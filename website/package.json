@@ -1,0 +1,27 @@
+{
+  "name": "@biscuits/website",
+  "type": "module",
+  "scripts": {
+    "dev": "vite"
+  },
+  "devDependencies": {
+    "@types/react": "^18.2.38",
+    "@types/react-dom": "^18.2.17",
+    "@types/three": "^0.158.3",
+    "@unocss/transformer-variant-group": "^0.57.7",
+    "@vitejs/plugin-react": "^4.2.0",
+    "typescript": "^5.3.2",
+    "unocss": "^0.57.7",
+    "vite": "^5.0.2"
+  },
+  "dependencies": {
+    "@a-type/ui": "^0.1.15",
+    "@react-three/fiber": "^8.15.11",
+    "@react-three/postprocessing": "^2.15.11",
+    "@react-three/drei": "^9.88.17",
+    "classnames": "^2.3.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "three": "^0.158.0"
+  }
+}
