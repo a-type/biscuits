@@ -36,9 +36,10 @@ function AppCard({ app }: { app: AppDefinition }) {
     >
       <a
         href={app.url}
-        className="flex flex-col flex-1 rounded-lg overflow-hidden shadow-lg ring-black ring bg-cover bg-center items-start justify-end p-4"
+        className="flex flex-col flex-1 rounded-lg overflow-hidden ring-black ring bg-cover bg-center items-start justify-end p-4"
         style={{
           backgroundImage: `url(${app.image})`,
+          boxShadow: `0px 10px 20px -3px rgba(0,0,0,0.1),-2px 10px 57px 11px rgba(0,0,0,0.1),-1px 3px 3px 0px rgba(0,0,0,0.1)`,
         }}
       >
         <h2 className="m-0 p-0">{app.name}</h2>
