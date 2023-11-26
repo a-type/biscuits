@@ -37,16 +37,14 @@ export function Paws() {
         >
           <group
             scale={0.8}
-            position={[6, 10, -10]}
+            position={[8, 10, -10]}
             rotation={[0.2, -0.8, -0.0]}
           >
             <CatArm position={[0, 0, 0]} offset={0} />
             <CatArm position={[6, 0, 0]} offset={1} />
           </group>
         </Float>
-        {/* <AccumulativeShadows temporal frames={50} scale={10}>
-          <RandomizedLight amount={6} position={[0, 30, 10]} />
-        </AccumulativeShadows> */}
+
         <ContactShadows
           opacity={0.25}
           scale={100}

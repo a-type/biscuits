@@ -18,7 +18,7 @@ const APPS: AppDefinition[] = [
 
 export function AppsGrid() {
   return (
-    <div className="grid grid-cols-6 [grid-template-rows:260px] gap-2">
+    <div className="grid grid-cols-6 [grid-template-rows:320px] gap-2">
       {APPS.map((app) => (
         <AppCard key={app.url} app={app} />
       ))}

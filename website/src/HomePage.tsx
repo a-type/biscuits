@@ -4,7 +4,7 @@ import { AppsGrid } from './AppsGrid.js';
 import { Paws } from '@/Paws.jsx';
 
 const innerProps = {
-  className: 'flex flex-col gap-6 relative',
+  className: 'flex flex-col gap-6 relative px-8',
 };
 
 export function HomePage() {
@@ -13,12 +13,14 @@ export function HomePage() {
       <Background />
       <Paws />
       <PageContent innerProps={innerProps}>
-        <div className="flex flex-col gap-2 h-[50vh]">
-          <h1 className="!text-[10vmin] [font-family:'Titan_One',sans-serif] text-[hsl(41_100%_30%)] m-0 font-500">
+        <div className="flex flex-col gap-2 h-[30vh] my-10 text-[hsl(41_100%_30%)]">
+          <h1 className="!text-[10vmin] [font-family:Neuton,'Titan_One',sans-serif] text-[hsl(41_100%_30%)] m-0 font-500">
             Biscuits
           </h1>
-          <P className="m-0 text-lg">Handmade apps</P>
-          <P className="m-0">in Raleigh, NC</P>
+          <P className="m-0 text-lg italic font-800 text-inherit">
+            Handmade apps
+          </P>
+          <P className="m-0 italic text-inherit">in Raleigh, NC</P>
         </div>
         <AppsGrid />
       </PageContent>
