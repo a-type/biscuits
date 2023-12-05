@@ -1,0 +1,20 @@
+{
+  "name": "@biscuits/db",
+  "private": true,
+  "version": "0.0.1",
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "scripts": {},
+  "type": "module",
+  "dependencies": {
+    "@a-type/utils": "^1.0.5",
+    "@paralleldrive/cuid2": "^2.2.2",
+    "bcrypt": "^5.1.1",
+    "better-sqlite3": "^9.1.1",
+    "kysely": "^0.26.3"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.8",
+    "@types/bcrypt": "^5.0.2"
+  }
+}

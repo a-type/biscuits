@@ -14,7 +14,7 @@ export function HomePage() {
       <Paws />
       <PageContent innerProps={innerProps}>
         <div className="flex flex-col gap-2 h-[30vh] my-10 text-[hsl(41_100%_30%)]">
-          <h1 className="!text-[10vmin] [font-family:Neuton,'Titan_One',sans-serif] text-[hsl(41_100%_30%)] m-0 font-500">
+          <h1 className="!text-[15vmin] [font-family:Neuton,'Titan_One',sans-serif] text-[hsl(41_100%_30%)] m-0 font-500">
             Biscuits
           </h1>
           <P className="m-0 text-lg italic font-800 text-inherit">
@@ -34,7 +34,7 @@ function Background() {
     <svg
       viewBox="0 0 100 100"
       preserveAspectRatio="none"
-      className="absolute top-0 right-0 w-3/4 h-3/4 pointer-events-none"
+      className="absolute top-0 right-0 w-1/2 h-3/4 pointer-events-none"
     >
       <path
         d={`M 5.4313104,-0.52988403
