@@ -1,20 +1,38 @@
+import { AppsGrid } from '@/components/AppsGrid';
 import { PageContent, PageRoot } from '@a-type/ui/components/layouts';
 import { P } from '@a-type/ui/components/typography';
-import { AppsGrid } from './AppsGrid.js';
-import { Paws } from '@/Paws.jsx';
+import classNames from 'classnames';
+import { Titan_One } from 'next/font/google';
+import { Suspense, lazy } from 'react';
+
+const Paws = lazy(() => import('@/components/Paws'));
 
 const innerProps = {
   className: 'flex flex-col gap-6 relative px-8',
 };
 
-export function HomePage() {
+const titanOne = Titan_One({
+  weight: ['400'],
+  display: 'swap',
+  subsets: ['latin'],
+  variable: '--font-titan-one',
+});
+
+export default function Home() {
   return (
     <PageRoot className="bg-primary">
       <Background />
-      <Paws />
+      <Suspense>
+        <Paws />
+      </Suspense>
       <PageContent innerProps={innerProps}>
         <div className="flex flex-col gap-2 h-[30vh] my-10 text-[hsl(41_100%_30%)]">
-          <h1 className="!text-[15vmin] [font-family:Neuton,'Titan_One',sans-serif] text-[hsl(41_100%_30%)] m-0 font-500">
+          <h1
+            className={classNames(
+              '!text-[15vmin] text-[hsl(41_100%_30%)] m-0 font-400',
+              titanOne.className,
+            )}
+          >
             Biscuits
           </h1>
           <P className="m-0 text-lg italic font-800 text-inherit">

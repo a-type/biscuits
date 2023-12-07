@@ -1,84 +1,120 @@
-import { Profile } from '@aglio/prisma';
-import { setLoginSession, getInviteIdCookie, join } from '@aglio/auth';
-import { googleOauth } from '../../../auth/googleOauth.js';
-import { prisma } from '../../../data/prisma.js';
-import { assert } from '@aglio/tools';
+import { assert } from '@a-type/utils';
 import { Request, Response } from 'express';
+import { googleOauth } from '../../../auth/google.js';
+import { getInviteIdCookie } from '../../../auth/cookies.js';
+import { db, id } from '@biscuits/db';
+import { Profile } from '@biscuits/db/src/tables.js';
+import { setLoginSession } from '../../../auth/session.js';
 
 export default async function googleCallbackHandler(
-	req: Request,
-	res: Response,
+  req: Request,
+  res: Response,
 ) {
-	const { code } = req.query;
-	assert(typeof code === 'string', 'code is required');
-	const { tokens } = await googleOauth.getToken(code);
-	googleOauth.setCredentials(tokens);
-	const profileResponse = await googleOauth.request({
-		url: 'https://www.googleapis.com/oauth2/v3/userinfo',
-	});
-	if (profileResponse.status !== 200) {
-		throw new Error(
-			`Failed to fetch profile: ${profileResponse.status} ${profileResponse.data}`,
-		);
-	}
-	const profile = profileResponse.data as GoogleOAuthProfile;
+  const { code } = req.query;
+  assert(typeof code === 'string', 'code is required');
+  const { tokens } = await googleOauth.getToken(code);
+  googleOauth.setCredentials(tokens);
+  const profileResponse = await googleOauth.request({
+    url: 'https://www.googleapis.com/oauth2/v3/userinfo',
+  });
+  if (profileResponse.status !== 200) {
+    throw new Error(
+      `Failed to fetch profile: ${profileResponse.status} ${profileResponse.data}`,
+    );
+  }
+  const googleProfile = profileResponse.data as GoogleOAuthProfile;
 
-	const inviteId = getInviteIdCookie(req);
+  const inviteId = getInviteIdCookie(req);
 
-	// find an existing Google account association and user
-	const accountAndUser = await prisma.account.findUnique({
-		where: {
-			provider_providerAccountId: {
-				provider: 'google',
-				providerAccountId: profile.sub,
-			},
-		},
-		include: {
-			profile: true,
-		},
-	});
+  // find an existing Google account association and user
+  const accountAndProfile = await db
+    .selectFrom('Account')
+    .where('provider', '=', 'google')
+    .where('providerAccountId', '=', googleProfile.sub)
+    .innerJoin('Profile', 'Profile.id', 'Account.profileId')
+    .selectAll()
+    .executeTakeFirst();
 
-	let user: Profile;
+  let profile: Profile;
 
-	if (!accountAndUser) {
-		user = await join({
-			inviteId,
-			email: profile.email,
-			fullName: profile.name,
-			friendlyName: profile.given_name,
-			picture: profile.picture,
-			providerAccount: {
-				accessToken: tokens.access_token!,
-				tokenType: 'Bearer',
-				provider: 'google',
-				providerAccountId: profile.sub,
-				type: 'oauth2',
-			},
-		});
-	} else {
-		user = accountAndUser.profile;
-	}
+  if (!accountAndProfile) {
+    profile = await db.transaction().execute(async (trx) => {
+      let planId: string | undefined;
+      if (inviteId) {
+        const invite = await trx
+          .selectFrom('PlanInvitation')
+          .selectAll()
+          .where('id', '=', inviteId)
+          .executeTakeFirst();
+        if (invite) {
+          planId = invite.planId;
+        }
+      }
 
-	await setLoginSession(res, {
-		userId: user.id,
-		name: user.friendlyName,
-		planId: user.planId,
-		role: user.role as 'admin' | 'user',
-		isProductAdmin: user.isProductAdmin,
-	});
+      const profile = await trx
+        .insertInto('Profile')
+        .values({
+          id: id(),
+          email: googleProfile.email,
+          fullName: googleProfile.name,
+          friendlyName: googleProfile.given_name || googleProfile.name,
+          imageUrl: googleProfile.picture || null,
+          isProductAdmin: false,
+          planRole: 'user',
+          planId,
+        })
+        .returningAll()
+        .executeTakeFirstOrThrow();
 
-	// TODO: safari hack compat
-	res.writeHead(302, { Location: '/api/auth/loginSuccess' });
-	res.end();
+      await trx
+        .insertInto('Account')
+        .values({
+          id: id(),
+          profileId: profile.id,
+          provider: 'google',
+          providerAccountId: googleProfile.sub,
+          type: 'oauth2',
+          accessToken: tokens.access_token!,
+          tokenType: 'Bearer',
+        })
+        .execute();
+
+      if (inviteId) {
+        await trx
+          .updateTable('PlanInvitation')
+          .where('id', '=', inviteId)
+          .set({
+            claimedAt: new Date().toISOString(),
+          })
+          .execute();
+      }
+
+      return profile;
+    });
+  } else {
+    profile = accountAndProfile;
+  }
+
+  await setLoginSession(res, {
+    userId: profile.id,
+    name: profile.friendlyName,
+    planId: profile.planId,
+    role: profile.planRole as 'admin' | 'user',
+    isProductAdmin: profile.isProductAdmin,
+  });
+
+  // TODO: safari hack compat
+  res.writeHead(302, { Location: '/api/auth/loginSuccess' });
+  res.end();
 }
 
 type GoogleOAuthProfile = {
-	sub: string;
-	name: string;
-	given_name?: string;
-	family_name?: string;
-	picture?: string;
-	email: string;
-	email_verified: boolean;
-	locale: string;
+  sub: string;
+  name: string;
+  given_name?: string;
+  family_name?: string;
+  picture?: string;
+  email: string;
+  email_verified: boolean;
+  locale: string;
 };

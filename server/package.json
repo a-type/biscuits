@@ -1,6 +1,13 @@
 {
   "name": "@biscuits/server",
-  "scripts": {},
+  "scripts": {
+    "dev": "env-cmd tsx watch ./src/server.ts",
+    "prestart": "cd ../packages/db && pnpm migrate",
+    "start": "pnpm prestart && tsx --tsconfig ./tsconfig.json ./src/server.ts",
+    "start:local": "env-cmd pnpm start",
+    "build": "tsc --build tsconfig.json",
+    "vapid": "node ./scripts/generateVapidKeys.js"
+  },
   "type": "module",
   "private": true,
   "dependencies": {
@@ -27,6 +34,9 @@
     "@types/cookie": "^0.5.4",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
-    "@types/jsonwebtoken": "^9.0.5"
+    "@types/jsonwebtoken": "^9.0.5",
+    "tsx": "^4.6.2",
+    "env-cmd": "^10.1.0",
+    "web-push": "^3.6.6"
   }
 }

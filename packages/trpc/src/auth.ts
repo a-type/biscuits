@@ -27,7 +27,7 @@ export const authRouter = t.router({
           email: input.email,
           name: input.name,
           code,
-          expiresAt: expiresAt.toUTCString(),
+          expiresAt: expiresAt.toISOString(),
         })
         .executeTakeFirst();
       await ctx.email.sendEmailVerification({
@@ -173,12 +173,12 @@ export const authRouter = t.router({
           name: profile.friendlyName || profile.fullName,
           email: input.email,
           code,
-          expiresAt: expiresAt.toUTCString(),
+          expiresAt: expiresAt.toISOString(),
         })
         .onConflict((oc) =>
           oc.doUpdateSet({
             code,
-            expiresAt: expiresAt.toUTCString(),
+            expiresAt: expiresAt.toISOString(),
           }),
         )
         .executeTakeFirst();
@@ -255,14 +255,32 @@ export const authRouter = t.router({
     }),
 
   session: t.procedure.query(async ({ ctx }) => {
+    if (!ctx.session)
+      return {
+        session: null,
+      };
+
+    // check plan association and role
+    const profile = await ctx.db
+      .selectFrom('Profile')
+      .select([
+        'planId',
+        'planRole',
+        'fullName',
+        'friendlyName',
+        'isProductAdmin',
+      ])
+      .where('id', '=', ctx.session?.userId)
+      .executeTakeFirst();
+
     // refresh session cookie
-    if (ctx.session) {
+    if (profile) {
       ctx.auth.setLoginSession({
         userId: ctx.session.userId,
-        planId: ctx.session.planId,
-        name: ctx.session.name,
-        role: ctx.session.role,
-        isProductAdmin: ctx.session.isProductAdmin,
+        planId: profile.planId,
+        name: profile.friendlyName || profile.fullName,
+        role: profile.planRole as 'user' | 'admin',
+        isProductAdmin: profile.isProductAdmin,
       });
     } else {
       ctx.auth.setLoginSession(null);

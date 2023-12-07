@@ -2,8 +2,17 @@
   "name": "biscuits",
   "version": "1.0.0",
   "description": "",
-  "scripts": {},
+  "scripts": {
+    "dev": "turbo run dev",
+    "prepare": "husky install",
+    "up-verdant": "pnpm --recursive update \"@verdant-web/*\" --latest"
+  },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "husky": "^8.0.3",
+    "turbo": "^1.9.3",
+    "typescript": "^5.0.4"
+  }
 }

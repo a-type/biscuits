@@ -1,28 +1,23 @@
+'use client';
+
 import {
-  AccumulativeShadows,
-  Backdrop,
   ContactShadows,
   Environment,
   Float,
   OrbitControls,
   PerspectiveCamera,
-  RandomizedLight,
-  Stage,
   useAnimations,
   useGLTF,
 } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
 import { useEffect, useRef } from 'react';
-import { GLTF } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import {
-  MeshStandardMaterial,
-  MeshToonMaterial,
-  Vector3,
-  ShaderMaterial,
-  ShaderChunk,
-  UniformsUtils,
-  UniformsLib,
   Color,
+  ShaderChunk,
+  ShaderMaterial,
+  UniformsLib,
+  UniformsUtils,
+  Vector3,
 } from 'three';
 
 export function Paws() {
@@ -64,9 +59,11 @@ export function Paws() {
   );
 }
 
+export default Paws;
+
 function CatArm({ offset, ...props }: any) {
   const group = useRef();
-  const { nodes, materials, animations } = useGLTF('/models/cat.glb');
+  const { nodes, animations } = useGLTF('/models/cat.glb') as any;
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {

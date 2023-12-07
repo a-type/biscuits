@@ -3,10 +3,13 @@ import { Server as HttpServer } from 'http';
 import { DEPLOYED_HOST } from '../config/deployedContext.js';
 import { assert } from '@a-type/utils';
 import { S3FileStorage } from '@verdant-web/s3-file-storage';
-import { db } from '../data/db.js';
+import { db } from '@biscuits/db';
 
-const STORAGE_DB_FILE = process.env.STORAGE_DB_FILE;
-assert(!!STORAGE_DB_FILE, 'STORAGE_DB_FILE environment variable must be set');
+const STORAGE_DATABASE_FILE = process.env.STORAGE_DATABASE_FILE;
+assert(
+  !!STORAGE_DATABASE_FILE,
+  'STORAGE_DATABASE_FILE environment variable must be set',
+);
 const VERDANT_SECRET = process.env.VERDANT_SECRET;
 assert(!!VERDANT_SECRET, 'VERDANT_SECRET environment variable must be set');
 
@@ -37,7 +40,7 @@ class Profiles implements UserProfiles<any> {
 export function attach(httpServer: HttpServer) {
   const server = new Server({
     httpServer,
-    databaseFile: STORAGE_DB_FILE!,
+    databaseFile: STORAGE_DATABASE_FILE!,
     tokenSecret: VERDANT_SECRET!,
     profiles: new Profiles(),
     replicaTruancyMinutes: 14 * 60 * 24,
