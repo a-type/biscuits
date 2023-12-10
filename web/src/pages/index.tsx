@@ -1,5 +1,5 @@
 import { Outlet, Router, makeRoutes } from '@verdant-web/react-router';
-import { lazy } from 'react';
+import { Suspense, lazy } from 'react';
 
 const HomePage = lazy(() => import('./HomePage.js'));
 const JoinPage = lazy(() => import('./JoinPage.js'));
@@ -18,12 +18,18 @@ const routes = makeRoutes([
     path: '/verify',
     component: lazy(() => import('./VerifyPage.js')),
   },
+  {
+    path: '/plan',
+    component: lazy(() => import('./PlanPage.js')),
+  },
 ]);
 
 export function Pages() {
   return (
     <Router routes={routes}>
-      <Outlet />
+      <Suspense>
+        <Outlet />
+      </Suspense>
     </Router>
   );
 }

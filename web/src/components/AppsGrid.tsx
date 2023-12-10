@@ -1,3 +1,5 @@
+import classNames from 'classnames';
+
 type AppDefinition = {
   name: string;
   description: string;
@@ -28,23 +30,29 @@ export function AppsGrid() {
 
 function AppCard({ app }: { app: AppDefinition }) {
   return (
-    <div
-      className="flex flex-col"
+    <a
+      className={classNames(
+        'flex flex-col rounded-lg overflow-hidden ring-black ring bg-white',
+        'transition-all duration-200 ease-in-out transform hover:scale-105',
+        'hover:ring-4',
+      )}
       style={{
         gridColumn: `span ${app.size}`,
       }}
+      href={app.url}
     >
-      <a
-        href={app.url}
-        className="flex flex-col flex-1 rounded-lg overflow-hidden ring-black ring bg-cover bg-center items-start justify-end p-4"
+      <div
+        className={classNames(
+          'flex flex-col flex-1 overflow-hidden bg-cover bg-center items-start justify-end p-4',
+          'border-0 border-b border-solid border-black',
+        )}
         style={{
           backgroundImage: `url(${app.image})`,
-          boxShadow: `0px 10px 20px -3px rgba(0,0,0,0.1),-2px 10px 57px 11px rgba(0,0,0,0.1),-1px 3px 3px 0px rgba(0,0,0,0.1)`,
         }}
       >
         <h2 className="m-0 p-0">{app.name}</h2>
-      </a>
-      <p>{app.description}</p>
-    </div>
+      </div>
+      <div className="p-3 font-semibold">{app.description}</div>
+    </a>
   );
 }

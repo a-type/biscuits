@@ -14,7 +14,7 @@ export function setSessionCookie(res: OutgoingMessage, token: string) {
     expires: new Date(Date.now() + MAX_AGE * 1000),
     httpOnly: true,
     secure: true,
-    sameSite: 'lax',
+    sameSite: 'none',
     path: '/',
   });
 

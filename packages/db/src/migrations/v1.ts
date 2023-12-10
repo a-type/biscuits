@@ -52,16 +52,16 @@ export async function up(db: Kysely<any>) {
     .addColumn('updatedAt', 'datetime', (col) =>
       col.notNull().defaultTo(sql`CURRENT_TIMESTAMP`),
     )
-    .addColumn('name', 'text', (col) => col.notNull())
-    .addColumn('stripeProductId', 'text', (col) => col.notNull())
-    .addColumn('stripePriceId', 'text', (col) => col.notNull())
+    .addColumn('name', 'text', (col) => col.notNull().defaultTo('Your Plan'))
+    .addColumn('stripeProductId', 'text')
+    .addColumn('stripePriceId', 'text')
     .addColumn('stripeSubscriptionId', 'text')
     .addColumn('stripeCustomerId', 'text')
     .addColumn('subscriptionStatus', 'text')
     .addColumn('subscriptionStatusCheckedAt', 'datetime')
     .addColumn('subscriptionExpiresAt', 'datetime')
     .addColumn('subscriptionCanceledAt', 'datetime')
-    .addColumn('featureFlags', 'text', (cb) => cb.defaultTo('{}'))
+    .addColumn('featureFlags', 'text', (cb) => cb.notNull().defaultTo('{}'))
     .execute();
 
   await db.schema

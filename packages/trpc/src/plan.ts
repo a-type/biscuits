@@ -59,10 +59,7 @@ export const planRouter = t.router({
     }
 
     if (!ctx.session.planId) {
-      throw new TRPCError({
-        code: 'NOT_FOUND',
-        message: 'Plan not found',
-      });
+      return null;
     }
 
     const plan = await ctx.db

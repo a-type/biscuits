@@ -1,3 +1,4 @@
+import { EmailSignInForm } from '@/components/auth/EmailSignInForm';
 import { EmailSignUpForm } from '@/components/auth/EmailSignupForm.jsx';
 import { OAuthSignInButton } from '@/components/auth/OAuthSignInButton.jsx';
 import { PageContent, PageRoot } from '@a-type/ui/components/layouts';
@@ -6,7 +7,7 @@ import { useSearchParams } from '@verdant-web/react-router';
 
 export default function JoinPage() {
   const [searchParams] = useSearchParams();
-  const returnTo = searchParams.get('returnTo');
+  const returnTo = searchParams.get('returnTo') ?? undefined;
 
   return (
     <PageRoot>
@@ -22,6 +23,17 @@ export default function JoinPage() {
             Sign up with Google
           </OAuthSignInButton>
           <EmailSignUpForm returnTo={returnTo} />
+        </div>
+        <div className="mt-8">
+          <P>Already have an account?</P>
+          <OAuthSignInButton
+            provider="google"
+            returnTo={returnTo}
+            inviteId={searchParams.get('inviteId')}
+          >
+            Sign in with Google
+          </OAuthSignInButton>
+          <EmailSignInForm returnTo={returnTo} />
         </div>
       </PageContent>
     </PageRoot>

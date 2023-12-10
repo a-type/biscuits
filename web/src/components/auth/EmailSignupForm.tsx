@@ -26,7 +26,12 @@ export function EmailSignUpForm({ returnTo }: EmailSignUpFormProps) {
       }}
     >
       <Form>
-        <TextField name="name" label="Your name" autoComplete="name" required />
+        <TextField
+          name="name"
+          label="Your name"
+          autoComplete="given-name"
+          required
+        />
         <TextField name="email" label="Email" autoComplete="email" required />
         <SubmitButton>Sign Up</SubmitButton>
       </Form>

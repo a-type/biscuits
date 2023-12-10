@@ -1,5 +1,10 @@
 import { AppsGrid } from '@/components/AppsGrid.jsx';
-import { PageContent, PageRoot } from '@a-type/ui/components/layouts';
+import { UserMenu } from '@/components/auth/UserMenu';
+import {
+  PageContent,
+  PageFixedArea,
+  PageRoot,
+} from '@a-type/ui/components/layouts';
 import { P } from '@a-type/ui/components/typography';
 import classNames from 'classnames';
 import { Suspense, lazy } from 'react';
@@ -18,16 +23,26 @@ export default function HomePage() {
         <Paws />
       </Suspense>
       <PageContent innerProps={innerProps}>
-        <div className="flex flex-col gap-2 h-[30vh] my-10 text-[hsl(41_100%_30%)]">
+        <PageFixedArea className="bg-transparent flex flex-row justify-end py-2">
+          <UserMenu />
+        </PageFixedArea>
+        <div className="flex flex-col gap-2 h-[30vh] my-10 text-primary-dark font-semibold">
           <h1
             className={classNames(
-              '[font-family:"Fraunces",serif] italic',
-              '!text-[15vmin] text-[hsl(41_100%_30%)] m-0 font-900',
+              '[font-family:"Noto_Serif",serif]',
+              'text-[5vmin] m-0 font-900 text-accent text-shadow',
             )}
           >
             Biscuits
           </h1>
-          <P className="m-0 text-lg font-800 text-inherit">Handmade apps</P>
+          <h2
+            className={classNames(
+              '[font-family:"Noto_Serif",serif]',
+              '!text-[10vmin] text-black mt-0 mb-6 font-900 leading-none',
+            )}
+          >
+            Scratch-made apps
+          </h2>
           <P className="m-0 text-inherit">in Raleigh, NC</P>
         </div>
         <AppsGrid />

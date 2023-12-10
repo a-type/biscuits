@@ -4,6 +4,13 @@ import { IncomingMessage } from 'http';
 import { MAX_AGE, setSessionCookie, getSessionCookie } from './cookies.js';
 import { Response } from 'express';
 
+type SessionJwt = jwt.JwtPayload & {
+  pid: string;
+  nam: string;
+  role: 'admin' | 'user';
+  pad: boolean;
+};
+
 export type Session = {
   name: string | null;
   planId: string | null;
@@ -42,10 +49,16 @@ export async function getLoginSession(req: IncomingMessage) {
   const token = getSessionCookie(req);
   if (!token) return null;
 
-  const session = jwt.verify(token, SESSION_SECRET!) as Session;
+  const session = jwt.verify(token, SESSION_SECRET!) as SessionJwt;
 
-  if (session) {
-    return session;
+  if (session && session.sub) {
+    return {
+      userId: session.sub,
+      planId: session.pid,
+      name: session.nam,
+      role: session.role,
+      isProductAdmin: session.pad,
+    };
   } else {
     return null;
   }
