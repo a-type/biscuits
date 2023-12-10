@@ -37,7 +37,7 @@ export function parseCookies(req: IncomingMessage) {
   return parse(cookie || '');
 }
 
-export function getTokenCookie(req: IncomingMessage) {
+export function getSessionCookie(req: IncomingMessage) {
   return parseCookies(req)[SESSION_COOKIE_NAME];
 }
 

@@ -1,0 +1,46 @@
+{
+  "name": "@biscuits/client",
+  "version": "0.0.1",
+  "private": true,
+  "main": "src/index.ts",
+  "module": "src/index.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "require": "./src/index.js"
+    },
+    "./react": {
+      "import": "./src/react.tsx",
+      "require": "./src/react.js"
+    }
+  },
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "import": "./dist/esm/index.js",
+        "require": "./dist/cjs/index.js"
+      },
+      "./react": {
+        "import": "./dist/esm/react.js",
+        "require": "./dist/cjs/react.js"
+      }
+    }
+  },
+  "scripts": {},
+  "dependencies": {
+    "@biscuits/trpc": "workspace:*",
+    "@tanstack/react-query": "^4.0.0",
+    "@trpc/client": "^10.10.0",
+    "@trpc/next": "^10.44.1",
+    "@trpc/react-query": "^10.44.1",
+    "@trpc/server": "^10.44.1",
+    "react": "^18",
+    "superjson": "^1.12.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18",
+    "typescript": "^5.0.2"
+  }
+}

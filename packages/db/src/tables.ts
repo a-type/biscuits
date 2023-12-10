@@ -21,8 +21,8 @@ export interface Database {
 
 export interface ProfileTable {
   id: string;
-  createdAt: ColumnType<Date, string | undefined, never>;
-  updatedAt: ColumnType<Date, string | undefined, string>;
+  createdAt: ColumnType<Date, Date | undefined, never>;
+  updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
 
   fullName: string;
   friendlyName: string;
@@ -41,8 +41,8 @@ export type ProfileUpdate = Updateable<ProfileTable>;
 
 export interface AccountTable {
   id: string;
-  createdAt: ColumnType<Date, string | undefined, never>;
-  updatedAt: ColumnType<Date, string | undefined, string>;
+  createdAt: ColumnType<Date, Date | undefined, never>;
+  updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
 
   type: string;
   provider: string;
@@ -60,8 +60,8 @@ export type AccountUpdate = Updateable<AccountTable>;
 
 export interface PlanTable {
   id: string;
-  createdAt: ColumnType<Date, string | undefined, never>;
-  updatedAt: ColumnType<Date, string | undefined, string>;
+  createdAt: ColumnType<Date, Date | undefined, never>;
+  updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
 
   name: string;
   stripeProductId: string | null;
@@ -71,11 +71,11 @@ export interface PlanTable {
   subscriptionStatus: string | null;
   subscriptionStatusCheckedAt: ColumnType<
     Date,
-    string | undefined,
-    string
+    number | undefined,
+    number
   > | null;
-  subscriptionExpiresAt: ColumnType<Date, string | undefined, string> | null;
-  subscriptionCanceledAt: ColumnType<Date, string | undefined, string> | null;
+  subscriptionExpiresAt: Date | null;
+  subscriptionCanceledAt: Date | null;
   featureFlags: string;
 }
 
@@ -85,14 +85,14 @@ export type PlanUpdate = Updateable<PlanTable>;
 
 export interface PlanInvitationTable {
   id: string;
-  createdAt: ColumnType<Date, string | undefined, never>;
-  updatedAt: ColumnType<Date, string | undefined, string>;
+  createdAt: ColumnType<Date, Date | undefined, never>;
+  updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
 
   planId: string;
   inviterId: string;
   inviterName: string;
-  expiresAt: ColumnType<Date, string | undefined, string> | null;
-  claimedAt: ColumnType<Date, string | undefined, string> | null;
+  expiresAt: Date | null;
+  claimedAt: Date | null;
 }
 
 export type PlanInvitation = Selectable<PlanInvitationTable>;
@@ -101,13 +101,13 @@ export type PlanInvitationUpdate = Updateable<PlanInvitationTable>;
 
 export interface EmailVerificationTable {
   id: string;
-  createdAt: ColumnType<Date, string | undefined, never>;
-  updatedAt: ColumnType<Date, string | undefined, string>;
+  createdAt: ColumnType<Date, Date | undefined, never>;
+  updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
 
   code: string;
   email: string;
   name: string;
-  expiresAt: ColumnType<Date, string | undefined, string>;
+  expiresAt: ColumnType<Date, Date | undefined, Date | undefined>;
 }
 
 export type EmailVerification = Selectable<EmailVerificationTable>;
@@ -116,13 +116,13 @@ export type EmailVerificationUpdate = Updateable<EmailVerificationTable>;
 
 export interface PasswordResetTable {
   id: string;
-  createdAt: ColumnType<Date, string | undefined, never>;
-  updatedAt: ColumnType<Date, string | undefined, string>;
+  createdAt: ColumnType<Date, Date | undefined, never>;
+  updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
 
   code: string;
   email: string;
   name: string;
-  expiresAt: ColumnType<Date, string | undefined, string>;
+  expiresAt: ColumnType<Date, Date | undefined, Date | undefined>;
 }
 
 export type PasswordReset = Selectable<PasswordResetTable>;
@@ -131,8 +131,8 @@ export type PasswordResetUpdate = Updateable<PasswordResetTable>;
 
 export interface ActivityLogTable {
   id: string;
-  createdAt: ColumnType<Date, string | undefined, never>;
-  updatedAt: ColumnType<Date, string | undefined, string>;
+  createdAt: ColumnType<Date, Date | undefined, never>;
+  updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
 
   profileId: string;
   action: string;

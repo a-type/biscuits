@@ -1,24 +1,16 @@
-import { AppsGrid } from '@/components/AppsGrid';
+import { AppsGrid } from '@/components/AppsGrid.jsx';
 import { PageContent, PageRoot } from '@a-type/ui/components/layouts';
 import { P } from '@a-type/ui/components/typography';
 import classNames from 'classnames';
-import { Titan_One } from 'next/font/google';
 import { Suspense, lazy } from 'react';
 
-const Paws = lazy(() => import('@/components/Paws'));
+const Paws = lazy(() => import('@/components/Paws.jsx'));
 
 const innerProps = {
   className: 'flex flex-col gap-6 relative px-8',
 };
 
-const titanOne = Titan_One({
-  weight: ['400'],
-  display: 'swap',
-  subsets: ['latin'],
-  variable: '--font-titan-one',
-});
-
-export default function Home() {
+export default function HomePage() {
   return (
     <PageRoot className="bg-primary">
       <Background />
@@ -29,16 +21,14 @@ export default function Home() {
         <div className="flex flex-col gap-2 h-[30vh] my-10 text-[hsl(41_100%_30%)]">
           <h1
             className={classNames(
-              '!text-[15vmin] text-[hsl(41_100%_30%)] m-0 font-400',
-              titanOne.className,
+              '[font-family:"Fraunces",serif] italic',
+              '!text-[15vmin] text-[hsl(41_100%_30%)] m-0 font-900',
             )}
           >
             Biscuits
           </h1>
-          <P className="m-0 text-lg italic font-800 text-inherit">
-            Handmade apps
-          </P>
-          <P className="m-0 italic text-inherit">in Raleigh, NC</P>
+          <P className="m-0 text-lg font-800 text-inherit">Handmade apps</P>
+          <P className="m-0 text-inherit">in Raleigh, NC</P>
         </div>
         <AppsGrid />
       </PageContent>

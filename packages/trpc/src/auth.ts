@@ -27,7 +27,13 @@ export const authRouter = t.router({
           email: input.email,
           name: input.name,
           code,
-          expiresAt: expiresAt.toISOString(),
+          expiresAt: expiresAt,
+        })
+        .onConflict((oc) => {
+          return oc.doUpdateSet({
+            code,
+            expiresAt,
+          });
         })
         .executeTakeFirst();
       await ctx.email.sendEmailVerification({
@@ -47,12 +53,14 @@ export const authRouter = t.router({
         inviteId: z.string().optional(),
         returnTo: z.string().optional(),
         password: z.string(),
+        email: z.string(),
       }),
     )
     .mutation(async ({ input, ctx }) => {
       const verification = await ctx.db
         .selectFrom('EmailVerification')
         .select(['email', 'name'])
+        .where('email', '=', input.email)
         .where('code', '=', input.code)
         .executeTakeFirst();
 
@@ -173,12 +181,12 @@ export const authRouter = t.router({
           name: profile.friendlyName || profile.fullName,
           email: input.email,
           code,
-          expiresAt: expiresAt.toISOString(),
+          expiresAt: expiresAt,
         })
         .onConflict((oc) =>
           oc.doUpdateSet({
             code,
-            expiresAt: expiresAt.toISOString(),
+            expiresAt,
           }),
         )
         .executeTakeFirst();
@@ -349,15 +357,15 @@ async function joinViaEmail({
       password: hashedPassword,
       friendlyName: fullName,
       isProductAdmin: false,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
+      createdAt: new Date(),
+      updatedAt: new Date(),
       id: id(),
     })
     .onConflict((oc) =>
       oc.doUpdateSet({
         planId: joiningPlanId,
         planRole: 'user',
-        updatedAt: new Date().toISOString(),
+        updatedAt: new Date(),
       }),
     )
     .executeTakeFirst();
@@ -368,7 +376,7 @@ async function joinViaEmail({
       .updateTable('PlanInvitation')
       .where('id', '=', inviteId)
       .set({
-        claimedAt: new Date().toISOString(),
+        claimedAt: new Date(),
       })
       .execute();
   }

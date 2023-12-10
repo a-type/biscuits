@@ -1,20 +1,27 @@
+#!/usr/bin/env node
+
 import * as path from 'path';
 import { promises as fs } from 'fs';
-import { db } from '../src/index.js';
-import { Migrator, FileMigrationProvider } from 'kysely';
+import { db } from './index.js';
+import { Migrator, MigrationProvider, Migration } from 'kysely';
 import url from 'url';
+import migrations from './migrations/index.js';
 
 const __dirname = path.dirname(url.fileURLToPath(import.meta.url));
 
+export class FileMigrationProvider implements MigrationProvider {
+  constructor() {}
+
+  async getMigrations(): Promise<Record<string, Migration>> {
+    return migrations;
+  }
+}
+
 async function migrateToLatest() {
+  console.log(__dirname);
   const migrator = new Migrator({
     db,
-    provider: new FileMigrationProvider({
-      fs,
-      path,
-      // This needs to be an absolute path.
-      migrationFolder: path.join(__dirname, './migrations'),
-    }),
+    provider: new FileMigrationProvider(),
   });
 
   const { error, results } = await migrator.migrateToLatest();

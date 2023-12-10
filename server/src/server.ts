@@ -7,6 +7,7 @@ import apiRouter from './api/index.js';
 import { createTrpcMiddleware } from './rpc/index.js';
 import { productAdminSetup } from './tasks/productAdminSetup.js';
 import { ALLOWED_ORIGINS } from './config/cors.js';
+import { PORT } from './config/deployedContext.js';
 
 const app = express();
 const server = createServer(app);
@@ -49,8 +50,8 @@ app.use('/verdant/files/:fileId', async (req, res) => {
 
 app.use('/trpc', createTrpcMiddleware(verdantServer));
 
-server.listen(4445, () => {
-  console.log('http://localhost:4445');
+server.listen(PORT, () => {
+  console.log(`http://localhost:${PORT}`);
 });
 
 productAdminSetup();

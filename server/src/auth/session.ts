@@ -1,7 +1,7 @@
 import { assert } from '@a-type/utils';
 import jwt from 'jsonwebtoken';
 import { IncomingMessage } from 'http';
-import { MAX_AGE, setSessionCookie } from './cookies.js';
+import { MAX_AGE, setSessionCookie, getSessionCookie } from './cookies.js';
 import { Response } from 'express';
 
 export type Session = {
@@ -39,7 +39,7 @@ export async function setLoginSession(res: Response, session: Session | null) {
 }
 
 export async function getLoginSession(req: IncomingMessage) {
-  const token = req.headers?.cookie?.replace('session=', '');
+  const token = getSessionCookie(req);
   if (!token) return null;
 
   const session = jwt.verify(token, SESSION_SECRET!) as Session;

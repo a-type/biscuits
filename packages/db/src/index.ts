@@ -5,6 +5,8 @@ import { Kysely, SqliteDialect } from 'kysely';
 export { jsonArrayFrom, jsonObjectFrom } from 'kysely/helpers/sqlite';
 import { createId } from '@paralleldrive/cuid2';
 import * as bcrypt from 'bcrypt';
+import { SerializePlugin } from 'kysely-plugin-serialize';
+import { UpdatedAtPlugin } from './plugins.js';
 
 const DATABASE_FILE = process.env.DATABASE_FILE;
 assert(DATABASE_FILE, 'DATABASE_FILE environment variable must be set');
@@ -19,6 +21,7 @@ const dialect = new SqliteDialect({
 // to communicate with your database.
 export const db = new Kysely<Database>({
   dialect,
+  plugins: [new UpdatedAtPlugin(), new SerializePlugin()],
 });
 
 export type DB = typeof db;
