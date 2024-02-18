@@ -22,6 +22,7 @@
   "type": "module",
   "dependencies": {
     "@a-type/utils": "^1.0.5",
+    "@a-type/kysely": "^1.0.0",
     "@paralleldrive/cuid2": "^2.2.2",
     "bcrypt": "^5.1.1",
     "better-sqlite3": "^9.1.1",

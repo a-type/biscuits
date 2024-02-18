@@ -3,7 +3,7 @@ import { Request, Response } from 'express';
 import { googleOauth } from '../../../auth/google.js';
 import { getInviteIdCookie } from '../../../auth/cookies.js';
 import { db, id } from '@biscuits/db';
-import { Profile } from '@biscuits/db/src/tables.js';
+import { User } from '@biscuits/db/src/tables.js';
 import { setLoginSession } from '../../../auth/session.js';
 
 export default async function googleCallbackHandler(
@@ -35,7 +35,7 @@ export default async function googleCallbackHandler(
     .selectAll()
     .executeTakeFirst();
 
-  let profile: Profile;
+  let profile: User;
 
   if (!accountAndProfile) {
     profile = await db.transaction().execute(async (trx) => {

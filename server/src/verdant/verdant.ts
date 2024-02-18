@@ -16,7 +16,7 @@ assert(!!VERDANT_SECRET, 'VERDANT_SECRET environment variable must be set');
 class Profiles implements UserProfiles<any> {
   get = async (userId: string) => {
     const profile = await db
-      .selectFrom('Profile')
+      .selectFrom('User')
       .select(['id', 'friendlyName', 'imageUrl'])
       .where('id', '=', userId)
       .executeTakeFirst();
@@ -37,32 +37,25 @@ class Profiles implements UserProfiles<any> {
   };
 }
 
-export function attach(httpServer: HttpServer) {
-  const server = new Server({
-    httpServer,
-    databaseFile: STORAGE_DATABASE_FILE!,
-    tokenSecret: VERDANT_SECRET!,
-    profiles: new Profiles(),
-    replicaTruancyMinutes: 14 * 60 * 24,
-    log: console.debug,
-    fileStorage:
-      process.env.NODE_ENV === 'production'
-        ? new S3FileStorage({
-            region: 'us-east-1',
-            bucketName: 'files.biscuits.club',
-          })
-        : new LocalFileStorage({
-            rootDirectory: 'userFiles',
-            host: DEPLOYED_HOST,
-          }),
-    fileConfig: {
-      deleteExpirationDays: 3,
-    },
-  });
+export const verdantServer = new Server({
+  databaseFile: STORAGE_DATABASE_FILE!,
+  tokenSecret: VERDANT_SECRET!,
+  profiles: new Profiles(),
+  replicaTruancyMinutes: 14 * 60 * 24,
+  log: console.debug,
+  fileStorage:
+    process.env.NODE_ENV === 'production'
+      ? new S3FileStorage({
+          region: 'us-east-1',
+          bucketName: 'files.biscuits.club',
+        })
+      : new LocalFileStorage({
+          rootDirectory: 'userFiles',
+          host: DEPLOYED_HOST,
+        }),
+  fileConfig: {
+    deleteExpirationDays: 3,
+  },
+});
 
-  server.on('error', console.error);
-  // server.on('changes', (info, operations, baselines) => {
-  // });
-
-  return server;
-}
+verdantServer.on('error', console.error);

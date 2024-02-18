@@ -7,7 +7,7 @@ import {
 } from 'kysely';
 
 export interface Database {
-  Profile: ProfileTable;
+  User: UserTable;
   Account: AccountTable;
   Plan: PlanTable;
   PlanInvitation: PlanInvitationTable;
@@ -19,7 +19,7 @@ export interface Database {
   // changelogItem: ChangelogItemTable;
 }
 
-export interface ProfileTable {
+export interface UserTable {
   id: string;
   createdAt: ColumnType<Date, Date | undefined, never>;
   updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
@@ -27,6 +27,7 @@ export interface ProfileTable {
   fullName: string;
   friendlyName: string;
   email: string;
+  emailVerifiedAt: string | null;
   imageUrl: string | null;
 
   password: string | null;
@@ -35,9 +36,9 @@ export interface ProfileTable {
   planId: string | null;
   planRole: string | null;
 }
-export type Profile = Selectable<ProfileTable>;
-export type NewProfile = Insertable<ProfileTable>;
-export type ProfileUpdate = Updateable<ProfileTable>;
+export type User = Selectable<UserTable>;
+export type NewUser = Insertable<UserTable>;
+export type UserUpdate = Updateable<UserTable>;
 
 export interface AccountTable {
   id: string;
@@ -50,8 +51,10 @@ export interface AccountTable {
   refreshToken: string | null;
   accessToken: string | null;
   tokenType: string | null;
-  accessTokenExpiresAt: ColumnType<Date, string | undefined, string> | null;
-  profileId: string;
+  expiresAt: ColumnType<Date, string | undefined, string> | null;
+  scope: string | null;
+  idToken: string | null;
+  userId: string;
 }
 
 export type Account = Selectable<AccountTable>;

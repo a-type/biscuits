@@ -3,10 +3,12 @@ import { Database } from './tables.js'; // this is the Database interface we def
 import SQLite from 'better-sqlite3';
 import { Kysely, SqliteDialect } from 'kysely';
 export { jsonArrayFrom, jsonObjectFrom } from 'kysely/helpers/sqlite';
-import { createId } from '@paralleldrive/cuid2';
-import * as bcrypt from 'bcrypt';
 import { SerializePlugin } from 'kysely-plugin-serialize';
-import { UpdatedAtPlugin } from './plugins.js';
+import {
+  TimestampsPlugin,
+  migrateToLatest as migrateInternal,
+} from '@a-type/kysely';
+import migrations from './migrations/index.js';
 
 const DATABASE_FILE = process.env.DATABASE_FILE;
 assert(DATABASE_FILE, 'DATABASE_FILE environment variable must be set');
@@ -21,19 +23,19 @@ const dialect = new SqliteDialect({
 // to communicate with your database.
 export const db = new Kysely<Database>({
   dialect,
-  plugins: [new UpdatedAtPlugin(), new SerializePlugin()],
+  plugins: [new TimestampsPlugin({}), new SerializePlugin()],
 });
 
 export type DB = typeof db;
 
-export function id(prefix?: string) {
-  return `${prefix || ''}${createId()}`;
-}
+export {
+  id,
+  hashPassword,
+  comparePassword,
+  dateTime,
+  compareDates,
+} from '@a-type/kysely';
 
-export function hashPassword(password: string) {
-  return bcrypt.hash(password, 10);
-}
-
-export function comparePassword(password: string, hash: string) {
-  return bcrypt.compare(password, hash);
+export function migrateToLatest() {
+  return migrateInternal(db, migrations);
 }

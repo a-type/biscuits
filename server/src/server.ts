@@ -1,57 +1,60 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import { attach } from './verdant/verdant.js';
+import { verdantServer } from './verdant/verdant.js';
 import { createServer } from 'http';
-import cors from 'cors';
-import apiRouter from './api/index.js';
-import { createTrpcMiddleware } from './rpc/index.js';
 import { productAdminSetup } from './tasks/productAdminSetup.js';
 import { ALLOWED_ORIGINS } from './config/cors.js';
 import { PORT } from './config/deployedContext.js';
 
-const app = express();
-const server = createServer(app);
+import { createServerAdapter } from '@whatwg-node/server';
+import { error, json, Router, createCors, IRequest } from 'itty-router';
 
-app.use(
-  cors({
-    origin: ALLOWED_ORIGINS,
-    credentials: true,
-  }),
+import { authRouter } from './routers/auth.js';
+import { trpcRouter } from './routers/trpc.js';
+import { migrateToLatest } from '@biscuits/db';
+import { verdantRouter } from './routers/verdant.js';
+
+const router = Router();
+
+const { preflight, corsify } = createCors({
+  origins: ALLOWED_ORIGINS,
+  headers: { 'Access-Control-Allow-Credentials': true },
+});
+
+const logger = (req: IRequest) => {
+  console.log(`[${req.method}] ${req.url}`);
+};
+
+router
+  .all('*', logger, preflight)
+  .get('/', () => 'Success!')
+  .all('/auth/*', authRouter.handle)
+  .all('/trpc/*', trpcRouter.handle)
+  .all('/verdant/*', verdantRouter.handle)
+  .all('*', () => error(404));
+
+const ittyServer = createServerAdapter((request) =>
+  router
+    .handle(request)
+    .catch((reason) => {
+      console.error(reason);
+      return error(reason);
+    })
+    .then((res) => {
+      if (res instanceof Response) return res;
+      return json(res);
+    })
+    .then((res) => {
+      return corsify(res);
+    }),
 );
-app.use((req, res, next) => {
-  // log the request details
-  console.log(new Date().toISOString(), req.method, req.url.split('?')[0]);
-  next();
-});
-app.use((req, res, next) => {
-  if (req.originalUrl.includes('/webhook')) {
-    next();
-  } else {
-    bodyParser.json({
-      limit: '50mb',
-    })(req, res, next);
-  }
-});
-app.use(bodyParser.urlencoded({ extended: true }));
 
-app.get('/', (req, res) => {
-  res.send("Hello World! You shouldn't be here!");
-});
+await migrateToLatest();
 
-app.use('/api', apiRouter);
+const httpServer = createServer(ittyServer);
+verdantServer.attach(httpServer, { httpPath: false });
 
-const verdantServer = attach(server);
-app.use('/verdant', async (req, res) => {
-  await verdantServer.handleRequest(req, res);
-});
-app.use('/verdant/files/:fileId', async (req, res) => {
-  await verdantServer.handleFileRequest(req, res);
-});
-
-app.use('/trpc', createTrpcMiddleware(verdantServer));
-
-server.listen(PORT, () => {
-  console.log(`http://localhost:${PORT}`);
+const port = PORT;
+httpServer.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
 
 productAdminSetup();
