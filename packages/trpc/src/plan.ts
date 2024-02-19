@@ -1,17 +1,10 @@
 import * as z from 'zod';
-import { t } from './common.js';
+import { t, userProcedure } from './common.js';
 import { TRPCError } from '@trpc/server';
 import { id } from '@biscuits/db';
 
 export const planRouter = t.router({
-  create: t.procedure.mutation(async ({ ctx }) => {
-    if (!ctx.session) {
-      throw new TRPCError({
-        code: 'UNAUTHORIZED',
-        message: 'Unauthorized',
-      });
-    }
-
+  create: userProcedure.mutation(async ({ ctx }) => {
     if (ctx.session.planId) {
       throw new TRPCError({
         code: 'BAD_REQUEST',
@@ -30,7 +23,7 @@ export const planRouter = t.router({
       .executeTakeFirstOrThrow();
 
     await ctx.db
-      .updateTable('Profile')
+      .updateTable('User')
       .where('id', '=', ctx.session.userId)
       .set({
         planId: planId,
@@ -50,14 +43,7 @@ export const planRouter = t.router({
     };
   }),
 
-  status: t.procedure.query(async ({ ctx }) => {
-    if (!ctx.session) {
-      throw new TRPCError({
-        code: 'UNAUTHORIZED',
-        message: 'Unauthorized',
-      });
-    }
-
+  status: userProcedure.query(async ({ ctx }) => {
     if (!ctx.session.planId) {
       return null;
     }
@@ -90,20 +76,13 @@ export const planRouter = t.router({
     };
   }),
 
-  kick: t.procedure
+  kick: userProcedure
     .input(
       z.object({
         id: z.string(),
       }),
     )
     .mutation(async ({ input, ctx }) => {
-      if (!ctx.session) {
-        throw new TRPCError({
-          code: 'UNAUTHORIZED',
-          message: 'Unauthorized',
-        });
-      }
-
       if (ctx.session.role !== 'admin') {
         throw new TRPCError({
           code: 'FORBIDDEN',
@@ -126,7 +105,7 @@ export const planRouter = t.router({
       }
 
       const kicked = await ctx.db
-        .selectFrom('Profile')
+        .selectFrom('User')
         .select(['id', 'planId'])
         .where('id', '=', input.id)
         .where('planId', '=', plan.id)
@@ -141,7 +120,7 @@ export const planRouter = t.router({
 
       // remove user from the plan
       await ctx.db
-        .updateTable('Profile')
+        .updateTable('User')
         .where('id', '=', kicked.id)
         .set({
           planId: null,
@@ -164,16 +143,16 @@ export const planRouter = t.router({
         .execute();
     }),
 
-  members: t.procedure.query(async ({ ctx }) => {
-    if (!ctx.session) {
+  members: userProcedure.query(async ({ ctx }) => {
+    if (!ctx.session?.planId) {
       throw new TRPCError({
-        code: 'UNAUTHORIZED',
-        message: 'Unauthorized',
+        code: 'NOT_FOUND',
+        message: 'You do not have a plan',
       });
     }
 
     const members = await ctx.db
-      .selectFrom('Profile')
+      .selectFrom('User')
       .select(['id', 'fullName', 'email', 'imageUrl'])
       .where('planId', '=', ctx.session.planId)
       .execute();
@@ -193,14 +172,7 @@ export const planRouter = t.router({
     }));
   }),
 
-  leave: t.procedure.mutation(async ({ ctx }) => {
-    if (!ctx.session) {
-      throw new TRPCError({
-        code: 'UNAUTHORIZED',
-        message: 'Unauthorized',
-      });
-    }
-
+  leave: userProcedure.mutation(async ({ ctx }) => {
     if (!ctx.session.planId) {
       throw new TRPCError({
         code: 'NOT_FOUND',
@@ -217,7 +189,7 @@ export const planRouter = t.router({
 
     // look up the membership
     const membership = await ctx.db
-      .selectFrom('Profile')
+      .selectFrom('User')
       .select(['id', 'planId'])
       .where('id', '=', ctx.session.userId)
       .where('planId', '=', ctx.session.planId)
@@ -231,13 +203,14 @@ export const planRouter = t.router({
     }
 
     await ctx.db
-      .updateTable('Profile')
+      .updateTable('User')
       .where('id', '=', membership.id)
       .set({
         planId: null,
       })
       .execute();
 
+    // FIXME: evict from all libraries in plan!
     ctx.verdant.evictUser(ctx.session.planId, membership.id);
 
     await ctx.db

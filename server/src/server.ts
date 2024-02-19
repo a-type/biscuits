@@ -3,14 +3,14 @@ import { createServer } from 'http';
 import { productAdminSetup } from './tasks/productAdminSetup.js';
 import { ALLOWED_ORIGINS } from './config/cors.js';
 import { PORT } from './config/deployedContext.js';
-
 import { createServerAdapter } from '@whatwg-node/server';
 import { error, json, Router, createCors, IRequest } from 'itty-router';
-
 import { authRouter } from './routers/auth.js';
 import { trpcRouter } from './routers/trpc.js';
 import { migrateToLatest } from '@biscuits/db';
 import { verdantRouter } from './routers/verdant.js';
+import { BiscuitsError } from './error.js';
+import { stripeRouter } from './routers/stripe.js';
 
 const router = Router();
 
@@ -29,6 +29,7 @@ router
   .all('/auth/*', authRouter.handle)
   .all('/trpc/*', trpcRouter.handle)
   .all('/verdant/*', verdantRouter.handle)
+  .all('/stripe/*', stripeRouter.handle)
   .all('*', () => error(404));
 
 const ittyServer = createServerAdapter((request) =>
@@ -36,7 +37,10 @@ const ittyServer = createServerAdapter((request) =>
     .handle(request)
     .catch((reason) => {
       console.error(reason);
-      return error(reason);
+      if (reason instanceof BiscuitsError) {
+        return error(reason.statusCode, reason.body);
+      }
+      return error(500, 'Internal Server Error');
     })
     .then((res) => {
       if (res instanceof Response) return res;

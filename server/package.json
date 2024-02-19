@@ -12,14 +12,14 @@
   "type": "module",
   "private": true,
   "dependencies": {
-    "@a-type/auth": "^0.1.2",
+    "@a-type/auth": "^0.2.1",
     "@a-type/utils": "^1.0.5",
     "@biscuits/db": "workspace:*",
     "@biscuits/email": "workspace:*",
     "@biscuits/trpc": "workspace:*",
-    "@trpc/server": "^10.10.0",
-    "@verdant-web/s3-file-storage": "^1.0.0",
-    "@verdant-web/server": "^2.0.8",
+    "@trpc/server": "^10.44.1",
+    "@verdant-web/s3-file-storage": "^1.0.14",
+    "@verdant-web/server": "^2.1.2",
     "@whatwg-node/server": "^0.9.22",
     "better-sqlite3": "^9.1.1",
     "body-parser": "^1.20.2",
@@ -35,9 +35,10 @@
     "@types/body-parser": "^1.19.5",
     "@types/cookie": "^0.5.4",
     "@types/jsonwebtoken": "^9.0.5",
+    "@types/node": "20.11.19",
     "dotenv-cli": "^7.3.0",
-    "tsx": "^4.6.2",
     "env-cmd": "^10.1.0",
+    "tsx": "^4.6.2",
     "web-push": "^3.6.6"
   }
 }

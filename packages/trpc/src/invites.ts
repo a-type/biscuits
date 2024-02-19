@@ -1,10 +1,10 @@
-import { t } from './common.js';
+import { publicProcedure, t, userProcedure } from './common.js';
 import * as z from 'zod';
 import { TRPCError } from '@trpc/server';
 import { id } from '@biscuits/db';
 
 export const invitesRouter = t.router({
-  details: t.procedure.input(z.string()).query(async ({ ctx, input }) => {
+  details: publicProcedure.input(z.string()).query(async ({ ctx, input }) => {
     const invite = await ctx.db
       .selectFrom('PlanInvitation')
       .select(['inviterName'])
@@ -23,20 +23,13 @@ export const invitesRouter = t.router({
     };
   }),
 
-  create: t.procedure
+  create: userProcedure
     .input(
       z.object({
         email: z.string().email(),
       }),
     )
     .mutation(async ({ input, ctx }) => {
-      if (!ctx.session) {
-        throw new TRPCError({
-          code: 'UNAUTHORIZED',
-          message: 'Unauthorized',
-        });
-      }
-
       if (!ctx.session.planId) {
         throw new TRPCError({
           code: 'NOT_FOUND',
@@ -66,7 +59,7 @@ export const invitesRouter = t.router({
 
       // check if the user is already a member
       const existing = await ctx.db
-        .selectFrom('Profile')
+        .selectFrom('User')
         .select(['id', 'planId'])
         .where('email', '=', input.email)
         .executeTakeFirst();
@@ -100,20 +93,13 @@ export const invitesRouter = t.router({
       };
     }),
 
-  claim: t.procedure
+  claim: userProcedure
     .input(
       z.object({
         inviteId: z.string(),
       }),
     )
     .mutation(async ({ input, ctx }) => {
-      if (!ctx.session) {
-        throw new TRPCError({
-          code: 'UNAUTHORIZED',
-          message: 'Unauthorized',
-        });
-      }
-
       if (ctx.session.planId) {
         // TODO: cancel old plan?
       }
@@ -147,14 +133,14 @@ export const invitesRouter = t.router({
 
       // move the user
       await ctx.db
-        .updateTable('Profile')
+        .updateTable('User')
         .where('id', '=', ctx.session.userId)
         .set({
           planId: invite.planId,
         })
         .executeTakeFirstOrThrow();
       const profile = await ctx.db
-        .selectFrom('Profile')
+        .selectFrom('User')
         .select([
           'id',
           'friendlyName',

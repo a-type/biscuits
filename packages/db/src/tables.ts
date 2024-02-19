@@ -34,7 +34,7 @@ export interface UserTable {
   isProductAdmin: boolean;
 
   planId: string | null;
-  planRole: string | null;
+  planRole: 'admin' | 'user' | null;
 }
 export type User = Selectable<UserTable>;
 export type NewUser = Insertable<UserTable>;

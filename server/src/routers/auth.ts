@@ -1,8 +1,10 @@
 import { Router } from 'itty-router';
 import { GoogleProvider, createHandlers } from '@a-type/auth';
-import { db, hashPassword, id } from '@biscuits/db';
+import { db, hashPassword, id, userNameSelector } from '@biscuits/db';
 import { assert } from '@a-type/utils';
 import { UI_ORIGIN, DEPLOYED_HOST } from '../config/deployedContext.js';
+import { BiscuitsError } from '../error.js';
+import { sessions } from '../auth/session.js';
 
 export const authRouter = Router({
   base: '/auth',
@@ -12,6 +14,7 @@ assert(!!process.env.GOOGLE_CLIENT_ID, 'GOOGLE_CLIENT_ID must be set');
 assert(!!process.env.GOOGLE_CLIENT_SECRET, 'GOOGLE_CLIENT_SECRET must be set');
 
 const handlers = createHandlers({
+  sessions,
   defaultReturnTo: `${UI_ORIGIN}/`,
   providers: {
     google: new GoogleProvider({
@@ -22,19 +25,24 @@ const handlers = createHandlers({
   },
   db: {
     getAccountByProviderAccountId: async (providerName, providerAccountId) => {
-      return db
+      const dbAccount = await db
         .selectFrom('Account')
         .where('provider', '=', providerName)
         .where('providerAccountId', '=', providerAccountId)
         .selectAll()
-        .executeTakeFirst();
+        .executeTakeFirstOrThrow();
+
+      return {
+        ...dbAccount,
+        expiresAt: dbAccount.expiresAt?.getTime() ?? null,
+      };
     },
     getUserByEmail: async (email) => {
       return db
         .selectFrom('User')
         .where('email', '=', email)
         .selectAll()
-        .executeTakeFirst();
+        .executeTakeFirstOrThrow();
     },
     insertAccount: async ({ expiresAt, ...account }) => {
       return db

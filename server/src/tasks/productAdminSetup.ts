@@ -5,13 +5,13 @@ const productAdmins = (process.env.MAKE_PRODUCT_ADMIN || '').split(',');
 export async function productAdminSetup() {
   for (const email of productAdmins) {
     const profile = await db
-      .selectFrom('Profile')
+      .selectFrom('User')
       .selectAll()
       .where('email', '=', email)
       .executeTakeFirst();
     if (profile && !profile.isProductAdmin) {
       await db
-        .updateTable('Profile')
+        .updateTable('User')
         .where('id', '=', profile.id)
         .set({ isProductAdmin: true })
         .executeTakeFirst();

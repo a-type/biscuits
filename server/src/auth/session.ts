@@ -1,65 +1,55 @@
-import { assert } from '@a-type/utils';
-import jwt from 'jsonwebtoken';
-import { IncomingMessage } from 'http';
-import { MAX_AGE, setSessionCookie, getSessionCookie } from './cookies.js';
-import { Response } from 'express';
+// extend @a-type/auth Session with additional data
 
-type SessionJwt = jwt.JwtPayload & {
-  pid: string;
-  nam: string;
-  role: 'admin' | 'user';
-  pad: boolean;
-};
+import { SessionManager } from '@a-type/auth';
+import { db, userNameSelector } from '@biscuits/db';
+import { BiscuitsError } from '../error.js';
+import { SESSION_SECRET } from '../config/secrets.js';
+import { ENVIRONMENT } from '../config/deployedContext.js';
 
-export type Session = {
-  name: string | null;
-  planId: string | null;
-  isProductAdmin: boolean;
-  userId: string;
-  role: 'admin' | 'user';
-};
-
-const SESSION_SECRET = process.env.SESSION_SECRET;
-assert(SESSION_SECRET, 'SESSION_SECRET environment variable must be set');
-
-export async function setLoginSession(res: Response, session: Session | null) {
-  if (!session) {
-    // if the session is null, remove the session cookie
-    setSessionCookie(res, '');
-    return;
+declare module '@a-type/auth' {
+  interface Session {
+    userId: string;
+    name: string | null;
+    isProductAdmin: boolean;
+    role: 'admin' | 'user' | null;
+    planId: string | null;
   }
-
-  // create a session object with a max age we can validate later
-  const sessionObject = {
-    sub: session.userId,
-    iat: Date.now(),
-    pid: session.planId,
-    nam: session.name,
-    role: session.role,
-    pad: session.isProductAdmin,
-  };
-  const token = jwt.sign(sessionObject, SESSION_SECRET!, {
-    expiresIn: MAX_AGE,
-  });
-
-  setSessionCookie(res, token);
 }
 
-export async function getLoginSession(req: IncomingMessage) {
-  const token = getSessionCookie(req);
-  if (!token) return null;
+export const sessions = new SessionManager({
+  cookieName: 'bsc-session',
+  async createSession(userId) {
+    const user = await db
+      .selectFrom('User')
+      .where('id', '=', userId)
+      .select(['id', 'isProductAdmin', 'planId', 'planRole'])
+      .select(userNameSelector)
+      .executeTakeFirst();
 
-  const session = jwt.verify(token, SESSION_SECRET!) as SessionJwt;
+    if (!user) {
+      throw new BiscuitsError(
+        BiscuitsError.Code.NotFound,
+        `Invalid session. User with ID ${userId} not found`,
+      );
+    }
 
-  if (session && session.sub) {
     return {
-      userId: session.sub,
-      planId: session.pid,
-      name: session.nam,
-      role: session.role,
-      isProductAdmin: session.pad,
+      userId,
+      name: user.name,
+      isProductAdmin: user.isProductAdmin,
+      planId: user.planId,
+      role: user.planRole,
     };
-  } else {
-    return null;
-  }
-}
+  },
+  secret: SESSION_SECRET,
+  shortNames: {
+    userId: 'sub',
+    isProductAdmin: 'pad',
+    name: 'name',
+    planId: 'pid',
+    role: 'role',
+  },
+  audience: 'biscuits.club',
+  issuer: 'biscuits.club',
+  mode: ENVIRONMENT === 'production' ? 'production' : 'development',
+});

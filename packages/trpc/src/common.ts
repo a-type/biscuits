@@ -1,14 +1,12 @@
-import { initTRPC } from '@trpc/server';
-import type { Request, Response } from 'express';
-import * as trpcExpress from '@trpc/server/adapters/express';
+import { TRPCError, initTRPC } from '@trpc/server';
 import type { DB } from '@biscuits/db';
 import type { Email } from '@biscuits/email';
 import Stripe from 'stripe';
 
-type Session = {
+export type Session = {
   name: string | null;
   isProductAdmin: boolean;
-  role: 'admin' | 'user';
+  role: 'admin' | 'user' | null;
   planId: string | null;
   userId: string;
 };
@@ -25,40 +23,16 @@ type Auth = {
 
 export type Context = {
   req: Request;
-  res: Response;
-  deployedContext: {
-    apiHost: string;
-    uiOrigin: string;
-  };
-  session: Session | null;
-  isProductAdmin: boolean;
-  db: DB;
-  auth: Auth;
-  verdant: Verdant;
-  email: Email;
-  stripe: Stripe;
-};
-
-export const createContext = ({
-  session,
-  ...rest
-}: trpcExpress.CreateExpressContextOptions & {
   deployedContext: {
     apiHost: string;
     uiOrigin: string;
   };
   session: Session | null;
   db: DB;
+  auth: Auth;
   verdant: Verdant;
   email: Email;
-  auth: Auth;
   stripe: Stripe;
-}): Context => {
-  return {
-    session,
-    isProductAdmin: session?.isProductAdmin ?? false,
-    ...rest,
-  };
 };
 
 export const t = initTRPC.context<Context>().create({
@@ -67,4 +41,36 @@ export const t = initTRPC.context<Context>().create({
     console.error(shape);
     return shape;
   },
+});
+
+export const publicProcedure = t.procedure;
+export const userProcedure = t.procedure.use(async (opts) => {
+  const { ctx } = opts;
+  if (!ctx.session) {
+    throw new TRPCError({
+      message: 'Please log in',
+      code: 'UNAUTHORIZED',
+    });
+  }
+  return opts.next({
+    ctx: {
+      ...ctx,
+      session: ctx.session!,
+    },
+  });
+});
+export const adminProcedure = t.procedure.use(async (opts) => {
+  const { ctx } = opts;
+  if (!ctx.session?.isProductAdmin) {
+    throw new TRPCError({
+      message: 'Not authorized',
+      code: 'FORBIDDEN',
+    });
+  }
+  return opts.next({
+    ctx: {
+      ...ctx,
+      session: ctx.session!,
+    },
+  });
 });

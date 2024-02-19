@@ -1,7 +1,7 @@
 import { assert } from '@a-type/utils';
 import { Database } from './tables.js'; // this is the Database interface we defined earlier
 import SQLite from 'better-sqlite3';
-import { Kysely, SqliteDialect } from 'kysely';
+import { Kysely, SqliteDialect, sql } from 'kysely';
 export { jsonArrayFrom, jsonObjectFrom } from 'kysely/helpers/sqlite';
 import { SerializePlugin } from 'kysely-plugin-serialize';
 import {
@@ -39,3 +39,7 @@ export {
 export function migrateToLatest() {
   return migrateInternal(db, migrations);
 }
+
+/** Selects the user name - prefers friendlyName, falls back to fullName */
+export const userNameSelector =
+  sql<string>`COALESCE(User.friendlyName, User.fullName)`.as('name');
