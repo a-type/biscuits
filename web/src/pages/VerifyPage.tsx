@@ -35,11 +35,7 @@ export function VerifyPage({}: VerifyPageProps) {
     <PageRoot>
       <PageContent>
         <H1>Complete your signup</H1>
-        <EmailCompleteSignupForm
-          code={code}
-          email={email}
-          onSuccess={onSuccess}
-        />
+        <EmailCompleteSignupForm code={code} email={email} />
       </PageContent>
     </PageRoot>
   );

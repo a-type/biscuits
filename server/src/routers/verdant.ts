@@ -6,7 +6,7 @@ import { DEPLOYED_HOST } from '../config/deployedContext.js';
 import { db } from '@biscuits/db';
 import { isSubscribed } from '../auth/subscription.js';
 import { BiscuitsError } from '../error.js';
-import { getLibraryName } from '../../../packages/libraries/src/index.js';
+import { getLibraryName } from '@biscuits/libraries';
 import { sessions } from '../auth/session.js';
 
 export const verdantRouter = Router({

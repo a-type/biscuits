@@ -127,6 +127,9 @@ importers:
       '@biscuits/db':
         specifier: workspace:*
         version: link:../packages/db
+      '@biscuits/libraries':
+        specifier: workspace:*
+        version: link:../packages/libraries
       '@biscuits/trpc':
         specifier: workspace:*
         version: link:../packages/trpc

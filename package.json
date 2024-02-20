@@ -4,6 +4,9 @@
   "description": "",
   "scripts": {
     "dev": "turbo run dev",
+    "build": "turbo run build",
+    "typecheck": "turbo run typecheck",
+    "test": "turbo run test",
     "prepare": "husky install",
     "up-verdant": "pnpm --recursive update \"@verdant-web/*\" --latest"
   },
