@@ -86,19 +86,6 @@ importers:
         specifier: ^4.6.2
         version: 4.6.2
 
-  packages/email:
-    dependencies:
-      '@a-type/utils':
-        specifier: ^1.0.5
-        version: 1.0.5
-      nodemailer:
-        specifier: ^6.8.0
-        version: 6.8.0
-    devDependencies:
-      '@types/nodemailer':
-        specifier: ^6.4.6
-        version: 6.4.6
-
   packages/libraries: {}
 
   packages/trpc:
@@ -106,9 +93,6 @@ importers:
       '@biscuits/db':
         specifier: workspace:*
         version: link:../db
-      '@biscuits/email':
-        specifier: workspace:*
-        version: link:../email
       '@biscuits/libraries':
         specifier: workspace:*
         version: link:../libraries
@@ -135,17 +119,14 @@ importers:
   server:
     dependencies:
       '@a-type/auth':
-        specifier: ^0.2.1
-        version: 0.2.1
+        specifier: ^0.3.4
+        version: 0.3.4
       '@a-type/utils':
         specifier: ^1.0.5
         version: 1.0.5
       '@biscuits/db':
         specifier: workspace:*
         version: link:../packages/db
-      '@biscuits/email':
-        specifier: workspace:*
-        version: link:../packages/email
       '@biscuits/trpc':
         specifier: workspace:*
         version: link:../packages/trpc
@@ -283,8 +264,8 @@ importers:
 
 packages:
 
-  /@a-type/auth@0.2.1:
-    resolution: {integrity: sha512-rixF8nUFM0gEyNz4x4WpSgBWJIrFxTm/zOUNpYl7tYhmfC7eBVi8IWDFbELOvX0+obljEpvV0XsHYtB3Rxb2+g==}
+  /@a-type/auth@0.3.4:
+    resolution: {integrity: sha512-cmTzyjRSwH1EuabUQlHgD1wFWlp/n41dqBWQzHeb1HzTjcS2rskhF0AzDFCRi3ZoBP+1Rjxq4hNJCRPW6WDb7A==}
     dependencies:
       cookie: 0.6.0
       discord-oauth2: 2.12.1
@@ -4685,12 +4666,6 @@ packages:
     dependencies:
       undici-types: 5.26.5
 
-  /@types/nodemailer@6.4.6:
-    resolution: {integrity: sha512-pD6fL5GQtUKvD2WnPmg5bC2e8kWCAPDwMPmHe/ohQbW+Dy0EcHgZ2oCSuPlWNqk74LS5BVMig1SymQbFMPPK3w==}
-    dependencies:
-      '@types/node': 20.10.0
-    dev: true
-
   /@types/object.omit@3.0.3:
     resolution: {integrity: sha512-xrq4bQTBGYY2cw+gV4PzoG2Lv3L0pjZ1uXStRRDQoATOYW1lCsFQHhQ+OkPhIcQoqLjAq7gYif7D14Qaa6Zbew==}
     dev: false
@@ -7752,11 +7727,6 @@ packages:
   /node-releases@2.0.13:
     resolution: {integrity: sha512-uYr7J37ae/ORWdZeQ1xxMJe3NtdmqMC/JZK+geofDrkLUApKRHPd18/TxtBOJ4A0/+uUIliorNrfYV6s1b02eQ==}
     dev: true
-
-  /nodemailer@6.8.0:
-    resolution: {integrity: sha512-EjYvSmHzekz6VNkNd12aUqAco+bOkRe3Of5jVhltqKhEsjw/y0PYPJfp83+s9Wzh1dspYAkUW/YNQ350NATbSQ==}
-    engines: {node: '>=6.0.0'}
-    dev: false
 
   /nodemailer@6.9.9:
     resolution: {integrity: sha512-dexTll8zqQoVJEZPwQAKzxxtFn0qTnjdQTchoU6Re9BUUGBJiOy3YMn/0ShTW6J5M0dfQ1NeDeRTTl4oIWgQMA==}

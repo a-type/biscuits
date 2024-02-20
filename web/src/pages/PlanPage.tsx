@@ -15,12 +15,12 @@ export function PlanPage({}: PlanPageProps) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!session.session) {
+    if (!session) {
       navigate('/join');
     }
-  }, [session.session, navigate]);
+  }, [session, navigate]);
 
-  if (!session.session) {
+  if (!session) {
     return <Spinner />;
   }
 

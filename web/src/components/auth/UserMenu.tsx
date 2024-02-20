@@ -10,7 +10,7 @@ export interface UserMenuProps {
 export function UserMenu({ className }: UserMenuProps) {
   const { data } = client.auth.session.useQuery();
 
-  if (!data?.session) {
+  if (!data) {
     return (
       <Link to="/join">
         <Button className={classNames(className)}>Sign in</Button>
@@ -18,7 +18,7 @@ export function UserMenu({ className }: UserMenuProps) {
     );
   }
 
-  const name = data.session.name;
+  const name = data.name;
 
   return (
     <Link to="/plan">

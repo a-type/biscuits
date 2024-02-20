@@ -7,10 +7,14 @@
   "type": "module",
   "exports": {
     ".": {
+      "production": "./dist/esm/index.js",
+      "development": "./src/index.ts",
       "import": "./src/index.ts",
       "require": "./src/index.js"
     },
     "./react": {
+      "production": "./dist/esm/react.js",
+      "development": "./src/react.tsx",
       "import": "./src/react.tsx",
       "require": "./src/react.js"
     }

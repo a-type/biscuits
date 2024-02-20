@@ -2,13 +2,19 @@
   "name": "@biscuits/trpc",
   "version": "0.0.1",
   "private": true,
-  "main": "src/index.ts",
-  "module": "src/index.ts",
+  "exports": {
+    ".": {
+      "production": "./dist/index.js",
+      "development": "./src/index.ts",
+      "import": "./dist/index.js",
+      "node": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
   "type": "module",
   "scripts": {},
   "dependencies": {
     "@biscuits/db": "workspace:*",
-    "@biscuits/email": "workspace:*",
     "@biscuits/libraries": "workspace:*",
     "@trpc/server": "^10.44.1",
     "stripe": "^14.7.0",

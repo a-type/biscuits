@@ -11,9 +11,8 @@ export interface Database {
   Account: AccountTable;
   Plan: PlanTable;
   PlanInvitation: PlanInvitationTable;
-  EmailVerification: EmailVerificationTable;
-  PasswordReset: PasswordResetTable;
   ActivityLog: ActivityLogTable;
+  VerificationCode: VerificationCodeTable;
   // TODO:
   // pushSubscription: PushSubscriptionTable;
   // changelogItem: ChangelogItemTable;
@@ -51,7 +50,7 @@ export interface AccountTable {
   refreshToken: string | null;
   accessToken: string | null;
   tokenType: string | null;
-  expiresAt: ColumnType<Date, string | undefined, string> | null;
+  accessTokenExpiresAt: ColumnType<Date, Date | undefined, Date> | null;
   scope: string | null;
   idToken: string | null;
   userId: string;
@@ -102,7 +101,7 @@ export type PlanInvitation = Selectable<PlanInvitationTable>;
 export type NewPlanInvitation = Insertable<PlanInvitationTable>;
 export type PlanInvitationUpdate = Updateable<PlanInvitationTable>;
 
-export interface EmailVerificationTable {
+export interface VerificationCodeTable {
   id: string;
   createdAt: ColumnType<Date, Date | undefined, never>;
   updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
@@ -113,9 +112,9 @@ export interface EmailVerificationTable {
   expiresAt: ColumnType<Date, Date | undefined, Date | undefined>;
 }
 
-export type EmailVerification = Selectable<EmailVerificationTable>;
-export type NewEmailVerification = Insertable<EmailVerificationTable>;
-export type EmailVerificationUpdate = Updateable<EmailVerificationTable>;
+export type VerificationCode = Selectable<VerificationCodeTable>;
+export type NewVerificationCode = Insertable<VerificationCodeTable>;
+export type VerificationCodeUpdate = Updateable<VerificationCodeTable>;
 
 export interface PasswordResetTable {
   id: string;

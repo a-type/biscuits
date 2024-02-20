@@ -1,4 +1,5 @@
 import { adminRouter } from './admin.js';
+import { authRouter } from './auth.js';
 import { t } from './common.js';
 // import { featureFlagsRouter } from './featureFlags.js';
 import { invitesRouter } from './invites.js';
@@ -11,6 +12,7 @@ export const appRouter = t.router({
   // featureFlags: featureFlagsRouter,
   plan: planRouter,
   // changelog: changelogRouter,
+  auth: authRouter,
 });
 
 export type AppRouter = typeof appRouter;

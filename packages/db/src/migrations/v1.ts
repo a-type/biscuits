@@ -2,7 +2,7 @@ import { Kysely, sql } from 'kysely';
 
 export async function up(db: Kysely<any>) {
   await db.schema
-    .createTable('Profile')
+    .createTable('User')
     .addColumn('id', 'text', (col) => col.primaryKey())
     .addColumn('createdAt', 'datetime', (col) =>
       col.notNull().defaultTo(sql`CURRENT_TIMESTAMP`),
@@ -19,7 +19,8 @@ export async function up(db: Kysely<any>) {
     .addColumn('planId', 'text', (col) =>
       col.references('Plan.id').onDelete('set null'),
     )
-    .addColumn('planRole', 'text', (col) => col.notNull())
+    .addColumn('planRole', 'text')
+    .addColumn('emailVerifiedAt', 'datetime')
     .execute();
 
   await db.schema
@@ -38,8 +39,10 @@ export async function up(db: Kysely<any>) {
     .addColumn('accessToken', 'text')
     .addColumn('tokenType', 'text')
     .addColumn('accessTokenExpiresAt', 'datetime')
-    .addColumn('profileId', 'text', (col) =>
-      col.notNull().references('Profile.id').onDelete('cascade'),
+    .addColumn('scope', 'text')
+    .addColumn('idToken', 'text')
+    .addColumn('userId', 'text', (col) =>
+      col.notNull().references('User.id').onDelete('cascade'),
     )
     .execute();
 
@@ -77,7 +80,7 @@ export async function up(db: Kysely<any>) {
       col.notNull().references('Plan.id').onDelete('cascade'),
     )
     .addColumn('inviterId', 'text', (col) =>
-      col.notNull().references('Profile.id'),
+      col.notNull().references('User.id'),
     )
     .addColumn('inviterName', 'text', (col) => col.notNull())
     .addColumn('expiresAt', 'datetime', (col) => col.notNull())
@@ -85,22 +88,7 @@ export async function up(db: Kysely<any>) {
     .execute();
 
   await db.schema
-    .createTable('EmailVerification')
-    .addColumn('id', 'text', (col) => col.primaryKey())
-    .addColumn('createdAt', 'datetime', (col) =>
-      col.notNull().defaultTo(sql`CURRENT_TIMESTAMP`),
-    )
-    .addColumn('updatedAt', 'datetime', (col) =>
-      col.notNull().defaultTo(sql`CURRENT_TIMESTAMP`),
-    )
-    .addColumn('email', 'text', (col) => col.notNull().unique())
-    .addColumn('code', 'text', (col) => col.notNull())
-    .addColumn('name', 'text', (col) => col.notNull())
-    .addColumn('expiresAt', 'datetime', (col) => col.notNull())
-    .execute();
-
-  await db.schema
-    .createTable('PasswordReset')
+    .createTable('VerificationCode')
     .addColumn('id', 'text', (col) => col.primaryKey())
     .addColumn('createdAt', 'datetime', (col) =>
       col.notNull().defaultTo(sql`CURRENT_TIMESTAMP`),
@@ -123,8 +111,8 @@ export async function up(db: Kysely<any>) {
     .addColumn('updatedAt', 'datetime', (col) =>
       col.notNull().defaultTo(sql`CURRENT_TIMESTAMP`),
     )
-    .addColumn('profileId', 'datetime', (col) =>
-      col.notNull().references('Profile.id').onDelete('no action'),
+    .addColumn('userId', 'datetime', (col) =>
+      col.notNull().references('User.id').onDelete('no action'),
     )
     .addColumn('action', 'text', (col) => col.notNull())
     .addColumn('data', 'text')
@@ -133,11 +121,10 @@ export async function up(db: Kysely<any>) {
 
 export async function down(db: Kysely<any>) {
   await db.schema.dropTable('ActivityLog').execute();
-  await db.schema.dropTable('PasswordReset').execute();
-  await db.schema.dropTable('EmailVerification').execute();
+  await db.schema.dropTable('VerificationCode').execute();
   await db.schema.dropTable('PlanInvitation').execute();
   await db.schema.dropTable('PlanMembership').execute();
   await db.schema.dropTable('Plan').execute();
   await db.schema.dropTable('Account').execute();
-  await db.schema.dropTable('Profile').execute();
+  await db.schema.dropTable('User').execute();
 }

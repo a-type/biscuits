@@ -1,9 +1,8 @@
 {
   "name": "@biscuits/server",
   "scripts": {
-    "dev": "env-cmd tsx watch ./src/server.ts",
-    "prestart": "pnpm migrate",
-    "start": "pnpm prestart && tsx --tsconfig ./tsconfig.json ./src/server.ts",
+    "dev": "env-cmd tsx watch --conditions=development ./src/server.ts",
+    "start": "node --conditions=production ./dist/server.js",
     "start:local": "env-cmd pnpm start",
     "build": "tsc --build tsconfig.json",
     "vapid": "node ./scripts/generateVapidKeys.js",
@@ -12,10 +11,9 @@
   "type": "module",
   "private": true,
   "dependencies": {
-    "@a-type/auth": "^0.2.1",
+    "@a-type/auth": "^0.3.4",
     "@a-type/utils": "^1.0.5",
     "@biscuits/db": "workspace:*",
-    "@biscuits/email": "workspace:*",
     "@biscuits/trpc": "workspace:*",
     "@trpc/server": "^10.44.1",
     "@verdant-web/s3-file-storage": "^1.0.14",

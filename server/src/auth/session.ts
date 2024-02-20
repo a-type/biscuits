@@ -51,5 +51,5 @@ export const sessions = new SessionManager({
   },
   audience: 'biscuits.club',
   issuer: 'biscuits.club',
-  mode: ENVIRONMENT === 'production' ? 'production' : 'development',
+  // mode: ENVIRONMENT === 'production' ? 'production' : 'development',
 });

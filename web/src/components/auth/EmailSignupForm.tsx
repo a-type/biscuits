@@ -1,40 +1,21 @@
 'use client';
 
-import { client } from '@biscuits/client/react';
-import { Formik } from 'formik';
-import { Form, SubmitButton, TextField } from '@a-type/ui/components/forms';
+import { API_HOST_HTTP } from '@/config';
+import { Button } from '@a-type/ui/components/button';
+import { Input } from '@a-type/ui/components/input';
 
 export interface EmailSignUpFormProps {
   returnTo?: string | null;
 }
 
 export function EmailSignUpForm({ returnTo }: EmailSignUpFormProps) {
-  const { mutateAsync } = client.auth.createEmailVerification.useMutation();
-
   return (
-    <Formik
-      initialValues={{ name: '', email: '' }}
-      onSubmit={async (values) => {
-        const result = await mutateAsync({
-          email: values.email,
-          name: values.name,
-          returnTo: returnTo || undefined,
-        });
-        if (result.sent) {
-          alert('Check your email for a verification link');
-        }
-      }}
+    <form
+      action={`${API_HOST_HTTP}/auth/begin-email-signup?returnTo=${returnTo}`}
     >
-      <Form>
-        <TextField
-          name="name"
-          label="Your name"
-          autoComplete="given-name"
-          required
-        />
-        <TextField name="email" label="Email" autoComplete="email" required />
-        <SubmitButton>Sign Up</SubmitButton>
-      </Form>
-    </Formik>
+      <Input name="name" autoComplete="given-name" required />
+      <Input name="email" autoComplete="email" required />
+      <Button type="submit">Sign Up</Button>
+    </form>
   );
 }

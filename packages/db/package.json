@@ -2,10 +2,14 @@
   "name": "@biscuits/db",
   "private": true,
   "version": "0.0.1",
-  "main": "src/index.ts",
-  "module": "src/index.ts",
-  "bin": {
-    "biscuits-migrate": "./dist/migrate.js"
+  "exports": {
+    ".": {
+      "production": "./dist/index.js",
+      "development": "./src/index.ts",
+      "import": "./dist/index.js",
+      "node": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
   },
   "publishConfig": {
     "access": "public",
