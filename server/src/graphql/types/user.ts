@@ -1,0 +1,98 @@
+import { builder } from '../builder.js';
+import { assignTypeName, hasTypeName } from '../relay.js';
+import { Plan } from './plan.js';
+
+builder.queryField('me', (t) =>
+  t.field({
+    type: 'User',
+    nullable: true,
+    resolve: async (_, __, ctx) => {
+      if (ctx.session?.userId) {
+        const user = await ctx.db
+          .selectFrom('User')
+          .selectAll()
+          .where('id', '=', ctx.session.userId)
+          .executeTakeFirst();
+        if (user) {
+          return assignTypeName('User')(user);
+        }
+      }
+      return null;
+    },
+  }),
+);
+
+builder.mutationFields((t) => ({
+  setUserRole: t.node({
+    authScopes: {
+      productAdmin: true,
+    },
+    args: {
+      userId: t.arg.globalID({
+        required: true,
+      }),
+      role: t.arg({
+        type: 'String',
+        required: true,
+      }),
+    },
+    id: async (_, { userId, role }, ctx) => {
+      if (userId.typename !== 'User') {
+        throw new Error('Invalid user');
+      }
+
+      if (role !== 'user' && role !== 'admin') {
+        throw new Error('Invalid role');
+      }
+
+      const result = await ctx.db
+        .updateTable('User')
+        .set({
+          planRole: role,
+        })
+        .where('id', '=', userId.id)
+        .returning('id')
+        .executeTakeFirst();
+
+      if (!result) {
+        throw new Error('User not found');
+      }
+
+      return { id: result.id, type: 'User' };
+    },
+  }),
+}));
+
+export const User = builder.loadableNodeRef('User', {
+  load: async (ids, ctx) => {
+    const results = await ctx.db
+      .selectFrom('User')
+      .selectAll()
+      .where('id', 'in', ids as string[])
+      .execute();
+
+    return results.map(assignTypeName('User'));
+  },
+  id: {
+    resolve: (user) => user.id,
+  },
+});
+User.implement({
+  description: 'A user in the system',
+
+  isTypeOf: hasTypeName('User'),
+  fields: (t) => ({
+    name: t.string({
+      resolve: (user) => user.friendlyName || user.fullName || 'Anonymous',
+    }),
+    role: t.exposeString('planRole', {
+      nullable: true,
+    }),
+    plan: t.field({
+      type: Plan,
+      nullable: true,
+      resolve: (user) => user.planId,
+    }),
+    email: t.exposeString('email'),
+  }),
+});

@@ -9,6 +9,7 @@ import {
   migrateToLatest as migrateInternal,
 } from '@a-type/kysely';
 import migrations from './migrations/index.js';
+export type * from './tables.js';
 
 const DATABASE_FILE = process.env.DATABASE_FILE;
 assert(DATABASE_FILE, 'DATABASE_FILE environment variable must be set');

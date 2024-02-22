@@ -111,9 +111,8 @@ export async function up(db: Kysely<any>) {
     .addColumn('updatedAt', 'datetime', (col) =>
       col.notNull().defaultTo(sql`CURRENT_TIMESTAMP`),
     )
-    .addColumn('userId', 'datetime', (col) =>
-      col.notNull().references('User.id').onDelete('no action'),
-    )
+    // not a foreign key. we want this intact if user deletes.
+    .addColumn('userId', 'varchar')
     .addColumn('action', 'text', (col) => col.notNull())
     .addColumn('data', 'text')
     .execute();

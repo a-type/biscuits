@@ -2,16 +2,17 @@ import 'uno.css';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Pages } from './pages/index.jsx';
-import { ClientProvider } from '@biscuits/client/react';
+import { Provider } from 'urql';
+import { client } from './graphql.js';
 
 function main() {
   const root = createRoot(document.getElementById('root')!);
   root.render(
-    <ClientProvider baseUrl={import.meta.env.VITE_API_URL}>
-      <StrictMode>
+    <StrictMode>
+      <Provider value={client}>
         <Pages />
-      </StrictMode>
-    </ClientProvider>,
+      </Provider>
+    </StrictMode>,
   );
 }
 

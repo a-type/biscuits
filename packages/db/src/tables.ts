@@ -136,7 +136,7 @@ export interface ActivityLogTable {
   createdAt: ColumnType<Date, Date | undefined, never>;
   updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
 
-  profileId: string;
+  userId: string | null;
   action: string;
   data: string | null;
 }

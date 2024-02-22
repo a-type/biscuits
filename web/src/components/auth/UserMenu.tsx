@@ -1,16 +1,26 @@
 import { Button } from '@a-type/ui/components/button';
-import { client } from '@biscuits/client/react';
 import { Link } from '@verdant-web/react-router';
 import classNames from 'classnames';
+import { graphql } from '@/graphql';
+import { useQuery } from 'urql';
 
 export interface UserMenuProps {
   className?: string;
 }
 
-export function UserMenu({ className }: UserMenuProps) {
-  const { data } = client.auth.session.useQuery();
+const UserMenuMe = graphql(`
+  query UserMenuMe {
+    me {
+      id
+      name
+    }
+  }
+`);
 
-  if (!data) {
+export function UserMenu({ className }: UserMenuProps) {
+  const [{ data }] = useQuery({ query: UserMenuMe });
+
+  if (!data?.me) {
     return (
       <Link to="/join">
         <Button className={classNames(className)}>Sign in</Button>
@@ -18,7 +28,7 @@ export function UserMenu({ className }: UserMenuProps) {
     );
   }
 
-  const name = data.name;
+  const name = data.me.name;
 
   return (
     <Link to="/plan">

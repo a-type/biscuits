@@ -1,34 +1,44 @@
+import { graphql } from '@/graphql';
 import { Button } from '@a-type/ui/components/button';
 import { PageContent, PageRoot } from '@a-type/ui/components/layouts';
-import { Spinner } from '@a-type/ui/components/spinner';
 import { H1 } from '@a-type/ui/components/typography';
-import { client } from '@biscuits/client/react';
 import { useNavigate } from '@verdant-web/react-router';
 import { Suspense, useEffect } from 'react';
+import { useMutation, useQuery } from 'urql';
+
+const PlanPageData = graphql(`
+  query PlanPageData {
+    me {
+      id
+    }
+    plan {
+      id
+      subscriptionStatus
+    }
+  }
+`);
 
 export interface PlanPageProps {}
 
 export function PlanPage({}: PlanPageProps) {
-  const [session] = client.auth.session.useSuspenseQuery();
-  const [status, { refetch }] = client.plan.status.useSuspenseQuery();
+  const [result, refetch] = useQuery({ query: PlanPageData });
+  const { data } = result;
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!session) {
+    if (!result.fetching && !result.data?.me) {
       navigate('/join');
     }
-  }, [session, navigate]);
+  }, [result, navigate]);
 
-  if (!session) {
-    return <Spinner />;
-  }
-
-  if (!status) {
+  if (!data?.plan) {
     return <NoPlanPage onCreate={refetch} />;
   }
 
-  if (!status.subscriptionStatus || status.subscriptionStatus === 'canceled') {
+  const plan = data.plan;
+
+  if (!plan.subscriptionStatus || plan.subscriptionStatus === 'canceled') {
     return <NoSubscriptionPage onSubscribed={refetch} />;
   }
 
@@ -46,14 +56,26 @@ export function PlanPage({}: PlanPageProps) {
 
 export default PlanPage;
 
+const PlanPageMembersData = graphql(`
+  query PlanPageMembers {
+    plan {
+      members {
+        id
+        name
+        email
+      }
+    }
+  }
+`);
+
 function PlanPageMembers() {
-  const [data] = client.plan.members.useSuspenseQuery();
+  const [{ data }] = useQuery({ query: PlanPageMembersData });
 
   return (
     <div className="grid">
-      {data.map((member) => (
+      {data?.plan?.members.map((member) => (
         <div key={member.id}>
-          <p>{member.fullName}</p>
+          <p>{member.name}</p>
           <p>{member.email}</p>
         </div>
       ))}
@@ -61,10 +83,18 @@ function PlanPageMembers() {
   );
 }
 
+const PlanPageCreatePlan = graphql(`
+  mutation PlanPageCreatePlan {
+    createPlan {
+      user {
+        id
+      }
+    }
+  }
+`);
+
 function NoPlanPage({ onCreate }: { onCreate?: () => void }) {
-  const { mutateAsync: createPlan } = client.plan.create.useMutation({
-    onSuccess: onCreate,
-  });
+  const [result, createPlan] = useMutation(PlanPageCreatePlan);
 
   return (
     <PageRoot>
@@ -75,7 +105,14 @@ function NoPlanPage({ onCreate }: { onCreate?: () => void }) {
             This shouldn&apos;t really happen, but just in case I made a button
             that fixes that for you.
           </div>
-          <Button onClick={() => createPlan()}>Fix it</Button>
+          <Button
+            onClick={async () => {
+              await createPlan({});
+              onCreate?.();
+            }}
+          >
+            Fix it
+          </Button>
         </div>
       </PageContent>
     </PageRoot>

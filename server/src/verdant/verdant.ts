@@ -59,3 +59,6 @@ export const verdantServer = new Server({
 });
 
 verdantServer.on('error', console.error);
+
+// TODO: expose named types in Verdant for...
+export type VerdantLibraryInfo = Awaited<ReturnType<Server['getLibraryInfo']>>;

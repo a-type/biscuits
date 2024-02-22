@@ -6,11 +6,12 @@ import { PORT } from './config/deployedContext.js';
 import { createServerAdapter } from '@whatwg-node/server';
 import { error, json, Router, createCors, IRequest } from 'itty-router';
 import { authRouter } from './routers/auth.js';
-import { trpcRouter } from './routers/trpc.js';
 import { migrateToLatest } from '@biscuits/db';
 import { verdantRouter } from './routers/verdant.js';
 import { BiscuitsError } from './error.js';
 import { stripeRouter } from './routers/stripe.js';
+import { graphqlRouter } from './routers/graphql.js';
+import { writeSchema } from './tasks/writeSchema.js';
 
 const router = Router();
 
@@ -27,9 +28,9 @@ router
   .all('*', logger, preflight)
   .get('/', () => 'Success!')
   .all('/auth/*', authRouter.handle)
-  .all('/trpc/*', trpcRouter.handle)
   .all('/verdant/*', verdantRouter.handle)
   .all('/stripe/*', stripeRouter.handle)
+  .all('/graphql/*', graphqlRouter.handle)
   .all('*', () => error(404));
 
 const ittyServer = createServerAdapter((request) =>
@@ -62,3 +63,4 @@ httpServer.listen(port, () => {
 });
 
 productAdminSetup();
+writeSchema();

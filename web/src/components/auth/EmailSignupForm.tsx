@@ -1,5 +1,3 @@
-'use client';
-
 import { API_HOST_HTTP } from '@/config';
 import { Button } from '@a-type/ui/components/button';
 import { Input } from '@a-type/ui/components/input';
