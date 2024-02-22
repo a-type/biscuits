@@ -78,7 +78,7 @@ export interface PlanTable {
   > | null;
   subscriptionExpiresAt: Date | null;
   subscriptionCanceledAt: Date | null;
-  featureFlags: string;
+  featureFlags: ColumnType<string, string | undefined, string>;
 }
 
 export type Plan = Selectable<PlanTable>;
