@@ -1,6 +1,8 @@
 import { db, id, jsonArrayFrom } from '@biscuits/db';
 import { BiscuitsError } from '../error.js';
 import { stripe } from '../services/stripe.js';
+import { email } from '../services/email.js';
+import { UI_ORIGIN } from '../config/deployedContext.js';
 
 export async function removeUserFromPlan(
   planId: string,
@@ -44,14 +46,15 @@ export async function removeUserFromPlan(
       plan.members.filter((m) => m.planRole === 'admin').length > 1;
     if (!canJustDeleteThem) {
       // user was the only admin, so we need to promote someone else
+
+      // when the only admin leaves, we always cancel the subscription, too.
+      if (plan.stripeSubscriptionId) {
+        await stripe.subscriptions.cancel(plan.stripeSubscriptionId);
+      }
+
       const newAdmin = plan.members.find((m) => m.planRole === 'user');
       if (!newAdmin) {
-        // no other users, so delete the plan. but we also need to cancel
-        // the subscription.
-        if (plan.stripeSubscriptionId) {
-          await stripe.subscriptions.cancel(plan.stripeSubscriptionId);
-        }
-
+        // no other users, so delete the plan.
         await tx.deleteFrom('Plan').where('id', '=', planId).execute();
         await tx
           .insertInto('ActivityLog')
@@ -68,13 +71,22 @@ export async function removeUserFromPlan(
         return;
       } else {
         // promote the new admin
-        await tx
+        const newAdminDetails = await tx
           .updateTable('User')
           .where('id', '=', newAdmin.id)
           .set({
             planRole: 'admin',
           })
-          .execute();
+          .returning(['id', 'email', 'fullName'])
+          .executeTakeFirstOrThrow();
+
+        // send an email to the new admin about their new role
+        await email.sendMail({
+          to: newAdminDetails.email,
+          subject: 'You are now the admin of your Biscuits plan',
+          text: `Hi ${newAdminDetails.fullName},\n\nYou are now the admin of your Biscuits plan. You can manage your plan at ${UI_ORIGIN}/plans/${planId}.\n\nThanks,\nGrant`,
+          html: `Hi ${newAdminDetails.fullName},<br><br>You are now the admin of your Biscuits plan. You can manage your plan at <a href="${UI_ORIGIN}/plans/${planId}">${UI_ORIGIN}/plans/${planId}</a>.<br><br>Thanks,<br>Grant`,
+        });
       }
     }
 
