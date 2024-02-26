@@ -51,7 +51,7 @@ export function ManageSubscription({
         <p>Status: {data.subscriptionStatus}</p>
         {data.productInfo && <PlanInfo data={data.productInfo} />}
       </div>
-      <form action={`${API_HOST_HTTP}/api/stripe/create-portal`} method="POST">
+      <form action={`${API_HOST_HTTP}/stripe/portal-session`} method="POST">
         <Button type="submit">Change your subscription</Button>
         <span className="text-xs">
           Update your plan, change your card, or unsubscribe

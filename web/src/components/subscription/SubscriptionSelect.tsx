@@ -2,9 +2,8 @@ import { graphql } from '@/graphql';
 import { H2 } from '@a-type/ui/components/typography';
 import { withClassName } from '@a-type/ui/hooks';
 import { useMutation } from 'urql';
-
-const FOR_TWO_PRICE_ID = import.meta.env.VITE_STRIPE_FOR_TWO_PLAN_PRICE_ID;
-const FAMILY_STYLE_PRICE_ID = import.meta.env.VITE_STRIPE_FAMILY_PLAN_PRICE_ID;
+import { AutoPlanInfo } from './PlanInfo';
+import { FAMILY_STYLE_PRICE_ID, FOR_TWO_PRICE_ID } from '@/config';
 
 export interface SubscriptionSelectProps {}
 
@@ -41,13 +40,13 @@ export function SubscriptionSelect({}: SubscriptionSelectProps) {
           disabled={result.fetching}
           onClick={() => selectPlan(FOR_TWO_PRICE_ID)}
         >
-          For Two
+          <AutoPlanInfo priceId={FOR_TWO_PRICE_ID} />
         </SubscriptionChoiceButton>
         <SubscriptionChoiceButton
           disabled={result.fetching}
           onClick={() => selectPlan(FAMILY_STYLE_PRICE_ID)}
         >
-          Family Style
+          <AutoPlanInfo priceId={FAMILY_STYLE_PRICE_ID} />
         </SubscriptionChoiceButton>
       </div>
     </div>

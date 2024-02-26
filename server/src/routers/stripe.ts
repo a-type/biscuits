@@ -135,8 +135,8 @@ stripeRouter.post('/checkout-session', async (req) => {
         quantity: 1,
       },
     ],
-    success_url: `https://${UI_ORIGIN}/account`,
-    cancel_url: `https://${UI_ORIGIN}/account`,
+    success_url: `${UI_ORIGIN}/account`,
+    cancel_url: `${UI_ORIGIN}/account`,
     customer_email: user.email,
     allow_promotion_codes: true,
     billing_address_collection: 'auto',
@@ -176,7 +176,7 @@ stripeRouter.post('/portal-session', async (req) => {
   const user = await db
     .selectFrom('User')
     .where('id', '=', session.userId)
-    .select(['email'])
+    .select(['email', 'stripeCustomerId'])
     .executeTakeFirst();
 
   if (!user) {
@@ -187,9 +187,16 @@ stripeRouter.post('/portal-session', async (req) => {
     );
   }
 
+  if (!user.stripeCustomerId) {
+    throw new BiscuitsError(
+      BiscuitsError.Code.BadRequest,
+      'You are not the manager of the billing for your plan. Please contact whoever is to update the subscription.',
+    );
+  }
+
   const portal = await stripe.billingPortal.sessions.create({
-    customer: user.email,
-    return_url: `https://${UI_ORIGIN}/account`,
+    customer: user.stripeCustomerId,
+    return_url: `${UI_ORIGIN}/account`,
   });
 
   if (!portal.url) {
