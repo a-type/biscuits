@@ -94,5 +94,8 @@ User.implement({
       resolve: (user) => user.planId,
     }),
     email: t.exposeString('email'),
+    imageUrl: t.exposeString('imageUrl', {
+      nullable: true,
+    }),
   }),
 });

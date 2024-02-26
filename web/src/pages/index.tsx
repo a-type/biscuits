@@ -1,3 +1,4 @@
+import { TopLoader } from '@/components/nav/TopLoader.jsx';
 import { Outlet, Router, makeRoutes } from '@verdant-web/react-router';
 import { Suspense, lazy } from 'react';
 
@@ -28,6 +29,7 @@ export function Pages() {
   return (
     <Router routes={routes}>
       <Suspense>
+        <TopLoader />
         <Outlet />
       </Suspense>
     </Router>

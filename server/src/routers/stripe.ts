@@ -2,10 +2,19 @@ import { Router } from 'itty-router';
 import { stripe } from '../services/stripe.js';
 import { STRIPE_WEBHOOK_SECRET } from '../config/secrets.js';
 import { BiscuitsError } from '../error.js';
-import Stripe from 'stripe';
 import { db } from '@biscuits/db';
 import { sessions } from '../auth/session.js';
 import { UI_ORIGIN } from '../config/deployedContext.js';
+import {
+  handlePaymentIntentCanceled,
+  handlePaymentIntentPaymentFailed,
+  handlePaymentIntentProcessing,
+  handlePaymentIntentSucceeded,
+  handleSubscriptionCreated,
+  handleSubscriptionDeleted,
+  handleSubscriptionUpdated,
+  handleTrialEnd,
+} from '../management/subscription.js';
 
 export const stripeRouter = Router({
   base: '/stripe',
@@ -43,6 +52,18 @@ stripeRouter.post('/webhook', async (req) => {
       case 'customer.subscription.updated':
         await handleSubscriptionUpdated(event);
         break;
+      case 'payment_intent.succeeded':
+        await handlePaymentIntentSucceeded(event);
+        break;
+      case 'payment_intent.processing':
+        await handlePaymentIntentProcessing(event);
+        break;
+      case 'payment_intent.canceled':
+        await handlePaymentIntentCanceled(event);
+        break;
+      case 'payment_intent.payment_failed':
+        await handlePaymentIntentPaymentFailed(event);
+        break;
     }
 
     return new Response('OK');
@@ -55,131 +76,6 @@ stripeRouter.post('/webhook', async (req) => {
     );
   }
 });
-
-async function handleTrialEnd(
-  event: Stripe.CustomerSubscriptionTrialWillEndEvent,
-) {
-  const subscription = event.data.object;
-  const { status, metadata } = subscription;
-  const { planId } = metadata;
-  if (!planId) {
-    throw new BiscuitsError(
-      BiscuitsError.Code.BadRequest,
-      'No planId found on subscription ' + subscription.id,
-    );
-  }
-
-  const expiresAt = subscription.trial_end
-    ? new Date(subscription.trial_end * 1000)
-    : undefined;
-
-  await db
-    .updateTable('Plan')
-    .where('id', '=', planId)
-    .set({
-      subscriptionStatus: status,
-      subscriptionExpiresAt: expiresAt,
-    })
-    .execute();
-}
-
-async function handleSubscriptionDeleted(
-  event: Stripe.CustomerSubscriptionDeletedEvent,
-) {
-  const subscription = event.data.object;
-  const { status, metadata } = subscription;
-  const { planId } = metadata;
-  if (!planId) {
-    throw new BiscuitsError(
-      BiscuitsError.Code.BadRequest,
-      'No planId found on subscription ' + subscription.id,
-    );
-  }
-
-  const canceledAt = subscription.canceled_at
-    ? new Date(subscription.canceled_at * 1000)
-    : null;
-
-  await db
-    .updateTable('Plan')
-    .where('id', '=', planId)
-    .set({
-      subscriptionStatus: status,
-      subscriptionCanceledAt: canceledAt,
-    })
-    .execute();
-}
-
-async function handleSubscriptionCreated(
-  event: Stripe.CustomerSubscriptionCreatedEvent,
-) {
-  const subscription = event.data.object;
-  const { status, metadata } = subscription;
-  const { planId } = metadata;
-  if (!planId) {
-    throw new BiscuitsError(
-      BiscuitsError.Code.BadRequest,
-      'No planId found on subscription ' + subscription.id,
-    );
-  }
-
-  const priceId = subscription.items.data[0]?.price.id;
-  const productId = subscription.items.data[0]?.price.product as string;
-
-  await db
-    .updateTable('Plan')
-    .where('id', '=', planId)
-    .set({
-      subscriptionStatus: status,
-      stripeSubscriptionId: subscription.id,
-      stripeCustomerId: subscription.customer as string,
-      stripePriceId: priceId,
-      stripeProductId: productId,
-    })
-    .execute();
-}
-
-async function handleSubscriptionUpdated(
-  event: Stripe.CustomerSubscriptionUpdatedEvent,
-) {
-  const subscription = event.data.object;
-  const { status, metadata } = subscription;
-  const { planId } = metadata;
-  if (!planId) {
-    throw new BiscuitsError(
-      BiscuitsError.Code.BadRequest,
-      'No planId found on subscription ' + subscription.id,
-    );
-  }
-
-  const canceledAt = subscription.canceled_at
-    ? new Date(subscription.canceled_at * 1000)
-    : null;
-
-  const expiresAt =
-    subscription.status !== 'active'
-      ? subscription.current_period_end
-        ? new Date(subscription.current_period_end * 1000)
-        : null
-      : null;
-
-  const priceId = subscription.items.data[0]?.price.id;
-  const productId = subscription.items.data[0]?.price.product as string;
-
-  await db
-    .updateTable('Plan')
-    .where('id', '=', planId)
-    .set({
-      subscriptionStatus: status,
-      stripeSubscriptionId: subscription.id,
-      subscriptionCanceledAt: canceledAt,
-      subscriptionExpiresAt: expiresAt,
-      stripeCustomerId: subscription.customer as string,
-      stripePriceId: priceId,
-      stripeProductId: productId,
-    })
-    .execute();
-}
 
 stripeRouter.post('/checkout-session', async (req) => {
   const body = await req.json();

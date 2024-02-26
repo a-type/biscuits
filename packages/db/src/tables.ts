@@ -26,6 +26,9 @@ export interface UserTable {
   password: string | null;
   isProductAdmin: boolean;
 
+  /** The Stripe Customer associated with this user. */
+  stripeCustomerId: string | null;
+
   planId: string | null;
   planRole: 'admin' | 'user' | null;
 }
@@ -63,7 +66,6 @@ export interface PlanTable {
   stripeProductId: string | null;
   stripePriceId: string | null;
   stripeSubscriptionId: string | null;
-  stripeCustomerId: string | null;
   subscriptionStatus: string | null;
   subscriptionStatusCheckedAt: ColumnType<
     Date,

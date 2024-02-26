@@ -1,10 +1,11 @@
+import { SubscriptionSetup } from '@/components/subscription/SubscriptionSetup';
 import { graphql } from '@/graphql';
-import { Button } from '@a-type/ui/components/button';
 import { PageContent, PageRoot } from '@a-type/ui/components/layouts';
-import { H1 } from '@a-type/ui/components/typography';
+import { Avatar } from '@a-type/ui/components/avatar';
+import { H1, H2 } from '@a-type/ui/components/typography';
 import { useNavigate } from '@verdant-web/react-router';
 import { Suspense, useEffect } from 'react';
-import { useMutation, useQuery } from 'urql';
+import { useQuery } from 'urql';
 
 const PlanPageData = graphql(`
   query PlanPageData {
@@ -21,7 +22,7 @@ const PlanPageData = graphql(`
 export interface PlanPageProps {}
 
 export function PlanPage({}: PlanPageProps) {
-  const [result, refetch] = useQuery({ query: PlanPageData });
+  const [result] = useQuery({ query: PlanPageData });
   const { data } = result;
 
   const navigate = useNavigate();
@@ -32,22 +33,13 @@ export function PlanPage({}: PlanPageProps) {
     }
   }, [result, navigate]);
 
-  if (!data?.plan) {
-    return <NoPlanPage onCreate={refetch} />;
-  }
-
-  const plan = data.plan;
-
-  if (!plan.subscriptionStatus || plan.subscriptionStatus === 'canceled') {
-    return <NoSubscriptionPage onSubscribed={refetch} />;
-  }
-
   return (
     <PageRoot>
       <PageContent>
         <H1>Your Plan</H1>
         <Suspense>
-          <PlanPageMembers />
+          <SubscriptionSetup />
+          {!!data?.plan && <PlanPageMembers />}
         </Suspense>
       </PageContent>
     </PageRoot>
@@ -63,6 +55,7 @@ const PlanPageMembersData = graphql(`
         id
         name
         email
+        imageUrl
       }
     }
   }
@@ -72,60 +65,24 @@ function PlanPageMembers() {
   const [{ data }] = useQuery({ query: PlanPageMembersData });
 
   return (
-    <div className="grid">
-      {data?.plan?.members.map((member) => (
-        <div key={member.id}>
-          <p>{member.name}</p>
-          <p>{member.email}</p>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-const PlanPageCreatePlan = graphql(`
-  mutation PlanPageCreatePlan {
-    createPlan {
-      user {
-        id
-      }
-    }
-  }
-`);
-
-function NoPlanPage({ onCreate }: { onCreate?: () => void }) {
-  const [result, createPlan] = useMutation(PlanPageCreatePlan);
-
-  return (
-    <PageRoot>
-      <PageContent>
-        <H1>You have no plan</H1>
-        <div className="flex flex-col items-start gap-4">
-          <div>
-            This shouldn&apos;t really happen, but just in case I made a button
-            that fixes that for you.
-          </div>
-          <Button
-            onClick={async () => {
-              await createPlan({});
-              onCreate?.();
-            }}
+    <div className="flex flex-col gap-3">
+      <H2>Members</H2>
+      <div className="grid">
+        {data?.plan?.members.map((member) => (
+          <div
+            key={member.id}
+            className="rounded-md border border-solid border-gray-5 p-4"
           >
-            Fix it
-          </Button>
-        </div>
-      </PageContent>
-    </PageRoot>
-  );
-}
-
-function NoSubscriptionPage({ onSubscribed }: { onSubscribed?: () => void }) {
-  return (
-    <PageRoot>
-      <PageContent>
-        <H1>Choose your plan</H1>
-        <div>TODO: plan options</div>
-      </PageContent>
-    </PageRoot>
+            <div className="flex flex-row gap-3">
+              <Avatar imageSrc={member.imageUrl ?? undefined} />
+              <div className="flex flex-col gap-2 items-start justify-start">
+                <span>{member.name}</span>
+                <span>{member.email}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }

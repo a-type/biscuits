@@ -2,7 +2,7 @@ import { GoogleProvider, createHandlers } from '@a-type/auth';
 import { assert } from '@a-type/utils';
 import { db, hashPassword, id } from '@biscuits/db';
 import { sessions } from '../auth/session.js';
-import { DEPLOYED_HOST, UI_ORIGIN } from '../config/deployedContext.js';
+import { DEPLOYED_ORIGIN, UI_ORIGIN } from '../config/deployedContext.js';
 import { email } from '../services/email.js';
 
 assert(!!process.env.GOOGLE_AUTH_CLIENT_ID, 'GOOGLE_CLIENT_ID must be set');
@@ -18,7 +18,7 @@ export const authHandlers = createHandlers({
     google: new GoogleProvider({
       clientId: process.env.GOOGLE_AUTH_CLIENT_ID!,
       clientSecret: process.env.GOOGLE_AUTH_CLIENT_SECRET!,
-      redirectUri: DEPLOYED_HOST + '/auth/provider/google/callback',
+      redirectUri: DEPLOYED_ORIGIN + '/auth/provider/google/callback',
     }),
   },
   email: email,
@@ -68,15 +68,6 @@ export const authHandlers = createHandlers({
         ? await hashPassword(plaintextPassword)
         : undefined;
       return db.transaction().execute(async (tx) => {
-        const plan = await tx
-          .insertInto('Plan')
-          .values({
-            id: id(),
-            name: `${friendlyName ?? fullName ?? 'Anonymous'}'s Plan`,
-          })
-          .returning('id')
-          .executeTakeFirstOrThrow();
-
         const userResult = await tx
           .insertInto('User')
           .values({
@@ -85,8 +76,6 @@ export const authHandlers = createHandlers({
             fullName: fullName || 'Anonymous',
             friendlyName: friendlyName || 'Anonymous',
             isProductAdmin: false,
-            planId: plan.id,
-            planRole: 'admin',
             ...user,
           })
           .returning('id')

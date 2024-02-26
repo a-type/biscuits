@@ -2,10 +2,10 @@ import { Router } from 'itty-router';
 import { verdantServer } from '../verdant/verdant.js';
 import { ReplicaType, TokenProvider } from '@verdant-web/server';
 import { VERDANT_SECRET } from '../config/secrets.js';
-import { DEPLOYED_HOST } from '../config/deployedContext.js';
+import { DEPLOYED_ORIGIN } from '../config/deployedContext.js';
 import { db } from '@biscuits/db';
 import { isSubscribed } from '../auth/subscription.js';
-import { BiscuitsError } from '../error.js';
+import { BiscuitsError } from '@biscuits/error';
 import { getLibraryName } from '@biscuits/libraries';
 import { sessions } from '../auth/session.js';
 
@@ -42,8 +42,8 @@ verdantRouter.get('/token/:app', async (req) => {
 
   const libraryId = getLibraryName(plan.id, req.params.app);
 
-  const syncEndpoint = DEPLOYED_HOST + '/verdant';
-  const fileEndpoint = DEPLOYED_HOST + '/verdant/files';
+  const syncEndpoint = DEPLOYED_ORIGIN + '/verdant';
+  const fileEndpoint = DEPLOYED_ORIGIN + '/verdant/files';
 
   const token = tokenProvider.getToken({
     userId: session?.userId,

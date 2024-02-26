@@ -1,6 +1,6 @@
 import { LocalFileStorage, Server, UserProfiles } from '@verdant-web/server';
 import { Server as HttpServer } from 'http';
-import { DEPLOYED_HOST } from '../config/deployedContext.js';
+import { DEPLOYED_ORIGIN } from '../config/deployedContext.js';
 import { assert } from '@a-type/utils';
 import { S3FileStorage } from '@verdant-web/s3-file-storage';
 import { db } from '@biscuits/db';
@@ -51,7 +51,7 @@ export const verdantServer = new Server({
         })
       : new LocalFileStorage({
           rootDirectory: 'userFiles',
-          host: DEPLOYED_HOST,
+          host: DEPLOYED_ORIGIN,
         }),
   fileConfig: {
     deleteExpirationDays: 3,

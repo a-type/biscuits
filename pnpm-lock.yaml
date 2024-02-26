@@ -18,6 +18,12 @@ importers:
         specifier: ^5.0.4
         version: 5.3.2
 
+  packages/client:
+    dependencies:
+      '@biscuits/error':
+        specifier: workspace:*
+        version: link:../error
+
   packages/db:
     dependencies:
       '@a-type/kysely':
@@ -52,19 +58,24 @@ importers:
         specifier: ^4.6.2
         version: 4.6.2
 
+  packages/error: {}
+
   packages/libraries: {}
 
   server:
     dependencies:
       '@a-type/auth':
-        specifier: ^0.3.6
-        version: 0.3.6
+        specifier: ^0.4.1
+        version: 0.4.1
       '@a-type/utils':
         specifier: ^1.0.5
         version: 1.0.5
       '@biscuits/db':
         specifier: workspace:*
         version: link:../packages/db
+      '@biscuits/error':
+        specifier: workspace:*
+        version: link:../packages/error
       '@biscuits/libraries':
         specifier: workspace:*
         version: link:../packages/libraries
@@ -160,23 +171,44 @@ importers:
   web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.1.15
-        version: 0.1.15(@types/react-dom@18.2.17)(@types/react@18.2.38)
+        specifier: ^0.6.13
+        version: 0.6.13(@types/react-dom@18.2.17)(@types/react@18.2.38)
+      '@biscuits/client':
+        specifier: workspace:*
+        version: link:../packages/client
+      '@biscuits/error':
+        specifier: workspace:*
+        version: link:../packages/error
+      '@react-spring/web':
+        specifier: ^9.7.3
+        version: 9.7.3(react-dom@18.2.0)(react@18.2.0)
       '@react-three/drei':
         specifier: ^9.88.17
         version: 9.88.17(@react-three/fiber@8.15.11)(@types/three@0.158.3)(react-dom@18.2.0)(react@18.2.0)(three@0.158.0)
       '@react-three/fiber':
         specifier: ^8.15.11
         version: 8.15.11(react-dom@18.2.0)(react@18.2.0)(three@0.158.0)
+      '@stripe/react-stripe-js':
+        specifier: ^2.5.0
+        version: 2.5.0(@stripe/stripe-js@3.0.5)(react-dom@18.2.0)(react@18.2.0)
+      '@stripe/stripe-js':
+        specifier: ^3.0.5
+        version: 3.0.5
       '@types/three':
         specifier: ^0.158.3
         version: 0.158.3
+      '@urql/exchange-retry':
+        specifier: ^1.2.1
+        version: 1.2.1
       '@verdant-web/react-router':
         specifier: ^0.6.1
         version: 0.6.1(react@18.2.0)
       classnames:
         specifier: ^2.3.2
         version: 2.3.2
+      cookie:
+        specifier: ^0.6.0
+        version: 0.6.0
       formik:
         specifier: ^2.4.5
         version: 2.4.5(react@18.2.0)
@@ -189,6 +221,9 @@ importers:
       react-dom:
         specifier: ^18
         version: 18.2.0(react@18.2.0)
+      react-hot-toast:
+        specifier: ^2.4.1
+        version: 2.4.1(csstype@3.1.2)(react-dom@18.2.0)(react@18.2.0)
       three:
         specifier: ^0.158.0
         version: 0.158.0
@@ -199,6 +234,9 @@ importers:
       '@0no-co/graphqlsp':
         specifier: ^1.3.4
         version: 1.3.4
+      '@types/cookie':
+        specifier: ^0.5.4
+        version: 0.5.4
       '@types/node':
         specifier: ^20
         version: 20.10.0
@@ -249,8 +287,8 @@ packages:
       - encoding
     dev: true
 
-  /@a-type/auth@0.3.6:
-    resolution: {integrity: sha512-hLSD7QMjsyKCJS6f/mSeNF6+zFIMCL6c5u8N4ne+lhlB/OKIekmVobbJWNogqBrZtAY5BIukOLEsCrMlZJ8jEA==}
+  /@a-type/auth@0.4.1:
+    resolution: {integrity: sha512-CQT9QNtsrYwnH36KtzclX7KPGuO3vU/wwU9y7NIKIzGw8fbuGaOhv/uKOYALXGJn57NwtJshho8y7BAS6SoQfA==}
     dependencies:
       cookie: 0.6.0
       discord-oauth2: 2.12.1
@@ -276,8 +314,8 @@ packages:
       - supports-color
     dev: false
 
-  /@a-type/ui@0.1.15(@types/react-dom@18.2.17)(@types/react@18.2.38):
-    resolution: {integrity: sha512-sjdLuT0TIgcwHxvyeiz6bUx1S3rodPdFg4z++ccOISJdgEeN6N08TMJ/d51HqC1xwZqxx0eX0snJMX+bzf6jtw==}
+  /@a-type/ui@0.6.13(@types/react-dom@18.2.17)(@types/react@18.2.38):
+    resolution: {integrity: sha512-5Jjw2xzAG8qVrbNKi5UwheQXNjJS5aVY+G8DDoXwbzxCptzlrolXStvuBursCX+eMOm29sdL9uLHjGg25gw9Hw==}
     dependencies:
       '@a-type/utils': 1.0.5
       '@radix-ui/react-accordion': 1.1.2(@types/react-dom@18.2.17)(@types/react@18.2.38)(react-dom@18.2.0)(react@18.2.0)
@@ -297,6 +335,7 @@ packages:
       '@radix-ui/react-toast': 1.1.5(@types/react-dom@18.2.17)(@types/react@18.2.38)(react-dom@18.2.0)(react@18.2.0)
       '@radix-ui/react-toggle-group': 1.0.4(@types/react-dom@18.2.17)(@types/react@18.2.38)(react-dom@18.2.0)(react@18.2.0)
       '@radix-ui/react-tooltip': 1.0.7(@types/react-dom@18.2.17)(@types/react@18.2.38)(react-dom@18.2.0)(react@18.2.0)
+      '@react-spring/web': 9.7.3(react-dom@18.2.0)(react@18.2.0)
       '@tiptap/core': 2.1.12(@tiptap/pm@2.1.12)
       '@tiptap/extension-document': 2.1.12(@tiptap/core@2.1.12)
       '@tiptap/extension-paragraph': 2.1.12(@tiptap/core@2.1.12)
@@ -305,8 +344,11 @@ packages:
       '@tiptap/starter-kit': 2.1.12(@tiptap/pm@2.1.12)
       '@use-gesture/react': 10.3.0(react@18.2.0)
       browser-image-resizer: 2.4.1
-      classnames: 2.3.2
+      calendar-blocks: 0.3.1(react@18.2.0)
+      clsx: 2.1.0
       color-interpolate: 1.0.5
+      color-parse: 2.0.0
+      color-space: 2.0.1
       date-fns: 2.30.0
       formik: 2.4.5(react@18.2.0)
       pluralize: 8.0.0
@@ -3527,6 +3569,16 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@react-spring/animated@9.7.3(react@18.2.0):
+    resolution: {integrity: sha512-5CWeNJt9pNgyvuSzQH+uy2pvTg8Y4/OisoscZIR8/ZNLIOI+CatFBhGZpDGTF/OzdNFsAoGk3wiUYTwoJ0YIvw==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@react-spring/shared': 9.7.3(react@18.2.0)
+      '@react-spring/types': 9.7.3
+      react: 18.2.0
+    dev: false
+
   /@react-spring/core@9.6.1(react@18.2.0):
     resolution: {integrity: sha512-3HAAinAyCPessyQNNXe5W0OHzRfa8Yo5P748paPcmMowZ/4sMfaZ2ZB6e5x5khQI8NusOHj8nquoutd6FRY5WQ==}
     peerDependencies:
@@ -3536,6 +3588,17 @@ packages:
       '@react-spring/rafz': 9.6.1
       '@react-spring/shared': 9.6.1(react@18.2.0)
       '@react-spring/types': 9.6.1
+      react: 18.2.0
+    dev: false
+
+  /@react-spring/core@9.7.3(react@18.2.0):
+    resolution: {integrity: sha512-IqFdPVf3ZOC1Cx7+M0cXf4odNLxDC+n7IN3MDcVCTIOSBfqEcBebSv+vlY5AhM0zw05PDbjKrNmBpzv/AqpjnQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@react-spring/animated': 9.7.3(react@18.2.0)
+      '@react-spring/shared': 9.7.3(react@18.2.0)
+      '@react-spring/types': 9.7.3
       react: 18.2.0
     dev: false
 
@@ -3550,6 +3613,15 @@ packages:
     dependencies:
       '@react-spring/rafz': 9.6.1
       '@react-spring/types': 9.6.1
+      react: 18.2.0
+    dev: false
+
+  /@react-spring/shared@9.7.3(react@18.2.0):
+    resolution: {integrity: sha512-NEopD+9S5xYyQ0pGtioacLhL2luflh6HACSSDUZOwLHoxA5eku1UPuqcJqjwSD6luKjjLfiLOspxo43FUHKKSA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@react-spring/types': 9.7.3
       react: 18.2.0
     dev: false
 
@@ -3571,6 +3643,24 @@ packages:
 
   /@react-spring/types@9.6.1:
     resolution: {integrity: sha512-POu8Mk0hIU3lRXB3bGIGe4VHIwwDsQyoD1F394OK7STTiX9w4dG3cTLljjYswkQN+hDSHRrj4O36kuVa7KPU8Q==}
+    dev: false
+
+  /@react-spring/types@9.7.3:
+    resolution: {integrity: sha512-Kpx/fQ/ZFX31OtlqVEFfgaD1ACzul4NksrvIgYfIFq9JpDHFwQkMVZ10tbo0FU/grje4rcL4EIrjekl3kYwgWw==}
+    dev: false
+
+  /@react-spring/web@9.7.3(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-BXt6BpS9aJL/QdVqEIX9YoUy8CE6TJrU0mNCqSoxdXlIeNcEBWOfIyE6B14ENNsyQKS3wOWkiJfco0tCr/9tUg==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@react-spring/animated': 9.7.3(react@18.2.0)
+      '@react-spring/core': 9.7.3(react@18.2.0)
+      '@react-spring/shared': 9.7.3(react@18.2.0)
+      '@react-spring/types': 9.7.3
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /@react-three/drei@9.88.17(@react-three/fiber@8.15.11)(@types/three@0.158.3)(react-dom@18.2.0)(react@18.2.0)(three@0.158.0):
@@ -4256,6 +4346,24 @@ packages:
       '@smithy/abort-controller': 2.1.1
       '@smithy/types': 2.9.1
       tslib: 2.6.2
+    dev: false
+
+  /@stripe/react-stripe-js@2.5.0(@stripe/stripe-js@3.0.5)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-ys5bnrufNoBlUPRblWkiN7dUCX3s2noBZS0Lf5GkHYO9x3SXJMZccif53IdP4X6tZyNLn7aSMgZBUZqsdzrvhg==}
+    peerDependencies:
+      '@stripe/stripe-js': ^1.44.1 || ^2.0.0 || ^3.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@stripe/stripe-js': 3.0.5
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /@stripe/stripe-js@3.0.5:
+    resolution: {integrity: sha512-0BTd2bC+8gSKty7jXKRntLnvmWgFTmpZkY0oP7ADBYfdV0JtuGoDbfQawui0W5eUlwT3CcKh2IeRV4SPOBIeXQ==}
+    engines: {node: '>=12.16'}
     dev: false
 
   /@tiptap/core@2.1.12(@tiptap/pm@2.1.12):
@@ -4959,6 +5067,15 @@ packages:
       - graphql
     dev: false
 
+  /@urql/exchange-retry@1.2.1:
+    resolution: {integrity: sha512-+BP73EJA0zJpGbdU1V6l2v8hb2m7/9dMHnF85ZjkaG6INkq4O7Tu9+jfC2wYxt2cajRxgxOoAL3iEJ5Xeerzyg==}
+    dependencies:
+      '@urql/core': 4.2.3
+      wonka: 6.3.4
+    transitivePeerDependencies:
+      - graphql
+    dev: false
+
   /@use-gesture/core@10.3.0:
     resolution: {integrity: sha512-rh+6MND31zfHcy9VU3dOZCqGY511lvGcfyJenN4cWZe0u1BH6brBpBddLVXhF2r4BMqWbvxfsbL7D287thJU2A==}
     dev: false
@@ -5444,6 +5561,14 @@ packages:
     engines: {node: '>=8'}
     dev: true
 
+  /calendar-blocks@0.3.1(react@18.2.0):
+    resolution: {integrity: sha512-Vwnjhm5bPjHIr+fZhJrBqrIGLPDiV4M5winYEAnRe9mG1yQjqf8OfGFrk1fryeoiZrbVcJOcm5xifi7KRjRO/A==}
+    peerDependencies:
+      react: '*'
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /call-bind@1.0.5:
     resolution: {integrity: sha512-C3nQxfFZxFRVoJoGKKI8y3MOEo129NQ+FgQ08iye+Mk4zNZZGdjfs06bVTr+DBSlA66Q2VEcMki/cUCP4SercQ==}
     dependencies:
@@ -5522,6 +5647,11 @@ packages:
     resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==}
     dev: false
 
+  /clsx@2.1.0:
+    resolution: {integrity: sha512-m3iNNWpd9rl3jvvcBnu70ylMdrXt8Vlq4HYadnU5fwcOtvkSQWPmj7amUcDT2qYI7risszBjI5AUIUox9D16pg==}
+    engines: {node: '>=6'}
+    dev: false
+
   /color-convert@1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
     dependencies:
@@ -5557,11 +5687,21 @@ packages:
       color-name: 1.1.4
     dev: false
 
+  /color-parse@2.0.0:
+    resolution: {integrity: sha512-g2Z+QnWsdHLppAbrpcFWo629kLOnOPtpxYV69GCqm92gqSgyXbzlfyN3MXs0412fPBkFmiuS+rXposgBgBa6Kg==}
+    dependencies:
+      color-name: 1.1.4
+    dev: false
+
   /color-space@1.16.0:
     resolution: {integrity: sha512-A6WMiFzunQ8KEPFmj02OnnoUnqhmSaHaZ/0LVFcPTdlvm8+3aMJ5x1HRHy3bDHPkovkf4sS0f4wsVvwk71fKkg==}
     dependencies:
       hsluv: 0.0.3
       mumath: 3.3.4
+    dev: false
+
+  /color-space@2.0.1:
+    resolution: {integrity: sha512-nKqUYlo0vZATVOFHY810BSYjmCARrG7e5R3UE3CQlyjJTvv5kSSmPG1kzm/oDyyqjehM+lW1RnEt9It9GNa5JA==}
     dev: false
 
   /color-support@1.1.3:
@@ -6662,6 +6802,14 @@ packages:
 
   /glsl-noise@0.0.0:
     resolution: {integrity: sha512-b/ZCF6amfAUb7dJM/MxRs7AetQEahYzJ8PtgfrmEdtw6uyGOr+ZSGtgjFm6mfsBkxJ4d2W7kg+Nlqzqvn3Bc0w==}
+    dev: false
+
+  /goober@2.1.14(csstype@3.1.2):
+    resolution: {integrity: sha512-4UpC0NdGyAFqLNPnhCT2iHpza2q+RAY3GV85a/mRPdzyPQMsj0KmMMuetdIkzWRbJ+Hgau1EZztq8ImmiMGhsg==}
+    peerDependencies:
+      csstype: ^3.0.10
+    dependencies:
+      csstype: 3.1.2
     dev: false
 
   /google-auth-library@9.2.0:
@@ -8155,6 +8303,20 @@ packages:
 
   /react-fast-compare@2.0.4:
     resolution: {integrity: sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==}
+    dev: false
+
+  /react-hot-toast@2.4.1(csstype@3.1.2)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-j8z+cQbWIM5LY37pR6uZR6D4LfseplqnuAO4co4u8917hBUvXlEqyP1ZzqVLcqoyUesZZv/ImreoCeHVDpE5pQ==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      goober: 2.1.14(csstype@3.1.2)
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    transitivePeerDependencies:
+      - csstype
     dev: false
 
   /react-is@16.13.1:

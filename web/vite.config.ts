@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 import UnoCSS from 'unocss/vite';
 
 // https://vitejs.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [UnoCSS(), react()],
   optimizeDeps: {
     exclude: [],
@@ -14,6 +14,10 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
+    conditions:
+      mode === 'production'
+        ? ['production', 'import', 'module', 'browser', 'default']
+        : ['development', 'import', 'module', 'browser', 'default'],
   },
   server: {
     port: 6123,
@@ -21,4 +25,4 @@ export default defineConfig({
   build: {
     sourcemap: true,
   },
-});
+}));

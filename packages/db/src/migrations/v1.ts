@@ -16,6 +16,7 @@ export async function up(db: Kysely<any>) {
     .addColumn('imageUrl', 'text')
     .addColumn('password', 'text')
     .addColumn('isProductAdmin', 'boolean', (col) => col.notNull())
+    .addColumn('stripeCustomerId', 'text')
     .addColumn('planId', 'text', (col) =>
       col.references('Plan.id').onDelete('set null'),
     )
@@ -59,12 +60,18 @@ export async function up(db: Kysely<any>) {
     .addColumn('stripeProductId', 'text')
     .addColumn('stripePriceId', 'text')
     .addColumn('stripeSubscriptionId', 'text')
-    .addColumn('stripeCustomerId', 'text')
     .addColumn('subscriptionStatus', 'text')
     .addColumn('subscriptionStatusCheckedAt', 'datetime')
     .addColumn('subscriptionExpiresAt', 'datetime')
     .addColumn('subscriptionCanceledAt', 'datetime')
     .addColumn('featureFlags', 'text', (cb) => cb.notNull().defaultTo('{}'))
+    .execute();
+
+  // add index to lookup plan by stripeSubscriptionId
+  await db.schema
+    .createIndex('Plan_stripeSubscriptionId')
+    .on('Plan')
+    .columns(['stripeSubscriptionId'])
     .execute();
 
   await db.schema

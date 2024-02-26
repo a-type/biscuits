@@ -6,15 +6,23 @@ import { GQLContext } from '../graphql/context.js';
 import { sessions } from '../auth/session.js';
 import { Session } from '@a-type/auth';
 import { verdantServer } from '../verdant/verdant.js';
-import { BiscuitsError } from '../error.js';
+import { BiscuitsError } from '@biscuits/error';
 import { GraphQLError } from 'graphql';
+import { stripe } from '../services/stripe.js';
+import { AuthError } from '@a-type/auth';
+import { createDataloaders } from '../graphql/dataloaders/index.js';
 
 const yoga = createYoga<GQLContext>({
   schema,
   maskedErrors: {
     maskError: (error, message, isDev) => {
       if (error instanceof BiscuitsError) {
-        return new GraphQLError(`[Code: ${error.code}] ${error.message}`);
+        return new GraphQLError(error.message, {
+          extensions: {
+            unexpected: error.code === BiscuitsError.Code.Unexpected,
+            biscuitsCode: error.code,
+          },
+        });
       }
       return maskError(error, message, isDev);
     },
@@ -32,19 +40,39 @@ async function handleGraphQLRequest(request: Request) {
   const auth = {
     setLoginSession: async (ses: Session | null) => {
       if (ses) {
-        sessionHeaders = await sessions.updateSession(ses);
+        const { headers } = await sessions.updateSession(ses);
+        sessionHeaders = headers;
       } else {
-        sessionHeaders = sessions.clearSession();
+        const { headers } = sessions.clearSession();
+        sessionHeaders = headers;
       }
     },
   };
 
+  let session = null;
+  try {
+    session = await sessions.getSession(request);
+  } catch (e) {
+    // if session expired, we need to tell the client to refresh it
+    if (e instanceof AuthError) {
+      if (e.message === 'Session expired') {
+        throw new BiscuitsError(BiscuitsError.Code.SessionExpired);
+      }
+    }
+    throw e;
+  }
+
   const ctx: GQLContext = {
     req: request,
-    session: await sessions.getSession(request),
+    session,
     db,
     auth,
     verdant: verdantServer,
+    stripe,
+    dataloaders: createDataloaders({
+      stripe,
+      db,
+    }),
   };
   const response = await yoga.fetch(request, ctx);
   // merge session headers with response headers

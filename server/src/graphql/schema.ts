@@ -4,6 +4,7 @@ import './types/planInvitation.js';
 import './types/planLibraryInfo.js';
 import './types/user.js';
 import './types/scalars.js';
+import './types/productInfo.js';
 
 builder.queryType({});
 builder.mutationType({});

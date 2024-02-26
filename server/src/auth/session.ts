@@ -4,7 +4,7 @@ import { SessionManager } from '@a-type/auth';
 import { db, userNameSelector } from '@biscuits/db';
 import { BiscuitsError } from '../error.js';
 import { SESSION_SECRET } from '../config/secrets.js';
-import { ENVIRONMENT } from '../config/deployedContext.js';
+import { DEPLOYED_ORIGIN, UI_ORIGIN } from '../config/deployedContext.js';
 
 declare module '@a-type/auth' {
   interface Session {
@@ -18,6 +18,7 @@ declare module '@a-type/auth' {
 
 export const sessions = new SessionManager({
   cookieName: 'bsc-session',
+  expiration: '1m',
   async createSession(userId) {
     const user = await db
       .selectFrom('User')
@@ -49,7 +50,7 @@ export const sessions = new SessionManager({
     planId: 'pid',
     role: 'role',
   },
-  audience: 'biscuits.club',
-  issuer: 'biscuits.club',
+  audience: UI_ORIGIN,
+  issuer: DEPLOYED_ORIGIN,
   // mode: ENVIRONMENT === 'production' ? 'production' : 'development',
 });

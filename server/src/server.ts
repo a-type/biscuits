@@ -8,10 +8,11 @@ import { error, json, Router, createCors, IRequest } from 'itty-router';
 import { authRouter } from './routers/auth.js';
 import { migrateToLatest } from '@biscuits/db';
 import { verdantRouter } from './routers/verdant.js';
-import { BiscuitsError } from './error.js';
+import { BiscuitsError } from '@biscuits/error';
 import { stripeRouter } from './routers/stripe.js';
 import { graphqlRouter } from './routers/graphql.js';
 import { writeSchema } from './tasks/writeSchema.js';
+import { AuthError } from '@a-type/auth';
 
 const router = Router();
 
@@ -38,6 +39,15 @@ const ittyServer = createServerAdapter((request) =>
     .handle(request)
     .catch((reason) => {
       console.error(reason);
+      // translate any errant AuthError expired into the biscuits version
+      if (reason instanceof AuthError) {
+        if (reason.message === 'Session expired') {
+          const biscuitsExpired = new BiscuitsError(
+            BiscuitsError.Code.SessionExpired,
+          );
+          return error(biscuitsExpired.statusCode, biscuitsExpired.body);
+        }
+      }
       if (reason instanceof BiscuitsError) {
         return error(reason.statusCode, reason.body);
       }

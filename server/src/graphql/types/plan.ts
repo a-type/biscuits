@@ -4,9 +4,17 @@ import { assignTypeName, hasTypeName } from '../relay.js';
 import { User } from './user.js';
 import { BiscuitsError } from '../../error.js';
 import { id } from '@biscuits/db';
+import {
+  createSubscription,
+  setupNewPlan,
+  updatePlanSubscription,
+} from '../../management/plans.js';
+import { assert } from '@a-type/utils';
+import { logger } from '../../logger.js';
+import { stripeDateToDate } from '../../services/stripe.js';
 
-builder.queryField('plan', (t) =>
-  t.field({
+builder.queryFields((t) => ({
+  plan: t.field({
     type: Plan,
     nullable: true,
     resolve: async (_, __, ctx) => {
@@ -16,10 +24,7 @@ builder.queryField('plan', (t) =>
       return null;
     },
   }),
-);
-
-builder.queryField('plans', (t) =>
-  t.connection({
+  plans: t.connection({
     type: 'Plan',
     authScopes: {
       productAdmin: true,
@@ -59,44 +64,64 @@ builder.queryField('plans', (t) =>
       };
     },
   }),
-);
+}));
 
 builder.mutationFields((t) => ({
-  createPlan: t.field({
+  setupPlan: t.field({
     authScopes: {
       user: true,
     },
-    type: 'CreatePlanResult',
-    resolve: async (_, __, ctx) => {
-      const userId = ctx.session?.userId;
-      if (!userId) {
+    type: 'SetupPlanResult',
+    args: {
+      input: t.arg({
+        type: 'SetupPlanInput',
+        required: true,
+      }),
+    },
+    resolve: async (_, { input }, ctx) => {
+      if (!ctx.session) {
         throw new BiscuitsError(BiscuitsError.Code.NotLoggedIn);
       }
+      const userId = ctx.session.userId;
 
-      const plan = await ctx.db.transaction().execute(async (tx) => {
-        const plan = await tx
-          .insertInto('Plan')
-          .values({
-            id: id(),
-            featureFlags: `{}`,
-            name: 'New Plan',
-          })
-          .returning('id')
-          .executeTakeFirstOrThrow();
+      const userDetails = await ctx.db
+        .selectFrom('User')
+        .select(['id', 'email', 'planId', 'fullName', 'stripeCustomerId'])
+        .where('id', '=', userId)
+        .executeTakeFirst();
 
-        await tx
-          .updateTable('User')
-          .set({
-            planId: plan.id,
-            planRole: 'admin',
-          })
-          .where('id', '=', userId)
-          .execute();
+      if (!userDetails) {
+        throw new BiscuitsError(
+          BiscuitsError.Code.Unexpected,
+          'User not found',
+        );
+      }
 
-        return plan;
+      let planId;
+      if (userDetails?.planId) {
+        // if existing plan has a subscription, change it
+        // to use the new product. if not, just update the plan
+        const plan = await updatePlanSubscription({
+          userDetails,
+          stripePriceId: input.stripePriceId,
+          ctx,
+        });
+        planId = plan.id;
+      } else {
+        const plan = await setupNewPlan({
+          userDetails,
+          stripePriceId: input.stripePriceId,
+          ctx,
+        });
+        planId = plan.id;
+      }
+
+      await ctx.auth.setLoginSession({
+        ...ctx.session,
+        planId,
       });
 
-      return { planId: plan.id, userId };
+      return { planId, userId };
     },
   }),
   deletePlan: t.field({
@@ -149,7 +174,36 @@ Plan.implement({
   isTypeOf: hasTypeName('Plan'),
   fields: (t) => ({
     subscriptionStatus: t.string({
-      resolve: (plan) => plan.subscriptionStatus ?? 'inactive',
+      resolve: async (plan, _, ctx) => {
+        if (!plan.stripeSubscriptionId) return 'inactive';
+        if (plan.subscriptionStatus) return plan.subscriptionStatus;
+        // we don't have cached data - fetch it
+        const subscription = await ctx.stripe.subscriptions.retrieve(
+          plan.stripeSubscriptionId,
+        );
+        const productId = subscription.items.data[0]?.price.product as
+          | string
+          | undefined;
+        const stripePriceId = subscription.items.data[0]?.price.id as
+          | string
+          | undefined;
+        await ctx.db
+          .updateTable('Plan')
+          .set({
+            subscriptionStatus: subscription.status,
+            // go ahead and cache the rest
+            subscriptionCanceledAt: stripeDateToDate(subscription.canceled_at),
+            subscriptionExpiresAt: stripeDateToDate(
+              subscription.current_period_end,
+            ),
+            subscriptionStatusCheckedAt: Date.now(),
+            stripeProductId: productId,
+            stripePriceId,
+          })
+          .where('id', '=', plan.id)
+          .execute();
+        return subscription.status;
+      },
     }),
     subscriptionCanceledAt: t.expose('subscriptionCanceledAt', {
       nullable: true,
@@ -158,6 +212,66 @@ Plan.implement({
     subscriptionExpiresAt: t.expose('subscriptionExpiresAt', {
       nullable: true,
       type: 'DateTime',
+    }),
+    productInfo: t.field({
+      type: 'ProductInfo',
+      nullable: true,
+      resolve: (plan) =>
+        plan.stripePriceId ? { priceId: plan.stripePriceId } : null,
+    }),
+    checkoutData: t.field({
+      type: 'StripeCheckoutData',
+      authScopes: {
+        planAdmin: true,
+      },
+      nullable: true,
+      resolve: async (plan, _, ctx) => {
+        if (!plan.stripeSubscriptionId) return null;
+        // can only complete checkout if subscription is incomplete or
+        // if we haven't yet synced with Stripe
+        if (
+          plan.subscriptionStatus !== 'incomplete' &&
+          plan.subscriptionStatus !== null
+        )
+          return null;
+        const subscription = await ctx.stripe.subscriptions.retrieve(
+          plan.stripeSubscriptionId,
+          {
+            expand: ['latest_invoice.payment_intent'],
+          },
+        );
+        // double check
+        if (subscription.status !== 'incomplete') return null;
+
+        assert(
+          typeof subscription.latest_invoice !== 'string',
+          'did not expand latest_invoice field',
+        );
+        assert(
+          typeof subscription.latest_invoice?.payment_intent !== 'string',
+          'did not expand latest_invoice.payment_intent field',
+        );
+        const clientSecret =
+          subscription.latest_invoice?.payment_intent?.client_secret;
+
+        if (!clientSecret) {
+          logger.urgent('Stripe subscription does not have client secret', {
+            subscriptionId: subscription.id,
+            latestInvoice: subscription.latest_invoice,
+            paymentIntent: subscription.latest_invoice?.payment_intent,
+          });
+          throw new BiscuitsError(
+            BiscuitsError.Code.Unexpected,
+            'Failed to begin the checkout process. This is unexpected. Please try again.',
+          );
+        }
+
+        const subscriptionData = {
+          subscriptionId: subscription.id,
+          clientSecret,
+        };
+        return subscriptionData;
+      },
     }),
     members: t.field({
       type: [User],
@@ -190,7 +304,22 @@ Plan.implement({
   }),
 });
 
-builder.objectType('CreatePlanResult', {
+builder.objectType('StripeCheckoutData', {
+  fields: (t) => ({
+    subscriptionId: t.exposeString('subscriptionId'),
+    clientSecret: t.exposeString('clientSecret'),
+  }),
+});
+
+builder.inputType('SetupPlanInput', {
+  fields: (t) => ({
+    stripePriceId: t.string({
+      required: true,
+    }),
+  }),
+});
+
+builder.objectType('SetupPlanResult', {
   fields: (t) => ({
     user: t.field({
       type: User,

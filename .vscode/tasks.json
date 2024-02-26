@@ -1,0 +1,16 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "write-schema",
+      "path": "server",
+      "problemMatcher": [],
+      "label": "npm: write-schema - server",
+      "detail": "env-cmd tsx watch --conditions=development ./scripts/writeSchema.ts",
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
+    }
+  ]
+}

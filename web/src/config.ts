@@ -7,3 +7,8 @@ export const UI_HOST_HTTP = import.meta.env.VITE_PUBLIC_URL;
 
 export const PRICE_MONTHLY_DOLLARS = 4;
 export const PRICE_YEARLY_DOLLARS = 48;
+
+export const FOR_TWO_PRICE_ID = import.meta.env
+  .VITE_STRIPE_FOR_TWO_PLAN_PRICE_ID;
+export const FAMILY_STYLE_PRICE_ID = import.meta.env
+  .VITE_STRIPE_FAMILY_PLAN_PRICE_ID;

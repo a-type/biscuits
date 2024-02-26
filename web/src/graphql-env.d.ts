@@ -66,37 +66,6 @@ export type introspection = {
         "name": "String"
       },
       {
-        "kind": "OBJECT",
-        "name": "CreatePlanResult",
-        "fields": [
-          {
-            "name": "plan",
-            "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "Plan",
-                "ofType": null
-              }
-            },
-            "args": []
-          },
-          {
-            "name": "user",
-            "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "User",
-                "ofType": null
-              }
-            },
-            "args": []
-          }
-        ],
-        "interfaces": []
-      },
-      {
         "kind": "SCALAR",
         "name": "DateTime"
       },
@@ -131,18 +100,6 @@ export type introspection = {
                 }
               }
             ]
-          },
-          {
-            "name": "createPlan",
-            "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "CreatePlanResult",
-                "ofType": null
-              }
-            },
-            "args": []
           },
           {
             "name": "createPlanInvitation",
@@ -255,6 +212,30 @@ export type introspection = {
                 }
               }
             ]
+          },
+          {
+            "name": "setupPlan",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "SetupPlanResult",
+                "ofType": null
+              }
+            },
+            "args": [
+              {
+                "name": "input",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "SetupPlanInput",
+                    "ofType": null
+                  }
+                }
+              }
+            ]
           }
         ],
         "interfaces": []
@@ -354,6 +335,15 @@ export type introspection = {
         "name": "Plan",
         "fields": [
           {
+            "name": "checkoutData",
+            "type": {
+              "kind": "OBJECT",
+              "name": "StripeCheckoutData",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
             "name": "id",
             "type": {
               "kind": "NON_NULL",
@@ -404,6 +394,15 @@ export type introspection = {
                   }
                 }
               }
+            },
+            "args": []
+          },
+          {
+            "name": "productInfo",
+            "type": {
+              "kind": "OBJECT",
+              "name": "ProductInfo",
+              "ofType": null
             },
             "args": []
           },
@@ -633,6 +632,61 @@ export type introspection = {
       },
       {
         "kind": "OBJECT",
+        "name": "ProductInfo",
+        "fields": [
+          {
+            "name": "currency",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "description",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "id",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "name",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "price",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
         "name": "Query",
         "fields": [
           {
@@ -772,6 +826,30 @@ export type introspection = {
                 }
               }
             ]
+          },
+          {
+            "name": "productInfo",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "ProductInfo",
+                "ofType": null
+              }
+            },
+            "args": [
+              {
+                "name": "priceId",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            ]
           }
         ],
         "interfaces": []
@@ -866,6 +944,85 @@ export type introspection = {
         ]
       },
       {
+        "kind": "INPUT_OBJECT",
+        "name": "SetupPlanInput",
+        "inputFields": [
+          {
+            "name": "stripePriceId",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            }
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "SetupPlanResult",
+        "fields": [
+          {
+            "name": "plan",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Plan",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "user",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "User",
+                "ofType": null
+              }
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "StripeCheckoutData",
+        "fields": [
+          {
+            "name": "clientSecret",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "subscriptionId",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
         "kind": "OBJECT",
         "name": "User",
         "fields": [
@@ -890,6 +1047,15 @@ export type introspection = {
                 "name": "ID",
                 "ofType": null
               }
+            },
+            "args": []
+          },
+          {
+            "name": "imageUrl",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "args": []
           },

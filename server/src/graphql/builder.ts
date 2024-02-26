@@ -18,9 +18,16 @@ export const builder = new SchemaBuilder<{
       userId: string;
       planId: string;
     };
-    CreatePlanResult: {
+    SetupPlanResult: {
       userId: string;
       planId: string;
+    };
+    StripeCheckoutData: {
+      subscriptionId: string;
+      clientSecret: string;
+    };
+    ProductInfo: {
+      priceId: string;
     };
   };
   AuthScopes: {
@@ -40,6 +47,9 @@ export const builder = new SchemaBuilder<{
     };
   };
   Inputs: {
+    SetupPlanInput: {
+      stripePriceId: string;
+    };
     CreatePlanInvitationInput: {
       email: string;
     };

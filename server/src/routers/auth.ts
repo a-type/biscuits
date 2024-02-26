@@ -22,4 +22,5 @@ authRouter
   .post(
     '/complete-reset-password',
     authHandlers.handleVerifyPasswordResetRequest,
-  );
+  )
+  .post('/refresh', authHandlers.handleRefreshSessionRequest);
