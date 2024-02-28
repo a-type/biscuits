@@ -132,9 +132,12 @@ export type introspection = {
           {
             "name": "createPlanInvitation",
             "type": {
-              "kind": "INTERFACE",
-              "name": "Node",
-              "ofType": null
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "PlanInvitation",
+                "ofType": null
+              }
             },
             "args": [
               {
@@ -423,6 +426,24 @@ export type introspection = {
             "args": []
           },
           {
+            "name": "pendingInvitations",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "LIST",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "PlanInvitation",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "args": []
+          },
+          {
             "name": "productInfo",
             "type": {
               "kind": "OBJECT",
@@ -474,7 +495,7 @@ export type introspection = {
         "name": "PlanInvitation",
         "fields": [
           {
-            "name": "code",
+            "name": "email",
             "type": {
               "kind": "NON_NULL",
               "ofType": {

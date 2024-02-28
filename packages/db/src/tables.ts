@@ -89,8 +89,9 @@ export interface PlanInvitationTable {
   planId: string;
   inviterId: string;
   inviterName: string;
-  expiresAt: Date | null;
+  expiresAt: Date;
   claimedAt: Date | null;
+  email: string;
 }
 
 export type PlanInvitation = Selectable<PlanInvitationTable>;

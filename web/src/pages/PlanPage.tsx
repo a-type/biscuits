@@ -12,6 +12,8 @@ import { Suspense, useEffect } from 'react';
 import { useQuery } from 'urql';
 import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
+import { API_HOST_HTTP } from '@/config';
+import { MembersAndInvitations } from '@/components/plan/MembersAndInvitations';
 
 const PlanPageData = graphql(`
   query PlanPageData {
@@ -42,17 +44,31 @@ export function PlanPage({}: PlanPageProps) {
   return (
     <PageRoot>
       <PageContent>
-        <PageFixedArea className="mb-10">
-          <Button asChild className="self-start">
+        <PageFixedArea className="mb-10 flex flex-row items-center w-full">
+          <Button asChild>
             <Link to="/">
               <Icon name="arrowLeft" /> Back to apps
             </Link>
           </Button>
+          <form
+            className="ml-auto"
+            action={`${API_HOST_HTTP}/auth/logout`}
+            method="post"
+          >
+            <Button type="submit" color="destructive">
+              Log Out
+            </Button>
+          </form>
         </PageFixedArea>
         <H1>Your Plan</H1>
         <Suspense>
           <SubscriptionSetup />
-          {!!data?.plan && <PlanPageMembers />}
+          {!!data?.plan && (
+            <div className="flex flex-col gap-3">
+              <H2>Members</H2>
+              <MembersAndInvitations />
+            </div>
+          )}
         </Suspense>
       </PageContent>
     </PageRoot>
@@ -60,42 +76,3 @@ export function PlanPage({}: PlanPageProps) {
 }
 
 export default PlanPage;
-
-const PlanPageMembersData = graphql(`
-  query PlanPageMembers {
-    plan {
-      members {
-        id
-        name
-        email
-        imageUrl
-      }
-    }
-  }
-`);
-
-function PlanPageMembers() {
-  const [{ data }] = useQuery({ query: PlanPageMembersData });
-
-  return (
-    <div className="flex flex-col gap-3">
-      <H2>Members</H2>
-      <div className="grid">
-        {data?.plan?.members.map((member) => (
-          <div
-            key={member.id}
-            className="rounded-md border border-solid border-gray-5 p-4"
-          >
-            <div className="flex flex-row gap-3">
-              <Avatar imageSrc={member.imageUrl ?? undefined} />
-              <div className="flex flex-col gap-2 items-start justify-start">
-                <span>{member.name}</span>
-                <span>{member.email}</span>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}

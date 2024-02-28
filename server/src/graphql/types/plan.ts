@@ -308,6 +308,22 @@ Plan.implement({
         return ctx.verdant.getLibraryInfo(getLibraryName(plan.id, app));
       },
     }),
+    pendingInvitations: t.field({
+      type: ['PlanInvitation'],
+      authScopes: {
+        planAdmin: true,
+      },
+      resolve: async (plan, _, ctx) => {
+        const result = await ctx.db
+          .selectFrom('PlanInvitation')
+          .selectAll()
+          .where('planId', '=', plan.id)
+          .where('claimedAt', 'is', null)
+          .execute();
+
+        return result.map(assignTypeName('PlanInvitation'));
+      },
+    }),
   }),
 });
 

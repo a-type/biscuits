@@ -3,9 +3,11 @@ import { BiscuitsError } from '../../error.js';
 import { builder } from '../builder.js';
 import { assignTypeName, hasTypeName } from '../relay.js';
 import { removeUserFromPlan } from '../../management/plans.js';
+import { email } from '../../services/email.js';
+import { UI_ORIGIN } from '../../config/deployedContext.js';
 
-builder.queryField('planInvitation', (t) =>
-  t.field({
+builder.queryFields((t) => ({
+  planInvitation: t.field({
     type: 'PlanInvitation',
     args: {
       code: t.arg({
@@ -26,10 +28,11 @@ builder.queryField('planInvitation', (t) =>
       return null;
     },
   }),
-);
+}));
 
 builder.mutationFields((t) => ({
-  createPlanInvitation: t.node({
+  createPlanInvitation: t.field({
+    type: 'PlanInvitation',
     authScopes: {
       planAdmin: true,
     },
@@ -39,7 +42,7 @@ builder.mutationFields((t) => ({
         required: true,
       }),
     },
-    id: async (_, { input }, ctx) => {
+    resolve: async (_, { input }, ctx) => {
       if (!ctx.session?.planId) {
         throw new BiscuitsError(BiscuitsError.Code.NoPlan);
       }
@@ -65,17 +68,27 @@ builder.mutationFields((t) => ({
       }
 
       const inviteCode = id();
-      await ctx.db
+      const invite = await ctx.db
         .insertInto('PlanInvitation')
         .values({
           id: inviteCode,
           planId,
           inviterId: ctx.session.userId,
           inviterName: ctx.session.name || 'Someone',
+          email: input.email,
+          expiresAt: new Date(Date.now() + 1000 * 60 * 60 * 24 * 7),
         })
-        .execute();
+        .returningAll()
+        .executeTakeFirstOrThrow();
 
-      return { id: inviteCode, type: 'PlanInvitation' };
+      await email.sendMail({
+        to: input.email,
+        subject: 'You have been invited to join a Biscuits plan',
+        text: `You have been invited to join a Biscuits plan. To accept the invitation, visit this URL: ${UI_ORIGIN}/invite/${inviteCode}`,
+        html: `You have been invited to join a Biscuits plan. To accept the invitation, click the following link: <a href="${UI_ORIGIN}/invite/${inviteCode}">Accept invitation</a>`,
+      });
+
+      return assignTypeName('PlanInvitation')(invite);
     },
   }),
 
@@ -175,8 +188,12 @@ export const PlanInvitation = builder.node('PlanInvitation', {
     return assignTypeName('PlanInvitation')(result);
   },
   fields: (t) => ({
-    code: t.exposeString('id'),
     inviterName: t.exposeString('inviterName'),
+    email: t.exposeString('email', {
+      authScopes: {
+        planAdmin: true,
+      },
+    }),
   }),
 });
 

@@ -92,6 +92,15 @@ export async function up(db: Kysely<any>) {
     .addColumn('inviterName', 'text', (col) => col.notNull())
     .addColumn('expiresAt', 'datetime', (col) => col.notNull())
     .addColumn('claimedAt', 'datetime')
+    .addColumn('email', 'text', (col) => col.notNull())
+    .execute();
+
+  // make planId + email unique for invites
+  await db.schema
+    .createIndex('PlanInvitation_planId_email')
+    .on('PlanInvitation')
+    .columns(['planId', 'email'])
+    .unique()
     .execute();
 
   await db.schema
