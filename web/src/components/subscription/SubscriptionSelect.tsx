@@ -10,11 +10,14 @@ export interface SubscriptionSelectProps {}
 const CreatePlan = graphql(`
   mutation CreatePlan($input: SetupPlanInput!) {
     setupPlan(input: $input) {
-      plan {
+      user {
         id
-        checkoutData {
-          subscriptionId
-          clientSecret
+        plan {
+          id
+          checkoutData {
+            subscriptionId
+            clientSecret
+          }
         }
       }
     }

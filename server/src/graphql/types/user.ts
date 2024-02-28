@@ -1,4 +1,6 @@
+import { User as DBUser } from '@biscuits/db';
 import { builder } from '../builder.js';
+import { createResults, keyIndexes } from '../dataloaders/index.js';
 import { assignTypeName, hasTypeName } from '../relay.js';
 import { Plan } from './plan.js';
 
@@ -65,13 +67,20 @@ builder.mutationFields((t) => ({
 
 export const User = builder.loadableNodeRef('User', {
   load: async (ids, ctx) => {
-    const results = await ctx.db
+    const users = await ctx.db
       .selectFrom('User')
       .selectAll()
       .where('id', 'in', ids as string[])
       .execute();
 
-    return results.map(assignTypeName('User'));
+    const indexes = keyIndexes(ids);
+
+    const results = createResults<DBUser & { __typename: 'User' }>(ids);
+    for (const result of users) {
+      results[indexes[result.id]] = assignTypeName('User')(result);
+    }
+
+    return results;
   },
   id: {
     resolve: (user) => user.id,

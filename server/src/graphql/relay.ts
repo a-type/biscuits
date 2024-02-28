@@ -1,5 +1,6 @@
 export function assignTypeName<Typename extends string>(typename: Typename) {
   return function <Obj extends {}>(obj: Obj): Obj & { __typename: Typename } {
+    if (!obj) return obj as any;
     return Object.assign(obj, { __typename: typename });
   };
 }

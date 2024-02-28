@@ -284,3 +284,65 @@ export async function updatePlanSubscription({
 
   return plan;
 }
+
+export async function cancelPlan(planId: string, userId: string) {
+  const plan = await db
+    .selectFrom('Plan')
+    .select(['id', 'stripeSubscriptionId'])
+    .where('id', '=', planId)
+    .executeTakeFirst();
+
+  if (!plan) {
+    throw new BiscuitsError(BiscuitsError.Code.NoPlan);
+  }
+
+  if (plan.stripeSubscriptionId) {
+    await cancelSubscription(planId, userId, plan.stripeSubscriptionId);
+  }
+
+  // email plan members
+  const members = await db
+    .selectFrom('User')
+    .select(['id', 'email', 'fullName'])
+    .where('planId', '=', planId)
+    .execute();
+
+  await Promise.all(
+    members.map((m) =>
+      email.sendMail({
+        to: m.email,
+        subject: 'Your Biscuits plan has been canceled',
+        text: `Hi ${m.fullName},\n\nYour Biscuits plan has been canceled. If you have any questions, please contact us at
+${UI_ORIGIN}/contact.\n\nThanks,\nGrant`,
+        html: `Hi ${m.fullName},<br><br>Your Biscuits plan has been canceled. If you have any questions, please contact us at
+<a href="${UI_ORIGIN}/contact">${UI_ORIGIN}/contact</a>.<br><br>Thanks,<br>Grant`,
+      }),
+    ),
+  );
+
+  await db.transaction().execute(async (tx) => {
+    await tx
+      .updateTable('User')
+      .set({
+        planId: null,
+        planRole: null,
+      })
+      .where('planId', '=', planId)
+      .execute();
+
+    await tx.deleteFrom('Plan').where('id', '=', planId).execute();
+
+    await tx
+      .insertInto('ActivityLog')
+      .values({
+        action: 'deletePlan',
+        id: id(),
+        userId,
+        data: JSON.stringify({
+          planId,
+          reason: 'user requested',
+        }),
+      })
+      .execute();
+  });
+}

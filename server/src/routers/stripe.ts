@@ -196,7 +196,7 @@ stripeRouter.post('/portal-session', async (req) => {
 
   const portal = await stripe.billingPortal.sessions.create({
     customer: user.stripeCustomerId,
-    return_url: `${UI_ORIGIN}/account`,
+    return_url: `${UI_ORIGIN}/plan`,
   });
 
   if (!portal.url) {

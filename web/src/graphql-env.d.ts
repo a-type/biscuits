@@ -21,6 +21,22 @@ export type introspection = {
     "types": [
       {
         "kind": "OBJECT",
+        "name": "CancelPlanResult",
+        "fields": [
+          {
+            "name": "user",
+            "type": {
+              "kind": "OBJECT",
+              "name": "User",
+              "ofType": null
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
         "name": "ClaimPlanInvitationResult",
         "fields": [
           {
@@ -77,6 +93,18 @@ export type introspection = {
         "kind": "OBJECT",
         "name": "Mutation",
         "fields": [
+          {
+            "name": "cancelPlan",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "CancelPlanResult",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
           {
             "name": "claimPlanInvitation",
             "type": {
@@ -136,12 +164,9 @@ export type introspection = {
               {
                 "name": "id",
                 "type": {
-                  "kind": "NON_NULL",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
                 }
               }
             ]

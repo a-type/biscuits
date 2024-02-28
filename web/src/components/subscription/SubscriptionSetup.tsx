@@ -59,10 +59,19 @@ export function SubscriptionSetup({}: SubscriptionSetupProps) {
           return p;
         });
       } else {
+        let checkCount = 0;
         const interval = setInterval(async () => {
           // check for subscription status change
           refetch({ requestPolicy: 'network-only' });
-        }, 1000);
+          checkCount++;
+          if (checkCount > 10) {
+            clearInterval(interval);
+            setParams((p) => {
+              p.delete('paymentComplete');
+              return p;
+            });
+          }
+        }, 5000);
         return () => clearInterval(interval);
       }
     }
@@ -82,6 +91,11 @@ export function SubscriptionSetup({}: SubscriptionSetupProps) {
   if (data?.plan?.checkoutData) {
     // checkout in progress - show payment collection
     return <SubscriptionCheckout checkoutData={data.plan.checkoutData} />;
+  }
+
+  if (data?.plan?.subscriptionStatus === 'incomplete') {
+    // if there wasn't any checkoutData, that means we're in limbo.
+    return <ManageSubscription data={data.plan} />;
   }
 
   if (data?.plan?.subscriptionStatus === 'active') {

@@ -1,8 +1,19 @@
 import DataLoader from 'dataloader';
 import Stripe from 'stripe';
 import { DB } from '@biscuits/db';
+import { BiscuitsError } from '@biscuits/error';
 
 const priceMemoryCache = new Map<string, Stripe.Price>();
+
+export function keyIndexes(ids: readonly string[]) {
+  return Object.fromEntries(ids.map((id, index) => [id, index]));
+}
+
+export function createResults<T>(ids: readonly string[]) {
+  return new Array<T | Error>(ids.length).fill(
+    new BiscuitsError(BiscuitsError.Code.NotFound),
+  );
+}
 
 export function createDataloaders({ stripe, db }: { stripe: Stripe; db: DB }) {
   const stripePriceLoader = new DataLoader(async (ids: readonly string[]) => {

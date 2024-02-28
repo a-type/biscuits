@@ -5,6 +5,10 @@ import { useSearchParams } from '@verdant-web/react-router';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 import { PlanInfo, planProductInfo } from './PlanInfo';
+import { CancelPlanButton } from './CancelPlanButton';
+import classNames from 'classnames';
+import { useQuery } from 'urql';
+import { Icon } from '@a-type/ui/components/icon';
 
 export const manageSubscriptionInfo = graphql(
   `
@@ -19,6 +23,15 @@ export const manageSubscriptionInfo = graphql(
   `,
   [planProductInfo],
 );
+
+const refetchPlanStatus = graphql(`
+  query RefetchPlanStatus {
+    plan {
+      id
+      subscriptionStatus
+    }
+  }
+`);
 
 export interface ManageSubscriptionProps {
   className?: string;
@@ -44,11 +57,30 @@ export function ManageSubscription({
     }
   }, [params, setParams]);
 
+  const [_, refetchStatus] = useQuery({
+    query: refetchPlanStatus,
+    pause: true,
+  });
+
   return (
-    <div className={className} {...props}>
+    <div
+      className={classNames('flex flex-col gap-4 items-start', className)}
+      {...props}
+    >
       <div>
         <h2>Your Subscription</h2>
-        <p>Status: {data.subscriptionStatus}</p>
+        <div className="flex flex-row gap-3 items-center">
+          Status: {data.subscriptionStatus}{' '}
+          <Button
+            size="icon"
+            color="ghost"
+            onClick={() => {
+              refetchStatus({ networkPolicy: 'network-only' });
+            }}
+          >
+            <Icon name="refresh" />
+          </Button>
+        </div>
         {data.productInfo && <PlanInfo data={data.productInfo} />}
       </div>
       <form action={`${API_HOST_HTTP}/stripe/portal-session`} method="POST">
@@ -57,6 +89,7 @@ export function ManageSubscription({
           Update your plan, change your card, or unsubscribe
         </span>
       </form>
+      <CancelPlanButton />
     </div>
   );
 }

@@ -29,6 +29,7 @@ export const builder = new SchemaBuilder<{
     ProductInfo: {
       priceId: string;
     };
+    CancelPlanResult: {};
   };
   AuthScopes: {
     public: boolean;

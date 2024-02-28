@@ -3,6 +3,7 @@ import { BiscuitsError } from '@biscuits/error';
 import { db, userNameSelector } from '@biscuits/db';
 import { email } from '../services/email.js';
 import { stripe, stripeDateToDate } from '../services/stripe.js';
+import { GQLContext } from '../graphql/context.js';
 
 export async function handleTrialEnd(
   event: Stripe.CustomerSubscriptionTrialWillEndEvent,
@@ -377,4 +378,33 @@ export async function handlePaymentIntentPaymentFailed(
       ),
     );
   }
+}
+
+export async function cacheSubscriptionInfoOnPlan(
+  subscription: Stripe.Subscription,
+  ctx: GQLContext,
+) {
+  if (!ctx.session?.planId) {
+    return;
+  }
+
+  const productId = subscription.items.data[0]?.price.product as
+    | string
+    | undefined;
+  const stripePriceId = subscription.items.data[0]?.price.id as
+    | string
+    | undefined;
+  await ctx.db
+    .updateTable('Plan')
+    .set({
+      subscriptionStatus: subscription.status,
+      // go ahead and cache the rest
+      subscriptionCanceledAt: stripeDateToDate(subscription.canceled_at),
+      subscriptionExpiresAt: stripeDateToDate(subscription.current_period_end),
+      subscriptionStatusCheckedAt: Date.now(),
+      stripeProductId: productId,
+      stripePriceId,
+    })
+    .where('id', '=', ctx.session.planId)
+    .execute();
 }

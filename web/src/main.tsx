@@ -5,6 +5,7 @@ import { Pages } from './pages/index.jsx';
 import { Provider } from 'urql';
 import { client } from './graphql.js';
 import { Toaster } from 'react-hot-toast';
+import { IconSpritesheet } from '@a-type/ui/components/icon';
 
 function main() {
   const root = createRoot(document.getElementById('root')!);
@@ -13,6 +14,7 @@ function main() {
       <Provider value={client}>
         <Pages />
         <Toaster position="bottom-center" />
+        <IconSpritesheet />
       </Provider>
     </StrictMode>,
   );

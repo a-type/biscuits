@@ -3,15 +3,17 @@ import { builder } from '../builder.js';
 import { assignTypeName, hasTypeName } from '../relay.js';
 import { User } from './user.js';
 import { BiscuitsError } from '../../error.js';
-import { id } from '@biscuits/db';
 import {
-  createSubscription,
+  cancelPlan,
   setupNewPlan,
   updatePlanSubscription,
 } from '../../management/plans.js';
 import { assert } from '@a-type/utils';
 import { logger } from '../../logger.js';
 import { stripeDateToDate } from '../../services/stripe.js';
+import { createResults, keyIndexes } from '../dataloaders/index.js';
+import { Plan as DBPlan } from '@biscuits/db';
+import { cacheSubscriptionInfoOnPlan } from '../../management/subscription.js';
 
 builder.queryFields((t) => ({
   plan: t.field({
@@ -126,19 +128,13 @@ builder.mutationFields((t) => ({
   }),
   deletePlan: t.field({
     args: {
-      id: t.arg.globalID({
-        required: true,
-      }),
+      id: t.arg.id(),
     },
     type: 'Plan',
     authScopes: {
       productAdmin: true,
     },
-    resolve: async (_, { id: { id, typename } }, ctx) => {
-      if (typename !== 'Plan') {
-        throw new BiscuitsError(BiscuitsError.Code.NotFound);
-      }
-
+    resolve: async (_, { id }, ctx) => {
       const plan = await ctx.db
         .deleteFrom('Plan')
         .where('id', '=', `${id}`)
@@ -152,17 +148,44 @@ builder.mutationFields((t) => ({
       return assignTypeName('Plan')(plan);
     },
   }),
+  cancelPlan: t.field({
+    authScopes: {
+      planAdmin: true,
+    },
+    type: 'CancelPlanResult',
+    resolve: async (_, __, ctx) => {
+      if (!ctx.session) {
+        throw new BiscuitsError(BiscuitsError.Code.NotLoggedIn);
+      }
+      const userId = ctx.session.userId;
+
+      if (!ctx.session.planId) {
+        throw new BiscuitsError(BiscuitsError.Code.NoPlan);
+      }
+
+      await cancelPlan(ctx.session.planId, userId);
+
+      return {};
+    },
+  }),
 }));
 
 export const Plan = builder.loadableNodeRef('Plan', {
   load: async (ids, ctx) => {
-    const results = await ctx.db
+    const plans = await ctx.db
       .selectFrom('Plan')
       .selectAll()
       .where('id', 'in', ids as string[])
       .execute();
 
-    return results.map(assignTypeName('Plan'));
+    // map results to key indexes
+    const indexes = keyIndexes(ids);
+    const results = createResults<DBPlan & { __typename: 'Plan' }>(ids);
+    for (const plan of plans) {
+      results[indexes[plan.id]] = assignTypeName('Plan')(plan);
+    }
+
+    return results;
   },
   id: {
     resolve: (plan) => plan.id,
@@ -181,27 +204,7 @@ Plan.implement({
         const subscription = await ctx.stripe.subscriptions.retrieve(
           plan.stripeSubscriptionId,
         );
-        const productId = subscription.items.data[0]?.price.product as
-          | string
-          | undefined;
-        const stripePriceId = subscription.items.data[0]?.price.id as
-          | string
-          | undefined;
-        await ctx.db
-          .updateTable('Plan')
-          .set({
-            subscriptionStatus: subscription.status,
-            // go ahead and cache the rest
-            subscriptionCanceledAt: stripeDateToDate(subscription.canceled_at),
-            subscriptionExpiresAt: stripeDateToDate(
-              subscription.current_period_end,
-            ),
-            subscriptionStatusCheckedAt: Date.now(),
-            stripeProductId: productId,
-            stripePriceId,
-          })
-          .where('id', '=', plan.id)
-          .execute();
+        await cacheSubscriptionInfoOnPlan(subscription, ctx);
         return subscription.status;
       },
     }),
@@ -241,7 +244,11 @@ Plan.implement({
           },
         );
         // double check
-        if (subscription.status !== 'incomplete') return null;
+        if (subscription.status !== 'incomplete') {
+          // changed since we last looked - let's store the new data.
+          await cacheSubscriptionInfoOnPlan(subscription, ctx);
+          return null;
+        }
 
         assert(
           typeof subscription.latest_invoice !== 'string',
@@ -328,6 +335,16 @@ builder.objectType('SetupPlanResult', {
     plan: t.field({
       type: Plan,
       resolve: (result) => result.planId,
+    }),
+  }),
+});
+
+builder.objectType('CancelPlanResult', {
+  fields: (t) => ({
+    user: t.field({
+      type: User,
+      nullable: true,
+      resolve: (_, __, ctx) => ctx.session?.userId ?? null,
     }),
   }),
 });
