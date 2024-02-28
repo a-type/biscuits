@@ -10,6 +10,15 @@
       "detail": "env-cmd tsx watch --conditions=development ./scripts/writeSchema.ts",
       "runOptions": {
         "runOn": "folderOpen"
+      },
+      "isBackground": true,
+      "presentation": {
+        "echo": true,
+        "reveal": "silent",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
       }
     }
   ]
