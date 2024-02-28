@@ -14,6 +14,8 @@ import { graphqlRouter } from './routers/graphql.js';
 import { writeSchema } from './tasks/writeSchema.js';
 import { AuthError } from '@a-type/auth';
 
+console.log('Starting server...');
+
 const router = Router();
 
 const { preflight, corsify } = createCors({
@@ -62,6 +64,7 @@ const ittyServer = createServerAdapter((request) =>
     }),
 );
 
+console.log('Checking for database migrations...');
 await migrateToLatest();
 
 const httpServer = createServer(ittyServer);

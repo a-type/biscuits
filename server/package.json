@@ -1,7 +1,9 @@
 {
   "name": "@biscuits/server",
   "scripts": {
-    "dev": "env-cmd tsx watch --conditions=development ./src/server.ts",
+    "dev:server": "env-cmd tsx watch --clear-screen=false --conditions=development ./src/server.ts",
+    "dev:stripe": "stripe listen -f http://localhost:6124/stripe/webhook",
+    "dev": "run-p dev:*",
     "start": "node --conditions=production ./dist/server.js",
     "start:local": "env-cmd pnpm start",
     "build": "tsc --build tsconfig.json",
@@ -27,7 +29,6 @@
     "@verdant-web/server": "^2.1.2",
     "@whatwg-node/server": "^0.9.22",
     "better-sqlite3": "^9.1.1",
-    "body-parser": "^1.20.2",
     "cookie": "^0.6.0",
     "dataloader": "^2.2.2",
     "googleapis": "^128.0.0",
@@ -45,6 +46,7 @@
     "@types/cookie": "^0.5.4",
     "@types/jsonwebtoken": "^9.0.5",
     "@types/node": "20.11.19",
+    "npm-run-all2": "6.1.2",
     "dotenv-cli": "^7.3.0",
     "env-cmd": "^10.1.0",
     "tsx": "^4.6.2",
