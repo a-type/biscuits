@@ -22,17 +22,23 @@ export function CancelPlanButton({}: CancelPlanButtonProps) {
   const [_, cancel] = useMutation(cancelPlan);
   const navigate = useNavigate();
   return (
-    <ConfirmedButton
-      color="destructive"
-      confirmTitle="Are you sure you want to cancel?"
-      confirmAction="I'm sure"
-      confirmText="Your data will all still be there on your device, but you won't be able to sync to other devices, with other plan members, or access member-only features anymore. You can come back anytime."
-      onConfirm={async () => {
-        await cancel({});
-        navigate('/');
-      }}
-    >
-      Cancel My Plan
-    </ConfirmedButton>
+    <div>
+      <ConfirmedButton
+        color="destructive"
+        confirmTitle="Are you sure you want to cancel?"
+        confirmAction="I'm sure"
+        confirmText="Your data will all still be there on your device, but you won't be able to sync to other devices, with other plan members, or access member-only features anymore. You can come back anytime."
+        onConfirm={async () => {
+          await cancel({});
+          navigate('/');
+        }}
+      >
+        Cancel My Plan
+      </ConfirmedButton>
+      <span className="text-xs">
+        Keep your data, but lose access to member-only features, including
+        device sync and sharing.
+      </span>
+    </div>
   );
 }

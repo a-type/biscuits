@@ -22,7 +22,7 @@ export function PlanInfo({ data: $data }: PlanInfoProps) {
       <h2>{data.name}</h2>
       <p>{data.description}</p>
       <p>
-        {((data.price ?? 0) / 100).toFixed(2)} {data.currency}
+        {((data.price ?? 0) / 100).toFixed(2)} {data.currency} / month
       </p>
     </div>
   );

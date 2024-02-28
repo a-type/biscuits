@@ -1,11 +1,17 @@
 import { SubscriptionSetup } from '@/components/subscription/SubscriptionSetup';
 import { graphql } from '@/graphql';
-import { PageContent, PageRoot } from '@a-type/ui/components/layouts';
+import {
+  PageContent,
+  PageFixedArea,
+  PageRoot,
+} from '@a-type/ui/components/layouts';
 import { Avatar } from '@a-type/ui/components/avatar';
 import { H1, H2 } from '@a-type/ui/components/typography';
-import { useNavigate } from '@verdant-web/react-router';
+import { Link, useNavigate } from '@verdant-web/react-router';
 import { Suspense, useEffect } from 'react';
 import { useQuery } from 'urql';
+import { Button } from '@a-type/ui/components/button';
+import { Icon } from '@a-type/ui/components/icon';
 
 const PlanPageData = graphql(`
   query PlanPageData {
@@ -36,6 +42,13 @@ export function PlanPage({}: PlanPageProps) {
   return (
     <PageRoot>
       <PageContent>
+        <PageFixedArea className="mb-10">
+          <Button asChild className="self-start">
+            <Link to="/">
+              <Icon name="arrowLeft" /> Back to apps
+            </Link>
+          </Button>
+        </PageFixedArea>
         <H1>Your Plan</H1>
         <Suspense>
           <SubscriptionSetup />
