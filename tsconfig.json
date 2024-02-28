@@ -19,10 +19,5 @@
     "isolatedModules": true,
     "customConditions": ["development"]
   },
-  "exclude": ["node_modules", "**/*/dist"],
-  "references": [
-    {
-      "path": "./packages/verdant"
-    }
-  ]
+  "exclude": ["node_modules", "**/*/dist"]
 }
