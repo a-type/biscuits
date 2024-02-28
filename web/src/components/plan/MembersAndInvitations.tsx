@@ -1,4 +1,3 @@
-import { graphql } from '@/graphql';
 import { Avatar } from '@a-type/ui/components/avatar';
 import {
   CardActions,
@@ -9,6 +8,7 @@ import {
 } from '@a-type/ui/components/card';
 import { useQuery } from 'urql';
 import { InviteMember } from './InviteMember';
+import { graphql } from '@/graphql';
 
 const membersQuery = graphql(`
   query PlanMembers {
