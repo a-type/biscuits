@@ -4,6 +4,7 @@ import { db, userNameSelector } from '@biscuits/db';
 import { email } from '../services/email.js';
 import { stripe, stripeDateToDate } from '../services/stripe.js';
 import { GQLContext } from '../graphql/context.js';
+import { UI_ORIGIN } from '../config/deployedContext.js';
 
 export async function handleTrialEnd(
   event: Stripe.CustomerSubscriptionTrialWillEndEvent,
@@ -130,6 +131,13 @@ export async function handleSubscriptionUpdated(
 
   const priceId = subscription.items.data[0]?.price.id;
   const productId = subscription.items.data[0]?.price.product as string;
+  // memberLimit should be set on the product metadata
+  const product = await stripe.products.retrieve(productId);
+  const memberLimitStr = product.metadata?.memberLimit ?? '';
+  let memberLimit: number | undefined = parseInt(memberLimitStr, 10);
+  if (isNaN(memberLimit)) {
+    memberLimit = undefined;
+  }
 
   const updated = await db
     .updateTable('Plan')
@@ -141,6 +149,7 @@ export async function handleSubscriptionUpdated(
       subscriptionExpiresAt: expiresAt,
       stripePriceId: priceId,
       stripeProductId: productId,
+      memberLimit,
     })
     .returning(['Plan.id as planId'])
     .executeTakeFirst();
@@ -175,6 +184,48 @@ export async function handleSubscriptionUpdated(
           }),
         ),
       );
+    }
+  }
+
+  // if member limit changed, the plan could possibly now be in violation of the limit.
+  // check the number of members and update status and send an email if so
+  if (memberLimit !== undefined) {
+    const members = await db
+      .selectFrom('User')
+      .select(['id'])
+      .where('planId', '=', planId)
+      .execute();
+
+    if (members.length > memberLimit) {
+      await db
+        .updateTable('Plan')
+        .where('id', '=', planId)
+        .set({
+          subscriptionStatus: 'member_limit_exceeded',
+        })
+        .execute();
+
+      // notify plan admins their subscription is in violation
+      const admins = await db
+        .selectFrom('User')
+        .select(['id', 'email'])
+        .select(userNameSelector)
+        .where('planId', '=', planId)
+        .where('planRole', '=', 'admin')
+        .execute();
+
+      if (admins.length > 0) {
+        await Promise.all(
+          admins.map((admin) =>
+            email.sendMail({
+              to: admin.email,
+              subject: 'Your Biscuits subscription needs attention',
+              text: `Hi ${admin.name},\n\nYou recently changed your Biscuits subscription, and now it has more than the allowed number of members. Please visit ${UI_ORIGIN}/plan to remove extra members, or your subscription will remain paused.\n\nThanks,\nGrant`,
+              html: `Hi ${admin.name},<br><br>You recently changed your Biscuits subscription, and now it has more than the allowed number of members. Please visit <a href="${UI_ORIGIN}/plan">${UI_ORIGIN}/plan</a> to remove extra members, or your subscription will remain paused.<br><br>Thanks,<br>Grant`,
+            }),
+          ),
+        );
+      }
     }
   }
 }

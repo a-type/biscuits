@@ -9,6 +9,7 @@ import { CancelPlanButton } from './CancelPlanButton';
 import classNames from 'classnames';
 import { useQuery } from 'urql';
 import { Icon } from '@a-type/ui/components/icon';
+import { H2 } from '@a-type/ui/components/typography';
 
 export const manageSubscriptionInfo = graphql(
   `
@@ -68,7 +69,7 @@ export function ManageSubscription({
       {...props}
     >
       <div>
-        <h2>Your Subscription</h2>
+        <H2>Your Subscription</H2>
         <div className="flex flex-row gap-3 items-center">
           Status: {data.subscriptionStatus}{' '}
           <Button

@@ -9,6 +9,7 @@ import {
 import { useQuery } from 'urql';
 import { InviteMember } from './InviteMember';
 import { graphql } from '@/graphql';
+import { H2 } from '@a-type/ui/components/typography';
 
 const membersQuery = graphql(`
   query PlanMembers {
@@ -26,17 +27,19 @@ const membersQuery = graphql(`
         id
         email
       }
+      canInviteMore
     }
   }
 `);
 
 export function MembersAndInvitations() {
   const [{ data }, refetch] = useQuery({ query: membersQuery });
+  const plan = data?.plan;
 
   return (
     <div>
       <CardGrid>
-        {data?.plan?.members.map((member) => (
+        {plan?.members.map((member) => (
           <CardRoot key={member.id}>
             <CardMain>
               <Avatar imageSrc={member.imageUrl ?? undefined} />
@@ -52,7 +55,7 @@ export function MembersAndInvitations() {
             </CardMain>
           </CardRoot>
         ))}
-        {data?.plan?.pendingInvitations.map((invite) => (
+        {plan?.pendingInvitations.map((invite) => (
           <CardRoot key={invite.id}>
             <CardMain>
               <Avatar />
@@ -66,7 +69,16 @@ export function MembersAndInvitations() {
           </CardRoot>
         ))}
       </CardGrid>
-      <InviteMember />
+      {plan?.canInviteMore ? (
+        <div className="py-4">
+          <H2>Invite someone</H2>
+          <InviteMember />
+        </div>
+      ) : (
+        <div className="py-4 color-gray-9">
+          You&apos;ve reached your membership limit. Upgrade to add more people.
+        </div>
+      )}
     </div>
   );
 }

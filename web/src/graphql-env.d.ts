@@ -369,6 +369,18 @@ export type introspection = {
         "name": "Plan",
         "fields": [
           {
+            "name": "canInviteMore",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
             "name": "checkoutData",
             "type": {
               "kind": "OBJECT",

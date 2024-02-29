@@ -1,4 +1,10 @@
-import { ColumnType, Insertable, Selectable, Updateable } from 'kysely';
+import {
+  ColumnType,
+  Generated,
+  Insertable,
+  Selectable,
+  Updateable,
+} from 'kysely';
 
 export interface Database {
   User: UserTable;
@@ -75,6 +81,7 @@ export interface PlanTable {
   subscriptionExpiresAt: Date | null;
   subscriptionCanceledAt: Date | null;
   featureFlags: ColumnType<string, string | undefined, string>;
+  memberLimit: Generated<number>;
 }
 
 export type Plan = Selectable<PlanTable>;

@@ -1,8 +1,11 @@
-import { id } from '@biscuits/db';
+import { id, jsonArrayFrom } from '@biscuits/db';
 import { BiscuitsError } from '../../error.js';
 import { builder } from '../builder.js';
 import { assignTypeName, hasTypeName } from '../relay.js';
-import { removeUserFromPlan } from '../../management/plans.js';
+import {
+  canPlanAcceptAMember,
+  removeUserFromPlan,
+} from '../../management/plans.js';
 import { email } from '../../services/email.js';
 import { UI_ORIGIN } from '../../config/deployedContext.js';
 import { User } from './user.js';
@@ -50,6 +53,12 @@ builder.mutationFields((t) => ({
       }
 
       const planId = ctx.session.planId;
+
+      const memberCheck = await canPlanAcceptAMember(planId, ctx);
+
+      if (!memberCheck.ok) {
+        throw new BiscuitsError(memberCheck.code);
+      }
 
       const existingUser = await ctx.db
         .selectFrom('User')
@@ -109,11 +118,8 @@ builder.mutationFields((t) => ({
       if (!ctx.session) {
         throw new BiscuitsError(BiscuitsError.Code.NotLoggedIn);
       }
-      if (ctx.session.planId) {
-        // remove the user from their old plan
-        await removeUserFromPlan(ctx.session.planId, ctx.session.userId);
-      }
 
+      // first validate the invite
       const { userId } = ctx.session;
 
       const invite = await ctx.db
@@ -138,6 +144,18 @@ builder.mutationFields((t) => ({
           BiscuitsError.Code.BadRequest,
           'Invite expired',
         );
+      }
+
+      // make sure the plan can accept more members
+      const memberCheck = await canPlanAcceptAMember(invite.planId, ctx);
+
+      if (!memberCheck.ok) {
+        throw new BiscuitsError(memberCheck.code);
+      }
+
+      if (ctx.session.planId) {
+        // remove the user from their old plan
+        await removeUserFromPlan(ctx.session.planId, ctx.session.userId);
       }
 
       await ctx.db.transaction().execute(async (tx) => {

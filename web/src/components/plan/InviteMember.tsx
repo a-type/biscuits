@@ -26,6 +26,7 @@ export function InviteMember({}: InviteMemberProps) {
         await createInvitation({ input: { email } });
         bag.resetForm();
       }}
+      className="p-3"
     >
       <TextField name="email" label="Email" />
       <SubmitButton>Invite</SubmitButton>

@@ -6,6 +6,7 @@ export enum BiscuitsErrorCode {
   Forbidden = 4030,
   NoPlan = 4031,
   SubscriptionInactive = 4032,
+  PlanFull = 4033,
   NotFound = 4040,
   Conflict = 4090,
   Unexpected = 5000,

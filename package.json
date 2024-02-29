@@ -8,7 +8,8 @@
     "typecheck": "turbo run typecheck",
     "test": "turbo run test",
     "prepare": "husky install",
-    "up-verdant": "pnpm --recursive update \"@verdant-web/*\" --latest"
+    "up-verdant": "pnpm --recursive update \"@verdant-web/*\" --latest",
+    "create-migration": "node ./scripts/createMigration.mjs"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,8 @@
   "dependencies": {
     "husky": "^8.0.3",
     "turbo": "^1.9.3",
-    "typescript": "^5.0.4"
+    "typescript": "^5.0.4",
+    "@clack/prompts": "0.7.0",
+    "prettier": "3.2.5"
   }
 }

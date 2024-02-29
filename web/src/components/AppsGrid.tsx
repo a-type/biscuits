@@ -50,7 +50,14 @@ function AppCard({ app }: { app: AppDefinition }) {
           backgroundImage: `url(${app.image})`,
         }}
       >
-        <h2 className="m-0 p-0">{app.name}</h2>
+        <h2
+          className={classNames(
+            'm-0 p-0 text-3xl',
+            '[font-family:"VC_Henrietta_Trial","Noto_Serif",serif]',
+          )}
+        >
+          {app.name}
+        </h2>
       </div>
       <div className="p-3 font-semibold">{app.description}</div>
     </a>

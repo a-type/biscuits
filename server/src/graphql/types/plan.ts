@@ -4,13 +4,13 @@ import { assignTypeName, hasTypeName } from '../relay.js';
 import { User } from './user.js';
 import { BiscuitsError } from '../../error.js';
 import {
+  canPlanAcceptAMember,
   cancelPlan,
   setupNewPlan,
   updatePlanSubscription,
 } from '../../management/plans.js';
 import { assert } from '@a-type/utils';
 import { logger } from '../../logger.js';
-import { stripeDateToDate } from '../../services/stripe.js';
 import { createResults, keyIndexes } from '../dataloaders/index.js';
 import { Plan as DBPlan } from '@biscuits/db';
 import { cacheSubscriptionInfoOnPlan } from '../../management/subscription.js';
@@ -331,6 +331,12 @@ Plan.implement({
           .execute();
 
         return result.map(assignTypeName('PlanInvitation'));
+      },
+    }),
+    canInviteMore: t.field({
+      type: 'Boolean',
+      resolve: async (plan, _, ctx) => {
+        return (await canPlanAcceptAMember(plan.id, ctx)).ok;
       },
     }),
   }),

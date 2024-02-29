@@ -1,8 +1,6 @@
 import { graphql } from '@/graphql';
 import { H2 } from '@a-type/ui/components/typography';
-import { withClassName } from '@a-type/ui/hooks';
 import { useMutation, useQuery } from 'urql';
-import { AutoPlanInfo } from './PlanInfo';
 import { FAMILY_STYLE_PRICE_ID, FOR_TWO_PRICE_ID } from '@/config';
 import {
   CardGrid,
@@ -10,7 +8,7 @@ import {
   CardRoot,
   CardTitle,
 } from '@a-type/ui/components/card';
-import { ReactNode, Suspense } from 'react';
+import { Suspense } from 'react';
 import { Price } from './Price';
 
 export interface SubscriptionSelectProps {}

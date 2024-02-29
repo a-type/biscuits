@@ -1,10 +1,11 @@
 import { db, id, jsonArrayFrom } from '@biscuits/db';
-import { BiscuitsError } from '@biscuits/error';
+import { BiscuitsError, BiscuitsErrorCode } from '@biscuits/error';
 import { stripe } from '../services/stripe.js';
 import { email } from '../services/email.js';
 import { UI_ORIGIN } from '../config/deployedContext.js';
 import { assert } from '@a-type/utils';
 import { GQLContext } from '../graphql/context.js';
+import { isSubscribed } from '../auth/subscription.js';
 
 export async function removeUserFromPlan(
   planId: string,
@@ -345,4 +346,53 @@ ${UI_ORIGIN}/contact.\n\nThanks,\nGrant`,
       })
       .execute();
   });
+}
+
+export async function canPlanAcceptAMember(
+  planId: string,
+  ctx: GQLContext,
+): Promise<{ ok: false; code: BiscuitsErrorCode } | { ok: true }> {
+  const plan = await ctx.db
+    .selectFrom('Plan')
+    .select(['Plan.memberLimit', 'Plan.subscriptionStatus'])
+    .select((eb) => [
+      jsonArrayFrom(
+        eb
+          .selectFrom('User')
+          .select(['id', 'planRole', 'stripeCustomerId'])
+          .whereRef('planId', '=', 'Plan.id'),
+      ).as('members'),
+    ])
+    .where('id', '=', planId)
+    .executeTakeFirst();
+
+  if (!plan) {
+    return { ok: false, code: BiscuitsErrorCode.NoPlan };
+  }
+
+  if (!isSubscribed(plan.subscriptionStatus)) {
+    return { ok: false, code: BiscuitsErrorCode.SubscriptionInactive };
+  }
+
+  // unlimited
+  if (plan.memberLimit === 0) {
+    return { ok: true };
+  }
+
+  const memberCount = plan.members.length;
+  if (memberCount >= plan.memberLimit) {
+    return { ok: false, code: BiscuitsErrorCode.PlanFull };
+  }
+
+  return { ok: true };
+}
+
+export async function isPlanInGoodStanding(planId: string) {
+  const plan = await db
+    .selectFrom('Plan')
+    .select(['subscriptionStatus'])
+    .where('id', '=', planId)
+    .executeTakeFirst();
+
+  return !!plan && isSubscribed(plan.subscriptionStatus);
 }

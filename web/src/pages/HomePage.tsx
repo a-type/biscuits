@@ -23,27 +23,34 @@ export default function HomePage() {
         <Paws />
       </Suspense>
       <PageContent innerProps={innerProps}>
-        <PageFixedArea className="bg-transparent flex flex-row justify-end py-2">
-          <UserMenu />
-        </PageFixedArea>
-        <div className="flex flex-col gap-2 min-h-[30vh] my-10 text-primary-dark font-semibold">
+        <PageFixedArea className="bg-transparent flex flex-row justify-between items-center py-2">
           <h1
             className={classNames(
-              '[font-family:"Noto_Serif",serif]',
-              'text-[5vmin] m-0 font-900 text-accent text-shadow',
+              '[font-family:"VC_Henrietta_Trial","Noto_Serif",serif]',
+              'text-[5vmin] m-0 font-normal text-primary-dark text-shadow',
             )}
           >
             Biscuits
           </h1>
+          <UserMenu />
+        </PageFixedArea>
+        <div className="flex flex-col gap-2 min-h-[30vh] mb-10 mt-5 text-primary-dark font-semibold">
           <h2
             className={classNames(
-              '[font-family:"Noto_Serif",serif]',
-              '!text-[10vmin] text-black mt-0 mb-6 font-900 leading-none',
+              '[font-family:"VC_Henrietta_Trial","Noto_Serif",serif]',
+              '!text-[8vmin] text-[#004933] mt-0 mb-6 font-bold leading-none',
             )}
           >
             Scratch-made apps
           </h2>
-          <P className="m-0 text-inherit">in Raleigh, NC</P>
+          <P
+            className={classNames(
+              '[font-family:"VC_Henrietta_Trial","Noto_Serif",serif]',
+              'm-0 text-inherit text-xl',
+            )}
+          >
+            in Raleigh, NC
+          </P>
         </div>
         <AppsGrid />
       </PageContent>
