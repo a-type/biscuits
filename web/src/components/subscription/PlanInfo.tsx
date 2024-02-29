@@ -1,5 +1,6 @@
 import { FragmentOf, graphql, readFragment } from '@/graphql';
 import { useQuery } from 'urql';
+import { Price } from './Price';
 
 export const planProductInfo = graphql(`
   fragment PlanInfo_productInfo on ProductInfo {
@@ -21,9 +22,7 @@ export function PlanInfo({ data: $data }: PlanInfoProps) {
     <div>
       <h2>{data.name}</h2>
       <p>{data.description}</p>
-      <p>
-        {((data.price ?? 0) / 100).toFixed(2)} {data.currency} / month
-      </p>
+      <Price value={data.price} currency={data.currency} />
     </div>
   );
 }

@@ -23,6 +23,10 @@ const routes = makeRoutes([
     path: '/plan',
     component: lazy(() => import('./PlanPage.js')),
   },
+  {
+    path: '/invite/:code',
+    component: lazy(() => import('./ClaimInvitePage.js')),
+  },
 ]);
 
 export function Pages() {

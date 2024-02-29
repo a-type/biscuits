@@ -118,10 +118,14 @@ builder.mutationFields((t) => ({
         planId = plan.id;
       }
 
-      await ctx.auth.setLoginSession({
+      const newSession = {
         ...ctx.session,
         planId,
-      });
+      };
+      await ctx.auth.setLoginSession(newSession);
+      // actually mutate the session - so that resolvers of the returned value
+      // have the right authentication
+      ctx.session = newSession;
 
       return { planId, userId };
     },
@@ -225,10 +229,12 @@ Plan.implement({
     checkoutData: t.field({
       type: 'StripeCheckoutData',
       authScopes: {
-        planAdmin: true,
+        user: true,
       },
       nullable: true,
       resolve: async (plan, _, ctx) => {
+        // only admins can complete checkout
+        if (ctx.session?.role !== 'admin') return null;
         if (!plan.stripeSubscriptionId) return null;
         // can only complete checkout if subscription is incomplete or
         // if we haven't yet synced with Stripe
@@ -311,9 +317,12 @@ Plan.implement({
     pendingInvitations: t.field({
       type: ['PlanInvitation'],
       authScopes: {
-        planAdmin: true,
+        user: true,
       },
       resolve: async (plan, _, ctx) => {
+        // only admins can see pending invitations
+        if (ctx.session?.role !== 'admin') return [];
+
         const result = await ctx.db
           .selectFrom('PlanInvitation')
           .selectAll()

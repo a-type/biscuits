@@ -26,7 +26,7 @@ export default function HomePage() {
         <PageFixedArea className="bg-transparent flex flex-row justify-end py-2">
           <UserMenu />
         </PageFixedArea>
-        <div className="flex flex-col gap-2 h-[30vh] my-10 text-primary-dark font-semibold">
+        <div className="flex flex-col gap-2 min-h-[30vh] my-10 text-primary-dark font-semibold">
           <h1
             className={classNames(
               '[font-family:"Noto_Serif",serif]',

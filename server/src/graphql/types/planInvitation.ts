@@ -5,6 +5,8 @@ import { assignTypeName, hasTypeName } from '../relay.js';
 import { removeUserFromPlan } from '../../management/plans.js';
 import { email } from '../../services/email.js';
 import { UI_ORIGIN } from '../../config/deployedContext.js';
+import { User } from './user.js';
+import { Plan } from './plan.js';
 
 builder.queryFields((t) => ({
   planInvitation: t.field({
@@ -199,11 +201,13 @@ export const PlanInvitation = builder.node('PlanInvitation', {
 
 builder.objectType('ClaimPlanInvitationResult', {
   fields: (t) => ({
-    user: t.node({
-      id: (result) => ({ id: result.userId, type: 'User' }),
+    user: t.field({
+      type: User,
+      resolve: (result) => result.userId,
     }),
-    plan: t.node({
-      id: (result) => ({ id: result.planId, type: 'Plan' }),
+    plan: t.field({
+      type: Plan,
+      resolve: (result) => result.planId,
     }),
   }),
 });

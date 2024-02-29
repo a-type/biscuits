@@ -42,18 +42,24 @@ export type introspection = {
           {
             "name": "plan",
             "type": {
-              "kind": "INTERFACE",
-              "name": "Node",
-              "ofType": null
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Plan",
+                "ofType": null
+              }
             },
             "args": []
           },
           {
             "name": "user",
             "type": {
-              "kind": "INTERFACE",
-              "name": "Node",
-              "ofType": null
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "User",
+                "ofType": null
+              }
             },
             "args": []
           }
