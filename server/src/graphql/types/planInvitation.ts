@@ -37,7 +37,7 @@ builder.queryFields((t) => ({
 
 builder.mutationFields((t) => ({
   createPlanInvitation: t.field({
-    type: 'PlanInvitation',
+    type: 'CreatePlanInvitationResult',
     authScopes: {
       planAdmin: true,
     },
@@ -99,7 +99,10 @@ builder.mutationFields((t) => ({
         html: `You have been invited to join a Biscuits plan. To accept the invitation, click the following link: <a href="${UI_ORIGIN}/invite/${inviteCode}">Accept invitation</a>`,
       });
 
-      return assignTypeName('PlanInvitation')(invite);
+      return {
+        planId,
+        planInvitationId: invite.id,
+      };
     },
   }),
 
@@ -155,7 +158,7 @@ builder.mutationFields((t) => ({
 
       if (ctx.session.planId) {
         // remove the user from their old plan
-        await removeUserFromPlan(ctx.session.planId, ctx.session.userId);
+        await removeUserFromPlan(ctx.session.planId, ctx.session.userId, ctx);
       }
 
       await ctx.db.transaction().execute(async (tx) => {
@@ -235,6 +238,15 @@ builder.inputType('CreatePlanInvitationInput', {
     email: t.string({
       description: 'The email address of the person to invite',
       required: true,
+    }),
+  }),
+});
+
+builder.objectType('CreatePlanInvitationResult', {
+  fields: (t) => ({
+    plan: t.field({
+      type: Plan,
+      resolve: (result) => result.planId,
     }),
   }),
 });

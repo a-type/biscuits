@@ -6,15 +6,17 @@ import {
   CardMain,
   CardRoot,
 } from '@a-type/ui/components/card';
-import { useQuery } from 'urql';
+import { useMutation, useQuery } from 'urql';
 import { InviteMember } from './InviteMember';
 import { graphql } from '@/graphql';
 import { H2 } from '@a-type/ui/components/typography';
+import { ConfirmedButton } from '@a-type/ui/components/button';
 
 const membersQuery = graphql(`
   query PlanMembers {
     me {
       id
+      role
     }
     plan {
       members {
@@ -35,26 +37,38 @@ const membersQuery = graphql(`
 export function MembersAndInvitations() {
   const [{ data }, refetch] = useQuery({ query: membersQuery });
   const plan = data?.plan;
+  const isAdmin = data?.me?.role === 'admin';
 
   return (
     <div>
       <CardGrid>
-        {plan?.members.map((member) => (
-          <CardRoot key={member.id}>
-            <CardMain>
-              <Avatar imageSrc={member.imageUrl ?? undefined} />
-              <div className="flex flex-col gap-2 items-start justify-start">
-                <span>
-                  {member.name}
-                  {member.id === data?.me?.id && (
-                    <span className="font-bold"> (you)</span>
-                  )}
-                </span>
-                <span>{member.email}</span>
-              </div>
-            </CardMain>
-          </CardRoot>
-        ))}
+        {plan?.members.map((member) => {
+          const isMe = member.id === data?.me?.id;
+          return (
+            <CardRoot key={member.id} className="h-full">
+              <CardMain>
+                <Avatar imageSrc={member.imageUrl ?? undefined} />
+                <div className="flex flex-col gap-2 items-start justify-start">
+                  <span>
+                    {member.name}
+                    {isMe && <span className="font-bold"> (you)</span>}
+                  </span>
+                  <span>{member.email}</span>
+                </div>
+              </CardMain>
+              {isAdmin && !isMe && (
+                <CardFooter>
+                  <CardActions>
+                    <KickMemberButton
+                      memberId={member.id as string}
+                      name={member.name}
+                    />
+                  </CardActions>
+                </CardFooter>
+              )}
+            </CardRoot>
+          );
+        })}
         {plan?.pendingInvitations.map((invite) => (
           <CardRoot key={invite.id}>
             <CardMain>
@@ -80,5 +94,43 @@ export function MembersAndInvitations() {
         </div>
       )}
     </div>
+  );
+}
+
+const kickMember = graphql(`
+  mutation KickMember($memberId: ID!) {
+    kickMember(userId: $memberId) {
+      plan {
+        id
+        members {
+          id
+          name
+          email
+          imageUrl
+        }
+      }
+    }
+  }
+`);
+
+function KickMemberButton({
+  memberId,
+  name,
+}: {
+  memberId: string;
+  name: string;
+}) {
+  const [{ fetching }, kick] = useMutation(kickMember);
+
+  return (
+    <ConfirmedButton
+      confirmText={`Are you sure you want to remove ${name}?`}
+      disabled={fetching}
+      onConfirm={() => kick({ memberId })}
+      size="small"
+      color="destructive"
+    >
+      Remove member
+    </ConfirmedButton>
   );
 }

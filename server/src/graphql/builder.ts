@@ -30,6 +30,8 @@ export const builder = new SchemaBuilder<{
       priceId: string;
     };
     CancelPlanResult: {};
+    KickMemberResult: { planId: string };
+    CreatePlanInvitationResult: { planId: string; planInvitationId: string };
   };
   AuthScopes: {
     public: boolean;

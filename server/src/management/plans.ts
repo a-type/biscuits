@@ -10,8 +10,9 @@ import { isSubscribed } from '../auth/subscription.js';
 export async function removeUserFromPlan(
   planId: string,
   userId: string,
-): Promise<void> {
-  await db.transaction().execute(async (tx) => {
+  ctx: GQLContext,
+) {
+  return ctx.db.transaction().execute(async (tx) => {
     // if user was admin of their plan and there are no other admins,
     // promote another user to admin. if there are no other users,
     // delete the plan
@@ -35,11 +36,11 @@ export async function removeUserFromPlan(
 
     const userMember = plan.members.find((m) => m.id === userId);
     if (!userMember) {
-      console.error('User not found in plan despite select matching', {
+      console.error('User not found in plan from their session', {
         planId,
         userId,
       });
-      throw new BiscuitsError(BiscuitsError.Code.Unexpected);
+      throw new BiscuitsError(BiscuitsError.Code.SessionInvalid);
     }
 
     // if they're not an admin, just remove them. if there's
@@ -107,14 +108,17 @@ export async function removeUserFromPlan(
     }
 
     // null out the old admin's planId and planRole
-    await tx
+    const removedUser = await tx
       .updateTable('User')
       .where('id', '=', userId)
       .set({
         planId: null,
         planRole: null,
       })
-      .execute();
+      .returning(['User.id', 'User.email', 'User.fullName'])
+      .executeTakeFirstOrThrow();
+
+    return removedUser;
   });
 }
 

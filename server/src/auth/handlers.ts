@@ -13,7 +13,8 @@ assert(
 
 export const authHandlers = createHandlers({
   sessions,
-  defaultReturnTo: `${UI_ORIGIN}/`,
+  defaultReturnTo: `/`,
+  returnToOrigin: UI_ORIGIN,
   providers: {
     google: new GoogleProvider({
       clientId: process.env.GOOGLE_AUTH_CLIENT_ID!,

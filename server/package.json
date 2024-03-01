@@ -15,7 +15,7 @@
   "type": "module",
   "private": true,
   "dependencies": {
-    "@a-type/auth": "^0.4.1",
+    "@a-type/auth": "^0.4.3",
     "@a-type/utils": "^1.0.5",
     "@biscuits/db": "workspace:*",
     "@biscuits/libraries": "workspace:*",

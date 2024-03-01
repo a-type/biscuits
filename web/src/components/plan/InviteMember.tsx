@@ -4,12 +4,19 @@ import {
   SubmitButton,
   TextField,
 } from '@a-type/ui/components/forms';
+import toast from 'react-hot-toast';
 import { useMutation } from 'urql';
 
 const invite = graphql(`
   mutation CreateInvitation($input: CreatePlanInvitationInput!) {
     createPlanInvitation(input: $input) {
-      id
+      plan {
+        id
+        pendingInvitations {
+          id
+          email
+        }
+      }
     }
   }
 `);
@@ -25,6 +32,7 @@ export function InviteMember({}: InviteMemberProps) {
       onSubmit={async ({ email }, bag) => {
         await createInvitation({ input: { email } });
         bag.resetForm();
+        toast.success('Invitation sent!');
       }}
       className="p-3"
     >

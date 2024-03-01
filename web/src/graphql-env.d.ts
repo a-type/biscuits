@@ -88,12 +88,50 @@ export type introspection = {
         "name": "String"
       },
       {
+        "kind": "OBJECT",
+        "name": "CreatePlanInvitationResult",
+        "fields": [
+          {
+            "name": "plan",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Plan",
+                "ofType": null
+              }
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
         "kind": "SCALAR",
         "name": "DateTime"
       },
       {
         "kind": "SCALAR",
         "name": "JSON"
+      },
+      {
+        "kind": "OBJECT",
+        "name": "KickMemberResult",
+        "fields": [
+          {
+            "name": "plan",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Plan",
+                "ofType": null
+              }
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
       },
       {
         "kind": "OBJECT",
@@ -141,7 +179,7 @@ export type introspection = {
               "kind": "NON_NULL",
               "ofType": {
                 "kind": "OBJECT",
-                "name": "PlanInvitation",
+                "name": "CreatePlanInvitationResult",
                 "ofType": null
               }
             },
@@ -176,6 +214,30 @@ export type introspection = {
                   "kind": "SCALAR",
                   "name": "ID",
                   "ofType": null
+                }
+              }
+            ]
+          },
+          {
+            "name": "kickMember",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "KickMemberResult",
+                "ofType": null
+              }
+            },
+            "args": [
+              {
+                "name": "userId",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
                 }
               }
             ]

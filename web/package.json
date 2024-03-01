@@ -9,7 +9,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@a-type/ui": "^0.6.14",
+    "@a-type/ui": "^0.6.15",
     "@biscuits/error": "workspace:*",
     "@biscuits/client": "workspace:*",
     "@react-spring/web": "^9.7.3",

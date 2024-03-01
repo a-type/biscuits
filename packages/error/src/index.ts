@@ -3,6 +3,8 @@ export enum BiscuitsErrorCode {
   Unauthorized = 4010,
   NotLoggedIn = 4011,
   SessionExpired = 4012,
+  // requires re-login
+  SessionInvalid = 4013,
   Forbidden = 4030,
   NoPlan = 4031,
   SubscriptionInactive = 4032,
@@ -26,8 +28,15 @@ export class BiscuitsError extends Error {
     return null;
   }
 
+  static isInstance(err: unknown): err is BiscuitsError {
+    return (
+      err instanceof BiscuitsError || (err as any)?.isBiscuitsError === true
+    );
+  }
+
   public code: BiscuitsErrorCode;
   public message: string;
+  public readonly isBiscuitsError = true;
 
   constructor(code: BiscuitsErrorCode, message?: string, cause?: unknown) {
     super(message, {

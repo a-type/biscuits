@@ -71,8 +71,8 @@ importers:
   server:
     dependencies:
       '@a-type/auth':
-        specifier: ^0.4.1
-        version: 0.4.1
+        specifier: ^0.4.3
+        version: 0.4.3
       '@a-type/utils':
         specifier: ^1.0.5
         version: 1.0.5
@@ -177,8 +177,8 @@ importers:
   web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.6.14
-        version: 0.6.14(@types/react-dom@18.2.17)(@types/react@18.2.38)
+        specifier: ^0.6.15
+        version: 0.6.15(@types/react-dom@18.2.17)(@types/react@18.2.38)
       '@biscuits/client':
         specifier: workspace:*
         version: link:../packages/client
@@ -293,8 +293,8 @@ packages:
       - encoding
     dev: true
 
-  /@a-type/auth@0.4.1:
-    resolution: {integrity: sha512-CQT9QNtsrYwnH36KtzclX7KPGuO3vU/wwU9y7NIKIzGw8fbuGaOhv/uKOYALXGJn57NwtJshho8y7BAS6SoQfA==}
+  /@a-type/auth@0.4.3:
+    resolution: {integrity: sha512-3tHylNWjn4hXu9xHpZplBGcvHEJtkcm4N5Pb7qNvUnflvzeYN3H0nt6plo7ziD3b7wy3MdTjWi5kBWr9TnKbPQ==}
     dependencies:
       cookie: 0.6.0
       discord-oauth2: 2.12.1
@@ -320,8 +320,8 @@ packages:
       - supports-color
     dev: false
 
-  /@a-type/ui@0.6.14(@types/react-dom@18.2.17)(@types/react@18.2.38):
-    resolution: {integrity: sha512-xqsUyYnI2u1RwfTy6VJO5NFH7j1WYAEewjWo8ZA5iyhAeRHXWohrDfJVcsryx+AsocEW7//tl/TbW+Tt9D1hIw==}
+  /@a-type/ui@0.6.15(@types/react-dom@18.2.17)(@types/react@18.2.38):
+    resolution: {integrity: sha512-wBSeaqau/yPtMAAYUEFN/Ou+nwigOrDuf4syY1PSUBTo3/Grcn3Gqad59497ZMkl4CVOI0aHRcaN/3WBYINd4A==}
     dependencies:
       '@a-type/utils': 1.0.5
       '@radix-ui/react-accordion': 1.1.2(@types/react-dom@18.2.17)(@types/react@18.2.38)(react-dom@18.2.0)(react@18.2.0)

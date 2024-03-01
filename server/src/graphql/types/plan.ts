@@ -6,6 +6,7 @@ import { BiscuitsError } from '../../error.js';
 import {
   canPlanAcceptAMember,
   cancelPlan,
+  removeUserFromPlan,
   setupNewPlan,
   updatePlanSubscription,
 } from '../../management/plans.js';
@@ -14,6 +15,7 @@ import { logger } from '../../logger.js';
 import { createResults, keyIndexes } from '../dataloaders/index.js';
 import { Plan as DBPlan } from '@biscuits/db';
 import { cacheSubscriptionInfoOnPlan } from '../../management/subscription.js';
+import { email } from '../../services/email.js';
 
 builder.queryFields((t) => ({
   plan: t.field({
@@ -123,9 +125,6 @@ builder.mutationFields((t) => ({
         planId,
       };
       await ctx.auth.setLoginSession(newSession);
-      // actually mutate the session - so that resolvers of the returned value
-      // have the right authentication
-      ctx.session = newSession;
 
       return { planId, userId };
     },
@@ -172,15 +171,87 @@ builder.mutationFields((t) => ({
       return {};
     },
   }),
+  kickMember: t.field({
+    type: 'KickMemberResult',
+    authScopes: {
+      planAdmin: true,
+    },
+    args: {
+      userId: t.arg.globalID({
+        required: true,
+      }),
+    },
+    resolve: async (_, { userId: { id } }, ctx) => {
+      const planId = ctx.session?.planId;
+      if (!planId) {
+        throw new BiscuitsError(BiscuitsError.Code.NoPlan);
+      }
+      const removed = await removeUserFromPlan(planId, id, ctx);
+      if (removed) {
+        await email.sendMail({
+          to: removed.email,
+          subject: 'You have been removed from your Biscuits plan',
+          text: `You have been removed from the Biscuits plan by an admin. If you believe this is a mistake, please contact support.`,
+          html: `You have been removed from the Biscuits plan by an admin. If you believe this is a mistake, please contact support.`,
+        });
+      }
+      return { planId };
+    },
+  }),
 }));
 
 export const Plan = builder.loadableNodeRef('Plan', {
   load: async (ids, ctx) => {
-    const plans = await ctx.db
-      .selectFrom('Plan')
-      .selectAll()
-      .where('id', 'in', ids as string[])
-      .execute();
+    // there's special auth logic here for loading plans for regular users -
+    // a non-product-admin should never load anything but their own plan.
+
+    // but there's one more thing... they might have been kicked from
+    // their plan. so we need to validate their session planId with a real
+    // planId in the database.
+
+    // nobody without a session should be loading plans
+    if (!ctx.session) {
+      throw new BiscuitsError(BiscuitsError.Code.NotLoggedIn);
+    }
+
+    let plans: DBPlan[];
+
+    if (ctx.session?.isProductAdmin) {
+      // no worries, just load them
+      plans = await ctx.db
+        .selectFrom('Plan')
+        .selectAll()
+        .where('id', 'in', ids as string[])
+        .execute();
+    } else {
+      // if the user is not a product admin, they can only load their own plan
+      if (ids.length !== 1) {
+        logger.warn(`Non-admin user tried to load multiple plans`, {
+          userId: ctx.session.userId,
+          planIds: ids,
+        });
+        throw new BiscuitsError(BiscuitsError.Code.Unexpected);
+      }
+      const planId = ctx.session.planId;
+      if (!planId) {
+        return createResults<DBPlan & { __typename: 'Plan' }>(ids);
+      }
+
+      // find plan by user ID, not session plan ID
+      const myPlan = await ctx.db
+        .selectFrom('User')
+        .innerJoin('Plan', 'Plan.id', 'User.planId')
+        .selectAll('Plan')
+        .where('User.id', '=', ctx.session.userId)
+        .executeTakeFirst();
+
+      if (!myPlan || myPlan.id !== planId) {
+        // user session is invalid.
+        throw new BiscuitsError(BiscuitsError.Code.SessionInvalid);
+      }
+
+      plans = [myPlan];
+    }
 
     // map results to key indexes
     const indexes = keyIndexes(ids);
@@ -376,6 +447,15 @@ builder.objectType('CancelPlanResult', {
       type: User,
       nullable: true,
       resolve: (_, __, ctx) => ctx.session?.userId ?? null,
+    }),
+  }),
+});
+
+builder.objectType('KickMemberResult', {
+  fields: (t) => ({
+    plan: t.field({
+      type: Plan,
+      resolve: (result) => result.planId,
     }),
   }),
 });

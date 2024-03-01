@@ -60,9 +60,11 @@ function ClaimInvitePage() {
 
   const [claimResult, mutateClaim] = useMutation(claimInviteAction);
   const claim = async () => {
-    await mutateClaim({ code });
-    toast.success('Welcome to your new membership!');
-    navigate('/plan');
+    const result = await mutateClaim({ code });
+    if (!result.error) {
+      toast.success('Welcome to your new membership!');
+      navigate('/plan');
+    }
   };
 
   if (isNotAuthenticated) {

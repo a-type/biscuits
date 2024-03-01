@@ -16,11 +16,15 @@ const yoga = createYoga<GQLContext>({
   schema,
   maskedErrors: {
     maskError: (error, message, isDev) => {
-      if (error instanceof BiscuitsError) {
-        return new GraphQLError(error.message, {
+      const originalError =
+        'originalError' in (error as any)
+          ? (error as any).originalError
+          : error;
+      if (BiscuitsError.isInstance(originalError)) {
+        return new GraphQLError(originalError.message, {
           extensions: {
-            unexpected: error.code === BiscuitsError.Code.Unexpected,
-            biscuitsCode: error.code,
+            unexpected: originalError.code === BiscuitsError.Code.Unexpected,
+            biscuitsCode: originalError.code,
           },
         });
       }
@@ -37,18 +41,6 @@ graphqlRouter.all('/', handleGraphQLRequest);
 
 async function handleGraphQLRequest(request: Request) {
   let sessionHeaders: Record<string, string> = {};
-  const auth = {
-    setLoginSession: async (ses: Session | null) => {
-      if (ses) {
-        const { headers } = await sessions.updateSession(ses);
-        sessionHeaders = headers;
-      } else {
-        const { headers } = sessions.clearSession();
-        sessionHeaders = headers;
-      }
-    },
-  };
-
   let session = null;
   try {
     session = await sessions.getSession(request);
@@ -66,7 +58,20 @@ async function handleGraphQLRequest(request: Request) {
     req: request,
     session,
     db,
-    auth,
+    auth: {
+      setLoginSession: async (ses: Session | null) => {
+        if (ses) {
+          const { headers } = await sessions.updateSession(ses);
+          sessionHeaders = headers;
+        } else {
+          const { headers } = sessions.clearSession();
+          sessionHeaders = headers;
+        }
+        // also update immediately in the context, so that
+        // resolvers on return values can see the new session
+        ctx.session = ses;
+      },
+    },
     verdant: verdantServer,
     stripe,
     dataloaders: createDataloaders({

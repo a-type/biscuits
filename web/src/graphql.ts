@@ -38,7 +38,9 @@ async function handleError(error: CombinedError) {
           code < 4020 &&
           code !== BiscuitsError.Code.SessionExpired
         ) {
-          window.location.href = '/join';
+          const currentPath = window.location.pathname;
+          window.location.href =
+            '/join' + '?returnTo=' + encodeURIComponent(currentPath);
         } else {
           errorMessage = err.message;
         }
