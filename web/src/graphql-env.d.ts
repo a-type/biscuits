@@ -21,6 +21,25 @@ export type introspection = {
     "types": [
       {
         "kind": "OBJECT",
+        "name": "CancelPlanInvitationResult",
+        "fields": [
+          {
+            "name": "plan",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Plan",
+                "ofType": null
+              }
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
         "name": "CancelPlanResult",
         "fields": [
           {
@@ -148,6 +167,30 @@ export type introspection = {
               }
             },
             "args": []
+          },
+          {
+            "name": "cancelPlanInvitation",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "CancelPlanInvitationResult",
+                "ofType": null
+              }
+            },
+            "args": [
+              {
+                "name": "id",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "ID",
+                    "ofType": null
+                  }
+                }
+              }
+            ]
           },
           {
             "name": "claimPlanInvitation",

@@ -78,7 +78,9 @@ export function MembersAndInvitations() {
               </div>
             </CardMain>
             <CardFooter>
-              <CardActions></CardActions>
+              <CardActions>
+                {isAdmin && <CancelInvitationButton id={invite.id as string} />}
+              </CardActions>
             </CardFooter>
           </CardRoot>
         ))}
@@ -131,6 +133,36 @@ function KickMemberButton({
       color="destructive"
     >
       Remove member
+    </ConfirmedButton>
+  );
+}
+
+const cancelInvitation = graphql(`
+  mutation CancelInvitation($id: ID!) {
+    cancelPlanInvitation(id: $id) {
+      plan {
+        id
+        pendingInvitations {
+          id
+          email
+        }
+      }
+    }
+  }
+`);
+
+function CancelInvitationButton({ id }: { id: string }) {
+  const [{ fetching }, cancel] = useMutation(cancelInvitation);
+
+  return (
+    <ConfirmedButton
+      confirmText="Are you sure you want to cancel this invitation?"
+      disabled={fetching}
+      onConfirm={() => cancel({ id })}
+      size="small"
+      color="destructive"
+    >
+      Cancel invitation
     </ConfirmedButton>
   );
 }

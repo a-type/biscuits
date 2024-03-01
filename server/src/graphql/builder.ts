@@ -32,6 +32,7 @@ export const builder = new SchemaBuilder<{
     CancelPlanResult: {};
     KickMemberResult: { planId: string };
     CreatePlanInvitationResult: { planId: string; planInvitationId: string };
+    CancelPlanInvitationResult: { planId: string };
   };
   AuthScopes: {
     public: boolean;

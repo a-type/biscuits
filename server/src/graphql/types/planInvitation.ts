@@ -191,6 +191,35 @@ builder.mutationFields((t) => ({
       };
     },
   }),
+
+  cancelPlanInvitation: t.field({
+    type: 'CancelPlanInvitationResult',
+    authScopes: {
+      planAdmin: true,
+    },
+    args: {
+      id: t.arg.globalID({
+        required: true,
+      }),
+    },
+    resolve: async (_, { id: { id } }, ctx) => {
+      if (!ctx.session?.planId) {
+        throw new BiscuitsError(BiscuitsError.Code.NoPlan);
+      }
+      const result = await ctx.db
+        .deleteFrom('PlanInvitation')
+        .where('id', '=', id)
+        .where('planId', '=', ctx.session.planId)
+        .returning(['planId'])
+        .executeTakeFirst();
+
+      if (!result) {
+        throw new BiscuitsError(BiscuitsError.Code.NotFound);
+      }
+
+      return { planId: result.planId };
+    },
+  }),
 }));
 
 export const PlanInvitation = builder.node('PlanInvitation', {
@@ -243,6 +272,15 @@ builder.inputType('CreatePlanInvitationInput', {
 });
 
 builder.objectType('CreatePlanInvitationResult', {
+  fields: (t) => ({
+    plan: t.field({
+      type: Plan,
+      resolve: (result) => result.planId,
+    }),
+  }),
+});
+
+builder.objectType('CancelPlanInvitationResult', {
   fields: (t) => ({
     plan: t.field({
       type: Plan,
