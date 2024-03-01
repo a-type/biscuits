@@ -5,11 +5,12 @@ import {
   CardGrid,
   CardMain,
   CardRoot,
+  CardTitle,
 } from '@a-type/ui/components/card';
 import { useMutation, useQuery } from 'urql';
 import { InviteMember } from './InviteMember';
 import { graphql } from '@/graphql';
-import { H2 } from '@a-type/ui/components/typography';
+import { H2, H3 } from '@a-type/ui/components/typography';
 import { ConfirmedButton } from '@a-type/ui/components/button';
 
 const membersQuery = graphql(`
@@ -46,15 +47,13 @@ export function MembersAndInvitations() {
           const isMe = member.id === data?.me?.id;
           return (
             <CardRoot key={member.id} className="h-full">
-              <CardMain>
-                <Avatar imageSrc={member.imageUrl ?? undefined} />
-                <div className="flex flex-col gap-2 items-start justify-start">
-                  <span>
-                    {member.name}
-                    {isMe && <span className="font-bold"> (you)</span>}
-                  </span>
-                  <span>{member.email}</span>
-                </div>
+              <CardMain className="justify-start">
+                <CardTitle className="flex-row mt-0">
+                  <Avatar imageSrc={member.imageUrl ?? undefined} />
+                  {member.name}
+                  {isMe && <span className="font-bold"> (you)</span>}
+                </CardTitle>
+                <span>{member.email}</span>
               </CardMain>
               {isAdmin && !isMe && (
                 <CardFooter>
@@ -87,7 +86,7 @@ export function MembersAndInvitations() {
       </CardGrid>
       {plan?.canInviteMore ? (
         <div className="py-4">
-          <H2>Invite someone</H2>
+          <H3>Invite someone</H3>
           <InviteMember />
         </div>
       ) : (

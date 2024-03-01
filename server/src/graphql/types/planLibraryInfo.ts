@@ -1,10 +1,12 @@
 import { ReplicaType } from '@verdant-web/server';
 import { builder } from '../builder.js';
 import { getLibraryName } from '@biscuits/libraries';
+import { BiscuitsError } from '@biscuits/error';
+import { Plan } from './plan.js';
 
 builder.mutationFields((t) => ({
   resetSync: t.field({
-    type: 'Boolean',
+    type: 'ResetSyncResult',
     authScopes: {
       productAdmin: true,
     },
@@ -13,13 +15,20 @@ builder.mutationFields((t) => ({
         type: 'String',
         required: true,
       }),
-      planId: t.arg.globalID({
-        required: true,
-      }),
+      planId: t.arg.globalID(),
     },
-    resolve: async (_, { app, planId: { id } }, ctx) => {
+    resolve: async (_, { app, planId }, ctx) => {
+      if (planId && !ctx.session?.isProductAdmin) {
+        throw new BiscuitsError(BiscuitsError.Code.Forbidden);
+      }
+      const id = planId?.id ?? ctx.session?.planId;
+      if (!id) {
+        throw new BiscuitsError(BiscuitsError.Code.BadRequest);
+      }
       ctx.verdant.evictLibrary(getLibraryName(id, app));
-      return true;
+      return {
+        planId: id,
+      };
     },
   }),
 }));
@@ -27,9 +36,19 @@ builder.mutationFields((t) => ({
 builder.objectType('PlanLibraryInfo', {
   description: 'Information about a Verdant library',
   fields: (t) => ({
+    id: t.exposeID('id'),
     replicas: t.field({
       type: ['PlanLibraryReplica'],
-      resolve: (library) => library.replicas,
+      args: {
+        includeTruant: t.arg.boolean(),
+      },
+      resolve: (library, args) => {
+        if (args.includeTruant) {
+          return library.replicas;
+        } else {
+          return library.replicas.filter((replica) => !replica.truant);
+        }
+      },
     }),
     latestServerOrder: t.exposeInt('latestServerOrder'),
     operationsCount: t.exposeInt('operationsCount'),
@@ -55,10 +74,35 @@ builder.objectType('PlanLibraryReplica', {
     truant: t.boolean({
       resolve: (replica) => !!replica.truant,
     }),
+    profile: t.field({
+      type: 'PlanLibraryReplicaProfile',
+      resolve: (replica) => replica.profile,
+    }),
     // TODO: profile - once it's decided what a Biscuits Profile type is.
   }),
 });
 
 builder.enumType(ReplicaType, {
   name: 'ReplicaType',
+});
+
+builder.objectType('PlanLibraryReplicaProfile', {
+  description: 'The profile that owns a replica',
+  fields: (t) => ({
+    id: t.exposeID('id'),
+    name: t.exposeString('name'),
+    imageUrl: t.exposeString('imageUrl', {
+      nullable: true,
+    }),
+  }),
+});
+
+builder.objectType('ResetSyncResult', {
+  description: 'Result of a reset sync operation',
+  fields: (t) => ({
+    plan: t.field({
+      type: Plan,
+      resolve: (result) => result.planId,
+    }),
+  }),
 });

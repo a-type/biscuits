@@ -374,6 +374,7 @@ Plan.implement({
       authScopes: {
         productAdmin: true,
       },
+      nullable: true,
       args: {
         app: t.arg({
           type: 'String',
@@ -381,8 +382,16 @@ Plan.implement({
           description: 'The app to get library info for',
         }),
       },
-      resolve: (plan, { app }, ctx) => {
-        return ctx.verdant.getLibraryInfo(getLibraryName(plan.id, app));
+      resolve: async (plan, { app }, ctx) => {
+        const libraryName = getLibraryName(plan.id, app);
+        const info = await ctx.verdant.getLibraryInfo(libraryName);
+        if (info.baselinesCount === 0 && info.operationsCount === 0) {
+          return null;
+        }
+        return {
+          id: libraryName,
+          ...info,
+        };
       },
     }),
     pendingInvitations: t.field({

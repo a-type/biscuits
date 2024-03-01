@@ -1,34 +1,17 @@
 import classNames from 'classnames';
-
-type AppDefinition = {
-  name: string;
-  description: string;
-  url: string;
-  image: string;
-  size: number;
-};
-
-const APPS: AppDefinition[] = [
-  {
-    name: 'Gnocchi',
-    description: "Maybe you're cooking every week and want to get organized",
-    url: 'https://gnocchi.club',
-    image: 'https://gnocchi.club/og-image.png',
-    size: 4,
-  },
-];
+import { AppManifest, apps } from '@biscuits/apps';
 
 export function AppsGrid() {
   return (
     <div className="grid grid-cols-6 [grid-template-rows:320px] gap-2">
-      {APPS.map((app) => (
+      {apps.map((app) => (
         <AppCard key={app.url} app={app} />
       ))}
     </div>
   );
 }
 
-function AppCard({ app }: { app: AppDefinition }) {
+function AppCard({ app }: { app: AppManifest }) {
   return (
     <a
       className={classNames(
@@ -47,7 +30,7 @@ function AppCard({ app }: { app: AppDefinition }) {
           'border-0 border-b border-solid border-black',
         )}
         style={{
-          backgroundImage: `url(${app.image})`,
+          backgroundImage: `url(${app.mainImageUrl})`,
         }}
       >
         <h2

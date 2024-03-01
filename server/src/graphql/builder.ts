@@ -5,6 +5,7 @@ import AuthPlugin from '@pothos/plugin-scope-auth';
 import { GQLContext } from './context.js';
 import { Plan, PlanInvitation, User } from '@biscuits/db';
 import { VerdantLibraryInfo } from '../verdant/verdant.js';
+import { BiscuitsVerdantProfile } from '@biscuits/libraries';
 
 export const builder = new SchemaBuilder<{
   Context: GQLContext;
@@ -12,8 +13,9 @@ export const builder = new SchemaBuilder<{
     User: User & { __typename: 'User' };
     Plan: Plan & { __typename: 'Plan' };
     PlanInvitation: PlanInvitation & { __typename: 'PlanInvitation' };
-    PlanLibraryInfo: VerdantLibraryInfo;
+    PlanLibraryInfo: VerdantLibraryInfo & { id: string };
     PlanLibraryReplica: VerdantLibraryInfo['replicas'][number];
+    PlanLibraryReplicaProfile: BiscuitsVerdantProfile;
     ClaimPlanInvitationResult: {
       userId: string;
       planId: string;
@@ -33,6 +35,7 @@ export const builder = new SchemaBuilder<{
     KickMemberResult: { planId: string };
     CreatePlanInvitationResult: { planId: string; planInvitationId: string };
     CancelPlanInvitationResult: { planId: string };
+    ResetSyncResult: { planId: string };
   };
   AuthScopes: {
     public: boolean;

@@ -1,6 +1,6 @@
 {
-  "name": "@biscuits/client",
-  "private": false,
+  "name": "@biscuits/apps",
+  "private": true,
   "version": "0.0.1",
   "exports": {
     ".": {
@@ -13,9 +13,6 @@
   },
   "scripts": {},
   "type": "module",
-  "dependencies": {
-    "@biscuits/error": "workspace:*",
-    "@biscuits/libraries": "workspace:*"
-  },
+  "dependencies": {},
   "devDependencies": {}
 }

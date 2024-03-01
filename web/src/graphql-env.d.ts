@@ -290,8 +290,8 @@ export type introspection = {
             "type": {
               "kind": "NON_NULL",
               "ofType": {
-                "kind": "SCALAR",
-                "name": "Boolean",
+                "kind": "OBJECT",
+                "name": "ResetSyncResult",
                 "ofType": null
               }
             },
@@ -310,12 +310,9 @@ export type introspection = {
               {
                 "name": "planId",
                 "type": {
-                  "kind": "NON_NULL",
-                  "ofType": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
-                  }
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
                 }
               }
             ]
@@ -382,10 +379,6 @@ export type introspection = {
       {
         "kind": "SCALAR",
         "name": "ID"
-      },
-      {
-        "kind": "SCALAR",
-        "name": "Boolean"
       },
       {
         "kind": "INTERFACE",
@@ -470,6 +463,10 @@ export type introspection = {
         "interfaces": []
       },
       {
+        "kind": "SCALAR",
+        "name": "Boolean"
+      },
+      {
         "kind": "OBJECT",
         "name": "Plan",
         "fields": [
@@ -509,12 +506,9 @@ export type introspection = {
           {
             "name": "libraryInfo",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "OBJECT",
-                "name": "PlanLibraryInfo",
-                "ofType": null
-              }
+              "kind": "OBJECT",
+              "name": "PlanLibraryInfo",
+              "ofType": null
             },
             "args": [
               {
@@ -687,6 +681,18 @@ export type introspection = {
             "args": []
           },
           {
+            "name": "id",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
             "name": "latestServerOrder",
             "type": {
               "kind": "NON_NULL",
@@ -726,7 +732,16 @@ export type introspection = {
                 }
               }
             },
-            "args": []
+            "args": [
+              {
+                "name": "includeTruant",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              }
+            ]
           }
         ],
         "interfaces": []
@@ -773,6 +788,18 @@ export type introspection = {
             "args": []
           },
           {
+            "name": "profile",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "PlanLibraryReplicaProfile",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
             "name": "truant",
             "type": {
               "kind": "NON_NULL",
@@ -791,6 +818,46 @@ export type introspection = {
               "ofType": {
                 "kind": "ENUM",
                 "name": "ReplicaType",
+                "ofType": null
+              }
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "PlanLibraryReplicaProfile",
+        "fields": [
+          {
+            "name": "id",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "imageUrl",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "name",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
                 "ofType": null
               }
             },
@@ -1111,6 +1178,25 @@ export type introspection = {
             "name": "Realtime"
           }
         ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "ResetSyncResult",
+        "fields": [
+          {
+            "name": "plan",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "Plan",
+                "ofType": null
+              }
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
       },
       {
         "kind": "INPUT_OBJECT",

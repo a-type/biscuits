@@ -14,6 +14,7 @@ import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
 import { API_HOST_HTTP } from '@/config';
 import { MembersAndInvitations } from '@/components/plan/MembersAndInvitations';
+import { VerdantLibraries } from '@/components/storage/VerdantLibraries';
 
 const PlanPageData = graphql(`
   query PlanPageData {
@@ -67,6 +68,12 @@ export function PlanPage({}: PlanPageProps) {
             <div className="flex flex-col gap-3">
               <H2>Members</H2>
               <MembersAndInvitations />
+            </div>
+          )}
+          {!!data?.plan && (
+            <div className="flex flex-col gap-3">
+              <H2>App data</H2>
+              <VerdantLibraries />
             </div>
           )}
         </Suspense>
