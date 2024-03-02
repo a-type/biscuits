@@ -21,12 +21,13 @@
   },
   "scripts": {
     "build": "tsc",
-    "//dev": "tsc -w"
+    "//dev": "tsc -w",
+    "migrate-down": "cross-env DATABASE_FILE=../../server/database.sqlite node ./scripts/migrateDown.mjs"
   },
   "type": "module",
   "dependencies": {
+    "@a-type/kysely": "^1.0.1",
     "@a-type/utils": "^1.0.5",
-    "@a-type/kysely": "^1.0.0",
     "@paralleldrive/cuid2": "^2.2.2",
     "bcrypt": "^5.1.1",
     "better-sqlite3": "^9.1.1",
@@ -36,6 +37,7 @@
   "devDependencies": {
     "@types/bcrypt": "^5.0.2",
     "@types/better-sqlite3": "^7.6.8",
+    "cross-env": "^7.0.3",
     "tsx": "^4.6.2"
   }
 }

@@ -3,7 +3,7 @@ import { intro, outro, text } from '@clack/prompts';
 import * as path from 'path';
 import * as fs from 'fs/promises';
 import { format } from 'prettier';
-import { URL } from 'url';
+import { URL, fileURLToPath } from 'url';
 
 intro('Create a new migration');
 
@@ -16,7 +16,7 @@ if (isCancel(res)) {
   process.exit(0);
 }
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname);
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // read current version
 const migrationsDir = path.resolve(

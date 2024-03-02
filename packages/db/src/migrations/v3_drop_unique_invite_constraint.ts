@@ -4,7 +4,7 @@ import { Kysely } from 'kysely';
 
 export async function up(db: Kysely<any>) {
   // so that the dev server doesn't immediately apply a no-op.
-  await db.schema.dropIndex('PlanInvitation_planId_email').execute();
+  await db.schema.dropIndex('PlanInvitation_planId_email').ifExists().execute();
 }
 
 export async function down(db: Kysely<any>) {

@@ -13,9 +13,8 @@ export interface Database {
   PlanInvitation: PlanInvitationTable;
   ActivityLog: ActivityLogTable;
   VerificationCode: VerificationCodeTable;
-  // TODO:
-  // pushSubscription: PushSubscriptionTable;
-  // changelogItem: ChangelogItemTable;
+  PushSubscription: PushSubscriptionTable;
+  ChangelogItem: ChangelogItemTable;
 }
 
 export interface UserTable {
@@ -148,3 +147,32 @@ export interface ActivityLogTable {
 export type ActivityLog = Selectable<ActivityLogTable>;
 export type NewActivityLog = Insertable<ActivityLogTable>;
 export type ActivityLogUpdate = Updateable<ActivityLogTable>;
+
+export interface PushSubscriptionTable {
+  endpoint: string;
+  createdAt: ColumnType<Date, Date | undefined, never>;
+  updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
+
+  auth: string | null;
+  p256dh: string | null;
+  userId: string | null;
+}
+
+export type PushSubscription = Selectable<PushSubscriptionTable>;
+export type NewPushSubscription = Insertable<PushSubscriptionTable>;
+export type PushSubscriptionUpdate = Updateable<PushSubscriptionTable>;
+
+export interface ChangelogItemTable {
+  id: string;
+  createdAt: ColumnType<Date, Date | undefined, never>;
+  updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
+
+  title: string;
+  details: string;
+  imageUrl: string | null;
+  important: boolean;
+}
+
+export type ChangelogItem = Selectable<ChangelogItemTable>;
+export type NewChangelogItem = Insertable<ChangelogItemTable>;
+export type ChangelogItemUpdate = Updateable<ChangelogItemTable>;

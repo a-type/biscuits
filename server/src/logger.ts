@@ -1,4 +1,4 @@
-class Logger {
+export class Logger {
   constructor(private tag: string) {}
 
   info(...args: any[]) {
@@ -15,6 +15,10 @@ class Logger {
 
   fatal(...args: any[]) {
     console.error(`[${this.tag}]`, '<<FATAL>>', ...args);
+  }
+
+  debug(...args: any[]) {
+    console.debug(`[${this.tag}]`, ...args);
   }
 }
 

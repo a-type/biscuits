@@ -4,6 +4,7 @@ import { assert } from '@a-type/utils';
 import { S3FileStorage } from '@verdant-web/s3-file-storage';
 import { db, userNameSelector } from '@biscuits/db';
 import { BiscuitsVerdantProfile } from '@biscuits/libraries';
+import { Logger } from '../logger.js';
 
 const STORAGE_DATABASE_FILE = process.env.STORAGE_DATABASE_FILE;
 assert(
@@ -38,12 +39,13 @@ class Profiles implements UserProfiles<BiscuitsVerdantProfile> {
   };
 }
 
+const logger = new Logger('🌿');
 export const verdantServer = new Server({
   databaseFile: STORAGE_DATABASE_FILE!,
   tokenSecret: VERDANT_SECRET!,
   profiles: new Profiles(),
   replicaTruancyMinutes: 14 * 60 * 24,
-  log: console.debug,
+  log: logger.debug.bind(logger),
   fileStorage:
     process.env.NODE_ENV === 'production'
       ? new S3FileStorage({

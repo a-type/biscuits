@@ -3,7 +3,7 @@ import RelayPlugin from '@pothos/plugin-relay';
 import DataloaderPlugin from '@pothos/plugin-dataloader';
 import AuthPlugin from '@pothos/plugin-scope-auth';
 import { GQLContext } from './context.js';
-import { Plan, PlanInvitation, User } from '@biscuits/db';
+import { ChangelogItem, Plan, PlanInvitation, User } from '@biscuits/db';
 import { VerdantLibraryInfo } from '../verdant/verdant.js';
 import { BiscuitsVerdantProfile } from '@biscuits/libraries';
 
@@ -36,12 +36,14 @@ export const builder = new SchemaBuilder<{
     CreatePlanInvitationResult: { planId: string; planInvitationId: string };
     CancelPlanInvitationResult: { planId: string };
     ResetSyncResult: { planId: string };
+    ChangelogItem: ChangelogItem & { __typename: 'ChangelogItem' };
   };
   AuthScopes: {
     public: boolean;
     user: boolean;
     planAdmin: boolean;
     productAdmin: boolean;
+    member: boolean;
   };
   Scalars: {
     DateTime: {
@@ -60,6 +62,17 @@ export const builder = new SchemaBuilder<{
     CreatePlanInvitationInput: {
       email: string;
     };
+    CreatePushSubscriptionInput: {
+      endpoint: string;
+      p256dh: string;
+      auth: string;
+    };
+    CreateChangelogItemInput: {
+      title: string;
+      details: string;
+      imageUrl?: string | null;
+      important?: boolean | null;
+    };
   };
 }>({
   plugins: [RelayPlugin, DataloaderPlugin, AuthPlugin],
@@ -67,6 +80,7 @@ export const builder = new SchemaBuilder<{
   authScopes: async (context) => ({
     public: true,
     user: !!context.session,
+    member: !!context.session?.planId,
     planAdmin: context.session?.role === 'admin',
     productAdmin: !!context.session?.isProductAdmin,
   }),
