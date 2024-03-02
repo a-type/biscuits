@@ -271,6 +271,17 @@ export type introspection = {
         "name": "CreatePushSubscriptionInput",
         "inputFields": [
           {
+            "name": "appId",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            }
+          },
+          {
             "name": "auth",
             "type": {
               "kind": "NON_NULL",

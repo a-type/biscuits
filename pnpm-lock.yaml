@@ -84,6 +84,9 @@ importers:
       '@a-type/utils':
         specifier: ^1.0.5
         version: 1.0.5
+      '@biscuits/apps':
+        specifier: workspace:*
+        version: link:../packages/apps
       '@biscuits/db':
         specifier: workspace:*
         version: link:../packages/db
@@ -108,6 +111,9 @@ importers:
       '@trpc/server':
         specifier: ^10.44.1
         version: 10.44.1
+      '@verdant-web/common':
+        specifier: ^2.2.0
+        version: 2.2.0
       '@verdant-web/s3-file-storage':
         specifier: ^1.0.14
         version: 1.0.14
@@ -166,6 +172,9 @@ importers:
       '@types/node':
         specifier: 20.11.19
         version: 20.11.19
+      '@types/web-push':
+        specifier: ^3.6.3
+        version: 3.6.3
       dotenv-cli:
         specifier: ^7.3.0
         version: 7.3.0
@@ -4806,6 +4815,12 @@ packages:
   /@types/throttle-debounce@2.1.0:
     resolution: {integrity: sha512-5eQEtSCoESnh2FsiLTxE121IiE60hnMqcb435fShf4bpLRjEu1Eoekht23y6zXS9Ts3l+Szu3TARnTsA0GkOkQ==}
     dev: false
+
+  /@types/web-push@3.6.3:
+    resolution: {integrity: sha512-v3oT4mMJsHeJ/rraliZ+7TbZtr5bQQuxcgD7C3/1q/zkAj29c8RE0F9lVZVu3hiQe5Z9fYcBreV7TLnfKR+4mg==}
+    dependencies:
+      '@types/node': 20.11.19
+    dev: true
 
   /@types/webxr@0.5.10:
     resolution: {integrity: sha512-n3u5sqXQJhf1CS68mw3Wf16FQ4cRPNBBwdYLFzq3UddiADOim1Pn3Y6PBdDilz1vOJF3ybLxJ8ZEDlLIzrOQZg==}

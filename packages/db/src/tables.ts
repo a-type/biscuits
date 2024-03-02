@@ -153,6 +153,7 @@ export interface PushSubscriptionTable {
   createdAt: ColumnType<Date, Date | undefined, never>;
   updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
 
+  appId: string;
   auth: string | null;
   p256dh: string | null;
   userId: string | null;

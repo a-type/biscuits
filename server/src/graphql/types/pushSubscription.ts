@@ -1,4 +1,6 @@
+import { isValidAppId } from '@biscuits/apps';
 import { builder } from '../builder.js';
+import { BiscuitsError } from '@biscuits/error';
 
 builder.mutationFields((t) => ({
   createPushSubscription: t.field({
@@ -14,7 +16,10 @@ builder.mutationFields((t) => ({
     },
     resolve: async (parent, { input }, { db, session }) => {
       if (!session) {
-        throw new Error('Not authenticated');
+        throw new BiscuitsError(BiscuitsError.Code.NotLoggedIn);
+      }
+      if (!isValidAppId(input.appId)) {
+        throw new BiscuitsError(BiscuitsError.Code.UnrecognizedApp);
       }
 
       await db
@@ -24,6 +29,7 @@ builder.mutationFields((t) => ({
           auth: input.auth,
           p256dh: input.p256dh,
           userId: session.userId,
+          appId: input.appId,
         })
         .onConflict((cb) =>
           cb.column('endpoint').doUpdateSet({
@@ -51,7 +57,7 @@ builder.mutationFields((t) => ({
     },
     resolve: async (parent, { endpoint }, { db, session }) => {
       if (!session) {
-        throw new Error('Not authenticated');
+        throw new BiscuitsError(BiscuitsError.Code.NotLoggedIn);
       }
 
       await db
@@ -67,6 +73,7 @@ builder.mutationFields((t) => ({
 
 builder.inputType('CreatePushSubscriptionInput', {
   fields: (t) => ({
+    appId: t.string({ required: true }),
     endpoint: t.string({ required: true }),
     auth: t.string({ required: true }),
     p256dh: t.string({ required: true }),

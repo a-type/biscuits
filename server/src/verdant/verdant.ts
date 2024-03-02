@@ -5,6 +5,7 @@ import { S3FileStorage } from '@verdant-web/s3-file-storage';
 import { db, userNameSelector } from '@biscuits/db';
 import { BiscuitsVerdantProfile } from '@biscuits/libraries';
 import { Logger } from '../logger.js';
+import { changeListener } from './changeHander.js';
 
 const STORAGE_DATABASE_FILE = process.env.STORAGE_DATABASE_FILE;
 assert(
@@ -62,6 +63,7 @@ export const verdantServer = new Server({
 });
 
 verdantServer.on('error', console.error);
+verdantServer.on('changes', changeListener.update);
 
 // TODO: expose named types in Verdant for...
 export type VerdantLibraryInfo = Awaited<ReturnType<Server['getLibraryInfo']>>;

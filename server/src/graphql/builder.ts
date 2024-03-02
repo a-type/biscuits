@@ -66,6 +66,7 @@ export const builder = new SchemaBuilder<{
       endpoint: string;
       p256dh: string;
       auth: string;
+      appId: string;
     };
     CreateChangelogItemInput: {
       title: string;

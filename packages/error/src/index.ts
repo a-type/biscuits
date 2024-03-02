@@ -1,5 +1,6 @@
 export enum BiscuitsErrorCode {
   BadRequest = 4000,
+  UnrecognizedApp = 4001,
   Unauthorized = 4010,
   NotLoggedIn = 4011,
   SessionExpired = 4012,
