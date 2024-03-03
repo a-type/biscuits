@@ -33,6 +33,7 @@ export const fetch: typeof window.fetch = async (input: any, init: any) => {
   const { body, clone } = await peekAtResponseBody(response);
   const biscuitsError = BiscuitsError.readResponseBody(body);
   if (biscuitsError) {
+    console.error('Biscuits Error', biscuitsError);
     if (biscuitsError.code === BiscuitsError.Code.SessionExpired) {
       // if the session expired, we need to refresh it
       const refreshSuccess = await refreshSession(requestUrlOrigin);

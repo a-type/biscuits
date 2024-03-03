@@ -13,6 +13,7 @@ import { stripeRouter } from './routers/stripe.js';
 import { graphqlRouter } from './routers/graphql.js';
 import { writeSchema } from './tasks/writeSchema.js';
 import { AuthError } from '@a-type/auth';
+import { appsRouter } from './routers/apps.js';
 
 console.log('Starting server...');
 
@@ -29,6 +30,7 @@ const logger = (req: IRequest) => {
 
 router
   .all('*', logger, preflight)
+  .all('*', appsRouter.handle)
   .get('/', () => 'Success!')
   .all('/auth/*', authRouter.handle)
   .all('/verdant/*', verdantRouter.handle)

@@ -10,6 +10,7 @@ import {
 import { retryExchange } from '@urql/exchange-retry';
 import { initGraphQLTada } from 'gql.tada';
 import type { introspection } from './graphql-env.d.js';
+import { fetch } from './fetch.js';
 
 export const graphql = initGraphQLTada<{
   introspection: introspection;

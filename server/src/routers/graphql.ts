@@ -48,7 +48,10 @@ async function handleGraphQLRequest(request: Request) {
     // if session expired, we need to tell the client to refresh it
     if (e instanceof AuthError) {
       if (e.message === 'Session expired') {
-        throw new BiscuitsError(BiscuitsError.Code.SessionExpired);
+        throw new BiscuitsError(
+          BiscuitsError.Code.SessionExpired,
+          'Session expired',
+        );
       }
     }
     throw e;
