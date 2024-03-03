@@ -1,7 +1,7 @@
 import { Button } from '@a-type/ui/components/button';
 import { Link } from '@verdant-web/react-router';
 import classNames from 'classnames';
-import { graphql } from '@/graphql';
+import { graphql } from '@/graphql.js';
 import { useQuery } from 'urql';
 
 export interface UserMenuProps {

@@ -1,4 +1,4 @@
-import { API_HOST_HTTP } from '@/config';
+import { API_HOST_HTTP } from '@/config.js';
 import { Button } from '@a-type/ui/components/button';
 import { Input } from '@a-type/ui/components/input';
 

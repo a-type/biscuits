@@ -1,6 +1,6 @@
 export { graphql, type FragmentOf } from '@biscuits/client';
 import { createGraphQLClient } from '@biscuits/client';
-import { API_HOST_HTTP } from './config';
+import { API_HOST_HTTP } from './config.js';
 import toast from 'react-hot-toast';
 
 export const client = createGraphQLClient({

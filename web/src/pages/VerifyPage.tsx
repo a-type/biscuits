@@ -1,4 +1,4 @@
-import { EmailCompleteSignupForm } from '@/components/auth/EmailCompleteSignupForm';
+import { EmailCompleteSignupForm } from '@/components/auth/EmailCompleteSignupForm.jsx';
 import { PageContent, PageRoot } from '@a-type/ui/components/layouts';
 import { H1, P } from '@a-type/ui/components/typography';
 import { useNavigate, useSearchParams } from '@verdant-web/react-router';

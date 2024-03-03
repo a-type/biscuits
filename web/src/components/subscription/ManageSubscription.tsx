@@ -1,11 +1,11 @@
-import { API_HOST_HTTP } from '@/config';
-import { FragmentOf, graphql, readFragment } from '@/graphql';
+import { API_HOST_HTTP } from '@/config.js';
+import { FragmentOf, graphql, readFragment } from '@/graphql.js';
 import { Button } from '@a-type/ui/components/button';
 import { useSearchParams } from '@verdant-web/react-router';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
-import { PlanInfo, planProductInfo } from './PlanInfo';
-import { CancelPlanButton } from './CancelPlanButton';
+import { PlanInfo, planProductInfo } from './PlanInfo.js';
+import { CancelPlanButton } from './CancelPlanButton.js';
 import classNames from 'classnames';
 import { useQuery } from 'urql';
 import { Icon } from '@a-type/ui/components/icon';

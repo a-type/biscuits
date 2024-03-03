@@ -1,5 +1,5 @@
 import { AppsGrid } from '@/components/AppsGrid.jsx';
-import { UserMenu } from '@/components/auth/UserMenu';
+import { UserMenu } from '@/components/auth/UserMenu.js';
 import {
   PageContent,
   PageFixedArea,

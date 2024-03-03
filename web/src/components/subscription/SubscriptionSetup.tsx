@@ -1,12 +1,12 @@
-import { graphql } from '@/graphql';
+import { graphql } from '@/graphql.js';
 import { Spinner } from '@a-type/ui/components/spinner';
 import { useQuery } from 'urql';
 import {
   ManageSubscription,
   manageSubscriptionInfo,
-} from './ManageSubscription';
-import { checkoutData, SubscriptionCheckout } from './SubscriptionCheckout';
-import { SubscriptionSelect } from './SubscriptionSelect';
+} from './ManageSubscription.js';
+import { checkoutData, SubscriptionCheckout } from './SubscriptionCheckout.js';
+import { SubscriptionSelect } from './SubscriptionSelect.js';
 import { useSearchParams } from '@verdant-web/react-router';
 import { useEffect } from 'react';
 

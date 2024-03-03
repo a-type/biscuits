@@ -8,8 +8,8 @@ import {
   CardTitle,
 } from '@a-type/ui/components/card';
 import { useMutation, useQuery } from 'urql';
-import { InviteMember } from './InviteMember';
-import { graphql } from '@/graphql';
+import { InviteMember } from './InviteMember.js';
+import { graphql } from '@/graphql.js';
 import { H2, H3 } from '@a-type/ui/components/typography';
 import { ConfirmedButton } from '@a-type/ui/components/button';
 

@@ -1,5 +1,5 @@
 import { Button, ButtonProps } from '@a-type/ui/components/button';
-import { API_HOST_HTTP } from '@/config';
+import { API_HOST_HTTP } from '@/config.js';
 import { ReactNode } from 'react';
 
 export function OAuthSignInButton({

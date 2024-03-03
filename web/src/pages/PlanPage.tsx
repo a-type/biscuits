@@ -1,4 +1,4 @@
-import { SubscriptionSetup } from '@/components/subscription/SubscriptionSetup';
+import { SubscriptionSetup } from '@/components/subscription/SubscriptionSetup.jsx';
 import { graphql } from '@/graphql';
 import {
   PageContent,
@@ -12,9 +12,9 @@ import { Suspense, useEffect } from 'react';
 import { useQuery } from 'urql';
 import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
-import { API_HOST_HTTP } from '@/config';
-import { MembersAndInvitations } from '@/components/plan/MembersAndInvitations';
-import { VerdantLibraries } from '@/components/storage/VerdantLibraries';
+import { API_HOST_HTTP } from '@/config.js';
+import { MembersAndInvitations } from '@/components/plan/MembersAndInvitations.jsx';
+import { VerdantLibraries } from '@/components/storage/VerdantLibraries.jsx';
 
 const PlanPageData = graphql(`
   query PlanPageData {

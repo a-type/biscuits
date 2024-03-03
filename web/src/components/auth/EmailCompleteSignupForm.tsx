@@ -1,6 +1,6 @@
 import { Input } from '@a-type/ui/components/input';
 import { Button } from '@a-type/ui/components/button';
-import { API_HOST_HTTP } from '@/config';
+import { API_HOST_HTTP } from '@/config.js';
 
 export interface EmailCompleteSignUpFormProps {
   code: string;

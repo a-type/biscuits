@@ -1,10 +1,10 @@
-import { graphql } from '@/graphql';
+import { graphql } from '@/graphql.js';
 import {
   FormikForm,
   SubmitButton,
   TextField,
 } from '@a-type/ui/components/forms';
-import toast from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import { useMutation } from 'urql';
 
 const invite = graphql(`

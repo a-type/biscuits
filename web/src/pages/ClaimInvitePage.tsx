@@ -1,4 +1,4 @@
-import { graphql } from '@/graphql';
+import { graphql } from '@/graphql.js';
 import { useNavigate, useParams } from '@verdant-web/react-router';
 import { useEffect } from 'react';
 import { useMutation, useQuery } from 'urql';

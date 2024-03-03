@@ -17,7 +17,13 @@
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "isolatedModules": true,
-    "customConditions": ["development"]
+    "customConditions": ["development"],
+    "plugins": [
+      {
+        "name": "@0no-co/graphqlsp",
+        "schema": "./server/schema.graphql"
+      }
+    ]
   },
   "exclude": ["node_modules", "**/*/dist"]
 }

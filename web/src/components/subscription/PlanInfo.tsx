@@ -1,5 +1,5 @@
-import { FragmentOf, graphql, readFragment } from '@/graphql';
-import { Price } from './Price';
+import { FragmentOf, graphql, readFragment } from '@/graphql.js';
+import { Price } from './Price.js';
 import { H2, H3, P } from '@a-type/ui/components/typography';
 
 export const planProductInfo = graphql(`

@@ -1,5 +1,5 @@
 import { Button, ButtonProps } from '@a-type/ui/components/button';
-import { API_HOST_HTTP, SECURE } from '@/config';
+import { API_HOST_HTTP, SECURE } from '@/config.js';
 
 export function LogoutButton({ children, ...rest }: ButtonProps) {
   return (

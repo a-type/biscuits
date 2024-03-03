@@ -1,4 +1,4 @@
-import { EmailSignInForm } from '@/components/auth/EmailSignInForm';
+import { EmailSignInForm } from '@/components/auth/EmailSignInForm.jsx';
 import { EmailSignUpForm } from '@/components/auth/EmailSignupForm.jsx';
 import { OAuthSignInButton } from '@/components/auth/OAuthSignInButton.jsx';
 import { PageContent, PageRoot } from '@a-type/ui/components/layouts';

@@ -1,4 +1,4 @@
-import { graphql } from '@/graphql';
+import { graphql } from '@/graphql.js';
 import { Avatar, AvatarList } from '@a-type/ui/components/avatar';
 import { ConfirmedButton } from '@a-type/ui/components/button';
 import {
@@ -9,7 +9,7 @@ import {
   CardRoot,
   CardTitle,
 } from '@a-type/ui/components/card';
-import { AppManifest, apps } from '@biscuits/apps';
+import { AppId, AppManifest, apps } from '@biscuits/apps';
 import { useMutation, useQuery } from 'urql';
 
 const libraryFragment = graphql(`
@@ -64,7 +64,7 @@ export function VerdantLibraries() {
   );
 }
 
-function VerdantLibrary({ app }: { app: AppManifest }) {
+function VerdantLibrary({ app }: { app: AppManifest<AppId> }) {
   const [data] = useQuery({ query: libraryData, variables: { appId: app.id } });
   const [_, doReset] = useMutation(resetSync);
 

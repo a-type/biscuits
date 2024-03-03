@@ -1,4 +1,4 @@
-import { graphql } from '@/graphql';
+import { graphql } from '@/graphql.js';
 import { ConfirmedButton } from '@a-type/ui/components/button';
 import { useNavigate } from '@verdant-web/react-router';
 import { useMutation } from 'urql';

@@ -1,5 +1,5 @@
-import { FragmentOf, graphql, readFragment } from '@/graphql';
-import { stripe } from '@/stripe';
+import { FragmentOf, graphql, readFragment } from '@/graphql.js';
+import { stripe } from '@/stripe.js';
 import { Button } from '@a-type/ui/components/button';
 import { H2 } from '@a-type/ui/components/typography';
 import {

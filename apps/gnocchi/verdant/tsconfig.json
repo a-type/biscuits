@@ -5,13 +5,7 @@
     "outDir": "./dist/esm",
     "rootDir": "./src",
     "allowJs": true,
-    "lib": ["es2021", "dom"],
-    "plugins": [
-      {
-        "name": "@0no-co/graphqlsp",
-        "schema": "../../../server/schema.graphql"
-      }
-    ]
+    "lib": ["es2021", "dom"]
   },
   "include": ["**/*.ts", "**/*.mts"]
 }
