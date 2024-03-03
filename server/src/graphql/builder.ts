@@ -3,7 +3,14 @@ import RelayPlugin from '@pothos/plugin-relay';
 import DataloaderPlugin from '@pothos/plugin-dataloader';
 import AuthPlugin from '@pothos/plugin-scope-auth';
 import { GQLContext } from './context.js';
-import { ChangelogItem, Plan, PlanInvitation, User } from '@biscuits/db';
+import {
+  ChangelogItem,
+  Food,
+  FoodCategory,
+  Plan,
+  PlanInvitation,
+  User,
+} from '@biscuits/db';
 import { VerdantLibraryInfo } from '../verdant/verdant.js';
 import { BiscuitsVerdantProfile } from '@biscuits/libraries';
 
@@ -37,6 +44,14 @@ export const builder = new SchemaBuilder<{
     CancelPlanInvitationResult: { planId: string };
     ResetSyncResult: { planId: string };
     ChangelogItem: ChangelogItem & { __typename: 'ChangelogItem' };
+
+    // Gnocchi
+    Food: Food & { __typename: 'Food' };
+    FoodCategory: FoodCategory & { __typename: 'FoodCategory' };
+    AssignFoodCategoryResult: { foodId: string };
+    CreateCategoryResult: { categoryId: string };
+    UpdateCategoryResult: { categoryId: string };
+    DeleteCategoryResult: { categoryId: string };
   };
   AuthScopes: {
     public: boolean;
@@ -73,6 +88,21 @@ export const builder = new SchemaBuilder<{
       details: string;
       imageUrl?: string | null;
       important?: boolean | null;
+    };
+
+    // Gnocchi
+    AssignFoodCategoryInput: {
+      foodName: string;
+      categoryId: string | number;
+    };
+    CreateCategoryInput: {
+      name: string;
+      sortKey: string;
+    };
+    UpdateCategoryInput: {
+      id: string | number;
+      name: string | null;
+      sortKey: string | null;
     };
   };
 }>({

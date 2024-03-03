@@ -15,6 +15,10 @@ export interface Database {
   VerificationCode: VerificationCodeTable;
   PushSubscription: PushSubscriptionTable;
   ChangelogItem: ChangelogItemTable;
+  Food: FoodTable;
+  FoodName: FoodNameTable;
+  FoodCategoryAssignment: FoodCategoryAssignmentTable;
+  FoodCategory: FoodCategoryTable;
 }
 
 export interface UserTable {
@@ -177,3 +181,52 @@ export interface ChangelogItemTable {
 export type ChangelogItem = Selectable<ChangelogItemTable>;
 export type NewChangelogItem = Insertable<ChangelogItemTable>;
 export type ChangelogItemUpdate = Updateable<ChangelogItemTable>;
+
+export interface FoodTable {
+  id: string;
+  createdAt: ColumnType<Date, Date | undefined, never>;
+  updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
+
+  canonicalName: string;
+}
+
+export type Food = Selectable<FoodTable>;
+export type NewFood = Insertable<FoodTable>;
+export type FoodUpdate = Updateable<FoodTable>;
+
+export interface FoodNameTable {
+  id: string;
+  createdAt: ColumnType<Date, Date | undefined, never>;
+  updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
+
+  name: string;
+  foodId: string;
+}
+
+export type FoodName = Selectable<FoodNameTable>;
+export type NewFoodName = Insertable<FoodNameTable>;
+export type FoodNameUpdate = Updateable<FoodNameTable>;
+
+export interface FoodCategoryAssignmentTable {
+  foodId: string;
+  categoryId: string;
+  votes: number;
+}
+
+export type FoodCategoryAssignment = Selectable<FoodCategoryAssignmentTable>;
+export type NewFoodCategoryAssignment = Insertable<FoodCategoryAssignmentTable>;
+export type FoodCategoryAssignmentUpdate =
+  Updateable<FoodCategoryAssignmentTable>;
+
+export interface FoodCategoryTable {
+  id: string;
+  createdAt: ColumnType<Date, Date | undefined, never>;
+  updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
+
+  name: string;
+  sortKey: string;
+}
+
+export type FoodCategory = Selectable<FoodCategoryTable>;
+export type NewFoodCategory = Insertable<FoodCategoryTable>;
+export type FoodCategoryUpdate = Updateable<FoodCategoryTable>;

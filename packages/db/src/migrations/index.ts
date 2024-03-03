@@ -6,4 +6,6 @@ import * as v3 from "./v3_drop_unique_invite_constraint.js";
 import * as v4 from "./v4_push_notifications_and_changelog.js";
 
 import * as v5 from "./v5_push_app_id.js";
-export default { v1, v2, v3, v4, v5 };
+
+import * as v6 from "./v6_foods.js";
+export default { v1, v2, v3, v4, v5, v6 };

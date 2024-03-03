@@ -1,0 +1,28 @@
+{
+  "name": "@gnocchi.biscuits/conversion",
+  "version": "0.0.1",
+  "private": true,
+  "exports": {
+    ".": {
+      "production": "./dist/esm/index.js",
+      "development": "./src/index.ts",
+      "import": "./dist/esm/index.js",
+      "node": "./dist/esm/index.js",
+      "default": "./dist/esm/index.js"
+    }
+  },
+  "type": "module",
+  "scripts": {
+    "test": "vitest",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "convert-units": "3.0.0-beta.5",
+    "parse-fraction": "^1.2.1",
+    "pluralize": "^8.0.0"
+  },
+  "devDependencies": {
+    "@types/pluralize": "^0.0.29",
+    "vitest": "^0.22.1"
+  }
+}

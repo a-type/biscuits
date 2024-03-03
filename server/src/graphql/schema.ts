@@ -8,6 +8,8 @@ import './types/productInfo.js';
 import './types/pushSubscription.js';
 import './types/changelog.js';
 
+import './types/gnocchi/index.js';
+
 builder.queryType({});
 builder.mutationType({});
 

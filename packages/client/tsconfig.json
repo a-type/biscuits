@@ -2,7 +2,14 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "outDir": "./dist",
-    "rootDir": "./src"
+    "rootDir": "./src",
+    "plugins": [
+      {
+        "name": "@0no-co/graphqlsp",
+        "schema": "../../server/schema.graphql",
+        "tadaOutputLocation": "./src/graphql-env.d.ts"
+      }
+    ]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.mts", "./typings"]
 }

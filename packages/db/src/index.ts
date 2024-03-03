@@ -36,6 +36,7 @@ export {
   dateTime,
   compareDates,
 } from '@a-type/kysely';
+export { sql } from 'kysely';
 
 export function migrateToLatest() {
   return migrateInternal(db, migrations);
