@@ -1,0 +1,21 @@
+{
+  "name": "@trip-tick.biscuits/verdant",
+  "version": "0.0.1",
+  "private": true,
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "generate": "verdant -s ./src/schema.ts -o ./src/client -r",
+    "preflight": "verdant preflight -s ./src/schema.ts -o ./src/client"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "dependencies": {
+    "@verdant-web/cli": "^4.1.0",
+    "@verdant-web/common": "^1.16.1",
+    "@verdant-web/react": "^24.0.1",
+    "@verdant-web/store": "^2.8.4",
+    "cuid": "^2.1.8"
+  }
+}

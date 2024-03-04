@@ -1,17 +1,25 @@
 import classNames from 'classnames';
-import { AppManifest, apps } from '@biscuits/apps';
+import { AppId, AppManifest, apps } from '@biscuits/apps';
 
 export function AppsGrid() {
   return (
     <div className="grid grid-cols-6 [grid-template-rows:320px] gap-2">
       {apps.map((app) => (
-        <AppCard key={app.url} app={app} />
+        <AppCard key={app.id} app={app} />
       ))}
     </div>
   );
 }
 
-function AppCard({ app }: { app: AppManifest }) {
+const DEV_URL_OVERRIDES: Record<AppId, string> = {
+  gnocchi: 'http://localhost:6220',
+  'trip-tick': 'http://localhost:6221',
+};
+
+function AppCard({ app }: { app: AppManifest<AppId> }) {
+  const url = import.meta.env.DEV
+    ? DEV_URL_OVERRIDES[app.id]
+    : `https://${app.id}.${window.location.host}`;
   return (
     <a
       className={classNames(
@@ -22,7 +30,7 @@ function AppCard({ app }: { app: AppManifest }) {
       style={{
         gridColumn: `span ${app.size}`,
       }}
-      href={app.url}
+      href={url}
     >
       <div
         className={classNames(
@@ -30,7 +38,9 @@ function AppCard({ app }: { app: AppManifest }) {
           'border-0 border-b border-solid border-black',
         )}
         style={{
-          backgroundImage: `url(${app.mainImageUrl})`,
+          backgroundImage: app.mainImageUrl
+            ? `url(${app.mainImageUrl})`
+            : 'none',
         }}
       >
         <h2

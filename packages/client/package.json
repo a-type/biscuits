@@ -9,6 +9,13 @@
       "import": "./dist/index.js",
       "node": "./dist/index.js",
       "default": "./dist/index.js"
+    },
+    "./serviceWorkers": {
+      "production": "./dist/serviceWorkers.js",
+      "development": "./src/serviceWorkers.ts",
+      "import": "./dist/serviceWorkers.js",
+      "node": "./dist/serviceWorkers.js",
+      "default": "./dist/serviceWorkers.js"
     }
   },
   "scripts": {},
@@ -21,5 +28,13 @@
     "@urql/exchange-retry": "^1.2.1",
     "gql.tada": "^1.2.1",
     "urql": "^4.0.6"
+  },
+  "peerDependencies": {
+    "@a-type/ui": "^0.6.17",
+    "react": "^18.2.0"
+  },
+  "devDependencies": {
+    "@a-type/ui": "^0.6.17",
+    "react": "^18.2.0"
   }
 }
