@@ -1,19 +1,16 @@
-import { useIsLoggedIn } from '@/hooks/useSession.js';
 import { Pages } from '@/pages/Pages.jsx';
 import { clientDescriptor, hooks } from '@/store.js';
 import { IconSpritesheet } from '@a-type/ui/components/icon';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactNode, Suspense, useState } from 'react';
+import { useIsLoggedIn, Provider, createGraphQLClient } from '@biscuits/client';
+import { ReactNode, Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
 
-export interface AppProps {}
+const graphqlClient = createGraphQLClient();
 
-export function App({}: AppProps) {
-  const [queryClient] = useState(() => new QueryClient());
-
+export function App() {
   return (
     <Suspense>
-      <QueryClientProvider client={queryClient}>
+      <Provider value={graphqlClient}>
         <LofiProvider>
           <Pages />
           <IconSpritesheet />
@@ -22,7 +19,7 @@ export function App({}: AppProps) {
             containerClassName="mb-10 sm:mb-0"
           />
         </LofiProvider>
-      </QueryClientProvider>
+      </Provider>
     </Suspense>
   );
 }

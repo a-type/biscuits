@@ -20,7 +20,15 @@ console.log('Starting server...');
 const router = Router();
 
 const { preflight, corsify } = createCors({
-  origins: ALLOWED_ORIGINS,
+  origins: (origin) => {
+    if (process.env.NODE_ENV !== 'production') {
+      // allow any localhost:62xx origin
+      if (origin.startsWith('http://localhost:62')) {
+        return true;
+      }
+    }
+    return ALLOWED_ORIGINS.includes(origin);
+  },
   headers: { 'Access-Control-Allow-Credentials': true },
 });
 

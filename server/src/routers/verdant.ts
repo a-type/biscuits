@@ -49,12 +49,12 @@ verdantRouter.get('/token/:app', async (req) => {
     fileEndpoint,
   });
 
-  return new Response(JSON.stringify({ token }), {
+  return new Response(JSON.stringify({ accessToken: token }), {
     status: 200,
     headers: {
       'Content-Type': 'application/json',
     },
   });
 });
-verdantRouter.all('/verdant', verdantServer.handleFetch);
-verdantRouter.all('/verdant/files/:fileId', verdantServer.handleFileFetch);
+verdantRouter.all('/', verdantServer.handleFetch);
+verdantRouter.all('/files/:fileId', verdantServer.handleFileFetch);

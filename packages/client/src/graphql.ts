@@ -6,11 +6,13 @@ import {
   cacheExchange,
   errorExchange,
   fetchExchange,
+  useQuery,
 } from 'urql';
 import { retryExchange } from '@urql/exchange-retry';
 import { initGraphQLTada } from 'gql.tada';
 import type { introspection } from './graphql-env.d.js';
 import { fetch } from './fetch.js';
+import { CONFIG } from './index.js';
 
 export const graphql = initGraphQLTada<{
   introspection: introspection;
@@ -64,12 +66,12 @@ const retry = retryExchange({
 const refocus = refocusExchange();
 
 export function createGraphQLClient({
-  origin,
+  origin = CONFIG.API_ORIGIN,
   onError,
 }: {
-  origin: string;
+  origin?: string;
   onError?: (error: string) => void;
-}) {
+} = {}) {
   return new Client({
     url: `${origin}/graphql`,
     exchanges: [
@@ -88,12 +90,12 @@ export function createGraphQLClient({
 }
 
 export function createMinimalGraphQLClient({
-  origin,
+  origin = CONFIG.API_ORIGIN,
   onError,
 }: {
-  origin: string;
+  origin?: string;
   onError?: (error: string) => void;
-}) {
+} = {}) {
   return new Client({
     url: `${origin}/graphql`,
     exchanges: [
@@ -106,4 +108,20 @@ export function createMinimalGraphQLClient({
     },
     fetch,
   });
+}
+
+export * from 'urql';
+
+// some minimal queries for common use
+const meQuery = graphql(`
+  query CommonMe {
+    me {
+      id
+    }
+  }
+`);
+
+export function useIsLoggedIn() {
+  const [result] = useQuery({ query: meQuery, requestPolicy: 'cache-first' });
+  return [result.data?.me != null, result.fetching] as const;
 }
