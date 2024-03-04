@@ -6,28 +6,25 @@ import { Button } from '@a-type/ui/components/button';
 import { Checkbox } from '@a-type/ui/components/checkbox';
 import { CollapsibleSimple } from '@a-type/ui/components/collapsible';
 import { LiveUpdateTextField } from '@a-type/ui/components/liveUpdateTextField';
-import { NumberStepper } from '@a-type/ui/components/numberStepper';
 import {
   TabsContent,
   TabsList,
   TabsRoot,
   TabsTrigger,
 } from '@a-type/ui/components/tabs';
-import { H2, H4 } from '@a-type/ui/components/typography';
+import { H4 } from '@a-type/ui/components/typography';
+import * as Progress from '@radix-ui/react-progress';
 import {
   List,
   ListItemsItem,
   Trip,
   TripCompletions,
   TripCompletionsValue,
-} from '@packing-list/verdant';
-import * as Progress from '@radix-ui/react-progress';
-import { useNavigate, useSearchParams } from '@verdant-web/react-router';
+} from '@trip-tick.biscuits/verdant';
+import { useSearchParams } from '@verdant-web/react-router';
+import classNames from 'classnames';
 import { useState } from 'react';
 import { TripDateRange } from './TripDateRange.jsx';
-import classNames from 'classnames';
-import { toast } from 'react-hot-toast';
-import { Icon } from '@a-type/ui/components/icon';
 
 export interface TripViewProps {
   tripId: string;
@@ -44,7 +41,6 @@ export function TripView({ tripId }: TripViewProps) {
     <div className="flex flex-col gap-2 w-full h-full">
       <TripViewInfo trip={trip} />
       <TripViewChecklists trip={trip} />
-      <ManageTrip trip={trip} />
     </div>
   );
 }
@@ -279,43 +275,6 @@ function TripViewChecklistItem({
           />
         ))}
       </Progress.Root>
-    </div>
-  );
-}
-
-function ManageTrip({ trip }: { trip: Trip }) {
-  const client = hooks.useClient();
-  const navigate = useNavigate();
-
-  return (
-    <div className="flex flex-col gap-3">
-      <H2>Manage trip</H2>
-      <div className="flex flex-row gap-2">
-        <Button
-          color="destructive"
-          onClick={() => {
-            client.trips.delete(trip.get('id'));
-            navigate('/trips', { skipTransition: true });
-            toast((t) => (
-              <span className="flex gap-2 items-center">
-                <Icon name="check" />
-                <span>Trip deleted!</span>
-                <Button
-                  size="small"
-                  onClick={() => {
-                    client.undoHistory.undo();
-                    toast.dismiss(t.id);
-                  }}
-                >
-                  Undo
-                </Button>
-              </span>
-            ));
-          }}
-        >
-          Delete trip
-        </Button>
-      </div>
     </div>
   );
 }

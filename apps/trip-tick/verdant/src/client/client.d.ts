@@ -50,9 +50,21 @@ export class ClientDescriptor<Presence = any, Profile = any> {
   readonly readyPromise: Promise<Client<Presence, Profile>>;
   readonly schema: StorageSchema;
   readonly namespace: string;
+  /**
+   * Resets all local data for this client, including the schema and migrations.
+   * If the client is not connected to sync, this causes the irretrievable loss of all data.
+   * If the client is connected to sync, this will cause the client to re-sync all data from the server.
+   * Use this very carefully, and only as a last resort.
+   */
+  __dangerous__resetLocal: () => Promise<void>;
 }
 
-import { ObjectEntity, ListEntity, EntityFile } from "@verdant-web/store";
+import {
+  ObjectEntity,
+  ListEntity,
+  EntityFile,
+  EntityFileSnapshot,
+} from "@verdant-web/store";
 
 /** Generated types for List */
 
@@ -127,6 +139,10 @@ export type ListItemsSnapshot = ListItemsItemSnapshot[];
 
 /** Index filters for List **/
 
+export interface ListCreatedAtSortFilter {
+  where: "createdAt";
+  order: "asc" | "desc";
+}
 export interface ListCreatedAtMatchFilter {
   where: "createdAt";
   equals: number;
@@ -139,6 +155,10 @@ export interface ListCreatedAtRangeFilter {
   lte?: number;
   lt?: number;
   order?: "asc" | "desc";
+}
+export interface ListCreatedAtSortFilter {
+  where: "createdAt";
+  order: "asc" | "desc";
 }
 export interface ListCreatedAtMatchFilter {
   where: "createdAt";
@@ -154,8 +174,10 @@ export interface ListCreatedAtRangeFilter {
   order?: "asc" | "desc";
 }
 export type ListFilter =
+  | ListCreatedAtSortFilter
   | ListCreatedAtMatchFilter
   | ListCreatedAtRangeFilter
+  | ListCreatedAtSortFilter
   | ListCreatedAtMatchFilter
   | ListCreatedAtRangeFilter;
 
@@ -222,6 +244,10 @@ export type TripCompletionsSnapshot = {
 
 /** Index filters for Trip **/
 
+export interface TripCreatedAtSortFilter {
+  where: "createdAt";
+  order: "asc" | "desc";
+}
 export interface TripCreatedAtMatchFilter {
   where: "createdAt";
   equals: number;
@@ -234,6 +260,10 @@ export interface TripCreatedAtRangeFilter {
   lte?: number;
   lt?: number;
   order?: "asc" | "desc";
+}
+export interface TripCreatedAtSortFilter {
+  where: "createdAt";
+  order: "asc" | "desc";
 }
 export interface TripCreatedAtMatchFilter {
   where: "createdAt";
@@ -249,7 +279,9 @@ export interface TripCreatedAtRangeFilter {
   order?: "asc" | "desc";
 }
 export type TripFilter =
+  | TripCreatedAtSortFilter
   | TripCreatedAtMatchFilter
   | TripCreatedAtRangeFilter
+  | TripCreatedAtSortFilter
   | TripCreatedAtMatchFilter
   | TripCreatedAtRangeFilter;

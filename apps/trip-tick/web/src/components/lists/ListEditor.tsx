@@ -1,4 +1,4 @@
-import { List, ListItemsItem } from '@packing-list/verdant';
+import { List, ListItemsItem } from '@trip-tick.biscuits/verdant';
 import { LiveUpdateTextField } from '@a-type/ui/components/liveUpdateTextField';
 import { Button } from '@a-type/ui/components/button';
 import { hooks } from '@/store.js';
@@ -96,7 +96,7 @@ function ListItemEditor({
         </Button>
       </div>
       <CollapsibleSimple open={expanded} onOpenChange={setExpanded}>
-        <div className="flex flex-col gap-1">
+        <div className="flex flex-col gap-3 items-start p-1">
           <FieldGroup>
             <FieldLabel>Pack</FieldLabel>
             <FieldArea>
@@ -137,61 +137,65 @@ function ListItemEditor({
               )}
             </FieldArea>
           </FieldGroup>
-        </div>
-        {additional > 0 ? (
-          <div className="flex flex-row gap-1 items-center">
-            <span>Plus</span>
-            <NumberStepper
-              value={additional}
-              onChange={(v) => {
-                if (v < 0) return;
-                item.set('additional', v);
-              }}
-            />
-            <span>extra per trip</span>
-          </div>
-        ) : (
-          <div>
-            <Button
-              size="small"
-              color="default"
-              onClick={() => item.set('additional', 1)}
-            >
-              Add extra
+          {additional > 0 ? (
+            <div className="flex flex-row gap-1 items-center">
+              <span>Plus</span>
+              <NumberStepper
+                value={additional}
+                onChange={(v) => {
+                  if (v < 0) return;
+                  item.set('additional', v);
+                }}
+              />
+              <span>extra per trip</span>
+            </div>
+          ) : (
+            <div>
+              <Button
+                size="small"
+                color="default"
+                onClick={() => item.set('additional', 1)}
+              >
+                Add extra
+              </Button>
+            </div>
+          )}
+          <ToggleGroup
+            value={roundDown ? 'down' : 'up'}
+            type="single"
+            onValueChange={(v) => {
+              item.set('roundDown', v === 'down');
+            }}
+          >
+            <ToggleItem value="down">
+              <ToggleItemIndicator>
+                <Icon name="check" />
+              </ToggleItemIndicator>
+              <ToggleItemLabel>
+                <ToggleItemTitle>Pack light</ToggleItemTitle>
+                <ToggleItemDescription>
+                  Rounds the number of items down
+                </ToggleItemDescription>
+              </ToggleItemLabel>
+            </ToggleItem>
+            <ToggleItem value="up">
+              <ToggleItemIndicator>
+                <Icon name="check" />
+              </ToggleItemIndicator>
+              <ToggleItemLabel>
+                <ToggleItemTitle>Pack safe</ToggleItemTitle>
+                <ToggleItemDescription>
+                  Rounds the number of items up
+                </ToggleItemDescription>
+              </ToggleItemLabel>
+            </ToggleItem>
+          </ToggleGroup>
+          <CollapsibleTrigger asChild>
+            <Button size="small" color="default">
+              Done
             </Button>
-          </div>
-        )}
-        <ToggleGroup
-          value={roundDown ? 'down' : 'up'}
-          type="single"
-          onValueChange={(v) => {
-            item.set('roundDown', v === 'down');
-          }}
-        >
-          <ToggleItem value="down">
-            <ToggleItemIndicator>☑️</ToggleItemIndicator>
-            <ToggleItemLabel>
-              <ToggleItemTitle>Pack light</ToggleItemTitle>
-              <ToggleItemDescription>
-                Rounds the number of items down
-              </ToggleItemDescription>
-            </ToggleItemLabel>
-          </ToggleItem>
-          <ToggleItem value="up">
-            <ToggleItemIndicator>☑️</ToggleItemIndicator>
-            <ToggleItemLabel>
-              <ToggleItemTitle>Pack safe</ToggleItemTitle>
-              <ToggleItemDescription>
-                Rounds the number of items up
-              </ToggleItemDescription>
-            </ToggleItemLabel>
-          </ToggleItem>
-        </ToggleGroup>
-        <CollapsibleTrigger asChild>
-          <Button size="small" color="default">
-            Done
-          </Button>
-        </CollapsibleTrigger>
+          </CollapsibleTrigger>
+        </div>
       </CollapsibleSimple>
       <CollapsibleSimple open={!expanded} onOpenChange={(v) => setExpanded(!v)}>
         <CollapsibleTrigger asChild>

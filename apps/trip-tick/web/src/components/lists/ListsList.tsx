@@ -5,8 +5,9 @@ import {
   CardGrid,
   CardMain,
   CardRoot,
+  CardTitle,
 } from '@a-type/ui/components/card';
-import { List } from '@packing-list/verdant';
+import { List } from '@trip-tick.biscuits/verdant';
 import { Link } from '@verdant-web/react-router';
 import {
   DropdownMenu,
@@ -15,6 +16,8 @@ import {
   DropdownMenuContent,
 } from '@a-type/ui/components/dropdownMenu';
 import { Button } from '@a-type/ui/components/button';
+import { Icon } from '@a-type/ui/components/icon';
+import { toast } from 'react-hot-toast';
 
 export interface ListsListProps {}
 
@@ -26,7 +29,9 @@ export function ListsList({}: ListsListProps) {
       {lists.map((list) => (
         <CardRoot key={list.get('id')}>
           <CardMain asChild>
-            <Link to={`/lists/${list.get('id')}`}>{list.get('name')}</Link>
+            <Link to={`/lists/${list.get('id')}`}>
+              <CardTitle>{list.get('name')}</CardTitle>
+            </Link>
           </CardMain>
           <CardFooter>
             <CardActions>
@@ -45,24 +50,30 @@ function ListsListItemMenu({ list }: { list: List }) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button size="icon">
-          <span
-            style={{
-              width: 15,
-              height: 15,
-              display: 'block',
-              fontSize: 12,
-              fontWeight: 100,
-            }}
-          >
-            ≡
-          </span>
+        <Button size="icon" color="ghost">
+          <Icon name="dots" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuItem
+          className="text-red"
           onClick={() => {
             client.lists.delete(list.get('id'));
+            toast((t) => (
+              <span className="flex gap-2 items-center">
+                <Icon name="check" />
+                <span>List deleted!</span>
+                <Button
+                  size="small"
+                  onClick={() => {
+                    client.undoHistory.undo();
+                    toast.dismiss(t.id);
+                  }}
+                >
+                  Undo
+                </Button>
+              </span>
+            ));
           }}
         >
           Delete

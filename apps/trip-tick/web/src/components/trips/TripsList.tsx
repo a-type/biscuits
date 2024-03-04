@@ -2,13 +2,17 @@ import { useTripProgress } from '@/components/trips/hooks.js';
 import { hooks } from '@/store.js';
 import { Button } from '@a-type/ui/components/button';
 import {
+  CardActions,
+  CardContent,
   CardFooter,
   CardGrid,
   CardMain,
   CardRoot,
+  CardTitle,
 } from '@a-type/ui/components/card';
-import { Trip } from '@packing-list/verdant';
+import { Trip } from '@trip-tick.biscuits/verdant';
 import { Link } from '@verdant-web/react-router';
+import { TripMenu } from './TripMenu.jsx';
 
 export interface TripsListProps {}
 
@@ -49,7 +53,11 @@ function TripsListItem({ trip }: { trip: Trip }) {
     <CardRoot>
       <CardMain asChild>
         <Link to={`/trips/${trip.get('id')}`} className="relative bg-white">
-          <span className="relative z-1">{name}</span>
+          <CardTitle className="relative z-1">{name}</CardTitle>
+          <CardContent className="text-xs">
+            {startsAt ? new Date(startsAt).toLocaleDateString() : 'Unscheduled'}{' '}
+            | {completedItems} / {totalItems} items
+          </CardContent>
           <div
             className="absolute left-0 top-0 bottom-0 bg-accent-wash"
             style={{
@@ -58,9 +66,10 @@ function TripsListItem({ trip }: { trip: Trip }) {
           />
         </Link>
       </CardMain>
-      <CardFooter className="text-xs">
-        {startsAt ? new Date(startsAt).toLocaleDateString() : 'Unscheduled'} |{' '}
-        {completedItems} / {totalItems} items
+      <CardFooter>
+        <CardActions>
+          <TripMenu tripId={trip.get('id')} />
+        </CardActions>
       </CardFooter>
     </CardRoot>
   );
