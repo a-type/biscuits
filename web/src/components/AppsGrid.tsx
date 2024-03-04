@@ -3,7 +3,12 @@ import { AppId, AppManifest, apps } from '@biscuits/apps';
 
 export function AppsGrid() {
   return (
-    <div className="grid grid-cols-6 [grid-template-rows:320px] gap-2">
+    <div
+      className={classNames(
+        'grid grid-cols-4 [grid-template-rows:320px] gap-4',
+        'lg:grid-cols-6',
+      )}
+    >
       {apps.map((app) => (
         <AppCard key={app.id} app={app} />
       ))}
@@ -23,9 +28,9 @@ function AppCard({ app }: { app: AppManifest<AppId> }) {
   return (
     <a
       className={classNames(
-        'flex flex-col rounded-lg overflow-hidden ring-black ring bg-white',
+        'flex flex-col rounded-lg overflow-hidden ring-black ring bg-white relative',
         'transition-all duration-200 ease-in-out transform hover:scale-105',
-        'hover:ring-4',
+        'hover:ring-4 hover:z-1',
       )}
       style={{
         gridColumn: `span ${app.size}`,
@@ -35,7 +40,7 @@ function AppCard({ app }: { app: AppManifest<AppId> }) {
       <div
         className={classNames(
           'flex flex-col flex-1 overflow-hidden bg-cover bg-center items-start justify-end p-4',
-          'border-0 border-b border-solid border-black',
+          'border-0 border-b border-solid border-black hover:border-b-4 transition-border-width',
         )}
         style={{
           backgroundImage: app.mainImageUrl

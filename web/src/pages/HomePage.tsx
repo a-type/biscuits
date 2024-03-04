@@ -32,7 +32,9 @@ export default function HomePage() {
           >
             Biscuits
           </h1>
-          <UserMenu />
+          <Suspense>
+            <UserMenu />
+          </Suspense>
         </PageFixedArea>
         <div className="flex flex-col gap-2 min-h-[30vh] mb-10 mt-5 text-primary-dark font-semibold">
           <h2

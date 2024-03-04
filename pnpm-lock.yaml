@@ -93,8 +93,6 @@ importers:
         specifier: ^18.2.0
         version: 18.2.0
 
-  apps/gnocchi/verdant/dist/esm/client: {}
-
   apps/trip-tick/verdant:
     dependencies:
       '@verdant-web/cli':
