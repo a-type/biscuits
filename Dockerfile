@@ -21,9 +21,8 @@ RUN pnpm fetch
 
 COPY . .
 
-RUN pnpm install --filter . --frozen-lockfile
-RUN pnpm install --filter "@biscuits/server..." --frozen-lockfile --unsafe-perm
-RUN pnpm --filter "@biscuits/server..." run build
+RUN pnpm install --frozen-lockfile
+RUN pnpm run build
 
 WORKDIR /root/monorepo/server
 EXPOSE 3001
