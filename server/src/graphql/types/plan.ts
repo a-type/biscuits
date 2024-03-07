@@ -16,6 +16,7 @@ import { createResults, keyIndexes } from '../dataloaders/index.js';
 import { Plan as DBPlan } from '@biscuits/db';
 import { cacheSubscriptionInfoOnPlan } from '../../management/subscription.js';
 import { email } from '../../services/email.js';
+import { isSubscribed } from '../../auth/subscription.js';
 
 builder.queryFields((t) => ({
   plan: t.field({
@@ -283,6 +284,12 @@ Plan.implement({
         return subscription.status;
       },
     }),
+    canSync: t.field({
+      type: 'Boolean',
+      resolve: async (plan, _, ctx) => {
+        return isSubscribed(plan.subscriptionStatus);
+      },
+    }),
     subscriptionCanceledAt: t.expose('subscriptionCanceledAt', {
       nullable: true,
       type: 'DateTime',
@@ -294,8 +301,20 @@ Plan.implement({
     productInfo: t.field({
       type: 'ProductInfo',
       nullable: true,
-      resolve: (plan) =>
-        plan.stripePriceId ? { priceId: plan.stripePriceId } : null,
+      resolve: async (plan, _, ctx) => {
+        if (plan.stripePriceId) {
+          // this is gross, but the shared cache on stripe loaders
+          // should at least mean it's not awful.
+          const price = await ctx.dataloaders.stripePriceIdLoader.load(
+            plan.stripePriceId,
+          );
+          if (!price?.lookup_key) return null;
+          return {
+            lookupKey: price.lookup_key,
+          };
+        }
+        return null;
+      },
     }),
     checkoutData: t.field({
       type: 'StripeCheckoutData',
@@ -417,6 +436,22 @@ Plan.implement({
       type: 'Boolean',
       resolve: async (plan, _, ctx) => {
         return (await canPlanAcceptAMember(plan.id, ctx)).ok;
+      },
+    }),
+    featureFlags: t.field({
+      type: ['String'],
+      resolve: async (plan) => {
+        try {
+          const planFlags = JSON.parse(plan.featureFlags ?? '{}');
+          return Object.keys(planFlags).filter((key) => planFlags[key]);
+        } catch (err) {
+          logger.warn('Error parsing plan feature flags', {
+            planId: plan.id,
+            featureFlags: plan.featureFlags,
+            error: err,
+          });
+          return [];
+        }
       },
     }),
   }),

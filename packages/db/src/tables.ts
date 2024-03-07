@@ -176,6 +176,7 @@ export interface ChangelogItemTable {
   details: string;
   imageUrl: string | null;
   important: boolean;
+  appId: string;
 }
 
 export type ChangelogItem = Selectable<ChangelogItemTable>;

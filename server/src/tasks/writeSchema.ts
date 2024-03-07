@@ -6,5 +6,4 @@ export function writeSchema() {
   const sortedSchema = lexicographicSortSchema(schema);
   const printedSchema = printSchema(sortedSchema);
   writeFileSync('schema.graphql', printedSchema);
-  console.log('Wrote schema to schema.graphql');
 }

@@ -5,7 +5,7 @@
       "type": "npm",
       "script": "write-schema",
       "path": "server",
-      "problemMatcher": [],
+      "problemMatcher": ["$tsc-watch"],
       "label": "npm: write-schema - server",
       "detail": "env-cmd tsx watch --conditions=development ./scripts/writeSchema.ts",
       "runOptions": {

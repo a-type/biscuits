@@ -3,7 +3,7 @@ import { FragmentOf, graphql, readFragment } from '@/graphql.js';
 import { Button } from '@a-type/ui/components/button';
 import { useSearchParams } from '@verdant-web/react-router';
 import { useEffect } from 'react';
-import toast from 'react-hot-toast';
+import { toast } from 'react-hot-toast';
 import { PlanInfo, planProductInfo } from './PlanInfo.js';
 import { CancelPlanButton } from './CancelPlanButton.js';
 import classNames from 'classnames';

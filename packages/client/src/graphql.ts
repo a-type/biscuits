@@ -1,17 +1,17 @@
 import { BiscuitsError } from '@biscuits/error';
 import { refocusExchange } from '@urql/exchange-refocus';
+import { retryExchange } from '@urql/exchange-retry';
+import { initGraphQLTada } from 'gql.tada';
 import {
-  type CombinedError,
   Client,
   cacheExchange,
   errorExchange,
   fetchExchange,
   useQuery,
+  type CombinedError,
 } from 'urql';
-import { retryExchange } from '@urql/exchange-retry';
-import { initGraphQLTada } from 'gql.tada';
-import type { introspection } from './graphql-env.d.js';
 import { fetch } from './fetch.js';
+import type { introspection } from './graphql-env.d.js';
 import { CONFIG } from './index.js';
 
 export const graphql = initGraphQLTada<{
@@ -22,8 +22,8 @@ export const graphql = initGraphQLTada<{
   };
 }>();
 
-export type { FragmentOf, ResultOf, VariablesOf } from 'gql.tada';
 export { readFragment } from 'gql.tada';
+export type { FragmentOf, ResultOf, VariablesOf } from 'gql.tada';
 
 function createErrorHandler(onError?: (err: string) => void) {
   return async function handleError(error: CombinedError) {
@@ -110,18 +110,57 @@ export function createMinimalGraphQLClient({
   });
 }
 
-export * from 'urql';
+export {
+  CombinedError,
+  useClient,
+  useMutation,
+  useQuery,
+  useSubscription,
+} from 'urql';
+export type {
+  AnyVariables,
+  CacheOutcome,
+  ClientOptions,
+  GraphQLRequest,
+  Query,
+  QueryProps,
+  QueryState,
+  UseQueryResponse,
+} from 'urql';
 
 // some minimal queries for common use
 const meQuery = graphql(`
   query CommonMe {
     me {
       id
+      plan {
+        id
+        canSync
+        subscriptionStatus
+        featureFlags
+      }
     }
   }
 `);
 
+export function useMe() {
+  return useQuery({
+    query: meQuery,
+    requestPolicy: 'cache-first',
+  });
+}
+
 export function useIsLoggedIn() {
-  const [result] = useQuery({ query: meQuery, requestPolicy: 'cache-first' });
+  const [result] = useMe();
   return [result.data?.me != null, result.fetching] as const;
+}
+
+export function useCanSync() {
+  const [result] = useMe();
+  return result?.data?.me?.plan?.canSync;
+}
+
+export function useIsOffline() {
+  const [result] = useMe();
+  return !result.fetching && !result.stale && result.error;
 }

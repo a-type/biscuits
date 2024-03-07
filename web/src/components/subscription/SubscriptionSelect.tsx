@@ -49,12 +49,12 @@ export function SubscriptionSelect({}: SubscriptionSelectProps) {
           <SubscriptionChoiceButton
             disabled={result.fetching}
             onClick={() => selectPlan(FOR_TWO_PRICE_ID)}
-            priceId={FOR_TWO_PRICE_ID}
+            lookupKey="for_two"
           />
           <SubscriptionChoiceButton
             disabled={result.fetching}
             onClick={() => selectPlan(FAMILY_STYLE_PRICE_ID)}
-            priceId={FAMILY_STYLE_PRICE_ID}
+            lookupKey="family_style"
           />
         </CardGrid>
       </Suspense>
@@ -63,8 +63,8 @@ export function SubscriptionSelect({}: SubscriptionSelectProps) {
 }
 
 const subscriptionPlanInfo = graphql(`
-  query SubscriptionPlanInfo($priceId: String!) {
-    productInfo(priceId: $priceId) {
+  query SubscriptionPlanInfo($lookupKey: String!) {
+    productInfo(lookupKey: $lookupKey) {
       id
       price
       currency
@@ -77,15 +77,15 @@ const subscriptionPlanInfo = graphql(`
 function SubscriptionChoiceButton({
   disabled,
   onClick,
-  priceId,
+  lookupKey,
 }: {
   disabled: boolean;
   onClick: () => void;
-  priceId: string;
+  lookupKey: 'for_two' | 'family_style';
 }) {
   const [{ data }] = useQuery({
     query: subscriptionPlanInfo,
-    variables: { priceId },
+    variables: { lookupKey },
   });
   return (
     <CardRoot>

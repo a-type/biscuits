@@ -13,6 +13,8 @@ import {
 } from '@biscuits/db';
 import { VerdantLibraryInfo } from '../verdant/verdant.js';
 import { BiscuitsVerdantProfile } from '@biscuits/libraries';
+import { ExtractorData } from '@gnocchi.biscuits/scanning';
+import { BiscuitsError } from '@biscuits/error';
 
 export const builder = new SchemaBuilder<{
   Context: GQLContext;
@@ -36,7 +38,7 @@ export const builder = new SchemaBuilder<{
       clientSecret: string;
     };
     ProductInfo: {
-      priceId: string;
+      lookupKey: string;
     };
     CancelPlanResult: {};
     KickMemberResult: { planId: string };
@@ -52,6 +54,15 @@ export const builder = new SchemaBuilder<{
     CreateCategoryResult: { categoryId: string };
     UpdateCategoryResult: { categoryId: string };
     DeleteCategoryResult: { categoryId: string };
+    RecipeScan: ExtractorData;
+    RecipeScanResult: {
+      type: 'web';
+      data: ExtractorData;
+    };
+    RecipeScanDetailedIngredient: NonNullable<
+      ExtractorData['detailedIngredients']
+    >[number];
+    RecipeScanDetailedStep: NonNullable<ExtractorData['detailedSteps']>[number];
   };
   AuthScopes: {
     public: boolean;
@@ -68,6 +79,10 @@ export const builder = new SchemaBuilder<{
     JSON: {
       Input: unknown;
       Output: unknown;
+    };
+    ID: {
+      Input: string;
+      Output: string;
     };
   };
   Inputs: {
@@ -88,6 +103,7 @@ export const builder = new SchemaBuilder<{
       details: string;
       imageUrl?: string | null;
       important?: boolean | null;
+      appId: string;
     };
 
     // Gnocchi
@@ -104,6 +120,9 @@ export const builder = new SchemaBuilder<{
       name: string | null;
       sortKey: string | null;
     };
+    RecipeScanInput: {
+      url: string;
+    };
   };
 }>({
   plugins: [RelayPlugin, DataloaderPlugin, AuthPlugin],
@@ -115,5 +134,9 @@ export const builder = new SchemaBuilder<{
     planAdmin: context.session?.role === 'admin',
     productAdmin: !!context.session?.isProductAdmin,
   }),
-  scopeAuthOptions: {},
+  scopeAuthOptions: {
+    unauthorizedError: (_, ctx, info, result) => {
+      return new BiscuitsError(BiscuitsError.Code.Forbidden);
+    },
+  },
 });

@@ -9,7 +9,8 @@
         "schema": "../../server/schema.graphql",
         "tadaOutputLocation": "./src/graphql-env.d.ts"
       }
-    ]
+    ],
+    "types": ["vite-plugin-pwa/client"]
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.mts", "./typings"]
 }

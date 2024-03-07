@@ -16,14 +16,9 @@ export function AppsGrid() {
   );
 }
 
-const DEV_URL_OVERRIDES: Record<AppId, string> = {
-  gnocchi: 'http://localhost:6220',
-  'trip-tick': 'http://localhost:6221',
-};
-
 function AppCard({ app }: { app: AppManifest<AppId> }) {
   const url = import.meta.env.DEV
-    ? DEV_URL_OVERRIDES[app.id]
+    ? app.devOriginOverride
     : `https://${app.id}.${window.location.host}`;
   return (
     <a

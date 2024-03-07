@@ -1,12 +1,14 @@
 import { BiscuitsVerdantProfile } from '@biscuits/libraries';
+import { CONFIG } from './index.js';
+import { AppId } from '@biscuits/apps';
 
 export function getVerdantSync<Presence>({
-  apiOrigin,
+  apiOrigin = CONFIG.API_ORIGIN,
   appId,
   initialPresence,
 }: {
-  apiOrigin: string;
-  appId: string;
+  apiOrigin?: string;
+  appId: AppId;
   initialPresence: Presence;
 }) {
   return {
@@ -17,5 +19,6 @@ export function getVerdantSync<Presence>({
       imageUrl: null,
     } satisfies BiscuitsVerdantProfile,
     authEndpoint: `${apiOrigin}/verdant/token/${appId}`,
+    useBroadcastChannel: true,
   };
 }

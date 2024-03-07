@@ -6,25 +6,25 @@ builder.queryFields((t) => ({
   productInfo: t.field({
     type: 'ProductInfo',
     args: {
-      priceId: t.arg.string({
+      lookupKey: t.arg.string({
         required: true,
       }),
     },
-    resolve: (_, { priceId }, ctx) => ({
-      priceId,
+    resolve: (_, { lookupKey }, ctx) => ({
+      lookupKey,
     }),
   }),
 }));
 
 builder.objectType('ProductInfo', {
   fields: (t) => ({
-    id: t.exposeString('priceId'),
+    id: t.exposeString('lookupKey'),
     price: t.field({
       type: 'Int',
       nullable: true,
       resolve: async (product, _, ctx) => {
-        const info = await ctx.dataloaders.stripePriceLoader.load(
-          product.priceId,
+        const info = await ctx.dataloaders.stripePriceLookupKeyLoader.load(
+          product.lookupKey,
         );
         if (!info) {
           throw new BiscuitsError(
@@ -39,8 +39,8 @@ builder.objectType('ProductInfo', {
       type: 'String',
       nullable: true,
       resolve: async (product, _, ctx) => {
-        const info = await ctx.dataloaders.stripePriceLoader.load(
-          product.priceId,
+        const info = await ctx.dataloaders.stripePriceLookupKeyLoader.load(
+          product.lookupKey,
         );
         if (!info) {
           throw new BiscuitsError(
@@ -55,8 +55,8 @@ builder.objectType('ProductInfo', {
       type: 'String',
       nullable: true,
       resolve: async (product, _, ctx) => {
-        const info = await ctx.dataloaders.stripePriceLoader.load(
-          product.priceId,
+        const info = await ctx.dataloaders.stripePriceLookupKeyLoader.load(
+          product.lookupKey,
         );
         if (!info) {
           throw new BiscuitsError(
@@ -78,8 +78,8 @@ builder.objectType('ProductInfo', {
       type: 'String',
       nullable: true,
       resolve: async (product, _, ctx) => {
-        const info = await ctx.dataloaders.stripePriceLoader.load(
-          product.priceId,
+        const info = await ctx.dataloaders.stripePriceLookupKeyLoader.load(
+          product.lookupKey,
         );
         if (!info) {
           throw new BiscuitsError(

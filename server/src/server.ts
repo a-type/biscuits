@@ -14,21 +14,14 @@ import { graphqlRouter } from './routers/graphql.js';
 import { writeSchema } from './tasks/writeSchema.js';
 import { AuthError } from '@a-type/auth';
 import { appsRouter } from './routers/apps.js';
+import { transferRouter } from './routers/transfer.js';
 
 console.log('Starting server...');
 
 const router = Router();
 
 const { preflight, corsify } = createCors({
-  origins: (origin) => {
-    if (process.env.NODE_ENV !== 'production') {
-      // allow any localhost:62xx origin
-      if (origin.startsWith('http://localhost:62')) {
-        return true;
-      }
-    }
-    return ALLOWED_ORIGINS.includes(origin);
-  },
+  origins: ALLOWED_ORIGINS,
   headers: { 'Access-Control-Allow-Credentials': true },
 });
 
@@ -44,6 +37,7 @@ router
   .all('/verdant/*', verdantRouter.handle)
   .all('/stripe/*', stripeRouter.handle)
   .all('/graphql/*', graphqlRouter.handle)
+  .all('/transfer/*', transferRouter.handle)
   .all('*', () => error(404));
 
 const ittyServer = createServerAdapter((request) =>

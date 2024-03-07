@@ -5,6 +5,7 @@
     "strict": true,
     "jsx": "preserve",
     "incremental": true,
+    "esModuleInterop": true,
     "paths": {
       "@/*": ["./src/*"]
     }

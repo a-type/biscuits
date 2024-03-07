@@ -5,10 +5,17 @@ import { assignTypeName } from '../relay.js';
 builder.queryFields((t) => ({
   changelog: t.field({
     type: ['ChangelogItem'],
-    resolve: async (_, __, { db }) => {
+    args: {
+      appId: t.arg.string({
+        description: 'The ID of the app to fetch the changelog for',
+        required: true,
+      }),
+    },
+    resolve: async (_, args, { db }) => {
       const items = await db
         .selectFrom('ChangelogItem')
         .selectAll()
+        .where('appId', '=', args.appId || 'gnocchi')
         .orderBy('createdAt', 'desc')
         .execute();
       return items.map(assignTypeName('ChangelogItem'));
@@ -37,6 +44,7 @@ builder.mutationFields((t) => ({
           details: input.details,
           imageUrl: input.imageUrl,
           important: !!input.important,
+          appId: input.appId,
         })
         .returningAll()
         .executeTakeFirst();
@@ -80,6 +88,10 @@ builder.inputType('CreateChangelogItemInput', {
     important: t.boolean({
       description: 'Whether this item is important',
       defaultValue: false,
+    }),
+    appId: t.string({
+      description: 'The ID of the app this changelog item is for',
+      required: true,
     }),
   }),
 });

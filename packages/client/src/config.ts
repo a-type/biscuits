@@ -10,6 +10,6 @@ declare global {
     VITE_PUBLIC_URL: string;
   }
   interface ImportMeta {
-    readonly env: Readonly<ImportMetaEnv>;
+    readonly env: ImportMetaEnv;
   }
 }

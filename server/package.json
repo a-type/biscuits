@@ -21,6 +21,7 @@
     "@biscuits/db": "workspace:*",
     "@biscuits/error": "workspace:*",
     "@biscuits/libraries": "workspace:*",
+    "@gnocchi.biscuits/scanning": "workspace:*",
     "@pothos/core": "^3.41.0",
     "@pothos/plugin-dataloader": "^3.17.2",
     "@pothos/plugin-relay": "^3.46.0",
