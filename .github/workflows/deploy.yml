@@ -1,0 +1,19 @@
+name: Production Deploy
+on:
+  release:
+    types: [published]
+
+env:
+  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy to production
+    steps:
+      - uses: actions/checkout@v2
+      - uses: superfly/flyctl-actions/setup-flyctl@master
+
+      - name: Deploy API
+        # deploy the image from ghcr.io for the target sha
+        run: flyctl deploy --image ghcr.io/a-type/biscuits:${{ github.sha }} --app biscuits
