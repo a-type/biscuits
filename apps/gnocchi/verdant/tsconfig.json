@@ -4,8 +4,7 @@
     "composite": true,
     "outDir": "./dist/esm",
     "rootDir": "./src",
-    "allowJs": true,
-    "lib": ["es2021", "dom"]
+    "allowJs": true
   },
   "include": ["**/*.ts", "**/*.mts"]
 }

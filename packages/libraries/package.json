@@ -11,7 +11,9 @@
       "default": "./dist/index.js"
     }
   },
-  "scripts": {},
+  "scripts": {
+    "build": "tsc"
+  },
   "type": "module",
   "dependencies": {},
   "devDependencies": {}

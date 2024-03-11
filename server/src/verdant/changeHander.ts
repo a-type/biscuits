@@ -30,7 +30,9 @@ class VerdantChangeListener {
     }
   >();
 
-  constructor(private appListeners: Record<AppId, ChangeHandler<any>>) {}
+  constructor(
+    private appListeners: Partial<Record<AppId, ChangeHandler<any>>>,
+  ) {}
 
   update = async (
     {

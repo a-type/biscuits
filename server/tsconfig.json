@@ -5,5 +5,5 @@
     "rootDir": "./src",
     "lib": ["es2021", "es2022"]
   },
-  "include": ["**/*.ts", "**/*.mts", "src/config/secrets"]
+  "include": ["src/**/*.ts", "src/**/*.mts"]
 }
