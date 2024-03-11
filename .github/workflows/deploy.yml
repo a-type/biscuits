@@ -7,9 +7,30 @@ env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
 jobs:
+  # check-for-changes:
+  #   runs-on: ubuntu-latest
+  #   permissions:
+  #     contents: read
+  #   outputs:
+  #     exitCode: ${{ steps.check.outputs.exitCode }}
+
+  #   steps:
+  #     # uses turborepo to check for changes to build dependencies in @biscuits/server
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v3
+
+  #     - name: Check for changes
+  #       run: npx turbo-ignore @biscuits/server --task=build
+  #       id: check
+  #       continue-on-error: true
+
   deploy:
     runs-on: ubuntu-latest
     name: Deploy to production
+
+    # needs: check-for-changes
+    # if: needs.check-for-changes.outputs.exitCode == '1'
+
     steps:
       - uses: actions/checkout@v2
       - uses: superfly/flyctl-actions/setup-flyctl@master
