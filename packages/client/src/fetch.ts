@@ -28,7 +28,7 @@ export const fetch: typeof window.fetch = async (input: any, init: any) => {
   const requestUrlString = typeof input === 'string' ? input : input.url;
   const requestUrlOrigin = new URL(requestUrlString).origin;
 
-  const response = await window.fetch(input, init);
+  const response = await window.fetch.bind(window)(input, init);
 
   const { body, clone } = await peekAtResponseBody(response);
   const biscuitsError = BiscuitsError.readResponseBody(body);

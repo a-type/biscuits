@@ -16,3 +16,4 @@ export * from './PushSubscriptionToggle.js';
 export * from './SubscriptionExpiredDialog.js';
 export * from './AppPicker.jsx';
 export * from './UserMenu.jsx';
+export * from './PresencePeople.js';

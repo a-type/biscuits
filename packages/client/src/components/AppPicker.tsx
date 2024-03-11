@@ -5,7 +5,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@a-type/ui/components/popover';
-import { CONFIG } from '../index.js';
+import { CONFIG, useAppId } from '../index.js';
 import { ReactNode, useEffect } from 'react';
 import { apps } from '@biscuits/apps';
 import {
@@ -21,6 +21,7 @@ export interface AppPickerProps {
 }
 
 export function AppPicker({ className, children }: AppPickerProps) {
+  const hostApp = useAppId();
   // listen for iframeMessages to trigger app navigation
   useEffect(() => {
     const listener = (event: MessageEvent) => {
@@ -50,11 +51,20 @@ export function AppPicker({ className, children }: AppPickerProps) {
           </Button>
         )}
       </PopoverTrigger>
-      <PopoverContent align="end" side="top" className="p-0">
+      <PopoverContent
+        align="end"
+        side="top"
+        className="p-0 min-w-0"
+        sideOffset={-40}
+      >
         <iframe
-          className="w-[152px] h-[152px] p-0 border-none shadow-none"
-          src={`${CONFIG.HOME_ORIGIN}/appPicker/`}
+          className="p-0 border-none shadow-none"
+          src={`${CONFIG.HOME_ORIGIN}/appPicker/?hostApp=${hostApp}`}
           title="App Picker"
+          style={{
+            width: 40 * 2 + 16 + 32,
+            height: 40 * 2 + 16 + 32,
+          }}
         />
       </PopoverContent>
     </Popover>
@@ -68,7 +78,7 @@ export function AppPickerNavItem({ className }: { className?: string }) {
         <NavBarItemIconWrapper>
           <Icon name="cardsGrid" />
         </NavBarItemIconWrapper>
-        <NavBarItemText>Apps</NavBarItemText>
+        <NavBarItemText>More apps</NavBarItemText>
       </NavBarItem>
     </AppPicker>
   );

@@ -7,22 +7,36 @@ import {
   DropdownMenuItemRightSlot,
   DropdownMenuTrigger,
 } from '@a-type/ui/components/dropdownMenu';
-import { CONFIG, graphql, useIsLoggedIn, useMe, useQuery } from '../index.js';
+import {
+  CONFIG,
+  graphql,
+  useAppId,
+  useIsLoggedIn,
+  useMe,
+  useQuery,
+} from '../index.js';
 import { Icon } from '@a-type/ui/components/icon';
+import { ReactNode } from 'react';
 
 export interface UserMenuProps {
   className?: string;
   disableAppSettings?: boolean;
+  children?: ReactNode;
 }
 
-export function UserMenu({ className, disableAppSettings }: UserMenuProps) {
+export function UserMenu({
+  className,
+  disableAppSettings,
+  children,
+}: UserMenuProps) {
   const isLoggedIn = useIsLoggedIn();
+  const appId = useAppId();
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button size="icon" color="ghost" className={className}>
-          <UserAvatar skipFetch={!isLoggedIn} />
+          {children ?? <UserAvatar skipFetch={!isLoggedIn} />}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
@@ -31,7 +45,7 @@ export function UserMenu({ className, disableAppSettings }: UserMenuProps) {
             asChild
             className="theme-leek bg-primary-wash color-primary-dark"
           >
-            <a href={`${CONFIG.HOME_ORIGIN}/join`}>
+            <a href={`${CONFIG.HOME_ORIGIN}/join?appReferrer=${appId}`}>
               Upgrade for sync
               <DropdownMenuItemRightSlot>
                 <Icon name="gift" />
@@ -40,7 +54,7 @@ export function UserMenu({ className, disableAppSettings }: UserMenuProps) {
           </DropdownMenuItem>
         ) : (
           <DropdownMenuItem asChild>
-            <a href={`${CONFIG.HOME_ORIGIN}/plan`}>
+            <a href={`${CONFIG.HOME_ORIGIN}/plan?appReferrer=${appId}`}>
               Mange plan
               <DropdownMenuItemRightSlot>
                 <Icon name="profile" />

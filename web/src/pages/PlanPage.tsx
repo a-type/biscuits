@@ -44,7 +44,7 @@ export function PlanPage({}: PlanPageProps) {
 
   useEffect(() => {
     if (!result.fetching && !result.data?.me) {
-      navigate('/join');
+      navigate('/login');
     }
   }, [result, navigate]);
 

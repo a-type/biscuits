@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite --host --mode development",
+    "app-dev": "vite --host --mode development",
     "build": "vite build --mode production",
     "preview": "vite preview --host",
     "link-verdant": "pnpm link --global @verdant-web/store && pnpm link --global @verdant-web/common && pnpm link --global @verdant-web/react && pnpm link --global @verdant-web/cli && pnpm link --global @verdant-web/react-router",
@@ -40,7 +40,7 @@
     "@vercel/analytics": "^0.1.6",
     "@verdant-web/cli": "^4.3.1",
     "@verdant-web/common": "2.2.0",
-    "@verdant-web/react": "28.0.0",
+    "@verdant-web/react": "28.0.1",
     "@verdant-web/react-router": "^0.6.1",
     "@verdant-web/store": "3.3.0",
     "@zip.js/zip.js": "^2.7.6",

@@ -20,6 +20,29 @@
         "showReuseMessage": true,
         "clear": false
       }
+    },
+    {
+      "type": "npm",
+      "script": "app-dev",
+      "path": "apps/gnocchi/web",
+      "problemMatcher": [],
+      "label": "Run Gnocchi",
+      "detail": "vite --host --mode development"
+    },
+    {
+      "type": "npm",
+      "script": "app-dev",
+      "path": "apps/trip-tick/web",
+      "problemMatcher": [],
+      "label": "Run Trip Tick",
+      "detail": "vite --host --mode development"
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "problemMatcher": [],
+      "label": "Main Dev",
+      "detail": "turbo run dev"
     }
   ]
 }

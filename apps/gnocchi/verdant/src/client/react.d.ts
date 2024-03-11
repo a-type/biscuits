@@ -444,9 +444,9 @@ export function createHooks<
   Mutations extends {
     [N: HookName]: (client: Client<Presence, Profile>, ...args: any[]) => any;
   } = never,
->(
-  mutations?: Mutations,
-): GeneratedHooks<Presence, Profile> & {
+>(options?: {
+  Context?: Context<StorageDescriptor<Presence, Profile> | null>;
+}): GeneratedHooks<Presence, Profile> & {
   withMutations: <
     Mutations extends {
       [Name: HookName]: (

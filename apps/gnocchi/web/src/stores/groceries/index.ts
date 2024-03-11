@@ -7,6 +7,7 @@ import {
   getVerdantSync,
   graphql,
   showSubscriptionPromotion,
+  VerdantContext,
 } from '@biscuits/client';
 import { BiscuitsError } from '@biscuits/error';
 import { parseIngredient } from '@gnocchi.biscuits/conversion';
@@ -102,7 +103,9 @@ const recipeScanQuery = graphql(`
   }
 `);
 
-export const hooks = createHooks<Presence, Profile>().withMutations({
+export const hooks = createHooks<Presence, Profile>({
+  Context: VerdantContext,
+}).withMutations({
   useDeleteItem: (client) => {
     return useCallback(
       async (item: Item) => {

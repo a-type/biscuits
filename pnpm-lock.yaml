@@ -74,14 +74,14 @@ importers:
         specifier: workspace:*
         version: link:../../../packages/client
       '@verdant-web/cli':
-        specifier: ^4.3.1
-        version: 4.3.1
+        specifier: ^4.3.2
+        version: 4.3.2
       '@verdant-web/common':
         specifier: 2.2.0
         version: 2.2.0
       '@verdant-web/react':
-        specifier: 28.0.0
-        version: 28.0.0(@verdant-web/store@3.3.0)(react@18.2.0)
+        specifier: 28.0.1
+        version: 28.0.1(@verdant-web/store@3.3.0)(react@18.2.0)
       '@verdant-web/store':
         specifier: 3.3.0
         version: 3.3.0
@@ -185,8 +185,8 @@ importers:
         specifier: 2.2.0
         version: 2.2.0
       '@verdant-web/react':
-        specifier: 28.0.0
-        version: 28.0.0(@verdant-web/store@3.3.0)(react@18.2.0)
+        specifier: 28.0.1
+        version: 28.0.1(@verdant-web/store@3.3.0)(react@18.2.0)
       '@verdant-web/react-router':
         specifier: ^0.6.1
         version: 0.6.1(react@18.2.0)
@@ -509,6 +509,9 @@ importers:
       '@urql/exchange-retry':
         specifier: ^1.2.1
         version: 1.2.1
+      clsx:
+        specifier: 2.1.0
+        version: 2.1.0
       gql.tada:
         specifier: ^1.2.1
         version: 1.2.1
@@ -10266,6 +10269,21 @@ packages:
       - '@swc/helpers'
     dev: false
 
+  /@verdant-web/cli@4.3.2:
+    resolution: {integrity: sha512-u8Q/8gO57V1EEKb4S8KV0siMe+WO6oaVGhkMUTSfSbAAysjUddsdcp/c3gTlZK8Bvqg1egJLl6OXDDl7XjZP8A==}
+    hasBin: true
+    dependencies:
+      '@clack/prompts': 0.5.1
+      '@swc/core': 1.4.2
+      change-case: 4.1.2
+      esbuild: 0.19.7
+      prettier: 3.2.5
+      yargs: 17.7.2
+      zod: 3.22.4
+    transitivePeerDependencies:
+      - '@swc/helpers'
+    dev: false
+
   /@verdant-web/common@1.16.2:
     resolution: {integrity: sha512-F/jLUyLO2X0sLyb0Om2nuaKEpAd5CRBq3bKxu7zpGtLlOtP3x/oKz+pWKgc/jiLBmPmxdzeMTlOlP1AAdcSNPA==}
     dependencies:
@@ -10312,8 +10330,8 @@ packages:
       use-sync-external-store: 1.2.0(react@18.2.0)
     dev: false
 
-  /@verdant-web/react@28.0.0(@verdant-web/store@3.3.0)(react@18.2.0):
-    resolution: {integrity: sha512-/KVvlV3nj+ddi10xfNJi9ICsDQktoIyiwLaCyK7oA4uRCoekpFlnLOtSOi43yl6mT0ydgZLys5f9w3/M81Ywmg==}
+  /@verdant-web/react@28.0.1(@verdant-web/store@3.3.0)(react@18.2.0):
+    resolution: {integrity: sha512-ysd3JKnyGsgjdPIl52l+MO4tUJuZV4UA4ie5c97aSEb1b/sDvho1Y4D+61BxcdqeFHG5+ByN64JlRdWHvTg9aA==}
     peerDependencies:
       '@verdant-web/store': ^3.3.0
       react: ^18.2.0

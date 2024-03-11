@@ -1,10 +1,8 @@
 import { ListEdit } from '@/components/groceries/lists/ListEdit.jsx';
 import { ListSelect } from '@/components/groceries/lists/ListSelect.jsx';
-import { Icon } from '@/components/icons/Icon.jsx';
 import { RecipeSavePrompt } from '@/components/recipes/savePrompt/RecipeSavePrompt.jsx';
 import { OfflineIndicator } from '@/components/sync/OfflineIndicator.jsx';
 import { RecipePresenceNotification } from '@/components/sync/collaborationMenu/RecipePresenceNotification.jsx';
-import { People } from '@/components/sync/people/People.jsx';
 import { ListContext } from '@/contexts/ListContext.jsx';
 import { usePageTitle } from '@/hooks/usePageTitle.jsx';
 import { firstTimeOnboarding } from '@/onboarding/firstTimeOnboarding.js';
@@ -19,12 +17,10 @@ import {
 import {
   ChangelogDisplay,
   InstallButton,
-  ManagePlanButton,
-  PromoteSubscriptionButton,
   SubscribedOnly,
   SubscriptionExpiredDialog,
-  UnsubscribedOnly,
   UserMenu,
+  PresencePeople,
 } from '@biscuits/client';
 import { useNavigate, useParams } from '@verdant-web/react-router';
 import { Suspense, useCallback, useEffect } from 'react';
@@ -69,12 +65,11 @@ export function GroceriesPage() {
               <ChangelogDisplay className="sm:hidden" hideOnSeen />
             </Suspense>
             <InstallButton />
-            <SubscribedOnly>
+            <UserMenu>
               <Suspense>
-                <People hideIfAlone />
+                <PresencePeople />
               </Suspense>
-            </SubscribedOnly>
-            <UserMenu />
+            </UserMenu>
             <OfflineIndicator />
           </div>
         </TopControls>

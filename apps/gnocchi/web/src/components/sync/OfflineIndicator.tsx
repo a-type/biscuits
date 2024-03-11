@@ -5,7 +5,7 @@ import { useIsOffline } from '@biscuits/client';
 export function OfflineIndicator() {
   const offline = useIsOffline();
 
-  if (offline) return null;
+  if (!offline) return null;
 
   return (
     <Tooltip content="Offline - but your changes will be saved!">

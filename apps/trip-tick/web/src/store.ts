@@ -19,13 +19,11 @@ export const hooks = createHooks<Presence, VerdantProfile>();
 
 export const clientDescriptor = new ClientDescriptor({
   namespace: 'trip-tick',
-  sync: {
-    ...getVerdantSync({
-      apiOrigin: CONFIG.API_ORIGIN,
-      appId: 'trip-tick',
-      initialPresence: {},
-    }),
-  },
+  sync: getVerdantSync({
+    apiOrigin: CONFIG.API_ORIGIN,
+    appId: 'trip-tick',
+    initialPresence: {},
+  }),
   migrations,
   log: console.debug,
 });
