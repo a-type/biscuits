@@ -33,10 +33,10 @@ const CreatePlan = graphql(`
 export function SubscriptionSelect({}: SubscriptionSelectProps) {
   const [result, createPlan] = useMutation(CreatePlan);
 
-  const selectPlan = async (priceId: string) => {
+  const selectPlan = async (lookupKey: string) => {
     await createPlan({
       input: {
-        stripePriceId: priceId,
+        priceLookupKey: lookupKey,
       },
     });
   };
@@ -48,12 +48,12 @@ export function SubscriptionSelect({}: SubscriptionSelectProps) {
         <CardGrid>
           <SubscriptionChoiceButton
             disabled={result.fetching}
-            onClick={() => selectPlan(FOR_TWO_PRICE_ID)}
+            onClick={() => selectPlan('for_two')}
             lookupKey="for_two"
           />
           <SubscriptionChoiceButton
             disabled={result.fetching}
-            onClick={() => selectPlan(FAMILY_STYLE_PRICE_ID)}
+            onClick={() => selectPlan('family_style')}
             lookupKey="family_style"
           />
         </CardGrid>

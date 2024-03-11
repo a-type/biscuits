@@ -8,14 +8,15 @@ import {
   NavBarItemIcon,
 } from '@a-type/ui/components/navBar';
 import { useState } from 'react';
+import { AppPicker, AppPickerNavItem } from '@biscuits/client';
 
 export interface NavigationProps {}
 
 export function Navigation({}: NavigationProps) {
   const [pathname, setPathname] = useState(() => window.location.pathname);
   useOnLocationChange((location) => setPathname(location.pathname));
+  const matchTrips = pathname === '/' || pathname.startsWith('/trips');
   const matchLists = pathname.startsWith('/lists');
-  const matchTrips = pathname.startsWith('/trips');
 
   return (
     <PageNav className="sm:mt-4">
@@ -24,7 +25,7 @@ export function Navigation({}: NavigationProps) {
           asChild
           className="[&[data-active=true]]:(bg-primary-wash color-black)"
         >
-          <Link to="/trips" data-active={matchTrips}>
+          <Link to="/" data-active={matchTrips}>
             <NavBarItemIconWrapper>
               <NavBarItemIcon className="i-solar-suitcase-tag-linear" />
             </NavBarItemIconWrapper>
@@ -42,6 +43,8 @@ export function Navigation({}: NavigationProps) {
             <NavBarItemText>Lists</NavBarItemText>
           </Link>
         </NavBarItem>
+
+        <AppPickerNavItem />
       </NavBarRoot>
     </PageNav>
   );

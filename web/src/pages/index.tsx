@@ -1,9 +1,8 @@
 import { TopLoader } from '@/components/nav/TopLoader.jsx';
 import { Outlet, Router, makeRoutes } from '@verdant-web/react-router';
 import { Suspense, lazy } from 'react';
-
+import LoginPage from './LoginPage.jsx';
 const HomePage = lazy(() => import('./HomePage.js'));
-const JoinPage = lazy(() => import('./JoinPage.js'));
 
 const routes = makeRoutes([
   {
@@ -13,7 +12,7 @@ const routes = makeRoutes([
   },
   {
     path: '/join',
-    component: JoinPage,
+    component: lazy(() => import('./JoinPage.js')),
   },
   {
     path: '/verify',
@@ -22,6 +21,10 @@ const routes = makeRoutes([
   {
     path: '/plan',
     component: lazy(() => import('./PlanPage.js')),
+  },
+  {
+    path: '/login',
+    component: LoginPage,
   },
   {
     path: '/invite/:code',

@@ -145,13 +145,21 @@ async function cancelSubscription(
   });
 }
 
-export function createSubscription({
-  stripePriceId,
+export async function createSubscription({
+  priceLookupKey,
   stripeCustomerId,
+  ctx,
 }: {
-  stripePriceId: string;
+  priceLookupKey: string;
   stripeCustomerId: string;
+  ctx: GQLContext;
 }) {
+  const price =
+    await ctx.dataloaders.stripePriceLookupKeyLoader.load(priceLookupKey);
+  if (!price) {
+    throw new BiscuitsError(BiscuitsError.Code.Unexpected, 'Price not found');
+  }
+
   // Create the subscription. Note we're expanding the Subscription's
   // latest invoice and that invoice's payment_intent
   // so we can pass it to the front end to confirm the payment
@@ -159,7 +167,7 @@ export function createSubscription({
     customer: stripeCustomerId,
     items: [
       {
-        price: stripePriceId,
+        price: price.id,
       },
     ],
     payment_behavior: 'default_incomplete',
@@ -170,7 +178,7 @@ export function createSubscription({
 
 export async function setupNewPlan({
   userDetails,
-  stripePriceId,
+  priceLookupKey,
   ctx,
 }: {
   userDetails: {
@@ -179,7 +187,7 @@ export async function setupNewPlan({
     fullName: string;
     stripeCustomerId: string | null;
   };
-  stripePriceId: string;
+  priceLookupKey: string;
   ctx: GQLContext;
 }) {
   let stripeCustomerId = userDetails.stripeCustomerId;
@@ -193,8 +201,9 @@ export async function setupNewPlan({
   }
 
   const stripeSubscription = await createSubscription({
-    stripePriceId,
+    priceLookupKey,
     stripeCustomerId: stripeCustomerId,
+    ctx,
   });
 
   const productId = stripeSubscription.items.data[0].price.product as string;
@@ -208,7 +217,7 @@ export async function setupNewPlan({
         featureFlags: `{}`,
         name: 'New Plan',
         stripeSubscriptionId: stripeSubscription.id,
-        stripePriceId,
+        stripePriceId: stripeSubscription.items.data[0].price.id,
         stripeProductId: productId,
       })
       .returning('id')
@@ -232,7 +241,7 @@ export async function setupNewPlan({
 
 export async function updatePlanSubscription({
   userDetails,
-  stripePriceId,
+  priceLookupKey,
   ctx,
 }: {
   userDetails: {
@@ -242,7 +251,7 @@ export async function updatePlanSubscription({
     stripeCustomerId: string | null;
     planId: string | null;
   };
-  stripePriceId: string;
+  priceLookupKey: string;
   ctx: GQLContext;
 }) {
   const plan = await ctx.db
@@ -255,9 +264,16 @@ export async function updatePlanSubscription({
     throw new BiscuitsError(BiscuitsError.Code.Unexpected, 'Plan not found');
   }
 
+  // lookup the price
+  const price =
+    await ctx.dataloaders.stripePriceLookupKeyLoader.load(priceLookupKey);
+  if (!price) {
+    throw new BiscuitsError(BiscuitsError.Code.Unexpected, 'Price not found');
+  }
+
   if (!plan.stripeSubscriptionId) {
     // we provision a new subscription
-    return setupNewPlan({ userDetails, stripePriceId, ctx });
+    return setupNewPlan({ userDetails, priceLookupKey, ctx });
   }
 
   const subscription = await stripe.subscriptions.retrieve(
@@ -282,7 +298,7 @@ export async function updatePlanSubscription({
     items: [
       {
         id: plan.stripeSubscriptionId,
-        price: stripePriceId,
+        price: price.id,
       },
     ],
   });

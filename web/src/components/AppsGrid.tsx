@@ -17,9 +17,7 @@ export function AppsGrid() {
 }
 
 function AppCard({ app }: { app: AppManifest<AppId> }) {
-  const url = import.meta.env.DEV
-    ? app.devOriginOverride
-    : `https://${app.id}.${window.location.host}`;
+  const url = import.meta.env.DEV ? app.devOriginOverride : app.url;
   return (
     <a
       className={classNames(

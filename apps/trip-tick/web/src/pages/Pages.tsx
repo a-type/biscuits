@@ -1,7 +1,6 @@
-import { HomePage } from './HomePage.jsx';
 import { useCallback } from 'react';
 import { lazyWithPreload as lazy } from 'react-lazy-with-preload';
-import { makeRoutes, Router, Outlet, Link } from '@verdant-web/react-router';
+import { makeRoutes, Router, Outlet } from '@verdant-web/react-router';
 import { updateApp, updateState } from '@/updateState.js';
 import { PageRoot } from '@a-type/ui/components/layouts';
 import { TopLoader } from '@/components/nav/TopLoader.jsx';
@@ -16,20 +15,16 @@ const TripPage = lazy(() => import('./TripPage.jsx'));
 const routes = makeRoutes([
   {
     path: '/',
-    component: HomePage,
-    exact: true,
-  },
-  {
-    path: '/trips/:tripId',
-    component: TripPage,
-  },
-  {
-    path: '/trips',
     component: TripsPage,
+    exact: true,
     onVisited() {
       ListsPage.preload();
       TripPage.preload();
     },
+  },
+  {
+    path: '/trips/:tripId',
+    component: TripPage,
   },
   {
     path: '/lists/:listId',

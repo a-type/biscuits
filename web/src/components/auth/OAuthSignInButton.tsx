@@ -1,5 +1,5 @@
 import { Button, ButtonProps } from '@a-type/ui/components/button';
-import { API_HOST_HTTP } from '@/config.js';
+import { CONFIG } from '@biscuits/client';
 import { ReactNode } from 'react';
 
 export function OAuthSignInButton({
@@ -15,7 +15,7 @@ export function OAuthSignInButton({
   children?: ReactNode;
   inviteId?: string | null;
 } & ButtonProps) {
-  const url = new URL(`${API_HOST_HTTP}/auth/provider/${provider}/login`);
+  const url = new URL(`${CONFIG.API_ORIGIN}/auth/provider/${provider}/login`);
   if (returnTo) {
     url.searchParams.set('returnTo', returnTo);
   }

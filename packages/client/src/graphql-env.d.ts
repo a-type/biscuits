@@ -2265,7 +2265,7 @@ export type introspection = {
         "name": "SetupPlanInput",
         "inputFields": [
           {
-            "name": "stripePriceId",
+            "name": "priceLookupKey",
             "type": {
               "kind": "NON_NULL",
               "ofType": {

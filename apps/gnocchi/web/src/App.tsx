@@ -3,7 +3,7 @@ import { Suspense, useLayoutEffect, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { Pages } from './pages/Pages.jsx';
 import { Provider as GroceriesProvider } from './stores/groceries/Provider.jsx';
-import { IconSpritesheet } from './components/icons/generated/IconSpritesheet.jsx';
+import { IconSpritesheet } from '@a-type/ui/components/icon';
 import { ReloadButton } from '@/components/sync/ReloadButton.jsx';
 import { GlobalLoader } from '@/GlobalLoader.jsx';
 import { useVisualViewportOffset } from '@a-type/ui/hooks';
@@ -61,7 +61,7 @@ function ErrorFallback() {
         <H1>Something went wrong</H1>
         <P>
           Sorry about this. The app has crashed. You can try refreshing, but if
-          that doesn't work,{' '}
+          that doesn&apos;t work,{' '}
           <a className="underline font-bold" href="mailto:hi@gnocchi.club">
             let me know about it.
           </a>

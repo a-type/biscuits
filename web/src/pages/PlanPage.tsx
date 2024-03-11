@@ -1,20 +1,20 @@
 import { SubscriptionSetup } from '@/components/subscription/SubscriptionSetup.jsx';
-import { graphql } from '@/graphql';
+import { graphql } from '@/graphql.js';
 import {
   PageContent,
   PageFixedArea,
   PageRoot,
 } from '@a-type/ui/components/layouts';
-import { Avatar } from '@a-type/ui/components/avatar';
 import { H1, H2 } from '@a-type/ui/components/typography';
-import { Link, useNavigate } from '@verdant-web/react-router';
+import { Link, useNavigate, useSearchParams } from '@verdant-web/react-router';
 import { Suspense, useEffect } from 'react';
 import { useQuery } from 'urql';
 import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
-import { API_HOST_HTTP } from '@/config.js';
 import { MembersAndInvitations } from '@/components/plan/MembersAndInvitations.jsx';
 import { VerdantLibraries } from '@/components/storage/VerdantLibraries.jsx';
+import { LogoutButton } from '@biscuits/client';
+import { apps } from '@biscuits/apps';
 
 const PlanPageData = graphql(`
   query PlanPageData {
@@ -33,6 +33,12 @@ export interface PlanPageProps {}
 export function PlanPage({}: PlanPageProps) {
   const [result] = useQuery({ query: PlanPageData });
   const { data } = result;
+  const [searchParams] = useSearchParams();
+  const returnToAppId = searchParams.get('fromApp');
+  const returnToApp = apps.find((app) => app.id === returnToAppId) ?? undefined;
+  const returnToAppUrl = import.meta.env.DEV
+    ? returnToApp?.devOriginOverride
+    : returnToApp?.url;
 
   const navigate = useNavigate();
 
@@ -46,20 +52,13 @@ export function PlanPage({}: PlanPageProps) {
     <PageRoot>
       <PageContent innerProps={{ className: 'flex flex-col gap-6' }}>
         <PageFixedArea className="mb-10 flex flex-row items-center w-full">
-          <Button asChild>
-            <Link to="/">
-              <Icon name="arrowLeft" /> Back to apps
+          <Button asChild color="primary">
+            <Link to={returnToAppUrl ?? '/'}>
+              <Icon name="arrowLeft" />
+              <span>Back to {returnToApp?.name ?? 'apps'}</span>
             </Link>
           </Button>
-          <form
-            className="ml-auto"
-            action={`${API_HOST_HTTP}/auth/logout`}
-            method="post"
-          >
-            <Button type="submit" color="destructive">
-              Log Out
-            </Button>
-          </form>
+          <LogoutButton />
         </PageFixedArea>
         <H1>Your Plan</H1>
         <Suspense>

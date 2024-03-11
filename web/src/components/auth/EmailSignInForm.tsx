@@ -1,10 +1,11 @@
-import { API_HOST_HTTP } from '@/config.js';
 import { Button } from '@a-type/ui/components/button';
 import {
   Dialog,
   DialogContent,
   DialogTrigger,
 } from '@a-type/ui/components/dialog';
+import { Input } from '@a-type/ui/components/input';
+import { CONFIG } from '@biscuits/client';
 
 export interface EmailSignInFormProps {
   returnTo?: string;
@@ -12,30 +13,35 @@ export interface EmailSignInFormProps {
 
 export function EmailSignInForm({ returnTo = '' }: EmailSignInFormProps) {
   return (
-    <form action={`${API_HOST_HTTP}/auth/email-login?returnTo=${returnTo}`}>
-      <input name="email" autoComplete="email" required />
-      <input
+    <form
+      className="flex flex-col gap-2"
+      action={`${CONFIG.API_ORIGIN}/auth/email-login?returnTo=${returnTo}`}
+    >
+      <Input name="email" autoComplete="email" required />
+      <Input
         autoComplete="current-password"
         name="password"
         type="password"
         required
       />
-      <Button type="submit">Sign In</Button>
-      <ForgotPassword />
+      <Button type="submit" className="self-end">
+        Sign In
+      </Button>
+      <ForgotPassword className="self-end" />
     </form>
   );
 }
 
-function ForgotPassword() {
+function ForgotPassword({ className }: { className?: string }) {
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <button className="bg-none border-none p-0 color-black underline cursor-pointer">
+      <DialogTrigger asChild className={className}>
+        <button className="bg-transparent border-none p-0 color-black underline cursor-pointer">
           Forgot password?
         </button>
       </DialogTrigger>
       <DialogContent>
-        <form action={`${API_HOST_HTTP}/auth/begin-reset-password`}>
+        <form action={`${CONFIG.API_ORIGIN}/auth/begin-reset-password`}>
           <input name="email" />
           <Button type="submit">Send reset email</Button>
         </form>

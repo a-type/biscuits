@@ -14,3 +14,5 @@ export * from './gates.js';
 export * from './LogoutButton.js';
 export * from './PushSubscriptionToggle.js';
 export * from './SubscriptionExpiredDialog.js';
+export * from './AppPicker.jsx';
+export * from './UserMenu.jsx';

@@ -24,6 +24,7 @@ import {
   SubscribedOnly,
   SubscriptionExpiredDialog,
   UnsubscribedOnly,
+  UserMenu,
 } from '@biscuits/client';
 import { useNavigate, useParams } from '@verdant-web/react-router';
 import { Suspense, useCallback, useEffect } from 'react';
@@ -68,23 +69,12 @@ export function GroceriesPage() {
               <ChangelogDisplay className="sm:hidden" hideOnSeen />
             </Suspense>
             <InstallButton />
-            <UnsubscribedOnly>
-              <PromoteSubscriptionButton size="small" color="accent">
-                Upgrade
-              </PromoteSubscriptionButton>
-            </UnsubscribedOnly>
             <SubscribedOnly>
               <Suspense>
                 <People hideIfAlone />
               </Suspense>
-              <ManagePlanButton
-                size="icon"
-                color="ghost"
-                className="opacity-70"
-              >
-                <Icon name="add_person" />
-              </ManagePlanButton>
             </SubscribedOnly>
+            <UserMenu />
             <OfflineIndicator />
           </div>
         </TopControls>

@@ -1,6 +1,6 @@
 import { Input } from '@a-type/ui/components/input';
 import { Button } from '@a-type/ui/components/button';
-import { API_HOST_HTTP } from '@/config.js';
+import { CONFIG } from '@biscuits/client';
 
 export interface EmailCompleteSignUpFormProps {
   code: string;
@@ -12,7 +12,7 @@ export function EmailCompleteSignupForm({
   email,
 }: EmailCompleteSignUpFormProps) {
   return (
-    <form action={`${API_HOST_HTTP}/auth/complete-email-signup`}>
+    <form action={`${CONFIG.API_ORIGIN}/auth/complete-email-signup`}>
       <input type="hidden" name="code" value={code} />
       <label htmlFor="email">Email</label>
       <Input name="email" autoComplete="email" required disabled={!!email} />

@@ -108,14 +108,14 @@ builder.mutationFields((t) => ({
         // to use the new product. if not, just update the plan
         const plan = await updatePlanSubscription({
           userDetails,
-          stripePriceId: input.stripePriceId,
+          priceLookupKey: input.priceLookupKey,
           ctx,
         });
         planId = plan.id;
       } else {
         const plan = await setupNewPlan({
           userDetails,
-          stripePriceId: input.stripePriceId,
+          priceLookupKey: input.priceLookupKey,
           ctx,
         });
         planId = plan.id;
@@ -466,7 +466,7 @@ builder.objectType('StripeCheckoutData', {
 
 builder.inputType('SetupPlanInput', {
   fields: (t) => ({
-    stripePriceId: t.string({
+    priceLookupKey: t.string({
       required: true,
     }),
   }),

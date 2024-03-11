@@ -15,7 +15,7 @@ export function TripPage({}: TripPageProps) {
     <PageContent>
       <PageFixedArea className="py-2 flex flex-row justify-between">
         <Button asChild color="ghost">
-          <Link to="/trips">
+          <Link to="/">
             <Icon name="arrowLeft" />
             Back to trips
           </Link>

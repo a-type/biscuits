@@ -10,7 +10,7 @@ const graphqlClient = createGraphQLClient();
 export function App() {
   return (
     <Suspense>
-      <Provider value={graphqlClient}>
+      <Provider appId="trip-tick" graphqlClient={graphqlClient}>
         <LofiProvider>
           <Pages />
           <IconSpritesheet />

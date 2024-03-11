@@ -1,4 +1,3 @@
-import { API_HOST_HTTP } from '@/config.js';
 import { FragmentOf, graphql, readFragment } from '@/graphql.js';
 import { Button } from '@a-type/ui/components/button';
 import { useSearchParams } from '@verdant-web/react-router';
@@ -10,6 +9,7 @@ import classNames from 'classnames';
 import { useQuery } from 'urql';
 import { Icon } from '@a-type/ui/components/icon';
 import { H2 } from '@a-type/ui/components/typography';
+import { CONFIG } from '@biscuits/client';
 
 export const manageSubscriptionInfo = graphql(
   `
@@ -84,7 +84,7 @@ export function ManageSubscription({
         </div>
         {data.productInfo && <PlanInfo data={data.productInfo} />}
       </div>
-      <form action={`${API_HOST_HTTP}/stripe/portal-session`} method="POST">
+      <form action={`${CONFIG.API_ORIGIN}/stripe/portal-session`} method="POST">
         <Button type="submit">Change your subscription</Button>
         <span className="text-xs">
           Update your plan, change your card, or unsubscribe

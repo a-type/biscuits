@@ -21,7 +21,11 @@ import { OnboardingTooltip } from '../onboarding/OnboardingTooltip.jsx';
 import { useHasNewExpirations } from '../pantry/hooks.js';
 import { PopEffect } from './PopEffect.jsx';
 import { withClassName } from '@a-type/ui/hooks';
-import { ChangelogDisplay } from '@biscuits/client';
+import {
+  AppPicker,
+  AppPickerNavItem,
+  ChangelogDisplay,
+} from '@biscuits/client';
 
 export interface NavBarProps {}
 
@@ -51,7 +55,7 @@ export function NavBar({}: NavBarProps) {
         <GroceriesNavBarLink active={matchGroceries} />
         <PantryNavBarLink active={matchPurchased} />
         <RecipesNavBarLink active={matchRecipes} />
-        <SettingsNavBarLink active={matchSettings} />
+        <AppPickerNavItem />
         <NavBarChangelog />
       </Suspense>
     </PageNav>

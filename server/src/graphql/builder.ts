@@ -87,7 +87,7 @@ export const builder = new SchemaBuilder<{
   };
   Inputs: {
     SetupPlanInput: {
-      stripePriceId: string;
+      priceLookupKey: string;
     };
     CreatePlanInvitationInput: {
       email: string;
