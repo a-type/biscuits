@@ -40,6 +40,9 @@ export const fetch: typeof window.fetch = async (input: any, init: any) => {
       if (refreshSuccess) {
         // retry the original request
         return fetch(input, init);
+      } else {
+        // failed to refresh the session - the user needs
+        // to log in again
       }
     }
   }
