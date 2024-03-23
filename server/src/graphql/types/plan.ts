@@ -404,13 +404,13 @@ Plan.implement({
       resolve: async (plan, { app }, ctx) => {
         const libraryName = getLibraryName(plan.id, app);
         const info = await ctx.verdant.getLibraryInfo(libraryName);
-        if (info.baselinesCount === 0 && info.operationsCount === 0) {
+        if (
+          !info ||
+          (info.baselinesCount === 0 && info.operationsCount === 0)
+        ) {
           return null;
         }
-        return {
-          id: libraryName,
-          ...info,
-        };
+        return info;
       },
     }),
     pendingInvitations: t.field({
@@ -441,16 +441,20 @@ Plan.implement({
     featureFlags: t.field({
       type: ['String'],
       resolve: async (plan) => {
-        try {
-          const planFlags = JSON.parse(plan.featureFlags ?? '{}');
-          return Object.keys(planFlags).filter((key) => planFlags[key]);
-        } catch (err) {
-          logger.warn('Error parsing plan feature flags', {
-            planId: plan.id,
-            featureFlags: plan.featureFlags,
-            error: err,
-          });
-          return [];
+        if (typeof plan.featureFlags === 'string') {
+          try {
+            const planFlags = JSON.parse(plan.featureFlags ?? '{}');
+            return Object.keys(planFlags).filter((key) => planFlags[key]);
+          } catch (err) {
+            logger.warn('Error parsing plan feature flags', {
+              planId: plan.id,
+              featureFlags: plan.featureFlags,
+              error: err,
+            });
+            return [];
+          }
+        } else {
+          return plan.featureFlags ?? [];
         }
       },
     }),
