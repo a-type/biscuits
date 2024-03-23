@@ -34,7 +34,7 @@ export function PlanPage({}: PlanPageProps) {
   const [result] = useQuery({ query: PlanPageData });
   const { data } = result;
   const [searchParams] = useSearchParams();
-  const returnToAppId = searchParams.get('fromApp');
+  const returnToAppId = searchParams.get('appReferrer');
   const returnToApp = apps.find((app) => app.id === returnToAppId) ?? undefined;
   const returnToAppUrl = import.meta.env.DEV
     ? returnToApp?.devOriginOverride
@@ -44,7 +44,10 @@ export function PlanPage({}: PlanPageProps) {
 
   useEffect(() => {
     if (!result.fetching && !result.data?.me) {
-      navigate('/login');
+      const search = window.location.search;
+      const path = window.location.pathname;
+      const returnTo = encodeURIComponent(path + search);
+      navigate(`/login?returnTo=${returnTo}`);
     }
   }, [result, navigate]);
 

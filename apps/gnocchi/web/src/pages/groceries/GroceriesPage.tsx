@@ -1,5 +1,6 @@
 import { ListEdit } from '@/components/groceries/lists/ListEdit.jsx';
 import { ListSelect } from '@/components/groceries/lists/ListSelect.jsx';
+import { Icon } from '@/components/icons/Icon.jsx';
 import { RecipeSavePrompt } from '@/components/recipes/savePrompt/RecipeSavePrompt.jsx';
 import { OfflineIndicator } from '@/components/sync/OfflineIndicator.jsx';
 import { RecipePresenceNotification } from '@/components/sync/collaborationMenu/RecipePresenceNotification.jsx';
@@ -64,13 +65,19 @@ export function GroceriesPage() {
             <Suspense>
               <ChangelogDisplay className="sm:hidden" hideOnSeen />
             </Suspense>
+            <Suspense>
+              <OfflineIndicator />
+            </Suspense>
             <InstallButton />
-            <UserMenu>
-              <Suspense>
-                <PresencePeople />
-              </Suspense>
-            </UserMenu>
-            <OfflineIndicator />
+            <Suspense>
+              <UserMenu>
+                <Suspense
+                  fallback={<Icon className="w-32px h-32px" name="profile" />}
+                >
+                  <PresencePeople />
+                </Suspense>
+              </UserMenu>
+            </Suspense>
           </div>
         </TopControls>
         <AddBar />

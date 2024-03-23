@@ -13,7 +13,7 @@ import { useListId } from '@/contexts/ListContext.jsx';
 import useMergedRef from '@/hooks/useMergedRef.js';
 import { useIsFirstRender, usePrevious } from '@/hooks/usePrevious.js';
 import { categorizeOnboarding } from '@/onboarding/categorizeOnboarding.js';
-import { Presence, Profile, hooks } from '@/stores/groceries/index.js';
+import { Person, Presence, Profile, hooks } from '@/stores/groceries/index.js';
 import { Button } from '@a-type/ui/components/button';
 import {
   CheckboxIndicator,
@@ -48,7 +48,6 @@ import {
   Pencil1Icon,
   TrashIcon,
 } from '@radix-ui/react-icons';
-import { UserInfo } from '@verdant-web/store';
 import classNames from 'classnames';
 import {
   CSSProperties,
@@ -355,7 +354,7 @@ function RecentPeople({ item }: { item: Item }) {
 
 function usePeopleWhoLastEditedThis(itemId: string) {
   const groceries = hooks.useClient();
-  const [people, setPeople] = useState<UserInfo<Profile, Presence>[]>(() => {
+  const [people, setPeople] = useState<Person[]>(() => {
     return Object.values(groceries.sync.presence.peers).filter(
       (p) => p.presence.lastInteractedItem === itemId,
     );

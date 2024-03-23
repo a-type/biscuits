@@ -1,4 +1,8 @@
-import { AvatarList, AvatarListItem } from '@a-type/ui/components/avatar';
+import {
+  Avatar,
+  AvatarList,
+  AvatarListItem,
+} from '@a-type/ui/components/avatar';
 import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
 import { useContext, useSyncExternalStore } from 'react';
 import { VerdantContext, VerdantProfile } from '../index.js';
@@ -33,7 +37,7 @@ export function PresencePeople({
   );
 
   if (!syncing || (hideIfAlone && peers.length === 0)) {
-    return null;
+    return <Avatar />;
   }
 
   return (

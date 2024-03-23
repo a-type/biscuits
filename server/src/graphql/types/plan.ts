@@ -391,7 +391,7 @@ Plan.implement({
     libraryInfo: t.field({
       type: 'PlanLibraryInfo',
       authScopes: {
-        productAdmin: true,
+        member: true,
       },
       nullable: true,
       args: {
