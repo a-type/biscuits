@@ -17,7 +17,7 @@ const innerProps = {
 
 export default function HomePage() {
   return (
-    <PageRoot className="bg-primary flex-basis-auto">
+    <PageRoot className="bg-primary-wash flex-basis-auto">
       <Background />
       <Suspense>
         <Paws />
@@ -28,7 +28,7 @@ export default function HomePage() {
             className={classNames(
               '[font-family:"VC_Henrietta_Trial","Noto_Serif",serif]',
               'text-[5vmin] m-0 font-normal text-primary-dark text-shadow',
-              'bg-primary p-2 rounded-lg leading-none',
+              'bg-primary-wash p-2 rounded-lg leading-none',
             )}
           >
             Biscuits
@@ -75,7 +75,7 @@ function Background() {
           c 14.109208,6.556587 28.71589,-4.334327 40.138713,5.166369 11.422824,9.500696 -0.04547,17.716434 5.50578,29.604545 6.792338,14.54591 13.568365,19.601822 34.23552,25.635865
           l -0.52988,-95.90900901
           z`}
-        className="fill-primary-light"
+        className="fill-primary-light opacity-20"
       />
     </svg>
   );

@@ -13,7 +13,7 @@ import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
 import { MembersAndInvitations } from '@/components/plan/MembersAndInvitations.jsx';
 import { VerdantLibraries } from '@/components/storage/VerdantLibraries.jsx';
-import { LogoutButton } from '@biscuits/client';
+import { LogoutButton, useLocalStorage } from '@biscuits/client';
 import { apps } from '@biscuits/apps';
 
 const PlanPageData = graphql(`
@@ -40,16 +40,22 @@ export function PlanPage({}: PlanPageProps) {
     ? returnToApp?.devOriginOverride
     : returnToApp?.url;
 
+  const hasAccount = !!result.data?.me;
+  const [_, setSeen] = useLocalStorage('seenBefore', false);
+  useEffect(() => {
+    if (hasAccount) setSeen(true);
+  }, [setSeen, hasAccount]);
+
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!result.fetching && !result.data?.me) {
+    if (!result.fetching && !hasAccount) {
       const search = window.location.search;
       const path = window.location.pathname;
       const returnTo = encodeURIComponent(path + search);
       navigate(`/login?returnTo=${returnTo}`);
     }
-  }, [result, navigate]);
+  }, [result, navigate, hasAccount]);
 
   return (
     <PageRoot>
