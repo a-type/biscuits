@@ -17,7 +17,7 @@ const innerProps = {
 
 export default function HomePage() {
   return (
-    <PageRoot className="bg-primary">
+    <PageRoot className="bg-primary flex-basis-auto">
       <Background />
       <Suspense>
         <Paws />
@@ -28,6 +28,7 @@ export default function HomePage() {
             className={classNames(
               '[font-family:"VC_Henrietta_Trial","Noto_Serif",serif]',
               'text-[5vmin] m-0 font-normal text-primary-dark text-shadow',
+              'bg-primary p-2 rounded-lg leading-none',
             )}
           >
             Biscuits
