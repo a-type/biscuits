@@ -17,9 +17,14 @@ export default function LoginPage() {
   const activeTab = searchParams.get('tab') ?? 'signin';
 
   return (
-    <div className="flex flex-row items-stretch justify-stretch h-full flex-1">
-      <div className="flex flex-col gap-3 flex-1 p-4 items-center bg-primary-light border-r-solid border-r border-r-3 border-r-primary-dark">
-        <H1>Join the club</H1>
+    <div className="flex flex-col items-center justify-center h-screen flex-1 bg-primary-wash">
+      <div className="absolute top-0 left-0 w-full h-screen flex-[2]">
+        <Paws />
+      </div>
+      <div className="flex flex-col gap-3 p-6 items-center bg-primary-light border-solid border border-3 border-primary-dark rounded-lg relative z-1">
+        <h1 className='[font-family:"VC_Henrietta_Trial","Noto_Serif",serif] mb-0'>
+          Join the club
+        </h1>
         <TabsRoot
           className="flex flex-col"
           value={activeTab}
@@ -57,9 +62,6 @@ export default function LoginPage() {
             <EmailSignInForm returnTo={returnTo} />
           </TabsContent>
         </TabsRoot>
-      </div>
-      <div className="hidden lg:block relative bg-primary w-full h-screen flex-[2]">
-        <Paws />
       </div>
     </div>
   );

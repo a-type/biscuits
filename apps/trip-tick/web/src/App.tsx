@@ -1,7 +1,12 @@
 import { Pages } from '@/pages/Pages.jsx';
 import { clientDescriptor, hooks } from '@/store.js';
 import { IconSpritesheet } from '@a-type/ui/components/icon';
-import { useIsLoggedIn, Provider, createGraphQLClient } from '@biscuits/client';
+import {
+  useIsLoggedIn,
+  Provider,
+  createGraphQLClient,
+  AppPreviewNotice,
+} from '@biscuits/client';
 import { ReactNode, Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
 
@@ -12,6 +17,7 @@ export function App() {
     <Suspense>
       <Provider appId="trip-tick" graphqlClient={graphqlClient}>
         <LofiProvider>
+          <AppPreviewNotice />
           <Pages />
           <IconSpritesheet />
           <Toaster

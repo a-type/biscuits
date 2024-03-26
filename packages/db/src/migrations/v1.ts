@@ -112,7 +112,7 @@ export async function up(db: Kysely<any>) {
     .addColumn('updatedAt', 'datetime', (col) =>
       col.notNull().defaultTo(sql`CURRENT_TIMESTAMP`),
     )
-    .addColumn('email', 'text', (col) => col.notNull().unique())
+    .addColumn('email', 'text', (col) => col.notNull())
     .addColumn('code', 'text', (col) => col.notNull())
     .addColumn('name', 'text', (col) => col.notNull())
     .addColumn('expiresAt', 'datetime', (col) => col.notNull())

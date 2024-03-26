@@ -26,7 +26,7 @@ export function LogoutNotice({}: LogoutNoticeProps) {
     if (isLoggedIn) {
       setWasLoggedIn(true);
     }
-  }, [isLoggedIn]);
+  }, [isLoggedIn, setWasLoggedIn]);
 
   return (
     <Dialog open={wasLoggedInButNowLoggedOut} onOpenChange={setWasLoggedIn}>

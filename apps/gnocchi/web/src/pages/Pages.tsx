@@ -170,21 +170,19 @@ const routes = makeRoutes([
 ]);
 
 function LayoutWithNavBar() {
-  const big = useMediaQuery('(min-width: 640px)');
-  if (big) {
-    return (
-      <PageRoot>
-        <Outlet />
-        <NavBar />
-      </PageRoot>
-    );
-  }
   return (
     <PageRoot>
-      <SwipeOutlet scroll className="[grid-area:content]" />
+      <Outlet />
       <NavBar />
     </PageRoot>
   );
+
+  // return (
+  //   <PageRoot>
+  //     <SwipeOutlet scroll className="[grid-area:content]" />
+  //     <NavBar />
+  //   </PageRoot>
+  // );
 }
 
 export function Pages() {

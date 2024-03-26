@@ -1,4 +1,5 @@
 import { LocalFileStorage, Server, UserProfiles } from '@verdant-web/server';
+import { sqlStorage } from '@verdant-web/server/storage';
 import { DEPLOYED_ORIGIN } from '../config/deployedContext.js';
 import { assert } from '@a-type/utils';
 import { S3FileStorage } from '@verdant-web/s3-file-storage';
@@ -42,7 +43,9 @@ class Profiles implements UserProfiles<BiscuitsVerdantProfile> {
 
 const logger = new Logger('🌿');
 export const verdantServer = new Server({
-  databaseFile: STORAGE_DATABASE_FILE!,
+  storage: sqlStorage({
+    databaseFile: STORAGE_DATABASE_FILE!,
+  }),
   tokenSecret: VERDANT_SECRET!,
   profiles: new Profiles(),
   replicaTruancyMinutes: 14 * 60 * 24,

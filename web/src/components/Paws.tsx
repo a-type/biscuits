@@ -51,7 +51,7 @@ export function Paws() {
         <Environment preset="sunset" />
         <PerspectiveCamera makeDefault position={[0, 30, 0]} />
         {/* Axishelper */}
-        {/* <OrbitControls /> */}
+        <OrbitControls enabled={false} />
         {/* <axesHelper /> */}
         {/* <cameraHelper /> */}
       </Canvas>

@@ -12,10 +12,10 @@
     "react": "^18.2.0"
   },
   "dependencies": {
-    "@verdant-web/cli": "^4.1.0",
-    "@verdant-web/common": "^1.16.1",
-    "@verdant-web/react": "^24.0.1",
-    "@verdant-web/store": "^2.8.4",
+    "@verdant-web/cli": "^4.3.2",
+    "@verdant-web/common": "2.3.0",
+    "@verdant-web/react": "29.0.0",
+    "@verdant-web/store": "3.4.0",
     "cuid": "^2.1.8"
   }
 }

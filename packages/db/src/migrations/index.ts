@@ -10,4 +10,6 @@ import * as v5 from "./v5_push_app_id.js";
 import * as v6 from "./v6_foods.js";
 
 import * as v7 from "./v7_changelog_app_ids.js";
-export default { v1, v2, v3, v4, v5, v6, v7 };
+
+import * as v8 from "./v8_more-indexes.js";
+export default { v1, v2, v3, v4, v5, v6, v7, v8 };

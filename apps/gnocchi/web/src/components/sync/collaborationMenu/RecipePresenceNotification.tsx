@@ -1,8 +1,7 @@
 import { makeRecipeLink } from '@/components/recipes/makeRecipeLink.js';
-import { Presence, Profile, hooks } from '@/stores/groceries/index.js';
+import { Person, Presence, Profile, hooks } from '@/stores/groceries/index.js';
 import { Button } from '@a-type/ui/components/button';
 import { PageNowPlaying } from '@a-type/ui/components/layouts';
-import { UserInfo } from '@verdant-web/common';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { Suspense, useState } from 'react';
 import { PersonAvatar } from '../people/PersonAvatar.jsx';
@@ -55,7 +54,7 @@ function RecipePresenceLink({
   onDismiss,
 }: {
   recipeId: string;
-  person: UserInfo<Profile, Presence>;
+  person: Person;
   onDismiss: () => void;
 }) {
   const recipe = hooks.useRecipe(recipeId);

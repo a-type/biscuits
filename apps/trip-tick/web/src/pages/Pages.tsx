@@ -5,6 +5,7 @@ import { updateApp, updateState } from '@/updateState.js';
 import { PageRoot } from '@a-type/ui/components/layouts';
 import { TopLoader } from '@/components/nav/TopLoader.jsx';
 import { Navigation } from '@/components/nav/Navigation.jsx';
+import { LogoutNotice } from '@biscuits/client';
 
 // dynamically import pages that may not be visited
 const ListsPage = lazy(() => import('./ListsPage.jsx'));
@@ -52,6 +53,7 @@ export function Pages() {
       <Router routes={routes} onNavigate={onNavigate}>
         <Outlet />
         <TopLoader />
+        <LogoutNotice />
       </Router>
       <Navigation />
     </PageRoot>
