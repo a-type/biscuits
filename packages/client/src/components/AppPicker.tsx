@@ -5,7 +5,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@a-type/ui/components/popover';
-import { CONFIG, useAppId } from '../index.js';
+import { CONFIG, getIsPWAInstalled, useAppId } from '../index.js';
 import { ReactNode, useEffect } from 'react';
 import { apps } from '@biscuits/apps';
 import {
@@ -31,9 +31,17 @@ export function AppPicker({ className, children }: AppPickerProps) {
           const appId = payload.appId;
           const app = apps.find((app) => app.id === appId);
           if (app) {
-            window.location.href = import.meta.env.DEV
-              ? app.devOriginOverride
-              : app.url;
+            const url = new URL(
+              import.meta.env.DEV ? app.devOriginOverride : app.url,
+            );
+            if (getIsPWAInstalled()) {
+              // when opening another app from a PWA, unless the other app's PWA
+              // is installed, it opens inside a frame in the current PWA. That's not
+              // ideal, so we add a query param to the URL to indicate that the other
+              // app should show a banner to the user about how to install.
+              url.searchParams.set('appPickerFrom', hostApp);
+            }
+            window.location.href = url.toString();
           }
         }
       }

@@ -12,7 +12,7 @@ import { TooltipProvider } from '@a-type/ui/components/tooltip';
 import { P, H1 } from '@a-type/ui/components/typography';
 import { ParticleLayer } from '@a-type/ui/components/particles';
 import { GlobalSyncingIndicator } from '@/components/sync/GlobalSyncingIndicator.jsx';
-import { Provider } from '@biscuits/client';
+import { AppPreviewNotice, Provider } from '@biscuits/client';
 import { graphqlClient } from './graphql.js';
 
 export function App() {
@@ -37,6 +37,7 @@ export function App() {
             <Provider graphqlClient={graphqlClient} appId="gnocchi">
               <GroceriesProvider>
                 <ParticleLayer>
+                  <AppPreviewNotice />
                   <Pages />
                   <Toaster
                     position="bottom-center"

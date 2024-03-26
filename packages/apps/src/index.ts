@@ -37,3 +37,7 @@ export const appIds = apps.map((app) => app.id) as AppId[];
 export function isValidAppId(appId: string): appId is AppId {
   return appIds.includes(appId as AppId);
 }
+
+export const appsById = Object.fromEntries(
+  apps.map((app) => [app.id, app]),
+) as Record<AppId, (typeof apps)[number]>;

@@ -28,6 +28,7 @@ export default defineConfig(({ command, mode }) => ({
       srcDir: 'src',
       filename: 'service-worker.ts',
       manifest: {
+        id: 'gnocchi-main',
         name: 'Gnocchi',
         short_name: 'Gnocchi',
         description: 'Your grocery list, done better.',
@@ -70,7 +71,7 @@ export default defineConfig(({ command, mode }) => ({
         ],
         categories: ['food'],
         display: 'standalone',
-        start_url: '/',
+        start_url: '/?directLaunch=true',
         share_target: {
           action: 'share',
           method: 'POST',

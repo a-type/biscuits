@@ -15,9 +15,10 @@ export default defineConfig({
       srcDir: 'src',
       filename: 'service-worker.ts',
       manifest: {
-        name: 'packing-list',
-        short_name: 'packing-list',
-        description: '',
+        id: 'trip-tick-main',
+        name: 'Trip Tick',
+        short_name: 'Trip Tick',
+        description: 'Stress-free trip packing',
         theme_color: '#ffffff',
         background_color: '#ffffff',
         icons: [
@@ -34,7 +35,7 @@ export default defineConfig({
         ],
         categories: [],
         display: 'standalone',
-        start_url: '/',
+        start_url: '/?directLaunch=true',
       } as any,
       includeAssets: ['fonts/**/*', 'images/**/*'],
 
