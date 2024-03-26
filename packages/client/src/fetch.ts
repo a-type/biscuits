@@ -57,7 +57,7 @@ const refreshTokenStorage = {
 
 export async function refreshSession(apiOrigin: string) {
   const refreshToken = refreshTokenStorage.get();
-  if (!refreshToken) return false;
+  if (!refreshToken) return refreshSessionViaIframe();
   try {
     const response = await fetch(`${apiOrigin}/auth/refresh`, {
       method: 'POST',
@@ -74,6 +74,46 @@ export async function refreshSession(apiOrigin: string) {
   } catch (e) {
     console.error(e);
     return false;
+  }
+}
+
+async function refreshSessionViaIframe() {
+  let iframe: HTMLIFrameElement | null = null;
+  try {
+    return await new Promise<void>((resolve, reject) => {
+      const iframeUrl = `${import.meta.env.VITE_HOME_ORIGIN}/refresh-session`;
+      // go ahead and subscribe to postMessage events
+      window.addEventListener('message', (event) => {
+        if (event.data.type === 'refresh-session') {
+          if (event.data.success) {
+            console.debug('refreshed session via iframe');
+            // store the new refresh token
+            refreshTokenStorage.set(event.data.success.refreshToken);
+            resolve();
+          }
+        }
+      });
+      iframe = document.createElement('iframe');
+      iframe.style.display = 'none';
+      iframe.src = iframeUrl;
+      iframe.addEventListener('load', () => {
+        console.debug('iframe loaded');
+      });
+      iframe.addEventListener('error', (ev) => {
+        console.error('iframe failed to load', ev.error);
+        reject(ev.error);
+      });
+      document.body.appendChild(iframe);
+
+      // failure case: if the iframe doesn't load, reject
+      setTimeout(() => {
+        reject(new Error('iframe-based session refresh timed out'));
+      }, 5000);
+    });
+  } finally {
+    if (iframe) {
+      document.body.removeChild(iframe);
+    }
   }
 }
 

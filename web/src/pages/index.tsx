@@ -2,6 +2,7 @@ import { TopLoader } from '@/components/nav/TopLoader.jsx';
 import { Outlet, Router, makeRoutes } from '@verdant-web/react-router';
 import { Suspense, lazy } from 'react';
 import LoginPage from './LoginPage.jsx';
+import RefreshSessionPage from './RefreshSessionPage.jsx';
 const HomePage = lazy(() => import('./HomePage.js'));
 
 const routes = makeRoutes([
@@ -29,6 +30,10 @@ const routes = makeRoutes([
   {
     path: '/invite/:code',
     component: lazy(() => import('./ClaimInvitePage.js')),
+  },
+  {
+    path: '/refresh-session',
+    component: RefreshSessionPage,
   },
 ]);
 
