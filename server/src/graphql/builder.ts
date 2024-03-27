@@ -11,7 +11,7 @@ import {
   PlanInvitation,
   User,
 } from '@biscuits/db';
-import { VerdantLibraryInfo } from '../verdant/verdant.js';
+import { LibraryInfo } from '@verdant-web/server';
 import { BiscuitsVerdantProfile } from '@biscuits/libraries';
 import { ExtractorData } from '@gnocchi.biscuits/scanning';
 import { BiscuitsError } from '@biscuits/error';
@@ -22,8 +22,8 @@ export const builder = new SchemaBuilder<{
     User: User & { __typename: 'User' };
     Plan: Plan & { __typename: 'Plan' };
     PlanInvitation: PlanInvitation & { __typename: 'PlanInvitation' };
-    PlanLibraryInfo: VerdantLibraryInfo & { id: string };
-    PlanLibraryReplica: VerdantLibraryInfo['replicas'][number];
+    PlanLibraryInfo: LibraryInfo & { id: string };
+    PlanLibraryReplica: LibraryInfo['replicas'][number];
     PlanLibraryReplicaProfile: BiscuitsVerdantProfile;
     ClaimPlanInvitationResult: {
       userId: string;

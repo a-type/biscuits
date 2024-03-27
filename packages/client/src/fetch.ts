@@ -57,7 +57,8 @@ const refreshTokenStorage = {
 
 export async function refreshSession(apiOrigin: string) {
   const refreshToken = refreshTokenStorage.get();
-  if (!refreshToken) return refreshSessionViaIframe();
+  if (!refreshToken || refreshToken === 'undefined')
+    return refreshSessionViaIframe();
   try {
     const response = await fetch(`${apiOrigin}/auth/refresh`, {
       method: 'POST',
@@ -86,7 +87,7 @@ async function refreshSessionViaIframe() {
       window.addEventListener('message', (event) => {
         if (event.data.type === 'refresh-session') {
           if (event.data.success) {
-            console.debug('refreshed session via iframe');
+            console.log('refreshed session via iframe');
             // store the new refresh token
             refreshTokenStorage.set(event.data.success.refreshToken);
             resolve();

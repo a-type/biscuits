@@ -14,7 +14,7 @@ authRouter
     const provider = req.params.provider;
     return authHandlers.handleOAuthCallbackRequest(req, { provider });
   })
-  .post('/logout', authHandlers.handleLogoutRequest)
+  .all('/logout', authHandlers.handleLogoutRequest)
   .post('/begin-email-signup', authHandlers.handleSendEmailVerificationRequest)
   .post('/complete-email-signup', authHandlers.handleVerifyEmailRequest)
   .post('/email-login', authHandlers.handleEmailLoginRequest)

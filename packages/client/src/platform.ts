@@ -1,3 +1,5 @@
+const PRETEND_PWA = false;
+
 export async function requestPersistentStorage() {
   if (getIsPWAInstalled() && navigator.storage && navigator.storage.persist) {
     const result = await navigator.storage.persist();
@@ -6,7 +8,7 @@ export async function requestPersistentStorage() {
 }
 
 export function getIsPWAInstalled() {
-  return window.matchMedia('(display-mode: standalone)').matches;
+  return PRETEND_PWA || window.matchMedia('(display-mode: standalone)').matches;
 }
 
 export function getOS() {

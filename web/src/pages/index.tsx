@@ -35,6 +35,10 @@ const routes = makeRoutes([
     path: '/refresh-session',
     component: RefreshSessionPage,
   },
+  {
+    path: '/apps',
+    component: lazy(() => import('./AppsPage.jsx')),
+  },
 ]);
 
 export function Pages() {

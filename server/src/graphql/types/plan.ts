@@ -454,7 +454,11 @@ Plan.implement({
             return [];
           }
         } else {
-          return plan.featureFlags ?? [];
+          const flags = plan.featureFlags ?? [];
+          if (!Array.isArray(flags)) {
+            return [];
+          }
+          return flags;
         }
       },
     }),

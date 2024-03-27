@@ -27,7 +27,6 @@ export type { FragmentOf, ResultOf, VariablesOf } from 'gql.tada';
 
 function createErrorHandler(onError?: (err: string) => void) {
   return async function handleError(error: CombinedError) {
-    console.error(error);
     let errorMessage: string | undefined =
       'An unexpected error occurred. Please try again.';
     if (error.graphQLErrors) {
@@ -76,7 +75,9 @@ export function createGraphQLClient({
     url: `${origin}/graphql`,
     exchanges: [
       refocus,
-      errorExchange({ onError: createErrorHandler(onError) }),
+      errorExchange({
+        onError: createErrorHandler(deduplicateErrors(onError)),
+      }),
       cacheExchange,
       retry,
       fetchExchange,
@@ -87,6 +88,20 @@ export function createGraphQLClient({
     fetch,
     suspense: true,
   });
+}
+
+function deduplicateErrors(onError?: (error: string) => void) {
+  if (!onError) return undefined;
+  // only show 1 of each error message within a time window
+  const errors = new Set<string>();
+  return (error: string) => {
+    if (errors.has(error)) return;
+    errors.add(error);
+    setTimeout(() => {
+      errors.delete(error);
+    }, 5000);
+    onError(error);
+  };
 }
 
 export function createMinimalGraphQLClient({

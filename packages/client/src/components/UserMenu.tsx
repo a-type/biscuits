@@ -9,6 +9,7 @@ import {
 } from '@a-type/ui/components/dropdownMenu';
 import {
   CONFIG,
+  getIsPWAInstalled,
   graphql,
   useAppId,
   useIsLoggedIn,
@@ -32,6 +33,14 @@ export function UserMenu({
   const isLoggedIn = useIsLoggedIn();
   const appId = useAppId();
 
+  const openPwaHackCatalog = () => {
+    // since we can't just open a new tab, use a share
+    // intent to open the PWA catalog URL
+    navigator.share({
+      url: `${CONFIG.HOME_ORIGIN}/apps`,
+    });
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -40,6 +49,23 @@ export function UserMenu({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
+        {getIsPWAInstalled() ? (
+          <DropdownMenuItem onClick={openPwaHackCatalog}>
+            More apps
+            <DropdownMenuItemRightSlot>
+              <Icon name="new_window" />
+            </DropdownMenuItemRightSlot>
+          </DropdownMenuItem>
+        ) : (
+          <DropdownMenuItem asChild>
+            <a href={`${CONFIG.HOME_ORIGIN}/apps`} target="_blank">
+              More apps
+              <DropdownMenuItemRightSlot>
+                <Icon name="new_window" />
+              </DropdownMenuItemRightSlot>
+            </a>
+          </DropdownMenuItem>
+        )}
         {!isLoggedIn ? (
           <DropdownMenuItem
             asChild
@@ -74,7 +100,7 @@ export function UserMenu({
         )}
         <DropdownMenuItem asChild>
           <a href={`${CONFIG.API_ORIGIN}/logout`}>
-            Logout
+            Log out
             <DropdownMenuItemRightSlot>
               <Icon name="arrowRight" />
             </DropdownMenuItemRightSlot>

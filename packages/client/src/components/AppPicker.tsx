@@ -50,6 +50,11 @@ export function AppPicker({ className, children }: AppPickerProps) {
     return () => window.removeEventListener('message', listener);
   }, []);
 
+  if (getIsPWAInstalled()) {
+    // app picker doesn't really work in a PWA :(
+    return null;
+  }
+
   return (
     <Popover>
       <PopoverTrigger className={className} asChild>

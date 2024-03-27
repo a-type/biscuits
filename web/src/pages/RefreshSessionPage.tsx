@@ -12,7 +12,10 @@ export function RefreshSessionPage() {
   const success = data.data?.me;
   useEffect(() => {
     if (window.top) {
-      window.top.postMessage({ type: 'refresh-session', success }, '*');
+      window.top.postMessage(
+        JSON.stringify({ type: 'refresh-session', success }),
+        '*',
+      );
     }
   }, [success]);
   return null;
