@@ -37,6 +37,10 @@ function AppIcons() {
       {apps
         .filter((app) => app.id !== hostApp)
         .map((app) => {
+          const iconUrl = new URL(
+            import.meta.env.DEV ? app.devOriginOverride : app.url,
+          );
+          iconUrl.pathname = app.iconPath;
           return (
             <button
               key={app.id}
@@ -44,7 +48,7 @@ function AppIcons() {
               onClick={() => goTo(app.id)}
             >
               <img
-                src={app.iconUrl}
+                src={iconUrl}
                 alt={app.name}
                 className="w-[40px] h-[40px] block"
               />
