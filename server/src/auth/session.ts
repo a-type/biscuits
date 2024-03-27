@@ -18,7 +18,7 @@ declare module '@a-type/auth' {
 
 export const sessions = new SessionManager({
   cookieName: 'bsc-session',
-  expiration: '2m',
+  expiration: '24h',
   async createSession(userId) {
     const user = await db
       .selectFrom('User')
