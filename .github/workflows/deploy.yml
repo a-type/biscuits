@@ -37,4 +37,4 @@ jobs:
 
       - name: Deploy API
         # deploy the image from ghcr.io for the target sha
-        run: flyctl deploy --image ghcr.io/a-type/biscuits:${{ github.sha }} --app biscuits
+        run: flyctl deploy --image ghcr.io/a-type/biscuits:${{ github.sha }}
