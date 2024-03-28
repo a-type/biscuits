@@ -178,7 +178,7 @@ function IngredientMenu({
 
   return (
     <>
-      <DropdownMenu>
+      <DropdownMenu modal={false}>
         <DropdownMenuTrigger asChild>
           <Button size="icon" color="ghost">
             <DotsVerticalIcon />
@@ -196,8 +196,6 @@ function IngredientMenu({
           </DropdownMenuCheckboxItem>
           <DropdownMenuItem
             onSelect={(ev) => {
-              // don't close the menu
-              ev.preventDefault();
               setDetailsOpen(true);
             }}
           >
@@ -212,13 +210,13 @@ function IngredientMenu({
               <TrashIcon />
             </DropdownMenuItemRightSlot>
           </DropdownMenuItem>
-          <IngredientDetailsDialog
-            ingredient={ingredient}
-            open={detailsOpen}
-            onOpenChange={setDetailsOpen}
-          />
         </DropdownMenuContent>
       </DropdownMenu>
+      <IngredientDetailsDialog
+        ingredient={ingredient}
+        open={detailsOpen}
+        onOpenChange={setDetailsOpen}
+      />
     </>
   );
 }
