@@ -1,6 +1,6 @@
 import { GoogleProvider, createHandlers } from '@a-type/auth';
 import { assert } from '@a-type/utils';
-import { db, hashPassword, id } from '@biscuits/db';
+import { comparePassword, db, hashPassword, id } from '@biscuits/db';
 import { sessions } from '../auth/session.js';
 import { DEPLOYED_ORIGIN, UI_ORIGIN } from '../config/deployedContext.js';
 import { email } from '../services/email.js';
@@ -13,7 +13,6 @@ assert(
 
 export const authHandlers = createHandlers({
   sessions,
-  defaultReturnTo: `/`,
   returnToOrigin: UI_ORIGIN,
   providers: {
     google: new GoogleProvider({
@@ -22,6 +21,8 @@ export const authHandlers = createHandlers({
       redirectUri: DEPLOYED_ORIGIN + '/auth/provider/google/callback',
     }),
   },
+  addProvidersToExistingUsers: true,
+  defaultReturnToPath: '/',
   email: email,
   db: {
     getAccountByProviderAccountId: async (providerName, providerAccountId) => {
@@ -96,10 +97,11 @@ export const authHandlers = createHandlers({
         .returning('id')
         .executeTakeFirstOrThrow();
     },
-    getVerificationCode: async (id) => {
+    getVerificationCode: async (email, code) => {
       const value = await db
         .selectFrom('VerificationCode')
-        .where('id', '=', id)
+        .where('code', '=', code)
+        .where('email', '=', email)
         .selectAll()
         .executeTakeFirst();
 
@@ -115,13 +117,38 @@ export const authHandlers = createHandlers({
     consumeVerificationCode: async (id) => {
       await db.deleteFrom('VerificationCode').where('id', '=', id).execute();
     },
-    getUserByEmailAndPassword: async (email, password) => {
-      return db
+    getUserByEmailAndPassword: async (email, plaintextPassword) => {
+      const user = await db
         .selectFrom('User')
         .where('email', '=', email)
-        .where('password', '=', password)
         .selectAll()
         .executeTakeFirst();
+
+      if (!user?.password) {
+        return undefined;
+      }
+
+      if (!(await comparePassword(plaintextPassword, user.password))) {
+        return undefined;
+      }
+
+      return user;
+    },
+    updateUser: async (id, { plaintextPassword, ...user }) => {
+      const password = plaintextPassword
+        ? await hashPassword(plaintextPassword)
+        : undefined;
+      await db
+        .updateTable('User')
+        .where('id', '=', id)
+        .set({
+          fullName: user.fullName ?? undefined,
+          emailVerifiedAt: user.emailVerifiedAt ?? undefined,
+          friendlyName: user.friendlyName ?? undefined,
+          imageUrl: user.imageUrl ?? undefined,
+          password,
+        })
+        .executeTakeFirstOrThrow();
     },
   },
 });

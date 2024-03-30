@@ -568,8 +568,8 @@ importers:
   server:
     dependencies:
       '@a-type/auth':
-        specifier: ^0.4.3
-        version: 0.4.3
+        specifier: ^0.4.8
+        version: 0.4.8
       '@a-type/utils':
         specifier: ^1.0.5
         version: 1.0.5
@@ -804,8 +804,8 @@ packages:
     transitivePeerDependencies:
       - encoding
 
-  /@a-type/auth@0.4.3:
-    resolution: {integrity: sha512-3tHylNWjn4hXu9xHpZplBGcvHEJtkcm4N5Pb7qNvUnflvzeYN3H0nt6plo7ziD3b7wy3MdTjWi5kBWr9TnKbPQ==}
+  /@a-type/auth@0.4.8:
+    resolution: {integrity: sha512-1wRdvhi0yCxrpWU3jBBZ5DcolJluZIB7Y/VeGWb5svsk6Juf/u/Gna6sVrHLPXMi0w9vUvf4Sn4XtTjEsbHk1Q==}
     dependencies:
       cookie: 0.6.0
       discord-oauth2: 2.12.1

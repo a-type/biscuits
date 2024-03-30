@@ -1,5 +1,5 @@
 import { Router } from 'itty-router';
-import { createYoga, maskError } from 'graphql-yoga';
+import { Plugin, createYoga, maskError } from 'graphql-yoga';
 import { db } from '@biscuits/db';
 import { schema } from '../graphql/schema.js';
 import { GQLContext } from '../graphql/context.js';
@@ -11,9 +11,23 @@ import { GraphQLError } from 'graphql';
 import { stripe } from '../services/stripe.js';
 import { AuthError } from '@a-type/auth';
 import { createDataloaders } from '../graphql/dataloaders/index.js';
+import { OnResponseHook } from '@whatwg-node/server';
+
+class ApplyHeadersPlugin implements Plugin<{}, GQLContext> {
+  onResponse?: OnResponseHook<GQLContext> | undefined = (payload) => {
+    if (payload.serverContext) {
+      for (const [key, value] of Object.entries(
+        payload.serverContext.auth.applyHeaders,
+      )) {
+        payload.response.headers.set(key, value);
+      }
+    }
+  };
+}
 
 const yoga = createYoga<GQLContext>({
   schema,
+  graphiql: true,
   maskedErrors: {
     maskError: (error, message, isDev) => {
       const originalError =
@@ -30,6 +44,13 @@ const yoga = createYoga<GQLContext>({
       }
       return maskError(error, message, isDev);
     },
+  },
+  plugins: [ApplyHeadersPlugin],
+  fetchAPI: {
+    Response: Response,
+    Request: Request,
+    Blob: Blob,
+    ReadableStream: ReadableStream,
   },
 });
 
@@ -62,13 +83,14 @@ async function handleGraphQLRequest(request: Request) {
     session,
     db,
     auth: {
+      applyHeaders: sessionHeaders,
       setLoginSession: async (ses: Session | null) => {
         if (ses) {
           const { headers } = await sessions.updateSession(ses);
-          sessionHeaders = headers;
+          Object.assign(sessionHeaders, headers);
         } else {
           const { headers } = sessions.clearSession();
-          sessionHeaders = headers;
+          Object.assign(sessionHeaders, headers);
         }
         // also update immediately in the context, so that
         // resolvers on return values can see the new session
@@ -82,13 +104,7 @@ async function handleGraphQLRequest(request: Request) {
       db,
     }),
   };
-  const response = await yoga.fetch(request, ctx);
-  // merge session headers with response headers
-  return new Response(response.body, {
-    status: response.status,
-    headers: {
-      ...response.headers,
-      ...sessionHeaders,
-    },
-  });
+
+  const yogaResponse = await yoga.handle(request, ctx);
+  return yogaResponse;
 }

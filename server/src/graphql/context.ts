@@ -11,6 +11,7 @@ export type GQLContext = {
   verdant: VerdantServer;
   auth: {
     setLoginSession: (session: Session | null) => Promise<void>;
+    applyHeaders: Record<string, string>;
   };
   stripe: Stripe;
   dataloaders: ReturnType<typeof createDataloaders>;

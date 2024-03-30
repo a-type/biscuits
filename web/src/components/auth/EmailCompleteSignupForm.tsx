@@ -1,6 +1,7 @@
 import { Input } from '@a-type/ui/components/input';
 import { Button } from '@a-type/ui/components/button';
 import { CONFIG } from '@biscuits/client';
+import { Form } from '@a-type/ui/components/forms';
 
 export interface EmailCompleteSignUpFormProps {
   code: string;
@@ -12,10 +13,13 @@ export function EmailCompleteSignupForm({
   email,
 }: EmailCompleteSignUpFormProps) {
   return (
-    <form action={`${CONFIG.API_ORIGIN}/auth/complete-email-signup`}>
+    <form
+      action={`${CONFIG.API_ORIGIN}/auth/complete-email-signup`}
+      method="post"
+      className="flex flex-col gap-2"
+    >
       <input type="hidden" name="code" value={code} />
-      <label htmlFor="email">Email</label>
-      <Input name="email" autoComplete="email" required disabled={!!email} />
+      <input type="hidden" name="email" value={email} />
       <label htmlFor="password">Password</label>
       <Input
         name="password"
@@ -23,7 +27,9 @@ export function EmailCompleteSignupForm({
         autoComplete="new-password"
         required
       />
-      <Button type="submit">Sign In</Button>
+      <Button className="self-end" color="primary" type="submit">
+        Sign In
+      </Button>
     </form>
   );
 }

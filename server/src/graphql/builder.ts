@@ -15,6 +15,13 @@ import { LibraryInfo } from '@verdant-web/server';
 import { BiscuitsVerdantProfile } from '@biscuits/libraries';
 import { ExtractorData } from '@gnocchi.biscuits/scanning';
 import { BiscuitsError } from '@biscuits/error';
+import {
+  GeographicResult,
+  TemperatureUnit,
+  WeatherForecast,
+  WeatherForecastDay,
+  WeatherForecastInput,
+} from '../services/weather.js';
 
 export const builder = new SchemaBuilder<{
   Context: GQLContext;
@@ -63,6 +70,11 @@ export const builder = new SchemaBuilder<{
       ExtractorData['detailedIngredients']
     >[number];
     RecipeScanDetailedStep: NonNullable<ExtractorData['detailedSteps']>[number];
+
+    // Common Utils
+    WeatherForecast: WeatherForecast;
+    WeatherForecastDay: WeatherForecastDay;
+    GeographicResult: GeographicResult;
   };
   AuthScopes: {
     public: boolean;
@@ -123,6 +135,9 @@ export const builder = new SchemaBuilder<{
     RecipeScanInput: {
       url: string;
     };
+
+    // Common Utils
+    WeatherForecastInput: WeatherForecastInput;
   };
 }>({
   plugins: [RelayPlugin, DataloaderPlugin, AuthPlugin],

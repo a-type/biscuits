@@ -23,7 +23,7 @@ export default function LoginPage() {
       <div className="absolute top-0 left-0 w-full h-screen flex-[2]">
         <Paws />
       </div>
-      <div className="flex flex-col gap-3 p-6 items-center bg-primary-light border-solid border border-3 border-primary-dark rounded-lg relative z-1">
+      <div className="flex flex-col gap-3 p-6 items-center bg-white border-solid border border-1 border-black rounded-lg relative z-1">
         <h1 className='[font-family:"VC_Henrietta_Trial","Noto_Serif",serif] mb-0'>
           Join the club
         </h1>
@@ -41,30 +41,50 @@ export default function LoginPage() {
             <TabsTrigger value="signin">Log in</TabsTrigger>
             <TabsTrigger value="signup">Create account</TabsTrigger>
           </TabsList>
-          <TabsContent value="signup" className="flex flex-col gap-3">
-            <P>Welcome!</P>
+          <TabsContent
+            value="signup"
+            className="flex flex-col gap-3 items-stretch"
+          >
+            <P className="w-full text-center">Welcome!</P>
             <OAuthSignInButton
               provider="google"
               returnTo={returnTo}
               inviteId={searchParams.get('inviteId')}
+              className="mx-auto"
             >
               Sign up with Google
             </OAuthSignInButton>
+            <Or />
             <EmailSignUpForm returnTo={returnTo} />
           </TabsContent>
-          <TabsContent value="signin" className="flex flex-col gap-3">
-            <P>Welcome back!</P>
+          <TabsContent
+            value="signin"
+            className="flex flex-col gap-3 items-stretch"
+          >
+            <P className="w-full text-center">Welcome back!</P>
             <OAuthSignInButton
               provider="google"
               returnTo={returnTo}
               inviteId={searchParams.get('inviteId')}
+              className="mx-auto"
             >
               Sign in with Google
             </OAuthSignInButton>
+            <Or />
             <EmailSignInForm returnTo={returnTo} />
           </TabsContent>
         </TabsRoot>
       </div>
+    </div>
+  );
+}
+
+function Or() {
+  return (
+    <div className="flex flex-row gap-2 items-center">
+      <div className="flex-1 border-t-solid border-t border-gray-5"></div>
+      <p className="text-gray-5">or</p>
+      <div className="flex-1 border-t-solid border-t border-gray-5"></div>
     </div>
   );
 }

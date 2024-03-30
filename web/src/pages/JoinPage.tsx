@@ -29,7 +29,7 @@ export function JoinPage({}: JoinPageProps) {
   const navigate = useNavigate();
   useEffect(() => {
     if (seen) {
-      navigate(`/login`);
+      navigate(`/login`, { replace: true });
     }
   }, [seen, navigate]);
 

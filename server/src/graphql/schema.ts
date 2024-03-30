@@ -10,6 +10,8 @@ import './types/changelog.js';
 
 import './types/gnocchi/index.js';
 
+import './types/common/index.js';
+
 builder.queryType({});
 builder.mutationType({});
 

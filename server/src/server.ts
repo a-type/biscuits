@@ -52,6 +52,18 @@ const ittyServer = createServerAdapter((request) =>
             BiscuitsError.Code.SessionExpired,
           );
           return error(biscuitsExpired.statusCode, biscuitsExpired.body);
+        } else if (reason.statusCode === 409) {
+          const biscuitsError = new BiscuitsError(
+            BiscuitsError.Code.Conflict,
+            'You have an account with a different login method. Try logging in with a different method.',
+          );
+          return error(biscuitsError.statusCode, biscuitsError.body);
+        } else if (reason.statusCode === 401) {
+          const biscuitsError = new BiscuitsError(
+            BiscuitsError.Code.Unauthorized,
+            'Unauthorized',
+          );
+          return error(biscuitsError.statusCode, biscuitsError.body);
         }
       }
       if (reason instanceof BiscuitsError) {

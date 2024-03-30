@@ -17,14 +17,20 @@ export function EmailSignInForm({ returnTo = '' }: EmailSignInFormProps) {
       className="flex flex-col gap-2"
       action={`${CONFIG.API_ORIGIN}/auth/email-login?returnTo=${returnTo}`}
     >
+      <label htmlFor="email" className="font-bold">
+        Email
+      </label>
       <Input name="email" autoComplete="email" required />
+      <label htmlFor="password" className="font-bold">
+        Password
+      </label>
       <Input
         autoComplete="current-password"
         name="password"
         type="password"
         required
       />
-      <Button type="submit" className="self-end">
+      <Button type="submit" className="self-end" color="primary">
         Sign In
       </Button>
       <ForgotPassword className="self-end" />
