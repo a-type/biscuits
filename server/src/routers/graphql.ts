@@ -51,6 +51,16 @@ const yoga = createYoga<GQLContext>({
     Request: Request,
     Blob: Blob,
     ReadableStream: ReadableStream,
+    fetch: fetch,
+    Headers: Headers,
+    FormData: FormData,
+    TextDecoder: TextDecoder,
+    TextEncoder: TextEncoder,
+    TransformStream: TransformStream,
+    URLSearchParams: URLSearchParams,
+    WritableStream: WritableStream,
+    URLPattern: URLPattern,
+    URL: URL,
   },
 });
 
