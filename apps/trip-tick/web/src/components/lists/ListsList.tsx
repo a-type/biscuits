@@ -76,7 +76,7 @@ function ListsListItemMenu({ list }: { list: List }) {
             ));
           }}
         >
-          Delete
+          Delete list
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

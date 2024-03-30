@@ -119,12 +119,15 @@ function TripViewChecklists({ trip }: { trip: Trip }) {
           </div>
           <Button
             className="flex-0-0-auto m-1 relative top-2"
-            size="icon"
+            size={editingLists ? 'small' : 'icon'}
             color={editingLists ? 'accent' : 'ghost'}
             onClick={() => setEditingLists((v) => !v)}
           >
             {editingLists ? (
-              <div className="i-solar-check-circle-linear" />
+              <>
+                Done adding lists{' '}
+                <div className="i-solar-check-circle-linear" />
+              </>
             ) : (
               <div className="i-solar-settings-linear" />
             )}

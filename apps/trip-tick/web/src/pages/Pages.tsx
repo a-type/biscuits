@@ -39,6 +39,10 @@ const routes = makeRoutes([
       TripsPage.preload();
     },
   },
+  {
+    path: '/settings',
+    component: lazy(() => import('./SettingsPage.jsx')),
+  },
 ]);
 
 export function Pages() {

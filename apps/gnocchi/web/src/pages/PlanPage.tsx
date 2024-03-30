@@ -2,7 +2,6 @@ import { Icon } from '@/components/icons/Icon.jsx';
 import { BugButton } from '@/components/menu/BugButton.jsx';
 import { ManageCategoriesDialog } from '@/components/menu/ManageCategoriesDialog.jsx';
 import { TextLink } from '@/components/nav/Link.jsx';
-import { ColorModeSelect } from '@/components/settings/ColorModeSelect.jsx';
 import { ReloadButton } from '@/components/sync/ReloadButton.jsx';
 import { UpdatePrompt } from '@/components/updatePrompt/UpdatePrompt.jsx';
 import { checkForUpdate } from '@/components/updatePrompt/updateState.js';
@@ -24,6 +23,7 @@ import {
   useCanSync,
   useIsOffline,
   useMe,
+  DarkModeToggle,
 } from '@biscuits/client';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 import { ReactNode, useEffect } from 'react';
@@ -101,7 +101,7 @@ function OfflineContents() {
   return (
     <MainContainer>
       <InstallHint />
-      <ColorModeSelect />
+      <DarkModeToggle />
       <Button size="small" color="default" onClick={() => refetch()}>
         Retry connection
       </Button>
@@ -117,7 +117,7 @@ function AnonymousContents() {
   return (
     <MainContainer>
       <InstallHint />
-      <ColorModeSelect />
+      <DarkModeToggle />
       <div>
         <div className="flex flex-row items-center gap-2">
           <PromoteSubscriptionButton color="primary">
@@ -145,7 +145,7 @@ function UnsubscribedContents() {
   return (
     <MainContainer>
       <InstallHint />
-      <ColorModeSelect />
+      <DarkModeToggle />
       <div className="bg-primary-wash color-black p-4 rounded-lg">
         Subscription inactive
       </div>
@@ -163,7 +163,7 @@ function OnlineContents() {
   return (
     <MainContainer>
       <InstallHint />
-      <ColorModeSelect />
+      <DarkModeToggle />
       <H2>Collaborate</H2>
       <PushSubscriptionToggle vapidKey={VAPID_KEY} />
       <Divider />

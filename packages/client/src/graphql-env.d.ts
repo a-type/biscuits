@@ -584,7 +584,7 @@ export type introspection = {
             "args": []
           },
           {
-            "name": "lat",
+            "name": "latitude",
             "type": {
               "kind": "NON_NULL",
               "ofType": {
@@ -596,7 +596,7 @@ export type introspection = {
             "args": []
           },
           {
-            "name": "lon",
+            "name": "longitude",
             "type": {
               "kind": "NON_NULL",
               "ofType": {

@@ -17,7 +17,7 @@ export const ToggleItem = withClassName(
 
 export const ToggleItemIndicator = withClassName(
   'div',
-  'self-start invisible color-primary-dark',
+  'self-start invisible color-primary-dark bg-primary-wash w-4 h-4 rounded',
   '[[data-state=on]>&]:(visible)',
 );
 
@@ -26,7 +26,7 @@ export const ToggleItemLabel = withClassName(
   'flex flex-col gap-2 items-start text-sm justify-center',
 );
 
-export const ToggleItemTitle = withClassName('span', 'font-bold');
+export const ToggleItemTitle = withClassName('span', 'font-bold color-black');
 
 export const ToggleItemDescription = withClassName(
   'span',

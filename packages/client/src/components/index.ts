@@ -18,3 +18,4 @@ export * from './AppPicker.js';
 export * from './UserMenu.js';
 export * from './PresencePeople.js';
 export * from './AppPreviewNotice.js';
+export * from './DarkModeToggle.js';

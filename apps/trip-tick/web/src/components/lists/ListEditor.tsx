@@ -18,6 +18,7 @@ import {
   CollapsibleTrigger,
 } from '@a-type/ui/components/collapsible';
 import { Icon } from '@a-type/ui/components/icon';
+import { H2 } from '@a-type/ui/components/typography';
 
 export interface ListEditorProps {
   list: List;
@@ -27,12 +28,18 @@ export function ListEditor({ list }: ListEditorProps) {
   const { name } = hooks.useWatch(list);
 
   return (
-    <div className="flex flex-col gap-3 md:(flex-row items-start)">
-      <LiveUpdateTextField
-        value={name}
-        onChange={(name) => list.set('name', name)}
-        className="h-auto"
-      />
+    <div className="flex flex-col gap-6">
+      <div className="flex flex-col gap-2">
+        <label className="text-sm font-bold" htmlFor="name">
+          List Name
+        </label>
+        <LiveUpdateTextField
+          value={name}
+          onChange={(name) => list.set('name', name)}
+          className="h-auto"
+          id="name"
+        />
+      </div>
       <ListItemsEditor list={list} />
     </div>
   );
@@ -43,21 +50,24 @@ function ListItemsEditor({ list }: { list: List }) {
   hooks.useWatch(items);
 
   return (
-    <ul className="mb-2 mt-0 list-none mx-0 px-0 flex flex-col gap-3 md:flex-1">
-      {items.map((item) => (
-        <li key={item.get('id')}>
-          <ListItemEditor
-            item={item}
-            onDelete={() => {
-              items.removeAll(item);
-            }}
-          />
+    <div>
+      <H2 className="mb-4">Items</H2>
+      <ul className="mb-2 mt-0 list-none mx-0 px-0 flex flex-col gap-3 md:flex-1">
+        {items.map((item) => (
+          <li key={item.get('id')}>
+            <ListItemEditor
+              item={item}
+              onDelete={() => {
+                items.removeAll(item);
+              }}
+            />
+          </li>
+        ))}
+        <li className="self-center justify-self-center">
+          <AddListItemButton list={list} />
         </li>
-      ))}
-      <li className="self-center justify-self-center">
-        <AddListItemButton list={list} />
-      </li>
-    </ul>
+      </ul>
+    </div>
   );
 }
 
@@ -124,7 +134,7 @@ function ListItemEditor({
                   <span>day{perDays === 1 ? '' : 's'}</span>
                 </div>
               ) : (
-                <div className="flex flex-row gap-1 items-center border border-gray-7 rounded-lg border-solid px-6">
+                <div className="flex flex-row gap-1 items-center border border-gray-7 rounded-full border-solid pl-6 pr-1">
                   <span>trip</span>
                   <Button
                     size="icon"
@@ -199,8 +209,8 @@ function ListItemEditor({
       </CollapsibleSimple>
       <CollapsibleSimple open={!expanded} onOpenChange={(v) => setExpanded(!v)}>
         <CollapsibleTrigger asChild>
-          <Button size="small" color="ghost">
-            <Icon name="convert" />
+          <Button size="small" color="ghost" className="text-black">
+            <Icon name="pencil" />
             <span>{shortString}</span>
           </Button>
         </CollapsibleTrigger>

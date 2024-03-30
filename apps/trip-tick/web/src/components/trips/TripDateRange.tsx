@@ -1,6 +1,6 @@
 import { hooks } from '@/store.js';
 import { Button } from '@a-type/ui/components/button';
-import { Trip } from '@packing-list/verdant';
+import { Trip } from '@trip-tick.biscuits/verdant';
 import {
   Popover,
   PopoverTrigger,
@@ -64,7 +64,7 @@ export function TripDateRange({ trip }: TripDateRangeProps) {
           <span>{displayString}</span>
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="z-dialog">
+      <PopoverContent className="z-dialog color-black">
         <PopoverArrow />
         <DateRangePicker value={value} onChange={onChange} />
       </PopoverContent>
