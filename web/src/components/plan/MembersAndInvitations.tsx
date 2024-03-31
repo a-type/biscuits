@@ -7,7 +7,7 @@ import {
   CardRoot,
   CardTitle,
 } from '@a-type/ui/components/card';
-import { useMutation, useQuery } from 'urql';
+import { useMutation, useSuspenseQuery } from '@biscuits/client';
 import { InviteMember } from './InviteMember.js';
 import { graphql } from '@/graphql.js';
 import { H2, H3 } from '@a-type/ui/components/typography';
@@ -36,7 +36,7 @@ const membersQuery = graphql(`
 `);
 
 export function MembersAndInvitations() {
-  const [{ data }, refetch] = useQuery({ query: membersQuery });
+  const { data } = useSuspenseQuery(membersQuery);
   const plan = data?.plan;
   const isAdmin = data?.me?.role === 'admin';
 
@@ -121,13 +121,13 @@ function KickMemberButton({
   memberId: string;
   name: string;
 }) {
-  const [{ fetching }, kick] = useMutation(kickMember);
+  const [kick, { loading }] = useMutation(kickMember);
 
   return (
     <ConfirmedButton
       confirmText={`Are you sure you want to remove ${name}?`}
-      disabled={fetching}
-      onConfirm={() => kick({ memberId })}
+      disabled={loading}
+      onConfirm={() => kick({ variables: { memberId } })}
       size="small"
       color="destructive"
     >
@@ -151,13 +151,13 @@ const cancelInvitation = graphql(`
 `);
 
 function CancelInvitationButton({ id }: { id: string }) {
-  const [{ fetching }, cancel] = useMutation(cancelInvitation);
+  const [cancel, { loading }] = useMutation(cancelInvitation);
 
   return (
     <ConfirmedButton
       confirmText="Are you sure you want to cancel this invitation?"
-      disabled={fetching}
-      onConfirm={() => cancel({ id })}
+      disabled={loading}
+      onConfirm={() => cancel({ variables: { id } })}
       size="small"
       color="destructive"
     >

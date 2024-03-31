@@ -26,7 +26,7 @@ import {
 } from '@a-type/ui/components/dialog';
 import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
 import { Cross2Icon } from '@radix-ui/react-icons';
-import { ManagePlanButton, graphql, useQuery } from '@biscuits/client';
+import { ManagePlanButton, graphql, useSuspenseQuery } from '@biscuits/client';
 import {
   Popover,
   PopoverContent,
@@ -89,9 +89,8 @@ const planMembersQuery = graphql(`
 
 function AddChefsAction() {
   const isLoggedIn = useIsLoggedIn();
-  const [{ data: members }] = useQuery({
-    query: planMembersQuery,
-    pause: !isLoggedIn,
+  const { data: members } = useSuspenseQuery(planMembersQuery, {
+    skip: !isLoggedIn,
   });
   const isSubscribed = useCanSync();
   const showTip =

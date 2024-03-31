@@ -1,3 +1,4 @@
+import { maps } from '../../../services/maps.js';
 import {
   TemperatureUnit,
   getForecast,
@@ -7,7 +8,12 @@ import { builder } from '../../builder.js';
 
 builder.queryFields((t) => ({
   weatherForecast: t.field({
+    description:
+      'Get a weather forecast for a location over a given time period',
     type: 'WeatherForecast',
+    authScopes: {
+      member: true,
+    },
     args: {
       input: t.arg({
         type: 'WeatherForecastInput',
@@ -19,8 +25,13 @@ builder.queryFields((t) => ({
       return getForecast(input);
     },
   }),
-  geographicLocations: t.field({
-    type: ['GeographicResult'],
+
+  locationAutocomplete: t.field({
+    description: 'Suggest completions for a location based on a search string',
+    type: ['LocationAutocompleteSuggestion'],
+    authScopes: {
+      member: true,
+    },
     args: {
       search: t.arg.string({
         required: true,
@@ -28,7 +39,25 @@ builder.queryFields((t) => ({
     },
     nullable: false,
     resolve: async (_, { search }, ctx) => {
-      return getGeographicLocation(search);
+      return maps.autocomplete(search, { userId: ctx.session?.userId });
+    },
+  }),
+
+  geographicLocation: t.field({
+    description:
+      'Get the latitude and longitude of a location identified by location autocomplete',
+    type: 'GeographicResult',
+    authScopes: {
+      member: true,
+    },
+    args: {
+      placeId: t.arg.string({
+        required: true,
+      }),
+    },
+    nullable: false,
+    resolve: async (_, { placeId }, ctx) => {
+      return maps.placeLocationDetails(placeId);
     },
   }),
 }));
@@ -73,7 +102,7 @@ builder.objectType('WeatherForecastDay', {
 builder.objectType('GeographicResult', {
   description: 'Geographic location result',
   fields: (t) => ({
-    name: t.exposeString('name', {
+    id: t.exposeString('id', {
       nullable: false,
     }),
     latitude: t.exposeFloat('latitude', {
@@ -82,11 +111,21 @@ builder.objectType('GeographicResult', {
     longitude: t.exposeFloat('longitude', {
       nullable: false,
     }),
-    country: t.exposeString('country', {
+    address: t.exposeString('shortFormattedAddress', {
       nullable: false,
     }),
-    state: t.exposeString('state', {
-      nullable: true,
+  }),
+});
+
+builder.objectType('LocationAutocompleteSuggestion', {
+  description: 'Location autocomplete suggestion',
+  fields: (t) => ({
+    placeId: t.exposeString('placeId', {
+      nullable: false,
+    }),
+    text: t.field({
+      type: 'String',
+      resolve: (p) => p.text.text,
     }),
   }),
 });

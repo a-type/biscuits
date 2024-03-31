@@ -1,3 +1,3 @@
-import schema from './schemaVersions/v2.js';
-	const finalSchema = { wip: false, ...schema };
+import schema from './schemaVersions/v3.js';
+	const finalSchema = { wip: true, ...schema };
 	export default finalSchema;

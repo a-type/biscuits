@@ -11,17 +11,6 @@ export default defineConfig(({ command, mode }) => ({
   plugins: [
     UnoCSS(),
     react(),
-    // checker({
-    // 	typescript: {
-    // 		tsconfigPath: './tsconfig.json',
-    // 		buildMode: true,
-    // 	},
-    // 	overlay: {
-    // 		initialIsOpen: false,
-    // 		badgeStyle: 'display: none',
-    // 	},
-    // 	enableBuild: false,
-    // }),
     VitePWA({
       includeManifestIcons: true,
       strategies: 'injectManifest',
@@ -114,6 +103,7 @@ export default defineConfig(({ command, mode }) => ({
       'react-dom/client',
       'formik',
       'hoist-non-react-statics',
+      'graphql',
     ],
   },
   resolve: {

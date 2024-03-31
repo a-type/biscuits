@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast';
 import { PlanInfo, planProductInfo } from './PlanInfo.js';
 import { CancelPlanButton } from './CancelPlanButton.js';
 import classNames from 'classnames';
-import { useQuery } from 'urql';
+import { useLazyQuery, useSuspenseQuery } from '@biscuits/client';
 import { Icon } from '@a-type/ui/components/icon';
 import { H2 } from '@a-type/ui/components/typography';
 import { CONFIG } from '@biscuits/client';
@@ -58,10 +58,7 @@ export function ManageSubscription({
     }
   }, [params, setParams]);
 
-  const [_, refetchStatus] = useQuery({
-    query: refetchPlanStatus,
-    pause: true,
-  });
+  const [refetchStatus] = useLazyQuery(refetchPlanStatus);
 
   return (
     <div
@@ -76,7 +73,7 @@ export function ManageSubscription({
             size="icon"
             color="ghost"
             onClick={() => {
-              refetchStatus({ networkPolicy: 'network-only' });
+              refetchStatus({ fetchPolicy: 'network-only' });
             }}
           >
             <Icon name="refresh" />

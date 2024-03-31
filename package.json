@@ -9,7 +9,8 @@
     "test": "turbo run test",
     "prepare": "husky install",
     "up-verdant": "pnpm --recursive update \"@verdant-web/*\" --latest",
-    "create-migration": "node ./scripts/createMigration.mjs"
+    "create-migration": "node ./scripts/createMigration.mjs",
+    "free-ports": "kill-port 6123 6124 6220 6221"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,7 @@
     "@clack/prompts": "0.7.0",
     "prettier": "3.2.5",
     "eslint": "^8",
-    "eslint-config-next": "14.0.3"
+    "eslint-config-next": "14.0.3",
+    "kill-port": "2.0.1"
   }
 }

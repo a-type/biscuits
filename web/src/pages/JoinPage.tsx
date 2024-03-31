@@ -7,7 +7,7 @@ import {
 } from '@a-type/ui/components/layouts';
 import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
-import { graphql, useLocalStorage, useQuery } from '@biscuits/client';
+import { graphql, useLocalStorage, useSuspenseQuery } from '@biscuits/client';
 import { Link, useNavigate } from '@verdant-web/react-router';
 import { useEffect } from 'react';
 import classNames from 'classnames';
@@ -79,7 +79,7 @@ export function JoinPage({}: JoinPageProps) {
 }
 
 const StartingPrice = () => {
-  const [{ data }] = useQuery({ query: startingPriceQuery });
+  const { data } = useSuspenseQuery(startingPriceQuery);
   return (
     <Price
       value={data?.productInfo.price}

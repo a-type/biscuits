@@ -8,7 +8,7 @@ import {
 import { H1, H2 } from '@a-type/ui/components/typography';
 import { Link, useNavigate, useSearchParams } from '@verdant-web/react-router';
 import { Suspense, useEffect } from 'react';
-import { useQuery } from 'urql';
+import { NetworkStatus, useSuspenseQuery } from '@biscuits/client';
 import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
 import { MembersAndInvitations } from '@/components/plan/MembersAndInvitations.jsx';
@@ -31,7 +31,7 @@ const PlanPageData = graphql(`
 export interface PlanPageProps {}
 
 export function PlanPage({}: PlanPageProps) {
-  const [result] = useQuery({ query: PlanPageData });
+  const result = useSuspenseQuery(PlanPageData);
   const { data } = result;
   const [searchParams] = useSearchParams();
   const returnToAppId = searchParams.get('appReferrer');
@@ -49,7 +49,7 @@ export function PlanPage({}: PlanPageProps) {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!result.fetching && !hasAccount) {
+    if (result.networkStatus === NetworkStatus.ready && !hasAccount) {
       const search = window.location.search;
       const path = window.location.pathname;
       const returnTo = encodeURIComponent(path + search);

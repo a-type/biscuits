@@ -22,6 +22,7 @@
     "@biscuits/error": "workspace:*",
     "@biscuits/libraries": "workspace:*",
     "@gnocchi.biscuits/scanning": "workspace:*",
+    "@googlemaps/google-maps-services-js": "^3.3.42",
     "@pothos/core": "^3.41.0",
     "@pothos/plugin-dataloader": "^3.17.2",
     "@pothos/plugin-relay": "^3.46.0",
@@ -40,6 +41,7 @@
     "graphql-yoga": "^5.1.1",
     "itty-router": "^4.0.25",
     "jsonwebtoken": "^9.0.2",
+    "kill-port-process": "^3.2.1",
     "kysely": "^0.26.3",
     "stripe": "^14.5.0"
   },

@@ -10,7 +10,7 @@ import {
   CardTitle,
 } from '@a-type/ui/components/card';
 import { AppId, AppManifest, apps } from '@biscuits/apps';
-import { useMutation, useQuery } from 'urql';
+import { useMutation, useSuspenseQuery } from '@biscuits/client';
 
 const libraryFragment = graphql(`
   fragment LibraryFragment on PlanLibraryInfo @_unmask {
@@ -65,8 +65,8 @@ export function VerdantLibraries() {
 }
 
 function VerdantLibrary({ app }: { app: AppManifest<AppId> }) {
-  const [data] = useQuery({ query: libraryData, variables: { appId: app.id } });
-  const [_, doReset] = useMutation(resetSync);
+  const data = useSuspenseQuery(libraryData, { variables: { appId: app.id } });
+  const [doReset] = useMutation(resetSync);
 
   const info = data.data?.plan?.libraryInfo;
   if (!info)
@@ -96,7 +96,7 @@ function VerdantLibrary({ app }: { app: AppManifest<AppId> }) {
       <CardFooter>
         <CardActions>
           <ConfirmedButton
-            onConfirm={() => doReset({ appId: app.id })}
+            onConfirm={() => doReset({ variables: { appId: app.id } })}
             size="small"
             color="destructive"
             confirmText="When you reset server data for this app, it will be re-initialized by the next device to open the app."

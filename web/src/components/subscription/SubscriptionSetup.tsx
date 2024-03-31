@@ -1,6 +1,6 @@
 import { graphql } from '@/graphql.js';
 import { Spinner } from '@a-type/ui/components/spinner';
-import { useQuery } from 'urql';
+import { useSuspenseQuery } from '@biscuits/client';
 import {
   ManageSubscription,
   manageSubscriptionInfo,
@@ -41,9 +41,7 @@ export function SubscriptionSetup({}: SubscriptionSetupProps) {
   const [params, setParams] = useSearchParams();
   const didJustCheckout = params.get('paymentComplete');
 
-  const [{ data, fetching }, refetch] = useQuery({
-    query: PlanSubscriptionInfo,
-  });
+  const { data, refetch } = useSuspenseQuery(PlanSubscriptionInfo);
 
   const subscriptionStatus = data?.plan?.subscriptionStatus;
   const isTerminalStatus =
@@ -85,8 +83,6 @@ export function SubscriptionSetup({}: SubscriptionSetupProps) {
       </div>
     );
   }
-
-  if (fetching) return <Spinner />;
 
   if (data?.plan?.checkoutData) {
     // checkout in progress - show payment collection

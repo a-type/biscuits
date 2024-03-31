@@ -24,6 +24,7 @@ export default defineConfig(({ mode }) => ({
   },
   server: {
     port: 6123,
+    strictPort: true,
   },
   build: {
     sourcemap: true,

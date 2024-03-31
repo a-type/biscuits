@@ -15,6 +15,7 @@ import { writeSchema } from './tasks/writeSchema.js';
 import { AuthError } from '@a-type/auth';
 import { appsRouter } from './routers/apps.js';
 import { transferRouter } from './routers/transfer.js';
+import { killPortProcess } from 'kill-port-process';
 
 console.log('Starting server...');
 
@@ -87,6 +88,9 @@ const httpServer = createServer(ittyServer);
 verdantServer.attach(httpServer, { httpPath: false });
 
 const port = PORT;
+if (process.env.NODE_ENV === 'development') {
+  await killPortProcess(PORT);
+}
 httpServer.listen(port, () => {
   console.log(`Server listening on port ${port}`);
 });

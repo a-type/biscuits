@@ -88,6 +88,13 @@ export type ListItemsItemQuantity = number;
 export type ListItemsItemPerDays = number;
 export type ListItemsItemAdditional = number;
 export type ListItemsItemRoundDown = boolean;
+export type ListItemsItemCondition = ObjectEntity<
+  ListItemsItemConditionInit,
+  ListItemsItemConditionDestructured,
+  ListItemsItemConditionSnapshot
+> | null;
+export type ListItemsItemConditionType = string;
+export type ListItemsItemConditionValue = any;
 export type ListInit = {
   id?: string;
   createdAt?: number;
@@ -95,6 +102,10 @@ export type ListInit = {
   items?: ListItemsInit;
 };
 
+export type ListItemsItemConditionInit = {
+  type: string;
+  value?: any | null;
+} | null;
 export type ListItemsItemInit = {
   id?: string;
   description?: string;
@@ -102,6 +113,7 @@ export type ListItemsItemInit = {
   perDays?: number;
   additional?: number;
   roundDown?: boolean;
+  condition?: ListItemsItemConditionInit;
 };
 export type ListItemsInit = ListItemsItemInit[];
 export type ListDestructured = {
@@ -111,6 +123,10 @@ export type ListDestructured = {
   items: ListItems;
 };
 
+export type ListItemsItemConditionDestructured = {
+  type: string;
+  value: any | null;
+};
 export type ListItemsItemDestructured = {
   id: string;
   description: string;
@@ -118,6 +134,7 @@ export type ListItemsItemDestructured = {
   perDays: number;
   additional: number;
   roundDown: boolean;
+  condition: ListItemsItemCondition;
 };
 export type ListItemsDestructured = ListItemsItem[];
 export type ListSnapshot = {
@@ -127,6 +144,10 @@ export type ListSnapshot = {
   items: ListItemsSnapshot;
 };
 
+export type ListItemsItemConditionSnapshot = {
+  type: string;
+  value: any | null;
+} | null;
 export type ListItemsItemSnapshot = {
   id: string;
   description: string;
@@ -134,6 +155,7 @@ export type ListItemsItemSnapshot = {
   perDays: number;
   additional: number;
   roundDown: boolean;
+  condition: ListItemsItemConditionSnapshot;
 };
 export type ListItemsSnapshot = ListItemsItemSnapshot[];
 
@@ -156,27 +178,7 @@ export interface ListCreatedAtRangeFilter {
   lt?: number;
   order?: "asc" | "desc";
 }
-export interface ListCreatedAtSortFilter {
-  where: "createdAt";
-  order: "asc" | "desc";
-}
-export interface ListCreatedAtMatchFilter {
-  where: "createdAt";
-  equals: number;
-  order?: "asc" | "desc";
-}
-export interface ListCreatedAtRangeFilter {
-  where: "createdAt";
-  gte?: number;
-  gt?: number;
-  lte?: number;
-  lt?: number;
-  order?: "asc" | "desc";
-}
 export type ListFilter =
-  | ListCreatedAtSortFilter
-  | ListCreatedAtMatchFilter
-  | ListCreatedAtRangeFilter
   | ListCreatedAtSortFilter
   | ListCreatedAtMatchFilter
   | ListCreatedAtRangeFilter;
@@ -201,6 +203,14 @@ export type TripCompletions = ObjectEntity<
 export type TripCompletionsValue = number;
 export type TripStartsAt = number;
 export type TripEndsAt = number;
+export type TripLocation = ObjectEntity<
+  TripLocationInit,
+  TripLocationDestructured,
+  TripLocationSnapshot
+> | null;
+export type TripLocationName = string;
+export type TripLocationLatitude = number;
+export type TripLocationLongitude = number;
 export type TripInit = {
   id?: string;
   createdAt?: number;
@@ -209,10 +219,16 @@ export type TripInit = {
   completions?: TripCompletionsInit;
   startsAt?: number | null;
   endsAt?: number | null;
+  location?: TripLocationInit;
 };
 
 export type TripListsInit = string[];
 export type TripCompletionsInit = { [key: string]: TripCompletionsValueInit };
+export type TripLocationInit = {
+  name: string;
+  latitude: number;
+  longitude: number;
+} | null;
 export type TripDestructured = {
   id: string;
   createdAt: number;
@@ -221,11 +237,17 @@ export type TripDestructured = {
   completions: TripCompletions;
   startsAt: number | null;
   endsAt: number | null;
+  location: TripLocation;
 };
 
 export type TripListsDestructured = string[];
 export type TripCompletionsDestructured = {
   [key: string]: TripCompletionsValue | undefined;
+};
+export type TripLocationDestructured = {
+  name: string;
+  latitude: number;
+  longitude: number;
 };
 export type TripSnapshot = {
   id: string;
@@ -235,12 +257,18 @@ export type TripSnapshot = {
   completions: TripCompletionsSnapshot;
   startsAt: number | null;
   endsAt: number | null;
+  location: TripLocationSnapshot;
 };
 
 export type TripListsSnapshot = string[];
 export type TripCompletionsSnapshot = {
   [key: string]: TripCompletionsValueSnapshot;
 };
+export type TripLocationSnapshot = {
+  name: string;
+  latitude: number;
+  longitude: number;
+} | null;
 
 /** Index filters for Trip **/
 
@@ -261,27 +289,7 @@ export interface TripCreatedAtRangeFilter {
   lt?: number;
   order?: "asc" | "desc";
 }
-export interface TripCreatedAtSortFilter {
-  where: "createdAt";
-  order: "asc" | "desc";
-}
-export interface TripCreatedAtMatchFilter {
-  where: "createdAt";
-  equals: number;
-  order?: "asc" | "desc";
-}
-export interface TripCreatedAtRangeFilter {
-  where: "createdAt";
-  gte?: number;
-  gt?: number;
-  lte?: number;
-  lt?: number;
-  order?: "asc" | "desc";
-}
 export type TripFilter =
-  | TripCreatedAtSortFilter
-  | TripCreatedAtMatchFilter
-  | TripCreatedAtRangeFilter
   | TripCreatedAtSortFilter
   | TripCreatedAtMatchFilter
   | TripCreatedAtRangeFilter;

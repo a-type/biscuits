@@ -13,8 +13,7 @@ import {
   graphql,
   useAppId,
   useIsLoggedIn,
-  useMe,
-  useQuery,
+  useSuspenseQuery,
 } from '../index.js';
 import { Icon } from '@a-type/ui/components/icon';
 import { ReactNode } from 'react';
@@ -127,7 +126,7 @@ export function UserAvatar({
   className?: string;
   skipFetch?: boolean;
 }) {
-  const [result] = useQuery({ query: userAvatarQuery, pause: skipFetch });
+  const result = useSuspenseQuery(userAvatarQuery, { skip: skipFetch });
 
   return (
     <Avatar

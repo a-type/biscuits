@@ -1,6 +1,5 @@
-import { Provider as UrqlProvider } from 'urql';
+import { ApolloProvider, ApolloClient } from '@apollo/client';
 import { ReactNode, createContext, useContext } from 'react';
-import type { Client } from 'urql';
 import { AppId } from '@biscuits/apps';
 
 export function Provider({
@@ -8,25 +7,28 @@ export function Provider({
   appId,
   children,
 }: {
-  appId: AppId;
-  graphqlClient: Client;
+  appId?: AppId;
+  graphqlClient: ApolloClient<any>;
   children: ReactNode;
 }) {
   return (
-    <UrqlProvider value={graphqlClient}>
+    <ApolloProvider client={graphqlClient}>
       <BiscuitsContext.Provider value={{ appId }}>
         {children}
       </BiscuitsContext.Provider>
-    </UrqlProvider>
+    </ApolloProvider>
   );
 }
 
-const BiscuitsContext = createContext<{ appId: AppId } | null>(null);
+const BiscuitsContext = createContext<{ appId?: AppId } | null>(null);
 
 export function useAppId() {
   const ctx = useContext(BiscuitsContext);
   if (!ctx) {
     throw new Error('useAppId must be used within a BiscuitsProvider');
+  }
+  if (!ctx.appId) {
+    throw new Error('Cannot use useAppId in a non-app context');
   }
   return ctx.appId;
 }

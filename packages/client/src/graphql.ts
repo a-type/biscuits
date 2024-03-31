@@ -1,18 +1,17 @@
 import { BiscuitsError } from '@biscuits/error';
-import { refocusExchange } from '@urql/exchange-refocus';
-import { retryExchange } from '@urql/exchange-retry';
 import { initGraphQLTada } from 'gql.tada';
-import {
-  Client,
-  cacheExchange,
-  errorExchange,
-  fetchExchange,
-  useQuery,
-  type CombinedError,
-} from 'urql';
 import { fetch } from './fetch.js';
 import type { introspection } from './graphql-env.d.js';
 import { CONFIG } from './index.js';
+import {
+  ApolloClient,
+  InMemoryCache,
+  useSuspenseQuery,
+  from,
+} from '@apollo/client';
+import { onError, ErrorHandler } from '@apollo/client/link/error';
+import { RetryLink } from '@apollo/client/link/retry';
+import { HttpLink } from '@apollo/client/link/http';
 
 export const graphql = initGraphQLTada<{
   introspection: introspection;
@@ -25,12 +24,12 @@ export const graphql = initGraphQLTada<{
 export { readFragment } from 'gql.tada';
 export type { FragmentOf, ResultOf, VariablesOf } from 'gql.tada';
 
-function createErrorHandler(onError?: (err: string) => void) {
-  return async function handleError(error: CombinedError) {
+function createErrorHandler(onError?: (err: string) => void): ErrorHandler {
+  return ({ graphQLErrors, networkError }) => {
     let errorMessage: string | undefined =
       'An unexpected error occurred. Please try again.';
-    if (error.graphQLErrors) {
-      for (const err of error.graphQLErrors) {
+    if (graphQLErrors) {
+      for (const err of graphQLErrors) {
         console.error(err);
         if (err.extensions?.biscuitsCode) {
           const code = err.extensions.biscuitsCode as number;
@@ -47,46 +46,54 @@ function createErrorHandler(onError?: (err: string) => void) {
           }
         }
       }
+    } else if (networkError) {
+      console.error(networkError);
+      errorMessage = 'A network error occurred. Please check your connection.';
     }
 
     onError?.(errorMessage);
   };
 }
 
-const retry = retryExchange({
-  retryIf: (error, operation) => {
-    if (operation.context.retry) return true;
-    if (error.networkError) return true;
+const createHttp = (origin: string) =>
+  new HttpLink({
+    fetch,
+    credentials: 'include',
+    uri: `${origin}/graphql`,
+  });
 
-    return false;
+const retry = new RetryLink({
+  delay: {
+    initial: 500,
+    max: Infinity,
+    jitter: true,
+  },
+  attempts: {
+    max: 3,
+    retryIf: (error, _operation) => {
+      if (error.networkError) return true;
+
+      return false;
+    },
   },
 });
 
-const refocus = refocusExchange();
-
 export function createGraphQLClient({
   origin = CONFIG.API_ORIGIN,
-  onError,
+  onError: errorHandler,
 }: {
   origin?: string;
   onError?: (error: string) => void;
 } = {}) {
-  return new Client({
-    url: `${origin}/graphql`,
-    exchanges: [
-      refocus,
-      errorExchange({
-        onError: createErrorHandler(deduplicateErrors(onError)),
-      }),
-      cacheExchange,
+  const http = createHttp(origin);
+  return new ApolloClient({
+    uri: `${origin}/graphql`,
+    cache: new InMemoryCache(),
+    link: from([
+      onError(createErrorHandler(deduplicateErrors(errorHandler))),
       retry,
-      fetchExchange,
-    ],
-    fetchOptions: {
-      credentials: 'include',
-    },
-    fetch,
-    suspense: true,
+      http,
+    ]),
   });
 }
 
@@ -106,42 +113,44 @@ function deduplicateErrors(onError?: (error: string) => void) {
 
 export function createMinimalGraphQLClient({
   origin = CONFIG.API_ORIGIN,
-  onError,
+  onError: errorHandler,
 }: {
   origin?: string;
   onError?: (error: string) => void;
 } = {}) {
-  return new Client({
-    url: `${origin}/graphql`,
-    exchanges: [
-      errorExchange({ onError: createErrorHandler(onError) }),
-      retry,
-      fetchExchange,
-    ],
-    fetchOptions: {
-      credentials: 'include',
-    },
-    fetch,
+  const http = createHttp(origin);
+  return new ApolloClient({
+    cache: new InMemoryCache(),
+    link: from([
+      onError(createErrorHandler(deduplicateErrors(errorHandler))),
+      http,
+    ]),
   });
 }
 
 export {
-  CombinedError,
-  useClient,
+  useApolloClient as useClient,
   useMutation,
   useQuery,
   useSubscription,
-} from 'urql';
+  useBackgroundQuery,
+  useFragment,
+  useLazyQuery,
+  useLoadableQuery,
+  useSuspenseQuery,
+  useReactiveVar,
+  useReadQuery,
+  NetworkStatus,
+} from '@apollo/client';
 export type {
-  AnyVariables,
-  CacheOutcome,
-  ClientOptions,
   GraphQLRequest,
-  Query,
-  QueryProps,
-  QueryState,
-  UseQueryResponse,
-} from 'urql';
+  UseBackgroundQueryResult,
+  UseFragmentOptions,
+  UseFragmentResult,
+  UseLoadableQueryResult,
+  UseReadQueryResult,
+  UseSuspenseQueryResult,
+} from '@apollo/client';
 
 // some minimal queries for common use
 const meQuery = graphql(`
@@ -159,23 +168,17 @@ const meQuery = graphql(`
 `);
 
 export function useMe() {
-  return useQuery({
-    query: meQuery,
-    requestPolicy: 'cache-first',
+  return useSuspenseQuery(meQuery, {
+    fetchPolicy: 'cache-first',
   });
 }
 
 export function useIsLoggedIn() {
-  const [result] = useMe();
-  return [result.data?.me != null, result.fetching] as const;
+  const result = useMe();
+  return result.data?.me !== null;
 }
 
 export function useCanSync() {
-  const [result] = useMe();
+  const result = useMe();
   return result?.data?.me?.plan?.canSync;
-}
-
-export function useIsOffline() {
-  const [result] = useMe();
-  return !result.fetching && !result.stale && result.error;
 }

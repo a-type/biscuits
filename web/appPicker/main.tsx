@@ -1,17 +1,13 @@
 import 'uno.css';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Provider } from 'urql';
-import { client } from '../src/graphql.js';
 import { apps } from '@biscuits/apps';
 
 function main() {
   const root = createRoot(document.getElementById('root')!);
   root.render(
     <StrictMode>
-      <Provider value={client}>
-        <AppIcons />
-      </Provider>
+      <AppIcons />
     </StrictMode>,
   );
 }
@@ -48,7 +44,7 @@ function AppIcons() {
               onClick={() => goTo(app.id)}
             >
               <img
-                src={iconUrl}
+                src={iconUrl.toString()}
                 alt={app.name}
                 className="w-[40px] h-[40px] block"
               />

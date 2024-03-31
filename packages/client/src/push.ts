@@ -1,7 +1,7 @@
-import { Client, useClient } from 'urql';
 import { graphql } from './graphql.js';
 import { useAppId } from './react.js';
 import { useCallback, useState, useEffect } from 'react';
+import { useApolloClient, ApolloClient } from '@apollo/client';
 
 const subscribeToPushMutation = graphql(`
   mutation SubscribeToPush($subscription: CreatePushSubscriptionInput!) {
@@ -18,7 +18,7 @@ const unsubscribeFromPushMutation = graphql(`
 export async function subscribeToPush(
   appId: string,
   vapidKey: string,
-  graphqlClient: Client,
+  graphqlClient: ApolloClient<any>,
 ) {
   if (!('serviceWorker' in navigator)) {
     // Service Worker isn't supported on this browser, disable or hide UI.
@@ -52,26 +52,29 @@ export async function subscribeToPush(
       auth: string;
     };
   };
-  await graphqlClient.mutation(subscribeToPushMutation, {
-    subscription: {
-      appId,
-      endpoint: parsedSubscription.endpoint,
-      auth: parsedSubscription.keys.auth,
-      p256dh: parsedSubscription.keys.p256dh,
+  await graphqlClient.mutate({
+    mutation: subscribeToPushMutation,
+    variables: {
+      subscription: {
+        appId,
+        endpoint: parsedSubscription.endpoint,
+        auth: parsedSubscription.keys.auth,
+        p256dh: parsedSubscription.keys.p256dh,
+      },
     },
   });
 }
 
 export function useSubscribeToPush(vapidKey: string) {
   const appId = useAppId();
-  const graphqlClient = useClient();
+  const graphqlClient = useApolloClient();
   return useCallback(
     () => subscribeToPush(appId, vapidKey, graphqlClient),
     [appId, graphqlClient, vapidKey],
   );
 }
 
-export async function unsubscribeFromPush(graphqlClient: Client) {
+export async function unsubscribeFromPush(graphqlClient: ApolloClient<any>) {
   const sw = await navigator.serviceWorker.getRegistration();
 
   if (!sw) {
@@ -89,13 +92,16 @@ export async function unsubscribeFromPush(graphqlClient: Client) {
   }
 
   await subscription.unsubscribe();
-  await graphqlClient.mutation(unsubscribeFromPushMutation, {
-    endpoint: subscription.endpoint,
+  await graphqlClient.mutate({
+    mutation: unsubscribeFromPushMutation,
+    variables: {
+      endpoint: subscription.endpoint,
+    },
   });
 }
 
 export function useUnsubscribeFromPush() {
-  const graphqlClient = useClient();
+  const graphqlClient = useApolloClient();
   return useCallback(() => unsubscribeFromPush(graphqlClient), [graphqlClient]);
 }
 

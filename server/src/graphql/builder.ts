@@ -22,6 +22,10 @@ import {
   WeatherForecastDay,
   WeatherForecastInput,
 } from '../services/weather.js';
+import {
+  AutocompleteSuggestion,
+  PlaceLocationDetails,
+} from '../services/maps.js';
 
 export const builder = new SchemaBuilder<{
   Context: GQLContext;
@@ -74,7 +78,8 @@ export const builder = new SchemaBuilder<{
     // Common Utils
     WeatherForecast: WeatherForecast;
     WeatherForecastDay: WeatherForecastDay;
-    GeographicResult: GeographicResult;
+    GeographicResult: PlaceLocationDetails;
+    LocationAutocompleteSuggestion: AutocompleteSuggestion;
   };
   AuthScopes: {
     public: boolean;

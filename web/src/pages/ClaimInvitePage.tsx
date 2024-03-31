@@ -1,12 +1,8 @@
 import { graphql } from '@/graphql.js';
 import { useNavigate, useParams } from '@verdant-web/react-router';
 import { useEffect } from 'react';
-import { useMutation, useQuery } from 'urql';
-import {
-  PageRoot,
-  PageContent,
-  PageFixedArea,
-} from '@a-type/ui/components/layouts';
+import { useMutation, useSuspenseQuery } from '@biscuits/client';
+import { PageRoot, PageContent } from '@a-type/ui/components/layouts';
 import { H1, P } from '@a-type/ui/components/typography';
 import { withClassName } from '@a-type/ui/hooks';
 import { Button } from '@a-type/ui/components/button';
@@ -45,8 +41,7 @@ function ClaimInvitePage() {
   const navigate = useNavigate();
   const code = params.code;
 
-  const [infoResult] = useQuery({
-    query: claimInviteInfo,
+  const infoResult = useSuspenseQuery(claimInviteInfo, {
     variables: { code },
   });
 
@@ -58,10 +53,10 @@ function ClaimInvitePage() {
     }
   }, [navigate, isNotAuthenticated, code]);
 
-  const [claimResult, mutateClaim] = useMutation(claimInviteAction);
+  const [mutateClaim] = useMutation(claimInviteAction);
   const claim = async () => {
-    const result = await mutateClaim({ code });
-    if (!result.error) {
+    const result = await mutateClaim({ variables: { code } });
+    if (!result.errors) {
       toast.success('Welcome to your new membership!');
       navigate('/plan');
     }

@@ -25,6 +25,7 @@ import { useSearchParams } from '@verdant-web/react-router';
 import classNames from 'classnames';
 import { useState } from 'react';
 import { TripDateRange } from './TripDateRange.jsx';
+import { LocationSelect } from '../weather/LocationSelect.jsx';
 
 export interface TripViewProps {
   tripId: string;
@@ -46,7 +47,7 @@ export function TripView({ tripId }: TripViewProps) {
 }
 
 function TripViewInfo({ trip }: { trip: Trip }) {
-  const { name, startsAt, endsAt } = hooks.useWatch(trip);
+  const { name, startsAt, endsAt, location } = hooks.useWatch(trip);
   return (
     <div
       className={classNames('flex flex-col items-start transition', {
@@ -60,6 +61,10 @@ function TripViewInfo({ trip }: { trip: Trip }) {
         className="text-xl w-full"
       />
       <TripDateRange trip={trip} />
+      <LocationSelect
+        value={location}
+        onChange={(v) => trip.set('location', v)}
+      />
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import { graphql } from '@/graphql.js';
 import { H2 } from '@a-type/ui/components/typography';
-import { useMutation, useQuery } from 'urql';
-import { FAMILY_STYLE_PRICE_ID, FOR_TWO_PRICE_ID } from '@/config.js';
+import { useMutation, useSuspenseQuery } from '@biscuits/client';
 import {
   CardGrid,
   CardMain,
@@ -31,12 +30,14 @@ const CreatePlan = graphql(`
 `);
 
 export function SubscriptionSelect({}: SubscriptionSelectProps) {
-  const [result, createPlan] = useMutation(CreatePlan);
+  const [createPlan, result] = useMutation(CreatePlan);
 
   const selectPlan = async (lookupKey: string) => {
     await createPlan({
-      input: {
-        priceLookupKey: lookupKey,
+      variables: {
+        input: {
+          priceLookupKey: lookupKey,
+        },
       },
     });
   };
@@ -47,12 +48,12 @@ export function SubscriptionSelect({}: SubscriptionSelectProps) {
       <Suspense>
         <CardGrid>
           <SubscriptionChoiceButton
-            disabled={result.fetching}
+            disabled={result.loading}
             onClick={() => selectPlan('for_two')}
             lookupKey="for_two"
           />
           <SubscriptionChoiceButton
-            disabled={result.fetching}
+            disabled={result.loading}
             onClick={() => selectPlan('family_style')}
             lookupKey="family_style"
           />
@@ -83,8 +84,7 @@ function SubscriptionChoiceButton({
   onClick: () => void;
   lookupKey: 'for_two' | 'family_style';
 }) {
-  const [{ data }] = useQuery({
-    query: subscriptionPlanInfo,
+  const { data } = useSuspenseQuery(subscriptionPlanInfo, {
     variables: { lookupKey },
   });
   return (

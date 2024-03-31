@@ -1,4 +1,5 @@
 import { BiscuitsError } from '@biscuits/error';
+import { CONFIG } from './index.js';
 
 // on window load, check for a refresh token param
 // and store it if found.
@@ -82,7 +83,7 @@ async function refreshSessionViaIframe() {
   let iframe: HTMLIFrameElement | null = null;
   try {
     return await new Promise<void>((resolve, reject) => {
-      const iframeUrl = `${import.meta.env.VITE_HOME_ORIGIN}/refresh-session`;
+      const iframeUrl = `${CONFIG.HOME_ORIGIN}/refresh-session`;
       // go ahead and subscribe to postMessage events
       window.addEventListener('message', (event) => {
         if (event.data.type === 'refresh-session') {

@@ -76,7 +76,7 @@ builder.objectType('PlanLibraryReplica', {
     }),
     profile: t.field({
       type: 'PlanLibraryReplicaProfile',
-      resolve: (replica) => replica.profile,
+      resolve: (replica) => replica.profile as any,
     }),
     // TODO: profile - once it's decided what a Biscuits Profile type is.
   }),

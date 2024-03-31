@@ -11,7 +11,7 @@ import {
 import { Button } from '@a-type/ui/components/button';
 import { ReactNode } from 'react';
 import { Icon } from '@a-type/ui/components/icon';
-import { graphql, useQuery } from '../index.js';
+import { graphql, useSuspenseQuery } from '../index.js';
 
 const subscriptionPromotionState = proxy({
   status: 'closed' as 'closed' | 'open',
@@ -39,7 +39,7 @@ export function SubscriptionPromotion({
   children,
 }: SubscriptionPromotionProps) {
   const { status } = useSnapshot(subscriptionPromotionState);
-  const [{ data }] = useQuery({ query: promotionProductQuery });
+  const { data } = useSuspenseQuery(promotionProductQuery);
   const price = data?.productInfo.price;
   const currency = data?.productInfo.currency;
 

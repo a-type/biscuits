@@ -572,7 +572,19 @@ export type introspection = {
         "name": "GeographicResult",
         "fields": [
           {
-            "name": "country",
+            "name": "address",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "id",
             "type": {
               "kind": "NON_NULL",
               "ofType": {
@@ -606,27 +618,6 @@ export type introspection = {
               }
             },
             "args": []
-          },
-          {
-            "name": "name",
-            "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              }
-            },
-            "args": []
-          },
-          {
-            "name": "state",
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "args": []
           }
         ],
         "interfaces": []
@@ -650,6 +641,37 @@ export type introspection = {
               "ofType": {
                 "kind": "OBJECT",
                 "name": "Plan",
+                "ofType": null
+              }
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "OBJECT",
+        "name": "LocationAutocompleteSuggestion",
+        "fields": [
+          {
+            "name": "placeId",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "text",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
                 "ofType": null
               }
             },
@@ -1704,7 +1726,31 @@ export type introspection = {
             "args": []
           },
           {
-            "name": "geographicLocations",
+            "name": "geographicLocation",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "GeographicResult",
+                "ofType": null
+              }
+            },
+            "args": [
+              {
+                "name": "placeId",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            ]
+          },
+          {
+            "name": "locationAutocomplete",
             "type": {
               "kind": "NON_NULL",
               "ofType": {
@@ -1713,7 +1759,7 @@ export type introspection = {
                   "kind": "NON_NULL",
                   "ofType": {
                     "kind": "OBJECT",
-                    "name": "GeographicResult",
+                    "name": "LocationAutocompleteSuggestion",
                     "ofType": null
                   }
                 }

@@ -5,7 +5,7 @@ import {
   TextField,
 } from '@a-type/ui/components/forms';
 import { toast } from 'react-hot-toast';
-import { useMutation } from 'urql';
+import { useMutation } from '@biscuits/client';
 
 const invite = graphql(`
   mutation CreateInvitation($input: CreatePlanInvitationInput!) {
@@ -24,13 +24,13 @@ const invite = graphql(`
 export interface InviteMemberProps {}
 
 export function InviteMember({}: InviteMemberProps) {
-  const [_, createInvitation] = useMutation(invite);
+  const [createInvitation] = useMutation(invite);
 
   return (
     <FormikForm
       initialValues={{ email: '' }}
       onSubmit={async ({ email }, bag) => {
-        await createInvitation({ input: { email } });
+        await createInvitation({ variables: { input: { email } } });
         bag.resetForm();
         toast.success('Invitation sent!');
       }}

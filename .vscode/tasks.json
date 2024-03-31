@@ -6,7 +6,7 @@
       "script": "write-schema",
       "path": "server",
       "problemMatcher": ["$tsc-watch"],
-      "label": "npm: write-schema - server",
+      "label": "Write Schema",
       "detail": "env-cmd tsx watch --conditions=development ./scripts/writeSchema.ts",
       "runOptions": {
         "runOn": "folderOpen"
@@ -42,7 +42,10 @@
       "script": "dev",
       "problemMatcher": [],
       "label": "Main Dev",
-      "detail": "turbo run dev"
+      "detail": "turbo run dev",
+      "runOptions": {
+        "reevaluateOnRerun": true
+      }
     }
   ]
 }
