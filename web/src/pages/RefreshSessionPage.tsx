@@ -8,7 +8,7 @@ import { useEffect } from 'react';
  * the refresh token, which is stored in this app's origin localStorage.
  */
 export function RefreshSessionPage() {
-  const [data] = useMe();
+  const data = useMe();
   const success = data.data?.me;
   useEffect(() => {
     if (window.top) {

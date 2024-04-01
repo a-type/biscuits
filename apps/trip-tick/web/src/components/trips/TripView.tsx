@@ -28,6 +28,15 @@ import { TripDateRange } from './TripDateRange.jsx';
 import { LocationSelect } from '../weather/LocationSelect.jsx';
 import { Icon } from '@a-type/ui/components/icon';
 import { WeatherForecast } from '../weather/WeatherForecast.jsx';
+import { useLongPress } from '@a-type/ui/hooks';
+import { Tooltip } from '@a-type/ui/components/tooltip';
+import { preventDefault } from '@a-type/utils';
+import {
+  Popover,
+  PopoverAnchor,
+  PopoverArrow,
+  PopoverContent,
+} from '@a-type/ui/components/popover';
 
 export interface TripViewProps {
   tripId: string;
@@ -262,14 +271,48 @@ function TripViewChecklistItem({
     }
   };
 
+  const {
+    ref,
+    state,
+    props: holdProps,
+  } = useLongPress({
+    onActivate() {},
+    onDurationReached: () => {
+      onCompletionChanged(computedQuantity);
+    },
+    // effectively disable, until supported...
+    delay: completed ? 60 * 1000 : 400,
+    duration: 1000,
+  });
+
   return (
     <div className="w-full p-2 flex flex-col gap-2">
       <div className="w-full flex flex-row items-center gap-2">
-        <Checkbox
-          checked={completed}
-          onCheckedChange={mainOnChecked}
-          className="w-32px h-32px rounded-full"
-        />
+        <Popover open={state === 'holding' || state === 'candidate'}>
+          <PopoverAnchor asChild>
+            <Checkbox
+              checked={completed}
+              onCheckedChange={mainOnChecked}
+              className="w-32px h-32px rounded-full touch-none"
+              ref={ref}
+              {...holdProps}
+            />
+          </PopoverAnchor>
+          <PopoverContent>
+            <PopoverArrow />
+            <div className="absolute z--1 top-0 left-0 h-full bg-accent-wash animate-progress-bar animate-duration-[1s] animate-delay-[400ms] animate-forwards" />
+            <div className="flex flex-row">
+              Hold to complete
+              <Icon
+                className={classNames(
+                  'ml-2',
+                  state === 'candidate' ? 'opacity-100' : 'opacity-50',
+                )}
+                name="check"
+              />
+            </div>
+          </PopoverContent>
+        </Popover>
         <label>{description}</label>
         <span className="text-gray-7">×{computedQuantity}</span>
       </div>

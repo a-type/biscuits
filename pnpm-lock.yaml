@@ -376,8 +376,8 @@ importers:
   apps/trip-tick/web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.6.21
-        version: 0.6.21(@types/react-dom@18.2.17)(@types/react@18.0.4)
+        specifier: ^0.6.25
+        version: 0.6.25(@types/react-dom@18.2.17)(@types/react@18.0.4)
       '@a-type/utils':
         specifier: ^1.0.6
         version: 1.0.6
@@ -976,8 +976,8 @@ packages:
       - '@types/react-dom'
     dev: false
 
-  /@a-type/ui@0.6.21(@types/react-dom@18.2.17)(@types/react@18.0.4):
-    resolution: {integrity: sha512-kCvgzMltFxFh6BgGUR5cbNzK5vpvUhDNGeiMPQZ8NSeq95ngqxZixLUnJ9Ei5w2tGUmEjwXVMWJpuJvZ+9mR2Q==}
+  /@a-type/ui@0.6.25(@types/react-dom@18.2.17)(@types/react@18.0.4):
+    resolution: {integrity: sha512-gkiuKU37+xeL0h/HTwsXQhkmUfQWv6SsCWhnyEa2MjvliH6hEToBJBLW6nTvkj+0eU5z0o7YRZq0QPyev2byHg==}
     dependencies:
       '@a-type/utils': 1.0.8
       '@radix-ui/react-accordion': 1.1.2(@types/react-dom@18.2.17)(@types/react@18.0.4)(react-dom@18.2.0)(react@18.2.0)
@@ -12118,7 +12118,7 @@ packages:
     peerDependencies:
       valtio: '*'
     dependencies:
-      valtio: 1.13.2(@types/react@18.0.4)(react@18.2.0)
+      valtio: 1.13.2(@types/react@18.0.14)(react@18.2.0)
     dev: false
 
   /destr@2.0.2:

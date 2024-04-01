@@ -71,15 +71,15 @@ function Forecast({
 
   return (
     <div className="flex flex-row gap-1 flex-wrap px-2">
-      <Chip className="bg-attention-light">
-        <Icon name="arrowUp" />
+      <Chip>
+        <Icon name="arrowUp" className="text-attention-dark" />
         <span>
           {Math.round(data.weatherForecast.high)}
           <TempUnit unit={data.weatherForecast.temperatureUnit} />
         </span>
       </Chip>
-      <Chip className="bg-primary-wash">
-        <Icon name="arrowDown" />
+      <Chip>
+        <Icon name="arrowDown" className="text-primary-dark" />
         {Math.round(data.weatherForecast.low)}
         <TempUnit unit={data.weatherForecast.temperatureUnit} />
       </Chip>

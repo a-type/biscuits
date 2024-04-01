@@ -87,7 +87,7 @@ export function AppPicker({ className, children }: AppPickerProps) {
 export function AppPickerNavItem({ className }: { className?: string }) {
   return (
     <AppPicker>
-      <NavBarItem>
+      <NavBarItem className={className}>
         <NavBarItemIconWrapper>
           <Icon name="cardsGrid" />
         </NavBarItemIconWrapper>
