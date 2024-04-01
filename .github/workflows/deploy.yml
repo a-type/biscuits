@@ -7,23 +7,6 @@ env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
 
 jobs:
-  # check-for-changes:
-  #   runs-on: ubuntu-latest
-  #   permissions:
-  #     contents: read
-  #   outputs:
-  #     exitCode: ${{ steps.check.outputs.exitCode }}
-
-  #   steps:
-  #     # uses turborepo to check for changes to build dependencies in @biscuits/server
-  #     - name: Checkout repository
-  #       uses: actions/checkout@v3
-
-  #     - name: Check for changes
-  #       run: npx turbo-ignore @biscuits/server --task=build
-  #       id: check
-  #       continue-on-error: true
-
   deploy:
     runs-on: ubuntu-latest
     name: Deploy to production
@@ -41,3 +24,9 @@ jobs:
       - name: Deploy API
         # deploy the image from ghcr.io for the target sha (short version)
         run: flyctl deploy --image ghcr.io/a-type/biscuits:sha-${SHORT_SHA}
+
+      - name: Deploy Web
+        run: curl -X POST ${{ secrets.CORE_WEB_DEPLOY_HOOK_PROD }}
+
+      - name: Deploy Trip Tick
+        run: curl -X POST ${{ secrets.TRIP_TICK_DEPLOY_HOOK_PROD }}
