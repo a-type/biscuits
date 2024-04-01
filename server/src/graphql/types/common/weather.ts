@@ -72,6 +72,50 @@ builder.objectType('WeatherForecast', {
     error: t.exposeString('error', {
       nullable: true,
     }),
+    high: t.float({
+      nullable: false,
+      resolve: (parent) => {
+        return parent.days.reduce(
+          (max, day) => Math.max(max, day.high),
+          -Infinity,
+        );
+      },
+    }),
+    low: t.float({
+      nullable: false,
+      resolve: (parent) => {
+        return parent.days.reduce(
+          (min, day) => Math.min(min, day.low),
+          Infinity,
+        );
+      },
+    }),
+    maxPrecipitationMM: t.float({
+      nullable: false,
+      resolve: (parent) => {
+        return parent.days.reduce(
+          (max, day) => Math.max(max, day.precipitationMM),
+          -Infinity,
+        );
+      },
+    }),
+    willRain: t.boolean({
+      nullable: false,
+      resolve: (parent) => {
+        return parent.days.some((day) => day.precipitationMM > 3);
+      },
+    }),
+    rainyDays: t.int({
+      nullable: false,
+      resolve: (parent) => {
+        return parent.days.filter((day) => day.precipitationMM > 3).length;
+      },
+    }),
+    temperatureUnit: t.field({
+      type: TemperatureUnit,
+      nullable: false,
+      resolve: (parent) => parent.days[0].temperatureUnit,
+    }),
   }),
 });
 

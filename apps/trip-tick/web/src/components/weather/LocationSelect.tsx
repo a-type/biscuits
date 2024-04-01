@@ -16,9 +16,11 @@ import { TripLocation, TripLocationInit } from '@trip-tick.biscuits/verdant';
 import classNames from 'classnames';
 import { useCombobox } from 'downshift';
 import { preventDefault } from '@a-type/utils';
-import { useRef, useState, useTransition } from 'react';
+import { useCallback, useRef, useState, useTransition } from 'react';
 import { useSize } from '@a-type/ui/hooks';
 import { toast } from 'react-hot-toast';
+import { Button } from '@a-type/ui/components/button';
+import { Icon } from '@a-type/ui/components/icon';
 
 export interface LocationSelectProps {
   className?: string;
@@ -53,6 +55,54 @@ export function LocationSelect({
   const isSubscribed = useCanSync();
 
   hooks.useWatch(value);
+
+  const [showEdit, setShowEdit] = useState(false);
+
+  const handleChange = useCallback(
+    (v: TripLocationInit) => {
+      onChange(v);
+      setShowEdit(false);
+    },
+    [onChange],
+  );
+
+  if (!isSubscribed) return null;
+
+  if (!showEdit && value) {
+    return (
+      <Button
+        color="ghost"
+        size="small"
+        className={classNames('font-normal', className)}
+        onClick={() => setShowEdit(true)}
+      >
+        <Icon name="placeholder" />
+        {value.get('name')}
+      </Button>
+    );
+  }
+
+  return (
+    <LocationSelectAutocomplete
+      value={value}
+      onChange={handleChange}
+      className={className}
+      autoFocus={showEdit}
+    />
+  );
+}
+
+function LocationSelectAutocomplete({
+  value,
+  onChange,
+  className,
+  autoFocus,
+}: {
+  value: TripLocation | null;
+  onChange: (value: TripLocationInit) => void;
+  className?: string;
+  autoFocus?: boolean;
+}) {
   const name = value?.get('name') ?? '';
 
   const [_, startTransition] = useTransition();
@@ -61,8 +111,7 @@ export function LocationSelect({
 
   const searchResult = useQuery(locationAutocomplete, {
     variables: { query: debouncedSearchValue },
-    skip:
-      !debouncedSearchValue || !isSubscribed || debouncedSearchValue === name,
+    skip: !debouncedSearchValue || debouncedSearchValue === name,
   });
   const client = useClient();
 
@@ -74,11 +123,7 @@ export function LocationSelect({
     getInputProps,
     highlightedIndex,
     getItemProps,
-    reset,
-    inputValue,
     setInputValue,
-    selectItem,
-    openMenu,
   } = useCombobox({
     items: options,
     initialInputValue: name,
@@ -118,9 +163,6 @@ export function LocationSelect({
       contentRef.current.style.width = width + 'px';
     }
   });
-
-  if (!isSubscribed) return null;
-
   return (
     <Popover open={isOpen}>
       <PopoverAnchor asChild>
@@ -141,6 +183,7 @@ export function LocationSelect({
             required
             autoComplete="off"
             name="location"
+            autoFocus={autoFocus}
           />
         </div>
       </PopoverAnchor>

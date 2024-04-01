@@ -30,6 +30,7 @@ const yoga = createYoga<GQLContext>({
   graphiql: true,
   maskedErrors: {
     maskError: (error, message, isDev) => {
+      console.error(`[GraphQL Error]`, error);
       const originalError =
         'originalError' in (error as any)
           ? (error as any).originalError

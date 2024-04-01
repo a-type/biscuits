@@ -164,55 +164,56 @@ export async function getForecast(
       days: [],
     };
   }
-  if (input.startDate > new Date(now.getTime() + 8 * 24 * 60 * 60 * 1000)) {
-    return {
-      days: [],
-    };
-  }
   if (input.startDate < now) {
     input.startDate = now;
   }
 
-  const params = new URLSearchParams();
-  params.set('lat', input.latitude.toString());
-  params.set('lon', input.longitude.toString());
-  params.set('appid', OPENWEATHER_API_KEY);
-  params.set('exclude', 'current,minutely,hourly');
-  params.set(
-    'units',
-    input.temperatureUnits === TemperatureUnit.Celsius ? 'metric' : 'imperial',
-  );
-
-  const response = await fetch(
-    `https://api.openweathermap.org/data/3.0/onecall?${params.toString()}`,
-  );
-  if (!response.ok) {
-    console.error(
-      'Failed to fetch weather forecast',
-      response.statusText,
-      await response.text().catch(() => ''),
-    );
-    throw new BiscuitsError(
-      BiscuitsError.Code.Unexpected,
-      'Failed to fetch weather forecast',
-    );
-  }
-  const data: WeatherForecastApiResult = await response.json();
-  // match up the forecast days with the requested days
   const forecast: WeatherForecastDay[] = [];
 
-  for (const day of data.daily) {
-    const dayDate = new Date(day.dt * 1000);
-    if (dayDate < input.startDate || dayDate > input.endDate) {
-      continue;
+  // only request main forecast API if some of the requested
+  // days are within the 8-day range
+  if (input.endDate > new Date(now.getTime() + 8 * 24 * 60 * 60 * 1000)) {
+    const params = new URLSearchParams();
+    params.set('lat', input.latitude.toString());
+    params.set('lon', input.longitude.toString());
+    params.set('appid', OPENWEATHER_API_KEY);
+    params.set('exclude', 'current,minutely,hourly');
+    params.set(
+      'units',
+      input.temperatureUnits === TemperatureUnit.Celsius
+        ? 'metric'
+        : 'imperial',
+    );
+
+    const response = await fetch(
+      `https://api.openweathermap.org/data/3.0/onecall?${params.toString()}`,
+    );
+    if (!response.ok) {
+      console.error(
+        'Failed to fetch weather forecast',
+        response.statusText,
+        await response.text().catch(() => ''),
+      );
+      throw new BiscuitsError(
+        BiscuitsError.Code.Unexpected,
+        'Failed to fetch weather forecast',
+      );
     }
-    forecast.push({
-      date: dayDate.toISOString(),
-      high: day.temp.max,
-      low: day.temp.min,
-      precipitationMM: day.rain ?? 0,
-      temperatureUnit: input.temperatureUnits,
-    });
+    const data: WeatherForecastApiResult = await response.json();
+    // match up the forecast days with the requested days
+    for (const day of data.daily) {
+      const dayDate = new Date(day.dt * 1000);
+      if (dayDate < input.startDate || dayDate > input.endDate) {
+        continue;
+      }
+      forecast.push({
+        date: dayDate.toISOString(),
+        high: day.temp.max,
+        low: day.temp.min,
+        precipitationMM: day.rain ?? 0,
+        temperatureUnit: input.temperatureUnits,
+      });
+    }
   }
 
   // was the end of the forecast range > 1 day behind the end of the
@@ -222,23 +223,19 @@ export async function getForecast(
   const mustEstimateFurther =
     !lastDayOfForecast || new Date(lastDayOfForecast) < input.endDate;
   if (mustEstimateFurther) {
-    const lastDay = new Date(
-      lastDayOfForecast ?? input.startDate.getTime() - 24 * 60 * 60 * 1000,
+    const remainingRange = getDateRange(
+      new Date(lastDayOfForecast ?? input.startDate),
+      input.endDate,
     );
-    if (lastDay < input.endDate) {
-      const missingDays = Math.ceil(
-        (input.endDate.getTime() - lastDay.getTime()) / (24 * 60 * 60 * 1000),
-      );
-      for (let i = 1; i <= missingDays; i++) {
-        const date = new Date(lastDay.getTime() + i * 24 * 60 * 60 * 1000);
-        const estimated = await getEstimatedWeather({
-          date: date,
-          latitude: input.latitude,
-          longitude: input.longitude,
-          temperatureUnits: input.temperatureUnits,
-        });
-        forecast.push(estimated);
-      }
+
+    for (const date of remainingRange) {
+      const estimated = await getEstimatedWeather({
+        date: date,
+        latitude: input.latitude,
+        longitude: input.longitude,
+        temperatureUnits: input.temperatureUnits,
+      });
+      forecast.push(estimated);
     }
   }
 
@@ -248,6 +245,16 @@ export async function getForecast(
       ? 'Dates more than 1 week in the future may be inaccurate'
       : undefined,
   };
+}
+
+function getDateRange(from: Date, to: Date) {
+  const range: Date[] = [];
+  const current = new Date(from);
+  while (current <= to) {
+    range.push(new Date(current));
+    current.setDate(current.getDate() + 1);
+  }
+  return range;
 }
 
 interface WeatherAggregateApiResult {

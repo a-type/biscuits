@@ -26,6 +26,8 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import { TripDateRange } from './TripDateRange.jsx';
 import { LocationSelect } from '../weather/LocationSelect.jsx';
+import { Icon } from '@a-type/ui/components/icon';
+import { WeatherForecast } from '../weather/WeatherForecast.jsx';
 
 export interface TripViewProps {
   tripId: string;
@@ -48,6 +50,7 @@ export function TripView({ tripId }: TripViewProps) {
 
 function TripViewInfo({ trip }: { trip: Trip }) {
   const { name, startsAt, endsAt, location } = hooks.useWatch(trip);
+  const [editName, setEditName] = useState(false);
   return (
     <div
       className={classNames('flex flex-col items-start transition', {
@@ -55,16 +58,30 @@ function TripViewInfo({ trip }: { trip: Trip }) {
         'gap-1': startsAt && endsAt,
       })}
     >
-      <LiveUpdateTextField
-        value={name}
-        onChange={(v) => trip.set('name', v)}
-        className="text-xl w-full"
-      />
+      {editName || !name || name === 'New Trip' ? (
+        <LiveUpdateTextField
+          value={name}
+          onChange={(v) => trip.set('name', v)}
+          className="text-xl w-full"
+          autoFocus={editName}
+          onBlur={() => setEditName(false)}
+        />
+      ) : (
+        <Button
+          color="ghost"
+          className="text-xl"
+          onClick={() => setEditName(true)}
+        >
+          {name}
+          <Icon className="ml-2" name="pencil" />
+        </Button>
+      )}
       <TripDateRange trip={trip} />
       <LocationSelect
         value={location}
         onChange={(v) => trip.set('location', v)}
       />
+      <WeatherForecast trip={trip} />
     </div>
   );
 }

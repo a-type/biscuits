@@ -1,5 +1,21 @@
 import { builder } from '../builder.js';
-import { DateResolver, JSONResolver } from 'graphql-scalars';
+import { JSONResolver } from 'graphql-scalars';
 
-builder.addScalarType('DateTime', DateResolver);
+builder.scalarType('DateTime', {
+  serialize: (value) => {
+    if (value instanceof Date) {
+      return value.toISOString();
+    }
+    throw new Error('DateTime must be a valid date object');
+  },
+  parseValue: (value) => {
+    if (typeof value === 'string') {
+      const parsed = new Date(value);
+      if (!isNaN(parsed.getTime())) {
+        return parsed;
+      }
+    }
+    throw new Error('DateTime must be a valid date string');
+  },
+});
 builder.addScalarType('JSON', JSONResolver);
