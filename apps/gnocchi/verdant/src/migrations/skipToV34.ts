@@ -11,8 +11,8 @@ export default createMigration<V34Types>(v34Schema, async ({ mutations }) => {
     const client = createMinimalGraphQLClient({
       origin: API_HOST_HTTP,
     });
-    const result = await client.query(
-      graphql(`
+    const result = await client.query({
+      query: graphql(`
         query DefaultCategories {
           foodCategories {
             id
@@ -21,8 +21,7 @@ export default createMigration<V34Types>(v34Schema, async ({ mutations }) => {
           }
         }
       `),
-      {},
-    );
+    });
     if (!result.data) {
       if (result.error) throw result.error;
       throw new Error('No data returned');

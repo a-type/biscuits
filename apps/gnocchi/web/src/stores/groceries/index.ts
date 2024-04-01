@@ -3,9 +3,9 @@ import { groceriesState } from '@/components/groceries/state.js';
 import { graphqlClient } from '@/graphql.js';
 import { detailedInstructionsToDoc, instructionsToDoc } from '@/lib/tiptap.js';
 import {
-  CombinedError,
   getVerdantSync,
   graphql,
+  isClientError,
   showSubscriptionPromotion,
   VerdantContext,
 } from '@biscuits/client';
@@ -126,10 +126,13 @@ export const hooks = createHooks<Presence, Profile>({
         // send the categorization to the server for research
         if (categoryId) {
           try {
-            await graphqlClient.mutation(foodAssignMutation, {
-              input: {
-                foodName: food,
-                categoryId,
+            await graphqlClient.mutate({
+              mutation: foodAssignMutation,
+              variables: {
+                input: {
+                  foodName: food,
+                  categoryId,
+                },
               },
             });
           } catch (err) {
@@ -150,12 +153,15 @@ export const hooks = createHooks<Presence, Profile>({
               .run(() => {
                 existing.set('categoryId', categoryId);
               })
-              .flush();
+              .commit();
           }
         } else if (categoryId) {
           try {
-            const remoteLookup = await graphqlClient.query(foodLookupQuery, {
-              food,
+            const remoteLookup = await graphqlClient.query({
+              query: foodLookupQuery,
+              variables: {
+                food,
+              },
             });
             if (remoteLookup?.data?.food) {
               await client.foods.put(
@@ -258,7 +264,7 @@ export const hooks = createHooks<Presence, Profile>({
   useResetCategoriesToDefault: (client) =>
     useCallback(async () => {
       const defaultCategories =
-        (await graphqlClient.query(defaultCategoriesQuery, {}))?.data
+        (await graphqlClient.query({ query: defaultCategoriesQuery }))?.data
           ?.categories ?? [];
       const existingCategories = await client.categories.findAll().resolved;
       const existingIdsToDelete = existingCategories
@@ -631,8 +637,11 @@ export async function addItems(
             try {
               remoteLookup =
                 (
-                  await graphqlClient.query(foodLookupQuery, {
-                    food: parsed.food,
+                  await graphqlClient.query({
+                    query: foodLookupQuery,
+                    variables: {
+                      food: parsed.food,
+                    },
                   })
                 ).data?.food ?? null;
             } catch (err) {
@@ -822,8 +831,11 @@ async function getScannedRecipe(
   client: Client,
 ): Promise<RecipeInit> {
   try {
-    const scanResult = await graphqlClient.query(recipeScanQuery, {
-      input: { url },
+    const scanResult = await graphqlClient.query({
+      query: recipeScanQuery,
+      variables: {
+        input: { url },
+      },
     });
     let result: RecipeInit = {
       url,
@@ -943,7 +955,8 @@ async function getScannedRecipe(
   } catch (err) {
     console.error(err);
     if (
-      err instanceof CombinedError &&
+      err instanceof Error &&
+      isClientError(err) &&
       err.graphQLErrors.some(
         (e) => e.extensions?.code === BiscuitsError.Code.Forbidden,
       )

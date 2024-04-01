@@ -8,6 +8,7 @@ import {
   InMemoryCache,
   useSuspenseQuery,
   from,
+  useQuery,
 } from '@apollo/client';
 import { onError, ErrorHandler } from '@apollo/client/link/error';
 import { RetryLink } from '@apollo/client/link/retry';
@@ -141,6 +142,8 @@ export {
   useReactiveVar,
   useReadQuery,
   NetworkStatus,
+  ApolloError,
+  isApolloError as isClientError,
 } from '@apollo/client';
 export type {
   GraphQLRequest,
@@ -150,6 +153,7 @@ export type {
   UseLoadableQueryResult,
   UseReadQueryResult,
   UseSuspenseQueryResult,
+  ErrorPolicy,
 } from '@apollo/client';
 
 // some minimal queries for common use
@@ -181,4 +185,11 @@ export function useIsLoggedIn() {
 export function useCanSync() {
   const result = useMe();
   return result?.data?.me?.plan?.canSync;
+}
+
+export function useIsOffline() {
+  const { error } = useQuery(meQuery, {
+    fetchPolicy: 'cache-first',
+  });
+  return !!error?.networkError;
 }

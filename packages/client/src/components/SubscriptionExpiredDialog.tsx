@@ -5,7 +5,7 @@ import { LogoutButton, ManagePlanButton, useMe } from '../index.js';
 export interface SubscriptionExpiredDialogProps {}
 
 export function SubscriptionExpiredDialog({}: SubscriptionExpiredDialogProps) {
-  const [{ data }] = useMe();
+  const { data } = useMe();
   const isLoggedIn = !!data?.me;
   const subscriptionStatus = data?.me?.plan?.subscriptionStatus;
 
