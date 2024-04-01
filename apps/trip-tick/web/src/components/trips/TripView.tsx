@@ -263,13 +263,6 @@ function TripViewChecklistItem({
       onCompletionChanged(0);
     }
   };
-  const subOnChecked = (checked: boolean) => {
-    if (checked) {
-      onCompletionChanged(completedQuantity + 1);
-    } else {
-      onCompletionChanged(completedQuantity - 1);
-    }
-  };
 
   const {
     ref,

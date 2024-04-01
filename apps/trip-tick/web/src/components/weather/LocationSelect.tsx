@@ -76,7 +76,7 @@ export function LocationSelect({
         className={classNames('font-normal', className)}
         onClick={() => setShowEdit(true)}
       >
-        <Icon name="placeholder" />
+        <Icon name="location" />
         {value.get('name')}
       </Button>
     );

@@ -16,6 +16,7 @@ import { TripMenu } from './TripMenu.jsx';
 import { H2 } from '@a-type/ui/components/typography';
 import { AddTripButton } from './AddTripButton.jsx';
 import { Divider } from '@a-type/ui/components/divider';
+import { Chip } from '@a-type/ui/components/chip';
 
 export interface TripsListProps {}
 
@@ -76,7 +77,9 @@ export function TripsList({}: TripsListProps) {
 }
 
 function TripsListItem({ trip }: { trip: Trip }) {
-  const { name, startsAt } = hooks.useWatch(trip);
+  const { name, startsAt, location } = hooks.useWatch(trip);
+  hooks.useWatch(location);
+  const locationName = location?.get('name');
 
   const isPast = startsAt && startsAt < Date.now();
 
@@ -91,9 +94,18 @@ function TripsListItem({ trip }: { trip: Trip }) {
       <CardMain compact={!!isPast} asChild>
         <Link to={`/trips/${trip.get('id')}`} className="relative bg-white">
           <CardTitle className="relative z-1">{name}</CardTitle>
-          <CardContent className="text-xs relative z-1">
-            {startsAt ? new Date(startsAt).toLocaleDateString() : 'Unscheduled'}
-            {isPast ? '' : ` | {completedItems} / {totalItems} items`}
+          <CardContent className="text-xs relative z-1 flex flex-row gap-1 flex-wrap">
+            {locationName && <Chip className="bg-white">{locationName}</Chip>}
+            <Chip className="bg-white">
+              {startsAt
+                ? new Date(startsAt).toLocaleDateString()
+                : 'Unscheduled'}
+            </Chip>
+            {!isPast && (
+              <Chip className="bg-white">
+                {completedItems} / {totalItems} items
+              </Chip>
+            )}
           </CardContent>
           {!isPast && (
             <div
