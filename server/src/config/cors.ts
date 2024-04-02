@@ -11,6 +11,6 @@ export const ALLOWED_ORIGINS = [
   // including localhost versions
   'http://localhost:4444',
   // app origins
-  ...appIds.map((id) => `https://${id}.${UI_ORIGIN}`),
+  ...apps.map((app) => app.url),
   ...apps.map((app) => app.devOriginOverride),
 ];
