@@ -52,14 +52,6 @@ jobs:
     needs: build-and-push-image
 
     steps:
-      - name: Wait for image build workflow
-        uses: lewagon/wait-on-check-action@v1.3.1
-        with:
-          ref: ${{ github.ref }}
-          check-name: 'build-and-push-image'
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          wait-interval: 10
-
       - uses: actions/checkout@v2
       - uses: superfly/flyctl-actions/setup-flyctl@master
 
