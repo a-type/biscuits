@@ -88,13 +88,6 @@ export type ListItemsItemQuantity = number;
 export type ListItemsItemPerDays = number;
 export type ListItemsItemAdditional = number;
 export type ListItemsItemRoundDown = boolean;
-export type ListItemsItemCondition = ObjectEntity<
-  ListItemsItemConditionInit,
-  ListItemsItemConditionDestructured,
-  ListItemsItemConditionSnapshot
-> | null;
-export type ListItemsItemConditionType = string;
-export type ListItemsItemConditionValue = any;
 export type ListInit = {
   id?: string;
   createdAt?: number;
@@ -102,10 +95,6 @@ export type ListInit = {
   items?: ListItemsInit;
 };
 
-export type ListItemsItemConditionInit = {
-  type: string;
-  value?: any | null;
-} | null;
 export type ListItemsItemInit = {
   id?: string;
   description?: string;
@@ -113,7 +102,6 @@ export type ListItemsItemInit = {
   perDays?: number;
   additional?: number;
   roundDown?: boolean;
-  condition?: ListItemsItemConditionInit;
 };
 export type ListItemsInit = ListItemsItemInit[];
 export type ListDestructured = {
@@ -123,10 +111,6 @@ export type ListDestructured = {
   items: ListItems;
 };
 
-export type ListItemsItemConditionDestructured = {
-  type: string;
-  value: any | null;
-};
 export type ListItemsItemDestructured = {
   id: string;
   description: string;
@@ -134,7 +118,6 @@ export type ListItemsItemDestructured = {
   perDays: number;
   additional: number;
   roundDown: boolean;
-  condition: ListItemsItemCondition;
 };
 export type ListItemsDestructured = ListItemsItem[];
 export type ListSnapshot = {
@@ -144,10 +127,6 @@ export type ListSnapshot = {
   items: ListItemsSnapshot;
 };
 
-export type ListItemsItemConditionSnapshot = {
-  type: string;
-  value: any | null;
-} | null;
 export type ListItemsItemSnapshot = {
   id: string;
   description: string;
@@ -155,7 +134,6 @@ export type ListItemsItemSnapshot = {
   perDays: number;
   additional: number;
   roundDown: boolean;
-  condition: ListItemsItemConditionSnapshot;
 };
 export type ListItemsSnapshot = ListItemsItemSnapshot[];
 

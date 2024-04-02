@@ -9,10 +9,6 @@ export type ListSnapshot = {
   items: ListItemsSnapshot;
 };
 
-export type ListItemsItemConditionSnapshot = {
-  type: string;
-  value: any | null;
-} | null;
 export type ListItemsItemSnapshot = {
   id: string;
   description: string;
@@ -20,7 +16,6 @@ export type ListItemsItemSnapshot = {
   perDays: number;
   additional: number;
   roundDown: boolean;
-  condition: ListItemsItemConditionSnapshot;
 };
 export type ListItemsSnapshot = ListItemsItemSnapshot[];
 export type ListInit = {
@@ -30,10 +25,6 @@ export type ListInit = {
   items?: ListItemsInit;
 };
 
-export type ListItemsItemConditionInit = {
-  type: string;
-  value?: any | null;
-} | null;
 export type ListItemsItemInit = {
   id?: string;
   description?: string;
@@ -41,7 +32,6 @@ export type ListItemsItemInit = {
   perDays?: number;
   additional?: number;
   roundDown?: boolean;
-  condition?: ListItemsItemConditionInit;
 };
 export type ListItemsInit = ListItemsItemInit[];
 

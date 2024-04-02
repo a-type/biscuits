@@ -36,13 +36,6 @@ var lists = schema.collection({
           }),
           roundDown: schema.fields.boolean({
             default: false
-          }),
-          condition: schema.fields.object({
-            nullable: true,
-            properties: {
-              type: schema.fields.string(),
-              value: schema.fields.any()
-            }
           })
         }
       })
