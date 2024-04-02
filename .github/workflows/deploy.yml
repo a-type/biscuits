@@ -1,18 +1,55 @@
 name: Production Deploy
 on:
-  release:
-    types: [published]
+  push:
+    branches: [main]
 
 env:
   FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
+  build-and-push-image:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Log in to the Container registry
+        uses: docker/login-action@f054a8b539a109f9f41c372932f1ae047eff08c9
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=tag
+            type=ref,event=pr
+            type=sha
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+
   deploy:
     runs-on: ubuntu-latest
     name: Deploy to production
-
-    # needs: check-for-changes
-    # if: needs.check-for-changes.outputs.exitCode == '1'
+    needs: build-and-push-image
 
     steps:
       - name: Wait for image build workflow
@@ -32,9 +69,3 @@ jobs:
       - name: Deploy API
         # deploy the image from ghcr.io for the target sha (short version)
         run: flyctl deploy --image ghcr.io/a-type/biscuits:sha-${SHORT_SHA}
-
-      - name: Deploy Web
-        run: curl -X POST ${{ secrets.CORE_WEB_DEPLOY_HOOK_PROD }}
-
-      - name: Deploy Trip Tick
-        run: curl -X POST ${{ secrets.TRIP_TICK_DEPLOY_HOOK_PROD }}
