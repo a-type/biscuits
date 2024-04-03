@@ -20,7 +20,7 @@ jobs:
           fetch-depth: 0
       - name: Get API changed files
         id: api
-        uses: tj-actions/changed-files@v23
+        uses: tj-actions/changed-files@v44
         with:
           since_last_remote_commit: true
           files: |
