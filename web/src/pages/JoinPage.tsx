@@ -17,7 +17,7 @@ export interface JoinPageProps {}
 
 const startingPriceQuery = graphql(`
   query StartingPrice {
-    productInfo(lookupKey: "for_two") {
+    productInfo(lookupKey: "for_one") {
       price
       currency
     }
@@ -41,8 +41,9 @@ export function JoinPage({}: JoinPageProps) {
             Join Biscuits to unlock features and collaboration in every app
           </h1>
           <p>
-            Biscuits apps are always free to use, but members can sync and share
-            data with family or friends. Plans start at <StartingPrice />.
+            Biscuits apps are always free to use, but members can sync data
+            across devices, use fancy new features, and even share with family
+            and friends. Plans start at <StartingPrice />.
           </p>
           <PageFixedArea className="flex flex-row gap-3 py-4 justify-between">
             <Button asChild color="default">
@@ -52,7 +53,7 @@ export function JoinPage({}: JoinPageProps) {
               </Link>
             </Button>
             <Button asChild color="primary">
-              <Link to="/login">Get started</Link>
+              <Link to="/login?returnTo=/plan">Get started</Link>
             </Button>
           </PageFixedArea>
           <PageSection>

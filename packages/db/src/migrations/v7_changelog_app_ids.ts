@@ -3,7 +3,6 @@ import { Kysely } from 'kysely';
 // changelog app ids
 
 export async function up(db: Kysely<any>) {
-  // so that the dev server doesn't immediately apply a no-op.
   await db.schema
     .alterTable('ChangelogItem')
     .addColumn('appId', 'varchar', (c) => c.notNull().defaultTo('gnocchi'))

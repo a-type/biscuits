@@ -219,6 +219,8 @@ export async function setupNewPlan({
         stripeSubscriptionId: stripeSubscription.id,
         stripePriceId: stripeSubscription.items.data[0].price.id,
         stripeProductId: productId,
+        // go ahead and pre-seed this so we don't have to wait for the webhook
+        subscriptionStatus: 'incomplete',
       })
       .returning('id')
       .executeTakeFirstOrThrow();
@@ -294,16 +296,37 @@ export async function updatePlanSubscription({
     );
   }
 
-  await stripe.subscriptions.update(plan.stripeSubscriptionId, {
-    items: [
-      {
-        id: plan.stripeSubscriptionId,
-        price: price.id,
-      },
-    ],
-  });
+  // if the subscription already has an item, we update it
+  const item = subscription.items.data[0];
 
-  return plan;
+  if (item.price.id === price.id) {
+    // no change
+    return plan;
+  }
+
+  const updatedSubscription = await stripe.subscriptions.update(
+    plan.stripeSubscriptionId,
+    {
+      items: [
+        {
+          id: item.id,
+          price: price.id,
+        },
+      ],
+    },
+  );
+
+  const updatedPlan = await ctx.db
+    .updateTable('Plan')
+    .set({
+      stripePriceId: price.id,
+      subscriptionStatus: updatedSubscription.status,
+    })
+    .where('id', '=', plan.id)
+    .returningAll()
+    .executeTakeFirstOrThrow();
+
+  return updatedPlan;
 }
 
 export async function cancelPlan(planId: string, userId: string) {

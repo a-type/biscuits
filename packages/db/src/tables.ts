@@ -196,7 +196,6 @@ export type NewFood = Insertable<FoodTable>;
 export type FoodUpdate = Updateable<FoodTable>;
 
 export interface FoodNameTable {
-  id: string;
   createdAt: ColumnType<Date, Date | undefined, never>;
   updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
 

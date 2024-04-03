@@ -21,10 +21,10 @@ const PlanPageData = graphql(`
   query PlanPageData {
     me {
       id
-    }
-    plan {
-      id
-      subscriptionStatus
+      plan {
+        id
+        subscriptionStatus
+      }
     }
   }
 `);
@@ -78,17 +78,17 @@ export function PlanPage({}: PlanPageProps) {
         >
           <Suspense>
             <SubscriptionSetup />
-            {!!data?.plan && (
-              <div className="flex flex-col gap-3">
-                <H2>Members</H2>
-                <MembersAndInvitations />
-              </div>
-            )}
-            {!!data?.plan && (
-              <div className="flex flex-col gap-3">
-                <H2>App data</H2>
-                <VerdantLibraries />
-              </div>
+            {!!data?.me?.plan && (
+              <>
+                <div className="flex flex-col gap-3">
+                  <H2>Members</H2>
+                  <MembersAndInvitations />
+                </div>
+                <div className="flex flex-col gap-3">
+                  <H2>App data</H2>
+                  <VerdantLibraries />
+                </div>
+              </>
             )}
           </Suspense>
         </ErrorBoundary>

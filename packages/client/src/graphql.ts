@@ -89,7 +89,7 @@ export function createGraphQLClient({
   const http = createHttp(origin);
   return new ApolloClient({
     uri: `${origin}/graphql`,
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({}),
     link: from([
       onError(createErrorHandler(deduplicateErrors(errorHandler))),
       retry,

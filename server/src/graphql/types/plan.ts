@@ -121,8 +121,11 @@ builder.mutationFields((t) => ({
         planId = plan.id;
       }
 
+      assert(!!planId, 'Plan ID not set during setupPlan');
+
       const newSession = {
         ...ctx.session,
+        role: 'admin' as const,
         planId,
       };
       await ctx.auth.setLoginSession(newSession);
@@ -331,8 +334,17 @@ Plan.implement({
         if (
           plan.subscriptionStatus !== 'incomplete' &&
           plan.subscriptionStatus !== null
-        )
+        ) {
+          console.debug(
+            'Subscription status is not incomplete. Cannot route to checkout.',
+            {
+              planId: plan.id,
+              status: plan.subscriptionStatus,
+            },
+          );
           return null;
+        }
+
         const subscription = await ctx.stripe.subscriptions.retrieve(
           plan.stripeSubscriptionId,
           {

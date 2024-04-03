@@ -27,7 +27,7 @@ export interface SubscriptionPromotionProps {
 
 const promotionProductQuery = graphql(`
   query PromotionProduct {
-    productInfo(lookupKey: "for_two") {
+    productInfo(lookupKey: "for_one") {
       id
       price
       currency

@@ -49,8 +49,8 @@ export function SubscriptionSelect({}: SubscriptionSelectProps) {
         <CardGrid>
           <SubscriptionChoiceButton
             disabled={result.loading}
-            onClick={() => selectPlan('for_two')}
-            lookupKey="for_two"
+            onClick={() => selectPlan('for_one')}
+            lookupKey="for_one"
           />
           <SubscriptionChoiceButton
             disabled={result.loading}
@@ -82,7 +82,7 @@ function SubscriptionChoiceButton({
 }: {
   disabled: boolean;
   onClick: () => void;
-  lookupKey: 'for_two' | 'family_style';
+  lookupKey: 'for_one' | 'family_style';
 }) {
   const { data } = useQuery(subscriptionPlanInfo, {
     variables: { lookupKey },

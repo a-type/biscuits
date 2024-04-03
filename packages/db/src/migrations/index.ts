@@ -12,4 +12,6 @@ import * as v6 from "./v6_foods.js";
 import * as v7 from "./v7_changelog_app_ids.js";
 
 import * as v8 from "./v8_more-indexes.js";
-export default { v1, v2, v3, v4, v5, v6, v7, v8 };
+
+import * as v9 from "./v9_food_name_drop_id.js";
+export default { v1, v2, v3, v4, v5, v6, v7, v8, v9 };

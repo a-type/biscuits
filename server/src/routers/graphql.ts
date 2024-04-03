@@ -11,17 +11,18 @@ import { GraphQLError } from 'graphql';
 import { stripe } from '../services/stripe.js';
 import { AuthError } from '@a-type/auth';
 import { createDataloaders } from '../graphql/dataloaders/index.js';
-import { OnResponseHook } from '@whatwg-node/server';
 
-class ApplyHeadersPlugin implements Plugin<{}, GQLContext> {
-  onResponse?: OnResponseHook<GQLContext> | undefined = (payload) => {
-    if (payload.serverContext) {
-      for (const [key, value] of Object.entries(
-        payload.serverContext.auth.applyHeaders,
-      )) {
-        payload.response.headers.set(key, value);
+function applyHeaders(): Plugin<{}, GQLContext> {
+  return {
+    onResponse: (payload) => {
+      if (payload.serverContext) {
+        for (const [key, value] of Object.entries(
+          payload.serverContext.auth.applyHeaders,
+        )) {
+          payload.response.headers.set(key, value);
+        }
       }
-    }
+    },
   };
 }
 
@@ -46,7 +47,7 @@ const yoga = createYoga<GQLContext>({
       return maskError(error, message, isDev);
     },
   },
-  plugins: [ApplyHeadersPlugin],
+  plugins: [applyHeaders()],
   fetchAPI: {
     Response: Response,
     Request: Request,
