@@ -54,7 +54,7 @@ export const verdantServer = new Server({
     process.env.NODE_ENV === 'production'
       ? new S3FileStorage({
           region: 'us-east-1',
-          bucketName: 'files.biscuits.club',
+          bucketName: 'user-files.biscuits.club',
         })
       : new LocalFileStorage({
           rootDirectory: 'userFiles',

@@ -25,7 +25,7 @@ jobs:
           flyctl ssh sftp get /data/database.sqlite ./backup/database.sqlite
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
-          FLY_APP_NAME: aglio
+          FLY_APP_NAME: biscuits-club
 
       - name: Upload to S3 in directory by date
         uses: jakejarvis/s3-sync-action@master
