@@ -1,9 +1,14 @@
 import { appIds, apps } from '@biscuits/apps';
 import { UI_ORIGIN } from './deployedContext.js';
+import { URL } from 'url';
+
+const uiOriginWithWWW = new URL(UI_ORIGIN);
+uiOriginWithWWW.hostname = `www.${uiOriginWithWWW.hostname}`;
 
 export const ALLOWED_ORIGINS = [
   'http://localhost:6123',
   UI_ORIGIN,
+  uiOriginWithWWW.toString(),
   // old apps - allowed for transfer purposes
   'https://gnocchi.club',
   'https://www.gnocchi.club',
