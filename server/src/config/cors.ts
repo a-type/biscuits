@@ -8,7 +8,8 @@ uiOriginWithWWW.hostname = `www.${uiOriginWithWWW.hostname}`;
 export const ALLOWED_ORIGINS = [
   'http://localhost:6123',
   UI_ORIGIN,
-  uiOriginWithWWW.toString(),
+  // remove trailing slash
+  uiOriginWithWWW.toString().slice(0, -1),
   // old apps - allowed for transfer purposes
   'https://gnocchi.club',
   'https://www.gnocchi.club',
