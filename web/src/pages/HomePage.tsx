@@ -27,7 +27,7 @@ export default function HomePage() {
           <h1
             className={classNames(
               '[font-family:"VC_Henrietta_Trial","Noto_Serif",serif]',
-              'text-[5vmin] m-0 font-normal text-primary-dark text-shadow',
+              'text-4xl m-0 font-normal text-primary-dark text-shadow',
               'bg-primary-wash p-2 rounded-lg leading-none',
             )}
           >
@@ -41,7 +41,7 @@ export default function HomePage() {
           <h2
             className={classNames(
               '[font-family:"VC_Henrietta_Trial","Noto_Serif",serif]',
-              '!text-[8vmin] text-[#004933] mt-0 mb-6 font-bold leading-none',
+              '!text-8xl text-[#004933] mt-0 block mb-10 font-bold leading-none',
             )}
           >
             Scratch-made apps
@@ -49,10 +49,15 @@ export default function HomePage() {
           <P
             className={classNames(
               '[font-family:"VC_Henrietta_Trial","Noto_Serif",serif]',
-              'm-0 text-inherit text-xl',
+              'm-0 mb-6 text-inherit text-xl',
             )}
           >
             in Raleigh, NC
+          </P>
+          <P className="text-black text-lg leading-loose font-normal">
+            Biscuits apps are designed to make your life easier - not become a
+            lifestyle. Free to use forever; no ads, no tracking, no selling your
+            data.
           </P>
         </div>
         <AppsGrid />

@@ -79,6 +79,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy to production
     needs: build-and-push-image
+    cancel-timeout-minutes: 10
 
     steps:
       - uses: actions/checkout@v2
