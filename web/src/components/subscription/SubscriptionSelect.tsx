@@ -1,6 +1,6 @@
 import { graphql } from '@/graphql.js';
 import { H2 } from '@a-type/ui/components/typography';
-import { useMutation, useSuspenseQuery } from '@biscuits/client';
+import { useMutation, useQuery } from '@biscuits/client';
 import {
   CardGrid,
   CardMain,
@@ -84,7 +84,7 @@ function SubscriptionChoiceButton({
   onClick: () => void;
   lookupKey: 'for_two' | 'family_style';
 }) {
-  const { data } = useSuspenseQuery(subscriptionPlanInfo, {
+  const { data } = useQuery(subscriptionPlanInfo, {
     variables: { lookupKey },
   });
   return (

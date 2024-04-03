@@ -1,24 +1,14 @@
 import { Button } from '@a-type/ui/components/button';
+import { useMe } from '@biscuits/client';
 import { Link } from '@verdant-web/react-router';
 import classNames from 'classnames';
-import { graphql } from '@/graphql.js';
-import { useSuspenseQuery } from '@biscuits/client';
 
 export interface UserMenuProps {
   className?: string;
 }
 
-const userMenuMe = graphql(`
-  query UserMenuMe {
-    me {
-      id
-      name
-    }
-  }
-`);
-
 export function UserMenu({ className }: UserMenuProps) {
-  const { data } = useSuspenseQuery(userMenuMe);
+  const { data } = useMe();
 
   if (!data?.me) {
     return (

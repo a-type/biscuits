@@ -13,10 +13,12 @@ import {
   graphql,
   useAppId,
   useIsLoggedIn,
+  useIsOffline,
   useSuspenseQuery,
 } from '../index.js';
 import { Icon } from '@a-type/ui/components/icon';
 import { ReactNode } from 'react';
+import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
 
 export interface UserMenuProps {
   className?: string;
@@ -30,6 +32,7 @@ export function UserMenu({
   children,
 }: UserMenuProps) {
   const isLoggedIn = useIsLoggedIn();
+  const isOffline = useIsOffline();
   const appId = useAppId();
 
   const openPwaHackCatalog = () => {
@@ -44,10 +47,19 @@ export function UserMenu({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button size="icon" color="ghost" className={className}>
-          {children ?? <UserAvatar skipFetch={!isLoggedIn} />}
+          {children ?? (
+            <ErrorBoundary fallback={<Avatar />}>
+              <UserAvatar skipFetch={!isLoggedIn} />
+            </ErrorBoundary>
+          )}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent>
+        {isOffline && (
+          <div className="pl-8 pr-4 py-1 text-gray-7 font-sm max-w-300px">
+            Offline - some features may be unavailable
+          </div>
+        )}
         {getIsPWAInstalled() ? (
           <DropdownMenuItem onClick={openPwaHackCatalog}>
             More apps
@@ -97,14 +109,16 @@ export function UserMenu({
             </a>
           </DropdownMenuItem>
         )}
-        <DropdownMenuItem asChild>
-          <a href={`${CONFIG.API_ORIGIN}/logout`}>
-            Log out
-            <DropdownMenuItemRightSlot>
-              <Icon name="arrowRight" />
-            </DropdownMenuItemRightSlot>
-          </a>
-        </DropdownMenuItem>
+        {!!isLoggedIn && (
+          <DropdownMenuItem asChild>
+            <a href={`${CONFIG.API_ORIGIN}/logout`}>
+              Log out
+              <DropdownMenuItemRightSlot>
+                <Icon name="arrowRight" />
+              </DropdownMenuItemRightSlot>
+            </a>
+          </DropdownMenuItem>
+        )}
       </DropdownMenuContent>
     </DropdownMenu>
   );

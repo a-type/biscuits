@@ -15,6 +15,7 @@ import { MembersAndInvitations } from '@/components/plan/MembersAndInvitations.j
 import { VerdantLibraries } from '@/components/storage/VerdantLibraries.jsx';
 import { LogoutButton, useLocalStorage } from '@biscuits/client';
 import { apps } from '@biscuits/apps';
+import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
 
 const PlanPageData = graphql(`
   query PlanPageData {
@@ -70,21 +71,27 @@ export function PlanPage({}: PlanPageProps) {
           <LogoutButton />
         </PageFixedArea>
         <H1>Your Plan</H1>
-        <Suspense>
-          <SubscriptionSetup />
-          {!!data?.plan && (
-            <div className="flex flex-col gap-3">
-              <H2>Members</H2>
-              <MembersAndInvitations />
-            </div>
-          )}
-          {!!data?.plan && (
-            <div className="flex flex-col gap-3">
-              <H2>App data</H2>
-              <VerdantLibraries />
-            </div>
-          )}
-        </Suspense>
+        <ErrorBoundary
+          fallback={
+            <div>Something went wrong. Couldn&apos;t load this content.</div>
+          }
+        >
+          <Suspense>
+            <SubscriptionSetup />
+            {!!data?.plan && (
+              <div className="flex flex-col gap-3">
+                <H2>Members</H2>
+                <MembersAndInvitations />
+              </div>
+            )}
+            {!!data?.plan && (
+              <div className="flex flex-col gap-3">
+                <H2>App data</H2>
+                <VerdantLibraries />
+              </div>
+            )}
+          </Suspense>
+        </ErrorBoundary>
       </PageContent>
     </PageRoot>
   );

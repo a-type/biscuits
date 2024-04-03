@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast';
 import { PlanInfo, planProductInfo } from './PlanInfo.js';
 import { CancelPlanButton } from './CancelPlanButton.js';
 import classNames from 'classnames';
-import { useLazyQuery, useSuspenseQuery } from '@biscuits/client';
+import { useLazyQuery } from '@biscuits/client';
 import { Icon } from '@a-type/ui/components/icon';
 import { H2 } from '@a-type/ui/components/typography';
 import { CONFIG } from '@biscuits/client';

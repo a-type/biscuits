@@ -161,6 +161,7 @@ const meQuery = graphql(`
   query CommonMe {
     me {
       id
+      name
       plan {
         id
         canSync
@@ -172,7 +173,7 @@ const meQuery = graphql(`
 `);
 
 export function useMe() {
-  return useSuspenseQuery(meQuery, {
+  return useQuery(meQuery, {
     fetchPolicy: 'cache-first',
   });
 }
@@ -188,8 +189,6 @@ export function useCanSync() {
 }
 
 export function useIsOffline() {
-  const { error } = useQuery(meQuery, {
-    fetchPolicy: 'cache-first',
-  });
+  const { error } = useMe();
   return !!error?.networkError;
 }

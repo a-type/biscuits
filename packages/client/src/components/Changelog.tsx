@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from '@a-type/ui/components/dialog';
 import { useState } from 'react';
-import { graphql, useSuspenseQuery } from '../index.js';
+import { graphql, useQuery } from '../index.js';
 import { useAppId } from './Context.js';
 
 export interface ChangelogDisplayProps {
@@ -46,7 +46,7 @@ export function ChangelogDisplay({
   );
   const [capturedSeen] = useState(seen);
   const appId = useAppId();
-  const res = useSuspenseQuery(changelogQuery, { variables: { appId } });
+  const res = useQuery(changelogQuery, { variables: { appId } });
   const data = res.data?.changelog || [];
   const lastSeenIndex = data.findIndex((x) => x.id === capturedSeen);
   const hasUnseen = !!data.length && lastSeenIndex !== 0;

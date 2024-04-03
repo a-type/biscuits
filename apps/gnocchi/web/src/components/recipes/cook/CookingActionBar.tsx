@@ -4,6 +4,7 @@ import {
   PromoteSubscriptionButton,
   useCanSync,
   useIsLoggedIn,
+  useQuery,
 } from '@biscuits/client';
 import { useActiveCookingSession } from '@/components/recipes/hooks.js';
 import {
@@ -26,7 +27,7 @@ import {
 } from '@a-type/ui/components/dialog';
 import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
 import { Cross2Icon } from '@radix-ui/react-icons';
-import { ManagePlanButton, graphql, useSuspenseQuery } from '@biscuits/client';
+import { ManagePlanButton, graphql } from '@biscuits/client';
 import {
   Popover,
   PopoverContent,
@@ -89,7 +90,7 @@ const planMembersQuery = graphql(`
 
 function AddChefsAction() {
   const isLoggedIn = useIsLoggedIn();
-  const { data: members } = useSuspenseQuery(planMembersQuery, {
+  const { data: members } = useQuery(planMembersQuery, {
     skip: !isLoggedIn,
   });
   const isSubscribed = useCanSync();

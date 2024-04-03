@@ -4,6 +4,7 @@ import { graphql, useCanSync, useSuspenseQuery } from '@biscuits/client';
 import { Trip } from '@trip-tick.biscuits/verdant';
 import { Suspense } from 'react';
 import { Chip } from '@a-type/ui/components/chip';
+import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
 
 export interface WeatherForecastProps {
   className?: string;
@@ -33,14 +34,16 @@ export function WeatherForecast({ className, trip }: WeatherForecastProps) {
 
   return (
     <div className={className}>
-      <Suspense>
-        <Forecast
-          startsAt={startsAt}
-          endsAt={endsAt}
-          latitude={location.get('latitude')}
-          longitude={location.get('longitude')}
-        />
-      </Suspense>
+      <ErrorBoundary>
+        <Suspense>
+          <Forecast
+            startsAt={startsAt}
+            endsAt={endsAt}
+            latitude={location.get('latitude')}
+            longitude={location.get('longitude')}
+          />
+        </Suspense>
+      </ErrorBoundary>
     </div>
   );
 }

@@ -2,7 +2,9 @@ import { TopLoader } from '@/components/nav/TopLoader.jsx';
 import { Outlet, Router, makeRoutes } from '@verdant-web/react-router';
 import { Suspense, lazy } from 'react';
 import RefreshSessionPage from './RefreshSessionPage.jsx';
+import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
 const HomePage = lazy(() => import('./HomePage.js'));
+const ErrorPage = lazy(() => import('./ErrorPage.jsx'));
 
 const routes = makeRoutes([
   {
@@ -43,10 +45,12 @@ const routes = makeRoutes([
 export function Pages() {
   return (
     <Router routes={routes}>
-      <Suspense>
-        <TopLoader />
-        <Outlet />
-      </Suspense>
+      <ErrorBoundary fallback={<ErrorPage />}>
+        <Suspense>
+          <TopLoader />
+          <Outlet />
+        </Suspense>
+      </ErrorBoundary>
     </Router>
   );
 }
