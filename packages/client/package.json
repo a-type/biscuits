@@ -36,8 +36,8 @@
     "@biscuits/error": "workspace:*",
     "@biscuits/libraries": "workspace:*",
     "clsx": "2.1.0",
-    "graphql": "16.8.1",
-    "gql.tada": "^1.2.1"
+    "gql.tada": "^1.2.1",
+    "graphql": "16.8.1"
   },
   "peerDependencies": {
     "@a-type/ui": "^0.6.17",
@@ -47,7 +47,7 @@
     "vite-plugin-pwa": "0.19.2"
   },
   "devDependencies": {
-    "@a-type/ui": "^0.6.17",
+    "@a-type/ui": "^0.6.26",
     "@types/react": "18.0.14",
     "@verdant-web/store": "^3.4.0",
     "react": "^18.2.0",

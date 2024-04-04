@@ -1,18 +1,23 @@
+import classNames from 'classnames';
 import { useMemo } from 'react';
 
 export interface PhoneDemoProps {
   src: string;
+  direction?: 'left' | 'right';
 }
 
-export function PhoneDemo({ src }: PhoneDemoProps) {
+export function PhoneDemo({ src, direction = 'left' }: PhoneDemoProps) {
   const animationDelay = useMemo(() => {
     return `${(Math.random() * 3).toFixed(2)}s`;
   }, []);
 
   return (
-    <div className="phone-wrapper">
+    <div className="phone-wrapper max-h-100vw overflow-hidden px-2 py-8 flex items-center justify-center">
       <div
-        className="phone border-4 border-black border-solid rounded-lg aspect-ratio-11/24 bg-black"
+        className={classNames(
+          'phone rounded-lg aspect-ratio-11/24 max-h-90vw bg-black min-h-0',
+          direction,
+        )}
         style={{
           animationDelay,
         }}

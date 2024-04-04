@@ -9,10 +9,10 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@a-type/ui": "^0.6.25",
-    "@biscuits/error": "workspace:*",
-    "@biscuits/client": "workspace:*",
+    "@a-type/ui": "^0.6.26",
     "@biscuits/apps": "workspace:*",
+    "@biscuits/client": "workspace:*",
+    "@biscuits/error": "workspace:*",
     "@react-spring/web": "^9.7.3",
     "@react-three/drei": "9.105.1",
     "@react-three/fiber": "8.16.1",
