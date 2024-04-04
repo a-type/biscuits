@@ -49,14 +49,18 @@ function ForgotPassword({ className }: { className?: string }) {
       </DialogTrigger>
       <DialogContent>
         <form
+          className="flex flex-col gap-2"
           method="post"
           action={`${CONFIG.API_ORIGIN}/auth/begin-reset-password`}
         >
           <label htmlFor="email" className="font-bold">
             Email
           </label>
+          <input type="hidden" name="returnTo" value={window.location.href} />
           <Input name="email" type="email" required />
-          <Button type="submit">Send reset email</Button>
+          <Button type="submit" className="self-end">
+            Send reset email
+          </Button>
         </form>
       </DialogContent>
     </Dialog>
