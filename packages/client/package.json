@@ -16,6 +16,13 @@
       "import": "./dist/serviceWorkers.js",
       "node": "./dist/serviceWorkers.js",
       "default": "./dist/serviceWorkers.js"
+    },
+    "./henrietta.css": {
+      "production": "./henrietta.css",
+      "development": "./henrietta.css",
+      "import": "./henrietta.css",
+      "node": "./henrietta.css",
+      "default": "./henrietta.css"
     }
   },
   "scripts": {

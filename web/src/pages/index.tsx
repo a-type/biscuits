@@ -40,6 +40,18 @@ const routes = makeRoutes([
     path: '/apps',
     component: lazy(() => import('./AppsPage.jsx')),
   },
+  {
+    path: '/contact',
+    component: lazy(() => import('./ContactPage.js')),
+  },
+  {
+    path: '/about',
+    component: lazy(() => import('./AboutPage.jsx')),
+  },
+  {
+    path: '*',
+    component: lazy(() => import('./NotFoundPage.jsx')),
+  },
 ]);
 
 export function Pages() {

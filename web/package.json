@@ -36,12 +36,12 @@
     "@types/react": "18.0.4",
     "@types/react-dom": "18.0.5",
     "@types/three": "0.162.0",
-    "@unocss/transformer-variant-group": "^0.57.7",
+    "@unocss/transformer-variant-group": "^0.58.5",
     "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8",
     "eslint-config-next": "14.0.3",
     "typescript": "^5",
-    "unocss": "^0.57.7",
+    "unocss": "^0.58.5",
     "vite": "^5"
   }
 }

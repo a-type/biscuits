@@ -1,5 +1,10 @@
 h1,
 h2,
-h3 {
-  font-family: 'VC Henrietta Trial', 'Noto Serif', serif;
+h3,
+.font-fancy {
+  font-family: Henrietta, 'Noto Serif', serif;
+}
+
+a {
+  font-weight: bold;
 }

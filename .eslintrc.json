@@ -1,3 +1,7 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": "next/core-web-vitals",
+  // not actually using NextJS, so disable next-specific rules
+  "rules": {
+    "@next/next/no-img-element": "off"
+  }
 }

@@ -6,6 +6,7 @@ import {
   PageRoot,
 } from '@a-type/ui/components/layouts';
 import { P } from '@a-type/ui/components/typography';
+import { Link } from '@verdant-web/react-router';
 import classNames from 'classnames';
 import { Suspense, lazy } from 'react';
 
@@ -26,7 +27,6 @@ export default function HomePage() {
         <PageFixedArea className="bg-transparent flex flex-row justify-between items-center py-2">
           <h1
             className={classNames(
-              '[font-family:"VC_Henrietta_Trial","Noto_Serif",serif]',
               'text-4xl m-0 font-normal text-primary-dark text-shadow',
               'bg-primary-wash p-2 rounded-lg leading-none',
             )}
@@ -40,24 +40,17 @@ export default function HomePage() {
         <div className="flex flex-col gap-2 min-h-[30vh] mb-10 mt-5 text-primary-dark font-semibold">
           <h2
             className={classNames(
-              '[font-family:"VC_Henrietta_Trial","Noto_Serif",serif]',
               '!text-8xl text-[#004933] mt-0 block mb-10 font-bold leading-none',
             )}
           >
             Scratch-made apps
           </h2>
-          <P
-            className={classNames(
-              '[font-family:"VC_Henrietta_Trial","Noto_Serif",serif]',
-              'm-0 mb-6 text-inherit text-xl',
-            )}
-          >
+          <P className={classNames('m-0 mb-6 text-inherit text-xl font-fancy')}>
             in Raleigh, NC
           </P>
           <P className="text-black text-lg leading-loose font-normal">
-            Biscuits apps are designed to make your life easier - not become a
-            lifestyle. Free to use forever; no ads, no tracking, no selling your
-            data.
+            Biscuits apps are designed to make your life easier. Free to use
+            forever; no ads, no tracking. <Link to="/about">Learn how</Link>.
           </P>
         </div>
         <AppsGrid />

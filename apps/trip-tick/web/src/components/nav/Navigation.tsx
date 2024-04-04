@@ -22,7 +22,7 @@ export function Navigation({}: NavigationProps) {
   return (
     <PageNav className="">
       <div className="hidden sm:(flex flex-row gap-2 items-center justify-center px-2 py-2 mt-3)">
-        <h1 className="text-md [font-family:'VC_Henrietta_Trial','Noto_Serif',serif] font-normal">
+        <h1 className="text-md [font-family:'Henrietta','Noto_Serif',serif] font-normal">
           Trip Tick
         </h1>
         <Logo className="w-12" />
