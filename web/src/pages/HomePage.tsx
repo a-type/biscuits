@@ -1,11 +1,13 @@
 import { AppsGrid } from '@/components/AppsGrid.jsx';
 import { UserMenu } from '@/components/auth/UserMenu.js';
+import { AppDemo } from '@/components/promo/AppDemo.jsx';
 import {
   PageContent,
   PageFixedArea,
   PageRoot,
 } from '@a-type/ui/components/layouts';
 import { P } from '@a-type/ui/components/typography';
+import { apps } from '@biscuits/apps';
 import { Link } from '@verdant-web/react-router';
 import classNames from 'classnames';
 import { Suspense, lazy } from 'react';
@@ -40,7 +42,7 @@ export default function HomePage() {
         <div className="flex flex-col gap-2 min-h-[30vh] mb-10 mt-5 text-primary-dark font-semibold">
           <h2
             className={classNames(
-              '!text-8xl text-[#004933] mt-0 block mb-10 font-bold leading-none',
+              '!text-8xl text-black mt-0 block mb-10 font-bold leading-none',
             )}
           >
             Scratch-made apps
@@ -53,7 +55,10 @@ export default function HomePage() {
             forever; no ads, no tracking. <Link to="/about">Learn how</Link>.
           </P>
         </div>
-        <AppsGrid />
+        {/* <AppsGrid /> */}
+        {apps.map((app, index) => (
+          <AppDemo appId={app.id} key={app.id} index={index} />
+        ))}
       </PageContent>
     </PageRoot>
   );

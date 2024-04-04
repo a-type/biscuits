@@ -7,6 +7,7 @@ export type AppManifest<Id extends string> = {
   iconPath: string;
   size?: number;
   devOriginOverride: string;
+  demoVideoSrc: string;
 };
 
 export const apps = [
@@ -16,9 +17,10 @@ export const apps = [
     name: 'Gnocchi',
     description: 'Organize your weekly cooking and groceries',
     mainImageUrl: 'https://gnocchi.club/og-image.png',
-    iconPath: 'icon.png',
+    iconPath: 'android-chrome-512x512.png',
     size: 4,
     devOriginOverride: 'http://localhost:6220',
+    demoVideoSrc: '/videos/gnocchi.mp4',
   } satisfies AppManifest<'gnocchi'>,
   {
     id: 'trip-tick',
@@ -28,6 +30,7 @@ export const apps = [
     iconPath: 'icon.png',
     size: 2,
     devOriginOverride: 'http://localhost:6221',
+    demoVideoSrc: '',
   } satisfies AppManifest<'trip-tick'>,
 ] as const;
 
