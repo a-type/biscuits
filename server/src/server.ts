@@ -60,6 +60,7 @@ const ittyServer = createServerAdapter((request) =>
           );
           return error(biscuitsError.statusCode, biscuitsError.body);
         } else if (reason.statusCode === 401) {
+          // TODO: redirect to login?
           const biscuitsError = new BiscuitsError(
             BiscuitsError.Code.Unauthorized,
             'Unauthorized',

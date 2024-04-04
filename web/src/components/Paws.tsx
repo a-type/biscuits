@@ -10,9 +10,10 @@ import {
   useGLTF,
 } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, memo } from 'react';
 import {
   Color,
+  Euler,
   ShaderChunk,
   ShaderMaterial,
   UniformsLib,
@@ -20,23 +21,26 @@ import {
   Vector3,
 } from 'three';
 
+const groupPosition = new Vector3(8, 10, -10);
+const groupRotation = new Euler(0.2, -0.8, -0.0);
+const leftPosition = new Vector3(0, 0, 0);
+const rightPosition = new Vector3(6, 0, 0);
+const cameraPosition = new Vector3(0, 30, 0);
+const floatRange = [1, 10] as [number, number];
+
 export function Paws() {
   return (
     <div className="absolute left-0 top-0 w-full h-full">
-      <Canvas shadows>
+      <Canvas>
         <Float
-          floatingRange={[1, 10]}
+          floatingRange={floatRange}
           floatIntensity={0.1}
           speed={1}
           rotationIntensity={0.5}
         >
-          <group
-            scale={0.8}
-            position={[8, 10, -10]}
-            rotation={[0.2, -0.8, -0.0]}
-          >
-            <CatArm position={[0, 0, 0]} offset={0} />
-            <CatArm position={[6, 0, 0]} offset={1} />
+          <group scale={0.8} position={groupPosition} rotation={groupRotation}>
+            <CatArm position={leftPosition} offset={0} />
+            <CatArm position={rightPosition} offset={1} />
           </group>
         </Float>
 
@@ -48,8 +52,8 @@ export function Paws() {
           resolution={128}
           color="#f00000"
         />
-        <Environment preset="sunset" />
-        <PerspectiveCamera makeDefault position={[0, 30, 0]} />
+        {/* <Environment preset="sunset" /> */}
+        <PerspectiveCamera makeDefault position={cameraPosition} />
         {/* Axishelper */}
         <OrbitControls enabled={false} />
         {/* <axesHelper /> */}
@@ -61,18 +65,30 @@ export function Paws() {
 
 export default Paws;
 
-function CatArm({ offset, ...props }: any) {
+const cubePos = new Vector3(-0.073, 0.3, 0.43);
+const spherePos = new Vector3(-0.61, -0.071, 11.643);
+const sphereRot = new Euler(0, -0.351, 0);
+const sphereScale = new Vector3(0.773, 0.803, 1);
+const sphere1Pos = new Vector3(0.548, -0.051, 11.709);
+const sphere1Rot = new Euler(0, 0.256, 0);
+const sphere2Pos = new Vector3(1.232, -0.041, 11.029);
+const sphere2Rot = new Vector3(0, 0.788, 0);
+const sphere3Pos = new Vector3(-1.338, 0, 11.155);
+const sphere3Rot = new Euler(0, -1.116, 0);
+
+const CatArm = memo(function CatArm({ offset, ...props }: any) {
   const group = useRef();
   const { nodes, animations } = useGLTF('/models/cat.glb') as any;
   const { actions } = useAnimations(animations, group);
 
   useEffect(() => {
-    setTimeout(() => {
+    let timeout = setTimeout(() => {
       actions['SphereAction']?.play();
       actions['Sphere.001Action']?.play();
       actions['Sphere.002Action']?.play();
       actions['Sphere.003Action']?.play();
     }, offset * 1000);
+    return () => void clearTimeout(timeout);
   }, [actions, offset]);
 
   return (
@@ -84,7 +100,7 @@ function CatArm({ offset, ...props }: any) {
           receiveShadow
           geometry={nodes.Cube.geometry}
           material={lightBrown}
-          position={[-0.073, 0.3, 0.43]}
+          position={cubePos}
         />
         <mesh
           name="Sphere"
@@ -92,9 +108,9 @@ function CatArm({ offset, ...props }: any) {
           receiveShadow
           geometry={nodes.Sphere.geometry}
           material={lightBrown}
-          position={[-0.61, -0.071, 11.643]}
-          rotation={[0, -0.351, 0]}
-          scale={[0.773, 0.803, 1]}
+          position={spherePos}
+          rotation={sphereRot}
+          scale={sphereScale}
         />
         <mesh
           name="Sphere001"
@@ -102,9 +118,9 @@ function CatArm({ offset, ...props }: any) {
           receiveShadow
           geometry={nodes.Sphere001.geometry}
           material={lightBrown}
-          position={[0.548, -0.051, 11.709]}
-          rotation={[0, 0.256, 0]}
-          scale={[0.773, 0.803, 1]}
+          position={sphere1Pos}
+          rotation={sphere1Rot}
+          scale={sphereScale}
         />
         <mesh
           name="Sphere002"
@@ -112,9 +128,9 @@ function CatArm({ offset, ...props }: any) {
           receiveShadow
           geometry={nodes.Sphere002.geometry}
           material={lightBrown}
-          position={[1.232, -0.041, 11.029]}
-          rotation={[0, 0.788, 0]}
-          scale={[0.773, 0.803, 1]}
+          position={sphere2Pos}
+          rotation={sphere2Rot}
+          scale={sphereScale}
         />
         <mesh
           name="Sphere003"
@@ -122,14 +138,14 @@ function CatArm({ offset, ...props }: any) {
           receiveShadow
           geometry={nodes.Sphere003.geometry}
           material={lightBrown}
-          position={[-1.338, 0, 11.155]}
-          rotation={[0, -1.116, 0]}
-          scale={[0.773, 0.803, 1]}
+          position={sphere3Pos}
+          rotation={sphere3Rot}
+          scale={sphereScale}
         />
       </group>
     </group>
   );
-}
+});
 
 useGLTF.preload('/models/cat.glb');
 

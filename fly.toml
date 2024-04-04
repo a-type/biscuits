@@ -16,6 +16,8 @@ EMAIL_USER = "hi@gnocchi.club"
 UI_ORIGIN = "https://biscuits.club"
 DATABASE_FILE = "/data/database.sqlite"
 STORAGE_DATABASE_FILE = "/data/storage.sqlite"
+HOST = "https://api.biscuits.club"
+NODE_ENV = "production"
 
 [http_service]
 internal_port = 6124

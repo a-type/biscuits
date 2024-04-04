@@ -48,7 +48,10 @@ function ForgotPassword({ className }: { className?: string }) {
         </button>
       </DialogTrigger>
       <DialogContent>
-        <form action={`${CONFIG.API_ORIGIN}/auth/begin-reset-password`}>
+        <form
+          method="post"
+          action={`${CONFIG.API_ORIGIN}/auth/begin-reset-password`}
+        >
           <input name="email" />
           <Button type="submit">Send reset email</Button>
         </form>

@@ -8,3 +8,4 @@ export * from './install.js';
 export * from './platform.js';
 export * from './featureFlags.js';
 export * from './darkMode.js';
+export * from './pageError.js';
