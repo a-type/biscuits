@@ -10,7 +10,7 @@ import { Link } from '@verdant-web/react-router';
 import classNames from 'classnames';
 import { Suspense, lazy } from 'react';
 
-const Paws = lazy(() => import('@/components/Paws.jsx'));
+const Paws = lazy(() => import('@/components/paws/Paws.jsx'));
 
 const innerProps = {
   className: 'flex flex-col gap-6 relative px-8',

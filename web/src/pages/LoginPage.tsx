@@ -11,7 +11,7 @@ import {
 } from '@a-type/ui/components/tabs';
 import { lazy } from 'react';
 
-const Paws = lazy(() => import('@/components/Paws.jsx'));
+const Paws = lazy(() => import('@/components/paws/Paws.jsx'));
 
 export default function LoginPage() {
   const [searchParams, setParams] = useSearchParams();

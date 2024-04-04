@@ -1,0 +1,30 @@
+@keyframes frame {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.frame-1 {
+  animation-delay: 0s;
+}
+
+.frame-2 {
+  animation-delay: 1s;
+}
+
+.frame-1,
+.frame-2 {
+  animation-name: frame;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-timing-function: step-end;
+
+  filter: hue-rotate(-5deg);
+}
