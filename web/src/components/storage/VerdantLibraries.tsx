@@ -9,7 +9,7 @@ import {
   CardRoot,
   CardTitle,
 } from '@a-type/ui/components/card';
-import { AppId, AppManifest, apps } from '@biscuits/apps';
+import { AppId, AppManifest, apps, getAppUrl } from '@biscuits/apps';
 import { useMutation, useSuspenseQuery } from '@biscuits/client';
 
 const libraryFragment = graphql(`
@@ -73,7 +73,10 @@ function VerdantLibrary({ app }: { app: AppManifest<AppId> }) {
     return (
       <CardRoot>
         <CardMain>
-          <CardTitle>{app.name}</CardTitle>
+          <CardTitle className="flex flex-row gap-2 items-center">
+            <img width={24} src={`${getAppUrl(app)}/${app.iconPath}`} />
+            {app.name}
+          </CardTitle>
           <p>No data</p>
         </CardMain>
       </CardRoot>
@@ -82,7 +85,10 @@ function VerdantLibrary({ app }: { app: AppManifest<AppId> }) {
   return (
     <CardRoot>
       <CardMain>
-        <CardTitle>{app.name}</CardTitle>
+        <CardTitle className="flex flex-row gap-2 items-center">
+          <img width={24} src={`${getAppUrl(app)}/${app.iconPath}`} />
+          {app.name}
+        </CardTitle>
         <AvatarList count={info.replicas.length}>
           {info.replicas.map((replica) => (
             <Avatar

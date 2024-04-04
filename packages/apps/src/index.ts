@@ -41,3 +41,19 @@ export function isValidAppId(appId: string): appId is AppId {
 export const appsById = Object.fromEntries(
   apps.map((app) => [app.id, app]),
 ) as Record<AppId, (typeof apps)[number]>;
+
+export function getAppUrl(app: AppManifest<AppId>) {
+  if (import.meta.env.DEV) {
+    return app.devOriginOverride;
+  }
+  return app.url;
+}
+
+declare global {
+  interface ImportMetaEnv {
+    DEV: boolean;
+  }
+  interface ImportMeta {
+    readonly env: ImportMetaEnv;
+  }
+}

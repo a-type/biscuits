@@ -18,26 +18,26 @@ const membersQuery = graphql(`
     me {
       id
       role
-    }
-    plan {
-      members {
-        id
-        name
-        email
-        imageUrl
+      plan {
+        members {
+          id
+          name
+          email
+          imageUrl
+        }
+        pendingInvitations {
+          id
+          email
+        }
+        canInviteMore
       }
-      pendingInvitations {
-        id
-        email
-      }
-      canInviteMore
     }
   }
 `);
 
 export function MembersAndInvitations() {
   const { data } = useSuspenseQuery(membersQuery);
-  const plan = data?.plan;
+  const plan = data?.me?.plan;
   const isAdmin = data?.me?.role === 'admin';
 
   return (
