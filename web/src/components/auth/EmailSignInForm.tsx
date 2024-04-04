@@ -15,6 +15,7 @@ export function EmailSignInForm({ returnTo = '' }: EmailSignInFormProps) {
   return (
     <form
       className="flex flex-col gap-2"
+      method="post"
       action={`${CONFIG.API_ORIGIN}/auth/email-login?returnTo=${returnTo}`}
     >
       <label htmlFor="email" className="font-bold">
