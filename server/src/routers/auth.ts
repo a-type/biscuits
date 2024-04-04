@@ -54,6 +54,7 @@ authRouter
 
 function routeAuthErrorsToUi(path: string) {
   return function (err: Error) {
+    console.error(err);
     if (err instanceof AuthError) {
       return new Response(null, {
         status: 302,

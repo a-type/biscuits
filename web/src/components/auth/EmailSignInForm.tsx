@@ -52,7 +52,10 @@ function ForgotPassword({ className }: { className?: string }) {
           method="post"
           action={`${CONFIG.API_ORIGIN}/auth/begin-reset-password`}
         >
-          <input name="email" />
+          <label htmlFor="email" className="font-bold">
+            Email
+          </label>
+          <Input name="email" type="email" required />
           <Button type="submit">Send reset email</Button>
         </form>
       </DialogContent>
