@@ -189,6 +189,24 @@ export type TripLocation = ObjectEntity<
 export type TripLocationName = string;
 export type TripLocationLatitude = number;
 export type TripLocationLongitude = number;
+export type TripExtraItems = ObjectEntity<
+  TripExtraItemsInit,
+  TripExtraItemsDestructured,
+  TripExtraItemsSnapshot
+>;
+export type TripExtraItemsValue = ListEntity<
+  TripExtraItemsValueInit,
+  TripExtraItemsValueDestructured,
+  TripExtraItemsValueSnapshot
+>;
+export type TripExtraItemsValueItem = ObjectEntity<
+  TripExtraItemsValueItemInit,
+  TripExtraItemsValueItemDestructured,
+  TripExtraItemsValueItemSnapshot
+>;
+export type TripExtraItemsValueItemId = string;
+export type TripExtraItemsValueItemDescription = string;
+export type TripExtraItemsValueItemQuantity = number;
 export type TripInit = {
   id?: string;
   createdAt?: number;
@@ -198,6 +216,7 @@ export type TripInit = {
   startsAt?: number | null;
   endsAt?: number | null;
   location?: TripLocationInit;
+  extraItems?: TripExtraItemsInit;
 };
 
 export type TripListsInit = string[];
@@ -207,6 +226,13 @@ export type TripLocationInit = {
   latitude: number;
   longitude: number;
 } | null;
+export type TripExtraItemsValueItemInit = {
+  id?: string;
+  description?: string;
+  quantity?: number;
+};
+export type TripExtraItemsValueInit = TripExtraItemsValueItemInit[];
+export type TripExtraItemsInit = { [key: string]: TripExtraItemsValueInit };
 export type TripDestructured = {
   id: string;
   createdAt: number;
@@ -216,6 +242,7 @@ export type TripDestructured = {
   startsAt: number | null;
   endsAt: number | null;
   location: TripLocation;
+  extraItems: TripExtraItems;
 };
 
 export type TripListsDestructured = string[];
@@ -227,6 +254,15 @@ export type TripLocationDestructured = {
   latitude: number;
   longitude: number;
 };
+export type TripExtraItemsValueItemDestructured = {
+  id: string;
+  description: string;
+  quantity: number;
+};
+export type TripExtraItemsValueDestructured = TripExtraItemsValueItem[];
+export type TripExtraItemsDestructured = {
+  [key: string]: TripExtraItemsValue | undefined;
+};
 export type TripSnapshot = {
   id: string;
   createdAt: number;
@@ -236,6 +272,7 @@ export type TripSnapshot = {
   startsAt: number | null;
   endsAt: number | null;
   location: TripLocationSnapshot;
+  extraItems: TripExtraItemsSnapshot;
 };
 
 export type TripListsSnapshot = string[];
@@ -247,6 +284,15 @@ export type TripLocationSnapshot = {
   latitude: number;
   longitude: number;
 } | null;
+export type TripExtraItemsValueItemSnapshot = {
+  id: string;
+  description: string;
+  quantity: number;
+};
+export type TripExtraItemsValueSnapshot = TripExtraItemsValueItemSnapshot[];
+export type TripExtraItemsSnapshot = {
+  [key: string]: TripExtraItemsValueSnapshot;
+};
 
 /** Index filters for Trip **/
 

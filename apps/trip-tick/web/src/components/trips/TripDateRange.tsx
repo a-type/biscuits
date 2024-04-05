@@ -56,7 +56,7 @@ export function TripDateRange({ trip }: TripDateRangeProps) {
           color={days === 0 ? 'primary' : 'ghost'}
           className={
             days === 0
-              ? ''
+              ? 'ml-4'
               : 'font-normal text-wrap text-start text-sm sm:text-md'
           }
         >

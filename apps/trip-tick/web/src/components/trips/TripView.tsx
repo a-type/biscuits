@@ -5,7 +5,14 @@ import { hooks } from '@/store.js';
 import { Button } from '@a-type/ui/components/button';
 import { Checkbox } from '@a-type/ui/components/checkbox';
 import { CollapsibleSimple } from '@a-type/ui/components/collapsible';
+import { Icon } from '@a-type/ui/components/icon';
 import { LiveUpdateTextField } from '@a-type/ui/components/liveUpdateTextField';
+import {
+  Popover,
+  PopoverAnchor,
+  PopoverArrow,
+  PopoverContent,
+} from '@a-type/ui/components/popover';
 import {
   TabsContent,
   TabsList,
@@ -13,6 +20,7 @@ import {
   TabsTrigger,
 } from '@a-type/ui/components/tabs';
 import { H4 } from '@a-type/ui/components/typography';
+import { useLongPress } from '@a-type/ui/hooks';
 import * as Progress from '@radix-ui/react-progress';
 import {
   List,
@@ -20,23 +28,17 @@ import {
   Trip,
   TripCompletions,
   TripCompletionsValue,
+  TripExtraItems,
+  TripExtraItemsValue,
+  TripExtraItemsValueItem,
 } from '@trip-tick.biscuits/verdant';
-import { useSearchParams } from '@verdant-web/react-router';
+import { Link, useSearchParams } from '@verdant-web/react-router';
 import classNames from 'classnames';
 import { useState } from 'react';
-import { TripDateRange } from './TripDateRange.jsx';
 import { LocationSelect } from '../weather/LocationSelect.jsx';
-import { Icon } from '@a-type/ui/components/icon';
 import { WeatherForecast } from '../weather/WeatherForecast.jsx';
-import { useLongPress } from '@a-type/ui/hooks';
-import { Tooltip } from '@a-type/ui/components/tooltip';
-import { preventDefault } from '@a-type/utils';
-import {
-  Popover,
-  PopoverAnchor,
-  PopoverArrow,
-  PopoverContent,
-} from '@a-type/ui/components/popover';
+import { TripDateRange } from './TripDateRange.jsx';
+import { NumberStepper } from '@a-type/ui/components/numberStepper';
 
 export interface TripViewProps {
   tripId: string;
@@ -59,11 +61,11 @@ export function TripView({ tripId }: TripViewProps) {
 
 function TripViewInfo({ trip }: { trip: Trip }) {
   const { name, startsAt, endsAt, location } = hooks.useWatch(trip);
-  const [editName, setEditName] = useState(false);
+  const [editName, setEditName] = useState(!name || name === 'New Trip');
   return (
     <div
       className={classNames('flex flex-col items-start transition', {
-        'gap-10': !startsAt || !endsAt,
+        'gap-4': !startsAt || !endsAt,
         'gap-1': startsAt && endsAt,
       })}
     >
@@ -96,9 +98,10 @@ function TripViewInfo({ trip }: { trip: Trip }) {
 }
 
 function TripViewChecklists({ trip }: { trip: Trip }) {
-  const { lists, completions } = hooks.useWatch(trip);
+  const { lists, completions, extraItems } = hooks.useWatch(trip);
   const days = useTripDays(trip);
   hooks.useWatch(lists);
+  hooks.useWatch(extraItems);
   const allLists = hooks.useAllLists();
 
   const mappedLists = lists
@@ -115,7 +118,7 @@ function TripViewChecklists({ trip }: { trip: Trip }) {
 
   if (!days) {
     return (
-      <div className="w-full flex-1 flex flex-col items-center justify-center text-gray-7">
+      <div className="w-full flex-1 flex flex-col items-center justify-center text-gray-7 mt-8">
         <div>Select dates to get started</div>
       </div>
     );
@@ -164,16 +167,20 @@ function TripViewChecklists({ trip }: { trip: Trip }) {
             )}
           </Button>
         </div>
-        {mappedLists.map((list) => (
-          <TabsContent key={list.get('id')} value={list.get('id')}>
-            <TripViewChecklist
-              key={list.get('id')}
-              list={list}
-              days={days}
-              completions={completions}
-            />
-          </TabsContent>
-        ))}
+        {mappedLists.map((list) => {
+          const listId = list.get('id');
+          return (
+            <TabsContent key={list.get('id')} value={list.get('id')}>
+              <TripViewChecklist
+                key={listId}
+                list={list}
+                days={days}
+                completions={completions}
+                extraItems={extraItems}
+              />
+            </TabsContent>
+          );
+        })}
       </TabsRoot>
     </div>
   );
@@ -203,33 +210,84 @@ function TripViewChecklist({
   list,
   days,
   completions,
+  extraItems,
 }: {
   list: List;
   days: number;
   completions: TripCompletions;
+  extraItems: TripExtraItems;
 }) {
-  const { items } = hooks.useWatch(list);
+  const { items, id: listId } = hooks.useWatch(list);
   hooks.useWatch(items);
   hooks.useWatch(completions);
+  hooks.useWatch(extraItems);
+
+  let extraItemsForList = extraItems.get(listId) ?? null;
+  if (Array.isArray(extraItemsForList)) {
+    // workaround Verdant bug #371
+    extraItemsForList = null;
+  }
 
   return (
-    <ul className="list-none flex flex-col gap-3 m-0 p-0">
-      {items.map((item) => {
-        const completion = completions.get(item.get('id')) ?? 0;
-        return (
-          <li key={item.get('id')} className="m-0 p-0">
-            <TripViewChecklistItem
-              item={item}
-              days={days}
-              completion={completion}
-              onCompletionChanged={(value) => {
-                completions.set(item.get('id'), value);
-              }}
-            />
-          </li>
-        );
-      })}
-    </ul>
+    <div className="flex flex-col gap-4">
+      <ul className="list-none flex flex-col gap-3 m-0 p-0">
+        {items.map((item) => {
+          const completion = completions.get(item.get('id')) ?? 0;
+          return (
+            <li key={item.get('id')} className="m-0 p-0">
+              <TripViewChecklistItem
+                item={item}
+                days={days}
+                completion={completion}
+                onCompletionChanged={(value) => {
+                  completions.set(item.get('id'), value);
+                }}
+              />
+            </li>
+          );
+        })}
+        {extraItemsForList?.map((item) => {
+          const completion = completions.get(item.get('id')) ?? 0;
+          return (
+            <li key={item.get('id')} className="m-0 p-0">
+              <ExtraItem
+                item={item}
+                completion={completion}
+                onCompletionChanged={(value) => {
+                  completions.set(item.get('id'), value);
+                }}
+              />
+            </li>
+          );
+        })}
+      </ul>
+      <Button
+        onClick={() => {
+          if (!extraItemsForList) {
+            extraItems.set(listId, [
+              {
+                quantity: 1,
+              },
+            ]);
+          } else {
+            extraItemsForList.push({
+              quantity: 1,
+            });
+          }
+        }}
+        size="small"
+        className="self-start"
+      >
+        <Icon name="plus" /> Add item
+      </Button>
+      <p className="text-sm italic text-gray-7">
+        New items are only applied to this trip.{' '}
+        <Link className="font-bold" to={`/lists/${list.get('id')}`}>
+          Edit the list
+        </Link>{' '}
+        if you want them for future trips.
+      </p>
+    </div>
   );
 }
 
@@ -246,7 +304,6 @@ function TripViewChecklistItem({
 }) {
   const { description, perDays, quantity, additional, roundDown } =
     hooks.useWatch(item);
-  const completedQuantity = completion;
   const computedQuantity = getComputedQuantity({
     perDays,
     quantity,
@@ -254,6 +311,55 @@ function TripViewChecklistItem({
     additional,
     roundDown,
   });
+
+  return (
+    <ChecklistItem
+      description={description}
+      completedQuantity={completion}
+      computedQuantity={computedQuantity}
+      onCompletionChanged={onCompletionChanged}
+    />
+  );
+}
+
+function ExtraItem({
+  item,
+  completion,
+  onCompletionChanged,
+}: {
+  item: TripExtraItemsValueItem;
+  completion: TripCompletionsValue;
+  onCompletionChanged: (completion: TripCompletionsValue) => void;
+}) {
+  const { description, quantity } = hooks.useWatch(item);
+
+  return (
+    <ChecklistItem
+      description={description}
+      completedQuantity={completion}
+      computedQuantity={quantity}
+      onCompletionChanged={onCompletionChanged}
+      onDescriptionChanged={(value) => item.set('description', value)}
+      onQuantityChanged={(value) => item.set('quantity', value)}
+    />
+  );
+}
+
+function ChecklistItem({
+  computedQuantity,
+  completedQuantity,
+  onCompletionChanged,
+  description,
+  onDescriptionChanged,
+  onQuantityChanged,
+}: {
+  computedQuantity: number;
+  completedQuantity: number;
+  onCompletionChanged: (value: number) => void;
+  description: string;
+  onDescriptionChanged?: (value: string) => void;
+  onQuantityChanged?: (value: number) => void;
+}) {
   const completed = completedQuantity >= computedQuantity;
 
   const mainOnChecked = (checked: boolean) => {
@@ -277,6 +383,9 @@ function TripViewChecklistItem({
     delay: completed ? 60 * 1000 : 400,
     duration: 1000,
   });
+
+  const canEdit = onDescriptionChanged || onQuantityChanged;
+  const [editing, setEditing] = useState(canEdit && !description);
 
   return (
     <div className="w-full p-2 flex flex-col gap-2">
@@ -306,8 +415,31 @@ function TripViewChecklistItem({
             </div>
           </PopoverContent>
         </Popover>
-        <label>{description}</label>
-        <span className="text-gray-7">×{computedQuantity}</span>
+        {onDescriptionChanged && editing ? (
+          <LiveUpdateTextField
+            value={description}
+            onChange={onDescriptionChanged}
+          />
+        ) : (
+          <label>{description}</label>
+        )}
+        {onQuantityChanged && editing ? (
+          <NumberStepper
+            value={computedQuantity}
+            onChange={onQuantityChanged}
+          />
+        ) : (
+          <span className="text-gray-7">×{computedQuantity}</span>
+        )}
+        {canEdit && (
+          <Button
+            size="icon"
+            color="ghost"
+            onClick={() => setEditing((v) => !v)}
+          >
+            <Icon name={editing ? 'check' : 'pencil'} />
+          </Button>
+        )}
       </div>
       <Progress.Root
         value={completedQuantity / computedQuantity}
