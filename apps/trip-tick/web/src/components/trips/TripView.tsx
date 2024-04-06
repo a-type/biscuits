@@ -3,7 +3,7 @@ import { useTripDays, useTripProgress } from '@/components/trips/hooks.js';
 import { getComputedQuantity } from '@/components/trips/utils.js';
 import { hooks } from '@/store.js';
 import { Button } from '@a-type/ui/components/button';
-import { Checkbox } from '@a-type/ui/components/checkbox';
+import { Checkbox, CheckboxRoot } from '@a-type/ui/components/checkbox';
 import { CollapsibleSimple } from '@a-type/ui/components/collapsible';
 import { Icon } from '@a-type/ui/components/icon';
 import { LiveUpdateTextField } from '@a-type/ui/components/liveUpdateTextField';
@@ -417,13 +417,15 @@ function ChecklistItem({
       <div className="w-full flex flex-row items-center gap-2">
         <Popover open={state === 'holding' || state === 'candidate'}>
           <PopoverAnchor asChild>
-            <Checkbox
+            <CheckboxRoot
               checked={completed}
               onCheckedChange={mainOnChecked}
-              className="w-32px h-32px rounded-full touch-none"
+              className="w-32px h-32px rounded-full touch-none flex items-center justify-center"
               ref={ref}
               {...holdProps}
-            />
+            >
+              <Icon name={completed ? 'check' : 'plus'} />
+            </CheckboxRoot>
           </PopoverAnchor>
           <PopoverContent>
             <PopoverArrow />

@@ -22,6 +22,7 @@ import { H2 } from '@a-type/ui/components/typography';
 import { OnboardingTooltip } from '@biscuits/client';
 import { firstList } from '@/onboarding/firstList.js';
 import { Link } from '@verdant-web/react-router';
+import { AddSuggested } from './AddSuggested.jsx';
 
 export interface ListEditorProps {
   list: List;
@@ -69,9 +70,9 @@ function ListItemsEditor({ list }: { list: List }) {
   hooks.useWatch(items);
 
   return (
-    <div>
-      <H2 className="mb-4">Items</H2>
-      <ul className="mb-2 mt-0 list-none mx-0 px-0 flex flex-col gap-3 md:flex-1">
+    <div className="flex flex-col gap-4">
+      <H2>Items</H2>
+      <ul className="mt-0 list-none mx-0 px-0 flex flex-col gap-3 md:flex-1">
         {items.map((item) => (
           <li key={item.get('id')}>
             <ListItemEditor
@@ -82,7 +83,7 @@ function ListItemsEditor({ list }: { list: List }) {
             />
           </li>
         ))}
-        <li className="self-center justify-self-center">
+        <li className="self-start justify-self-start">
           <OnboardingTooltip
             onboarding={firstList}
             step="addItem"
@@ -92,6 +93,7 @@ function ListItemsEditor({ list }: { list: List }) {
           </OnboardingTooltip>
         </li>
       </ul>
+      <AddSuggested items={items} />
     </div>
   );
 }
@@ -110,7 +112,11 @@ function ListItemEditor({
 
   let shortString = `${quantity} per `;
   if (perDays) {
-    shortString += `${perDays} days`;
+    if (perDays === 1) {
+      shortString += 'day';
+    } else {
+      shortString += `${perDays} days`;
+    }
   } else {
     shortString += 'trip';
   }
@@ -131,9 +137,9 @@ function ListItemEditor({
         </Button>
       </div>
       <CollapsibleSimple open={expanded} onOpenChange={setExpanded}>
-        <div className="flex flex-col gap-3 items-start p-1">
+        <div className="flex flex-row flex-wrap gap-3 items-start p-1">
           <FieldGroup>
-            <FieldLabel>Pack</FieldLabel>
+            <FieldLabel className="font-bold">Pack</FieldLabel>
             <FieldArea>
               <NumberStepper
                 increment={1}
@@ -141,93 +147,76 @@ function ListItemEditor({
                 onChange={(v) => {
                   if (v > 0) item.set('quantity', v);
                 }}
+                className="bg-white"
               />
             </FieldArea>
           </FieldGroup>
           <FieldGroup>
-            <FieldLabel>for every</FieldLabel>
+            <FieldLabel className="font-bold">for every</FieldLabel>
             <FieldArea>
-              {perDays > 0 ? (
-                <div className="flex flex-row gap-1 items-center">
-                  <NumberStepper
-                    value={perDays}
-                    increment={1}
-                    onChange={(v) => {
-                      if (v >= 0) item.set('perDays', v);
-                    }}
-                  />
-                  <span>day{perDays === 1 ? '' : 's'}</span>
-                </div>
-              ) : (
-                <div className="flex flex-row gap-1 justify-between items-center border border-black rounded-full border-solid pl-6 pr-1 h-[33px] w-[178px]">
-                  <div className="w-[30px]" />
-                  <span>trip</span>
-                  <Button
-                    size="small"
-                    color="ghost"
-                    className="h-full"
-                    onClick={() => item.set('perDays', 1)}
-                  >
-                    <Icon name="plus" className="w-[12px] h-[12px] flex" />
-                  </Button>
-                </div>
-              )}
+              <NumberStepper
+                value={perDays}
+                increment={1}
+                onChange={(v) => {
+                  if (v >= 0) item.set('perDays', v);
+                }}
+                className="bg-white"
+                renderValue={(d) =>
+                  d === 0 ? 'trip' : `${d} day${d === 1 ? '' : 's'}`
+                }
+              />
             </FieldArea>
           </FieldGroup>
-          {additional > 0 ? (
-            <div className="flex flex-row gap-1 items-center">
-              <span>Plus</span>
-              <NumberStepper
-                value={additional}
-                onChange={(v) => {
-                  if (v < 0) return;
-                  item.set('additional', v);
-                }}
-              />
-              <span>extra per trip</span>
-            </div>
-          ) : (
-            <div>
-              <Button
-                size="small"
-                color="default"
-                onClick={() => item.set('additional', 1)}
-              >
-                <Icon name="plus" />
-                Add extra
-              </Button>
-            </div>
+          <FieldGroup>
+            <FieldLabel>plus</FieldLabel>
+            <FieldArea>
+              <div className="flex flex-row gap-2 items-center">
+                <NumberStepper
+                  value={additional}
+                  onChange={(v) => {
+                    if (v < 0) return;
+                    item.set('additional', v);
+                  }}
+                  className="bg-white"
+                  renderValue={(d) => (d === 0 ? 'None' : `${d} / trip`)}
+                />
+              </div>
+            </FieldArea>
+          </FieldGroup>
+        </div>
+        <div className="flex flex-col gap-3 items-start p-1">
+          {perDays > 1 && (
+            <ToggleGroup
+              value={roundDown ? 'down' : 'up'}
+              type="single"
+              onValueChange={(v) => {
+                item.set('roundDown', v === 'down');
+              }}
+            >
+              <ToggleItem value="down">
+                <ToggleItemIndicator>
+                  <Icon name="check" />
+                </ToggleItemIndicator>
+                <ToggleItemLabel>
+                  <ToggleItemTitle>Pack light</ToggleItemTitle>
+                  <ToggleItemDescription>
+                    Rounds the number of items down
+                  </ToggleItemDescription>
+                </ToggleItemLabel>
+              </ToggleItem>
+              <ToggleItem value="up">
+                <ToggleItemIndicator>
+                  <Icon name="check" />
+                </ToggleItemIndicator>
+                <ToggleItemLabel>
+                  <ToggleItemTitle>Pack safe</ToggleItemTitle>
+                  <ToggleItemDescription>
+                    Rounds the number of items up
+                  </ToggleItemDescription>
+                </ToggleItemLabel>
+              </ToggleItem>
+            </ToggleGroup>
           )}
-          <ToggleGroup
-            value={roundDown ? 'down' : 'up'}
-            type="single"
-            onValueChange={(v) => {
-              item.set('roundDown', v === 'down');
-            }}
-          >
-            <ToggleItem value="down">
-              <ToggleItemIndicator>
-                <Icon name="check" />
-              </ToggleItemIndicator>
-              <ToggleItemLabel>
-                <ToggleItemTitle>Pack light</ToggleItemTitle>
-                <ToggleItemDescription>
-                  Rounds the number of items down
-                </ToggleItemDescription>
-              </ToggleItemLabel>
-            </ToggleItem>
-            <ToggleItem value="up">
-              <ToggleItemIndicator>
-                <Icon name="check" />
-              </ToggleItemIndicator>
-              <ToggleItemLabel>
-                <ToggleItemTitle>Pack safe</ToggleItemTitle>
-                <ToggleItemDescription>
-                  Rounds the number of items up
-                </ToggleItemDescription>
-              </ToggleItemLabel>
-            </ToggleItem>
-          </ToggleGroup>
           <CollapsibleTrigger asChild>
             <Button size="small" color="default">
               Done
@@ -259,7 +248,7 @@ const AddListItemButton = forwardRef<HTMLButtonElement, { list: List }>(
 
     return (
       <Button
-        color="default"
+        color="primary"
         className="w-full items-center justify-center"
         onClick={() =>
           items.push({
@@ -274,11 +263,8 @@ const AddListItemButton = forwardRef<HTMLButtonElement, { list: List }>(
   },
 );
 
-const FieldGroup = withClassName(
-  'div',
-  'flex flex-col gap-2 items-start w-full',
-);
-const FieldLabel = withClassName('label', 'text-sm font-medium');
+const FieldGroup = withClassName('div', 'flex flex-col gap-2 items-start');
+const FieldLabel = withClassName('label', 'text-sm font-medium font-bold');
 const FieldArea = withClassName(
   'div',
   'flex flex-col gap-2 items-start w-full',
