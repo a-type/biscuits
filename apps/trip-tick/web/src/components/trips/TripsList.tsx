@@ -13,10 +13,12 @@ import {
 import { Trip } from '@trip-tick.biscuits/verdant';
 import { Link } from '@verdant-web/react-router';
 import { TripMenu } from './TripMenu.jsx';
-import { H2 } from '@a-type/ui/components/typography';
+import { H2, P } from '@a-type/ui/components/typography';
 import { AddTripButton } from './AddTripButton.jsx';
 import { Divider } from '@a-type/ui/components/divider';
 import { Chip } from '@a-type/ui/components/chip';
+import { useState } from 'react';
+import { AddListButton } from '../lists/AddListButton.jsx';
 
 export interface TripsListProps {}
 
@@ -42,7 +44,27 @@ export function TripsList({}: TripsListProps) {
     [[], []] as [Trip[], Trip[]],
   );
 
-  const client = hooks.useClient();
+  const [showPast, setShowPast] = useState(false);
+
+  // just to see if we have some
+  const [lists] = hooks.useAllListsPaginated({
+    pageSize: 1,
+  });
+  const hasLists = lists.length > 0;
+
+  if (!hasLists) {
+    return (
+      <div className="flex flex-col gap-4 items-start">
+        <H2>Welcome!</H2>
+        <P>
+          Trip Tick is a list-making app purpose-made for planning what to pack
+          for your next trip.
+        </P>
+        <P>To get started, you need to create your first packing list.</P>
+        <AddListButton />
+      </div>
+    );
+  }
 
   return (
     <div className="flex flex-col gap-4">
@@ -58,7 +80,7 @@ export function TripsList({}: TripsListProps) {
           <AddTripButton color="default">Plan one</AddTripButton>
         </div>
       )}
-      {!!past.length && (
+      {!!past.length && showPast ? (
         <>
           <Divider />
           <H2>Past Trips</H2>
@@ -67,10 +89,18 @@ export function TripsList({}: TripsListProps) {
               <TripsListItem key={trip.get('id')} trip={trip} />
             ))}
           </CardGrid>
+          {tools.hasMore && (
+            <Button onClick={() => tools.loadMore()}>Show older</Button>
+          )}
         </>
-      )}
-      {tools.hasMore && (
-        <Button onClick={() => tools.loadMore()}>Show older</Button>
+      ) : (
+        <Button
+          className="self-center opacity-50"
+          color="ghost"
+          onClick={() => setShowPast(true)}
+        >
+          Show past trips
+        </Button>
       )}
     </div>
   );

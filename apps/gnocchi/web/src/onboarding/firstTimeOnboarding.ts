@@ -1,6 +1,6 @@
-import { createOnboarding } from './createOnboarding.js';
+import { createOnboarding } from '@biscuits/client';
 
 export const firstTimeOnboarding = createOnboarding('firstTime', [
-	'welcome',
-	'settings',
+  'welcome',
+  'settings',
 ]);

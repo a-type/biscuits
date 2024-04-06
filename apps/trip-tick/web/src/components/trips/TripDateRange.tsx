@@ -55,9 +55,7 @@ export function TripDateRange({ trip }: TripDateRangeProps) {
         <Button
           color={days === 0 ? 'primary' : 'ghost'}
           className={
-            days === 0
-              ? 'ml-4'
-              : 'font-normal text-wrap text-start text-sm sm:text-md'
+            days === 0 ? 'ml-4' : 'font-normal text-wrap text-start text-sm'
           }
         >
           <Icon name="calendar" />

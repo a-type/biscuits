@@ -1,5 +1,6 @@
 import { hooks } from '@/store.js';
 import { Button } from '@a-type/ui/components/button';
+import { useNavigate } from '@verdant-web/react-router';
 import { ReactNode } from 'react';
 
 export interface AddListButtonProps {
@@ -13,14 +14,16 @@ export function AddListButton({
   ...rest
 }: AddListButtonProps) {
   const client = hooks.useClient();
+  const navigate = useNavigate();
 
   return (
     <Button
       color="primary"
-      onClick={() => {
-        client.lists.put({
+      onClick={async () => {
+        const list = await client.lists.put({
           name: 'New list',
         });
+        navigate(`/lists/${list.get('id')}`);
       }}
       className={className}
       {...rest}

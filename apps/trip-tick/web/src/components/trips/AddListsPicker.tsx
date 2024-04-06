@@ -1,6 +1,6 @@
 import { hooks } from '@/store.js';
 import { Button } from '@a-type/ui/components/button';
-import { Trip } from '@packing-list/verdant';
+import { Trip } from '@trip-tick.biscuits/verdant';
 import { Link } from '@verdant-web/react-router';
 import classNames from 'classnames';
 
@@ -27,7 +27,6 @@ export function AddListsPicker({ trip, className }: AddListsPickerProps) {
         return (
           <Button
             key={id}
-            size="small"
             color={active ? 'primary' : 'default'}
             onClick={() => {
               if (active) {
@@ -36,6 +35,7 @@ export function AddListsPicker({ trip, className }: AddListsPickerProps) {
                 trip.get('lists').add(list.get('id'));
               }
             }}
+            className="rounded-md gap-4 py-4"
           >
             <div
               className={
@@ -44,7 +44,12 @@ export function AddListsPicker({ trip, className }: AddListsPickerProps) {
                   : `i-solar-add-circle-linear`
               }
             />
-            {list.get('name')}
+            <div className="flex flex-col gap-1 text-start">
+              <span>{list.get('name')}</span>
+              <span className="text-sm text-gray-7">
+                {list.get('items').length} items
+              </span>
+            </div>
           </Button>
         );
       })}

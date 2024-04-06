@@ -1,7 +1,7 @@
-import { createOnboarding } from './createOnboarding.js';
+import { createOnboarding } from '@biscuits/client';
 
 export const categorizeOnboarding = createOnboarding(
-	'categorize',
-	['categorize'],
-	true,
+  'categorize',
+  ['categorize'],
+  true,
 );

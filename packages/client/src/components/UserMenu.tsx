@@ -17,7 +17,7 @@ import {
   useSuspenseQuery,
 } from '../index.js';
 import { Icon } from '@a-type/ui/components/icon';
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
 
 export interface UserMenuProps {
@@ -49,7 +49,9 @@ export function UserMenu({
         <Button size="icon" color="ghost" className={className}>
           {children ?? (
             <ErrorBoundary fallback={<Avatar />}>
-              <UserAvatar skipFetch={!isLoggedIn} />
+              <Suspense fallback={<Avatar />}>
+                <UserAvatar skipFetch={!isLoggedIn} />
+              </Suspense>
             </ErrorBoundary>
           )}
         </Button>

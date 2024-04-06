@@ -1,4 +1,4 @@
-import { OnboardingTooltip } from '@/components/onboarding/OnboardingTooltip.jsx';
+import { OnboardingTooltip } from '@biscuits/client';
 import { AddToListDialog } from '@/components/recipes/viewer/AddToListDialog.jsx';
 import { saveHubRecipeOnboarding } from '@/onboarding/saveHubRecipeOnboarding.js';
 import { Recipe } from '@gnocchi.biscuits/verdant';

@@ -1,6 +1,6 @@
-import { createOnboarding } from '@/onboarding/createOnboarding.js';
+import { createOnboarding } from '@biscuits/client';
 
 export const pantryOnboarding = createOnboarding('pantry', [
-	'expirations',
-	'clear',
+  'expirations',
+  'clear',
 ]);

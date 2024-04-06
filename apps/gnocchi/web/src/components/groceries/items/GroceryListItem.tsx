@@ -2,7 +2,7 @@ import { OpenFoodDetailButton } from '@/components/foods/OpenFoodDetailButton.js
 import { ItemSources } from '@/components/groceries/items/ItemSources.jsx';
 import { Icon } from '@/components/icons/Icon.jsx';
 import { Link } from '@/components/nav/Link.jsx';
-import { OnboardingTooltip } from '@/components/onboarding/OnboardingTooltip.jsx';
+import { OnboardingTooltip } from '@biscuits/client';
 import { usePurchasedText } from '@/components/pantry/hooks.js';
 import {
   PeopleList,

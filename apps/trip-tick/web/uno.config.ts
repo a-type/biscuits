@@ -10,11 +10,14 @@ export default defineConfig({
   preflights: [
     {
       getCSS: () => `
-        #root {
-          display: flex;
-          flex-direction: column;
-          min-height: 100%;
-        }
+      html, body, #root {
+				display: flex;
+				flex-direction: column;
+			}
+
+			#root {
+				flex: 1;
+			}
       `,
     },
   ],

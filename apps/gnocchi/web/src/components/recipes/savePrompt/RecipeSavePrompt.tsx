@@ -10,7 +10,7 @@ import { useNavigate, useSearchParams } from '@verdant-web/react-router';
 import { proxy, useSnapshot } from 'valtio';
 import { useLocalStorage } from '@/hooks/useLocalStorage.js';
 import { saveHubRecipeOnboarding } from '@/onboarding/saveHubRecipeOnboarding.js';
-import { OnboardingBanner } from '@/components/onboarding/OnboardingBanner.jsx';
+import { OnboardingBanner } from '@biscuits/client';
 import { firstTimeOnboarding } from '@/onboarding/firstTimeOnboarding.js';
 import { H2, P } from '@a-type/ui/components/typography';
 import { TextLink } from '@/components/nav/Link.jsx';

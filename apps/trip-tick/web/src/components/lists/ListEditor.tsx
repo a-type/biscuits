@@ -12,13 +12,16 @@ import {
   ToggleItemTitle,
 } from '@/components/ui/ToggleGroup.jsx';
 import { withClassName } from '@a-type/ui/hooks';
-import { useState } from 'react';
+import { forwardRef, useState } from 'react';
 import {
   CollapsibleSimple,
   CollapsibleTrigger,
 } from '@a-type/ui/components/collapsible';
 import { Icon } from '@a-type/ui/components/icon';
 import { H2 } from '@a-type/ui/components/typography';
+import { OnboardingTooltip } from '@biscuits/client';
+import { firstList } from '@/onboarding/firstList.js';
+import { Link } from '@verdant-web/react-router';
 
 export interface ListEditorProps {
   list: List;
@@ -26,19 +29,35 @@ export interface ListEditorProps {
 
 export function ListEditor({ list }: ListEditorProps) {
   const { name } = hooks.useWatch(list);
+  const [editName, setEditName] = useState(!name || name === 'New List');
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-2">
-        <label className="text-sm font-bold" htmlFor="name">
-          List Name
-        </label>
-        <LiveUpdateTextField
-          value={name}
-          onChange={(name) => list.set('name', name)}
-          className="h-auto"
-          id="name"
-        />
+      <div className="flex flex-row gap-1 items-center">
+        <Button asChild color="ghost" size="icon">
+          <Link to="/lists">
+            <Icon name="arrowLeft" />
+            <span className="sr-only">Back to lists</span>
+          </Link>
+        </Button>
+        {editName ? (
+          <LiveUpdateTextField
+            value={name}
+            onChange={(v) => list.set('name', v)}
+            className="text-xl w-full"
+            autoFocus={editName}
+            onBlur={() => setEditName(false)}
+          />
+        ) : (
+          <Button
+            color="ghost"
+            className="text-xl"
+            onClick={() => setEditName(true)}
+          >
+            {name}
+            <Icon className="ml-2" name="pencil" />
+          </Button>
+        )}
       </div>
       <ListItemsEditor list={list} />
     </div>
@@ -64,7 +83,13 @@ function ListItemsEditor({ list }: { list: List }) {
           </li>
         ))}
         <li className="self-center justify-self-center">
-          <AddListItemButton list={list} />
+          <OnboardingTooltip
+            onboarding={firstList}
+            step="addItem"
+            content="Add your first item you want to pack"
+          >
+            <AddListItemButton list={list} />
+          </OnboardingTooltip>
         </li>
       </ul>
     </div>
@@ -83,7 +108,7 @@ function ListItemEditor({
 
   const [expanded, setExpanded] = useState(false);
 
-  let shortString = `${quantity} / `;
+  let shortString = `${quantity} per `;
   if (perDays) {
     shortString += `${perDays} days`;
   } else {
@@ -134,14 +159,16 @@ function ListItemEditor({
                   <span>day{perDays === 1 ? '' : 's'}</span>
                 </div>
               ) : (
-                <div className="flex flex-row gap-1 items-center border border-gray-7 rounded-full border-solid pl-6 pr-1">
+                <div className="flex flex-row gap-1 justify-between items-center border border-black rounded-full border-solid pl-6 pr-1 h-[33px] w-[178px]">
+                  <div className="w-[30px]" />
                   <span>trip</span>
                   <Button
-                    size="icon"
+                    size="small"
                     color="ghost"
+                    className="h-full"
                     onClick={() => item.set('perDays', 1)}
                   >
-                    +
+                    <Icon name="plus" className="w-[12px] h-[12px] flex" />
                   </Button>
                 </div>
               )}
@@ -166,6 +193,7 @@ function ListItemEditor({
                 color="default"
                 onClick={() => item.set('additional', 1)}
               >
+                <Icon name="plus" />
                 Add extra
               </Button>
             </div>
@@ -208,34 +236,43 @@ function ListItemEditor({
         </div>
       </CollapsibleSimple>
       <CollapsibleSimple open={!expanded} onOpenChange={(v) => setExpanded(!v)}>
-        <CollapsibleTrigger asChild>
-          <Button size="small" color="ghost" className="text-black">
-            <Icon name="pencil" />
-            <span>{shortString}</span>
-          </Button>
-        </CollapsibleTrigger>
+        <OnboardingTooltip
+          onboarding={firstList}
+          step="conditions"
+          content="Set rules for how many of this item you want to pack for each trip"
+        >
+          <CollapsibleTrigger asChild>
+            <Button size="small" color="ghost" className="text-black">
+              <Icon name="pencil" />
+              <span>{shortString}</span>
+            </Button>
+          </CollapsibleTrigger>
+        </OnboardingTooltip>
       </CollapsibleSimple>
     </div>
   );
 }
 
-function AddListItemButton({ list }: { list: List }) {
-  const { items } = hooks.useWatch(list);
+const AddListItemButton = forwardRef<HTMLButtonElement, { list: List }>(
+  function AddListItemButton({ list }, ref) {
+    const { items } = hooks.useWatch(list);
 
-  return (
-    <Button
-      color="default"
-      className="w-full items-center justify-center"
-      onClick={() =>
-        items.push({
-          description: 'New item',
-        })
-      }
-    >
-      Add Item
-    </Button>
-  );
-}
+    return (
+      <Button
+        color="default"
+        className="w-full items-center justify-center"
+        onClick={() =>
+          items.push({
+            description: 'New item',
+          })
+        }
+        ref={ref}
+      >
+        Add Item
+      </Button>
+    );
+  },
+);
 
 const FieldGroup = withClassName(
   'div',

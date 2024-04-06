@@ -22,7 +22,7 @@ import { snapCenterToCursor } from '@dnd-kit/modifiers';
 import { forwardRef, memo, useCallback, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { ref as valtioRef } from 'valtio';
-import { OnboardingBanner } from '../onboarding/OnboardingBanner.jsx';
+import { OnboardingBanner } from '@biscuits/client';
 import { GroceryEmptyContent } from './GroceryEmptyContent.jsx';
 import { GroceryListCategory } from './categories/GroceryListCategory.js';
 import {

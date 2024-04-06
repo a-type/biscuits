@@ -1,9 +1,9 @@
-import { createOnboarding } from './createOnboarding.js';
+import { createOnboarding } from '@biscuits/client';
 
 export const saveHubRecipeOnboarding = createOnboarding('saveHubRecipe', [
-	'save',
-	'recipe',
-	'addToList',
-	'viewList',
-	'subscribe',
+  'save',
+  'recipe',
+  'addToList',
+  'viewList',
+  'subscribe',
 ] as const);

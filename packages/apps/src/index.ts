@@ -30,7 +30,7 @@ export const apps = [
     iconPath: 'icon.png',
     size: 2,
     devOriginOverride: 'http://localhost:6221',
-    demoVideoSrc: '',
+    demoVideoSrc: '/videos/trip-tick.mp4',
   } satisfies AppManifest<'trip-tick'>,
 ] as const;
 

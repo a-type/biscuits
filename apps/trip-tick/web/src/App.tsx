@@ -10,26 +10,32 @@ import {
 } from '@biscuits/client';
 import { ReactNode, Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
+import { FullScreenSpinner } from '@a-type/ui/components/spinner';
+import { ParticleLayer } from '@a-type/ui/components/particles';
 
 const graphqlClient = createGraphQLClient();
 
 export function App() {
   return (
-    <Suspense>
-      <Provider appId="trip-tick" graphqlClient={graphqlClient}>
-        <LofiProvider>
-          <TooltipProvider>
-            <AppPreviewNotice />
-            <Pages />
-            <IconSpritesheet />
-            <Toaster
-              position="bottom-center"
-              containerClassName="mb-10 sm:mb-0"
-            />
-          </TooltipProvider>
-        </LofiProvider>
-      </Provider>
-    </Suspense>
+    <div className="flex flex-col flex-1 w-full h-full">
+      <Suspense fallback={<FullScreenSpinner />}>
+        <Provider appId="trip-tick" graphqlClient={graphqlClient}>
+          <LofiProvider>
+            <TooltipProvider>
+              <AppPreviewNotice />
+              <ParticleLayer>
+                <Pages />
+              </ParticleLayer>
+              <IconSpritesheet />
+              <Toaster
+                position="bottom-center"
+                containerClassName="mb-10 sm:mb-0"
+              />
+            </TooltipProvider>
+          </LofiProvider>
+        </Provider>
+      </Suspense>
+    </div>
   );
 }
 

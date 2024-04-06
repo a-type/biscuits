@@ -92,6 +92,9 @@ async function refreshSessionViaIframe() {
             // store the new refresh token
             refreshTokenStorage.set(event.data.success.refreshToken);
             resolve();
+          } else {
+            console.error('session refresh failed via iframe');
+            reject(new Error('session refresh failed via iframe'));
           }
         }
       });

@@ -1,5 +1,5 @@
 import { PageNav } from '@a-type/ui/components/layouts';
-import { Link, useMatch, useOnLocationChange } from '@verdant-web/react-router';
+import { Link, useOnLocationChange } from '@verdant-web/react-router';
 import {
   NavBarRoot,
   NavBarItem,
@@ -8,7 +8,7 @@ import {
   NavBarItemIcon,
 } from '@a-type/ui/components/navBar';
 import { useState } from 'react';
-import { AppPicker, AppPickerNavItem } from '@biscuits/client';
+import { AppPickerNavItem } from '@biscuits/client';
 import { Logo } from '../brand/Logo.jsx';
 
 export interface NavigationProps {}
@@ -22,7 +22,7 @@ export function Navigation({}: NavigationProps) {
   return (
     <PageNav className="">
       <div className="hidden sm:(flex flex-row gap-2 items-center justify-center px-2 py-2 mt-3)">
-        <h1 className="text-md [font-family:'Henrietta','Noto_Serif',serif] font-normal">
+        <h1 className="text-md [font-family:'Henrietta','Noto_Serif',serif] font-semibold">
           Trip Tick
         </h1>
         <Logo className="w-12" />

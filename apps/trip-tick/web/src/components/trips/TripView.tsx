@@ -34,11 +34,12 @@ import {
 } from '@trip-tick.biscuits/verdant';
 import { Link, useSearchParams } from '@verdant-web/react-router';
 import classNames from 'classnames';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { LocationSelect } from '../weather/LocationSelect.jsx';
 import { WeatherForecast } from '../weather/WeatherForecast.jsx';
 import { TripDateRange } from './TripDateRange.jsx';
 import { NumberStepper } from '@a-type/ui/components/numberStepper';
+import { useParticles } from '@a-type/ui/components/particles';
 
 export interface TripViewProps {
   tripId: string;
@@ -69,24 +70,32 @@ function TripViewInfo({ trip }: { trip: Trip }) {
         'gap-1': startsAt && endsAt,
       })}
     >
-      {editName || !name || name === 'New Trip' ? (
-        <LiveUpdateTextField
-          value={name}
-          onChange={(v) => trip.set('name', v)}
-          className="text-xl w-full"
-          autoFocus={editName}
-          onBlur={() => setEditName(false)}
-        />
-      ) : (
-        <Button
-          color="ghost"
-          className="text-xl"
-          onClick={() => setEditName(true)}
-        >
-          {name}
-          <Icon className="ml-2" name="pencil" />
+      <div className="flex flex-row gap-1 items-center">
+        <Button asChild color="ghost" size="icon">
+          <Link to="/trips">
+            <Icon name="arrowLeft" />
+            <span className="sr-only">Back to trips</span>
+          </Link>
         </Button>
-      )}
+        {editName ? (
+          <LiveUpdateTextField
+            value={name}
+            onChange={(v) => trip.set('name', v)}
+            className="text-xl w-full"
+            autoFocus={editName}
+            onBlur={() => setEditName(false)}
+          />
+        ) : (
+          <Button
+            color="ghost"
+            className="text-xl"
+            onClick={() => setEditName(true)}
+          >
+            {name}
+            <Icon className="ml-2" name="pencil" />
+          </Button>
+        )}
+      </div>
       <TripDateRange trip={trip} />
       <LocationSelect
         value={location}
@@ -135,10 +144,10 @@ function TripViewChecklists({ trip }: { trip: Trip }) {
           });
         }}
       >
-        <div className="flex flex-row gap-2 items-start">
+        <div className="flex flex-row gap-2 items-start mb-4">
           <div className="flex-1">
             <CollapsibleSimple open={editingLists}>
-              <H4 className="mx-1 my-2">
+              <H4 className="mx-1 mb-2 mt-4">
                 {startedWithNoLists ? 'Add lists' : 'Edit lists'}
               </H4>
               <AddListsPicker trip={trip} className="p-2" />
@@ -152,7 +161,7 @@ function TripViewChecklists({ trip }: { trip: Trip }) {
             </CollapsibleSimple>
           </div>
           <Button
-            className="flex-0-0-auto m-1 relative top-2"
+            className="flex-0-0-auto m-1 relative top--2"
             size={editingLists ? 'small' : 'icon'}
             color={editingLists ? 'accent' : 'ghost'}
             onClick={() => setEditingLists((v) => !v)}
@@ -229,8 +238,8 @@ function TripViewChecklist({
   }
 
   return (
-    <div className="flex flex-col gap-4">
-      <ul className="list-none flex flex-col gap-3 m-0 p-0">
+    <div className="flex flex-col gap-6">
+      <ul className="list-none flex flex-col gap-4 m-0 p-0">
         {items.map((item) => {
           const completion = completions.get(item.get('id')) ?? 0;
           return (
@@ -387,6 +396,22 @@ function ChecklistItem({
   const canEdit = onDescriptionChanged || onQuantityChanged;
   const [editing, setEditing] = useState(canEdit && !description);
 
+  const particles = useParticles();
+  const barRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (completed && barRef.current) {
+      particles?.elementExplosion({
+        count: 40,
+        element: barRef.current,
+        color: {
+          opacity: 1,
+          space: 'rgb',
+          values: [115, 219, 160],
+        },
+      });
+    }
+  }, [completed, particles]);
+
   return (
     <div className="w-full p-2 flex flex-col gap-2">
       <div className="w-full flex flex-row items-center gap-2">
@@ -443,12 +468,13 @@ function ChecklistItem({
       </div>
       <Progress.Root
         value={completedQuantity / computedQuantity}
-        className="relative overflow-hidden rounded-full w-full h-12px border border-solid border-gray-4"
+        className="relative overflow-hidden rounded-full w-full h-12px border border-solid border-black"
         style={{
           // Fix overflow clipping in Safari
           // https://gist.github.com/domske/b66047671c780a238b51c51ffde8d3a0
           transform: 'translateZ(0)',
         }}
+        ref={barRef}
       >
         <Progress.Indicator
           className="bg-accent w-full h-full transition-transform duration-[300ms] ease-out"

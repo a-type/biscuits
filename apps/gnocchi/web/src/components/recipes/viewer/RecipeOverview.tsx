@@ -1,4 +1,4 @@
-import { OnboardingBanner } from '@/components/onboarding/OnboardingBanner.jsx';
+import { OnboardingBanner } from '@biscuits/client';
 import { HeaderBar } from '@/components/recipes/layout/HeaderBar.jsx';
 import { RecipeNote } from '@/components/recipes/viewer/RecipeNote.jsx';
 import { saveHubRecipeOnboarding } from '@/onboarding/saveHubRecipeOnboarding.js';
