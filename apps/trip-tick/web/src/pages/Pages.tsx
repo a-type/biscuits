@@ -43,6 +43,10 @@ const routes = makeRoutes([
     path: '/settings',
     component: lazy(() => import('./SettingsPage.jsx')),
   },
+  {
+    path: '*',
+    component: lazy(() => import('./NotFoundPage.jsx')),
+  },
 ]);
 
 export function Pages() {
