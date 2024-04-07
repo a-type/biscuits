@@ -144,7 +144,6 @@ function LocationSelectAutocomplete({
         const data = result.data?.geographicLocation;
 
         if (data) {
-          setInputValue(selectedItem.text);
           onChange({
             latitude: data.latitude,
             longitude: data.longitude,
@@ -169,13 +168,17 @@ function LocationSelectAutocomplete({
         <div
           data-state={isOpen ? 'open' : 'closed'}
           className={classNames(
-            'flex gap-2 flex-row w-full relative',
+            'flex gap-1 flex-col w-full relative',
             className,
           )}
           ref={innerRef}
         >
+          <label htmlFor="location-input" className="font-bold">
+            Where are you going?
+          </label>
           <Input
             data-test="location-input"
+            id="location-input"
             {...getInputProps({
               placeholder: 'Raleigh, NC',
             })}

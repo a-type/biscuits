@@ -9,7 +9,7 @@ export function TripPage({}: TripPageProps) {
   const params = useParams();
   const tripId = params.tripId;
   return (
-    <PageContent>
+    <PageContent fullHeight className="initial">
       <Suspense>
         <TripView tripId={tripId} />
       </Suspense>

@@ -9,6 +9,7 @@ import {
   useSuspenseQuery,
   from,
   useQuery,
+  NetworkStatus,
 } from '@apollo/client';
 import { onError, ErrorHandler } from '@apollo/client/link/error';
 import { RetryLink } from '@apollo/client/link/retry';
@@ -180,7 +181,7 @@ export function useMe() {
 
 export function useIsLoggedIn() {
   const result = useMe();
-  return result.data?.me !== null;
+  return [!!result.data?.me?.id, result.networkStatus !== NetworkStatus.ready];
 }
 
 export function useCanSync() {

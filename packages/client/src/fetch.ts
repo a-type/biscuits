@@ -54,12 +54,14 @@ const refreshTokenStorage = {
   get: () => window.localStorage.getItem('biscuits-refresh'),
   set: (token: string) =>
     window.localStorage.setItem('biscuits-refresh', token),
+  clear: () => window.localStorage.removeItem('biscuits-refresh'),
 };
 
 export async function refreshSession(apiOrigin: string) {
   const refreshToken = refreshTokenStorage.get();
   if (!refreshToken || refreshToken === 'undefined')
     return refreshSessionViaIframe();
+
   try {
     const response = await fetch(`${apiOrigin}/auth/refresh`, {
       method: 'POST',
@@ -71,6 +73,9 @@ export async function refreshSession(apiOrigin: string) {
       const body = await response.json();
       // store the new refresh token
       refreshTokenStorage.set(body.refreshToken);
+    } else {
+      console.error('session refresh failed', response.status);
+      refreshTokenStorage.clear();
     }
     return response.ok;
   } catch (e) {

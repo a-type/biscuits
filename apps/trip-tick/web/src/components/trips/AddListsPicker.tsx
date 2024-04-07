@@ -3,6 +3,7 @@ import { Button } from '@a-type/ui/components/button';
 import { Trip } from '@trip-tick.biscuits/verdant';
 import { Link } from '@verdant-web/react-router';
 import classNames from 'classnames';
+import { Icon } from '@a-type/ui/components/icon';
 
 export interface AddListsPickerProps {
   trip: Trip;
@@ -17,7 +18,7 @@ export function AddListsPicker({ trip, className }: AddListsPickerProps) {
   return (
     <div
       className={classNames(
-        'flex flex-row items-center flex-wrap gap-2',
+        'flex flex-row items-center flex-wrap gap-2 w-full',
         className,
       )}
     >
@@ -37,13 +38,7 @@ export function AddListsPicker({ trip, className }: AddListsPickerProps) {
             }}
             className="rounded-md gap-4 py-4"
           >
-            <div
-              className={
-                active
-                  ? `i-solar-check-circle-linear`
-                  : `i-solar-add-circle-linear`
-              }
-            />
+            <Icon name={active ? 'check' : 'plus'} />
             <div className="flex flex-col gap-1 text-start">
               <span>{list.get('name')}</span>
               <span className="text-sm text-gray-7">

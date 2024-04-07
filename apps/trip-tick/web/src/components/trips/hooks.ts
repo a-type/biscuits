@@ -1,15 +1,16 @@
 import { getComputedQuantity } from '@/components/trips/utils.js';
 import { hooks } from '@/store.js';
-import { List, Trip } from '@packing-list/verdant';
+import { Trip } from '@trip-tick.biscuits/verdant';
 
 export function useTripProgress(
   trip: Trip,
   { listFilter }: { listFilter?: string[] } = {},
 ) {
-  const { lists, completions } = hooks.useWatch(trip);
+  const { lists, completions, extraItems } = hooks.useWatch(trip);
   const days = useTripDays(trip);
   hooks.useWatch(lists);
   hooks.useWatch(completions);
+  hooks.useWatch(extraItems);
   const allLists = hooks.useAllLists();
 
   const mappedLists = lists
@@ -25,6 +26,11 @@ export function useTripProgress(
     })
     .map((list) => list.getSnapshot());
 
+  const extraItemCount = extraItems.values().reduce((acc, exList) => {
+    return exList.getAll().reduce((acc, ex) => {
+      return acc + ex.get('quantity');
+    }, acc);
+  }, 0);
   const totalItems = mappedLists.reduce((acc, list) => {
     return (
       acc +
@@ -41,7 +47,7 @@ export function useTripProgress(
         );
       }, 0)
     );
-  }, 0);
+  }, extraItemCount);
 
   // starting from lists because completions may include data
   // from lists that are no longer included

@@ -40,6 +40,7 @@ import { WeatherForecast } from '../weather/WeatherForecast.jsx';
 import { TripDateRange } from './TripDateRange.jsx';
 import { NumberStepper } from '@a-type/ui/components/numberStepper';
 import { useParticles } from '@a-type/ui/components/particles';
+import { Divider } from '@a-type/ui/components/divider';
 
 export interface TripViewProps {
   tripId: string;
@@ -53,7 +54,7 @@ export function TripView({ tripId }: TripViewProps) {
   }
 
   return (
-    <div className="flex flex-col gap-2 w-full h-full">
+    <div className="flex flex-col gap-4 w-full">
       <TripViewInfo trip={trip} />
       <TripViewChecklists trip={trip} />
     </div>
@@ -65,10 +66,13 @@ function TripViewInfo({ trip }: { trip: Trip }) {
   const [editName, setEditName] = useState(!name || name === 'New Trip');
   return (
     <div
-      className={classNames('flex flex-col items-start transition', {
-        'gap-4': !startsAt || !endsAt,
-        'gap-1': startsAt && endsAt,
-      })}
+      className={classNames(
+        'flex flex-col items-start transition sm:rounded-md bg-primary-wash ring-16px sm:ring-8px ring-primary-wash',
+        {
+          'gap-4': !startsAt || !endsAt,
+          'gap-1': startsAt && endsAt,
+        },
+      )}
     >
       <div className="flex flex-row gap-1 items-center">
         <Button asChild color="ghost" size="icon">
@@ -134,76 +138,72 @@ function TripViewChecklists({ trip }: { trip: Trip }) {
   }
 
   return (
-    <div>
-      <TabsRoot
-        value={activeList}
-        onValueChange={(val) => {
-          setParams((params) => {
-            params.set('list', val);
-            return params;
-          });
-        }}
-      >
-        <div className="flex flex-row gap-2 items-start mb-4">
-          <div className="flex-1">
-            <CollapsibleSimple open={editingLists}>
-              <H4 className="mx-1 mb-2 mt-4">
-                {startedWithNoLists ? 'Add lists' : 'Edit lists'}
-              </H4>
-              <AddListsPicker trip={trip} className="p-2" />
-            </CollapsibleSimple>
-            <CollapsibleSimple open={!editingLists}>
-              <TabsList className="important:justify-start">
-                {mappedLists.map((list) => (
-                  <ListTab list={list} key={list.get('id')} trip={trip} />
-                ))}
-              </TabsList>
-            </CollapsibleSimple>
-          </div>
+    <TabsRoot
+      value={activeList}
+      onValueChange={(val) => {
+        setParams((params) => {
+          params.set('list', val);
+          return params;
+        });
+      }}
+    >
+      <div className="display-unset mb-4">
+        <div className="flex flex-row gap-2 items-center px-2">
+          <H4 className="flex-1">
+            {editingLists
+              ? startedWithNoLists
+                ? 'Add lists'
+                : 'Edit lists'
+              : 'Lists'}
+          </H4>
           <Button
-            className="flex-0-0-auto m-1 relative top--2"
+            className="flex-0-0-auto m-1"
             size={editingLists ? 'small' : 'icon'}
             color={editingLists ? 'accent' : 'ghost'}
             onClick={() => setEditingLists((v) => !v)}
           >
             {editingLists ? (
               <>
-                Done adding lists{' '}
-                <div className="i-solar-check-circle-linear" />
+                Done <div className="i-solar-check-circle-linear" />
               </>
             ) : (
               <div className="i-solar-settings-linear" />
             )}
           </Button>
         </div>
-        {mappedLists.map((list) => {
-          const listId = list.get('id');
-          return (
-            <TabsContent key={list.get('id')} value={list.get('id')}>
-              <TripViewChecklist
-                key={listId}
-                list={list}
-                days={days}
-                completions={completions}
-                extraItems={extraItems}
-              />
-            </TabsContent>
-          );
-        })}
-      </TabsRoot>
-    </div>
+        <CollapsibleSimple open={editingLists}>
+          <AddListsPicker trip={trip} className="p-2" />
+        </CollapsibleSimple>
+        <TabsList className="important:justify-start sticky top-0 z-2 bg-white">
+          {mappedLists.map((list) => (
+            <ListTab list={list} key={list.get('id')} trip={trip} />
+          ))}
+        </TabsList>
+      </div>
+      {mappedLists.map((list) => {
+        const listId = list.get('id');
+        return (
+          <TabsContent key={list.get('id')} value={list.get('id')}>
+            <TripViewChecklist
+              key={listId}
+              list={list}
+              days={days}
+              completions={completions}
+              extraItems={extraItems}
+            />
+          </TabsContent>
+        );
+      })}
+    </TabsRoot>
   );
 }
 
 function ListTab({ trip, list }: { list: List; trip: Trip }) {
   const { value } = useTripProgress(trip, { listFilter: [list.get('id')] });
   return (
-    <TabsTrigger
-      value={list.get('id')}
-      className="relative overflow-hidden !border-gray-7"
-    >
+    <TabsTrigger value={list.get('id')} className="relative overflow-hidden">
       <span>{list.get('name')}</span>
-      <Progress.Root className="w-full absolute bottom-0 left-0 overflow-hidden rounded-b-full border border-t-solid border-t-gray-4">
+      <Progress.Root className="w-full absolute bottom-0 left-0 overflow-hidden rounded-b-full border border-t-solid border-t-primary">
         <Progress.Indicator
           className="bg-accent w-full h-4px"
           style={{

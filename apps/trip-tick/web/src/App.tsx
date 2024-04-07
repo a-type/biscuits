@@ -41,7 +41,7 @@ export function App() {
 
 function LofiProvider({ children }: { children: ReactNode }) {
   // only sync if logged in to the server
-  const isLoggedIn = useIsLoggedIn();
+  const [isLoggedIn] = useIsLoggedIn();
   return (
     <hooks.Provider value={clientDescriptor} sync={isLoggedIn}>
       {children}

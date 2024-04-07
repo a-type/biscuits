@@ -6,7 +6,7 @@ export interface LoginButtonProps extends ButtonProps {
 }
 
 export function LoginButton(props: LoginButtonProps) {
-  const url = new URL(CONFIG.HOME_ORIGIN + '/join');
+  const url = new URL(CONFIG.HOME_ORIGIN + '/login');
   if (props.returnTo) {
     url.searchParams.set('returnTo', props.returnTo);
   }
