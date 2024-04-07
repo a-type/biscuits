@@ -41,6 +41,7 @@ import { TripDateRange } from './TripDateRange.jsx';
 import { NumberStepper } from '@a-type/ui/components/numberStepper';
 import { useParticles } from '@a-type/ui/components/particles';
 import { Divider } from '@a-type/ui/components/divider';
+import { usePageTitle } from '@biscuits/client';
 
 export interface TripViewProps {
   tripId: string;
@@ -48,6 +49,7 @@ export interface TripViewProps {
 
 export function TripView({ tripId }: TripViewProps) {
   const trip = hooks.useTrip(tripId);
+  usePageTitle(trip?.get('name') ?? 'Trip');
 
   if (!trip) {
     return <div>Trip not found</div>;

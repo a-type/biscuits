@@ -1,10 +1,11 @@
 import { PageContent } from '@a-type/ui/components/layouts';
 import { H1 } from '@a-type/ui/components/typography';
-import { DarkModeToggle } from '@biscuits/client';
+import { DarkModeToggle, usePageTitle } from '@biscuits/client';
 
 export interface SettingsPageProps {}
 
 export function SettingsPage({}: SettingsPageProps) {
+  usePageTitle('Settings');
   return (
     <PageContent>
       <H1>Settings</H1>
