@@ -33,7 +33,7 @@ export function TripMenu({ tripId }: TripMenuProps) {
           className="text-red"
           onClick={() => {
             client.trips.delete(trip.get('id'));
-            navigate('/trips', { skipTransition: true });
+            navigate('/', { skipTransition: true });
             toast((t) => (
               <span className="flex gap-2 items-center">
                 <Icon name="check" />

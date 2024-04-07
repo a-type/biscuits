@@ -22,10 +22,10 @@ export function Navigation({}: NavigationProps) {
   return (
     <PageNav className="">
       <div className="hidden sm:(flex flex-row gap-2 items-center justify-center px-2 py-2 mt-3)">
+        <Logo className="w-12" />
         <h1 className="text-md [font-family:'Henrietta','Noto_Serif',serif] font-semibold">
           Trip Tick
         </h1>
-        <Logo className="w-12" />
       </div>
       <NavBarRoot>
         <NavBarItem

@@ -120,7 +120,7 @@ function TripsListItem({ trip }: { trip: Trip }) {
   } = useTripProgress(trip);
 
   return (
-    <CardRoot>
+    <CardRoot className="h-full">
       <CardMain compact={!!isPast} asChild>
         <Link to={`/trips/${trip.get('id')}`} className="relative bg-white">
           <CardTitle className="relative z-1">{name}</CardTitle>

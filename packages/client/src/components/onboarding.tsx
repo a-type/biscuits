@@ -231,7 +231,8 @@ export const OnboardingTooltip = function OnboardingTooltip<
         disableBlur
         className={classNames(
           'theme-leek',
-          'important:bg-primary-wash flex py-2 px-3',
+          'important:bg-primaryWash flex py-2 px-3',
+          'overflow-visible',
         )}
         onInteractOutside={(event) => {
           // if the user interacts outside the popover,
@@ -244,7 +245,7 @@ export const OnboardingTooltip = function OnboardingTooltip<
         }}
         collisionPadding={16}
       >
-        <PopoverArrow className="important:fill-primary-wash" />
+        <PopoverArrow className="important:fill-primaryWash" />
         <div className="flex flex-row gap-3 items-center">
           {content}
           {!disableNext && (
