@@ -39,7 +39,7 @@ export default function HomePage() {
             <UserMenu />
           </Suspense>
         </PageFixedArea>
-        <div className="flex flex-col gap-2 min-h-[30vh] mb-10 mt-5 text-primary-dark font-semibold">
+        <div className="flex flex-col gap-2 min-h-[30vh] mb-4 mt-5 text-primary-dark font-semibold">
           <h2
             className={classNames(
               '!text-8xl text-black mt-0 block mb-10 font-bold leading-none',
@@ -50,9 +50,14 @@ export default function HomePage() {
           <P className={classNames('m-0 mb-6 text-inherit text-xl font-fancy')}>
             in Raleigh, NC
           </P>
-          <P className="text-black text-lg leading-loose font-normal">
+          <P className="text-black text-lg leading-loose font-normal mb-4">
             Biscuits apps are designed to make your life easier. Free to use
-            forever; no ads, no tracking. <Link to="/about">Learn how</Link>.
+            forever, no ads, no tracking. <Link to="/about">Learn how</Link>.
+          </P>
+          <P className="text-black leading-loose font-normal">
+            No signup needed. No need to open the App Store. These are instant
+            web apps, no installation required. Just click &quot;Open app&quot;
+            to get started.
           </P>
         </div>
         {/* <AppsGrid /> */}

@@ -1,3 +1,6 @@
+import { Price } from '@/components/subscription/Price.jsx';
+import { Button } from '@a-type/ui/components/button';
+import { Icon } from '@a-type/ui/components/icon';
 import {
   PageContent,
   PageFixedArea,
@@ -5,13 +8,9 @@ import {
   PageSection,
   PageSectionGrid,
 } from '@a-type/ui/components/layouts';
-import { Button } from '@a-type/ui/components/button';
-import { Icon } from '@a-type/ui/components/icon';
-import { graphql, useLocalStorage, useQuery } from '@biscuits/client';
-import { Link, useNavigate } from '@verdant-web/react-router';
-import { useEffect } from 'react';
+import { graphql, useQuery } from '@biscuits/client';
+import { Link } from '@verdant-web/react-router';
 import classNames from 'classnames';
-import { Price } from '@/components/subscription/Price.jsx';
 
 export interface JoinPageProps {}
 
@@ -25,14 +24,6 @@ const startingPriceQuery = graphql(`
 `);
 
 export function JoinPage({}: JoinPageProps) {
-  const [seen] = useLocalStorage('seenBefore', false);
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (seen) {
-      navigate(`/login`, { replace: true });
-    }
-  }, [seen, navigate]);
-
   return (
     <PageRoot className="bg-gray-1">
       <PageContent>

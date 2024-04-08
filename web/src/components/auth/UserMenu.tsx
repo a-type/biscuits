@@ -12,7 +12,7 @@ export function UserMenu({ className }: UserMenuProps) {
 
   if (!data?.me) {
     return (
-      <Link to="/join">
+      <Link to="/login">
         <Button color="primary" className={classNames(className)}>
           Join the club
         </Button>
