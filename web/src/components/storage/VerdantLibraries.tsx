@@ -1,5 +1,9 @@
 import { graphql } from '@/graphql.js';
-import { Avatar, AvatarList } from '@a-type/ui/components/avatar';
+import {
+  Avatar,
+  AvatarList,
+  AvatarListItem,
+} from '@a-type/ui/components/avatar';
 import { ConfirmedButton } from '@a-type/ui/components/button';
 import {
   CardActions,
@@ -90,8 +94,9 @@ function VerdantLibrary({ app }: { app: AppManifest<AppId> }) {
           {app.name}
         </CardTitle>
         <AvatarList count={info.replicas.length}>
-          {info.replicas.map((replica) => (
-            <Avatar
+          {info.replicas.map((replica, index) => (
+            <AvatarListItem
+              index={index}
               key={replica.id}
               imageSrc={replica.profile.imageUrl ?? undefined}
               name={replica.profile.name}
