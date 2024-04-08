@@ -420,7 +420,7 @@ function ChecklistItem({
             <CheckboxRoot
               checked={completed}
               onCheckedChange={mainOnChecked}
-              className="w-32px h-32px rounded-full touch-none flex items-center justify-center"
+              className="w-32px h-32px rounded-full touch-none flex items-center justify-center text-black"
               ref={ref}
               {...holdProps}
             >
