@@ -44,8 +44,6 @@ const RecipeEditPage = lazyWithPreload(
 const RecipeOverviewPage = lazyWithPreload(
   () => import('./recipe/RecipeOverviewPage.jsx'),
 );
-const PrivacyPolicyPage = lazy(() => import('./PrivacyPolicy.jsx'));
-const TermsAndConditionsPage = lazy(() => import('./TermsAndConditions.jsx'));
 const PantryPage = lazyWithPreload(() => import('./pantry/PantryPage.js'));
 const PantryListPage = lazyWithPreload(
   () => import('./pantry/PantryListPage.js'),
@@ -154,14 +152,6 @@ const routes = makeRoutes([
         ],
       },
       {
-        path: 'privacy-policy',
-        component: PrivacyPolicyPage,
-      },
-      {
-        path: 'tos',
-        component: TermsAndConditionsPage,
-      },
-      {
         path: '',
         component: NotFoundPage,
       },
@@ -176,13 +166,6 @@ function LayoutWithNavBar() {
       <NavBar />
     </PageRoot>
   );
-
-  // return (
-  //   <PageRoot>
-  //     <SwipeOutlet scroll className="[grid-area:content]" />
-  //     <NavBar />
-  //   </PageRoot>
-  // );
 }
 
 export function Pages() {

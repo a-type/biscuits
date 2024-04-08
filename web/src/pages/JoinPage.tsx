@@ -1,3 +1,4 @@
+import { Footer } from '@/components/help/Footer.jsx';
 import { Price } from '@/components/subscription/Price.jsx';
 import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
@@ -65,6 +66,7 @@ export function JoinPage({}: JoinPageProps) {
             </p>
           </PageSection>
         </div>
+        <Footer />
       </PageContent>
     </PageRoot>
   );

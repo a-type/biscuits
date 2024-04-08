@@ -7,6 +7,7 @@ import { H1, P } from '@a-type/ui/components/typography';
 import { withClassName } from '@a-type/ui/hooks';
 import { Button } from '@a-type/ui/components/button';
 import { toast } from 'react-hot-toast';
+import { Footer } from '@/components/help/Footer.jsx';
 
 const claimInviteInfo = graphql(`
   query ClaimInviteInfo($code: String!) {
@@ -88,6 +89,7 @@ function ClaimInvitePage() {
           )}
           <Button onClick={claim}>Claim Invite</Button>
         </div>
+        <Footer />
       </PageContent>
     </PageRoot>
   );

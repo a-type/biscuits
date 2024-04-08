@@ -180,8 +180,8 @@ importers:
         specifier: ^0.1.6
         version: 0.1.11(react@18.2.0)
       '@verdant-web/react-router':
-        specifier: ^0.6.1
-        version: 0.6.1(react@18.2.0)
+        specifier: ^0.6.2
+        version: 0.6.2(react@18.2.0)
       '@zip.js/zip.js':
         specifier: ^2.7.6
         version: 2.7.37
@@ -406,8 +406,8 @@ importers:
         specifier: ^30.0.0
         version: 30.0.0(@verdant-web/store@3.5.0)(react@18.2.0)
       '@verdant-web/react-router':
-        specifier: ^0.6.1
-        version: 0.6.1(react@18.2.0)
+        specifier: ^0.6.2
+        version: 0.6.2(react@18.2.0)
       '@verdant-web/store':
         specifier: ^3.5.0
         version: 3.5.0
@@ -577,8 +577,8 @@ importers:
   server:
     dependencies:
       '@a-type/auth':
-        specifier: 0.4.11
-        version: 0.4.11
+        specifier: 0.4.12
+        version: 0.4.12
       '@a-type/utils':
         specifier: 1.0.8
         version: 1.0.8
@@ -731,8 +731,8 @@ importers:
         specifier: ^0.158.3
         version: 0.158.3
       '@verdant-web/react-router':
-        specifier: ^0.6.1
-        version: 0.6.1(react@18.2.0)
+        specifier: ^0.6.2
+        version: 0.6.2(react@18.2.0)
       classnames:
         specifier: ^2.3.2
         version: 2.3.2
@@ -815,8 +815,8 @@ packages:
     transitivePeerDependencies:
       - encoding
 
-  /@a-type/auth@0.4.11:
-    resolution: {integrity: sha512-fi7gGWic2sF9BKr9J/ghYdxtje+f8AbtqsPp2Q9PyXjuh1cnSBDGGrbLO3XegPldFSSWQdHMgSIK39pK3W9APg==}
+  /@a-type/auth@0.4.12:
+    resolution: {integrity: sha512-P7P+y1QBGDlbntSMXxuD3gHtD8V/++RxGlW3z3mh4+y3IAz5nzls3cgs9A+1oDrUU3TsHqvPjzAptr9M/jhtPg==}
     dependencies:
       cookie: 0.6.0
       discord-oauth2: 2.12.1
@@ -10295,12 +10295,12 @@ packages:
       object-hash: 3.0.0
       uuid: 8.3.2
 
-  /@verdant-web/react-router@0.6.1(react@18.2.0):
-    resolution: {integrity: sha512-eZ97ZSQ+f9ENq/HQhgkdxlJtS/ov7R7gehV5Xjt3KouzB8gfdyhTGgkMANaUQwJW9rQg6wgDUG2nZn6plo8mZw==}
+  /@verdant-web/react-router@0.6.2(react@18.2.0):
+    resolution: {integrity: sha512-O98qNIUvMwRTZKqMWW2iReQwqmxW57y/TSg1fLIgTOy0lKHIh87KqMZpiYEgioHw6y1dBC/CMvEqvst4zD7pcw==}
     peerDependencies:
       react: ^18.2.0
     dependencies:
-      path-to-regexp: 6.2.1
+      path-to-regexp: 6.2.2
       react: 18.2.0
     dev: false
 
@@ -14884,8 +14884,8 @@ packages:
     resolution: {integrity: sha512-5DFkuoqlv1uYQKxy8omFBeJPQcdoE07Kv2sferDCrAq1ohOU+MSDswDIbnx3YAM60qIOnYa53wBhXW0EbMonrQ==}
     dev: true
 
-  /path-to-regexp@6.2.1:
-    resolution: {integrity: sha512-JLyh7xT1kizaEvcaXOQwOc2/Yhw6KZOvPf1S8401UyLk86CU79LN3vl7ztXGm/pZ+YjoyAJ4rxmHwbkBXJX+yw==}
+  /path-to-regexp@6.2.2:
+    resolution: {integrity: sha512-GQX3SSMokngb36+whdpRXE+3f9V8UzyAorlYvOGx87ufGHehNTn5lCxrKtLyZ4Yl/wEKnNnr98ZzOwwDZV5ogw==}
     dev: false
 
   /path-type@4.0.0:

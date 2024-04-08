@@ -148,6 +148,7 @@ export function UserAvatar({
     <Avatar
       imageSrc={result?.data?.me?.imageUrl ?? undefined}
       className={className}
+      popIn={false}
     />
   );
 }

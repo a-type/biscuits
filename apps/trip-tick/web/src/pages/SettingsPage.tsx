@@ -1,6 +1,7 @@
 import { PageContent } from '@a-type/ui/components/layouts';
 import { H1 } from '@a-type/ui/components/typography';
 import { DarkModeToggle, usePageTitle } from '@biscuits/client';
+import { AutoRestoreScroll } from '@verdant-web/react-router';
 
 export interface SettingsPageProps {}
 
@@ -12,6 +13,7 @@ export function SettingsPage({}: SettingsPageProps) {
       <div className="flex flex-col gap-4 my-6 mx-2">
         <DarkModeToggle />
       </div>
+      <AutoRestoreScroll />
     </PageContent>
   );
 }

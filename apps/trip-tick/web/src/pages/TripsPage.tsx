@@ -3,6 +3,7 @@ import { TripsList } from '@/components/trips/TripsList.jsx';
 import { PageContent, PageNowPlaying } from '@a-type/ui/components/layouts';
 import { H1 } from '@a-type/ui/components/typography';
 import { UserMenu, usePageTitle } from '@biscuits/client';
+import { AutoRestoreScroll } from '@verdant-web/react-router';
 import { Suspense } from 'react';
 
 export interface TripsPageProps {}
@@ -21,6 +22,7 @@ export function TripsPage({}: TripsPageProps) {
       <PageNowPlaying unstyled>
         <AddTripButton />
       </PageNowPlaying>
+      <AutoRestoreScroll />
     </PageContent>
   );
 }

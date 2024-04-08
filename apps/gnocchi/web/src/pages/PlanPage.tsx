@@ -29,6 +29,7 @@ import { ArrowRightIcon } from '@radix-ui/react-icons';
 import { ReactNode, useEffect } from 'react';
 import { groceriesDescriptor } from '@/stores/groceries/index.js';
 import { VAPID_KEY } from '@/config.js';
+import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
 
 const contents = {
   offline: OfflineContents,
@@ -74,6 +75,7 @@ export function PlanPage() {
           <TextLink to="/tos">Terms and conditions of use</TextLink>
         </div>
       </div>
+      <AutoRestoreScroll />
     </PageContent>
   );
 }

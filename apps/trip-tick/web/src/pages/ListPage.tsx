@@ -2,7 +2,7 @@ import { ListEditor } from '@/components/lists/ListEditor.jsx';
 import { hooks } from '@/store.js';
 import { PageContent } from '@a-type/ui/components/layouts';
 import { usePageTitle } from '@biscuits/client';
-import { useParams } from '@verdant-web/react-router';
+import { AutoRestoreScroll, useParams } from '@verdant-web/react-router';
 import { Suspense } from 'react';
 
 export interface ListPageProps {}
@@ -16,6 +16,7 @@ export function ListPage({}: ListPageProps) {
       <Suspense>
         <ListPageEditor listId={listId} />
       </Suspense>
+      <AutoRestoreScroll />
     </PageContent>
   );
 }

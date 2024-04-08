@@ -19,7 +19,7 @@
     "@stripe/react-stripe-js": "^2.5.0",
     "@stripe/stripe-js": "^3.0.5",
     "@types/three": "^0.158.3",
-    "@verdant-web/react-router": "^0.6.1",
+    "@verdant-web/react-router": "^0.6.2",
     "classnames": "^2.3.2",
     "cookie": "^0.6.0",
     "formik": "^2.4.5",

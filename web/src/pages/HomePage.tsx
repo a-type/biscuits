@@ -1,5 +1,6 @@
 import { AppsGrid } from '@/components/AppsGrid.jsx';
 import { UserMenu } from '@/components/auth/UserMenu.js';
+import { Footer } from '@/components/help/Footer.jsx';
 import { AppDemo } from '@/components/promo/AppDemo.jsx';
 import {
   PageContent,
@@ -64,6 +65,7 @@ export default function HomePage() {
         {apps.map((app, index) => (
           <AppDemo appId={app.id} key={app.id} index={index} />
         ))}
+        <Footer />
       </PageContent>
     </PageRoot>
   );

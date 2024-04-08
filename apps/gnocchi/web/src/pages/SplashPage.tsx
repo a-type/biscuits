@@ -19,6 +19,7 @@ import { H2, P } from '@a-type/ui/components/typography';
 import { TextLink } from '@/components/nav/Link.jsx';
 import { LinkButton } from '@/components/nav/Link.jsx';
 import { LoginButton, PromoteSubscriptionButton } from '@biscuits/client';
+import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
 
 // dynamically import Scene
 const Scene = lazy(() => import('@/components/3d/Scene.jsx'));
@@ -45,6 +46,7 @@ export function SplashPage() {
 
   return (
     <div className="bg-white color-black flex flex-col items-stretch">
+      <AutoRestoreScroll />
       <div className="fixed top-0 left-0 w-full h-80% pointer-events-none">
         <Suspense>
           <Scene />

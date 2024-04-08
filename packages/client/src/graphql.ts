@@ -28,7 +28,10 @@ export const graphql = initGraphQLTada<{
 export { readFragment } from 'gql.tada';
 export type { FragmentOf, ResultOf, VariablesOf } from 'gql.tada';
 
-function createErrorHandler(onError?: (err: string) => void): ErrorHandler {
+function createErrorHandler(
+  onError?: (err: string) => void,
+  onLoggedOut?: () => void,
+): ErrorHandler {
   return ({ graphQLErrors, networkError, operation, forward }) => {
     let errorMessage: string | undefined =
       'An unexpected error occurred. Please try again.';
@@ -42,15 +45,20 @@ function createErrorHandler(onError?: (err: string) => void): ErrorHandler {
             code < 4020 &&
             code !== BiscuitsError.Code.SessionExpired
           ) {
+            errorMessage = undefined;
             operation.setContext(async () => {
               // attempt to refresh the session
+              console.log('Attempting to refresh session');
               const success = await refreshSession(CONFIG.API_ORIGIN);
+              console.log('Refresh session succeeded:', success);
               if (success) {
                 // retry the original request
                 return forward(operation);
               } else {
+                console.error('Failed to refresh session');
                 // failed to refresh the session - the user needs
                 // to log in to use this query.
+                onLoggedOut?.();
                 return;
               }
             });
@@ -60,11 +68,33 @@ function createErrorHandler(onError?: (err: string) => void): ErrorHandler {
         }
       }
     } else if (networkError) {
-      console.error(networkError);
-      errorMessage = 'A network error occurred. Please check your connection.';
+      if ('statusCode' in networkError && networkError.statusCode === 401) {
+        errorMessage = undefined;
+        operation.setContext(async () => {
+          // attempt to refresh the session
+          console.log('Attempting to refresh session');
+          const success = await refreshSession(CONFIG.API_ORIGIN);
+          console.log('Refresh session succeeded:', success);
+          if (success) {
+            // retry the original request
+            return forward(operation);
+          } else {
+            console.error('Failed to refresh session');
+            // failed to refresh the session - the user needs
+            // to log in to use this query.
+            onLoggedOut?.();
+            return;
+          }
+        });
+      } else {
+        console.error(networkError);
+        errorMessage =
+          'A network error occurred. Please check your connection.';
+      }
     }
 
-    onError?.(errorMessage);
+    if (errorMessage && !operation.getContext().hideErrors)
+      onError?.(errorMessage);
   };
 }
 
@@ -94,16 +124,18 @@ const retry = new RetryLink({
 export function createGraphQLClient({
   origin = CONFIG.API_ORIGIN,
   onError: errorHandler,
+  onLoggedOut,
 }: {
   origin?: string;
   onError?: (error: string) => void;
+  onLoggedOut?: () => void;
 } = {}) {
   const http = createHttp(origin);
   return new ApolloClient({
     uri: `${origin}/graphql`,
     cache: new InMemoryCache({}),
     link: from([
-      onError(createErrorHandler(deduplicateErrors(errorHandler))),
+      onError(createErrorHandler(deduplicateErrors(errorHandler), onLoggedOut)),
       retry,
       http,
     ]),
@@ -127,15 +159,17 @@ function deduplicateErrors(onError?: (error: string) => void) {
 export function createMinimalGraphQLClient({
   origin = CONFIG.API_ORIGIN,
   onError: errorHandler,
+  onLoggedOut,
 }: {
   origin?: string;
   onError?: (error: string) => void;
+  onLoggedOut?: () => void;
 } = {}) {
   const http = createHttp(origin);
   return new ApolloClient({
     cache: new InMemoryCache(),
     link: from([
-      onError(createErrorHandler(deduplicateErrors(errorHandler))),
+      onError(createErrorHandler(deduplicateErrors(errorHandler), onLoggedOut)),
       http,
     ]),
   });

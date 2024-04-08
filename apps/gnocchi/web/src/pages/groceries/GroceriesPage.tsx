@@ -1,6 +1,7 @@
 import { ListEdit } from '@/components/groceries/lists/ListEdit.jsx';
 import { ListSelect } from '@/components/groceries/lists/ListSelect.jsx';
 import { Icon } from '@/components/icons/Icon.jsx';
+import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
 import { RecipeSavePrompt } from '@/components/recipes/savePrompt/RecipeSavePrompt.jsx';
 import { OfflineIndicator } from '@/components/sync/OfflineIndicator.jsx';
 import { RecipePresenceNotification } from '@/components/sync/collaborationMenu/RecipePresenceNotification.jsx';
@@ -85,6 +86,7 @@ export function GroceriesPage() {
         <SubscriptionExpiredDialog />
         <UnknownListRedirect listId={listId} />
         <RecipePresenceNotification />
+        <AutoRestoreScroll />
       </ThemedPageContent>
     </ListContext.Provider>
   );

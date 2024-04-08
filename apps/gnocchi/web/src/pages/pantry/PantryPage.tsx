@@ -1,3 +1,4 @@
+import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
 import { PantryActionBar } from '@/components/pantry/actions/PantryActionBar.jsx';
 import { PantrySearch } from '@/components/pantry/search/PantrySearch.jsx';
 import { usePageTitle } from '@/hooks/usePageTitle.jsx';
@@ -8,19 +9,20 @@ import { Suspense } from 'react';
 export interface PantryPageProps {}
 
 export function PantryPage({}: PantryPageProps) {
-	usePageTitle('Pantry');
+  usePageTitle('Pantry');
 
-	return (
-		<PageContent fullHeight innerProps={{ className: 'gap-2' }}>
-			<PantrySearch />
-			<PageFixedArea>
-				<PantryActionBar />
-			</PageFixedArea>
-			<Suspense>
-				<Outlet />
-			</Suspense>
-		</PageContent>
-	);
+  return (
+    <PageContent fullHeight innerProps={{ className: 'gap-2' }}>
+      <PantrySearch />
+      <PageFixedArea>
+        <PantryActionBar />
+      </PageFixedArea>
+      <Suspense>
+        <Outlet />
+      </Suspense>
+      <AutoRestoreScroll />
+    </PageContent>
+  );
 }
 
 export default PantryPage;

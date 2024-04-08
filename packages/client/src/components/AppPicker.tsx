@@ -26,7 +26,7 @@ export function AppPicker({ className, children }: AppPickerProps) {
   useEffect(() => {
     const listener = (event: MessageEvent) => {
       if (event.origin === CONFIG.HOME_ORIGIN) {
-        const { type, payload } = JSON.parse(event.data);
+        const { type, payload } = event.data;
         if (type === 'navigate') {
           const appId = payload.appId;
           const app = apps.find((app) => app.id === appId);

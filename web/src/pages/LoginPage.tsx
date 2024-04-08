@@ -10,6 +10,7 @@ import {
   TabsTrigger,
 } from '@a-type/ui/components/tabs';
 import { lazy } from 'react';
+import { Footer } from '@/components/help/Footer.jsx';
 
 const Paws = lazy(() => import('@/components/paws/Paws.jsx'));
 
@@ -75,6 +76,7 @@ export default function LoginPage() {
           </TabsContent>
         </TabsRoot>
       </div>
+      <Footer className="px-12" />
     </div>
   );
 }

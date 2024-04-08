@@ -16,6 +16,7 @@ import { VerdantLibraries } from '@/components/storage/VerdantLibraries.jsx';
 import { LogoutButton, useLocalStorage } from '@biscuits/client';
 import { apps } from '@biscuits/apps';
 import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
+import { Footer } from '@/components/help/Footer.jsx';
 
 const PlanPageData = graphql(`
   query PlanPageData {
@@ -92,6 +93,7 @@ export function PlanPage({}: PlanPageProps) {
             )}
           </Suspense>
         </ErrorBoundary>
+        <Footer />
       </PageContent>
     </PageRoot>
   );

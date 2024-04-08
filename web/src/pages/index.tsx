@@ -1,7 +1,11 @@
 import { TopLoader } from '@/components/nav/TopLoader.jsx';
-import { Outlet, Router, makeRoutes } from '@verdant-web/react-router';
+import {
+  Outlet,
+  RestoreScroll,
+  Router,
+  makeRoutes,
+} from '@verdant-web/react-router';
 import { Suspense, lazy } from 'react';
-import RefreshSessionPage from './RefreshSessionPage.jsx';
 import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
 const HomePage = lazy(() => import('./HomePage.js'));
 const ErrorPage = lazy(() => import('./ErrorPage.jsx'));
@@ -33,10 +37,6 @@ const routes = makeRoutes([
     component: lazy(() => import('./ClaimInvitePage.js')),
   },
   {
-    path: '/refresh-session',
-    component: RefreshSessionPage,
-  },
-  {
     path: '/apps',
     component: lazy(() => import('./AppsPage.jsx')),
   },
@@ -47,6 +47,14 @@ const routes = makeRoutes([
   {
     path: '/about',
     component: lazy(() => import('./AboutPage.jsx')),
+  },
+  {
+    path: '/privacy',
+    component: lazy(() => import('./PrivacyPage.js')),
+  },
+  {
+    path: '/tos',
+    component: lazy(() => import('./TermsPage.js')),
   },
   {
     path: '*',
@@ -61,6 +69,7 @@ export function Pages() {
         <Suspense>
           <TopLoader />
           <Outlet />
+          <RestoreScroll />
         </Suspense>
       </ErrorBoundary>
     </Router>

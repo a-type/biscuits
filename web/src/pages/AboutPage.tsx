@@ -1,3 +1,4 @@
+import { Footer } from '@/components/help/Footer.jsx';
 import { Button } from '@a-type/ui/components/button';
 import { PageContent, PageRoot } from '@a-type/ui/components/layouts';
 import { H1, H2, P } from '@a-type/ui/components/typography';
@@ -91,6 +92,7 @@ export function AboutPage({}: AboutPageProps) {
             <Link to="/">Go home</Link>
           </Button>
         </div>
+        <Footer />
       </PageContent>
     </PageRoot>
   );

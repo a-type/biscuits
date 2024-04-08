@@ -3,5 +3,11 @@ import { createGraphQLClient } from '@biscuits/client';
 import { toast } from 'react-hot-toast';
 
 export const client = createGraphQLClient({
-  onError: toast.error.bind(toast),
+  onError: (err) => {
+    toast.error(err);
+  },
+  onLoggedOut: () => {
+    // redirect to login
+    window.location.href = '/login';
+  },
 });

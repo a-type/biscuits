@@ -134,6 +134,9 @@ export const hooks = createHooks<Presence, Profile>({
                   categoryId,
                 },
               },
+              context: {
+                hideErrors: true,
+              },
             });
           } catch (err) {
             console.error(err);
@@ -161,6 +164,9 @@ export const hooks = createHooks<Presence, Profile>({
               query: foodLookupQuery,
               variables: {
                 food,
+              },
+              context: {
+                hideErrors: true,
               },
             });
             if (remoteLookup?.data?.food) {
@@ -264,8 +270,12 @@ export const hooks = createHooks<Presence, Profile>({
   useResetCategoriesToDefault: (client) =>
     useCallback(async () => {
       const defaultCategories =
-        (await graphqlClient.query({ query: defaultCategoriesQuery }))?.data
-          ?.categories ?? [];
+        (
+          await graphqlClient.query({
+            query: defaultCategoriesQuery,
+            context: { hideErrors: true },
+          })
+        )?.data?.categories ?? [];
       const existingCategories = await client.categories.findAll().resolved;
       const existingIdsToDelete = existingCategories
         .map((cat) => cat.get('id'))
@@ -641,6 +651,9 @@ export async function addItems(
                     query: foodLookupQuery,
                     variables: {
                       food: parsed.food,
+                    },
+                    context: {
+                      hideErrors: true,
                     },
                   })
                 ).data?.food ?? null;

@@ -33,6 +33,7 @@ export default defineConfig(({ mode }) => ({
         main: resolve(__dirname, 'index.html'),
         appPicker: resolve(__dirname, 'appPicker/index.html'),
         refreshSession: resolve(__dirname, 'refreshSession/index.html'),
+        storeRefreshToken: resolve(__dirname, 'storeRefreshToken/index.html'),
       },
     },
   },

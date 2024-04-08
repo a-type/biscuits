@@ -18,7 +18,7 @@ function AppIcons() {
 
   const goTo = (id: string) => {
     window.parent.postMessage(
-      JSON.stringify({ type: 'navigate', payload: { appId: id } }),
+      { type: 'navigate', payload: { appId: id } },
       '*',
     );
   };
