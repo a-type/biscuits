@@ -19,6 +19,7 @@ const membersQuery = graphql(`
       id
       role
       plan {
+        id
         members {
           id
           name
