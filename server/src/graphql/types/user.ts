@@ -3,23 +3,33 @@ import { builder } from '../builder.js';
 import { createResults, keyIndexes } from '../dataloaders/index.js';
 import { assignTypeName, hasTypeName } from '../relay.js';
 import { Plan } from './plan.js';
+import { BiscuitsError } from '@biscuits/error';
 
 builder.queryField('me', (t) =>
   t.field({
     type: 'User',
-    nullable: true,
+    nullable: false,
     resolve: async (_, __, ctx) => {
-      if (ctx.session?.userId) {
-        const user = await ctx.db
-          .selectFrom('User')
-          .selectAll()
-          .where('id', '=', ctx.session.userId)
-          .executeTakeFirst();
-        if (user) {
-          return assignTypeName('User')(user);
-        }
+      if (!ctx.session?.userId) {
+        throw new BiscuitsError(
+          BiscuitsError.Code.Unauthorized,
+          'Not logged in',
+        );
       }
-      return null;
+
+      const user = await ctx.db
+        .selectFrom('User')
+        .selectAll()
+        .where('id', '=', ctx.session.userId)
+        .executeTakeFirst();
+      if (user) {
+        return assignTypeName('User')(user);
+      }
+
+      throw new BiscuitsError(
+        BiscuitsError.Code.Unexpected,
+        'Could not access your account. Please contact support.',
+      );
     },
   }),
 );

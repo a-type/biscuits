@@ -2,7 +2,7 @@ import { BiscuitsError } from '@biscuits/error';
 import { initGraphQLTada } from 'gql.tada';
 import { fetch } from './fetch.js';
 import type { introspection } from './graphql-env.d.js';
-import { CONFIG } from './index.js';
+import { CONFIG, refreshSession } from './index.js';
 import {
   ApolloClient,
   InMemoryCache,
@@ -10,10 +10,12 @@ import {
   from,
   useQuery,
   NetworkStatus,
+  Observable,
 } from '@apollo/client';
 import { onError, ErrorHandler } from '@apollo/client/link/error';
 import { RetryLink } from '@apollo/client/link/retry';
 import { HttpLink } from '@apollo/client/link/http';
+import { setContext } from '@apollo/client/link/context';
 
 export const graphql = initGraphQLTada<{
   introspection: introspection;
@@ -27,7 +29,7 @@ export { readFragment } from 'gql.tada';
 export type { FragmentOf, ResultOf, VariablesOf } from 'gql.tada';
 
 function createErrorHandler(onError?: (err: string) => void): ErrorHandler {
-  return ({ graphQLErrors, networkError }) => {
+  return ({ graphQLErrors, networkError, operation, forward }) => {
     let errorMessage: string | undefined =
       'An unexpected error occurred. Please try again.';
     if (graphQLErrors) {
@@ -40,9 +42,18 @@ function createErrorHandler(onError?: (err: string) => void): ErrorHandler {
             code < 4020 &&
             code !== BiscuitsError.Code.SessionExpired
           ) {
-            const currentPath = window.location.pathname;
-            window.location.href =
-              '/join' + '?returnTo=' + encodeURIComponent(currentPath);
+            operation.setContext(async () => {
+              // attempt to refresh the session
+              const success = await refreshSession(CONFIG.API_ORIGIN);
+              if (success) {
+                // retry the original request
+                return forward(operation);
+              } else {
+                // failed to refresh the session - the user needs
+                // to log in to use this query.
+                return;
+              }
+            });
           } else {
             errorMessage = err.message;
           }
@@ -181,7 +192,11 @@ export function useMe() {
 
 export function useIsLoggedIn() {
   const result = useMe();
-  return [!!result.data?.me?.id, result.networkStatus !== NetworkStatus.ready];
+  return [
+    !!result.data?.me?.id,
+    result.networkStatus === NetworkStatus.loading ||
+      result.networkStatus === NetworkStatus.refetch,
+  ];
 }
 
 export function useCanSync() {

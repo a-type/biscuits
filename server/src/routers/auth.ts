@@ -50,7 +50,8 @@ authRouter
       .handleVerifyPasswordResetRequest(req)
       .catch(routeAuthErrorsToUi('/login')),
   )
-  .post('/refresh', authHandlers.handleRefreshSessionRequest);
+  .post('/refresh', authHandlers.handleRefreshSessionRequest)
+  .get('/session', authHandlers.handleSessionRequest);
 
 function routeAuthErrorsToUi(path: string) {
   return function (err: Error) {

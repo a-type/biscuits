@@ -57,10 +57,20 @@ const refreshTokenStorage = {
   clear: () => window.localStorage.removeItem('biscuits-refresh'),
 };
 
-export async function refreshSession(apiOrigin: string) {
+export async function refreshSession(
+  apiOrigin: string,
+  disableIframeFallback = false,
+) {
   const refreshToken = refreshTokenStorage.get();
-  if (!refreshToken || refreshToken === 'undefined')
-    return refreshSessionViaIframe();
+  if (!refreshToken || refreshToken === 'undefined') {
+    if (disableIframeFallback) {
+      console.error('no refresh token found');
+      return false;
+    } else {
+      console.log('attempting to refresh session via iframe');
+      return refreshSessionViaIframe();
+    }
+  }
 
   try {
     const response = await fetch(`${apiOrigin}/auth/refresh`, {
@@ -88,7 +98,7 @@ async function refreshSessionViaIframe() {
   let iframe: HTMLIFrameElement | null = null;
   try {
     return await new Promise<void>((resolve, reject) => {
-      const iframeUrl = `${CONFIG.HOME_ORIGIN}/refresh-session`;
+      const iframeUrl = `${CONFIG.HOME_ORIGIN}/refreshSession/`;
       // go ahead and subscribe to postMessage events
       window.addEventListener('message', (event) => {
         if (event.data.type === 'refresh-session') {
@@ -145,4 +155,12 @@ async function peekAtResponseBody(response: Response): Promise<{
     body: null,
     clone,
   };
+}
+
+export function login() {
+  window.location.href =
+    CONFIG.HOME_ORIGIN +
+    '/login' +
+    '?returnTo=' +
+    encodeURIComponent(window.location.href);
 }
