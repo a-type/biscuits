@@ -3,10 +3,12 @@ import { useTripDays, useTripProgress } from '@/components/trips/hooks.js';
 import { getComputedQuantity } from '@/components/trips/utils.js';
 import { hooks } from '@/store.js';
 import { Button } from '@a-type/ui/components/button';
-import { Checkbox, CheckboxRoot } from '@a-type/ui/components/checkbox';
+import { CheckboxRoot } from '@a-type/ui/components/checkbox';
 import { CollapsibleSimple } from '@a-type/ui/components/collapsible';
 import { Icon } from '@a-type/ui/components/icon';
 import { LiveUpdateTextField } from '@a-type/ui/components/liveUpdateTextField';
+import { NumberStepper } from '@a-type/ui/components/numberStepper';
+import { useParticles } from '@a-type/ui/components/particles';
 import {
   Popover,
   PopoverAnchor,
@@ -21,6 +23,7 @@ import {
 } from '@a-type/ui/components/tabs';
 import { H4 } from '@a-type/ui/components/typography';
 import { useLongPress } from '@a-type/ui/hooks';
+import { usePageTitle } from '@biscuits/client';
 import * as Progress from '@radix-ui/react-progress';
 import {
   List,
@@ -29,7 +32,6 @@ import {
   TripCompletions,
   TripCompletionsValue,
   TripExtraItems,
-  TripExtraItemsValue,
   TripExtraItemsValueItem,
 } from '@trip-tick.biscuits/verdant';
 import { Link, useSearchParams } from '@verdant-web/react-router';
@@ -38,10 +40,6 @@ import { useEffect, useRef, useState } from 'react';
 import { LocationSelect } from '../weather/LocationSelect.jsx';
 import { WeatherForecast } from '../weather/WeatherForecast.jsx';
 import { TripDateRange } from './TripDateRange.jsx';
-import { NumberStepper } from '@a-type/ui/components/numberStepper';
-import { useParticles } from '@a-type/ui/components/particles';
-import { Divider } from '@a-type/ui/components/divider';
-import { usePageTitle } from '@biscuits/client';
 
 export interface TripViewProps {
   tripId: string;
@@ -176,7 +174,7 @@ function TripViewChecklists({ trip }: { trip: Trip }) {
         <CollapsibleSimple open={editingLists}>
           <AddListsPicker trip={trip} className="p-2" />
         </CollapsibleSimple>
-        <TabsList className="important:justify-start sticky top-0 z-2 bg-white">
+        <TabsList className="important:justify-start sticky top-0 z-2 bg-wash">
           {mappedLists.map((list) => (
             <ListTab list={list} key={list.get('id')} trip={trip} />
           ))}

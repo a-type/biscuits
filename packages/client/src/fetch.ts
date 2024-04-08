@@ -131,8 +131,6 @@ async function refreshSessionViaIframe() {
         if (event.data.type === 'refresh-session') {
           if (event.data.success) {
             console.debug('refreshed session via iframe');
-            // store the new refresh token
-            refreshTokenStorage.set(event.data.success.refreshToken);
             resolve();
             clearTimeout(timeout);
           } else {
