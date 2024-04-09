@@ -446,17 +446,22 @@ function ChecklistItem({
           <LiveUpdateTextField
             value={description}
             onChange={onDescriptionChanged}
+            placeholder="What is it?"
+            className="flex-1"
           />
         ) : (
-          <label>{description}</label>
+          <label className="font-bold">{description}</label>
         )}
         {onQuantityChanged && editing ? (
           <NumberStepper
             value={computedQuantity}
             onChange={onQuantityChanged}
+            className="ml-auto"
           />
         ) : (
-          <span className="text-gray-7">×{computedQuantity}</span>
+          <span className="text-gray-7 ml-auto">
+            {completedQuantity} / {computedQuantity}
+          </span>
         )}
         {canEdit && (
           <Button
@@ -489,7 +494,7 @@ function ChecklistItem({
         {new Array(computedQuantity - 1).fill(0).map((_, i) => (
           <div
             key={i}
-            className="w-1px h-full bg-gray-4 absolute top-0 left-0"
+            className="w-1px h-full bg-gray-6 absolute top-0 left-0"
             style={{
               left: `${(100 / computedQuantity) * (i + 1)}%`,
             }}
