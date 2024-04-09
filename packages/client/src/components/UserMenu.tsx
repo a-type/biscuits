@@ -31,7 +31,7 @@ export function UserMenu({
   disableAppSettings,
   children,
 }: UserMenuProps) {
-  const isLoggedIn = useIsLoggedIn();
+  const [isLoggedIn] = useIsLoggedIn();
   const isOffline = useIsOffline();
   const appId = useAppId();
 
@@ -62,23 +62,7 @@ export function UserMenu({
             Offline - some features may be unavailable
           </div>
         )}
-        {getIsPWAInstalled() ? (
-          <DropdownMenuItem onClick={openPwaHackCatalog}>
-            More apps
-            <DropdownMenuItemRightSlot>
-              <Icon name="new_window" />
-            </DropdownMenuItemRightSlot>
-          </DropdownMenuItem>
-        ) : (
-          <DropdownMenuItem asChild>
-            <a href={`${CONFIG.HOME_ORIGIN}/apps`} target="_blank">
-              More apps
-              <DropdownMenuItemRightSlot>
-                <Icon name="new_window" />
-              </DropdownMenuItemRightSlot>
-            </a>
-          </DropdownMenuItem>
-        )}
+
         {!isLoggedIn ? (
           <DropdownMenuItem
             asChild
@@ -97,6 +81,23 @@ export function UserMenu({
               Mange plan
               <DropdownMenuItemRightSlot>
                 <Icon name="profile" />
+              </DropdownMenuItemRightSlot>
+            </a>
+          </DropdownMenuItem>
+        )}
+        {getIsPWAInstalled() ? (
+          <DropdownMenuItem onClick={openPwaHackCatalog}>
+            More apps
+            <DropdownMenuItemRightSlot>
+              <Icon name="new_window" />
+            </DropdownMenuItemRightSlot>
+          </DropdownMenuItem>
+        ) : (
+          <DropdownMenuItem asChild>
+            <a href={`${CONFIG.HOME_ORIGIN}/apps`} target="_blank">
+              More apps
+              <DropdownMenuItemRightSlot>
+                <Icon name="new_window" />
               </DropdownMenuItemRightSlot>
             </a>
           </DropdownMenuItem>

@@ -34,6 +34,7 @@ const libraryData = graphql(
   `
     query VerdantLibraryData($appId: String!) {
       plan {
+        id
         libraryInfo(app: $appId) {
           ...LibraryFragment
         }
@@ -48,6 +49,7 @@ const resetSync = graphql(
     mutation ResetSync($appId: String!) {
       resetSync(app: $appId) {
         plan {
+          id
           libraryInfo(app: $appId) {
             ...LibraryFragment
           }
