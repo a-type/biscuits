@@ -12,7 +12,7 @@ export function getComputedQuantity({
   additional: number;
 }) {
   if (perDays < 1) {
-    return additional + 1;
+    return quantity + additional;
   }
   return (
     additional +
