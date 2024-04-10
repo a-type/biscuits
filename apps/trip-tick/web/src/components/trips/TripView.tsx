@@ -414,7 +414,7 @@ function ChecklistItem({
 
   return (
     <div className="w-full p-2 flex flex-col gap-2">
-      <div className="w-full flex flex-row items-center gap-2">
+      <div className="w-full flex flex-row items-center gap-2 flex-wrap">
         <Popover open={state === 'holding' || state === 'candidate'}>
           <PopoverAnchor asChild>
             <CheckboxRoot
@@ -447,16 +447,16 @@ function ChecklistItem({
             value={description}
             onChange={onDescriptionChanged}
             placeholder="What is it?"
-            className="flex-1"
+            className="flex-1 min-w-50%"
           />
         ) : (
-          <label className="font-bold">{description}</label>
+          <label className="font-bold select-none">{description}</label>
         )}
         {onQuantityChanged && editing ? (
           <NumberStepper
             value={computedQuantity}
             onChange={onQuantityChanged}
-            className="ml-auto"
+            className="mr-auto"
           />
         ) : (
           <span className="text-gray-7 ml-auto">
@@ -466,7 +466,7 @@ function ChecklistItem({
         {canEdit && (
           <Button
             size="icon"
-            color="ghost"
+            color={editing ? 'default' : 'ghost'}
             onClick={() => setEditing((v) => !v)}
           >
             <Icon name={editing ? 'check' : 'pencil'} />
