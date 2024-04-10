@@ -134,3 +134,5 @@ dist
 .env.*
 
 backups/
+
+.DS_Store

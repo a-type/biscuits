@@ -1,4 +1,3 @@
-import { AppsGrid } from '@/components/AppsGrid.jsx';
 import { UserMenu } from '@/components/auth/UserMenu.js';
 import { Footer } from '@/components/help/Footer.jsx';
 import { AppDemo } from '@/components/promo/AppDemo.jsx';
@@ -30,7 +29,7 @@ export default function HomePage() {
         <PageFixedArea className="bg-transparent flex flex-row justify-between items-center py-2">
           <h1
             className={classNames(
-              'text-4xl m-0 font-normal text-primary-dark text-shadow',
+              'text-2xl sm:text-4xl m-0 font-normal text-primary-dark text-shadow',
               'bg-primary-wash p-2 rounded-lg leading-none',
             )}
           >
@@ -40,15 +39,19 @@ export default function HomePage() {
             <UserMenu />
           </Suspense>
         </PageFixedArea>
-        <div className="flex flex-col gap-2 min-h-[30vh] mb-4 mt-5 text-primary-dark font-semibold">
+        <div className="flex flex-col gap-2 min-h-[30vh] mb-4 mt-2 sm:mt-5 text-primary-dark font-semibold">
           <h2
             className={classNames(
-              '!text-8xl text-black mt-0 block mb-10 font-bold leading-none',
+              'text-4xl sm:text-8xl text-black mt-0 block sm:mb-5 sm:mb-10 font-bold leading-none',
             )}
           >
             Scratch-made apps
           </h2>
-          <P className={classNames('m-0 mb-6 text-inherit text-xl font-fancy')}>
+          <P
+            className={classNames(
+              'm-0 mb-6 text-inherit text-lg sm:text-xl font-fancy',
+            )}
+          >
             in Raleigh, NC
           </P>
           <P className="text-black text-lg leading-loose font-normal mb-4">
