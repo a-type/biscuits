@@ -121,7 +121,7 @@ function Forecast({
         )}
         <Icon
           name="arrowDown"
-          className="ml-auto [*[data-state=open]>&]:rotate-180 transition-transform"
+          className="ml-auto [*[data-state=open]>&]:rotate-180 transition-transform text-black"
         />
       </CollapsibleTrigger>
       <CollapsibleContent>
