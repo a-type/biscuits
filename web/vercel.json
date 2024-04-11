@@ -1,9 +1,9 @@
 {
   "routes": [
-    { "src": "/appPicker", "dest": "/appPicker/", "status": 200 },
-    { "src": "/refreshSession", "dest": "/refreshSession/", "status": 200 },
+    { "src": "/appPicker/", "dest": "/appPicker/", "status": 200 },
+    { "src": "/refreshSession/", "dest": "/refreshSession/", "status": 200 },
     {
-      "src": "/storeRefreshToken",
+      "src": "/storeRefreshToken/",
       "dest": "/storeRefreshToken/",
       "status": 200
     },
