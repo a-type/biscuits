@@ -1,5 +1,5 @@
 {
-  "unocss.root": ["web", "apps/trip-tick/web", "apps/gnocchi/web"],
+  // "unocss.root": ["web", "apps/trip-tick/web", "apps/gnocchi/web"],
   "typescript.tsdk": "node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "typescript.preferences.autoImportFileExcludePatterns": [
