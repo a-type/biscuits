@@ -140,6 +140,10 @@ builder.objectType('WeatherForecastDay', {
       type: TemperatureUnit,
       nullable: false,
     }),
+    willRain: t.boolean({
+      nullable: false,
+      resolve: (parent) => parent.precipitationMM > 3,
+    }),
   }),
 });
 
