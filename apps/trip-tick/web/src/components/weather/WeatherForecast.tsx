@@ -102,20 +102,20 @@ function Forecast({
   return (
     <CollapsibleRoot>
       <CollapsibleTrigger className="bg-transparent border-none flex flex-row items-center gap-1 flex-wrap p-2 w-full">
-        <Chip aria-label="High temperature">
+        <Chip aria-label="High temperature" className="text-black">
           <Icon name="arrowUp" className="text-attention-dark" />
           <span>
             {Math.round(data.weatherForecast.high)}
             <TempUnit unit={data.weatherForecast.temperatureUnit} />
           </span>
         </Chip>
-        <Chip aria-label="Low temperature">
+        <Chip aria-label="Low temperature" className="text-black">
           <Icon name="arrowDown" className="text-primary-dark" />
           {Math.round(data.weatherForecast.low)}
           <TempUnit unit={data.weatherForecast.temperatureUnit} />
         </Chip>
         {data.weatherForecast.willRain && (
-          <Chip>
+          <Chip className="text-black">
             <Raindrop /> Rain
           </Chip>
         )}
