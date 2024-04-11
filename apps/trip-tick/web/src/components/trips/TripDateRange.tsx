@@ -25,13 +25,14 @@ function formatDay(date: Date) {
 
 export function TripDateRange({ trip }: TripDateRangeProps) {
   const { startsAt, endsAt } = hooks.useWatch(trip);
-  const days = useTripDays(trip);
+  const nights = useTripDays(trip);
+  const days = nights + 1;
 
   const displayString =
     startsAt && endsAt
       ? `${formatDay(new Date(startsAt))} - ${formatDay(
           new Date(endsAt),
-        )} (${days} days)`
+        )} (${days} days, ${nights} nights)`
       : 'Select dates';
 
   const value = {
@@ -53,9 +54,9 @@ export function TripDateRange({ trip }: TripDateRangeProps) {
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
         <Button
-          color={days === 0 ? 'primary' : 'ghost'}
+          color={nights === 0 ? 'primary' : 'ghost'}
           className={
-            days === 0 ? 'ml-4' : 'font-normal text-wrap text-start text-sm'
+            nights === 0 ? 'ml-4' : 'font-normal text-wrap text-start text-sm'
           }
         >
           <Icon name="calendar" />

@@ -35,7 +35,7 @@ export function TripsList({}: TripsListProps) {
   const [past, future] = trips.reduce(
     ([past, future], trip) => {
       const startsAt = trip.get('startsAt');
-      if (startsAt && startsAt < Date.now()) {
+      if (startsAt && startsAt < Date.now() - 24 * 60 * 60 * 1000) {
         return [[...past, trip], future];
       } else {
         return [past, [...future, trip]];

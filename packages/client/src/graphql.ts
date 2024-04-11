@@ -226,10 +226,13 @@ export function useMe() {
 
 export function useIsLoggedIn() {
   const result = useMe();
+  // ignore if network error
+  const networkError = !!result.error?.networkError;
   return [
     !!result.data?.me?.id,
     result.networkStatus === NetworkStatus.loading ||
-      result.networkStatus === NetworkStatus.refetch,
+      result.networkStatus === NetworkStatus.refetch ||
+      networkError,
   ];
 }
 

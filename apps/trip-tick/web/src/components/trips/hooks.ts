@@ -80,5 +80,5 @@ export function useTripDays(trip: Trip) {
   if (!startsAt || !endsAt) {
     return 0;
   }
-  return Math.round((endsAt - startsAt) / 86400000) + 1;
+  return Math.round((endsAt - startsAt) / 86400000);
 }
