@@ -40,6 +40,8 @@ export interface UserTable {
 
   planId: string | null;
   planRole: 'admin' | 'user' | null;
+
+  preferences: Record<string, any>;
 }
 export type User = Selectable<UserTable>;
 export type NewUser = Insertable<UserTable>;

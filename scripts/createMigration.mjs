@@ -30,7 +30,7 @@ const versions = migrationFiles
   .map((f) => parseInt(f.slice(1), 10))
   .sort((a, b) => a - b);
 const latestVersion = versions[versions.length - 1];
-const nextVersion = latestVersion + 1;
+const nextVersion = `${latestVersion + 1}`.padStart(4, '0');
 
 const name = res.toLowerCase().replace(/\s/g, '_');
 const fileName = `v${nextVersion}_${name}.ts`;

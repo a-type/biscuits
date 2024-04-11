@@ -33,15 +33,6 @@ export function getComputedQuantity({
   const coldDays =
     forecast?.days?.filter((day) => day.low < coldThreshold).length || 0;
 
-  console.log({
-    hotThreshold,
-    coldThreshold,
-    forecast,
-    hotDays,
-    coldDays,
-    rainDays,
-  });
-
   let unrounded = 0;
   let conditionedDays = rawDays;
   switch (condition) {

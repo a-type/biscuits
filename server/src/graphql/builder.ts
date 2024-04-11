@@ -57,6 +57,8 @@ export const builder = new SchemaBuilder<{
     CancelPlanInvitationResult: { planId: string };
     ResetSyncResult: { planId: string };
     ChangelogItem: ChangelogItem & { __typename: 'ChangelogItem' };
+    SetUserPreferenceResult: { userId: string; key: string };
+    UserPreference: { userId: string; key: string; value: any };
 
     // Gnocchi
     Food: Food & { __typename: 'Food' };
@@ -125,6 +127,10 @@ export const builder = new SchemaBuilder<{
       imageUrl?: string | null;
       important?: boolean | null;
       appId: string;
+    };
+    SetUserPreferenceInput: {
+      key: string;
+      value: any;
     };
 
     // Gnocchi

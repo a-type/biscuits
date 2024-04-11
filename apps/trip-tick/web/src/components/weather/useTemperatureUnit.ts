@@ -1,4 +1,4 @@
-import { useLocalStorage } from '@biscuits/client';
+import { useUserPreference } from '@biscuits/client';
 import {
   celsiusToKelvin,
   fahrenheitToKelvin,
@@ -7,7 +7,7 @@ import {
 } from './utils.js';
 
 export function useTemperatureUnit() {
-  const [unit, setUnit] = useLocalStorage('temperatureUnit', 'fahrenheit');
+  const [unit, setUnit] = useUserPreference('temperatureUnit', 'fahrenheit');
 
   return {
     unit,

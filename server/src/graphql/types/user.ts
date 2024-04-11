@@ -4,6 +4,7 @@ import { createResults, keyIndexes } from '../dataloaders/index.js';
 import { assignTypeName, hasTypeName } from '../relay.js';
 import { Plan } from './plan.js';
 import { BiscuitsError } from '@biscuits/error';
+import { assert } from '@a-type/utils';
 
 builder.queryField('me', (t) =>
   t.field({
@@ -73,6 +74,42 @@ builder.mutationFields((t) => ({
       return { id: result.id, type: 'User' };
     },
   }),
+  setUserPreference: t.field({
+    type: 'SetUserPreferenceResult',
+    args: {
+      input: t.arg({
+        type: 'SetUserPreferenceInput',
+        required: true,
+      }),
+    },
+    authScopes: {
+      user: true,
+    },
+    resolve: async (_, args, ctx) => {
+      assert(ctx.session);
+
+      const { preferences } = await ctx.db
+        .selectFrom('User')
+        .select('preferences')
+        .where('id', '=', ctx.session.userId)
+        .executeTakeFirstOrThrow();
+
+      await ctx.db
+        .updateTable('User')
+        .set({
+          preferences: {
+            ...preferences,
+            [args.input.key]: args.input.value,
+          },
+        })
+        .executeTakeFirstOrThrow();
+
+      return {
+        userId: ctx.session.userId,
+        key: args.input.key,
+      };
+    },
+  }),
 }));
 
 export const User = builder.loadableNodeRef('User', {
@@ -115,6 +152,54 @@ User.implement({
     email: t.exposeString('email'),
     imageUrl: t.exposeString('imageUrl', {
       nullable: true,
+    }),
+    preference: t.field({
+      type: 'UserPreference',
+      nullable: true,
+      args: {
+        key: t.arg({
+          type: 'String',
+          required: true,
+        }),
+      },
+      resolve: (user, args) => {
+        return {
+          userId: user.id,
+          key: args.key,
+          value: user.preferences[args.key],
+        };
+      },
+    }),
+  }),
+});
+
+builder.objectType('SetUserPreferenceResult', {
+  fields: (t) => ({
+    user: t.field({
+      type: User,
+      resolve: (parent) => parent.userId,
+    }),
+  }),
+});
+
+builder.objectType('UserPreference', {
+  fields: (t) => ({
+    id: t.id({
+      resolve: (p) => `${p.userId}-${p.key}`,
+    }),
+    value: t.field({
+      type: 'JSON',
+      resolve: (p) => p.value,
+    }),
+  }),
+});
+
+builder.inputType('SetUserPreferenceInput', {
+  fields: (t) => ({
+    key: t.string({ required: true }),
+    value: t.field({
+      type: 'JSON',
+      required: true,
     }),
   }),
 });

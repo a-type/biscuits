@@ -994,6 +994,30 @@ export type introspection = {
             ]
           },
           {
+            "name": "setUserPreference",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "SetUserPreferenceResult",
+                "ofType": null
+              }
+            },
+            "args": [
+              {
+                "name": "input",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "SetUserPreferenceInput",
+                    "ofType": null
+                  }
+                }
+              }
+            ]
+          },
+          {
             "name": "setUserRole",
             "type": {
               "kind": "INTERFACE",
@@ -2433,6 +2457,53 @@ export type introspection = {
       },
       {
         "kind": "INPUT_OBJECT",
+        "name": "SetUserPreferenceInput",
+        "inputFields": [
+          {
+            "name": "key",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            }
+          },
+          {
+            "name": "value",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "JSON",
+                "ofType": null
+              }
+            }
+          }
+        ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "SetUserPreferenceResult",
+        "fields": [
+          {
+            "name": "user",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "User",
+                "ofType": null
+              }
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
+      },
+      {
+        "kind": "INPUT_OBJECT",
         "name": "SetupPlanInput",
         "inputFields": [
           {
@@ -2642,6 +2713,27 @@ export type introspection = {
             "args": []
           },
           {
+            "name": "preference",
+            "type": {
+              "kind": "OBJECT",
+              "name": "UserPreference",
+              "ofType": null
+            },
+            "args": [
+              {
+                "name": "key",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              }
+            ]
+          },
+          {
             "name": "role",
             "type": {
               "kind": "SCALAR",
@@ -2657,6 +2749,37 @@ export type introspection = {
             "name": "Node"
           }
         ]
+      },
+      {
+        "kind": "OBJECT",
+        "name": "UserPreference",
+        "fields": [
+          {
+            "name": "id",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "value",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "JSON",
+                "ofType": null
+              }
+            },
+            "args": []
+          }
+        ],
+        "interfaces": []
       },
       {
         "kind": "OBJECT",
