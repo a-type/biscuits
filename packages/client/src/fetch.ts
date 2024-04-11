@@ -15,7 +15,7 @@ if (typeof window !== 'undefined') {
       }
       // remove it
       url.searchParams.delete('refreshToken');
-      url.searchParams.delete('refreshTokenExpiresAt');
+      url.searchParams.delete('refreshTokenExpires');
       window.history.replaceState({}, '', url.toString());
     }
   });

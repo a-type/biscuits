@@ -123,7 +123,7 @@ builder.objectType('WeatherForecastDay', {
   description: 'Weather forecast for a single day',
   fields: (t) => ({
     date: t.field({
-      type: 'DateTime',
+      type: 'Date',
       nullable: false,
       resolve: (parent) => new Date(parent.date),
     }),
@@ -181,11 +181,11 @@ builder.objectType('LocationAutocompleteSuggestion', {
 builder.inputType('WeatherForecastInput', {
   fields: (t) => ({
     startDate: t.field({
-      type: 'DateTime',
+      type: 'Date',
       required: true,
     }),
     endDate: t.field({
-      type: 'DateTime',
+      type: 'Date',
       required: true,
     }),
     latitude: t.float({

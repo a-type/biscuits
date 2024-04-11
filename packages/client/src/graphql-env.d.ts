@@ -429,6 +429,10 @@ export type introspection = {
       },
       {
         "kind": "SCALAR",
+        "name": "Date"
+      },
+      {
+        "kind": "SCALAR",
         "name": "DateTime"
       },
       {
@@ -2767,7 +2771,7 @@ export type introspection = {
               "kind": "NON_NULL",
               "ofType": {
                 "kind": "SCALAR",
-                "name": "DateTime",
+                "name": "Date",
                 "ofType": null
               }
             },
@@ -2846,7 +2850,7 @@ export type introspection = {
               "kind": "NON_NULL",
               "ofType": {
                 "kind": "SCALAR",
-                "name": "DateTime",
+                "name": "Date",
                 "ofType": null
               }
             }
@@ -2879,7 +2883,7 @@ export type introspection = {
               "kind": "NON_NULL",
               "ofType": {
                 "kind": "SCALAR",
-                "name": "DateTime",
+                "name": "Date",
                 "ofType": null
               }
             }

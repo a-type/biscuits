@@ -1,20 +1,10 @@
 import { AddListsPicker } from '@/components/trips/AddListsPicker.jsx';
 import { useTripDays, useTripProgress } from '@/components/trips/hooks.js';
-import { getComputedQuantity } from '@/components/trips/utils.js';
 import { hooks } from '@/store.js';
 import { Button } from '@a-type/ui/components/button';
-import { CheckboxRoot } from '@a-type/ui/components/checkbox';
 import { CollapsibleSimple } from '@a-type/ui/components/collapsible';
 import { Icon } from '@a-type/ui/components/icon';
 import { LiveUpdateTextField } from '@a-type/ui/components/liveUpdateTextField';
-import { NumberStepper } from '@a-type/ui/components/numberStepper';
-import { useParticles } from '@a-type/ui/components/particles';
-import {
-  Popover,
-  PopoverAnchor,
-  PopoverArrow,
-  PopoverContent,
-} from '@a-type/ui/components/popover';
 import {
   TabsContent,
   TabsList,
@@ -22,24 +12,33 @@ import {
   TabsTrigger,
 } from '@a-type/ui/components/tabs';
 import { H4 } from '@a-type/ui/components/typography';
-import { useLongPress } from '@a-type/ui/hooks';
-import { usePageTitle } from '@biscuits/client';
+import {
+  FragmentOf,
+  graphql,
+  useCanSync,
+  useLocalStorage,
+  usePageTitle,
+  useQuery,
+} from '@biscuits/client';
 import * as Progress from '@radix-ui/react-progress';
 import {
   List,
-  ListItemsItem,
   Trip,
   TripCompletions,
-  TripCompletionsValue,
   TripExtraItems,
-  TripExtraItemsValueItem,
 } from '@trip-tick.biscuits/verdant';
 import { Link, useSearchParams } from '@verdant-web/react-router';
 import classNames from 'classnames';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { LocationSelect } from '../weather/LocationSelect.jsx';
-import { WeatherForecast } from '../weather/WeatherForecast.jsx';
+import {
+  WeatherForecast,
+  forecast as forecastFragment,
+} from '../weather/WeatherForecast.jsx';
 import { TripDateRange } from './TripDateRange.jsx';
+import { ExtraItem, ListItem } from './TripItem.jsx';
+import { quantityForecast } from './utils.js';
+import { TemperatureUnit } from '../weather/TemperatureUnit.jsx';
 
 export interface TripViewProps {
   tripId: string;
@@ -53,15 +52,78 @@ export function TripView({ tripId }: TripViewProps) {
     return <div>Trip not found</div>;
   }
 
+  return <TripViewImpl trip={trip} />;
+}
+
+const weather = graphql(
+  `
+    query Weather($input: WeatherForecastInput!) {
+      weatherForecast(input: $input) {
+        ...Forecast
+        ...QuantityForecast
+      }
+    }
+  `,
+  [forecastFragment, quantityForecast],
+);
+
+function useWeather(trip: Trip) {
+  const { location, startsAt, endsAt, id } = hooks.useWatch(trip);
+  hooks.useWatch(location);
+  const latitude = location?.get('latitude') || 0;
+  const longitude = location?.get('longitude') || 0;
+
+  const { data } = useQuery(weather, {
+    variables: {
+      input: {
+        endDate: new Date(endsAt || 0).toDateString(),
+        startDate: new Date(startsAt || 0).toDateString(),
+        latitude,
+        longitude,
+        temperatureUnits: 'Fahrenheit',
+      },
+    },
+    skip: !latitude || !longitude || !startsAt || !endsAt,
+  });
+
+  const forecastData = data?.weatherForecast;
+
+  const [cached, setCached] = useLocalStorage(
+    `weather-${id}`,
+    forecastData,
+    true,
+  );
+  useEffect(() => {
+    if (forecastData) {
+      // need to unmask fragments for writing to local storage
+
+      setCached(forecastData);
+    }
+  }, [forecastData, setCached]);
+
+  const forecast = forecastData ?? cached;
+
+  return { forecast };
+}
+
+function TripViewImpl({ trip }: { trip: Trip }) {
+  const { forecast } = useWeather(trip);
+
   return (
     <div className="flex flex-col gap-4 w-full">
-      <TripViewInfo trip={trip} />
-      <TripViewChecklists trip={trip} />
+      <TripViewInfo trip={trip} forecast={forecast} />
+      <TripViewChecklists trip={trip} forecast={forecast} />
     </div>
   );
 }
 
-function TripViewInfo({ trip }: { trip: Trip }) {
+function TripViewInfo({
+  trip,
+  forecast,
+}: {
+  trip: Trip;
+  forecast?: FragmentOf<typeof forecastFragment>;
+}) {
   const { name, startsAt, endsAt, location } = hooks.useWatch(trip);
   const [editName, setEditName] = useState(!name || name === 'New Trip');
   return (
@@ -105,12 +167,18 @@ function TripViewInfo({ trip }: { trip: Trip }) {
         value={location}
         onChange={(v) => trip.set('location', v)}
       />
-      <WeatherForecast trip={trip} />
+      {forecast && <WeatherForecast forecast={forecast} />}
     </div>
   );
 }
 
-function TripViewChecklists({ trip }: { trip: Trip }) {
+function TripViewChecklists({
+  trip,
+  forecast,
+}: {
+  trip: Trip;
+  forecast?: FragmentOf<typeof quantityForecast>;
+}) {
   const { lists, completions, extraItems } = hooks.useWatch(trip);
   const days = useTripDays(trip);
   hooks.useWatch(lists);
@@ -190,6 +258,7 @@ function TripViewChecklists({ trip }: { trip: Trip }) {
               days={days}
               completions={completions}
               extraItems={extraItems}
+              forecast={forecast}
             />
           </TabsContent>
         );
@@ -220,16 +289,24 @@ function TripViewChecklist({
   days,
   completions,
   extraItems,
+  forecast,
 }: {
   list: List;
   days: number;
   completions: TripCompletions;
   extraItems: TripExtraItems;
+  forecast?: FragmentOf<typeof quantityForecast>;
 }) {
-  const { items, id: listId } = hooks.useWatch(list);
+  const {
+    items,
+    id: listId,
+    hotThreshold,
+    coldThreshold,
+  } = hooks.useWatch(list);
   hooks.useWatch(items);
   hooks.useWatch(completions);
   hooks.useWatch(extraItems);
+  const isSubscribed = useCanSync();
 
   let extraItemsForList = extraItems.get(listId) ?? null;
   if (Array.isArray(extraItemsForList)) {
@@ -238,19 +315,35 @@ function TripViewChecklist({
   }
 
   return (
-    <div className="flex flex-col gap-6">
-      <ul className="list-none flex flex-col gap-4 m-0 p-0">
+    <div className="flex flex-col">
+      {isSubscribed && (
+        <div className="text-xs italic text-gray-7 flex flex-row gap-2 m-2">
+          Hot days: {hotThreshold}+ <TemperatureUnit unit="Fahrenheit" />. Cold
+          days: {coldThreshold}- <TemperatureUnit unit="Fahrenheit" />.{' '}
+          <Link
+            className="font-bold inline-flex items-center flex-row gap-2 ml-auto"
+            to={`/lists/${list.get('id')}`}
+          >
+            Configure in list
+            <Icon name="gear" />
+          </Link>
+        </div>
+      )}
+      <ul className="list-none flex flex-col gap-1 m-0 p-0 mb-6">
         {items.map((item) => {
           const completion = completions.get(item.get('id')) ?? 0;
           return (
             <li key={item.get('id')} className="m-0 p-0">
-              <TripViewChecklistItem
+              <ListItem
                 item={item}
                 days={days}
                 completion={completion}
                 onCompletionChanged={(value) => {
                   completions.set(item.get('id'), value);
                 }}
+                forecast={forecast}
+                hotThreshold={hotThreshold}
+                coldThreshold={coldThreshold}
               />
             </li>
           );
@@ -270,237 +363,34 @@ function TripViewChecklist({
           );
         })}
       </ul>
-      <Button
-        onClick={() => {
-          if (!extraItemsForList) {
-            extraItems.set(listId, [
-              {
+      <div className="flex flex-col gap-4">
+        <Button
+          onClick={() => {
+            if (!extraItemsForList) {
+              extraItems.set(listId, [
+                {
+                  quantity: 1,
+                },
+              ]);
+            } else {
+              extraItemsForList.push({
                 quantity: 1,
-              },
-            ]);
-          } else {
-            extraItemsForList.push({
-              quantity: 1,
-            });
-          }
-        }}
-        size="small"
-        className="self-start"
-      >
-        <Icon name="plus" /> Add item
-      </Button>
-      <p className="text-sm italic text-gray-7">
-        New items are only applied to this trip.{' '}
-        <Link className="font-bold" to={`/lists/${list.get('id')}`}>
-          Edit the list
-        </Link>{' '}
-        if you want them for future trips.
-      </p>
-    </div>
-  );
-}
-
-function TripViewChecklistItem({
-  item,
-  days,
-  completion,
-  onCompletionChanged,
-}: {
-  item: ListItemsItem;
-  days: number;
-  completion: TripCompletionsValue;
-  onCompletionChanged: (completion: TripCompletionsValue) => void;
-}) {
-  const { description, perDays, quantity, additional, roundDown } =
-    hooks.useWatch(item);
-  const computedQuantity = getComputedQuantity({
-    perDays,
-    quantity,
-    days,
-    additional,
-    roundDown,
-  });
-
-  return (
-    <ChecklistItem
-      description={description}
-      completedQuantity={completion}
-      computedQuantity={computedQuantity}
-      onCompletionChanged={onCompletionChanged}
-    />
-  );
-}
-
-function ExtraItem({
-  item,
-  completion,
-  onCompletionChanged,
-}: {
-  item: TripExtraItemsValueItem;
-  completion: TripCompletionsValue;
-  onCompletionChanged: (completion: TripCompletionsValue) => void;
-}) {
-  const { description, quantity } = hooks.useWatch(item);
-
-  return (
-    <ChecklistItem
-      description={description}
-      completedQuantity={completion}
-      computedQuantity={quantity}
-      onCompletionChanged={onCompletionChanged}
-      onDescriptionChanged={(value) => item.set('description', value)}
-      onQuantityChanged={(value) => item.set('quantity', value)}
-    />
-  );
-}
-
-function ChecklistItem({
-  computedQuantity,
-  completedQuantity,
-  onCompletionChanged,
-  description,
-  onDescriptionChanged,
-  onQuantityChanged,
-}: {
-  computedQuantity: number;
-  completedQuantity: number;
-  onCompletionChanged: (value: number) => void;
-  description: string;
-  onDescriptionChanged?: (value: string) => void;
-  onQuantityChanged?: (value: number) => void;
-}) {
-  const completed = completedQuantity >= computedQuantity;
-
-  const mainOnChecked = (checked: boolean) => {
-    if (checked) {
-      onCompletionChanged(completedQuantity + 1);
-    } else {
-      onCompletionChanged(0);
-    }
-  };
-
-  const {
-    ref,
-    state,
-    props: holdProps,
-  } = useLongPress({
-    onActivate() {},
-    onDurationReached: () => {
-      onCompletionChanged(computedQuantity);
-    },
-    // effectively disable, until supported...
-    delay: completed ? 60 * 1000 : 400,
-    duration: 1000,
-  });
-
-  const canEdit = onDescriptionChanged || onQuantityChanged;
-  const [editing, setEditing] = useState(canEdit && !description);
-
-  const particles = useParticles();
-  const barRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    if (completed && barRef.current) {
-      particles?.elementExplosion({
-        count: 40,
-        element: barRef.current,
-        color: {
-          opacity: 1,
-          space: 'rgb',
-          values: [115, 219, 160],
-        },
-      });
-    }
-  }, [completed, particles]);
-
-  return (
-    <div className="w-full p-2 flex flex-col gap-2">
-      <div className="w-full flex flex-row items-center gap-2 flex-wrap">
-        <Popover open={state === 'holding' || state === 'candidate'}>
-          <PopoverAnchor asChild>
-            <CheckboxRoot
-              checked={completed}
-              onCheckedChange={mainOnChecked}
-              className="w-32px h-32px rounded-full touch-none flex items-center justify-center text-black"
-              ref={ref}
-              {...holdProps}
-            >
-              <Icon name={completed ? 'check' : 'plus'} />
-            </CheckboxRoot>
-          </PopoverAnchor>
-          <PopoverContent>
-            <PopoverArrow />
-            <div className="absolute z--1 top-0 left-0 h-full bg-accent-wash animate-progress-bar animate-duration-[1s] animate-delay-[400ms] animate-forwards" />
-            <div className="flex flex-row">
-              Hold to complete
-              <Icon
-                className={classNames(
-                  'ml-2',
-                  state === 'candidate' ? 'opacity-100' : 'opacity-50',
-                )}
-                name="check"
-              />
-            </div>
-          </PopoverContent>
-        </Popover>
-        {onDescriptionChanged && editing ? (
-          <LiveUpdateTextField
-            value={description}
-            onChange={onDescriptionChanged}
-            placeholder="What is it?"
-            className="flex-1 min-w-50%"
-          />
-        ) : (
-          <label className="font-bold select-none">{description}</label>
-        )}
-        {onQuantityChanged && editing ? (
-          <NumberStepper
-            value={computedQuantity}
-            onChange={onQuantityChanged}
-            className="mr-auto"
-          />
-        ) : (
-          <span className="text-gray-7 ml-auto">
-            {completedQuantity} / {computedQuantity}
-          </span>
-        )}
-        {canEdit && (
-          <Button
-            size="icon"
-            color={editing ? 'default' : 'ghost'}
-            onClick={() => setEditing((v) => !v)}
-          >
-            <Icon name={editing ? 'check' : 'pencil'} />
-          </Button>
-        )}
-      </div>
-      <Progress.Root
-        value={completedQuantity / computedQuantity}
-        className="relative overflow-hidden rounded-full w-full h-12px border border-solid border-black"
-        style={{
-          // Fix overflow clipping in Safari
-          // https://gist.github.com/domske/b66047671c780a238b51c51ffde8d3a0
-          transform: 'translateZ(0)',
-        }}
-        ref={barRef}
-      >
-        <Progress.Indicator
-          className="bg-accent w-full h-full transition-transform duration-[300ms] ease-out"
-          style={{
-            transform: `translateX(-${
-              100 * (1 - completedQuantity / computedQuantity)
-            }%)`,
+              });
+            }
           }}
-        />
-        {new Array(computedQuantity - 1).fill(0).map((_, i) => (
-          <div
-            key={i}
-            className="w-1px h-full bg-gray-6 absolute top-0 left-0"
-            style={{
-              left: `${(100 / computedQuantity) * (i + 1)}%`,
-            }}
-          />
-        ))}
-      </Progress.Root>
+          size="small"
+          className="self-start"
+        >
+          <Icon name="plus" /> Add item
+        </Button>
+        <p className="text-sm italic text-gray-7">
+          New items are only applied to this trip.{' '}
+          <Link className="font-bold" to={`/lists/${list.get('id')}`}>
+            Edit the list
+          </Link>{' '}
+          if you want them for future trips.
+        </p>
+      </div>
     </div>
   );
 }

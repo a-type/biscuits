@@ -207,7 +207,7 @@ export async function getForecast(
         continue;
       }
       forecast.push({
-        date: dayDate.toISOString(),
+        date: dayDate.toDateString(),
         high: day.temp.max,
         low: day.temp.min,
         precipitationMM: day.rain ?? 0,
@@ -298,6 +298,12 @@ export interface EstimatedWeatherInput {
   temperatureUnits: TemperatureUnit;
 }
 
+function formatDate(date: Date) {
+  const month = `${date.getMonth() + 1}`.padStart(2, '0');
+  const day = `${date.getDate()}`.padStart(2, '0');
+  return `${date.getFullYear()}-${month}-${day}`;
+}
+
 export async function getEstimatedWeather(
   input: EstimatedWeatherInput,
 ): Promise<WeatherForecastDay> {
@@ -305,8 +311,8 @@ export async function getEstimatedWeather(
   params.set('lat', input.latitude.toString());
   params.set('lon', input.longitude.toString());
   params.set('appid', OPENWEATHER_API_KEY);
-  // date must be formatted YYYY-MM-DD
-  params.set('date', input.date.toISOString().split('T')[0]);
+  // date must be formatted YYYY-MM-DD, ignoring tz
+  params.set('date', formatDate(input.date));
   params.set(
     'units',
     input.temperatureUnits === TemperatureUnit.Celsius ? 'metric' : 'imperial',

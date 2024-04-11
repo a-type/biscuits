@@ -93,6 +93,10 @@ export const builder = new SchemaBuilder<{
       Input: Date;
       Output: Date;
     };
+    Date: {
+      Input: Date;
+      Output: Date;
+    };
     JSON: {
       Input: unknown;
       Output: unknown;

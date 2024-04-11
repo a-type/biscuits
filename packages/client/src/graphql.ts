@@ -1,31 +1,29 @@
+import {
+  ApolloClient,
+  InMemoryCache,
+  NetworkStatus,
+  from,
+  useQuery,
+} from '@apollo/client';
+import { ErrorHandler, onError } from '@apollo/client/link/error';
+import { HttpLink } from '@apollo/client/link/http';
+import { RetryLink } from '@apollo/client/link/retry';
 import { BiscuitsError } from '@biscuits/error';
 import { initGraphQLTada } from 'gql.tada';
 import { fetch } from './fetch.js';
 import type { introspection } from './graphql-env.d.js';
 import { CONFIG, refreshSession } from './index.js';
-import {
-  ApolloClient,
-  InMemoryCache,
-  useSuspenseQuery,
-  from,
-  useQuery,
-  NetworkStatus,
-  Observable,
-} from '@apollo/client';
-import { onError, ErrorHandler } from '@apollo/client/link/error';
-import { RetryLink } from '@apollo/client/link/retry';
-import { HttpLink } from '@apollo/client/link/http';
-import { setContext } from '@apollo/client/link/context';
 
 export const graphql = initGraphQLTada<{
   introspection: introspection;
   scalars: {
     DateTime: string;
+    Date: string;
     JSON: any;
   };
 }>();
 
-export { readFragment } from 'gql.tada';
+export { maskFragments, readFragment } from 'gql.tada';
 export type { FragmentOf, ResultOf, VariablesOf } from 'gql.tada';
 
 function createErrorHandler(
@@ -176,22 +174,23 @@ export function createMinimalGraphQLClient({
 }
 
 export {
-  useApolloClient as useClient,
-  useMutation,
-  useQuery,
-  useSubscription,
+  ApolloError,
+  NetworkStatus,
+  isApolloError as isClientError,
   useBackgroundQuery,
+  useApolloClient as useClient,
   useFragment,
   useLazyQuery,
   useLoadableQuery,
-  useSuspenseQuery,
+  useMutation,
+  useQuery,
   useReactiveVar,
   useReadQuery,
-  NetworkStatus,
-  ApolloError,
-  isApolloError as isClientError,
+  useSubscription,
+  useSuspenseQuery,
 } from '@apollo/client';
 export type {
+  ErrorPolicy,
   GraphQLRequest,
   UseBackgroundQueryResult,
   UseFragmentOptions,
@@ -199,7 +198,6 @@ export type {
   UseLoadableQueryResult,
   UseReadQueryResult,
   UseSuspenseQueryResult,
-  ErrorPolicy,
 } from '@apollo/client';
 
 // some minimal queries for common use

@@ -85,21 +85,29 @@ export type ListItemsItem = ObjectEntity<
 export type ListItemsItemId = string;
 export type ListItemsItemDescription = string;
 export type ListItemsItemQuantity = number;
-export type ListItemsItemPerDays = number;
+export type ListItemsItemPeriod = "trip" | "day" | "night";
+export type ListItemsItemCondition = "rain" | "hot" | "cold";
+export type ListItemsItemPeriodMultiplier = number;
 export type ListItemsItemAdditional = number;
 export type ListItemsItemRoundDown = boolean;
+export type ListHotThreshold = number;
+export type ListColdThreshold = number;
 export type ListInit = {
   id?: string;
   createdAt?: number;
   name?: string;
   items?: ListItemsInit;
+  hotThreshold?: number;
+  coldThreshold?: number;
 };
 
 export type ListItemsItemInit = {
   id?: string;
   description?: string;
   quantity?: number;
-  perDays?: number;
+  period?: "trip" | "day" | "night";
+  condition?: "rain" | "hot" | "cold" | null;
+  periodMultiplier?: number;
   additional?: number;
   roundDown?: boolean;
 };
@@ -109,13 +117,17 @@ export type ListDestructured = {
   createdAt: number;
   name: string;
   items: ListItems;
+  hotThreshold: number;
+  coldThreshold: number;
 };
 
 export type ListItemsItemDestructured = {
   id: string;
   description: string;
   quantity: number;
-  perDays: number;
+  period: "trip" | "day" | "night";
+  condition: "rain" | "hot" | "cold" | null;
+  periodMultiplier: number;
   additional: number;
   roundDown: boolean;
 };
@@ -125,13 +137,17 @@ export type ListSnapshot = {
   createdAt: number;
   name: string;
   items: ListItemsSnapshot;
+  hotThreshold: number;
+  coldThreshold: number;
 };
 
 export type ListItemsItemSnapshot = {
   id: string;
   description: string;
   quantity: number;
-  perDays: number;
+  period: "trip" | "day" | "night";
+  condition: "rain" | "hot" | "cold" | null;
+  periodMultiplier: number;
   additional: number;
   roundDown: boolean;
 };
@@ -313,7 +329,27 @@ export interface TripCreatedAtRangeFilter {
   lt?: number;
   order?: "asc" | "desc";
 }
+export interface TripStartsAtSortFilter {
+  where: "startsAt";
+  order: "asc" | "desc";
+}
+export interface TripStartsAtMatchFilter {
+  where: "startsAt";
+  equals: number;
+  order?: "asc" | "desc";
+}
+export interface TripStartsAtRangeFilter {
+  where: "startsAt";
+  gte?: number;
+  gt?: number;
+  lte?: number;
+  lt?: number;
+  order?: "asc" | "desc";
+}
 export type TripFilter =
   | TripCreatedAtSortFilter
   | TripCreatedAtMatchFilter
-  | TripCreatedAtRangeFilter;
+  | TripCreatedAtRangeFilter
+  | TripStartsAtSortFilter
+  | TripStartsAtMatchFilter
+  | TripStartsAtRangeFilter;
