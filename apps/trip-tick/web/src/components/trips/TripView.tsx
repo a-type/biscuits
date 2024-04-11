@@ -39,6 +39,7 @@ import { TripDateRange } from './TripDateRange.jsx';
 import { ExtraItem, ListItem } from './TripItem.jsx';
 import { quantityForecast } from './utils.js';
 import { TemperatureUnit } from '../weather/TemperatureUnit.jsx';
+import { useTemperatureUnit } from '../weather/useTemperatureUnit.js';
 
 export interface TripViewProps {
   tripId: string;
@@ -80,7 +81,8 @@ function useWeather(trip: Trip) {
         startDate: new Date(startsAt || 0).toDateString(),
         latitude,
         longitude,
-        temperatureUnits: 'Fahrenheit',
+        // matches list config values. will be converted for display.
+        temperatureUnits: 'Kelvin',
       },
     },
     skip: !latitude || !longitude || !startsAt || !endsAt,
@@ -307,6 +309,7 @@ function TripViewChecklist({
   hooks.useWatch(completions);
   hooks.useWatch(extraItems);
   const isSubscribed = useCanSync();
+  const { toDisplay } = useTemperatureUnit();
 
   let extraItemsForList = extraItems.get(listId) ?? null;
   if (Array.isArray(extraItemsForList)) {
@@ -318,8 +321,8 @@ function TripViewChecklist({
     <div className="flex flex-col">
       {isSubscribed && (
         <div className="text-xs italic text-gray-7 flex flex-row gap-2 m-2">
-          Hot days: {hotThreshold}+ <TemperatureUnit unit="Fahrenheit" />. Cold
-          days: {coldThreshold}- <TemperatureUnit unit="Fahrenheit" />.{' '}
+          Hot days: {toDisplay(hotThreshold)}+ <TemperatureUnit />. Cold days:{' '}
+          {toDisplay(coldThreshold)}- <TemperatureUnit />.{' '}
           <Link
             className="font-bold inline-flex items-center flex-row gap-2 ml-auto"
             to={`/lists/${list.get('id')}`}

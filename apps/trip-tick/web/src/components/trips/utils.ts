@@ -13,8 +13,8 @@ export function getComputedQuantity({
   periodMultiplier,
   additional,
   weather: forecast,
-  hotThreshold = 70,
-  coldThreshold = 50,
+  hotThreshold = 299,
+  coldThreshold = 277,
 }: {
   quantity: number;
   roundDown: boolean;
@@ -32,6 +32,15 @@ export function getComputedQuantity({
     forecast?.days?.filter((day) => day.high > hotThreshold).length || 0;
   const coldDays =
     forecast?.days?.filter((day) => day.low < coldThreshold).length || 0;
+
+  console.log({
+    hotThreshold,
+    coldThreshold,
+    forecast,
+    hotDays,
+    coldDays,
+    rainDays,
+  });
 
   let unrounded = 0;
   let conditionedDays = rawDays;
@@ -65,7 +74,8 @@ export function getComputedQuantity({
   if (unrounded === 0) return 0;
 
   return (
-    additional + (roundDown ? Math.floor(unrounded) : Math.ceil(unrounded))
+    additional +
+    (roundDown ? Math.max(1, Math.floor(unrounded)) : Math.ceil(unrounded))
   );
 }
 

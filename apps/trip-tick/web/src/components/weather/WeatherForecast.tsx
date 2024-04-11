@@ -8,6 +8,7 @@ import { Icon } from '@a-type/ui/components/icon';
 import { FragmentOf, ResultOf, graphql, readFragment } from '@biscuits/client';
 import classNames from 'classnames';
 import { TemperatureUnit } from './TemperatureUnit.jsx';
+import { useTemperatureUnit } from './useTemperatureUnit.js';
 
 export interface WeatherForecastProps {
   className?: string;
@@ -43,18 +44,19 @@ export function WeatherForecast({
   className,
   forecast: data,
 }: WeatherForecastProps) {
+  const { toDisplay } = useTemperatureUnit();
   return (
     <CollapsibleRoot className={classNames('w-full', className)}>
       <CollapsibleTrigger className="bg-transparent border-none flex flex-row items-center gap-1 flex-wrap p-2 w-full">
         <Chip aria-label="High temperature" className="text-black">
           <Icon name="arrowUp" className="text-attention-dark" />
-          {Math.round(data.high)}
-          <TemperatureUnit unit={data.temperatureUnit} />
+          {toDisplay(data.high)}
+          <TemperatureUnit />
         </Chip>
         <Chip aria-label="Low temperature" className="text-black">
           <Icon name="arrowDown" className="text-primary-dark" />
-          {Math.round(data.low)}
-          <TemperatureUnit unit={data.temperatureUnit} />
+          {toDisplay(data.low)}
+          <TemperatureUnit />
         </Chip>
         {data.willRain && (
           <Chip className="text-black">
@@ -79,6 +81,7 @@ export function WeatherForecast({
 
 function DayForecast({ day }: { day: ResultOf<typeof forecastDay> }) {
   const { date, high, low, willRain } = day;
+  const { toDisplay } = useTemperatureUnit();
 
   return (
     <div className="flex flex-col items-center gap-1 border border-1 border-solid border-black bg-white rounded-md text-xs py-1 px-4 relative">
@@ -90,14 +93,14 @@ function DayForecast({ day }: { day: ResultOf<typeof forecastDay> }) {
           aria-label="High temperature"
         >
           <Icon name="arrowUp" />
-          {Math.round(high)}
+          {toDisplay(high)}
         </div>
         <div
           className="text-primary-dark flex flex-row items-center"
           aria-label="Low temperature"
         >
           <Icon name="arrowDown" />
-          {Math.round(low)}
+          {toDisplay(low)}
         </div>
       </div>
     </div>

@@ -4,6 +4,7 @@ import { OPENWEATHER_API_KEY } from '../config/secrets.js';
 export enum TemperatureUnit {
   Celsius = 'C',
   Fahrenheit = 'F',
+  Kelvin = 'K',
 }
 
 export interface WeatherForecastDay {
@@ -182,7 +183,9 @@ export async function getForecast(
       'units',
       input.temperatureUnits === TemperatureUnit.Celsius
         ? 'metric'
-        : 'imperial',
+        : input.temperatureUnits === TemperatureUnit.Kelvin
+          ? 'standard'
+          : 'imperial',
     );
 
     const response = await fetch(
@@ -315,7 +318,11 @@ export async function getEstimatedWeather(
   params.set('date', formatDate(input.date));
   params.set(
     'units',
-    input.temperatureUnits === TemperatureUnit.Celsius ? 'metric' : 'imperial',
+    input.temperatureUnits === TemperatureUnit.Celsius
+      ? 'metric'
+      : input.temperatureUnits === TemperatureUnit.Kelvin
+        ? 'standard'
+        : 'imperial',
   );
 
   const response = await fetch(

@@ -2519,6 +2519,9 @@ export type introspection = {
           },
           {
             "name": "Fahrenheit"
+          },
+          {
+            "name": "Kelvin"
           }
         ]
       },

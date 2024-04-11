@@ -59,11 +59,12 @@ const lists = schema.collection({
         },
       }),
     }),
+    // these are Kelvin
     hotThreshold: schema.fields.number({
-      default: 80,
+      default: 299,
     }),
     coldThreshold: schema.fields.number({
-      default: 40,
+      default: 277,
     }),
   },
   indexes: {

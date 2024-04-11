@@ -17,8 +17,9 @@ export default createMigration<V4Types, V5Types>(
     await migrate('lists', ({ items, ...rest }) => {
       return {
         ...rest,
-        hotThreshold: 80,
-        coldThreshold: 40,
+        // these are Kelvin
+        hotThreshold: 299,
+        coldThreshold: 277,
         items: items.map(({ perDays, ...rest }) => ({
           // perDays is 0 for "trip" mode in the old schema - make it 1
           // and interpret.

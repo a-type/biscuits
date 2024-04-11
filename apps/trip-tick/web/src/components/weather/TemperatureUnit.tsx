@@ -1,3 +1,6 @@
-export function TemperatureUnit({ unit }: { unit: 'Fahrenheit' | 'Celsius' }) {
-  return <span>{unit === 'Fahrenheit' ? '°F' : '°C'}</span>;
+import { useTemperatureUnit } from './useTemperatureUnit.js';
+
+export function TemperatureUnit() {
+  const { unit } = useTemperatureUnit();
+  return <span>{unit === 'fahrenheit' ? '°F' : '°C'}</span>;
 }
