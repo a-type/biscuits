@@ -394,7 +394,14 @@ export const hooks = createHooks<Presence, Profile>({
           url,
           client,
         );
-        recipe.update(scanned);
+        // FIXME: verdant will have a fix for this soon
+        let copyWithoutUndefined = Object.entries(scanned)
+          .filter(([_, v]) => v !== undefined)
+          .reduce((acc, [k, v]) => {
+            acc[k as keyof RecipeInit] = v;
+            return acc;
+          }, {} as Partial<RecipeInit>);
+        recipe.update(copyWithoutUndefined);
 
         // set this separately - do not merge
         if (instructions) {
