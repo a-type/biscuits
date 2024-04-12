@@ -123,7 +123,7 @@ async function refreshSessionViaIframe() {
       // failure case: if the iframe doesn't load, reject
       let timeout = setTimeout(() => {
         reject(new Error('iframe-based session refresh timed out'));
-      }, 5000);
+      }, 30000);
 
       const iframeUrl = `${CONFIG.HOME_ORIGIN}/refreshSession/`;
       // go ahead and subscribe to postMessage events
@@ -132,11 +132,11 @@ async function refreshSessionViaIframe() {
           if (event.data.success) {
             console.debug('refreshed session via iframe');
             resolve();
-            clearTimeout(timeout);
           } else {
             console.error('session refresh failed via iframe');
             reject(new Error('session refresh failed via iframe'));
           }
+          clearTimeout(timeout);
         }
       });
       iframe = document.createElement('iframe');
