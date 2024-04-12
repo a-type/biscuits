@@ -69,6 +69,9 @@ export function WeatherForecast({
         />
       </CollapsibleTrigger>
       <CollapsibleContent>
+        <span className="text-gray-7 italic text-xs pl-2 py-1">
+          Daily Forecast
+        </span>
         <div className="flex flex-row gap-1 overflow-x-auto w-full min-w-0 py-2">
           {data.days.map((day, i) => (
             <DayForecast day={day} key={i} />
@@ -82,10 +85,11 @@ export function WeatherForecast({
 function DayForecast({ day }: { day: ResultOf<typeof forecastDay> }) {
   const { date, high, low, willRain } = day;
   const { toDisplay } = useTemperatureUnit();
+  const dateNumber = date.split('-').pop();
 
   return (
     <div className="flex flex-col items-center gap-1 border border-1 border-solid border-black bg-white rounded-md text-xs py-1 px-4 relative">
-      <div className="font-bold text-sm">{new Date(date).getDate()}</div>
+      <div className="font-bold text-sm">{dateNumber}</div>
       {!!willRain && <Raindrop className="absolute top-1 right-1" />}
       <div className="flex flex-col items-center">
         <div

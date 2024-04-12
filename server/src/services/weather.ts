@@ -1,5 +1,7 @@
 import { BiscuitsError } from '@biscuits/error';
 import { OPENWEATHER_API_KEY } from '../config/secrets.js';
+import { compare } from '../dates.js';
+import { formatInTimeZone } from 'date-fns-tz';
 
 export enum TemperatureUnit {
   Celsius = 'C',
@@ -21,8 +23,8 @@ export interface WeatherForecast {
 }
 
 export interface WeatherForecastInput {
-  startDate: Date;
-  endDate: Date;
+  startDate: string;
+  endDate: string;
   latitude: number;
   longitude: number;
   temperatureUnits: TemperatureUnit;
@@ -153,27 +155,36 @@ export async function getForecast(
 ): Promise<WeatherForecast> {
   // validate provided dates - forecast can only
   // see 8 days ahead
-  const now = new Date();
-  if (input.endDate < input.startDate) {
+  const now = formatDate(new Date());
+  if (compare(input.endDate, input.startDate) < 0) {
     throw new BiscuitsError(
       BiscuitsError.Code.BadRequest,
       'End date must be after start date',
     );
   }
-  if (input.endDate < now) {
+  // end is in the past
+  if (compare(input.endDate, now) < 0) {
     return {
       days: [],
     };
   }
-  if (input.startDate < now) {
+  // start is in the past
+  if (compare(input.startDate, now) < 0) {
     input.startDate = now;
   }
-
+  const range = getDateRange(input.startDate, input.endDate);
+  console.log(range);
   const forecast: WeatherForecastDay[] = [];
+  let error: string | undefined = undefined;
 
   // only request main forecast API if some of the requested
   // days are within the 8-day range
-  if (input.endDate > new Date(now.getTime() + 8 * 24 * 60 * 60 * 1000)) {
+  let data: WeatherForecastApiResult | undefined = undefined;
+  const maxForecastDate = formatDate(
+    new Date(Date.now() + 8 * 24 * 60 * 60 * 1000),
+  );
+  // start date is within forecast range
+  if (compare(input.startDate, maxForecastDate) < 0) {
     const params = new URLSearchParams();
     params.set('lat', input.latitude.toString());
     params.set('lon', input.longitude.toString());
@@ -202,38 +213,29 @@ export async function getForecast(
         'Failed to fetch weather forecast',
       );
     }
-    const data: WeatherForecastApiResult = await response.json();
-    // match up the forecast days with the requested days
-    for (const day of data.daily) {
-      const dayDate = new Date(day.dt * 1000);
-      if (dayDate < input.startDate || dayDate > input.endDate) {
-        continue;
-      }
+    data = await response.json();
+  }
+  // match up the forecast days with the requested days
+  for (const day of range) {
+    const forecastDay = data?.daily.find(
+      (d) =>
+        formatDate(new Date((d.dt + (data?.timezone_offset ?? 0)) * 1000)) ===
+        day,
+    );
+    if (forecastDay) {
       forecast.push({
-        date: dayDate.toDateString(),
-        high: day.temp.max,
-        low: day.temp.min,
-        precipitationMM: day.rain ?? 0,
+        date: day,
+        high: forecastDay.temp.max,
+        low: forecastDay.temp.min,
+        precipitationMM: forecastDay.rain ?? 0,
         temperatureUnit: input.temperatureUnits,
       });
-    }
-  }
-
-  // was the end of the forecast range > 1 day behind the end of the
-  // user-supplied range? then we need to fetch data from the aggregate
-  // api for those days
-  const lastDayOfForecast = forecast[forecast.length - 1]?.date;
-  const mustEstimateFurther =
-    !lastDayOfForecast || new Date(lastDayOfForecast) < input.endDate;
-  if (mustEstimateFurther) {
-    const remainingRange = getDateRange(
-      new Date(lastDayOfForecast ?? input.startDate),
-      input.endDate,
-    );
-
-    for (const date of remainingRange) {
+    } else {
+      error = 'Dates more than 1 week in the future may be inaccurate';
+      // if the forecast API didn't return a forecast for the day,
+      // we need to estimate the weather
       const estimated = await getEstimatedWeather({
-        date: date,
+        date: day,
         latitude: input.latitude,
         longitude: input.longitude,
         temperatureUnits: input.temperatureUnits,
@@ -241,21 +243,29 @@ export async function getForecast(
       forecast.push(estimated);
     }
   }
+  console.log(forecast);
 
   return {
     days: forecast,
-    error: mustEstimateFurther
-      ? 'Dates more than 1 week in the future may be inaccurate'
-      : undefined,
+    error,
   };
 }
 
-function getDateRange(from: Date, to: Date) {
-  const range: Date[] = [];
-  const current = new Date(from);
-  while (current <= to) {
-    range.push(new Date(current));
-    current.setDate(current.getDate() + 1);
+export function getDateRange(from: string, to: string): string[] {
+  const days = Math.ceil(
+    (new Date(to).getTime() + 24 * 60 * 60 * 100 - new Date(from).getTime()) /
+      (24 * 60 * 60 * 1000),
+  );
+  // convert to UTC just in case system time isn't.
+  const fromNormalized = new Date(from);
+  fromNormalized.setTime(
+    fromNormalized.getTime() + fromNormalized.getTimezoneOffset() * 60 * 1000,
+  );
+  const range: string[] = [];
+  for (let i = 0; i < days; i++) {
+    range.push(
+      formatDate(new Date(fromNormalized.getTime() + i * 24 * 60 * 60 * 1000)),
+    );
   }
   return range;
 }
@@ -295,7 +305,7 @@ interface WeatherAggregateApiResult {
 }
 
 export interface EstimatedWeatherInput {
-  date: Date;
+  date: string;
   latitude: number;
   longitude: number;
   temperatureUnits: TemperatureUnit;
@@ -315,7 +325,8 @@ export async function getEstimatedWeather(
   params.set('lon', input.longitude.toString());
   params.set('appid', OPENWEATHER_API_KEY);
   // date must be formatted YYYY-MM-DD, ignoring tz
-  params.set('date', formatDate(input.date));
+  params.set('date', input.date);
+  console.log('specific weather date', input.date);
   params.set(
     'units',
     input.temperatureUnits === TemperatureUnit.Celsius

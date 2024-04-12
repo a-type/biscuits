@@ -125,7 +125,7 @@ builder.objectType('WeatherForecastDay', {
     date: t.field({
       type: 'Date',
       nullable: false,
-      resolve: (parent) => new Date(parent.date),
+      resolve: (parent) => parent.date,
     }),
     high: t.exposeFloat('high', {
       nullable: false,

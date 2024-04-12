@@ -68,6 +68,9 @@ const weather = graphql(
   [forecastFragment, quantityForecast],
 );
 
+function formatDate(date: number) {
+  return new Date(date).toISOString().split('T')[0];
+}
 function useWeather(trip: Trip) {
   const { location, startsAt, endsAt, id } = hooks.useWatch(trip);
   hooks.useWatch(location);
@@ -77,8 +80,8 @@ function useWeather(trip: Trip) {
   const { data } = useQuery(weather, {
     variables: {
       input: {
-        endDate: new Date(endsAt || 0).toDateString(),
-        startDate: new Date(startsAt || 0).toDateString(),
+        endDate: formatDate(endsAt ?? 0),
+        startDate: formatDate(startsAt ?? 0),
         latitude,
         longitude,
         // matches list config values. will be converted for display.
@@ -97,8 +100,6 @@ function useWeather(trip: Trip) {
   );
   useEffect(() => {
     if (forecastData) {
-      // need to unmask fragments for writing to local storage
-
       setCached(forecastData);
     }
   }, [forecastData, setCached]);

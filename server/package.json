@@ -10,7 +10,8 @@
     "vapid": "node ./scripts/generateVapidKeys.js",
     "migrate": "dotenv biscuits-migrate",
     "typecheck": "tsc --noEmit",
-    "write-schema": "env-cmd tsx watch --conditions=development ./scripts/writeSchema.ts"
+    "write-schema": "env-cmd tsx watch --conditions=development ./scripts/writeSchema.ts",
+    "test": "vitest"
   },
   "type": "module",
   "private": true,
@@ -35,6 +36,8 @@
     "better-sqlite3": "^9.1.1",
     "cookie": "^0.6.0",
     "dataloader": "^2.2.2",
+    "date-fns": "^3.6.0",
+    "date-fns-tz": "^3.0.1",
     "googleapis": "^128.0.0",
     "graphql": "^16.8.1",
     "graphql-scalars": "^1.22.4",
@@ -56,6 +59,7 @@
     "env-cmd": "^10.1.0",
     "npm-run-all2": "6.1.2",
     "tsx": "^4.6.2",
+    "vitest": "^0.22.1",
     "web-push": "^3.6.6"
   }
 }
