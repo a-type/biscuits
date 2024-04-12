@@ -85,10 +85,12 @@ export function ExtraItem({
   item,
   completion,
   onCompletionChanged,
+  onDelete,
 }: {
   item: TripExtraItemsValueItem;
   completion: TripCompletionsValue;
   onCompletionChanged: (completion: TripCompletionsValue) => void;
+  onDelete: () => void;
 }) {
   const { description, quantity } = hooks.useWatch(item);
 
@@ -100,6 +102,7 @@ export function ExtraItem({
       onCompletionChanged={onCompletionChanged}
       onDescriptionChanged={(value) => item.set('description', value)}
       onQuantityChanged={(value) => item.set('quantity', value)}
+      onDelete={onDelete}
     />
   );
 }
@@ -112,6 +115,7 @@ function ChecklistItem({
   onDescriptionChanged,
   onQuantityChanged,
   subline,
+  onDelete,
 }: {
   computedQuantity: number;
   completedQuantity: number;
@@ -119,6 +123,7 @@ function ChecklistItem({
   description: string;
   onDescriptionChanged?: (value: string) => void;
   onQuantityChanged?: (value: number) => void;
+  onDelete?: () => void;
   subline?: string;
 }) {
   const completed = completedQuantity >= computedQuantity;
@@ -210,6 +215,11 @@ function ChecklistItem({
             onChange={onQuantityChanged}
             className="mr-auto"
           />
+        )}
+        {editing && onDelete && (
+          <Button size="icon" color="ghostDestructive" onClick={onDelete}>
+            <Icon name="x" />
+          </Button>
         )}
         {canEdit && (
           <Button

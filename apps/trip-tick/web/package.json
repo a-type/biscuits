@@ -20,7 +20,7 @@
     "@unocss/transformer-variant-group": "^0.54.1",
     "@verdant-web/react": "^30.0.0",
     "@verdant-web/react-router": "^0.6.2",
-    "@verdant-web/store": "^3.5.0",
+    "@verdant-web/store": "^3.5.1",
     "classnames": "^2.3.2",
     "date-fns": "^2.30.0",
     "downshift": "^7.0.1",

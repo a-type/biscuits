@@ -312,6 +312,7 @@ function TripViewChecklist({
   const { toDisplay } = useTemperatureUnit();
 
   let extraItemsForList = extraItems.get(listId) ?? null;
+  hooks.useWatch(extraItemsForList);
   if (Array.isArray(extraItemsForList)) {
     // workaround Verdant bug #371
     extraItemsForList = null;
@@ -360,6 +361,9 @@ function TripViewChecklist({
                 completion={completion}
                 onCompletionChanged={(value) => {
                   completions.set(item.get('id'), value);
+                }}
+                onDelete={() => {
+                  extraItemsForList?.removeAll(item);
                 }}
               />
             </li>
