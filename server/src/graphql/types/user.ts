@@ -189,6 +189,7 @@ builder.objectType('UserPreference', {
     }),
     value: t.field({
       type: 'JSON',
+      nullable: true,
       resolve: (p) => p.value,
     }),
   }),
