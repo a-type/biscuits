@@ -19,7 +19,7 @@ export function PersonAvatar({
     <div
       data-pop={popIn}
       className={classNames(
-        'layer-components:(flex items-center justify-center rounded-full border-default p-2px overflow-hidden w-24px h-24px select-none relative bg-white flex-shrink-0)',
+        'layer-components:(flex items-center justify-center rounded-full border-default overflow-hidden w-24px h-24px select-none relative bg-white flex-shrink-0)',
         popIn &&
           'layer-variants:(animate-pop-in-from-half animate-ease-springy animate-duration-200)',
         !person && 'layer-components(border-dashed bg-gray2)',

@@ -32,7 +32,7 @@ export function TripDateRange({ trip }: TripDateRangeProps) {
     startsAt && endsAt
       ? `${formatDay(new Date(startsAt))} - ${formatDay(
           new Date(endsAt),
-        )} (${days} days, ${nights} nights)`
+        )} (${days}${nbsp}days,${nbsp}${nights}${nbsp}nights)`
       : 'Select dates';
 
   const value = {

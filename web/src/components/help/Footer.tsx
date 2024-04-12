@@ -14,7 +14,9 @@ export function Footer({ className }: FooterProps) {
       )}
     >
       <div className="flex flex-col gap-3 items-start">
-        <span className="font-fancy text-sm font-semibold">Biscuits</span>
+        <Link to="/" className="font-fancy text-sm font-semibold">
+          Biscuits
+        </Link>
         <span>© {new Date().getFullYear()} Grant Forrest</span>
         <Link to="/privacy">Privacy Policy</Link>
         <Link to="/tos">Terms of Service</Link>

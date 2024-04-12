@@ -206,7 +206,7 @@ function useOnDragEnd() {
         item.set('categoryId', groceriesState.draggedItemOriginalCategory);
       } else {
         const dropZone = over.data.current as GroceryDnDDrop;
-        if (dropZone.type === 'category') {
+        if (dropZone.type === 'category' && dropZone.value !== undefined) {
           await setItemCategory(item, dropZone.value, true);
         } else if (dropZone.type === 'new') {
           groceriesState.newCategoryPendingItem = valtioRef(item);

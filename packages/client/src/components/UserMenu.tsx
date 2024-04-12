@@ -68,17 +68,27 @@ export function UserMenu({
         )}
 
         {!isLoggedIn ? (
-          <DropdownMenuItem
-            asChild
-            className="theme-leek bg-primary-wash color-primary-dark"
-          >
-            <a href={`${CONFIG.HOME_ORIGIN}/join?appReferrer=${appId}`}>
-              Upgrade for sync
-              <DropdownMenuItemRightSlot>
-                <Icon name="gift" />
-              </DropdownMenuItemRightSlot>
-            </a>
-          </DropdownMenuItem>
+          <>
+            <DropdownMenuItem
+              asChild
+              className="theme-leek bg-primary-wash color-primary-dark"
+            >
+              <a href={`${CONFIG.HOME_ORIGIN}/join?appReferrer=${appId}`}>
+                Upgrade for sync
+                <DropdownMenuItemRightSlot>
+                  <Icon name="gift" />
+                </DropdownMenuItemRightSlot>
+              </a>
+            </DropdownMenuItem>
+            <DropdownMenuItem asChild>
+              <a href={`${CONFIG.HOME_ORIGIN}/login?appReferrer=${appId}`}>
+                Log in
+                <DropdownMenuItemRightSlot>
+                  <Icon name="arrowRight" />
+                </DropdownMenuItemRightSlot>
+              </a>
+            </DropdownMenuItem>
+          </>
         ) : (
           <DropdownMenuItem asChild>
             <a href={`${CONFIG.HOME_ORIGIN}/plan?appReferrer=${appId}`}>

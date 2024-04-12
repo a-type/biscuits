@@ -97,20 +97,30 @@ builder.mutationFields((t) => ({
       }
 
       // upsert category assignment - increment votes if it already exists
-      const categoryId = decodeGlobalID(input.categoryId as string).id;
-      await ctx.db
-        .insertInto('FoodCategoryAssignment')
-        .values({
-          foodId: food.id,
-          categoryId,
-          votes: 1,
-        })
-        .onConflict((oc) =>
-          oc.columns(['foodId', 'categoryId']).doUpdateSet((eb) => ({
-            votes: sql<number>`FoodCategoryAssignment.votes + 1`,
-          })),
-        )
-        .execute();
+      const categoryId = input.categoryId.toString();
+      try {
+        await ctx.db
+          .insertInto('FoodCategoryAssignment')
+          .values({
+            foodId: food.id,
+            categoryId,
+            votes: 1,
+          })
+          .onConflict((oc) =>
+            oc.columns(['foodId', 'categoryId']).doUpdateSet((eb) => ({
+              votes: sql<number>`FoodCategoryAssignment.votes + 1`,
+            })),
+          )
+          .execute();
+      } catch (err) {
+        if (err instanceof Error && err.message.includes('FOREIGN KEY')) {
+          throw new BiscuitsError(
+            BiscuitsError.Code.BadRequest,
+            'Invalid category',
+          );
+        }
+        throw err;
+      }
 
       return { foodId: food.id };
     },

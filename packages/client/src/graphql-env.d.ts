@@ -2769,12 +2769,9 @@ export type introspection = {
           {
             "name": "value",
             "type": {
-              "kind": "NON_NULL",
-              "ofType": {
-                "kind": "SCALAR",
-                "name": "JSON",
-                "ofType": null
-              }
+              "kind": "SCALAR",
+              "name": "JSON",
+              "ofType": null
             },
             "args": []
           }

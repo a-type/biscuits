@@ -24,7 +24,12 @@ const dialect = new SqliteDialect({
 // to communicate with your database.
 export const db = new Kysely<Database>({
   dialect,
-  plugins: [new TimestampsPlugin({}), new SerializePlugin()],
+  plugins: [
+    new TimestampsPlugin({
+      ignoredTables: ['FoodCategoryAssignment'],
+    }),
+    new SerializePlugin(),
+  ],
 });
 
 export type DB = typeof db;

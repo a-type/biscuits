@@ -71,7 +71,7 @@ export function ListItemEditor({
         </Button>
       </div>
       <CollapsibleSimple open={expanded} onOpenChange={setExpanded}>
-        <div className="grid grid-cols-2 gap-3 items-start p-1">
+        <div className="grid sm:grid-cols-2 gap-3 items-start p-1">
           <FieldGroup>
             <FieldLabel className="font-bold">Pack</FieldLabel>
             <FieldArea>

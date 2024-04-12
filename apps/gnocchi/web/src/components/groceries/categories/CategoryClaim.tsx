@@ -87,32 +87,3 @@ export const CategoryClaim = memo(function CategoryClaim({
     </Button>
   );
 });
-
-const ClaimIcon = forwardRef<SVGSVGElement, { active?: boolean }>(
-  function ClaimIcon({ active }, ref) {
-    return (
-      <svg
-        width="15"
-        height="15"
-        viewBox="0 0 15 15"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        ref={ref}
-        className="z-1 relative"
-      >
-        <path
-          d="M8.5 14.5L10.6429 4.99999M10.6429 4.99999L11.5 0.999986C11.5 0.999986 9 1.99999 7.5 0.999986C6 -1.35601e-05 3.5 0.999986 3.5 0.999986L3 4.99999C3 4.99999 5 3.49999 6.8258 4.60521C8.6516 5.71043 10.6429 4.99999 10.6429 4.99999Z"
-          stroke="currentColor"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          className={classNames(
-            'opacity-50 transition-all duration-200 ease-springy',
-            active
-              ? 'opacity-100 stroke-accentDark fill-accentLight'
-              : 'opacity-50 stroke-current fill-none',
-          )}
-        />
-      </svg>
-    );
-  },
-);

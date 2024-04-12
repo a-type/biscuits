@@ -15,6 +15,8 @@ export type AppManifest<Id extends string> = {
 export type PaidFeature = {
   imageUrl: string;
   description: string;
+  title: string;
+  family?: boolean;
 };
 
 export const apps = [
@@ -31,8 +33,23 @@ export const apps = [
     paidFeatures: [
       {
         imageUrl: '/images/gnocchi/scanner.png',
+        title: 'Recipe Scanner',
         description:
           'Scan web recipes to create a personal copy. Add notes, make changes, and collaborate on cooking with other plan members.',
+      },
+      {
+        imageUrl: '/images/gnocchi/groceries-collaboration.png',
+        title: 'Collaborative Groceries',
+        description:
+          'Share your groceries list with other plan members and stay on the same page. Shopping gets more efficient with realtime presence and progress updates.',
+        family: true,
+      },
+      {
+        imageUrl: '/images/gnocchi/recipe-collaboration.png',
+        title: 'Sous Chef Mode',
+        description:
+          'Team up with other plan members to cook a recipe together. Assign steps and track progress with instant updates.',
+        family: true,
       },
     ],
     paidDescription:
@@ -50,8 +67,15 @@ export const apps = [
     paidFeatures: [
       {
         imageUrl: '/images/trip-tick/weather.png',
+        title: 'Weather Forecast',
         description:
-          'Get weather forecasts for your destination and the duration of your trip.',
+          'Get weather forecasts for your destination over the duration of your trip.',
+      },
+      {
+        imageUrl: '/images/trip-tick/conditions.png',
+        title: 'Powerful Conditions',
+        description:
+          'Define conditions for packing list items based on predicted weather to make sure you have everything you need.',
       },
     ],
     paidDescription:

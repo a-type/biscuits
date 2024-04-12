@@ -26,6 +26,16 @@ const startingPriceQuery = graphql(`
 `);
 
 export function JoinPage({}: JoinPageProps) {
+  const appReferrer = new URLSearchParams(window.location.search).get(
+    'appReferrer',
+  );
+
+  const sortedApps = appReferrer
+    ? [...apps].sort((a, b) =>
+        a.id === appReferrer ? -1 : b.id === appReferrer ? 1 : 0,
+      )
+    : apps;
+
   return (
     <PageRoot className="bg-primary-wash">
       <PageContent>
@@ -49,7 +59,7 @@ export function JoinPage({}: JoinPageProps) {
               <Link to="/login?returnTo=/plan">Get started</Link>
             </Button>
           </PageFixedArea>
-          {apps.map((app) => (
+          {sortedApps.map((app) => (
             <div key={app.id} className="w-full max-w-none">
               <div className="flex flex-row items-center gap-4">
                 <img
@@ -88,8 +98,16 @@ const StartingPrice = () => {
 
 function AppFeature({ feature }: { feature: PaidFeature }) {
   return (
-    <div className="flex flex-col sm:flex-row gap-4 items-start">
-      <p className="text-md font-bold my-0 flex-1-0-0">{feature.description}</p>
+    <div className="flex flex-col gap-4 items-start">
+      <div className="flex flex-row items-center gap-3 flex-wrap">
+        <h3 className="text-md font-bold my-0">{feature.title}</h3>
+        {feature.family && (
+          <div className="px-3 py-1 rounded-full bg-accent-dark color-white text-xxs">
+            Family Style Plan
+          </div>
+        )}
+      </div>
+      <p className="my-0">{feature.description}</p>
       <img
         className="border border-solid border-1 border-black rounded-lg max-w-full flex-1-0-0 min-w-0"
         src={feature.imageUrl}
