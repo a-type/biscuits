@@ -31,7 +31,7 @@ import { lazyWithPreload } from 'react-lazy-with-preload';
 import { NotFoundPage } from './NotFoundPage.jsx';
 import { GroceriesPage } from './groceries/GroceriesPage.js';
 import { SubscriptionPromotionContent } from '@/components/promotional/SubscriptionPromotionContent.jsx';
-import { groceriesDescriptor } from '@/stores/groceries/index.js';
+import { groceriesDescriptor, hooks } from '@/stores/groceries/index.js';
 
 const PlanPage = lazyWithPreload(() => import('./PlanPage.jsx'));
 const SplashPage = lazy(() => import('./SplashPage.jsx'));
@@ -169,6 +169,7 @@ function LayoutWithNavBar() {
 }
 
 export function Pages() {
+  const client = hooks.useClient();
   const handleNavigate = useCallback(
     (
       location: Location,
@@ -185,8 +186,14 @@ export function Pages() {
         updateApp(ev?.state?.isSwipeNavigation);
         return false;
       }
+      // if first-level path changes, reset undo state
+      const firstLevelFrom = prev.pathname.split('/')[0];
+      const firstLevelTo = location.pathname.split('/')[0];
+      if (firstLevelFrom !== firstLevelTo) {
+        client.undoHistory.clear();
+      }
     },
-    [],
+    [client],
   );
   return (
     <ErrorBoundary fallback={(props) => <ErrorFallback {...props} />}>

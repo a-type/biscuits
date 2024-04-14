@@ -3,7 +3,14 @@ import { firstTimeOnboarding } from '@/onboarding/firstTimeOnboarding.js';
 import { saveHubRecipeOnboarding } from '@/onboarding/saveHubRecipeOnboarding.js';
 import { hooks } from '@/stores/groceries/index.js';
 import { PageNav } from '@a-type/ui/components/layouts';
-import { useMatch, useOnLocationChange } from '@verdant-web/react-router';
+import {
+  NavBarRoot,
+  NavBarItemIcon,
+  NavBarItemIconWrapper,
+  NavBarItem,
+  NavBarItemText,
+} from '@a-type/ui/components/navBar';
+import { useOnLocationChange } from '@verdant-web/react-router';
 import classNames from 'classnames';
 import {
   ReactNode,
@@ -21,11 +28,7 @@ import { OnboardingTooltip } from '@biscuits/client';
 import { useHasNewExpirations } from '../pantry/hooks.js';
 import { PopEffect } from './PopEffect.jsx';
 import { withClassName } from '@a-type/ui/hooks';
-import {
-  AppPicker,
-  AppPickerNavItem,
-  ChangelogDisplay,
-} from '@biscuits/client';
+import { AppPickerNavItem, ChangelogDisplay } from '@biscuits/client';
 
 export interface NavBarProps {}
 
@@ -53,11 +56,13 @@ export function NavBar({}: NavBarProps) {
             Gnocchi
           </h1>
         </div>
-        <GroceriesNavBarLink active={matchGroceries} />
-        <PantryNavBarLink active={matchPurchased} />
-        <RecipesNavBarLink active={matchRecipes} />
-        <AppPickerNavItem />
-        <NavBarChangelog />
+        <NavBarRoot>
+          <GroceriesNavBarLink active={matchGroceries} />
+          <PantryNavBarLink active={matchPurchased} />
+          <RecipesNavBarLink active={matchRecipes} />
+          <AppPickerNavItem />
+          <NavBarChangelog />
+        </NavBarRoot>
       </Suspense>
     </PageNav>
   );
@@ -76,59 +81,33 @@ const NavBarLink = memo(
       onHover?: () => void;
     }
   >(function NavBarLink(
-    { to, children, icon, animate, active, onClick, onHover },
+    { to, children, icon, animate, active, onHover, onClick },
     ref,
   ) {
-    // reset undo history when navigating
-    const client = hooks.useClient();
-    const handleClick = useCallback(() => {
-      client.undoHistory.clear();
-      onClick?.();
-    }, [client, onClick]);
-
     return (
-      <Link
-        to={to}
-        className={classNames(navBarLinkRootClass, {
-          'important:(color-black bg-primaryWash)': active,
-          active: active,
-        })}
-        data-active={active}
-        onClick={handleClick}
-        onMouseOver={onHover}
-        ref={ref}
-      >
-        <NavBarLinkIcon>
-          <PopEffect active={animate} />
-          {icon}
-        </NavBarLinkIcon>
-        <NavBarLinkText data-active={!!active}>{children}</NavBarLinkText>
-      </Link>
+      <NavBarItem asChild>
+        <Link
+          to={to}
+          className={classNames({
+            'important:(color-black bg-primaryWash)': active,
+            active: active,
+          })}
+          data-active={active}
+          onMouseOver={onHover}
+          onClick={onClick}
+          ref={ref}
+        >
+          <NavBarItemIconWrapper>
+            <NavBarItemIcon>
+              <PopEffect active={animate} />
+              {icon}
+            </NavBarItemIcon>
+          </NavBarItemIconWrapper>
+          <NavBarItemText data-active={!!active}>{children}</NavBarItemText>
+        </Link>
+      </NavBarItem>
     );
   }),
-);
-
-const navBarLinkRootClass = classNames(
-  'layer-components:(flex flex-col items-center justify-center whitespace-nowrap py-1 px-3 bg-transparent rounded-md border-none cursor-pointer text-sm transition-colors h-full gap-6px relative text-inherit)',
-  'layer-components:sm:(flex-row-reverse h-auto justify-start gap-2 overflow-visible)',
-  'layer-components:hover:bg-primaryWash',
-  'layer-components:focus-visible:(outline-none bg-primaryWash)',
-  'layer-components:active:bg-primaryWash',
-);
-
-const NavBarLinkIcon = withClassName(
-  'div',
-  'relative flex sm:(p-6px rounded-full bg-lightBlend)',
-);
-
-const NavBarLinkText = withClassName(
-  'span',
-  'overflow-hidden pl-1 inline-block text-xxs whitespace-nowrap text-ellipsis sm:(text-md leading-normal)',
-);
-
-const NavIcon = withClassName(
-  Icon,
-  'relative z-1 [a[data-active=true]_&]:fill-primary-light',
 );
 
 function RecipesNavBarLink({ active }: { active: boolean }) {
@@ -141,7 +120,7 @@ function RecipesNavBarLink({ active }: { active: boolean }) {
   return (
     <NavBarLink
       to="/recipes"
-      icon={<NavIcon name="book" />}
+      icon={<Icon name="book" />}
       active={active}
       onHover={preload}
     >
@@ -164,7 +143,7 @@ function PantryNavBarLink({ active }: { active: boolean }) {
   return (
     <NavBarLink
       to="/pantry"
-      icon={<NavIcon name="food" />}
+      icon={<Icon name="food" />}
       animate={recent}
       active={active}
       onClick={onSeen}
@@ -197,7 +176,7 @@ function GroceriesNavBarLink({ active }: { active: boolean }) {
     >
       <NavBarLink
         to="/"
-        icon={<NavIcon name="cart" />}
+        icon={<Icon name="cart" />}
         active={active}
         animate={justAddedSomething}
       >
@@ -207,41 +186,22 @@ function GroceriesNavBarLink({ active }: { active: boolean }) {
   );
 }
 
-function SettingsNavBarLink({ active }: { active: boolean }) {
-  return (
-    <OnboardingTooltip
-      content={
-        <div>Tap here to manage categories and upgrade your experience</div>
-      }
-      onboarding={firstTimeOnboarding}
-      step="settings"
-    >
-      <NavBarLink
-        to="/settings"
-        icon={<NavIcon name="profile" />}
-        active={active}
-      >
-        <span>Settings</span>
-      </NavBarLink>
-    </OnboardingTooltip>
-  );
-}
-
 function NavBarChangelog() {
   return (
     <ChangelogDisplay hideOnSeen className="hidden md:display-flex">
       <NavBarChangelogButton>
-        <NavBarLinkIcon>
-          <NavIcon name="gift" />
-        </NavBarLinkIcon>
-        <NavBarLinkText>What&apos;s new</NavBarLinkText>
+        <NavBarItemIconWrapper>
+          <NavBarItemIcon>
+            <Icon name="gift" />
+          </NavBarItemIcon>
+        </NavBarItemIconWrapper>
+        <NavBarItemText>What&apos;s new</NavBarItemText>
       </NavBarChangelogButton>
     </ChangelogDisplay>
   );
 }
 
 const NavBarChangelogButton = withClassName(
-  'button',
-  navBarLinkRootClass,
+  NavBarItem,
   '[&[data-new=true]]:(bg-accent-wash text-accent-dark)',
 );
