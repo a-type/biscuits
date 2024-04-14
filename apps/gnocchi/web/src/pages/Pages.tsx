@@ -161,7 +161,7 @@ const routes = makeRoutes([
 
 function LayoutWithNavBar() {
   return (
-    <PageRoot>
+    <PageRoot className="bg-gray-2 !sm:bg-wash">
       <Outlet />
       <NavBar />
     </PageRoot>

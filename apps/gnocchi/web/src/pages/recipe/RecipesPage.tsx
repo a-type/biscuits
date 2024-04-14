@@ -16,7 +16,7 @@ export interface RecipesPageProps {}
 export function RecipesPage({}: RecipesPageProps) {
   usePageTitle('Recipes');
   return (
-    <PageContent>
+    <PageContent className="rounded-b-lg border-b border-b-solid border-b-gray-5 bg-wash sm:border-none sm:rounded-0">
       <Suspense>
         <RecipeList />
       </Suspense>

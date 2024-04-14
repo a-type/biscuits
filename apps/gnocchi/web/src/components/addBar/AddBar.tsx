@@ -128,8 +128,9 @@ function suggestionToString(item: SuggestionData | undefined | null) {
 const NOW = startOfDay(new Date()).getTime();
 const SUGGESTION_INTERVAL_END = addDays(NOW, 5).getTime();
 
+// FIXME: this component takes a while to re-render
 export const AddBarImpl = forwardRef<HTMLDivElement, AddBarProps>(
-  function GroceryListAddImpl({ onAdd, showRichSuggestions, ...rest }, ref) {
+  function AddBarImpl({ onAdd, showRichSuggestions, ...rest }, ref) {
     const isSubscribed = useCanSync();
     const listId = useListId() || null;
     const [randomPlaceholder, setRandomPlaceholder] =

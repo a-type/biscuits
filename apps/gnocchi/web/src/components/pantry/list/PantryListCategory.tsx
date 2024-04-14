@@ -37,18 +37,18 @@ export function PantryListCategory({
             order: 'desc',
           }
         : filter === 'frozen'
-          ? {
-              where: 'frozen',
-              equals: true,
-            }
-          : {
-              where: 'inInventory_categoryId_lastPurchasedAt',
-              match: {
-                inInventory: true,
-                categoryId: category?.get('id') ?? 'null',
-              },
-              order: 'desc',
+        ? {
+            where: 'frozen',
+            equals: true,
+          }
+        : {
+            where: 'inInventory_categoryId_lastPurchasedAt',
+            match: {
+              inInventory: true,
+              categoryId: category?.get('id') ?? 'null',
             },
+            order: 'desc',
+          },
     key: `pantry-category-${category?.get('id') ?? 'null'}`,
     pageSize,
   });
@@ -63,7 +63,7 @@ export function PantryListCategory({
 
   return (
     <CategoryRoot
-      className="pantryListCategory"
+      className="pantryListCategory mb-4"
       data-is-empty={items.length === 0 && !showShowMore}
       data-do-not-animate
       {...rest}

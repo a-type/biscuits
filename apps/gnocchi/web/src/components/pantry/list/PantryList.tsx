@@ -33,7 +33,7 @@ function PantryListInner({ className, ...rest }: PantryListProps) {
       </OnboardingBanner>
       <ExpiresSoonSection />
       <PantryListSectionTabs />
-      <div className="flex flex-col gap-4">
+      <div className="flex flex-col">
         {categories.map((category) => {
           return (
             <PantryListCategory key={category.get('id')} category={category} />
