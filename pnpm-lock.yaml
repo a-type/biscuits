@@ -107,8 +107,8 @@ importers:
   apps/gnocchi/web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.7.3
-        version: 0.7.3(@types/react-dom@18.2.17)(@types/react@18.0.14)
+        specifier: ^0.7.4
+        version: 0.7.4(@types/react-dom@18.2.17)(@types/react@18.0.14)
       '@a-type/utils':
         specifier: ^1.0.8
         version: 1.0.8
@@ -378,8 +378,8 @@ importers:
   apps/trip-tick/web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.7.3
-        version: 0.7.3(@types/react-dom@18.2.17)(@types/react@18.0.4)
+        specifier: ^0.7.4
+        version: 0.7.4(@types/react-dom@18.2.17)(@types/react@18.0.4)
       '@a-type/utils':
         specifier: ^1.0.6
         version: 1.0.6
@@ -526,8 +526,8 @@ importers:
         version: 1.13.2(@types/react@18.0.14)(react@18.2.0)
     devDependencies:
       '@a-type/ui':
-        specifier: ^0.7.3
-        version: 0.7.3(@types/react@18.0.14)
+        specifier: ^0.7.4
+        version: 0.7.4(@types/react@18.0.14)
       '@types/react':
         specifier: 18.0.14
         version: 18.0.14
@@ -718,8 +718,8 @@ importers:
   web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.7.3
-        version: 0.7.3(@types/react-dom@18.0.5)(@types/react@18.0.4)
+        specifier: ^0.7.4
+        version: 0.7.4(@types/react-dom@18.0.5)(@types/react@18.0.4)
       '@biscuits/apps':
         specifier: workspace:*
         version: link:../packages/apps
@@ -858,10 +858,10 @@ packages:
       - encoding
       - supports-color
 
-  /@a-type/ui@0.7.3(@types/react-dom@18.0.5)(@types/react@18.0.4):
-    resolution: {integrity: sha512-Gow0c0KJ/TknksFVr+ev4d1rbVuZ+i9+Nio425I8/QWLgJ5q5TkDgYzCn7dA+c25RyV9rqRQ90WUjGoQpVoTJQ==}
+  /@a-type/ui@0.7.4(@types/react-dom@18.0.5)(@types/react@18.0.4):
+    resolution: {integrity: sha512-gcDey4c069IT2+ro5w0opES8lvKociSPgHTv/Yf+w/blgP0vuI4lVDv2ODHSHpwlAiRdwUUZB6fe8aYSdSznlA==}
     dependencies:
-      '@a-type/utils': 1.0.6
+      '@a-type/utils': 1.0.8
       '@radix-ui/react-accordion': 1.1.2(@types/react-dom@18.0.5)(@types/react@18.0.4)(react-dom@18.2.0)(react@18.2.0)
       '@radix-ui/react-checkbox': 1.0.4(@types/react-dom@18.0.5)(@types/react@18.0.4)(react-dom@18.2.0)(react@18.2.0)
       '@radix-ui/react-collapsible': 1.0.3(@types/react-dom@18.0.5)(@types/react@18.0.4)(react-dom@18.2.0)(react@18.2.0)
@@ -904,8 +904,8 @@ packages:
       - '@types/react-dom'
     dev: false
 
-  /@a-type/ui@0.7.3(@types/react-dom@18.2.17)(@types/react@18.0.14):
-    resolution: {integrity: sha512-Gow0c0KJ/TknksFVr+ev4d1rbVuZ+i9+Nio425I8/QWLgJ5q5TkDgYzCn7dA+c25RyV9rqRQ90WUjGoQpVoTJQ==}
+  /@a-type/ui@0.7.4(@types/react-dom@18.2.17)(@types/react@18.0.14):
+    resolution: {integrity: sha512-gcDey4c069IT2+ro5w0opES8lvKociSPgHTv/Yf+w/blgP0vuI4lVDv2ODHSHpwlAiRdwUUZB6fe8aYSdSznlA==}
     dependencies:
       '@a-type/utils': 1.0.8
       '@radix-ui/react-accordion': 1.1.2(@types/react-dom@18.2.17)(@types/react@18.0.14)(react-dom@18.2.0)(react@18.2.0)
@@ -950,10 +950,10 @@ packages:
       - '@types/react-dom'
     dev: false
 
-  /@a-type/ui@0.7.3(@types/react-dom@18.2.17)(@types/react@18.0.4):
-    resolution: {integrity: sha512-Gow0c0KJ/TknksFVr+ev4d1rbVuZ+i9+Nio425I8/QWLgJ5q5TkDgYzCn7dA+c25RyV9rqRQ90WUjGoQpVoTJQ==}
+  /@a-type/ui@0.7.4(@types/react-dom@18.2.17)(@types/react@18.0.4):
+    resolution: {integrity: sha512-gcDey4c069IT2+ro5w0opES8lvKociSPgHTv/Yf+w/blgP0vuI4lVDv2ODHSHpwlAiRdwUUZB6fe8aYSdSznlA==}
     dependencies:
-      '@a-type/utils': 1.0.6
+      '@a-type/utils': 1.0.8
       '@radix-ui/react-accordion': 1.1.2(@types/react-dom@18.2.17)(@types/react@18.0.4)(react-dom@18.2.0)(react@18.2.0)
       '@radix-ui/react-checkbox': 1.0.4(@types/react-dom@18.2.17)(@types/react@18.0.4)(react-dom@18.2.0)(react@18.2.0)
       '@radix-ui/react-collapsible': 1.0.3(@types/react-dom@18.2.17)(@types/react@18.0.4)(react-dom@18.2.0)(react@18.2.0)
@@ -996,10 +996,10 @@ packages:
       - '@types/react-dom'
     dev: false
 
-  /@a-type/ui@0.7.3(@types/react@18.0.14):
-    resolution: {integrity: sha512-Gow0c0KJ/TknksFVr+ev4d1rbVuZ+i9+Nio425I8/QWLgJ5q5TkDgYzCn7dA+c25RyV9rqRQ90WUjGoQpVoTJQ==}
+  /@a-type/ui@0.7.4(@types/react@18.0.14):
+    resolution: {integrity: sha512-gcDey4c069IT2+ro5w0opES8lvKociSPgHTv/Yf+w/blgP0vuI4lVDv2ODHSHpwlAiRdwUUZB6fe8aYSdSznlA==}
     dependencies:
-      '@a-type/utils': 1.0.6
+      '@a-type/utils': 1.0.8
       '@radix-ui/react-accordion': 1.1.2(@types/react@18.0.14)(react-dom@18.2.0)(react@18.2.0)
       '@radix-ui/react-checkbox': 1.0.4(@types/react-dom@18.2.17)(@types/react@18.0.14)(react-dom@18.2.0)(react@18.2.0)
       '@radix-ui/react-collapsible': 1.0.3(@types/react-dom@18.2.17)(@types/react@18.0.14)(react-dom@18.2.0)(react@18.2.0)
@@ -1048,10 +1048,10 @@ packages:
 
   /@a-type/utils@1.0.6:
     resolution: {integrity: sha512-kmtqO0BBb3nXDf6ow77VIqJsMGa9HplfcOjQU3lf0mx6IZT9QwKmZzY1I9m/flkCb3a/ukUHWVPgwJ7Cgp+Gvg==}
+    dev: false
 
   /@a-type/utils@1.0.8:
     resolution: {integrity: sha512-marXHFs7zMiTvySvMknBw0Xo0aPzUWq1zrHHRGS3iowoZeNPTlowdhLuplWv3OZ14IobOi7caItsqVj0ly3b4Q==}
-    dev: false
 
   /@aashutoshrathi/word-wrap@1.2.6:
     resolution: {integrity: sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==}
@@ -6266,7 +6266,7 @@ packages:
       '@types/react-dom':
         optional: true
     dependencies:
-      '@babel/runtime': 7.24.1
+      '@babel/runtime': 7.24.4
       '@radix-ui/react-slot': 1.0.2(@types/react@18.0.4)(react@18.2.0)
       '@types/react': 18.0.4
       '@types/react-dom': 18.0.5
@@ -6287,7 +6287,7 @@ packages:
       '@types/react-dom':
         optional: true
     dependencies:
-      '@babel/runtime': 7.24.1
+      '@babel/runtime': 7.24.4
       '@radix-ui/react-slot': 1.0.2(@types/react@18.0.14)(react@18.2.0)
       '@types/react': 18.0.14
       '@types/react-dom': 18.2.17
@@ -6469,7 +6469,7 @@ packages:
       '@types/react-dom':
         optional: true
     dependencies:
-      '@babel/runtime': 7.23.4
+      '@babel/runtime': 7.24.4
       '@radix-ui/primitive': 1.0.1
       '@radix-ui/react-collection': 1.0.3(@types/react-dom@18.0.5)(@types/react@18.0.4)(react-dom@18.2.0)(react@18.2.0)
       '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.0.4)(react@18.2.0)
@@ -6498,7 +6498,7 @@ packages:
       '@types/react-dom':
         optional: true
     dependencies:
-      '@babel/runtime': 7.23.4
+      '@babel/runtime': 7.24.4
       '@radix-ui/primitive': 1.0.1
       '@radix-ui/react-collection': 1.0.3(@types/react-dom@18.2.17)(@types/react@18.0.14)(react-dom@18.2.0)(react@18.2.0)
       '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.0.14)(react@18.2.0)
@@ -6556,7 +6556,7 @@ packages:
       '@types/react-dom':
         optional: true
     dependencies:
-      '@babel/runtime': 7.23.4
+      '@babel/runtime': 7.24.4
       '@radix-ui/primitive': 1.0.1
       '@radix-ui/react-collection': 1.0.3(@types/react-dom@18.2.17)(@types/react@18.0.14)(react-dom@18.2.0)(react@18.2.0)
       '@radix-ui/react-compose-refs': 1.0.1(@types/react@18.0.14)(react@18.2.0)
@@ -7094,7 +7094,7 @@ packages:
       '@types/react-dom':
         optional: true
     dependencies:
-      '@babel/runtime': 7.23.4
+      '@babel/runtime': 7.24.4
       '@radix-ui/primitive': 1.0.1
       '@radix-ui/react-context': 1.0.1(@types/react@18.0.4)(react@18.2.0)
       '@radix-ui/react-direction': 1.0.1(@types/react@18.0.4)(react@18.2.0)
@@ -7121,7 +7121,7 @@ packages:
       '@types/react-dom':
         optional: true
     dependencies:
-      '@babel/runtime': 7.23.4
+      '@babel/runtime': 7.24.4
       '@radix-ui/primitive': 1.0.1
       '@radix-ui/react-context': 1.0.1(@types/react@18.0.14)(react@18.2.0)
       '@radix-ui/react-direction': 1.0.1(@types/react@18.0.14)(react@18.2.0)
@@ -7175,7 +7175,7 @@ packages:
       '@types/react-dom':
         optional: true
     dependencies:
-      '@babel/runtime': 7.23.4
+      '@babel/runtime': 7.24.4
       '@radix-ui/primitive': 1.0.1
       '@radix-ui/react-context': 1.0.1(@types/react@18.0.14)(react@18.2.0)
       '@radix-ui/react-direction': 1.0.1(@types/react@18.0.14)(react@18.2.0)
