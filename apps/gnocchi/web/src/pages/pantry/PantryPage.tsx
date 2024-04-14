@@ -15,7 +15,7 @@ export function PantryPage({}: PantryPageProps) {
     <PageContent
       fullHeight
       innerProps={{ className: 'gap-2' }}
-      className="rounded-b-lg border-b border-b-solid border-b-gray-5 bg-wash sm:border-none sm:rounded-0"
+      className="rounded-b-lg border-b border-b-solid border-b-[#00000070] bg-wash sm:border-none sm:rounded-0"
     >
       <PantrySearch />
       <PageFixedArea>
