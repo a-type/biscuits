@@ -25,32 +25,6 @@ export function PrivacyPolicy() {
         </a>
         .
       </p>
-      <div className="color-accent-dark bg-accent-wash p-3 rounded-md">
-        <p>
-          <strong>Grant's note</strong>: the rest of this is largely a standard
-          privacy policy, but if you're wondering, Biscuits collects very little
-          personal data, and most of it is what you provide if you choose to
-          sign up for a subscription.
-        </p>
-        <p>
-          For anonymous, local-only users - only completely anonymized category
-          assignment information about items in your list is collected, and only
-          for the default categories. This helps me give everyone better
-          category suggestions. I also collect analytics ("Usage Data") about
-          how you access and use the app, only so I can understand how to do a
-          good job providing it for everyone and whether any promotions I'm
-          running are effective.
-        </p>
-        <p>
-          For subscribers with an Account, in addition to the data collected for
-          anonymous users above, I will store your name and email address, so
-          you can log in and be recognized by others. If you sign in with a
-          social provider, I will store the image URL of your avatar.
-          Additionally, all the data you put into Biscuits apps will be stored.
-          This is simply necessary in order to synchronize it. You still own
-          your data, see <Link to="/tos">the Terms and Conditions</Link>
-        </p>
-      </div>
       <h1>Interpretation and Definitions</h1>
       <h2>Interpretation</h2>
       <p>

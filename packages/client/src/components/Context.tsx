@@ -1,20 +1,27 @@
 import { ApolloProvider, ApolloClient } from '@apollo/client';
 import { ReactNode, createContext, useContext } from 'react';
 import { AppId } from '@biscuits/apps';
+import { VerdantContext } from '../verdant.js';
+import { ClientDescriptor } from '@verdant-web/store';
+import { VerdantProfile } from '../index.js';
 
 export function Provider({
   graphqlClient,
   appId,
   children,
+  storeDescriptor,
 }: {
   appId?: AppId;
   graphqlClient: ApolloClient<any>;
   children: ReactNode;
+  storeDescriptor: ClientDescriptor<any, VerdantProfile> | null;
 }) {
   return (
     <ApolloProvider client={graphqlClient}>
       <BiscuitsContext.Provider value={{ appId }}>
-        {children}
+        <VerdantContext.Provider value={storeDescriptor}>
+          {children}
+        </VerdantContext.Provider>
       </BiscuitsContext.Provider>
     </ApolloProvider>
   );

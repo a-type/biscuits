@@ -689,6 +689,18 @@ export type introspection = {
         "name": "Mutation",
         "fields": [
           {
+            "name": "acceptTermsOfService",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "User",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
             "name": "assignFoodCategory",
             "type": {
               "kind": "NON_NULL",
@@ -2658,6 +2670,15 @@ export type introspection = {
         "kind": "OBJECT",
         "name": "User",
         "fields": [
+          {
+            "name": "acceptedTermsOfServiceAt",
+            "type": {
+              "kind": "SCALAR",
+              "name": "DateTime",
+              "ofType": null
+            },
+            "args": []
+          },
           {
             "name": "email",
             "type": {

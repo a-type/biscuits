@@ -110,6 +110,24 @@ builder.mutationFields((t) => ({
       };
     },
   }),
+  acceptTermsOfService: t.field({
+    type: User,
+    authScopes: {
+      user: true,
+    },
+    resolve: async (_, __, ctx) => {
+      assert(ctx.session);
+      const userId = ctx.session.userId;
+      await ctx.db
+        .updateTable('User')
+        .set({
+          acceptedTosAt: new Date(),
+        })
+        .where('id', '=', userId)
+        .executeTakeFirstOrThrow();
+      return userId;
+    },
+  }),
 }));
 
 export const User = builder.loadableNodeRef('User', {
@@ -147,7 +165,12 @@ User.implement({
     plan: t.field({
       type: Plan,
       nullable: true,
-      resolve: (user) => user.planId,
+      resolve: (user, _, ctx) => {
+        if (user.id !== ctx.session?.userId) {
+          return null;
+        }
+        return user.planId;
+      },
     }),
     email: t.exposeString('email'),
     imageUrl: t.exposeString('imageUrl', {
@@ -162,12 +185,25 @@ User.implement({
           required: true,
         }),
       },
-      resolve: (user, args) => {
+      resolve: (user, args, ctx) => {
+        if (user.id !== ctx.session?.userId) {
+          return null;
+        }
         return {
           userId: user.id,
           key: args.key,
           value: user.preferences[args.key],
         };
+      },
+    }),
+    acceptedTermsOfServiceAt: t.field({
+      type: 'DateTime',
+      nullable: true,
+      resolve: (user, _, ctx) => {
+        if (user.id !== ctx.session?.userId) {
+          return null;
+        }
+        return user.acceptedTosAt;
       },
     }),
   }),

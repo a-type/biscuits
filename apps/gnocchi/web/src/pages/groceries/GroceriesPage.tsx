@@ -86,7 +86,6 @@ export function GroceriesPage() {
         </TopControls>
         <AddBar />
         <List />
-        <SubscriptionExpiredDialog />
         <UnknownListRedirect listId={listId} />
         <RecipePresenceNotification />
         <AutoRestoreScroll />

@@ -9,6 +9,7 @@ import {
 } from '@a-type/ui/components/dropdownMenu';
 import {
   CONFIG,
+  PresencePeople,
   getIsPWAInstalled,
   graphql,
   useAppId,
@@ -50,7 +51,7 @@ export function UserMenu({
           <Button size="icon" color="ghost" className={className}>
             <ErrorBoundary fallback={<Avatar />}>
               <Suspense fallback={<Avatar />}>
-                <UserAvatar skipFetch={!isLoggedIn} />
+                <PresencePeople />
               </Suspense>
             </ErrorBoundary>
           </Button>

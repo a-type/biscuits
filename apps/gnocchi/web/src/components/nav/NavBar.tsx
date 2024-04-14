@@ -120,7 +120,7 @@ function RecipesNavBarLink({ active }: { active: boolean }) {
   return (
     <NavBarLink
       to="/recipes"
-      icon={<Icon name="book" />}
+      icon={<Icon name="book" className="fill-inherit" />}
       active={active}
       onHover={preload}
     >
@@ -143,7 +143,7 @@ function PantryNavBarLink({ active }: { active: boolean }) {
   return (
     <NavBarLink
       to="/pantry"
-      icon={<Icon name="food" />}
+      icon={<Icon name="food" className="fill-inherit" />}
       animate={recent}
       active={active}
       onClick={onSeen}
@@ -176,7 +176,7 @@ function GroceriesNavBarLink({ active }: { active: boolean }) {
     >
       <NavBarLink
         to="/"
-        icon={<Icon name="cart" />}
+        icon={<Icon name="cart" className="fill-inherit" />}
         active={active}
         animate={justAddedSomething}
       >
@@ -192,7 +192,7 @@ function NavBarChangelog() {
       <NavBarChangelogButton>
         <NavBarItemIconWrapper>
           <NavBarItemIcon>
-            <Icon name="gift" />
+            <Icon name="gift" className="fill-inherit" />
           </NavBarItemIcon>
         </NavBarItemIconWrapper>
         <NavBarItemText>What&apos;s new</NavBarItemText>

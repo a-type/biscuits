@@ -78,6 +78,7 @@ export const authHandlers = createHandlers({
             fullName: fullName || 'Anonymous',
             friendlyName: friendlyName || 'Anonymous',
             isProductAdmin: false,
+            acceptedTosAt: new Date(),
             ...user,
           })
           .returning('id')

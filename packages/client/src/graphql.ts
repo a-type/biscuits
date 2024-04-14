@@ -212,6 +212,7 @@ const meQuery = graphql(`
         subscriptionStatus
         featureFlags
       }
+      acceptedTermsOfServiceAt
     }
   }
 `);

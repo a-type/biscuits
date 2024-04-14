@@ -14,6 +14,7 @@ import { ParticleLayer } from '@a-type/ui/components/particles';
 import { GlobalSyncingIndicator } from '@/components/sync/GlobalSyncingIndicator.jsx';
 import { AppPreviewNotice, Provider } from '@biscuits/client';
 import { graphqlClient } from './graphql.js';
+import { groceriesDescriptor } from './stores/groceries/index.js';
 
 export function App() {
   useLayoutEffect(() => {
@@ -34,7 +35,11 @@ export function App() {
       <ErrorBoundary fallback={<ErrorFallback />}>
         <TooltipProvider>
           <Suspense fallback={<GlobalLoader />}>
-            <Provider graphqlClient={graphqlClient} appId="gnocchi">
+            <Provider
+              graphqlClient={graphqlClient}
+              appId="gnocchi"
+              storeDescriptor={groceriesDescriptor as any}
+            >
               <GroceriesProvider>
                 <ParticleLayer>
                   <AppPreviewNotice />

@@ -19,7 +19,11 @@ export function App() {
   return (
     <div className="flex flex-col flex-1 w-full h-full">
       <Suspense fallback={<FullScreenSpinner />}>
-        <Provider appId="trip-tick" graphqlClient={graphqlClient}>
+        <Provider
+          appId="trip-tick"
+          graphqlClient={graphqlClient}
+          storeDescriptor={clientDescriptor as any}
+        >
           <LofiProvider>
             <TooltipProvider>
               <AppPreviewNotice />

@@ -8,6 +8,7 @@ import {
 } from '@a-type/ui/components/layouts';
 import { P } from '@a-type/ui/components/typography';
 import { apps } from '@biscuits/apps';
+import { Essentials } from '@biscuits/client';
 import { Link } from '@verdant-web/react-router';
 import classNames from 'classnames';
 import { Suspense, lazy } from 'react';
@@ -70,6 +71,7 @@ export default function HomePage() {
         ))}
         <Footer />
       </PageContent>
+      <Essentials />
     </PageRoot>
   );
 }

@@ -46,6 +46,8 @@ export interface UserTable {
     Record<string, any> | undefined,
     Record<string, any> | undefined
   >;
+
+  acceptedTosAt: ColumnType<Date, Date | undefined, Date | undefined> | null;
 }
 export type User = Selectable<UserTable>;
 export type NewUser = Insertable<UserTable>;

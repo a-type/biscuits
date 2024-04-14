@@ -34,7 +34,7 @@ export function Navigation({}: NavigationProps) {
         >
           <Link to="/" data-active={matchTrips}>
             <NavBarItemIconWrapper>
-              <NavBarItemIcon className="i-solar-suitcase-tag-linear" />
+              <NavBarItemIcon className="i-solar-suitcase-tag-linear fill-inherit" />
             </NavBarItemIconWrapper>
             <NavBarItemText>Trips</NavBarItemText>
           </Link>

@@ -5,6 +5,7 @@ import {
   ResetToServer,
   SubscribedOnly,
   useCanSync,
+  Essentials,
 } from '@biscuits/client';
 import { FoodDetailDialog } from '@/components/foods/FoodDetailDialog.jsx';
 import { BugButton } from '@/components/menu/BugButton.jsx';
@@ -201,7 +202,7 @@ export function Pages() {
         <Router routes={routes} onNavigate={handleNavigate}>
           <TopLoader />
           <Outlet />
-          <LogoutNotice />
+          <Essentials />
           <RecipeTagEditor />
           <FoodDetailDialog />
           <SubscriptionPromotion>

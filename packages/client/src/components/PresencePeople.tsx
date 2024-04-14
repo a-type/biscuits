@@ -43,21 +43,21 @@ export function PresencePeople({
   return (
     <ErrorBoundary>
       <AvatarList count={peers.length + 1}>
-        <AvatarListItem
-          index={0}
-          imageSrc={self?.profile.imageUrl}
-          name={self?.profile.name}
-          className={avatarClassName}
-        />
         {peers.map((peer, index) => (
           <AvatarListItem
             key={peer.profile.id}
-            index={index + 1}
+            index={index}
             imageSrc={peer.profile.imageUrl}
             name={peer.profile.name}
             className={avatarClassName}
           />
         ))}
+        <AvatarListItem
+          index={peers.length}
+          imageSrc={self?.profile.imageUrl}
+          name={self?.profile.name}
+          className={avatarClassName}
+        />
       </AvatarList>
     </ErrorBoundary>
   );

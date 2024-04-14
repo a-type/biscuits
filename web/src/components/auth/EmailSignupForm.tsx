@@ -12,11 +12,13 @@ import { toast } from 'react-hot-toast';
 export interface EmailSignUpFormProps {
   returnTo?: string | null;
   actionText?: string;
+  disabled?: boolean;
 }
 
 export function EmailSignUpForm({
   returnTo,
   actionText = 'Start signup',
+  disabled,
 }: EmailSignUpFormProps) {
   const [success, setSuccess] = useState(false);
 
@@ -35,6 +37,7 @@ export function EmailSignUpForm({
         email: '',
       }}
       onSubmit={async (values, helpers) => {
+        if (disabled) return;
         try {
           // this API accepts form data
           const formData = new FormData();
@@ -66,7 +69,12 @@ export function EmailSignUpForm({
         autoComplete="email"
         required
       />
-      <SubmitButton type="submit" className="self-end" color="primary">
+      <SubmitButton
+        disabled={disabled}
+        type="submit"
+        className="self-end"
+        color="primary"
+      >
         {actionText}
       </SubmitButton>
     </FormikForm>

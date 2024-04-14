@@ -1,7 +1,7 @@
 import { EmailSignInForm } from '@/components/auth/EmailSignInForm.jsx';
 import { EmailSignUpForm } from '@/components/auth/EmailSignupForm.jsx';
 import { OAuthSignInButton } from '@/components/auth/OAuthSignInButton.jsx';
-import { H1, P } from '@a-type/ui/components/typography';
+import { P } from '@a-type/ui/components/typography';
 import { useSearchParams } from '@verdant-web/react-router';
 import {
   TabsList,
@@ -9,8 +9,10 @@ import {
   TabsRoot,
   TabsTrigger,
 } from '@a-type/ui/components/tabs';
-import { lazy } from 'react';
+import { lazy, useState } from 'react';
 import { Footer } from '@/components/help/Footer.jsx';
+import { Checkbox } from '@a-type/ui/components/checkbox';
+import classNames from 'classnames';
 
 const Paws = lazy(() => import('@/components/paws/Paws.jsx'));
 
@@ -18,6 +20,8 @@ export default function LoginPage() {
   const [searchParams, setParams] = useSearchParams();
   const returnTo = searchParams.get('returnTo') ?? undefined;
   const activeTab = searchParams.get('tab') ?? 'signin';
+
+  const [tosAgreed, setTosAgreed] = useState(false);
 
   return (
     <div className="flex flex-col items-center justify-center h-screen flex-1 bg-primary-wash">
@@ -47,16 +51,38 @@ export default function LoginPage() {
             className="flex flex-col gap-3 items-stretch"
           >
             <P className="w-full text-center">Welcome!</P>
+            <label
+              className={classNames(
+                'flex flex-row gap-3 max-w-400px text-sm transition-color  p-2 rounded-lg',
+                !tosAgreed && 'bg-primary-light text-black',
+              )}
+            >
+              <Checkbox
+                checked={tosAgreed}
+                onCheckedChange={(c) => setTosAgreed(!!c)}
+              />
+              <span>
+                I agree to the{' '}
+                <a href="/tos" className="font-bold" target="_blank">
+                  terms of service
+                </a>{' '}
+                and have read the{' '}
+                <a href="/privacy" className="font-bold" target="_blank">
+                  privacy policy
+                </a>
+              </span>
+            </label>
             <OAuthSignInButton
               provider="google"
               returnTo={returnTo}
               inviteId={searchParams.get('inviteId')}
               className="mx-auto"
+              disabled={!tosAgreed}
             >
               Sign up with Google
             </OAuthSignInButton>
             <Or />
-            <EmailSignUpForm returnTo={returnTo} />
+            <EmailSignUpForm returnTo={returnTo} disabled={!tosAgreed} />
           </TabsContent>
           <TabsContent
             value="signin"
