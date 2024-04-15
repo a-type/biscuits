@@ -4,6 +4,7 @@ import * as path from 'path';
 import * as fs from 'fs/promises';
 import { format } from 'prettier';
 import { URL, fileURLToPath } from 'url';
+import { exec } from 'child_process';
 
 intro('Create a new migration');
 
@@ -63,7 +64,7 @@ const exportDefaultIndex = indexContent.indexOf('export default {');
 const newContent = `${indexContent.slice(0, exportDefaultIndex)}\nimport * as v${nextVersion} from './${fileName.replace('.ts', '.js')}';\n${indexContent.slice(exportDefaultIndex)}`;
 // insert ", v#" into the exported object
 const exportIndex = newContent.indexOf('};', exportDefaultIndex);
-const newExport = `${newContent.slice(0, exportIndex)},\n  v${nextVersion}${newContent.slice(exportIndex)}`;
+const newExport = `${newContent.slice(0, exportIndex)}v${nextVersion},\n${newContent.slice(exportIndex)}`;
 
 await fs.writeFile(
   indexFile,
@@ -71,3 +72,7 @@ await fs.writeFile(
 );
 
 outro(`Created migration ${res}`);
+
+exec(`code ${path.join(migrationsDir, fileName)}`);
+
+process.exit(0);

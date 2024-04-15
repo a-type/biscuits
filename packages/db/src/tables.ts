@@ -48,6 +48,7 @@ export interface UserTable {
   >;
 
   acceptedTosAt: ColumnType<Date, Date | undefined, Date | undefined> | null;
+  sendEmailUpdates: ColumnType<boolean, boolean | undefined, boolean>;
 }
 export type User = Selectable<UserTable>;
 export type NewUser = Insertable<UserTable>;

@@ -1006,6 +1006,30 @@ export type introspection = {
             ]
           },
           {
+            "name": "setSendEmailUpdates",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "User",
+                "ofType": null
+              }
+            },
+            "args": [
+              {
+                "name": "value",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Boolean",
+                    "ofType": null
+                  }
+                }
+              }
+            ]
+          },
+          {
             "name": "setUserPreference",
             "type": {
               "kind": "NON_NULL",
@@ -1264,6 +1288,18 @@ export type introspection = {
               "ofType": {
                 "kind": "SCALAR",
                 "name": "ID",
+                "ofType": null
+              }
+            },
+            "args": []
+          },
+          {
+            "name": "isSubscribed",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
                 "ofType": null
               }
             },
@@ -2760,6 +2796,18 @@ export type introspection = {
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "sendEmailUpdates",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
             },
             "args": []
           }

@@ -17,6 +17,7 @@ import { LogoutButton, useLocalStorage } from '@biscuits/client';
 import { apps } from '@biscuits/apps';
 import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
 import { Footer } from '@/components/help/Footer.jsx';
+import { EmailUpdatesToggle } from '@/components/user/EmailUpdatesToggle.jsx';
 
 const PlanPageData = graphql(`
   query PlanPageData {
@@ -25,6 +26,7 @@ const PlanPageData = graphql(`
       plan {
         id
         subscriptionStatus
+        isSubscribed
       }
     }
   }
@@ -62,7 +64,7 @@ export function PlanPage({}: PlanPageProps) {
   return (
     <PageRoot>
       <PageContent innerProps={{ className: 'flex flex-col gap-6' }}>
-        <PageFixedArea className="mb-10 flex flex-row items-center w-full">
+        <PageFixedArea className="mb-10 flex flex-row items-center w-full justify-between">
           <Button asChild color="primary">
             <Link to={returnToAppUrl ?? '/'}>
               <Icon name="arrowLeft" />
@@ -91,6 +93,11 @@ export function PlanPage({}: PlanPageProps) {
                 </div>
               </>
             )}
+          </Suspense>
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <Suspense>
+            <EmailUpdatesToggle isSubscribed={data?.me?.plan?.isSubscribed} />
           </Suspense>
         </ErrorBoundary>
         <Footer />

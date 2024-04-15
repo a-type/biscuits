@@ -128,6 +128,27 @@ builder.mutationFields((t) => ({
       return userId;
     },
   }),
+  setSendEmailUpdates: t.field({
+    type: User,
+    authScopes: {
+      user: true,
+    },
+    args: {
+      value: t.arg({ type: 'Boolean', required: true }),
+    },
+    resolve: async (_, { value }, ctx) => {
+      assert(ctx.session);
+      const userId = ctx.session.userId;
+      await ctx.db
+        .updateTable('User')
+        .set({
+          sendEmailUpdates: value,
+        })
+        .where('id', '=', userId)
+        .executeTakeFirstOrThrow();
+      return userId;
+    },
+  }),
 }));
 
 export const User = builder.loadableNodeRef('User', {
@@ -206,6 +227,7 @@ User.implement({
         return user.acceptedTosAt;
       },
     }),
+    sendEmailUpdates: t.exposeBoolean('sendEmailUpdates'),
   }),
 });
 

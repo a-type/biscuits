@@ -293,6 +293,10 @@ Plan.implement({
         return isSubscribed(plan.subscriptionStatus);
       },
     }),
+    isSubscribed: t.field({
+      type: 'Boolean',
+      resolve: (plan) => isSubscribed(plan.subscriptionStatus),
+    }),
     subscriptionCanceledAt: t.expose('subscriptionCanceledAt', {
       nullable: true,
       type: 'DateTime',

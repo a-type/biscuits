@@ -2,6 +2,7 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
+  DialogTitle,
 } from '@a-type/ui/components/dialog';
 import { CONFIG, LogoutButton, graphql, useMe, useMutation } from '../index.js';
 import { Button } from '@a-type/ui/components/button';
@@ -31,7 +32,7 @@ export function TosPrompt() {
   return (
     <Dialog open={needsToUpdateTos}>
       <DialogContent>
-        <h1>Terms of Service Update</h1>
+        <DialogTitle>Terms of Service Update</DialogTitle>
         <p>
           We&apos;ve updated our terms of service. Please review and accept to
           continue using Biscuits apps.
