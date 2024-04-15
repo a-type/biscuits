@@ -88,8 +88,20 @@ export async function removeUserFromPlan(
         await email.sendMail({
           to: newAdminDetails.email,
           subject: 'You are now the admin of your Biscuits plan',
-          text: `Hi ${newAdminDetails.fullName},\n\nYou are now the admin of your Biscuits plan. You can manage your plan at ${UI_ORIGIN}/plans/${planId}.\n\nThanks,\nGrant`,
-          html: `Hi ${newAdminDetails.fullName},<br><br>You are now the admin of your Biscuits plan. You can manage your plan at <a href="${UI_ORIGIN}/plans/${planId}">${UI_ORIGIN}/plans/${planId}</a>.<br><br>Thanks,<br>Grant`,
+          text: `Hi ${newAdminDetails.fullName},\n
+          You are now the admin of your Biscuits plan. This usually happens because the previous admin left the plan. Your plan may require a new payment method to remain active.\n
+          You can manage your plan at ${UI_ORIGIN}/plan.\n
+          Thanks,
+          Grant`,
+          html: `<div>
+            <p>Hi ${newAdminDetails.fullName},</p>
+            <p>
+              You are now the admin of your Biscuits plan. This usually happens because the previous admin left the plan. Your plan may require a new payment method to remain active.
+              You can manage your plan at <a href="${UI_ORIGIN}/plan">${UI_ORIGIN}/plan</a>.
+            </p>
+            <p>Thanks,</p>
+            <p>Grant</p>
+          </div>`,
         });
       }
     } else {
@@ -356,10 +368,17 @@ export async function cancelPlan(planId: string, userId: string) {
       email.sendMail({
         to: m.email,
         subject: 'Your Biscuits plan has been canceled',
-        text: `Hi ${m.fullName},\n\nYour Biscuits plan has been canceled. If you have any questions, please contact us at
+        text: `Hi ${m.fullName},\n\nYour Biscuits plan has been canceled. If you have any questions, please contact us via
 ${UI_ORIGIN}/contact.\n\nThanks,\nGrant`,
-        html: `Hi ${m.fullName},<br><br>Your Biscuits plan has been canceled. If you have any questions, please contact us at
-<a href="${UI_ORIGIN}/contact">${UI_ORIGIN}/contact</a>.<br><br>Thanks,<br>Grant`,
+        html: `<div>
+        <p>Hi ${m.fullName},</p>
+        <p>
+          Your Biscuits plan has been canceled. If you have any questions, please contact us via
+          <a href="${UI_ORIGIN}/contact">${UI_ORIGIN}/contact</a>.
+        </p>
+        <p>Thanks,</p>
+        <p>Grant</p>
+      </div>`,
       }),
     ),
   );
