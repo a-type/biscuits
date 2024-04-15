@@ -97,8 +97,8 @@ const NavBarLink = memo(
           onClick={onClick}
           ref={ref}
         >
-          <NavBarItemIconWrapper>
-            <NavBarItemIcon>
+          <NavBarItemIconWrapper className="flex">
+            <NavBarItemIcon className="flex">
               <PopEffect active={animate} />
               {icon}
             </NavBarItemIcon>
