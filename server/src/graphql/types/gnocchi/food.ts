@@ -5,7 +5,11 @@ import { assignTypeName, hasTypeName } from '../../relay.js';
 import { BiscuitsError } from '@biscuits/error';
 import { FoodCategory } from './foodCategory.js';
 import { logger } from '../../../logger.js';
-import { decodeGlobalID } from '@pothos/plugin-relay';
+import {
+  ResolveCursorConnectionArgs,
+  decodeGlobalID,
+  resolveCursorConnection,
+} from '@pothos/plugin-relay';
 import { fromCursor, toCursor } from '../cursors.js';
 
 builder.queryFields((t) => ({
@@ -62,40 +66,51 @@ builder.queryFields((t) => ({
     args: {
       startsWith: t.arg.string(),
     },
-    resolve: async (_, args, ctx) => {
-      const { first: providedFirst, after } = args;
-      const first = providedFirst || 50;
-      const query = ctx.db.selectFrom('Food').selectAll();
-
-      if (args.startsWith) {
-        query.where('canonicalName', 'like', `${args.startsWith}%`);
-      }
-
-      if (after) {
-        const name = fromCursor(after);
-        query.where('canonicalName', '>', name);
-      }
-
-      const foods = await query.limit(first).execute();
-
-      const firstFood = foods[0];
-      const lastFood = foods[foods.length - 1];
-
-      return {
-        edges: foods.map((food) => ({
-          node: assignTypeName('Food')(food),
-          cursor: toCursor(food.canonicalName),
-        })),
-        pageInfo: {
-          hasNextPage: foods.length === first,
-          endCursor: lastFood ? toCursor(lastFood.canonicalName) : undefined,
-          hasPreviousPage: true,
-          startCursor: firstFood
-            ? toCursor(firstFood.canonicalName)
-            : undefined,
+    resolve: async (_, args, ctx) =>
+      resolveCursorConnection(
+        {
+          args,
+          toCursor: (food) => toCursor(food.canonicalName),
         },
-      };
-    },
+        async ({
+          before,
+          after,
+          limit,
+          inverted,
+        }: ResolveCursorConnectionArgs) => {
+          let query = ctx.db.selectFrom('Food').selectAll();
+
+          console.log(before, after, limit, inverted, args.startsWith);
+
+          if (args.startsWith) {
+            query = query.where(
+              'canonicalName',
+              'like',
+              `${args.startsWith.toLowerCase()}%`,
+            );
+          }
+
+          if (before) {
+            const name = fromCursor(before);
+            query = query.where('canonicalName', '<', name);
+          }
+
+          if (after) {
+            const name = fromCursor(after);
+            query = query.where('canonicalName', '>', name);
+          }
+
+          if (inverted) {
+            query = query.orderBy('canonicalName', 'desc');
+          } else {
+            query = query.orderBy('canonicalName', 'asc');
+          }
+
+          const foods = await query.limit(limit).execute();
+
+          return foods.map((food) => assignTypeName('Food')(food));
+        },
+      ),
   }),
 }));
 

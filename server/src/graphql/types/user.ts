@@ -228,6 +228,7 @@ User.implement({
       },
     }),
     sendEmailUpdates: t.exposeBoolean('sendEmailUpdates'),
+    isProductAdmin: t.exposeBoolean('isProductAdmin'),
   }),
 });
 

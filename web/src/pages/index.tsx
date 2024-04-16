@@ -57,6 +57,16 @@ const routes = makeRoutes([
     component: lazy(() => import('./TermsPage.js')),
   },
   {
+    path: '/admin',
+    component: lazy(() => import('./admin/AdminPage.js')),
+    children: [
+      {
+        path: 'foods',
+        component: lazy(() => import('./admin/AdminFoodsPage.js')),
+      },
+    ],
+  },
+  {
     path: '*',
     component: lazy(() => import('./NotFoundPage.jsx')),
   },
