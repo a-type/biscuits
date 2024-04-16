@@ -87,6 +87,7 @@ builder.mutationFields((t) => ({
       return { categoryId: category.id };
     },
   }),
+
   deleteCategory: t.field({
     type: 'DeleteCategoryResult',
     authScopes: {

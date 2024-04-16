@@ -6,6 +6,7 @@ import { BiscuitsError } from '@biscuits/error';
 import { FoodCategory } from './foodCategory.js';
 import { logger } from '../../../logger.js';
 import { decodeGlobalID } from '@pothos/plugin-relay';
+import { fromCursor, toCursor } from '../cursors.js';
 
 builder.queryFields((t) => ({
   food: t.field({
@@ -51,6 +52,49 @@ builder.queryFields((t) => ({
       }
 
       return null;
+    },
+  }),
+  foods: t.connection({
+    type: Food,
+    authScopes: {
+      productAdmin: true,
+    },
+    args: {
+      startsWith: t.arg.string(),
+    },
+    resolve: async (_, args, ctx) => {
+      const { first: providedFirst, after } = args;
+      const first = providedFirst || 50;
+      const query = ctx.db.selectFrom('Food').selectAll();
+
+      if (args.startsWith) {
+        query.where('canonicalName', 'like', `${args.startsWith}%`);
+      }
+
+      if (after) {
+        const name = fromCursor(after);
+        query.where('canonicalName', '>', name);
+      }
+
+      const foods = await query.limit(first).execute();
+
+      const firstFood = foods[0];
+      const lastFood = foods[foods.length - 1];
+
+      return {
+        edges: foods.map((food) => ({
+          node: assignTypeName('Food')(food),
+          cursor: toCursor(food.canonicalName),
+        })),
+        pageInfo: {
+          hasNextPage: foods.length === first,
+          endCursor: lastFood ? toCursor(lastFood.canonicalName) : undefined,
+          hasPreviousPage: true,
+          startCursor: firstFood
+            ? toCursor(firstFood.canonicalName)
+            : undefined,
+        },
+      };
     },
   }),
 }));
@@ -123,6 +167,86 @@ builder.mutationFields((t) => ({
       }
 
       return { foodId: food.id };
+    },
+  }),
+  addFoodName: t.field({
+    type: 'String',
+    args: {
+      foodId: t.arg.id({ required: true }),
+      name: t.arg.string({ required: true }),
+    },
+    authScopes: {
+      productAdmin: true,
+    },
+    resolve: async (_, { foodId, name }, ctx) => {
+      await ctx.db.insertInto('FoodName').values({ foodId, name }).execute();
+
+      return name;
+    },
+  }),
+  removeFoodName: t.field({
+    type: Food,
+    args: {
+      foodId: t.arg.id({ required: true }),
+      name: t.arg.string({ required: true }),
+    },
+    authScopes: {
+      productAdmin: true,
+    },
+    resolve: async (_, { foodId, name }, ctx) => {
+      await ctx.db
+        .deleteFrom('FoodName')
+        .where('foodId', '=', foodId)
+        .where('name', '=', name)
+        .execute();
+
+      return foodId;
+    },
+  }),
+  changeFoodCanonicalName: t.field({
+    type: Food,
+    args: {
+      foodId: t.arg.id({ required: true }),
+      name: t.arg.string({ required: true }),
+    },
+    authScopes: {
+      productAdmin: true,
+    },
+    resolve: async (_, { foodId, name }, ctx) => {
+      await ctx.db
+        .updateTable('Food')
+        .set({ canonicalName: name })
+        .where('id', '=', foodId)
+        .execute();
+
+      return foodId;
+    },
+  }),
+  overrideFoodCategory: t.field({
+    type: 'AssignFoodCategoryResult',
+    args: {
+      foodId: t.arg.id({ required: true }),
+      categoryId: t.arg.id({ required: true }),
+    },
+    authScopes: {
+      productAdmin: true,
+    },
+    resolve: async (_, { foodId, categoryId }, ctx) => {
+      await ctx.db
+        .insertInto('FoodCategoryAssignment')
+        .values({
+          foodId,
+          categoryId,
+          votes: 10000,
+        })
+        .onConflict((oc) =>
+          oc.columns(['foodId', 'categoryId']).doUpdateSet((eb) => ({
+            votes: 10000,
+          })),
+        )
+        .execute();
+
+      return { foodId };
     },
   }),
 }));
