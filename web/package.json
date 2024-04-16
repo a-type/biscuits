@@ -9,7 +9,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@a-type/ui": "^0.7.6",
+    "@a-type/ui": "^0.7.8",
     "@biscuits/apps": "workspace:*",
     "@biscuits/client": "workspace:*",
     "@biscuits/error": "workspace:*",

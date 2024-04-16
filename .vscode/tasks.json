@@ -46,6 +46,13 @@
       "runOptions": {
         "reevaluateOnRerun": true
       }
+    },
+    {
+      "type": "npm",
+      "script": "free-ports",
+      "problemMatcher": [],
+      "label": "Free Ports",
+      "detail": "kill-port 6123 6124 6220 6221"
     }
   ]
 }

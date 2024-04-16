@@ -26,7 +26,7 @@ export default function HomePage() {
       <Suspense>
         <Paws />
       </Suspense>
-      <PageContent innerProps={innerProps}>
+      <PageContent innerProps={innerProps} className="bg-transparent">
         <PageFixedArea className="bg-transparent flex flex-row justify-between items-center py-2">
           <h1
             className={classNames(
