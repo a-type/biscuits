@@ -105,8 +105,8 @@ importers:
   apps/gnocchi/web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.7.8
-        version: 0.7.8(@types/react-dom@18.2.17)(@types/react@18.0.14)
+        specifier: ^0.7.9
+        version: 0.7.9(@types/react-dom@18.2.17)(@types/react@18.0.14)
       '@a-type/utils':
         specifier: ^1.0.8
         version: 1.0.8
@@ -376,8 +376,8 @@ importers:
   apps/trip-tick/web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.7.8
-        version: 0.7.8(@types/react-dom@18.2.17)(@types/react@18.0.4)
+        specifier: ^0.7.9
+        version: 0.7.9(@types/react-dom@18.2.17)(@types/react@18.0.4)
       '@a-type/utils':
         specifier: ^1.0.6
         version: 1.0.6
@@ -524,8 +524,8 @@ importers:
         version: 1.13.2(@types/react@18.0.14)(react@18.2.0)
     devDependencies:
       '@a-type/ui':
-        specifier: ^0.7.8
-        version: 0.7.8(@types/react@18.0.14)
+        specifier: ^0.7.9
+        version: 0.7.9(@types/react@18.0.14)
       '@types/react':
         specifier: 18.0.14
         version: 18.0.14
@@ -537,7 +537,7 @@ importers:
         version: 18.2.0
       vite-plugin-pwa:
         specifier: 0.19.2
-        version: 0.19.2(vite@5.2.8)(workbox-build@7.0.0)(workbox-window@7.0.0)
+        version: 0.19.2(vite@5.2.9)(workbox-build@7.0.0)(workbox-window@7.0.0)
 
   packages/db:
     dependencies:
@@ -716,8 +716,8 @@ importers:
   web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.7.8
-        version: 0.7.8(@types/react-dom@18.0.5)(@types/react@18.0.4)
+        specifier: ^0.7.9
+        version: 0.7.9(@types/react-dom@18.0.5)(@types/react@18.0.4)
       '@biscuits/apps':
         specifier: workspace:*
         version: link:../packages/apps
@@ -856,8 +856,8 @@ packages:
       - encoding
       - supports-color
 
-  /@a-type/ui@0.7.8(@types/react-dom@18.0.5)(@types/react@18.0.4):
-    resolution: {integrity: sha512-0LpOiRvceZfRwnTV2RhBIOo9JiJjcA+qVKb1D+oELZLWxbqI+YoqU2QyzsfeFCH1WT6FIOpzKqlQYre2wpGXSQ==}
+  /@a-type/ui@0.7.9(@types/react-dom@18.0.5)(@types/react@18.0.4):
+    resolution: {integrity: sha512-FLlgfb2bHXKbm73IMEhSRjnIXYQGxxWxbUdYqVwfPNMBw5zDvdLG7Uznrq+43/XvP32XpTo1dfRXup5nlyc5hw==}
     dependencies:
       '@a-type/utils': 1.0.8
       '@radix-ui/react-accordion': 1.1.2(@types/react-dom@18.0.5)(@types/react@18.0.4)(react-dom@18.2.0)(react@18.2.0)
@@ -902,8 +902,8 @@ packages:
       - '@types/react-dom'
     dev: false
 
-  /@a-type/ui@0.7.8(@types/react-dom@18.2.17)(@types/react@18.0.14):
-    resolution: {integrity: sha512-0LpOiRvceZfRwnTV2RhBIOo9JiJjcA+qVKb1D+oELZLWxbqI+YoqU2QyzsfeFCH1WT6FIOpzKqlQYre2wpGXSQ==}
+  /@a-type/ui@0.7.9(@types/react-dom@18.2.17)(@types/react@18.0.14):
+    resolution: {integrity: sha512-FLlgfb2bHXKbm73IMEhSRjnIXYQGxxWxbUdYqVwfPNMBw5zDvdLG7Uznrq+43/XvP32XpTo1dfRXup5nlyc5hw==}
     dependencies:
       '@a-type/utils': 1.0.8
       '@radix-ui/react-accordion': 1.1.2(@types/react-dom@18.2.17)(@types/react@18.0.14)(react-dom@18.2.0)(react@18.2.0)
@@ -948,8 +948,8 @@ packages:
       - '@types/react-dom'
     dev: false
 
-  /@a-type/ui@0.7.8(@types/react-dom@18.2.17)(@types/react@18.0.4):
-    resolution: {integrity: sha512-0LpOiRvceZfRwnTV2RhBIOo9JiJjcA+qVKb1D+oELZLWxbqI+YoqU2QyzsfeFCH1WT6FIOpzKqlQYre2wpGXSQ==}
+  /@a-type/ui@0.7.9(@types/react-dom@18.2.17)(@types/react@18.0.4):
+    resolution: {integrity: sha512-FLlgfb2bHXKbm73IMEhSRjnIXYQGxxWxbUdYqVwfPNMBw5zDvdLG7Uznrq+43/XvP32XpTo1dfRXup5nlyc5hw==}
     dependencies:
       '@a-type/utils': 1.0.8
       '@radix-ui/react-accordion': 1.1.2(@types/react-dom@18.2.17)(@types/react@18.0.4)(react-dom@18.2.0)(react@18.2.0)
@@ -994,8 +994,8 @@ packages:
       - '@types/react-dom'
     dev: false
 
-  /@a-type/ui@0.7.8(@types/react@18.0.14):
-    resolution: {integrity: sha512-0LpOiRvceZfRwnTV2RhBIOo9JiJjcA+qVKb1D+oELZLWxbqI+YoqU2QyzsfeFCH1WT6FIOpzKqlQYre2wpGXSQ==}
+  /@a-type/ui@0.7.9(@types/react@18.0.14):
+    resolution: {integrity: sha512-FLlgfb2bHXKbm73IMEhSRjnIXYQGxxWxbUdYqVwfPNMBw5zDvdLG7Uznrq+43/XvP32XpTo1dfRXup5nlyc5hw==}
     dependencies:
       '@a-type/utils': 1.0.8
       '@radix-ui/react-accordion': 1.1.2(@types/react@18.0.14)(react-dom@18.2.0)(react@18.2.0)
@@ -3214,7 +3214,7 @@ packages:
       babel-plugin-polyfill-corejs2: 0.4.10(@babel/core@7.24.4)
       babel-plugin-polyfill-corejs3: 0.10.4(@babel/core@7.24.4)
       babel-plugin-polyfill-regenerator: 0.6.1(@babel/core@7.24.4)
-      core-js-compat: 3.36.1
+      core-js-compat: 3.37.0
       semver: 6.3.1
     transitivePeerDependencies:
       - supports-color
@@ -10936,7 +10936,7 @@ packages:
     dependencies:
       '@babel/core': 7.24.4
       '@babel/helper-define-polyfill-provider': 0.6.1(@babel/core@7.24.4)
-      core-js-compat: 3.36.1
+      core-js-compat: 3.37.0
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -11489,8 +11489,8 @@ packages:
       toggle-selection: 1.0.6
     dev: false
 
-  /core-js-compat@3.36.1:
-    resolution: {integrity: sha512-Dk997v9ZCt3X/npqzyGdTlq6t7lDBhZwGvV94PKzDArjp7BTRm7WlDAXYd/OWdeFHO8OChQYRJNJvUCqCbrtKA==}
+  /core-js-compat@3.37.0:
+    resolution: {integrity: sha512-vYq4L+T8aS5UuFg4UwDhc7YNRWVeVZwltad9C/jV3R2LgVOpS9BDr7l/WL6BN0dbV3k1XejPTHqqEzJgsa0frA==}
     dependencies:
       browserslist: 4.23.0
     dev: true
@@ -17452,7 +17452,7 @@ packages:
       - supports-color
     dev: true
 
-  /vite-plugin-pwa@0.19.2(vite@5.2.8)(workbox-build@7.0.0)(workbox-window@7.0.0):
+  /vite-plugin-pwa@0.19.2(vite@5.2.9)(workbox-build@7.0.0)(workbox-window@7.0.0):
     resolution: {integrity: sha512-LSQJFPxCAQYbRuSyc9EbRLRqLpaBA9onIZuQFomfUYjWSgHuQLonahetDlPSC9zsxmkSEhQH8dXZN8yL978h3w==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
@@ -17467,7 +17467,7 @@ packages:
       debug: 4.3.4
       fast-glob: 3.3.2
       pretty-bytes: 6.1.1
-      vite: 5.2.8
+      vite: 5.2.9
       workbox-build: 7.0.0
       workbox-window: 7.0.0
     transitivePeerDependencies:
@@ -17635,8 +17635,8 @@ packages:
     optionalDependencies:
       fsevents: 2.3.3
 
-  /vite@5.2.8:
-    resolution: {integrity: sha512-OyZR+c1CE8yeHw5V5t59aXsUPPVTHMDjEZz8MgguLL/Q7NblxhZUlTu9xSPqlsUO/y+X7dlU05jdhvyycD55DA==}
+  /vite@5.2.9:
+    resolution: {integrity: sha512-uOQWfuZBlc6Y3W/DTuQ1Sr+oIXWvqljLvS881SVmAj00d5RdgShLcuXWxseWPd4HXwiYBFW/vXHfKFeqj9uQnw==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
     peerDependencies:
