@@ -1,6 +1,7 @@
 import { getComputedQuantity } from '@/components/trips/utils.js';
 import { hooks } from '@/store.js';
 import { Trip } from '@trip-tick.biscuits/verdant';
+import differenceInDays from 'date-fns/differenceInDays';
 
 export function useTripProgress(
   trip: Trip,
@@ -41,8 +42,10 @@ export function useTripProgress(
             quantity: item.quantity,
             roundDown: item.roundDown,
             days,
-            perDays: item.perDays,
+            periodMultiplier: item.periodMultiplier,
             additional: item.additional,
+            condition: item.condition,
+            period: item.period,
           })
         );
       }, 0)
@@ -75,10 +78,13 @@ export function useTripProgress(
   };
 }
 
+/**
+ * Total number of days, including the first day and the last day.
+ */
 export function useTripDays(trip: Trip) {
   const { startsAt, endsAt } = hooks.useWatch(trip);
   if (!startsAt || !endsAt) {
     return 0;
   }
-  return Math.round((endsAt - startsAt) / 86400000);
+  return differenceInDays(endsAt, startsAt) + 1;
 }
