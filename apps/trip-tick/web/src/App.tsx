@@ -12,10 +12,12 @@ import { ReactNode, Suspense } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { FullScreenSpinner } from '@a-type/ui/components/spinner';
 import { ParticleLayer } from '@a-type/ui/components/particles';
+import { useVisualViewportOffset } from '@a-type/ui/hooks';
 
 const graphqlClient = createGraphQLClient();
 
 export function App() {
+  useVisualViewportOffset();
   return (
     <div className="flex flex-col flex-1 w-full h-full">
       <Suspense fallback={<FullScreenSpinner />}>
