@@ -105,8 +105,8 @@ importers:
   apps/gnocchi/web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.7.9
-        version: 0.7.9(@types/react-dom@18.2.17)(@types/react@18.0.14)
+        specifier: ^0.7.10
+        version: 0.7.10(@types/react-dom@18.2.17)(@types/react@18.0.14)
       '@a-type/utils':
         specifier: ^1.0.8
         version: 1.0.8
@@ -376,8 +376,8 @@ importers:
   apps/trip-tick/web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.7.9
-        version: 0.7.9(@types/react-dom@18.2.17)(@types/react@18.0.4)
+        specifier: ^0.7.10
+        version: 0.7.10(@types/react-dom@18.2.17)(@types/react@18.0.4)
       '@a-type/utils':
         specifier: ^1.0.6
         version: 1.0.6
@@ -524,8 +524,8 @@ importers:
         version: 1.13.2(@types/react@18.0.14)(react@18.2.0)
     devDependencies:
       '@a-type/ui':
-        specifier: ^0.7.9
-        version: 0.7.9(@types/react@18.0.14)
+        specifier: ^0.7.10
+        version: 0.7.10(@types/react@18.0.14)
       '@types/react':
         specifier: 18.0.14
         version: 18.0.14
@@ -716,8 +716,8 @@ importers:
   web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.7.9
-        version: 0.7.9(@types/react-dom@18.0.5)(@types/react@18.0.4)
+        specifier: ^0.7.10
+        version: 0.7.10(@types/react-dom@18.0.5)(@types/react@18.0.4)
       '@biscuits/apps':
         specifier: workspace:*
         version: link:../packages/apps
@@ -856,8 +856,8 @@ packages:
       - encoding
       - supports-color
 
-  /@a-type/ui@0.7.9(@types/react-dom@18.0.5)(@types/react@18.0.4):
-    resolution: {integrity: sha512-FLlgfb2bHXKbm73IMEhSRjnIXYQGxxWxbUdYqVwfPNMBw5zDvdLG7Uznrq+43/XvP32XpTo1dfRXup5nlyc5hw==}
+  /@a-type/ui@0.7.10(@types/react-dom@18.0.5)(@types/react@18.0.4):
+    resolution: {integrity: sha512-AHrrw7GNU+CFMmPCOGXbf85pFlzXAc12xoSD8h9b02WWokVV6iHdq6lOx9hZQhh7q9NTi7m5dKJymALr378zyQ==}
     dependencies:
       '@a-type/utils': 1.0.8
       '@radix-ui/react-accordion': 1.1.2(@types/react-dom@18.0.5)(@types/react@18.0.4)(react-dom@18.2.0)(react@18.2.0)
@@ -902,8 +902,8 @@ packages:
       - '@types/react-dom'
     dev: false
 
-  /@a-type/ui@0.7.9(@types/react-dom@18.2.17)(@types/react@18.0.14):
-    resolution: {integrity: sha512-FLlgfb2bHXKbm73IMEhSRjnIXYQGxxWxbUdYqVwfPNMBw5zDvdLG7Uznrq+43/XvP32XpTo1dfRXup5nlyc5hw==}
+  /@a-type/ui@0.7.10(@types/react-dom@18.2.17)(@types/react@18.0.14):
+    resolution: {integrity: sha512-AHrrw7GNU+CFMmPCOGXbf85pFlzXAc12xoSD8h9b02WWokVV6iHdq6lOx9hZQhh7q9NTi7m5dKJymALr378zyQ==}
     dependencies:
       '@a-type/utils': 1.0.8
       '@radix-ui/react-accordion': 1.1.2(@types/react-dom@18.2.17)(@types/react@18.0.14)(react-dom@18.2.0)(react@18.2.0)
@@ -948,8 +948,8 @@ packages:
       - '@types/react-dom'
     dev: false
 
-  /@a-type/ui@0.7.9(@types/react-dom@18.2.17)(@types/react@18.0.4):
-    resolution: {integrity: sha512-FLlgfb2bHXKbm73IMEhSRjnIXYQGxxWxbUdYqVwfPNMBw5zDvdLG7Uznrq+43/XvP32XpTo1dfRXup5nlyc5hw==}
+  /@a-type/ui@0.7.10(@types/react-dom@18.2.17)(@types/react@18.0.4):
+    resolution: {integrity: sha512-AHrrw7GNU+CFMmPCOGXbf85pFlzXAc12xoSD8h9b02WWokVV6iHdq6lOx9hZQhh7q9NTi7m5dKJymALr378zyQ==}
     dependencies:
       '@a-type/utils': 1.0.8
       '@radix-ui/react-accordion': 1.1.2(@types/react-dom@18.2.17)(@types/react@18.0.4)(react-dom@18.2.0)(react@18.2.0)
@@ -994,8 +994,8 @@ packages:
       - '@types/react-dom'
     dev: false
 
-  /@a-type/ui@0.7.9(@types/react@18.0.14):
-    resolution: {integrity: sha512-FLlgfb2bHXKbm73IMEhSRjnIXYQGxxWxbUdYqVwfPNMBw5zDvdLG7Uznrq+43/XvP32XpTo1dfRXup5nlyc5hw==}
+  /@a-type/ui@0.7.10(@types/react@18.0.14):
+    resolution: {integrity: sha512-AHrrw7GNU+CFMmPCOGXbf85pFlzXAc12xoSD8h9b02WWokVV6iHdq6lOx9hZQhh7q9NTi7m5dKJymALr378zyQ==}
     dependencies:
       '@a-type/utils': 1.0.8
       '@radix-ui/react-accordion': 1.1.2(@types/react@18.0.14)(react-dom@18.2.0)(react@18.2.0)
