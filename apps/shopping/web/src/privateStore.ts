@@ -4,7 +4,7 @@ import {
   migrations,
   UserInfo,
 } from '@shopping.biscuits/verdant';
-import { VerdantProfile } from '@biscuits/client';
+import { CONFIG, getVerdantSync, VerdantProfile } from '@biscuits/client';
 import { undoHistory } from './undo.js';
 
 export interface Presence {
@@ -22,6 +22,11 @@ export const privateClientDescriptor = new ClientDescriptor({
   namespace: 'private_shopping',
   migrations,
   undoHistory,
+  sync: getVerdantSync({
+    appId: 'shopping',
+    access: 'user',
+    initialPresence: {} satisfies Presence,
+  }),
 });
 
 // these are some helpers I like to use. You can delete them if you want.

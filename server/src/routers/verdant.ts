@@ -27,14 +27,26 @@ verdantRouter.get('/token/:app', async (req) => {
     throw new BiscuitsError(BiscuitsError.Code.NoPlan);
   }
 
-  // lookup library for user's plan and the app
   const ok = await isPlanInGoodStanding(session.planId);
 
   if (!ok) {
     throw new BiscuitsError(BiscuitsError.Code.SubscriptionInactive);
   }
 
-  const libraryId = getLibraryName(session.planId, req.params.app);
+  const access = req.params.access ?? 'members';
+  if (access !== 'members' && access !== 'user') {
+    throw new BiscuitsError(
+      BiscuitsError.Code.BadRequest,
+      'Invalid access type',
+    );
+  }
+
+  const libraryId = getLibraryName({
+    planId: session.planId,
+    app: req.params.app,
+    access,
+    userId: session.userId,
+  });
 
   const syncEndpoint = DEPLOYED_ORIGIN + '/verdant';
   const fileEndpoint = DEPLOYED_ORIGIN + '/verdant/files';

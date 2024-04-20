@@ -416,9 +416,26 @@ Plan.implement({
           required: true,
           description: 'The app to get library info for',
         }),
+        access: t.arg({
+          type: 'String',
+          required: true,
+          description: 'The access level of the library',
+        }),
       },
-      resolve: async (plan, { app }, ctx) => {
-        const libraryName = getLibraryName(plan.id, app);
+      resolve: async (plan, { app, access }, ctx) => {
+        assert(ctx.session?.userId);
+        if (access !== 'members' && access !== 'user') {
+          throw new BiscuitsError(
+            BiscuitsError.Code.BadRequest,
+            'Invalid access type',
+          );
+        }
+        const libraryName = getLibraryName({
+          planId: plan.id,
+          app,
+          access,
+          userId: ctx.session.userId,
+        });
         const info = await ctx.verdant.getLibraryInfo(libraryName);
         if (
           !info ||

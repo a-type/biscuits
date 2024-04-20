@@ -3,6 +3,7 @@ import { builder } from '../builder.js';
 import { getLibraryName } from '@biscuits/libraries';
 import { BiscuitsError } from '@biscuits/error';
 import { Plan } from './plan.js';
+import { assert } from '@a-type/utils';
 
 builder.mutationFields((t) => ({
   resetSync: t.field({
@@ -16,8 +17,12 @@ builder.mutationFields((t) => ({
         required: true,
       }),
       planId: t.arg.globalID(),
+      access: t.arg.string({
+        required: true,
+      }),
     },
-    resolve: async (_, { app, planId }, ctx) => {
+    resolve: async (_, { app, planId, access }, ctx) => {
+      assert(ctx.session?.userId, 'Session required');
       if (planId && !ctx.session?.isProductAdmin) {
         throw new BiscuitsError(BiscuitsError.Code.Forbidden);
       }
@@ -25,7 +30,20 @@ builder.mutationFields((t) => ({
       if (!id) {
         throw new BiscuitsError(BiscuitsError.Code.BadRequest);
       }
-      ctx.verdant.evictLibrary(getLibraryName(id, app));
+      if (access !== 'members' && access !== 'user') {
+        throw new BiscuitsError(
+          BiscuitsError.Code.BadRequest,
+          'Invalid access type',
+        );
+      }
+      ctx.verdant.evictLibrary(
+        getLibraryName({
+          planId: id,
+          app,
+          access,
+          userId: ctx.session.userId,
+        }),
+      );
       return {
         planId: id,
       };

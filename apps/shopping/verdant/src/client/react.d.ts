@@ -13,8 +13,8 @@ import type {
   AnyEntity,
   EntityDestructured,
   EntityFile,
-  Item,
-  ItemFilter,
+  List,
+  ListFilter,
 } from "./index.js";
 
 type HookConfig<F> = {
@@ -78,32 +78,32 @@ export interface GeneratedHooks<Presence, Profile> {
    */
   useSync(isOn: boolean): void;
 
-  useItem(id: string, config?: { skip?: boolean }): Item | null;
-  useItemUnsuspended(
+  useList(id: string, config?: { skip?: boolean }): List | null;
+  useListUnsuspended(
     id: string,
     config?: { skip?: boolean },
-  ): { data: Item | null; status: QueryStatus };
-  useOneItem: <Config extends HookConfig<ItemFilter>>(
+  ): { data: List | null; status: QueryStatus };
+  useOneList: <Config extends HookConfig<ListFilter>>(
     config?: Config,
-  ) => Item | null;
-  useOneItemsUnsuspended: <Config extends HookConfig<ItemFilter>>(
+  ) => List | null;
+  useOneListsUnsuspended: <Config extends HookConfig<ListFilter>>(
     config?: Config,
-  ) => { data: Item | null; status: QueryStatus };
-  useAllItems: <Config extends HookConfig<ItemFilter>>(
+  ) => { data: List | null; status: QueryStatus };
+  useAllLists: <Config extends HookConfig<ListFilter>>(
     config?: Config,
-  ) => Item[];
-  useAllItemsUnsuspended: <Config extends HookConfig<ItemFilter>>(
+  ) => List[];
+  useAllListsUnsuspended: <Config extends HookConfig<ListFilter>>(
     config?: Config,
-  ) => { data: Item[]; status: QueryStatus };
-  useAllItemsPaginated: <
-    Config extends HookConfig<ItemFilter> & {
+  ) => { data: List[]; status: QueryStatus };
+  useAllListsPaginated: <
+    Config extends HookConfig<ListFilter> & {
       pageSize?: number;
       suspend?: false;
     },
   >(
     config?: Config,
   ) => [
-    Item[],
+    List[],
     {
       next: () => void;
       previous: () => void;
@@ -113,15 +113,15 @@ export interface GeneratedHooks<Presence, Profile> {
       status: QueryStatus;
     },
   ];
-  useAllItemsInfinite: <
-    Config extends HookConfig<ItemFilter> & {
+  useAllListsInfinite: <
+    Config extends HookConfig<ListFilter> & {
       pageSize?: number;
       suspend?: false;
     },
   >(
     config?: Config,
   ) => [
-    Item[],
+    List[],
     { loadMore: () => void; hasMore: boolean; status: QueryStatus },
   ];
 }

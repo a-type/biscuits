@@ -53,6 +53,14 @@
       "problemMatcher": [],
       "label": "Free Ports",
       "detail": "kill-port 6123 6124 6220 6221"
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "apps/shopping/web",
+      "problemMatcher": [],
+      "label": "Run Shopping",
+      "detail": "vite"
     }
   ]
 }

@@ -1,17 +1,14 @@
 import { useLocalStorage } from '../hooks/useStorage.js';
 import { Button, ButtonProps } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
-import { useRegisterSW } from 'virtual:pwa-register/react';
 
 export interface ReloadButtonProps extends ButtonProps {}
 
 export function ReloadButton({ onClick, ...props }: ReloadButtonProps) {
-  const { updateServiceWorker } = useRegisterSW();
   const [_, setLastErrorReload] = useLastErrorReload();
 
   const refresh = () => {
     setLastErrorReload(Date.now() + 500);
-    updateServiceWorker();
     window.location.reload();
   };
 

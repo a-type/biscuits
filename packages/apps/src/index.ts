@@ -10,6 +10,7 @@ export type AppManifest<Id extends string> = {
   demoVideoSrc: string;
   paidDescription: string;
   paidFeatures: PaidFeature[];
+  prerelease?: boolean;
 };
 
 export type PaidFeature = {
@@ -81,6 +82,18 @@ export const apps = [
     paidDescription:
       'Now everyone can be on the same page when packing. Plus, get a weather forecast and more powerful trip planning tools.',
   } satisfies AppManifest<'trip-tick'>,
+  {
+    id: 'shopping',
+    demoVideoSrc: '',
+    description: 'TODO',
+    devOriginOverride: 'http://localhost:6222',
+    iconPath: 'icon.png',
+    name: 'Shopping',
+    paidDescription: 'TODO',
+    paidFeatures: [],
+    url: 'https://shopping.biscuits.club',
+    prerelease: true,
+  } satisfies AppManifest<'shopping'>,
 ] as const;
 
 export type AppId = (typeof apps)[number]['id'];

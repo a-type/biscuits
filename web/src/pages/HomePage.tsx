@@ -66,9 +66,11 @@ export default function HomePage() {
           </P>
         </div>
         {/* <AppsGrid /> */}
-        {apps.map((app, index) => (
-          <AppDemo appId={app.id} key={app.id} index={index} />
-        ))}
+        {apps.map((app, index) =>
+          !app.prerelease || import.meta.env.DEV ? (
+            <AppDemo appId={app.id} key={app.id} index={index} />
+          ) : null,
+        )}
         <Footer />
       </PageContent>
       <Essentials />

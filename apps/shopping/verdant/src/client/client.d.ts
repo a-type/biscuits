@@ -10,7 +10,7 @@ import type {
 export * from "@verdant-web/store";
 
 export class Client<Presence = any, Profile = any> {
-  readonly items: CollectionQueries<Item, ItemInit, ItemFilter>;
+  readonly lists: CollectionQueries<List, ListInit, ListFilter>;
 
   sync: BaseClient<Presence, Profile>["sync"];
   undoHistory: BaseClient<Presence, Profile>["undoHistory"];
@@ -65,46 +65,85 @@ import {
   EntityFileSnapshot,
 } from "@verdant-web/store";
 
-/** Generated types for Item */
+/** Generated types for List */
 
-export type Item = ObjectEntity<ItemInit, ItemDestructured, ItemSnapshot>;
-export type ItemId = string;
-export type ItemContent = string;
-export type ItemDone = boolean;
-export type ItemCreatedAt = number;
-export type ItemInit = {
+export type List = ObjectEntity<ListInit, ListDestructured, ListSnapshot>;
+export type ListId = string;
+export type ListName = string;
+export type ListCreatedAt = number;
+export type ListItems = ListEntity<
+  ListItemsInit,
+  ListItemsDestructured,
+  ListItemsSnapshot
+>;
+export type ListItemsItem = ObjectEntity<
+  ListItemsItemInit,
+  ListItemsItemDestructured,
+  ListItemsItemSnapshot
+>;
+export type ListItemsItemId = string;
+export type ListItemsItemDescription = string;
+export type ListItemsItemPurchasedAt = number;
+export type ListItemsItemCreatedAt = number;
+export type ListItemsItemLink = string;
+export type ListInit = {
   id?: string;
-  content?: string;
-  done?: boolean;
+  name?: string;
   createdAt?: number;
+  items?: ListItemsInit;
 };
 
-export type ItemDestructured = {
+export type ListItemsItemInit = {
+  id?: string;
+  description?: string;
+  purchasedAt?: number | null;
+  createdAt?: number;
+  link?: string | null;
+};
+export type ListItemsInit = ListItemsItemInit[];
+export type ListDestructured = {
   id: string;
-  content: string;
-  done: boolean;
+  name: string;
   createdAt: number;
+  items: ListItems;
 };
 
-export type ItemSnapshot = {
+export type ListItemsItemDestructured = {
   id: string;
-  content: string;
-  done: boolean;
+  description: string;
+  purchasedAt: number | null;
   createdAt: number;
+  link: string | null;
+};
+export type ListItemsDestructured = ListItemsItem[];
+export type ListSnapshot = {
+  id: string;
+  name: string;
+  createdAt: number;
+  items: ListItemsSnapshot;
 };
 
-/** Index filters for Item **/
+export type ListItemsItemSnapshot = {
+  id: string;
+  description: string;
+  purchasedAt: number | null;
+  createdAt: number;
+  link: string | null;
+};
+export type ListItemsSnapshot = ListItemsItemSnapshot[];
 
-export interface ItemCreatedAtSortFilter {
+/** Index filters for List **/
+
+export interface ListCreatedAtSortFilter {
   where: "createdAt";
   order: "asc" | "desc";
 }
-export interface ItemCreatedAtMatchFilter {
+export interface ListCreatedAtMatchFilter {
   where: "createdAt";
   equals: number;
   order?: "asc" | "desc";
 }
-export interface ItemCreatedAtRangeFilter {
+export interface ListCreatedAtRangeFilter {
   where: "createdAt";
   gte?: number;
   gt?: number;
@@ -112,7 +151,7 @@ export interface ItemCreatedAtRangeFilter {
   lt?: number;
   order?: "asc" | "desc";
 }
-export type ItemFilter =
-  | ItemCreatedAtSortFilter
-  | ItemCreatedAtMatchFilter
-  | ItemCreatedAtRangeFilter;
+export type ListFilter =
+  | ListCreatedAtSortFilter
+  | ListCreatedAtMatchFilter
+  | ListCreatedAtRangeFilter;

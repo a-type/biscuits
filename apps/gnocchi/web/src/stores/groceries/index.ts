@@ -508,6 +508,7 @@ export function createClientDescriptor(options: { namespace: string }) {
             viewingRecipeId: null,
             lastInteractedCategory: null,
           } satisfies Presence,
+          access: 'members',
         }),
     migrations,
     namespace: options.namespace,

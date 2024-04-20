@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import react from '@vitejs/plugin-react-swc';
 import { fileURLToPath } from 'url';
 import { VitePWA } from 'vite-plugin-pwa';
 
@@ -57,7 +57,7 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3000,
+    port: 6222,
   },
   build: {
     sourcemap: true,

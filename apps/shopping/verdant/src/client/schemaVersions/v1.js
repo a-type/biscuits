@@ -2,22 +2,39 @@
 
 // src/schema.ts
 import { schema } from "@verdant-web/store";
-import cuid from "cuid";
-var items = schema.collection({
-  name: "item",
+var lists = schema.collection({
+  name: "list",
   primaryKey: "id",
   fields: {
     id: schema.fields.string({
-      default: cuid
+      default: schema.generated.id
     }),
-    content: schema.fields.string({
-      default: ""
-    }),
-    done: schema.fields.boolean({
-      default: false
+    name: schema.fields.string({
+      default: "New list"
     }),
     createdAt: schema.fields.number({
-      default: () => Date.now()
+      default: Date.now()
+    }),
+    items: schema.fields.array({
+      items: schema.fields.object({
+        properties: {
+          id: schema.fields.string({
+            default: schema.generated.id
+          }),
+          description: schema.fields.string({
+            default: ""
+          }),
+          purchasedAt: schema.fields.number({
+            nullable: true
+          }),
+          createdAt: schema.fields.number({
+            default: Date.now()
+          }),
+          link: schema.fields.string({
+            nullable: true
+          })
+        }
+      })
     })
   },
   indexes: {
@@ -29,7 +46,7 @@ var items = schema.collection({
 var schema_default = schema({
   version: 1,
   collections: {
-    items
+    lists
   }
 });
 export {

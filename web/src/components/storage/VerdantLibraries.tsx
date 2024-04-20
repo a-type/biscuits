@@ -15,6 +15,7 @@ import {
 } from '@a-type/ui/components/card';
 import { AppId, AppManifest, apps, getAppUrl } from '@biscuits/apps';
 import { useMutation, useSuspenseQuery } from '@biscuits/client';
+import { Fragment } from 'react';
 
 const libraryFragment = graphql(`
   fragment LibraryFragment on PlanLibraryInfo @_unmask {
@@ -32,10 +33,10 @@ const libraryFragment = graphql(`
 
 const libraryData = graphql(
   `
-    query VerdantLibraryData($appId: String!) {
+    query VerdantLibraryData($appId: String!, $access: String!) {
       plan {
         id
-        libraryInfo(app: $appId) {
+        libraryInfo(app: $appId, access: $access) {
           ...LibraryFragment
         }
       }
@@ -46,8 +47,8 @@ const libraryData = graphql(
 
 const resetSync = graphql(
   `
-    mutation ResetSync($appId: String!) {
-      resetSync(app: $appId) {
+    mutation ResetSync($appId: String!, $access: String!) {
+      resetSync(app: $appId, access: $access) {
         plan {
           id
           libraryInfo(app: $appId) {
@@ -64,14 +65,25 @@ export function VerdantLibraries() {
   return (
     <CardGrid>
       {apps.map((appManifest) => (
-        <VerdantLibrary app={appManifest} key={appManifest.id} />
+        <Fragment key={appManifest.id}>
+          <VerdantLibrary app={appManifest} access="members" />
+          <VerdantLibrary app={appManifest} access="user" />
+        </Fragment>
       ))}
     </CardGrid>
   );
 }
 
-function VerdantLibrary({ app }: { app: AppManifest<AppId> }) {
-  const data = useSuspenseQuery(libraryData, { variables: { appId: app.id } });
+function VerdantLibrary({
+  app,
+  access,
+}: {
+  app: AppManifest<AppId>;
+  access: string;
+}) {
+  const data = useSuspenseQuery(libraryData, {
+    variables: { appId: app.id, access },
+  });
   const [doReset] = useMutation(resetSync);
 
   const info = data.data?.plan?.libraryInfo;
@@ -109,7 +121,7 @@ function VerdantLibrary({ app }: { app: AppManifest<AppId> }) {
       <CardFooter>
         <CardActions>
           <ConfirmedButton
-            onConfirm={() => doReset({ variables: { appId: app.id } })}
+            onConfirm={() => doReset({ variables: { appId: app.id, access } })}
             size="small"
             color="destructive"
             confirmText="When you reset server data for this app, it will be re-initialized by the next device to open the app."

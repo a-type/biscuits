@@ -1125,6 +1125,17 @@ export type introspection = {
             },
             "args": [
               {
+                "name": "access",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              },
+              {
                 "name": "app",
                 "type": {
                   "kind": "NON_NULL",
@@ -1453,6 +1464,17 @@ export type introspection = {
               "ofType": null
             },
             "args": [
+              {
+                "name": "access",
+                "type": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                }
+              },
               {
                 "name": "app",
                 "type": {
