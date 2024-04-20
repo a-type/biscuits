@@ -30,7 +30,7 @@ export const apps = [
     iconPath: 'android-chrome-512x512.png',
     size: 4,
     devOriginOverride: 'http://localhost:6220',
-    demoVideoSrc: '/videos/gnocchi.mp4',
+    demoVideoSrc: '/videos/gnocchi-compressed.mp4',
     paidFeatures: [
       {
         imageUrl: '/images/gnocchi/scanner.png',
@@ -64,7 +64,7 @@ export const apps = [
     iconPath: 'icon.png',
     size: 2,
     devOriginOverride: 'http://localhost:6221',
-    demoVideoSrc: '/videos/trip-tick.mp4',
+    demoVideoSrc: '/videos/trip-tick-compressed.mp4',
     paidFeatures: [
       {
         imageUrl: '/images/trip-tick/weather.png',
