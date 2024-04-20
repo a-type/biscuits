@@ -1,0 +1,27 @@
+import { useEffect } from 'react';
+import { checkForUpdate } from '@/updateState.js';
+import { H1 } from '@a-type/ui/components/typography';
+import { UpdatePrompt } from '@/components/updatePrompt/UpdatePrompt.jsx';
+import { ColorModeSelect } from '@/components/settings/ColorModeSelect.jsx';
+
+export interface SettingsPageProps {}
+
+export function SettingsPage({}: SettingsPageProps) {
+  useEffect(() => {
+    checkForUpdate();
+  }, []);
+
+  return (
+    <PageContent fullHeight noPadding>
+      <div className="flex flex-col w-full mt-6 p-4 gap-4 items-start">
+        <H1>Settings</H1>
+        <UpdatePrompt />
+        <div className="flex flex-col items-start w-full gap-4">
+          <ColorModeSelect />
+        </div>
+      </div>
+    </PageContent>
+  );
+}
+
+export default SettingsPage;

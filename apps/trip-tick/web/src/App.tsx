@@ -3,7 +3,7 @@ import { clientDescriptor, hooks } from '@/store.js';
 import { IconSpritesheet } from '@a-type/ui/components/icon';
 import { TooltipProvider } from '@a-type/ui/components/tooltip';
 import {
-  useIsLoggedIn,
+  useCanSync,
   Provider,
   createGraphQLClient,
   AppPreviewNotice,
@@ -47,7 +47,7 @@ export function App() {
 
 function LofiProvider({ children }: { children: ReactNode }) {
   // only sync if logged in to the server
-  const [isLoggedIn] = useIsLoggedIn();
+  const isLoggedIn = useCanSync();
   return (
     <hooks.Provider value={clientDescriptor} sync={isLoggedIn}>
       {children}
