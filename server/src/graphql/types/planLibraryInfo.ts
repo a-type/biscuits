@@ -1,6 +1,6 @@
 import { ReplicaType } from '@verdant-web/server';
 import { builder } from '../builder.js';
-import { getLibraryName } from '@biscuits/libraries';
+import { BiscuitsVerdantProfile, getLibraryName } from '@biscuits/libraries';
 import { BiscuitsError } from '@biscuits/error';
 import { Plan } from './plan.js';
 import { assert } from '@a-type/utils';
@@ -66,6 +66,31 @@ builder.objectType('PlanLibraryInfo', {
         } else {
           return library.replicas.filter((replica) => !replica.truant);
         }
+      },
+    }),
+    profiles: t.field({
+      type: ['PlanLibraryReplicaProfile'],
+      args: {
+        includeTruant: t.arg.boolean(),
+      },
+      resolve: (library, args) => {
+        const baseReplicas = args.includeTruant
+          ? library.replicas
+          : library.replicas.filter((replica) => !replica.truant);
+        const profiles = baseReplicas.map(
+          (replica) => replica.profile as BiscuitsVerdantProfile,
+        );
+        // deduplicate
+        let deduplicatedProfiles: BiscuitsVerdantProfile[] = [];
+        const seen = new Set<string>();
+        for (const profile of profiles) {
+          if (!seen.has(profile.id)) {
+            deduplicatedProfiles.push(profile);
+            seen.add(profile.id);
+          }
+        }
+
+        return deduplicatedProfiles;
       },
     }),
     latestServerOrder: t.exposeInt('latestServerOrder'),

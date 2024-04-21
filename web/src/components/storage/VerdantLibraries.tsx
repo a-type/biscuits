@@ -20,13 +20,10 @@ import { Fragment } from 'react';
 const libraryFragment = graphql(`
   fragment LibraryFragment on PlanLibraryInfo @_unmask {
     id
-    replicas {
+    profiles {
       id
-      profile {
-        id
-        name
-        imageUrl
-      }
+      name
+      imageUrl
     }
   }
 `);
@@ -64,12 +61,14 @@ const resetSync = graphql(
 export function VerdantLibraries() {
   return (
     <CardGrid>
-      {apps.map((appManifest) => (
-        <Fragment key={appManifest.id}>
-          <VerdantLibrary app={appManifest} access="members" />
-          <VerdantLibrary app={appManifest} access="user" />
-        </Fragment>
-      ))}
+      {apps
+        .filter((app) => !app.prerelease)
+        .map((appManifest) => (
+          <Fragment key={appManifest.id}>
+            <VerdantLibrary app={appManifest} access="members" />
+            <VerdantLibrary app={appManifest} access="user" />
+          </Fragment>
+        ))}
     </CardGrid>
   );
 }
@@ -87,18 +86,10 @@ function VerdantLibrary({
   const [doReset] = useMutation(resetSync);
 
   const info = data.data?.plan?.libraryInfo;
-  if (!info)
-    return (
-      <CardRoot>
-        <CardMain>
-          <CardTitle className="flex flex-row gap-2 items-center">
-            <img width={24} src={`${getAppUrl(app)}/${app.iconPath}`} />
-            {app.name}
-          </CardTitle>
-          <p>No data</p>
-        </CardMain>
-      </CardRoot>
-    );
+
+  if (!info) {
+    return null;
+  }
 
   return (
     <CardRoot>
@@ -106,14 +97,15 @@ function VerdantLibrary({
         <CardTitle className="flex flex-row gap-2 items-center">
           <img width={24} src={`${getAppUrl(app)}/${app.iconPath}`} />
           {app.name}
+          {access === 'user' && <span> (private data)</span>}
         </CardTitle>
-        <AvatarList count={info.replicas.length}>
-          {info.replicas.map((replica, index) => (
+        <AvatarList count={info.profiles.length}>
+          {info.profiles.map((profile, index) => (
             <AvatarListItem
               index={index}
-              key={replica.id}
-              imageSrc={replica.profile.imageUrl ?? undefined}
-              name={replica.profile.name}
+              key={profile.id}
+              imageSrc={profile.imageUrl ?? undefined}
+              name={profile.name}
             />
           ))}
         </AvatarList>

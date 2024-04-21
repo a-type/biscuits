@@ -1681,6 +1681,33 @@ export type introspection = {
             "args": []
           },
           {
+            "name": "profiles",
+            "type": {
+              "kind": "NON_NULL",
+              "ofType": {
+                "kind": "LIST",
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "PlanLibraryReplicaProfile",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "args": [
+              {
+                "name": "includeTruant",
+                "type": {
+                  "kind": "SCALAR",
+                  "name": "Boolean",
+                  "ofType": null
+                }
+              }
+            ]
+          },
+          {
             "name": "replicas",
             "type": {
               "kind": "NON_NULL",
