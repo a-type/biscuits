@@ -108,8 +108,8 @@ importers:
   apps/gnocchi/web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.7.12
-        version: 0.7.12(@types/react-dom@18.2.25)(@types/react@18.2.79)
+        specifier: ^0.7.13
+        version: 0.7.13(@types/react-dom@18.2.25)(@types/react@18.2.79)
       '@a-type/utils':
         specifier: ^1.0.8
         version: 1.0.8
@@ -376,8 +376,8 @@ importers:
   apps/shopping/web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.7.12
-        version: 0.7.12(@types/react-dom@18.2.25)(@types/react@18.2.79)
+        specifier: ^0.7.13
+        version: 0.7.13(@types/react-dom@18.2.25)(@types/react@18.2.79)
       '@a-type/utils':
         specifier: ^1.0.8
         version: 1.0.8
@@ -467,8 +467,8 @@ importers:
   apps/trip-tick/web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.7.12
-        version: 0.7.12(@types/react-dom@18.2.25)(@types/react@18.2.79)
+        specifier: ^0.7.13
+        version: 0.7.13(@types/react-dom@18.2.25)(@types/react@18.2.79)
       '@a-type/utils':
         specifier: ^1.0.6
         version: 1.0.6
@@ -615,8 +615,8 @@ importers:
         version: 1.13.2(@types/react@18.0.14)(react@18.2.0)
     devDependencies:
       '@a-type/ui':
-        specifier: ^0.7.12
-        version: 0.7.12(@types/react@18.0.14)
+        specifier: ^0.7.13
+        version: 0.7.13(@types/react@18.0.14)
       '@types/react':
         specifier: 18.0.14
         version: 18.0.14
@@ -807,8 +807,8 @@ importers:
   web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.7.12
-        version: 0.7.12(@types/react-dom@18.0.5)(@types/react@18.0.4)
+        specifier: ^0.7.13
+        version: 0.7.13(@types/react-dom@18.0.5)(@types/react@18.0.4)
       '@biscuits/apps':
         specifier: workspace:*
         version: link:../packages/apps
@@ -947,8 +947,8 @@ packages:
       - encoding
       - supports-color
 
-  /@a-type/ui@0.7.12(@types/react-dom@18.0.5)(@types/react@18.0.4):
-    resolution: {integrity: sha512-5GnbfvvG8YglHbUFstSew0sgHhWvDzlGwpTE65QiCSntYQHrgf/mhEGOWsOdTuGDZiMC3QysJHQ+0Fiqm1yNyQ==}
+  /@a-type/ui@0.7.13(@types/react-dom@18.0.5)(@types/react@18.0.4):
+    resolution: {integrity: sha512-Z6bVFxoLqQIgH64T7V3vIsTyVEdQeEOqvTYbwM+vqVMnMKBn9pDqh1nc+rsBMbC240taX/D/1Skm8aVYLJ8s/Q==}
     dependencies:
       '@a-type/utils': 1.0.8
       '@radix-ui/react-accordion': 1.1.2(@types/react-dom@18.0.5)(@types/react@18.0.4)(react-dom@18.2.0)(react@18.2.0)
@@ -993,8 +993,8 @@ packages:
       - '@types/react-dom'
     dev: false
 
-  /@a-type/ui@0.7.12(@types/react-dom@18.2.25)(@types/react@18.2.79):
-    resolution: {integrity: sha512-5GnbfvvG8YglHbUFstSew0sgHhWvDzlGwpTE65QiCSntYQHrgf/mhEGOWsOdTuGDZiMC3QysJHQ+0Fiqm1yNyQ==}
+  /@a-type/ui@0.7.13(@types/react-dom@18.2.25)(@types/react@18.2.79):
+    resolution: {integrity: sha512-Z6bVFxoLqQIgH64T7V3vIsTyVEdQeEOqvTYbwM+vqVMnMKBn9pDqh1nc+rsBMbC240taX/D/1Skm8aVYLJ8s/Q==}
     dependencies:
       '@a-type/utils': 1.0.8
       '@radix-ui/react-accordion': 1.1.2(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0)
@@ -1015,13 +1015,13 @@ packages:
       '@radix-ui/react-toggle-group': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0)
       '@radix-ui/react-tooltip': 1.0.7(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0)
       '@react-spring/web': 9.7.3(react-dom@18.2.0)(react@18.2.0)
-      '@tiptap/core': 2.2.4(@tiptap/pm@2.2.4)
-      '@tiptap/extension-document': 2.2.4(@tiptap/core@2.2.4)
-      '@tiptap/extension-paragraph': 2.2.4(@tiptap/core@2.2.4)
-      '@tiptap/pm': 2.2.4
-      '@tiptap/react': 2.2.4(@tiptap/core@2.2.4)(@tiptap/pm@2.2.4)(react-dom@18.2.0)(react@18.2.0)
-      '@tiptap/starter-kit': 2.2.4(@tiptap/pm@2.2.4)
-      '@use-gesture/react': 10.3.0(react@18.2.0)
+      '@tiptap/core': 2.3.0(@tiptap/pm@2.3.0)
+      '@tiptap/extension-document': 2.3.0(@tiptap/core@2.3.0)
+      '@tiptap/extension-paragraph': 2.3.0(@tiptap/core@2.3.0)
+      '@tiptap/pm': 2.3.0
+      '@tiptap/react': 2.3.0(@tiptap/core@2.3.0)(@tiptap/pm@2.3.0)(react-dom@18.2.0)(react@18.2.0)
+      '@tiptap/starter-kit': 2.3.0(@tiptap/pm@2.3.0)
+      '@use-gesture/react': 10.3.1(react@18.2.0)
       browser-image-resizer: 2.4.1
       calendar-blocks: 0.3.1(react@18.2.0)
       clsx: 2.1.0
@@ -1031,7 +1031,7 @@ packages:
       date-fns: 2.30.0
       formik: 2.4.5(react@18.2.0)
       pluralize: 8.0.0
-      prosemirror-model: 1.19.3
+      prosemirror-model: 1.20.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     transitivePeerDependencies:
@@ -1039,8 +1039,8 @@ packages:
       - '@types/react-dom'
     dev: false
 
-  /@a-type/ui@0.7.12(@types/react@18.0.14):
-    resolution: {integrity: sha512-5GnbfvvG8YglHbUFstSew0sgHhWvDzlGwpTE65QiCSntYQHrgf/mhEGOWsOdTuGDZiMC3QysJHQ+0Fiqm1yNyQ==}
+  /@a-type/ui@0.7.13(@types/react@18.0.14):
+    resolution: {integrity: sha512-Z6bVFxoLqQIgH64T7V3vIsTyVEdQeEOqvTYbwM+vqVMnMKBn9pDqh1nc+rsBMbC240taX/D/1Skm8aVYLJ8s/Q==}
     dependencies:
       '@a-type/utils': 1.0.8
       '@radix-ui/react-accordion': 1.1.2(@types/react@18.0.14)(react-dom@18.2.0)(react@18.2.0)
