@@ -1,12 +1,40 @@
 {
-  "routes": [
-    { "src": "/appPicker/", "dest": "/appPicker/", "status": 200 },
-    { "src": "/refreshSession/", "dest": "/refreshSession/", "status": 200 },
+  "rewrites": [
+    { "source": "/appPicker/", "destination": "/appPicker/index.html" },
     {
-      "src": "/storeRefreshToken/",
-      "dest": "/storeRefreshToken/",
-      "status": 200
+      "source": "/refreshSession/",
+      "destination": "/refreshSession/index.html"
     },
-    { "src": "/[^.]+", "dest": "/", "status": 200 }
+    {
+      "source": "/storeRefreshToken/",
+      "destination": "/storeRefreshToken/index.html"
+    },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "headers": [
+    {
+      "source": "/videos/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000" }
+      ]
+    },
+    {
+      "source": "/images/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000" }
+      ]
+    },
+    {
+      "source": "/fonts/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000" }
+      ]
+    },
+    {
+      "source": "/models/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000" }
+      ]
+    }
   ]
 }
