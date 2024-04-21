@@ -29,9 +29,7 @@ export default function LoginPage() {
         <Paws />
       </div>
       <div className="flex flex-col gap-3 p-6 items-center bg-white border-solid border border-1 border-black rounded-lg relative z-1">
-        <h1 className='[font-family:"VC_Henrietta_Trial","Noto_Serif",serif] mb-0'>
-          Join the club
-        </h1>
+        <h1 className="font-fancy mb-0">Join the club</h1>
         <TabsRoot
           className="flex flex-col"
           value={activeTab}

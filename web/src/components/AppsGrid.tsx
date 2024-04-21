@@ -41,12 +41,7 @@ function AppCard({ app }: { app: AppManifest<AppId> }) {
             : 'none',
         }}
       >
-        <h2
-          className={classNames(
-            'm-0 p-0 text-3xl',
-            '[font-family:"VC_Henrietta_Trial","Noto_Serif",serif]',
-          )}
-        >
+        <h2 className={classNames('m-0 p-0 text-3xl', 'font-fancy')}>
           {app.name}
         </h2>
       </div>
