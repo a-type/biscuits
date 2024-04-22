@@ -8,7 +8,7 @@ import {
 import { H1, H2 } from '@a-type/ui/components/typography';
 import { Link, useNavigate, useSearchParams } from '@verdant-web/react-router';
 import { Suspense, useEffect } from 'react';
-import { NetworkStatus, useSuspenseQuery } from '@biscuits/client';
+import { NetworkStatus, useQuery } from '@biscuits/client';
 import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
 import { MembersAndInvitations } from '@/components/plan/MembersAndInvitations.jsx';
@@ -35,7 +35,7 @@ const PlanPageData = graphql(`
 export interface PlanPageProps {}
 
 export function PlanPage({}: PlanPageProps) {
-  const result = useSuspenseQuery(PlanPageData);
+  const result = useQuery(PlanPageData);
   const { data } = result;
   const [searchParams] = useSearchParams();
   const returnToAppId = searchParams.get('appReferrer');
@@ -73,6 +73,11 @@ export function PlanPage({}: PlanPageProps) {
           </Button>
           <LogoutButton />
         </PageFixedArea>
+        <ErrorBoundary>
+          <Suspense>
+            <EmailUpdatesToggle isSubscribed={data?.me?.plan?.isSubscribed} />
+          </Suspense>
+        </ErrorBoundary>
         <H1>Your Plan</H1>
         <ErrorBoundary
           fallback={
@@ -93,11 +98,6 @@ export function PlanPage({}: PlanPageProps) {
                 </div>
               </>
             )}
-          </Suspense>
-        </ErrorBoundary>
-        <ErrorBoundary>
-          <Suspense>
-            <EmailUpdatesToggle isSubscribed={data?.me?.plan?.isSubscribed} />
           </Suspense>
         </ErrorBoundary>
         <Footer />

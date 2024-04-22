@@ -41,7 +41,7 @@ export function SubscriptionSetup({}: SubscriptionSetupProps) {
   const [params, setParams] = useSearchParams();
   const didJustCheckout = params.get('paymentComplete');
 
-  const { data, refetch } = useQuery(PlanSubscriptionInfo);
+  const { data, refetch, loading } = useQuery(PlanSubscriptionInfo);
 
   const subscriptionStatus = data?.plan?.subscriptionStatus;
   const isTerminalStatus =
@@ -82,6 +82,10 @@ export function SubscriptionSetup({}: SubscriptionSetupProps) {
         <div>Activating your subscription...</div>
       </div>
     );
+  }
+
+  if (loading) {
+    return <Spinner />;
   }
 
   if (data?.plan?.checkoutData) {
