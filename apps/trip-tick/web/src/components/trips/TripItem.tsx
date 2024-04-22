@@ -10,22 +10,20 @@ import { LiveUpdateTextField } from '@a-type/ui/components/liveUpdateTextField';
 import { NumberStepper } from '@a-type/ui/components/numberStepper';
 import { useParticles } from '@a-type/ui/components/particles';
 import {
-  Popover,
-  PopoverAnchor,
-  PopoverArrow,
-  PopoverContent,
-} from '@a-type/ui/components/popover';
-import { useLongPress } from '@a-type/ui/hooks';
-import { FragmentOf, ResultOf } from '@biscuits/client';
-import * as Progress from '@radix-ui/react-progress';
+  SliderRange,
+  SliderRoot,
+  SliderThumb,
+  SliderTrack,
+} from '@a-type/ui/components/slider';
+import { ResultOf } from '@biscuits/client';
 import {
   ListItemsItem,
   TripCompletionsValue,
   TripExtraItemsValueItem,
 } from '@trip-tick.biscuits/verdant';
-import classNames from 'classnames';
 import { useEffect, useRef, useState } from 'react';
 import { getItemRulesLabel } from '../lists/utils.js';
+import classNames from 'classnames';
 
 export function ListItem({
   item,
@@ -136,20 +134,6 @@ function ChecklistItem({
     }
   };
 
-  const {
-    ref,
-    state,
-    props: holdProps,
-  } = useLongPress({
-    onActivate() {},
-    onDurationReached: () => {
-      onCompletionChanged(computedQuantity);
-    },
-    // effectively disable, until supported...
-    delay: completed ? 60 * 1000 : 400,
-    duration: 1000,
-  });
-
   const canEdit = onDescriptionChanged || onQuantityChanged;
   const [editing, setEditing] = useState(canEdit && !description);
 
@@ -172,33 +156,13 @@ function ChecklistItem({
   return (
     <div className="w-full p-2 flex flex-col gap-2">
       <div className="w-full flex flex-row items-center gap-2 flex-wrap">
-        <Popover open={state === 'holding' || state === 'candidate'}>
-          <PopoverAnchor asChild>
-            <CheckboxRoot
-              checked={completed}
-              onCheckedChange={mainOnChecked}
-              className="w-32px h-32px rounded-full touch-none flex items-center justify-center text-black"
-              ref={ref}
-              {...holdProps}
-            >
-              <Icon name={completed ? 'check' : 'plus'} />
-            </CheckboxRoot>
-          </PopoverAnchor>
-          <PopoverContent>
-            <PopoverArrow />
-            <div className="absolute z--1 top-0 left-0 h-full bg-accent-wash animate-progress-bar animate-duration-[1s] animate-delay-[400ms] animate-forwards" />
-            <div className="flex flex-row">
-              Hold to complete
-              <Icon
-                className={classNames(
-                  'ml-2',
-                  state === 'candidate' ? 'opacity-100' : 'opacity-50',
-                )}
-                name="check"
-              />
-            </div>
-          </PopoverContent>
-        </Popover>
+        <CheckboxRoot
+          checked={completed}
+          onCheckedChange={mainOnChecked}
+          className="w-32px h-32px rounded-full touch-none flex items-center justify-center text-black"
+        >
+          <Icon name={completed ? 'check' : 'plus'} />
+        </CheckboxRoot>
         {onDescriptionChanged && editing ? (
           <LiveUpdateTextField
             value={description}
@@ -231,9 +195,11 @@ function ChecklistItem({
           </Button>
         )}
       </div>
-      <Progress.Root
-        value={completedQuantity / computedQuantity}
-        className="relative overflow-hidden rounded-full w-full h-12px border border-solid border-black"
+      <SliderRoot
+        value={[completedQuantity]}
+        min={0}
+        max={computedQuantity}
+        onValueChange={([v]) => onCompletionChanged(v)}
         style={{
           // Fix overflow clipping in Safari
           // https://gist.github.com/domske/b66047671c780a238b51c51ffde8d3a0
@@ -241,24 +207,32 @@ function ChecklistItem({
         }}
         ref={barRef}
       >
-        <Progress.Indicator
-          className="bg-accent w-full h-full transition-transform duration-[300ms] ease-out"
-          style={{
-            transform: `translateX(-${
-              100 * (1 - completedQuantity / computedQuantity)
-            }%)`,
-          }}
-        />
-        {new Array(computedQuantity - 1).fill(0).map((_, i) => (
-          <div
-            key={i}
-            className="w-1px h-full bg-gray-6 absolute top-0 left-0"
-            style={{
-              left: `${(100 / computedQuantity) * (i + 1)}%`,
-            }}
+        <SliderTrack>
+          <SliderRange
+            className="transition-all"
+            data-color={completed ? 'default' : 'primary'}
           />
-        ))}
-      </Progress.Root>
+          {new Array(computedQuantity - 1).fill(0).map((_, i) => (
+            <div
+              key={i}
+              className="w-1px h-full bg-gray-6 absolute top-0 left-0"
+              style={{
+                left: `${(100 / computedQuantity) * (i + 1)}%`,
+              }}
+            />
+          ))}
+        </SliderTrack>
+        <SliderThumb
+          data-color={completed ? 'default' : 'primary'}
+          className={classNames(
+            'transition-all',
+            completed && 'bg-accent ring-black ring-1 text-white',
+            'flex items-center justify-center',
+          )}
+        >
+          {completed && <Icon name="check" />}
+        </SliderThumb>
+      </SliderRoot>
       <div className="flex flex-row justify-between gap-2 items-center text-xs text-gray-7">
         {subline && <div className="italic">{subline}</div>}
         <span className="ml-auto">
