@@ -9,12 +9,12 @@ export function Provider({
   graphqlClient,
   appId,
   children,
-  storeDescriptor,
+  storeDescriptor = null,
 }: {
   appId?: AppId;
   graphqlClient: ApolloClient<any>;
   children: ReactNode;
-  storeDescriptor: ClientDescriptor<any, VerdantProfile> | null;
+  storeDescriptor?: ClientDescriptor<any, VerdantProfile> | null;
 }) {
   return (
     <ApolloProvider client={graphqlClient}>

@@ -14,20 +14,21 @@
     "up-ui": "pnpm --recursive update \"@a-type/ui\" --latest",
     "create-migration": "node ./scripts/createMigration.mjs",
     "create-app": "node ./scripts/create-app/create-app.mjs",
-    "free-ports": "kill-port 6123 6124 6220 6221"
+    "free-ports": "kill-port 6123 6124 6220 6221",
+    "latest": "pnpm --recursive update --latest"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "cp-tpl": "1.0.9",
-    "husky": "^8.0.3",
-    "turbo": "^1.9.3",
-    "typescript": "^5.0.4",
     "@clack/prompts": "0.7.0",
-    "prettier": "3.2.5",
+    "cp-tpl": "1.0.9",
     "eslint": "^8",
     "eslint-config-next": "14.0.3",
-    "kill-port": "2.0.1"
+    "husky": "^8.0.3",
+    "kill-port": "2.0.1",
+    "prettier": "3.2.5",
+    "turbo": "^1.9.3",
+    "typescript": "^5.4.5"
   }
 }
