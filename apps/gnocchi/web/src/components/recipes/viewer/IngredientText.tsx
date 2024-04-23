@@ -25,9 +25,11 @@ export function IngredientText({
       <span className={className}>
         <Tooltip
           content={
-            <span className="text-wrap max-w-80vw">
-              Multiplier {multiplier}x applied. Original value: {quantity}
-            </span>
+            (
+              <span className="text-wrap max-w-80vw">
+                Multiplier {multiplier}x applied. Original value: {quantity}
+              </span>
+            ) as any
           }
         >
           <span className="text-accent-dark font-bold">

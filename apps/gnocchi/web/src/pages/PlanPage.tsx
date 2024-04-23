@@ -28,7 +28,6 @@ import {
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 import { ReactNode, useEffect } from 'react';
 import { groceriesDescriptor } from '@/stores/groceries/index.js';
-import { VAPID_KEY } from '@/config.js';
 import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
 
 const contents = {
@@ -96,13 +95,13 @@ function ManageSection() {
 }
 
 function OfflineContents() {
-  const [_, refetch] = useMe();
+  const { refetch } = useMe();
 
   useInterval(refetch, 3000);
 
   return (
     <MainContainer>
-      <InstallHint />
+      <InstallHint content="Always have your list on hand. Install the app!" />
       <DarkModeToggle />
       <Button size="small" color="default" onClick={() => refetch()}>
         Retry connection
@@ -118,7 +117,7 @@ function OfflineContents() {
 function AnonymousContents() {
   return (
     <MainContainer>
-      <InstallHint />
+      <InstallHint content="Always have your list on hand. Install the app!" />
       <DarkModeToggle />
       <div>
         <div className="flex flex-row items-center gap-2">
@@ -146,7 +145,7 @@ function AnonymousContents() {
 function UnsubscribedContents() {
   return (
     <MainContainer>
-      <InstallHint />
+      <InstallHint content="Always have your list on hand. Install the app!" />
       <DarkModeToggle />
       <div className="bg-primary-wash color-black p-4 rounded-lg">
         Subscription inactive
@@ -164,10 +163,11 @@ function UnsubscribedContents() {
 function OnlineContents() {
   return (
     <MainContainer>
-      <InstallHint />
+      <InstallHint content="Always have your list on hand. Install the app!" />
       <DarkModeToggle />
       <H2>Collaborate</H2>
-      <PushSubscriptionToggle vapidKey={VAPID_KEY} />
+      {/* TODO: re-enable push subscriptions */}
+      {/* <PushSubscriptionToggle vapidKey={VAPID_KEY} /> */}
       <Divider />
       <H2>Manage</H2>
       <ManagePlanButton />

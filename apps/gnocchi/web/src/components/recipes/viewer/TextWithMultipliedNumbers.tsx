@@ -36,10 +36,12 @@ export function TextWithMultipliedNumbers({
             {isNumber && (
               <Tooltip
                 content={
-                  <span className="text-wrap max-w-80vw">
-                    Multiplier {fractionToText(multiplier)}x applied. Original
-                    value: {fragment}
-                  </span>
+                  (
+                    <span className="text-wrap max-w-80vw">
+                      Multiplier {fractionToText(multiplier)}x applied. Original
+                      value: {fragment}
+                    </span>
+                  ) as any
                 }
               >
                 <span className="multiplied-number text-accent-dark font-bold flex-row inline-flex items-center gap-0.5">
