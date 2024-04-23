@@ -69,18 +69,9 @@ export function GroceriesPage() {
             <Suspense>
               <ChangelogDisplay className="sm:hidden" hideOnSeen />
             </Suspense>
-            <Suspense>
-              <OfflineIndicator />
-            </Suspense>
             <InstallButton />
             <Suspense>
-              <UserMenu>
-                <Suspense
-                  fallback={<Icon className="w-32px h-32px" name="profile" />}
-                >
-                  <PresencePeople />
-                </Suspense>
-              </UserMenu>
+              <UserMenu />
             </Suspense>
           </div>
         </TopControls>

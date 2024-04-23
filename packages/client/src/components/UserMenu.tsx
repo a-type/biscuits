@@ -48,16 +48,18 @@ export function UserMenu({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         {children ?? isLoggedIn ? (
-          <Button size="icon" color="ghost" className={className}>
+          <Button size="small" color="ghost" className={className}>
             <ErrorBoundary fallback={<Avatar />}>
               <Suspense fallback={<Avatar />}>
                 <PresencePeople />
               </Suspense>
             </ErrorBoundary>
+            <Icon name="gear" />
           </Button>
         ) : (
-          <Button size="small" color="accent" className={className}>
-            <Icon name="refresh" /> Sync
+          <Button size="small" color="ghost" className={className}>
+            <Icon name="offline" />
+            <Icon name="gear" />
           </Button>
         )}
       </DropdownMenuTrigger>
