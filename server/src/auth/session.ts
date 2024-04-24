@@ -4,7 +4,11 @@ import { SessionManager } from '@a-type/auth';
 import { db, userNameSelector } from '@biscuits/db';
 import { BiscuitsError } from '../error.js';
 import { SESSION_SECRET } from '../config/secrets.js';
-import { DEPLOYED_ORIGIN, UI_ORIGIN } from '../config/deployedContext.js';
+import {
+  DEPLOYED_ORIGIN,
+  UI_ORIGIN,
+  ENVIRONMENT,
+} from '../config/deployedContext.js';
 
 declare module '@a-type/auth' {
   interface Session {
@@ -53,5 +57,5 @@ export const sessions = new SessionManager({
   },
   audience: UI_ORIGIN,
   issuer: DEPLOYED_ORIGIN,
-  // mode: ENVIRONMENT === 'production' ? 'production' : 'development',
+  mode: ENVIRONMENT === 'production' ? 'production' : 'development',
 });
