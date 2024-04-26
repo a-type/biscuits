@@ -42,16 +42,16 @@ export const AddBar = () => (
     <Suspense fallback={<div className="w-full h-41px" />}>
       <GroceryListAdd />
     </Suspense>
-    <GroceriesActionBar />
+    <Suspense>
+      <GroceriesActionBar />
+    </Suspense>
   </PageFixedArea>
 );
 
 export const List = () => (
-  <>
-    {/* <Suspense> */}
+  <Suspense>
     <GroceryList />
-    {/* </Suspense> */}
-  </>
+  </Suspense>
 );
 
 export function ThemedPageContent({
