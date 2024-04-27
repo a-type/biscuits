@@ -32,7 +32,7 @@ export function UserMenu({
   disableAppSettings,
   children,
 }: UserMenuProps) {
-  const [isLoggedIn] = useIsLoggedIn();
+  const [isLoggedIn, loading] = useIsLoggedIn();
   const isOffline = useIsOffline();
   const appId = useAppId();
 
@@ -47,7 +47,12 @@ export function UserMenu({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        {children ?? isLoggedIn ? (
+        {children ?? (!isLoggedIn && loading) ? (
+          <Button size="small" color="ghost" className={className}>
+            <Avatar />
+            <Icon name="gear" />
+          </Button>
+        ) : isLoggedIn ? (
           <Button size="small" color="ghost" className={className}>
             <ErrorBoundary fallback={<Avatar />}>
               <Suspense fallback={<Avatar />}>
