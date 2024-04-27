@@ -13,12 +13,19 @@ import { lazy, useState } from 'react';
 import { Footer } from '@/components/help/Footer.jsx';
 import { Checkbox } from '@a-type/ui/components/checkbox';
 import classNames from 'classnames';
+import { AppId, appsById } from '@biscuits/apps';
 
 const Paws = lazy(() => import('@/components/paws/Paws.jsx'));
 
 export default function LoginPage() {
   const [searchParams, setParams] = useSearchParams();
-  const returnTo = searchParams.get('returnTo') ?? undefined;
+  let returnTo = searchParams.get('returnTo') ?? undefined;
+  const appReferrer = searchParams.get('appReferrer') ?? undefined;
+  if (!returnTo && appReferrer) {
+    const app = appsById[appReferrer as AppId];
+    returnTo = app?.url;
+  }
+
   const activeTab = searchParams.get('tab') ?? 'signin';
 
   const [tosAgreed, setTosAgreed] = useState(false);

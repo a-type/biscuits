@@ -110,7 +110,7 @@ const retry = new RetryLink({
     jitter: true,
   },
   attempts: {
-    max: 3,
+    max: 10,
     retryIf: (error, _operation) => {
       if (error.networkError) return true;
 

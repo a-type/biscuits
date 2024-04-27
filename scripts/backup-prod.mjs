@@ -12,9 +12,10 @@ const backupDirName = path.resolve(process.cwd(), `backups/${nowString}`);
 fs.mkdirSync(backupDirName, { recursive: true });
 
 const backupFileName = path.resolve(backupDirName, 'database.sqlite');
-const backupVerdantFileName = path.resolve(backupDirName, 'verdant.sqlite');
+const backupVerdantFileName = path.resolve(backupDirName, 'storage.sqlite');
 
 // pull the files from Fly
 const exec = promisify(child.exec);
+await exec(`flyctl machines start biscuits-club`);
 await exec(`flyctl ssh sftp get /data/database.sqlite ${backupFileName}`);
-await exec(`flyctl ssh sftp get /data/verdant.sqlite ${backupVerdantFileName}`);
+await exec(`flyctl ssh sftp get /data/storage.sqlite ${backupVerdantFileName}`);
