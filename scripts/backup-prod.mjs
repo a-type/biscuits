@@ -16,6 +16,5 @@ const backupVerdantFileName = path.resolve(backupDirName, 'storage.sqlite');
 
 // pull the files from Fly
 const exec = promisify(child.exec);
-await exec(`flyctl machines start biscuits-club`);
 await exec(`flyctl ssh sftp get /data/database.sqlite ${backupFileName}`);
 await exec(`flyctl ssh sftp get /data/storage.sqlite ${backupVerdantFileName}`);
