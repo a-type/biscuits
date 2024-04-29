@@ -23,7 +23,7 @@ jobs:
         run: |
           mkdir ./backup
           curl https://api.biscuits.club
-          flyctl ssh sftp get /data/verdant.sqlite ./backup/verdant.sqlite
+          flyctl ssh sftp get /data/storage.sqlite ./backup/storage.sqlite
           flyctl ssh sftp get /data/database.sqlite ./backup/database.sqlite
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
