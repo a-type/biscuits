@@ -39,3 +39,8 @@ export function useAppId() {
   }
   return ctx.appId;
 }
+
+export function useMaybeAppId() {
+  const ctx = useContext(BiscuitsContext);
+  return ctx?.appId;
+}

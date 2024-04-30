@@ -1,5 +1,5 @@
 import { Button, ButtonProps } from '@a-type/ui/components/button';
-import { CONFIG, useAppId } from '../index.js';
+import { CONFIG, useAppId, useMaybeAppId } from '../index.js';
 import { Icon } from '@a-type/ui/components/icon';
 
 export interface LoginButtonProps extends ButtonProps {
@@ -10,8 +10,10 @@ export function LoginButton({ children, ...props }: LoginButtonProps) {
   const url = new URL(CONFIG.HOME_ORIGIN + '/login');
 
   url.searchParams.set('returnTo', props.returnTo ?? window.location.href);
-  const appId = useAppId();
-  url.searchParams.set('appReferrer', appId);
+  const appId = useMaybeAppId();
+  if (appId) {
+    url.searchParams.set('appReferrer', appId);
+  }
 
   return (
     <Button asChild {...props}>
