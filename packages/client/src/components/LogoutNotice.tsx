@@ -1,4 +1,3 @@
-import { useLocalStorage } from '../hooks/useStorage.js';
 import { useEffect, useState } from 'react';
 import {
   Dialog,
@@ -10,11 +9,12 @@ import { P } from '@a-type/ui/components/typography';
 import { Button } from '@a-type/ui/components/button';
 import { useIsLoggedIn } from '../index.js';
 import { LoginButton } from './LoginButton.js';
+import { useWasLoggedIn } from '../hooks/useWasLoggedIn.js';
 
 export interface LogoutNoticeProps {}
 
 export function LogoutNotice({}: LogoutNoticeProps) {
-  const [wasLoggedIn, setWasLoggedIn] = useLocalStorage('wasLoggedIn', false);
+  const [wasLoggedIn, setWasLoggedIn] = useWasLoggedIn();
   const [isLoggedIn, loadingLoggedInStatus] = useIsLoggedIn();
   const [close, setClose] = useState(false);
 

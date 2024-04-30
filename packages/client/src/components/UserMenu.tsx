@@ -10,6 +10,7 @@ import {
 import {
   CONFIG,
   LoginButton,
+  LogoutButton,
   PresencePeople,
   getIsPWAInstalled,
   graphql,
@@ -44,11 +45,6 @@ export function UserMenu({
       url: `${CONFIG.HOME_ORIGIN}/apps`,
     });
   };
-
-  const loginUrl = new URL(CONFIG.HOME_ORIGIN + '/login');
-
-  loginUrl.searchParams.set('returnTo', window.location.href);
-  loginUrl.searchParams.set('appReferrer', appId);
 
   return (
     <DropdownMenu>
@@ -95,12 +91,12 @@ export function UserMenu({
               </a>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <a href={loginUrl.toString()}>
+              <LoginButton color="unstyled" className="transition-none">
                 Log in
                 <DropdownMenuItemRightSlot>
                   <Icon name="arrowRight" />
                 </DropdownMenuItemRightSlot>
-              </a>
+              </LoginButton>
             </DropdownMenuItem>
           </>
         ) : (
@@ -142,14 +138,12 @@ export function UserMenu({
         )}
         {!!isLoggedIn && (
           <DropdownMenuItem asChild>
-            <a
-              href={`${CONFIG.API_ORIGIN}/auth/logout?returnTo=${window.location.href}`}
-            >
+            <LogoutButton color="unstyled">
               Log out
               <DropdownMenuItemRightSlot>
                 <Icon name="arrowRight" />
               </DropdownMenuItemRightSlot>
-            </a>
+            </LogoutButton>
           </DropdownMenuItem>
         )}
       </DropdownMenuContent>
