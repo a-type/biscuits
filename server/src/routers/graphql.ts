@@ -16,11 +16,9 @@ function applyHeaders(): Plugin<{}, GQLContext> {
   return {
     onResponse: (payload) => {
       if (payload.serverContext) {
-        for (const [key, value] of Object.entries(
-          payload.serverContext.auth.applyHeaders,
-        )) {
-          payload.response.headers.set(key, value);
-        }
+        payload.serverContext.auth.applyHeaders.forEach((value, key) => {
+          payload.response.headers.append(key, value);
+        });
       }
     },
   };
@@ -73,7 +71,21 @@ export const graphqlRouter = Router({
 graphqlRouter.all('/', handleGraphQLRequest);
 
 async function handleGraphQLRequest(request: Request) {
-  let sessionHeaders: Record<string, string> = {};
+  const auth = {
+    applyHeaders: new Headers(),
+    setLoginSession: async (ses: Session | null) => {
+      if (ses) {
+        const { headers } = await sessions.updateSession(ses);
+        auth.applyHeaders = new Headers(headers);
+      } else {
+        const { headers } = sessions.clearSession();
+        auth.applyHeaders = new Headers(headers);
+      }
+      // also update immediately in the context, so that
+      // resolvers on return values can see the new session
+      ctx.session = ses;
+    },
+  };
   let session = null;
   try {
     session = await sessions.getSession(request);
@@ -94,21 +106,7 @@ async function handleGraphQLRequest(request: Request) {
     req: request,
     session,
     db,
-    auth: {
-      applyHeaders: sessionHeaders,
-      setLoginSession: async (ses: Session | null) => {
-        if (ses) {
-          const { headers } = await sessions.updateSession(ses);
-          Object.assign(sessionHeaders, headers);
-        } else {
-          const { headers } = sessions.clearSession();
-          Object.assign(sessionHeaders, headers);
-        }
-        // also update immediately in the context, so that
-        // resolvers on return values can see the new session
-        ctx.session = ses;
-      },
-    },
+    auth,
     verdant: verdantServer,
     stripe,
     dataloaders: createDataloaders({

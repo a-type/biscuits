@@ -1,14 +1,6 @@
 {
   "rewrites": [
     { "source": "/appPicker/", "destination": "/appPicker/index.html" },
-    {
-      "source": "/refreshSession/",
-      "destination": "/refreshSession/index.html"
-    },
-    {
-      "source": "/storeRefreshToken/",
-      "destination": "/storeRefreshToken/index.html"
-    },
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "headers": [

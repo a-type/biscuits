@@ -1,5 +1,3 @@
-// extend @a-type/auth Session with additional data
-
 import { SessionManager } from '@a-type/auth';
 import { db, userNameSelector } from '@biscuits/db';
 import { BiscuitsError } from '../error.js';
@@ -57,5 +55,8 @@ export const sessions = new SessionManager({
   },
   audience: UI_ORIGIN,
   issuer: DEPLOYED_ORIGIN,
-  mode: ENVIRONMENT === 'production' ? 'production' : 'development',
+  // mode: ENVIRONMENT === 'production' ? 'production' : 'development',
+  mode: 'production',
+  refreshPath: '/auth/refresh',
+  refreshTokenCookieName: 'bsc-refresh',
 });

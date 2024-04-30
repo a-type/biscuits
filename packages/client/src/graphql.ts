@@ -1,5 +1,6 @@
 import {
   ApolloClient,
+  ApolloError,
   InMemoryCache,
   NetworkStatus,
   from,
@@ -13,6 +14,7 @@ import { initGraphQLTada } from 'gql.tada';
 import { fetch } from './fetch.js';
 import type { introspection } from './graphql-env.d.js';
 import { CONFIG, refreshSession } from './index.js';
+import { useEffect } from 'react';
 
 export const graphql = initGraphQLTada<{
   introspection: introspection;
@@ -218,9 +220,26 @@ const meQuery = graphql(`
 `);
 
 export function useMe() {
-  return useQuery(meQuery, {
+  const res = useQuery(meQuery, {
     fetchPolicy: 'cache-first',
   });
+
+  // setup to refetch on window visible if the query
+  // was unsuccessful
+  const { refetch, error } = res;
+  useEffect(() => {
+    if (error) {
+      const handler = () => {
+        refetch();
+      };
+      window.addEventListener('visibilitychange', handler);
+      return () => {
+        window.removeEventListener('visibilitychange', handler);
+      };
+    }
+  }, [refetch, error]);
+
+  return res;
 }
 
 export function useIsLoggedIn() {
@@ -242,5 +261,17 @@ export function useCanSync() {
 
 export function useIsOffline() {
   const { error } = useMe();
-  return !!error?.networkError;
+  return isOfflineError(error);
+}
+
+function isOfflineError(error: ApolloError | undefined) {
+  if (!error) return false;
+  if (!error.networkError) return false;
+  if ('statusCode' in error.networkError) {
+    return (
+      error.networkError.statusCode === 0 ||
+      error.networkError.statusCode >= 500
+    );
+  }
+  return false;
 }
