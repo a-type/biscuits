@@ -18,17 +18,18 @@ import {
   ResetToServer,
   ChangelogDisplay,
   PromoteSubscriptionButton,
-  PushSubscriptionToggle,
   useIsLoggedIn,
   useCanSync,
   useIsOffline,
   useMe,
   DarkModeToggle,
+  ManageStorage,
 } from '@biscuits/client';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 import { ReactNode, useEffect } from 'react';
 import { groceriesDescriptor } from '@/stores/groceries/index.js';
 import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
+import { toast } from 'react-hot-toast';
 
 const contents = {
   offline: OfflineContents,
@@ -90,6 +91,7 @@ function ManageSection() {
     <>
       <ManageCategories />
       {/* <ManageFoodsButton /> */}
+      <ManageStorage onError={(err) => toast.error(err.message)} />
     </>
   );
 }
@@ -147,12 +149,7 @@ function UnsubscribedContents() {
     <MainContainer>
       <InstallHint content="Always have your list on hand. Install the app!" />
       <DarkModeToggle />
-      <div className="bg-primary-wash color-black p-4 rounded-lg">
-        Subscription inactive
-      </div>
-      <ManagePlanButton />
       <ManageSection />
-      <LogoutButton>Sign out</LogoutButton>
       <Divider />
       <BugButton />
       <ReloadButton />
@@ -178,7 +175,6 @@ function OnlineContents() {
       <ReloadButton />
       <ResetToServer clientDescriptor={groceriesDescriptor} />
       <Divider />
-      <LogoutButton>Sign out</LogoutButton>
     </MainContainer>
   );
 }

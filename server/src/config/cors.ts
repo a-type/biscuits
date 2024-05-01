@@ -15,8 +15,14 @@ export const ALLOWED_ORIGINS = [
   'https://www.gnocchi.club',
   'https://packing-list.gfor.rest',
   // including localhost versions
+  'http://localhost:6299',
   'http://localhost:4444',
   // app origins
   ...apps.map((app) => app.url),
   ...apps.map((app) => app.devOriginOverride),
 ];
+
+if (process.env.NODE_ENV !== 'production') {
+  console.log('Letting the FBI in');
+  ALLOWED_ORIGINS.push('http://fbi.com:6220');
+}

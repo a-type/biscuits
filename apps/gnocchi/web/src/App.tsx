@@ -15,6 +15,7 @@ import { GlobalSyncingIndicator } from '@/components/sync/GlobalSyncingIndicator
 import { AppPreviewNotice, Provider } from '@biscuits/client';
 import { graphqlClient } from './graphql.js';
 import { groceriesDescriptor } from './stores/groceries/index.js';
+import { AppMoved } from './components/promotional/AppMoved.jsx';
 
 export function App() {
   useLayoutEffect(() => {
@@ -50,6 +51,7 @@ export function App() {
                   />
                   <IconSpritesheet />
                   <GlobalSyncingIndicator />
+                  <AppMoved />
                 </ParticleLayer>
               </GroceriesProvider>
             </Provider>

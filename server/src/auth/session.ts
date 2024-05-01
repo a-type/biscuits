@@ -20,7 +20,13 @@ declare module '@a-type/auth' {
 
 export const sessions = new SessionManager({
   cookieName: 'bsc-session',
-  sameSite: 'none',
+  cookieOptions: {
+    sameSite: 'none',
+    // this is not sustainable, but hopefully by the time
+    // cross-site cookies are fully blocked everyone will be
+    // on gnocchi.biscuits.club
+    partitioned: false,
+  },
   expiration: process.env.NODE_ENV === 'production' ? '24h' : '1m',
   async createSession(userId) {
     const user = await db

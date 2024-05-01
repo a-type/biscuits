@@ -136,6 +136,14 @@ export function UserMenu({
             </a>
           </DropdownMenuItem>
         )}
+        <DropdownMenuItem asChild>
+          <a href={`${CONFIG.HOME_ORIGIN}/contact`} target="_blank">
+            Contact support
+            <DropdownMenuItemRightSlot>
+              <Icon name="profile" />
+            </DropdownMenuItemRightSlot>
+          </a>
+        </DropdownMenuItem>
         {!!isLoggedIn && (
           <DropdownMenuItem asChild>
             <LogoutButton color="unstyled">

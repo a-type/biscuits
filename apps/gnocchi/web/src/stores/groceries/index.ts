@@ -1028,4 +1028,12 @@ _groceries.then(async (g) => {
     })
     .map((i) => i.get('id'));
   await g.items.deleteAll(itemsToDelete);
+
+  const backup = await import('@verdant-web/store/backup');
+  backup.transferOrigins(
+    g,
+    'https://gnocchi.club',
+    'https://gnocchi.biscuits.club',
+  );
+  backup.transferOrigins(g, 'http://localhost:6299', 'http://localhost:6220');
 });
