@@ -31,7 +31,7 @@ function AppIcons() {
       }}
     >
       {apps
-        .filter((app) => app.id !== hostApp)
+        .filter((app) => app.id !== hostApp && !app.prerelease)
         .map((app) => {
           const iconUrl = new URL(
             import.meta.env.DEV ? app.devOriginOverride : app.url,

@@ -20,7 +20,7 @@ export type PaidFeature = {
   family?: boolean;
 };
 
-export const apps = [
+export const apps: AppManifest<string>[] = [
   {
     id: 'gnocchi',
     url: 'https://gnocchi.biscuits.club',
