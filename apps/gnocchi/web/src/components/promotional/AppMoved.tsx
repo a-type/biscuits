@@ -32,6 +32,11 @@ export function AppMoved({}: AppMovedProps) {
     return null;
   }
 
+  const goTo = new URL(app.url);
+  if (!canSync) {
+    goTo.search = '?transfer=true';
+  }
+
   return (
     <Dialog open>
       <DialogContent className="gap-3">
@@ -53,7 +58,7 @@ export function AppMoved({}: AppMovedProps) {
             </Link>
           </Button>
           <Button asChild color="primary">
-            <Link newTab to={app.url + '?transfer=true'}>
+            <Link newTab to={goTo.toString()}>
               Open Gnocchi
             </Link>
           </Button>
