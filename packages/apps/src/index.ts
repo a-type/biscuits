@@ -23,10 +23,10 @@ export type PaidFeature = {
 export const apps = [
   {
     id: 'gnocchi',
-    url: 'https://gnocchi.club',
+    url: 'https://gnocchi.biscuits.club',
     name: 'Gnocchi',
     description: 'Organize your weekly cooking and groceries',
-    mainImageUrl: 'https://gnocchi.club/og-image.png',
+    mainImageUrl: 'https://gnocchi.biscuits.club/og-image.png',
     iconPath: 'android-chrome-512x512.png',
     size: 4,
     devOriginOverride: 'http://localhost:6220',
