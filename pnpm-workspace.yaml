@@ -3,3 +3,4 @@ packages:
   - 'server'
   - 'packages/*'
   - 'apps/**/*'
+  - 'blog'

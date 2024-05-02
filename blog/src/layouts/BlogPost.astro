@@ -1,0 +1,95 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const {
+  title,
+  description,
+  pubDate,
+  updatedDate,
+  heroImage,
+  heroAlt = 'A cover image without alt text, sorry',
+} = Astro.props;
+---
+
+<html lang="en">
+  <head>
+    <BaseHead title={title} description={description} />
+    <style is:global>
+      h2,
+      h3,
+      h4,
+      h5 {
+        font-family: 'Henrietta', serif;
+      }
+
+      h2 {
+        font-size: 1.25rem;
+        font-weight: normal;
+      }
+      h3 {
+        font-size: 1.125rem;
+        font-weight: bold;
+      }
+      h4 {
+        font-size: 1rem;
+        font-weight: 900;
+      }
+
+      .prose a {
+        font-weight: bold;
+        color: var(--color-primary-dark);
+        background-color: var(--color-primary-wash);
+      }
+    </style>
+  </head>
+
+  <body class="col items-stretch">
+    <Header />
+    <main class="col flex-1">
+      <article class="col w-full max-w-800px">
+        <div class="hero-image">
+          {
+            heroImage && (
+              <img
+                class="w-full h-auto object-cover border border-default rounded-lg"
+                src={heroImage}
+                alt={heroAlt}
+              />
+            )
+          }
+        </div>
+        <div class="prose">
+          <div class="title">
+            <div class="date">
+              <FormattedDate
+                class="italic text-xs text-gray-7"
+                date={pubDate}
+              />
+              {
+                updatedDate && (
+                  <div class="last-updated-on">
+                    Last updated on{' '}
+                    <FormattedDate
+                      class="italic text-xs text-gray-7"
+                      date={updatedDate}
+                    />
+                  </div>
+                )
+              }
+            </div>
+            <h1 class="font-fancy font-normal text-3xl">{title}</h1>
+            <hr class="opacity-50" />
+          </div>
+          <slot />
+        </div>
+      </article>
+    </main>
+    <Footer />
+  </body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "name": "",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@a-type/ui": "^0.8.2",
+    "@astrojs/check": "^0.5.10",
+    "@astrojs/mdx": "^2.3.1",
+    "@astrojs/rss": "^4.0.5",
+    "@astrojs/sitemap": "^3.1.4",
+    "@biscuits/client": "workspace:*",
+    "@unocss/astro": "^0.59.4",
+    "@unocss/reset": "^0.59.4",
+    "@unocss/transformer-variant-group": "^0.59.4",
+    "astro": "^4.7.1",
+    "typescript": "^5.4.5",
+    "unocss": "^0.59.4"
+  }
+}
