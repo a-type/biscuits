@@ -4,7 +4,6 @@ import { VerdantContext } from '../verdant.js';
 import { Icon } from '@a-type/ui/components/icon';
 import { useAppId } from './Context.js';
 import { appsById } from '@biscuits/apps';
-import * as backup from '@verdant-web/store/backup';
 
 export interface ExportDataButtonProps extends Omit<ButtonProps, 'onError'> {
   onError: (error: Error) => void;
@@ -70,6 +69,7 @@ export function ImportDataButton({
           onChange={async (ev) => {
             setLoading(true);
             try {
+              const backup = await import('@verdant-web/store/backup');
               const client = await clientDesc.open();
               const file = ev.target.files?.[0];
               if (!file) {
