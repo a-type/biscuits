@@ -23,5 +23,3 @@ export * from './onboarding.js';
 export * from './TosPrompt.js';
 export * from './Essentials.js';
 export * from './ReloadButton.js';
-export * from './backups.js';
-export * from './ManageStorage.js';

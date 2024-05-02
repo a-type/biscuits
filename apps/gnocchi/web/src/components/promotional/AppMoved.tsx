@@ -7,7 +7,6 @@ import {
 import { P } from '@a-type/ui/components/typography';
 import {
   CONFIG,
-  ExportDataButton,
   LoginButton,
   getIsPWAInstalled,
   getOS,
@@ -18,6 +17,7 @@ import { Link } from '@verdant-web/react-router';
 import { Icon } from '@a-type/ui/components/icon';
 import { toast } from 'react-hot-toast';
 import { Button } from '@a-type/ui/components/button';
+import { ExportDataButton } from '@biscuits/client/storage';
 
 export interface AppMovedProps {}
 

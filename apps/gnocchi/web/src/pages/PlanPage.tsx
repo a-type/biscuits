@@ -23,8 +23,8 @@ import {
   useIsOffline,
   useMe,
   DarkModeToggle,
-  ManageStorage,
 } from '@biscuits/client';
+import { ManageStorage } from '@biscuits/client/storage';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
 import { ReactNode, useEffect } from 'react';
 import { groceriesDescriptor } from '@/stores/groceries/index.js';

@@ -39,10 +39,11 @@
     "@types/three": "0.163.0",
     "@unocss/transformer-variant-group": "^0.58.5",
     "@vitejs/plugin-react": "^4.2.1",
+    "@vitejs/plugin-react-swc": "^3.6.0",
     "eslint": "9.1.1",
     "eslint-config-next": "14.0.3",
     "typescript": "5.4.5",
     "unocss": "0.59.4",
-    "vite": "5.2.10"
+    "vite": "5.0.10"
   }
 }

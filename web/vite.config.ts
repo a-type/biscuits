@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
+import react from '@vitejs/plugin-react-swc';
 import { fileURLToPath } from 'url';
 import UnoCSS from 'unocss/vite';
 import { resolve } from 'path';
@@ -34,9 +34,6 @@ export default defineConfig(({ mode }) => ({
         main: resolve(__dirname, 'index.html'),
         appPicker: resolve(__dirname, 'appPicker/index.html'),
       },
-    },
-    commonjsOptions: {
-      exclude: ['*.min.js'],
     },
   },
 }));
