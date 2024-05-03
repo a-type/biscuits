@@ -9,7 +9,7 @@ interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname + '/index.html', Astro.site);
 
-const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
+const { title, description, image = '/og-image.png' } = Astro.props;
 
 const fontSources = [
   'https://resources.biscuits.club/fonts/VCHenrietta-Regular.woff',
