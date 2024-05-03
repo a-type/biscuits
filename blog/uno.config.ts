@@ -3,7 +3,7 @@ import variantGroup from '@unocss/transformer-variant-group';
 import atype from '@a-type/ui/uno-preset';
 
 export default defineConfig({
-  presets: [atype({ spacingIncrement: 0.25 })],
+  presets: [atype({ spacingIncrement: 0.25 }) as any],
   // required to support styling in this library
   transformers: [variantGroup()],
   // modify the content sources to include

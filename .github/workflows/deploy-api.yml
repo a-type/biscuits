@@ -1,4 +1,4 @@
-name: Production Deploy
+name: API Deploy
 on:
   push:
     branches: [main]

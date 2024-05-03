@@ -34,7 +34,7 @@ jobs:
         with:
           args: --follow-symlinks
         env:
-          AWS_S3_BUCKET: prod-db-backups.gnocchi.club
+          AWS_S3_BUCKET: ${{ secrets.S3_BUCKET_BACKUPS }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: us-east-1
