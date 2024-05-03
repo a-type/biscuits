@@ -24,7 +24,7 @@ const posts = (await getCollection('blog')).sort(
           {
             posts.map((post) => (
               <li class="rounded-lg border border-default w-full bg-white hover:bg-primary-wash overflow-hidden">
-                <a href={`/${post.slug}/`} class="block w-full">
+                <a href={`/${post.slug}/index.html`} class="block w-full">
                   {post.data.heroImage && (
                     <img
                       class="w-full h-auto object-cover border-b border-b-black border-b-solid"
