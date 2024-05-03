@@ -86,7 +86,7 @@ export function RecipeSavePrompt({}: RecipeSavePromptProps) {
           onboarding={saveHubRecipeOnboarding}
           step="save"
         >
-          <H2>Welcome to Gnocchi.club!</H2>
+          <H2>Welcome to Gnocchi!</H2>
           <P>
             You&apos;re about to save a copy of a recipe to your collection.
             Press the Save button to get started.

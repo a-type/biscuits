@@ -167,8 +167,8 @@ self.addEventListener('push', (event) => {
 
         const commonOptions = {
           tag: 'list-change',
-          icon: 'https://gnocchi.club/android-chrome-192x192.png',
-          badge: 'https://gnocchi.club/badge.png',
+          icon: 'https://gnocchi.biscuits.club/android-chrome-192x192.png',
+          badge: 'https://gnocchi.biscuits.club/badge.png',
         };
 
         if (!currentNotification) {

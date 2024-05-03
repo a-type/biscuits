@@ -70,7 +70,7 @@ function ErrorFallback() {
         <P>
           Sorry about this. The app has crashed. You can try refreshing, but if
           that doesn&apos;t work,{' '}
-          <a className="underline font-bold" href="mailto:hi@gnocchi.club">
+          <a className="underline font-bold" href="mailto:hi@biscuits.club">
             let me know about it.
           </a>
         </P>
