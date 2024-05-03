@@ -2,6 +2,8 @@ name: Blog Deploy
 on:
   push:
     branches: [main]
+    paths:
+      - 'blog/**'
 
 jobs:
   build-and-deploy-blog:
@@ -37,3 +39,12 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           SOURCE_DIR: './blog/dist'
+
+      - name: Invalidate CloudFront cache
+        uses: chetan/invalidate-cloudfront-action@v2
+        with:
+          cloudfront-distribution-id: ${{ secrets.CLOUDFRONT_ID_BLOG }}
+          paths: '/*'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
