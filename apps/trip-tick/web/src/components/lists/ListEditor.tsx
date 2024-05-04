@@ -36,6 +36,7 @@ export function ListEditor({ list }: ListEditorProps) {
             className="text-xl w-full"
             autoFocus={editName}
             onBlur={() => setEditName(false)}
+            autoSelect
           />
         ) : (
           <Button

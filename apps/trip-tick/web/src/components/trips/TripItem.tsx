@@ -172,6 +172,7 @@ function ChecklistItem({
                 onChange={onDescriptionChanged}
                 placeholder="What is it?"
                 className="flex-1 min-w-50%"
+                autoSelect
               />
             ) : (
               <label className="font-bold select-none">{description}</label>

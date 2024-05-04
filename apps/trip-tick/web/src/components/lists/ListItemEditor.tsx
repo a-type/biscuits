@@ -65,6 +65,7 @@ export function ListItemEditor({
           value={description}
           onChange={(v) => item.set('description', v)}
           className="flex-1"
+          autoSelect
         />
         <Button size="icon" color="ghostDestructive" onClick={onDelete}>
           <div className="i-solar-trash-bin-minimalistic-linear" />

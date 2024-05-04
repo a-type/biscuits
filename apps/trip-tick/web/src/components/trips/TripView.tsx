@@ -153,6 +153,7 @@ function TripViewInfo({
             className="text-xl w-full"
             autoFocus={editName}
             onBlur={() => setEditName(false)}
+            autoSelect
           />
         ) : (
           <Button
