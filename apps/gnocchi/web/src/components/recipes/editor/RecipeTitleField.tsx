@@ -7,7 +7,7 @@ export interface RecipeTitleFieldProps {
 }
 
 export function RecipeTitleField({ recipe }: RecipeTitleFieldProps) {
-  const title = hooks.useWatch(recipe, 'title');
+  const { title } = hooks.useWatch(recipe);
 
   return (
     <LiveUpdateTextField

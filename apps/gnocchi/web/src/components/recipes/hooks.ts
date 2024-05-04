@@ -62,7 +62,7 @@ export function useCookSessionAction(recipe: Recipe | null) {
 }
 
 export function useActiveCookingSession(recipe: Recipe) {
-  const session = hooks.useWatch(recipe, 'session');
+  const { session } = hooks.useWatch(recipe);
   if (!session) {
     return null;
   }

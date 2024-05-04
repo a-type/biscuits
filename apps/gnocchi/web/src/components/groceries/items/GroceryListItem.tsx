@@ -259,7 +259,7 @@ function useDidJustMove(item: Item) {
 }
 
 function useDidQuantityJustChange(item: Item) {
-  const totalQuantity = hooks.useWatch(item, 'totalQuantity');
+  const { totalQuantity } = hooks.useWatch(item);
   const [didQuantityChange, setDidQuantityChange] = useState(false);
   const isFirstRenderRef = useIsFirstRender();
   useEffect(() => {

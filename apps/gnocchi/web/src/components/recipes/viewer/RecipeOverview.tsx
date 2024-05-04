@@ -180,7 +180,7 @@ function RecipeOverviewContent({ recipe }: { recipe: Recipe }) {
 }
 
 function PreludeSection({ recipe }: { recipe: Recipe }) {
-  const prelude = hooks.useWatch(recipe, 'prelude');
+  const { prelude } = hooks.useWatch(recipe);
   hooks.useWatch(prelude);
 
   if (prelude.get('content')?.length === 0) {

@@ -71,7 +71,7 @@ function IngredientCheckoffItem({
   multiplier?: number;
   recipeId: string;
 }) {
-  const isSectionHeader = hooks.useWatch(ingredient, 'isSectionHeader');
+  const { isSectionHeader } = hooks.useWatch(ingredient);
   return (
     <li className={'flex flex-row gap-2 w-full'}>
       {!isSectionHeader && (
