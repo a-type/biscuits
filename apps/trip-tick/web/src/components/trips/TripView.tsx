@@ -266,6 +266,13 @@ function TripViewChecklists({
           </TabsContent>
         );
       })}
+      {startedWithNoLists && !mappedLists.length && (
+        <div className="w-full p-4 text-gray-7 italic">
+          <span className="[font-style:normal]">💡</span> Add lists to this trip
+          for everything you want to pack. Once you start packing, check off
+          items as you go.
+        </div>
+      )}
     </TabsRoot>
   );
 }

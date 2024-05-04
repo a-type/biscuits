@@ -13,6 +13,7 @@ import { Toaster } from 'react-hot-toast';
 import { FullScreenSpinner } from '@a-type/ui/components/spinner';
 import { ParticleLayer } from '@a-type/ui/components/particles';
 import { useVisualViewportOffset } from '@a-type/ui/hooks';
+import { Explainer } from './components/onboarding/Explainer.jsx';
 
 const graphqlClient = createGraphQLClient();
 
@@ -37,6 +38,7 @@ export function App() {
                 position="bottom-center"
                 containerClassName="mb-10 sm:mb-0"
               />
+              <Explainer />
             </TooltipProvider>
           </LofiProvider>
         </Provider>

@@ -101,6 +101,7 @@ export function ExtraItem({
       onDescriptionChanged={(value) => item.set('description', value)}
       onQuantityChanged={(value) => item.set('quantity', value)}
       onDelete={onDelete}
+      subline="Added for this trip"
     />
   );
 }
@@ -155,84 +156,90 @@ function ChecklistItem({
 
   return (
     <div className="w-full p-2 flex flex-col gap-2">
-      <div className="w-full flex flex-row items-center gap-2 flex-wrap">
+      <div className="row w-full">
         <CheckboxRoot
           checked={completed}
           onCheckedChange={mainOnChecked}
           className="w-32px h-32px rounded-full touch-none flex items-center justify-center text-black"
         >
-          <Icon name={completed ? 'check' : 'plus'} />
+          <Icon name="check" />
         </CheckboxRoot>
-        {onDescriptionChanged && editing ? (
-          <LiveUpdateTextField
-            value={description}
-            onChange={onDescriptionChanged}
-            placeholder="What is it?"
-            className="flex-1 min-w-50%"
-          />
-        ) : (
-          <label className="font-bold select-none">{description}</label>
-        )}
-        {!!onQuantityChanged && editing && (
-          <NumberStepper
-            value={computedQuantity}
-            onChange={onQuantityChanged}
-            className="mr-auto"
-          />
-        )}
-        {editing && onDelete && (
-          <Button size="icon" color="ghostDestructive" onClick={onDelete}>
-            <Icon name="x" />
-          </Button>
-        )}
-        {canEdit && (
-          <Button
-            size="icon"
-            color={editing ? 'default' : 'ghost'}
-            onClick={() => setEditing((v) => !v)}
+        <div className="col items-start flex-1">
+          <div className="w-full flex flex-row items-center gap-2 flex-wrap">
+            {onDescriptionChanged && editing ? (
+              <LiveUpdateTextField
+                value={description}
+                onChange={onDescriptionChanged}
+                placeholder="What is it?"
+                className="flex-1 min-w-50%"
+              />
+            ) : (
+              <label className="font-bold select-none">{description}</label>
+            )}
+            {!!onQuantityChanged && editing && (
+              <NumberStepper
+                value={computedQuantity}
+                onChange={onQuantityChanged}
+                className="mr-auto"
+              />
+            )}
+            {editing && onDelete && (
+              <Button size="icon" color="ghostDestructive" onClick={onDelete}>
+                <Icon name="x" />
+              </Button>
+            )}
+            {canEdit && (
+              <Button
+                size="icon"
+                color={editing ? 'default' : 'ghost'}
+                onClick={() => setEditing((v) => !v)}
+              >
+                <Icon name={editing ? 'check' : 'pencil'} />
+              </Button>
+            )}
+          </div>
+          <SliderRoot
+            className="flex-1"
+            value={[completedQuantity]}
+            min={0}
+            max={computedQuantity}
+            onValueChange={([v]) => onCompletionChanged(v)}
+            style={{
+              // Fix overflow clipping in Safari
+              // https://gist.github.com/domske/b66047671c780a238b51c51ffde8d3a0
+              transform: 'translateZ(0)',
+            }}
+            ref={barRef}
           >
-            <Icon name={editing ? 'check' : 'pencil'} />
-          </Button>
-        )}
+            <SliderTrack>
+              <SliderRange
+                className="transition-all"
+                data-color={completed ? 'default' : 'primary'}
+              />
+              {new Array(computedQuantity - 1).fill(0).map((_, i) => (
+                <div
+                  key={i}
+                  className="w-1px h-full bg-gray-6 absolute top-0 left-0"
+                  style={{
+                    left: `${(100 / computedQuantity) * (i + 1)}%`,
+                  }}
+                />
+              ))}
+            </SliderTrack>
+            <SliderThumb
+              data-color={completed ? 'default' : 'primary'}
+              className={classNames(
+                'transition-all',
+                completed && 'bg-accent ring-black ring-1 text-white',
+                'flex items-center justify-center',
+                completedQuantity === 0 && 'opacity-0',
+              )}
+            >
+              {completed && <Icon name="check" />}
+            </SliderThumb>
+          </SliderRoot>
+        </div>
       </div>
-      <SliderRoot
-        value={[completedQuantity]}
-        min={0}
-        max={computedQuantity}
-        onValueChange={([v]) => onCompletionChanged(v)}
-        style={{
-          // Fix overflow clipping in Safari
-          // https://gist.github.com/domske/b66047671c780a238b51c51ffde8d3a0
-          transform: 'translateZ(0)',
-        }}
-        ref={barRef}
-      >
-        <SliderTrack>
-          <SliderRange
-            className="transition-all"
-            data-color={completed ? 'default' : 'primary'}
-          />
-          {new Array(computedQuantity - 1).fill(0).map((_, i) => (
-            <div
-              key={i}
-              className="w-1px h-full bg-gray-6 absolute top-0 left-0"
-              style={{
-                left: `${(100 / computedQuantity) * (i + 1)}%`,
-              }}
-            />
-          ))}
-        </SliderTrack>
-        <SliderThumb
-          data-color={completed ? 'default' : 'primary'}
-          className={classNames(
-            'transition-all',
-            completed && 'bg-accent ring-black ring-1 text-white',
-            'flex items-center justify-center',
-          )}
-        >
-          {completed && <Icon name="check" />}
-        </SliderThumb>
-      </SliderRoot>
       <div className="flex flex-row justify-between gap-2 items-center text-xs text-gray-7">
         {subline && <div className="italic">{subline}</div>}
         <span className="ml-auto">
