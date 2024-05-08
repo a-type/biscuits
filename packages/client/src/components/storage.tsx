@@ -113,7 +113,7 @@ export function ManageStorage({ className, onError }: ManageStorageProps) {
   if (isSubscribed) return null;
 
   return (
-    <div className={clsx('flex flex-col items-start', className)}>
+    <div className={clsx('flex flex-col items-start gap-2', className)}>
       <H2>Manage App Storage</H2>
       <P className="text-xs mb-2">
         This app stores all data on your device. You can export and import your

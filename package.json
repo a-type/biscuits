@@ -22,6 +22,7 @@
   "license": "ISC",
   "dependencies": {
     "@clack/prompts": "0.7.0",
+    "aws-cdk": "2.140.0",
     "cp-tpl": "1.0.9",
     "eslint": "^8",
     "eslint-config-next": "14.0.3",

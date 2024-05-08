@@ -1,14 +1,12 @@
-import { useCallback } from 'react';
-import { lazyWithPreload as lazy } from 'react-lazy-with-preload';
-import { makeRoutes, Router, Outlet } from '@verdant-web/react-router';
+import { TopLoader } from '@/components/nav/TopLoader.jsx';
 import { updateApp, updateState } from '@/updateState.js';
 import { PageRoot } from '@a-type/ui/components/layouts';
-import { TopLoader } from '@/components/nav/TopLoader.jsx';
-import { Navigation } from '@/components/nav/Navigation.jsx';
-import { Essentials, LogoutNotice } from '@biscuits/client';
+import { Essentials } from '@biscuits/client';
+import { Outlet, Router, makeRoutes } from '@verdant-web/react-router';
+import { useCallback } from 'react';
+import { lazyWithPreload as lazy } from 'react-lazy-with-preload';
 
 // dynamically import pages that may not be visited
-const ListsPage = lazy(() => import('./ListsPage.jsx'));
 const ListPage = lazy(() => import('./ListPage.jsx'));
 const TripsPage = lazy(() => import('./TripsPage.jsx'));
 const TripPage = lazy(() => import('./TripPage.jsx'));
@@ -19,7 +17,6 @@ const routes = makeRoutes([
     component: TripsPage,
     exact: true,
     onVisited() {
-      ListsPage.preload();
       TripPage.preload();
     },
   },
@@ -30,14 +27,6 @@ const routes = makeRoutes([
   {
     path: '/lists/:listId',
     component: ListPage,
-  },
-  {
-    path: '/lists',
-    component: ListsPage,
-    onVisited() {
-      ListPage.preload();
-      TripsPage.preload();
-    },
   },
   {
     path: '/settings',
@@ -63,7 +52,6 @@ export function Pages() {
         <TopLoader />
         <Essentials />
       </Router>
-      <Navigation />
     </PageRoot>
   );
 }

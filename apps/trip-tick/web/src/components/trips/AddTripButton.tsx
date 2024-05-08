@@ -10,6 +10,12 @@ export function AddTripButton({
 }: AddTripButtonProps) {
   const client = hooks.useClient();
   const navigate = useNavigate();
+  const lists = hooks.useAllLists();
+
+  if (!lists.length) {
+    // don't show this option yet - they need lists first
+    return null;
+  }
 
   return (
     <Button

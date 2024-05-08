@@ -24,7 +24,7 @@ export function ListEditor({ list }: ListEditorProps) {
     <div className="flex flex-col gap-6">
       <div className="flex flex-row gap-1 items-center">
         <Button asChild color="ghost" size="icon">
-          <Link to="/lists">
+          <Link to="/">
             <Icon name="arrowLeft" />
             <span className="sr-only">Back to lists</span>
           </Link>

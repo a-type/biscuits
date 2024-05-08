@@ -1,13 +1,10 @@
 import { hooks } from '@/store.js';
-import { Button } from '@a-type/ui/components/button';
+import { Button, ButtonProps } from '@a-type/ui/components/button';
 import { useMe } from '@biscuits/client';
 import { useNavigate } from '@verdant-web/react-router';
 import { ReactNode } from 'react';
 
-export interface AddListButtonProps {
-  children?: ReactNode;
-  className?: string;
-}
+export interface AddListButtonProps extends ButtonProps {}
 
 export function AddListButton({
   children,
@@ -28,7 +25,9 @@ export function AddListButton({
           const list = await client.lists.put({
             name: 'New list',
           });
-          navigate(`/lists/${list.get('id')}`);
+          navigate(`/lists/${list.get('id')}`, {
+            skipTransition: true,
+          });
         } else {
           const listName = me ? me.me.name : `My stuff`;
           const list = await client.lists.put({

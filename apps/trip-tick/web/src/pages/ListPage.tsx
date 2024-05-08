@@ -1,6 +1,7 @@
 import { ListEditor } from '@/components/lists/ListEditor.jsx';
+import { ListMenu } from '@/components/lists/ListMenu.jsx';
 import { hooks } from '@/store.js';
-import { PageContent } from '@a-type/ui/components/layouts';
+import { PageContent, PageFixedArea } from '@a-type/ui/components/layouts';
 import { usePageTitle } from '@biscuits/client';
 import { AutoRestoreScroll, useParams } from '@verdant-web/react-router';
 import { Suspense } from 'react';
@@ -29,7 +30,14 @@ function ListPageEditor({ listId }: { listId: string }) {
     return <div>List not found</div>;
   }
 
-  return <ListEditor list={list} />;
+  return (
+    <>
+      <PageFixedArea className="row justify-end w-full">
+        <ListMenu list={list} />
+      </PageFixedArea>
+      <ListEditor list={list} />
+    </>
+  );
 }
 
 export default ListPage;

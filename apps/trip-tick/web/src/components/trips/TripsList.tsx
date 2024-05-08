@@ -52,22 +52,25 @@ export function TripsList({}: TripsListProps) {
   });
   const hasLists = lists.length > 0;
 
-  if (!hasLists) {
+  if (!trips.length && !hasLists) {
+    return null;
+  }
+
+  if (!trips.length) {
     return (
-      <div className="flex flex-col gap-4 items-start">
-        <H2>Welcome!</H2>
-        <P>
-          Trip Tick is a list-making app purpose-made for planning what to pack
-          for your next trip.
-        </P>
-        <P>To get started, you need to create your first packing list.</P>
-        <AddListButton />
+      <div className="col items-stretch">
+        <H2>Trips</H2>
+        <div className="col bg-primary-wash rounded-lg p-8">
+          <P>No trips yet</P>
+          <AddTripButton>Plan one</AddTripButton>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="flex flex-col gap-4">
+      <H2>Trips</H2>
       {!!future.length ? (
         <CardGrid className="list-none p-0 m-0">
           {future.map((trip) => (
@@ -93,7 +96,7 @@ export function TripsList({}: TripsListProps) {
             <Button onClick={() => tools.loadMore()}>Show older</Button>
           )}
         </>
-      ) : (
+      ) : !!past.length ? (
         <Button
           className="self-center opacity-50"
           color="ghost"
@@ -101,7 +104,7 @@ export function TripsList({}: TripsListProps) {
         >
           Show past trips
         </Button>
-      )}
+      ) : null}
     </div>
   );
 }

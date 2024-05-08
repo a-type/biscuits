@@ -1,7 +1,11 @@
+import { Logo } from '@/components/brand/Logo.jsx';
+import { ListsList } from '@/components/lists/ListsList.jsx';
 import { AddTripButton } from '@/components/trips/AddTripButton.jsx';
 import { TripsList } from '@/components/trips/TripsList.jsx';
+import { Divider } from '@a-type/ui/components/divider';
+import { Icon } from '@a-type/ui/components/icon';
 import { PageContent, PageNowPlaying } from '@a-type/ui/components/layouts';
-import { H1 } from '@a-type/ui/components/typography';
+import { H2 } from '@a-type/ui/components/typography';
 import {
   InfrequentSubscriptionHint,
   InstallHint,
@@ -17,22 +21,37 @@ export function TripsPage({}: TripsPageProps) {
   usePageTitle('Trips');
   return (
     <PageContent>
-      <div className="flex flex-row items-center justify-between mb-4">
-        <H1>Trips</H1>
+      <div className="col !gap-10 items-stretch">
+        <div className="flex flex-row items-center justify-between mb-4">
+          <div className="row">
+            <Logo />
+            <h1 className="text-md [font-family:'Henrietta','Noto_Serif',serif] font-semibold">
+              Trip Tick
+            </h1>
+          </div>
+          <Suspense>
+            <UserMenu className="ml-auto" />
+          </Suspense>
+        </div>
         <Suspense>
-          <UserMenu className="ml-auto" />
+          <ListsList />
         </Suspense>
+        <Suspense>
+          <Divider />
+          <TripsList />
+        </Suspense>
+        <InstallHint
+          content="Keep your packing lists handy. Install the app!"
+          className="mt-4"
+        />
+        <InfrequentSubscriptionHint />
       </div>
-      <TripsList />
-      <InstallHint
-        content="Keep your packing lists handy. Install the app!"
-        className="mt-4"
-      />
-      <InfrequentSubscriptionHint />
-      <PageNowPlaying unstyled>
-        <AddTripButton />
-      </PageNowPlaying>
       <AutoRestoreScroll />
+      <PageNowPlaying unstyled className="col items-center">
+        <AddTripButton className="shadow-lg">
+          <Icon name="plus" /> New Trip
+        </AddTripButton>
+      </PageNowPlaying>
     </PageContent>
   );
 }
