@@ -246,7 +246,7 @@ function TripViewChecklists({
         <CollapsibleSimple open={editingLists}>
           <AddListsPicker trip={trip} className="p-2" />
         </CollapsibleSimple>
-        <TabsList className="important:justify-start sticky top-0 z-2 bg-wash">
+        <TabsList className="important:justify-start sticky top-0 z-2 bg-wash overflow-x-auto overflow-y-hidden w-full">
           {mappedLists.map((list) => (
             <ListTab list={list} key={list.get('id')} trip={trip} />
           ))}
@@ -281,8 +281,11 @@ function TripViewChecklists({
 function ListTab({ trip, list }: { list: List; trip: Trip }) {
   const { value } = useTripProgress(trip, { listFilter: [list.get('id')] });
   return (
-    <TabsTrigger value={list.get('id')} className="relative overflow-hidden">
-      <span>{list.get('name')}</span>
+    <TabsTrigger
+      value={list.get('id')}
+      className="relative overflow-hidden flex-shrink-0"
+    >
+      <span className="text-nowrap">{list.get('name')}</span>
       <Progress.Root className="w-full absolute bottom-0 left-0 overflow-hidden rounded-b-full border border-t-solid border-t-primary">
         <Progress.Indicator
           className="bg-accent w-full h-4px"
