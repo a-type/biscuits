@@ -1,9 +1,11 @@
 import { ListEditor } from '@/components/lists/ListEditor.jsx';
 import { ListMenu } from '@/components/lists/ListMenu.jsx';
 import { hooks } from '@/store.js';
+import { Button } from '@a-type/ui/components/button';
+import { Icon } from '@a-type/ui/components/icon';
 import { PageContent, PageFixedArea } from '@a-type/ui/components/layouts';
 import { usePageTitle } from '@biscuits/client';
-import { AutoRestoreScroll, useParams } from '@verdant-web/react-router';
+import { AutoRestoreScroll, Link, useParams } from '@verdant-web/react-router';
 import { Suspense } from 'react';
 
 export interface ListPageProps {}
@@ -32,7 +34,13 @@ function ListPageEditor({ listId }: { listId: string }) {
 
   return (
     <>
-      <PageFixedArea className="row justify-end w-full">
+      <PageFixedArea className="row justify-between w-full py-3">
+        <Button asChild color="ghost" size="icon">
+          <Link to="/">
+            <Icon name="arrowLeft" />
+            <span className="sr-only">Back to lists</span>
+          </Link>
+        </Button>
         <ListMenu list={list} />
       </PageFixedArea>
       <ListEditor list={list} />
