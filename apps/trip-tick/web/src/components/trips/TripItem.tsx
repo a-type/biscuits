@@ -200,7 +200,7 @@ function ChecklistItem({
             )}
           </div>
           <SliderRoot
-            className="flex-1"
+            className="flex-1 pointer-events-none"
             value={[completedQuantity]}
             min={0}
             max={computedQuantity}
@@ -212,9 +212,9 @@ function ChecklistItem({
             }}
             ref={barRef}
           >
-            <SliderTrack>
+            <SliderTrack className="pointer-events-none">
               <SliderRange
-                className="transition-all"
+                className="transition-all pointer-events-none"
                 data-color={completed ? 'default' : 'primary'}
               />
               {new Array(computedQuantity - 1).fill(0).map((_, i) => (
@@ -230,10 +230,10 @@ function ChecklistItem({
             <SliderThumb
               data-color={completed ? 'default' : 'primary'}
               className={classNames(
-                'transition-all',
+                'transition-all ring-1 w-8px rounded-sm pointer-events-initial',
                 completed && 'bg-accent ring-black ring-1 text-white',
                 'flex items-center justify-center',
-                completedQuantity === 0 && 'opacity-0',
+                // completedQuantity === 0 && 'opacity-0',
               )}
             >
               {completed && <Icon name="check" />}
