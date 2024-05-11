@@ -4,3 +4,4 @@ packages:
   - 'packages/*'
   - 'apps/**/*'
   - 'blog'
+  - 'cdk'
