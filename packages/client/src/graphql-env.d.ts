@@ -2321,9 +2321,12 @@ export type introspection = {
               "ofType": {
                 "kind": "LIST",
                 "ofType": {
-                  "kind": "OBJECT",
-                  "name": "QueryFoodsConnectionEdge",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "QueryFoodsConnectionEdge",
+                    "ofType": null
+                  }
                 }
               }
             },
@@ -2386,9 +2389,12 @@ export type introspection = {
               "ofType": {
                 "kind": "LIST",
                 "ofType": {
-                  "kind": "OBJECT",
-                  "name": "QueryPlansConnectionEdge",
-                  "ofType": null
+                  "kind": "NON_NULL",
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "QueryPlansConnectionEdge",
+                    "ofType": null
+                  }
                 }
               }
             },

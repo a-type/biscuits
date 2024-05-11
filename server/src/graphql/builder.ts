@@ -154,9 +154,14 @@ export const builder = new SchemaBuilder<{
     // Common Utils
     WeatherForecastInput: WeatherForecastInput;
   };
+  DefaultEdgesNullability: false;
 }>({
   plugins: [RelayPlugin, DataloaderPlugin, AuthPlugin],
-  relayOptions: {},
+  relayOptions: {
+    edgesFieldOptions: {
+      nullable: false,
+    },
+  },
   authScopes: async (context) => ({
     public: true,
     user: !!context.session,

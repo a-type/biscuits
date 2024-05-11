@@ -4,13 +4,14 @@ import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
 import { LiveUpdateTextField } from '@a-type/ui/components/liveUpdateTextField';
 import { H2 } from '@a-type/ui/components/typography';
+import { debounce } from '@a-type/utils';
 import { OnboardingTooltip } from '@biscuits/client';
 import { List } from '@trip-tick.biscuits/verdant';
-import { Link } from '@verdant-web/react-router';
 import { forwardRef, useState } from 'react';
+import { toast } from 'react-hot-toast';
 import { AddSuggested } from './AddSuggested.jsx';
-import { ListItemEditor } from './ListItemEditor.jsx';
 import { ListInfoEditor } from './ListInfoEditor.jsx';
+import { ListItemEditor } from './ListItemEditor.jsx';
 
 export interface ListEditorProps {
   list: List;
@@ -19,6 +20,14 @@ export interface ListEditorProps {
 export function ListEditor({ list }: ListEditorProps) {
   const { name } = hooks.useWatch(list);
   const [editName, setEditName] = useState(!name || name === 'New List');
+
+  hooks.useOnChange(
+    list,
+    (info) => {
+      if (info.isLocal) showSaveToast();
+    },
+    { deep: true },
+  );
 
   return (
     <div className="flex flex-col gap-6">
@@ -48,6 +57,13 @@ export function ListEditor({ list }: ListEditorProps) {
     </div>
   );
 }
+
+const showSaveToast = debounce(() => {
+  toast.success('Changes saved', {
+    id: 'saved',
+    duration: 2000,
+  });
+}, 1000);
 
 function ListItemsEditor({ list }: { list: List }) {
   const { items } = hooks.useWatch(list);
