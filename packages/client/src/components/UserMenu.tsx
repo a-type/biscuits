@@ -51,7 +51,7 @@ export function UserMenu({
       <DropdownMenuTrigger asChild>
         {children ?? (!isLoggedIn && loading) ? (
           <Button size="small" color="ghost" className={className}>
-            <Avatar />
+            <Icon name="refresh" className="animate-spin" />
             <Icon name="gear" />
           </Button>
         ) : isLoggedIn ? (

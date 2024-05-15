@@ -91,8 +91,15 @@ function createErrorHandler(
       } else if (!hasNetworkError) {
         hasNetworkError = true;
         console.error(networkError);
-        errorMessage =
-          'A network error occurred. Please check your connection.';
+        if (networkError.message === 'Failed to fetch') {
+          errorMessage =
+            'Having trouble reaching Biscuits servers. Running in offline mode.';
+        } else {
+          errorMessage =
+            'A network error occurred. Please check your connection.';
+        }
+      } else {
+        errorMessage = undefined;
       }
     }
 
@@ -257,8 +264,8 @@ export function useIsLoggedIn() {
     !!result.data?.me?.id,
     result.networkStatus === NetworkStatus.loading ||
       result.networkStatus === NetworkStatus.refetch ||
-      networkError,
-  ];
+      isOfflineError(result.error),
+  ] as const;
 }
 
 export function useCanSync() {
@@ -274,6 +281,7 @@ export function useIsOffline() {
 function isOfflineError(error: ApolloError | undefined) {
   if (!error) return false;
   if (!error.networkError) return false;
+  if (error.networkError.message === 'Failed to fetch') return true;
   if ('statusCode' in error.networkError) {
     return (
       error.networkError.statusCode === 0 ||
