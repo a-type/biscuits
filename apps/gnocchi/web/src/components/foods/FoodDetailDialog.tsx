@@ -242,13 +242,14 @@ const FoodNameEditor = ({ food }: { food: Food }) => {
           onChange={(ev) => setNewName(ev.target.value ?? '')}
           placeholder={food.get('canonicalName')}
           autoSelect
+          autoFocus
         />
         {newName !== food.get('canonicalName') && (
           <Suspense
             fallback={
-              <Button disabled>
+              <Button disabled color="primary">
                 <Icon name="check" />
-                <span>Save</span>
+                <span>Rename</span>
               </Button>
             }
           >
@@ -258,6 +259,7 @@ const FoodNameEditor = ({ food }: { food: Food }) => {
                 setEditing(false);
               }}
               newName={newName}
+              food={food}
             />
           </Suspense>
         )}
@@ -279,9 +281,11 @@ const FoodNameEditor = ({ food }: { food: Food }) => {
 function FoodNameEditorSaveButton({
   onSave,
   newName,
+  food,
 }: {
   onSave: () => void;
   newName: string;
+  food: Food;
 }) {
   const foodToMerge = hooks.useOneFood({
     index: {
@@ -289,10 +293,11 @@ function FoodNameEditorSaveButton({
       equals: newName,
     },
   });
+  const merge = !!foodToMerge && foodToMerge !== food;
   return (
     <Button color="primary" onClick={onSave}>
-      <Icon name={!!foodToMerge ? 'convert' : 'check'} />
-      <span>{!!foodToMerge ? 'Merge' : 'Save'}</span>
+      <Icon name={!!merge ? 'convert' : 'check'} />
+      <span>{!!merge ? 'Merge' : 'Rename'}</span>
     </Button>
   );
 }

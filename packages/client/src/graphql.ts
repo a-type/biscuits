@@ -28,6 +28,8 @@ export const graphql = initGraphQLTada<{
 export { maskFragments, readFragment } from 'gql.tada';
 export type { FragmentOf, ResultOf, VariablesOf } from 'gql.tada';
 
+let hasNetworkError = false;
+
 function createErrorHandler(
   onError?: (err: string) => void,
   onLoggedOut?: () => void,
@@ -86,11 +88,16 @@ function createErrorHandler(
             return;
           }
         });
-      } else {
+      } else if (!hasNetworkError) {
+        hasNetworkError = true;
         console.error(networkError);
         errorMessage =
           'A network error occurred. Please check your connection.';
       }
+    }
+
+    if (!networkError) {
+      hasNetworkError = false;
     }
 
     if (errorMessage && !operation.getContext().hideErrors)

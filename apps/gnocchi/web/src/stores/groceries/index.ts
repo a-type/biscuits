@@ -500,16 +500,20 @@ export const hooks = createHooks<Presence, Profile>({
     const showFood = params.get('showFood');
     return useCallback(
       async (food: Food, newName: string) => {
+        if (food.get('canonicalName') === newName) return;
+
         const existing = await client.foods.findOne({
           index: {
             where: 'anyName',
             equals: newName,
           },
         }).resolved;
-        if (existing) {
+
+        let finalCanonicalName: string = newName;
+
+        if (existing && existing !== food) {
           // confirm merge
           if (
-            existing !== food &&
             !confirm(
               `You already have a food named ${newName}. Merge "${food.get(
                 'canonicalName',
@@ -530,16 +534,10 @@ export const hooks = createHooks<Presence, Profile>({
             })
             .commit();
           await client.foods.delete(food.get('canonicalName'));
-          // if currently viewing the food (probably are) then redirect
-
-          if (showFood === food.get('canonicalName')) {
-            setParams((p) => {
-              p.set('showFood', existing.get('canonicalName'));
-              return p;
-            });
-          }
 
           toast.success('Merged foods');
+
+          finalCanonicalName = existing.get('canonicalName');
         } else {
           // create a new food, delete the old
           await client.foods.put({
@@ -551,6 +549,16 @@ export const hooks = createHooks<Presence, Profile>({
               .concat(food.get('canonicalName')),
           });
           await client.foods.delete(food.get('canonicalName'));
+          finalCanonicalName = newName;
+        }
+
+        // if currently viewing the food (probably are) then redirect
+
+        if (showFood === food.get('canonicalName')) {
+          setParams((p) => {
+            p.set('showFood', finalCanonicalName);
+            return p;
+          });
         }
       },
       [client, showFood, setParams],
