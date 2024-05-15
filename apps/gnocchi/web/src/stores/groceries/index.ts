@@ -28,6 +28,7 @@ import {
   createHooks,
   migrations,
 } from '@gnocchi.biscuits/verdant';
+import { useSearchParams } from '@verdant-web/react-router';
 import cuid from 'cuid';
 import pluralize from 'pluralize';
 import { useCallback } from 'react';
@@ -493,6 +494,68 @@ export const hooks = createHooks<Presence, Profile>({
         frozenAt: null,
       });
     }, []),
+
+  useChangeFoodCanonicalName: (client) => {
+    const [params, setParams] = useSearchParams();
+    const showFood = params.get('showFood');
+    return useCallback(
+      async (food: Food, newName: string) => {
+        const existing = await client.foods.findOne({
+          index: {
+            where: 'anyName',
+            equals: newName,
+          },
+        }).resolved;
+        if (existing) {
+          // confirm merge
+          if (
+            existing !== food &&
+            !confirm(
+              `You already have a food named ${newName}. Merge "${food.get(
+                'canonicalName',
+              )}" with "${existing.get('canonicalName')}"?`,
+            )
+          ) {
+            return;
+          }
+
+          // merge - this is not undoable since delete can't be batched with the rest...
+          client
+            .batch({ undoable: false, max: null })
+            .run(() => {
+              existing.get('alternateNames').add(food.get('canonicalName'));
+              for (const altName of food.get('alternateNames')) {
+                existing.get('alternateNames').add(altName);
+              }
+            })
+            .commit();
+          await client.foods.delete(food.get('canonicalName'));
+          // if currently viewing the food (probably are) then redirect
+
+          if (showFood === food.get('canonicalName')) {
+            setParams((p) => {
+              p.set('showFood', existing.get('canonicalName'));
+              return p;
+            });
+          }
+
+          toast.success('Merged foods');
+        } else {
+          // create a new food, delete the old
+          await client.foods.put({
+            ...food.getSnapshot(),
+            canonicalName: newName,
+            alternateNames: food
+              .get('alternateNames')
+              .getSnapshot()
+              .concat(food.get('canonicalName')),
+          });
+          await client.foods.delete(food.get('canonicalName'));
+        }
+      },
+      [client, showFood, setParams],
+    );
+  },
 });
 
 const DEBUG = localStorage.getItem('DEBUG') === 'true';

@@ -25,7 +25,11 @@ import {
 import { useSearchParams } from '@verdant-web/react-router';
 import { Suspense, useState } from 'react';
 import { CategorySelect } from '../groceries/categories/CategorySelect.jsx';
-import { Icon } from '../icons/Icon.jsx';
+import { Icon } from '@a-type/ui/components/icon';
+import { Food } from '@gnocchi.biscuits/verdant';
+import { Input } from '@a-type/ui/components/input';
+import { stopPropagation } from '@a-type/utils';
+import { Tooltip } from '@a-type/ui/components/tooltip';
 
 export interface FoodDetailDialogProps {}
 
@@ -104,7 +108,7 @@ function FoodDetailView({
   return (
     <div className="flex flex-col gap-3">
       <DialogTitle>
-        <FoodName food={food} capitalize />
+        <FoodNameEditor food={food} />
       </DialogTitle>
       {lastPurchasedAt || expiresText || purchaseIntervalDays ? (
         <div className="flex flex-col gap-2">
@@ -193,21 +197,21 @@ function FoodDetailView({
       <Divider />
       <H3>Alternate names</H3>
       <FoodNamesEditor names={food.get('alternateNames')} />
-      <Row>
+      <label className="row gap-1">
         <Checkbox
           checked={food.get('pluralizeName')}
           onCheckedChange={(val) => food.set('pluralizeName', val === true)}
         />
         <span>Use pluralized name</span>
-      </Row>
+      </label>
       <Divider />
-      <Row>
+      <label className="row gap-1">
         <Checkbox
           checked={food.get('doNotSuggest')}
           onCheckedChange={(val) => food.set('doNotSuggest', val === true)}
         />
         <span>Do not suggest</span>
-      </Row>
+      </label>
       <Row>
         <Button
           onClick={() => {
@@ -224,3 +228,71 @@ function FoodDetailView({
 }
 
 const Row = withClassName('div', 'flex flex-row items-center gap-1');
+
+const FoodNameEditor = ({ food }: { food: Food }) => {
+  const changeName = hooks.useChangeFoodCanonicalName();
+  const [newName, setNewName] = useState(food.get('canonicalName'));
+  const [editing, setEditing] = useState(false);
+
+  if (editing) {
+    return (
+      <div className="row">
+        <Input
+          value={newName}
+          onChange={(ev) => setNewName(ev.target.value ?? '')}
+          placeholder={food.get('canonicalName')}
+          autoSelect
+        />
+        {newName !== food.get('canonicalName') && (
+          <Suspense
+            fallback={
+              <Button disabled>
+                <Icon name="check" />
+                <span>Save</span>
+              </Button>
+            }
+          >
+            <FoodNameEditorSaveButton
+              onSave={() => {
+                changeName(food, newName);
+                setEditing(false);
+              }}
+              newName={newName}
+            />
+          </Suspense>
+        )}
+      </div>
+    );
+  }
+  return (
+    <div className="row">
+      <FoodName food={food} capitalize />
+      <Tooltip content="Change the primary name, or merge with another food">
+        <Button size="icon" color="ghost" onClick={() => setEditing(true)}>
+          <Icon name="pencil" />
+        </Button>
+      </Tooltip>
+    </div>
+  );
+};
+
+function FoodNameEditorSaveButton({
+  onSave,
+  newName,
+}: {
+  onSave: () => void;
+  newName: string;
+}) {
+  const foodToMerge = hooks.useOneFood({
+    index: {
+      where: 'anyName',
+      equals: newName,
+    },
+  });
+  return (
+    <Button color="primary" onClick={onSave}>
+      <Icon name={!!foodToMerge ? 'convert' : 'check'} />
+      <span>{!!foodToMerge ? 'Merge' : 'Save'}</span>
+    </Button>
+  );
+}
