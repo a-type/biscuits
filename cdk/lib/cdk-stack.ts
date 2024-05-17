@@ -14,9 +14,10 @@ export class CdkStack extends cdk.Stack {
 
     // create an s3 bucket
 
-    const bucket = new cdk.aws_s3.Bucket(this, `${props.appId}.biscuits.club`, {
+    const bucket = new cdk.aws_s3.Bucket(this, `${props.appId}_bucket`, {
       versioned: false,
       removalPolicy: cdk.RemovalPolicy.DESTROY,
+      bucketName: `${props.appId}.biscuits.club`,
     });
 
     new cdk.CfnOutput(this, 'BucketName', {
@@ -27,7 +28,7 @@ export class CdkStack extends cdk.Stack {
 
     const certificate = new cdk.aws_certificatemanager.Certificate(
       this,
-      `${props.appId}.biscuits.club`,
+      `${props.appId}_certificate`,
       {
         domainName: `${props.appId}.biscuits.club`,
       },
@@ -41,7 +42,7 @@ export class CdkStack extends cdk.Stack {
 
     const originAccessIdentity = new cdk.aws_cloudfront.OriginAccessIdentity(
       this,
-      `${props.appId}.biscuits.club`,
+      `${props.appId}_origin_access_identity`,
     );
 
     new cdk.CfnOutput(this, 'OriginAccessIdentityId', {
@@ -52,7 +53,7 @@ export class CdkStack extends cdk.Stack {
 
     const distribution = new cdk.aws_cloudfront.Distribution(
       this,
-      `${props.appId}.biscuits.club`,
+      `${props.appId}_distribution`,
       {
         defaultBehavior: {
           origin: new cdk.aws_cloudfront_origins.S3Origin(bucket, {
