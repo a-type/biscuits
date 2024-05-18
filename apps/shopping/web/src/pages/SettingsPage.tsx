@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { checkForUpdate } from '@/updateState.js';
 import { H1 } from '@a-type/ui/components/typography';
 import { DarkModeToggle } from '@biscuits/client';
+import { PageContent } from '@a-type/ui/components/layouts';
 
 export interface SettingsPageProps {}
 
