@@ -78,19 +78,15 @@ export function RecipeListItem({
       </CardImage>
       <CardFooter>
         <CardActions>
-          {isPinned && (
-            <Button
-              size="icon"
-              color={isPinned ? 'primary' : 'default'}
-              onClick={togglePinned}
-              className="relative"
-            >
-              <DrawingPinIcon
-                className={isPinned ? 'relative top--2px left-0px' : undefined}
-              />
-              <PinIcon isPinned={isPinned} />
-            </Button>
-          )}
+          <Button
+            size="icon"
+            color={isPinned ? 'primary' : 'default'}
+            onClick={togglePinned}
+            className="relative"
+          >
+            <PinIcon isPinned={isPinned} />
+          </Button>
+
           <AddToListButton recipe={recipe} color="ghost" size="small">
             <Icon name="add_to_list" />
           </AddToListButton>
