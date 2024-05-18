@@ -39,7 +39,7 @@ function RecipeTagViewer({ tag }: { tag: string }) {
     <RecipeTagMenuWrapper tagName={tag}>
       <div
         className={classNames(
-          'flex flex-row items-center gap-1 px-3 py-1 rounded-full bg-primaryLight color-black font-bold',
+          'flex flex-row items-center gap-1 px-3 py-1 rounded-full bg-primary-light border border-solid border-gray-7 color-black font-bold',
           data?.get('color') && `theme-${data.get('color')}`,
         )}
       >

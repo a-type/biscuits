@@ -1,85 +1,95 @@
 import { RecipeTagsList } from '@/components/recipes/collection/RecipeTagsList.jsx';
 import { NewTagForm } from '@/components/recipes/editor/NewTagForm.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { Recipe } from '@gnocchi.biscuits/verdant';
 import { Button } from '@a-type/ui/components/button';
 import {
-  Popover,
-  PopoverArrow,
-  PopoverContent,
-  PopoverTrigger,
-} from '@a-type/ui/components/popover';
+  Dialog,
+  DialogActions,
+  DialogClose,
+  DialogContent,
+  DialogTrigger,
+  DialogTitle,
+} from '@a-type/ui/components/dialog';
+import { Recipe } from '@gnocchi.biscuits/verdant';
 import { PlusIcon } from '@radix-ui/react-icons';
 import classNames from 'classnames';
 import { ReactNode, Suspense, forwardRef, useState } from 'react';
-import { stopPropagation } from '@a-type/utils';
 
-export function RecipeAddTag({
+export function RecipeEditTags({
   recipe,
-  onAdd,
-  empty,
   children,
   contentClassName,
   className,
+  onClose,
 }: {
   recipe: Recipe;
-  onAdd?: () => void;
-  empty?: boolean;
   children?: ReactNode;
   contentClassName?: string;
   className?: string;
+  onClose?: () => void;
 }) {
   const [open, setOpen] = useState(false);
-  const addTag = (tagName: string | null) => {
+  const toggleTag = (tagName: string | null) => {
     if (tagName === null) return;
-    recipe.get('tags').add(tagName);
-    onAdd?.();
-    setOpen(false);
+    const tags = recipe.get('tags');
+    if (tags.has(tagName)) {
+      tags.removeAll(tagName);
+    } else {
+      tags.add(tagName);
+    }
   };
-  const { tags } = hooks.useWatch(recipe);
+  const { tags, title } = hooks.useWatch(recipe);
   hooks.useWatch(tags);
-  const tagsSnapshot = tags?.getSnapshot() ?? [];
 
   return (
-    <Popover
+    <Dialog
       open={open}
       onOpenChange={(o) => {
-        if (o) setOpen(true);
+        setOpen(o);
+        if (!o && onClose) onClose();
       }}
     >
       {children ? (
-        <PopoverTrigger asChild>{children}</PopoverTrigger>
+        <DialogTrigger asChild>{children}</DialogTrigger>
       ) : (
-        <PopoverTrigger asChild className={className}>
+        <DialogTrigger asChild className={className}>
           <DefaultTrigger />
-        </PopoverTrigger>
+        </DialogTrigger>
       )}
-      <PopoverContent
-        className={classNames('max-w-350px', contentClassName)}
-        onPointerDownOutside={() => setOpen(false)}
-      >
-        <PopoverArrow />
+      <DialogContent className={contentClassName}>
+        <DialogTitle>Tags for {title}</DialogTitle>
         <Suspense>
-          <NewTagForm onCreate={addTag} />
-          <div className="mt-4">
-            <RecipeTagsList onSelect={addTag} omit={tagsSnapshot} />
+          <div className="mb-4 w-full">
+            <RecipeTagsList
+              onSelect={toggleTag}
+              selectedValues={tags.getSnapshot()}
+              className="w-full font-bold"
+            />
           </div>
+          <NewTagForm onCreate={toggleTag} />
         </Suspense>
-      </PopoverContent>
-    </Popover>
+        <DialogActions>
+          <DialogClose asChild>
+            <Button>Done</Button>
+          </DialogClose>
+        </DialogActions>
+      </DialogContent>
+    </Dialog>
   );
 }
 
 const DefaultTrigger = forwardRef<HTMLButtonElement, { className?: string }>(
-  ({ className, ...rest }, ref) => (
-    <Button
-      size="small"
-      className={classNames('py-1 px-2 text-xs', className)}
-      ref={ref}
-      {...rest}
-    >
-      <PlusIcon />
-      <span>Tag</span>
-    </Button>
-  ),
+  function DefaultTrigger({ className, ...rest }, ref) {
+    return (
+      <Button
+        size="small"
+        className={classNames('py-1 px-2 text-xs', className)}
+        ref={ref}
+        {...rest}
+      >
+        <PlusIcon />
+        <span>Tag</span>
+      </Button>
+    );
+  },
 );

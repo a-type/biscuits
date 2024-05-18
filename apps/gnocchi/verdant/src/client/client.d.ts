@@ -1113,6 +1113,28 @@ export interface RecipeTitleMatchStartsWithFilter {
   startsWith: string;
   order?: "asc" | "desc";
 }
+export interface RecipeGeneralSearchSortFilter {
+  where: "generalSearch";
+  order: "asc" | "desc";
+}
+export interface RecipeGeneralSearchMatchFilter {
+  where: "generalSearch";
+  equals: string;
+  order?: "asc" | "desc";
+}
+export interface RecipeGeneralSearchRangeFilter {
+  where: "generalSearch";
+  gte?: string;
+  gt?: string;
+  lte?: string;
+  lt?: string;
+  order?: "asc" | "desc";
+}
+export interface RecipeGeneralSearchStartsWithFilter {
+  where: "generalSearch";
+  startsWith: string;
+  order?: "asc" | "desc";
+}
 export interface RecipeSessionStartedAtSortFilter {
   where: "sessionStartedAt";
   order: "asc" | "desc";
@@ -1156,6 +1178,10 @@ export type RecipeFilter =
   | RecipeTitleMatchMatchFilter
   | RecipeTitleMatchRangeFilter
   | RecipeTitleMatchStartsWithFilter
+  | RecipeGeneralSearchSortFilter
+  | RecipeGeneralSearchMatchFilter
+  | RecipeGeneralSearchRangeFilter
+  | RecipeGeneralSearchStartsWithFilter
   | RecipeSessionStartedAtSortFilter
   | RecipeSessionStartedAtMatchFilter
   | RecipeSessionStartedAtRangeFilter;

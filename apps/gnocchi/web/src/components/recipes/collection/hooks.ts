@@ -1,6 +1,8 @@
 import { useCallback } from 'react';
 import { useSearchParams } from '@verdant-web/react-router';
 import { hooks } from '@/stores/groceries/index.js';
+import { useLocalStorage } from '@biscuits/client';
+import { removeStopwords } from 'stopword';
 
 export function useRecipeTagFilter() {
   const [params, setParams] = useSearchParams();
@@ -94,40 +96,31 @@ export function useRecipeTitleFilter() {
 
 export function useIsFiltered() {
   const [tagFilter] = useRecipeTagFilter();
-  const [foodFilter] = useRecipeFoodFilter();
   const [titleFilter] = useRecipeTitleFilter();
 
-  return !!tagFilter || !!foodFilter || !!titleFilter;
+  return !!tagFilter || !!titleFilter;
 }
 
 export function useFilteredRecipes() {
   const [tagFilter] = useRecipeTagFilter();
-  const [foodFilter] = useRecipeFoodFilter();
   const [titleFilter] = useRecipeTitleFilter();
 
   // just in... 'case'
   const normalizedTagFilter = tagFilter?.toLowerCase().trim();
-  const normalizedFoodFilter = foodFilter?.toLowerCase().trim();
+  const normalizedFoodFilter = titleFilter?.toLowerCase().trim();
   // only the first word
   const normalizedTitleWords = titleFilter?.toLowerCase().trim()?.split(/\s+/);
+  const firstTitleWord = removeStopwords(normalizedTitleWords)[0];
   const hasTitleFilter = !!titleFilter;
 
   const [rawRecipes, meta] = hooks.useAllRecipesInfinite(
-    hasTitleFilter
+    firstTitleWord
       ? {
           index: {
-            where: 'titleMatch',
-            startsWith: normalizedTitleWords[0],
+            where: 'generalSearch',
+            startsWith: firstTitleWord,
           },
-          key: 'recipesByTitleMatch',
-        }
-      : normalizedFoodFilter
-      ? {
-          index: {
-            where: 'food',
-            equals: normalizedFoodFilter,
-          },
-          key: 'recipesByFood',
+          key: 'recipesSearch',
         }
       : normalizedTagFilter
       ? {
@@ -168,23 +161,29 @@ export function useFilteredRecipes() {
         return false;
     }
 
-    // a food filter exists, but another filter took precedence
-    if (normalizedFoodFilter && hasTitleFilter) {
-      if (
-        !recipe
-          .get('ingredients')
-          .getSnapshot()
-          .some(
-            (ingredient) =>
-              ingredient.food &&
-              ingredient.food.toLowerCase() === normalizedFoodFilter,
-          )
-      )
-        return false;
-    }
+    // // a food filter exists, but another filter took precedence
+    // if (normalizedFoodFilter && hasTitleFilter) {
+    //   if (
+    //     !recipe
+    //       .get('ingredients')
+    //       .getSnapshot()
+    //       .some(
+    //         (ingredient) =>
+    //           ingredient.food &&
+    //           ingredient.food.toLowerCase() === normalizedFoodFilter,
+    //       )
+    //   )
+    //     return false;
+    // }
 
     return true;
   });
 
   return [recipes, meta] as const;
+}
+
+export const gridStyles = ['card-big', 'card-small'] as const;
+export type GridStyle = (typeof gridStyles)[number];
+export function useGridStyle() {
+  return useLocalStorage<GridStyle>('recipeGridStyle', 'card-big');
 }

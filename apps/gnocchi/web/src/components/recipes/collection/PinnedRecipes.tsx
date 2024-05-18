@@ -91,10 +91,9 @@ function PinnedRecipeListItem({ recipe }: { recipe: Recipe }) {
           title.length > 20 && 'text-sm',
         )}
       >
-        <div className="text-md overflow-hidden text-ellipsis whitespace-nowrap min-w-0">
+        <div className="pl-2 text-md overflow-hidden text-ellipsis whitespace-nowrap min-w-0">
           {title}
         </div>
-        <RecipeTagsViewer recipe={recipe} limit={1} className="text-xs" />
       </Link>
       <AddToListButton
         recipe={recipe}

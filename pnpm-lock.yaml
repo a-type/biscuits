@@ -254,6 +254,9 @@ importers:
       react-use-measure:
         specifier: ^2.1.1
         version: 2.1.1(react-dom@18.2.0)(react@18.2.0)
+      stopword:
+        specifier: ^2.0.8
+        version: 2.0.8
       superjson:
         specifier: ^1.12.0
         version: 1.13.3
@@ -312,6 +315,9 @@ importers:
       '@types/react-dom':
         specifier: ^18.2.25
         version: 18.2.25
+      '@types/stopword':
+        specifier: ^2.0.0
+        version: 2.0.0
       '@types/three':
         specifier: 0.162.0
         version: 0.162.0
@@ -9476,6 +9482,10 @@ packages:
 
   /@types/stats.js@0.17.3:
     resolution: {integrity: sha512-pXNfAD3KHOdif9EQXZ9deK82HVNaXP5ZIF5RP2QG6OQFNTaY2YIetfrE9t528vEreGQvEPRDDc8muaoYeK0SxQ==}
+
+  /@types/stopword@2.0.0:
+    resolution: {integrity: sha512-R9g+FLEFzxRANryn5f2Beg7WMMopGBNI6Ghi3+8WrOZL7C063db0VuVrEpbKrML8o6sOryNN81ms9waSJITJqw==}
+    dev: true
 
   /@types/stopword@2.0.3:
     resolution: {integrity: sha512-hioMj0lOvISM+EDevf7ijG8EMbU+J3pj4SstCyfQC1t39uPYpAe7beSfBdU6c1d9jeECTQQtR3UJWtVoUO8Weg==}

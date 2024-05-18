@@ -16,7 +16,14 @@ import { PageFixedArea } from '@a-type/ui/components/layouts';
 import { Spinner } from '@a-type/ui/components/spinner';
 import { Suspense } from 'react';
 import { RecipeListActions } from './RecipeListActions.jsx';
-import { useFilteredRecipes } from './hooks.js';
+import {
+  useFilteredRecipes,
+  useGridStyle,
+  useRecipeTagFilter,
+} from './hooks.js';
+import { RecipeTagsList } from './RecipeTagsList.jsx';
+import classNames from 'classnames';
+import { Peek } from '@a-type/ui/components/peek';
 
 export interface RecipeListProps {}
 
@@ -34,6 +41,10 @@ export function RecipeList({}: RecipeListProps) {
       </Suspense>
       <Suspense>
         <PinnedRecipes />
+      </Suspense>
+
+      <Suspense>
+        <TagFilterList />
       </Suspense>
 
       <Suspense
@@ -54,6 +65,7 @@ export function RecipeList({}: RecipeListProps) {
 
 function RecipeListContent() {
   const [recipes, { loadMore, hasMore }] = useFilteredRecipes();
+  const [gridStyle] = useGridStyle();
 
   if (!recipes.length) {
     return <EmptyState />;
@@ -61,7 +73,12 @@ function RecipeListContent() {
 
   return (
     <>
-      <CardGrid>
+      <CardGrid
+        className={classNames({
+          'grid-cols-1 sm:grid-cols-2': gridStyle === 'card-big',
+          'grid-cols-2 sm:grid-cols-3': gridStyle === 'card-small',
+        })}
+      >
         {recipes.map((recipe) => (
           <RecipeListItem
             key={recipe.get('id')}
@@ -76,5 +93,21 @@ function RecipeListContent() {
         </InfiniteLoadTrigger>
       )}
     </>
+  );
+}
+
+function TagFilterList() {
+  const [tagFilter, setTagFilter] = useRecipeTagFilter();
+  const toggleTagFilter = (value: string | null) =>
+    tagFilter ? setTagFilter(null) : setTagFilter(value);
+
+  return (
+    <RecipeTagsList
+      onSelect={toggleTagFilter}
+      selectedValues={tagFilter ? [tagFilter] : []}
+      onlySelected
+      className="mb-4 font-normal text-xs"
+      buttonClassName="py-1 px-2 text-xs"
+    />
   );
 }

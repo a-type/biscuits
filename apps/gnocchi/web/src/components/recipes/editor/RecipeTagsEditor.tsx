@@ -15,7 +15,7 @@ import {
 } from '@a-type/ui/components/popover';
 import { Button } from '@a-type/ui/components/button';
 import { H2 } from '@a-type/ui/components/typography';
-import { RecipeAddTag } from '@/components/recipes/editor/RecipeAddTag.jsx';
+import { RecipeEditTags } from '@/components/recipes/editor/RecipeAddTag.jsx';
 import { Chip } from '@a-type/ui/components/chip';
 
 export interface RecipeTagsEditorProps {
@@ -37,11 +37,7 @@ export function RecipeTagsEditor({ recipe, className }: RecipeTagsEditorProps) {
           <TagDisplay key={tag} tag={tag} onRemove={removeTag} />
         </Suspense>
       ))}
-      <RecipeAddTag
-        recipe={recipe}
-        empty={tags?.length === 0}
-        className="text-xs"
-      />
+      <RecipeEditTags recipe={recipe} className="text-xs" />
     </div>
   );
 }
@@ -62,7 +58,7 @@ function TagDisplay({
     <Chip
       color="primary"
       className={classNames(
-        'flex items-center gap-1 px-2 rounded-full bg-primaryLight color-black font-bold text-xs',
+        'flex items-center gap-1 px-2 rounded-full !bg-primary-light color-black border-gray-7 font-bold text-xs',
         color && `theme-${color}`,
       )}
     >

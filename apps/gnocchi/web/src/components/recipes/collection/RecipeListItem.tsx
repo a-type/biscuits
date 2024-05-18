@@ -1,5 +1,5 @@
 import { Link } from '@/components/nav/Link.jsx';
-import { RecipeAddTag } from '@/components/recipes/editor/RecipeAddTag.jsx';
+import { RecipeEditTags } from '@/components/recipes/editor/RecipeAddTag.jsx';
 import { makeRecipeLink } from '@/components/recipes/makeRecipeLink.js';
 import { AddToListButton } from '@/components/recipes/viewer/AddToListButton.jsx';
 import { hooks } from '@/stores/groceries/index.js';
@@ -37,6 +37,8 @@ import { RecipeTagsViewer } from '../viewer/RecipeTagsViewer.jsx';
 import { Icon } from '@/components/icons/Icon.jsx';
 import addWeeks from 'date-fns/addWeeks';
 import { PinIcon } from './PinIcon.jsx';
+import { useGridStyle } from './hooks.js';
+import classNames from 'classnames';
 
 const THREE_WEEKS_AGO = addWeeks(Date.now(), -3).getTime();
 
@@ -48,6 +50,7 @@ export function RecipeListItem({
   className?: string;
 }) {
   const { title, pinnedAt } = hooks.useWatch(recipe);
+  const [gridStyle] = useGridStyle();
 
   const isPinned = !!pinnedAt && pinnedAt > THREE_WEEKS_AGO;
 
@@ -60,12 +63,22 @@ export function RecipeListItem({
   }, [recipe, isPinned]);
 
   return (
-    <CardRoot className={className}>
+    <CardRoot
+      className={classNames(
+        {
+          '!max-h-20vh': gridStyle === 'card-small',
+        },
+        className,
+      )}
+    >
       <CardMain asChild>
         <Link to={makeRecipeLink(recipe)} preserveQuery>
           <div className="text-md">
             <Suspense>
-              <RecipeTagsViewer recipe={recipe} />
+              <RecipeTagsViewer
+                recipe={recipe}
+                className={gridStyle === 'card-small' ? 'text-xxs' : 'text-xs'}
+              />
             </Suspense>
           </div>
           <CardTitle>
@@ -130,19 +143,14 @@ export function RecipeListItemMenu({
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent onPointerDownOutside={() => setMenuOpen(false)}>
-        <RecipeAddTag
-          recipe={recipe}
-          onAdd={() => {
-            setMenuOpen(false);
-          }}
-        >
+        <RecipeEditTags recipe={recipe} onClose={() => setMenuOpen(false)}>
           <DropdownMenuItem>
-            <span>Add Tag</span>
+            <span>Tags</span>
             <DropdownMenuItemRightSlot>
-              <PlusIcon />
+              <Icon name="tag" />
             </DropdownMenuItemRightSlot>
           </DropdownMenuItem>
-        </RecipeAddTag>
+        </RecipeEditTags>
         <DropdownMenuItem asChild>
           <Link to={makeRecipeLink(recipe, '/edit')} preserveQuery>
             <span>Edit</span>
