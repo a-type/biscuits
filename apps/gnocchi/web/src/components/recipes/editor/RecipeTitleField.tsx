@@ -20,6 +20,7 @@ export function RecipeTitleField({ recipe }: RecipeTitleFieldProps) {
         });
       }}
       className="important:text-3xl max-w-full w-full"
+      autoSelect
     />
   );
 }

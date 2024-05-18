@@ -14,7 +14,7 @@
     "typecheck": "tsc --build tsconfig.json"
   },
   "dependencies": {
-    "@a-type/ui": "^0.8.3",
+    "@a-type/ui": "^0.8.6",
     "@a-type/utils": "^1.0.8",
     "@biscuits/client": "workspace:*",
     "@biscuits/error": "workspace:*",
@@ -56,7 +56,7 @@
     "parse-fraction": "^1.2.1",
     "pluralize": "^8.0.0",
     "postprocessing": "^6.29.1",
-    "prosemirror-model": "^1.18.0",
+    "prosemirror-model": "1.19.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.3.0",

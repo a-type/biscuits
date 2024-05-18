@@ -52,6 +52,7 @@ export function RecipeTimeFields({ recipe }: RecipeTimeFieldsProps) {
             updateComponentTime('prepTimeMinutes', val);
           }}
           className="w-24"
+          autoSelect
         />
       </Row>
       <Row>
@@ -66,6 +67,7 @@ export function RecipeTimeFields({ recipe }: RecipeTimeFieldsProps) {
             updateComponentTime('cookTimeMinutes', val);
           }}
           className="w-24"
+          autoSelect
         />
       </Row>
       <Row>
@@ -87,6 +89,7 @@ export function RecipeTimeFields({ recipe }: RecipeTimeFieldsProps) {
             }
           }}
           className="w-24"
+          autoSelect
         />
       </Row>
     </div>
