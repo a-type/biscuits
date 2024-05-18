@@ -68,6 +68,7 @@ export function RecipeListItem({
         {
           '!max-h-20vh': gridStyle === 'card-small',
         },
+        'shadow-sm',
         className,
       )}
     >
