@@ -18,6 +18,8 @@ export class CdkStack extends cdk.Stack {
       versioned: false,
       removalPolicy: cdk.RemovalPolicy.DESTROY,
       bucketName: `${props.appId}.biscuits.club`,
+      websiteIndexDocument: 'index.html',
+      websiteErrorDocument: 'index.html',
     });
 
     new cdk.CfnOutput(this, 'BucketName', {
@@ -31,6 +33,10 @@ export class CdkStack extends cdk.Stack {
       `${props.appId}_certificate`,
       {
         domainName: `${props.appId}.biscuits.club`,
+        certificateName: `${props.appId}.biscuits.club_cert`,
+        validation: cdk.aws_certificatemanager.CertificateValidation.fromDns(),
+        subjectAlternativeNames:
+          props.appId === 'www' ? [`biscuits.club`] : undefined,
       },
     );
 
@@ -43,6 +49,9 @@ export class CdkStack extends cdk.Stack {
     const originAccessIdentity = new cdk.aws_cloudfront.OriginAccessIdentity(
       this,
       `${props.appId}_origin_access_identity`,
+      {
+        comment: `${props.appId} origin access identity`,
+      },
     );
 
     new cdk.CfnOutput(this, 'OriginAccessIdentityId', {
@@ -64,6 +73,9 @@ export class CdkStack extends cdk.Stack {
         },
         domainNames: [`${props.appId}.biscuits.club`],
         certificate: certificate,
+        defaultRootObject: 'index.html',
+        priceClass: cdk.aws_cloudfront.PriceClass.PRICE_CLASS_100,
+        comment: `${props.appId} app distribution`,
       },
     );
 

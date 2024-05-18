@@ -79,6 +79,62 @@ const copyConfig = {
 
 await cpTpl(path.resolve(__dirname, `./template`), destinationDir, copyConfig);
 
+const deployAction = `name: ${name} deploy
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/${appId}/**'
+
+jobs:
+  build-and-deploy-${appId}:
+    name: Build and deploy ${appId}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 8.12.1
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --filter @biscuits/${appId}...
+
+      - name: Build ${appId}
+        run: pnpm --filter @biscuits/${appId} run build
+
+      - name: Deploy ${appId} to S3
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --follow-symlinks --delete
+        env:
+          AWS_S3_BUCKET: \${{ secrets.S3_BUCKET_${appId.toUpperCase()} }}
+          AWS_ACCESS_KEY_ID: \${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: \${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          SOURCE_DIR: './apps/${appId}/dist'
+
+      - name: Invalidate CloudFront cache
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          AWS_ACCESS_KEY_ID: \${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: \${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          DISTRIBUTION: \${{ secrets.CLOUDFRONT_ID_${appId.toUpperCase()} }}
+          PATHS: '/*'
+          AWS_REGION: 'us-east-1'
+`;
+await fs.writeFile(
+  path.resolve(process.cwd(), `.github/workflows/deploy-${appId}.yml`),
+  deployAction,
+);
+
 copySpinner.stop('Copying complete');
 
 const installSpinner = spinner();
@@ -101,9 +157,7 @@ await execAsync('pnpm generate --select=wip --module=esm', {
   cwd: verdantDir,
 });
 
-installSpinner.stop(
-  'Your first Verdant schema has been created in WIP mode. You can try out your app immediately! Edit your schema and run `pnpm generate` to generate a new version.',
-);
+installSpinner.stop('App created.');
 
 exec('code ./packages/apps/src/index.ts', {
   cwd: process.cwd(),

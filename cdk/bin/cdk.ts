@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
-import { CdkStack } from '../lib/cdk-stack';
+import { CdkStack } from '../lib/cdk-stack.js';
 import { apps } from '@biscuits/apps';
 
 const app = new cdk.App();
@@ -40,5 +40,8 @@ for (const appManifest of allApps) {
   new CdkStack(app, appManifest.id, {
     ...common,
     appId: appManifest.id,
+    tags: {
+      appId: appManifest.id,
+    },
   });
 }
