@@ -1,5 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
+import { S3OriginWithOAC } from './S3OriginWithOAC';
 
 export interface CdkStackProps extends cdk.StackProps {
   // add props here
@@ -44,18 +45,23 @@ export class CdkStack extends cdk.Stack {
       value: certificate.certificateArn,
     });
 
-    // create an origin access identity
+    // create an origin access control
 
-    const originAccessIdentity = new cdk.aws_cloudfront.OriginAccessIdentity(
+    const originAccessControl = new cdk.aws_cloudfront.CfnOriginAccessControl(
       this,
-      `${props.appId}_origin_access_identity`,
+      `${props.appId}_origin_access_control`,
       {
-        comment: `${props.appId} origin access identity`,
+        originAccessControlConfig: {
+          name: `${props.appId}.biscuits.club-oac`,
+          originAccessControlOriginType: 's3',
+          signingBehavior: 'no-override',
+          signingProtocol: 'sigv4',
+        },
       },
     );
 
-    new cdk.CfnOutput(this, 'OriginAccessIdentityId', {
-      value: originAccessIdentity.originAccessIdentityId,
+    new cdk.CfnOutput(this, 'OriginAccessControlId', {
+      value: originAccessControl.ref,
     });
 
     // create a cloudfront distribution
@@ -65,8 +71,8 @@ export class CdkStack extends cdk.Stack {
       `${props.appId}_distribution`,
       {
         defaultBehavior: {
-          origin: new cdk.aws_cloudfront_origins.S3Origin(bucket, {
-            originAccessIdentity,
+          origin: new S3OriginWithOAC(bucket, {
+            originAccessControlId: originAccessControl.getAtt('Id'),
           }),
           viewerProtocolPolicy:
             cdk.aws_cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
@@ -86,19 +92,5 @@ export class CdkStack extends cdk.Stack {
     new cdk.CfnOutput(this, 'DistributionDomainName', {
       value: distribution.domainName,
     });
-
-    // configure the bucket policy
-
-    bucket.addToResourcePolicy(
-      new cdk.aws_iam.PolicyStatement({
-        actions: ['s3:GetObject'],
-        resources: [bucket.arnForObjects('*')],
-        principals: [
-          new cdk.aws_iam.CanonicalUserPrincipal(
-            originAccessIdentity.cloudFrontOriginAccessIdentityS3CanonicalUserId,
-          ),
-        ],
-      }),
-    );
   }
 }
