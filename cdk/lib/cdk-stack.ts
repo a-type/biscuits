@@ -35,7 +35,6 @@ export class CdkStack extends cdk.Stack {
         bucketProps: {
           blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
           versioned: false,
-          removalPolicy: cdk.RemovalPolicy.DESTROY,
           bucketName: `${props.appId}.biscuits.club`,
           lifecycleRules: [],
         },
@@ -44,8 +43,22 @@ export class CdkStack extends cdk.Stack {
           domainNames: [`${props.appId}.biscuits.club`],
           priceClass: PriceClass.PRICE_CLASS_100,
           comment: `${props.appId} app distribution`,
+          defaultRootObject: 'index.html',
+          errorResponses: [
+            {
+              httpStatus: 403,
+              responseHttpStatus: 200,
+              responsePagePath: '/index.html',
+            },
+            {
+              httpStatus: 404,
+              responseHttpStatus: 200,
+              responsePagePath: '/index.html',
+            },
+          ],
         },
         logS3AccessLogs: false,
+        insertHttpSecurityHeaders: false,
       },
     );
 
