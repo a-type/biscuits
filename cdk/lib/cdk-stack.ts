@@ -28,6 +28,10 @@ export class CdkStack extends cdk.Stack {
 
     // create a cloudfront distribution
 
+    const domains = [`${props.appId}.biscuits.club`];
+    if (props.appId === 'www') {
+      domains.push('biscuits.club');
+    }
     const distribution = new CloudFrontToS3(
       this,
       `${props.appId}_distribution`,
@@ -40,7 +44,7 @@ export class CdkStack extends cdk.Stack {
         },
         cloudFrontDistributionProps: {
           certificate,
-          domainNames: [`${props.appId}.biscuits.club`],
+          domainNames: domains,
           priceClass: PriceClass.PRICE_CLASS_100,
           comment: `${props.appId} app distribution`,
           defaultRootObject: 'index.html',
