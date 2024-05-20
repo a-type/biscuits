@@ -640,6 +640,9 @@ importers:
 
   cdk:
     dependencies:
+      '@aws-solutions-constructs/aws-cloudfront-s3':
+        specifier: ^2.57.0
+        version: 2.57.0(@aws-solutions-constructs/core@2.57.0)(@aws-solutions-constructs/resources@2.57.0)(aws-cdk-lib@2.141.0)(constructs@10.3.0)
       '@biscuits/apps':
         specifier: workspace:*
         version: link:../packages/apps
@@ -1452,6 +1455,17 @@ packages:
     resolution: {integrity: sha512-twhuEG+JPOYCYPx/xy5uH2+VUsIEhPTzDY0F1KuB+ocjWWB/KEDiOVL19nHvbPCB6fhWnkykXEMJ4HHcKvjtvg==}
     dev: false
 
+  /@aws-cdk/integ-tests-alpha@2.138.0-alpha.0(aws-cdk-lib@2.141.0)(constructs@10.3.0):
+    resolution: {integrity: sha512-TqLcJbC9VX05X2Py2GpFZ8quO7Mj3i1NuerekzqM8RV8AiU3aPMcZFGRK+MdXHNIiGzYx9ZGfMPERVT4Qqwn6A==}
+    engines: {node: '>= 14.15.0'}
+    peerDependencies:
+      aws-cdk-lib: ^2.138.0
+      constructs: ^10.0.0
+    dependencies:
+      aws-cdk-lib: 2.141.0(constructs@10.3.0)
+      constructs: 10.3.0
+    dev: false
+
   /@aws-crypto/crc32@3.0.0:
     resolution: {integrity: sha512-IzSgsrxUcsrejQbPVilIKy16kAT52EwB6zSaI+M3xxIhKh5+aldEyvI+z6erM7TCLB2BJsFrtHjp6/4/sr+3dA==}
     dependencies:
@@ -2098,6 +2112,53 @@ packages:
       '@smithy/types': 2.12.0
       tslib: 2.6.2
     dev: false
+
+  /@aws-solutions-constructs/aws-cloudfront-s3@2.57.0(@aws-solutions-constructs/core@2.57.0)(@aws-solutions-constructs/resources@2.57.0)(aws-cdk-lib@2.141.0)(constructs@10.3.0):
+    resolution: {integrity: sha512-ReL7pk7UE2Xgg0mw6v8TmMC6Jhkmv1R4s3UZqM9w4RMXzp3LceS78YZLJHBT6m8AAT6wxY4kAFqJNoUZJ7fFKg==}
+    peerDependencies:
+      '@aws-solutions-constructs/core': 2.57.0
+      '@aws-solutions-constructs/resources': 2.57.0
+      aws-cdk-lib: ^2.138.0
+      constructs: ^10.0.0
+    dependencies:
+      '@aws-cdk/integ-tests-alpha': 2.138.0-alpha.0(aws-cdk-lib@2.141.0)(constructs@10.3.0)
+      '@aws-solutions-constructs/core': 2.57.0(aws-cdk-lib@2.141.0)(constructs@10.3.0)
+      '@aws-solutions-constructs/resources': 2.57.0(@aws-solutions-constructs/core@2.57.0)(aws-cdk-lib@2.141.0)(constructs@10.3.0)
+      aws-cdk-lib: 2.141.0(constructs@10.3.0)
+      constructs: 10.3.0
+    dev: false
+
+  /@aws-solutions-constructs/core@2.57.0(aws-cdk-lib@2.141.0)(constructs@10.3.0):
+    resolution: {integrity: sha512-AGDqfup4vfo1ueum44M70lcnUPVFM1jZhK9XVksxEQdQJA1T6O1OdcGGJO3aw3vQVC+9YS9upTYCfHUyC5j3qw==}
+    peerDependencies:
+      aws-cdk-lib: ^2.138.0
+      constructs: ^10.0.0
+    dependencies:
+      '@aws-cdk/integ-tests-alpha': 2.138.0-alpha.0(aws-cdk-lib@2.141.0)(constructs@10.3.0)
+      aws-cdk-lib: 2.141.0(constructs@10.3.0)
+      constructs: 10.3.0
+    dev: false
+    bundledDependencies:
+      - deepmerge
+      - npmlog
+      - deep-diff
+
+  /@aws-solutions-constructs/resources@2.57.0(@aws-solutions-constructs/core@2.57.0)(aws-cdk-lib@2.141.0)(constructs@10.3.0):
+    resolution: {integrity: sha512-2LYLlTF8GPvKY1KIFcF7MJNO7vnND7g93+FZY3sg95cSB6U9wKqhVdEn1LRGZLGljmsJJBHxUSedy8TOVIjOsQ==}
+    peerDependencies:
+      '@aws-solutions-constructs/core': 2.57.0
+      aws-cdk-lib: ^2.138.0
+      constructs: ^10.0.0
+    dependencies:
+      '@aws-cdk/integ-tests-alpha': 2.138.0-alpha.0(aws-cdk-lib@2.141.0)(constructs@10.3.0)
+      '@aws-solutions-constructs/core': 2.57.0(aws-cdk-lib@2.141.0)(constructs@10.3.0)
+      aws-cdk-lib: 2.141.0(constructs@10.3.0)
+      constructs: 10.3.0
+    dev: false
+    bundledDependencies:
+      - '@aws-sdk/client-kms'
+      - '@aws-sdk/client-s3'
+      - aws-sdk-client-mock
 
   /@babel/code-frame@7.23.5:
     resolution: {integrity: sha512-CgH3s1a96LipHCmSUmYFPwY7MNx8C3avkq7i4Wl3cfa662ldtUe4VM1TPXX70pfmrlWTb6jLqTYrZyT2ZTJBgA==}

@@ -1,6 +1,11 @@
 import * as cdk from 'aws-cdk-lib';
+import { CfnDistribution, PriceClass } from 'aws-cdk-lib/aws-cloudfront';
 import { Construct } from 'constructs';
-import { S3OriginWithOAC } from './S3OriginWithOAC';
+import { S3Bucket } from './S3Bucket';
+import { CloudFrontDistribution } from './CloudfrontDistribution';
+import { TLSCertificate } from './TLSCertificate';
+import { CloudFrontToS3 } from '@aws-solutions-constructs/aws-cloudfront-s3';
+import { BlockPublicAccess } from 'aws-cdk-lib/aws-s3';
 
 export interface CdkStackProps extends cdk.StackProps {
   // add props here
@@ -13,84 +18,47 @@ export class CdkStack extends cdk.Stack {
 
     // The code that defines your stack goes here
 
-    // create an s3 bucket
-
-    const bucket = new cdk.aws_s3.Bucket(this, `${props.appId}_bucket`, {
-      versioned: false,
-      removalPolicy: cdk.RemovalPolicy.DESTROY,
-      bucketName: `${props.appId}.biscuits.club`,
-      websiteIndexDocument: 'index.html',
-      websiteErrorDocument: 'index.html',
-    });
-
-    new cdk.CfnOutput(this, 'BucketName', {
-      value: bucket.bucketName,
-    });
-
     // create a TLS certificate
 
-    const certificate = new cdk.aws_certificatemanager.Certificate(
-      this,
-      `${props.appId}_certificate`,
-      {
-        domainName: `${props.appId}.biscuits.club`,
-        certificateName: `${props.appId}.biscuits.club_cert`,
-        validation: cdk.aws_certificatemanager.CertificateValidation.fromDns(),
-        subjectAlternativeNames:
-          props.appId === 'www' ? [`biscuits.club`] : undefined,
-      },
-    );
+    const certificate = new TLSCertificate(this, props.appId);
 
     new cdk.CfnOutput(this, 'CertificateArn', {
       value: certificate.certificateArn,
     });
 
-    // create an origin access control
-
-    const originAccessControl = new cdk.aws_cloudfront.CfnOriginAccessControl(
-      this,
-      `${props.appId}_origin_access_control`,
-      {
-        originAccessControlConfig: {
-          name: `${props.appId}.biscuits.club-oac`,
-          originAccessControlOriginType: 's3',
-          signingBehavior: 'no-override',
-          signingProtocol: 'sigv4',
-        },
-      },
-    );
-
-    new cdk.CfnOutput(this, 'OriginAccessControlId', {
-      value: originAccessControl.ref,
-    });
-
     // create a cloudfront distribution
 
-    const distribution = new cdk.aws_cloudfront.Distribution(
+    const distribution = new CloudFrontToS3(
       this,
       `${props.appId}_distribution`,
       {
-        defaultBehavior: {
-          origin: new S3OriginWithOAC(bucket, {
-            originAccessControlId: originAccessControl.getAtt('Id'),
-          }),
-          viewerProtocolPolicy:
-            cdk.aws_cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+        bucketProps: {
+          blockPublicAccess: BlockPublicAccess.BLOCK_ALL,
+          versioned: false,
+          removalPolicy: cdk.RemovalPolicy.DESTROY,
+          bucketName: `${props.appId}.biscuits.club`,
+          lifecycleRules: [],
         },
-        domainNames: [`${props.appId}.biscuits.club`],
-        certificate: certificate,
-        defaultRootObject: 'index.html',
-        priceClass: cdk.aws_cloudfront.PriceClass.PRICE_CLASS_100,
-        comment: `${props.appId} app distribution`,
+        cloudFrontDistributionProps: {
+          certificate,
+          domainNames: [`${props.appId}.biscuits.club`],
+          priceClass: PriceClass.PRICE_CLASS_100,
+          comment: `${props.appId} app distribution`,
+        },
+        logS3AccessLogs: false,
       },
     );
 
+    new cdk.CfnOutput(this, 'BucketName', {
+      value: distribution.s3Bucket!.bucketName,
+    });
+
     new cdk.CfnOutput(this, 'DistributionId', {
-      value: distribution.distributionId,
+      value: distribution.cloudFrontWebDistribution.distributionId,
     });
 
     new cdk.CfnOutput(this, 'DistributionDomainName', {
-      value: distribution.domainName,
+      value: distribution.cloudFrontWebDistribution.distributionDomainName,
     });
   }
 }
