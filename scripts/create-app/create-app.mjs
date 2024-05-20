@@ -119,7 +119,7 @@ jobs:
           AWS_S3_BUCKET: \${{ secrets.S3_BUCKET_${appId.toUpperCase()} }}
           AWS_ACCESS_KEY_ID: \${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: \${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          SOURCE_DIR: './apps/${appId}/dist'
+          SOURCE_DIR: './apps/${appId}/web/dist'
 
       - name: Invalidate CloudFront cache
         uses: chetan/invalidate-cloudfront-action@v2
