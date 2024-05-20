@@ -9,16 +9,16 @@ import { useEffect } from 'react';
 export interface HomePageProps {}
 
 export function HomePage({}: HomePageProps) {
-  const [lastList, setLastList] = useLocalStorage<string | null>(
-    'last-list',
-    null,
-  );
+  const [lastList] = useLocalStorage<string | null>('last-list', null);
   const someList = hooks.useOneList();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (lastList || someList) {
-      navigate(`/list/${lastList || someList!.get('id')}`);
+      navigate(`/list/${lastList || someList!.get('id')}`, {
+        replace: true,
+        skipTransition: true,
+      });
     }
   }, [navigate, lastList, someList]);
 
