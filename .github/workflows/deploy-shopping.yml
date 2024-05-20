@@ -27,10 +27,10 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --filter @biscuits/shopping...
+        run: pnpm install --filter @shopping.biscuits/web...
 
       - name: Build shopping
-        run: pnpm --filter @biscuits/shopping run build
+        run: pnpm --filter @shoppoing.biscuits/web... run build
 
       - name: Deploy shopping to S3
         uses: jakejarvis/s3-sync-action@master

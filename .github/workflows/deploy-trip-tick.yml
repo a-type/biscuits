@@ -27,10 +27,10 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --filter @biscuits/trip-tick...
+        run: pnpm install --filter @trip-tick.biscuits/web...
 
       - name: Build trip-tick
-        run: pnpm --filter @biscuits/trip-tick run build
+        run: pnpm --filter @trip-tick.biscuits/web... run build
 
       - name: Deploy trip-tick to S3
         uses: jakejarvis/s3-sync-action@master

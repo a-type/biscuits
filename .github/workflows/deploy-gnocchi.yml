@@ -27,10 +27,10 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --filter @biscuits/gnocchi...
+        run: pnpm install --filter @gnocchi.biscuits/web...
 
       - name: Build gnocchi
-        run: pnpm --filter @biscuits/gnocchi run build
+        run: pnpm --filter @gnocchi.biscuits/web... run build
 
       - name: Deploy gnocchi to S3
         uses: jakejarvis/s3-sync-action@master

@@ -108,10 +108,10 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --filter @biscuits/${appId}...
+        run: pnpm install --filter @${appId}.biscuits/web...
 
       - name: Build ${appId}
-        run: pnpm --filter @biscuits/${appId} run build
+        run: pnpm --filter @${appId}.biscuits/web... run build
 
       - name: Deploy ${appId} to S3
         uses: jakejarvis/s3-sync-action@master
