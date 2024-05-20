@@ -5,6 +5,7 @@ on:
     paths:
       - 'apps/shopping/**'
       - 'packages/client/**'
+      - '.github/workflows/deploy-shopping.yml'
 
 jobs:
   build-and-deploy-shopping:

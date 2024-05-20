@@ -86,6 +86,7 @@ on:
     paths:
       - 'apps/${appId}/**'
       - 'packages/client/**'
+      - '.github/workflows/deploy-${appId}.yml'
 
 jobs:
   build-and-deploy-${appId}:
