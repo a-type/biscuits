@@ -30,7 +30,7 @@ jobs:
         run: pnpm install --filter @shopping.biscuits/web...
 
       - name: Build shopping
-        run: pnpm --filter @shoppoing.biscuits/web... run build
+        run: pnpm --filter @shopping.biscuits/web... run build
 
       - name: Deploy shopping to S3
         uses: jakejarvis/s3-sync-action@master
