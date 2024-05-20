@@ -85,6 +85,7 @@ on:
     branches: [main]
     paths:
       - 'apps/${appId}/**'
+      - 'packages/client/**'
 
 jobs:
   build-and-deploy-${appId}:

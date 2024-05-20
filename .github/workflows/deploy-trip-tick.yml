@@ -3,12 +3,12 @@ on:
   push:
     branches: [main]
     paths:
-      - 'apps/shopping/**'
+      - 'apps/trip-tick/**'
       - 'packages/client/**'
 
 jobs:
-  build-and-deploy-shopping:
-    name: Build and deploy shopping
+  build-and-deploy-trip-tick:
+    name: Build and deploy trip-tick
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -26,26 +26,26 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --filter @biscuits/shopping...
+        run: pnpm install --filter @biscuits/trip-tick...
 
-      - name: Build shopping
-        run: pnpm --filter @biscuits/shopping run build
+      - name: Build trip-tick
+        run: pnpm --filter @biscuits/trip-tick run build
 
-      - name: Deploy shopping to S3
+      - name: Deploy trip-tick to S3
         uses: jakejarvis/s3-sync-action@master
         with:
           args: --follow-symlinks --delete
         env:
-          AWS_S3_BUCKET: ${{ secrets.S3_BUCKET_SHOPPING }}
+          AWS_S3_BUCKET: ${{ secrets.S3_BUCKET_TRIP_TICK }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          SOURCE_DIR: './apps/shopping/web/dist'
+          SOURCE_DIR: './apps/trip-tick/web/dist'
 
       - name: Invalidate CloudFront cache
         uses: chetan/invalidate-cloudfront-action@v2
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          DISTRIBUTION: ${{ secrets.CLOUDFRONT_ID_SHOPPING }}
+          DISTRIBUTION: ${{ secrets.CLOUDFRONT_ID_TRIP_TICK }}
           PATHS: '/*'
           AWS_REGION: 'us-east-1'
