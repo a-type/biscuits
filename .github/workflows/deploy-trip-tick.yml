@@ -1,4 +1,4 @@
-name: Shopping Deploy
+name: Trip-Tick Deploy
 on:
   push:
     branches: [main]

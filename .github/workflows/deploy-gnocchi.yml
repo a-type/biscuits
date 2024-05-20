@@ -1,4 +1,4 @@
-name: Shopping Deploy
+name: Gnocchi Deploy
 on:
   push:
     branches: [main]
