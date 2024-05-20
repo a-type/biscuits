@@ -1,6 +1,6 @@
 import { CreateListButton } from '@/components/lists/CreateListButton.jsx';
 import { hooks } from '@/store.js';
-import { PageContent, PageFixedArea } from '@a-type/ui/components/layouts';
+import { PageContent } from '@a-type/ui/components/layouts';
 import { H1, P } from '@a-type/ui/components/typography';
 import { useLocalStorage } from '@biscuits/client';
 import { useNavigate } from '@verdant-web/react-router';

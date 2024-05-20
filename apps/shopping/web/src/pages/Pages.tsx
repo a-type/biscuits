@@ -10,6 +10,7 @@ import { Link } from '@verdant-web/react-router';
 import { TopLoader } from '@/components/nav/TopLoader.jsx';
 import { ReloadButton } from '@biscuits/client';
 import ListPage from './ListPage.jsx';
+import { PageRoot } from '@a-type/ui/components/layouts';
 
 const routes = makeRoutes([
   {
@@ -43,7 +44,9 @@ export function Pages() {
       <Suspense fallback={<Spinner />}>
         <Router routes={routes} onNavigate={handleNavigate}>
           <TopLoader />
-          <Outlet />
+          <PageRoot>
+            <Outlet />
+          </PageRoot>
         </Router>
       </Suspense>
     </ErrorBoundary>
