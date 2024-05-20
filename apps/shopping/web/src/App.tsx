@@ -13,12 +13,6 @@ import { H1, P } from '@a-type/ui/components/typography';
 export interface AppProps {}
 
 export function App({}: AppProps) {
-  useLayoutEffect(() => {
-    if (typeof window !== 'undefined') {
-      document.body.className = 'theme-lemon';
-    }
-  }, []);
-
   useVisualViewportOffset();
 
   return (

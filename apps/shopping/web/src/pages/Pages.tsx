@@ -9,11 +9,17 @@ import { updateApp, updateState } from '@/updateState.js';
 import { Link } from '@verdant-web/react-router';
 import { TopLoader } from '@/components/nav/TopLoader.jsx';
 import { ReloadButton } from '@biscuits/client';
+import ListPage from './ListPage.jsx';
 
 const routes = makeRoutes([
   {
     path: '/',
+    exact: true,
     component: HomePage,
+  },
+  {
+    path: '/list/:listId',
+    component: ListPage,
   },
   {
     path: '/settings',

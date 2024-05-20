@@ -56,7 +56,7 @@
     },
     {
       "type": "npm",
-      "script": "dev",
+      "script": "app-dev",
       "path": "apps/shopping/web",
       "problemMatcher": [],
       "label": "Run Shopping",
