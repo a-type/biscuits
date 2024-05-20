@@ -13,7 +13,7 @@ var lists = schema.collection({
       default: "New list"
     }),
     createdAt: schema.fields.number({
-      default: Date.now()
+      default: Date.now
     }),
     items: schema.fields.array({
       items: schema.fields.object({
@@ -28,7 +28,7 @@ var lists = schema.collection({
             nullable: true
           }),
           createdAt: schema.fields.number({
-            default: Date.now()
+            default: Date.now
           }),
           link: schema.fields.string({
             nullable: true
