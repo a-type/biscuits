@@ -24,19 +24,25 @@ export function RecipePresenceNotification({}: RecipePresenceNotificationProps) 
   }
 }
 
-function RecipePresenceNotificationContent() {
-  const [dismissedId, setDismissedId] = useState('');
-
+export function useRecipePresenceNotification() {
   const viewingRecipe = hooks.useFindPeer((peer) => {
     return !!peer?.presence?.viewingRecipeId;
   });
 
-  const recipeId = viewingRecipe?.presence.viewingRecipeId;
+  return {
+    peer: viewingRecipe,
+    recipeId: viewingRecipe?.presence.viewingRecipeId,
+  };
+}
 
-  if (recipeId && recipeId !== dismissedId) {
+function RecipePresenceNotificationContent() {
+  const [dismissedId, setDismissedId] = useState('');
+  const { peer, recipeId } = useRecipePresenceNotification();
+
+  if (peer && recipeId && recipeId !== dismissedId) {
     return (
       <RecipePresenceLink
-        person={viewingRecipe}
+        person={peer}
         recipeId={recipeId}
         onDismiss={() => setDismissedId(recipeId)}
       />

@@ -29,6 +29,7 @@ import { useHasNewExpirations } from '../pantry/hooks.js';
 import { PopEffect } from './PopEffect.jsx';
 import { withClassName } from '@a-type/ui/hooks';
 import { AppPickerNavItem, ChangelogDisplay } from '@biscuits/client';
+import { useRecipePresenceNotification } from '../sync/collaborationMenu/RecipePresenceNotification.jsx';
 
 export interface NavBarProps {}
 
@@ -117,6 +118,8 @@ function RecipesNavBarLink({ active }: { active: boolean }) {
     client.recipes.findAll();
   }, []);
 
+  const { peer: someoneViewingRecipe } = useRecipePresenceNotification();
+
   return (
     <NavBarLink
       to="/recipes"
@@ -124,7 +127,8 @@ function RecipesNavBarLink({ active }: { active: boolean }) {
       active={active}
       onHover={preload}
     >
-      Recipes
+      <span>Recipes</span>
+      {someoneViewingRecipe && <Pip />}
     </NavBarLink>
   );
 }
