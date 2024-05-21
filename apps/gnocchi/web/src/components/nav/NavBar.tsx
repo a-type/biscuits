@@ -30,6 +30,7 @@ import { PopEffect } from './PopEffect.jsx';
 import { withClassName } from '@a-type/ui/hooks';
 import { AppPickerNavItem, ChangelogDisplay } from '@biscuits/client';
 import { useRecipePresenceNotification } from '../sync/collaborationMenu/RecipePresenceNotification.jsx';
+import { IconName } from '../icons/generated/iconNames.js';
 
 export interface NavBarProps {}
 
@@ -75,7 +76,7 @@ const NavBarLink = memo(
     {
       to: string;
       children: ReactNode;
-      icon: ReactNode;
+      icon: IconName;
       animate?: boolean;
       active: boolean;
       onClick?: () => void;
@@ -99,10 +100,8 @@ const NavBarLink = memo(
           ref={ref}
         >
           <NavBarItemIconWrapper className="flex">
-            <NavBarItemIcon className="flex">
-              <PopEffect active={animate} />
-              {icon}
-            </NavBarItemIcon>
+            <PopEffect active={animate} />
+            <NavBarItemIcon name={icon} />
           </NavBarItemIconWrapper>
           <NavBarItemText data-active={!!active}>{children}</NavBarItemText>
         </Link>
@@ -121,12 +120,7 @@ function RecipesNavBarLink({ active }: { active: boolean }) {
   const { peer: someoneViewingRecipe } = useRecipePresenceNotification();
 
   return (
-    <NavBarLink
-      to="/recipes"
-      icon={<Icon name="book" className="fill-inherit" />}
-      active={active}
-      onHover={preload}
-    >
+    <NavBarLink to="/recipes" icon="book" active={active} onHover={preload}>
       <span>Recipes</span>
       {someoneViewingRecipe && <Pip />}
     </NavBarLink>
@@ -147,7 +141,7 @@ function PantryNavBarLink({ active }: { active: boolean }) {
   return (
     <NavBarLink
       to="/pantry"
-      icon={<Icon name="food" className="fill-inherit" />}
+      icon="food"
       animate={recent}
       active={active}
       onClick={onSeen}
@@ -180,7 +174,7 @@ function GroceriesNavBarLink({ active }: { active: boolean }) {
     >
       <NavBarLink
         to="/"
-        icon={<Icon name="cart" className="fill-inherit" />}
+        icon="cart"
         active={active}
         animate={justAddedSomething}
       >
@@ -195,9 +189,7 @@ function NavBarChangelog() {
     <ChangelogDisplay hideOnSeen className="hidden md:display-flex">
       <NavBarChangelogButton>
         <NavBarItemIconWrapper>
-          <NavBarItemIcon>
-            <Icon name="gift" className="fill-inherit" />
-          </NavBarItemIcon>
+          <NavBarItemIcon name="gift" />
         </NavBarItemIconWrapper>
         <NavBarItemText>What&apos;s new</NavBarItemText>
       </NavBarChangelogButton>
