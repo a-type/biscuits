@@ -45,10 +45,7 @@ export function App() {
                 <ParticleLayer>
                   <AppPreviewNotice />
                   <Pages />
-                  <Toaster
-                    position="bottom-center"
-                    containerClassName="mb-10 sm:mb-0"
-                  />
+                  <Toaster position="top-center" containerClassName="mt-1" />
                   <IconSpritesheet />
                   <GlobalSyncingIndicator />
                   <AppMoved />

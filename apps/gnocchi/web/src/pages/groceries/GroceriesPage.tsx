@@ -1,3 +1,4 @@
+import { FloatingAdd } from '@/components/groceries/addBar/FloatingAdd.jsx';
 import { ListEdit } from '@/components/groceries/lists/ListEdit.jsx';
 import { ListSelect } from '@/components/groceries/lists/ListSelect.jsx';
 import { Icon } from '@/components/icons/Icon.jsx';
@@ -9,13 +10,14 @@ import { ListContext } from '@/contexts/ListContext.jsx';
 import { usePageTitle } from '@/hooks/usePageTitle.jsx';
 import { firstTimeOnboarding } from '@/onboarding/firstTimeOnboarding.js';
 import {
-  AddBar,
+  MainActions,
   List,
   ListSelectWrapper,
   ThemedPageContent,
   TopControls,
   UnknownListRedirect,
 } from '@/pages/groceries/layout.jsx';
+import { PageNowPlaying } from '@a-type/ui/components/layouts';
 import {
   ChangelogDisplay,
   InstallButton,
@@ -75,11 +77,13 @@ export function GroceriesPage() {
             </Suspense>
           </div>
         </TopControls>
-        <AddBar />
+        <MainActions />
         <List />
         <UnknownListRedirect listId={listId} />
-        <RecipePresenceNotification />
         <AutoRestoreScroll />
+        <PageNowPlaying unstyled className="items-center">
+          <FloatingAdd />
+        </PageNowPlaying>
       </ThemedPageContent>
     </ListContext.Provider>
   );

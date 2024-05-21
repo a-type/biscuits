@@ -8,8 +8,8 @@ import { Suspense } from 'react';
 import { RecipesNowPlaying } from '@/components/recipes/nowPlaying/RecipesNowPlaying.jsx';
 import { usePageTitle } from '@/hooks/usePageTitle.jsx';
 import { RecipeCreateButton } from '@/components/recipes/collection/RecipeCreateButton.jsx';
-import { PlusIcon } from '@radix-ui/react-icons';
 import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
+import { Icon } from '@/components/icons/Icon.jsx';
 
 export interface RecipesPageProps {}
 
@@ -21,11 +21,14 @@ export function RecipesPage({}: RecipesPageProps) {
         <RecipeList />
       </Suspense>
       <Suspense>
-        <PageNowPlaying unstyled className="flex flex-col pointer-events-none">
+        <PageNowPlaying
+          unstyled
+          className="flex flex-col items-center pointer-events-none"
+        >
           <Suspense>
-            <RecipeCreateButton className="pointer-events-auto w-48px h-48px md:w-auto md:h-auto mr-4 mb-1 shadow-lg">
+            <RecipeCreateButton className="pointer-events-auto w-48px h-48px items-center justify-center md:w-auto md:h-auto shadow-lg">
               <span className="hidden md:block">New Recipe</span>
-              <PlusIcon />
+              <Icon name="plus" className="w-20px h-20px" />
             </RecipeCreateButton>
           </Suspense>
           <RecipesNowPlaying showSingle defaultOpen />

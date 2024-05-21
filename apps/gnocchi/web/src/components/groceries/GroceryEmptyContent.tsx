@@ -14,7 +14,7 @@ export function GroceryEmptyContent() {
           }}
         />
         <P className="[font-size:inherit]">Your list is empty</P>
-        <P className="[font-size:inherit]">Use the bar above to add items</P>
+        <P className="[font-size:inherit]">Use the button below to add items</P>
       </div>
       <MeetupHint />
       <InstallHint content="Always have your list on hand. Install the app!" />

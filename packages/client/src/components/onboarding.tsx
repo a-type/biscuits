@@ -175,7 +175,7 @@ export function OnboardingBanner<O extends Onboarding<any>>({
       className={classNames('theme-leek', 'w-full', className)}
     >
       <CollapsibleContent>
-        <div className="flex flex-col w-full bg-primaryWash color-black p-4 rounded-lg gap-3">
+        <div className="flex flex-col w-full bg-primary-wash color-black p-4 rounded-lg gap-3">
           <div>{children}</div>
           <div className="flex justify-end gap-3">
             {!disableNext && (
@@ -231,7 +231,7 @@ export const OnboardingTooltip = function OnboardingTooltip<
         disableBlur
         className={classNames(
           'theme-leek',
-          'important:bg-primaryWash flex py-2 px-3',
+          '!bg-primary-wash flex py-2 px-3',
           'overflow-visible',
         )}
         onInteractOutside={(event) => {
@@ -245,7 +245,7 @@ export const OnboardingTooltip = function OnboardingTooltip<
         }}
         collisionPadding={16}
       >
-        <PopoverArrow className="important:fill-primaryWash" />
+        <PopoverArrow className="!fill-primary-wash" />
         <div className="flex flex-row gap-3 items-center">
           {content}
           {!disableNext && (

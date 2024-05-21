@@ -27,7 +27,9 @@ export function AppMoved({}: AppMovedProps) {
 
   if (
     window.location.origin === app.url ||
-    window.location.origin === app.devOriginOverride
+    window.location.origin === app.devOriginOverride ||
+    // special case for localnet...
+    window.location.origin.startsWith('http://192.')
   ) {
     return null;
   }

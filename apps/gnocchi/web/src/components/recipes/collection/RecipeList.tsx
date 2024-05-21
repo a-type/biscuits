@@ -23,15 +23,15 @@ import {
 } from './hooks.js';
 import { RecipeTagsList } from './RecipeTagsList.jsx';
 import classNames from 'classnames';
-import { Peek } from '@a-type/ui/components/peek';
+import { RecipePresenceNotification } from '@/components/sync/collaborationMenu/RecipePresenceNotification.jsx';
 
 export interface RecipeListProps {}
 
 export function RecipeList({}: RecipeListProps) {
   return (
-    <div className="flex flex-col p-0 m-0 mb-6">
+    <div className="flex flex-col p-0 m-0 mb-6 gap-2">
       <Suspense>
-        <PageFixedArea className="pt-2 w-full mb-4">
+        <PageFixedArea className="pt-2 w-full mb-2">
           <div className="flex flex-row items-center justify-stretch w-full">
             <RecipeSearchBar className="flex-1" />
             <RecipeCollectionMenu className="flex-0-0-auto" />
@@ -39,6 +39,8 @@ export function RecipeList({}: RecipeListProps) {
           <RecipeListActions />
         </PageFixedArea>
       </Suspense>
+      <RecipePresenceNotification />
+
       <Suspense>
         <PinnedRecipes />
       </Suspense>

@@ -35,13 +35,11 @@ function RecipePresenceNotificationContent() {
 
   if (recipeId && recipeId !== dismissedId) {
     return (
-      <PageNowPlaying className="p-1">
-        <RecipePresenceLink
-          person={viewingRecipe}
-          recipeId={recipeId}
-          onDismiss={() => setDismissedId(recipeId)}
-        />
-      </PageNowPlaying>
+      <RecipePresenceLink
+        person={viewingRecipe}
+        recipeId={recipeId}
+        onDismiss={() => setDismissedId(recipeId)}
+      />
     );
   } else {
     return null;
@@ -62,7 +60,7 @@ function RecipePresenceLink({
   if (!recipe) return null;
 
   return (
-    <div className="flex flex-row gap-2 items-center p-2 w-full">
+    <div className="flex flex-row gap-2 items-center p-2 w-full max-w-full overflow-hidden border-default rounded-lg bg-white">
       <Button
         size="icon"
         onClick={onDismiss}

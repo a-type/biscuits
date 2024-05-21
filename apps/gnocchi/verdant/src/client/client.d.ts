@@ -615,6 +615,23 @@ export interface FoodFrozenRangeFilter {
   lt?: boolean;
   order?: "asc" | "desc";
 }
+export interface FoodPurchaseCountSortFilter {
+  where: "purchaseCount";
+  order: "asc" | "desc";
+}
+export interface FoodPurchaseCountMatchFilter {
+  where: "purchaseCount";
+  equals: number;
+  order?: "asc" | "desc";
+}
+export interface FoodPurchaseCountRangeFilter {
+  where: "purchaseCount";
+  gte?: number;
+  gt?: number;
+  lte?: number;
+  lt?: number;
+  order?: "asc" | "desc";
+}
 export interface FoodCategoryIdLastPurchasedAtCompoundFilter {
   where: "categoryId_lastPurchasedAt";
   match: {
@@ -657,6 +674,9 @@ export type FoodFilter =
   | FoodFrozenSortFilter
   | FoodFrozenMatchFilter
   | FoodFrozenRangeFilter
+  | FoodPurchaseCountSortFilter
+  | FoodPurchaseCountMatchFilter
+  | FoodPurchaseCountRangeFilter
   | FoodCategoryIdLastPurchasedAtCompoundFilter
   | FoodInInventoryCategoryIdLastPurchasedAtCompoundFilter;
 

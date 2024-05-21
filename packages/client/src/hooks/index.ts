@@ -7,3 +7,5 @@ export * from './useTitleBarColor.js';
 export * from './useUserPreference.js';
 export * from './useWasLoggedIn.js';
 export * from './useAppInfo.js';
+export * from './useOnPointerDownOutside.js';
+export * from './useIsInitialMount.js';

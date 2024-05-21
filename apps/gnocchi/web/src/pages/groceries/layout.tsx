@@ -37,16 +37,18 @@ export const ListSelectWrapper = ({
   </div>
 );
 
-export const AddBar = () => (
-  <PageFixedArea className="flex flex-col gap-2 px-3 py-2">
-    <Suspense fallback={<div className="w-full h-41px" />}>
-      <GroceryListAdd />
-    </Suspense>
-    <Suspense>
-      <GroceriesActionBar />
-    </Suspense>
-  </PageFixedArea>
-);
+export const MainActions = () => {
+  return (
+    <PageFixedArea className="flex flex-col gap-2 px-3 py-2">
+      <Suspense fallback={<div className="w-full h-41px hidden md:flex" />}>
+        <GroceryListAdd className="hidden md:flex" />
+      </Suspense>
+      <Suspense>
+        <GroceriesActionBar />
+      </Suspense>
+    </PageFixedArea>
+  );
+};
 
 export const List = () => (
   <Suspense>
