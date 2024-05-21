@@ -167,15 +167,15 @@ export const AddBar = forwardRef<HTMLDivElement, AddBarProps>(function AddBar(
   ref,
 ) {
   return (
-    <Suspense fallback={<Skeleton />}>
+    <Suspense fallback={<Skeleton className={props.className} />}>
       <AddBarImpl {...props} ref={ref} />
     </Suspense>
   );
 });
 
-function Skeleton() {
+function Skeleton({ className }: { className?: string }) {
   return (
-    <div className="flex flex-1 w-full flex-row gap-2">
+    <div className={classNames('flex flex-1 w-full flex-row gap-2', className)}>
       <Input
         data-test="grocery-list-add-input"
         name="text"
