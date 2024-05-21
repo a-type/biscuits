@@ -81,7 +81,7 @@ export function GroceriesPage() {
         <List />
         <UnknownListRedirect listId={listId} />
         <AutoRestoreScroll />
-        <PageNowPlaying unstyled className="items-center">
+        <PageNowPlaying unstyled className="items-center pointer-events-none">
           <FloatingAdd />
         </PageNowPlaying>
       </ThemedPageContent>

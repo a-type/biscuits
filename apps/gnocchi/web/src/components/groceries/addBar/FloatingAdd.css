@@ -73,6 +73,8 @@
     clip-path: var(--clip-final);
     transform: translateX(0);
     opacity: 1;
+    width: auto;
+    height: auto;
   }
   80% {
     transform: translate(calc(-50% + 21px), var(--bar-initial-y-offset))
@@ -91,6 +93,8 @@
     transform: translate(calc(-50% + 21px), var(--bar-initial-y-offset))
       scale(var(--bar-scale-compensate));
     opacity: 0;
+    width: auto;
+    height: auto;
   }
 }
 
@@ -106,6 +110,9 @@
   clip-path: var(--clip-initial);
   transform: translate(calc(-50% + 21px), var(--bar-initial-y-offset))
     scale(var(--bar-scale-compensate));
+
+  width: 0;
+  height: 0;
 
   animation: addBarHideInset 0.2s ease-out;
 }

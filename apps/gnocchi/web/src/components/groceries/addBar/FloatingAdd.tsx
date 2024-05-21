@@ -54,7 +54,9 @@ export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
         className={classNames(
           'relative z-1 shadow-xl',
           'add-bar',
-          open ? 'add-bar-visible' : 'add-bar-hidden pointer-events-none',
+          open
+            ? 'add-bar-visible pointer-events-auto'
+            : 'add-bar-hidden pointer-events-none',
           disableAnimation && 'disable-animation',
         )}
         {...rest}
@@ -64,7 +66,7 @@ export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
         onClick={() => setOpen(true)}
         color="primary"
         className={classNames(
-          'absolute shadow-xl bottom-0 left-1/2 transform -translate-x-1/2',
+          'absolute shadow-xl bottom-0 left-1/2 transform -translate-x-1/2 pointer-events-auto',
           'add-button',
           open ? 'hidden' : 'visible',
         )}
