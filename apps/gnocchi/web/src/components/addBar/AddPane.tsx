@@ -133,7 +133,7 @@ const AddPaneImpl = forwardRef<HTMLDivElement, AddBarProps>(
     return (
       <div
         className={classNames(
-          'flex flex-col-reverse rounded-lg bg-white shadow-xl',
+          'flex flex-col-reverse rounded-lg bg-white shadow-xl border-default rounded-b-21px border-b-none',
           className,
         )}
       >
