@@ -54,7 +54,7 @@ export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
         className={classNames(
           'relative z-1 shadow-xl',
           'add-bar',
-          open ? 'add-bar-visible' : 'add-bar-hidden',
+          open ? 'add-bar-visible' : 'add-bar-hidden pointer-events-none',
           disableAnimation && 'disable-animation',
         )}
         {...rest}
