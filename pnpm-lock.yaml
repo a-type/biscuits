@@ -113,8 +113,8 @@ importers:
   apps/gnocchi/web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.8.8
-        version: 0.8.8(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^0.8.9
+        version: 0.8.9(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0)
       '@a-type/utils':
         specifier: ^1.0.8
         version: 1.0.8
@@ -390,8 +390,8 @@ importers:
   apps/shopping/web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.8.8
-        version: 0.8.8(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^0.8.9
+        version: 0.8.9(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0)
       '@a-type/utils':
         specifier: ^1.0.8
         version: 1.0.8
@@ -487,8 +487,8 @@ importers:
   apps/trip-tick/web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.8.8
-        version: 0.8.8(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^0.8.9
+        version: 0.8.9(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0)
       '@a-type/utils':
         specifier: ^1.0.6
         version: 1.0.6
@@ -602,8 +602,8 @@ importers:
   blog:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.8.8
-        version: 0.8.8(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^0.8.9
+        version: 0.8.9(react-dom@18.3.1)(react@18.3.1)
       '@astrojs/check':
         specifier: ^0.5.10
         version: 0.5.10(typescript@5.4.5)
@@ -711,8 +711,8 @@ importers:
         version: 1.13.2(@types/react@18.2.79)(react@18.2.0)
     devDependencies:
       '@a-type/ui':
-        specifier: ^0.8.8
-        version: 0.8.8(@types/react@18.2.79)(react-dom@18.3.1)(react@18.2.0)
+        specifier: ^0.8.9
+        version: 0.8.9(@types/react@18.2.79)(react-dom@18.3.1)(react@18.2.0)
       '@types/react':
         specifier: 18.2.79
         version: 18.2.79
@@ -903,8 +903,8 @@ importers:
   web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.8.8
-        version: 0.8.8(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^0.8.9
+        version: 0.8.9(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0)
       '@biscuits/apps':
         specifier: workspace:*
         version: link:../packages/apps
@@ -1049,8 +1049,8 @@ packages:
       - encoding
       - supports-color
 
-  /@a-type/ui@0.8.8(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-7LTJWd0UOC2O63ibjR61MNrMDGCk0fJji7lt4rJIl7++ONGFaoBiJbRNyTAtEiUCRCgnbIlwLsmPBnaaFts5Yw==}
+  /@a-type/ui@0.8.9(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-DmFq2ScQk2EPp/xh+MR8lcgz72ddfhwpSwNzXX/d8/z2DnDPmy/5K5jDywk7kOqmizAs4L4tfupVLzpGPY4vUg==}
     peerDependencies:
       react: ^18
       react-dom: ^18
@@ -1099,8 +1099,8 @@ packages:
       - '@types/react-dom'
     dev: false
 
-  /@a-type/ui@0.8.8(@types/react@18.2.79)(react-dom@18.3.1)(react@18.2.0):
-    resolution: {integrity: sha512-7LTJWd0UOC2O63ibjR61MNrMDGCk0fJji7lt4rJIl7++ONGFaoBiJbRNyTAtEiUCRCgnbIlwLsmPBnaaFts5Yw==}
+  /@a-type/ui@0.8.9(@types/react@18.2.79)(react-dom@18.3.1)(react@18.2.0):
+    resolution: {integrity: sha512-DmFq2ScQk2EPp/xh+MR8lcgz72ddfhwpSwNzXX/d8/z2DnDPmy/5K5jDywk7kOqmizAs4L4tfupVLzpGPY4vUg==}
     peerDependencies:
       react: ^18
       react-dom: ^18
@@ -1149,8 +1149,8 @@ packages:
       - '@types/react-dom'
     dev: true
 
-  /@a-type/ui@0.8.8(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-7LTJWd0UOC2O63ibjR61MNrMDGCk0fJji7lt4rJIl7++ONGFaoBiJbRNyTAtEiUCRCgnbIlwLsmPBnaaFts5Yw==}
+  /@a-type/ui@0.8.9(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-DmFq2ScQk2EPp/xh+MR8lcgz72ddfhwpSwNzXX/d8/z2DnDPmy/5K5jDywk7kOqmizAs4L4tfupVLzpGPY4vUg==}
     peerDependencies:
       react: ^18
       react-dom: ^18

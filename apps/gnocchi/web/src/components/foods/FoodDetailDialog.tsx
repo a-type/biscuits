@@ -28,7 +28,7 @@ import { CategorySelect } from '../groceries/categories/CategorySelect.jsx';
 import { Icon } from '@a-type/ui/components/icon';
 import { Food } from '@gnocchi.biscuits/verdant';
 import { Input } from '@a-type/ui/components/input';
-import { stopPropagation } from '@a-type/utils';
+import { preventDefault, stopPropagation } from '@a-type/utils';
 import { Tooltip } from '@a-type/ui/components/tooltip';
 
 export interface FoodDetailDialogProps {}
@@ -48,7 +48,7 @@ export function FoodDetailDialog({}: FoodDetailDialogProps) {
   };
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent>
+      <DialogContent onOpenAutoFocus={preventDefault}>
         <Suspense>
           {foodName && <FoodDetailView foodName={foodName} open={open} />}
         </Suspense>
@@ -269,7 +269,7 @@ const FoodNameEditor = ({ food }: { food: Food }) => {
   return (
     <div className="row">
       <FoodName food={food} capitalize />
-      <Tooltip content="Change the primary name, or merge with another food">
+      <Tooltip content="Rename or merge">
         <Button size="icon" color="ghost" onClick={() => setEditing(true)}>
           <Icon name="pencil" />
         </Button>
