@@ -110,7 +110,28 @@ export function ManageStorage({ className, onError }: ManageStorageProps) {
 
   // sync users cannot manage local storage, it would cause unexpected
   // results...
-  if (isSubscribed) return null;
+  if (isSubscribed) {
+    return (
+      <div className={clsx('flex flex-col items-start gap-2', className)}>
+        <H2>Manage Device Storage</H2>
+        <P className="text-xs mb-2">
+          Your data is synced to Biscuits. If you're experiencing issues, you
+          can try resetting your local device to the server's data.
+        </P>
+        <div className="flex flex-row gap-2 flex-wrap">
+          <ConfirmedButton
+            color="destructive"
+            confirmText="This will delete your local data and replace it with the server's data. It cannot be undone."
+            onConfirm={() => {
+              clientDesc?.__dangerous__resetLocal();
+            }}
+          >
+            Reset local data
+          </ConfirmedButton>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={clsx('flex flex-col items-start gap-2', className)}>
