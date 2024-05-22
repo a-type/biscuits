@@ -15,16 +15,17 @@ export interface FloatingAddProps {
 export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
   const listId = useListId() || null;
   const addItems = hooks.useAddItems();
+  const [open, setOpen] = useState(false);
+
   const onAdd = useCallback(
-    (items: string[]) => {
-      return addItems(items, {
+    async (items: string[]) => {
+      await addItems(items, {
         listId,
       });
+      setOpen(false);
     },
     [listId, addItems],
   );
-
-  const [open, setOpen] = useState(false);
 
   const ref = useOnPointerDownOutside(() => {
     setOpen(false);
@@ -49,8 +50,6 @@ export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
       <AddPane
         onAdd={onAdd}
         showRichSuggestions
-        open={open}
-        onOpenChange={setOpen}
         className={classNames(
           'relative z-1 shadow-xl',
           'add-bar',
@@ -59,6 +58,7 @@ export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
             : 'add-bar-hidden pointer-events-none',
           disableAnimation && 'disable-animation',
         )}
+        disabled={!open}
         {...rest}
       />
       <Button

@@ -367,8 +367,9 @@ export function useAddBarSuggestions({
 
 function stateReducer(
   state: UseComboboxState<SuggestionData>,
-  { type, changes }: UseComboboxStateChangeOptions<SuggestionData>,
+  { type, changes, selectItem }: UseComboboxStateChangeOptions<SuggestionData>,
 ): Partial<UseComboboxState<SuggestionData>> {
+  console.log('stateReducer', type, changes, selectItem);
   if (
     changes.inputValue &&
     type === useCombobox.stateChangeTypes.InputKeyDownEnter &&
@@ -420,7 +421,6 @@ export function useAddBarCombobox({
 
   const combobox = useCombobox<SuggestionData>({
     onInputValueChange({ inputValue }) {
-      console.log('inputchange', inputValue);
       startTransition(() => {
         setSuggestionPrompt(inputValue || '');
       });
@@ -458,6 +458,7 @@ export function useAddBarCombobox({
     isOpen: open,
     onIsOpenChange: onOpenChange
       ? (changes) => {
+          console.log('onOpenChange', changes);
           onOpenChange(!!changes.isOpen);
         }
       : undefined,

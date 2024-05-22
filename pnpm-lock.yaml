@@ -113,8 +113,8 @@ importers:
   apps/gnocchi/web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.8.9
-        version: 0.8.9(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^0.8.10
+        version: 0.8.10(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0)
       '@a-type/utils':
         specifier: ^1.0.8
         version: 1.0.8
@@ -215,8 +215,8 @@ importers:
         specifier: ^2.29.3
         version: 2.30.0
       downshift:
-        specifier: ^7.0.1
-        version: 7.6.2(react@18.2.0)
+        specifier: 9.0.6
+        version: 9.0.6(react@18.2.0)
       fractional-indexing:
         specifier: ^3.0.1
         version: 3.2.0
@@ -390,8 +390,8 @@ importers:
   apps/shopping/web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.8.9
-        version: 0.8.9(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^0.8.10
+        version: 0.8.10(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0)
       '@a-type/utils':
         specifier: ^1.0.8
         version: 1.0.8
@@ -487,8 +487,8 @@ importers:
   apps/trip-tick/web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.8.9
-        version: 0.8.9(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^0.8.10
+        version: 0.8.10(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0)
       '@a-type/utils':
         specifier: ^1.0.6
         version: 1.0.6
@@ -602,8 +602,8 @@ importers:
   blog:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.8.9
-        version: 0.8.9(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^0.8.10
+        version: 0.8.10(react-dom@18.3.1)(react@18.3.1)
       '@astrojs/check':
         specifier: ^0.5.10
         version: 0.5.10(typescript@5.4.5)
@@ -711,8 +711,8 @@ importers:
         version: 1.13.2(@types/react@18.2.79)(react@18.2.0)
     devDependencies:
       '@a-type/ui':
-        specifier: ^0.8.9
-        version: 0.8.9(@types/react@18.2.79)(react-dom@18.3.1)(react@18.2.0)
+        specifier: ^0.8.10
+        version: 0.8.10(@types/react@18.2.79)(react-dom@18.3.1)(react@18.2.0)
       '@types/react':
         specifier: 18.2.79
         version: 18.2.79
@@ -903,8 +903,8 @@ importers:
   web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.8.9
-        version: 0.8.9(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0)
+        specifier: ^0.8.10
+        version: 0.8.10(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0)
       '@biscuits/apps':
         specifier: workspace:*
         version: link:../packages/apps
@@ -1049,8 +1049,8 @@ packages:
       - encoding
       - supports-color
 
-  /@a-type/ui@0.8.9(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-DmFq2ScQk2EPp/xh+MR8lcgz72ddfhwpSwNzXX/d8/z2DnDPmy/5K5jDywk7kOqmizAs4L4tfupVLzpGPY4vUg==}
+  /@a-type/ui@0.8.10(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-aEfs5EkXd44bQAgSd6Oq+6doQxiA2iafDXeGE9yB0d7vWPQT+OJSezThH/GJRQccVo9GuslN6q3xJun/wSJHaA==}
     peerDependencies:
       react: ^18
       react-dom: ^18
@@ -1099,8 +1099,8 @@ packages:
       - '@types/react-dom'
     dev: false
 
-  /@a-type/ui@0.8.9(@types/react@18.2.79)(react-dom@18.3.1)(react@18.2.0):
-    resolution: {integrity: sha512-DmFq2ScQk2EPp/xh+MR8lcgz72ddfhwpSwNzXX/d8/z2DnDPmy/5K5jDywk7kOqmizAs4L4tfupVLzpGPY4vUg==}
+  /@a-type/ui@0.8.10(@types/react@18.2.79)(react-dom@18.3.1)(react@18.2.0):
+    resolution: {integrity: sha512-aEfs5EkXd44bQAgSd6Oq+6doQxiA2iafDXeGE9yB0d7vWPQT+OJSezThH/GJRQccVo9GuslN6q3xJun/wSJHaA==}
     peerDependencies:
       react: ^18
       react-dom: ^18
@@ -1149,8 +1149,8 @@ packages:
       - '@types/react-dom'
     dev: true
 
-  /@a-type/ui@0.8.9(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-DmFq2ScQk2EPp/xh+MR8lcgz72ddfhwpSwNzXX/d8/z2DnDPmy/5K5jDywk7kOqmizAs4L4tfupVLzpGPY4vUg==}
+  /@a-type/ui@0.8.10(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-aEfs5EkXd44bQAgSd6Oq+6doQxiA2iafDXeGE9yB0d7vWPQT+OJSezThH/GJRQccVo9GuslN6q3xJun/wSJHaA==}
     peerDependencies:
       react: ^18
       react-dom: ^18
@@ -3651,7 +3651,7 @@ packages:
     resolution: {integrity: sha512-2Yv65nlWnWlSpe3fXEyX5i7fx5kIKo4Qbcj+hMO0odwaneFjfXw5fdum+4yL20O0QiaHpia0cYQ9xpNMqrBwHg==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      regenerator-runtime: 0.14.0
+      regenerator-runtime: 0.14.1
 
   /@babel/runtime@7.24.1:
     resolution: {integrity: sha512-+BIznRzyqBf+2wCTxcKE3wDjfGeCoVE61KSHGpkzqrLi8qxqFwBeUFyId2cxkTmm55fzDGnm0+yCxaxygrLUnQ==}
@@ -12726,6 +12726,10 @@ packages:
     resolution: {integrity: sha512-y/ZA3BGnxoM/QHHQ2Uy49CLtnWPbt4tTPpEEZiEmmiWBFKjej7nEyH8Ryz54jH0MLXflUYA3Er2zUxPSJu5R+g==}
     dev: false
 
+  /compute-scroll-into-view@3.1.0:
+    resolution: {integrity: sha512-rj8l8pD4bJ1nx+dAkMhV1xB5RuZEyVysfxJqB1pRchh1KVvwOv9b7CGB8ZfjTImVv2oF+sYMUkMZq6Na5Ftmbg==}
+    dev: false
+
   /concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
 
@@ -13255,6 +13259,19 @@ packages:
       prop-types: 15.8.1
       react: 18.2.0
       react-is: 17.0.2
+      tslib: 2.6.2
+    dev: false
+
+  /downshift@9.0.6(react@18.2.0):
+    resolution: {integrity: sha512-lkqWh0eb34XuH+3z3/BH/LGVRV7ur0rielSlxtlQKsjAFF/wc/c0wsM9phUGXyzK2g1QWHoNHQyc+vVAheI17Q==}
+    peerDependencies:
+      react: '>=16.12.0'
+    dependencies:
+      '@babel/runtime': 7.24.5
+      compute-scroll-into-view: 3.1.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-is: 18.2.0
       tslib: 2.6.2
     dev: false
 
@@ -14310,7 +14327,7 @@ packages:
     peerDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
     dependencies:
-      '@babel/runtime': 7.23.4
+      '@babel/runtime': 7.24.5
       aria-query: 5.3.0
       array-includes: 3.1.7
       array.prototype.flatmap: 1.3.2
@@ -18473,6 +18490,10 @@ packages:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
     dev: false
 
+  /react-is@18.2.0:
+    resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
+    dev: false
+
   /react-is@18.3.1:
     resolution: {integrity: sha512-/LLMVyas0ljjAtoYiPqYiL8VWXzUUdThrmU5+n20DZv+a+ClRoevUzw5JxU+Ieh5/c87ytoTBV9G1FiKfNJdmg==}
     dev: true
@@ -18682,9 +18703,6 @@ packages:
   /regenerator-runtime@0.13.11:
     resolution: {integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==}
     dev: false
-
-  /regenerator-runtime@0.14.0:
-    resolution: {integrity: sha512-srw17NI0TUWHuGa5CFGGmhfNIeja30WMBfbslPNhf6JrqQlLN5gcrvig1oqPxiVaXb0oW0XRKtH6Nngs5lKCIA==}
 
   /regenerator-runtime@0.14.1:
     resolution: {integrity: sha512-dYnhHh0nJoMfnkZs6GmmhFknAGRrLznOu5nc9ML+EJxGvrx6H7teuevqVqCuPcPK//3eDrrjQhehXVx9cnkGdw==}

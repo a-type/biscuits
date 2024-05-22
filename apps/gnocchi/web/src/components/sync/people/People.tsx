@@ -45,17 +45,19 @@ export function PeopleList({
   children,
   count,
   size = 24,
+  className,
 }: {
   children: ReactNode;
   count: number;
   size?: number;
+  className?: string;
 }) {
   const width = count > 0 ? size + (count - 1) * ((size * 2) / 3) : 0;
 
   return (
     <PeopleContext.Provider value={{ size }}>
       <div
-        className="relative flex-basis-auto"
+        className={classNames('relative flex-basis-auto', className)}
         style={{ width, minWidth: width, height: size }}
       >
         {children}

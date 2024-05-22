@@ -1,6 +1,6 @@
 import { OpenFoodDetailButton } from '@/components/foods/OpenFoodDetailButton.jsx';
 import { ItemSources } from '@/components/groceries/items/ItemSources.jsx';
-import { Icon } from '@/components/icons/Icon.jsx';
+import { Icon } from '@a-type/ui/components/icon';
 import { Link } from '@/components/nav/Link.jsx';
 import { OnboardingTooltip } from '@biscuits/client';
 import { usePurchasedText } from '@/components/pantry/hooks.js';
@@ -158,58 +158,69 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
           isPartiallyPurchased={isPartiallyPurchased}
           togglePurchased={togglePurchased}
         />
-        <CollapsibleTrigger asChild>
-          <div className="flex flex-row items-start gap-2 [grid-area:main] pt-2 pr-3 pb-2 relative cursor-pointer focus:(shadow-focus)">
-            <div className="flex flex-col gap-1 items-start flex-1">
-              <div className="flex flex-row items-start gap-1 mt-1 max-w-full overflow-hidden text-ellipsis relative">
-                <span>{displayString}</span>
-              </div>
-              {isPurchased && (
-                <div className="absolute left-0 right-52px top-20px border-0 border-b border-b-gray5 border-solid h-1px transform-origin-left animate-expand-scale-x animate-duration-100 animate-ease-out" />
-              )}
-              <CollapsibleSimple
-                open={!!subline && !menuOpen && !isPurchased}
-                className="text-xs text-gray-6 italic pl-2 pr-1 self-stretch [grid-area:comment]"
-              >
-                {subline}
-              </CollapsibleSimple>
+        <div className="flex flex-row items-start [grid-area:main] pt-2 pr-3 pb-2 relative focus:(shadow-focus)">
+          <div className="flex flex-col gap-1 items-start flex-1 mr-2">
+            <div className="flex flex-row items-start gap-1 mt-1 max-w-full overflow-hidden text-ellipsis relative">
+              <span>{displayString}</span>
             </div>
-            <RecentPeople item={item} />
-            <ListTag item={item} collapsed={menuOpen} />
-            {!isPurchased && (
-              <Suspense>
-                <RecentPurchaseHint compact className="mt-1" foodName={food} />
-              </Suspense>
+            {isPurchased && (
+              <div className="absolute left-0 right-52px top-20px border-0 border-b border-b-gray5 border-solid h-1px transform-origin-left animate-expand-scale-x animate-duration-100 animate-ease-out" />
             )}
-            <div
-              onTouchStart={stopPropagation}
-              onTouchMove={stopPropagation}
-              onTouchEnd={stopPropagation}
-              onPointerDown={stopPropagation}
-              onPointerMove={stopPropagation}
-              onPointerUp={stopPropagation}
+            <CollapsibleSimple
+              open={!!subline && !menuOpen && !isPurchased}
+              className="text-xs text-gray-6 italic pl-2 pr-1 self-stretch [grid-area:comment]"
             >
-              <div
-                className="relative py-1 px-2"
-                // onContextMenu={preventDefault}
-                {...menuProps}
-              >
-                {first ? (
-                  <OnboardingTooltip
-                    onboarding={categorizeOnboarding}
-                    step="categorize"
-                    content="Tap and hold to change category"
-                    disableNext
-                  >
-                    <DragHandleDots2Icon />
-                  </OnboardingTooltip>
-                ) : (
-                  <DragHandleDots2Icon />
-                )}
-              </div>
+              {subline}
+            </CollapsibleSimple>
+          </div>
+          <RecentPeople item={item} className="mr-1" />
+          <ListTag item={item} collapsed={menuOpen} className="mr-1" />
+          {!isPurchased && (
+            <Suspense>
+              <RecentPurchaseHint
+                compact
+                className="mt-1 mr-1"
+                foodName={food}
+              />
+            </Suspense>
+          )}
+          <div
+            onTouchStart={stopPropagation}
+            onTouchMove={stopPropagation}
+            onTouchEnd={stopPropagation}
+            onPointerDown={stopPropagation}
+            onPointerMove={stopPropagation}
+            onPointerUp={stopPropagation}
+            className="mr-1"
+          >
+            <div
+              className="relative py-1 px-2"
+              // onContextMenu={preventDefault}
+              {...menuProps}
+            >
+              {first ? (
+                <OnboardingTooltip
+                  onboarding={categorizeOnboarding}
+                  step="categorize"
+                  content="Tap and hold to change category"
+                  disableNext
+                >
+                  <DragHandleDots2Icon className="text-gray-5 hover:text-white" />
+                </OnboardingTooltip>
+              ) : (
+                <DragHandleDots2Icon className="text-gray-5 hover:text-white" />
+              )}
             </div>
           </div>
-        </CollapsibleTrigger>
+          <CollapsibleTrigger asChild>
+            <Button size="icon" color="ghost" className="p-1">
+              <Icon
+                name="chevron"
+                className="[*[data-state=open]_&]:rotate-180deg text-gray-5 hover:text-gray-7"
+              />
+            </Button>
+          </CollapsibleTrigger>
+        </div>
         <CollapsibleContent className="[grid-area:secondary]">
           <Suspense>
             <div className="flex flex-col gap-2 justify-end p-3 pt-0 items-end">
@@ -330,7 +341,7 @@ export function GroceryListItemDraggable({
   );
 }
 
-function RecentPeople({ item }: { item: Item }) {
+function RecentPeople({ item, className }: { item: Item; className?: string }) {
   const people = usePeopleWhoLastEditedThis(item.get('id'));
 
   if (people.length === 0) {
@@ -338,7 +349,7 @@ function RecentPeople({ item }: { item: Item }) {
   }
 
   return (
-    <PeopleList count={people.length}>
+    <PeopleList count={people.length} className={className}>
       {people.map((person, index) => (
         <PeopleListItem index={index} key={person.profile.id}>
           <PersonAvatar
@@ -372,7 +383,15 @@ function usePeopleWhoLastEditedThis(itemId: string) {
   return people;
 }
 
-function ListTag({ item, collapsed }: { item: Item; collapsed?: boolean }) {
+function ListTag({
+  item,
+  collapsed,
+  className,
+}: {
+  item: Item;
+  collapsed?: boolean;
+  className?: string;
+}) {
   const filteredListId = useListId();
 
   const { listId } = hooks.useWatch(item);
@@ -393,7 +412,7 @@ function ListTag({ item, collapsed }: { item: Item; collapsed?: boolean }) {
 
   return (
     <Tooltip content={list.get('name')}>
-      <CollapsibleRoot open={!collapsed}>
+      <CollapsibleRoot open={!collapsed} className={className}>
         <CollapsibleContent
           data-horizontal
           className="rounded-md focus-within:(outline-none shadow-focus)"

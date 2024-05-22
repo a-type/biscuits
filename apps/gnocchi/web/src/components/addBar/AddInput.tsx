@@ -1,7 +1,7 @@
 import { Button } from '@a-type/ui/components/button';
 import { Input, InputProps } from '@a-type/ui/components/input';
 import classNames from 'classnames';
-import { forwardRef } from 'react';
+import { FocusEvent, forwardRef, useCallback } from 'react';
 import { Icon } from '../icons/Icon.jsx';
 import { isUrl } from '@a-type/utils';
 import { SuggestionData } from './hooks.js';
@@ -50,6 +50,7 @@ export const AddInput = forwardRef<HTMLDivElement, AddInputProps>(
           autoComplete="off"
           tabIndex={disableInteraction ? -1 : 0}
           {...inputProps}
+          onFocus={console.log}
         />
         <div className="absolute flex flex-row-reverse gap-1 right-1 top-1">
           <Button
