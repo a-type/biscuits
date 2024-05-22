@@ -175,7 +175,12 @@ export const AddBar = forwardRef<HTMLDivElement, AddBarProps>(function AddBar(
 
 function Skeleton({ className }: { className?: string }) {
   return (
-    <div className={classNames('flex flex-1 w-full flex-row gap-2', className)}>
+    <div
+      className={classNames(
+        'layer-components:(flex flex-1 w-full flex-row gap-2)',
+        className,
+      )}
+    >
       <Input
         data-test="grocery-list-add-input"
         name="text"

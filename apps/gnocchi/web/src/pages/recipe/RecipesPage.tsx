@@ -26,7 +26,7 @@ export function RecipesPage({}: RecipesPageProps) {
           className="flex flex-col items-center pointer-events-none"
         >
           <Suspense>
-            <RecipeCreateButton className="pointer-events-auto w-48px h-48px items-center justify-center md:w-auto md:h-auto shadow-lg">
+            <RecipeCreateButton className="pointer-events-auto w-48px h-48px items-center justify-center md:w-auto md:h-auto shadow-xl">
               <span className="hidden md:block">New Recipe</span>
               <Icon name="plus" className="w-20px h-20px" />
             </RecipeCreateButton>

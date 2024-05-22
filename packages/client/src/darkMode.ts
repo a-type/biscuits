@@ -28,13 +28,18 @@ const updateMode = () => {
     'meta[name=theme-color]',
   );
 
+  // evaluate the var(--color-wash) css var for the bar color
+  const root = document.documentElement;
+  const cssVar = '--color-wash';
+  const color = getComputedStyle(root).getPropertyValue(cssVar);
+
   if (finalMode === 'dark') {
     iosStatusBarColor?.setAttribute('content', 'black');
-    androidStatusBarColor?.setAttribute('content', '#000000');
+    androidStatusBarColor?.setAttribute('content', color);
   }
   if (finalMode === 'light') {
     iosStatusBarColor?.setAttribute('content', 'white');
-    androidStatusBarColor?.setAttribute('content', '#ffffff');
+    androidStatusBarColor?.setAttribute('content', color);
   }
 };
 updateMode();
