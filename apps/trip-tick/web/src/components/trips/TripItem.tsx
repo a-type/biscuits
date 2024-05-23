@@ -235,9 +235,7 @@ function ChecklistItem({
                 'flex items-center justify-center',
                 // completedQuantity === 0 && 'opacity-0',
               )}
-            >
-              {completed && <Icon name="check" />}
-            </SliderThumb>
+            />
           </SliderRoot>
         </div>
       </div>
