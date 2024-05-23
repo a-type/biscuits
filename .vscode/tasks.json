@@ -25,7 +25,7 @@
       "type": "npm",
       "script": "app-dev",
       "path": "apps/gnocchi/web",
-      "problemMatcher": [],
+      "problemMatcher": ["$tsc-watch"],
       "label": "Run Gnocchi",
       "detail": "vite --host --mode development"
     },
@@ -33,14 +33,14 @@
       "type": "npm",
       "script": "app-dev",
       "path": "apps/trip-tick/web",
-      "problemMatcher": [],
+      "problemMatcher": ["$tsc-watch"],
       "label": "Run Trip Tick",
       "detail": "vite --host --mode development"
     },
     {
       "type": "npm",
       "script": "dev",
-      "problemMatcher": [],
+      "problemMatcher": ["$tsc-watch"],
       "label": "Main Dev",
       "detail": "turbo run dev",
       "runOptions": {
@@ -58,9 +58,18 @@
       "type": "npm",
       "script": "app-dev",
       "path": "apps/shopping/web",
-      "problemMatcher": [],
+      "problemMatcher": ["$tsc-watch"],
       "label": "Run Shopping",
       "detail": "vite"
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "blog",
+      "problemMatcher": ["$tsc-watch"],
+      "label": "Blog",
+      "detail": "astro",
+      "isBackground": true
     }
   ]
 }
