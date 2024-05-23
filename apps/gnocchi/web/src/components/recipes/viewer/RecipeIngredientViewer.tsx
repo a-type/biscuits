@@ -22,7 +22,6 @@ import {
 } from '@a-type/ui/components/collapsible';
 import { useToggle } from '@a-type/ui/hooks';
 import { useUnitConversion } from '@/components/recipes/viewer/unitConversion.js';
-import pluralize from 'pluralize';
 import { useLookupFoodName } from '@/components/foods/FoodName.jsx';
 
 (window as any).convertUnits = convertUnits;
@@ -138,13 +137,11 @@ export function RecipeIngredientViewer({
                   if (open) resetConversion();
                 }}
               >
-                <Tooltip content="Convert">
-                  <DropdownMenuTrigger asChild>
-                    <Button size="icon" color="ghost">
-                      <Icon name="convert" />
-                    </Button>
-                  </DropdownMenuTrigger>
-                </Tooltip>
+                <DropdownMenuTrigger asChild>
+                  <Button size="icon" color="ghost">
+                    <Icon name="convert" />
+                  </Button>
+                </DropdownMenuTrigger>
                 <DropdownMenuContent>
                   <DropdownMenuLabel>Convert to:</DropdownMenuLabel>
                   {convertOptions.map((opt) => (

@@ -174,7 +174,7 @@ export function AddToListDialog({
                           : foodName ?? undefined;
                         return {
                           original: item.get('text'),
-                          quantity: totalQuantity,
+                          quantity: textOverride ? 1 : totalQuantity,
                           unit: item.get('unit'),
                           food: item.get('food') || 'Unknown',
                           // for items added from recipes, we add

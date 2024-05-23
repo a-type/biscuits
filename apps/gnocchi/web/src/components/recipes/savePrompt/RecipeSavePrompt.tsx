@@ -5,7 +5,7 @@ import {
   DialogContent,
   DialogTitle,
 } from '@a-type/ui/components/dialog';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from '@verdant-web/react-router';
 import { proxy, useSnapshot } from 'valtio';
 import { useLocalStorage } from '@/hooks/useLocalStorage.js';
@@ -59,20 +59,26 @@ export function RecipeSavePrompt({}: RecipeSavePromptProps) {
   }, [isGnocchi, hasScannedBefore, beginOnboarding, cancelFirstTimeOnboarding]);
 
   const addRecipeFromUrl = hooks.useAddRecipeFromUrl();
+  const [loading, setLoading] = useState(false);
   const save = async () => {
-    const recipe = await addRecipeFromUrl(url);
-    setHasScannedBefore(true);
-    if (recipe) {
-      navigate(
-        `/recipes/${recipe.get(
-          'slug',
-        )}?firstTimeScanFlow=true&skipWelcome=true`,
-        {
-          replace: true,
-        },
-      );
+    setLoading(true);
+    try {
+      const recipe = await addRecipeFromUrl(url);
+      setHasScannedBefore(true);
+      if (recipe) {
+        navigate(
+          `/recipes/${recipe.get(
+            'slug',
+          )}?firstTimeScanFlow=true&skipWelcome=true`,
+          {
+            replace: true,
+          },
+        );
+      }
+      recipeSavePromptState.url = '';
+    } finally {
+      setLoading(false);
     }
-    recipeSavePromptState.url = '';
   };
 
   return (
@@ -109,7 +115,7 @@ export function RecipeSavePrompt({}: RecipeSavePromptProps) {
           <DialogClose asChild>
             <Button onClick={cancelOnboarding}>Cancel</Button>
           </DialogClose>
-          <Button color="primary" onClick={save}>
+          <Button color="primary" onClick={save} loading={loading}>
             {isGnocchi ? 'Save it!' : 'Scan it!'}
           </Button>
         </DialogActions>
