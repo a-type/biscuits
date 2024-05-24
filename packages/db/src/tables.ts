@@ -19,6 +19,7 @@ export interface Database {
   FoodName: FoodNameTable;
   FoodCategoryAssignment: FoodCategoryAssignmentTable;
   FoodCategory: FoodCategoryTable;
+  PublishedRecipe: PublishedRecipeTable;
 }
 
 export interface UserTable {
@@ -239,3 +240,18 @@ export interface FoodCategoryTable {
 export type FoodCategory = Selectable<FoodCategoryTable>;
 export type NewFoodCategory = Insertable<FoodCategoryTable>;
 export type FoodCategoryUpdate = Updateable<FoodCategoryTable>;
+
+export interface PublishedRecipeTable {
+  id: string;
+  createdAt: ColumnType<Date, Date | undefined, never>;
+  updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
+
+  publishedAt: Date;
+
+  planId: string;
+  slug: string;
+}
+
+export type PublishedRecipe = Selectable<PublishedRecipeTable>;
+export type NewPublishedRecipe = Insertable<PublishedRecipeTable>;
+export type PublishedRecipeUpdate = Updateable<PublishedRecipeTable>;

@@ -1,9 +1,7 @@
-import { DocumentBaseline, Operation, decomposeOid } from '@verdant-web/common';
-import { sendPush } from '../services/webPush.js';
-import type { AppId } from '@biscuits/apps';
+import { DocumentBaseline, Operation } from '@verdant-web/common';
 import { parseLibraryName } from '@biscuits/libraries';
-import { db } from '@biscuits/db';
 import { changeHandlers } from './changeHandlers/index.js';
+import { logger } from '../logger.js';
 
 export type ChangeData = {
   planId: string;
@@ -12,11 +10,15 @@ export type ChangeData = {
   operations: Operation[];
   baselines: DocumentBaseline[];
 };
-export type ChangeHandler<T> = (
-  data: ChangeData,
-  get: () => T,
-  schedule: (payload: T) => void,
-) => Promise<void>;
+export type ChangeHandler<T> = {
+  match: (data: ChangeData) => boolean;
+  process: (
+    data: ChangeData,
+    get: () => T,
+    schedule: (payload: T) => void,
+  ) => Promise<void>;
+  effect: (planId: string, userId: string, payload: T) => void;
+};
 
 class VerdantChangeListener {
   private debounceTimeSeconds = 10;
@@ -27,12 +29,11 @@ class VerdantChangeListener {
       planId: string;
       userId: string;
       payload: any;
+      listenerIndex: number;
     }
   >();
 
-  constructor(
-    private appListeners: Partial<Record<AppId, ChangeHandler<any>>>,
-  ) {}
+  constructor(private appListeners: ChangeHandler<any>[]) {}
 
   update = async (
     {
@@ -46,24 +47,42 @@ class VerdantChangeListener {
     baselines: DocumentBaseline[],
   ) => {
     const { app, planId } = parseLibraryName(libraryId);
-    const listener = this.appListeners[app as AppId];
-    if (listener) {
-      const get = () =>
-        this.pendingNotifications.get(`${libraryId}:${userId}`)?.payload;
-      const schedule = () => {
-        const existing = this.pendingNotifications.get(
-          `${libraryId}:${userId}`,
+    const data = {
+      planId,
+      appId: app,
+      userId,
+      operations,
+      baselines,
+    };
+    for (let i = 0; i < this.appListeners.length; i++) {
+      const listener = this.appListeners[i];
+      if (listener.match(data)) {
+        const get = () =>
+          this.pendingNotifications.get(`${libraryId}:${userId}`)?.payload;
+        const schedule = (payload: any) => {
+          const existing = this.pendingNotifications.get(
+            `${libraryId}:${userId}`,
+          );
+          if (existing) {
+            clearTimeout(existing.timeout);
+            existing.payload = payload;
+            existing.timeout = this.schedule(`${libraryId}:${userId}`);
+          } else {
+            this.pendingNotifications.set(`${libraryId}:${userId}`, {
+              planId,
+              userId,
+              payload,
+              timeout: this.schedule(`${libraryId}:${userId}`),
+              listenerIndex: i,
+            });
+          }
+        };
+        await listener.process(
+          { planId, appId: app, userId, operations, baselines },
+          get,
+          schedule,
         );
-        if (existing) {
-          clearTimeout(existing.timeout);
-        }
-        this.schedule(`${libraryId}:${userId}`);
-      };
-      await listener(
-        { planId, appId: app, userId, operations, baselines },
-        get,
-        schedule,
-      );
+      }
     }
   };
 
@@ -75,41 +94,20 @@ class VerdantChangeListener {
     const notification = this.pendingNotifications.get(key);
     if (!notification) return;
 
+    const listener = this.appListeners[notification.listenerIndex];
+    if (!listener) {
+      logger.urgent(
+        `No listener found for ${key} (index: ${notification.listenerIndex}). Something's off.`,
+      );
+    }
+
     this.pendingNotifications.delete(key);
 
-    // send a notification to all other users in the plan
-    const planId = notification.planId;
-    const subscriptions = await db
-      .selectFrom('PushSubscription')
-      .leftJoin('User', 'PushSubscription.userId', 'User.id')
-      .where('User.planId', '=', planId)
-      .select([
-        'PushSubscription.p256dh',
-        'PushSubscription.auth',
-        'PushSubscription.endpoint',
-        'User.friendlyName',
-        'User.fullName',
-        'User.id as userId',
-      ])
-      .execute();
-    const sender = subscriptions.find(
-      (sub) => sub.userId === notification.userId,
+    listener.effect(
+      notification.planId,
+      notification.userId,
+      notification.payload,
     );
-    const senderName = sender?.friendlyName ?? sender?.fullName ?? 'Someone';
-    console.info(
-      `Sending push notification for changes to ${notification.planId} by ${notification.userId}`,
-    );
-    for (const sub of subscriptions) {
-      // do not send to originator of change
-      if (sub.userId === notification.userId) continue;
-
-      if (sub.auth && sub.p256dh) {
-        await sendPush(sub, {
-          originatorName: senderName,
-          payload: notification.payload,
-        });
-      }
-    }
   };
 }
 
