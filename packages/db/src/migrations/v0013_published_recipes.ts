@@ -13,6 +13,9 @@ export async function up(db: Kysely<any>) {
       col.notNull().defaultTo(sql`CURRENT_TIMESTAMP`),
     )
     .addColumn('publishedAt', 'datetime')
+    .addColumn('publishedBy', 'text', (col) =>
+      col.notNull().references('User.id'),
+    )
     .addColumn('planId', 'text', (col) => col.notNull())
     .addColumn('slug', 'text', (col) => col.notNull())
     .addUniqueConstraint('PublishedRecipe_planId_slug_unique', [

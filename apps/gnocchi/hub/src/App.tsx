@@ -16,8 +16,15 @@ import {
 } from '@a-type/ui/components/layouts';
 import { Note } from '@a-type/ui/components/note';
 import { H1, H2, P } from '@a-type/ui/components/typography';
+import { HubRecipeData } from './types.js';
 
-export function App({ recipe: data, url }: { recipe: any; url: string }) {
+export function App({
+  recipe: data,
+  url,
+}: {
+  recipe: HubRecipeData;
+  url: string;
+}) {
   if (!data) {
     return (
       <PageRoot className="theme-lemon">
@@ -94,9 +101,9 @@ export function App({ recipe: data, url }: { recipe: any; url: string }) {
             Powered by{' '}
             <a
               className="font-bold color-black"
-              href="https://gnocchi.club/welcome"
+              href="https://gnocchi.biscuits.club/welcome"
             >
-              Gnocchi.club
+              Gnocchi
             </a>
             , the freshest way to manage your weekly cooking
           </P>

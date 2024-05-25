@@ -53,7 +53,8 @@ builder.mutationFields((t) => ({
     resolve: async (_, { input }, ctx) => {
       const { id, slug } = input;
       const planId = ctx.session?.planId;
-      if (!planId) {
+      const userId = ctx.session?.userId;
+      if (!planId || !userId) {
         throw new BiscuitsError(
           BiscuitsError.Code.Forbidden,
           'You must be a member to publish a recipe',
@@ -62,7 +63,13 @@ builder.mutationFields((t) => ({
 
       const recipe = await ctx.db
         .insertInto('PublishedRecipe')
-        .values({ id, planId, slug, publishedAt: new Date() })
+        .values({
+          id,
+          planId,
+          slug,
+          publishedAt: new Date(),
+          publishedBy: userId,
+        })
         .returningAll()
         .executeTakeFirstOrThrow();
 

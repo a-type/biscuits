@@ -247,6 +247,7 @@ export interface PublishedRecipeTable {
   updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
 
   publishedAt: Date;
+  publishedBy: string;
 
   planId: string;
   slug: string;

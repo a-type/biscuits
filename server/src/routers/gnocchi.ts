@@ -2,7 +2,7 @@ import { Router } from 'itty-router';
 import * as path from 'path';
 import * as fsSync from 'fs';
 import * as fs from 'fs/promises';
-import { serverRender } from '@gnocchi.biscuits/hub';
+import { serverRender, type HubRecipeData } from '@gnocchi.biscuits/hub';
 import { verdantServer } from '../verdant/verdant.js';
 import { getLibraryName } from '@biscuits/libraries';
 import { db } from '@biscuits/db';
@@ -63,9 +63,10 @@ gnocchiRouter.get('/hubRecipe/:planId/:recipeSlug', async (req) => {
 
   const recipe = await db
     .selectFrom('PublishedRecipe')
-    .select('id')
+    .leftJoin('User', 'PublishedRecipe.publishedBy', 'User.id')
+    .select(['PublishedRecipe.id', 'User.fullName as publisherFullName'])
     .where('slug', '=', recipeSlug)
-    .where('planId', '=', planId)
+    .where('PublishedRecipe.planId', '=', planId)
     .executeTakeFirst();
 
   if (!recipe) {
@@ -78,10 +79,22 @@ gnocchiRouter.get('/hubRecipe/:planId/:recipeSlug', async (req) => {
     recipe.id,
   );
 
-  const appHtml = serverRender(snapshot, req.url);
+  const data: HubRecipeData = {
+    id: recipe.id,
+    title: snapshot.title,
+    prelude: snapshot.prelude,
+    mainImageUrl: snapshot.image?.url,
+    ingredients: snapshot.ingredients,
+    instructions: snapshot.instructions,
+    publisher: {
+      fullName: recipe.publisherFullName,
+    },
+  };
+
+  const appHtml = serverRender(data, req.url);
   const html = indexTemplate
     .replace('<!--app-html-->', appHtml)
-    .replace(`{/*snapshot*/}`, JSON.stringify(snapshot));
+    .replace(`{/*snapshot*/}`, JSON.stringify(data));
   return new Response(html, {
     headers: {
       'Content-Type': 'text/html',
