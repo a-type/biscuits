@@ -1,25 +1,48 @@
 import { BiscuitsError } from '@biscuits/error';
 import { builder } from '../../builder.js';
 import { assignTypeName, hasTypeName } from '../../relay.js';
-import { serverRender } from '@gnocchi.biscuits/hub';
+import { createResults, keyIndexes } from '../../dataloaders/index.js';
+import type { PublishedRecipe as DBPublishedRecipe } from '@biscuits/db';
+import { GNOCCHI_HUB_ORIGIN } from '../../../config/deployedContext.js';
 
 builder.queryFields((t) => ({
   publishedRecipe: t.field({
-    type: PublishedRecipe,
+    type: 'PublishedRecipe',
     authScopes: {
       member: true,
     },
     nullable: true,
     args: {
-      id: t.arg.id(),
+      id: t.arg.id({
+        required: true,
+      }),
     },
-    resolve: (_, { id }) => id,
+    resolve: async (_, { id }, ctx) => {
+      const planId = ctx.session?.planId;
+      if (!planId) {
+        throw new BiscuitsError(
+          BiscuitsError.Code.Forbidden,
+          'You must be a member to view a published recipe',
+        );
+      }
+
+      const publishedRecipe = await ctx.db
+        .selectFrom('PublishedRecipe')
+        .selectAll()
+        .where('id', '=', id)
+        .where('planId', '=', planId)
+        .executeTakeFirst();
+
+      if (!publishedRecipe) return null;
+
+      return assignTypeName('PublishedRecipe')(publishedRecipe);
+    },
   }),
 }));
 
 builder.mutationFields((t) => ({
   publishRecipe: t.field({
-    type: PublishedRecipe,
+    type: 'PublishedRecipe',
     authScopes: {
       member: true,
     },
@@ -39,60 +62,72 @@ builder.mutationFields((t) => ({
         );
       }
 
-      await ctx.ssg.gnocchiHub.upload(`${planId}/${slug}`, serverRender());
-
-      await ctx.db
+      const recipe = await ctx.db
         .insertInto('PublishedRecipe')
         .values({ id, planId, slug, publishedAt: new Date() })
-        .executeTakeFirst();
+        .returningAll()
+        .executeTakeFirstOrThrow();
 
-      return id;
+      return assignTypeName('PublishedRecipe')(recipe);
+    },
+  }),
+
+  unpublishRecipe: t.field({
+    type: 'ID',
+    authScopes: {
+      member: true,
+    },
+    args: {
+      recipeId: t.arg.id({
+        required: true,
+      }),
+    },
+    resolve: async (_, { recipeId }, ctx) => {
+      const planId = ctx.session?.planId;
+      if (!planId) {
+        throw new BiscuitsError(
+          BiscuitsError.Code.Forbidden,
+          'You must be a member to unpublish a recipe',
+        );
+      }
+
+      await ctx.db
+        .deleteFrom('PublishedRecipe')
+        .where('id', '=', recipeId)
+        .where('planId', '=', planId)
+        .execute();
+
+      return recipeId;
     },
   }),
 }));
 
-const PublishedRecipe = builder.loadableNodeRef('PublishedRecipe', {
-  id: {
-    resolve: (source) => source.id,
-  },
-  load: async (ids, ctx) => {
-    if (!ctx.session?.planId) {
-      throw new BiscuitsError(
-        BiscuitsError.Code.Forbidden,
-        'You must be a member to view a published recipe',
-      );
-    }
-    const planId = ctx.session.planId;
-    const recipes = await Promise.all(
-      ids.map(async (id) => {
-        const recipe = await ctx.db
-          .selectFrom('PublishedRecipe')
-          .where('id', '=', id)
-          .where('planId', '=', planId)
-          .selectAll()
-          .executeTakeFirst();
-
-        if (!recipe) return null;
-
-        return assignTypeName('PublishedRecipe')(recipe);
-      }),
-    );
-    return recipes;
-  },
-});
-
-PublishedRecipe.implement({
+builder.objectType('PublishedRecipe', {
   description: 'A published recipe',
 
   isTypeOf: hasTypeName('PublishedRecipe'),
   fields: (t) => ({
+    id: t.exposeID('id'),
     publishedAt: t.expose('publishedAt', {
       type: 'DateTime',
     }),
     url: t.string({
       resolve: (source, _, ctx) => {
-        return ctx.ssg.gnocchiHub.origin + `/${source.planId}/${source.slug}`;
+        return GNOCCHI_HUB_ORIGIN + `/${source.planId}/${source.slug}`;
       },
+    }),
+  }),
+});
+
+builder.inputType('PublishRecipeInput', {
+  fields: (t) => ({
+    id: t.id({
+      description: 'The ID of the recipe to publish',
+      required: true,
+    }),
+    slug: t.string({
+      description: 'The slug for the published recipe',
+      required: true,
     }),
   }),
 });

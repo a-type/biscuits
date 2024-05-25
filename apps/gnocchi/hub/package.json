@@ -5,22 +5,20 @@
   "type": "module",
   "exports": {
     ".": {
-      "development": "./src/entry-server.tsx",
-      "import": "./dist/entry-server.js"
+      "import": "./dist/server/entry-server.js"
     }
   },
   "scripts": {
-    "app-dev": "vite --host --mode development",
-    "app-dev-old": "vite --host --mode development --port 6299",
-    "build": "vite build --mode production",
-    "preview": "vite preview --host",
-    "link-verdant": "pnpm link --global @verdant-web/store && pnpm link --global @verdant-web/common && pnpm link --global @verdant-web/react && pnpm link --global @verdant-web/cli && pnpm link --global @verdant-web/react-router",
-    "clear": "rm -rf node_modules/.vite",
-    "icons": "node ./scripts/generateIcons.js",
+    "build": "pnpm run build:client && pnpm run build:server",
+    "build:client": "vite build --outDir dist/client",
+    "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server",
+    "dev": "pnpm run dev:client && pnpm run dev:server",
+    "dev:client": "vite build --mode development --outDir dist/client",
+    "dev:server": "vite build --mode development --ssr src/entry-server.tsx --outDir dist/server",
     "typecheck": "tsc --build tsconfig.json"
   },
   "dependencies": {
-    "@a-type/ui": "^0.8.13",
+    "@a-type/ui": "^0.8.15",
     "@a-type/utils": "^1.0.8",
     "@tiptap/core": "^2.2.4",
     "@tiptap/extension-document": "^2.2.4",

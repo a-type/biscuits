@@ -11,7 +11,6 @@ import { GraphQLError } from 'graphql';
 import { stripe } from '../services/stripe.js';
 import { AuthError } from '@a-type/auth';
 import { createDataloaders } from '../graphql/dataloaders/index.js';
-import { SsgLocalStorage, SsgS3Storage } from '../services/ssg.js';
 
 function applyHeaders(): Plugin<{}, GQLContext> {
   return {
@@ -103,21 +102,6 @@ async function handleGraphQLRequest(request: Request) {
     throw e;
   }
 
-  const ssg =
-    process.env.NODE_ENV === 'production'
-      ? {
-          gnocchiHub: new SsgS3Storage({
-            bucket: 'hub.gnocchi.biscuits.club',
-            origin: 'https://hub.gnocchi.biscuits.club',
-          }),
-        }
-      : {
-          gnocchiHub: new SsgLocalStorage({
-            localAppOrigin: 'http://localhost:6320',
-            rootRelativeToRepo: './apps/gnocchi/hub/public',
-          }),
-        };
-
   const ctx: GQLContext = {
     req: request,
     session,
@@ -129,7 +113,6 @@ async function handleGraphQLRequest(request: Request) {
       stripe,
       db,
     }),
-    ssg,
   };
 
   const yogaResponse = await yoga.handle(request, ctx);

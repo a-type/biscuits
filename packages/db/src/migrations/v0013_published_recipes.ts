@@ -20,6 +20,12 @@ export async function up(db: Kysely<any>) {
       'slug',
     ])
     .execute();
+
+  await db.schema
+    .createIndex('PublishedRecipe_slug')
+    .on('PublishedRecipe')
+    .columns(['planId', 'slug'])
+    .execute();
 }
 
 export async function down(db: Kysely<any>) {}

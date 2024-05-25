@@ -10,9 +10,9 @@ export function keyIndexes(ids: readonly string[]) {
   return Object.fromEntries(ids.map((id, index) => [id, index]));
 }
 
-export function createResults<T>(ids: readonly string[]) {
+export function createResults<T>(ids: readonly string[], defaultValue?: T) {
   return new Array<T | Error>(ids.length).fill(
-    new BiscuitsError(BiscuitsError.Code.NotFound),
+    defaultValue ?? new BiscuitsError(BiscuitsError.Code.NotFound),
   );
 }
 

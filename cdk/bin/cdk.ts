@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
-import { CdkStack } from '../lib/cdk-stack.js';
+import { AppStack } from '../lib/AppStack.js';
 import { apps } from '@biscuits/apps';
+import { SSGStack } from '../lib/SSGStack.js';
 
 const app = new cdk.App();
 
@@ -37,11 +38,29 @@ const allApps = [
 ];
 
 for (const appManifest of allApps) {
-  new CdkStack(app, appManifest.id, {
+  new AppStack(app, appManifest.id, {
     ...common,
     appId: appManifest.id,
     tags: {
       appId: appManifest.id,
+    },
+  });
+}
+
+const ssg = [
+  {
+    subdomain: 'recipes.gnocchi',
+    renderPath: '/gnocchi/hubRecipe',
+  },
+];
+
+for (const ssgManifest of ssg) {
+  new SSGStack(app, ssgManifest.subdomain, {
+    ...common,
+    subdomain: ssgManifest.subdomain,
+    renderPath: ssgManifest.renderPath,
+    tags: {
+      subdomain: ssgManifest.subdomain,
     },
   });
 }

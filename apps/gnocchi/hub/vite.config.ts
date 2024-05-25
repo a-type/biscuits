@@ -7,6 +7,10 @@ import { defineConfig } from 'vite';
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => ({
   plugins: [UnoCSS(), react(), viteCommonjs()],
+  base:
+    mode === 'production'
+      ? 'https://recipes.gnocchi.biscuits.club/'
+      : 'http://localhost:6124/gnocchi/hubRecipe/',
   optimizeDeps: {
     exclude: ['@a-type/ui'],
     include: [

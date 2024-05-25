@@ -1,8 +1,6 @@
 import * as cdk from 'aws-cdk-lib';
-import { CfnDistribution, PriceClass } from 'aws-cdk-lib/aws-cloudfront';
+import { PriceClass } from 'aws-cdk-lib/aws-cloudfront';
 import { Construct } from 'constructs';
-import { S3Bucket } from './S3Bucket';
-import { CloudFrontDistribution } from './CloudfrontDistribution';
 import { TLSCertificate } from './TLSCertificate';
 import { CloudFrontToS3 } from '@aws-solutions-constructs/aws-cloudfront-s3';
 import { BlockPublicAccess } from 'aws-cdk-lib/aws-s3';
@@ -10,13 +8,13 @@ import { addRepositoryVariable } from './github';
 import { createDnsRecord } from './porkbun';
 import { waitForCertificateValidation } from './aws';
 
-export interface CdkStackProps extends cdk.StackProps {
+export interface AppStackProps extends cdk.StackProps {
   // add props here
   appId: string;
 }
 
-export class CdkStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props: CdkStackProps) {
+export class AppStack extends cdk.Stack {
+  constructor(scope: Construct, id: string, props: AppStackProps) {
     super(scope, id, props);
 
     // The code that defines your stack goes here

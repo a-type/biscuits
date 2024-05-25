@@ -3,7 +3,6 @@ import { DB } from '@biscuits/db';
 import { Server as VerdantServer } from '@verdant-web/server';
 import Stripe from 'stripe';
 import { createDataloaders } from './dataloaders/index.js';
-import { SsgStorage } from '../services/ssg.js';
 
 export type GQLContext = {
   session: Session | null;
@@ -16,7 +15,4 @@ export type GQLContext = {
   };
   stripe: Stripe;
   dataloaders: ReturnType<typeof createDataloaders>;
-  ssg: {
-    gnocchiHub: SsgStorage;
-  };
 };

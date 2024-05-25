@@ -61,7 +61,7 @@ importers:
   apps/gnocchi/hub:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.8.13
+        specifier: ^0.8.15
         version: 0.8.16(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.2.0)
       '@a-type/utils':
         specifier: ^1.0.8
@@ -1278,7 +1278,7 @@ packages:
       '@use-gesture/react': 10.3.0(react@18.2.0)
       browser-image-resizer: 2.4.1
       calendar-blocks: 0.3.1(react@18.2.0)
-      clsx: 2.1.1
+      clsx: 2.1.0
       color-interpolate: 1.0.5
       color-parse: 2.0.2
       color-space: 2.0.1
@@ -1328,7 +1328,7 @@ packages:
       '@use-gesture/react': 10.3.0(react@18.2.0)
       browser-image-resizer: 2.4.1
       calendar-blocks: 0.3.1(react@18.2.0)
-      clsx: 2.1.1
+      clsx: 2.1.0
       color-interpolate: 1.0.5
       color-parse: 2.0.2
       color-space: 2.0.1
@@ -1378,7 +1378,7 @@ packages:
       '@use-gesture/react': 10.3.0(react@18.2.0)
       browser-image-resizer: 2.4.1
       calendar-blocks: 0.3.1(react@18.2.0)
-      clsx: 2.1.1
+      clsx: 2.1.0
       color-interpolate: 1.0.5
       color-parse: 2.0.2
       color-space: 2.0.1
@@ -12896,11 +12896,11 @@ packages:
   /clsx@2.1.0:
     resolution: {integrity: sha512-m3iNNWpd9rl3jvvcBnu70ylMdrXt8Vlq4HYadnU5fwcOtvkSQWPmj7amUcDT2qYI7risszBjI5AUIUox9D16pg==}
     engines: {node: '>=6'}
-    dev: false
 
   /clsx@2.1.1:
     resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
     engines: {node: '>=6'}
+    dev: false
 
   /collapse-white-space@2.1.0:
     resolution: {integrity: sha512-loKTxY1zCOuG4j9f6EPnuyyYkf58RnhhWTvRoZEokgB+WbdXehfjFviyOVYkqzEWz1Q5kRiZdBYS5SwxbQYwzw==}
