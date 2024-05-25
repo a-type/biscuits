@@ -82,7 +82,7 @@ export function App({ recipe: data, url }: { recipe: any; url: string }) {
           <PageFixedArea className="flex flex-row justify-end bottom-4 top-auto mb-4 bg-transparent">
             <a
               href={`${
-                process.env.VITE_APP_GNOCCHI_ORIGIN
+                import.meta.env.VITE_APP_GNOCCHI_ORIGIN
               }?recipeUrl=${encodeURIComponent(url)}&hub=true&skipWelcome=true`}
             >
               <Button color="primary" className="shadow-lg">
