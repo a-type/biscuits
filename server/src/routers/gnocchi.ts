@@ -83,7 +83,7 @@ gnocchiRouter.get('/hubRecipe/:planId/:recipeSlug', async (req) => {
     id: recipe.id,
     title: snapshot.title,
     prelude: snapshot.prelude,
-    mainImageUrl: snapshot.image?.url,
+    mainImageUrl: snapshot.mainImage?.url,
     ingredients: snapshot.ingredients,
     instructions: snapshot.instructions,
     publisher: {
