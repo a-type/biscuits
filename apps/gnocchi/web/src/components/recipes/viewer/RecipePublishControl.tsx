@@ -74,7 +74,7 @@ export function RecipePublishControl({ recipe }: RecipePublishControlProps) {
       <DialogTrigger asChild>
         <Button size="small">{isPublished ? 'Published' : 'Publish'}</Button>
       </DialogTrigger>
-      {data.publishedRecipe ? (
+      {publishedRecipe ? (
         <PublishedContent
           recipe={recipe}
           publishedRecipe={publishedRecipe}
@@ -93,7 +93,7 @@ function PublishedContent({
   onChange,
 }: {
   recipe: Recipe;
-  publishedRecipe: { publishedAt: number; url: string };
+  publishedRecipe: { publishedAt: string; url: string };
   onChange?: () => void;
 }) {
   const { id } = hooks.useWatch(recipe);
