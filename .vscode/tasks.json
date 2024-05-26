@@ -70,6 +70,14 @@
       "label": "Blog",
       "detail": "astro",
       "isBackground": true
+    },
+    {
+      "type": "npm",
+      "script": "app-dev",
+      "path": "apps/bible/web",
+      "problemMatcher": [],
+      "label": "Run Bible",
+      "detail": "vite"
     }
   ]
 }

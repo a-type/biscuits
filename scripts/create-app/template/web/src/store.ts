@@ -3,7 +3,7 @@ import {
   createHooks,
   migrations,
   UserInfo,
-} from '@shopping.biscuits/verdant';
+} from '@{{todoId}}.biscuits/verdant';
 
 export interface Presence {
   /**
