@@ -11,13 +11,19 @@ export async function waitForCertificateValidation(
   const client = new ACM({});
 
   let response;
+  const began = Date.now();
   while (
     response?.Certificate?.DomainValidationOptions?.[0]?.ResourceRecord
-      ?.Type !== 'CNAME'
+      ?.Type !== 'CNAME' &&
+    Date.now() - began < 1000 * 60 * 5
   ) {
     response = await client.describeCertificate({
       CertificateArn: arn,
     });
+  }
+
+  if (!response?.Certificate?.DomainValidationOptions?.[0]?.ResourceRecord) {
+    throw new Error('Resource record not found (timed out)');
   }
 
   const cname =
