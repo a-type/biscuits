@@ -21,7 +21,7 @@ export class SSGStack extends Stack {
     const distribution = new CloudfrontToServer(
       this,
       {
-        origin: `https://api.biscuits.club`,
+        origin: `api.biscuits.club`,
         path: props.renderPath,
       },
       certificate,

@@ -49,13 +49,14 @@ for (const appManifest of allApps) {
 
 const ssg = [
   {
+    id: 'gnocchi-hub',
     subdomain: 'recipes.gnocchi',
     renderPath: '/gnocchi/hubRecipe',
   },
 ];
 
 for (const ssgManifest of ssg) {
-  new SSGStack(app, ssgManifest.subdomain, {
+  new SSGStack(app, ssgManifest.id, {
     ...common,
     subdomain: ssgManifest.subdomain,
     renderPath: ssgManifest.renderPath,
