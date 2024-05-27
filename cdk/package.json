@@ -19,6 +19,7 @@
     "vitest": "1.6.0"
   },
   "dependencies": {
+    "@aws-sdk/client-acm": "^3.583.0",
     "@aws-solutions-constructs/aws-cloudfront-s3": "^2.57.0",
     "@biscuits/apps": "workspace:*",
     "@octokit/rest": "^20.1.1",
