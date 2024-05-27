@@ -226,7 +226,7 @@ export async function setupNewPlan({
       .insertInto('Plan')
       .values({
         id: id(),
-        featureFlags: `{}`,
+        featureFlags: {},
         name: 'New Plan',
         stripeSubscriptionId: stripeSubscription.id,
         stripePriceId: stripeSubscription.items.data[0].price.id,
