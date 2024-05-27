@@ -1,6 +1,5 @@
 import { TLSCertificate } from './TLSCertificate';
 import { ACM } from '@aws-sdk/client-acm';
-import { createDnsRecord } from './porkbun';
 
 export async function waitForCertificateValidation(
   certificate: TLSCertificate,
