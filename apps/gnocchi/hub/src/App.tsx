@@ -41,7 +41,7 @@ export function App({
         <article
           itemScope
           itemType="https://schema.org/Recipe"
-          className="h-recipe"
+          className="h-recipe flex flex-col gap-4 items-stretch"
         >
           <TopLineRoot>
             {data.mainImageUrl && (
@@ -56,6 +56,7 @@ export function App({
               </P>
             </TopLineTitle>
           </TopLineRoot>
+          {data.note && <Note className="self-start">{data.note}</Note>}
           {data.prelude && (
             <div>
               <Suspense>
