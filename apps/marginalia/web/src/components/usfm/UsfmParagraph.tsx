@@ -18,6 +18,12 @@ export function UsfmParagraph({ content }: UsfmParagraphProps) {
     const line = lines.shift()!;
     if (isVerse(line)) {
       verses.push(<UsfmVerse line={line} key={verses.length} />);
+    } else {
+      verses.push(
+        <span key={verses.length} data-type="unknown" className="text-amber">
+          {line}
+        </span>,
+      );
     }
   }
 

@@ -13,6 +13,8 @@ export interface UsfmRendererProps {
 export function UsfmRenderer({ root }: UsfmRendererProps) {
   const bookName = root.match(/^\\h (.*)$/m)?.[1];
   const remaining = root.slice(root.indexOf('\\c 1'));
+  // is lines is not the right way to split the content?
+  // should split on verses instead?
   const lines = remaining.split('\n');
   const paragraphs = useParagraphs(lines);
 

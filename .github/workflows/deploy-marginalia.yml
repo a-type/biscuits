@@ -1,15 +1,15 @@
-name: bible deploy
+name: Marginalia deploy
 on:
   push:
     branches: [main]
     paths:
-      - 'apps/bible/**'
+      - 'apps/marginalia/**'
       - 'packages/client/**'
-      - '.github/workflows/deploy-bible.yml'
+      - '.github/workflows/deploy-marginalia.yml'
 
 jobs:
-  build-and-deploy-bible:
-    name: Build and deploy bible
+  build-and-deploy-marginalia:
+    name: Build and deploy marginalia
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -27,26 +27,26 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --filter @bible.biscuits/web...
+        run: pnpm install --filter @marginalia.biscuits/web...
 
-      - name: Build bible
-        run: pnpm --filter @bible.biscuits/web... run build
+      - name: Build marginalia
+        run: pnpm --filter @marginalia.biscuits/web... run build
 
-      - name: Deploy bible to S3
+      - name: Deploy marginalia to S3
         uses: jakejarvis/s3-sync-action@master
         with:
           args: --follow-symlinks --delete
         env:
-          AWS_S3_BUCKET: ${{ secrets.S3_BUCKET_BIBLE }}
+          AWS_S3_BUCKET: ${{ secrets.S3_BUCKET_MARGINALIA }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          SOURCE_DIR: './apps/bible/web/dist'
+          SOURCE_DIR: './apps/marginalia/web/dist'
 
       - name: Invalidate CloudFront cache
         uses: chetan/invalidate-cloudfront-action@v2
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          DISTRIBUTION: ${{ secrets.CLOUDFRONT_ID_BIBLE }}
+          DISTRIBUTION: ${{ secrets.CLOUDFRONT_ID_MARGINALIA }}
           PATHS: '/*'
           AWS_REGION: 'us-east-1'

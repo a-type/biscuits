@@ -3,7 +3,7 @@ import {
   createHooks,
   migrations,
   UserInfo,
-} from '@bible.biscuits/verdant';
+} from '@marginalia.biscuits/verdant';
 
 export interface Presence {
   /**

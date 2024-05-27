@@ -95,7 +95,7 @@ export const apps: AppManifest<string>[] = [
     prerelease: true,
   } satisfies AppManifest<'shopping'>,
   {
-    id: 'bible',
+    id: 'marginalia',
     demoVideoSrc: '',
     description: 'TODO',
     devOriginOverride: 'http://localhost:6223',
@@ -103,9 +103,9 @@ export const apps: AppManifest<string>[] = [
     name: 'Bible',
     paidDescription: 'TODO',
     paidFeatures: [],
-    url: 'https://bible.biscuits.club',
+    url: 'https://marginalia.biscuits.club',
     prerelease: true,
-  } satisfies AppManifest<'bible'>,
+  } satisfies AppManifest<'marginalia'>,
 ] as const;
 
 export type AppId = (typeof apps)[number]['id'];

@@ -1,5 +1,5 @@
 {
-  "name": "@bible.biscuits/web",
+  "name": "@marginalia.biscuits/web",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -11,7 +11,7 @@
   "dependencies": {
     "@a-type/ui": "0.8.15",
     "@a-type/utils": "1.1.0",
-    "@bible.biscuits/verdant": "workspace:*",
+    "@marginalia.biscuits/verdant": "workspace:*",
     "@biscuits/client": "workspace:*",
     "@react-spring/web": "^9.7.3",
     "@tanstack/react-query": "5.39.0",
