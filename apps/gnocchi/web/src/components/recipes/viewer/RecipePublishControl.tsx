@@ -10,6 +10,7 @@ import {
   DialogActions,
   DialogTitle,
 } from '@a-type/ui/components/dialog';
+import { Tooltip } from '@a-type/ui/components/tooltip';
 import { P } from '@a-type/ui/components/typography';
 import {
   graphql,
@@ -61,6 +62,9 @@ export function RecipePublishControl({ recipe }: RecipePublishControlProps) {
     variables: { recipeId: recipe.get('id') },
   });
 
+  const { url } = hooks.useWatch(recipe);
+  const notAllowed = !!url;
+
   const canPublish = useCanSync();
 
   if (!canPublish || !enabled) return null;
@@ -73,13 +77,25 @@ export function RecipePublishControl({ recipe }: RecipePublishControlProps) {
     );
   }
 
+  if (notAllowed) {
+    return (
+      <Tooltip content="You can't publish web recipes, only your own.">
+        <Button size="small" disabled>
+          Publish
+        </Button>
+      </Tooltip>
+    );
+  }
+
   const publishedRecipe = data.publishedRecipe;
   const isPublished = !!publishedRecipe;
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button size="small">{isPublished ? 'Published' : 'Publish'}</Button>
+        <Button size="small" color={isPublished ? 'accent' : 'default'}>
+          {isPublished ? 'Published' : 'Publish'}
+        </Button>
       </DialogTrigger>
       {publishedRecipe ? (
         <PublishedContent
