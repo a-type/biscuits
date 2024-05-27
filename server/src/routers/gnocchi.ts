@@ -87,7 +87,7 @@ gnocchiRouter.get('/hubRecipe/:planId/:recipeSlug', async (req) => {
     ingredients: snapshot.ingredients,
     instructions: snapshot.instructions,
     publisher: {
-      fullName: recipe.publisherFullName,
+      fullName: recipe.publisherFullName ?? 'Anonymous',
     },
   };
 
