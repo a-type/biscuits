@@ -500,6 +500,7 @@ export const hooks = createHooks<Presence, Profile>({
     const showFood = params.get('showFood');
     return useCallback(
       async (food: Food, newName: string) => {
+        newName = newName.toLowerCase();
         if (food.get('canonicalName') === newName) return;
 
         const existing = await client.foods.findOne({
