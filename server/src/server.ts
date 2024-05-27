@@ -13,8 +13,8 @@ import { stripeRouter } from './routers/stripe.js';
 import { graphqlRouter } from './routers/graphql.js';
 import { writeSchema } from './tasks/writeSchema.js';
 import { AuthError } from '@a-type/auth';
-import { transferRouter } from './routers/transfer.js';
 import { killPortProcess } from 'kill-port-process';
+import { gnocchiRouter } from './routers/gnocchi.js';
 
 console.log('Starting server...');
 
@@ -68,7 +68,7 @@ router
   .all('/verdant/*', verdantRouter.fetch)
   .all('/stripe/*', stripeRouter.fetch)
   .all('/graphql/*', graphqlRouter.fetch)
-  .all('/transfer/*', transferRouter.fetch);
+  .all('/gnocchi/*', gnocchiRouter.fetch);
 
 const ittyServer = createServerAdapter((request) => router.fetch(request));
 
