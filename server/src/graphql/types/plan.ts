@@ -30,7 +30,7 @@ builder.queryFields((t) => ({
     },
   }),
   plans: t.connection({
-    type: 'Plan',
+    type: Plan,
     authScopes: {
       productAdmin: true,
     },
@@ -200,6 +200,59 @@ builder.mutationFields((t) => ({
         });
       }
       return { planId };
+    },
+  }),
+  setFeatureFlag: t.field({
+    type: 'Plan',
+    authScopes: {
+      productAdmin: true,
+    },
+    args: {
+      planId: t.arg.globalID({
+        required: true,
+      }),
+      flagName: t.arg({
+        type: 'String',
+        required: true,
+      }),
+      enabled: t.arg({
+        type: 'Boolean',
+        required: true,
+      }),
+    },
+    resolve: async (_, { planId, flagName, enabled }, ctx) => {
+      const { id } = planId;
+      const currentPlan = await ctx.db
+        .selectFrom('Plan')
+        .select(['featureFlags'])
+        .where('id', '=', id)
+        .executeTakeFirst();
+
+      if (!currentPlan) {
+        throw new BiscuitsError(BiscuitsError.Code.NotFound);
+      }
+
+      let flags = currentPlan?.featureFlags ?? {};
+      flags[flagName] = enabled;
+
+      const plan = await ctx.db
+        .updateTable('Plan')
+        .set({
+          featureFlags: flags,
+        })
+        .where('id', '=', id)
+        .returningAll()
+        .executeTakeFirst();
+
+      if (!plan) {
+        logger.urgent('Failed to update plan feature flags', {
+          planId: id,
+          featureFlags: flags,
+        });
+        throw new BiscuitsError(BiscuitsError.Code.Unexpected);
+      }
+
+      return assignTypeName('Plan')(plan);
     },
   }),
 }));
@@ -487,11 +540,8 @@ Plan.implement({
             return [];
           }
         } else {
-          const flags = plan.featureFlags ?? [];
-          if (!Array.isArray(flags)) {
-            return [];
-          }
-          return flags;
+          const planFlags = plan.featureFlags ?? {};
+          return Object.keys(planFlags).filter((key) => !!planFlags[key]);
         }
       },
     }),

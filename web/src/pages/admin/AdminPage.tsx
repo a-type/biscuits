@@ -27,6 +27,9 @@ export function AdminPage({}: AdminPageProps) {
       <PageContent>
         <TabsRoot>
           <TabsList>
+            <TabsTrigger value="plans" asChild>
+              <Link to="/admin/plans">Plans</Link>
+            </TabsTrigger>
             <TabsTrigger value="foods" asChild>
               <Link to="/admin/foods">Foods</Link>
             </TabsTrigger>

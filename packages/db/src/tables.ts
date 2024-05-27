@@ -93,7 +93,11 @@ export interface PlanTable {
   > | null;
   subscriptionExpiresAt: Date | null;
   subscriptionCanceledAt: Date | null;
-  featureFlags: ColumnType<string, string | undefined, string>;
+  featureFlags: ColumnType<
+    Record<string, boolean>,
+    Record<string, boolean> | undefined,
+    Record<string, boolean>
+  >;
   memberLimit: Generated<number>;
 }
 

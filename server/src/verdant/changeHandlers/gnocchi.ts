@@ -4,7 +4,7 @@ import { db } from '@biscuits/db';
 import { sendPush } from '../../services/webPush.js';
 import { GNOCCHI_HUB_CLOUDFRONT_ID } from '../../config/secrets.js';
 import { logger } from '../../logger.js';
-import { cloudfront, createInvalidation } from '../../services/cloudfront.js';
+import { createInvalidation } from '../../services/cloudfront.js';
 
 export const gnocchiListNotifications: ChangeHandler<{
   createdItemCount: number;

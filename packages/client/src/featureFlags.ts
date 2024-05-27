@@ -1,7 +1,7 @@
 import { useMe } from './graphql.js';
 
 export const featureFlags = {
-  multipliedIngredients: false,
+  hub: false,
 } as const;
 
 export type FeatureFlagName = keyof typeof featureFlags;

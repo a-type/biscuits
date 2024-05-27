@@ -11,7 +11,13 @@ import {
   DialogTitle,
 } from '@a-type/ui/components/dialog';
 import { P } from '@a-type/ui/components/typography';
-import { graphql, useCanSync, useMutation, useQuery } from '@biscuits/client';
+import {
+  graphql,
+  useCanSync,
+  useFeatureFlag,
+  useMutation,
+  useQuery,
+} from '@biscuits/client';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { format } from 'date-fns/esm';
 import { useState } from 'react';
@@ -50,13 +56,14 @@ const unpublishMutation = graphql(`
 `);
 
 export function RecipePublishControl({ recipe }: RecipePublishControlProps) {
+  const enabled = useFeatureFlag('hub');
   const { data, loading, refetch } = useQuery(publishedQuery, {
     variables: { recipeId: recipe.get('id') },
   });
 
   const canPublish = useCanSync();
 
-  if (!canPublish) return null;
+  if (!canPublish || !enabled) return null;
 
   if (loading || !data) {
     return (
