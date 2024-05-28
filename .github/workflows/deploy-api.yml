@@ -93,3 +93,17 @@ jobs:
       - name: Deploy API
         # deploy the image from ghcr.io for the target sha (short version)
         run: flyctl deploy --image ghcr.io/a-type/biscuits:sha-${SHORT_SHA}
+
+  invalidate-ssr:
+    name: Invalidate SSR caches
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+      - name: Invalidate SSR caches
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.DEPLOYER_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.DEPLOYER_AWS_SECRET_ACCESS_KEY }}
+          DISTRIBUTION: ${{ secrets.CLOUDFRONT_ID_GNOCCHI_HUB }}
+          PATHS: '/*'
+          AWS_REGION: 'us-east-1'
