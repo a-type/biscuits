@@ -1,8 +1,3 @@
 {
-  "extends": "next/core-web-vitals",
-  // not actually using NextJS, so disable next-specific rules
-  "rules": {
-    "@next/next/no-img-element": "off",
-    "react/no-unescaped-entities": "off"
-  }
+  "extends": ["eslint:recommended", "plugin:react/recommended"]
 }

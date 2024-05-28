@@ -1,19 +1,20 @@
 import * as cdk from 'aws-cdk-lib';
-import { CfnDistribution, PriceClass } from 'aws-cdk-lib/aws-cloudfront';
+import { PriceClass } from 'aws-cdk-lib/aws-cloudfront';
 import { Construct } from 'constructs';
-import { S3Bucket } from './S3Bucket';
-import { CloudFrontDistribution } from './CloudfrontDistribution';
 import { TLSCertificate } from './TLSCertificate';
 import { CloudFrontToS3 } from '@aws-solutions-constructs/aws-cloudfront-s3';
 import { BlockPublicAccess } from 'aws-cdk-lib/aws-s3';
+import { addRepositoryVariable } from './github';
+import { createDnsRecord } from './porkbun';
+import { waitForCertificateValidation } from './aws';
 
-export interface CdkStackProps extends cdk.StackProps {
+export interface AppStackProps extends cdk.StackProps {
   // add props here
   appId: string;
 }
 
-export class CdkStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props: CdkStackProps) {
+export class AppStack extends cdk.Stack {
+  constructor(scope: Construct, id: string, props: AppStackProps) {
     super(scope, id, props);
 
     // The code that defines your stack goes here
@@ -25,6 +26,21 @@ export class CdkStack extends cdk.Stack {
     new cdk.CfnOutput(this, 'CertificateArn', {
       value: certificate.certificateArn,
     });
+
+    // automatically create CNAME required for certificate validation - need to get CNAME
+    // domain and content from the certificate.
+    // waitForCertificateValidation(certificate)
+    //   .then(({ cname, content }) => {
+    //     return createDnsRecord('biscuits.club', {
+    //       type: 'CNAME',
+    //       content,
+    //       name: cname,
+    //     });
+    //   })
+    //   .catch((err) => {
+    //     console.error('⚠️ FAILED TO CREATE DNS RECORD');
+    //     console.error(err);
+    //   });
 
     // create a cloudfront distribution
 
@@ -73,6 +89,14 @@ export class CdkStack extends cdk.Stack {
     new cdk.CfnOutput(this, 'DistributionId', {
       value: distribution.cloudFrontWebDistribution.distributionId,
     });
+
+    // addRepositoryVariable(
+    //   `CLOUDFRONT_ID_${props.appId.toUpperCase()}`,
+    //   distribution.cloudFrontWebDistribution.distributionId,
+    // ).catch((err) => {
+    //   console.error('⚠️ FAILED TO ADD DISTRIBUTION ID TO REPO VARIABLES');
+    //   console.error(err);
+    // });
 
     new cdk.CfnOutput(this, 'DistributionDomainName', {
       value: distribution.cloudFrontWebDistribution.distributionDomainName,

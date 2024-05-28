@@ -61,6 +61,10 @@ const routes = makeRoutes([
     component: lazy(() => import('./admin/AdminPage.js')),
     children: [
       {
+        path: 'plans',
+        component: lazy(() => import('./admin/AdminPlansPage.js')),
+      },
+      {
         path: 'foods',
         component: lazy(() => import('./admin/AdminFoodsPage.js')),
       },

@@ -1,15 +1,7 @@
 import { pickBestNameMatch } from '@/components/foods/lookup.jsx';
 import { groceriesState } from '@/components/groceries/state.js';
 import { graphqlClient } from '@/graphql.js';
-import { detailedInstructionsToDoc, instructionsToDoc } from '@/lib/tiptap.js';
-import {
-  getVerdantSync,
-  graphql,
-  isClientError,
-  showSubscriptionPromotion,
-  VerdantContext,
-} from '@biscuits/client';
-import { BiscuitsError } from '@biscuits/error';
+import { getVerdantSync, graphql, VerdantContext } from '@biscuits/client';
 import { parseIngredient } from '@gnocchi.biscuits/conversion';
 import { depluralize } from '@gnocchi.biscuits/conversion';
 import {
@@ -33,6 +25,7 @@ import cuid from 'cuid';
 import pluralize from 'pluralize';
 import { useCallback } from 'react';
 import { toast } from 'react-hot-toast';
+import { getScannedRecipe } from './scanRecipe.js';
 
 export interface Presence {
   lastInteractedItem: string | null;
@@ -77,29 +70,6 @@ const defaultCategoriesQuery = graphql(`
       id
       name
       sortKey
-    }
-  }
-`);
-
-const recipeScanQuery = graphql(`
-  query RecipeScan($input: RecipeScanInput!) {
-    recipeScan(input: $input) {
-      type
-      data {
-        url
-        title
-        url
-        rawIngredients
-        steps
-        detailedSteps {
-          type
-          content
-        }
-        cookTimeMinutes
-        prepTimeMinutes
-        totalTimeMinutes
-        servings
-      }
     }
   }
 `);
@@ -500,6 +470,7 @@ export const hooks = createHooks<Presence, Profile>({
     const showFood = params.get('showFood');
     return useCallback(
       async (food: Food, newName: string) => {
+        newName = newName.toLowerCase();
         if (food.get('canonicalName') === newName) return;
 
         const existing = await client.foods.findOne({
@@ -916,149 +887,6 @@ async function purchaseItem(client: Client, item: Item, batchName?: string) {
     lastInteractedItem: item.get('id'),
     lastInteractedCategory: item.get('categoryId') ?? null,
   });
-}
-
-async function getScannedRecipe(
-  url: string,
-  client: Client,
-): Promise<RecipeInit> {
-  try {
-    const scanResult = await graphqlClient.query({
-      query: recipeScanQuery,
-      variables: {
-        input: { url },
-      },
-    });
-    let result: RecipeInit = {
-      url,
-      title: 'Web Recipe',
-    };
-
-    if (!scanResult.data?.recipeScan) {
-      toast.error('Sorry, we had trouble finding a recipe on that webpage.');
-      return result;
-    }
-
-    const scanType = scanResult.data.recipeScan.type;
-    const scanned = scanResult.data.recipeScan.data;
-
-    if (scanType === 'web') {
-      /*if (scanned.detailedIngredients?.length) {
-					result.ingredients = scanned.detailedIngredients.map(
-						(i) => {
-							const unitMatch = i.unit ? lookupUnit(i.unit) : null;
-							return {
-								food: i.foodName,
-								quantity: i.quantity,
-								unit:
-									unitMatch?.singular?.toLowerCase() ||
-									i.unit?.toLowerCase() ||
-									'',
-								comments: i.comments || [],
-								text: i.original,
-							};
-						},
-					);
-				} else */ if (scanned.rawIngredients?.length) {
-        result.ingredients = scanned.rawIngredients.map((line: string) => {
-          const parsed = parseIngredient(line);
-          return {
-            text: parsed.sanitized,
-            food: parsed.food,
-            unit: parsed.unit,
-            comments: parsed.comments,
-            quantity: parsed.quantity,
-          };
-        });
-      }
-
-      // lookup foods for all ingredients
-      result.ingredients = await Promise.all(
-        (result.ingredients ?? []).map(async (ingredient) => {
-          try {
-            if (!ingredient.food) return ingredient;
-
-            const lookup = await client.foods.findOne({
-              index: {
-                where: 'nameLookup',
-                equals: ingredient.food,
-              },
-            }).resolved;
-            // make this match a little more strict - avoids things like
-            // "sugar" matching "brown sugar"
-            if (
-              lookup &&
-              (lookup.get('canonicalName') === ingredient.food ||
-                lookup.get('alternateNames').includes(ingredient.food))
-            ) {
-              ingredient.food = lookup.get('canonicalName');
-            }
-            return ingredient;
-          } catch (err) {
-            // we tried...
-            return ingredient;
-          }
-        }),
-      );
-
-      result.url = scanned.url;
-      result.title = scanned.title || 'Web Recipe';
-      result.prepTimeMinutes = scanned.prepTimeMinutes ?? undefined;
-      result.cookTimeMinutes = scanned.cookTimeMinutes ?? undefined;
-      result.totalTimeMinutes = scanned.totalTimeMinutes ?? undefined;
-      result.instructions = scanned.detailedSteps
-        ? detailedInstructionsToDoc(scanned.detailedSteps as any)
-        : instructionsToDoc(scanned.steps || []);
-      result.servings = scanned.servings ?? undefined;
-      // TODO: support hub again?
-      // } else if (scanType === 'hub') {
-      //   result.ingredients = scanned.ingredients.map((i) => ({
-      //     food: i.food,
-      //     text: i.text,
-      //     unit: i.unit,
-      //     quantity: i.quantity,
-      //     comments: (() => {
-      //       try {
-      //         return JSON.parse(i.comments || '[]');
-      //       } catch (err) {
-      //         return [];
-      //       }
-      //     })(),
-      //     id: i.id,
-      //     note: i.note,
-      //   }));
-      //   result.url = scanned.url;
-      //   result.title = scanned.title || 'Web Recipe';
-      //   result.instructions = scanned.instructionsSerialized
-      //     ? JSON.parse(scanned.instructionsSerialized)
-      //     : undefined;
-      //   result.prelude = scanned.preludeSerialized
-      //     ? JSON.parse(scanned.preludeSerialized)
-      //     : undefined;
-      //   result.prepTimeMinutes = scanned.prepTimeMinutes ?? undefined;
-      //   result.cookTimeMinutes = scanned.cookTimeMinutes ?? undefined;
-      //   result.totalTimeMinutes = scanned.totalTimeMinutes ?? undefined;
-      //   result.servings = scanned.servings ?? undefined;
-    } else {
-      throw new Error('Unrecognized scan result type');
-    }
-
-    return result;
-  } catch (err) {
-    console.error(err);
-    if (
-      err instanceof Error &&
-      isClientError(err) &&
-      err.graphQLErrors.some(
-        (e) => e.extensions?.code === BiscuitsError.Code.Forbidden,
-      )
-    ) {
-      showSubscriptionPromotion();
-    } else {
-      toast.error('Could not scan that recipe.');
-    }
-    throw err;
-  }
 }
 
 // hook up undo to ctrl+z

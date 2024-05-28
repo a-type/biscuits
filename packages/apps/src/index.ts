@@ -94,6 +94,18 @@ export const apps: AppManifest<string>[] = [
     url: 'https://shopping.biscuits.club',
     prerelease: true,
   } satisfies AppManifest<'shopping'>,
+  {
+    id: 'marginalia',
+    demoVideoSrc: '',
+    description: 'TODO',
+    devOriginOverride: 'http://localhost:6223',
+    iconPath: 'icon.png',
+    name: 'Bible',
+    paidDescription: 'TODO',
+    paidFeatures: [],
+    url: 'https://marginalia.biscuits.club',
+    prerelease: true,
+  } satisfies AppManifest<'marginalia'>,
 ] as const;
 
 export type AppId = (typeof apps)[number]['id'];

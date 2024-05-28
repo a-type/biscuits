@@ -6,6 +6,9 @@ import { Spinner } from '@a-type/ui/components/spinner';
 import { lazy, useCallback, Suspense } from 'react';
 import { updateApp, updateState } from '@/updateState.js';
 import { Link } from '@verdant-web/react-router';
+import { TopLoader } from '@/components/nav/TopLoader.jsx';
+import { Button } from '@a-type/ui/components/button';
+import { ReloadButton } from '@biscuits/client';
 
 const routes = makeRoutes([
   {
@@ -20,7 +23,7 @@ const routes = makeRoutes([
 
 export function Pages() {
   const handleNavigate = useCallback(
-    (_path: string, ev: { state?: any; skipTransition?: boolean }) => {
+    (_: Location, ev: { state?: any; skipTransition?: boolean }) => {
       if (updateState.updateAvailable) {
         console.info('Update ready to install, intercepting navigation...');
         updateApp();

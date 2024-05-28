@@ -1,5 +1,3 @@
-import { handleChanges as gnocchi } from './gnocchi.js';
+import { gnocchiListNotifications } from './gnocchi.js';
 
-export const changeHandlers = {
-  gnocchi,
-};
+export const changeHandlers = [gnocchiListNotifications];

@@ -126,7 +126,8 @@ export function RecipeIngredientViewer({
       <div className="flex flex-row w-full items-start">
         <IngredientText
           className="flex-1 block mt-1"
-          multiplier={multiplier}
+          // don't multiply section headers.
+          multiplier={isSectionHeader ? 1 : multiplier}
           ingredient={ingredient}
         />
         <div className="flex flex-row gap-2 items-center relative top--1">

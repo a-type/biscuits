@@ -90,7 +90,6 @@ export const AddBarImpl = forwardRef<HTMLDivElement, AddBarProps>(
             <AddInput
               inputProps={getInputProps({
                 onPaste: onInputPaste,
-                onPointerDown: openMenu,
                 placeholder,
               })}
               isOpen={isOpen}

@@ -1,0 +1,48 @@
+{
+  "name": "@gnocchi.biscuits/hub",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/server/entry-server.js",
+      "types": "./dist/server/entry-server.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "pnpm run build:client && pnpm run build:server && pnpm run typings",
+    "build:client": "vite build --outDir dist/client",
+    "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server",
+    "dev": "concurrently npm:dev:client npm:dev:server npm:typings",
+    "dev:client": "vite build --mode development --outDir dist/client --watch",
+    "dev:server": "vite build --mode development --ssr src/entry-server.tsx --outDir dist/server --watch",
+    "typings": "tsc --declaration --emitDeclarationOnly",
+    "typecheck": "tsc --build tsconfig.json"
+  },
+  "dependencies": {
+    "@a-type/ui": "^0.8.15",
+    "@a-type/utils": "^1.0.8",
+    "@tiptap/core": "^2.2.4",
+    "@tiptap/extension-document": "^2.2.4",
+    "@tiptap/extension-link": "^2.2.4",
+    "@tiptap/extension-paragraph": "^2.2.4",
+    "@tiptap/pm": "^2.2.4",
+    "@tiptap/react": "^2.2.4",
+    "@tiptap/starter-kit": "^2.2.4",
+    "prosemirror-model": "1.19.4",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@originjs/vite-plugin-commonjs": "^1.0.3",
+    "@types/react": "^18.2.79",
+    "@types/react-dom": "^18.2.25",
+    "@unocss/transformer-variant-group": "^0.58.0",
+    "@vitejs/plugin-react-swc": "^3.5.0",
+    "concurrently": "^7.5.0",
+    "dotenv": "^16.0.1",
+    "typescript": "^5.4.5",
+    "unocss": "^0.58.0",
+    "vite": "^5.0.10"
+  }
+}

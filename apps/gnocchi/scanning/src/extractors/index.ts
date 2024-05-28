@@ -3,3 +3,4 @@ export * from './naive.js';
 export * from './wprm.js';
 export * from './schemaOrg.js';
 export * from './tasty.js';
+export * from './gnocchi.js';

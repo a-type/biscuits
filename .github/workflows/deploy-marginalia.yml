@@ -1,0 +1,52 @@
+name: Marginalia deploy
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/marginalia/**'
+      - 'packages/client/**'
+      - '.github/workflows/deploy-marginalia.yml'
+
+jobs:
+  build-and-deploy-marginalia:
+    name: Build and deploy marginalia
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 8.12.1
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --filter @marginalia.biscuits/web...
+
+      - name: Build marginalia
+        run: pnpm --filter @marginalia.biscuits/web... run build
+
+      - name: Deploy marginalia to S3
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --follow-symlinks --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.S3_BUCKET_MARGINALIA }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          SOURCE_DIR: './apps/marginalia/web/dist'
+
+      - name: Invalidate CloudFront cache
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          DISTRIBUTION: ${{ secrets.CLOUDFRONT_ID_MARGINALIA }}
+          PATHS: '/*'
+          AWS_REGION: 'us-east-1'

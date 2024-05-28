@@ -15,6 +15,8 @@ ENV CYPRESS_INSTALL_BINARY=0
 ENV PNPM_HOME=/usr/local/share/pnpm
 ENV PATH="$PNPM_HOME:$PATH"
 
+ENV VITE_APP_GNOCCHI_ORIGIN=https://gnocchi.biscuits.club
+
 FROM base as dev
 COPY ./pnpm-lock.yaml .
 RUN pnpm fetch

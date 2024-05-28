@@ -44,6 +44,7 @@ import { AddImagePrompt } from '@/components/recipes/cook/AddImagePrompt.jsx';
 import { CookingActionBar } from '@/components/recipes/cook/CookingActionBar.jsx';
 import { useWakeLock } from '@/hooks/useWakeLock.js';
 import { Icon } from '@/components/icons/Icon.jsx';
+import { RecipePublishControl } from './RecipePublishControl.jsx';
 
 export interface RecipeOverviewProps {
   slug: string;
@@ -100,6 +101,7 @@ function RecipeOverviewContent({ recipe }: { recipe: Recipe }) {
               <H1>{title}</H1>
               <div className="flex flex-row gap-1 flex-wrap items-center w-full">
                 <RecipeViewerEditButton recipe={recipe} />
+                <RecipePublishControl recipe={recipe} />
               </div>
               <div className="flex flex-col justify-between items-start w-full gap-3">
                 <div className="flex flex-row gap-1 flex-wrap">

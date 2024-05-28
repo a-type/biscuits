@@ -1,0 +1,17 @@
+export const PARAGRAPH_MARKERS = [
+  '\\p',
+  '\\m',
+  '\\po',
+  '\\pr',
+  '\\cls',
+  '\\pmo',
+  '\\pm',
+  '\\pmc',
+  '\\pmr',
+  '\\pi',
+  '\\mi',
+  '\\nb',
+  '\\pc',
+  '\\ph',
+  '\\b',
+];

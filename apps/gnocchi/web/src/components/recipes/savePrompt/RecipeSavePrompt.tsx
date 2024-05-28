@@ -42,7 +42,8 @@ export function RecipeSavePrompt({}: RecipeSavePromptProps) {
     }
   }, [slugParam]);
 
-  const isGnocchi = false;
+  const isGnocchi =
+    url.includes('gnocchi.biscuits.club') || url.includes('localhost:6124');
 
   const beginOnboarding = saveHubRecipeOnboarding.useBegin();
   const cancelOnboarding = saveHubRecipeOnboarding.useCancel();
@@ -102,7 +103,12 @@ export function RecipeSavePrompt({}: RecipeSavePromptProps) {
           Add a copy of this recipe to your collection and access it any time.
         </P>
         {!isGnocchi && (
-          <P style={{ textOverflow: 'ellipsis', overflow: 'hidden' }}>{url}</P>
+          <P
+            className="my-2"
+            style={{ textOverflow: 'ellipsis', overflow: 'hidden' }}
+          >
+            {url}
+          </P>
         )}
 
         <span className="text-sm">
