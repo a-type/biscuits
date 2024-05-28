@@ -193,8 +193,8 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
             className="mr-1"
           >
             <div
-              className="relative py-1 px-2"
-              // onContextMenu={preventDefault}
+              className="relative py-1 px-2 select-none"
+              onContextMenu={preventDefault}
               {...menuProps}
             >
               <OnboardingTooltip

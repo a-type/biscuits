@@ -91,6 +91,7 @@ function ThemedPageContentInner({
         fullHeight
         noPadding
         className={classNames(className, theme)}
+        id="page-content"
       >
         {children}
       </PageContent>

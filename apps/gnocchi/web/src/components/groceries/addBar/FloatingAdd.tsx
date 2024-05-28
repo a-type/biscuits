@@ -3,10 +3,11 @@ import { useListId } from '@/contexts/ListContext.jsx';
 import { hooks } from '@/stores/groceries/index.js';
 import { Button } from '@a-type/ui/components/button';
 import classNames from 'classnames';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import './FloatingAdd.css';
 import { AddPane } from '@/components/addBar/AddPane.jsx';
 import { useOnPointerDownOutside } from '@biscuits/client';
+import { stopPropagation } from '@a-type/utils';
 
 export interface FloatingAddProps {
   className?: string;
@@ -39,7 +40,7 @@ export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
   return (
     <div
       className={classNames(
-        'relative flex flex-col items-stretch justify-stretch w-full',
+        'relative flex flex-col items-stretch justify-stretch w-full z-100',
         'floating-add',
         // only visible on mobile
         'md:hidden',

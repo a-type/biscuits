@@ -49,7 +49,6 @@ export const GroceryList = forwardRef<HTMLDivElement, GroceryListProps>(
   function GroceryList({ ...rest }, ref) {
     const handleDragStart = useOnDragStart();
     const handleDragEnd = useOnDragEnd();
-    const handleDragOver = useOnDragOver();
     const handleDragCancel = useOnDragCancel();
 
     const sensors = useGroceryDndSensors();
@@ -60,7 +59,6 @@ export const GroceryList = forwardRef<HTMLDivElement, GroceryListProps>(
       <DndContext
         onDragStart={handleDragStart}
         onDragEnd={handleDragEnd}
-        onDragOver={handleDragOver}
         onDragCancel={handleDragCancel}
         sensors={sensors}
         modifiers={[snapCenterToCursor]}
@@ -190,6 +188,7 @@ function useOnDragStart() {
     groceriesState.draggedItemOriginalCategory = item.get('categoryId');
     groceriesState.isAnyItemDragged = true;
     navigator.vibrate?.(100);
+    document.body.style.setProperty('user-select', 'none');
   }, []);
 }
 
@@ -216,22 +215,10 @@ function useOnDragEnd() {
       }
       groceriesState.draggedItemOriginalCategory = null;
       groceriesState.isAnyItemDragged = false;
+      document.body.style.removeProperty('user-select');
     },
     [setItemCategory, deleteItem],
   );
-}
-
-function useOnDragOver() {
-  return useCallback(async ({ over, active }: DragOverEvent) => {
-    // if (!over) return;
-    // const item = (active.data.current as GroceryDnDDrag).value;
-    // const dropZone = over.data.current as GroceryDnDDrop;
-    // if (dropZone.type === 'category') {
-    // 	if (item.get('categoryId') !== dropZone.value) {
-    // 		await groceries.setItemCategory(item, dropZone.value);
-    // 	}
-    // }
-  }, []);
 }
 
 function useOnDragCancel() {
@@ -243,5 +230,8 @@ function useOnDragCancel() {
         groceriesState.draggedItemOriginalCategory,
       );
     }
+    groceriesState.draggedItemOriginalCategory = null;
+    groceriesState.isAnyItemDragged = false;
+    document.body.style.removeProperty('user-select');
   }, []);
 }

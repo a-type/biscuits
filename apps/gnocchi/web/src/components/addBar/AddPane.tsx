@@ -107,6 +107,10 @@ const AddPaneImpl = forwardRef<
 
   const noSuggestions = allSuggestions.length === 0;
 
+  const menuProps = getMenuProps({
+    ref: contentRef,
+  });
+
   return (
     <div
       className={classNames(
@@ -129,12 +133,11 @@ const AddPaneImpl = forwardRef<
         {...rest}
       />
       <div
-        {...getMenuProps({
-          ref: contentRef,
-        })}
+        {...menuProps}
         className={classNames(
           'flex flex-col overflow-x-hidden overflow-y-auto overscroll-contain max-h-[calc(var(--viewport-height,40vh)-80px)] lg:max-h-50vh w-full max-w-none gap-4 p-3',
         )}
+        onScroll={console.log}
       >
         {showSuggested && (
           <SuggestionGroup
