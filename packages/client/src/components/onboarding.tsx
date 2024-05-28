@@ -231,7 +231,7 @@ export const OnboardingTooltip = function OnboardingTooltip<
         disableBlur
         className={classNames(
           'theme-leek',
-          '!bg-primary-wash flex py-2 px-3',
+          'bg-primary-wash flex py-2 px-3',
           'overflow-visible',
         )}
         onInteractOutside={(event) => {

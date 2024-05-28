@@ -27,7 +27,7 @@ export function AddToListButton({
       disableNext
       // prevent interactions inside the dialog
       // from skipping the step
-      ignoreOutsideInteraction={(el) => !!el.closest('role="dialog"')}
+      ignoreOutsideInteraction={(el) => !!el.closest('[role="dialog"]')}
     >
       <div className={className}>
         <AddToListDialog recipe={recipe} listId={listId}>
