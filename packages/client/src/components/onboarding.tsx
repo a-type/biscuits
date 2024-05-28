@@ -82,10 +82,15 @@ export function createOnboarding<Steps extends StringTuple>(
     // a unique ID for this invocation of this hook. useful if there
     // are multiple mounted components using this same hook and name.
     const id = useId();
-    if (stepClaims[name] === undefined) {
-      stepClaims[name] = id;
-    }
-    const hasClaim = true; // stepClaims[name] === id;
+    const hasClaim = stepClaims[name] === id;
+    useEffect(() => {
+      if (!stepClaims[name]) {
+        stepClaims[name] = id;
+        return () => {
+          delete stepClaims[name];
+        };
+      }
+    }, [id]);
 
     const active = useSnapshot(state).active;
 

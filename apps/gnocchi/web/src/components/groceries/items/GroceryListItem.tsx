@@ -72,12 +72,11 @@ export interface GroceryListItemProps {
   isDragActive?: boolean;
   style?: CSSProperties;
   menuProps?: any;
-  first?: boolean;
 }
 
 export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
   function GroceryListItem(
-    { item, isDragActive, menuProps, className, first, ...rest },
+    { item, isDragActive, menuProps, className, ...rest },
     ref,
   ) {
     const { purchasedAt, comment, id, food, textOverride } =
@@ -198,18 +197,14 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
               // onContextMenu={preventDefault}
               {...menuProps}
             >
-              {first ? (
-                <OnboardingTooltip
-                  onboarding={categorizeOnboarding}
-                  step="categorize"
-                  content="Tap and hold to change category"
-                  disableNext
-                >
-                  <DragHandleDots2Icon className="text-gray-5 hover:text-white" />
-                </OnboardingTooltip>
-              ) : (
-                <DragHandleDots2Icon className="text-gray-5 hover:text-white" />
-              )}
+              <OnboardingTooltip
+                onboarding={categorizeOnboarding}
+                step="categorize"
+                content="Tap and hold to change category"
+                disableNext
+              >
+                <Icon name="grabby" className="text-gray-5" />
+              </OnboardingTooltip>
             </div>
           </div>
           <CollapsibleTrigger asChild>
