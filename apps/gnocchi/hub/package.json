@@ -10,12 +10,13 @@
     }
   },
   "scripts": {
-    "build": "pnpm run build:client && pnpm run build:server",
+    "build": "pnpm run build:client && pnpm run build:server && pnpm run typings",
     "build:client": "vite build --outDir dist/client",
-    "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server && tsc --declaration --emitDeclarationOnly",
-    "dev": "pnpm run dev:client && pnpm run dev:server && tsc --declaration --emitDeclarationOnly",
-    "dev:client": "vite build --mode development --outDir dist/client",
-    "dev:server": "vite build --mode development --ssr src/entry-server.tsx --outDir dist/server",
+    "build:server": "vite build --ssr src/entry-server.tsx --outDir dist/server",
+    "dev": "concurrently npm:dev:client npm:dev:server npm:typings",
+    "dev:client": "vite build --mode development --outDir dist/client --watch",
+    "dev:server": "vite build --mode development --ssr src/entry-server.tsx --outDir dist/server --watch",
+    "typings": "tsc --declaration --emitDeclarationOnly",
     "typecheck": "tsc --build tsconfig.json"
   },
   "dependencies": {

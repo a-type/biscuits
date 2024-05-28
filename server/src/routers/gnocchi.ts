@@ -48,6 +48,10 @@ async function staticFile(req: Request) {
     url.pathname.replace('/gnocchi/hubRecipe/', '/'),
   );
 
+  if (!fsSync.existsSync(filePath)) {
+    return new Response('Not found', { status: 404 });
+  }
+
   const file = await fs.readFile(filePath, 'utf-8');
   return new Response(file, {
     headers: {
@@ -79,6 +83,10 @@ gnocchiRouter.get('/hubRecipe/:planId/:recipeSlug', async (req) => {
     recipe.id,
   );
 
+  if (!snapshot) {
+    return new Response('Recipe not found', { status: 404 });
+  }
+
   const data: HubRecipeData = {
     id: recipe.id,
     title: snapshot.title,
@@ -87,6 +95,10 @@ gnocchiRouter.get('/hubRecipe/:planId/:recipeSlug', async (req) => {
     ingredients: snapshot.ingredients,
     instructions: snapshot.instructions,
     note: snapshot.note,
+    prepTimeMinutes: snapshot.prepTimeMinutes,
+    cookTimeMinutes: snapshot.cookTimeMinutes,
+    totalTimeMinutes: snapshot.totalTimeMinutes,
+    servings: snapshot.servings,
     publisher: {
       fullName: recipe.publisherFullName ?? 'Anonymous',
     },

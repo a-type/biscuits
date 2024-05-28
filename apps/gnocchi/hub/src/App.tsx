@@ -17,6 +17,7 @@ import {
 import { Note } from '@a-type/ui/components/note';
 import { H1, H2, P } from '@a-type/ui/components/typography';
 import { HubRecipeData } from './types.js';
+import { Chip } from '@a-type/ui/components/chip';
 
 export function App({
   recipe: data,
@@ -54,6 +55,33 @@ export function App({
               <P itemProp="author" className="p-author">
                 Published by {data.publisher?.fullName ?? 'Anonymous'}
               </P>
+              <div className="row flex-wrap">
+                {data.servings && <Chip>Serves {data.servings}</Chip>}
+                {data.prepTimeMinutes && (
+                  <>
+                    <Chip>Prep {data.prepTimeMinutes} min</Chip>
+                    <span className="hidden" itemProp="prepTime">
+                      P0Y0M0DT0H{data.prepTimeMinutes}M0S
+                    </span>
+                  </>
+                )}
+                {data.cookTimeMinutes && (
+                  <>
+                    <Chip>Cook {data.cookTimeMinutes} min</Chip>
+                    <span className="hidden" itemProp="cookTime">
+                      P0Y0M0DT0H{data.cookTimeMinutes}M0S
+                    </span>
+                  </>
+                )}
+                {data.totalTimeMinutes && (
+                  <>
+                    <Chip>Total {data.totalTimeMinutes} min</Chip>
+                    <span className="hidden" itemProp="totalTime">
+                      P0Y0M0DT0H{data.totalTimeMinutes}M0S
+                    </span>
+                  </>
+                )}
+              </div>
             </TopLineTitle>
           </TopLineRoot>
           {data.note && <Note className="self-start">{data.note}</Note>}

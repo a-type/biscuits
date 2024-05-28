@@ -156,7 +156,8 @@ export function parseInstructionInternalText($el: Cheerio<AnyNode>) {
     } else if (
       el.type === 'tag' &&
       ((el.name.startsWith('h') && el.name.length === 2) ||
-        el.name === 'strong')
+        el.name === 'strong' ||
+        el.attribs['data-section-title'] === 'true')
     ) {
       steps.push(currentStep);
       steps.push({ type: 'sectionTitle', content: $(el).text() });

@@ -74,6 +74,9 @@ builder.objectType('RecipeScan', {
     servings: t.exposeInt('servings', {
       nullable: true,
     }),
+    note: t.exposeString('note', {
+      nullable: true,
+    }),
   }),
 });
 
@@ -100,6 +103,12 @@ builder.objectType('RecipeScanDetailedIngredient', {
     preparations: t.exposeStringList('preparations', {
       nullable: true,
     }),
+    note: t.exposeString('note', {
+      nullable: true,
+    }),
+    isSectionHeader: t.exposeBoolean('isSectionHeader', {
+      nullable: true,
+    }),
   }),
 });
 
@@ -107,6 +116,9 @@ builder.objectType('RecipeScanDetailedStep', {
   fields: (t) => ({
     type: t.exposeString('type'),
     content: t.exposeString('content'),
+    note: t.exposeString('note', {
+      nullable: true,
+    }),
   }),
 });
 

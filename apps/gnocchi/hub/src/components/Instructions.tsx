@@ -130,7 +130,9 @@ const SectionTitle = Node.create({
   renderHTML({ HTMLAttributes }: any) {
     return [
       'h2',
-      mergeAttributes(this.options.HTMLAttributes, HTMLAttributes),
+      mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
+        'data-section-title': true,
+      }),
       0,
     ];
   },
@@ -156,7 +158,7 @@ function InstructionStepView({
         <NodeViewContent />
       </div>
       {node.attrs.note && (
-        <Note className="mt-2 ml-8 max-w-80% w-max-content">
+        <Note className="mt-2 ml-8 max-w-80% w-max-content" data-note="true">
           {node.attrs.note}
         </Note>
       )}

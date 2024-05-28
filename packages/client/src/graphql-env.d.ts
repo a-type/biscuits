@@ -1214,7 +1214,7 @@ export type introspection = {
                 }
               },
               {
-                "name": "id",
+                "name": "planId",
                 "type": {
                   "kind": "NON_NULL",
                   "ofType": {
@@ -2721,6 +2721,15 @@ export type introspection = {
             "args": []
           },
           {
+            "name": "note",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
             "name": "prepTimeMinutes",
             "type": {
               "kind": "SCALAR",
@@ -2830,6 +2839,24 @@ export type introspection = {
             "args": []
           },
           {
+            "name": "isSectionHeader",
+            "type": {
+              "kind": "SCALAR",
+              "name": "Boolean",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
+            "name": "note",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "args": []
+          },
+          {
             "name": "original",
             "type": {
               "kind": "NON_NULL",
@@ -2893,6 +2920,15 @@ export type introspection = {
                 "name": "String",
                 "ofType": null
               }
+            },
+            "args": []
+          },
+          {
+            "name": "note",
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "args": []
           },
