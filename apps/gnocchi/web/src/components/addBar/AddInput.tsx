@@ -50,7 +50,6 @@ export const AddInput = forwardRef<HTMLDivElement, AddInputProps>(
           autoComplete="off"
           tabIndex={disableInteraction ? -1 : 0}
           {...inputProps}
-          onFocus={console.log}
         />
         <div className="absolute flex flex-row-reverse gap-1 right-1 top-1">
           <Button

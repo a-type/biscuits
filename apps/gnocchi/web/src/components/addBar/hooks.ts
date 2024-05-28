@@ -369,7 +369,6 @@ function stateReducer(
   state: UseComboboxState<SuggestionData>,
   { type, changes, selectItem }: UseComboboxStateChangeOptions<SuggestionData>,
 ): Partial<UseComboboxState<SuggestionData>> {
-  console.log('stateReducer', type, changes, selectItem);
   if (
     changes.inputValue &&
     type === useCombobox.stateChangeTypes.InputKeyDownEnter &&
@@ -458,7 +457,6 @@ export function useAddBarCombobox({
     isOpen: open,
     onIsOpenChange: onOpenChange
       ? (changes) => {
-          console.log('onOpenChange', changes);
           onOpenChange(!!changes.isOpen);
         }
       : undefined,
