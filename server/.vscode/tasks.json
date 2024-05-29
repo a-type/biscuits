@@ -1,0 +1,34 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "dev",
+      "problemMatcher": [],
+      "label": "npm: dev",
+      "detail": "run-p dev:*"
+    },
+    {
+      "type": "npm",
+      "script": "write-schema",
+      "problemMatcher": [],
+      "label": "npm: write-schema",
+      "detail": "env-cmd tsx watch --conditions=development ./scripts/writeSchema.ts",
+      "runOptions": {
+        "runOn": "folderOpen",
+        "instanceLimit": 1,
+        "reevaluateOnRerun": true
+      },
+      "hide": true,
+      "isBackground": true,
+      "presentation": {
+        "echo": true,
+        "reveal": "never",
+        "focus": false,
+        "panel": "shared",
+        "showReuseMessage": true,
+        "clear": false
+      }
+    }
+  ]
+}

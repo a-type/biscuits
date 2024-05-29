@@ -1,5 +1,5 @@
-import { UsfmRenderer } from '@/components/usfm/UsfmRenderer.jsx';
 import { useSuspenseQuery } from '@tanstack/react-query';
+import { UsfmNode } from '../usfm/nodes.jsx';
 
 export interface BookProps {
   id: string;
@@ -12,7 +12,11 @@ export function Book({ id }: BookProps) {
     return <div>Loading...</div>;
   }
 
-  return <UsfmRenderer root={book} />;
+  return (
+    <article className="leading-loose">
+      <UsfmNode text={book} />
+    </article>
+  );
 }
 
 function useBook(id: string) {

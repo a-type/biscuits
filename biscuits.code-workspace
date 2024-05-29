@@ -1,0 +1,44 @@
+{
+  "folders": [
+    {
+      "path": "server",
+      "name": "💽 Server",
+    },
+    {
+      "path": "web",
+      "name": "🌐 Web",
+    },
+    {
+      "path": "packages",
+      "name": "📦 Packages",
+    },
+    {
+      "path": "apps/gnocchi",
+      "name": "🍝 Gnocchi",
+    },
+    {
+      "path": "apps/trip-tick",
+      "name": "🚗 Trip Tick",
+    },
+    {
+      "path": "apps/shopping",
+      "name": "🛒 Shopping",
+    },
+    {
+      "path": "apps/marginalia",
+      "name": "📚 Marginalia",
+    },
+    {
+      "path": "scripts",
+      "name": "📃 Scripts",
+    },
+    {
+      "path": "cdk",
+      "name": "🛠️ CDK",
+    },
+    {
+      "path": "blog",
+      "name": "📝 Blog",
+    },
+  ],
+}

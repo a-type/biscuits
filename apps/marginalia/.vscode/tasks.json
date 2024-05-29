@@ -1,0 +1,13 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "app-dev",
+      "path": "web",
+      "problemMatcher": [],
+      "label": "npm: app-dev - web",
+      "detail": "vite"
+    }
+  ]
+}
