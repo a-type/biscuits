@@ -6,8 +6,16 @@
       "script": "app-dev",
       "path": "web",
       "problemMatcher": [],
-      "label": "npm: app-dev - web",
+      "label": "Dev",
       "detail": "vite"
+    },
+    {
+      "type": "npm",
+      "script": "generate",
+      "path": "verdant",
+      "problemMatcher": [],
+      "label": "Generate",
+      "detail": "verdant -s ./src/schema.ts -o ./src/client -r"
     }
   ]
 }
