@@ -18,8 +18,8 @@ import { schema } from '@verdant-web/store';
  * For subsequent changes to your schema, use just `pnpm generate`.
  */
 
-const items = schema.collection({
-  name: 'item',
+const annotations = schema.collection({
+  name: 'annotation',
   primaryKey: 'id',
   fields: {
     id: schema.fields.string({
@@ -28,16 +28,38 @@ const items = schema.collection({
     content: schema.fields.string({
       default: '',
     }),
-    done: schema.fields.boolean({
-      default: false,
-    }),
     createdAt: schema.fields.number({
       default: () => Date.now(),
     }),
+    book: schema.fields.string(),
+    start: schema.fields.object({
+      properties: {
+        chapter: schema.fields.number(),
+        verse: schema.fields.number(),
+      },
+    }),
+    end: schema.fields.object({
+      properties: {
+        chapter: schema.fields.number(),
+        verse: schema.fields.number(),
+      },
+    }),
   },
   indexes: {
-    createdAt: {
-      field: 'createdAt',
+    book: {
+      field: 'book',
+    },
+    startsAt: {
+      type: 'string',
+      compute(doc) {
+        return `${doc.start.chapter}:${doc.start.verse}`;
+      },
+    },
+    endsAt: {
+      type: 'string',
+      compute(doc) {
+        return `${doc.end.chapter}:${doc.end.verse}`;
+      },
     },
   },
 });
@@ -45,6 +67,6 @@ const items = schema.collection({
 export default schema({
   version: 1,
   collections: {
-    items,
+    annotations,
   },
 });

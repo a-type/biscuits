@@ -13,8 +13,8 @@ import type {
   AnyEntity,
   EntityDestructured,
   EntityFile,
-  Item,
-  ItemFilter,
+  Annotation,
+  AnnotationFilter,
 } from "./index.js";
 
 type HookConfig<F> = {
@@ -81,32 +81,32 @@ export interface GeneratedHooks<Presence, Profile> {
    */
   useSync(isOn: boolean): void;
 
-  useItem(id: string, config?: { skip?: boolean }): Item | null;
-  useItemUnsuspended(
+  useAnnotation(id: string, config?: { skip?: boolean }): Annotation | null;
+  useAnnotationUnsuspended(
     id: string,
     config?: { skip?: boolean },
-  ): { data: Item | null; status: QueryStatus };
-  useOneItem: <Config extends HookConfig<ItemFilter>>(
+  ): { data: Annotation | null; status: QueryStatus };
+  useOneAnnotation: <Config extends HookConfig<AnnotationFilter>>(
     config?: Config,
-  ) => Item | null;
-  useOneItemsUnsuspended: <Config extends HookConfig<ItemFilter>>(
+  ) => Annotation | null;
+  useOneAnnotationsUnsuspended: <Config extends HookConfig<AnnotationFilter>>(
     config?: Config,
-  ) => { data: Item | null; status: QueryStatus };
-  useAllItems: <Config extends HookConfig<ItemFilter>>(
+  ) => { data: Annotation | null; status: QueryStatus };
+  useAllAnnotations: <Config extends HookConfig<AnnotationFilter>>(
     config?: Config,
-  ) => Item[];
-  useAllItemsUnsuspended: <Config extends HookConfig<ItemFilter>>(
+  ) => Annotation[];
+  useAllAnnotationsUnsuspended: <Config extends HookConfig<AnnotationFilter>>(
     config?: Config,
-  ) => { data: Item[]; status: QueryStatus };
-  useAllItemsPaginated: <
-    Config extends HookConfig<ItemFilter> & {
+  ) => { data: Annotation[]; status: QueryStatus };
+  useAllAnnotationsPaginated: <
+    Config extends HookConfig<AnnotationFilter> & {
       pageSize?: number;
       suspend?: false;
     },
   >(
     config?: Config,
   ) => [
-    Item[],
+    Annotation[],
     {
       next: () => void;
       previous: () => void;
@@ -116,15 +116,15 @@ export interface GeneratedHooks<Presence, Profile> {
       status: QueryStatus;
     },
   ];
-  useAllItemsInfinite: <
-    Config extends HookConfig<ItemFilter> & {
+  useAllAnnotationsInfinite: <
+    Config extends HookConfig<AnnotationFilter> & {
       pageSize?: number;
       suspend?: false;
     },
   >(
     config?: Config,
   ) => [
-    Item[],
+    Annotation[],
     { loadMore: () => void; hasMore: boolean; status: QueryStatus },
   ];
 }
