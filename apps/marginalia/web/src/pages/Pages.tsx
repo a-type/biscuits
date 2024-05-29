@@ -20,6 +20,11 @@ const routes = makeRoutes([
   {
     path: '/:code',
     component: HomePage,
+    exact: true,
+  },
+  {
+    path: '/:code/:chapter',
+    component: lazy(() => import('./ChapterPage.jsx')),
   },
   {
     path: '/settings',

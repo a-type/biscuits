@@ -1,4 +1,5 @@
 import { Book } from '@/components/text/Book.jsx';
+import { BookSelect } from '@/components/text/BookSelect.jsx';
 import { books } from '@/data/books.js';
 import { PageContent, PageFixedArea } from '@a-type/ui/components/layouts';
 import {
@@ -18,21 +19,12 @@ export function HomePage({}: HomePageProps) {
   return (
     <PageContent>
       <PageFixedArea className="items-start">
-        <Select
+        <BookSelect
           value={code}
           onValueChange={(val) => {
             navigate('/' + val);
           }}
-        >
-          <SelectTrigger />
-          <SelectContent>
-            {books.map((book) => (
-              <SelectItem value={book.id} key={book.id}>
-                {book.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        />
       </PageFixedArea>
       <Book id={code} />
     </PageContent>
