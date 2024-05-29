@@ -27,21 +27,6 @@ export class AppStack extends cdk.Stack {
       value: certificate.certificateArn,
     });
 
-    // automatically create CNAME required for certificate validation - need to get CNAME
-    // domain and content from the certificate.
-    // waitForCertificateValidation(certificate)
-    //   .then(({ cname, content }) => {
-    //     return createDnsRecord('biscuits.club', {
-    //       type: 'CNAME',
-    //       content,
-    //       name: cname,
-    //     });
-    //   })
-    //   .catch((err) => {
-    //     console.error('⚠️ FAILED TO CREATE DNS RECORD');
-    //     console.error(err);
-    //   });
-
     // create a cloudfront distribution
 
     const domains = [`${props.appId}.biscuits.club`];
@@ -89,14 +74,6 @@ export class AppStack extends cdk.Stack {
     new cdk.CfnOutput(this, 'DistributionId', {
       value: distribution.cloudFrontWebDistribution.distributionId,
     });
-
-    // addRepositoryVariable(
-    //   `CLOUDFRONT_ID_${props.appId.toUpperCase()}`,
-    //   distribution.cloudFrontWebDistribution.distributionId,
-    // ).catch((err) => {
-    //   console.error('⚠️ FAILED TO ADD DISTRIBUTION ID TO REPO VARIABLES');
-    //   console.error(err);
-    // });
 
     new cdk.CfnOutput(this, 'DistributionDomainName', {
       value: distribution.cloudFrontWebDistribution.distributionDomainName,

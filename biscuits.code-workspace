@@ -29,6 +29,10 @@
       "name": "📚 Marginalia",
     },
     {
+      "path": "apps/star-chart",
+      "name": "🌟 Star Chart",
+    },
+    {
       "path": "scripts",
       "name": "📃 Scripts",
     },
@@ -39,6 +43,10 @@
     {
       "path": "blog",
       "name": "📝 Blog",
+    },
+    {
+      "path": ".github/workflows",
+      "name": "🔧 Workflows",
     },
   ],
 }

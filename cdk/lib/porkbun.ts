@@ -14,6 +14,7 @@ export async function createDnsRecord(
     name?: string;
   },
 ) {
+  console.info('Creating DNS record:', record);
   const response = await fetch(
     `https://porkbun.com/api/json/v3/dns/create/${domain}`,
     {
@@ -28,4 +29,9 @@ export async function createDnsRecord(
       }),
     },
   );
+  if (!response.ok) {
+    throw new Error(`Failed to create DNS record: ${response.statusText}`);
+  }
+  const json = await response.json();
+  console.info('Response:', json);
 }

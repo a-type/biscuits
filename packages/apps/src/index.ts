@@ -106,6 +106,18 @@ export const apps: AppManifest<string>[] = [
     url: 'https://marginalia.biscuits.club',
     prerelease: true,
   } satisfies AppManifest<'marginalia'>,
+  {
+    id: 'star-chart',
+    demoVideoSrc: '',
+    description: 'TODO',
+    devOriginOverride: 'http://localhost:6224',
+    iconPath: 'icon.png',
+    name: 'Star Chart',
+    paidDescription: 'TODO',
+    paidFeatures: [],
+    url: 'https://star-chart.biscuits.club',
+    prerelease: true,
+  },
 ] as const;
 
 export type AppId = (typeof apps)[number]['id'];

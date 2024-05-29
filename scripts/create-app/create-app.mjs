@@ -79,6 +79,9 @@ const copyConfig = {
 
 await cpTpl(path.resolve(__dirname, `./template`), destinationDir, copyConfig);
 
+function constify(str) {
+  return str.toUpperCase().replace(/[^A-Z0-9]/g, '_');
+}
 const deployAction = `name: ${name} deploy
 on:
   push:
@@ -118,7 +121,7 @@ jobs:
         with:
           args: --follow-symlinks --delete
         env:
-          AWS_S3_BUCKET: \${{ secrets.S3_BUCKET_${appId.toUpperCase()} }}
+          AWS_S3_BUCKET: \${{ secrets.S3_BUCKET_${constify(appId)} }}
           AWS_ACCESS_KEY_ID: \${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: \${{ secrets.AWS_SECRET_ACCESS_KEY }}
           SOURCE_DIR: './apps/${appId}/web/dist'
@@ -128,7 +131,7 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: \${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: \${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          DISTRIBUTION: \${{ secrets.CLOUDFRONT_ID_${appId.toUpperCase()} }}
+          DISTRIBUTION: \${{ secrets.CLOUDFRONT_ID_${constify(appId)} }}
           PATHS: '/*'
           AWS_REGION: 'us-east-1'
 `;
