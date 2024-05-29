@@ -11,7 +11,10 @@
     "migrate": "dotenv biscuits-migrate",
     "typecheck": "tsc --noEmit",
     "write-schema": "env-cmd tsx watch --conditions=development ./scripts/writeSchema.ts",
-    "test": "vitest"
+    "test": "vitest",
+    "// these are here to make them easier to reference from the workspace": "",
+    "create-app": "cd .. && pnpm run create-app",
+    "create-migration": "cd .. && pnpm run create-migration"
   },
   "type": "module",
   "private": true,
