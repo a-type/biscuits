@@ -11,7 +11,7 @@
   "dependencies": {
     "@a-type/ui": "0.8.15",
     "@a-type/utils": "1.1.0",
-    "@marginalia.biscuits/verdant": "workspace:*",
+    "@{{todoId}}.biscuits/verdant": "workspace:*",
     "@biscuits/client": "workspace:*",
     "@react-spring/web": "^9.7.3",
     "@verdant-web/react-router": "^0.6.2",

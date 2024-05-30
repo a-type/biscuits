@@ -24,7 +24,7 @@ export type Participant = UserInfo<Profile, Presence>;
 export const hooks = createHooks<Presence, Profile>();
 
 export const clientDescriptor = new ClientDescriptor({
-  namespace: 'shopping',
+  namespace: '{{todoId}}',
   migrations,
 });
 
