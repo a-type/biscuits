@@ -3,6 +3,7 @@ import { checkForUpdate } from '@/updateState.js';
 import { H1 } from '@a-type/ui/components/typography';
 import { DarkModeToggle } from '@biscuits/client';
 import { PageContent } from '@a-type/ui/components/layouts';
+import { ManageStorage } from '@biscuits/client/storage';
 
 export interface SettingsPageProps {}
 
@@ -17,6 +18,7 @@ export function SettingsPage({}: SettingsPageProps) {
         <H1>Settings</H1>
         <div className="flex flex-col items-start w-full gap-4">
           <DarkModeToggle />
+          <ManageStorage />
         </div>
       </div>
     </PageContent>

@@ -2,19 +2,45 @@ import { StorageSchema } from "@verdant-web/common";
 declare const schema: StorageSchema;
 export default schema;
 
-export type ItemSnapshot = {
+export type ProjectSnapshot = { id: string; name: string; createdAt: number };
+export type ProjectInit = { id?: string; name: string; createdAt?: number };
+
+export type TaskSnapshot = {
   id: string;
-  content: string;
-  done: boolean;
+  projectId: string;
   createdAt: number;
+  content: string;
+  completedAt: number | null;
+  position: TaskPositionSnapshot;
 };
-export type ItemInit = {
+
+export type TaskPositionSnapshot = { x: number; y: number };
+export type TaskInit = {
   id?: string;
-  content?: string;
-  done?: boolean;
+  projectId: string;
   createdAt?: number;
+  content: string;
+  completedAt?: number | null;
+  position: TaskPositionInit;
+};
+
+export type TaskPositionInit = { x: number; y: number };
+
+export type ConnectionSnapshot = {
+  id: string;
+  createdAt: number;
+  sourceTaskId: string;
+  targetTaskId: string;
+};
+export type ConnectionInit = {
+  id?: string;
+  createdAt?: number;
+  sourceTaskId: string;
+  targetTaskId: string;
 };
 
 export type MigrationTypes = {
-  items: { init: ItemInit; snapshot: ItemSnapshot };
+  projects: { init: ProjectInit; snapshot: ProjectSnapshot };
+  tasks: { init: TaskInit; snapshot: TaskSnapshot };
+  connections: { init: ConnectionInit; snapshot: ConnectionSnapshot };
 };

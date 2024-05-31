@@ -10,7 +10,13 @@ import type {
 export * from "@verdant-web/store";
 
 export class Client<Presence = any, Profile = any> {
-  readonly items: CollectionQueries<Item, ItemInit, ItemFilter>;
+  readonly projects: CollectionQueries<Project, ProjectInit, ProjectFilter>;
+  readonly tasks: CollectionQueries<Task, TaskInit, TaskFilter>;
+  readonly connections: CollectionQueries<
+    Connection,
+    ConnectionInit,
+    ConnectionFilter
+  >;
 
   sync: BaseClient<Presence, Profile>["sync"];
   undoHistory: BaseClient<Presence, Profile>["undoHistory"];
@@ -65,46 +71,38 @@ import {
   EntityFileSnapshot,
 } from "@verdant-web/store";
 
-/** Generated types for Item */
+/** Generated types for Project */
 
-export type Item = ObjectEntity<ItemInit, ItemDestructured, ItemSnapshot>;
-export type ItemId = string;
-export type ItemContent = string;
-export type ItemDone = boolean;
-export type ItemCreatedAt = number;
-export type ItemInit = {
-  id?: string;
-  content?: string;
-  done?: boolean;
-  createdAt?: number;
-};
+export type Project = ObjectEntity<
+  ProjectInit,
+  ProjectDestructured,
+  ProjectSnapshot
+>;
+export type ProjectId = string;
+export type ProjectName = string;
+export type ProjectCreatedAt = number;
+export type ProjectInit = { id?: string; name: string; createdAt?: number };
 
-export type ItemDestructured = {
+export type ProjectDestructured = {
   id: string;
-  content: string;
-  done: boolean;
+  name: string;
   createdAt: number;
 };
 
-export type ItemSnapshot = {
-  id: string;
-  content: string;
-  done: boolean;
-  createdAt: number;
-};
+export type ProjectSnapshot = { id: string; name: string; createdAt: number };
 
-/** Index filters for Item **/
+/** Index filters for Project **/
 
-export interface ItemCreatedAtSortFilter {
+export interface ProjectCreatedAtSortFilter {
   where: "createdAt";
   order: "asc" | "desc";
 }
-export interface ItemCreatedAtMatchFilter {
+export interface ProjectCreatedAtMatchFilter {
   where: "createdAt";
   equals: number;
   order?: "asc" | "desc";
 }
-export interface ItemCreatedAtRangeFilter {
+export interface ProjectCreatedAtRangeFilter {
   where: "createdAt";
   gte?: number;
   gt?: number;
@@ -112,7 +110,171 @@ export interface ItemCreatedAtRangeFilter {
   lt?: number;
   order?: "asc" | "desc";
 }
-export type ItemFilter =
-  | ItemCreatedAtSortFilter
-  | ItemCreatedAtMatchFilter
-  | ItemCreatedAtRangeFilter;
+export type ProjectFilter =
+  | ProjectCreatedAtSortFilter
+  | ProjectCreatedAtMatchFilter
+  | ProjectCreatedAtRangeFilter;
+
+/** Generated types for Task */
+
+export type Task = ObjectEntity<TaskInit, TaskDestructured, TaskSnapshot>;
+export type TaskId = string;
+export type TaskProjectId = string;
+export type TaskCreatedAt = number;
+export type TaskContent = string;
+export type TaskCompletedAt = number;
+export type TaskPosition = ObjectEntity<
+  TaskPositionInit,
+  TaskPositionDestructured,
+  TaskPositionSnapshot
+>;
+export type TaskPositionX = number;
+export type TaskPositionY = number;
+export type TaskInit = {
+  id?: string;
+  projectId: string;
+  createdAt?: number;
+  content: string;
+  completedAt?: number | null;
+  position: TaskPositionInit;
+};
+
+export type TaskPositionInit = { x: number; y: number };
+export type TaskDestructured = {
+  id: string;
+  projectId: string;
+  createdAt: number;
+  content: string;
+  completedAt: number | null;
+  position: TaskPosition;
+};
+
+export type TaskPositionDestructured = { x: number; y: number };
+export type TaskSnapshot = {
+  id: string;
+  projectId: string;
+  createdAt: number;
+  content: string;
+  completedAt: number | null;
+  position: TaskPositionSnapshot;
+};
+
+export type TaskPositionSnapshot = { x: number; y: number };
+
+/** Index filters for Task **/
+
+export interface TaskProjectIdSortFilter {
+  where: "projectId";
+  order: "asc" | "desc";
+}
+export interface TaskProjectIdMatchFilter {
+  where: "projectId";
+  equals: string;
+  order?: "asc" | "desc";
+}
+export interface TaskProjectIdRangeFilter {
+  where: "projectId";
+  gte?: string;
+  gt?: string;
+  lte?: string;
+  lt?: string;
+  order?: "asc" | "desc";
+}
+export interface TaskProjectIdStartsWithFilter {
+  where: "projectId";
+  startsWith: string;
+  order?: "asc" | "desc";
+}
+export type TaskFilter =
+  | TaskProjectIdSortFilter
+  | TaskProjectIdMatchFilter
+  | TaskProjectIdRangeFilter
+  | TaskProjectIdStartsWithFilter;
+
+/** Generated types for Connection */
+
+export type Connection = ObjectEntity<
+  ConnectionInit,
+  ConnectionDestructured,
+  ConnectionSnapshot
+>;
+export type ConnectionId = string;
+export type ConnectionCreatedAt = number;
+export type ConnectionSourceTaskId = string;
+export type ConnectionTargetTaskId = string;
+export type ConnectionInit = {
+  id?: string;
+  createdAt?: number;
+  sourceTaskId: string;
+  targetTaskId: string;
+};
+
+export type ConnectionDestructured = {
+  id: string;
+  createdAt: number;
+  sourceTaskId: string;
+  targetTaskId: string;
+};
+
+export type ConnectionSnapshot = {
+  id: string;
+  createdAt: number;
+  sourceTaskId: string;
+  targetTaskId: string;
+};
+
+/** Index filters for Connection **/
+
+export interface ConnectionSourceTaskIdSortFilter {
+  where: "sourceTaskId";
+  order: "asc" | "desc";
+}
+export interface ConnectionSourceTaskIdMatchFilter {
+  where: "sourceTaskId";
+  equals: string;
+  order?: "asc" | "desc";
+}
+export interface ConnectionSourceTaskIdRangeFilter {
+  where: "sourceTaskId";
+  gte?: string;
+  gt?: string;
+  lte?: string;
+  lt?: string;
+  order?: "asc" | "desc";
+}
+export interface ConnectionSourceTaskIdStartsWithFilter {
+  where: "sourceTaskId";
+  startsWith: string;
+  order?: "asc" | "desc";
+}
+export interface ConnectionTargetTaskIdSortFilter {
+  where: "targetTaskId";
+  order: "asc" | "desc";
+}
+export interface ConnectionTargetTaskIdMatchFilter {
+  where: "targetTaskId";
+  equals: string;
+  order?: "asc" | "desc";
+}
+export interface ConnectionTargetTaskIdRangeFilter {
+  where: "targetTaskId";
+  gte?: string;
+  gt?: string;
+  lte?: string;
+  lt?: string;
+  order?: "asc" | "desc";
+}
+export interface ConnectionTargetTaskIdStartsWithFilter {
+  where: "targetTaskId";
+  startsWith: string;
+  order?: "asc" | "desc";
+}
+export type ConnectionFilter =
+  | ConnectionSourceTaskIdSortFilter
+  | ConnectionSourceTaskIdMatchFilter
+  | ConnectionSourceTaskIdRangeFilter
+  | ConnectionSourceTaskIdStartsWithFilter
+  | ConnectionTargetTaskIdSortFilter
+  | ConnectionTargetTaskIdMatchFilter
+  | ConnectionTargetTaskIdRangeFilter
+  | ConnectionTargetTaskIdStartsWithFilter;

@@ -1,3 +1,4 @@
+import { getVerdantSync } from '@biscuits/client';
 import {
   ClientDescriptor,
   createHooks,
@@ -10,6 +11,8 @@ export interface Presence {
    * Put any transient presence state for users
    * you want here
    */
+  cursorActive: boolean;
+  cursorPosition?: { x: number; y: number };
 }
 
 // should match server
@@ -24,8 +27,16 @@ export type Participant = UserInfo<Profile, Presence>;
 export const hooks = createHooks<Presence, Profile>();
 
 export const clientDescriptor = new ClientDescriptor({
-  namespace: 'shopping',
+  namespace: 'star-chart',
   migrations,
+  sync: getVerdantSync({
+    appId: 'star-chart',
+    initialPresence: {
+      cursorActive: false,
+      cursorPosition: undefined,
+    },
+    access: 'members',
+  }),
 });
 
 // these are some helpers I like to use. You can delete them if you want.

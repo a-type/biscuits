@@ -16,10 +16,10 @@ export default defineConfig(({ command, mode }) => ({
       srcDir: 'src',
       filename: 'service-worker.ts',
       manifest: {
-        id: 'trip-tick-main',
-        name: 'Trip Tick',
-        short_name: 'Trip Tick',
-        description: 'Stress-free trip packing',
+        id: 'star-chart-main',
+        name: 'Star Chart',
+        short_name: 'Star Chart',
+        description: 'A simple project planner',
         theme_color: '#ffffff',
         background_color: '#ffffff',
         icons: icons(),
@@ -55,7 +55,7 @@ export default defineConfig(({ command, mode }) => ({
     },
   },
   server: {
-    port: 6221,
+    port: 6224,
   },
   build: {
     sourcemap: true,

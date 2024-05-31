@@ -13,8 +13,12 @@ import type {
   AnyEntity,
   EntityDestructured,
   EntityFile,
-  Item,
-  ItemFilter,
+  Project,
+  ProjectFilter,
+  Task,
+  TaskFilter,
+  Connection,
+  ConnectionFilter,
 } from "./index.js";
 
 type HookConfig<F> = {
@@ -81,32 +85,32 @@ export interface GeneratedHooks<Presence, Profile> {
    */
   useSync(isOn: boolean): void;
 
-  useItem(id: string, config?: { skip?: boolean }): Item | null;
-  useItemUnsuspended(
+  useProject(id: string, config?: { skip?: boolean }): Project | null;
+  useProjectUnsuspended(
     id: string,
     config?: { skip?: boolean },
-  ): { data: Item | null; status: QueryStatus };
-  useOneItem: <Config extends HookConfig<ItemFilter>>(
+  ): { data: Project | null; status: QueryStatus };
+  useOneProject: <Config extends HookConfig<ProjectFilter>>(
     config?: Config,
-  ) => Item | null;
-  useOneItemsUnsuspended: <Config extends HookConfig<ItemFilter>>(
+  ) => Project | null;
+  useOneProjectsUnsuspended: <Config extends HookConfig<ProjectFilter>>(
     config?: Config,
-  ) => { data: Item | null; status: QueryStatus };
-  useAllItems: <Config extends HookConfig<ItemFilter>>(
+  ) => { data: Project | null; status: QueryStatus };
+  useAllProjects: <Config extends HookConfig<ProjectFilter>>(
     config?: Config,
-  ) => Item[];
-  useAllItemsUnsuspended: <Config extends HookConfig<ItemFilter>>(
+  ) => Project[];
+  useAllProjectsUnsuspended: <Config extends HookConfig<ProjectFilter>>(
     config?: Config,
-  ) => { data: Item[]; status: QueryStatus };
-  useAllItemsPaginated: <
-    Config extends HookConfig<ItemFilter> & {
+  ) => { data: Project[]; status: QueryStatus };
+  useAllProjectsPaginated: <
+    Config extends HookConfig<ProjectFilter> & {
       pageSize?: number;
       suspend?: false;
     },
   >(
     config?: Config,
   ) => [
-    Item[],
+    Project[],
     {
       next: () => void;
       previous: () => void;
@@ -116,15 +120,109 @@ export interface GeneratedHooks<Presence, Profile> {
       status: QueryStatus;
     },
   ];
-  useAllItemsInfinite: <
-    Config extends HookConfig<ItemFilter> & {
+  useAllProjectsInfinite: <
+    Config extends HookConfig<ProjectFilter> & {
       pageSize?: number;
       suspend?: false;
     },
   >(
     config?: Config,
   ) => [
-    Item[],
+    Project[],
+    { loadMore: () => void; hasMore: boolean; status: QueryStatus },
+  ];
+
+  useTask(id: string, config?: { skip?: boolean }): Task | null;
+  useTaskUnsuspended(
+    id: string,
+    config?: { skip?: boolean },
+  ): { data: Task | null; status: QueryStatus };
+  useOneTask: <Config extends HookConfig<TaskFilter>>(
+    config?: Config,
+  ) => Task | null;
+  useOneTasksUnsuspended: <Config extends HookConfig<TaskFilter>>(
+    config?: Config,
+  ) => { data: Task | null; status: QueryStatus };
+  useAllTasks: <Config extends HookConfig<TaskFilter>>(
+    config?: Config,
+  ) => Task[];
+  useAllTasksUnsuspended: <Config extends HookConfig<TaskFilter>>(
+    config?: Config,
+  ) => { data: Task[]; status: QueryStatus };
+  useAllTasksPaginated: <
+    Config extends HookConfig<TaskFilter> & {
+      pageSize?: number;
+      suspend?: false;
+    },
+  >(
+    config?: Config,
+  ) => [
+    Task[],
+    {
+      next: () => void;
+      previous: () => void;
+      setPage: (page: number) => void;
+      hasNext: boolean;
+      hasPrevious: boolean;
+      status: QueryStatus;
+    },
+  ];
+  useAllTasksInfinite: <
+    Config extends HookConfig<TaskFilter> & {
+      pageSize?: number;
+      suspend?: false;
+    },
+  >(
+    config?: Config,
+  ) => [
+    Task[],
+    { loadMore: () => void; hasMore: boolean; status: QueryStatus },
+  ];
+
+  useConnection(id: string, config?: { skip?: boolean }): Connection | null;
+  useConnectionUnsuspended(
+    id: string,
+    config?: { skip?: boolean },
+  ): { data: Connection | null; status: QueryStatus };
+  useOneConnection: <Config extends HookConfig<ConnectionFilter>>(
+    config?: Config,
+  ) => Connection | null;
+  useOneConnectionsUnsuspended: <Config extends HookConfig<ConnectionFilter>>(
+    config?: Config,
+  ) => { data: Connection | null; status: QueryStatus };
+  useAllConnections: <Config extends HookConfig<ConnectionFilter>>(
+    config?: Config,
+  ) => Connection[];
+  useAllConnectionsUnsuspended: <Config extends HookConfig<ConnectionFilter>>(
+    config?: Config,
+  ) => { data: Connection[]; status: QueryStatus };
+  useAllConnectionsPaginated: <
+    Config extends HookConfig<ConnectionFilter> & {
+      pageSize?: number;
+      suspend?: false;
+    },
+  >(
+    config?: Config,
+  ) => [
+    Connection[],
+    {
+      next: () => void;
+      previous: () => void;
+      setPage: (page: number) => void;
+      hasNext: boolean;
+      hasPrevious: boolean;
+      status: QueryStatus;
+    },
+  ];
+  useAllConnectionsInfinite: <
+    Config extends HookConfig<ConnectionFilter> & {
+      pageSize?: number;
+      suspend?: false;
+    },
+  >(
+    config?: Config,
+  ) => [
+    Connection[],
     { loadMore: () => void; hasMore: boolean; status: QueryStatus },
   ];
 }

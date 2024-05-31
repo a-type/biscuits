@@ -13,7 +13,12 @@ import { ReloadButton } from '@biscuits/client';
 const routes = makeRoutes([
   {
     path: '/',
+    exact: true,
     component: HomePage,
+  },
+  {
+    path: '/project/:projectId',
+    component: lazy(() => import('./ProjectPage.jsx')),
   },
   {
     path: '/settings',
