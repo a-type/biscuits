@@ -7,7 +7,7 @@ import { IconSpritesheet } from '@a-type/ui/components/icon';
 import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
 import { TooltipProvider } from '@a-type/ui/components/tooltip';
 import { ParticleLayer } from '@a-type/ui/components/particles';
-import { ReloadButton } from '@biscuits/client';
+import { PrereleaseWarning, ReloadButton } from '@biscuits/client';
 import { H1, P } from '@a-type/ui/components/typography';
 
 export interface AppProps {}
@@ -21,6 +21,7 @@ export function App({}: AppProps) {
         <Suspense>
           <VerdantProvider>
             <ParticleLayer>
+              <PrereleaseWarning />
               <Pages />
               <Toaster
                 position="bottom-center"

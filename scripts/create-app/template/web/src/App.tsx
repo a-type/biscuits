@@ -14,6 +14,7 @@ import {
   Provider,
   createGraphQLClient,
   AppPreviewNotice,
+  PrereleaseWarning,
 } from '@biscuits/client';
 
 export interface AppProps {}
@@ -41,6 +42,7 @@ export function App({}: AppProps) {
             <VerdantProvider>
               <ParticleLayer>
                 <AppPreviewNotice />
+                <PrereleaseWarning />
                 <Pages />
                 <Toaster
                   position="bottom-center"
