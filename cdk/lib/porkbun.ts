@@ -31,6 +31,8 @@ export async function createDnsRecord(
   );
   if (!response.ok) {
     throw new Error(`Failed to create DNS record: ${response.statusText}`);
+  } else {
+    console.info('✅ DNS record created');
   }
   const json = await response.json();
   console.info('Response:', json);

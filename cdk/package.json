@@ -8,7 +8,8 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "vitest",
-    "cdk": "cdk"
+    "cdk-raw": "cdk",
+    "cdk": "env-cmd tsx ./bin/wrapper.ts"
   },
   "devDependencies": {
     "@types/node": "20.12.7",
@@ -24,6 +25,8 @@
     "@biscuits/apps": "workspace:*",
     "@octokit/rest": "^20.1.1",
     "aws-cdk-lib": "2.141.0",
+    "dotenv": "16.4.5",
+    "env-cmd": "10.1.0",
     "constructs": "^10.0.0",
     "source-map-support": "^0.5.21"
   }

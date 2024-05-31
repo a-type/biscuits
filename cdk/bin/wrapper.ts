@@ -12,9 +12,9 @@ import { spawn } from 'child_process';
 import { createDnsRecord } from '../lib/porkbun.js';
 import { addRepositoryVariable } from '../lib/github.js';
 
-const appId = process.argv[2];
+const appId = process.argv[3];
 
-const cdk = spawn('pnpm', ['cdk', 'deploy', appId], {
+const cdk = spawn('pnpm', ['cdk-raw', 'deploy', appId], {
   stdio: ['ignore', 'pipe', 'pipe'],
 });
 
@@ -57,6 +57,18 @@ cdk.stdout.on('data', (data) => {
   if (cfMatch) {
     const cfId = cfMatch[1];
     addRepositoryVariable('CLOUDFRONT_ID_' + constify(appId), cfId);
+  }
+
+  // detect Cloudfront domain and add a CNAME record to porkbun
+  // Looks like: app-id.DistributionDomainName = BLAH
+  const cfDomainMatch = data.toString().match(/DistributionDomainName = (.+)/);
+  if (cfDomainMatch) {
+    const domain = cfDomainMatch[1];
+    createDnsRecord('biscuits.club', {
+      type: 'CNAME',
+      name: appId,
+      content: domain,
+    });
   }
 });
 
