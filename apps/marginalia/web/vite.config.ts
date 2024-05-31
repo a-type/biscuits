@@ -17,9 +17,9 @@ export default defineConfig(({ command, mode }) => ({
       filename: 'service-worker.ts',
       manifest: {
         id: 'trip-tick-main',
-        name: 'Trip Tick',
-        short_name: 'Trip Tick',
-        description: 'Stress-free trip packing',
+        name: 'Marginalia',
+        short_name: 'Marginalia',
+        description: 'A Bible app for normal people',
         theme_color: '#ffffff',
         background_color: '#ffffff',
         icons: icons(),
