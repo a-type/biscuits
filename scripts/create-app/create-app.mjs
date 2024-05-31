@@ -115,6 +115,10 @@ jobs:
 
       - name: Build ${appId}
         run: pnpm --filter @${appId}.biscuits/web... run build
+        env:
+          VITE_API_ORIGIN: \${{ vars.API_ORIGIN }}
+          VITE_HOME_ORIGIN: \${{ vars.HOME_ORIGIN }}
+          VITE_PUBLIC_URL: https://${appId}.biscuits.club
 
       - name: Deploy ${appId} to S3
         uses: jakejarvis/s3-sync-action@master
