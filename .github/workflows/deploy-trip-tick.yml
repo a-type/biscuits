@@ -5,6 +5,7 @@ on:
     paths:
       - 'apps/trip-tick/**'
       - 'packages/client/**'
+      - 'packages/apps/**'
       - '.github/workflows/deploy-trip-tick.yml'
 
 jobs:

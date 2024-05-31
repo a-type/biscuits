@@ -5,6 +5,7 @@ on:
     paths:
       - 'apps/gnocchi/**'
       - 'packages/client/**'
+      - 'packages/apps/**'
       - '.github/workflows/deploy-gnocchi.yml'
 
 jobs:

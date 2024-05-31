@@ -5,6 +5,7 @@ on:
     paths:
       - 'apps/marginalia/**'
       - 'packages/client/**'
+      - 'packages/apps/**'
       - '.github/workflows/deploy-marginalia.yml'
 
 jobs:

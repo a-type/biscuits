@@ -5,6 +5,7 @@ on:
     paths:
       - 'web/**'
       - 'packages/client/**'
+      - 'packages/apps/**'
       - '.github/workflows/deploy-home.yml'
 
 jobs:

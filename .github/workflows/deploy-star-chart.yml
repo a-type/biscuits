@@ -5,6 +5,7 @@ on:
     paths:
       - 'apps/star-chart/**'
       - 'packages/client/**'
+      - 'packages/apps/**'
       - '.github/workflows/deploy-star-chart.yml'
 
 jobs:
