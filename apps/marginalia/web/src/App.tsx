@@ -42,7 +42,7 @@ export function App({}: AppProps) {
       <TooltipProvider>
         <Suspense>
           <Provider
-            appId="bible"
+            appId="marginalia"
             graphqlClient={graphqlClient}
             storeDescriptor={clientDescriptor as any}
           >

@@ -20,7 +20,7 @@ export type PaidFeature = {
   family?: boolean;
 };
 
-export const apps: AppManifest<string>[] = [
+export const apps = [
   {
     id: 'gnocchi',
     url: 'https://gnocchi.biscuits.club',
@@ -117,7 +117,7 @@ export const apps: AppManifest<string>[] = [
     paidFeatures: [],
     url: 'https://star-chart.biscuits.club',
     prerelease: true,
-  },
+  } satisfies AppManifest<'star-chart'>,
 ] as const;
 
 export type AppId = (typeof apps)[number]['id'];
