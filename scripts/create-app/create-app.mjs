@@ -122,15 +122,15 @@ jobs:
           args: --follow-symlinks --delete
         env:
           AWS_S3_BUCKET: \${{ secrets.S3_BUCKET_${constify(appId)} }}
-          AWS_ACCESS_KEY_ID: \${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: \${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: \${{ secrets.DEPLOYER_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: \${{ secrets.DEPLOYER_AWS_SECRET_ACCESS_KEY }}
           SOURCE_DIR: './apps/${appId}/web/dist'
 
       - name: Invalidate CloudFront cache
         uses: chetan/invalidate-cloudfront-action@v2
         env:
-          AWS_ACCESS_KEY_ID: \${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: \${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: \${{ secrets.DEPLOYER_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: \${{ secrets.DEPLOYER_AWS_SECRET_ACCESS_KEY }}
           DISTRIBUTION: \${{ secrets.CLOUDFRONT_ID_${constify(appId)} }}
           PATHS: '/*'
           AWS_REGION: 'us-east-1'
