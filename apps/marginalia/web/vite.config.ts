@@ -16,7 +16,7 @@ export default defineConfig(({ command, mode }) => ({
       srcDir: 'src',
       filename: 'service-worker.ts',
       manifest: {
-        id: 'trip-tick-main',
+        id: 'marginalia-main',
         name: 'Marginalia',
         short_name: 'Marginalia',
         description: 'A Bible app for normal people',
