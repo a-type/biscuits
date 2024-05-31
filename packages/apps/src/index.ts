@@ -55,7 +55,7 @@ export const apps = [
     ],
     paidDescription:
       'Your personal cooking app becomes a family groceries list and recipe box.',
-  } satisfies AppManifest<'gnocchi'>,
+  } as AppManifest<'gnocchi'>,
   {
     id: 'trip-tick',
     url: 'https://trip-tick.biscuits.club',
@@ -81,7 +81,7 @@ export const apps = [
     ],
     paidDescription:
       'Now everyone can be on the same page when packing. Plus, get a weather forecast and more powerful trip planning tools.',
-  } satisfies AppManifest<'trip-tick'>,
+  } as AppManifest<'trip-tick'>,
   {
     id: 'shopping',
     demoVideoSrc: '',
@@ -93,7 +93,7 @@ export const apps = [
     paidFeatures: [],
     url: 'https://shopping.biscuits.club',
     prerelease: true,
-  } satisfies AppManifest<'shopping'>,
+  } as AppManifest<'shopping'>,
   {
     id: 'marginalia',
     demoVideoSrc: '',
@@ -105,7 +105,7 @@ export const apps = [
     paidFeatures: [],
     url: 'https://marginalia.biscuits.club',
     prerelease: true,
-  } satisfies AppManifest<'marginalia'>,
+  } as AppManifest<'marginalia'>,
   {
     id: 'star-chart',
     demoVideoSrc: '',
@@ -117,7 +117,7 @@ export const apps = [
     paidFeatures: [],
     url: 'https://star-chart.biscuits.club',
     prerelease: true,
-  } satisfies AppManifest<'star-chart'>,
+  } as AppManifest<'star-chart'>,
 ] as const;
 
 export type AppId = (typeof apps)[number]['id'];
