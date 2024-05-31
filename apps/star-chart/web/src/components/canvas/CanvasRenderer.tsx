@@ -7,6 +7,7 @@ import { ViewportEventOrigin } from './Viewport.js';
 import { ReactNode, useEffect, useState } from 'react';
 import { useGesture } from '@use-gesture/react';
 import { PresenceCursors } from './PresenceCursors.jsx';
+import { useCanvas } from './CanvasProvider.jsx';
 
 const VIEWPORT_ORIGIN_SPRINGS = {
   control: SPRINGS.QUICK,
@@ -100,6 +101,8 @@ export const CanvasRenderer = ({
     },
   });
 
+  const canvas = useCanvas();
+
   return (
     <animated.div
       className="absolute origin-center overflow-visible overscroll-none touch-none"
@@ -115,6 +118,8 @@ export const CanvasRenderer = ({
         }),
         // @ts-ignore
         '--zoom': zoom,
+        // @ts-ignore
+        '--grid-size': `${canvas.snapIncrement > 1 ? canvas.snapIncrement : 24}px`,
       }}
       {...bindGestures()}
     >

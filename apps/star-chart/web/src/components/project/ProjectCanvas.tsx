@@ -8,6 +8,9 @@ import { CanvasRenderer } from '../canvas/CanvasRenderer.jsx';
 import { Vector2 } from '../canvas/types.js';
 import { CanvasObject } from '../canvas/CanvasObject.jsx';
 import { TaskNode } from './TaskNode.jsx';
+import { CanvasSvgLayer } from '../canvas/CanvasSvgLayer.jsx';
+import { ConnectionWire } from './ConnectionWire.jsx';
+import { roundVector, snapVector } from '../canvas/math.js';
 
 export interface ProjectCanvasProps {
   project: Project;
@@ -21,14 +24,32 @@ export function ProjectCanvas({ project }: ProjectCanvasProps) {
       equals: projectId,
     },
   });
+  const connections = hooks.useAllConnections({
+    index: {
+      where: 'projectId',
+      equals: projectId,
+    },
+  });
   const addTask = useAddTask(projectId);
 
   return (
     <ViewportProvider>
-      <CanvasProvider>
+      <CanvasProvider
+        options={{
+          positionSnapIncrement: 24,
+        }}
+      >
         <ViewportRoot>
           <CanvasRenderer onTap={addTask}>
             <CanvasWallpaper />
+            <CanvasSvgLayer id="connections">
+              {connections.map((connection) => (
+                <ConnectionWire
+                  key={connection.get('id')}
+                  connection={connection}
+                />
+              ))}
+            </CanvasSvgLayer>
             {tasks.map((task) => (
               <TaskNode key={task.get('id')} task={task} />
             ))}
@@ -43,11 +64,10 @@ function useAddTask(projectId: string) {
   const client = hooks.useClient();
   return useCallback(
     (position: Vector2) => {
-      console.debug('Adding task at', position);
       client.tasks.put({
         projectId,
         content: 'New Task',
-        position,
+        position: snapVector(position, 24),
       });
     },
     [client],

@@ -24,6 +24,7 @@ import {
 } from '@a-type/utils';
 import { clsx } from '@a-type/ui';
 import { useRerasterize } from './rerasterizeSignal.js';
+import { useEffectOnce, useMergedRef } from '@biscuits/client';
 
 export interface CanvasObjectRootProps {
   children: ReactNode;
@@ -40,10 +41,20 @@ export function CanvasObjectRoot({
   const ref = useRef<HTMLDivElement>(null);
   useRerasterize(ref);
 
+  const canvas = useCanvas();
+  const observe = useCallback(
+    (el: HTMLElement | null) => {
+      return canvas.bounds.observe(canvasObject.id, el);
+    },
+    [canvas, canvasObject.id],
+  );
+
+  const finalRef = useMergedRef(ref, observe);
+
   return (
     <CanvasObjectContext.Provider value={canvasObject}>
       <animated.div
-        ref={ref}
+        ref={finalRef}
         className={clsx('absolute', className)}
         onKeyDown={stopPropagation}
         onKeyUp={stopPropagation}
@@ -67,6 +78,7 @@ export interface CanvasObject {
   isGrabbing: boolean;
   rootProps: any;
   moveTo: (position: Vector2, interpolate?: boolean) => void;
+  id: string;
 }
 
 const CanvasObjectContext = createContext<CanvasObject | null>(null);
@@ -84,45 +96,44 @@ export function useCanvasObjectContext() {
 export function useCanvasObject({
   initialPosition,
   objectId,
-  onDrop: onMove,
   zIndex = 0,
+  onDrop,
 }: {
   initialPosition: Vector2;
   objectId: string;
   onDrop: (pos: Vector2) => any;
   zIndex?: number;
 }) {
-  const {
-    style: dragStyle,
-    pickupSpring,
-    dragSpring,
-    isGrabbing,
-    bindDragHandle,
-  } = useDrag({ initialPosition, objectId });
+  const canvas = useCanvas();
+
+  const { pickupSpring, isGrabbing, bindDragHandle } = useDrag({
+    initialPosition,
+    objectId,
+  });
 
   /**
    * ONLY MOVES THE VISUAL NODE.
    * Update the actual backing data to make real movements.
+   * This should be hooked up to backing data changes.
    */
   const moveTo = useCallback(
-    (position: Vector2, interpolate = true) => {
-      dragSpring.start({
+    (position: Vector2) => {
+      canvas.setPosition(objectId, {
         x: position.x,
         y: position.y,
-        immediate: !interpolate,
       });
     },
-    [dragSpring],
+    [canvas, objectId],
   );
 
-  const canvas = useCanvas();
   useEffect(() => {
-    if (onMove) {
-      return canvas.subscribe(`positionChange:${objectId}`, onMove);
+    if (onDrop) {
+      return canvas.subscribe(`gestureCommit:${objectId}`, onDrop);
     }
-  }, [canvas, onMove]);
+  }, [canvas, onDrop]);
 
   const canvasObject: CanvasObject = useMemo(() => {
+    const position = canvas.positions.get(objectId);
     const rootProps = {
       style: {
         /**
@@ -131,7 +142,7 @@ export function useCanvasObject({
          * up or dropped.
          */
         transform: to(
-          [dragStyle.x, dragStyle.y, pickupSpring.value],
+          [position.x, position.y, pickupSpring.value],
           (xv, yv, grabEffect) =>
             `translate(${xv}px, ${yv}px) scale(${1 + 0.05 * grabEffect})`,
         ),
@@ -145,8 +156,9 @@ export function useCanvasObject({
       isGrabbing,
       rootProps,
       moveTo,
+      id: objectId,
     };
-  }, [dragStyle, pickupSpring, zIndex, isGrabbing, bindDragHandle]);
+  }, [canvas, pickupSpring, zIndex, isGrabbing, bindDragHandle, objectId]);
 
   return canvasObject;
 }
@@ -167,11 +179,9 @@ function useDrag({
 
   const [isGrabbing, setIsGrabbing] = useState(false);
 
-  const [style, spring] = useSpring(() => ({
-    x: initialPosition.x,
-    y: initialPosition.y,
-    config: SPRINGS.RESPONSIVE,
-  }));
+  useEffectOnce(() => {
+    canvas.setPosition(objectId, initialPosition);
+  });
 
   const pickupSpring = useSpring({
     value: isGrabbing ? 1 : 0,
@@ -180,11 +190,9 @@ function useDrag({
 
   // stores the displacement between the user's grab point and the position
   // of the object, in screen pixels
-  const grabDisplacementRef = useRef<Vector2 | null>(null);
-  const displace = useCallback((position: Vector2) => {
-    return roundVector(
-      addVectors(position, grabDisplacementRef.current ?? { x: 0, y: 0 }),
-    );
+  const grabDisplacementRef = useRef<Vector2>({ x: 0, y: 0 });
+  const displace = useCallback((screenPosition: Vector2) => {
+    return roundVector(addVectors(screenPosition, grabDisplacementRef.current));
   }, []);
 
   // create a private instance of AutoPan to control the automatic panning behavior
@@ -204,17 +212,7 @@ function useDrag({
         canvas.onObjectDrag(finalPosition, objectId);
       },
     );
-  }, [autoPan, viewport, canvas, objectId, spring, displace]);
-
-  useEffect(() => {
-    return canvas.subscribe(`gestureChange:${objectId}`, (position) => {
-      spring.start({
-        x: position.x,
-        y: position.y,
-        immediate: true,
-      });
-    });
-  }, [canvas]);
+  }, [autoPan, viewport, canvas, objectId, displace]);
 
   // binds drag controls to the underlying element
   const bindDragHandle = useGesture({
@@ -246,15 +244,11 @@ function useDrag({
         setIsGrabbing(true);
       }
 
-      const positionVector = displace({
-        x: state.xy[0],
-        y: state.xy[1],
-      });
+      const screenPosition = { x: state.xy[0], y: state.xy[1] };
+      autoPan.update(screenPosition);
 
       // send to canvas to be interpreted into movement
-      canvas.onObjectDrag(positionVector, objectId);
-
-      autoPan.update({ x: state.xy[0], y: state.xy[1] });
+      canvas.onObjectDrag(displace(screenPosition), objectId);
     },
     onDragStart: (state) => {
       if (isRightClick(state.event) || isMiddleClick(state.event)) {
@@ -262,22 +256,23 @@ function useDrag({
         return;
       }
 
+      // begin auto-pan using cursor viewport position
       const screenPosition = { x: state.xy[0], y: state.xy[1] };
+      autoPan.start(screenPosition);
 
       // capture the initial displacement between the cursor and the
       // object's center to add to each subsequent position
-      const currentPosition = viewport.worldToViewport({
-        x: style.x.get(),
-        y: style.y.get(),
-      });
-      grabDisplacementRef.current = subtractVectors(
-        currentPosition,
-        screenPosition,
-      );
-      const positionVector = displace(screenPosition);
-
-      canvas.onObjectDragStart(positionVector, objectId);
-      autoPan.start(screenPosition);
+      const currentObjectPosition = canvas.getViewportPosition(objectId);
+      if (currentObjectPosition) {
+        const displacement = subtractVectors(
+          currentObjectPosition,
+          screenPosition,
+        );
+        grabDisplacementRef.current.x = displacement.x;
+        grabDisplacementRef.current.y = displacement.y;
+      }
+      // apply displacement and begin drag
+      canvas.onObjectDragStart(displace(screenPosition), objectId);
       onDragStart?.();
     },
     onDragEnd: (state) => {
@@ -286,8 +281,8 @@ function useDrag({
         return;
       }
 
-      const positionVector = displace({ x: state.xy[0], y: state.xy[1] });
-      canvas.onObjectDragEnd(positionVector, objectId);
+      const screenPosition = { x: state.xy[0], y: state.xy[1] };
+      canvas.onObjectDragEnd(displace(screenPosition), objectId);
       // we leave this flag on for a few ms - the "drag" gesture
       // basically has a fade-out effect where it continues to
       // block gestures internal to the drag handle for a bit even
@@ -302,11 +297,9 @@ function useDrag({
   });
 
   return {
-    style,
     bindDragHandle,
     pickupSpring,
     isGrabbing,
     moveTo,
-    dragSpring: spring,
   };
 }

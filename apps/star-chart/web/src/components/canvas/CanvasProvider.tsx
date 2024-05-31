@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useState } from 'react';
-import { Canvas } from './Canvas.js';
+import { Canvas, CanvasOptions } from './Canvas.js';
 import { Viewport } from './Viewport.js';
 import { useViewport } from './ViewportProvider.jsx';
 
@@ -13,10 +13,16 @@ export const CanvasContext = createContext<Canvas>(dummyCanvas);
  * Abstractly, a CanvasProvider provides a way of handling changes to object positions,
  * including the act of moving an object and that of releasing it to a final location.
  */
-export const CanvasProvider = ({ children }: { children: ReactNode }) => {
+export const CanvasProvider = ({
+  children,
+  options,
+}: {
+  children: ReactNode;
+  options?: CanvasOptions;
+}) => {
   const viewport = useViewport();
   const [canvas] = useState(() => {
-    return new Canvas(viewport);
+    return new Canvas(viewport, options);
   });
 
   return (

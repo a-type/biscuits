@@ -9,3 +9,4 @@ export * from './useWasLoggedIn.js';
 export * from './useAppInfo.js';
 export * from './useOnPointerDownOutside.js';
 export * from './useIsInitialMount.js';
+export * from './useMergedRef.js';

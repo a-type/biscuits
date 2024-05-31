@@ -37,6 +37,10 @@ export const ViewportProvider = ({
         min: minZoom,
         max: maxZoom,
       },
+      canvasLimits: {
+        max: { x: 1000, y: 1000 },
+        min: { x: -1000, y: -1000 },
+      },
     });
     // @ts-ignore for debugging!
     window.viewport = viewport;

@@ -96,6 +96,13 @@ export function snap(value: number, increment: number) {
   return Math.round(value / increment) * increment;
 }
 
+export function snapVector(vec: Vector2, increment: number) {
+  return {
+    x: snap(vec.x, increment),
+    y: snap(vec.y, increment),
+  };
+}
+
 /**
  * Rounds a value to the closest multiple of an increment,
  * defaulting to 1 x increment if the value is smaller than 1

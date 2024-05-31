@@ -3,7 +3,7 @@ export type Vector2 = {
   y: number;
 };
 
-export type Bounds = {
+export type Size = {
   width: number;
   height: number;
 };

@@ -200,11 +200,13 @@ export type Connection = ObjectEntity<
 >;
 export type ConnectionId = string;
 export type ConnectionCreatedAt = number;
+export type ConnectionProjectId = string;
 export type ConnectionSourceTaskId = string;
 export type ConnectionTargetTaskId = string;
 export type ConnectionInit = {
   id?: string;
   createdAt?: number;
+  projectId: string;
   sourceTaskId: string;
   targetTaskId: string;
 };
@@ -212,6 +214,7 @@ export type ConnectionInit = {
 export type ConnectionDestructured = {
   id: string;
   createdAt: number;
+  projectId: string;
   sourceTaskId: string;
   targetTaskId: string;
 };
@@ -219,12 +222,35 @@ export type ConnectionDestructured = {
 export type ConnectionSnapshot = {
   id: string;
   createdAt: number;
+  projectId: string;
   sourceTaskId: string;
   targetTaskId: string;
 };
 
 /** Index filters for Connection **/
 
+export interface ConnectionProjectIdSortFilter {
+  where: "projectId";
+  order: "asc" | "desc";
+}
+export interface ConnectionProjectIdMatchFilter {
+  where: "projectId";
+  equals: string;
+  order?: "asc" | "desc";
+}
+export interface ConnectionProjectIdRangeFilter {
+  where: "projectId";
+  gte?: string;
+  gt?: string;
+  lte?: string;
+  lt?: string;
+  order?: "asc" | "desc";
+}
+export interface ConnectionProjectIdStartsWithFilter {
+  where: "projectId";
+  startsWith: string;
+  order?: "asc" | "desc";
+}
 export interface ConnectionSourceTaskIdSortFilter {
   where: "sourceTaskId";
   order: "asc" | "desc";
@@ -270,6 +296,10 @@ export interface ConnectionTargetTaskIdStartsWithFilter {
   order?: "asc" | "desc";
 }
 export type ConnectionFilter =
+  | ConnectionProjectIdSortFilter
+  | ConnectionProjectIdMatchFilter
+  | ConnectionProjectIdRangeFilter
+  | ConnectionProjectIdStartsWithFilter
   | ConnectionSourceTaskIdSortFilter
   | ConnectionSourceTaskIdMatchFilter
   | ConnectionSourceTaskIdRangeFilter

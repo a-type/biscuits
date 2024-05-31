@@ -1,17 +1,10 @@
 import { EventSubscriber } from '@a-type/utils';
-import {
-  addVectors,
-  clamp,
-  multiplyVector,
-  snap,
-  snapWithoutZero,
-  vectorDistance,
-} from './math.js';
-import { Bounds, Vector2 } from './types.js';
-import { Viewport } from './Viewport.js';
 import { proxy, subscribe } from 'valtio';
-
-const MOVE_THROTTLE_PERIOD = 100;
+import { addVectors, snap, vectorDistance } from './math.js';
+import { Vector2 } from './types.js';
+import { Viewport } from './Viewport.js';
+import { ObjectBounds } from './ObjectBounds.js';
+import { ObjectPositions } from './ObjectPositions.js';
 
 type ActiveGestureState = {
   objectId: string | null;
@@ -28,7 +21,10 @@ export type CanvasEvents = {
   gestureStart: () => void;
   gestureEnd: () => void;
   gestureMove: () => void;
-  [k: `positionChange:${string}`]: (newPosition: Vector2) => void;
+  [k: `gestureCommit:${string}`]: (
+    newPosition: Vector2,
+    info: { source: 'gesture' | 'external' },
+  ) => void;
   [k: `gestureChange:${string}`]: (newPosition: Vector2) => void;
 };
 
@@ -44,6 +40,9 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
     position: null,
     startPosition: null,
   });
+
+  readonly bounds = new ObjectBounds();
+  readonly positions = new ObjectPositions();
 
   private positionObservers: Record<string, Set<(position: Vector2) => void>> =
     {};
@@ -68,6 +67,10 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
     this._positionSnapIncrement = options?.positionSnapIncrement ?? 1;
   }
 
+  get snapIncrement() {
+    return this._positionSnapIncrement;
+  }
+
   private onGestureStart() {
     this._gestureActive = true;
     this.emit('gestureStart');
@@ -89,6 +92,11 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
 
   private emitGestureChange = () => {
     if (!this.activeGesture.objectId || !this.activeGesture.position) return;
+    this.positions.update(
+      this.activeGesture.objectId,
+      this.activeGesture.position,
+      { source: 'gesture' },
+    );
     this.emit(
       `gestureChange:${this.activeGesture.objectId}`,
       this.activeGesture.position,
@@ -107,8 +115,13 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
     return vectorDistance(position, startPosition);
   }
 
-  private commitGesture = (objectId: string, position: Vector2) => {
-    return this.emit(`positionChange:${objectId}`, position);
+  private commitGesture = (
+    objectId: string,
+    position: Vector2,
+    info: { source: 'gesture' | 'external' },
+  ) => {
+    this.positions.update(objectId, position, info);
+    return this.emit(`gestureCommit:${objectId}`, position, info);
   };
 
   /**
@@ -118,7 +131,7 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
   private commitActiveGesture = () => {
     const { objectId, position } = this.activeGesture;
     if (!objectId || !position) return;
-    this.commitGesture(objectId, position);
+    this.commitGesture(objectId, position, { source: 'gesture' });
   };
 
   // private throttledCommitActiveGesture = throttle(this.commitActiveGesture, MOVE_THROTTLE_PERIOD, { trailing: false });
@@ -159,8 +172,6 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
     const worldPosition = this.viewport.viewportToWorld(screenPosition, true);
     this.activeGesture.objectId = objectId;
     this.activeGesture.position = worldPosition;
-    // TODO: do we want real-time movement?
-    // this.throttledCommitActiveGesture();
     this.onGestureMove();
   };
 
@@ -169,8 +180,7 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
     // capture the final position before committing
     this.activeGesture.objectId = objectId;
     this.activeGesture.position = worldPosition;
-    // wait for confirmation from server of gesture change before finishing the gesture
-    await this.commitActiveGesture();
+    this.commitActiveGesture();
     this.clearActiveGesture();
     this.onGestureEnd();
   };
@@ -179,11 +189,30 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
    * Directly sets the world position of an object, applying
    * clamping and snapping behaviors.
    */
-  setPosition = (worldPosition: Vector2, objectId: string) => {
+  setPosition = (objectId: string, worldPosition: Vector2) => {
     this.commitGesture(
       objectId,
       this.viewport.clampToWorld(this.snapPosition(worldPosition)),
+      { source: 'external' },
     );
+  };
+
+  /**
+   * Gets the instantaneous position of an object.
+   */
+  getPosition = (objectId: string): Vector2 | null => {
+    const pos = this.positions.maybeGet(objectId);
+    if (!pos) return null;
+    return { x: pos.x.get(), y: pos.y.get() };
+  };
+
+  /**
+   * Gets the position of an object relative to the viewport
+   */
+  getViewportPosition = (objectId: string): Vector2 | null => {
+    const worldPosition = this.getPosition(objectId);
+    if (!worldPosition) return null;
+    return this.viewport.worldToViewport(worldPosition);
   };
 
   /**
@@ -200,7 +229,31 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
       this.viewport.clampToWorld(
         this.snapPosition(addVectors(currentPosition, movement)),
       ),
+      { source: 'external' },
     );
+  };
+
+  /**
+   * Returns which object ID the world point intersects with
+   */
+  hitTest = (worldPosition: Vector2): string | null => {
+    // TODO: faster
+    for (const [id, position] of this.positions.all()) {
+      const bounds = this.bounds.get(id);
+      if (!bounds) continue;
+      const x = position.x.get();
+      const y = position.y.get();
+      if (
+        worldPosition.x >= x &&
+        worldPosition.x <= x + bounds.width &&
+        worldPosition.y >= y &&
+        worldPosition.y <= y + bounds.height
+      ) {
+        return id;
+      }
+    }
+
+    return null;
   };
 
   dispose = () => {

@@ -1,5 +1,5 @@
 import { EventSubscriber, preventDefault } from '@a-type/utils';
-import { Bounds, Vector2, RectLimits } from './types.js';
+import { Size, Vector2, RectLimits } from './types.js';
 import { addVectors, clamp, clampVector, subtractVectors } from './math.js';
 
 // for some calculations we need to assume a real size for an infinite
@@ -63,7 +63,7 @@ export type ViewportEvents = {
   zoomChanged(zoom: number, origin: ViewportEventOrigin): void;
   centerChanged(center: Readonly<Vector2>, origin: ViewportEventOrigin): void;
   /** Fired when the size of the bound element changes */
-  sizeChanged(size: Bounds): void;
+  sizeChanged(size: Size): void;
 };
 
 /**
@@ -86,7 +86,7 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
   // these two are initialized in a helper method, bypassing
   // strict initialization checking...
   private _boundElement: HTMLElement = null as any;
-  private _boundElementSize: Bounds = { width: 0, height: 0 };
+  private _boundElementSize: Size = { width: 0, height: 0 };
   private handleBoundElementResize = ([entry]: ResizeObserverEntry[]) => {
     this.setBoundElementSize(entry.contentRect);
   };
@@ -118,7 +118,7 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
     window.viewport = this;
   }
 
-  private setBoundElementSize = (size: Bounds) => {
+  private setBoundElementSize = (size: Size) => {
     this._boundElementSize.width = size.width;
     this._boundElementSize.height = size.height;
     this.emit('sizeChanged', size);
@@ -179,7 +179,7 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
    * The size, in pixels, of the viewport element.
    */
   get size() {
-    return this._boundElementSize as Readonly<Bounds>;
+    return this._boundElementSize as Readonly<Size>;
   }
 
   get element() {

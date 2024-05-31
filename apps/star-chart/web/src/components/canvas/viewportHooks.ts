@@ -14,7 +14,7 @@ import { Viewport } from './Viewport.js';
 /**
  * Tracks cursor position and sends updates to the socket connection
  */
-export function useTrackCursor() {
+export function useTrackCursor(viewport: Viewport) {
   const lastKnownPositionRef = useRef<Vector2>({ x: 0, y: 0 });
 
   const client = hooks.useClient();
@@ -23,11 +23,11 @@ export function useTrackCursor() {
     (pos: Vector2) => {
       lastKnownPositionRef.current = pos;
       client.sync.presence.update({
-        cursorPosition: pos,
+        cursorPosition: viewport.viewportToWorld(lastKnownPositionRef.current),
         cursorActive: true,
       });
     },
-    [lastKnownPositionRef, client],
+    [lastKnownPositionRef, client, viewport],
   );
 
   useEffect(() => {
@@ -41,6 +41,23 @@ export function useTrackCursor() {
       window.removeEventListener('blur', handleWindowBlur);
     };
   }, [lastKnownPositionRef]);
+
+  useEffect(() => {
+    const unsubs = [
+      viewport.subscribe('centerChanged', () => {
+        onMove(lastKnownPositionRef.current);
+      }),
+      viewport.subscribe('sizeChanged', () => {
+        onMove(lastKnownPositionRef.current);
+      }),
+      viewport.subscribe('zoomChanged', () => {
+        onMove(lastKnownPositionRef.current);
+      }),
+    ];
+    return () => {
+      unsubs.forEach((fn) => fn());
+    };
+  }, [viewport, onMove]);
 
   return onMove;
 }
@@ -130,7 +147,7 @@ export function useViewportGestureControls(
     },
   );
 
-  const onCursorMove = useTrackCursor();
+  const onCursorMove = useTrackCursor(viewport);
 
   const bindPassiveGestures = useGesture({
     onDrag: ({ delta: [x, y] }) => {
@@ -138,8 +155,8 @@ export function useViewportGestureControls(
         origin: 'direct',
       });
     },
-    onMove: ({ xy }) => {
-      onCursorMove(viewport.viewportToWorld({ x: xy[0], y: xy[1] }));
+    onPointerMoveCapture: ({ event }) => {
+      onCursorMove({ x: event.clientX, y: event.clientY });
     },
     onDragStart: () => {
       viewportGestureState.active = true;

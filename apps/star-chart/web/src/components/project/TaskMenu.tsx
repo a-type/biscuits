@@ -18,8 +18,30 @@ export interface TaskMenuProps {
 
 export function TaskMenu({ task, className, ...rest }: TaskMenuProps) {
   const client = hooks.useClient();
-  const deleteTask = () => {
-    client.tasks.delete(task.get('id'));
+  const id = task.get('id');
+  const deleteTask = async () => {
+    // delete all connections to and from this task
+    const sourcedConnections = await client.connections.findAll({
+      index: {
+        where: 'sourceTaskId',
+        equals: id,
+      },
+    }).resolved;
+    const targetConnections = await client.connections.findAll({
+      index: {
+        where: 'targetTaskId',
+        equals: id,
+      },
+    }).resolved;
+    await Promise.all([
+      ...sourcedConnections.map((connection) =>
+        client.connections.delete(connection.get('id')),
+      ),
+      ...targetConnections.map((connection) =>
+        client.connections.delete(connection.get('id')),
+      ),
+      client.tasks.delete(id),
+    ]);
   };
   return (
     <DropdownMenu>

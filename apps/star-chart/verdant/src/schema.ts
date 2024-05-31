@@ -58,10 +58,14 @@ const connections = schema.collection({
     createdAt: schema.fields.number({
       default: () => Date.now(),
     }),
+    projectId: schema.fields.string(),
     sourceTaskId: schema.fields.string(),
     targetTaskId: schema.fields.string(),
   },
   indexes: {
+    projectId: {
+      field: 'projectId',
+    },
     sourceTaskId: {
       field: 'sourceTaskId',
     },
@@ -72,7 +76,7 @@ const connections = schema.collection({
 });
 
 export default schema({
-  version: 1,
+  version: 2,
   collections: {
     projects,
     tasks,
