@@ -1,5 +1,5 @@
 import { useGesture } from '@use-gesture/react';
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { proxy, subscribe } from 'valtio';
 import { useCanvas } from '../canvas/CanvasProvider.jsx';
 import { hooks } from '@/store.js';
@@ -9,6 +9,7 @@ import { SvgPortal } from '../canvas/CanvasSvgLayer.jsx';
 import { useViewport } from '../canvas/ViewportProvider.jsx';
 import { clsx } from '@a-type/ui';
 import { useSpring } from '@react-spring/web';
+import { closestLivePoint } from '../canvas/math.js';
 
 export interface ConnectionSourceProps {
   sourceNodeId: string;
@@ -74,6 +75,13 @@ export function ConnectionSource({
     },
   });
 
+  const sourceCenter = canvas.getLiveCenter(sourceNodeId);
+  const sourceBounds = canvas.getLiveBounds(sourceNodeId);
+  const sourcePosition = useMemo(
+    () => closestLivePoint(sourceCenter, sourceBounds, target),
+    [sourceCenter, sourceBounds, target],
+  );
+
   return (
     <>
       <div
@@ -83,8 +91,9 @@ export function ConnectionSource({
       />
       <SvgPortal layerId="connections">
         <Wire
-          sourcePosition={canvas.positions.get(sourceNodeId)}
+          sourcePosition={sourcePosition}
           targetPosition={target}
+          markerEnd="url(#arrow-end)"
           className={clsx(
             'stroke-black stroke-2',
             active ? 'opacity-100' : 'opacity-0',

@@ -1,4 +1,5 @@
-import { Vector2 } from './types.js';
+import { SpringValue, to } from '@react-spring/web';
+import { LiveSize, LiveVector2, Vector2 } from './types.js';
 
 /**
  * Constrains a number to be between a min and max value
@@ -146,4 +147,69 @@ export function compareWithTolerance(
 
 export function roundTenths(percentage: number) {
   return Math.round(percentage * 10) / 10;
+}
+
+export function addToSpringVector(
+  vec: LiveVector2,
+  add: Vector2 | LiveVector2,
+) {
+  if (isVector2(add)) {
+    return {
+      x: to([vec.x], (v) => v + add.x),
+      y: to([vec.y], (v) => v + add.y),
+    };
+  }
+
+  return {
+    x: to([vec.x, add.x], (v1, v2) => v1 + v2),
+    y: to([vec.y, add.y], (v1, v2) => v1 + v2),
+  };
+}
+
+function isVector2(obj: any): obj is Vector2 {
+  return obj.x !== undefined && obj.y !== undefined;
+}
+
+export function closestLivePoint(
+  sourceCenter: LiveVector2,
+  sourceBounds: LiveSize,
+  targetCenter: LiveVector2,
+  shortenBy: number = 0,
+) {
+  const point = to(
+    [
+      sourceCenter.x,
+      sourceCenter.y,
+      sourceBounds.width,
+      sourceBounds.height,
+      targetCenter.x,
+      targetCenter.y,
+    ],
+    (sourceX, sourceY, sourceWidth, sourceHeight, targetX, targetY) => {
+      const dx = targetX - sourceX;
+      const dy = targetY - sourceY;
+      const length = Math.sqrt(dx * dx + dy * dy);
+      const normalizedX = dx / length;
+      const normalizedY = dy / length;
+      const longestBound = Math.max(sourceWidth / 2, sourceHeight / 2);
+      const projectedX = normalizedX * longestBound;
+      const projectedY = normalizedY * longestBound;
+      const cappedX =
+        Math.min(Math.abs(projectedX), sourceWidth / 2) * Math.sign(projectedX);
+      const cappedY =
+        Math.min(Math.abs(projectedY), sourceHeight / 2) *
+        Math.sign(projectedY);
+      const shortenedX = cappedX - normalizedX * shortenBy;
+      const shortenedY = cappedY - normalizedY * shortenBy;
+      return {
+        x: sourceX + shortenedX,
+        y: sourceY + shortenedY,
+      };
+    },
+  );
+
+  return {
+    x: point.to((p) => p.x),
+    y: point.to((p) => p.y),
+  };
 }

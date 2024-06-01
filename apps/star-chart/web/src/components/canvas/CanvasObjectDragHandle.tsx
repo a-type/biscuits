@@ -1,4 +1,4 @@
-import { ReactNode, useCallback } from 'react';
+import { ReactNode, useCallback, useRef } from 'react';
 import { useCanvasObjectContext } from './CanvasObject.jsx';
 import { clsx } from '@a-type/ui';
 
@@ -6,12 +6,14 @@ export interface CanvasObjectDragHandleProps {
   children: ReactNode;
   disabled?: boolean;
   className?: string;
+  onTap?: () => void;
 }
 
 export function CanvasObjectDragHandle({
   children,
   disabled,
   className,
+  onTap: providedOnTap,
   ...rest
 }: CanvasObjectDragHandleProps) {
   const { bindDragHandle, isGrabbing } = useCanvasObjectContext();
@@ -31,6 +33,13 @@ export function CanvasObjectDragHandle({
     [isGrabbing],
   );
 
+  const bindArgsRef = useRef<
+    Exclude<Parameters<typeof bindDragHandle>[0], undefined>
+  >({});
+  if (providedOnTap) {
+    bindArgsRef.current.onTap = providedOnTap;
+  }
+
   return (
     <div
       className={clsx(
@@ -42,7 +51,7 @@ export function CanvasObjectDragHandle({
         },
         className,
       )}
-      {...(disabled ? {} : bindDragHandle())}
+      {...(disabled ? {} : bindDragHandle(bindArgsRef.current))}
       onClickCapture={onClickCapture}
       {...rest}
     >

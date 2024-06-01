@@ -1,10 +1,9 @@
 import { EventSubscriber } from '@a-type/utils';
-import { Vector2 } from './types.js';
 import { SpringValue } from '@react-spring/web';
 
 export interface Bounds {
-  width: number;
-  height: number;
+  width: SpringValue<number>;
+  height: SpringValue<number>;
 }
 
 export class ObjectBounds extends EventSubscriber<{
@@ -18,13 +17,23 @@ export class ObjectBounds extends EventSubscriber<{
     this.sizeObserver = new ResizeObserver(this.handleChanges);
   }
 
-  private updateBounds = (objectId: string, changes: Partial<Bounds>) => {
+  private updateBounds = (
+    objectId: string,
+    changes: Partial<{ width: number; height: number }>,
+  ) => {
     let bounds = this.bounds.get(objectId);
     if (!bounds) {
-      bounds = { width: 0, height: 0 };
+      bounds = { width: new SpringValue(0), height: new SpringValue(0) };
       this.bounds.set(objectId, bounds);
     }
-    Object.assign(bounds, changes);
+
+    if (changes.width) {
+      bounds.width.set(changes.width);
+    }
+    if (changes.height) {
+      bounds.height.set(changes.height);
+    }
+
     this.emit(`sizeChange:${objectId}`, bounds);
   };
 
@@ -46,20 +55,25 @@ export class ObjectBounds extends EventSubscriber<{
   };
 
   get = (objectId: string) => {
-    return this.bounds.get(objectId);
+    const existing = this.bounds.get(objectId);
+    if (!existing) {
+      this.updateBounds(objectId, { width: 0, height: 0 });
+      return this.bounds.get(objectId)!;
+    }
+    return existing;
   };
 
   private handleChanges = (entries: ResizeObserverEntry[]) => {
     entries.forEach((entry) => {
       const objectId = entry.target.getAttribute('data-observed-object-id');
       if (!objectId) return;
-      const bounds = entry.contentRect;
+      const bounds = entry.borderBoxSize[0];
       const existing = this.bounds.get(objectId);
       if (existing) {
         // x/y are not helpful here
         this.updateBounds(objectId, {
-          width: bounds.width,
-          height: bounds.height,
+          width: bounds.inlineSize,
+          height: bounds.blockSize,
         });
       }
     });

@@ -1,11 +1,14 @@
 import { Task } from '@star-chart.biscuits/verdant';
 import { CanvasObjectRoot, useCanvasObject } from '../canvas/CanvasObject.jsx';
 import { hooks } from '@/store.js';
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { CanvasObjectDragHandle } from '../canvas/CanvasObjectDragHandle.jsx';
 import { TaskMenu } from './TaskMenu.jsx';
 import { Checkbox } from '@a-type/ui/components/checkbox';
 import { ConnectionSource } from './ConnectionSource.jsx';
+import { LiveUpdateTextField } from '@a-type/ui/components/liveUpdateTextField';
+import { subscribe } from 'valtio';
+import { mode } from './mode.js';
 
 export interface TaskNodeProps {
   task: Task;
@@ -44,13 +47,26 @@ export function TaskNode({ task }: TaskNodeProps) {
     [client, id, projectId],
   );
 
+  const [editMode, setEditMode] = useState(false);
+  const enterEdit = useCallback(() => {
+    setEditMode(true);
+    mode.value = 'edit-task';
+  }, []);
+  useEffect(() => {
+    return subscribe(mode, () => {
+      if (mode.value !== 'edit-task') {
+        setEditMode(false);
+      }
+    });
+  }, []);
+
   return (
     <CanvasObjectRoot
-      className="bg-white border-default p-2 rounded-md shadow-sm"
+      className="bg-white border-solid border-2 border-gray-blend p-2 rounded-md shadow-sm"
       canvasObject={canvasObject}
     >
-      <CanvasObjectDragHandle>
-        <div className="w-max-content max-w-300px min-w-100px row items-start">
+      <CanvasObjectDragHandle onTap={enterEdit}>
+        <div className="w-max-content max-w-300px min-w-200px row items-start">
           <Checkbox
             checked={!!completedAt}
             onCheckedChange={(val) => {
@@ -59,7 +75,17 @@ export function TaskNode({ task }: TaskNodeProps) {
             }}
             data-no-drag
           />
-          <div className="mt-1 text-sm">{content}</div>
+          {editMode ? (
+            <LiveUpdateTextField
+              className="text-sm min-w-80px w-auto"
+              value={content}
+              onChange={(v) => task.set('content', v)}
+              autoSelect
+              autoFocus
+            />
+          ) : (
+            <div className="mt-1 text-sm">{content}</div>
+          )}
         </div>
         <div className="w-full row">
           <ConnectionSource

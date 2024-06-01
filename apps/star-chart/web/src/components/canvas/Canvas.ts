@@ -5,6 +5,7 @@ import { Vector2 } from './types.js';
 import { Viewport } from './Viewport.js';
 import { ObjectBounds } from './ObjectBounds.js';
 import { ObjectPositions } from './ObjectPositions.js';
+import { SpringValue, to } from '@react-spring/web';
 
 type ActiveGestureState = {
   objectId: string | null;
@@ -206,6 +207,31 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
     return { x: pos.x.get(), y: pos.y.get() };
   };
 
+  getCenter = (objectId: string): Vector2 | null => {
+    const pos = this.positions.maybeGet(objectId);
+    if (!pos) return null;
+    const bounds = this.bounds.get(objectId);
+    if (!bounds) {
+      return { x: pos.x.get(), y: pos.y.get() };
+    }
+    return {
+      x: pos.x.get() + bounds.width.get() / 2,
+      y: pos.y.get() + bounds.height.get() / 2,
+    };
+  };
+
+  getLivePosition = (objectId: string) => this.positions.get(objectId);
+  getLiveBounds = (objectId: string) => this.bounds.get(objectId);
+
+  getLiveCenter = (objectId: string) => {
+    const pos = this.getLivePosition(objectId);
+    const bounds = this.bounds.get(objectId);
+    return {
+      x: to([pos.x, bounds.width], (x, width) => x + width / 2),
+      y: to([pos.y, bounds.height], (y, height) => y + height / 2),
+    };
+  };
+
   /**
    * Gets the position of an object relative to the viewport
    */
@@ -245,9 +271,9 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
       const y = position.y.get();
       if (
         worldPosition.x >= x &&
-        worldPosition.x <= x + bounds.width &&
+        worldPosition.x <= x + bounds.width.get() &&
         worldPosition.y >= y &&
-        worldPosition.y <= y + bounds.height
+        worldPosition.y <= y + bounds.height.get()
       ) {
         return id;
       }

@@ -11,6 +11,8 @@ import { TaskNode } from './TaskNode.jsx';
 import { CanvasSvgLayer } from '../canvas/CanvasSvgLayer.jsx';
 import { ConnectionWire } from './ConnectionWire.jsx';
 import { roundVector, snapVector } from '../canvas/math.js';
+import { ArrowMarkers } from './ArrowMarkers.jsx';
+import { mode } from './mode.js';
 
 export interface ProjectCanvasProps {
   project: Project;
@@ -31,6 +33,19 @@ export function ProjectCanvas({ project }: ProjectCanvasProps) {
     },
   });
   const addTask = useAddTask(projectId);
+  const handleTap = useCallback(
+    (position: Vector2) => {
+      switch (mode.value) {
+        case 'default':
+          addTask(position);
+          break;
+        case 'edit-task':
+          mode.value = 'default';
+          break;
+      }
+    },
+    [addTask],
+  );
 
   return (
     <ViewportProvider>
@@ -40,9 +55,10 @@ export function ProjectCanvas({ project }: ProjectCanvasProps) {
         }}
       >
         <ViewportRoot>
-          <CanvasRenderer onTap={addTask}>
+          <CanvasRenderer onTap={handleTap}>
             <CanvasWallpaper />
             <CanvasSvgLayer id="connections">
+              <ArrowMarkers />
               {connections.map((connection) => (
                 <ConnectionWire
                   key={connection.get('id')}

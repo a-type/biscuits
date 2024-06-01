@@ -68,13 +68,39 @@ export function CanvasObjectRoot({
         {...rest}
       >
         {children}
+        {/* <DebugAnnotations /> */}
       </animated.div>
     </CanvasObjectContext.Provider>
   );
 }
 
+function DebugAnnotations() {
+  const canvas = useCanvas();
+  const { id } = useCanvasObjectContext();
+  const size = canvas.getLiveBounds(id);
+
+  return (
+    <div className="absolute inset-0 pointer-events-none">
+      <animated.div
+        className="absolute left-0 top-0 border-solid border-1 border-red"
+        style={{
+          width: size.width,
+          height: size.height,
+        }}
+      />
+      <animated.div
+        className="w-1px h-1px left-0 top-0 absolute z-1 bg-red rounded-full"
+        style={{
+          x: size.width.to((w) => w / 2),
+          y: size.height.to((h) => h / 2),
+        }}
+      />
+    </div>
+  );
+}
+
 export interface CanvasObject {
-  bindDragHandle: () => any;
+  bindDragHandle: (args?: { onTap?: () => void }) => any;
   isGrabbing: boolean;
   rootProps: any;
   moveTo: (position: Vector2, interpolate?: boolean) => void;
@@ -217,7 +243,10 @@ function useDrag({
   // binds drag controls to the underlying element
   const bindDragHandle = useGesture({
     onDrag: (state) => {
-      if (isRightClick(state.event) || isMiddleClick(state.event)) {
+      if (
+        'button' in state.event &&
+        (isRightClick(state.event) || isMiddleClick(state.event))
+      ) {
         state.cancel();
         return;
       }
@@ -251,7 +280,10 @@ function useDrag({
       canvas.onObjectDrag(displace(screenPosition), objectId);
     },
     onDragStart: (state) => {
-      if (isRightClick(state.event) || isMiddleClick(state.event)) {
+      if (
+        'button' in state.event &&
+        (isRightClick(state.event) || isMiddleClick(state.event))
+      ) {
         state.cancel();
         return;
       }
@@ -276,7 +308,10 @@ function useDrag({
       onDragStart?.();
     },
     onDragEnd: (state) => {
-      if (isRightClick(state.event) || isMiddleClick(state.event)) {
+      if (
+        'button' in state.event &&
+        (isRightClick(state.event) || isMiddleClick(state.event))
+      ) {
         state.cancel();
         return;
       }
@@ -293,6 +328,12 @@ function useDrag({
       autoPan.stop();
       onDragEnd?.();
       grabDisplacementRef.current = { x: 0, y: 0 };
+
+      // invoke tap handler if provided. not sure how to type this..
+      if (state.tap) {
+        console.log('tap');
+        state.args?.[0]?.onTap?.();
+      }
     },
   });
 
