@@ -13,6 +13,8 @@ import { LiveUpdateTextField } from '@a-type/ui/components/liveUpdateTextField';
 import { subscribe } from 'valtio';
 import { mode } from './mode.js';
 import { CollapsibleSimple } from '@a-type/ui/components/collapsible';
+import { useBlockCount, useDependencyCount } from './hooks.js';
+import { clsx } from '@a-type/ui';
 
 export interface TaskNodeProps {
   task: Task;
@@ -64,9 +66,15 @@ export function TaskNode({ task }: TaskNodeProps) {
     });
   }, []);
 
+  const blockers = useBlockCount(id);
+  const dependencies = useDependencyCount(id);
+
   return (
     <CanvasObjectRoot
-      className="bg-white border-solid border-2 border-gray-blend p-2 rounded-md shadow-sm"
+      className={clsx(
+        'bg-white border-solid border-2 border-gray-blend p-2 rounded-md shadow-sm',
+        dependencies === 0 && blockers > 2 && '!bg-primary-wash font-bold',
+      )}
       canvasObject={canvasObject}
     >
       <CanvasObjectDragHandle onTap={enterEdit}>
@@ -94,7 +102,9 @@ export function TaskNode({ task }: TaskNodeProps) {
             sourceNodeId={id}
             onConnection={createConnectionTo}
             className="ml-auto"
-          />
+          >
+            {blockers}
+          </ConnectionSource>
         </div>
         <CollapsibleSimple open={editMode}>
           <TaskMenu task={task} className="ml-auto" {...disableDragProps} />

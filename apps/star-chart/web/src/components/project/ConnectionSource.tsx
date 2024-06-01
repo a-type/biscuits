@@ -1,5 +1,5 @@
 import { useGesture } from '@use-gesture/react';
-import { Suspense, useCallback, useMemo, useState } from 'react';
+import { ReactNode, Suspense, useCallback, useMemo, useState } from 'react';
 import { proxy, subscribe } from 'valtio';
 import { useCanvas } from '../canvas/CanvasProvider.jsx';
 import { hooks } from '@/store.js';
@@ -17,12 +17,14 @@ export interface ConnectionSourceProps {
   sourceNodeId: string;
   onConnection: (targetNodeId: string) => void;
   className?: string;
+  children?: ReactNode;
 }
 
 export function ConnectionSource({
   sourceNodeId,
   onConnection,
   className,
+  children,
 }: ConnectionSourceProps) {
   const [target, spring] = useSpring(() => ({
     x: 0,
@@ -99,9 +101,7 @@ export function ConnectionSource({
           className,
         )}
       >
-        <Suspense>
-          <BlockCount taskId={sourceNodeId} />
-        </Suspense>
+        <Suspense>{children}</Suspense>
       </div>
       <SvgPortal layerId="connections">
         <Wire
@@ -116,16 +116,4 @@ export function ConnectionSource({
       </SvgPortal>
     </>
   );
-}
-
-function BlockCount({
-  taskId,
-  className,
-}: {
-  taskId: string;
-  className?: string;
-}) {
-  const count = useBlockCount(taskId);
-  if (count === 0) return null;
-  return <span className={className}>{count}</span>;
 }

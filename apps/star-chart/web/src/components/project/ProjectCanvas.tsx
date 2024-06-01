@@ -14,6 +14,8 @@ import { roundVector, snapVector } from '../canvas/math.js';
 import { ArrowMarkers } from './ArrowMarkers.jsx';
 import { mode } from './mode.js';
 import { CameraControls } from './CameraControls.jsx';
+import { useProjectData } from './hooks.js';
+import { AnalysisContext } from './AnalysisContext.jsx';
 
 export interface ProjectCanvasProps {
   project: Project;
@@ -21,18 +23,9 @@ export interface ProjectCanvasProps {
 
 export function ProjectCanvas({ project }: ProjectCanvasProps) {
   const projectId = project.get('id');
-  const tasks = hooks.useAllTasks({
-    index: {
-      where: 'projectId',
-      equals: projectId,
-    },
-  });
-  const connections = hooks.useAllConnections({
-    index: {
-      where: 'projectId',
-      equals: projectId,
-    },
-  });
+
+  const { tasks, connections, analysis } = useProjectData(projectId);
+
   const addTask = useAddTask(projectId);
   const handleTap = useCallback(
     (position: Vector2) => {
@@ -49,32 +42,34 @@ export function ProjectCanvas({ project }: ProjectCanvasProps) {
   );
 
   return (
-    <ViewportProvider>
-      <CanvasProvider
-        options={{
-          positionSnapIncrement: 24,
-        }}
-      >
-        <ViewportRoot>
-          <CanvasRenderer onTap={handleTap}>
-            <CanvasWallpaper />
-            <CanvasSvgLayer id="connections">
-              <ArrowMarkers />
-              {connections.map((connection) => (
-                <ConnectionWire
-                  key={connection.get('id')}
-                  connection={connection}
-                />
+    <AnalysisContext.Provider value={analysis}>
+      <ViewportProvider>
+        <CanvasProvider
+          options={{
+            positionSnapIncrement: 24,
+          }}
+        >
+          <ViewportRoot>
+            <CanvasRenderer onTap={handleTap}>
+              <CanvasWallpaper />
+              <CanvasSvgLayer id="connections">
+                <ArrowMarkers />
+                {connections.map((connection) => (
+                  <ConnectionWire
+                    key={connection.get('id')}
+                    connection={connection}
+                  />
+                ))}
+              </CanvasSvgLayer>
+              {tasks.map((task) => (
+                <TaskNode key={task.get('id')} task={task} />
               ))}
-            </CanvasSvgLayer>
-            {tasks.map((task) => (
-              <TaskNode key={task.get('id')} task={task} />
-            ))}
-          </CanvasRenderer>
-          <CameraControls />
-        </ViewportRoot>
-      </CanvasProvider>
-    </ViewportProvider>
+            </CanvasRenderer>
+            <CameraControls />
+          </ViewportRoot>
+        </CanvasProvider>
+      </ViewportProvider>
+    </AnalysisContext.Provider>
   );
 }
 
