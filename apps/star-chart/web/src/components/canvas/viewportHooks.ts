@@ -66,7 +66,7 @@ export const viewportGestureState = proxy({
   active: false,
 });
 
-const PINCH_GESTURE_DAMPING = 100;
+const PINCH_GESTURE_DAMPING = 200;
 const WHEEL_GESTURE_DAMPING = 40;
 
 export interface ViewportGestureConfig {
@@ -82,12 +82,17 @@ export function useViewportGestureControls(
   // we want to do for zoom.
   useGesture(
     {
-      onPinch: ({ delta: [_, d], origin, event }) => {
+      onPinch: ({ da: [d], origin, event, memo }) => {
         event?.preventDefault();
-        viewport.doRelativeZoom(d / PINCH_GESTURE_DAMPING, {
-          origin: 'direct',
-          centroid: { x: origin[0], y: origin[1] },
-        });
+        if (memo === undefined) return d;
+        const diff = d - memo;
+        if (diff !== 0) {
+          viewport.doRelativeZoom(diff / PINCH_GESTURE_DAMPING, {
+            origin: 'direct',
+            centroid: { x: origin[0], y: origin[1] },
+          });
+        }
+        return d;
       },
       onWheel: ({ delta: [x, y], event }) => {
         event?.preventDefault();
