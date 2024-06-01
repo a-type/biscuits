@@ -1,5 +1,5 @@
 import { useGesture } from '@use-gesture/react';
-import { useCallback, useMemo, useState } from 'react';
+import { Suspense, useCallback, useMemo, useState } from 'react';
 import { proxy, subscribe } from 'valtio';
 import { useCanvas } from '../canvas/CanvasProvider.jsx';
 import { hooks } from '@/store.js';
@@ -10,15 +10,18 @@ import { useViewport } from '../canvas/ViewportProvider.jsx';
 import { clsx } from '@a-type/ui';
 import { useSpring } from '@react-spring/web';
 import { closestLivePoint } from '../canvas/math.js';
+import { useBlockCount } from './hooks.js';
 
 export interface ConnectionSourceProps {
   sourceNodeId: string;
   onConnection: (targetNodeId: string) => void;
+  className?: string;
 }
 
 export function ConnectionSource({
   sourceNodeId,
   onConnection,
+  className,
 }: ConnectionSourceProps) {
   const [target, spring] = useSpring(() => ({
     x: 0,
@@ -87,19 +90,38 @@ export function ConnectionSource({
       <div
         data-no-drag
         {...bind()}
-        className="w-24px h-24px rounded-full bg-white border-2 border-black border-solid touch-none"
-      />
+        className={clsx(
+          'w-24px h-24px rounded-full bg-accent-light touch-none flex items-center justify-center text-black cursor-pointer hover:(ring-accent-dark ring-3)',
+          className,
+        )}
+      >
+        <Suspense>
+          <BlockCount taskId={sourceNodeId} />
+        </Suspense>
+      </div>
       <SvgPortal layerId="connections">
         <Wire
           sourcePosition={sourcePosition}
           targetPosition={target}
           markerEnd="url(#arrow-end)"
           className={clsx(
-            'stroke-black stroke-2',
+            'stroke-accent stroke-2',
             active ? 'opacity-100' : 'opacity-0',
           )}
         />
       </SvgPortal>
     </>
   );
+}
+
+function BlockCount({
+  taskId,
+  className,
+}: {
+  taskId: string;
+  className?: string;
+}) {
+  const count = useBlockCount(taskId);
+  if (count === 0) return null;
+  return <span className={className}>{count}</span>;
 }

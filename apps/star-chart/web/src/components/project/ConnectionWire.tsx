@@ -27,7 +27,7 @@ export function ConnectionWire({ connection }: ConnectionWireProps) {
 
   return (
     <Wire
-      className="stroke-gray-5 stroke-2"
+      className="stroke-accent-light stroke-2"
       sourcePosition={sourcePosition}
       targetPosition={targetPosition}
       data-source-id={sourceTaskId}

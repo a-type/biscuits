@@ -13,6 +13,7 @@ import { ConnectionWire } from './ConnectionWire.jsx';
 import { roundVector, snapVector } from '../canvas/math.js';
 import { ArrowMarkers } from './ArrowMarkers.jsx';
 import { mode } from './mode.js';
+import { CameraControls } from './CameraControls.jsx';
 
 export interface ProjectCanvasProps {
   project: Project;
@@ -70,6 +71,7 @@ export function ProjectCanvas({ project }: ProjectCanvasProps) {
               <TaskNode key={task.get('id')} task={task} />
             ))}
           </CanvasRenderer>
+          <CameraControls />
         </ViewportRoot>
       </CanvasProvider>
     </ViewportProvider>

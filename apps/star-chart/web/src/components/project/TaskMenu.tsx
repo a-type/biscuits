@@ -44,20 +44,10 @@ export function TaskMenu({ task, className, ...rest }: TaskMenuProps) {
     ]);
   };
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger asChild className={className} {...rest}>
-        <Button size="icon" color="ghost">
-          <Icon name="dots" />
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent>
-        <DropdownMenuItem color="destructive" onClick={deleteTask}>
-          <span>Delete</span>
-          <DropdownMenuItemRightSlot>
-            <Icon name="trash" />
-          </DropdownMenuItemRightSlot>
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
+    <div className="row justify-end">
+      <Button size="icon" color="ghostDestructive" onClick={deleteTask}>
+        <Icon name="trash" />
+      </Button>
+    </div>
   );
 }

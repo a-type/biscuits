@@ -9,6 +9,7 @@ import { ConnectionSource } from './ConnectionSource.jsx';
 import { LiveUpdateTextField } from '@a-type/ui/components/liveUpdateTextField';
 import { subscribe } from 'valtio';
 import { mode } from './mode.js';
+import { CollapsibleSimple } from '@a-type/ui/components/collapsible';
 
 export interface TaskNodeProps {
   task: Task;
@@ -86,14 +87,15 @@ export function TaskNode({ task }: TaskNodeProps) {
           ) : (
             <div className="mt-1 text-sm">{content}</div>
           )}
-        </div>
-        <div className="w-full row">
           <ConnectionSource
             sourceNodeId={id}
             onConnection={createConnectionTo}
+            className="ml-auto"
           />
-          <TaskMenu task={task} className="ml-auto" data-no-drag />
         </div>
+        <CollapsibleSimple open={editMode}>
+          <TaskMenu task={task} className="ml-auto" data-no-drag />
+        </CollapsibleSimple>
       </CanvasObjectDragHandle>
     </CanvasObjectRoot>
   );
