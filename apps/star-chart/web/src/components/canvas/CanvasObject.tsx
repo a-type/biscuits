@@ -326,13 +326,14 @@ function useDrag({
         setIsGrabbing(false);
       }, 100);
       autoPan.stop();
-      onDragEnd?.();
       grabDisplacementRef.current = { x: 0, y: 0 };
 
       // invoke tap handler if provided. not sure how to type this..
       if (state.tap) {
         console.log('tap');
         state.args?.[0]?.onTap?.();
+      } else {
+        onDragEnd?.();
       }
     },
   });

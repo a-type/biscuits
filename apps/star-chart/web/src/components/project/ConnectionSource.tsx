@@ -11,6 +11,7 @@ import { clsx } from '@a-type/ui';
 import { useSpring } from '@react-spring/web';
 import { closestLivePoint } from '../canvas/math.js';
 import { useBlockCount } from './hooks.js';
+import { disableDragProps } from '../canvas/CanvasObjectDragHandle.jsx';
 
 export interface ConnectionSourceProps {
   sourceNodeId: string;
@@ -35,7 +36,8 @@ export function ConnectionSource({
   const client = hooks.useClient();
 
   const bind = useGesture({
-    onDragStart: ({ xy: [x, y] }) => {
+    onDragStart: ({ xy: [x, y], event }) => {
+      event?.stopPropagation();
       const worldPosition = viewport.viewportToWorld({ x, y }, true);
       spring.start({
         x: worldPosition.x,
@@ -44,7 +46,8 @@ export function ConnectionSource({
       });
       setActive(true);
     },
-    onDrag: ({ xy: [x, y] }) => {
+    onDrag: ({ xy: [x, y], event }) => {
+      event?.stopPropagation();
       const worldPosition = viewport.viewportToWorld({ x, y }, true);
       spring.start({
         x: worldPosition.x,
@@ -52,7 +55,8 @@ export function ConnectionSource({
         immediate: true,
       });
     },
-    onDragEnd: async ({ xy: [x, y] }) => {
+    onDragEnd: async ({ xy: [x, y], event }) => {
+      event?.stopPropagation();
       const worldPosition = viewport.viewportToWorld({ x, y }, true);
       spring.start({
         x: worldPosition.x,
@@ -88,7 +92,7 @@ export function ConnectionSource({
   return (
     <>
       <div
-        data-no-drag
+        {...disableDragProps}
         {...bind()}
         className={clsx(
           'w-24px h-24px rounded-full bg-accent-light touch-none flex items-center justify-center text-black cursor-pointer hover:(ring-accent-dark ring-3)',

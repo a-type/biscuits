@@ -2,7 +2,10 @@ import { Task } from '@star-chart.biscuits/verdant';
 import { CanvasObjectRoot, useCanvasObject } from '../canvas/CanvasObject.jsx';
 import { hooks } from '@/store.js';
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { CanvasObjectDragHandle } from '../canvas/CanvasObjectDragHandle.jsx';
+import {
+  CanvasObjectDragHandle,
+  disableDragProps,
+} from '../canvas/CanvasObjectDragHandle.jsx';
 import { TaskMenu } from './TaskMenu.jsx';
 import { Checkbox } from '@a-type/ui/components/checkbox';
 import { ConnectionSource } from './ConnectionSource.jsx';
@@ -74,7 +77,7 @@ export function TaskNode({ task }: TaskNodeProps) {
               if (val) task.set('completedAt', Date.now());
               else task.set('completedAt', null);
             }}
-            data-no-drag
+            {...disableDragProps}
           />
           {editMode ? (
             <LiveUpdateTextField
@@ -94,7 +97,7 @@ export function TaskNode({ task }: TaskNodeProps) {
           />
         </div>
         <CollapsibleSimple open={editMode}>
-          <TaskMenu task={task} className="ml-auto" data-no-drag />
+          <TaskMenu task={task} className="ml-auto" {...disableDragProps} />
         </CollapsibleSimple>
       </CanvasObjectDragHandle>
     </CanvasObjectRoot>

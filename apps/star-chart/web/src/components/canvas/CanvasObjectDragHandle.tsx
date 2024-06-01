@@ -1,6 +1,7 @@
 import { ReactNode, useCallback, useRef } from 'react';
 import { useCanvasObjectContext } from './CanvasObject.jsx';
 import { clsx } from '@a-type/ui';
+import { stopPropagation } from '@a-type/utils';
 
 export interface CanvasObjectDragHandleProps {
   children: ReactNode;
@@ -59,3 +60,16 @@ export function CanvasObjectDragHandle({
     </div>
   );
 }
+
+export const disableDragProps = {
+  'data-no-drag': true,
+  onPointerDown: stopPropagation,
+  onPointerMove: stopPropagation,
+  onPointerUp: stopPropagation,
+  onTouchStart: stopPropagation,
+  onTouchMove: stopPropagation,
+  onTouchEnd: stopPropagation,
+  onMouseDown: stopPropagation,
+  onMouseMove: stopPropagation,
+  onMouseUp: stopPropagation,
+};
