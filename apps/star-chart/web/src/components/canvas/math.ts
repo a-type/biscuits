@@ -189,6 +189,9 @@ export function closestLivePoint(
       const dx = targetX - sourceX;
       const dy = targetY - sourceY;
       const length = Math.sqrt(dx * dx + dy * dy);
+      if (length === 0) {
+        return { x: sourceX, y: sourceY };
+      }
       const normalizedX = dx / length;
       const normalizedY = dy / length;
       const longestBound = Math.max(sourceWidth / 2, sourceHeight / 2);
@@ -211,5 +214,104 @@ export function closestLivePoint(
   return {
     x: point.to((p) => p.x),
     y: point.to((p) => p.y),
+  };
+}
+
+export interface Bezier {
+  start: Vector2;
+  end: Vector2;
+  control1: Vector2;
+  control2: Vector2;
+}
+
+export function getWireBezierForEndPoints(
+  // params are like this for convenience with most usage.
+  startX: number,
+  startY: number,
+  endX: number,
+  endY: number,
+): Bezier {
+  if (Math.abs(startX - endX) > Math.abs(startY - endY)) {
+    return {
+      start: { x: startX, y: startY },
+      end: { x: endX, y: endY },
+      control1: { x: startX + (endX - startX) / 2, y: startY },
+      control2: { x: startX + (endX - startX) / 2, y: endY },
+    };
+  }
+
+  return {
+    start: { x: startX, y: startY },
+    end: { x: endX, y: endY },
+    control1: { x: startX, y: startY + (endY - startY) / 2 },
+    control2: { x: endX, y: startY + (endY - startY) / 2 },
+  };
+}
+
+export function computeSamplesOnBezier(
+  curve: Bezier,
+  {
+    samples = 100,
+    startT = 0,
+    endT = 1,
+  }: {
+    samples?: number;
+    startT?: number;
+    endT?: number;
+  },
+) {
+  const points = [];
+  const range = endT - startT;
+  for (let i = 0; i <= samples; i++) {
+    const t = startT + (i / samples) * range;
+    points.push({
+      x:
+        (1 - t) ** 3 * curve.start.x +
+        3 * (1 - t) ** 2 * t * curve.control1.x +
+        3 * (1 - t) * t ** 2 * curve.control2.x +
+        t ** 3 * curve.end.x,
+      y:
+        (1 - t) ** 3 * curve.start.y +
+        3 * (1 - t) ** 2 * t * curve.control1.y +
+        3 * (1 - t) * t ** 2 * curve.control2.y +
+        t ** 3 * curve.end.y,
+
+      t,
+    });
+  }
+  return points;
+}
+
+export function distanceToBezier(curve: Bezier, point: Vector2) {
+  // start with the whole curve
+  const samples = computeSamplesOnBezier(curve, { samples: 100 });
+  let minDistance = Infinity;
+  let closestPoint = { x: 0, y: 0, t: 0 };
+  for (const sample of samples) {
+    const distance = vectorDistance(sample, point);
+    minDistance = Math.min(minDistance, distance);
+    if (distance === minDistance) {
+      closestPoint = sample;
+    }
+  }
+
+  // having found the closest point at default resolution,
+  // we can now refine the search around that point
+  const refinedSamples = computeSamplesOnBezier(curve, {
+    samples: 20,
+    startT: closestPoint.t - 0.1,
+    endT: closestPoint.t + 0.1,
+  });
+  for (const sample of refinedSamples) {
+    const distance = vectorDistance(sample, point);
+    minDistance = Math.min(minDistance, distance);
+    if (distance === minDistance) {
+      closestPoint = sample;
+    }
+  }
+
+  return {
+    distance: minDistance,
+    closestPoint,
   };
 }

@@ -5,7 +5,7 @@ import {
   ViewportProvider,
   ViewportRoot,
 } from '../canvas/ViewportProvider.jsx';
-import { useCallback, useEffect, useState } from 'react';
+import { Suspense, useCallback, useEffect, useState } from 'react';
 import { CanvasProvider } from '../canvas/CanvasProvider.jsx';
 import { CanvasWallpaper } from '../canvas/CanvasWallpaper.jsx';
 import { CanvasRenderer } from '../canvas/CanvasRenderer.jsx';
@@ -16,33 +16,43 @@ import { CanvasSvgLayer } from '../canvas/CanvasSvgLayer.jsx';
 import { ConnectionWire } from './ConnectionWire.jsx';
 import { roundVector, snapVector } from '../canvas/math.js';
 import { ArrowMarkers } from './ArrowMarkers.jsx';
-import { mode } from './mode.js';
 import { CameraControls } from './CameraControls.jsx';
 import { useProjectData } from './hooks.js';
 import { AnalysisContext } from './AnalysisContext.jsx';
+import { projectCanvasMachine, ProjectCanvasState } from './state.js';
 
 export interface ProjectCanvasProps {
   project: Project;
 }
 
-export function ProjectCanvas({ project }: ProjectCanvasProps) {
+export function ProjectCanvas(props: ProjectCanvasProps) {
+  const addTask = useAddTask(props.project.get('id'));
+
+  return (
+    <ProjectCanvasState.Provider
+      logic={projectCanvasMachine.provide({
+        actions: {
+          createTask: (_, ev) => addTask(ev.position),
+        },
+      })}
+    >
+      <ProjectCanvasImpl {...props} />
+    </ProjectCanvasState.Provider>
+  );
+}
+
+function ProjectCanvasImpl({ project }: ProjectCanvasProps) {
   const projectId = project.get('id');
 
   const { tasks, connections, analysis } = useProjectData(projectId);
 
-  const addTask = useAddTask(projectId);
+  const actor = ProjectCanvasState.useActorRef();
+
   const handleTap = useCallback(
     (position: Vector2) => {
-      switch (mode.value) {
-        case 'default':
-          addTask(position);
-          break;
-        case 'edit-task':
-          mode.value = 'default';
-          break;
-      }
+      actor.send({ type: 'tapCanvas', position });
     },
-    [addTask],
+    [actor],
   );
 
   return (
@@ -55,19 +65,20 @@ export function ProjectCanvas({ project }: ProjectCanvasProps) {
           }}
         >
           <ViewportRoot>
-            <CanvasRenderer onTap={handleTap}>
-              <CanvasWallpaper />
+            <CanvasRenderer>
+              <CanvasWallpaper onTap={handleTap} />
               <CanvasSvgLayer id="connections">
                 <ArrowMarkers />
-                {connections.map((connection) => (
-                  <ConnectionWire
-                    key={connection.get('id')}
-                    connection={connection}
-                  />
-                ))}
               </CanvasSvgLayer>
+              {connections.map((connection) => (
+                <Suspense key={connection.get('id')}>
+                  <ConnectionWire connection={connection} />
+                </Suspense>
+              ))}
               {tasks.map((task) => (
-                <TaskNode key={task.get('id')} task={task} />
+                <Suspense key={task.get('id')}>
+                  <TaskNode task={task} />
+                </Suspense>
               ))}
             </CanvasRenderer>
             <CameraControls />
@@ -82,6 +93,7 @@ function useAddTask(projectId: string) {
   const client = hooks.useClient();
   return useCallback(
     (position: Vector2) => {
+      console.log('creating task at', position);
       client.tasks.put({
         projectId,
         content: 'New Task',

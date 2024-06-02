@@ -28,7 +28,10 @@ export function CanvasSvgLayer({
 
   return (
     <svg
-      className={clsx('absolute', className)}
+      className={clsx(
+        'absolute pointer-events-none [&>*]:pointer-events-auto',
+        className,
+      )}
       style={style}
       id={id}
       viewBox={`-${canvasRect.width / 2} -${canvasRect.height / 2} ${canvasRect.width} ${canvasRect.height}`}

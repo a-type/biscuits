@@ -17,6 +17,7 @@
     "@types/raf": "^3.4.3",
     "@use-gesture/react": "^10.2.24",
     "@verdant-web/react-router": "^0.6.2",
+    "@xstate/react": "^4.1.1",
     "raf": "^3.4.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
@@ -33,7 +34,8 @@
     "workbox-precaching": "^7.1.0",
     "workbox-routing": "^7.1.0",
     "workbox-strategies": "^7.1.0",
-    "workbox-window": "^7.1.0"
+    "workbox-window": "^7.1.0",
+    "xstate": "^5.13.1"
   },
   "devDependencies": {
     "@originjs/vite-plugin-commonjs": "^1.0.3",

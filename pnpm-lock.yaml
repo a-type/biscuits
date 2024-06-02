@@ -683,6 +683,9 @@ importers:
       '@verdant-web/react-router':
         specifier: ^0.6.2
         version: 0.6.2(react@18.2.0)
+      '@xstate/react':
+        specifier: ^4.1.1
+        version: 4.1.1(@types/react@18.2.79)(react@18.2.0)(xstate@5.13.1)
       raf:
         specifier: ^3.4.1
         version: 3.4.1
@@ -734,6 +737,9 @@ importers:
       workbox-window:
         specifier: ^7.1.0
         version: 7.1.0
+      xstate:
+        specifier: ^5.13.1
+        version: 5.13.1
     devDependencies:
       '@originjs/vite-plugin-commonjs':
         specifier: ^1.0.3
@@ -12073,6 +12079,23 @@ packages:
       tslib: 2.6.2
     dev: false
 
+  /@xstate/react@4.1.1(@types/react@18.2.79)(react@18.2.0)(xstate@5.13.1):
+    resolution: {integrity: sha512-pFp/Y+bnczfaZ0V8B4LOhx3d6Gd71YKAPbzerGqydC2nsYN/mp7RZu3q/w6/kvI2hwR/jeDeetM7xc3JFZH2NA==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      xstate: ^5.11.0
+    peerDependenciesMeta:
+      xstate:
+        optional: true
+    dependencies:
+      react: 18.2.0
+      use-isomorphic-layout-effect: 1.1.2(@types/react@18.2.79)(react@18.2.0)
+      use-sync-external-store: 1.2.2(react@18.2.0)
+      xstate: 5.13.1
+    transitivePeerDependencies:
+      - '@types/react'
+    dev: false
+
   /@zip.js/zip.js@2.7.37:
     resolution: {integrity: sha512-E1Q8X0D+5mgHE/bfThb9zCslhhKvMOIpBV1/8Yo1LTforZbNk3U4cVDOfRAU6h+hgo45MxyICpRvovAazsGFyQ==}
     engines: {bun: '>=0.7.0', deno: '>=1.0.0', node: '>=16.5.0'}
@@ -21005,6 +21028,19 @@ packages:
       react: 18.2.0
       tslib: 2.6.2
 
+  /use-isomorphic-layout-effect@1.1.2(@types/react@18.2.79)(react@18.2.0):
+    resolution: {integrity: sha512-49L8yCO3iGT/ZF9QttjwLF/ZD9Iwto5LnH5LmEdk/6cFmXddqi2ulF0edxTwjj+7mqvpVVGQWvbXZdn32wRSHA==}
+    peerDependencies:
+      '@types/react': '*'
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+    dependencies:
+      '@types/react': 18.2.79
+      react: 18.2.0
+    dev: false
+
   /use-sidecar@1.1.2(@types/react@18.2.79)(react@18.2.0):
     resolution: {integrity: sha512-epTbsLuzZ7lPClpz2TyryBfztm7m+28DlEv2ZCQ3MDr5ssiwyOwGH/e5F9CkfWjJ1t4clvI58yF822/GUkjjhw==}
     engines: {node: '>=10'}
@@ -22193,6 +22229,10 @@ packages:
         optional: true
       utf-8-validate:
         optional: true
+    dev: false
+
+  /xstate@5.13.1:
+    resolution: {integrity: sha512-saBUxsTb29Vq8bjq1TjLdGCYs2pneGMzQ7pqQyXh1nqZaSnKHkCkxf3EV+EDYbLnQioxK9HNMYPQrz4whj3RJQ==}
     dev: false
 
   /y18n@5.0.8:

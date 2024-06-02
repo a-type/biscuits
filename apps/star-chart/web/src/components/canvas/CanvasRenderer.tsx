@@ -88,19 +88,6 @@ export const CanvasRenderer = ({
     };
   }, [viewport, panSpring, zoomSpring, onZoomChange]);
 
-  const bindGestures = useGesture({
-    onDragEnd: ({ tap, xy: [x, y] }) => {
-      if (tap) {
-        onTap?.(
-          viewport.viewportToWorld({
-            x,
-            y,
-          }),
-        );
-      }
-    },
-  });
-
   const canvas = useCanvas();
 
   return (
@@ -121,7 +108,6 @@ export const CanvasRenderer = ({
         // @ts-ignore
         '--grid-size': `${canvas.snapIncrement > 1 ? canvas.snapIncrement : 24}px`,
       }}
-      {...bindGestures()}
     >
       {children}
       <PresenceCursors />

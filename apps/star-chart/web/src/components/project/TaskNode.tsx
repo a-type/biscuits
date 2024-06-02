@@ -11,12 +11,12 @@ import { Checkbox } from '@a-type/ui/components/checkbox';
 import { ConnectionSource } from './ConnectionSource.jsx';
 import { LiveUpdateTextField } from '@a-type/ui/components/liveUpdateTextField';
 import { subscribe } from 'valtio';
-import { mode } from './mode.js';
 import { CollapsibleSimple } from '@a-type/ui/components/collapsible';
 import { useDownstreamCount, useUpstreamUncompletedCount } from './hooks.js';
 import { clsx } from '@a-type/ui';
 import { Icon } from '@a-type/ui/components/icon';
 import { Tooltip } from '@a-type/ui/components/tooltip';
+import { ProjectCanvasState } from './state.js';
 
 export interface TaskNodeProps {
   task: Task;
@@ -47,6 +47,7 @@ export function TaskNode({ task }: TaskNodeProps) {
     (targetTaskId: string) => {
       console.log('connecting', id, targetTaskId);
       client.connections.put({
+        id: `connection-${id}-${targetTaskId}`,
         projectId,
         sourceTaskId: id,
         targetTaskId,
@@ -55,18 +56,15 @@ export function TaskNode({ task }: TaskNodeProps) {
     [client, id, projectId],
   );
 
-  const [editMode, setEditMode] = useState(false);
-  const enterEdit = useCallback(() => {
-    setEditMode(true);
-    mode.value = 'edit-task';
-  }, []);
-  useEffect(() => {
-    return subscribe(mode, () => {
-      if (mode.value !== 'edit-task') {
-        setEditMode(false);
-      }
-    });
-  }, []);
+  const actor = ProjectCanvasState.useActorRef();
+  const selectedId = ProjectCanvasState.useSelector(
+    ({ context }) => context.selectedTask,
+  );
+  const editMode = selectedId === id;
+
+  const onTap = useCallback(() => {
+    actor.send({ type: 'selectTask', taskId: id });
+  }, [actor, id]);
 
   const downstreams = useDownstreamCount(id);
   const upstreams = useUpstreamUncompletedCount(id);
@@ -82,7 +80,7 @@ export function TaskNode({ task }: TaskNodeProps) {
       )}
       canvasObject={canvasObject}
     >
-      <CanvasObjectDragHandle onTap={enterEdit}>
+      <CanvasObjectDragHandle onTap={onTap}>
         <div className="w-max-content max-w-300px min-w-200px row items-start">
           <Checkbox
             className={clsx(!completedAt && upstreams > 0 ? 'opacity-50' : '')}

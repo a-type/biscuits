@@ -104,15 +104,14 @@ export function ConnectionSource({
         {children}
       </div>
       <SvgPortal layerId="connections">
-        <Wire
-          sourcePosition={sourcePosition}
-          targetPosition={target}
-          markerEnd="url(#arrow-end)"
-          className={clsx(
-            'stroke-accent stroke-2',
-            active ? 'opacity-100' : 'opacity-0',
-          )}
-        />
+        {active && (
+          <Wire
+            sourcePosition={sourcePosition}
+            targetPosition={target}
+            markerEnd="url(#arrow-end)"
+            className={clsx('stroke-accent stroke-2')}
+          />
+        )}
       </SvgPortal>
     </>
   );

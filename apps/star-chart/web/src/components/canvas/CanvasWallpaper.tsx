@@ -1,11 +1,14 @@
 import { clsx } from '@a-type/ui';
 import * as React from 'react';
 import { useViewport } from './ViewportProvider.jsx';
+import { Vector2 } from './types.js';
+import { useGesture } from '@use-gesture/react';
 
 export interface IViewportWallpaperProps {
   children?: React.ReactNode;
   imageUrl?: string | null;
   color?: string;
+  onTap?: (position: Vector2) => void;
 }
 
 /**
@@ -16,6 +19,7 @@ export const CanvasWallpaper: React.FC<IViewportWallpaperProps> = ({
   children,
   imageUrl,
   color = 'var(--color-wash)',
+  onTap,
 }) => {
   const viewport = useViewport();
 
@@ -31,6 +35,19 @@ export const CanvasWallpaper: React.FC<IViewportWallpaperProps> = ({
     };
   }, [imageUrl, color, viewport]);
 
+  const bindGestures = useGesture({
+    onDragEnd: ({ tap, xy: [x, y] }) => {
+      if (tap) {
+        onTap?.(
+          viewport.viewportToWorld({
+            x,
+            y,
+          }),
+        );
+      }
+    },
+  });
+
   return (
     <div
       style={style}
@@ -38,6 +55,7 @@ export const CanvasWallpaper: React.FC<IViewportWallpaperProps> = ({
         'absolute rounded-lg [background-position:calc(var(--grid-size,24px)/-2)_calc(var(--grid-size,24px)/-2)] bg-repeat z-0',
         classNameGridBg,
       )}
+      {...bindGestures()}
     >
       {children}
     </div>
