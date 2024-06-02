@@ -10,7 +10,7 @@ import { useViewport } from '../canvas/ViewportProvider.jsx';
 import { clsx } from '@a-type/ui';
 import { useSpring } from '@react-spring/web';
 import { closestLivePoint } from '../canvas/math.js';
-import { useBlockCount } from './hooks.js';
+import { useDownstreamCount } from './hooks.js';
 import { disableDragProps } from '../canvas/CanvasObjectDragHandle.jsx';
 
 export interface ConnectionSourceProps {
@@ -97,11 +97,11 @@ export function ConnectionSource({
         {...disableDragProps}
         {...bind()}
         className={clsx(
-          'w-24px h-24px rounded-full bg-accent-light touch-none flex items-center justify-center text-black cursor-pointer hover:(ring-accent-dark ring-3)',
+          'min-w-24px h-24px touch-none cursor-pointer hover:(ring-accent-dark ring-3)',
           className,
         )}
       >
-        <Suspense>{children}</Suspense>
+        {children}
       </div>
       <SvgPortal layerId="connections">
         <Wire

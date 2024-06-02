@@ -3,12 +3,12 @@ import { Task } from '@star-chart.biscuits/verdant';
 import { useEffect, useState } from 'react';
 import { useAnalysis } from './AnalysisContext.jsx';
 
-export function useBlockCount(taskId: string) {
+export function useDownstreamCount(taskId: string) {
   const analysis = useAnalysis();
   return analysis.downstreams[taskId]?.length || 0;
 }
 
-export function useDependencyCount(taskId: string) {
+export function useUpstreamUncompletedCount(taskId: string) {
   const analysis = useAnalysis();
   return (
     analysis.upstreams[taskId]?.filter((dep) => !dep.completed).length || 0

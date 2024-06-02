@@ -9,6 +9,7 @@ export class ObjectPositions {
       y: SpringValue<number>;
     }
   >();
+  private initialized = new Map<string, boolean>();
 
   constructor(private springConfig = SPRINGS.QUICK) {}
 
@@ -23,6 +24,7 @@ export class ObjectPositions {
           config: this.springConfig,
         }),
       };
+      this.initialized.set(objectId, false);
       this.positions.set(objectId, position);
       return position;
     }
@@ -39,16 +41,18 @@ export class ObjectPositions {
     { source }: { source: 'gesture' | 'external' },
   ) => {
     const position = this.get(objectId);
+    const initialized = this.initialized.get(objectId);
     if (changes.x !== undefined) {
       position.x.start(changes.x, {
-        immediate: source === 'gesture',
+        immediate: source === 'gesture' || !initialized,
       });
     }
     if (changes.y !== undefined) {
       position.y.start(changes.y, {
-        immediate: source === 'gesture',
+        immediate: source === 'gesture' || !initialized,
       });
     }
+    this.initialized.set(objectId, true);
   };
 
   all = () => {
@@ -57,5 +61,6 @@ export class ObjectPositions {
 
   remove = (objectId: string) => {
     this.positions.delete(objectId);
+    this.initialized.delete(objectId);
   };
 }

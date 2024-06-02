@@ -1,7 +1,11 @@
 import { hooks } from '@/store.js';
-import { Project } from '@star-chart.biscuits/verdant';
-import { ViewportProvider, ViewportRoot } from '../canvas/ViewportProvider.jsx';
-import { useCallback } from 'react';
+import { Project, Task } from '@star-chart.biscuits/verdant';
+import {
+  useViewport,
+  ViewportProvider,
+  ViewportRoot,
+} from '../canvas/ViewportProvider.jsx';
+import { useCallback, useEffect, useState } from 'react';
 import { CanvasProvider } from '../canvas/CanvasProvider.jsx';
 import { CanvasWallpaper } from '../canvas/CanvasWallpaper.jsx';
 import { CanvasRenderer } from '../canvas/CanvasRenderer.jsx';
@@ -43,7 +47,8 @@ export function ProjectCanvas({ project }: ProjectCanvasProps) {
 
   return (
     <AnalysisContext.Provider value={analysis}>
-      <ViewportProvider>
+      <ViewportProvider minZoom={0.25} maxZoom={1.25}>
+        <ZoomFitter tasks={tasks} />
         <CanvasProvider
           options={{
             positionSnapIncrement: 24,
@@ -85,4 +90,53 @@ function useAddTask(projectId: string) {
     },
     [client],
   );
+}
+
+function useZoomToFit(tasks: Task[]) {
+  const viewport = useViewport();
+  const [hasZoomed, setHasZoomed] = useState(false);
+  useEffect(() => {
+    if (hasZoomed) return;
+    if (tasks.length === 0) return;
+    const bounds = tasks.reduce(
+      (acc, task) => {
+        const position = task.get('position').getAll();
+        return {
+          left: Math.min(acc.left, position.x),
+          top: Math.min(acc.top, position.y),
+          right: Math.max(acc.right, position.x),
+          bottom: Math.max(acc.bottom, position.y),
+        };
+      },
+      {
+        left: Infinity,
+        top: Infinity,
+        right: -Infinity,
+        bottom: -Infinity,
+      },
+    );
+    const center = {
+      x: (bounds.left + bounds.right) / 2,
+      y: (bounds.top + bounds.bottom) / 2,
+    };
+    const width = bounds.right - bounds.left;
+    const height = bounds.bottom - bounds.top;
+    const padding = 100;
+    const zoom = Math.min(
+      viewport.size.width / (width + padding),
+      viewport.size.height / (height + padding),
+    );
+    // this ensures the move happens after other
+    // effects that ran on the same render. mainly
+    // the canvas viewport setup stuff...
+    requestAnimationFrame(() => {
+      viewport.doMove(center, zoom);
+    });
+    setHasZoomed(true);
+  }, [tasks, viewport, hasZoomed]);
+}
+
+function ZoomFitter({ tasks }: { tasks: Task[] }) {
+  useZoomToFit(tasks);
+  return null;
 }

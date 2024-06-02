@@ -10,6 +10,7 @@ import {
 import { proxy } from 'valtio';
 import { Vector2 } from './types.js';
 import { Viewport } from './Viewport.js';
+import { isLeftClick } from '@a-type/utils';
 
 /**
  * Tracks cursor position and sends updates to the socket connection
@@ -155,7 +156,12 @@ export function useViewportGestureControls(
   const onCursorMove = useTrackCursor(viewport);
 
   const bindPassiveGestures = useGesture({
-    onDrag: ({ delta: [x, y] }) => {
+    onDrag: ({ delta: [x, y], event }) => {
+      if ('button' in event && isLeftClick(event)) {
+        // ignore left-click drags for panning.
+        // TODO: box-select
+        return;
+      }
       viewport.doRelativePan(viewport.viewportDeltaToWorld({ x: -x, y: -y }), {
         origin: 'direct',
       });

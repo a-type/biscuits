@@ -11,6 +11,8 @@ export interface ConnectionWireProps {
 
 export function ConnectionWire({ connection }: ConnectionWireProps) {
   const { sourceTaskId, targetTaskId } = hooks.useWatch(connection);
+  const sourceTask = hooks.useTask(sourceTaskId);
+  hooks.useWatch(sourceTask);
 
   const canvas = useCanvas();
 
@@ -33,6 +35,7 @@ export function ConnectionWire({ connection }: ConnectionWireProps) {
       data-source-id={sourceTaskId}
       data-target-id={targetTaskId}
       markerEnd="url(#arrow-end)"
+      strokeDasharray={sourceTask?.get('completedAt') ? '0' : '4 4'}
     />
   );
 }
