@@ -103,7 +103,11 @@ export function TaskNode({ task }: TaskNodeProps) {
             <div
               className={clsx(
                 'mt-1 text-sm',
-                !completedAt ? 'font-bold' : 'line-through',
+                !completedAt
+                  ? upstreams === 0
+                    ? 'font-bold'
+                    : ''
+                  : 'line-through',
               )}
             >
               {isPriority && (
