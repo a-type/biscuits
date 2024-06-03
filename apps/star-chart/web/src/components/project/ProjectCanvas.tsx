@@ -2,7 +2,11 @@ import { hooks } from '@/store.js';
 import { Project, Task } from '@star-chart.biscuits/verdant';
 import { Suspense, useCallback, useEffect, useState } from 'react';
 import { BoxSelect } from '../canvas/BoxSelect.jsx';
-import { CanvasGestures, CanvasProvider } from '../canvas/CanvasProvider.jsx';
+import {
+  CanvasGestures,
+  CanvasProvider,
+  useCanvas,
+} from '../canvas/CanvasProvider.jsx';
 import { CanvasRenderer } from '../canvas/CanvasRenderer.jsx';
 import { CanvasSvgLayer } from '../canvas/CanvasSvgLayer.jsx';
 import { CanvasWallpaper } from '../canvas/CanvasWallpaper.jsx';
@@ -45,9 +49,10 @@ export function ProjectCanvas({ project }: ProjectCanvasProps) {
           }}
         >
           <CanvasGestures
-            onTap={(position, ctx) => {
+            onTap={async (position, ctx) => {
               if (ctx.canvas.selections.selectedIds.size === 0) {
-                addTask(position);
+                const task = await addTask(position);
+                ctx.canvas.selections.set([task.get('id')]);
               } else {
                 ctx.canvas.selections.set([]);
               }
@@ -86,14 +91,15 @@ export function ProjectCanvas({ project }: ProjectCanvasProps) {
 
 function useAddTask(projectId: string) {
   const client = hooks.useClient();
+
   return useCallback(
-    (position: Vector2) => {
-      console.log('creating task at', position);
-      client.tasks.put({
+    async (position: Vector2) => {
+      const task = await client.tasks.put({
         projectId,
         content: 'New Task',
         position: snapVector(position, 24),
       });
+      return task;
     },
     [client],
   );
