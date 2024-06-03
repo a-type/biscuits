@@ -75,7 +75,7 @@ export function TaskNode({ task }: TaskNodeProps) {
       className={clsx(
         'layer-components:(bg-white border-solid border-2 border-gray-blend rounded-md shadow-sm)',
         isPriority && 'layer-variants:bg-primary-wash',
-        upstreams > 0 && 'layer-variants:bg-gray-blend',
+        upstreams > 0 && 'layer-variants:bg-wash',
         selected && 'layer-variants:border-primary',
         !selected && pendingSelect && 'layer-variants:border-primary-wash',
       )}

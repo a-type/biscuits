@@ -166,10 +166,12 @@ export function useViewportGestureControls(
         metaKey,
         ctrlKey,
         altKey,
+        touches,
       }) => {
         if (!intentional || last) return;
 
-        gestureIsDragging.current = (buttons & 1) !== 0;
+        console.log(touches, type);
+        gestureIsDragging.current = touches === 0 && (buttons & 1) !== 0;
 
         if (gestureIsDragging.current) {
           canvas.onCanvasDrag(
@@ -180,21 +182,28 @@ export function useViewportGestureControls(
               ctrlOrMeta: ctrlKey || metaKey,
             },
           );
-          return;
+        } else {
+          viewport.doRelativePan(
+            viewport.viewportDeltaToWorld({ x: -x, y: -y }),
+            {
+              origin: 'direct',
+            },
+          );
         }
-
-        viewport.doRelativePan(
-          viewport.viewportDeltaToWorld({ x: -x, y: -y }),
-          {
-            origin: 'direct',
-          },
-        );
       },
       onPointerMoveCapture: ({ event }) => {
         onCursorMove({ x: event.clientX, y: event.clientY });
       },
-      onDragStart: ({ xy, buttons, metaKey, shiftKey, ctrlKey, altKey }) => {
-        gestureIsDragging.current = (buttons & 1) !== 0;
+      onDragStart: ({
+        xy,
+        buttons,
+        metaKey,
+        shiftKey,
+        ctrlKey,
+        altKey,
+        touches,
+      }) => {
+        gestureIsDragging.current = touches === 0 && (buttons & 1) !== 0;
         if (gestureIsDragging.current) {
           canvas.onCanvasDragStart(
             { x: xy[0], y: xy[1] },

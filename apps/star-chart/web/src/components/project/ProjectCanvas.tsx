@@ -27,6 +27,7 @@ import { TaskNode } from './TaskNode.jsx';
 import { SelectionMenu } from './SelectionMenu.jsx';
 import { Reticule } from './Reticule.jsx';
 import { ProjectTitle } from './ProjectTitle.jsx';
+import { HomeButton } from './HomeButton.jsx';
 
 export interface ProjectCanvasProps {
   project: Project;
@@ -82,6 +83,7 @@ export function ProjectCanvas({ project }: ProjectCanvasProps) {
             <CameraControls />
             <Minimap className="hidden sm:block absolute bottom-0 left-0 w-200px border-default bg-light-blend" />
             <SelectionMenu />
+            <HomeButton />
           </ViewportRoot>
         </CanvasProvider>
       </ViewportProvider>
