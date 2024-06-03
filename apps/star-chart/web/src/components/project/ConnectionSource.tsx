@@ -9,20 +9,23 @@ import { SvgPortal } from '../canvas/CanvasSvgLayer.jsx';
 import { useViewport } from '../canvas/ViewportProvider.jsx';
 import { Wire } from '../canvas/Wire.jsx';
 import { closestLivePoint } from '../canvas/math.js';
+import { Task } from '@star-chart.biscuits/verdant';
 
 export interface ConnectionSourceProps {
-  sourceNodeId: string;
+  sourceTask: Task;
   onConnection: (targetNodeId: string) => void;
   className?: string;
   children?: ReactNode;
 }
 
 export function ConnectionSource({
-  sourceNodeId,
+  sourceTask,
   onConnection,
   className,
   children,
 }: ConnectionSourceProps) {
+  const sourceNodeId = sourceTask.get('id');
+
   const [target, spring] = useSpring(() => ({
     x: 0,
     y: 0,
@@ -62,27 +65,35 @@ export function ConnectionSource({
         y: worldPosition.y,
         immediate: true,
       });
+
       // see if we're over a target
       const objectId = canvas.hitTest(worldPosition);
-      if (!objectId) {
-        setActive(false);
-        return;
-      }
+      if (objectId) {
+        // don't link to self
+        if (objectId === sourceNodeId) {
+          setActive(false);
+          return;
+        }
 
-      // don't link to self
-      if (objectId === sourceNodeId) {
-        setActive(false);
-        return;
-      }
+        // verify it's a task node
+        const task = await client.tasks.get(objectId).resolved;
+        if (!task) {
+          setActive(false);
+          return;
+        }
 
-      // verify it's a task node
-      const task = await client.tasks.get(objectId).resolved;
-      if (!task) {
-        setActive(false);
-        return;
+        onConnection(objectId);
+      } else {
+        // no target - create a new task at this position and link
+        const task = await client.tasks.put({
+          projectId: sourceTask.get('projectId'),
+          content: 'New Task',
+          position: worldPosition,
+        });
+        // select the new task
+        canvas.selections.set([task.get('id')]);
+        onConnection(task.get('id'));
       }
-
-      onConnection(objectId);
       setActive(false);
     },
   });

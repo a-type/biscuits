@@ -120,7 +120,7 @@ export function TaskNode({ task }: TaskNodeProps) {
             </div>
           )}
           <ConnectionSource
-            sourceNodeId={id}
+            sourceTask={task}
             onConnection={createConnectionTo}
             className="ml-auto text-xs row !gap-1 py-1 px-2 rounded-full bg-accent-light flex-shrink-0"
           >
