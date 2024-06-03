@@ -24,8 +24,8 @@ export function useCenter(objectId: string) {
   if (!size || !origin) return { x: 0, y: 0 };
 
   return {
-    x: to([size.width, origin.x], (width, x) => x - width / 2),
-    y: to([size.height, origin.y], (height, y) => y - height / 2),
+    x: to([size.width, origin.x], (width, x) => x + width / 2),
+    y: to([size.height, origin.y], (height, y) => y + height / 2),
   };
 }
 

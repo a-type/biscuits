@@ -1,6 +1,6 @@
 import { ProjectCanvas } from '@/components/project/ProjectCanvas.jsx';
 import { hooks } from '@/store.js';
-import { UserMenu } from '@biscuits/client';
+import { usePageTitle, UserMenu } from '@biscuits/client';
 import { Link, useParams, useSearchParams } from '@verdant-web/react-router';
 import {
   DropdownMenuItem,
@@ -22,6 +22,8 @@ export function ProjectPage({}: ProjectPageProps) {
       return cur;
     });
   };
+
+  usePageTitle(project?.get('name') || 'New Project');
 
   if (!project) {
     return <div>Not found</div>;

@@ -24,6 +24,8 @@ export function ConnectionMenu({ connection }: ConnectionMenuProps) {
     canvas.selections.set([]);
   };
 
+  console.log(sourceCenter.x);
+
   return (
     <animated.div
       {...stopGesturePropagation}
