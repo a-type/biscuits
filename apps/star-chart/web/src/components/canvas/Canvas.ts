@@ -45,6 +45,8 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
   readonly bounds = new ObjectBounds();
   readonly positions = new ObjectPositions();
 
+  readonly objectElements = new Map<string, Element>();
+
   private positionObservers: Record<string, Set<(position: Vector2) => void>> =
     {};
 
@@ -210,7 +212,7 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
   getCenter = (objectId: string): Vector2 | null => {
     const pos = this.positions.maybeGet(objectId);
     if (!pos) return null;
-    const bounds = this.bounds.get(objectId);
+    const bounds = this.bounds.getSize(objectId);
     if (!bounds) {
       return { x: pos.x.get(), y: pos.y.get() };
     }
@@ -220,12 +222,18 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
     };
   };
 
-  getLivePosition = (objectId: string) => this.positions.get(objectId);
-  getLiveBounds = (objectId: string) => this.bounds.get(objectId);
+  getLivePosition = (objectId: string) => this.bounds.getOrigin(objectId);
+  getLiveSize = (objectId: string) => this.bounds.getSize(objectId);
 
   getLiveCenter = (objectId: string) => {
     const pos = this.getLivePosition(objectId);
-    const bounds = this.bounds.get(objectId);
+    const bounds = this.bounds.getSize(objectId);
+    if (!pos) {
+      return {
+        x: new SpringValue(0),
+        y: new SpringValue(0),
+      };
+    }
     return {
       x: to([pos.x, bounds.width], (x, width) => x + width / 2),
       y: to([pos.y, bounds.height], (y, height) => y + height / 2),
@@ -265,7 +273,7 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
   hitTest = (worldPosition: Vector2): string | null => {
     // TODO: faster
     for (const [id, position] of this.positions.all()) {
-      const bounds = this.bounds.get(id);
+      const bounds = this.bounds.getSize(id);
       if (!bounds) continue;
       const x = position.x.get();
       const y = position.y.get();
@@ -280,6 +288,19 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
     }
 
     return null;
+  };
+
+  registerElement = (objectId: string, element: Element | null) => {
+    if (element) {
+      this.objectElements.set(objectId, element);
+      this.bounds.observe(objectId, element);
+    } else {
+      const el = this.objectElements.get(objectId);
+      if (el) {
+        this.objectElements.delete(objectId);
+        this.bounds.unobserve(el);
+      }
+    }
   };
 
   dispose = () => {

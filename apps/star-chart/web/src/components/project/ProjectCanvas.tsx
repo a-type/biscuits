@@ -20,6 +20,7 @@ import { CameraControls } from './CameraControls.jsx';
 import { useProjectData } from './hooks.js';
 import { AnalysisContext } from './AnalysisContext.jsx';
 import { projectCanvasMachine, ProjectCanvasState } from './state.js';
+import { Minimap } from '../canvas/Minimap.jsx';
 
 export interface ProjectCanvasProps {
   project: Project;
@@ -82,6 +83,7 @@ function ProjectCanvasImpl({ project }: ProjectCanvasProps) {
               ))}
             </CanvasRenderer>
             <CameraControls />
+            <Minimap className="hidden sm:block absolute bottom-0 left-0 w-200px border-default bg-light-blend" />
           </ViewportRoot>
         </CanvasProvider>
       </ViewportProvider>
@@ -135,8 +137,8 @@ function useZoomToFit(tasks: Task[]) {
     const height = bounds.bottom - bounds.top;
     const padding = 100;
     const zoom = Math.min(
-      viewport.size.width / (width + padding),
-      viewport.size.height / (height + padding),
+      viewport.elementSize.width / (width + padding),
+      viewport.elementSize.height / (height + padding),
     );
     // this ensures the move happens after other
     // effects that ran on the same render. mainly

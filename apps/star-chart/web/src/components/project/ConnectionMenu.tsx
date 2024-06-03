@@ -1,9 +1,9 @@
 import { Connection } from '@star-chart.biscuits/verdant';
-import { useCanvas } from '../canvas/CanvasProvider.jsx';
 import { hooks } from '@/store.js';
 import { animated, to } from '@react-spring/web';
 import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
+import { useCenter } from '../canvas/canvasHooks.js';
 
 export interface ConnectionMenuProps {
   connection: Connection;
@@ -12,10 +12,8 @@ export interface ConnectionMenuProps {
 export function ConnectionMenu({ connection }: ConnectionMenuProps) {
   const { sourceTaskId, targetTaskId } = hooks.useWatch(connection);
 
-  const canvas = useCanvas();
-
-  const sourceCenter = canvas.getLiveCenter(sourceTaskId);
-  const targetCenter = canvas.getLiveCenter(targetTaskId);
+  const sourceCenter = useCenter(sourceTaskId);
+  const targetCenter = useCenter(targetTaskId);
 
   const client = hooks.useClient();
   const deleteConnection = () => {

@@ -34,8 +34,8 @@ export function ConnectionWire({ connection }: ConnectionWireProps) {
 
   const sourceCenter = canvas.getLiveCenter(sourceTaskId);
   const targetCenter = canvas.getLiveCenter(targetTaskId);
-  const sourceBounds = canvas.bounds.get(sourceTaskId);
-  const targetBounds = canvas.bounds.get(targetTaskId);
+  const sourceBounds = canvas.getLiveSize(sourceTaskId);
+  const targetBounds = canvas.getLiveSize(targetTaskId);
   const [sourcePosition, targetPosition] = useMemo(() => {
     return [
       closestLivePoint(sourceCenter, sourceBounds, targetCenter),

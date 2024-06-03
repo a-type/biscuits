@@ -1,10 +1,12 @@
 import { animated, to } from '@react-spring/web';
-import { SVGProps, useState } from 'react';
+import { SVGProps, useEffect, useState } from 'react';
 import { LiveVector2, Vector2 } from './types.js';
 import { useGesture } from '@use-gesture/react';
 import { distanceToBezier, getWireBezierForEndPoints } from './math.js';
 import { useViewport } from './ViewportProvider.jsx';
 import { clsx } from '@a-type/ui';
+import { useRegister } from './canvasHooks.js';
+import { useCanvas } from './CanvasProvider.jsx';
 
 export interface WireProps extends Omit<SVGProps<SVGPathElement>, 'ref'> {
   sourcePosition: LiveVector2;
@@ -12,6 +14,7 @@ export interface WireProps extends Omit<SVGProps<SVGPathElement>, 'ref'> {
   className?: string;
   hoverClassName?: string;
   onTap?: (relativePosition: Vector2) => void;
+  id: string;
 }
 
 export function Wire({
@@ -20,6 +23,7 @@ export function Wire({
   className,
   hoverClassName,
   onTap,
+  id,
   ...rest
 }: WireProps) {
   const viewport = useViewport();
@@ -29,10 +33,6 @@ export function Wire({
       onHover: ({ hovering }) => {
         setHovered(!!hovering);
       },
-      // onMouseOut: () => {
-      //   console.log('out', rest.id);
-      //   setHovered(false);
-      // },
       onDragStart: (state) => {
         state.event.stopPropagation();
         state.event.preventDefault();
@@ -73,6 +73,16 @@ export function Wire({
     },
   );
 
+  const register = useRegister(id);
+  const canvas = useCanvas();
+  // register position as smallest of x,y values - i.e. top left
+  useEffect(() => {
+    return canvas.bounds.registerOrigin(id, {
+      x: to([sourcePosition.x, targetPosition.x], Math.min),
+      y: to([sourcePosition.y, targetPosition.y], Math.min),
+    });
+  }, [canvas, id, sourcePosition, targetPosition]);
+
   return (
     <>
       {/* invisible path for interaction boundaries */}
@@ -86,8 +96,10 @@ export function Wire({
           onTap && hovered ? hoverClassName : 'stroke-transparent',
           onTap ? 'cursor-pointer' : '',
         )}
+        ref={register}
       />
       <animated.path
+        id={id}
         d={curve}
         fill="none"
         className={clsx('pointer-events-none', className)}

@@ -25,6 +25,7 @@ import {
 import { clsx } from '@a-type/ui';
 import { useRerasterize } from './rerasterizeSignal.js';
 import { useEffectOnce, useMergedRef } from '@biscuits/client';
+import { useRegister } from './canvasHooks.js';
 
 export interface CanvasObjectRootProps {
   children: ReactNode;
@@ -41,15 +42,8 @@ export function CanvasObjectRoot({
   const ref = useRef<HTMLDivElement>(null);
   useRerasterize(ref);
 
-  const canvas = useCanvas();
-  const observe = useCallback(
-    (el: HTMLElement | null) => {
-      return canvas.bounds.observe(canvasObject.id, el);
-    },
-    [canvas, canvasObject.id],
-  );
-
-  const finalRef = useMergedRef(ref, observe);
+  const register = useRegister(canvasObject.id);
+  const finalRef = useMergedRef(ref, register);
 
   return (
     <CanvasObjectContext.Provider value={canvasObject}>
@@ -77,7 +71,7 @@ export function CanvasObjectRoot({
 function DebugAnnotations() {
   const canvas = useCanvas();
   const { id } = useCanvasObjectContext();
-  const size = canvas.getLiveBounds(id);
+  const size = canvas.getLiveSize(id);
 
   return (
     <div className="absolute inset-0 pointer-events-none">
@@ -157,6 +151,13 @@ export function useCanvasObject({
       return canvas.subscribe(`gestureCommit:${objectId}`, onDrop);
     }
   }, [canvas, onDrop]);
+
+  // FIXME: find a better place to do this?
+  useEffect(
+    () =>
+      canvas.bounds.registerOrigin(objectId, canvas.positions.get(objectId)),
+    [canvas, objectId],
+  );
 
   const canvasObject: CanvasObject = useMemo(() => {
     const position = canvas.positions.get(objectId);

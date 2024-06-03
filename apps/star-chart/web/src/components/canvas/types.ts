@@ -1,4 +1,4 @@
-import { Interpolation, FrameValue } from '@react-spring/web';
+import { FrameValue } from '@react-spring/web';
 
 export type Vector2 = {
   x: number;

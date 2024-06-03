@@ -1,17 +1,14 @@
-import { useGesture } from '@use-gesture/react';
-import { ReactNode, Suspense, useCallback, useMemo, useState } from 'react';
-import { proxy, subscribe } from 'valtio';
-import { useCanvas } from '../canvas/CanvasProvider.jsx';
 import { hooks } from '@/store.js';
-import { Wire } from '../canvas/Wire.jsx';
-import { Vector2 } from '../canvas/types.js';
-import { SvgPortal } from '../canvas/CanvasSvgLayer.jsx';
-import { useViewport } from '../canvas/ViewportProvider.jsx';
 import { clsx } from '@a-type/ui';
 import { useSpring } from '@react-spring/web';
-import { closestLivePoint } from '../canvas/math.js';
-import { useDownstreamCount } from './hooks.js';
+import { useGesture } from '@use-gesture/react';
+import { ReactNode, useMemo, useState } from 'react';
 import { disableDragProps } from '../canvas/CanvasObjectDragHandle.jsx';
+import { useCanvas } from '../canvas/CanvasProvider.jsx';
+import { SvgPortal } from '../canvas/CanvasSvgLayer.jsx';
+import { useViewport } from '../canvas/ViewportProvider.jsx';
+import { Wire } from '../canvas/Wire.jsx';
+import { closestLivePoint } from '../canvas/math.js';
 
 export interface ConnectionSourceProps {
   sourceNodeId: string;
@@ -85,7 +82,7 @@ export function ConnectionSource({
   });
 
   const sourceCenter = canvas.getLiveCenter(sourceNodeId);
-  const sourceBounds = canvas.getLiveBounds(sourceNodeId);
+  const sourceBounds = canvas.getLiveSize(sourceNodeId);
   const sourcePosition = useMemo(
     () => closestLivePoint(sourceCenter, sourceBounds, target),
     [sourceCenter, sourceBounds, target],
@@ -110,6 +107,7 @@ export function ConnectionSource({
             targetPosition={target}
             markerEnd="url(#arrow-end)"
             className={clsx('stroke-accent stroke-2')}
+            id={sourceNodeId + '-pending-connection'}
           />
         )}
       </SvgPortal>

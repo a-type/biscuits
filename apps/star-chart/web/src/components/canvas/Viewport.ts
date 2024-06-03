@@ -171,6 +171,10 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
     return this._center as Readonly<Vector2>;
   }
 
+  get topLeft() {
+    return this.viewportToWorld({ x: 0, y: 0 });
+  }
+
   get config() {
     return this._config;
   }
@@ -178,8 +182,19 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
   /**
    * The size, in pixels, of the viewport element.
    */
-  get size() {
+  get elementSize() {
     return this._boundElementSize as Readonly<Size>;
+  }
+
+  /**
+   * The size in world units of the visible space
+   * in the viewport
+   */
+  get size() {
+    return {
+      width: this._boundElementSize.width / this.zoom,
+      height: this._boundElementSize.height / this.zoom,
+    };
   }
 
   get element() {

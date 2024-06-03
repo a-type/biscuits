@@ -1,5 +1,6 @@
 import { EventSubscriber } from '@a-type/utils';
 import { SpringValue } from '@react-spring/web';
+import { LiveVector2 } from './types.js';
 
 export interface Bounds {
   width: SpringValue<number>;
@@ -8,8 +9,11 @@ export interface Bounds {
 
 export class ObjectBounds extends EventSubscriber<{
   [k: `sizeChange:${string}`]: (bounds: Bounds) => void;
+  [k: `originChange:${string}`]: (origin: LiveVector2) => void;
+  observedChange: () => void;
 }> {
-  private bounds: Map<string, Bounds> = new Map();
+  private origins: Map<string, LiveVector2> = new Map();
+  private sizes: Map<string, Bounds> = new Map();
   private sizeObserver;
 
   constructor() {
@@ -17,14 +21,16 @@ export class ObjectBounds extends EventSubscriber<{
     this.sizeObserver = new ResizeObserver(this.handleChanges);
   }
 
-  private updateBounds = (
+  private updateSize = (
     objectId: string,
     changes: Partial<{ width: number; height: number }>,
   ) => {
-    let bounds = this.bounds.get(objectId);
+    let bounds = this.sizes.get(objectId);
     if (!bounds) {
       bounds = { width: new SpringValue(0), height: new SpringValue(0) };
-      this.bounds.set(objectId, bounds);
+      this.sizes.set(objectId, bounds);
+      this.emit('observedChange');
+      this.emit(`sizeChange:${objectId}`, bounds);
     }
 
     if (changes.width) {
@@ -33,34 +39,62 @@ export class ObjectBounds extends EventSubscriber<{
     if (changes.height) {
       bounds.height.set(changes.height);
     }
-
-    this.emit(`sizeChange:${objectId}`, bounds);
   };
 
-  observe = (objectId: string, element: HTMLElement | null) => {
+  observe = (objectId: string, element: Element | null) => {
     // supports React <19 refs
     if (element === null) {
-      this.bounds.delete(objectId);
+      this.sizes.delete(objectId);
       return;
     }
 
     element.setAttribute('data-observed-object-id', objectId);
     this.sizeObserver.observe(element);
     // seed initial state
-    this.updateBounds(objectId, {
+    this.updateSize(objectId, {
       width: element.clientWidth,
       height: element.clientHeight,
     });
     return () => void this.sizeObserver.unobserve(element);
   };
 
-  get = (objectId: string) => {
-    const existing = this.bounds.get(objectId);
+  unobserve = (el: Element) => {
+    const objectId = el.getAttribute('data-observed-object-id');
+    if (objectId) {
+      this.sizes.delete(objectId);
+      this.sizeObserver.unobserve(el);
+    }
+  };
+
+  registerOrigin = (objectId: string, origin: LiveVector2) => {
+    this.origins.set(objectId, origin);
+    this.emit(`originChange:${objectId}`, origin);
+    return () => {
+      this.origins.delete(objectId);
+    };
+  };
+
+  getSize = (objectId: string) => {
+    const existing = this.sizes.get(objectId);
     if (!existing) {
-      this.updateBounds(objectId, { width: 0, height: 0 });
-      return this.bounds.get(objectId)!;
+      this.updateSize(objectId, { width: 0, height: 0 });
+      return this.sizes.get(objectId)!;
     }
     return existing;
+  };
+
+  getOrigin = (objectId: string) => {
+    const existing = this.origins.get(objectId);
+    if (existing) {
+      return existing;
+    }
+    const origin = {
+      x: new SpringValue(0),
+      y: new SpringValue(0),
+    };
+    this.origins.set(objectId, origin);
+    this.emit(`originChange:${objectId}`, origin);
+    return origin;
   };
 
   private handleChanges = (entries: ResizeObserverEntry[]) => {
@@ -68,14 +102,18 @@ export class ObjectBounds extends EventSubscriber<{
       const objectId = entry.target.getAttribute('data-observed-object-id');
       if (!objectId) return;
       const bounds = entry.borderBoxSize[0];
-      const existing = this.bounds.get(objectId);
+      const existing = this.sizes.get(objectId);
       if (existing) {
         // x/y are not helpful here
-        this.updateBounds(objectId, {
+        this.updateSize(objectId, {
           width: bounds.inlineSize,
           height: bounds.blockSize,
         });
       }
     });
   };
+
+  get ids() {
+    return Array.from(this.sizes.keys());
+  }
 }

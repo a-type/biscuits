@@ -31,7 +31,7 @@ export const CanvasRenderer = ({
   const viewport = useViewport();
 
   // keep track of viewport element size as provided by Viewport class
-  const [viewportSize, setViewportSize] = useState(viewport.size);
+  const [viewportSize, setViewportSize] = useState(viewport.elementSize);
   useEffect(() => {
     return viewport.subscribe('sizeChanged', setViewportSize);
   }, [viewport]);
