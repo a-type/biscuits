@@ -69,6 +69,12 @@ export function ConnectionSource({
         return;
       }
 
+      // don't link to self
+      if (objectId === sourceNodeId) {
+        setActive(false);
+        return;
+      }
+
       // verify it's a task node
       const task = await client.tasks.get(objectId).resolved;
       if (!task) {
