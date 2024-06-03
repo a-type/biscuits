@@ -6,6 +6,7 @@ import { Viewport } from './Viewport.js';
 import { ObjectBounds } from './ObjectBounds.js';
 import { ObjectPositions } from './ObjectPositions.js';
 import { SpringValue, to } from '@react-spring/web';
+import { Selections } from './Selections.js';
 
 type ActiveGestureState = {
   objectId: string | null;
@@ -18,15 +19,22 @@ export interface CanvasOptions {
   positionSnapIncrement?: number;
 }
 
+export interface CanvasGestureInfo {
+  shift: boolean;
+  alt: boolean;
+  ctrlOrMeta: boolean;
+}
+
 export type CanvasEvents = {
-  gestureStart: () => void;
-  gestureEnd: () => void;
-  gestureMove: () => void;
-  [k: `gestureCommit:${string}`]: (
+  [k: `objectDrop:${string}`]: (
     newPosition: Vector2,
     info: { source: 'gesture' | 'external' },
   ) => void;
-  [k: `gestureChange:${string}`]: (newPosition: Vector2) => void;
+  [k: `objectDrag:${string}`]: (newPosition: Vector2) => void;
+  canvasTap: (position: Vector2, info: CanvasGestureInfo) => void;
+  canvasDragStart: (position: Vector2, info: CanvasGestureInfo) => void;
+  canvasDrag: (position: Vector2, info: CanvasGestureInfo) => void;
+  canvasDragEnd: (position: Vector2, info: CanvasGestureInfo) => void;
 };
 
 /**
@@ -44,8 +52,10 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
 
   readonly bounds = new ObjectBounds();
   readonly positions = new ObjectPositions();
+  readonly selections = new Selections();
 
   readonly objectElements = new Map<string, Element>();
+  readonly objectMetadata = new Map<string, any>();
 
   private positionObservers: Record<string, Set<(position: Vector2) => void>> =
     {};
@@ -76,20 +86,17 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
 
   private onGestureStart() {
     this._gestureActive = true;
-    this.emit('gestureStart');
     this.emitGestureChange();
     this.viewport.element.style.setProperty('cursor', 'grabbing');
   }
 
   private onGestureEnd() {
     this._gestureActive = true;
-    this.emit('gestureEnd');
     this.emitGestureChange();
     this.viewport.element.style.removeProperty('cursor');
   }
 
   private onGestureMove() {
-    this.emit('gestureMove');
     this.emitGestureChange();
   }
 
@@ -101,7 +108,7 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
       { source: 'gesture' },
     );
     this.emit(
-      `gestureChange:${this.activeGesture.objectId}`,
+      `objectDrag:${this.activeGesture.objectId}`,
       this.activeGesture.position,
     );
   };
@@ -124,7 +131,7 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
     info: { source: 'gesture' | 'external' },
   ) => {
     this.positions.update(objectId, position, info);
-    return this.emit(`gestureCommit:${objectId}`, position, info);
+    return this.emit(`objectDrop:${objectId}`, position, info);
   };
 
   /**
@@ -183,9 +190,29 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
     // capture the final position before committing
     this.activeGesture.objectId = objectId;
     this.activeGesture.position = worldPosition;
+    this.onGestureEnd();
     this.commitActiveGesture();
     this.clearActiveGesture();
-    this.onGestureEnd();
+  };
+
+  onCanvasTap = (screenPosition: Vector2, info: CanvasGestureInfo) => {
+    const worldPosition = this.viewport.viewportToWorld(screenPosition);
+    this.emit('canvasTap', worldPosition, info);
+  };
+
+  onCanvasDragStart = (screenPosition: Vector2, info: CanvasGestureInfo) => {
+    const worldPosition = this.viewport.viewportToWorld(screenPosition);
+    this.emit('canvasDragStart', worldPosition, info);
+  };
+
+  onCanvasDrag = (screenPosition: Vector2, info: CanvasGestureInfo) => {
+    const worldPosition = this.viewport.viewportToWorld(screenPosition);
+    this.emit('canvasDrag', worldPosition, info);
+  };
+
+  onCanvasDragEnd = (screenPosition: Vector2, info: CanvasGestureInfo) => {
+    const worldPosition = this.viewport.viewportToWorld(screenPosition);
+    this.emit('canvasDragEnd', worldPosition, info);
   };
 
   /**
@@ -233,6 +260,9 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
         x: new SpringValue(0),
         y: new SpringValue(0),
       };
+    }
+    if (!bounds) {
+      return pos;
     }
     return {
       x: to([pos.x, bounds.width], (x, width) => x + width / 2),
@@ -287,18 +317,33 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
       }
     }
 
+    // TODO:
+    // const intersections = this.bounds.getIntersections({
+    //   x: worldPosition.x,
+    //   y: worldPosition.y,
+    //   width: 0,
+    //   height: 0
+    // }, 1)
+
     return null;
   };
 
-  registerElement = (objectId: string, element: Element | null) => {
+  registerElement = (
+    objectId: string,
+    element: Element | null,
+    metadata?: any,
+  ) => {
     if (element) {
       this.objectElements.set(objectId, element);
       this.bounds.observe(objectId, element);
+      this.objectMetadata.set(objectId, metadata);
     } else {
+      console.info('unregistered', objectId);
+      this.objectMetadata.delete(objectId);
       const el = this.objectElements.get(objectId);
       if (el) {
-        this.objectElements.delete(objectId);
         this.bounds.unobserve(el);
+        this.objectElements.delete(objectId);
       }
     }
   };

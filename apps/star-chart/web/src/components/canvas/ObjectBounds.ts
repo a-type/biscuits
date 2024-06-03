@@ -1,6 +1,6 @@
 import { EventSubscriber } from '@a-type/utils';
 import { SpringValue } from '@react-spring/web';
-import { LiveVector2 } from './types.js';
+import { Box, LiveVector2 } from './types.js';
 
 export interface Bounds {
   width: SpringValue<number>;
@@ -62,6 +62,8 @@ export class ObjectBounds extends EventSubscriber<{
     const objectId = el.getAttribute('data-observed-object-id');
     if (objectId) {
       this.sizes.delete(objectId);
+      this.origins.delete(objectId);
+      this.emit('observedChange');
       this.sizeObserver.unobserve(el);
     }
   };
@@ -75,26 +77,11 @@ export class ObjectBounds extends EventSubscriber<{
   };
 
   getSize = (objectId: string) => {
-    const existing = this.sizes.get(objectId);
-    if (!existing) {
-      this.updateSize(objectId, { width: 0, height: 0 });
-      return this.sizes.get(objectId)!;
-    }
-    return existing;
+    return this.sizes.get(objectId);
   };
 
   getOrigin = (objectId: string) => {
-    const existing = this.origins.get(objectId);
-    if (existing) {
-      return existing;
-    }
-    const origin = {
-      x: new SpringValue(0),
-      y: new SpringValue(0),
-    };
-    this.origins.set(objectId, origin);
-    this.emit(`originChange:${objectId}`, origin);
-    return origin;
+    return this.origins.get(objectId);
   };
 
   private handleChanges = (entries: ResizeObserverEntry[]) => {
@@ -116,4 +103,86 @@ export class ObjectBounds extends EventSubscriber<{
   get ids() {
     return Array.from(this.sizes.keys());
   }
+
+  getIntersections = (box: Box, threshold: number) => {
+    return this.ids.filter((objectId) =>
+      this.intersects(objectId, box, threshold),
+    );
+  };
+
+  intersects = (objectId: string, box: Box, threshold: number) => {
+    const objectOrigin = this.getOrigin(objectId);
+    const objectSize = this.getSize(objectId);
+
+    if (!objectOrigin || !objectSize) return false;
+
+    const objectX = objectOrigin.x.get();
+    const objectY = objectOrigin.y.get();
+    const objectWidth = objectSize.width.get();
+    const objectHeight = objectSize.height.get();
+
+    if (objectWidth === 0 && objectHeight === 0) {
+      // this becomes a point containment check and always passes if true
+      return (
+        objectX >= box.x &&
+        objectX <= box.x + box.width &&
+        objectY >= box.y &&
+        objectY <= box.y + box.height
+      );
+    }
+
+    const objectBottomRight = {
+      x: objectX + objectWidth,
+      y: objectY + objectHeight,
+    };
+
+    const boxTopLeft = {
+      x: box.x,
+      y: box.y,
+    };
+    const boxBottomRight = {
+      x: boxTopLeft.x + box.width,
+      y: boxTopLeft.y + box.height,
+    };
+
+    if (objectWidth === 0) {
+      // box must enclose the object horizontally
+      if (objectX > boxBottomRight.x || objectX < boxTopLeft.x) return false;
+
+      // this becomes a line containment check
+      const intersectionArea = Math.max(
+        0,
+        Math.min(objectBottomRight.y, boxBottomRight.y) -
+          Math.max(objectY, boxTopLeft.y),
+      );
+      return intersectionArea / objectHeight > threshold;
+    } else if (objectHeight === 0) {
+      // box must enclose the object vertically
+      if (objectY > boxBottomRight.y || objectY < boxTopLeft.y) return false;
+
+      // this becomes a line containment check
+      const intersectionArea = Math.max(
+        0,
+        Math.min(objectBottomRight.x, boxBottomRight.x) -
+          Math.max(objectX, boxTopLeft.x),
+      );
+      return intersectionArea / objectWidth > threshold;
+    }
+
+    // ensure this isn't 0 as it's used as a divisor (although we should be safe here)
+    const testArea = Math.max(Number.MIN_VALUE, objectWidth * objectHeight);
+    const intersectionArea =
+      Math.max(
+        0,
+        Math.min(objectBottomRight.x, boxBottomRight.x) -
+          Math.max(objectX, boxTopLeft.x),
+      ) *
+      Math.max(
+        0,
+        Math.min(objectBottomRight.y, boxBottomRight.y) -
+          Math.max(objectY, boxTopLeft.y),
+      );
+
+    return intersectionArea / testArea > threshold;
+  };
 }

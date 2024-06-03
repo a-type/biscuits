@@ -84,7 +84,10 @@ export function ConnectionSource({
   const sourceCenter = canvas.getLiveCenter(sourceNodeId);
   const sourceBounds = canvas.getLiveSize(sourceNodeId);
   const sourcePosition = useMemo(
-    () => closestLivePoint(sourceCenter, sourceBounds, target),
+    () =>
+      sourceBounds
+        ? closestLivePoint(sourceCenter, sourceBounds, target)
+        : sourceCenter,
     [sourceCenter, sourceBounds, target],
   );
 

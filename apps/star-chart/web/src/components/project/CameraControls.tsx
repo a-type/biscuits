@@ -1,6 +1,7 @@
 import { useSyncExternalStore } from 'react';
 import { useViewport } from '../canvas/ViewportProvider.jsx';
 import { Slider } from '@a-type/ui/components/slider';
+import { disableDragProps } from '../canvas/CanvasObjectDragHandle.jsx';
 
 export interface CameraControlsProps {}
 
@@ -12,7 +13,10 @@ export function CameraControls({}: CameraControlsProps) {
   );
 
   return (
-    <div className="absolute bottom-1 right-1 row pointer-events-none">
+    <div
+      className="absolute bottom-1 right-1 row pointer-events-none"
+      {...disableDragProps}
+    >
       <Slider
         value={[zoom]}
         onValueChange={([v]) => {

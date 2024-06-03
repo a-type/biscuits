@@ -10,13 +10,13 @@ import { TaskMenu } from './TaskMenu.jsx';
 import { Checkbox } from '@a-type/ui/components/checkbox';
 import { ConnectionSource } from './ConnectionSource.jsx';
 import { LiveUpdateTextField } from '@a-type/ui/components/liveUpdateTextField';
-import { subscribe } from 'valtio';
 import { CollapsibleSimple } from '@a-type/ui/components/collapsible';
 import { useDownstreamCount, useUpstreamUncompletedCount } from './hooks.js';
 import { clsx } from '@a-type/ui';
 import { Icon } from '@a-type/ui/components/icon';
 import { Tooltip } from '@a-type/ui/components/tooltip';
-import { ProjectCanvasState } from './state.js';
+import { useIsPendingSelection, useIsSelected } from '../canvas/canvasHooks.js';
+import { useCanvas } from '../canvas/CanvasProvider.jsx';
 
 export interface TaskNodeProps {
   task: Task;
@@ -31,6 +31,7 @@ export function TaskNode({ task }: TaskNodeProps) {
     initialPosition,
     objectId: id,
     onDrop: position.update,
+    metadata: { type: 'task' },
   });
 
   useEffect(() => {
@@ -56,15 +57,13 @@ export function TaskNode({ task }: TaskNodeProps) {
     [client, id, projectId],
   );
 
-  const actor = ProjectCanvasState.useActorRef();
-  const selectedId = ProjectCanvasState.useSelector(
-    ({ context }) => context.selectedTask,
-  );
-  const editMode = selectedId === id;
+  const { selected, exclusive } = useIsSelected(id);
+  const pendingSelect = useIsPendingSelection(id);
 
+  const canvas = useCanvas();
   const onTap = useCallback(() => {
-    actor.send({ type: 'selectTask', taskId: id });
-  }, [actor, id]);
+    canvas.selections.set([id]);
+  }, [canvas, id]);
 
   const downstreams = useDownstreamCount(id);
   const upstreams = useUpstreamUncompletedCount(id);
@@ -74,14 +73,16 @@ export function TaskNode({ task }: TaskNodeProps) {
   return (
     <CanvasObjectRoot
       className={clsx(
-        'layer-components:(bg-white border-solid border-2 border-gray-blend p-2 rounded-md shadow-sm)',
-        isPriority && 'bg-primary-wash',
-        upstreams > 0 && 'bg-gray-blend',
+        'layer-components:(bg-white border-solid border-2 border-gray-blend rounded-md shadow-sm)',
+        isPriority && 'layer-variants:bg-primary-wash',
+        upstreams > 0 && 'layer-variants:bg-gray-blend',
+        selected && 'layer-variants:border-primary',
+        !selected && pendingSelect && 'layer-variants:border-primary-wash',
       )}
       canvasObject={canvasObject}
     >
-      <CanvasObjectDragHandle onTap={onTap}>
-        <div className="w-max-content max-w-300px min-w-200px row items-start">
+      <CanvasObjectDragHandle onTap={onTap} className="p-2">
+        <div className="w-240px row items-start">
           <Checkbox
             className={clsx(!completedAt && upstreams > 0 ? 'opacity-50' : '')}
             checked={!!completedAt}
@@ -91,9 +92,9 @@ export function TaskNode({ task }: TaskNodeProps) {
             }}
             {...disableDragProps}
           />
-          {editMode ? (
+          {exclusive ? (
             <LiveUpdateTextField
-              className="text-sm min-w-80px w-auto"
+              className="text-sm min-w-80px w-auto py-0px h-full"
               value={content}
               onChange={(v) => task.set('content', v)}
               autoSelect
@@ -121,7 +122,7 @@ export function TaskNode({ task }: TaskNodeProps) {
           <ConnectionSource
             sourceNodeId={id}
             onConnection={createConnectionTo}
-            className="ml-auto text-xs row !gap-1 py-1 px-2 rounded-full bg-accent-light "
+            className="ml-auto text-xs row !gap-1 py-1 px-2 rounded-full bg-accent-light flex-shrink-0"
           >
             {downstreams === 0 ? null : downstreams}
             <Icon name="arrowRight" />
@@ -133,9 +134,13 @@ export function TaskNode({ task }: TaskNodeProps) {
             </div>
           )}
         </div>
-        <CollapsibleSimple open={editMode}>
-          <TaskMenu task={task} className="ml-auto" {...disableDragProps} />
-        </CollapsibleSimple>
+        {exclusive && (
+          <TaskMenu
+            task={task}
+            className="ml-auto absolute top-100% right-0 transform bg-white row p-1 rounded-full shadow-sm"
+            {...disableDragProps}
+          />
+        )}
       </CanvasObjectDragHandle>
     </CanvasObjectRoot>
   );

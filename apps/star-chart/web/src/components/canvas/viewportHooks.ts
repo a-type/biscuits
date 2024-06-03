@@ -11,6 +11,8 @@ import { proxy } from 'valtio';
 import { Vector2 } from './types.js';
 import { Viewport } from './Viewport.js';
 import { isLeftClick } from '@a-type/utils';
+import { useCanvas } from './CanvasProvider.jsx';
+import { createMachine, setup } from 'xstate';
 
 /**
  * Tracks cursor position and sends updates to the socket connection
@@ -63,10 +65,6 @@ export function useTrackCursor(viewport: Viewport) {
   return onMove;
 }
 
-export const viewportGestureState = proxy({
-  active: false,
-});
-
 const PINCH_GESTURE_DAMPING = 200;
 const WHEEL_GESTURE_DAMPING = 40;
 
@@ -116,19 +114,15 @@ export function useViewportGestureControls(
       },
       onPinchStart: ({ event }) => {
         event?.preventDefault();
-        viewportGestureState.active = true;
       },
       onPinchEnd: ({ event }) => {
         event?.preventDefault();
-        viewportGestureState.active = false;
       },
       onWheelStart: ({ event }) => {
         event?.preventDefault();
-        viewportGestureState.active = true;
       },
       onWheelEnd: ({ event }) => {
         event?.preventDefault();
-        viewportGestureState.active = false;
       },
     },
     {
@@ -155,27 +149,90 @@ export function useViewportGestureControls(
 
   const onCursorMove = useTrackCursor(viewport);
 
-  const bindPassiveGestures = useGesture({
-    onDrag: ({ delta: [x, y], event }) => {
-      if ('button' in event && isLeftClick(event)) {
-        // ignore left-click drags for panning.
-        // TODO: box-select
-        return;
-      }
-      viewport.doRelativePan(viewport.viewportDeltaToWorld({ x: -x, y: -y }), {
-        origin: 'direct',
-      });
+  const canvas = useCanvas();
+
+  const gestureIsDragging = useRef(false);
+  const bindPassiveGestures = useGesture(
+    {
+      onDrag: ({
+        delta: [x, y],
+        xy,
+        type,
+        buttons,
+        intentional,
+        last,
+        memo,
+        shiftKey,
+        metaKey,
+        ctrlKey,
+        altKey,
+      }) => {
+        if (!intentional || last) return;
+
+        gestureIsDragging.current = (buttons & 1) !== 0;
+
+        if (gestureIsDragging.current) {
+          canvas.onCanvasDrag(
+            { x: xy[0], y: xy[1] },
+            {
+              shift: shiftKey,
+              alt: altKey,
+              ctrlOrMeta: ctrlKey || metaKey,
+            },
+          );
+          return;
+        }
+
+        viewport.doRelativePan(
+          viewport.viewportDeltaToWorld({ x: -x, y: -y }),
+          {
+            origin: 'direct',
+          },
+        );
+      },
+      onPointerMoveCapture: ({ event }) => {
+        onCursorMove({ x: event.clientX, y: event.clientY });
+      },
+      onDragStart: ({ xy, buttons, metaKey, shiftKey, ctrlKey, altKey }) => {
+        gestureIsDragging.current = (buttons & 1) !== 0;
+        if (gestureIsDragging.current) {
+          canvas.onCanvasDragStart(
+            { x: xy[0], y: xy[1] },
+            {
+              shift: shiftKey,
+              alt: altKey,
+              ctrlOrMeta: ctrlKey || metaKey,
+            },
+          );
+          return;
+        }
+      },
+      onDragEnd: ({ xy, tap, metaKey, shiftKey, ctrlKey, altKey }) => {
+        if (gestureIsDragging.current) {
+          const info = {
+            shift: shiftKey,
+            alt: altKey,
+            ctrlOrMeta: ctrlKey || metaKey,
+          };
+          if (tap) {
+            canvas.onCanvasTap({ x: xy[0], y: xy[1] }, info);
+          }
+          canvas.onCanvasDragEnd({ x: xy[0], y: xy[1] }, info);
+        }
+        gestureIsDragging.current = false;
+      },
+      onContextMenu: ({ event }) => {
+        event.preventDefault();
+      },
     },
-    onPointerMoveCapture: ({ event }) => {
-      onCursorMove({ x: event.clientX, y: event.clientY });
+    {
+      drag: {
+        pointer: {
+          buttons: [1, 2, 4],
+        },
+      },
     },
-    onDragStart: () => {
-      viewportGestureState.active = true;
-    },
-    onDragEnd: () => {
-      viewportGestureState.active = false;
-    },
-  });
+  );
 
   return bindPassiveGestures();
 }

@@ -1,7 +1,8 @@
 import { hooks } from '@/store.js';
 import { Task } from '@star-chart.biscuits/verdant';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useAnalysis } from './AnalysisContext.jsx';
+import { nonNilFilter } from '@a-type/utils';
 
 export function useDownstreamCount(taskId: string) {
   const analysis = useAnalysis();
@@ -62,10 +63,12 @@ export function useProjectData(projectId: string) {
         const taskId = task.get('id');
         const sourced = connections
           .filter((c) => c.get('sourceTaskId') === taskId)
-          .map((c) => taskMap[c.get('targetTaskId')]);
+          .map((c) => taskMap[c.get('targetTaskId')])
+          .filter(nonNilFilter);
         const target = connections
           .filter((c) => c.get('targetTaskId') === taskId)
-          .map((c) => taskMap[c.get('sourceTaskId')]);
+          .map((c) => taskMap[c.get('sourceTaskId')])
+          .filter(nonNilFilter);
 
         upstreams[taskId] = target.map((t) => ({
           taskId: t.get('id'),
@@ -100,4 +103,52 @@ export function useProjectData(projectId: string) {
     connections,
     analysis,
   };
+}
+
+export function useDeleteTask() {
+  const client = hooks.useClient();
+  return useCallback(
+    async (id: string) => {
+      const deletedIds = [id];
+      // delete all connections to and from this task
+      const sourcedConnections = await client.connections.findAll({
+        index: {
+          where: 'sourceTaskId',
+          equals: id,
+        },
+      }).resolved;
+      const targetConnections = await client.connections.findAll({
+        index: {
+          where: 'targetTaskId',
+          equals: id,
+        },
+      }).resolved;
+      await Promise.all([
+        ...sourcedConnections.map((connection) =>
+          client.connections.delete(connection.get('id')).then(() => {
+            deletedIds.push(connection.get('id'));
+          }),
+        ),
+        ...targetConnections.map((connection) =>
+          client.connections.delete(connection.get('id')).then(() => {
+            deletedIds.push(connection.get('id'));
+          }),
+        ),
+        client.tasks.delete(id),
+      ]);
+
+      return deletedIds;
+    },
+    [client],
+  );
+}
+
+export function useDeleteConnection() {
+  const client = hooks.useClient();
+  return useCallback(
+    (id: string) => {
+      return client.connections.delete(id);
+    },
+    [client],
+  );
 }

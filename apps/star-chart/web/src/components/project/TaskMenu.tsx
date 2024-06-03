@@ -1,15 +1,8 @@
-import { Task } from '@star-chart.biscuits/verdant';
-import {
-  DropdownMenu,
-  DropdownMenuItem,
-  DropdownMenuArrow,
-  DropdownMenuContent,
-  DropdownMenuTrigger,
-  DropdownMenuItemRightSlot,
-} from '@a-type/ui/components/dropdownMenu';
 import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
-import { hooks } from '@/store.js';
+import { Task } from '@star-chart.biscuits/verdant';
+import { useDeleteTask } from './hooks.js';
+import { clsx } from '@a-type/ui';
 
 export interface TaskMenuProps {
   task: Task;
@@ -17,35 +10,16 @@ export interface TaskMenuProps {
 }
 
 export function TaskMenu({ task, className, ...rest }: TaskMenuProps) {
-  const client = hooks.useClient();
   const id = task.get('id');
-  const deleteTask = async () => {
-    // delete all connections to and from this task
-    const sourcedConnections = await client.connections.findAll({
-      index: {
-        where: 'sourceTaskId',
-        equals: id,
-      },
-    }).resolved;
-    const targetConnections = await client.connections.findAll({
-      index: {
-        where: 'targetTaskId',
-        equals: id,
-      },
-    }).resolved;
-    await Promise.all([
-      ...sourcedConnections.map((connection) =>
-        client.connections.delete(connection.get('id')),
-      ),
-      ...targetConnections.map((connection) =>
-        client.connections.delete(connection.get('id')),
-      ),
-      client.tasks.delete(id),
-    ]);
-  };
+  const deleteTask = useDeleteTask();
+
   return (
-    <div className="row justify-end">
-      <Button size="icon" color="ghostDestructive" onClick={deleteTask}>
+    <div className={clsx('row justify-end', className)} {...rest}>
+      <Button
+        size="icon"
+        color="ghostDestructive"
+        onClick={() => deleteTask(id)}
+      >
         <Icon name="trash" />
       </Button>
     </div>

@@ -1,60 +1,38 @@
 import { hooks } from '@/store.js';
 import { Project, Task } from '@star-chart.biscuits/verdant';
+import { Suspense, useCallback, useEffect, useState } from 'react';
+import { BoxSelect } from '../canvas/BoxSelect.jsx';
+import { CanvasGestures, CanvasProvider } from '../canvas/CanvasProvider.jsx';
+import { CanvasRenderer } from '../canvas/CanvasRenderer.jsx';
+import { CanvasSvgLayer } from '../canvas/CanvasSvgLayer.jsx';
+import { CanvasWallpaper } from '../canvas/CanvasWallpaper.jsx';
+import { snapVector } from '../canvas/math.js';
+import { Minimap } from '../canvas/Minimap.jsx';
+import { Vector2 } from '../canvas/types.js';
 import {
   useViewport,
   ViewportProvider,
   ViewportRoot,
 } from '../canvas/ViewportProvider.jsx';
-import { Suspense, useCallback, useEffect, useState } from 'react';
-import { CanvasProvider } from '../canvas/CanvasProvider.jsx';
-import { CanvasWallpaper } from '../canvas/CanvasWallpaper.jsx';
-import { CanvasRenderer } from '../canvas/CanvasRenderer.jsx';
-import { Vector2 } from '../canvas/types.js';
-import { CanvasObject } from '../canvas/CanvasObject.jsx';
-import { TaskNode } from './TaskNode.jsx';
-import { CanvasSvgLayer } from '../canvas/CanvasSvgLayer.jsx';
-import { ConnectionWire } from './ConnectionWire.jsx';
-import { roundVector, snapVector } from '../canvas/math.js';
+import { AnalysisContext } from './AnalysisContext.jsx';
 import { ArrowMarkers } from './ArrowMarkers.jsx';
 import { CameraControls } from './CameraControls.jsx';
+import { ConnectionWire } from './ConnectionWire.jsx';
 import { useProjectData } from './hooks.js';
-import { AnalysisContext } from './AnalysisContext.jsx';
-import { projectCanvasMachine, ProjectCanvasState } from './state.js';
-import { Minimap } from '../canvas/Minimap.jsx';
+import { TaskNode } from './TaskNode.jsx';
+import { SelectionMenu } from './SelectionMenu.jsx';
+import { Reticule } from './Reticule.jsx';
 
 export interface ProjectCanvasProps {
   project: Project;
 }
 
-export function ProjectCanvas(props: ProjectCanvasProps) {
-  const addTask = useAddTask(props.project.get('id'));
-
-  return (
-    <ProjectCanvasState.Provider
-      logic={projectCanvasMachine.provide({
-        actions: {
-          createTask: (_, ev) => addTask(ev.position),
-        },
-      })}
-    >
-      <ProjectCanvasImpl {...props} />
-    </ProjectCanvasState.Provider>
-  );
-}
-
-function ProjectCanvasImpl({ project }: ProjectCanvasProps) {
+export function ProjectCanvas({ project }: ProjectCanvasProps) {
   const projectId = project.get('id');
 
   const { tasks, connections, analysis } = useProjectData(projectId);
 
-  const actor = ProjectCanvasState.useActorRef();
-
-  const handleTap = useCallback(
-    (position: Vector2) => {
-      actor.send({ type: 'tapCanvas', position });
-    },
-    [actor],
-  );
+  const addTask = useAddTask(projectId);
 
   return (
     <AnalysisContext.Provider value={analysis}>
@@ -65,11 +43,22 @@ function ProjectCanvasImpl({ project }: ProjectCanvasProps) {
             positionSnapIncrement: 24,
           }}
         >
+          <CanvasGestures
+            onTap={(position, ctx) => {
+              if (ctx.canvas.selections.selectedIds.size === 0) {
+                addTask(position);
+              } else {
+                ctx.canvas.selections.set([]);
+              }
+            }}
+          />
           <ViewportRoot>
             <CanvasRenderer>
-              <CanvasWallpaper onTap={handleTap} />
+              <CanvasWallpaper />
               <CanvasSvgLayer id="connections">
                 <ArrowMarkers />
+                <Reticule />
+                <BoxSelect className="stroke-1 stroke-accent-dark fill-accent-wash opacity-50 z-0" />
               </CanvasSvgLayer>
               {connections.map((connection) => (
                 <Suspense key={connection.get('id')}>
@@ -84,6 +73,7 @@ function ProjectCanvasImpl({ project }: ProjectCanvasProps) {
             </CanvasRenderer>
             <CameraControls />
             <Minimap className="hidden sm:block absolute bottom-0 left-0 w-200px border-default bg-light-blend" />
+            <SelectionMenu />
           </ViewportRoot>
         </CanvasProvider>
       </ViewportProvider>

@@ -42,7 +42,7 @@ export function CanvasObjectRoot({
   const ref = useRef<HTMLDivElement>(null);
   useRerasterize(ref);
 
-  const register = useRegister(canvasObject.id);
+  const register = useRegister(canvasObject.id, canvasObject.metadata);
   const finalRef = useMergedRef(ref, register);
 
   return (
@@ -68,37 +68,13 @@ export function CanvasObjectRoot({
   );
 }
 
-function DebugAnnotations() {
-  const canvas = useCanvas();
-  const { id } = useCanvasObjectContext();
-  const size = canvas.getLiveSize(id);
-
-  return (
-    <div className="absolute inset-0 pointer-events-none">
-      <animated.div
-        className="absolute left-0 top-0 border-solid border-1 border-red"
-        style={{
-          width: size.width,
-          height: size.height,
-        }}
-      />
-      <animated.div
-        className="w-1px h-1px left-0 top-0 absolute z-1 bg-red rounded-full"
-        style={{
-          x: size.width.to((w) => w / 2),
-          y: size.height.to((h) => h / 2),
-        }}
-      />
-    </div>
-  );
-}
-
 export interface CanvasObject {
   bindDragHandle: (args?: { onTap?: () => void }) => any;
   isGrabbing: boolean;
   rootProps: any;
   moveTo: (position: Vector2, interpolate?: boolean) => void;
   id: string;
+  metadata: any;
 }
 
 const CanvasObjectContext = createContext<CanvasObject | null>(null);
@@ -118,11 +94,13 @@ export function useCanvasObject({
   objectId,
   zIndex = 0,
   onDrop,
+  metadata,
 }: {
   initialPosition: Vector2;
   objectId: string;
   onDrop: (pos: Vector2) => any;
   zIndex?: number;
+  metadata?: any;
 }) {
   const canvas = useCanvas();
 
@@ -148,7 +126,7 @@ export function useCanvasObject({
 
   useEffect(() => {
     if (onDrop) {
-      return canvas.subscribe(`gestureCommit:${objectId}`, onDrop);
+      return canvas.subscribe(`objectDrop:${objectId}`, onDrop);
     }
   }, [canvas, onDrop]);
 
@@ -184,6 +162,7 @@ export function useCanvasObject({
       rootProps,
       moveTo,
       id: objectId,
+      metadata,
     };
   }, [canvas, pickupSpring, zIndex, isGrabbing, bindDragHandle, objectId]);
 

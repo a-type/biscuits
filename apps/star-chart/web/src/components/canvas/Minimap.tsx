@@ -1,10 +1,8 @@
-import { useEffect, useMemo } from 'react';
-import { useCanvas } from './CanvasProvider.jsx';
-import { useViewport } from './ViewportProvider.jsx';
 import { animated, useSpring } from '@react-spring/web';
-import { clsx } from '@a-type/ui';
 import { useGesture } from '@use-gesture/react';
+import { useEffect } from 'react';
 import { useBoundsObjectIds, useOrigin, useSize } from './canvasHooks.js';
+import { useViewport } from './ViewportProvider.jsx';
 
 export interface MinimapProps {
   className?: string;

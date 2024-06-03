@@ -22,6 +22,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hot-toast": "^2.4.1",
+    "react-hotkeys-hook": "^4.5.0",
     "rete": "^2.0.3",
     "rete-area-plugin": "^2.0.4",
     "rete-connection-plugin": "^2.0.2",

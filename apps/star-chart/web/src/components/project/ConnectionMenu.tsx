@@ -4,6 +4,8 @@ import { animated, to } from '@react-spring/web';
 import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
 import { useCenter } from '../canvas/canvasHooks.js';
+import { stopGesturePropagation } from '../canvas/events.js';
+import { useCanvas } from '../canvas/CanvasProvider.jsx';
 
 export interface ConnectionMenuProps {
   connection: Connection;
@@ -16,12 +18,15 @@ export function ConnectionMenu({ connection }: ConnectionMenuProps) {
   const targetCenter = useCenter(targetTaskId);
 
   const client = hooks.useClient();
+  const canvas = useCanvas();
   const deleteConnection = () => {
     client.connections.delete(connection.get('id'));
+    canvas.selections.set([]);
   };
 
   return (
     <animated.div
+      {...stopGesturePropagation}
       data-connection-menu
       style={{
         x: to([sourceCenter.x, targetCenter.x], (x1, x2) => (x1 + x2) / 2),

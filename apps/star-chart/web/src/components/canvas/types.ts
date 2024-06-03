@@ -24,3 +24,5 @@ export type LiveSize = {
   width: FrameValue<number>;
   height: FrameValue<number>;
 };
+
+export type Box = Vector2 & Size;

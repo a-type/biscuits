@@ -2,19 +2,21 @@ import { animated, to } from '@react-spring/web';
 import { SVGProps, useEffect, useState } from 'react';
 import { LiveVector2, Vector2 } from './types.js';
 import { useGesture } from '@use-gesture/react';
-import { distanceToBezier, getWireBezierForEndPoints } from './math.js';
+import { getWireBezierForEndPoints } from './math.js';
 import { useViewport } from './ViewportProvider.jsx';
 import { clsx } from '@a-type/ui';
 import { useRegister } from './canvasHooks.js';
 import { useCanvas } from './CanvasProvider.jsx';
+import { CanvasGestureInfo } from './Canvas.js';
 
 export interface WireProps extends Omit<SVGProps<SVGPathElement>, 'ref'> {
   sourcePosition: LiveVector2;
   targetPosition: LiveVector2;
   className?: string;
   hoverClassName?: string;
-  onTap?: (relativePosition: Vector2) => void;
+  onTap?: (relativePosition: Vector2, info: CanvasGestureInfo) => void;
   id: string;
+  metadata?: any;
 }
 
 export function Wire({
@@ -24,6 +26,7 @@ export function Wire({
   hoverClassName,
   onTap,
   id,
+  metadata,
   ...rest
 }: WireProps) {
   const viewport = useViewport();
@@ -50,7 +53,11 @@ export function Wire({
 
           state.event.preventDefault();
           state.event.stopPropagation();
-          onTap?.(worldPos);
+          onTap?.(worldPos, {
+            shift: state.shiftKey,
+            ctrlOrMeta: state.ctrlKey || state.metaKey,
+            alt: state.altKey,
+          });
         }
       },
     },
@@ -73,7 +80,7 @@ export function Wire({
     },
   );
 
-  const register = useRegister(id);
+  const register = useRegister(id, metadata);
   const canvas = useCanvas();
   // register position as smallest of x,y values - i.e. top left
   useEffect(() => {
@@ -93,6 +100,7 @@ export function Wire({
         fill="none"
         opacity="50%"
         className={clsx(
+          'touch-none',
           onTap && hovered ? hoverClassName : 'stroke-transparent',
           onTap ? 'cursor-pointer' : '',
         )}
