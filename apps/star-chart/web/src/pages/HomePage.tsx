@@ -1,6 +1,8 @@
 import { CreateProjectButton } from '@/components/project/CreateProjectButton.jsx';
 import { ProjectCanvas } from '@/components/project/ProjectCanvas.jsx';
+import { ProjectCard } from '@/components/project/ProjectCard.jsx';
 import { hooks } from '@/store.js';
+import { CardGrid } from '@a-type/ui/components/card';
 import { Icon } from '@a-type/ui/components/icon';
 import {
   PageContent,
@@ -18,17 +20,19 @@ export function HomePage({}: HomePageProps) {
   return (
     <PageRoot>
       <PageContent>
-        <H1>Projects</H1>
-        <div className="col">
+        <H1 className="mb-2">Projects</H1>
+        <CardGrid>
           {projects.map((proj) => (
-            <Link to={`/project/${proj.get('id')}`} key={proj.get('id')}>
-              {proj.get('name')}
-            </Link>
+            <ProjectCard key={proj.uid} project={proj} />
           ))}
-        </div>
+        </CardGrid>
         <PageNowPlaying unstyled className="row items-center justify-center">
-          <CreateProjectButton size="icon" className="shadow-xl">
-            <Icon name="plus" />
+          <CreateProjectButton
+            color="primary"
+            size="icon"
+            className="shadow-xl w-48px h-48px items-center justify-center"
+          >
+            <Icon name="plus" className="w-20px h-20px" />
           </CreateProjectButton>
         </PageNowPlaying>
       </PageContent>

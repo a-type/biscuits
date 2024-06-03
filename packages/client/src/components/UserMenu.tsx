@@ -27,12 +27,14 @@ export interface UserMenuProps {
   className?: string;
   disableAppSettings?: boolean;
   children?: ReactNode;
+  extraItems?: ReactNode[];
 }
 
 export function UserMenu({
   className,
   disableAppSettings,
   children,
+  extraItems,
 }: UserMenuProps) {
   const [isLoggedIn, loading] = useIsLoggedIn();
   const isOffline = useIsOffline();
@@ -154,6 +156,11 @@ export function UserMenu({
             </LogoutButton>
           </DropdownMenuItem>
         )}
+        {extraItems?.map((item, i) => (
+          <DropdownMenuItem key={i} asChild>
+            {item}
+          </DropdownMenuItem>
+        ))}
       </DropdownMenuContent>
     </DropdownMenu>
   );

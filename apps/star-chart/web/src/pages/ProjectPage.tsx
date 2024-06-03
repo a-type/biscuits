@@ -1,13 +1,27 @@
 import { ProjectCanvas } from '@/components/project/ProjectCanvas.jsx';
 import { hooks } from '@/store.js';
 import { UserMenu } from '@biscuits/client';
-import { useParams } from '@verdant-web/react-router';
+import { Link, useParams, useSearchParams } from '@verdant-web/react-router';
+import {
+  DropdownMenuItem,
+  DropdownMenuItemRightSlot,
+} from '@a-type/ui/components/dropdownMenu';
+import { Icon } from '@a-type/ui/components/icon';
 
 export interface ProjectPageProps {}
 
 export function ProjectPage({}: ProjectPageProps) {
   const { projectId } = useParams();
   const project = hooks.useProject(projectId);
+
+  const [_, setSearch] = useSearchParams();
+
+  const showProjectSettings = () => {
+    setSearch((cur) => {
+      cur.set('editProject', projectId);
+      return cur;
+    });
+  };
 
   if (!project) {
     return <div>Not found</div>;
@@ -17,7 +31,17 @@ export function ProjectPage({}: ProjectPageProps) {
     <div className="w-full h-full relative">
       <ProjectCanvas project={project} />
       <div className="fixed top-0 left-0 right-0 py-2 row items-center pointer-events-none">
-        <UserMenu className="pointer-events-auto ml-auto" />
+        <UserMenu
+          className="pointer-events-auto ml-auto"
+          extraItems={[
+            <div onClick={showProjectSettings}>
+              Edit project
+              <DropdownMenuItemRightSlot>
+                <Icon name="new_window" />
+              </DropdownMenuItemRightSlot>
+            </div>,
+          ]}
+        />
       </div>
     </div>
   );

@@ -15,6 +15,7 @@ import {
   createGraphQLClient,
   AppPreviewNotice,
 } from '@biscuits/client';
+import { ProjectSettingsDialog } from './components/project/ProjectSettingsDialog.jsx';
 
 export interface AppProps {}
 
@@ -48,6 +49,7 @@ export function App({}: AppProps) {
                   containerClassName="mb-10 sm:mb-0"
                 />
                 <IconSpritesheet />
+                <ProjectSettingsDialog />
               </ParticleLayer>
             </VerdantProvider>
           </Provider>

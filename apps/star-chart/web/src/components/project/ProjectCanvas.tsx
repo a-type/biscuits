@@ -22,6 +22,7 @@ import { useProjectData } from './hooks.js';
 import { TaskNode } from './TaskNode.jsx';
 import { SelectionMenu } from './SelectionMenu.jsx';
 import { Reticule } from './Reticule.jsx';
+import { ProjectTitle } from './ProjectTitle.jsx';
 
 export interface ProjectCanvasProps {
   project: Project;
@@ -53,6 +54,8 @@ export function ProjectCanvas({ project }: ProjectCanvasProps) {
             }}
           />
           <ViewportRoot>
+            <ProjectTitle project={project} />
+
             <CanvasRenderer>
               <CanvasWallpaper />
               <CanvasSvgLayer id="connections">
