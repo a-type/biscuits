@@ -87,8 +87,13 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
   // strict initialization checking...
   private _boundElement: HTMLElement = null as any;
   private _boundElementSize: Size = { width: 0, height: 0 };
+  private _boundElementOffset: Vector2 = { x: 0, y: 0 };
   private handleBoundElementResize = ([entry]: ResizeObserverEntry[]) => {
-    this.setBoundElementSize(entry.contentRect);
+    const box = entry.target.getBoundingClientRect();
+    this.setBoundElementSize(entry.contentRect, {
+      x: box.left,
+      y: box.top,
+    });
   };
   private _boundElementResizeObserver = new ResizeObserver(
     this.handleBoundElementResize,
@@ -118,15 +123,19 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
     window.viewport = this;
   }
 
-  private setBoundElementSize = (size: Size) => {
+  private setBoundElementSize = (size: Size, offset?: Vector2) => {
     this._boundElementSize.width = size.width;
     this._boundElementSize.height = size.height;
+    if (offset) {
+      this._boundElementOffset = offset;
+    }
     this.emit('sizeChanged', size);
   };
 
   private bindOrDefault = (element: HTMLElement | null) => {
     if (this._boundElement && this._boundElement !== element) {
       this._boundElementResizeObserver.unobserve(this._boundElement);
+      this._boundElement.removeAttribute('data-viewport');
     }
     if (typeof window === 'undefined') {
       // SSR context - simulate an element client rect and ignore
@@ -137,12 +146,20 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
       });
     } else {
       this._boundElement = element ?? document.documentElement;
+      this._boundElement.setAttribute('data-viewport', 'true');
       this._boundElementResizeObserver.observe(this._boundElement);
       if (element) {
-        this.setBoundElementSize({
-          width: element.clientWidth,
-          height: element.clientHeight,
-        });
+        const box = element.getBoundingClientRect();
+        this.setBoundElementSize(
+          {
+            width: element.clientWidth,
+            height: element.clientHeight,
+          },
+          {
+            x: box.left,
+            y: box.top,
+          },
+        );
       } else {
         this.setBoundElementSize({
           width: window.innerWidth,
@@ -172,7 +189,7 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
   }
 
   get topLeft() {
-    return this.viewportToWorld({ x: 0, y: 0 });
+    return this.viewportToWorld(this._boundElementOffset);
   }
 
   get config() {
@@ -274,8 +291,14 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
     //      this is done OUTSIDE of the zoom scaling because the pan coordinate is already
     //      in world space and doesn't need to be adjusted for zoom.
     const transformedPoint = {
-      x: (screenPoint.x - this.halfViewportWidth) / this.zoom + this.center.x,
-      y: (screenPoint.y - this.halfViewportHeight) / this.zoom + this.center.y,
+      x:
+        (screenPoint.x - this._boundElementOffset.x - this.halfViewportWidth) /
+          this.zoom +
+        this.center.x,
+      y:
+        (screenPoint.y - this._boundElementOffset.y - this.halfViewportHeight) /
+          this.zoom +
+        this.center.y,
     };
 
     if (clamp && !!this.config.canvasLimits) {
@@ -303,8 +326,14 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
    */
   worldToViewport = (worldPoint: Vector2) => {
     return {
-      x: (worldPoint.x - this.center.x) * this.zoom + this.halfViewportWidth,
-      y: (worldPoint.y - this.center.y) * this.zoom + this.halfViewportHeight,
+      x:
+        (worldPoint.x - this.center.x) * this.zoom +
+        this.halfViewportWidth +
+        this._boundElementOffset.x,
+      y:
+        (worldPoint.y - this.center.y) * this.zoom +
+        this.halfViewportHeight +
+        this._boundElementOffset.y,
     };
   };
 

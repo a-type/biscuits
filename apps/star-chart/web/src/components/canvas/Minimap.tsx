@@ -29,7 +29,6 @@ export function Minimap({ className }: MinimapProps) {
   });
 
   const ids = useBoundsObjectIds();
-  console.log(ids);
 
   return (
     <div className={className}>
