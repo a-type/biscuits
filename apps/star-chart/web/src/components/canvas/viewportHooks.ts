@@ -1,18 +1,15 @@
 import { hooks } from '@/store.js';
 import { useGesture } from '@use-gesture/react';
 import {
+  KeyboardEvent as ReactKeyboardEvent,
   RefObject,
   useCallback,
   useEffect,
   useRef,
-  KeyboardEvent as ReactKeyboardEvent,
 } from 'react';
-import { proxy } from 'valtio';
+import { useCanvas } from './CanvasProvider.jsx';
 import { Vector2 } from './types.js';
 import { Viewport } from './Viewport.js';
-import { isLeftClick } from '@a-type/utils';
-import { useCanvas } from './CanvasProvider.jsx';
-import { createMachine, setup } from 'xstate';
 
 /**
  * Tracks cursor position and sends updates to the socket connection
@@ -151,7 +148,10 @@ export function useViewportGestureControls(
 
   const canvas = useCanvas();
 
-  const gestureIsDragging = useRef(false);
+  const gestureDetails = useRef({
+    buttons: 0,
+    touches: 0,
+  });
   const bindPassiveGestures = useGesture(
     {
       onDrag: ({
@@ -170,10 +170,10 @@ export function useViewportGestureControls(
       }) => {
         if (!intentional || last) return;
 
-        console.log(touches, type);
-        gestureIsDragging.current = touches === 0 && (buttons & 1) !== 0;
+        gestureDetails.current.touches = touches;
+        gestureDetails.current.buttons = buttons;
 
-        if (gestureIsDragging.current) {
+        if (isCanvasDrag(gestureDetails.current)) {
           canvas.onCanvasDrag(
             { x: xy[0], y: xy[1] },
             {
@@ -203,8 +203,10 @@ export function useViewportGestureControls(
         altKey,
         touches,
       }) => {
-        gestureIsDragging.current = touches === 0 && (buttons & 1) !== 0;
-        if (gestureIsDragging.current) {
+        gestureDetails.current.touches = touches;
+        gestureDetails.current.buttons = buttons;
+
+        if (isCanvasDrag(gestureDetails.current)) {
           canvas.onCanvasDragStart(
             { x: xy[0], y: xy[1] },
             {
@@ -216,19 +218,27 @@ export function useViewportGestureControls(
           return;
         }
       },
-      onDragEnd: ({ xy, tap, metaKey, shiftKey, ctrlKey, altKey }) => {
-        if (gestureIsDragging.current) {
-          const info = {
-            shift: shiftKey,
-            alt: altKey,
-            ctrlOrMeta: ctrlKey || metaKey,
-          };
-          if (tap) {
-            canvas.onCanvasTap({ x: xy[0], y: xy[1] }, info);
-          }
+      onDragEnd: ({ xy, tap, metaKey, shiftKey, ctrlKey, altKey, type }) => {
+        const info = {
+          shift: shiftKey,
+          alt: altKey,
+          ctrlOrMeta: ctrlKey || metaKey,
+        };
+
+        if (isCanvasDrag(gestureDetails.current)) {
           canvas.onCanvasDragEnd({ x: xy[0], y: xy[1] }, info);
         }
-        gestureIsDragging.current = false;
+
+        // tap is triggered either by left click, or on touchscreens
+        if (
+          tap &&
+          (isCanvasDrag(gestureDetails.current) ||
+            isTouch(gestureDetails.current))
+        ) {
+          canvas.onCanvasTap({ x: xy[0], y: xy[1] }, info);
+        }
+        gestureDetails.current.buttons = 0;
+        gestureDetails.current.touches = 0;
       },
       onContextMenu: ({ event }) => {
         event.preventDefault();
@@ -356,4 +366,18 @@ export function useKeyboardControls(viewport: Viewport) {
     onKeyUp: handleKeyUp,
     onKeyDown: handleKeyDown,
   };
+}
+
+function isCanvasDrag({
+  touches,
+  buttons,
+}: {
+  touches: number;
+  buttons: number;
+}) {
+  return (buttons & 1) > 0 && touches === 0;
+}
+
+function isTouch({ touches }: { touches: number; buttons: number }) {
+  return touches > 0;
 }

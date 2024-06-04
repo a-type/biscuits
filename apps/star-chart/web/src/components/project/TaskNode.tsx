@@ -60,6 +60,7 @@ export function TaskNode({ task }: TaskNodeProps) {
         upstreams > 0 && 'layer-variants:bg-wash',
         selected && 'layer-variants:border-primary',
         !selected && pendingSelect && 'layer-variants:border-primary-wash',
+        !!completedAt && 'opacity-50',
       )}
       canvasObject={canvasObject}
     >
@@ -141,7 +142,7 @@ function TaskFullContent({
               : 'line-through',
           )}
         >
-          {isPriority(upstreams, downstreams) && (
+          {!completedAt && isPriority(upstreams, downstreams) && (
             <Tooltip content="High impact!">
               <span>🔥</span>
             </Tooltip>
