@@ -43,7 +43,12 @@ export function ProjectCanvas({ project }: ProjectCanvasProps) {
 
   return (
     <AnalysisContext.Provider value={analysis}>
-      <ViewportProvider minZoom={0.25} maxZoom={1.25}>
+      <ViewportProvider
+        minZoom={0.25}
+        maxZoom={1.25}
+        defaultZoom={1}
+        canvasSize={null}
+      >
         <ZoomFitter tasks={tasks} />
         <CanvasProvider
           options={{
@@ -52,7 +57,6 @@ export function ProjectCanvas({ project }: ProjectCanvasProps) {
         >
           <CanvasGestures
             onTap={async (position, ctx) => {
-              console.log(ctx.canvas.selections.selectedIds.size);
               if (ctx.canvas.selections.selectedIds.size === 0) {
                 const task = await addTask(position);
                 ctx.canvas.selections.set([task.get('id')]);
@@ -83,10 +87,10 @@ export function ProjectCanvas({ project }: ProjectCanvasProps) {
               ))}
             </CanvasRenderer>
             <CameraControls />
-            <Minimap
+            {/* <Minimap
               className="hidden sm:block absolute bottom-0 left-0 w-200px border-default bg-light-blend"
               renderItem={renderMinimapItem}
-            />
+            /> */}
             <SelectionMenu />
             <HomeButton />
           </ViewportRoot>

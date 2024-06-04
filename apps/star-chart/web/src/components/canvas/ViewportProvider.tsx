@@ -6,6 +6,7 @@ import {
   useViewportGestureControls,
 } from './viewportHooks.js';
 import { clsx } from '@a-type/ui';
+import { Size } from './types.js';
 
 export function useViewport() {
   const ctx = useContext(ViewportContext);
@@ -21,6 +22,7 @@ export interface ViewportProviderProps {
   minZoom?: number;
   maxZoom?: number;
   defaultZoom?: number;
+  canvasSize?: Size | null;
 }
 
 export const ViewportProvider = ({
@@ -28,6 +30,7 @@ export const ViewportProvider = ({
   minZoom = 1 / 4,
   maxZoom = 2,
   defaultZoom = 1,
+  canvasSize = { width: 2000, height: 2000 },
 }: ViewportProviderProps) => {
   const [viewport] = useState(() => {
     const viewport = new Viewport({
@@ -37,10 +40,12 @@ export const ViewportProvider = ({
         min: minZoom,
         max: maxZoom,
       },
-      canvasLimits: {
-        max: { x: 1000, y: 1000 },
-        min: { x: -1000, y: -1000 },
-      },
+      canvasLimits: canvasSize
+        ? {
+            max: { x: canvasSize.width / 2, y: canvasSize.height / 2 },
+            min: { x: -canvasSize.width / 2, y: -canvasSize.height / 2 },
+          }
+        : undefined,
     });
     // @ts-ignore for debugging!
     window.viewport = viewport;

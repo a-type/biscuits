@@ -6,10 +6,12 @@ import {
   useCallback,
   useEffect,
   useRef,
+  useState,
 } from 'react';
 import { useCanvas } from './CanvasProvider.jsx';
 import { Vector2 } from './types.js';
 import { Viewport } from './Viewport.js';
+import { useViewport } from './ViewportProvider.jsx';
 
 /**
  * Tracks cursor position and sends updates to the socket connection
@@ -386,4 +388,17 @@ function isCanvasDrag({
 
 function isTouch({ touches }: { touches: number; buttons: number }) {
   return touches > 0;
+}
+
+export function useCanvasRect() {
+  const viewport = useViewport();
+
+  const [rect, setRect] = useState(() => viewport.canvasRect);
+  useEffect(() => {
+    return viewport.subscribe('canvasChanged', () =>
+      setRect(viewport.canvasRect),
+    );
+  }, [viewport]);
+
+  return rect;
 }

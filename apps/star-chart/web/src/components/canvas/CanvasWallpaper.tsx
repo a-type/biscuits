@@ -1,6 +1,7 @@
 import { clsx } from '@a-type/ui';
 import * as React from 'react';
 import { useViewport } from './ViewportProvider.jsx';
+import { useCanvasRect } from './viewportHooks.js';
 
 export interface IViewportWallpaperProps {
   children?: React.ReactNode;
@@ -16,10 +17,9 @@ export const CanvasWallpaper: React.FC<IViewportWallpaperProps> = ({
   children,
   imageUrl,
 }) => {
-  const viewport = useViewport();
+  const canvasRect = useCanvasRect();
 
   const style = React.useMemo(() => {
-    const canvasRect = viewport.canvasRect;
     return {
       backgroundImage: imageUrl ? `url(${imageUrl})` : undefined,
       width: canvasRect.width,
@@ -27,7 +27,7 @@ export const CanvasWallpaper: React.FC<IViewportWallpaperProps> = ({
       left: canvasRect.x,
       top: canvasRect.y,
     };
-  }, [imageUrl, viewport]);
+  }, [imageUrl, canvasRect]);
 
   return (
     <div

@@ -50,7 +50,7 @@ export function SvgPortal({
 }) {
   const layer = document.getElementById(layerId);
   if (!layer) {
-    console.warn('Layer not found', layerId);
+    console.debug('Layer not found', layerId);
     return null;
   }
   return createPortal(children, layer);

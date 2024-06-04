@@ -1,6 +1,12 @@
 import { EventSubscriber, preventDefault } from '@a-type/utils';
 import { Size, Vector2, RectLimits } from './types.js';
-import { addVectors, clamp, clampVector, subtractVectors } from './math.js';
+import {
+  addVectors,
+  clamp,
+  clampVector,
+  multiplyVector,
+  subtractVectors,
+} from './math.js';
 
 // for some calculations we need to assume a real size for an infinite
 // canvas... we use this value for infinite extents. FIXME: can we
@@ -64,6 +70,8 @@ export type ViewportEvents = {
   centerChanged(center: Readonly<Vector2>, origin: ViewportEventOrigin): void;
   /** Fired when the size of the bound element changes */
   sizeChanged(size: Size): void;
+  /** Fired when the size of the canvas changes */
+  canvasChanged(size: RectLimits): void;
 };
 
 /**
@@ -113,7 +121,12 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
     this._config = {
       defaultZoom: 1,
       zoomLimits: { min: 0.25, max: 2 },
-      panLimits: config.canvasLimits,
+      panLimits: config.canvasLimits
+        ? {
+            max: multiplyVector(config.canvasLimits.max, 1.5),
+            min: multiplyVector(config.canvasLimits.min, 1.5),
+          }
+        : undefined,
       ...config,
     };
 
@@ -514,5 +527,10 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
     this._center = this.clampPanPosition(worldPosition);
     this.emit('centerChanged', this.center, origin);
     this.emit('zoomChanged', this.zoom, origin);
+  };
+
+  resizeCanvas = (size: RectLimits) => {
+    this.config.canvasLimits = size;
+    this.emit('canvasChanged', size);
   };
 }

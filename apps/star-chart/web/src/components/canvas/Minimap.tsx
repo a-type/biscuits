@@ -4,6 +4,7 @@ import { useEffect, JSX, Fragment } from 'react';
 import { useBoundsObjectIds, useOrigin, useSize } from './canvasHooks.js';
 import { useViewport } from './ViewportProvider.jsx';
 import { useCanvas } from './CanvasProvider.jsx';
+import { useCanvasRect } from './viewportHooks.js';
 
 export interface MinimapProps {
   className?: string;
@@ -13,6 +14,8 @@ export interface MinimapProps {
 export function Minimap({ className, renderItem }: MinimapProps) {
   const viewport = useViewport();
   const canvas = useCanvas();
+
+  const canvasRect = useCanvasRect();
 
   const bind = useGesture({
     onDrag: ({ event }) => {
@@ -33,8 +36,8 @@ export function Minimap({ className, renderItem }: MinimapProps) {
 
   return (
     <div className={className}>
-      <svg
-        viewBox={`${-viewport.canvasRect.width / 2} ${-viewport.canvasRect.height / 2} ${viewport.canvasRect.width} ${viewport.canvasRect.height}`}
+      <animated.svg
+        viewBox={`${-canvasRect.width / 2} ${-canvasRect.height / 2} ${canvasRect.width} ${canvasRect.height}`}
         width="100%"
         height="100%"
         preserveAspectRatio="xMidYMid meet"
@@ -50,7 +53,7 @@ export function Minimap({ className, renderItem }: MinimapProps) {
           ),
         )}
         <MinimapViewportRect />
-      </svg>
+      </animated.svg>
     </div>
   );
 }
