@@ -1,15 +1,18 @@
 import { animated, useSpring } from '@react-spring/web';
 import { useGesture } from '@use-gesture/react';
-import { useEffect } from 'react';
+import { useEffect, JSX, Fragment } from 'react';
 import { useBoundsObjectIds, useOrigin, useSize } from './canvasHooks.js';
 import { useViewport } from './ViewportProvider.jsx';
+import { useCanvas } from './CanvasProvider.jsx';
 
 export interface MinimapProps {
   className?: string;
+  renderItem?: (objectId: string, metadata: any) => JSX.Element | null;
 }
 
-export function Minimap({ className }: MinimapProps) {
+export function Minimap({ className, renderItem }: MinimapProps) {
   const viewport = useViewport();
+  const canvas = useCanvas();
 
   const bind = useGesture({
     onDrag: ({ event }) => {
@@ -32,25 +35,33 @@ export function Minimap({ className }: MinimapProps) {
     <div className={className}>
       <svg
         viewBox={`${-viewport.canvasRect.width / 2} ${-viewport.canvasRect.height / 2} ${viewport.canvasRect.width} ${viewport.canvasRect.height}`}
-        // preserve aspect ratio
-        // style={{
-        //   aspectRatio: `${viewport.canvasRect.width} / ${viewport.canvasRect.height}`,
-        // }}
         width="100%"
         height="100%"
         preserveAspectRatio="xMidYMid meet"
         {...bind()}
       >
-        {ids.map((id) => (
-          <MinimapRect key={id} objectId={id} />
-        ))}
+        {ids.map((id) =>
+          renderItem ? (
+            <Fragment key={id}>
+              {renderItem(id, canvas.objectMetadata.get(id))}
+            </Fragment>
+          ) : (
+            <MinimapRect key={id} objectId={id} />
+          ),
+        )}
         <MinimapViewportRect />
       </svg>
     </div>
   );
 }
 
-function MinimapRect({ objectId }: { objectId: string }) {
+export function MinimapRect({
+  objectId,
+  className,
+}: {
+  objectId: string;
+  className?: string;
+}) {
   const origin = useOrigin(objectId);
   const size = useSize(objectId);
 
@@ -64,6 +75,7 @@ function MinimapRect({ objectId }: { objectId: string }) {
       stroke="black"
       strokeWidth={1}
       pointerEvents="none"
+      className={className}
     />
   );
 }

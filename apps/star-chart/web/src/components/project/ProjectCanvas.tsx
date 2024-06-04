@@ -28,6 +28,7 @@ import { SelectionMenu } from './SelectionMenu.jsx';
 import { Reticule } from './Reticule.jsx';
 import { ProjectTitle } from './ProjectTitle.jsx';
 import { HomeButton } from './HomeButton.jsx';
+import { renderMinimapItem } from './minimap.jsx';
 
 export interface ProjectCanvasProps {
   project: Project;
@@ -82,7 +83,10 @@ export function ProjectCanvas({ project }: ProjectCanvasProps) {
               ))}
             </CanvasRenderer>
             <CameraControls />
-            <Minimap className="hidden sm:block absolute bottom-0 left-0 w-200px border-default bg-light-blend" />
+            <Minimap
+              className="hidden sm:block absolute bottom-0 left-0 w-200px border-default bg-light-blend"
+              renderItem={renderMinimapItem}
+            />
             <SelectionMenu />
             <HomeButton />
           </ViewportRoot>
