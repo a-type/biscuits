@@ -197,16 +197,29 @@ export function closestLivePoint(
       const longestBound = Math.max(sourceWidth / 2, sourceHeight / 2);
       const projectedX = normalizedX * longestBound;
       const projectedY = normalizedY * longestBound;
-      const cappedX =
-        Math.min(Math.abs(projectedX), sourceWidth / 2) * Math.sign(projectedX);
-      const cappedY =
-        Math.min(Math.abs(projectedY), sourceHeight / 2) *
-        Math.sign(projectedY);
-      const shortenedX = cappedX - normalizedX * shortenBy;
-      const shortenedY = cappedY - normalizedY * shortenBy;
+
+      const shouldCapX = Math.abs(projectedX) > sourceWidth / 2;
+      const shouldCapY = Math.abs(projectedY) > sourceHeight / 2;
+      let cappedX = shouldCapX
+        ? (Math.sign(projectedX) * sourceWidth) / 2
+        : projectedX;
+      let cappedY = shouldCapY
+        ? (Math.sign(projectedY) * sourceHeight) / 2
+        : projectedY;
+
+      // steer toward center of the met side of the boundary and adjust
+      // for shorten size
+      if (shouldCapY) {
+        cappedX = cappedX * 0.5;
+        cappedY -= shortenBy * Math.sign(projectedY);
+      } else if (shouldCapX) {
+        cappedY = cappedY * 0.5;
+        cappedX -= shortenBy * Math.sign(projectedX);
+      }
+
       return {
-        x: sourceX + shortenedX,
-        y: sourceY + shortenedY,
+        x: sourceX + cappedX,
+        y: sourceY + cappedY,
       };
     },
   );
@@ -231,7 +244,7 @@ export function getWireBezierForEndPoints(
   endX: number,
   endY: number,
 ): Bezier {
-  if (Math.abs(startX - endX) > Math.abs(startY - endY)) {
+  if (Math.abs(startY - endY) < 20) {
     return {
       start: { x: startX, y: startY },
       end: { x: endX, y: endY },

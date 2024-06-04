@@ -163,7 +163,7 @@ function TaskFullContent({
         <Icon name="arrowRight" />
       </ConnectionSource>
       {upstreams > 0 && (
-        <div className="row text-xs absolute -top-3 -left-4 bg-attention-wash !gap-1 text-black rounded-full px-2">
+        <div className="row text-xs absolute -top-3 -left-4 bg-red-1 !gap-1 text-black rounded-full px-2">
           <span>🚫</span>
           {upstreams}
         </div>

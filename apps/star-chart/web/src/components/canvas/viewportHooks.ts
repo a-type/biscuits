@@ -63,7 +63,7 @@ export function useTrackCursor(viewport: Viewport) {
 }
 
 const PINCH_GESTURE_DAMPING = 200;
-const WHEEL_GESTURE_DAMPING = 40;
+const WHEEL_GESTURE_DAMPING = 100;
 
 export interface ViewportGestureConfig {
   initialZoom: number;
