@@ -63,8 +63,8 @@ export function TaskNode({ task }: TaskNodeProps) {
         !selected && pendingSelect && 'layer-variants:border-primary-wash',
         !!completedAt &&
           (downstreamUncompleted
-            ? 'opacity-[calc(var(--zoom,1)*var(--zoom,1)*0.75)]'
-            : 'opacity-[calc(var(--zoom,1)*var(--zoom,1)*0.25)]'),
+            ? 'opacity-[calc(var(--zoom,1)*var(--zoom,1))]'
+            : 'opacity-[calc(var(--zoom,1)*var(--zoom,1)*0.5)]'),
       )}
       canvasObject={canvasObject}
     >

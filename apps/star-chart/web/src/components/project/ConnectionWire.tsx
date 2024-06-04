@@ -65,7 +65,7 @@ export function ConnectionWire({ connection }: ConnectionWireProps) {
             !selected && pendingSelect && 'stroke-primary',
             sourceTaskIsComplete &&
               targetTaskIsComplete &&
-              'opacity-[calc(var(--zoom,1)*var(--zoom,1)*0.35)]',
+              'opacity-[calc(var(--zoom,1)*var(--zoom,1)*0.5)]',
           )}
           hoverClassName="stroke-primary-wash"
           sourcePosition={sourcePosition}
