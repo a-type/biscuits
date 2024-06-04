@@ -157,20 +157,19 @@ export function useViewportGestureControls(
       onDrag: ({
         delta: [x, y],
         xy,
-        type,
         buttons,
         intentional,
         last,
-        memo,
         shiftKey,
         metaKey,
         ctrlKey,
         altKey,
         touches,
+        type,
       }) => {
         if (!intentional || last) return;
 
-        gestureDetails.current.touches = touches;
+        gestureDetails.current.touches = type === 'touchmove' ? touches : 0;
         gestureDetails.current.buttons = buttons;
 
         if (isCanvasDrag(gestureDetails.current)) {
@@ -202,8 +201,9 @@ export function useViewportGestureControls(
         ctrlKey,
         altKey,
         touches,
+        type,
       }) => {
-        gestureDetails.current.touches = touches;
+        gestureDetails.current.touches = type === 'touchdown' ? touches : 0;
         gestureDetails.current.buttons = buttons;
 
         if (isCanvasDrag(gestureDetails.current)) {
@@ -225,18 +225,21 @@ export function useViewportGestureControls(
           ctrlOrMeta: ctrlKey || metaKey,
         };
 
-        if (isCanvasDrag(gestureDetails.current)) {
-          canvas.onCanvasDragEnd({ x: xy[0], y: xy[1] }, info);
-        }
-
-        // tap is triggered either by left click, or on touchscreens
+        // tap is triggered either by left click, or on touchscreens.
+        // tap must fire before drag end.
         if (
           tap &&
           (isCanvasDrag(gestureDetails.current) ||
             isTouch(gestureDetails.current))
         ) {
+          console.log('tap');
           canvas.onCanvasTap({ x: xy[0], y: xy[1] }, info);
         }
+
+        if (isCanvasDrag(gestureDetails.current)) {
+          canvas.onCanvasDragEnd({ x: xy[0], y: xy[1] }, info);
+        }
+
         gestureDetails.current.buttons = 0;
         gestureDetails.current.touches = 0;
       },
@@ -248,6 +251,9 @@ export function useViewportGestureControls(
       drag: {
         pointer: {
           buttons: [1, 2, 4],
+          // enabling touch events on mobile devices makes it possible
+          // to differentiate between touch and non-touch events.
+          touch: true,
         },
       },
     },
@@ -375,7 +381,7 @@ function isCanvasDrag({
   touches: number;
   buttons: number;
 }) {
-  return (buttons & 1) > 0 && touches === 0;
+  return !!(buttons & 1) && touches === 0;
 }
 
 function isTouch({ touches }: { touches: number; buttons: number }) {

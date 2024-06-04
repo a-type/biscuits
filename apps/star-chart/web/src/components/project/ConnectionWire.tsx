@@ -22,6 +22,8 @@ export function ConnectionWire({ connection }: ConnectionWireProps) {
   const { sourceTaskId, targetTaskId, id } = hooks.useWatch(connection);
   const sourceTask = hooks.useTask(sourceTaskId);
   hooks.useWatch(sourceTask);
+  const targetTask = hooks.useTask(targetTaskId);
+  hooks.useWatch(targetTask);
 
   const canvas = useCanvas();
   const onTap = useCallback(
@@ -50,6 +52,9 @@ export function ConnectionWire({ connection }: ConnectionWireProps) {
     ];
   }, [sourceBounds, sourceCenter, targetCenter, targetBounds]);
 
+  const sourceTaskIsComplete = !!sourceTask?.get('completedAt');
+  const targetTaskIsComplete = !!targetTask?.get('completedAt');
+
   return (
     <>
       <SvgPortal layerId="connections">
@@ -58,6 +63,9 @@ export function ConnectionWire({ connection }: ConnectionWireProps) {
             'layer-components:(stroke-accent-light stroke-2 [&[data-hovered=true]]:stroke-primary z-1)',
             selected && 'stroke-primary',
             !selected && pendingSelect && 'stroke-primary',
+            sourceTaskIsComplete &&
+              targetTaskIsComplete &&
+              'opacity-[calc(var(--zoom,1)*var(--zoom,1)*0.35)]',
           )}
           hoverClassName="stroke-primary-wash"
           sourcePosition={sourcePosition}
@@ -65,7 +73,7 @@ export function ConnectionWire({ connection }: ConnectionWireProps) {
           data-source-id={sourceTaskId}
           data-target-id={targetTaskId}
           markerEnd="url(#arrow-end)"
-          strokeDasharray={sourceTask?.get('completedAt') ? '0' : '4 4'}
+          strokeDasharray={sourceTaskIsComplete ? '0' : '4 4'}
           onTap={onTap}
           id={connection.get('id')}
           metadata={{ type: 'connection' }}

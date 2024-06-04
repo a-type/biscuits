@@ -51,6 +51,7 @@ export function ProjectCanvas({ project }: ProjectCanvasProps) {
         >
           <CanvasGestures
             onTap={async (position, ctx) => {
+              console.log(ctx.canvas.selections.selectedIds.size);
               if (ctx.canvas.selections.selectedIds.size === 0) {
                 const task = await addTask(position);
                 ctx.canvas.selections.set([task.get('id')]);

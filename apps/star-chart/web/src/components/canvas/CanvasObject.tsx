@@ -50,8 +50,9 @@ export function CanvasObjectRoot({
       <animated.div
         ref={finalRef}
         className={clsx('absolute', className)}
-        onKeyDown={stopPropagation}
-        onKeyUp={stopPropagation}
+        // this is blocking undo keybinds...
+        // onKeyDown={stopPropagation}
+        // onKeyUp={stopPropagation}
         onPointerDown={stopPropagation}
         onPointerUp={stopPropagation}
         onPointerMove={stopPropagation}

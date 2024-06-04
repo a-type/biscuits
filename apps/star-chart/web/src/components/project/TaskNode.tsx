@@ -14,7 +14,7 @@ import {
 } from '../canvas/CanvasObjectDragHandle.jsx';
 import { useCanvas } from '../canvas/CanvasProvider.jsx';
 import { ConnectionSource } from './ConnectionSource.jsx';
-import { useDownstreamCount, useUpstreamUncompletedCount } from './hooks.js';
+import { useDownstreamCount, useUpstreamCount } from './hooks.js';
 import { TaskMenu } from './TaskMenu.jsx';
 
 export interface TaskNodeProps {
@@ -49,8 +49,9 @@ export function TaskNode({ task }: TaskNodeProps) {
     canvas.selections.set([id]);
   }, [canvas, id]);
 
-  const downstreams = useDownstreamCount(id);
-  const upstreams = useUpstreamUncompletedCount(id);
+  const { total: downstreams, uncompleted: downstreamUncompleted } =
+    useDownstreamCount(id);
+  const { uncompleted: upstreams } = useUpstreamCount(id);
 
   return (
     <CanvasObjectRoot
@@ -60,7 +61,10 @@ export function TaskNode({ task }: TaskNodeProps) {
         upstreams > 0 && 'layer-variants:bg-wash',
         selected && 'layer-variants:border-primary',
         !selected && pendingSelect && 'layer-variants:border-primary-wash',
-        !!completedAt && 'opacity-50',
+        !!completedAt &&
+          (downstreamUncompleted
+            ? 'opacity-[calc(var(--zoom,1)*var(--zoom,1)*0.75)]'
+            : 'opacity-[calc(var(--zoom,1)*var(--zoom,1)*0.25)]'),
       )}
       canvasObject={canvasObject}
     >
@@ -159,8 +163,8 @@ function TaskFullContent({
         <Icon name="arrowRight" />
       </ConnectionSource>
       {upstreams > 0 && (
-        <div className="row text-xs absolute -top-3 -left-4 bg-accent-light !gap-1 text-black rounded-full px-1">
-          <Icon name="arrowRight" />
+        <div className="row text-xs absolute -top-3 -left-4 bg-attention-wash !gap-1 text-black rounded-full px-2">
+          <span>🚫</span>
           {upstreams}
         </div>
       )}

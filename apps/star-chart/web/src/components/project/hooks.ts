@@ -6,14 +6,18 @@ import { nonNilFilter } from '@a-type/utils';
 
 export function useDownstreamCount(taskId: string) {
   const analysis = useAnalysis();
-  return analysis.downstreams[taskId]?.length || 0;
+  const total = analysis.downstreams[taskId]?.length || 0;
+  const uncompleted =
+    analysis.downstreams[taskId]?.filter((dep) => !dep.completed).length || 0;
+  return { total, uncompleted };
 }
 
-export function useUpstreamUncompletedCount(taskId: string) {
+export function useUpstreamCount(taskId: string) {
   const analysis = useAnalysis();
-  return (
-    analysis.upstreams[taskId]?.filter((dep) => !dep.completed).length || 0
-  );
+  const total = analysis.upstreams[taskId]?.length || 0;
+  const uncompleted =
+    analysis.upstreams[taskId]?.filter((dep) => !dep.completed).length || 0;
+  return { total, uncompleted };
 }
 
 export interface AnalysisDependency {
