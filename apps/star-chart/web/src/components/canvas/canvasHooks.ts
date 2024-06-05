@@ -174,3 +174,14 @@ export function useSelectedObjectIds() {
 
   return selectedIds;
 }
+
+export function useCanvasRect() {
+  const canvas = useCanvas();
+
+  const [rect, setRect] = useState(() => canvas.boundary);
+  useEffect(() => {
+    return canvas.subscribe('resize', () => setRect(canvas.boundary));
+  }, [canvas]);
+
+  return rect;
+}

@@ -1,7 +1,8 @@
 import { ReactNode, useMemo } from 'react';
-import { useViewport } from './ViewportProvider.jsx';
 import { clsx } from '@a-type/ui';
 import { createPortal } from 'react-dom';
+import { useCanvasRect } from './canvasHooks.js';
+import { useCanvas } from './CanvasProvider.jsx';
 
 export interface CanvasSvgLayerProps {
   children: ReactNode;
@@ -14,17 +15,17 @@ export function CanvasSvgLayer({
   className,
   id,
 }: CanvasSvgLayerProps) {
-  const viewport = useViewport();
-  const canvasRect = viewport.canvasRect;
+  const canvas = useCanvas();
+  const canvasRect = useCanvasRect();
 
   const style = useMemo(() => {
     return {
-      width: viewport.canvasRect.width,
-      height: viewport.canvasRect.height,
-      left: viewport.canvasRect.x,
-      top: viewport.canvasRect.y,
+      width: canvas.boundary.width,
+      height: canvas.boundary.height,
+      left: canvas.boundary.x,
+      top: canvas.boundary.y,
     };
-  }, [viewport]);
+  }, [canvas]);
 
   return (
     <svg

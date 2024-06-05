@@ -1,21 +1,17 @@
 import { EventSubscriber } from '@a-type/utils';
 import { SpringValue, to } from '@react-spring/web';
-import { snap } from './math.js';
+import { clampVector, snap } from './math.js';
 import { ObjectBounds } from './ObjectBounds.js';
 import { ObjectPositions } from './ObjectPositions.js';
 import { Selections } from './Selections.js';
-import { Vector2 } from './types.js';
-import { Viewport } from './Viewport.js';
-
-type ActiveGestureState = {
-  targetObjectId: string | null;
-  position: Vector2 | null;
-  startPosition: Vector2 | null;
-};
+import { RectLimits, Vector2 } from './types.js';
+import { Viewport, ViewportConfig } from './Viewport.js';
 
 export interface CanvasOptions {
   /** Snaps items to a world-unit grid after dropping them - defaults to 1. */
   positionSnapIncrement?: number;
+  limits?: RectLimits;
+  viewportConfig?: Omit<ViewportConfig, 'canvas'>;
 }
 
 export interface CanvasGestureInfo {
@@ -23,6 +19,11 @@ export interface CanvasGestureInfo {
   alt: boolean;
   ctrlOrMeta: boolean;
 }
+
+const DEFAULT_LIMITS: RectLimits = {
+  max: { x: 1_000_000, y: 1_000_000 },
+  min: { x: -1_000_000, y: -1_000_000 },
+};
 
 export type CanvasEvents = {
   [k: `objectDrop:${string}`]: (
@@ -34,15 +35,13 @@ export type CanvasEvents = {
   canvasDragStart: (position: Vector2, info: CanvasGestureInfo) => void;
   canvasDrag: (position: Vector2, info: CanvasGestureInfo) => void;
   canvasDragEnd: (position: Vector2, info: CanvasGestureInfo) => void;
+  resize: (size: RectLimits) => void;
 };
 
-/**
- * This class encapsulates the logic which powers the movement and
- * sizing of objects within a Room Canvas - the 2d space that makes
- * up the standard With Room. It implements the required functionality
- * for both CanvasContext and SizingContext
- */
 export class Canvas extends EventSubscriber<CanvasEvents> {
+  readonly viewport: Viewport;
+  readonly limits: RectLimits;
+
   readonly bounds = new ObjectBounds();
   readonly selections = new Selections();
 
@@ -51,11 +50,10 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
 
   private _positionSnapIncrement = 1;
 
-  constructor(
-    private viewport: Viewport,
-    options?: CanvasOptions,
-  ) {
+  constructor(options?: CanvasOptions) {
     super();
+    this.viewport = new Viewport({ ...options?.viewportConfig, canvas: this });
+    this.limits = options?.limits ?? DEFAULT_LIMITS;
     // @ts-ignore for debugging...
     window.canvas = this;
     this._positionSnapIncrement = options?.positionSnapIncrement ?? 1;
@@ -65,10 +63,35 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
     return this._positionSnapIncrement;
   }
 
+  get boundary() {
+    return {
+      x: this.limits.min.x,
+      y: this.limits.min.y,
+      width: this.limits.max.x - this.limits.min.x,
+      height: this.limits.max.y - this.limits.min.y,
+    };
+  }
+
+  get center() {
+    return {
+      x: (this.limits.max.x + this.limits.min.x) / 2,
+      y: (this.limits.max.y + this.limits.min.y) / 2,
+    };
+  }
+
   snapPosition = (position: Vector2) => ({
     x: snap(position.x, this._positionSnapIncrement),
     y: snap(position.y, this._positionSnapIncrement),
   });
+
+  clampPosition = (position: Vector2) =>
+    clampVector(position, this.limits.min, this.limits.max);
+
+  resize = (size: RectLimits) => {
+    this.limits.min = size.min;
+    this.limits.max = size.max;
+    this.emit('resize', size);
+  };
 
   onCanvasTap = (screenPosition: Vector2, info: CanvasGestureInfo) => {
     const worldPosition = this.viewport.viewportToWorld(screenPosition);

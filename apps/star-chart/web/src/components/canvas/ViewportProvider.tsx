@@ -1,18 +1,16 @@
-import { createContext, useCallback, useRef, useState } from 'react';
+import { clsx } from '@a-type/ui';
+import { createContext, useCallback, useRef } from 'react';
+import { useCanvas } from './CanvasProvider.jsx';
+import { Size } from './types.js';
 import { Viewport } from './Viewport.js';
-import { useContext } from 'react';
 import {
   useKeyboardControls,
   useViewportGestureControls,
 } from './viewportHooks.js';
-import { clsx } from '@a-type/ui';
-import { Size } from './types.js';
 
 export function useViewport() {
-  const ctx = useContext(ViewportContext);
-  if (!ctx)
-    throw new Error('useViewport must be called inside a ViewportProvider');
-  return ctx;
+  const canvas = useCanvas();
+  return canvas.viewport;
 }
 
 export const ViewportContext = createContext<Viewport | null>(null);
@@ -24,40 +22,6 @@ export interface ViewportProviderProps {
   defaultZoom?: number;
   canvasSize?: Size | null;
 }
-
-export const ViewportProvider = ({
-  children,
-  minZoom = 1 / 4,
-  maxZoom = 2,
-  defaultZoom = 1,
-  canvasSize = { width: 2000, height: 2000 },
-}: ViewportProviderProps) => {
-  const [viewport] = useState(() => {
-    const viewport = new Viewport({
-      panLimitMode: 'viewport',
-      defaultZoom,
-      zoomLimits: {
-        min: minZoom,
-        max: maxZoom,
-      },
-      canvasLimits: canvasSize
-        ? {
-            max: { x: canvasSize.width / 2, y: canvasSize.height / 2 },
-            min: { x: -canvasSize.width / 2, y: -canvasSize.height / 2 },
-          }
-        : undefined,
-    });
-    // @ts-ignore for debugging!
-    window.viewport = viewport;
-    return viewport;
-  });
-
-  return (
-    <ViewportContext.Provider value={viewport}>
-      {children}
-    </ViewportContext.Provider>
-  );
-};
 
 export const ViewportRoot = ({
   children,

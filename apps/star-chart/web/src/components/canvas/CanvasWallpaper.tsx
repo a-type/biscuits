@@ -1,7 +1,6 @@
 import { clsx } from '@a-type/ui';
 import * as React from 'react';
-import { useViewport } from './ViewportProvider.jsx';
-import { useCanvasRect } from './viewportHooks.js';
+import { useCanvasRect } from './canvasHooks.js';
 
 export interface IViewportWallpaperProps {
   children?: React.ReactNode;
@@ -24,8 +23,9 @@ export const CanvasWallpaper: React.FC<IViewportWallpaperProps> = ({
       backgroundImage: imageUrl ? `url(${imageUrl})` : undefined,
       width: canvasRect.width,
       height: canvasRect.height,
-      left: canvasRect.x,
-      top: canvasRect.y,
+      left: 0,
+      top: 0,
+      transform: `translate(-50%, -50%)`,
     };
   }, [imageUrl, canvasRect]);
 
@@ -33,7 +33,7 @@ export const CanvasWallpaper: React.FC<IViewportWallpaperProps> = ({
     <div
       style={style}
       className={clsx(
-        'absolute rounded-lg [background-position:-17px_-17px] bg-repeat z-0 touch-none opacity-10',
+        'absolute rounded-lg [background-position:14px_14px] bg-repeat z-0 touch-none opacity-10',
         classNameGridBg,
       )}
     >
