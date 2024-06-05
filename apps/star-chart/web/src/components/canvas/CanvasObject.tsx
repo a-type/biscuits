@@ -95,20 +95,25 @@ export function useCanvasObject({
   objectId,
   zIndex = 0,
   onDrop,
+  onDrag,
   metadata,
 }: {
   initialPosition: Vector2;
   objectId: string;
-  onDrop: (pos: Vector2) => any;
+  onDrop?: (pos: Vector2) => any;
+  onDrag?: (pos: Vector2) => any;
   zIndex?: number;
   metadata?: any;
 }) {
   const canvas = useCanvas();
 
-  const { pickupSpring, isGrabbing, bindDragHandle } = useDrag({
-    initialPosition,
-    objectId,
-  });
+  const { pickupSpring, isGrabbing, bindDragHandle, dragSpring, dragStyle } =
+    useDrag({
+      initialPosition,
+      objectId,
+      onDrag,
+      onDragEnd: onDrop,
+    });
 
   /**
    * ONLY MOVES THE VISUAL NODE.
@@ -117,29 +122,21 @@ export function useCanvasObject({
    */
   const moveTo = useCallback(
     (position: Vector2) => {
-      canvas.setPosition(objectId, {
+      dragSpring.start({
         x: position.x,
         y: position.y,
       });
     },
-    [canvas, objectId],
+    [objectId, dragSpring],
   );
-
-  useEffect(() => {
-    if (onDrop) {
-      return canvas.subscribe(`objectDrop:${objectId}`, onDrop);
-    }
-  }, [canvas, onDrop]);
 
   // FIXME: find a better place to do this?
   useEffect(
-    () =>
-      canvas.bounds.registerOrigin(objectId, canvas.positions.get(objectId)),
+    () => canvas.bounds.registerOrigin(objectId, dragStyle),
     [canvas, objectId],
   );
 
   const canvasObject: CanvasObject = useMemo(() => {
-    const position = canvas.positions.get(objectId);
     const rootProps = {
       style: {
         /**
@@ -148,7 +145,7 @@ export function useCanvasObject({
          * up or dropped.
          */
         transform: to(
-          [position.x, position.y, pickupSpring.value],
+          [dragStyle.x, dragStyle.y, pickupSpring.value],
           (xv, yv, grabEffect) =>
             `translate(${xv}px, ${yv}px) scale(${1 + 0.05 * grabEffect})`,
         ),
@@ -175,20 +172,20 @@ function useDrag({
   objectId,
   onDragStart,
   onDragEnd,
+  onDrag,
 }: {
   initialPosition: Vector2;
   objectId: string;
-  onDragStart?: () => void;
-  onDragEnd?: () => void;
+  onDragStart?: (pos: Vector2) => void;
+  onDragEnd?: (pos: Vector2) => void;
+  onDrag?: (pos: Vector2) => any;
 }) {
   const canvas = useCanvas();
   const viewport = useViewport();
 
   const [isGrabbing, setIsGrabbing] = useState(false);
 
-  useEffectOnce(() => {
-    canvas.setPosition(objectId, initialPosition);
-  });
+  const [dragStyle, dragSpring] = useSpring(() => initialPosition);
 
   const pickupSpring = useSpring({
     value: isGrabbing ? 1 : 0,
@@ -215,8 +212,10 @@ function useDrag({
         // all we have to do to move the object as the screen auto-pans is re-trigger a
         // move event with the same cursor position - since the view itself has moved 'below' us,
         // the same cursor position produces the new world position.
-        const finalPosition = displace(cursorPosition);
-        canvas.onObjectDrag(finalPosition, objectId);
+        const finalPosition = viewport.viewportToWorld(
+          displace(cursorPosition),
+        );
+        dragSpring.set(finalPosition);
       },
     );
   }, [autoPan, viewport, canvas, objectId, displace]);
@@ -257,8 +256,13 @@ function useDrag({
       const screenPosition = { x: state.xy[0], y: state.xy[1] };
       autoPan.update(screenPosition);
 
+      // TODO: DELETE - canvas no longer controls object positions.
       // send to canvas to be interpreted into movement
-      canvas.onObjectDrag(displace(screenPosition), objectId);
+      // canvas.onObjectDrag(displace(screenPosition), objectId);
+
+      const position = viewport.viewportToWorld(displace(screenPosition));
+      dragSpring.set(position);
+      onDrag?.(position);
     },
     onDragStart: (state) => {
       if (
@@ -285,8 +289,12 @@ function useDrag({
         grabDisplacementRef.current.y = displacement.y;
       }
       // apply displacement and begin drag
-      canvas.onObjectDragStart(displace(screenPosition), objectId);
-      onDragStart?.();
+      // TODO: DELETE - canvas no longer controls object positions.
+      // canvas.onObjectDragStart(displace(screenPosition), objectId);
+      setIsGrabbing(true);
+      const position = viewport.viewportToWorld(displace(screenPosition));
+      dragSpring.start(position);
+      onDragStart?.(position);
     },
     onDragEnd: (state) => {
       if (
@@ -298,7 +306,15 @@ function useDrag({
       }
 
       const screenPosition = { x: state.xy[0], y: state.xy[1] };
-      canvas.onObjectDragEnd(displace(screenPosition), objectId);
+      // TODO: DELETE - canvas no longer controls object positions.
+      // canvas.onObjectDragEnd(displace(screenPosition), objectId);
+
+      // animate to final position, rounded by canvas
+      const position = canvas.snapPosition(
+        viewport.viewportToWorld(displace(screenPosition)),
+      );
+      dragSpring.start(position);
+
       // we leave this flag on for a few ms - the "drag" gesture
       // basically has a fade-out effect where it continues to
       // block gestures internal to the drag handle for a bit even
@@ -311,11 +327,10 @@ function useDrag({
 
       // invoke tap handler if provided. not sure how to type this..
       if (state.tap) {
-        console.log('tap');
-        state.args?.[0]?.onTap?.();
-      } else {
-        onDragEnd?.();
+        state.args?.[0]?.onTap?.(position);
       }
+
+      onDragEnd?.(position);
     },
   });
 
@@ -324,5 +339,7 @@ function useDrag({
     pickupSpring,
     isGrabbing,
     moveTo,
+    dragSpring,
+    dragStyle,
   };
 }

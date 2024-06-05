@@ -36,7 +36,6 @@ export class Selections extends EventSubscriber<{
 
   clear = () => {
     this.set([]);
-    console.log('clear');
   };
 
   toggle = (objectId: string) => {

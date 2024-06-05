@@ -234,7 +234,6 @@ export function useViewportGestureControls(
           (isCanvasDrag(gestureDetails.current) ||
             isTouch(gestureDetails.current))
         ) {
-          console.log('tap');
           canvas.onCanvasTap({ x: xy[0], y: xy[1] }, info);
         }
 

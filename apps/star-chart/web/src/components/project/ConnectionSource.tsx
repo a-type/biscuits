@@ -2,7 +2,7 @@ import { hooks } from '@/store.js';
 import { clsx } from '@a-type/ui';
 import { useSpring } from '@react-spring/web';
 import { useGesture } from '@use-gesture/react';
-import { ReactNode, useMemo, useState } from 'react';
+import { ReactNode, useCallback, useMemo, useState } from 'react';
 import { disableDragProps } from '../canvas/CanvasObjectDragHandle.jsx';
 import { useCanvas } from '../canvas/CanvasProvider.jsx';
 import { SvgPortal } from '../canvas/CanvasSvgLayer.jsx';
@@ -10,6 +10,8 @@ import { useViewport } from '../canvas/ViewportProvider.jsx';
 import { Wire } from '../canvas/Wire.jsx';
 import { closestLivePoint } from '../canvas/math.js';
 import { Task } from '@star-chart.biscuits/verdant';
+import { Vector2 } from '../canvas/types.js';
+import { projectState } from './state.js';
 
 export interface ConnectionSourceProps {
   sourceTask: Task;
@@ -37,6 +39,25 @@ export function ConnectionSource({
   const viewport = useViewport();
   const client = hooks.useClient();
 
+  const hitTestTasks = useCallback(
+    (worldPosition: Vector2) => {
+      const objectIds = canvas.bounds.getIntersections(
+        {
+          x: worldPosition.x,
+          y: worldPosition.y,
+          width: 0,
+          height: 0,
+        },
+        0,
+      );
+      const taskId = objectIds.find(
+        (id) => canvas.objectMetadata.get(id)?.type === 'task',
+      );
+      return taskId ?? null;
+    },
+    [canvas],
+  );
+
   const bind = useGesture({
     onDragStart: ({ xy: [x, y], event }) => {
       event?.stopPropagation();
@@ -56,6 +77,8 @@ export function ConnectionSource({
         y: worldPosition.y,
         immediate: true,
       });
+      const taskId = hitTestTasks(worldPosition);
+      projectState.activeConnectionTarget = taskId;
     },
     onDragEnd: async ({ xy: [x, y], event }) => {
       event?.stopPropagation();
@@ -66,23 +89,22 @@ export function ConnectionSource({
         immediate: true,
       });
 
-      // see if we're over a target
-      const objectId = canvas.hitTest(worldPosition);
-      if (objectId) {
+      const taskId = projectState.activeConnectionTarget;
+      if (taskId) {
         // don't link to self
-        if (objectId === sourceNodeId) {
+        if (taskId === sourceNodeId) {
           setActive(false);
           return;
         }
 
-        // verify it's a task node
-        const task = await client.tasks.get(objectId).resolved;
+        // double check it's a task
+        const task = await client.tasks.get(taskId).resolved;
         if (!task) {
           setActive(false);
           return;
         }
 
-        onConnection(objectId);
+        onConnection(taskId);
       } else {
         // no target - create a new task at this position and link
         const task = await client.tasks.put({
@@ -95,6 +117,7 @@ export function ConnectionSource({
         onConnection(task.get('id'));
       }
       setActive(false);
+      projectState.activeConnectionTarget = null;
     },
   });
 

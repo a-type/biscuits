@@ -1,6 +1,6 @@
 import { EventSubscriber } from '@a-type/utils';
 import { SpringValue } from '@react-spring/web';
-import { Box, LiveVector2 } from './types.js';
+import { Box, LiveVector2, Vector2 } from './types.js';
 
 export interface Bounds {
   width: SpringValue<number>;
@@ -110,6 +110,17 @@ export class ObjectBounds extends EventSubscriber<{
     );
   };
 
+  hitTest = (point: Vector2) => {
+    return this.getIntersections(
+      {
+        ...point,
+        width: 0,
+        height: 0,
+      },
+      0,
+    );
+  };
+
   intersects = (objectId: string, box: Box, threshold: number) => {
     const objectOrigin = this.getOrigin(objectId);
     const objectSize = this.getSize(objectId);
@@ -121,20 +132,20 @@ export class ObjectBounds extends EventSubscriber<{
     const objectWidth = objectSize.width.get();
     const objectHeight = objectSize.height.get();
 
-    if (objectWidth === 0 && objectHeight === 0) {
-      // this becomes a point containment check and always passes if true
-      return (
-        objectX >= box.x &&
-        objectX <= box.x + box.width &&
-        objectY >= box.y &&
-        objectY <= box.y + box.height
-      );
-    }
-
     const objectBottomRight = {
       x: objectX + objectWidth,
       y: objectY + objectHeight,
     };
+
+    if (box.width === 0 && box.height === 0) {
+      // this becomes a point containment check and always passes if true
+      return (
+        box.x >= objectX &&
+        box.x <= objectBottomRight.x &&
+        box.y >= objectY &&
+        box.y <= objectBottomRight.y
+      );
+    }
 
     const boxTopLeft = {
       x: box.x,

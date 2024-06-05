@@ -16,6 +16,8 @@ import { useCanvas } from '../canvas/CanvasProvider.jsx';
 import { ConnectionSource } from './ConnectionSource.jsx';
 import { useDownstreamCount, useUpstreamCount } from './hooks.js';
 import { TaskMenu } from './TaskMenu.jsx';
+import { useSnapshot } from 'valtio';
+import { projectState } from './state.js';
 
 export interface TaskNodeProps {
   task: Task;
@@ -53,6 +55,8 @@ export function TaskNode({ task }: TaskNodeProps) {
     useDownstreamCount(id);
   const { uncompleted: upstreams } = useUpstreamCount(id);
 
+  const { activeConnectionTarget } = useSnapshot(projectState);
+
   return (
     <CanvasObjectRoot
       className={clsx(
@@ -65,6 +69,7 @@ export function TaskNode({ task }: TaskNodeProps) {
           (downstreamUncompleted
             ? 'opacity-[calc(var(--zoom,1)*var(--zoom,1))]'
             : 'opacity-[calc(var(--zoom,1)*var(--zoom,1)*0.5)]'),
+        activeConnectionTarget === id && 'bg-accent-light border-accent',
       )}
       canvasObject={canvasObject}
     >
@@ -105,7 +110,6 @@ function TaskFullContent({
   const client = hooks.useClient();
   const createConnectionTo = useCallback(
     (targetTaskId: string) => {
-      console.log('connecting', id, targetTaskId);
       client.connections.put({
         id: `connection-${id}-${targetTaskId}`,
         projectId,
