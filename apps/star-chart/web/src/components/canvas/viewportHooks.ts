@@ -6,12 +6,12 @@ import {
   useCallback,
   useEffect,
   useRef,
-  useState,
 } from 'react';
 import { useCanvas } from './CanvasProvider.jsx';
 import { Vector2 } from './types.js';
 import { Viewport } from './Viewport.js';
-import { useViewport } from './ViewportProvider.jsx';
+import { vectorLength } from './math.js';
+import { gestureStateToInput } from './gestureUtils.js';
 
 /**
  * Tracks cursor position and sends updates to the socket connection
@@ -156,36 +156,22 @@ export function useViewportGestureControls(
   });
   const bindPassiveGestures = useGesture(
     {
-      onDrag: ({
-        delta: [x, y],
-        xy,
-        buttons,
-        intentional,
-        last,
-        shiftKey,
-        metaKey,
-        ctrlKey,
-        altKey,
-        touches,
-        type,
-      }) => {
-        if (!intentional || last) return;
+      onDrag: (state) => {
+        if (state.last) return;
 
-        gestureDetails.current.touches = type === 'touchmove' ? touches : 0;
-        gestureDetails.current.buttons = buttons;
+        gestureDetails.current.touches =
+          state.type === 'touchmove' ? state.touches : 0;
+        gestureDetails.current.buttons = state.buttons;
 
+        const input = gestureStateToInput(state);
         if (isCanvasDrag(gestureDetails.current)) {
-          canvas.onCanvasDrag(
-            { x: xy[0], y: xy[1] },
-            {
-              shift: shiftKey,
-              alt: altKey,
-              ctrlOrMeta: ctrlKey || metaKey,
-            },
-          );
+          canvas.onCanvasDrag(input);
         } else {
           viewport.doRelativePan(
-            viewport.viewportDeltaToWorld({ x: -x, y: -y }),
+            viewport.viewportDeltaToWorld({
+              x: -state.delta[0],
+              y: -state.delta[1],
+            }),
             {
               origin: 'direct',
             },
@@ -195,50 +181,31 @@ export function useViewportGestureControls(
       onPointerMoveCapture: ({ event }) => {
         onCursorMove({ x: event.clientX, y: event.clientY });
       },
-      onDragStart: ({
-        xy,
-        buttons,
-        metaKey,
-        shiftKey,
-        ctrlKey,
-        altKey,
-        touches,
-        type,
-      }) => {
-        gestureDetails.current.touches = type === 'touchdown' ? touches : 0;
-        gestureDetails.current.buttons = buttons;
+      onDragStart: (state) => {
+        gestureDetails.current.touches =
+          state.type === 'touchdown' ? state.touches : 0;
+        gestureDetails.current.buttons = state.buttons;
 
         if (isCanvasDrag(gestureDetails.current)) {
-          canvas.onCanvasDragStart(
-            { x: xy[0], y: xy[1] },
-            {
-              shift: shiftKey,
-              alt: altKey,
-              ctrlOrMeta: ctrlKey || metaKey,
-            },
-          );
+          canvas.onCanvasDragStart(gestureStateToInput(state));
           return;
         }
       },
-      onDragEnd: ({ xy, tap, metaKey, shiftKey, ctrlKey, altKey, type }) => {
-        const info = {
-          shift: shiftKey,
-          alt: altKey,
-          ctrlOrMeta: ctrlKey || metaKey,
-        };
+      onDragEnd: (state) => {
+        const info = gestureStateToInput(state);
 
         // tap is triggered either by left click, or on touchscreens.
         // tap must fire before drag end.
         if (
-          tap &&
+          state.tap &&
           (isCanvasDrag(gestureDetails.current) ||
             isTouch(gestureDetails.current))
         ) {
-          canvas.onCanvasTap({ x: xy[0], y: xy[1] }, info);
+          canvas.onCanvasTap(info);
         }
 
         if (isCanvasDrag(gestureDetails.current)) {
-          canvas.onCanvasDragEnd({ x: xy[0], y: xy[1] }, info);
+          canvas.onCanvasDragEnd(info);
         }
 
         gestureDetails.current.buttons = 0;

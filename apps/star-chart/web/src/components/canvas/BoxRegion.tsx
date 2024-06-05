@@ -3,14 +3,11 @@ import { useCanvasGestures } from './canvasHooks.js';
 import { useRef, useState } from 'react';
 import { Vector2 } from './types.js';
 import { CanvasGestureInfo } from './Canvas.js';
+import { useCanvas } from './CanvasProvider.jsx';
 
 export interface BoxRegionProps {
   onPending?: (objectIds: string[], info: CanvasGestureInfo) => void;
-  onEnd?: (
-    objectIds: string[],
-    endPosition: Vector2,
-    info: CanvasGestureInfo,
-  ) => void;
+  onEnd?: (objectIds: string[], info: CanvasGestureInfo) => void;
   tolerance?: number;
   className?: string;
 }
@@ -31,18 +28,25 @@ export function BoxRegion({
 
   const previousPending = useRef<string[]>([]);
 
+  const canvas = useCanvas();
+
   useCanvasGestures({
-    onDragStart: (pos) => {
+    onDragStart: (info) => {
       previousPending.current = [];
-      originRef.current = pos;
-      spring.set({ x: pos.x, y: pos.y, width: 0, height: 0 });
+      originRef.current = info.worldPosition;
+      spring.set({
+        x: info.worldPosition.x,
+        y: info.worldPosition.y,
+        width: 0,
+        height: 0,
+      });
     },
-    onDrag: (pos, { canvas, info }) => {
+    onDrag: (info) => {
       const rect = {
-        x: Math.min(pos.x, originRef.current.x),
-        y: Math.min(pos.y, originRef.current.y),
-        width: Math.abs(pos.x - originRef.current.x),
-        height: Math.abs(pos.y - originRef.current.y),
+        x: Math.min(info.worldPosition.x, originRef.current.x),
+        y: Math.min(info.worldPosition.y, originRef.current.y),
+        width: Math.abs(info.worldPosition.x - originRef.current.x),
+        height: Math.abs(info.worldPosition.y - originRef.current.y),
       };
       spring.set(rect);
       const objectIds = canvas.bounds.getIntersections(rect, tolerance);
@@ -65,7 +69,7 @@ export function BoxRegion({
 
       previousPending.current = objectIds;
     },
-    onDragEnd: (pos, { canvas, info }) => {
+    onDragEnd: (info) => {
       const objectIds = canvas.bounds.getIntersections(
         {
           x: x.get(),
@@ -77,7 +81,7 @@ export function BoxRegion({
       );
 
       onPending?.([], info);
-      onCommit?.(objectIds, pos, info);
+      onCommit?.(objectIds, info);
 
       spring.set({ x: 0, y: 0, width: 0, height: 0 });
       originRef.current.x = 0;

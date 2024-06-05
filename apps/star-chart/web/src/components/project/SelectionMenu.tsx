@@ -72,6 +72,7 @@ export function SelectionMenu({ className }: SelectionMenuProps) {
             onClick={() => deleteSelected('task')}
             color="ghostDestructive"
             size="small"
+            className="flex-1 justify-center"
           >
             <Icon name="trash" />
             Delete Tasks
@@ -82,6 +83,7 @@ export function SelectionMenu({ className }: SelectionMenuProps) {
             onClick={() => deleteSelected('connection')}
             color="ghostDestructive"
             size="small"
+            className="flex-1 justify-center"
           >
             <Icon name="trash" />
             Delete Connections
@@ -91,6 +93,7 @@ export function SelectionMenu({ className }: SelectionMenuProps) {
           onClick={() => deleteSelected()}
           color="ghostDestructive"
           size="small"
+          className="flex-1 justify-center"
         >
           <Icon name="trash" />
           Delete All

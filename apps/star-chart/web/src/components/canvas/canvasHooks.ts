@@ -72,22 +72,10 @@ export function useBoundsObjectIds() {
 }
 
 export function useCanvasGestures(handlers: {
-  onDragStart?: (
-    position: Vector2,
-    ctx: { canvas: Canvas; info: CanvasGestureInfo },
-  ) => void;
-  onDrag?: (
-    position: Vector2,
-    ctx: { canvas: Canvas; info: CanvasGestureInfo },
-  ) => void;
-  onDragEnd?: (
-    position: Vector2,
-    ctx: { canvas: Canvas; info: CanvasGestureInfo },
-  ) => void;
-  onTap?: (
-    position: Vector2,
-    ctx: { canvas: Canvas; info: CanvasGestureInfo },
-  ) => void;
+  onDragStart?: (info: CanvasGestureInfo) => void;
+  onDrag?: (info: CanvasGestureInfo) => void;
+  onDragEnd?: (info: CanvasGestureInfo) => void;
+  onTap?: (info: CanvasGestureInfo) => void;
 }) {
   const canvas = useCanvas();
   const handlersRef = useRef(handlers);
@@ -95,29 +83,17 @@ export function useCanvasGestures(handlers: {
 
   useEffect(() => {
     const unsubs = [
-      canvas.subscribe('canvasDragStart', (position, info) => {
-        handlersRef.current.onDragStart?.(position, {
-          canvas,
-          info,
-        });
+      canvas.subscribe('canvasDragStart', (info) => {
+        handlersRef.current.onDragStart?.(info);
       }),
-      canvas.subscribe('canvasDrag', (position, info) => {
-        handlersRef.current.onDrag?.(position, {
-          canvas,
-          info,
-        });
+      canvas.subscribe('canvasDrag', (info) => {
+        handlersRef.current.onDrag?.(info);
       }),
-      canvas.subscribe('canvasDragEnd', (position, info) => {
-        handlersRef.current.onDragEnd?.(position, {
-          canvas,
-          info,
-        });
+      canvas.subscribe('canvasDragEnd', (info) => {
+        handlersRef.current.onDragEnd?.(info);
       }),
-      canvas.subscribe('canvasTap', (position, info) => {
-        handlersRef.current.onTap?.(position, {
-          canvas,
-          info,
-        });
+      canvas.subscribe('canvasTap', (info) => {
+        handlersRef.current.onTap?.(info);
       }),
     ];
 
@@ -125,6 +101,43 @@ export function useCanvasGestures(handlers: {
       unsubs.forEach((fn) => fn());
     };
   }, [canvas]);
+}
+
+export function useObjectGestures(
+  handlers: {
+    onDragStart?: (info: CanvasGestureInfo) => void;
+    onDrag?: (info: CanvasGestureInfo) => void;
+    onDragEnd?: (info: CanvasGestureInfo) => void;
+  },
+  objectId?: string,
+) {
+  const canvas = useCanvas();
+  const handlersRef = useRef(handlers);
+  handlersRef.current = handlers;
+
+  useEffect(() => {
+    const unsubs = [
+      canvas.subscribe('objectDragStart', (info) => {
+        if (!objectId || info.targetId === objectId) {
+          handlersRef.current.onDragStart?.(info);
+        }
+      }),
+      canvas.subscribe('objectDrag', (info) => {
+        if (!objectId || info.targetId === objectId) {
+          handlersRef.current.onDrag?.(info);
+        }
+      }),
+      canvas.subscribe('objectDragEnd', (info) => {
+        if (!objectId || info.targetId === objectId) {
+          handlersRef.current.onDragEnd?.(info);
+        }
+      }),
+    ];
+
+    return () => {
+      unsubs.forEach((fn) => fn());
+    };
+  }, [canvas, objectId]);
 }
 
 export function useIsSelected(objectId: string) {

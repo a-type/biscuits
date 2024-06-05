@@ -1,5 +1,5 @@
 import { useSyncExternalStore } from 'react';
-import { useViewport } from '../canvas/ViewportProvider.jsx';
+import { useViewport } from '../canvas/ViewportRoot.jsx';
 import { Slider } from '@a-type/ui/components/slider';
 import { disableDragProps } from '../canvas/CanvasObjectDragHandle.jsx';
 

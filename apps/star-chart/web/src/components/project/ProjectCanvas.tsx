@@ -12,7 +12,7 @@ import { CanvasSvgLayer } from '../canvas/CanvasSvgLayer.jsx';
 import { CanvasWallpaper } from '../canvas/CanvasWallpaper.jsx';
 import { snapVector } from '../canvas/math.js';
 import { Vector2 } from '../canvas/types.js';
-import { useViewport, ViewportRoot } from '../canvas/ViewportProvider.jsx';
+import { useViewport, ViewportRoot } from '../canvas/ViewportRoot.jsx';
 import { AnalysisContext } from './AnalysisContext.jsx';
 import { ArrowMarkers } from './ArrowMarkers.jsx';
 import { CameraControls } from './CameraControls.jsx';
@@ -52,12 +52,12 @@ export function ProjectCanvas({ project }: ProjectCanvasProps) {
       <AnalysisContext.Provider value={analysis}>
         <ZoomFitter tasks={tasks} />
         <CanvasGestures
-          onTap={async (position, ctx) => {
-            if (ctx.canvas.selections.selectedIds.size === 0) {
-              const task = await addTask(position);
-              ctx.canvas.selections.set([task.get('id')]);
+          onTap={async (info) => {
+            if (canvas.selections.selectedIds.size === 0) {
+              const task = await addTask(info.worldPosition);
+              canvas.selections.set([task.get('id')]);
             } else {
-              ctx.canvas.selections.set([]);
+              canvas.selections.set([]);
             }
           }}
         />

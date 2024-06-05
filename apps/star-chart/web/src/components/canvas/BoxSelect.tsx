@@ -15,13 +15,13 @@ export function BoxSelect({ className, onCommit }: BoxSelectProps) {
       onPending={(objectIds, info) => {
         canvas.selections.setPending(objectIds);
       }}
-      onEnd={(objectIds, endPosition, info) => {
+      onEnd={(objectIds, info) => {
         if (info.shift) {
           canvas.selections.addAll(objectIds);
         } else {
           canvas.selections.set(objectIds);
         }
-        onCommit?.(objectIds, endPosition);
+        onCommit?.(objectIds, info.worldPosition);
       }}
       className={className}
     />
