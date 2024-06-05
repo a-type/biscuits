@@ -78,7 +78,9 @@ export function ConnectionSource({
         immediate: true,
       });
       const taskId = hitTestTasks(worldPosition);
-      projectState.activeConnectionTarget = taskId;
+      if (taskId !== sourceNodeId) {
+        projectState.activeConnectionTarget = taskId;
+      }
     },
     onDragEnd: async ({ xy: [x, y], event }) => {
       event?.stopPropagation();
