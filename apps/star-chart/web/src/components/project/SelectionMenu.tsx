@@ -69,23 +69,12 @@ export function SelectionMenu({ className }: SelectionMenuProps) {
       <div className="row flex-wrap justify-stretch">
         {mixed && (
           <Button
-            onClick={() => deleteSelected('task')}
-            color="ghostDestructive"
-            size="small"
-            className="flex-1 justify-center"
-          >
-            <Icon name="trash" />
-            Delete Tasks
-          </Button>
-        )}
-        {mixed && (
-          <Button
             onClick={() => deleteSelected('connection')}
             color="ghostDestructive"
             size="small"
             className="flex-1 justify-center"
           >
-            <Icon name="trash" />
+            <Icon name="connectionBreak" />
             Delete Connections
           </Button>
         )}

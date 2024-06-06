@@ -4,6 +4,7 @@ import { useCanvas } from '../canvas/CanvasProvider.jsx';
 import { Button } from '@a-type/ui/components/button';
 import { CanvasOverlayContent } from '../canvas/CanvasOverlay.jsx';
 import { useIsTouch } from '@biscuits/client';
+import { Icon } from '@a-type/ui/components/icon';
 
 export interface TouchToolsProps {
   className?: string;
@@ -34,7 +35,9 @@ export function TouchTools({ className }: TouchToolsProps) {
           dragLocked && 'bg-primary-light text-primary-dark',
         )}
       >
-        <span>{dragLocked ? '🔒' : '🔓'}</span>
+        <span>
+          <Icon name={dragLocked ? 'lock' : 'lockOpen'} />
+        </span>
         <span className="text-[8px] leading-tight">Drag Lock</span>
       </Button>
       {isTouchscreen && (
@@ -48,7 +51,9 @@ export function TouchTools({ className }: TouchToolsProps) {
             boxSelect && 'bg-primary-light text-primary-dark',
           )}
         >
-          <span>🔲</span>
+          <span>
+            <Icon name="maximize" />
+          </span>
           <span className="text-[8px] leading-tight">Box Select</span>
         </Button>
       )}
