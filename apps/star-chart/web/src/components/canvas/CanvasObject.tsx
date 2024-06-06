@@ -4,6 +4,7 @@ import { useMergedRef } from '@biscuits/client';
 import { animated, to, useSpring } from '@react-spring/web';
 import {
   createContext,
+  CSSProperties,
   ReactNode,
   useCallback,
   useContext,
@@ -34,6 +35,7 @@ export interface CanvasObjectRootProps {
   className?: string;
   canvasObject: CanvasObject;
   onTap?: () => void;
+  style?: CSSProperties;
 }
 
 export function CanvasObjectRoot({
@@ -41,6 +43,7 @@ export function CanvasObjectRoot({
   className,
   canvasObject,
   onTap,
+  style,
   ...rest
 }: CanvasObjectRootProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -72,6 +75,10 @@ export function CanvasObjectRoot({
         // onDragEnd={preventDefault}
         // onDrag={preventDefault}
         {...canvasObject.rootProps}
+        style={{
+          ...style,
+          ...canvasObject.rootProps.style,
+        }}
         {...bind()}
         {...rest}
       >

@@ -8,10 +8,11 @@ import { useCanvas } from '../canvas/CanvasProvider.jsx';
 import { SvgPortal } from '../canvas/CanvasSvgLayer.jsx';
 import { useViewport } from '../canvas/ViewportRoot.jsx';
 import { Wire } from '../canvas/Wire.jsx';
-import { closestLivePoint } from '../canvas/math.js';
+import { addVectors, closestLivePoint } from '../canvas/math.js';
 import { Task } from '@star-chart.biscuits/verdant';
 import { Vector2 } from '../canvas/types.js';
 import { projectState } from './state.js';
+import { CARD_MIN_HEIGHT, CARD_WIDTH } from './constants.js';
 
 export interface ConnectionSourceProps {
   sourceTask: Task;
@@ -112,7 +113,10 @@ export function ConnectionSource({
         const task = await client.tasks.put({
           projectId: sourceTask.get('projectId'),
           content: 'New Task',
-          position: worldPosition,
+          position: addVectors(worldPosition, {
+            x: -CARD_WIDTH / 2,
+            y: -CARD_MIN_HEIGHT / 2,
+          }),
         });
         // select the new task
         canvas.selections.set([task.get('id')]);

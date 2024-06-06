@@ -10,7 +10,7 @@ import {
 import { CanvasRenderer } from '../canvas/CanvasRenderer.jsx';
 import { CanvasSvgLayer } from '../canvas/CanvasSvgLayer.jsx';
 import { CanvasWallpaper } from '../canvas/CanvasWallpaper.jsx';
-import { snapVector } from '../canvas/math.js';
+import { addVectors, snapVector } from '../canvas/math.js';
 import { Vector2 } from '../canvas/types.js';
 import { useViewport, ViewportRoot } from '../canvas/ViewportRoot.jsx';
 import { AnalysisContext } from './AnalysisContext.jsx';
@@ -25,6 +25,7 @@ import { SelectionMenu } from './SelectionMenu.jsx';
 import { TaskNode } from './TaskNode.jsx';
 import { TouchTools } from './TouchTools.jsx';
 import { CanvasOverlay } from '../canvas/CanvasOverlay.jsx';
+import { CARD_MIN_HEIGHT, CARD_WIDTH } from './constants.js';
 
 export interface ProjectCanvasProps {
   project: Project;
@@ -56,7 +57,16 @@ export function ProjectCanvas({ project }: ProjectCanvasProps) {
         <CanvasGestures
           onTap={async (info) => {
             if (canvas.selections.selectedIds.size === 0) {
-              const task = await addTask(info.worldPosition);
+              const task = await addTask(
+                addVectors(
+                  info.worldPosition,
+                  // offset to center
+                  {
+                    x: -CARD_WIDTH / 2,
+                    y: -CARD_MIN_HEIGHT / 2,
+                  },
+                ),
+              );
               canvas.selections.set([task.get('id')]);
             } else {
               canvas.selections.set([]);
@@ -121,7 +131,6 @@ function useZoomToFit(tasks: Task[]) {
   const [hasZoomed, setHasZoomed] = useState(false);
   useEffect(() => {
     if (hasZoomed) return;
-    if (tasks.length === 0) return;
     const bounds = tasks.reduce(
       (acc, task) => {
         const position = task.get('position').getAll();

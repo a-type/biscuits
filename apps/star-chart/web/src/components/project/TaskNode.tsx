@@ -18,10 +18,16 @@ import { useDownstreamCount, useUpstreamCount } from './hooks.js';
 import { TaskMenu } from './TaskMenu.jsx';
 import { useSnapshot } from 'valtio';
 import { projectState } from './state.js';
+import { CARD_MIN_HEIGHT, CARD_WIDTH } from './constants.js';
 
 export interface TaskNodeProps {
   task: Task;
 }
+
+const style = {
+  width: CARD_WIDTH,
+  minHeight: CARD_MIN_HEIGHT,
+};
 
 export function TaskNode({ task }: TaskNodeProps) {
   const { id, position, completedAt } = hooks.useWatch(task);
@@ -71,10 +77,11 @@ export function TaskNode({ task }: TaskNodeProps) {
             : 'opacity-[calc(var(--zoom,1)*var(--zoom,1)*0.5)]'),
         activeConnectionTarget === id && 'bg-accent-light border-accent',
       )}
+      style={style}
       canvasObject={canvasObject}
       onTap={onTap}
     >
-      <CanvasObjectDragHandle className={clsx('p-2')}>
+      <CanvasObjectDragHandle className="flex-col items-stretch justify-stretch">
         <TaskFullContent
           task={task}
           upstreams={upstreams}
@@ -122,7 +129,7 @@ function TaskFullContent({
   );
 
   return (
-    <div className="w-240px row items-start">
+    <div className="row items-start p-2">
       <Checkbox
         className={clsx(!completedAt && upstreams > 0 ? 'opacity-50' : '')}
         checked={!!completedAt}
