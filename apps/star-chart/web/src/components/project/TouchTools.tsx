@@ -5,6 +5,7 @@ import { Button } from '@a-type/ui/components/button';
 import { CanvasOverlayContent } from '../canvas/CanvasOverlay.jsx';
 import { useIsTouch } from '@biscuits/client';
 import { Icon } from '@a-type/ui/components/icon';
+import { useEffect } from 'react';
 
 export interface TouchToolsProps {
   className?: string;
@@ -17,6 +18,12 @@ export function TouchTools({ className }: TouchToolsProps) {
   const boxSelect = useBoxSelectEnabled();
 
   const isTouchscreen = useIsTouch();
+  // auto-lock on touch devices.
+  useEffect(() => {
+    if (isTouchscreen) {
+      canvas.tools.dragLocked = true;
+    }
+  }, [canvas, isTouchscreen]);
 
   return (
     <CanvasOverlayContent
@@ -32,7 +39,7 @@ export function TouchTools({ className }: TouchToolsProps) {
         aria-pressed={dragLocked}
         className={clsx(
           'flex-col gap-0 rounded-md px-1 py-0',
-          dragLocked && 'bg-primary-light text-primary-dark',
+          dragLocked && 'bg-primary-wash text-primary-dark',
         )}
       >
         <span>
@@ -48,7 +55,7 @@ export function TouchTools({ className }: TouchToolsProps) {
           aria-pressed={boxSelect}
           className={clsx(
             'flex-col gap-0 rounded-md px-1 py-0',
-            boxSelect && 'bg-primary-light text-primary-dark',
+            boxSelect && 'bg-primary-wash text-primary-dark',
           )}
         >
           <span>
