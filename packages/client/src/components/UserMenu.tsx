@@ -93,7 +93,7 @@ export function UserMenu({
               </a>
             </DropdownMenuItem>
             <DropdownMenuItem asChild>
-              <LoginButton color="unstyled" className="transition-none">
+              <LoginButton className="border-none transition-none shadow-none">
                 Log in
                 <DropdownMenuItemRightSlot>
                   <Icon name="arrowRight" />
