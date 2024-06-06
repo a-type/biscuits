@@ -3,6 +3,7 @@ import { useCanvas } from './CanvasProvider.jsx';
 import { to } from '@react-spring/web';
 import { Vector2 } from './types.js';
 import { Canvas, CanvasGestureInfo } from './Canvas.js';
+import { useSnapshot } from 'valtio';
 
 export function useRegister(objectId: string, metadata?: any) {
   const canvas = useCanvas();
@@ -197,4 +198,14 @@ export function useCanvasRect() {
   }, [canvas]);
 
   return rect;
+}
+
+export function useDragLocked() {
+  const canvas = useCanvas();
+  return useSnapshot(canvas.tools).dragLocked;
+}
+
+export function useBoxSelectEnabled() {
+  const canvas = useCanvas();
+  return useSnapshot(canvas.tools).boxSelect;
 }

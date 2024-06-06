@@ -23,6 +23,8 @@ import { ProjectTitle } from './ProjectTitle.jsx';
 import { Reticule } from './Reticule.jsx';
 import { SelectionMenu } from './SelectionMenu.jsx';
 import { TaskNode } from './TaskNode.jsx';
+import { TouchTools } from './TouchTools.jsx';
+import { CanvasOverlay } from '../canvas/CanvasOverlay.jsx';
 
 export interface ProjectCanvasProps {
   project: Project;
@@ -82,13 +84,16 @@ export function ProjectCanvas({ project }: ProjectCanvasProps) {
               </Suspense>
             ))}
           </CanvasRenderer>
-          <CameraControls />
-          {/* <Minimap
-              className="hidden sm:block absolute bottom-0 left-0 w-200px border-default bg-light-blend"
-              renderItem={renderMinimapItem}
-            /> */}
-          <SelectionMenu />
-          <HomeButton />
+          <CanvasOverlay>
+            <CameraControls />
+            {/* <Minimap
+                className="hidden sm:block absolute bottom-0 left-0 w-200px border-default bg-light-blend"
+                renderItem={renderMinimapItem}
+              /> */}
+            <SelectionMenu />
+            <HomeButton />
+            <TouchTools />
+          </CanvasOverlay>
         </ViewportRoot>
       </AnalysisContext.Provider>
     </CanvasContext.Provider>

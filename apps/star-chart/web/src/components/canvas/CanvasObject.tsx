@@ -1,3 +1,7 @@
+import { clsx } from '@a-type/ui';
+import { preventDefault } from '@a-type/utils';
+import { useMergedRef } from '@biscuits/client';
+import { animated, to, useSpring } from '@react-spring/web';
 import {
   createContext,
   ReactNode,
@@ -8,44 +12,35 @@ import {
   useRef,
   useState,
 } from 'react';
-import { useCanvas } from './CanvasProvider.jsx';
-import { useViewport } from './ViewportRoot.jsx';
-import { to, useSpring, animated } from '@react-spring/web';
-import { Vector2 } from './types.js';
-import { SPRINGS } from './constants.js';
-import {
-  addVectors,
-  roundVector,
-  snapshotLiveVector,
-  subtractVectors,
-} from './math.js';
-import { AutoPan } from './AutoPan.js';
-import { useGesture } from '@use-gesture/react';
-import {
-  isRightClick,
-  isMiddleClick,
-  stopPropagation,
-  preventDefault,
-} from '@a-type/utils';
-import { clsx } from '@a-type/ui';
-import { useRerasterize } from './rerasterizeSignal.js';
-import { useEffectOnce, useMergedRef } from '@biscuits/client';
 import {
   useIsSelected,
   useObjectGestures,
   useRegister,
 } from './canvasHooks.js';
+import { useCanvas } from './CanvasProvider.jsx';
+import { SPRINGS } from './constants.js';
+import {
+  addVectors,
+  snapshotLiveVector,
+  vectorDistance,
+  vectorLength,
+} from './math.js';
+import { useRerasterize } from './rerasterizeSignal.js';
+import { Vector2 } from './types.js';
+import { useGesture } from '@use-gesture/react';
 
 export interface CanvasObjectRootProps {
   children: ReactNode;
   className?: string;
   canvasObject: CanvasObject;
+  onTap?: () => void;
 }
 
 export function CanvasObjectRoot({
   children,
   className,
   canvasObject,
+  onTap,
   ...rest
 }: CanvasObjectRootProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -54,25 +49,33 @@ export function CanvasObjectRoot({
   const register = useRegister(canvasObject.id, canvasObject.metadata);
   const finalRef = useMergedRef(ref, register);
 
+  const canvas = useCanvas();
+  const bind = useGesture({
+    onDragEnd: (info) => {
+      if (info.tap) {
+        console.debug(`claiming tap gesture for ${canvasObject.id}`);
+        canvas.gestureState.claimedBy = canvasObject.id;
+        onTap?.();
+      }
+    },
+  });
+
   return (
     <CanvasObjectContext.Provider value={canvasObject}>
       <animated.div
         ref={finalRef}
-        className={clsx('absolute', className)}
+        className={clsx('absolute touch-none', className)}
         // this is blocking undo keybinds...
         // onKeyDown={stopPropagation}
         // onKeyUp={stopPropagation}
-        onPointerDown={stopPropagation}
-        onPointerUp={stopPropagation}
-        onPointerMove={stopPropagation}
-        onDragStart={preventDefault}
-        onDragEnd={preventDefault}
-        onDrag={preventDefault}
+        // onDragStart={preventDefault}
+        // onDragEnd={preventDefault}
+        // onDrag={preventDefault}
         {...canvasObject.rootProps}
+        {...bind()}
         {...rest}
       >
         {children}
-        {/* <DebugAnnotations /> */}
       </animated.div>
     </CanvasObjectContext.Provider>
   );
@@ -152,7 +155,7 @@ export function useCanvasObject({
       positionSpring.set(
         addVectors(snapshotLiveVector(positionStyle), info.delta),
       );
-      if (info.intentional) {
+      if (vectorLength(info.delta) > 5) {
         setIsDragging(true);
       }
     },
@@ -162,7 +165,7 @@ export function useCanvasObject({
       positionSpring.set(
         addVectors(snapshotLiveVector(positionStyle), info.delta),
       );
-      if (info.intentional) {
+      if (vectorLength(info.delta) > 5) {
         setIsDragging(true);
       }
     },

@@ -146,19 +146,27 @@ export function useViewportGestureControls(
 
   const gestureDetails = useRef({
     buttons: 0,
-    touches: 0,
+    isTouch: false,
   });
   const bindPassiveGestures = useGesture(
     {
       onDrag: (state) => {
         if (!state.last) {
-          gestureDetails.current.touches =
-            state.type === 'touchmove' ? state.touches : 0;
           gestureDetails.current.buttons = state.buttons;
+          gestureDetails.current.isTouch = isTouchEvent(state.event);
+        }
+
+        // ignore claimed gestures
+        if (canvas.gestureState.claimedBy) {
+          return;
         }
 
         const input = gestureStateToInput(state);
-        if (isCanvasDrag(gestureDetails.current)) {
+        // TODO: move the 'box select' tool override somewhere that
+        // makes sense. might want to have this element simply report
+        // gesture info to Canvas and let other logic interpret that
+        // into pan or drag.
+        if (isCanvasDrag(gestureDetails.current) || canvas.tools.boxSelect) {
           if (!state.last) {
             canvas.onCanvasDrag(input);
           }
@@ -179,34 +187,52 @@ export function useViewportGestureControls(
         onCursorMove({ x: event.clientX, y: event.clientY });
       },
       onDragStart: (state) => {
-        gestureDetails.current.touches =
-          state.type === 'touchdown' ? state.touches : 0;
+        gestureDetails.current.isTouch = isTouchEvent(state.event);
         gestureDetails.current.buttons = state.buttons;
 
-        if (isCanvasDrag(gestureDetails.current)) {
+        if (canvas.gestureState.claimedBy) {
+          // ignore claimed gestures
+          console.debug(
+            `drag start. gesture claimed by ${canvas.gestureState.claimedBy}`,
+          );
+          return;
+        }
+
+        if (isCanvasDrag(gestureDetails.current) || canvas.tools.boxSelect) {
           canvas.onCanvasDragStart(gestureStateToInput(state));
           return;
         }
       },
       onDragEnd: (state) => {
+        if (canvas.gestureState.claimedBy) {
+          console.debug(
+            `drag complete. gesture claimed by ${canvas.gestureState.claimedBy}`,
+          );
+          // this gesture was claimed, but it's now over.
+          // we don't take action but we do reset the claim status
+          canvas.gestureState.claimedBy = null;
+          return;
+        } else {
+          console.debug(`drag complete, no claims. processing on canvas.`);
+        }
+
         const info = gestureStateToInput(state);
 
         // tap is triggered either by left click, or on touchscreens.
         // tap must fire before drag end.
         if (
           state.tap &&
-          (isCanvasDrag(gestureDetails.current) || state.type === 'touchend')
+          (isCanvasDrag(gestureDetails.current) || isTouchEvent(state.event))
         ) {
-          console.log('here');
           canvas.onCanvasTap(info);
         }
 
-        if (isCanvasDrag(gestureDetails.current)) {
+        if (isCanvasDrag(gestureDetails.current) || canvas.tools.boxSelect) {
           canvas.onCanvasDragEnd(info);
         }
 
         gestureDetails.current.buttons = 0;
-        gestureDetails.current.touches = 0;
+        gestureDetails.current.isTouch = false;
       },
       onContextMenu: ({ event }) => {
         event.preventDefault();
@@ -218,7 +244,7 @@ export function useViewportGestureControls(
           buttons: [1, 2, 4],
           // enabling touch events on mobile devices makes it possible
           // to differentiate between touch and non-touch events.
-          touch: true,
+          // touch: true,
           // lock: true,
         },
       },
@@ -351,11 +377,18 @@ export function useKeyboardControls(viewport: Viewport) {
 }
 
 function isCanvasDrag({
-  touches,
+  isTouch,
   buttons,
 }: {
-  touches: number;
+  isTouch: boolean;
   buttons: number;
 }) {
-  return !!(buttons & 1) && touches === 0;
+  return !!(buttons & 1) && !isTouch;
+}
+
+function isTouchEvent(event: Event) {
+  if (event.type.startsWith('touch')) return true;
+  if (event.type.startsWith('pointer'))
+    return (event as PointerEvent).pointerType === 'touch';
+  return false;
 }

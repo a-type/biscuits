@@ -397,12 +397,12 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
     {
       origin = 'direct',
       centroid,
-      gestureComplete,
+      gestureComplete = true,
     }: {
       centroid?: Vector2;
       origin?: ViewportEventOrigin;
-      gestureComplete: boolean;
-    },
+      gestureComplete?: boolean;
+    } = {},
   ) => {
     // the pan position is also updated to keep the focal point in the same screen position
     if (centroid) {
@@ -452,7 +452,7 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
     details: {
       origin?: ViewportEventOrigin;
       centroid?: Vector2;
-      gestureComplete: boolean;
+      gestureComplete?: boolean;
     },
   ) => {
     this.doZoom(this.zoom + zoomDelta, details);
@@ -470,8 +470,8 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
     worldPosition: Vector2,
     {
       origin = 'direct',
-      gestureComplete,
-    }: { origin?: ViewportEventOrigin; gestureComplete: boolean },
+      gestureComplete = true,
+    }: { origin?: ViewportEventOrigin; gestureComplete?: boolean } = {},
   ) => {
     this._center = this.clampPanPosition(worldPosition);
     this.emit('centerChanged', this.center, origin);
@@ -489,7 +489,7 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
    */
   doRelativePan = (
     worldDelta: Vector2,
-    details: { origin?: ViewportEventOrigin; gestureComplete: boolean },
+    details?: { origin?: ViewportEventOrigin; gestureComplete?: boolean },
   ) => {
     this.doPan(addVectors(this.center, worldDelta), details);
   };
@@ -503,15 +503,9 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
   doMove = (
     worldPosition: Vector2,
     zoomValue: number,
-    { origin = 'direct' }: { origin?: ViewportEventOrigin } = {},
+    info: { origin?: ViewportEventOrigin; gestureComplete?: boolean } = {},
   ) => {
-    this._zoom = clamp(
-      zoomValue,
-      this.config.zoomLimits.min,
-      this.config.zoomLimits.max,
-    );
-    this._center = this.clampPanPosition(worldPosition);
-    this.emit('centerChanged', this.center, origin);
-    this.emit('zoomChanged', this.zoom, origin);
+    this.doPan(worldPosition, info);
+    this.doZoom(zoomValue, info);
   };
 }

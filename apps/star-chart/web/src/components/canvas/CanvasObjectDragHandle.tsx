@@ -1,4 +1,11 @@
-import { ReactNode, useCallback, useEffect, useMemo, useRef } from 'react';
+import {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+} from 'react';
 import { useCanvasObjectContext } from './CanvasObject.jsx';
 import { clsx } from '@a-type/ui';
 import { isMiddleClick, isRightClick, stopPropagation } from '@a-type/utils';
@@ -12,25 +19,24 @@ import { useCanvas } from './CanvasProvider.jsx';
 import { Vector2 } from './types.js';
 import { AutoPan } from './AutoPan.js';
 import { useGesture } from '@use-gesture/react';
-import { CanvasGestureInfo, CanvasGestureInput } from './Canvas.js';
+import { CanvasGestureInput } from './Canvas.js';
 import { applyGestureState } from './gestureUtils.js';
+import { useDragLocked } from './canvasHooks.js';
 
 export interface CanvasObjectDragHandleProps {
   children: ReactNode;
   disabled?: boolean;
   className?: string;
-  onTap?: () => void;
 }
 
 export function CanvasObjectDragHandle({
   children,
   disabled,
   className,
-  onTap: providedOnTap,
   ...rest
 }: CanvasObjectDragHandleProps) {
   const { isDragging: isGrabbing } = useCanvasObjectContext();
-  const bindDragHandle = useDragHandle();
+  const bindDragHandle = useDragHandle(disabled);
 
   /**
    * This handler prevents click events from firing within the draggable handle
@@ -47,13 +53,6 @@ export function CanvasObjectDragHandle({
     [isGrabbing],
   );
 
-  const bindArgsRef = useRef<
-    Exclude<Parameters<typeof bindDragHandle>[0], undefined>
-  >({});
-  if (providedOnTap) {
-    bindArgsRef.current.onTap = providedOnTap;
-  }
-
   return (
     <div
       className={clsx(
@@ -65,7 +64,7 @@ export function CanvasObjectDragHandle({
         },
         className,
       )}
-      {...(disabled ? {} : bindDragHandle(bindArgsRef.current))}
+      {...bindDragHandle()}
       onClickCapture={onClickCapture}
       {...rest}
     >
@@ -91,10 +90,14 @@ export const disableDragProps = {
   ...stopPropagationProps,
 };
 
-function useDragHandle() {
+function useDragHandle(disabled: boolean = false) {
   const canvas = useCanvas();
   const viewport = canvas.viewport;
   const canvasObject = useCanvasObjectContext();
+
+  const dragLocked = useDragLocked();
+
+  const id = useId();
 
   // stores the displacement between the user's grab point and the position
   // of the object, in screen pixels
@@ -144,6 +147,11 @@ function useDragHandle() {
           return;
         }
 
+        if (canvas.gestureState.claimedBy !== id) {
+          state.cancel();
+          return;
+        }
+
         if (state.event?.target) {
           const element = state.event?.target as HTMLElement;
           // look up the element tree for a hidden or no-drag element to see if dragging is allowed
@@ -160,10 +168,6 @@ function useDragHandle() {
             state.cancel();
             return;
           }
-        }
-
-        if (!state.canceled) {
-          state.event.stopPropagation();
         }
 
         // update gesture info
@@ -190,7 +194,10 @@ function useDragHandle() {
           return;
         }
 
-        state.event.stopPropagation();
+        console.debug(
+          `claiming gesture for ${id} (${canvasObject.id}'s drag handle)`,
+        );
+        canvas.gestureState.claimedBy = id;
 
         // update/ reset gesture info
         Object.assign(gestureInputRef.current, {
@@ -232,8 +239,17 @@ function useDragHandle() {
           return;
         }
 
-        if (!state.canceled) {
-          state.event.stopPropagation();
+        if (canvas.gestureState.claimedBy !== id) {
+          state.cancel();
+          return;
+        }
+
+        // don't claim taps. let parents handle them.
+        if (state.tap) {
+          console.debug(`${id} is abandoning claim on tap gesture`);
+          canvas.gestureState.claimedBy = null;
+          state.cancel();
+          return;
         }
 
         // update gesture info
@@ -246,11 +262,6 @@ function useDragHandle() {
 
         const screenPosition = { x: state.xy[0], y: state.xy[1] };
 
-        // invoke tap handler if provided. not sure how to type this..
-        if (state.tap) {
-          state.args?.[0]?.onTap?.();
-        }
-
         applyGestureState(gestureInputRef.current, state);
         gestureInputRef.current.screenPosition = displace(screenPosition);
         canvas.onObjectDragEnd(gestureInputRef.current);
@@ -261,10 +272,8 @@ function useDragHandle() {
     {
       drag: {
         preventDefault: true,
-        pointer: {
-          touch: true,
-        },
       },
+      enabled: !dragLocked && !disabled,
     },
   );
 

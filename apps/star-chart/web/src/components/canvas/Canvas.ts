@@ -5,6 +5,7 @@ import { ObjectBounds } from './ObjectBounds.js';
 import { Selections } from './Selections.js';
 import { RectLimits, Vector2 } from './types.js';
 import { Viewport, ViewportConfig } from './Viewport.js';
+import { proxy } from 'valtio';
 
 export interface CanvasOptions {
   /** Snaps items to a world-unit grid after dropping them - defaults to 1. */
@@ -53,6 +54,15 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
 
   readonly objectElements = new Map<string, Element>();
   readonly objectMetadata = new Map<string, any>();
+
+  readonly tools = proxy({
+    dragLocked: false,
+    boxSelect: false,
+  });
+
+  readonly gestureState = {
+    claimedBy: null as string | null,
+  };
 
   private _positionSnapIncrement = 1;
 

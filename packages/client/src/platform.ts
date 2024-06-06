@@ -56,3 +56,12 @@ export function getIsMobile() {
     /iPad/i.test(navigator.userAgent)
   );
 }
+
+let isUsingTouch = false;
+window.addEventListener('touchstart', () => {
+  isUsingTouch = true;
+});
+
+export function getIsTouch() {
+  return isUsingTouch;
+}

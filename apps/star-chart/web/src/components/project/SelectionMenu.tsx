@@ -6,6 +6,7 @@ import { useCanvas } from '../canvas/CanvasProvider.jsx';
 import { disableDragProps } from '../canvas/CanvasObjectDragHandle.jsx';
 import { useDeleteConnection, useDeleteTask } from './hooks.js';
 import { useMemo } from 'react';
+import { CanvasOverlayContent } from '../canvas/CanvasOverlay.jsx';
 
 export interface SelectionMenuProps {
   className?: string;
@@ -53,14 +54,13 @@ export function SelectionMenu({ className }: SelectionMenuProps) {
   const mixed = tasks.length > 0 && connections.length > 0;
 
   return (
-    <div
+    <CanvasOverlayContent
       className={clsx(
         'bg-white rounded-lg shadow-xl p-3 col hidden min-w-200px max-w-80vw',
         'absolute z-100 bottom-1 left-50% transform -translate-1/2',
         hasSelection && 'flex animate-dialog-in',
         className,
       )}
-      {...disableDragProps}
     >
       <div className="font-bold">
         {selectedIds.length}{' '}
@@ -99,6 +99,6 @@ export function SelectionMenu({ className }: SelectionMenuProps) {
           Delete All
         </Button>
       </div>
-    </div>
+    </CanvasOverlayContent>
   );
 }

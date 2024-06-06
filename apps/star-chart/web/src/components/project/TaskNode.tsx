@@ -72,8 +72,9 @@ export function TaskNode({ task }: TaskNodeProps) {
         activeConnectionTarget === id && 'bg-accent-light border-accent',
       )}
       canvasObject={canvasObject}
+      onTap={onTap}
     >
-      <CanvasObjectDragHandle onTap={onTap} className={clsx('p-2')}>
+      <CanvasObjectDragHandle className={clsx('p-2')}>
         <TaskFullContent
           task={task}
           upstreams={upstreams}
