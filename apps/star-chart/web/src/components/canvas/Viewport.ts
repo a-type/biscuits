@@ -7,6 +7,7 @@ import {
   multiplyVector,
   subtractVectors,
 } from './math.js';
+import { Canvas } from './Canvas.js';
 
 // for some calculations we need to assume a real size for an infinite
 // canvas... we use this value for infinite extents. FIXME: can we
@@ -18,8 +19,6 @@ export interface ViewportConfig {
   defaultZoom?: number;
   /** Supply a starting center position. Default 0,0 */
   defaultCenter?: Vector2;
-  /** Restrict world positions to certain boundaries. Default unlimited. */
-  canvasLimits?: RectLimits;
   /** Restrict pan movement to certain boundaries. Default is canvasLimits if those exist,
    * otherwise unbounded.
    */
@@ -41,12 +40,14 @@ export interface ViewportConfig {
    * can be set later using bindElement. Defaults to window.
    */
   boundElement?: HTMLElement;
+
+  canvas: Canvas;
 }
 
 // removes some optional annotations as they are filled by defaults.
 type InternalViewportConfig = Omit<
   ViewportConfig,
-  'zoomLimits' | 'boundElement' | 'defaultZoom'
+  'zoomLimits' | 'boundElement' | 'defaultZoom' | 'canvas'
 > & {
   defaultZoom: number;
   zoomLimits: { min: number; max: number };
@@ -88,6 +89,7 @@ export type ViewportEvents = {
  * when the camera properties change.
  */
 export class Viewport extends EventSubscriber<ViewportEvents> {
+  private canvas: Canvas;
   private _center: Vector2 = { x: 0, y: 0 };
   private _zoom = 1;
   _config: InternalViewportConfig;
@@ -107,8 +109,9 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
     this.handleBoundElementResize,
   );
 
-  constructor({ boundElement, ...config }: ViewportConfig) {
+  constructor({ boundElement, canvas, ...config }: ViewportConfig) {
     super();
+    this.canvas = canvas;
 
     if (config.defaultCenter) {
       this._center = config.defaultCenter;
@@ -121,10 +124,10 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
     this._config = {
       defaultZoom: 1,
       zoomLimits: { min: 0.25, max: 2 },
-      panLimits: config.canvasLimits
+      panLimits: canvas.limits
         ? {
-            max: multiplyVector(config.canvasLimits.max, 1.5),
-            min: multiplyVector(config.canvasLimits.min, 1.5),
+            max: multiplyVector(canvas.limits.max, 1.5),
+            min: multiplyVector(canvas.limits.min, 1.5),
           }
         : undefined,
       ...config,
@@ -231,32 +234,6 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
     return this._boundElement;
   }
 
-  /**
-   * The rectangle bounds describing the total world canvas area.
-   * For infinite canvases this will be a large but finite space.
-   */
-  get canvasRect() {
-    const canvasMin = this.config.canvasLimits?.min ?? {
-      x: -INFINITE_LOGICAL_SIZE / 2,
-      y: -INFINITE_LOGICAL_SIZE / 2,
-    };
-    const canvasMax = this.config.canvasLimits?.max ?? {
-      x: INFINITE_LOGICAL_SIZE / 2,
-      y: INFINITE_LOGICAL_SIZE / 2,
-    };
-    return {
-      x: canvasMin.x,
-      y: canvasMin.y,
-      width: canvasMax.x - canvasMin.x,
-      height: canvasMax.y - canvasMin.y,
-    };
-  }
-
-  get worldCenter() {
-    const rect = this.canvasRect;
-    return { x: rect.x + rect.width / 2, y: rect.y + rect.height / 2 };
-  }
-
   /** Convenience getters for internal calculation */
 
   private get halfViewportWidth() {
@@ -314,23 +291,11 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
         this.center.y,
     };
 
-    if (clamp && !!this.config.canvasLimits) {
-      return this.clampToWorld(transformedPoint);
+    if (clamp) {
+      return this.canvas.clampPosition(transformedPoint);
     }
 
     return transformedPoint;
-  };
-
-  /**
-   * Restricts a position to one inside the world canvas
-   */
-  clampToWorld = (worldPosition: Vector2) => {
-    if (!this.config.canvasLimits) return worldPosition;
-    return clampVector(
-      worldPosition,
-      this.config.canvasLimits.min,
-      this.config.canvasLimits.max,
-    );
   };
 
   /**
@@ -383,8 +348,8 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
         const worldViewportHalfHeight = this.halfViewportHeight / this.zoom;
         const worldViewportWidth = this._boundElementSize.width / this.zoom;
         const worldViewportHeight = this._boundElementSize.height / this.zoom;
-        const canvasRect = this.canvasRect;
-        const worldCenter = this.worldCenter;
+        const canvasRect = this.canvas.boundary;
+        const worldCenter = this.canvas.center;
 
         // there are different rules depending on if the viewport is visually larger
         // than the canvas, or vice versa. when the viewport is larger than the canvas
@@ -527,10 +492,5 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
     this._center = this.clampPanPosition(worldPosition);
     this.emit('centerChanged', this.center, origin);
     this.emit('zoomChanged', this.zoom, origin);
-  };
-
-  resizeCanvas = (size: RectLimits) => {
-    this.config.canvasLimits = size;
-    this.emit('canvasChanged', size);
   };
 }

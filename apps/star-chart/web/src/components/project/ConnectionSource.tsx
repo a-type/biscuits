@@ -6,7 +6,7 @@ import { ReactNode, useCallback, useMemo, useState } from 'react';
 import { disableDragProps } from '../canvas/CanvasObjectDragHandle.jsx';
 import { useCanvas } from '../canvas/CanvasProvider.jsx';
 import { SvgPortal } from '../canvas/CanvasSvgLayer.jsx';
-import { useViewport } from '../canvas/ViewportProvider.jsx';
+import { useViewport } from '../canvas/ViewportRoot.jsx';
 import { Wire } from '../canvas/Wire.jsx';
 import { closestLivePoint } from '../canvas/math.js';
 import { Task } from '@star-chart.biscuits/verdant';

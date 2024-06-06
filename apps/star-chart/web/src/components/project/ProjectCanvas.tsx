@@ -3,32 +3,26 @@ import { Project, Task } from '@star-chart.biscuits/verdant';
 import { Suspense, useCallback, useEffect, useState } from 'react';
 import { BoxSelect } from '../canvas/BoxSelect.jsx';
 import {
+  CanvasContext,
   CanvasGestures,
-  CanvasProvider,
-  useCanvas,
+  useCreateCanvas,
 } from '../canvas/CanvasProvider.jsx';
 import { CanvasRenderer } from '../canvas/CanvasRenderer.jsx';
 import { CanvasSvgLayer } from '../canvas/CanvasSvgLayer.jsx';
 import { CanvasWallpaper } from '../canvas/CanvasWallpaper.jsx';
 import { snapVector } from '../canvas/math.js';
-import { Minimap } from '../canvas/Minimap.jsx';
 import { Vector2 } from '../canvas/types.js';
-import {
-  useViewport,
-  ViewportProvider,
-  ViewportRoot,
-} from '../canvas/ViewportProvider.jsx';
+import { useViewport, ViewportRoot } from '../canvas/ViewportRoot.jsx';
 import { AnalysisContext } from './AnalysisContext.jsx';
 import { ArrowMarkers } from './ArrowMarkers.jsx';
 import { CameraControls } from './CameraControls.jsx';
 import { ConnectionWire } from './ConnectionWire.jsx';
-import { useProjectData } from './hooks.js';
-import { TaskNode } from './TaskNode.jsx';
-import { SelectionMenu } from './SelectionMenu.jsx';
-import { Reticule } from './Reticule.jsx';
-import { ProjectTitle } from './ProjectTitle.jsx';
 import { HomeButton } from './HomeButton.jsx';
-import { renderMinimapItem } from './minimap.jsx';
+import { useProjectData } from './hooks.js';
+import { ProjectTitle } from './ProjectTitle.jsx';
+import { Reticule } from './Reticule.jsx';
+import { SelectionMenu } from './SelectionMenu.jsx';
+import { TaskNode } from './TaskNode.jsx';
 
 export interface ProjectCanvasProps {
   project: Project;
@@ -41,62 +35,63 @@ export function ProjectCanvas({ project }: ProjectCanvasProps) {
 
   const addTask = useAddTask(projectId);
 
-  return (
-    <AnalysisContext.Provider value={analysis}>
-      <ViewportProvider
-        minZoom={0.25}
-        maxZoom={1.25}
-        defaultZoom={1}
-        canvasSize={null}
-      >
-        <ZoomFitter tasks={tasks} />
-        <CanvasProvider
-          options={{
-            positionSnapIncrement: 24,
-          }}
-        >
-          <CanvasGestures
-            onTap={async (position, ctx) => {
-              if (ctx.canvas.selections.selectedIds.size === 0) {
-                const task = await addTask(position);
-                ctx.canvas.selections.set([task.get('id')]);
-              } else {
-                ctx.canvas.selections.set([]);
-              }
-            }}
-          />
-          <ViewportRoot>
-            <ProjectTitle project={project} />
+  const canvas = useCreateCanvas({
+    viewportConfig: {
+      zoomLimits: {
+        max: 1.25,
+        min: 0.25,
+      },
+      defaultCenter: { x: 0, y: 0 },
+      defaultZoom: 1,
+    },
+    positionSnapIncrement: 24,
+  });
 
-            <CanvasRenderer>
-              <CanvasWallpaper />
-              <CanvasSvgLayer id="connections">
-                <ArrowMarkers />
-                <Reticule />
-                <BoxSelect className="stroke-1 stroke-accent-dark fill-accent-wash opacity-50 z-0" />
-              </CanvasSvgLayer>
-              {connections.map((connection) => (
-                <Suspense key={connection.get('id')}>
-                  <ConnectionWire connection={connection} />
-                </Suspense>
-              ))}
-              {tasks.map((task) => (
-                <Suspense key={task.get('id')}>
-                  <TaskNode task={task} />
-                </Suspense>
-              ))}
-            </CanvasRenderer>
-            <CameraControls />
-            {/* <Minimap
+  return (
+    <CanvasContext.Provider value={canvas}>
+      <AnalysisContext.Provider value={analysis}>
+        <ZoomFitter tasks={tasks} />
+        <CanvasGestures
+          onTap={async (info) => {
+            if (canvas.selections.selectedIds.size === 0) {
+              const task = await addTask(info.worldPosition);
+              canvas.selections.set([task.get('id')]);
+            } else {
+              canvas.selections.set([]);
+            }
+          }}
+        />
+        <ViewportRoot>
+          <ProjectTitle project={project} />
+
+          <CanvasRenderer>
+            <CanvasWallpaper />
+            <CanvasSvgLayer id="connections">
+              <ArrowMarkers />
+              <Reticule />
+              <BoxSelect className="stroke-1 stroke-accent-dark fill-accent-wash opacity-50 z-0" />
+            </CanvasSvgLayer>
+            {connections.map((connection) => (
+              <Suspense key={connection.get('id')}>
+                <ConnectionWire connection={connection} />
+              </Suspense>
+            ))}
+            {tasks.map((task) => (
+              <Suspense key={task.get('id')}>
+                <TaskNode task={task} />
+              </Suspense>
+            ))}
+          </CanvasRenderer>
+          <CameraControls />
+          {/* <Minimap
               className="hidden sm:block absolute bottom-0 left-0 w-200px border-default bg-light-blend"
               renderItem={renderMinimapItem}
             /> */}
-            <SelectionMenu />
-            <HomeButton />
-          </ViewportRoot>
-        </CanvasProvider>
-      </ViewportProvider>
-    </AnalysisContext.Provider>
+          <SelectionMenu />
+          <HomeButton />
+        </ViewportRoot>
+      </AnalysisContext.Provider>
+    </CanvasContext.Provider>
   );
 }
 

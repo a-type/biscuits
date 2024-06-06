@@ -2,9 +2,9 @@ import { animated, useSpring } from '@react-spring/web';
 import { useGesture } from '@use-gesture/react';
 import { useEffect, JSX, Fragment } from 'react';
 import { useBoundsObjectIds, useOrigin, useSize } from './canvasHooks.js';
-import { useViewport } from './ViewportProvider.jsx';
+import { useViewport } from './ViewportRoot.jsx';
 import { useCanvas } from './CanvasProvider.jsx';
-import { useCanvasRect } from './viewportHooks.js';
+import { useCanvasRect } from './canvasHooks.js';
 
 export interface MinimapProps {
   className?: string;

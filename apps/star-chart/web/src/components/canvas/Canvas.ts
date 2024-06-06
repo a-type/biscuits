@@ -1,48 +1,53 @@
 import { EventSubscriber } from '@a-type/utils';
 import { SpringValue, to } from '@react-spring/web';
-import { snap } from './math.js';
+import { clampVector, snap } from './math.js';
 import { ObjectBounds } from './ObjectBounds.js';
-import { ObjectPositions } from './ObjectPositions.js';
 import { Selections } from './Selections.js';
-import { Vector2 } from './types.js';
-import { Viewport } from './Viewport.js';
-
-type ActiveGestureState = {
-  targetObjectId: string | null;
-  position: Vector2 | null;
-  startPosition: Vector2 | null;
-};
+import { RectLimits, Vector2 } from './types.js';
+import { Viewport, ViewportConfig } from './Viewport.js';
 
 export interface CanvasOptions {
   /** Snaps items to a world-unit grid after dropping them - defaults to 1. */
   positionSnapIncrement?: number;
+  limits?: RectLimits;
+  viewportConfig?: Omit<ViewportConfig, 'canvas'>;
 }
 
 export interface CanvasGestureInfo {
   shift: boolean;
   alt: boolean;
   ctrlOrMeta: boolean;
+  intentional: boolean;
+  delta: Vector2;
+  worldPosition: Vector2;
+  targetId?: string;
 }
 
-export type CanvasEvents = {
-  [k: `objectDrop:${string}`]: (
-    newPosition: Vector2,
-    info: { source: 'gesture' | 'external' },
-  ) => void;
-  [k: `objectDrag:${string}`]: (newPosition: Vector2) => void;
-  canvasTap: (position: Vector2, info: CanvasGestureInfo) => void;
-  canvasDragStart: (position: Vector2, info: CanvasGestureInfo) => void;
-  canvasDrag: (position: Vector2, info: CanvasGestureInfo) => void;
-  canvasDragEnd: (position: Vector2, info: CanvasGestureInfo) => void;
+export interface CanvasGestureInput
+  extends Omit<CanvasGestureInfo, 'worldPosition'> {
+  screenPosition: Vector2;
+}
+
+const DEFAULT_LIMITS: RectLimits = {
+  max: { x: 1_000_000, y: 1_000_000 },
+  min: { x: -1_000_000, y: -1_000_000 },
 };
 
-/**
- * This class encapsulates the logic which powers the movement and
- * sizing of objects within a Room Canvas - the 2d space that makes
- * up the standard With Room. It implements the required functionality
- * for both CanvasContext and SizingContext
- */
+export type CanvasEvents = {
+  objectDragStart: (info: CanvasGestureInfo) => void;
+  objectDrag: (info: CanvasGestureInfo) => void;
+  objectDragEnd: (info: CanvasGestureInfo) => void;
+  canvasTap: (info: CanvasGestureInfo) => void;
+  canvasDragStart: (info: CanvasGestureInfo) => void;
+  canvasDrag: (info: CanvasGestureInfo) => void;
+  canvasDragEnd: (info: CanvasGestureInfo) => void;
+  resize: (size: RectLimits) => void;
+};
+
 export class Canvas extends EventSubscriber<CanvasEvents> {
+  readonly viewport: Viewport;
+  readonly limits: RectLimits;
+
   readonly bounds = new ObjectBounds();
   readonly selections = new Selections();
 
@@ -51,11 +56,10 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
 
   private _positionSnapIncrement = 1;
 
-  constructor(
-    private viewport: Viewport,
-    options?: CanvasOptions,
-  ) {
+  constructor(options?: CanvasOptions) {
     super();
+    this.viewport = new Viewport({ ...options?.viewportConfig, canvas: this });
+    this.limits = options?.limits ?? DEFAULT_LIMITS;
     // @ts-ignore for debugging...
     window.canvas = this;
     this._positionSnapIncrement = options?.positionSnapIncrement ?? 1;
@@ -65,29 +69,76 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
     return this._positionSnapIncrement;
   }
 
+  get boundary() {
+    return {
+      x: this.limits.min.x,
+      y: this.limits.min.y,
+      width: this.limits.max.x - this.limits.min.x,
+      height: this.limits.max.y - this.limits.min.y,
+    };
+  }
+
+  get center() {
+    return {
+      x: (this.limits.max.x + this.limits.min.x) / 2,
+      y: (this.limits.max.y + this.limits.min.y) / 2,
+    };
+  }
+
   snapPosition = (position: Vector2) => ({
     x: snap(position.x, this._positionSnapIncrement),
     y: snap(position.y, this._positionSnapIncrement),
   });
 
-  onCanvasTap = (screenPosition: Vector2, info: CanvasGestureInfo) => {
-    const worldPosition = this.viewport.viewportToWorld(screenPosition);
-    this.emit('canvasTap', worldPosition, info);
+  clampPosition = (position: Vector2) =>
+    clampVector(position, this.limits.min, this.limits.max);
+
+  resize = (size: RectLimits) => {
+    this.limits.min = size.min;
+    this.limits.max = size.max;
+    this.emit('resize', size);
   };
 
-  onCanvasDragStart = (screenPosition: Vector2, info: CanvasGestureInfo) => {
-    const worldPosition = this.viewport.viewportToWorld(screenPosition);
-    this.emit('canvasDragStart', worldPosition, info);
+  private transformGesture = (
+    { screenPosition, delta, ...rest }: CanvasGestureInput,
+    snap?: boolean,
+  ): CanvasGestureInfo => {
+    let pos = this.viewport.viewportToWorld(screenPosition);
+    if (snap) {
+      pos = this.snapPosition(pos);
+    }
+    return Object.assign(rest, {
+      worldPosition: pos,
+      delta: this.viewport.viewportDeltaToWorld(delta),
+    });
   };
 
-  onCanvasDrag = (screenPosition: Vector2, info: CanvasGestureInfo) => {
-    const worldPosition = this.viewport.viewportToWorld(screenPosition);
-    this.emit('canvasDrag', worldPosition, info);
+  onCanvasTap = (info: CanvasGestureInput) => {
+    this.emit('canvasTap', this.transformGesture(info));
   };
 
-  onCanvasDragEnd = (screenPosition: Vector2, info: CanvasGestureInfo) => {
-    const worldPosition = this.viewport.viewportToWorld(screenPosition);
-    this.emit('canvasDragEnd', worldPosition, info);
+  onCanvasDragStart = (info: CanvasGestureInput) => {
+    this.emit('canvasDragStart', this.transformGesture(info));
+  };
+
+  onCanvasDrag = (info: CanvasGestureInput) => {
+    this.emit('canvasDrag', this.transformGesture(info));
+  };
+
+  onCanvasDragEnd = (info: CanvasGestureInput) => {
+    this.emit('canvasDragEnd', this.transformGesture(info));
+  };
+
+  onObjectDragStart = (info: CanvasGestureInput) => {
+    this.emit('objectDragStart', this.transformGesture(info));
+  };
+
+  onObjectDrag = (info: CanvasGestureInput) => {
+    this.emit('objectDrag', this.transformGesture(info));
+  };
+
+  onObjectDragEnd = (info: CanvasGestureInput) => {
+    this.emit('objectDragEnd', this.transformGesture(info));
   };
 
   /**

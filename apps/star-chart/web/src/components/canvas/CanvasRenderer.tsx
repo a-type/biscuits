@@ -2,7 +2,7 @@ import { animated, to, useSpring } from '@react-spring/web';
 import { SPRINGS } from './constants.js';
 import { Vector2 } from './types.js';
 import { rerasterizeSignal } from './rerasterizeSignal.js';
-import { useViewport } from './ViewportProvider.jsx';
+import { useViewport } from './ViewportRoot.jsx';
 import { ViewportEventOrigin } from './Viewport.js';
 import { ReactNode, useEffect, useState } from 'react';
 import { useGesture } from '@use-gesture/react';

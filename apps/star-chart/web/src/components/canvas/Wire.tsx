@@ -3,7 +3,7 @@ import { SVGProps, useEffect, useState } from 'react';
 import { LiveVector2, Vector2 } from './types.js';
 import { useGesture } from '@use-gesture/react';
 import { getWireBezierForEndPoints } from './math.js';
-import { useViewport } from './ViewportProvider.jsx';
+import { useViewport } from './ViewportRoot.jsx';
 import { clsx } from '@a-type/ui';
 import { useRegister } from './canvasHooks.js';
 import { useCanvas } from './CanvasProvider.jsx';

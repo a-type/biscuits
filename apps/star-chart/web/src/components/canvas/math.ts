@@ -69,8 +69,11 @@ export function vectorDistance(v1: Vector2, v2: Vector2) {
   );
 }
 
-export function vectorLength(v: Vector2) {
-  return vectorDistance(v, { x: 0, y: 0 });
+export function vectorLength(v: Vector2 | [number, number]) {
+  if (Array.isArray(v)) {
+    return Math.sqrt(v[0] ** 2 + v[1] ** 2);
+  }
+  return Math.sqrt(v.x ** 2 + v.y ** 2);
 }
 
 /**
@@ -326,5 +329,12 @@ export function distanceToBezier(curve: Bezier, point: Vector2) {
   return {
     distance: minDistance,
     closestPoint,
+  };
+}
+
+export function snapshotLiveVector(vec: LiveVector2) {
+  return {
+    x: vec.x.get(),
+    y: vec.y.get(),
   };
 }
