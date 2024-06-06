@@ -4,7 +4,7 @@ import { Vector2 } from './types.js';
 import { rerasterizeSignal } from './rerasterizeSignal.js';
 import { useViewport } from './ViewportRoot.jsx';
 import { ViewportEventOrigin } from './Viewport.js';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactNode, useEffect, useRef, useState } from 'react';
 import { useGesture } from '@use-gesture/react';
 import { PresenceCursors } from './PresenceCursors.jsx';
 import { useCanvas } from './CanvasProvider.jsx';
@@ -29,6 +29,7 @@ export const CanvasRenderer = ({
   onTap,
 }: IViewportRendererProps) => {
   const viewport = useViewport();
+  const ref = useRef<HTMLDivElement>(null);
 
   // keep track of viewport element size as provided by Viewport class
   const [viewportSize, setViewportSize] = useState(viewport.elementSize);
@@ -42,7 +43,6 @@ export const CanvasRenderer = ({
   const [{ centerX, centerY }, panSpring] = useSpring(() => ({
     centerX: viewport.center.x,
     centerY: viewport.center.y,
-    isPanning: false,
     config: SPRINGS.RELAXED,
   }));
   const [{ zoom }, zoomSpring] = useSpring(() => ({
@@ -56,14 +56,12 @@ export const CanvasRenderer = ({
       center: Readonly<Vector2>,
       origin: ViewportEventOrigin,
     ) {
-      await panSpring.start({
+      panSpring.start({
         centerX: center.x,
         centerY: center.y,
-        isPanning: true,
         immediate: origin === 'direct',
         config: VIEWPORT_ORIGIN_SPRINGS[origin],
-      })[0];
-      await panSpring.start({ isPanning: false })[0];
+      });
     }
     async function handleZoomChanged(
       zoomValue: number,
@@ -72,16 +70,19 @@ export const CanvasRenderer = ({
       onZoomChange?.(zoomValue);
       await zoomSpring.start({
         zoom: zoomValue,
-        isZooming: true,
         immediate: origin === 'direct',
         config: VIEWPORT_ORIGIN_SPRINGS[origin],
       })[0];
-      await zoomSpring.start({ isZooming: false })[0];
-      rerasterizeSignal.emit('rerasterize');
     }
     const unsubs = [
       viewport.subscribe('centerChanged', handleCenterChanged),
       viewport.subscribe('zoomChanged', handleZoomChanged),
+      viewport.subscribe('zoomSettled', (zoom) => {
+        // wait until after animation settles to update variable
+        // and trigger rerasterize
+        ref.current?.style.setProperty('--zoom-settled', zoom.toString());
+        rerasterizeSignal.dispatchEvent(new Event('rerasterize'));
+      }),
     ];
     return () => {
       unsubs.forEach((unsub) => unsub());
@@ -92,6 +93,7 @@ export const CanvasRenderer = ({
 
   return (
     <animated.div
+      ref={ref}
       className="absolute origin-center overflow-visible overscroll-none touch-none"
       style={{
         transform: to([centerX, centerY, zoom], (cx, cy, zoomv) => {

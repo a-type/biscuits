@@ -80,7 +80,7 @@ export function useViewportGestureControls(
   // we want to do for zoom.
   useGesture(
     {
-      onPinch: ({ da: [d], origin, event, memo }) => {
+      onPinch: ({ da: [d], origin, event, memo, last, type }) => {
         event?.preventDefault();
         if (memo === undefined) return d;
         const diff = d - memo;
@@ -88,16 +88,19 @@ export function useViewportGestureControls(
           viewport.doRelativeZoom(diff / PINCH_GESTURE_DAMPING, {
             origin: 'direct',
             centroid: { x: origin[0], y: origin[1] },
+            gestureComplete: last,
           });
         }
         return d;
       },
-      onWheel: ({ delta: [x, y], event }) => {
+      onWheel: ({ delta: [x, y], event, last }) => {
         event?.preventDefault();
+        // if (isPinching.current) return;
         if (event?.ctrlKey || event?.metaKey) {
           viewport.doRelativeZoom(-y / WHEEL_GESTURE_DAMPING, {
             origin: 'direct',
             centroid: { x: event.clientX, y: event.clientY },
+            gestureComplete: last,
           });
         } else {
           viewport.doRelativePan(
@@ -107,6 +110,7 @@ export function useViewportGestureControls(
             }),
             {
               origin: 'direct',
+              gestureComplete: true,
             },
           );
         }
@@ -157,15 +161,15 @@ export function useViewportGestureControls(
   const bindPassiveGestures = useGesture(
     {
       onDrag: (state) => {
-        if (state.last) return;
-
         gestureDetails.current.touches =
           state.type === 'touchmove' ? state.touches : 0;
         gestureDetails.current.buttons = state.buttons;
 
         const input = gestureStateToInput(state);
         if (isCanvasDrag(gestureDetails.current)) {
-          canvas.onCanvasDrag(input);
+          if (!state.last) {
+            canvas.onCanvasDrag(input);
+          }
         } else {
           viewport.doRelativePan(
             viewport.viewportDeltaToWorld({
@@ -174,6 +178,7 @@ export function useViewportGestureControls(
             }),
             {
               origin: 'direct',
+              gestureComplete: state.last,
             },
           );
         }
@@ -244,7 +249,10 @@ const ZOOM_SPEED = 0.001;
 
 export function useKeyboardControls(viewport: Viewport) {
   const elementRef = useRef<HTMLDivElement>(null);
-  const activeKeysRef = useRef(new Set<string>());
+  const activeKeysRef = useRef({
+    pressed: new Set<string>(),
+    released: new Set<string>(),
+  });
 
   // global zoom default prevention - this is best-effort and not
   // guaranteed to work.
@@ -267,7 +275,7 @@ export function useKeyboardControls(viewport: Viewport) {
       // if meta key is down, keyup is never fired and the zoom never
       // ends.
       if (!ev.metaKey) {
-        activeKeysRef.current.add(ev.key);
+        activeKeysRef.current.pressed.add(ev.key);
       }
     }
   }, []);
@@ -275,7 +283,11 @@ export function useKeyboardControls(viewport: Viewport) {
   const handleKeyUp = useCallback((ev: ReactKeyboardEvent<HTMLElement>) => {
     if (CONTROLLED_KEYS.includes(ev.key)) {
       ev.preventDefault();
-      activeKeysRef.current.delete(ev.key);
+      activeKeysRef.current.pressed.delete(ev.key);
+      activeKeysRef.current.released.add(ev.key);
+      queueMicrotask(() => {
+        activeKeysRef.current.released.delete(ev.key);
+      });
     }
   }, []);
 
@@ -297,23 +309,25 @@ export function useKeyboardControls(viewport: Viewport) {
       const delta = lastFrameTime ? now - lastFrameTime : 0;
       lastFrameTime = now;
 
-      if (activeKeys.has('=') || activeKeys.has('+')) {
+      if (activeKeys.pressed.has('=') || activeKeys.pressed.has('+')) {
         viewport.doRelativeZoom(delta * ZOOM_SPEED, {
           origin: 'direct',
+          gestureComplete: true,
         });
-      } else if (activeKeys.has('-')) {
+      } else if (activeKeys.pressed.has('-')) {
         viewport.doRelativeZoom(delta * -ZOOM_SPEED, {
           origin: 'direct',
+          gestureComplete: true,
         });
       }
-      const xInput = activeKeys.has('ArrowLeft')
+      const xInput = activeKeys.pressed.has('ArrowLeft')
         ? -1
-        : activeKeys.has('ArrowRight')
+        : activeKeys.pressed.has('ArrowRight')
           ? 1
           : 0;
-      const yInput = activeKeys.has('ArrowUp')
+      const yInput = activeKeys.pressed.has('ArrowUp')
         ? -1
-        : activeKeys.has('ArrowDown')
+        : activeKeys.pressed.has('ArrowDown')
           ? 1
           : 0;
       velocity.x = delta * xInput * PAN_SPEED;
@@ -321,6 +335,7 @@ export function useKeyboardControls(viewport: Viewport) {
       if (velocity.x !== 0 || velocity.y !== 0) {
         viewport.doRelativePan(velocity, {
           origin: 'direct',
+          gestureComplete: true,
         });
       }
 

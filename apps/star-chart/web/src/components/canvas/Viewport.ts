@@ -68,7 +68,9 @@ export type ViewportEventOrigin = 'direct' | 'control' | 'animation';
 
 export type ViewportEvents = {
   zoomChanged(zoom: number, origin: ViewportEventOrigin): void;
+  zoomSettled(zoom: number, origin: ViewportEventOrigin): void;
   centerChanged(center: Readonly<Vector2>, origin: ViewportEventOrigin): void;
+  centerSettled(center: Readonly<Vector2>, origin: ViewportEventOrigin): void;
   /** Fired when the size of the bound element changes */
   sizeChanged(size: Size): void;
   /** Fired when the size of the canvas changes */
@@ -395,7 +397,12 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
     {
       origin = 'direct',
       centroid,
-    }: { centroid?: Vector2; origin?: ViewportEventOrigin } = {},
+      gestureComplete,
+    }: {
+      centroid?: Vector2;
+      origin?: ViewportEventOrigin;
+      gestureComplete: boolean;
+    },
   ) => {
     // the pan position is also updated to keep the focal point in the same screen position
     if (centroid) {
@@ -418,6 +425,7 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
       // convert that difference to world units and apply it as a relative pan
       this.doRelativePan(this.viewportDeltaToWorld(screenDifference), {
         origin,
+        gestureComplete,
       });
     } else {
       this._zoom = clamp(
@@ -427,9 +435,13 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
       );
       // apply a pan with the current pan position to recalculate pan
       // boundaries from the new zoom and enforce them
-      this.doPan(this.center, { origin });
+      this.doPan(this.center, { origin, gestureComplete });
     }
     this.emit('zoomChanged', this.zoom, origin);
+    if (gestureComplete) {
+      console.log('zoom settled', this.zoom);
+      this.emit('zoomSettled', this.zoom, origin);
+    }
   };
 
   /**
@@ -438,7 +450,11 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
    */
   doRelativeZoom = (
     zoomDelta: number,
-    details?: { origin?: ViewportEventOrigin; centroid?: Vector2 },
+    details: {
+      origin?: ViewportEventOrigin;
+      centroid?: Vector2;
+      gestureComplete: boolean;
+    },
   ) => {
     this.doZoom(this.zoom + zoomDelta, details);
   };
@@ -453,10 +469,16 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
    */
   doPan = (
     worldPosition: Vector2,
-    { origin = 'direct' }: { origin?: ViewportEventOrigin } = {},
+    {
+      origin = 'direct',
+      gestureComplete,
+    }: { origin?: ViewportEventOrigin; gestureComplete: boolean },
   ) => {
     this._center = this.clampPanPosition(worldPosition);
     this.emit('centerChanged', this.center, origin);
+    if (gestureComplete) {
+      this.emit('centerSettled', this.center, origin);
+    }
   };
 
   /**
@@ -468,7 +490,7 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
    */
   doRelativePan = (
     worldDelta: Vector2,
-    details?: { origin?: ViewportEventOrigin },
+    details: { origin?: ViewportEventOrigin; gestureComplete: boolean },
   ) => {
     this.doPan(addVectors(this.center, worldDelta), details);
   };

@@ -33,7 +33,7 @@ export const CanvasWallpaper: React.FC<IViewportWallpaperProps> = ({
     <div
       style={style}
       className={clsx(
-        'absolute rounded-lg [background-position:14px_14px] bg-repeat z-0 touch-none opacity-10',
+        'absolute rounded-lg [background-position:calc((var(--grid-size,24px)/2)+2)] bg-repeat z-0 touch-none opacity-10',
         classNameGridBg,
       )}
     >
@@ -43,4 +43,4 @@ export const CanvasWallpaper: React.FC<IViewportWallpaperProps> = ({
 };
 
 const classNameGridBg =
-  '[background-size:var(--grid-size,24px)_var(--grid-size,24px)] [background-image:linear-gradient(to_right,_var(--color-dark-blend)_calc(1px/var(--zoom,1)),_transparent_calc(1px/var(--zoom,1))),linear-gradient(to_bottom,_var(--color-dark-blend)_calc(1px/var(--zoom,1)),_transparent_calc(1px/var(--zoom,1)))]';
+  '[background-size:var(--grid-size,24px)_var(--grid-size,24px)] [background-image:linear-gradient(to_right,_var(--color-dark-blend)_calc(1px/var(--zoom-settled,1)),_transparent_calc(1px/var(--zoom-settled,1))),linear-gradient(to_bottom,_var(--color-dark-blend)_calc(1px/var(--zoom-settled,1)),_transparent_calc(1px/var(--zoom-settled,1)))]';

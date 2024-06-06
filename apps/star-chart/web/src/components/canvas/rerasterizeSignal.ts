@@ -1,10 +1,9 @@
-import { EventSubscriber } from '@a-type/utils';
 import { RefObject, useEffect } from 'react';
 
 // a shared global signal emitter makes things simple, just
 // import it and call .emit('rerasterize') to trigger rerasterization of
 // any relevant items when we need to.
-export const rerasterizeSignal = new EventSubscriber<{ rerasterize(): void }>();
+export const rerasterizeSignal = new EventTarget();
 
 export function useRerasterize(ref: RefObject<HTMLElement>) {
   useEffect(() => {
@@ -27,7 +26,7 @@ export function useRerasterize(ref: RefObject<HTMLElement>) {
      * TODO: if we need to optimize this even further, we could avoid re-rasterizing widgets which are
      * currently offscreen!
      */
-    return rerasterizeSignal.subscribe('rerasterize', () => {
+    function rerasterize() {
       requestAnimationFrame(() => {
         if (!ref.current) return;
         ref.current.style.willChange = 'initial';
@@ -36,6 +35,10 @@ export function useRerasterize(ref: RefObject<HTMLElement>) {
           ref.current.style.willChange = 'transform';
         });
       });
-    });
+    }
+    rerasterizeSignal.addEventListener('rerasterize', rerasterize);
+    return () => {
+      rerasterizeSignal.removeEventListener('rerasterize', rerasterize);
+    };
   }, [ref]);
 }
