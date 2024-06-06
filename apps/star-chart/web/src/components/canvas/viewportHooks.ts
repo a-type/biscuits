@@ -80,8 +80,7 @@ export function useViewportGestureControls(
   // we want to do for zoom.
   useGesture(
     {
-      onPinch: ({ da: [d], origin, event, memo, last, type }) => {
-        event?.preventDefault();
+      onPinch: ({ da: [d], origin, memo, last }) => {
         if (memo === undefined) return d;
         const diff = d - memo;
         if (diff !== 0) {
@@ -93,10 +92,9 @@ export function useViewportGestureControls(
         }
         return d;
       },
-      onWheel: ({ delta: [x, y], event, last }) => {
-        event?.preventDefault();
+      onWheel: ({ delta: [x, y], event, last, metaKey, ctrlKey }) => {
         // if (isPinching.current) return;
-        if (event?.ctrlKey || event?.metaKey) {
+        if (ctrlKey || metaKey) {
           viewport.doRelativeZoom(-y / WHEEL_GESTURE_DAMPING, {
             origin: 'direct',
             centroid: { x: event.clientX, y: event.clientY },
@@ -115,18 +113,6 @@ export function useViewportGestureControls(
           );
         }
       },
-      onPinchStart: ({ event }) => {
-        event?.preventDefault();
-      },
-      onPinchEnd: ({ event }) => {
-        event?.preventDefault();
-      },
-      onWheelStart: ({ event }) => {
-        event?.preventDefault();
-      },
-      onWheelEnd: ({ event }) => {
-        event?.preventDefault();
-      },
     },
     {
       target: ref,
@@ -143,6 +129,10 @@ export function useViewportGestureControls(
             (viewport.config.zoomLimits.max - initialZoom) *
             PINCH_GESTURE_DAMPING,
         },
+        preventDefault: true,
+      },
+      wheel: {
+        preventDefault: true,
       },
       eventOptions: {
         passive: false,

@@ -33,7 +33,7 @@ export const CanvasWallpaper: React.FC<IViewportWallpaperProps> = ({
     <div
       style={style}
       className={clsx(
-        'absolute rounded-lg [background-position:calc((var(--grid-size,24px)/2)+2)] bg-repeat z-0 touch-none opacity-10',
+        'absolute rounded-lg [background-position:calc((var(--grid-size,24px)/2)+2px)_calc((var(--grid-size,24px)/2)+2px)] bg-repeat z-0 touch-none opacity-10',
         classNameGridBg,
       )}
     >
