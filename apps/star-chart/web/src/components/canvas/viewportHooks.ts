@@ -151,9 +151,11 @@ export function useViewportGestureControls(
   const bindPassiveGestures = useGesture(
     {
       onDrag: (state) => {
-        gestureDetails.current.touches =
-          state.type === 'touchmove' ? state.touches : 0;
-        gestureDetails.current.buttons = state.buttons;
+        if (!state.last) {
+          gestureDetails.current.touches =
+            state.type === 'touchmove' ? state.touches : 0;
+          gestureDetails.current.buttons = state.buttons;
+        }
 
         const input = gestureStateToInput(state);
         if (isCanvasDrag(gestureDetails.current)) {
@@ -195,6 +197,7 @@ export function useViewportGestureControls(
           state.tap &&
           (isCanvasDrag(gestureDetails.current) || state.type === 'touchend')
         ) {
+          console.log('here');
           canvas.onCanvasTap(info);
         }
 

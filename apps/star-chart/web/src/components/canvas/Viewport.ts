@@ -439,7 +439,6 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
     }
     this.emit('zoomChanged', this.zoom, origin);
     if (gestureComplete) {
-      console.log('zoom settled', this.zoom);
       this.emit('zoomSettled', this.zoom, origin);
     }
   };
