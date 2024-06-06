@@ -198,8 +198,7 @@ export function useViewportGestureControls(
         // tap must fire before drag end.
         if (
           state.tap &&
-          (isCanvasDrag(gestureDetails.current) ||
-            isTouch(gestureDetails.current))
+          (isCanvasDrag(gestureDetails.current) || state.type === 'touchend')
         ) {
           canvas.onCanvasTap(info);
         }
@@ -222,6 +221,7 @@ export function useViewportGestureControls(
           // enabling touch events on mobile devices makes it possible
           // to differentiate between touch and non-touch events.
           touch: true,
+          // lock: true,
         },
       },
     },
@@ -350,8 +350,4 @@ function isCanvasDrag({
   buttons: number;
 }) {
   return !!(buttons & 1) && touches === 0;
-}
-
-function isTouch({ touches }: { touches: number; buttons: number }) {
-  return touches > 0;
 }

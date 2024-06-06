@@ -74,8 +74,7 @@ export function CanvasObjectDragHandle({
   );
 }
 
-export const disableDragProps = {
-  'data-no-drag': true,
+const stopPropagationProps = {
   onPointerDown: stopPropagation,
   onPointerMove: stopPropagation,
   onPointerUp: stopPropagation,
@@ -85,6 +84,11 @@ export const disableDragProps = {
   onMouseDown: stopPropagation,
   onMouseMove: stopPropagation,
   onMouseUp: stopPropagation,
+};
+
+export const disableDragProps = {
+  'data-no-drag': true,
+  ...stopPropagationProps,
 };
 
 function useDragHandle() {
@@ -129,118 +133,140 @@ function useDragHandle() {
   }, [autoPan, viewport, canvas, canvasObject, displace]);
 
   // binds drag controls to the underlying element
-  const bindDragHandle = useGesture({
-    onDrag: (state) => {
-      if (
-        'button' in state.event &&
-        (isRightClick(state.event) || isMiddleClick(state.event))
-      ) {
-        state.cancel();
-        return;
-      }
-
-      if (state.event?.target) {
-        const element = state.event?.target as HTMLElement;
-        // look up the element tree for a hidden or no-drag element to see if dragging is allowed
-        // here.
-        const dragPrevented =
-          element.getAttribute('aria-hidden') === 'true' ||
-          element.getAttribute('data-no-drag') === 'true' ||
-          !!element.closest('[data-no-drag="true"], [aria-hidden="true"]');
-        // BUGFIX: a patch which is intended to prevent a bug where opening a menu
-        // or other popover from within a draggable allows dragging by clicking anywhere
-        // on the screen, since the whole screen is covered by a click-blocker element
-        // ignore drag events which target an aria-hidden element
-        if (dragPrevented) {
+  const bindDragHandle = useGesture(
+    {
+      onDrag: (state) => {
+        if (
+          'button' in state.event &&
+          (isRightClick(state.event) || isMiddleClick(state.event))
+        ) {
           state.cancel();
           return;
         }
-      }
 
-      // update gesture info
-      Object.assign(gestureInputRef.current, {
-        alt: state.event.altKey,
-        shift: state.event.shiftKey,
-        ctrlOrMeta: state.event.ctrlKey || state.event.metaKey,
-        distance: vectorLength(state.distance),
-      });
+        if (state.event?.target) {
+          const element = state.event?.target as HTMLElement;
+          // look up the element tree for a hidden or no-drag element to see if dragging is allowed
+          // here.
+          const dragPrevented =
+            element.getAttribute('aria-hidden') === 'true' ||
+            element.getAttribute('data-no-drag') === 'true' ||
+            !!element.closest('[data-no-drag="true"], [aria-hidden="true"]');
+          // BUGFIX: a patch which is intended to prevent a bug where opening a menu
+          // or other popover from within a draggable allows dragging by clicking anywhere
+          // on the screen, since the whole screen is covered by a click-blocker element
+          // ignore drag events which target an aria-hidden element
+          if (dragPrevented) {
+            state.cancel();
+            return;
+          }
+        }
 
-      const screenPosition = { x: state.xy[0], y: state.xy[1] };
-      autoPan.update(screenPosition);
+        if (!state.canceled) {
+          state.event.stopPropagation();
+        }
 
-      applyGestureState(gestureInputRef.current, state);
-      gestureInputRef.current.screenPosition = displace(screenPosition);
-      canvas.onObjectDrag(gestureInputRef.current);
-    },
-    onDragStart: (state) => {
-      if (
-        'button' in state.event &&
-        (isRightClick(state.event) || isMiddleClick(state.event))
-      ) {
-        state.cancel();
-        return;
-      }
+        // update gesture info
+        Object.assign(gestureInputRef.current, {
+          alt: state.event.altKey,
+          shift: state.event.shiftKey,
+          ctrlOrMeta: state.event.ctrlKey || state.event.metaKey,
+          distance: vectorLength(state.distance),
+        });
 
-      // update/ reset gesture info
-      Object.assign(gestureInputRef.current, {
-        alt: state.event.altKey,
-        shift: state.event.shiftKey,
-        ctrlOrMeta: state.event.ctrlKey || state.event.metaKey,
-        distance: vectorLength(state.distance),
-      });
+        const screenPosition = { x: state.xy[0], y: state.xy[1] };
+        autoPan.update(screenPosition);
 
-      // begin auto-pan using cursor viewport position
-      const screenPosition = { x: state.xy[0], y: state.xy[1] };
-      autoPan.start(screenPosition);
+        applyGestureState(gestureInputRef.current, state);
+        gestureInputRef.current.screenPosition = displace(screenPosition);
+        canvas.onObjectDrag(gestureInputRef.current);
+      },
+      onDragStart: (state) => {
+        if (
+          'button' in state.event &&
+          (isRightClick(state.event) || isMiddleClick(state.event))
+        ) {
+          state.cancel();
+          return;
+        }
 
-      // capture the initial displacement between the cursor and the
-      // object's center to add to each subsequent position
-      const currentObjectPosition = canvas.getViewportPosition(canvasObject.id);
-      if (currentObjectPosition) {
-        const displacement = subtractVectors(
-          currentObjectPosition,
-          screenPosition,
+        state.event.stopPropagation();
+
+        // update/ reset gesture info
+        Object.assign(gestureInputRef.current, {
+          alt: state.event.altKey,
+          shift: state.event.shiftKey,
+          ctrlOrMeta: state.event.ctrlKey || state.event.metaKey,
+          distance: vectorLength(state.distance),
+        });
+
+        // begin auto-pan using cursor viewport position
+        const screenPosition = { x: state.xy[0], y: state.xy[1] };
+        autoPan.start(screenPosition);
+
+        // capture the initial displacement between the cursor and the
+        // object's center to add to each subsequent position
+        const currentObjectPosition = canvas.getViewportPosition(
+          canvasObject.id,
         );
-        grabDisplacementRef.current.x = displacement.x;
-        grabDisplacementRef.current.y = displacement.y;
-      }
+        if (currentObjectPosition) {
+          const displacement = subtractVectors(
+            currentObjectPosition,
+            screenPosition,
+          );
+          grabDisplacementRef.current.x = displacement.x;
+          grabDisplacementRef.current.y = displacement.y;
+        }
 
-      applyGestureState(gestureInputRef.current, state);
-      gestureInputRef.current.screenPosition = displace(screenPosition);
-      // apply displacement and begin drag
-      canvas.onObjectDragStart(gestureInputRef.current);
+        applyGestureState(gestureInputRef.current, state);
+        gestureInputRef.current.screenPosition = displace(screenPosition);
+        // apply displacement and begin drag
+        canvas.onObjectDragStart(gestureInputRef.current);
+      },
+      onDragEnd: (state) => {
+        if (
+          'button' in state.event &&
+          (isRightClick(state.event) || isMiddleClick(state.event))
+        ) {
+          state.cancel();
+          return;
+        }
+
+        if (!state.canceled) {
+          state.event.stopPropagation();
+        }
+
+        // update gesture info
+        Object.assign(gestureInputRef.current, {
+          alt: state.event.altKey,
+          shift: state.event.shiftKey,
+          ctrlOrMeta: state.event.ctrlKey || state.event.metaKey,
+          distance: vectorLength(state.distance),
+        });
+
+        const screenPosition = { x: state.xy[0], y: state.xy[1] };
+
+        // invoke tap handler if provided. not sure how to type this..
+        if (state.tap) {
+          state.args?.[0]?.onTap?.();
+        }
+
+        applyGestureState(gestureInputRef.current, state);
+        gestureInputRef.current.screenPosition = displace(screenPosition);
+        canvas.onObjectDragEnd(gestureInputRef.current);
+        autoPan.stop();
+        grabDisplacementRef.current = { x: 0, y: 0 };
+      },
     },
-    onDragEnd: (state) => {
-      if (
-        'button' in state.event &&
-        (isRightClick(state.event) || isMiddleClick(state.event))
-      ) {
-        state.cancel();
-        return;
-      }
-
-      // update gesture info
-      Object.assign(gestureInputRef.current, {
-        alt: state.event.altKey,
-        shift: state.event.shiftKey,
-        ctrlOrMeta: state.event.ctrlKey || state.event.metaKey,
-        distance: vectorLength(state.distance),
-      });
-
-      const screenPosition = { x: state.xy[0], y: state.xy[1] };
-
-      // invoke tap handler if provided. not sure how to type this..
-      if (state.tap) {
-        state.args?.[0]?.onTap?.();
-      }
-
-      applyGestureState(gestureInputRef.current, state);
-      gestureInputRef.current.screenPosition = displace(screenPosition);
-      canvas.onObjectDragEnd(gestureInputRef.current);
-      autoPan.stop();
-      grabDisplacementRef.current = { x: 0, y: 0 };
+    {
+      drag: {
+        preventDefault: true,
+        pointer: {
+          touch: true,
+        },
+      },
     },
-  });
+  );
 
   return bindDragHandle;
 }
