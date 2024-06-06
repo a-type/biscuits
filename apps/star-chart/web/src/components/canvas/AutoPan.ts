@@ -78,6 +78,7 @@ export class AutoPan extends EventSubscriber<{
   };
 
   private loop = () => {
+    console.log('autopan loop');
     const autoPan = this.getAutoPan();
 
     if (vectorLength(autoPan)) {

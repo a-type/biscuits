@@ -6,6 +6,7 @@ import {
   createContext,
   CSSProperties,
   ReactNode,
+  RefObject,
   useCallback,
   useContext,
   useEffect,
@@ -48,6 +49,7 @@ export function CanvasObjectRoot({
 }: CanvasObjectRootProps) {
   const ref = useRef<HTMLDivElement>(null);
   useRerasterize(ref);
+  useHideOffscreen(ref);
 
   const register = useRegister(canvasObject.id, canvasObject.metadata);
   const finalRef = useMergedRef(ref, register);
@@ -221,4 +223,30 @@ export function useCanvasObject({
   }, [canvas, pickupSpring, zIndex, isDragging, objectId]);
 
   return canvasObject;
+}
+
+function useHideOffscreen(ref: RefObject<HTMLDivElement | null>) {
+  useEffect(() => {
+    if (!ref.current) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) {
+          ref.current?.style.setProperty('visibility', 'hidden');
+        } else {
+          ref.current?.style.setProperty('visibility', 'visible');
+        }
+      },
+      {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0,
+      },
+    );
+
+    observer.observe(ref.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, [ref]);
 }

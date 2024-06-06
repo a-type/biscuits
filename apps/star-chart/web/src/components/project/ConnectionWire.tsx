@@ -27,7 +27,7 @@ export function ConnectionWire({ connection }: ConnectionWireProps) {
 
   const canvas = useCanvas();
   const onTap = useCallback(
-    (pos: Vector2, info: CanvasGestureInfo) => {
+    (info: CanvasGestureInfo) => {
       if (info.shift) {
         canvas.selections.add(id);
       } else {

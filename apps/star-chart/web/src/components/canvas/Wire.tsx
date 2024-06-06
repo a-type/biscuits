@@ -14,7 +14,7 @@ export interface WireProps extends Omit<SVGProps<SVGPathElement>, 'ref'> {
   targetPosition: LiveVector2;
   className?: string;
   hoverClassName?: string;
-  onTap?: (relativePosition: Vector2, info: CanvasGestureInfo) => void;
+  onTap?: (info: CanvasGestureInfo) => void;
   id: string;
   metadata?: any;
 }
@@ -53,10 +53,17 @@ export function Wire({
 
           state.event.preventDefault();
           state.event.stopPropagation();
-          onTap?.(worldPos, {
+          onTap?.({
             shift: state.shiftKey,
             ctrlOrMeta: state.ctrlKey || state.metaKey,
             alt: state.altKey,
+            delta: viewport.viewportDeltaToWorld({
+              x: state.delta[0],
+              y: state.delta[1],
+            }),
+            worldPosition: worldPos,
+            intentional: state.intentional,
+            targetId: id,
           });
         }
       },
@@ -100,7 +107,7 @@ export function Wire({
         fill="none"
         opacity="50%"
         className={clsx(
-          'touch-none',
+          'touch-none content-visibility-auto',
           onTap && hovered ? hoverClassName : 'stroke-transparent',
           onTap ? 'cursor-pointer' : '',
         )}
@@ -110,7 +117,10 @@ export function Wire({
         id={id}
         d={curve}
         fill="none"
-        className={clsx('pointer-events-none', className)}
+        className={clsx(
+          'pointer-events-none content-visibility-auto',
+          className,
+        )}
         data-hovered={hovered}
         {...rest}
       />
