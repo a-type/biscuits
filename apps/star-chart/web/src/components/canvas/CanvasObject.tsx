@@ -180,13 +180,12 @@ export function useCanvasObject({
     },
     onDragEnd: async (info) => {
       if (!selected && info.targetId !== objectId) return;
-      onDrop?.(info.worldPosition);
-      // animate to final position
-      positionSpring.start(
-        canvas.snapPosition(
-          addVectors(snapshotLiveVector(positionStyle), info.delta),
-        ),
+      const finalPosition = canvas.snapPosition(
+        addVectors(snapshotLiveVector(positionStyle), info.delta),
       );
+      onDrop?.(finalPosition);
+      // animate to final position
+      positionSpring.start(finalPosition);
       // we leave this flag on for a few ms - the "drag" gesture
       // basically has a fade-out effect where it continues to
       // block gestures internal to the drag handle for a bit even
