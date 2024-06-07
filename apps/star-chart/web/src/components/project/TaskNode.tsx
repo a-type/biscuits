@@ -19,6 +19,7 @@ import { TaskMenu } from './TaskMenu.jsx';
 import { useSnapshot } from 'valtio';
 import { projectState } from './state.js';
 import { CARD_MIN_HEIGHT, CARD_WIDTH } from './constants.js';
+import { CanvasGestureInfo } from '../canvas/Canvas.js';
 
 export interface TaskNodeProps {
   task: Task;
@@ -53,9 +54,16 @@ export function TaskNode({ task }: TaskNodeProps) {
   const pendingSelect = useIsPendingSelection(id);
 
   const canvas = useCanvas();
-  const onTap = useCallback(() => {
-    canvas.selections.set([id]);
-  }, [canvas, id]);
+  const onTap = useCallback(
+    (info: CanvasGestureInfo) => {
+      if (info.shift) {
+        canvas.selections.add(id);
+      } else {
+        canvas.selections.set([id]);
+      }
+    },
+    [canvas, id],
+  );
 
   const { total: downstreams, uncompleted: downstreamUncompleted } =
     useDownstreamCount(id);

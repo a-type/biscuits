@@ -30,12 +30,13 @@ import {
 import { useRerasterize } from './rerasterizeSignal.js';
 import { Vector2 } from './types.js';
 import { useGesture } from '@use-gesture/react';
+import { CanvasGestureInfo } from './Canvas.js';
 
 export interface CanvasObjectRootProps {
   children: ReactNode;
   className?: string;
   canvasObject: CanvasObject;
-  onTap?: () => void;
+  onTap?: (info: CanvasGestureInfo) => void;
   style?: CSSProperties;
 }
 
@@ -60,7 +61,21 @@ export function CanvasObjectRoot({
       if (info.tap) {
         console.debug(`claiming tap gesture for ${canvasObject.id}`);
         canvas.gestureState.claimedBy = canvasObject.id;
-        onTap?.();
+        onTap?.({
+          alt: info.altKey,
+          ctrlOrMeta: info.ctrlKey || info.metaKey,
+          delta: canvas.viewport.viewportDeltaToWorld({
+            x: info.delta[0],
+            y: info.delta[1],
+          }),
+          intentional: true,
+          shift: info.shiftKey,
+          worldPosition: canvas.viewport.viewportToWorld({
+            x: info.xy[0],
+            y: info.xy[1],
+          }),
+          targetId: canvasObject.id,
+        });
       }
     },
   });
