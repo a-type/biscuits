@@ -206,6 +206,8 @@ export function useCanvasObject({
       // block gestures internal to the drag handle for a bit even
       // after releasing
       setTimeout(setIsDragging, 100, false);
+      // update the spatial hash now that the object is settled
+      canvas.bounds.updateHash(objectId);
     },
   });
 

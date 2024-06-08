@@ -4,7 +4,7 @@ import { Vector2 } from './types.js';
 
 export interface BoxSelectProps {
   className?: string;
-  onCommit?: (objectIds: string[], endPosition: Vector2) => void;
+  onCommit?: (objectIds: Set<string>, endPosition: Vector2) => void;
 }
 
 export function BoxSelect({ className, onCommit }: BoxSelectProps) {

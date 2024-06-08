@@ -15,7 +15,7 @@ export class Selections extends EventSubscriber<{
     this.emit('change', Array.from(this.selectedIds));
   };
 
-  addAll = (objectIds: string[]) => {
+  addAll = (objectIds: Iterable<string>) => {
     for (const objectId of objectIds) {
       this.add(objectId);
     }
@@ -66,31 +66,31 @@ export class Selections extends EventSubscriber<{
     }
   };
 
-  set = (objectIds: string[]) => {
-    const selectedIds = new Set(objectIds);
+  set = (objectIds: Set<string> | Array<string>) => {
+    const selectedIds = Array.isArray(objectIds)
+      ? new Set(objectIds)
+      : objectIds;
     for (const objectId of this.selectedIds) {
       if (!selectedIds.has(objectId)) {
         this.remove(objectId);
       }
     }
     for (const objectId of objectIds) {
-      if (!this.selectedIds.has(objectId)) {
-        this.add(objectId);
-      }
+      this.add(objectId);
     }
   };
 
-  setPending = (objectIds: string[]) => {
-    const pendingIds = new Set(objectIds);
+  setPending = (objectIds: Set<string> | Array<string>) => {
+    const pendingIds = Array.isArray(objectIds)
+      ? new Set(objectIds)
+      : objectIds;
     for (const objectId of this.pendingIds) {
       if (!pendingIds.has(objectId)) {
         this.removePending(objectId);
       }
     }
     for (const objectId of objectIds) {
-      if (!this.pendingIds.has(objectId)) {
-        this.addPending(objectId);
-      }
+      this.addPending(objectId);
     }
   };
 }

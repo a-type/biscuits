@@ -1,6 +1,7 @@
 import { EventSubscriber } from '@a-type/utils';
 import { SpringValue } from '@react-spring/web';
 import { Box, LiveVector2, Vector2 } from './types.js';
+import { SpatialHash } from './SpatialHash.js';
 
 export interface Bounds {
   width: SpringValue<number>;
@@ -15,11 +16,43 @@ export class ObjectBounds extends EventSubscriber<{
   private origins: Map<string, LiveVector2> = new Map();
   private sizes: Map<string, Bounds> = new Map();
   private sizeObserver;
+  private spatialHash = new SpatialHash<string>(100);
+  private spatialHashRecomputeTimers = new Map<string, any>();
 
   constructor() {
     super();
     this.sizeObserver = new ResizeObserver(this.handleChanges);
   }
+
+  updateHash = (objectId: string) => {
+    const origin = this.getOrigin(objectId);
+    const size = this.getSize(objectId);
+
+    if (!origin || !size) {
+      console.log('no origin or size', objectId, {
+        origin,
+        size,
+      });
+      return;
+    }
+
+    const x = origin.x.get();
+    const y = origin.y.get();
+    const width = size.width.get();
+    const height = size.height.get();
+
+    this.spatialHash.replace(objectId, { x, y, width, height });
+  };
+
+  private debouncedUpdateHash = (objectId: string) => {
+    clearTimeout(this.spatialHashRecomputeTimers.get(objectId));
+    this.spatialHashRecomputeTimers.set(
+      objectId,
+      setTimeout(() => {
+        this.updateHash(objectId);
+      }, 500),
+    );
+  };
 
   private updateSize = (
     objectId: string,
@@ -39,6 +72,8 @@ export class ObjectBounds extends EventSubscriber<{
     if (changes.height) {
       bounds.height.set(changes.height);
     }
+
+    this.debouncedUpdateHash(objectId);
   };
 
   observe = (objectId: string, element: Element | null) => {
@@ -105,9 +140,14 @@ export class ObjectBounds extends EventSubscriber<{
   }
 
   getIntersections = (box: Box, threshold: number) => {
-    return this.ids.filter((objectId) =>
-      this.intersects(objectId, box, threshold),
-    );
+    const nearby = this.spatialHash.queryByRect(box);
+    const intersections = new Set<string>();
+    for (const id of nearby) {
+      if (this.intersects(id, box, threshold)) {
+        intersections.add(id);
+      }
+    }
+    return intersections;
   };
 
   hitTest = (point: Vector2) => {

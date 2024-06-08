@@ -78,7 +78,7 @@ export function TaskNode({ task }: TaskNodeProps) {
         isPriority(upstreams, downstreams) && 'layer-variants:bg-primary-wash',
         upstreams > 0 && 'layer-variants:bg-wash',
         selected && 'layer-variants:border-primary',
-        !selected && pendingSelect && 'layer-variants:border-primary-wash',
+        !selected && pendingSelect && 'layer-variants:border-primary-light',
         !!completedAt &&
           (downstreamUncompleted
             ? 'opacity-[calc(var(--zoom,1)*var(--zoom,1))]'
