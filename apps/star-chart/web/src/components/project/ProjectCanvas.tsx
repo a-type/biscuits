@@ -136,10 +136,7 @@ function useZoomToFit(tasks: Task[]) {
     // effects that ran on the same render. mainly
     // the canvas viewport setup stuff...
     requestAnimationFrame(() => {
-      const bounds = canvas.bounds.getCurrentContainer();
-      if (!bounds) return;
-
-      canvas.viewport.fitOnScreen(bounds, { origin: 'control', margin: 10 });
+      canvas.zoomToFit({ origin: 'control', margin: 10 });
     });
     setHasZoomed(true);
   }, [tasks, canvas, hasZoomed]);

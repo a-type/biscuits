@@ -4,7 +4,7 @@ import { clampVector, snap } from './math.js';
 import { ObjectBounds } from './ObjectBounds.js';
 import { Selections } from './Selections.js';
 import { RectLimits, Vector2 } from './types.js';
-import { Viewport, ViewportConfig } from './Viewport.js';
+import { Viewport, ViewportConfig, ViewportEventOrigin } from './Viewport.js';
 import { proxy } from 'valtio';
 
 export interface CanvasOptions {
@@ -219,6 +219,17 @@ export class Canvas extends EventSubscriber<CanvasEvents> {
         this.bounds.unobserve(el);
         this.objectElements.delete(objectId);
       }
+    }
+  };
+
+  zoomToFit = (
+    options: { origin?: ViewportEventOrigin; margin?: number } = {},
+  ) => {
+    const bounds = this.bounds.getCurrentContainer();
+    if (bounds) {
+      this.viewport.fitOnScreen(bounds, options);
+    } else {
+      this.viewport.doMove(this.center, 1, options);
     }
   };
 
