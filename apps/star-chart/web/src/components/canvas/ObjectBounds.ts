@@ -236,4 +236,65 @@ export class ObjectBounds extends EventSubscriber<{
 
     return intersectionArea / testArea > threshold;
   };
+
+  /**
+   * Get the instantaenous bounding box of an object.
+   */
+  getCurrentBounds = (objectId: string): Box | null => {
+    const origin = this.getOrigin(objectId);
+    const size = this.getSize(objectId);
+
+    if (!origin && !size) {
+      return null;
+    }
+
+    const bounds: Box = {
+      x: 0,
+      y: 0,
+      width: 0,
+      height: 0,
+    };
+
+    if (origin) {
+      bounds.x = origin.x.get();
+      bounds.y = origin.y.get();
+    }
+    if (size) {
+      bounds.width = size.width.get();
+      bounds.height = size.height.get();
+    }
+
+    return bounds;
+  };
+
+  /**
+   * Gets the instantaneous rectangle describing the outer
+   * limits of all tracked objects
+   */
+  getCurrentContainer = () => {
+    const ids = this.ids;
+    let container = this.getCurrentBounds(ids[0]);
+    if (!container) {
+      return null;
+    }
+
+    for (let i = 1; i < ids.length; i++) {
+      const bounds = this.getCurrentBounds(ids[i]);
+      if (!bounds) {
+        continue;
+      }
+
+      container = {
+        x: Math.min(container.x, bounds.x),
+        y: Math.min(container.y, bounds.y),
+        width: Math.max(container.width, bounds.x - container.x + bounds.width),
+        height: Math.max(
+          container.height,
+          bounds.y - container.y + bounds.height,
+        ),
+      };
+    }
+
+    return container;
+  };
 }
