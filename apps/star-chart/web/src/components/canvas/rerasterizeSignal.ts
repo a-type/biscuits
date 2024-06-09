@@ -5,7 +5,13 @@ import { RefObject, useEffect } from 'react';
 // any relevant items when we need to.
 export const rerasterizeSignal = new EventTarget();
 
-export function useRerasterize(ref: RefObject<HTMLElement>) {
+// note on "defaultToOwnLayer" - if false, the item defaults to compositing with
+// parent layer (will-change: initial). If true, it defaults to its own compositing
+// layer (will-change: transform). The rerasterize just flips on and off.
+export function useRerasterize(
+  ref: RefObject<HTMLElement>,
+  defaultToOwnLayer = true,
+) {
   useEffect(() => {
     /**
      * Dirty trick ahead - literally!
@@ -29,10 +35,10 @@ export function useRerasterize(ref: RefObject<HTMLElement>) {
     function rerasterize() {
       requestAnimationFrame(() => {
         if (!ref.current) return;
-        ref.current.style.willChange = 'initial';
+        const el = ref.current;
+        el.style.willChange = defaultToOwnLayer ? 'transform' : 'initial';
         requestAnimationFrame(() => {
-          if (!ref.current) return;
-          ref.current.style.willChange = 'transform';
+          el.style.willChange = defaultToOwnLayer ? 'initial' : 'transform';
         });
       });
     }
