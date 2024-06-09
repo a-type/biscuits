@@ -5,6 +5,7 @@ import { BoxSelect } from '../canvas/BoxSelect.jsx';
 import {
   CanvasContext,
   CanvasGestures,
+  useCanvas,
   useCreateCanvas,
 } from '../canvas/CanvasProvider.jsx';
 import { CanvasRenderer } from '../canvas/CanvasRenderer.jsx';
@@ -127,46 +128,18 @@ function useAddTask(projectId: string) {
 }
 
 function useZoomToFit(tasks: Task[]) {
-  const viewport = useViewport();
+  const canvas = useCanvas();
   const [hasZoomed, setHasZoomed] = useState(false);
   useEffect(() => {
     if (hasZoomed) return;
-    const bounds = tasks.reduce(
-      (acc, task) => {
-        const position = task.get('position').getAll();
-        return {
-          left: Math.min(acc.left, position.x),
-          top: Math.min(acc.top, position.y),
-          right: Math.max(acc.right, position.x),
-          bottom: Math.max(acc.bottom, position.y),
-        };
-      },
-      {
-        left: Infinity,
-        top: Infinity,
-        right: -Infinity,
-        bottom: -Infinity,
-      },
-    );
-    const center = {
-      x: (bounds.left + bounds.right) / 2,
-      y: (bounds.top + bounds.bottom) / 2,
-    };
-    const width = bounds.right - bounds.left;
-    const height = bounds.bottom - bounds.top;
-    const padding = 100;
-    const zoom = Math.min(
-      viewport.elementSize.width / (width + padding),
-      viewport.elementSize.height / (height + padding),
-    );
     // this ensures the move happens after other
     // effects that ran on the same render. mainly
     // the canvas viewport setup stuff...
     requestAnimationFrame(() => {
-      viewport.doMove(center, zoom);
+      canvas.zoomToFit({ origin: 'control', margin: 10 });
     });
     setHasZoomed(true);
-  }, [tasks, viewport, hasZoomed]);
+  }, [tasks, canvas, hasZoomed]);
 }
 
 function ZoomFitter({ tasks }: { tasks: Task[] }) {

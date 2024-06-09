@@ -78,11 +78,11 @@ export function TaskNode({ task }: TaskNodeProps) {
         isPriority(upstreams, downstreams) && 'layer-variants:bg-primary-wash',
         upstreams > 0 && 'layer-variants:bg-wash',
         selected && 'layer-variants:border-primary',
-        !selected && pendingSelect && 'layer-variants:border-primary-wash',
+        !selected && pendingSelect && 'layer-variants:border-primary-light',
         !!completedAt &&
           (downstreamUncompleted
-            ? 'opacity-[calc(var(--zoom,1)*var(--zoom,1))]'
-            : 'opacity-[calc(var(--zoom,1)*var(--zoom,1)*0.5)]'),
+            ? 'opacity-[var(--zoom,1)]'
+            : 'opacity-[calc(var(--zoom,1)*var(--zoom,1))] sm:opacity-[calc(var(--zoom,1)*var(--zoom,1)*0.5)]'),
         activeConnectionTarget === id && 'bg-accent-light border-accent',
       )}
       style={style}
@@ -136,6 +136,11 @@ function TaskFullContent({
     [client, id, projectId],
   );
 
+  const canvas = useCanvas();
+  const commitAndEndEditing = () => {
+    canvas.selections.remove(id);
+  };
+
   return (
     <div className="row items-start p-2">
       <Checkbox
@@ -149,11 +154,25 @@ function TaskFullContent({
       />
       {exclusive ? (
         <LiveUpdateTextField
-          className="text-sm min-w-80px w-auto py-0px h-full"
+          className="text-sm min-w-80px w-auto py-0px h-full rounded-md"
           value={content}
           onChange={(v) => task.set('content', v)}
           autoSelect
           autoFocus
+          textArea
+          onKeyDown={(ev) => {
+            if (ev.key === 'Enter') {
+              ev.preventDefault();
+              task.set('content', content);
+              commitAndEndEditing();
+            }
+
+            const isModifiedKeypress = ev.metaKey || ev.ctrlKey;
+            if (!isModifiedKeypress) {
+              // capture all keypresses that aren't modified
+              ev.stopPropagation();
+            }
+          }}
         />
       ) : (
         <div

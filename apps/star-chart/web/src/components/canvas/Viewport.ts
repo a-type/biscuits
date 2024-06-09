@@ -1,5 +1,5 @@
 import { EventSubscriber, preventDefault } from '@a-type/utils';
-import { Size, Vector2, RectLimits } from './types.js';
+import { Size, Vector2, RectLimits, Box } from './types.js';
 import {
   addVectors,
   clamp,
@@ -507,5 +507,29 @@ export class Viewport extends EventSubscriber<ViewportEvents> {
   ) => {
     this.doPan(worldPosition, info);
     this.doZoom(zoomValue, info);
+  };
+
+  /**
+   * Does the best it can to fit the provided area onscreen.
+   * Area is in world units.
+   */
+  fitOnScreen = (
+    bounds: Box,
+    {
+      origin = 'control',
+      margin = 10,
+    }: { origin?: ViewportEventOrigin; margin?: number },
+  ) => {
+    const width = bounds.width;
+    const height = bounds.height;
+    const zoom = Math.min(
+      this.elementSize.width / (width + margin),
+      this.elementSize.height / (height + margin),
+    );
+    const center = {
+      x: bounds.x + width / 2,
+      y: bounds.y + height / 2,
+    };
+    this.doMove(center, zoom, { origin });
   };
 }

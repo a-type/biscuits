@@ -6,8 +6,8 @@ import { CanvasGestureInfo } from './Canvas.js';
 import { useCanvas } from './CanvasProvider.jsx';
 
 export interface BoxRegionProps {
-  onPending?: (objectIds: string[], info: CanvasGestureInfo) => void;
-  onEnd?: (objectIds: string[], info: CanvasGestureInfo) => void;
+  onPending?: (objectIds: Set<string>, info: CanvasGestureInfo) => void;
+  onEnd?: (objectIds: Set<string>, info: CanvasGestureInfo) => void;
   tolerance?: number;
   className?: string;
 }
@@ -26,13 +26,13 @@ export function BoxRegion({
   }));
   const originRef = useRef<Vector2>({ x: 0, y: 0 });
 
-  const previousPending = useRef<string[]>([]);
+  const previousPending = useRef<Set<string>>(new Set<string>());
 
   const canvas = useCanvas();
 
   useCanvasGestures({
     onDragStart: (info) => {
-      previousPending.current = [];
+      previousPending.current = new Set<string>();
       originRef.current = info.worldPosition;
       spring.set({
         x: info.worldPosition.x,
@@ -52,15 +52,15 @@ export function BoxRegion({
       const objectIds = canvas.bounds.getIntersections(rect, tolerance);
 
       // this is all just logic to diff as much as possible...
-      if (objectIds.length !== previousPending.current.length) {
+      if (objectIds.size !== previousPending.current.size) {
         onPending?.(objectIds, info);
-      } else if (objectIds.length === 0) {
-        if (previousPending.current.length !== 0) {
-          onPending?.([], info);
+      } else if (objectIds.size === 0) {
+        if (previousPending.current.size !== 0) {
+          onPending?.(objectIds, info);
         }
       } else {
-        for (let i = 0; i < objectIds.length; i++) {
-          if (objectIds[i] !== previousPending.current[i]) {
+        for (const entry of objectIds) {
+          if (!previousPending.current.has(entry)) {
             onPending?.(objectIds, info);
             break;
           }
@@ -80,7 +80,7 @@ export function BoxRegion({
         tolerance,
       );
 
-      onPending?.([], info);
+      onPending?.(new Set(), info);
       onCommit?.(objectIds, info);
 
       spring.set({ x: 0, y: 0, width: 0, height: 0 });

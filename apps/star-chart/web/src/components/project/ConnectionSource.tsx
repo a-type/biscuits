@@ -51,7 +51,7 @@ export function ConnectionSource({
         },
         0,
       );
-      const taskId = objectIds.find(
+      const taskId = [...objectIds].find(
         (id) => canvas.objectMetadata.get(id)?.type === 'task',
       );
       return taskId ?? null;
