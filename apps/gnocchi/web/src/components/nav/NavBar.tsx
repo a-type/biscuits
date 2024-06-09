@@ -44,13 +44,7 @@ export function NavBar({}: NavBarProps) {
   const matchRecipes = pathname.startsWith('/recipes');
 
   return (
-    <PageNav
-      className={classNames(
-        'flex flex-row items-stretch justify-around w-full rounded-0 shadow-lg shadow-inset overflow-hidden z-50 p-1 h-auto',
-        'pb-[calc(0.25rem+env(safe-area-inset-bottom,0px))]',
-        'sm:(flex flex-col rounded-0 border-none border-transparent shadow-none h-min-content overflow-y-auto overflow-x-hidden justify-start items-stretch gap-2 pb-10)',
-      )}
-    >
+    <PageNav>
       <Suspense>
         <div className="hidden sm:(flex flex-row gap-2 items-center justify-center px-2 py-2 mt-3)">
           <img src="/android-chrome-192x192.png" className="w-30px h-30px" />
