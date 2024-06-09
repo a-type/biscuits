@@ -36,9 +36,9 @@ export function useRerasterize(
       requestAnimationFrame(() => {
         if (!ref.current) return;
         const el = ref.current;
-        el.style.willChange = defaultToOwnLayer ? 'transform' : 'initial';
+        el.style.willChange = defaultToOwnLayer ? 'initial' : 'transform';
         requestAnimationFrame(() => {
-          el.style.willChange = defaultToOwnLayer ? 'initial' : 'transform';
+          el.style.willChange = defaultToOwnLayer ? 'transform' : 'initial';
         });
       });
     }
