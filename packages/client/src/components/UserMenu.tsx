@@ -67,7 +67,7 @@ export function UserMenu({
           </Button>
         ) : (
           <Button size="small" color="ghost" className={className}>
-            <Icon name="offline" />
+            <Icon name="refreshDisabled" />
             <Icon name="gear" />
           </Button>
         )}
