@@ -120,7 +120,7 @@ export function UserMenu({
           </DropdownMenuItem>
         ) : (
           <DropdownMenuItem asChild>
-            <a href={`${CONFIG.HOME_ORIGIN}/apps`} target="_blank">
+            <a href={`${CONFIG.HOME_ORIGIN}`} target="_blank">
               More apps
               <DropdownMenuItemRightSlot>
                 <Icon name="new_window" />
@@ -148,7 +148,7 @@ export function UserMenu({
         </DropdownMenuItem>
         {!!isLoggedIn && (
           <DropdownMenuItem asChild>
-            <LogoutButton color="unstyled">
+            <LogoutButton className="border-none transition-none shadow-none">
               Log out
               <DropdownMenuItemRightSlot>
                 <Icon name="arrowRight" />

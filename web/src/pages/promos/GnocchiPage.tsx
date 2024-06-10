@@ -163,6 +163,7 @@ export function GnocchiPage() {
       </Content>
       <Footer className="theme-leek" />
       <CallToAction
+        appId="gnocchi"
         className={staticSectionAccent ? 'theme-leek' : undefined}
       />
     </Root>

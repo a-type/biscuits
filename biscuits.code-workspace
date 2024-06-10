@@ -1,52 +1,52 @@
 {
   "folders": [
     {
-      "path": "server",
       "name": "💽 Server",
+      "path": "server",
     },
     {
-      "path": "web",
       "name": "🌐 Web",
+      "path": "web",
     },
     {
-      "path": "packages",
       "name": "📦 Packages",
+      "path": "packages",
     },
     {
-      "path": "apps/gnocchi",
       "name": "🍝 Gnocchi",
+      "path": "apps/gnocchi",
     },
     {
-      "path": "apps/trip-tick",
       "name": "🏖️ Trip Tick",
+      "path": "apps/trip-tick",
     },
     {
-      "path": "apps/shopping",
       "name": "🛒 Shopping",
+      "path": "apps/shopping",
     },
     {
-      "path": "apps/marginalia",
       "name": "📚 Marginalia",
+      "path": "apps/marginalia",
     },
     {
-      "path": "apps/star-chart",
       "name": "🌟 Star Chart",
+      "path": "apps/star-chart",
     },
     {
-      "path": "scripts",
       "name": "📃 Scripts",
+      "path": "scripts",
     },
     {
-      "path": "cdk",
       "name": "🛠️ CDK",
+      "path": "cdk",
     },
     {
-      "path": "blog",
       "name": "📝 Blog",
+      "path": "blog",
     },
     {
-      "path": ".github/workflows",
       "name": "🔧 Workflows",
+      "path": ".github/workflows",
     },
   ],
 }

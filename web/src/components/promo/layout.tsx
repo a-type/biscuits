@@ -6,6 +6,7 @@ import { H2 } from '@a-type/ui/components/typography';
 import { Link } from '@verdant-web/react-router';
 import { Button } from '@a-type/ui/components/button';
 import { AppId, appsById } from '@biscuits/apps';
+import { Icon } from '@a-type/ui/components/icon';
 
 export const DemoGrid = withClassName(
   'div',
@@ -20,9 +21,13 @@ export const Highlight = withClassName(
   'flex-1 [grid-row-end:span_2] min-w-0 w-full object-contain rounded-lg border-default',
 );
 export const TitleWrap = withClassName('div', 'md:[grid-column-end:span_2]');
-export const Item = withClassName('p', 'flex items-start gap-2');
-export const Emoji = withClassName('span', 'block');
-export const ItemText = withClassName('span', 'block relative');
+const Emoji = withClassName('span', 'block');
+const ItemText = withClassName('span', 'block relative');
+
+export const Description = withClassName(
+  'p',
+  'font-light text-xl my-6 text-white',
+);
 
 export const Section = forwardRef<
   HTMLDivElement,
@@ -80,16 +85,26 @@ export const FeatureSection = ({
   items,
 }: {
   title: string;
-  items: { emoji: string; text: string }[];
+  items: { emoji: string; text: string; premium?: boolean }[];
 }) => {
   return (
     <Section>
       <H2 className="gutter-bottom">{title}</H2>
       {items.map((item, index) => (
-        <Item key={index}>
-          <Emoji>{item.emoji}</Emoji>
-          <ItemText>{item.text}</ItemText>
-        </Item>
+        <div className="col gap-0" key={index}>
+          <div className="row items-start my-2">
+            <Emoji>{item.emoji}</Emoji>
+            <ItemText>{item.text}</ItemText>
+          </div>
+          {item.premium && (
+            <Link
+              to="/join"
+              className="ml-auto relative -top-2 text-xs bg-primary-dark text-white px-3 py-1 rounded-full font-bold"
+            >
+              Premium feature
+            </Link>
+          )}
+        </div>
       ))}
     </Section>
   );
@@ -111,7 +126,13 @@ export const Footer = ({ className }: { className?: string }) => (
   </Content>
 );
 
-export const CallToAction = ({ className }: { className?: string }) => (
+export const CallToAction = ({
+  className,
+  appId,
+}: {
+  className?: string;
+  appId: AppId;
+}) => (
   <div
     className={clsx(
       'flex flex-col fixed bottom-0 bg-primary-light border-0 border-t border-solid border-t-primary-dark m-0 w-full p-6 items-center gap-3 z-2 transition-colors',
@@ -120,16 +141,22 @@ export const CallToAction = ({ className }: { className?: string }) => (
   >
     <Button asChild>
       <Link
-        to="/"
+        to={appsById[appId].url}
         data-test="get-started"
-        className="justify-center self-center"
+        className="justify-center self-center text-xl"
         color="default"
       >
         Get Started
       </Link>
     </Button>
+    <Button asChild color="ghost">
+      <Link to="/">
+        More Biscuits apps
+        <Icon name="arrowRight" />
+      </Link>
+    </Button>
 
-    <span className="text-sm">
+    <span className="text-xs">
       Free, no signup required. By continuing you agree to{' '}
       <Link to="/tos" newTab>
         the terms and conditions of usage.
@@ -145,7 +172,7 @@ export const Root = withClassName(
 
 export const Background = withClassName(
   'div',
-  'fixed top-0 left-0 w-full h-80% pointer-events-none',
+  'layer-components:(fixed top-0 left-0 w-full h-80% pointer-events-none)',
 );
 
 const AppNameText = withClassName(
