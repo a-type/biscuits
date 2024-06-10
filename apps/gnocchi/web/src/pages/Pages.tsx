@@ -1,18 +1,10 @@
 import { GlobalLoader } from '@/GlobalLoader.jsx';
-import {
-  LogoutNotice,
-  SubscriptionPromotion,
-  ResetToServer,
-  SubscribedOnly,
-  useCanSync,
-  Essentials,
-} from '@biscuits/client';
 import { FoodDetailDialog } from '@/components/foods/FoodDetailDialog.jsx';
 import { BugButton } from '@/components/menu/BugButton.jsx';
 import { LinkButton } from '@/components/nav/Link.jsx';
 import { NavBar } from '@/components/nav/NavBar.jsx';
-import { SwipeOutlet } from '@/components/nav/SwipeOutlet.jsx';
 import { TopLoader } from '@/components/nav/TopLoader.jsx';
+import { SubscriptionPromotionContent } from '@/components/promotional/SubscriptionPromotionContent.jsx';
 import { RecipeTagEditor } from '@/components/recipes/tags/RecipeTagEditor.jsx';
 import {
   ReloadButton,
@@ -22,20 +14,23 @@ import {
   updateApp,
   updateState,
 } from '@/components/updatePrompt/updateState.js';
-import { useMediaQuery } from '@/hooks/useMediaQuery.js';
+import { groceriesDescriptor, hooks } from '@/stores/groceries/index.js';
 import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
 import { PageRoot } from '@a-type/ui/components/layouts';
 import { H1, P } from '@a-type/ui/components/typography';
+import {
+  Essentials,
+  ResetToServer,
+  SubscribedOnly,
+  SubscriptionPromotion,
+} from '@biscuits/client';
 import { Outlet, Router, makeRoutes } from '@verdant-web/react-router';
-import { Suspense, lazy, useCallback } from 'react';
+import { Suspense, useCallback } from 'react';
 import { lazyWithPreload } from 'react-lazy-with-preload';
 import { NotFoundPage } from './NotFoundPage.jsx';
 import { GroceriesPage } from './groceries/GroceriesPage.js';
-import { SubscriptionPromotionContent } from '@/components/promotional/SubscriptionPromotionContent.jsx';
-import { groceriesDescriptor, hooks } from '@/stores/groceries/index.js';
 
 const PlanPage = lazyWithPreload(() => import('./PlanPage.jsx'));
-const SplashPage = lazy(() => import('./SplashPage.jsx'));
 const RecipeViewPage = lazyWithPreload(
   () => import('./recipe/RecipeViewPage.jsx'),
 );
@@ -55,10 +50,6 @@ const PantrySearchPage = lazyWithPreload(
 const RecipesPage = lazyWithPreload(() => import('./recipe/RecipesPage.jsx'));
 
 const routes = makeRoutes([
-  {
-    path: '/welcome',
-    component: SplashPage,
-  },
   {
     path: '/',
     component: LayoutWithNavBar,

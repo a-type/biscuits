@@ -130,7 +130,7 @@ export function App({
             Powered by{' '}
             <a
               className="font-bold color-black"
-              href="https://gnocchi.biscuits.club/welcome"
+              href="https://biscuits.club/gnocchi"
             >
               Gnocchi
             </a>

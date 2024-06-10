@@ -51,15 +51,15 @@
   "peerDependencies": {
     "@a-type/ui": "^0.6.17",
     "@verdant-web/store": "^3.2.2",
-    "react": "^18.2.0",
+    "react": "18.3.1",
     "valtio": "^1.13.2",
     "vite-plugin-pwa": "0.19.2"
   },
   "devDependencies": {
     "@a-type/ui": "^0.8.19",
-    "@types/react": "18.2.79",
+    "@types/react": "18.3.3",
     "@verdant-web/store": "^3.6.4",
-    "react": "^18.2.0",
+    "react": "18.3.1",
     "vite-plugin-pwa": "0.19.2"
   }
 }

@@ -9,7 +9,7 @@
     "preflight": "verdant preflight -s ./src/schema.ts -o ./src/client"
   },
   "peerDependencies": {
-    "react": "^18.2.0"
+    "react": "18.3.1"
   },
   "dependencies": {
     "@verdant-web/cli": "^4.4.0",

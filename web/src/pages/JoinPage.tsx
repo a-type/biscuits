@@ -38,7 +38,7 @@ export function JoinPage({}: JoinPageProps) {
 
   return (
     <PageRoot className="bg-primary-wash">
-      <PageContent>
+      <PageContent className="bg-primary-wash">
         <div className="flex flex-col gap-6 w-full">
           <h1 className={classNames('text-gray-9')}>
             Join Biscuits to unlock features and collaboration in every app
@@ -59,25 +59,27 @@ export function JoinPage({}: JoinPageProps) {
               <Link to="/login?returnTo=/plan">Get started</Link>
             </Button>
           </PageFixedArea>
-          {sortedApps.map((app) => (
-            <div key={app.id} className="w-full max-w-none">
-              <div className="flex flex-row items-center gap-4">
-                <img
-                  src={`${getAppUrl(app)}/${app.iconPath}`}
-                  alt={app.name}
-                  width={48}
-                />
-                <h2>{app.name}</h2>
+          {sortedApps
+            .filter((app) => !app.prerelease)
+            .map((app) => (
+              <div key={app.id} className="w-full max-w-none">
+                <div className="flex flex-row items-center gap-4">
+                  <img
+                    src={`${getAppUrl(app)}/${app.iconPath}`}
+                    alt={app.name}
+                    width={48}
+                  />
+                  <h2>{app.name}</h2>
+                </div>
+                <p>{app.paidDescription}</p>
+                <PageSectionGrid>
+                  {app.paidFeatures.map((feature, index) => (
+                    <AppFeature key={index} feature={feature} />
+                  ))}
+                </PageSectionGrid>
+                <Divider className="my-8" />
               </div>
-              <p>{app.paidDescription}</p>
-              <PageSectionGrid>
-                {app.paidFeatures.map((feature, index) => (
-                  <AppFeature key={index} feature={feature} />
-                ))}
-              </PageSectionGrid>
-              <Divider className="my-8" />
-            </div>
-          ))}
+            ))}
         </div>
         <Footer />
       </PageContent>

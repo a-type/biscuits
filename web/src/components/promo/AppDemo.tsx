@@ -1,4 +1,3 @@
-import './phone.css';
 import { AppId, appsById, getAppUrl } from '@biscuits/apps';
 import PhoneDemo from './PhoneDemo.jsx';
 import { Button } from '@a-type/ui/components/button';

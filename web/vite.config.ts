@@ -4,15 +4,23 @@ import { fileURLToPath } from 'url';
 import UnoCSS from 'unocss/vite';
 import { resolve } from 'path';
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
+import CircularDependency from 'vite-plugin-circular-dependency';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  plugins: [UnoCSS(), react(), viteCommonjs()],
+  plugins: [
+    UnoCSS(),
+    react(),
+    CircularDependency({
+      circleImportThrowErr: true,
+    }),
+    viteCommonjs(),
+  ],
   optimizeDeps: {
-    exclude: [],
-    include: ['react/jsx-runtime', 'react', 'react-dom'],
+    exclude: ['@a-type/ui'],
+    include: ['react/jsx-runtime', 'react', 'react-dom', 'react-dom/client'],
   },
   resolve: {
     alias: {

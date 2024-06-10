@@ -17,7 +17,7 @@
     "@unocss/transformer-variant-group": "^0.54.1",
     "@verdant-web/react-router": "^0.6.2",
     "classnames": "^2.5.0",
-    "react": "^18.2.0",
+    "react": "18.3.1",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
     "unocss": "0.58.8",

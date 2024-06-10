@@ -72,12 +72,7 @@ export default defineConfig(({ command, mode }) => ({
           },
         },
       } as any,
-      includeAssets: [
-        'fonts/**/*',
-        'images/**/*',
-        'models/**/*',
-        'assets/**/*',
-      ],
+      includeAssets: ['fonts/**/*', 'images/**/*', 'assets/**/*'],
 
       workbox: {
         sourcemap: true,
