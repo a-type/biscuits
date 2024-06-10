@@ -45,6 +45,10 @@ const routes = makeRoutes([
     component: lazy(() => import('./promos/GnocchiPage.jsx')),
   },
   {
+    path: '/trip-tick',
+    component: lazy(() => import('./promos/TripTickPage.jsx')),
+  },
+  {
     path: '/contact',
     component: lazy(() => import('./ContactPage.js')),
   },
