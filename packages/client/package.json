@@ -58,7 +58,7 @@
   "devDependencies": {
     "@a-type/ui": "^0.8.19",
     "@types/react": "18.2.79",
-    "@verdant-web/store": "^3.6.3",
+    "@verdant-web/store": "^3.6.4",
     "react": "^18.2.0",
     "vite-plugin-pwa": "0.19.2"
   }
