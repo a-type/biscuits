@@ -28,7 +28,8 @@ export function InfrequentSubscriptionHint() {
   const daysSinceFirstSeen = (now - startCountingAt) / 1000 / 60 / 60 / 24;
   const daysSinceDismissed = (now - dismissedAt) / 1000 / 60 / 60 / 24;
 
-  if (isSubscribed) {
+  // strict check important. undefined = not loaded
+  if (isSubscribed !== false) {
     return null;
   }
 

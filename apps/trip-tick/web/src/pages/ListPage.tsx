@@ -34,7 +34,7 @@ function ListPageEditor({ listId }: { listId: string }) {
 
   return (
     <>
-      <PageFixedArea className="row justify-between w-full py-3">
+      <PageFixedArea className="!row justify-between w-full py-3">
         <Button asChild color="ghost" size="icon">
           <Link to="/">
             <Icon name="arrowLeft" />
