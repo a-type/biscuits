@@ -1,6 +1,6 @@
 import { hooks } from '@/store.js';
 import { H1 } from '@a-type/ui/components/typography';
-import { List } from '@shopping.biscuits/verdant';
+import { List } from '@wish-wash.biscuits/verdant';
 import { ListItem } from './ListItem.jsx';
 import { PageNowPlaying } from '@a-type/ui/components/layouts';
 import { CreateItemButton } from './CreateItemButton.jsx';

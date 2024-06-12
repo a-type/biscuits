@@ -1,4 +1,4 @@
-import { ListItemsItem } from '@shopping.biscuits/verdant';
+import { ListItemsItem } from '@wish-wash.biscuits/verdant';
 import { Checkbox } from '@a-type/ui/components/checkbox';
 import { hooks } from '@/store.js';
 

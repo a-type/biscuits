@@ -1,0 +1,68 @@
+
+> @biscuits/cdk@0.1.0 cdk-raw C:\Users\a-typ\git\biscuits\cdk
+> cdk "deploy" "wish-wash" "--require-approval=never"
+
+[30;43mWARN[0m [0m[31;1mAWS_SOLUTIONS_CONSTRUCTS_WARNING: [0m An override has been provided for the property: versioned.
+[0m[30;43mWARN[0m [0m[31;1mAWS_SOLUTIONS_CONSTRUCTS_WARNING: [0m An override has been provided for the property: versioned.
+[0m[30;43mWARN[0m [0m[31;1mAWS_SOLUTIONS_CONSTRUCTS_WARNING: [0m An override has been provided for the property: versioned.
+[0m[30;43mWARN[0m [0m[31;1mAWS_SOLUTIONS_CONSTRUCTS_WARNING: [0m An override has been provided for the property: versioned.
+[0m[30;43mWARN[0m [0m[31;1mAWS_SOLUTIONS_CONSTRUCTS_WARNING: [0m An override has been provided for the property: versioned.
+[0m[30;43mWARN[0m [0m[31;1mAWS_SOLUTIONS_CONSTRUCTS_WARNING: [0m An override has been provided for the property: versioned.
+[0m[30;43mWARN[0m [0m[31;1mAWS_SOLUTIONS_CONSTRUCTS_WARNING: [0m An override has been provided for the property: versioned.
+[0m
+✨  Synthesis time: 3.08s
+
+wish-wash: deploying... [1/1]
+wish-wash: creating CloudFormation changeset...
+wish-wash |  0/11 | 8:42:27 PM | REVIEW_IN_PROGRESS   | AWS::CloudFormation::Stack           | wish-wash User Initiated
+wish-wash |  0/11 | 8:42:33 PM | CREATE_IN_PROGRESS   | AWS::CloudFormation::Stack           | wish-wash User Initiated
+wish-wash |  0/11 | 8:42:36 PM | CREATE_IN_PROGRESS   | AWS::CDK::Metadata                   | CDKMetadata/Default (CDKMetadata) 
+wish-wash |  0/11 | 8:42:36 PM | CREATE_IN_PROGRESS   | AWS::S3::Bucket                      | wish-wash_distribution/S3Bucket (wishwashdistributionS3Bucket024BA1E5) 
+wish-wash |  0/11 | 8:42:36 PM | CREATE_IN_PROGRESS   | AWS::S3::Bucket                      | wish-wash_distribution/CloudfrontLoggingBucketAccessLog (wishwashdistributionCloudfrontLoggingBucketAccessLogB544BFC9) 
+wish-wash |  0/11 | 8:42:36 PM | CREATE_IN_PROGRESS   | AWS::CloudFront::OriginAccessControl | wish-wash_distribution/CloudFrontOac (wishwashdistributionCloudFrontOacE856343B) 
+wish-wash |  0/11 | 8:42:36 PM | CREATE_IN_PROGRESS   | AWS::CertificateManager::Certificate | wish-wash_certificate (wishwashcertificate61586962) 
+wish-wash |  0/11 | 8:42:36 PM | CREATE_IN_PROGRESS   | AWS::CertificateManager::Certificate | wish-wash_certificate (wishwashcertificate61586962) Resource creation Initiated
+wish-wash |  0/11 | 8:42:37 PM | CREATE_IN_PROGRESS   | AWS::CDK::Metadata                   | CDKMetadata/Default (CDKMetadata) Resource creation Initiated
+wish-wash |  1/11 | 8:42:37 PM | CREATE_COMPLETE      | AWS::CDK::Metadata                   | CDKMetadata/Default (CDKMetadata) 
+wish-wash |  1/11 | 8:42:37 PM | CREATE_IN_PROGRESS   | AWS::CloudFront::OriginAccessControl | wish-wash_distribution/CloudFrontOac (wishwashdistributionCloudFrontOacE856343B) Resource creation Initiated
+wish-wash |  1/11 | 8:42:37 PM | CREATE_IN_PROGRESS   | AWS::S3::Bucket                      | wish-wash_distribution/CloudfrontLoggingBucketAccessLog (wishwashdistributionCloudfrontLoggingBucketAccessLogB544BFC9) Resource creation Initiated
+wish-wash |  2/11 | 8:42:37 PM | CREATE_COMPLETE      | AWS::CloudFront::OriginAccessControl | wish-wash_distribution/CloudFrontOac (wishwashdistributionCloudFrontOacE856343B) 
+wish-wash |  2/11 | 8:42:37 PM | CREATE_IN_PROGRESS   | AWS::S3::Bucket                      | wish-wash_distribution/S3Bucket (wishwashdistributionS3Bucket024BA1E5) Resource creation Initiated
+wish-wash |  3/11 | 8:43:00 PM | CREATE_COMPLETE      | AWS::S3::Bucket                      | wish-wash_distribution/CloudfrontLoggingBucketAccessLog (wishwashdistributionCloudfrontLoggingBucketAccessLogB544BFC9) 
+wish-wash |  3/11 | 8:43:00 PM | CREATE_IN_PROGRESS   | AWS::S3::Bucket                      | wish-wash_distribution/CloudfrontLoggingBucket (wishwashdistributionCloudfrontLoggingBucketD4173FD8) 
+wish-wash |  4/11 | 8:43:00 PM | CREATE_COMPLETE      | AWS::S3::Bucket                      | wish-wash_distribution/S3Bucket (wishwashdistributionS3Bucket024BA1E5) 
+wish-wash |  4/11 | 8:43:02 PM | CREATE_IN_PROGRESS   | AWS::S3::Bucket                      | wish-wash_distribution/CloudfrontLoggingBucket (wishwashdistributionCloudfrontLoggingBucketD4173FD8) Resource creation Initiated
+wish-wash |  4/11 | 8:43:08 PM | CREATE_IN_PROGRESS   | AWS::CertificateManager::Certificate | wish-wash_certificate (wishwashcertificate61586962) Content of DNS Record is: {Name: _e9ffa6ca5913c114e843ea8228a7eac4.wish-wash.biscuits.club.,Type: CNAME,Value: _610495316ce5aff8cb96e26755f58d59.sdgjtdhdhz.acm-validations.aws.}
+wish-wash |  5/11 | 8:43:24 PM | CREATE_COMPLETE      | AWS::S3::Bucket                      | wish-wash_distribution/CloudfrontLoggingBucket (wishwashdistributionCloudfrontLoggingBucketD4173FD8) 
+wish-wash |  5/11 | 8:43:25 PM | CREATE_IN_PROGRESS   | AWS::S3::BucketPolicy                | wish-wash_distribution/CloudfrontLoggingBucket/Policy (wishwashdistributionCloudfrontLoggingBucketPolicy0FC4F586) 
+wish-wash |  5/11 | 8:43:26 PM | CREATE_IN_PROGRESS   | AWS::S3::BucketPolicy                | wish-wash_distribution/CloudfrontLoggingBucketAccessLog/Policy (wishwashdistributionCloudfrontLoggingBucketAccessLogPolicyF51EC6A9) 
+wish-wash |  5/11 | 8:43:26 PM | CREATE_IN_PROGRESS   | AWS::S3::BucketPolicy                | wish-wash_distribution/CloudfrontLoggingBucket/Policy (wishwashdistributionCloudfrontLoggingBucketPolicy0FC4F586) Resource creation Initiated
+wish-wash |  6/11 | 8:43:27 PM | CREATE_COMPLETE      | AWS::S3::BucketPolicy                | wish-wash_distribution/CloudfrontLoggingBucket/Policy (wishwashdistributionCloudfrontLoggingBucketPolicy0FC4F586) 
+wish-wash |  6/11 | 8:43:27 PM | CREATE_IN_PROGRESS   | AWS::S3::BucketPolicy                | wish-wash_distribution/CloudfrontLoggingBucketAccessLog/Policy (wishwashdistributionCloudfrontLoggingBucketAccessLogPolicyF51EC6A9) Resource creation Initiated
+wish-wash |  7/11 | 8:43:27 PM | CREATE_COMPLETE      | AWS::S3::BucketPolicy                | wish-wash_distribution/CloudfrontLoggingBucketAccessLog/Policy (wishwashdistributionCloudfrontLoggingBucketAccessLogPolicyF51EC6A9) 
+ 7/11 Currently in progress: wish-wash, wishwashcertificate61586962
+wish-wash |  8/11 | 8:47:09 PM | CREATE_COMPLETE      | AWS::CertificateManager::Certificate | wish-wash_certificate (wishwashcertificate61586962) 
+wish-wash |  8/11 | 8:47:11 PM | CREATE_IN_PROGRESS   | AWS::CloudFront::Distribution        | wish-wash_distribution/CloudFrontDistribution (wishwashdistributionCloudFrontDistribution85ADB6FD) 
+wish-wash |  8/11 | 8:47:15 PM | CREATE_IN_PROGRESS   | AWS::CloudFront::Distribution        | wish-wash_distribution/CloudFrontDistribution (wishwashdistributionCloudFrontDistribution85ADB6FD) Resource creation Initiated
+ 8/11 Currently in progress: wish-wash, wishwashdistributionCloudFrontDistribution85ADB6FD
+wish-wash |  9/11 | 8:50:58 PM | CREATE_COMPLETE      | AWS::CloudFront::Distribution        | wish-wash_distribution/CloudFrontDistribution (wishwashdistributionCloudFrontDistribution85ADB6FD) 
+wish-wash |  9/11 | 8:50:59 PM | CREATE_IN_PROGRESS   | AWS::S3::BucketPolicy                | wish-wash_distribution/S3Bucket/Policy (wishwashdistributionS3BucketPolicy24E3791A) 
+wish-wash |  9/11 | 8:51:00 PM | CREATE_IN_PROGRESS   | AWS::S3::BucketPolicy                | wish-wash_distribution/S3Bucket/Policy (wishwashdistributionS3BucketPolicy24E3791A) Resource creation Initiated
+wish-wash | 10/11 | 8:51:01 PM | CREATE_COMPLETE      | AWS::S3::BucketPolicy                | wish-wash_distribution/S3Bucket/Policy (wishwashdistributionS3BucketPolicy24E3791A) 
+wish-wash | 11/11 | 8:51:02 PM | CREATE_COMPLETE      | AWS::CloudFormation::Stack           | wish-wash 
+
+ ✅  wish-wash
+
+✨  Deployment time: 518.71s
+
+Outputs:
+wish-wash.BucketName = wish-wash.biscuits.club
+wish-wash.CertificateArn = arn:aws:acm:us-east-1:262002082180:certificate/399f371a-29fa-441d-a953-a02142186d76
+wish-wash.DistributionDomainName = d2zzfbc6dhchix.cloudfront.net
+wish-wash.DistributionId = E1EUU8RLJQXXX9
+Stack ARN:
+
+✨  Total time: 521.79s
+
+arn:aws:cloudformation:us-east-1:262002082180:stack/wish-wash/a4a02fa0-2854-11ef-8aed-0affe931a88d
+

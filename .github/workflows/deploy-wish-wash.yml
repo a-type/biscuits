@@ -1,16 +1,16 @@
-name: Shopping Deploy
+name: Wishwash Deploy
 on:
   push:
     branches: [main]
     paths:
-      - 'apps/shopping/**'
+      - 'apps/wish-wash/**'
       - 'packages/client/**'
       - 'packages/apps/**'
-      - '.github/workflows/deploy-shopping.yml'
+      - '.github/workflows/deploy-wish-wash.yml'
 
 jobs:
-  build-and-deploy-shopping:
-    name: Build and deploy shopping
+  build-and-deploy-wish-wash:
+    name: Build and deploy wish-wash
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -28,30 +28,30 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --filter @shopping.biscuits/web...
+        run: pnpm install --filter @wish-wash.biscuits/web...
 
-      - name: Build shopping
-        run: pnpm --filter @shopping.biscuits/web... run build
+      - name: Build wish-wash
+        run: pnpm --filter @wish-wash.biscuits/web... run build
         env:
           VITE_API_ORIGIN: ${{ vars.API_ORIGIN }}
           VITE_HOME_ORIGIN: ${{ vars.HOME_ORIGIN }}
-          VITE_PUBLIC_URL: https://shopping.biscuits.club
+          VITE_PUBLIC_URL: https://wish-wash.biscuits.club
 
-      - name: Deploy shopping to S3
+      - name: Deploy wish-wash to S3
         uses: jakejarvis/s3-sync-action@master
         with:
           args: --follow-symlinks --delete
         env:
-          AWS_S3_BUCKET: ${{ secrets.S3_BUCKET_SHOPPING }}
+          AWS_S3_BUCKET: ${{ secrets.S3_BUCKET_WISH_WASH }}
           AWS_ACCESS_KEY_ID: ${{ secrets.DEPLOYER_AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.DEPLOYER_AWS_SECRET_ACCESS_KEY }}
-          SOURCE_DIR: './apps/shopping/web/dist'
+          SOURCE_DIR: './apps/wish-wash/web/dist'
 
       - name: Invalidate CloudFront cache
         uses: chetan/invalidate-cloudfront-action@v2
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.DEPLOYER_AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.DEPLOYER_AWS_SECRET_ACCESS_KEY }}
-          DISTRIBUTION: ${{ secrets.CLOUDFRONT_ID_SHOPPING }}
+          DISTRIBUTION: ${{ secrets.CLOUDFRONT_ID_WISH_WASH }}
           PATHS: '/*'
           AWS_REGION: 'us-east-1'

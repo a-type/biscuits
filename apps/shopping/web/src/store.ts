@@ -3,7 +3,7 @@ import {
   createHooks,
   migrations,
   UserInfo,
-} from '@shopping.biscuits/verdant';
+} from '@wish-wash.biscuits/verdant';
 import { getVerdantSync, VerdantProfile } from '@biscuits/client';
 import { undoHistory } from './undo.js';
 
@@ -19,11 +19,11 @@ export type Participant = UserInfo<VerdantProfile, Presence>;
 export const hooks = createHooks<Presence, VerdantProfile>();
 
 export const clientDescriptor = new ClientDescriptor({
-  namespace: 'shopping',
+  namespace: 'wish-wash',
   migrations,
   undoHistory,
   sync: getVerdantSync({
-    appId: 'shopping',
+    appId: 'wish-wash',
     access: 'members',
     initialPresence: {} satisfies Presence,
   }),

@@ -1,4 +1,4 @@
-import { UndoHistory } from '@shopping.biscuits/verdant';
+import { UndoHistory } from '@wish-wash.biscuits/verdant';
 
 export const undoHistory = new UndoHistory();
 

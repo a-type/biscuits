@@ -8,22 +8,30 @@
 // the other services as needed.
 
 import { spawn } from 'child_process';
+import * as fs from 'fs/promises';
 
 import { createDnsRecord } from '../lib/porkbun.js';
 import { addRepositoryVariable } from '../lib/github.js';
 
 const appId = process.argv[3];
 
-const cdk = spawn('pnpm', ['cdk-raw', 'deploy', appId], {
-  stdio: ['ignore', 'pipe', 'pipe'],
-});
+const cdk = spawn(
+  'pnpm',
+  ['cdk-raw', 'deploy', appId, '--require-approval=never'],
+  {
+    stdio: ['ignore', 'pipe', 'pipe'],
+  },
+);
 
 function constify(str: string) {
   return str.toUpperCase().replace(/[^A-Z0-9]/g, '_');
 }
 
+let allOutput = '';
+
 cdk.stdout.on('data', (data) => {
   process.stdout.write(data);
+  allOutput += data;
 
   // detect Certificates and provision the required CNAME
   // in porkbun
@@ -74,4 +82,15 @@ cdk.stdout.on('data', (data) => {
 
 cdk.stderr.on('data', (data) => {
   process.stderr.write(data);
+  allOutput += data;
+});
+
+cdk.on('close', async (code) => {
+  await fs.writeFile('cdk-output.txt', allOutput);
+  if (code === 0) {
+    console.log('CDK exited cleanly');
+  } else {
+    console.error('CDK exited with code', code);
+    console.error(allOutput);
+  }
 });

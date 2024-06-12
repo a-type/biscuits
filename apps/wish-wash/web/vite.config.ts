@@ -15,8 +15,8 @@ export default defineConfig(({ command, mode }) => ({
       srcDir: 'src',
       filename: 'service-worker.ts',
       manifest: {
-        name: 'shopping',
-        short_name: 'shopping',
+        name: 'Wish Wash',
+        short_name: 'Wish Wash',
         description: '',
         theme_color: '#ffffff',
         background_color: '#ffffff',

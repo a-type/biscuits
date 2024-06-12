@@ -1,6 +1,6 @@
 import { ButtonProps, Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
-import { List } from '@shopping.biscuits/verdant';
+import { List } from '@wish-wash.biscuits/verdant';
 
 export interface CreateItemButtonProps extends ButtonProps {
   list: List;

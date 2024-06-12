@@ -1,5 +1,5 @@
 {
-  "name": "@shopping.biscuits/web",
+  "name": "@wish-wash.biscuits/web",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -13,10 +13,9 @@
     "@a-type/utils": "^1.0.8",
     "@biscuits/client": "workspace:*",
     "@react-spring/web": "^9.7.3",
-    "@shopping.biscuits/verdant": "workspace:*",
+    "@wish-wash.biscuits/verdant": "workspace:*",
     "@unocss/transformer-variant-group": "^0.54.1",
     "@verdant-web/react-router": "^0.6.2",
-    "classnames": "^2.5.0",
     "react": "18.3.1",
     "react-dom": "^18.2.0",
     "react-hot-toast": "^2.4.1",
