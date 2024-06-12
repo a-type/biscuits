@@ -18,7 +18,7 @@ export interface TripTickPageProps {}
 export function TripTickPage({}: TripTickPageProps) {
   return (
     <Root className="theme-eggplant">
-      <Background className="h-70% absolute">
+      <Background className="h-80%">
         <img src="/images/trip-tick/hero1.svg" className="w-full h-full" />
       </Background>
       <Content className="bg-wash">

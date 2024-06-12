@@ -143,7 +143,7 @@ export const CallToAction = ({
       <Link
         to={appsById[appId].url}
         data-test="get-started"
-        className="justify-center self-center text-xl"
+        className="justify-center self-center"
         color="default"
       >
         Get Started
@@ -156,7 +156,7 @@ export const CallToAction = ({
       </Link>
     </Button>
 
-    <span className="text-xs">
+    <span className="text-xxs">
       Free, no signup required. By continuing you agree to{' '}
       <Link to="/tos" newTab>
         the terms and conditions of usage.
