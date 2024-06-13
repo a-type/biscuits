@@ -65,6 +65,10 @@ const routes = makeRoutes([
     component: lazy(() => import('./TermsPage.js')),
   },
   {
+    path: '/reset-password',
+    component: lazy(() => import('./ResetPasswordPage.js')),
+  },
+  {
     path: '/admin',
     component: lazy(() => import('./admin/AdminPage.js')),
     children: [

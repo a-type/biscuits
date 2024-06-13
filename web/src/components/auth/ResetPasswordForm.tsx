@@ -13,15 +13,15 @@ export function EmailCompleteSignupForm({
 }: EmailCompleteSignUpFormProps) {
   return (
     <form
-      action={`${CONFIG.API_ORIGIN}/auth/complete-email-signup`}
+      action={`${CONFIG.API_ORIGIN}/auth/complete-reset-password`}
       method="post"
       className="flex flex-col gap-2"
     >
       <input type="hidden" name="code" value={code} />
       <input type="hidden" name="email" value={email} />
-      <label htmlFor="password">Password</label>
+      <label htmlFor="newPassword">New Password</label>
       <Input
-        name="password"
+        name="newPassword"
         type="password"
         autoComplete="new-password"
         required
