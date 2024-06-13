@@ -126,7 +126,7 @@ importers:
         version: 0.58.8(postcss@8.4.38)(vite@5.2.11)
       vite:
         specifier: ^5.0.10
-        version: 5.2.11(@types/node@20.12.7)
+        version: 5.2.11
 
   apps/gnocchi/scanning:
     dependencies:
@@ -540,101 +540,10 @@ importers:
         version: 3.5.0(vite@5.2.11)
       vite:
         specifier: 5.2.11
-        version: 5.2.11(@types/node@20.12.7)
+        version: 5.2.11
       vite-plugin-pwa:
         specifier: ^0.19.8
         version: 0.19.8(vite@5.2.11)(workbox-build@7.1.1)(workbox-window@7.1.0)
-
-  apps/shopping/verdant:
-    dependencies:
-      '@verdant-web/cli':
-        specifier: ^4.4.0
-        version: 4.4.0
-      '@verdant-web/common':
-        specifier: ^2.3.1
-        version: 2.3.1
-      '@verdant-web/react':
-        specifier: ^32.0.0
-        version: 32.0.0(@verdant-web/store@3.6.4)(react@18.3.1)
-      '@verdant-web/store':
-        specifier: ^3.6.4
-        version: 3.6.4
-      react:
-        specifier: 18.3.1
-        version: 18.3.1
-
-  apps/shopping/web:
-    dependencies:
-      '@a-type/ui':
-        specifier: ^0.8.19
-        version: 0.8.19(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
-      '@a-type/utils':
-        specifier: ^1.0.8
-        version: 1.0.8
-      '@biscuits/client':
-        specifier: workspace:*
-        version: link:../../../packages/client
-      '@react-spring/web':
-        specifier: ^9.7.3
-        version: 9.7.3(react-dom@18.2.0)(react@18.3.1)
-      '@unocss/transformer-variant-group':
-        specifier: ^0.54.1
-        version: 0.54.3
-      '@verdant-web/react-router':
-        specifier: ^0.6.2
-        version: 0.6.2(react@18.3.1)
-      '@wish-wash.biscuits/verdant':
-        specifier: workspace:*
-        version: link:../verdant
-      react:
-        specifier: 18.3.1
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.2.0(react@18.3.1)
-      react-hot-toast:
-        specifier: ^2.4.1
-        version: 2.4.1(csstype@3.1.3)(react-dom@18.2.0)(react@18.3.1)
-      unocss:
-        specifier: 0.58.8
-        version: 0.58.8(postcss@8.4.38)(rollup@2.79.1)(vite@5.2.7)
-      valtio:
-        specifier: ^1.12.1
-        version: 1.13.2(@types/react@18.2.79)(react@18.3.1)
-      workbox-core:
-        specifier: ^6.5.4
-        version: 6.6.1
-      workbox-expiration:
-        specifier: ^6.5.4
-        version: 6.6.1
-      workbox-precaching:
-        specifier: ^6.5.4
-        version: 6.6.1
-      workbox-routing:
-        specifier: ^6.5.4
-        version: 6.6.1
-      workbox-strategies:
-        specifier: ^6.5.4
-        version: 6.6.1
-      workbox-window:
-        specifier: ^6.5.4
-        version: 6.6.1
-    devDependencies:
-      '@types/react':
-        specifier: ^18.2.79
-        version: 18.2.79
-      '@types/react-dom':
-        specifier: ^18.2.25
-        version: 18.2.25
-      '@vitejs/plugin-react-swc':
-        specifier: 3.5.0
-        version: 3.5.0(vite@5.2.7)
-      vite:
-        specifier: 5.2.7
-        version: 5.2.7
-      vite-plugin-pwa:
-        specifier: ^0.19.8
-        version: 0.19.8(vite@5.2.7)(workbox-build@7.1.1)(workbox-window@6.6.1)
 
   apps/star-chart/verdant:
     dependencies:
@@ -758,7 +667,7 @@ importers:
         version: 3.5.0(vite@5.2.11)
       vite:
         specifier: 5.2.11
-        version: 5.2.11(@types/node@20.12.7)
+        version: 5.2.11
       vite-plugin-pwa:
         specifier: ^0.19.8
         version: 0.19.8(vite@5.2.11)(workbox-build@7.1.1)(workbox-window@7.1.0)
@@ -898,6 +807,97 @@ importers:
       vite-plugin-pwa:
         specifier: 0.19.7
         version: 0.19.7(vite@5.2.7)(workbox-build@7.1.1)(workbox-window@6.6.1)
+
+  apps/wish-wash/verdant:
+    dependencies:
+      '@verdant-web/cli':
+        specifier: ^4.4.0
+        version: 4.4.0
+      '@verdant-web/common':
+        specifier: ^2.3.1
+        version: 2.3.1
+      '@verdant-web/react':
+        specifier: ^32.0.0
+        version: 32.0.0(@verdant-web/store@3.6.4)(react@18.3.1)
+      '@verdant-web/store':
+        specifier: ^3.6.4
+        version: 3.6.4
+      react:
+        specifier: 18.3.1
+        version: 18.3.1
+
+  apps/wish-wash/web:
+    dependencies:
+      '@a-type/ui':
+        specifier: ^0.8.19
+        version: 0.8.19(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@a-type/utils':
+        specifier: ^1.0.8
+        version: 1.1.3
+      '@biscuits/client':
+        specifier: workspace:*
+        version: link:../../../packages/client
+      '@react-spring/web':
+        specifier: ^9.7.3
+        version: 9.7.3(react-dom@18.3.1)(react@18.3.1)
+      '@unocss/transformer-variant-group':
+        specifier: ^0.54.1
+        version: 0.54.3
+      '@verdant-web/react-router':
+        specifier: ^0.6.2
+        version: 0.6.2(react@18.3.1)
+      '@wish-wash.biscuits/verdant':
+        specifier: workspace:*
+        version: link:../verdant
+      react:
+        specifier: 18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.3.1(react@18.3.1)
+      react-hot-toast:
+        specifier: ^2.4.1
+        version: 2.4.1(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+      unocss:
+        specifier: 0.58.8
+        version: 0.58.8(postcss@8.4.38)(rollup@2.79.1)(vite@5.2.7)
+      valtio:
+        specifier: ^1.12.1
+        version: 1.13.2(@types/react@18.3.3)(react@18.3.1)
+      workbox-core:
+        specifier: ^6.5.4
+        version: 6.6.1
+      workbox-expiration:
+        specifier: ^6.5.4
+        version: 6.6.1
+      workbox-precaching:
+        specifier: ^6.5.4
+        version: 6.6.1
+      workbox-routing:
+        specifier: ^6.5.4
+        version: 6.6.1
+      workbox-strategies:
+        specifier: ^6.5.4
+        version: 6.6.1
+      workbox-window:
+        specifier: ^6.5.4
+        version: 6.6.1
+    devDependencies:
+      '@types/react':
+        specifier: ^18.2.79
+        version: 18.3.3
+      '@types/react-dom':
+        specifier: ^18.2.25
+        version: 18.3.0
+      '@vitejs/plugin-react-swc':
+        specifier: 3.5.0
+        version: 3.5.0(vite@5.2.7)
+      vite:
+        specifier: 5.2.7
+        version: 5.2.7
+      vite-plugin-pwa:
+        specifier: ^0.19.8
+        version: 0.19.8(vite@5.2.7)(workbox-build@7.1.1)(workbox-window@6.6.1)
 
   blog:
     dependencies:
@@ -1082,11 +1082,11 @@ importers:
   server:
     dependencies:
       '@a-type/auth':
-        specifier: 0.5.4
-        version: 0.5.4
+        specifier: 0.6.0
+        version: 0.6.0
       '@a-type/utils':
-        specifier: 1.1.0
-        version: 1.1.0
+        specifier: 1.1.3
+        version: 1.1.3
       '@aws-sdk/client-cloudfront':
         specifier: ^3.583.0
         version: 3.583.0
@@ -1356,15 +1356,15 @@ packages:
     transitivePeerDependencies:
       - encoding
 
-  /@a-type/auth@0.5.4:
-    resolution: {integrity: sha512-0jBw7QRKQrrQD5KtxD2MUK2JH/P3M+gZ3PMqNII2RqdR8irq+SsdQFnZXqrjWNWgRIevjMpVeCar+n5AtEGTBw==}
+  /@a-type/auth@0.6.0:
+    resolution: {integrity: sha512-+1wOQ7qr32d/xuVG5dbNSyatMt/gBHlqWPduAznqn7WauiBI/4ksOr7E2YEH6BtzN0C0YyvbOHlw9NPVsGU4jA==}
     dependencies:
       cookie: 0.6.0
       discord-oauth2: 2.12.1
       googleapis: 129.0.0
       jose: 5.2.2
       nodemailer: 6.9.9
-      zod: 3.23.4
+      zod: 3.23.8
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -1388,7 +1388,7 @@ packages:
       react: ^18
       react-dom: ^18
     dependencies:
-      '@a-type/utils': 1.1.0
+      '@a-type/utils': 1.1.3
       '@radix-ui/react-accordion': 1.1.2(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
       '@radix-ui/react-checkbox': 1.0.4(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
       '@radix-ui/react-collapsible': 1.0.3(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
@@ -1417,7 +1417,7 @@ packages:
       '@use-gesture/react': 10.3.1(react@18.3.1)
       browser-image-resizer: 2.4.1
       calendar-blocks: 0.3.1(react@18.3.1)
-      clsx: 2.1.1
+      clsx: 2.1.0
       color-interpolate: 1.0.5
       color-parse: 2.0.2
       color-space: 2.0.1
@@ -1488,7 +1488,7 @@ packages:
       react: ^18
       react-dom: ^18
     dependencies:
-      '@a-type/utils': 1.1.0
+      '@a-type/utils': 1.1.3
       '@radix-ui/react-accordion': 1.1.2(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       '@radix-ui/react-checkbox': 1.0.4(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       '@radix-ui/react-collapsible': 1.0.3(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
@@ -1517,7 +1517,7 @@ packages:
       '@use-gesture/react': 10.3.1(react@18.3.1)
       browser-image-resizer: 2.4.1
       calendar-blocks: 0.3.1(react@18.3.1)
-      clsx: 2.1.1
+      clsx: 2.1.0
       color-interpolate: 1.0.5
       color-parse: 2.0.2
       color-space: 2.0.1
@@ -1538,7 +1538,7 @@ packages:
       react: ^18
       react-dom: ^18
     dependencies:
-      '@a-type/utils': 1.1.0
+      '@a-type/utils': 1.1.3
       '@radix-ui/react-accordion': 1.1.2(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       '@radix-ui/react-checkbox': 1.0.4(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       '@radix-ui/react-collapsible': 1.0.3(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
@@ -1567,7 +1567,7 @@ packages:
       '@use-gesture/react': 10.3.1(react@18.3.1)
       browser-image-resizer: 2.4.1
       calendar-blocks: 0.3.1(react@18.3.1)
-      clsx: 2.1.1
+      clsx: 2.1.0
       color-interpolate: 1.0.5
       color-parse: 2.0.2
       color-space: 2.0.1
@@ -1588,7 +1588,7 @@ packages:
       react: ^18
       react-dom: ^18
     dependencies:
-      '@a-type/utils': 1.1.0
+      '@a-type/utils': 1.1.3
       '@radix-ui/react-accordion': 1.1.2(react-dom@18.3.1)(react@18.3.1)
       '@radix-ui/react-checkbox': 1.0.4(react-dom@18.3.1)(react@18.3.1)
       '@radix-ui/react-collapsible': 1.0.3(react-dom@18.3.1)(react@18.3.1)
@@ -1617,7 +1617,7 @@ packages:
       '@use-gesture/react': 10.3.1(react@18.3.1)
       browser-image-resizer: 2.4.1
       calendar-blocks: 0.3.1(react@18.3.1)
-      clsx: 2.1.1
+      clsx: 2.1.0
       color-interpolate: 1.0.5
       color-parse: 2.0.2
       color-space: 2.0.1
@@ -1646,10 +1646,14 @@ packages:
 
   /@a-type/utils@1.1.0:
     resolution: {integrity: sha512-dwM1bl6XQaC/X9RZQUp0LDGQF70nn0QV6TFq/bKsjqlt8OEBGWlr++um4oigl2QMKkwzto9XwoBJ/D38IvROIQ==}
+    dev: false
 
   /@a-type/utils@1.1.2:
     resolution: {integrity: sha512-VM/iA7Gco+RloJa8sNXdMgB+REIiNSL+H/ai4BJKPPUJq8woDY06Frd+XVw/V7lAorUrcBaGf0E1Z+7bXO9VMA==}
     dev: false
+
+  /@a-type/utils@1.1.3:
+    resolution: {integrity: sha512-wdd3pHus6WNYzoBZjwZhn2DJhgtK02VE/fky7t6soEl4DIUZamaCJmHivmFX4mvHL5/WIq/T2iXyZjDIC5F3KQ==}
 
   /@aashutoshrathi/word-wrap@1.2.6:
     resolution: {integrity: sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==}
@@ -1870,7 +1874,7 @@ packages:
     engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0}
     dependencies:
       ci-info: 4.0.0
-      debug: 4.3.4
+      debug: 4.3.5
       dlv: 1.1.3
       dset: 3.1.3
       is-docker: 3.0.0
@@ -2756,7 +2760,7 @@ packages:
       '@babel/traverse': 7.24.0
       '@babel/types': 7.24.0
       convert-source-map: 2.0.0
-      debug: 4.3.4
+      debug: 4.3.5
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.1
@@ -2778,7 +2782,7 @@ packages:
       '@babel/traverse': 7.24.5
       '@babel/types': 7.24.5
       convert-source-map: 2.0.0
-      debug: 4.3.4
+      debug: 4.3.5
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.1
@@ -2800,7 +2804,7 @@ packages:
       '@babel/traverse': 7.24.6
       '@babel/types': 7.24.6
       convert-source-map: 2.0.0
-      debug: 4.3.4
+      debug: 4.3.5
       gensync: 1.0.0-beta.2
       json5: 2.2.3
       semver: 6.3.1
@@ -4739,7 +4743,7 @@ packages:
       '@babel/helper-split-export-declaration': 7.22.6
       '@babel/parser': 7.24.6
       '@babel/types': 7.24.6
-      debug: 4.3.4
+      debug: 4.3.5
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
@@ -4756,7 +4760,7 @@ packages:
       '@babel/helper-split-export-declaration': 7.24.5
       '@babel/parser': 7.24.6
       '@babel/types': 7.24.6
-      debug: 4.3.4
+      debug: 4.3.5
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
@@ -4773,7 +4777,7 @@ packages:
       '@babel/helper-split-export-declaration': 7.24.6
       '@babel/parser': 7.24.6
       '@babel/types': 7.24.6
-      debug: 4.3.4
+      debug: 4.3.5
       globals: 11.12.0
     transitivePeerDependencies:
       - supports-color
@@ -5852,7 +5856,7 @@ packages:
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     dependencies:
       ajv: 6.12.6
-      debug: 4.3.4
+      debug: 4.3.5
       espree: 10.0.1
       globals: 14.0.0
       ignore: 5.3.0
@@ -6025,7 +6029,7 @@ packages:
     engines: {node: '>=10.10.0'}
     dependencies:
       '@humanwhocodes/object-schema': 2.0.3
-      debug: 4.3.4
+      debug: 4.3.5
       minimatch: 3.1.2
     transitivePeerDependencies:
       - supports-color
@@ -6075,7 +6079,7 @@ packages:
       '@antfu/install-pkg': 0.1.1
       '@antfu/utils': 0.7.6
       '@iconify/types': 2.0.0
-      debug: 4.3.4
+      debug: 4.3.5
       kolorist: 1.8.0
       local-pkg: 0.5.0
       mlly: 1.6.1
@@ -6089,7 +6093,7 @@ packages:
       '@antfu/install-pkg': 0.1.1
       '@antfu/utils': 0.7.7
       '@iconify/types': 2.0.0
-      debug: 4.3.4
+      debug: 4.3.5
       kolorist: 1.8.0
       local-pkg: 0.5.0
       mlly: 1.6.1
@@ -12611,7 +12615,7 @@ packages:
       '@typescript-eslint/types': 6.13.2
       '@typescript-eslint/typescript-estree': 6.13.2(typescript@5.4.5)
       '@typescript-eslint/visitor-keys': 6.13.2
-      debug: 4.3.4
+      debug: 4.3.5
       eslint: 9.1.1
       typescript: 5.4.5
     transitivePeerDependencies:
@@ -12642,7 +12646,7 @@ packages:
     dependencies:
       '@typescript-eslint/types': 6.13.2
       '@typescript-eslint/visitor-keys': 6.13.2
-      debug: 4.3.4
+      debug: 4.3.5
       globby: 11.1.0
       is-glob: 4.0.3
       semver: 7.6.2
@@ -12706,7 +12710,7 @@ packages:
       '@unocss/core': 0.58.8
       '@unocss/reset': 0.58.8
       '@unocss/vite': 0.58.8(vite@5.2.11)
-      vite: 5.2.11(@types/node@20.12.7)
+      vite: 5.2.11
     transitivePeerDependencies:
       - rollup
     dev: true
@@ -12737,7 +12741,7 @@ packages:
       '@unocss/core': 0.60.3
       '@unocss/reset': 0.60.3
       '@unocss/vite': 0.60.3(rollup@2.79.1)(vite@5.2.11)
-      vite: 5.2.11(@types/node@20.12.7)
+      vite: 5.2.11
     transitivePeerDependencies:
       - rollup
     dev: false
@@ -13489,7 +13493,7 @@ packages:
       chokidar: 3.6.0
       fast-glob: 3.3.2
       magic-string: 0.30.10
-      vite: 5.2.11(@types/node@20.12.7)
+      vite: 5.2.11
     transitivePeerDependencies:
       - rollup
     dev: true
@@ -13528,7 +13532,7 @@ packages:
       chokidar: 3.6.0
       fast-glob: 3.3.2
       magic-string: 0.30.10
-      vite: 5.2.11(@types/node@20.12.7)
+      vite: 5.2.11
     transitivePeerDependencies:
       - rollup
     dev: false
@@ -13663,8 +13667,8 @@ packages:
     peerDependencies:
       vite: ^4 || ^5
     dependencies:
-      '@swc/core': 1.5.5
-      vite: 5.2.11(@types/node@20.12.7)
+      '@swc/core': 1.5.27
+      vite: 5.2.11
     transitivePeerDependencies:
       - '@swc/helpers'
     dev: true
@@ -13674,7 +13678,7 @@ packages:
     peerDependencies:
       vite: ^4 || ^5
     dependencies:
-      '@swc/core': 1.5.5
+      '@swc/core': 1.5.27
       vite: 5.2.7
     transitivePeerDependencies:
       - '@swc/helpers'
@@ -13697,7 +13701,7 @@ packages:
       vite: ^4 || ^5
     dependencies:
       '@swc/core': 1.5.5
-      vite: 5.2.11(@types/node@20.12.7)
+      vite: 5.2.11
     transitivePeerDependencies:
       - '@swc/helpers'
     dev: true
@@ -13990,7 +13994,7 @@ packages:
     resolution: {integrity: sha512-o/zjMZRhJxny7OyEF+Op8X+efiELC7k7yOjMzgfzVqOzXqkBkWI79YoTdOtsuWd5BWhAGAuOY/Xa6xpiaWXiNg==}
     engines: {node: '>= 14'}
     dependencies:
-      debug: 4.3.4
+      debug: 4.3.5
     transitivePeerDependencies:
       - supports-color
 
@@ -14304,8 +14308,8 @@ packages:
       tsconfck: 3.0.3(typescript@5.4.5)
       unist-util-visit: 5.0.0
       vfile: 6.0.1
-      vite: 5.2.11(@types/node@20.12.7)
-      vitefu: 0.2.5(vite@5.2.11)
+      vite: 5.2.13(@types/node@20.12.7)
+      vitefu: 0.2.5(vite@5.2.13)
       which-pm: 2.1.1
       yargs-parser: 21.1.1
       zod: 3.23.5
@@ -14925,11 +14929,11 @@ packages:
   /clsx@2.1.0:
     resolution: {integrity: sha512-m3iNNWpd9rl3jvvcBnu70ylMdrXt8Vlq4HYadnU5fwcOtvkSQWPmj7amUcDT2qYI7risszBjI5AUIUox9D16pg==}
     engines: {node: '>=6'}
-    dev: false
 
   /clsx@2.1.1:
     resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
     engines: {node: '>=6'}
+    dev: false
 
   /collapse-white-space@2.1.0:
     resolution: {integrity: sha512-loKTxY1zCOuG4j9f6EPnuyyYkf58RnhhWTvRoZEokgB+WbdXehfjFviyOVYkqzEWz1Q5kRiZdBYS5SwxbQYwzw==}
@@ -16461,7 +16465,7 @@ packages:
       eslint: '*'
       eslint-plugin-import: '*'
     dependencies:
-      debug: 4.3.4
+      debug: 4.3.5
       enhanced-resolve: 5.15.0
       eslint: 9.1.1
       eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.13.2)(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1)(eslint@9.1.1)
@@ -17875,7 +17879,7 @@ packages:
     engines: {node: '>= 14'}
     dependencies:
       agent-base: 7.1.0
-      debug: 4.3.4
+      debug: 4.3.5
     transitivePeerDependencies:
       - supports-color
 
@@ -19422,7 +19426,7 @@ packages:
     resolution: {integrity: sha512-o/sd0nMof8kYff+TqcDx3VSrgBTcZpSvYcAHIfHhv5VAuNmisCxjhx6YmxS8PFEpb9z5WKWKPdzf0jM23ro3RQ==}
     dependencies:
       '@types/debug': 4.1.12
-      debug: 4.3.4
+      debug: 4.3.5
       decode-named-character-reference: 1.0.2
       devlop: 1.1.0
       micromark-core-commonmark: 2.0.1
@@ -22757,7 +22761,7 @@ packages:
       '@unocss/transformer-directives': 0.58.8
       '@unocss/transformer-variant-group': 0.58.8
       '@unocss/vite': 0.58.8(vite@5.2.11)
-      vite: 5.2.11(@types/node@20.12.7)
+      vite: 5.2.11
     transitivePeerDependencies:
       - postcss
       - rollup
@@ -22834,7 +22838,7 @@ packages:
       '@unocss/transformer-directives': 0.60.3
       '@unocss/transformer-variant-group': 0.60.3
       '@unocss/vite': 0.60.3(rollup@2.79.1)(vite@5.2.11)
-      vite: 5.2.11(@types/node@20.12.7)
+      vite: 5.2.11
     transitivePeerDependencies:
       - postcss
       - rollup
@@ -23116,7 +23120,7 @@ packages:
     hasBin: true
     dependencies:
       cac: 6.7.14
-      debug: 4.3.4
+      debug: 4.3.5
       pathe: 1.1.2
       picocolors: 1.0.0
       vite: 5.2.13(@types/node@20.12.7)
@@ -23277,7 +23281,7 @@ packages:
       debug: 4.3.4
       fast-glob: 3.3.2
       pretty-bytes: 6.1.1
-      vite: 5.2.11(@types/node@20.12.7)
+      vite: 5.2.11
       workbox-build: 7.1.1
       workbox-window: 7.1.0
     transitivePeerDependencies:
@@ -23296,7 +23300,7 @@ packages:
       '@vite-pwa/assets-generator':
         optional: true
     dependencies:
-      debug: 4.3.4
+      debug: 4.3.5
       fast-glob: 3.3.2
       pretty-bytes: 6.1.1
       vite: 5.2.7
@@ -23375,7 +23379,7 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vite@5.2.11(@types/node@20.12.7):
+  /vite@5.2.11:
     resolution: {integrity: sha512-HndV31LWW05i1BLPMUCE1B9E9GFbOu1MbenhS58FuK6owSO5qHm7GiCotrNY1YE5rMeQSFBGmT5ZaLEjFizgiQ==}
     engines: {node: ^18.0.0 || >=20.0.0}
     hasBin: true
@@ -23403,7 +23407,6 @@ packages:
       terser:
         optional: true
     dependencies:
-      '@types/node': 20.12.7
       esbuild: 0.20.2
       postcss: 8.4.38
       rollup: 4.17.2
@@ -23479,7 +23482,7 @@ packages:
     optionalDependencies:
       fsevents: 2.3.3
 
-  /vitefu@0.2.5(vite@5.2.11):
+  /vitefu@0.2.5(vite@5.2.13):
     resolution: {integrity: sha512-SgHtMLoqaeeGnd2evZ849ZbACbnwQCIwRH57t18FxcXoZop0uQu0uzlIhJBlF/eWVzuce0sHeqPcDo+evVcg8Q==}
     peerDependencies:
       vite: ^3.0.0 || ^4.0.0 || ^5.0.0
@@ -23487,7 +23490,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 5.2.11(@types/node@20.12.7)
+      vite: 5.2.13(@types/node@20.12.7)
     dev: false
 
   /vitest@0.22.1:
@@ -23573,7 +23576,7 @@ packages:
       strip-literal: 2.1.0
       tinybench: 2.8.0
       tinypool: 0.8.4
-      vite: 5.2.11(@types/node@20.12.7)
+      vite: 5.2.13(@types/node@20.12.7)
       vite-node: 1.6.0(@types/node@20.12.7)
       why-is-node-running: 2.2.2
     transitivePeerDependencies:
@@ -24241,10 +24244,6 @@ packages:
       zod: ^3.23.3
     dependencies:
       zod: 3.23.5
-    dev: false
-
-  /zod@3.23.4:
-    resolution: {integrity: sha512-/AtWOKbBgjzEYYQRNfoGKHObgfAZag6qUJX1VbHo2PRBgS+wfWagEY2mizjfyAPcGesrJOcx/wcl0L9WnVrHFw==}
     dev: false
 
   /zod@3.23.5:
