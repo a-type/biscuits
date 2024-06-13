@@ -1,0 +1,135 @@
+@font-face {
+  font-family: Henrietta;
+  src:
+    url('https://resources.biscuits.club/fonts/VCHenrietta-Regular.woff')
+      format('woff'),
+    url('https://resources.biscuits.club/fonts/VCHenrietta-Regular.woff2')
+      format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Henrietta;
+  src:
+    url('https://resources.biscuits.club/fonts/VCHenrietta-Bold.woff')
+      format('woff'),
+    url('https://resources.biscuits.club/fonts/VCHenrietta-Bold.woff2')
+      format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Henrietta;
+  src:
+    url('https://resources.biscuits.club/fonts/VCHenrietta-Italic.woff')
+      format('woff'),
+    url('https://resources.biscuits.club/fonts/VCHenrietta-Italic.woff2')
+      format('woff2');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Henrietta;
+  src:
+    url('https://resources.biscuits.club/fonts/VCHenrietta-BoldItalic.woff')
+      format('woff'),
+    url('https://resources.biscuits.club/fonts/VCHenrietta-BoldItalic.woff2')
+      format('woff2');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Henrietta;
+  src:
+    url('https://resources.biscuits.club/fonts/VCHenrietta-Black.woff')
+      format('woff'),
+    url('https://resources.biscuits.club/fonts/VCHenrietta-Black.woff2')
+      format('woff2');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Henrietta;
+  src:
+    url('https://resources.biscuits.club/fonts/VCHenrietta-BlackItalic.woff')
+      format('woff'),
+    url('https://resources.biscuits.club/fonts/VCHenrietta-BlackItalic.woff2')
+      format('woff2');
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Henrietta;
+  src:
+    url('https://resources.biscuits.club/fonts/VCHenrietta-SemiBold.woff')
+      format('woff'),
+    url('https://resources.biscuits.club/fonts/VCHenrietta-SemiBold.woff2')
+      format('woff2');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Henrietta;
+  src:
+    url('https://resources.biscuits.club/fonts/VCHenrietta-SemiBoldItalic.woff')
+      format('woff'),
+    url('https://resources.biscuits.club/fonts/VCHenrietta-SemiBoldItalic.woff2')
+      format('woff2');
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Henrietta;
+  src:
+    url('https://resources.biscuits.club/fonts/VCHenrietta-Medium.woff')
+      format('woff'),
+    url('https://resources.biscuits.club/fonts/VCHenrietta-Medium.woff2')
+      format('woff2');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Henrietta;
+  src:
+    url('https://resources.biscuits.club/fonts/VCHenrietta-MediumItalic.woff')
+      format('woff'),
+    url('https://resources.biscuits.club/fonts/VCHenrietta-MediumItalic.woff2')
+      format('woff2');
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Henrietta;
+  src:
+    url('https://resources.biscuits.club/fonts/VCHenrietta-Light.woff')
+      format('woff'),
+    url('https://resources.biscuits.club/fonts/VCHenrietta-Light.woff2')
+      format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Henrietta;
+  src:
+    url('https://resources.biscuits.club/fonts/VCHenrietta-LightItalic.woff')
+      format('woff'),
+    url('https://resources.biscuits.club/fonts/VCHenrietta-LightItalic.woff2')
+      format('woff2');
+  font-weight: 300;
+  font-style: italic;
+}
+
+.font-fancy {
+  font-family: Henrietta, sans-serif;
+}
