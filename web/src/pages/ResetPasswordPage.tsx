@@ -1,6 +1,7 @@
-import { EmailCompleteSignupForm } from '@/components/auth/EmailCompleteSignupForm.jsx';
+import { ResetPasswordForm } from '@a-type/auth-client';
 import { PageContent, PageRoot } from '@a-type/ui/components/layouts';
 import { H1, P } from '@a-type/ui/components/typography';
+import { CONFIG } from '@biscuits/client';
 import { useSearchParams } from '@verdant-web/react-router';
 
 export interface ResetPasswordPageProps {}
@@ -25,7 +26,11 @@ export function ResetPasswordPage({}: ResetPasswordPageProps) {
     <PageRoot>
       <PageContent>
         <H1>Complete your signup</H1>
-        <EmailCompleteSignupForm code={code} email={email} />
+        <ResetPasswordForm
+          code={code}
+          email={email}
+          endpoint={`${CONFIG.API_ORIGIN}/auth/complete-reset-password`}
+        />
       </PageContent>
     </PageRoot>
   );

@@ -50,7 +50,7 @@ function ClaimInvitePage() {
   const isNotAuthenticated = infoResult.data && !infoResult.data.me;
   useEffect(() => {
     if (isNotAuthenticated) {
-      navigate(`/join?returnTo=${encodeURIComponent(`/claim/${code}`)}`);
+      navigate(`/login?returnTo=${encodeURIComponent(`/claim/${code}`)}`);
     }
   }, [navigate, isNotAuthenticated, code]);
 

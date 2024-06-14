@@ -1,6 +1,3 @@
-import { EmailSignInForm } from '@/components/auth/EmailSignInForm.jsx';
-import { EmailSignUpForm } from '@/components/auth/EmailSignupForm.jsx';
-import { OAuthSignInButton } from '@/components/auth/OAuthSignInButton.jsx';
 import { P } from '@a-type/ui/components/typography';
 import { useSearchParams } from '@verdant-web/react-router';
 import {
@@ -14,6 +11,12 @@ import { Footer } from '@/components/help/Footer.jsx';
 import { Checkbox } from '@a-type/ui/components/checkbox';
 import classNames from 'classnames';
 import { AppId, appsById } from '@biscuits/apps';
+import { CONFIG } from '@biscuits/client';
+import {
+  OAuthSigninButton,
+  EmailSignupForm,
+  EmailSigninForm,
+} from '@a-type/auth-client';
 
 const Paws = lazy(() => import('@/components/paws/Paws.jsx'));
 
@@ -77,33 +80,41 @@ export default function LoginPage() {
                 </a>
               </span>
             </label>
-            <OAuthSignInButton
-              provider="google"
+            <OAuthSigninButton
+              endpoint={`${CONFIG.API_ORIGIN}/auth/provider/google/login`}
               returnTo={returnTo}
               inviteId={searchParams.get('inviteId')}
               className="mx-auto"
               disabled={!tosAgreed}
             >
               Sign up with Google
-            </OAuthSignInButton>
+            </OAuthSigninButton>
             <Or />
-            <EmailSignUpForm returnTo={returnTo} disabled={!tosAgreed} />
+            <EmailSignupForm
+              endpoint={`${CONFIG.API_ORIGIN}/auth/begin-email-signup`}
+              returnTo={returnTo}
+              disabled={!tosAgreed}
+            />
           </TabsContent>
           <TabsContent
             value="signin"
             className="flex flex-col gap-3 items-stretch"
           >
             <P className="w-full text-center">Welcome back!</P>
-            <OAuthSignInButton
-              provider="google"
+            <OAuthSigninButton
+              endpoint={`${CONFIG.API_ORIGIN}/auth/provider/google/login`}
               returnTo={returnTo}
               inviteId={searchParams.get('inviteId')}
               className="mx-auto"
             >
               Sign in with Google
-            </OAuthSignInButton>
+            </OAuthSigninButton>
             <Or />
-            <EmailSignInForm returnTo={returnTo} />
+            <EmailSigninForm
+              returnTo={returnTo}
+              endpoint={`${CONFIG.API_ORIGIN}/auth/email-login`}
+              resetPasswordEndpoint={`${CONFIG.API_ORIGIN}/auth/begin-reset-password`}
+            />
           </TabsContent>
         </TabsRoot>
       </div>

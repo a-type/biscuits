@@ -55,6 +55,7 @@ export const authHandlers = createHandlers({
         .values({
           id: id(),
           accessTokenExpiresAt: expiresAt ? new Date(expiresAt) : undefined,
+
           ...account,
         })
         .returning('id')

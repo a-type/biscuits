@@ -9,7 +9,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@a-type/ui": "^0.8.19",
+    "@a-type/auth-client": "1.0.4",
+    "@a-type/ui": "^0.8.20",
     "@biscuits/apps": "workspace:*",
     "@biscuits/client": "workspace:*",
     "@biscuits/error": "workspace:*",
