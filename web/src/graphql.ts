@@ -1,6 +1,6 @@
 export { graphql, type FragmentOf, readFragment } from '@biscuits/client';
 import { createGraphQLClient } from '@biscuits/client';
-import { toast } from 'react-hot-toast';
+import { toast } from '@a-type/ui';
 
 export const client = createGraphQLClient({
   onError: (err) => {

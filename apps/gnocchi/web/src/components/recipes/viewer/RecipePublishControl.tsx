@@ -22,7 +22,7 @@ import {
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { format } from 'date-fns/esm';
 import { useState } from 'react';
-import { toast } from 'react-hot-toast';
+import { toast } from '@a-type/ui';
 
 export interface RecipePublishControlProps {
   recipe: Recipe;

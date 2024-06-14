@@ -6,7 +6,7 @@ import { PageRoot, PageContent } from '@a-type/ui/components/layouts';
 import { H1, P } from '@a-type/ui/components/typography';
 import { withClassName } from '@a-type/ui/hooks';
 import { Button } from '@a-type/ui/components/button';
-import { toast } from 'react-hot-toast';
+import { toast } from '@a-type/ui';
 import { Footer } from '@/components/help/Footer.jsx';
 
 const claimInviteInfo = graphql(`

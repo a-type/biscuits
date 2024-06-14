@@ -1,7 +1,7 @@
 import { useIsRouteTransitioning } from '@verdant-web/react-router';
 import { animated, useSpring } from '@react-spring/web';
-import { clsx } from '@a-type/ui';
 import { useCallback, useEffect } from 'react';
+import { clsx } from '@a-type/ui';
 
 export interface TopLoaderProps {
   className?: string;
@@ -15,7 +15,7 @@ export function TopLoader({ className }: TopLoaderProps) {
   }));
 
   const run = useCallback(() => {
-    let timeout: any;
+    let timeout: any | undefined;
     function step(previous: number) {
       spring.start({
         width: `${previous}%`,

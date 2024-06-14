@@ -18,6 +18,8 @@ export function LogoutNotice({}: LogoutNoticeProps) {
   const [isLoggedIn, loadingLoggedInStatus] = useIsLoggedIn();
   const [close, setClose] = useState(false);
 
+  const isLoginPage = window.location.pathname === '/login';
+
   const wasLoggedInButNowLoggedOut =
     !close && wasLoggedIn && !isLoggedIn && !loadingLoggedInStatus;
 
@@ -28,6 +30,8 @@ export function LogoutNotice({}: LogoutNoticeProps) {
       setWasLoggedIn(true);
     }
   }, [isLoggedIn, setWasLoggedIn]);
+
+  if (isLoginPage) return null;
 
   return (
     <Dialog open={wasLoggedInButNowLoggedOut} onOpenChange={setWasLoggedIn}>

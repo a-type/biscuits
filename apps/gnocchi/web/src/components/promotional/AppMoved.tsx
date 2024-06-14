@@ -15,7 +15,7 @@ import {
 } from '@biscuits/client';
 import { Link } from '@verdant-web/react-router';
 import { Icon } from '@a-type/ui/components/icon';
-import { toast } from 'react-hot-toast';
+import { toast } from '@a-type/ui';
 import { Button } from '@a-type/ui/components/button';
 import { ExportDataButton } from '@biscuits/client/storage';
 

@@ -4,7 +4,7 @@ import {
   SubmitButton,
   TextField,
 } from '@a-type/ui/components/forms';
-import { toast } from 'react-hot-toast';
+import { toast } from '@a-type/ui';
 import { useMutation } from '@biscuits/client';
 
 const invite = graphql(`

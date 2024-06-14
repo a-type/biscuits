@@ -34,7 +34,7 @@ import {
   PopoverTrigger,
 } from '@a-type/ui/components/popover';
 import { Note } from '@a-type/ui/components/note';
-import { HOME_ORIGIN } from 'node_modules/@biscuits/client/src/config.js';
+import { CONFIG } from '@biscuits/client';
 
 export interface CookingActionBarProps {
   recipe: Recipe;
@@ -130,7 +130,7 @@ function AddChefsAction() {
               device sync, grocery collaboration, and web recipe scanning.
             </p>
             <p>
-              <TextLink newTab to={`${HOME_ORIGIN}/join`}>
+              <TextLink newTab to={`${CONFIG.HOME_ORIGIN}/join`}>
                 Learn more about subscription features.
               </TextLink>
             </p>

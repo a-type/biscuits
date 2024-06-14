@@ -1,59 +1,28 @@
-import { clientDescriptor, hooks } from '@/store.js';
-import { ReactNode, Suspense, useLayoutEffect } from 'react';
 import { Pages } from '@/pages/Pages.jsx';
-import { useVisualViewportOffset } from '@a-type/ui/hooks';
-import { Toaster } from 'react-hot-toast';
-import { IconSpritesheet } from '@a-type/ui/components/icon';
+import { clientDescriptor, hooks } from '@/store.js';
 import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
-import { TooltipProvider } from '@a-type/ui/components/tooltip';
-import { ParticleLayer } from '@a-type/ui/components/particles';
-import { ReloadButton } from '@biscuits/client';
+import { Provider as UIProvider } from '@a-type/ui/components/provider';
 import { H1, P } from '@a-type/ui/components/typography';
-import {
-  useCanSync,
-  Provider,
-  createGraphQLClient,
-  AppPreviewNotice,
-  PrereleaseWarning,
-} from '@biscuits/client';
+import { Provider, ReloadButton, useCanSync } from '@biscuits/client';
+import { ReactNode, Suspense } from 'react';
 
 export interface AppProps {}
 
-const graphqlClient = createGraphQLClient();
-
 export function App({}: AppProps) {
-  useLayoutEffect(() => {
-    if (typeof window !== 'undefined') {
-      document.body.className = 'theme-lemon';
-    }
-  }, []);
-
-  useVisualViewportOffset();
-
   return (
     <ErrorBoundary fallback={<ErrorFallback />}>
-      <TooltipProvider>
+      <UIProvider>
         <Suspense>
           <Provider
             appId="{{todoId}}"
-            graphqlClient={graphqlClient}
             storeDescriptor={clientDescriptor as any}
           >
             <VerdantProvider>
-              <ParticleLayer>
-                <AppPreviewNotice />
-                <PrereleaseWarning />
-                <Pages />
-                <Toaster
-                  position="bottom-center"
-                  containerClassName="mb-10 sm:mb-0"
-                />
-                <IconSpritesheet />
-              </ParticleLayer>
+              <Pages />
             </VerdantProvider>
           </Provider>
         </Suspense>
-      </TooltipProvider>
+      </UIProvider>
     </ErrorBoundary>
   );
 }
@@ -76,7 +45,7 @@ function ErrorFallback() {
         <P>
           Sorry about this. The app has crashed. You can try refreshing, but if
           that doesn&apos;t work,{' '}
-          <a className="underline font-bold" href="mailto:invalid">
+          <a className="underline font-bold" href="mailto:hi@biscuits.club">
             let me know about it.
           </a>
         </P>

@@ -18,7 +18,7 @@ import { useCombobox } from 'downshift';
 import { preventDefault } from '@a-type/utils';
 import { useCallback, useRef, useState, useTransition } from 'react';
 import { useSize } from '@a-type/ui/hooks';
-import { toast } from 'react-hot-toast';
+import { toast } from '@a-type/ui';
 import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
 

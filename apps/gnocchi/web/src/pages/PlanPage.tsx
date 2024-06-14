@@ -29,7 +29,7 @@ import { ArrowRightIcon } from '@radix-ui/react-icons';
 import { ReactNode, useEffect } from 'react';
 import { groceriesDescriptor } from '@/stores/groceries/index.js';
 import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
-import { toast } from 'react-hot-toast';
+import { toast } from '@a-type/ui';
 
 const contents = {
   offline: OfflineContents,

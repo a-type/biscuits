@@ -1,25 +1,15 @@
-import { clientDescriptor, hooks } from '@/store.js';
-import { ReactNode, Suspense, useLayoutEffect } from 'react';
 import { Pages } from '@/pages/Pages.jsx';
-import { useVisualViewportOffset } from '@a-type/ui/hooks';
-import { Toaster } from 'react-hot-toast';
-import { IconSpritesheet } from '@a-type/ui/components/icon';
+import { clientDescriptor, hooks } from '@/store.js';
 import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
-import { TooltipProvider } from '@a-type/ui/components/tooltip';
-import { ParticleLayer } from '@a-type/ui/components/particles';
-import { PrereleaseWarning, ReloadButton } from '@biscuits/client';
+import { Provider as UIProvider } from '@a-type/ui/components/provider';
 import { H1, P } from '@a-type/ui/components/typography';
-import {
-  useCanSync,
-  Provider,
-  createGraphQLClient,
-  AppPreviewNotice,
-} from '@biscuits/client';
-import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import { useVisualViewportOffset } from '@a-type/ui/hooks';
+import { Provider, ReloadButton, useCanSync } from '@biscuits/client';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactNode, Suspense, useLayoutEffect } from 'react';
 
 export interface AppProps {}
 
-const graphqlClient = createGraphQLClient();
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
@@ -39,30 +29,20 @@ export function App({}: AppProps) {
 
   return (
     <ErrorBoundary fallback={<ErrorFallback />}>
-      <TooltipProvider>
+      <UIProvider>
         <Suspense>
           <Provider
             appId="marginalia"
-            graphqlClient={graphqlClient}
             storeDescriptor={clientDescriptor as any}
           >
             <VerdantProvider>
               <QueryClientProvider client={queryClient}>
-                <ParticleLayer>
-                  <AppPreviewNotice />
-                  <PrereleaseWarning />
-                  <Pages />
-                  <Toaster
-                    position="bottom-center"
-                    containerClassName="mb-10 sm:mb-0"
-                  />
-                  <IconSpritesheet />
-                </ParticleLayer>
+                <Pages />
               </QueryClientProvider>
             </VerdantProvider>
           </Provider>
         </Suspense>
-      </TooltipProvider>
+      </UIProvider>
     </ErrorBoundary>
   );
 }

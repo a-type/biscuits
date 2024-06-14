@@ -6,7 +6,6 @@ import { Spinner } from '@a-type/ui/components/spinner';
 import { lazy, useCallback, Suspense } from 'react';
 import { updateApp, updateState } from '@/updateState.js';
 import { Link } from '@verdant-web/react-router';
-import { TopLoader } from '@/components/nav/TopLoader.jsx';
 import { Button } from '@a-type/ui/components/button';
 import { ReloadButton } from '@biscuits/client';
 import { PageRoot } from '@a-type/ui/components/layouts';
@@ -47,7 +46,6 @@ export function Pages() {
     <ErrorBoundary fallback={(props) => <ErrorFallback {...props} />}>
       <Suspense fallback={<Spinner />}>
         <Router routes={routes} onNavigate={handleNavigate}>
-          <TopLoader />
           <PageRoot>
             <Outlet />
           </PageRoot>

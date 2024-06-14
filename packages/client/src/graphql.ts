@@ -15,6 +15,7 @@ import { fetch } from './fetch.js';
 import type { introspection } from './graphql-env.d.js';
 import { CONFIG, refreshSession } from './index.js';
 import { useEffect } from 'react';
+import { toast } from '@a-type/ui';
 
 export const graphql = initGraphQLTada<{
   introspection: introspection;
@@ -155,6 +156,10 @@ export function createGraphQLClient({
     ]),
   });
 }
+
+export const graphqlClient = createGraphQLClient({
+  onError: toast.error,
+});
 
 function deduplicateErrors(onError?: (error: string) => void) {
   if (!onError) return undefined;

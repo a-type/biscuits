@@ -16,7 +16,7 @@ import {
 } from '@a-type/ui/components/forms';
 import { Cross2Icon, PlusIcon } from '@radix-ui/react-icons';
 import { useState } from 'react';
-import { toast } from 'react-hot-toast';
+import { toast } from '@a-type/ui';
 
 export interface FoodNamesEditorProps {
   names: FoodAlternateNames;

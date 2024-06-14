@@ -93,7 +93,6 @@ export function Pages() {
     <Router routes={routes}>
       <ErrorBoundary fallback={<ErrorPage />}>
         <Suspense>
-          <TopLoader />
           <Outlet />
           <RestoreScroll />
         </Suspense>

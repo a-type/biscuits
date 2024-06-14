@@ -1,7 +1,5 @@
-import { TopLoader } from '@/components/nav/TopLoader.jsx';
 import { updateApp, updateState } from '@/updateState.js';
 import { PageRoot } from '@a-type/ui/components/layouts';
-import { Essentials } from '@biscuits/client';
 import { Outlet, Router, makeRoutes } from '@verdant-web/react-router';
 import { useCallback } from 'react';
 import { lazyWithPreload as lazy } from 'react-lazy-with-preload';
@@ -49,8 +47,6 @@ export function Pages() {
     <PageRoot>
       <Router routes={routes} onNavigate={onNavigate}>
         <Outlet />
-        <TopLoader />
-        <Essentials />
       </Router>
     </PageRoot>
   );

@@ -4,12 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "app-dev": "vite --open --serve",
+    "app-dev": "vite --host --open",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@a-type/ui": "0.8.20",
+    "@a-type/ui": "0.8.21",
     "@a-type/utils": "1.1.0",
     "@biscuits/client": "workspace:*",
     "@marginalia.biscuits/verdant": "workspace:*",
@@ -19,7 +19,6 @@
     "classnames": "^2.5.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-hot-toast": "^2.4.1",
     "unocss": "0.60.3",
     "valtio": "^1.13.2",
     "workbox-core": "^7.1.0",

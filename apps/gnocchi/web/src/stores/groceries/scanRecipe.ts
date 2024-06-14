@@ -2,13 +2,13 @@ import {
   graphql,
   isClientError,
   showSubscriptionPromotion,
+  graphqlClient,
 } from '@biscuits/client';
 import { detailedInstructionsToDoc, instructionsToDoc } from '@/lib/tiptap.js';
 import { BiscuitsError } from '@biscuits/error';
 import { lookupUnit, parseIngredient } from '@gnocchi.biscuits/conversion';
-import { graphqlClient } from '@/graphql.js';
 import { RecipeInit, Client } from '@gnocchi.biscuits/verdant';
-import { toast } from 'react-hot-toast';
+import { toast } from '@a-type/ui';
 
 const recipeScanQuery = graphql(`
   query RecipeScan($input: RecipeScanInput!) {
@@ -82,7 +82,7 @@ export async function getScannedRecipe(
             comments: [...(i.comments ?? [])],
             text: i.original,
             note: i.note,
-            isSectionHeader: i.isSectionHeader,
+            isSectionHeader: i.isSectionHeader ?? undefined,
           };
         });
       } else if (scanned.rawIngredients?.length) {

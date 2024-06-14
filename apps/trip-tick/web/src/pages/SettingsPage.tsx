@@ -7,7 +7,7 @@ import { H1 } from '@a-type/ui/components/typography';
 import { DarkModeToggle, usePageTitle } from '@biscuits/client';
 import { ManageStorage } from '@biscuits/client/storage';
 import { AutoRestoreScroll, Link } from '@verdant-web/react-router';
-import { toast } from 'react-hot-toast';
+import { toast } from '@a-type/ui';
 
 export interface SettingsPageProps {}
 

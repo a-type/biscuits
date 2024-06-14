@@ -1,5 +1,7 @@
+import { toast } from '@a-type/ui';
+
 let callback: (message: string) => boolean | void = (message: string) => {
-  alert(message);
+  toast.error(message);
   return true;
 };
 

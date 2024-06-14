@@ -8,7 +8,7 @@ import {
 } from '@a-type/ui/components/dropdownMenu';
 import { Icon } from '@a-type/ui/components/icon';
 import { useNavigate } from '@verdant-web/react-router';
-import { toast } from 'react-hot-toast';
+import { toast } from '@a-type/ui';
 
 export interface TripMenuProps {
   tripId: string;

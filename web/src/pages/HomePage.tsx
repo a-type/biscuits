@@ -73,7 +73,6 @@ export default function HomePage() {
         )}
         <Footer />
       </PageContent>
-      <Essentials />
     </PageRoot>
   );
 }

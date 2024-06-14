@@ -1,31 +1,17 @@
-import classNames from 'classnames';
-import { Suspense, useLayoutEffect, useState } from 'react';
-import { Toaster } from 'react-hot-toast';
-import { Pages } from './pages/Pages.jsx';
-import { Provider as GroceriesProvider } from './stores/groceries/Provider.jsx';
-import { IconSpritesheet } from '@a-type/ui/components/icon';
 import { ReloadButton } from '@/components/sync/ReloadButton.jsx';
 import { GlobalLoader } from '@/GlobalLoader.jsx';
-import { useVisualViewportOffset } from '@a-type/ui/hooks';
 import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
-import { TooltipProvider } from '@a-type/ui/components/tooltip';
-import { P, H1 } from '@a-type/ui/components/typography';
-import { ParticleLayer } from '@a-type/ui/components/particles';
-import { GlobalSyncingIndicator } from '@/components/sync/GlobalSyncingIndicator.jsx';
-import { AppPreviewNotice, Provider } from '@biscuits/client';
-import { graphqlClient } from './graphql.js';
-import { groceriesDescriptor } from './stores/groceries/index.js';
+import { Provider as UIProvider } from '@a-type/ui/components/provider';
+import { H1, P } from '@a-type/ui/components/typography';
+import { Provider } from '@biscuits/client';
+import classNames from 'classnames';
+import { Suspense } from 'react';
 import { AppMoved } from './components/promotional/AppMoved.jsx';
+import { Pages } from './pages/Pages.jsx';
+import { groceriesDescriptor } from './stores/groceries/index.js';
+import { Provider as GroceriesProvider } from './stores/groceries/Provider.jsx';
 
 export function App() {
-  useLayoutEffect(() => {
-    if (typeof window !== 'undefined') {
-      document.body.className = 'theme-lemon';
-    }
-  }, []);
-
-  useVisualViewportOffset();
-
   return (
     <div
       className={classNames(
@@ -34,26 +20,19 @@ export function App() {
       )}
     >
       <ErrorBoundary fallback={<ErrorFallback />}>
-        <TooltipProvider>
+        <UIProvider>
           <Suspense fallback={<GlobalLoader />}>
             <Provider
-              graphqlClient={graphqlClient}
               appId="gnocchi"
               storeDescriptor={groceriesDescriptor as any}
             >
               <GroceriesProvider>
-                <ParticleLayer>
-                  <AppPreviewNotice />
-                  <Pages />
-                  <Toaster position="top-center" containerClassName="mt-1" />
-                  <IconSpritesheet />
-                  <GlobalSyncingIndicator />
-                  <AppMoved />
-                </ParticleLayer>
+                <Pages />
+                <AppMoved />
               </GroceriesProvider>
             </Provider>
           </Suspense>
-        </TooltipProvider>
+        </UIProvider>
       </ErrorBoundary>
     </div>
   );

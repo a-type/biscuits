@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@a-type/ui": "0.8.20",
+    "@a-type/ui": "0.8.21",
     "@a-type/utils": "1.1.2",
     "@biscuits/client": "workspace:*",
     "@react-spring/web": "^9.7.3",
@@ -21,7 +21,6 @@
     "raf": "^3.4.1",
     "react": "18.3.1",
     "react-dom": "18.3.1",
-    "react-hot-toast": "^2.4.1",
     "react-hotkeys-hook": "^4.5.0",
     "rete": "^2.0.3",
     "rete-area-plugin": "^2.0.4",

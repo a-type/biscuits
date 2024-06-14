@@ -20,7 +20,7 @@
     "typecheck": "tsc --build tsconfig.json"
   },
   "dependencies": {
-    "@a-type/ui": "^0.8.20",
+    "@a-type/ui": "^0.8.21",
     "@a-type/utils": "^1.0.8",
     "@tiptap/core": "^2.2.4",
     "@tiptap/extension-document": "^2.2.4",

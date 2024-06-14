@@ -8,7 +8,7 @@ import { debounce } from '@a-type/utils';
 import { OnboardingTooltip } from '@biscuits/client';
 import { List } from '@trip-tick.biscuits/verdant';
 import { forwardRef, useState } from 'react';
-import { toast } from 'react-hot-toast';
+import { toast } from '@a-type/ui';
 import { AddSuggested } from './AddSuggested.jsx';
 import { ListInfoEditor } from './ListInfoEditor.jsx';
 import { ListItemEditor } from './ListItemEditor.jsx';

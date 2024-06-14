@@ -1,60 +1,30 @@
-import { clientDescriptor, hooks } from '@/store.js';
-import { ReactNode, Suspense, useLayoutEffect } from 'react';
 import { Pages } from '@/pages/Pages.jsx';
-import { useVisualViewportOffset } from '@a-type/ui/hooks';
-import { Toaster } from 'react-hot-toast';
-import { IconSpritesheet } from '@a-type/ui/components/icon';
+import { clientDescriptor, hooks } from '@/store.js';
 import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
-import { TooltipProvider } from '@a-type/ui/components/tooltip';
-import { ParticleLayer } from '@a-type/ui/components/particles';
-import { PrereleaseWarning, ReloadButton } from '@biscuits/client';
+import { Provider as UIProvider } from '@a-type/ui/components/provider';
 import { H1, P } from '@a-type/ui/components/typography';
-import {
-  useCanSync,
-  Provider,
-  createGraphQLClient,
-  AppPreviewNotice,
-} from '@biscuits/client';
+import { Provider, ReloadButton, useCanSync } from '@biscuits/client';
+import { ReactNode, Suspense } from 'react';
 import { ProjectSettingsDialog } from './components/project/ProjectSettingsDialog.jsx';
 
 export interface AppProps {}
 
-const graphqlClient = createGraphQLClient();
-
 export function App({}: AppProps) {
-  useLayoutEffect(() => {
-    if (typeof window !== 'undefined') {
-      document.body.className = 'theme-lemon';
-    }
-  }, []);
-
-  useVisualViewportOffset();
-
   return (
     <ErrorBoundary fallback={<ErrorFallback />}>
-      <TooltipProvider>
+      <UIProvider>
         <Suspense>
           <Provider
             appId="star-chart"
-            graphqlClient={graphqlClient}
             storeDescriptor={clientDescriptor as any}
           >
             <VerdantProvider>
-              <ParticleLayer>
-                <AppPreviewNotice />
-                <PrereleaseWarning />
-                <Pages />
-                <Toaster
-                  position="bottom-center"
-                  containerClassName="mb-10 sm:mb-0"
-                />
-                <IconSpritesheet />
-                <ProjectSettingsDialog />
-              </ParticleLayer>
+              <Pages />
+              <ProjectSettingsDialog />
             </VerdantProvider>
           </Provider>
         </Suspense>
-      </TooltipProvider>
+      </UIProvider>
     </ErrorBoundary>
   );
 }
