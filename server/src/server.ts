@@ -4,7 +4,7 @@ import { productAdminSetup } from './tasks/productAdminSetup.js';
 import { ALLOWED_ORIGINS } from './config/cors.js';
 import { PORT } from './config/deployedContext.js';
 import { createServerAdapter } from '@whatwg-node/server';
-import { error, json, AutoRouter, cors, IRequest } from 'itty-router';
+import { error, AutoRouter, cors, IRequest } from 'itty-router';
 import { authRouter } from './routers/auth.js';
 import { migrateToLatest } from '@biscuits/db';
 import { verdantRouter } from './routers/verdant.js';
