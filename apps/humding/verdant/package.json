@@ -1,0 +1,21 @@
+{
+  "name": "@humding.biscuits/verdant",
+  "version": "0.0.1",
+  "private": true,
+  "main": "src/index.ts",
+  "type": "module",
+  "scripts": {
+    "generate": "verdant -s ./src/schema.ts -o ./src/client -r",
+    "preflight": "verdant preflight -s ./src/schema.ts -o ./src/client",
+    "build": "pnpm run preflight"
+  },
+  "peerDependencies": {
+    "react": "18.3.1"
+  },
+  "dependencies": {
+    "@verdant-web/cli": "4.4.0",
+    "@verdant-web/common": "2.3.1",
+    "@verdant-web/react": "32.0.0",
+    "@verdant-web/store": "^3.6.3"
+  }
+}

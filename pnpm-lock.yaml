@@ -178,6 +178,8 @@ importers:
         specifier: 18.3.1
         version: 18.3.1
 
+  apps/gnocchi/verdant/dist/esm/client: {}
+
   apps/gnocchi/web:
     dependencies:
       '@a-type/ui':
@@ -433,6 +435,103 @@ importers:
       vite-plugin-pwa:
         specifier: ^0.17.4
         version: 0.17.5(vite@5.1.5)(workbox-build@7.1.1)(workbox-window@6.6.1)
+
+  apps/humding/verdant:
+    dependencies:
+      '@verdant-web/cli':
+        specifier: 4.4.0
+        version: 4.4.0
+      '@verdant-web/common':
+        specifier: 2.3.1
+        version: 2.3.1
+      '@verdant-web/react':
+        specifier: 32.0.0
+        version: 32.0.0(@verdant-web/store@3.6.4)(react@18.3.1)
+      '@verdant-web/store':
+        specifier: ^3.6.3
+        version: 3.6.4
+      react:
+        specifier: 18.3.1
+        version: 18.3.1
+
+  apps/humding/web:
+    dependencies:
+      '@a-type/ui':
+        specifier: 0.8.21
+        version: 0.8.21(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+      '@a-type/utils':
+        specifier: 1.1.3
+        version: 1.1.3
+      '@biscuits/client':
+        specifier: workspace:*
+        version: link:../../../packages/client
+      '@humding.biscuits/verdant':
+        specifier: workspace:*
+        version: link:../verdant
+      '@react-spring/web':
+        specifier: ^9.7.3
+        version: 9.7.3(react-dom@18.3.1)(react@18.3.1)
+      '@use-gesture/react':
+        specifier: ^10.2.24
+        version: 10.3.1(react@18.3.1)
+      '@verdant-web/react-router':
+        specifier: ^0.6.2
+        version: 0.6.2(react@18.3.1)
+      react:
+        specifier: 18.3.1
+        version: 18.3.1
+      react-dom:
+        specifier: 18.3.1
+        version: 18.3.1(react@18.3.1)
+      react-hot-toast:
+        specifier: ^2.4.1
+        version: 2.4.1(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+      unocss:
+        specifier: 0.60.3
+        version: 0.60.3(postcss@8.4.38)(rollup@2.79.1)(vite@5.2.11)
+      valtio:
+        specifier: ^1.13.2
+        version: 1.13.2(@types/react@18.3.3)(react@18.3.1)
+      workbox-core:
+        specifier: ^7.1.0
+        version: 7.1.0
+      workbox-expiration:
+        specifier: ^7.1.0
+        version: 7.1.0
+      workbox-precaching:
+        specifier: ^7.1.0
+        version: 7.1.0
+      workbox-routing:
+        specifier: ^7.1.0
+        version: 7.1.0
+      workbox-strategies:
+        specifier: ^7.1.0
+        version: 7.1.0
+      workbox-window:
+        specifier: ^7.1.0
+        version: 7.1.0
+    devDependencies:
+      '@originjs/vite-plugin-commonjs':
+        specifier: ^1.0.3
+        version: 1.0.3
+      '@types/react':
+        specifier: ^18.2.79
+        version: 18.3.3
+      '@types/react-dom':
+        specifier: ^18.2.25
+        version: 18.3.0
+      '@unocss/transformer-variant-group':
+        specifier: ^0.58.0
+        version: 0.58.8
+      '@vitejs/plugin-react-swc':
+        specifier: 3.5.0
+        version: 3.5.0(vite@5.2.11)
+      vite:
+        specifier: 5.2.11
+        version: 5.2.11
+      vite-plugin-pwa:
+        specifier: ^0.19.8
+        version: 0.19.8(vite@5.2.11)(workbox-build@7.1.1)(workbox-window@7.1.0)
 
   apps/marginalia/verdant:
     dependencies:
@@ -986,6 +1085,9 @@ importers:
       '@a-type/auth-client':
         specifier: 1.0.6
         version: 1.0.6(@a-type/ui@0.8.21)(react@18.3.1)
+      '@a-type/utils':
+        specifier: 1.1.3
+        version: 1.1.3
       '@apollo/client':
         specifier: ^3.9.9
         version: 3.9.9(@types/react@18.3.3)(graphql@16.8.1)(react-dom@18.3.1)(react@18.3.1)
@@ -1441,12 +1543,12 @@ packages:
       '@use-gesture/react': 10.3.1(react@18.3.1)
       browser-image-resizer: 2.4.1
       calendar-blocks: 0.3.1(react@18.3.1)
-      clsx: 2.1.1
+      clsx: 2.1.0
       color-interpolate: 1.0.5
       color-parse: 2.0.2
       color-space: 2.0.1
       date-fns: 2.30.0
-      formik: 2.4.5(react@18.3.1)
+      formik: 2.4.6(react@18.3.1)
       pluralize: 8.0.0
       prosemirror-model: 1.21.1
       react: 18.3.1
@@ -1493,12 +1595,12 @@ packages:
       '@use-gesture/react': 10.3.1(react@18.3.1)
       browser-image-resizer: 2.4.1
       calendar-blocks: 0.3.1(react@18.3.1)
-      clsx: 2.1.1
+      clsx: 2.1.0
       color-interpolate: 1.0.5
       color-parse: 2.0.2
       color-space: 2.0.1
       date-fns: 2.30.0
-      formik: 2.4.5(react@18.3.1)
+      formik: 2.4.6(react@18.3.1)
       pluralize: 8.0.0
       prosemirror-model: 1.21.1
       react: 18.3.1
@@ -1597,12 +1699,12 @@ packages:
       '@use-gesture/react': 10.3.1(react@18.3.1)
       browser-image-resizer: 2.4.1
       calendar-blocks: 0.3.1(react@18.3.1)
-      clsx: 2.1.1
+      clsx: 2.1.0
       color-interpolate: 1.0.5
       color-parse: 2.0.2
       color-space: 2.0.1
       date-fns: 2.30.0
-      formik: 2.4.5(react@18.3.1)
+      formik: 2.4.6(react@18.3.1)
       pluralize: 8.0.0
       prosemirror-model: 1.21.1
       react: 18.3.1
@@ -1649,12 +1751,12 @@ packages:
       '@use-gesture/react': 10.3.1(react@18.3.1)
       browser-image-resizer: 2.4.1
       calendar-blocks: 0.3.1(react@18.3.1)
-      clsx: 2.1.1
+      clsx: 2.1.0
       color-interpolate: 1.0.5
       color-parse: 2.0.2
       color-space: 2.0.1
       date-fns: 2.30.0
-      formik: 2.4.5(react@18.3.1)
+      formik: 2.4.6(react@18.3.1)
       pluralize: 8.0.0
       prosemirror-model: 1.21.1
       react: 18.3.1
@@ -1700,12 +1802,12 @@ packages:
       '@use-gesture/react': 10.3.1(react@18.3.1)
       browser-image-resizer: 2.4.1
       calendar-blocks: 0.3.1(react@18.3.1)
-      clsx: 2.1.1
+      clsx: 2.1.0
       color-interpolate: 1.0.5
       color-parse: 2.0.2
       color-space: 2.0.1
       date-fns: 2.30.0
-      formik: 2.4.5(react@18.3.1)
+      formik: 2.4.6(react@18.3.1)
       pluralize: 8.0.0
       prosemirror-model: 1.21.1
       react: 18.3.1
@@ -2985,7 +3087,7 @@ packages:
     engines: {node: '>=6.9.0'}
     dependencies:
       '@babel/compat-data': 7.24.4
-      '@babel/helper-validator-option': 7.23.5
+      '@babel/helper-validator-option': 7.24.7
       browserslist: 4.23.0
       lru-cache: 5.1.1
       semver: 6.3.1
@@ -3133,8 +3235,8 @@ packages:
     resolution: {integrity: sha512-xpeLqeeRkbxhnYimfr2PC+iA0Q7ljX/d1eZ9/inYbmfG2jpl8Lu3DyXvpOAnrS5kxkfOWJjioIMQsaMBXFI05w==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      '@babel/template': 7.24.6
-      '@babel/types': 7.24.6
+      '@babel/template': 7.24.7
+      '@babel/types': 7.24.7
 
   /@babel/helper-function-name@7.24.7:
     resolution: {integrity: sha512-FyoJTsj/PEUWu1/TYRiXTIHc8lbw+TDYkZuoE43opPS5TrI7MyONBE1oNvfguEXAD9yhQRrVBnXdXzSLQl9XnA==}
@@ -3153,7 +3255,7 @@ packages:
     resolution: {integrity: sha512-SF/EMrC3OD7dSta1bLJIlrsVxwtd0UpjRJqLno6125epQMJ/kyFmpTT4pbvPbdQHzCHg+biQ7Syo8lnDtbR+uA==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      '@babel/types': 7.24.6
+      '@babel/types': 7.24.7
 
   /@babel/helper-hoist-variables@7.24.7:
     resolution: {integrity: sha512-MJJwhkoGy5c4ehfoRyrJ/owKeMl19U54h27YYftT0o2teQ3FJ3nQUf/I3LlJsX4l3qlw7WRXUmiyajvHXoTubQ==}
@@ -3497,6 +3599,7 @@ packages:
   /@babel/helper-validator-option@7.23.5:
     resolution: {integrity: sha512-85ttAOMLsr53VgXkTbkx8oA6YTfT4q7/HzXSLEYmjcSTJPMPQtvq1BD79Byep5xMUYbGRzEpDsjUf3dyp54IKw==}
     engines: {node: '>=6.9.0'}
+    dev: true
 
   /@babel/helper-validator-option@7.24.6:
     resolution: {integrity: sha512-Jktc8KkF3zIkePb48QO+IapbXlSapOW9S+ogZZkcO6bABgYAxtZcjZ/O005111YLf+j4M84uEgwYoidDkXbCkQ==}
@@ -4861,14 +4964,14 @@ packages:
     resolution: {integrity: sha512-7aaBLeDQ4zYcUFDUD41lJc1fG8+5IU9DaNSJAgal866FGvmD5EbWQgnEC6kO1gGLsX0esNkfnJSndbTXA3r7UA==}
     engines: {node: '>=6.9.0'}
     dependencies:
-      '@babel/code-frame': 7.24.6
-      '@babel/generator': 7.24.6
+      '@babel/code-frame': 7.24.7
+      '@babel/generator': 7.24.7
       '@babel/helper-environment-visitor': 7.22.20
       '@babel/helper-function-name': 7.23.0
       '@babel/helper-hoist-variables': 7.22.5
       '@babel/helper-split-export-declaration': 7.24.5
-      '@babel/parser': 7.24.6
-      '@babel/types': 7.24.6
+      '@babel/parser': 7.24.7
+      '@babel/types': 7.24.7
       debug: 4.3.5
       globals: 11.12.0
     transitivePeerDependencies:
@@ -10895,7 +10998,7 @@ packages:
       '@mediapipe/tasks-vision': 0.10.8
       '@react-spring/three': 9.6.1(@react-three/fiber@8.15.19)(react@18.3.1)(three@0.162.0)
       '@react-three/fiber': 8.15.19(react-dom@18.3.1)(react@18.3.1)(three@0.162.0)
-      '@use-gesture/react': 10.3.0(react@18.3.1)
+      '@use-gesture/react': 10.3.1(react@18.3.1)
       camera-controls: 2.7.3(three@0.162.0)
       cross-env: 7.0.3
       detect-gpu: 5.0.37
@@ -13464,7 +13567,7 @@ packages:
   /@unocss/preset-icons@0.60.3:
     resolution: {integrity: sha512-L3Ecr36xC+Y8v5WMQcNsGoOzu0HpgNLh5RlC2abs8OyBDGn1k3UqdEFdrhRt3bXpln9b8JkstHO7ZwYPgr2/Cg==}
     dependencies:
-      '@iconify/utils': 2.1.23
+      '@iconify/utils': 2.1.24
       '@unocss/core': 0.60.3
       ofetch: 1.3.4
     transitivePeerDependencies:
@@ -13802,9 +13905,9 @@ packages:
   /@unocss/transformer-attributify-jsx-babel@0.60.3:
     resolution: {integrity: sha512-6WcEFPSaxscGR22dRUcNqY0ippC3/Q/LBVFVSCJh++hoIPVCZbxF505cPq/bOdF2bpNzj9yXW0OJt03nB505Hg==}
     dependencies:
-      '@babel/core': 7.24.6
-      '@babel/plugin-syntax-jsx': 7.24.1(@babel/core@7.24.6)
-      '@babel/preset-typescript': 7.24.1(@babel/core@7.24.6)
+      '@babel/core': 7.24.7
+      '@babel/plugin-syntax-jsx': 7.24.7(@babel/core@7.24.7)
+      '@babel/preset-typescript': 7.24.7(@babel/core@7.24.7)
       '@unocss/core': 0.60.3
     transitivePeerDependencies:
       - supports-color
@@ -14129,7 +14232,7 @@ packages:
       '@swc/core': 1.5.27
       change-case: 4.1.2
       esbuild: 0.19.12
-      prettier: 3.3.1
+      prettier: 3.2.5
       yargs: 17.7.2
       zod: 3.23.8
     transitivePeerDependencies:
@@ -15484,11 +15587,11 @@ packages:
   /clsx@2.1.0:
     resolution: {integrity: sha512-m3iNNWpd9rl3jvvcBnu70ylMdrXt8Vlq4HYadnU5fwcOtvkSQWPmj7amUcDT2qYI7risszBjI5AUIUox9D16pg==}
     engines: {node: '>=6'}
-    dev: false
 
   /clsx@2.1.1:
     resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
     engines: {node: '>=6'}
+    dev: false
 
   /collapse-white-space@2.1.0:
     resolution: {integrity: sha512-loKTxY1zCOuG4j9f6EPnuyyYkf58RnhhWTvRoZEokgB+WbdXehfjFviyOVYkqzEWz1Q5kRiZdBYS5SwxbQYwzw==}
@@ -17723,6 +17826,7 @@ packages:
       react-fast-compare: 2.0.4
       tiny-warning: 1.0.3
       tslib: 2.6.2
+    dev: false
 
   /formik@2.4.6(react@18.3.1):
     resolution: {integrity: sha512-A+2EI7U7aG296q2TLGvNapDNTZp1khVt5Vk0Q/fyfSROss0V/V6+txt2aJnwEos44IxTCW/LYAi/zgWzlevj+g==}
@@ -17738,7 +17842,6 @@ packages:
       react-fast-compare: 2.0.4
       tiny-warning: 1.0.3
       tslib: 2.6.3
-    dev: false
 
   /forwarded@0.2.0:
     resolution: {integrity: sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==}
@@ -18527,6 +18630,7 @@ packages:
 
   /inflight@1.0.6:
     resolution: {integrity: sha512-k92I/b08q4wvFscXCLvqfsHCrjrF7yiXsQuIVvVE7N82W3+aqpzuUdBbfhWcy/FZR3/4IgflMgKLOsvPDrGCJA==}
+    deprecated: This module is not supported, and leaks memory. Do not use it. Check out lru-cache if you want a good and tested way to coalesce async requests by a key value, which is much more comprehensive and powerful.
     dependencies:
       once: 1.4.0
       wrappy: 1.0.2
@@ -18631,7 +18735,7 @@ packages:
   /is-core-module@2.13.1:
     resolution: {integrity: sha512-hHrIjvZsftOsvKSn2TRYl63zvxsgE0K+0mYMoH6gD4omR5IWB2KynivBQczo3+wF1cCkjzvptnI9Q0sPU66ilw==}
     dependencies:
-      hasown: 2.0.0
+      hasown: 2.0.2
 
   /is-data-view@1.0.1:
     resolution: {integrity: sha512-AHkaJrsUVW6wq6JS8y3JnM/GJF/9cf+k20+iDzlSaJrinEo5+7vRiteOSwBhHRiAyQATN1AmY4hwzxJKPmYf+w==}
@@ -20794,12 +20898,6 @@ packages:
 
   /prettier@3.2.5:
     resolution: {integrity: sha512-3/GWa9aOC0YeD7LUfvOG2NiDyhOWRvt1k+rcKhOuYnMY24iiCphgneUfJDyFXd6rZCAnuLBv6UeAULtrhT/F4A==}
-    engines: {node: '>=14'}
-    hasBin: true
-    dev: false
-
-  /prettier@3.3.1:
-    resolution: {integrity: sha512-7CAwy5dRsxs8PHXT3twixW9/OEll8MLE0VRPCJyl7CkS6VHGPSlsVaWTiASPTyGyYRyApxlaWTzwUxVNrhcwDg==}
     engines: {node: '>=14'}
     hasBin: true
     dev: false
@@ -23936,7 +24034,7 @@ packages:
       '@vite-pwa/assets-generator':
         optional: true
     dependencies:
-      debug: 4.3.4
+      debug: 4.3.5
       fast-glob: 3.3.2
       pretty-bytes: 6.1.1
       vite: 5.2.11
@@ -23958,7 +24056,7 @@ packages:
       '@vite-pwa/assets-generator':
         optional: true
     dependencies:
-      debug: 4.3.4
+      debug: 4.3.5
       fast-glob: 3.3.2
       pretty-bytes: 6.1.1
       vite: 5.3.1(@types/node@20.12.7)

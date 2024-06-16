@@ -4,7 +4,7 @@ import { VerdantContext } from '../verdant.js';
 import { Icon } from '@a-type/ui/components/icon';
 import { useAppId } from './Context.js';
 import { appsById } from '@biscuits/apps';
-import { clsx } from '@a-type/ui';
+import { clsx, toast } from '@a-type/ui';
 import { useCanSync } from '../index.js';
 import { H2, P } from '@a-type/ui/components/typography';
 import { ConfirmedButton } from '@a-type/ui/components/button';
@@ -101,10 +101,16 @@ export function ImportDataButton({
 
 export interface ManageStorageProps {
   className?: string;
-  onError: (error: Error) => void;
+  onError?: (error: Error) => void;
 }
 
-export function ManageStorage({ className, onError }: ManageStorageProps) {
+function defaultOnError(error: Error) {
+  toast.error(error.message);
+}
+export function ManageStorage({
+  className,
+  onError = defaultOnError,
+}: ManageStorageProps) {
   const isSubscribed = useCanSync();
   const clientDesc = useContext(VerdantContext);
 

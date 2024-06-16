@@ -118,6 +118,19 @@ export const apps = [
     url: 'https://star-chart.biscuits.club',
     prerelease: true,
   } as AppManifest<'star-chart'>,
+  {
+    id: 'humding',
+    demoVideoSrc: '',
+    description: 'An app for playing it by ear',
+    devOriginOverride: 'http://localhost:6225',
+    iconPath: 'icon.png',
+    name: 'Humding',
+    paidDescription:
+      'Share your songs with others and sync to all your devices',
+    paidFeatures: [],
+    url: 'https://humding.biscuits.club',
+    prerelease: true,
+  } as AppManifest<'humding'>,
 ] as const;
 
 export type AppId = (typeof apps)[number]['id'];

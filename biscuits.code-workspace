@@ -33,6 +33,10 @@
       "path": "apps/star-chart",
     },
     {
+      "name": "🎸 Humding",
+      "path": "apps/humding",
+    },
+    {
       "name": "📃 Scripts",
       "path": "scripts",
     },

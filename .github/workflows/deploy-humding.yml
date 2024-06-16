@@ -1,0 +1,57 @@
+name: humding deploy
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/humding/**'
+      - 'packages/client/**'
+      - 'packages/apps/**'
+      - '.github/workflows/deploy-humding.yml'
+
+jobs:
+  build-and-deploy-humding:
+    name: Build and deploy humding
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 8.12.1
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --filter @humding.biscuits/web...
+
+      - name: Build humding
+        run: pnpm --filter @humding.biscuits/web... run build
+        env:
+          VITE_API_ORIGIN: ${{ vars.API_ORIGIN }}
+          VITE_HOME_ORIGIN: ${{ vars.HOME_ORIGIN }}
+          VITE_PUBLIC_URL: https://humding.biscuits.club
+
+      - name: Deploy humding to S3
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --follow-symlinks --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.S3_BUCKET_HUMDING }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.DEPLOYER_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.DEPLOYER_AWS_SECRET_ACCESS_KEY }}
+          SOURCE_DIR: './apps/humding/web/dist'
+
+      - name: Invalidate CloudFront cache
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.DEPLOYER_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.DEPLOYER_AWS_SECRET_ACCESS_KEY }}
+          DISTRIBUTION: ${{ secrets.CLOUDFRONT_ID_HUMDING }}
+          PATHS: '/*'
+          AWS_REGION: 'us-east-1'

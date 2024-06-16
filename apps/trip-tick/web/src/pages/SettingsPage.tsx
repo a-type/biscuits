@@ -1,5 +1,4 @@
 import { TemperatureUnitSelect } from '@/components/weather/TemperatureUnit.jsx';
-import { clientDescriptor } from '@/store.js';
 import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
 import { PageContent, PageFixedArea } from '@a-type/ui/components/layouts';

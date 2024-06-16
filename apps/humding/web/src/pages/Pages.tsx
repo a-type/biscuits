@@ -8,12 +8,17 @@ import { updateApp, updateState } from '@/updateState.js';
 import { Link } from '@verdant-web/react-router';
 import { Button } from '@a-type/ui/components/button';
 import { ReloadButton } from '@biscuits/client';
+import { PageRoot } from '@a-type/ui/components/layouts';
 
 const routes = makeRoutes([
   {
     path: '/',
     index: true,
     component: HomePage,
+  },
+  {
+    path: '/songs/:songId',
+    component: lazy(() => import('./SongPage.jsx')),
   },
   {
     path: '/settings',
@@ -35,9 +40,11 @@ export function Pages() {
   return (
     <ErrorBoundary fallback={(props) => <ErrorFallback {...props} />}>
       <Suspense fallback={<Spinner />}>
-        <Router routes={routes} onNavigate={handleNavigate}>
-          <Outlet />
-        </Router>
+        <PageRoot>
+          <Router routes={routes} onNavigate={handleNavigate}>
+            <Outlet />
+          </Router>
+        </PageRoot>
       </Suspense>
     </ErrorBoundary>
   );

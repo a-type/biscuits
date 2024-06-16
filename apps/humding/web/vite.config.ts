@@ -16,10 +16,10 @@ export default defineConfig(({ command, mode }) => ({
       srcDir: 'src',
       filename: 'service-worker.ts',
       manifest: {
-        id: '{{todoId}}-main',
-        name: '{{todo}}',
-        short_name: '{{todo}}',
-        description: '',
+        id: 'humding-main',
+        name: 'Humding',
+        short_name: 'Humding',
+        description: 'An app for playing it by ear',
         theme_color: '#ffffff',
         background_color: '#ffffff',
         icons: icons(),
@@ -55,7 +55,7 @@ export default defineConfig(({ command, mode }) => ({
     },
   },
   server: {
-    port: 5555,
+    port: 6225,
   },
   build: {
     sourcemap: true,
