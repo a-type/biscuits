@@ -7,10 +7,7 @@ export const client = createGraphQLClient({
     toast.error(err);
   },
   onLoggedOut: () => {
-    if (
-      window.location.pathname !== '/' &&
-      window.location.pathname !== '/join'
-    ) {
+    if (window.location.pathname === '/plan') {
       // redirect to login
       window.location.href = '/login';
     }
