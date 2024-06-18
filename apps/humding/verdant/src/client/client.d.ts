@@ -94,7 +94,6 @@ export type SongLinesItemWordsItem = ObjectEntity<
 export type SongLinesItemWordsItemId = string;
 export type SongLinesItemWordsItemText = string;
 export type SongLinesItemWordsItemGapStart = number;
-export type SongLinesItemWordsItemGapEnd = number;
 export type SongLinesItemWordsItemChords = ListEntity<
   SongLinesItemWordsItemChordsInit,
   SongLinesItemWordsItemChordsDestructured,
@@ -126,7 +125,6 @@ export type SongLinesItemWordsItemInit = {
   id?: string;
   text?: string;
   gapStart?: number;
-  gapEnd?: number;
   chords?: SongLinesItemWordsItemChordsInit;
 };
 export type SongLinesItemWordsInit = SongLinesItemWordsItemInit[];
@@ -150,7 +148,6 @@ export type SongLinesItemWordsItemDestructured = {
   id: string;
   text: string;
   gapStart: number;
-  gapEnd: number;
   chords: SongLinesItemWordsItemChords;
 };
 export type SongLinesItemWordsDestructured = SongLinesItemWordsItem[];
@@ -174,7 +171,6 @@ export type SongLinesItemWordsItemSnapshot = {
   id: string;
   text: string;
   gapStart: number;
-  gapEnd: number;
   chords: SongLinesItemWordsItemChordsSnapshot;
 };
 export type SongLinesItemWordsSnapshot = SongLinesItemWordsItemSnapshot[];

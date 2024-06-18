@@ -20,7 +20,6 @@ export type SongLinesItemWordsItemSnapshot = {
   id: string;
   text: string;
   gapStart: number;
-  gapEnd: number;
   chords: SongLinesItemWordsItemChordsSnapshot;
 };
 export type SongLinesItemWordsSnapshot = SongLinesItemWordsItemSnapshot[];
@@ -44,7 +43,6 @@ export type SongLinesItemWordsItemInit = {
   id?: string;
   text?: string;
   gapStart?: number;
-  gapEnd?: number;
   chords?: SongLinesItemWordsItemChordsInit;
 };
 export type SongLinesItemWordsInit = SongLinesItemWordsItemInit[];

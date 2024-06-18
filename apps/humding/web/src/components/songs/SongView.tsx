@@ -8,6 +8,7 @@ import {
   SongLinesItemWordsItem,
   SongLinesItemWordsItemChords,
   SongLinesItemWordsItemChordsItem,
+  SongLinesItemWordsItemInit,
 } from '@humding.biscuits/verdant';
 import {
   forwardRef,
@@ -21,10 +22,15 @@ import {
 import { useDrag } from '@use-gesture/react';
 import { clsx } from '@a-type/ui';
 import { stopPropagation } from '@a-type/utils';
+import { proxy, useSnapshot } from 'valtio';
 
 export interface SongViewProps {
   song: Song;
 }
+
+const focusState = proxy({
+  id: null as string | null,
+});
 
 export function SongView({ song }: SongViewProps) {
   const { lines } = hooks.useWatch(song);
@@ -38,6 +44,11 @@ export function SongView({ song }: SongViewProps) {
           onDelete={() => {
             lines.delete(i);
           }}
+          onPush={(word) => {
+            lines.push({
+              words: [word],
+            });
+          }}
         />
       ))}
       <EmptyLine song={song} />
@@ -48,52 +59,56 @@ export function SongView({ song }: SongViewProps) {
 function SongViewLine({
   line,
   onDelete,
+  onPush,
 }: {
   line: SongLinesItem;
   onDelete: () => void;
+  onPush: (word: SongLinesItemWordsItemInit) => void;
 }) {
   const { words } = hooks.useWatch(line);
   hooks.useWatch(words);
-  const [autoFocus, setAutoFocus] = useState<string | null>(null);
 
   return (
-    <div className="col w-full items-start">
-      <div className="row w-full">
+    <div className="col w-full items-start overflow-x-hidden">
+      <div className="row w-full flex-wrap">
         {words.map((word, i) => (
           <SongViewWord
             word={word}
+            wordIndex={i}
+            last={i === words.length - 1}
+            line={line}
             key={word.get('id')}
             onInsertBefore={(gap, text) => {
               const wordId = id();
-              words.insert(i, { gapEnd: gap, text, id: wordId });
-              setAutoFocus(wordId);
+              words.insert(i, { text, id: wordId });
+              focusState.id = wordId;
             }}
             onInsertAfter={(gap, text, line) => {
-              // TODO: line split
               const wordId = id();
-              words.insert(i + 1, { gapStart: gap, text, id: wordId });
-              setAutoFocus(wordId);
+              if (line) {
+                onPush({ text, id: wordId });
+              } else {
+                words.insert(i + 1, { gapStart: gap, text, id: wordId });
+              }
+              focusState.id = wordId;
             }}
-            autoFocus={autoFocus}
             onDelete={() => {
               if (words.length === 1) {
                 onDelete();
               } else {
                 words.delete(i);
-                const nextWord = words.get(i);
-                setAutoFocus(nextWord?.get('id') ?? null);
+                if (i > 0) {
+                  const nextWord = words.get(i - 1);
+                  focusState.id = nextWord?.get('id') ?? null;
+                } else {
+                  // TODO: focus last word of previous line when deleting
+                  // first word of line.
+                  focusState.id = null;
+                }
               }
             }}
           />
         ))}
-        <Gap
-          onClick={({ splitAt }) => {
-            words.push({
-              text: '',
-              gapStart: splitAt,
-            });
-          }}
-        />
       </div>
     </div>
   );
@@ -103,19 +118,23 @@ interface SongViewWordProps {
   onInsertBefore: (gap: number, orphan: string) => void;
   onInsertAfter: (gap: number, orphan: string, line: boolean) => void;
   onDelete?: () => void;
-  autoFocus?: string | null;
   goToNext?: () => void;
   goToPrevious?: () => void;
   autoSelect?: boolean;
   word: SongLinesItemWordsItem;
+  line: SongLinesItem;
+  wordIndex: number;
+  last: boolean;
 }
 
 function SongViewWord({
   word,
+  line,
+  wordIndex,
+  last,
   onInsertBefore,
   onInsertAfter,
   onDelete,
-  autoFocus,
   goToNext,
   goToPrevious,
   ...rest
@@ -126,32 +145,26 @@ function SongViewWord({
   // I think each word just needs a single starting gap, and the 'end gap' should be
   // the start gap of the next word. This will require cross-word coordination... which
   // is hard with the debouncing...
-  const { id, text, gapStart, gapEnd, chords } = hooks.useWatch(word);
-  // debounce changes so that writes don't happen too frequently
-  const [localValue, setLocalValue] = useDebouncedState(text, (value) =>
-    word.set('text', value),
-  );
-  const [localStartGap, setLocalStartGap] = useDebouncedState(
-    gapStart,
-    (value) => word.set('gapStart', value),
-  );
-  const [localEndGap, setLocalEndGap] = useDebouncedState(gapEnd, (value) =>
-    word.set('gapEnd', value),
-  );
+  const { id, text, gapStart, chords } = hooks.useWatch(word);
 
   const bind = useDrag(
     ({ delta: [dx] }) => {
+      const nextWord = line.get('words').get(wordIndex + 1);
+
       if (dx < 0) {
-        if (localStartGap > 0) {
-          setLocalStartGap(localStartGap + dx);
+        if (gapStart > 0) {
+          word.set('gapStart', gapStart + dx);
         } else {
-          setLocalEndGap(localEndGap - dx);
+          // if next word, reduce its gap start
+          if (nextWord) {
+            nextWord.set('gapStart', nextWord.get('gapStart') - dx);
+          }
         }
       } else if (dx > 0) {
-        if (localEndGap > 0) {
-          setLocalEndGap(localEndGap - dx);
+        if (nextWord && nextWord.get('gapStart') > 0) {
+          nextWord.set('gapStart', nextWord.get('gapStart') - dx);
         } else {
-          setLocalStartGap(localStartGap + dx);
+          word.set('gapStart', gapStart + dx);
         }
       }
     },
@@ -160,26 +173,28 @@ function SongViewWord({
     },
   );
 
+  const wordFocused = useSnapshot(focusState).id === id;
+
   return (
-    <div className="flex flex-col items-start flex-grow-1 flex-shrink-0 flex-basis-auto">
+    <div className="flex flex-col items-start flex-shrink-0 flex-basis-auto">
       <SongViewWordChords chords={chords} />
-      <div className="flex flex-row items-start w-full">
+      <div className="flex flex-row items-start">
         <Gap
           onClick={({ splitAt }) => {
-            setLocalStartGap(localStartGap - splitAt);
+            word.set('gapStart', gapStart - splitAt);
             onInsertBefore(splitAt, '');
           }}
-          size={localStartGap}
+          size={gapStart}
         />
         <div className="col flex-1">
           <TextField
-            value={localValue}
-            onValueChange={setLocalValue}
+            value={text}
+            onValueChange={(v) => word.set('text', v)}
             onSplit={(before, after, line) => {
-              setLocalValue(before);
+              word.set('text', before);
               onInsertAfter(0, after, line);
             }}
-            autoFocus={autoFocus === id}
+            autoFocus={wordFocused}
             onDiscard={onDelete}
             goToNext={goToNext}
             goToPrevious={goToPrevious}
@@ -192,13 +207,6 @@ function SongViewWord({
             &lt;&gt;
           </div>
         </div>
-        <Gap
-          onClick={({ splitAt }) => {
-            setLocalEndGap(splitAt);
-            onInsertAfter(localEndGap - splitAt, '', true);
-          }}
-          size={localEndGap}
-        />
       </div>
     </div>
   );
@@ -217,12 +225,13 @@ function SongViewWordChords({
 
     chords.push({
       value: '',
-      offset: Math.max(0.1, Math.min(0.9, xPosition / rect.width)),
+      offset: Math.max(0.1 * rect.width, Math.min(0.9 * rect.width, xPosition)),
     });
     ev.stopPropagation();
   }, []);
+
   return (
-    <div className="relative h-[60px] w-full" onClick={addChord} {...rest}>
+    <div className="relative h-[60px]" onClick={addChord} {...rest}>
       {chords.map((chord) => (
         <SongViewChord
           chord={chord}
@@ -236,28 +245,19 @@ function SongViewWordChords({
 
 function SongViewChord({
   chord,
-  autoFocus,
   onDelete,
   ...rest
 }: {
   chord: SongLinesItemWordsItemChordsItem;
-  autoFocus?: boolean;
   onDelete?: () => void;
 }) {
-  const { value, offset } = hooks.useWatch(chord);
-  const [localValue, setLocalValue] = useDebouncedState(value, (value) =>
-    chord.set('value', value),
-  );
-  const [localOffset, setLocalOffset] = useDebouncedState(offset, (value) =>
-    chord.set('offset', value),
-  );
+  const { id, value, offset } = hooks.useWatch(chord);
+
+  const chordFocused = useSnapshot(focusState).id === id;
 
   const bind = useDrag(
     ({ delta: [dx], event }) => {
-      const width = (event.currentTarget as HTMLElement).getBoundingClientRect()
-        .width;
-      const dxPercent = dx / width;
-      setLocalOffset(Math.max(0.1, Math.min(0.9, localOffset + dxPercent)));
+      chord.set('offset', Math.max(0, offset + dx));
     },
     {
       axis: 'x',
@@ -266,22 +266,22 @@ function SongViewChord({
 
   return (
     <div
-      className="flex flex-col flex-grow-1 flex-shrink-0 flex-basis-auto absolute z-1"
+      className="flex flex-col flex-grow-1 flex-shrink-0 flex-basis-auto z-1"
       style={{
-        left: `${localOffset * 100}%`,
+        marginLeft: offset,
       }}
       onClick={stopPropagation}
     >
       <TextField
-        value={localValue}
-        onValueChange={setLocalValue}
+        value={value}
+        onValueChange={(v) => chord.set('value', v)}
         onSplit={(before, after, line) => {
-          setLocalValue(before);
+          chord.set('value', before);
           chord.get('offset') === 0
             ? chord.set('offset', 1)
             : chord.set('offset', 0);
         }}
-        autoFocus={autoFocus}
+        autoFocus={chordFocused}
         onDiscard={onDelete}
         {...rest}
       />
@@ -298,9 +298,11 @@ function SongViewChord({
 function Gap({
   onClick: handleClick,
   size,
+  className,
 }: {
   onClick: (info: { splitAt: number }) => void;
   size?: number;
+  className?: string;
 }) {
   const onClick = (ev: MouseEvent<HTMLButtonElement>) => {
     // get relative x pixel position within button
@@ -309,12 +311,13 @@ function Gap({
   };
   return (
     <Button
+      data-testid="gap"
       color="unstyled"
       style={{
         width: size,
-        flex: size === undefined ? 1 : undefined,
+        flexBasis: size,
       }}
-      className="h-6"
+      className={clsx('h-6', className)}
       onClick={onClick}
     />
   );

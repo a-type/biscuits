@@ -26,9 +26,6 @@ const songs = schema.collection({
                 gapStart: schema.fields.number({
                   default: 0,
                 }),
-                gapEnd: schema.fields.number({
-                  default: 0,
-                }),
 
                 chords: schema.fields.array({
                   items: schema.fields.object({
