@@ -20,6 +20,7 @@ import { useSnapshot } from 'valtio';
 import { projectState } from './state.js';
 import { CARD_MIN_HEIGHT, CARD_WIDTH } from './constants.js';
 import { CanvasGestureInfo } from '../canvas/Canvas.js';
+import { Vector2 } from '../canvas/types.js';
 
 export interface TaskNodeProps {
   task: Task;
@@ -34,10 +35,23 @@ export function TaskNode({ task }: TaskNodeProps) {
   const { id, position, completedAt } = hooks.useWatch(task);
   const initialPosition = useMemo(() => position.getSnapshot(), []);
 
+  const client = hooks.useClient();
+  const updatePosition = useCallback(
+    (vec: Vector2) => {
+      client
+        .batch({ batchName: 'task-move', timeout: 40, max: 100 })
+        .run(() => {
+          position.update(vec);
+        });
+    },
+    [position, client],
+  );
+
   const canvasObject = useCanvasObject({
     initialPosition,
     objectId: id,
-    onDrop: position.update,
+    onDrop: updatePosition,
+    onDrag: updatePosition,
     metadata: { type: 'task' },
   });
 

@@ -19,16 +19,33 @@ var songs = schema.collection({
           words: schema.fields.array({
             items: schema.fields.object({
               properties: {
-                text: schema.fields.string(),
-                gap: schema.fields.number()
-              }
-            })
-          }),
-          chords: schema.fields.array({
-            items: schema.fields.object({
-              properties: {
-                value: schema.fields.string(),
-                gap: schema.fields.number()
+                id: schema.fields.string({
+                  default: schema.generated.id
+                }),
+                text: schema.fields.string({
+                  default: ""
+                }),
+                gapStart: schema.fields.number({
+                  default: 0
+                }),
+                gapEnd: schema.fields.number({
+                  default: 0
+                }),
+                chords: schema.fields.array({
+                  items: schema.fields.object({
+                    properties: {
+                      id: schema.fields.string({
+                        default: schema.generated.id
+                      }),
+                      value: schema.fields.string({
+                        default: ""
+                      }),
+                      offset: schema.fields.number({
+                        default: 0
+                      })
+                    }
+                  })
+                })
               }
             })
           })

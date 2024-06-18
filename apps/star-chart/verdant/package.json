@@ -14,8 +14,8 @@
   },
   "dependencies": {
     "@verdant-web/cli": "4.4.0",
-    "@verdant-web/common": "2.3.1",
-    "@verdant-web/react": "32.0.0",
-    "@verdant-web/store": "3.6.4"
+    "@verdant-web/common": "2.3.2",
+    "@verdant-web/react": "33.0.0",
+    "@verdant-web/store": "3.7.0"
   }
 }

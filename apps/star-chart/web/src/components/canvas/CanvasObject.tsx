@@ -185,10 +185,12 @@ export function useCanvasObject({
     },
     onDrag: (info) => {
       if (!selected && info.targetId !== objectId) return;
-      onDrag?.(info.worldPosition);
-      positionSpring.set(
-        addVectors(snapshotLiveVector(positionStyle), info.delta),
+      const finalPosition = addVectors(
+        snapshotLiveVector(positionStyle),
+        info.delta,
       );
+      onDrag?.(finalPosition);
+      positionSpring.set(finalPosition);
       if (vectorLength(info.delta) > 5) {
         setIsDragging(true);
       }

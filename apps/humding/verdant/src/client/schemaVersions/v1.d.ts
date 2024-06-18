@@ -9,14 +9,22 @@ export type SongSnapshot = {
   lines: SongLinesSnapshot;
 };
 
-export type SongLinesItemWordsItemSnapshot = { text: string; gap: number };
-export type SongLinesItemWordsSnapshot = SongLinesItemWordsItemSnapshot[];
-export type SongLinesItemChordsItemSnapshot = { value: string; gap: number };
-export type SongLinesItemChordsSnapshot = SongLinesItemChordsItemSnapshot[];
-export type SongLinesItemSnapshot = {
-  words: SongLinesItemWordsSnapshot;
-  chords: SongLinesItemChordsSnapshot;
+export type SongLinesItemWordsItemChordsItemSnapshot = {
+  id: string;
+  value: string;
+  offset: number;
 };
+export type SongLinesItemWordsItemChordsSnapshot =
+  SongLinesItemWordsItemChordsItemSnapshot[];
+export type SongLinesItemWordsItemSnapshot = {
+  id: string;
+  text: string;
+  gapStart: number;
+  gapEnd: number;
+  chords: SongLinesItemWordsItemChordsSnapshot;
+};
+export type SongLinesItemWordsSnapshot = SongLinesItemWordsItemSnapshot[];
+export type SongLinesItemSnapshot = { words: SongLinesItemWordsSnapshot };
 export type SongLinesSnapshot = SongLinesItemSnapshot[];
 export type SongInit = {
   id?: string;
@@ -25,14 +33,22 @@ export type SongInit = {
   lines?: SongLinesInit;
 };
 
-export type SongLinesItemWordsItemInit = { text: string; gap: number };
-export type SongLinesItemWordsInit = SongLinesItemWordsItemInit[];
-export type SongLinesItemChordsItemInit = { value: string; gap: number };
-export type SongLinesItemChordsInit = SongLinesItemChordsItemInit[];
-export type SongLinesItemInit = {
-  words?: SongLinesItemWordsInit;
-  chords?: SongLinesItemChordsInit;
+export type SongLinesItemWordsItemChordsItemInit = {
+  id?: string;
+  value?: string;
+  offset?: number;
 };
+export type SongLinesItemWordsItemChordsInit =
+  SongLinesItemWordsItemChordsItemInit[];
+export type SongLinesItemWordsItemInit = {
+  id?: string;
+  text?: string;
+  gapStart?: number;
+  gapEnd?: number;
+  chords?: SongLinesItemWordsItemChordsInit;
+};
+export type SongLinesItemWordsInit = SongLinesItemWordsItemInit[];
+export type SongLinesItemInit = { words?: SongLinesItemWordsInit };
 export type SongLinesInit = SongLinesItemInit[];
 
 export type MigrationTypes = {

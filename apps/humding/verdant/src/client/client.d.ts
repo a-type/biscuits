@@ -91,20 +91,23 @@ export type SongLinesItemWordsItem = ObjectEntity<
   SongLinesItemWordsItemDestructured,
   SongLinesItemWordsItemSnapshot
 >;
+export type SongLinesItemWordsItemId = string;
 export type SongLinesItemWordsItemText = string;
-export type SongLinesItemWordsItemGap = number;
-export type SongLinesItemChords = ListEntity<
-  SongLinesItemChordsInit,
-  SongLinesItemChordsDestructured,
-  SongLinesItemChordsSnapshot
+export type SongLinesItemWordsItemGapStart = number;
+export type SongLinesItemWordsItemGapEnd = number;
+export type SongLinesItemWordsItemChords = ListEntity<
+  SongLinesItemWordsItemChordsInit,
+  SongLinesItemWordsItemChordsDestructured,
+  SongLinesItemWordsItemChordsSnapshot
 >;
-export type SongLinesItemChordsItem = ObjectEntity<
-  SongLinesItemChordsItemInit,
-  SongLinesItemChordsItemDestructured,
-  SongLinesItemChordsItemSnapshot
+export type SongLinesItemWordsItemChordsItem = ObjectEntity<
+  SongLinesItemWordsItemChordsItemInit,
+  SongLinesItemWordsItemChordsItemDestructured,
+  SongLinesItemWordsItemChordsItemSnapshot
 >;
-export type SongLinesItemChordsItemValue = string;
-export type SongLinesItemChordsItemGap = number;
+export type SongLinesItemWordsItemChordsItemId = string;
+export type SongLinesItemWordsItemChordsItemValue = string;
+export type SongLinesItemWordsItemChordsItemOffset = number;
 export type SongInit = {
   id?: string;
   createdAt?: number;
@@ -112,14 +115,22 @@ export type SongInit = {
   lines?: SongLinesInit;
 };
 
-export type SongLinesItemWordsItemInit = { text: string; gap: number };
-export type SongLinesItemWordsInit = SongLinesItemWordsItemInit[];
-export type SongLinesItemChordsItemInit = { value: string; gap: number };
-export type SongLinesItemChordsInit = SongLinesItemChordsItemInit[];
-export type SongLinesItemInit = {
-  words?: SongLinesItemWordsInit;
-  chords?: SongLinesItemChordsInit;
+export type SongLinesItemWordsItemChordsItemInit = {
+  id?: string;
+  value?: string;
+  offset?: number;
 };
+export type SongLinesItemWordsItemChordsInit =
+  SongLinesItemWordsItemChordsItemInit[];
+export type SongLinesItemWordsItemInit = {
+  id?: string;
+  text?: string;
+  gapStart?: number;
+  gapEnd?: number;
+  chords?: SongLinesItemWordsItemChordsInit;
+};
+export type SongLinesItemWordsInit = SongLinesItemWordsItemInit[];
+export type SongLinesItemInit = { words?: SongLinesItemWordsInit };
 export type SongLinesInit = SongLinesItemInit[];
 export type SongDestructured = {
   id: string;
@@ -128,17 +139,22 @@ export type SongDestructured = {
   lines: SongLines;
 };
 
-export type SongLinesItemWordsItemDestructured = { text: string; gap: number };
-export type SongLinesItemWordsDestructured = SongLinesItemWordsItem[];
-export type SongLinesItemChordsItemDestructured = {
+export type SongLinesItemWordsItemChordsItemDestructured = {
+  id: string;
   value: string;
-  gap: number;
+  offset: number;
 };
-export type SongLinesItemChordsDestructured = SongLinesItemChordsItem[];
-export type SongLinesItemDestructured = {
-  words: SongLinesItemWords;
-  chords: SongLinesItemChords;
+export type SongLinesItemWordsItemChordsDestructured =
+  SongLinesItemWordsItemChordsItem[];
+export type SongLinesItemWordsItemDestructured = {
+  id: string;
+  text: string;
+  gapStart: number;
+  gapEnd: number;
+  chords: SongLinesItemWordsItemChords;
 };
+export type SongLinesItemWordsDestructured = SongLinesItemWordsItem[];
+export type SongLinesItemDestructured = { words: SongLinesItemWords };
 export type SongLinesDestructured = SongLinesItem[];
 export type SongSnapshot = {
   id: string;
@@ -147,14 +163,22 @@ export type SongSnapshot = {
   lines: SongLinesSnapshot;
 };
 
-export type SongLinesItemWordsItemSnapshot = { text: string; gap: number };
-export type SongLinesItemWordsSnapshot = SongLinesItemWordsItemSnapshot[];
-export type SongLinesItemChordsItemSnapshot = { value: string; gap: number };
-export type SongLinesItemChordsSnapshot = SongLinesItemChordsItemSnapshot[];
-export type SongLinesItemSnapshot = {
-  words: SongLinesItemWordsSnapshot;
-  chords: SongLinesItemChordsSnapshot;
+export type SongLinesItemWordsItemChordsItemSnapshot = {
+  id: string;
+  value: string;
+  offset: number;
 };
+export type SongLinesItemWordsItemChordsSnapshot =
+  SongLinesItemWordsItemChordsItemSnapshot[];
+export type SongLinesItemWordsItemSnapshot = {
+  id: string;
+  text: string;
+  gapStart: number;
+  gapEnd: number;
+  chords: SongLinesItemWordsItemChordsSnapshot;
+};
+export type SongLinesItemWordsSnapshot = SongLinesItemWordsItemSnapshot[];
+export type SongLinesItemSnapshot = { words: SongLinesItemWordsSnapshot };
 export type SongLinesSnapshot = SongLinesItemSnapshot[];
 
 /** Index filters for Song **/

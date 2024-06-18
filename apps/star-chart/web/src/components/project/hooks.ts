@@ -50,6 +50,7 @@ export function useProjectData(projectId: string) {
   });
 
   useEffect(() => {
+    const noticedCompleted = new Map<string, boolean>();
     // subscribe to all tasks and connections to recompute analysis
     function recompute() {
       const upstreams: Record<string, AnalysisDependency[]> = {};
@@ -93,7 +94,19 @@ export function useProjectData(projectId: string) {
     recompute();
 
     const unsubs = [
-      ...tasks.map((t) => t.subscribe('change', recompute)),
+      ...tasks.map((t) =>
+        t.subscribe('change', () => {
+          // avoid recomputing except for cases where the task's completedAt changes
+          // from the observed value. Task position changes frequently and we don't want
+          // to recompute the analysis for that.
+          // TODO: build per-key change watching into Verdant
+          const completedAt = t.get('completedAt');
+          if (noticedCompleted.get(t.get('id')) !== !!completedAt) {
+            noticedCompleted.set(t.get('id'), !!completedAt);
+            recompute();
+          }
+        }),
+      ),
       ...connections.map((c) => c.subscribe('change', recompute)),
     ];
 
