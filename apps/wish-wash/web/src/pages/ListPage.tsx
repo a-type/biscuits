@@ -1,7 +1,9 @@
+import { ListDetailsEditButton } from '@/components/lists/ListDetailsDialog.jsx';
+import { ListPicker } from '@/components/lists/ListPicker.jsx';
 import { ListView } from '@/components/lists/ListView.jsx';
 import { hooks } from '@/store.js';
 import { Button } from '@a-type/ui/components/button';
-import { PageContent } from '@a-type/ui/components/layouts';
+import { PageContent, PageFixedArea } from '@a-type/ui/components/layouts';
 import { H1 } from '@a-type/ui/components/typography';
 import { useLocalStorage } from '@biscuits/client';
 import { Link, useNavigate, useParams } from '@verdant-web/react-router';
@@ -39,6 +41,13 @@ export function ListPage({}: ListPageProps) {
 
   return (
     <PageContent>
+      <PageFixedArea className="flex-row justify-start py-2 mb-2">
+        <ListPicker
+          value={listId}
+          onChange={(id) => navigate(`/lists/${id}`)}
+        />
+        <ListDetailsEditButton listId={listId} />
+      </PageFixedArea>
       <ListView list={list} />
     </PageContent>
   );

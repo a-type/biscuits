@@ -21,12 +21,17 @@ export function ListItem({ item }: ListItemProps) {
           }
         }}
       />
-      <div>
+      <div className="col items-start">
         {description}
         {link && (
           <a href={link} target="_blank" rel="noopener noreferrer">
             (link)
           </a>
+        )}
+        {purchasedAt && (
+          <span className="text-xxs italic text-gray-5">
+            Purchased at {new Date(purchasedAt).toLocaleDateString()}
+          </span>
         )}
       </div>
     </div>

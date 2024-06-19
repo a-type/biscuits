@@ -10,6 +10,7 @@ import { Link } from '@verdant-web/react-router';
 import { ReloadButton } from '@biscuits/client';
 import ListPage from './ListPage.jsx';
 import { PageRoot } from '@a-type/ui/components/layouts';
+import { ListDetailsDialog } from '@/components/lists/ListDetailsDialog.jsx';
 
 const routes = makeRoutes([
   {
@@ -45,6 +46,7 @@ export function Pages() {
           <PageRoot>
             <Outlet />
           </PageRoot>
+          <ListDetailsDialog />
         </Router>
       </Suspense>
     </ErrorBoundary>
