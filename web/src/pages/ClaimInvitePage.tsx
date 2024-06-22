@@ -58,7 +58,9 @@ function ClaimInvitePage() {
   const claim = async () => {
     const result = await mutateClaim({ variables: { code } });
     if (!result.errors) {
-      toast.success('Welcome to your new membership!');
+      toast.success('Welcome to your new membership!', {
+        duration: 15000,
+      });
       navigate('/plan');
     }
   };

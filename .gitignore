@@ -136,3 +136,5 @@ dist
 backups/
 
 .DS_Store
+
+*.bak

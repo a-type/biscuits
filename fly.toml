@@ -16,6 +16,7 @@ EMAIL_USER = "hi@biscuits.club"
 UI_ORIGIN = "https://biscuits.club"
 DATABASE_FILE = "/data/database.sqlite"
 STORAGE_DATABASE_FILE = "/data/storage.sqlite"
+STORAGE_DATABASES_DIRECTORY = "/data/storage"
 HOST = "https://api.biscuits.club"
 NODE_ENV = "production"
 
