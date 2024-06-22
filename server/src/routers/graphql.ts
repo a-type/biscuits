@@ -29,18 +29,25 @@ const yoga = createYoga<GQLContext>({
   graphiql: true,
   maskedErrors: {
     maskError: (error, message, isDev) => {
-      console.error(`[GraphQL Error]`, error);
       const originalError =
         'originalError' in (error as any)
           ? (error as any).originalError
           : error;
       if (BiscuitsError.isInstance(originalError)) {
+        // log more details for server errors
+        if (originalError.statusCode >= 500) {
+          console.error(`[Internal Error]`, error);
+        } else {
+          console.debug(`[Validation Error]`, originalError.message);
+        }
         return new GraphQLError(originalError.message, {
           extensions: {
             unexpected: originalError.code === BiscuitsError.Code.Unexpected,
             biscuitsCode: originalError.code,
           },
         });
+      } else {
+        console.error(`[GraphQL Error]`, error);
       }
       return maskError(error, message, isDev);
     },
