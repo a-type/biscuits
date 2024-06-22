@@ -58,6 +58,7 @@ const router = AutoRouter({
 });
 
 const logger = (req: IRequest) => {
+  if (req.route === '/') return;
   console.log(`[${req.method}] ${req.url}`);
 };
 
