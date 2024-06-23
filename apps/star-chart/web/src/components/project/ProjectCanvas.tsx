@@ -78,7 +78,7 @@ export function ProjectCanvas({ project }: ProjectCanvasProps) {
           <ProjectTitle project={project} />
 
           <CanvasRenderer>
-            <CanvasWallpaper />
+            {/* <CanvasWallpaper /> */}
             <CanvasSvgLayer id="connections">
               <ArrowMarkers />
               <Reticule />

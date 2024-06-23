@@ -1,6 +1,7 @@
 import { clsx } from '@a-type/ui';
 import * as React from 'react';
 import { useCanvasRect } from './canvasHooks.js';
+import { useRerasterize } from './rerasterizeSignal.js';
 
 export interface IViewportWallpaperProps {
   children?: React.ReactNode;
@@ -17,6 +18,9 @@ export const CanvasWallpaper: React.FC<IViewportWallpaperProps> = ({
   imageUrl,
 }) => {
   const canvasRect = useCanvasRect();
+
+  const ref = React.useRef<HTMLDivElement>(null);
+  useRerasterize(ref);
 
   const style = React.useMemo(() => {
     return {
@@ -36,6 +40,7 @@ export const CanvasWallpaper: React.FC<IViewportWallpaperProps> = ({
         'absolute rounded-lg [background-position:calc((var(--grid-size,24px)/2)+2px)_calc((var(--grid-size,24px)/2)+2px)] bg-repeat z-0 touch-none opacity-10',
         classNameGridBg,
       )}
+      ref={ref}
     >
       {children}
     </div>

@@ -1,8 +1,9 @@
-import { ReactNode, useMemo } from 'react';
+import { ReactNode, useMemo, useRef } from 'react';
 import { clsx } from '@a-type/ui';
 import { createPortal } from 'react-dom';
 import { useCanvasRect } from './canvasHooks.js';
 import { useCanvas } from './CanvasProvider.jsx';
+import { useRerasterize } from './rerasterizeSignal.js';
 
 export interface CanvasSvgLayerProps {
   children: ReactNode;
@@ -27,6 +28,9 @@ export function CanvasSvgLayer({
     };
   }, [canvas]);
 
+  const ref = useRef<SVGSVGElement>(null);
+  useRerasterize(ref);
+
   return (
     <svg
       className={clsx(
@@ -36,6 +40,7 @@ export function CanvasSvgLayer({
       style={style}
       id={id}
       viewBox={`-${canvasRect.width / 2} -${canvasRect.height / 2} ${canvasRect.width} ${canvasRect.height}`}
+      ref={ref}
     >
       {children}
     </svg>

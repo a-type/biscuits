@@ -50,7 +50,7 @@ export function CanvasObjectRoot({
 }: CanvasObjectRootProps) {
   const ref = useRef<HTMLDivElement>(null);
   useRerasterize(ref);
-  useHideOffscreen(ref);
+  // useHideOffscreen(ref);
 
   const register = useRegister(canvasObject.id, canvasObject.metadata);
   const finalRef = useMergedRef(ref, register);

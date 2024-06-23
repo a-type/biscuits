@@ -9,7 +9,7 @@ export const rerasterizeSignal = new EventTarget();
 // parent layer (will-change: initial). If true, it defaults to its own compositing
 // layer (will-change: transform). The rerasterize just flips on and off.
 export function useRerasterize(
-  ref: RefObject<HTMLElement>,
+  ref: RefObject<HTMLElement | SVGElement>,
   defaultToOwnLayer = true,
 ) {
   useEffect(() => {
