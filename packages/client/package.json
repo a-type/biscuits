@@ -65,6 +65,8 @@
     "@verdant-web/react-router": "0.6.2",
     "@verdant-web/store": "^3.8.1",
     "react": "18.3.1",
-    "vite-plugin-pwa": "0.19.2"
+    "vite-plugin-pwa": "0.19.2",
+    "unocss": "^0.58.0",
+    "@unocss/transformer-variant-group": "^0.58.0"
   }
 }
