@@ -33,7 +33,9 @@
     }
   },
   "scripts": {
-    "build": "tsc",
+    "build": "pnpm run build:transpile && pnpm run build:prefix",
+    "build:transpile": "tsc",
+    "build:prefix": "node ./scripts/addUnoInclude.mjs",
     "dev": "tsc --watch"
   },
   "type": "module",
