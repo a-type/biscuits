@@ -15,7 +15,7 @@ export function CreateListButton({
   const navigate = useNavigate();
   const createList = async (ev: MouseEvent<HTMLButtonElement>) => {
     const list = await client.lists.put({ name: 'New list' });
-    navigate(`/list/${list.get('id')}`);
+    navigate(`/list/${list.get('id')}?listId=${list.get('id')}`);
     onClick?.(ev);
   };
   return (

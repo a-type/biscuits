@@ -15,10 +15,13 @@ export function HomePage({}: HomePageProps) {
 
   useEffect(() => {
     if (lastList || someList) {
-      navigate(`/list/${lastList || someList!.get('id')}`, {
-        replace: true,
-        skipTransition: true,
-      });
+      navigate(
+        `/list/${lastList || someList!.get('id')}${window.location.search}`,
+        {
+          replace: true,
+          skipTransition: true,
+        },
+      );
     }
   }, [navigate, lastList, someList]);
 
@@ -33,12 +36,12 @@ export default HomePage;
 
 function EmptyContent() {
   return (
-    <>
+    <div className="col">
       <H1>No lists!</H1>
       <P>
         You might have deleted all your lists. You can create a new one below.
       </P>
       <CreateListButton />
-    </>
+    </div>
   );
 }

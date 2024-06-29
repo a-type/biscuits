@@ -13,7 +13,8 @@ import {
   SubmitButton,
 } from '@a-type/ui/components/forms';
 import { Icon } from '@a-type/ui/components/icon';
-import { useSearchParams } from '@verdant-web/react-router';
+import { useNavigate, useSearchParams } from '@verdant-web/react-router';
+import { toast } from '@a-type/ui';
 
 export interface ListDetailsDialogProps {}
 
@@ -23,11 +24,22 @@ export function ListDetailsDialog({}: ListDetailsDialogProps) {
   const list = hooks.useList(listId || '', { skip: !listId });
   hooks.useWatch(list);
 
-  const onClose = () =>
+  const onClose = () => {
+    console.log('close');
     setParams((p) => {
       p.delete('listId');
       return p;
     });
+  };
+
+  const navigate = useNavigate();
+  const deleteList = async () => {
+    if (list) {
+      list.deleteSelf();
+      toast.success('List deleted');
+      navigate('/');
+    }
+  };
 
   return (
     <Dialog
@@ -49,10 +61,24 @@ export function ListDetailsDialog({}: ListDetailsDialogProps) {
           <DialogTitle>Edit List</DialogTitle>
           <TextField name="name" required />
           <DialogActions>
+            <Button
+              type="button"
+              color="destructive"
+              onClick={deleteList}
+              className="mr-auto"
+            >
+              <Icon name="trash" />
+              Delete list
+            </Button>
             <DialogClose asChild>
-              <Button>Cancel</Button>
+              <Button type="button">
+                <Icon name="x" />
+                Cancel
+              </Button>
             </DialogClose>
-            <SubmitButton>Save</SubmitButton>
+            <SubmitButton>
+              <Icon name="check" /> Save
+            </SubmitButton>
           </DialogActions>
         </FormikForm>
       </DialogContent>

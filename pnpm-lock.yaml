@@ -178,6 +178,8 @@ importers:
         specifier: 18.3.1
         version: 18.3.1
 
+  apps/gnocchi/verdant/dist/esm/client: {}
+
   apps/gnocchi/web:
     dependencies:
       '@a-type/ui':

@@ -44,11 +44,13 @@ export function ListPage({}: ListPageProps) {
       <PageFixedArea className="flex-row justify-start py-2 mb-2">
         <ListPicker
           value={listId}
-          onChange={(id) => navigate(`/lists/${id}`)}
+          onChange={(id, isNew) =>
+            navigate(`/list/${id}${isNew ? `?listId=${id}` : ``}`)
+          }
         />
         <ListDetailsEditButton listId={listId} />
       </PageFixedArea>
-      <ListView list={list} />
+      <ListView listId={listId} />
     </PageContent>
   );
 }

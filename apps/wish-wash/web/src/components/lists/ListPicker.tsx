@@ -1,4 +1,5 @@
 import { hooks } from '@/store.js';
+import { Icon } from '@a-type/ui/components/icon';
 import {
   Select,
   SelectItem,
@@ -8,7 +9,7 @@ import {
 
 export interface ListPickerProps {
   value: string;
-  onChange: (value: string) => void;
+  onChange: (value: string, isNew: boolean) => void;
 }
 
 export function ListPicker({
@@ -21,9 +22,9 @@ export function ListPicker({
   const onChange = async (value: string) => {
     if (value === 'new') {
       const list = await client.lists.put({});
-      providedOnChange(list.get('id'));
+      providedOnChange(list.get('id'), true);
     } else {
-      providedOnChange(value);
+      providedOnChange(value, false);
     }
   };
 
@@ -36,7 +37,9 @@ export function ListPicker({
             {list.get('name')}
           </SelectItem>
         ))}
-        <SelectItem value="new">New list</SelectItem>
+        <SelectItem value="new">
+          <Icon name="plus" /> New list
+        </SelectItem>
       </SelectContent>
     </Select>
   );
