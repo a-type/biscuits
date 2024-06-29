@@ -1,20 +1,24 @@
-import { ButtonProps, Button } from '@a-type/ui/components/button';
+import { hooks } from '@/store.js';
+import { Button, ButtonProps } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
-import { List } from '@wish-wash.biscuits/verdant';
+import { createdItemState } from './state.js';
 
 export interface CreateItemButtonProps extends ButtonProps {
-  list: List;
+  listId: string;
 }
 
 export function CreateItemButton({
-  list,
+  listId,
   children,
   ...rest
 }: CreateItemButtonProps) {
-  const createItem = () => {
-    const item = list.get('items').push({
+  const client = hooks.useClient();
+  const createItem = async () => {
+    const item = await client.items.put({
+      listId,
       description: 'New idea',
     });
+    createdItemState.justCreatedId = item.get('id');
   };
   return (
     <Button onClick={createItem}>

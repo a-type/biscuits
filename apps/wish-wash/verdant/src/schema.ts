@@ -31,27 +31,6 @@ const lists = schema.collection({
     createdAt: schema.fields.number({
       default: Date.now,
     }),
-    items: schema.fields.array({
-      items: schema.fields.object({
-        properties: {
-          id: schema.fields.string({
-            default: schema.generated.id,
-          }),
-          description: schema.fields.string({
-            default: '',
-          }),
-          purchasedAt: schema.fields.number({
-            nullable: true,
-          }),
-          createdAt: schema.fields.number({
-            default: Date.now,
-          }),
-          link: schema.fields.string({
-            nullable: true,
-          }),
-        },
-      }),
-    }),
   },
   indexes: {
     createdAt: {
@@ -60,9 +39,44 @@ const lists = schema.collection({
   },
 });
 
+const items = schema.collection({
+  name: 'item',
+  primaryKey: 'id',
+  fields: {
+    id: schema.fields.string({
+      default: schema.generated.id,
+    }),
+    listId: schema.fields.string(),
+    description: schema.fields.string({
+      default: '',
+    }),
+    purchasedAt: schema.fields.number({
+      nullable: true,
+    }),
+    createdAt: schema.fields.number({
+      default: Date.now,
+    }),
+    link: schema.fields.string({
+      nullable: true,
+    }),
+  },
+  indexes: {
+    listId: {
+      field: 'listId',
+    },
+    createdAt: {
+      field: 'createdAt',
+    },
+    purchasedAt: {
+      field: 'purchasedAt',
+    },
+  },
+});
+
 export default schema({
-  version: 1,
+  version: 2,
   collections: {
     lists,
+    items,
   },
 });

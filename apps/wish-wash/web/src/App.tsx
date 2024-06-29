@@ -3,15 +3,12 @@ import { clientDescriptor, hooks } from '@/store.js';
 import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
 import { Provider as UIProvider } from '@a-type/ui/components/provider';
 import { H1, P } from '@a-type/ui/components/typography';
-import { useVisualViewportOffset } from '@a-type/ui/hooks';
 import { Provider, ReloadButton } from '@biscuits/client';
 import { ReactNode, Suspense } from 'react';
 
 export interface AppProps {}
 
 export function App({}: AppProps) {
-  useVisualViewportOffset();
-
   return (
     <ErrorBoundary fallback={<ErrorFallback />}>
       <UIProvider toastContainerClassName="mb-10 sm:mb-0">

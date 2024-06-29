@@ -11,6 +11,7 @@ export * from "@verdant-web/store";
 
 export class Client<Presence = any, Profile = any> {
   readonly lists: CollectionQueries<List, ListInit, ListFilter>;
+  readonly items: CollectionQueries<Item, ItemInit, ItemFilter>;
 
   sync: BaseClient<Presence, Profile>["sync"];
   undoHistory: BaseClient<Presence, Profile>["undoHistory"];
@@ -71,66 +72,11 @@ export type List = ObjectEntity<ListInit, ListDestructured, ListSnapshot>;
 export type ListId = string;
 export type ListName = string;
 export type ListCreatedAt = number;
-export type ListItems = ListEntity<
-  ListItemsInit,
-  ListItemsDestructured,
-  ListItemsSnapshot
->;
-export type ListItemsItem = ObjectEntity<
-  ListItemsItemInit,
-  ListItemsItemDestructured,
-  ListItemsItemSnapshot
->;
-export type ListItemsItemId = string;
-export type ListItemsItemDescription = string;
-export type ListItemsItemPurchasedAt = number;
-export type ListItemsItemCreatedAt = number;
-export type ListItemsItemLink = string;
-export type ListInit = {
-  id?: string;
-  name?: string;
-  createdAt?: number;
-  items?: ListItemsInit;
-};
+export type ListInit = { id?: string; name?: string; createdAt?: number };
 
-export type ListItemsItemInit = {
-  id?: string;
-  description?: string;
-  purchasedAt?: number | null;
-  createdAt?: number;
-  link?: string | null;
-};
-export type ListItemsInit = ListItemsItemInit[];
-export type ListDestructured = {
-  id: string;
-  name: string;
-  createdAt: number;
-  items: ListItems;
-};
+export type ListDestructured = { id: string; name: string; createdAt: number };
 
-export type ListItemsItemDestructured = {
-  id: string;
-  description: string;
-  purchasedAt: number | null;
-  createdAt: number;
-  link: string | null;
-};
-export type ListItemsDestructured = ListItemsItem[];
-export type ListSnapshot = {
-  id: string;
-  name: string;
-  createdAt: number;
-  items: ListItemsSnapshot;
-};
-
-export type ListItemsItemSnapshot = {
-  id: string;
-  description: string;
-  purchasedAt: number | null;
-  createdAt: number;
-  link: string | null;
-};
-export type ListItemsSnapshot = ListItemsItemSnapshot[];
+export type ListSnapshot = { id: string; name: string; createdAt: number };
 
 /** Index filters for List **/
 
@@ -155,3 +101,109 @@ export type ListFilter =
   | ListCreatedAtSortFilter
   | ListCreatedAtMatchFilter
   | ListCreatedAtRangeFilter;
+
+/** Generated types for Item */
+
+export type Item = ObjectEntity<ItemInit, ItemDestructured, ItemSnapshot>;
+export type ItemId = string;
+export type ItemListId = string;
+export type ItemDescription = string;
+export type ItemPurchasedAt = number;
+export type ItemCreatedAt = number;
+export type ItemLink = string;
+export type ItemInit = {
+  id?: string;
+  listId: string;
+  description?: string;
+  purchasedAt?: number | null;
+  createdAt?: number;
+  link?: string | null;
+};
+
+export type ItemDestructured = {
+  id: string;
+  listId: string;
+  description: string;
+  purchasedAt: number | null;
+  createdAt: number;
+  link: string | null;
+};
+
+export type ItemSnapshot = {
+  id: string;
+  listId: string;
+  description: string;
+  purchasedAt: number | null;
+  createdAt: number;
+  link: string | null;
+};
+
+/** Index filters for Item **/
+
+export interface ItemListIdSortFilter {
+  where: "listId";
+  order: "asc" | "desc";
+}
+export interface ItemListIdMatchFilter {
+  where: "listId";
+  equals: string;
+  order?: "asc" | "desc";
+}
+export interface ItemListIdRangeFilter {
+  where: "listId";
+  gte?: string;
+  gt?: string;
+  lte?: string;
+  lt?: string;
+  order?: "asc" | "desc";
+}
+export interface ItemListIdStartsWithFilter {
+  where: "listId";
+  startsWith: string;
+  order?: "asc" | "desc";
+}
+export interface ItemCreatedAtSortFilter {
+  where: "createdAt";
+  order: "asc" | "desc";
+}
+export interface ItemCreatedAtMatchFilter {
+  where: "createdAt";
+  equals: number;
+  order?: "asc" | "desc";
+}
+export interface ItemCreatedAtRangeFilter {
+  where: "createdAt";
+  gte?: number;
+  gt?: number;
+  lte?: number;
+  lt?: number;
+  order?: "asc" | "desc";
+}
+export interface ItemPurchasedAtSortFilter {
+  where: "purchasedAt";
+  order: "asc" | "desc";
+}
+export interface ItemPurchasedAtMatchFilter {
+  where: "purchasedAt";
+  equals: number;
+  order?: "asc" | "desc";
+}
+export interface ItemPurchasedAtRangeFilter {
+  where: "purchasedAt";
+  gte?: number;
+  gt?: number;
+  lte?: number;
+  lt?: number;
+  order?: "asc" | "desc";
+}
+export type ItemFilter =
+  | ItemListIdSortFilter
+  | ItemListIdMatchFilter
+  | ItemListIdRangeFilter
+  | ItemListIdStartsWithFilter
+  | ItemCreatedAtSortFilter
+  | ItemCreatedAtMatchFilter
+  | ItemCreatedAtRangeFilter
+  | ItemPurchasedAtSortFilter
+  | ItemPurchasedAtMatchFilter
+  | ItemPurchasedAtRangeFilter;

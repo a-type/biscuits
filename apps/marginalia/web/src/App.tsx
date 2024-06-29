@@ -3,10 +3,9 @@ import { clientDescriptor, hooks } from '@/store.js';
 import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
 import { Provider as UIProvider } from '@a-type/ui/components/provider';
 import { H1, P } from '@a-type/ui/components/typography';
-import { useVisualViewportOffset } from '@a-type/ui/hooks';
 import { Provider, ReloadButton, useCanSync } from '@biscuits/client';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactNode, Suspense, useLayoutEffect } from 'react';
+import { ReactNode, Suspense } from 'react';
 
 export interface AppProps {}
 
@@ -19,14 +18,6 @@ const queryClient = new QueryClient({
 });
 
 export function App({}: AppProps) {
-  useLayoutEffect(() => {
-    if (typeof window !== 'undefined') {
-      document.body.className = 'theme-lemon';
-    }
-  }, []);
-
-  useVisualViewportOffset();
-
   return (
     <ErrorBoundary fallback={<ErrorFallback />}>
       <UIProvider>

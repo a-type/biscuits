@@ -12,7 +12,6 @@ import {
 } from '../index.js';
 import { graphqlClient as defaultClient } from '../index.js';
 import { GlobalSyncingIndicator } from './GlobalSyncingIndicator.js';
-import { useVisualViewportOffset } from '@a-type/ui/hooks';
 
 export function Provider({
   graphqlClient = defaultClient,
@@ -25,8 +24,6 @@ export function Provider({
   children: ReactNode;
   storeDescriptor?: ClientDescriptor<any, VerdantProfile> | null;
 }) {
-  useVisualViewportOffset();
-
   return (
     <ApolloProvider client={graphqlClient}>
       <BiscuitsContext.Provider value={{ appId }}>
