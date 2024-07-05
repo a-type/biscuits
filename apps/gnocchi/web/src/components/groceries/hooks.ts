@@ -1,6 +1,6 @@
 import { hooks } from '@/stores/groceries/index.js';
 import { Category, Item } from '@gnocchi.biscuits/verdant';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useSnapshot } from 'valtio';
 import { groceriesState } from './state.js';
 import { debounce } from '@a-type/utils';
@@ -34,6 +34,21 @@ export function useItemsGroupedAndSorted(
     [items, purchasedStillVisibleItems, purchasedHidingItems],
   );
 
+  // subscribe to the cateogryId on all visible items to re-render when the category changes
+  // since the items query won't rerender when this changes... not sure if there's a more
+  // straightforward way to approach this.
+  const [forcedChange, forceUpdate] = useState(0);
+  useEffect(() => {
+    const unsubs = visibleItems.map((item) =>
+      item.subscribeToField('categoryId', 'change', () => {
+        console.log('category changed', item.get('id'));
+        forceUpdate((prev) => prev + 1);
+      }),
+    );
+
+    return () => unsubs.forEach((unsub) => unsub());
+  }, [visibleItems]);
+
   const categoryGroups = useMemo(() => {
     const categoryGroups: { category: Category | null; items: Item[] }[] = [];
     const sortedCategories: (Category | null)[] = categories
@@ -64,7 +79,7 @@ export function useItemsGroupedAndSorted(
       categoryGroups[categoryIndex].items.push(item);
     }
     return categoryGroups;
-  }, [visibleItems, categories]);
+  }, [visibleItems, categories, forcedChange]);
 
   return {
     categoryGroups,

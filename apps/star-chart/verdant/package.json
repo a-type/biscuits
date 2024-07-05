@@ -16,6 +16,6 @@
     "@verdant-web/cli": "4.4.1",
     "@verdant-web/common": "2.3.4",
     "@verdant-web/react": "34.0.1",
-    "@verdant-web/store": "3.8.1"
+    "@verdant-web/store": "3.8.3"
   }
 }

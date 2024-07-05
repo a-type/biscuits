@@ -14,7 +14,7 @@
     "@biscuits/client": "workspace:*",
     "@react-spring/web": "^9.7.3",
     "@unocss/transformer-variant-group": "^0.54.1",
-    "@verdant-web/react-router": "^0.6.2",
+    "@verdant-web/react-router": "^0.6.3",
     "@wish-wash.biscuits/verdant": "workspace:*",
     "react": "18.3.1",
     "react-dom": "18.3.1",
