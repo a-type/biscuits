@@ -5,11 +5,11 @@ import { VerdantContext } from '../verdant.js';
 import { ClientDescriptor } from '@verdant-web/store';
 import {
   AppPreviewNotice,
-  Essentials,
   PrereleaseWarning,
   TopLoader,
   VerdantProfile,
 } from '../index.js';
+import { Essentials } from './Essentials.js';
 import { graphqlClient as defaultClient } from '../index.js';
 import { GlobalSyncingIndicator } from './GlobalSyncingIndicator.js';
 

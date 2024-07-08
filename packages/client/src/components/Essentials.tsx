@@ -1,4 +1,5 @@
 import { LogoutNotice } from './LogoutNotice.js';
+import { ResetNotifier } from './ResetNotifier.js';
 import { SubscriptionExpiredDialog } from './SubscriptionExpiredDialog.js';
 import { TosPrompt } from './TosPrompt.js';
 
@@ -8,6 +9,7 @@ export function Essentials() {
       <LogoutNotice />
       <TosPrompt />
       <SubscriptionExpiredDialog />
+      <ResetNotifier />
     </>
   );
 }
