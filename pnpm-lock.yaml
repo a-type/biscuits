@@ -160,10 +160,10 @@ importers:
         version: 2.3.4
       '@verdant-web/react':
         specifier: 34.0.1
-        version: 34.0.1(@verdant-web/store@3.8.3)(react@18.3.1)
+        version: 34.0.1(@verdant-web/store@3.8.4)(react@18.3.1)
       '@verdant-web/store':
-        specifier: 3.8.3
-        version: 3.8.3
+        specifier: 3.8.4
+        version: 3.8.4
       cuid:
         specifier: ^2.1.8
         version: 2.1.8
@@ -261,8 +261,8 @@ importers:
         specifier: ^0.6.3
         version: 0.6.3(react@18.3.1)
       '@verdant-web/store':
-        specifier: ^3.8.3
-        version: 3.8.3
+        specifier: ^3.8.4
+        version: 3.8.4
       '@zip.js/zip.js':
         specifier: ^2.7.6
         version: 2.7.37
@@ -446,10 +446,10 @@ importers:
         version: 2.3.4
       '@verdant-web/react':
         specifier: 34.0.1
-        version: 34.0.1(@verdant-web/store@3.8.3)(react@18.3.1)
+        version: 34.0.1(@verdant-web/store@3.8.4)(react@18.3.1)
       '@verdant-web/store':
-        specifier: ^3.8.3
-        version: 3.8.3
+        specifier: ^3.8.4
+        version: 3.8.4
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -543,10 +543,10 @@ importers:
         version: 2.3.4
       '@verdant-web/react':
         specifier: ^34.0.1
-        version: 34.0.1(@verdant-web/store@3.8.3)(react@18.3.1)
+        version: 34.0.1(@verdant-web/store@3.8.4)(react@18.3.1)
       '@verdant-web/store':
-        specifier: ^3.8.3
-        version: 3.8.3
+        specifier: ^3.8.4
+        version: 3.8.4
       cuid:
         specifier: ^2.1.8
         version: 2.1.8
@@ -646,10 +646,10 @@ importers:
         version: 2.3.4
       '@verdant-web/react':
         specifier: 34.0.1
-        version: 34.0.1(@verdant-web/store@3.8.3)(react@18.3.1)
+        version: 34.0.1(@verdant-web/store@3.8.4)(react@18.3.1)
       '@verdant-web/store':
-        specifier: 3.8.3
-        version: 3.8.3
+        specifier: 3.8.4
+        version: 3.8.4
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -770,10 +770,10 @@ importers:
         version: 2.3.4
       '@verdant-web/react':
         specifier: 34.0.1
-        version: 34.0.1(@verdant-web/store@3.8.3)(react@18.3.1)
+        version: 34.0.1(@verdant-web/store@3.8.4)(react@18.3.1)
       '@verdant-web/store':
-        specifier: 3.8.3
-        version: 3.8.3
+        specifier: 3.8.4
+        version: 3.8.4
       cuid:
         specifier: ^2.1.8
         version: 2.1.8
@@ -812,13 +812,13 @@ importers:
         version: 0.54.3
       '@verdant-web/react':
         specifier: ^34.0.1
-        version: 34.0.1(@verdant-web/store@3.8.3)(react@18.3.1)
+        version: 34.0.1(@verdant-web/store@3.8.4)(react@18.3.1)
       '@verdant-web/react-router':
         specifier: ^0.6.3
         version: 0.6.3(react@18.3.1)
       '@verdant-web/store':
-        specifier: ^3.8.3
-        version: 3.8.3
+        specifier: ^3.8.4
+        version: 3.8.4
       classnames:
         specifier: ^2.3.2
         version: 2.3.2
@@ -906,10 +906,10 @@ importers:
         version: 2.3.4
       '@verdant-web/react':
         specifier: ^34.0.1
-        version: 34.0.1(@verdant-web/store@3.8.3)(react@18.3.1)
+        version: 34.0.1(@verdant-web/store@3.8.4)(react@18.3.1)
       '@verdant-web/store':
-        specifier: ^3.8.3
-        version: 3.8.3
+        specifier: ^3.8.4
+        version: 3.8.4
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -1132,8 +1132,8 @@ importers:
         specifier: 0.6.3
         version: 0.6.3(react@18.3.1)
       '@verdant-web/store':
-        specifier: ^3.8.3
-        version: 3.8.3
+        specifier: ^3.8.4
+        version: 3.8.4
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -1239,11 +1239,11 @@ importers:
         specifier: 2.3.4
         version: 2.3.4
       '@verdant-web/s3-file-storage':
-        specifier: 1.0.24
-        version: 1.0.24
+        specifier: 1.0.25
+        version: 1.0.25
       '@verdant-web/server':
-        specifier: 3.1.2
-        version: 3.1.2
+        specifier: 3.1.3
+        version: 3.1.3
       '@whatwg-node/server':
         specifier: ^0.9.22
         version: 0.9.25
@@ -1555,6 +1555,19 @@ packages:
       '@paralleldrive/cuid2': 2.2.2
       bcrypt: 5.1.1
       kysely: 0.27.3
+    transitivePeerDependencies:
+      - encoding
+      - supports-color
+    dev: false
+
+  /@a-type/kysely@1.0.1(kysely@0.27.4):
+    resolution: {integrity: sha512-ZiLRXsFD+tYRXbb2TajkqHHI0EwiEWhuKltrIfarqjoDvvvOcypwvQfq811+HXatnLME5mA6D8yYMqmdYhpyoQ==}
+    peerDependencies:
+      kysely: ^0.27.2
+    dependencies:
+      '@paralleldrive/cuid2': 2.2.2
+      bcrypt: 5.1.1
+      kysely: 0.27.4
     transitivePeerDependencies:
       - encoding
       - supports-color
@@ -12086,8 +12099,8 @@ packages:
     dev: true
     optional: true
 
-  /@swc/core-darwin-arm64@1.6.7:
-    resolution: {integrity: sha512-sNb+ghP2OhZyUjS7E5Mf3PqSvoXJ5gY6GBaH2qp8WQxx9VL7ozC4HVo6vkeFJBN5cmYqUCLnhrM3HU4W+7yMSA==}
+  /@swc/core-darwin-arm64@1.6.13:
+    resolution: {integrity: sha512-SOF4buAis72K22BGJ3N8y88mLNfxLNprTuJUpzikyMGrvkuBFNcxYtMhmomO0XHsgLDzOJ+hWzcgjRNzjMsUcQ==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [darwin]
@@ -12122,8 +12135,8 @@ packages:
     dev: true
     optional: true
 
-  /@swc/core-darwin-x64@1.6.7:
-    resolution: {integrity: sha512-LQwYm/ATYN5fYSYVPMfComPiFo5i8jh75h1ASvNWhXtS+/+k1dq1zXTJWZRuojd5NXgW3bb6mJtJ2evwYIgYbA==}
+  /@swc/core-darwin-x64@1.6.13:
+    resolution: {integrity: sha512-AW8akFSC+tmPE6YQQvK9S2A1B8pjnXEINg+gGgw0KRUUXunvu1/OEOeC5L2Co1wAwhD7bhnaefi06Qi9AiwOag==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [darwin]
@@ -12158,8 +12171,8 @@ packages:
     dev: true
     optional: true
 
-  /@swc/core-linux-arm-gnueabihf@1.6.7:
-    resolution: {integrity: sha512-kEDzVhNci38LX3kdY99t68P2CDf+2QFDk5LawVamXH0iN5DRAO/+wjOhxL8KOHa6wQVqKEt5WrhD+Rrvk/34Yw==}
+  /@swc/core-linux-arm-gnueabihf@1.6.13:
+    resolution: {integrity: sha512-f4gxxvDXVUm2HLYXRd311mSrmbpQF2MZ4Ja6XCQz1hWAxXdhRl1gpnZ+LH/xIfGSwQChrtLLVrkxdYUCVuIjFg==}
     engines: {node: '>=10'}
     cpu: [arm]
     os: [linux]
@@ -12194,8 +12207,8 @@ packages:
     dev: true
     optional: true
 
-  /@swc/core-linux-arm64-gnu@1.6.7:
-    resolution: {integrity: sha512-SyOBUGfl31xLGpIJ/Jd6GKHtkfZyHBXSwFlK7FmPN//MBQLtTBm4ZaWTnWnGo4aRsJwQdXWDKPyqlMBtnIl1nQ==}
+  /@swc/core-linux-arm64-gnu@1.6.13:
+    resolution: {integrity: sha512-Nf/eoW2CbG8s+9JoLtjl9FByBXyQ5cjdBsA4efO7Zw4p+YSuXDgc8HRPC+E2+ns0praDpKNZtLvDtmF2lL+2Gg==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
@@ -12230,8 +12243,8 @@ packages:
     dev: true
     optional: true
 
-  /@swc/core-linux-arm64-musl@1.6.7:
-    resolution: {integrity: sha512-1fOAXkDFbRfItEdMZPxT3du1QWYhgToa4YsnqTujjE8EqJW8K27hIcHRIkVuzp7PNhq8nLBg0JpJM4g27EWD7g==}
+  /@swc/core-linux-arm64-musl@1.6.13:
+    resolution: {integrity: sha512-2OysYSYtdw79prJYuKIiux/Gj0iaGEbpS2QZWCIY4X9sGoETJ5iMg+lY+YCrIxdkkNYd7OhIbXdYFyGs/w5LDg==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
@@ -12266,8 +12279,8 @@ packages:
     dev: true
     optional: true
 
-  /@swc/core-linux-x64-gnu@1.6.7:
-    resolution: {integrity: sha512-Gp7uCwPsNO5ATxbyvfTyeNCHUGD9oA+xKMm43G1tWCy+l07gLqWMKp7DIr3L3qPD05TfAVo3OuiOn2abpzOFbw==}
+  /@swc/core-linux-x64-gnu@1.6.13:
+    resolution: {integrity: sha512-PkR4CZYJNk5hcd2+tMWBpnisnmYsUzazI1O5X7VkIGFcGePTqJ/bWlfUIVVExWxvAI33PQFzLbzmN5scyIUyGQ==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
@@ -12302,8 +12315,8 @@ packages:
     dev: true
     optional: true
 
-  /@swc/core-linux-x64-musl@1.6.7:
-    resolution: {integrity: sha512-QeruGBZJ15tadqEMQ77ixT/CYGk20MtlS8wmvJiV+Wsb8gPW5LgCjtupzcLLnoQzDG54JGNCeeZ0l/T8NYsOvA==}
+  /@swc/core-linux-x64-musl@1.6.13:
+    resolution: {integrity: sha512-OdsY7wryTxCKwGQcwW9jwWg3cxaHBkTTHi91+5nm7hFPpmZMz1HivJrWAMwVE7iXFw+M4l6ugB/wCvpYrUAAjA==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
@@ -12338,8 +12351,8 @@ packages:
     dev: true
     optional: true
 
-  /@swc/core-win32-arm64-msvc@1.6.7:
-    resolution: {integrity: sha512-ouRqgSnT95lTCiU/6kJRNS5b1o+p8I/V9jxtL21WUj/JOVhsFmBErqQ0MZyCu514noWiR5BIqOrZXR8C1Knx6Q==}
+  /@swc/core-win32-arm64-msvc@1.6.13:
+    resolution: {integrity: sha512-ap6uNmYjwk9M/+bFEuWRNl3hq4VqgQ/Lk+ID/F5WGqczNr0L7vEf+pOsRAn0F6EV+o/nyb3ePt8rLhE/wjHpPg==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [win32]
@@ -12374,8 +12387,8 @@ packages:
     dev: true
     optional: true
 
-  /@swc/core-win32-ia32-msvc@1.6.7:
-    resolution: {integrity: sha512-eZAP/EmJ0IcfgAx6B4/SpSjq3aT8gr0ooktfMqw/w0/5lnNrbMl2v+2kvxcneNcF7bp8VNcYZnoHlsP+LvmVbA==}
+  /@swc/core-win32-ia32-msvc@1.6.13:
+    resolution: {integrity: sha512-IJ8KH4yIUHTnS/U1jwQmtbfQals7zWPG0a9hbEfIr4zI0yKzjd83lmtS09lm2Q24QBWOCFGEEbuZxR4tIlvfzA==}
     engines: {node: '>=10'}
     cpu: [ia32]
     os: [win32]
@@ -12410,8 +12423,8 @@ packages:
     dev: true
     optional: true
 
-  /@swc/core-win32-x64-msvc@1.6.7:
-    resolution: {integrity: sha512-QOdE+7GQg1UQPS6p0KxzJOh/8GLbJ5zI1vqKArCCB0unFqUfKIjYb2TaH0geEBy3w9qtXxe3ZW6hzxtZSS9lDg==}
+  /@swc/core-win32-x64-msvc@1.6.13:
+    resolution: {integrity: sha512-f6/sx6LMuEnbuxtiSL/EkR0Y6qUHFw1XVrh6rwzKXptTipUdOY+nXpKoh+1UsBm/r7H0/5DtOdrn3q5ZHbFZjQ==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [win32]
@@ -12494,8 +12507,8 @@ packages:
       '@swc/core-win32-x64-msvc': 1.5.5
     dev: true
 
-  /@swc/core@1.6.7:
-    resolution: {integrity: sha512-BBzORL9qWz5hZqAZ83yn+WNaD54RH5eludjqIOboolFOK/Pw+2l00/H77H4CEBJnzCIBQszsyqtITmrn4evp0g==}
+  /@swc/core@1.6.13:
+    resolution: {integrity: sha512-eailUYex6fkfaQTev4Oa3mwn0/e3mQU4H8y1WPuImYQESOQDtVrowwUGDSc19evpBbHpKtwM+hw8nLlhIsF+Tw==}
     engines: {node: '>=10'}
     requiresBuild: true
     peerDependencies:
@@ -12507,16 +12520,16 @@ packages:
       '@swc/counter': 0.1.3
       '@swc/types': 0.1.9
     optionalDependencies:
-      '@swc/core-darwin-arm64': 1.6.7
-      '@swc/core-darwin-x64': 1.6.7
-      '@swc/core-linux-arm-gnueabihf': 1.6.7
-      '@swc/core-linux-arm64-gnu': 1.6.7
-      '@swc/core-linux-arm64-musl': 1.6.7
-      '@swc/core-linux-x64-gnu': 1.6.7
-      '@swc/core-linux-x64-musl': 1.6.7
-      '@swc/core-win32-arm64-msvc': 1.6.7
-      '@swc/core-win32-ia32-msvc': 1.6.7
-      '@swc/core-win32-x64-msvc': 1.6.7
+      '@swc/core-darwin-arm64': 1.6.13
+      '@swc/core-darwin-x64': 1.6.13
+      '@swc/core-linux-arm-gnueabihf': 1.6.13
+      '@swc/core-linux-arm64-gnu': 1.6.13
+      '@swc/core-linux-arm64-musl': 1.6.13
+      '@swc/core-linux-x64-gnu': 1.6.13
+      '@swc/core-linux-x64-musl': 1.6.13
+      '@swc/core-win32-arm64-msvc': 1.6.13
+      '@swc/core-win32-ia32-msvc': 1.6.13
+      '@swc/core-win32-x64-msvc': 1.6.13
     dev: false
 
   /@swc/counter@0.1.3:
@@ -14437,7 +14450,7 @@ packages:
     hasBin: true
     dependencies:
       '@clack/prompts': 0.5.1
-      '@swc/core': 1.6.7
+      '@swc/core': 1.6.13
       change-case: 4.1.2
       esbuild: 0.19.12
       prettier: 3.3.2
@@ -14462,25 +14475,25 @@ packages:
       path-to-regexp: 6.2.2
       react: 18.3.1
 
-  /@verdant-web/react@34.0.1(@verdant-web/store@3.8.3)(react@18.3.1):
+  /@verdant-web/react@34.0.1(@verdant-web/store@3.8.4)(react@18.3.1):
     resolution: {integrity: sha512-biCJI15D2WgiZ88mYkPSNfnedJiHwNM2TUb8b12sMvBWUX/4EMvQ1nEzcb69EQaV3X/e+TMj6FhjM/p9y6d1TQ==}
     peerDependencies:
       '@verdant-web/store': ^3.8.1
       react: ^18.2.0
     dependencies:
       '@verdant-web/common': 2.3.4
-      '@verdant-web/store': 3.8.3
+      '@verdant-web/store': 3.8.4
       react: 18.3.1
       suspend-react: 0.0.8(react@18.3.1)
       use-sync-external-store: 1.2.2(react@18.3.1)
     dev: false
 
-  /@verdant-web/s3-file-storage@1.0.24:
-    resolution: {integrity: sha512-M7aopgXi3vVrd6Pfh53YqG2FPTvfGAUf1vAAkC2PdnPGkwsiOZQCR+4C8zsR48MkttlgV5gQQp4fzGY9FzR8uw==}
+  /@verdant-web/s3-file-storage@1.0.25:
+    resolution: {integrity: sha512-KxTyoWp2ItJnI5lTI5ssl57waJIEcx/eXqKq573Go41Cg0sJHr0sSJYNj74yIANhXi1uapgAhYXra4ODCSODAQ==}
     dependencies:
       '@aws-sdk/client-s3': 3.583.0
       '@aws-sdk/lib-storage': 3.609.0(@aws-sdk/client-s3@3.583.0)
-      '@verdant-web/server': 3.1.2
+      '@verdant-web/server': 3.1.3
     transitivePeerDependencies:
       - aws-crt
       - bufferutil
@@ -14489,8 +14502,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@verdant-web/server@3.1.2:
-    resolution: {integrity: sha512-nUvfc5D5PBeUhblyxtTUXB3mPaBpG/ABTSE20MUfALeJRLSAGbEKeEk74uuEmge5iczfd34Xlty8SXtfS+vGrw==}
+  /@verdant-web/server@3.1.3:
+    resolution: {integrity: sha512-SYBLuAvxsTLVlk1NiEEP14zyQGxbE8ewKgn4mN2zIEnUIy266ohKL9CccoMW56c3Qp2yUUE1yR3G63/twC0Kqg==}
     hasBin: true
     dependencies:
       '@a-type/kysely': 1.0.1(kysely@0.27.3)
@@ -14510,15 +14523,15 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@verdant-web/store@3.8.3:
-    resolution: {integrity: sha512-gaSq8JbMncRu7aTrpxNz1sd6ph97L0hMU5WteJHlG6/junqToJ8kGy2ZZMv6jzznIndC6rUyYYbyqF+LToa79A==}
+  /@verdant-web/store@3.8.4:
+    resolution: {integrity: sha512-jNTeZ2J6R++aAltgqUSz7k0RsT8sIZ9BEDHL0jHurPtiwhq+lQQ0DgTtcCTaH/C8b1qDIu4lGZTssUPwnEwCVw==}
     dependencies:
-      '@a-type/kysely': 1.0.1(kysely@0.27.3)
+      '@a-type/kysely': 1.0.1(kysely@0.27.4)
       '@verdant-web/common': 2.3.4
       cuid: 2.1.8
       jszip: 3.10.1
       jwt-decode: 3.1.2
-      kysely: 0.27.3
+      kysely: 0.27.4
       weak-event: 2.0.5
     transitivePeerDependencies:
       - encoding
@@ -19504,6 +19517,11 @@ packages:
 
   /kysely@0.27.3:
     resolution: {integrity: sha512-lG03Ru+XyOJFsjH3OMY6R/9U38IjDPfnOfDgO3ynhbDr+Dz8fak+X6L62vqu3iybQnj+lG84OttBuU9KY3L9kA==}
+    engines: {node: '>=14.0.0'}
+    dev: false
+
+  /kysely@0.27.4:
+    resolution: {integrity: sha512-dyNKv2KRvYOQPLCAOCjjQuCk4YFd33BvGdf/o5bC7FiW+BB6snA81Zt+2wT9QDFzKqxKa5rrOmvlK/anehCcgA==}
     engines: {node: '>=14.0.0'}
 
   /language-subtag-registry@0.3.22:
