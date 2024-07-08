@@ -19,7 +19,7 @@ const routes = makeRoutes([
     component: HomePage,
   },
   {
-    path: '/list/:listId',
+    path: '/:visibility/:listId',
     component: ListPage,
   },
   {

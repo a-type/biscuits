@@ -1,21 +1,28 @@
+import { ListProvider } from '@/components/lists/ListContext.jsx';
 import { ListDetailsEditButton } from '@/components/lists/ListDetailsDialog.jsx';
+import { ListMenu } from '@/components/lists/ListMenu.jsx';
 import { ListPicker } from '@/components/lists/ListPicker.jsx';
 import { ListView } from '@/components/lists/ListView.jsx';
+import { privateHooks } from '@/privateStore.js';
 import { hooks } from '@/store.js';
 import { Button } from '@a-type/ui/components/button';
 import { PageContent, PageFixedArea } from '@a-type/ui/components/layouts';
 import { H1 } from '@a-type/ui/components/typography';
+import { assert } from '@a-type/utils';
 import { useLocalStorage } from '@biscuits/client';
 import { Link, useNavigate, useParams } from '@verdant-web/react-router';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 
 export interface ListPageProps {}
 
 export function ListPage({}: ListPageProps) {
-  const { listId } = useParams();
+  const { listId, visibility } = useParams();
+  assert(visibility === 'shared' || visibility === 'private');
   const [_, setLastList] = useLocalStorage<string | null>('last-list', null);
 
-  const list = hooks.useList(listId);
+  const publicList = hooks.useList(listId);
+  const privateList = privateHooks.useList(listId);
+  const list = visibility === 'private' ? privateList : publicList;
 
   useEffect(() => {
     setLastList(listId);
@@ -27,6 +34,12 @@ export function ListPage({}: ListPageProps) {
       navigate('/');
     }
   }, [!!list, setLastList]);
+
+  const publicClient = hooks.useClient();
+  const privateClient = privateHooks.useClient();
+  const client = visibility === 'private' ? privateClient : publicClient;
+
+  const ctx = useMemo(() => ({ listId, client }), [listId, client]);
 
   if (!list) {
     return (
@@ -40,18 +53,21 @@ export function ListPage({}: ListPageProps) {
   }
 
   return (
-    <PageContent>
-      <PageFixedArea className="flex-row justify-start py-2 mb-2">
-        <ListPicker
-          value={listId}
-          onChange={(id, isNew) =>
-            navigate(`/list/${id}${isNew ? `?listId=${id}` : ``}`)
-          }
-        />
-        <ListDetailsEditButton listId={listId} />
-      </PageFixedArea>
-      <ListView listId={listId} />
-    </PageContent>
+    <ListProvider value={ctx}>
+      <PageContent>
+        <PageFixedArea className="flex-row justify-start py-2 mb-2">
+          <ListPicker
+            value={listId}
+            valueVisibility={visibility}
+            onChange={(id, isNew, visibility) =>
+              navigate(`/${visibility}/${id}${isNew ? `?listId=${id}` : ``}`)
+            }
+          />
+          <ListDetailsEditButton listId={listId} />
+        </PageFixedArea>
+        <ListView listId={listId} />
+      </PageContent>
+    </ListProvider>
   );
 }
 

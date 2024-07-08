@@ -5,6 +5,7 @@ import { Provider as UIProvider } from '@a-type/ui/components/provider';
 import { H1, P } from '@a-type/ui/components/typography';
 import { Provider, ReloadButton } from '@biscuits/client';
 import { ReactNode, Suspense } from 'react';
+import { privateClientDescriptor, privateHooks } from './privateStore.js';
 
 export interface AppProps {}
 
@@ -28,7 +29,13 @@ export function App({}: AppProps) {
 }
 
 function VerdantProvider({ children }: { children: ReactNode }) {
-  return <hooks.Provider value={clientDescriptor}>{children}</hooks.Provider>;
+  return (
+    <hooks.Provider value={clientDescriptor}>
+      <privateHooks.Provider value={privateClientDescriptor}>
+        {children}
+      </privateHooks.Provider>
+    </hooks.Provider>
+  );
 }
 
 function ErrorFallback() {
