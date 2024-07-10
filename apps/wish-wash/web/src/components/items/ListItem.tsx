@@ -3,7 +3,7 @@ import { Checkbox } from '@a-type/ui/components/checkbox';
 import { hooks } from '@/store.js';
 import { EditableText } from '@a-type/ui/components/editableText';
 import { useSnapshot } from 'valtio';
-import { createdItemState } from './state.js';
+import { createdItemState } from '../lists/state.js';
 import {
   CardRoot,
   CardContent,
@@ -28,6 +28,7 @@ import {
   SubmitButton,
   TextField,
 } from '@a-type/ui/components/forms';
+import { AmazonSearchButton } from './AmazonSearchButton.jsx';
 
 export interface ListItemProps {
   item: Item;
@@ -67,9 +68,12 @@ export function ListItem({ item }: ListItemProps) {
                 </Link>
               </Button>
             ) : (
-              <Button onClick={() => setAddLinkOpen(true)}>
-                <Icon name="plus" /> Link
-              </Button>
+              <>
+                <AmazonSearchButton item={item} />
+                <Button onClick={() => setAddLinkOpen(true)}>
+                  <Icon name="plus" /> Link
+                </Button>
+              </>
             )}
             <Button
               toggled={!!purchasedAt}

@@ -1,7 +1,7 @@
 import { hooks } from '@/store.js';
 import { InfiniteLoadTrigger } from '@a-type/ui/components/infiniteLoadTrigger';
 import { CreateItem } from './CreateItem.jsx';
-import { ListItem } from './ListItem.jsx';
+import { ListItem } from '../items/ListItem.jsx';
 
 export interface ListViewProps {
   listId: string;
