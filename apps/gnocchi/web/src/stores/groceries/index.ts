@@ -556,7 +556,19 @@ export function createClientDescriptor(options: { namespace: string }) {
     namespace: options.namespace,
     log:
       import.meta.env.DEV || DEBUG
-        ? (...args: any[]) => console.debug('🌿', ...args)
+        ? (level, ...args: any[]) => {
+            if (level === 'debug') {
+              if (DEBUG) {
+                console.debug('🌿', ...args);
+              }
+            } else if (level === 'error' || level === 'critical') {
+              console.error('🌿', ...args);
+            } else if (level === 'warn') {
+              console.warn('🌿', ...args);
+            } else {
+              console.log('🌿', ...args);
+            }
+          }
         : undefined,
     EXPERIMENTAL_weakRefs: true,
   });

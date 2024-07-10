@@ -138,3 +138,5 @@ backups/
 .DS_Store
 
 *.bak
+
+vite.config.ts.*

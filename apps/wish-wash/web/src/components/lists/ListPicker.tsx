@@ -1,4 +1,3 @@
-import { privateHooks } from '@/privateStore.js';
 import { hooks } from '@/store.js';
 import { Icon } from '@a-type/ui/components/icon';
 import {
@@ -8,82 +7,87 @@ import {
   SelectTrigger,
   SelectGroup,
   SelectSeparator,
+  SelectLabel,
 } from '@a-type/ui/components/select';
 import { assert } from '@a-type/utils';
+import { useCanSync } from '@biscuits/client';
+import { authorization } from '@wish-wash.biscuits/verdant';
 
 export interface ListPickerProps {
   value: string;
-  valueVisibility: 'shared' | 'private';
-  onChange: (
-    value: string,
-    isNew: boolean,
-    visibility: 'shared' | 'private',
-  ) => void;
+  onChange: (value: string, isNew: boolean) => void;
 }
 
 export function ListPicker({
   value,
-  valueVisibility,
   onChange: providedOnChange,
 }: ListPickerProps) {
   const client = hooks.useClient();
-  const privateClient = privateHooks.useClient();
 
-  const onChange = async (value: string) => {
-    if (value === 'new-shared') {
+  const onChange = async (id: string) => {
+    if (id === 'new-shared') {
       const list = await client.lists.put({});
-      providedOnChange(list.get('id'), true, 'shared');
-    } else if (value === 'new-private') {
-      const list = await privateClient.lists.put({});
-      providedOnChange(list.get('id'), true, 'private');
+      providedOnChange(list.get('id'), true);
+    } else if (id === 'new-private') {
+      const list = await client.lists.put(
+        {},
+        {
+          access: authorization.private,
+        },
+      );
+      providedOnChange(list.get('id'), true);
     } else {
-      const [visibility, id] = value.split('::');
-      assert(visibility === 'shared' || visibility === 'private');
-      providedOnChange(id, false, visibility);
+      providedOnChange(id, false);
     }
   };
 
   return (
-    <Select value={`${valueVisibility}::${value}`} onValueChange={onChange}>
+    <Select value={value} onValueChange={onChange}>
       <SelectTrigger />
       <SelectContent>
-        <SharedLists />
-        <PrivateLists />
+        <ListsPickerLIsts />
       </SelectContent>
     </Select>
   );
 }
 
-function SharedLists() {
+function ListsPickerLIsts() {
   const lists = hooks.useAllLists();
 
-  return (
-    <SelectGroup title="Shared lists" className="bg-wash">
-      {lists.map((list) => (
-        <SelectItem value={`shared::${list.get('id')}`} key={list.uid}>
-          {list.get('name')}
-        </SelectItem>
-      ))}
-      <SelectItem value="new-shared">
-        <Icon name="add_person" /> New shared list
-      </SelectItem>
-    </SelectGroup>
-  );
-}
+  // segment by access
+  const privateLists = lists.filter((list) => list.isAuthorized);
+  const publicLists = lists.filter((list) => !list.isAuthorized);
 
-function PrivateLists() {
-  const lists = privateHooks.useAllLists();
+  const canSync = useCanSync();
 
   return (
-    <SelectGroup title="Private lists">
-      {lists.map((list) => (
-        <SelectItem value={`private::${list.get('id')}`} key={list.uid}>
-          {list.get('name')}
+    <>
+      <SelectGroup title="Shared lists">
+        {publicLists.length > 0 && <SelectLabel>Shared lists</SelectLabel>}
+        {publicLists.map((list) => (
+          <SelectItem value={list.get('id')} key={list.uid}>
+            <Icon name="add_person" /> {list.get('name')}
+          </SelectItem>
+        ))}
+        <SelectItem
+          value="new-shared"
+          disabled={!canSync}
+          className="font-bold"
+        >
+          <Icon name="add_person" /> New shared list
         </SelectItem>
-      ))}
-      <SelectItem value="new-private">
-        <Icon name="lock" /> New private list
-      </SelectItem>
-    </SelectGroup>
+      </SelectGroup>
+      <SelectGroup title="Private lists" className="bg-wash">
+        {privateLists.length > 0 && <SelectLabel>Private lists</SelectLabel>}
+        {privateLists.map((list) => (
+          <SelectItem value={list.get('id')} key={list.uid}>
+            <Icon name="lock" /> {list.get('name')}
+          </SelectItem>
+        ))}
+        <SelectItem value="new-private" className="font-bold">
+          <Icon name="lock" /> New private list
+        </SelectItem>
+      </SelectGroup>
+    </>
   );
 }

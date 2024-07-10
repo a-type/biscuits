@@ -1,5 +1,4 @@
 import { ListMenu } from '@/components/lists/ListMenu.jsx';
-import { privateHooks } from '@/privateStore.js';
 import { hooks } from '@/store.js';
 import { Icon } from '@a-type/ui/components/icon';
 import { PageContent, PageFixedArea } from '@a-type/ui/components/layouts';
@@ -12,24 +11,17 @@ export interface HomePageProps {}
 
 export function HomePage({}: HomePageProps) {
   const [lastList] = useLocalStorage<string | null>('last-list', null);
-  const somePublicList = hooks.useOneList();
-  const somePrivateList = privateHooks.useOneList();
+  const someList = hooks.useOneList();
   const navigate = useNavigate();
-
-  const someList = somePublicList || somePrivateList;
-  const isPrivate = someList === somePrivateList;
 
   useEffect(() => {
     if (lastList || someList) {
-      navigate(
-        `/${isPrivate ? 'private' : 'shared'}/${lastList || someList!.get('id')}${window.location.search}`,
-        {
-          replace: true,
-          skipTransition: true,
-        },
-      );
+      navigate(`/${lastList || someList!.get('id')}${window.location.search}`, {
+        replace: true,
+        skipTransition: true,
+      });
     }
-  }, [navigate, lastList, someList, isPrivate]);
+  }, [navigate, lastList, someList]);
 
   return (
     <PageContent>

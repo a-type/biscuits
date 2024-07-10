@@ -24,10 +24,10 @@
   "dependencies": {
     "@0no-co/graphqlsp": "1.12.8",
     "@biscuits/client": "workspace:*",
-    "@verdant-web/cli": "^4.4.1",
-    "@verdant-web/common": "2.3.4",
-    "@verdant-web/react": "34.0.1",
-    "@verdant-web/store": "3.8.4",
+    "@verdant-web/cli": "^4.5.0",
+    "@verdant-web/common": "2.4.0",
+    "@verdant-web/react": "35.0.0",
+    "@verdant-web/store": "3.9.0",
     "cuid": "^2.1.8",
     "stopword": "^2.0.8"
   },

@@ -13,6 +13,7 @@ export function ListView({ listId }: ListViewProps) {
       where: 'listId',
       equals: listId,
     },
+    key: `items-${listId}`,
   });
 
   return (

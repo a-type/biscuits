@@ -1,16 +1,15 @@
-import { makeRoutes, Outlet, Router } from '@verdant-web/react-router';
-import { HomePage } from './HomePage.jsx';
-import { H1, P } from '@a-type/ui/components/typography';
-import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
-import { Button } from '@a-type/ui/components/button';
-import { Spinner } from '@a-type/ui/components/spinner';
-import { lazy, useCallback, Suspense } from 'react';
-import { updateApp, updateState } from '@/updateState.js';
-import { Link } from '@verdant-web/react-router';
-import { ReloadButton } from '@biscuits/client';
-import ListPage from './ListPage.jsx';
-import { PageRoot } from '@a-type/ui/components/layouts';
 import { ListDetailsDialog } from '@/components/lists/ListDetailsDialog.jsx';
+import { updateApp, updateState } from '@/updateState.js';
+import { Button } from '@a-type/ui/components/button';
+import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
+import { PageRoot } from '@a-type/ui/components/layouts';
+import { Spinner } from '@a-type/ui/components/spinner';
+import { H1, P } from '@a-type/ui/components/typography';
+import { ReloadButton } from '@biscuits/client';
+import { Link, makeRoutes, Outlet, Router } from '@verdant-web/react-router';
+import { lazy, Suspense, useCallback } from 'react';
+import { HomePage } from './HomePage.jsx';
+import ListPage from './ListPage.jsx';
 
 const routes = makeRoutes([
   {
@@ -19,7 +18,7 @@ const routes = makeRoutes([
     component: HomePage,
   },
   {
-    path: '/:visibility/:listId',
+    path: '/:listId',
     component: ListPage,
   },
   {

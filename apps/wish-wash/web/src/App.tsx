@@ -3,9 +3,8 @@ import { clientDescriptor, hooks } from '@/store.js';
 import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
 import { Provider as UIProvider } from '@a-type/ui/components/provider';
 import { H1, P } from '@a-type/ui/components/typography';
-import { Provider, ReloadButton } from '@biscuits/client';
+import { Provider, ReloadButton, useCanSync } from '@biscuits/client';
 import { ReactNode, Suspense } from 'react';
-import { privateClientDescriptor, privateHooks } from './privateStore.js';
 
 export interface AppProps {}
 
@@ -14,14 +13,11 @@ export function App({}: AppProps) {
     <ErrorBoundary fallback={<ErrorFallback />}>
       <UIProvider toastContainerClassName="mb-10 sm:mb-0">
         <Suspense>
-          <VerdantProvider>
-            <Provider
-              appId="wish-wash"
-              storeDescriptor={clientDescriptor as any}
-            >
+          <Provider appId="wish-wash" storeDescriptor={clientDescriptor as any}>
+            <VerdantProvider>
               <Pages />
-            </Provider>
-          </VerdantProvider>
+            </VerdantProvider>
+          </Provider>
         </Suspense>
       </UIProvider>
     </ErrorBoundary>
@@ -29,11 +25,10 @@ export function App({}: AppProps) {
 }
 
 function VerdantProvider({ children }: { children: ReactNode }) {
+  const canSync = useCanSync();
   return (
-    <hooks.Provider value={clientDescriptor}>
-      <privateHooks.Provider value={privateClientDescriptor}>
-        {children}
-      </privateHooks.Provider>
+    <hooks.Provider value={clientDescriptor} sync={canSync}>
+      {children}
     </hooks.Provider>
   );
 }

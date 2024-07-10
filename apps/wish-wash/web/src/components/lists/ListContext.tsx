@@ -1,9 +1,9 @@
-import { Client } from '@wish-wash.biscuits/verdant';
+import { Client, List } from '@wish-wash.biscuits/verdant';
 import { createContext, useContext } from 'react';
 
 export interface ListContextProps {
   listId: string;
-  client: Client;
+  list: List;
 }
 
 const listContext = createContext<ListContextProps | undefined>(undefined);
