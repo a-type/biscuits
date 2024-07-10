@@ -10,6 +10,7 @@ import { Link, makeRoutes, Outlet, Router } from '@verdant-web/react-router';
 import { lazy, Suspense, useCallback } from 'react';
 import { HomePage } from './HomePage.jsx';
 import ListPage from './ListPage.jsx';
+import { ShareTargetListPicker } from '@/components/shareTarget/ShareTargetListPicker.jsx';
 
 const routes = makeRoutes([
   {
@@ -46,6 +47,7 @@ export function Pages() {
             <Outlet />
           </PageRoot>
           <ListDetailsDialog />
+          <ShareTargetListPicker />
         </Router>
       </Suspense>
     </ErrorBoundary>

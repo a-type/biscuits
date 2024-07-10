@@ -61,8 +61,8 @@ importers:
   apps/gnocchi/hub:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.8.24
-        version: 0.8.24(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^0.8.26
+        version: 0.8.26(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@a-type/utils':
         specifier: ^1.0.8
         version: 1.1.0
@@ -181,8 +181,8 @@ importers:
   apps/gnocchi/web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.8.24
-        version: 0.8.24(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.2)(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^0.8.26
+        version: 0.8.26(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.2)(react-dom@18.3.1)(react@18.3.1)
       '@a-type/utils':
         specifier: ^1.0.8
         version: 1.0.8
@@ -455,8 +455,8 @@ importers:
   apps/humding/web:
     dependencies:
       '@a-type/ui':
-        specifier: 0.8.24
-        version: 0.8.24(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 0.8.26
+        version: 0.8.26(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@a-type/utils':
         specifier: 1.1.3
         version: 1.1.3
@@ -555,8 +555,8 @@ importers:
   apps/marginalia/web:
     dependencies:
       '@a-type/ui':
-        specifier: 0.8.24
-        version: 0.8.24(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 0.8.26
+        version: 0.8.26(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@a-type/utils':
         specifier: 1.1.0
         version: 1.1.0
@@ -655,8 +655,8 @@ importers:
   apps/star-chart/web:
     dependencies:
       '@a-type/ui':
-        specifier: 0.8.24
-        version: 0.8.24(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 0.8.26
+        version: 0.8.26(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@a-type/utils':
         specifier: 1.1.2
         version: 1.1.2
@@ -782,8 +782,8 @@ importers:
   apps/trip-tick/web:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.8.24
-        version: 0.8.24(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.2.0)(react@18.3.1)
+        specifier: ^0.8.26
+        version: 0.8.26(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.2.0)(react@18.3.1)
       '@a-type/utils':
         specifier: ^1.0.6
         version: 1.0.6
@@ -915,8 +915,8 @@ importers:
   apps/wish-wash/web:
     dependencies:
       '@a-type/ui':
-        specifier: 0.8.24
-        version: 0.8.24(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 0.8.26
+        version: 0.8.26(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@a-type/utils':
         specifier: 1.1.3
         version: 1.1.3
@@ -988,11 +988,11 @@ importers:
   blog:
     dependencies:
       '@a-type/ui':
-        specifier: ^0.8.24
-        version: 0.8.24(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^0.8.26
+        version: 0.8.26(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@astrojs/check':
         specifier: ^0.5.10
-        version: 0.5.10(prettier@3.2.5)(typescript@5.4.5)
+        version: 0.5.10(typescript@5.4.5)
       '@astrojs/mdx':
         specifier: ^2.3.1
         version: 2.3.1(astro@4.7.1)
@@ -1007,7 +1007,7 @@ importers:
         version: link:../packages/client
       '@unocss/astro':
         specifier: ^0.59.4
-        version: 0.59.4(vite@5.3.1)
+        version: 0.59.4(vite@5.3.3)
       '@unocss/reset':
         specifier: ^0.59.4
         version: 0.59.4
@@ -1022,7 +1022,7 @@ importers:
         version: 5.4.5
       unocss:
         specifier: ^0.59.4
-        version: 0.59.4(postcss@8.4.39)(vite@5.3.1)
+        version: 0.59.4(postcss@8.4.39)(vite@5.3.3)
 
   cdk:
     dependencies:
@@ -1082,7 +1082,7 @@ importers:
         version: 1.12.8(graphql@16.8.1)(typescript@5.5.3)
       '@a-type/auth-client':
         specifier: 1.0.6
-        version: 1.0.6(@a-type/ui@0.8.24)(react@18.3.1)
+        version: 1.0.6(@a-type/ui@0.8.26)(react@18.3.1)
       '@a-type/utils':
         specifier: 1.1.3
         version: 1.1.3
@@ -1118,8 +1118,8 @@ importers:
         version: 1.13.2(@types/react@18.3.3)(react@18.3.1)
     devDependencies:
       '@a-type/ui':
-        specifier: ^0.8.24
-        version: 0.8.24(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^0.8.26
+        version: 0.8.26(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@types/react':
         specifier: 18.3.3
         version: 18.3.3
@@ -1332,10 +1332,10 @@ importers:
     dependencies:
       '@a-type/auth-client':
         specifier: 1.0.6
-        version: 1.0.6(@a-type/ui@0.8.24)(react@18.3.1)
+        version: 1.0.6(@a-type/ui@0.8.26)(react@18.3.1)
       '@a-type/ui':
-        specifier: ^0.8.24
-        version: 0.8.24(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^0.8.26
+        version: 0.8.26(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@biscuits/apps':
         specifier: workspace:*
         version: link:../packages/apps
@@ -1521,13 +1521,13 @@ packages:
       typescript: 5.5.3
     dev: false
 
-  /@a-type/auth-client@1.0.6(@a-type/ui@0.8.24)(react@18.3.1):
+  /@a-type/auth-client@1.0.6(@a-type/ui@0.8.26)(react@18.3.1):
     resolution: {integrity: sha512-AGKAEpExelRupmveEVfYzpwEMVwAPJ6fCqdpJKQeL41rHyCY/CpwAF4+XG7AEFgU/1EzEjr00MYEC1QQNJZzzw==}
     peerDependencies:
       '@a-type/ui': ^0.8.0
       react: ^18
     dependencies:
-      '@a-type/ui': 0.8.24(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+      '@a-type/ui': 0.8.26(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
     dev: false
 
@@ -1570,13 +1570,13 @@ packages:
       - encoding
       - supports-color
 
-  /@a-type/ui@0.8.24(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.2)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-Zvr+m8eHUVGJf0DXDNsGsrhcEDcfNBeXXdRBZBY3CDfYWyALwBFAGIuMy6QinVFWlJyt732nb1XamMI1mEDHaw==}
+  /@a-type/ui@0.8.26(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.2)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-FiGvfQIasp1KBvkfh5KfkND4RkhJVKwVCslwCIkneK28cMlG8mh+u6qixMw88eyZ9xfoQPltAnyC0DBnGHn7JQ==}
     peerDependencies:
       react: ^18
       react-dom: ^18
     dependencies:
-      '@a-type/utils': 1.1.0
+      '@a-type/utils': 1.1.3
       '@radix-ui/react-accordion': 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
       '@radix-ui/react-checkbox': 1.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
       '@radix-ui/react-collapsible': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
@@ -1610,7 +1610,7 @@ packages:
       color-parse: 2.0.2
       color-space: 2.0.1
       date-fns: 2.30.0
-      formik: 2.4.6(react@18.3.1)
+      formik: 2.4.5(react@18.3.1)
       pluralize: 8.0.0
       prosemirror-model: 1.21.1
       react: 18.3.1
@@ -1622,13 +1622,13 @@ packages:
       - csstype
     dev: false
 
-  /@a-type/ui@0.8.24(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.2.0)(react@18.3.1):
-    resolution: {integrity: sha512-Zvr+m8eHUVGJf0DXDNsGsrhcEDcfNBeXXdRBZBY3CDfYWyALwBFAGIuMy6QinVFWlJyt732nb1XamMI1mEDHaw==}
+  /@a-type/ui@0.8.26(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.2.0)(react@18.3.1):
+    resolution: {integrity: sha512-FiGvfQIasp1KBvkfh5KfkND4RkhJVKwVCslwCIkneK28cMlG8mh+u6qixMw88eyZ9xfoQPltAnyC0DBnGHn7JQ==}
     peerDependencies:
       react: ^18
       react-dom: ^18
     dependencies:
-      '@a-type/utils': 1.1.0
+      '@a-type/utils': 1.1.3
       '@radix-ui/react-accordion': 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
       '@radix-ui/react-checkbox': 1.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
       '@radix-ui/react-collapsible': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
@@ -1662,7 +1662,7 @@ packages:
       color-parse: 2.0.2
       color-space: 2.0.1
       date-fns: 2.30.0
-      formik: 2.4.6(react@18.3.1)
+      formik: 2.4.5(react@18.3.1)
       pluralize: 8.0.0
       prosemirror-model: 1.21.1
       react: 18.3.1
@@ -1674,8 +1674,8 @@ packages:
       - csstype
     dev: false
 
-  /@a-type/ui@0.8.24(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-Zvr+m8eHUVGJf0DXDNsGsrhcEDcfNBeXXdRBZBY3CDfYWyALwBFAGIuMy6QinVFWlJyt732nb1XamMI1mEDHaw==}
+  /@a-type/ui@0.8.26(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-FiGvfQIasp1KBvkfh5KfkND4RkhJVKwVCslwCIkneK28cMlG8mh+u6qixMw88eyZ9xfoQPltAnyC0DBnGHn7JQ==}
     peerDependencies:
       react: ^18
       react-dom: ^18
@@ -1726,13 +1726,13 @@ packages:
       - csstype
     dev: false
 
-  /@a-type/ui@0.8.24(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-Zvr+m8eHUVGJf0DXDNsGsrhcEDcfNBeXXdRBZBY3CDfYWyALwBFAGIuMy6QinVFWlJyt732nb1XamMI1mEDHaw==}
+  /@a-type/ui@0.8.26(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-FiGvfQIasp1KBvkfh5KfkND4RkhJVKwVCslwCIkneK28cMlG8mh+u6qixMw88eyZ9xfoQPltAnyC0DBnGHn7JQ==}
     peerDependencies:
       react: ^18
       react-dom: ^18
     dependencies:
-      '@a-type/utils': 1.1.0
+      '@a-type/utils': 1.1.3
       '@radix-ui/react-accordion': 1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       '@radix-ui/react-checkbox': 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       '@radix-ui/react-collapsible': 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
@@ -1766,7 +1766,7 @@ packages:
       color-parse: 2.0.2
       color-space: 2.0.1
       date-fns: 2.30.0
-      formik: 2.4.6(react@18.3.1)
+      formik: 2.4.5(react@18.3.1)
       pluralize: 8.0.0
       prosemirror-model: 1.21.1
       react: 18.3.1
@@ -1778,13 +1778,13 @@ packages:
       - csstype
     dev: false
 
-  /@a-type/ui@0.8.24(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-Zvr+m8eHUVGJf0DXDNsGsrhcEDcfNBeXXdRBZBY3CDfYWyALwBFAGIuMy6QinVFWlJyt732nb1XamMI1mEDHaw==}
+  /@a-type/ui@0.8.26(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-FiGvfQIasp1KBvkfh5KfkND4RkhJVKwVCslwCIkneK28cMlG8mh+u6qixMw88eyZ9xfoQPltAnyC0DBnGHn7JQ==}
     peerDependencies:
       react: ^18
       react-dom: ^18
     dependencies:
-      '@a-type/utils': 1.1.0
+      '@a-type/utils': 1.1.3
       '@radix-ui/react-accordion': 1.2.0(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       '@radix-ui/react-checkbox': 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       '@radix-ui/react-collapsible': 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
@@ -1818,7 +1818,7 @@ packages:
       color-parse: 2.0.2
       color-space: 2.0.1
       date-fns: 2.30.0
-      formik: 2.4.6(react@18.3.1)
+      formik: 2.4.5(react@18.3.1)
       pluralize: 8.0.0
       prosemirror-model: 1.21.1
       react: 18.3.1
@@ -1829,13 +1829,13 @@ packages:
       - '@types/react-dom'
       - csstype
 
-  /@a-type/ui@0.8.24(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-Zvr+m8eHUVGJf0DXDNsGsrhcEDcfNBeXXdRBZBY3CDfYWyALwBFAGIuMy6QinVFWlJyt732nb1XamMI1mEDHaw==}
+  /@a-type/ui@0.8.26(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-FiGvfQIasp1KBvkfh5KfkND4RkhJVKwVCslwCIkneK28cMlG8mh+u6qixMw88eyZ9xfoQPltAnyC0DBnGHn7JQ==}
     peerDependencies:
       react: ^18
       react-dom: ^18
     dependencies:
-      '@a-type/utils': 1.1.0
+      '@a-type/utils': 1.1.3
       '@radix-ui/react-accordion': 1.2.0(react-dom@18.3.1)(react@18.3.1)
       '@radix-ui/react-checkbox': 1.1.1(react-dom@18.3.1)(react@18.3.1)
       '@radix-ui/react-collapsible': 1.1.0(react-dom@18.3.1)(react@18.3.1)
@@ -1869,7 +1869,7 @@ packages:
       color-parse: 2.0.2
       color-space: 2.0.1
       date-fns: 2.30.0
-      formik: 2.4.6(react@18.3.1)
+      formik: 2.4.5(react@18.3.1)
       pluralize: 8.0.0
       prosemirror-model: 1.21.1
       react: 18.3.1
@@ -1895,6 +1895,7 @@ packages:
 
   /@a-type/utils@1.1.0:
     resolution: {integrity: sha512-dwM1bl6XQaC/X9RZQUp0LDGQF70nn0QV6TFq/bKsjqlt8OEBGWlr++um4oigl2QMKkwzto9XwoBJ/D38IvROIQ==}
+    dev: false
 
   /@a-type/utils@1.1.2:
     resolution: {integrity: sha512-VM/iA7Gco+RloJa8sNXdMgB+REIiNSL+H/ai4BJKPPUJq8woDY06Frd+XVw/V7lAorUrcBaGf0E1Z+7bXO9VMA==}
@@ -1902,7 +1903,6 @@ packages:
 
   /@a-type/utils@1.1.3:
     resolution: {integrity: sha512-wdd3pHus6WNYzoBZjwZhn2DJhgtK02VE/fky7t6soEl4DIUZamaCJmHivmFX4mvHL5/WIq/T2iXyZjDIC5F3KQ==}
-    dev: false
 
   /@aashutoshrathi/word-wrap@1.2.6:
     resolution: {integrity: sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==}
@@ -1979,13 +1979,13 @@ packages:
       - '@types/react'
     dev: false
 
-  /@astrojs/check@0.5.10(prettier@3.2.5)(typescript@5.4.5):
+  /@astrojs/check@0.5.10(typescript@5.4.5):
     resolution: {integrity: sha512-vliHXM9cu/viGeKiksUM4mXfO816ohWtawTl2ADPgTsd4nUMjFiyAl7xFZhF34yy4hq4qf7jvK1F2PlR3b5I5w==}
     hasBin: true
     peerDependencies:
       typescript: ^5.0.0
     dependencies:
-      '@astrojs/language-server': 2.8.4(prettier@3.2.5)(typescript@5.4.5)
+      '@astrojs/language-server': 2.8.4(typescript@5.4.5)
       chokidar: 3.6.0
       fast-glob: 3.3.2
       kleur: 4.1.5
@@ -2004,7 +2004,7 @@ packages:
     resolution: {integrity: sha512-6B13lz5n6BrbTqCTwhXjJXuR1sqiX/H6rTxzlXx+lN1NnV4jgnq/KJldCQaUWJzPL5SiWahQyinxAbxQtwgPHA==}
     dev: false
 
-  /@astrojs/language-server@2.8.4(prettier@3.2.5)(typescript@5.4.5):
+  /@astrojs/language-server@2.8.4(typescript@5.4.5):
     resolution: {integrity: sha512-sJH5vGTBkhgA8+hdhzX78UUp4cFz4Mt7xkEkevD188OS5bDMkaue6hK+dtXWM47mnrXFveXA2u38K7S+5+IRjA==}
     hasBin: true
     peerDependencies:
@@ -2024,11 +2024,10 @@ packages:
       '@volar/language-service': 2.1.6
       '@volar/typescript': 2.1.6
       fast-glob: 3.3.2
-      prettier: 3.2.5
       volar-service-css: 0.0.34(@volar/language-service@2.1.6)
       volar-service-emmet: 0.0.34(@volar/language-service@2.1.6)
       volar-service-html: 0.0.34(@volar/language-service@2.1.6)
-      volar-service-prettier: 0.0.34(@volar/language-service@2.1.6)(prettier@3.2.5)
+      volar-service-prettier: 0.0.34(@volar/language-service@2.1.6)
       volar-service-typescript: 0.0.34(@volar/language-service@2.1.6)
       volar-service-typescript-twoslash-queries: 0.0.34(@volar/language-service@2.1.6)
       vscode-html-languageservice: 5.2.0
@@ -6004,16 +6003,16 @@ packages:
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     dev: true
 
-  /@floating-ui/core@1.6.3:
-    resolution: {integrity: sha512-1ZpCvYf788/ZXOhRQGFxnYQOVgeU+pi0i+d0Ow34La7qjIXETi6RNswGVKkA6KcDO8/+Ysu2E/CeUmmeEBDvTg==}
+  /@floating-ui/core@1.6.4:
+    resolution: {integrity: sha512-a4IowK4QkXl4SCWTGUR0INAfEOX3wtsYw3rKK5InQEHMGObkR8Xk44qYQD9P4r6HHw0iIfK6GUKECmY8sTkqRA==}
     dependencies:
-      '@floating-ui/utils': 0.2.3
+      '@floating-ui/utils': 0.2.4
 
-  /@floating-ui/dom@1.6.6:
-    resolution: {integrity: sha512-qiTYajAnh3P+38kECeffMSQgbvXty2VB6rS+42iWR4FPIlZjLK84E9qtLnMTLIpPz2znD/TaFqaiavMUrS+Hcw==}
+  /@floating-ui/dom@1.6.7:
+    resolution: {integrity: sha512-wmVfPG5o2xnKDU4jx/m4w5qva9FWHcnZ8BvzEe90D/RpwsJaTAVYPEPdQ8sbr/N8zZTAHlZUTQdqg8ZUbzHmng==}
     dependencies:
-      '@floating-ui/core': 1.6.3
-      '@floating-ui/utils': 0.2.3
+      '@floating-ui/core': 1.6.4
+      '@floating-ui/utils': 0.2.4
 
   /@floating-ui/react-dom@2.1.1(react-dom@18.2.0)(react@18.3.1):
     resolution: {integrity: sha512-4h84MJt3CHrtG18mGsXuLCHMrug49d7DFkU0RMIyshRveBeyV2hmV/pDaF2Uxtu8kgq5r46llp5E5FQiR0K2Yg==}
@@ -6021,7 +6020,7 @@ packages:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
     dependencies:
-      '@floating-ui/dom': 1.6.6
+      '@floating-ui/dom': 1.6.7
       react: 18.3.1
       react-dom: 18.2.0(react@18.3.1)
     dev: false
@@ -6032,12 +6031,12 @@ packages:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
     dependencies:
-      '@floating-ui/dom': 1.6.6
+      '@floating-ui/dom': 1.6.7
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  /@floating-ui/utils@0.2.3:
-    resolution: {integrity: sha512-XGndio0l5/Gvd6CLIABvsav9HHezgDFFhDfHk1bvLfr9ni8dojqLSvBbotJEjmIwNHL7vK4QzBJTdBRoB+c1ww==}
+  /@floating-ui/utils@0.2.4:
+    resolution: {integrity: sha512-dWO2pw8hhi+WrXq1YJy2yCuWoL20PddgGaqTgVe4cOS9Q6qklXCiA1tJEqX6BEwRNSCP84/afac9hd4MS+zEUA==}
 
   /@googlemaps/google-maps-services-js@3.3.42:
     resolution: {integrity: sha512-DfqM28z0jSMr0BSw+CUcUPJLwwMhMf1f+IWfFYuPs6o/AqyYUN+jLjBQKfaUh69e8MShYM4LzcNBYjyttYtsmA==}
@@ -11094,7 +11093,6 @@ packages:
     cpu: [arm]
     os: [android]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-android-arm-eabi@4.5.2:
@@ -11117,7 +11115,6 @@ packages:
     cpu: [arm64]
     os: [android]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-android-arm64@4.5.2:
@@ -11140,7 +11137,6 @@ packages:
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-darwin-arm64@4.5.2:
@@ -11163,7 +11159,6 @@ packages:
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-darwin-x64@4.5.2:
@@ -11186,7 +11181,6 @@ packages:
     cpu: [arm]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-linux-arm-gnueabihf@4.5.2:
@@ -11209,7 +11203,6 @@ packages:
     cpu: [arm]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-linux-arm64-gnu@4.17.2:
@@ -11224,7 +11217,6 @@ packages:
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-linux-arm64-gnu@4.5.2:
@@ -11247,7 +11239,6 @@ packages:
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-linux-arm64-musl@4.5.2:
@@ -11270,7 +11261,6 @@ packages:
     cpu: [ppc64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-linux-riscv64-gnu@4.17.2:
@@ -11285,7 +11275,6 @@ packages:
     cpu: [riscv64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-linux-s390x-gnu@4.17.2:
@@ -11300,7 +11289,6 @@ packages:
     cpu: [s390x]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-linux-x64-gnu@4.17.2:
@@ -11315,7 +11303,6 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-linux-x64-gnu@4.5.2:
@@ -11338,7 +11325,6 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-linux-x64-musl@4.5.2:
@@ -11361,7 +11347,6 @@ packages:
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-win32-arm64-msvc@4.5.2:
@@ -11384,7 +11369,6 @@ packages:
     cpu: [ia32]
     os: [win32]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-win32-ia32-msvc@4.5.2:
@@ -11407,7 +11391,6 @@ packages:
     cpu: [x64]
     os: [win32]
     requiresBuild: true
-    dev: true
     optional: true
 
   /@rollup/rollup-win32-x64-msvc@4.5.2:
@@ -13302,7 +13285,7 @@ packages:
       - rollup
     dev: true
 
-  /@unocss/astro@0.59.4(vite@5.3.1):
+  /@unocss/astro@0.59.4(vite@5.3.3):
     resolution: {integrity: sha512-DU3OR5MMR1Uvvec4/wB9EetDASHRg19Moy6z/MiIhn8JWJ0QzWYgSeJcfUX8exomMYv6WUEQJL+CyLI34Wmn8w==}
     peerDependencies:
       vite: ^2.9.0 || ^3.0.0-0 || ^4.0.0 || ^5.0.0-0
@@ -13312,8 +13295,8 @@ packages:
     dependencies:
       '@unocss/core': 0.59.4
       '@unocss/reset': 0.59.4
-      '@unocss/vite': 0.59.4(vite@5.3.1)
-      vite: 5.3.1(@types/node@20.12.7)
+      '@unocss/vite': 0.59.4(vite@5.3.3)
+      vite: 5.3.3
     transitivePeerDependencies:
       - rollup
     dev: false
@@ -14320,7 +14303,7 @@ packages:
       - rollup
     dev: true
 
-  /@unocss/vite@0.59.4(vite@5.3.1):
+  /@unocss/vite@0.59.4(vite@5.3.3):
     resolution: {integrity: sha512-q7GN7vkQYn79n7vYIUlaa7gXGwc7pk0Qo3z3ZFwWGE43/DtZnn2Hwl5UjgBAgi9McA+xqHJEHRsJnI7HJPHUYA==}
     peerDependencies:
       vite: ^2.9.0 || ^3.0.0-0 || ^4.0.0 || ^5.0.0-0
@@ -14335,7 +14318,7 @@ packages:
       chokidar: 3.6.0
       fast-glob: 3.3.2
       magic-string: 0.30.10
-      vite: 5.3.1(@types/node@20.12.7)
+      vite: 5.3.3
     transitivePeerDependencies:
       - rollup
     dev: false
@@ -15156,7 +15139,7 @@ packages:
       tsconfck: 3.0.3(typescript@5.4.5)
       unist-util-visit: 5.0.0
       vfile: 6.0.1
-      vite: 5.3.1(@types/node@20.12.7)
+      vite: 5.3.1
       vitefu: 0.2.5(vite@5.3.1)
       which-pm: 2.1.1
       yargs-parser: 21.1.1
@@ -18039,7 +18022,6 @@ packages:
       react-fast-compare: 2.0.4
       tiny-warning: 1.0.3
       tslib: 2.6.2
-    dev: false
 
   /formik@2.4.6(react@18.3.1):
     resolution: {integrity: sha512-A+2EI7U7aG296q2TLGvNapDNTZp1khVt5Vk0Q/fyfSROss0V/V6+txt2aJnwEos44IxTCW/LYAi/zgWzlevj+g==}
@@ -18055,6 +18037,7 @@ packages:
       react-fast-compare: 2.0.4
       tiny-warning: 1.0.3
       tslib: 2.6.3
+    dev: false
 
   /forwarded@0.2.0:
     resolution: {integrity: sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==}
@@ -22107,7 +22090,6 @@ packages:
       '@rollup/rollup-win32-ia32-msvc': 4.18.1
       '@rollup/rollup-win32-x64-msvc': 4.18.1
       fsevents: 2.3.3
-    dev: true
 
   /rollup@4.5.2:
     resolution: {integrity: sha512-CRK1uoROBfkcqrZKyaFcqCcZWNsvJ6yVYZkqTlRocZhO2s5yER6Z3f/QaYtO8RGyloPnmhwgzuPQpNGeK210xQ==}
@@ -23797,7 +23779,7 @@ packages:
       - supports-color
     dev: true
 
-  /unocss@0.59.4(postcss@8.4.39)(vite@5.3.1):
+  /unocss@0.59.4(postcss@8.4.39)(vite@5.3.3):
     resolution: {integrity: sha512-QmCVjRObvVu/gsGrJGVt0NnrdhFFn314BUZn2WQyXV9rIvHLRmG5bIu0j5vibJkj7ZhFchTrnTM1pTFXP1xt5g==}
     engines: {node: '>=14'}
     peerDependencies:
@@ -23809,7 +23791,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      '@unocss/astro': 0.59.4(vite@5.3.1)
+      '@unocss/astro': 0.59.4(vite@5.3.3)
       '@unocss/cli': 0.59.4
       '@unocss/core': 0.59.4
       '@unocss/extractor-arbitrary-variants': 0.59.4
@@ -23828,8 +23810,8 @@ packages:
       '@unocss/transformer-compile-class': 0.59.4
       '@unocss/transformer-directives': 0.59.4
       '@unocss/transformer-variant-group': 0.59.4
-      '@unocss/vite': 0.59.4(vite@5.3.1)
-      vite: 5.3.1(@types/node@20.12.7)
+      '@unocss/vite': 0.59.4(vite@5.3.3)
+      vite: 5.3.3
     transitivePeerDependencies:
       - postcss
       - rollup
@@ -24620,6 +24602,7 @@ packages:
       rollup: 4.17.2
     optionalDependencies:
       fsevents: 2.3.3
+    dev: true
 
   /vite@5.3.3:
     resolution: {integrity: sha512-NPQdeCU0Dv2z5fu+ULotpuq5yfCS1BzKUIPhNbP3YBfAMGJXbt2nS+sbTFu+qchaqWTD+H3JK++nRwr6XIcp6A==}
@@ -24654,7 +24637,6 @@ packages:
       rollup: 4.18.1
     optionalDependencies:
       fsevents: 2.3.3
-    dev: true
 
   /vitefu@0.2.5(vite@5.3.1):
     resolution: {integrity: sha512-SgHtMLoqaeeGnd2evZ849ZbACbnwQCIwRH57t18FxcXoZop0uQu0uzlIhJBlF/eWVzuce0sHeqPcDo+evVcg8Q==}
@@ -24664,7 +24646,7 @@ packages:
       vite:
         optional: true
     dependencies:
-      vite: 5.3.1(@types/node@20.12.7)
+      vite: 5.3.1
     dev: false
 
   /vitest@0.22.1:
@@ -24804,7 +24786,7 @@ packages:
       vscode-uri: 3.0.8
     dev: false
 
-  /volar-service-prettier@0.0.34(@volar/language-service@2.1.6)(prettier@3.2.5):
+  /volar-service-prettier@0.0.34(@volar/language-service@2.1.6):
     resolution: {integrity: sha512-BNfJ8FwfPi1Wm/JkuzNjraOLdtKieGksNT/bDyquygVawv1QUzO2HB1hiMKfZGdcSFG5ZL9R0j7bBfRTfXA2gg==}
     peerDependencies:
       '@volar/language-service': ~2.1.0
@@ -24816,7 +24798,6 @@ packages:
         optional: true
     dependencies:
       '@volar/language-service': 2.1.6
-      prettier: 3.2.5
       vscode-uri: 3.0.8
     dev: false
 

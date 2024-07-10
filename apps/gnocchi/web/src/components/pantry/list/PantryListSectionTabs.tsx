@@ -1,5 +1,6 @@
 import { TabsList, TabsRoot, TabsTrigger } from '@a-type/ui/components/tabs';
 import { useFilter } from '../hooks.js';
+import { Icon } from '@/components/icons/Icon.jsx';
 
 export interface PantryListSectionTabsProps {}
 
@@ -14,12 +15,15 @@ export function PantryListSectionTabs({}: PantryListSectionTabsProps) {
     >
       <TabsList>
         <TabsTrigger className="text-nowrap" value="purchased">
+          <Icon name="check" />
           Purchased
         </TabsTrigger>
-        <TabsTrigger value="frozen" className="text-nowrap theme-leek">
+        <TabsTrigger value="frozen" className="text-nowrap">
+          <Icon name="snowflake" />
           Frozen
         </TabsTrigger>
         <TabsTrigger className="text-nowrap" value="all">
+          <Icon name="food" />
           All foods
         </TabsTrigger>
       </TabsList>

@@ -1,12 +1,12 @@
+import { hooks } from '@/store.js';
 import {
   FormikForm,
   SubmitButton,
   TextField,
 } from '@a-type/ui/components/forms';
-import { useListContext } from './ListContext.jsx';
-import { createdItemState } from './state.js';
-import { hooks } from '@/store.js';
+import { isUrl } from '@a-type/utils';
 import { authorization } from '@wish-wash.biscuits/verdant';
+import { useListContext } from './ListContext.jsx';
 
 export interface CreateItemProps {}
 
@@ -18,10 +18,18 @@ export function CreateItem({}: CreateItemProps) {
     <FormikForm
       initialValues={{ description: '' }}
       onSubmit={async (values, form) => {
+        let description = values.description;
+        let link: string | null = null;
+        if (isUrl(values.description)) {
+          link = values.description;
+          description = 'Web item';
+        }
+
         const item = await client.items.put(
           {
             listId,
-            description: values.description,
+            description,
+            link,
           },
           {
             access: list.isAuthorized
@@ -41,6 +49,7 @@ export function CreateItem({}: CreateItemProps) {
         required
         className="flex-1"
         variant="primary"
+        placeholder="An idea, or a URL..."
       />
       <SubmitButton>Add</SubmitButton>
     </FormikForm>

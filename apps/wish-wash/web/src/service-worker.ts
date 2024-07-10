@@ -16,6 +16,7 @@ import {
 } from 'workbox-precaching';
 import { NavigationRoute, registerRoute } from 'workbox-routing';
 import { StaleWhileRevalidate } from 'workbox-strategies';
+import { listenForShare } from '@biscuits/client/serviceWorkers';
 
 declare const self: ServiceWorkerGlobalScope;
 
@@ -58,3 +59,5 @@ self.addEventListener('message', (event) => {
     self.skipWaiting();
   }
 });
+
+listenForShare();

@@ -21,7 +21,7 @@ export function ListMenu(props: ListMenuProps) {
   const navigate = useNavigate();
   const createList = async (isPrivate?: boolean) => {
     const list = await client.lists.put(
-      { name: 'New list' },
+      { name: 'Wish list' },
       {
         access: isPrivate ? authorization.private : authorization.public,
       },

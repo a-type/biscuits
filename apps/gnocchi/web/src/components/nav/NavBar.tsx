@@ -85,7 +85,6 @@ const NavBarLink = memo(
         <Link
           to={to}
           className={classNames({
-            'important:(color-black bg-primaryWash)': active,
             active: active,
           })}
           data-active={active}

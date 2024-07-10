@@ -23,22 +23,9 @@ export function listenForShare() {
 
           const formData = await event.request.formData();
           const text = formData.get('text');
-          if (text && typeof text === 'string') {
-            // check if text is a URL
-            try {
-              new URL(text);
-              // post message to the client
-
-              client.postMessage({ type: 'pwa-share', url: text });
-            } catch (e) {
-              // not a URL, could be ingredients list
-              const items = text.split('\n');
-
-              client.postMessage({ type: 'pwa-share', items });
-            }
-          } else {
-            console.warn('No text found in share');
-          }
+          const url = formData.get('url');
+          const title = formData.get('title');
+          client.postMessage({ type: 'pwa-share', text, url, title });
         })(),
       );
     }
