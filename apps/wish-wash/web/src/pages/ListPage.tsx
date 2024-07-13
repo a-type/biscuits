@@ -4,7 +4,12 @@ import { ListPicker } from '@/components/lists/ListPicker.jsx';
 import { ListView } from '@/components/lists/ListView.jsx';
 import { hooks } from '@/store.js';
 import { Button } from '@a-type/ui/components/button';
-import { PageContent, PageFixedArea } from '@a-type/ui/components/layouts';
+import {
+  PageContent,
+  PageFixedArea,
+  PageNav,
+  PageNowPlaying,
+} from '@a-type/ui/components/layouts';
 import { H1 } from '@a-type/ui/components/typography';
 import { useLocalStorage, UserMenu } from '@biscuits/client';
 import { Link, useNavigate, useParams } from '@verdant-web/react-router';
@@ -48,22 +53,18 @@ export function ListPage({}: ListPageProps) {
 
 function ListPageContent({ list }: { list: List }) {
   const ctx = useMemo(() => ({ listId: list.get('id'), list }), [list]);
-  const navigate = useNavigate();
 
   return (
     <ListProvider value={ctx}>
-      <PageContent>
-        <PageFixedArea className="flex-row justify-start py-2 mb-2">
-          <ListPicker
-            value={list.get('id')}
-            onChange={(id, isNew) =>
-              navigate(`/${id}${isNew ? `?listId=${id}` : ``}`)
-            }
-          />
-          <ListDetailsEditButton listId={list.get('id')} />
-          <UserMenu className="ml-auto" />
+      <PageContent fullHeight noPadding>
+        <PageFixedArea className="flex-col p-0 gap-2 mb-2">
+          <div className="row p-2">
+            <ListDetailsEditButton listId={list.get('id')} />
+            <UserMenu className="ml-auto" />
+          </div>
+          <ListPicker value={list.get('id')} />
         </PageFixedArea>
-        <ListView listId={list.get('id')} />
+        <ListView listId={list.get('id')} className="m-2" />
       </PageContent>
     </ListProvider>
   );

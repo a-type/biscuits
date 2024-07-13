@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@a-type/ui": "0.8.26",
+    "@a-type/ui": "0.8.28",
     "@a-type/utils": "1.1.0",
     "@biscuits/client": "workspace:*",
     "@marginalia.biscuits/verdant": "workspace:*",
