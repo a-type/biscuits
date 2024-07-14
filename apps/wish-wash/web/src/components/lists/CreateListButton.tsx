@@ -25,9 +25,12 @@ export function CreateListButton({
 
   const canSync = useCanSync();
 
+  const [open, setOpen] = useState(false);
+
   const createPublic = async () => {
     const list = await client.lists.put({});
     navigate(`/${list.get('id')}?listId=${list.get('id')}`);
+    setOpen(false);
   };
   const createPrivate = async () => {
     const list = await client.lists.put(
@@ -37,9 +40,8 @@ export function CreateListButton({
       },
     );
     navigate(`/${list.get('id')}?listId=${list.get('id')}`);
+    setOpen(false);
   };
-
-  const [open, setOpen] = useState(false);
 
   return (
     <Dialog
