@@ -19,7 +19,7 @@ import {
   getOS,
 } from '../platform.js';
 import { Icon } from '@a-type/ui/components/icon';
-import clsx from 'clsx';
+import { clsx } from '@a-type/ui';
 import { useAppId } from './Context.js';
 import { appsById } from '@biscuits/apps';
 

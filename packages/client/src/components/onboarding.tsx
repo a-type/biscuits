@@ -6,7 +6,6 @@ import {
   CollapsibleRoot,
 } from '@a-type/ui/components/collapsible';
 import { ReactNode, useEffect, useState } from 'react';
-import classNames from 'classnames';
 import {
   Popover,
   PopoverAnchor,
@@ -15,6 +14,7 @@ import {
 } from '@a-type/ui/components/popover';
 import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
+import { clsx } from '@a-type/ui';
 
 type StringTuple = readonly string[];
 export type Onboarding<Steps extends StringTuple> = {
@@ -177,7 +177,7 @@ export function OnboardingBanner<O extends Onboarding<any>>({
   return (
     <CollapsibleRoot
       open={show}
-      className={classNames('theme-leek', 'w-full', className)}
+      className={clsx('theme-leek', 'w-full', className)}
     >
       <CollapsibleContent>
         <div className="flex flex-col w-full bg-primary-wash color-black p-4 rounded-lg gap-3">
@@ -234,7 +234,7 @@ export const OnboardingTooltip = function OnboardingTooltip<
       <PopoverAnchor asChild>{children}</PopoverAnchor>
       <PopoverContent
         disableBlur
-        className={classNames(
+        className={clsx(
           'theme-leek',
           'bg-primary-wash flex py-2 px-3',
           'overflow-visible',
