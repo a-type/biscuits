@@ -80,6 +80,10 @@ const routes = makeRoutes([
         path: 'foods',
         component: lazy(() => import('./admin/AdminFoodsPage.js')),
       },
+      {
+        path: 'changelogs',
+        component: lazy(() => import('./admin/AdminChangelogsPage.js')),
+      },
     ],
   },
   {

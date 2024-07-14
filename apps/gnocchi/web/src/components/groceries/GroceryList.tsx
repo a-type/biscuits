@@ -30,10 +30,7 @@ import {
   MOBILE_DRAG_ACTIVATION_DELAY,
 } from './constants.js';
 import { GroceryDnDDrag, GroceryDnDDrop } from './dndTypes.js';
-import {
-  useItemsGroupedAndSorted,
-  useTransitionPurchasedItems,
-} from './hooks.js';
+import { useItemsGroupedAndSorted } from './hooks.js';
 import { GroceryItemDragPreview } from './items/GroceryItemDragPreview.jsx';
 import { groceriesState } from './state.js';
 import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
@@ -52,8 +49,6 @@ export const GroceryList = forwardRef<HTMLDivElement, GroceryListProps>(
     const handleDragCancel = useOnDragCancel();
 
     const sensors = useGroceryDndSensors();
-
-    useTransitionPurchasedItems();
 
     return (
       <DndContext

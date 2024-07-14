@@ -12,6 +12,13 @@ import {
 import { useState } from 'react';
 import { graphql, useQuery } from '../index.js';
 import { useAppId } from './Context.js';
+import {
+  NavBarItem,
+  NavBarItemIcon,
+  NavBarItemIconWrapper,
+  NavBarItemText,
+} from '@a-type/ui/components/navBar';
+import { withClassName } from '@a-type/ui/hooks';
 
 export interface ChangelogDisplayProps {
   children?: React.ReactNode;
@@ -107,3 +114,21 @@ export function ChangelogDisplay({
     </Dialog>
   );
 }
+
+export function NavBarChangelog() {
+  return (
+    <ChangelogDisplay hideOnSeen className="hidden md:flex">
+      <NavBarChangelogButton>
+        <NavBarItemIconWrapper>
+          <NavBarItemIcon name="gift" />
+        </NavBarItemIconWrapper>
+        <NavBarItemText>What&apos;s new</NavBarItemText>
+      </NavBarChangelogButton>
+    </ChangelogDisplay>
+  );
+}
+
+const NavBarChangelogButton = withClassName(
+  NavBarItem,
+  '[&[data-new=true]]:(bg-accent-wash text-accent-dark)',
+);

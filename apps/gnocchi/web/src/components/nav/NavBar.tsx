@@ -1,5 +1,4 @@
 import { Link } from '@/components/nav/Link.jsx';
-import { firstTimeOnboarding } from '@/onboarding/firstTimeOnboarding.js';
 import { saveHubRecipeOnboarding } from '@/onboarding/saveHubRecipeOnboarding.js';
 import { hooks } from '@/stores/groceries/index.js';
 import { PageNav } from '@a-type/ui/components/layouts';
@@ -23,8 +22,7 @@ import {
 } from 'react';
 import { useSnapshot } from 'valtio';
 import { groceriesState } from '../groceries/state.js';
-import { Icon } from '../icons/Icon.jsx';
-import { OnboardingTooltip } from '@biscuits/client';
+import { NavBarChangelog, OnboardingTooltip } from '@biscuits/client';
 import { useHasNewExpirations } from '../pantry/hooks.js';
 import { PopEffect } from './PopEffect.jsx';
 import { withClassName } from '@a-type/ui/hooks';
@@ -126,19 +124,10 @@ const Pip = withClassName(
 );
 
 function PantryNavBarLink({ active }: { active: boolean }) {
-  const { purchasedHidingItems } = useSnapshot(groceriesState);
-  const recent = !!purchasedHidingItems.size;
-
   const [newExpiredTime, onSeen] = useHasNewExpirations();
 
   return (
-    <NavBarLink
-      to="/pantry"
-      icon="food"
-      animate={recent}
-      active={active}
-      onClick={onSeen}
-    >
+    <NavBarLink to="/pantry" icon="food" active={active} onClick={onSeen}>
       <span>Pantry</span>
       {newExpiredTime && <Pip />}
     </NavBarLink>
@@ -176,21 +165,3 @@ function GroceriesNavBarLink({ active }: { active: boolean }) {
     </OnboardingTooltip>
   );
 }
-
-function NavBarChangelog() {
-  return (
-    <ChangelogDisplay hideOnSeen className="hidden md:display-flex">
-      <NavBarChangelogButton>
-        <NavBarItemIconWrapper>
-          <NavBarItemIcon name="gift" />
-        </NavBarItemIconWrapper>
-        <NavBarItemText>What&apos;s new</NavBarItemText>
-      </NavBarChangelogButton>
-    </ChangelogDisplay>
-  );
-}
-
-const NavBarChangelogButton = withClassName(
-  NavBarItem,
-  '[&[data-new=true]]:(bg-accent-wash text-accent-dark)',
-);

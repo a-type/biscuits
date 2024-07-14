@@ -65,8 +65,13 @@ export const CategoryClaim = memo(function CategoryClaim({
   const peopleCount = Math.max(1, people.length);
 
   return (
-    <Button color="ghost" size="small" className="p-2px h-30px" onClick={claim}>
-      <PeopleList count={peopleCount} size={18}>
+    <Button
+      color="ghost"
+      size="small"
+      className="p-0 h-auto w-auto"
+      onClick={claim}
+    >
+      <PeopleList count={peopleCount} size={20}>
         {people.map((person, index) => (
           <PeopleListAvatar
             key={person.id}

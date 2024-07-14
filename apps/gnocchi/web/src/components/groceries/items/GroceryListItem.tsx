@@ -1,8 +1,6 @@
 import { OpenFoodDetailButton } from '@/components/foods/OpenFoodDetailButton.jsx';
 import { ItemSources } from '@/components/groceries/items/ItemSources.jsx';
-import { Icon } from '@a-type/ui/components/icon';
 import { Link } from '@/components/nav/Link.jsx';
-import { OnboardingTooltip } from '@biscuits/client';
 import { usePurchasedText } from '@/components/pantry/hooks.js';
 import {
   PeopleList,
@@ -13,7 +11,8 @@ import { useListId } from '@/contexts/ListContext.jsx';
 import useMergedRef from '@/hooks/useMergedRef.js';
 import { useIsFirstRender, usePrevious } from '@/hooks/usePrevious.js';
 import { categorizeOnboarding } from '@/onboarding/categorizeOnboarding.js';
-import { Person, Presence, Profile, hooks } from '@/stores/groceries/index.js';
+import { Person, hooks } from '@/stores/groceries/index.js';
+import { clsx } from '@a-type/ui';
 import { Button } from '@a-type/ui/components/button';
 import {
   CheckboxIndicator,
@@ -33,22 +32,18 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@a-type/ui/components/dialog';
+import { Icon } from '@a-type/ui/components/icon';
 import { LiveUpdateTextField } from '@a-type/ui/components/liveUpdateTextField';
 import { NumberStepper } from '@a-type/ui/components/numberStepper';
 import { useParticles } from '@a-type/ui/components/particles';
 import { Tooltip } from '@a-type/ui/components/tooltip';
 import { useSizeCssVars } from '@a-type/ui/hooks';
 import { preventDefault, stopPropagation } from '@a-type/utils';
+import { OnboardingTooltip } from '@biscuits/client';
 import { useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 import { Item } from '@gnocchi.biscuits/verdant';
-import {
-  ClockIcon,
-  DragHandleDots2Icon,
-  Pencil1Icon,
-  TrashIcon,
-} from '@radix-ui/react-icons';
-import classNames from 'classnames';
+import { ClockIcon, Pencil1Icon, TrashIcon } from '@radix-ui/react-icons';
 import {
   CSSProperties,
   Suspense,
@@ -63,6 +58,7 @@ import { useSnapshot } from 'valtio';
 import { ListSelect } from '../lists/ListSelect.jsx';
 import { useListOrNull, useListThemeClass } from '../lists/hooks.js';
 import { groceriesState } from '../state.js';
+import './GroceryListItem.css';
 import { ItemDeleteButton } from './ItemDeleteButton.js';
 import { useItemDisplayText, useItemSubline } from './hooks.js';
 
@@ -83,22 +79,20 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
       hooks.useWatch(item);
 
     const isPurchased = !!purchasedAt;
-    const { purchasedHidingItems } = useSnapshot(groceriesState);
-    const isHiding = purchasedHidingItems.has(id);
 
     // TODO: clean this up
-    const purchasedHiddenState = isHiding ? 'hidden' : 'visible';
+    const purchasedHiddenState = 'visible';
 
     const previousPurchasedAt = usePrevious(isPurchased);
     const wasPurchasedSinceMount = isPurchased && !previousPurchasedAt;
     useEffect(() => {
       if (wasPurchasedSinceMount) {
-        groceriesState.purchasedStillVisibleItems.add(id);
+        groceriesState.purchasedThisSession.add(id);
       }
     }, [wasPurchasedSinceMount, id]);
     useEffect(() => {
       if (!isPurchased) {
-        groceriesState.purchasedStillVisibleItems.delete(id);
+        groceriesState.purchasedThisSession.delete(id);
       }
     }, [isPurchased]);
 
@@ -126,7 +120,7 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 
     return (
       <CollapsibleRoot
-        className={classNames(
+        className={clsx(
           'item',
           'grid grid-areas-[check_main]-[check_comment]-[secondary_secondary] grid-cols-[min-content_1fr_min-content] grid-rows-[min-content_min-content_min-content]',
           'w-full bg-wash rounded-lg relative select-none transition ease-springy',
@@ -158,7 +152,12 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
           togglePurchased={togglePurchased}
         />
         <div className="flex flex-row items-start [grid-area:main] pt-2 pr-3 pb-2 relative focus:(shadow-focus)">
-          <div className="flex flex-col gap-1 items-start flex-1 mr-2">
+          <div
+            className={clsx(
+              'flex flex-col gap-1 items-start flex-1 mr-2',
+              isPurchased && 'item-purchased',
+            )}
+          >
             <div className="flex flex-row items-start gap-1 mt-1 max-w-full overflow-hidden text-ellipsis relative">
               <span>{displayString}</span>
             </div>
@@ -417,7 +416,7 @@ function ListTag({
             className="focus-visible:outline-none"
           >
             <div
-              className={classNames(
+              className={clsx(
                 listThemeClass,
                 'flex items-center justify-center p-1 color-black rounded-md bg-primary-light text-xs min-w-3 min-h-3 gap-1 lg:px-2',
               )}
@@ -458,7 +457,7 @@ function QuantityEditor({
       <DialogTrigger asChild>
         <Button
           size="icon"
-          className={classNames('p-1 font-normal', className)}
+          className={clsx('p-1 font-normal', className)}
           color="ghost"
         >
           <Pencil1Icon />
@@ -502,8 +501,6 @@ function ItemCheckbox({
   const ref = useRef<HTMLButtonElement>(null);
   const particles = useParticles();
 
-  const { beganMoveToHidingAt } = useSnapshot(groceriesState);
-
   useEffect(() => {
     if (isPurchased && ref.current) {
       particles?.addParticles(
@@ -529,12 +526,11 @@ function ItemCheckbox({
       onPointerDown={stopPropagation}
       onPointerUp={stopPropagation}
       data-test="grocery-list-item-checkbox"
-      className="[grid-area:check] mt-2 mx-3 overflow-hidden"
-    >
-      {isPurchased && !!beganMoveToHidingAt && (
-        <HideProgress startedAt={beganMoveToHidingAt} />
+      className={clsx(
+        '[grid-area:check] mt-2 mx-3 overflow-hidden',
+        isPurchased && 'checkbox-purchased',
       )}
-      {/* <HideProgress startedAt={Date.now()} /> */}
+    >
       <CheckboxIndicator />
     </CheckboxRoot>
   );
@@ -596,7 +592,7 @@ function RecentPurchaseHint({
   if (compact) {
     return (
       <Tooltip content={purchasedText}>
-        <ClockIcon className={classNames('color-primary-dark', className)} />
+        <ClockIcon className={clsx('color-primary-dark', className)} />
       </Tooltip>
     );
   }
@@ -606,7 +602,7 @@ function RecentPurchaseHint({
 
   return (
     <div
-      className={classNames(
+      className={clsx(
         'text-xs text-gray-7 italic flex flex-row gap-1 items-center',
         className,
       )}
@@ -614,47 +610,5 @@ function RecentPurchaseHint({
       <ClockIcon />
       <span>{purchasedText}</span>
     </div>
-  );
-}
-
-function HideProgress({ startedAt }: { startedAt: number }) {
-  const circleRef = useRef<SVGCircleElement>(null);
-  useEffect(() => {
-    if (!startedAt) return;
-    const circle = circleRef.current;
-    if (!circle) return;
-    const circumference = 32 * Math.PI;
-    const duration = 5000;
-    const start = Date.now();
-    const end = start + duration;
-    const animate = () => {
-      const now = Date.now();
-      const elapsed = now - start;
-      const progress = elapsed / duration;
-      const strokeDashoffset = circumference * (1 - progress);
-      circle.style.strokeDashoffset = String(strokeDashoffset);
-      if (now < end) {
-        requestAnimationFrame(animate);
-      }
-    };
-    animate();
-  }, [startedAt]);
-
-  return (
-    <svg
-      viewBox="0 0 32 32"
-      className="w-32px h-32px flex-shrink-0 rounded-full overflow-hidden absolute left-50% right-50% [transform:translate(-50%,-50%)]"
-    >
-      <circle
-        ref={circleRef}
-        r="50%"
-        cx="50%"
-        cy="50%"
-        fill="transparent"
-        opacity="0.25"
-        strokeDasharray={`${32 * Math.PI}`}
-        className="stroke-primary-dark stroke-32px transform rotate-270 origin-center"
-      />
-    </svg>
   );
 }

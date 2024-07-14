@@ -46,17 +46,16 @@ export const AddInput = forwardRef<HTMLDivElement, AddInputProps>(
           name="text"
           required
           className="flex-1 pr-[72px] max-w-none"
-          variant="primary"
           autoComplete="off"
           tabIndex={disableInteraction ? -1 : 0}
           {...inputProps}
         />
-        <div className="absolute flex flex-row-reverse gap-1 right-1 top-1">
+        <div className="absolute flex flex-row-reverse gap-1 right-0px top-0px">
           <Button
             data-test="grocery-list-add-button"
             color="primary"
             size="icon"
-            className="w-34px h-34px p-0 items-center justify-center"
+            className="w-35px h-35px p-0 items-center justify-center"
             onClick={() =>
               selectItem({
                 type: 'raw',

@@ -54,6 +54,29 @@ builder.mutationFields((t) => ({
       return assignTypeName('ChangelogItem')(result);
     },
   }),
+  deleteChangelogItem: t.field({
+    type: 'ChangelogItem',
+    args: {
+      id: t.arg.string({
+        description: 'The ID of the changelog item to delete',
+        required: true,
+      }),
+    },
+    authScopes: {
+      productAdmin: true,
+    },
+    resolve: async (_, { id }, { db }) => {
+      const result = await db
+        .deleteFrom('ChangelogItem')
+        .where('id', '=', id)
+        .returningAll()
+        .executeTakeFirst();
+      if (!result) {
+        throw new Error('Failed to delete changelog item');
+      }
+      return assignTypeName('ChangelogItem')(result);
+    },
+  }),
 }));
 
 builder.objectType('ChangelogItem', {

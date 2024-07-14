@@ -56,12 +56,12 @@ export function GroceryListCategory({
       ref={finalRef}
       {...rest}
     >
-      <CategoryTitleRow>
+      <CategoryTitleRow className="relative">
         <CategoryTitle>
           {category?.get('name') ?? 'Uncategorized'}
         </CategoryTitle>
         {category && (
-          <div className="ml-auto mr-1 flex flex-row items-center justify-between flex-grow-0 flex-shrink-0 flex-basis-auto">
+          <div className="flex flex-row items-center justify-between absolute right-4px top-1/2 -translate-1/2">
             <CategoryClaim category={category} />
           </div>
         )}

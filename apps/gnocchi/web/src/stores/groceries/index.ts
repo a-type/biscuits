@@ -566,7 +566,7 @@ export function createClientDescriptor(options: { namespace: string }) {
             } else if (level === 'warn') {
               console.warn('🌿', ...args);
             } else {
-              console.log('🌿', ...args);
+              console.debug('🌿', ...args);
             }
           }
         : undefined,

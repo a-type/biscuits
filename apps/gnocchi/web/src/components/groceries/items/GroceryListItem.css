@@ -1,0 +1,28 @@
+@keyframes checkAndFade {
+  from {
+    opacity: 1;
+    background-color: var(--color-primary);
+  }
+  to {
+    opacity: 0.5;
+    background-color: transparent;
+    border-color: transparent;
+  }
+}
+
+@keyframes itemFade {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
+.checkbox-purchased {
+  animation: checkAndFade 5s forwards linear;
+}
+
+.item-purchased {
+  animation: itemFade 5s forwards linear;
+}

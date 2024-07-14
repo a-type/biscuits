@@ -19,19 +19,15 @@ export function useItemsGroupedAndSorted(
         },
   );
   const categories = hooks.useAllCategories();
-  const { purchasedStillVisibleItems, purchasedHidingItems } =
-    useSnapshot(groceriesState);
+  const { purchasedThisSession } = useSnapshot(groceriesState);
 
   const visibleItems = useMemo(
     () =>
       items.filter((item) => {
         if (!item.get('purchasedAt')) return true;
-        return (
-          purchasedStillVisibleItems.has(item.get('id')) ||
-          purchasedHidingItems.has(item.get('id'))
-        );
+        return purchasedThisSession.has(item.get('id'));
       }),
-    [items, purchasedStillVisibleItems, purchasedHidingItems],
+    [items, purchasedThisSession],
   );
 
   // subscribe to the cateogryId on all visible items to re-render when the category changes
@@ -86,37 +82,3 @@ export function useItemsGroupedAndSorted(
     itemCount: visibleItems.length,
   };
 }
-
-export function useTransitionPurchasedItems() {
-  const { purchasedStillVisibleItems } = useSnapshot(groceriesState);
-  // no cleanups in these effects since we want them to run even if
-  // the user navigates away
-  useEffect(() => {
-    if (purchasedStillVisibleItems.size) {
-      debouncedMovePurchasedItemsToHiding();
-      groceriesState.beganMoveToHidingAt = Date.now();
-    }
-  }, [purchasedStillVisibleItems.size]);
-}
-
-function movePurchasedItemsToHiding() {
-  console.log('moving purchased items to hiding');
-  for (const id of groceriesState.purchasedStillVisibleItems) {
-    groceriesState.purchasedHidingItems.add(id);
-  }
-  groceriesState.purchasedStillVisibleItems.clear();
-  debouncedClearPurchasedHidingItems();
-}
-const debouncedMovePurchasedItemsToHiding = debounce(
-  movePurchasedItemsToHiding,
-  5000,
-);
-
-function clearPurchasedHidingItems() {
-  console.log('clearing purchased hiding items');
-  groceriesState.purchasedHidingItems.clear();
-}
-const debouncedClearPurchasedHidingItems = debounce(
-  clearPurchasedHidingItems,
-  1000,
-);
