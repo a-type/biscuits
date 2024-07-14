@@ -3,7 +3,7 @@ import { AddToListDialog } from '@/components/recipes/viewer/AddToListDialog.jsx
 import useMergedRef from '@/hooks/useMergedRef.js';
 import { Input } from '@a-type/ui/components/input';
 import { useSize } from '@a-type/ui/hooks';
-import { isUrl } from '@a-type/utils';
+import { isUrl, stopPropagation } from '@a-type/utils';
 import { showSubscriptionPromotion, useCanSync } from '@biscuits/client';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import classNames from 'classnames';
@@ -30,6 +30,7 @@ import {
   useAddBarSuggestions,
 } from './hooks.js';
 import { AddBarProps } from './AddBar.jsx';
+import { ScrollArea } from '@a-type/ui/components/scrollArea';
 
 const AddPaneImpl = forwardRef<
   HTMLDivElement,
@@ -132,12 +133,12 @@ const AddPaneImpl = forwardRef<
         disableInteraction={disabled}
         {...rest}
       />
-      <div
+      <ScrollArea
         {...menuProps}
         className={classNames(
-          'flex flex-col overflow-x-hidden overflow-y-auto overscroll-contain max-h-[calc(var(--viewport-height,40vh)-80px)] lg:max-h-50vh w-full max-w-none gap-4 p-3',
+          'flex flex-col max-h-[calc(var(--viewport-height,40vh)-80px)] lg:max-h-50vh w-full max-w-none gap-4 p-3',
         )}
-        onScroll={console.log}
+        onScroll={stopPropagation}
       >
         {showSuggested && (
           <SuggestionGroup
@@ -164,7 +165,7 @@ const AddPaneImpl = forwardRef<
           />
         )}
         {noSuggestions && <div>No suggestions</div>}
-      </div>
+      </ScrollArea>
       {addingRecipe && (
         <AddToListDialog
           recipe={addingRecipe}

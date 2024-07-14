@@ -24,6 +24,7 @@ import {
 import { RecipeTagsList } from './RecipeTagsList.jsx';
 import classNames from 'classnames';
 import { RecipePresenceNotification } from '@/components/sync/collaborationMenu/RecipePresenceNotification.jsx';
+import { RecipeTagsFilter } from './RecipeTagsFilter.jsx';
 
 export interface RecipeListProps {}
 
@@ -104,11 +105,10 @@ function TagFilterList() {
     tagFilter ? setTagFilter(null) : setTagFilter(value);
 
   return (
-    <RecipeTagsList
+    <RecipeTagsFilter
       onSelect={toggleTagFilter}
       selectedValues={tagFilter ? [tagFilter] : []}
-      onlySelected
-      className="mb-4 font-normal text-xs"
+      className="mb-1 font-normal text-xs"
       buttonClassName="py-1 px-2 text-xs"
     />
   );
