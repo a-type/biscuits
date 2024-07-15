@@ -20,7 +20,7 @@ export function NoteEditor({
   return (
     <Note className={classNames('focus-within:shadow-focus', className)}>
       <LiveUpdateTextField
-        className="border-none outline-none resize-none w-full rounded-none h-full p-0 m-0 [font-family:inherit] text-inherit [font-size:inherit] [font-style:inherit] bg-transparent shadow-none focus:(outline-none bg-transparent border-transparent shadow-none)"
+        className="!border-none outline-none resize-none w-full !rounded-none !shadow-none h-full p-0 m-0 [font-family:inherit] text-inherit [font-size:inherit] [font-style:inherit] bg-transparent shadow-none focus:(outline-none bg-transparent border-transparent shadow-none)"
         textArea
         value={value}
         onChange={onChange}
