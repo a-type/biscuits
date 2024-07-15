@@ -19,7 +19,7 @@ import {
   DialogActions,
   DialogClose,
 } from '@a-type/ui/components/dialog';
-import { Link } from '@verdant-web/react-router';
+import { Link, useSearchParams } from '@verdant-web/react-router';
 import { Button } from '@a-type/ui/components/button';
 import { ReactNode, useState } from 'react';
 import { Icon } from '@a-type/ui/components/icon';
@@ -39,19 +39,18 @@ export function ListItem({ item }: ListItemProps) {
   const justCreatedId = useSnapshot(createdItemState).justCreatedId;
 
   const [addLinkOpen, setAddLinkOpen] = useState(false);
+  const [_, setSearch] = useSearchParams();
+  const openEdit = () =>
+    setSearch((s) => {
+      s.set('itemId', id);
+      return s;
+    });
 
   return (
     <>
       <CardRoot>
         <CardMain className="col items-start" compact>
-          <CardTitle>
-            <EditableText
-              value={description}
-              onValueChange={(v) => item.set('description', v)}
-              autoFocus={justCreatedId === id}
-              autoSelect
-            />
-          </CardTitle>
+          <CardTitle>{description}</CardTitle>
           {link && <CardContent>(link)</CardContent>}
         </CardMain>
         <CardFooter className="items-center">
@@ -60,9 +59,17 @@ export function ListItem({ item }: ListItemProps) {
               Purchased at {new Date(purchasedAt).toLocaleDateString()}
             </span>
           )}
-          <div className="row ml-auto items-center">
+          <div className="row w-full items-center">
+            <Button
+              color="ghost"
+              size="icon"
+              onClick={openEdit}
+              className="mr-auto"
+            >
+              <Icon name="gear" />
+            </Button>
             {link ? (
-              <Button asChild color="accent">
+              <Button asChild color="accent" size="small">
                 <Link to={link} newTab>
                   <Icon name="link" /> Visit
                 </Link>
@@ -70,9 +77,6 @@ export function ListItem({ item }: ListItemProps) {
             ) : (
               <>
                 <SearchButton item={item} />
-                <Button onClick={() => setAddLinkOpen(true)}>
-                  <Icon name="plus" /> Link
-                </Button>
               </>
             )}
             <Button
@@ -86,6 +90,7 @@ export function ListItem({ item }: ListItemProps) {
                   item.set('purchasedAt', Date.now());
                 }
               }}
+              size="small"
             >
               {purchasedAt ? 'Bought' : 'Buy'}
             </Button>

@@ -51,7 +51,7 @@ export function SearchButton({ item }: SearchButtonProps) {
 
   return (
     <div className="flex flex-row">
-      <Button asChild className="rounded-r-none relative z-1">
+      <Button asChild className="rounded-r-none relative z-1" size="small">
         <Link
           to={searchConfigs[selectedProvider].template.replace(
             '$1',
@@ -63,7 +63,10 @@ export function SearchButton({ item }: SearchButtonProps) {
         </Link>
       </Button>
       <Select value={selectedProvider} onValueChange={setSelectedProvider}>
-        <SelectTrigger className="rounded-l-none border-l-none !gap-0">
+        <SelectTrigger
+          className="rounded-l-none border-l-none !gap-0"
+          size="small"
+        >
           <SelectValue>{null}</SelectValue>
           <SelectIcon />
         </SelectTrigger>

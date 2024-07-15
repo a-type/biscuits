@@ -1,57 +1,37 @@
 import { hooks } from '@/store.js';
-import {
-  FormikForm,
-  SubmitButton,
-  TextField,
-} from '@a-type/ui/components/forms';
-import { isUrl } from '@a-type/utils';
-import { authorization } from '@wish-wash.biscuits/verdant';
+import { Button } from '@a-type/ui/components/button';
+import { Icon } from '@a-type/ui/components/icon';
+import { useSearchParams } from '@verdant-web/react-router';
 import { useListContext } from './ListContext.jsx';
+import { clsx } from '@a-type/ui';
 
-export interface CreateItemProps {}
+export interface CreateItemProps {
+  className?: string;
+}
 
-export function CreateItem({}: CreateItemProps) {
-  const { listId, list } = useListContext();
+export function CreateItem({ className }: CreateItemProps) {
+  const { listId } = useListContext();
   const client = hooks.useClient();
+  const [_, setSearch] = useSearchParams();
+
+  const createItem = async () => {
+    const item = await client.items.put({
+      listId,
+      description: 'New item',
+    });
+
+    setSearch((s) => {
+      s.set('itemId', item.get('id'));
+      return s;
+    });
+  };
 
   return (
-    <FormikForm
-      initialValues={{ description: '' }}
-      onSubmit={async (values, form) => {
-        let description = values.description;
-        let link: string | null = null;
-        if (isUrl(values.description)) {
-          link = values.description;
-          description = 'Web item';
-        }
-
-        const item = await client.items.put(
-          {
-            listId,
-            description,
-            link,
-          },
-          {
-            access: list.isAuthorized
-              ? authorization.private
-              : authorization.public,
-          },
-        );
-        // actually don't need to focus edit on this since we just
-        // named it...
-        // createdItemState.justCreatedId = item.get('id');
-        form.resetForm();
-      }}
-      className="!row items-center gap-2"
-    >
-      <TextField
-        name="description"
-        required
-        className="flex-1"
-        variant="primary"
-        placeholder="An idea, or a URL..."
-      />
-      <SubmitButton>Add</SubmitButton>
-    </FormikForm>
+    <div className={clsx('row justify-center', className)}>
+      <Button onClick={createItem} color="primary" className="shadow-md">
+        <Icon name="plus" />
+        New item
+      </Button>
+    </div>
   );
 }

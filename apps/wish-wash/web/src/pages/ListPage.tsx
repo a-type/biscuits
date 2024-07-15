@@ -1,9 +1,12 @@
+import { ListActions } from '@/components/lists/ListActions.jsx';
 import { ListProvider } from '@/components/lists/ListContext.jsx';
 import { ListDetailsEditButton } from '@/components/lists/ListDetailsDialog.jsx';
+import { ListHero } from '@/components/lists/ListHero.jsx';
 import { ListPicker } from '@/components/lists/ListPicker.jsx';
 import { ListView } from '@/components/lists/ListView.jsx';
 import { hooks } from '@/store.js';
 import { Button } from '@a-type/ui/components/button';
+import { Icon } from '@a-type/ui/components/icon';
 import {
   PageContent,
   PageFixedArea,
@@ -56,9 +59,14 @@ function ListPageContent({ list }: { list: List }) {
 
   return (
     <ListProvider value={ctx}>
-      <PageContent fullHeight noPadding>
-        <PageFixedArea className="flex-row p-0 gap-0">
-          <ListPicker value={list.get('id')} />
+      <PageContent>
+        <div className="row">
+          <Button asChild size="small" color="ghost">
+            <Link to="/">
+              <Icon name="arrowLeft" />
+              Home
+            </Link>
+          </Button>
           <UserMenu
             className="ml-auto my-auto"
             extraItems={
@@ -68,8 +76,10 @@ function ListPageContent({ list }: { list: List }) {
               />
             }
           />
-        </PageFixedArea>
-        <ListView listId={list.get('id')} className="m-2" />
+        </div>
+        <ListHero list={list} />
+        <ListActions className="sticky top-0 z-10" />
+        <ListView listId={list.get('id')} />
       </PageContent>
     </ListProvider>
   );
