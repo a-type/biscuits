@@ -1,14 +1,13 @@
 import { hooks } from '@/store.js';
-import { Icon } from '@a-type/ui/components/icon';
-import { HorizontalList } from '@a-type/ui/components/horizontalList';
-import { assert } from '@a-type/utils';
-import { useCanSync, useLocalStorage } from '@biscuits/client';
-import { authorization, List } from '@wish-wash.biscuits/verdant';
-import { Button } from '@a-type/ui/components/button';
-import { Link } from '@verdant-web/react-router';
-import { CreateListButton } from './CreateListButton.jsx';
-import { useEffect, useRef, useState } from 'react';
 import { clsx } from '@a-type/ui';
+import { Button } from '@a-type/ui/components/button';
+import { HorizontalList } from '@a-type/ui/components/horizontalList';
+import { Icon } from '@a-type/ui/components/icon';
+import { useLocalStorage } from '@biscuits/client';
+import { Link } from '@verdant-web/react-router';
+import { List } from '@wish-wash.biscuits/verdant';
+import { useEffect, useRef } from 'react';
+import { CreateListButton } from './CreateListButton.jsx';
 
 export interface ListPickerProps {
   className?: string;
@@ -18,7 +17,7 @@ export interface ListPickerProps {
 export function ListPicker({ className, value, ...props }: ListPickerProps) {
   const [open, setOpen] = useLocalStorage('list-picker-open', false);
   return (
-    <div {...props} className={clsx('relative w-full mb-4', className)}>
+    <div {...props} className={clsx('relative w-full', className)}>
       <HorizontalList
         className="w-full min-w-0 rounded-lg"
         open={open}

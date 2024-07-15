@@ -28,7 +28,7 @@ import {
   SubmitButton,
   TextField,
 } from '@a-type/ui/components/forms';
-import { AmazonSearchButton } from './AmazonSearchButton.jsx';
+import { SearchButton } from './SearchButton.jsx';
 
 export interface ListItemProps {
   item: Item;
@@ -69,7 +69,7 @@ export function ListItem({ item }: ListItemProps) {
               </Button>
             ) : (
               <>
-                <AmazonSearchButton item={item} />
+                <SearchButton item={item} />
                 <Button onClick={() => setAddLinkOpen(true)}>
                   <Icon name="plus" /> Link
                 </Button>
@@ -115,24 +115,4 @@ export function ListItem({ item }: ListItemProps) {
       </Dialog>
     </>
   );
-}
-
-function CardLink({
-  to,
-  ...props
-}: {
-  to: string | null;
-  children: ReactNode;
-}) {
-  return <Link {...props} to={to || '#'} newTab />;
-}
-
-function CardNotLink({
-  to: _,
-  ...props
-}: {
-  to: string | null;
-  children: ReactNode;
-}) {
-  return <div {...props} />;
 }

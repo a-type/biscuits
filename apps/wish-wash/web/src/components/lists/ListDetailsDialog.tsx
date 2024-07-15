@@ -8,6 +8,10 @@ import {
   DialogClose,
 } from '@a-type/ui/components/dialog';
 import {
+  DropdownMenuItem,
+  DropdownMenuItemRightSlot,
+} from '@a-type/ui/components/dropdownMenu';
+import {
   FormikForm,
   TextField,
   SubmitButton,
@@ -15,6 +19,7 @@ import {
 import { Icon } from '@a-type/ui/components/icon';
 import { useNavigate, useSearchParams } from '@verdant-web/react-router';
 import { toast } from '@a-type/ui';
+import { UserMenuItem } from '@biscuits/client';
 
 export interface ListDetailsDialogProps {}
 
@@ -86,13 +91,13 @@ export function ListDetailsDialog({}: ListDetailsDialogProps) {
   );
 }
 
-export interface ListDetailsEditButtonProps extends ButtonProps {
+export interface ListDetailsEditButtonProps {
   listId: string;
+  className?: string;
 }
 
 export function ListDetailsEditButton({
   listId,
-  children,
   ...rest
 }: ListDetailsEditButtonProps) {
   const [_, setParams] = useSearchParams();
@@ -104,8 +109,11 @@ export function ListDetailsEditButton({
   };
 
   return (
-    <Button onClick={onClick} size="icon" color="ghost" {...rest}>
-      {children || <Icon name="gear" />}
-    </Button>
+    <UserMenuItem onClick={onClick} {...rest}>
+      Edit list{' '}
+      <DropdownMenuItemRightSlot>
+        <Icon name="pencil" />
+      </DropdownMenuItemRightSlot>
+    </UserMenuItem>
   );
 }

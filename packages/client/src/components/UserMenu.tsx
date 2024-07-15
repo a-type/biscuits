@@ -4,6 +4,7 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
+  DropdownMenuItemProps,
   DropdownMenuItemRightSlot,
   DropdownMenuTrigger,
 } from '@a-type/ui/components/dropdownMenu';
@@ -27,7 +28,7 @@ export interface UserMenuProps {
   className?: string;
   disableAppSettings?: boolean;
   children?: ReactNode;
-  extraItems?: ReactNode[];
+  extraItems?: ReactNode;
 }
 
 export function UserMenu({
@@ -156,14 +157,14 @@ export function UserMenu({
             </LogoutButton>
           </DropdownMenuItem>
         )}
-        {extraItems?.map((item, i) => (
-          <DropdownMenuItem key={i} asChild>
-            {item}
-          </DropdownMenuItem>
-        ))}
+        {extraItems}
       </DropdownMenuContent>
     </DropdownMenu>
   );
+}
+
+export function UserMenuItem(props: DropdownMenuItemProps) {
+  return <DropdownMenuItem {...props} />;
 }
 
 const userAvatarQuery = graphql(`

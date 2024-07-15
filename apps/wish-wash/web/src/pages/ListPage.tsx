@@ -57,12 +57,17 @@ function ListPageContent({ list }: { list: List }) {
   return (
     <ListProvider value={ctx}>
       <PageContent fullHeight noPadding>
-        <PageFixedArea className="flex-col p-0 gap-2 mb-2">
-          <div className="row p-2">
-            <ListDetailsEditButton listId={list.get('id')} />
-            <UserMenu className="ml-auto" />
-          </div>
+        <PageFixedArea className="flex-row p-0 gap-0">
           <ListPicker value={list.get('id')} />
+          <UserMenu
+            className="ml-auto my-auto"
+            extraItems={
+              <ListDetailsEditButton
+                listId={list.get('id')}
+                key="list-details-edit"
+              />
+            }
+          />
         </PageFixedArea>
         <ListView listId={list.get('id')} className="m-2" />
       </PageContent>
