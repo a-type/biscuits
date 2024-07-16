@@ -57,6 +57,7 @@ export function SearchButton({ item }: SearchButtonProps) {
             '$1',
             item.get('description'),
           )}
+          newTab
         >
           <Icon name="search" />
           {searchConfigs[selectedProvider].name}
