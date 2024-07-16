@@ -20,6 +20,7 @@ import { Icon } from '@a-type/ui/components/icon';
 import { useNavigate, useSearchParams } from '@verdant-web/react-router';
 import { toast } from '@a-type/ui';
 import { UserMenuItem } from '@biscuits/client';
+import { useEditList } from './hooks.js';
 
 export interface ListDetailsDialogProps {}
 
@@ -100,16 +101,9 @@ export function ListDetailsEditButton({
   listId,
   ...rest
 }: ListDetailsEditButtonProps) {
-  const [_, setParams] = useSearchParams();
-  const onClick = () => {
-    setParams((p) => {
-      p.set('listId', listId);
-      return p;
-    });
-  };
-
+  const editList = useEditList();
   return (
-    <UserMenuItem onClick={onClick} {...rest}>
+    <UserMenuItem onClick={() => editList(listId)} {...rest}>
       Edit list{' '}
       <DropdownMenuItemRightSlot>
         <Icon name="pencil" />

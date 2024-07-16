@@ -60,7 +60,7 @@ function ListPageContent({ list }: { list: List }) {
   return (
     <ListProvider value={ctx}>
       <PageContent>
-        <div className="row">
+        <div className="row -ml-3">
           <Button asChild size="small" color="ghost">
             <Link to="/">
               <Icon name="arrowLeft" />
