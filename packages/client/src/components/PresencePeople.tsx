@@ -57,6 +57,7 @@ export function PresencePeople({
           imageSrc={self?.profile.imageUrl}
           name={self?.profile.name}
           className={avatarClassName}
+          popIn={false}
         />
       </AvatarList>
     </ErrorBoundary>
