@@ -173,7 +173,6 @@ function OnlineContents() {
       <H2>Troubleshoot</H2>
       <BugButton />
       <ReloadButton />
-      <ResetToServer clientDescriptor={groceriesDescriptor} />
       <Divider />
     </MainContainer>
   );
