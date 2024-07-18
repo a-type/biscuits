@@ -47,14 +47,14 @@ export function PresencePeople({
           <AvatarListItem
             key={peer.profile.id}
             index={index}
-            imageSrc={peer.profile.imageUrl}
+            imageSrc={peer.profile.imageUrl ?? undefined}
             name={peer.profile.name}
             className={avatarClassName}
           />
         ))}
         <AvatarListItem
           index={peers.length}
-          imageSrc={self?.profile.imageUrl}
+          imageSrc={self?.profile.imageUrl ?? undefined}
           name={self?.profile.name}
           className={avatarClassName}
           popIn={false}
