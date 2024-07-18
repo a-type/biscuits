@@ -83,11 +83,7 @@ function RecipeListContent() {
         })}
       >
         {recipes.map((recipe) => (
-          <RecipeListItem
-            key={recipe.get('id')}
-            recipe={recipe}
-            className="min-h-200px md:(h-30vh max-h-300px)"
-          />
+          <RecipeListItem key={recipe.get('id')} recipe={recipe} />
         ))}
       </CardGrid>
       {hasMore && (

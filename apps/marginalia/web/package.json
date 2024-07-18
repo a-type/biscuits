@@ -9,13 +9,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@a-type/ui": "0.8.33",
+    "@a-type/ui": "1.0.5",
     "@a-type/utils": "1.1.0",
     "@biscuits/client": "workspace:*",
     "@marginalia.biscuits/verdant": "workspace:*",
     "@react-spring/web": "^9.7.3",
     "@tanstack/react-query": "5.39.0",
-    "@verdant-web/react-router": "^0.6.3",
+    "@verdant-web/react-router": "^0.6.4",
     "classnames": "^2.5.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
@@ -35,8 +35,8 @@
     "@types/unist": "^3.0.2",
     "@unocss/transformer-variant-group": "^0.58.0",
     "@vitejs/plugin-react-swc": "3.5.0",
+    "typescript": "5.5.3",
     "vite": "5.2.11",
-    "vite-plugin-pwa": "^0.19.8",
-    "typescript": "5.5.3"
+    "vite-plugin-pwa": "^0.19.8"
   }
 }

@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@a-type/ui": "^0.8.33",
+    "@a-type/ui": "^1.0.5",
     "@a-type/utils": "^1.0.6",
     "@biscuits/client": "workspace:*",
     "@radix-ui/react-progress": "^1.0.3",
@@ -18,9 +18,9 @@
     "@tanstack/react-query": "^4.24.10",
     "@trip-tick.biscuits/verdant": "workspace:*",
     "@unocss/transformer-variant-group": "^0.54.1",
-    "@verdant-web/react": "^35.0.0",
-    "@verdant-web/react-router": "^0.6.3",
-    "@verdant-web/store": "^3.9.0",
+    "@verdant-web/react": "^37.0.0",
+    "@verdant-web/react-router": "^0.6.4",
+    "@verdant-web/store": "^3.11.0",
     "classnames": "^2.3.2",
     "date-fns": "^2.30.0",
     "downshift": "^7.0.1",
@@ -46,8 +46,8 @@
     "@types/react-dom": "^18.2.25",
     "@unocss/preset-icons": "^0.55.7",
     "@vitejs/plugin-react-swc": "^3.5.0",
+    "typescript": "5.5.3",
     "vite": "5.2.7",
-    "vite-plugin-pwa": "0.19.7",
-    "typescript": "5.5.3"
+    "vite-plugin-pwa": "0.19.7"
   }
 }

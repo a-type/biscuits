@@ -49,7 +49,7 @@ export function RecipeListItem({
   recipe: Recipe;
   className?: string;
 }) {
-  const { title, pinnedAt } = hooks.useWatch(recipe);
+  const { title, pinnedAt, mainImage } = hooks.useWatch(recipe);
   const [gridStyle] = useGridStyle();
 
   const isPinned = !!pinnedAt && pinnedAt > THREE_WEEKS_AGO;
@@ -65,8 +65,10 @@ export function RecipeListItem({
   return (
     <CardRoot
       className={classNames(
+        'self-end',
         {
           '!max-h-20vh': gridStyle === 'card-small',
+          'min-h-200px md:(h-30vh max-h-300px)': !!mainImage,
         },
         'shadow-sm',
         className,
@@ -74,7 +76,14 @@ export function RecipeListItem({
     >
       <CardMain asChild>
         <Link to={makeRecipeLink(recipe)} preserveQuery>
-          <div className="text-md">
+          <CardTitle
+            className={classNames(
+              gridStyle === 'card-small' ? 'text-sm sm:text-md' : '',
+            )}
+          >
+            {title}
+          </CardTitle>
+          <div className="m-2">
             <Suspense>
               <RecipeTagsViewer
                 recipe={recipe}
@@ -82,9 +91,6 @@ export function RecipeListItem({
               />
             </Suspense>
           </div>
-          <CardTitle>
-            <span>{title}</span>
-          </CardTitle>
         </Link>
       </CardMain>
       <CardImage>

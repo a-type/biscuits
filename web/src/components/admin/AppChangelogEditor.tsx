@@ -81,12 +81,12 @@ export function AppChangelogEditor({ appId }: AppChangelogEditorProps) {
       <CardGrid>
         {data.changelog.map((item: any) => (
           <CardRoot key={item.id}>
+            {item.imageUrl && (
+              <CardImage>
+                <img src={item.imageUrl} />
+              </CardImage>
+            )}
             <CardMain>
-              {item.imageUrl && (
-                <CardImage>
-                  <img src={item.imageUrl} />
-                </CardImage>
-              )}
               <CardTitle>{item.title}</CardTitle>
               <CardContent>{item.details}</CardContent>
             </CardMain>
