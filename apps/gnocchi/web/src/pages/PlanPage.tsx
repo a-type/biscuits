@@ -162,7 +162,7 @@ function OnlineContents() {
     <MainContainer>
       <InstallHint content="Always have your list on hand. Install the app!" />
       <DarkModeToggle />
-      <H2>Collaborate</H2>
+      {/* <H2>Collaborate</H2> */}
       {/* TODO: re-enable push subscriptions */}
       {/* <PushSubscriptionToggle vapidKey={VAPID_KEY} /> */}
       <Divider />
