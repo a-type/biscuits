@@ -59,6 +59,21 @@ const items = schema.collection({
     link: schema.fields.string({
       nullable: true,
     }),
+    expiresAt: schema.fields.number({
+      nullable: true,
+    }),
+    imageUrl: schema.fields.string({
+      nullable: true,
+    }),
+    imageFile: schema.fields.file({
+      nullable: true,
+    }),
+    count: schema.fields.number({
+      default: 1,
+    }),
+    prioritized: schema.fields.boolean({
+      default: false,
+    }),
   },
   indexes: {
     listId: {
@@ -70,11 +85,32 @@ const items = schema.collection({
     purchasedAt: {
       field: 'purchasedAt',
     },
+    /**
+     * Sorts items by recently created, with prioritized at the top
+     * Since all compound index parts are lexographically sorted this
+     * exploits that to get prioritized items at the top by prepending
+     * a 'z' to the createdAt timestamp
+     */
+    prioritizedThenCreatedAt: {
+      type: 'string',
+      compute: (item) => {
+        if (item.prioritized) {
+          // kind of an arbitrary way to get it after everything else
+          return 'z' + item.createdAt;
+        }
+        return item.createdAt.toString();
+      },
+    },
+  },
+  compounds: {
+    listOrder: {
+      of: ['listId', 'prioritizedThenCreatedAt'],
+    },
   },
 });
 
 export default schema({
-  version: 2,
+  version: 3,
   collections: {
     lists,
     items,

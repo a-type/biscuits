@@ -6,11 +6,12 @@
   "scripts": {
     "dev": "vite --host --mode=development",
     "build": "vite build --mode=production",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "up-ui": "cd .. && pnpm up-ui"
   },
   "dependencies": {
     "@a-type/auth-client": "1.0.6",
-    "@a-type/ui": "^1.0.7",
+    "@a-type/ui": "^1.0.9",
     "@biscuits/apps": "workspace:*",
     "@biscuits/client": "workspace:*",
     "@biscuits/error": "workspace:*",

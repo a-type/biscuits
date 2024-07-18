@@ -12,7 +12,7 @@ export function RedoAction({ showName }: { showName?: boolean }) {
       onClick={() => {
         groceries.undoHistory.redo();
       }}
-      icon={<Icon name="undo" className="-scale-x-1" />}
+      icon={<Icon name="undo" className="-scale-x-100" />}
       visible={canRedo}
     >
       {showName ? 'Undo' : undefined}

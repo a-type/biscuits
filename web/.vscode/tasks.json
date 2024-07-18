@@ -7,6 +7,13 @@
       "problemMatcher": [],
       "label": "Dev",
       "detail": "vite --host --mode=development"
+    },
+    {
+      "type": "npm",
+      "script": "up-ui",
+      "problemMatcher": [],
+      "label": "Up-UI",
+      "detail": "cd .. && pnpm up-ui"
     }
   ]
 }

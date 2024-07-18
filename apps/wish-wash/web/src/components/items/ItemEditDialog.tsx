@@ -12,6 +12,7 @@ import { Input } from '@a-type/ui/components/input/Input';
 import { TextArea } from '@a-type/ui/components/textArea/TextArea';
 import { Button } from '@a-type/ui/components/button';
 import { preventDefault } from '@a-type/utils';
+import { ImageUploader } from '@a-type/ui/components/imageUploader';
 
 export interface ItemEditDialogProps {}
 
@@ -51,10 +52,18 @@ export function ItemEditDialog({}: ItemEditDialogProps) {
 }
 
 function ItemEditor({ item }: { item: Item }) {
-  const { description, link } = hooks.useWatch(item);
+  const { description, link, imageFile, imageUrl } = hooks.useWatch(item);
+  hooks.useWatch(imageFile);
+  const finalImageUrl = imageFile?.url || imageUrl;
 
   return (
     <div className="col w-full items-stretch">
+      <label>Image</label>
+      <ImageUploader
+        className="w-full h-[200px] rounded-lg"
+        value={finalImageUrl}
+        onChange={(file) => item.set('imageFile', file)}
+      />
       <label htmlFor="description">Description</label>
       <TextArea
         id="description"

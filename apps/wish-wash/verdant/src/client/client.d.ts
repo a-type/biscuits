@@ -25,10 +25,36 @@ export class Client<Presence = any, Profile = any> {
   import: BaseClient<Presence, Profile>["import"];
   subscribe: BaseClient<Presence, Profile>["subscribe"];
   stats: BaseClient<Presence, Profile>["stats"];
+
+  /**
+   * Deletes all local data. If the client is connected to sync,
+   * this will cause the client to re-sync all data from the server.
+   * Use this very carefully, and only as a last resort.
+   */
   __dangerous__resetLocal: BaseClient<
     Presence,
     Profile
   >["__dangerous__resetLocal"];
+
+  /**
+   * Export all data, then re-import it. This might resolve
+   * some issues with the local database, but it should
+   * only be done as a second-to-last resort. The last resort
+   * would be __dangerous__resetLocal on ClientDescriptor, which
+   * clears all local data.
+   *
+   * Unlike __dangerous__resetLocal, this method allows local-only
+   * clients to recover data, whereas __dangerous__resetLocal only
+   * lets networked clients recover from the server.
+   */
+  __dangerous__hardReset: () => Promise<void>;
+
+  /**
+   * Manually triggers storage rebasing. Follows normal
+   * rebasing rules. Rebases already happen automatically
+   * during normal operation, so you probably don't need this.
+   */
+  __manualRebase: () => Promise<void>;
 }
 
 export interface ClientDescriptorOptions<Presence = any, Profile = any>
@@ -111,6 +137,11 @@ export type ItemDescription = string;
 export type ItemPurchasedAt = number;
 export type ItemCreatedAt = number;
 export type ItemLink = string;
+export type ItemExpiresAt = number;
+export type ItemImageUrl = string;
+export type ItemImageFile = string | null;
+export type ItemCount = number;
+export type ItemPrioritized = boolean;
 export type ItemInit = {
   id?: string;
   listId: string;
@@ -118,6 +149,11 @@ export type ItemInit = {
   purchasedAt?: number | null;
   createdAt?: number;
   link?: string | null;
+  expiresAt?: number | null;
+  imageUrl?: string | null;
+  imageFile?: File | null;
+  count?: number;
+  prioritized?: boolean;
 };
 
 export type ItemDestructured = {
@@ -127,6 +163,11 @@ export type ItemDestructured = {
   purchasedAt: number | null;
   createdAt: number;
   link: string | null;
+  expiresAt: number | null;
+  imageUrl: string | null;
+  imageFile: EntityFile | null;
+  count: number;
+  prioritized: boolean;
 };
 
 export type ItemSnapshot = {
@@ -136,6 +177,11 @@ export type ItemSnapshot = {
   purchasedAt: number | null;
   createdAt: number;
   link: string | null;
+  expiresAt: number | null;
+  imageUrl: string | null;
+  imageFile: EntityFileSnapshot | null;
+  count: number;
+  prioritized: boolean;
 };
 
 /** Index filters for Item **/
@@ -196,6 +242,36 @@ export interface ItemPurchasedAtRangeFilter {
   lt?: number;
   order?: "asc" | "desc";
 }
+export interface ItemPrioritizedThenCreatedAtSortFilter {
+  where: "prioritizedThenCreatedAt";
+  order: "asc" | "desc";
+}
+export interface ItemPrioritizedThenCreatedAtMatchFilter {
+  where: "prioritizedThenCreatedAt";
+  equals: string;
+  order?: "asc" | "desc";
+}
+export interface ItemPrioritizedThenCreatedAtRangeFilter {
+  where: "prioritizedThenCreatedAt";
+  gte?: string;
+  gt?: string;
+  lte?: string;
+  lt?: string;
+  order?: "asc" | "desc";
+}
+export interface ItemPrioritizedThenCreatedAtStartsWithFilter {
+  where: "prioritizedThenCreatedAt";
+  startsWith: string;
+  order?: "asc" | "desc";
+}
+export interface ItemListOrderCompoundFilter {
+  where: "listOrder";
+  match: {
+    listId: string;
+    prioritizedThenCreatedAt?: string;
+  };
+  order?: "asc" | "desc";
+}
 export type ItemFilter =
   | ItemListIdSortFilter
   | ItemListIdMatchFilter
@@ -206,4 +282,9 @@ export type ItemFilter =
   | ItemCreatedAtRangeFilter
   | ItemPurchasedAtSortFilter
   | ItemPurchasedAtMatchFilter
-  | ItemPurchasedAtRangeFilter;
+  | ItemPurchasedAtRangeFilter
+  | ItemPrioritizedThenCreatedAtSortFilter
+  | ItemPrioritizedThenCreatedAtMatchFilter
+  | ItemPrioritizedThenCreatedAtRangeFilter
+  | ItemPrioritizedThenCreatedAtStartsWithFilter
+  | ItemListOrderCompoundFilter;

@@ -5,6 +5,7 @@ import { ListItem } from '../items/ListItem.jsx';
 import { clsx } from '@a-type/ui';
 import { ItemEditDialog } from '../items/ItemEditDialog.jsx';
 import { Suspense } from 'react';
+import { CardGrid } from '@a-type/ui/components/card';
 
 export interface ListViewProps {
   listId: string;
@@ -14,21 +15,24 @@ export interface ListViewProps {
 export function ListView({ listId, className }: ListViewProps) {
   const [items, { hasMore, loadMore }] = hooks.useAllItemsInfinite({
     index: {
-      where: 'listId',
-      equals: listId,
+      where: 'listOrder',
+      match: {
+        listId,
+      },
+      order: 'desc',
     },
     key: `items-${listId}`,
   });
 
   return (
-    <div className={clsx('col items-stretch', className)}>
-      <div className="col items-stretch">
+    <div className={clsx('col items-stretch gap-4', className)}>
+      <CardGrid>
         {items.map((item) => (
           <ListItem item={item} key={item.get('id')} />
         ))}
-        <CreateItem className="sticky bottom-4 z-10" />
-      </div>
+      </CardGrid>
       {hasMore && <InfiniteLoadTrigger onVisible={loadMore} />}
+      <CreateItem className="sticky bottom-4 z-10" />
       <Suspense>
         <ItemEditDialog />
       </Suspense>
