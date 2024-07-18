@@ -11,7 +11,7 @@ export function PantryListSectionTabs({}: PantryListSectionTabsProps) {
     <TabsRoot
       value={filter}
       onValueChange={(f) => setFilter(f as 'purchased' | 'all' | 'frozen')}
-      className="overflow-x-auto"
+      className="overflow-x-auto overflow-y-hidden"
     >
       <TabsList>
         <TabsTrigger className="text-nowrap" value="purchased">

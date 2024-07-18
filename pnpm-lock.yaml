@@ -61,8 +61,8 @@ importers:
   apps/gnocchi/hub:
     dependencies:
       '@a-type/ui':
-        specifier: ^1.0.5
-        version: 1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^1.0.7
+        version: 1.0.7(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@a-type/utils':
         specifier: ^1.0.8
         version: 1.1.0
@@ -181,8 +181,8 @@ importers:
   apps/gnocchi/web:
     dependencies:
       '@a-type/ui':
-        specifier: ^1.0.5
-        version: 1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.2)(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^1.0.7
+        version: 1.0.7(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.2)(react-dom@18.3.1)(react@18.3.1)
       '@a-type/utils':
         specifier: ^1.0.8
         version: 1.0.8
@@ -455,8 +455,8 @@ importers:
   apps/humding/web:
     dependencies:
       '@a-type/ui':
-        specifier: 1.0.5
-        version: 1.0.5(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 1.0.7
+        version: 1.0.7(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@a-type/utils':
         specifier: 1.1.3
         version: 1.1.3
@@ -558,8 +558,8 @@ importers:
   apps/marginalia/web:
     dependencies:
       '@a-type/ui':
-        specifier: 1.0.5
-        version: 1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 1.0.7
+        version: 1.0.7(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@a-type/utils':
         specifier: 1.1.0
         version: 1.1.0
@@ -661,8 +661,8 @@ importers:
   apps/star-chart/web:
     dependencies:
       '@a-type/ui':
-        specifier: 1.0.5
-        version: 1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 1.0.7
+        version: 1.0.7(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@a-type/utils':
         specifier: 1.1.2
         version: 1.1.2
@@ -791,8 +791,8 @@ importers:
   apps/trip-tick/web:
     dependencies:
       '@a-type/ui':
-        specifier: ^1.0.5
-        version: 1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.2.0)(react@18.3.1)
+        specifier: ^1.0.7
+        version: 1.0.7(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.2.0)(react@18.3.1)
       '@a-type/utils':
         specifier: ^1.0.6
         version: 1.0.6
@@ -927,8 +927,8 @@ importers:
   apps/wish-wash/web:
     dependencies:
       '@a-type/ui':
-        specifier: 1.0.5
-        version: 1.0.5(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 1.0.7
+        version: 1.0.7(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@a-type/utils':
         specifier: 1.1.3
         version: 1.1.3
@@ -1003,8 +1003,8 @@ importers:
   blog:
     dependencies:
       '@a-type/ui':
-        specifier: ^1.0.5
-        version: 1.0.5(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^1.0.7
+        version: 1.0.7(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@astrojs/check':
         specifier: ^0.5.10
         version: 0.5.10(typescript@5.5.3)
@@ -1094,7 +1094,7 @@ importers:
     dependencies:
       '@a-type/auth-client':
         specifier: 1.0.6
-        version: 1.0.6(@a-type/ui@1.0.5)(react@18.3.1)
+        version: 1.0.6(@a-type/ui@1.0.7)(react@18.3.1)
       '@a-type/utils':
         specifier: 1.1.3
         version: 1.1.3
@@ -1124,8 +1124,8 @@ importers:
         version: 1.13.2(@types/react@18.3.3)(react@18.3.1)
     devDependencies:
       '@a-type/ui':
-        specifier: ^1.0.5
-        version: 1.0.5(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^1.0.7
+        version: 1.0.7(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@types/react':
         specifier: 18.3.3
         version: 18.3.3
@@ -1341,10 +1341,10 @@ importers:
     dependencies:
       '@a-type/auth-client':
         specifier: 1.0.6
-        version: 1.0.6(@a-type/ui@1.0.5)(react@18.3.1)
+        version: 1.0.6(@a-type/ui@1.0.7)(react@18.3.1)
       '@a-type/ui':
-        specifier: ^1.0.5
-        version: 1.0.5(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^1.0.7
+        version: 1.0.7(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@biscuits/apps':
         specifier: workspace:*
         version: link:../packages/apps
@@ -1496,13 +1496,13 @@ packages:
       graphql: 16.9.0
       typescript: 5.5.3
 
-  /@a-type/auth-client@1.0.6(@a-type/ui@1.0.5)(react@18.3.1):
+  /@a-type/auth-client@1.0.6(@a-type/ui@1.0.7)(react@18.3.1):
     resolution: {integrity: sha512-AGKAEpExelRupmveEVfYzpwEMVwAPJ6fCqdpJKQeL41rHyCY/CpwAF4+XG7AEFgU/1EzEjr00MYEC1QQNJZzzw==}
     peerDependencies:
       '@a-type/ui': ^0.8.0
       react: ^18
     dependencies:
-      '@a-type/ui': 1.0.5(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+      '@a-type/ui': 1.0.7(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
     dev: false
 
@@ -1545,8 +1545,8 @@ packages:
       - encoding
       - supports-color
 
-  /@a-type/ui@1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.2)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-pvZFXGKwQBjF3CfIBgOdARm5oyaYXPRcHjMuEa3trxJJ3IC9mwvwOE4L4jC4zf8ahMbdTC1oxSAyJGwQVBfV0A==}
+  /@a-type/ui@1.0.7(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.2)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-tP1gSMQi3J1RdfQO7Ph4V8j6wHqI31EPuGwrWrxQAmYmOVlP99B279W6VFzZFUWZ1qryv61CrsfRbWfw/Lr/Jg==}
     peerDependencies:
       react: ^18
       react-dom: ^18
@@ -1598,8 +1598,8 @@ packages:
       - csstype
     dev: false
 
-  /@a-type/ui@1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.2.0)(react@18.3.1):
-    resolution: {integrity: sha512-pvZFXGKwQBjF3CfIBgOdARm5oyaYXPRcHjMuEa3trxJJ3IC9mwvwOE4L4jC4zf8ahMbdTC1oxSAyJGwQVBfV0A==}
+  /@a-type/ui@1.0.7(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.2.0)(react@18.3.1):
+    resolution: {integrity: sha512-tP1gSMQi3J1RdfQO7Ph4V8j6wHqI31EPuGwrWrxQAmYmOVlP99B279W6VFzZFUWZ1qryv61CrsfRbWfw/Lr/Jg==}
     peerDependencies:
       react: ^18
       react-dom: ^18
@@ -1651,8 +1651,8 @@ packages:
       - csstype
     dev: false
 
-  /@a-type/ui@1.0.5(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-pvZFXGKwQBjF3CfIBgOdARm5oyaYXPRcHjMuEa3trxJJ3IC9mwvwOE4L4jC4zf8ahMbdTC1oxSAyJGwQVBfV0A==}
+  /@a-type/ui@1.0.7(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-tP1gSMQi3J1RdfQO7Ph4V8j6wHqI31EPuGwrWrxQAmYmOVlP99B279W6VFzZFUWZ1qryv61CrsfRbWfw/Lr/Jg==}
     peerDependencies:
       react: ^18
       react-dom: ^18
@@ -1704,8 +1704,8 @@ packages:
       - csstype
     dev: false
 
-  /@a-type/ui@1.0.5(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-pvZFXGKwQBjF3CfIBgOdARm5oyaYXPRcHjMuEa3trxJJ3IC9mwvwOE4L4jC4zf8ahMbdTC1oxSAyJGwQVBfV0A==}
+  /@a-type/ui@1.0.7(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-tP1gSMQi3J1RdfQO7Ph4V8j6wHqI31EPuGwrWrxQAmYmOVlP99B279W6VFzZFUWZ1qryv61CrsfRbWfw/Lr/Jg==}
     peerDependencies:
       react: ^18
       react-dom: ^18
@@ -1757,8 +1757,8 @@ packages:
       - csstype
     dev: false
 
-  /@a-type/ui@1.0.5(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-pvZFXGKwQBjF3CfIBgOdARm5oyaYXPRcHjMuEa3trxJJ3IC9mwvwOE4L4jC4zf8ahMbdTC1oxSAyJGwQVBfV0A==}
+  /@a-type/ui@1.0.7(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-tP1gSMQi3J1RdfQO7Ph4V8j6wHqI31EPuGwrWrxQAmYmOVlP99B279W6VFzZFUWZ1qryv61CrsfRbWfw/Lr/Jg==}
     peerDependencies:
       react: ^18
       react-dom: ^18
@@ -1809,8 +1809,8 @@ packages:
       - '@types/react-dom'
       - csstype
 
-  /@a-type/ui@1.0.5(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-pvZFXGKwQBjF3CfIBgOdARm5oyaYXPRcHjMuEa3trxJJ3IC9mwvwOE4L4jC4zf8ahMbdTC1oxSAyJGwQVBfV0A==}
+  /@a-type/ui@1.0.7(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-tP1gSMQi3J1RdfQO7Ph4V8j6wHqI31EPuGwrWrxQAmYmOVlP99B279W6VFzZFUWZ1qryv61CrsfRbWfw/Lr/Jg==}
     peerDependencies:
       react: ^18
       react-dom: ^18

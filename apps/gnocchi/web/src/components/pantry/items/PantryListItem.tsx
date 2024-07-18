@@ -81,11 +81,14 @@ export function PantryListItem({
           leaving && 'animate-fade-out-down animate-forwards',
         )}
       >
-        <CardMain compact asChild className="bg-gray-1">
+        <CardMain compact asChild>
           <OpenFoodDetailButton
             foodName={food}
-            className="font-normal border-none rounded-none items-start text-sm"
+            className="font-normal p-0 border-none rounded-none items-start text-sm"
           >
+            <CardTitle className={classNames('text-wrap', 'text-md')}>
+              <FoodName food={item} capitalize />
+            </CardTitle>
             <div className="flex flex-row gap-1 items-center flex-wrap p-1 text-xs italic">
               {purchasedAt && (
                 <Chip title={new Date(purchasedAt).toLocaleDateString()}>
@@ -110,14 +113,15 @@ export function PantryListItem({
                 </Tooltip>
               )}
             </div>
-            <CardTitle className={classNames('text-wrap', 'text-md')}>
-              <FoodName food={item} capitalize />
-            </CardTitle>
             <OpenInNewWindowIcon className="absolute right-2 top-2 z-1 color-gray-9 opacity-50" />
           </OpenFoodDetailButton>
         </CardMain>
-        <CardFooter>
-          <CardActions className="flex-wrap">
+        <CardFooter className={classNames(showLabels ? 'p-0' : '')}>
+          <CardActions
+            className={classNames('flex-wrap', {
+              'rounded-none p-1': showLabels,
+            })}
+          >
             <Suspense
               fallback={
                 <Button
