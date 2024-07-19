@@ -17,6 +17,7 @@ import {
 import { NavigationRoute, registerRoute } from 'workbox-routing';
 import { StaleWhileRevalidate } from 'workbox-strategies';
 import { listenForShare } from '@biscuits/client/serviceWorkers';
+import { clientDescriptor } from './store.js';
 
 declare const self: ServiceWorkerGlobalScope;
 
@@ -61,3 +62,71 @@ self.addEventListener('message', (event) => {
 });
 
 listenForShare();
+
+self.addEventListener('periodicsync', (event: any) => {
+  if (event.tag === 'expiration-sync') {
+    event.waitUntil(checkExpirations());
+  }
+  // Other logic for different tags as needed.
+});
+
+async function checkExpirations() {
+  const client = await clientDescriptor.open();
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+  const tomorrow = new Date(today);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  const expiredItems = await client.items.findAll({
+    index: {
+      where: 'expiresAt',
+      gte: today.getTime(),
+      lt: tomorrow.getTime(),
+    },
+  }).resolved;
+  const filteredItems = expiredItems.filter(
+    (item) => !item.get('expirationNotificationSent'),
+  );
+
+  // issue a push notification for expired items
+  // and mark them as notified
+
+  if (filteredItems.length === 1) {
+    // simpler notification which shows item description, too
+    const item = filteredItems[0];
+    const description = item.get('description');
+    const createdAt = item.get('createdAt');
+    const lifetime = (today.getTime() - createdAt) / (1000 * 60 * 60 * 24);
+
+    const message = `"${description}" has been on your list for ${lifetime} days. Do you still want it? Open Wish Wash to manage old items.`;
+
+    self.registration.showNotification('Old items on your list', {
+      body: message,
+      icon: '/favicon.ico',
+      silent: true,
+    });
+  } else {
+    // get the newest item and count of items for the message.
+    const newestItem = filteredItems.reduce((newest, item) => {
+      if (item.get('createdAt') > newest.get('createdAt')) {
+        return item;
+      }
+      return newest;
+    });
+    const count = filteredItems.length;
+    const createdAt = newestItem.get('createdAt');
+    const lifetime = (today.getTime() - createdAt) / (1000 * 60 * 60 * 24);
+    const message = `${count} items have been on your list for over ${lifetime} days. Do you still want them? Open Wish Wash to manage old items.`;
+
+    self.registration.showNotification('Old items on your list', {
+      body: message,
+      icon: '/favicon.ico',
+      silent: true,
+    });
+  }
+
+  // clean up notifications
+  for (const item of filteredItems) {
+    item.set('expirationNotificationSent', true);
+  }
+}

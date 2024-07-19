@@ -1,4 +1,4 @@
-import { hooks } from '@/store.js';
+import { hooks } from '@/hooks.js';
 import { H1 } from '@a-type/ui/components/typography';
 import { List } from '@wish-wash.biscuits/verdant';
 

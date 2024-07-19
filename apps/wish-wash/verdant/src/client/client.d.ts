@@ -138,6 +138,7 @@ export type ItemPurchasedAt = number;
 export type ItemCreatedAt = number;
 export type ItemLink = string;
 export type ItemExpiresAt = number;
+export type ItemExpirationNotificationSent = boolean;
 export type ItemImageUrl = string;
 export type ItemImageFile = string | null;
 export type ItemCount = number;
@@ -150,6 +151,7 @@ export type ItemInit = {
   createdAt?: number;
   link?: string | null;
   expiresAt?: number | null;
+  expirationNotificationSent?: boolean;
   imageUrl?: string | null;
   imageFile?: File | null;
   count?: number;
@@ -164,6 +166,7 @@ export type ItemDestructured = {
   createdAt: number;
   link: string | null;
   expiresAt: number | null;
+  expirationNotificationSent: boolean;
   imageUrl: string | null;
   imageFile: EntityFile | null;
   count: number;
@@ -178,6 +181,7 @@ export type ItemSnapshot = {
   createdAt: number;
   link: string | null;
   expiresAt: number | null;
+  expirationNotificationSent: boolean;
   imageUrl: string | null;
   imageFile: EntityFileSnapshot | null;
   count: number;
@@ -264,6 +268,23 @@ export interface ItemPrioritizedThenCreatedAtStartsWithFilter {
   startsWith: string;
   order?: "asc" | "desc";
 }
+export interface ItemExpiresAtSortFilter {
+  where: "expiresAt";
+  order: "asc" | "desc";
+}
+export interface ItemExpiresAtMatchFilter {
+  where: "expiresAt";
+  equals: number;
+  order?: "asc" | "desc";
+}
+export interface ItemExpiresAtRangeFilter {
+  where: "expiresAt";
+  gte?: number;
+  gt?: number;
+  lte?: number;
+  lt?: number;
+  order?: "asc" | "desc";
+}
 export interface ItemListOrderCompoundFilter {
   where: "listOrder";
   match: {
@@ -287,4 +308,7 @@ export type ItemFilter =
   | ItemPrioritizedThenCreatedAtMatchFilter
   | ItemPrioritizedThenCreatedAtRangeFilter
   | ItemPrioritizedThenCreatedAtStartsWithFilter
+  | ItemExpiresAtSortFilter
+  | ItemExpiresAtMatchFilter
+  | ItemExpiresAtRangeFilter
   | ItemListOrderCompoundFilter;

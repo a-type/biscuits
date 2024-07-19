@@ -1,6 +1,5 @@
-import { ListMenu } from '@/components/lists/ListMenu.jsx';
 import { ListsList } from '@/components/lists/ListsList.jsx';
-import { hooks } from '@/store.js';
+import { hooks } from '@/hooks.js';
 import { DropdownMenuItemRightSlot } from '@a-type/ui/components/dropdownMenu';
 import { Icon } from '@a-type/ui/components/icon';
 import { PageContent, PageFixedArea } from '@a-type/ui/components/layouts';

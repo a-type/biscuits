@@ -1,4 +1,4 @@
-import { hooks } from '@/store.js';
+import { hooks } from '@/hooks.js';
 import { Button, ButtonProps } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
 import { createdItemState } from './state.js';

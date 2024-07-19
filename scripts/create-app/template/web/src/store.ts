@@ -1,9 +1,9 @@
 import {
   ClientDescriptor,
-  createHooks,
   migrations,
   UserInfo,
 } from '@{{todoId}}.biscuits/verdant';
+import { VerdantProfile } from '@biscuits/client';
 
 export interface Presence {
   /**
@@ -12,16 +12,7 @@ export interface Presence {
    */
 }
 
-// should match server
-export interface Profile {
-  id: string;
-  name: string;
-  imageUrl: string | null;
-}
-
-export type Participant = UserInfo<Profile, Presence>;
-
-export const hooks = createHooks<Presence, Profile>();
+export type Participant = UserInfo<VerdantProfile, Presence>;
 
 export const clientDescriptor = new ClientDescriptor({
   namespace: '{{todoId}}',

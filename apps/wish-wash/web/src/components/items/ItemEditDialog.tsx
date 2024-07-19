@@ -6,13 +6,14 @@ import {
   DialogActions,
   DialogClose,
 } from '@a-type/ui/components/dialog';
-import { hooks } from '@/store.js';
+import { hooks } from '@/hooks.js';
 import { Item } from '@wish-wash.biscuits/verdant';
 import { Input } from '@a-type/ui/components/input/Input';
 import { TextArea } from '@a-type/ui/components/textArea/TextArea';
 import { Button } from '@a-type/ui/components/button';
 import { preventDefault } from '@a-type/utils';
 import { ImageUploader } from '@a-type/ui/components/imageUploader';
+import { ItemExpirationEditor } from './ItemExpirationEditor.jsx';
 
 export interface ItemEditDialogProps {}
 
@@ -79,6 +80,7 @@ function ItemEditor({ item }: { item: Item }) {
         onChange={(e) => item.set('link', e.currentTarget.value)}
         autoSelect
       />
+      <ItemExpirationEditor item={item} />
     </div>
   );
 }

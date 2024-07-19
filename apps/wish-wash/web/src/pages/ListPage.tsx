@@ -2,17 +2,11 @@ import { ListActions } from '@/components/lists/ListActions.jsx';
 import { ListProvider } from '@/components/lists/ListContext.jsx';
 import { ListDetailsEditButton } from '@/components/lists/ListDetailsDialog.jsx';
 import { ListHero } from '@/components/lists/ListHero.jsx';
-import { ListPicker } from '@/components/lists/ListPicker.jsx';
 import { ListView } from '@/components/lists/ListView.jsx';
-import { hooks } from '@/store.js';
+import { hooks } from '@/hooks.js';
 import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
-import {
-  PageContent,
-  PageFixedArea,
-  PageNav,
-  PageNowPlaying,
-} from '@a-type/ui/components/layouts';
+import { PageContent } from '@a-type/ui/components/layouts';
 import { H1 } from '@a-type/ui/components/typography';
 import { useLocalStorage, UserMenu } from '@biscuits/client';
 import { Link, useNavigate, useParams } from '@verdant-web/react-router';

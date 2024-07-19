@@ -1,4 +1,4 @@
-import { hooks } from '@/store.js';
+import { hooks } from '@/hooks.js';
 import { clsx } from '@a-type/ui';
 import { Button } from '@a-type/ui/components/button';
 import { HorizontalList } from '@a-type/ui/components/horizontalList';

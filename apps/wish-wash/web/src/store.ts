@@ -1,6 +1,5 @@
 import {
   ClientDescriptor,
-  createHooks,
   migrations,
   UserInfo,
 } from '@wish-wash.biscuits/verdant';
@@ -15,8 +14,6 @@ export interface Presence {
 }
 
 export type Participant = UserInfo<VerdantProfile, Presence>;
-
-export const hooks = createHooks<Presence, VerdantProfile>();
 
 export const clientDescriptor = new ClientDescriptor({
   namespace: 'wish-wash',

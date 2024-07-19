@@ -153,17 +153,17 @@ importers:
         specifier: workspace:*
         version: link:../../../packages/client
       '@verdant-web/cli':
-        specifier: ^4.6.0
-        version: 4.6.0
+        specifier: ^4.6.1
+        version: 4.6.1
       '@verdant-web/common':
-        specifier: 2.5.1
-        version: 2.5.1
+        specifier: 2.5.2
+        version: 2.5.2
       '@verdant-web/react':
-        specifier: 37.0.0
-        version: 37.0.0(@verdant-web/store@3.11.0)(react@18.3.1)
+        specifier: 37.0.1
+        version: 37.0.1(@verdant-web/store@3.11.1)(react@18.3.1)
       '@verdant-web/store':
-        specifier: 3.11.0
-        version: 3.11.0
+        specifier: 3.11.1
+        version: 3.11.1
       cuid:
         specifier: ^2.1.8
         version: 2.1.8
@@ -259,8 +259,8 @@ importers:
         specifier: ^0.6.4
         version: 0.6.4(react@18.3.1)
       '@verdant-web/store':
-        specifier: ^3.11.0
-        version: 3.11.0
+        specifier: ^3.11.1
+        version: 3.11.1
       '@zip.js/zip.js':
         specifier: ^2.7.6
         version: 2.7.37
@@ -437,17 +437,17 @@ importers:
   apps/humding/verdant:
     dependencies:
       '@verdant-web/cli':
-        specifier: 4.6.0
-        version: 4.6.0
+        specifier: 4.6.1
+        version: 4.6.1
       '@verdant-web/common':
-        specifier: 2.5.1
-        version: 2.5.1
+        specifier: 2.5.2
+        version: 2.5.2
       '@verdant-web/react':
-        specifier: 37.0.0
-        version: 37.0.0(@verdant-web/store@3.11.0)(react@18.3.1)
+        specifier: 37.0.1
+        version: 37.0.1(@verdant-web/store@3.11.1)(react@18.3.1)
       '@verdant-web/store':
-        specifier: ^3.11.0
-        version: 3.11.0
+        specifier: ^3.11.1
+        version: 3.11.1
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -537,17 +537,17 @@ importers:
   apps/marginalia/verdant:
     dependencies:
       '@verdant-web/cli':
-        specifier: ^4.6.0
-        version: 4.6.0
+        specifier: ^4.6.1
+        version: 4.6.1
       '@verdant-web/common':
-        specifier: ^2.5.1
-        version: 2.5.1
+        specifier: ^2.5.2
+        version: 2.5.2
       '@verdant-web/react':
-        specifier: ^37.0.0
-        version: 37.0.0(@verdant-web/store@3.11.0)(react@18.3.1)
+        specifier: ^37.0.1
+        version: 37.0.1(@verdant-web/store@3.11.1)(react@18.3.1)
       '@verdant-web/store':
-        specifier: ^3.11.0
-        version: 3.11.0
+        specifier: ^3.11.1
+        version: 3.11.1
       cuid:
         specifier: ^2.1.8
         version: 2.1.8
@@ -643,17 +643,17 @@ importers:
   apps/star-chart/verdant:
     dependencies:
       '@verdant-web/cli':
-        specifier: 4.6.0
-        version: 4.6.0
+        specifier: 4.6.1
+        version: 4.6.1
       '@verdant-web/common':
-        specifier: 2.5.1
-        version: 2.5.1
+        specifier: 2.5.2
+        version: 2.5.2
       '@verdant-web/react':
-        specifier: 37.0.0
-        version: 37.0.0(@verdant-web/store@3.11.0)(react@18.3.1)
+        specifier: 37.0.1
+        version: 37.0.1(@verdant-web/store@3.11.1)(react@18.3.1)
       '@verdant-web/store':
-        specifier: 3.11.0
-        version: 3.11.0
+        specifier: 3.11.1
+        version: 3.11.1
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -770,17 +770,17 @@ importers:
   apps/trip-tick/verdant:
     dependencies:
       '@verdant-web/cli':
-        specifier: ^4.6.0
-        version: 4.6.0
+        specifier: ^4.6.1
+        version: 4.6.1
       '@verdant-web/common':
-        specifier: 2.5.1
-        version: 2.5.1
+        specifier: 2.5.2
+        version: 2.5.2
       '@verdant-web/react':
-        specifier: 37.0.0
-        version: 37.0.0(@verdant-web/store@3.11.0)(react@18.3.1)
+        specifier: 37.0.1
+        version: 37.0.1(@verdant-web/store@3.11.1)(react@18.3.1)
       '@verdant-web/store':
-        specifier: 3.11.0
-        version: 3.11.0
+        specifier: 3.11.1
+        version: 3.11.1
       cuid:
         specifier: ^2.1.8
         version: 2.1.8
@@ -818,14 +818,14 @@ importers:
         specifier: ^0.54.1
         version: 0.54.3
       '@verdant-web/react':
-        specifier: ^37.0.0
-        version: 37.0.0(@verdant-web/store@3.11.0)(react@18.3.1)
+        specifier: ^37.0.1
+        version: 37.0.1(@verdant-web/store@3.11.1)(react@18.3.1)
       '@verdant-web/react-router':
         specifier: ^0.6.4
         version: 0.6.4(react@18.3.1)
       '@verdant-web/store':
-        specifier: ^3.11.0
-        version: 3.11.0
+        specifier: ^3.11.1
+        version: 3.11.1
       classnames:
         specifier: ^2.3.2
         version: 2.3.2
@@ -909,17 +909,17 @@ importers:
   apps/wish-wash/verdant:
     dependencies:
       '@verdant-web/cli':
-        specifier: 4.6.0
-        version: 4.6.0
+        specifier: 4.6.1
+        version: 4.6.1
       '@verdant-web/common':
-        specifier: 2.5.1
-        version: 2.5.1
+        specifier: 2.5.2
+        version: 2.5.2
       '@verdant-web/react':
-        specifier: 37.0.0
-        version: 37.0.0(@verdant-web/store@3.11.0)(react@18.3.1)
+        specifier: 37.0.1
+        version: 37.0.1(@verdant-web/store@3.11.1)(react@18.3.1)
       '@verdant-web/store':
-        specifier: 3.11.0
-        version: 3.11.0
+        specifier: 3.11.1
+        version: 3.11.1
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -1136,8 +1136,8 @@ importers:
         specifier: 0.6.4
         version: 0.6.4(react@18.3.1)
       '@verdant-web/store':
-        specifier: ^3.11.0
-        version: 3.11.0
+        specifier: ^3.11.1
+        version: 3.11.1
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -1243,14 +1243,14 @@ importers:
         specifier: ^10.44.1
         version: 10.44.1
       '@verdant-web/common':
-        specifier: 2.5.1
-        version: 2.5.1
+        specifier: 2.5.2
+        version: 2.5.2
       '@verdant-web/s3-file-storage':
-        specifier: 1.0.28
-        version: 1.0.28
+        specifier: 1.0.29
+        version: 1.0.29
       '@verdant-web/server':
-        specifier: 3.3.1
-        version: 3.3.1
+        specifier: 3.3.2
+        version: 3.3.2
       '@whatwg-node/server':
         specifier: ^0.9.22
         version: 0.9.25
@@ -1604,7 +1604,7 @@ packages:
       react: ^18
       react-dom: ^18
     dependencies:
-      '@a-type/utils': 1.1.3
+      '@a-type/utils': 1.1.0
       '@radix-ui/react-accordion': 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
       '@radix-ui/react-checkbox': 1.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
       '@radix-ui/react-collapsible': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
@@ -1625,7 +1625,7 @@ packages:
       '@radix-ui/react-toggle-group': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
       '@radix-ui/react-tooltip': 1.1.2(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
       '@react-spring/web': 9.7.3(react-dom@18.2.0)(react@18.3.1)
-      '@tiptap/core': 2.4.0(@tiptap/pm@2.5.4)
+      '@tiptap/core': 2.4.0(@tiptap/pm@2.4.0)
       '@tiptap/extension-document': 2.4.0(@tiptap/core@2.4.0)
       '@tiptap/extension-paragraph': 2.4.0(@tiptap/core@2.4.0)
       '@tiptap/pm': 2.4.0
@@ -1639,7 +1639,7 @@ packages:
       color-parse: 2.0.2
       color-space: 2.0.1
       date-fns: 2.30.0
-      formik: 2.4.5(react@18.3.1)
+      formik: 2.4.6(react@18.3.1)
       pluralize: 8.0.0
       prosemirror-model: 1.21.1
       react: 18.3.1
@@ -1710,7 +1710,7 @@ packages:
       react: ^18
       react-dom: ^18
     dependencies:
-      '@a-type/utils': 1.1.3
+      '@a-type/utils': 1.1.0
       '@radix-ui/react-accordion': 1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       '@radix-ui/react-checkbox': 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       '@radix-ui/react-collapsible': 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
@@ -1731,7 +1731,7 @@ packages:
       '@radix-ui/react-toggle-group': 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       '@radix-ui/react-tooltip': 1.1.2(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       '@react-spring/web': 9.7.3(react-dom@18.3.1)(react@18.3.1)
-      '@tiptap/core': 2.4.0(@tiptap/pm@2.5.4)
+      '@tiptap/core': 2.4.0(@tiptap/pm@2.4.0)
       '@tiptap/extension-document': 2.4.0(@tiptap/core@2.4.0)
       '@tiptap/extension-paragraph': 2.4.0(@tiptap/core@2.4.0)
       '@tiptap/pm': 2.4.0
@@ -1745,7 +1745,7 @@ packages:
       color-parse: 2.0.2
       color-space: 2.0.1
       date-fns: 2.30.0
-      formik: 2.4.5(react@18.3.1)
+      formik: 2.4.6(react@18.3.1)
       pluralize: 8.0.0
       prosemirror-model: 1.21.1
       react: 18.3.1
@@ -1763,7 +1763,7 @@ packages:
       react: ^18
       react-dom: ^18
     dependencies:
-      '@a-type/utils': 1.1.3
+      '@a-type/utils': 1.1.0
       '@radix-ui/react-accordion': 1.2.0(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       '@radix-ui/react-checkbox': 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       '@radix-ui/react-collapsible': 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
@@ -1784,7 +1784,7 @@ packages:
       '@radix-ui/react-toggle-group': 1.1.0(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       '@radix-ui/react-tooltip': 1.1.2(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
       '@react-spring/web': 9.7.3(react-dom@18.3.1)(react@18.3.1)
-      '@tiptap/core': 2.4.0(@tiptap/pm@2.5.4)
+      '@tiptap/core': 2.4.0(@tiptap/pm@2.4.0)
       '@tiptap/extension-document': 2.4.0(@tiptap/core@2.4.0)
       '@tiptap/extension-paragraph': 2.4.0(@tiptap/core@2.4.0)
       '@tiptap/pm': 2.4.0
@@ -1798,7 +1798,7 @@ packages:
       color-parse: 2.0.2
       color-space: 2.0.1
       date-fns: 2.30.0
-      formik: 2.4.5(react@18.3.1)
+      formik: 2.4.6(react@18.3.1)
       pluralize: 8.0.0
       prosemirror-model: 1.21.1
       react: 18.3.1
@@ -1876,7 +1876,6 @@ packages:
 
   /@a-type/utils@1.1.0:
     resolution: {integrity: sha512-dwM1bl6XQaC/X9RZQUp0LDGQF70nn0QV6TFq/bKsjqlt8OEBGWlr++um4oigl2QMKkwzto9XwoBJ/D38IvROIQ==}
-    dev: false
 
   /@a-type/utils@1.1.2:
     resolution: {integrity: sha512-VM/iA7Gco+RloJa8sNXdMgB+REIiNSL+H/ai4BJKPPUJq8woDY06Frd+XVw/V7lAorUrcBaGf0E1Z+7bXO9VMA==}
@@ -1884,6 +1883,7 @@ packages:
 
   /@a-type/utils@1.1.3:
     resolution: {integrity: sha512-wdd3pHus6WNYzoBZjwZhn2DJhgtK02VE/fky7t6soEl4DIUZamaCJmHivmFX4mvHL5/WIq/T2iXyZjDIC5F3KQ==}
+    dev: false
 
   /@aashutoshrathi/word-wrap@1.2.6:
     resolution: {integrity: sha512-1Yjs2SvM8TflER/OD3cOjhWWOZb58A2t7wpE2S9XfBYTiIl+XFhQG2bjy4Pu1I+EAlCNUzRDYDdFwFYUKvXcIA==}
@@ -2630,16 +2630,16 @@ packages:
       tslib: 2.6.3
     dev: false
 
-  /@aws-sdk/lib-storage@3.614.0(@aws-sdk/client-s3@3.583.0):
-    resolution: {integrity: sha512-Bzni+r7pS+nRiqcmWPpB/OiQEM4GszGRp1DXpL3rKnwaeu+Qgf2w12DULxWUacIvOc4IzLsv6tpEidQ/P1zKQg==}
+  /@aws-sdk/lib-storage@3.616.0(@aws-sdk/client-s3@3.583.0):
+    resolution: {integrity: sha512-VhuJGCbJvI1TGGWDd5pdnCa+pobKAGv5/H4MqN1GlyRuWd6Biwby+pRaFb2nL4GT3bOJdCcM24CyZXO2PefPaw==}
     engines: {node: '>=16.0.0'}
     peerDependencies:
-      '@aws-sdk/client-s3': ^3.614.0
+      '@aws-sdk/client-s3': ^3.616.0
     dependencies:
       '@aws-sdk/client-s3': 3.583.0
       '@smithy/abort-controller': 3.1.1
       '@smithy/middleware-endpoint': 3.0.5
-      '@smithy/smithy-client': 3.1.8
+      '@smithy/smithy-client': 3.1.9
       buffer: 5.6.0
       events: 3.3.0
       stream-browserify: 3.0.0
@@ -12132,15 +12132,15 @@ packages:
       tslib: 2.6.3
     dev: false
 
-  /@smithy/smithy-client@3.1.8:
-    resolution: {integrity: sha512-nUNGCa0NgvtD0eM45732EBp1H9JQITChMBegGtPRhJD00v3hiFF6tibiOihcYwP5mbp9Kui+sOCl86rDT/Ew2w==}
+  /@smithy/smithy-client@3.1.9:
+    resolution: {integrity: sha512-My2RaInZ4gSwJUPMaiLR/Nk82+c4LlvqpXA+n7lonGYgCZq23Tg+/xFhgmiejJ6XPElYJysTPyV90vKyp17+1g==}
     engines: {node: '>=16.0.0'}
     dependencies:
       '@smithy/middleware-endpoint': 3.0.5
       '@smithy/middleware-stack': 3.0.3
       '@smithy/protocol-http': 4.0.4
       '@smithy/types': 3.3.0
-      '@smithy/util-stream': 3.1.0
+      '@smithy/util-stream': 3.1.1
       tslib: 2.6.3
     dev: false
 
@@ -12290,8 +12290,8 @@ packages:
       tslib: 2.6.3
     dev: false
 
-  /@smithy/util-stream@3.1.0:
-    resolution: {integrity: sha512-QEMvyv58QIptWA8cpQPbHagJOAlrbCt3ueB9EShwdFfVMYAviXdVtksszQQq+o+dv5dalUMWUbUHUDSJgkF9xg==}
+  /@smithy/util-stream@3.1.1:
+    resolution: {integrity: sha512-EhRnVvl3AhoHAT2rGQ5o+oSDRM/BUSMPLZZdRJZLcNVUsFAjOs4vHaPdNQivTSzRcFxf5DA4gtO46WWU2zimaw==}
     engines: {node: '>=16.0.0'}
     dependencies:
       '@smithy/fetch-http-handler': 3.2.2
@@ -12382,8 +12382,8 @@ packages:
     dev: true
     optional: true
 
-  /@swc/core-darwin-arm64@1.6.13:
-    resolution: {integrity: sha512-SOF4buAis72K22BGJ3N8y88mLNfxLNprTuJUpzikyMGrvkuBFNcxYtMhmomO0XHsgLDzOJ+hWzcgjRNzjMsUcQ==}
+  /@swc/core-darwin-arm64@1.7.0:
+    resolution: {integrity: sha512-2ylhM7f0HwUwLrFYZAe/dse8PCbPsYcJS3Dt7Q8NT3PUn7vy6QOMxNcOPPuDrnmaXqQQO3oxdmRapguTxaat9g==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [darwin]
@@ -12418,8 +12418,8 @@ packages:
     dev: true
     optional: true
 
-  /@swc/core-darwin-x64@1.6.13:
-    resolution: {integrity: sha512-AW8akFSC+tmPE6YQQvK9S2A1B8pjnXEINg+gGgw0KRUUXunvu1/OEOeC5L2Co1wAwhD7bhnaefi06Qi9AiwOag==}
+  /@swc/core-darwin-x64@1.7.0:
+    resolution: {integrity: sha512-SgVnN4gT1Rb9YfTkp4FCUITqSs7Yj0uB2SUciu5CV3HuGvS5YXCUzh+KrwpLFtx8NIgivISKcNnb41mJi98X8Q==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [darwin]
@@ -12454,8 +12454,8 @@ packages:
     dev: true
     optional: true
 
-  /@swc/core-linux-arm-gnueabihf@1.6.13:
-    resolution: {integrity: sha512-f4gxxvDXVUm2HLYXRd311mSrmbpQF2MZ4Ja6XCQz1hWAxXdhRl1gpnZ+LH/xIfGSwQChrtLLVrkxdYUCVuIjFg==}
+  /@swc/core-linux-arm-gnueabihf@1.7.0:
+    resolution: {integrity: sha512-+Z9Dayart1iKJQEJJ9N/KS4z5EdXJE3WPFikY0jonKTo4Dd8RuyVz5yLvqcIMeVdz/SwximATaL6iJXw7hZS9A==}
     engines: {node: '>=10'}
     cpu: [arm]
     os: [linux]
@@ -12490,8 +12490,8 @@ packages:
     dev: true
     optional: true
 
-  /@swc/core-linux-arm64-gnu@1.6.13:
-    resolution: {integrity: sha512-Nf/eoW2CbG8s+9JoLtjl9FByBXyQ5cjdBsA4efO7Zw4p+YSuXDgc8HRPC+E2+ns0praDpKNZtLvDtmF2lL+2Gg==}
+  /@swc/core-linux-arm64-gnu@1.7.0:
+    resolution: {integrity: sha512-UnLrCiZ1EI4shznJn0xP6DLgsXUSwtfsdgHhGYCrvbgVBBve3S9iFgVFEB3SPl7Q/TdowNbrN4zHU0oChfiNfw==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
@@ -12526,8 +12526,8 @@ packages:
     dev: true
     optional: true
 
-  /@swc/core-linux-arm64-musl@1.6.13:
-    resolution: {integrity: sha512-2OysYSYtdw79prJYuKIiux/Gj0iaGEbpS2QZWCIY4X9sGoETJ5iMg+lY+YCrIxdkkNYd7OhIbXdYFyGs/w5LDg==}
+  /@swc/core-linux-arm64-musl@1.7.0:
+    resolution: {integrity: sha512-H724UANA+ptsfwKRr9mnaDa9cb5fw0oFysiGKTgb3DMYcgk3Od0jMTnXVPFSVpo7FlmyxeC9K8ueUPBOoOK6XA==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
@@ -12562,8 +12562,8 @@ packages:
     dev: true
     optional: true
 
-  /@swc/core-linux-x64-gnu@1.6.13:
-    resolution: {integrity: sha512-PkR4CZYJNk5hcd2+tMWBpnisnmYsUzazI1O5X7VkIGFcGePTqJ/bWlfUIVVExWxvAI33PQFzLbzmN5scyIUyGQ==}
+  /@swc/core-linux-x64-gnu@1.7.0:
+    resolution: {integrity: sha512-SY3HA0K0Dpqt1HIfMLGpwL4hd4UaL2xHP5oZXPlRQPhUDZrbb4PbI3ZJnh66c63eL4ZR8EJ+HRFI0Alx5p69Zw==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
@@ -12598,8 +12598,8 @@ packages:
     dev: true
     optional: true
 
-  /@swc/core-linux-x64-musl@1.6.13:
-    resolution: {integrity: sha512-OdsY7wryTxCKwGQcwW9jwWg3cxaHBkTTHi91+5nm7hFPpmZMz1HivJrWAMwVE7iXFw+M4l6ugB/wCvpYrUAAjA==}
+  /@swc/core-linux-x64-musl@1.7.0:
+    resolution: {integrity: sha512-cEJ2ebtV1v/5Ilb55E05J6F5SrHKQWzUttIhR5Mkayyo+yvPslcpByuFC3D+J7X1ebziTOBpWuMpUdjLfh3SMQ==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
@@ -12634,8 +12634,8 @@ packages:
     dev: true
     optional: true
 
-  /@swc/core-win32-arm64-msvc@1.6.13:
-    resolution: {integrity: sha512-ap6uNmYjwk9M/+bFEuWRNl3hq4VqgQ/Lk+ID/F5WGqczNr0L7vEf+pOsRAn0F6EV+o/nyb3ePt8rLhE/wjHpPg==}
+  /@swc/core-win32-arm64-msvc@1.7.0:
+    resolution: {integrity: sha512-ecQOOmzEssz+m0pR4xDYCGuvn3E/l0nQ3tk5jp1NA1lsAy4bMV0YbYCHjptYvWL/UjhIerIp3IlCJ8x5DodSog==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [win32]
@@ -12670,8 +12670,8 @@ packages:
     dev: true
     optional: true
 
-  /@swc/core-win32-ia32-msvc@1.6.13:
-    resolution: {integrity: sha512-IJ8KH4yIUHTnS/U1jwQmtbfQals7zWPG0a9hbEfIr4zI0yKzjd83lmtS09lm2Q24QBWOCFGEEbuZxR4tIlvfzA==}
+  /@swc/core-win32-ia32-msvc@1.7.0:
+    resolution: {integrity: sha512-gz81seZkRn3zMnVOc7L5k6F4vQC82gIxmHiL+GedK+A37XI/X26AASU3zxvORnqQbwQYXQ+AEVckxBmFlz3v2g==}
     engines: {node: '>=10'}
     cpu: [ia32]
     os: [win32]
@@ -12706,8 +12706,8 @@ packages:
     dev: true
     optional: true
 
-  /@swc/core-win32-x64-msvc@1.6.13:
-    resolution: {integrity: sha512-f6/sx6LMuEnbuxtiSL/EkR0Y6qUHFw1XVrh6rwzKXptTipUdOY+nXpKoh+1UsBm/r7H0/5DtOdrn3q5ZHbFZjQ==}
+  /@swc/core-win32-x64-msvc@1.7.0:
+    resolution: {integrity: sha512-b5Fd1xEOw9uqBpj2lqsaR4Iq9UhiL84hNDcEsi6DQA7Y1l85waQAslTbS0E4/pJ1PISAs0jW0zIGLco1eaWBOg==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [win32]
@@ -12790,8 +12790,8 @@ packages:
       '@swc/core-win32-x64-msvc': 1.5.5
     dev: true
 
-  /@swc/core@1.6.13:
-    resolution: {integrity: sha512-eailUYex6fkfaQTev4Oa3mwn0/e3mQU4H8y1WPuImYQESOQDtVrowwUGDSc19evpBbHpKtwM+hw8nLlhIsF+Tw==}
+  /@swc/core@1.7.0:
+    resolution: {integrity: sha512-d4vMzH6ICllDwlPuhset2h8gu/USHdbyfJim+2hQEdxC0UONtfpmu38XBgNqRjStrji1Q5M10jfeUZL3cu1i8g==}
     engines: {node: '>=10'}
     requiresBuild: true
     peerDependencies:
@@ -12803,16 +12803,16 @@ packages:
       '@swc/counter': 0.1.3
       '@swc/types': 0.1.9
     optionalDependencies:
-      '@swc/core-darwin-arm64': 1.6.13
-      '@swc/core-darwin-x64': 1.6.13
-      '@swc/core-linux-arm-gnueabihf': 1.6.13
-      '@swc/core-linux-arm64-gnu': 1.6.13
-      '@swc/core-linux-arm64-musl': 1.6.13
-      '@swc/core-linux-x64-gnu': 1.6.13
-      '@swc/core-linux-x64-musl': 1.6.13
-      '@swc/core-win32-arm64-msvc': 1.6.13
-      '@swc/core-win32-ia32-msvc': 1.6.13
-      '@swc/core-win32-x64-msvc': 1.6.13
+      '@swc/core-darwin-arm64': 1.7.0
+      '@swc/core-darwin-x64': 1.7.0
+      '@swc/core-linux-arm-gnueabihf': 1.7.0
+      '@swc/core-linux-arm64-gnu': 1.7.0
+      '@swc/core-linux-arm64-musl': 1.7.0
+      '@swc/core-linux-x64-gnu': 1.7.0
+      '@swc/core-linux-x64-musl': 1.7.0
+      '@swc/core-win32-arm64-msvc': 1.7.0
+      '@swc/core-win32-ia32-msvc': 1.7.0
+      '@swc/core-win32-x64-msvc': 1.7.0
     dev: false
 
   /@swc/counter@0.1.3:
@@ -12888,6 +12888,7 @@ packages:
       '@tiptap/pm': ^2.0.0
     dependencies:
       '@tiptap/pm': 2.5.4
+    dev: false
 
   /@tiptap/extension-blockquote@2.4.0(@tiptap/core@2.4.0):
     resolution: {integrity: sha512-nJJy4KsPgQqWTTDOWzFRdjCfG5+QExfZj44dulgDFNh+E66xhamnbM70PklllXJgEcge7xmT5oKM0gKls5XgFw==}
@@ -13110,6 +13111,7 @@ packages:
       prosemirror-trailing-node: 2.0.9(prosemirror-model@1.22.1)(prosemirror-state@1.4.3)(prosemirror-view@1.33.8)
       prosemirror-transform: 1.9.0
       prosemirror-view: 1.33.8
+    dev: false
 
   /@tiptap/react@2.4.0(@tiptap/core@2.4.0)(@tiptap/pm@2.4.0)(react-dom@18.2.0)(react@18.3.1):
     resolution: {integrity: sha512-baxnIr6Dy+5iGagOEIKFeHzdl1ZRa6Cg+SJ3GDL/BVLpO6KiCM3Mm5ymB726UKP1w7icrBiQD2fGY3Bx8KaiSA==}
@@ -13119,7 +13121,7 @@ packages:
       react: ^17.0.0 || ^18.0.0
       react-dom: ^17.0.0 || ^18.0.0
     dependencies:
-      '@tiptap/core': 2.4.0(@tiptap/pm@2.5.4)
+      '@tiptap/core': 2.4.0(@tiptap/pm@2.4.0)
       '@tiptap/extension-bubble-menu': 2.5.4(@tiptap/core@2.4.0)(@tiptap/pm@2.4.0)
       '@tiptap/extension-floating-menu': 2.5.4(@tiptap/core@2.4.0)(@tiptap/pm@2.4.0)
       '@tiptap/pm': 2.4.0
@@ -14726,12 +14728,12 @@ packages:
       react: 18.3.1
     dev: false
 
-  /@verdant-web/cli@4.6.0:
-    resolution: {integrity: sha512-dERyG67IKDdS8urtPh7Hlg6j3bDuMYM1rKBmiJOqnl9dB976Q9U0FHu8yRJKAfj4CMxf3uQdvkNNVtt5eE+UJA==}
+  /@verdant-web/cli@4.6.1:
+    resolution: {integrity: sha512-Pow6EE4SLqQu5LMIPojg/PWWk/tpGQDwsTV6DnczJngvF4n6MvDw6cqTLp37SXYJe6uyKlOpn3EYRZ/a4ftsWg==}
     hasBin: true
     dependencies:
       '@clack/prompts': 0.5.1
-      '@swc/core': 1.6.13
+      '@swc/core': 1.7.0
       change-case: 4.1.2
       esbuild: 0.19.12
       prettier: 3.3.3
@@ -14741,8 +14743,8 @@ packages:
       - '@swc/helpers'
     dev: false
 
-  /@verdant-web/common@2.5.1:
-    resolution: {integrity: sha512-syywMtNLd+o5vKxON4QngQMJ0OxKFvCWdBTMKWAeq6UK6koti4xs38pIAhE3wrGkwSHQ8MwVLJ9PSiAQqTgTHg==}
+  /@verdant-web/common@2.5.2:
+    resolution: {integrity: sha512-LR+LKaup+u3Zaoto9s5soIc2lvqGqSb5hP7l04X13LA0pPgp3nOHPvDoJoioIqCuf8EfnCicQni73cmmywXRHA==}
     dependencies:
       cuid: 2.1.8
       object-hash: 3.0.0
@@ -14756,25 +14758,25 @@ packages:
       path-to-regexp: 6.2.2
       react: 18.3.1
 
-  /@verdant-web/react@37.0.0(@verdant-web/store@3.11.0)(react@18.3.1):
-    resolution: {integrity: sha512-Qcmx8IWVgY4T54YeTIcYVjQYy+dqTeEgImx5ADArsq/9VrJNrrJM5aROkUoV6LUlz/xYAoTiQ4i6WHGWhdfC8g==}
+  /@verdant-web/react@37.0.1(@verdant-web/store@3.11.1)(react@18.3.1):
+    resolution: {integrity: sha512-cs2BgzMdlDLVrnapXcWzMozjyJEipPClM3jthqCtYyNpKf9ZANF089dfDOwcNOjRzm+NVCeBGiJNfDfrdg+lPw==}
     peerDependencies:
-      '@verdant-web/store': ^3.11.0
+      '@verdant-web/store': ^3.11.1
       react: ^18.2.0
     dependencies:
-      '@verdant-web/common': 2.5.1
-      '@verdant-web/store': 3.11.0
+      '@verdant-web/common': 2.5.2
+      '@verdant-web/store': 3.11.1
       react: 18.3.1
       suspend-react: 0.0.8(react@18.3.1)
       use-sync-external-store: 1.2.2(react@18.3.1)
     dev: false
 
-  /@verdant-web/s3-file-storage@1.0.28:
-    resolution: {integrity: sha512-e1EAB+nihTRMmRIMl+XWA6ig+BPH0/07+myLX54pCFWPBJyX52WaAkD3/Hh3pHj25856xM0HBAKV8qbvc7YFeg==}
+  /@verdant-web/s3-file-storage@1.0.29:
+    resolution: {integrity: sha512-NVVD341Mfwcd1IQwtEt4SRsJTnqDucCawvIZypkdUsBMiQKaTpZB2c7tVbmYtC9Z9On6udzagj8tOn0SKVvV3w==}
     dependencies:
       '@aws-sdk/client-s3': 3.583.0
-      '@aws-sdk/lib-storage': 3.614.0(@aws-sdk/client-s3@3.583.0)
-      '@verdant-web/server': 3.3.1
+      '@aws-sdk/lib-storage': 3.616.0(@aws-sdk/client-s3@3.583.0)
+      '@verdant-web/server': 3.3.2
     transitivePeerDependencies:
       - aws-crt
       - bufferutil
@@ -14783,12 +14785,12 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@verdant-web/server@3.3.1:
-    resolution: {integrity: sha512-1do891DtjK/qOqcr/tkw51Dlvwy1Bx+kC7uRHewTEFh5m22j9JCeuOYOglY0etQ1/58a4SqHGdx8ln+4CyziWw==}
+  /@verdant-web/server@3.3.2:
+    resolution: {integrity: sha512-EEVIdL2jh54WJGsRUOYOIM6P26L9IPhdOccs3DsSIcPBH4lvzSlov+1CjFoMw/7DPHQSMIsxlCJXoo/0a9LvaA==}
     hasBin: true
     dependencies:
       '@a-type/kysely': 1.0.1(kysely@0.27.3)
-      '@verdant-web/common': 2.5.1
+      '@verdant-web/common': 2.5.2
       async-lock: 1.4.1
       better-sqlite3: 7.6.2
       busboy: 1.6.0
@@ -14804,11 +14806,11 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@verdant-web/store@3.11.0:
-    resolution: {integrity: sha512-Fljh2QsRjBb7K6D/ogI7oFmwqMPs1A03vr3LNTuJua4eR5toDVLJl9e4g+tlheyMHqtRVr+JoaXTZuFfw0lURg==}
+  /@verdant-web/store@3.11.1:
+    resolution: {integrity: sha512-X1ToMj/ffXQGQvUzqaz2cv+7XwkZNFblw8LEMq35kfFb+82hC1ULxFg2U44XgzAtWX54HVGEhmskjO+pS8ag5Q==}
     dependencies:
       '@a-type/kysely': 1.0.1(kysely@0.27.4)
-      '@verdant-web/common': 2.5.1
+      '@verdant-web/common': 2.5.2
       cuid: 2.1.8
       jszip: 3.10.1
       jwt-decode: 3.1.2
@@ -15844,7 +15846,7 @@ packages:
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001642
-      electron-to-chromium: 1.4.829
+      electron-to-chromium: 1.4.830
       node-releases: 2.0.17
       update-browserslist-db: 1.1.0(browserslist@4.23.2)
     dev: true
@@ -16920,7 +16922,7 @@ packages:
     engines: {node: '>=0.10.0'}
     hasBin: true
     dependencies:
-      jake: 10.9.1
+      jake: 10.9.2
     dev: true
 
   /electron-to-chromium@1.4.690:
@@ -16929,8 +16931,8 @@ packages:
   /electron-to-chromium@1.4.796:
     resolution: {integrity: sha512-NglN/xprcM+SHD2XCli4oC6bWe6kHoytcyLKCWXmRL854F0qhPhaYgUswUsglnPxYaNQIg2uMY4BvaomIf3kLA==}
 
-  /electron-to-chromium@1.4.829:
-    resolution: {integrity: sha512-5qp1N2POAfW0u1qGAxXEtz6P7bO1m6gpZr5hdf5ve6lxpLM7MpiM4jIPz7xcrNlClQMafbyUDDWjlIQZ1Mw0Rw==}
+  /electron-to-chromium@1.4.830:
+    resolution: {integrity: sha512-TrPKKH20HeN0J1LHzsYLs2qwXrp8TF4nHdu4sq61ozGbzMpWhI7iIOPYPPkxeq1azMT9PZ8enPFcftbs/Npcjg==}
     dev: true
 
   /emmet@2.4.7:
@@ -18427,6 +18429,7 @@ packages:
       react-fast-compare: 2.0.4
       tiny-warning: 1.0.3
       tslib: 2.6.2
+    dev: false
 
   /formik@2.4.6(react@18.3.1):
     resolution: {integrity: sha512-A+2EI7U7aG296q2TLGvNapDNTZp1khVt5Vk0Q/fyfSROss0V/V6+txt2aJnwEos44IxTCW/LYAi/zgWzlevj+g==}
@@ -18442,7 +18445,6 @@ packages:
       react-fast-compare: 2.0.4
       tiny-warning: 1.0.3
       tslib: 2.6.3
-    dev: false
 
   /forwarded@0.2.0:
     resolution: {integrity: sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==}
@@ -19611,8 +19613,8 @@ packages:
     resolution: {integrity: sha512-ZHnPI0OOyTTLuNp2FdciejYaK4Wl3ZV3O0yEm8njOGggh/k/ek3BL7X2I5YsCOfc5vLhIJgj3Z4pUtLs6k9Ucg==}
     dev: false
 
-  /jake@10.9.1:
-    resolution: {integrity: sha512-61btcOHNnLnsOdtLgA5efqQWjnSi/vow5HbI7HMdKKWqvrKR1bLK3BPlJn9gcSaP2ewuamUSMB5XEy76KUIS2w==}
+  /jake@10.9.2:
+    resolution: {integrity: sha512-2P4SQ0HrLQ+fw6llpLnOaGAvN2Zu6778SJMrCUwns4fOoG9ayrTiZk3VV8sCPkVZF8ab0zksVpS8FDY5pRCNBA==}
     engines: {node: '>=10'}
     hasBin: true
     dependencies:
@@ -21650,6 +21652,7 @@ packages:
       prosemirror-transform: 1.9.0
       prosemirror-view: 1.33.8
       rope-sequence: 1.3.4
+    dev: false
 
   /prosemirror-inputrules@1.4.0:
     resolution: {integrity: sha512-6ygpPRuTJ2lcOXs9JkefieMst63wVJBgHZGl5QOytN7oSZs3Co/BYbc3Yx9zm9H37Bxw8kVzCnDsihsVsL4yEg==}
@@ -21692,6 +21695,7 @@ packages:
     resolution: {integrity: sha512-gMrxal+F3higDFxCkBK5iQXckRVYvIu/3dopERJ6b20xfwZ9cbYvQvuldqaN+v/XytNPGyURYUpUU23kBRxWCQ==}
     dependencies:
       orderedmap: 2.1.1
+    dev: false
 
   /prosemirror-schema-basic@1.2.2:
     resolution: {integrity: sha512-/dT4JFEGyO7QnNTe9UaKUhjDXbTNkiWTq/N4VpKaF79bBjSExVV2NXmJpcM7z/gD7mbqNjxbmWW5nf1iNSSGnw==}
@@ -21702,6 +21706,7 @@ packages:
     resolution: {integrity: sha512-h+H0OQwZVqMon1PNn0AG9cTfx513zgIG2DY00eJ00Yvgb3UD+GQ/VlWW5rcaxacpCGT1Yx8nuhwXk4+QbXUfJA==}
     dependencies:
       prosemirror-model: 1.21.1
+    dev: false
 
   /prosemirror-schema-list@1.3.0:
     resolution: {integrity: sha512-Hz/7gM4skaaYfRPNgr421CU4GSwotmEwBVvJh5ltGiffUJwm7C8GfN/Bc6DR1EKEp5pDKhODmdXXyi9uIsZl5A==}
@@ -21716,6 +21721,7 @@ packages:
       prosemirror-model: 1.21.1
       prosemirror-state: 1.4.3
       prosemirror-transform: 1.9.0
+    dev: false
 
   /prosemirror-state@1.4.3:
     resolution: {integrity: sha512-goFKORVbvPuAQaXhpbemJFRKJ2aixr+AZMGiquiqKxaucC6hlpHNZHWgz5R7dS4roHiwq9vDctE//CZ++o0W1Q==}
@@ -21758,6 +21764,7 @@ packages:
       prosemirror-model: 1.22.1
       prosemirror-state: 1.4.3
       prosemirror-view: 1.33.8
+    dev: false
 
   /prosemirror-transform@1.9.0:
     resolution: {integrity: sha512-5UXkr1LIRx3jmpXXNKDhv8OyAOeLTGuXNwdVfg8x27uASna/wQkr9p6fD3eupGOi4PLJfbezxTyi/7fSJypXHg==}
@@ -21784,6 +21791,7 @@ packages:
       prosemirror-model: 1.21.1
       prosemirror-state: 1.4.3
       prosemirror-transform: 1.9.0
+    dev: false
 
   /proxy-addr@2.0.7:
     resolution: {integrity: sha512-llQsMLSUDUPT44jdrU/O37qlnifitDP+ZwrmmZcoSKyLKvtZxpyV0n2/bD/N4tBAAZ/gJEdZU7KMraoK1+XYAg==}

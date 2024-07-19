@@ -1,4 +1,4 @@
-import { hooks } from '@/store.js';
+import { hooks } from '@/hooks.js';
 import { List } from '@wish-wash.biscuits/verdant';
 import {
   CardRoot,

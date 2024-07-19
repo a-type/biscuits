@@ -1,5 +1,5 @@
 import { ActionButton } from '@a-type/ui/components/actions';
-import { hooks } from '@/store.js';
+import { hooks } from '@/hooks.js';
 import { Tooltip } from '@a-type/ui/components/tooltip';
 import { Icon } from '@a-type/ui/components/icon';
 

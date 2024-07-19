@@ -1,38 +1,21 @@
-import { Item } from '@wish-wash.biscuits/verdant';
-import { Checkbox } from '@a-type/ui/components/checkbox';
-import { hooks } from '@/store.js';
-import { EditableText } from '@a-type/ui/components/editableText';
-import { useSnapshot } from 'valtio';
-import { createdItemState } from '../lists/state.js';
-import {
-  CardRoot,
-  CardContent,
-  CardMain,
-  CardActions,
-  CardFooter,
-  CardTitle,
-  CardImage,
-  CardMenu,
-} from '@a-type/ui/components/card';
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  DialogClose,
-} from '@a-type/ui/components/dialog';
-import { Link, useSearchParams } from '@verdant-web/react-router';
-import { Button } from '@a-type/ui/components/button';
-import { ReactNode, useState } from 'react';
-import { Icon } from '@a-type/ui/components/icon';
-import {
-  FormikForm,
-  SubmitButton,
-  TextField,
-} from '@a-type/ui/components/forms';
-import { SearchButton } from './SearchButton.jsx';
+import { hooks } from '@/hooks.js';
 import { clsx } from '@a-type/ui';
+import { Button } from '@a-type/ui/components/button';
+import {
+  CardActions,
+  CardContent,
+  CardFooter,
+  CardImage,
+  CardMain,
+  CardMenu,
+  CardRoot,
+  CardTitle,
+} from '@a-type/ui/components/card';
+import { Icon } from '@a-type/ui/components/icon';
+import { Link, useSearchParams } from '@verdant-web/react-router';
+import { Item } from '@wish-wash.biscuits/verdant';
 import { ItemStar } from './ItemStar.jsx';
+import { SearchButton } from './SearchButton.jsx';
 
 export interface ListItemProps {
   item: Item;

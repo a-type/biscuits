@@ -1,9 +1,9 @@
 import { ActionButton } from '@a-type/ui/components/actions';
-import { hooks } from '@/store.js';
+import { hooks } from '@/hooks.js';
 import { Icon } from '@a-type/ui/components/icon';
 
 export function RedoAction({ showName }: { showName?: boolean }) {
-  const canRedo = hooks.useCanUndo();
+  const canRedo = hooks.useCanRedo();
   const groceries = hooks.useClient();
 
   return (

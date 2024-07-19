@@ -1,5 +1,6 @@
 import { Pages } from '@/pages/Pages.jsx';
-import { clientDescriptor, hooks } from '@/store.js';
+import { clientDescriptor } from '@/store.js';
+import { hooks } from '@/hooks.js';
 import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
 import { Provider as UIProvider } from '@a-type/ui/components/provider';
 import { H1, P } from '@a-type/ui/components/typography';

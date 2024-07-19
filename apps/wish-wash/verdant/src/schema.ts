@@ -62,6 +62,9 @@ const items = schema.collection({
     expiresAt: schema.fields.number({
       nullable: true,
     }),
+    expirationNotificationSent: schema.fields.boolean({
+      default: false,
+    }),
     imageUrl: schema.fields.string({
       nullable: true,
     }),
@@ -101,6 +104,9 @@ const items = schema.collection({
         return item.createdAt.toString();
       },
     },
+    expiresAt: {
+      field: 'expiresAt',
+    },
   },
   compounds: {
     listOrder: {
@@ -110,7 +116,7 @@ const items = schema.collection({
 });
 
 export default schema({
-  version: 3,
+  version: 4,
   collections: {
     lists,
     items,

@@ -9,7 +9,7 @@ import {
   DialogSelectList,
   DialogTitle,
 } from '@a-type/ui/components/dialog';
-import { hooks } from '@/store.js';
+import { hooks } from '@/hooks.js';
 import { useNavigate } from '@verdant-web/react-router';
 import { Icon } from '@a-type/ui/components/icon';
 

@@ -1,4 +1,4 @@
-import { hooks } from '@/store.js';
+import { hooks } from '@/hooks.js';
 import { InfiniteLoadTrigger } from '@a-type/ui/components/infiniteLoadTrigger';
 import { CreateItem } from './CreateItem.jsx';
 import { ListItem } from '../items/ListItem.jsx';
