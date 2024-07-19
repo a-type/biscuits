@@ -18,12 +18,10 @@ const EMPTY_DROPPABLE_SIZE = 48;
 export function GroceryListCategory({
   category,
   items,
-  first,
   ...rest
 }: {
   category: Category | null;
   items: Item[];
-  first?: boolean;
 }) {
   const { empty, mountedEmpty, justMounted } =
     useCategoryItemVisibilityState(items);
@@ -67,14 +65,8 @@ export function GroceryListCategory({
         )}
       </CategoryTitleRow>
       <CategoryItems data-is-item-dragging={isDragging}>
-        {items.map((item, index) => {
-          return (
-            <MemoizedDraggableItem
-              key={item.get('id')}
-              item={item}
-              first={index === 0}
-            />
-          );
+        {items.map((item) => {
+          return <MemoizedDraggableItem key={item.get('id')} item={item} />;
         })}
       </CategoryItems>
     </CategoryRoot>

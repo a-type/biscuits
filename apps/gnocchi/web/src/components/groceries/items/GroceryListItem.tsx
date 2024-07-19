@@ -75,8 +75,7 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
     { item, isDragActive, menuProps, className, ...rest },
     ref,
   ) {
-    const { purchasedAt, comment, id, food, textOverride } =
-      hooks.useWatch(item);
+    const { purchasedAt, comment, id, food } = hooks.useWatch(item);
 
     const isPurchased = !!purchasedAt;
 
@@ -280,13 +279,7 @@ function useDidQuantityJustChange(item: Item) {
   return didQuantityChange;
 }
 
-export function GroceryListItemDraggable({
-  item,
-  ...rest
-}: {
-  item: Item;
-  first?: boolean;
-}) {
+export function GroceryListItemDraggable({ item, ...rest }: { item: Item }) {
   const {
     attributes,
     listeners,
