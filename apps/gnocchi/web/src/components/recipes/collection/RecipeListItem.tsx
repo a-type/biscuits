@@ -21,24 +21,17 @@ import {
   DropdownMenuItemRightSlot,
   DropdownMenuTrigger,
 } from '@a-type/ui/components/dropdownMenu';
-import {
-  Cross2Icon,
-  DotsVerticalIcon,
-  DrawingPinFilledIcon,
-  DrawingPinIcon,
-  Pencil1Icon,
-  PlusCircledIcon,
-  PlusIcon,
-  TrashIcon,
-} from '@radix-ui/react-icons';
 import { Suspense, useCallback, useState } from 'react';
 import { RecipeMainImageViewer } from '../viewer/RecipeMainImageViewer.jsx';
 import { RecipeTagsViewer } from '../viewer/RecipeTagsViewer.jsx';
-import { Icon } from '@/components/icons/Icon.jsx';
+import { Icon } from '@a-type/ui/components/icon';
 import addWeeks from 'date-fns/addWeeks';
 import { PinIcon } from './PinIcon.jsx';
 import { useGridStyle } from './hooks.js';
 import classNames from 'classnames';
+import { DrawingPinFilledIcon } from '@radix-ui/react-icons';
+import { useNavigate } from '@verdant-web/react-router';
+import cuid from 'cuid';
 
 const THREE_WEEKS_AGO = addWeeks(Date.now(), -3).getTime();
 
@@ -134,6 +127,26 @@ export function RecipeListItemMenu({
   const deleteRecipe = hooks.useDeleteRecipe();
   const { pinnedAt } = hooks.useWatch(recipe);
   const isPinned = pinnedAt && pinnedAt > THREE_WEEKS_AGO;
+  const client = hooks.useClient();
+  const navigate = useNavigate();
+  const copyRecipe = async () => {
+    const copy = await client.recipes.clone(recipe);
+    copy.update({
+      slug: cuid.slug(),
+      title: `${recipe.get('title')} (copy)`,
+      pinnedAt: null,
+      createdAt: Date.now(),
+      addIntervalGuess: null,
+      cookCount: 0,
+      lastAddedAt: null,
+      lastCookedAt: null,
+      session: null,
+      updatedAt: Date.now(),
+    });
+    navigate(makeRecipeLink(copy, '/edit'), {
+      skipTransition: true,
+    });
+  };
 
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -147,7 +160,7 @@ export function RecipeListItemMenu({
     >
       <DropdownMenuTrigger asChild>
         <Button size="icon" color="ghost" {...rest}>
-          <DotsVerticalIcon className="w-20px h-20px" />
+          <Icon name="dots" className="w-20px h-20px" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent onPointerDownOutside={() => setMenuOpen(false)}>
@@ -163,7 +176,7 @@ export function RecipeListItemMenu({
           <Link to={makeRecipeLink(recipe, '/edit')} preserveQuery>
             <span>Edit</span>
             <DropdownMenuItemRightSlot>
-              <Pencil1Icon />
+              <Icon name="pencil" />
             </DropdownMenuItemRightSlot>
           </Link>
         </DropdownMenuItem>
@@ -180,6 +193,12 @@ export function RecipeListItemMenu({
             </DropdownMenuItemRightSlot>
           </DropdownMenuItem>
         )}
+        <DropdownMenuItem onSelect={copyRecipe}>
+          <span>Make a copy</span>
+          <DropdownMenuItemRightSlot>
+            <Icon name="copy" />
+          </DropdownMenuItemRightSlot>
+        </DropdownMenuItem>
         <DropdownMenuItem
           color="destructive"
           onSelect={() => {
@@ -189,7 +208,7 @@ export function RecipeListItemMenu({
         >
           <span>Delete</span>
           <DropdownMenuItemRightSlot>
-            <TrashIcon />
+            <Icon name="trash" />
           </DropdownMenuItemRightSlot>
         </DropdownMenuItem>
       </DropdownMenuContent>
