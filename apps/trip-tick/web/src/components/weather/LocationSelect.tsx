@@ -154,6 +154,9 @@ function LocationSelectAutocomplete({
         }
       }
     },
+    itemToString: (item) => {
+      return item?.text ?? '';
+    },
   });
 
   const contentRef = useRef<HTMLDivElement>(null);
@@ -214,7 +217,9 @@ function LocationSelectAutocomplete({
             <span className="">{item.text}</span>
           </div>
         ))}
-        {!options && <div className="p-2 text-center">No results found</div>}
+        {!options?.length && (
+          <div className="px-2 text-center">No results found</div>
+        )}
       </PopoverContent>
     </Popover>
   );
