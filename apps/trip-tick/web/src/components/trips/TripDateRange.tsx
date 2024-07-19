@@ -25,8 +25,8 @@ function formatDay(date: Date) {
 
 export function TripDateRange({ trip }: TripDateRangeProps) {
   const { startsAt, endsAt } = hooks.useWatch(trip);
-  const nights = useTripDays(trip);
-  const days = nights + 1;
+  const days = useTripDays(trip);
+  const nights = Math.max(0, days - 1);
 
   const displayString =
     startsAt && endsAt
