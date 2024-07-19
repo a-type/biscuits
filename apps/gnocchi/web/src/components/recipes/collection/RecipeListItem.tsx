@@ -78,10 +78,11 @@ export function RecipeListItem({
         <Link to={makeRecipeLink(recipe)} preserveQuery>
           <CardTitle
             className={classNames(
+              'flex-shrink-0',
               gridStyle === 'card-small' ? 'text-sm sm:text-md' : '',
             )}
           >
-            {title}
+            <span className="line-clamp-2 text-ellipsis">{title}</span>
           </CardTitle>
           <div className="m-2">
             <Suspense>
