@@ -282,6 +282,7 @@ function IngredientNote({ ingredient }: { ingredient: RecipeIngredientsItem }) {
     <NoteEditor
       value={note}
       onChange={(value) => ingredient.set('note', value)}
+      className="self-end"
     />
   );
 }

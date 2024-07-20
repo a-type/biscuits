@@ -22,6 +22,8 @@ import { makeRecipeLink } from '@/components/recipes/makeRecipeLink.js';
 import { RecipeTimeFields } from '@/components/recipes/editor/RecipeTimeFields.jsx';
 import { LiveUpdateTextField } from '@a-type/ui/components/liveUpdateTextField';
 import { usePageTitle } from '@/hooks/usePageTitle.jsx';
+import { NoteEditor } from './NoteEditor.jsx';
+import { hooks } from '@/stores/groceries/index.js';
 
 export interface RecipeEditorProps {
   slug: string;
@@ -61,6 +63,7 @@ function RecipeEditorContent({ recipe }: { recipe: Recipe }) {
         <H2 className="gutter-bottom">Description</H2>
         <RecipePreludeEditor recipe={recipe} />
       </div>
+      <RecipeNoteEditor recipe={recipe} />
       <RecipeTimeFields recipe={recipe} />
       <label className="flex flex-row items-center justify-between mt-1">
         <span>Servings</span>
@@ -90,5 +93,16 @@ function RecipeEditorContent({ recipe }: { recipe: Recipe }) {
         <RecipeDeleteButton className="self-start" recipe={recipe} />
       </div>
     </div>
+  );
+}
+
+function RecipeNoteEditor({ recipe }: { recipe: Recipe }) {
+  const { note } = hooks.useWatch(recipe);
+  return (
+    <NoteEditor
+      value={note ?? ''}
+      onChange={(v) => recipe.set('note', v)}
+      className="self-start"
+    />
   );
 }

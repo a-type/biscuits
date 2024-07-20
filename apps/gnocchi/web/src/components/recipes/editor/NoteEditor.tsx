@@ -26,6 +26,7 @@ export function NoteEditor({
         onChange={onChange}
         autoFocus={autoFocus}
         onBlur={onBlur}
+        placeholder="Add a note..."
       />
     </Note>
   );
