@@ -28,7 +28,6 @@ const router = AutoRouter({
   before: [preflight],
   finally: [corsify],
   catch: (reason) => {
-    console.error(reason);
     // translate any errant AuthError expired into the biscuits version
     if (reason instanceof AuthError) {
       if (reason.message === 'Session expired') {
@@ -52,8 +51,12 @@ const router = AutoRouter({
       }
     }
     if (reason instanceof BiscuitsError) {
+      if (reason.code >= BiscuitsError.Code.Unexpected) {
+        console.error(reason);
+      }
       return error(reason.statusCode, reason.body);
     }
+    console.error(reason);
     return error(500, 'Internal Server Error');
   },
 });
