@@ -88,7 +88,9 @@ export function App({
               </div>
             </TopLineTitle>
           </TopLineRoot>
-          {data.note && <Note className="self-start">{data.note}</Note>}
+          {data.note && (
+            <Note className="self-start max-w-400px">{data.note}</Note>
+          )}
           {data.prelude && (
             <div>
               <Suspense>
