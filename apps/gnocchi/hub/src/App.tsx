@@ -19,6 +19,10 @@ import { H1, H2, P } from '@a-type/ui/components/typography';
 import { HubRecipeData } from './types.js';
 import { Chip } from '@a-type/ui/components/chip';
 
+const innerProps = {
+  className: 'max-w-600px',
+};
+
 export function App({
   recipe: data,
   url,
@@ -38,7 +42,7 @@ export function App({
 
   return (
     <PageRoot className="theme-lemon">
-      <PageContent>
+      <PageContent innerProps={innerProps}>
         <article
           itemScope
           itemType="https://schema.org/Recipe"
