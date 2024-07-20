@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { Suspense, useEffect } from 'react';
 import {
   IngredientList,
   IngredientListItem,
@@ -30,6 +30,11 @@ export function App({
   recipe: HubRecipeData;
   url: string;
 }) {
+  useEffect(() => {
+    // set page title to recipe title on load
+    document.title = data.title;
+  }, [data.title]);
+
   if (!data) {
     return (
       <PageRoot className="theme-lemon">
