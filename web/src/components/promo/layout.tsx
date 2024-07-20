@@ -135,26 +135,28 @@ export const CallToAction = ({
 }) => (
   <div
     className={clsx(
-      'flex flex-col fixed bottom-0 bg-primary-light border-0 border-t border-solid border-t-primary-dark m-0 w-full p-6 items-center gap-3 z-2 transition-colors',
+      'flex flex-col fixed bottom-0 bg-primary-light border-0 border-t border-solid border-t-primary-dark m-0 w-full p-3 items-center gap-3 z-2 transition-colors',
       className,
     )}
   >
-    <Button asChild>
-      <Link
-        to={appsById[appId].url}
-        data-test="get-started"
-        className="justify-center self-center"
-        color="default"
-      >
-        Get Started
-      </Link>
-    </Button>
-    <Button asChild color="ghost">
-      <Link to="/">
-        More Biscuits apps
-        <Icon name="arrowRight" />
-      </Link>
-    </Button>
+    <div className="flex flex-col sm:flex-row-reverse justify-between items-center w-full">
+      <Button asChild>
+        <Link
+          to={appsById[appId].url}
+          data-test="get-started"
+          className="justify-center self-center"
+          color="default"
+        >
+          Get Started
+        </Link>
+      </Button>
+      <Button asChild color="ghost">
+        <Link to="/">
+          <Icon name="arrowLeft" />
+          More Biscuits apps
+        </Link>
+      </Button>
+    </div>
 
     <span className="text-xxs">
       Free, no signup required. By continuing you agree to{' '}

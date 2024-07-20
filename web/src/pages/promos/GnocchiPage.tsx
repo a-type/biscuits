@@ -152,7 +152,7 @@ export function GnocchiPage() {
             },
           ]}
         />
-        <div className="flex flex-row items-center justify-center gap-4 w-full py-8 md:[grid-column-end:span_2]">
+        <div className="flex flex-row flex-wrap items-center justify-center gap-4 w-full py-8 md:[grid-column-end:span_2]">
           <Button asChild color="primary">
             <Link to="/join">Upgrade now</Link>
           </Button>
