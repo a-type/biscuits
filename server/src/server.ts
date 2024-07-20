@@ -15,6 +15,7 @@ import { writeSchema } from './tasks/writeSchema.js';
 import { AuthError } from '@a-type/auth';
 import { killPortProcess } from 'kill-port-process';
 import { gnocchiRouter } from './routers/gnocchi.js';
+import { rateLimit } from './rateLimiter.js';
 
 console.log('Starting server...');
 
@@ -65,11 +66,11 @@ const logger = (req: IRequest) => {
 router
   .all('*', logger, preflight)
   .get('/', () => 'Success!')
-  .all('/auth/*', authRouter.fetch)
+  .all('/auth/*', rateLimit, authRouter.fetch)
   .all('/verdant/*', verdantRouter.fetch)
-  .all('/stripe/*', stripeRouter.fetch)
-  .all('/graphql/*', graphqlRouter.fetch)
-  .all('/gnocchi/*', gnocchiRouter.fetch);
+  .all('/stripe/*', rateLimit, stripeRouter.fetch)
+  .all('/graphql/*', rateLimit, graphqlRouter.fetch)
+  .all('/gnocchi/*', rateLimit, gnocchiRouter.fetch);
 
 const ittyServer = createServerAdapter((request) => router.fetch(request));
 

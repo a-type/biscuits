@@ -43,7 +43,7 @@ const logger = new Logger('🌿');
 export const verdantServer = new Server({
   storage: sqlShardStorage({
     databasesDirectory: STORAGE_DATABASES_DIRECTORY,
-    transferFromUnifiedDatabaseFile: OLD_STORAGE_DATABASE_FILE,
+    // transferFromUnifiedDatabaseFile: OLD_STORAGE_DATABASE_FILE,
   }),
   tokenSecret: VERDANT_SECRET,
   profiles: new Profiles(),

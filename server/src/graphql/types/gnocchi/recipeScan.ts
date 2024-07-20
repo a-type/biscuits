@@ -1,5 +1,6 @@
 import { scanWebRecipe } from '@gnocchi.biscuits/scanning';
 import { builder } from '../../builder.js';
+import { BiscuitsError } from '@biscuits/error';
 
 builder.queryFields((t) => ({
   recipeScan: t.field({
@@ -11,10 +12,15 @@ builder.queryFields((t) => ({
         required: true,
       }),
     },
-    authScopes: {
-      member: true,
-    },
-    resolve: async (_, { input }) => {
+    resolve: async (_, { input }, ctx) => {
+      // only members can scan non-gnocchi recipes
+      const isMember = !!ctx.session?.planId;
+      if (!isMember && !input.url.includes('recipes.gnocchi.biscuits.club')) {
+        throw new BiscuitsError(
+          BiscuitsError.Code.Unauthorized,
+          'You must be a Biscuits member to scan web recipes',
+        );
+      }
       const result = await scanWebRecipe(input.url);
       if (!result) return null;
       return {
