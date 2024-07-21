@@ -110,11 +110,11 @@ export function TripsList({}: TripsListProps) {
 }
 
 function TripsListItem({ trip }: { trip: Trip }) {
-  const { name, startsAt, location } = hooks.useWatch(trip);
+  const { name, startsAt, endsAt, location } = hooks.useWatch(trip);
   hooks.useWatch(location);
   const locationName = location?.get('name');
 
-  const isPast = startsAt && startsAt < Date.now();
+  const isPast = endsAt && endsAt < Date.now();
 
   const {
     value: completion,
@@ -127,7 +127,7 @@ function TripsListItem({ trip }: { trip: Trip }) {
       <CardMain compact={!!isPast} asChild>
         <Link to={`/trips/${trip.get('id')}`} className="relative bg-white">
           <CardTitle className="relative z-1">{name}</CardTitle>
-          <CardContent className="text-xs relative z-1 flex flex-row gap-1 flex-wrap">
+          <div className="text-xs px-2 relative z-1 flex flex-row gap-1 flex-wrap">
             {locationName && <Chip className="bg-white">{locationName}</Chip>}
             <Chip className="bg-white">
               {startsAt
@@ -139,7 +139,7 @@ function TripsListItem({ trip }: { trip: Trip }) {
                 {completedItems} / {totalItems} items
               </Chip>
             )}
-          </CardContent>
+          </div>
           {!isPast && (
             <div
               className="absolute left-0 top-0 bottom-0 bg-accent-wash"

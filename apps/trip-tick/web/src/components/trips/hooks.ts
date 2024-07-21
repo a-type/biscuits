@@ -9,7 +9,7 @@ export function useTripProgress(
 ) {
   const { lists, completions, extraItems } = hooks.useWatch(trip);
   const days = useTripDays(trip);
-  hooks.useWatch(lists);
+  hooks.useWatch(lists, { deep: true });
   hooks.useWatch(completions);
   hooks.useWatch(extraItems);
   const allLists = hooks.useAllLists();
@@ -44,7 +44,7 @@ export function useTripProgress(
             days,
             periodMultiplier: item.periodMultiplier,
             additional: item.additional,
-            condition: item.condition,
+            conditions: item.conditions,
             period: item.period,
           })
         );

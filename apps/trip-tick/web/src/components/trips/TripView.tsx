@@ -311,17 +311,10 @@ function TripViewChecklist({
   extraItems: TripExtraItems;
   forecast?: FragmentOf<typeof quantityForecast>;
 }) {
-  const {
-    items,
-    id: listId,
-    hotThreshold,
-    coldThreshold,
-  } = hooks.useWatch(list);
+  const { items, id: listId } = hooks.useWatch(list);
   hooks.useWatch(items);
   hooks.useWatch(completions);
   hooks.useWatch(extraItems);
-  const isSubscribed = useCanSync();
-  const { toDisplay } = useTemperatureUnit();
 
   let extraItemsForList = extraItems.get(listId) ?? null;
   hooks.useWatch(extraItemsForList);
@@ -332,19 +325,6 @@ function TripViewChecklist({
 
   return (
     <div className="flex flex-col">
-      {isSubscribed && (
-        <div className="text-xs italic text-gray-7 flex flex-row gap-2 m-2">
-          Hot days: {toDisplay(hotThreshold)}+ <TemperatureUnit />. Cold days:{' '}
-          {toDisplay(coldThreshold)}- <TemperatureUnit />.{' '}
-          <Link
-            className="font-bold inline-flex items-center flex-row gap-2 ml-auto"
-            to={`/lists/${list.get('id')}`}
-          >
-            Configure in list
-            <Icon name="gear" />
-          </Link>
-        </div>
-      )}
       <ul className="list-none flex flex-col gap-1 m-0 p-0 mb-6">
         {items.map((item) => {
           const completion = completions.get(item.get('id')) ?? 0;
@@ -358,8 +338,6 @@ function TripViewChecklist({
                   completions.set(item.get('id'), value);
                 }}
                 forecast={forecast}
-                hotThreshold={hotThreshold}
-                coldThreshold={coldThreshold}
               />
             </li>
           );

@@ -31,37 +31,32 @@ export function ListItem({
   completion,
   onCompletionChanged,
   forecast,
-  hotThreshold,
-  coldThreshold,
 }: {
   item: ListItemsItem;
   days: number;
   completion: TripCompletionsValue;
   onCompletionChanged: (completion: TripCompletionsValue) => void;
   forecast?: ResultOf<typeof quantityForecast>;
-  hotThreshold?: number;
-  coldThreshold?: number;
 }) {
   const {
     description,
     periodMultiplier,
-    condition,
+    conditions,
     quantity,
     additional,
     roundDown,
     period,
   } = hooks.useWatch(item);
+  hooks.useWatch(conditions, { deep: true });
   const computedQuantity = getComputedQuantity({
     periodMultiplier,
     quantity,
     days,
     additional,
     roundDown,
-    condition,
+    conditions: conditions.getSnapshot(),
     weather: forecast,
     period,
-    hotThreshold,
-    coldThreshold,
   });
 
   if (computedQuantity === 0) {

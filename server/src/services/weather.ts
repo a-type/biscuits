@@ -173,7 +173,6 @@ export async function getForecast(
     input.startDate = now;
   }
   const range = getDateRange(input.startDate, input.endDate);
-  console.log(range);
   const forecast: WeatherForecastDay[] = [];
   let error: string | undefined = undefined;
 
@@ -243,7 +242,6 @@ export async function getForecast(
       forecast.push(estimated);
     }
   }
-  console.log(forecast);
 
   return {
     days: forecast,
@@ -326,7 +324,6 @@ export async function getEstimatedWeather(
   params.set('appid', OPENWEATHER_API_KEY);
   // date must be formatted YYYY-MM-DD, ignoring tz
   params.set('date', input.date);
-  console.log('specific weather date', input.date);
   params.set(
     'units',
     input.temperatureUnits === TemperatureUnit.Celsius

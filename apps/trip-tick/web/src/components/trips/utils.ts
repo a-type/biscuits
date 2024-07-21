@@ -1,6 +1,9 @@
-import { FragmentOf, ResultOf, graphql, readFragment } from '@biscuits/client';
+import { ResultOf, graphql } from '@biscuits/client';
 import {
-  ListItemsItemCondition,
+  ListItemsItemConditions,
+  ListItemsItemConditionsItem,
+  ListItemsItemConditionsItemSnapshot,
+  ListItemsItemConditionsSnapshot,
   ListItemsItemPeriod,
 } from '@trip-tick.biscuits/verdant';
 
@@ -8,44 +11,29 @@ export function getComputedQuantity({
   quantity,
   roundDown,
   days: rawDays,
-  condition,
+  conditions,
   period,
   periodMultiplier,
   additional,
   weather: forecast,
-  hotThreshold = 299,
-  coldThreshold = 277,
 }: {
   quantity: number;
   roundDown: boolean;
   days: number;
-  condition: ListItemsItemCondition | null;
+  conditions: ListItemsItemConditionsSnapshot | null;
   period: ListItemsItemPeriod;
   periodMultiplier: number;
   additional: number;
   weather?: ResultOf<typeof quantityForecast>;
-  hotThreshold?: number;
-  coldThreshold?: number;
 }) {
-  const rainDays = forecast?.days?.filter((day) => day.willRain).length || 0;
-  const hotDays =
-    forecast?.days?.filter((day) => day.high > hotThreshold).length || 0;
-  const coldDays =
-    forecast?.days?.filter((day) => day.low < coldThreshold).length || 0;
-
   let unrounded = 0;
-  let conditionedDays = rawDays;
-  switch (condition) {
-    case 'cold':
-      conditionedDays = coldDays;
-      break;
-    case 'hot':
-      conditionedDays = hotDays;
-      break;
-    case 'rain':
-      conditionedDays = rainDays;
-      break;
-  }
+  let conditionedDays = conditions?.length
+    ? (forecast?.days ?? []).filter((day) => {
+        if (!conditions) return true;
+        return conditions.every((condition) => matchDay(day, condition));
+      }).length
+    : rawDays;
+
   const conditionedNights =
     conditionedDays === 0 ? 0 : Math.max(1, conditionedDays - 1);
 
@@ -68,6 +56,20 @@ export function getComputedQuantity({
     additional +
     (roundDown ? Math.max(1, Math.floor(unrounded)) : Math.ceil(unrounded))
   );
+}
+
+function matchDay(
+  day: { low: number; high: number; willRain: boolean },
+  condition: ListItemsItemConditionsItemSnapshot,
+) {
+  switch (condition.type) {
+    case 'rain':
+      return day.willRain;
+    case 'hot':
+      return day.high > condition.params.temperature ?? 299;
+    case 'cold':
+      return day.low < condition.params.temperature ?? 277;
+  }
 }
 
 export const quantityForecast = graphql(`

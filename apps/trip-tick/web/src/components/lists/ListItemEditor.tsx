@@ -6,60 +6,41 @@ import {
   ToggleItemLabel,
   ToggleItemTitle,
 } from '@/components/ui/ToggleGroup.jsx';
-import { firstList } from '@/onboarding/firstList.js';
 import { hooks } from '@/store.js';
 import { Button } from '@a-type/ui/components/button';
-import {
-  CollapsibleSimple,
-  CollapsibleTrigger,
-} from '@a-type/ui/components/collapsible';
 import { Icon } from '@a-type/ui/components/icon';
 import { LiveUpdateTextField } from '@a-type/ui/components/liveUpdateTextField';
 import { NumberStepper } from '@a-type/ui/components/numberStepper';
 import {
   Select,
   SelectContent,
+  SelectIcon,
   SelectItem,
   SelectTrigger,
   SelectValue,
-  SelectIcon,
 } from '@a-type/ui/components/select';
 import { withClassName } from '@a-type/ui/hooks';
 import { OnboardingTooltip, useCanSync } from '@biscuits/client';
-import {
-  ListItemsItem,
-  ListItemsItemCondition,
-  ListItemsItemPeriod,
-} from '@trip-tick.biscuits/verdant';
-import { useState } from 'react';
+import { ListItemsItem } from '@trip-tick.biscuits/verdant';
 import pluralize from 'pluralize';
-import { conditionNames, getItemRulesLabel, periodNames } from './utils.js';
+import { ListItemConditionsEditor } from './ListItemConditionsEditor.jsx';
+import { periodNames } from './utils.js';
+import { firstList } from '@/onboarding/firstList.js';
 
-export function ListItemEditor({
-  item,
-  onDelete,
-}: {
-  item: ListItemsItem;
-  onDelete: () => void;
-}) {
+export function ListItemEditor({ item }: { item: ListItemsItem }) {
   const {
     description,
     quantity,
     additional,
-    condition,
     periodMultiplier,
     period,
     roundDown,
   } = hooks.useWatch(item);
 
-  const [expanded, setExpanded] = useState(false);
-
-  const shortString = getItemRulesLabel(item);
-
   const isSubscribed = useCanSync();
 
   return (
-    <div className="flex flex-col gap-3 border border-solid border-gray-5 p-2 rounded-lg w-full">
+    <div className="flex flex-col gap-3 w-full">
       <div className="flex flex-row justify-between items-center">
         <LiveUpdateTextField
           value={description}
@@ -67,25 +48,26 @@ export function ListItemEditor({
           className="flex-1"
           autoSelect
         />
-        <Button size="icon" color="ghostDestructive" onClick={onDelete}>
-          <div className="i-solar-trash-bin-minimalistic-linear" />
-        </Button>
       </div>
-      <CollapsibleSimple open={expanded} onOpenChange={setExpanded}>
-        <div className="grid sm:grid-cols-2 gap-3 items-start p-1">
-          <FieldGroup>
-            <FieldLabel className="font-bold">Pack</FieldLabel>
-            <FieldArea>
-              <NumberStepper
-                increment={1}
-                value={quantity}
-                onChange={(v) => {
-                  if (v > 0) item.set('quantity', v);
-                }}
-                className="bg-white"
-              />
-            </FieldArea>
-          </FieldGroup>
+      <div className="flex flex-col gap-3 items-start">
+        <FieldGroup>
+          <FieldLabel className="font-bold">Pack</FieldLabel>
+          <FieldArea>
+            <NumberStepper
+              increment={1}
+              value={quantity}
+              onChange={(v) => {
+                if (v > 0) item.set('quantity', v);
+              }}
+              className="bg-white"
+            />
+          </FieldArea>
+        </FieldGroup>
+        <OnboardingTooltip
+          onboarding={firstList}
+          step="conditions"
+          content="Set rules for how many of this item you want to pack for each trip"
+        >
           <FieldGroup>
             <FieldLabel className="font-bold">for every</FieldLabel>
             <FieldArea>
@@ -107,7 +89,7 @@ export function ListItemEditor({
                   }
                 }}
               >
-                <SelectTrigger className="w-full bg-white justify-between border-default py-1.5 px-4">
+                <SelectTrigger className="bg-white justify-between border-default py-1.5 px-4">
                   <SelectValue />
                   <SelectIcon />
                 </SelectTrigger>
@@ -120,107 +102,85 @@ export function ListItemEditor({
                 </SelectContent>
               </Select>
             </FieldArea>
+            <FieldDescription>
+              include items once for the whole trip, or based on the trip length
+            </FieldDescription>
           </FieldGroup>
-          {isSubscribed && (
-            <FieldGroup>
-              <FieldLabel>
-                {period === 'trip' ? "with a day that's" : 'which is'}
-              </FieldLabel>
-              <FieldArea>
-                <Select
-                  value={condition ?? ('null' as const)}
-                  onValueChange={(v) => {
-                    if (v === 'null') item.set('condition', null);
-                    else item.set('condition', v);
-                  }}
-                >
-                  <SelectTrigger className="w-full bg-white justify-between border-default py-1.5 px-4">
-                    <SelectValue />
-                    <SelectIcon />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectItem value="null">add condition...</SelectItem>
-                    {Object.entries(conditionNames).map(([key, value]) => (
-                      <SelectItem value={key} key={key}>
-                        {value}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </FieldArea>
-            </FieldGroup>
-          )}
-          <FieldGroup>
-            <FieldLabel>plus</FieldLabel>
-            <FieldArea>
-              <div className="flex flex-row gap-2 items-center">
-                <NumberStepper
-                  value={additional}
-                  onChange={(v) => {
-                    if (v < 0) return;
-                    item.set('additional', v);
-                  }}
-                  className="bg-white"
-                  renderValue={(d) => (d === 0 ? 'None' : `${d} / trip`)}
-                />
-              </div>
-            </FieldArea>
-          </FieldGroup>
-        </div>
-        <div className="flex flex-col gap-3 items-start p-1">
-          {periodMultiplier > 1 && (
-            <ToggleGroup
-              value={roundDown ? 'down' : 'up'}
-              type="single"
-              onValueChange={(v) => {
-                item.set('roundDown', v === 'down');
-              }}
-            >
-              <ToggleItem value="down">
-                <ToggleItemIndicator>
-                  <Icon name="check" />
-                </ToggleItemIndicator>
-                <ToggleItemLabel>
-                  <ToggleItemTitle>Pack light</ToggleItemTitle>
-                  <ToggleItemDescription>
-                    Rounds the number of items down
-                  </ToggleItemDescription>
-                </ToggleItemLabel>
-              </ToggleItem>
-              <ToggleItem value="up">
-                <ToggleItemIndicator>
-                  <Icon name="check" />
-                </ToggleItemIndicator>
-                <ToggleItemLabel>
-                  <ToggleItemTitle>Pack safe</ToggleItemTitle>
-                  <ToggleItemDescription>
-                    Rounds the number of items up
-                  </ToggleItemDescription>
-                </ToggleItemLabel>
-              </ToggleItem>
-            </ToggleGroup>
-          )}
-          <CollapsibleTrigger asChild>
-            <Button size="small" color="default">
-              Done
-            </Button>
-          </CollapsibleTrigger>
-        </div>
-      </CollapsibleSimple>
-      <CollapsibleSimple open={!expanded} onOpenChange={(v) => setExpanded(!v)}>
-        <OnboardingTooltip
-          onboarding={firstList}
-          step="conditions"
-          content="Set rules for how many of this item you want to pack for each trip"
-        >
-          <CollapsibleTrigger asChild>
-            <Button size="small" color="ghost" className="text-black">
-              <Icon name="pencil" />
-              <span>{shortString}</span>
-            </Button>
-          </CollapsibleTrigger>
         </OnboardingTooltip>
-      </CollapsibleSimple>
+        <FieldGroup>
+          <FieldLabel>plus</FieldLabel>
+          <FieldArea>
+            <div className="flex flex-row gap-2 items-center">
+              <NumberStepper
+                value={additional}
+                onChange={(v) => {
+                  if (v < 0) return;
+                  item.set('additional', v);
+                }}
+                className="bg-white"
+                renderValue={(d) => (d === 0 ? 'None' : `${d} / trip`)}
+              />
+            </div>
+          </FieldArea>
+          <FieldDescription>
+            add additional items for each trip, regardless of trip length
+          </FieldDescription>
+        </FieldGroup>
+        {isSubscribed && (
+          <FieldGroup className="grid-col-span-2">
+            <FieldLabel>when...</FieldLabel>
+            <FieldArea>
+              <ListItemConditionsEditor item={item} />
+            </FieldArea>
+            <FieldDescription>
+              conditions limit how the item is included based on weather
+            </FieldDescription>
+          </FieldGroup>
+        )}
+      </div>
+      <div className="flex flex-col gap-3 items-start p-1">
+        {periodMultiplier > 1 && (
+          <FieldGroup>
+            <FieldLabel>rounded</FieldLabel>
+            <FieldArea>
+              <ToggleGroup
+                value={roundDown ? 'down' : 'up'}
+                type="single"
+                onValueChange={(v) => {
+                  item.set('roundDown', v === 'down');
+                }}
+              >
+                <ToggleItem value="down">
+                  <ToggleItemIndicator>
+                    <Icon name="check" />
+                  </ToggleItemIndicator>
+                  <ToggleItemLabel>
+                    <ToggleItemTitle>Pack light</ToggleItemTitle>
+                    <ToggleItemDescription>
+                      Rounds the number of items down
+                    </ToggleItemDescription>
+                  </ToggleItemLabel>
+                </ToggleItem>
+                <ToggleItem value="up">
+                  <ToggleItemIndicator>
+                    <Icon name="check" />
+                  </ToggleItemIndicator>
+                  <ToggleItemLabel>
+                    <ToggleItemTitle>Pack safe</ToggleItemTitle>
+                    <ToggleItemDescription>
+                      Rounds the number of items up
+                    </ToggleItemDescription>
+                  </ToggleItemLabel>
+                </ToggleItem>
+              </ToggleGroup>
+            </FieldArea>
+            <FieldDescription>
+              what to do when a trip has an odd number of{' '}
+              {period === 'night' ? 'nights' : 'days'}
+            </FieldDescription>
+          </FieldGroup>
+        )}
+      </div>
     </div>
   );
 }
@@ -230,4 +190,8 @@ const FieldLabel = withClassName('label', 'text-sm font-medium font-bold');
 const FieldArea = withClassName(
   'div',
   'flex flex-col gap-2 items-start w-full',
+);
+const FieldDescription = withClassName(
+  'div',
+  'text-xs italic text-gray-5 my-1',
 );

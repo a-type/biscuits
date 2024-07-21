@@ -52,19 +52,28 @@ const powerSuggestions: ListItemsItemInit[] = [
     description: 'Rain jacket',
     quantity: 1,
     period: 'trip',
-    condition: 'rain',
+    conditions: [
+      {
+        type: 'rain',
+      },
+    ],
   },
   {
     description: 'Sunglasses',
     quantity: 1,
     period: 'trip',
-    condition: 'hot',
+    conditions: [{ type: 'hot', params: { temperature: 299 } }],
   },
   {
     description: 'Coat or jacket',
     quantity: 1,
     period: 'trip',
-    condition: 'cold',
+    conditions: [
+      {
+        type: 'cold',
+        params: { temperature: 277 },
+      },
+    ],
   },
 ];
 

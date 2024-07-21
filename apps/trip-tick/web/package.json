@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@a-type/ui": "^1.0.9",
+    "@a-type/ui": "^1.0.10",
     "@a-type/utils": "^1.0.6",
     "@biscuits/client": "workspace:*",
     "@radix-ui/react-progress": "^1.0.3",

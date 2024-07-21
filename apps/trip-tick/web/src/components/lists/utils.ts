@@ -1,6 +1,6 @@
 import {
   ListItemsItem,
-  ListItemsItemCondition,
+  ListItemsItemConditionsItemType,
   ListItemsItemPeriod,
 } from '@trip-tick.biscuits/verdant';
 import pluralize from 'pluralize';
@@ -9,15 +9,17 @@ export function getItemRulesLabel(item: ListItemsItem) {
   const quantity = item.get('quantity');
   const period = item.get('period');
   const periodMultiplier = item.get('periodMultiplier');
-  const condition = item.get('condition');
+  const conditions = item.get('conditions');
   const additional = item.get('additional');
 
   let shortString = `${quantity} per `;
   if (periodMultiplier !== 1 && period !== 'trip') {
     shortString += `${periodMultiplier} `;
   }
-  if (condition) {
-    shortString += conditionNames[condition] + ' ';
+  if (conditions.length > 0) {
+    for (const condition of conditions) {
+      shortString += conditionNames[condition.get('type')] + ' ';
+    }
   }
   shortString += pluralize(periodNames[period], periodMultiplier);
   if (additional) {
@@ -32,7 +34,7 @@ export const periodNames: Record<ListItemsItemPeriod, string> = {
   night: 'night',
 };
 
-export const conditionNames: Record<ListItemsItemCondition, string> = {
+export const conditionNames: Record<ListItemsItemConditionsItemType, string> = {
   cold: 'cold',
   hot: 'hot',
   rain: 'rainy',

@@ -10,8 +10,9 @@ import { List } from '@trip-tick.biscuits/verdant';
 import { forwardRef, useState } from 'react';
 import { toast } from '@a-type/ui';
 import { AddSuggested } from './AddSuggested.jsx';
-import { ListInfoEditor } from './ListInfoEditor.jsx';
-import { ListItemEditor } from './ListItemEditor.jsx';
+import { ListEditorItem } from './ListEditorItem.jsx';
+import { useSearchParams } from '@verdant-web/react-router';
+import { CardGrid } from '@a-type/ui/components/card';
 
 export interface ListEditorProps {
   list: List;
@@ -52,7 +53,6 @@ export function ListEditor({ list }: ListEditorProps) {
           </Button>
         )}
       </div>
-      <ListInfoEditor list={list} />
       <ListItemsEditor list={list} />
     </div>
   );
@@ -72,27 +72,24 @@ function ListItemsEditor({ list }: { list: List }) {
   return (
     <div className="flex flex-col gap-4">
       <H2>Items</H2>
-      <ul className="mt-0 list-none mx-0 px-0 flex flex-col gap-3 md:flex-1">
+      <CardGrid>
         {items.map((item) => (
-          <li key={item.get('id')}>
-            <ListItemEditor
-              item={item}
-              onDelete={() => {
-                items.removeAll(item);
-              }}
-            />
-          </li>
+          <ListEditorItem
+            item={item}
+            onDelete={() => {
+              items.removeAll(item);
+            }}
+            key={item.get('id')}
+          />
         ))}
-        <li className="self-start justify-self-start">
-          <OnboardingTooltip
-            onboarding={firstList}
-            step="addItem"
-            content="Add your first item you want to pack"
-          >
-            <AddListItemButton list={list} />
-          </OnboardingTooltip>
-        </li>
-      </ul>
+      </CardGrid>
+      <OnboardingTooltip
+        onboarding={firstList}
+        step="addItem"
+        content="Add your first item you want to pack"
+      >
+        <AddListItemButton list={list} />
+      </OnboardingTooltip>
       <AddSuggested items={items} />
     </div>
   );
@@ -101,16 +98,22 @@ function ListItemsEditor({ list }: { list: List }) {
 const AddListItemButton = forwardRef<HTMLButtonElement, { list: List }>(
   function AddListItemButton({ list }, ref) {
     const { items } = hooks.useWatch(list);
+    const [_, setParams] = useSearchParams();
 
     return (
       <Button
         color="primary"
-        className="w-full items-center justify-center"
-        onClick={() =>
+        className="self-center items-center justify-center"
+        onClick={() => {
           items.push({
             description: 'New item',
-          })
-        }
+          });
+          const item = items.get(items.length - 1);
+          setParams((p) => {
+            p.set('item', item.get('id'));
+            return p;
+          });
+        }}
         ref={ref}
       >
         Add Item

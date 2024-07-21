@@ -25,10 +25,36 @@ export class Client<Presence = any, Profile = any> {
   import: BaseClient<Presence, Profile>["import"];
   subscribe: BaseClient<Presence, Profile>["subscribe"];
   stats: BaseClient<Presence, Profile>["stats"];
+
+  /**
+   * Deletes all local data. If the client is connected to sync,
+   * this will cause the client to re-sync all data from the server.
+   * Use this very carefully, and only as a last resort.
+   */
   __dangerous__resetLocal: BaseClient<
     Presence,
     Profile
   >["__dangerous__resetLocal"];
+
+  /**
+   * Export all data, then re-import it. This might resolve
+   * some issues with the local database, but it should
+   * only be done as a second-to-last resort. The last resort
+   * would be __dangerous__resetLocal on ClientDescriptor, which
+   * clears all local data.
+   *
+   * Unlike __dangerous__resetLocal, this method allows local-only
+   * clients to recover data, whereas __dangerous__resetLocal only
+   * lets networked clients recover from the server.
+   */
+  __dangerous__hardReset: () => Promise<void>;
+
+  /**
+   * Manually triggers storage rebasing. Follows normal
+   * rebasing rules. Rebases already happen automatically
+   * during normal operation, so you probably don't need this.
+   */
+  __manualRebase: () => Promise<void>;
 }
 
 export interface ClientDescriptorOptions<Presence = any, Profile = any>
@@ -86,27 +112,47 @@ export type ListItemsItemId = string;
 export type ListItemsItemDescription = string;
 export type ListItemsItemQuantity = number;
 export type ListItemsItemPeriod = "trip" | "day" | "night";
-export type ListItemsItemCondition = "rain" | "hot" | "cold";
+export type ListItemsItemConditions = ListEntity<
+  ListItemsItemConditionsInit,
+  ListItemsItemConditionsDestructured,
+  ListItemsItemConditionsSnapshot
+>;
+export type ListItemsItemConditionsItem = ObjectEntity<
+  ListItemsItemConditionsItemInit,
+  ListItemsItemConditionsItemDestructured,
+  ListItemsItemConditionsItemSnapshot
+>;
+export type ListItemsItemConditionsItemType = "rain" | "hot" | "cold";
+export type ListItemsItemConditionsItemParams = ObjectEntity<
+  ListItemsItemConditionsItemParamsInit,
+  ListItemsItemConditionsItemParamsDestructured,
+  ListItemsItemConditionsItemParamsSnapshot
+>;
+export type ListItemsItemConditionsItemParamsValue = any;
 export type ListItemsItemPeriodMultiplier = number;
 export type ListItemsItemAdditional = number;
 export type ListItemsItemRoundDown = boolean;
-export type ListHotThreshold = number;
-export type ListColdThreshold = number;
 export type ListInit = {
   id?: string;
   createdAt?: number;
   name?: string;
   items?: ListItemsInit;
-  hotThreshold?: number;
-  coldThreshold?: number;
 };
 
+export type ListItemsItemConditionsItemParamsInit = {
+  [key: string]: ListItemsItemConditionsItemParamsValueInit;
+};
+export type ListItemsItemConditionsItemInit = {
+  type: "rain" | "hot" | "cold";
+  params?: ListItemsItemConditionsItemParamsInit;
+};
+export type ListItemsItemConditionsInit = ListItemsItemConditionsItemInit[];
 export type ListItemsItemInit = {
   id?: string;
   description?: string;
   quantity?: number;
   period?: "trip" | "day" | "night";
-  condition?: "rain" | "hot" | "cold" | null;
+  conditions?: ListItemsItemConditionsInit;
   periodMultiplier?: number;
   additional?: number;
   roundDown?: boolean;
@@ -117,16 +163,22 @@ export type ListDestructured = {
   createdAt: number;
   name: string;
   items: ListItems;
-  hotThreshold: number;
-  coldThreshold: number;
 };
 
+export type ListItemsItemConditionsItemParamsDestructured = {
+  [key: string]: ListItemsItemConditionsItemParamsValue | undefined;
+};
+export type ListItemsItemConditionsItemDestructured = {
+  type: "rain" | "hot" | "cold";
+  params: ListItemsItemConditionsItemParams;
+};
+export type ListItemsItemConditionsDestructured = ListItemsItemConditionsItem[];
 export type ListItemsItemDestructured = {
   id: string;
   description: string;
   quantity: number;
   period: "trip" | "day" | "night";
-  condition: "rain" | "hot" | "cold" | null;
+  conditions: ListItemsItemConditions;
   periodMultiplier: number;
   additional: number;
   roundDown: boolean;
@@ -137,16 +189,23 @@ export type ListSnapshot = {
   createdAt: number;
   name: string;
   items: ListItemsSnapshot;
-  hotThreshold: number;
-  coldThreshold: number;
 };
 
+export type ListItemsItemConditionsItemParamsSnapshot = {
+  [key: string]: ListItemsItemConditionsItemParamsValueSnapshot;
+};
+export type ListItemsItemConditionsItemSnapshot = {
+  type: "rain" | "hot" | "cold";
+  params: ListItemsItemConditionsItemParamsSnapshot;
+};
+export type ListItemsItemConditionsSnapshot =
+  ListItemsItemConditionsItemSnapshot[];
 export type ListItemsItemSnapshot = {
   id: string;
   description: string;
   quantity: number;
   period: "trip" | "day" | "night";
-  condition: "rain" | "hot" | "cold" | null;
+  conditions: ListItemsItemConditionsSnapshot;
   periodMultiplier: number;
   additional: number;
   roundDown: boolean;

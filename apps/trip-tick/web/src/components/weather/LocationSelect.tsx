@@ -190,6 +190,7 @@ function LocationSelectAutocomplete({
             autoComplete="off"
             name="location"
             autoFocus={autoFocus}
+            autoSelect
           />
         </div>
       </PopoverAnchor>
