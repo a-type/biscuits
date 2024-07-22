@@ -13,7 +13,7 @@ import * as fs from 'fs/promises';
 import { createDnsRecord } from '../lib/porkbun.js';
 import { addRepositoryVariable } from '../lib/github.js';
 
-const appId = process.argv[3];
+const appId = process.argv[3] || process.argv[4];
 
 const cdk = spawn(
   'pnpm',
