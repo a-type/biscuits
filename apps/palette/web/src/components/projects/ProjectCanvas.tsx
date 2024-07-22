@@ -166,6 +166,7 @@ function ColorPickerCanvas({
           pixel: { x: canvasX, y: canvasY },
         });
       },
+      onContextMenu: preventDefault,
     },
     {
       eventOptions: {
@@ -189,7 +190,6 @@ function ColorPickerCanvas({
           'w-full h-auto sm:(w-auto h-full max-w-60vw) touch-none',
           className,
         )}
-        onContextMenu={preventDefault}
       />
       {/* bubble preview */}
       <div
