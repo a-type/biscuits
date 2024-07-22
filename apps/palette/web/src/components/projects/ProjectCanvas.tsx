@@ -73,6 +73,7 @@ function ColorPickerCanvas({
     }
 
     const image = new Image();
+    image.crossOrigin = 'anonymous';
     image.src = imageSrc;
     image.onload = () => {
       canvas.width = image.width;
