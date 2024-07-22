@@ -36,7 +36,7 @@ function ProjectsListItem({ item }: { item: Project }) {
   const { id, image } = hooks.useWatch(item);
   hooks.useWatch(image);
   return (
-    <CardRoot>
+    <CardRoot className="h-240px">
       <CardMain asChild>
         <Link to={`/items/${id}`} />
       </CardMain>
