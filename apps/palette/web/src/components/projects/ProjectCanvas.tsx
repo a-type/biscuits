@@ -172,6 +172,11 @@ function ColorPickerCanvas({
         capture: true,
         passive: false,
       },
+      drag: {
+        pointer: {
+          touch: true,
+        },
+      },
       target: canvasRef,
     },
   );
