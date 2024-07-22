@@ -169,10 +169,6 @@ function ColorPickerCanvas({
       onContextMenu: preventDefault,
     },
     {
-      eventOptions: {
-        capture: true,
-        passive: false,
-      },
       drag: {
         pointer: {
           touch: true,
