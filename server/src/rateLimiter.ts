@@ -2,7 +2,7 @@ import { RequestHandler } from 'itty-router';
 import { RateLimiterMemory, RateLimiterRes } from 'rate-limiter-flexible';
 
 export const rateLimiter = new RateLimiterMemory({
-  points: 5,
+  points: 20,
   duration: 1,
 });
 
