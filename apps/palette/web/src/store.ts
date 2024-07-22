@@ -3,7 +3,7 @@ import {
   migrations,
   UserInfo,
 } from '@palette.biscuits/verdant';
-import { VerdantProfile } from '@biscuits/client';
+import { getVerdantSync, VerdantProfile } from '@biscuits/client';
 
 export interface Presence {
   /**
@@ -17,6 +17,11 @@ export type Participant = UserInfo<VerdantProfile, Presence>;
 export const clientDescriptor = new ClientDescriptor({
   namespace: 'palette',
   migrations,
+  sync: getVerdantSync({
+    appId: 'palette',
+    access: 'members',
+    initialPresence: {},
+  }),
 });
 
 // these are some helpers I like to use. You can delete them if you want.
