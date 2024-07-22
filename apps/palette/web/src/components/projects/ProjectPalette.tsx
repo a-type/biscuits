@@ -43,12 +43,17 @@ export function ProjectPalette({ project, className }: ProjectPaletteProps) {
           size="small"
           onClick={deleteSelectedColor}
           disabled={!selectedId}
-          className="ml-auto"
+          className="mr-auto"
         >
           <Icon name="trash" />
           Delete color
         </Button>
       </div>
+      {!sorted.length && (
+        <span className="text-xs text-gray-5 italic m-auto">
+          Click the image to select colors
+        </span>
+      )}
       <ScrollArea background="wash" className="[flex:1_0_0]">
         <div
           className={clsx(
@@ -75,11 +80,6 @@ export function ProjectPalette({ project, className }: ProjectPaletteProps) {
             />
           ))}
         </div>
-        {!sorted.length && (
-          <span className="text-xs text-gray-5 italic">
-            Click the image to select colors
-          </span>
-        )}
       </ScrollArea>
     </div>
   );

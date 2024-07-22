@@ -7,8 +7,10 @@ import {
   ProjectColorsItem,
   ProjectColorsItemInit,
 } from '@palette.biscuits/verdant';
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useColorSelection } from './hooks.js';
+import { preventDefault } from '@a-type/utils';
+import { useGesture } from '@use-gesture/react';
 
 export interface ProjectCanvasProps {
   project: Project;
@@ -28,12 +30,17 @@ export function ProjectCanvas({
     const newColor = colors.get(colors.length - 1);
     setSelected(newColor.get('id'));
   };
+  const [picking, setPicking] = useState(false);
 
   return (
     <div className={clsx('relative w-full sm:(w-auto h-full)', className)}>
       <div className="relative">
-        <ColorPickerCanvas imageSrc={image.url} onColor={addColor} />
-        {showBubbles && <Bubbles colors={colors} />}
+        <ColorPickerCanvas
+          imageSrc={image.url}
+          onColor={addColor}
+          onPickingChange={setPicking}
+        />
+        {showBubbles && !picking && <Bubbles colors={colors} />}
       </div>
     </div>
   );
@@ -43,12 +50,15 @@ function ColorPickerCanvas({
   imageSrc,
   onColor,
   className,
+  onPickingChange,
 }: {
   imageSrc?: string | null;
   onColor: (init: ProjectColorsItemInit) => void;
   className?: string;
+  onPickingChange?: (picking: boolean) => void;
 }) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const previewRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -77,39 +87,111 @@ function ColorPickerCanvas({
     };
   }, [canvasRef, imageSrc]);
 
-  const handleColor = useStableCallback(onColor);
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+  const getCanvasColor = useCallback(
+    (x: number, y: number) => {
+      const canvas = canvasRef.current;
+      if (!canvas) return null;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return null;
 
-    const handleColor = (e: MouseEvent) => {
-      const { clientX, clientY } = e;
       // convert from mouse position into canvas pixels, have to use canvas actual size
       const canvasRect = canvas.getBoundingClientRect();
-      const canvasX =
-        (clientX - canvasRect.left) * (canvas.width / canvasRect.width);
+      const canvasX = (x - canvasRect.left) * (canvas.width / canvasRect.width);
       const canvasY =
-        (clientY - canvasRect.top) * (canvas.height / canvasRect.height);
+        (y - canvasRect.top) * (canvas.height / canvasRect.height);
 
       const pixel = ctx.getImageData(canvasX, canvasY, 1, 1).data;
+
       const color = { r: pixel[0], g: pixel[1], b: pixel[2] };
-      onColor({
-        value: color,
-        percentage: { x: canvasX / canvas.width, y: canvasY / canvas.height },
-        pixel: { x: canvasX, y: canvasY },
-      });
-    };
-    canvas.addEventListener('click', handleColor);
-    return () => canvas.removeEventListener('click', handleColor);
-  }, [handleColor, canvasRef]);
+      return color;
+    },
+    [canvasRef],
+  );
+
+  useGesture(
+    {
+      onDragStart: ({ xy }) => {
+        const [clientX, clientY] = xy;
+        const preview = previewRef.current;
+        if (!preview) return;
+        preview.style.setProperty('left', `${clientX}px`);
+        preview.style.setProperty('top', `${clientY}px`);
+        preview.style.setProperty('display', 'block');
+        const color = getCanvasColor(clientX, clientY);
+        if (!color) return;
+        preview.style.setProperty(
+          'background-color',
+          `rgb(${color.r}, ${color.g}, ${color.b})`,
+        );
+        onPickingChange?.(true);
+      },
+      onDrag: ({ xy }) => {
+        const [clientX, clientY] = xy;
+        const preview = previewRef.current;
+        if (!preview) return;
+        preview.style.setProperty('left', `${clientX}px`);
+        preview.style.setProperty('top', `${clientY}px`);
+
+        const color = getCanvasColor(clientX, clientY);
+        if (!color) return;
+        preview.style.setProperty(
+          'background-color',
+          `rgb(${color.r}, ${color.g}, ${color.b})`,
+        );
+      },
+      onDragEnd: ({ xy }) => {
+        const [clientX, clientY] = xy;
+
+        previewRef.current?.style.setProperty('display', 'none');
+        onPickingChange?.(false);
+
+        const canvas = canvasRef.current;
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+
+        // convert from mouse position into canvas pixels, have to use canvas actual size
+        const canvasRect = canvas.getBoundingClientRect();
+        const canvasX =
+          (clientX - canvasRect.left) * (canvas.width / canvasRect.width);
+        const canvasY =
+          (clientY - canvasRect.top) * (canvas.height / canvasRect.height);
+
+        const color = getCanvasColor(clientX, clientY);
+        if (!color) return;
+
+        onColor({
+          value: color,
+          percentage: { x: canvasX / canvas.width, y: canvasY / canvas.height },
+          pixel: { x: canvasX, y: canvasY },
+        });
+      },
+    },
+    {
+      eventOptions: {
+        capture: true,
+        passive: false,
+      },
+      target: canvasRef,
+    },
+  );
 
   return (
-    <canvas
-      ref={canvasRef}
-      className={clsx('w-full h-auto sm:(w-auto h-full max-w-60vw)', className)}
-    />
+    <>
+      <canvas
+        ref={canvasRef}
+        className={clsx(
+          'w-full h-auto sm:(w-auto h-full max-w-60vw) touch-none',
+          className,
+        )}
+        onContextMenu={preventDefault}
+      />
+      {/* bubble preview */}
+      <div
+        ref={previewRef}
+        className="-translate-1/2 rounded-full w-120px h-120px fixed pointer-events-none"
+      />
+    </>
   );
 }
 

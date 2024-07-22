@@ -21,7 +21,7 @@ export function ProjectColorSpotlight({
     return (
       <div
         className={clsx(
-          'flex flex-col p-2 items-center justify-center',
+          'flex flex-col p-2 items-center justify-center border-1 border-solid border-gray-4 rounded-lg',
           className,
         )}
       >
