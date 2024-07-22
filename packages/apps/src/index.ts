@@ -131,6 +131,18 @@ export const apps = [
     url: 'https://humding.biscuits.club',
     prerelease: true,
   } as AppManifest<'humding'>,
+  {
+    id: 'palette',
+    demoVideoSrc: '',
+    description: 'Paint what you see, not what you think you see',
+    devOriginOverride: 'http://localhost:6226',
+    iconPath: 'icon.png',
+    name: 'Palette',
+    paidDescription: 'Sync your projects across all your devices',
+    paidFeatures: [],
+    url: 'https://palette.biscuits.club',
+    prerelease: true,
+  },
 ] as const;
 
 export type AppId = (typeof apps)[number]['id'];

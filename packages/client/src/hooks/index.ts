@@ -12,3 +12,4 @@ export * from './useIsInitialMount.js';
 export * from './useMergedRef.js';
 export * from './useIsTouch.js';
 export * from './useOnVisible.js';
+export * from './useStableCallback.js';

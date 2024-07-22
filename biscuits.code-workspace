@@ -37,6 +37,10 @@
       "path": "apps/humding",
     },
     {
+      "name": "🎨 Palette",
+      "path": "apps/palette",
+    },
+    {
       "name": "📃 Scripts",
       "path": "scripts",
     },

@@ -1,18 +1,17 @@
 {
-  "name": "@{{todoId}}.biscuits/web",
+  "name": "@palette.biscuits/web",
   "version": "1.0.0",
   "private": true,
   "type": "module",
   "scripts": {
     "app-dev": "vite",
     "build": "vite build",
-    "preview": "vite preview",
-    "generate": "cd ../verdant && pnpm generate"
+    "preview": "vite preview"
   },
   "dependencies": {
     "@a-type/ui": "1.0.10",
     "@a-type/utils": "1.1.3",
-    "@{{todoId}}.biscuits/verdant": "workspace:*",
+    "@palette.biscuits/verdant": "workspace:*",
     "@biscuits/client": "workspace:*",
     "@react-spring/web": "^9.7.4",
     "@verdant-web/react-router": "^0.6.4",

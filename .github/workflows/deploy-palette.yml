@@ -1,0 +1,57 @@
+name: palette deploy
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/palette/**'
+      - 'packages/client/**'
+      - 'packages/apps/**'
+      - '.github/workflows/deploy-palette.yml'
+
+jobs:
+  build-and-deploy-palette:
+    name: Build and deploy palette
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 8.12.1
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --filter @palette.biscuits/web...
+
+      - name: Build palette
+        run: pnpm --filter @palette.biscuits/web... run build
+        env:
+          VITE_API_ORIGIN: ${{ vars.API_ORIGIN }}
+          VITE_HOME_ORIGIN: ${{ vars.HOME_ORIGIN }}
+          VITE_PUBLIC_URL: https://palette.biscuits.club
+
+      - name: Deploy palette to S3
+        uses: jakejarvis/s3-sync-action@master
+        with:
+          args: --follow-symlinks --delete
+        env:
+          AWS_S3_BUCKET: ${{ secrets.S3_BUCKET_PALETTE }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.DEPLOYER_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.DEPLOYER_AWS_SECRET_ACCESS_KEY }}
+          SOURCE_DIR: './apps/palette/web/dist'
+
+      - name: Invalidate CloudFront cache
+        uses: chetan/invalidate-cloudfront-action@v2
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.DEPLOYER_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.DEPLOYER_AWS_SECRET_ACCESS_KEY }}
+          DISTRIBUTION: ${{ secrets.CLOUDFRONT_ID_PALETTE }}
+          PATHS: '/*'
+          AWS_REGION: 'us-east-1'
