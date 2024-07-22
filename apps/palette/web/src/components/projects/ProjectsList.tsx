@@ -38,7 +38,7 @@ function ProjectsListItem({ item }: { item: Project }) {
   return (
     <CardRoot className="h-240px">
       <CardMain asChild>
-        <Link to={`/items/${id}`} />
+        <Link to={`/projects/${id}`} />
       </CardMain>
       <CardImage asChild>{image.url && <img src={image.url} />}</CardImage>
     </CardRoot>
