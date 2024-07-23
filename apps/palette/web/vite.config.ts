@@ -17,9 +17,10 @@ export default defineConfig(({ command, mode }) => ({
       filename: 'service-worker.ts',
       manifest: {
         id: 'palette-main',
-        name: 'palette',
-        short_name: 'palette',
-        description: '',
+        name: 'Palette: paint what you see',
+        short_name: 'Palette',
+        description:
+          'A simple tool for picking colors out of a reference photo',
         theme_color: '#ffffff',
         background_color: '#ffffff',
         icons: icons(),
