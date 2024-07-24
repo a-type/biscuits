@@ -4,7 +4,7 @@ import { Kysely, sql } from 'kysely';
 
 export async function up(db: Kysely<any>) {
   await db.schema
-    .createTable('PublishedRecipe')
+    .createTable('PublishedWishlist')
     .addColumn('id', 'text', (b) => b.primaryKey())
     .addColumn('createdAt', 'datetime', (col) =>
       col.notNull().defaultTo(sql`CURRENT_TIMESTAMP`),
@@ -14,23 +14,13 @@ export async function up(db: Kysely<any>) {
     )
     .addColumn('publishedAt', 'datetime')
     .addColumn('publishedBy', 'text', (col) =>
-      col.notNull().references('User.id'),
+      col.notNull().references('User.id').onDelete('cascade'),
     )
     .addColumn('planId', 'text', (col) => col.notNull())
-    .addColumn('slug', 'text', (col) => col.notNull())
-    .addUniqueConstraint('PublishedRecipe_planId_slug_unique', [
-      'planId',
-      'slug',
-    ])
-    .execute();
-
-  await db.schema
-    .createIndex('PublishedRecipe_slug')
-    .on('PublishedRecipe')
-    .columns(['planId', 'slug'])
+    .addColumn('slug', 'text', (col) => col.notNull().unique())
     .execute();
 }
 
 export async function down(db: Kysely<any>) {
-  await db.schema.dropTable('PublishedRecipe').execute();
+  await db.schema.dropTable('PublishedWishlist').execute();
 }

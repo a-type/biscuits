@@ -9,6 +9,7 @@ import './types/pushSubscription.js';
 import './types/changelog.js';
 
 import './types/gnocchi/index.js';
+import './types/wishWash/index.js';
 
 import './types/common/index.js';
 

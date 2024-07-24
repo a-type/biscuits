@@ -1,11 +1,11 @@
 import { Router } from 'itty-router';
 import * as path from 'path';
 import * as fsSync from 'fs';
-import * as fs from 'fs/promises';
 import { serverRender, type HubRecipeData } from '@gnocchi.biscuits/hub';
 import { verdantServer } from '../verdant/verdant.js';
 import { getLibraryName } from '@biscuits/libraries';
 import { db } from '@biscuits/db';
+import { renderTemplate, staticFile } from '../common/hubs.js';
 
 export const gnocchiRouter = Router({
   base: '/gnocchi',
@@ -26,41 +26,9 @@ const indexTemplate = fsSync.readFileSync(
   'utf8',
 );
 
-const assetFileTypes: Record<string, string> = {
-  '.css': 'text/css',
-  '.js': 'application/javascript',
-  '.json': 'application/json',
-  '.ico': 'image/x-icon',
-  '.png': 'image/png',
-  '.jpg': 'image/jpeg',
-  '.jpeg': 'image/jpeg',
-  '.svg': 'image/svg+xml',
-  '.gif': 'image/gif',
-  '.webp': 'image/webp',
-  '.woff': 'font/woff',
-  '.woff2': 'font/woff2',
-};
-
-async function staticFile(req: Request) {
-  const url = new URL(req.url);
-  const filePath = path.join(
-    hubClientPath,
-    url.pathname.replace('/gnocchi/hubRecipe/', '/'),
-  );
-
-  if (!fsSync.existsSync(filePath)) {
-    return new Response('Not found', { status: 404 });
-  }
-
-  const file = await fs.readFile(filePath, 'utf-8');
-  return new Response(file, {
-    headers: {
-      'Content-Type': assetFileTypes[path.extname(filePath)] ?? 'text/plain',
-    },
-  });
-}
-
-gnocchiRouter.get('/hubRecipe/assets/*', staticFile);
+gnocchiRouter.get('/hubRecipe/assets/*', (req) =>
+  staticFile(hubClientPath, 'hubRecipe', req),
+);
 
 gnocchiRouter.get('/hubRecipe/:planId/:recipeSlug', async (req) => {
   const { planId, recipeSlug } = req.params;
@@ -68,7 +36,11 @@ gnocchiRouter.get('/hubRecipe/:planId/:recipeSlug', async (req) => {
   const recipe = await db
     .selectFrom('PublishedRecipe')
     .leftJoin('User', 'PublishedRecipe.publishedBy', 'User.id')
-    .select(['PublishedRecipe.id', 'User.fullName as publisherFullName'])
+    .select([
+      'PublishedRecipe.id',
+      'User.fullName as publisherFullName',
+      'PublishedRecipe.publishedBy',
+    ])
     .where('slug', '=', recipeSlug)
     .where('PublishedRecipe.planId', '=', planId)
     .executeTakeFirst();
@@ -78,7 +50,12 @@ gnocchiRouter.get('/hubRecipe/:planId/:recipeSlug', async (req) => {
   }
 
   const snapshot = await verdantServer.getDocumentSnapshot(
-    getLibraryName({ planId, app: 'gnocchi', access: 'members', userId: '' }),
+    getLibraryName({
+      planId,
+      app: 'gnocchi',
+      access: 'members',
+      userId: recipe.publishedBy,
+    }),
     'recipes',
     recipe.id,
   );
@@ -105,14 +82,9 @@ gnocchiRouter.get('/hubRecipe/:planId/:recipeSlug', async (req) => {
   };
 
   const appHtml = serverRender(data, req.url);
-  const html = indexTemplate
-    .replace('<!--app-html-->', appHtml)
-    .replace(`{/*snapshot*/}`, JSON.stringify(data));
-  return new Response(html, {
-    headers: {
-      'Content-Type': 'text/html',
-    },
-  });
+  return renderTemplate(indexTemplate, appHtml, data);
 });
 
-gnocchiRouter.get('/hubRecipe/*', staticFile);
+gnocchiRouter.get('/hubRecipe/*', (req) =>
+  staticFile(hubClientPath, 'hubRecipe', req),
+);

@@ -10,6 +10,7 @@ import {
   Plan,
   PlanInvitation,
   PublishedRecipe,
+  PublishedWishlist,
   User,
 } from '@biscuits/db';
 import { LibraryInfo } from '@verdant-web/server';
@@ -78,6 +79,9 @@ export const builder = new SchemaBuilder<{
     >[number];
     RecipeScanDetailedStep: NonNullable<ExtractorData['detailedSteps']>[number];
     PublishedRecipe: PublishedRecipe & { __typename: 'PublishedRecipe' };
+
+    // WishWash
+    PublishedWishlist: PublishedWishlist & { __typename: 'PublishedWishlist' };
 
     // Common Utils
     WeatherForecast: WeatherForecast;
@@ -155,6 +159,11 @@ export const builder = new SchemaBuilder<{
     PublishRecipeInput: {
       id: string;
       slug: string;
+    };
+
+    // WishWash
+    PublishWishlistInput: {
+      id: string;
     };
 
     // Common Utils

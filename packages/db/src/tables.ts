@@ -20,6 +20,7 @@ export interface Database {
   FoodCategoryAssignment: FoodCategoryAssignmentTable;
   FoodCategory: FoodCategoryTable;
   PublishedRecipe: PublishedRecipeTable;
+  PublishedWishlist: PublishedWishlistTable;
 }
 
 export interface UserTable {
@@ -260,3 +261,19 @@ export interface PublishedRecipeTable {
 export type PublishedRecipe = Selectable<PublishedRecipeTable>;
 export type NewPublishedRecipe = Insertable<PublishedRecipeTable>;
 export type PublishedRecipeUpdate = Updateable<PublishedRecipeTable>;
+
+export interface PublishedWishlistTable {
+  id: string;
+  createdAt: ColumnType<Date, Date | undefined, never>;
+  updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
+
+  publishedAt: Date;
+  publishedBy: string;
+
+  planId: string;
+  slug: string;
+}
+
+export type PublishedWishlist = Selectable<PublishedWishlistTable>;
+export type NewPublishedWishlist = Insertable<PublishedWishlistTable>;
+export type PublishedWishlistUpdate = Updateable<PublishedWishlistTable>;
