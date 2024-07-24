@@ -219,7 +219,7 @@ function Bubble({ color: colorVal }: { color: ProjectColorsItem }) {
     <button
       onClick={() => setSelected(id)}
       className={clsx(
-        'absolute w-24px h-24px rounded-full pointer-events-auto -translate-1/2 border-solid border-0 appearance-none',
+        'absolute w-24px h-24px rounded-full pointer-events-auto -translate-1/2 border-solid border-1 border-black appearance-none',
         selected && 'border-2 border-black w-48px h-48px z-1',
       )}
       style={{
