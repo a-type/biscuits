@@ -1,5 +1,5 @@
 import { PageContent, PageRoot } from '@a-type/ui/components/layouts';
-import { H1 } from '@a-type/ui/components/typography';
+import { H1, P } from '@a-type/ui/components/typography';
 import { useEffect } from 'react';
 import { HubWishlistData } from './types.js';
 
@@ -25,7 +25,10 @@ export function App({ recipe: data }: { recipe: HubWishlistData }) {
 
   return (
     <PageRoot className="theme-leek">
-      <PageContent innerProps={innerProps}></PageContent>
+      <PageContent innerProps={innerProps}>
+        <H1>{data.title}</H1>
+        <P>{data.items.length} items</P>
+      </PageContent>
     </PageRoot>
   );
 }

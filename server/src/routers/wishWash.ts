@@ -6,6 +6,9 @@ import { verdantServer } from '../verdant/verdant.js';
 import { getLibraryName } from '@biscuits/libraries';
 import { db } from '@biscuits/db';
 import { renderTemplate, staticFile } from '../common/hubs.js';
+import { ListSnapshot as WishlistSnapshot } from '@wish-wash.biscuits/verdant';
+import { sessions } from '../auth/session.js';
+import { Session } from '@a-type/auth';
 
 export const wishWashRouter = Router({
   base: '/wishWash',
@@ -27,11 +30,11 @@ const indexTemplate = fsSync.readFileSync(
 );
 
 wishWashRouter.get('/hubList/assets/*', (req) =>
-  staticFile(hubClientPath, 'hubList', req),
+  staticFile(hubClientPath, 'wishWash/hubList', req),
 );
 
 wishWashRouter.get('/hubList/favicon.ico', (req) =>
-  staticFile(hubClientPath, 'hubList', req),
+  staticFile(hubClientPath, 'wishWash/hubList', req),
 );
 
 wishWashRouter.get('/hubList/:listSlug', async (req) => {
@@ -70,20 +73,35 @@ wishWashRouter.get('/hubList/:listSlug', async (req) => {
     return new Response('Wishlist not found', { status: 404 });
   }
 
+  let session: Session | null = null;
+  try {
+    session = await sessions.getSession(req);
+  } catch (err) {
+    // that's fine
+  }
+  // is this the user's list?
+  const isUsersList = session?.userId === wishList.publishedBy;
+
   const data: HubWishlistData = {
     id: wishList.id,
-    title: snapshot.title,
-    // TODO: figure out how to get item data...
-  } as any;
+    title: snapshot.name,
+    hidePurchases: isUsersList,
+    // mapping manually here to avoid leaking unintended data.
+    items: snapshot.items.map((item) => ({
+      description: item.description,
+      count: item.count,
+      link: item.link,
+      prioritized: item.prioritized,
+      imageUrl: item.imageUrl,
+      createdAt: item.createdAt,
+      purchasedAt: item.purchasedAt,
+    })),
+  };
 
   const appHtml = serverRender(data);
   return renderTemplate(indexTemplate, appHtml, data);
 });
 
 wishWashRouter.get('/hubList/*', (req) =>
-  staticFile(hubClientPath, 'hubList', req),
+  staticFile(hubClientPath, 'wishWash/hubList', req),
 );
-
-interface WishlistSnapshot {
-  title: string;
-}

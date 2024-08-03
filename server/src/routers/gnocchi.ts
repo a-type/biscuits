@@ -27,7 +27,7 @@ const indexTemplate = fsSync.readFileSync(
 );
 
 gnocchiRouter.get('/hubRecipe/assets/*', (req) =>
-  staticFile(hubClientPath, 'hubRecipe', req),
+  staticFile(hubClientPath, 'gnocchi/hubRecipe', req),
 );
 
 gnocchiRouter.get('/hubRecipe/:planId/:recipeSlug', async (req) => {
@@ -86,5 +86,5 @@ gnocchiRouter.get('/hubRecipe/:planId/:recipeSlug', async (req) => {
 });
 
 gnocchiRouter.get('/hubRecipe/*', (req) =>
-  staticFile(hubClientPath, 'hubRecipe', req),
+  staticFile(hubClientPath, 'gnocchi/hubRecipe', req),
 );

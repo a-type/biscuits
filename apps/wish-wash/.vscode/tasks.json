@@ -16,6 +16,14 @@
       "problemMatcher": [],
       "label": "Generate",
       "detail": "verdant -s ./src/schema.ts -o ./src/client -r"
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "path": "hub",
+      "problemMatcher": [],
+      "label": "Hub: Dev",
+      "detail": "concurrently npm:dev:client npm:dev:server npm:typings"
     }
   ]
 }

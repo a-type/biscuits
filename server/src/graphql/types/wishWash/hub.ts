@@ -1,5 +1,5 @@
 import { BiscuitsError } from '@biscuits/error';
-import { GNOCCHI_HUB_ORIGIN } from '../../../config/deployedContext.js';
+import { WISH_WASH_HUB_ORIGIN } from '../../../config/deployedContext.js';
 import { builder } from '../../builder.js';
 import { assignTypeName, hasTypeName } from '../../relay.js';
 import cuid from '@paralleldrive/cuid2';
@@ -120,7 +120,7 @@ builder.objectType('PublishedWishlist', {
     }),
     url: t.string({
       resolve: (source, _, ctx) => {
-        return GNOCCHI_HUB_ORIGIN + `/${source.planId}/${source.slug}`;
+        return WISH_WASH_HUB_ORIGIN + `/${source.slug}`;
       },
     }),
   }),
@@ -130,10 +130,6 @@ builder.inputType('PublishWishlistInput', {
   fields: (t) => ({
     id: t.id({
       description: 'The ID of the wishlist to publish',
-      required: true,
-    }),
-    slug: t.string({
-      description: 'The slug for the published wishlist',
       required: true,
     }),
   }),

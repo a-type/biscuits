@@ -16,6 +16,7 @@ import { AuthError } from '@a-type/auth';
 import { killPortProcess } from 'kill-port-process';
 import { gnocchiRouter } from './routers/gnocchi.js';
 import { rateLimit } from './rateLimiter.js';
+import { wishWashRouter } from './routers/wishWash.js';
 
 console.log('Starting server...');
 
@@ -73,7 +74,8 @@ router
   .all('/verdant/*', verdantRouter.fetch)
   .all('/stripe/*', rateLimit, stripeRouter.fetch)
   .all('/graphql/*', rateLimit, graphqlRouter.fetch)
-  .all('/gnocchi/*', rateLimit, gnocchiRouter.fetch);
+  .all('/gnocchi/*', rateLimit, gnocchiRouter.fetch)
+  .all('/wishWash/*', rateLimit, wishWashRouter.fetch);
 
 const ittyServer = createServerAdapter((request) => router.fetch(request));
 

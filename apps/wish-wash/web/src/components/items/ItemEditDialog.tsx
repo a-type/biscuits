@@ -7,7 +7,7 @@ import {
   DialogClose,
 } from '@a-type/ui/components/dialog';
 import { hooks } from '@/hooks.js';
-import { Item } from '@wish-wash.biscuits/verdant';
+import { Item, List } from '@wish-wash.biscuits/verdant';
 import { Input } from '@a-type/ui/components/input/Input';
 import { TextArea } from '@a-type/ui/components/textArea/TextArea';
 import { Button } from '@a-type/ui/components/button';
@@ -15,14 +15,18 @@ import { preventDefault } from '@a-type/utils';
 import { ImageUploader } from '@a-type/ui/components/imageUploader';
 import { ItemExpirationEditor } from './ItemExpirationEditor.jsx';
 
-export interface ItemEditDialogProps {}
+export interface ItemEditDialogProps {
+  list: List;
+}
 
-export function ItemEditDialog({}: ItemEditDialogProps) {
+export function ItemEditDialog({ list }: ItemEditDialogProps) {
   const [search, setSearch] = useSearchParams();
 
   const itemId = search.get('itemId');
+  const { items } = hooks.useWatch(list);
+  hooks.useWatch(items);
 
-  const item = hooks.useItem(itemId || '', { skip: !itemId });
+  const item = items.find((i) => i.get('id') === itemId);
 
   return (
     <Dialog

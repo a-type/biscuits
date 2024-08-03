@@ -1,6 +1,7 @@
 import { Avatar } from '@a-type/ui/components/avatar';
 import {
   CardActions,
+  CardContent,
   CardFooter,
   CardGrid,
   CardMain,
@@ -54,7 +55,7 @@ export function MembersAndInvitations() {
                   {member.name}
                   {isMe && <span className="font-bold"> (you)</span>}
                 </CardTitle>
-                <span>{member.email}</span>
+                <CardContent>{member.email}</CardContent>
               </CardMain>
               {isAdmin && !isMe && (
                 <CardFooter>

@@ -11,7 +11,6 @@ export * from "@verdant-web/store";
 
 export class Client<Presence = any, Profile = any> {
   readonly lists: CollectionQueries<List, ListInit, ListFilter>;
-  readonly items: CollectionQueries<Item, ItemInit, ItemFilter>;
 
   sync: BaseClient<Presence, Profile>["sync"];
   undoHistory: BaseClient<Presence, Profile>["undoHistory"];
@@ -98,11 +97,90 @@ export type List = ObjectEntity<ListInit, ListDestructured, ListSnapshot>;
 export type ListId = string;
 export type ListName = string;
 export type ListCreatedAt = number;
-export type ListInit = { id?: string; name?: string; createdAt?: number };
+export type ListItems = ListEntity<
+  ListItemsInit,
+  ListItemsDestructured,
+  ListItemsSnapshot
+>;
+export type ListItemsItem = ObjectEntity<
+  ListItemsItemInit,
+  ListItemsItemDestructured,
+  ListItemsItemSnapshot
+>;
+export type ListItemsItemId = string;
+export type ListItemsItemDescription = string;
+export type ListItemsItemPurchasedAt = number;
+export type ListItemsItemCreatedAt = number;
+export type ListItemsItemLink = string;
+export type ListItemsItemExpiresAt = number;
+export type ListItemsItemExpirationNotificationSent = boolean;
+export type ListItemsItemImageUrl = string;
+export type ListItemsItemImageFile = string | null;
+export type ListItemsItemCount = number;
+export type ListItemsItemPrioritized = boolean;
+export type ListInit = {
+  id?: string;
+  name?: string;
+  createdAt?: number;
+  items?: ListItemsInit;
+};
 
-export type ListDestructured = { id: string; name: string; createdAt: number };
+export type ListItemsItemInit = {
+  id?: string;
+  description?: string;
+  purchasedAt?: number | null;
+  createdAt?: number;
+  link?: string | null;
+  expiresAt?: number | null;
+  expirationNotificationSent?: boolean;
+  imageUrl?: string | null;
+  imageFile?: File | null;
+  count?: number;
+  prioritized?: boolean;
+};
+export type ListItemsInit = ListItemsItemInit[];
+export type ListDestructured = {
+  id: string;
+  name: string;
+  createdAt: number;
+  items: ListItems;
+};
 
-export type ListSnapshot = { id: string; name: string; createdAt: number };
+export type ListItemsItemDestructured = {
+  id: string;
+  description: string;
+  purchasedAt: number | null;
+  createdAt: number;
+  link: string | null;
+  expiresAt: number | null;
+  expirationNotificationSent: boolean;
+  imageUrl: string | null;
+  imageFile: EntityFile | null;
+  count: number;
+  prioritized: boolean;
+};
+export type ListItemsDestructured = ListItemsItem[];
+export type ListSnapshot = {
+  id: string;
+  name: string;
+  createdAt: number;
+  items: ListItemsSnapshot;
+};
+
+export type ListItemsItemSnapshot = {
+  id: string;
+  description: string;
+  purchasedAt: number | null;
+  createdAt: number;
+  link: string | null;
+  expiresAt: number | null;
+  expirationNotificationSent: boolean;
+  imageUrl: string | null;
+  imageFile: EntityFileSnapshot | null;
+  count: number;
+  prioritized: boolean;
+};
+export type ListItemsSnapshot = ListItemsItemSnapshot[];
 
 /** Index filters for List **/
 
@@ -127,188 +205,3 @@ export type ListFilter =
   | ListCreatedAtSortFilter
   | ListCreatedAtMatchFilter
   | ListCreatedAtRangeFilter;
-
-/** Generated types for Item */
-
-export type Item = ObjectEntity<ItemInit, ItemDestructured, ItemSnapshot>;
-export type ItemId = string;
-export type ItemListId = string;
-export type ItemDescription = string;
-export type ItemPurchasedAt = number;
-export type ItemCreatedAt = number;
-export type ItemLink = string;
-export type ItemExpiresAt = number;
-export type ItemExpirationNotificationSent = boolean;
-export type ItemImageUrl = string;
-export type ItemImageFile = string | null;
-export type ItemCount = number;
-export type ItemPrioritized = boolean;
-export type ItemInit = {
-  id?: string;
-  listId: string;
-  description?: string;
-  purchasedAt?: number | null;
-  createdAt?: number;
-  link?: string | null;
-  expiresAt?: number | null;
-  expirationNotificationSent?: boolean;
-  imageUrl?: string | null;
-  imageFile?: File | null;
-  count?: number;
-  prioritized?: boolean;
-};
-
-export type ItemDestructured = {
-  id: string;
-  listId: string;
-  description: string;
-  purchasedAt: number | null;
-  createdAt: number;
-  link: string | null;
-  expiresAt: number | null;
-  expirationNotificationSent: boolean;
-  imageUrl: string | null;
-  imageFile: EntityFile | null;
-  count: number;
-  prioritized: boolean;
-};
-
-export type ItemSnapshot = {
-  id: string;
-  listId: string;
-  description: string;
-  purchasedAt: number | null;
-  createdAt: number;
-  link: string | null;
-  expiresAt: number | null;
-  expirationNotificationSent: boolean;
-  imageUrl: string | null;
-  imageFile: EntityFileSnapshot | null;
-  count: number;
-  prioritized: boolean;
-};
-
-/** Index filters for Item **/
-
-export interface ItemListIdSortFilter {
-  where: "listId";
-  order: "asc" | "desc";
-}
-export interface ItemListIdMatchFilter {
-  where: "listId";
-  equals: string;
-  order?: "asc" | "desc";
-}
-export interface ItemListIdRangeFilter {
-  where: "listId";
-  gte?: string;
-  gt?: string;
-  lte?: string;
-  lt?: string;
-  order?: "asc" | "desc";
-}
-export interface ItemListIdStartsWithFilter {
-  where: "listId";
-  startsWith: string;
-  order?: "asc" | "desc";
-}
-export interface ItemCreatedAtSortFilter {
-  where: "createdAt";
-  order: "asc" | "desc";
-}
-export interface ItemCreatedAtMatchFilter {
-  where: "createdAt";
-  equals: number;
-  order?: "asc" | "desc";
-}
-export interface ItemCreatedAtRangeFilter {
-  where: "createdAt";
-  gte?: number;
-  gt?: number;
-  lte?: number;
-  lt?: number;
-  order?: "asc" | "desc";
-}
-export interface ItemPurchasedAtSortFilter {
-  where: "purchasedAt";
-  order: "asc" | "desc";
-}
-export interface ItemPurchasedAtMatchFilter {
-  where: "purchasedAt";
-  equals: number;
-  order?: "asc" | "desc";
-}
-export interface ItemPurchasedAtRangeFilter {
-  where: "purchasedAt";
-  gte?: number;
-  gt?: number;
-  lte?: number;
-  lt?: number;
-  order?: "asc" | "desc";
-}
-export interface ItemPrioritizedThenCreatedAtSortFilter {
-  where: "prioritizedThenCreatedAt";
-  order: "asc" | "desc";
-}
-export interface ItemPrioritizedThenCreatedAtMatchFilter {
-  where: "prioritizedThenCreatedAt";
-  equals: string;
-  order?: "asc" | "desc";
-}
-export interface ItemPrioritizedThenCreatedAtRangeFilter {
-  where: "prioritizedThenCreatedAt";
-  gte?: string;
-  gt?: string;
-  lte?: string;
-  lt?: string;
-  order?: "asc" | "desc";
-}
-export interface ItemPrioritizedThenCreatedAtStartsWithFilter {
-  where: "prioritizedThenCreatedAt";
-  startsWith: string;
-  order?: "asc" | "desc";
-}
-export interface ItemExpiresAtSortFilter {
-  where: "expiresAt";
-  order: "asc" | "desc";
-}
-export interface ItemExpiresAtMatchFilter {
-  where: "expiresAt";
-  equals: number;
-  order?: "asc" | "desc";
-}
-export interface ItemExpiresAtRangeFilter {
-  where: "expiresAt";
-  gte?: number;
-  gt?: number;
-  lte?: number;
-  lt?: number;
-  order?: "asc" | "desc";
-}
-export interface ItemListOrderCompoundFilter {
-  where: "listOrder";
-  match: {
-    listId: string;
-    prioritizedThenCreatedAt?: string;
-  };
-  order?: "asc" | "desc";
-}
-export type ItemFilter =
-  | ItemListIdSortFilter
-  | ItemListIdMatchFilter
-  | ItemListIdRangeFilter
-  | ItemListIdStartsWithFilter
-  | ItemCreatedAtSortFilter
-  | ItemCreatedAtMatchFilter
-  | ItemCreatedAtRangeFilter
-  | ItemPurchasedAtSortFilter
-  | ItemPurchasedAtMatchFilter
-  | ItemPurchasedAtRangeFilter
-  | ItemPrioritizedThenCreatedAtSortFilter
-  | ItemPrioritizedThenCreatedAtMatchFilter
-  | ItemPrioritizedThenCreatedAtRangeFilter
-  | ItemPrioritizedThenCreatedAtStartsWithFilter
-  | ItemExpiresAtSortFilter
-  | ItemExpiresAtMatchFilter
-  | ItemExpiresAtRangeFilter
-  | ItemListOrderCompoundFilter;

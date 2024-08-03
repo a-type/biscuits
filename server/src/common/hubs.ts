@@ -25,6 +25,8 @@ export async function staticFile(
   const url = new URL(req.url);
   const filePath = path.join(basePath, url.pathname.replace(`/${prefix}`, ''));
 
+  console.log('static file', filePath);
+
   if (!fsSync.existsSync(filePath)) {
     return new Response('Not found', { status: 404 });
   }

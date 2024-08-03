@@ -2,23 +2,23 @@ import { hooks } from '@/hooks.js';
 import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
 import { useSearchParams } from '@verdant-web/react-router';
-import { useListContext } from './ListContext.jsx';
 import { clsx } from '@a-type/ui';
+import { List } from '@wish-wash.biscuits/verdant';
 
 export interface CreateItemProps {
   className?: string;
+  list: List;
 }
 
-export function CreateItem({ className }: CreateItemProps) {
-  const { listId } = useListContext();
-  const client = hooks.useClient();
+export function CreateItem({ className, list }: CreateItemProps) {
+  const { id: listId, items } = hooks.useWatch(list);
   const [_, setSearch] = useSearchParams();
 
   const createItem = async () => {
-    const item = await client.items.put({
-      listId,
+    items.push({
       description: 'New item',
     });
+    const item = items.get(items.length - 1);
 
     setSearch((s) => {
       s.set('itemId', item.get('id'));

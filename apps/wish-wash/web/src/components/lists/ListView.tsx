@@ -6,23 +6,16 @@ import { clsx } from '@a-type/ui';
 import { ItemEditDialog } from '../items/ItemEditDialog.jsx';
 import { Suspense } from 'react';
 import { CardGrid } from '@a-type/ui/components/card';
+import { List } from '@wish-wash.biscuits/verdant';
+import { useSortedItems } from './hooks.js';
 
 export interface ListViewProps {
-  listId: string;
+  list: List;
   className?: string;
 }
 
-export function ListView({ listId, className }: ListViewProps) {
-  const [items, { hasMore, loadMore }] = hooks.useAllItemsInfinite({
-    index: {
-      where: 'listOrder',
-      match: {
-        listId,
-      },
-      order: 'desc',
-    },
-    key: `items-${listId}`,
-  });
+export function ListView({ list, className }: ListViewProps) {
+  const items = useSortedItems(list);
 
   return (
     <div className={clsx('col items-stretch gap-4', className)}>
@@ -31,10 +24,9 @@ export function ListView({ listId, className }: ListViewProps) {
           <ListItem item={item} key={item.get('id')} />
         ))}
       </CardGrid>
-      {hasMore && <InfiniteLoadTrigger onVisible={loadMore} />}
-      <CreateItem className="sticky bottom-4 z-10" />
+      <CreateItem className="sticky bottom-4 z-10" list={list} />
       <Suspense>
-        <ItemEditDialog />
+        <ItemEditDialog list={list} />
       </Suspense>
     </div>
   );

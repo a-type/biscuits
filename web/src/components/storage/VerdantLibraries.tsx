@@ -7,6 +7,7 @@ import {
 import { ConfirmedButton } from '@a-type/ui/components/button';
 import {
   CardActions,
+  CardContent,
   CardFooter,
   CardGrid,
   CardMain,
@@ -48,7 +49,7 @@ const resetSync = graphql(
       resetSync(app: $appId, access: $access) {
         plan {
           id
-          libraryInfo(app: $appId) {
+          libraryInfo(app: $appId, access: $access) {
             ...LibraryFragment
           }
         }
@@ -62,7 +63,7 @@ export function VerdantLibraries() {
   return (
     <CardGrid>
       {apps
-        .filter((app) => !app.prerelease)
+        .filter((app) => !app.prerelease || import.meta.env.DEV)
         .map((appManifest) => (
           <Fragment key={appManifest.id}>
             <VerdantLibrary app={appManifest} access="members" />
@@ -99,16 +100,18 @@ function VerdantLibrary({
           {app.name}
           {access === 'user' && <span> (private data)</span>}
         </CardTitle>
-        <AvatarList count={info.profiles.length}>
-          {info.profiles.map((profile, index) => (
-            <AvatarListItem
-              index={index}
-              key={profile.id}
-              imageSrc={profile.imageUrl ?? undefined}
-              name={profile.name}
-            />
-          ))}
-        </AvatarList>
+        <CardContent>
+          <AvatarList count={info.profiles.length}>
+            {info.profiles.map((profile, index) => (
+              <AvatarListItem
+                index={index}
+                key={profile.id}
+                imageSrc={profile.imageUrl ?? undefined}
+                name={profile.name}
+              />
+            ))}
+          </AvatarList>
+        </CardContent>
       </CardMain>
       <CardFooter>
         <CardActions>

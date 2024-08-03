@@ -58,6 +58,6 @@
     },
   ],
   "settings": {
-    "typescript.tsdk": "📦 Packages/🌐 Packages\\client\\node_modules\\typescript\\lib",
+    "typescript.tsdk": "🌐 Web\\node_modules\\typescript\\lib",
   },
 }

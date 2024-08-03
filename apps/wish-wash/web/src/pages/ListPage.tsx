@@ -1,5 +1,4 @@
 import { ListActions } from '@/components/lists/ListActions.jsx';
-import { ListProvider } from '@/components/lists/ListContext.jsx';
 import { ListDetailsEditButton } from '@/components/lists/ListDetailsDialog.jsx';
 import { ListHero } from '@/components/lists/ListHero.jsx';
 import { ListView } from '@/components/lists/ListView.jsx';
@@ -52,30 +51,28 @@ function ListPageContent({ list }: { list: List }) {
   const ctx = useMemo(() => ({ listId: list.get('id'), list }), [list]);
 
   return (
-    <ListProvider value={ctx}>
-      <PageContent>
-        <div className="row -ml-3">
-          <Button asChild size="small" color="ghost">
-            <Link to="/">
-              <Icon name="arrowLeft" />
-              Home
-            </Link>
-          </Button>
-          <UserMenu
-            className="ml-auto my-auto"
-            extraItems={
-              <ListDetailsEditButton
-                listId={list.get('id')}
-                key="list-details-edit"
-              />
-            }
-          />
-        </div>
-        <ListHero list={list} />
-        <ListActions className="sticky top-0 z-10" />
-        <ListView listId={list.get('id')} />
-      </PageContent>
-    </ListProvider>
+    <PageContent>
+      <div className="row -ml-3">
+        <Button asChild size="small" color="ghost">
+          <Link to="/">
+            <Icon name="arrowLeft" />
+            Home
+          </Link>
+        </Button>
+        <UserMenu
+          className="ml-auto my-auto"
+          extraItems={
+            <ListDetailsEditButton
+              listId={list.get('id')}
+              key="list-details-edit"
+            />
+          }
+        />
+      </div>
+      <ListHero list={list} />
+      <ListActions className="sticky top-0 z-10" />
+      <ListView list={list} />
+    </PageContent>
   );
 }
 

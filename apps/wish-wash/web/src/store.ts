@@ -24,6 +24,7 @@ export const clientDescriptor = new ClientDescriptor({
     access: 'members',
     initialPresence: {} satisfies Presence,
   }),
+  log: console.debug,
 });
 
 // these are some helpers I like to use. You can delete them if you want.

@@ -27,11 +27,11 @@ export interface ListDetailsDialogProps {}
 export function ListDetailsDialog({}: ListDetailsDialogProps) {
   const [params, setParams] = useSearchParams();
   const listId = params.get('listId');
+
   const list = hooks.useList(listId || '', { skip: !listId });
   hooks.useWatch(list);
 
   const onClose = () => {
-    console.log('close');
     setParams((p) => {
       p.delete('listId');
       return p;

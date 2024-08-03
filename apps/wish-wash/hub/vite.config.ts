@@ -9,8 +9,8 @@ export default defineConfig(({ command, mode }) => ({
   plugins: [UnoCSS(), react(), viteCommonjs()],
   base:
     mode === 'production'
-      ? 'https://recipes.gnocchi.biscuits.club/'
-      : 'http://localhost:6124/gnocchi/hubRecipe/',
+      ? 'https://lists.wish-wash.biscuits.club/'
+      : 'http://localhost:6124/wishWash/hubList/',
   optimizeDeps: {
     exclude: ['@a-type/ui'],
     include: [

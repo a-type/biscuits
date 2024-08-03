@@ -6,3 +6,5 @@ export const ENVIRONMENT = process.env.NODE_ENV || 'development';
 
 export const GNOCCHI_HUB_ORIGIN =
   process.env.GNOCCHI_HUB_ORIGIN || 'http://localhost:6124/gnocchi/hubRecipe';
+export const WISH_WASH_HUB_ORIGIN =
+  process.env.WISH_WASH_HUB_ORIGIN || 'http://localhost:6124/wishWash/hubList';

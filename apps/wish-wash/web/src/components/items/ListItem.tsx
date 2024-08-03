@@ -12,10 +12,11 @@ import {
   CardTitle,
 } from '@a-type/ui/components/card';
 import { Icon } from '@a-type/ui/components/icon';
-import { Link, useSearchParams } from '@verdant-web/react-router';
+import { Link } from '@verdant-web/react-router';
 import { Item } from '@wish-wash.biscuits/verdant';
 import { ItemStar } from './ItemStar.jsx';
 import { SearchButton } from './SearchButton.jsx';
+import { useEditItem } from './hooks.js';
 
 export interface ListItemProps {
   item: Item;
@@ -24,14 +25,10 @@ export interface ListItemProps {
 export function ListItem({ item }: ListItemProps) {
   const { purchasedAt, description, link, id, imageFile, imageUrl } =
     hooks.useWatch(item);
+
   hooks.useWatch(imageFile);
 
-  const [_, setSearch] = useSearchParams();
-  const openEdit = () =>
-    setSearch((s) => {
-      s.set('itemId', id);
-      return s;
-    });
+  const editItem = useEditItem();
 
   const imageSrc = imageFile?.url || imageUrl;
 
@@ -56,7 +53,7 @@ export function ListItem({ item }: ListItemProps) {
           <Button
             color="ghost"
             size="icon"
-            onClick={openEdit}
+            onClick={() => editItem(id)}
             className="mr-auto"
           >
             <Icon name="pencil" />

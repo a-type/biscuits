@@ -22,103 +22,61 @@ const lists = schema.collection({
   name: 'list',
   primaryKey: 'id',
   fields: {
-    id: schema.fields.string({
-      default: schema.generated.id,
-    }),
+    id: schema.fields.id(),
     name: schema.fields.string({
       default: 'New list',
     }),
     createdAt: schema.fields.number({
       default: Date.now,
     }),
+    items: schema.fields.array({
+      items: schema.fields.object({
+        properties: {
+          id: schema.fields.id(),
+          description: schema.fields.string({
+            default: '',
+          }),
+          purchasedAt: schema.fields.number({
+            nullable: true,
+          }),
+          createdAt: schema.fields.number({
+            default: Date.now,
+          }),
+          link: schema.fields.string({
+            nullable: true,
+          }),
+          expiresAt: schema.fields.number({
+            nullable: true,
+          }),
+          expirationNotificationSent: schema.fields.boolean({
+            default: false,
+          }),
+          imageUrl: schema.fields.string({
+            nullable: true,
+          }),
+          imageFile: schema.fields.file({
+            nullable: true,
+          }),
+          count: schema.fields.number({
+            default: 1,
+          }),
+          prioritized: schema.fields.boolean({
+            default: false,
+          }),
+        },
+      }),
+    }),
   },
   indexes: {
     createdAt: {
       field: 'createdAt',
-    },
-  },
-});
-
-const items = schema.collection({
-  name: 'item',
-  primaryKey: 'id',
-  fields: {
-    id: schema.fields.string({
-      default: schema.generated.id,
-    }),
-    listId: schema.fields.string(),
-    description: schema.fields.string({
-      default: '',
-    }),
-    purchasedAt: schema.fields.number({
-      nullable: true,
-    }),
-    createdAt: schema.fields.number({
-      default: Date.now,
-    }),
-    link: schema.fields.string({
-      nullable: true,
-    }),
-    expiresAt: schema.fields.number({
-      nullable: true,
-    }),
-    expirationNotificationSent: schema.fields.boolean({
-      default: false,
-    }),
-    imageUrl: schema.fields.string({
-      nullable: true,
-    }),
-    imageFile: schema.fields.file({
-      nullable: true,
-    }),
-    count: schema.fields.number({
-      default: 1,
-    }),
-    prioritized: schema.fields.boolean({
-      default: false,
-    }),
-  },
-  indexes: {
-    listId: {
-      field: 'listId',
-    },
-    createdAt: {
-      field: 'createdAt',
-    },
-    purchasedAt: {
-      field: 'purchasedAt',
-    },
-    /**
-     * Sorts items by recently created, with prioritized at the top
-     * Since all compound index parts are lexographically sorted this
-     * exploits that to get prioritized items at the top by prepending
-     * a 'z' to the createdAt timestamp
-     */
-    prioritizedThenCreatedAt: {
-      type: 'string',
-      compute: (item) => {
-        if (item.prioritized) {
-          // kind of an arbitrary way to get it after everything else
-          return 'z' + item.createdAt;
-        }
-        return item.createdAt.toString();
-      },
-    },
-    expiresAt: {
-      field: 'expiresAt',
-    },
-  },
-  compounds: {
-    listOrder: {
-      of: ['listId', 'prioritizedThenCreatedAt'],
     },
   },
 });
 
 export default schema({
-  version: 4,
+  version: 5,
   collections: {
     lists,
-    items,
   },
 });
