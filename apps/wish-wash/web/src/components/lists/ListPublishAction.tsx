@@ -1,5 +1,6 @@
 import { clsx } from '@a-type/ui';
-import { Button, ButtonProps } from '@a-type/ui/components/button';
+import { ActionButton, ActionButtonProps } from '@a-type/ui/components/actions';
+import { Button } from '@a-type/ui/components/button';
 import {
   Dialog,
   DialogTrigger,
@@ -13,7 +14,7 @@ import { P } from '@a-type/ui/components/typography';
 import { graphql, useCanSync, useMutation, useQuery } from '@biscuits/client';
 import { Link } from '@verdant-web/react-router';
 
-export interface ListPublishButtonProps extends ButtonProps {
+export interface ListPublishActionProps extends ActionButtonProps {
   listId: string;
 }
 
@@ -26,11 +27,11 @@ const publishedListQuery = graphql(`
   }
 `);
 
-export function ListPublishButton({
+export function ListPublishAction({
   listId,
   className,
   ...rest
-}: ListPublishButtonProps) {
+}: ListPublishActionProps) {
   const canPublish = useCanSync();
 
   const { data } = useQuery(publishedListQuery, { variables: { listId } });
@@ -43,14 +44,14 @@ export function ListPublishButton({
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button
+        <ActionButton
           color={isPublished ? 'default' : 'accent'}
           {...rest}
           className={clsx('self-start', className)}
         >
           <Icon name="send" />
           {isPublished ? 'Edit sharing' : 'Share list'}
-        </Button>
+        </ActionButton>
       </DialogTrigger>
       <DialogContent>
         {isPublished ? (
@@ -98,7 +99,12 @@ function PublishList({ listId }: { listId: string }) {
         as purchased if they buy them for you!
       </P>
       <DialogActions>
-        <Button onClick={publish}>Publish</Button>
+        <DialogClose asChild>
+          <Button>Cancel</Button>
+        </DialogClose>
+        <Button color="primary" onClick={publish}>
+          Publish
+        </Button>
       </DialogActions>
     </>
   );
@@ -117,15 +123,22 @@ function ManagePublishedList({ listId, url }: { listId: string; url: string }) {
   return (
     <>
       <DialogTitle>Manage sharing</DialogTitle>
-      <P>
+      <P className="mb-2">
         Your list is currently public on the internet. You can unpublish it at
         any time.
       </P>
-      <Link to={url} newTab>
-        View your list <Icon name="new_window" />
-      </Link>
+      <Button asChild color="accent" className="self-start">
+        <Link to={url} newTab>
+          View your list <Icon name="new_window" />
+        </Link>
+      </Button>
       <DialogActions>
-        <Button onClick={unpublish}>Unpublish</Button>
+        <Button color="ghostDestructive" onClick={unpublish}>
+          Unpublish
+        </Button>
+        <DialogClose asChild>
+          <Button>Done</Button>
+        </DialogClose>
       </DialogActions>
     </>
   );

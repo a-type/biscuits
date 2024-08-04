@@ -48,8 +48,6 @@ export function ListPage({}: ListPageProps) {
 }
 
 function ListPageContent({ list }: { list: List }) {
-  const ctx = useMemo(() => ({ listId: list.get('id'), list }), [list]);
-
   return (
     <PageContent>
       <div className="row -ml-3">
@@ -70,7 +68,7 @@ function ListPageContent({ list }: { list: List }) {
         />
       </div>
       <ListHero list={list} />
-      <ListActions className="sticky top-0 z-10" />
+      <ListActions className="sticky top-0 z-10" listId={list.get('id')} />
       <ListView list={list} />
     </PageContent>
   );
