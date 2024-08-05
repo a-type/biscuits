@@ -18,7 +18,9 @@ export class Logger {
   }
 
   debug(...args: any[]) {
-    console.debug(`[${this.tag}]`, ...args);
+    if (process.env.DEBUG === 'true') {
+      console.debug(`[${this.tag}]`, ...args);
+    }
   }
 }
 
