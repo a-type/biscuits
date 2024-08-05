@@ -17,7 +17,7 @@ import {
 import { NavigationRoute, registerRoute } from 'workbox-routing';
 import { StaleWhileRevalidate } from 'workbox-strategies';
 import { listenForShare } from '@biscuits/client/serviceWorkers';
-import { clientDescriptor } from './store.js';
+import { ClientDescriptor } from '@wish-wash.biscuits/verdant';
 
 declare const self: ServiceWorkerGlobalScope;
 
@@ -71,19 +71,28 @@ self.addEventListener('periodicsync', (event: any) => {
 });
 
 async function checkExpirations() {
+  const clientDescriptor = new ClientDescriptor({
+    namespace: 'wish-wash',
+    log: console.debug,
+  });
   const client = await clientDescriptor.open();
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
 
-  const expiredItems = await client.items.findAll({
-    index: {
-      where: 'expiresAt',
-      gte: today.getTime(),
-      lt: tomorrow.getTime(),
-    },
-  }).resolved;
+  const lists = await client.lists.findAll().resolved;
+
+  const expiredItems = lists.flatMap((list) =>
+    list.get('items').filter((item) => {
+      const expiration = item.get('expiresAt');
+      if (!expiration) {
+        return false;
+      }
+      const expirationDate = new Date(expiration);
+      return expirationDate < today;
+    }),
+  );
   const filteredItems = expiredItems.filter(
     (item) => !item.get('expirationNotificationSent'),
   );

@@ -1,8 +1,4 @@
-import {
-  ClientDescriptor,
-  migrations,
-  UserInfo,
-} from '@wish-wash.biscuits/verdant';
+import { ClientDescriptor, UserInfo } from '@wish-wash.biscuits/verdant';
 import { getVerdantSync, VerdantProfile } from '@biscuits/client';
 import { undoHistory } from './undo.js';
 
@@ -17,7 +13,6 @@ export type Participant = UserInfo<VerdantProfile, Presence>;
 
 export const clientDescriptor = new ClientDescriptor({
   namespace: 'wish-wash',
-  migrations,
   undoHistory,
   sync: getVerdantSync({
     appId: 'wish-wash',
