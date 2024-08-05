@@ -159,11 +159,11 @@ importers:
         specifier: 2.5.2
         version: 2.5.2
       '@verdant-web/react':
-        specifier: 37.0.1
-        version: 37.0.1(@verdant-web/store@3.11.1)(react@18.3.1)
+        specifier: 38.0.0
+        version: 38.0.0(@verdant-web/store@3.12.0)(react@18.3.1)
       '@verdant-web/store':
-        specifier: 3.11.1
-        version: 3.11.1
+        specifier: 3.12.0
+        version: 3.12.0
       cuid:
         specifier: ^2.1.8
         version: 2.1.8
@@ -259,8 +259,8 @@ importers:
         specifier: ^0.6.4
         version: 0.6.4(react@18.3.1)
       '@verdant-web/store':
-        specifier: ^3.11.1
-        version: 3.11.1
+        specifier: ^3.12.0
+        version: 3.12.0
       '@zip.js/zip.js':
         specifier: ^2.7.6
         version: 2.7.37
@@ -443,11 +443,11 @@ importers:
         specifier: 2.5.2
         version: 2.5.2
       '@verdant-web/react':
-        specifier: 37.0.1
-        version: 37.0.1(@verdant-web/store@3.11.1)(react@18.3.1)
+        specifier: 38.0.0
+        version: 38.0.0(@verdant-web/store@3.12.0)(react@18.3.1)
       '@verdant-web/store':
-        specifier: ^3.11.1
-        version: 3.11.1
+        specifier: ^3.12.0
+        version: 3.12.0
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -543,11 +543,11 @@ importers:
         specifier: ^2.5.2
         version: 2.5.2
       '@verdant-web/react':
-        specifier: ^37.0.1
-        version: 37.0.1(@verdant-web/store@3.11.1)(react@18.3.1)
+        specifier: ^38.0.0
+        version: 38.0.0(@verdant-web/store@3.12.0)(react@18.3.1)
       '@verdant-web/store':
-        specifier: ^3.11.1
-        version: 3.11.1
+        specifier: ^3.12.0
+        version: 3.12.0
       cuid:
         specifier: ^2.1.8
         version: 2.1.8
@@ -649,11 +649,11 @@ importers:
         specifier: 2.5.2
         version: 2.5.2
       '@verdant-web/react':
-        specifier: 37.0.1
-        version: 37.0.1(@verdant-web/store@3.11.1)(react@18.3.1)
+        specifier: 38.0.0
+        version: 38.0.0(@verdant-web/store@3.12.0)(react@18.3.1)
       '@verdant-web/store':
-        specifier: ^3.11.1
-        version: 3.11.1
+        specifier: ^3.12.0
+        version: 3.12.0
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -749,11 +749,11 @@ importers:
         specifier: 2.5.2
         version: 2.5.2
       '@verdant-web/react':
-        specifier: 37.0.1
-        version: 37.0.1(@verdant-web/store@3.11.1)(react@18.3.1)
+        specifier: 38.0.0
+        version: 38.0.0(@verdant-web/store@3.12.0)(react@18.3.1)
       '@verdant-web/store':
-        specifier: 3.11.1
-        version: 3.11.1
+        specifier: 3.12.0
+        version: 3.12.0
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -876,11 +876,11 @@ importers:
         specifier: 2.5.2
         version: 2.5.2
       '@verdant-web/react':
-        specifier: 37.0.1
-        version: 37.0.1(@verdant-web/store@3.11.1)(react@18.3.1)
+        specifier: 38.0.0
+        version: 38.0.0(@verdant-web/store@3.12.0)(react@18.3.1)
       '@verdant-web/store':
-        specifier: 3.11.1
-        version: 3.11.1
+        specifier: 3.12.0
+        version: 3.12.0
       cuid:
         specifier: ^2.1.8
         version: 2.1.8
@@ -918,14 +918,14 @@ importers:
         specifier: ^0.54.1
         version: 0.54.3
       '@verdant-web/react':
-        specifier: ^37.0.1
-        version: 37.0.1(@verdant-web/store@3.11.1)(react@18.3.1)
+        specifier: ^38.0.0
+        version: 38.0.0(@verdant-web/store@3.12.0)(react@18.3.1)
       '@verdant-web/react-router':
         specifier: ^0.6.4
         version: 0.6.4(react@18.3.1)
       '@verdant-web/store':
-        specifier: ^3.11.1
-        version: 3.11.1
+        specifier: ^3.12.0
+        version: 3.12.0
       classnames:
         specifier: ^2.3.2
         version: 2.3.2
@@ -1085,11 +1085,11 @@ importers:
         specifier: 2.5.2
         version: 2.5.2
       '@verdant-web/react':
-        specifier: 37.0.1
-        version: 37.0.1(@verdant-web/store@3.11.1)(react@18.3.1)
+        specifier: 38.0.0
+        version: 38.0.0(@verdant-web/store@3.12.0)(react@18.3.1)
       '@verdant-web/store':
-        specifier: 3.11.1
-        version: 3.11.1
+        specifier: 3.12.0
+        version: 3.12.0
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -1306,8 +1306,8 @@ importers:
         specifier: 0.6.4
         version: 0.6.4(react@18.3.1)
       '@verdant-web/store':
-        specifier: ^3.11.1
-        version: 3.11.1
+        specifier: ^3.12.0
+        version: 3.12.0
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -15517,14 +15517,14 @@ packages:
       path-to-regexp: 6.2.2
       react: 18.3.1
 
-  /@verdant-web/react@37.0.1(@verdant-web/store@3.11.1)(react@18.3.1):
-    resolution: {integrity: sha512-cs2BgzMdlDLVrnapXcWzMozjyJEipPClM3jthqCtYyNpKf9ZANF089dfDOwcNOjRzm+NVCeBGiJNfDfrdg+lPw==}
+  /@verdant-web/react@38.0.0(@verdant-web/store@3.12.0)(react@18.3.1):
+    resolution: {integrity: sha512-v2sXxBP5/qGU3HUhGteKywrAcoccMVOssoPOHj+kbSabD+BEk2QKoyvzjbOrMhrQgYx99Nhr+j6qKiU1gZYUtw==}
     peerDependencies:
-      '@verdant-web/store': ^3.11.1
+      '@verdant-web/store': ^3.12.0
       react: ^18.2.0
     dependencies:
       '@verdant-web/common': 2.5.2
-      '@verdant-web/store': 3.11.1
+      '@verdant-web/store': 3.12.0
       react: 18.3.1
       suspend-react: 0.0.8(react@18.3.1)
       use-sync-external-store: 1.2.2(react@18.3.1)
@@ -15565,8 +15565,8 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@verdant-web/store@3.11.1:
-    resolution: {integrity: sha512-X1ToMj/ffXQGQvUzqaz2cv+7XwkZNFblw8LEMq35kfFb+82hC1ULxFg2U44XgzAtWX54HVGEhmskjO+pS8ag5Q==}
+  /@verdant-web/store@3.12.0:
+    resolution: {integrity: sha512-zaYwTOEukm+gKQ9lu2PETEYRmns4jcXPYcoY/+kmQYd5ljHX7/8Vzlm1OAX9jv9bX261H4UYIc5dOAw+kyThng==}
     dependencies:
       '@a-type/kysely': 1.0.1(kysely@0.27.4)
       '@verdant-web/common': 2.5.2
