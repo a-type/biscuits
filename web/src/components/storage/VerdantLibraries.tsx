@@ -62,14 +62,12 @@ const resetSync = graphql(
 export function VerdantLibraries() {
   return (
     <CardGrid>
-      {apps
-        .filter((app) => !app.prerelease || import.meta.env.DEV)
-        .map((appManifest) => (
-          <Fragment key={appManifest.id}>
-            <VerdantLibrary app={appManifest} access="members" />
-            <VerdantLibrary app={appManifest} access="user" />
-          </Fragment>
-        ))}
+      {apps.map((appManifest) => (
+        <Fragment key={appManifest.id}>
+          <VerdantLibrary app={appManifest} access="members" />
+          <VerdantLibrary app={appManifest} access="user" />
+        </Fragment>
+      ))}
     </CardGrid>
   );
 }
