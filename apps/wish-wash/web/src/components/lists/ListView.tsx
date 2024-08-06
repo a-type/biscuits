@@ -5,7 +5,7 @@ import { ListItem } from '../items/ListItem.jsx';
 import { clsx } from '@a-type/ui';
 import { ItemEditDialog } from '../items/ItemEditDialog.jsx';
 import { Suspense } from 'react';
-import { CardGrid } from '@a-type/ui/components/card';
+import { CardGrid, cardGridColumns } from '@a-type/ui/components/card';
 import { List } from '@wish-wash.biscuits/verdant';
 import { useSortedItems } from './hooks.js';
 
@@ -19,7 +19,7 @@ export function ListView({ list, className }: ListViewProps) {
 
   return (
     <div className={clsx('col items-stretch gap-4', className)}>
-      <CardGrid>
+      <CardGrid columns={cardGridColumns.default}>
         {items.map((item) => (
           <ListItem item={item} key={item.get('id')} />
         ))}

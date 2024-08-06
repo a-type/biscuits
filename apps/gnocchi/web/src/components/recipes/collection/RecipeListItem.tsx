@@ -21,7 +21,7 @@ import {
   DropdownMenuItemRightSlot,
   DropdownMenuTrigger,
 } from '@a-type/ui/components/dropdownMenu';
-import { Suspense, useCallback, useState } from 'react';
+import { Suspense, useCallback, useState, memo } from 'react';
 import { RecipeMainImageViewer } from '../viewer/RecipeMainImageViewer.jsx';
 import { RecipeTagsViewer } from '../viewer/RecipeTagsViewer.jsx';
 import { Icon } from '@a-type/ui/components/icon';
@@ -35,7 +35,7 @@ import cuid from 'cuid';
 
 const THREE_WEEKS_AGO = addWeeks(Date.now(), -3).getTime();
 
-export function RecipeListItem({
+export const RecipeListItem = memo(function RecipeListItem({
   recipe,
   className,
 }: {
@@ -111,7 +111,7 @@ export function RecipeListItem({
       </CardFooter>
     </CardRoot>
   );
-}
+});
 
 export function RecipePlaceholderItem({ className }: { className?: string }) {
   return <CardRoot className={className}>&nbsp;</CardRoot>;

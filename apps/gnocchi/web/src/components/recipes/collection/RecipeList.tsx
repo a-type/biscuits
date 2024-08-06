@@ -10,7 +10,7 @@ import {
 import { RecipeSearchBar } from '@/components/recipes/collection/RecipeSearchBar.jsx';
 import { useFeatureFlag } from '@biscuits/client';
 import { Button } from '@a-type/ui/components/button';
-import { CardGrid } from '@a-type/ui/components/card';
+import { CardGrid, cardGridColumns } from '@a-type/ui/components/card';
 import { InfiniteLoadTrigger } from '@a-type/ui/components/infiniteLoadTrigger';
 import { PageFixedArea } from '@a-type/ui/components/layouts';
 import { Spinner } from '@a-type/ui/components/spinner';
@@ -81,6 +81,11 @@ function RecipeListContent() {
           'grid-cols-1 sm:grid-cols-2': gridStyle === 'card-big',
           'grid-cols-2 sm:grid-cols-3': gridStyle === 'card-small',
         })}
+        columns={
+          gridStyle === 'card-big'
+            ? cardGridColumns.default
+            : cardGridColumns.small
+        }
       >
         {recipes.map((recipe) => (
           <RecipeListItem key={recipe.get('id')} recipe={recipe} />
