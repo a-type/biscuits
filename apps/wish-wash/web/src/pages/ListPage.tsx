@@ -5,7 +5,7 @@ import { ListView } from '@/components/lists/ListView.jsx';
 import { hooks } from '@/hooks.js';
 import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
-import { PageContent } from '@a-type/ui/components/layouts';
+import { PageContent, PageRoot } from '@a-type/ui/components/layouts';
 import { H1 } from '@a-type/ui/components/typography';
 import { useLocalStorage, UserMenu } from '@biscuits/client';
 import { Link, useNavigate, useParams } from '@verdant-web/react-router';
@@ -49,7 +49,7 @@ export function ListPage({}: ListPageProps) {
 
 function ListPageContent({ list }: { list: List }) {
   return (
-    <PageContent>
+    <div className="w-full h-full p-4">
       <div className="row -ml-3">
         <Button asChild size="small" color="ghost">
           <Link to="/">
@@ -70,8 +70,12 @@ function ListPageContent({ list }: { list: List }) {
       <ListHero list={list} />
       <ListActions className="sticky top-0 z-10" listId={list.get('id')} />
       <ListView list={list} />
-    </PageContent>
+    </div>
   );
 }
 
 export default ListPage;
+
+const innerContentProps = {
+  className: 'max-w-1200px',
+};

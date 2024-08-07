@@ -17,35 +17,64 @@ import { Item } from '@wish-wash.biscuits/verdant';
 import { ItemStar } from './ItemStar.jsx';
 import { SearchButton } from './SearchButton.jsx';
 import { useEditItem } from './hooks.js';
+import { ItemTypeChip } from './ItemTypeChip.jsx';
+import { Chip } from '@a-type/ui/components/chip';
+import { ImageMarquee } from './ImageMarquee.jsx';
 
 export interface ListItemProps {
   item: Item;
 }
 
 export function ListItem({ item }: ListItemProps) {
-  const { purchasedAt, description, link, id, imageFile, imageUrl } =
-    hooks.useWatch(item);
-
-  hooks.useWatch(imageFile);
+  const {
+    purchasedCount,
+    count,
+    description,
+    links,
+    id,
+    imageFiles,
+    type,
+    lastPurchasedAt,
+    prioritized,
+  } = hooks.useWatch(item);
+  hooks.useWatch(links);
+  hooks.useWatch(imageFiles);
+  const link = links.get(0);
 
   const editItem = useEditItem();
 
-  const imageSrc = imageFile?.url || imageUrl;
+  const purchased = purchasedCount > count;
 
   return (
-    <CardRoot className={clsx(imageSrc && 'min-h-200px')}>
-      {imageSrc && (
-        <CardImage asChild>
-          <img src={imageSrc} />
+    <CardRoot
+      className={clsx(
+        prioritized
+          ? 'min-h-300px sm:min-h-40vw'
+          : imageFiles.length
+            ? 'min-h-300px'
+            : '',
+      )}
+      data-span={prioritized ? 2 : 1}
+    >
+      {imageFiles.length > 0 && (
+        <CardImage>
+          <ImageMarquee images={imageFiles.getAll()} />
         </CardImage>
       )}
       <CardMain className="col items-start">
-        <CardTitle>{description}</CardTitle>
-        {purchasedAt && (
-          <CardContent className="text-xxs italic text-gray-5 px-2 bg-gray-1 rounded">
-            Purchased at {new Date(purchasedAt).toLocaleDateString()}
-          </CardContent>
-        )}
+        <CardTitle className="block">
+          <ItemTypeChip className="mr-2" item={item} />
+          {description}
+        </CardTitle>
+        <div className="p-2">
+          {lastPurchasedAt && (
+            <Chip className="text-xxs">
+              Bought: {new Date(lastPurchasedAt).toLocaleDateString()}
+            </Chip>
+          )}
+          {type === 'idea' ||
+            (type === 'product' && !link && <SearchButton item={item} />)}
+        </div>
         <ItemStar item={item} className="absolute right-1 top-1" />
       </CardMain>
       <CardFooter className="items-center justify-between">
@@ -60,31 +89,23 @@ export function ListItem({ item }: ListItemProps) {
           </Button>
         </CardMenu>
         <CardActions className="ml-auto mr-0">
-          {link ? (
+          {link && (
             <Button asChild color="accent" size="small">
               <Link to={link} newTab>
-                <Icon name="link" /> Visit
+                <Icon name="link" /> View
               </Link>
             </Button>
-          ) : (
-            <>
-              <SearchButton item={item} />
-            </>
           )}
           <Button
-            toggled={!!purchasedAt}
-            color={purchasedAt ? 'default' : 'primary'}
+            toggled={!!purchased}
+            color={purchased ? 'default' : 'primary'}
             toggleMode="indicator"
             onClick={() => {
-              if (purchasedAt) {
-                item.set('purchasedAt', null);
-              } else {
-                item.set('purchasedAt', Date.now());
-              }
+              // TODO: Implement
             }}
             size="small"
           >
-            {purchasedAt ? 'Bought' : 'Buy'}
+            {purchased ? 'Bought' : 'Buy'}
           </Button>
         </CardActions>
       </CardFooter>

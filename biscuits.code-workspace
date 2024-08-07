@@ -59,5 +59,15 @@
   ],
   "settings": {
     "typescript.tsdk": "🌐 Web\\node_modules\\typescript\\lib",
+    "unocss.root": [
+      "🌐 Web",
+      "🍝 Gnocchi\\web",
+      "🏖️ Trip Tick\\web",
+      "🛒 Wish Wash\\web",
+      "📚 Marginalia\\web",
+      "🌟 Star Chart\\web",
+      "🎸 Humding\\web",
+      "🎨 Palette\\web",
+    ],
   },
 }

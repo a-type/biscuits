@@ -30,7 +30,7 @@ export function ItemExpirationEditor({ item }: ItemExpirationEditorProps) {
         <Popover open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
             <Button color="ghost" className="flex-1">
-              <Icon name="placeholder" />
+              <Icon name="bell" />
               <span>{dateValue?.toDateString() ?? 'Add reminder'}</span>
             </Button>
           </PopoverTrigger>

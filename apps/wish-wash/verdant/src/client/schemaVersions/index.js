@@ -2,7 +2,7 @@
 /**
  * @generated - do not modify this file.
  */
-import v5 from './v5.js';
+import v6 from './v6.js';
 
-export default [v5]
+export default [v6]
 	

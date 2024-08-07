@@ -36,14 +36,14 @@ const lists = schema.collection({
           description: schema.fields.string({
             default: '',
           }),
-          purchasedAt: schema.fields.number({
+          lastPurchasedAt: schema.fields.number({
             nullable: true,
           }),
           createdAt: schema.fields.number({
             default: Date.now,
           }),
-          link: schema.fields.string({
-            nullable: true,
+          links: schema.fields.array({
+            items: schema.fields.string(),
           }),
           expiresAt: schema.fields.number({
             nullable: true,
@@ -51,17 +51,24 @@ const lists = schema.collection({
           expirationNotificationSent: schema.fields.boolean({
             default: false,
           }),
-          imageUrl: schema.fields.string({
-            nullable: true,
-          }),
-          imageFile: schema.fields.file({
-            nullable: true,
+          imageFiles: schema.fields.array({
+            items: schema.fields.file(),
           }),
           count: schema.fields.number({
             default: 1,
           }),
+          purchasedCount: schema.fields.number({
+            default: 0,
+          }),
           prioritized: schema.fields.boolean({
             default: false,
+          }),
+          type: schema.fields.string({
+            options: ['idea', 'product', 'vibe'],
+            default: 'idea',
+          }),
+          sortKey: schema.fields.string({
+            default: 'a0',
           }),
         },
       }),
@@ -75,7 +82,7 @@ const lists = schema.collection({
 });
 
 export default schema({
-  version: 5,
+  version: 6,
   collections: {
     lists,
   },

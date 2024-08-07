@@ -3,6 +3,7 @@ import { UndoAction } from '@/components/actions/UndoAction.js';
 import { RedoAction } from '@/components/actions/RedoAction.js';
 import { clsx } from '@a-type/ui';
 import { ListPublishAction } from './ListPublishAction.jsx';
+import { ItemSizeAction } from './ItemSizeAction.jsx';
 
 export interface ListActionsProps {
   className?: string;
@@ -15,6 +16,7 @@ export function ListActions({ className, listId }: ListActionsProps) {
       <UndoAction />
       <RedoAction />
       <ListPublishAction listId={listId} />
+      <ItemSizeAction />
     </ActionBar>
   );
 }

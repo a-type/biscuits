@@ -2,7 +2,11 @@ import { ListsList } from '@/components/lists/ListsList.jsx';
 import { hooks } from '@/hooks.js';
 import { DropdownMenuItemRightSlot } from '@a-type/ui/components/dropdownMenu';
 import { Icon } from '@a-type/ui/components/icon';
-import { PageContent, PageFixedArea } from '@a-type/ui/components/layouts';
+import {
+  PageContent,
+  PageFixedArea,
+  PageRoot,
+} from '@a-type/ui/components/layouts';
 import { H1 } from '@a-type/ui/components/typography';
 import { useCanSync, UserMenu, UserMenuItem } from '@biscuits/client';
 import { useNavigate } from '@verdant-web/react-router';
@@ -13,19 +17,21 @@ export interface HomePageProps {}
 
 export function HomePage({}: HomePageProps) {
   return (
-    <PageContent>
-      <PageFixedArea className="items-end">
-        <UserMenu
-          extraItems={
-            <Suspense>
-              <ListMenuExtraItems />
-            </Suspense>
-          }
-        />
-      </PageFixedArea>
-      <H1 className="gutter-bottom">Lists</H1>
-      <ListsList />
-    </PageContent>
+    <PageRoot>
+      <PageContent>
+        <PageFixedArea className="items-end">
+          <UserMenu
+            extraItems={
+              <Suspense>
+                <ListMenuExtraItems />
+              </Suspense>
+            }
+          />
+        </PageFixedArea>
+        <H1 className="gutter-bottom">Lists</H1>
+        <ListsList />
+      </PageContent>
+    </PageRoot>
   );
 }
 

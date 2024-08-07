@@ -43,9 +43,7 @@ export function Pages() {
     <ErrorBoundary fallback={(props) => <ErrorFallback {...props} />}>
       <Suspense fallback={<Spinner />}>
         <Router routes={routes} onNavigate={handleNavigate}>
-          <PageRoot>
-            <Outlet />
-          </PageRoot>
+          <Outlet />
           <ListDetailsDialog />
           <ShareTargetListPicker />
         </Router>

@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@a-type/ui": "1.1.3",
+    "@a-type/ui": "1.1.6",
     "@a-type/utils": "1.1.2",
     "@biscuits/client": "workspace:*",
     "@react-spring/web": "^9.7.3",
