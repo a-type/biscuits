@@ -15,7 +15,7 @@ import {
 } from '@biscuits/db';
 import { LibraryInfo } from '@verdant-web/server';
 import { BiscuitsVerdantProfile } from '@biscuits/libraries';
-import { ExtractorData } from '@gnocchi.biscuits/scanning';
+import { ExtractorData as GnocchiRecipeScan } from '@gnocchi.biscuits/scanning';
 import { BiscuitsError } from '@biscuits/error';
 import {
   GeographicResult,
@@ -28,6 +28,7 @@ import {
   AutocompleteSuggestion,
   PlaceLocationDetails,
 } from '../services/maps.js';
+import { ExtractorData as WishWashStorePageScan } from '@wish-wash.biscuits/scanning';
 
 export const builder = new SchemaBuilder<{
   Context: GQLContext;
@@ -69,19 +70,22 @@ export const builder = new SchemaBuilder<{
     CreateCategoryResult: { categoryId: string };
     UpdateCategoryResult: { categoryId: string };
     DeleteCategoryResult: { categoryId: string };
-    RecipeScan: ExtractorData;
+    RecipeScan: GnocchiRecipeScan;
     RecipeScanResult: {
       type: 'web';
-      data: ExtractorData;
+      data: GnocchiRecipeScan;
     };
     RecipeScanDetailedIngredient: NonNullable<
-      ExtractorData['detailedIngredients']
+      GnocchiRecipeScan['detailedIngredients']
     >[number];
-    RecipeScanDetailedStep: NonNullable<ExtractorData['detailedSteps']>[number];
+    RecipeScanDetailedStep: NonNullable<
+      GnocchiRecipeScan['detailedSteps']
+    >[number];
     PublishedRecipe: PublishedRecipe & { __typename: 'PublishedRecipe' };
 
     // WishWash
     PublishedWishlist: PublishedWishlist & { __typename: 'PublishedWishlist' };
+    StorePageScan: WishWashStorePageScan & { __typename: 'StorePageScan' };
 
     // Common Utils
     WeatherForecast: WeatherForecast;
@@ -164,6 +168,9 @@ export const builder = new SchemaBuilder<{
     // WishWash
     PublishWishlistInput: {
       id: string;
+    };
+    StorePageScanInput: {
+      url: string;
     };
 
     // Common Utils

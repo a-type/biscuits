@@ -58,7 +58,7 @@
     },
   ],
   "settings": {
-    "typescript.tsdk": "🌐 Web\\node_modules\\typescript\\lib",
+    "typescript.tsdk": "📦 Packages\\client\\node_modules\\typescript\\lib",
     "unocss.root": [
       "🌐 Web",
       "🍝 Gnocchi\\web",
@@ -69,5 +69,7 @@
       "🎸 Humding\\web",
       "🎨 Palette\\web",
     ],
+    "typescript.enablePromptUseWorkspaceTsdk": true,
+    "typescript.preferences.importModuleSpecifierEnding": "js",
   },
 }

@@ -42,6 +42,7 @@
     "@whatwg-node/server": "^0.9.22",
     "@wish-wash.biscuits/hub": "workspace:*",
     "@wish-wash.biscuits/verdant": "workspace:*",
+    "@wish-wash.biscuits/scanning": "workspace:*",
     "better-sqlite3": "^9.1.1",
     "change-case": "5.4.4",
     "cookie": "^0.6.0",
