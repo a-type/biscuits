@@ -20,11 +20,17 @@ import { preventDefault } from '@a-type/utils';
 import { ImageUploader } from '@a-type/ui/components/imageUploader';
 import { ItemExpirationEditor } from './ItemExpirationEditor.jsx';
 import { NumberStepper } from '@a-type/ui/components/numberStepper';
-import { ReactNode } from 'react';
+import { ReactNode, useCallback } from 'react';
 import { Icon } from '@a-type/ui/components/icon';
 import { clsx } from '@a-type/ui';
 import { withClassName } from '@a-type/ui/hooks';
 import { ScrollArea } from '@a-type/ui/components/scrollArea/ScrollArea';
+import {
+  graphql,
+  useCanSync,
+  useLazyQuery,
+  useMutation,
+} from '@biscuits/client';
 
 export interface ItemEditDialogProps {
   list: List;
@@ -222,9 +228,45 @@ function CountField({ item }: { item: Item }) {
   );
 }
 
+const scanPage = graphql(`
+  query ScanStorePage($url: String!) {
+    storePageScan(input: { url: $url }) {
+      currency
+      price
+      productName
+      scanner
+    }
+  }
+`);
+
 function SingleLinkField({ item }: { item: Item }) {
   const { links } = hooks.useWatch(item);
   hooks.useWatch(links);
+  const firstLink = links.get(0) ?? null;
+
+  const subscribed = useCanSync();
+  const [doScan, { loading: scanning }] = useLazyQuery(scanPage);
+  const maybeScanPage = useCallback(async () => {
+    // don't scan if data already exists
+    if (item.get('description')) {
+      return;
+    }
+
+    const result = await doScan({
+      variables: {
+        url: firstLink,
+      },
+    });
+    if (result.data?.storePageScan) {
+      const scan = result.data.storePageScan;
+      console.log('scan result', scan);
+      item.update({
+        description: scan.productName ?? undefined,
+      });
+    } else {
+      console.error('scan failed', result.error);
+    }
+  }, [firstLink, item]);
 
   return (
     <>
@@ -234,8 +276,12 @@ function SingleLinkField({ item }: { item: Item }) {
         value={links.get(0) || ''}
         type="url"
         onChange={(e) => links.set(0, e.currentTarget.value)}
+        onBlur={maybeScanPage}
         autoSelect
       />
+      {scanning && (
+        <span className="text-xs text-gray-5">Scanning page...</span>
+      )}
     </>
   );
 }

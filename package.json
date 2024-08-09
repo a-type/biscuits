@@ -30,6 +30,7 @@
     "kill-port": "2.0.1",
     "prettier": "3.2.5",
     "turbo": "^1.9.3",
-    "typescript": "^5.4.5"
+    "typescript": "^5.4.5",
+    "gql.tada": "1.8.5"
   }
 }

@@ -20,8 +20,9 @@
     "customConditions": ["development"],
     "plugins": [
       {
-        "name": "@0no-co/graphqlsp",
-        "schema": "./server/schema.graphql"
+        "name": "gql.tada/ts-plugin",
+        "schema": "./server/schema.graphql",
+        "tadaOutputLocation": "./packages/client/src/graphql-env.d.ts"
       }
     ]
   },
