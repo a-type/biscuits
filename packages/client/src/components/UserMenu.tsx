@@ -52,7 +52,7 @@ export function UserMenu({
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        {children ?? (!isLoggedIn && loading) ? (
+        {children ?? (!isLoggedIn && loading && !isOffline) ? (
           <Button size="small" color="ghost" className={className}>
             <Icon name="refresh" className="animate-spin" />
             <Icon name="gear" />
@@ -68,14 +68,17 @@ export function UserMenu({
           </Button>
         ) : (
           <Button size="small" color="ghost" className={className}>
-            <Icon name="refreshDisabled" />
+            <Icon
+              name="refreshDisabled"
+              className={isOffline ? 'color-attention' : ''}
+            />
             <Icon name="gear" />
           </Button>
         )}
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         {isOffline && (
-          <div className="pl-8 pr-4 py-1 text-gray-7 font-sm max-w-300px">
+          <div className="pl-8 pr-4 py-1 text-gray-7 text-sm max-w-300px bg-attention-wash color-attention-dark">
             Offline - some features may be unavailable
           </div>
         )}

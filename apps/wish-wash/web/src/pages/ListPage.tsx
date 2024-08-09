@@ -49,7 +49,7 @@ export function ListPage({}: ListPageProps) {
 
 function ListPageContent({ list }: { list: List }) {
   return (
-    <div className="w-full h-full p-4">
+    <div className="w-full h-full p-4 gap-4 flex flex-col">
       <div className="row -ml-3">
         <Button asChild size="small" color="ghost">
           <Link to="/">

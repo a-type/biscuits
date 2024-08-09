@@ -93,8 +93,10 @@ function createErrorHandler(
         hasNetworkError = true;
         console.error(networkError);
         if (networkError.message === 'Failed to fetch') {
-          errorMessage =
-            'Having trouble reaching Biscuits servers. Running in offline mode.';
+          // errorMessage =
+          //   'Having trouble reaching Biscuits servers. Running in offline mode.';
+          // this is communicated through UserMenu
+          errorMessage = undefined;
         } else {
           errorMessage =
             'A network error occurred. Please check your connection.';
