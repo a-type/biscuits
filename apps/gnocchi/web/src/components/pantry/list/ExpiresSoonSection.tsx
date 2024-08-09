@@ -2,6 +2,7 @@ import { H2 } from '@a-type/ui/components/typography';
 import classNames from 'classnames';
 import { useExpiresSoonItems } from '../hooks.js';
 import { PantryListItem } from '../items/PantryListItem.jsx';
+import { CardGrid, cardGridColumns } from '@a-type/ui/components/card';
 
 export interface ExpiresSoonSectionProps {
   className?: string;
@@ -15,7 +16,7 @@ export function ExpiresSoonSection({ className }: ExpiresSoonSectionProps) {
   return (
     <div className={classNames('flex flex-col mb-6', className)}>
       <H2 className="important:text-md gutter-bottom ml-3">Expiring soon</H2>
-      <div className="flex flex-col gap-3">
+      <CardGrid columns={cardGridColumns.default}>
         {expiresSoonItems.map((item) => (
           <PantryListItem
             item={item}
@@ -24,7 +25,7 @@ export function ExpiresSoonSection({ className }: ExpiresSoonSectionProps) {
             snoozable
           />
         ))}
-      </div>
+      </CardGrid>
     </div>
   );
 }

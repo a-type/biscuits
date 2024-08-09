@@ -21,7 +21,7 @@ export function SuggestionGroup({
 }) {
   return (
     <div className={classNames('flex flex-col gap-2', className)} {...rest}>
-      <div className="text-xs uppercase text-gray-7 font-bold ml-1">
+      <div className="text-xs uppercase text-gray-7 font-bold m2-1">
         {title}
       </div>
       <div className="flex flex-row gap-2 flex-wrap">

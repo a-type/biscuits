@@ -10,7 +10,7 @@ import {
 } from '@/components/groceries/categories/GroceryListCategory.jsx';
 import { hooks } from '@/stores/groceries/index.js';
 import { Button } from '@a-type/ui/components/button';
-import { CardGrid } from '@a-type/ui/components/card';
+import { CardGrid, cardGridColumns } from '@a-type/ui/components/card';
 import { useFilter } from '@/components/pantry/hooks.js';
 import { useEffect } from 'react';
 import { pantryOnboarding } from '@/onboarding/pantryOnboarding.js';
@@ -74,7 +74,7 @@ export function PantryListCategory({
         </CategoryTitle>
       </CategoryTitleRow>
       <CategoryItems>
-        <CardGrid className="grid-cols-[repeat(2,1fr)]">
+        <CardGrid columns={cardGridColumns.small}>
           {items.map((item) => {
             return (
               <PantryListItem key={item.get('canonicalName')} item={item} />
