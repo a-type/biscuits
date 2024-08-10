@@ -1,6 +1,6 @@
 import { PageContent, PageRoot } from '@a-type/ui/components/layouts';
 import { H1, P } from '@a-type/ui/components/typography';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { HubWishlistData } from './types.js';
 
 const innerProps = {
