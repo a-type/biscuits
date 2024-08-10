@@ -5,6 +5,7 @@ import { email } from '../services/email.js';
 import { stripe, stripeDateToDate } from '../services/stripe.js';
 import { GQLContext } from '../graphql/context.js';
 import { UI_ORIGIN } from '../config/deployedContext.js';
+import { AppId, appIds } from '@biscuits/apps';
 
 async function emailAllAdmins(
   planId: string,
@@ -108,6 +109,8 @@ export async function handleSubscriptionCreated(
   const priceId = subscription.items.data[0]?.price.id;
   const productId = subscription.items.data[0]?.price.product as string;
 
+  const productMetadata = await getProductMetadata(productId);
+
   const result = await db
     .updateTable('Plan')
     .where('stripeSubscriptionId', '=', subscription.id)
@@ -116,6 +119,8 @@ export async function handleSubscriptionCreated(
       stripeSubscriptionId: subscription.id,
       stripePriceId: priceId,
       stripeProductId: productId,
+      memberLimit: productMetadata.memberLimit,
+      allowedApp: productMetadata.app === '*' ? null : productMetadata.app,
     })
     .returning('Plan.id as planId')
     .executeTakeFirst();
@@ -169,12 +174,7 @@ export async function handleSubscriptionUpdated(
   const priceId = subscription.items.data[0]?.price.id;
   const productId = subscription.items.data[0]?.price.product as string;
   // memberLimit should be set on the product metadata
-  const product = await stripe.products.retrieve(productId);
-  const memberLimitStr = product.metadata?.memberLimit ?? '';
-  let memberLimit: number | undefined = parseInt(memberLimitStr, 10);
-  if (isNaN(memberLimit)) {
-    memberLimit = undefined;
-  }
+  const productMetadata = await getProductMetadata(productId);
 
   const updated = await db
     .updateTable('Plan')
@@ -186,7 +186,8 @@ export async function handleSubscriptionUpdated(
       subscriptionExpiresAt: expiresAt,
       stripePriceId: priceId,
       stripeProductId: productId,
-      memberLimit,
+      memberLimit: productMetadata.memberLimit,
+      allowedApp: productMetadata.app === '*' ? null : productMetadata.app,
     })
     .returning(['Plan.id as planId'])
     .executeTakeFirst();
@@ -222,14 +223,14 @@ export async function handleSubscriptionUpdated(
 
   // if member limit changed, the plan could possibly now be in violation of the limit.
   // check the number of members and update status and send an email if so
-  if (memberLimit !== undefined) {
+  if (productMetadata.memberLimit !== undefined) {
     const members = await db
       .selectFrom('User')
       .select(['id'])
       .where('planId', '=', planId)
       .execute();
 
-    if (members.length > memberLimit) {
+    if (members.length > productMetadata.memberLimit) {
       await db
         .updateTable('Plan')
         .where('id', '=', planId)
@@ -476,4 +477,28 @@ export async function cacheSubscriptionInfoOnPlan(
     })
     .where('id', '=', ctx.session.planId)
     .execute();
+}
+
+interface BiscuitsProductMetadata {
+  memberLimit: number;
+  app: AppId | '*';
+}
+
+async function getProductMetadata(
+  productId: string,
+): Promise<BiscuitsProductMetadata> {
+  const product = await stripe.products.retrieve(productId);
+  const memberLimitStr = product.metadata?.memberLimit ?? '';
+  let memberLimit: number = parseInt(memberLimitStr, 10);
+  if (isNaN(memberLimit)) {
+    memberLimit = 6;
+  }
+  let appId = product.metadata?.app ?? '*';
+  if (!appIds.includes(appId as any)) {
+    appId = '*';
+  }
+  return {
+    memberLimit,
+    app: appId as AppId | '*',
+  };
 }

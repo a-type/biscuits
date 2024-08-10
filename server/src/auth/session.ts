@@ -15,6 +15,8 @@ declare module '@a-type/auth' {
     isProductAdmin: boolean;
     role: 'admin' | 'user' | null;
     planId: string | null;
+    /** If not present, all apps are accessible. */
+    allowedApp?: string;
   }
 }
 
@@ -31,8 +33,15 @@ export const sessions = new SessionManager({
   async createSession(userId) {
     const user = await db
       .selectFrom('User')
-      .where('id', '=', userId)
-      .select(['id', 'isProductAdmin', 'planId', 'planRole'])
+      .leftJoin('Plan', 'User.planId', 'Plan.id')
+      .where('User.id', '=', userId)
+      .select([
+        'User.id',
+        'User.isProductAdmin',
+        'User.planId',
+        'User.planRole',
+        'Plan.allowedApp',
+      ])
       .select(userNameSelector)
       .executeTakeFirst();
 
@@ -49,6 +58,7 @@ export const sessions = new SessionManager({
       isProductAdmin: user.isProductAdmin,
       planId: user.planId,
       role: user.planRole,
+      allowedApp: user.allowedApp ?? undefined,
     };
   },
   secret: SESSION_SECRET,
@@ -58,6 +68,7 @@ export const sessions = new SessionManager({
     name: 'name',
     planId: 'pid',
     role: 'role',
+    allowedApp: 'app',
   },
   audience: UI_ORIGIN,
   issuer: DEPLOYED_ORIGIN,
