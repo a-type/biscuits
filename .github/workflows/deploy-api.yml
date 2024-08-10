@@ -31,6 +31,8 @@ jobs:
             **/packages/error/**/*.ts
             **/packages/libraries/**/*.ts
             **/apps/gnocchi/scanning/**/*.ts
+            **/apps/*/hub/**/*.ts
+            **/apps/*/hub/**/*.tsx
             ./Dockerfile
             ./fly.toml
             ./pnpm-lock.yaml
