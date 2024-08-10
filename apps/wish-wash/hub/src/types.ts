@@ -9,8 +9,8 @@ interface HubWishlistItem {
   description: string;
   count: number;
   prioritized: boolean;
-  imageUrl: string | null;
-  link: string | null;
+  imageUrls: string[];
+  links: string[];
   createdAt: number;
-  purchasedAt: number;
+  purchasedCount: number;
 }

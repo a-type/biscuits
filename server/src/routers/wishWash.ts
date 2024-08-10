@@ -90,11 +90,13 @@ wishWashRouter.get('/hubList/:listSlug', async (req) => {
     items: snapshot.items.map((item) => ({
       description: item.description,
       count: item.count,
-      link: item.link,
+      purchasedCount: item.purchasedCount,
+      links: item.links,
       prioritized: item.prioritized,
-      imageUrl: item.imageUrl,
+      imageUrls: item.imageFiles
+        .map((f) => f.url)
+        .filter((url): url is string => !!url),
       createdAt: item.createdAt,
-      purchasedAt: item.purchasedAt,
     })),
   };
 
