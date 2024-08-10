@@ -36,7 +36,7 @@ jobs:
             ./Dockerfile
             ./fly.toml
             ./pnpm-lock.yaml
-            ./.github/workflows/deploy.yml
+            ./.github/workflows/deploy-api.yml
 
   build-and-push-image:
     name: Build and push Docker image
