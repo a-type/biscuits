@@ -5,10 +5,10 @@ import { useEffect } from 'react';
 import { toast, clsx } from '@a-type/ui';
 import { PlanInfo, planProductInfo } from './PlanInfo.js';
 import { CancelPlanButton } from './CancelPlanButton.js';
-import { useLazyQuery } from '@biscuits/client';
+import { useLazyQuery } from '@apollo/client';
 import { Icon } from '@a-type/ui/components/icon';
 import { H2 } from '@a-type/ui/components/typography';
-import { CONFIG } from '@biscuits/client';
+import * as CONFIG from '../../config.js';
 
 export const manageSubscriptionInfo = graphql(
   `

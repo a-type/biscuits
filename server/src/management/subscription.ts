@@ -6,6 +6,7 @@ import { stripe, stripeDateToDate } from '../services/stripe.js';
 import { GQLContext } from '../graphql/context.js';
 import { UI_ORIGIN } from '../config/deployedContext.js';
 import { AppId, appIds } from '@biscuits/apps';
+import { getProductMetadata } from './products.js';
 
 async function emailAllAdmins(
   planId: string,
@@ -477,28 +478,4 @@ export async function cacheSubscriptionInfoOnPlan(
     })
     .where('id', '=', ctx.session.planId)
     .execute();
-}
-
-interface BiscuitsProductMetadata {
-  memberLimit: number;
-  app: AppId | '*';
-}
-
-async function getProductMetadata(
-  productId: string,
-): Promise<BiscuitsProductMetadata> {
-  const product = await stripe.products.retrieve(productId);
-  const memberLimitStr = product.metadata?.memberLimit ?? '';
-  let memberLimit: number = parseInt(memberLimitStr, 10);
-  if (isNaN(memberLimit)) {
-    memberLimit = 6;
-  }
-  let appId = product.metadata?.app ?? '*';
-  if (!appIds.includes(appId as any)) {
-    appId = '*';
-  }
-  return {
-    memberLimit,
-    app: appId as AppId | '*',
-  };
 }

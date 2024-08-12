@@ -14,7 +14,11 @@ import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
 import { LogoutButton } from './LogoutButton.js';
 import { PresencePeople } from './PresencePeople.js';
 import { graphql, useSuspenseQuery } from '../graphql.js';
-import { useIsLoggedIn, useIsOffline } from '../hooks/graphql.js';
+import {
+  useHasServerAccess,
+  useIsLoggedIn,
+  useIsOffline,
+} from '../hooks/graphql.js';
 import { useAppId } from './Context.js';
 import { getIsPWAInstalled } from '../platform.js';
 import { LoginButton } from './LoginButton.js';
@@ -36,6 +40,7 @@ export function UserMenu({
   const [isLoggedIn, loading] = useIsLoggedIn();
   const isOffline = useIsOffline();
   const appId = useAppId();
+  const hasServerAccess = useHasServerAccess();
 
   const openPwaHackCatalog = () => {
     // since we can't just open a new tab, use a share
@@ -55,6 +60,7 @@ export function UserMenu({
           </Button>
         ) : isLoggedIn ? (
           <Button size="small" color="ghost" className={className}>
+            {!hasServerAccess && <Icon name="refreshDisabled" />}
             <ErrorBoundary fallback={<Avatar />}>
               <Suspense fallback={<Avatar />}>
                 <PresencePeople />
