@@ -7,7 +7,7 @@ import {
 } from '@a-type/ui/components/dialog';
 import { P } from '@a-type/ui/components/typography';
 import { Button } from '@a-type/ui/components/button';
-import { useIsLoggedIn } from '../index.js';
+import { useIsLoggedIn } from '../hooks/graphql.js';
 import { LoginButton } from './LoginButton.js';
 import { useWasLoggedIn } from '../hooks/useWasLoggedIn.js';
 
@@ -18,7 +18,9 @@ export function LogoutNotice({}: LogoutNoticeProps) {
   const [isLoggedIn, loadingLoggedInStatus] = useIsLoggedIn();
   const [close, setClose] = useState(false);
 
-  const isLoginPage = window.location.pathname === '/login';
+  const isLoginPage =
+    window.location.pathname === '/login' ||
+    window.location.pathname === '/verify';
 
   const wasLoggedInButNowLoggedOut =
     !close && wasLoggedIn && !isLoggedIn && !loadingLoggedInStatus;

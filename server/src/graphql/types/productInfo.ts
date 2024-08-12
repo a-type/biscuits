@@ -97,5 +97,28 @@ builder.objectType('ProductInfo', {
         return info.product.description;
       },
     }),
+    period: t.field({
+      type: 'String',
+      nullable: false,
+      resolve: async (product, _, ctx) => {
+        const info = await ctx.dataloaders.stripePriceLookupKeyLoader.load(
+          product.lookupKey,
+        );
+        if (!info) {
+          throw new BiscuitsError(
+            BiscuitsError.Code.NotFound,
+            'Product info not found',
+          );
+        }
+        if (typeof info.product === 'string') {
+          logger.urgent('Product info not expanded correctly');
+          throw new BiscuitsError(BiscuitsError.Code.Unexpected);
+        }
+        if (info.product.deleted) {
+          return 'This plan is no longer available.';
+        }
+        return info.recurring?.interval ?? 'month';
+      },
+    }),
   }),
 });

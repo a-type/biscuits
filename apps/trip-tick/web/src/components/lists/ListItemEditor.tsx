@@ -20,7 +20,7 @@ import {
   SelectValue,
 } from '@a-type/ui/components/select';
 import { withClassName } from '@a-type/ui/hooks';
-import { OnboardingTooltip, useCanSync } from '@biscuits/client';
+import { OnboardingTooltip, useHasServerAccess } from '@biscuits/client';
 import { ListItemsItem } from '@trip-tick.biscuits/verdant';
 import pluralize from 'pluralize';
 import { ListItemConditionsEditor } from './ListItemConditionsEditor.jsx';
@@ -37,7 +37,7 @@ export function ListItemEditor({ item }: { item: ListItemsItem }) {
     roundDown,
   } = hooks.useWatch(item);
 
-  const isSubscribed = useCanSync();
+  const isSubscribed = useHasServerAccess();
 
   return (
     <div className="flex flex-col gap-3 w-full">

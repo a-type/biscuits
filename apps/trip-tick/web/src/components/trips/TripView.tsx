@@ -15,7 +15,7 @@ import { H4 } from '@a-type/ui/components/typography';
 import {
   FragmentOf,
   graphql,
-  useCanSync,
+  useHasServerAccess,
   useLocalStorage,
   usePageTitle,
   useQuery,

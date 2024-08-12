@@ -1,5 +1,6 @@
 import { Button, ButtonProps } from '@a-type/ui/components/button';
-import { CONFIG, useAppId } from '../index.js';
+import { useAppId } from './Context.js';
+import * as CONFIG from '../config.js';
 
 export interface ManagePlanButtonProps extends ButtonProps {}
 

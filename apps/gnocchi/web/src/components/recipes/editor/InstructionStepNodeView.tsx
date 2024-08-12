@@ -27,7 +27,7 @@ import {
   isActiveCookingSession,
   useCookSessionAction,
 } from '@/components/recipes/hooks.js';
-import { useCanSync } from '@biscuits/client';
+import { useHasServerAccess } from '@biscuits/client';
 
 export interface InstructionStepNodeViewProps {
   node: {
@@ -113,7 +113,7 @@ export function InstructionStepNodeView({
     }
   }, [note, updateAttributes]);
 
-  const isSubscribed = useCanSync();
+  const isSubscribed = useHasServerAccess();
 
   return (
     <NodeViewWrapper

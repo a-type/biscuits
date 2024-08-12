@@ -5,10 +5,11 @@ import {
 } from '@a-type/ui/components/avatar';
 import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
 import { useContext, useSyncExternalStore } from 'react';
-import { VerdantContext, VerdantProfile } from '../index.js';
 import { UserInfo } from '@verdant-web/store';
+import { VerdantContext } from '../verdant.js';
+import { BiscuitsVerdantProfile } from '@biscuits/libraries';
 
-const EMPTY_PEERS = {} as Record<string, UserInfo<VerdantProfile, any>>;
+const EMPTY_PEERS = {} as Record<string, UserInfo<BiscuitsVerdantProfile, any>>;
 
 export function PresencePeople({
   hideIfAlone,

@@ -8,21 +8,17 @@ import {
   DropdownMenuItemRightSlot,
   DropdownMenuTrigger,
 } from '@a-type/ui/components/dropdownMenu';
-import {
-  CONFIG,
-  LoginButton,
-  LogoutButton,
-  PresencePeople,
-  getIsPWAInstalled,
-  graphql,
-  useAppId,
-  useIsLoggedIn,
-  useIsOffline,
-  useSuspenseQuery,
-} from '../index.js';
 import { Icon } from '@a-type/ui/components/icon';
 import { ReactNode, Suspense } from 'react';
 import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
+import { LogoutButton } from './LogoutButton.js';
+import { PresencePeople } from './PresencePeople.js';
+import { graphql, useSuspenseQuery } from '../graphql.js';
+import { useIsLoggedIn, useIsOffline } from '../hooks/graphql.js';
+import { useAppId } from './Context.js';
+import { getIsPWAInstalled } from '../platform.js';
+import { LoginButton } from './LoginButton.js';
+import * as CONFIG from '../config.js';
 
 export interface UserMenuProps {
   className?: string;

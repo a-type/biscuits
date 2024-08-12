@@ -19,12 +19,16 @@ const routes = makeRoutes([
     component: HomePage,
   },
   {
-    path: '/:listId',
-    component: ListPage,
+    path: '/buy-yearly',
+    component: lazy(() => import('./BuyYearlyPage.jsx')),
   },
   {
     path: '/settings',
     component: lazy(() => import('./SettingsPage.jsx')),
+  },
+  {
+    path: '/:listId',
+    component: ListPage,
   },
 ]);
 

@@ -69,6 +69,10 @@ const routes = makeRoutes([
     component: lazy(() => import('./ResetPasswordPage.js')),
   },
   {
+    path: '/return-to-app',
+    component: lazy(() => import('./BackToAppPage.js')),
+  },
+  {
     path: '/admin',
     component: lazy(() => import('./admin/AdminPage.js')),
     children: [

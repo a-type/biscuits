@@ -10,7 +10,6 @@ import { lazy, useState } from 'react';
 import { Footer } from '@/components/help/Footer.jsx';
 import { Checkbox } from '@a-type/ui/components/checkbox';
 import classNames from 'classnames';
-import { AppId, appsById } from '@biscuits/apps';
 import { CONFIG } from '@biscuits/client';
 import {
   OAuthSigninButton,
@@ -24,9 +23,12 @@ export default function LoginPage() {
   const [searchParams, setParams] = useSearchParams();
   let returnTo = searchParams.get('returnTo') ?? undefined;
   const appReferrer = searchParams.get('appReferrer') ?? undefined;
+  let appState: any = undefined;
   if (!returnTo && appReferrer) {
-    const app = appsById[appReferrer as AppId];
-    returnTo = app?.url;
+    appState = {
+      appReferrer,
+      appReturnTo: searchParams.get('appReturnTo') ?? undefined,
+    };
   }
 
   const activeTab = searchParams.get('tab') ?? 'signin';
@@ -86,6 +88,7 @@ export default function LoginPage() {
               inviteId={searchParams.get('inviteId')}
               className="mx-auto"
               disabled={!tosAgreed}
+              appState={appState}
             >
               Sign up with Google
             </OAuthSigninButton>
@@ -94,6 +97,7 @@ export default function LoginPage() {
               endpoint={`${CONFIG.API_ORIGIN}/auth/begin-email-signup`}
               returnTo={returnTo}
               disabled={!tosAgreed}
+              appState={appState}
             />
           </TabsContent>
           <TabsContent
@@ -106,6 +110,7 @@ export default function LoginPage() {
               returnTo={returnTo}
               inviteId={searchParams.get('inviteId')}
               className="mx-auto"
+              appState={appState}
             >
               Sign in with Google
             </OAuthSigninButton>
@@ -114,6 +119,7 @@ export default function LoginPage() {
               returnTo={returnTo}
               endpoint={`${CONFIG.API_ORIGIN}/auth/email-login`}
               resetPasswordEndpoint={`${CONFIG.API_ORIGIN}/auth/begin-reset-password`}
+              appState={appState}
             />
           </TabsContent>
         </TabsRoot>

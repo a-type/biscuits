@@ -3,14 +3,12 @@ import { ReactNode, createContext, useContext } from 'react';
 import { AppId } from '@biscuits/apps';
 import { VerdantContext } from '../verdant.js';
 import { ClientDescriptor } from '@verdant-web/store';
-import {
-  AppPreviewNotice,
-  PrereleaseWarning,
-  TopLoader,
-  VerdantProfile,
-} from '../index.js';
+import { AppPreviewNotice } from './AppPreviewNotice.js';
+import { PrereleaseWarning } from './PrereleaseWarning.js';
+import { TopLoader } from './TopLoader.js';
+import { BiscuitsVerdantProfile } from '@biscuits/libraries';
 import { Essentials } from './Essentials.js';
-import { graphqlClient as defaultClient } from '../index.js';
+import { graphqlClient as defaultClient } from '../graphql.js';
 import { GlobalSyncingIndicator } from './GlobalSyncingIndicator.js';
 
 export function Provider({
@@ -22,7 +20,7 @@ export function Provider({
   appId?: AppId;
   graphqlClient?: ApolloClient<any>;
   children: ReactNode;
-  storeDescriptor?: ClientDescriptor<any, VerdantProfile> | null;
+  storeDescriptor?: ClientDescriptor<any, BiscuitsVerdantProfile> | null;
 }) {
   return (
     <ApolloProvider client={graphqlClient}>

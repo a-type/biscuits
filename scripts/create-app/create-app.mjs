@@ -120,6 +120,7 @@ jobs:
           VITE_API_ORIGIN: \${{ vars.API_ORIGIN }}
           VITE_HOME_ORIGIN: \${{ vars.HOME_ORIGIN }}
           VITE_PUBLIC_URL: https://${appId}.biscuits.club
+          VITE_STRIPE_PUBLISHABLE_KEY: \${{ vars.STRIPE_PUBLISHABLE_KEY }}
 
       - name: Deploy ${appId} to S3
         uses: jakejarvis/s3-sync-action@master

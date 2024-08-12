@@ -4,9 +4,11 @@ import {
   DialogContent,
   DialogTitle,
 } from '@a-type/ui/components/dialog';
-import { CONFIG, LogoutButton, graphql, useMe, useMutation } from '../index.js';
 import { Button } from '@a-type/ui/components/button';
 import { TOS_UPDATED_AT } from '../tos.js';
+import { graphql, useMutation } from '../graphql.js';
+import * as CONFIG from '../config.js';
+import { useMe } from '../hooks/graphql.js';
 
 const acceptTosMutation = graphql(`
   mutation AcceptTos {

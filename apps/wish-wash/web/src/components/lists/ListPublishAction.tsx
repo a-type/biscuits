@@ -11,8 +11,14 @@ import {
 } from '@a-type/ui/components/dialog';
 import { Icon } from '@a-type/ui/components/icon';
 import { P } from '@a-type/ui/components/typography';
-import { graphql, useCanSync, useMutation, useQuery } from '@biscuits/client';
+import {
+  graphql,
+  useHasServerAccess,
+  useMutation,
+  useQuery,
+} from '@biscuits/client';
 import { Link } from '@verdant-web/react-router';
+import { SubscriptionDialog } from '../promotion/SubscriptionDialog.jsx';
 
 export interface ListPublishActionProps extends ActionButtonProps {
   listId: string;
@@ -32,13 +38,27 @@ export function ListPublishAction({
   className,
   ...rest
 }: ListPublishActionProps) {
-  const canPublish = useCanSync();
+  const canPublish = useHasServerAccess();
 
-  const { data } = useQuery(publishedListQuery, { variables: { listId } });
+  const { data } = useQuery(publishedListQuery, {
+    variables: { listId },
+    skip: !canPublish,
+  });
   const isPublished = data?.publishedWishlist;
 
   if (!canPublish && !isPublished) {
-    return null;
+    return (
+      <SubscriptionDialog>
+        <ActionButton
+          color="accent"
+          {...rest}
+          className={clsx('self-start', className)}
+        >
+          <Icon name="send" />
+          Share list
+        </ActionButton>
+      </SubscriptionDialog>
+    );
   }
 
   return (

@@ -26,7 +26,7 @@ import { NavBarChangelog, OnboardingTooltip } from '@biscuits/client';
 import { useHasNewExpirations } from '../pantry/hooks.js';
 import { PopEffect } from './PopEffect.jsx';
 import { withClassName } from '@a-type/ui/hooks';
-import { AppPickerNavItem, ChangelogDisplay } from '@biscuits/client';
+import { AppPickerNavItem } from '@biscuits/client';
 import { useRecipePresenceNotification } from '../sync/collaborationMenu/RecipePresenceNotification.jsx';
 import { IconName } from '../icons/generated/iconNames.js';
 

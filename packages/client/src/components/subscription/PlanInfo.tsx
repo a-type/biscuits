@@ -1,6 +1,6 @@
-import { FragmentOf, graphql, readFragment } from '@/graphql.js';
-import { Price } from './Price.js';
-import { H2, H3, P } from '@a-type/ui/components/typography';
+import { FragmentOf, graphql, readFragment } from '../../graphql.js';
+import { Price } from '@biscuits/client';
+import { H3, P } from '@a-type/ui/components/typography';
 
 export const planProductInfo = graphql(`
   fragment PlanInfo_productInfo on ProductInfo {
@@ -9,6 +9,7 @@ export const planProductInfo = graphql(`
     currency
     name
     description
+    period
   }
 `);
 
@@ -22,7 +23,7 @@ export function PlanInfo({ data: $data }: PlanInfoProps) {
     <div>
       <H3>{data.name}</H3>
       <P>{data.description}</P>
-      <Price value={data.price} currency={data.currency} />
+      <Price value={data.price} currency={data.currency} period={data.period} />
     </div>
   );
 }

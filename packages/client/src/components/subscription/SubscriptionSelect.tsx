@@ -1,6 +1,6 @@
-import { graphql } from '@/graphql.js';
-import { H2 } from '@a-type/ui/components/typography';
-import { useMutation, useQuery } from '@biscuits/client';
+import { graphql } from '../../graphql.js';
+import { H2, P } from '@a-type/ui/components/typography';
+import { useMutation, useQuery } from '@apollo/client';
 import {
   CardGrid,
   CardMain,
@@ -8,9 +8,12 @@ import {
   CardTitle,
 } from '@a-type/ui/components/card';
 import { Suspense } from 'react';
-import { Price } from './Price.js';
+import { Price } from '../Price.js';
+import { Button } from '@a-type/ui/components/button';
 
-export interface SubscriptionSelectProps {}
+export interface SubscriptionSelectProps {
+  priceKeys?: PriceKey[];
+}
 
 const CreatePlan = graphql(`
   mutation CreatePlan($input: SetupPlanInput!) {
@@ -29,7 +32,12 @@ const CreatePlan = graphql(`
   }
 `);
 
-export function SubscriptionSelect({}: SubscriptionSelectProps) {
+export type PriceKey = 'for_one' | 'family_style' | 'wishwash_yearly';
+const defaultPriceKeys: PriceKey[] = ['for_one', 'family_style'];
+
+export function SubscriptionSelect({
+  priceKeys = defaultPriceKeys,
+}: SubscriptionSelectProps) {
   const [createPlan, result] = useMutation(CreatePlan);
 
   const selectPlan = async (lookupKey: string) => {
@@ -42,11 +50,33 @@ export function SubscriptionSelect({}: SubscriptionSelectProps) {
     });
   };
 
+  // only one key ... show a different experience
+  if (priceKeys.length === 1) {
+    return (
+      <SinglePriceExperience
+        priceKey={priceKeys[0]}
+        onProceed={() =>
+          createPlan({
+            variables: { input: { priceLookupKey: priceKeys[0] } },
+          })
+        }
+      />
+    );
+  }
+
   return (
     <div className="flex flex-col gap-4">
       <H2>Select a Plan</H2>
       <Suspense>
         <CardGrid>
+          {priceKeys.map((lookupKey) => (
+            <SubscriptionChoiceButton
+              key={lookupKey}
+              disabled={result.loading}
+              onClick={() => selectPlan(lookupKey)}
+              lookupKey={lookupKey as PriceKey}
+            />
+          ))}
           <SubscriptionChoiceButton
             disabled={result.loading}
             onClick={() => selectPlan('for_one')}
@@ -82,7 +112,7 @@ function SubscriptionChoiceButton({
 }: {
   disabled: boolean;
   onClick: () => void;
-  lookupKey: 'for_one' | 'family_style';
+  lookupKey: PriceKey;
 }) {
   const { data } = useQuery(subscriptionPlanInfo, {
     variables: { lookupKey },
@@ -100,5 +130,32 @@ function SubscriptionChoiceButton({
         </button>
       </CardMain>
     </CardRoot>
+  );
+}
+
+function SinglePriceExperience({
+  priceKey,
+  onProceed,
+}: {
+  priceKey: PriceKey;
+  onProceed: () => void;
+}) {
+  const { data } = useQuery(subscriptionPlanInfo, {
+    variables: { lookupKey: priceKey },
+  });
+
+  return (
+    <div>
+      <H2>Checkout</H2>
+      <P>
+        You're about to subscribe to {data?.productInfo.name} for{' '}
+        <Price
+          value={data?.productInfo.price}
+          currency={data?.productInfo.currency}
+        />
+        .
+      </P>
+      <Button onClick={onProceed}>Enter payment info</Button>
+    </div>
   );
 }

@@ -10,6 +10,12 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["**/*.ts", "**/*.tsx"],
+  "include": [
+    "**/*.ts",
+    "**/*.tsx",
+    "../packages/client/src/components/subscription/ManageSubscription.tsx",
+    "../packages/client/src/components/subscription/PlanInfo.tsx",
+    "../packages/client/src/components/subscription/CancelPlanButton.tsx"
+  ],
   "exclude": ["node_modules"]
 }

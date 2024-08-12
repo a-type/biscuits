@@ -10,7 +10,7 @@ import {
   DialogTrigger,
 } from '@a-type/ui/components/dialog';
 import { useState } from 'react';
-import { graphql, useQuery } from '../index.js';
+import { graphql, useQuery } from '../graphql.js';
 import { useAppId } from './Context.js';
 import {
   NavBarItem,

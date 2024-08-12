@@ -1,6 +1,8 @@
 import { Dialog, DialogContent } from '@a-type/ui/components/dialog';
 import { H2 } from '@a-type/ui/components/typography';
-import { LogoutButton, ManagePlanButton, useMe } from '../index.js';
+import { LogoutButton } from './LogoutButton.js';
+import { ManagePlanButton } from './ManagePlanButton.js';
+import { useMe } from '../hooks/graphql.js';
 
 export interface SubscriptionExpiredDialogProps {}
 

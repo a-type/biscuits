@@ -7,7 +7,7 @@ import {
 } from '@a-type/ui/components/popover';
 import {
   graphql,
-  useCanSync,
+  useHasServerAccess,
   useClient,
   useDebounced,
   useQuery,
@@ -52,7 +52,7 @@ export function LocationSelect({
   value,
   onChange,
 }: LocationSelectProps) {
-  const isSubscribed = useCanSync();
+  const isSubscribed = useHasServerAccess();
 
   hooks.useWatch(value);
 

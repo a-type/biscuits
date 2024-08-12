@@ -5,7 +5,7 @@ import { Icon } from '@a-type/ui/components/icon';
 import { useAppId } from './Context.js';
 import { appsById } from '@biscuits/apps';
 import { clsx, toast } from '@a-type/ui';
-import { useCanSync } from '../index.js';
+import { useHasServerAccess } from '../hooks/graphql.js';
 import { H2, P } from '@a-type/ui/components/typography';
 import { ConfirmedButton } from '@a-type/ui/components/button';
 
@@ -111,7 +111,7 @@ export function ManageStorage({
   className,
   onError = defaultOnError,
 }: ManageStorageProps) {
-  const isSubscribed = useCanSync();
+  const isSubscribed = useHasServerAccess();
   const clientDesc = useContext(VerdantContext);
 
   // sync users cannot manage local storage, it would cause unexpected

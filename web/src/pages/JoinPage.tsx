@@ -1,5 +1,4 @@
 import { Footer } from '@/components/help/Footer.jsx';
-import { Price } from '@/components/subscription/Price.jsx';
 import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
 import {
@@ -10,20 +9,11 @@ import {
 } from '@a-type/ui/components/layouts';
 import { Divider } from '@a-type/ui/components/divider';
 import { PaidFeature, apps, getAppUrl } from '@biscuits/apps';
-import { graphql, useQuery } from '@biscuits/client';
 import { Link } from '@verdant-web/react-router';
 import classNames from 'classnames';
+import { StartingPrice } from '@biscuits/client';
 
 export interface JoinPageProps {}
-
-const startingPriceQuery = graphql(`
-  query StartingPrice {
-    productInfo(lookupKey: "for_one") {
-      price
-      currency
-    }
-  }
-`);
 
 export function JoinPage({}: JoinPageProps) {
   const appReferrer = new URLSearchParams(window.location.search).get(
@@ -86,17 +76,6 @@ export function JoinPage({}: JoinPageProps) {
     </PageRoot>
   );
 }
-
-const StartingPrice = () => {
-  const { data } = useQuery(startingPriceQuery);
-  return (
-    <Price
-      value={data?.productInfo.price}
-      currency={data?.productInfo.currency}
-      className="font-bold"
-    />
-  );
-};
 
 function AppFeature({ feature }: { feature: PaidFeature }) {
   return (

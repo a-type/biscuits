@@ -2,7 +2,7 @@ import { hooks } from '@/store.js';
 import { ActionButton } from '@a-type/ui/components/actions';
 import { ListItems, ListItemsItemInit } from '@trip-tick.biscuits/verdant';
 import { H3 } from '@a-type/ui/components/typography';
-import { useCanSync } from '@biscuits/client';
+import { useHasServerAccess } from '@biscuits/client';
 
 export interface AddSuggestedProps {
   items: ListItems;
@@ -79,7 +79,7 @@ const powerSuggestions: ListItemsItemInit[] = [
 
 export function AddSuggested({ items }: AddSuggestedProps) {
   const existing = hooks.useWatch(items);
-  const isSubscribed = useCanSync();
+  const isSubscribed = useHasServerAccess();
 
   let suggestions = basicSuggestions;
   if (isSubscribed) {

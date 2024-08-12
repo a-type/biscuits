@@ -1,21 +1,13 @@
-import {
-  ApolloClient,
-  ApolloError,
-  InMemoryCache,
-  NetworkStatus,
-  from,
-  useQuery,
-} from '@apollo/client';
+import { toast } from '@a-type/ui';
+import { ApolloClient, InMemoryCache, from } from '@apollo/client';
 import { ErrorHandler, onError } from '@apollo/client/link/error';
 import { HttpLink } from '@apollo/client/link/http';
 import { RetryLink } from '@apollo/client/link/retry';
 import { BiscuitsError } from '@biscuits/error';
 import { initGraphQLTada } from 'gql.tada';
-import { fetch } from './fetch.js';
+import * as CONFIG from './config.js';
+import { fetch, refreshSession } from './fetch.js';
 import type { introspection } from './graphql-env.d.js';
-import { CONFIG, refreshSession } from './index.js';
-import { useEffect } from 'react';
-import { toast } from '@a-type/ui';
 
 export const graphql = initGraphQLTada<{
   introspection: introspection;
@@ -40,7 +32,7 @@ function createErrorHandler(
       'An unexpected error occurred. Please try again.';
     if (graphQLErrors) {
       for (const err of graphQLErrors) {
-        console.error(err);
+        console.error('Error during op', operation.operationName, err);
         if (err.extensions?.biscuitsCode) {
           const code = err.extensions.biscuitsCode as number;
           if (
@@ -222,78 +214,3 @@ export type {
   UseReadQueryResult,
   UseSuspenseQueryResult,
 } from '@apollo/client';
-
-// some minimal queries for common use
-const meQuery = graphql(`
-  query CommonMe {
-    me {
-      id
-      name
-      plan {
-        id
-        canSync
-        subscriptionStatus
-        featureFlags
-      }
-      acceptedTermsOfServiceAt
-    }
-  }
-`);
-
-export function useMe() {
-  const res = useQuery(meQuery, {
-    fetchPolicy: 'cache-first',
-  });
-
-  // setup to refetch on window visible if the query
-  // was unsuccessful
-  const { refetch, error } = res;
-  useEffect(() => {
-    if (error) {
-      const handler = () => {
-        refetch();
-      };
-      window.addEventListener('visibilitychange', handler);
-      return () => {
-        window.removeEventListener('visibilitychange', handler);
-      };
-    }
-  }, [refetch, error]);
-
-  return res;
-}
-
-export function useIsLoggedIn() {
-  const result = useMe();
-  // ignore if network error
-  const networkError = !!result.error?.networkError;
-  return [
-    !!result.data?.me?.id,
-    result.networkStatus === NetworkStatus.loading ||
-      result.networkStatus === NetworkStatus.refetch ||
-      isOfflineError(result.error),
-  ] as const;
-}
-
-export function useCanSync() {
-  const result = useMe();
-  return result?.data?.me?.plan?.canSync;
-}
-
-export function useIsOffline() {
-  const { error } = useMe();
-  return isOfflineError(error);
-}
-
-function isOfflineError(error: ApolloError | undefined) {
-  if (!error) return false;
-  if (!error.networkError) return false;
-  if (error.networkError.message === 'Failed to fetch') return true;
-  if ('statusCode' in error.networkError) {
-    return (
-      error.networkError.statusCode === 0 ||
-      error.networkError.statusCode >= 500
-    );
-  }
-  return false;
-}

@@ -3,7 +3,7 @@ import { clientDescriptor, hooks } from '@/store.js';
 import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
 import { Provider as UIProvider } from '@a-type/ui/components/provider';
 import { H1, P } from '@a-type/ui/components/typography';
-import { Provider, ReloadButton, useCanSync } from '@biscuits/client';
+import { Provider, ReloadButton, useHasServerAccess } from '@biscuits/client';
 import { ReactNode, Suspense } from 'react';
 
 export interface AppProps {}
@@ -13,10 +13,7 @@ export function App({}: AppProps) {
     <ErrorBoundary fallback={<ErrorFallback />}>
       <UIProvider>
         <Suspense>
-          <Provider
-            appId="humding"
-            storeDescriptor={clientDescriptor as any}
-          >
+          <Provider appId="humding" storeDescriptor={clientDescriptor as any}>
             <VerdantProvider>
               <Pages />
             </VerdantProvider>
@@ -29,7 +26,7 @@ export function App({}: AppProps) {
 
 function VerdantProvider({ children }: { children: ReactNode }) {
   // only sync if logged in to the server
-  const isLoggedIn = useCanSync();
+  const isLoggedIn = useHasServerAccess();
   return (
     <hooks.Provider value={clientDescriptor} sync={isLoggedIn}>
       {children}

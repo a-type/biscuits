@@ -340,10 +340,19 @@ Plan.implement({
         return subscription.status;
       },
     }),
-    canSync: t.field({
+    hasAppAccess: t.field({
       type: 'Boolean',
-      resolve: async (plan, _, ctx) => {
-        return isSubscribed(plan.subscriptionStatus);
+      args: {
+        appId: t.arg({
+          type: 'String',
+          required: true,
+        }),
+      },
+      resolve: async (plan, { appId }, ctx) => {
+        return (
+          isSubscribed(plan.subscriptionStatus) &&
+          (!ctx.session?.allowedApp || ctx.session.allowedApp === appId)
+        );
       },
     }),
     isSubscribed: t.field({

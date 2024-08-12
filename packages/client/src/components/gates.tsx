@@ -1,12 +1,12 @@
 import { ReactNode } from 'react';
-import { useCanSync } from '../index.js';
+import { useHasServerAccess } from '../hooks/graphql.js';
 
 export interface GateProps {
   children?: ReactNode;
 }
 
 export function SubscribedOnly({ children }: GateProps) {
-  const isSubscribed = useCanSync();
+  const isSubscribed = useHasServerAccess();
 
   if (!isSubscribed) {
     return null;
@@ -16,7 +16,7 @@ export function SubscribedOnly({ children }: GateProps) {
 }
 
 export function UnsubscribedOnly({ children }: GateProps) {
-  const isSubscribed = useCanSync();
+  const isSubscribed = useHasServerAccess();
 
   if (isSubscribed) {
     return null;

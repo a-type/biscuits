@@ -2,7 +2,7 @@ import { Icon } from '@/components/icons/Icon.jsx';
 import { TextLink } from '@/components/nav/Link.jsx';
 import {
   PromoteSubscriptionButton,
-  useCanSync,
+  useHasServerAccess,
   useIsLoggedIn,
   useQuery,
 } from '@biscuits/client';
@@ -94,7 +94,7 @@ function AddChefsAction() {
   const { data: members } = useQuery(planMembersQuery, {
     skip: !isLoggedIn,
   });
-  const isSubscribed = useCanSync();
+  const isSubscribed = useHasServerAccess();
   const showTip =
     members && (!isLoggedIn || members?.plan?.members.length === 1);
   const [dismissed, setDismissed] = useLocalStorage('add-chefs-tip', false);

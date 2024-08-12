@@ -1,5 +1,5 @@
 import { Button, ButtonProps } from '@a-type/ui/components/button';
-import { CONFIG } from '../index.js';
+import * as CONFIG from '../config.js';
 import { Icon } from '@a-type/ui/components/icon';
 import { useWasLoggedIn } from '../hooks/useWasLoggedIn.js';
 

@@ -1,4 +1,4 @@
-import { useMe } from './graphql.js';
+import { useMe } from './hooks/graphql.js';
 
 export const featureFlags = {
   hub: false,

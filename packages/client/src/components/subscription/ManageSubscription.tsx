@@ -1,11 +1,10 @@
-import { FragmentOf, graphql, readFragment } from '@/graphql.js';
+import { FragmentOf, graphql, readFragment } from '../../graphql.js';
 import { Button } from '@a-type/ui/components/button';
 import { useSearchParams } from '@verdant-web/react-router';
 import { useEffect } from 'react';
-import { toast } from '@a-type/ui';
+import { toast, clsx } from '@a-type/ui';
 import { PlanInfo, planProductInfo } from './PlanInfo.js';
 import { CancelPlanButton } from './CancelPlanButton.js';
-import classNames from 'classnames';
 import { useLazyQuery } from '@biscuits/client';
 import { Icon } from '@a-type/ui/components/icon';
 import { H2 } from '@a-type/ui/components/typography';
@@ -62,12 +61,23 @@ export function ManageSubscription({
 
   return (
     <div
-      className={classNames('flex flex-col gap-4 items-start', className)}
+      className={clsx('flex flex-col gap-4 items-start', className)}
       {...props}
     >
-      <div>
+      <div className="flex flex-col gap-4">
         <H2>Your Subscription</H2>
-        <div className="flex flex-row gap-3 items-center">
+        <div
+          className={clsx(
+            'flex flex-row gap-3 items-center self-start p-2 rounded',
+            {
+              'bg-accent-wash': data.subscriptionStatus === 'active',
+              'bg-primary-wash': data.subscriptionStatus === 'trialing',
+              'bg-attention-wash': ['cancelled', 'past_due'].includes(
+                data.subscriptionStatus,
+              ),
+            },
+          )}
+        >
           Status: {data.subscriptionStatus}{' '}
           <Button
             size="icon"

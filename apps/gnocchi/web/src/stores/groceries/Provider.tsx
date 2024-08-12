@@ -1,9 +1,9 @@
 import { hooks, groceriesDescriptor } from './index.js';
 import { ReactNode } from 'react';
-import { useCanSync } from '@biscuits/client';
+import { useHasServerAccess } from '@biscuits/client';
 
 export function Provider({ children }: { children: ReactNode }) {
-  const isSubscribed = useCanSync();
+  const isSubscribed = useHasServerAccess();
 
   return (
     <hooks.Provider value={groceriesDescriptor} sync={isSubscribed}>

@@ -1,4 +1,3 @@
-import { SubscriptionSetup } from '@/components/subscription/SubscriptionSetup.jsx';
 import { graphql } from '@/graphql.js';
 import {
   PageContent,
@@ -8,7 +7,7 @@ import {
 import { H1, H2 } from '@a-type/ui/components/typography';
 import { Link, useNavigate, useSearchParams } from '@verdant-web/react-router';
 import { Suspense, useEffect } from 'react';
-import { NetworkStatus, useQuery } from '@biscuits/client';
+import { NetworkStatus, useQuery, SubscriptionSetup } from '@biscuits/client';
 import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
 import { MembersAndInvitations } from '@/components/plan/MembersAndInvitations.jsx';

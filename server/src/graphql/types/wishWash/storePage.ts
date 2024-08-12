@@ -12,7 +12,7 @@ builder.queryFields((t) => ({
       }),
     },
     authScopes: {
-      member: true,
+      app: 'wish-wash',
     },
     resolve: async (_, { input }, ctx) => {
       const result = await scanStorePage(input.url);
