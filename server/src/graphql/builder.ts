@@ -144,6 +144,7 @@ export const builder = new SchemaBuilder<{
       key: string;
       value: any;
     };
+    UpdateUserInfoInput: { name: string };
 
     // Gnocchi
     AssignFoodCategoryInput: {

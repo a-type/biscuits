@@ -4,7 +4,7 @@ import {
   PageFixedArea,
   PageRoot,
 } from '@a-type/ui/components/layouts';
-import { H1, H2 } from '@a-type/ui/components/typography';
+import { H1, H2, H3 } from '@a-type/ui/components/typography';
 import { Link, useNavigate, useSearchParams } from '@verdant-web/react-router';
 import { Suspense, useEffect } from 'react';
 import { NetworkStatus, useQuery, SubscriptionSetup } from '@biscuits/client';
@@ -17,19 +17,27 @@ import { apps } from '@biscuits/apps';
 import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
 import { Footer } from '@/components/help/Footer.jsx';
 import { EmailUpdatesToggle } from '@/components/user/EmailUpdatesToggle.jsx';
+import {
+  UserInfoEditor,
+  userInfoFragment,
+} from '@/components/user/UserInfoEditor.jsx';
 
-const PlanPageData = graphql(`
-  query PlanPageData {
-    me {
-      id
-      plan {
+const PlanPageData = graphql(
+  `
+    query PlanPageData {
+      me {
         id
-        subscriptionStatus
-        isSubscribed
+        plan {
+          id
+          subscriptionStatus
+          isSubscribed
+        }
+        ...UserInfoEditor_userInfoFragment
       }
     }
-  }
-`);
+  `,
+  [userInfoFragment],
+);
 
 export interface PlanPageProps {}
 
@@ -74,10 +82,15 @@ export function PlanPage({}: PlanPageProps) {
         </PageFixedArea>
         <ErrorBoundary>
           <Suspense>
+            <H2>Your Account</H2>
+            {data?.me && <UserInfoEditor user={data.me} />}
+          </Suspense>
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <Suspense>
             <EmailUpdatesToggle isSubscribed={data?.me?.plan?.isSubscribed} />
           </Suspense>
         </ErrorBoundary>
-        <H1>Your Plan</H1>
         <ErrorBoundary
           fallback={
             <div>Something went wrong. Couldn&apos;t load this content.</div>
@@ -88,11 +101,11 @@ export function PlanPage({}: PlanPageProps) {
             {!!data?.me?.plan && (
               <>
                 <div className="flex flex-col gap-3">
-                  <H2>Members</H2>
+                  <H3>Members</H3>
                   <MembersAndInvitations />
                 </div>
                 <div className="flex flex-col gap-3">
-                  <H2>App data</H2>
+                  <H3>App data</H3>
                   <VerdantLibraries />
                 </div>
               </>

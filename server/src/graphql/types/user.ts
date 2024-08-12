@@ -36,7 +36,8 @@ builder.queryField('me', (t) =>
 );
 
 builder.mutationFields((t) => ({
-  setUserRole: t.node({
+  setUserRole: t.field({
+    type: User,
     authScopes: {
       productAdmin: true,
     },
@@ -49,7 +50,7 @@ builder.mutationFields((t) => ({
         required: true,
       }),
     },
-    id: async (_, { userId, role }, ctx) => {
+    resolve: async (_, { userId, role }, ctx) => {
       if (userId.typename !== 'User') {
         throw new Error('Invalid user');
       }
@@ -71,7 +72,7 @@ builder.mutationFields((t) => ({
         throw new Error('User not found');
       }
 
-      return { id: result.id, type: 'User' };
+      return result.id;
     },
   }),
   setUserPreference: t.field({
@@ -143,6 +144,30 @@ builder.mutationFields((t) => ({
         .updateTable('User')
         .set({
           sendEmailUpdates: value,
+        })
+        .where('id', '=', userId)
+        .executeTakeFirstOrThrow();
+      return userId;
+    },
+  }),
+  updateUserInfo: t.field({
+    type: User,
+    authScopes: {
+      user: true,
+    },
+    args: {
+      input: t.arg({
+        type: 'UpdateUserInfoInput',
+        required: true,
+      }),
+    },
+    resolve: async (_, { input }, ctx) => {
+      assert(ctx.session);
+      const userId = ctx.session.userId;
+      await ctx.db
+        .updateTable('User')
+        .set({
+          friendlyName: input.name || undefined,
         })
         .where('id', '=', userId)
         .executeTakeFirstOrThrow();
@@ -261,5 +286,11 @@ builder.inputType('SetUserPreferenceInput', {
       type: 'JSON',
       required: true,
     }),
+  }),
+});
+
+builder.inputType('UpdateUserInfoInput', {
+  fields: (t) => ({
+    name: t.string({ required: false }),
   }),
 });
