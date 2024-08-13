@@ -1399,8 +1399,8 @@ importers:
   server:
     dependencies:
       '@a-type/auth':
-        specifier: 0.6.6
-        version: 0.6.6
+        specifier: 0.6.9
+        version: 0.6.9
       '@a-type/utils':
         specifier: 1.1.3
         version: 1.1.3
@@ -1446,9 +1446,6 @@ importers:
       '@pothos/plugin-scope-auth':
         specifier: ^3.21.1
         version: 3.21.1(@pothos/core@3.41.0)(graphql@16.8.1)
-      '@trpc/server':
-        specifier: ^10.44.1
-        version: 10.44.1
       '@verdant-web/common':
         specifier: 2.5.2
         version: 2.5.2
@@ -1559,8 +1556,8 @@ importers:
   web:
     dependencies:
       '@a-type/auth-client':
-        specifier: 1.0.7
-        version: 1.0.7(@a-type/ui@1.1.6)(react@18.3.1)
+        specifier: 1.0.9
+        version: 1.0.9(@a-type/ui@1.1.6)(react@18.3.1)
       '@a-type/ui':
         specifier: ^1.1.6
         version: 1.1.6(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
@@ -1736,8 +1733,8 @@ packages:
       react: 18.3.1
     dev: false
 
-  /@a-type/auth-client@1.0.7(@a-type/ui@1.1.6)(react@18.3.1):
-    resolution: {integrity: sha512-BVctBAZq12G/fZ0S3PBdVAGc6oGx8ZVXZV7ynvIsZKtcgvK0cYTN9WEMOf/NDgn+ax2bNFrshG1vlmM5wbrgsw==}
+  /@a-type/auth-client@1.0.9(@a-type/ui@1.1.6)(react@18.3.1):
+    resolution: {integrity: sha512-NkdpdhVu7c6YQyvoEKaF5jYjItkhPdTNMPuY2TtogvwL+XcPfBpOW3zLpD3xSyzjhbVRYuuRjuGjnWjWOnxz5g==}
     peerDependencies:
       '@a-type/ui': ^0.8.0
       react: ^18
@@ -1746,8 +1743,8 @@ packages:
       react: 18.3.1
     dev: false
 
-  /@a-type/auth@0.6.6:
-    resolution: {integrity: sha512-HpWfgksPpcEqgrUwVrL3iwJMzrc5i7bMrgvUqZclQxPP31fYhq4AoxFnVMzp24IMUyrXoNwGS7W2GqVkYoIPSA==}
+  /@a-type/auth@0.6.9:
+    resolution: {integrity: sha512-NVCeNXA5OBHq1yDidhrZVduPrYi8kBHeT9xj+qm3pfmmcy+Cbnjm0yXb/dYYo5lSv4A3gIB9o8xDpJxmV2J7kA==}
     dependencies:
       cookie: 0.6.0
       discord-oauth2: 2.12.1
@@ -13863,11 +13860,6 @@ packages:
       '@tiptap/extension-text': 2.4.0(@tiptap/core@2.4.0)
     transitivePeerDependencies:
       - '@tiptap/pm'
-
-  /@trpc/server@10.44.1:
-    resolution: {integrity: sha512-mF7B+K6LjuboX8I1RZgKE5GA/fJhsJ8tKGK2UBt3Bwik7hepEPb4NJgNr7vO6BK5IYwPdBLRLTctRw6XZx0sRg==}
-    engines: {node: '>=18.0.0'}
-    dev: false
 
   /@tsconfig/node10@1.0.11:
     resolution: {integrity: sha512-DcRjDCujK/kCk/cUe8Xz8ZSpm8mS3mNNpta+jGCA6USEDfktlNvm1+IuZ9eTcDbNk41BHwpHHeW+N1lKCz4zOw==}

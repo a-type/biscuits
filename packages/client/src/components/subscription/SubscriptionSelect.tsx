@@ -38,7 +38,9 @@ const defaultPriceKeys: PriceKey[] = ['for_one', 'family_style'];
 export function SubscriptionSelect({
   priceKeys = defaultPriceKeys,
 }: SubscriptionSelectProps) {
-  const [createPlan, result] = useMutation(CreatePlan);
+  const [createPlan, result] = useMutation(CreatePlan, {
+    refetchQueries: ['PlanSubscriptionInfo'],
+  });
 
   const selectPlan = async (lookupKey: string) => {
     await createPlan({
@@ -145,7 +147,7 @@ function SinglePriceExperience({
   });
 
   return (
-    <div>
+    <div className="flex flex-col gap-3 items-start">
       <H2>Checkout</H2>
       <P>
         You're about to subscribe to {data?.productInfo.name} for{' '}
@@ -155,7 +157,9 @@ function SinglePriceExperience({
         />
         .
       </P>
-      <Button onClick={onProceed}>Enter payment info</Button>
+      <Button color="primary" onClick={onProceed}>
+        Enter payment info
+      </Button>
     </div>
   );
 }

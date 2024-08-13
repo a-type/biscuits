@@ -9,16 +9,16 @@ import {
 } from '@a-type/ui/components/layouts';
 import { Divider } from '@a-type/ui/components/divider';
 import { PaidFeature, apps, getAppUrl } from '@biscuits/apps';
-import { Link } from '@verdant-web/react-router';
+import { Link, useSearchParams } from '@verdant-web/react-router';
 import classNames from 'classnames';
 import { StartingPrice } from '@biscuits/client';
 
 export interface JoinPageProps {}
 
 export function JoinPage({}: JoinPageProps) {
-  const appReferrer = new URLSearchParams(window.location.search).get(
-    'appReferrer',
-  );
+  const [search] = useSearchParams();
+  const appReferrer = search.get('appReferrer');
+  const backTo = search.get('backTo');
 
   const sortedApps = appReferrer
     ? [...apps].sort((a, b) =>
@@ -40,9 +40,9 @@ export function JoinPage({}: JoinPageProps) {
           </p>
           <PageFixedArea className="flex flex-row gap-3 py-4 justify-between bg-transparent">
             <Button asChild color="default">
-              <Link to="/">
+              <Link to={backTo || '/'}>
                 <Icon name="arrowLeft" />
-                Back to apps
+                {backTo ? 'Go back' : 'Back to apps'}
               </Link>
             </Button>
             <Button asChild color="primary">

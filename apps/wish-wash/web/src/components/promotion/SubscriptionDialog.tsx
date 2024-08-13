@@ -14,23 +14,20 @@ export function SubscriptionDialog({ children }: SubscriptionDialogProps) {
     <Dialog>
       <Dialog.Trigger asChild>{children}</Dialog.Trigger>
       <Dialog.Content>
-        <Dialog.Title>Share your list this year</Dialog.Title>
-        <P>
-          Share your list with friends and family all year for an{' '}
-          <em>annual</em> charge of $10.
+        <Dialog.Title>Share your list for a year</Dialog.Title>
+        <P className="gutter-bottom">
+          For $10, share your list with friends and family all year. (That's
+          your next birthday <i>and</i> yearly holidays sorted!)
         </P>
         <P>
-          (That's your next birthday <i>and</i> yearly holidays sorted!)
-        </P>
-        <P>
-          You'll get a link for any list you can share with anyone. They can
+          You'll get a link for any list you can share with people. They can
           browse and mark items as bought.
         </P>
         <Dialog.Actions>
           <Dialog.Close>Nevermind</Dialog.Close>
           <Button asChild color="primary">
             <Link
-              to={`${CONFIG.HOME_ORIGIN}/login?appReferrer=wish-wash&appReturnTo=${encodeURIComponent('/buy-yearly')}`}
+              to={`${CONFIG.HOME_ORIGIN}/login?tab=signup&appReferrer=wish-wash&appReturnTo=${encodeURIComponent('/buy-yearly')}`}
             >
               Subscribe
             </Link>

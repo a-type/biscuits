@@ -10,7 +10,7 @@
     "up-ui": "cd .. && pnpm up-ui"
   },
   "dependencies": {
-    "@a-type/auth-client": "1.0.7",
+    "@a-type/auth-client": "1.0.9",
     "@a-type/ui": "^1.1.6",
     "@biscuits/apps": "workspace:*",
     "@biscuits/client": "workspace:*",

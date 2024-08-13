@@ -38,7 +38,9 @@ function MemberUpsell() {
         sharing.
       </P>
       <Button asChild color="accent">
-        <Link to={`${CONFIG.HOME_ORIGIN}/join`}>Learn more</Link>
+        <Link to={`${CONFIG.HOME_ORIGIN}/join?backTo=${window.location.href}`}>
+          Learn more
+        </Link>
       </Button>
     </div>
   );

@@ -78,7 +78,12 @@ function PaymentForm() {
       <H2>Complete your subscription</H2>
       <PaymentElement />
       {error && <p className="text-red">{error}</p>}
-      <Button disabled={!stripe} type="submit" className="self-end">
+      <Button
+        color="primary"
+        disabled={!stripe}
+        type="submit"
+        className="self-end"
+      >
         Subscribe
       </Button>
     </form>

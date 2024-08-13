@@ -84,6 +84,11 @@ export function UserMenu({
             Offline - some features may be unavailable
           </div>
         )}
+        {isLoggedIn && !hasServerAccess && (
+          <div className="pl-8 pr-4 py-1 text-gray-7 text-sm max-w-300px color-gray-7">
+            Your plan does not include this app
+          </div>
+        )}
 
         {!isLoggedIn ? (
           <>
