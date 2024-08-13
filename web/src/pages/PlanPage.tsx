@@ -21,6 +21,7 @@ import {
   UserInfoEditor,
   userInfoFragment,
 } from '@/components/user/UserInfoEditor.jsx';
+import { toast } from '@a-type/ui';
 
 const PlanPageData = graphql(
   `
@@ -57,6 +58,8 @@ export function PlanPage({}: PlanPageProps) {
     if (hasAccount) setSeen(true);
   }, [setSeen, hasAccount]);
 
+  const justPaid = searchParams.get('redirect_status') === 'succeeded';
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -67,6 +70,14 @@ export function PlanPage({}: PlanPageProps) {
       navigate(`/login?returnTo=${returnTo}`);
     }
   }, [result, navigate, hasAccount]);
+
+  useEffect(() => {
+    if (justPaid) {
+      toast.success('Thanks for subscribing! 🎉', {
+        id: 'justPaid',
+      });
+    }
+  }, [justPaid]);
 
   return (
     <PageRoot>

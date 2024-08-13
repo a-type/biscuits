@@ -2,6 +2,7 @@ import { graphql } from '../../graphql.js';
 import { H2, P } from '@a-type/ui/components/typography';
 import { useMutation, useQuery } from '@apollo/client';
 import {
+  CardContent,
   CardGrid,
   CardMain,
   CardRoot,
@@ -79,16 +80,6 @@ export function SubscriptionSelect({
               lookupKey={lookupKey as PriceKey}
             />
           ))}
-          <SubscriptionChoiceButton
-            disabled={result.loading}
-            onClick={() => selectPlan('for_one')}
-            lookupKey="for_one"
-          />
-          <SubscriptionChoiceButton
-            disabled={result.loading}
-            onClick={() => selectPlan('family_style')}
-            lookupKey="family_style"
-          />
         </CardGrid>
       </Suspense>
     </div>
@@ -124,11 +115,13 @@ function SubscriptionChoiceButton({
       <CardMain asChild>
         <button onClick={onClick} disabled={disabled}>
           <CardTitle>{data?.productInfo.name}</CardTitle>
-          <p>{data?.productInfo.description}</p>
-          <Price
-            value={data?.productInfo.price}
-            currency={data?.productInfo.currency}
-          />
+          <CardContent>{data?.productInfo.description}</CardContent>
+          <CardContent>
+            <Price
+              value={data?.productInfo.price}
+              currency={data?.productInfo.currency}
+            />
+          </CardContent>
         </button>
       </CardMain>
     </CardRoot>

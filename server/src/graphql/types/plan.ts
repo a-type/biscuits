@@ -355,7 +355,7 @@ Plan.implement({
       resolve: async (plan, { appId }, ctx) => {
         return (
           isSubscribed(plan.subscriptionStatus) &&
-          (!ctx.session?.allowedApp || ctx.session.allowedApp === appId)
+          (!plan.allowedApp || plan.allowedApp === appId)
         );
       },
     }),
