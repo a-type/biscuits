@@ -21,7 +21,7 @@ export function PlanInfo({ data: $data }: PlanInfoProps) {
   const data = readFragment(planProductInfo, $data);
   return (
     <div>
-      <H3>{data.name}</H3>
+      <H3 className="text-sm">{data.name}</H3>
       <P>{data.description}</P>
       <Price value={data.price} currency={data.currency} period={data.period} />
     </div>

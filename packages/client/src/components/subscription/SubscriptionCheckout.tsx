@@ -60,7 +60,7 @@ function PaymentForm() {
     const result = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: `${window.location.origin}/plan?paymentComplete=true`,
+        return_url: `${window.location.origin}/settings?paymentComplete=true`,
       },
     });
 

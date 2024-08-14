@@ -22,6 +22,7 @@ import {
   userInfoFragment,
 } from '@/components/user/UserInfoEditor.jsx';
 import { toast } from '@a-type/ui';
+import { Tabs } from '@a-type/ui/components/tabs';
 
 const PlanPageData = graphql(
   `
@@ -58,7 +59,9 @@ export function PlanPage({}: PlanPageProps) {
     if (hasAccount) setSeen(true);
   }, [setSeen, hasAccount]);
 
-  const justPaid = searchParams.get('redirect_status') === 'succeeded';
+  const justPaid =
+    searchParams.get('paymentComplete') ||
+    searchParams.get('redirect_status') === 'succeeded';
 
   const navigate = useNavigate();
 
@@ -79,6 +82,15 @@ export function PlanPage({}: PlanPageProps) {
     }
   }, [justPaid]);
 
+  const [search, setSearch] = useSearchParams();
+  const tab = search.get('tab') ?? 'profile';
+  const setTab = (tab: string) => {
+    setSearch((s) => {
+      s.set('tab', tab);
+      return s;
+    });
+  };
+
   return (
     <PageRoot>
       <PageContent innerProps={{ className: 'flex flex-col gap-6' }}>
@@ -91,38 +103,71 @@ export function PlanPage({}: PlanPageProps) {
           </Button>
           <LogoutButton />
         </PageFixedArea>
-        <ErrorBoundary>
-          <Suspense>
-            <H2>Your Account</H2>
-            {data?.me && <UserInfoEditor user={data.me} />}
-          </Suspense>
-        </ErrorBoundary>
-        <ErrorBoundary>
-          <Suspense>
-            <EmailUpdatesToggle isSubscribed={data?.me?.plan?.isSubscribed} />
-          </Suspense>
-        </ErrorBoundary>
-        <ErrorBoundary
-          fallback={
-            <div>Something went wrong. Couldn&apos;t load this content.</div>
-          }
-        >
-          <Suspense>
-            <SubscriptionSetup />
-            {!!data?.me?.plan && (
-              <>
-                <div className="flex flex-col gap-3">
-                  <H3>Members</H3>
-                  <MembersAndInvitations />
-                </div>
-                <div className="flex flex-col gap-3">
-                  <H3>App data</H3>
-                  <VerdantLibraries />
-                </div>
-              </>
-            )}
-          </Suspense>
-        </ErrorBoundary>
+        <Tabs value={tab} onValueChange={setTab} className="flex-1">
+          <Tabs.List>
+            <Tabs.Trigger value="profile">Profile</Tabs.Trigger>
+            <Tabs.Trigger value="subscription">Subscription</Tabs.Trigger>
+            <Tabs.Trigger value="members">Members</Tabs.Trigger>
+            <Tabs.Trigger value="data">Data</Tabs.Trigger>
+          </Tabs.List>
+          <div className="px-2 py-6 flex-1">
+            <Tabs.Content value="profile">
+              <ErrorBoundary>
+                <Suspense>
+                  {data?.me ? (
+                    <UserInfoEditor user={data.me} />
+                  ) : (
+                    <div>Loading...</div>
+                  )}
+                </Suspense>
+              </ErrorBoundary>
+              <ErrorBoundary>
+                <Suspense>
+                  <EmailUpdatesToggle
+                    isSubscribed={data?.me?.plan?.isSubscribed}
+                  />
+                </Suspense>
+              </ErrorBoundary>
+            </Tabs.Content>
+            <Tabs.Content value="subscription">
+              <ErrorBoundary
+                fallback={
+                  <div>
+                    Something went wrong. Couldn&apos;t load this content.
+                  </div>
+                }
+              >
+                <Suspense>
+                  <SubscriptionSetup />
+                </Suspense>
+              </ErrorBoundary>
+            </Tabs.Content>
+            <Tabs.Content value="members">
+              <ErrorBoundary>
+                <Suspense>
+                  {!!data?.me?.plan && (
+                    <>
+                      <div className="flex flex-col gap-3">
+                        <H3>Members</H3>
+                        <MembersAndInvitations />
+                      </div>
+                    </>
+                  )}
+                </Suspense>
+              </ErrorBoundary>
+            </Tabs.Content>
+            <Tabs.Content value="data">
+              <ErrorBoundary>
+                <Suspense>
+                  <div className="flex flex-col gap-3">
+                    <H3>App data</H3>
+                    <VerdantLibraries />
+                  </div>
+                </Suspense>
+              </ErrorBoundary>
+            </Tabs.Content>
+          </div>
+        </Tabs>
         <Footer />
       </PageContent>
     </PageRoot>

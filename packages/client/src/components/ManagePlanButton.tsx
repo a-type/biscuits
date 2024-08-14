@@ -11,7 +11,7 @@ export function ManagePlanButton({
   const appReferrer = useAppId();
   return (
     <Button asChild {...props}>
-      <a href={`${CONFIG.HOME_ORIGIN}/plan?fromApp=${appReferrer}`}>
+      <a href={`${CONFIG.HOME_ORIGIN}/settings?appReferrer=${appReferrer}`}>
         {children || 'Manage plan'}
       </a>
     </Button>

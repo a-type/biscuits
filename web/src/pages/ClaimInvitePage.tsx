@@ -61,7 +61,7 @@ function ClaimInvitePage() {
       toast.success('Welcome to your new membership!', {
         duration: 15000,
       });
-      navigate('/plan');
+      navigate('/settings');
     }
   };
 

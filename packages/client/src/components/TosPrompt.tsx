@@ -53,7 +53,7 @@ export function TosPrompt() {
         </div>
         <DialogActions>
           <Button asChild>
-            <a href={`${CONFIG.HOME_ORIGIN}/plan`} target="_blank">
+            <a href={`${CONFIG.HOME_ORIGIN}/settings`} target="_blank">
               Manage Plan or Log Out
             </a>
           </Button>

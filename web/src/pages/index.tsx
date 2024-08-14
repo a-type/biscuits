@@ -26,7 +26,11 @@ const routes = makeRoutes([
   },
   {
     path: '/plan',
-    component: lazy(() => import('./PlanPage.js')),
+    component: lazy(() => import('./SettingsPage.jsx')),
+  },
+  {
+    path: '/settings',
+    component: lazy(() => import('./SettingsPage.jsx')),
   },
   {
     path: '/login',

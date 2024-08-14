@@ -6,6 +6,7 @@ import {
   TextField,
 } from '@a-type/ui/components/forms';
 import { Icon } from '@a-type/ui/components/icon';
+import { H2 } from '@a-type/ui/components/typography';
 import {
   FragmentOf,
   graphql,
@@ -44,11 +45,15 @@ export function UserInfoEditor({ user, className }: UserInfoEditorProps) {
 
   if (!editing) {
     return (
-      <div className={clsx('col w-full items-start', className)}>
+      <div className={clsx('col w-full items-start py-3', className)}>
+        <div className="row justify-between w-full">
+          <H2>Your profile</H2>
+          <Button color="ghost" onClick={() => setEditing(true)}>
+            <Icon name="pencil" /> Edit
+          </Button>
+        </div>
+
         <div>Name: {userData.name}</div>
-        <Button color="ghost" onClick={() => setEditing(true)}>
-          <Icon name="pencil" /> Edit
-        </Button>
       </div>
     );
   }
@@ -60,6 +65,7 @@ export function UserInfoEditor({ user, className }: UserInfoEditorProps) {
         await update({ variables: values });
         setEditing(false);
       }}
+      className="py-3"
     >
       <TextField name="name" label="Name" />
       <div className="row justify-end w-full">

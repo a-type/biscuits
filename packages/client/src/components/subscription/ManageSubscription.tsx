@@ -9,6 +9,7 @@ import { useLazyQuery } from '@apollo/client';
 import { Icon } from '@a-type/ui/components/icon';
 import { H2 } from '@a-type/ui/components/typography';
 import * as CONFIG from '../../config.js';
+import { Chip } from '@a-type/ui/components/chip';
 
 export const manageSubscriptionInfo = graphql(
   `
@@ -64,30 +65,30 @@ export function ManageSubscription({
       className={clsx('flex flex-col gap-4 items-start', className)}
       {...props}
     >
-      <div className="flex flex-col gap-4">
-        <H2>Your Subscription</H2>
-        <div
-          className={clsx(
-            'flex flex-row gap-3 items-center self-start p-2 rounded',
-            {
-              'bg-accent-wash': data.subscriptionStatus === 'active',
-              'bg-primary-wash': data.subscriptionStatus === 'trialing',
-              'bg-attention-wash': ['cancelled', 'past_due'].includes(
-                data.subscriptionStatus,
-              ),
-            },
-          )}
-        >
-          Status: {data.subscriptionStatus}{' '}
-          <Button
-            size="icon"
-            color="ghost"
-            onClick={() => {
-              refetchStatus({ fetchPolicy: 'network-only' });
-            }}
+      <div className="flex flex-col gap-4 w-full">
+        <div className="row justify-between w-full">
+          <H2>Your Subscription</H2>
+          <Chip
+            color={
+              data.subscriptionStatus === 'active'
+                ? 'accent'
+                : data.subscriptionStatus === 'trialing'
+                  ? 'primary'
+                  : 'neutral'
+            }
+            className="pl-6"
           >
-            <Icon name="refresh" />
-          </Button>
+            {data.subscriptionStatus}
+            <Button
+              size="icon"
+              color="ghost"
+              onClick={() => {
+                refetchStatus({ fetchPolicy: 'network-only' });
+              }}
+            >
+              <Icon name="refresh" />
+            </Button>
+          </Chip>
         </div>
         {data.productInfo && <PlanInfo data={data.productInfo} />}
       </div>
