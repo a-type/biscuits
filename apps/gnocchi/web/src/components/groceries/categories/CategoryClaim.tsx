@@ -8,7 +8,7 @@ import { Category } from '@gnocchi.biscuits/verdant';
 import { Button } from '@a-type/ui/components/button';
 import classNames from 'classnames';
 import { forwardRef, memo, useCallback, useEffect, useState } from 'react';
-import { useCanSync } from '@biscuits/client';
+import { useHasServerAccess } from '@biscuits/client';
 
 export const CategoryClaim = memo(function CategoryClaim({
   category,
@@ -17,7 +17,7 @@ export const CategoryClaim = memo(function CategoryClaim({
 }) {
   const { isMyClaim, claimer } = useCategoryClaimPresence(category);
   const me = hooks.useSelf();
-  const isSubscribed = useCanSync();
+  const isSubscribed = useHasServerAccess();
 
   const claim = useCallback(() => {
     if (isMyClaim) {

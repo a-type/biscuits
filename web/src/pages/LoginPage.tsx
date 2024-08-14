@@ -1,22 +1,22 @@
 import { P } from '@a-type/ui/components/typography';
-import { useSearchParams } from '@verdant-web/react-router';
+import { Link, useSearchParams } from '@verdant-web/react-router';
 import {
   TabsList,
   TabsContent,
   TabsRoot,
   TabsTrigger,
 } from '@a-type/ui/components/tabs';
-import { lazy, useState } from 'react';
+import { lazy, ReactNode, useState } from 'react';
 import { Footer } from '@/components/help/Footer.jsx';
 import { Checkbox } from '@a-type/ui/components/checkbox';
 import classNames from 'classnames';
-import { AppId, appsById } from '@biscuits/apps';
 import { CONFIG } from '@biscuits/client';
 import {
   OAuthSigninButton,
   EmailSignupForm,
   EmailSigninForm,
 } from '@a-type/auth-client';
+import { AppId, appsById } from '@biscuits/apps';
 
 const Paws = lazy(() => import('@/components/paws/Paws.jsx'));
 
@@ -24,14 +24,36 @@ export default function LoginPage() {
   const [searchParams, setParams] = useSearchParams();
   let returnTo = searchParams.get('returnTo') ?? undefined;
   const appReferrer = searchParams.get('appReferrer') ?? undefined;
+  let appState: any = undefined;
   if (!returnTo && appReferrer) {
-    const app = appsById[appReferrer as AppId];
-    returnTo = app?.url;
+    appState = {
+      appReferrer,
+      appReturnTo: searchParams.get('appReturnTo') ?? undefined,
+    };
   }
 
   const activeTab = searchParams.get('tab') ?? 'signin';
 
   const [tosAgreed, setTosAgreed] = useState(false);
+
+  let title: ReactNode = activeTab === 'signin' ? 'Log in' : 'Join the club';
+  if (appReferrer) {
+    const appInfo = appsById[appReferrer as AppId];
+    if (appInfo) {
+      title = (
+        <span className="row">
+          <img
+            src={`${appInfo.url}/${appInfo.iconPath}`}
+            className="w-60px h-60px inline-block mr-2"
+            alt=""
+          />
+          {activeTab === 'signin'
+            ? `Log in to ${appInfo.name}`
+            : `Sign up for ${appInfo.name}`}
+        </span>
+      );
+    }
+  }
 
   return (
     <div className="flex flex-col items-center justify-center h-screen flex-1 bg-primary-wash">
@@ -39,7 +61,10 @@ export default function LoginPage() {
         <Paws />
       </div>
       <div className="flex flex-col gap-3 p-6 items-center bg-white border-solid border border-1 border-black rounded-lg relative z-1">
-        <h1 className="font-fancy mb-0">Join the club</h1>
+        <h1 className="font-fancy mb-0">{title}</h1>
+        {appReferrer && (
+          <P className="italic color-gray-7 text-sm">A Biscuits.club app</P>
+        )}
         <TabsRoot
           className="flex flex-col"
           value={activeTab}
@@ -58,7 +83,6 @@ export default function LoginPage() {
             value="signup"
             className="flex flex-col gap-3 items-stretch"
           >
-            <P className="w-full text-center">Welcome!</P>
             <label
               className={classNames(
                 'flex flex-row gap-3 max-w-400px text-sm transition-color  p-2 rounded-lg',
@@ -86,6 +110,7 @@ export default function LoginPage() {
               inviteId={searchParams.get('inviteId')}
               className="mx-auto"
               disabled={!tosAgreed}
+              appState={appState}
             >
               Sign up with Google
             </OAuthSigninButton>
@@ -94,18 +119,32 @@ export default function LoginPage() {
               endpoint={`${CONFIG.API_ORIGIN}/auth/begin-email-signup`}
               returnTo={returnTo}
               disabled={!tosAgreed}
+              appState={appState}
             />
+            {!tosAgreed && (
+              <P className="text-center text-sm text-gray-7">
+                You must agree to the terms to sign up
+              </P>
+            )}
+            {appReferrer && (
+              <P className="text-center text-sm text-gray-7">
+                Your account works with{' '}
+                <Link newTab to="/">
+                  all Biscuits apps
+                </Link>
+              </P>
+            )}
           </TabsContent>
           <TabsContent
             value="signin"
             className="flex flex-col gap-3 items-stretch"
           >
-            <P className="w-full text-center">Welcome back!</P>
             <OAuthSigninButton
               endpoint={`${CONFIG.API_ORIGIN}/auth/provider/google/login`}
               returnTo={returnTo}
               inviteId={searchParams.get('inviteId')}
               className="mx-auto"
+              appState={appState}
             >
               Sign in with Google
             </OAuthSigninButton>
@@ -114,6 +153,7 @@ export default function LoginPage() {
               returnTo={returnTo}
               endpoint={`${CONFIG.API_ORIGIN}/auth/email-login`}
               resetPasswordEndpoint={`${CONFIG.API_ORIGIN}/auth/begin-reset-password`}
+              appState={appState}
             />
           </TabsContent>
         </TabsRoot>

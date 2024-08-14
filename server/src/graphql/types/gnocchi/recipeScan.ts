@@ -13,8 +13,10 @@ builder.queryFields((t) => ({
       }),
     },
     resolve: async (_, { input }, ctx) => {
-      // only members can scan non-gnocchi recipes
-      const isMember = !!ctx.session?.planId;
+      // only members with gnocchi app access can scan non-gnocchi recipes
+      const isMember =
+        !!ctx.session?.planId &&
+        (!ctx.session.allowedApp || ctx.session.allowedApp === 'gnocchi');
       if (!isMember && !input.url.includes('recipes.gnocchi.biscuits.club')) {
         throw new BiscuitsError(
           BiscuitsError.Code.Unauthorized,

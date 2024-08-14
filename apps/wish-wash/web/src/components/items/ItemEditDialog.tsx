@@ -27,7 +27,7 @@ import { withClassName } from '@a-type/ui/hooks';
 import { ScrollArea } from '@a-type/ui/components/scrollArea/ScrollArea';
 import {
   graphql,
-  useCanSync,
+  useHasServerAccess,
   useLazyQuery,
   useMutation,
 } from '@biscuits/client';
@@ -244,7 +244,7 @@ function SingleLinkField({ item }: { item: Item }) {
   hooks.useWatch(links);
   const firstLink = links.get(0) ?? null;
 
-  const subscribed = useCanSync();
+  const subscribed = useHasServerAccess();
   const [doScan, { loading: scanning }] = useLazyQuery(scanPage);
   const maybeScanPage = useCallback(async () => {
     // don't scan if data already exists

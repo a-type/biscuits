@@ -179,9 +179,17 @@ builder.mutationFields((t) => ({
           .execute();
       });
 
+      // get plan info needed for session
+      const plan = await ctx.db
+        .selectFrom('Plan')
+        .where('id', '=', invite.planId)
+        .select(['id', 'allowedApp'])
+        .executeTakeFirstOrThrow();
+
       await ctx.auth.setLoginSession({
         ...ctx.session,
-        planId: invite.planId,
+        planId: plan.id,
+        allowedApp: plan.allowedApp || undefined,
         role: 'user',
       });
 

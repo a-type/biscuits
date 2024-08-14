@@ -9,7 +9,7 @@ import {
   DialogTitle,
 } from '@a-type/ui/components/dialog';
 import { Icon } from '@a-type/ui/components/icon';
-import { useCanSync } from '@biscuits/client';
+import { useHasServerAccess } from '@biscuits/client';
 import { useNavigate } from '@verdant-web/react-router';
 import { authorization } from '@wish-wash.biscuits/verdant';
 import { useState } from 'react';
@@ -23,7 +23,7 @@ export function CreateListButton({
   const client = hooks.useClient();
   const navigate = useNavigate();
 
-  const canSync = useCanSync();
+  const canSync = useHasServerAccess();
 
   const [open, setOpen] = useState(false);
 

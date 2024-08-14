@@ -29,6 +29,7 @@ import {
   PlaceLocationDetails,
 } from '../services/maps.js';
 import { ExtractorData as WishWashStorePageScan } from '@wish-wash.biscuits/scanning';
+import { AppId } from '@biscuits/apps';
 
 export const builder = new SchemaBuilder<{
   Context: GQLContext;
@@ -99,6 +100,7 @@ export const builder = new SchemaBuilder<{
     planAdmin: boolean;
     productAdmin: boolean;
     member: boolean;
+    app: AppId;
   };
   Scalars: {
     DateTime: {
@@ -142,6 +144,7 @@ export const builder = new SchemaBuilder<{
       key: string;
       value: any;
     };
+    UpdateUserInfoInput: { name: string };
 
     // Gnocchi
     AssignFoodCategoryInput: {
@@ -184,13 +187,19 @@ export const builder = new SchemaBuilder<{
       nullable: false,
     },
   },
-  authScopes: async (context) => ({
-    public: true,
-    user: !!context.session,
-    member: !!context.session?.planId,
-    planAdmin: context.session?.role === 'admin',
-    productAdmin: !!context.session?.isProductAdmin,
-  }),
+  authScopes: async (context) => {
+    const member = !!context.session?.planId;
+    return {
+      public: true,
+      user: !!context.session,
+      member,
+      planAdmin: context.session?.role === 'admin',
+      productAdmin: !!context.session?.isProductAdmin,
+      app: (appId) =>
+        member &&
+        (!context.session?.allowedApp || context.session.allowedApp === appId),
+    };
+  },
   scopeAuthOptions: {
     unauthorizedError: (_, ctx, info, result) => {
       return new BiscuitsError(BiscuitsError.Code.Forbidden);

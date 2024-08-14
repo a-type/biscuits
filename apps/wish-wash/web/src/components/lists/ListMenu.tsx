@@ -1,7 +1,7 @@
 import { hooks } from '@/hooks.js';
 import { ButtonProps, Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
-import { useCanSync } from '@biscuits/client';
+import { useHasServerAccess } from '@biscuits/client';
 import { useNavigate } from '@verdant-web/react-router';
 import {
   DropdownMenu,
@@ -29,7 +29,7 @@ export function ListMenu(props: ListMenuProps) {
     navigate(`/${list.get('id')}?listId=${list.get('id')}`);
   };
 
-  const canSync = useCanSync();
+  const canSync = useHasServerAccess();
 
   return (
     <DropdownMenu>

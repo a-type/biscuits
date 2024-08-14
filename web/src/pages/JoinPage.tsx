@@ -1,5 +1,4 @@
 import { Footer } from '@/components/help/Footer.jsx';
-import { Price } from '@/components/subscription/Price.jsx';
 import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
 import {
@@ -10,25 +9,16 @@ import {
 } from '@a-type/ui/components/layouts';
 import { Divider } from '@a-type/ui/components/divider';
 import { PaidFeature, apps, getAppUrl } from '@biscuits/apps';
-import { graphql, useQuery } from '@biscuits/client';
-import { Link } from '@verdant-web/react-router';
+import { Link, useSearchParams } from '@verdant-web/react-router';
 import classNames from 'classnames';
+import { StartingPrice } from '@biscuits/client';
 
 export interface JoinPageProps {}
 
-const startingPriceQuery = graphql(`
-  query StartingPrice {
-    productInfo(lookupKey: "for_one") {
-      price
-      currency
-    }
-  }
-`);
-
 export function JoinPage({}: JoinPageProps) {
-  const appReferrer = new URLSearchParams(window.location.search).get(
-    'appReferrer',
-  );
+  const [search] = useSearchParams();
+  const appReferrer = search.get('appReferrer');
+  const backTo = search.get('backTo');
 
   const sortedApps = appReferrer
     ? [...apps].sort((a, b) =>
@@ -50,13 +40,13 @@ export function JoinPage({}: JoinPageProps) {
           </p>
           <PageFixedArea className="flex flex-row gap-3 py-4 justify-between bg-transparent">
             <Button asChild color="default">
-              <Link to="/">
+              <Link to={backTo || '/'}>
                 <Icon name="arrowLeft" />
-                Back to apps
+                {backTo ? 'Go back' : 'Back to apps'}
               </Link>
             </Button>
             <Button asChild color="primary">
-              <Link to="/login?returnTo=/plan">Get started</Link>
+              <Link to="/login?returnTo=/plan&tab=signup">Get started</Link>
             </Button>
           </PageFixedArea>
           {sortedApps
@@ -86,17 +76,6 @@ export function JoinPage({}: JoinPageProps) {
     </PageRoot>
   );
 }
-
-const StartingPrice = () => {
-  const { data } = useQuery(startingPriceQuery);
-  return (
-    <Price
-      value={data?.productInfo.price}
-      currency={data?.productInfo.currency}
-      className="font-bold"
-    />
-  );
-};
 
 function AppFeature({ feature }: { feature: PaidFeature }) {
   return (

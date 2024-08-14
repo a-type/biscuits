@@ -1,5 +1,5 @@
 import { BiscuitsVerdantProfile, LibraryAccess } from '@biscuits/libraries';
-import { CONFIG, VerdantProfile } from './index.js';
+import * as CONFIG from './config.js';
 import { AppId } from '@biscuits/apps';
 import { createContext } from 'react';
 import { ClientDescriptor } from '@verdant-web/store';
@@ -29,5 +29,5 @@ export function getVerdantSync<Presence>({
 
 export const VerdantContext = createContext<ClientDescriptor<
   any,
-  VerdantProfile
+  BiscuitsVerdantProfile
 > | null>(null);

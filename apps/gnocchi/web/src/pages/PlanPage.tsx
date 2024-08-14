@@ -19,7 +19,7 @@ import {
   ChangelogDisplay,
   PromoteSubscriptionButton,
   useIsLoggedIn,
-  useCanSync,
+  useHasServerAccess,
   useIsOffline,
   useMe,
   DarkModeToggle,
@@ -41,7 +41,7 @@ const contents = {
 export function PlanPage() {
   const offline = useIsOffline();
   const isLoggedIn = useIsLoggedIn();
-  const canSync = useCanSync();
+  const canSync = useHasServerAccess();
 
   let state: keyof typeof contents = 'online';
   if (offline) {

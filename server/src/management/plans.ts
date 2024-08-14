@@ -6,6 +6,7 @@ import { UI_ORIGIN } from '../config/deployedContext.js';
 import { assert } from '@a-type/utils';
 import { GQLContext } from '../graphql/context.js';
 import { isSubscribed } from '../auth/subscription.js';
+import { getProductMetadata } from './products.js';
 
 export async function removeUserFromPlan(
   planId: string,
@@ -201,7 +202,7 @@ export async function setupNewPlan({
   };
   priceLookupKey: string;
   ctx: GQLContext;
-}) {
+}): Promise<PlanVitalInfo> {
   let stripeCustomerId = userDetails.stripeCustomerId;
   if (!stripeCustomerId) {
     // create Stripe customer to assign to user
@@ -221,6 +222,8 @@ export async function setupNewPlan({
   const productId = stripeSubscription.items.data[0].price.product as string;
   assert(!!productId, 'Stripe subscription product ID is missing');
 
+  const metadata = await getProductMetadata(productId);
+
   const plan = await ctx.db.transaction().execute(async (tx) => {
     const plan = await tx
       .insertInto('Plan')
@@ -233,8 +236,10 @@ export async function setupNewPlan({
         stripeProductId: productId,
         // go ahead and pre-seed this so we don't have to wait for the webhook
         subscriptionStatus: 'incomplete',
+        memberLimit: metadata.memberLimit,
+        allowedApp: metadata.app,
       })
-      .returning('id')
+      .returning(['id', 'allowedApp'])
       .executeTakeFirstOrThrow();
 
     await tx
@@ -253,6 +258,11 @@ export async function setupNewPlan({
   return plan;
 }
 
+export interface PlanVitalInfo {
+  id: string;
+  allowedApp: string | null;
+}
+
 export async function updatePlanSubscription({
   userDetails,
   priceLookupKey,
@@ -267,10 +277,10 @@ export async function updatePlanSubscription({
   };
   priceLookupKey: string;
   ctx: GQLContext;
-}) {
+}): Promise<PlanVitalInfo> {
   const plan = await ctx.db
     .selectFrom('Plan')
-    .select(['id', 'stripeSubscriptionId'])
+    .select(['id', 'stripeSubscriptionId', 'allowedApp'])
     .where('id', '=', userDetails.planId)
     .executeTakeFirst();
 
@@ -316,6 +326,11 @@ export async function updatePlanSubscription({
     return plan;
   }
 
+  assert(!!item.price.product, 'Subscription item product ID is missing');
+  assert(typeof item.price.product === 'string', 'Product ID is not a string');
+
+  const productMetadata = await getProductMetadata(item.price.product);
+
   const updatedSubscription = await stripe.subscriptions.update(
     plan.stripeSubscriptionId,
     {
@@ -333,6 +348,8 @@ export async function updatePlanSubscription({
     .set({
       stripePriceId: price.id,
       subscriptionStatus: updatedSubscription.status,
+      memberLimit: productMetadata.memberLimit,
+      allowedApp: productMetadata.app,
     })
     .where('id', '=', plan.id)
     .returningAll()

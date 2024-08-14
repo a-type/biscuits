@@ -7,7 +7,7 @@ builder.queryFields((t) => ({
   publishedRecipe: t.field({
     type: 'PublishedRecipe',
     authScopes: {
-      member: true,
+      app: 'gnocchi',
     },
     nullable: true,
     args: {
@@ -42,7 +42,7 @@ builder.mutationFields((t) => ({
   publishRecipe: t.field({
     type: 'PublishedRecipe',
     authScopes: {
-      member: true,
+      app: 'gnocchi',
     },
     args: {
       input: t.arg({

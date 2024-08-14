@@ -100,6 +100,7 @@ export interface PlanTable {
     Record<string, boolean>
   >;
   memberLimit: Generated<number>;
+  allowedApp: string | null;
 }
 
 export type Plan = Selectable<PlanTable>;

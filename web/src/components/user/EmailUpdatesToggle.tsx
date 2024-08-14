@@ -33,7 +33,7 @@ export function EmailUpdatesToggle({ isSubscribed }: EmailUpdatesToggleProps) {
         checked={data.me.sendEmailUpdates}
         onCheckedChange={(v) => setValue({ variables: { enabled: !!v } })}
       />
-      <div className="flex flex-col gap-2 items-stretch flex-1">
+      <div className="flex flex-col gap-2 items-stretch flex-1 mt-1">
         <div>
           Send me an email when a new Biscuits app launches or significant
           features are added

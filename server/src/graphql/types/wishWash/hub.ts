@@ -8,7 +8,7 @@ builder.queryFields((t) => ({
   publishedWishlist: t.field({
     type: 'PublishedWishlist',
     authScopes: {
-      member: true,
+      app: 'wish-wash',
     },
     nullable: true,
     args: {

@@ -4,7 +4,7 @@ import { Recipe } from '@gnocchi.biscuits/verdant';
 import { Button } from '@a-type/ui/components/button';
 import { LiveUpdateTextField } from '@a-type/ui/components/liveUpdateTextField';
 import { useState } from 'react';
-import { useCanSync } from '@biscuits/client';
+import { useHasServerAccess } from '@biscuits/client';
 
 export interface RecipeUrlFieldProps {
   recipe: Recipe;
@@ -13,7 +13,7 @@ export interface RecipeUrlFieldProps {
 export function RecipeUrlField({ recipe }: RecipeUrlFieldProps) {
   const { url } = hooks.useWatch(recipe);
   const [scanning, setScanning] = useState(false);
-  const isSubscribed = useCanSync();
+  const isSubscribed = useHasServerAccess();
   const updateRecipeFromUrl = hooks.useUpdateRecipeFromUrl();
 
   const scan = async () => {

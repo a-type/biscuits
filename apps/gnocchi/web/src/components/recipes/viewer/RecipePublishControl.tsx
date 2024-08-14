@@ -14,7 +14,7 @@ import { Tooltip } from '@a-type/ui/components/tooltip';
 import { P } from '@a-type/ui/components/typography';
 import {
   graphql,
-  useCanSync,
+  useHasServerAccess,
   useFeatureFlag,
   useMutation,
   useQuery,
@@ -65,7 +65,7 @@ export function RecipePublishControl({ recipe }: RecipePublishControlProps) {
   const { url } = hooks.useWatch(recipe);
   const notAllowed = !!url;
 
-  const canPublish = useCanSync();
+  const canPublish = useHasServerAccess();
 
   if (!canPublish || !enabled) return null;
 

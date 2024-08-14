@@ -1,16 +1,18 @@
-import { graphql } from '@/graphql.js';
+import { graphql } from '../../graphql.js';
 import { Spinner } from '@a-type/ui/components/spinner';
-import { useQuery } from '@biscuits/client';
+import { useQuery } from '@apollo/client';
 import {
   ManageSubscription,
   manageSubscriptionInfo,
 } from './ManageSubscription.js';
 import { checkoutData, SubscriptionCheckout } from './SubscriptionCheckout.js';
-import { SubscriptionSelect } from './SubscriptionSelect.js';
+import { PriceKey, SubscriptionSelect } from './SubscriptionSelect.js';
 import { useSearchParams } from '@verdant-web/react-router';
 import { useEffect } from 'react';
 
-export interface SubscriptionSetupProps {}
+export interface SubscriptionSetupProps {
+  priceKeys?: PriceKey[];
+}
 
 const PlanSubscriptionInfo = graphql(
   `
@@ -37,7 +39,7 @@ const TERMINAL_STATUSES = [
   'past_due',
 ];
 
-export function SubscriptionSetup({}: SubscriptionSetupProps) {
+export function SubscriptionSetup({ priceKeys }: SubscriptionSetupProps) {
   const [params, setParams] = useSearchParams();
   const didJustCheckout = params.get('paymentComplete');
 
@@ -104,5 +106,5 @@ export function SubscriptionSetup({}: SubscriptionSetupProps) {
   }
 
   // subscription inactive - show plan selection
-  return <SubscriptionSelect />;
+  return <SubscriptionSelect priceKeys={priceKeys} />;
 }

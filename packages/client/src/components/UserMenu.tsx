@@ -8,21 +8,21 @@ import {
   DropdownMenuItemRightSlot,
   DropdownMenuTrigger,
 } from '@a-type/ui/components/dropdownMenu';
-import {
-  CONFIG,
-  LoginButton,
-  LogoutButton,
-  PresencePeople,
-  getIsPWAInstalled,
-  graphql,
-  useAppId,
-  useIsLoggedIn,
-  useIsOffline,
-  useSuspenseQuery,
-} from '../index.js';
 import { Icon } from '@a-type/ui/components/icon';
 import { ReactNode, Suspense } from 'react';
 import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
+import { LogoutButton } from './LogoutButton.js';
+import { PresencePeople } from './PresencePeople.js';
+import { graphql, useSuspenseQuery } from '../graphql.js';
+import {
+  useHasServerAccess,
+  useIsLoggedIn,
+  useIsOffline,
+} from '../hooks/graphql.js';
+import { useAppId } from './Context.js';
+import { getIsPWAInstalled } from '../platform.js';
+import { LoginButton } from './LoginButton.js';
+import * as CONFIG from '../config.js';
 
 export interface UserMenuProps {
   className?: string;
@@ -40,6 +40,7 @@ export function UserMenu({
   const [isLoggedIn, loading] = useIsLoggedIn();
   const isOffline = useIsOffline();
   const appId = useAppId();
+  const hasServerAccess = useHasServerAccess();
 
   const openPwaHackCatalog = () => {
     // since we can't just open a new tab, use a share
@@ -59,6 +60,7 @@ export function UserMenu({
           </Button>
         ) : isLoggedIn ? (
           <Button size="small" color="ghost" className={className}>
+            {!hasServerAccess && <Icon name="refreshDisabled" />}
             <ErrorBoundary fallback={<Avatar />}>
               <Suspense fallback={<Avatar />}>
                 <PresencePeople />
@@ -80,6 +82,11 @@ export function UserMenu({
         {isOffline && (
           <div className="pl-8 pr-4 py-1 text-gray-7 text-sm max-w-300px bg-attention-wash color-attention-dark">
             Offline - some features may be unavailable
+          </div>
+        )}
+        {isLoggedIn && !hasServerAccess && (
+          <div className="pl-8 pr-4 py-1 text-gray-7 text-sm max-w-300px color-gray-7">
+            Your plan does not include this app
           </div>
         )}
 

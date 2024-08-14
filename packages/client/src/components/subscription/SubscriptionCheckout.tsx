@@ -1,5 +1,5 @@
-import { FragmentOf, graphql, readFragment } from '@/graphql.js';
-import { stripe } from '@/stripe.js';
+import { FragmentOf, graphql, readFragment } from '../../graphql.js';
+import { stripe } from '../../stripe.js';
 import { Button } from '@a-type/ui/components/button';
 import { H2 } from '@a-type/ui/components/typography';
 import {
@@ -78,7 +78,12 @@ function PaymentForm() {
       <H2>Complete your subscription</H2>
       <PaymentElement />
       {error && <p className="text-red">{error}</p>}
-      <Button disabled={!stripe} type="submit" className="self-end">
+      <Button
+        color="primary"
+        disabled={!stripe}
+        type="submit"
+        className="self-end"
+      >
         Subscribe
       </Button>
     </form>

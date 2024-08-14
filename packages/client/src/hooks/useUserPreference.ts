@@ -1,5 +1,6 @@
 import { useCallback, useEffect } from 'react';
-import { graphql, useIsLoggedIn, useMutation, useQuery } from '../graphql.js';
+import { graphql, useMutation, useQuery } from '../graphql.js';
+import { useIsLoggedIn } from './graphql.js';
 import { useLocalStorage } from './useStorage.js';
 
 const userPreference = graphql(`

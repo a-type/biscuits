@@ -1,7 +1,7 @@
-import { graphql } from '@/graphql.js';
+import { graphql } from '../../graphql.js';
 import { ConfirmedButton } from '@a-type/ui/components/button';
 import { useNavigate } from '@verdant-web/react-router';
-import { useMutation } from '@biscuits/client';
+import { useMutation } from '@apollo/client';
 
 const cancelPlan = graphql(`
   mutation CancelPlan {
@@ -33,7 +33,7 @@ export function CancelPlanButton({}: CancelPlanButtonProps) {
           navigate('/');
         }}
       >
-        Cancel My Plan
+        Cancel your plan
       </ConfirmedButton>
       <span className="text-xs">
         Keep your data, but lose access to member-only features, including

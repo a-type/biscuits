@@ -11,7 +11,7 @@ import {
   getIsPWAInstalled,
   getOS,
   useAppInfo,
-  useCanSync,
+  useHasServerAccess,
 } from '@biscuits/client';
 import { Link } from '@verdant-web/react-router';
 import { Icon } from '@a-type/ui/components/icon';
@@ -22,7 +22,7 @@ import { ExportDataButton } from '@biscuits/client/storage';
 export interface AppMovedProps {}
 
 export function AppMoved({}: AppMovedProps) {
-  const canSync = useCanSync();
+  const canSync = useHasServerAccess();
   const app = useAppInfo();
 
   if (

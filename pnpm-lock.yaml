@@ -1191,6 +1191,9 @@ importers:
       vite:
         specifier: 5.3.1
         version: 5.3.1(@types/node@20.12.7)
+      vite-plugin-circular-dependency:
+        specifier: ^0.2.1
+        version: 0.2.1(rollup@2.79.1)
       vite-plugin-pwa:
         specifier: ^0.19.8
         version: 0.19.8(vite@5.3.1)(workbox-build@7.1.1)(workbox-window@6.6.1)
@@ -1308,6 +1311,12 @@ importers:
       '@react-spring/web':
         specifier: ^9
         version: 9.7.3(react-dom@18.3.1)(react@18.3.1)
+      '@stripe/react-stripe-js':
+        specifier: 2.7.3
+        version: 2.7.3(@stripe/stripe-js@4.2.0)(react-dom@18.3.1)(react@18.3.1)
+      '@stripe/stripe-js':
+        specifier: 4.2.0
+        version: 4.2.0
       gql.tada:
         specifier: 1.8.2
         version: 1.8.2(graphql@16.9.0)(svelte@4.2.18)(typescript@5.5.3)
@@ -1390,8 +1399,8 @@ importers:
   server:
     dependencies:
       '@a-type/auth':
-        specifier: 0.6.6
-        version: 0.6.6
+        specifier: 0.6.9
+        version: 0.6.9
       '@a-type/utils':
         specifier: 1.1.3
         version: 1.1.3
@@ -1437,9 +1446,6 @@ importers:
       '@pothos/plugin-scope-auth':
         specifier: ^3.21.1
         version: 3.21.1(@pothos/core@3.41.0)(graphql@16.8.1)
-      '@trpc/server':
-        specifier: ^10.44.1
-        version: 10.44.1
       '@verdant-web/common':
         specifier: 2.5.2
         version: 2.5.2
@@ -1550,8 +1556,8 @@ importers:
   web:
     dependencies:
       '@a-type/auth-client':
-        specifier: 1.0.6
-        version: 1.0.6(@a-type/ui@1.1.6)(react@18.3.1)
+        specifier: 1.0.9
+        version: 1.0.9(@a-type/ui@1.1.6)(react@18.3.1)
       '@a-type/ui':
         specifier: ^1.1.6
         version: 1.1.6(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
@@ -1727,8 +1733,18 @@ packages:
       react: 18.3.1
     dev: false
 
-  /@a-type/auth@0.6.6:
-    resolution: {integrity: sha512-HpWfgksPpcEqgrUwVrL3iwJMzrc5i7bMrgvUqZclQxPP31fYhq4AoxFnVMzp24IMUyrXoNwGS7W2GqVkYoIPSA==}
+  /@a-type/auth-client@1.0.9(@a-type/ui@1.1.6)(react@18.3.1):
+    resolution: {integrity: sha512-NkdpdhVu7c6YQyvoEKaF5jYjItkhPdTNMPuY2TtogvwL+XcPfBpOW3zLpD3xSyzjhbVRYuuRjuGjnWjWOnxz5g==}
+    peerDependencies:
+      '@a-type/ui': ^0.8.0
+      react: ^18
+    dependencies:
+      '@a-type/ui': 1.1.6(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+      react: 18.3.1
+    dev: false
+
+  /@a-type/auth@0.6.9:
+    resolution: {integrity: sha512-NVCeNXA5OBHq1yDidhrZVduPrYi8kBHeT9xj+qm3pfmmcy+Cbnjm0yXb/dYYo5lSv4A3gIB9o8xDpJxmV2J7kA==}
     dependencies:
       cookie: 0.6.0
       discord-oauth2: 2.12.1
@@ -12909,8 +12925,26 @@ packages:
       react-dom: 18.3.1(react@18.3.1)
     dev: false
 
+  /@stripe/react-stripe-js@2.7.3(@stripe/stripe-js@4.2.0)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-05t6oY7cmAJt7asknmeoI4z4GnutgKRZ7dcdTWCkeYclONzIRMuMTiyjBMQ/q3I2sdNizSl25YZ8G6Lg4nN1aw==}
+    peerDependencies:
+      '@stripe/stripe-js': ^1.44.1 || ^2.0.0 || ^3.0.0 || ^4.0.0
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      '@stripe/stripe-js': 4.2.0
+      prop-types: 15.8.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: false
+
   /@stripe/stripe-js@3.0.5:
     resolution: {integrity: sha512-0BTd2bC+8gSKty7jXKRntLnvmWgFTmpZkY0oP7ADBYfdV0JtuGoDbfQawui0W5eUlwT3CcKh2IeRV4SPOBIeXQ==}
+    engines: {node: '>=12.16'}
+    dev: false
+
+  /@stripe/stripe-js@4.2.0:
+    resolution: {integrity: sha512-MdTpmXqtm+B9rIAmaSlCkF6qv3793UrghA95SFI4Ge7KGYWZAMYyxbX/z9FXs6XnU5gUbKtGtlVgZQp1T88UfQ==}
     engines: {node: '>=12.16'}
     dev: false
 
@@ -13826,11 +13860,6 @@ packages:
       '@tiptap/extension-text': 2.4.0(@tiptap/core@2.4.0)
     transitivePeerDependencies:
       - '@tiptap/pm'
-
-  /@trpc/server@10.44.1:
-    resolution: {integrity: sha512-mF7B+K6LjuboX8I1RZgKE5GA/fJhsJ8tKGK2UBt3Bwik7hepEPb4NJgNr7vO6BK5IYwPdBLRLTctRw6XZx0sRg==}
-    engines: {node: '>=18.0.0'}
-    dev: false
 
   /@tsconfig/node10@1.0.11:
     resolution: {integrity: sha512-DcRjDCujK/kCk/cUe8Xz8ZSpm8mS3mNNpta+jGCA6USEDfktlNvm1+IuZ9eTcDbNk41BHwpHHeW+N1lKCz4zOw==}

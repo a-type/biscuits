@@ -190,9 +190,7 @@ builder.mutationFields((t) => ({
       foodId: t.arg.id({ required: true }),
       name: t.arg.string({ required: true }),
     },
-    authScopes: {
-      productAdmin: true,
-    },
+    authScopes: {},
     resolve: async (_, { foodId, name }, ctx) => {
       await ctx.db.insertInto('FoodName').values({ foodId, name }).execute();
 

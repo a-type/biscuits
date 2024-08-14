@@ -11,7 +11,7 @@ import {
 import { Button } from '@a-type/ui/components/button';
 import { ReactNode } from 'react';
 import { Icon } from '@a-type/ui/components/icon';
-import { graphql, useQuery } from '../index.js';
+import { graphql, useQuery } from '../graphql.js';
 
 const subscriptionPromotionState = proxy({
   status: 'closed' as 'closed' | 'open',

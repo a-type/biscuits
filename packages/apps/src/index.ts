@@ -9,7 +9,7 @@ export type AppManifest<Id extends string> = {
   devOriginOverride: string;
   demoVideoSrc: string;
   paidDescription: string;
-  paidFeatures: PaidFeature[];
+  paidFeatures: PaidFeature[] | readonly PaidFeature[];
   prerelease?: boolean;
 };
 

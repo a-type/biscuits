@@ -1,12 +1,12 @@
 import { ConfirmedButton } from '@a-type/ui/components/button';
-import { useCanSync } from '../index.js';
+import { useHasServerAccess } from '../hooks/graphql.js';
 
 export function ResetToServer({
   clientDescriptor,
 }: {
   clientDescriptor: { __dangerous__resetLocal: () => void };
 }) {
-  const canSync = useCanSync();
+  const canSync = useHasServerAccess();
 
   if (!canSync) return null;
 

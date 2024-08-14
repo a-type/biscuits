@@ -1,5 +1,6 @@
 import { Button, ButtonProps } from '@a-type/ui/components/button';
-import { CONFIG, useAppId, useMaybeAppId } from '../index.js';
+import * as CONFIG from '../config.js';
+import { useMaybeAppId } from './Context.js';
 import { Icon } from '@a-type/ui/components/icon';
 
 export interface LoginButtonProps extends ButtonProps {

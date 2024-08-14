@@ -1,4 +1,4 @@
-import { useCanSync } from '../graphql.js';
+import { useHasServerAccess } from '../hooks/graphql.js';
 import { useLocalStorage } from '../hooks/useStorage.js';
 import { PromoteSubscriptionButton } from './PromoteSubscriptionButton.js';
 import { P } from '@a-type/ui/components/typography';
@@ -9,7 +9,7 @@ import { apps } from '@biscuits/apps';
 export function InfrequentSubscriptionHint() {
   const appId = useAppId();
   const appName = apps.find((app) => app.id === appId)?.name ?? 'this app';
-  const isSubscribed = useCanSync();
+  const isSubscribed = useHasServerAccess();
 
   const [startCountingAt] = useLocalStorage(
     'first-time-seen',

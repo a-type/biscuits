@@ -4,6 +4,7 @@ import { assignTypeName, hasTypeName } from '../relay.js';
 import { User } from './user.js';
 import { BiscuitsError } from '../../error.js';
 import {
+  PlanVitalInfo,
   canPlanAcceptAMember,
   cancelPlan,
   removeUserFromPlan,
@@ -17,6 +18,7 @@ import { Plan as DBPlan } from '@biscuits/db';
 import { cacheSubscriptionInfoOnPlan } from '../../management/subscription.js';
 import { email } from '../../services/email.js';
 import { isSubscribed } from '../../auth/subscription.js';
+import { Session } from '@a-type/auth';
 
 builder.queryFields((t) => ({
   plan: t.field({
@@ -103,17 +105,18 @@ builder.mutationFields((t) => ({
       }
 
       let planId;
+      let plan: PlanVitalInfo | undefined;
       if (userDetails?.planId) {
         // if existing plan has a subscription, change it
         // to use the new product. if not, just update the plan
-        const plan = await updatePlanSubscription({
+        plan = await updatePlanSubscription({
           userDetails,
           priceLookupKey: input.priceLookupKey,
           ctx,
         });
         planId = plan.id;
       } else {
-        const plan = await setupNewPlan({
+        plan = await setupNewPlan({
           userDetails,
           priceLookupKey: input.priceLookupKey,
           ctx,
@@ -123,10 +126,11 @@ builder.mutationFields((t) => ({
 
       assert(!!planId, 'Plan ID not set during setupPlan');
 
-      const newSession = {
+      const newSession: Session = {
         ...ctx.session,
         role: 'admin' as const,
         planId,
+        allowedApp: plan.allowedApp || undefined,
       };
       await ctx.auth.setLoginSession(newSession);
 
@@ -340,10 +344,19 @@ Plan.implement({
         return subscription.status;
       },
     }),
-    canSync: t.field({
+    hasAppAccess: t.field({
       type: 'Boolean',
-      resolve: async (plan, _, ctx) => {
-        return isSubscribed(plan.subscriptionStatus);
+      args: {
+        appId: t.arg({
+          type: 'String',
+          required: true,
+        }),
+      },
+      resolve: async (plan, { appId }, ctx) => {
+        return (
+          isSubscribed(plan.subscriptionStatus) &&
+          (!plan.allowedApp || plan.allowedApp === appId)
+        );
       },
     }),
     isSubscribed: t.field({

@@ -5,7 +5,7 @@ import {
 } from '../push.js';
 import { Switch } from '@a-type/ui/components/switch';
 import { useState } from 'react';
-import { useCanSync } from '../graphql.js';
+import { useHasServerAccess } from '../hooks/graphql.js';
 import { useIsServiceWorkerRegistered } from '../hooks/useIsServiceWorkerRegistered.js';
 
 export interface PushSubscriptionToggleProps {
@@ -38,7 +38,7 @@ export function PushSubscriptionToggle({
     }
   };
   const toggle = subscribed ? unsubscribe : subscribe;
-  const canSync = useCanSync();
+  const canSync = useHasServerAccess();
   const canSubscribe = useIsServiceWorkerRegistered();
   if (!canSubscribe || !canSync) {
     return null;

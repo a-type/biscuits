@@ -6,12 +6,12 @@ import { Cross2Icon } from '@radix-ui/react-icons';
 import { Suspense, useState } from 'react';
 import { PersonAvatar } from '../people/PersonAvatar.jsx';
 import { Link } from '@/components/nav/Link.jsx';
-import { useCanSync } from '@biscuits/client';
+import { useHasServerAccess } from '@biscuits/client';
 
 export interface RecipePresenceNotificationProps {}
 
 export function RecipePresenceNotification({}: RecipePresenceNotificationProps) {
-  const isSubscribed = useCanSync();
+  const isSubscribed = useHasServerAccess();
 
   if (isSubscribed) {
     return (

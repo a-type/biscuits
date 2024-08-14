@@ -48,7 +48,7 @@ export function MembersAndInvitations() {
         {plan?.members.map((member) => {
           const isMe = member.id === data?.me?.id;
           return (
-            <CardRoot key={member.id} className="h-full">
+            <CardRoot key={member.id}>
               <CardMain className="justify-start">
                 <CardTitle className="flex-row mt-0">
                   <Avatar imageSrc={member.imageUrl ?? undefined} />

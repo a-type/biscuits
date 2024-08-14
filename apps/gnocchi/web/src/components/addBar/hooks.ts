@@ -1,6 +1,9 @@
 import { useListId } from '@/contexts/ListContext.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { showSubscriptionPromotion, useCanSync } from '@biscuits/client';
+import {
+  showSubscriptionPromotion,
+  useHasServerAccess,
+} from '@biscuits/client';
 import { depluralize } from '@gnocchi.biscuits/conversion';
 import { Food, Recipe } from '@gnocchi.biscuits/verdant';
 import {
@@ -411,7 +414,7 @@ export function useAddBarCombobox({
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
 }) {
-  const isSubscribed = useCanSync();
+  const isSubscribed = useHasServerAccess();
 
   const [addingRecipe, setAddingRecipe] = useState<Recipe | null>(null);
   const clearAddingRecipe = useCallback(() => {

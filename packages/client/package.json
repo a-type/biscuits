@@ -46,6 +46,8 @@
     "@biscuits/apps": "workspace:*",
     "@biscuits/error": "workspace:*",
     "@biscuits/libraries": "workspace:*",
+    "@stripe/stripe-js": "4.2.0",
+    "@stripe/react-stripe-js": "2.7.3",
     "gql.tada": "1.8.2",
     "graphql": "16.9.0"
   },

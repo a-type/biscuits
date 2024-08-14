@@ -1,19 +1,20 @@
 import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
 import {
+  NavBarItem,
+  NavBarItemIconWrapper,
+  NavBarItemText,
+} from '@a-type/ui/components/navBar';
+import {
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from '@a-type/ui/components/popover';
-import { CONFIG, getIsPWAInstalled, useAppId } from '../index.js';
-import { ReactNode, useEffect } from 'react';
 import { apps } from '@biscuits/apps';
-import {
-  NavBarItem,
-  NavBarItemIcon,
-  NavBarItemIconWrapper,
-  NavBarItemText,
-} from '@a-type/ui/components/navBar';
+import { ReactNode, useEffect } from 'react';
+import * as CONFIG from '../config.js';
+import { getIsPWAInstalled } from '../platform.js';
+import { useAppId } from './Context.js';
 
 export interface AppPickerProps {
   className?: string;

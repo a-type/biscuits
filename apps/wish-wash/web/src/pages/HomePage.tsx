@@ -8,7 +8,7 @@ import {
   PageRoot,
 } from '@a-type/ui/components/layouts';
 import { H1 } from '@a-type/ui/components/typography';
-import { useCanSync, UserMenu, UserMenuItem } from '@biscuits/client';
+import { useHasServerAccess, UserMenu, UserMenuItem } from '@biscuits/client';
 import { useNavigate } from '@verdant-web/react-router';
 import { authorization } from '@wish-wash.biscuits/verdant';
 import { Suspense } from 'react';
@@ -51,7 +51,7 @@ export function ListMenuExtraItems() {
     navigate(`/${list.get('id')}?listId=${list.get('id')}`);
   };
 
-  const canSync = useCanSync();
+  const canSync = useHasServerAccess();
 
   return (
     <>

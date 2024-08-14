@@ -4,7 +4,10 @@ import useMergedRef from '@/hooks/useMergedRef.js';
 import { Input } from '@a-type/ui/components/input';
 import { useSize } from '@a-type/ui/hooks';
 import { isUrl, stopPropagation } from '@a-type/utils';
-import { showSubscriptionPromotion, useCanSync } from '@biscuits/client';
+import {
+  showSubscriptionPromotion,
+  useHasServerAccess,
+} from '@biscuits/client';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import classNames from 'classnames';
 import {

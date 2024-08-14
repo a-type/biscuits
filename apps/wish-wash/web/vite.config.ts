@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import { VitePWA } from 'vite-plugin-pwa';
 import UnoCSS from 'unocss/vite';
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
+import CircularDependency from 'vite-plugin-circular-dependency';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => ({
@@ -47,6 +48,9 @@ export default defineConfig(({ command, mode }) => ({
         type: 'module',
         navigateFallback: 'index.html',
       },
+    }),
+    CircularDependency({
+      circleImportThrowErr: true,
     }),
     viteCommonjs(),
   ],
