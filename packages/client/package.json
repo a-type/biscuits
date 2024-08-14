@@ -46,8 +46,8 @@
     "@biscuits/apps": "workspace:*",
     "@biscuits/error": "workspace:*",
     "@biscuits/libraries": "workspace:*",
-    "@stripe/stripe-js": "4.2.0",
     "@stripe/react-stripe-js": "2.7.3",
+    "@stripe/stripe-js": "4.2.0",
     "gql.tada": "1.8.2",
     "graphql": "16.9.0"
   },
@@ -61,7 +61,7 @@
     "vite-plugin-pwa": "0.19.2"
   },
   "devDependencies": {
-    "@a-type/ui": "^1.1.6",
+    "@a-type/ui": "^1.1.7",
     "@types/react": "18.3.3",
     "@unocss/transformer-variant-group": "^0.58.0",
     "@verdant-web/react-router": "0.6.4",
