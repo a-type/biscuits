@@ -73,7 +73,7 @@ export function AppPicker({ className, children }: AppPickerProps) {
       >
         <iframe
           className="p-0 border-none shadow-none focus:outline-none"
-          src={`${CONFIG.HOME_ORIGIN}/appPicker/?hostApp=${hostApp}`}
+          src={`${CONFIG.HOME_ORIGIN}/appPicker/index.html?hostApp=${hostApp}`}
           title="App Picker"
           style={{
             width: 40 * 2 + 16 + 32,
