@@ -24,13 +24,13 @@ export function PhoneDemo({
   return (
     <div
       className={classNames(
-        'phone-wrapper max-h-100vw overflow-hidden px-2 py-8 flex items-center justify-center',
+        'phone-wrapper overflow-hidden px-2 py-8 flex items-center justify-center',
         className,
       )}
     >
       <div
         className={classNames(
-          'phone rounded-lg aspect-ratio-11/24 max-h-90vw bg-[black] min-h-0',
+          'phone rounded-lg aspect-ratio-11/24 bg-[black] min-h-0',
           direction,
         )}
         style={{

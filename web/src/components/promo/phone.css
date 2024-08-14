@@ -78,8 +78,8 @@
 
 .phone {
   position: relative;
-
   border: 2px solid #323232;
+  max-height: 45vh;
 }
 
 .phone.left {

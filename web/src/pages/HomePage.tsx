@@ -8,7 +8,6 @@ import {
 } from '@a-type/ui/components/layouts';
 import { P } from '@a-type/ui/components/typography';
 import { apps } from '@biscuits/apps';
-import { Essentials } from '@biscuits/client';
 import { Link } from '@verdant-web/react-router';
 import classNames from 'classnames';
 import { Suspense, lazy } from 'react';
@@ -48,13 +47,6 @@ export default function HomePage() {
           >
             Scratch-made apps
           </h2>
-          <P
-            className={classNames(
-              'm-0 mb-6 text-inherit text-lg sm:text-xl font-fancy',
-            )}
-          >
-            in Raleigh, NC
-          </P>
           <P className="text-black text-lg leading-loose font-normal mb-4">
             Biscuits apps are designed to make your life easier. Free to use
             forever, no ads, no tracking. <Link to="/about">Learn how</Link>.
@@ -65,7 +57,6 @@ export default function HomePage() {
             to get started.
           </P>
         </div>
-        {/* <AppsGrid /> */}
         {apps.map((app, index) =>
           !app.prerelease || import.meta.env.DEV ? (
             <AppDemo appId={app.id} key={app.id} index={index} />

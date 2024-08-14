@@ -23,6 +23,7 @@ export function Footer({ className }: FooterProps) {
       </div>
       <div className="flex flex-col gap-3 items-end">
         <Link to="/contact">Contact</Link>
+        <span>Made in Raleigh, NC</span>
       </div>
     </div>
   );

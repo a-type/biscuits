@@ -1,5 +1,6 @@
 import { Router } from 'itty-router';
 import { Plugin, createYoga, maskError } from 'graphql-yoga';
+import { useCSRFPrevention } from '@graphql-yoga/plugin-csrf-prevention';
 import { db } from '@biscuits/db';
 import { schema } from '../graphql/schema.js';
 import { GQLContext } from '../graphql/context.js';
@@ -52,7 +53,12 @@ const yoga = createYoga<GQLContext>({
       return maskError(error, message, isDev);
     },
   },
-  plugins: [applyHeaders()],
+  plugins: [
+    applyHeaders(),
+    useCSRFPrevention({
+      requestHeaders: ['x-csrf-token'],
+    }),
+  ],
   fetchAPI: {
     Response: Response,
     Request: Request,

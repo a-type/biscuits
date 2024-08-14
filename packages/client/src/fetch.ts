@@ -15,6 +15,9 @@ export const fetch = createFetch({
     }
     return false;
   },
+  headers: {
+    'x-csrf-token': 'csrf',
+  },
 });
 
 export function login() {
