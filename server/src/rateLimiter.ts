@@ -2,8 +2,8 @@ import { RequestHandler } from 'itty-router';
 import { RateLimiterMemory, RateLimiterRes } from 'rate-limiter-flexible';
 
 export const rateLimiter = new RateLimiterMemory({
-  points: 20,
-  duration: 1,
+  points: 50,
+  duration: 5,
 });
 
 export const rateLimit: RequestHandler = async (req) => {
