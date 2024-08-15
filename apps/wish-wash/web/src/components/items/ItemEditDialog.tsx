@@ -1,36 +1,29 @@
-import { useSearchParams } from '@verdant-web/react-router';
+import { hooks } from '@/hooks.js';
+import { clsx } from '@a-type/ui';
+import { Button } from '@a-type/ui/components/button';
 import {
   Dialog,
-  DialogContent,
-  DialogTitle,
   DialogActions,
   DialogClose,
+  DialogContent,
+  DialogTitle,
 } from '@a-type/ui/components/dialog';
-import { hooks } from '@/hooks.js';
+import { Icon } from '@a-type/ui/components/icon';
+import { ImageUploader } from '@a-type/ui/components/imageUploader';
+import { Input } from '@a-type/ui/components/input/Input';
+import { NumberStepper } from '@a-type/ui/components/numberStepper';
+import { ScrollArea } from '@a-type/ui/components/scrollArea/ScrollArea';
+import { TextArea } from '@a-type/ui/components/textArea/TextArea';
+import { withClassName } from '@a-type/ui/hooks';
+import { preventDefault } from '@a-type/utils';
+import { graphql, useHasServerAccess, useLazyQuery } from '@biscuits/client';
+import { useSearchParams } from '@verdant-web/react-router';
 import {
   Item,
   List,
   ListItemsItemImageFilesDestructured,
-  ListItemsItemImageFilesItem,
 } from '@wish-wash.biscuits/verdant';
-import { Input } from '@a-type/ui/components/input/Input';
-import { TextArea } from '@a-type/ui/components/textArea/TextArea';
-import { Button } from '@a-type/ui/components/button';
-import { preventDefault } from '@a-type/utils';
-import { ImageUploader } from '@a-type/ui/components/imageUploader';
-import { ItemExpirationEditor } from './ItemExpirationEditor.jsx';
-import { NumberStepper } from '@a-type/ui/components/numberStepper';
 import { ReactNode, useCallback } from 'react';
-import { Icon } from '@a-type/ui/components/icon';
-import { clsx } from '@a-type/ui';
-import { withClassName } from '@a-type/ui/hooks';
-import { ScrollArea } from '@a-type/ui/components/scrollArea/ScrollArea';
-import {
-  graphql,
-  useHasServerAccess,
-  useLazyQuery,
-  useMutation,
-} from '@biscuits/client';
 
 export interface ItemEditDialogProps {
   list: List;
@@ -88,12 +81,7 @@ function ItemEditor({ item }: { item: Item }) {
       break;
   }
 
-  return (
-    <div className="col w-full items-stretch">
-      {content}
-      <ItemExpirationEditor item={item} />
-    </div>
-  );
+  return <div className="col w-full items-stretch">{content}</div>;
 }
 
 function IdeaEditor({ item }: { item: Item }) {
@@ -101,6 +89,7 @@ function IdeaEditor({ item }: { item: Item }) {
     <>
       <ImagesField item={item} />
       <DescriptionField item={item} />
+      <PriceRangeField item={item} />
       <CountField item={item} />
     </>
   );
@@ -109,8 +98,10 @@ function IdeaEditor({ item }: { item: Item }) {
 function ProductEditor({ item }: { item: Item }) {
   return (
     <>
+      <RemoteImage item={item} />
       <SingleLinkField item={item} />
       <DescriptionField item={item} label="What is it?" />
+      <PriceField item={item} />
       <CountField item={item} />
     </>
   );
@@ -231,10 +222,10 @@ function CountField({ item }: { item: Item }) {
 const scanPage = graphql(`
   query ScanStorePage($url: String!) {
     storePageScan(input: { url: $url }) {
-      currency
-      price
+      priceString
       productName
       scanner
+      imageUrl
     }
   }
 `);
@@ -247,10 +238,7 @@ function SingleLinkField({ item }: { item: Item }) {
   const subscribed = useHasServerAccess();
   const [doScan, { loading: scanning }] = useLazyQuery(scanPage);
   const maybeScanPage = useCallback(async () => {
-    // don't scan if data already exists
-    if (item.get('description')) {
-      return;
-    }
+    if (!subscribed) return;
 
     const result = await doScan({
       variables: {
@@ -262,11 +250,13 @@ function SingleLinkField({ item }: { item: Item }) {
       console.log('scan result', scan);
       item.update({
         description: scan.productName ?? undefined,
+        priceMin: scan.priceString ?? undefined,
+        remoteImageUrl: scan.imageUrl ?? undefined,
       });
     } else {
       console.error('scan failed', result.error);
     }
-  }, [firstLink, item]);
+  }, [firstLink, item, subscribed]);
 
   return (
     <>
@@ -279,11 +269,72 @@ function SingleLinkField({ item }: { item: Item }) {
         onBlur={maybeScanPage}
         autoSelect
       />
-      {scanning && (
-        <span className="text-xs text-gray-5">Scanning page...</span>
+      {!!scanning && (
+        <span className="text-xs text-gray-7 pl-3">
+          <Icon name="refresh" className="animate-spin w-10px h-10px" />{' '}
+          Scanning page...
+        </span>
       )}
     </>
   );
 }
 
 const Label = withClassName('label', 'font-bold text-sm text-gray-7 py-1');
+
+function PriceRangeField({ item }: { item: Item }) {
+  const priceMinField = hooks.useField(item, 'priceMin');
+  const priceMaxField = hooks.useField(item, 'priceMax');
+
+  return (
+    <>
+      <Label htmlFor="priceMin">Price range</Label>
+      <div className="row">
+        <Input
+          id="priceMin"
+          {...priceMinField.inputProps}
+          value={priceMinField.inputProps.value ?? ''}
+          placeholder="$10"
+          className="w-1/2"
+        />
+        <span className="px-2">to</span>
+        <Input
+          id="priceMax"
+          {...priceMaxField.inputProps}
+          value={priceMaxField.inputProps.value ?? ''}
+          placeholder="$100"
+          className="w-1/2"
+        />
+      </div>
+    </>
+  );
+}
+
+function PriceField({ item }: { item: Item }) {
+  const priceField = hooks.useField(item, 'priceMin');
+
+  return (
+    <>
+      <Label htmlFor="price">Price</Label>
+      <Input
+        id="price"
+        {...priceField.inputProps}
+        value={priceField.inputProps.value ?? ''}
+        placeholder="$10"
+      />
+    </>
+  );
+}
+
+function RemoteImage({ item }: { item: Item }) {
+  const { remoteImageUrl } = hooks.useWatch(item);
+
+  if (!remoteImageUrl) return null;
+
+  return (
+    <img
+      src={remoteImageUrl}
+      alt="product image"
+      className="h-200px object-cover object-center"
+    />
+  );
+}

@@ -117,19 +117,20 @@ export type ListItemsItemLinks = ListEntity<
   ListItemsItemLinksSnapshot
 >;
 export type ListItemsItemLinksItem = string;
-export type ListItemsItemExpiresAt = number;
-export type ListItemsItemExpirationNotificationSent = boolean;
 export type ListItemsItemImageFiles = ListEntity<
   ListItemsItemImageFilesInit,
   ListItemsItemImageFilesDestructured,
   ListItemsItemImageFilesSnapshot
 >;
 export type ListItemsItemImageFilesItem = string;
+export type ListItemsItemRemoteImageUrl = string;
 export type ListItemsItemCount = number;
 export type ListItemsItemPurchasedCount = number;
 export type ListItemsItemPrioritized = boolean;
 export type ListItemsItemType = "idea" | "product" | "vibe";
-export type ListItemsItemSortKey = string;
+export type ListItemsItemPriceMin = string;
+export type ListItemsItemPriceMax = string;
+export type ListItemsItemNote = string;
 export type ListInit = {
   id?: string;
   name?: string;
@@ -145,14 +146,15 @@ export type ListItemsItemInit = {
   lastPurchasedAt?: number | null;
   createdAt?: number;
   links?: ListItemsItemLinksInit;
-  expiresAt?: number | null;
-  expirationNotificationSent?: boolean;
   imageFiles?: ListItemsItemImageFilesInit;
+  remoteImageUrl?: string | null;
   count?: number;
   purchasedCount?: number;
   prioritized?: boolean;
   type?: "idea" | "product" | "vibe";
-  sortKey?: string;
+  priceMin?: string | null;
+  priceMax?: string | null;
+  note?: string | null;
 };
 export type ListItemsInit = ListItemsItemInit[];
 export type ListDestructured = {
@@ -170,14 +172,15 @@ export type ListItemsItemDestructured = {
   lastPurchasedAt: number | null;
   createdAt: number;
   links: ListItemsItemLinks;
-  expiresAt: number | null;
-  expirationNotificationSent: boolean;
   imageFiles: ListItemsItemImageFiles;
+  remoteImageUrl: string | null;
   count: number;
   purchasedCount: number;
   prioritized: boolean;
   type: "idea" | "product" | "vibe";
-  sortKey: string;
+  priceMin: string | null;
+  priceMax: string | null;
+  note: string | null;
 };
 export type ListItemsDestructured = ListItemsItem[];
 export type ListSnapshot = {
@@ -195,14 +198,15 @@ export type ListItemsItemSnapshot = {
   lastPurchasedAt: number | null;
   createdAt: number;
   links: ListItemsItemLinksSnapshot;
-  expiresAt: number | null;
-  expirationNotificationSent: boolean;
   imageFiles: ListItemsItemImageFilesSnapshot;
+  remoteImageUrl: string | null;
   count: number;
   purchasedCount: number;
   prioritized: boolean;
   type: "idea" | "product" | "vibe";
-  sortKey: string;
+  priceMin: string | null;
+  priceMax: string | null;
+  note: string | null;
 };
 export type ListItemsSnapshot = ListItemsItemSnapshot[];
 

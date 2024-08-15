@@ -1,16 +1,7 @@
 import { hooks } from '@/hooks.js';
 import { clsx } from '@a-type/ui';
 import { Button } from '@a-type/ui/components/button';
-import {
-  CardActions,
-  CardContent,
-  CardFooter,
-  CardImage,
-  CardMain,
-  CardMenu,
-  CardRoot,
-  CardTitle,
-} from '@a-type/ui/components/card';
+import { Card } from '@a-type/ui/components/card';
 import { Icon } from '@a-type/ui/components/icon';
 import { Link } from '@verdant-web/react-router';
 import { Item } from '@wish-wash.biscuits/verdant';
@@ -21,6 +12,7 @@ import { ItemTypeChip } from './ItemTypeChip.jsx';
 import { Chip } from '@a-type/ui/components/chip';
 import { ImageMarquee } from './ImageMarquee.jsx';
 import { CSSProperties, forwardRef } from 'react';
+import { H3 } from '@a-type/ui/components/typography';
 
 export interface ListItemProps {
   item: Item;
@@ -40,6 +32,9 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
       type,
       lastPurchasedAt,
       prioritized,
+      priceMin,
+      priceMax,
+      remoteImageUrl,
     } = hooks.useWatch(item);
     hooks.useWatch(links);
     hooks.useWatch(imageFiles);
@@ -49,8 +44,17 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 
     const purchased = purchasedCount > count;
 
+    const price =
+      priceMin || priceMax
+        ? !priceMin || !priceMax
+          ? priceMax || priceMin
+          : `${priceMin} - ${priceMax}`
+        : null;
+
+    const hasImage = imageFiles.length > 0 || remoteImageUrl;
+
     return (
-      <CardRoot
+      <Card
         ref={ref}
         className={clsx(
           prioritized
@@ -63,17 +67,28 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
         data-span={prioritized ? 2 : 1}
         {...rest}
       >
-        {imageFiles.length > 0 && (
-          <CardImage>
-            <ImageMarquee images={imageFiles.getAll()} />
-          </CardImage>
+        {hasImage && (
+          <Card.Image>
+            {imageFiles.length > 0 ? (
+              <ImageMarquee images={imageFiles.getAll()} />
+            ) : (
+              <img
+                src={remoteImageUrl!}
+                alt={description}
+                className="w-full h-full object-cover object-center"
+              />
+            )}
+          </Card.Image>
         )}
-        <CardMain className="col items-start">
-          <CardTitle className="block">
+        <Card.Main className="col items-start">
+          <Card.Content unstyled>
             <ItemTypeChip className="mr-2" item={item} />
-            {description}
-          </CardTitle>
-          <div className="p-2">
+          </Card.Content>
+          <Card.Content>
+            <H3>{description}</H3>
+          </Card.Content>
+          {price && <Card.Content className="text-md">{price}</Card.Content>}
+          <Card.Content unstyled>
             {lastPurchasedAt && (
               <Chip className="text-xxs">
                 Bought: {new Date(lastPurchasedAt).toLocaleDateString()}
@@ -81,11 +96,11 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
             )}
             {type === 'idea' ||
               (type === 'product' && !link && <SearchButton item={item} />)}
-          </div>
+          </Card.Content>
           <ItemStar item={item} className="absolute right-1 top-1" />
-        </CardMain>
-        <CardFooter className="items-center justify-between">
-          <CardMenu className="ml-0 mr-auto">
+        </Card.Main>
+        <Card.Footer className="items-center justify-between">
+          <Card.Menu className="ml-0 mr-auto">
             <Button
               color="ghost"
               size="icon"
@@ -94,8 +109,8 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
             >
               <Icon name="pencil" />
             </Button>
-          </CardMenu>
-          <CardActions className="ml-auto mr-0">
+          </Card.Menu>
+          <Card.Actions className="ml-auto mr-0">
             {link && (
               <Button asChild color="accent" size="small">
                 <Link to={link} newTab>
@@ -114,9 +129,9 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
             >
               {purchased ? 'Bought' : 'Buy'}
             </Button>
-          </CardActions>
-        </CardFooter>
-      </CardRoot>
+          </Card.Actions>
+        </Card.Footer>
+      </Card>
     );
   },
 );

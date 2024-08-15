@@ -46,6 +46,13 @@ builder.objectType('StorePageScan', {
     scanner: t.exposeString('scanner', {
       nullable: true,
     }),
+    priceString: t.string({
+      nullable: true,
+      resolve: (root) => {
+        if (!root.price) return null;
+        return `${root.currency ?? '$'}${root.price}`;
+      },
+    }),
   }),
 });
 
