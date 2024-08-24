@@ -29,4 +29,4 @@ export * from './TopLoader.js';
 export * from './AppIcon.js';
 export * from './Price.js';
 export * from './subscription/index.js';
-export * from './Marquee.js';
+export * from './Tip.js';
