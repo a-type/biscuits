@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@a-type/auth-client": "1.0.10",
-    "@a-type/ui": "^1.1.10",
+    "@a-type/ui": "^1.1.14",
     "@biscuits/apps": "workspace:*",
     "@biscuits/client": "workspace:*",
     "@biscuits/error": "workspace:*",

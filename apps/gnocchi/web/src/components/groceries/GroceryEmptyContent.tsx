@@ -5,7 +5,7 @@ import { InfrequentSubscriptionHint, InstallHint } from '@biscuits/client';
 
 export function GroceryEmptyContent() {
   return (
-    <div className="flex flex-col p-4 gap-6 select-none animate-fade-in-up animate-duration-500">
+    <div className="flex flex-col p-4 gap-6 select-none">
       <div className="flex flex-col items-center justify-center flex-grow-1 text-center color-gray7 italic text-sm gap-3 p-4">
         <Cart
           width="15vmax"

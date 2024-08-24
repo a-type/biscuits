@@ -20,7 +20,7 @@
     "typecheck": "tsc --build tsconfig.json"
   },
   "dependencies": {
-    "@a-type/ui": "1.1.10",
+    "@a-type/ui": "^1.1.14",
     "@a-type/utils": "^1.0.8",
     "@biscuits/client": "workspace:*",
     "@wish-wash.biscuits/common": "workspace:*",

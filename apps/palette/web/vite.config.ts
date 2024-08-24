@@ -26,6 +26,7 @@ export default defineConfig(({ command, mode }) => ({
         icons: icons(),
         categories: [],
         display: 'standalone',
+        scope: 'https://palette.biscuits.club/',
         start_url: '/?directLaunch=true',
       } as any,
       includeAssets: ['fonts/**/*', 'images/**/*'],

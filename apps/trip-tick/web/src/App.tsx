@@ -10,7 +10,7 @@ export function App() {
   return (
     <div className="flex flex-col flex-1 w-full h-full">
       <Suspense fallback={<FullScreenSpinner />}>
-        <UIProvider>
+        <UIProvider disableViewportOffset>
           <Provider appId="trip-tick" storeDescriptor={clientDescriptor as any}>
             <LofiProvider>
               <Pages />

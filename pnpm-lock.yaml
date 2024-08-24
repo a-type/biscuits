@@ -64,8 +64,8 @@ importers:
   apps/gnocchi/hub:
     dependencies:
       '@a-type/ui':
-        specifier: ^1.1.10
-        version: 1.1.10(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^1.1.14
+        version: 1.1.14(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@a-type/utils':
         specifier: ^1.0.8
         version: 1.1.0
@@ -184,8 +184,8 @@ importers:
   apps/gnocchi/web:
     dependencies:
       '@a-type/ui':
-        specifier: ^1.1.10
-        version: 1.1.10(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.2)(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^1.1.14
+        version: 1.1.14(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.2)(react-dom@18.3.1)(react@18.3.1)
       '@a-type/utils':
         specifier: ^1.0.8
         version: 1.0.8
@@ -458,8 +458,8 @@ importers:
   apps/humding/web:
     dependencies:
       '@a-type/ui':
-        specifier: 1.1.10
-        version: 1.1.10(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 1.1.14
+        version: 1.1.14(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@a-type/utils':
         specifier: 1.1.3
         version: 1.1.3
@@ -561,8 +561,8 @@ importers:
   apps/marginalia/web:
     dependencies:
       '@a-type/ui':
-        specifier: 1.1.10
-        version: 1.1.10(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 1.1.14
+        version: 1.1.14(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@a-type/utils':
         specifier: 1.1.0
         version: 1.1.0
@@ -664,8 +664,8 @@ importers:
   apps/palette/web:
     dependencies:
       '@a-type/ui':
-        specifier: 1.1.10
-        version: 1.1.10(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 1.1.14
+        version: 1.1.14(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@a-type/utils':
         specifier: 1.1.3
         version: 1.1.3
@@ -764,8 +764,8 @@ importers:
   apps/star-chart/web:
     dependencies:
       '@a-type/ui':
-        specifier: 1.1.10
-        version: 1.1.10(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 1.1.14
+        version: 1.1.14(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@a-type/utils':
         specifier: 1.1.2
         version: 1.1.2
@@ -879,8 +879,8 @@ importers:
   apps/trip-tick/web:
     dependencies:
       '@a-type/ui':
-        specifier: ^1.1.10
-        version: 1.1.10(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.2.0)(react@18.3.1)
+        specifier: ^1.1.14
+        version: 1.1.14(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.2.0)(react@18.3.1)
       '@a-type/utils':
         specifier: ^1.0.6
         version: 1.0.6
@@ -1024,8 +1024,8 @@ importers:
   apps/wish-wash/hub:
     dependencies:
       '@a-type/ui':
-        specifier: 1.1.10
-        version: 1.1.10(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^1.1.14
+        version: 1.1.14(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@a-type/utils':
         specifier: ^1.0.8
         version: 1.1.3
@@ -1107,8 +1107,8 @@ importers:
   apps/wish-wash/web:
     dependencies:
       '@a-type/ui':
-        specifier: 1.1.10
-        version: 1.1.10(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: 1.1.14
+        version: 1.1.14(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@a-type/utils':
         specifier: 1.1.3
         version: 1.1.3
@@ -1195,8 +1195,8 @@ importers:
   blog:
     dependencies:
       '@a-type/ui':
-        specifier: ^1.1.10
-        version: 1.1.10(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^1.1.14
+        version: 1.1.14(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@astrojs/check':
         specifier: ^0.5.10
         version: 0.5.10(prettier@3.2.5)(typescript@5.5.3)
@@ -1286,7 +1286,7 @@ importers:
     dependencies:
       '@a-type/auth-client':
         specifier: 1.0.10
-        version: 1.0.10(@a-type/ui@1.1.10)(react@18.3.1)
+        version: 1.0.10(@a-type/ui@1.1.14)(react@18.3.1)
       '@a-type/utils':
         specifier: 1.1.3
         version: 1.1.3
@@ -1322,8 +1322,8 @@ importers:
         version: 1.13.2(@types/react@18.3.3)(react@18.3.1)
     devDependencies:
       '@a-type/ui':
-        specifier: ^1.1.10
-        version: 1.1.10(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^1.1.14
+        version: 1.1.14(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@types/react':
         specifier: 18.3.3
         version: 18.3.3
@@ -1554,10 +1554,10 @@ importers:
     dependencies:
       '@a-type/auth-client':
         specifier: 1.0.10
-        version: 1.0.10(@a-type/ui@1.1.10)(react@18.3.1)
+        version: 1.0.10(@a-type/ui@1.1.14)(react@18.3.1)
       '@a-type/ui':
-        specifier: ^1.1.10
-        version: 1.1.10(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+        specifier: ^1.1.14
+        version: 1.1.14(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       '@biscuits/apps':
         specifier: workspace:*
         version: link:../packages/apps
@@ -1720,13 +1720,13 @@ packages:
       graphql: 16.9.0
       typescript: 5.5.3
 
-  /@a-type/auth-client@1.0.10(@a-type/ui@1.1.10)(react@18.3.1):
+  /@a-type/auth-client@1.0.10(@a-type/ui@1.1.14)(react@18.3.1):
     resolution: {integrity: sha512-MurwV86uZa6pipu5KwTYh/wZSKyjLoUoGkHGoNvjdiRbl4OW59Op8fhWOJ99FdeUvM3/Yg5O2bwx4baCpPiriA==}
     peerDependencies:
       '@a-type/ui': ^0.8.0
       react: ^18
     dependencies:
-      '@a-type/ui': 1.1.10(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+      '@a-type/ui': 1.1.14(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
       react: 18.3.1
     dev: false
 
@@ -1768,165 +1768,6 @@ packages:
     transitivePeerDependencies:
       - encoding
       - supports-color
-
-  /@a-type/ui@1.1.10(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.2)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-b16GOsyDGcLGEeXmOTg7UQV5kfwCxec/rMPKDGKiB6pm6/0e1/laaPBaiQ105wpQ11uwvl1PG4ODhlKTiTQQGQ==}
-    peerDependencies:
-      react: ^18
-      react-dom: ^18
-    dependencies:
-      '@a-type/utils': 1.1.3
-      '@radix-ui/react-accordion': 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-checkbox': 1.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-collapsible': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-context-menu': 2.2.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-dialog': 1.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-dropdown-menu': 2.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-icons': 1.3.0(react@18.3.1)
-      '@radix-ui/react-menu': 2.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-popover': 1.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-radio-group': 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-scroll-area': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-select': 2.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-slider': 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-slot': 1.1.0(@types/react@18.2.79)(react@18.3.1)
-      '@radix-ui/react-switch': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-tabs': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-toast': 1.2.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-toggle-group': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-tooltip': 1.1.2(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@react-spring/web': 9.7.4(react-dom@18.3.1)(react@18.3.1)
-      '@tiptap/core': 2.4.0(@tiptap/pm@2.4.0)
-      '@tiptap/extension-document': 2.4.0(@tiptap/core@2.4.0)
-      '@tiptap/extension-paragraph': 2.4.0(@tiptap/core@2.4.0)
-      '@tiptap/pm': 2.4.0
-      '@tiptap/react': 2.4.0(@tiptap/core@2.4.0)(@tiptap/pm@2.4.0)(react-dom@18.3.1)(react@18.3.1)
-      '@tiptap/starter-kit': 2.4.0(@tiptap/pm@2.4.0)
-      '@use-gesture/react': 10.3.1(react@18.3.1)
-      browser-image-resizer: 2.4.1
-      calendar-blocks: 0.3.1(react@18.3.1)
-      clsx: 2.1.1
-      color-interpolate: 1.0.5
-      color-parse: 2.0.2
-      color-space: 2.0.1
-      date-fns: 2.30.0
-      formik: 2.4.6(react@18.3.1)
-      pluralize: 8.0.0
-      prosemirror-model: 1.21.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      react-hot-toast: 2.4.1(csstype@3.1.2)(react-dom@18.3.1)(react@18.3.1)
-    transitivePeerDependencies:
-      - '@types/react'
-      - '@types/react-dom'
-      - csstype
-    dev: false
-
-  /@a-type/ui@1.1.10(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.2.0)(react@18.3.1):
-    resolution: {integrity: sha512-b16GOsyDGcLGEeXmOTg7UQV5kfwCxec/rMPKDGKiB6pm6/0e1/laaPBaiQ105wpQ11uwvl1PG4ODhlKTiTQQGQ==}
-    peerDependencies:
-      react: ^18
-      react-dom: ^18
-    dependencies:
-      '@a-type/utils': 1.1.3
-      '@radix-ui/react-accordion': 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
-      '@radix-ui/react-checkbox': 1.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
-      '@radix-ui/react-collapsible': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
-      '@radix-ui/react-context-menu': 2.2.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
-      '@radix-ui/react-dialog': 1.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
-      '@radix-ui/react-dropdown-menu': 2.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
-      '@radix-ui/react-icons': 1.3.0(react@18.3.1)
-      '@radix-ui/react-menu': 2.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
-      '@radix-ui/react-popover': 1.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
-      '@radix-ui/react-radio-group': 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
-      '@radix-ui/react-scroll-area': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
-      '@radix-ui/react-select': 2.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
-      '@radix-ui/react-slider': 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
-      '@radix-ui/react-slot': 1.1.0(@types/react@18.2.79)(react@18.3.1)
-      '@radix-ui/react-switch': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
-      '@radix-ui/react-tabs': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
-      '@radix-ui/react-toast': 1.2.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
-      '@radix-ui/react-toggle-group': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
-      '@radix-ui/react-tooltip': 1.1.2(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
-      '@react-spring/web': 9.7.4(react-dom@18.2.0)(react@18.3.1)
-      '@tiptap/core': 2.4.0(@tiptap/pm@2.4.0)
-      '@tiptap/extension-document': 2.4.0(@tiptap/core@2.4.0)
-      '@tiptap/extension-paragraph': 2.4.0(@tiptap/core@2.4.0)
-      '@tiptap/pm': 2.4.0
-      '@tiptap/react': 2.4.0(@tiptap/core@2.4.0)(@tiptap/pm@2.4.0)(react-dom@18.2.0)(react@18.3.1)
-      '@tiptap/starter-kit': 2.4.0(@tiptap/pm@2.4.0)
-      '@use-gesture/react': 10.3.1(react@18.3.1)
-      browser-image-resizer: 2.4.1
-      calendar-blocks: 0.3.1(react@18.3.1)
-      clsx: 2.1.1
-      color-interpolate: 1.0.5
-      color-parse: 2.0.2
-      color-space: 2.0.1
-      date-fns: 2.30.0
-      formik: 2.4.6(react@18.3.1)
-      pluralize: 8.0.0
-      prosemirror-model: 1.21.1
-      react: 18.3.1
-      react-dom: 18.2.0(react@18.3.1)
-      react-hot-toast: 2.4.1(csstype@3.1.3)(react-dom@18.2.0)(react@18.3.1)
-    transitivePeerDependencies:
-      - '@types/react'
-      - '@types/react-dom'
-      - csstype
-    dev: false
-
-  /@a-type/ui@1.1.10(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-b16GOsyDGcLGEeXmOTg7UQV5kfwCxec/rMPKDGKiB6pm6/0e1/laaPBaiQ105wpQ11uwvl1PG4ODhlKTiTQQGQ==}
-    peerDependencies:
-      react: ^18
-      react-dom: ^18
-    dependencies:
-      '@a-type/utils': 1.1.3
-      '@radix-ui/react-accordion': 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-checkbox': 1.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-collapsible': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-context-menu': 2.2.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-dialog': 1.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-dropdown-menu': 2.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-icons': 1.3.0(react@18.3.1)
-      '@radix-ui/react-menu': 2.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-popover': 1.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-radio-group': 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-scroll-area': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-select': 2.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-slider': 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-slot': 1.1.0(@types/react@18.2.79)(react@18.3.1)
-      '@radix-ui/react-switch': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-tabs': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-toast': 1.2.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-toggle-group': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-tooltip': 1.1.2(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
-      '@react-spring/web': 9.7.4(react-dom@18.3.1)(react@18.3.1)
-      '@tiptap/core': 2.4.0(@tiptap/pm@2.4.0)
-      '@tiptap/extension-document': 2.4.0(@tiptap/core@2.4.0)
-      '@tiptap/extension-paragraph': 2.4.0(@tiptap/core@2.4.0)
-      '@tiptap/pm': 2.4.0
-      '@tiptap/react': 2.4.0(@tiptap/core@2.4.0)(@tiptap/pm@2.4.0)(react-dom@18.3.1)(react@18.3.1)
-      '@tiptap/starter-kit': 2.4.0(@tiptap/pm@2.4.0)
-      '@use-gesture/react': 10.3.1(react@18.3.1)
-      browser-image-resizer: 2.4.1
-      calendar-blocks: 0.3.1(react@18.3.1)
-      clsx: 2.1.1
-      color-interpolate: 1.0.5
-      color-parse: 2.0.2
-      color-space: 2.0.1
-      date-fns: 2.30.0
-      formik: 2.4.6(react@18.3.1)
-      pluralize: 8.0.0
-      prosemirror-model: 1.21.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      react-hot-toast: 2.4.1(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
-    transitivePeerDependencies:
-      - '@types/react'
-      - '@types/react-dom'
-      - csstype
-    dev: false
 
   /@a-type/ui@1.1.10(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-b16GOsyDGcLGEeXmOTg7UQV5kfwCxec/rMPKDGKiB6pm6/0e1/laaPBaiQ105wpQ11uwvl1PG4ODhlKTiTQQGQ==}
@@ -1979,33 +1820,140 @@ packages:
       - '@types/react'
       - '@types/react-dom'
       - csstype
+    dev: true
 
-  /@a-type/ui@1.1.10(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-b16GOsyDGcLGEeXmOTg7UQV5kfwCxec/rMPKDGKiB6pm6/0e1/laaPBaiQ105wpQ11uwvl1PG4ODhlKTiTQQGQ==}
+  /@a-type/ui@1.1.14(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.2)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-CHn7b+MdLvmQ/jmC/erWeGLPZJk++9TyeMpNGRmhG1jZa87up06UGDF7fq4NKetvnWlPXoPnWfjmPqyC+HMtNA==}
     peerDependencies:
       react: ^18
       react-dom: ^18
     dependencies:
       '@a-type/utils': 1.1.3
-      '@radix-ui/react-accordion': 1.2.0(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-checkbox': 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-collapsible': 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-context-menu': 2.2.1(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-dialog': 1.1.1(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-dropdown-menu': 2.1.1(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-accordion': 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-checkbox': 1.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-collapsible': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-context-menu': 2.2.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-dialog': 1.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-dropdown-menu': 2.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
       '@radix-ui/react-icons': 1.3.0(react@18.3.1)
-      '@radix-ui/react-menu': 2.1.1(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-popover': 1.1.1(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-radio-group': 1.2.0(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-scroll-area': 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-select': 2.1.1(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-slider': 1.2.0(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-slot': 1.1.0(@types/react@18.3.3)(react@18.3.1)
-      '@radix-ui/react-switch': 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-tabs': 1.1.0(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-toast': 1.2.1(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-toggle-group': 1.1.0(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
-      '@radix-ui/react-tooltip': 1.1.2(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-menu': 2.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-popover': 1.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-radio-group': 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-scroll-area': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-select': 2.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-slider': 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-slot': 1.1.0(@types/react@18.2.79)(react@18.3.1)
+      '@radix-ui/react-switch': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-tabs': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-toast': 1.2.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-toggle-group': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-tooltip': 1.1.2(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@react-spring/web': 9.7.4(react-dom@18.3.1)(react@18.3.1)
+      '@tiptap/core': 2.4.0(@tiptap/pm@2.4.0)
+      '@tiptap/extension-document': 2.4.0(@tiptap/core@2.4.0)
+      '@tiptap/extension-paragraph': 2.4.0(@tiptap/core@2.4.0)
+      '@tiptap/pm': 2.4.0
+      '@tiptap/react': 2.4.0(@tiptap/core@2.4.0)(@tiptap/pm@2.4.0)(react-dom@18.3.1)(react@18.3.1)
+      '@tiptap/starter-kit': 2.4.0(@tiptap/pm@2.4.0)
+      '@use-gesture/react': 10.3.1(react@18.3.1)
+      browser-image-resizer: 2.4.1
+      calendar-blocks: 0.3.1(react@18.3.1)
+      clsx: 2.1.1
+      color-interpolate: 1.0.5
+      color-parse: 2.0.2
+      color-space: 2.0.1
+      date-fns: 2.30.0
+      formik: 2.4.6(react@18.3.1)
+      pluralize: 8.0.0
+      prosemirror-model: 1.21.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      react-hot-toast: 2.4.1(csstype@3.1.2)(react-dom@18.3.1)(react@18.3.1)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - csstype
+    dev: false
+
+  /@a-type/ui@1.1.14(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.2.0)(react@18.3.1):
+    resolution: {integrity: sha512-CHn7b+MdLvmQ/jmC/erWeGLPZJk++9TyeMpNGRmhG1jZa87up06UGDF7fq4NKetvnWlPXoPnWfjmPqyC+HMtNA==}
+    peerDependencies:
+      react: ^18
+      react-dom: ^18
+    dependencies:
+      '@a-type/utils': 1.1.3
+      '@radix-ui/react-accordion': 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
+      '@radix-ui/react-checkbox': 1.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
+      '@radix-ui/react-collapsible': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
+      '@radix-ui/react-context-menu': 2.2.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
+      '@radix-ui/react-dialog': 1.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
+      '@radix-ui/react-dropdown-menu': 2.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
+      '@radix-ui/react-icons': 1.3.0(react@18.3.1)
+      '@radix-ui/react-menu': 2.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
+      '@radix-ui/react-popover': 1.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
+      '@radix-ui/react-radio-group': 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
+      '@radix-ui/react-scroll-area': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
+      '@radix-ui/react-select': 2.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
+      '@radix-ui/react-slider': 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
+      '@radix-ui/react-slot': 1.1.0(@types/react@18.2.79)(react@18.3.1)
+      '@radix-ui/react-switch': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
+      '@radix-ui/react-tabs': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
+      '@radix-ui/react-toast': 1.2.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
+      '@radix-ui/react-toggle-group': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
+      '@radix-ui/react-tooltip': 1.1.2(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0)(react@18.3.1)
+      '@react-spring/web': 9.7.4(react-dom@18.2.0)(react@18.3.1)
+      '@tiptap/core': 2.4.0(@tiptap/pm@2.6.6)
+      '@tiptap/extension-document': 2.4.0(@tiptap/core@2.4.0)
+      '@tiptap/extension-paragraph': 2.4.0(@tiptap/core@2.4.0)
+      '@tiptap/pm': 2.4.0
+      '@tiptap/react': 2.4.0(@tiptap/core@2.4.0)(@tiptap/pm@2.4.0)(react-dom@18.2.0)(react@18.3.1)
+      '@tiptap/starter-kit': 2.4.0(@tiptap/pm@2.4.0)
+      '@use-gesture/react': 10.3.1(react@18.3.1)
+      browser-image-resizer: 2.4.1
+      calendar-blocks: 0.3.1(react@18.3.1)
+      clsx: 2.1.1
+      color-interpolate: 1.0.5
+      color-parse: 2.0.2
+      color-space: 2.0.1
+      date-fns: 2.30.0
+      formik: 2.4.6(react@18.3.1)
+      pluralize: 8.0.0
+      prosemirror-model: 1.21.1
+      react: 18.3.1
+      react-dom: 18.2.0(react@18.3.1)
+      react-hot-toast: 2.4.1(csstype@3.1.3)(react-dom@18.2.0)(react@18.3.1)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - csstype
+    dev: false
+
+  /@a-type/ui@1.1.14(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-CHn7b+MdLvmQ/jmC/erWeGLPZJk++9TyeMpNGRmhG1jZa87up06UGDF7fq4NKetvnWlPXoPnWfjmPqyC+HMtNA==}
+    peerDependencies:
+      react: ^18
+      react-dom: ^18
+    dependencies:
+      '@a-type/utils': 1.1.3
+      '@radix-ui/react-accordion': 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-checkbox': 1.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-collapsible': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-context-menu': 2.2.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-dialog': 1.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-dropdown-menu': 2.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-icons': 1.3.0(react@18.3.1)
+      '@radix-ui/react-menu': 2.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-popover': 1.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-radio-group': 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-scroll-area': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-select': 2.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-slider': 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-slot': 1.1.0(@types/react@18.2.79)(react@18.3.1)
+      '@radix-ui/react-switch': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-tabs': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-toast': 1.2.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-toggle-group': 1.1.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-tooltip': 1.1.2(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1)(react@18.3.1)
       '@react-spring/web': 9.7.4(react-dom@18.3.1)(react@18.3.1)
       '@tiptap/core': 2.4.0(@tiptap/pm@2.4.0)
       '@tiptap/extension-document': 2.4.0(@tiptap/core@2.4.0)
@@ -2031,9 +1979,115 @@ packages:
       - '@types/react'
       - '@types/react-dom'
       - csstype
+    dev: false
 
-  /@a-type/ui@1.1.10(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1):
-    resolution: {integrity: sha512-b16GOsyDGcLGEeXmOTg7UQV5kfwCxec/rMPKDGKiB6pm6/0e1/laaPBaiQ105wpQ11uwvl1PG4ODhlKTiTQQGQ==}
+  /@a-type/ui@1.1.14(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-CHn7b+MdLvmQ/jmC/erWeGLPZJk++9TyeMpNGRmhG1jZa87up06UGDF7fq4NKetvnWlPXoPnWfjmPqyC+HMtNA==}
+    peerDependencies:
+      react: ^18
+      react-dom: ^18
+    dependencies:
+      '@a-type/utils': 1.1.3
+      '@radix-ui/react-accordion': 1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-checkbox': 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-collapsible': 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-context-menu': 2.2.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-dialog': 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-dropdown-menu': 2.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-icons': 1.3.0(react@18.3.1)
+      '@radix-ui/react-menu': 2.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-popover': 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-radio-group': 1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-scroll-area': 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-select': 2.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-slider': 1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-slot': 1.1.0(@types/react@18.3.3)(react@18.3.1)
+      '@radix-ui/react-switch': 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-tabs': 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-toast': 1.2.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-toggle-group': 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-tooltip': 1.1.2(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@react-spring/web': 9.7.4(react-dom@18.3.1)(react@18.3.1)
+      '@tiptap/core': 2.4.0(@tiptap/pm@2.6.6)
+      '@tiptap/extension-document': 2.4.0(@tiptap/core@2.4.0)
+      '@tiptap/extension-paragraph': 2.4.0(@tiptap/core@2.4.0)
+      '@tiptap/pm': 2.4.0
+      '@tiptap/react': 2.4.0(@tiptap/core@2.4.0)(@tiptap/pm@2.4.0)(react-dom@18.3.1)(react@18.3.1)
+      '@tiptap/starter-kit': 2.4.0(@tiptap/pm@2.4.0)
+      '@use-gesture/react': 10.3.1(react@18.3.1)
+      browser-image-resizer: 2.4.1
+      calendar-blocks: 0.3.1(react@18.3.1)
+      clsx: 2.1.1
+      color-interpolate: 1.0.5
+      color-parse: 2.0.2
+      color-space: 2.0.1
+      date-fns: 2.30.0
+      formik: 2.4.6(react@18.3.1)
+      pluralize: 8.0.0
+      prosemirror-model: 1.21.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      react-hot-toast: 2.4.1(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - csstype
+    dev: false
+
+  /@a-type/ui@1.1.14(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-CHn7b+MdLvmQ/jmC/erWeGLPZJk++9TyeMpNGRmhG1jZa87up06UGDF7fq4NKetvnWlPXoPnWfjmPqyC+HMtNA==}
+    peerDependencies:
+      react: ^18
+      react-dom: ^18
+    dependencies:
+      '@a-type/utils': 1.1.3
+      '@radix-ui/react-accordion': 1.2.0(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-checkbox': 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-collapsible': 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-context-menu': 2.2.1(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-dialog': 1.1.1(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-dropdown-menu': 2.1.1(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-icons': 1.3.0(react@18.3.1)
+      '@radix-ui/react-menu': 2.1.1(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-popover': 1.1.1(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-radio-group': 1.2.0(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-scroll-area': 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-select': 2.1.1(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-slider': 1.2.0(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-slot': 1.1.0(@types/react@18.3.3)(react@18.3.1)
+      '@radix-ui/react-switch': 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-tabs': 1.1.0(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-toast': 1.2.1(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-toggle-group': 1.1.0(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@radix-ui/react-tooltip': 1.1.2(@types/react@18.3.3)(react-dom@18.3.1)(react@18.3.1)
+      '@react-spring/web': 9.7.4(react-dom@18.3.1)(react@18.3.1)
+      '@tiptap/core': 2.4.0(@tiptap/pm@2.6.6)
+      '@tiptap/extension-document': 2.4.0(@tiptap/core@2.4.0)
+      '@tiptap/extension-paragraph': 2.4.0(@tiptap/core@2.4.0)
+      '@tiptap/pm': 2.4.0
+      '@tiptap/react': 2.4.0(@tiptap/core@2.4.0)(@tiptap/pm@2.4.0)(react-dom@18.3.1)(react@18.3.1)
+      '@tiptap/starter-kit': 2.4.0(@tiptap/pm@2.4.0)
+      '@use-gesture/react': 10.3.1(react@18.3.1)
+      browser-image-resizer: 2.4.1
+      calendar-blocks: 0.3.1(react@18.3.1)
+      clsx: 2.1.1
+      color-interpolate: 1.0.5
+      color-parse: 2.0.2
+      color-space: 2.0.1
+      date-fns: 2.30.0
+      formik: 2.4.6(react@18.3.1)
+      pluralize: 8.0.0
+      prosemirror-model: 1.21.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      react-hot-toast: 2.4.1(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1)
+    transitivePeerDependencies:
+      - '@types/react'
+      - '@types/react-dom'
+      - csstype
+
+  /@a-type/ui@1.1.14(csstype@3.1.3)(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-CHn7b+MdLvmQ/jmC/erWeGLPZJk++9TyeMpNGRmhG1jZa87up06UGDF7fq4NKetvnWlPXoPnWfjmPqyC+HMtNA==}
     peerDependencies:
       react: ^18
       react-dom: ^18
@@ -2059,7 +2113,7 @@ packages:
       '@radix-ui/react-toggle-group': 1.1.0(react-dom@18.3.1)(react@18.3.1)
       '@radix-ui/react-tooltip': 1.1.2(react-dom@18.3.1)(react@18.3.1)
       '@react-spring/web': 9.7.4(react-dom@18.3.1)(react@18.3.1)
-      '@tiptap/core': 2.4.0(@tiptap/pm@2.4.0)
+      '@tiptap/core': 2.4.0(@tiptap/pm@2.6.6)
       '@tiptap/extension-document': 2.4.0(@tiptap/core@2.4.0)
       '@tiptap/extension-paragraph': 2.4.0(@tiptap/core@2.4.0)
       '@tiptap/pm': 2.4.0
@@ -13577,6 +13631,13 @@ packages:
     dependencies:
       '@tiptap/pm': 2.4.0
 
+  /@tiptap/core@2.4.0(@tiptap/pm@2.6.6):
+    resolution: {integrity: sha512-YJSahk8pkxpCs8SflCZfTnJpE7IPyUWIylfgXM2DefjRQa5DZ+c6sNY0s/zbxKYFQ6AuHVX40r9pCfcqHChGxQ==}
+    peerDependencies:
+      '@tiptap/pm': ^2.0.0
+    dependencies:
+      '@tiptap/pm': 2.6.6
+
   /@tiptap/extension-blockquote@2.6.2(@tiptap/core@2.4.0):
     resolution: {integrity: sha512-g0k2xAlRBYokWSNKzzAm6lvSZKR8nl1FXnnfDiobaNKBcdlweLhLVSFE6SJlahj/G/FQ7oiAmSfVPfoJAJ54Mw==}
     peerDependencies:
@@ -13777,6 +13838,28 @@ packages:
       prosemirror-transform: 1.9.0
       prosemirror-view: 1.33.7
 
+  /@tiptap/pm@2.6.6:
+    resolution: {integrity: sha512-56FGLPn3fwwUlIbLs+BO21bYfyqP9fKyZQbQyY0zWwA/AG2kOwoXaRn7FOVbjP6CylyWpFJnpRRmgn694QKHEg==}
+    dependencies:
+      prosemirror-changeset: 2.2.1
+      prosemirror-collab: 1.3.1
+      prosemirror-commands: 1.5.2
+      prosemirror-dropcursor: 1.8.1
+      prosemirror-gapcursor: 1.3.2
+      prosemirror-history: 1.4.1
+      prosemirror-inputrules: 1.4.0
+      prosemirror-keymap: 1.2.2
+      prosemirror-markdown: 1.13.0
+      prosemirror-menu: 1.2.4
+      prosemirror-model: 1.22.3
+      prosemirror-schema-basic: 1.2.3
+      prosemirror-schema-list: 1.4.1
+      prosemirror-state: 1.4.3
+      prosemirror-tables: 1.5.0
+      prosemirror-trailing-node: 2.0.9(prosemirror-model@1.22.3)(prosemirror-state@1.4.3)(prosemirror-view@1.34.0)
+      prosemirror-transform: 1.9.0
+      prosemirror-view: 1.34.0
+
   /@tiptap/react@2.4.0(@tiptap/core@2.4.0)(@tiptap/pm@2.4.0)(react-dom@18.2.0)(react@18.3.1):
     resolution: {integrity: sha512-baxnIr6Dy+5iGagOEIKFeHzdl1ZRa6Cg+SJ3GDL/BVLpO6KiCM3Mm5ymB726UKP1w7icrBiQD2fGY3Bx8KaiSA==}
     peerDependencies:
@@ -13785,7 +13868,7 @@ packages:
       react: ^17.0.0 || ^18.0.0
       react-dom: ^17.0.0 || ^18.0.0
     dependencies:
-      '@tiptap/core': 2.4.0(@tiptap/pm@2.4.0)
+      '@tiptap/core': 2.4.0(@tiptap/pm@2.6.6)
       '@tiptap/extension-bubble-menu': 2.6.4(@tiptap/core@2.4.0)(@tiptap/pm@2.4.0)
       '@tiptap/extension-floating-menu': 2.6.4(@tiptap/core@2.4.0)(@tiptap/pm@2.4.0)
       '@tiptap/pm': 2.4.0
@@ -17394,7 +17477,7 @@ packages:
     peerDependencies:
       valtio: '*'
     dependencies:
-      valtio: 1.13.2(@types/react@18.2.79)(react@18.3.1)
+      valtio: 1.13.2(@types/react@18.3.3)(react@18.3.1)
     dev: false
 
   /destr@2.0.2:
@@ -22350,6 +22433,14 @@ packages:
       prosemirror-view: 1.33.6
       rope-sequence: 1.3.4
 
+  /prosemirror-history@1.4.1:
+    resolution: {integrity: sha512-2JZD8z2JviJrboD9cPuX/Sv/1ChFng+xh2tChQ2X4bB2HeK+rra/bmJ3xGntCcjhOqIzSDG6Id7e8RJ9QPXLEQ==}
+    dependencies:
+      prosemirror-state: 1.4.3
+      prosemirror-transform: 1.9.0
+      prosemirror-view: 1.34.0
+      rope-sequence: 1.3.4
+
   /prosemirror-inputrules@1.4.0:
     resolution: {integrity: sha512-6ygpPRuTJ2lcOXs9JkefieMst63wVJBgHZGl5QOytN7oSZs3Co/BYbc3Yx9zm9H37Bxw8kVzCnDsihsVsL4yEg==}
     dependencies:
@@ -22387,13 +22478,30 @@ packages:
     dependencies:
       orderedmap: 2.1.1
 
+  /prosemirror-model@1.22.3:
+    resolution: {integrity: sha512-V4XCysitErI+i0rKFILGt/xClnFJaohe/wrrlT2NSZ+zk8ggQfDH4x2wNK7Gm0Hp4CIoWizvXFP7L9KMaCuI0Q==}
+    dependencies:
+      orderedmap: 2.1.1
+
   /prosemirror-schema-basic@1.2.2:
     resolution: {integrity: sha512-/dT4JFEGyO7QnNTe9UaKUhjDXbTNkiWTq/N4VpKaF79bBjSExVV2NXmJpcM7z/gD7mbqNjxbmWW5nf1iNSSGnw==}
     dependencies:
       prosemirror-model: 1.21.1
 
+  /prosemirror-schema-basic@1.2.3:
+    resolution: {integrity: sha512-h+H0OQwZVqMon1PNn0AG9cTfx513zgIG2DY00eJ00Yvgb3UD+GQ/VlWW5rcaxacpCGT1Yx8nuhwXk4+QbXUfJA==}
+    dependencies:
+      prosemirror-model: 1.21.1
+
   /prosemirror-schema-list@1.3.0:
     resolution: {integrity: sha512-Hz/7gM4skaaYfRPNgr421CU4GSwotmEwBVvJh5ltGiffUJwm7C8GfN/Bc6DR1EKEp5pDKhODmdXXyi9uIsZl5A==}
+    dependencies:
+      prosemirror-model: 1.21.1
+      prosemirror-state: 1.4.3
+      prosemirror-transform: 1.9.0
+
+  /prosemirror-schema-list@1.4.1:
+    resolution: {integrity: sha512-jbDyaP/6AFfDfu70VzySsD75Om2t3sXTOdl5+31Wlxlg62td1haUpty/ybajSfJ1pkGadlOfwQq9kgW5IMo1Rg==}
     dependencies:
       prosemirror-model: 1.21.1
       prosemirror-state: 1.4.3
@@ -22415,6 +22523,15 @@ packages:
       prosemirror-transform: 1.9.0
       prosemirror-view: 1.33.7
 
+  /prosemirror-tables@1.5.0:
+    resolution: {integrity: sha512-VMx4zlYWm7aBlZ5xtfJHpqa3Xgu3b7srV54fXYnXgsAcIGRqKSrhiK3f89omzzgaAgAtDOV4ImXnLKhVfheVNQ==}
+    dependencies:
+      prosemirror-keymap: 1.2.2
+      prosemirror-model: 1.21.1
+      prosemirror-state: 1.4.3
+      prosemirror-transform: 1.9.0
+      prosemirror-view: 1.34.0
+
   /prosemirror-trailing-node@2.0.8(prosemirror-model@1.21.1)(prosemirror-state@1.4.3)(prosemirror-view@1.33.7):
     resolution: {integrity: sha512-ujRYhSuhQb1Jsarh1IHqb2KoSnRiD7wAMDGucP35DN7j5af6X7B18PfdPIrbwsPTqIAj0fyOvxbuPsWhNvylmA==}
     peerDependencies:
@@ -22427,6 +22544,19 @@ packages:
       prosemirror-model: 1.21.1
       prosemirror-state: 1.4.3
       prosemirror-view: 1.33.7
+
+  /prosemirror-trailing-node@2.0.9(prosemirror-model@1.22.3)(prosemirror-state@1.4.3)(prosemirror-view@1.34.0):
+    resolution: {integrity: sha512-YvyIn3/UaLFlFKrlJB6cObvUhmwFNZVhy1Q8OpW/avoTbD/Y7H5EcjK4AZFKhmuS6/N6WkGgt7gWtBWDnmFvHg==}
+    peerDependencies:
+      prosemirror-model: ^1.22.1
+      prosemirror-state: ^1.4.2
+      prosemirror-view: ^1.33.8
+    dependencies:
+      '@remirror/core-constants': 2.0.2
+      escape-string-regexp: 4.0.0
+      prosemirror-model: 1.22.3
+      prosemirror-state: 1.4.3
+      prosemirror-view: 1.34.0
 
   /prosemirror-transform@1.9.0:
     resolution: {integrity: sha512-5UXkr1LIRx3jmpXXNKDhv8OyAOeLTGuXNwdVfg8x27uASna/wQkr9p6fD3eupGOi4PLJfbezxTyi/7fSJypXHg==}
@@ -22442,6 +22572,13 @@ packages:
 
   /prosemirror-view@1.33.7:
     resolution: {integrity: sha512-jo6eMQCtPRwcrA2jISBCnm0Dd2B+szS08BU1Ay+XGiozHo5EZMHfLQE8R5nO4vb1spTH2RW1woZIYXRiQsuP8g==}
+    dependencies:
+      prosemirror-model: 1.21.1
+      prosemirror-state: 1.4.3
+      prosemirror-transform: 1.9.0
+
+  /prosemirror-view@1.34.0:
+    resolution: {integrity: sha512-oBFfImMwV9siXRW20hJ/pASfYz7dcHqBuRR8xtF4/Hot9dGwfXMjTgTQKhTFyr+iF0Wn4EFGXACab5dywNOaYQ==}
     dependencies:
       prosemirror-model: 1.21.1
       prosemirror-state: 1.4.3

@@ -26,6 +26,7 @@ export default defineConfig(({ command, mode }) => ({
         categories: [],
         display: 'standalone',
         start_url: '/',
+        scope: 'https://wish-wash.biscuits.club/',
         share_target: {
           action: '/share',
           method: 'POST',

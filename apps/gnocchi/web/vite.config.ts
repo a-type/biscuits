@@ -23,6 +23,7 @@ export default defineConfig(({ command, mode }) => ({
         description: 'Your grocery list, done better.',
         theme_color: '#fdfdff',
         background_color: '#fdfdff',
+        scope: 'https://gnocchi.biscuits.club/',
         icons: [
           {
             src: 'android-chrome-192x192.png',

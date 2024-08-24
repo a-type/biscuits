@@ -4,12 +4,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "app-dev": "vite",
+    "app-dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@a-type/ui": "^1.1.10",
+    "@a-type/ui": "^1.1.14",
     "@a-type/utils": "^1.0.6",
     "@biscuits/client": "workspace:*",
     "@radix-ui/react-progress": "^1.0.3",
