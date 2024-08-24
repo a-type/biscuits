@@ -12,7 +12,7 @@ export interface AppProps {}
 export function App({}: AppProps) {
   return (
     <ErrorBoundary fallback={<ErrorFallback />}>
-      <UIProvider toastContainerClassName="mb-10 sm:mb-0">
+      <UIProvider toastContainerClassName="mb-10 sm:mb-0" disableViewportOffset>
         <Suspense>
           <Provider appId="wish-wash" storeDescriptor={clientDescriptor as any}>
             <VerdantProvider>

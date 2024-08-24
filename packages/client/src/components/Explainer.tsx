@@ -28,8 +28,8 @@ export function Explainer({ stages }: ExplainerProps) {
       }}
     >
       <DialogContent
-        outerClassName="h-screen max-h-none sm:(h-auto max-h-[80vh]) overflow-y-auto"
-        className="h-screen sm:h-auto"
+        outerClassName="h-screen max-h-90vh sm:(h-auto max-h-[80vh]) overflow-y-auto"
+        className="h-full sm:h-auto"
       >
         <div className="col gap-4 flex-1 items-start">{stages[stage]}</div>
         <DialogActions>
