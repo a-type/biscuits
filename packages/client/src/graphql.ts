@@ -203,6 +203,7 @@ export {
   useReadQuery,
   useSubscription,
   useSuspenseQuery,
+  ApolloProvider,
 } from '@apollo/client';
 export type {
   ErrorPolicy,

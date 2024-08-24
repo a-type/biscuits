@@ -37,6 +37,16 @@ wishWashRouter.get('/hubList/favicon.ico', (req) =>
   staticFile(hubClientPath, 'wishWash/hubList', req),
 );
 
+function itemImageUrls(item: WishlistSnapshot['items'][number]) {
+  const imageUrls = item.imageFiles
+    .map((f) => f.url)
+    .filter((url): url is string => !!url);
+  if (item.remoteImageUrl) {
+    imageUrls.push(item.remoteImageUrl);
+  }
+  return imageUrls;
+}
+
 wishWashRouter.get('/hubList/:listSlug', async (req) => {
   const { listSlug } = req.params;
   // parse slug out of fragment
@@ -50,6 +60,7 @@ wishWashRouter.get('/hubList/:listSlug', async (req) => {
       'User.fullName as publisherFullName',
       'PublishedWishlist.planId',
       'PublishedWishlist.publishedBy',
+      'PublishedWishlist.slug',
     ])
     .where('slug', '=', slug)
     .executeTakeFirst();
@@ -85,18 +96,22 @@ wishWashRouter.get('/hubList/:listSlug', async (req) => {
   const data: HubWishlistData = {
     id: wishList.id,
     title: snapshot.name,
+    slug: wishList.slug,
     hidePurchases: isUsersList,
     // mapping manually here to avoid leaking unintended data.
     items: snapshot.items.map((item) => ({
+      id: item.id,
       description: item.description,
       count: item.count,
       purchasedCount: item.purchasedCount,
       links: item.links,
       prioritized: item.prioritized,
-      imageUrls: item.imageFiles
-        .map((f) => f.url)
-        .filter((url): url is string => !!url),
+      imageUrls: itemImageUrls(item),
       createdAt: item.createdAt,
+      note: item.note,
+      priceMin: item.priceMin ?? null,
+      priceMax: item.priceMax ?? null,
+      type: item.type,
     })),
   };
 

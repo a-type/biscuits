@@ -131,11 +131,18 @@ export type ListItemsItemType = "idea" | "product" | "vibe";
 export type ListItemsItemPriceMin = string;
 export type ListItemsItemPriceMax = string;
 export type ListItemsItemNote = string;
+export type ListConfirmedRemotePurchases = ListEntity<
+  ListConfirmedRemotePurchasesInit,
+  ListConfirmedRemotePurchasesDestructured,
+  ListConfirmedRemotePurchasesSnapshot
+>;
+export type ListConfirmedRemotePurchasesItem = string;
 export type ListInit = {
   id?: string;
   name?: string;
   createdAt?: number;
   items?: ListItemsInit;
+  confirmedRemotePurchases?: ListConfirmedRemotePurchasesInit;
 };
 
 export type ListItemsItemLinksInit = string[];
@@ -157,11 +164,13 @@ export type ListItemsItemInit = {
   note?: string | null;
 };
 export type ListItemsInit = ListItemsItemInit[];
+export type ListConfirmedRemotePurchasesInit = string[];
 export type ListDestructured = {
   id: string;
   name: string;
   createdAt: number;
   items: ListItems;
+  confirmedRemotePurchases: ListConfirmedRemotePurchases;
 };
 
 export type ListItemsItemLinksDestructured = string[];
@@ -183,11 +192,13 @@ export type ListItemsItemDestructured = {
   note: string | null;
 };
 export type ListItemsDestructured = ListItemsItem[];
+export type ListConfirmedRemotePurchasesDestructured = string[];
 export type ListSnapshot = {
   id: string;
   name: string;
   createdAt: number;
   items: ListItemsSnapshot;
+  confirmedRemotePurchases: ListConfirmedRemotePurchasesSnapshot;
 };
 
 export type ListItemsItemLinksSnapshot = string[];
@@ -209,6 +220,7 @@ export type ListItemsItemSnapshot = {
   note: string | null;
 };
 export type ListItemsSnapshot = ListItemsItemSnapshot[];
+export type ListConfirmedRemotePurchasesSnapshot = string[];
 
 /** Index filters for List **/
 

@@ -26,6 +26,8 @@ import * as v0013 from "./v0013_published_recipes.js";
 import * as v0014 from "./v0014_published_wishlists.js";
 
 import * as v0015 from "./v0015_plan_allowed_apps.js";
+
+import * as v0016 from "./v0016_wishlist_purchases.js";
 export default {
   v0001,
   v0002,
@@ -42,4 +44,5 @@ export default {
   v0013,
   v0014,
   v0015,
+  v0016,
 };

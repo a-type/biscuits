@@ -1,11 +1,13 @@
 export interface HubWishlistData {
   id: string;
+  slug: string;
   title: string;
   items: HubWishlistItem[];
   hidePurchases: boolean;
 }
 
-interface HubWishlistItem {
+export interface HubWishlistItem {
+  id: string;
   description: string;
   count: number;
   prioritized: boolean;
@@ -13,4 +15,8 @@ interface HubWishlistItem {
   links: string[];
   createdAt: number;
   purchasedCount: number;
+  priceMin: string | null;
+  priceMax: string | null;
+  note: string | null;
+  type: 'product' | 'idea' | 'vibe';
 }

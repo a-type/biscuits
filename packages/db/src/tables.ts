@@ -21,6 +21,7 @@ export interface Database {
   FoodCategory: FoodCategoryTable;
   PublishedRecipe: PublishedRecipeTable;
   PublishedWishlist: PublishedWishlistTable;
+  WishlistPurchase: WishlistPurchaseTable;
 }
 
 export interface UserTable {
@@ -278,3 +279,19 @@ export interface PublishedWishlistTable {
 export type PublishedWishlist = Selectable<PublishedWishlistTable>;
 export type NewPublishedWishlist = Insertable<PublishedWishlistTable>;
 export type PublishedWishlistUpdate = Updateable<PublishedWishlistTable>;
+
+export interface WishlistPurchaseTable {
+  id: string;
+  createdAt: ColumnType<Date, Date | undefined, never>;
+  updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
+  confirmedAt: ColumnType<Date, Date | undefined, Date | undefined> | null;
+
+  wishlistId: string;
+  itemId: string;
+  purchasedBy: string;
+  quantity: number;
+}
+
+export type WishlistPurchase = Selectable<WishlistPurchaseTable>;
+export type NewWishlistPurchase = Insertable<WishlistPurchaseTable>;
+export type WishlistPurchaseUpdate = Updateable<WishlistPurchaseTable>;

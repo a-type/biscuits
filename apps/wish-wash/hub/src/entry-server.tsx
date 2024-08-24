@@ -7,5 +7,5 @@ import { HubWishlistData } from './types.js';
 export type { HubWishlistData } from './types.js';
 
 export function serverRender(snapshot: HubWishlistData) {
-  return ReactDOMServer.renderToStaticMarkup(<App recipe={snapshot} />);
+  return ReactDOMServer.renderToStaticMarkup(<App list={snapshot} />);
 }

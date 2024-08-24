@@ -12,6 +12,7 @@ export enum BiscuitsErrorCode {
   PlanFull = 4033,
   NotFound = 4040,
   Conflict = 4090,
+  RateLimited = 4290,
   Unexpected = 5000,
 }
 

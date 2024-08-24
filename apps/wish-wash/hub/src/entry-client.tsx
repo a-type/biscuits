@@ -5,7 +5,4 @@ import 'virtual:uno.css';
 // @ts-ignore
 const snapshot = window.__SNAPSHOT__;
 
-ReactDOM.hydrateRoot(
-  document.getElementById('root')!,
-  <App recipe={snapshot} />,
-);
+ReactDOM.hydrateRoot(document.getElementById('root')!, <App list={snapshot} />);

@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 import { defineConfig } from 'vite';
 
 // https://vitejs.dev/config/
-export default defineConfig(({ command, mode }) => ({
+export default defineConfig(({ mode }) => ({
   plugins: [UnoCSS(), react(), viteCommonjs()],
   base:
     mode === 'production'
@@ -20,7 +20,6 @@ export default defineConfig(({ command, mode }) => ({
       'react-dom/client',
       'formik',
       'hoist-non-react-statics',
-      'graphql',
     ],
   },
   resolve: {

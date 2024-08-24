@@ -30,6 +30,20 @@
       "import": "./dist/components/storage.js",
       "node": "./dist/components/storage.js",
       "default": "./dist/components/storage.js"
+    },
+    "./fetch": {
+      "production": "./dist/fetch.js",
+      "development": "./src/fetch.ts",
+      "import": "./dist/fetch.js",
+      "node": "./dist/fetch.js",
+      "default": "./dist/fetch.js"
+    },
+    "./graphql": {
+      "production": "./dist/graphql.js",
+      "development": "./src/graphql.ts",
+      "import": "./dist/graphql.js",
+      "node": "./dist/graphql.js",
+      "default": "./dist/graphql.js"
     }
   },
   "scripts": {
@@ -61,7 +75,7 @@
     "vite-plugin-pwa": "0.19.2"
   },
   "devDependencies": {
-    "@a-type/ui": "^1.1.8",
+    "@a-type/ui": "^1.1.10",
     "@types/react": "18.3.3",
     "@unocss/transformer-variant-group": "^0.58.0",
     "@verdant-web/react-router": "0.6.4",

@@ -12,6 +12,7 @@ import {
   PublishedRecipe,
   PublishedWishlist,
   User,
+  WishlistPurchase,
 } from '@biscuits/db';
 import { LibraryInfo } from '@verdant-web/server';
 import { BiscuitsVerdantProfile } from '@biscuits/libraries';
@@ -87,6 +88,7 @@ export const builder = new SchemaBuilder<{
     // WishWash
     PublishedWishlist: PublishedWishlist & { __typename: 'PublishedWishlist' };
     StorePageScan: WishWashStorePageScan & { __typename: 'StorePageScan' };
+    WishlistPurchase: WishlistPurchase & { __typename: 'WishlistPurchase' };
 
     // Common Utils
     WeatherForecast: WeatherForecast;
@@ -174,6 +176,12 @@ export const builder = new SchemaBuilder<{
     };
     StorePageScanInput: {
       url: string;
+    };
+    PurchasePublicItemInput: {
+      wishlistSlug: string;
+      itemId: string;
+      name: string;
+      quantity: number;
     };
 
     // Common Utils

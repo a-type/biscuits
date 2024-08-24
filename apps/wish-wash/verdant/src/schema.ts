@@ -76,6 +76,9 @@ const lists = schema.collection({
         },
       }),
     }),
+    confirmedRemotePurchases: schema.fields.array({
+      items: schema.fields.string(),
+    }),
   },
   indexes: {
     createdAt: {
@@ -85,7 +88,7 @@ const lists = schema.collection({
 });
 
 export default schema({
-  version: 8,
+  version: 9,
   collections: {
     lists,
   },
