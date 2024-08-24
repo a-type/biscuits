@@ -14,7 +14,7 @@
     "typecheck": "tsc --build tsconfig.json"
   },
   "dependencies": {
-    "@a-type/ui": "^1.1.7",
+    "@a-type/ui": "^1.1.14",
     "@a-type/utils": "^1.0.8",
     "@biscuits/client": "workspace:*",
     "@biscuits/error": "workspace:*",

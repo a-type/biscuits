@@ -20,7 +20,7 @@ export function App() {
       )}
     >
       <ErrorBoundary fallback={<ErrorFallback />}>
-        <UIProvider>
+        <UIProvider disableViewportOffset>
           <Suspense fallback={<GlobalLoader />}>
             <Provider
               appId="gnocchi"

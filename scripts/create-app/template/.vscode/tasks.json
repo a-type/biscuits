@@ -15,7 +15,10 @@
       "path": "web",
       "problemMatcher": ["$tsc-watch"],
       "label": "Dev",
-      "detail": "vite"
+      "detail": "vite",
+      "runOptions": {
+        "reevaluateOnRerun": true
+      }
     }
   ]
 }
