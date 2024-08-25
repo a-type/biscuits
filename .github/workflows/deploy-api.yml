@@ -101,7 +101,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: deploy
     steps:
-      - name: Invalidate SSR caches
+      - name: Invalidate Gnocchi SSR cache
         uses: chetan/invalidate-cloudfront-action@v2
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.DEPLOYER_AWS_ACCESS_KEY_ID }}
@@ -109,3 +109,11 @@ jobs:
           DISTRIBUTION: ${{ secrets.CLOUDFRONT_ID_GNOCCHI_HUB }}
           PATHS: '/*'
           AWS_REGION: 'us-east-1'
+      # - name: Invalidate Wish Wash SSR cache
+      #   uses: chetan/invalidate-cloudfront-action@v2
+      #   env:
+      #     AWS_ACCESS_KEY_ID: ${{ secrets.DEPLOYER_AWS_ACCESS_KEY_ID }}
+      #     AWS_SECRET_ACCESS_KEY: ${{ secrets.DEPLOYER_AWS_SECRET_ACCESS_KEY }}
+      #     DISTRIBUTION: ${{ secrets.CLOUDFRONT_ID_WISH_WASH_HUB }}
+      #     PATHS: '/*'
+      #     AWS_REGION: 'us-east-1'

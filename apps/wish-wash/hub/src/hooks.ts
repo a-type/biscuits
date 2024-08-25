@@ -51,7 +51,7 @@ export function usePurchaseItem(id: string) {
       variables: {
         input: {
           wishlistSlug,
-          id,
+          itemId: id,
           quantity,
           name,
         },

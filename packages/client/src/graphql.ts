@@ -205,13 +205,4 @@ export {
   useSuspenseQuery,
   ApolloProvider,
 } from '@apollo/client';
-export type {
-  ErrorPolicy,
-  GraphQLRequest,
-  UseBackgroundQueryResult,
-  UseFragmentOptions,
-  UseFragmentResult,
-  UseLoadableQueryResult,
-  UseReadQueryResult,
-  UseSuspenseQueryResult,
-} from '@apollo/client';
+export type * from '@apollo/client';

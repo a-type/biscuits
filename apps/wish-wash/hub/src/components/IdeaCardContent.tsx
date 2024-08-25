@@ -2,7 +2,7 @@ import { HubWishlistItem } from '@/types.js';
 import { Card } from '@a-type/ui/components/card';
 import { ItemCardTitle } from './ItemCardTitle.jsx';
 import { ItemCardPrice } from './ItemCardPrice.jsx';
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 import { Dialog } from '@a-type/ui/components/dialog';
 import { SearchButton, searchProviders } from '@wish-wash.biscuits/common';
 

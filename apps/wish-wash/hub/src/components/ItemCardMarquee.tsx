@@ -1,3 +1,4 @@
+import React from 'react';
 import { HubWishlistItem } from '@/types.js';
 import { CardImage } from '@a-type/ui/components/card';
 import { Marquee } from '@a-type/ui/components/marquee';

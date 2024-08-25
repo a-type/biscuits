@@ -5,6 +5,7 @@
     "outDir": "./dist/server",
     "rootDir": "./src",
     "baseUrl": ".",
+    "lib": ["esnext", "dom", "dom.iterable"],
     "paths": {
       "@/*": ["./src/*"]
     },

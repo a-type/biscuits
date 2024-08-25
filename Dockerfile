@@ -5,11 +5,9 @@ RUN npm install -g pnpm
 WORKDIR /root/monorepo
 
 # add git
-RUN apk add --no-cache git
-
-# missing dep for turbo - mentioned by @nathanhammond
+# and libc6-compat - missing dep for turbo - mentioned by @nathanhammond
 # on https://github.com/vercel/turborepo/issues/2293
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache git libc6-compat py3-pip g++ make
 
 ENV CYPRESS_INSTALL_BINARY=0
 ENV PNPM_HOME=/usr/local/share/pnpm
@@ -17,7 +15,7 @@ ENV PATH="$PNPM_HOME:$PATH"
 
 ENV VITE_APP_GNOCCHI_ORIGIN=https://gnocchi.biscuits.club
 
-FROM base as dev
+FROM base AS dev
 COPY ./pnpm-lock.yaml .
 RUN pnpm fetch
 
