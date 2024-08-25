@@ -18,7 +18,7 @@ import { gnocchiRouter } from './routers/gnocchi.js';
 import { rateLimit } from './rateLimiter.js';
 import { wishWashRouter } from './routers/wishWash.js';
 
-console.log('Starting server...');
+console.log('Starting server...', new Date().toISOString());
 
 const { preflight, corsify } = cors({
   origin: ALLOWED_ORIGINS,
