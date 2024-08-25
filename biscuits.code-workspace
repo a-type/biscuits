@@ -1,75 +1,79 @@
 {
-  "folders": [
-    {
-      "name": "💽 Server",
-      "path": "server",
-    },
-    {
-      "name": "🌐 Web",
-      "path": "web",
-    },
-    {
-      "name": "📦 Packages",
-      "path": "packages",
-    },
-    {
-      "name": "🍝 Gnocchi",
-      "path": "apps/gnocchi",
-    },
-    {
-      "name": "🏖️ Trip Tick",
-      "path": "apps/trip-tick",
-    },
-    {
-      "name": "🛒 Wish Wash",
-      "path": "apps/wish-wash",
-    },
-    {
-      "name": "📚 Marginalia",
-      "path": "apps/marginalia",
-    },
-    {
-      "name": "🌟 Star Chart",
-      "path": "apps/star-chart",
-    },
-    {
-      "name": "🎸 Humding",
-      "path": "apps/humding",
-    },
-    {
-      "name": "🎨 Palette",
-      "path": "apps/palette",
-    },
-    {
-      "name": "📃 Scripts",
-      "path": "scripts",
-    },
-    {
-      "name": "🛠️ CDK",
-      "path": "cdk",
-    },
-    {
-      "name": "📝 Blog",
-      "path": "blog",
-    },
-    {
-      "name": "🔧 Workflows",
-      "path": ".github/workflows",
-    },
-  ],
-  "settings": {
-    "typescript.tsdk": "📦 Packages\\client\\node_modules\\typescript\\lib",
-    "unocss.root": [
-      "🌐 Web",
-      "🍝 Gnocchi\\web",
-      "🏖️ Trip Tick\\web",
-      "🛒 Wish Wash\\web",
-      "📚 Marginalia\\web",
-      "🌟 Star Chart\\web",
-      "🎸 Humding\\web",
-      "🎨 Palette\\web",
-    ],
-    "typescript.enablePromptUseWorkspaceTsdk": true,
-    "typescript.preferences.importModuleSpecifierEnding": "js",
-  },
+	"folders": [
+		{
+			"name": "💽 Server",
+			"path": "server",
+		},
+		{
+			"name": "🌐 Web",
+			"path": "web",
+		},
+		{
+			"name": "📦 Packages",
+			"path": "packages",
+		},
+		{
+			"name": "🍝 Gnocchi",
+			"path": "apps/gnocchi",
+		},
+		{
+			"name": "🏖️ Trip Tick",
+			"path": "apps/trip-tick",
+		},
+		{
+			"name": "🛒 Wish Wash",
+			"path": "apps/wish-wash",
+		},
+		{
+			"name": "📚 Marginalia",
+			"path": "apps/marginalia",
+		},
+		{
+			"name": "🌟 Star Chart",
+			"path": "apps/star-chart",
+		},
+		{
+			"name": "🎸 Humding",
+			"path": "apps/humding",
+		},
+		{
+			"name": "🎨 Palette",
+			"path": "apps/palette",
+		},
+		{
+			"name": "📃 Scripts",
+			"path": "scripts",
+		},
+		{
+			"name": "🛠️ CDK",
+			"path": "cdk",
+		},
+		{
+			"name": "📝 Blog",
+			"path": "blog",
+		},
+		{
+			"name": "🔧 Workflows",
+			"path": ".github/workflows",
+		},
+	],
+	"settings": {
+		"typescript.tsdk": "📦 Packages\\client\\node_modules\\typescript\\lib",
+		"unocss.root": [
+			"🌐 Web",
+			"🍝 Gnocchi\\web",
+			"🏖️ Trip Tick\\web",
+			"🛒 Wish Wash\\web",
+			"📚 Marginalia\\web",
+			"🌟 Star Chart\\web",
+			"🎸 Humding\\web",
+			"🎨 Palette\\web",
+		],
+		"typescript.enablePromptUseWorkspaceTsdk": true,
+		"typescript.preferences.importModuleSpecifierEnding": "js",
+		"prettier.trailingComma": "all",
+		"prettier.useTabs": true,
+		"prettier.singleQuote": true,
+		"prettier.experimentalTernaries": true,
+	},
 }

@@ -15,123 +15,118 @@ import { CSSProperties, forwardRef } from 'react';
 import { H3 } from '@a-type/ui/components/typography';
 
 export interface ListItemProps {
-  item: Item;
-  style?: CSSProperties;
-  className?: string;
+	item: Item;
+	style?: CSSProperties;
+	className?: string;
 }
 
 export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
-  function ListItem({ item, className, ...rest }, ref) {
-    const {
-      purchasedCount,
-      count,
-      description,
-      links,
-      id,
-      imageFiles,
-      type,
-      lastPurchasedAt,
-      prioritized,
-      priceMin,
-      priceMax,
-      remoteImageUrl,
-    } = hooks.useWatch(item);
-    hooks.useWatch(links);
-    hooks.useWatch(imageFiles);
-    const link = links.get(0);
+	function ListItem({ item, className, ...rest }, ref) {
+		const {
+			purchasedCount,
+			count,
+			description,
+			links,
+			id,
+			imageFiles,
+			type,
+			lastPurchasedAt,
+			prioritized,
+			priceMin,
+			priceMax,
+			remoteImageUrl,
+		} = hooks.useWatch(item);
+		hooks.useWatch(links);
+		hooks.useWatch(imageFiles);
+		const link = links.get(0);
 
-    const editItem = useEditItem();
+		const editItem = useEditItem();
 
-    const purchased = purchasedCount > count;
+		const purchased = purchasedCount > count;
 
-    const price =
-      priceMin || priceMax
-        ? !priceMin || !priceMax
-          ? priceMax || priceMin
-          : `${priceMin} - ${priceMax}`
-        : null;
+		const price =
+			priceMin || priceMax ?
+				!priceMin || !priceMax ?
+					priceMax || priceMin
+				:	`${priceMin} - ${priceMax}`
+			:	null;
 
-    const hasImage = imageFiles.length > 0 || remoteImageUrl;
+		const hasImage = imageFiles.length > 0 || remoteImageUrl;
 
-    return (
-      <Card
-        ref={ref}
-        className={clsx(
-          prioritized
-            ? 'min-h-300px sm:min-h-40vw'
-            : imageFiles.length
-              ? 'min-h-300px'
-              : '',
-          className,
-        )}
-        data-span={prioritized ? 2 : 1}
-        {...rest}
-      >
-        {hasImage && (
-          <Card.Image>
-            {imageFiles.length > 0 ? (
-              <ImageMarquee images={imageFiles.getAll()} />
-            ) : (
-              <img
-                src={remoteImageUrl!}
-                alt={description}
-                className="w-full h-full object-cover object-center"
-              />
-            )}
-          </Card.Image>
-        )}
-        <Card.Main className="col items-start">
-          <Card.Content unstyled>
-            <ItemTypeChip className="mr-2" item={item} />
-          </Card.Content>
-          <Card.Content>
-            <H3>{description}</H3>
-          </Card.Content>
-          {price && <Card.Content className="text-md">{price}</Card.Content>}
-          <Card.Content unstyled>
-            {lastPurchasedAt && (
-              <Chip className="text-xxs">
-                Bought: {new Date(lastPurchasedAt).toLocaleDateString()}
-              </Chip>
-            )}
-            {type === 'idea' ||
-              (type === 'product' && !link && <SearchButton item={item} />)}
-          </Card.Content>
-          <ItemStar item={item} className="absolute right-1 top-1" />
-        </Card.Main>
-        <Card.Footer className="items-center justify-between">
-          <Card.Menu className="ml-0 mr-auto">
-            <Button
-              color="ghost"
-              size="icon"
-              onClick={() => editItem(id)}
-              className="mr-auto"
-            >
-              <Icon name="pencil" />
-            </Button>
-          </Card.Menu>
-          <Card.Actions className="ml-auto mr-0">
-            {link && (
-              <Button asChild color="accent" size="small">
-                <Link to={link} newTab>
-                  <Icon name="link" /> View
-                </Link>
-              </Button>
-            )}
-            <Button
-              toggled={!!purchased}
-              color={purchased ? 'default' : 'primary'}
-              toggleMode="indicator"
-              onClick={() => {
-                // TODO: Implement
-              }}
-              size="small"
-            >
-              {purchased ? 'Bought' : 'Buy'}
-            </Button>
-          </Card.Actions>
-        </Card.Footer>
-      </Card>
-    );
-  },
+		return (
+			<Card
+				ref={ref}
+				className={clsx(
+					prioritized ? 'min-h-300px sm:min-h-40vw'
+					: imageFiles.length ? 'min-h-300px'
+					: '',
+					className,
+				)}
+				data-span={prioritized ? 2 : 1}
+				{...rest}
+			>
+				{hasImage && (
+					<Card.Image>
+						{imageFiles.length > 0 ?
+							<ImageMarquee images={imageFiles.getAll()} />
+						:	<img
+								src={remoteImageUrl!}
+								alt={description}
+								className="w-full h-full object-cover object-center"
+							/>
+						}
+					</Card.Image>
+				)}
+				<Card.Main className="col items-start" onClick={() => editItem(id)}>
+					<Card.Content unstyled className="pt-2 pl-1">
+						<ItemTypeChip item={item} />
+					</Card.Content>
+					<Card.Content
+						unstyled
+						className={clsx(
+							'p-1',
+							hasImage ?
+								'bg-[rgba(0,0,0,0.5)] text-[white] text-xl font-bold'
+							:	'text-lg font-normal',
+						)}
+					>
+						<span>{description}</span>
+					</Card.Content>
+					{price && <Card.Content className="text-md">{price}</Card.Content>}
+					<Card.Content unstyled>
+						{lastPurchasedAt && (
+							<Chip className="text-xxs">
+								Bought: {new Date(lastPurchasedAt).toLocaleDateString()}
+							</Chip>
+						)}
+						{type === 'idea' ||
+							(type === 'product' && !link && <SearchButton item={item} />)}
+					</Card.Content>
+				</Card.Main>
+				<ItemStar item={item} className="absolute right-1 top-1" />
+				<Card.Footer className="items-center justify-between">
+					<Card.Actions className="ml-auto mr-0">
+						{link && (
+							<Button asChild color="accent" size="small">
+								<Link to={link} newTab>
+									<Icon name="link" /> View
+								</Link>
+							</Button>
+						)}
+						<Button
+							toggled={!!purchased}
+							color={purchased ? 'default' : 'primary'}
+							toggleMode="indicator"
+							onClick={() => {
+								// TODO: Implement
+							}}
+							size="small"
+						>
+							{purchased ? 'Bought' : 'Buy'}
+						</Button>
+					</Card.Actions>
+				</Card.Footer>
+			</Card>
+		);
+	},
 );
