@@ -1,11 +1,11 @@
 {
-  "extends": "../../../tsconfig.json",
-  "compilerOptions": {
-    "jsx": "preserve",
-    "outDir": "./dist",
-    "rootDir": ".",
-    "baseUrl": ".",
-    "customConditions": ["development"]
-  },
-  "include": ["src"]
+	"extends": "../../../tsconfig.json",
+	"compilerOptions": {
+		"jsx": "preserve",
+		"outDir": "./dist",
+		"rootDir": "./src",
+		"baseUrl": ".",
+		"customConditions": ["development"]
+	},
+	"include": ["src"]
 }

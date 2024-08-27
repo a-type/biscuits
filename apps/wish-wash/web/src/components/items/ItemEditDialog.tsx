@@ -16,7 +16,8 @@ import { ScrollArea } from '@a-type/ui/components/scrollArea/ScrollArea';
 import { TextArea } from '@a-type/ui/components/textArea/TextArea';
 import { withClassName } from '@a-type/ui/hooks';
 import { preventDefault } from '@a-type/utils';
-import { graphql, useHasServerAccess, useLazyQuery } from '@biscuits/client';
+import { useHasServerAccess } from '@biscuits/client';
+import { graphql, useLazyQuery } from '@biscuits/graphql';
 import { useSearchParams } from '@verdant-web/react-router';
 import {
 	Item,

@@ -1,16 +1,16 @@
 {
-  "extends": "../../../tsconfig.json",
-  "compilerOptions": {
-    "jsx": "preserve",
-    "outDir": "./dist/server",
-    "rootDir": "./src",
-    "baseUrl": ".",
-    "lib": ["esnext", "dom", "dom.iterable"],
-    "paths": {
-      "@/*": ["./src/*"]
-    },
-    "types": ["vite/client"],
-    "customConditions": ["development"]
-  },
-  "include": ["src"]
+	"extends": "../../../tsconfig.json",
+	"compilerOptions": {
+		"jsx": "preserve",
+		"outDir": "./dist/server",
+		"rootDir": "./src",
+		"baseUrl": ".",
+		"lib": ["esnext", "dom", "dom.iterable"],
+		"paths": {
+			"@/*": ["./src/*"]
+		},
+		"types": ["vite/client"],
+		"customConditions": ["development"]
+	},
+	"include": ["src"]
 }

@@ -1,41 +1,42 @@
 {
-  "name": "@humding.biscuits/web",
-  "version": "1.0.0",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "app-dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "@a-type/ui": "1.1.14",
-    "@a-type/utils": "1.1.3",
-    "@biscuits/client": "workspace:*",
-    "@humding.biscuits/verdant": "workspace:*",
-    "@react-spring/web": "^9.7.3",
-    "@use-gesture/react": "^10.2.24",
-    "@verdant-web/react-router": "^0.6.4",
-    "react": "18.3.1",
-    "react-dom": "18.3.1",
-    "react-hot-toast": "^2.4.1",
-    "unocss": "0.60.3",
-    "valtio": "^1.13.2",
-    "workbox-core": "^7.1.0",
-    "workbox-expiration": "^7.1.0",
-    "workbox-precaching": "^7.1.0",
-    "workbox-routing": "^7.1.0",
-    "workbox-strategies": "^7.1.0",
-    "workbox-window": "^7.1.0"
-  },
-  "devDependencies": {
-    "@originjs/vite-plugin-commonjs": "^1.0.3",
-    "@types/react": "^18.2.79",
-    "@types/react-dom": "^18.2.25",
-    "@unocss/transformer-variant-group": "^0.58.0",
-    "@vitejs/plugin-react-swc": "3.5.0",
-    "typescript": "5.5.3",
-    "vite": "5.2.11",
-    "vite-plugin-pwa": "^0.19.8"
-  }
+	"name": "@humding.biscuits/web",
+	"version": "1.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"app-dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview"
+	},
+	"dependencies": {
+		"@a-type/ui": "1.1.16",
+		"@a-type/utils": "1.1.3",
+		"@biscuits/client": "workspace:*",
+		"@biscuits/graphql": "workspace:*",
+		"@humding.biscuits/verdant": "workspace:*",
+		"@react-spring/web": "^9.7.3",
+		"@use-gesture/react": "^10.2.24",
+		"@verdant-web/react-router": "^0.6.4",
+		"react": "18.3.1",
+		"react-dom": "18.3.1",
+		"react-hot-toast": "^2.4.1",
+		"unocss": "0.60.3",
+		"valtio": "^1.13.2",
+		"workbox-core": "^7.1.0",
+		"workbox-expiration": "^7.1.0",
+		"workbox-precaching": "^7.1.0",
+		"workbox-routing": "^7.1.0",
+		"workbox-strategies": "^7.1.0",
+		"workbox-window": "^7.1.0"
+	},
+	"devDependencies": {
+		"@originjs/vite-plugin-commonjs": "^1.0.3",
+		"@types/react": "^18.2.79",
+		"@types/react-dom": "^18.2.25",
+		"@unocss/transformer-variant-group": "^0.58.0",
+		"@vitejs/plugin-react-swc": "3.5.0",
+		"typescript": "5.5.3",
+		"vite": "5.2.11",
+		"vite-plugin-pwa": "^0.19.8"
+	}
 }

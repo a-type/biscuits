@@ -1,4 +1,3 @@
-import { graphql } from '@/graphql.js';
 import {
 	PageContent,
 	PageFixedArea,
@@ -7,12 +6,16 @@ import {
 import { H1, H2, H3 } from '@a-type/ui/components/typography';
 import { Link, useNavigate, useSearchParams } from '@verdant-web/react-router';
 import { Suspense, useEffect } from 'react';
-import { NetworkStatus, useQuery, SubscriptionSetup } from '@biscuits/client';
+import { graphql, NetworkStatus, useQuery } from '@biscuits/graphql';
 import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
 import { MembersAndInvitations } from '@/components/plan/MembersAndInvitations.jsx';
 import { VerdantLibraries } from '@/components/storage/VerdantLibraries.jsx';
-import { LogoutButton, useLocalStorage } from '@biscuits/client';
+import {
+	LogoutButton,
+	useLocalStorage,
+	SubscriptionSetup,
+} from '@biscuits/client';
 import { apps } from '@biscuits/apps';
 import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
 import { Footer } from '@/components/help/Footer.jsx';

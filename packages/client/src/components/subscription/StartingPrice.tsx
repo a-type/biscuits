@@ -1,23 +1,23 @@
 import { useQuery } from '@apollo/client';
-import { graphql } from '../../graphql.js';
+import { graphql } from '@biscuits/graphql';
 import { Price } from '../Price.js';
 
 const startingPriceQuery = graphql(`
-  query StartingPrice {
-    productInfo(lookupKey: "for_one") {
-      price
-      currency
-    }
-  }
+	query StartingPrice {
+		productInfo(lookupKey: "for_one") {
+			price
+			currency
+		}
+	}
 `);
 
 export const StartingPrice = () => {
-  const { data } = useQuery(startingPriceQuery);
-  return (
-    <Price
-      value={data?.productInfo.price}
-      currency={data?.productInfo.currency}
-      className="font-bold"
-    />
-  );
+	const { data } = useQuery(startingPriceQuery);
+	return (
+		<Price
+			value={data?.productInfo.price}
+			currency={data?.productInfo.currency}
+			className="font-bold"
+		/>
+	);
 };

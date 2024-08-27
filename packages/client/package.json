@@ -1,88 +1,89 @@
 {
-  "name": "@biscuits/client",
-  "private": false,
-  "version": "0.0.1",
-  "exports": {
-    ".": {
-      "production": "./dist/index.js",
-      "development": "./src/index.ts",
-      "import": "./dist/index.js",
-      "node": "./dist/index.js",
-      "default": "./dist/index.js"
-    },
-    "./serviceWorkers": {
-      "production": "./dist/serviceWorkers.js",
-      "development": "./src/serviceWorkers.ts",
-      "import": "./dist/serviceWorkers.js",
-      "node": "./dist/serviceWorkers.js",
-      "default": "./dist/serviceWorkers.js"
-    },
-    "./henrietta.css": {
-      "production": "./henrietta.css",
-      "development": "./henrietta.css",
-      "import": "./henrietta.css",
-      "node": "./henrietta.css",
-      "default": "./henrietta.css"
-    },
-    "./storage": {
-      "production": "./dist/components/storage.js",
-      "development": "./src/components/storage.tsx",
-      "import": "./dist/components/storage.js",
-      "node": "./dist/components/storage.js",
-      "default": "./dist/components/storage.js"
-    },
-    "./fetch": {
-      "production": "./dist/fetch.js",
-      "development": "./src/fetch.ts",
-      "import": "./dist/fetch.js",
-      "node": "./dist/fetch.js",
-      "default": "./dist/fetch.js"
-    },
-    "./graphql": {
-      "production": "./dist/graphql.js",
-      "development": "./src/graphql.ts",
-      "import": "./dist/graphql.js",
-      "node": "./dist/graphql.js",
-      "default": "./dist/graphql.js"
-    }
-  },
-  "scripts": {
-    "build": "pnpm run build:transpile && pnpm run build:prefix",
-    "build:transpile": "tsc",
-    "build:prefix": "node ./scripts/addUnoInclude.mjs",
-    "dev": "tsc --watch"
-  },
-  "type": "module",
-  "dependencies": {
-    "@a-type/auth-client": "1.0.10",
-    "@a-type/utils": "1.1.3",
-    "@apollo/client": "3.10.8",
-    "@biscuits/apps": "workspace:*",
-    "@biscuits/error": "workspace:*",
-    "@biscuits/libraries": "workspace:*",
-    "@stripe/react-stripe-js": "2.7.3",
-    "@stripe/stripe-js": "4.2.0",
-    "gql.tada": "1.8.2",
-    "graphql": "16.9.0"
-  },
-  "peerDependencies": {
-    "@a-type/ui": "^0.6.17",
-    "@react-spring/web": "^9",
-    "@verdant-web/react-router": "^0.6.0",
-    "@verdant-web/store": "^3.2.2",
-    "react": "18.3.1",
-    "valtio": "^1.13.2",
-    "vite-plugin-pwa": "0.19.2"
-  },
-  "devDependencies": {
-    "@a-type/ui": "^1.1.14",
-    "@types/react": "18.3.3",
-    "@unocss/transformer-variant-group": "^0.58.0",
-    "@verdant-web/react-router": "0.6.4",
-    "@verdant-web/store": "^3.12.0",
-    "react": "18.3.1",
-    "typescript": "5.5.3",
-    "unocss": "^0.58.0",
-    "vite-plugin-pwa": "0.19.2"
-  }
+	"name": "@biscuits/client",
+	"private": false,
+	"version": "0.0.1",
+	"exports": {
+		".": {
+			"production": "./dist/index.js",
+			"development": "./src/index.ts",
+			"import": "./dist/index.js",
+			"node": "./dist/index.js",
+			"default": "./dist/index.js"
+		},
+		"./serviceWorkers": {
+			"production": "./dist/serviceWorkers.js",
+			"development": "./src/serviceWorkers.ts",
+			"import": "./dist/serviceWorkers.js",
+			"node": "./dist/serviceWorkers.js",
+			"default": "./dist/serviceWorkers.js"
+		},
+		"./henrietta.css": {
+			"production": "./henrietta.css",
+			"development": "./henrietta.css",
+			"import": "./henrietta.css",
+			"node": "./henrietta.css",
+			"default": "./henrietta.css"
+		},
+		"./storage": {
+			"production": "./dist/components/storage.js",
+			"development": "./src/components/storage.tsx",
+			"import": "./dist/components/storage.js",
+			"node": "./dist/components/storage.js",
+			"default": "./dist/components/storage.js"
+		},
+		"./fetch": {
+			"production": "./dist/fetch.js",
+			"development": "./src/fetch.ts",
+			"import": "./dist/fetch.js",
+			"node": "./dist/fetch.js",
+			"default": "./dist/fetch.js"
+		},
+		"./graphql": {
+			"production": "./dist/graphql.js",
+			"development": "./src/graphql.ts",
+			"import": "./dist/graphql.js",
+			"node": "./dist/graphql.js",
+			"default": "./dist/graphql.js"
+		}
+	},
+	"scripts": {
+		"build": "pnpm run build:transpile && pnpm run build:prefix",
+		"build:transpile": "tsc",
+		"build:prefix": "node ./scripts/addUnoInclude.mjs",
+		"dev": "tsc --watch"
+	},
+	"type": "module",
+	"dependencies": {
+		"@a-type/auth-client": "1.0.10",
+		"@a-type/utils": "1.1.3",
+		"@apollo/client": "3.10.8",
+		"@biscuits/apps": "workspace:*",
+		"@biscuits/error": "workspace:*",
+		"@biscuits/graphql": "workspace:*",
+		"@biscuits/libraries": "workspace:*",
+		"@stripe/react-stripe-js": "2.7.3",
+		"@stripe/stripe-js": "4.2.0",
+		"gql.tada": "1.8.2",
+		"graphql": "16.9.0"
+	},
+	"peerDependencies": {
+		"@a-type/ui": "^0.6.17",
+		"@react-spring/web": "^9",
+		"@verdant-web/react-router": "^0.6.0",
+		"@verdant-web/store": "^3.2.2",
+		"react": "18.3.1",
+		"valtio": "^1.13.2",
+		"vite-plugin-pwa": "0.19.2"
+	},
+	"devDependencies": {
+		"@a-type/ui": "^1.1.16",
+		"@types/react": "18.3.3",
+		"@unocss/transformer-variant-group": "^0.58.0",
+		"@verdant-web/react-router": "0.6.4",
+		"@verdant-web/store": "^3.12.0",
+		"react": "18.3.1",
+		"typescript": "5.5.3",
+		"unocss": "^0.58.0",
+		"vite-plugin-pwa": "0.19.2"
+	}
 }

@@ -98,6 +98,7 @@ wishWashRouter.get('/hubList/:listSlug', async (req) => {
 		title: snapshot.name,
 		slug: wishList.slug,
 		hidePurchases: isUsersList,
+		author: wishList.publisherFullName,
 		// mapping manually here to avoid leaking unintended data.
 		items: snapshot.items.map((item) => ({
 			id: item.id,

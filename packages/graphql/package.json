@@ -1,0 +1,41 @@
+{
+	"name": "@biscuits/graphql",
+	"private": false,
+	"version": "0.0.1",
+	"exports": {
+		".": {
+			"production": "./dist/index.js",
+			"development": "./src/index.ts",
+			"import": "./dist/index.js",
+			"node": "./dist/index.js",
+			"default": "./dist/index.js"
+		},
+		"./fetch": {
+			"production": "./dist/fetch.js",
+			"development": "./src/fetch.ts",
+			"import": "./dist/fetch.js",
+			"node": "./dist/fetch.js",
+			"default": "./dist/fetch.js"
+		}
+	},
+	"scripts": {
+		"build": "pnpm run build:transpile",
+		"build:transpile": "tsc",
+		"dev": "tsc --watch"
+	},
+	"type": "module",
+	"dependencies": {
+		"@a-type/auth-client": "1.0.10",
+		"@a-type/utils": "1.1.3",
+		"@apollo/client": "3.10.8",
+		"@biscuits/apps": "workspace:*",
+		"@biscuits/error": "workspace:*",
+		"@biscuits/libraries": "workspace:*",
+		"gql.tada": "1.8.2",
+		"graphql": "16.9.0"
+	},
+	"peerDependencies": {},
+	"devDependencies": {
+		"typescript": "5.5.3"
+	}
+}
