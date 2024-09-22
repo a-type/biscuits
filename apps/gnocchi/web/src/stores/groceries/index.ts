@@ -14,6 +14,7 @@ import {
 	ItemInputsItemInit,
 	Recipe,
 	RecipeIngredients,
+	RecipeIngredientsItem,
 	RecipeIngredientsItemInit,
 	RecipeInit,
 	UserInfo,
@@ -292,6 +293,81 @@ export const hooks = createHooks<Presence, Profile>({
 				const clone = JSON.parse(JSON.stringify(snapshot));
 				const newItem = await client.items.put(clone);
 				return newItem;
+			},
+			[client],
+		),
+	useAddIngredients: (client) =>
+		useCallback(
+			async (
+				ingredients: RecipeIngredientsItem[],
+				{
+					recipeId,
+					multiplier = 1,
+					showToast,
+					listId,
+					title,
+				}: {
+					recipeId: string;
+					multiplier?: number;
+					showToast?: boolean;
+					listId?: string | null;
+					title?: string | null;
+				},
+			) => {
+				const processed = await Promise.all(
+					ingredients.map(async (ingredient) => {
+						const totalQuantity =
+							ingredient.get('quantity') * (multiplier || 1);
+						const foodName = ingredient.get('food');
+						const food = foodName
+							? pickBestNameMatch(
+									await client.foods.findAll({
+										index: {
+											where: 'nameLookup',
+											equals: foodName,
+										},
+									}).resolved,
+									foodName,
+							  )
+							: undefined;
+						const unit = ingredient.get('unit');
+						const textOverride =
+							multiplier !== 1
+								? `${totalQuantity} ${
+										unit ? pluralize(unit, totalQuantity) : ''
+								  } ${
+										food
+											? food.get('pluralizeName')
+												? pluralize(food.get('canonicalName'))
+												: food.get('canonicalName')
+											: foodName ?? ''
+								  }`
+								: food
+								? food.get('pluralizeName')
+									? pluralize(food.get('canonicalName'))
+									: food.get('canonicalName')
+								: foodName ?? undefined;
+
+						return {
+							original: ingredient.get('text'),
+							quantity: textOverride ? 1 : totalQuantity,
+							unit: unit,
+							food: ingredient.get('food') || 'Unknown',
+							// for items added from this view, we add the food
+							// name as the text, not the ingredient text
+							textOverride,
+						};
+					}),
+				);
+				return addItems(client, processed, {
+					sourceInfo: {
+						multiplier: multiplier !== 1 ? multiplier : undefined,
+						recipeId,
+						title,
+					},
+					listId,
+					showToast,
+				});
 			},
 			[client],
 		),
