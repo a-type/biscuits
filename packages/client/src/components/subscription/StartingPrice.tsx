@@ -1,5 +1,4 @@
-import { useQuery } from '@apollo/client';
-import { graphql } from '@biscuits/graphql';
+import { graphql, useQuery } from '@biscuits/graphql';
 import { Price } from '../Price.js';
 
 const startingPriceQuery = graphql(`

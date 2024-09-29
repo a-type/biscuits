@@ -1,4 +1,4 @@
-import { FragmentOf, graphql, readFragment } from '../../graphql.js';
+import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 import { Button } from '@a-type/ui/components/button';
 import { useSearchParams } from '@verdant-web/react-router';
 import { useEffect } from 'react';
@@ -12,93 +12,92 @@ import * as CONFIG from '../../config.js';
 import { Chip } from '@a-type/ui/components/chip';
 
 export const manageSubscriptionInfo = graphql(
-  `
-    fragment ManageSubscription_manageSubscriptionInfo on Plan {
-      id
-      subscriptionStatus
-      productInfo {
-        id
-        ...PlanInfo_productInfo
-      }
-    }
-  `,
-  [planProductInfo],
+	`
+		fragment ManageSubscription_manageSubscriptionInfo on Plan {
+			id
+			subscriptionStatus
+			productInfo {
+				id
+				...PlanInfo_productInfo
+			}
+		}
+	`,
+	[planProductInfo],
 );
 
 const refetchPlanStatus = graphql(`
-  query RefetchPlanStatus {
-    plan {
-      id
-      subscriptionStatus
-    }
-  }
+	query RefetchPlanStatus {
+		plan {
+			id
+			subscriptionStatus
+		}
+	}
 `);
 
 export interface ManageSubscriptionProps {
-  className?: string;
-  data: FragmentOf<typeof manageSubscriptionInfo>;
+	className?: string;
+	data: FragmentOf<typeof manageSubscriptionInfo>;
 }
 
 export function ManageSubscription({
-  className,
-  data: $data,
-  ...props
+	className,
+	data: $data,
+	...props
 }: ManageSubscriptionProps) {
-  const [params, setParams] = useSearchParams();
+	const [params, setParams] = useSearchParams();
 
-  const data = readFragment(manageSubscriptionInfo, $data);
+	const data = readFragment(manageSubscriptionInfo, $data);
 
-  useEffect(() => {
-    if (params.get('paymentComplete')) {
-      toast.success('Your subscription is activated! 🎉');
-      setParams((p) => {
-        p.delete('paymentComplete');
-        return p;
-      });
-    }
-  }, [params, setParams]);
+	useEffect(() => {
+		if (params.get('paymentComplete')) {
+			toast.success('Your subscription is activated! 🎉');
+			setParams((p) => {
+				p.delete('paymentComplete');
+				return p;
+			});
+		}
+	}, [params, setParams]);
 
-  const [refetchStatus] = useLazyQuery(refetchPlanStatus);
+	const [refetchStatus] = useLazyQuery(refetchPlanStatus);
 
-  return (
-    <div
-      className={clsx('flex flex-col gap-4 items-start', className)}
-      {...props}
-    >
-      <div className="flex flex-col gap-4 w-full">
-        <div className="row justify-between w-full">
-          <H2>Your Subscription</H2>
-          <Chip
-            color={
-              data.subscriptionStatus === 'active'
-                ? 'accent'
-                : data.subscriptionStatus === 'trialing'
-                  ? 'primary'
-                  : 'neutral'
-            }
-            className="pl-6"
-          >
-            {data.subscriptionStatus}
-            <Button
-              size="icon"
-              color="ghost"
-              onClick={() => {
-                refetchStatus({ fetchPolicy: 'network-only' });
-              }}
-            >
-              <Icon name="refresh" />
-            </Button>
-          </Chip>
-        </div>
-        {data.productInfo && <PlanInfo data={data.productInfo} />}
-      </div>
-      <form action={`${CONFIG.API_ORIGIN}/stripe/portal-session`} method="POST">
-        <Button type="submit">Change your subscription</Button>
-        <span className="text-xs">
-          Update your plan, change your card, or unsubscribe
-        </span>
-      </form>
-      <CancelPlanButton />
-    </div>
-  );
+	return (
+		<div
+			className={clsx('flex flex-col gap-4 items-start', className)}
+			{...props}
+		>
+			<div className="flex flex-col gap-4 w-full">
+				<div className="row justify-between w-full">
+					<H2>Your Subscription</H2>
+					<Chip
+						color={
+							data.subscriptionStatus === 'active' ? 'accent'
+							: data.subscriptionStatus === 'trialing' ?
+								'primary'
+							:	'neutral'
+						}
+						className="pl-6"
+					>
+						{data.subscriptionStatus}
+						<Button
+							size="icon"
+							color="ghost"
+							onClick={() => {
+								refetchStatus({ fetchPolicy: 'network-only' });
+							}}
+						>
+							<Icon name="refresh" />
+						</Button>
+					</Chip>
+				</div>
+				{data.productInfo && <PlanInfo data={data.productInfo} />}
+			</div>
+			<form action={`${CONFIG.API_ORIGIN}/stripe/portal-session`} method="POST">
+				<Button type="submit">Change your subscription</Button>
+				<span className="text-xs">
+					Update your plan, change your card, or unsubscribe
+				</span>
+			</form>
+			<CancelPlanButton />
+		</div>
+	);
 }

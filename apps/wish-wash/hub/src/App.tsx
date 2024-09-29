@@ -4,6 +4,7 @@ import React, { useEffect } from 'react';
 import { HubWishlistData } from './types.js';
 import { ApolloProvider, graphqlClient } from '@biscuits/graphql';
 import { Items } from './components/Items.jsx';
+import { HubContextProvider } from './components/Context.jsx';
 
 const innerProps = {
 	className: 'max-w-600px',
@@ -26,14 +27,16 @@ export function App({ list: data }: { list: HubWishlistData }) {
 	}
 
 	return (
-		<ApolloProvider client={graphqlClient}>
-			<PageRoot className="theme-leek">
-				<PageContent innerProps={innerProps}>
-					<H1>{data.title}</H1>
-					<P>{data.items.length} items</P>
-					<Items items={data.items} listAuthor={data.author} />
-				</PageContent>
-			</PageRoot>
-		</ApolloProvider>
+		<HubContextProvider wishlistSlug={data.slug}>
+			<ApolloProvider client={graphqlClient}>
+				<PageRoot className="theme-leek">
+					<PageContent innerProps={innerProps}>
+						<H1>{data.title}</H1>
+						<P>{data.items.length} items</P>
+						<Items items={data.items} listAuthor={data.author} />
+					</PageContent>
+				</PageRoot>
+			</ApolloProvider>
+		</HubContextProvider>
 	);
 }

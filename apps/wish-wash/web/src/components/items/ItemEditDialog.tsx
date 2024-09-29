@@ -253,6 +253,7 @@ function SingleLinkField({
 	const [doScan, { loading: scanning }] = useLazyQuery(scanPage);
 	const maybeScanPage = useCallback(async () => {
 		if (!subscribed) return;
+		if (!firstLink) return;
 
 		const result = await doScan({
 			variables: {

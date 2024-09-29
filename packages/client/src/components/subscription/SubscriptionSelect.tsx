@@ -1,6 +1,6 @@
 import { graphql } from '@biscuits/graphql';
 import { H2, P } from '@a-type/ui/components/typography';
-import { useMutation, useQuery } from '@apollo/client';
+import { useMutation, useQuery } from '@biscuits/graphql';
 import {
 	CardContent,
 	CardGrid,

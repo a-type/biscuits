@@ -12,7 +12,7 @@ import { ItemTypeChip } from './ItemTypeChip.jsx';
 import { Chip } from '@a-type/ui/components/chip';
 import { ImageMarquee } from './ImageMarquee.jsx';
 import { CSSProperties, forwardRef } from 'react';
-import { H3 } from '@a-type/ui/components/typography';
+import { typeThemes } from '@wish-wash.biscuits/common';
 
 export interface ListItemProps {
 	item: Item;
@@ -60,6 +60,8 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 					prioritized ? 'min-h-300px sm:min-h-40vw'
 					: imageFiles.length ? 'min-h-300px'
 					: '',
+					`theme-${typeThemes[type]}`,
+					'bg-primary-wash',
 					className,
 				)}
 				data-span={prioritized ? 2 : 1}
@@ -84,10 +86,10 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 					<Card.Content
 						unstyled
 						className={clsx(
-							'p-1',
+							'p-1 font-bold',
 							hasImage ?
-								'bg-[rgba(0,0,0,0.5)] text-[white] text-xl font-bold'
-							:	'text-lg font-normal',
+								'bg-[rgba(0,0,0,0.5)] text-[white] text-xl'
+							:	'text-lg color-primary-dark',
 						)}
 					>
 						<span>{description}</span>
@@ -99,15 +101,15 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 								Bought: {new Date(lastPurchasedAt).toLocaleDateString()}
 							</Chip>
 						)}
-						{type === 'idea' ||
-							(type === 'product' && !link && <SearchButton item={item} />)}
 					</Card.Content>
 				</Card.Main>
 				<ItemStar item={item} className="absolute right-1 top-1" />
 				<Card.Footer className="items-center justify-between">
 					<Card.Actions className="ml-auto mr-0">
+						{type === 'idea' ||
+							(type === 'product' && !link && <SearchButton item={item} />)}
 						{link && (
-							<Button asChild color="accent" size="small">
+							<Button asChild color="default" size="small">
 								<Link to={link} newTab>
 									<Icon name="link" /> View
 								</Link>

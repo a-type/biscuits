@@ -1,6 +1,5 @@
-import { graphql } from '@biscuits/graphql';
+import { graphql, useQuery } from '@biscuits/graphql';
 import { Spinner } from '@a-type/ui/components/spinner';
-import { useQuery } from '@apollo/client';
 import {
 	ManageSubscription,
 	manageSubscriptionInfo,
