@@ -1,37 +1,12 @@
-import { recipeSavePromptState } from '@/components/recipes/savePrompt/state.js';
 import { AddToListDialog } from '@/components/recipes/viewer/AddToListDialog.jsx';
 import useMergedRef from '@/hooks/useMergedRef.js';
-import { Input } from '@a-type/ui/components/input';
 import { useSize } from '@a-type/ui/hooks';
-import { isUrl, preventDefault, stopPropagation } from '@a-type/utils';
-import {
-	showSubscriptionPromotion,
-	useHasServerAccess,
-} from '@biscuits/client';
-import { Recipe } from '@gnocchi.biscuits/verdant';
+import { preventDefault, stopPropagation } from '@a-type/utils';
 import classNames from 'classnames';
-import {
-	UseComboboxState,
-	UseComboboxStateChangeOptions,
-	useCombobox,
-} from 'downshift';
-import {
-	Suspense,
-	forwardRef,
-	useCallback,
-	useEffect,
-	useRef,
-	useState,
-	useTransition,
-} from 'react';
+import { Suspense, forwardRef, useEffect, useRef, useState } from 'react';
 import { AddInput } from './AddInput.jsx';
 import { SuggestionGroup } from './SuggestionGroup.jsx';
-import {
-	SuggestionData,
-	suggestionToString,
-	useAddBarCombobox,
-	useAddBarSuggestions,
-} from './hooks.js';
+import { useAddBarCombobox, useAddBarSuggestions } from './hooks.js';
 import { AddBarProps } from './AddBar.jsx';
 import { ScrollArea } from '@a-type/ui/components/scrollArea';
 
@@ -156,31 +131,33 @@ const AddPaneImpl = forwardRef<
 				onScroll={stopPropagation}
 				background="white"
 			>
-				{showSuggested && (
-					<SuggestionGroup
-						title="Suggested"
-						suggestions={mainSuggestions}
-						highlightedIndex={highlightedIndex}
-						getItemProps={getItemProps}
-					/>
-				)}
-				{showExpiring && (
-					<SuggestionGroup
-						title="Expiring Soon"
-						suggestions={expiresSoonSuggestions}
-						getItemProps={getItemProps}
-						highlightedIndex={highlightedIndex}
-					/>
-				)}
-				{!noSuggestions && (
-					<SuggestionGroup
-						title={inputValue ? 'Matches' : 'Favorites'}
-						suggestions={matchSuggestions}
-						highlightedIndex={highlightedIndex}
-						getItemProps={getItemProps}
-					/>
-				)}
-				{noSuggestions && <div>No suggestions</div>}
+				<div className="flex flex-col gap-4 items-stretch">
+					{showSuggested && (
+						<SuggestionGroup
+							title="Suggested"
+							suggestions={mainSuggestions}
+							highlightedIndex={highlightedIndex}
+							getItemProps={getItemProps}
+						/>
+					)}
+					{showExpiring && (
+						<SuggestionGroup
+							title="Expiring Soon"
+							suggestions={expiresSoonSuggestions}
+							getItemProps={getItemProps}
+							highlightedIndex={highlightedIndex}
+						/>
+					)}
+					{!noSuggestions && (
+						<SuggestionGroup
+							title={inputValue ? 'Matches' : 'Favorites'}
+							suggestions={matchSuggestions}
+							highlightedIndex={highlightedIndex}
+							getItemProps={getItemProps}
+						/>
+					)}
+					{noSuggestions && <div>No suggestions</div>}
+				</div>
 			</ScrollArea>
 			{addingRecipe && (
 				<AddToListDialog
