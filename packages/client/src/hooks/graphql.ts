@@ -1,6 +1,10 @@
-import { ApolloError, NetworkStatus, useQuery } from '@apollo/client';
 import { useMaybeAppId } from '../components/Context.js';
-import { graphql } from '@biscuits/graphql';
+import {
+	ApolloError,
+	graphql,
+	NetworkStatus,
+	useQuery,
+} from '@biscuits/graphql';
 import { useEffect } from 'react';
 
 // some minimal queries for common use

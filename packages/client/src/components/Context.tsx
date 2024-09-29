@@ -1,4 +1,3 @@
-import { ApolloProvider, ApolloClient } from '@apollo/client';
 import { ReactNode, createContext, useContext } from 'react';
 import { AppId } from '@biscuits/apps';
 import { VerdantContext } from '../verdant.js';
@@ -8,7 +7,11 @@ import { PrereleaseWarning } from './PrereleaseWarning.js';
 import { TopLoader } from './TopLoader.js';
 import { BiscuitsVerdantProfile } from '@biscuits/libraries';
 import { Essentials } from './Essentials.js';
-import { graphqlClient as defaultClient } from '@biscuits/graphql';
+import {
+	ApolloClient,
+	ApolloProvider,
+	graphqlClient as defaultClient,
+} from '@biscuits/graphql';
 import { GlobalSyncingIndicator } from './GlobalSyncingIndicator.js';
 
 export function Provider({

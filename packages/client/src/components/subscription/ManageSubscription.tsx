@@ -1,11 +1,15 @@
-import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
+import {
+	FragmentOf,
+	graphql,
+	readFragment,
+	useLazyQuery,
+} from '@biscuits/graphql';
 import { Button } from '@a-type/ui/components/button';
 import { useSearchParams } from '@verdant-web/react-router';
 import { useEffect } from 'react';
 import { toast, clsx } from '@a-type/ui';
 import { PlanInfo, planProductInfo } from './PlanInfo.js';
 import { CancelPlanButton } from './CancelPlanButton.js';
-import { useLazyQuery } from '@apollo/client';
 import { Icon } from '@a-type/ui/components/icon';
 import { H2 } from '@a-type/ui/components/typography';
 import * as CONFIG from '../../config.js';

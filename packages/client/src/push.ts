@@ -1,7 +1,6 @@
-import { graphql } from '@biscuits/graphql';
+import { graphql, useClient, ApolloClient } from '@biscuits/graphql';
 import { useAppId } from './react.js';
 import { useCallback, useState, useEffect } from 'react';
-import { useApolloClient, ApolloClient } from '@apollo/client';
 
 const subscribeToPushMutation = graphql(`
 	mutation SubscribeToPush($subscription: CreatePushSubscriptionInput!) {
@@ -67,7 +66,7 @@ export async function subscribeToPush(
 
 export function useSubscribeToPush(vapidKey: string) {
 	const appId = useAppId();
-	const graphqlClient = useApolloClient();
+	const graphqlClient = useClient();
 	return useCallback(
 		() => subscribeToPush(appId, vapidKey, graphqlClient),
 		[appId, graphqlClient, vapidKey],
@@ -101,7 +100,7 @@ export async function unsubscribeFromPush(graphqlClient: ApolloClient<any>) {
 }
 
 export function useUnsubscribeFromPush() {
-	const graphqlClient = useApolloClient();
+	const graphqlClient = useClient();
 	return useCallback(() => unsubscribeFromPush(graphqlClient), [graphqlClient]);
 }
 

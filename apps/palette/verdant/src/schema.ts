@@ -19,51 +19,53 @@ import { schema } from '@verdant-web/store';
  */
 
 const projects = schema.collection({
-  name: 'project',
-  primaryKey: 'id',
-  fields: {
-    id: schema.fields.id(),
-    createdAt: schema.fields.number({
-      default: () => Date.now(),
-    }),
-    image: schema.fields.file(),
-    colors: schema.fields.array({
-      items: schema.fields.object({
-        properties: {
-          id: schema.fields.id(),
-          pixel: schema.fields.object({
-            properties: {
-              x: schema.fields.number(),
-              y: schema.fields.number(),
-            },
-          }),
-          percentage: schema.fields.object({
-            properties: {
-              x: schema.fields.number(),
-              y: schema.fields.number(),
-            },
-          }),
-          value: schema.fields.object({
-            properties: {
-              r: schema.fields.number(),
-              g: schema.fields.number(),
-              b: schema.fields.number(),
-            },
-          }),
-        },
-      }),
-    }),
-  },
-  indexes: {
-    createdAt: {
-      field: 'createdAt',
-    },
-  },
+	name: 'project',
+	primaryKey: 'id',
+	fields: {
+		id: schema.fields.id(),
+		createdAt: schema.fields.number({
+			default: () => Date.now(),
+		}),
+		image: schema.fields.file({
+			downloadRemote: true,
+		}),
+		colors: schema.fields.array({
+			items: schema.fields.object({
+				properties: {
+					id: schema.fields.id(),
+					pixel: schema.fields.object({
+						properties: {
+							x: schema.fields.number(),
+							y: schema.fields.number(),
+						},
+					}),
+					percentage: schema.fields.object({
+						properties: {
+							x: schema.fields.number(),
+							y: schema.fields.number(),
+						},
+					}),
+					value: schema.fields.object({
+						properties: {
+							r: schema.fields.number(),
+							g: schema.fields.number(),
+							b: schema.fields.number(),
+						},
+					}),
+				},
+			}),
+		}),
+	},
+	indexes: {
+		createdAt: {
+			field: 'createdAt',
+		},
+	},
 });
 
 export default schema({
-  version: 1,
-  collections: {
-    projects,
-  },
+	version: 2,
+	collections: {
+		projects,
+	},
 });
