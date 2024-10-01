@@ -675,6 +675,9 @@ importers:
 
   apps/palette/web:
     dependencies:
+      '@a-type/react-space':
+        specifier: ^0.2.10
+        version: 0.2.10(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@a-type/ui':
         specifier: 1.1.16
         version: 1.1.16(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -1766,6 +1769,12 @@ packages:
     resolution: {integrity: sha512-ZiLRXsFD+tYRXbb2TajkqHHI0EwiEWhuKltrIfarqjoDvvvOcypwvQfq811+HXatnLME5mA6D8yYMqmdYhpyoQ==}
     peerDependencies:
       kysely: ^0.27.2
+
+  '@a-type/react-space@0.2.10':
+    resolution: {integrity: sha512-WovQ6KOqLCnGb+8vg4rE3bUbANXcikwwnkb3U3HxxtquaZZ9Ta1L5Q/CRVTy+jlasaNxyakn/0HjQdjbLleSCg==}
+    peerDependencies:
+      react: ^18.3.1
+      react-dom: ^18.3.1
 
   '@a-type/ui@1.1.16':
     resolution: {integrity: sha512-ijeECCUqTMgXL6vzvVHTAYaoOMXf6c/cpRi30WxCHlNWtN9/CbkEO5R/bTJbSIg1EYXirUtRtd6DBrFN1bEL1A==}
@@ -3949,10 +3958,12 @@ packages:
   '@humanwhocodes/config-array@0.11.13':
     resolution: {integrity: sha512-JSBDMiDKSzQVngfRjOdFXgFfklaXI4K9nLF49Auh21lmBWRLIK3+xTErTWD4KU54pb6coM6ESE7Awz/FNU3zgQ==}
     engines: {node: '>=10.10.0'}
+    deprecated: Use @eslint/config-array instead
 
   '@humanwhocodes/config-array@0.13.0':
     resolution: {integrity: sha512-DZLEEqFWQFiyK6h5YIeynKx7JlvCYWL0cImfSRXZ9l4Sg2efkFGTuFf6vzXjK1cq6IYkU+Eg/JizXw+TD2vRNw==}
     engines: {node: '>=10.10.0'}
+    deprecated: Use @eslint/config-array instead
 
   '@humanwhocodes/module-importer@1.0.1':
     resolution: {integrity: sha512-bxveV4V8v5Yb4ncFTT3rPSgZBOpCkjfK0y4oVVVJwIuDVBRMDXrPyXRL988i5ap9m9bnyEEjWfm5WkBmtffLfA==}
@@ -3960,9 +3971,11 @@ packages:
 
   '@humanwhocodes/object-schema@2.0.1':
     resolution: {integrity: sha512-dvuCeX5fC9dXgJn9t+X5atfmgQAzUOWqS1254Gh0m6i8wKd10ebXkfNKiRK+1GWi/yTvvLDHpoxLr0xxxeslWw==}
+    deprecated: Use @eslint/object-schema instead
 
   '@humanwhocodes/object-schema@2.0.3':
     resolution: {integrity: sha512-93zYdMES/c1D69yZiKDBj0V24vqNzB/koF26KPaagAfd3P/4gUlh3Dys5ogAK+Exi9QyzlD8x/08Zt7wIKcDcA==}
+    deprecated: Use @eslint/object-schema instead
 
   '@humanwhocodes/retry@0.2.3':
     resolution: {integrity: sha512-X38nUbachlb01YMlvPFojKoiXq+LzZvuSce70KPMPdeM1Rj03k4dR7lDslhbqXn3Ang4EU3+EAmwEAsbrjHW3g==}
@@ -8754,6 +8767,7 @@ packages:
 
   glob@7.1.7:
     resolution: {integrity: sha512-OvD9ENzPLbegENnYP5UUfJIirTg4+XwMWGaQfQTY0JenxNvvIKP3U3/tAQSPIu/lHxXYSZmpXlUHeqAIdKzBLQ==}
+    deprecated: Glob versions prior to v9 are no longer supported
 
   glob@7.2.3:
     resolution: {integrity: sha512-nFR0zLpU2YCaRxwoCJvL6UvCH2JFyFVIvwTLsIf21AuHlMskA1hhTdk+LlYJtOlYt9v6dvszD2BGRqBL+iQK9Q==}
@@ -10432,6 +10446,9 @@ packages:
   proxy-compare@2.6.0:
     resolution: {integrity: sha512-8xuCeM3l8yqdmbPoYeLbrAXCBWu19XEYc5/F28f5qOaoAIMyfmBUkl5axiK+x9olUvRlcekvnm98AP9RDngOIw==}
 
+  proxy-compare@3.0.0:
+    resolution: {integrity: sha512-y44MCkgtZUCT9tZGuE278fB7PWVf7fRYy0vbRXAts2o5F0EfC4fIQrvQQGBJo1WJbFcVLXzApOscyJuZqHQc1w==}
+
   proxy-from-env@1.1.0:
     resolution: {integrity: sha512-D+zkORCbA9f1tdWRK0RaCR3GPv50cMxcrz4X8k5LTSUD1Dkw47mKJEZQNunItRTkWwgtaUSo1RVFRIG9ZXiFYg==}
 
@@ -10897,6 +10914,14 @@ packages:
   signal-exit@4.1.0:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
+
+  signia-react@0.1.5:
+    resolution: {integrity: sha512-DhHOEJNHIFq0sd4mFpMQx6U0vSb6MGrCS+iVdl1jM2Ts9iNyPc6zaWG/ko+ARS4L2cdHFpNH2l5YqoBNLwMyCw==}
+    peerDependencies:
+      react: ^18
+
+  signia@0.1.5:
+    resolution: {integrity: sha512-ViJpywl7H1W6zRfqbu+86xpSCcuq6tpOen7I+gR8axaiyZP8txRNAoeCsL20UkuqzG/Ybtk0u4C2lawkiwPlnw==}
 
   simple-concat@1.0.1:
     resolution: {integrity: sha512-cSFtAPtRhljv69IK0hTVZQ+OfE9nePi/rtJmw5UjHeVyVroEqJXP1sFztKUy1qU+xvz3u/sfYJLa947b7nAN2Q==}
@@ -11724,6 +11749,18 @@ packages:
       react:
         optional: true
 
+  valtio@2.0.0:
+    resolution: {integrity: sha512-SzUU5UUK/vBRfHWXihwkJE55YNj8zhOkzxPOexcz0xIIT6Oux5VLynCmzyME2bYuEWcktW2NTaaLbpUydEsHiw==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      '@types/react': '>=18.0.0'
+      react: '>=18.0.0'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      react:
+        optional: true
+
   value-or-promise@1.0.12:
     resolution: {integrity: sha512-Z6Uz+TYwEqE7ZN50gwn+1LCVo9ZVrpxRPOhOLnncYkY1ZzOYtrX8Fwf/rFktZ8R5mJms6EZf5TqNOMeZmnPq9Q==}
     engines: {node: '>=12'}
@@ -12517,6 +12554,21 @@ snapshots:
     transitivePeerDependencies:
       - encoding
       - supports-color
+
+  '@a-type/react-space@0.2.10(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+    dependencies:
+      '@a-type/utils': 1.1.3
+      '@radix-ui/react-slot': 1.1.0(@types/react@18.3.3)(react@18.3.1)
+      '@react-spring/web': 9.7.4(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@use-gesture/react': 10.3.1(react@18.3.1)
+      raf: 3.4.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      signia: 0.1.5
+      signia-react: 0.1.5(react@18.3.1)
+      valtio: 2.0.0(@types/react@18.3.3)(react@18.3.1)
+    transitivePeerDependencies:
+      - '@types/react'
 
   '@a-type/ui@1.1.16(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
@@ -21923,7 +21975,7 @@ snapshots:
       eslint: 9.1.1
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@6.13.2(eslint@9.1.1)(typescript@5.5.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.0(eslint@9.1.1))(eslint@9.1.1)
-      eslint-plugin-import: 2.29.0(@typescript-eslint/parser@6.13.2(eslint@9.1.1)(typescript@5.5.3))(eslint-import-resolver-typescript@3.6.1)(eslint@9.1.1)
+      eslint-plugin-import: 2.29.0(@typescript-eslint/parser@6.13.2(eslint@9.1.1)(typescript@5.5.3))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.13.2(eslint@9.1.1)(typescript@5.5.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.0(eslint@9.1.1))(eslint@9.1.1))(eslint@9.1.1)
       eslint-plugin-jsx-a11y: 6.8.0(eslint@9.1.1)
       eslint-plugin-react: 7.34.1(eslint@9.1.1)
       eslint-plugin-react-hooks: 4.6.0(eslint@9.1.1)
@@ -21947,7 +21999,7 @@ snapshots:
       enhanced-resolve: 5.15.0
       eslint: 9.1.1
       eslint-module-utils: 2.8.0(@typescript-eslint/parser@6.13.2(eslint@9.1.1)(typescript@5.5.3))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.13.2(eslint@9.1.1)(typescript@5.5.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.0(eslint@9.1.1))(eslint@9.1.1))(eslint@9.1.1)
-      eslint-plugin-import: 2.29.0(@typescript-eslint/parser@6.13.2(eslint@9.1.1)(typescript@5.5.3))(eslint-import-resolver-typescript@3.6.1)(eslint@9.1.1)
+      eslint-plugin-import: 2.29.0(@typescript-eslint/parser@6.13.2(eslint@9.1.1)(typescript@5.5.3))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.13.2(eslint@9.1.1)(typescript@5.5.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.0(eslint@9.1.1))(eslint@9.1.1))(eslint@9.1.1)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.2
       is-core-module: 2.13.1
@@ -21969,7 +22021,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.29.0(@typescript-eslint/parser@6.13.2(eslint@9.1.1)(typescript@5.5.3))(eslint-import-resolver-typescript@3.6.1)(eslint@9.1.1):
+  eslint-plugin-import@2.29.0(@typescript-eslint/parser@6.13.2(eslint@9.1.1)(typescript@5.5.3))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@6.13.2(eslint@9.1.1)(typescript@5.5.3))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.0(eslint@9.1.1))(eslint@9.1.1))(eslint@9.1.1):
     dependencies:
       array-includes: 3.1.7
       array.prototype.findlastindex: 1.2.3
@@ -24656,6 +24708,8 @@ snapshots:
 
   proxy-compare@2.6.0: {}
 
+  proxy-compare@3.0.0: {}
+
   proxy-from-env@1.1.0: {}
 
   pseudomap@1.0.2: {}
@@ -25316,6 +25370,13 @@ snapshots:
   signal-exit@3.0.7: {}
 
   signal-exit@4.1.0: {}
+
+  signia-react@0.1.5(react@18.3.1):
+    dependencies:
+      react: 18.3.1
+      signia: 0.1.5
+
+  signia@0.1.5: {}
 
   simple-concat@1.0.1: {}
 
@@ -26403,6 +26464,13 @@ snapshots:
       derive-valtio: 0.1.0(valtio@1.13.2(@types/react@18.3.3)(react@18.3.1))
       proxy-compare: 2.6.0
       use-sync-external-store: 1.2.0(react@18.3.1)
+    optionalDependencies:
+      '@types/react': 18.3.3
+      react: 18.3.1
+
+  valtio@2.0.0(@types/react@18.3.3)(react@18.3.1):
+    dependencies:
+      proxy-compare: 3.0.0
     optionalDependencies:
       '@types/react': 18.3.3
       react: 18.3.1

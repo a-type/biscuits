@@ -1,6 +1,7 @@
 import { hooks } from '@/hooks.js';
 import { clsx } from '@a-type/ui';
 import {
+	EntityFile,
 	Project,
 	ProjectColors,
 	ProjectColorsItem,
@@ -8,8 +9,16 @@ import {
 } from '@palette.biscuits/verdant';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useColorSelection } from './hooks.js';
-import { preventDefault } from '@a-type/utils';
-import { useGesture } from '@use-gesture/react';
+import {
+	CanvasRoot,
+	useClaimedGestures,
+	useCreateCanvas,
+	useCreateViewport,
+	useViewport,
+	ViewportRoot,
+	useClaimGesture,
+	useCanvas,
+} from '@a-type/react-space';
 
 export interface ProjectCanvasProps {
 	project: Project;
@@ -22,7 +31,6 @@ export function ProjectCanvas({
 	showBubbles,
 }: ProjectCanvasProps) {
 	const { image, colors } = hooks.useWatch(project);
-	hooks.useWatch(image);
 	const [_, setSelected] = useColorSelection();
 	const addColor = (init: ProjectColorsItemInit) => {
 		colors.push(init);
@@ -31,61 +39,89 @@ export function ProjectCanvas({
 	};
 	const [picking, setPicking] = useState(false);
 
+	const viewport = useCreateViewport({
+		panLimitMode: 'viewport',
+		defaultZoom: 0.1,
+		zoomLimits: {
+			min: 'fit',
+			max: 3,
+		},
+	});
+
 	return (
 		<div className={clsx('relative w-full sm:(w-auto h-full)', className)}>
-			<div className="relative">
-				<ColorPickerCanvas
-					imageSrc={image.url}
-					onColor={addColor}
-					onPickingChange={setPicking}
-				/>
-				{showBubbles && !picking && <Bubbles colors={colors} />}
-			</div>
+			<ViewportRoot viewport={viewport}>
+				<div className="relative">
+					<ColorPickerCanvas
+						image={image}
+						onColor={addColor}
+						onPickingChange={setPicking}
+					/>
+					{showBubbles && !picking && <Bubbles colors={colors} />}
+				</div>
+			</ViewportRoot>
 		</div>
 	);
 }
 
 function ColorPickerCanvas({
-	imageSrc,
+	image: imageModel,
 	onColor,
 	className,
 	onPickingChange,
 }: {
-	imageSrc?: string | null;
+	image: EntityFile;
 	onColor: (init: ProjectColorsItemInit) => void;
 	className?: string;
 	onPickingChange?: (picking: boolean) => void;
 }) {
-	const canvasRef = useRef<HTMLCanvasElement>(null);
-	const previewRef = useRef<HTMLDivElement>(null);
+	hooks.useWatch(imageModel);
+	const imageSrc = imageModel.url;
+
+	const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+	const viewport = useViewport();
+	const logicalCanvas = useCreateCanvas({
+		viewport,
+	});
+
+	const [image, setImage] = useState<HTMLImageElement | null>(null);
+
+	useEffect(() => {
+		if (!imageSrc) return;
+		const image = new Image();
+		image.crossOrigin = 'anonymous';
+		image.onload = () => {
+			logicalCanvas.resize({
+				min: { x: 0, y: 0 },
+				max: { x: image.width, y: image.height },
+			});
+			logicalCanvas.viewport.fitOnScreen({
+				x: 0,
+				y: 0,
+				width: image.width,
+				height: image.height,
+			});
+			setImage(image);
+		};
+		image.src = imageSrc + (imageSrc.startsWith('blob') ? '' : '?canvas=true');
+	}, [imageSrc, logicalCanvas]);
 
 	useEffect(() => {
 		const canvas = canvasRef.current;
-		if (!canvas) return;
+		if (!image || !canvas) return;
 
+		canvas.width = image.width;
+		canvas.height = image.height;
+		canvas.style.setProperty('width', `${image.width}px`);
+		canvas.style.setProperty('height', `${image.height}px`);
+		// enforce aspect ratio
+		canvas.style.setProperty('aspect-ratio', `${image.width}/${image.height}`);
 		const ctx = canvas.getContext('2d');
 		if (!ctx) return;
-
-		if (!imageSrc) {
-			ctx.clearRect(0, 0, canvas.width, canvas.height);
-			return;
-		}
-
-		const image = new Image();
-		image.crossOrigin = 'anonymous';
-		image.src = imageSrc + '?canvas=true';
-		image.onload = () => {
-			canvas.width = image.width;
-			canvas.height = image.height;
-			// enforce aspect ratio
-			canvas.style.setProperty(
-				'aspect-ratio',
-				`${image.width}/${image.height}`,
-			);
-			ctx.clearRect(0, 0, canvas.width, canvas.height);
-			ctx.drawImage(image, 0, 0);
-		};
-	}, [canvasRef, imageSrc]);
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+		ctx.drawImage(image, 0, 0);
+	}, [image, canvasRef]);
 
 	const getCanvasColor = useCallback(
 		(x: number, y: number) => {
@@ -94,13 +130,7 @@ function ColorPickerCanvas({
 			const ctx = canvas.getContext('2d');
 			if (!ctx) return null;
 
-			// convert from mouse position into canvas pixels, have to use canvas actual size
-			const canvasRect = canvas.getBoundingClientRect();
-			const canvasX = (x - canvasRect.left) * (canvas.width / canvasRect.width);
-			const canvasY =
-				(y - canvasRect.top) * (canvas.height / canvasRect.height);
-
-			const pixel = ctx.getImageData(canvasX, canvasY, 1, 1).data;
+			const pixel = ctx.getImageData(x, y, 1, 1).data;
 
 			const color = { r: pixel[0], g: pixel[1], b: pixel[2] };
 			return color;
@@ -108,16 +138,63 @@ function ColorPickerCanvas({
 		[canvasRef],
 	);
 
-	useGesture(
+	return (
+		<CanvasRoot canvas={logicalCanvas}>
+			{/* <CanvasBackground> */}
+			<canvas ref={canvasRef} className={clsx('touch-none', className)} />
+			{/* </CanvasBackground> */}
+			{/* bubble preview */}
+			<BubblePicker
+				getCanvasColor={getCanvasColor}
+				onPickingChange={onPickingChange}
+				onColor={onColor}
+			/>
+		</CanvasRoot>
+	);
+}
+
+function BubblePicker({
+	getCanvasColor,
+	onPickingChange,
+	onColor,
+}: {
+	getCanvasColor: (
+		x: number,
+		y: number,
+	) => { r: number; g: number; b: number } | null;
+	onPickingChange?: (picking: boolean) => void;
+	onColor: (color: {
+		value: { r: number; g: number; b: number };
+		percentage: { x: number; y: number };
+		pixel: { x: number; y: number };
+	}) => void;
+}) {
+	const previewRef = useRef<HTMLDivElement>(null);
+
+	useClaimGesture(
+		'tool',
+		'bubble',
+		(detail) => {
+			console.log('detail', detail);
+			return detail.isTouch || detail.isLeftMouse;
+		},
 		{
-			onDragStart: ({ xy }) => {
-				const [clientX, clientY] = xy;
+			onCanvas: true,
+		},
+	);
+
+	const canvas = useCanvas();
+
+	useClaimedGestures(
+		{
+			onDragStart: ({ pointerWorldPosition }) => {
+				const { x, y } = pointerWorldPosition;
 				const preview = previewRef.current;
 				if (!preview) return;
-				preview.style.setProperty('left', `${clientX}px`);
-				preview.style.setProperty('top', `${clientY}px`);
+				preview.style.setProperty('left', `${x}px`);
+				preview.style.setProperty('top', `${y}px`);
 				preview.style.setProperty('display', 'block');
-				const color = getCanvasColor(clientX, clientY);
+				const color = getCanvasColor(x, y);
 				if (!color) return;
 				preview.style.setProperty(
 					'background-color',
@@ -125,74 +202,50 @@ function ColorPickerCanvas({
 				);
 				onPickingChange?.(true);
 			},
-			onDrag: ({ xy }) => {
-				const [clientX, clientY] = xy;
+			onDrag: ({ pointerWorldPosition }) => {
+				const { x, y } = pointerWorldPosition;
 				const preview = previewRef.current;
 				if (!preview) return;
-				preview.style.setProperty('left', `${clientX}px`);
-				preview.style.setProperty('top', `${clientY}px`);
+				preview.style.setProperty('left', `${x}px`);
+				preview.style.setProperty('top', `${y}px`);
 
-				const color = getCanvasColor(clientX, clientY);
+				const color = getCanvasColor(x, y);
 				if (!color) return;
 				preview.style.setProperty(
 					'background-color',
 					`rgb(${color.r}, ${color.g}, ${color.b})`,
 				);
 			},
-			onDragEnd: ({ xy }) => {
-				const [clientX, clientY] = xy;
+			onDragEnd: ({ pointerWorldPosition }) => {
+				const { x, y } = pointerWorldPosition;
 
 				previewRef.current?.style.setProperty('display', 'none');
 				onPickingChange?.(false);
 
-				const canvas = canvasRef.current;
-				if (!canvas) return;
-				const ctx = canvas.getContext('2d');
-				if (!ctx) return;
+				const canvasRect = canvas.limits.value;
+				const canvasWidth = canvasRect.max.x - canvasRect.min.x;
+				const canvasHeight = canvasRect.max.y - canvasRect.min.y;
+				const canvasX = x / canvasWidth;
+				const canvasY = y / canvasHeight;
 
-				// convert from mouse position into canvas pixels, have to use canvas actual size
-				const canvasRect = canvas.getBoundingClientRect();
-				const canvasX =
-					(clientX - canvasRect.left) * (canvas.width / canvasRect.width);
-				const canvasY =
-					(clientY - canvasRect.top) * (canvas.height / canvasRect.height);
-
-				const color = getCanvasColor(clientX, clientY);
+				const color = getCanvasColor(x, y);
 				if (!color) return;
 
 				onColor({
 					value: color,
-					percentage: { x: canvasX / canvas.width, y: canvasY / canvas.height },
-					pixel: { x: canvasX, y: canvasY },
+					percentage: { x: canvasX, y: canvasY },
+					pixel: { x, y },
 				});
 			},
-			onContextMenu: preventDefault,
 		},
-		{
-			drag: {
-				pointer: {
-					touch: true,
-				},
-			},
-			target: canvasRef,
-		},
+		'bubble',
 	);
 
 	return (
-		<>
-			<canvas
-				ref={canvasRef}
-				className={clsx(
-					'w-full h-auto sm:(w-auto h-full max-w-60vw) touch-none',
-					className,
-				)}
-			/>
-			{/* bubble preview */}
-			<div
-				ref={previewRef}
-				className="-translate-1/2 rounded-full w-120px h-120px fixed pointer-events-none"
-			/>
-		</>
+		<div
+			ref={previewRef}
+			className="translate-[calc(4px/var(--zoom,1))] rounded-r-full rounded-bl-full w-[calc(84px/var(--zoom,1))] h-[calc(84px/var(--zoom,1))] fixed pointer-events-none"
+		/>
 	);
 }
 
@@ -214,17 +267,20 @@ function Bubble({ color: colorVal }: { color: ProjectColorsItem }) {
 	const { r, g, b } = hooks.useWatch(value);
 	const [selectedId, setSelected] = useColorSelection();
 	const selected = selectedId === id;
+
 	return (
 		<button
 			onClick={() => setSelected(id)}
 			className={clsx(
-				'absolute w-24px h-24px rounded-full pointer-events-auto -translate-1/2 border-solid border-1 border-black appearance-none',
-				selected && 'border-2 border-black w-48px h-48px z-1',
+				'absolute rounded-full pointer-events-auto -translate-1/2 border-solid border-1 border-black appearance-none min-h-0 min-w-0 p-0 m-0',
+				selected && 'border-2 border-black z-1',
 			)}
 			style={{
 				backgroundColor: `rgb(${r}, ${g}, ${b})`,
 				left: `${x * 100}%`,
 				top: `${y * 100}%`,
+				width: `calc(${selected ? 48 : 24}px / var(--zoom, 1))`,
+				height: `calc(${selected ? 48 : 24}px / var(--zoom, 1))`,
 			}}
 		/>
 	);
