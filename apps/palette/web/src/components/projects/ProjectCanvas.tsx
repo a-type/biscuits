@@ -19,17 +19,15 @@ import {
 	useClaimGesture,
 	useCanvas,
 } from '@a-type/react-space';
+import { proxy, useSnapshot } from 'valtio';
+import { Button } from '@a-type/ui/components/button';
+import { Icon } from '@a-type/ui/components/icon';
 
 export interface ProjectCanvasProps {
 	project: Project;
 	className?: string;
-	showBubbles: boolean;
 }
-export function ProjectCanvas({
-	project,
-	className,
-	showBubbles,
-}: ProjectCanvasProps) {
+export function ProjectCanvas({ project, className }: ProjectCanvasProps) {
 	const { image, colors } = hooks.useWatch(project);
 	const [_, setSelected] = useColorSelection();
 	const addColor = (init: ProjectColorsItemInit) => {
@@ -38,6 +36,7 @@ export function ProjectCanvas({
 		setSelected(newColor.get('id'));
 	};
 	const [picking, setPicking] = useState(false);
+	const { showBubbles } = useSnapshot(toolState);
 
 	const viewport = useCreateViewport({
 		panLimitMode: 'viewport',
@@ -49,17 +48,21 @@ export function ProjectCanvas({
 	});
 
 	return (
-		<div className={clsx('relative w-full sm:(w-auto h-full)', className)}>
-			<ViewportRoot viewport={viewport}>
-				<div className="relative">
-					<ColorPickerCanvas
-						image={image}
-						onColor={addColor}
-						onPickingChange={setPicking}
-					/>
-					{showBubbles && !picking && <Bubbles colors={colors} />}
-				</div>
+		<div
+			className={clsx(
+				'relative flex flex-col w-full sm:(w-auto h-full)',
+				className,
+			)}
+		>
+			<ViewportRoot viewport={viewport} style={{ height: 'auto', flex: '1' }}>
+				<ColorPickerCanvas
+					image={image}
+					onColor={addColor}
+					onPickingChange={setPicking}
+				/>
+				{showBubbles && !picking && <Bubbles colors={colors} />}
 			</ViewportRoot>
+			<CanvasTools />
 		</div>
 	);
 }
@@ -171,12 +174,14 @@ function BubblePicker({
 }) {
 	const previewRef = useRef<HTMLDivElement>(null);
 
+	const { tool } = useSnapshot(toolState);
+
 	useClaimGesture(
 		'tool',
 		'bubble',
 		(detail) => {
 			console.log('detail', detail);
-			return detail.isTouch || detail.isLeftMouse;
+			return (tool === 'bubble' && detail.isTouch) || detail.isLeftMouse;
 		},
 		{
 			onCanvas: true,
@@ -272,8 +277,8 @@ function Bubble({ color: colorVal }: { color: ProjectColorsItem }) {
 		<button
 			onClick={() => setSelected(id)}
 			className={clsx(
-				'absolute rounded-full pointer-events-auto -translate-1/2 border-solid border-1 border-black appearance-none min-h-0 min-w-0 p-0 m-0',
-				selected && 'border-2 border-black z-1',
+				'absolute rounded-full pointer-events-auto -translate-1/2 border-solid border-1 border-gray appearance-none min-h-0 min-w-0 p-0 m-0',
+				selected && 'border-2 z-1',
 			)}
 			style={{
 				backgroundColor: `rgb(${r}, ${g}, ${b})`,
@@ -285,3 +290,31 @@ function Bubble({ color: colorVal }: { color: ProjectColorsItem }) {
 		/>
 	);
 }
+
+function CanvasTools() {
+	const { tool, showBubbles } = useSnapshot(toolState);
+
+	return (
+		<div className="row w-full bg-white p-2 border-gray border-1 border-solid">
+			<Button
+				size="icon"
+				toggled={showBubbles}
+				onClick={() => (toolState.showBubbles = !showBubbles)}
+			>
+				<Icon name={showBubbles ? 'eye' : 'eyeClosed'} />
+			</Button>
+			<Button
+				size="icon"
+				toggled={tool === 'bubble'}
+				onClick={() => (toolState.tool = tool === 'bubble' ? null : 'bubble')}
+			>
+				<Icon name="waterDrop" />
+			</Button>
+		</div>
+	);
+}
+
+const toolState = proxy({
+	tool: null as 'bubble' | null,
+	showBubbles: true,
+});
