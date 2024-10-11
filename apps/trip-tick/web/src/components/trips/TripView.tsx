@@ -281,7 +281,7 @@ function ListTab({ trip, list }: { list: List; trip: Trip }) {
 			<span className="text-nowrap">{list.get('name')}</span>
 			<Progress.Root
 				value={value}
-				className="w-full absolute bottom-0 left-0 overflow-hidden rounded-b-full border border-t-solid border-t-primary"
+				className="absolute bottom-0 left-2 right-2 overflow-hidden rounded-full border border-t-solid border-l-solid border-r-solid border-primary"
 			>
 				<Progress.Indicator
 					className="bg-accent w-full h-4px"
