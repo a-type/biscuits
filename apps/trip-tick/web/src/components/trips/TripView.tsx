@@ -32,6 +32,7 @@ import {
 import { TripDateRange } from './TripDateRange.jsx';
 import { ExtraItem, ListItem } from './TripItem.jsx';
 import { quantityForecast } from './utils.js';
+import { TripGlobalProgress } from './TripGlobalProgress.jsx';
 
 export interface TripViewProps {
 	tripId: string;
@@ -108,6 +109,9 @@ function TripViewImpl({ trip }: { trip: Trip }) {
 		<div className="flex flex-col gap-4 w-full">
 			<TripViewInfo trip={trip} forecast={forecast} />
 			<TripViewChecklists trip={trip} forecast={forecast} />
+			<div className="fixed bottom-0 left-0 right-0 bg-wash p-1 w-full">
+				<TripGlobalProgress trip={trip} />
+			</div>
 		</div>
 	);
 }
@@ -275,7 +279,10 @@ function ListTab({ trip, list }: { list: List; trip: Trip }) {
 			className="relative overflow-hidden flex-shrink-0"
 		>
 			<span className="text-nowrap">{list.get('name')}</span>
-			<Progress.Root className="w-full absolute bottom-0 left-0 overflow-hidden rounded-b-full border border-t-solid border-t-primary">
+			<Progress.Root
+				value={value}
+				className="w-full absolute bottom-0 left-0 overflow-hidden rounded-b-full border border-t-solid border-t-primary"
+			>
 				<Progress.Indicator
 					className="bg-accent w-full h-4px"
 					style={{
