@@ -15,7 +15,7 @@ import {
 	SliderThumb,
 	SliderTrack,
 } from '@a-type/ui/components/slider';
-import { ResultOf } from '@biscuits/client';
+import { ResultOf } from '@biscuits/graphql';
 import {
 	ListItemsItem,
 	TripCompletionsValue,
