@@ -265,8 +265,8 @@ importers:
         specifier: ^0.1.6
         version: 0.1.11(react@18.3.1)
       '@verdant-web/react-router':
-        specifier: 0.5.5-next.0
-        version: 0.5.5-next.0(react@18.3.1)
+        specifier: 0.6.4
+        version: 0.6.4(react@18.3.1)
       '@verdant-web/store':
         specifier: 4.0.0-next.0
         version: 4.0.0-next.0
@@ -485,8 +485,8 @@ importers:
         specifier: ^10.2.24
         version: 10.3.1(react@18.3.1)
       '@verdant-web/react-router':
-        specifier: 0.5.5-next.0
-        version: 0.5.5-next.0(react@18.3.1)
+        specifier: 0.6.4
+        version: 0.6.4(react@18.3.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -591,8 +591,8 @@ importers:
         specifier: 5.39.0
         version: 5.39.0(react@18.3.1)
       '@verdant-web/react-router':
-        specifier: 0.5.5-next.0
-        version: 0.5.5-next.0(react@18.3.1)
+        specifier: 0.6.4
+        version: 0.6.4(react@18.3.1)
       classnames:
         specifier: ^2.5.0
         version: 2.5.1
@@ -700,8 +700,8 @@ importers:
         specifier: ^10.2.24
         version: 10.3.1(react@18.3.1)
       '@verdant-web/react-router':
-        specifier: 0.5.5-next.0
-        version: 0.5.5-next.0(react@18.3.1)
+        specifier: 0.6.4
+        version: 0.6.4(react@18.3.1)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -806,8 +806,8 @@ importers:
         specifier: ^10.2.24
         version: 10.3.0(react@18.3.1)
       '@verdant-web/react-router':
-        specifier: 0.5.5-next.0
-        version: 0.5.5-next.0(react@18.3.1)
+        specifier: 0.6.4
+        version: 0.6.4(react@18.3.1)
       '@xstate/react':
         specifier: ^4.1.1
         version: 4.1.1(@types/react@18.2.79)(react@18.3.1)(xstate@5.13.1)
@@ -933,8 +933,8 @@ importers:
         specifier: 39.0.0-next.0
         version: 39.0.0-next.0(@verdant-web/store@4.0.0-next.0)(react@18.3.1)
       '@verdant-web/react-router':
-        specifier: 0.5.5-next.0
-        version: 0.5.5-next.0(react@18.3.1)
+        specifier: 0.6.4
+        version: 0.6.4(react@18.3.1)
       '@verdant-web/store':
         specifier: 4.0.0-next.0
         version: 4.0.0-next.0
@@ -1158,8 +1158,8 @@ importers:
         specifier: ^0.54.1
         version: 0.54.3
       '@verdant-web/react-router':
-        specifier: 0.5.5-next.0
-        version: 0.5.5-next.0(react@18.3.1)
+        specifier: 0.6.4
+        version: 0.6.4(react@18.3.1)
       '@wish-wash.biscuits/common':
         specifier: workspace:*
         version: link:../common
@@ -1358,8 +1358,8 @@ importers:
         specifier: ^0.58.0
         version: 0.58.8
       '@verdant-web/react-router':
-        specifier: 0.5.5-next.0
-        version: 0.5.5-next.0(react@18.3.1)
+        specifier: 0.6.4
+        version: 0.6.4(react@18.3.1)
       '@verdant-web/store':
         specifier: 4.0.0-next.0
         version: 4.0.0-next.0
@@ -1653,8 +1653,8 @@ importers:
         specifier: 0.165.0
         version: 0.165.0
       '@verdant-web/react-router':
-        specifier: 0.5.5-next.0
-        version: 0.5.5-next.0(react@18.3.1)
+        specifier: 0.6.4
+        version: 0.6.4(react@18.3.1)
       classnames:
         specifier: ^2.3.2
         version: 2.3.2
@@ -6773,8 +6773,8 @@ packages:
   '@verdant-web/common@2.6.0-next.0':
     resolution: {integrity: sha512-9rG7fPK1O5rzRLDhskRlilheNelgKcx41PYDdasBt/uQjUJnsQZ0ejD0bE9AbjRgBlLHDPeqmQ6KlDecpa9Wpg==}
 
-  '@verdant-web/react-router@0.5.5-next.0':
-    resolution: {integrity: sha512-ms51S5/DYAT8FcYkOICE7nSnY59lbpqpR5VeVy575AWoNsKWtAnvVT7NLazCOeBrUk9WAKLAVXRejrwUabz6Ew==}
+  '@verdant-web/react-router@0.6.4':
+    resolution: {integrity: sha512-IxwHXTQhbYrf0sGr4nmK96Z4Vd6aPHFChH/AoxXO5isWeETXKRSXJXB6y4ge78nJqv/KFof1uoY39QD4cJxxnQ==}
     peerDependencies:
       react: ^18.2.0
 
@@ -20104,7 +20104,7 @@ snapshots:
       object-hash: 3.0.0
       uuid: 8.3.2
 
-  '@verdant-web/react-router@0.5.5-next.0(react@18.3.1)':
+  '@verdant-web/react-router@0.6.4(react@18.3.1)':
     dependencies:
       path-to-regexp: 6.3.0
       react: 18.3.1
