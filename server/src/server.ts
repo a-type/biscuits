@@ -16,6 +16,8 @@ import { AuthError } from '@a-type/auth';
 import { gnocchiRouter } from './routers/gnocchi.js';
 import { rateLimit } from './rateLimiter.js';
 import { wishWashRouter } from './routers/wishWash.js';
+import { readFile } from 'fs/promises';
+import { join } from 'path';
 
 console.log('Starting server...', new Date().toISOString());
 
@@ -75,6 +77,24 @@ router
 	.all('/graphql/*', rateLimit, graphqlRouter.fetch)
 	.all('/gnocchi/*', rateLimit, gnocchiRouter.fetch)
 	.all('/wishWash/*', rateLimit, wishWashRouter.fetch);
+// for local dev only, add endpoint to serve user files.
+if (process.env.NODE_ENV === 'development') {
+	router.get('/userFiles/:dir/:id/:filename', async (req) => {
+		try {
+			const filePath = join(
+				process.cwd(),
+				`./userFiles/${req.params.dir}/${req.params.id}/${decodeURIComponent(req.params.filename)}`,
+			);
+			const file = await readFile(filePath);
+			return new Response(file, {
+				status: 200,
+			});
+		} catch (err) {
+			console.error(err);
+			return new Response('Not found', { status: 404 });
+		}
+	});
+}
 
 const ittyServer = createServerAdapter((request) => router.fetch(request));
 

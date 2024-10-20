@@ -1,21 +1,21 @@
 {
-  "name": "@palette.biscuits/verdant",
-  "version": "0.0.1",
-  "private": true,
-  "main": "src/index.ts",
-  "type": "module",
-  "scripts": {
-    "generate": "verdant -s ./src/schema.ts -o ./src/client -r",
-    "preflight": "verdant preflight -s ./src/schema.ts -o ./src/client",
-    "build": "pnpm run preflight"
-  },
-  "peerDependencies": {
-    "react": "18.3.1"
-  },
-  "dependencies": {
-    "@verdant-web/cli": "4.6.2-next.0",
-    "@verdant-web/common": "2.6.0-next.0",
-    "@verdant-web/react": "39.0.0-next.0",
-    "@verdant-web/store": "4.0.0-next.0"
-  }
+	"name": "@palette.biscuits/verdant",
+	"version": "0.0.1",
+	"private": true,
+	"main": "src/index.ts",
+	"type": "module",
+	"scripts": {
+		"generate": "verdant -s ./src/schema.ts -o ./src/client -r",
+		"preflight": "verdant preflight -s ./src/schema.ts -o ./src/client",
+		"build": "pnpm run preflight"
+	},
+	"peerDependencies": {
+		"react": "18.3.1"
+	},
+	"dependencies": {
+		"@verdant-web/cli": "4.6.2-next.0",
+		"@verdant-web/common": "2.6.0-next.1",
+		"@verdant-web/react": "39.0.0-next.1",
+		"@verdant-web/store": "4.0.0-next.1"
+	}
 }

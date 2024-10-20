@@ -1,4 +1,3 @@
-import { DeleteAllAction } from '@/components/groceries/actions/DeleteAllAction.jsx';
 import { PurchaseAllAction } from '@/components/groceries/actions/PurchaseAllAction.jsx';
 import { ActionBar } from '@a-type/ui/components/actions';
 import { MeetupAction } from './MeetupAction.jsx';
@@ -9,14 +8,13 @@ import { ClearPurchasedAction } from './ClearPurchasedAction.jsx';
 export interface GroceriesActionBarProps {}
 
 export function GroceriesActionBar({}: GroceriesActionBarProps) {
-  return (
-    <ActionBar>
-      <UndoAction />
-      <RedoAction />
-      <MeetupAction />
-      <PurchaseAllAction />
-      <DeleteAllAction />
-      <ClearPurchasedAction />
-    </ActionBar>
-  );
+	return (
+		<ActionBar>
+			<UndoAction />
+			<RedoAction />
+			<MeetupAction />
+			<PurchaseAllAction />
+			<ClearPurchasedAction />
+		</ActionBar>
+	);
 }
