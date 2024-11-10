@@ -1,4 +1,6 @@
-import { ProjectView } from '@/components/projects/ProjectView.jsx';
+import { ProjectCanvas } from '@/components/projects/ProjectCanvas.jsx';
+import { ProjectColorSpotlight } from '@/components/projects/ProjectColorSpotlight.jsx';
+import { ProjectPalette } from '@/components/projects/ProjectPalette.jsx';
 import { hooks } from '@/hooks.js';
 import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
@@ -25,16 +27,22 @@ export function ProjectPage({}: ProjectPageProps) {
 	}
 
 	return (
-		<div className="flex flex-col p-0 m-0 w-full h-100vh">
-			<div className="row py-1">
-				<Button asChild color="ghost" size="small">
-					<Link to="/">
-						<Icon name="arrowLeft" />
-						Back to projects
-					</Link>
-				</Button>
+		<div className="flex flex-col p-0 m-0 w-full min-h-100vh">
+			<div className="flex flex-col items-stretch md:flex-row w-full h-full gap-1">
+				<div className="flex flex-col gap-1 [flex:3_0_0]">
+					<div className="row py-1">
+						<Button asChild color="ghost" size="small">
+							<Link to="/">
+								<Icon name="arrowLeft" />
+								Back to projects
+							</Link>
+						</Button>
+					</div>
+					<ProjectCanvas project={project} className="[flex:3_0_0]" />
+				</div>
+				<ProjectPalette project={project} className="[flex:1_0_80px]" />
+				<ProjectColorSpotlight project={project} className="[flex:1_0_70px]" />
 			</div>
-			<ProjectView project={project} />
 		</div>
 	);
 }
