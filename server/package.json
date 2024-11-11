@@ -38,7 +38,7 @@
 		"@pothos/plugin-scope-auth": "^3.21.1",
 		"@verdant-web/common": "2.6.0",
 		"@verdant-web/s3-file-storage": "1.0.30",
-		"@verdant-web/server": "3.3.3",
+		"@verdant-web/server": "3.3.4-alpha.1",
 		"@whatwg-node/server": "^0.9.22",
 		"@wish-wash.biscuits/hub": "workspace:*",
 		"@wish-wash.biscuits/scanning": "workspace:*",
