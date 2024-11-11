@@ -24,6 +24,7 @@ import { useSnapshot } from 'valtio';
 import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
 import { toolState } from './state.js';
+import { preventDefault } from '@a-type/utils';
 
 export interface ProjectCanvasProps {
 	project: Project;
@@ -145,7 +146,7 @@ function ColorPickerCanvas({
 	}, [canvasRef]);
 
 	return (
-		<CanvasRoot canvas={logicalCanvas}>
+		<CanvasRoot canvas={logicalCanvas} onContextMenu={preventDefault}>
 			{/* <CanvasBackground> */}
 			<canvas ref={canvasRef} className={clsx('touch-none', className)} />
 			{/* </CanvasBackground> */}
