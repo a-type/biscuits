@@ -183,15 +183,12 @@ function BubblePicker({
 	const previewCanvasRef = useRef<HTMLCanvasElement>(null);
 	const dotRef = useRef<HTMLDivElement>(null);
 
-	const { tool } = useSnapshot(toolState);
-
 	useClaimGesture(
 		'tool',
 		'bubble',
 		(detail) => {
-			console.log('detail', detail);
 			if (detail.isTouch) {
-				return tool === 'bubble' || detail.touchesCount < 2;
+				return detail.touchesCount < 2;
 			}
 			return detail.isLeftMouse;
 		},
@@ -384,7 +381,7 @@ function Bubble({ color: colorVal }: { color: ProjectColorsItem }) {
 }
 
 function CanvasTools() {
-	const { tool, showBubbles } = useSnapshot(toolState);
+	const { showBubbles } = useSnapshot(toolState);
 
 	return (
 		<div className="row w-full bg-white p-2 border-gray border-1 border-solid">
