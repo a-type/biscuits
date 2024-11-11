@@ -2,10 +2,9 @@ import { hooks } from '@/hooks.js';
 import { Project, ProjectColorsItem } from '@palette.biscuits/verdant';
 // @ts-ignore
 import { Color } from '@dynamize/color-utilities';
-import { Tabs } from '@a-type/ui/components/tabs';
 import { useColorSelection } from './hooks.js';
-import { H3 } from '@a-type/ui/components/typography';
 import { clsx } from '@a-type/ui';
+import { useBoundsCssVars } from '@a-type/ui/hooks';
 
 export interface ColorBreakdownProps {
 	project: Project;
@@ -54,41 +53,26 @@ function ColorBreakdownVisuals({
 	const hsl = convertible.hsl;
 
 	return (
-		<Tabs className={clsx('flex flex-col gap-2', className)} defaultValue="ryb">
-			<div className="row justify-between pl-3">
-				<H3>Color mix</H3>
-				<Tabs.List>
-					<Tabs.Trigger value="ryb">RYB</Tabs.Trigger>
-					<Tabs.Trigger value="cmy">CMY</Tabs.Trigger>
-				</Tabs.List>
-			</div>
-			<Tabs.Content value="ryb">
-				<PieChart
-					segments={[
-						{
-							color: red,
-							percent: (100 * ryb.red) / rybTotal,
-						},
-						{
-							color: yellow,
-							percent: (100 * ryb.yellow) / rybTotal,
-						},
-						{
-							color: blue,
-							percent: (100 * ryb.blue) / rybTotal,
-						},
-					]}
-				/>
-			</Tabs.Content>
-			<Tabs.Content value="cmy">
-				<PieChart
-					segments={[
-						{ color: cyan, percent: (100 * cmyk.cyan) / cmykTotal },
-						{ color: magenta, percent: (100 * cmyk.magenta) / cmykTotal },
-						{ color: yellow, percent: (100 * cmyk.yellow) / cmykTotal },
-					]}
-				/>
-			</Tabs.Content>
+		<div className="flex flex-col gap-3">
+			<PieChart
+				segments={[
+					{
+						label: 'R',
+						color: red,
+						percent: (100 * ryb.red) / rybTotal,
+					},
+					{
+						label: 'Y',
+						color: yellow,
+						percent: (100 * ryb.yellow) / rybTotal,
+					},
+					{
+						label: 'B',
+						color: blue,
+						percent: (100 * ryb.blue) / rybTotal,
+					},
+				]}
+			/>
 			<div className="w-100% h-32px flex-shrink-0 bg-gradient-to-r from-#000000 to-#ffffff relative mt-3">
 				<div
 					className="h-full w-5px absolute"
@@ -98,7 +82,7 @@ function ColorBreakdownVisuals({
 					}}
 				/>
 			</div>
-		</Tabs>
+		</div>
 	);
 }
 
@@ -106,11 +90,10 @@ function PieChart({
 	segments,
 	className,
 }: {
-	segments: { color: string; percent: number }[];
+	segments: { color: string; percent: number; label: string }[];
 	className?: string;
 }) {
 	let total = 0;
-	console.log(segments);
 	const gradient = `conic-gradient(${segments
 		.map(({ color, percent }, i) => {
 			const steps = [];
@@ -123,13 +106,44 @@ function PieChart({
 		})
 		.flat()
 		.join(', ')})`;
-	console.log(gradient);
+
+	let totalAngle = 0;
+	const segmentLabelRadians = segments.map(({ percent }) => {
+		const angle = (percent / 100) * Math.PI * 2;
+		const angleCenter = totalAngle + angle / 2 - Math.PI / 2;
+		totalAngle += angle;
+		return angleCenter;
+	});
+
+	const rootRef = useBoundsCssVars<HTMLDivElement>();
+
 	return (
 		<div
+			ref={rootRef}
 			style={{
 				backgroundImage: gradient,
 			}}
-			className={clsx('rounded-full aspect-1 w-full', className)}
-		/>
+			className={clsx('rounded-full aspect-1 w-full relative', className)}
+		>
+			<div className="left-1/2 top-1/2 absolute overflow-visible">
+				{/* Render percentage values in the correct positions */}
+				{segments.map(({ label, percent }, i) => {
+					const x = Math.cos(segmentLabelRadians[i]);
+					const y = Math.sin(segmentLabelRadians[i]);
+
+					return (
+						<span
+							key={label}
+							className="absolute rounded-full py-1 px-3 bg-white border-default"
+							style={{
+								transform: `translate(-50%, -50%) translate(calc(var(--height) * 0.33 * ${x}), calc(var(--height) * 0.33 * ${y}))`,
+							}}
+						>
+							{label}&nbsp;{percent.toFixed(0)}%
+						</span>
+					);
+				})}
+			</div>
+		</div>
 	);
 }
