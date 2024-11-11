@@ -10,7 +10,7 @@ import {
 } from '@a-type/ui/components/card';
 import { useMutation, useSuspenseQuery, graphql } from '@biscuits/graphql';
 import { InviteMember } from './InviteMember.js';
-import { H2, H3 } from '@a-type/ui/components/typography';
+import { H3 } from '@a-type/ui/components/typography';
 import { ConfirmedButton } from '@a-type/ui/components/button';
 
 const membersQuery = graphql(`
@@ -86,7 +86,7 @@ export function MembersAndInvitations() {
 				))}
 			</CardGrid>
 			{plan?.canInviteMore ?
-				<div className="py-4">
+				<div className="p-4 flex flex-col items-stretch gap-3 bg-accent-wash border-accent-dark border-1 border-solid rounded-lg">
 					<H3>Invite someone</H3>
 					<InviteMember />
 				</div>

@@ -33,7 +33,6 @@ export function InviteMember({}: InviteMemberProps) {
 				bag.resetForm();
 				toast.success('Invitation sent!');
 			}}
-			className="p-3"
 		>
 			<TextField name="email" label="Email" />
 			<SubmitButton>Invite</SubmitButton>
