@@ -86,7 +86,7 @@ export function MembersAndInvitations() {
 				))}
 			</CardGrid>
 			{plan?.canInviteMore ?
-				<div className="p-4 flex flex-col items-stretch gap-3 bg-accent-wash border-accent-dark border-1 border-solid rounded-lg">
+				<div className="p-4 flex flex-col items-stretch gap-3 bg-primary-wash border-primary-dark border-1 border-solid rounded-lg theme-leek">
 					<H3>Invite someone</H3>
 					<InviteMember />
 				</div>
