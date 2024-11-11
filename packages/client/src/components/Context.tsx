@@ -19,18 +19,20 @@ export function Provider({
 	appId,
 	children,
 	storeDescriptor = null,
+	disablePreviewWarning,
 }: {
 	appId?: AppId;
 	graphqlClient?: ApolloClient<any>;
 	children: ReactNode;
 	storeDescriptor?: ClientDescriptor<any, BiscuitsVerdantProfile> | null;
+	disablePreviewWarning?: boolean;
 }) {
 	return (
 		<ApolloProvider client={graphqlClient}>
 			<BiscuitsContext.Provider value={{ appId }}>
 				<VerdantContext.Provider value={storeDescriptor}>
 					{appId && <AppPreviewNotice />}
-					{appId && <PrereleaseWarning />}
+					{appId && !disablePreviewWarning && <PrereleaseWarning />}
 					<TopLoader />
 					{storeDescriptor && <GlobalSyncingIndicator />}
 					{children}
