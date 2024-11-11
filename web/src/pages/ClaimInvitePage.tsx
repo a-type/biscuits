@@ -43,13 +43,17 @@ function ClaimInvitePage() {
 
 	const infoResult = useSuspenseQuery(claimInviteInfo, {
 		variables: { code },
+		// avoid error boundary when user is not logged in.
+		errorPolicy: 'ignore',
 	});
 
 	// redirect non-auth users to join
-	const isNotAuthenticated = infoResult.data && !infoResult.data.me;
+	const isNotAuthenticated = !infoResult.data?.me;
 	useEffect(() => {
 		if (isNotAuthenticated) {
-			navigate(`/login?returnTo=${encodeURIComponent(`/claim/${code}`)}`);
+			navigate(
+				`/login?tab=signup&returnTo=${encodeURIComponent(`/invite/${code}`)}&message=${encodeURIComponent('Sign up or log in to claim your invite.')}`,
+			);
 		}
 	}, [navigate, isNotAuthenticated, code]);
 

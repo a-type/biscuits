@@ -72,10 +72,10 @@ export function MembersAndInvitations() {
 				{plan?.pendingInvitations.map((invite) => (
 					<CardRoot key={invite.id}>
 						<CardMain>
-							<Avatar />
-							<div className="flex flex-col gap-2 items-start justify-start">
+							<CardTitle className="flex-row mt-0 color-gray-7">
+								<Avatar />
 								<span>Invited: {invite.email}</span>
-							</div>
+							</CardTitle>
 						</CardMain>
 						<CardFooter>
 							<CardActions>

@@ -78,7 +78,7 @@ router
 	.all('/gnocchi/*', rateLimit, gnocchiRouter.fetch)
 	.all('/wishWash/*', rateLimit, wishWashRouter.fetch);
 // for local dev only, add endpoint to serve user files.
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV !== 'production') {
 	router.get('/userFiles/:dir/:id/:filename', async (req) => {
 		try {
 			const filePath = join(

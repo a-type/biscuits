@@ -40,6 +40,7 @@ export default function LoginPage() {
 	}, [error]);
 
 	const activeTab = searchParams.get('tab') ?? 'signin';
+	const message = searchParams.get('message');
 
 	const [tosAgreed, setTosAgreed] = useState(false);
 
@@ -69,6 +70,9 @@ export default function LoginPage() {
 			</div>
 			<div className="flex flex-col gap-3 p-6 items-center bg-white border-solid border border-1 border-black rounded-lg relative z-1">
 				<h1 className="font-fancy mb-0">{title}</h1>
+				{message && (
+					<P className="px-3 py-1 rounded-full bg-accent-light">{message}</P>
+				)}
 				{appReferrer && (
 					<P className="italic color-gray-7 text-sm">A Biscuits.club app</P>
 				)}
@@ -113,7 +117,7 @@ export default function LoginPage() {
 						</label>
 						<OAuthSigninButton
 							endpoint={`${CONFIG.API_ORIGIN}/auth/provider/google/login`}
-							returnTo={'/settings?tab=subscription'}
+							returnTo={returnTo || '/settings?tab=subscription'}
 							inviteId={searchParams.get('inviteId')}
 							className="mx-auto"
 							disabled={!tosAgreed}
@@ -124,7 +128,7 @@ export default function LoginPage() {
 						<Or />
 						<EmailSignupForm
 							endpoint={`${CONFIG.API_ORIGIN}/auth/begin-email-signup`}
-							returnTo={'/settings?tab=subscription'}
+							returnTo={returnTo || '/settings?tab=subscription'}
 							disabled={!tosAgreed}
 							appState={appState}
 						/>
