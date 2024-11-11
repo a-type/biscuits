@@ -28,9 +28,6 @@ export function ColorBreakdown({ project, className }: ColorBreakdownProps) {
 const yellow = 'rgb(255,255,0)';
 const red = 'rgb(255,0,0)';
 const blue = 'rgb(0,0,255)';
-const cyan = 'rgb(0,255,255)';
-const magenta = 'rgb(255,0,255)';
-const black = 'rgb(0,0,0)';
 
 function ColorBreakdownVisuals({
 	color,
@@ -48,39 +45,50 @@ function ColorBreakdownVisuals({
 	]);
 	const ryb = convertible.ryb;
 	const rybTotal = ryb.red + ryb.yellow + ryb.blue;
-	const cmyk = convertible.cmyk;
-	const cmykTotal = cmyk.cyan + cmyk.magenta + cmyk.yellow;
 	const hsl = convertible.hsl;
 
 	return (
-		<div className="flex flex-col gap-3">
-			<PieChart
-				segments={[
-					{
-						label: 'R',
-						color: red,
-						percent: (100 * ryb.red) / rybTotal,
-					},
-					{
-						label: 'Y',
-						color: yellow,
-						percent: (100 * ryb.yellow) / rybTotal,
-					},
-					{
-						label: 'B',
-						color: blue,
-						percent: (100 * ryb.blue) / rybTotal,
-					},
-				]}
+		<div
+			className={clsx(
+				'flex flex-col gap-3 md:(flex-row items-stretch)',
+				className,
+			)}
+		>
+			<div
+				className="h-15vh w-full md:(h-auto [flex:1_0_80px]) rounded-lg"
+				style={{
+					background: `rgb(${r},${g},${b})`,
+				}}
 			/>
-			<div className="w-100% h-32px flex-shrink-0 bg-gradient-to-r from-#000000 to-#ffffff relative mt-3">
-				<div
-					className="h-full w-5px absolute"
-					style={{
-						left: `${hsl.lightness}%`,
-						background: hsl.lightness > 50 ? 'black' : 'white',
-					}}
+			<div className="flex flex-col gap-3 [flex:2_0_80px]">
+				<PieChart
+					segments={[
+						{
+							label: 'R',
+							color: red,
+							percent: (100 * ryb.red) / rybTotal,
+						},
+						{
+							label: 'Y',
+							color: yellow,
+							percent: (100 * ryb.yellow) / rybTotal,
+						},
+						{
+							label: 'B',
+							color: blue,
+							percent: (100 * ryb.blue) / rybTotal,
+						},
+					]}
 				/>
+				<div className="w-100% h-32px flex-shrink-0 bg-gradient-to-r from-#000000 to-#ffffff relative mt-3">
+					<div
+						className="h-full w-5px absolute"
+						style={{
+							left: `${hsl.lightness}%`,
+							background: hsl.lightness > 50 ? 'black' : 'white',
+						}}
+					/>
+				</div>
 			</div>
 		</div>
 	);

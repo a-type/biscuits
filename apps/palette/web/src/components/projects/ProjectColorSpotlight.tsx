@@ -79,7 +79,8 @@ export function ProjectColorSpotlight({
 						<Icon name="waterDrop" /> Mixing
 					</Button>
 				</Dialog.Trigger>
-				<Dialog.Content>
+				<Dialog.Content width="lg">
+					<Dialog.Title>Color Mixing</Dialog.Title>
 					<ColorBreakdown project={project} />
 					<Dialog.Actions>
 						<Dialog.Close>Close</Dialog.Close>
