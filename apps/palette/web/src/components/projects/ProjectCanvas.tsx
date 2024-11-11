@@ -395,13 +395,6 @@ function CanvasTools() {
 			>
 				<Icon name={showBubbles ? 'eye' : 'eyeClosed'} />
 			</Button>
-			<Button
-				size="icon"
-				toggled={tool === 'bubble'}
-				onClick={() => (toolState.tool = tool === 'bubble' ? null : 'bubble')}
-			>
-				<Icon name="waterDrop" />
-			</Button>
 		</div>
 	);
 }
