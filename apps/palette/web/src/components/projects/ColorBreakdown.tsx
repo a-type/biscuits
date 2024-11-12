@@ -1,43 +1,20 @@
-import { hooks } from '@/hooks.js';
-import { Project, ProjectColorsItem } from '@palette.biscuits/verdant';
 // @ts-ignore
 import { Color } from '@dynamize/color-utilities';
-import { useColorSelection } from './hooks.js';
 import { clsx } from '@a-type/ui';
 import { useBoundsCssVars } from '@a-type/ui/hooks';
 
 export interface ColorBreakdownProps {
-	project: Project;
+	color: { r: number; g: number; b: number };
 	className?: string;
-}
-
-// shows r/y/b distribution of a color
-export function ColorBreakdown({ project, className }: ColorBreakdownProps) {
-	const [selectedId] = useColorSelection();
-	const { colors } = hooks.useWatch(project);
-	hooks.useWatch(colors);
-	const matchingColor = colors.find((c) => c.get('id') === selectedId);
-
-	if (!matchingColor) {
-		return null;
-	}
-
-	return <ColorBreakdownVisuals color={matchingColor} className={className} />;
 }
 
 const yellow = 'rgb(255,255,0)';
 const red = 'rgb(255,0,0)';
 const blue = 'rgb(0,0,255)';
 
-function ColorBreakdownVisuals({
-	color,
-	className,
-}: {
-	color: ProjectColorsItem;
-	className?: string;
-}) {
-	const { value } = hooks.useWatch(color);
-	const { r, g, b } = value.getSnapshot();
+// shows r/y/b distribution of a color
+export function ColorBreakdown({ color, className }: ColorBreakdownProps) {
+	const { r, g, b } = color;
 	const convertible = new Color('rgb', { red: r, green: g, blue: b }, [
 		'ryb',
 		'cmyk',
@@ -48,47 +25,34 @@ function ColorBreakdownVisuals({
 	const hsl = convertible.hsl;
 
 	return (
-		<div
-			className={clsx(
-				'flex flex-col gap-3 md:(flex-row items-stretch)',
-				className,
-			)}
-		>
-			<div
-				className="h-15vh w-full md:(h-auto [flex:1_0_80px]) rounded-lg"
-				style={{
-					background: `rgb(${r},${g},${b})`,
-				}}
+		<div className={clsx('flex flex-row gap-3 justify-around', className)}>
+			<PieChart
+				segments={[
+					{
+						label: 'R',
+						color: red,
+						percent: (100 * ryb.red) / rybTotal,
+					},
+					{
+						label: 'Y',
+						color: yellow,
+						percent: (100 * ryb.yellow) / rybTotal,
+					},
+					{
+						label: 'B',
+						color: blue,
+						percent: (100 * ryb.blue) / rybTotal,
+					},
+				]}
 			/>
-			<div className="flex flex-col gap-3 [flex:2_0_80px]">
-				<PieChart
-					segments={[
-						{
-							label: 'R',
-							color: red,
-							percent: (100 * ryb.red) / rybTotal,
-						},
-						{
-							label: 'Y',
-							color: yellow,
-							percent: (100 * ryb.yellow) / rybTotal,
-						},
-						{
-							label: 'B',
-							color: blue,
-							percent: (100 * ryb.blue) / rybTotal,
-						},
-					]}
+			<div className="h-100% w-32px flex-shrink-0 bg-gradient-to-b from-#000000 to-#ffffff relative">
+				<div
+					className="w-full h-5px absolute"
+					style={{
+						top: `${hsl.lightness}%`,
+						background: hsl.lightness > 50 ? 'black' : 'white',
+					}}
 				/>
-				<div className="w-100% h-32px flex-shrink-0 bg-gradient-to-r from-#000000 to-#ffffff relative mt-3">
-					<div
-						className="h-full w-5px absolute"
-						style={{
-							left: `${hsl.lightness}%`,
-							background: hsl.lightness > 50 ? 'black' : 'white',
-						}}
-					/>
-				</div>
 			</div>
 		</div>
 	);
@@ -131,7 +95,10 @@ function PieChart({
 			style={{
 				backgroundImage: gradient,
 			}}
-			className={clsx('rounded-full aspect-1 w-full relative', className)}
+			className={clsx(
+				'rounded-full aspect-1 relative transition-all',
+				className,
+			)}
 		>
 			<div className="left-1/2 top-1/2 absolute overflow-visible">
 				{/* Render percentage values in the correct positions */}

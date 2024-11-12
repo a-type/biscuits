@@ -4,9 +4,6 @@ import { hooks } from '@/hooks.js';
 import { clsx } from '@a-type/ui';
 import { useSnapshot } from 'valtio';
 import { toolState } from './state.js';
-import { assert } from '@a-type/utils';
-import { Dialog } from '@a-type/ui/components/dialog';
-import { useState } from 'react';
 import { ColorBreakdown } from './ColorBreakdown.jsx';
 import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
@@ -20,73 +17,62 @@ export function ProjectColorSpotlight({
 	project,
 	className,
 }: ProjectColorSpotlightProps) {
-	const [selectedId] = useColorSelection();
+	const [selectedId, setSelectedId] = useColorSelection();
 	const { colors } = hooks.useWatch(project);
 	const matchingColor = colors.find((c) => c.get('id') === selectedId);
 	hooks.useWatch(matchingColor || null);
 	const matchingColorValues = matchingColor?.get('value')?.getSnapshot();
 
-	const { pickingColor } = useSnapshot(toolState);
+	const { pickedColor: pickingColor } = useSnapshot(toolState);
 
-	const showColor = !!pickingColor || !!matchingColorValues;
+	const color = pickingColor?.value || matchingColorValues;
 
-	const [showMixing, setShowMixing] = useState(false);
-
-	if (!showColor) {
+	if (color) {
 		return (
 			<div
 				className={clsx(
-					'flex flex-col p-2 items-center justify-center border-1 border-solid border-gray-4 rounded-lg',
+					'm-1 relative flex flex-col md:flex-row gap-1',
 					className,
 				)}
 			>
-				<span className="text-xs text-gray-5 italic">
-					Select a color to see it here
-				</span>
+				<div
+					className={'relative flex-1-0-0 h-full rounded-lg'}
+					style={{
+						backgroundColor: `rgb(${color.r}, ${color.g}, ${color.b})`,
+					}}
+				>
+					<div className="absolute right-3 bottom-3 row">
+						{!!pickingColor && (
+							<Button
+								size="small"
+								color="primary"
+								onClick={() => {
+									colors.push(pickingColor);
+									const color = colors.get(colors.length - 1);
+									toolState.pickedColor = null;
+									setSelectedId(color.get('id'));
+								}}
+							>
+								<Icon name="plus" /> Save
+							</Button>
+						)}
+					</div>
+				</div>
+				<ColorBreakdown color={color} className="flex-1-0-0 p-2" />
 			</div>
 		);
 	}
 
-	if (pickingColor) {
-		return (
-			<div
-				className={clsx(
-					'w-full h-full rounded-t-lg md:rounded-b-lg',
-					className,
-				)}
-				style={{
-					backgroundColor: pickingColor,
-				}}
-			/>
-		);
-	}
-
-	assert(matchingColorValues);
-
 	return (
 		<div
 			className={clsx(
-				'w-full h-full rounded-t-lg relative md:rounded-b-lg',
+				'flex flex-col p-2 items-center justify-center border-1 border-solid border-gray-4 rounded-lg',
 				className,
 			)}
-			style={{
-				backgroundColor: `rgb(${matchingColorValues.r}, ${matchingColorValues.g}, ${matchingColorValues.b})`,
-			}}
 		>
-			<Dialog open={showMixing} onOpenChange={setShowMixing}>
-				<Dialog.Trigger asChild>
-					<Button className="absolute right-1 bottom-2" size="small">
-						<Icon name="waterDrop" /> Mixing
-					</Button>
-				</Dialog.Trigger>
-				<Dialog.Content width="lg">
-					<Dialog.Title>Color Mixing</Dialog.Title>
-					<ColorBreakdown project={project} />
-					<Dialog.Actions>
-						<Dialog.Close>Close</Dialog.Close>
-					</Dialog.Actions>
-				</Dialog.Content>
-			</Dialog>
+			<span className="text-xs text-gray-5 italic">
+				Select a color to see it here
+			</span>
 		</div>
 	);
 }

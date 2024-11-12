@@ -5,7 +5,6 @@ import {
 	Project,
 	ProjectColors,
 	ProjectColorsItem,
-	ProjectColorsItemInit,
 } from '@palette.biscuits/verdant';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useColorSelection } from './hooks.js';
@@ -20,9 +19,7 @@ import {
 	useCanvas,
 	Vector2,
 } from '@a-type/react-space';
-import { useSnapshot } from 'valtio';
-import { Button } from '@a-type/ui/components/button';
-import { Icon } from '@a-type/ui/components/icon';
+import { ref, useSnapshot } from 'valtio';
 import { toolState } from './state.js';
 import { preventDefault } from '@a-type/utils';
 
@@ -32,13 +29,7 @@ export interface ProjectCanvasProps {
 }
 export function ProjectCanvas({ project, className }: ProjectCanvasProps) {
 	const { image, colors } = hooks.useWatch(project);
-	const [_, setSelected] = useColorSelection();
-	const addColor = (init: ProjectColorsItemInit) => {
-		colors.push(init);
-		const newColor = colors.get(colors.length - 1);
-		setSelected(newColor.get('id'));
-	};
-	const { showBubbles, pickingColor } = useSnapshot(toolState);
+	const { showBubbles, activelyPicking } = useSnapshot(toolState);
 
 	const viewport = useCreateViewport({
 		panLimitMode: 'viewport',
@@ -49,8 +40,6 @@ export function ProjectCanvas({ project, className }: ProjectCanvasProps) {
 		},
 	});
 
-	const picking = !!pickingColor;
-
 	return (
 		<div
 			className={clsx(
@@ -59,21 +48,19 @@ export function ProjectCanvas({ project, className }: ProjectCanvasProps) {
 			)}
 		>
 			<ViewportRoot viewport={viewport} className="flex-grow-1 h-auto">
-				<ColorPickerCanvas image={image} onColor={addColor} />
-				{showBubbles && !picking && <Bubbles colors={colors} />}
+				<ColorPickerCanvas image={image} />
+				{showBubbles && !activelyPicking && <Bubbles colors={colors} />}
+				<PickingBubble />
 			</ViewportRoot>
-			<CanvasTools />
 		</div>
 	);
 }
 
 function ColorPickerCanvas({
 	image: imageModel,
-	onColor,
 	className,
 }: {
 	image: EntityFile;
-	onColor: (init: ProjectColorsItemInit) => void;
 	className?: string;
 }) {
 	hooks.useWatch(imageModel);
@@ -136,35 +123,19 @@ function ColorPickerCanvas({
 		[canvasRef],
 	);
 
-	const getCanvasSize = useCallback(() => {
-		const canvas = canvasRef.current;
-		if (!canvas) return null;
-		return {
-			width: canvas.width,
-			height: canvas.height,
-		};
-	}, [canvasRef]);
-
 	return (
 		<CanvasRoot canvas={logicalCanvas} onContextMenu={preventDefault}>
 			{/* <CanvasBackground> */}
 			<canvas ref={canvasRef} className={clsx('touch-none', className)} />
 			{/* </CanvasBackground> */}
 			{/* bubble preview */}
-			<BubblePicker
-				getCanvasColors={getCanvasColors}
-				getCanvasSize={getCanvasSize}
-				onColor={onColor}
-			/>
+			<BubblePicker getCanvasColors={getCanvasColors} />
 		</CanvasRoot>
 	);
 }
 
 function BubblePicker({
 	getCanvasColors,
-	onPickingChange,
-	getCanvasSize,
-	onColor,
 }: {
 	getCanvasColors: (
 		x: number,
@@ -172,17 +143,12 @@ function BubblePicker({
 		xRange?: number,
 		yRange?: number,
 	) => Uint8ClampedArray | null;
-	getCanvasSize: () => { width: number; height: number } | null;
-	onPickingChange?: (picking: boolean) => void;
-	onColor: (color: {
-		value: { r: number; g: number; b: number };
-		percentage: { x: number; y: number };
-		pixel: { x: number; y: number };
-	}) => void;
 }) {
 	const previewRef = useRef<HTMLDivElement>(null);
 	const previewCanvasRef = useRef<HTMLCanvasElement>(null);
 	const dotRef = useRef<HTMLDivElement>(null);
+	const show = useSnapshot(toolState).activelyPicking;
+	const [_, setSelected] = useColorSelection();
 
 	useClaimGesture(
 		'tool',
@@ -229,10 +195,19 @@ function BubblePicker({
 					g: colors[577],
 					b: colors[578],
 				};
-				toolState.pickingColor = `rgb(${centerColor.r}, ${centerColor.g}, ${centerColor.b})`;
+				const canvasRect = canvas.limits.value;
+				const canvasWidth = canvasRect.max.x - canvasRect.min.x;
+				const canvasHeight = canvasRect.max.y - canvasRect.min.y;
+				const canvasX = x / canvasWidth;
+				const canvasY = y / canvasHeight;
+				toolState.pickedColor = ref({
+					value: centerColor,
+					percentage: { x: canvasX, y: canvasY },
+					pixel: { x, y },
+				});
 				dotRef.current?.style.setProperty(
 					'background-color',
-					toolState.pickingColor,
+					`rgb(${centerColor.r}, ${centerColor.g}, ${centerColor.b})`,
 				);
 			}
 		},
@@ -245,14 +220,13 @@ function BubblePicker({
 			if (!preview) return;
 			preview.style.setProperty('--x', `${worldPosition.x}px`);
 			preview.style.setProperty('--y', `${worldPosition.y}px`);
-			preview.style.setProperty('display', 'block');
 
 			const size = preview.computedStyleMap().get('--size');
 			const sizeValue = size ? parseInt(size.toString()) : 0;
 
-			const flipX = screenPosition.x - sizeValue * 2 <= 0;
+			const flipX = screenPosition.x - sizeValue * 1.5 <= 0;
 			preview.style.setProperty('--x-mult', flipX ? `1` : `-1`);
-			const flipY = screenPosition.y - sizeValue * 2 <= 0;
+			const flipY = screenPosition.y - sizeValue * 1.5 <= 0;
 			preview.style.setProperty('--y-mult', flipY ? `1` : `-1`);
 
 			preview.style.setProperty('border-radius', '9999px');
@@ -277,7 +251,8 @@ function BubblePicker({
 				if (!preview) return;
 				updatePosition(pointerWorldPosition, screenPosition);
 				updatePreview(x, y);
-				onPickingChange?.(true);
+				toolState.activelyPicking = true;
+				setSelected(null);
 			},
 			onDrag: (
 				{ pointerWorldPosition, screenPosition, touchesCount },
@@ -293,31 +268,15 @@ function BubblePicker({
 				if (!preview) return;
 				updatePosition(pointerWorldPosition, screenPosition);
 				updatePreview(x, y);
+				toolState.activelyPicking = true;
 			},
-			onDragEnd: ({ pointerWorldPosition }) => {
-				const { x, y } = pointerWorldPosition;
-
-				previewRef.current?.style.setProperty('display', 'none');
-
-				const canvasRect = canvas.limits.value;
-				const canvasWidth = canvasRect.max.x - canvasRect.min.x;
-				const canvasHeight = canvasRect.max.y - canvasRect.min.y;
-				const canvasX = x / canvasWidth;
-				const canvasY = y / canvasHeight;
-
-				const color = getCanvasColors(x, y);
-				toolState.pickingColor = null;
-				if (!color) return;
-
-				onColor({
-					value: { r: color[0], g: color[1], b: color[2] },
-					percentage: { x: canvasX, y: canvasY },
-					pixel: { x, y },
-				});
+			onDragEnd: () => {
+				toolState.activelyPicking = false;
 			},
 			onAbandon: () => {
 				previewRef.current?.style.setProperty('display', 'none');
-				toolState.pickingColor = null;
+				toolState.pickedColor = null;
+				toolState.activelyPicking = false;
 			},
 		},
 		'bubble',
@@ -332,7 +291,8 @@ function BubblePicker({
 				'[transform:translate(-50%,-50%)_translate(calc(var(--x-mult,1)*(var(--size)+var(--pointer-size))/2/var(--zoom,1)),calc(var(--y-mult,1)*(var(--size)+var(--pointer-size))/2/var(--zoom,1)))]',
 				'left-[var(--x)] top-[var(--y)]',
 				'w-[calc(var(--size)/var(--zoom,1))] h-[calc(var(--size)/var(--zoom,1))]',
-				'fixed pointer-events-none border-1 border-solid border-gray-4 overflow-hidden hidden',
+				'fixed pointer-events-none border-1 border-solid border-gray-4 overflow-hidden',
+				show ? 'block' : 'hidden',
 			)}
 		>
 			<canvas ref={previewCanvasRef} className="w-full h-full" />
@@ -356,6 +316,9 @@ function Bubbles({ colors }: { colors: ProjectColors }) {
 	);
 }
 
+const BUBBLE_SIZE_LG = 64;
+const BUBBLE_SIZE_SM = 32;
+
 function Bubble({ color: colorVal }: { color: ProjectColorsItem }) {
 	const { percentage, value, id } = hooks.useWatch(colorVal);
 	const { x, y } = hooks.useWatch(percentage);
@@ -365,34 +328,51 @@ function Bubble({ color: colorVal }: { color: ProjectColorsItem }) {
 
 	return (
 		<button
-			onClick={() => setSelected(id)}
+			onClick={() => {
+				setSelected(id);
+				toolState.pickedColor = null;
+			}}
 			className={clsx(
-				'absolute rounded-full pointer-events-auto -translate-1/2 border-solid border-1 border-gray appearance-none min-h-0 min-w-0 p-0 m-0',
-				selected && 'border-2 z-1',
+				'absolute rounded-full pointer-events-auto -translate-1/2 border-solid border-black appearance-none min-h-0 min-w-0 p-0 m-0',
 			)}
 			style={{
 				backgroundColor: `rgb(${r}, ${g}, ${b})`,
 				left: `${x * 100}%`,
 				top: `${y * 100}%`,
-				width: `calc(${selected ? 48 : 24}px / var(--zoom, 1))`,
-				height: `calc(${selected ? 48 : 24}px / var(--zoom, 1))`,
+				width: `calc(${selected ? BUBBLE_SIZE_LG : BUBBLE_SIZE_SM}px / var(--zoom, 1))`,
+				height: `calc(${selected ? BUBBLE_SIZE_LG : BUBBLE_SIZE_SM}px / var(--zoom, 1))`,
+				borderWidth: 'calc(1px/var(--zoom,1))',
+				boxShadow: '0 0 0 calc(1px/var(--zoom,1)) var(--color-white)',
+				zIndex: selected ? 1 : 0,
 			}}
 		/>
 	);
 }
 
-function CanvasTools() {
-	const { showBubbles } = useSnapshot(toolState);
+function PickingBubble() {
+	const { pickedColor, activelyPicking } = useSnapshot(toolState);
+
+	if (!pickedColor || activelyPicking) return;
 
 	return (
-		<div className="row w-full bg-white p-2 border-gray border-1 border-solid">
-			<Button
-				size="icon"
-				toggled={showBubbles}
-				onClick={() => (toolState.showBubbles = !showBubbles)}
-			>
-				<Icon name={showBubbles ? 'eye' : 'eyeClosed'} />
-			</Button>
+		<div
+			className="absolute pointer-events-none -translate-1/2"
+			style={{
+				left: `${pickedColor.percentage.x * 100}%`,
+				top: `${pickedColor.percentage.y * 100}%`,
+				width: `calc(${BUBBLE_SIZE_LG}px / var(--zoom, 1))`,
+				height: `calc(${BUBBLE_SIZE_LG}px / var(--zoom, 1))`,
+			}}
+		>
+			<div
+				className={clsx(
+					'absolute rounded-full pointer-events-none border-dashed border-white animate-spin animate-duration-20s w-full h-full',
+				)}
+				style={{
+					backgroundColor: `rgb(${pickedColor.value.r}, ${pickedColor.value.g}, ${pickedColor.value.b})`,
+					borderWidth: `calc(2px / var(--zoom, 1))`,
+				}}
+			/>
 		</div>
 	);
 }

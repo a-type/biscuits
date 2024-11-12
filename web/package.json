@@ -7,7 +7,8 @@
 		"dev": "vite --host --mode=development",
 		"build": "vite build --mode=production",
 		"typecheck": "tsc --noEmit",
-		"up-ui": "cd .. && pnpm up-ui"
+		"up-ui": "cd .. && pnpm up-ui",
+		"prepare-video": "ffmpeg -c:v libx265 -crf 25 -filter:v scale=-1:720 -i"
 	},
 	"dependencies": {
 		"@a-type/auth-client": "1.0.10",
