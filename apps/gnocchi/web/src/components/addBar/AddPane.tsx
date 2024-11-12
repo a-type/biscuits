@@ -126,7 +126,7 @@ const AddPaneImpl = forwardRef<
 			<ScrollArea
 				{...menuProps}
 				className={classNames(
-					'flex flex-col max-h-[calc(var(--viewport-height,40vh)-80px)] lg:max-h-50vh w-full max-w-none gap-4 p-3',
+					'flex flex-col max-h-[calc(var(--viewport-height,40dvh)-80px)] lg:max-h-50dvh w-full max-w-none gap-4 p-3',
 				)}
 				onScroll={stopPropagation}
 				background="white"

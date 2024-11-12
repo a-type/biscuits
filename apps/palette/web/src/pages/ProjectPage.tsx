@@ -35,7 +35,7 @@ export function ProjectPage({}: ProjectPageProps) {
 	}
 
 	return (
-		<div className="w-full min-h-100vh flex flex-col md:h-100vh">
+		<div className="w-full min-h-100dvh flex flex-col md:h-100dvh">
 			<div className="row py-1 sticky z-100 bg-wash top-0">
 				<Button asChild color="ghost" size="small">
 					<Link to="/">
@@ -52,7 +52,7 @@ export function ProjectPage({}: ProjectPageProps) {
 				</ActionBar>
 			</div>
 			<div className="flex flex-col items-stretch md:flex-row w-full gap-1 flex-1 items-stretch md:min-h-0">
-				<div className="flex flex-col gap-1 [flex:3_0_auto] min-h-80vh md:h-auto md:[flex:3_0_0]">
+				<div className="flex flex-col gap-1 [flex:3_0_auto] min-h-80dvh md:h-auto md:[flex:3_0_0]">
 					<ProjectCanvas project={project} className="[flex:3_0_200px]" />
 					<ProjectColorSpotlight
 						project={project}

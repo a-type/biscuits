@@ -95,7 +95,7 @@ function RecipeOverviewContent({ recipe }: { recipe: Recipe }) {
 				<H2>This is your copy!</H2>
 				<P>Feel free to make changes, add notes, etc.</P>
 			</OnboardingBanner>
-			<div className="flex flex-col gap-6 items-start w-full pb-33vh">
+			<div className="flex flex-col gap-6 items-start w-full pb-33dvh">
 				<TitleAndImageLayout>
 					<TitleContainer>
 						<div className="w-full flex flex-col items-start self-start text-xs my-3 gap-4">
