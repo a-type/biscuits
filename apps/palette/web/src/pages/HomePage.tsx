@@ -1,7 +1,8 @@
 import { CreateProject } from '@/components/projects/CreateProject.jsx';
 import { ProjectsList } from '@/components/projects/ProjectsList.jsx';
+import { basicsOnboarding } from '@/onboarding/basics.js';
 import { PageContent, PageFixedArea } from '@a-type/ui/components/layouts';
-import { usePageTitle, UserMenu } from '@biscuits/client';
+import { OnboardingBanner, usePageTitle, UserMenu } from '@biscuits/client';
 
 export interface HomePageProps {}
 
@@ -15,6 +16,14 @@ export function HomePage({}: HomePageProps) {
 					<UserMenu className="ml-auto" />
 				</div>
 			</PageFixedArea>
+			<OnboardingBanner
+				onboarding={basicsOnboarding}
+				step="intro"
+				className="max-w-400px mx-auto mb-4"
+			>
+				Palette is a painting tool which helps you analyze colors in reference
+				photos. Add an image to start a new project.
+			</OnboardingBanner>
 			<ProjectsList />
 			<CreateProject />
 		</PageContent>

@@ -2,6 +2,8 @@
 import { Color } from '@dynamize/color-utilities';
 import { clsx } from '@a-type/ui';
 import { useBoundsCssVars } from '@a-type/ui/hooks';
+import { OnboardingTooltip } from '@biscuits/client';
+import { basicsOnboarding } from '@/onboarding/basics.js';
 
 export interface ColorBreakdownProps {
 	color: { r: number; g: number; b: number };
@@ -25,36 +27,42 @@ export function ColorBreakdown({ color, className }: ColorBreakdownProps) {
 	const hsl = convertible.hsl;
 
 	return (
-		<div className={clsx('flex flex-row gap-3 justify-around', className)}>
-			<PieChart
-				segments={[
-					{
-						label: 'R',
-						color: red,
-						percent: (100 * ryb.red) / rybTotal,
-					},
-					{
-						label: 'Y',
-						color: yellow,
-						percent: (100 * ryb.yellow) / rybTotal,
-					},
-					{
-						label: 'B',
-						color: blue,
-						percent: (100 * ryb.blue) / rybTotal,
-					},
-				]}
-			/>
-			<div className="h-100% w-32px flex-shrink-0 bg-gradient-to-b from-#000000 to-#ffffff relative">
-				<div
-					className="w-full h-5px absolute"
-					style={{
-						top: `${hsl.lightness}%`,
-						background: hsl.lightness > 50 ? 'black' : 'white',
-					}}
+		<OnboardingTooltip
+			onboarding={basicsOnboarding}
+			step="color"
+			content="This section shows the selected color and mixing helpers."
+		>
+			<div className={clsx('flex flex-row gap-3 justify-around', className)}>
+				<PieChart
+					segments={[
+						{
+							label: 'R',
+							color: red,
+							percent: (100 * ryb.red) / rybTotal,
+						},
+						{
+							label: 'Y',
+							color: yellow,
+							percent: (100 * ryb.yellow) / rybTotal,
+						},
+						{
+							label: 'B',
+							color: blue,
+							percent: (100 * ryb.blue) / rybTotal,
+						},
+					]}
 				/>
+				<div className="h-100% w-32px flex-shrink-0 bg-gradient-to-b from-#000000 to-#ffffff relative">
+					<div
+						className="w-full h-5px absolute"
+						style={{
+							top: `${hsl.lightness}%`,
+							background: hsl.lightness > 50 ? 'black' : 'white',
+						}}
+					/>
+				</div>
 			</div>
-		</div>
+		</OnboardingTooltip>
 	);
 }
 

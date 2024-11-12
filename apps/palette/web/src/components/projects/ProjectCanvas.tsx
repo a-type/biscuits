@@ -22,6 +22,8 @@ import {
 import { ref, useSnapshot } from 'valtio';
 import { toolState } from './state.js';
 import { preventDefault } from '@a-type/utils';
+import { OnboardingTooltip } from '@biscuits/client';
+import { basicsOnboarding } from '@/onboarding/basics.js';
 
 export interface ProjectCanvasProps {
 	project: Project;
@@ -41,18 +43,24 @@ export function ProjectCanvas({ project, className }: ProjectCanvasProps) {
 	});
 
 	return (
-		<div
-			className={clsx(
-				'relative flex flex-col w-full sm:(w-auto h-full)',
-				className,
-			)}
+		<OnboardingTooltip
+			onboarding={basicsOnboarding}
+			step="bubbles"
+			content="Tap and drag to pick a color. Pinch to zoom and pan."
 		>
-			<ViewportRoot viewport={viewport} className="flex-grow-1 h-auto">
-				<ColorPickerCanvas image={image} />
-				{showBubbles && !activelyPicking && <Bubbles colors={colors} />}
-				<PickingBubble />
-			</ViewportRoot>
-		</div>
+			<div
+				className={clsx(
+					'relative flex flex-col w-full sm:(w-auto h-full)',
+					className,
+				)}
+			>
+				<ViewportRoot viewport={viewport} className="flex-grow-1 h-auto">
+					<ColorPickerCanvas image={image} />
+					{showBubbles && !activelyPicking && <Bubbles colors={colors} />}
+					<PickingBubble />
+				</ViewportRoot>
+			</div>
+		</OnboardingTooltip>
 	);
 }
 

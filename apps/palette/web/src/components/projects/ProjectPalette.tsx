@@ -5,6 +5,8 @@ import { useColorSelection, useSort } from './hooks.js';
 import { H3 } from '@a-type/ui/components/typography';
 // @ts-ignore
 import { Color } from '@dynamize/color-utilities';
+import { OnboardingTooltip } from '@biscuits/client';
+import { basicsOnboarding } from '@/onboarding/basics.js';
 
 export interface ProjectPaletteProps {
 	project: Project;
@@ -36,7 +38,13 @@ export function ProjectPalette({ project, className }: ProjectPaletteProps) {
 
 	return (
 		<div className={clsx('flex flex-col items-stretch m-1', className)}>
-			<H3>Saved Colors</H3>
+			<OnboardingTooltip
+				onboarding={basicsOnboarding}
+				step="palette"
+				content="Tap 'Save' on a color to add it to your palette"
+			>
+				<H3>Saved Colors</H3>
+			</OnboardingTooltip>
 			{!sorted.length && (
 				<span className="text-xs text-gray-5 italic m-auto">
 					Click the image to select colors
