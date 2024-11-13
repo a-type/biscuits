@@ -7,28 +7,28 @@ import { CanvasOverlayContent } from '../canvas/CanvasOverlay.jsx';
 export interface CameraControlsProps {}
 
 export function CameraControls({}: CameraControlsProps) {
-  const viewport = useViewport();
-  const zoom = useSyncExternalStore(
-    (cb) => viewport.subscribe('zoomChanged', cb),
-    () => viewport.zoom,
-  );
+	const viewport = useViewport();
+	const zoom = useSyncExternalStore(
+		(cb) => viewport.subscribe('zoomChanged', cb),
+		() => viewport.zoom,
+	);
 
-  return (
-    <CanvasOverlayContent
-      className="absolute bottom-1 right-1 row pointer-events-none"
-      {...disableDragProps}
-    >
-      <Slider
-        value={[zoom]}
-        onValueChange={([v]) => {
-          viewport.doZoom(v, { gestureComplete: true });
-        }}
-        min={viewport.config.zoomLimits.min}
-        max={viewport.config.zoomLimits.max}
-        step={0.01}
-        color="default"
-        className="pointer-events-auto w-100px max-w-80vw cursor-pointer"
-      />
-    </CanvasOverlayContent>
-  );
+	return (
+		<CanvasOverlayContent
+			className="absolute bottom-1 right-1 row pointer-events-none"
+			{...disableDragProps}
+		>
+			<Slider
+				value={[zoom]}
+				onValueChange={([v]) => {
+					viewport.doZoom(v, { gestureComplete: true });
+				}}
+				min={viewport.config.zoomLimits.min}
+				max={viewport.config.zoomLimits.max}
+				step={0.01}
+				color="default"
+				className="pointer-events-auto w-100px max-w-80dvw cursor-pointer"
+			/>
+		</CanvasOverlayContent>
+	);
 }

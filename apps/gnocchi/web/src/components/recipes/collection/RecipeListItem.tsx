@@ -50,8 +50,8 @@ export const RecipeListItem = memo(function RecipeListItem({
 			className={classNames(
 				'self-end',
 				{
-					'!max-h-20vh': gridStyle === 'card-small',
-					'min-h-200px md:(h-30vh max-h-300px)': !!mainImage,
+					'!max-h-20dvh': gridStyle === 'card-small',
+					'min-h-200px md:(h-30dvh max-h-300px)': !!mainImage,
 				},
 				'shadow-sm',
 				className,

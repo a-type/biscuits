@@ -57,7 +57,7 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 			<Card
 				ref={ref}
 				className={clsx(
-					prioritized ? 'min-h-300px sm:min-h-40vw'
+					prioritized ? 'min-h-300px sm:min-h-40dvw'
 					: imageFiles.length ? 'min-h-300px'
 					: '',
 					`theme-${typeThemes[type]}`,
