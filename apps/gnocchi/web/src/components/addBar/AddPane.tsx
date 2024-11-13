@@ -79,8 +79,6 @@ const AddPaneImpl = forwardRef<
 	useEffect(() => {
 		if (disabled) {
 			inputRef.current?.blur();
-		} else {
-			inputRef.current?.focus();
 		}
 	}, [disabled]);
 
