@@ -48,7 +48,7 @@ export function RecipeList({}: RecipeListProps) {
 
 			<Suspense
 				fallback={
-					<CardGrid>
+					<CardGrid className="z-1">
 						<RecipePlaceholderItem className="min-h-200px md:(h-30dvh max-h-300px)" />
 						<RecipePlaceholderItem className="min-h-200px md:(h-30dvh max-h-300px)" />
 						<RecipePlaceholderItem className="min-h-200px md:(h-30dvh max-h-300px)" />
@@ -73,7 +73,7 @@ function RecipeListContent() {
 	return (
 		<>
 			<CardGrid
-				className={classNames({
+				className={classNames('z-1', {
 					'grid-cols-1 sm:grid-cols-2': gridStyle === 'card-big',
 					'grid-cols-2 sm:grid-cols-3': gridStyle === 'card-small',
 				})}

@@ -103,7 +103,7 @@ const AddPaneImpl = forwardRef<
 	return (
 		<div
 			className={classNames(
-				'flex flex-col-reverse rounded-lg bg-white shadow-xl border-default rounded-b-21px border-b-none gap-1',
+				'flex flex-col-reverse rounded-lg bg-white shadow-xl border-default rounded-b-21px border-b-none',
 				className,
 			)}
 		>
@@ -124,12 +124,12 @@ const AddPaneImpl = forwardRef<
 			<ScrollArea
 				{...menuProps}
 				className={classNames(
-					'flex flex-col max-h-[calc(var(--viewport-height,40dvh)-80px)] lg:max-h-50dvh w-full max-w-none gap-4 p-3',
+					'flex flex-col max-h-[calc(var(--viewport-height,40dvh)-80px)] lg:max-h-50dvh w-full max-w-none gap-4',
 				)}
 				onScroll={stopPropagation}
 				background="white"
 			>
-				<div className="flex flex-col gap-4 items-stretch">
+				<div className="flex flex-col gap-4 items-stretch p-3">
 					{showSuggested && (
 						<SuggestionGroup
 							title="Suggested"

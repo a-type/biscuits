@@ -19,7 +19,7 @@ export function RecipesPage({}: RecipesPageProps) {
 			<Suspense>
 				<PageNowPlaying
 					unstyled
-					className="flex flex-col items-center pointer-events-none [z-index:calc(var(--z-dialogBackdrop)-1)]"
+					className="flex flex-col items-center pointer-events-none"
 				>
 					<Suspense>
 						<RecipeCreateButton className="pointer-events-auto w-48px h-48px items-center justify-center md:w-auto md:h-auto md:gap-2 shadow-xl">
