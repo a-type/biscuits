@@ -1,11 +1,8 @@
 import { FloatingAdd } from '@/components/groceries/addBar/FloatingAdd.jsx';
 import { ListEdit } from '@/components/groceries/lists/ListEdit.jsx';
 import { ListSelect } from '@/components/groceries/lists/ListSelect.jsx';
-import { Icon } from '@/components/icons/Icon.jsx';
 import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
 import { RecipeSavePrompt } from '@/components/recipes/savePrompt/RecipeSavePrompt.jsx';
-import { OfflineIndicator } from '@/components/sync/OfflineIndicator.jsx';
-import { RecipePresenceNotification } from '@/components/sync/collaborationMenu/RecipePresenceNotification.jsx';
 import { ListContext } from '@/contexts/ListContext.jsx';
 import { usePageTitle } from '@/hooks/usePageTitle.jsx';
 import { firstTimeOnboarding } from '@/onboarding/firstTimeOnboarding.js';
@@ -18,14 +15,7 @@ import {
 	UnknownListRedirect,
 } from '@/pages/groceries/layout.jsx';
 import { PageNowPlaying } from '@a-type/ui/components/layouts';
-import {
-	ChangelogDisplay,
-	InstallButton,
-	SubscribedOnly,
-	SubscriptionExpiredDialog,
-	UserMenu,
-	PresencePeople,
-} from '@biscuits/client';
+import { ChangelogDisplay, InstallButton, UserMenu } from '@biscuits/client';
 import { useNavigate, useParams } from '@verdant-web/react-router';
 import { Suspense, useCallback, useEffect } from 'react';
 
@@ -81,7 +71,11 @@ export function GroceriesPage() {
 				<List />
 				<UnknownListRedirect listId={listId} />
 				<AutoRestoreScroll />
-				<PageNowPlaying unstyled className="items-center pointer-events-none">
+				<PageNowPlaying
+					unstyled
+					keepAboveKeyboard
+					className="items-center pointer-events-none"
+				>
 					<FloatingAdd />
 				</PageNowPlaying>
 			</ThemedPageContent>
