@@ -41,6 +41,10 @@
 			"path": "apps/palette",
 		},
 		{
+			"name": "🙋 Names",
+			"path": "apps/names",
+		},
+		{
 			"name": "📃 Scripts",
 			"path": "scripts",
 		},
