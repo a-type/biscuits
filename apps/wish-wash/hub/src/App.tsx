@@ -1,10 +1,11 @@
 import { PageContent, PageRoot } from '@a-type/ui/components/layouts';
 import { H1, P } from '@a-type/ui/components/typography';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { HubWishlistData } from './types.js';
 import { ApolloProvider, graphqlClient } from '@biscuits/graphql';
 import { Items } from './components/Items.jsx';
 import { HubContextProvider } from './components/Context.jsx';
+import { Provider as UIProvider } from '@a-type/ui/components/provider';
 
 const innerProps = {
 	className: 'max-w-600px',
@@ -29,13 +30,15 @@ export function App({ list: data }: { list: HubWishlistData }) {
 	return (
 		<HubContextProvider wishlistSlug={data.slug}>
 			<ApolloProvider client={graphqlClient}>
-				<PageRoot className="theme-leek">
-					<PageContent innerProps={innerProps}>
-						<H1>{data.title}</H1>
-						<P>{data.items.length} items</P>
-						<Items items={data.items} listAuthor={data.author} />
-					</PageContent>
-				</PageRoot>
+				<UIProvider>
+					<PageRoot className="theme-leek">
+						<PageContent innerProps={innerProps}>
+							<H1>{data.title}</H1>
+							<P>{data.items.length} items</P>
+							<Items items={data.items} listAuthor={data.author} />
+						</PageContent>
+					</PageRoot>
+				</UIProvider>
 			</ApolloProvider>
 		</HubContextProvider>
 	);

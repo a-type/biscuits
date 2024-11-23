@@ -12,6 +12,8 @@ import {
 	PublishedRecipe,
 	PublishedWishlist,
 	User,
+	WishlistIdeaRequest,
+	WishlistIdeaRequestResponse,
 	WishlistPurchase,
 } from '@biscuits/db';
 import { LibraryInfo } from '@verdant-web/server';
@@ -19,8 +21,6 @@ import { BiscuitsVerdantProfile } from '@biscuits/libraries';
 import { ExtractorData as GnocchiRecipeScan } from '@gnocchi.biscuits/scanning';
 import { BiscuitsError } from '@biscuits/error';
 import {
-	GeographicResult,
-	TemperatureUnit,
 	WeatherForecast,
 	WeatherForecastDay,
 	WeatherForecastInput,
@@ -89,6 +89,9 @@ export const builder = new SchemaBuilder<{
 		PublishedWishlist: PublishedWishlist & { __typename: 'PublishedWishlist' };
 		StorePageScan: WishWashStorePageScan & { __typename: 'StorePageScan' };
 		WishlistPurchase: WishlistPurchase & { __typename: 'WishlistPurchase' };
+		WishlistIdeaRequest: WishlistIdeaRequest & {
+			__typename: 'WishlistIdeaRequest';
+		};
 
 		// Common Utils
 		WeatherForecast: WeatherForecast;
@@ -182,6 +185,14 @@ export const builder = new SchemaBuilder<{
 			itemId: string;
 			name: string;
 			quantity: number;
+		};
+		WishlistIdeaRequestCreateInput: {
+			wishlistId: string;
+			name: string;
+		};
+		WishlistIdeaRequestResponseInput: {
+			ideaRequestId: string;
+			responses: WishlistIdeaRequestResponse;
 		};
 
 		// Common Utils

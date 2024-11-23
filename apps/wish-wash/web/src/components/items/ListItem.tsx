@@ -103,11 +103,11 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 						)}
 					</Card.Content>
 				</Card.Main>
-				<ItemStar item={item} className="absolute right-1 top-1" />
+				<ItemStar item={item} className="absolute right-1 top-1 z-1" />
 				<Card.Footer className="items-center justify-between">
 					<Card.Actions className="ml-auto mr-0">
 						{type === 'idea' ||
-							(type === 'product' && !link && <SearchButton item={item} />)}
+							(type === 'link' && !link && <SearchButton item={item} />)}
 						{link && (
 							<Button asChild color="default" size="small">
 								<Link to={link} newTab>

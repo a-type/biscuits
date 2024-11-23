@@ -21,6 +21,7 @@ import { Button } from '@a-type/ui/components/button';
 import { Icon } from '@a-type/ui/components/icon';
 import { useEditList } from './hooks.js';
 import { toast } from '@a-type/ui';
+import { FirstList } from '../onboarding/FirstList.jsx';
 
 export interface ListsListProps {}
 
@@ -32,6 +33,10 @@ export function ListsList({}: ListsListProps) {
 		},
 		pageSize: 20,
 	});
+
+	if (items.length === 0) {
+		return <FirstList />;
+	}
 
 	return (
 		<>

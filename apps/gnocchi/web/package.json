@@ -14,7 +14,7 @@
 		"typecheck": "tsc --build tsconfig.json"
 	},
 	"dependencies": {
-		"@a-type/ui": "^1.1.19",
+		"@a-type/ui": "^1.1.26",
 		"@a-type/utils": "^1.0.8",
 		"@biscuits/client": "workspace:*",
 		"@biscuits/error": "workspace:*",
@@ -41,7 +41,7 @@
 		"@use-gesture/react": "^10.2.24",
 		"@vercel/analytics": "^0.1.6",
 		"@verdant-web/react-router": "0.6.5",
-		"@verdant-web/store": "4.0.0",
+		"@verdant-web/store": "4.1.0-alpha.1",
 		"@zip.js/zip.js": "^2.7.6",
 		"classnames": "^2.3.2",
 		"convert-units": "^3.0.0-beta.4",

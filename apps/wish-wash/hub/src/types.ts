@@ -19,5 +19,5 @@ export interface HubWishlistItem {
 	priceMin: string | null;
 	priceMax: string | null;
 	note: string | null;
-	type: 'product' | 'idea' | 'vibe';
+	type: 'link' | 'idea' | 'vibe';
 }

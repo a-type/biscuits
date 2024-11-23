@@ -3,7 +3,6 @@ import {
 	Card,
 	CardContent,
 	CardGrid,
-	cardGridColumns,
 	CardMain,
 	CardTitle,
 } from '@a-type/ui/components/card';
@@ -12,10 +11,12 @@ import { ReactNode, Suspense } from 'react';
 import { useItemSize } from '../items/hooks.js';
 import { ItemEditDialog } from '../items/ItemEditDialog.jsx';
 import { ListItem } from '../items/ListItem.jsx';
-import { CreateItem } from './CreateItem.jsx';
 import { ItemSorter } from './ItemSorter.jsx';
 import { hooks } from '@/hooks.js';
 import { Icon, IconName } from '@a-type/ui/components/icon';
+import { WishlistOnboarding } from '../../../../common/src/components/onboarding/WishlistOnboarding.jsx';
+import { P, H2 } from '@a-type/ui/components/typography';
+import { AddItem } from './add/AddItem.jsx';
 
 export interface ListViewProps {
 	list: List;
@@ -58,18 +59,45 @@ function smallColumns(size: number) {
 }
 
 export function ListView({ list, className }: ListViewProps) {
-	const { items } = hooks.useWatch(list);
+	const { items, type, completedQuestions } = hooks.useWatch(list);
 	hooks.useWatch(items);
+	hooks.useWatch(completedQuestions);
 	const [itemSize] = useItemSize();
+
+	const needsOnboarding =
+		type === 'wishlist' && completedQuestions.length === 0;
+
+	if (needsOnboarding) {
+		return (
+			<div className="flex flex-col items-stretch gap-4">
+				<H2>Welcome to your wishlist!</H2>
+				<P>Let's get your wish list started with some ideas.</P>
+				<WishlistOnboarding
+					onAnswer={(question, answer) => {
+						items.push({
+							description: answer,
+							prompt: question.question,
+							type: 'idea',
+						});
+						completedQuestions.push(question.id);
+					}}
+					answeredQuestions={completedQuestions.getSnapshot()}
+					onSkip={() => {
+						completedQuestions.push('skipped');
+					}}
+				/>
+			</div>
+		);
+	}
 
 	return (
 		<div className={clsx('col items-stretch gap-4', className)}>
-			<CreateItem className="sticky top-4 z-10 self-center" list={list} />
+			<AddItem list={list} />
 			<div className="row items-stretch">
 				<div className="flex-1">
 					<CardGrid
 						columns={itemSize === 'large' ? largeColumns : smallColumns}
-						className="flex-1"
+						className="flex-1 z-0"
 					>
 						{items.map((item) => (
 							<ListItem item={item} key={item.get('id')} />
@@ -103,13 +131,14 @@ function TutorialCards() {
 				for. Like, "a black dress" or "a phone case"&mdash;maybe you don't care
 				which one, or just don't know yet.
 			</TutorialCard>
-			<TutorialCard theme="leek" title="Products" icon="gift">
-				Products are specific things, with a link to a store page to buy it.
-			</TutorialCard>
 			<TutorialCard theme="eggplant" title="Vibes" icon="magic">
 				Vibes help to describe your aesthetic&mdash;just the general feeling or
 				style of things you like. Vibes help others find creative and
 				spontaneous gifts.
+			</TutorialCard>
+			<TutorialCard theme="leek" title="Links" icon="gift">
+				Links are specific things, with a link to a store page to buy it. That's
+				not what Wish Wash is all about, but you can still add them.
 			</TutorialCard>
 		</>
 	);

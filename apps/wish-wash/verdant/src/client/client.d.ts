@@ -59,10 +59,12 @@ export class Client<Presence = any, Profile = any> {
 export interface ClientDescriptorOptions<Presence = any, Profile = any>
   extends Omit<
     BaseClientDescriptorOptions<Presence, Profile>,
-    "schema" | "migrations"
+    "schema" | "migrations" | "oldSchemas"
   > {
   /** WARNING: overriding the schema is dangerous and almost definitely not what you want. */
   schema?: StorageSchema;
+  /** WARNING: overriding old schemas is dangerous and almost definitely not what you want. */
+  oldSchemas?: StorageSchema[];
   /** WARNING: overriding the migrations is dangerous and almost definitely not what you want. */
   migrations?: Migration[];
 }
@@ -97,6 +99,22 @@ export type List = ObjectEntity<ListInit, ListDestructured, ListSnapshot>;
 export type ListId = string;
 export type ListName = string;
 export type ListCreatedAt = number;
+export type ListType = "shopping" | "wishlist" | "ideas";
+/** IDs of onboarding questions that have been completed */
+export type ListCompletedQuestions = ListEntity<
+  ListCompletedQuestionsInit,
+  ListCompletedQuestionsDestructured,
+  ListCompletedQuestionsSnapshot
+>;
+export type ListCompletedQuestionsItem = string;
+export type ListLinkedPublicListSlug = string;
+export type ListWebWishlistLinks = ListEntity<
+  ListWebWishlistLinksInit,
+  ListWebWishlistLinksDestructured,
+  ListWebWishlistLinksSnapshot
+>;
+export type ListWebWishlistLinksItem = string;
+export type ListDescription = string;
 export type ListItems = ListEntity<
   ListItemsInit,
   ListItemsDestructured,
@@ -109,6 +127,8 @@ export type ListItemsItem = ObjectEntity<
 >;
 export type ListItemsItemId = string;
 export type ListItemsItemDescription = string;
+/** If this item was created from a survey question, this is the question. */
+export type ListItemsItemPrompt = string;
 export type ListItemsItemLastPurchasedAt = number;
 export type ListItemsItemCreatedAt = number;
 export type ListItemsItemLinks = ListEntity<
@@ -127,7 +147,7 @@ export type ListItemsItemRemoteImageUrl = string;
 export type ListItemsItemCount = number;
 export type ListItemsItemPurchasedCount = number;
 export type ListItemsItemPrioritized = boolean;
-export type ListItemsItemType = "idea" | "product" | "vibe";
+export type ListItemsItemType = "idea" | "link" | "vibe";
 export type ListItemsItemPriceMin = string;
 export type ListItemsItemPriceMax = string;
 export type ListItemsItemNote = string;
@@ -141,15 +161,23 @@ export type ListInit = {
   id?: string;
   name?: string;
   createdAt?: number;
+  type?: "shopping" | "wishlist" | "ideas";
+  completedQuestions?: ListCompletedQuestionsInit;
+  linkedPublicListSlug?: string | null;
+  webWishlistLinks?: ListWebWishlistLinksInit;
+  description?: string | null;
   items?: ListItemsInit;
   confirmedRemotePurchases?: ListConfirmedRemotePurchasesInit;
 };
 
+export type ListCompletedQuestionsInit = string[];
+export type ListWebWishlistLinksInit = string[];
 export type ListItemsItemLinksInit = string[];
 export type ListItemsItemImageFilesInit = File[];
 export type ListItemsItemInit = {
   id?: string;
   description?: string;
+  prompt?: string | null;
   lastPurchasedAt?: number | null;
   createdAt?: number;
   links?: ListItemsItemLinksInit;
@@ -158,7 +186,7 @@ export type ListItemsItemInit = {
   count?: number;
   purchasedCount?: number;
   prioritized?: boolean;
-  type?: "idea" | "product" | "vibe";
+  type?: "idea" | "link" | "vibe";
   priceMin?: string | null;
   priceMax?: string | null;
   note?: string | null;
@@ -169,15 +197,23 @@ export type ListDestructured = {
   id: string;
   name: string;
   createdAt: number;
+  type: "shopping" | "wishlist" | "ideas";
+  completedQuestions: ListCompletedQuestions;
+  linkedPublicListSlug: string | null;
+  webWishlistLinks: ListWebWishlistLinks;
+  description: string | null;
   items: ListItems;
   confirmedRemotePurchases: ListConfirmedRemotePurchases;
 };
 
+export type ListCompletedQuestionsDestructured = string[];
+export type ListWebWishlistLinksDestructured = string[];
 export type ListItemsItemLinksDestructured = string[];
 export type ListItemsItemImageFilesDestructured = EntityFile[];
 export type ListItemsItemDestructured = {
   id: string;
   description: string;
+  prompt: string | null;
   lastPurchasedAt: number | null;
   createdAt: number;
   links: ListItemsItemLinks;
@@ -186,7 +222,7 @@ export type ListItemsItemDestructured = {
   count: number;
   purchasedCount: number;
   prioritized: boolean;
-  type: "idea" | "product" | "vibe";
+  type: "idea" | "link" | "vibe";
   priceMin: string | null;
   priceMax: string | null;
   note: string | null;
@@ -197,15 +233,23 @@ export type ListSnapshot = {
   id: string;
   name: string;
   createdAt: number;
+  type: "shopping" | "wishlist" | "ideas";
+  completedQuestions: ListCompletedQuestionsSnapshot;
+  linkedPublicListSlug: string | null;
+  webWishlistLinks: ListWebWishlistLinksSnapshot;
+  description: string | null;
   items: ListItemsSnapshot;
   confirmedRemotePurchases: ListConfirmedRemotePurchasesSnapshot;
 };
 
+export type ListCompletedQuestionsSnapshot = string[];
+export type ListWebWishlistLinksSnapshot = string[];
 export type ListItemsItemLinksSnapshot = string[];
 export type ListItemsItemImageFilesSnapshot = EntityFileSnapshot[];
 export type ListItemsItemSnapshot = {
   id: string;
   description: string;
+  prompt: string | null;
   lastPurchasedAt: number | null;
   createdAt: number;
   links: ListItemsItemLinksSnapshot;
@@ -214,7 +258,7 @@ export type ListItemsItemSnapshot = {
   count: number;
   purchasedCount: number;
   prioritized: boolean;
-  type: "idea" | "product" | "vibe";
+  type: "idea" | "link" | "vibe";
   priceMin: string | null;
   priceMax: string | null;
   note: string | null;

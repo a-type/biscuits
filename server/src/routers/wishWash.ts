@@ -24,11 +24,6 @@ const hubPath = path.join(
 );
 const hubClientPath = path.join(hubPath, 'client');
 
-const indexTemplate = fsSync.readFileSync(
-	path.join(hubClientPath, 'index.html'),
-	'utf8',
-);
-
 wishWashRouter.get('/hubList/assets/*', (req) =>
 	staticFile(hubClientPath, 'wishWash/hubList', req),
 );
@@ -50,7 +45,7 @@ function itemImageUrls(item: WishlistSnapshot['items'][number]) {
 wishWashRouter.get('/hubList/:listSlug', async (req) => {
 	const { listSlug } = req.params;
 	// parse slug out of fragment
-	const slug = listSlug.split('-').slice(-1)[0];
+	const slug = listSlug.split('-').pop()!;
 
 	const wishList = await db
 		.selectFrom('PublishedWishlist')
@@ -115,6 +110,11 @@ wishWashRouter.get('/hubList/:listSlug', async (req) => {
 			type: item.type,
 		})),
 	};
+
+	const indexTemplate = fsSync.readFileSync(
+		path.join(hubClientPath, 'index.html'),
+		'utf8',
+	);
 
 	const { serverRender } = await import('@wish-wash.biscuits/hub');
 	const appHtml = serverRender(data);

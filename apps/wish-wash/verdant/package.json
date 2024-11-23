@@ -13,10 +13,10 @@
 		"react": "18.3.1"
 	},
 	"dependencies": {
-		"@verdant-web/cli": "4.7.0",
+		"@verdant-web/cli": "4.7.1-alpha.0",
 		"@verdant-web/common": "2.6.0",
 		"@verdant-web/react": "39.0.0",
-		"@verdant-web/store": "4.0.0"
+		"@verdant-web/store": "4.1.0-alpha.1"
 	},
 	"volta": {
 		"node": "20.17.0"

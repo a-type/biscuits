@@ -1,4 +1,3 @@
-import React from 'react';
 import { HubWishlistItem } from '@/types.js';
 import { ItemCardMarquee } from './ItemCardMarquee.jsx';
 import { Card } from '@a-type/ui/components/card';
@@ -31,7 +30,7 @@ export function ItemCard({ item, listAuthor, className }: ItemCardProps) {
 
 function ItemCardContent({ item, ...rest }: ItemCardProps) {
 	switch (item.type) {
-		case 'product':
+		case 'link':
 			return <ProductCardContent item={item} {...rest} />;
 		case 'idea':
 			return <IdeaCardContent item={item} {...rest} />;

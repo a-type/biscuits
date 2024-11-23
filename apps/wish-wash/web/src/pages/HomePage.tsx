@@ -9,7 +9,6 @@ import {
 	PageNowPlaying,
 	PageRoot,
 } from '@a-type/ui/components/layouts';
-import { H1 } from '@a-type/ui/components/typography';
 import { useHasServerAccess, UserMenu, UserMenuItem } from '@biscuits/client';
 import { useNavigate } from '@verdant-web/react-router';
 import { authorization } from '@wish-wash.biscuits/verdant';
@@ -30,7 +29,6 @@ export function HomePage({}: HomePageProps) {
 						}
 					/>
 				</PageFixedArea>
-				<H1 className="gutter-bottom">Lists</H1>
 				<ListsList />
 				<PageNowPlaying unstyled>
 					<CreateListButton className="self-center shadow-lg" color="primary" />

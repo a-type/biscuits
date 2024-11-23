@@ -19,77 +19,99 @@ import { schema } from '@verdant-web/store';
  */
 
 const lists = schema.collection({
-  name: 'list',
-  primaryKey: 'id',
-  fields: {
-    id: schema.fields.id(),
-    name: schema.fields.string({
-      default: 'New list',
-    }),
-    createdAt: schema.fields.number({
-      default: Date.now,
-    }),
-    items: schema.fields.array({
-      items: schema.fields.object({
-        properties: {
-          id: schema.fields.id(),
-          description: schema.fields.string({
-            default: '',
-          }),
-          lastPurchasedAt: schema.fields.number({
-            nullable: true,
-          }),
-          createdAt: schema.fields.number({
-            default: Date.now,
-          }),
-          links: schema.fields.array({
-            items: schema.fields.string(),
-          }),
-          imageFiles: schema.fields.array({
-            items: schema.fields.file(),
-          }),
-          remoteImageUrl: schema.fields.string({
-            nullable: true,
-          }),
-          count: schema.fields.number({
-            default: 1,
-          }),
-          purchasedCount: schema.fields.number({
-            default: 0,
-          }),
-          prioritized: schema.fields.boolean({
-            default: false,
-          }),
-          type: schema.fields.string({
-            options: ['idea', 'product', 'vibe'],
-            default: 'idea',
-          }),
-          priceMin: schema.fields.string({
-            nullable: true,
-          }),
-          priceMax: schema.fields.string({
-            nullable: true,
-          }),
-          note: schema.fields.string({
-            nullable: true,
-          }),
-        },
-      }),
-    }),
-    confirmedRemotePurchases: schema.fields.array({
-      items: schema.fields.string(),
-    }),
-  },
-  indexes: {
-    createdAt: {
-      field: 'createdAt',
-    },
-  },
+	name: 'list',
+	primaryKey: 'id',
+	fields: {
+		id: schema.fields.id(),
+		name: schema.fields.string({
+			default: 'New list',
+		}),
+		createdAt: schema.fields.number({
+			default: Date.now,
+		}),
+		type: schema.fields.string({
+			options: ['shopping', 'wishlist', 'ideas'],
+			default: 'shopping',
+		}),
+		completedQuestions: schema.fields.array({
+			items: schema.fields.string(),
+			documentation: 'IDs of onboarding questions that have been completed',
+		}),
+		linkedPublicListSlug: schema.fields.string({
+			nullable: true,
+		}),
+		webWishlistLinks: schema.fields.array({
+			items: schema.fields.string(),
+		}),
+		description: schema.fields.string({
+			nullable: true,
+		}),
+		items: schema.fields.array({
+			items: schema.fields.object({
+				properties: {
+					id: schema.fields.id(),
+					description: schema.fields.string({
+						default: '',
+					}),
+					prompt: schema.fields.string({
+						nullable: true,
+						documentation:
+							'If this item was created from a survey question, this is the question.',
+					}),
+					lastPurchasedAt: schema.fields.number({
+						nullable: true,
+					}),
+					createdAt: schema.fields.number({
+						default: Date.now,
+					}),
+					links: schema.fields.array({
+						items: schema.fields.string(),
+					}),
+					imageFiles: schema.fields.array({
+						items: schema.fields.file(),
+					}),
+					remoteImageUrl: schema.fields.string({
+						nullable: true,
+					}),
+					count: schema.fields.number({
+						default: 1,
+					}),
+					purchasedCount: schema.fields.number({
+						default: 0,
+					}),
+					prioritized: schema.fields.boolean({
+						default: false,
+					}),
+					type: schema.fields.string({
+						options: ['idea', 'link', 'vibe'],
+						default: 'idea',
+					}),
+					priceMin: schema.fields.string({
+						nullable: true,
+					}),
+					priceMax: schema.fields.string({
+						nullable: true,
+					}),
+					note: schema.fields.string({
+						nullable: true,
+					}),
+				},
+			}),
+		}),
+		confirmedRemotePurchases: schema.fields.array({
+			items: schema.fields.string(),
+		}),
+	},
+	indexes: {
+		createdAt: {
+			field: 'createdAt',
+		},
+	},
 });
 
 export default schema({
-  version: 9,
-  collections: {
-    lists,
-  },
+	version: 10,
+	collections: {
+		lists,
+	},
 });
