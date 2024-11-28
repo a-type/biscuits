@@ -1,5 +1,5 @@
-import { Button } from '@a-type/ui/components/button';
 import {
+	Button,
 	CardContent,
 	CardFooter,
 	CardGrid,
@@ -7,26 +7,22 @@ import {
 	CardMain,
 	CardRoot,
 	CardTitle,
-} from '@a-type/ui/components/card';
-import {
+	CheckboxField,
+	ConfirmedButton,
 	Dialog,
-	DialogContent,
-	DialogClose,
 	DialogActions,
+	DialogClose,
+	DialogContent,
 	DialogTitle,
 	DialogTrigger,
-} from '@a-type/ui/components/dialog';
-import {
 	FormikForm,
 	SubmitButton,
 	TextAreaField,
 	TextField,
-	CheckboxField,
-} from '@a-type/ui/components/forms';
+	toast,
+} from '@a-type/ui';
 import { AppId } from '@biscuits/apps';
 import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
-import { toast } from '@a-type/ui';
-import { ConfirmedButton } from '@a-type/ui/components/button';
 import { useState } from 'react';
 
 export interface AppChangelogEditorProps {
@@ -134,7 +130,7 @@ export function AppChangelogEditor({ appId }: AppChangelogEditorProps) {
 						<TextField name="title" label="Title" />
 						<TextAreaField name="details" label="Details" />
 						<TextField name="imageUrl" label="Image URL" type="url" />
-						<CheckboxField name="important" label="Important" />
+						<CheckboxField name="important" label="important" />
 						<DialogActions>
 							<DialogClose asChild>
 								<Button>Cancel</Button>

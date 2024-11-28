@@ -73,7 +73,7 @@
 		"vite-plugin-pwa": "0.19.2"
 	},
 	"devDependencies": {
-		"@a-type/ui": "^1.1.26",
+		"@a-type/ui": "^1.1.29",
 		"@types/react": "18.3.3",
 		"@unocss/transformer-variant-group": "^0.58.0",
 		"@verdant-web/react-router": "0.6.5",

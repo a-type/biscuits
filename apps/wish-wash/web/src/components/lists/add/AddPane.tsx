@@ -1,13 +1,10 @@
-import { PageNowPlaying } from '@a-type/ui/components/layouts';
-import { Button } from '@a-type/ui/components/button';
-import { Icon } from '@a-type/ui/components/icon';
-import { useState } from 'react';
-import { AddOptionsCollapsible } from './AddOptionsCollapsible.jsx';
-import { AddOptions } from './AddOptions.jsx';
+import { Button, clsx, Icon, PageNowPlaying } from '@a-type/ui';
 import { List } from '@wish-wash.biscuits/verdant';
+import { useState } from 'react';
 import { AddInput } from './AddInput.jsx';
+import { AddOptions } from './AddOptions.jsx';
+import { AddOptionsCollapsible } from './AddOptionsCollapsible.jsx';
 import { AddItemProvider } from './AddProvider.jsx';
-import { clsx } from '@a-type/ui';
 
 export interface AddPaneProps {
 	list: List;

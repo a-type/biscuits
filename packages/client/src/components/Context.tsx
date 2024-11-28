@@ -1,18 +1,18 @@
-import { ReactNode, createContext, useContext } from 'react';
 import { AppId } from '@biscuits/apps';
-import { VerdantContext } from '../verdant.js';
-import { ClientDescriptor } from '@verdant-web/store';
-import { AppPreviewNotice } from './AppPreviewNotice.js';
-import { PrereleaseWarning } from './PrereleaseWarning.js';
-import { TopLoader } from './TopLoader.js';
-import { BiscuitsVerdantProfile } from '@biscuits/libraries';
-import { Essentials } from './Essentials.js';
 import {
 	ApolloClient,
 	ApolloProvider,
 	graphqlClient as defaultClient,
 } from '@biscuits/graphql';
+import { BiscuitsVerdantProfile } from '@biscuits/libraries';
+import { ClientDescriptor } from '@verdant-web/store';
+import { ReactNode, createContext, useContext } from 'react';
+import { VerdantContext } from '../verdant.js';
+import { AppPreviewNotice } from './AppPreviewNotice.js';
+import { Essentials } from './Essentials.js';
 import { GlobalSyncingIndicator } from './GlobalSyncingIndicator.js';
+import { PrereleaseWarning } from './PrereleaseWarning.js';
+import { TopLoader } from './TopLoader.js';
 
 export function Provider({
 	graphqlClient = defaultClient,

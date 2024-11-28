@@ -1,6 +1,6 @@
-import { ComponentPropsWithoutRef, useState } from 'react';
-import { TabsRoot, TabsTrigger } from '@a-type/ui/components/tabs';
+import { TabsRoot, TabsTrigger } from '@a-type/ui';
 import { Link, useOnLocationChange } from '@verdant-web/react-router';
+import { ComponentPropsWithoutRef, useState } from 'react';
 
 export const NavigationTabsRoot = (
 	props: ComponentPropsWithoutRef<typeof TabsRoot>,

@@ -1,6 +1,6 @@
+import { H3, P } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 import { Price } from '../Price.js';
-import { H3, P } from '@a-type/ui/components/typography';
 
 export const planProductInfo = graphql(`
 	fragment PlanInfo_productInfo on ProductInfo {

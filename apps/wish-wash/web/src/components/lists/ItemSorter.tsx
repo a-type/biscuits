@@ -1,16 +1,15 @@
 import { hooks } from '@/hooks.js';
-import { Item, List } from '@wish-wash.biscuits/verdant';
-import { useState, useCallback, forwardRef, CSSProperties } from 'react';
+import { Button, clsx, Dialog, Icon, ScrollArea } from '@a-type/ui';
 import {
-	useSensors,
-	useSensor,
-	PointerSensor,
-	KeyboardSensor,
-	DragStartEvent,
-	DragEndEvent,
-	DndContext,
 	closestCenter,
+	DndContext,
+	DragEndEvent,
 	DragOverlay,
+	DragStartEvent,
+	KeyboardSensor,
+	PointerSensor,
+	useSensor,
+	useSensors,
 } from '@dnd-kit/core';
 import {
 	SortableContext,
@@ -19,12 +18,9 @@ import {
 	verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { ScrollArea } from '@a-type/ui/components/scrollArea/ScrollArea';
+import { Item, List } from '@wish-wash.biscuits/verdant';
+import { CSSProperties, forwardRef, useCallback, useState } from 'react';
 import { ItemTypeChip } from '../items/ItemTypeChip.jsx';
-import { Icon } from '@a-type/ui/components/icon';
-import { clsx } from '@a-type/ui';
-import { Dialog } from '@a-type/ui/components/dialog';
-import { Button } from '@a-type/ui/components/button';
 import { useReordering } from './hooks.js';
 
 export interface ItemSorterProps {

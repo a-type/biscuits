@@ -7,11 +7,7 @@ import { ProjectCanvas } from '@/components/projects/ProjectCanvas.jsx';
 import { ProjectColorSpotlight } from '@/components/projects/ProjectColorSpotlight.jsx';
 import { ProjectPalette } from '@/components/projects/ProjectPalette.jsx';
 import { hooks } from '@/hooks.js';
-import { ActionBar } from '@a-type/ui/components/actions';
-import { Button } from '@a-type/ui/components/button';
-import { Icon } from '@a-type/ui/components/icon';
-import { PageContent } from '@a-type/ui/components/layouts';
-import { H1 } from '@a-type/ui/components/typography';
+import { ActionBar, Button, H1, Icon, PageContent } from '@a-type/ui';
 import { usePageTitle } from '@biscuits/client';
 import { Link, useParams } from '@verdant-web/react-router';
 

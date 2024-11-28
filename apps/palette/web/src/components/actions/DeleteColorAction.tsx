@@ -1,8 +1,7 @@
-import { ActionButton } from '@a-type/ui/components/actions';
-import { Icon } from '@a-type/ui/components/icon';
-import { useColorSelection } from '../projects/hooks.js';
-import { Project } from '@palette.biscuits/verdant';
 import { hooks } from '@/hooks.js';
+import { ActionButton, Icon } from '@a-type/ui';
+import { Project } from '@palette.biscuits/verdant';
+import { useColorSelection } from '../projects/hooks.js';
 
 export function DeleteColorAction({ project }: { project: Project }) {
 	const { colors } = hooks.useWatch(project);

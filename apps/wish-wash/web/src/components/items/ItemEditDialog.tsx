@@ -1,20 +1,20 @@
 import { hooks } from '@/hooks.js';
-import { clsx } from '@a-type/ui';
-import { Button } from '@a-type/ui/components/button';
 import {
+	Button,
+	clsx,
 	Dialog,
 	DialogActions,
 	DialogClose,
 	DialogContent,
 	DialogTitle,
-} from '@a-type/ui/components/dialog';
-import { Icon } from '@a-type/ui/components/icon';
-import { ImageUploader } from '@a-type/ui/components/imageUploader';
-import { Input } from '@a-type/ui/components/input/Input';
-import { NumberStepper } from '@a-type/ui/components/numberStepper';
-import { ScrollArea } from '@a-type/ui/components/scrollArea/ScrollArea';
-import { TextArea } from '@a-type/ui/components/textArea/TextArea';
-import { withClassName } from '@a-type/ui/hooks';
+	Icon,
+	ImageUploader,
+	Input,
+	NumberStepper,
+	ScrollArea,
+	TextArea,
+	withClassName,
+} from '@a-type/ui';
 import { preventDefault } from '@a-type/utils';
 import { useHasServerAccess } from '@biscuits/client';
 import { graphql, useLazyQuery } from '@biscuits/graphql';

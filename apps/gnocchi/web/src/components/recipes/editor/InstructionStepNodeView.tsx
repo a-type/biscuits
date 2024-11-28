@@ -3,6 +3,22 @@ import { PersonSelect } from '@/components/sync/people/PersonSelect.jsx';
 import { hooks } from '@/stores/groceries/index.js';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 // @ts-ignore
+import { InstructionsContext } from '@/components/recipes/editor/InstructionsContext.jsx';
+import {
+	isActiveCookingSession,
+	useCookSessionAction,
+} from '@/components/recipes/hooks.js';
+import {
+	Button,
+	Checkbox,
+	CollapsibleContent,
+	CollapsibleRoot,
+	Note,
+	TextArea,
+	Tooltip,
+	useToggle,
+} from '@a-type/ui';
+import { useHasServerAccess } from '@biscuits/client';
 import { NodeViewContent, NodeViewWrapper } from '@tiptap/react';
 import classNames from 'classnames';
 import {
@@ -12,22 +28,6 @@ import {
 	useContext,
 	useMemo,
 } from 'react';
-import {
-	CollapsibleContent,
-	CollapsibleRoot,
-} from '@a-type/ui/components/collapsible';
-import { TextArea } from '@a-type/ui/components/textArea';
-import { Note } from '@a-type/ui/components/note';
-import { Checkbox } from '@a-type/ui/components/checkbox';
-import { Tooltip } from '@a-type/ui/components/tooltip';
-import { Button } from '@a-type/ui/components/button';
-import { useToggle } from '@a-type/ui/hooks';
-import { InstructionsContext } from '@/components/recipes/editor/InstructionsContext.jsx';
-import {
-	isActiveCookingSession,
-	useCookSessionAction,
-} from '@/components/recipes/hooks.js';
-import { useHasServerAccess } from '@biscuits/client';
 
 export interface InstructionStepNodeViewProps {
 	node: {

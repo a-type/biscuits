@@ -1,15 +1,12 @@
 import { hooks } from '@/hooks.js';
-import { toast } from '@a-type/ui';
-import { Button, ConfirmedButton } from '@a-type/ui/components/button';
-import { Dialog, DialogClose } from '@a-type/ui/components/dialog';
-import { DropdownMenuItemRightSlot } from '@a-type/ui/components/dropdownMenu';
 import {
-	FormikForm,
-	SubmitButton,
-	TextField,
-} from '@a-type/ui/components/forms';
-import { Icon } from '@a-type/ui/components/icon';
-import { Tabs } from '@a-type/ui/components/tabs';
+	Button,
+	ConfirmedButton,
+	Dialog,
+	DropdownMenuItemRightSlot,
+	Icon,
+	toast,
+} from '@a-type/ui';
 import { UserMenuItem } from '@biscuits/client';
 import { useNavigate, useSearchParams } from '@verdant-web/react-router';
 import { authorization } from '@wish-wash.biscuits/verdant';

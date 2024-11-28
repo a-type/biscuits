@@ -1,12 +1,10 @@
-import { Project } from '@palette.biscuits/verdant';
-import { useColorSelection } from './hooks.js';
 import { hooks } from '@/hooks.js';
-import { clsx } from '@a-type/ui';
+import { Button, clsx, Icon } from '@a-type/ui';
+import { Project } from '@palette.biscuits/verdant';
 import { useSnapshot } from 'valtio';
-import { toolState } from './state.js';
 import { ColorBreakdown } from './ColorBreakdown.jsx';
-import { Button } from '@a-type/ui/components/button';
-import { Icon } from '@a-type/ui/components/icon';
+import { useColorSelection } from './hooks.js';
+import { toolState } from './state.js';
 
 export interface ProjectColorSpotlightProps {
 	project: Project;

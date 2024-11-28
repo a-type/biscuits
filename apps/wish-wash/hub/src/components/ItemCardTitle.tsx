@@ -1,9 +1,6 @@
 import { HubWishlistItem } from '@/types.js';
-import { Card } from '@a-type/ui/components/card';
-import { Chip } from '@a-type/ui/components/chip';
-import { Icon } from '@a-type/ui/components/icon';
+import { Card, Chip, clsx, Icon } from '@a-type/ui';
 import { typeIcons } from '@wish-wash.biscuits/common';
-import { clsx } from '@a-type/ui';
 
 export interface ItemCardTitleProps {
 	item: HubWishlistItem;

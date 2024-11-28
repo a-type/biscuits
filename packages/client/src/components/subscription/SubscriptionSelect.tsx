@@ -1,16 +1,16 @@
-import { graphql } from '@biscuits/graphql';
-import { H2, P } from '@a-type/ui/components/typography';
-import { useMutation, useQuery } from '@biscuits/graphql';
 import {
+	Button,
 	CardContent,
 	CardGrid,
 	CardMain,
 	CardRoot,
 	CardTitle,
-} from '@a-type/ui/components/card';
+	H2,
+	P,
+} from '@a-type/ui';
+import { graphql, useMutation, useQuery } from '@biscuits/graphql';
 import { Suspense } from 'react';
 import { Price } from '../Price.js';
-import { Button } from '@a-type/ui/components/button';
 
 export interface SubscriptionSelectProps {
 	priceKeys?: PriceKey[];
@@ -94,6 +94,7 @@ const subscriptionPlanInfo = graphql(`
 			currency
 			name
 			description
+			period
 		}
 	}
 `);
@@ -120,6 +121,7 @@ function SubscriptionChoiceButton({
 						<Price
 							value={data?.productInfo.price}
 							currency={data?.productInfo.currency}
+							period={data?.productInfo.period}
 						/>
 					</CardContent>
 				</button>
@@ -147,6 +149,7 @@ function SinglePriceExperience({
 				<Price
 					value={data?.productInfo.price}
 					currency={data?.productInfo.currency}
+					period={data?.productInfo.period}
 				/>
 				.
 			</P>

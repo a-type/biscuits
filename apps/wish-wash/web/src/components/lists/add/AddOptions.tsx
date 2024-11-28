@@ -1,6 +1,4 @@
-import { Button } from '@a-type/ui/components/button';
-import { Icon } from '@a-type/ui/components/icon';
-import { withClassName } from '@a-type/ui/hooks';
+import { Button, Card, Icon, withClassName } from '@a-type/ui';
 import {
 	typeDescriptions,
 	typeIcons,
@@ -8,7 +6,6 @@ import {
 	typeThemes,
 } from '@wish-wash.biscuits/common';
 import { useAddItem } from './AddProvider.jsx';
-import { Card } from '@a-type/ui/components/card';
 
 export interface AddOptionsProps {}
 

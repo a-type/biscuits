@@ -1,8 +1,8 @@
+import { Slider } from '@a-type/ui';
 import { useSyncExternalStore } from 'react';
-import { useViewport } from '../canvas/ViewportRoot.jsx';
-import { Slider } from '@a-type/ui/components/slider';
 import { disableDragProps } from '../canvas/CanvasObjectDragHandle.jsx';
 import { CanvasOverlayContent } from '../canvas/CanvasOverlay.jsx';
+import { useViewport } from '../canvas/ViewportRoot.jsx';
 
 export interface CameraControlsProps {}
 

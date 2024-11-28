@@ -1,14 +1,15 @@
 import { recipeTagEditorState } from '@/components/recipes/tags/recipeTagEditorState.js';
 import { hooks } from '@/stores/groceries/index.js';
-import { Button } from '@a-type/ui/components/button';
-import { ColorPicker, ThemeName } from '@a-type/ui/components/colorPicker';
 import {
+	Button,
+	ColorPicker,
 	Dialog,
 	DialogActions,
 	DialogClose,
 	DialogContent,
 	DialogTitle,
-} from '@a-type/ui/components/dialog';
+	ThemeName,
+} from '@a-type/ui';
 import { useSnapshot } from 'valtio';
 
 export interface RecipeTagEditorProps {}

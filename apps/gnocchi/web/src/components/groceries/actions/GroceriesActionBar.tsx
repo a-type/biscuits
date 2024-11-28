@@ -1,9 +1,9 @@
 import { PurchaseAllAction } from '@/components/groceries/actions/PurchaseAllAction.jsx';
-import { ActionBar } from '@a-type/ui/components/actions';
+import { ActionBar } from '@a-type/ui';
+import { ClearPurchasedAction } from './ClearPurchasedAction.jsx';
 import { MeetupAction } from './MeetupAction.jsx';
 import { RedoAction } from './RedoAction.jsx';
 import { UndoAction } from './UndoAction.jsx';
-import { ClearPurchasedAction } from './ClearPurchasedAction.jsx';
 
 export interface GroceriesActionBarProps {}
 

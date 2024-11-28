@@ -1,14 +1,13 @@
 import { AddToListDialog } from '@/components/recipes/viewer/AddToListDialog.jsx';
 import useMergedRef from '@/hooks/useMergedRef.js';
-import { useSize } from '@a-type/ui/hooks';
+import { ScrollArea, useSize } from '@a-type/ui';
 import { preventDefault, stopPropagation } from '@a-type/utils';
 import classNames from 'classnames';
 import { Suspense, forwardRef, useEffect, useRef, useState } from 'react';
+import { AddBarProps } from './AddBar.jsx';
 import { AddInput } from './AddInput.jsx';
 import { SuggestionGroup } from './SuggestionGroup.jsx';
 import { useAddBarCombobox, useAddBarSuggestions } from './hooks.js';
-import { AddBarProps } from './AddBar.jsx';
-import { ScrollArea } from '@a-type/ui/components/scrollArea';
 
 const AddPaneImpl = forwardRef<
 	HTMLDivElement,

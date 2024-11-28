@@ -1,9 +1,9 @@
 import { hooks } from '@/stores/groceries/index.js';
+import { Button } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import addWeeks from 'date-fns/addWeeks';
 import { useCallback } from 'react';
 import { PinIcon } from '../collection/PinIcon.jsx';
-import { Button } from '@a-type/ui/components/button';
 
 export interface RecipePinToggleProps {
 	recipe: Recipe;

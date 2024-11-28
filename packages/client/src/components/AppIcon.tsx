@@ -1,18 +1,18 @@
 import { useAppInfo } from '../react.js';
 
 export interface AppIconProps {
-  className?: string;
+	className?: string;
 }
 
 export function AppIcon({ className, ...rest }: AppIconProps) {
-  const app = useAppInfo();
+	const app = useAppInfo();
 
-  return (
-    <img
-      src={app.iconPath}
-      className={className ?? 'w-12'}
-      alt={app.name + ' icon'}
-      {...rest}
-    />
-  );
+	return (
+		<img
+			src={app.iconPath}
+			className={className ?? 'w-12'}
+			alt={app.name + ' icon'}
+			{...rest}
+		/>
+	);
 }

@@ -1,4 +1,4 @@
-import { createContext, ReactNode, useContext, useState } from 'react';
+import { createContext, useContext, useState } from 'react';
 import { Canvas, CanvasOptions } from './Canvas.js';
 import { useCanvasGestures } from './canvasHooks.js';
 
@@ -9,13 +9,13 @@ const dummyCanvas = new Canvas({});
 export const CanvasContext = createContext<Canvas>(dummyCanvas);
 
 export function useCreateCanvas(options?: CanvasOptions) {
-  return useState(() => new Canvas(options))[0];
+	return useState(() => new Canvas(options))[0];
 }
 
 export const useCanvas = () => useContext(CanvasContext);
 
 // FIXME: this is silly, clean this pattern up
 export function CanvasGestures(props: Parameters<typeof useCanvasGestures>[0]) {
-  useCanvasGestures(props);
-  return null;
+	useCanvasGestures(props);
+	return null;
 }

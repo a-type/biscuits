@@ -1,4 +1,4 @@
-import { Button } from '@a-type/ui/components/button';
+import { Button } from '@a-type/ui';
 import { graphql, useSuspenseQuery } from '@biscuits/graphql';
 import { useState } from 'react';
 

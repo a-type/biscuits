@@ -1,11 +1,10 @@
 import { HubWishlistItem } from '@/types.js';
-import { ItemCardMarquee } from './ItemCardMarquee.jsx';
-import { Card } from '@a-type/ui/components/card';
-import { ProductCardContent } from './ProductCardContent.jsx';
-import { IdeaCardContent } from './IdeaCardContent.jsx';
-import { VibeCardContent } from './VibeCardContent.jsx';
-import { clsx } from '@a-type/ui';
+import { Card, clsx } from '@a-type/ui';
 import { typeThemes } from '@wish-wash.biscuits/common';
+import { IdeaCardContent } from './IdeaCardContent.jsx';
+import { ItemCardMarquee } from './ItemCardMarquee.jsx';
+import { ProductCardContent } from './ProductCardContent.jsx';
+import { VibeCardContent } from './VibeCardContent.jsx';
 
 export interface ItemCardProps {
 	item: HubWishlistItem;

@@ -1,22 +1,21 @@
+import { Icon } from '@/components/icons/Icon.jsx';
+import { hooks } from '@/stores/groceries/index.js';
 import {
+	Dialog,
+	DialogContent,
 	FormikForm,
-	SubmitButton,
-	TextField,
-} from '@a-type/ui/components/forms';
-import {
 	Select,
 	SelectContent,
 	SelectItem,
 	SelectSeparator,
 	SelectTrigger,
-} from '@a-type/ui/components/select';
-import { hooks } from '@/stores/groceries/index.js';
-import { withClassName } from '@a-type/ui/hooks';
-import { useState } from 'react';
-import { Icon } from '@/components/icons/Icon.jsx';
-import { ThemeName } from '@a-type/ui/components/colorPicker';
-import { Dialog, DialogContent } from '@a-type/ui/components/dialog';
+	SubmitButton,
+	TextField,
+	ThemeName,
+	withClassName,
+} from '@a-type/ui';
 import { List } from '@gnocchi.biscuits/verdant';
+import { useState } from 'react';
 
 function getRandomColor(): ThemeName {
 	const colors: ThemeName[] = [

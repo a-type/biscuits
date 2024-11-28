@@ -1,12 +1,7 @@
 import { UserMenu } from '@/components/auth/UserMenu.js';
 import { Footer } from '@/components/help/Footer.jsx';
 import { AppDemo } from '@/components/promo/AppDemo.jsx';
-import {
-	PageContent,
-	PageFixedArea,
-	PageRoot,
-} from '@a-type/ui/components/layouts';
-import { P } from '@a-type/ui/components/typography';
+import { P, PageContent, PageFixedArea, PageRoot } from '@a-type/ui';
 import { apps } from '@biscuits/apps';
 import { Link } from '@verdant-web/react-router';
 import classNames from 'classnames';

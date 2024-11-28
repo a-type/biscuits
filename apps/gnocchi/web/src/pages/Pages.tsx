@@ -15,9 +15,7 @@ import {
 	updateState,
 } from '@/components/updatePrompt/updateState.js';
 import { groceriesDescriptor, hooks } from '@/stores/groceries/index.js';
-import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
-import { PageRoot } from '@a-type/ui/components/layouts';
-import { H1, P } from '@a-type/ui/components/typography';
+import { ErrorBoundary, H1, P, PageRoot } from '@a-type/ui';
 import {
 	Essentials,
 	ResetToServer,

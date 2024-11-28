@@ -1,12 +1,12 @@
-import { Button } from '@a-type/ui/components/button';
 import {
+	Button,
 	Dialog,
-	DialogContent,
 	DialogActions,
 	DialogClose,
-} from '@a-type/ui/components/dialog';
-import { useLocalStorage } from '../hooks/useStorage.js';
+	DialogContent,
+} from '@a-type/ui';
 import { ReactNode, useState } from 'react';
+import { useLocalStorage } from '../hooks/useStorage.js';
 
 export interface ExplainerProps {
 	stages: ReactNode[];

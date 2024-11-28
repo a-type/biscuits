@@ -1,23 +1,23 @@
 import { TextLink } from '@/components/nav/Link.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { Button } from '@a-type/ui/components/button';
-import { Checkbox } from '@a-type/ui/components/checkbox';
 import {
+	Button,
+	Checkbox,
 	Dialog,
-	DialogTrigger,
-	DialogContent,
-	DialogClose,
 	DialogActions,
+	DialogClose,
+	DialogContent,
 	DialogTitle,
-} from '@a-type/ui/components/dialog';
-import { Tooltip } from '@a-type/ui/components/tooltip';
-import { P } from '@a-type/ui/components/typography';
-import { useHasServerAccess, useFeatureFlag } from '@biscuits/client';
+	DialogTrigger,
+	P,
+	toast,
+	Tooltip,
+} from '@a-type/ui';
+import { useFeatureFlag, useHasServerAccess } from '@biscuits/client';
 import { graphql, useMutation, useQuery } from '@biscuits/graphql';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { format } from 'date-fns/esm';
 import { useState } from 'react';
-import { toast } from '@a-type/ui';
 
 export interface RecipePublishControlProps {
 	recipe: Recipe;

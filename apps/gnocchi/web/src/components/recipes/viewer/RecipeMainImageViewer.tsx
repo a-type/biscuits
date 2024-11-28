@@ -3,24 +3,24 @@ import { Recipe } from '@gnocchi.biscuits/verdant';
 import classNames from 'classnames';
 
 export interface RecipeMainImageViewerProps {
-  recipe: Recipe;
-  className?: string;
+	recipe: Recipe;
+	className?: string;
 }
 
 export function RecipeMainImageViewer({
-  recipe,
-  className,
+	recipe,
+	className,
 }: RecipeMainImageViewerProps) {
-  const { mainImage } = hooks.useWatch(recipe);
-  const src = hooks.useWatch(mainImage);
+	const { mainImage } = hooks.useWatch(recipe);
+	const src = hooks.useWatch(mainImage);
 
-  return src ? (
-    <img
-      src={src}
-      className={classNames(
-        'w-full h-full overflow-hidden rounded-lg object-cover',
-        className,
-      )}
-    />
-  ) : null;
+	return src ? (
+		<img
+			src={src}
+			className={classNames(
+				'w-full h-full overflow-hidden rounded-lg object-cover',
+				className,
+			)}
+		/>
+	) : null;
 }

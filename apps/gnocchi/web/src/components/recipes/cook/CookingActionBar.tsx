@@ -1,11 +1,5 @@
 import { Icon } from '@/components/icons/Icon.jsx';
 import { TextLink } from '@/components/nav/Link.jsx';
-import {
-	PromoteSubscriptionButton,
-	useHasServerAccess,
-	useIsLoggedIn,
-	ManagePlanButton,
-} from '@biscuits/client';
 import { useActiveCookingSession } from '@/components/recipes/hooks.js';
 import {
 	PeopleList,
@@ -14,27 +8,32 @@ import {
 import { PersonAvatar } from '@/components/sync/people/PersonAvatar.jsx';
 import { useLocalStorage } from '@/hooks/useLocalStorage.js';
 import { hooks } from '@/stores/groceries/index.js';
-import { Recipe } from '@gnocchi.biscuits/verdant';
-import { ActionBar, ActionButton } from '@a-type/ui/components/actions';
-import { Button } from '@a-type/ui/components/button';
 import {
+	ActionBar,
+	ActionButton,
+	Button,
 	Dialog,
 	DialogActions,
 	DialogClose,
 	DialogContent,
 	DialogTitle,
 	DialogTrigger,
-} from '@a-type/ui/components/dialog';
-import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
-import { Cross2Icon } from '@radix-ui/react-icons';
-import { graphql, useQuery } from '@biscuits/graphql';
-import {
+	ErrorBoundary,
+	Note,
 	Popover,
 	PopoverContent,
 	PopoverTrigger,
-} from '@a-type/ui/components/popover';
-import { Note } from '@a-type/ui/components/note';
-import { CONFIG } from '@biscuits/client';
+} from '@a-type/ui';
+import {
+	CONFIG,
+	ManagePlanButton,
+	PromoteSubscriptionButton,
+	useHasServerAccess,
+	useIsLoggedIn,
+} from '@biscuits/client';
+import { graphql, useQuery } from '@biscuits/graphql';
+import { Recipe } from '@gnocchi.biscuits/verdant';
+import { Cross2Icon } from '@radix-ui/react-icons';
 
 export interface CookingActionBarProps {
 	recipe: Recipe;

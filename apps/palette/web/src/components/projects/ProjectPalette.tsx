@@ -1,12 +1,11 @@
 import { hooks } from '@/hooks.js';
-import { clsx } from '@a-type/ui';
+import { clsx, H3 } from '@a-type/ui';
 import { Project } from '@palette.biscuits/verdant';
 import { useColorSelection, useSort } from './hooks.js';
-import { H3 } from '@a-type/ui/components/typography';
 // @ts-ignore
-import { Color } from '@dynamize/color-utilities';
-import { OnboardingTooltip } from '@biscuits/client';
 import { basicsOnboarding } from '@/onboarding/basics.js';
+import { OnboardingTooltip } from '@biscuits/client';
+import { Color } from '@dynamize/color-utilities';
 
 export interface ProjectPaletteProps {
 	project: Project;

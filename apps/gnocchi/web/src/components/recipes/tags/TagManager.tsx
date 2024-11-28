@@ -1,17 +1,19 @@
 import { UndoAction } from '@/components/groceries/actions/UndoAction.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { ActionBar } from '@a-type/ui/components/actions';
-import { Button } from '@a-type/ui/components/button';
-import { ColorPicker, ThemeName } from '@a-type/ui/components/colorPicker';
 import {
+	ActionBar,
+	Button,
+	ColorPicker,
 	Dialog,
 	DialogActions,
 	DialogClose,
 	DialogContent,
 	DialogTrigger,
-} from '@a-type/ui/components/dialog';
-import { Divider } from '@a-type/ui/components/divider';
-import { Form, FormikForm, TextField } from '@a-type/ui/components/forms';
+	Divider,
+	FormikForm,
+	TextField,
+	ThemeName,
+} from '@a-type/ui';
 import { TrashIcon } from '@radix-ui/react-icons';
 import classNames from 'classnames';
 import { ReactNode } from 'react';

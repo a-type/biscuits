@@ -4,7 +4,7 @@ import {
 	ContextMenuItem,
 	ContextMenuRoot,
 	ContextMenuTrigger,
-} from '@a-type/ui/components/contextMenu';
+} from '@a-type/ui';
 import { ReactNode } from 'react';
 
 export interface RecipeTagMenuWrapperProps {

@@ -1,98 +1,97 @@
+import { Link } from '@/components/nav/Link.jsx';
 import { makeRecipeLink } from '@/components/recipes/makeRecipeLink.js';
-import { Person, Presence, Profile, hooks } from '@/stores/groceries/index.js';
-import { Button } from '@a-type/ui/components/button';
-import { PageNowPlaying } from '@a-type/ui/components/layouts';
+import { Person, hooks } from '@/stores/groceries/index.js';
+import { Button } from '@a-type/ui';
+import { useHasServerAccess } from '@biscuits/client';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { Suspense, useState } from 'react';
 import { PersonAvatar } from '../people/PersonAvatar.jsx';
-import { Link } from '@/components/nav/Link.jsx';
-import { useHasServerAccess } from '@biscuits/client';
 
 export interface RecipePresenceNotificationProps {}
 
 export function RecipePresenceNotification({}: RecipePresenceNotificationProps) {
-  const isSubscribed = useHasServerAccess();
+	const isSubscribed = useHasServerAccess();
 
-  if (isSubscribed) {
-    return (
-      <Suspense>
-        <RecipePresenceNotificationContent />
-      </Suspense>
-    );
-  } else {
-    return null;
-  }
+	if (isSubscribed) {
+		return (
+			<Suspense>
+				<RecipePresenceNotificationContent />
+			</Suspense>
+		);
+	} else {
+		return null;
+	}
 }
 
 export function useRecipePresenceNotification() {
-  const viewingRecipe = hooks.useFindPeer((peer) => {
-    return !!peer?.presence?.viewingRecipeId;
-  });
+	const viewingRecipe = hooks.useFindPeer((peer) => {
+		return !!peer?.presence?.viewingRecipeId;
+	});
 
-  return {
-    peer: viewingRecipe,
-    recipeId: viewingRecipe?.presence.viewingRecipeId,
-  };
+	return {
+		peer: viewingRecipe,
+		recipeId: viewingRecipe?.presence.viewingRecipeId,
+	};
 }
 
 function RecipePresenceNotificationContent() {
-  const [dismissedId, setDismissedId] = useState('');
-  const { peer, recipeId } = useRecipePresenceNotification();
+	const [dismissedId, setDismissedId] = useState('');
+	const { peer, recipeId } = useRecipePresenceNotification();
 
-  if (peer && recipeId && recipeId !== dismissedId) {
-    return (
-      <RecipePresenceLink
-        person={peer}
-        recipeId={recipeId}
-        onDismiss={() => setDismissedId(recipeId)}
-      />
-    );
-  } else {
-    return null;
-  }
+	if (peer && recipeId && recipeId !== dismissedId) {
+		return (
+			<RecipePresenceLink
+				person={peer}
+				recipeId={recipeId}
+				onDismiss={() => setDismissedId(recipeId)}
+			/>
+		);
+	} else {
+		return null;
+	}
 }
 
 function RecipePresenceLink({
-  recipeId,
-  person,
-  onDismiss,
+	recipeId,
+	person,
+	onDismiss,
 }: {
-  recipeId: string;
-  person: Person;
-  onDismiss: () => void;
+	recipeId: string;
+	person: Person;
+	onDismiss: () => void;
 }) {
-  const recipe = hooks.useRecipe(recipeId);
+	const recipe = hooks.useRecipe(recipeId);
 
-  if (!recipe) return null;
+	if (!recipe) return null;
 
-  return (
-    <div className="flex flex-row gap-2 items-center p-2 w-full max-w-full overflow-hidden border-default rounded-lg bg-white">
-      <Button
-        size="icon"
-        onClick={onDismiss}
-        color="ghost"
-        className="flex-0-0-auto"
-      >
-        <Cross2Icon />
-      </Button>
-      <Link
-        to={makeRecipeLink(recipe)}
-        onClick={onDismiss}
-        className="flex flex-row gap-2 items-center flex-1"
-      >
-        <PersonAvatar person={person} />
-        <div className="flex flex-col gap-2px flex-[1_1_0] min-w-0">
-          <div className="text-xxs ml--2px">
-            &nbsp;{person.profile.name} is viewing
-          </div>
-          <div className="text-xs font-bold overflow-hidden text-ellipsis whitespace-nowrap">
-            {recipe.get('title')}
-          </div>
-        </div>
-        <Button size="small" className="whitespace-nowrap" asChild>
-          <div>Join</div>
-        </Button>
-      </Link>
-    </div>
-  );
+	return (
+		<div className="flex flex-row gap-2 items-center p-2 w-full max-w-full overflow-hidden border-default rounded-lg bg-white">
+			<Button
+				size="icon"
+				onClick={onDismiss}
+				color="ghost"
+				className="flex-0-0-auto"
+			>
+				<Cross2Icon />
+			</Button>
+			<Link
+				to={makeRecipeLink(recipe)}
+				onClick={onDismiss}
+				className="flex flex-row gap-2 items-center flex-1"
+			>
+				<PersonAvatar person={person} />
+				<div className="flex flex-col gap-2px flex-[1_1_0] min-w-0">
+					<div className="text-xxs ml--2px">
+						&nbsp;{person.profile.name} is viewing
+					</div>
+					<div className="text-xs font-bold overflow-hidden text-ellipsis whitespace-nowrap">
+						{recipe.get('title')}
+					</div>
+				</div>
+				<Button size="small" className="whitespace-nowrap" asChild>
+					<div>Join</div>
+				</Button>
+			</Link>
+		</div>
+	);
 }

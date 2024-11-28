@@ -1,17 +1,16 @@
-import { proxy } from 'valtio';
-import { useSnapshot } from 'valtio';
-import { LoginButton } from './LoginButton.js';
 import {
+	Button,
 	Dialog,
 	DialogActions,
 	DialogClose,
 	DialogContent,
 	DialogTitle,
-} from '@a-type/ui/components/dialog';
-import { Button } from '@a-type/ui/components/button';
-import { ReactNode } from 'react';
-import { Icon } from '@a-type/ui/components/icon';
+	Icon,
+} from '@a-type/ui';
 import { graphql, useQuery } from '@biscuits/graphql';
+import { ReactNode } from 'react';
+import { proxy, useSnapshot } from 'valtio';
+import { LoginButton } from './LoginButton.js';
 
 const subscriptionPromotionState = proxy({
 	status: 'closed' as 'closed' | 'open',

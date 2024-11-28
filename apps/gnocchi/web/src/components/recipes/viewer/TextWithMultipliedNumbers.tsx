@@ -1,6 +1,6 @@
-import { Tooltip } from '@a-type/ui/components/tooltip';
-import { useFeatureFlag } from '@biscuits/client';
+import { Tooltip } from '@a-type/ui';
 import { fractionToText } from '@a-type/utils';
+import { useFeatureFlag } from '@biscuits/client';
 
 export interface TextWithMultipliedNumbersProps {
 	text: string | null;

@@ -1,17 +1,18 @@
+import { hooks } from '@/stores/groceries/index.js';
 import {
+	Button,
+	ColorPicker,
 	Dialog,
 	DialogActions,
 	DialogClose,
 	DialogContent,
 	DialogTrigger,
-} from '@a-type/ui/components/dialog';
-import { LiveUpdateTextField } from '@a-type/ui/components/liveUpdateTextField';
-import { hooks } from '@/stores/groceries/index.js';
+	H2,
+	LiveUpdateTextField,
+	ThemeName,
+} from '@a-type/ui';
 import { GearIcon } from '@radix-ui/react-icons';
 import { useState } from 'react';
-import { Button } from '@a-type/ui/components/button';
-import { H2 } from '@a-type/ui/components/typography';
-import { ColorPicker, ThemeName } from '@a-type/ui/components/colorPicker';
 
 export interface ListEditProps {
 	listId: string;

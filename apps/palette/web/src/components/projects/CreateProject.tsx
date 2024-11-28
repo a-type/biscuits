@@ -1,7 +1,6 @@
-import { ImageUploader } from '@a-type/ui/components/imageUploader';
 import { hooks } from '@/hooks.js';
+import { H2, ImageUploader } from '@a-type/ui';
 import { useNavigate } from '@verdant-web/react-router';
-import { H2 } from '@a-type/ui/components/typography';
 
 export interface CreateProjectProps {}
 export function CreateProject(props: CreateProjectProps) {

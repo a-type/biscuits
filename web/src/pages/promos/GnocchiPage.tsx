@@ -12,8 +12,7 @@ import {
 	Section,
 	TitleWrap,
 } from '@/components/promo/layout.jsx';
-import { Button } from '@a-type/ui/components/button';
-import { H2, P } from '@a-type/ui/components/typography';
+import { Button, H2, P } from '@a-type/ui';
 import { useLocalStorage, useOnVisible } from '@biscuits/client';
 import { Link } from '@verdant-web/react-router';
 import classNames from 'classnames';

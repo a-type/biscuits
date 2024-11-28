@@ -1,6 +1,6 @@
 import { hooks } from '@/stores/groceries/index.js';
-import { MeetupIcon } from './MeetupIcon.jsx';
 import classNames from 'classnames';
+import { MeetupIcon } from './MeetupIcon.jsx';
 
 export interface MeetupHintProps {
 	className?: string;

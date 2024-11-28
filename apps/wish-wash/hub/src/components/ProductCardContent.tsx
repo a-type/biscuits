@@ -1,16 +1,19 @@
-import React from 'react';
-import { HubWishlistItem } from '@/types.js';
-import { Card } from '@a-type/ui/components/card';
-import { ItemCardTitle } from './ItemCardTitle.jsx';
-import { ItemCardPrice } from './ItemCardPrice.jsx';
-import { Dialog, DialogActions } from '@a-type/ui/components/dialog';
-import { ReactNode, useEffect, useState } from 'react';
-import { Button } from '@a-type/ui/components/button';
-import { P } from '@a-type/ui/components/typography';
-import { FormikForm, SubmitButton } from '@a-type/ui/components/forms';
 import { usePurchaseItem } from '@/hooks.js';
-import { NumberStepperField } from '@a-type/ui/components/forms/NumberStepperField';
+import { HubWishlistItem } from '@/types.js';
+import {
+	Button,
+	Card,
+	Dialog,
+	DialogActions,
+	FormikForm,
+	NumberStepperField,
+	P,
+	SubmitButton,
+} from '@a-type/ui';
 import { SearchButton } from '@wish-wash.biscuits/common';
+import { ReactNode, useState } from 'react';
+import { ItemCardPrice } from './ItemCardPrice.jsx';
+import { ItemCardTitle } from './ItemCardTitle.jsx';
 
 export interface ProductCardContentProps {
 	item: HubWishlistItem;

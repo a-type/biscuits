@@ -1,23 +1,23 @@
-import { P } from '@a-type/ui/components/typography';
-import { Link, useSearchParams } from '@verdant-web/react-router';
+import { Footer } from '@/components/help/Footer.jsx';
 import {
-	TabsList,
+	EmailSigninForm,
+	EmailSignupForm,
+	OAuthSigninButton,
+} from '@a-type/auth-client';
+import {
+	Checkbox,
+	P,
 	TabsContent,
+	TabsList,
 	TabsRoot,
 	TabsTrigger,
-} from '@a-type/ui/components/tabs';
-import { lazy, ReactNode, useEffect, useState } from 'react';
-import { Footer } from '@/components/help/Footer.jsx';
-import { Checkbox } from '@a-type/ui/components/checkbox';
-import classNames from 'classnames';
-import { CONFIG } from '@biscuits/client';
-import {
-	OAuthSigninButton,
-	EmailSignupForm,
-	EmailSigninForm,
-} from '@a-type/auth-client';
+	toast,
+} from '@a-type/ui';
 import { AppId, appsById } from '@biscuits/apps';
-import { toast } from '@a-type/ui';
+import { CONFIG } from '@biscuits/client';
+import { Link, useSearchParams } from '@verdant-web/react-router';
+import classNames from 'classnames';
+import { lazy, ReactNode, useEffect, useState } from 'react';
 
 const Paws = lazy(() => import('@/components/paws/Paws.jsx'));
 

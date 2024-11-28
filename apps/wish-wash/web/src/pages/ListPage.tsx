@@ -3,10 +3,7 @@ import { ListDetailsEditButton } from '@/components/lists/ListDetailsDialog.jsx'
 import { ListHero } from '@/components/lists/ListHero.jsx';
 import { ListView } from '@/components/lists/ListView.jsx';
 import { hooks } from '@/hooks.js';
-import { Button } from '@a-type/ui/components/button';
-import { Icon } from '@a-type/ui/components/icon';
-import { PageContent } from '@a-type/ui/components/layouts';
-import { H1 } from '@a-type/ui/components/typography';
+import { Button, H1, Icon, PageContent } from '@a-type/ui';
 import { useLocalStorage, UserMenu } from '@biscuits/client';
 import { Link, useNavigate, useParams } from '@verdant-web/react-router';
 import { List } from '@wish-wash.biscuits/verdant';

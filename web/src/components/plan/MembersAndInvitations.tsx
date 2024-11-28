@@ -1,5 +1,5 @@
-import { Avatar } from '@a-type/ui/components/avatar';
 import {
+	Avatar,
 	CardActions,
 	CardContent,
 	CardFooter,
@@ -7,11 +7,11 @@ import {
 	CardMain,
 	CardRoot,
 	CardTitle,
-} from '@a-type/ui/components/card';
-import { useMutation, useSuspenseQuery, graphql } from '@biscuits/graphql';
+	ConfirmedButton,
+	H3,
+} from '@a-type/ui';
+import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
 import { InviteMember } from './InviteMember.js';
-import { H3 } from '@a-type/ui/components/typography';
-import { ConfirmedButton } from '@a-type/ui/components/button';
 
 const membersQuery = graphql(`
 	query PlanMembers {

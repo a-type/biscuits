@@ -1,6 +1,4 @@
-import { ButtonProps, Button } from '@a-type/ui/components/button';
-import { Dialog } from '@a-type/ui/components/dialog';
-import { Icon } from '@a-type/ui/components/icon';
+import { Button, ButtonProps, Dialog, Icon } from '@a-type/ui';
 import { useState } from 'react';
 import { CreateListOptions } from './CreateListOptions.jsx';
 

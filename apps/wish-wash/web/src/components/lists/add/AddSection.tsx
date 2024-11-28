@@ -1,10 +1,10 @@
-import { Popover } from '@a-type/ui/components/popover';
-import { ReactNode } from 'react';
-import { AddItemProvider, useAddItem } from './AddProvider.jsx';
-import { AddInput } from './AddInput.jsx';
-import { List } from '@wish-wash.biscuits/verdant';
-import { AddOptions } from './AddOptions.jsx';
+import { Popover } from '@a-type/ui';
 import { preventDefault } from '@a-type/utils';
+import { List } from '@wish-wash.biscuits/verdant';
+import { ReactNode } from 'react';
+import { AddInput } from './AddInput.jsx';
+import { AddOptions } from './AddOptions.jsx';
+import { AddItemProvider, useAddItem } from './AddProvider.jsx';
 
 export interface AddSectionProps {
 	className?: string;

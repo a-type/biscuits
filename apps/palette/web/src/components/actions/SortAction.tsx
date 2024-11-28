@@ -1,6 +1,5 @@
-import { ActionButton } from '@a-type/ui/components/actions';
+import { ActionButton, Icon } from '@a-type/ui';
 import { ColorSort, useSort } from '../projects/hooks.js';
-import { Icon } from '@a-type/ui/components/icon';
 
 export function SortAction() {
 	const [sort, setSort] = useSort();

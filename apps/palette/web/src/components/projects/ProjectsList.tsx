@@ -1,12 +1,12 @@
 import { hooks } from '@/hooks.js';
-import { Project } from '@palette.biscuits/verdant';
 import {
-	CardRoot,
-	CardMain,
 	CardGrid,
 	CardImage,
-} from '@a-type/ui/components/card';
-import { InfiniteLoadTrigger } from '@a-type/ui/components/infiniteLoadTrigger';
+	CardMain,
+	CardRoot,
+	InfiniteLoadTrigger,
+} from '@a-type/ui';
+import { Project } from '@palette.biscuits/verdant';
 import { Link } from '@verdant-web/react-router';
 
 export interface ProjectsListProps {}

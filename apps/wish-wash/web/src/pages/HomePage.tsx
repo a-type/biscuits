@@ -1,14 +1,14 @@
 import { CreateListButton } from '@/components/lists/CreateListButton.jsx';
 import { ListsList } from '@/components/lists/ListsList.jsx';
 import { hooks } from '@/hooks.js';
-import { DropdownMenuItemRightSlot } from '@a-type/ui/components/dropdownMenu';
-import { Icon } from '@a-type/ui/components/icon';
 import {
+	DropdownMenuItemRightSlot,
+	Icon,
 	PageContent,
 	PageFixedArea,
 	PageNowPlaying,
 	PageRoot,
-} from '@a-type/ui/components/layouts';
+} from '@a-type/ui';
 import { useHasServerAccess, UserMenu, UserMenuItem } from '@biscuits/client';
 import { useNavigate } from '@verdant-web/react-router';
 import { authorization } from '@wish-wash.biscuits/verdant';

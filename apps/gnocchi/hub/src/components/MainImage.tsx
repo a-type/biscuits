@@ -1,5 +1,5 @@
-import { TopLineImage } from './layout.jsx';
 import { clsx } from '@a-type/ui';
+import { TopLineImage } from './layout.jsx';
 
 export interface MainImageProps {
 	url: string;

@@ -1,20 +1,21 @@
-import { clsx } from '@a-type/ui';
-import { ActionButton, ActionButtonProps } from '@a-type/ui/components/actions';
-import { Button } from '@a-type/ui/components/button';
 import {
+	ActionButton,
+	ActionButtonProps,
+	Button,
+	clsx,
 	Dialog,
-	DialogTrigger,
-	DialogContent,
-	DialogClose,
 	DialogActions,
+	DialogClose,
+	DialogContent,
 	DialogTitle,
-} from '@a-type/ui/components/dialog';
-import { Icon } from '@a-type/ui/components/icon';
-import { P } from '@a-type/ui/components/typography';
+	DialogTrigger,
+	Icon,
+	P,
+} from '@a-type/ui';
 import { useHasServerAccess } from '@biscuits/client';
 import { graphql, useMutation, useQuery } from '@biscuits/graphql';
 import { Link } from '@verdant-web/react-router';
-import { SubscriptionDialog } from '../promotion/SubscriptionDialog.jsx';
+import { upsellState } from '../promotion/upsellState.js';
 
 export interface ListPublishActionProps extends ActionButtonProps {
 	listId: string;
@@ -44,16 +45,15 @@ export function ListPublishAction({
 
 	if (!canPublish && !isPublished) {
 		return (
-			<SubscriptionDialog>
-				<ActionButton
-					color="accent"
-					{...rest}
-					className={clsx('self-start', className)}
-				>
-					<Icon name="send" />
-					Share list
-				</ActionButton>
-			</SubscriptionDialog>
+			<ActionButton
+				color="accent"
+				{...rest}
+				className={clsx('self-start', className)}
+				onClick={() => (upsellState.show = true)}
+			>
+				<Icon name="send" />
+				Share list
+			</ActionButton>
 		);
 	}
 

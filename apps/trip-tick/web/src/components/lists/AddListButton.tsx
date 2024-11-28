@@ -1,5 +1,5 @@
 import { hooks } from '@/store.js';
-import { Button, ButtonProps } from '@a-type/ui/components/button';
+import { Button, ButtonProps } from '@a-type/ui';
 import { useMe } from '@biscuits/client';
 import { useNavigate } from '@verdant-web/react-router';
 

@@ -1,16 +1,16 @@
 import { hooks } from '@/stores/groceries/index.js';
-import { ReactNode, Suspense } from 'react';
-import { CategoryManager } from '../groceries/categories/CategoryManager.js';
 import {
+	Button,
 	Dialog,
+	DialogActions,
 	DialogClose,
 	DialogContent,
 	DialogTitle,
 	DialogTrigger,
-	DialogActions,
-} from '@a-type/ui/components/dialog';
+} from '@a-type/ui';
+import { ReactNode, Suspense } from 'react';
+import { CategoryManager } from '../groceries/categories/CategoryManager.js';
 import { menuState } from './state.js';
-import { Button } from '@a-type/ui/components/button';
 
 export function ManageCategoriesDialog({ children }: { children: ReactNode }) {
 	const resetToDefaults = hooks.useResetCategoriesToDefault();

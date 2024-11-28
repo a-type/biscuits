@@ -1,9 +1,4 @@
-import { Button } from '@a-type/ui/components/button';
-import {
-	Popover,
-	PopoverContent,
-	PopoverTrigger,
-} from '@a-type/ui/components/popover';
+import { Button, Popover, PopoverContent, PopoverTrigger } from '@a-type/ui';
 import { QuestionMarkCircledIcon } from '@radix-ui/react-icons';
 import { ReactNode } from 'react';
 

@@ -1,7 +1,7 @@
-import { ButtonProps, getButtonClassName } from '@a-type/ui/components/button';
+import { ButtonProps, getButtonClassName } from '@a-type/ui';
+import { Link, LinkProps } from '@verdant-web/react-router';
 import classNames from 'classnames';
 import { forwardRef } from 'react';
-import { Link, LinkProps } from '@verdant-web/react-router';
 
 export { Link };
 export type { LinkProps };

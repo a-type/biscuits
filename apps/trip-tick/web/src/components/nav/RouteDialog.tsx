@@ -1,10 +1,10 @@
+import { Dialog, DialogContent } from '@a-type/ui';
 import {
 	Outlet,
 	RouteRenderer,
 	useMatchingRoute,
 	useNavigate,
 } from '@verdant-web/react-router';
-import { Dialog, DialogContent } from '@a-type/ui/components/dialog';
 import { Suspense } from 'react';
 
 export interface RouteDialogProps {}

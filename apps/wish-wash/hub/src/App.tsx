@@ -1,11 +1,15 @@
-import { PageContent, PageRoot } from '@a-type/ui/components/layouts';
-import { H1, P } from '@a-type/ui/components/typography';
-import { useEffect } from 'react';
-import { HubWishlistData } from './types.js';
+import {
+	H1,
+	P,
+	PageContent,
+	PageRoot,
+	Provider as UIProvider,
+} from '@a-type/ui';
 import { ApolloProvider, graphqlClient } from '@biscuits/graphql';
-import { Items } from './components/Items.jsx';
+import { useEffect } from 'react';
 import { HubContextProvider } from './components/Context.jsx';
-import { Provider as UIProvider } from '@a-type/ui/components/provider';
+import { Items } from './components/Items.jsx';
+import { HubWishlistData } from './types.js';
 
 const innerProps = {
 	className: 'max-w-600px',

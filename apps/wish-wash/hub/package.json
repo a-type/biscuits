@@ -21,7 +21,7 @@
 		"typecheck": "tsc --build tsconfig.json"
 	},
 	"dependencies": {
-		"@a-type/ui": "^1.1.26",
+		"@a-type/ui": "1.1.29",
 		"@a-type/utils": "^1.0.8",
 		"@biscuits/graphql": "workspace:*",
 		"@wish-wash.biscuits/common": "workspace:*",

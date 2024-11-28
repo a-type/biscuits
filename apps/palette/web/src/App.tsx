@@ -1,11 +1,9 @@
 import { Pages } from '@/pages/Pages.jsx';
 import { clientDescriptor } from '@/store.js';
-import { hooks } from './hooks.js';
-import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
-import { Provider as UIProvider } from '@a-type/ui/components/provider';
-import { H1, P } from '@a-type/ui/components/typography';
+import { ErrorBoundary, H1, P, Provider as UIProvider } from '@a-type/ui';
 import { Provider, ReloadButton, useHasServerAccess } from '@biscuits/client';
 import { ReactNode, Suspense } from 'react';
+import { hooks } from './hooks.js';
 
 export interface AppProps {}
 

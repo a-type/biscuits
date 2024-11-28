@@ -1,4 +1,4 @@
-import { PageContent, PageRoot } from '@a-type/ui/components/layouts';
+import { PageContent, PageRoot } from '@a-type/ui';
 import { WishlistOnboarding } from '@wish-wash.biscuits/common';
 
 export interface PreviewRequestPageProps {}

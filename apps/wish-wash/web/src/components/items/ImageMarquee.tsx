@@ -1,5 +1,5 @@
 import { hooks } from '@/hooks.js';
-import { Marquee } from '@a-type/ui/components/marquee';
+import { Marquee } from '@a-type/ui';
 import { EntityFile } from '@wish-wash.biscuits/verdant';
 
 export interface ImageMarqueeProps {

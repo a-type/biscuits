@@ -1,22 +1,24 @@
-import { clsx } from '@a-type/ui';
+import { hooks } from '@/hooks.js';
 import {
 	Card,
 	CardContent,
 	CardGrid,
 	CardMain,
 	CardTitle,
-} from '@a-type/ui/components/card';
+	clsx,
+	H2,
+	Icon,
+	IconName,
+	P,
+} from '@a-type/ui';
 import { List } from '@wish-wash.biscuits/verdant';
 import { ReactNode, Suspense } from 'react';
+import { WishlistOnboarding } from '../../../../common/src/components/onboarding/WishlistOnboarding.jsx';
 import { useItemSize } from '../items/hooks.js';
 import { ItemEditDialog } from '../items/ItemEditDialog.jsx';
 import { ListItem } from '../items/ListItem.jsx';
-import { ItemSorter } from './ItemSorter.jsx';
-import { hooks } from '@/hooks.js';
-import { Icon, IconName } from '@a-type/ui/components/icon';
-import { WishlistOnboarding } from '../../../../common/src/components/onboarding/WishlistOnboarding.jsx';
-import { P, H2 } from '@a-type/ui/components/typography';
 import { AddItem } from './add/AddItem.jsx';
+import { ItemSorter } from './ItemSorter.jsx';
 
 export interface ListViewProps {
 	list: List;

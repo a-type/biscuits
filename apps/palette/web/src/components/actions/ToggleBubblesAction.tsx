@@ -1,7 +1,6 @@
+import { ActionButton, Icon } from '@a-type/ui';
 import { useSnapshot } from 'valtio';
 import { toolState } from '../projects/state.js';
-import { ActionButton } from '@a-type/ui/components/actions';
-import { Icon } from '@a-type/ui/components/icon';
 
 export interface ToggleBubblesActionProps {}
 

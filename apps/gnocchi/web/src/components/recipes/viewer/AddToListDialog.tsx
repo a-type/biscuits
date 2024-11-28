@@ -1,16 +1,17 @@
 import { RecipeNote } from '@/components/recipes/viewer/RecipeNote.jsx';
 import { saveHubRecipeOnboarding } from '@/onboarding/saveHubRecipeOnboarding.js';
 import { hooks } from '@/stores/groceries/index.js';
-import { ActionBar, ActionButton } from '@a-type/ui/components/actions';
-import { Button } from '@a-type/ui/components/button';
-import { Checkbox } from '@a-type/ui/components/checkbox';
 import {
+	ActionBar,
+	ActionButton,
+	Button,
+	Checkbox,
 	Dialog,
 	DialogActions,
 	DialogClose,
 	DialogContent,
 	DialogTitle,
-} from '@a-type/ui/components/dialog';
+} from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { CheckboxIcon, SquareIcon } from '@radix-ui/react-icons';
 import classNames from 'classnames';

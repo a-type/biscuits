@@ -1,6 +1,5 @@
 import { hooks } from '@/hooks.js';
-import { EditableText } from '@a-type/ui/components/editableText';
-import { Icon } from '@a-type/ui/components/icon';
+import { EditableText, Icon } from '@a-type/ui';
 import { List } from '@wish-wash.biscuits/verdant';
 
 export interface ListHeroProps {

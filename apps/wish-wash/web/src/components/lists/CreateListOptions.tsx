@@ -1,13 +1,17 @@
 import { hooks } from '@/hooks.js';
-import { Button } from '@a-type/ui/components/button';
-import { Card } from '@a-type/ui/components/card';
-import { FormikForm, TextField } from '@a-type/ui/components/forms';
-import { Icon } from '@a-type/ui/components/icon';
-import { withClassName } from '@a-type/ui/hooks';
+import {
+	Button,
+	Card,
+	FormikForm,
+	Icon,
+	TextField,
+	withClassName,
+} from '@a-type/ui';
 import { useHasServerAccess } from '@biscuits/client';
 import { useNavigate } from '@verdant-web/react-router';
 import { authorization, List, ListInit } from '@wish-wash.biscuits/verdant';
 import { useState } from 'react';
+import { upsellState } from '../promotion/upsellState.js';
 
 export interface CreateListOptionsProps {
 	onCreated?: (list: List) => void;
@@ -105,17 +109,29 @@ export function CreateListOptions({
 						</Card>
 						<Card className="h-full">
 							<Card.Main
-								onClick={() =>
-									createList('My wish list', 'wishlist', authorization.private)
-								}
+								onClick={() => {
+									if (!canSync) {
+										upsellState.show = true;
+									} else {
+										createList(
+											'My wish list',
+											'wishlist',
+											authorization.private,
+										);
+									}
+								}}
 							>
 								<Card.Title>
 									<Icon name="gift" /> Personal Wish List
-									{!canSync && <PremiumBadge>Members Only</PremiumBadge>}
 								</Card.Title>
 								<Card.Content>
 									Make a wish list to share with others.
 								</Card.Content>
+								{!canSync && (
+									<Card.Content unstyled>
+										<PremiumBadge>$10 / year</PremiumBadge>
+									</Card.Content>
+								)}
 							</Card.Main>
 						</Card>
 						<Card className="h-full">
@@ -137,5 +153,5 @@ export function CreateListOptions({
 
 const PremiumBadge = withClassName(
 	'div',
-	'text-xs font-bold text-accent-dark bg-accent-wash rounded-full py-1 px-4',
+	'text-xs font-bold text-accent-dark bg-accent-wash rounded-full py-1 px-4 border-accent-dark border-1 border-solid',
 );

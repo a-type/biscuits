@@ -1,31 +1,31 @@
-import {
-	PageContent,
-	PageFixedArea,
-	PageRoot,
-} from '@a-type/ui/components/layouts';
-import { H1, H2, H3 } from '@a-type/ui/components/typography';
-import { Link, useNavigate, useSearchParams } from '@verdant-web/react-router';
-import { Suspense, useEffect } from 'react';
-import { graphql, NetworkStatus, useQuery } from '@biscuits/graphql';
-import { Button } from '@a-type/ui/components/button';
-import { Icon } from '@a-type/ui/components/icon';
+import { Footer } from '@/components/help/Footer.jsx';
 import { MembersAndInvitations } from '@/components/plan/MembersAndInvitations.jsx';
 import { VerdantLibraries } from '@/components/storage/VerdantLibraries.jsx';
-import {
-	LogoutButton,
-	useLocalStorage,
-	SubscriptionSetup,
-} from '@biscuits/client';
-import { apps } from '@biscuits/apps';
-import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
-import { Footer } from '@/components/help/Footer.jsx';
 import { EmailUpdatesToggle } from '@/components/user/EmailUpdatesToggle.jsx';
 import {
 	UserInfoEditor,
 	userInfoFragment,
 } from '@/components/user/UserInfoEditor.jsx';
-import { toast } from '@a-type/ui';
-import { Tabs } from '@a-type/ui/components/tabs';
+import {
+	Button,
+	ErrorBoundary,
+	H3,
+	Icon,
+	PageContent,
+	PageFixedArea,
+	PageRoot,
+	Tabs,
+	toast,
+} from '@a-type/ui';
+import { apps } from '@biscuits/apps';
+import {
+	LogoutButton,
+	SubscriptionSetup,
+	useLocalStorage,
+} from '@biscuits/client';
+import { graphql, NetworkStatus, useQuery } from '@biscuits/graphql';
+import { Link, useNavigate, useSearchParams } from '@verdant-web/react-router';
+import { Suspense, useEffect } from 'react';
 
 const PlanPageData = graphql(
 	`

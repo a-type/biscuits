@@ -1,27 +1,25 @@
+import { useLookupFoodName } from '@/components/foods/FoodName.jsx';
 import { Icon } from '@/components/icons/Icon.jsx';
+import { useUnitConversion } from '@/components/recipes/viewer/unitConversion.js';
 import { hooks } from '@/stores/groceries/index.js';
-import { convertUnits, lookupUnit } from '@gnocchi.biscuits/conversion';
-import { RecipeIngredientsItem } from '@gnocchi.biscuits/verdant';
-import { fractionToText } from '@a-type/utils';
-import classNames from 'classnames';
-import { useCallback, useMemo } from 'react';
-import { NoteEditor } from '../editor/NoteEditor.jsx';
-import { IngredientText } from './IngredientText.jsx';
 import {
+	Button,
+	CollapsibleContent,
+	CollapsibleRoot,
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuLabel,
 	DropdownMenuTrigger,
-} from '@a-type/ui/components/dropdownMenu';
-import { Button } from '@a-type/ui/components/button';
-import {
-	CollapsibleContent,
-	CollapsibleRoot,
-} from '@a-type/ui/components/collapsible';
-import { useToggle } from '@a-type/ui/hooks';
-import { useUnitConversion } from '@/components/recipes/viewer/unitConversion.js';
-import { useLookupFoodName } from '@/components/foods/FoodName.jsx';
+	useToggle,
+} from '@a-type/ui';
+import { fractionToText } from '@a-type/utils';
+import { convertUnits, lookupUnit } from '@gnocchi.biscuits/conversion';
+import { RecipeIngredientsItem } from '@gnocchi.biscuits/verdant';
+import classNames from 'classnames';
+import { useCallback, useMemo } from 'react';
+import { NoteEditor } from '../editor/NoteEditor.jsx';
+import { IngredientText } from './IngredientText.jsx';
 
 (window as any).convertUnits = convertUnits;
 

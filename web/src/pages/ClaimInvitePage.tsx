@@ -1,12 +1,16 @@
+import { Footer } from '@/components/help/Footer.jsx';
+import {
+	Button,
+	H1,
+	P,
+	PageContent,
+	PageRoot,
+	toast,
+	withClassName,
+} from '@a-type/ui';
+import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
 import { useNavigate, useParams } from '@verdant-web/react-router';
 import { useEffect } from 'react';
-import { useMutation, useSuspenseQuery, graphql } from '@biscuits/graphql';
-import { PageRoot, PageContent } from '@a-type/ui/components/layouts';
-import { H1, P } from '@a-type/ui/components/typography';
-import { withClassName } from '@a-type/ui/hooks';
-import { Button } from '@a-type/ui/components/button';
-import { toast } from '@a-type/ui';
-import { Footer } from '@/components/help/Footer.jsx';
 
 const claimInviteInfo = graphql(`
 	query ClaimInviteInfo($code: String!) {

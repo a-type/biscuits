@@ -1,6 +1,5 @@
-import React from 'react';
 import { HubWishlistItem } from '@/types.js';
-import { CardGrid } from '@a-type/ui/components/card';
+import { CardGrid } from '@a-type/ui';
 import { ItemCard } from './ItemCard.jsx';
 
 export interface ItemsProps {

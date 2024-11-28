@@ -1,15 +1,19 @@
-import { useLocalStorage } from '../hooks/useStorage.js';
-import { H2, P } from '@a-type/ui/components/typography';
-import { Button } from '@a-type/ui/components/button';
 import {
+	Button,
+	clsx,
 	Dialog,
 	DialogActions,
 	DialogClose,
 	DialogContent,
 	DialogTrigger,
-} from '@a-type/ui/components/dialog';
-import { withClassName } from '@a-type/ui/hooks';
+	H2,
+	Icon,
+	P,
+	withClassName,
+} from '@a-type/ui';
+import { appsById } from '@biscuits/apps';
 import { useSnapshot } from 'valtio';
+import { useLocalStorage } from '../hooks/useStorage.js';
 import { installState, triggerInstall } from '../install.js';
 import {
 	getIsEdge,
@@ -18,10 +22,7 @@ import {
 	getIsSafari,
 	getOS,
 } from '../platform.js';
-import { Icon } from '@a-type/ui/components/icon';
-import { clsx } from '@a-type/ui';
 import { useAppId } from './Context.js';
-import { appsById } from '@biscuits/apps';
 
 export interface InstallHintProps {
 	content: string;

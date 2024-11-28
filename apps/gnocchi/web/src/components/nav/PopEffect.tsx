@@ -1,7 +1,7 @@
-import classNames from 'classnames';
+import { useParticles } from '@a-type/ui';
 import { debounce } from '@a-type/utils';
+import classNames from 'classnames';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useParticles } from '@a-type/ui/components/particles';
 
 export interface PopEffectProps {
 	active?: boolean;

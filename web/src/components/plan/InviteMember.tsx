@@ -1,10 +1,5 @@
+import { FormikForm, SubmitButton, TextField, toast } from '@a-type/ui';
 import { graphql, useMutation } from '@biscuits/graphql';
-import {
-	FormikForm,
-	SubmitButton,
-	TextField,
-} from '@a-type/ui/components/forms';
-import { toast } from '@a-type/ui';
 
 const invite = graphql(`
 	mutation CreateInvitation($input: CreatePlanInvitationInput!) {

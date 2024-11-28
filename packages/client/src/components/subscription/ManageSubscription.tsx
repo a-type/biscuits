@@ -1,19 +1,15 @@
+import { Button, Chip, clsx, H2, Icon, toast } from '@a-type/ui';
 import {
 	FragmentOf,
 	graphql,
 	readFragment,
 	useLazyQuery,
 } from '@biscuits/graphql';
-import { Button } from '@a-type/ui/components/button';
 import { useSearchParams } from '@verdant-web/react-router';
 import { useEffect } from 'react';
-import { toast, clsx } from '@a-type/ui';
-import { PlanInfo, planProductInfo } from './PlanInfo.js';
-import { CancelPlanButton } from './CancelPlanButton.js';
-import { Icon } from '@a-type/ui/components/icon';
-import { H2 } from '@a-type/ui/components/typography';
 import * as CONFIG from '../../config.js';
-import { Chip } from '@a-type/ui/components/chip';
+import { CancelPlanButton } from './CancelPlanButton.js';
+import { PlanInfo, planProductInfo } from './PlanInfo.js';
 
 export const manageSubscriptionInfo = graphql(
 	`

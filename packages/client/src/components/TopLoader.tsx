@@ -1,7 +1,7 @@
-import { useIsRouteTransitioning } from '@verdant-web/react-router';
-import { animated, useSpring } from '@react-spring/web';
-import { useCallback, useEffect } from 'react';
 import { clsx } from '@a-type/ui';
+import { animated, useSpring } from '@react-spring/web';
+import { useIsRouteTransitioning } from '@verdant-web/react-router';
+import { useCallback, useEffect } from 'react';
 
 export interface TopLoaderProps {
 	className?: string;

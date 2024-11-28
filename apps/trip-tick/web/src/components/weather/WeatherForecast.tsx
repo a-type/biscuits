@@ -1,10 +1,10 @@
-import { Chip } from '@a-type/ui/components/chip';
 import {
+	Chip,
 	CollapsibleContent,
 	CollapsibleRoot,
 	CollapsibleTrigger,
-} from '@a-type/ui/components/collapsible';
-import { Icon } from '@a-type/ui/components/icon';
+	Icon,
+} from '@a-type/ui';
 import { ResultOf, graphql } from '@biscuits/graphql';
 import classNames from 'classnames';
 import { TemperatureUnit } from './TemperatureUnit.jsx';

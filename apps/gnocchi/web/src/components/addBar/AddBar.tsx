@@ -1,12 +1,12 @@
 import { AddToListDialog } from '@/components/recipes/viewer/AddToListDialog.jsx';
 import useMergedRef from '@/hooks/useMergedRef.js';
-import { Input } from '@a-type/ui/components/input';
 import {
+	Input,
 	Popover,
 	PopoverAnchor,
 	PopoverContent,
-} from '@a-type/ui/components/popover';
-import { useSize } from '@a-type/ui/hooks';
+	useSize,
+} from '@a-type/ui';
 import { preventDefault, stopPropagation } from '@a-type/utils';
 import classNames from 'classnames';
 import { Suspense, forwardRef, useRef, useState } from 'react';

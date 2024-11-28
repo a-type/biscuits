@@ -1,14 +1,14 @@
-import PaprikaImporter from '@/components/import/PaprikaImporter.jsx';
+import Paprikaimporter from '@/components/import/Paprikaimporter.jsx';
 import { TagManager } from '@/components/recipes/tags/TagManager.jsx';
-import { Button } from '@a-type/ui/components/button';
 import {
+	Button,
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuTrigger,
-} from '@a-type/ui/components/dropdownMenu';
+} from '@a-type/ui';
 import { DotsVerticalIcon } from '@radix-ui/react-icons';
-import { Suspense, lazy, useCallback, useState } from 'react';
+import { Suspense, useCallback, useState } from 'react';
 
 export interface RecipeCollectionMenuProps {
 	className?: string;
@@ -33,9 +33,9 @@ export function RecipeCollectionMenu({ className }: RecipeCollectionMenuProps) {
 						}}
 						asChild
 					>
-						<PaprikaImporter onClose={onSubmenuClose}>
-							Import from Paprika 3
-						</PaprikaImporter>
+						<Paprikaimporter onClose={onSubmenuClose}>
+							import from Paprika 3
+						</Paprikaimporter>
 					</DropdownMenuItem>
 				</Suspense>
 				<Suspense>

@@ -7,20 +7,23 @@ import {
 	RecipePlaceholderItem,
 } from '@/components/recipes/collection/RecipeListItem.jsx';
 import { RecipeSearchBar } from '@/components/recipes/collection/RecipeSearchBar.jsx';
-import { CardGrid, cardGridColumns } from '@a-type/ui/components/card';
-import { InfiniteLoadTrigger } from '@a-type/ui/components/infiniteLoadTrigger';
-import { PageFixedArea } from '@a-type/ui/components/layouts';
-import { Spinner } from '@a-type/ui/components/spinner';
+import { RecipePresenceNotification } from '@/components/sync/collaborationMenu/RecipePresenceNotification.jsx';
+import {
+	CardGrid,
+	cardGridColumns,
+	InfiniteLoadTrigger,
+	PageFixedArea,
+	Spinner,
+} from '@a-type/ui';
+import classNames from 'classnames';
 import { Suspense } from 'react';
 import { RecipeListActions } from './RecipeListActions.jsx';
+import { RecipeTagsFilter } from './RecipeTagsFilter.jsx';
 import {
 	useFilteredRecipes,
 	useGridStyle,
 	useRecipeTagFilter,
 } from './hooks.js';
-import classNames from 'classnames';
-import { RecipePresenceNotification } from '@/components/sync/collaborationMenu/RecipePresenceNotification.jsx';
-import { RecipeTagsFilter } from './RecipeTagsFilter.jsx';
 
 export interface RecipeListProps {}
 

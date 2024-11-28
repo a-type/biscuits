@@ -1,5 +1,5 @@
+import { Switch } from '@a-type/ui';
 import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
-import { Switch } from '@a-type/ui/components/switch';
 
 export interface EmailUpdatesToggleProps {
 	isSubscribed?: boolean;

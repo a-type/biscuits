@@ -1,11 +1,9 @@
-import { clsx } from '@a-type/ui';
+import { Button, clsx, Icon } from '@a-type/ui';
+import { useMemo } from 'react';
 import { useSelectedObjectIds } from '../canvas/canvasHooks.js';
-import { Button } from '@a-type/ui/components/button';
-import { Icon } from '@a-type/ui/components/icon';
+import { CanvasOverlayContent } from '../canvas/CanvasOverlay.jsx';
 import { useCanvas } from '../canvas/CanvasProvider.jsx';
 import { useDeleteConnection, useDeleteTask } from './hooks.js';
-import { useMemo } from 'react';
-import { CanvasOverlayContent } from '../canvas/CanvasOverlay.jsx';
 
 export interface SelectionMenuProps {
 	className?: string;

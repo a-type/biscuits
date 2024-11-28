@@ -1,13 +1,13 @@
+import { Spinner } from '@a-type/ui';
 import { graphql, useQuery } from '@biscuits/graphql';
-import { Spinner } from '@a-type/ui/components/spinner';
+import { useSearchParams } from '@verdant-web/react-router';
+import { useEffect } from 'react';
 import {
 	ManageSubscription,
 	manageSubscriptionInfo,
 } from './ManageSubscription.js';
 import { checkoutData, SubscriptionCheckout } from './SubscriptionCheckout.js';
 import { PriceKey, SubscriptionSelect } from './SubscriptionSelect.js';
-import { useSearchParams } from '@verdant-web/react-router';
-import { useEffect } from 'react';
 
 export interface SubscriptionSetupProps {
 	priceKeys?: PriceKey[];

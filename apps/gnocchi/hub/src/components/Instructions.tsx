@@ -1,167 +1,166 @@
 'use client';
 
-import { Note } from '@a-type/ui/components/note';
-import { RichEditor } from '@a-type/ui/components/richEditor';
+import { Note, RichEditor } from '@a-type/ui';
 // @ts-ignore
 import { Node, mergeAttributes } from '@tiptap/core';
 import {
-  // @ts-ignore
-  NodeViewContent,
-  // @ts-ignore
-  NodeViewWrapper,
-  // @ts-ignore
-  ReactNodeViewRenderer,
-  // @ts-ignore
-  useEditor,
+	// @ts-ignore
+	NodeViewContent,
+	// @ts-ignore
+	NodeViewWrapper,
+	// @ts-ignore
+	ReactNodeViewRenderer,
+	// @ts-ignore
+	useEditor,
 } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 // @ts-ignore
 import Link from '@tiptap/extension-link';
 
 export interface InstructionsProps {
-  instructions: any;
+	instructions: any;
 }
 
 export function Instructions({ instructions }: InstructionsProps) {
-  const editor = useEditor({
-    extensions: [
-      StarterKit.configure({
-        history: false,
-      }),
-      Step,
-      SectionTitle,
-      Link,
-    ],
-    content: instructions,
-    editable: false,
-  });
-  return (
-    <div className="e-instructions" itemProp="recipeInstructions">
-      <RichEditor editor={editor} readOnly />
-    </div>
-  );
+	const editor = useEditor({
+		extensions: [
+			StarterKit.configure({
+				history: false,
+			}),
+			Step,
+			SectionTitle,
+			Link,
+		],
+		content: instructions,
+		editable: false,
+	});
+	return (
+		<div className="e-instructions" itemProp="recipeInstructions">
+			<RichEditor editor={editor} readOnly />
+		</div>
+	);
 }
 
 const Step = Node.create({
-  name: 'step',
-  group: 'block',
-  content: 'inline*',
-  defining: true,
-  priority: 1001,
+	name: 'step',
+	group: 'block',
+	content: 'inline*',
+	defining: true,
+	priority: 1001,
 
-  addAttributes() {
-    return {
-      id: {
-        default: null,
-        keepOnSplit: false,
-        rendered: false,
-        parseHTML: (element: HTMLElement) => element.getAttribute('data-id'),
-        renderHTML: (attributes: any) => {
-          return {
-            'data-id': attributes.id,
-          };
-        },
-      },
-      note: {
-        default: undefined,
-        keepOnSplit: false,
-        rendered: false,
-        parseHTML: (element: HTMLElement) => element.getAttribute('data-note'),
-        renderHTML: (attributes: any) => {
-          return {
-            'data-note': attributes.note,
-          };
-        },
-      },
-    };
-  },
+	addAttributes() {
+		return {
+			id: {
+				default: null,
+				keepOnSplit: false,
+				rendered: false,
+				parseHTML: (element: HTMLElement) => element.getAttribute('data-id'),
+				renderHTML: (attributes: any) => {
+					return {
+						'data-id': attributes.id,
+					};
+				},
+			},
+			note: {
+				default: undefined,
+				keepOnSplit: false,
+				rendered: false,
+				parseHTML: (element: HTMLElement) => element.getAttribute('data-note'),
+				renderHTML: (attributes: any) => {
+					return {
+						'data-note': attributes.note,
+					};
+				},
+			},
+		};
+	},
 
-  addOptions() {
-    return {
-      HTMLAttributes: {},
-    };
-  },
+	addOptions() {
+		return {
+			HTMLAttributes: {},
+		};
+	},
 
-  parseHTML() {
-    return [{ tag: 'p' }];
-  },
+	parseHTML() {
+		return [{ tag: 'p' }];
+	},
 
-  renderHTML({ node, HTMLAttributes }: any) {
-    return [
-      'p',
-      mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
-        'data-id': node.attrs.id,
-      }),
-      0,
-    ];
-  },
+	renderHTML({ node, HTMLAttributes }: any) {
+		return [
+			'p',
+			mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
+				'data-id': node.attrs.id,
+			}),
+			0,
+		];
+	},
 
-  addNodeView() {
-    return ReactNodeViewRenderer(InstructionStepView);
-  },
+	addNodeView() {
+		return ReactNodeViewRenderer(InstructionStepView);
+	},
 });
 
 const SectionTitle = Node.create({
-  name: 'sectionTitle',
-  content: 'inline*',
-  defining: true,
-  group: 'block',
+	name: 'sectionTitle',
+	content: 'inline*',
+	defining: true,
+	group: 'block',
 
-  addAttributes() {
-    return {
-      id: {
-        default: null,
-        keepOnSplit: false,
-        rendered: false,
-        parseHTML: (element: HTMLElement) => element.getAttribute('data-id'),
-        renderHTML: (attributes: any) => {
-          return {
-            'data-id': attributes.id,
-          };
-        },
-      },
-    };
-  },
+	addAttributes() {
+		return {
+			id: {
+				default: null,
+				keepOnSplit: false,
+				rendered: false,
+				parseHTML: (element: HTMLElement) => element.getAttribute('data-id'),
+				renderHTML: (attributes: any) => {
+					return {
+						'data-id': attributes.id,
+					};
+				},
+			},
+		};
+	},
 
-  parseHTML() {
-    return [{ tag: 'h2' }, { tag: 'h1' }, { tag: 'h3' }];
-  },
+	parseHTML() {
+		return [{ tag: 'h2' }, { tag: 'h1' }, { tag: 'h3' }];
+	},
 
-  renderHTML({ HTMLAttributes }: any) {
-    return [
-      'h2',
-      mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
-        'data-section-title': true,
-      }),
-      0,
-    ];
-  },
+	renderHTML({ HTMLAttributes }: any) {
+		return [
+			'h2',
+			mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
+				'data-section-title': true,
+			}),
+			0,
+		];
+	},
 });
 
 function InstructionStepView({
-  node,
+	node,
 }: {
-  node: {
-    attrs: {
-      id: string;
-      note?: string;
-    };
-  };
+	node: {
+		attrs: {
+			id: string;
+			note?: string;
+		};
+	};
 }) {
-  return (
-    <NodeViewWrapper
-      data-id={node.attrs.id}
-      className="flex flex-col mb-5 w-full p-1"
-      contentEditable={false}
-    >
-      <div>
-        <NodeViewContent />
-      </div>
-      {node.attrs.note && (
-        <Note className="mt-2 ml-8 max-w-80% w-max-content" data-note="true">
-          {node.attrs.note}
-        </Note>
-      )}
-    </NodeViewWrapper>
-  );
+	return (
+		<NodeViewWrapper
+			data-id={node.attrs.id}
+			className="flex flex-col mb-5 w-full p-1"
+			contentEditable={false}
+		>
+			<div>
+				<NodeViewContent />
+			</div>
+			{node.attrs.note && (
+				<Note className="mt-2 ml-8 max-w-80% w-max-content" data-note="true">
+					{node.attrs.note}
+				</Note>
+			)}
+		</NodeViewWrapper>
+	);
 }

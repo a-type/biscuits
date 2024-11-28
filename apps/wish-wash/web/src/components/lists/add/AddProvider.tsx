@@ -1,3 +1,16 @@
+import { hooks } from '@/hooks.js';
+import { useSearchParams } from '@verdant-web/react-router';
+import {
+	List,
+	ListItemsItemInit,
+	ListItemsItemType,
+} from '@wish-wash.biscuits/verdant';
+import {
+	useCombobox,
+	UseComboboxReturnValue,
+	UseComboboxState,
+	UseComboboxStateChangeOptions,
+} from 'downshift';
 import {
 	createContext,
 	startTransition,
@@ -6,19 +19,6 @@ import {
 	useRef,
 	useState,
 } from 'react';
-import {
-	useCombobox,
-	UseComboboxReturnValue,
-	UseComboboxState,
-	UseComboboxStateChangeOptions,
-} from 'downshift';
-import {
-	List,
-	ListItemsItemInit,
-	ListItemsItemType,
-} from '@wish-wash.biscuits/verdant';
-import { hooks } from '@/hooks.js';
-import { useSearchParams } from '@verdant-web/react-router';
 
 const addItemContext = createContext<
 	| (UseComboboxReturnValue<ListItemsItemType> & {

@@ -1,10 +1,6 @@
 import {
-	Avatar,
 	AvatarList,
 	AvatarListItem,
-} from '@a-type/ui/components/avatar';
-import { ConfirmedButton } from '@a-type/ui/components/button';
-import {
 	CardActions,
 	CardContent,
 	CardFooter,
@@ -12,7 +8,8 @@ import {
 	CardMain,
 	CardRoot,
 	CardTitle,
-} from '@a-type/ui/components/card';
+	ConfirmedButton,
+} from '@a-type/ui';
 import { AppId, AppManifest, apps, getAppUrl } from '@biscuits/apps';
 import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
 import { Fragment } from 'react';

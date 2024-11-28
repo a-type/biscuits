@@ -1,5 +1,12 @@
-import { withClassName } from '@a-type/ui/hooks';
+import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
+import { LinkButton, TextLink } from '@/components/nav/Link.jsx';
+import { DemoFrame } from '@/components/promotional/DemoFrame.jsx';
+import { APP_NAME } from '@/config.js';
 import { useLocalStorage } from '@/hooks/useLocalStorage.js';
+import { useOnVisible } from '@/hooks/useOnVisible.js';
+import { H2, P, withClassName } from '@a-type/ui';
+import { LoginButton, PromoteSubscriptionButton } from '@biscuits/client';
+import { useSearchParams } from '@verdant-web/react-router';
 import classNames from 'classnames';
 import {
 	CSSProperties,
@@ -11,15 +18,6 @@ import {
 	useRef,
 	useState,
 } from 'react';
-import { DemoFrame } from '@/components/promotional/DemoFrame.jsx';
-import { APP_NAME } from '@/config.js';
-import { useOnVisible } from '@/hooks/useOnVisible.js';
-import { useSearchParams } from '@verdant-web/react-router';
-import { H2, P } from '@a-type/ui/components/typography';
-import { TextLink } from '@/components/nav/Link.jsx';
-import { LinkButton } from '@/components/nav/Link.jsx';
-import { LoginButton, PromoteSubscriptionButton } from '@biscuits/client';
-import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
 
 // dynamically import Scene
 const Scene = lazy(() => import('@/components/3d/Scene.jsx'));

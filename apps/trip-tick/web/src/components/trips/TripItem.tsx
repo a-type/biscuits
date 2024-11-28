@@ -3,27 +3,27 @@ import {
 	quantityForecast,
 } from '@/components/trips/utils.js';
 import { hooks } from '@/store.js';
-import { Button } from '@a-type/ui/components/button';
-import { CheckboxRoot } from '@a-type/ui/components/checkbox';
-import { Icon } from '@a-type/ui/components/icon';
-import { LiveUpdateTextField } from '@a-type/ui/components/liveUpdateTextField';
-import { NumberStepper } from '@a-type/ui/components/numberStepper';
-import { useParticles } from '@a-type/ui/components/particles';
 import {
+	Button,
+	CheckboxRoot,
+	Icon,
+	LiveUpdateTextField,
+	NumberStepper,
 	SliderRange,
 	SliderRoot,
 	SliderThumb,
 	SliderTrack,
-} from '@a-type/ui/components/slider';
+	useParticles,
+} from '@a-type/ui';
 import { ResultOf } from '@biscuits/graphql';
 import {
 	ListItemsItem,
 	TripCompletionsValue,
 	TripExtraItemsValueItem,
 } from '@trip-tick.biscuits/verdant';
+import classNames from 'classnames';
 import { useEffect, useRef, useState } from 'react';
 import { getItemRulesLabel } from '../lists/utils.js';
-import classNames from 'classnames';
 
 export function ListItem({
 	item,

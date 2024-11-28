@@ -1,9 +1,8 @@
-import { Button } from '@a-type/ui/components/button';
-import { Input, InputProps } from '@a-type/ui/components/input';
+import { Button, Input, InputProps } from '@a-type/ui';
+import { isUrl } from '@a-type/utils';
 import classNames from 'classnames';
 import { forwardRef } from 'react';
 import { Icon } from '../icons/Icon.jsx';
-import { isUrl } from '@a-type/utils';
 import { SuggestionData } from './hooks.js';
 
 export interface AddInputProps {

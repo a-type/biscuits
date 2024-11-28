@@ -1,28 +1,28 @@
-import { Avatar } from '@a-type/ui/components/avatar';
-import { Button } from '@a-type/ui/components/button';
 import {
+	Avatar,
+	Button,
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuItemProps,
 	DropdownMenuItemRightSlot,
 	DropdownMenuTrigger,
-} from '@a-type/ui/components/dropdownMenu';
-import { Icon } from '@a-type/ui/components/icon';
-import { ReactNode, Suspense } from 'react';
-import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
-import { LogoutButton } from './LogoutButton.js';
-import { PresencePeople } from './PresencePeople.js';
+	ErrorBoundary,
+	Icon,
+} from '@a-type/ui';
 import { graphql, useSuspenseQuery } from '@biscuits/graphql';
+import { ReactNode, Suspense } from 'react';
+import * as CONFIG from '../config.js';
 import {
 	useHasServerAccess,
 	useIsLoggedIn,
 	useIsOffline,
 } from '../hooks/graphql.js';
-import { useAppId } from './Context.js';
 import { getIsPWAInstalled } from '../platform.js';
+import { useAppId } from './Context.js';
 import { LoginButton } from './LoginButton.js';
-import * as CONFIG from '../config.js';
+import { LogoutButton } from './LogoutButton.js';
+import { PresencePeople } from './PresencePeople.js';
 
 export interface UserMenuProps {
 	className?: string;

@@ -1,5 +1,19 @@
 import { hooks } from '@/hooks.js';
+import { basicsOnboarding } from '@/onboarding/basics.js';
+import {
+	CanvasRoot,
+	useCanvas,
+	useClaimedGestures,
+	useClaimGesture,
+	useCreateCanvas,
+	useCreateViewport,
+	useViewport,
+	Vector2,
+	ViewportRoot,
+} from '@a-type/react-space';
 import { clsx } from '@a-type/ui';
+import { preventDefault } from '@a-type/utils';
+import { OnboardingTooltip } from '@biscuits/client';
 import {
 	EntityFile,
 	Project,
@@ -7,23 +21,9 @@ import {
 	ProjectColorsItem,
 } from '@palette.biscuits/verdant';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { useColorSelection } from './hooks.js';
-import {
-	CanvasRoot,
-	useClaimedGestures,
-	useCreateCanvas,
-	useCreateViewport,
-	useViewport,
-	ViewportRoot,
-	useClaimGesture,
-	useCanvas,
-	Vector2,
-} from '@a-type/react-space';
 import { ref, useSnapshot } from 'valtio';
+import { useColorSelection } from './hooks.js';
 import { toolState } from './state.js';
-import { preventDefault } from '@a-type/utils';
-import { OnboardingTooltip } from '@biscuits/client';
-import { basicsOnboarding } from '@/onboarding/basics.js';
 
 export interface ProjectCanvasProps {
 	project: Project;

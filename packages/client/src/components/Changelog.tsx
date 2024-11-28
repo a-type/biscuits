@@ -1,24 +1,22 @@
-import { Icon } from '@a-type/ui/components/icon';
-import { useLocalStorage } from '../hooks/useStorage.js';
-import { Button } from '@a-type/ui/components/button';
 import {
+	Button,
 	Dialog,
 	DialogActions,
 	DialogClose,
 	DialogContent,
 	DialogTitle,
 	DialogTrigger,
-} from '@a-type/ui/components/dialog';
-import { useState } from 'react';
-import { graphql, useQuery } from '@biscuits/graphql';
-import { useAppId } from './Context.js';
-import {
+	Icon,
 	NavBarItem,
 	NavBarItemIcon,
 	NavBarItemIconWrapper,
 	NavBarItemText,
-} from '@a-type/ui/components/navBar';
-import { withClassName } from '@a-type/ui/hooks';
+	withClassName,
+} from '@a-type/ui';
+import { graphql, useQuery } from '@biscuits/graphql';
+import { useState } from 'react';
+import { useLocalStorage } from '../hooks/useStorage.js';
+import { useAppId } from './Context.js';
 
 export interface ChangelogDisplayProps {
 	children?: React.ReactNode;

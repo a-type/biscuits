@@ -1,8 +1,8 @@
 import { hooks } from '@/stores/groceries/index.js';
-import { RecipeIngredientsItem } from '@gnocchi.biscuits/verdant';
+import { Tooltip } from '@a-type/ui';
 import { fractionToText } from '@a-type/utils';
+import { RecipeIngredientsItem } from '@gnocchi.biscuits/verdant';
 import pluralize from 'pluralize';
-import { Tooltip } from '@a-type/ui/components/tooltip';
 import { TextWithMultipliedNumbers } from './TextWithMultipliedNumbers.jsx';
 
 export interface IngredientTextProps {

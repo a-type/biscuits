@@ -1,10 +1,10 @@
-import { StarIcon } from '@radix-ui/react-icons';
-import { useState } from 'react';
-import { Button } from '@a-type/ui/components/button';
 import {
 	updateApp,
 	updateState,
 } from '@/components/updatePrompt/updateState.js';
+import { Button } from '@a-type/ui';
+import { StarIcon } from '@radix-ui/react-icons';
+import { useState } from 'react';
 import { useSnapshot } from 'valtio';
 
 export interface UpdatePromptProps {}

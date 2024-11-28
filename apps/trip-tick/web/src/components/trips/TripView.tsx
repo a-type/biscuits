@@ -1,19 +1,19 @@
 import { AddListsPicker } from '@/components/trips/AddListsPicker.jsx';
 import { useTripDays, useTripProgress } from '@/components/trips/hooks.js';
 import { hooks } from '@/store.js';
-import { Button } from '@a-type/ui/components/button';
-import { CollapsibleSimple } from '@a-type/ui/components/collapsible';
-import { Icon } from '@a-type/ui/components/icon';
-import { LiveUpdateTextField } from '@a-type/ui/components/liveUpdateTextField';
 import {
+	Button,
+	CollapsibleSimple,
+	H4,
+	Icon,
+	LiveUpdateTextField,
 	TabsContent,
 	TabsList,
 	TabsRoot,
 	TabsTrigger,
-} from '@a-type/ui/components/tabs';
-import { H4 } from '@a-type/ui/components/typography';
-import { FragmentOf, graphql, useQuery } from '@biscuits/graphql';
+} from '@a-type/ui';
 import { useLocalStorage, usePageTitle } from '@biscuits/client';
+import { FragmentOf, graphql, useQuery } from '@biscuits/graphql';
 import * as Progress from '@radix-ui/react-progress';
 import {
 	List,
@@ -30,9 +30,9 @@ import {
 	forecast as forecastFragment,
 } from '../weather/WeatherForecast.jsx';
 import { TripDateRange } from './TripDateRange.jsx';
+import { TripGlobalProgress } from './TripGlobalProgress.jsx';
 import { ExtraItem, ListItem } from './TripItem.jsx';
 import { quantityForecast } from './utils.js';
-import { TripGlobalProgress } from './TripGlobalProgress.jsx';
 
 export interface TripViewProps {
 	tripId: string;

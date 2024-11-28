@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom/client';
-import { App } from './App.jsx';
 import 'virtual:uno.css';
+import { App } from './App.jsx';
 
 // @ts-ignore
 const snapshot = window.__SNAPSHOT__;

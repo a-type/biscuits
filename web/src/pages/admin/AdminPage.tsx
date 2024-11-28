@@ -1,12 +1,12 @@
-import { PageContent, PageRoot } from '@a-type/ui/components/layouts';
-import { TabsList, TabsRoot, TabsTrigger } from '@a-type/ui/components/tabs';
-import { graphql, useSuspenseQuery } from '@biscuits/graphql';
 import {
-	Link,
-	Outlet,
-	useNavigate,
-	useParams,
-} from '@verdant-web/react-router';
+	PageContent,
+	PageRoot,
+	TabsList,
+	TabsRoot,
+	TabsTrigger,
+} from '@a-type/ui';
+import { graphql, useSuspenseQuery } from '@biscuits/graphql';
+import { Link, Outlet, useNavigate } from '@verdant-web/react-router';
 
 export interface AdminPageProps {}
 

@@ -1,9 +1,8 @@
 // @ts-ignore
-import { Color } from '@dynamize/color-utilities';
-import { clsx } from '@a-type/ui';
-import { useBoundsCssVars } from '@a-type/ui/hooks';
-import { OnboardingTooltip } from '@biscuits/client';
 import { basicsOnboarding } from '@/onboarding/basics.js';
+import { clsx, useBoundsCssVars } from '@a-type/ui';
+import { OnboardingTooltip } from '@biscuits/client';
+import { Color } from '@dynamize/color-utilities';
 
 export interface ColorBreakdownProps {
 	color: { r: number; g: number; b: number };

@@ -1,7 +1,6 @@
-import { Input } from '@a-type/ui/components/input/Input';
-import { useAddItem } from './AddProvider.jsx';
+import { clsx, Input } from '@a-type/ui';
 import { forwardRef, useEffect, useState } from 'react';
-import { clsx } from '@a-type/ui';
+import { useAddItem } from './AddProvider.jsx';
 
 export interface AddInputProps {
 	className?: string;

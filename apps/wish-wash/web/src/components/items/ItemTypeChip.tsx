@@ -1,9 +1,7 @@
 import { hooks } from '@/hooks.js';
-import { Chip } from '@a-type/ui/components/chip';
-import { Item } from '@wish-wash.biscuits/verdant';
+import { Chip, clsx, Icon } from '@a-type/ui';
 import { typeIcons, typeThemes } from '@wish-wash.biscuits/common';
-import { Icon } from '@a-type/ui/components/icon';
-import { clsx } from '@a-type/ui';
+import { Item } from '@wish-wash.biscuits/verdant';
 
 export interface ItemTypeChipProps {
 	item: Item;

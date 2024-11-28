@@ -1,27 +1,25 @@
 import { hooks } from '@/hooks.js';
-import { List } from '@wish-wash.biscuits/verdant';
 import {
-	CardRoot,
-	CardMain,
-	CardGrid,
-	CardTitle,
+	Button,
 	CardFooter,
-} from '@a-type/ui/components/card';
-import { InfiniteLoadTrigger } from '@a-type/ui/components/infiniteLoadTrigger';
-import { Link } from '@verdant-web/react-router';
-import {
+	CardGrid,
+	CardMain,
+	CardRoot,
+	CardTitle,
 	DropdownMenu,
 	DropdownMenuArrow,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuItemRightSlot,
 	DropdownMenuTrigger,
-} from '@a-type/ui/components/dropdownMenu';
-import { Button } from '@a-type/ui/components/button';
-import { Icon } from '@a-type/ui/components/icon';
-import { useEditList } from './hooks.js';
-import { toast } from '@a-type/ui';
+	Icon,
+	InfiniteLoadTrigger,
+	toast,
+} from '@a-type/ui';
+import { Link } from '@verdant-web/react-router';
+import { List } from '@wish-wash.biscuits/verdant';
 import { FirstList } from '../onboarding/FirstList.jsx';
+import { useEditList } from './hooks.js';
 
 export interface ListsListProps {}
 

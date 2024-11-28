@@ -1,12 +1,9 @@
-import { useEffect } from 'react';
 import { checkForUpdate } from '@/updateState.js';
-import { H1 } from '@a-type/ui/components/typography';
+import { Button, H1, Icon, PageContent, PageFixedArea } from '@a-type/ui';
 import { DarkModeToggle, usePageTitle } from '@biscuits/client';
-import { PageContent, PageFixedArea } from '@a-type/ui/components/layouts';
 import { ManageStorage } from '@biscuits/client/storage';
-import { Button } from '@a-type/ui/components/button';
-import { Icon } from '@a-type/ui/components/icon';
 import { AutoRestoreScroll, Link } from '@verdant-web/react-router';
+import { useEffect } from 'react';
 
 export interface SettingsPageProps {}
 

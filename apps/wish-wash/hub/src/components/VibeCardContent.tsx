@@ -1,9 +1,7 @@
 import { HubWishlistItem } from '@/types.js';
-import { Card } from '@a-type/ui/components/card';
-import { ItemCardTitle } from './ItemCardTitle.jsx';
-import { Dialog } from '@a-type/ui/components/dialog';
-import { P } from '@a-type/ui/components/typography';
+import { Card, Dialog, P } from '@a-type/ui';
 import { FC, ReactNode } from 'react';
+import { ItemCardTitle } from './ItemCardTitle.jsx';
 
 export interface VibeCardContentProps {
 	item: HubWishlistItem;

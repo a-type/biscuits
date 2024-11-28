@@ -2,25 +2,25 @@ import { ReactNode } from 'react';
 import { useHasServerAccess } from '../hooks/graphql.js';
 
 export interface GateProps {
-  children?: ReactNode;
+	children?: ReactNode;
 }
 
 export function SubscribedOnly({ children }: GateProps) {
-  const isSubscribed = useHasServerAccess();
+	const isSubscribed = useHasServerAccess();
 
-  if (!isSubscribed) {
-    return null;
-  }
+	if (!isSubscribed) {
+		return null;
+	}
 
-  return <>{children}</>;
+	return <>{children}</>;
 }
 
 export function UnsubscribedOnly({ children }: GateProps) {
-  const isSubscribed = useHasServerAccess();
+	const isSubscribed = useHasServerAccess();
 
-  if (isSubscribed) {
-    return null;
-  }
+	if (isSubscribed) {
+		return null;
+	}
 
-  return <>{children}</>;
+	return <>{children}</>;
 }

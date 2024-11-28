@@ -1,14 +1,14 @@
 import {
+	Button,
 	Dialog,
 	DialogActions,
 	DialogContent,
 	DialogTitle,
-} from '@a-type/ui/components/dialog';
-import { Button } from '@a-type/ui/components/button';
-import { TOS_UPDATED_AT } from '../tos.js';
+} from '@a-type/ui';
 import { graphql, useMutation } from '@biscuits/graphql';
 import * as CONFIG from '../config.js';
 import { useMe } from '../hooks/graphql.js';
+import { TOS_UPDATED_AT } from '../tos.js';
 
 const acceptTosMutation = graphql(`
 	mutation AcceptTos {

@@ -1,6 +1,5 @@
 import { useSearch } from '@/components/pantry/hooks.js';
-import { Button } from '@a-type/ui/components/button';
-import { LiveUpdateTextField } from '@a-type/ui/components/liveUpdateTextField';
+import { Button, LiveUpdateTextField } from '@a-type/ui';
 import { Cross2Icon } from '@radix-ui/react-icons';
 
 export function PantrySearch() {

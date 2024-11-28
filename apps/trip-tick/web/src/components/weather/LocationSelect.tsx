@@ -1,21 +1,21 @@
 import { hooks } from '@/store.js';
-import { Input } from '@a-type/ui/components/input/Input';
 import {
+	Button,
+	Icon,
+	Input,
 	Popover,
 	PopoverAnchor,
 	PopoverContent,
-} from '@a-type/ui/components/popover';
-import { useHasServerAccess, useDebounced } from '@biscuits/client';
+	toast,
+	useSize,
+} from '@a-type/ui';
+import { preventDefault } from '@a-type/utils';
+import { useDebounced, useHasServerAccess } from '@biscuits/client';
 import { graphql, useClient, useQuery } from '@biscuits/graphql';
 import { TripLocation, TripLocationInit } from '@trip-tick.biscuits/verdant';
 import classNames from 'classnames';
 import { useCombobox } from 'downshift';
-import { preventDefault } from '@a-type/utils';
 import { useCallback, useRef, useState, useTransition } from 'react';
-import { useSize } from '@a-type/ui/hooks';
-import { toast } from '@a-type/ui';
-import { Button } from '@a-type/ui/components/button';
-import { Icon } from '@a-type/ui/components/icon';
 
 export interface LocationSelectProps {
 	className?: string;

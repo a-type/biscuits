@@ -1,12 +1,12 @@
-import { clsx } from '@a-type/ui';
-import { Button } from '@a-type/ui/components/button';
 import {
+	Button,
+	clsx,
 	FormikForm,
+	H2,
+	Icon,
 	SubmitButton,
 	TextField,
-} from '@a-type/ui/components/forms';
-import { Icon } from '@a-type/ui/components/icon';
-import { H2 } from '@a-type/ui/components/typography';
+} from '@a-type/ui';
 import {
 	FragmentOf,
 	graphql,

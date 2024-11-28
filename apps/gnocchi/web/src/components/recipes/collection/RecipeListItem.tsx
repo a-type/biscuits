@@ -3,9 +3,8 @@ import { RecipeEditTags } from '@/components/recipes/editor/RecipeAddTag.jsx';
 import { makeRecipeLink } from '@/components/recipes/makeRecipeLink.js';
 import { AddToListButton } from '@/components/recipes/viewer/AddToListButton.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { Recipe } from '@gnocchi.biscuits/verdant';
-import { Button } from '@a-type/ui/components/button';
 import {
+	Button,
 	CardActions,
 	CardFooter,
 	CardImage,
@@ -13,25 +12,24 @@ import {
 	CardMenu,
 	CardRoot,
 	CardTitle,
-} from '@a-type/ui/components/card';
-import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuItemRightSlot,
 	DropdownMenuTrigger,
-} from '@a-type/ui/components/dropdownMenu';
-import { Suspense, useState, memo } from 'react';
-import { RecipeMainImageViewer } from '../viewer/RecipeMainImageViewer.jsx';
-import { RecipeTagsViewer } from '../viewer/RecipeTagsViewer.jsx';
-import { Icon } from '@a-type/ui/components/icon';
-import addWeeks from 'date-fns/addWeeks';
-import { useGridStyle } from './hooks.js';
-import classNames from 'classnames';
+	Icon,
+} from '@a-type/ui';
+import { Recipe } from '@gnocchi.biscuits/verdant';
 import { DrawingPinFilledIcon } from '@radix-ui/react-icons';
 import { useNavigate } from '@verdant-web/react-router';
+import classNames from 'classnames';
 import cuid from 'cuid';
+import addWeeks from 'date-fns/addWeeks';
+import { memo, Suspense, useState } from 'react';
+import { RecipeMainImageViewer } from '../viewer/RecipeMainImageViewer.jsx';
 import { RecipePinToggle } from '../viewer/RecipePinToggle.jsx';
+import { RecipeTagsViewer } from '../viewer/RecipeTagsViewer.jsx';
+import { useGridStyle } from './hooks.js';
 
 const THREE_WEEKS_AGO = addWeeks(Date.now(), -3).getTime();
 

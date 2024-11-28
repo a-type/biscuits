@@ -1,10 +1,7 @@
-import { OnboardingQuestion, onboardingQuestions } from './questions.js';
-import { useEffect, useRef, useState } from 'react';
-import { Button } from '@a-type/ui/components/button';
-import { clsx } from '@a-type/ui';
-import { H1, H2, P } from '@a-type/ui/components/typography';
-import { TextArea } from '@a-type/ui/components/textArea';
+import { Button, clsx, H1, H2, P, TextArea } from '@a-type/ui';
 import { Progress } from '@a-type/ui/components/progress';
+import { useEffect, useRef, useState } from 'react';
+import { OnboardingQuestion, onboardingQuestions } from './questions.js';
 
 export interface WishlistOnboardingProps {
 	answeredQuestions?: string[];

@@ -1,15 +1,14 @@
-import { Suspense, useEffect, useRef, useState } from 'react';
+import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
+import { animated, useSpring } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
-import { useSpring, animated } from '@react-spring/web';
 import {
-	RouteTree,
 	Outlet,
+	RouteTree,
 	useNavigate,
 	useNextMatchingRoute,
-	RestoreScroll,
 } from '@verdant-web/react-router';
 import classNames from 'classnames';
-import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
+import { Suspense, useEffect, useRef, useState } from 'react';
 
 export function SwipeOutlet({
 	preload,

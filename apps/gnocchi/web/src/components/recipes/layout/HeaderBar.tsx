@@ -1,8 +1,8 @@
 import { LinkButton } from '@/components/nav/Link.jsx';
-import { PageFixedArea } from '@a-type/ui/components/layouts';
+import { PageFixedArea } from '@a-type/ui';
 import { ArrowLeftIcon } from '@radix-ui/react-icons';
-import { ReactNode } from 'react';
 import classNames from 'classnames';
+import { ReactNode } from 'react';
 
 export interface HeaderBarProps {
 	children?: ReactNode;

@@ -9,7 +9,7 @@
 		"preview": "vite preview"
 	},
 	"dependencies": {
-		"@a-type/ui": "1.1.26",
+		"@a-type/ui": "1.1.29",
 		"@a-type/utils": "1.1.0",
 		"@biscuits/client": "workspace:*",
 		"@biscuits/graphql": "workspace:*",

@@ -1,11 +1,11 @@
-import { PageContent, PageNowPlaying } from '@a-type/ui/components/layouts';
+import { Icon } from '@/components/icons/Icon.jsx';
+import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
+import { RecipeCreateButton } from '@/components/recipes/collection/RecipeCreateButton.jsx';
 import { RecipeList } from '@/components/recipes/collection/RecipeList.jsx';
-import { Suspense } from 'react';
 import { RecipesNowPlaying } from '@/components/recipes/nowPlaying/RecipesNowPlaying.jsx';
 import { usePageTitle } from '@/hooks/usePageTitle.jsx';
-import { RecipeCreateButton } from '@/components/recipes/collection/RecipeCreateButton.jsx';
-import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
-import { Icon } from '@/components/icons/Icon.jsx';
+import { PageContent, PageNowPlaying } from '@a-type/ui';
+import { Suspense } from 'react';
 
 export interface RecipesPageProps {}
 

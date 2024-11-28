@@ -7,14 +7,14 @@ import { ListContext } from '@/contexts/ListContext.jsx';
 import { usePageTitle } from '@/hooks/usePageTitle.jsx';
 import { firstTimeOnboarding } from '@/onboarding/firstTimeOnboarding.js';
 import {
-	MainActions,
 	List,
 	ListSelectWrapper,
+	MainActions,
 	ThemedPageContent,
 	TopControls,
 	UnknownListRedirect,
 } from '@/pages/groceries/layout.jsx';
-import { PageNowPlaying } from '@a-type/ui/components/layouts';
+import { PageNowPlaying } from '@a-type/ui';
 import { ChangelogDisplay, InstallButton, UserMenu } from '@biscuits/client';
 import { useNavigate, useParams } from '@verdant-web/react-router';
 import { Suspense, useCallback, useEffect } from 'react';

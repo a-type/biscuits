@@ -1,12 +1,12 @@
-import { Button } from '@a-type/ui/components/button';
-import { Checkbox } from '@a-type/ui/components/checkbox';
 import {
+	Button,
+	Checkbox,
 	Dialog,
-	DialogContent,
 	DialogActions,
-	DialogTitle,
 	DialogClose,
-} from '@a-type/ui/components/dialog';
+	DialogContent,
+	DialogTitle,
+} from '@a-type/ui';
 import { featureFlags } from '@biscuits/client';
 import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
 import { useSearchParams } from '@verdant-web/react-router';

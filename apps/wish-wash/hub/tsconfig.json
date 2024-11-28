@@ -12,5 +12,5 @@
 		"types": ["vite/client"],
 		"customConditions": ["development"]
 	},
-	"include": ["src", "../web/src/components/items/ItemTypeChip.tsx"]
+	"include": ["src"]
 }

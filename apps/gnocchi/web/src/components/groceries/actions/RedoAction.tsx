@@ -1,5 +1,5 @@
-import { ActionButton } from '@a-type/ui/components/actions';
 import { hooks } from '@/stores/groceries/index.js';
+import { ActionButton } from '@a-type/ui';
 import { ResetIcon } from '@radix-ui/react-icons';
 
 export function RedoAction({ showName }: { showName?: boolean }) {

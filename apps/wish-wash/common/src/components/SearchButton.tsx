@@ -1,14 +1,14 @@
-import { Button } from '@a-type/ui/components/button';
-import { Icon } from '@a-type/ui/components/icon';
 import {
+	Button,
+	clsx,
+	Icon,
 	Select,
+	SelectContent,
+	SelectIcon,
 	SelectItem,
 	SelectTrigger,
-	SelectContent,
 	SelectValue,
-	SelectIcon,
-} from '@a-type/ui/components/select';
-import { clsx } from '@a-type/ui';
+} from '@a-type/ui';
 import { useState } from 'react';
 
 export interface SearchButtonProps {

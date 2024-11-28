@@ -1,15 +1,12 @@
 import { ListDetailsDialog } from '@/components/lists/ListDetailsDialog.jsx';
+import { ShareTargetListPicker } from '@/components/shareTarget/ShareTargetListPicker.jsx';
 import { updateApp, updateState } from '@/updateState.js';
-import { Button } from '@a-type/ui/components/button';
-import { ErrorBoundary } from '@a-type/ui/components/errorBoundary';
-import { Spinner } from '@a-type/ui/components/spinner';
-import { H1, P } from '@a-type/ui/components/typography';
+import { Button, ErrorBoundary, H1, P, Spinner } from '@a-type/ui';
 import { ReloadButton } from '@biscuits/client';
 import { Link, makeRoutes, Outlet, Router } from '@verdant-web/react-router';
 import { lazy, Suspense, useCallback } from 'react';
 import { HomePage } from './HomePage.jsx';
 import ListPage from './ListPage.jsx';
-import { ShareTargetListPicker } from '@/components/shareTarget/ShareTargetListPicker.jsx';
 
 const routes = makeRoutes([
 	{

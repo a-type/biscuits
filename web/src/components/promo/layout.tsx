@@ -1,12 +1,8 @@
-import { withClassName } from '@a-type/ui/hooks';
-import { clsx } from '@a-type/ui';
-import PhoneDemo from './PhoneDemo.jsx';
-import { CSSProperties, forwardRef, ReactNode } from 'react';
-import { H2 } from '@a-type/ui/components/typography';
-import { Link } from '@verdant-web/react-router';
-import { Button } from '@a-type/ui/components/button';
+import { Button, clsx, H2, Icon, withClassName } from '@a-type/ui';
 import { AppId, appsById } from '@biscuits/apps';
-import { Icon } from '@a-type/ui/components/icon';
+import { Link } from '@verdant-web/react-router';
+import { CSSProperties, forwardRef, ReactNode } from 'react';
+import PhoneDemo from './PhoneDemo.jsx';
 
 export const DemoGrid = withClassName(
 	'div',
