@@ -1,5 +1,4 @@
-import { ThemeName } from '@a-type/ui/components/colorPicker';
-import { IconName } from '@a-type/ui/components/icon';
+import { IconName, ThemeName } from '@a-type/ui';
 
 type ItemType = 'idea' | 'link' | 'vibe';
 

@@ -60,7 +60,7 @@ export function ExportDataButton({
 	);
 }
 
-export function importDataButton({
+export function ImportDataButton({
 	children,
 	onError,
 	...props
@@ -153,7 +153,7 @@ export function ManageStorage({
 			</P>
 			<div className="flex flex-row gap-2 flex-wrap">
 				<ExportDataButton onError={onError} />
-				<importDataButton onError={onError} />
+				<ImportDataButton onError={onError} />
 				<ConfirmedButton
 					color="destructive"
 					confirmText="This will delete your data. It cannot be undone."

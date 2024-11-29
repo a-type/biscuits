@@ -10,8 +10,8 @@
 		"generate": "cd ../verdant && pnpm generate"
 	},
 	"dependencies": {
-		"@a-type/ui": "1.0.10",
-		"@a-type/utils": "1.1.3",
+		"@a-type/ui": "1.2.0",
+		"@a-type/utils": "1.1.4",
 		"@{{todoId}}.biscuits/verdant": "workspace:*",
 		"@biscuits/client": "workspace:*",
 		"@biscuits/graphql": "workspace:*",

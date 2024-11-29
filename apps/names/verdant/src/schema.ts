@@ -42,6 +42,14 @@ const people = schema.collection({
 		photo: schema.fields.file({
 			nullable: true,
 		}),
+		relationships: schema.fields.array({
+			items: schema.fields.object({
+				properties: {
+					personId: schema.fields.string(),
+					type: schema.fields.string(),
+				},
+			}),
+		}),
 	},
 	indexes: {
 		createdAt: {
@@ -50,7 +58,18 @@ const people = schema.collection({
 		matchText: {
 			type: 'string[]',
 			compute: (person) =>
-				person.name.split(/s/).concat(person.note?.split(/s/) ?? []),
+				person.name
+					.toLowerCase()
+					.split(/s/)
+					.concat(person.note?.toLowerCase().split(/\s+/) ?? []),
+		},
+		matchName: {
+			type: 'string[]',
+			compute: (person) => person.name.toLowerCase().split(/\s+/),
+		},
+		matchNote: {
+			type: 'string[]',
+			compute: (person) => person.note?.toLowerCase().split(/\s+/) ?? [],
 		},
 		latitude: {
 			type: 'number',

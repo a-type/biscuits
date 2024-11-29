@@ -143,6 +143,18 @@ export const apps = [
 		url: 'https://palette.biscuits.club',
 		prerelease: false,
 	},
+	{
+		id: 'names',
+		name: 'Names',
+		iconPath: 'icon.png',
+		description: 'TODO',
+		url: 'https://names.biscuits.club',
+		devOriginOverride: 'http://localhost:6227',
+		demoVideoSrc: '',
+		paidDescription: 'TODO',
+		paidFeatures: [],
+		prerelease: true,
+	},
 ] as const;
 
 export type AppId = (typeof apps)[number]['id'];

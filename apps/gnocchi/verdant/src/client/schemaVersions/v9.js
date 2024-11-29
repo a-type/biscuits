@@ -1,9 +1,9 @@
 /** @generated - do not modify this file. */
 
 // src/client/schemaVersions/v9.js
-import { collection, schema } from '@verdant-web/store';
+import { schema } from '@verdant-web/store';
 import cuid from 'cuid';
-var categories = collection({
+var categories = schema.collection({
 	name: 'category',
 	pluralName: 'categories',
 	primaryKey: 'id',
@@ -31,7 +31,7 @@ var categories = collection({
 		},
 	},
 });
-var foodCategoryAssignments = collection({
+var foodCategoryAssignments = schema.collection({
 	name: 'foodCategoryAssignment',
 	primaryKey: 'id',
 	fields: {
@@ -52,7 +52,7 @@ var foodCategoryAssignments = collection({
 		},
 	},
 });
-var items = collection({
+var items = schema.collection({
 	name: 'item',
 	primaryKey: 'id',
 	fields: {
@@ -136,7 +136,7 @@ var items = collection({
 		},
 	},
 });
-var suggestions = collection({
+var suggestions = schema.collection({
 	name: 'suggestion',
 	primaryKey: 'text',
 	fields: {

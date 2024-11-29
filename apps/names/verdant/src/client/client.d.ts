@@ -112,6 +112,18 @@ export type PersonGeolocationLatitude = number;
 export type PersonGeolocationLongitude = number;
 export type PersonNote = string;
 export type PersonPhoto = string | null;
+export type PersonRelationships = ListEntity<
+  PersonRelationshipsInit,
+  PersonRelationshipsDestructured,
+  PersonRelationshipsSnapshot
+>;
+export type PersonRelationshipsItem = ObjectEntity<
+  PersonRelationshipsItemInit,
+  PersonRelationshipsItemDestructured,
+  PersonRelationshipsItemSnapshot
+>;
+export type PersonRelationshipsItemPersonId = string;
+export type PersonRelationshipsItemType = string;
 export type PersonInit = {
   id?: string;
   createdAt?: number;
@@ -119,12 +131,15 @@ export type PersonInit = {
   geolocation?: PersonGeolocationInit;
   note?: string | null;
   photo?: File | null;
+  relationships?: PersonRelationshipsInit;
 };
 
 export type PersonGeolocationInit = {
   latitude: number;
   longitude: number;
 } | null;
+export type PersonRelationshipsItemInit = { personId: string; type: string };
+export type PersonRelationshipsInit = PersonRelationshipsItemInit[];
 export type PersonDestructured = {
   id: string;
   createdAt: number;
@@ -132,12 +147,18 @@ export type PersonDestructured = {
   geolocation: PersonGeolocation;
   note: string | null;
   photo: EntityFile | null;
+  relationships: PersonRelationships;
 };
 
 export type PersonGeolocationDestructured = {
   latitude: number;
   longitude: number;
 };
+export type PersonRelationshipsItemDestructured = {
+  personId: string;
+  type: string;
+};
+export type PersonRelationshipsDestructured = PersonRelationshipsItem[];
 export type PersonSnapshot = {
   id: string;
   createdAt: number;
@@ -145,12 +166,18 @@ export type PersonSnapshot = {
   geolocation: PersonGeolocationSnapshot;
   note: string | null;
   photo: EntityFileSnapshot | null;
+  relationships: PersonRelationshipsSnapshot;
 };
 
 export type PersonGeolocationSnapshot = {
   latitude: number;
   longitude: number;
 } | null;
+export type PersonRelationshipsItemSnapshot = {
+  personId: string;
+  type: string;
+};
+export type PersonRelationshipsSnapshot = PersonRelationshipsItemSnapshot[];
 
 /** Index filters for Person **/
 
@@ -190,6 +217,50 @@ export interface PersonMatchTextRangeFilter {
 }
 export interface PersonMatchTextStartsWithFilter {
   where: "matchText";
+  startsWith: string;
+  order?: "asc" | "desc";
+}
+export interface PersonMatchNameSortFilter {
+  where: "matchName";
+  order: "asc" | "desc";
+}
+export interface PersonMatchNameMatchFilter {
+  where: "matchName";
+  equals: string;
+  order?: "asc" | "desc";
+}
+export interface PersonMatchNameRangeFilter {
+  where: "matchName";
+  gte?: string;
+  gt?: string;
+  lte?: string;
+  lt?: string;
+  order?: "asc" | "desc";
+}
+export interface PersonMatchNameStartsWithFilter {
+  where: "matchName";
+  startsWith: string;
+  order?: "asc" | "desc";
+}
+export interface PersonMatchNoteSortFilter {
+  where: "matchNote";
+  order: "asc" | "desc";
+}
+export interface PersonMatchNoteMatchFilter {
+  where: "matchNote";
+  equals: string;
+  order?: "asc" | "desc";
+}
+export interface PersonMatchNoteRangeFilter {
+  where: "matchNote";
+  gte?: string;
+  gt?: string;
+  lte?: string;
+  lt?: string;
+  order?: "asc" | "desc";
+}
+export interface PersonMatchNoteStartsWithFilter {
+  where: "matchNote";
   startsWith: string;
   order?: "asc" | "desc";
 }
@@ -235,6 +306,14 @@ export type PersonFilter =
   | PersonMatchTextMatchFilter
   | PersonMatchTextRangeFilter
   | PersonMatchTextStartsWithFilter
+  | PersonMatchNameSortFilter
+  | PersonMatchNameMatchFilter
+  | PersonMatchNameRangeFilter
+  | PersonMatchNameStartsWithFilter
+  | PersonMatchNoteSortFilter
+  | PersonMatchNoteMatchFilter
+  | PersonMatchNoteRangeFilter
+  | PersonMatchNoteStartsWithFilter
   | PersonLatitudeSortFilter
   | PersonLatitudeMatchFilter
   | PersonLatitudeRangeFilter

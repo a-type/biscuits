@@ -81,16 +81,16 @@ async function readEntries(file: File): Promise<PaprikaRecipe[]> {
 	return json;
 }
 
-export interface PaprikaimporterProps {
+export interface PaprikaImporterProps {
 	className?: string;
 	children?: ReactNode;
 	onClose?: () => void;
 }
 
-export const Paprikaimporter = forwardRef<
+export const PaprikaImporter = forwardRef<
 	HTMLLabelElement,
-	PaprikaimporterProps
->(function Paprikaimporter({ className, children, onClose, ...rest }, ref) {
+	PaprikaImporterProps
+>(function PaprikaImporter({ className, children, onClose, ...rest }, ref) {
 	const [data, setData] = useState<PaprikaRecipe[]>([]);
 	const [selected, setSelected] = useState<Record<string, boolean>>({});
 	const [loading, setLoading] = useState(false);
@@ -226,7 +226,7 @@ export const Paprikaimporter = forwardRef<
 	);
 });
 
-export default Paprikaimporter;
+export default PaprikaImporter;
 
 function RecipeItem({
 	recipe,

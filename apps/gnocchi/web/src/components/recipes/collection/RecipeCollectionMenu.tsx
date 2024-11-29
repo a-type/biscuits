@@ -1,4 +1,4 @@
-import Paprikaimporter from '@/components/import/Paprikaimporter.jsx';
+import PaprikaImporter from '@/components/import/PaprikaImporter.jsx';
 import { TagManager } from '@/components/recipes/tags/TagManager.jsx';
 import {
 	Button,
@@ -33,9 +33,9 @@ export function RecipeCollectionMenu({ className }: RecipeCollectionMenuProps) {
 						}}
 						asChild
 					>
-						<Paprikaimporter onClose={onSubmenuClose}>
+						<PaprikaImporter onClose={onSubmenuClose}>
 							import from Paprika 3
-						</Paprikaimporter>
+						</PaprikaImporter>
 					</DropdownMenuItem>
 				</Suspense>
 				<Suspense>

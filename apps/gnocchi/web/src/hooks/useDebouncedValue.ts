@@ -1,4 +1,4 @@
-import { useStableCallback } from '@a-type/ui/hooks';
+import { useStableCallback } from '@a-type/ui';
 import { useEffect, useState } from 'react';
 
 export function useDebouncedValue<T>(
