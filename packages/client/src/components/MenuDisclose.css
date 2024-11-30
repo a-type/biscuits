@@ -1,0 +1,124 @@
+.menu-disclose-root {
+	--content-border-offset: 3px;
+	--trigger-size: 48px;
+	--clip-center: calc(var(--trigger-size) / 2 - 6px);
+	--content-scale-compensate: 1.5;
+	--content-initial-y-offset: -4px;
+
+	--clip-initial: inset(
+		calc(100% - 38px) var(--content-border-offset) var(--content-border-offset)
+			calc(100% - 38px) round 200px
+	);
+	--clip-intermediate: inset(
+		calc(100% - 36px) var(--content-border-offset) var(--content-border-offset)
+			calc(100% - 36px) round 32px
+	);
+	--clip-final: inset(0px 0px 0px 0px round 0%);
+}
+
+@keyframes menuReveal {
+	0% {
+		clip-path: var(--clip-initial);
+		transform: translate(
+				calc(-50% + var(--clip-center)),
+				var(--content-initial-y-offset)
+			)
+			scale(var(--content-scale-compensate));
+	}
+	20% {
+		clip-path: var(--clip-intermediate);
+		transform: translate(
+				calc(-50% + var(--clip-center)),
+				var(--content-initial-y-offset)
+			)
+			scale(var(--content-scale-compensate));
+	}
+	50% {
+		transform: translateX(0);
+	}
+	100% {
+		clip-path: var(--clip-final);
+		transform: translateX(0);
+	}
+}
+
+@keyframes menuHide {
+	0% {
+		clip-path: var(--clip-final);
+		transform: translateX(0);
+		opacity: 1;
+		width: auto;
+		height: auto;
+	}
+	80% {
+		transform: translate(
+				calc(-50% + var(--clip-center)),
+				var(--content-initial-y-offset)
+			)
+			scale(var(--content-scale-compensate));
+	}
+	90% {
+		clip-path: var(--clip-intermediate);
+		transform: translate(
+				calc(-50% + var(--clip-center)),
+				var(--content-initial-y-offset)
+			)
+			scale(var(--content-scale-compensate));
+	}
+	99% {
+		opacity: 1;
+	}
+	100% {
+		clip-path: var(--clip-initial);
+		transform: translate(
+				calc(-50% + var(--clip-center)),
+				var(--content-initial-y-offset)
+			)
+			scale(var(--content-scale-compensate));
+		opacity: 0;
+		width: auto;
+		height: auto;
+	}
+}
+
+.menu-disclose-content {
+	transform-origin: calc(100% - var(--clip-center))
+		calc(100% - var(--clip-center));
+}
+
+.menu-disclose-content-visible {
+	animation: menuReveal 0.2s ease-out;
+	opacity: 100%;
+}
+.menu-disclose-content-hidden {
+	clip-path: var(--clip-initial);
+	transform: translate(
+			calc(-50% + var(--clip-center)),
+			var(--content-initial-y-offset)
+		)
+		scale(var(--content-scale-compensate));
+
+	width: 0;
+	height: 0;
+	pointer-events: none;
+	opacity: 0;
+
+	animation: menuHide 0.2s ease-out;
+}
+
+.menu-disclose-trigger {
+	width: var(--trigger-size);
+	height: var(--trigger-size);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.menu-disclose-trigger-hidden {
+	pointer-events: none;
+	opacity: 0;
+}
+
+.disable-animation {
+	animation: none !important;
+}
