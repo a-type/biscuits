@@ -1,4 +1,5 @@
 import { AddPane } from '@/components/addBar/AddPane.jsx';
+import { useKeepOpenAfterSelect } from '@/components/addBar/hooks.js';
 import { Icon } from '@/components/icons/Icon.jsx';
 import { useListId } from '@/contexts/ListContext.jsx';
 import { hooks } from '@/stores/groceries/index.js';
@@ -17,14 +18,17 @@ export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
 	const addItems = hooks.useAddItems();
 	const [open, setOpen] = useState(false);
 
+	const [keepOpenOnSelect] = useKeepOpenAfterSelect();
 	const onAdd = useCallback(
 		async (items: string[]) => {
 			await addItems(items, {
 				listId,
 			});
-			setOpen(false);
+			if (!keepOpenOnSelect) {
+				setOpen(false);
+			}
 		},
-		[listId, addItems],
+		[listId, addItems, keepOpenOnSelect],
 	);
 
 	const ref = useOnPointerDownOutside(() => {
@@ -58,6 +62,7 @@ export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
 						: 'add-bar-hidden pointer-events-none',
 					disableAnimation && 'disable-animation',
 				)}
+				onOpenChange={setOpen}
 				disabled={!open}
 				{...rest}
 			/>

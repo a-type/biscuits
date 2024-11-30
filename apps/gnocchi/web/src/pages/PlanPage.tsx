@@ -1,3 +1,4 @@
+import { useKeepOpenAfterSelect } from '@/components/addBar/hooks.js';
 import { Icon } from '@/components/icons/Icon.jsx';
 import { BugButton } from '@/components/menu/BugButton.jsx';
 import { ManageCategoriesDialog } from '@/components/menu/ManageCategoriesDialog.jsx';
@@ -7,7 +8,15 @@ import { ReloadButton } from '@/components/sync/ReloadButton.jsx';
 import { UpdatePrompt } from '@/components/updatePrompt/UpdatePrompt.jsx';
 import { checkForUpdate } from '@/components/updatePrompt/updateState.js';
 import { useInterval } from '@/hooks/useInterval.js';
-import { Button, Divider, H1, H2, PageContent, toast } from '@a-type/ui';
+import {
+	Button,
+	Divider,
+	H1,
+	H2,
+	PageContent,
+	Switch,
+	toast,
+} from '@a-type/ui';
 import {
 	ChangelogDisplay,
 	DarkModeToggle,
@@ -83,6 +92,7 @@ function ManageSection() {
 	return (
 		<>
 			<ManageCategories />
+			<ManageSettings />
 			{/* <ManageFoodsButton /> */}
 			<ManageStorage onError={(err) => toast.error(err.message)} />
 		</>
@@ -178,6 +188,22 @@ function ManageCategories() {
 				<Button>Manage categories</Button>
 			</ManageCategoriesDialog>
 			<span className="text-xs">Add, remove, and rearrange categories</span>
+		</div>
+	);
+}
+
+function ManageSettings() {
+	const [addBarKeepOpen, setAddBarKeepOpen] = useKeepOpenAfterSelect();
+	return (
+		<div className="row">
+			<Switch
+				id="addbar-keepopen"
+				checked={addBarKeepOpen}
+				onCheckedChange={setAddBarKeepOpen}
+			/>
+			<label htmlFor="addbar-keepopen" className="text-sm">
+				Keep add bar open after adding items
+			</label>
 		</div>
 	);
 }
