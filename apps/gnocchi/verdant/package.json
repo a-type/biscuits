@@ -28,7 +28,7 @@
 		"@verdant-web/cli": "4.7.1-alpha.0",
 		"@verdant-web/common": "2.6.0",
 		"@verdant-web/react": "39.0.0",
-		"@verdant-web/store": "4.1.0-alpha.5",
+		"@verdant-web/store": "4.1.0-alpha.9",
 		"cuid": "^2.1.8",
 		"stopword": "^2.0.8"
 	},
