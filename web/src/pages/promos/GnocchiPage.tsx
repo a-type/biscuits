@@ -142,7 +142,7 @@ export function GnocchiPage() {
 					items={[
 						{
 							emoji: '🖨️',
-							text: 'Scan a recipe page directly to the app to add all the ingredients to your list.',
+							text: 'Scan unlimited web recipes directly to the app to add all the ingredients to your list.',
 						},
 						{
 							emoji: '🧑🏻‍🍳',

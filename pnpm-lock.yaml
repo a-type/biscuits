@@ -166,10 +166,10 @@ importers:
         version: 2.6.0
       '@verdant-web/react':
         specifier: 39.0.0
-        version: 39.0.0(@verdant-web/store@4.1.0-alpha.1)(react@18.3.1)
+        version: 39.0.0(@verdant-web/store@4.1.0-alpha.5)(react@18.3.1)
       '@verdant-web/store':
-        specifier: 4.1.0-alpha.1
-        version: 4.1.0-alpha.1
+        specifier: 4.1.0-alpha.5
+        version: 4.1.0-alpha.5
       cuid:
         specifier: ^2.1.8
         version: 2.1.8
@@ -268,8 +268,8 @@ importers:
         specifier: 0.6.5
         version: 0.6.5(react@18.3.1)
       '@verdant-web/store':
-        specifier: 4.1.0-alpha.1
-        version: 4.1.0-alpha.1
+        specifier: 4.1.0-alpha.5
+        version: 4.1.0-alpha.5
       '@zip.js/zip.js':
         specifier: ^2.7.6
         version: 2.7.37
@@ -453,10 +453,10 @@ importers:
         version: 2.6.0
       '@verdant-web/react':
         specifier: 39.0.0
-        version: 39.0.0(@verdant-web/store@4.1.0-alpha.1)(react@18.3.1)
+        version: 39.0.0(@verdant-web/store@4.1.0-alpha.5)(react@18.3.1)
       '@verdant-web/store':
-        specifier: 4.1.0-alpha.1
-        version: 4.1.0-alpha.1
+        specifier: 4.1.0-alpha.5
+        version: 4.1.0-alpha.5
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -556,10 +556,10 @@ importers:
         version: 2.6.0
       '@verdant-web/react':
         specifier: 39.0.0
-        version: 39.0.0(@verdant-web/store@4.1.0-alpha.1)(react@18.3.1)
+        version: 39.0.0(@verdant-web/store@4.1.0-alpha.5)(react@18.3.1)
       '@verdant-web/store':
-        specifier: 4.1.0-alpha.1
-        version: 4.1.0-alpha.1
+        specifier: 4.1.0-alpha.5
+        version: 4.1.0-alpha.5
       cuid:
         specifier: ^2.1.8
         version: 2.1.8
@@ -665,10 +665,10 @@ importers:
         version: 2.6.0
       '@verdant-web/react':
         specifier: 39.0.0
-        version: 39.0.0(@verdant-web/store@4.1.0-alpha.1)(react@18.3.1)
+        version: 39.0.0(@verdant-web/store@4.1.0-alpha.5)(react@18.3.1)
       '@verdant-web/store':
-        specifier: 4.1.0-alpha.1
-        version: 4.1.0-alpha.1
+        specifier: 4.1.0-alpha.5
+        version: 4.1.0-alpha.5
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -768,10 +768,10 @@ importers:
         version: 2.6.0
       '@verdant-web/react':
         specifier: 39.0.0
-        version: 39.0.0(@verdant-web/store@4.1.0-alpha.1)(react@18.3.1)
+        version: 39.0.0(@verdant-web/store@4.1.0-alpha.5)(react@18.3.1)
       '@verdant-web/store':
-        specifier: 4.1.0-alpha.1
-        version: 4.1.0-alpha.1
+        specifier: 4.1.0-alpha.5
+        version: 4.1.0-alpha.5
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -886,10 +886,10 @@ importers:
         version: 2.6.0
       '@verdant-web/react':
         specifier: 39.0.0
-        version: 39.0.0(@verdant-web/store@4.1.0-alpha.1)(react@18.3.1)
+        version: 39.0.0(@verdant-web/store@4.1.0-alpha.5)(react@18.3.1)
       '@verdant-web/store':
-        specifier: 4.1.0-alpha.1
-        version: 4.1.0-alpha.1
+        specifier: 4.1.0-alpha.5
+        version: 4.1.0-alpha.5
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -1001,10 +1001,10 @@ importers:
         version: 2.6.0
       '@verdant-web/react':
         specifier: 39.0.0
-        version: 39.0.0(@verdant-web/store@4.1.0-alpha.1)(react@18.3.1)
+        version: 39.0.0(@verdant-web/store@4.1.0-alpha.5)(react@18.3.1)
       '@verdant-web/store':
-        specifier: 4.1.0-alpha.1
-        version: 4.1.0-alpha.1
+        specifier: 4.1.0-alpha.5
+        version: 4.1.0-alpha.5
       cuid:
         specifier: ^2.1.8
         version: 2.1.8
@@ -1046,13 +1046,13 @@ importers:
         version: 0.54.3
       '@verdant-web/react':
         specifier: 39.0.0
-        version: 39.0.0(@verdant-web/store@4.1.0-alpha.1)(react@18.3.1)
+        version: 39.0.0(@verdant-web/store@4.1.0-alpha.5)(react@18.3.1)
       '@verdant-web/react-router':
         specifier: 0.6.5
         version: 0.6.5(react@18.3.1)
       '@verdant-web/store':
-        specifier: 4.1.0-alpha.1
-        version: 4.1.0-alpha.1
+        specifier: 4.1.0-alpha.5
+        version: 4.1.0-alpha.5
       classnames:
         specifier: ^2.3.2
         version: 2.3.2
@@ -1235,10 +1235,10 @@ importers:
         version: 2.6.0
       '@verdant-web/react':
         specifier: 39.0.0
-        version: 39.0.0(@verdant-web/store@4.1.0-alpha.1)(react@18.3.1)
+        version: 39.0.0(@verdant-web/store@4.1.0-alpha.5)(react@18.3.1)
       '@verdant-web/store':
-        specifier: 4.1.0-alpha.1
-        version: 4.1.0-alpha.1
+        specifier: 4.1.0-alpha.5
+        version: 4.1.0-alpha.5
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -1479,8 +1479,8 @@ importers:
         specifier: 0.6.5
         version: 0.6.5(react@18.3.1)
       '@verdant-web/store':
-        specifier: 4.1.0-alpha.1
-        version: 4.1.0-alpha.1
+        specifier: 4.1.0-alpha.5
+        version: 4.1.0-alpha.5
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -7255,8 +7255,8 @@ packages:
     resolution: {integrity: sha512-0Jmb9hz53jbpz1PZ177Iau/psg+VyS3tElOKgT4vGJOLjDUZTp5pStnkkYKcgmtWUjPWmBBWK3UhIHJdC9+ynA==}
     hasBin: true
 
-  '@verdant-web/store@4.1.0-alpha.1':
-    resolution: {integrity: sha512-26x24jPoSxEv3YR8Txnm0NZ9QQ30hJKwU2QNhEHwh6FsVB3P4VT4eqejRi3wzWhgM0x9IC6ElS+tyE3ZX0n/0w==}
+  '@verdant-web/store@4.1.0-alpha.5':
+    resolution: {integrity: sha512-bO8XvdGVMdag4YSMeeUlygUvz2Cdp8jdfcRTWV9CyyTFesyjeWY0mJXq87NAZg1Mr2GSsvqU/SJejnsRihytsw==}
 
   '@vitejs/plugin-react-swc@3.5.0':
     resolution: {integrity: sha512-1PrOvAaDpqlCV+Up8RkAh9qaiUjoDUcjtttyhXDKw53XA6Ve16SOp6cCOpRs8Dj8DqUQs6eTW5YkLcLJjrXAig==}
@@ -13818,8 +13818,8 @@ snapshots:
     dependencies:
       '@aws-crypto/sha256-browser': 3.0.0
       '@aws-crypto/sha256-js': 3.0.0
-      '@aws-sdk/client-sso-oidc': 3.583.0(@aws-sdk/client-sts@3.583.0)
-      '@aws-sdk/client-sts': 3.583.0
+      '@aws-sdk/client-sso-oidc': 3.583.0
+      '@aws-sdk/client-sts': 3.583.0(@aws-sdk/client-sso-oidc@3.583.0)
       '@aws-sdk/core': 3.582.0
       '@aws-sdk/credential-provider-node': 3.583.0(@aws-sdk/client-sso-oidc@3.583.0)(@aws-sdk/client-sts@3.583.0)
       '@aws-sdk/middleware-host-header': 3.577.0
@@ -13865,8 +13865,8 @@ snapshots:
     dependencies:
       '@aws-crypto/sha256-browser': 3.0.0
       '@aws-crypto/sha256-js': 3.0.0
-      '@aws-sdk/client-sso-oidc': 3.583.0(@aws-sdk/client-sts@3.583.0)
-      '@aws-sdk/client-sts': 3.583.0
+      '@aws-sdk/client-sso-oidc': 3.583.0
+      '@aws-sdk/client-sts': 3.583.0(@aws-sdk/client-sso-oidc@3.583.0)
       '@aws-sdk/core': 3.582.0
       '@aws-sdk/credential-provider-node': 3.583.0(@aws-sdk/client-sso-oidc@3.583.0)(@aws-sdk/client-sts@3.583.0)
       '@aws-sdk/middleware-host-header': 3.577.0
@@ -13915,8 +13915,8 @@ snapshots:
       '@aws-crypto/sha1-browser': 3.0.0
       '@aws-crypto/sha256-browser': 3.0.0
       '@aws-crypto/sha256-js': 3.0.0
-      '@aws-sdk/client-sso-oidc': 3.583.0(@aws-sdk/client-sts@3.583.0)
-      '@aws-sdk/client-sts': 3.583.0
+      '@aws-sdk/client-sso-oidc': 3.583.0
+      '@aws-sdk/client-sts': 3.583.0(@aws-sdk/client-sso-oidc@3.583.0)
       '@aws-sdk/core': 3.582.0
       '@aws-sdk/credential-provider-node': 3.583.0(@aws-sdk/client-sso-oidc@3.583.0)(@aws-sdk/client-sts@3.583.0)
       '@aws-sdk/middleware-bucket-endpoint': 3.577.0
@@ -13973,11 +13973,11 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  '@aws-sdk/client-sso-oidc@3.583.0(@aws-sdk/client-sts@3.583.0)':
+  '@aws-sdk/client-sso-oidc@3.583.0':
     dependencies:
       '@aws-crypto/sha256-browser': 3.0.0
       '@aws-crypto/sha256-js': 3.0.0
-      '@aws-sdk/client-sts': 3.583.0
+      '@aws-sdk/client-sts': 3.583.0(@aws-sdk/client-sso-oidc@3.583.0)
       '@aws-sdk/core': 3.582.0
       '@aws-sdk/credential-provider-node': 3.583.0(@aws-sdk/client-sso-oidc@3.583.0)(@aws-sdk/client-sts@3.583.0)
       '@aws-sdk/middleware-host-header': 3.577.0
@@ -14016,7 +14016,6 @@ snapshots:
       '@smithy/util-utf8': 3.0.0
       tslib: 2.8.1
     transitivePeerDependencies:
-      - '@aws-sdk/client-sts'
       - aws-crt
 
   '@aws-sdk/client-sso@3.583.0':
@@ -14062,11 +14061,11 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  '@aws-sdk/client-sts@3.583.0':
+  '@aws-sdk/client-sts@3.583.0(@aws-sdk/client-sso-oidc@3.583.0)':
     dependencies:
       '@aws-crypto/sha256-browser': 3.0.0
       '@aws-crypto/sha256-js': 3.0.0
-      '@aws-sdk/client-sso-oidc': 3.583.0(@aws-sdk/client-sts@3.583.0)
+      '@aws-sdk/client-sso-oidc': 3.583.0
       '@aws-sdk/core': 3.582.0
       '@aws-sdk/credential-provider-node': 3.583.0(@aws-sdk/client-sso-oidc@3.583.0)(@aws-sdk/client-sts@3.583.0)
       '@aws-sdk/middleware-host-header': 3.577.0
@@ -14105,6 +14104,7 @@ snapshots:
       '@smithy/util-utf8': 3.0.0
       tslib: 2.8.1
     transitivePeerDependencies:
+      - '@aws-sdk/client-sso-oidc'
       - aws-crt
 
   '@aws-sdk/core@3.582.0':
@@ -14138,7 +14138,7 @@ snapshots:
 
   '@aws-sdk/credential-provider-ini@3.583.0(@aws-sdk/client-sso-oidc@3.583.0)(@aws-sdk/client-sts@3.583.0)':
     dependencies:
-      '@aws-sdk/client-sts': 3.583.0
+      '@aws-sdk/client-sts': 3.583.0(@aws-sdk/client-sso-oidc@3.583.0)
       '@aws-sdk/credential-provider-env': 3.577.0
       '@aws-sdk/credential-provider-process': 3.577.0
       '@aws-sdk/credential-provider-sso': 3.583.0(@aws-sdk/client-sso-oidc@3.583.0)
@@ -14195,7 +14195,7 @@ snapshots:
 
   '@aws-sdk/credential-provider-web-identity@3.577.0(@aws-sdk/client-sts@3.583.0)':
     dependencies:
-      '@aws-sdk/client-sts': 3.583.0
+      '@aws-sdk/client-sts': 3.583.0(@aws-sdk/client-sso-oidc@3.583.0)
       '@aws-sdk/types': 3.577.0
       '@smithy/property-provider': 3.0.0
       '@smithy/types': 3.0.0
@@ -14322,7 +14322,7 @@ snapshots:
 
   '@aws-sdk/token-providers@3.577.0(@aws-sdk/client-sso-oidc@3.583.0)':
     dependencies:
-      '@aws-sdk/client-sso-oidc': 3.583.0(@aws-sdk/client-sts@3.583.0)
+      '@aws-sdk/client-sso-oidc': 3.583.0
       '@aws-sdk/types': 3.577.0
       '@smithy/property-provider': 3.0.0
       '@smithy/shared-ini-file-loader': 3.0.0
@@ -22101,10 +22101,10 @@ snapshots:
       path-to-regexp: 6.3.0
       react: 18.3.1
 
-  '@verdant-web/react@39.0.0(@verdant-web/store@4.1.0-alpha.1)(react@18.3.1)':
+  '@verdant-web/react@39.0.0(@verdant-web/store@4.1.0-alpha.5)(react@18.3.1)':
     dependencies:
       '@verdant-web/common': 2.6.0
-      '@verdant-web/store': 4.1.0-alpha.1
+      '@verdant-web/store': 4.1.0-alpha.5
       react: 18.3.1
       suspend-react: 0.0.8(react@18.3.1)
       use-sync-external-store: 1.2.2(react@18.3.1)
@@ -22157,7 +22157,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@verdant-web/store@4.1.0-alpha.1':
+  '@verdant-web/store@4.1.0-alpha.5':
     dependencies:
       '@a-type/kysely': 1.0.2(kysely@0.27.4)
       '@verdant-web/common': 2.7.0-alpha.0

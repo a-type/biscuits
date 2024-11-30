@@ -13,11 +13,8 @@ export function RecipeUrlField({ recipe }: RecipeUrlFieldProps) {
 	const { url } = hooks.useWatch(recipe);
 	const [initialUrl] = useState(() => recipe.get('url'));
 	const [scanning, setScanning] = useState(false);
-	const isLoggedIn = useIsLoggedIn();
+	const [isLoggedIn] = useIsLoggedIn();
 	const updateRecipeFromUrl = hooks.useUpdateRecipeFromUrl();
-
-	const hasUrlChanged = url !== initialUrl;
-	const showScan = hasUrlChanged || !url;
 
 	const scan = async () => {
 		if (url) {
@@ -40,35 +37,34 @@ export function RecipeUrlField({ recipe }: RecipeUrlFieldProps) {
 				className="flex-1"
 				autoSelect
 			/>
-			{showScan &&
-				(isLoggedIn ? (
-					<Button color="primary" onClick={scan} disabled={!url || scanning}>
-						<Icon name="scan" style={{ width: 15, height: 15 }} />
-						<span className="ml-2">Scan</span>
-					</Button>
-				) : (
-					<Dialog>
-						<Dialog.Trigger asChild>
-							<Button color="primary">
-								<Icon name="scan" style={{ width: 15, height: 15 }} />
-								<span className="ml-2">Scan</span>
-							</Button>
-						</Dialog.Trigger>
-						<Dialog.Content>
-							<Dialog.Title>Sign up to scan</Dialog.Title>
-							<Dialog.Description>
-								Get a free account to begin scanning web recipes. Free users get
-								5 recipes per month.
-							</Dialog.Description>
-							<Dialog.Actions>
-								<Dialog.Close>Cancel</Dialog.Close>
-								<LoginButton color="primary" asChild returnTo="/">
-									Get started
-								</LoginButton>
-							</Dialog.Actions>
-						</Dialog.Content>
-					</Dialog>
-				))}
+			{isLoggedIn ? (
+				<Button color="primary" onClick={scan} disabled={!url || scanning}>
+					<Icon name="scan" style={{ width: 15, height: 15 }} />
+					<span className="ml-2">Scan</span>
+				</Button>
+			) : (
+				<Dialog>
+					<Dialog.Trigger asChild>
+						<Button color="primary">
+							<Icon name="scan" style={{ width: 15, height: 15 }} />
+							<span className="ml-2">Scan</span>
+						</Button>
+					</Dialog.Trigger>
+					<Dialog.Content>
+						<Dialog.Title>Sign up to scan web recipes</Dialog.Title>
+						<Dialog.Description>
+							Get a free account to begin scanning web recipes. Free users get 5
+							recipes per month.
+						</Dialog.Description>
+						<Dialog.Actions>
+							<Dialog.Close>Cancel</Dialog.Close>
+							<LoginButton color="primary" asChild returnTo="/">
+								Get started
+							</LoginButton>
+						</Dialog.Actions>
+					</Dialog.Content>
+				</Dialog>
+			)}
 		</div>
 	);
 }
