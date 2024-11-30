@@ -1,5 +1,4 @@
-import { Button, clsx, H1, H2, P, TextArea } from '@a-type/ui';
-import { Progress } from '@a-type/ui/components/progress';
+import { Button, clsx, H1, H2, P, Progress, TextArea } from '@a-type/ui';
 import { useEffect, useRef, useState } from 'react';
 import { OnboardingQuestion, onboardingQuestions } from './questions.js';
 
