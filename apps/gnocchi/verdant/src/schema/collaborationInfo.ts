@@ -1,6 +1,6 @@
 import { schema } from '@verdant-web/store';
 
-export const collaborationInfo = schema.collection({
+export const collaborationInfo: any = schema.collection({
 	name: 'collaborationInfo',
 	pluralName: 'collaborationInfo',
 	primaryKey: 'id',
