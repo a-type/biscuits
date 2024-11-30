@@ -1,8 +1,4 @@
-import SchemaBuilder from '@pothos/core';
-import RelayPlugin from '@pothos/plugin-relay';
-import DataloaderPlugin from '@pothos/plugin-dataloader';
-import AuthPlugin from '@pothos/plugin-scope-auth';
-import { GQLContext } from './context.js';
+import { AppId } from '@biscuits/apps';
 import {
 	ChangelogItem,
 	Food,
@@ -16,21 +12,25 @@ import {
 	WishlistIdeaRequestResponse,
 	WishlistPurchase,
 } from '@biscuits/db';
-import { LibraryInfo } from '@verdant-web/server';
+import { BiscuitsError } from '@biscuits/error';
 import { BiscuitsVerdantProfile } from '@biscuits/libraries';
 import { ExtractorData as GnocchiRecipeScan } from '@gnocchi.biscuits/scanning';
-import { BiscuitsError } from '@biscuits/error';
+import SchemaBuilder from '@pothos/core';
+import DataloaderPlugin from '@pothos/plugin-dataloader';
+import RelayPlugin from '@pothos/plugin-relay';
+import AuthPlugin from '@pothos/plugin-scope-auth';
+import { LibraryInfo } from '@verdant-web/server';
+import { ExtractorData as WishWashStorePageScan } from '@wish-wash.biscuits/scanning';
+import {
+	AutocompleteSuggestion,
+	PlaceLocationDetails,
+} from '../services/maps.js';
 import {
 	WeatherForecast,
 	WeatherForecastDay,
 	WeatherForecastInput,
 } from '../services/weather.js';
-import {
-	AutocompleteSuggestion,
-	PlaceLocationDetails,
-} from '../services/maps.js';
-import { ExtractorData as WishWashStorePageScan } from '@wish-wash.biscuits/scanning';
-import { AppId } from '@biscuits/apps';
+import { GQLContext } from './context.js';
 
 export const builder = new SchemaBuilder<{
 	Context: GQLContext;
@@ -106,6 +106,7 @@ export const builder = new SchemaBuilder<{
 		productAdmin: boolean;
 		member: boolean;
 		app: AppId;
+		freeLimited: [string, number, UsageLimitPeriod];
 	};
 	Scalars: {
 		DateTime: {
@@ -222,6 +223,70 @@ export const builder = new SchemaBuilder<{
 						context.session.allowedApp === appId)
 				);
 			},
+			freeLimited: async ([limitType, limitCount, limitPeriod]) => {
+				if (!context.session) {
+					return false;
+				}
+				if (context.session.planId) {
+					// plan users are not limited
+					return true;
+				}
+				// logged in but not in a plan -- subject to limits
+				const limit = await context.db
+					.selectFrom('UserUsageLimit')
+					.selectAll()
+					.where('userId', '=', context.session.userId)
+					.where('limitType', '=', limitType)
+					.executeTakeFirst();
+				if (!limit) {
+					// initialize limit
+					await context.db
+						.insertInto('UserUsageLimit')
+						.values({
+							userId: context.session.userId,
+							limitType,
+							uses: 1,
+							resetsAt: addLimitPeriod(new Date(), limitPeriod),
+						})
+						.execute();
+					return true;
+				}
+
+				// check limit
+				if (limit.uses >= limitCount) {
+					// might be expired?
+					if (limit.resetsAt < new Date()) {
+						await context.db
+							.updateTable('UserUsageLimit')
+							.set({
+								uses: 1,
+								resetsAt: addLimitPeriod(limit.resetsAt, limitPeriod),
+							})
+							.where('userId', '=', context.session.userId)
+							.where('limitType', '=', limitType)
+							.execute();
+						return true;
+					}
+					throw new BiscuitsError(
+						BiscuitsError.Code.UsageLimitReached,
+						'Free usage limit reached. Please try again later.',
+						undefined,
+						{
+							resetsAt: limit.resetsAt.getTime(),
+						},
+					);
+				}
+
+				// increment uses
+				await context.db
+					.updateTable('UserUsageLimit')
+					.set({ uses: limit.uses + 1 })
+					.where('userId', '=', context.session.userId)
+					.where('limitType', '=', limitType)
+					.execute();
+
+				return true;
+			},
 		};
 	},
 	scopeAuthOptions: {
@@ -233,3 +298,25 @@ export const builder = new SchemaBuilder<{
 		},
 	},
 });
+
+type UsageLimitPeriod = 'day' | 'week' | 'month' | 'year';
+function addLimitPeriod(expired: Date, period: UsageLimitPeriod): Date {
+	const reset = new Date(expired);
+	switch (period) {
+		case 'day':
+			reset.setDate(reset.getDate() + 1);
+			break;
+		case 'week':
+			reset.setDate(reset.getDate() + 7);
+			break;
+		case 'month':
+			reset.setMonth(reset.getMonth() + 1);
+			break;
+		case 'year':
+			reset.setFullYear(reset.getFullYear() + 1);
+			break;
+		default:
+			throw new Error('Invalid period');
+	}
+	return reset;
+}

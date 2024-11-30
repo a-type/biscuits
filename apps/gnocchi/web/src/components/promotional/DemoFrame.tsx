@@ -11,17 +11,13 @@ export function DemoFrame({ demo, className, ...rest }: DemoFrameProps) {
 	return (
 		<div
 			className={classNames(
-				'flex flex-col border-default rounded-lg overflow-hidden',
+				'flex flex-col border-default rounded-lg overflow-hidden mb-auto',
 				className,
 			)}
 			{...rest}
 		>
-			<video
-				autoPlay
-				loop
-				muted
-				controls={false}
-				src={`/videos/demos/${demo}.mp4`}
+			<img
+				src={`https://biscuits.club/images/gnocchi/${demo}.png`}
 				className="w-full h-auto object-cover"
 			/>
 		</div>

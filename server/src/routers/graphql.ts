@@ -1,17 +1,16 @@
-import { Router } from 'itty-router';
-import { Plugin, createYoga, maskError } from 'graphql-yoga';
-import { useCSRFPrevention } from '@graphql-yoga/plugin-csrf-prevention';
+import { AuthError, Session } from '@a-type/auth';
 import { db } from '@biscuits/db';
-import { schema } from '../graphql/schema.js';
-import { GQLContext } from '../graphql/context.js';
-import { sessions } from '../auth/session.js';
-import { Session } from '@a-type/auth';
-import { verdantServer } from '../verdant/verdant.js';
 import { BiscuitsError } from '@biscuits/error';
+import { useCSRFPrevention } from '@graphql-yoga/plugin-csrf-prevention';
 import { GraphQLError } from 'graphql';
-import { stripe } from '../services/stripe.js';
-import { AuthError } from '@a-type/auth';
+import { Plugin, createYoga, maskError } from 'graphql-yoga';
+import { Router } from 'itty-router';
+import { sessions } from '../auth/session.js';
+import { GQLContext } from '../graphql/context.js';
 import { createDataloaders } from '../graphql/dataloaders/index.js';
+import { schema } from '../graphql/schema.js';
+import { stripe } from '../services/stripe.js';
+import { verdantServer } from '../verdant/verdant.js';
 
 function applyHeaders(): Plugin<{}, GQLContext> {
 	return {
@@ -46,6 +45,7 @@ const yoga = createYoga<GQLContext>({
 					extensions: {
 						unexpected: originalError.code === BiscuitsError.Code.Unexpected,
 						biscuitsCode: originalError.code,
+						...originalError.extraData,
 					},
 				});
 			} else {

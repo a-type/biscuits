@@ -1,10 +1,10 @@
-import { graphql, isClientError, graphqlClient } from '@biscuits/graphql';
-import { showSubscriptionPromotion } from '@biscuits/client';
 import { detailedInstructionsToDoc, instructionsToDoc } from '@/lib/tiptap.js';
-import { BiscuitsError } from '@biscuits/error';
-import { lookupUnit, parseIngredient } from '@gnocchi.biscuits/conversion';
-import { RecipeInit, Client } from '@gnocchi.biscuits/verdant';
 import { toast } from '@a-type/ui';
+import { showSubscriptionPromotion } from '@biscuits/client';
+import { BiscuitsError } from '@biscuits/error';
+import { graphql, graphqlClient, isClientError } from '@biscuits/graphql';
+import { lookupUnit, parseIngredient } from '@gnocchi.biscuits/conversion';
+import { Client, RecipeInit } from '@gnocchi.biscuits/verdant';
 
 const recipeScanQuery = graphql(`
 	query RecipeScan($input: RecipeScanInput!) {
@@ -144,10 +144,31 @@ export async function getScannedRecipe(
 			err instanceof Error &&
 			isClientError(err) &&
 			err.graphQLErrors.some(
-				(e) => e.extensions?.code === BiscuitsError.Code.Forbidden,
+				(e) =>
+					e.extensions?.biscuitsCode === BiscuitsError.Code.Forbidden ||
+					e.extensions?.biscuitsCode === BiscuitsError.Code.UsageLimitReached,
 			)
 		) {
-			showSubscriptionPromotion();
+			if (
+				err.graphQLErrors.some(
+					(e) => e.extensions?.biscuitsCode === BiscuitsError.Code.Forbidden,
+				)
+			) {
+				showSubscriptionPromotion();
+			} else {
+				const resetsAt = err.graphQLErrors[0].extensions?.resetsAt as
+					| number
+					| null;
+				const message = resetsAt
+					? `You've used up your free scans for this month. You can wait until ${new Date(
+							resetsAt,
+					  ).toLocaleDateString()} to try again, or subscribe for unlimited scans.`
+					: `You've used up your free scans for this month. Subscribe for unlimited recipe scans.`;
+				showSubscriptionPromotion(
+					'Subscribe for unlimited recipe scans.',
+					message,
+				);
+			}
 		} else {
 			toast.error('Could not scan that recipe.');
 		}

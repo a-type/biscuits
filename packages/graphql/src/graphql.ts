@@ -191,8 +191,10 @@ export function createMinimalGraphQLClient({
 	});
 }
 
+export type * from '@apollo/client';
 export {
 	ApolloError,
+	ApolloProvider,
 	NetworkStatus,
 	isApolloError as isClientError,
 	useBackgroundQuery,
@@ -206,6 +208,4 @@ export {
 	useReadQuery,
 	useSubscription,
 	useSuspenseQuery,
-	ApolloProvider,
 } from '@apollo/client';
-export type * from '@apollo/client';

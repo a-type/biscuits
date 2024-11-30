@@ -15,6 +15,9 @@ export interface Database {
 	VerificationCode: VerificationCodeTable;
 	PushSubscription: PushSubscriptionTable;
 	ChangelogItem: ChangelogItemTable;
+	UserUsageLimit: UserUsageLimitTable;
+
+	// app-specific data
 	Food: FoodTable;
 	FoodName: FoodNameTable;
 	FoodCategoryAssignment: FoodCategoryAssignmentTable;
@@ -315,3 +318,16 @@ export interface WishlistIdeaRequestTable {
 export type WishlistIdeaRequest = Selectable<WishlistIdeaRequestTable>;
 export type NewWishlistIdeaRequest = Insertable<WishlistIdeaRequestTable>;
 export type WishlistIdeaRequestUpdate = Updateable<WishlistIdeaRequestTable>;
+
+export interface UserUsageLimitTable {
+	userId: string;
+	limitType: string;
+	createdAt: ColumnType<Date, Date | undefined, never>;
+	updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
+	uses: number;
+	resetsAt: ColumnType<Date, Date | undefined, Date | undefined>;
+}
+
+export type UsageLimit = Selectable<UserUsageLimitTable>;
+export type NewUsageLimit = Insertable<UserUsageLimitTable>;
+export type UsageLimitUpdate = Updateable<UserUsageLimitTable>;

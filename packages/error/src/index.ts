@@ -13,6 +13,7 @@ export enum BiscuitsErrorCode {
 	NotFound = 4040,
 	Conflict = 4090,
 	RateLimited = 4290,
+	UsageLimitReached = 4291,
 	Unexpected = 5000,
 }
 
@@ -49,7 +50,12 @@ export class BiscuitsError extends Error {
 	public message: string;
 	public readonly isBiscuitsError = true;
 
-	constructor(code: BiscuitsErrorCode, message?: string, cause?: unknown) {
+	constructor(
+		code: BiscuitsErrorCode,
+		message?: string,
+		cause?: unknown,
+		public readonly extraData?: Record<string, any>,
+	) {
 		super(message, {
 			cause,
 		});

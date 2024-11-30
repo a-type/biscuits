@@ -20,7 +20,7 @@ export function SubscriptionPromotionContent({}: SubscriptionPromotionContentPro
 						efficiently.
 					</P>
 				</div>
-				<DemoFrame demo="multiplayer-groceries" />
+				<DemoFrame demo="groceries-collaboration" />
 				<div>
 					<H2 className="mb-2">More recipe tools</H2>
 					<P className="mb-4">
@@ -32,7 +32,7 @@ export function SubscriptionPromotionContent({}: SubscriptionPromotionContentPro
 						stay on the same page.
 					</P>
 				</div>
-				<DemoFrame demo="multiplayer-cooking" />
+				<DemoFrame demo="recipe-collaboration" />
 			</div>
 		</>
 	);
