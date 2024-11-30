@@ -1,10 +1,11 @@
+import { createMinimalGraphQLClient, graphql } from '@biscuits/graphql';
+import { createMigration } from '@verdant-web/store';
 import v34Schema, {
 	MigrationTypes as V34Types,
 } from '../client/schemaVersions/v34.js';
-import { createMigration } from '@verdant-web/store';
-import { createMinimalGraphQLClient, graphql } from '@biscuits/graphql';
 import { API_HOST_HTTP } from '../config.js';
 
+// @ts-ignore
 export default createMigration<V34Types>(v34Schema, async ({ mutations }) => {
 	await mutations.collaborationInfo.put({});
 	try {
