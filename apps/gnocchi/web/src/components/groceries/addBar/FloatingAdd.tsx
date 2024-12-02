@@ -46,13 +46,16 @@ export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
 				<AddPane
 					onAdd={onAdd}
 					showRichSuggestions
-					className={classNames('relative z-1 shadow-xl')}
+					className={classNames('relative z-1')}
 					onOpenChange={setOpen}
 					open={open}
 					disabled={!open}
 					{...rest}
 				/>
 			</MenuDisclose.Content>
+			{open && (
+				<div className="opacity-0 bg-overlay fixed inset-0 z-0 pointer-events-none animate-fade-in animate-delay-200 animate-forwards" />
+			)}
 			<MenuDisclose.Trigger asChild>
 				<Button
 					size="icon"

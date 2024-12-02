@@ -108,7 +108,7 @@ const AddPaneImpl = forwardRef<
 	return (
 		<div
 			className={classNames(
-				'flex flex-col-reverse rounded-lg bg-white shadow-xl border-default rounded-b-21px border-b-none',
+				'flex flex-col-reverse rounded-lg bg-white border-default rounded-b-21px border-b-none',
 				className,
 			)}
 		>
@@ -127,7 +127,7 @@ const AddPaneImpl = forwardRef<
 			<ScrollArea
 				{...menuProps}
 				className={classNames(
-					'flex flex-col max-h-[calc(var(--viewport-height,40dvh)-40px)] lg:max-h-50dvh w-full max-w-none gap-4',
+					'flex flex-col max-h-[calc(var(--viewport-height,40dvh)-80px)] lg:max-h-50dvh w-full max-w-none gap-4',
 				)}
 				onScroll={stopPropagation}
 				background="white"
