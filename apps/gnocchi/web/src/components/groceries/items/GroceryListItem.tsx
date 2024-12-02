@@ -167,7 +167,9 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 						</CollapsibleSimple>
 					</div>
 					<RecentPeople item={item} className="mr-1" />
-					<ListTag item={item} collapsed={menuOpen} className="mr-1" />
+					<Suspense>
+						<ListTag item={item} collapsed={menuOpen} className="mr-1" />
+					</Suspense>
 					{!isPurchased && (
 						<Suspense>
 							<RecentPurchaseHint
@@ -415,7 +417,7 @@ function ListTag({
 								{name}
 							</span>
 							<span className="inline whitespace-nowrap overflow-hidden text-ellipsis max-w-full lg:hidden">
-								{getInitials(name)}
+								{getInitials(name).toUpperCase()}
 							</span>
 						</div>
 					</Link>
