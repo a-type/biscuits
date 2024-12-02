@@ -50,6 +50,7 @@
 		"build": "pnpm run build:transpile && pnpm run build:prefix",
 		"build:transpile": "tsc",
 		"build:prefix": "node ./scripts/addUnoInclude.mjs",
+		"build:copy": "node ./scripts/copyCss.mjs",
 		"dev": "tsc --watch"
 	},
 	"type": "module",
@@ -74,10 +75,12 @@
 	},
 	"devDependencies": {
 		"@a-type/ui": "1.2.1",
+		"@types/copy": "^0.3.5",
 		"@types/react": "18.3.3",
 		"@unocss/transformer-variant-group": "^0.58.0",
 		"@verdant-web/react-router": "0.6.5",
 		"@verdant-web/store": "4.1.0-alpha.9",
+		"copy": "^0.3.2",
 		"react": "18.3.1",
 		"typescript": "5.5.3",
 		"unocss": "^0.58.0",
