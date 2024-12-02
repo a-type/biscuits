@@ -11,7 +11,11 @@ import { useAddBarCombobox, useAddBarSuggestions } from './hooks.js';
 
 const AddPaneImpl = forwardRef<
 	HTMLDivElement,
-	AddBarProps & { disabled?: boolean }
+	AddBarProps & {
+		disabled?: boolean;
+		open?: boolean;
+		onOpenChange: (open: boolean) => void;
+	}
 >(function AddPaneImpl(
 	{
 		onAdd,
@@ -48,29 +52,24 @@ const AddPaneImpl = forwardRef<
 
 	const inputRef = useRef<HTMLInputElement>(null);
 	const {
-		combobox: {
-			isOpen,
-			getMenuProps,
-			getInputProps,
-			highlightedIndex,
-			getItemProps,
-			inputValue,
-			setInputValue,
-			selectItem,
-			openMenu,
-		},
+		getMenuProps,
+		getInputProps,
+		getItemProps,
+		getSubmitButtonProps,
+		clear,
 		addingRecipe,
 		clearAddingRecipe,
-		onInputPaste,
 	} = useAddBarCombobox({
 		setSuggestionPrompt,
 		allSuggestions,
-		onAdd: (items) => {
+		onAdd: (items, focusInput) => {
 			onAdd(items);
-			inputRef.current?.blur();
+			if (focusInput) {
+				inputRef.current?.focus();
+			} else {
+				inputRef.current?.blur();
+			}
 		},
-		onOpenChange,
-		open,
 	});
 
 	const mergedRef = useMergedRef(ref, innerRef);
@@ -86,9 +85,16 @@ const AddPaneImpl = forwardRef<
 			visualViewport?.addEventListener('scroll', preventDefault, true);
 			const original = document.body.style.overflow;
 			document.body.style.overflow = 'hidden';
+			const pageContent = document.getElementById('page-content');
+			if (pageContent) {
+				pageContent.style.overflow = 'hidden';
+			}
 			return () => {
 				visualViewport?.removeEventListener('scroll', preventDefault);
 				document.body.style.overflow = original;
+				if (pageContent) {
+					pageContent.style.overflow = '';
+				}
 			};
 		}
 	}, [open]);
@@ -108,22 +114,20 @@ const AddPaneImpl = forwardRef<
 		>
 			<AddInput
 				inputProps={getInputProps({
-					onPaste: onInputPaste,
-					onPointerDown: openMenu,
 					placeholder,
 					ref: inputRef,
 				})}
-				isOpen={isOpen}
-				selectItem={selectItem}
-				clear={() => setInputValue('')}
+				isOpen={!!open}
+				clear={() => clear()}
 				ref={mergedRef}
 				disableInteraction={disabled}
+				getSubmitButtonProps={getSubmitButtonProps}
 				{...rest}
 			/>
 			<ScrollArea
 				{...menuProps}
 				className={classNames(
-					'flex flex-col max-h-[calc(var(--viewport-height,40dvh)-80px)] lg:max-h-50dvh w-full max-w-none gap-4',
+					'flex flex-col max-h-[calc(var(--viewport-height,40dvh)-40px)] lg:max-h-50dvh w-full max-w-none gap-4',
 				)}
 				onScroll={stopPropagation}
 				background="white"
@@ -133,7 +137,6 @@ const AddPaneImpl = forwardRef<
 						<SuggestionGroup
 							title="Suggested"
 							suggestions={mainSuggestions}
-							highlightedIndex={highlightedIndex}
 							getItemProps={getItemProps}
 						/>
 					)}
@@ -142,14 +145,12 @@ const AddPaneImpl = forwardRef<
 							title="Expiring Soon"
 							suggestions={expiresSoonSuggestions}
 							getItemProps={getItemProps}
-							highlightedIndex={highlightedIndex}
 						/>
 					)}
 					{!noSuggestions && (
 						<SuggestionGroup
-							title={inputValue ? 'Matches' : 'Favorites'}
+							title={suggestionPrompt ? 'Matches' : 'Favorites'}
 							suggestions={matchSuggestions}
-							highlightedIndex={highlightedIndex}
 							getItemProps={getItemProps}
 						/>
 					)}
@@ -169,7 +170,11 @@ const AddPaneImpl = forwardRef<
 
 export const AddPane = forwardRef<
 	HTMLDivElement,
-	AddBarProps & { disabled?: boolean }
+	AddBarProps & {
+		disabled?: boolean;
+		open: boolean;
+		onOpenChange: (open: boolean) => void;
+	}
 >(function AddBar(props, ref) {
 	return (
 		<Suspense>

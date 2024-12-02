@@ -12,28 +12,25 @@ import classNames from 'classnames';
 import { Suspense, forwardRef, useRef, useState } from 'react';
 import { AddInput } from './AddInput.jsx';
 import { SuggestionGroup } from './SuggestionGroup.jsx';
-import { useAddBarCombobox, useAddBarSuggestions } from './hooks.js';
+import {
+	useAddBarCombobox,
+	useAddBarSuggestions,
+	useKeepOpenAfterSelect,
+} from './hooks.js';
 
 export interface AddBarProps {
 	className?: string;
 	onAdd: (text: string[]) => Promise<void> | void;
 	showRichSuggestions?: boolean;
-	open?: boolean;
-	onOpenChange?: (open: boolean) => void;
 }
 
 export const AddBarImpl = forwardRef<HTMLDivElement, AddBarProps>(
 	function AddBarImpl(
-		{
-			onAdd,
-			showRichSuggestions = false,
-			open,
-			onOpenChange,
-			className,
-			...rest
-		},
+		{ onAdd, showRichSuggestions = false, className, ...rest },
 		ref,
 	) {
+		const [keepOpenOnSelect] = useKeepOpenAfterSelect();
+		const [open, onOpenChange] = useState(false);
 		const [suggestionPrompt, setSuggestionPrompt] = useState('');
 
 		const {
@@ -57,24 +54,22 @@ export const AddBarImpl = forwardRef<HTMLDivElement, AddBarProps>(
 		});
 
 		const {
-			combobox: {
-				isOpen,
-				getMenuProps,
-				getInputProps,
-				highlightedIndex,
-				getItemProps,
-				inputValue,
-				setInputValue,
-				selectItem,
-				openMenu,
-			},
 			addingRecipe,
 			clearAddingRecipe,
-			onInputPaste,
+			getMenuProps,
+			getInputProps,
+			getItemProps,
+			getSubmitButtonProps,
+			clear,
 		} = useAddBarCombobox({
 			setSuggestionPrompt,
 			allSuggestions,
-			onAdd,
+			onAdd: (items: string[], focusInput: boolean) => {
+				onAdd(items);
+				if (!keepOpenOnSelect) {
+					onOpenChange(false);
+				}
+			},
 			onOpenChange,
 			open,
 		});
@@ -85,17 +80,17 @@ export const AddBarImpl = forwardRef<HTMLDivElement, AddBarProps>(
 
 		return (
 			<>
-				<Popover open={isOpen}>
+				<Popover open={open}>
 					<PopoverAnchor asChild>
 						<AddInput
 							inputProps={getInputProps({
-								onPaste: onInputPaste,
 								placeholder,
+								onFocus: () => onOpenChange?.(true),
 							})}
-							isOpen={isOpen}
+							getSubmitButtonProps={getSubmitButtonProps}
+							isOpen={open}
 							className={className}
-							selectItem={selectItem}
-							clear={() => setInputValue('')}
+							clear={() => clear()}
 							ref={mergedRef}
 							{...rest}
 						/>
@@ -126,7 +121,6 @@ export const AddBarImpl = forwardRef<HTMLDivElement, AddBarProps>(
 							<SuggestionGroup
 								title="Suggested"
 								suggestions={mainSuggestions}
-								highlightedIndex={highlightedIndex}
 								getItemProps={getItemProps}
 							/>
 						)}
@@ -135,14 +129,12 @@ export const AddBarImpl = forwardRef<HTMLDivElement, AddBarProps>(
 								title="Expiring Soon"
 								suggestions={expiresSoonSuggestions}
 								getItemProps={getItemProps}
-								highlightedIndex={highlightedIndex}
 							/>
 						)}
 						{!noSuggestions && (
 							<SuggestionGroup
-								title={inputValue ? 'Matches' : 'Favorites'}
+								title={suggestionPrompt ? 'Matches' : 'Favorites'}
 								suggestions={matchSuggestions}
-								highlightedIndex={highlightedIndex}
 								getItemProps={getItemProps}
 							/>
 						)}

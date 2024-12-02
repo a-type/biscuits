@@ -74,7 +74,7 @@ export function GroceriesPage() {
 				<PageNowPlaying
 					unstyled
 					keepAboveKeyboard
-					className="items-center pointer-events-none"
+					className="items-center pointer-events-none z-nav"
 				>
 					<FloatingAdd />
 				</PageNowPlaying>

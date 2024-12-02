@@ -22,6 +22,7 @@ export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
 		async (items: string[]) => {
 			await addItems(items, {
 				listId,
+				showToast: true,
 			});
 			if (!keepOpenOnSelect) {
 				setOpen(false);
@@ -47,6 +48,7 @@ export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
 					showRichSuggestions
 					className={classNames('relative z-1 shadow-xl')}
 					onOpenChange={setOpen}
+					open={open}
 					disabled={!open}
 					{...rest}
 				/>

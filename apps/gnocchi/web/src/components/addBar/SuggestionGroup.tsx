@@ -9,14 +9,12 @@ export function SuggestionGroup({
 	suggestions,
 	className,
 	getItemProps,
-	highlightedIndex,
 	...rest
 }: {
 	title: string;
 	suggestions: SuggestionData[];
 	className?: string;
 	getItemProps: (opts: UseComboboxGetItemPropsOptions<SuggestionData>) => any;
-	highlightedIndex: number;
 }) {
 	return (
 		<div className={classNames('flex flex-col gap-2', className)} {...rest}>
@@ -28,8 +26,7 @@ export function SuggestionGroup({
 					<SuggestionItem
 						key={suggestion.id}
 						value={suggestion}
-						highlighted={highlightedIndex === suggestion.index}
-						{...getItemProps({ item: suggestion, index: suggestion.index })}
+						{...getItemProps({ item: suggestion })}
 					/>
 				))}
 			</div>
@@ -40,10 +37,9 @@ export function SuggestionGroup({
 export const SuggestionItem = forwardRef<
 	HTMLButtonElement,
 	ButtonProps & {
-		highlighted?: boolean;
 		value: SuggestionData;
 	}
->(function SuggestionItem({ highlighted, className, value, ...rest }, ref) {
+>(function SuggestionItem({ className, value, ...rest }, ref) {
 	let displayString;
 	if (value.type === 'raw') {
 		displayString = value.text;
@@ -62,9 +58,7 @@ export const SuggestionItem = forwardRef<
 			ref={ref}
 			className={classNames(
 				'rounded-full font-normal border-gray-5 max-w-100% overflow-hidden text-ellipsis flex flex-row',
-				{
-					'bg-primary-wash': highlighted,
-				},
+				'[&[aria-selected="true"]]:bg-primary-wash',
 				className,
 			)}
 			{...rest}

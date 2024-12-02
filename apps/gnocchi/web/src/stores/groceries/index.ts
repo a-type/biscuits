@@ -1,31 +1,30 @@
 import { pickBestNameMatch } from '@/components/foods/lookup.jsx';
 import { groceriesState } from '@/components/groceries/state.js';
-import { graphql, graphqlClient } from '@biscuits/graphql';
+import { toast } from '@a-type/ui';
 import { getVerdantSync, VerdantContext } from '@biscuits/client';
-import { parseIngredient } from '@gnocchi.biscuits/conversion';
-import { depluralize } from '@gnocchi.biscuits/conversion';
+import { graphql, graphqlClient } from '@biscuits/graphql';
+import { depluralize, parseIngredient } from '@gnocchi.biscuits/conversion';
 import {
 	Client,
 	ClientDescriptor,
+	createHooks,
 	Food,
 	Item,
 	ItemDestructured,
 	ItemInit,
 	ItemInputsItemInit,
+	migrations,
 	Recipe,
 	RecipeIngredients,
 	RecipeIngredientsItem,
 	RecipeIngredientsItemInit,
 	RecipeInit,
 	UserInfo,
-	createHooks,
-	migrations,
 } from '@gnocchi.biscuits/verdant';
 import { useSearchParams } from '@verdant-web/react-router';
 import cuid from 'cuid';
 import pluralize from 'pluralize';
 import { useCallback } from 'react';
-import { toast } from '@a-type/ui';
 import { getScannedRecipe } from './scanRecipe.js';
 
 export interface Presence {
@@ -895,12 +894,16 @@ export async function addItems(
 	}
 
 	if (showToast) {
-		toast.success(
-			'Added ' + lines.length + ' ' + pluralize('item', lines.length),
-			{
-				id: 'add-items',
-			},
-		);
+		let message;
+		if (lines.length === 1) {
+			message = 'Added ' + lines[0];
+		} else {
+			message = 'Added ' + lines.length + ' items';
+		}
+		toast.success(message, {
+			id: 'add-items',
+			duration: 5000,
+		});
 		groceriesState.justAddedSomething = true;
 	}
 }

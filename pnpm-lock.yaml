@@ -64,8 +64,8 @@ importers:
   apps/gnocchi/hub:
     dependencies:
       '@a-type/ui':
-        specifier: ^1.2.0
-        version: 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^1.2.1
+        version: 1.2.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@a-type/utils':
         specifier: ^1.0.8
         version: 1.1.0
@@ -126,7 +126,7 @@ importers:
         version: 5.5.3
       unocss:
         specifier: ^0.58.0
-        version: 0.58.8(postcss@8.4.49)(rollup@4.27.4)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))
+        version: 0.58.8(postcss@8.4.49)(rollup@4.28.0)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))
       vite:
         specifier: ^5.0.10
         version: 5.2.11(@types/node@22.10.1)(terser@5.36.0)
@@ -187,8 +187,8 @@ importers:
   apps/gnocchi/web:
     dependencies:
       '@a-type/ui':
-        specifier: ^1.2.0
-        version: 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^1.2.1
+        version: 1.2.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@a-type/utils':
         specifier: ^1.0.8
         version: 1.0.8
@@ -435,7 +435,7 @@ importers:
         version: 5.1.5(@types/node@22.10.1)(terser@5.36.0)
       vite-plugin-checker:
         specifier: ^0.6.2
-        version: 0.6.4(eslint@9.15.0(jiti@2.4.0))(optionator@0.9.4)(typescript@5.5.3)(vite@5.1.5(@types/node@22.10.1)(terser@5.36.0))
+        version: 0.6.4(eslint@9.16.0(jiti@2.4.1))(optionator@0.9.4)(typescript@5.5.3)(vite@5.1.5(@types/node@22.10.1)(terser@5.36.0))
       vite-plugin-circular-dependency:
         specifier: ^0.2.1
         version: 0.2.1(rollup@2.79.2)
@@ -464,8 +464,8 @@ importers:
   apps/humding/web:
     dependencies:
       '@a-type/ui':
-        specifier: 1.2.0
-        version: 1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 1.2.1
+        version: 1.2.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@a-type/utils':
         specifier: 1.1.3
         version: 1.1.3
@@ -498,7 +498,7 @@ importers:
         version: 2.4.1(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       unocss:
         specifier: 0.60.3
-        version: 0.60.3(postcss@8.4.49)(rollup@4.27.4)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))
+        version: 0.60.3(postcss@8.4.49)(rollup@4.28.0)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))
       valtio:
         specifier: ^1.13.2
         version: 1.13.2(@types/react@18.3.3)(react@18.3.1)
@@ -570,8 +570,8 @@ importers:
   apps/marginalia/web:
     dependencies:
       '@a-type/ui':
-        specifier: 1.2.0
-        version: 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 1.2.1
+        version: 1.2.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@a-type/utils':
         specifier: 1.1.0
         version: 1.1.0
@@ -604,7 +604,7 @@ importers:
         version: 18.3.1(react@18.3.1)
       unocss:
         specifier: 0.60.3
-        version: 0.60.3(postcss@8.4.49)(rollup@4.27.4)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))
+        version: 0.60.3(postcss@8.4.49)(rollup@4.28.0)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))
       valtio:
         specifier: ^1.13.2
         version: 1.13.2(@types/react@18.2.79)(react@18.3.1)
@@ -676,8 +676,8 @@ importers:
   apps/names/web:
     dependencies:
       '@a-type/ui':
-        specifier: 1.2.0
-        version: 1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 1.2.1
+        version: 1.2.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@a-type/utils':
         specifier: 1.1.4
         version: 1.1.4
@@ -710,7 +710,7 @@ importers:
         version: 2.4.1(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       unocss:
         specifier: 0.61.0
-        version: 0.61.0(postcss@8.4.49)(rollup@4.27.4)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
+        version: 0.61.0(postcss@8.4.49)(rollup@4.28.0)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
       valtio:
         specifier: ^1.13.2
         version: 1.13.2(@types/react@18.3.3)(react@18.3.1)
@@ -782,8 +782,8 @@ importers:
         specifier: ^0.2.15
         version: 0.2.15(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@a-type/ui':
-        specifier: 1.2.0
-        version: 1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 1.2.1
+        version: 1.2.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@a-type/utils':
         specifier: 1.1.3
         version: 1.1.3
@@ -828,7 +828,7 @@ importers:
         version: 2.4.1(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       unocss:
         specifier: 0.61.0
-        version: 0.61.0(postcss@8.4.49)(rollup@4.27.4)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
+        version: 0.61.0(postcss@8.4.49)(rollup@4.28.0)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
       valtio:
         specifier: ^1.13.2
         version: 1.13.2(@types/react@18.3.3)(react@18.3.1)
@@ -897,8 +897,8 @@ importers:
   apps/star-chart/web:
     dependencies:
       '@a-type/ui':
-        specifier: 1.2.0
-        version: 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 1.2.1
+        version: 1.2.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@a-type/utils':
         specifier: 1.1.2
         version: 1.1.2
@@ -940,7 +940,7 @@ importers:
         version: 4.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       unocss:
         specifier: 0.60.3
-        version: 0.60.3(postcss@8.4.49)(rollup@4.27.4)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))
+        version: 0.60.3(postcss@8.4.49)(rollup@4.28.0)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))
       valtio:
         specifier: ^1.13.2
         version: 1.13.2(@types/react@18.2.79)(react@18.3.1)
@@ -1015,8 +1015,8 @@ importers:
   apps/trip-tick/web:
     dependencies:
       '@a-type/ui':
-        specifier: ^1.2.0
-        version: 1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.2.0(react@18.3.1))(react@18.3.1)
+        specifier: ^1.2.1
+        version: 1.2.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.2.0(react@18.3.1))(react@18.3.1)
       '@a-type/utils':
         specifier: ^1.0.6
         version: 1.0.6
@@ -1079,7 +1079,7 @@ importers:
         version: 2.2.1
       unocss:
         specifier: 0.58.8
-        version: 0.58.8(postcss@8.4.49)(rollup@4.27.4)(vite@5.2.7(@types/node@22.10.1)(terser@5.36.0))
+        version: 0.58.8(postcss@8.4.49)(rollup@4.28.0)(vite@5.2.7(@types/node@22.10.1)(terser@5.36.0))
       valtio:
         specifier: ^1.11.2
         version: 1.13.2(@types/react@18.2.79)(react@18.3.1)
@@ -1136,8 +1136,8 @@ importers:
   apps/wish-wash/common:
     devDependencies:
       '@a-type/ui':
-        specifier: 1.2.0
-        version: 1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 1.2.1
+        version: 1.2.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@a-type/utils':
         specifier: ^1.0.8
         version: 1.1.0
@@ -1163,8 +1163,8 @@ importers:
   apps/wish-wash/hub:
     dependencies:
       '@a-type/ui':
-        specifier: 1.2.0
-        version: 1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 1.2.1
+        version: 1.2.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@a-type/utils':
         specifier: ^1.0.8
         version: 1.1.3
@@ -1207,7 +1207,7 @@ importers:
         version: 5.5.3
       unocss:
         specifier: ^0.58.0
-        version: 0.58.8(postcss@8.4.49)(rollup@4.27.4)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
+        version: 0.58.8(postcss@8.4.49)(rollup@4.28.0)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
       vite:
         specifier: ^5.0.10
         version: 5.3.1(@types/node@22.10.1)(terser@5.36.0)
@@ -1246,8 +1246,8 @@ importers:
   apps/wish-wash/web:
     dependencies:
       '@a-type/ui':
-        specifier: 1.2.0
-        version: 1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 1.2.1
+        version: 1.2.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@a-type/utils':
         specifier: 1.1.3
         version: 1.1.3
@@ -1292,7 +1292,7 @@ importers:
         version: 18.3.1(react@18.3.1)
       unocss:
         specifier: 0.61.0
-        version: 0.61.0(postcss@8.4.49)(rollup@4.27.4)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
+        version: 0.61.0(postcss@8.4.49)(rollup@4.28.0)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
       valtio:
         specifier: 1.13.2
         version: 1.13.2(@types/react@18.3.3)(react@18.3.1)
@@ -1335,7 +1335,7 @@ importers:
         version: 5.3.1(@types/node@22.10.1)(terser@5.36.0)
       vite-plugin-circular-dependency:
         specifier: ^0.2.1
-        version: 0.2.1(rollup@4.27.4)
+        version: 0.2.1(rollup@4.28.0)
       vite-plugin-pwa:
         specifier: ^0.19.8
         version: 0.19.8(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))(workbox-build@7.3.0(@types/babel__core@7.20.5))(workbox-window@6.6.1)
@@ -1343,8 +1343,8 @@ importers:
   blog:
     dependencies:
       '@a-type/ui':
-        specifier: ^1.2.0
-        version: 1.2.0(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^1.2.1
+        version: 1.2.1(@types/react-dom@18.3.1)(@types/react@18.3.12)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@astrojs/check':
         specifier: ^0.5.10
         version: 0.5.10(prettier@3.4.1)(typescript@5.5.3)
@@ -1365,7 +1365,7 @@ importers:
         version: link:../packages/graphql
       '@unocss/astro':
         specifier: ^0.59.4
-        version: 0.59.4(rollup@4.27.4)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
+        version: 0.59.4(rollup@4.28.0)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
       '@unocss/reset':
         specifier: ^0.59.4
         version: 0.59.4
@@ -1380,7 +1380,7 @@ importers:
         version: 5.5.3
       unocss:
         specifier: ^0.59.4
-        version: 0.59.4(postcss@8.4.49)(rollup@4.27.4)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
+        version: 0.59.4(postcss@8.4.49)(rollup@4.28.0)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
 
   cdk:
     dependencies:
@@ -1437,7 +1437,7 @@ importers:
     dependencies:
       '@a-type/auth-client':
         specifier: 1.0.12
-        version: 1.0.12(@a-type/ui@1.2.0(@types/react-dom@18.3.1)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        version: 1.0.12(@a-type/ui@1.2.1(@types/react-dom@18.3.1)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       '@a-type/utils':
         specifier: 1.1.4
         version: 1.1.4
@@ -1467,8 +1467,8 @@ importers:
         version: 1.13.2(@types/react@18.3.3)(react@18.3.1)
     devDependencies:
       '@a-type/ui':
-        specifier: 1.2.0
-        version: 1.2.0(@types/react-dom@18.3.1)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 1.2.1
+        version: 1.2.1(@types/react-dom@18.3.1)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@types/react':
         specifier: 18.3.3
         version: 18.3.3
@@ -1489,10 +1489,10 @@ importers:
         version: 5.5.3
       unocss:
         specifier: ^0.58.0
-        version: 0.58.8(postcss@8.4.49)(rollup@4.27.4)(vite@6.0.1(@types/node@22.10.1)(jiti@2.4.0)(terser@5.36.0)(tsx@4.19.2))
+        version: 0.58.8(postcss@8.4.49)(rollup@4.28.0)(vite@6.0.2(@types/node@22.10.1)(jiti@2.4.1)(terser@5.36.0)(tsx@4.19.2))
       vite-plugin-pwa:
         specifier: 0.19.2
-        version: 0.19.2(vite@6.0.1(@types/node@22.10.1)(jiti@2.4.0)(terser@5.36.0)(tsx@4.19.2))(workbox-build@7.3.0(@types/babel__core@7.20.5))(workbox-window@7.3.0)
+        version: 0.19.2(vite@6.0.2(@types/node@22.10.1)(jiti@2.4.1)(terser@5.36.0)(tsx@4.19.2))(workbox-build@7.3.0(@types/babel__core@7.20.5))(workbox-window@7.3.0)
 
   packages/db:
     dependencies:
@@ -1537,7 +1537,7 @@ importers:
     dependencies:
       '@a-type/auth-client':
         specifier: 1.0.12
-        version: 1.0.12(@a-type/ui@1.2.0(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        version: 1.0.12(@a-type/ui@1.2.1(@types/react-dom@18.3.1)(@types/react@18.3.12)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       '@a-type/utils':
         specifier: 1.1.4
         version: 1.1.4
@@ -1555,7 +1555,7 @@ importers:
         version: link:../libraries
       gql.tada:
         specifier: 1.8.2
-        version: 1.8.2(graphql@16.9.0)(svelte@5.2.10)(typescript@5.5.3)
+        version: 1.8.2(graphql@16.9.0)(svelte@5.4.0)(typescript@5.5.3)
       graphql:
         specifier: 16.9.0
         version: 16.9.0
@@ -1730,10 +1730,10 @@ importers:
     dependencies:
       '@a-type/auth-client':
         specifier: 1.0.12
-        version: 1.0.12(@a-type/ui@1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
+        version: 1.0.12(@a-type/ui@1.2.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       '@a-type/ui':
-        specifier: ^1.2.0
-        version: 1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: ^1.2.1
+        version: 1.2.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@biscuits/apps':
         specifier: workspace:*
         version: link:../packages/apps
@@ -1836,13 +1836,13 @@ importers:
         version: 5.5.3
       unocss:
         specifier: 0.59.4
-        version: 0.59.4(postcss@8.4.49)(rollup@4.27.4)(vite@5.2.13(@types/node@20.12.7)(terser@5.36.0))
+        version: 0.59.4(postcss@8.4.49)(rollup@4.28.0)(vite@5.2.13(@types/node@20.12.7)(terser@5.36.0))
       vite:
         specifier: 5.2.13
         version: 5.2.13(@types/node@20.12.7)(terser@5.36.0)
       vite-plugin-circular-dependency:
         specifier: ^0.2.1
-        version: 0.2.1(rollup@4.27.4)
+        version: 0.2.1(rollup@4.28.0)
 
 packages:
 
@@ -1899,8 +1899,8 @@ packages:
       react: ^18.3.1
       react-dom: ^18.3.1
 
-  '@a-type/ui@1.2.0':
-    resolution: {integrity: sha512-egwgvjDfsAvOUZlKlXgQIBNw07WVpy9qHODUhdk8D0MJI0XgHDrfvqhPokLRHWmNV870g/THSOLWfqbmCCnz1w==}
+  '@a-type/ui@1.2.1':
+    resolution: {integrity: sha512-pkzZBQfHLloOdz5FZOP90Hp0JiwZmsecByMfsRhCy2EDjvaTelWlqlqqc84ecpp2TQwbCgO2uYf9cOAAklqfrw==}
     peerDependencies:
       react: ^18
       react-dom: ^18
@@ -4250,8 +4250,8 @@ packages:
     resolution: {integrity: sha512-5WoDz3Y19Bg2BnErkZTp0en+c/i9PvgFS7MBe1+m60HjFr0hrphlAGp4yzI7pxpt4xShln4ZyYp4neJm8hmOkQ==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@eslint/js@9.15.0':
-    resolution: {integrity: sha512-tMTqrY+EzbXmKJR5ToI8lxu7jaN5EdmrBFJpQk5JmSlyLsx6o4t27r883K5xsLuCYCpfKBCGswMSWXsM+jB7lg==}
+  '@eslint/js@9.16.0':
+    resolution: {integrity: sha512-tw2HxzQkrbeuvyj1tG2Yqq+0H9wGoI2IMk4EOsQeX+vmd75FtJAzf+gTA69WF+baUKRYQ3x2kbLE08js5OsTVg==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
   '@eslint/object-schema@2.1.4':
@@ -5633,6 +5633,11 @@ packages:
     cpu: [arm]
     os: [android]
 
+  '@rollup/rollup-android-arm-eabi@4.28.0':
+    resolution: {integrity: sha512-wLJuPLT6grGZsy34g4N1yRfYeouklTgPhH1gWXCYspenKYD0s3cR99ZevOGw5BexMNywkbV3UkjADisozBmpPQ==}
+    cpu: [arm]
+    os: [android]
+
   '@rollup/rollup-android-arm-eabi@4.5.2':
     resolution: {integrity: sha512-ee7BudTwwrglFYSc3UnqInDDjCLWHKrFmGNi4aK7jlEyg4CyPa1DCMrZfsN1O13YT76UFEqXz2CoN7BCGpUlJw==}
     cpu: [arm]
@@ -5645,6 +5650,11 @@ packages:
 
   '@rollup/rollup-android-arm64@4.27.4':
     resolution: {integrity: sha512-wzKRQXISyi9UdCVRqEd0H4cMpzvHYt1f/C3CoIjES6cG++RHKhrBj2+29nPF0IB5kpy9MS71vs07fvrNGAl/iA==}
+    cpu: [arm64]
+    os: [android]
+
+  '@rollup/rollup-android-arm64@4.28.0':
+    resolution: {integrity: sha512-eiNkznlo0dLmVG/6wf+Ifi/v78G4d4QxRhuUl+s8EWZpDewgk7PX3ZyECUXU0Zq/Ca+8nU8cQpNC4Xgn2gFNDA==}
     cpu: [arm64]
     os: [android]
 
@@ -5663,6 +5673,11 @@ packages:
     cpu: [arm64]
     os: [darwin]
 
+  '@rollup/rollup-darwin-arm64@4.28.0':
+    resolution: {integrity: sha512-lmKx9yHsppblnLQZOGxdO66gT77bvdBtr/0P+TPOseowE7D9AJoBw8ZDULRasXRWf1Z86/gcOdpBrV6VDUY36Q==}
+    cpu: [arm64]
+    os: [darwin]
+
   '@rollup/rollup-darwin-arm64@4.5.2':
     resolution: {integrity: sha512-NTGJWoL8bKyqyWFn9/RzSv4hQ4wTbaAv0lHHRwf4OnpiiP4P8W0jiXbm8Nc5BCXKmWAwuvJY82mcIU2TayC20g==}
     cpu: [arm64]
@@ -5678,6 +5693,11 @@ packages:
     cpu: [x64]
     os: [darwin]
 
+  '@rollup/rollup-darwin-x64@4.28.0':
+    resolution: {integrity: sha512-8hxgfReVs7k9Js1uAIhS6zq3I+wKQETInnWQtgzt8JfGx51R1N6DRVy3F4o0lQwumbErRz52YqwjfvuwRxGv1w==}
+    cpu: [x64]
+    os: [darwin]
+
   '@rollup/rollup-darwin-x64@4.5.2':
     resolution: {integrity: sha512-hlKqj7bpPvU15sZo4za14u185lpMzdwWLMc9raMqPK4wywt0wR23y1CaVQ4oAFXat3b5/gmRntyfpwWTKl+vvA==}
     cpu: [x64]
@@ -5688,8 +5708,18 @@ packages:
     cpu: [arm64]
     os: [freebsd]
 
+  '@rollup/rollup-freebsd-arm64@4.28.0':
+    resolution: {integrity: sha512-lA1zZB3bFx5oxu9fYud4+g1mt+lYXCoch0M0V/xhqLoGatbzVse0wlSQ1UYOWKpuSu3gyN4qEc0Dxf/DII1bhQ==}
+    cpu: [arm64]
+    os: [freebsd]
+
   '@rollup/rollup-freebsd-x64@4.27.4':
     resolution: {integrity: sha512-wYcC5ycW2zvqtDYrE7deary2P2UFmSh85PUpAx+dwTCO9uw3sgzD6Gv9n5X4vLaQKsrfTSZZ7Z7uynQozPVvWA==}
+    cpu: [x64]
+    os: [freebsd]
+
+  '@rollup/rollup-freebsd-x64@4.28.0':
+    resolution: {integrity: sha512-aI2plavbUDjCQB/sRbeUZWX9qp12GfYkYSJOrdYTL/C5D53bsE2/nBPuoiJKoWp5SN78v2Vr8ZPnB+/VbQ2pFA==}
     cpu: [x64]
     os: [freebsd]
 
@@ -5700,6 +5730,11 @@ packages:
 
   '@rollup/rollup-linux-arm-gnueabihf@4.27.4':
     resolution: {integrity: sha512-9OwUnK/xKw6DyRlgx8UizeqRFOfi9mf5TYCw1uolDaJSbUmBxP85DE6T4ouCMoN6pXw8ZoTeZCSEfSaYo+/s1w==}
+    cpu: [arm]
+    os: [linux]
+
+  '@rollup/rollup-linux-arm-gnueabihf@4.28.0':
+    resolution: {integrity: sha512-WXveUPKtfqtaNvpf0iOb0M6xC64GzUX/OowbqfiCSXTdi/jLlOmH0Ba94/OkiY2yTGTwteo4/dsHRfh5bDCZ+w==}
     cpu: [arm]
     os: [linux]
 
@@ -5718,6 +5753,11 @@ packages:
     cpu: [arm]
     os: [linux]
 
+  '@rollup/rollup-linux-arm-musleabihf@4.28.0':
+    resolution: {integrity: sha512-yLc3O2NtOQR67lI79zsSc7lk31xjwcaocvdD1twL64PK1yNaIqCeWI9L5B4MFPAVGEVjH5k1oWSGuYX1Wutxpg==}
+    cpu: [arm]
+    os: [linux]
+
   '@rollup/rollup-linux-arm64-gnu@4.17.2':
     resolution: {integrity: sha512-EMMPHkiCRtE8Wdk3Qhtciq6BndLtstqZIroHiiGzB3C5LDJmIZcSzVtLRbwuXuUft1Cnv+9fxuDtDxz3k3EW2A==}
     cpu: [arm64]
@@ -5725,6 +5765,11 @@ packages:
 
   '@rollup/rollup-linux-arm64-gnu@4.27.4':
     resolution: {integrity: sha512-pleyNgyd1kkBkw2kOqlBx+0atfIIkkExOTiifoODo6qKDSpnc6WzUY5RhHdmTdIJXBdSnh6JknnYTtmQyobrVg==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@rollup/rollup-linux-arm64-gnu@4.28.0':
+    resolution: {integrity: sha512-+P9G9hjEpHucHRXqesY+3X9hD2wh0iNnJXX/QhS/J5vTdG6VhNYMxJ2rJkQOxRUd17u5mbMLHM7yWGZdAASfcg==}
     cpu: [arm64]
     os: [linux]
 
@@ -5743,6 +5788,11 @@ packages:
     cpu: [arm64]
     os: [linux]
 
+  '@rollup/rollup-linux-arm64-musl@4.28.0':
+    resolution: {integrity: sha512-1xsm2rCKSTpKzi5/ypT5wfc+4bOGa/9yI/eaOLW0oMs7qpC542APWhl4A37AENGZ6St6GBMWhCCMM6tXgTIplw==}
+    cpu: [arm64]
+    os: [linux]
+
   '@rollup/rollup-linux-arm64-musl@4.5.2':
     resolution: {integrity: sha512-KrRnuG5phJx756e62wxvWH2e+TK84MP2IVuPwfge+GBvWqIUfVzFRn09TKruuQBXzZp52Vyma7FjMDkwlA9xpg==}
     cpu: [arm64]
@@ -5758,6 +5808,11 @@ packages:
     cpu: [ppc64]
     os: [linux]
 
+  '@rollup/rollup-linux-powerpc64le-gnu@4.28.0':
+    resolution: {integrity: sha512-zgWxMq8neVQeXL+ouSf6S7DoNeo6EPgi1eeqHXVKQxqPy1B2NvTbaOUWPn/7CfMKL7xvhV0/+fq/Z/J69g1WAQ==}
+    cpu: [ppc64]
+    os: [linux]
+
   '@rollup/rollup-linux-riscv64-gnu@4.17.2':
     resolution: {integrity: sha512-BOaNfthf3X3fOWAB+IJ9kxTgPmMqPPH5f5k2DcCsRrBIbWnaJCgX2ll77dV1TdSy9SaXTR5iDXRL8n7AnoP5cg==}
     cpu: [riscv64]
@@ -5765,6 +5820,11 @@ packages:
 
   '@rollup/rollup-linux-riscv64-gnu@4.27.4':
     resolution: {integrity: sha512-qyyprhyGb7+RBfMPeww9FlHwKkCXdKHeGgSqmIXw9VSUtvyFZ6WZRtnxgbuz76FK7LyoN8t/eINRbPUcvXB5fw==}
+    cpu: [riscv64]
+    os: [linux]
+
+  '@rollup/rollup-linux-riscv64-gnu@4.28.0':
+    resolution: {integrity: sha512-VEdVYacLniRxbRJLNtzwGt5vwS0ycYshofI7cWAfj7Vg5asqj+pt+Q6x4n+AONSZW/kVm+5nklde0qs2EUwU2g==}
     cpu: [riscv64]
     os: [linux]
 
@@ -5778,6 +5838,11 @@ packages:
     cpu: [s390x]
     os: [linux]
 
+  '@rollup/rollup-linux-s390x-gnu@4.28.0':
+    resolution: {integrity: sha512-LQlP5t2hcDJh8HV8RELD9/xlYtEzJkm/aWGsauvdO2ulfl3QYRjqrKW+mGAIWP5kdNCBheqqqYIGElSRCaXfpw==}
+    cpu: [s390x]
+    os: [linux]
+
   '@rollup/rollup-linux-x64-gnu@4.17.2':
     resolution: {integrity: sha512-Hy7pLwByUOuyaFC6mAr7m+oMC+V7qyifzs/nW2OJfC8H4hbCzOX07Ov0VFk/zP3kBsELWNFi7rJtgbKYsav9QQ==}
     cpu: [x64]
@@ -5785,6 +5850,11 @@ packages:
 
   '@rollup/rollup-linux-x64-gnu@4.27.4':
     resolution: {integrity: sha512-Ni8mMtfo+o/G7DVtweXXV/Ol2TFf63KYjTtoZ5f078AUgJTmaIJnj4JFU7TK/9SVWTaSJGxPi5zMDgK4w+Ez7Q==}
+    cpu: [x64]
+    os: [linux]
+
+  '@rollup/rollup-linux-x64-gnu@4.28.0':
+    resolution: {integrity: sha512-Nl4KIzteVEKE9BdAvYoTkW19pa7LR/RBrT6F1dJCV/3pbjwDcaOq+edkP0LXuJ9kflW/xOK414X78r+K84+msw==}
     cpu: [x64]
     os: [linux]
 
@@ -5803,6 +5873,11 @@ packages:
     cpu: [x64]
     os: [linux]
 
+  '@rollup/rollup-linux-x64-musl@4.28.0':
+    resolution: {integrity: sha512-eKpJr4vBDOi4goT75MvW+0dXcNUqisK4jvibY9vDdlgLx+yekxSm55StsHbxUsRxSTt3JEQvlr3cGDkzcSP8bw==}
+    cpu: [x64]
+    os: [linux]
+
   '@rollup/rollup-linux-x64-musl@4.5.2':
     resolution: {integrity: sha512-/f0Q6Sc+Vw54Ws6N8fxaEe4R7at3b8pFyv+O/F2VaQ4hODUJcRUcCBJh6zuqtgQQt7w845VTkGLFgWZkP3tUoQ==}
     cpu: [x64]
@@ -5815,6 +5890,11 @@ packages:
 
   '@rollup/rollup-win32-arm64-msvc@4.27.4':
     resolution: {integrity: sha512-yOpVsA4K5qVwu2CaS3hHxluWIK5HQTjNV4tWjQXluMiiiu4pJj4BN98CvxohNCpcjMeTXk/ZMJBRbgRg8HBB6A==}
+    cpu: [arm64]
+    os: [win32]
+
+  '@rollup/rollup-win32-arm64-msvc@4.28.0':
+    resolution: {integrity: sha512-Vi+WR62xWGsE/Oj+mD0FNAPY2MEox3cfyG0zLpotZdehPFXwz6lypkGs5y38Jd/NVSbOD02aVad6q6QYF7i8Bg==}
     cpu: [arm64]
     os: [win32]
 
@@ -5833,6 +5913,11 @@ packages:
     cpu: [ia32]
     os: [win32]
 
+  '@rollup/rollup-win32-ia32-msvc@4.28.0':
+    resolution: {integrity: sha512-kN/Vpip8emMLn/eOza+4JwqDZBL6MPNpkdaEsgUtW1NYN3DZvZqSQrbKzJcTL6hd8YNmFTn7XGWMwccOcJBL0A==}
+    cpu: [ia32]
+    os: [win32]
+
   '@rollup/rollup-win32-ia32-msvc@4.5.2':
     resolution: {integrity: sha512-J5zL3riR4AOyU/J3M/i4k/zZ8eP1yT+nTmAKztCXJtnI36jYH0eepvob22mAQ/kLwfsK2TB6dbyVY1F8c/0H5A==}
     cpu: [ia32]
@@ -5845,6 +5930,11 @@ packages:
 
   '@rollup/rollup-win32-x64-msvc@4.27.4':
     resolution: {integrity: sha512-3j4jx1TppORdTAoBJRd+/wJRGCPC0ETWkXOecJ6PPZLj6SptXkrXcNqdj0oclbKML6FkQltdz7bBA3rUSirZug==}
+    cpu: [x64]
+    os: [win32]
+
+  '@rollup/rollup-win32-x64-msvc@4.28.0':
+    resolution: {integrity: sha512-Bvno2/aZT6usSa7lRDL2+hMjVAGjuqaymF1ApZm31JXzniR/hvr14jpU+/z4X6Gt5BPlzosscyJZGUvguXIqeQ==}
     cpu: [x64]
     os: [win32]
 
@@ -8923,8 +9013,8 @@ packages:
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     hasBin: true
 
-  eslint@9.15.0:
-    resolution: {integrity: sha512-7CrWySmIibCgT1Os28lUU6upBshZ+GxybLOrmRzi08kS8MBuO8QA7pXEgYgY5W8vK3e74xv0lpjo9DbaGU9Rkw==}
+  eslint@9.16.0:
+    resolution: {integrity: sha512-whp8mSQI4C8VXd+fLgSM0lh3UlmcFtVwUQjyKCFfsp+2ItAIYhlq/hqGahGqHE6cv9unM41VlqKk2VtKYR2TaA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
     hasBin: true
     peerDependencies:
@@ -8933,8 +9023,8 @@ packages:
       jiti:
         optional: true
 
-  esm-env@1.2.0:
-    resolution: {integrity: sha512-OhSQuHL3mUcaQHjGe8UMG8GsJIJHYYz0flR0h9fiTPNMupLMkb7TvcRD0EeJXW5a8GHBgfz08b6FDLNK7kkPQA==}
+  esm-env@1.2.1:
+    resolution: {integrity: sha512-U9JedYYjCnadUlXk7e1Kr+aENQhtUaoaV9+gZm1T8LC/YBAPJx3NSPIAurFOC0U5vrdSevnUJS2/wUVxGwPhng==}
 
   espree@10.0.1:
     resolution: {integrity: sha512-MWkrWZbJsL2UwnjxTX3gG8FneachS/Mwg7tdGXce011sJd5b0JG54vat5KHnfSBODZ3Wvzd2WnjxyzsRoVv+ww==}
@@ -8961,8 +9051,8 @@ packages:
     resolution: {integrity: sha512-ca9pw9fomFcKPvFLXhBKUK90ZvGibiGOvRJNbjljY7s7uq/5YO4BOzcYtJqExdx99rF6aAcnRxHmcUHcz6sQsg==}
     engines: {node: '>=0.10'}
 
-  esrap@1.2.2:
-    resolution: {integrity: sha512-F2pSJklxx1BlQIQgooczXCPHmcWpn6EsP5oo73LQfonG9fIlIENQ8vMmfGXeojP9MrkzUNAfyU5vdFlR9shHAw==}
+  esrap@1.2.3:
+    resolution: {integrity: sha512-ZlQmCCK+n7SGoqo7DnfKaP1sJZa49P01/dXzmjCASSo04p72w8EksT2NMK8CEX8DhKsfJXANioIw8VyHNsBfvQ==}
 
   esrecurse@4.3.0:
     resolution: {integrity: sha512-KmfKL3b6G+RXvP8N1vr3Tq1kL/oCFgn2NYXEtqP8/L3pKapUA4G8cFVaoF3SU323CD4XypR/ffioHmkti6/Tag==}
@@ -9844,8 +9934,8 @@ packages:
     resolution: {integrity: sha512-gFqAIbuKyyso/3G2qhiO2OM6shY6EPP/R0+mkDbyspxKazh8BXDC5FiFsUjlczgdNz/vfra0da2y+aHrusLG/Q==}
     hasBin: true
 
-  jiti@2.4.0:
-    resolution: {integrity: sha512-H5UpaUI+aHOqZXlYOaFP/8AzKsg+guWu+Pr3Y8i7+Y3zr1aXAvCvTAQ1RxSc6oVD8R8c7brgNtTVP91E7upH/g==}
+  jiti@2.4.1:
+    resolution: {integrity: sha512-yPBThwecp1wS9DmoA4x4KR2h3QoslacnDR8ypuFM962kI4/456Iy1oHx2RAgh4jfZNdn0bctsdadceiBUgpU1g==}
     hasBin: true
 
   jose@5.2.2:
@@ -11324,6 +11414,11 @@ packages:
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
     hasBin: true
 
+  rollup@4.28.0:
+    resolution: {integrity: sha512-G9GOrmgWHBma4YfCcX8PjH0qhXSdH8B4HDE2o4/jaxj93S4DPCIDoLcXz99eWMji4hB29UFCEd7B2gwGJDR9cQ==}
+    engines: {node: '>=18.0.0', npm: '>=8.0.0'}
+    hasBin: true
+
   rollup@4.5.2:
     resolution: {integrity: sha512-CRK1uoROBfkcqrZKyaFcqCcZWNsvJ6yVYZkqTlRocZhO2s5yER6Z3f/QaYtO8RGyloPnmhwgzuPQpNGeK210xQ==}
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
@@ -11724,8 +11819,8 @@ packages:
       svelte: ^3.55 || ^4.0.0-next.0 || ^4.0 || ^5.0.0-next.0
       typescript: ^4.9.4 || ^5.0.0
 
-  svelte@5.2.10:
-    resolution: {integrity: sha512-ON0OyO7vOmSjTc9mLjusu3vf1I7BvjovbiRB7j84F1WZMXV6dR+Tj4btIzxQxMHfzbGskaFmRa7qjgmBSVBnhQ==}
+  svelte@5.4.0:
+    resolution: {integrity: sha512-2I/mjD8cXDpKfdfUK+T6yo/OzugMXIm8lhyJUFM5F/gICMYnkl3C/+4cOSpia8TqpDsi6Qfm5+fdmBNMNmaf2g==}
     engines: {node: '>=18'}
 
   symbol-observable@4.0.0:
@@ -12621,8 +12716,8 @@ packages:
       terser:
         optional: true
 
-  vite@6.0.1:
-    resolution: {integrity: sha512-Ldn6gorLGr4mCdFnmeAOLweJxZ34HjKnDm4HGo6P66IEqTxQb36VEdFJQENKxWjupNfoIjvRUnswjn1hpYEpjQ==}
+  vite@6.0.2:
+    resolution: {integrity: sha512-XdQ+VsY2tJpBsKGs0wf3U/+azx8BBpYRHFAyKm5VeEZNOJZRB63q7Sc8Iup3k0TrN3KO6QgyzFf+opSbfY1y0g==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
     peerDependencies:
@@ -13163,19 +13258,19 @@ snapshots:
       graphql: 16.9.0
       typescript: 5.7.2
 
-  '@a-type/auth-client@1.0.12(@a-type/ui@1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
+  '@a-type/auth-client@1.0.12(@a-type/ui@1.2.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@a-type/ui': 1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@a-type/ui': 1.2.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
 
-  '@a-type/auth-client@1.0.12(@a-type/ui@1.2.0(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
+  '@a-type/auth-client@1.0.12(@a-type/ui@1.2.1(@types/react-dom@18.3.1)(@types/react@18.3.12)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@a-type/ui': 1.2.0(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@a-type/ui': 1.2.1(@types/react-dom@18.3.1)(@types/react@18.3.12)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
 
-  '@a-type/auth-client@1.0.12(@a-type/ui@1.2.0(@types/react-dom@18.3.1)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
+  '@a-type/auth-client@1.0.12(@a-type/ui@1.2.1(@types/react-dom@18.3.1)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@a-type/ui': 1.2.0(@types/react-dom@18.3.1)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      '@a-type/ui': 1.2.1(@types/react-dom@18.3.1)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react: 18.3.1
 
   '@a-type/auth@0.6.9':
@@ -13232,9 +13327,9 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@a-type/ui@1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@a-type/ui@1.2.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@a-type/utils': 1.1.4
+      '@a-type/utils': 1.1.0
       '@radix-ui/react-accordion': 1.2.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-checkbox': 1.1.2(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-collapsible': 1.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -13281,9 +13376,9 @@ snapshots:
       - '@types/react-dom'
       - csstype
 
-  '@a-type/ui@1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.2.0(react@18.3.1))(react@18.3.1)':
+  '@a-type/ui@1.2.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.2.0(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@a-type/utils': 1.1.4
+      '@a-type/utils': 1.1.0
       '@radix-ui/react-accordion': 1.2.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-checkbox': 1.1.2(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-collapsible': 1.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.2.0(react@18.3.1))(react@18.3.1)
@@ -13330,9 +13425,9 @@ snapshots:
       - '@types/react-dom'
       - csstype
 
-  '@a-type/ui@1.2.0(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@a-type/ui@1.2.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@a-type/utils': 1.1.4
+      '@a-type/utils': 1.1.0
       '@radix-ui/react-accordion': 1.2.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-checkbox': 1.1.2(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-collapsible': 1.1.1(@types/react-dom@18.2.25)(@types/react@18.2.79)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -13373,15 +13468,15 @@ snapshots:
       prosemirror-model: 1.21.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      react-hot-toast: 2.4.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react-hot-toast: 2.4.1(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     transitivePeerDependencies:
       - '@types/react'
       - '@types/react-dom'
       - csstype
 
-  '@a-type/ui@1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@a-type/ui@1.2.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@a-type/utils': 1.1.4
+      '@a-type/utils': 1.1.0
       '@radix-ui/react-accordion': 1.2.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-checkbox': 1.1.2(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-collapsible': 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -13428,58 +13523,9 @@ snapshots:
       - '@types/react-dom'
       - csstype
 
-  '@a-type/ui@1.2.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@a-type/ui@1.2.1(@types/react-dom@18.3.1)(@types/react@18.3.12)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@a-type/utils': 1.1.4
-      '@radix-ui/react-accordion': 1.2.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-checkbox': 1.1.2(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-collapsible': 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-context-menu': 2.2.2(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-dialog': 1.1.2(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-dropdown-menu': 2.1.2(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-icons': 1.3.2(react@18.3.1)
-      '@radix-ui/react-menu': 2.1.2(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-popover': 1.1.2(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-progress': 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-radio-group': 1.2.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-scroll-area': 1.2.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-select': 2.1.2(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-slider': 1.2.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-slot': 1.1.0(@types/react@18.3.3)(react@18.3.1)
-      '@radix-ui/react-switch': 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-tabs': 1.1.1(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-toast': 1.2.2(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-toggle-group': 1.1.0(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@radix-ui/react-tooltip': 1.1.4(@types/react-dom@18.3.0)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@react-spring/web': 9.7.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@tiptap/core': 2.4.0(@tiptap/pm@2.4.0)
-      '@tiptap/extension-document': 2.4.0(@tiptap/core@2.4.0(@tiptap/pm@2.4.0))
-      '@tiptap/extension-paragraph': 2.4.0(@tiptap/core@2.4.0(@tiptap/pm@2.4.0))
-      '@tiptap/pm': 2.4.0
-      '@tiptap/react': 2.4.0(@tiptap/core@2.4.0(@tiptap/pm@2.4.0))(@tiptap/pm@2.4.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      '@tiptap/starter-kit': 2.4.0(@tiptap/pm@2.4.0)
-      '@use-gesture/react': 10.3.1(react@18.3.1)
-      browser-image-resizer: 2.4.1
-      calendar-blocks: 0.3.1(react@18.3.1)
-      clsx: 2.1.1
-      color-interpolate: 1.0.5
-      color-parse: 2.0.2
-      color-space: 2.0.1
-      date-fns: 2.30.0
-      formik: 2.4.6(react@18.3.1)
-      pluralize: 8.0.0
-      prosemirror-model: 1.21.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-      react-hot-toast: 2.4.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-    transitivePeerDependencies:
-      - '@types/react'
-      - '@types/react-dom'
-      - csstype
-
-  '@a-type/ui@1.2.0(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
-    dependencies:
-      '@a-type/utils': 1.1.4
+      '@a-type/utils': 1.1.0
       '@radix-ui/react-accordion': 1.2.1(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-checkbox': 1.1.2(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-collapsible': 1.1.1(@types/react-dom@18.3.1)(@types/react@18.3.12)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -13520,15 +13566,15 @@ snapshots:
       prosemirror-model: 1.21.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      react-hot-toast: 2.4.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react-hot-toast: 2.4.1(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     transitivePeerDependencies:
       - '@types/react'
       - '@types/react-dom'
       - csstype
 
-  '@a-type/ui@1.2.0(@types/react-dom@18.3.1)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
+  '@a-type/ui@1.2.1(@types/react-dom@18.3.1)(@types/react@18.3.3)(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)':
     dependencies:
-      '@a-type/utils': 1.1.4
+      '@a-type/utils': 1.1.0
       '@radix-ui/react-accordion': 1.2.1(@types/react-dom@18.3.1)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-checkbox': 1.1.2(@types/react-dom@18.3.1)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       '@radix-ui/react-collapsible': 1.1.1(@types/react-dom@18.3.1)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -13569,7 +13615,7 @@ snapshots:
       prosemirror-model: 1.21.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      react-hot-toast: 2.4.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react-hot-toast: 2.4.1(csstype@3.1.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
     transitivePeerDependencies:
       - '@types/react'
       - '@types/react-dom'
@@ -16305,9 +16351,9 @@ snapshots:
       eslint: 9.1.1
       eslint-visitor-keys: 3.4.3
 
-  '@eslint-community/eslint-utils@4.4.1(eslint@9.15.0(jiti@2.4.0))':
+  '@eslint-community/eslint-utils@4.4.1(eslint@9.16.0(jiti@2.4.1))':
     dependencies:
-      eslint: 9.15.0(jiti@2.4.0)
+      eslint: 9.16.0(jiti@2.4.1)
       eslint-visitor-keys: 3.4.3
     optional: true
 
@@ -16375,7 +16421,7 @@ snapshots:
 
   '@eslint/js@9.1.1': {}
 
-  '@eslint/js@9.15.0':
+  '@eslint/js@9.16.0':
     optional: true
 
   '@eslint/object-schema@2.1.4':
@@ -16423,14 +16469,14 @@ snapshots:
     dependencies:
       crypto-js: 4.2.0
 
-  '@gql.tada/cli-utils@1.5.1(@0no-co/graphqlsp@1.12.11(graphql@16.9.0)(typescript@5.5.3))(graphql@16.9.0)(svelte@5.2.10)(typescript@5.5.3)':
+  '@gql.tada/cli-utils@1.5.1(@0no-co/graphqlsp@1.12.11(graphql@16.9.0)(typescript@5.5.3))(graphql@16.9.0)(svelte@5.4.0)(typescript@5.5.3)':
     dependencies:
       '@0no-co/graphqlsp': 1.12.11(graphql@16.9.0)(typescript@5.5.3)
       '@gql.tada/internal': 1.0.4(graphql@16.9.0)(typescript@5.5.3)
       '@vue/compiler-dom': 3.4.31
       '@vue/language-core': 2.0.26(typescript@5.5.3)
       graphql: 16.9.0
-      svelte2tsx: 0.7.13(svelte@5.2.10)(typescript@5.5.3)
+      svelte2tsx: 0.7.13(svelte@5.4.0)(typescript@5.5.3)
       typescript: 5.5.3
     transitivePeerDependencies:
       - svelte
@@ -19943,13 +19989,13 @@ snapshots:
     optionalDependencies:
       rollup: 2.79.2
 
-  '@rollup/pluginutils@5.1.0(rollup@4.27.4)':
+  '@rollup/pluginutils@5.1.0(rollup@4.28.0)':
     dependencies:
       '@types/estree': 1.0.5
       estree-walker: 2.0.2
       picomatch: 2.3.1
     optionalDependencies:
-      rollup: 4.27.4
+      rollup: 4.28.0
 
   '@rollup/pluginutils@5.1.3(rollup@2.79.2)':
     dependencies:
@@ -19959,18 +20005,21 @@ snapshots:
     optionalDependencies:
       rollup: 2.79.2
 
-  '@rollup/pluginutils@5.1.3(rollup@4.27.4)':
+  '@rollup/pluginutils@5.1.3(rollup@4.28.0)':
     dependencies:
       '@types/estree': 1.0.6
       estree-walker: 2.0.2
       picomatch: 4.0.2
     optionalDependencies:
-      rollup: 4.27.4
+      rollup: 4.28.0
 
   '@rollup/rollup-android-arm-eabi@4.17.2':
     optional: true
 
   '@rollup/rollup-android-arm-eabi@4.27.4':
+    optional: true
+
+  '@rollup/rollup-android-arm-eabi@4.28.0':
     optional: true
 
   '@rollup/rollup-android-arm-eabi@4.5.2':
@@ -19982,6 +20031,9 @@ snapshots:
   '@rollup/rollup-android-arm64@4.27.4':
     optional: true
 
+  '@rollup/rollup-android-arm64@4.28.0':
+    optional: true
+
   '@rollup/rollup-android-arm64@4.5.2':
     optional: true
 
@@ -19989,6 +20041,9 @@ snapshots:
     optional: true
 
   '@rollup/rollup-darwin-arm64@4.27.4':
+    optional: true
+
+  '@rollup/rollup-darwin-arm64@4.28.0':
     optional: true
 
   '@rollup/rollup-darwin-arm64@4.5.2':
@@ -20000,19 +20055,31 @@ snapshots:
   '@rollup/rollup-darwin-x64@4.27.4':
     optional: true
 
+  '@rollup/rollup-darwin-x64@4.28.0':
+    optional: true
+
   '@rollup/rollup-darwin-x64@4.5.2':
     optional: true
 
   '@rollup/rollup-freebsd-arm64@4.27.4':
     optional: true
 
+  '@rollup/rollup-freebsd-arm64@4.28.0':
+    optional: true
+
   '@rollup/rollup-freebsd-x64@4.27.4':
+    optional: true
+
+  '@rollup/rollup-freebsd-x64@4.28.0':
     optional: true
 
   '@rollup/rollup-linux-arm-gnueabihf@4.17.2':
     optional: true
 
   '@rollup/rollup-linux-arm-gnueabihf@4.27.4':
+    optional: true
+
+  '@rollup/rollup-linux-arm-gnueabihf@4.28.0':
     optional: true
 
   '@rollup/rollup-linux-arm-gnueabihf@4.5.2':
@@ -20024,10 +20091,16 @@ snapshots:
   '@rollup/rollup-linux-arm-musleabihf@4.27.4':
     optional: true
 
+  '@rollup/rollup-linux-arm-musleabihf@4.28.0':
+    optional: true
+
   '@rollup/rollup-linux-arm64-gnu@4.17.2':
     optional: true
 
   '@rollup/rollup-linux-arm64-gnu@4.27.4':
+    optional: true
+
+  '@rollup/rollup-linux-arm64-gnu@4.28.0':
     optional: true
 
   '@rollup/rollup-linux-arm64-gnu@4.5.2':
@@ -20039,6 +20112,9 @@ snapshots:
   '@rollup/rollup-linux-arm64-musl@4.27.4':
     optional: true
 
+  '@rollup/rollup-linux-arm64-musl@4.28.0':
+    optional: true
+
   '@rollup/rollup-linux-arm64-musl@4.5.2':
     optional: true
 
@@ -20048,10 +20124,16 @@ snapshots:
   '@rollup/rollup-linux-powerpc64le-gnu@4.27.4':
     optional: true
 
+  '@rollup/rollup-linux-powerpc64le-gnu@4.28.0':
+    optional: true
+
   '@rollup/rollup-linux-riscv64-gnu@4.17.2':
     optional: true
 
   '@rollup/rollup-linux-riscv64-gnu@4.27.4':
+    optional: true
+
+  '@rollup/rollup-linux-riscv64-gnu@4.28.0':
     optional: true
 
   '@rollup/rollup-linux-s390x-gnu@4.17.2':
@@ -20060,10 +20142,16 @@ snapshots:
   '@rollup/rollup-linux-s390x-gnu@4.27.4':
     optional: true
 
+  '@rollup/rollup-linux-s390x-gnu@4.28.0':
+    optional: true
+
   '@rollup/rollup-linux-x64-gnu@4.17.2':
     optional: true
 
   '@rollup/rollup-linux-x64-gnu@4.27.4':
+    optional: true
+
+  '@rollup/rollup-linux-x64-gnu@4.28.0':
     optional: true
 
   '@rollup/rollup-linux-x64-gnu@4.5.2':
@@ -20075,6 +20163,9 @@ snapshots:
   '@rollup/rollup-linux-x64-musl@4.27.4':
     optional: true
 
+  '@rollup/rollup-linux-x64-musl@4.28.0':
+    optional: true
+
   '@rollup/rollup-linux-x64-musl@4.5.2':
     optional: true
 
@@ -20082,6 +20173,9 @@ snapshots:
     optional: true
 
   '@rollup/rollup-win32-arm64-msvc@4.27.4':
+    optional: true
+
+  '@rollup/rollup-win32-arm64-msvc@4.28.0':
     optional: true
 
   '@rollup/rollup-win32-arm64-msvc@4.5.2':
@@ -20093,6 +20187,9 @@ snapshots:
   '@rollup/rollup-win32-ia32-msvc@4.27.4':
     optional: true
 
+  '@rollup/rollup-win32-ia32-msvc@4.28.0':
+    optional: true
+
   '@rollup/rollup-win32-ia32-msvc@4.5.2':
     optional: true
 
@@ -20100,6 +20197,9 @@ snapshots:
     optional: true
 
   '@rollup/rollup-win32-x64-msvc@4.27.4':
+    optional: true
+
+  '@rollup/rollup-win32-x64-msvc@4.28.0':
     optional: true
 
   '@rollup/rollup-win32-x64-msvc@4.5.2':
@@ -21061,7 +21161,7 @@ snapshots:
 
   '@types/react-dom@18.3.1':
     dependencies:
-      '@types/react': 18.3.3
+      '@types/react': 18.3.12
     optional: true
 
   '@types/react-reconciler@0.26.7':
@@ -21179,81 +21279,81 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  '@unocss/astro@0.58.8(rollup@4.27.4)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))':
+  '@unocss/astro@0.58.8(rollup@4.28.0)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))':
     dependencies:
       '@unocss/core': 0.58.8
       '@unocss/reset': 0.58.8
-      '@unocss/vite': 0.58.8(rollup@4.27.4)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))
+      '@unocss/vite': 0.58.8(rollup@4.28.0)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))
     optionalDependencies:
       vite: 5.2.11(@types/node@22.10.1)(terser@5.36.0)
     transitivePeerDependencies:
       - rollup
 
-  '@unocss/astro@0.58.8(rollup@4.27.4)(vite@5.2.7(@types/node@22.10.1)(terser@5.36.0))':
+  '@unocss/astro@0.58.8(rollup@4.28.0)(vite@5.2.7(@types/node@22.10.1)(terser@5.36.0))':
     dependencies:
       '@unocss/core': 0.58.8
       '@unocss/reset': 0.58.8
-      '@unocss/vite': 0.58.8(rollup@4.27.4)(vite@5.2.7(@types/node@22.10.1)(terser@5.36.0))
+      '@unocss/vite': 0.58.8(rollup@4.28.0)(vite@5.2.7(@types/node@22.10.1)(terser@5.36.0))
     optionalDependencies:
       vite: 5.2.7(@types/node@22.10.1)(terser@5.36.0)
     transitivePeerDependencies:
       - rollup
 
-  '@unocss/astro@0.58.8(rollup@4.27.4)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))':
+  '@unocss/astro@0.58.8(rollup@4.28.0)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))':
     dependencies:
       '@unocss/core': 0.58.8
       '@unocss/reset': 0.58.8
-      '@unocss/vite': 0.58.8(rollup@4.27.4)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
+      '@unocss/vite': 0.58.8(rollup@4.28.0)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
     optionalDependencies:
       vite: 5.3.1(@types/node@22.10.1)(terser@5.36.0)
     transitivePeerDependencies:
       - rollup
 
-  '@unocss/astro@0.58.8(rollup@4.27.4)(vite@6.0.1(@types/node@22.10.1)(jiti@2.4.0)(terser@5.36.0)(tsx@4.19.2))':
+  '@unocss/astro@0.58.8(rollup@4.28.0)(vite@6.0.2(@types/node@22.10.1)(jiti@2.4.1)(terser@5.36.0)(tsx@4.19.2))':
     dependencies:
       '@unocss/core': 0.58.8
       '@unocss/reset': 0.58.8
-      '@unocss/vite': 0.58.8(rollup@4.27.4)(vite@6.0.1(@types/node@22.10.1)(jiti@2.4.0)(terser@5.36.0)(tsx@4.19.2))
+      '@unocss/vite': 0.58.8(rollup@4.28.0)(vite@6.0.2(@types/node@22.10.1)(jiti@2.4.1)(terser@5.36.0)(tsx@4.19.2))
     optionalDependencies:
-      vite: 6.0.1(@types/node@22.10.1)(jiti@2.4.0)(terser@5.36.0)(tsx@4.19.2)
+      vite: 6.0.2(@types/node@22.10.1)(jiti@2.4.1)(terser@5.36.0)(tsx@4.19.2)
     transitivePeerDependencies:
       - rollup
 
-  '@unocss/astro@0.59.4(rollup@4.27.4)(vite@5.2.13(@types/node@20.12.7)(terser@5.36.0))':
+  '@unocss/astro@0.59.4(rollup@4.28.0)(vite@5.2.13(@types/node@20.12.7)(terser@5.36.0))':
     dependencies:
       '@unocss/core': 0.59.4
       '@unocss/reset': 0.59.4
-      '@unocss/vite': 0.59.4(rollup@4.27.4)(vite@5.2.13(@types/node@20.12.7)(terser@5.36.0))
+      '@unocss/vite': 0.59.4(rollup@4.28.0)(vite@5.2.13(@types/node@20.12.7)(terser@5.36.0))
     optionalDependencies:
       vite: 5.2.13(@types/node@20.12.7)(terser@5.36.0)
     transitivePeerDependencies:
       - rollup
 
-  '@unocss/astro@0.59.4(rollup@4.27.4)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))':
+  '@unocss/astro@0.59.4(rollup@4.28.0)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))':
     dependencies:
       '@unocss/core': 0.59.4
       '@unocss/reset': 0.59.4
-      '@unocss/vite': 0.59.4(rollup@4.27.4)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
+      '@unocss/vite': 0.59.4(rollup@4.28.0)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
     optionalDependencies:
       vite: 5.3.1(@types/node@22.10.1)(terser@5.36.0)
     transitivePeerDependencies:
       - rollup
 
-  '@unocss/astro@0.60.3(rollup@4.27.4)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))':
+  '@unocss/astro@0.60.3(rollup@4.28.0)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))':
     dependencies:
       '@unocss/core': 0.60.3
       '@unocss/reset': 0.60.3
-      '@unocss/vite': 0.60.3(rollup@4.27.4)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))
+      '@unocss/vite': 0.60.3(rollup@4.28.0)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))
     optionalDependencies:
       vite: 5.2.11(@types/node@22.10.1)(terser@5.36.0)
     transitivePeerDependencies:
       - rollup
 
-  '@unocss/astro@0.61.0(rollup@4.27.4)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))':
+  '@unocss/astro@0.61.0(rollup@4.28.0)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))':
     dependencies:
       '@unocss/core': 0.61.0
       '@unocss/reset': 0.61.0
-      '@unocss/vite': 0.61.0(rollup@4.27.4)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
+      '@unocss/vite': 0.61.0(rollup@4.28.0)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
     optionalDependencies:
       vite: 5.3.1(@types/node@22.10.1)(terser@5.36.0)
     transitivePeerDependencies:
@@ -21277,10 +21377,10 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  '@unocss/cli@0.58.8(rollup@4.27.4)':
+  '@unocss/cli@0.58.8(rollup@4.28.0)':
     dependencies:
       '@ampproject/remapping': 2.3.0
-      '@rollup/pluginutils': 5.1.0(rollup@4.27.4)
+      '@rollup/pluginutils': 5.1.0(rollup@4.28.0)
       '@unocss/config': 0.58.8
       '@unocss/core': 0.58.8
       '@unocss/preset-uno': 0.58.8
@@ -21295,10 +21395,10 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  '@unocss/cli@0.59.4(rollup@4.27.4)':
+  '@unocss/cli@0.59.4(rollup@4.28.0)':
     dependencies:
       '@ampproject/remapping': 2.3.0
-      '@rollup/pluginutils': 5.1.0(rollup@4.27.4)
+      '@rollup/pluginutils': 5.1.0(rollup@4.28.0)
       '@unocss/config': 0.59.4
       '@unocss/core': 0.59.4
       '@unocss/preset-uno': 0.59.4
@@ -21313,10 +21413,10 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  '@unocss/cli@0.60.3(rollup@4.27.4)':
+  '@unocss/cli@0.60.3(rollup@4.28.0)':
     dependencies:
       '@ampproject/remapping': 2.3.0
-      '@rollup/pluginutils': 5.1.0(rollup@4.27.4)
+      '@rollup/pluginutils': 5.1.0(rollup@4.28.0)
       '@unocss/config': 0.60.3
       '@unocss/core': 0.60.3
       '@unocss/preset-uno': 0.60.3
@@ -21331,10 +21431,10 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  '@unocss/cli@0.61.0(rollup@4.27.4)':
+  '@unocss/cli@0.61.0(rollup@4.28.0)':
     dependencies:
       '@ampproject/remapping': 2.3.0
-      '@rollup/pluginutils': 5.1.3(rollup@4.27.4)
+      '@rollup/pluginutils': 5.1.3(rollup@4.28.0)
       '@unocss/config': 0.61.0
       '@unocss/core': 0.61.0
       '@unocss/preset-uno': 0.61.0
@@ -21926,10 +22026,10 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  '@unocss/vite@0.58.8(rollup@4.27.4)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))':
+  '@unocss/vite@0.58.8(rollup@4.28.0)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))':
     dependencies:
       '@ampproject/remapping': 2.3.0
-      '@rollup/pluginutils': 5.1.0(rollup@4.27.4)
+      '@rollup/pluginutils': 5.1.0(rollup@4.28.0)
       '@unocss/config': 0.58.8
       '@unocss/core': 0.58.8
       '@unocss/inspector': 0.58.8
@@ -21942,10 +22042,10 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  '@unocss/vite@0.58.8(rollup@4.27.4)(vite@5.2.7(@types/node@22.10.1)(terser@5.36.0))':
+  '@unocss/vite@0.58.8(rollup@4.28.0)(vite@5.2.7(@types/node@22.10.1)(terser@5.36.0))':
     dependencies:
       '@ampproject/remapping': 2.3.0
-      '@rollup/pluginutils': 5.1.0(rollup@4.27.4)
+      '@rollup/pluginutils': 5.1.0(rollup@4.28.0)
       '@unocss/config': 0.58.8
       '@unocss/core': 0.58.8
       '@unocss/inspector': 0.58.8
@@ -21958,10 +22058,10 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  '@unocss/vite@0.58.8(rollup@4.27.4)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))':
+  '@unocss/vite@0.58.8(rollup@4.28.0)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))':
     dependencies:
       '@ampproject/remapping': 2.3.0
-      '@rollup/pluginutils': 5.1.0(rollup@4.27.4)
+      '@rollup/pluginutils': 5.1.0(rollup@4.28.0)
       '@unocss/config': 0.58.8
       '@unocss/core': 0.58.8
       '@unocss/inspector': 0.58.8
@@ -21974,10 +22074,10 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  '@unocss/vite@0.58.8(rollup@4.27.4)(vite@6.0.1(@types/node@22.10.1)(jiti@2.4.0)(terser@5.36.0)(tsx@4.19.2))':
+  '@unocss/vite@0.58.8(rollup@4.28.0)(vite@6.0.2(@types/node@22.10.1)(jiti@2.4.1)(terser@5.36.0)(tsx@4.19.2))':
     dependencies:
       '@ampproject/remapping': 2.3.0
-      '@rollup/pluginutils': 5.1.0(rollup@4.27.4)
+      '@rollup/pluginutils': 5.1.0(rollup@4.28.0)
       '@unocss/config': 0.58.8
       '@unocss/core': 0.58.8
       '@unocss/inspector': 0.58.8
@@ -21986,14 +22086,14 @@ snapshots:
       chokidar: 3.6.0
       fast-glob: 3.3.2
       magic-string: 0.30.10
-      vite: 6.0.1(@types/node@22.10.1)(jiti@2.4.0)(terser@5.36.0)(tsx@4.19.2)
+      vite: 6.0.2(@types/node@22.10.1)(jiti@2.4.1)(terser@5.36.0)(tsx@4.19.2)
     transitivePeerDependencies:
       - rollup
 
-  '@unocss/vite@0.59.4(rollup@4.27.4)(vite@5.2.13(@types/node@20.12.7)(terser@5.36.0))':
+  '@unocss/vite@0.59.4(rollup@4.28.0)(vite@5.2.13(@types/node@20.12.7)(terser@5.36.0))':
     dependencies:
       '@ampproject/remapping': 2.3.0
-      '@rollup/pluginutils': 5.1.0(rollup@4.27.4)
+      '@rollup/pluginutils': 5.1.0(rollup@4.28.0)
       '@unocss/config': 0.59.4
       '@unocss/core': 0.59.4
       '@unocss/inspector': 0.59.4
@@ -22006,10 +22106,10 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  '@unocss/vite@0.59.4(rollup@4.27.4)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))':
+  '@unocss/vite@0.59.4(rollup@4.28.0)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))':
     dependencies:
       '@ampproject/remapping': 2.3.0
-      '@rollup/pluginutils': 5.1.0(rollup@4.27.4)
+      '@rollup/pluginutils': 5.1.0(rollup@4.28.0)
       '@unocss/config': 0.59.4
       '@unocss/core': 0.59.4
       '@unocss/inspector': 0.59.4
@@ -22022,10 +22122,10 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  '@unocss/vite@0.60.3(rollup@4.27.4)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))':
+  '@unocss/vite@0.60.3(rollup@4.28.0)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))':
     dependencies:
       '@ampproject/remapping': 2.3.0
-      '@rollup/pluginutils': 5.1.0(rollup@4.27.4)
+      '@rollup/pluginutils': 5.1.0(rollup@4.28.0)
       '@unocss/config': 0.60.3
       '@unocss/core': 0.60.3
       '@unocss/inspector': 0.60.3
@@ -22038,10 +22138,10 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  '@unocss/vite@0.61.0(rollup@4.27.4)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))':
+  '@unocss/vite@0.61.0(rollup@4.28.0)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))':
     dependencies:
       '@ampproject/remapping': 2.3.0
-      '@rollup/pluginutils': 5.1.3(rollup@4.27.4)
+      '@rollup/pluginutils': 5.1.3(rollup@4.28.0)
       '@unocss/config': 0.61.0
       '@unocss/core': 0.61.0
       '@unocss/inspector': 0.61.0
@@ -24307,14 +24407,14 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint@9.15.0(jiti@2.4.0):
+  eslint@9.16.0(jiti@2.4.1):
     dependencies:
-      '@eslint-community/eslint-utils': 4.4.1(eslint@9.15.0(jiti@2.4.0))
+      '@eslint-community/eslint-utils': 4.4.1(eslint@9.16.0(jiti@2.4.1))
       '@eslint-community/regexpp': 4.12.1
       '@eslint/config-array': 0.19.0
       '@eslint/core': 0.9.0
       '@eslint/eslintrc': 3.2.0
-      '@eslint/js': 9.15.0
+      '@eslint/js': 9.16.0
       '@eslint/plugin-kit': 0.2.3
       '@humanfs/node': 0.16.6
       '@humanwhocodes/module-importer': 1.0.1
@@ -24344,12 +24444,12 @@ snapshots:
       natural-compare: 1.4.0
       optionator: 0.9.4
     optionalDependencies:
-      jiti: 2.4.0
+      jiti: 2.4.1
     transitivePeerDependencies:
       - supports-color
     optional: true
 
-  esm-env@1.2.0: {}
+  esm-env@1.2.1: {}
 
   espree@10.0.1:
     dependencies:
@@ -24381,7 +24481,7 @@ snapshots:
       estraverse: 5.3.0
     optional: true
 
-  esrap@1.2.2:
+  esrap@1.2.3:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.5.0
       '@types/estree': 1.0.6
@@ -24898,11 +24998,11 @@ snapshots:
     transitivePeerDependencies:
       - graphql
 
-  gql.tada@1.8.2(graphql@16.9.0)(svelte@5.2.10)(typescript@5.5.3):
+  gql.tada@1.8.2(graphql@16.9.0)(svelte@5.4.0)(typescript@5.5.3):
     dependencies:
       '@0no-co/graphql.web': 1.0.7(graphql@16.9.0)
       '@0no-co/graphqlsp': 1.12.11(graphql@16.9.0)(typescript@5.5.3)
-      '@gql.tada/cli-utils': 1.5.1(@0no-co/graphqlsp@1.12.11(graphql@16.9.0)(typescript@5.5.3))(graphql@16.9.0)(svelte@5.2.10)(typescript@5.5.3)
+      '@gql.tada/cli-utils': 1.5.1(@0no-co/graphqlsp@1.12.11(graphql@16.9.0)(typescript@5.5.3))(graphql@16.9.0)(svelte@5.4.0)(typescript@5.5.3)
       '@gql.tada/internal': 1.0.4(graphql@16.9.0)(typescript@5.5.3)
       typescript: 5.5.3
     transitivePeerDependencies:
@@ -25445,7 +25545,7 @@ snapshots:
 
   jiti@1.21.0: {}
 
-  jiti@2.4.0:
+  jiti@2.4.1:
     optional: true
 
   jose@5.2.2: {}
@@ -26990,14 +27090,6 @@ snapshots:
     transitivePeerDependencies:
       - csstype
 
-  react-hot-toast@2.4.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
-    dependencies:
-      goober: 2.1.14(csstype@3.1.3)
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
-    transitivePeerDependencies:
-      - csstype
-
   react-hotkeys-hook@4.5.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
       react: 18.3.1
@@ -27384,6 +27476,30 @@ snapshots:
       '@rollup/rollup-win32-arm64-msvc': 4.27.4
       '@rollup/rollup-win32-ia32-msvc': 4.27.4
       '@rollup/rollup-win32-x64-msvc': 4.27.4
+      fsevents: 2.3.3
+
+  rollup@4.28.0:
+    dependencies:
+      '@types/estree': 1.0.6
+    optionalDependencies:
+      '@rollup/rollup-android-arm-eabi': 4.28.0
+      '@rollup/rollup-android-arm64': 4.28.0
+      '@rollup/rollup-darwin-arm64': 4.28.0
+      '@rollup/rollup-darwin-x64': 4.28.0
+      '@rollup/rollup-freebsd-arm64': 4.28.0
+      '@rollup/rollup-freebsd-x64': 4.28.0
+      '@rollup/rollup-linux-arm-gnueabihf': 4.28.0
+      '@rollup/rollup-linux-arm-musleabihf': 4.28.0
+      '@rollup/rollup-linux-arm64-gnu': 4.28.0
+      '@rollup/rollup-linux-arm64-musl': 4.28.0
+      '@rollup/rollup-linux-powerpc64le-gnu': 4.28.0
+      '@rollup/rollup-linux-riscv64-gnu': 4.28.0
+      '@rollup/rollup-linux-s390x-gnu': 4.28.0
+      '@rollup/rollup-linux-x64-gnu': 4.28.0
+      '@rollup/rollup-linux-x64-musl': 4.28.0
+      '@rollup/rollup-win32-arm64-msvc': 4.28.0
+      '@rollup/rollup-win32-ia32-msvc': 4.28.0
+      '@rollup/rollup-win32-x64-msvc': 4.28.0
       fsevents: 2.3.3
 
   rollup@4.5.2:
@@ -27830,14 +27946,14 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  svelte2tsx@0.7.13(svelte@5.2.10)(typescript@5.5.3):
+  svelte2tsx@0.7.13(svelte@5.4.0)(typescript@5.5.3):
     dependencies:
       dedent-js: 1.0.1
       pascal-case: 3.1.2
-      svelte: 5.2.10
+      svelte: 5.4.0
       typescript: 5.5.3
 
-  svelte@5.2.10:
+  svelte@5.4.0:
     dependencies:
       '@ampproject/remapping': 2.3.0
       '@jridgewell/sourcemap-codec': 1.5.0
@@ -27846,8 +27962,8 @@ snapshots:
       acorn-typescript: 1.4.13(acorn@8.14.0)
       aria-query: 5.3.2
       axobject-query: 4.1.0
-      esm-env: 1.2.0
-      esrap: 1.2.2
+      esm-env: 1.2.1
+      esrap: 1.2.3
       is-reference: 3.0.3
       locate-character: 3.0.0
       magic-string: 0.30.14
@@ -28382,10 +28498,10 @@ snapshots:
       - rollup
       - supports-color
 
-  unocss@0.58.8(postcss@8.4.49)(rollup@4.27.4)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0)):
+  unocss@0.58.8(postcss@8.4.49)(rollup@4.28.0)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0)):
     dependencies:
-      '@unocss/astro': 0.58.8(rollup@4.27.4)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))
-      '@unocss/cli': 0.58.8(rollup@4.27.4)
+      '@unocss/astro': 0.58.8(rollup@4.28.0)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))
+      '@unocss/cli': 0.58.8(rollup@4.28.0)
       '@unocss/core': 0.58.8
       '@unocss/extractor-arbitrary-variants': 0.58.8
       '@unocss/postcss': 0.58.8(postcss@8.4.49)
@@ -28403,7 +28519,7 @@ snapshots:
       '@unocss/transformer-compile-class': 0.58.8
       '@unocss/transformer-directives': 0.58.8
       '@unocss/transformer-variant-group': 0.58.8
-      '@unocss/vite': 0.58.8(rollup@4.27.4)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))
+      '@unocss/vite': 0.58.8(rollup@4.28.0)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))
     optionalDependencies:
       vite: 5.2.11(@types/node@22.10.1)(terser@5.36.0)
     transitivePeerDependencies:
@@ -28411,10 +28527,10 @@ snapshots:
       - rollup
       - supports-color
 
-  unocss@0.58.8(postcss@8.4.49)(rollup@4.27.4)(vite@5.2.7(@types/node@22.10.1)(terser@5.36.0)):
+  unocss@0.58.8(postcss@8.4.49)(rollup@4.28.0)(vite@5.2.7(@types/node@22.10.1)(terser@5.36.0)):
     dependencies:
-      '@unocss/astro': 0.58.8(rollup@4.27.4)(vite@5.2.7(@types/node@22.10.1)(terser@5.36.0))
-      '@unocss/cli': 0.58.8(rollup@4.27.4)
+      '@unocss/astro': 0.58.8(rollup@4.28.0)(vite@5.2.7(@types/node@22.10.1)(terser@5.36.0))
+      '@unocss/cli': 0.58.8(rollup@4.28.0)
       '@unocss/core': 0.58.8
       '@unocss/extractor-arbitrary-variants': 0.58.8
       '@unocss/postcss': 0.58.8(postcss@8.4.49)
@@ -28432,7 +28548,7 @@ snapshots:
       '@unocss/transformer-compile-class': 0.58.8
       '@unocss/transformer-directives': 0.58.8
       '@unocss/transformer-variant-group': 0.58.8
-      '@unocss/vite': 0.58.8(rollup@4.27.4)(vite@5.2.7(@types/node@22.10.1)(terser@5.36.0))
+      '@unocss/vite': 0.58.8(rollup@4.28.0)(vite@5.2.7(@types/node@22.10.1)(terser@5.36.0))
     optionalDependencies:
       vite: 5.2.7(@types/node@22.10.1)(terser@5.36.0)
     transitivePeerDependencies:
@@ -28440,10 +28556,10 @@ snapshots:
       - rollup
       - supports-color
 
-  unocss@0.58.8(postcss@8.4.49)(rollup@4.27.4)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0)):
+  unocss@0.58.8(postcss@8.4.49)(rollup@4.28.0)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0)):
     dependencies:
-      '@unocss/astro': 0.58.8(rollup@4.27.4)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
-      '@unocss/cli': 0.58.8(rollup@4.27.4)
+      '@unocss/astro': 0.58.8(rollup@4.28.0)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
+      '@unocss/cli': 0.58.8(rollup@4.28.0)
       '@unocss/core': 0.58.8
       '@unocss/extractor-arbitrary-variants': 0.58.8
       '@unocss/postcss': 0.58.8(postcss@8.4.49)
@@ -28461,7 +28577,7 @@ snapshots:
       '@unocss/transformer-compile-class': 0.58.8
       '@unocss/transformer-directives': 0.58.8
       '@unocss/transformer-variant-group': 0.58.8
-      '@unocss/vite': 0.58.8(rollup@4.27.4)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
+      '@unocss/vite': 0.58.8(rollup@4.28.0)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
     optionalDependencies:
       vite: 5.3.1(@types/node@22.10.1)(terser@5.36.0)
     transitivePeerDependencies:
@@ -28469,10 +28585,10 @@ snapshots:
       - rollup
       - supports-color
 
-  unocss@0.58.8(postcss@8.4.49)(rollup@4.27.4)(vite@6.0.1(@types/node@22.10.1)(jiti@2.4.0)(terser@5.36.0)(tsx@4.19.2)):
+  unocss@0.58.8(postcss@8.4.49)(rollup@4.28.0)(vite@6.0.2(@types/node@22.10.1)(jiti@2.4.1)(terser@5.36.0)(tsx@4.19.2)):
     dependencies:
-      '@unocss/astro': 0.58.8(rollup@4.27.4)(vite@6.0.1(@types/node@22.10.1)(jiti@2.4.0)(terser@5.36.0)(tsx@4.19.2))
-      '@unocss/cli': 0.58.8(rollup@4.27.4)
+      '@unocss/astro': 0.58.8(rollup@4.28.0)(vite@6.0.2(@types/node@22.10.1)(jiti@2.4.1)(terser@5.36.0)(tsx@4.19.2))
+      '@unocss/cli': 0.58.8(rollup@4.28.0)
       '@unocss/core': 0.58.8
       '@unocss/extractor-arbitrary-variants': 0.58.8
       '@unocss/postcss': 0.58.8(postcss@8.4.49)
@@ -28490,18 +28606,18 @@ snapshots:
       '@unocss/transformer-compile-class': 0.58.8
       '@unocss/transformer-directives': 0.58.8
       '@unocss/transformer-variant-group': 0.58.8
-      '@unocss/vite': 0.58.8(rollup@4.27.4)(vite@6.0.1(@types/node@22.10.1)(jiti@2.4.0)(terser@5.36.0)(tsx@4.19.2))
+      '@unocss/vite': 0.58.8(rollup@4.28.0)(vite@6.0.2(@types/node@22.10.1)(jiti@2.4.1)(terser@5.36.0)(tsx@4.19.2))
     optionalDependencies:
-      vite: 6.0.1(@types/node@22.10.1)(jiti@2.4.0)(terser@5.36.0)(tsx@4.19.2)
+      vite: 6.0.2(@types/node@22.10.1)(jiti@2.4.1)(terser@5.36.0)(tsx@4.19.2)
     transitivePeerDependencies:
       - postcss
       - rollup
       - supports-color
 
-  unocss@0.59.4(postcss@8.4.49)(rollup@4.27.4)(vite@5.2.13(@types/node@20.12.7)(terser@5.36.0)):
+  unocss@0.59.4(postcss@8.4.49)(rollup@4.28.0)(vite@5.2.13(@types/node@20.12.7)(terser@5.36.0)):
     dependencies:
-      '@unocss/astro': 0.59.4(rollup@4.27.4)(vite@5.2.13(@types/node@20.12.7)(terser@5.36.0))
-      '@unocss/cli': 0.59.4(rollup@4.27.4)
+      '@unocss/astro': 0.59.4(rollup@4.28.0)(vite@5.2.13(@types/node@20.12.7)(terser@5.36.0))
+      '@unocss/cli': 0.59.4(rollup@4.28.0)
       '@unocss/core': 0.59.4
       '@unocss/extractor-arbitrary-variants': 0.59.4
       '@unocss/postcss': 0.59.4(postcss@8.4.49)
@@ -28519,7 +28635,7 @@ snapshots:
       '@unocss/transformer-compile-class': 0.59.4
       '@unocss/transformer-directives': 0.59.4
       '@unocss/transformer-variant-group': 0.59.4
-      '@unocss/vite': 0.59.4(rollup@4.27.4)(vite@5.2.13(@types/node@20.12.7)(terser@5.36.0))
+      '@unocss/vite': 0.59.4(rollup@4.28.0)(vite@5.2.13(@types/node@20.12.7)(terser@5.36.0))
     optionalDependencies:
       vite: 5.2.13(@types/node@20.12.7)(terser@5.36.0)
     transitivePeerDependencies:
@@ -28527,10 +28643,10 @@ snapshots:
       - rollup
       - supports-color
 
-  unocss@0.59.4(postcss@8.4.49)(rollup@4.27.4)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0)):
+  unocss@0.59.4(postcss@8.4.49)(rollup@4.28.0)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0)):
     dependencies:
-      '@unocss/astro': 0.59.4(rollup@4.27.4)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
-      '@unocss/cli': 0.59.4(rollup@4.27.4)
+      '@unocss/astro': 0.59.4(rollup@4.28.0)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
+      '@unocss/cli': 0.59.4(rollup@4.28.0)
       '@unocss/core': 0.59.4
       '@unocss/extractor-arbitrary-variants': 0.59.4
       '@unocss/postcss': 0.59.4(postcss@8.4.49)
@@ -28548,7 +28664,7 @@ snapshots:
       '@unocss/transformer-compile-class': 0.59.4
       '@unocss/transformer-directives': 0.59.4
       '@unocss/transformer-variant-group': 0.59.4
-      '@unocss/vite': 0.59.4(rollup@4.27.4)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
+      '@unocss/vite': 0.59.4(rollup@4.28.0)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
     optionalDependencies:
       vite: 5.3.1(@types/node@22.10.1)(terser@5.36.0)
     transitivePeerDependencies:
@@ -28556,10 +28672,10 @@ snapshots:
       - rollup
       - supports-color
 
-  unocss@0.60.3(postcss@8.4.49)(rollup@4.27.4)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0)):
+  unocss@0.60.3(postcss@8.4.49)(rollup@4.28.0)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0)):
     dependencies:
-      '@unocss/astro': 0.60.3(rollup@4.27.4)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))
-      '@unocss/cli': 0.60.3(rollup@4.27.4)
+      '@unocss/astro': 0.60.3(rollup@4.28.0)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))
+      '@unocss/cli': 0.60.3(rollup@4.28.0)
       '@unocss/core': 0.60.3
       '@unocss/extractor-arbitrary-variants': 0.60.3
       '@unocss/postcss': 0.60.3(postcss@8.4.49)
@@ -28577,7 +28693,7 @@ snapshots:
       '@unocss/transformer-compile-class': 0.60.3
       '@unocss/transformer-directives': 0.60.3
       '@unocss/transformer-variant-group': 0.60.3
-      '@unocss/vite': 0.60.3(rollup@4.27.4)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))
+      '@unocss/vite': 0.60.3(rollup@4.28.0)(vite@5.2.11(@types/node@22.10.1)(terser@5.36.0))
     optionalDependencies:
       vite: 5.2.11(@types/node@22.10.1)(terser@5.36.0)
     transitivePeerDependencies:
@@ -28585,10 +28701,10 @@ snapshots:
       - rollup
       - supports-color
 
-  unocss@0.61.0(postcss@8.4.49)(rollup@4.27.4)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0)):
+  unocss@0.61.0(postcss@8.4.49)(rollup@4.28.0)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0)):
     dependencies:
-      '@unocss/astro': 0.61.0(rollup@4.27.4)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
-      '@unocss/cli': 0.61.0(rollup@4.27.4)
+      '@unocss/astro': 0.61.0(rollup@4.28.0)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
+      '@unocss/cli': 0.61.0(rollup@4.28.0)
       '@unocss/core': 0.61.0
       '@unocss/extractor-arbitrary-variants': 0.61.0
       '@unocss/postcss': 0.61.0(postcss@8.4.49)
@@ -28606,7 +28722,7 @@ snapshots:
       '@unocss/transformer-compile-class': 0.61.0
       '@unocss/transformer-directives': 0.61.0
       '@unocss/transformer-variant-group': 0.61.0
-      '@unocss/vite': 0.61.0(rollup@4.27.4)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
+      '@unocss/vite': 0.61.0(rollup@4.28.0)(vite@5.3.1(@types/node@22.10.1)(terser@5.36.0))
     optionalDependencies:
       vite: 5.3.1(@types/node@22.10.1)(terser@5.36.0)
     transitivePeerDependencies:
@@ -28799,7 +28915,7 @@ snapshots:
       - supports-color
       - terser
 
-  vite-plugin-checker@0.6.4(eslint@9.15.0(jiti@2.4.0))(optionator@0.9.4)(typescript@5.5.3)(vite@5.1.5(@types/node@22.10.1)(terser@5.36.0)):
+  vite-plugin-checker@0.6.4(eslint@9.16.0(jiti@2.4.1))(optionator@0.9.4)(typescript@5.5.3)(vite@5.1.5(@types/node@22.10.1)(terser@5.36.0)):
     dependencies:
       '@babel/code-frame': 7.23.5
       ansi-escapes: 4.3.2
@@ -28818,7 +28934,7 @@ snapshots:
       vscode-languageserver-textdocument: 1.0.11
       vscode-uri: 3.0.8
     optionalDependencies:
-      eslint: 9.15.0(jiti@2.4.0)
+      eslint: 9.16.0(jiti@2.4.1)
       optionator: 0.9.4
       typescript: 5.5.3
 
@@ -28829,9 +28945,9 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  vite-plugin-circular-dependency@0.2.1(rollup@4.27.4):
+  vite-plugin-circular-dependency@0.2.1(rollup@4.28.0):
     dependencies:
-      '@rollup/pluginutils': 5.1.0(rollup@4.27.4)
+      '@rollup/pluginutils': 5.1.0(rollup@4.28.0)
       chalk: 4.1.2
     transitivePeerDependencies:
       - rollup
@@ -28847,12 +28963,12 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  vite-plugin-pwa@0.19.2(vite@6.0.1(@types/node@22.10.1)(jiti@2.4.0)(terser@5.36.0)(tsx@4.19.2))(workbox-build@7.3.0(@types/babel__core@7.20.5))(workbox-window@7.3.0):
+  vite-plugin-pwa@0.19.2(vite@6.0.2(@types/node@22.10.1)(jiti@2.4.1)(terser@5.36.0)(tsx@4.19.2))(workbox-build@7.3.0(@types/babel__core@7.20.5))(workbox-window@7.3.0):
     dependencies:
       debug: 4.3.4
       fast-glob: 3.3.2
       pretty-bytes: 6.1.1
-      vite: 6.0.1(@types/node@22.10.1)(jiti@2.4.0)(terser@5.36.0)(tsx@4.19.2)
+      vite: 6.0.2(@types/node@22.10.1)(jiti@2.4.1)(terser@5.36.0)(tsx@4.19.2)
       workbox-build: 7.3.0(@types/babel__core@7.20.5)
       workbox-window: 7.3.0
     transitivePeerDependencies:
@@ -28984,15 +29100,15 @@ snapshots:
       fsevents: 2.3.3
       terser: 5.36.0
 
-  vite@6.0.1(@types/node@22.10.1)(jiti@2.4.0)(terser@5.36.0)(tsx@4.19.2):
+  vite@6.0.2(@types/node@22.10.1)(jiti@2.4.1)(terser@5.36.0)(tsx@4.19.2):
     dependencies:
       esbuild: 0.24.0
       postcss: 8.4.49
-      rollup: 4.27.4
+      rollup: 4.28.0
     optionalDependencies:
       '@types/node': 22.10.1
       fsevents: 2.3.3
-      jiti: 2.4.0
+      jiti: 2.4.1
       terser: 5.36.0
       tsx: 4.19.2
 

@@ -5,6 +5,7 @@ import {
 	showSubscriptionPromotion,
 	useHasServerAccess,
 	useLocalStorage,
+	useOnPointerDownOutside,
 } from '@biscuits/client';
 import { depluralize } from '@gnocchi.biscuits/conversion';
 import { Food, Recipe } from '@gnocchi.biscuits/verdant';
@@ -16,9 +17,12 @@ import {
 } from 'downshift';
 import pluralize from 'pluralize';
 import {
+	ComponentProps,
+	KeyboardEvent,
 	MutableRefObject,
 	startTransition,
 	useCallback,
+	useId,
 	useMemo,
 	useState,
 } from 'react';
@@ -398,15 +402,6 @@ function makeStateReducer(closeOnSelect: boolean) {
 						} as SuggestionData,
 					};
 				}
-			case useCombobox.stateChangeTypes.ItemClick:
-				if (closeOnSelect) {
-					return changes;
-				}
-				// keep open after selecting an item
-				return {
-					...changes,
-					isOpen: true,
-				};
 			default:
 				return changes;
 		}
@@ -418,7 +413,6 @@ function makeStateReducer(closeOnSelect: boolean) {
 	): Partial<UseComboboxState<SuggestionData>> {
 		console.log(actionAndChanges.type, actionAndChanges.changes);
 		const base = baseReducer(state, actionAndChanges);
-		console.log('result', base);
 		return base;
 	};
 }
@@ -432,63 +426,98 @@ export function useAddBarCombobox({
 }: {
 	setSuggestionPrompt: (val: string) => void;
 	allSuggestions: SuggestionData[];
-	onAdd: (text: string[]) => Promise<void> | void;
+	onAdd: (text: string[], focusInput: boolean) => Promise<void> | void;
 	open?: boolean;
 	onOpenChange?: (open: boolean) => void;
 }) {
 	const isSubscribed = useHasServerAccess();
 
-	const [keepOpen] = useKeepOpenAfterSelect();
+	const menuId = useId();
+	const inputId = useId();
+
 	const [addingRecipe, setAddingRecipe] = useState<Recipe | null>(null);
 	const clearAddingRecipe = useCallback(() => {
 		setAddingRecipe(null);
 	}, []);
 
-	const stateReducer = useMemo(() => makeStateReducer(!keepOpen), [keepOpen]);
+	const [inputValue, setInputValue] = useState('');
+	const [highlightedIndex, setHighlightedIndex] = useState(-1);
 
-	const combobox = useCombobox<SuggestionData>({
-		onInputValueChange({ inputValue }) {
-			startTransition(() => {
-				setSuggestionPrompt(inputValue || '');
-			});
-		},
-		items: allSuggestions,
-		itemToString: suggestionToString,
-		async onSelectedItemChange({ selectedItem, inputValue }) {
-			if (selectedItem) {
-				combobox.setInputValue('');
-				if (selectedItem.type === 'raw') {
-					await onAdd([selectedItem.text]);
-				} else if (selectedItem.type === 'url') {
-					if (isSubscribed) {
-						recipeSavePromptState.url = selectedItem.url;
+	const clear = useCallback(() => {
+		setInputValue('');
+		setSuggestionPrompt('');
+		setHighlightedIndex(-1);
+	}, []);
+
+	const selectItem = useCallback(
+		async (selected: SuggestionData, focusInput: boolean) => {
+			if (selected.type === 'food') {
+				try {
+					const { quantity } = destructureSearchPrompt(inputValue || '');
+					if (quantity) {
+						await onAdd([`${quantity} ${selected.name}`], focusInput);
 					} else {
-						showSubscriptionPromotion();
+						await onAdd([selected.name], focusInput);
 					}
-				} else if (selectedItem.type === 'food') {
-					try {
-						const { quantity } = destructureSearchPrompt(inputValue || '');
-						if (quantity) {
-							await onAdd([`${quantity} ${selectedItem.name}`]);
-						} else {
-							await onAdd([selectedItem.name]);
-						}
-					} catch (e) {
-						combobox.setInputValue(inputValue || '');
-					}
-				} else {
-					setAddingRecipe(selectedItem.recipe);
+				} catch (e) {
+					setInputValue(inputValue || '');
 				}
+			} else if (selected.type === 'recipe') {
+				setAddingRecipe(selected.recipe);
+			} else {
+				await onAdd([suggestionToString(selected)], focusInput);
 			}
 		},
-		stateReducer,
-		isOpen: open,
-		onIsOpenChange: onOpenChange
-			? (changes) => {
-					onOpenChange(!!changes.isOpen);
-			  }
-			: undefined,
-	});
+		[onAdd, inputValue],
+	);
+
+	const selectInputValue = useCallback(() => {
+		if (isUrl(inputValue)) {
+			if (isSubscribed) {
+				recipeSavePromptState.url = inputValue;
+			} else {
+				showSubscriptionPromotion();
+			}
+		} else {
+			onAdd([inputValue], true);
+		}
+	}, [inputValue, onAdd, isSubscribed]);
+
+	const maxIndex = allSuggestions.length - 1;
+	const onInputKeyDown = useCallback(
+		async (ev: KeyboardEvent) => {
+			switch (ev.key) {
+				case 'ArrowDown':
+					setHighlightedIndex((index) => (index + 1) % (maxIndex + 1));
+					onOpenChange?.(true);
+					break;
+				case 'ArrowUp':
+					setHighlightedIndex((index) => (index + maxIndex) % (maxIndex + 1));
+					break;
+				case 'Enter':
+					if (highlightedIndex >= 0 && allSuggestions[highlightedIndex]) {
+						const selected = allSuggestions[highlightedIndex];
+						await selectItem(selected, true);
+					} else {
+						selectInputValue();
+					}
+					clear();
+					break;
+				case 'Escape':
+					clear();
+					onOpenChange?.(false);
+					break;
+			}
+		},
+		[
+			maxIndex,
+			highlightedIndex,
+			allSuggestions,
+			clear,
+			selectItem,
+			selectInputValue,
+		],
+	);
 
 	const onInputPaste = useCallback(
 		async (event: React.ClipboardEvent<HTMLInputElement>) => {
@@ -497,19 +526,97 @@ export function useAddBarCombobox({
 			const lines = text.split(/\r?\n/).map((t) => t.trim());
 			const items = lines.filter(Boolean);
 			if (items.length > 1) {
-				await onAdd(items);
-				combobox.reset();
+				await onAdd(items, true);
+				setInputValue('');
+				setSuggestionPrompt('');
 			}
 		},
-		[combobox, onAdd],
+		[onAdd],
+	);
+
+	const getInputProps = useCallback(
+		(rest: any): ComponentProps<'input'> => {
+			return {
+				...rest,
+				onKeyDown: onInputKeyDown,
+				onPaste: onInputPaste,
+				onChange: (ev) => {
+					setInputValue(ev.target.value);
+					startTransition(() => {
+						setSuggestionPrompt(ev.target.value);
+					});
+				},
+				id: inputId,
+				'aria-autocomplete': 'list',
+				'aria-controls': menuId,
+				'aria-activedescendant': allSuggestions[highlightedIndex]?.id,
+				'aria-expanded': open,
+				value: inputValue,
+				autoComplete: 'off',
+				autoCorrect: 'off',
+				autoCapitalize: 'off',
+				spellCheck: false,
+			};
+		},
+		[onInputKeyDown, onInputPaste, inputId],
+	);
+
+	const ref = useOnPointerDownOutside((ev) => {
+		if ((ev.target as HTMLElement).id === inputId) return;
+		onOpenChange?.(false);
+	});
+	const getMenuProps = useCallback(
+		(rest: any) => ({
+			id: menuId,
+			role: 'listbox',
+			'aria-labelledby': inputId,
+			ref,
+			...rest,
+		}),
+		[menuId, inputId],
+	);
+
+	const getItemProps = useCallback(
+		({ item }: { item: SuggestionData }) => {
+			return {
+				id: item.id,
+				role: 'option',
+				'aria-selected': item.index === highlightedIndex,
+				onClick: () => {
+					selectItem(item, false);
+				},
+			};
+		},
+		[highlightedIndex, selectItem],
+	);
+
+	const getSubmitButtonProps = useCallback(
+		() => ({
+			onClick: () => {
+				if (isUrl(inputValue)) {
+					if (isSubscribed) {
+						recipeSavePromptState.url = inputValue;
+					} else {
+						showSubscriptionPromotion();
+					}
+				} else {
+					onAdd([inputValue], true);
+				}
+				clear();
+			},
+		}),
+		[inputValue, onAdd, clear],
 	);
 
 	return {
-		combobox,
 		setAddingRecipe,
 		clearAddingRecipe,
 		addingRecipe,
-		onInputPaste,
+		getInputProps,
+		getItemProps,
+		getMenuProps,
+		getSubmitButtonProps,
+		clear,
 	};
 }
 

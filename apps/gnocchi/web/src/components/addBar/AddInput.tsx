@@ -1,28 +1,37 @@
-import { Button, Input, InputProps } from '@a-type/ui';
+import {
+	Button,
+	ButtonProps,
+	Input,
+	InputProps,
+	useParticles,
+} from '@a-type/ui';
 import { isUrl } from '@a-type/utils';
 import classNames from 'classnames';
-import { forwardRef } from 'react';
+import { forwardRef, useEffect, useRef } from 'react';
+import { useSnapshot } from 'valtio';
+import { groceriesState } from '../groceries/state.js';
 import { Icon } from '../icons/Icon.jsx';
-import { SuggestionData } from './hooks.js';
 
 export interface AddInputProps {
 	inputProps: InputProps;
 	isOpen: boolean;
 	className?: string;
-	selectItem: (item: SuggestionData) => void;
 	clear: () => void;
 	disableInteraction?: boolean;
+	getSubmitButtonProps: () => any;
+	onFocus?: () => void;
 }
 
 export const AddInput = forwardRef<HTMLDivElement, AddInputProps>(
 	function AddInput(
 		{
 			inputProps,
+			getSubmitButtonProps,
 			isOpen,
 			className,
-			selectItem,
 			clear,
 			disableInteraction,
+			onFocus,
 			...rest
 		},
 		ref,
@@ -50,23 +59,7 @@ export const AddInput = forwardRef<HTMLDivElement, AddInputProps>(
 					{...inputProps}
 				/>
 				<div className="absolute flex flex-row-reverse gap-1 right-0px top-0px">
-					<Button
-						data-test="grocery-list-add-button"
-						color="primary"
-						size="icon"
-						className="md:(w-35px h-35px p-0) items-center justify-center"
-						onClick={() =>
-							selectItem({
-								type: 'raw',
-								text: inputValue,
-								id: inputValue,
-							})
-						}
-						aria-label={inputIsUrl ? 'scan recipe page' : 'add item'}
-						tabIndex={disableInteraction ? -1 : 0}
-					>
-						{inputIsUrl ? <Icon name="scan" /> : <Icon name="plus" />}
-					</Button>
+					<SubmitButton {...getSubmitButtonProps()} />
 					{!!inputValue && (
 						<Button
 							size="icon"
@@ -83,3 +76,46 @@ export const AddInput = forwardRef<HTMLDivElement, AddInputProps>(
 		);
 	},
 );
+
+function SubmitButton({
+	children,
+	inputIsUrl,
+	disableInteraction,
+	...rest
+}: ButtonProps & {
+	inputIsUrl: boolean;
+	disableInteraction: boolean;
+}) {
+	const { justAddedSomething } = useSnapshot(groceriesState);
+
+	const ref = useRef<HTMLButtonElement>(null);
+
+	const particles = useParticles();
+	useEffect(() => {
+		if (justAddedSomething) {
+			if (ref.current) {
+				particles?.addParticles(
+					particles.elementExplosion({
+						element: ref.current,
+						count: 20,
+					}),
+				);
+			}
+		}
+	}, [justAddedSomething]);
+
+	return (
+		<Button
+			data-test="grocery-list-add-button"
+			color="primary"
+			size="icon"
+			className="md:(w-35px h-35px p-0) items-center justify-center relative z-2"
+			aria-label={inputIsUrl ? 'scan recipe page' : 'add item'}
+			tabIndex={disableInteraction ? -1 : 0}
+			{...rest}
+			ref={ref}
+		>
+			{inputIsUrl ? <Icon name="scan" /> : <Icon name="plus" />}
+		</Button>
+	);
+}
