@@ -47,7 +47,7 @@
 		}
 	},
 	"scripts": {
-		"build": "pnpm run build:transpile && pnpm run build:prefix",
+		"build": "pnpm run build:transpile && pnpm run build:prefix && pnpm run build:copy",
 		"build:transpile": "tsc",
 		"build:prefix": "node ./scripts/addUnoInclude.mjs",
 		"build:copy": "node ./scripts/copyCss.mjs",
