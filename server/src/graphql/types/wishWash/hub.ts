@@ -1,8 +1,8 @@
 import { BiscuitsError } from '@biscuits/error';
+import cuid from '@paralleldrive/cuid2';
 import { WISH_WASH_HUB_ORIGIN } from '../../../config/deployedContext.js';
 import { builder } from '../../builder.js';
 import { assignTypeName, hasTypeName } from '../../relay.js';
-import cuid from '@paralleldrive/cuid2';
 
 builder.queryFields((t) => ({
 	publishedWishlist: t.field({
@@ -43,7 +43,7 @@ builder.mutationFields((t) => ({
 	publishWishlist: t.field({
 		type: 'PublishedWishlist',
 		authScopes: {
-			member: true,
+			app: 'wish-wash',
 		},
 		args: {
 			input: t.arg({
@@ -59,8 +59,24 @@ builder.mutationFields((t) => ({
 			if (!planId || !userId) {
 				throw new BiscuitsError(
 					BiscuitsError.Code.Forbidden,
-					'You must be a member to publish a wishlist',
+					'You must be create an account to publish a wishlist',
 				);
+			}
+
+			// free users can only publish one list
+			if (!ctx.session?.planHasSubscription) {
+				const existingPublishedWishlist = await ctx.db
+					.selectFrom('PublishedWishlist')
+					.selectAll()
+					.where('planId', '=', planId)
+					.executeTakeFirst();
+
+				if (existingPublishedWishlist) {
+					throw new BiscuitsError(
+						BiscuitsError.Code.Forbidden,
+						'Free users can only publish one wishlist',
+					);
+				}
 			}
 
 			const wishlist = await ctx.db

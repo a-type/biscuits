@@ -85,7 +85,7 @@ export function PlanPage({}: PlanPageProps) {
 	}, [justPaid]);
 
 	const [search, setSearch] = useSearchParams();
-	const tab = search.get('tab') ?? 'subscription';
+	const tab = search.get('tab') ?? 'profile';
 	const setTab = (tab: string) => {
 		setSearch((s) => {
 			s.set('tab', tab);
@@ -107,8 +107,8 @@ export function PlanPage({}: PlanPageProps) {
 				</PageFixedArea>
 				<Tabs value={tab} onValueChange={setTab} className="flex-1">
 					<Tabs.List>
-						<Tabs.Trigger value="subscription">Subscription</Tabs.Trigger>
 						<Tabs.Trigger value="profile">Profile</Tabs.Trigger>
+						<Tabs.Trigger value="subscription">Subscription</Tabs.Trigger>
 						<Tabs.Trigger value="members">Members</Tabs.Trigger>
 						<Tabs.Trigger value="data">Data</Tabs.Trigger>
 					</Tabs.List>

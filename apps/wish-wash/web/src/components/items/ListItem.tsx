@@ -31,6 +31,7 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 			priceMin,
 			priceMax,
 			remoteImageUrl,
+			prompt,
 		} = hooks.useWatch(item);
 		hooks.useWatch(links);
 		hooks.useWatch(imageFiles);
@@ -79,6 +80,11 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 					<Card.Content unstyled className="pt-2 pl-1">
 						<ItemTypeChip item={item} />
 					</Card.Content>
+					{prompt && (
+						<Card.Content className="p-1" unstyled>
+							{prompt}
+						</Card.Content>
+					)}
 					<Card.Content
 						unstyled
 						className={clsx(

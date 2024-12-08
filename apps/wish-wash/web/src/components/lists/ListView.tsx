@@ -11,9 +11,9 @@ import {
 	IconName,
 	P,
 } from '@a-type/ui';
+import { WishlistOnboarding } from '@wish-wash.biscuits/common';
 import { List } from '@wish-wash.biscuits/verdant';
 import { ReactNode, Suspense } from 'react';
-import { WishlistOnboarding } from '../../../../common/src/components/onboarding/WishlistOnboarding.jsx';
 import { useItemSize } from '../items/hooks.js';
 import { ItemEditDialog } from '../items/ItemEditDialog.jsx';
 import { ListItem } from '../items/ListItem.jsx';
@@ -72,22 +72,24 @@ export function ListView({ list, className }: ListViewProps) {
 	if (needsOnboarding) {
 		return (
 			<div className="flex flex-col items-stretch gap-4">
-				<H2>Welcome to your wishlist!</H2>
-				<P>Let's get your wish list started with some ideas.</P>
-				<WishlistOnboarding
-					onAnswer={(question, answer) => {
-						items.push({
-							description: answer,
-							prompt: question.question,
-							type: 'idea',
-						});
-						completedQuestions.push(question.id);
-					}}
-					answeredQuestions={completedQuestions.getSnapshot()}
-					onSkip={() => {
-						completedQuestions.push('skipped');
-					}}
-				/>
+				<div className="mx-auto bg-primary-wash p-4 rounded-lg max-w-800px w-full">
+					<H2>Welcome to your wishlist!</H2>
+					<P>Let's get your wish list started with some ideas.</P>
+					<WishlistOnboarding
+						answeredQuestions={completedQuestions.getSnapshot()}
+						onAnswers={(answers) => {
+							for (const [question, answer] of answers) {
+								items.push({
+									description: answer,
+									prompt: question.prompt,
+									type: 'idea',
+								});
+								completedQuestions.push(question.id);
+							}
+						}}
+						thanksText="That'll get your list started. Now add more ideas!"
+					/>
+				</div>
 			</div>
 		);
 	}

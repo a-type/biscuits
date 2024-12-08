@@ -65,9 +65,6 @@ export default function LoginPage() {
 
 	return (
 		<div className="flex flex-col items-center justify-center h-screen flex-1 bg-primary-wash">
-			<div className="absolute top-0 left-0 w-full h-screen flex-[2]">
-				<Paws />
-			</div>
 			<div className="flex flex-col gap-3 p-6 items-center bg-white border-solid border border-1 border-black rounded-lg relative z-1">
 				<h1 className="font-fancy mb-0">{title}</h1>
 				{message && (

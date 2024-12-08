@@ -11,7 +11,6 @@ import { useHasServerAccess } from '@biscuits/client';
 import { useNavigate } from '@verdant-web/react-router';
 import { authorization, List, ListInit } from '@wish-wash.biscuits/verdant';
 import { useState } from 'react';
-import { upsellState } from '../promotion/upsellState.js';
 
 export interface CreateListOptionsProps {
 	onCreated?: (list: List) => void;
@@ -110,15 +109,7 @@ export function CreateListOptions({
 						<Card className="h-full">
 							<Card.Main
 								onClick={() => {
-									if (!canSync) {
-										upsellState.show = true;
-									} else {
-										createList(
-											'My wish list',
-											'wishlist',
-											authorization.private,
-										);
-									}
+									createList('My wish list', 'wishlist', authorization.private);
 								}}
 							>
 								<Card.Title>
@@ -127,11 +118,6 @@ export function CreateListOptions({
 								<Card.Content>
 									Make a wish list to share with others.
 								</Card.Content>
-								{!canSync && (
-									<Card.Content unstyled>
-										<PremiumBadge>$10 / year</PremiumBadge>
-									</Card.Content>
-								)}
 							</Card.Main>
 						</Card>
 						<Card className="h-full">

@@ -208,7 +208,11 @@ export const builder = new SchemaBuilder<{
 		},
 	},
 	authScopes: async (context) => {
-		const member = !!context.session?.planId;
+		const member =
+			!!context.session?.planId &&
+			// mild back-compat for sessions without this flag
+			(context.session.planHasSubscription === undefined ||
+				!!context.session.planHasSubscription);
 		return {
 			public: true,
 			user: !!context.session,
@@ -217,7 +221,7 @@ export const builder = new SchemaBuilder<{
 			productAdmin: !!context.session?.isProductAdmin,
 			app: (appId) => {
 				return (
-					member &&
+					!!context.session &&
 					(!context.session?.allowedApp ||
 						context.session.allowedApp === '*' ||
 						context.session.allowedApp === appId)

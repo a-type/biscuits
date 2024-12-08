@@ -84,8 +84,8 @@ export function UserMenu({
 					</div>
 				)}
 				{isLoggedIn && !hasServerAccess && (
-					<div className="pl-8 pr-4 py-1 text-gray-7 text-sm max-w-300px color-gray-7">
-						Your plan does not include this app
+					<div className="bg-wash pl-8 pr-4 py-1 text-gray-7 text-sm max-w-300px color-gray-7">
+						Your plan does not include sync for this app
 					</div>
 				)}
 

@@ -1,4 +1,4 @@
-import { Spinner } from '@a-type/ui';
+import { P, Spinner } from '@a-type/ui';
 import { graphql, useQuery } from '@biscuits/graphql';
 import { useSearchParams } from '@verdant-web/react-router';
 import { useEffect } from 'react';
@@ -105,5 +105,13 @@ export function SubscriptionSetup({ priceKeys }: SubscriptionSetupProps) {
 	}
 
 	// subscription inactive - show plan selection
-	return <SubscriptionSelect priceKeys={priceKeys} />;
+	return (
+		<div className="flex flex-col gap-3">
+			<P>
+				You don't have an active subscription. Subscribe to unlock all Biscuits
+				app features.
+			</P>
+			<SubscriptionSelect priceKeys={priceKeys} />
+		</div>
+	);
 }
