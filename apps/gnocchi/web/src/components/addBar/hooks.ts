@@ -10,11 +10,6 @@ import {
 import { depluralize } from '@gnocchi.biscuits/conversion';
 import { Food, Recipe } from '@gnocchi.biscuits/verdant';
 import { addDays, startOfDay } from 'date-fns/esm';
-import {
-	UseComboboxState,
-	UseComboboxStateChangeOptions,
-	useCombobox,
-} from 'downshift';
 import pluralize from 'pluralize';
 import {
 	ComponentProps,
@@ -370,53 +365,6 @@ export function useAddBarSuggestions({
 	};
 }
 
-function makeStateReducer(closeOnSelect: boolean) {
-	function baseReducer(
-		state: UseComboboxState<SuggestionData>,
-		{
-			type,
-			changes,
-			selectItem,
-		}: UseComboboxStateChangeOptions<SuggestionData>,
-	): Partial<UseComboboxState<SuggestionData>> {
-		switch (type) {
-			case useCombobox.stateChangeTypes.InputKeyDownEnter:
-				if (changes.inputValue && !changes.selectedItem) {
-					if (isUrl(changes.inputValue)) {
-						return {
-							...changes,
-							selectedItem: {
-								type: 'url' as const,
-								url: changes.inputValue,
-								id: changes.inputValue,
-							} as SuggestionData,
-						};
-					}
-
-					return {
-						...changes,
-						selectedItem: {
-							type: 'raw' as const,
-							text: changes.inputValue,
-							id: changes.inputValue,
-						} as SuggestionData,
-					};
-				}
-			default:
-				return changes;
-		}
-	}
-
-	return function stateReducer(
-		state: UseComboboxState<SuggestionData>,
-		actionAndChanges: UseComboboxStateChangeOptions<SuggestionData>,
-	): Partial<UseComboboxState<SuggestionData>> {
-		console.log(actionAndChanges.type, actionAndChanges.changes);
-		const base = baseReducer(state, actionAndChanges);
-		return base;
-	};
-}
-
 export function useAddBarCombobox({
 	setSuggestionPrompt,
 	allSuggestions,
@@ -584,10 +532,11 @@ export function useAddBarCombobox({
 				'aria-selected': item.index === highlightedIndex,
 				onClick: () => {
 					selectItem(item, false);
+					clear();
 				},
 			};
 		},
-		[highlightedIndex, selectItem],
+		[highlightedIndex, selectItem, clear],
 	);
 
 	const getSubmitButtonProps = useCallback(
