@@ -6,7 +6,7 @@ import {
 	Provider as UIProvider,
 } from '@a-type/ui';
 import { ApolloProvider, graphqlClient } from '@biscuits/graphql';
-import { useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { HubContextProvider } from './components/Context.jsx';
 import { Items } from './components/Items.jsx';
 import { HubWishlistData } from './types.js';
@@ -15,7 +15,11 @@ const innerProps = {
 	className: 'max-w-600px',
 };
 
-export function App({ list: data }: { list: HubWishlistData }) {
+export const App: FC<{ list: HubWishlistData }> = function App({
+	list: data,
+}: {
+	list: HubWishlistData;
+}) {
 	useEffect(() => {
 		// set page title to list title on load
 		document.title = data.title;
@@ -46,4 +50,4 @@ export function App({ list: data }: { list: HubWishlistData }) {
 			</ApolloProvider>
 		</HubContextProvider>
 	);
-}
+};

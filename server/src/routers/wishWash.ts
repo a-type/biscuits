@@ -8,9 +8,10 @@ import { Hono } from 'hono';
 import * as path from 'path';
 import { sessions } from '../auth/session.js';
 import { renderTemplate, staticFile } from '../common/hubs.js';
+import { Env } from '../config/hono.js';
 import { verdantServer } from '../verdant/verdant.js';
 
-export const wishWashRouter = new Hono();
+export const wishWashRouter = new Hono<Env>();
 
 const hubPath = path.join(
 	process.cwd(),

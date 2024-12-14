@@ -5,7 +5,13 @@ import { useCSRFPrevention } from '@graphql-yoga/plugin-csrf-prevention';
 import { GraphQLError } from 'graphql';
 import { Plugin, createYoga, maskError } from 'graphql-yoga';
 import { Hono } from 'hono';
+import {
+	ReadableStream,
+	TransformStream,
+	WritableStream,
+} from 'node:stream/web';
 import { sessions } from '../auth/session.js';
+import { Env } from '../config/hono.js';
 import { GQLContext } from '../graphql/context.js';
 import { createDataloaders } from '../graphql/dataloaders/index.js';
 import { schema } from '../graphql/schema.js';
@@ -14,11 +20,13 @@ import { verdantServer } from '../verdant/verdant.js';
 
 function applyHeaders(): Plugin<{}, GQLContext> {
 	return {
-		onResponse: (payload) => {
+		onResponse: (payload: any) => {
 			if (payload.serverContext) {
-				payload.serverContext.auth.applyHeaders.forEach((value, key) => {
-					payload.response.headers.append(key, value);
-				});
+				payload.serverContext.auth.applyHeaders.forEach(
+					(value: string, key: string) => {
+						payload.response.headers.append(key, value);
+					},
+				);
 			}
 		},
 	};
@@ -73,12 +81,11 @@ const yoga = createYoga<GQLContext>({
 		TransformStream: TransformStream,
 		URLSearchParams: URLSearchParams,
 		WritableStream: WritableStream,
-		URLPattern: URLPattern,
 		URL: URL,
 	},
 });
 
-export const graphqlRouter = new Hono().all(
+export const graphqlRouter = new Hono<Env>().all(
 	'/',
 	async function handleGraphQLRequest(honoCtx) {
 		const auth = {

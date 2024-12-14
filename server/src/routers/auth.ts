@@ -2,8 +2,9 @@ import { AuthError } from '@a-type/auth';
 import { Hono } from 'hono';
 import { authHandlers } from '../auth/handlers.js';
 import { UI_ORIGIN } from '../config/deployedContext.js';
+import { Env } from '../config/hono.js';
 
-export const authRouter = new Hono();
+export const authRouter = new Hono<Env>();
 
 authRouter
 	.post('/provider/:provider/login', (ctx) => {

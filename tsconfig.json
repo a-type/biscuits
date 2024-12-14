@@ -1,30 +1,31 @@
 {
-  "compilerOptions": {
-    "noImplicitAny": true,
-    "noLib": false,
-    "target": "es2017",
-    "sourceMap": true,
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "lib": ["dom", "esnext", "webworker"],
-    "skipLibCheck": true,
-    "strict": true,
-    "forceConsistentCasingInFileNames": true,
-    "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "jsx": "react-jsx",
-    "downlevelIteration": true,
-    "experimentalDecorators": true,
-    "isolatedModules": true,
-    "customConditions": ["development"],
-    "plugins": [
-      {
-        "name": "gql.tada/ts-plugin",
-        "schema": "./server/schema.graphql",
-        "tadaOutputLocation": "./packages/client/src/graphql-env.d.ts"
-      }
-    ]
-  },
-  "exclude": ["node_modules", "**/*/dist"]
+	"compilerOptions": {
+		"noImplicitAny": true,
+		"noLib": false,
+		"target": "es2017",
+		"sourceMap": true,
+		"module": "NodeNext",
+		"moduleResolution": "NodeNext",
+		"lib": ["dom", "esnext", "webworker"],
+		"skipLibCheck": true,
+		"strict": true,
+		"forceConsistentCasingInFileNames": true,
+		"allowSyntheticDefaultImports": true,
+		"esModuleInterop": true,
+		"resolveJsonModule": true,
+		"preserveSymlinks": true,
+		"jsx": "react-jsx",
+		"downlevelIteration": true,
+		"experimentalDecorators": true,
+		"isolatedModules": true,
+		"customConditions": ["development"],
+		"plugins": [
+			{
+				"name": "gql.tada/ts-plugin",
+				"schema": "./server/schema.graphql",
+				"tadaOutputLocation": "./packages/client/src/graphql-env.d.ts"
+			}
+		]
+	},
+	"exclude": ["node_modules", "**/*/dist"]
 }

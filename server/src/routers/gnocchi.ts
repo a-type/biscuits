@@ -5,9 +5,10 @@ import * as fsSync from 'fs';
 import { Hono } from 'hono';
 import * as path from 'path';
 import { renderTemplate, staticFile } from '../common/hubs.js';
+import { Env } from '../config/hono.js';
 import { verdantServer } from '../verdant/verdant.js';
 
-export const gnocchiRouter = new Hono();
+export const gnocchiRouter = new Hono<Env>();
 
 const hubPath = path.join(
 	process.cwd(),

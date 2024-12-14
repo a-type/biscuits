@@ -4,11 +4,12 @@ import { ReplicaType, TokenProvider } from '@verdant-web/server';
 import { Hono } from 'hono';
 import { sessions } from '../auth/session.js';
 import { DEPLOYED_ORIGIN } from '../config/deployedContext.js';
+import { Env } from '../config/hono.js';
 import { VERDANT_SECRET } from '../config/secrets.js';
 import { isPlanInGoodStanding } from '../management/plans.js';
 import { verdantServer } from '../verdant/verdant.js';
 
-export const verdantRouter = new Hono();
+export const verdantRouter = new Hono<Env>();
 
 const tokenProvider = new TokenProvider({
 	secret: VERDANT_SECRET,

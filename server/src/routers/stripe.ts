@@ -2,6 +2,7 @@ import { db } from '@biscuits/db';
 import { Hono } from 'hono';
 import { sessions } from '../auth/session.js';
 import { UI_ORIGIN } from '../config/deployedContext.js';
+import { Env } from '../config/hono.js';
 import { STRIPE_WEBHOOK_SECRET } from '../config/secrets.js';
 import { BiscuitsError } from '../error.js';
 import {
@@ -16,7 +17,7 @@ import {
 } from '../management/subscription.js';
 import { stripe } from '../services/stripe.js';
 
-export const stripeRouter = new Hono();
+export const stripeRouter = new Hono<Env>();
 
 stripeRouter.post('/webhook', async ({ req }) => {
 	const signature = req.header('stripe-signature')!;

@@ -140,3 +140,5 @@ backups/
 *.bak
 
 vite.config.ts.*
+
+.turbo/*

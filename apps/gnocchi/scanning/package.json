@@ -1,27 +1,27 @@
 {
-  "name": "@gnocchi.biscuits/scanning",
-  "version": "0.0.1",
-  "private": true,
-  "exports": {
-    ".": {
-      "production": "./dist/esm/index.js",
-      "development": "./src/index.ts",
-      "import": "./dist/esm/index.js",
-      "node": "./dist/esm/index.js",
-      "default": "./dist/esm/index.js"
-    }
-  },
-  "type": "module",
-  "scripts": {
-    "test": "vitest",
-    "build": "tsc"
-  },
-  "dependencies": {
-    "cheerio": "^1.0.0-rc.12",
-    "iso8601-duration": "^2.1.1",
-    "robots-parser": "^3.0.1"
-  },
-  "devDependencies": {
-    "vitest": "^0.22.1"
-  }
+	"name": "@gnocchi.biscuits/scanning",
+	"version": "0.0.1",
+	"private": true,
+	"exports": {
+		".": {
+			"production": "./dist/esm/index.js",
+			"development": "./src/index.ts",
+			"import": "./dist/esm/index.js",
+			"node": "./dist/esm/index.js",
+			"default": "./dist/esm/index.js"
+		}
+	},
+	"type": "module",
+	"scripts": {
+		"test": "vitest",
+		"build": "tsc"
+	},
+	"dependencies": {
+		"cheerio": "^1.0.0-rc.12",
+		"iso8601-duration": "^2.1.1",
+		"robots-parser": "^3.0.1"
+	},
+	"devDependencies": {
+		"vitest": "2.1.8"
+	}
 }

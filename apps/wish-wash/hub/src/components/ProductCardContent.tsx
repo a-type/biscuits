@@ -1,11 +1,11 @@
 import { usePurchaseItem } from '@/hooks.js';
 import { HubWishlistItem } from '@/types.js';
 import {
+	FormikForm as BaseFormikForm,
 	Button,
 	Card,
 	Dialog,
 	DialogActions,
-	FormikForm,
 	NumberStepperField,
 	P,
 	SubmitButton,
@@ -14,6 +14,8 @@ import { SearchButton } from '@wish-wash.biscuits/common';
 import { ReactNode, useState } from 'react';
 import { ItemCardPrice } from './ItemCardPrice.jsx';
 import { ItemCardTitle } from './ItemCardTitle.jsx';
+
+const FormikForm = BaseFormikForm as any;
 
 export interface ProductCardContentProps {
 	item: HubWishlistItem;
@@ -134,7 +136,10 @@ function PostLinkBuyExperienceContent({
 	return (
 		<FormikForm
 			initialValues={{ quantity: 1, name: 'Anonymous' }}
-			onSubmit={async (values, form) => {
+			onSubmit={async (
+				values: { quantity: number; name: string },
+				form: any,
+			) => {
 				await purchase(values);
 				form.resetForm();
 			}}

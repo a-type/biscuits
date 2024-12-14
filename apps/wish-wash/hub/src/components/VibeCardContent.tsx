@@ -1,6 +1,6 @@
 import { HubWishlistItem } from '@/types.js';
 import { Card, Dialog, P } from '@a-type/ui';
-import { FC, ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { ItemCardTitle } from './ItemCardTitle.jsx';
 
 export interface VibeCardContentProps {
@@ -9,20 +9,19 @@ export interface VibeCardContentProps {
 	listAuthor: string;
 }
 
-export const VibeCardContent: FC<VibeCardContentProps> =
-	function VibeCardContent({
-		item,
-		className,
-		listAuthor,
-	}: VibeCardContentProps) {
-		return (
-			<VibeCardBuyExperience item={item} listAuthor={listAuthor}>
-				<Card.Main className={className}>
-					<ItemCardTitle item={item} />
-				</Card.Main>
-			</VibeCardBuyExperience>
-		);
-	};
+export function VibeCardContent({
+	item,
+	className,
+	listAuthor,
+}: VibeCardContentProps) {
+	return (
+		<VibeCardBuyExperience item={item} listAuthor={listAuthor}>
+			<Card.Main className={className}>
+				<ItemCardTitle item={item} />
+			</Card.Main>
+		</VibeCardBuyExperience>
+	);
+}
 
 function VibeCardBuyExperience({
 	item,
