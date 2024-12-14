@@ -34,7 +34,6 @@ const changelogQuery = graphql(`
 			details
 			createdAt
 			imageUrl
-			important
 		}
 	}
 `);

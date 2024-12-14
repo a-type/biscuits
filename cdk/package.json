@@ -16,7 +16,7 @@
     "aws-cdk": "2.141.0",
     "ts-node": "^10.9.2",
     "tsx": "^4.10.4",
-    "typescript": "5.5.3",
+    "typescript": "5.7.2",
     "vitest": "1.6.0"
   },
   "dependencies": {
@@ -25,9 +25,9 @@
     "@biscuits/apps": "workspace:*",
     "@octokit/rest": "^20.1.1",
     "aws-cdk-lib": "2.141.0",
+    "constructs": "^10.0.0",
     "dotenv": "16.4.5",
     "env-cmd": "10.1.0",
-    "constructs": "^10.0.0",
     "source-map-support": "^0.5.21"
   }
 }

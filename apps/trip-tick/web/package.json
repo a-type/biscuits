@@ -47,7 +47,7 @@
 		"@types/react-dom": "^18.2.25",
 		"@unocss/preset-icons": "^0.55.7",
 		"@vitejs/plugin-react-swc": "^3.5.0",
-		"typescript": "5.5.3",
+		"typescript": "5.7.2",
 		"vite": "5.2.7",
 		"vite-plugin-pwa": "0.19.7"
 	}

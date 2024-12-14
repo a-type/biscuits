@@ -27,12 +27,12 @@
 		"cp-tpl": "1.0.9",
 		"eslint": "^8",
 		"eslint-plugin-react": "7.34.1",
+		"gql.tada": "1.8.10",
 		"husky": "^8.0.3",
 		"kill-port": "2.0.1",
 		"prettier": "3.2.5",
 		"turbo": "^1.9.3",
-		"typescript": "^5.4.5",
-		"gql.tada": "1.8.5"
+		"typescript": "^5.7.2"
 	},
 	"volta": {
 		"node": "22.12.0"

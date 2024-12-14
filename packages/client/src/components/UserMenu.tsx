@@ -2,11 +2,9 @@ import {
 	Avatar,
 	Button,
 	DropdownMenu,
-	DropdownMenuContent,
 	DropdownMenuItem,
 	DropdownMenuItemProps,
 	DropdownMenuItemRightSlot,
-	DropdownMenuTrigger,
 	ErrorBoundary,
 	Icon,
 } from '@a-type/ui';
@@ -52,7 +50,7 @@ export function UserMenu({
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger asChild>
+			<DropdownMenu.Trigger asChild>
 				{children ?? (!isLoggedIn && loading && !isOffline) ?
 					<Button size="small" color="ghost" className={className}>
 						<Icon name="refresh" className="animate-spin" />
@@ -76,8 +74,8 @@ export function UserMenu({
 						<Icon name="gear" />
 					</Button>
 				}
-			</DropdownMenuTrigger>
-			<DropdownMenuContent>
+			</DropdownMenu.Trigger>
+			<DropdownMenu.Content>
 				{isOffline && (
 					<div className="pl-8 pr-4 py-1 text-gray-7 text-sm max-w-300px bg-attention-wash color-attention-dark">
 						Offline - some features may be unavailable
@@ -91,7 +89,7 @@ export function UserMenu({
 
 				{!isLoggedIn ?
 					<>
-						<DropdownMenuItem
+						<DropdownMenu.Item
 							asChild
 							className="theme-leek bg-primary-wash color-primary-dark"
 						>
@@ -101,71 +99,71 @@ export function UserMenu({
 									<Icon name="gift" />
 								</DropdownMenuItemRightSlot>
 							</a>
-						</DropdownMenuItem>
-						<DropdownMenuItem asChild>
+						</DropdownMenu.Item>
+						<DropdownMenu.Item asChild>
 							<LoginButton className="border-none transition-none shadow-none">
 								Log in
 								<DropdownMenuItemRightSlot>
 									<Icon name="arrowRight" />
 								</DropdownMenuItemRightSlot>
 							</LoginButton>
-						</DropdownMenuItem>
+						</DropdownMenu.Item>
 					</>
-				:	<DropdownMenuItem asChild>
+				:	<DropdownMenu.Item asChild>
 						<a href={`${CONFIG.HOME_ORIGIN}/settings?appReferrer=${appId}`}>
 							Mange plan
 							<DropdownMenuItemRightSlot>
 								<Icon name="profile" />
 							</DropdownMenuItemRightSlot>
 						</a>
-					</DropdownMenuItem>
+					</DropdownMenu.Item>
 				}
 				{getIsPWAInstalled() ?
-					<DropdownMenuItem onClick={openPwaHackCatalog}>
+					<DropdownMenu.Item onClick={openPwaHackCatalog}>
 						More apps
 						<DropdownMenuItemRightSlot>
 							<Icon name="new_window" />
 						</DropdownMenuItemRightSlot>
-					</DropdownMenuItem>
-				:	<DropdownMenuItem asChild>
+					</DropdownMenu.Item>
+				:	<DropdownMenu.Item asChild>
 						<a href={`${CONFIG.HOME_ORIGIN}`} target="_blank">
 							More apps
 							<DropdownMenuItemRightSlot>
 								<Icon name="new_window" />
 							</DropdownMenuItemRightSlot>
 						</a>
-					</DropdownMenuItem>
+					</DropdownMenu.Item>
 				}
 				{!disableAppSettings && (
-					<DropdownMenuItem asChild>
+					<DropdownMenu.Item asChild>
 						<a href={`/settings`}>
 							App settings
 							<DropdownMenuItemRightSlot>
 								<Icon name="gear" />
 							</DropdownMenuItemRightSlot>
 						</a>
-					</DropdownMenuItem>
+					</DropdownMenu.Item>
 				)}
-				<DropdownMenuItem asChild>
+				<DropdownMenu.Item asChild>
 					<a href={`${CONFIG.HOME_ORIGIN}/contact`} target="_blank">
 						Contact support
 						<DropdownMenuItemRightSlot>
 							<Icon name="profile" />
 						</DropdownMenuItemRightSlot>
 					</a>
-				</DropdownMenuItem>
+				</DropdownMenu.Item>
 				{!!isLoggedIn && (
-					<DropdownMenuItem asChild>
+					<DropdownMenu.Item asChild>
 						<LogoutButton className="border-none transition-none shadow-none">
 							Log out
 							<DropdownMenuItemRightSlot>
 								<Icon name="arrowRight" />
 							</DropdownMenuItemRightSlot>
 						</LogoutButton>
-					</DropdownMenuItem>
+					</DropdownMenu.Item>
 				)}
 				{extraItems}
-			</DropdownMenuContent>
+			</DropdownMenu.Content>
 		</DropdownMenu>
 	);
 }

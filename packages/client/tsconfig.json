@@ -3,7 +3,14 @@
 	"compilerOptions": {
 		"outDir": "./dist",
 		"rootDir": "./src",
-		"types": ["vite-plugin-pwa/client"]
+		"types": ["vite-plugin-pwa/client"],
+		"plugins": [
+			{
+				"name": "gql.tada/ts-plugin",
+				"schema": "../../server/schema.graphql",
+				"tadaOutputLocation": "../graphql/src/graphql-env.d.ts"
+			}
+		]
 	},
 	"include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.mts", "./typings"]
 }

@@ -31,11 +31,11 @@
 		"@biscuits/apps": "workspace:*",
 		"@biscuits/error": "workspace:*",
 		"@biscuits/libraries": "workspace:*",
-		"gql.tada": "1.8.2",
+		"gql.tada": "1.8.10",
 		"graphql": "16.9.0",
 		"react": "19.0.0"
 	},
 	"devDependencies": {
-		"typescript": "5.5.3"
+		"typescript": "5.7.2"
 	}
 }
