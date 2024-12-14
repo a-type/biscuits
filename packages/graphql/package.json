@@ -32,9 +32,9 @@
 		"@biscuits/error": "workspace:*",
 		"@biscuits/libraries": "workspace:*",
 		"gql.tada": "1.8.2",
-		"graphql": "16.9.0"
+		"graphql": "16.9.0",
+		"react": "19.0.0"
 	},
-	"peerDependencies": {},
 	"devDependencies": {
 		"typescript": "5.5.3"
 	}

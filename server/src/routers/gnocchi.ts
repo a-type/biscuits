@@ -1,15 +1,13 @@
-import { Router } from 'itty-router';
-import * as path from 'path';
-import * as fsSync from 'fs';
-import { type HubRecipeData } from '@gnocchi.biscuits/hub';
-import { verdantServer } from '../verdant/verdant.js';
-import { getLibraryName } from '@biscuits/libraries';
 import { db } from '@biscuits/db';
+import { getLibraryName } from '@biscuits/libraries';
+import { type HubRecipeData } from '@gnocchi.biscuits/hub';
+import * as fsSync from 'fs';
+import { Hono } from 'hono';
+import * as path from 'path';
 import { renderTemplate, staticFile } from '../common/hubs.js';
+import { verdantServer } from '../verdant/verdant.js';
 
-export const gnocchiRouter = Router({
-	base: '/gnocchi',
-});
+export const gnocchiRouter = new Hono();
 
 const hubPath = path.join(
 	process.cwd(),
@@ -26,12 +24,13 @@ const indexTemplate = fsSync.readFileSync(
 	'utf8',
 );
 
-gnocchiRouter.get('/hubRecipe/assets/*', (req) =>
-	staticFile(hubClientPath, 'gnocchi/hubRecipe', req),
+gnocchiRouter.get('/hubRecipe/assets/*', (ctx) =>
+	staticFile(hubClientPath, 'gnocchi/hubRecipe', ctx.req.raw),
 );
 
-gnocchiRouter.get('/hubRecipe/:planId/:recipeSlug', async (req) => {
-	const { planId, recipeSlug } = req.params;
+gnocchiRouter.get('/hubRecipe/:planId/:recipeSlug', async (ctx) => {
+	const planId = ctx.req.param('planId');
+	const recipeSlug = ctx.req.param('recipeSlug');
 
 	const recipe = await db
 		.selectFrom('PublishedRecipe')
@@ -83,10 +82,10 @@ gnocchiRouter.get('/hubRecipe/:planId/:recipeSlug', async (req) => {
 
 	const { serverRender } = await import('@gnocchi.biscuits/hub');
 
-	const appHtml = serverRender(data, req.url);
+	const appHtml = serverRender(data, ctx.req.url);
 	return renderTemplate(indexTemplate, appHtml, data);
 });
 
-gnocchiRouter.get('/hubRecipe/*', (req) =>
-	staticFile(hubClientPath, 'gnocchi/hubRecipe', req),
+gnocchiRouter.get('/hubRecipe/*', (ctx) =>
+	staticFile(hubClientPath, 'gnocchi/hubRecipe', ctx.req.raw),
 );

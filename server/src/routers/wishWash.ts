@@ -1,18 +1,16 @@
-import { Router } from 'itty-router';
-import * as path from 'path';
-import * as fsSync from 'fs';
-import { type HubWishlistData } from '@wish-wash.biscuits/hub';
-import { verdantServer } from '../verdant/verdant.js';
-import { getLibraryName } from '@biscuits/libraries';
-import { db } from '@biscuits/db';
-import { renderTemplate, staticFile } from '../common/hubs.js';
-import type { ListSnapshot as WishlistSnapshot } from '@wish-wash.biscuits/verdant';
-import { sessions } from '../auth/session.js';
 import { Session } from '@a-type/auth';
+import { db } from '@biscuits/db';
+import { getLibraryName } from '@biscuits/libraries';
+import { type HubWishlistData } from '@wish-wash.biscuits/hub';
+import type { ListSnapshot as WishlistSnapshot } from '@wish-wash.biscuits/verdant';
+import * as fsSync from 'fs';
+import { Hono } from 'hono';
+import * as path from 'path';
+import { sessions } from '../auth/session.js';
+import { renderTemplate, staticFile } from '../common/hubs.js';
+import { verdantServer } from '../verdant/verdant.js';
 
-export const wishWashRouter = Router({
-	base: '/wishWash',
-});
+export const wishWashRouter = new Hono();
 
 const hubPath = path.join(
 	process.cwd(),
@@ -24,12 +22,12 @@ const hubPath = path.join(
 );
 const hubClientPath = path.join(hubPath, 'client');
 
-wishWashRouter.get('/hubList/assets/*', (req) =>
-	staticFile(hubClientPath, 'wishWash/hubList', req),
+wishWashRouter.get('/hubList/assets/*', ({ req }) =>
+	staticFile(hubClientPath, 'wishWash/hubList', req.raw),
 );
 
-wishWashRouter.get('/hubList/favicon.ico', (req) =>
-	staticFile(hubClientPath, 'wishWash/hubList', req),
+wishWashRouter.get('/hubList/favicon.ico', ({ req }) =>
+	staticFile(hubClientPath, 'wishWash/hubList', req.raw),
 );
 
 function itemImageUrls(item: WishlistSnapshot['items'][number]) {
@@ -42,8 +40,8 @@ function itemImageUrls(item: WishlistSnapshot['items'][number]) {
 	return imageUrls;
 }
 
-wishWashRouter.get('/hubList/:listSlug', async (req) => {
-	const { listSlug } = req.params;
+wishWashRouter.get('/hubList/:listSlug', async ({ req }) => {
+	const listSlug = req.param('listSlug');
 	// parse slug out of fragment
 	const slug = listSlug.split('-').pop()!;
 
@@ -81,7 +79,7 @@ wishWashRouter.get('/hubList/:listSlug', async (req) => {
 
 	let session: Session | null = null;
 	try {
-		session = await sessions.getSession(req);
+		session = await sessions.getSession(req.raw);
 	} catch (err) {
 		// that's fine
 	}
@@ -121,6 +119,6 @@ wishWashRouter.get('/hubList/:listSlug', async (req) => {
 	return renderTemplate(indexTemplate, appHtml, data);
 });
 
-wishWashRouter.get('/hubList/*', (req) =>
-	staticFile(hubClientPath, 'wishWash/hubList', req),
+wishWashRouter.get('/hubList/*', ({ req }) =>
+	staticFile(hubClientPath, 'wishWash/hubList', req.raw),
 );

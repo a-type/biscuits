@@ -4,7 +4,7 @@ import { BiscuitsError } from '@biscuits/error';
 import { useCSRFPrevention } from '@graphql-yoga/plugin-csrf-prevention';
 import { GraphQLError } from 'graphql';
 import { Plugin, createYoga, maskError } from 'graphql-yoga';
-import { Router } from 'itty-router';
+import { Hono } from 'hono';
 import { sessions } from '../auth/session.js';
 import { GQLContext } from '../graphql/context.js';
 import { createDataloaders } from '../graphql/dataloaders/index.js';
@@ -78,57 +78,54 @@ const yoga = createYoga<GQLContext>({
 	},
 });
 
-export const graphqlRouter = Router({
-	base: '/graphql',
-});
-
-graphqlRouter.all('/', handleGraphQLRequest);
-
-async function handleGraphQLRequest(request: Request) {
-	const auth = {
-		applyHeaders: new Headers(),
-		setLoginSession: async (ses: Session | null) => {
-			if (ses) {
-				const { headers } = await sessions.updateSession(ses);
-				auth.applyHeaders = new Headers(headers);
-			} else {
-				const { headers } = sessions.clearSession();
-				auth.applyHeaders = new Headers(headers);
+export const graphqlRouter = new Hono().all(
+	'/',
+	async function handleGraphQLRequest(honoCtx) {
+		const auth = {
+			applyHeaders: new Headers(),
+			setLoginSession: async (ses: Session | null) => {
+				if (ses) {
+					const { headers } = await sessions.updateSession(ses);
+					auth.applyHeaders = new Headers(headers);
+				} else {
+					const { headers } = sessions.clearSession();
+					auth.applyHeaders = new Headers(headers);
+				}
+				// also update immediately in the context, so that
+				// resolvers on return values can see the new session
+				ctx.session = ses;
+			},
+		};
+		let session = null;
+		try {
+			session = await sessions.getSession(honoCtx.req.raw);
+		} catch (e) {
+			// if session expired, we need to tell the client to refresh it
+			if (e instanceof AuthError) {
+				if (e.message === 'Session expired') {
+					throw new BiscuitsError(
+						BiscuitsError.Code.SessionExpired,
+						'Session expired',
+					);
+				}
 			}
-			// also update immediately in the context, so that
-			// resolvers on return values can see the new session
-			ctx.session = ses;
-		},
-	};
-	let session = null;
-	try {
-		session = await sessions.getSession(request);
-	} catch (e) {
-		// if session expired, we need to tell the client to refresh it
-		if (e instanceof AuthError) {
-			if (e.message === 'Session expired') {
-				throw new BiscuitsError(
-					BiscuitsError.Code.SessionExpired,
-					'Session expired',
-				);
-			}
+			throw e;
 		}
-		throw e;
-	}
 
-	const ctx: GQLContext = {
-		req: request,
-		session,
-		db,
-		auth,
-		verdant: verdantServer,
-		stripe,
-		dataloaders: createDataloaders({
-			stripe,
+		const ctx: GQLContext = {
+			req: honoCtx.req.raw,
+			session,
 			db,
-		}),
-	};
+			auth,
+			verdant: verdantServer,
+			stripe,
+			dataloaders: createDataloaders({
+				stripe,
+				db,
+			}),
+		};
 
-	const yogaResponse = await yoga.handle(request, ctx);
-	return yogaResponse;
-}
+		const yogaResponse = await yoga.handle(honoCtx.req.raw, ctx);
+		return yogaResponse;
+	},
+);

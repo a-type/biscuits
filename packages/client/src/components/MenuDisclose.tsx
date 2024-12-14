@@ -1,4 +1,4 @@
-import { clsx, Slot } from '@a-type/ui';
+import { Button, ButtonProps, clsx, Slot } from '@a-type/ui';
 import {
 	ComponentProps,
 	createContext,
@@ -57,6 +57,9 @@ export const MenuDiscloseRoot = forwardRef<
 				className={clsx('relative', 'menu-disclose-root', className)}
 			>
 				{children}
+				{open && (
+					<div className="opacity-0 bg-overlay fixed inset-0 z-0 pointer-events-none animate-fade-in animate-delay-200 animate-forwards" />
+				)}
 			</Comp>
 		</MenuDiscloseContext.Provider>
 	);
@@ -72,7 +75,7 @@ export const MenuDiscloseTrigger = forwardRef<
 >(function MenuDiscloseTriggerImpl({ children, asChild, ...rest }, ref) {
 	const { setOpen, open } = useContext(MenuDiscloseContext);
 
-	const Comp = asChild ? Slot : 'button';
+	const Comp = asChild ? Slot : DefaultButton;
 
 	return (
 		<Comp
@@ -81,6 +84,7 @@ export const MenuDiscloseTrigger = forwardRef<
 			className={clsx(
 				'pointer-events-auto',
 				'menu-disclose-trigger',
+				'bottom-0 left-1/2 transform -translate-x-1/2 pointer-events-auto',
 				open && 'menu-disclose-trigger-hidden',
 			)}
 			onClick={(ev) => {
@@ -92,6 +96,19 @@ export const MenuDiscloseTrigger = forwardRef<
 		</Comp>
 	);
 });
+
+const DefaultButton = forwardRef<HTMLButtonElement, ButtonProps>(
+	function DefaultButton({ className, ...props }, ref) {
+		return (
+			<Button
+				size="icon"
+				color="primary"
+				className={clsx('absolute shadow-xl', className)}
+				{...props}
+			/>
+		);
+	},
+);
 
 export interface MenuDiscloseContentProps extends ComponentProps<'div'> {
 	asChild?: boolean;
@@ -117,7 +134,7 @@ export const MenuDiscloseContent = forwardRef<
 			{...rest}
 			ref={ref}
 			className={clsx(
-				'relative z-1',
+				'relative z-1 border-default bg-white rounded-lg shadow-xl',
 				'menu-disclose-content',
 				open ?
 					'menu-disclose-content-visible pointer-events-auto'

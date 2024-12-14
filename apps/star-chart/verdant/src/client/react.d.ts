@@ -1,4 +1,10 @@
-import { Context, ComponentType, ReactNode } from "react";
+import {
+  Context,
+  ComponentType,
+  ReactNode,
+  ChangeEvent,
+  FocusEvent,
+} from "react";
 import type {
   Client,
   ClientDescriptor,
@@ -12,6 +18,7 @@ import type {
   EntityShape,
   AnyEntity,
   EntityDestructured,
+  EntityInit,
   EntityFile,
   Project,
   ProjectFilter,
@@ -27,20 +34,29 @@ type HookConfig<F> = {
   key?: string;
 };
 
+type FieldInputProps<Shape> = {
+  value: Shape extends boolean ? undefined : Shape;
+  checked?: boolean;
+  onChange: (event: ChangeEvent) => void;
+  onFocus: (event: FocusEvent) => void;
+  onBlur: (event: FocusEvent) => void;
+  type?: string;
+};
+
 export interface GeneratedHooks<Presence, Profile> {
   /**
    * Render this context Provider at the top level of your
    * React tree to provide a Client to all hooks.
    */
   Provider: ComponentType<{
-    value: ClientDescriptor<Schema>;
+    value: ClientDescriptor<any, any>;
     children: ReactNode;
     sync?: boolean;
   }>;
   /**
    * Direct access to the React Context, if needed.
    */
-  Context: Context<ClientDescriptor<Schema>>;
+  Context: Context<ClientDescriptor<any, any>>;
   /** @deprecated use useClient instead */
   useStorage: () => Client<Presence, Profile>;
   useClient: () => Client<Presence, Profile>;
@@ -56,6 +72,46 @@ export interface GeneratedHooks<Presence, Profile> {
     query: (peer: UserInfo<Profile, Presence>) => boolean,
     options?: { includeSelf: boolean },
   ) => UserInfo<Profile, Presence>[];
+  useViewPeers: () => UserInfo<Profile, Presence>[];
+  useViewId: (viewId: string | undefined) => void;
+  useField<
+    T extends AnyEntity<any, any, any>,
+    K extends keyof EntityDestructured<T>,
+  >(
+    entity: T,
+    fieldName: K,
+    options?: {
+      /** after this timeout, the field will be considered abandoned by a peer. defaults to 1m */
+      timeout: number;
+    },
+  ): {
+    /* The live value of the field */
+    value: EntityDestructured<T>[K];
+    /* Sets the value of the field */
+    setValue: (value: Exclude<EntityInit<T>[K], undefined>) => void;
+    /* Pass these props to any <input> or <textarea> element to auto-wire it */
+    inputProps: FieldInputProps<EntityDestructured<T>[K]>;
+    presence: {
+      /**
+       * Whether the current replica is editing the field
+       */
+      self: boolean;
+      /**
+       * A list of peers editing this field
+       */
+      peers: UserInfo<Profile, Presence>[];
+      /**
+       * Whether the field is currently being edited by someone else.
+       * Will return false if the current replica is already editing it.
+       */
+      occupied: boolean;
+      /**
+       * Mark the field as being edited by the current replica, similar to
+       * what inputProps do on 'focus' events.
+       */
+      touch: () => void;
+    };
+  };
   useSyncStatus: () => boolean;
   useWatch<T extends AnyEntity<any, any, any> | null>(
     entity: T,

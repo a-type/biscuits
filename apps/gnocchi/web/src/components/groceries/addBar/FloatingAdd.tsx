@@ -53,17 +53,12 @@ export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
 					{...rest}
 				/>
 			</MenuDisclose.Content>
-			{open && (
-				<div className="opacity-0 bg-overlay fixed inset-0 z-0 pointer-events-none animate-fade-in animate-delay-200 animate-forwards" />
-			)}
 			<MenuDisclose.Trigger asChild>
 				<Button
 					size="icon"
 					onClick={() => setOpen(true)}
 					color="primary"
-					className={classNames(
-						'absolute shadow-xl bottom-0 left-1/2 transform -translate-x-1/2 pointer-events-auto',
-					)}
+					className={classNames('absolute shadow-xl')}
 				>
 					<Icon name="plus" className="w-20px h-20px" />
 				</Button>

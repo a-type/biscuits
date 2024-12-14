@@ -19,21 +19,21 @@
 		"build": "tsc && node ./scripts/copyClient.js"
 	},
 	"peerDependencies": {
-		"react": "18.3.1"
+		"react": "^19"
 	},
 	"dependencies": {
 		"@0no-co/graphqlsp": "1.12.8",
 		"@biscuits/client": "workspace:*",
 		"@biscuits/graphql": "workspace:*",
-		"@verdant-web/cli": "4.7.1-alpha.0",
-		"@verdant-web/common": "2.6.0",
-		"@verdant-web/react": "39.0.0",
-		"@verdant-web/store": "4.1.0-alpha.9",
+		"@verdant-web/cli": "4.7.1",
+		"@verdant-web/common": "2.7.0",
+		"@verdant-web/react": "40.1.0",
+		"@verdant-web/store": "4.1.0",
 		"cuid": "^2.1.8",
 		"stopword": "^2.0.8"
 	},
 	"devDependencies": {
 		"@types/stopword": "^2.0.0",
-		"react": "18.3.1"
+		"react": "19.0.0"
 	}
 }

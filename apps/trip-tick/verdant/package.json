@@ -9,13 +9,13 @@
 		"preflight": "verdant preflight -s ./src/schema.ts -o ./src/client"
 	},
 	"peerDependencies": {
-		"react": "18.3.1"
+		"react": "^19"
 	},
 	"dependencies": {
-		"@verdant-web/cli": "4.7.1-alpha.0",
-		"@verdant-web/common": "2.6.0",
-		"@verdant-web/react": "39.0.0",
-		"@verdant-web/store": "4.1.0-alpha.9",
+		"@verdant-web/cli": "4.7.1",
+		"@verdant-web/common": "2.7.0",
+		"@verdant-web/react": "40.1.0",
+		"@verdant-web/store": "4.1.0",
 		"cuid": "^2.1.8"
 	}
 }

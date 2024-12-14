@@ -17,6 +17,10 @@ const routes = makeRoutes([
 		component: lazy(() => import('./ProjectPage.jsx')),
 	},
 	{
+		path: '/task/:taskId',
+		component: lazy(() => import('./TaskPage.jsx')),
+	},
+	{
 		path: '/settings',
 		component: lazy(() => import('./SettingsPage.jsx')),
 	},

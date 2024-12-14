@@ -1,10 +1,11 @@
 import { CreateProjectButton } from '@/components/project/CreateProjectButton.jsx';
 import { ProjectCard } from '@/components/project/ProjectCard.jsx';
+import { FloatingNewTask } from '@/components/tasks/FloatingNewTask.jsx';
+import { SingleTasks } from '@/components/tasks/SingleTasks.jsx';
 import { hooks } from '@/store.js';
 import {
+	Box,
 	CardGrid,
-	H1,
-	Icon,
 	PageContent,
 	PageNowPlaying,
 	PageRoot,
@@ -18,20 +19,21 @@ export function HomePage({}: HomePageProps) {
 	return (
 		<PageRoot>
 			<PageContent>
-				<H1 className="mb-2">Projects</H1>
-				<CardGrid>
-					{projects.map((proj) => (
-						<ProjectCard key={proj.uid} project={proj} />
-					))}
-				</CardGrid>
+				<Box container direction="col">
+					<SingleTasks />
+					<Box container direction="col" surface border p="md">
+						<CardGrid>
+							{projects.map((proj) => (
+								<ProjectCard key={proj.uid} project={proj} />
+							))}
+						</CardGrid>
+						<Box container justify="end">
+							<CreateProjectButton />
+						</Box>
+					</Box>
+				</Box>
 				<PageNowPlaying unstyled className="row items-center justify-center">
-					<CreateProjectButton
-						color="primary"
-						size="icon"
-						className="shadow-xl w-48px h-48px items-center justify-center"
-					>
-						<Icon name="plus" className="w-20px h-20px" />
-					</CreateProjectButton>
+					<FloatingNewTask />
 				</PageNowPlaying>
 			</PageContent>
 		</PageRoot>

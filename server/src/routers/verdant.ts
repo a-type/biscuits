@@ -1,23 +1,21 @@
 import { BiscuitsError } from '@biscuits/error';
 import { getLibraryName } from '@biscuits/libraries';
 import { ReplicaType, TokenProvider } from '@verdant-web/server';
-import { Router } from 'itty-router';
+import { Hono } from 'hono';
 import { sessions } from '../auth/session.js';
 import { DEPLOYED_ORIGIN } from '../config/deployedContext.js';
 import { VERDANT_SECRET } from '../config/secrets.js';
 import { isPlanInGoodStanding } from '../management/plans.js';
 import { verdantServer } from '../verdant/verdant.js';
 
-export const verdantRouter = Router({
-	base: '/verdant',
-});
+export const verdantRouter = new Hono();
 
 const tokenProvider = new TokenProvider({
 	secret: VERDANT_SECRET,
 });
 
-verdantRouter.get('/token/:app', async (req) => {
-	const session = await sessions.getSession(req);
+verdantRouter.get('/token/:app', async ({ req }) => {
+	const session = await sessions.getSession(req.raw);
 
 	if (!session) {
 		throw new BiscuitsError(BiscuitsError.Code.NotLoggedIn);
@@ -25,7 +23,7 @@ verdantRouter.get('/token/:app', async (req) => {
 
 	// for Wish Wash, users can use sync for 1 person, fetch-based only,
 	// with no subscription
-	const appId = req.params.app;
+	const appId = req.param('app');
 
 	if (!session.planId) {
 		throw new BiscuitsError(BiscuitsError.Code.NoPlan);
@@ -37,7 +35,7 @@ verdantRouter.get('/token/:app', async (req) => {
 		throw new BiscuitsError(BiscuitsError.Code.SubscriptionInactive);
 	}
 
-	const access = req.params.access ?? 'members';
+	const access = req.query('access') ?? 'members';
 	if (access !== 'members' && access !== 'user') {
 		throw new BiscuitsError(
 			BiscuitsError.Code.BadRequest,
@@ -50,7 +48,7 @@ verdantRouter.get('/token/:app', async (req) => {
 
 	const libraryId = getLibraryName({
 		planId: session.planId,
-		app: req.params.app,
+		app: req.param('app'),
 		access,
 		userId: session.userId,
 	});
@@ -80,5 +78,7 @@ verdantRouter.get('/token/:app', async (req) => {
 		},
 	});
 });
-verdantRouter.all('/', verdantServer.handleFetch);
-verdantRouter.all('/files/:fileId', verdantServer.handleFileFetch);
+verdantRouter.all('/', (ctx) => verdantServer.handleFetch(ctx.req.raw));
+verdantRouter.all('/files/:fileId', (ctx) =>
+	verdantServer.handleFileFetch(ctx.req.raw),
+);

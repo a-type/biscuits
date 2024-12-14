@@ -1,43 +1,41 @@
 {
-  "name": "@biscuits/db",
-  "private": true,
-  "version": "0.0.1",
-  "exports": {
-    ".": {
-      "production": "./dist/index.js",
-      "development": "./src/index.ts",
-      "import": "./dist/index.js",
-      "node": "./dist/index.js",
-      "default": "./dist/index.js"
-    }
-  },
-  "publishConfig": {
-    "access": "public",
-    "exports": {
-      ".": {
-        "import": "./dist/index.js"
-      }
-    }
-  },
-  "scripts": {
-    "build": "tsc",
-    "//dev": "tsc -w",
-    "migrate-down": "cross-env DATABASE_FILE=../../server/database.sqlite node ./scripts/migrateDown.mjs"
-  },
-  "type": "module",
-  "dependencies": {
-    "@a-type/kysely": "^1.0.1",
-    "@a-type/utils": "^1.0.5",
-    "@paralleldrive/cuid2": "^2.2.2",
-    "bcrypt": "^5.1.1",
-    "better-sqlite3": "^9.1.1",
-    "kysely": "^0.27.3",
-    "kysely-plugin-serialize": "^0.5.7"
-  },
-  "devDependencies": {
-    "@types/bcrypt": "^5.0.2",
-    "@types/better-sqlite3": "^7.6.8",
-    "cross-env": "^7.0.3",
-    "tsx": "^4.6.2"
-  }
+	"name": "@biscuits/db",
+	"private": true,
+	"version": "0.0.1",
+	"exports": {
+		".": {
+			"production": "./dist/index.js",
+			"development": "./src/index.ts",
+			"import": "./dist/index.js",
+			"node": "./dist/index.js",
+			"default": "./dist/index.js"
+		}
+	},
+	"publishConfig": {
+		"access": "public",
+		"exports": {
+			".": {
+				"import": "./dist/index.js"
+			}
+		}
+	},
+	"scripts": {
+		"build": "tsc",
+		"//dev": "tsc -w",
+		"migrate-down": "cross-env DATABASE_FILE=../../server/database.sqlite node ./scripts/migrateDown.mjs"
+	},
+	"type": "module",
+	"dependencies": {
+		"@a-type/kysely": "^1.1.0",
+		"@a-type/utils": "^1.0.5",
+		"@paralleldrive/cuid2": "^2.2.2",
+		"better-sqlite3": "11.7.0",
+		"kysely": "^0.27.5",
+		"kysely-plugin-serialize": "^0.7.0"
+	},
+	"devDependencies": {
+		"@types/better-sqlite3": "^7.6.12",
+		"cross-env": "^7.0.3",
+		"tsx": "^4.6.2"
+	}
 }

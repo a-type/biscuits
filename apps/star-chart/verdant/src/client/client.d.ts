@@ -30,19 +30,47 @@ export class Client<Presence = any, Profile = any> {
   import: BaseClient<Presence, Profile>["import"];
   subscribe: BaseClient<Presence, Profile>["subscribe"];
   stats: BaseClient<Presence, Profile>["stats"];
+
+  /**
+   * Deletes all local data. If the client is connected to sync,
+   * this will cause the client to re-sync all data from the server.
+   * Use this very carefully, and only as a last resort.
+   */
   __dangerous__resetLocal: BaseClient<
     Presence,
     Profile
   >["__dangerous__resetLocal"];
+
+  /**
+   * Export all data, then re-import it. This might resolve
+   * some issues with the local database, but it should
+   * only be done as a second-to-last resort. The last resort
+   * would be __dangerous__resetLocal on ClientDescriptor, which
+   * clears all local data.
+   *
+   * Unlike __dangerous__resetLocal, this method allows local-only
+   * clients to recover data, whereas __dangerous__resetLocal only
+   * lets networked clients recover from the server.
+   */
+  __dangerous__hardReset: () => Promise<void>;
+
+  /**
+   * Manually triggers storage rebasing. Follows normal
+   * rebasing rules. Rebases already happen automatically
+   * during normal operation, so you probably don't need this.
+   */
+  __manualRebase: () => Promise<void>;
 }
 
 export interface ClientDescriptorOptions<Presence = any, Profile = any>
   extends Omit<
     BaseClientDescriptorOptions<Presence, Profile>,
-    "schema" | "migrations"
+    "schema" | "migrations" | "oldSchemas"
   > {
   /** WARNING: overriding the schema is dangerous and almost definitely not what you want. */
   schema?: StorageSchema;
+  /** WARNING: overriding old schemas is dangerous and almost definitely not what you want. */
+  oldSchemas?: StorageSchema[];
   /** WARNING: overriding the migrations is dangerous and almost definitely not what you want. */
   migrations?: Migration[];
 }
@@ -127,39 +155,67 @@ export type TaskPosition = ObjectEntity<
   TaskPositionInit,
   TaskPositionDestructured,
   TaskPositionSnapshot
->;
+> | null;
 export type TaskPositionX = number;
 export type TaskPositionY = number;
+export type TaskImages = ListEntity<
+  TaskImagesInit,
+  TaskImagesDestructured,
+  TaskImagesSnapshot
+>;
+export type TaskImagesItem = string;
+export type TaskNote = string;
+export type TaskAssignedTo = string;
+export type TaskTimeEstimateMinutes = number;
+export type TaskScheduledAt = number;
 export type TaskInit = {
   id?: string;
-  projectId: string;
+  projectId?: string | null;
   createdAt?: number;
   content: string;
   completedAt?: number | null;
-  position: TaskPositionInit;
+  position?: TaskPositionInit;
+  images?: TaskImagesInit;
+  note?: string | null;
+  assignedTo?: string | null;
+  timeEstimateMinutes?: number | null;
+  scheduledAt?: number | null;
 };
 
-export type TaskPositionInit = { x: number; y: number };
+export type TaskPositionInit = { x: number; y: number } | null;
+export type TaskImagesInit = File[];
 export type TaskDestructured = {
   id: string;
-  projectId: string;
+  projectId: string | null;
   createdAt: number;
   content: string;
   completedAt: number | null;
   position: TaskPosition;
+  images: TaskImages;
+  note: string | null;
+  assignedTo: string | null;
+  timeEstimateMinutes: number | null;
+  scheduledAt: number | null;
 };
 
 export type TaskPositionDestructured = { x: number; y: number };
+export type TaskImagesDestructured = EntityFile[];
 export type TaskSnapshot = {
   id: string;
-  projectId: string;
+  projectId: string | null;
   createdAt: number;
   content: string;
   completedAt: number | null;
   position: TaskPositionSnapshot;
+  images: TaskImagesSnapshot;
+  note: string | null;
+  assignedTo: string | null;
+  timeEstimateMinutes: number | null;
+  scheduledAt: number | null;
 };
 
-export type TaskPositionSnapshot = { x: number; y: number };
+export type TaskPositionSnapshot = { x: number; y: number } | null;
+export type TaskImagesSnapshot = EntityFileSnapshot[];
 
 /** Index filters for Task **/
 
