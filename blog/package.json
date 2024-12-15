@@ -11,17 +11,17 @@
 	},
 	"dependencies": {
 		"@a-type/ui": "^1.3.3",
-		"@astrojs/check": "^0.5.10",
-		"@astrojs/mdx": "^2.3.1",
-		"@astrojs/rss": "^4.0.5",
-		"@astrojs/sitemap": "^3.1.4",
+		"@astrojs/check": "^0.9.4",
+		"@astrojs/mdx": "^4.0.2",
+		"@astrojs/rss": "^4.0.10",
+		"@astrojs/sitemap": "^3.2.1",
 		"@biscuits/client": "workspace:*",
 		"@biscuits/graphql": "workspace:*",
-		"@unocss/astro": "^0.59.4",
-		"@unocss/reset": "^0.59.4",
-		"@unocss/transformer-variant-group": "^0.59.4",
-		"astro": "^4.7.1",
+		"@unocss/astro": "^0.65.1",
+		"@unocss/reset": "^0.65.1",
+		"@unocss/transformer-variant-group": "^0.65.1",
+		"astro": "^5.0.5",
 		"typescript": "5.5.3",
-		"unocss": "^0.59.4"
+		"unocss": "^0.65.1"
 	}
 }
