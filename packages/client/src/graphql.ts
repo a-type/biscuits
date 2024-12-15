@@ -9,3 +9,6 @@ export const graphql = initGraphQLTada<{
 		JSON: any;
 	};
 }>();
+
+export { maskFragments, readFragment } from 'gql.tada';
+export type { FragmentOf, ResultOf, VariablesOf } from 'gql.tada';

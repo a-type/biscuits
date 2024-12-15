@@ -1,3 +1,4 @@
+import { graphql } from '@/graphql.js';
 import { hooks } from '@/hooks.js';
 import {
 	Button,
@@ -17,7 +18,7 @@ import {
 } from '@a-type/ui';
 import { preventDefault } from '@a-type/utils';
 import { useHasServerAccess } from '@biscuits/client';
-import { graphql, useLazyQuery } from '@biscuits/graphql';
+import { useLazyQuery } from '@biscuits/graphql';
 import { useSearchParams } from '@verdant-web/react-router';
 import {
 	Item,
@@ -74,7 +75,7 @@ function ItemEditor({ item }: { item: Item }) {
 		case 'idea':
 			content = <IdeaEditor item={item} />;
 			break;
-		case 'product':
+		case 'link':
 			content = <ProductEditor item={item} />;
 			break;
 		case 'vibe':

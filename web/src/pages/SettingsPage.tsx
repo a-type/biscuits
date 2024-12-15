@@ -6,6 +6,7 @@ import {
 	UserInfoEditor,
 	userInfoFragment,
 } from '@/components/user/UserInfoEditor.jsx';
+import { graphql } from '@/graphql.js';
 import {
 	Button,
 	ErrorBoundary,
@@ -23,7 +24,7 @@ import {
 	SubscriptionSetup,
 	useLocalStorage,
 } from '@biscuits/client';
-import { graphql, NetworkStatus, useQuery } from '@biscuits/graphql';
+import { NetworkStatus, useQuery } from '@biscuits/graphql';
 import { Link, useNavigate, useSearchParams } from '@verdant-web/react-router';
 import { Suspense, useEffect } from 'react';
 

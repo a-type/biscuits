@@ -1,5 +1,6 @@
 import { AddListsPicker } from '@/components/trips/AddListsPicker.jsx';
 import { useTripDays, useTripProgress } from '@/components/trips/hooks.js';
+import { FragmentOf, graphql } from '@/graphql.js';
 import { hooks } from '@/store.js';
 import {
 	Button,
@@ -13,7 +14,7 @@ import {
 	TabsTrigger,
 } from '@a-type/ui';
 import { useLocalStorage, usePageTitle } from '@biscuits/client';
-import { FragmentOf, graphql, useQuery } from '@biscuits/graphql';
+import { useQuery } from '@biscuits/graphql';
 import * as Progress from '@radix-ui/react-progress';
 import {
 	List,

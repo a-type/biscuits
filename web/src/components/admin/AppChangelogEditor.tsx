@@ -1,3 +1,4 @@
+import { graphql } from '@/graphql.js';
 import {
 	Button,
 	CardContent,
@@ -22,7 +23,7 @@ import {
 	toast,
 } from '@a-type/ui';
 import { AppId } from '@biscuits/apps';
-import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
+import { useMutation, useSuspenseQuery } from '@biscuits/graphql';
 import { useState } from 'react';
 
 export interface AppChangelogEditorProps {

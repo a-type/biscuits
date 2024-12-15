@@ -8,8 +8,9 @@ import {
 	H2,
 	P,
 } from '@a-type/ui';
-import { graphql, useMutation, useQuery } from '@biscuits/graphql';
+import { useMutation, useQuery } from '@biscuits/graphql';
 import { Suspense } from 'react';
+import { graphql } from '../../graphql.js';
 import { Price } from '../Price.js';
 
 export interface SubscriptionSelectProps {

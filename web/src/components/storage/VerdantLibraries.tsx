@@ -1,3 +1,4 @@
+import { graphql } from '@/graphql.js';
 import {
 	AvatarList,
 	AvatarListItem,
@@ -11,7 +12,7 @@ import {
 	ConfirmedButton,
 } from '@a-type/ui';
 import { AppId, AppManifest, apps, getAppUrl } from '@biscuits/apps';
-import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
+import { useMutation, useSuspenseQuery } from '@biscuits/graphql';
 import { Fragment } from 'react';
 
 const libraryFragment = graphql(`

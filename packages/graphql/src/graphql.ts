@@ -3,22 +3,8 @@ import { ErrorHandler, onError } from '@apollo/client/link/error';
 import { HttpLink } from '@apollo/client/link/http';
 import { RetryLink } from '@apollo/client/link/retry';
 import { BiscuitsError } from '@biscuits/error';
-import { initGraphQLTada } from 'gql.tada';
 import * as CONFIG from './config.js';
 import { fetch, refreshSession } from './fetch.js';
-import type { introspection } from './graphql-env.d.js';
-
-export const graphql = initGraphQLTada<{
-	introspection: introspection;
-	scalars: {
-		DateTime: string;
-		Date: string;
-		JSON: any;
-	};
-}>();
-
-export { maskFragments, readFragment } from 'gql.tada';
-export type { FragmentOf, ResultOf, VariablesOf } from 'gql.tada';
 
 let hasNetworkError = false;
 

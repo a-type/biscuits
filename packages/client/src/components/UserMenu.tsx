@@ -8,9 +8,10 @@ import {
 	ErrorBoundary,
 	Icon,
 } from '@a-type/ui';
-import { graphql, useSuspenseQuery } from '@biscuits/graphql';
+import { useSuspenseQuery } from '@biscuits/graphql';
 import { ReactNode, Suspense } from 'react';
 import * as CONFIG from '../config.js';
+import { graphql } from '../graphql.js';
 import {
 	useHasServerAccess,
 	useIsLoggedIn,

@@ -1,5 +1,4 @@
 import { Button, H2 } from '@a-type/ui';
-import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 import {
 	Elements,
 	PaymentElement,
@@ -7,6 +6,7 @@ import {
 	useStripe,
 } from '@stripe/react-stripe-js';
 import { useState } from 'react';
+import { FragmentOf, graphql, readFragment } from '../../graphql.js';
 import { stripe } from '../../stripe.js';
 
 export const checkoutData = graphql(`

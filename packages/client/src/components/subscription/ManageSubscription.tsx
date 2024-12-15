@@ -1,13 +1,9 @@
 import { Button, Chip, clsx, H2, Icon, toast } from '@a-type/ui';
-import {
-	FragmentOf,
-	graphql,
-	readFragment,
-	useLazyQuery,
-} from '@biscuits/graphql';
+import { useLazyQuery } from '@biscuits/graphql';
 import { useSearchParams } from '@verdant-web/react-router';
 import { useEffect } from 'react';
 import * as CONFIG from '../../config.js';
+import { FragmentOf, graphql, readFragment } from '../../graphql.js';
 import { CancelPlanButton } from './CancelPlanButton.js';
 import { PlanInfo, planProductInfo } from './PlanInfo.js';
 

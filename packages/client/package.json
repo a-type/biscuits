@@ -64,7 +64,7 @@
 		"@biscuits/libraries": "workspace:*",
 		"@stripe/react-stripe-js": "2.7.3",
 		"@stripe/stripe-js": "4.2.0",
-		"gql.tada": "1.8.10"
+		"gql.tada": "1.8.2"
 	},
 	"peerDependencies": {
 		"@a-type/ui": "^1.0.0",
@@ -84,7 +84,7 @@
 		"@verdant-web/store": "4.1.0",
 		"copy": "^0.3.2",
 		"react": "19.0.0",
-		"typescript": "5.7.2",
+		"typescript": "5.5.3",
 		"unocss": "^0.58.0",
 		"vite-plugin-pwa": "0.19.2"
 	}
