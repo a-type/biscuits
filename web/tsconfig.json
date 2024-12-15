@@ -1,21 +1,23 @@
 {
-  "extends": "../tsconfig.json",
-  "compilerOptions": {
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "strict": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "esModuleInterop": true,
-    "paths": {
-      "@/*": ["./src/*"]
-    }
-  },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "../packages/client/src/components/subscription/ManageSubscription.tsx",
-    "../packages/client/src/components/subscription/PlanInfo.tsx",
-    "../packages/client/src/components/subscription/CancelPlanButton.tsx"
-  ],
-  "exclude": ["node_modules"]
+	"extends": "../tsconfig.json",
+	"compilerOptions": {
+		"lib": ["dom", "dom.iterable", "esnext"],
+		"strict": true,
+		"jsx": "preserve",
+		"incremental": true,
+		"esModuleInterop": true,
+		"paths": {
+			"@/*": ["./src/*"]
+		},
+		"plugins": [
+			{
+				"name": "gql.tada/ts-plugin",
+				"schema": "../packages/graphql/schema.graphql",
+				"tadaOutputLocation": "./src/graphql-env.d.ts",
+				"tadaTurboLocation": "./src/graphql-cache.d.ts"
+			}
+		]
+	},
+	"include": ["**/*.ts", "**/*.tsx"],
+	"exclude": ["node_modules"]
 }

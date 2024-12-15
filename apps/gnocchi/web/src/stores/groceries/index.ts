@@ -2,7 +2,7 @@ import { pickBestNameMatch } from '@/components/foods/lookup.jsx';
 import { groceriesState } from '@/components/groceries/state.js';
 import { toast } from '@a-type/ui';
 import { getVerdantSync, VerdantContext } from '@biscuits/client';
-import { graphql, graphqlClient } from '@biscuits/graphql';
+import { graphqlClient } from '@biscuits/graphql';
 import { depluralize, parseIngredient } from '@gnocchi.biscuits/conversion';
 import {
 	Client,
@@ -25,6 +25,7 @@ import { useSearchParams } from '@verdant-web/react-router';
 import cuid from 'cuid';
 import pluralize from 'pluralize';
 import { useCallback } from 'react';
+import { graphql } from '../../graphql.js';
 import { getScannedRecipe } from './scanRecipe.js';
 
 export interface Presence {

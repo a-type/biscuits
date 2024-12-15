@@ -1,14 +1,22 @@
 {
-  "extends": "../../../tsconfig.json",
-  "compilerOptions": {
-    "jsx": "preserve",
-    "outDir": "./dist",
-    "rootDir": ".",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    },
-    "types": ["vite/client", "vite-plugin-pwa"]
-  },
-  "include": ["src"]
+	"extends": "../../../tsconfig.json",
+	"compilerOptions": {
+		"jsx": "preserve",
+		"outDir": "./dist",
+		"rootDir": ".",
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"]
+		},
+		"types": ["vite/client", "vite-plugin-pwa"],
+		"plugins": [
+			{
+				"name": "gql.tada/ts-plugin",
+				"schema": "../../packages/graphql/schema.graphql",
+				"tadaOutputLocation": "./src/graphql-env.d.ts",
+				"tadaTurboLocation": "./src/graphql-cache.d.ts"
+			}
+		]
+	},
+	"include": ["src"]
 }

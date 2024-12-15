@@ -17,6 +17,7 @@
 		"@biscuits/graphql": "workspace:*",
 		"@react-spring/web": "^9.7.5",
 		"@verdant-web/react-router": "^0.6.5",
+		"gql.tada": "1.8.10",
 		"react": "19.0.0",
 		"react-dom": "19.0.0",
 		"react-hot-toast": "^2.4.1",

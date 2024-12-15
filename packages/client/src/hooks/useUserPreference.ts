@@ -1,5 +1,6 @@
+import { useMutation, useQuery } from '@biscuits/graphql';
 import { useCallback, useEffect } from 'react';
-import { graphql, useMutation, useQuery } from '@biscuits/graphql';
+import { graphql } from '../graphql.js';
 import { useIsLoggedIn } from './graphql.js';
 import { useLocalStorage } from './useStorage.js';
 

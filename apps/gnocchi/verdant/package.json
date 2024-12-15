@@ -22,7 +22,6 @@
 		"react": "^19"
 	},
 	"dependencies": {
-		"@0no-co/graphqlsp": "1.12.8",
 		"@biscuits/client": "workspace:*",
 		"@biscuits/graphql": "workspace:*",
 		"@verdant-web/cli": "4.7.1",
@@ -30,6 +29,7 @@
 		"@verdant-web/react": "40.1.0",
 		"@verdant-web/store": "4.1.0",
 		"cuid": "^2.1.8",
+		"gql.tada": "1.8.10",
 		"stopword": "^2.0.8"
 	},
 	"devDependencies": {

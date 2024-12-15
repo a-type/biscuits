@@ -1,0 +1,498 @@
+input AssignFoodCategoryInput {
+  categoryId: ID!
+  foodName: String!
+}
+
+type AssignFoodCategoryResult {
+  food: Food!
+}
+
+type CancelPlanInvitationResult {
+  plan: Plan!
+}
+
+type CancelPlanResult {
+  user: User
+}
+
+"""A single item in the changelog"""
+type ChangelogItem {
+  createdAt: DateTime!
+  details: String!
+  id: ID!
+  imageUrl: String
+  important: Boolean!
+  title: String!
+  updatedAt: DateTime!
+}
+
+type ClaimPlanInvitationResult {
+  plan: Plan!
+  user: User!
+}
+
+input CreateCategoryInput {
+  name: String!
+  sortKey: String!
+}
+
+type CreateCategoryResult {
+  categories: [FoodCategory!]!
+}
+
+"""Input for creating a new changelog item"""
+input CreateChangelogItemInput {
+  """The ID of the app this changelog item is for"""
+  appId: String!
+
+  """The details of the changelog item"""
+  details: String!
+
+  """The URL of an image to display with the changelog item"""
+  imageUrl: String
+
+  """Whether this item is important"""
+  important: Boolean = false
+
+  """The title of the changelog item"""
+  title: String!
+}
+
+input CreatePlanInvitationInput {
+  """The email address of the person to invite"""
+  email: String!
+}
+
+type CreatePlanInvitationResult {
+  plan: Plan!
+}
+
+input CreatePushSubscriptionInput {
+  appId: String!
+  auth: String!
+  endpoint: String!
+  p256dh: String!
+}
+
+scalar Date
+
+scalar DateTime
+
+type DeleteCategoryResult {
+  categories: [FoodCategory!]!
+}
+
+"""Information about a food in Gnocchi"""
+type Food implements Node {
+  alternateNames: [String!]!
+  canonicalName: String!
+  category: FoodCategory
+  id: ID!
+}
+
+"""A grocery store category in Gnocchi"""
+type FoodCategory implements Node {
+  id: ID!
+  name: String!
+  sortKey: String!
+}
+
+"""Geographic location result"""
+type GeographicResult {
+  address: String!
+  id: String!
+  latitude: Float!
+  longitude: Float!
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+type KickMemberResult {
+  plan: Plan!
+}
+
+"""Location autocomplete suggestion"""
+type LocationAutocompleteSuggestion {
+  placeId: String!
+  text: String!
+}
+
+type Mutation {
+  acceptTermsOfService: User!
+  addFoodName(foodId: ID!, name: String!): String!
+  assignFoodCategory(input: AssignFoodCategoryInput!): AssignFoodCategoryResult!
+  cancelPlan: CancelPlanResult!
+  cancelPlanInvitation(id: ID!): CancelPlanInvitationResult!
+  changeFoodCanonicalName(foodId: ID!, name: String!): Food!
+  claimPlanInvitation(code: String!): ClaimPlanInvitationResult!
+  confirmPurchases(purchaseIds: [ID!]!): Boolean!
+  createCategory(input: CreateCategoryInput!): CreateCategoryResult!
+  createChangelogItem(input: CreateChangelogItemInput!): ChangelogItem!
+  createPlanInvitation(input: CreatePlanInvitationInput!): CreatePlanInvitationResult!
+  createPushSubscription(input: CreatePushSubscriptionInput!): Boolean!
+  deleteCategory(categoryId: ID!): DeleteCategoryResult!
+  deleteChangelogItem(
+    """The ID of the changelog item to delete"""
+    id: String!
+  ): ChangelogItem!
+  deletePlan(id: ID): Plan!
+  deletePushSubscription(endpoint: String!): Boolean!
+  kickMember(userId: ID!): KickMemberResult!
+  overrideFoodCategory(categoryId: ID!, foodId: ID!): AssignFoodCategoryResult!
+  publishRecipe(input: PublishRecipeInput!): PublishedRecipe!
+  publishWishlist(input: PublishWishlistInput!): PublishedWishlist!
+  purchasePublicItem(input: PurchasePublicItemInput!): Boolean!
+  removeFoodName(foodId: ID!, name: String!): Food!
+  resetSync(access: String!, app: String!, planId: ID): ResetSyncResult!
+  setFeatureFlag(enabled: Boolean!, flagName: String!, planId: ID!): Plan!
+  setSendEmailUpdates(value: Boolean!): User!
+  setUserPreference(input: SetUserPreferenceInput!): SetUserPreferenceResult!
+  setUserRole(role: String!, userId: ID!): User!
+  setupPlan(input: SetupPlanInput!): SetupPlanResult!
+  unpublishRecipe(recipeId: ID!): ID!
+  unpublishWishlist(wishlistId: ID!): ID!
+  updateCategory(input: UpdateCategoryInput!): UpdateCategoryResult!
+  updateUserInfo(input: UpdateUserInfoInput!): User!
+}
+
+interface Node {
+  id: ID!
+}
+
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
+"""A group of users with a subscription to a product"""
+type Plan implements Node {
+  canInviteMore: Boolean!
+  checkoutData: StripeCheckoutData
+  featureFlags: [String!]!
+  hasAppAccess(appId: String!): Boolean!
+  id: ID!
+  isSubscribed: Boolean!
+  libraryInfo(
+    """The access level of the library"""
+    access: String!
+
+    """The app to get library info for"""
+    app: String!
+  ): PlanLibraryInfo
+  members: [User!]!
+  pendingInvitations: [PlanInvitation!]!
+  productInfo: ProductInfo
+  subscriptionCanceledAt: DateTime
+  subscriptionExpiresAt: DateTime
+  subscriptionStatus: String!
+}
+
+"""An invitation to join a plan"""
+type PlanInvitation implements Node {
+  email: String!
+  id: ID!
+  inviterName: String!
+}
+
+"""Information about a Verdant library"""
+type PlanLibraryInfo {
+  baselinesCount: Int!
+  globalAck: String
+  id: ID!
+  latestServerOrder: Int!
+  operationsCount: Int!
+  profiles(includeTruant: Boolean): [PlanLibraryReplicaProfile!]!
+  replicas(includeTruant: Boolean): [PlanLibraryReplica!]!
+}
+
+"""A client replica of a Verdant library"""
+type PlanLibraryReplica {
+  ackedLogicalTime: String
+  ackedServerOrder: Int!
+  id: ID!
+  profile: PlanLibraryReplicaProfile!
+  truant: Boolean!
+  type: ReplicaType!
+}
+
+"""The profile that owns a replica"""
+type PlanLibraryReplicaProfile {
+  id: ID!
+  imageUrl: String
+  name: String!
+}
+
+type ProductInfo {
+  currency: String
+  description: String
+  id: String!
+  name: String
+  period: String!
+  price: Int
+}
+
+input PublishRecipeInput {
+  """The ID of the recipe to publish"""
+  id: ID!
+
+  """The slug for the published recipe"""
+  slug: String!
+}
+
+input PublishWishlistInput {
+  """The ID of the wishlist to publish"""
+  id: ID!
+}
+
+"""A published recipe"""
+type PublishedRecipe {
+  id: ID!
+  publishedAt: DateTime!
+  url: String!
+}
+
+"""A published wishlist"""
+type PublishedWishlist {
+  id: ID!
+  publishedAt: DateTime!
+  url: String!
+}
+
+input PurchasePublicItemInput {
+  itemId: ID!
+  name: String!
+  quantity: Int!
+  wishlistSlug: String!
+}
+
+type Query {
+  changelog(
+    """The ID of the app to fetch the changelog for"""
+    appId: String!
+  ): [ChangelogItem!]!
+  food(id: ID, name: String): Food
+  foodCategories: [FoodCategory!]!
+  foods(after: ID, before: ID, first: Int, last: Int, startsWith: String): QueryFoodsConnection!
+
+  """
+  Get the latitude and longitude of a location identified by location autocomplete
+  """
+  geographicLocation(placeId: String!): GeographicResult!
+
+  """Suggest completions for a location based on a search string"""
+  locationAutocomplete(search: String!): [LocationAutocompleteSuggestion!]!
+  me: User!
+  node(id: ID!): Node
+  nodes(ids: [ID!]!): [Node]!
+  plan: Plan
+  planInvitation(code: String!): PlanInvitation
+  plans(after: ID, before: ID, first: Int, last: Int): QueryPlansConnection!
+  productInfo(lookupKey: String!): ProductInfo!
+  publishedRecipe(id: ID!): PublishedRecipe
+  publishedWishlist(id: ID!): PublishedWishlist
+  recipeScan(input: RecipeScanInput!): RecipeScanResult
+  storePageScan(input: StorePageScanInput!): StorePageScan
+
+  """Get a weather forecast for a location over a given time period"""
+  weatherForecast(input: WeatherForecastInput!): WeatherForecast!
+  wishlistPurchases(includeConfirmed: Boolean, wishlistId: ID!): [WishlistPurchase!]!
+}
+
+type QueryFoodsConnection {
+  edges: [QueryFoodsConnectionEdge!]!
+  pageInfo: PageInfo!
+}
+
+type QueryFoodsConnectionEdge {
+  cursor: String!
+  node: Food!
+}
+
+type QueryPlansConnection {
+  edges: [QueryPlansConnectionEdge!]!
+  pageInfo: PageInfo!
+}
+
+type QueryPlansConnectionEdge {
+  cursor: String!
+  node: Plan!
+}
+
+type RecipeScan {
+  author: String
+  cookTimeMinutes: Int
+  copyrightHolder: String
+  copyrightYear: String
+  description: String
+  detailedIngredients: [RecipeScanDetailedIngredient!]
+  detailedSteps: [RecipeScanDetailedStep!]
+  imageUrl: String
+  note: String
+  prepTimeMinutes: Int
+  rawIngredients: [String!]
+  servings: Int
+  steps: [String!]
+  title: String
+  totalTimeMinutes: Int
+  url: String
+}
+
+type RecipeScanDetailedIngredient {
+  comments: [String!]
+  foodName: String!
+  isSectionHeader: Boolean
+  note: String
+  original: String!
+  preparations: [String!]
+  quantity: Float!
+  unit: String
+}
+
+type RecipeScanDetailedStep {
+  content: String!
+  note: String
+  type: String!
+}
+
+input RecipeScanInput {
+  url: String!
+}
+
+type RecipeScanResult {
+  data: RecipeScan!
+  type: String!
+}
+
+enum ReplicaType {
+  PassivePush
+  PassiveRealtime
+  Push
+  ReadOnlyPull
+  ReadOnlyRealtime
+  Realtime
+}
+
+"""Result of a reset sync operation"""
+type ResetSyncResult {
+  plan: Plan!
+}
+
+input SetUserPreferenceInput {
+  key: String!
+  value: JSON!
+}
+
+type SetUserPreferenceResult {
+  user: User!
+}
+
+input SetupPlanInput {
+  priceLookupKey: String!
+}
+
+type SetupPlanResult {
+  plan: Plan!
+  user: User!
+}
+
+type StorePageScan {
+  currency: String
+  imageUrl: String
+  price: String
+  priceString: String
+  productName: String
+  scanner: String
+  url: String
+}
+
+input StorePageScanInput {
+  url: String!
+}
+
+type StripeCheckoutData {
+  clientSecret: String!
+  subscriptionId: String!
+}
+
+enum TemperatureUnit {
+  Celsius
+  Fahrenheit
+  Kelvin
+}
+
+input UpdateCategoryInput {
+  id: ID!
+  name: String
+  sortKey: String
+}
+
+type UpdateCategoryResult {
+  categories: [FoodCategory!]!
+}
+
+input UpdateUserInfoInput {
+  name: String
+}
+
+"""A user in the system"""
+type User implements Node {
+  acceptedTermsOfServiceAt: DateTime
+  email: String!
+  id: ID!
+  imageUrl: String
+  isProductAdmin: Boolean!
+  name: String!
+  plan: Plan
+  preference(key: String!): UserPreference
+  role: String
+  sendEmailUpdates: Boolean!
+}
+
+type UserPreference {
+  id: ID!
+  value: JSON
+}
+
+"""Weather forecast for a location over a given time period"""
+type WeatherForecast {
+  days: [WeatherForecastDay!]!
+  error: String
+  high: Float!
+  low: Float!
+  maxPrecipitationMM: Float!
+  rainyDays: Int!
+  temperatureUnit: TemperatureUnit!
+  willRain: Boolean!
+}
+
+"""Weather forecast for a single day"""
+type WeatherForecastDay {
+  date: Date!
+  high: Float!
+  low: Float!
+  precipitationMM: Float!
+  temperatureUnit: TemperatureUnit!
+  willRain: Boolean!
+}
+
+input WeatherForecastInput {
+  endDate: Date!
+  latitude: Float!
+  longitude: Float!
+  startDate: Date!
+  temperatureUnits: TemperatureUnit!
+}
+
+type WishlistPurchase {
+  confirmedAt: DateTime
+  createdAt: DateTime!
+  id: ID!
+  itemId: ID!
+  purchasedBy: ID!
+  quantity: Int!
+}

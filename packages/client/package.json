@@ -51,7 +51,8 @@
 		"build:transpile": "tsc",
 		"build:prefix": "node ./scripts/addUnoInclude.mjs",
 		"build:copy": "node ./scripts/copyCss.mjs",
-		"dev": "tsc --watch"
+		"dev": "tsc --watch",
+		"gql": "gql-tada"
 	},
 	"type": "module",
 	"dependencies": {
@@ -63,7 +64,7 @@
 		"@biscuits/libraries": "workspace:*",
 		"@stripe/react-stripe-js": "2.7.3",
 		"@stripe/stripe-js": "4.2.0",
-		"gql.tada": "^1.8.10"
+		"gql.tada": "1.8.10"
 	},
 	"peerDependencies": {
 		"@a-type/ui": "^1.0.0",
@@ -75,7 +76,7 @@
 		"vite-plugin-pwa": "0.19.2"
 	},
 	"devDependencies": {
-		"@a-type/ui": "1.3.1",
+		"@a-type/ui": "1.3.3",
 		"@types/copy": "^0.3.5",
 		"@types/react": "^19.0.1",
 		"@unocss/transformer-variant-group": "^0.58.0",

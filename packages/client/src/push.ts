@@ -1,6 +1,7 @@
-import { graphql, useClient, ApolloClient } from '@biscuits/graphql';
+import { ApolloClient, useClient } from '@biscuits/graphql';
+import { useCallback, useEffect, useState } from 'react';
+import { graphql } from './graphql.js';
 import { useAppId } from './react.js';
-import { useCallback, useState, useEffect } from 'react';
 
 const subscribeToPushMutation = graphql(`
 	mutation SubscribeToPush($subscription: CreatePushSubscriptionInput!) {

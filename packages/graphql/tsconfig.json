@@ -6,8 +6,9 @@
 		"plugins": [
 			{
 				"name": "gql.tada/ts-plugin",
-				"schema": "../../server/schema.graphql",
-				"tadaOutputLocation": "./src/graphql-env.d.ts"
+				"schema": "./schema.graphql",
+				"tadaOutputLocation": "./src/graphql-env.d.ts",
+				"tadaTurboLocation": "./src/graphql-cache.d.ts"
 			}
 		]
 	},

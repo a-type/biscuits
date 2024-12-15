@@ -1,9 +1,10 @@
-import { createMinimalGraphQLClient, graphql } from '@biscuits/graphql';
+import { createMinimalGraphQLClient } from '@biscuits/graphql';
 import { createMigration } from '@verdant-web/store';
 import v34Schema, {
 	MigrationTypes as V34Types,
 } from '../client/schemaVersions/v34.js';
 import { API_HOST_HTTP } from '../config.js';
+import { graphql } from '../graphql.js';
 
 // @ts-ignore
 export default createMigration<V34Types>(v34Schema, async ({ mutations }) => {

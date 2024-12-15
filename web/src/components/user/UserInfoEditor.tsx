@@ -7,13 +7,9 @@ import {
 	SubmitButton,
 	TextField,
 } from '@a-type/ui';
-import {
-	FragmentOf,
-	graphql,
-	readFragment,
-	useMutation,
-} from '@biscuits/graphql';
+import { FragmentOf, readFragment, useMutation } from '@biscuits/graphql';
 import { useState } from 'react';
+import { graphql } from '../../graphql.js';
 
 export const userInfoFragment = graphql(`
 	fragment UserInfoEditor_userInfoFragment on User {

@@ -2,9 +2,10 @@ import { detailedInstructionsToDoc, instructionsToDoc } from '@/lib/tiptap.js';
 import { toast } from '@a-type/ui';
 import { showSubscriptionPromotion } from '@biscuits/client';
 import { BiscuitsError } from '@biscuits/error';
-import { graphql, graphqlClient, isClientError } from '@biscuits/graphql';
+import { graphqlClient, isClientError } from '@biscuits/graphql';
 import { lookupUnit, parseIngredient } from '@gnocchi.biscuits/conversion';
 import { Client, RecipeInit } from '@gnocchi.biscuits/verdant';
+import { graphql } from '../../graphql.js';
 
 const recipeScanQuery = graphql(`
 	query RecipeScan($input: RecipeScanInput!) {

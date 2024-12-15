@@ -25,14 +25,13 @@
 		"@clack/prompts": "0.7.0",
 		"aws-cdk": "2.140.0",
 		"cp-tpl": "1.0.9",
-		"eslint": "^8",
-		"eslint-plugin-react": "7.34.1",
-		"gql.tada": "1.8.10",
+		"eslint": "9.17.0",
+		"eslint-plugin-react": "7.37.2",
 		"husky": "^8.0.3",
 		"kill-port": "2.0.1",
 		"prettier": "3.2.5",
 		"turbo": "^1.9.3",
-		"typescript": "^5.7.2"
+		"typescript": "5.7.2"
 	},
 	"volta": {
 		"node": "22.12.0"

@@ -8,14 +8,16 @@
 			"development": "./src/index.ts",
 			"import": "./dist/index.js",
 			"node": "./dist/index.js",
-			"default": "./dist/index.js"
+			"default": "./dist/index.js",
+			"types": "./dist/index.d.ts"
 		},
 		"./fetch": {
 			"production": "./dist/fetch.js",
 			"development": "./src/fetch.ts",
 			"import": "./dist/fetch.js",
 			"node": "./dist/fetch.js",
-			"default": "./dist/fetch.js"
+			"default": "./dist/fetch.js",
+			"types": "./dist/fetch.d.ts"
 		}
 	},
 	"scripts": {
