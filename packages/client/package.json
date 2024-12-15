@@ -64,7 +64,7 @@
 		"@biscuits/libraries": "workspace:*",
 		"@stripe/react-stripe-js": "2.7.3",
 		"@stripe/stripe-js": "4.2.0",
-		"gql.tada": "1.8.2"
+		"gql.tada": "1.8.10"
 	},
 	"peerDependencies": {
 		"@a-type/ui": "^1.0.0",

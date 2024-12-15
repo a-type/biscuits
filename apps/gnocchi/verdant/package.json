@@ -29,7 +29,7 @@
 		"@verdant-web/react": "40.1.0",
 		"@verdant-web/store": "4.1.0",
 		"cuid": "^2.1.8",
-		"gql.tada": "1.8.2",
+		"gql.tada": "1.8.10",
 		"stopword": "^2.0.8"
 	},
 	"devDependencies": {

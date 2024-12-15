@@ -29,7 +29,7 @@
 		"classnames": "^2.3.2",
 		"cookie": "^0.6.0",
 		"formik": "^2.4.5",
-		"gql.tada": "1.8.2",
+		"gql.tada": "1.8.10",
 		"react": "19.0.0",
 		"react-dom": "19.0.0",
 		"react-hot-toast": "^2.4.1",
