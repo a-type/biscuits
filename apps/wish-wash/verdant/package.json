@@ -10,13 +10,10 @@
 		"build": "pnpm run preflight"
 	},
 	"peerDependencies": {
-		"react": "^19"
-	},
-	"dependencies": {
-		"@verdant-web/cli": "4.7.1",
-		"@verdant-web/common": "2.7.0",
-		"@verdant-web/react": "40.1.0",
-		"@verdant-web/store": "4.1.0"
+		"react": "*",
+		"@verdant-web/cli": "*",
+		"@verdant-web/react": "*",
+		"@verdant-web/store": "*"
 	},
 	"volta": {
 		"node": "20.17.0"

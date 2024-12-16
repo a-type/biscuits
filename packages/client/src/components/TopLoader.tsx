@@ -57,8 +57,10 @@ export function TopLoader({ className }: TopLoaderProps) {
 			data-state={show ? 'visible' : 'hidden'}
 		>
 			<animated.div
-				className="absolute top-0 left-0 h-full bg-accent"
-				style={style as any}
+				{...({
+					className: 'absolute top-0 left-0 h-full bg-accent',
+					style,
+				} as any)}
 			/>
 		</div>
 	);

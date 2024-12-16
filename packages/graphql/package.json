@@ -26,18 +26,18 @@
 		"dev": "tsc --watch"
 	},
 	"type": "module",
+	"peerDependencies": {
+		"@a-type/utils": "*",
+		"gql.tada": "*",
+		"react": "*",
+		"typescript": "*"
+	},
 	"dependencies": {
 		"@a-type/auth-client": "1.0.13",
-		"@a-type/utils": "1.1.4",
-		"@apollo/client": "3.10.8",
+		"@apollo/client": "3.12.3",
 		"@biscuits/apps": "workspace:*",
 		"@biscuits/error": "workspace:*",
 		"@biscuits/libraries": "workspace:*",
-		"gql.tada": "1.8.10",
-		"graphql": "16.9.0",
-		"react": "19.0.0"
-	},
-	"devDependencies": {
-		"typescript": "5.5.3"
+		"graphql": "16.10.0"
 	}
 }

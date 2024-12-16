@@ -20,24 +20,27 @@
 		"typings": "tsc --declaration --emitDeclarationOnly",
 		"typecheck": "tsc --build tsconfig.json"
 	},
+	"peerDependencies": {
+		"@a-type/ui": "*",
+		"@a-type/utils": "*",
+		"react": "*",
+		"react-dom": "*",
+		"vite": "*",
+		"typescript": "*",
+		"@vitejs/plugin-react-swc": "*",
+		"unocss": "*",
+		"@unocss/transformer-variant-group": "*",
+		"@types/react": "*",
+		"@types/react-dom": "*",
+		"gql.tada": "*"
+	},
 	"dependencies": {
-		"@a-type/ui": "1.3.3",
-		"@a-type/utils": "^1.0.8",
-		"@biscuits/graphql": "workspace:*",
 		"@wish-wash.biscuits/common": "workspace:*",
-		"react": "19.0.0",
-		"react-dom": "19.0.0"
+		"@biscuits/graphql": "workspace:*"
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "^1.0.3",
-		"@types/react": "^19.0.1",
-		"@types/react-dom": "^19.0.2",
-		"@unocss/transformer-variant-group": "^0.65.1",
-		"@vitejs/plugin-react-swc": "^3.7.2",
 		"concurrently": "^7.5.0",
-		"dotenv": "^16.0.1",
-		"typescript": "5.5.3",
-		"unocss": "^0.58.0",
-		"vite": "^5.0.10"
+		"dotenv": "^16.0.1"
 	}
 }

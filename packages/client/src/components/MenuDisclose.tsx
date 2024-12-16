@@ -53,7 +53,7 @@ export const MenuDiscloseRoot = forwardRef<
 		<MenuDiscloseContext.Provider value={{ open, setOpen }}>
 			<Comp
 				{...rest}
-				ref={finalRef}
+				ref={finalRef as any}
 				className={clsx('relative', 'menu-disclose-root', className)}
 			>
 				{children}
@@ -65,7 +65,8 @@ export const MenuDiscloseRoot = forwardRef<
 	);
 });
 
-export interface MenuDiscloseTriggerProps extends ComponentProps<'button'> {
+export interface MenuDiscloseTriggerProps
+	extends Omit<ComponentProps<'button'>, 'color'> {
 	asChild?: boolean;
 }
 

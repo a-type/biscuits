@@ -16,20 +16,13 @@
 		"build": "tsc"
 	},
 	"peerDependencies": {
-		"@a-type/ui": "1.1.10",
-		"@a-type/utils": "^1.0.8",
+		"@a-type/ui": "*",
+		"@a-type/utils": "*",
 		"@biscuits/graphql": "workspace:*",
-		"react": "^19",
-		"react-dom": "^19"
-	},
-	"devDependencies": {
-		"@a-type/ui": "1.3.3",
-		"@a-type/utils": "^1.0.8",
-		"@biscuits/graphql": "workspace:*",
-		"@types/react": "^19.0.1",
-		"@types/react-dom": "^19.0.2",
-		"react": "19.0.0",
-		"react-dom": "19.0.0",
-		"typescript": "5.5.3"
+		"react": "*",
+		"react-dom": "*",
+		"@types/react": "*",
+		"@types/react-dom": "*",
+		"typescript": "*"
 	}
 }

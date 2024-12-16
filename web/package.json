@@ -10,9 +10,21 @@
 		"up-ui": "cd .. && pnpm up-ui",
 		"prepare-video": "ffmpeg -c:v libx265 -crf 25 -filter:v scale=-1:720 -i"
 	},
+	"peerDependencies": {
+		"react": "*",
+		"react-dom": "*",
+		"@types/react": "*",
+		"@types/react-dom": "*",
+		"@a-type/ui": "*",
+		"gql.tada": "*",
+		"unocss": "*",
+		"@unocss/transformer-variant-group": "*",
+		"typescript": "*",
+		"vite": "*",
+		"@vitejs/plugin-react-swc": "*"
+	},
 	"dependencies": {
 		"@a-type/auth-client": "1.0.13",
-		"@a-type/ui": "^1.3.3",
 		"@biscuits/apps": "workspace:*",
 		"@biscuits/client": "workspace:*",
 		"@biscuits/error": "workspace:*",
@@ -29,27 +41,15 @@
 		"classnames": "^2.3.2",
 		"cookie": "^0.6.0",
 		"formik": "^2.4.5",
-		"gql.tada": "1.8.10",
-		"react": "19.0.0",
-		"react-dom": "19.0.0",
 		"react-hot-toast": "^2.4.1",
 		"three": "0.165.0"
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "^1.0.3",
 		"@types/cookie": "^0.5.4",
-		"@types/node": "20.12.7",
-		"@types/react": "^19.0.1",
-		"@types/react-dom": "^19.0.2",
 		"@types/three": "0.165.0",
-		"@unocss/transformer-variant-group": "^0.65.1",
-		"@vitejs/plugin-react": "4.3.1",
-		"@vitejs/plugin-react-swc": "3.7.0",
 		"eslint": "9.1.1",
 		"eslint-config-next": "14.0.3",
-		"typescript": "5.5.3",
-		"unocss": "0.65.1",
-		"vite": "5.2.13",
 		"vite-plugin-circular-dependency": "^0.2.1"
 	}
 }

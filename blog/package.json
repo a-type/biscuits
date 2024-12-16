@@ -9,8 +9,13 @@
 		"preview": "astro preview",
 		"astro": "astro"
 	},
+	"peerDependencies": {
+		"@a-type/ui": "*",
+		"typescript": "*",
+		"unocss": "*",
+		"@unocss/transformer-variant-group": "*"
+	},
 	"dependencies": {
-		"@a-type/ui": "^1.3.3",
 		"@astrojs/check": "^0.9.4",
 		"@astrojs/mdx": "^4.0.2",
 		"@astrojs/rss": "^4.0.10",
@@ -19,9 +24,6 @@
 		"@biscuits/graphql": "workspace:*",
 		"@unocss/astro": "^0.65.1",
 		"@unocss/reset": "^0.65.1",
-		"@unocss/transformer-variant-group": "^0.65.1",
-		"astro": "^5.0.5",
-		"typescript": "5.5.3",
-		"unocss": "^0.65.1"
+		"astro": "^5.0.5"
 	}
 }

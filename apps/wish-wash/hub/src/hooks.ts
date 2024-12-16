@@ -1,6 +1,7 @@
+import { useMutation } from '@biscuits/graphql';
 import { useEffect, useState } from 'react';
-import { graphql, useMutation } from '@biscuits/graphql';
 import { useHubContext } from './components/Context.jsx';
+import { graphql } from './graphql.js';
 
 export function useTimer(timeout: number) {
 	const [triggered, setTriggered] = useState(false);

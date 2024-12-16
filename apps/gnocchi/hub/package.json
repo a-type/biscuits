@@ -19,9 +19,20 @@
 		"typings": "tsc --declaration --emitDeclarationOnly",
 		"typecheck": "tsc --build tsconfig.json"
 	},
+	"peerDependencies": {
+		"react": "*",
+		"react-dom": "*",
+		"vite": "*",
+		"@a-type/ui": "*",
+		"@a-type/utils": "*",
+		"@types/react": "*",
+		"@types/react-dom": "*",
+		"typescript": "*",
+		"@vitejs/plugin-react-swc": "*",
+		"unocss": "*",
+		"@unocss/transformer-variant-group": "*"
+	},
 	"dependencies": {
-		"@a-type/ui": "^1.3.3",
-		"@a-type/utils": "^1.0.8",
 		"@tiptap/core": "^2.2.4",
 		"@tiptap/extension-document": "^2.2.4",
 		"@tiptap/extension-link": "^2.2.4",
@@ -29,20 +40,11 @@
 		"@tiptap/pm": "^2.2.4",
 		"@tiptap/react": "^2.2.4",
 		"@tiptap/starter-kit": "^2.2.4",
-		"prosemirror-model": "1.19.4",
-		"react": "19.0.0",
-		"react-dom": "19.0.0"
+		"prosemirror-model": "1.19.4"
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "^1.0.3",
-		"@types/react": "^19.0.1",
-		"@types/react-dom": "^19.0.2",
-		"@unocss/transformer-variant-group": "^0.58.0",
-		"@vitejs/plugin-react-swc": "^3.5.0",
 		"concurrently": "^7.5.0",
-		"dotenv": "^16.0.1",
-		"typescript": "5.5.3",
-		"unocss": "^0.58.0",
-		"vite": "^5.0.10"
+		"dotenv": "^16.0.1"
 	}
 }
