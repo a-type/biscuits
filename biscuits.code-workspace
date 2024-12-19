@@ -85,4 +85,7 @@
 		"prettier.singleQuote": true,
 		"prettier.experimentalTernaries": true,
 	},
+	"extensions": {
+		"recommendations": ["antfu.pnpm-catalog-lens"],
+	},
 }
