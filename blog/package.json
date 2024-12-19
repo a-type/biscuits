@@ -10,10 +10,10 @@
 		"astro": "astro"
 	},
 	"peerDependencies": {
-		"@a-type/ui": "*",
-		"typescript": "*",
-		"unocss": "*",
-		"@unocss/transformer-variant-group": "*"
+		"@a-type/ui": "catalog:",
+		"typescript": "catalog:",
+		"unocss": "catalog:",
+		"@unocss/transformer-variant-group": "catalog:"
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.4",

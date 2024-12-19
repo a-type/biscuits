@@ -11,17 +11,17 @@
 		"prepare-video": "ffmpeg -c:v libx265 -crf 25 -filter:v scale=-1:720 -i"
 	},
 	"peerDependencies": {
-		"react": "*",
-		"react-dom": "*",
-		"@types/react": "*",
-		"@types/react-dom": "*",
-		"@a-type/ui": "*",
-		"gql.tada": "*",
-		"unocss": "*",
-		"@unocss/transformer-variant-group": "*",
-		"typescript": "*",
-		"vite": "*",
-		"@vitejs/plugin-react-swc": "*"
+		"react": "catalog:",
+		"react-dom": "catalog:",
+		"@types/react": "catalog:",
+		"@types/react-dom": "catalog:",
+		"@a-type/ui": "catalog:",
+		"gql.tada": "catalog:",
+		"unocss": "catalog:",
+		"@unocss/transformer-variant-group": "catalog:",
+		"typescript": "catalog:",
+		"vite": "catalog:",
+		"@vitejs/plugin-react-swc": "catalog:"
 	},
 	"dependencies": {
 		"@a-type/auth-client": "1.0.13",

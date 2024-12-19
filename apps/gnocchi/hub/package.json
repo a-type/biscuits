@@ -20,17 +20,17 @@
 		"typecheck": "tsc --build tsconfig.json"
 	},
 	"peerDependencies": {
-		"react": "*",
-		"react-dom": "*",
-		"vite": "*",
-		"@a-type/ui": "*",
-		"@a-type/utils": "*",
-		"@types/react": "*",
-		"@types/react-dom": "*",
-		"typescript": "*",
-		"@vitejs/plugin-react-swc": "*",
-		"unocss": "*",
-		"@unocss/transformer-variant-group": "*"
+		"react": "catalog:",
+		"react-dom": "catalog:",
+		"vite": "catalog:",
+		"@a-type/ui": "catalog:",
+		"@a-type/utils": "catalog:",
+		"@types/react": "catalog:",
+		"@types/react-dom": "catalog:",
+		"typescript": "catalog:",
+		"@vitejs/plugin-react-swc": "catalog:",
+		"unocss": "catalog:",
+		"@unocss/transformer-variant-group": "catalog:"
 	},
 	"dependencies": {
 		"@tiptap/core": "^2.2.4",

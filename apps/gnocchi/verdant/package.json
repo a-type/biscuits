@@ -19,11 +19,11 @@
 		"build": "tsc && node ./scripts/copyClient.js"
 	},
 	"peerDependencies": {
-		"react": "*",
-		"@verdant-web/store": "*",
-		"@verdant-web/react": "*",
-		"@verdant-web/cli": "*",
-		"gql.tada": "*"
+		"react": "catalog:",
+		"@verdant-web/store": "catalog:",
+		"@verdant-web/react": "catalog:",
+		"@verdant-web/cli": "catalog:",
+		"gql.tada": "catalog:"
 	},
 	"dependencies": {
 		"@biscuits/client": "workspace:*",

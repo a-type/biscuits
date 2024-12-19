@@ -26,8 +26,8 @@
 	},
 	"type": "module",
 	"peerDependencies": {
-		"@a-type/utils": "*",
-		"typescript": "*"
+		"@a-type/utils": "catalog:",
+		"typescript": "catalog:"
 	},
 	"dependencies": {
 		"@a-type/kysely": "^1.1.0",

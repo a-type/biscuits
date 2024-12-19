@@ -9,10 +9,10 @@
 		"preflight": "verdant preflight -s ./src/schema.ts -o ./src/client"
 	},
 	"peerDependencies": {
-		"react": "*",
-		"@verdant-web/store": "*",
-		"@verdant-web/react": "*",
-		"@verdant-web/cli": "*"
+		"react": "catalog:",
+		"@verdant-web/store": "catalog:",
+		"@verdant-web/react": "catalog:",
+		"@verdant-web/cli": "catalog:"
 	},
 	"dependencies": {
 		"cuid": "^2.1.8"

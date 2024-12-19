@@ -21,18 +21,18 @@
 		"typecheck": "tsc --build tsconfig.json"
 	},
 	"peerDependencies": {
-		"@a-type/ui": "*",
-		"@a-type/utils": "*",
-		"react": "*",
-		"react-dom": "*",
-		"vite": "*",
-		"typescript": "*",
-		"@vitejs/plugin-react-swc": "*",
-		"unocss": "*",
-		"@unocss/transformer-variant-group": "*",
-		"@types/react": "*",
-		"@types/react-dom": "*",
-		"gql.tada": "*"
+		"@a-type/ui": "catalog:",
+		"@a-type/utils": "catalog:",
+		"react": "catalog:",
+		"react-dom": "catalog:",
+		"vite": "catalog:",
+		"typescript": "catalog:",
+		"@vitejs/plugin-react-swc": "catalog:",
+		"unocss": "catalog:",
+		"@unocss/transformer-variant-group": "catalog:",
+		"@types/react": "catalog:",
+		"@types/react-dom": "catalog:",
+		"gql.tada": "catalog:"
 	},
 	"dependencies": {
 		"@wish-wash.biscuits/common": "workspace:*",

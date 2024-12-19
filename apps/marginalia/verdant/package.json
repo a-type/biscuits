@@ -10,10 +10,10 @@
 		"build": "pnpm run preflight"
 	},
 	"peerDependencies": {
-		"react": "*",
-		"@verdant-web/cli": "*",
-		"@verdant-web/react": "*",
-		"@verdant-web/store": "*"
+		"react": "catalog:",
+		"@verdant-web/cli": "catalog:",
+		"@verdant-web/react": "catalog:",
+		"@verdant-web/store": "catalog:"
 	},
 	"dependencies": {
 		"cuid": "^2.1.8"
