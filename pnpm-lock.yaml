@@ -838,8 +838,8 @@ importers:
   packages/db:
     dependencies:
       '@a-type/kysely':
-        specifier: ^1.1.0
-        version: 1.1.0(kysely@0.27.5)
+        specifier: ^1.1.1
+        version: 1.1.1(kysely@0.27.5)
       '@paralleldrive/cuid2':
         specifier: ^2.2.2
         version: 2.2.2
@@ -1157,8 +1157,8 @@ packages:
   '@a-type/auth@0.6.9':
     resolution: {integrity: sha512-NVCeNXA5OBHq1yDidhrZVduPrYi8kBHeT9xj+qm3pfmmcy+Cbnjm0yXb/dYYo5lSv4A3gIB9o8xDpJxmV2J7kA==}
 
-  '@a-type/kysely@1.1.0':
-    resolution: {integrity: sha512-ST+ow+yFqXO+6jN39UUjO8WqbAkCG6Yc8wIG1ZcnIyXuXzTQlZMG1ZCLvXZ6w2xxHNmJvCz7sGTmvQhIH1JOYw==}
+  '@a-type/kysely@1.1.1':
+    resolution: {integrity: sha512-JOCyXi09IEmhscHAoU/lLy7/prkPRtFLgTrWs5uK7q0nLL2zN6soFwtafOWsRh3iJsM/km47aXohyGx5mHRmnQ==}
     peerDependencies:
       kysely: ^0.27.2
 
@@ -5342,8 +5342,9 @@ packages:
   base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
 
-  bcryptjs@2.4.3:
-    resolution: {integrity: sha512-V/Hy/X9Vt7f3BbPJEi8BdVFMByHi+jNXrYkW3huaybV/kQ0KJg0Y6PkEMbn+zeT+i+SiKZ/HMqJGIIt4LZDqNQ==}
+  bcrypt-ts@5.0.3:
+    resolution: {integrity: sha512-2FcgD12xPbwCoe5i9/HK0jJ1xA1m+QfC1e6htG9Bl/hNOnLyaFmQSlqLKcfe3QdnoMPKpKEGFCbESBTg+SJNOw==}
+    engines: {node: '>=18'}
 
   before-after-hook@2.2.3:
     resolution: {integrity: sha512-NzUnlZexiaH/46WDhANlyR2bXRopNg4F/zuSA3OpZnllCUgRaOF2znDioDWrmbNVsuZk6l9pMquQB38cfBZwkQ==}
@@ -10289,10 +10290,10 @@ snapshots:
       - encoding
       - supports-color
 
-  '@a-type/kysely@1.1.0(kysely@0.27.5)':
+  '@a-type/kysely@1.1.1(kysely@0.27.5)':
     dependencies:
       '@paralleldrive/cuid2': 2.2.2
-      bcryptjs: 2.4.3
+      bcrypt-ts: 5.0.3
       kysely: 0.27.5
 
   '@a-type/react-space@0.2.15(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
@@ -15134,7 +15135,7 @@ snapshots:
 
   '@verdant-web/server@3.3.4':
     dependencies:
-      '@a-type/kysely': 1.1.0(kysely@0.27.5)
+      '@a-type/kysely': 1.1.1(kysely@0.27.5)
       '@verdant-web/common': 2.7.0
       async-lock: 1.4.1
       better-sqlite3: 11.7.0
@@ -15150,7 +15151,7 @@ snapshots:
 
   '@verdant-web/store@4.1.0':
     dependencies:
-      '@a-type/kysely': 1.1.0(kysely@0.27.5)
+      '@a-type/kysely': 1.1.1(kysely@0.27.5)
       '@verdant-web/common': 2.7.0
       cuid: 2.1.8
       jszip: 3.10.1
@@ -15666,7 +15667,7 @@ snapshots:
 
   base64-js@1.5.1: {}
 
-  bcryptjs@2.4.3: {}
+  bcrypt-ts@5.0.3: {}
 
   before-after-hook@2.2.3: {}
 
