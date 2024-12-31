@@ -184,7 +184,15 @@ function PreludeSection({ recipe }: { recipe: Recipe }) {
 	const { prelude } = hooks.useWatch(recipe);
 	hooks.useWatch(prelude);
 
-	if (prelude.get('content')?.length === 0) {
+	const empty =
+		!prelude ||
+		!prelude.get('content') ||
+		prelude
+			.get('content')
+			.getSnapshot()
+			.every((p: any) => !p.content);
+
+	if (empty) {
 		return null;
 	}
 
