@@ -8,7 +8,13 @@
 		"build": "vite build",
 		"preview": "vite preview"
 	},
-	"peerDependencies": {
+	"dependencies": {
+		"@biscuits/client": "workspace:*",
+		"@biscuits/graphql": "workspace:*",
+		"@marginalia.biscuits/verdant": "workspace:*",
+		"@react-spring/web": "^9.7.3",
+		"@tanstack/react-query": "5.39.0",
+		"classnames": "^2.5.0",
 		"@a-type/ui": "catalog:",
 		"@a-type/utils": "catalog:",
 		"gql.tada": "catalog:",
@@ -31,15 +37,6 @@
 		"workbox-routing": "catalog:",
 		"workbox-strategies": "catalog:",
 		"workbox-window": "catalog:"
-	},
-	"dependencies": {
-		"@biscuits/client": "workspace:*",
-		"@biscuits/graphql": "workspace:*",
-		"@marginalia.biscuits/verdant": "workspace:*",
-		"@react-spring/web": "^9.7.3",
-		"@tanstack/react-query": "5.39.0",
-		"@verdant-web/react-router": "0.7.0",
-		"classnames": "^2.5.0"
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "^1.0.3",

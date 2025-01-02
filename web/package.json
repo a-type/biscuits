@@ -10,19 +10,6 @@
 		"up-ui": "cd .. && pnpm up-ui",
 		"prepare-video": "ffmpeg -c:v libx265 -crf 25 -filter:v scale=-1:720 -i"
 	},
-	"peerDependencies": {
-		"react": "catalog:",
-		"react-dom": "catalog:",
-		"@types/react": "catalog:",
-		"@types/react-dom": "catalog:",
-		"@a-type/ui": "catalog:",
-		"gql.tada": "catalog:",
-		"unocss": "catalog:",
-		"@unocss/transformer-variant-group": "catalog:",
-		"typescript": "catalog:",
-		"vite": "catalog:",
-		"@vitejs/plugin-react-swc": "catalog:"
-	},
 	"dependencies": {
 		"@a-type/auth-client": "1.0.13",
 		"@biscuits/apps": "workspace:*",
@@ -42,7 +29,18 @@
 		"cookie": "^0.6.0",
 		"formik": "^2.4.5",
 		"react-hot-toast": "^2.4.1",
-		"three": "0.165.0"
+		"three": "0.165.0",
+		"react": "catalog:",
+		"react-dom": "catalog:",
+		"@types/react": "catalog:",
+		"@types/react-dom": "catalog:",
+		"@a-type/ui": "catalog:",
+		"gql.tada": "catalog:",
+		"unocss": "catalog:",
+		"@unocss/transformer-variant-group": "catalog:",
+		"typescript": "catalog:",
+		"vite": "catalog:",
+		"@vitejs/plugin-react-swc": "catalog:"
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "^1.0.3",

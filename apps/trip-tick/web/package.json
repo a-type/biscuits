@@ -8,7 +8,19 @@
 		"build": "vite build",
 		"preview": "vite preview"
 	},
-	"peerDependencies": {
+	"dependencies": {
+		"@biscuits/client": "workspace:*",
+		"@biscuits/graphql": "workspace:*",
+		"@radix-ui/react-progress": "^1.0.3",
+		"@radix-ui/react-toggle-group": "^1.0.4",
+		"@react-spring/web": "^9.7.3",
+		"@tanstack/react-query": "^4.24.10",
+		"@trip-tick.biscuits/verdant": "workspace:*",
+		"classnames": "^2.3.2",
+		"date-fns": "^2.30.0",
+		"downshift": "^7.0.1",
+		"pluralize": "^8.0.0",
+		"react-lazy-with-preload": "^2.2.1",
 		"@a-type/ui": "catalog:",
 		"@a-type/utils": "catalog:",
 		"gql.tada": "catalog:",
@@ -32,20 +44,6 @@
 		"workbox-routing": "catalog:",
 		"workbox-strategies": "catalog:",
 		"workbox-window": "catalog:"
-	},
-	"dependencies": {
-		"@biscuits/client": "workspace:*",
-		"@biscuits/graphql": "workspace:*",
-		"@radix-ui/react-progress": "^1.0.3",
-		"@radix-ui/react-toggle-group": "^1.0.4",
-		"@react-spring/web": "^9.7.3",
-		"@tanstack/react-query": "^4.24.10",
-		"@trip-tick.biscuits/verdant": "workspace:*",
-		"classnames": "^2.3.2",
-		"date-fns": "^2.30.0",
-		"downshift": "^7.0.1",
-		"pluralize": "^8.0.0",
-		"react-lazy-with-preload": "^2.2.1"
 	},
 	"devDependencies": {
 		"@iconify-json/solar": "^1.1.3",

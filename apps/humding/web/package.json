@@ -8,7 +8,12 @@
 		"build": "vite build",
 		"preview": "vite preview"
 	},
-	"peerDependencies": {
+	"dependencies": {
+		"@biscuits/client": "workspace:*",
+		"@biscuits/graphql": "workspace:*",
+		"@humding.biscuits/verdant": "workspace:*",
+		"@react-spring/web": "^9.7.3",
+		"@use-gesture/react": "^10.2.24",
 		"@a-type/ui": "catalog:",
 		"@a-type/utils": "catalog:",
 		"gql.tada": "catalog:",
@@ -31,13 +36,6 @@
 		"workbox-routing": "catalog:",
 		"workbox-strategies": "catalog:",
 		"workbox-window": "catalog:"
-	},
-	"dependencies": {
-		"@biscuits/client": "workspace:*",
-		"@biscuits/graphql": "workspace:*",
-		"@humding.biscuits/verdant": "workspace:*",
-		"@react-spring/web": "^9.7.3",
-		"@use-gesture/react": "^10.2.24"
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "^1.0.3"

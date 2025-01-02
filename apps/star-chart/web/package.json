@@ -8,7 +8,17 @@
 		"build": "vite build",
 		"preview": "vite preview"
 	},
-	"peerDependencies": {
+	"dependencies": {
+		"@biscuits/client": "workspace:*",
+		"@biscuits/graphql": "workspace:*",
+		"@react-spring/web": "^9.7.3",
+		"@star-chart.biscuits/verdant": "workspace:*",
+		"@types/raf": "^3.4.3",
+		"@use-gesture/react": "^10.2.24",
+		"@xstate/react": "^4.1.1",
+		"raf": "^3.4.1",
+		"react-hotkeys-hook": "^4.5.0",
+		"xstate": "^5.13.1",
 		"@a-type/ui": "catalog:",
 		"@a-type/utils": "catalog:",
 		"gql.tada": "catalog:",
@@ -31,19 +41,6 @@
 		"workbox-routing": "catalog:",
 		"workbox-strategies": "catalog:",
 		"workbox-window": "catalog:"
-	},
-	"dependencies": {
-		"@biscuits/client": "workspace:*",
-		"@biscuits/graphql": "workspace:*",
-		"@react-spring/web": "^9.7.3",
-		"@star-chart.biscuits/verdant": "workspace:*",
-		"@types/raf": "^3.4.3",
-		"@use-gesture/react": "^10.2.24",
-		"@verdant-web/react-router": "0.7.0",
-		"@xstate/react": "^4.1.1",
-		"raf": "^3.4.1",
-		"react-hotkeys-hook": "^4.5.0",
-		"xstate": "^5.13.1"
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "^1.0.3"

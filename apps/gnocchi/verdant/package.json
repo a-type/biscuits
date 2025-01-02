@@ -18,18 +18,16 @@
 		"preflight": "verdant preflight -s ./src/schema.ts -o ./src/client",
 		"build": "tsc && node ./scripts/copyClient.js"
 	},
-	"peerDependencies": {
+	"dependencies": {
+		"@biscuits/client": "workspace:*",
+		"@biscuits/graphql": "workspace:*",
+		"cuid": "^2.1.8",
+		"stopword": "^2.0.8",
 		"react": "catalog:",
 		"@verdant-web/store": "catalog:",
 		"@verdant-web/react": "catalog:",
 		"@verdant-web/cli": "catalog:",
 		"gql.tada": "catalog:"
-	},
-	"dependencies": {
-		"@biscuits/client": "workspace:*",
-		"@biscuits/graphql": "workspace:*",
-		"cuid": "^2.1.8",
-		"stopword": "^2.0.8"
 	},
 	"devDependencies": {
 		"@types/stopword": "^2.0.0"

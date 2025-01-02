@@ -8,7 +8,17 @@
 		"build": "vite build",
 		"preview": "vite preview"
 	},
-	"peerDependencies": {
+	"dependencies": {
+		"@a-type/react-space": "^0.2.15",
+		"@biscuits/client": "workspace:*",
+		"@biscuits/graphql": "workspace:*",
+		"@dynamize/color-utilities": "^1.0.12",
+		"@palette.biscuits/verdant": "workspace:*",
+		"@react-spring/web": "^9.7.4",
+		"@scidian/iris": "^1.0.4",
+		"@use-gesture/react": "^10.2.24",
+		"@zsviczian/colormaster": "^1.2.2",
+		"colormaster": "^1.2.1",
 		"@a-type/ui": "catalog:",
 		"@a-type/utils": "catalog:",
 		"gql.tada": "catalog:",
@@ -31,18 +41,6 @@
 		"workbox-routing": "catalog:",
 		"workbox-strategies": "catalog:",
 		"workbox-window": "catalog:"
-	},
-	"dependencies": {
-		"@a-type/react-space": "^0.2.15",
-		"@biscuits/client": "workspace:*",
-		"@biscuits/graphql": "workspace:*",
-		"@dynamize/color-utilities": "^1.0.12",
-		"@palette.biscuits/verdant": "workspace:*",
-		"@react-spring/web": "^9.7.4",
-		"@scidian/iris": "^1.0.4",
-		"@use-gesture/react": "^10.2.24",
-		"@zsviczian/colormaster": "^1.2.2",
-		"colormaster": "^1.2.1"
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "^1.0.3"

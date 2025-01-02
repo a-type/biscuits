@@ -47,10 +47,7 @@ export function GroceriesPage() {
 	return (
 		<ListContext.Provider value={listId}>
 			<RecipeSavePrompt />
-			<ThemedPageContent
-				listId={listId}
-				className="rounded-b-lg border-b border-b-solid border-b-[#00000070] bg-wash sm:border-none sm:rounded-0"
-			>
+			<ThemedPageContent listId={listId}>
 				<TopControls>
 					<ListSelectWrapper>
 						<ListSelect includeAll value={listId} onChange={onListChange} />

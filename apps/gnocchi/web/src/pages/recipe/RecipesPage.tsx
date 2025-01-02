@@ -12,7 +12,7 @@ export interface RecipesPageProps {}
 export function RecipesPage({}: RecipesPageProps) {
 	usePageTitle('Recipes');
 	return (
-		<PageContent className="rounded-b-lg border-b border-b-solid border-b-[#00000070] bg-wash sm:border-none sm:rounded-0">
+		<PageContent>
 			<Suspense>
 				<RecipeList />
 			</Suspense>

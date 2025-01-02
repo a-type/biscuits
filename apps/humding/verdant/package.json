@@ -9,7 +9,7 @@
 		"preflight": "verdant preflight -s ./src/schema.ts -o ./src/client",
 		"build": "pnpm run preflight"
 	},
-	"peerDependencies": {
+	"dependencies": {
 		"react": "catalog:",
 		"@verdant-web/cli": "catalog:",
 		"@verdant-web/react": "catalog:",

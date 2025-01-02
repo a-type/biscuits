@@ -9,7 +9,12 @@
 		"preview": "vite preview",
 		"generate": "cd ../verdant && pnpm generate"
 	},
-	"peerDependencies": {
+	"dependencies": {
+		"@biscuits/client": "workspace:*",
+		"@biscuits/graphql": "workspace:*",
+		"@names.biscuits/verdant": "workspace:*",
+		"@react-spring/web": "^9.7.5",
+		"downshift": "^9.0.8",
 		"@a-type/ui": "catalog:",
 		"@a-type/utils": "catalog:",
 		"gql.tada": "catalog:",
@@ -32,13 +37,6 @@
 		"workbox-routing": "catalog:",
 		"workbox-strategies": "catalog:",
 		"workbox-window": "catalog:"
-	},
-	"dependencies": {
-		"@biscuits/client": "workspace:*",
-		"@biscuits/graphql": "workspace:*",
-		"@names.biscuits/verdant": "workspace:*",
-		"@react-spring/web": "^9.7.5",
-		"downshift": "^9.0.8"
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "^1.0.3"

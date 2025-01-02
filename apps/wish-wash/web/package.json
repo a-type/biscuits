@@ -8,7 +8,16 @@
 		"build": "vite build",
 		"preview": "vite preview"
 	},
-	"peerDependencies": {
+	"dependencies": {
+		"@biscuits/client": "workspace:*",
+		"@biscuits/graphql": "workspace:*",
+		"@dnd-kit/core": "^6.1.0",
+		"@dnd-kit/sortable": "^8.0.0",
+		"@dnd-kit/utilities": "^3.2.2",
+		"@react-spring/web": "^9.7.3",
+		"@wish-wash.biscuits/common": "workspace:*",
+		"@wish-wash.biscuits/verdant": "workspace:*",
+		"downshift": "^9.0.8",
 		"@a-type/ui": "catalog:",
 		"@a-type/utils": "catalog:",
 		"gql.tada": "catalog:",
@@ -31,17 +40,6 @@
 		"workbox-routing": "catalog:",
 		"workbox-strategies": "catalog:",
 		"workbox-window": "catalog:"
-	},
-	"dependencies": {
-		"@biscuits/client": "workspace:*",
-		"@biscuits/graphql": "workspace:*",
-		"@dnd-kit/core": "^6.1.0",
-		"@dnd-kit/sortable": "^8.0.0",
-		"@dnd-kit/utilities": "^3.2.2",
-		"@react-spring/web": "^9.7.3",
-		"@wish-wash.biscuits/common": "workspace:*",
-		"@wish-wash.biscuits/verdant": "workspace:*",
-		"downshift": "^9.0.8"
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "1.0.3",

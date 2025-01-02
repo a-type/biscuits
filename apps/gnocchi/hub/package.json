@@ -19,7 +19,15 @@
 		"typings": "tsc --declaration --emitDeclarationOnly",
 		"typecheck": "tsc --build tsconfig.json"
 	},
-	"peerDependencies": {
+	"dependencies": {
+		"@tiptap/core": "^2.2.4",
+		"@tiptap/extension-document": "^2.2.4",
+		"@tiptap/extension-link": "^2.2.4",
+		"@tiptap/extension-paragraph": "^2.2.4",
+		"@tiptap/pm": "^2.2.4",
+		"@tiptap/react": "^2.2.4",
+		"@tiptap/starter-kit": "^2.2.4",
+		"prosemirror-model": "1.19.4",
 		"react": "catalog:",
 		"react-dom": "catalog:",
 		"vite": "catalog:",
@@ -31,16 +39,6 @@
 		"@vitejs/plugin-react-swc": "catalog:",
 		"unocss": "catalog:",
 		"@unocss/transformer-variant-group": "catalog:"
-	},
-	"dependencies": {
-		"@tiptap/core": "^2.2.4",
-		"@tiptap/extension-document": "^2.2.4",
-		"@tiptap/extension-link": "^2.2.4",
-		"@tiptap/extension-paragraph": "^2.2.4",
-		"@tiptap/pm": "^2.2.4",
-		"@tiptap/react": "^2.2.4",
-		"@tiptap/starter-kit": "^2.2.4",
-		"prosemirror-model": "1.19.4"
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "^1.0.3",

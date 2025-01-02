@@ -20,7 +20,9 @@
 		"typings": "tsc --declaration --emitDeclarationOnly",
 		"typecheck": "tsc --build tsconfig.json"
 	},
-	"peerDependencies": {
+	"dependencies": {
+		"@wish-wash.biscuits/common": "workspace:*",
+		"@biscuits/graphql": "workspace:*",
 		"@a-type/ui": "catalog:",
 		"@a-type/utils": "catalog:",
 		"react": "catalog:",
@@ -33,10 +35,6 @@
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
 		"gql.tada": "catalog:"
-	},
-	"dependencies": {
-		"@wish-wash.biscuits/common": "workspace:*",
-		"@biscuits/graphql": "workspace:*"
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "^1.0.3",
