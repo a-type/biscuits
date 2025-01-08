@@ -82,7 +82,7 @@ export const RecipeListItem = memo(function RecipeListItem({
 				<CardActions>
 					<RecipePinToggle recipe={recipe} />
 
-					<AddToListButton recipe={recipe} color="ghost" size="small">
+					<AddToListButton recipe={recipe} color="ghost" size="icon">
 						<Icon name="add_to_list" />
 					</AddToListButton>
 				</CardActions>
@@ -140,7 +140,7 @@ export function RecipeListItemMenu({
 			modal={false}
 		>
 			<DropdownMenuTrigger asChild>
-				<Button size="icon" color="ghost" {...rest}>
+				<Button size="icon-small" color="ghost" {...rest}>
 					<Icon name="dots" className="w-20px h-20px" />
 				</Button>
 			</DropdownMenuTrigger>
