@@ -111,7 +111,7 @@ export function PantryListItem({
 								</Tooltip>
 							)}
 							{isStaple && (
-								<Tooltip content="Staple food are automatically added to the list when used up">
+								<Tooltip content="Staple foods are automatically added to the list when used up">
 									<Chip>
 										<Icon name="cart" />
 										Staple
