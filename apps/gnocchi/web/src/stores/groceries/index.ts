@@ -533,13 +533,34 @@ export const hooks = createHooks<Presence, Profile>({
 		),
 
 	useClearPantryItem: (client) =>
-		useCallback(async (food: Food) => {
-			food.update({
-				inInventory: false,
-				expiresAt: null,
-				frozenAt: null,
-			});
-		}, []),
+		useCallback(
+			async (food: Food) => {
+				food.update({
+					inInventory: false,
+					expiresAt: null,
+					frozenAt: null,
+				});
+				// add the item to the list if it's a staple
+				if (food.get('isStaple')) {
+					const shouldPluralize = food.get('pluralizeName');
+					await addItems(
+						client,
+						[pluralize(food.get('canonicalName'), shouldPluralize ? 2 : 1)],
+						{
+							showToast: true,
+							listId: food.get('defaultListId'),
+							onlyIfNotPresent: true,
+							toastMessage: (name) =>
+								`Staple food "${pluralize(
+									name,
+									food.get('pluralizeName') ? 2 : 1,
+								)}" put back on the list!`,
+						},
+					);
+				}
+			},
+			[client],
+		),
 
 	useChangeFoodCanonicalName: (client) => {
 		const [params, setParams] = useSearchParams();
@@ -680,11 +701,15 @@ export async function addItems(
 		listId = null,
 		purchased,
 		showToast,
+		onlyIfNotPresent,
+		toastMessage,
 	}: {
 		listId?: string | null;
 		sourceInfo?: Omit<ItemInputsItemInit, 'text' | 'quantity'>;
 		purchased?: boolean;
 		showToast?: boolean;
+		toastMessage?: (name: string) => string;
+		onlyIfNotPresent?: boolean;
 	},
 ) {
 	if (!lines.length) return;
@@ -707,14 +732,18 @@ export async function addItems(
 				},
 			}).resolved;
 			if (firstMatch && !purchased) {
-				const totalQuantity = firstMatch.get('totalQuantity') + parsed.quantity;
-				firstMatch.set('totalQuantity', totalQuantity);
-				// add the source, too
-				const inputs = firstMatch.get('inputs');
-				inputs.push({
-					...sourceInfo,
-					text: parsed.original,
-				});
+				// skip increasing existing matched item if this flag is set
+				if (!onlyIfNotPresent) {
+					const totalQuantity =
+						firstMatch.get('totalQuantity') + parsed.quantity;
+					firstMatch.set('totalQuantity', totalQuantity);
+					// add the source, too
+					const inputs = firstMatch.get('inputs');
+					inputs.push({
+						...sourceInfo,
+						text: parsed.original,
+					});
+				}
 			} else {
 				const lookup = await client.foods.findOne({
 					index: {
@@ -897,7 +926,12 @@ export async function addItems(
 	if (showToast) {
 		let message;
 		if (lines.length === 1) {
-			message = 'Added ' + lines[0];
+			if (toastMessage) {
+				const name = typeof lines[0] === 'string' ? lines[0] : lines[0].food;
+				message = toastMessage(name);
+			} else {
+				message = 'Added ' + lines[0];
+			}
 		} else {
 			message = 'Added ' + lines.length + ' items';
 		}

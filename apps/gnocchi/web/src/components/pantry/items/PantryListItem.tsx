@@ -51,6 +51,7 @@ export function PantryListItem({
 		expiresAt,
 		frozenAt,
 		inInventory,
+		isStaple,
 	} = hooks.useWatch(item);
 
 	const clearItem = hooks.useClearPantryItem();
@@ -106,6 +107,14 @@ export function PantryListItem({
 									<Chip color="accent">
 										<Icon name="snowflake" />
 										<RelativeTime value={frozenAt} abbreviate />
+									</Chip>
+								</Tooltip>
+							)}
+							{isStaple && (
+								<Tooltip content="Staple food are automatically added to the list when used up">
+									<Chip>
+										<Icon name="cart" />
+										Staple
 									</Chip>
 								</Tooltip>
 							)}

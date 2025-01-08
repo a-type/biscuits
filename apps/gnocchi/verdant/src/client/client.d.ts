@@ -452,6 +452,8 @@ export type FoodPurchaseCount = number;
 export type FoodDefaultListId = string;
 export type FoodPluralizeName = boolean;
 export type FoodDoNotSuggest = boolean;
+/** When a staple item is depleted, it is automatically added to the list */
+export type FoodIsStaple = boolean;
 export type FoodInit = {
   canonicalName: string;
   alternateNames?: FoodAlternateNamesInit;
@@ -467,6 +469,7 @@ export type FoodInit = {
   defaultListId?: string | null;
   pluralizeName?: boolean;
   doNotSuggest?: boolean;
+  isStaple?: boolean;
 };
 
 export type FoodAlternateNamesInit = string[];
@@ -485,6 +488,7 @@ export type FoodDestructured = {
   defaultListId: string | null;
   pluralizeName: boolean;
   doNotSuggest: boolean;
+  isStaple: boolean;
 };
 
 export type FoodAlternateNamesDestructured = string[];
@@ -503,6 +507,7 @@ export type FoodSnapshot = {
   defaultListId: string | null;
   pluralizeName: boolean;
   doNotSuggest: boolean;
+  isStaple: boolean;
 };
 
 export type FoodAlternateNamesSnapshot = string[];
@@ -660,6 +665,23 @@ export interface FoodPurchaseCountRangeFilter {
   lt?: number;
   order?: "asc" | "desc";
 }
+export interface FoodIsStapleSortFilter {
+  where: "isStaple";
+  order: "asc" | "desc";
+}
+export interface FoodIsStapleMatchFilter {
+  where: "isStaple";
+  equals: boolean;
+  order?: "asc" | "desc";
+}
+export interface FoodIsStapleRangeFilter {
+  where: "isStaple";
+  gte?: boolean;
+  gt?: boolean;
+  lte?: boolean;
+  lt?: boolean;
+  order?: "asc" | "desc";
+}
 export interface FoodCategoryIdLastPurchasedAtCompoundFilter {
   where: "categoryId_lastPurchasedAt";
   match: {
@@ -705,6 +727,9 @@ export type FoodFilter =
   | FoodPurchaseCountSortFilter
   | FoodPurchaseCountMatchFilter
   | FoodPurchaseCountRangeFilter
+  | FoodIsStapleSortFilter
+  | FoodIsStapleMatchFilter
+  | FoodIsStapleRangeFilter
   | FoodCategoryIdLastPurchasedAtCompoundFilter
   | FoodInInventoryCategoryIdLastPurchasedAtCompoundFilter;
 

@@ -4,8 +4,8 @@ import { ListSelect } from '@/components/groceries/lists/ListSelect.jsx';
 import { useExpiresText } from '@/components/pantry/hooks.js';
 import { hooks } from '@/stores/groceries/index.js';
 import {
+	Box,
 	Button,
-	Checkbox,
 	Dialog,
 	DialogActions,
 	DialogClose,
@@ -17,6 +17,7 @@ import {
 	Input,
 	LiveUpdateTextField,
 	RelativeTime,
+	Switch,
 	Tooltip,
 	withClassName,
 } from '@a-type/ui';
@@ -198,17 +199,30 @@ function FoodDetailView({
 			<H3>Alternate names</H3>
 			<FoodNamesEditor names={food.get('alternateNames')} />
 			<label className="row gap-1">
-				<Checkbox
+				<Switch
 					checked={food.get('pluralizeName')}
 					onCheckedChange={(val) => food.set('pluralizeName', val === true)}
 				/>
 				<span>Use pluralized name</span>
 			</label>
+			<Box direction="col" gap="sm" p="none">
+				<label className="row gap-1">
+					<Switch
+						checked={food.get('isStaple')}
+						onCheckedChange={(val) => food.set('isStaple', val === true)}
+					/>
+					<span>Staple food</span>
+				</label>
+				<span className="text-xs italic color-gray-7">
+					Staples are automatically added to the list when they run out
+				</span>
+			</Box>
 			<Divider />
 			<label className="row gap-1">
-				<Checkbox
+				<Switch
 					checked={food.get('doNotSuggest')}
 					onCheckedChange={(val) => food.set('doNotSuggest', val === true)}
+					className="bg-attention"
 				/>
 				<span>Do not suggest</span>
 			</label>
