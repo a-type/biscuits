@@ -1,16 +1,6 @@
 import { Icon } from '@/components/icons/Icon.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import {
-	Select,
-	SelectContent,
-	SelectGroup,
-	SelectIcon,
-	SelectItem,
-	SelectLabel,
-	SelectTrigger,
-	SelectValue,
-	UnstyledSelectTrigger,
-} from '@a-type/ui';
+import { Select, SelectTrigger, UnstyledSelectTrigger } from '@a-type/ui';
 import classNames from 'classnames';
 import { ReactNode, useCallback, useEffect } from 'react';
 
@@ -45,7 +35,7 @@ export function MeetupSelect({ children, id, emptyLabel }: MeetupSelectProps) {
 	const setMeetup = useCallback(
 		(value: string) => {
 			if (value === 'clear') {
-				info?.set('meetup', undefined);
+				info?.set('meetup', null);
 			} else {
 				client
 					.batch({ undoable: false })
@@ -65,7 +55,7 @@ export function MeetupSelect({ children, id, emptyLabel }: MeetupSelectProps) {
 	return (
 		<Select value={location || 'clear'} onValueChange={setMeetup}>
 			<Trigger
-				asChild={!!children}
+				asChild
 				className={classNames(
 					!children && 'py-3 px-6',
 					!!location && 'bg-accent-wash color-accent-dark',
@@ -77,26 +67,26 @@ export function MeetupSelect({ children, id, emptyLabel }: MeetupSelectProps) {
 				) : (
 					<>
 						<Icon name="locate" />
-						<SelectValue />
-						<SelectIcon />
+						<Select.Value />
+						<Select.Icon />
 					</>
 				)}
 			</Trigger>
-			<SelectContent>
-				<SelectItem value="clear">
+			<Select.Content>
+				<Select.Item value="clear">
 					{location ? 'Clear' : emptyLabel || 'Regroup'}
-				</SelectItem>
-				<SelectGroup>
-					<SelectLabel>Choose a location</SelectLabel>
-					<SelectItem value="Checkout Lanes">Checkout Lanes</SelectItem>
-					<SelectItem value="Self Checkout">Self Checkout</SelectItem>
+				</Select.Item>
+				<Select.Group>
+					<Select.Label>Choose a location</Select.Label>
+					<Select.Item value="Checkout Lanes">Checkout Lanes</Select.Item>
+					<Select.Item value="Self Checkout">Self Checkout</Select.Item>
 					{options.map((option) => (
-						<SelectItem value={option} key={option}>
+						<Select.Item value={option} key={option}>
 							{option}
-						</SelectItem>
+						</Select.Item>
 					))}
-				</SelectGroup>
-			</SelectContent>
+				</Select.Group>
+			</Select.Content>
 		</Select>
 	);
 }
