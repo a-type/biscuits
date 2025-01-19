@@ -15,7 +15,7 @@ catalog:
   '@verdant-web/cli': 4.7.2
   '@verdant-web/react': 40.2.1
   '@verdant-web/react-router': 0.7.1
-  '@verdant-web/store': 4.1.0
+  '@verdant-web/store': 4.1.2
   '@vitejs/plugin-react-swc': 3.7.2
   gql.tada: 1.8.10
   react: 19.0.0

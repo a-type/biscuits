@@ -31,8 +31,8 @@ catalogs:
       specifier: 0.7.1
       version: 0.7.1
     '@verdant-web/store':
-      specifier: 4.1.0
-      version: 4.1.0
+      specifier: 4.1.2
+      version: 4.1.2
     '@vitejs/plugin-react-swc':
       specifier: 3.7.2
       version: 3.7.2
@@ -232,10 +232,10 @@ importers:
         version: 4.7.2
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 40.2.1(@verdant-web/store@4.1.0)(react@19.0.0)
+        version: 40.2.1(@verdant-web/store@4.1.2)(react@19.0.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.1.0
+        version: 4.1.2
       cuid:
         specifier: ^2.1.8
         version: 2.1.8
@@ -347,7 +347,7 @@ importers:
         version: 0.7.1(react@19.0.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.1.0
+        version: 4.1.2
       '@vitejs/plugin-react-swc':
         specifier: 'catalog:'
         version: 3.7.2(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))
@@ -519,10 +519,10 @@ importers:
         version: 4.7.2
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 40.2.1(@verdant-web/store@4.1.0)(react@19.0.0)
+        version: 40.2.1(@verdant-web/store@4.1.2)(react@19.0.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.1.0
+        version: 4.1.2
       react:
         specifier: 'catalog:'
         version: 19.0.0
@@ -564,7 +564,7 @@ importers:
         version: 0.7.1(react@19.0.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.1.0
+        version: 4.1.2
       '@vitejs/plugin-react-swc':
         specifier: 'catalog:'
         version: 3.7.2(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))
@@ -622,10 +622,10 @@ importers:
         version: 4.7.2
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 40.2.1(@verdant-web/store@4.1.0)(react@19.0.0)
+        version: 40.2.1(@verdant-web/store@4.1.2)(react@19.0.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.1.0
+        version: 4.1.2
       cuid:
         specifier: ^2.1.8
         version: 2.1.8
@@ -670,7 +670,7 @@ importers:
         version: 0.7.1(react@19.0.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.1.0
+        version: 4.1.2
       '@vitejs/plugin-react-swc':
         specifier: 'catalog:'
         version: 3.7.2(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))
@@ -734,10 +734,10 @@ importers:
         version: 4.7.2
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 40.2.1(@verdant-web/store@4.1.0)(react@19.0.0)
+        version: 40.2.1(@verdant-web/store@4.1.2)(react@19.0.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.1.0
+        version: 4.1.2
       react:
         specifier: 'catalog:'
         version: 19.0.0
@@ -776,7 +776,7 @@ importers:
         version: 0.7.1(react@19.0.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.1.0
+        version: 4.1.2
       '@vitejs/plugin-react-swc':
         specifier: 'catalog:'
         version: 3.7.2(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))
@@ -837,10 +837,10 @@ importers:
         version: 4.7.2
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 40.2.1(@verdant-web/store@4.1.0)(react@19.0.0)
+        version: 40.2.1(@verdant-web/store@4.1.2)(react@19.0.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.1.0
+        version: 4.1.2
       react:
         specifier: 'catalog:'
         version: 19.0.0
@@ -891,7 +891,7 @@ importers:
         version: 0.7.1(react@19.0.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.1.0
+        version: 4.1.2
       '@vitejs/plugin-react-swc':
         specifier: 'catalog:'
         version: 3.7.2(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))
@@ -955,10 +955,10 @@ importers:
         version: 4.7.2
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 40.2.1(@verdant-web/store@4.1.0)(react@19.0.0)
+        version: 40.2.1(@verdant-web/store@4.1.2)(react@19.0.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.1.0
+        version: 4.1.2
       react:
         specifier: 'catalog:'
         version: 19.0.0
@@ -1003,7 +1003,7 @@ importers:
         version: 0.7.1(react@19.0.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.1.0
+        version: 4.1.2
       '@vitejs/plugin-react-swc':
         specifier: 'catalog:'
         version: 3.7.2(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))
@@ -1073,10 +1073,10 @@ importers:
         version: 4.7.2
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 40.2.1(@verdant-web/store@4.1.0)(react@19.0.0)
+        version: 40.2.1(@verdant-web/store@4.1.2)(react@19.0.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.1.0
+        version: 4.1.2
       cuid:
         specifier: ^2.1.8
         version: 2.1.8
@@ -1124,13 +1124,13 @@ importers:
         version: 0.65.3
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 40.2.1(@verdant-web/store@4.1.0)(react@19.0.0)
+        version: 40.2.1(@verdant-web/store@4.1.2)(react@19.0.0)
       '@verdant-web/react-router':
         specifier: 'catalog:'
         version: 0.7.1(react@19.0.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.1.0
+        version: 4.1.2
       '@vitejs/plugin-react-swc':
         specifier: 'catalog:'
         version: 3.7.2(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))
@@ -1285,10 +1285,10 @@ importers:
         version: 4.7.2
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 40.2.1(@verdant-web/store@4.1.0)(react@19.0.0)
+        version: 40.2.1(@verdant-web/store@4.1.2)(react@19.0.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.1.0
+        version: 4.1.2
       react:
         specifier: 'catalog:'
         version: 19.0.0
@@ -1333,7 +1333,7 @@ importers:
         version: 0.7.1(react@19.0.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.1.0
+        version: 4.1.2
       '@vitejs/plugin-react-swc':
         specifier: 'catalog:'
         version: 3.7.2(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))
@@ -5594,8 +5594,8 @@ packages:
     resolution: {integrity: sha512-uX1mkqLxD2OA2Aa195coRJKOhXhJBAwURBmbmlOLsD1//zX9/tVC/xAi0SPgbO20RJ23O3VJIoZK8LGhtzKfcA==}
     hasBin: true
 
-  '@verdant-web/store@4.1.0':
-    resolution: {integrity: sha512-rNg37pzHGflFju5+tPFfeTr3kbre76nw2nvcC3WitrpHaKiwTdrvWgDpoFtUXI9tjeCIOnMyBkhhjXjJD+uUgQ==}
+  '@verdant-web/store@4.1.2':
+    resolution: {integrity: sha512-Qm3dxkIyxzcJzxDQz53ZA4KG9VVhJFxHwUW1m10AOSADs2ZmdST7rjhDW4JroqNfjRNyXm5duxFB/CkH2yV40w==}
 
   '@vitejs/plugin-react-swc@3.7.2':
     resolution: {integrity: sha512-y0byko2b2tSVVf5Gpng1eEhX1OvPC7x8yns1Fx8jDzlJp4LS6CMkCPfLw47cjyoMrshQDoQw4qcgjsU9VvlCew==}
@@ -15822,10 +15822,10 @@ snapshots:
       path-to-regexp: 6.3.0
       react: 19.0.0
 
-  '@verdant-web/react@40.2.1(@verdant-web/store@4.1.0)(react@19.0.0)':
+  '@verdant-web/react@40.2.1(@verdant-web/store@4.1.2)(react@19.0.0)':
     dependencies:
       '@verdant-web/common': 2.7.0
-      '@verdant-web/store': 4.1.0
+      '@verdant-web/store': 4.1.2
       react: 19.0.0
       suspend-react: 0.1.3(react@19.0.0)
       use-sync-external-store: 1.4.0(react@19.0.0)
@@ -15856,14 +15856,12 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@verdant-web/store@4.1.0':
+  '@verdant-web/store@4.1.2':
     dependencies:
-      '@a-type/kysely': 1.1.1(kysely@0.27.5)
       '@verdant-web/common': 2.7.0
       cuid: 2.1.8
       jszip: 3.10.1
       jwt-decode: 3.1.2
-      kysely: 0.27.5
       weak-event: 2.0.5
 
   '@vitejs/plugin-react-swc@3.7.2(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))':

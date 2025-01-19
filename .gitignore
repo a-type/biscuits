@@ -130,6 +130,8 @@ dist
 .pnp.*
 
 *.sqlite
+*.sqlite-wal
+*.sqlite-shm
 *.db
 .env.*
 
