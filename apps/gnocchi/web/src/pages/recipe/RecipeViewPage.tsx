@@ -5,7 +5,7 @@ export interface RecipeViewPageProps {}
 
 export function RecipeViewPage({}: RecipeViewPageProps) {
 	return (
-		<PageContent className="rounded-b-lg border-b border-b-solid border-b-[#00000070] bg-wash sm:border-none sm:rounded-0">
+		<PageContent>
 			<Outlet />
 		</PageContent>
 	);

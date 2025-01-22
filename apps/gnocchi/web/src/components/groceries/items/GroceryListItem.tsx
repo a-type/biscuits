@@ -204,7 +204,7 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 						</div>
 					</div>
 					<CollapsibleTrigger asChild>
-						<Button size="icon" color="ghost" className="p-1">
+						<Button size="icon" color="ghost" className="p-1 flex-shrink-0">
 							<Icon
 								name="chevron"
 								className="[*[data-state=open]_&]:rotate-180deg text-gray-5 hover:text-gray-7"
