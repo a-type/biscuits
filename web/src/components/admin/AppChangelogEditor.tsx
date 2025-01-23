@@ -75,7 +75,7 @@ export function AppChangelogEditor({ appId }: AppChangelogEditorProps) {
 
 	return (
 		<div className="col">
-			<CardGrid>
+			<CardGrid className="w-full">
 				{data.changelog.map((item: any) => (
 					<CardRoot key={item.id}>
 						{item.imageUrl && (
