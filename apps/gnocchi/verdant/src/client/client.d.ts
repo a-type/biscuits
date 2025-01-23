@@ -882,6 +882,12 @@ export type RecipeLastCookedAt = number;
 export type RecipeLastAddedAt = number;
 export type RecipeAddIntervalGuess = number;
 export type RecipePinnedAt = number;
+export type RecipeSubRecipeMultipliers = ObjectEntity<
+  RecipeSubRecipeMultipliersInit,
+  RecipeSubRecipeMultipliersDestructured,
+  RecipeSubRecipeMultipliersSnapshot
+>;
+export type RecipeSubRecipeMultipliersValue = number;
 export type RecipeInit = {
   id?: string;
   slug?: string;
@@ -906,6 +912,7 @@ export type RecipeInit = {
   lastAddedAt?: number | null;
   addIntervalGuess?: number | null;
   pinnedAt?: number | null;
+  subRecipeMultipliers?: RecipeSubRecipeMultipliersInit;
 };
 
 export type RecipeIngredientsItemCommentsInit = string[];
@@ -936,6 +943,9 @@ export type RecipeSessionInit = {
   ingredientAssignments?: RecipeSessionIngredientAssignmentsInit;
 } | null;
 export type RecipeTagsInit = string[];
+export type RecipeSubRecipeMultipliersInit = {
+  [key: string]: RecipeSubRecipeMultipliersValueInit;
+};
 export type RecipeDestructured = {
   id: string;
   slug: string;
@@ -960,6 +970,7 @@ export type RecipeDestructured = {
   lastAddedAt: number | null;
   addIntervalGuess: number | null;
   pinnedAt: number | null;
+  subRecipeMultipliers: RecipeSubRecipeMultipliers;
 };
 
 export type RecipeIngredientsItemCommentsDestructured = string[];
@@ -990,6 +1001,9 @@ export type RecipeSessionDestructured = {
   ingredientAssignments: RecipeSessionIngredientAssignments;
 };
 export type RecipeTagsDestructured = string[];
+export type RecipeSubRecipeMultipliersDestructured = {
+  [key: string]: RecipeSubRecipeMultipliersValue | undefined;
+};
 export type RecipeSnapshot = {
   id: string;
   slug: string;
@@ -1014,6 +1028,7 @@ export type RecipeSnapshot = {
   lastAddedAt: number | null;
   addIntervalGuess: number | null;
   pinnedAt: number | null;
+  subRecipeMultipliers: RecipeSubRecipeMultipliersSnapshot;
 };
 
 export type RecipeIngredientsItemCommentsSnapshot = string[];
@@ -1044,6 +1059,9 @@ export type RecipeSessionSnapshot = {
   ingredientAssignments: RecipeSessionIngredientAssignmentsSnapshot;
 } | null;
 export type RecipeTagsSnapshot = string[];
+export type RecipeSubRecipeMultipliersSnapshot = {
+  [key: string]: RecipeSubRecipeMultipliersValueSnapshot;
+};
 
 /** Index filters for Recipe **/
 

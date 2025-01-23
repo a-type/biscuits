@@ -12,9 +12,9 @@ export function UndoAction({ showName }: { showName?: boolean }) {
 				onClick={() => {
 					groceries.undoHistory.undo();
 				}}
-				icon={<Icon name="undo" />}
 				visuallyDisabled={!canUndo}
 			>
+				<Icon name="undo" />
 				{showName ? 'Undo' : undefined}
 			</ActionButton>
 		</Tooltip>

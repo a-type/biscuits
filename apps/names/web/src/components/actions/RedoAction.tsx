@@ -3,17 +3,17 @@ import { ActionButton, Icon } from '@a-type/ui';
 
 export function RedoAction({ showName }: { showName?: boolean }) {
 	const canRedo = hooks.useCanRedo();
-	const groceries = hooks.useClient();
+	const client = hooks.useClient();
 
 	return (
 		<ActionButton
 			size="small"
 			onClick={() => {
-				groceries.undoHistory.redo();
+				client.undoHistory.redo();
 			}}
-			icon={<Icon name="undo" className="-scale-x-100" />}
 			visible={canRedo}
 		>
+			<Icon name="undo" className="-scale-x-100" />
 			{showName ? 'Undo' : undefined}
 		</ActionButton>
 	);

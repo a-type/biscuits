@@ -158,11 +158,13 @@ const AddPaneImpl = forwardRef<
 				</div>
 			</ScrollArea>
 			{addingRecipe && (
-				<AddToListDialog
-					recipe={addingRecipe}
-					onOpenChange={clearAddingRecipe}
-					open
-				/>
+				<Suspense>
+					<AddToListDialog
+						recipe={addingRecipe}
+						onOpenChange={clearAddingRecipe}
+						open
+					/>
+				</Suspense>
 			)}
 		</div>
 	);

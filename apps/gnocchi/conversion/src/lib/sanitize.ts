@@ -13,4 +13,30 @@ export function sanitize(text: string) {
 }
 
 const removeLeadingChars = ['-', '*'];
-const removeCharsAnywhere = ['•', '□', '▪', '▫', '▢', '\n', '\r', '\t'];
+const removeCharsAnywhere = [
+	'•',
+	'□',
+	'▪',
+	'▫',
+	'▢',
+	'\n',
+	'\r',
+	'\t',
+	'▢',
+	'▣',
+	'▪',
+	'▫',
+	'◉',
+	'○',
+	'◌',
+	'●',
+	'◦',
+	'◯',
+	'◻',
+	'◼',
+	'◽',
+	'◾',
+	'☐',
+	'☑',
+	'☒',
+];

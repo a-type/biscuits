@@ -19,20 +19,10 @@ export function RecipeInstructionsField({
 
 	return (
 		<div className="flex flex-col gap-2">
-			{/* {isMobileOs() && (
-				<div className="bg-primary-wash p-2 rounded-md flex flex-col">
-					<P size="xs">
-						Hi, mobile user! Sorry, but the instruction editor doesn't always
-						work correctly on phones. I'm working on it! If you have a sync
-						subscription, I recommend switching to a computer to write up your
-						recipes for now.
-					</P>
-				</div>
-			)} */}
 			{editor && <Toolbar editor={editor} />}
 			<RichEditor
 				editor={editor}
-				className="[&_.ProseMirror]:(bg-gray1 rounded-lg p-4 border-default)"
+				className="[&_.ProseMirror]:(bg-white rounded-[20px] px-4 py-2 shadow-sm-inset border-gray-5 border-solid border-1)"
 			/>
 			<P className="text-xs">
 				Press <kbd>Enter</kbd> to create a new step. Each step line will have a
@@ -52,7 +42,7 @@ function isMobileOs() {
 function Toolbar({ editor }: { editor: Editor }) {
 	return (
 		// Sticks below the action bar
-		<div className="flex flex-row gap-2 items-center sticky z-1 top-44px bg-wash">
+		<div className="flex flex-row gap-2 items-center sticky z-1 top-44px bg-wash border-b border-b-gray-7 border-b-solid">
 			<Button
 				color="ghost"
 				onClick={() => {

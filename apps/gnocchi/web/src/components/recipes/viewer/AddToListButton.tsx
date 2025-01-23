@@ -3,6 +3,7 @@ import { saveHubRecipeOnboarding } from '@/onboarding/saveHubRecipeOnboarding.js
 import { Button, ButtonProps, DialogTrigger } from '@a-type/ui';
 import { OnboardingTooltip } from '@biscuits/client';
 import { Recipe } from '@gnocchi.biscuits/verdant';
+import { Suspense } from 'react';
 
 export interface AddToListButtonProps extends ButtonProps {
 	recipe: Recipe;
@@ -29,13 +30,21 @@ export function AddToListButton({
 			ignoreOutsideInteraction={(el) => !!el.closest('[role="dialog"]')}
 		>
 			<div className={className}>
-				<AddToListDialog recipe={recipe} listId={listId}>
-					<DialogTrigger asChild>
-						<Button color="default" {...rest}>
+				<Suspense
+					fallback={
+						<Button disabled {...rest}>
 							{children || 'Add to list'}
 						</Button>
-					</DialogTrigger>
-				</AddToListDialog>
+					}
+				>
+					<AddToListDialog recipe={recipe} listId={listId}>
+						<DialogTrigger asChild>
+							<Button color="default" {...rest}>
+								{children || 'Add to list'}
+							</Button>
+						</DialogTrigger>
+					</AddToListDialog>
+				</Suspense>
 			</div>
 		</OnboardingTooltip>
 	);

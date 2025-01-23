@@ -13,9 +13,9 @@ export function ClearPurchasedAction({}: ClearPurchasedActionProps) {
 			onClick={() => {
 				groceriesState.purchasedThisSession.clear();
 			}}
-			icon={<Icon name="check" />}
 			visible={purchasedThisSession.size > 0}
 		>
+			<Icon name="check" />
 			Clear purchased
 		</ActionButton>
 	);

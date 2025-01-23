@@ -11,11 +11,8 @@ export function SortAction() {
 	};
 
 	return (
-		<ActionButton
-			onClick={goNext}
-			icon={<Icon name="drag_vertical" />}
-			className="capitalize"
-		>
+		<ActionButton onClick={goNext} className="capitalize">
+			<Icon name="drag_vertical" />
 			{sort}
 		</ActionButton>
 	);

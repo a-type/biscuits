@@ -11,9 +11,9 @@ export function RedoAction({ showName }: { showName?: boolean }) {
 			onClick={() => {
 				groceries.undoHistory.redo();
 			}}
-			icon={<Icon name="undo" className="-scale-x-100" />}
 			visible={canRedo}
 		>
+			<Icon name="undo" style={{ transform: 'scaleX(-1)' }} />
 			{showName ? 'Undo' : undefined}
 		</ActionButton>
 	);

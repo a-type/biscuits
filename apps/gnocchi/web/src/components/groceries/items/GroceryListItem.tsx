@@ -71,7 +71,7 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 		{ item, isDragActive, menuProps, className, ...rest },
 		ref,
 	) {
-		const { purchasedAt, comment, id, food } = hooks.useWatch(item);
+		const { purchasedAt, comment, id, food, listId } = hooks.useWatch(item);
 
 		const isPurchased = !!purchasedAt;
 
@@ -223,7 +223,7 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 									className="important:text-xs important:border-gray5 flex-grow-2 flex-shrink-1 flex-basis-50% md:flex-basis-120px my-1"
 								/>
 								<ListSelect
-									value={item.get('listId')}
+									value={listId}
 									onChange={(listId) => item.set('listId', listId)}
 									className="flex-basis-25% flex-grow-1 flex-shrink-1 md:flex-basis-80px"
 								/>

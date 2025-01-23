@@ -26,9 +26,9 @@ export function PurchaseAllAction() {
 			visible={items.length > 0}
 			size="small"
 			onActivate={onActivate}
-			icon={<CheckboxIcon />}
 			progressColor="primaryLight"
 		>
+			<CheckboxIcon />
 			Purchase All
 		</LongPressAction>
 	);

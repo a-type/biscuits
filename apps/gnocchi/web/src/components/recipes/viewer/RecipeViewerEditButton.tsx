@@ -1,9 +1,9 @@
-import { LinkButton, LinkButtonProps } from '@/components/nav/Link.jsx';
+import { Link } from '@/components/nav/Link.jsx';
+import { ActionButton, ActionButtonProps, Icon } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { makeRecipeLink } from '../makeRecipeLink.js';
 
-export interface RecipeViewerEditButtonProps
-	extends Omit<LinkButtonProps, 'to'> {
+export interface RecipeViewerEditButtonProps extends ActionButtonProps {
 	recipe: Recipe;
 }
 
@@ -12,13 +12,11 @@ export function RecipeViewerEditButton({
 	...rest
 }: RecipeViewerEditButtonProps) {
 	return (
-		<LinkButton
-			size="small"
-			color="default"
-			to={makeRecipeLink(recipe, '/edit')}
-			{...rest}
-		>
-			Edit
-		</LinkButton>
+		<ActionButton asChild {...rest}>
+			<Link to={makeRecipeLink(recipe, '/edit')}>
+				<Icon name="pencil" />
+				Edit
+			</Link>
+		</ActionButton>
 	);
 }

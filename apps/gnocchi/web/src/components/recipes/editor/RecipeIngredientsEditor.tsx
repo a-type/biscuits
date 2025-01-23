@@ -1,7 +1,7 @@
-import { Icon } from '@/components/icons/Icon.jsx';
 import { useSessionStorage } from '@/hooks/useLocalStorage.js';
 import { hooks } from '@/stores/groceries/index.js';
 import {
+	Box,
 	Button,
 	Dialog,
 	DialogActions,
@@ -15,6 +15,7 @@ import {
 	DropdownMenuItemRightSlot,
 	DropdownMenuTrigger,
 	FormikForm,
+	Icon,
 	SubmitButton,
 	TextAreaField,
 	TextField,
@@ -38,15 +39,12 @@ import {
 	RecipeIngredients,
 	RecipeIngredientsItem,
 } from '@gnocchi.biscuits/verdant';
-import {
-	CheckIcon,
-	DotsVerticalIcon,
-	DragHandleDots2Icon,
-	TrashIcon,
-} from '@radix-ui/react-icons';
+import { CheckIcon, DragHandleDots2Icon } from '@radix-ui/react-icons';
 import classNames from 'classnames';
-import { useState } from 'react';
+import { Suspense, useState } from 'react';
+import { useSubRecipeIds } from '../hooks.js';
 import { NoteEditor } from './NoteEditor.jsx';
+import { SubRecipeEditorButton } from './SubRecipeEditorButton.jsx';
 
 export interface RecipeIngredientsEditorProps {
 	recipe: Recipe;
@@ -94,6 +92,7 @@ export function RecipeIngredientsEditor({
 					</div>
 				</SortableContext>
 			</DndContext>
+			<EmbeddedRecipeIngredientsEditors recipe={recipe} />
 			<AddIngredientsForm ingredients={ingredients} recipeId={id} />
 		</div>
 	);
@@ -176,7 +175,7 @@ function IngredientMenu({
 			<DropdownMenu modal={false}>
 				<DropdownMenuTrigger asChild>
 					<Button size="icon" color="ghost">
-						<DotsVerticalIcon />
+						<Icon name="dots" />
 					</Button>
 				</DropdownMenuTrigger>
 				<DropdownMenuContent>
@@ -202,7 +201,7 @@ function IngredientMenu({
 					>
 						<span>Delete</span>
 						<DropdownMenuItemRightSlot>
-							<TrashIcon />
+							<Icon name="trash" />
 						</DropdownMenuItemRightSlot>
 					</DropdownMenuItem>
 				</DropdownMenuContent>
@@ -324,5 +323,52 @@ function AddIngredientsForm({
 				</>
 			)}
 		</FormikForm>
+	);
+}
+
+function EmbeddedRecipeIngredientsEditors({ recipe }: { recipe: Recipe }) {
+	const embeddedIds = useSubRecipeIds(recipe);
+
+	if (Object.keys(embeddedIds).length === 0) {
+		return null;
+	}
+
+	return (
+		<Box direction="col" p="none">
+			{Object.entries(embeddedIds).map(([id, mult]) => (
+				<Suspense key={id}>
+					<EmbeddedRecipeIngredientsEditor
+						id={id}
+						multiplier={mult}
+						parent={recipe}
+					/>
+				</Suspense>
+			))}
+		</Box>
+	);
+}
+
+function EmbeddedRecipeIngredientsEditor({
+	id,
+	multiplier,
+	parent,
+}: {
+	id: string;
+	multiplier: number;
+	parent: Recipe;
+}) {
+	// just a simple display of title, mult, and edit button
+	const recipe = hooks.useRecipe(id);
+
+	const multText = ` (x${multiplier})`;
+
+	return (
+		<Box justify="between" items="center" p="none">
+			<span className="font-bold">
+				Sub-recipe: {recipe?.get('title') ?? '<broken link>'}
+				{multText}
+			</span>
+			<SubRecipeEditorButton parentRecipe={parent} subRecipeId={id} />
+		</Box>
 	);
 }

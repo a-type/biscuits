@@ -22,9 +22,9 @@ export function DeleteColorAction({ project }: { project: Project }) {
 		<ActionButton
 			color="destructive"
 			onClick={deleteSelectedColor}
-			icon={<Icon name="trash" />}
 			visible={!!selectedId}
 		>
+			<Icon name="trash" />
 			Delete color
 		</ActionButton>
 	);

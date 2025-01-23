@@ -222,7 +222,7 @@ function FoodDetailView({
 				<Switch
 					checked={food.get('doNotSuggest')}
 					onCheckedChange={(val) => food.set('doNotSuggest', val === true)}
-					className="bg-attention"
+					className="[&[data-state=checked]]:bg-attention"
 				/>
 				<span>Do not suggest</span>
 			</label>

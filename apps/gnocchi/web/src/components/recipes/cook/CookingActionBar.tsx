@@ -34,7 +34,9 @@ import {
 } from '@biscuits/client';
 import { useQuery } from '@biscuits/graphql';
 import { Recipe } from '@gnocchi.biscuits/verdant';
-import { Cross2Icon } from '@radix-ui/react-icons';
+import { RecipePinToggle } from '../viewer/RecipePinToggle.jsx';
+import { RecipePublishControl } from '../viewer/RecipePublishControl.jsx';
+import { RecipeViewerEditButton } from '../viewer/RecipeViewerEditButton.jsx';
 
 export interface CookingActionBarProps {
 	recipe: Recipe;
@@ -43,10 +45,16 @@ export interface CookingActionBarProps {
 export function CookingActionBar({ recipe }: CookingActionBarProps) {
 	return (
 		<ActionBar>
+			<RecipePinToggle recipe={recipe} className="mr-2" />
 			<CookingPeople recipeId={recipe.get('id')} />
 			<AddChefsAction />
 			<StopCookingAction recipe={recipe} />
 			<NoteToggleAction recipe={recipe} />
+			<RecipeViewerEditButton
+				recipe={recipe}
+				className="font-normal h-[30px]"
+			/>
+			<RecipePublishControl recipe={recipe} />
 		</ActionBar>
 	);
 }
@@ -108,11 +116,8 @@ function AddChefsAction() {
 			}}
 		>
 			<DialogTrigger asChild>
-				<ActionButton
-					visible={showTip && !dismissed}
-					icon={<Icon name="add_person" />}
-					color="accent"
-				>
+				<ActionButton visible={showTip && !dismissed} color="accent">
+					<Icon name="add_person" />
 					<span className="hidden sm:display-inline">Invite chefs</span>
 				</ActionButton>
 			</DialogTrigger>
@@ -165,11 +170,8 @@ function StopCookingAction({ recipe }: { recipe: Recipe }) {
 	};
 
 	return (
-		<ActionButton
-			visible={!!session}
-			icon={<Cross2Icon />}
-			onClick={stopCooking}
-		>
+		<ActionButton visible={!!session} onClick={stopCooking}>
+			<Icon name="x" />
 			Stop cooking
 		</ActionButton>
 	);
@@ -183,7 +185,8 @@ function NoteToggleAction({ recipe }: { recipe: Recipe }) {
 	return (
 		<Popover>
 			<PopoverTrigger asChild>
-				<ActionButton icon={<Icon name="note" />} color="primary">
+				<ActionButton color="primary">
+					<Icon name="note" />
 					<span className="hidden sm:display-inline">Add note</span>
 				</ActionButton>
 			</PopoverTrigger>

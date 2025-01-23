@@ -1,6 +1,5 @@
 import { hooks } from '@/stores/groceries/index.js';
-import { ActionButton, Tooltip } from '@a-type/ui';
-import { ResetIcon } from '@radix-ui/react-icons';
+import { ActionButton, Icon, Tooltip } from '@a-type/ui';
 
 export function UndoAction({ showName }: { showName?: boolean }) {
 	const canUndo = hooks.useCanUndo();
@@ -13,9 +12,9 @@ export function UndoAction({ showName }: { showName?: boolean }) {
 				onClick={() => {
 					groceries.undoHistory.undo();
 				}}
-				icon={<ResetIcon />}
 				visuallyDisabled={!canUndo}
 			>
+				<Icon name="undo" />
 				{showName ? 'Undo' : undefined}
 			</ActionButton>
 		</Tooltip>

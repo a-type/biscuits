@@ -22,8 +22,15 @@ export function lookupUnit(unitName: string | null): UnitDescription | null {
     return (
       unitName.toLowerCase() === abbr ||
       unitName.toLowerCase() === singular.toLowerCase() ||
-      unitName.toLowerCase() === plural.toLowerCase()
+      unitName.toLowerCase() === plural.toLowerCase() ||
+      unitName.toLowerCase() === translateBritish(singular.toLowerCase())
     );
   });
   return match || null;
+}
+
+function translateBritish(word: string) {
+  if (word.endsWith('re')) {
+    return word.slice(0, -2) + 'er';
+  }
 }

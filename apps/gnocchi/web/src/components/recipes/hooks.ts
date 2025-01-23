@@ -51,7 +51,7 @@ export function useCookSessionAction(recipe: Recipe | null) {
 						recipe.set('lastCookedAt', Date.now());
 						session = recipe.get('session');
 					})
-					.flush();
+					.commit();
 			}
 			assert(session);
 			action(session);
@@ -184,4 +184,37 @@ export function useWatchChanges(recipe: Recipe) {
 			unsubs.forEach((unsub) => unsub());
 		};
 	}, [ingredients, instructions, prelude]);
+}
+
+export function useSubRecipeIds(recipe: Recipe) {
+	const { instructions, subRecipeMultipliers } = hooks.useWatch(recipe);
+	hooks.useWatch(instructions, { deep: true });
+	hooks.useWatch(subRecipeMultipliers);
+	return getSubRecipesWithMultipliers(recipe);
+}
+
+export function getSubRecipeIds(recipe: Recipe) {
+	const instructions = recipe.get('instructions');
+	const snapshot = instructions.getSnapshot();
+
+	const subRecipeIds: string[] = (snapshot.content ?? [])
+		.map((node: any) => node?.attrs?.subRecipeId)
+		.filter((id: string) => !!id);
+
+	return subRecipeIds;
+}
+
+export function getSubRecipesWithMultipliers(recipe: Recipe) {
+	const subRecipeIds = getSubRecipeIds(recipe);
+	const subRecipeMultipliers = recipe.get('subRecipeMultipliers');
+
+	const withMultipliers = subRecipeIds.reduce<{ [id: string]: number }>(
+		(acc, id) => {
+			acc[id] = subRecipeMultipliers.get(id) ?? 1;
+			return acc;
+		},
+		{},
+	);
+
+	return withMultipliers;
 }

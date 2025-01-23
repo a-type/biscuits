@@ -142,11 +142,13 @@ export const AddBarImpl = forwardRef<HTMLDivElement, AddBarProps>(
 					</PopoverContent>
 				</Popover>
 				{addingRecipe && (
-					<AddToListDialog
-						recipe={addingRecipe}
-						onOpenChange={clearAddingRecipe}
-						open
-					/>
+					<Suspense>
+						<AddToListDialog
+							recipe={addingRecipe}
+							onOpenChange={clearAddingRecipe}
+							open
+						/>
+					</Suspense>
 				)}
 			</>
 		);

@@ -3,18 +3,18 @@ import { ActionButton, Icon, Tooltip } from '@a-type/ui';
 
 export function UndoAction({ showName }: { showName?: boolean }) {
 	const canUndo = hooks.useCanUndo();
-	const groceries = hooks.useClient();
+	const client = hooks.useClient();
 
 	return (
 		<Tooltip content={!canUndo ? 'Nothing to undo' : 'Undo'}>
 			<ActionButton
 				size="small"
 				onClick={() => {
-					groceries.undoHistory.undo();
+					client.undoHistory.undo();
 				}}
-				icon={<Icon name="undo" />}
 				visuallyDisabled={!canUndo}
 			>
+				<Icon name="undo" />
 				{showName ? 'Undo' : undefined}
 			</ActionButton>
 		</Tooltip>

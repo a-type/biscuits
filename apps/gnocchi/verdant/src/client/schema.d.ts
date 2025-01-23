@@ -1,2 +1,2 @@
-export * from "./schemaVersions/v44.js";
-export { default } from "./schemaVersions/v44.js";
+export * from "./schemaVersions/v45.js";
+export { default } from "./schemaVersions/v45.js";

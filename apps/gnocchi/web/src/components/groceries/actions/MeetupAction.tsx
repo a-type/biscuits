@@ -1,7 +1,6 @@
-import { MeetupIcon } from '@/components/sync/meetup/MeetupIcon.jsx';
 import { MeetupSelect } from '@/components/sync/meetup/MeetupSelect.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { ActionButton, SelectValue } from '@a-type/ui';
+import { ActionButton, Icon, SelectValue } from '@a-type/ui';
 
 export interface MeetupActionProps {}
 
@@ -13,10 +12,10 @@ export function MeetupAction({}: MeetupActionProps) {
 			{(location) => (
 				<ActionButton
 					size="small"
-					icon={<MeetupIcon />}
 					color={!!location ? 'accent' : 'default'}
 					visible={hasPeers}
 				>
+					<Icon name="location" />
 					<SelectValue />
 				</ActionButton>
 			)}

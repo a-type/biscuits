@@ -1,4 +1,3 @@
-import { useLookupFoodName } from '@/components/foods/FoodName.jsx';
 import { Icon } from '@/components/icons/Icon.jsx';
 import { useUnitConversion } from '@/components/recipes/viewer/unitConversion.js';
 import { hooks } from '@/stores/groceries/index.js';
@@ -86,10 +85,8 @@ export function RecipeIngredientViewer({
 	}, [setConversion]);
 
 	const add = hooks.useAddIngredients();
-	const foodName = useLookupFoodName(food);
-	const client = hooks.useClient();
 	const addToList = useCallback(async () => {
-		add([ingredient], { multiplier, recipeId, showToast: true });
+		add([ingredient.getSnapshot()], { multiplier, recipeId, showToast: true });
 	}, [ingredient, multiplier, add, recipeId]);
 
 	return (
@@ -121,7 +118,9 @@ export function RecipeIngredientViewer({
 									</Button>
 								</DropdownMenuTrigger>
 								<DropdownMenuContent>
-									<DropdownMenuLabel>Convert to:</DropdownMenuLabel>
+									<DropdownMenuLabel className="text-sm font-bold py-1 pl-3">
+										Convert to:
+									</DropdownMenuLabel>
 									{convertOptions.map((opt) => (
 										<DropdownMenuItem
 											key={opt}

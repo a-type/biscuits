@@ -1,5 +1,5 @@
 import { hooks } from '@/stores/groceries/index.js';
-import { Button } from '@a-type/ui';
+import { Button, clsx } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import addWeeks from 'date-fns/addWeeks';
 import { useCallback } from 'react';
@@ -7,11 +7,12 @@ import { PinIcon } from '../collection/PinIcon.jsx';
 
 export interface RecipePinToggleProps {
 	recipe: Recipe;
+	className?: string;
 }
 
 const THREE_WEEKS_AGO = addWeeks(Date.now(), -3).getTime();
 
-export function RecipePinToggle({ recipe }: RecipePinToggleProps) {
+export function RecipePinToggle({ recipe, className }: RecipePinToggleProps) {
 	const { pinnedAt } = hooks.useWatch(recipe);
 	const isPinned = !!pinnedAt && pinnedAt > THREE_WEEKS_AGO;
 
@@ -28,7 +29,7 @@ export function RecipePinToggle({ recipe }: RecipePinToggleProps) {
 			size="icon"
 			color={isPinned ? 'primary' : 'default'}
 			onClick={togglePinned}
-			className="relative"
+			className={clsx('relative', className)}
 		>
 			<PinIcon isPinned={isPinned} />
 		</Button>

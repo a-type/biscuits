@@ -16,8 +16,8 @@ import {
 	migrations,
 	Recipe,
 	RecipeIngredients,
-	RecipeIngredientsItem,
 	RecipeIngredientsItemInit,
+	RecipeIngredientsItemSnapshot,
 	RecipeInit,
 	UserInfo,
 } from '@gnocchi.biscuits/verdant';
@@ -299,7 +299,7 @@ export const hooks = createHooks<Presence, Profile>({
 	useAddIngredients: (client) =>
 		useCallback(
 			async (
-				ingredients: RecipeIngredientsItem[],
+				ingredients: RecipeIngredientsItemSnapshot[],
 				{
 					recipeId,
 					multiplier = 1,
@@ -316,9 +316,8 @@ export const hooks = createHooks<Presence, Profile>({
 			) => {
 				const processed = await Promise.all(
 					ingredients.map(async (ingredient) => {
-						const totalQuantity =
-							ingredient.get('quantity') * (multiplier || 1);
-						const foodName = ingredient.get('food');
+						const totalQuantity = ingredient.quantity * (multiplier || 1);
+						const foodName = ingredient.food;
 						const food = foodName
 							? pickBestNameMatch(
 									await client.foods.findAll({
@@ -330,7 +329,7 @@ export const hooks = createHooks<Presence, Profile>({
 									foodName,
 							  )
 							: undefined;
-						const unit = ingredient.get('unit');
+						const unit = ingredient.unit;
 						const textOverride =
 							multiplier !== 1
 								? `${totalQuantity} ${
@@ -349,10 +348,10 @@ export const hooks = createHooks<Presence, Profile>({
 								: foodName ?? undefined;
 
 						return {
-							original: ingredient.get('text'),
+							original: ingredient.text,
 							quantity: textOverride ? 1 : totalQuantity,
 							unit: unit,
-							food: ingredient.get('food') || 'Unknown',
+							food: ingredient.food || 'Unknown',
 							// for items added from this view, we add the food
 							// name as the text, not the ingredient text
 							textOverride,
@@ -930,7 +929,12 @@ export async function addItems(
 				const name = typeof lines[0] === 'string' ? lines[0] : lines[0].food;
 				message = toastMessage(name);
 			} else {
-				message = 'Added ' + lines[0];
+				const line = lines[0];
+				if (typeof line === 'string') {
+					message = 'Added ' + line;
+				} else {
+					message = 'Added ' + line.textOverride || line.food;
+				}
 			}
 		} else {
 			message = 'Added ' + lines.length + ' items';

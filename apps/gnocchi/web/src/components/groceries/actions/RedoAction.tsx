@@ -1,6 +1,5 @@
 import { hooks } from '@/stores/groceries/index.js';
-import { ActionButton } from '@a-type/ui';
-import { ResetIcon } from '@radix-ui/react-icons';
+import { ActionButton, Icon } from '@a-type/ui';
 
 export function RedoAction({ showName }: { showName?: boolean }) {
 	const canRedo = hooks.useCanRedo();
@@ -12,9 +11,9 @@ export function RedoAction({ showName }: { showName?: boolean }) {
 			onClick={() => {
 				groceries.undoHistory.redo();
 			}}
-			icon={<ResetIcon style={{ transform: 'scaleX(-1)' }} />}
 			visible={canRedo}
 		>
+			<Icon name="undo" className="-scale-x-100" />
 			{showName ? 'Redo' : undefined}
 		</ActionButton>
 	);

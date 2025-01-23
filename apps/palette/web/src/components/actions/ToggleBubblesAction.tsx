@@ -9,11 +9,11 @@ export function ToggleBubblesAction({}: ToggleBubblesActionProps) {
 
 	return (
 		<ActionButton
-			icon={<Icon name={showBubbles ? 'eye' : 'eyeClosed'} />}
 			toggled={showBubbles}
 			toggleMode="state-only"
 			onClick={() => (toolState.showBubbles = !showBubbles)}
 		>
+			<Icon name={showBubbles ? 'eye' : 'eyeClosed'} />
 			Dots
 		</ActionButton>
 	);

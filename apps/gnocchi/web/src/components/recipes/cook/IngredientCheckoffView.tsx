@@ -12,19 +12,25 @@ import { RecipeIngredientViewer } from '../viewer/RecipeIngredientViewer.jsx';
 export interface IngredientCheckoffViewProps {
 	recipe: Recipe;
 	className?: string;
+	multiplierOverride?: number;
 }
 
 export const IngredientCheckoffView = forwardRef<
 	HTMLUListElement,
 	IngredientCheckoffViewProps
->(function IngredientCheckoffView({ recipe, className }, ref) {
+>(function IngredientCheckoffView(
+	{ recipe, className, multiplierOverride },
+	ref,
+) {
 	const session = useActiveCookingSession(recipe);
 	hooks.useWatch(session);
 	const sessionAction = useCookSessionAction(recipe);
 	const completedIngredients = session?.get('completedIngredients') ?? null;
 	hooks.useWatch(completedIngredients);
-	const { ingredients, multiplier } = hooks.useWatch(recipe);
+	const { ingredients, multiplier: baseMultiplier } = hooks.useWatch(recipe);
 	hooks.useWatch(ingredients);
+
+	const multiplier = multiplierOverride ?? baseMultiplier;
 
 	return (
 		<ul

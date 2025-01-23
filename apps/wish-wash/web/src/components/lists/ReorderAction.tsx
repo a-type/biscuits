@@ -12,8 +12,8 @@ export function ReorderAction({ className }: ReorderActionProps) {
 		<ActionButton
 			onClick={() => setReordering(!reordering)}
 			className={className}
-			icon={<Icon name="convert" />}
 		>
+			<Icon name="convert" />
 			{reordering ? 'Done' : 'Reorder'}
 		</ActionButton>
 	);

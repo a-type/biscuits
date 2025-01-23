@@ -1,9 +1,7 @@
-import { Icon } from '@/components/icons/Icon.jsx';
 import { AddImagePrompt } from '@/components/recipes/cook/AddImagePrompt.jsx';
 import { AddNotePrompt } from '@/components/recipes/cook/AddNotePrompt.jsx';
 import { CookingActionBar } from '@/components/recipes/cook/CookingActionBar.jsx';
 import { CookingToolbar } from '@/components/recipes/cook/CookingToolbar.jsx';
-import { IngredientCheckoffView } from '@/components/recipes/cook/IngredientCheckoffView.jsx';
 import { InstructionsProvider } from '@/components/recipes/editor/InstructionStepNodeView.jsx';
 import { HeaderBar } from '@/components/recipes/layout/HeaderBar.jsx';
 import { RecipesNowPlaying } from '@/components/recipes/nowPlaying/RecipesNowPlaying.jsx';
@@ -13,7 +11,16 @@ import { usePageTitle } from '@/hooks/usePageTitle.jsx';
 import { useWakeLock } from '@/hooks/useWakeLock.js';
 import { saveHubRecipeOnboarding } from '@/onboarding/saveHubRecipeOnboarding.js';
 import { hooks } from '@/stores/groceries/index.js';
-import { Chip, Divider, H1, H2, P, PageNowPlaying } from '@a-type/ui';
+import {
+	Button,
+	Chip,
+	Divider,
+	H1,
+	H2,
+	Icon,
+	P,
+	PageNowPlaying,
+} from '@a-type/ui';
 import { formatMinutes } from '@a-type/utils';
 import { OnboardingBanner } from '@biscuits/client';
 import { Recipe } from '@gnocchi.biscuits/verdant';
@@ -36,13 +43,11 @@ import {
 	TitleContainer,
 } from '../layout/TitleAndImageLayout.jsx';
 import { AddToListButton } from './AddToListButton.jsx';
+import { RecipeIngredientsViewer } from './RecipeIngredientsViewer.jsx';
 import { RecipeInstructionsViewer } from './RecipeInstructionsViewer.jsx';
 import { RecipeMainImageViewer } from './RecipeMainImageViewer.jsx';
 import { RecipeMultiplierField } from './RecipeMultiplierField.jsx';
-import { RecipePinToggle } from './RecipePinToggle.jsx';
 import { RecipePreludeViewer } from './RecipePreludeViewer.jsx';
-import { RecipePublishControl } from './RecipePublishControl.jsx';
-import { RecipeViewerEditButton } from './RecipeViewerEditButton.jsx';
 
 export interface RecipeOverviewProps {
 	slug: string;
@@ -97,15 +102,26 @@ function RecipeOverviewContent({ recipe }: { recipe: Recipe }) {
 					<TitleContainer>
 						<div className="w-full flex flex-col items-start self-start text-xs my-3 gap-4">
 							<H1>{title}</H1>
-							<RecipeNote recipe={recipe} />
-
-							<div className="flex flex-row gap-1 flex-wrap items-center w-full">
-								<RecipePinToggle recipe={recipe} />
-								<RecipeViewerEditButton recipe={recipe} />
-								<RecipePublishControl recipe={recipe} />
+							<div className="flex flex-row gap-2 items-start">
+								<RecipeNote recipe={recipe} />
 							</div>
+
 							<div className="flex flex-col justify-between items-start w-full gap-3">
 								<div className="flex flex-row gap-1 flex-wrap">
+									<Chip
+										asChild
+										className="cursor-pointer"
+										onClick={() => {
+											document
+												.getElementById('#steps')
+												?.scrollIntoView({ behavior: 'smooth' });
+										}}
+									>
+										<Button color="ghost" className="font-normal text-xs">
+											<Icon name="arrowDown" />
+											<span>Jump to steps</span>
+										</Button>
+									</Chip>
 									<Chip>Created on {format(createdAt, 'LLL do, yyyy')}</Chip>
 									{!!totalTimeMinutes && (
 										<Chip>Total time: {formatMinutes(totalTimeMinutes)}</Chip>
@@ -155,21 +171,18 @@ function RecipeOverviewContent({ recipe }: { recipe: Recipe }) {
 						<H2>Ingredients</H2>
 						<RecipeMultiplierField recipe={recipe} />
 					</div>
-					{/* Seems redundant now? */}
-					<AddToListButton color="primary" recipe={recipe}>
-						<Icon name="add_to_list" />
-						<span>Add to list...</span>
-					</AddToListButton>
-					<IngredientCheckoffView recipe={recipe} />
+					<div className="flex flex-row gap-2 justify-between items-center w-full">
+						<AddToListButton size="small" color="primary" recipe={recipe}>
+							<Icon name="add_to_list" />
+							<span>Bulk add...</span>
+						</AddToListButton>
+					</div>
+					<RecipeIngredientsViewer recipe={recipe} />
 				</div>
 				<Divider />
 				<div className="w-full flex flex-col gap-4" ref={stepsRef}>
-					<H2>Instructions</H2>
-					<InstructionsProvider
-						isEditing={false}
-						showTools
-						recipeId={recipe.get('id')}
-					>
+					<H2 id="#steps">Steps</H2>
+					<InstructionsProvider isEditing={false} recipeId={recipe.get('id')}>
 						<RecipeInstructionsViewer recipe={recipe} />
 					</InstructionsProvider>
 				</div>

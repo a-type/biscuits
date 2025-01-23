@@ -19,7 +19,10 @@ export function AddItemAction() {
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<ActionButton icon={<PlusIcon />}>Add items</ActionButton>
+				<ActionButton>
+					<PlusIcon />
+					Add items
+				</ActionButton>
 			</DialogTrigger>
 			<DialogContent>
 				<FormikForm

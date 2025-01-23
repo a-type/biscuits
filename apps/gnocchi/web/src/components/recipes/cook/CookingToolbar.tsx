@@ -6,7 +6,7 @@ import { animated, useSpring } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
 import classNames from 'classnames';
 import { useCallback, useRef } from 'react';
-import { IngredientCheckoffView } from './IngredientCheckoffView.jsx';
+import { RecipeIngredientsViewer } from '../viewer/RecipeIngredientsViewer.jsx';
 
 export interface CookingToolbarProps {
 	recipe: Recipe;
@@ -24,7 +24,7 @@ export function CookingToolbar({ recipe, className }: CookingToolbarProps) {
 	return (
 		<div
 			className={classNames(
-				'w-full flex flex-col items-center relative bottom-[calc(0.25rem*-1)] mb-2 max-w-600px',
+				'w-full flex flex-col items-center relative bottom-[calc(0.25rem*-1)] mb-2 ',
 				className,
 			)}
 		>
@@ -88,7 +88,7 @@ export function CookingToolbar({ recipe, className }: CookingToolbarProps) {
 				}}
 			>
 				<div className="overflow-overlay h-full mt-3 pb-[calc(40px+env(safe-area-inset-bottom,0px))] flex flex-col items-center px-1">
-					<IngredientCheckoffView recipe={recipe} className="important:p-2" />
+					<RecipeIngredientsViewer recipe={recipe} className="important:p-2" />
 				</div>
 			</animated.div>
 		</div>
