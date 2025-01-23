@@ -81,7 +81,7 @@ export const CategorySelect = withSuspense(function CategorySelect({
 					</DialogSelectList>
 
 					<DialogActions className="justify-between">
-						<Button color="primary" onClick={() => setState('create')}>
+						<Button color="ghost" onClick={() => setState('create')}>
 							New category
 						</Button>
 						<DialogClose asChild>
