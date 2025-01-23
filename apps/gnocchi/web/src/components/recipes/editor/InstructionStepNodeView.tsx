@@ -163,21 +163,24 @@ export function InstructionStepNodeView({
 				className={classNames(
 					'grid grid-areas-[label_label_label]-[tools_content_endTools]-[note_note_note]-[embed_embed_embed]',
 					'grid-cols-[min-content_1fr_min-content] grid-rows-[repeat(3,min-content)]',
-					'mb-4 rounded-md w-full transition-colors',
+					'mb-2 rounded-md w-full transition-colors items-start',
 					completed && !isEditing && 'opacity-60',
 					isAssignedToMe && !isEditing && 'bg-primaryWash mb-2',
 				)}
 			>
 				<div
 					className={clsx(
-						'[grid-area:content] relative flex flex-row gap-2 items-start justify-between',
+						'[grid-area:content] relative flex flex-row gap-2 items-start pt-2 justify-between',
 						!subRecipeId && 'items-center',
 					)}
 				>
 					{subRecipeId ? (
 						<InstructionsContext value={embeddedCtx}>
 							<Suspense fallback={<div>Loading sub-recipe</div>}>
-								<EmbeddedSubRecipeInstructionsToggle recipeId={subRecipeId} />
+								<EmbeddedSubRecipeInstructionsToggle
+									recipeId={subRecipeId}
+									className="mt--1"
+								/>
 							</Suspense>
 							{isEditing && (
 								<Button size="icon" color="ghost" onClick={removeSubRecipe}>
@@ -203,7 +206,7 @@ export function InstructionStepNodeView({
 				</div>
 				<CollapsibleRoot
 					open={showNote}
-					className="[grid-area:note] mt-2 ml-auto"
+					className="[grid-area:note] mt-2 ml-auto w-max-content max-w-400px"
 					contentEditable={false}
 				>
 					<CollapsibleContent>
@@ -253,7 +256,7 @@ export function InstructionStepNodeView({
 					</div>
 				)}
 				<div
-					className="flex flex-col items-center gap-2 [grid-area:endTools] w-32px ml-3"
+					className="flex flex-col items-center gap-1 [grid-area:endTools] w-32px ml-3"
 					contentEditable={false}
 				>
 					{!isEditing && isSubscribed && (
