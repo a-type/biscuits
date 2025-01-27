@@ -61,11 +61,7 @@ export function AddToListDialog({
 
 	const addItems = hooks.useAddIngredients();
 	const allIngredients = useAllAddableIngredients(recipe);
-	const [checkedItems, setCheckedItems] = useState<boolean[]>(() => {
-		return new Array(allIngredients.length).fill(false).map((_, i) => {
-			return !allIngredients[i].isSectionHeader;
-		});
-	});
+	const [unchecked, setUnchecked] = useState({} as Record<string, boolean>);
 
 	return (
 		<Dialog open={isReallyOpen} onOpenChange={setIsReallyOpen} {...rest}>
@@ -80,44 +76,51 @@ export function AddToListDialog({
 						onChange={setMultiplier}
 					/>
 					<ActionBar>
-						<ActionButton
-							onClick={() => setCheckedItems((prev) => prev.map(() => true))}
-						>
+						<ActionButton onClick={() => setUnchecked({})}>
 							<CheckboxIcon />
 							Select all
 						</ActionButton>
 						<ActionButton
-							onClick={() => setCheckedItems((prev) => prev.map(() => false))}
+							onClick={() =>
+								setUnchecked(
+									allIngredients.reduce<Record<string, boolean>>(
+										(acc, item) => {
+											acc[item.id] = true;
+											return acc;
+										},
+										{},
+									),
+								)
+							}
 						>
 							<SquareIcon />
 							Select none
 						</ActionButton>
 					</ActionBar>
 					<ul className="flex flex-col items-start list-none p-0 m-0 gap-3 w-full">
-						{allIngredients.map((ingredient, index) => {
+						{allIngredients.map((ingredient) => {
 							const isSectionHeader = ingredient.isSectionHeader;
 							return (
 								<li
-									key={index}
+									key={ingredient.id}
 									className="flex flex-row items-start gap-2 w-full"
 								>
 									<Checkbox
-										checked={checkedItems[index]}
+										checked={!unchecked[ingredient.id]}
 										onCheckedChange={(checked) => {
-											setCheckedItems((prev) => {
-												const next = [...prev];
-												next[index] = checked === true;
-												return next;
-											});
+											setUnchecked((v) => ({
+												...v,
+												[ingredient.id]: !checked,
+											}));
 										}}
 										className={
 											isSectionHeader ? '[visibility:hidden]' : undefined
 										}
 										disabled={isSectionHeader}
-										id={`ingredient-${index}`}
+										id={`ingredient-${ingredient.id}`}
 									/>
 									<label
-										htmlFor={`ingredient-${index}`}
+										htmlFor={`ingredient-${ingredient.id}`}
 										className={classNames(
 											'flex-1 flex flex-col gap-1',
 											isSectionHeader ? 'font-bold' : undefined,
@@ -153,8 +156,7 @@ export function AddToListDialog({
 							try {
 								addItems(
 									allIngredients.filter(
-										(item, index) =>
-											checkedItems[index] && !item.isSectionHeader,
+										(item) => !unchecked[item.id] && !item.isSectionHeader,
 									),
 									{
 										title: recipe.get('title'),
@@ -192,7 +194,8 @@ function useAllAddableIngredients(recipe: Recipe) {
 	const client = hooks.useClient();
 
 	const view = getIngredientsView(recipe.get('id'), client);
-	const ingredients = view.ready ? view.result : use(view.loaded);
+	const ingredients = view.ready ? view.result : [];
+	use(view.loaded);
 	return ingredients;
 }
 
