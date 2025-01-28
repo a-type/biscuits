@@ -52,10 +52,11 @@ export function UserMenu({
 	return (
 		<DropdownMenu>
 			<DropdownMenu.Trigger asChild>
-				{children ?? (!isLoggedIn && loading && !isOffline) ?
+				{(children ?? (!isLoggedIn && loading && !isOffline)) ?
 					<Button size="small" color="ghost" className={className}>
 						<Icon name="refresh" className="animate-spin" />
-						<Icon name="gear" />
+						{/* match height with avatar */}
+						<Icon name="gear" className="h-25px" />
 					</Button>
 				: isLoggedIn ?
 					<Button size="small" color="ghost" className={className}>
@@ -65,14 +66,14 @@ export function UserMenu({
 								<PresencePeople />
 							</Suspense>
 						</ErrorBoundary>
-						<Icon name="gear" />
+						<Icon name="gear" className="h-25px" />
 					</Button>
 				:	<Button size="small" color="ghost" className={className}>
 						<Icon
 							name="refreshDisabled"
 							className={isOffline ? 'color-attention' : ''}
 						/>
-						<Icon name="gear" />
+						<Icon name="gear" className="h-25px" />
 					</Button>
 				}
 			</DropdownMenu.Trigger>
