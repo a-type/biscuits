@@ -70,7 +70,11 @@ export function toYield(yieldStr: string) {
 	if (!yieldStr) {
 		return null;
 	}
-	return parseInt(yieldStr.toLowerCase().replace('servings', ''));
+	const val = parseInt(yieldStr.toLowerCase().replace('servings', ''));
+	if (isNaN(val)) {
+		return null;
+	}
+	return val;
 }
 
 export function findFirstMatch($: CheerioAPI, selectors: string[]) {
