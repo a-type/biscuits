@@ -70,7 +70,7 @@ export const authHandlers = createHandlers({
 		}) => {
 			const password =
 				plaintextPassword ? await hashPassword(plaintextPassword) : undefined;
-			return db.transaction().execute(async (tx) => {
+			const result = await db.transaction().execute(async (tx) => {
 				const planResult = await tx
 					.insertInto('Plan')
 					.values({
@@ -106,6 +106,17 @@ export const authHandlers = createHandlers({
 
 				return userResult;
 			});
+			email
+				.sendMail({
+					to: 'hi@biscuits.club',
+					subject: 'New Biscuits User',
+					text: `A new user has signed up: ${user.email}`,
+					html: `<p>A new user has signed up: ${user.email}</p>`,
+				})
+				.catch((error) => {
+					console.error('Failed to send new user email', error);
+				});
+			return result;
 		},
 		insertVerificationCode: async ({ expiresAt, ...verificationCode }) => {
 			await db
