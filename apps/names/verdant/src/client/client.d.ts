@@ -11,6 +11,11 @@ export * from "@verdant-web/store";
 
 export class Client<Presence = any, Profile = any> {
   readonly people: CollectionQueries<Person, PersonInit, PersonFilter>;
+  readonly relationships: CollectionQueries<
+    Relationship,
+    RelationshipInit,
+    RelationshipFilter
+  >;
 
   sync: BaseClient<Presence, Profile>["sync"];
   undoHistory: BaseClient<Presence, Profile>["undoHistory"];
@@ -112,18 +117,7 @@ export type PersonGeolocationLatitude = number;
 export type PersonGeolocationLongitude = number;
 export type PersonNote = string;
 export type PersonPhoto = string | null;
-export type PersonRelationships = ListEntity<
-  PersonRelationshipsInit,
-  PersonRelationshipsDestructured,
-  PersonRelationshipsSnapshot
->;
-export type PersonRelationshipsItem = ObjectEntity<
-  PersonRelationshipsItemInit,
-  PersonRelationshipsItemDestructured,
-  PersonRelationshipsItemSnapshot
->;
-export type PersonRelationshipsItemPersonId = string;
-export type PersonRelationshipsItemType = string;
+export type PersonCreatedBy = string;
 export type PersonInit = {
   id?: string;
   createdAt?: number;
@@ -131,15 +125,13 @@ export type PersonInit = {
   geolocation?: PersonGeolocationInit;
   note?: string | null;
   photo?: File | null;
-  relationships?: PersonRelationshipsInit;
+  createdBy?: string | null;
 };
 
 export type PersonGeolocationInit = {
   latitude: number;
   longitude: number;
 } | null;
-export type PersonRelationshipsItemInit = { personId: string; type: string };
-export type PersonRelationshipsInit = PersonRelationshipsItemInit[];
 export type PersonDestructured = {
   id: string;
   createdAt: number;
@@ -147,18 +139,13 @@ export type PersonDestructured = {
   geolocation: PersonGeolocation;
   note: string | null;
   photo: EntityFile | null;
-  relationships: PersonRelationships;
+  createdBy: string | null;
 };
 
 export type PersonGeolocationDestructured = {
   latitude: number;
   longitude: number;
 };
-export type PersonRelationshipsItemDestructured = {
-  personId: string;
-  type: string;
-};
-export type PersonRelationshipsDestructured = PersonRelationshipsItem[];
 export type PersonSnapshot = {
   id: string;
   createdAt: number;
@@ -166,18 +153,13 @@ export type PersonSnapshot = {
   geolocation: PersonGeolocationSnapshot;
   note: string | null;
   photo: EntityFileSnapshot | null;
-  relationships: PersonRelationshipsSnapshot;
+  createdBy: string | null;
 };
 
 export type PersonGeolocationSnapshot = {
   latitude: number;
   longitude: number;
 } | null;
-export type PersonRelationshipsItemSnapshot = {
-  personId: string;
-  type: string;
-};
-export type PersonRelationshipsSnapshot = PersonRelationshipsItemSnapshot[];
 
 /** Index filters for Person **/
 
@@ -320,3 +302,69 @@ export type PersonFilter =
   | PersonLongitudeSortFilter
   | PersonLongitudeMatchFilter
   | PersonLongitudeRangeFilter;
+
+/** Generated types for Relationship */
+
+export type Relationship = ObjectEntity<
+  RelationshipInit,
+  RelationshipDestructured,
+  RelationshipSnapshot
+>;
+export type RelationshipId = string;
+export type RelationshipPersonAId = string;
+export type RelationshipPersonALabel = string;
+export type RelationshipPersonBId = string;
+export type RelationshipPersonBLabel = string;
+export type RelationshipInit = {
+  id?: string;
+  personAId: string;
+  personALabel?: string | null;
+  personBId: string;
+  personBLabel?: string | null;
+};
+
+export type RelationshipDestructured = {
+  id: string;
+  personAId: string;
+  personALabel: string | null;
+  personBId: string;
+  personBLabel: string | null;
+};
+
+export type RelationshipSnapshot = {
+  id: string;
+  personAId: string;
+  personALabel: string | null;
+  personBId: string;
+  personBLabel: string | null;
+};
+
+/** Index filters for Relationship **/
+
+export interface RelationshipPersonIdSortFilter {
+  where: "personId";
+  order: "asc" | "desc";
+}
+export interface RelationshipPersonIdMatchFilter {
+  where: "personId";
+  equals: string;
+  order?: "asc" | "desc";
+}
+export interface RelationshipPersonIdRangeFilter {
+  where: "personId";
+  gte?: string;
+  gt?: string;
+  lte?: string;
+  lt?: string;
+  order?: "asc" | "desc";
+}
+export interface RelationshipPersonIdStartsWithFilter {
+  where: "personId";
+  startsWith: string;
+  order?: "asc" | "desc";
+}
+export type RelationshipFilter =
+  | RelationshipPersonIdSortFilter
+  | RelationshipPersonIdMatchFilter
+  | RelationshipPersonIdRangeFilter
+  | RelationshipPersonIdStartsWithFilter;

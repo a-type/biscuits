@@ -22,6 +22,8 @@ import type {
   EntityFile,
   Person,
   PersonFilter,
+  Relationship,
+  RelationshipFilter,
 } from "./index.js";
 
 type HookConfig<F> = {
@@ -111,7 +113,12 @@ export interface GeneratedHooks<Presence, Profile> {
   useSyncStatus: () => boolean;
   useWatch<T extends AnyEntity<any, any, any> | null>(
     entity: T,
-    options?: { deep?: boolean },
+    options?: {
+      /** Observes changes to all sub-objects */
+      deep?: boolean;
+      /** Disables performance enhancements that prevent re-renders if the changed keys aren't used in the component */
+      untracked?: boolean;
+    },
   ): EntityDestructured<T>;
   useWatch<T extends EntityFile | null>(file: T): string | null;
   useOnChange<T extends AnyEntity<any, any, any> | null>(
@@ -181,6 +188,57 @@ export interface GeneratedHooks<Presence, Profile> {
     config?: Config,
   ) => [
     Person[],
+    { loadMore: () => void; hasMore: boolean; status: QueryStatus },
+  ];
+
+  useRelationship(id: string, config?: { skip?: boolean }): Relationship | null;
+  useRelationshipUnsuspended(
+    id: string,
+    config?: { skip?: boolean },
+  ): { data: Relationship | null; status: QueryStatus };
+  useOneRelationship: <Config extends HookConfig<RelationshipFilter>>(
+    config?: Config,
+  ) => Relationship | null;
+  useOneRelationshipsUnsuspended: <
+    Config extends HookConfig<RelationshipFilter>,
+  >(
+    config?: Config,
+  ) => { data: Relationship | null; status: QueryStatus };
+  useAllRelationships: <Config extends HookConfig<RelationshipFilter>>(
+    config?: Config,
+  ) => Relationship[];
+  useAllRelationshipsUnsuspended: <
+    Config extends HookConfig<RelationshipFilter>,
+  >(
+    config?: Config,
+  ) => { data: Relationship[]; status: QueryStatus };
+  useAllRelationshipsPaginated: <
+    Config extends HookConfig<RelationshipFilter> & {
+      pageSize?: number;
+      suspend?: false;
+    },
+  >(
+    config?: Config,
+  ) => [
+    Relationship[],
+    {
+      next: () => void;
+      previous: () => void;
+      setPage: (page: number) => void;
+      hasNext: boolean;
+      hasPrevious: boolean;
+      status: QueryStatus;
+    },
+  ];
+  useAllRelationshipsInfinite: <
+    Config extends HookConfig<RelationshipFilter> & {
+      pageSize?: number;
+      suspend?: false;
+    },
+  >(
+    config?: Config,
+  ) => [
+    Relationship[],
     { loadMore: () => void; hasMore: boolean; status: QueryStatus },
   ];
 }

@@ -120,6 +120,17 @@ export function UserMenu({
 						</a>
 					</DropdownMenu.Item>
 				}
+
+				{!disableAppSettings && (
+					<DropdownMenu.Item asChild>
+						<a href={`/settings`}>
+							App settings
+							<DropdownMenuItemRightSlot>
+								<Icon name="gear" />
+							</DropdownMenuItemRightSlot>
+						</a>
+					</DropdownMenu.Item>
+				)}
 				{getIsPWAInstalled() ?
 					<DropdownMenu.Item onClick={openPwaHackCatalog}>
 						More apps
@@ -136,16 +147,6 @@ export function UserMenu({
 						</a>
 					</DropdownMenu.Item>
 				}
-				{!disableAppSettings && (
-					<DropdownMenu.Item asChild>
-						<a href={`/settings`}>
-							App settings
-							<DropdownMenuItemRightSlot>
-								<Icon name="gear" />
-							</DropdownMenuItemRightSlot>
-						</a>
-					</DropdownMenu.Item>
-				)}
 				<DropdownMenu.Item asChild>
 					<a href={`${CONFIG.HOME_ORIGIN}/contact`} target="_blank">
 						Contact support

@@ -19,9 +19,9 @@ export function HomePage({}: HomePageProps) {
 	return (
 		<PageRoot>
 			<PageContent>
-				<Box container direction="col">
+				<Box container direction="col" gap="md">
 					<SingleTasks />
-					<Box container direction="col" surface border p="md">
+					<Box container direction="col" surface border p="md" gap="md">
 						<CardGrid>
 							{projects.map((proj) => (
 								<ProjectCard key={proj.uid} project={proj} />

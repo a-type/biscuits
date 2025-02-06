@@ -3,6 +3,7 @@ import { clientDescriptor } from '@/store.js';
 import { ErrorBoundary, H1, P, Provider as UIProvider } from '@a-type/ui';
 import { Provider, ReloadButton, useHasServerAccess } from '@biscuits/client';
 import { ReactNode, Suspense } from 'react';
+import { LocationRequestDialog } from './components/location/LocationRequestDialog.jsx';
 import { SuperBarProvider } from './components/superBar/SuperBarContext.jsx';
 import { hooks } from './hooks.js';
 
@@ -17,6 +18,7 @@ export function App({}: AppProps) {
 						<VerdantProvider>
 							<SuperBarProvider>
 								<Pages />
+								<LocationRequestDialog />
 							</SuperBarProvider>
 						</VerdantProvider>
 					</Provider>

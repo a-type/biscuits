@@ -9,18 +9,13 @@ export type PersonSnapshot = {
   geolocation: PersonGeolocationSnapshot;
   note: string | null;
   photo: EntityFileSnapshot | null;
-  relationships: PersonRelationshipsSnapshot;
+  createdBy: string | null;
 };
 
 export type PersonGeolocationSnapshot = {
   latitude: number;
   longitude: number;
 } | null;
-export type PersonRelationshipsItemSnapshot = {
-  personId: string;
-  type: string;
-};
-export type PersonRelationshipsSnapshot = PersonRelationshipsItemSnapshot[];
 export type PersonInit = {
   id?: string;
   createdAt?: number;
@@ -28,16 +23,30 @@ export type PersonInit = {
   geolocation?: PersonGeolocationInit;
   note?: string | null;
   photo?: File | null;
-  relationships?: PersonRelationshipsInit;
+  createdBy?: string | null;
 };
 
 export type PersonGeolocationInit = {
   latitude: number;
   longitude: number;
 } | null;
-export type PersonRelationshipsItemInit = { personId: string; type: string };
-export type PersonRelationshipsInit = PersonRelationshipsItemInit[];
+
+export type RelationshipSnapshot = {
+  id: string;
+  personAId: string;
+  personALabel: string | null;
+  personBId: string;
+  personBLabel: string | null;
+};
+export type RelationshipInit = {
+  id?: string;
+  personAId: string;
+  personALabel?: string | null;
+  personBId: string;
+  personBLabel?: string | null;
+};
 
 export type MigrationTypes = {
   people: { init: PersonInit; snapshot: PersonSnapshot };
+  relationships: { init: RelationshipInit; snapshot: RelationshipSnapshot };
 };

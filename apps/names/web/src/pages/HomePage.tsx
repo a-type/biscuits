@@ -1,7 +1,15 @@
 import { SuperBar } from '@/components/superBar/SuperBar.jsx';
 import { SuperBarCreate } from '@/components/superBar/SuperBarCreate.jsx';
 import { SuperBarSuggestions } from '@/components/superBar/SuperBarSuggestions.jsx';
-import { P, PageContent, PageRoot } from '@a-type/ui';
+import {
+	Box,
+	PageContent,
+	PageNowPlaying,
+	PageRoot,
+	Spinner,
+} from '@a-type/ui';
+import { AppIcon, UserMenu } from '@biscuits/client';
+import { Suspense } from 'react';
 
 export interface HomePageProps {}
 
@@ -9,10 +17,25 @@ export function HomePage({}: HomePageProps) {
 	return (
 		<PageRoot>
 			<PageContent>
-				<P>Search for people or add a new name</P>
-				<SuperBar />
-				<SuperBarSuggestions />
-				<SuperBarCreate />
+				<Box items="center" justify="between" className="pb-sm">
+					<Box items="center" gap="sm">
+						<AppIcon className="w-32px h-32px" />
+						<h1 className="font-fancy m-0 text-md font-semibold p-0">Names</h1>
+					</Box>
+					<UserMenu />
+				</Box>
+				<Suspense fallback={<Spinner />}>
+					<SuperBarSuggestions />
+				</Suspense>
+				<PageNowPlaying
+					unstyled
+					className="flex items-stretch justify-center overflow-visible"
+				>
+					<Suspense>
+						<SuperBarCreate />
+					</Suspense>
+					<SuperBar />
+				</PageNowPlaying>
 			</PageContent>
 		</PageRoot>
 	);

@@ -1,10 +1,10 @@
-import { PageContent } from '@a-type/ui';
+import { Divider, PageContent } from '@a-type/ui';
 
 export function PrivacyPolicy() {
 	return (
 		<PageContent>
 			<h1>Privacy Policy</h1>
-			<p>Last updated: January 14, 2023</p>
+			<p>Last updated: February 5, 2025</p>
 			<p>
 				This Privacy Policy describes Our policies and procedures on the
 				collection, use and disclosure of Your information when You use the
@@ -143,6 +143,9 @@ export function PrivacyPolicy() {
 				<li>
 					<p>Usage Data</p>
 				</li>
+				<li>
+					<p>Geolocation data</p>
+				</li>
 			</ul>
 			<h3>Usage Data</h3>
 			<p>Usage Data is collected automatically when using the Service.</p>
@@ -186,6 +189,16 @@ export function PrivacyPolicy() {
 				choose to provide such information and Personal Data, during
 				registration or otherwise, You are giving the Company permission to use,
 				share, and store it in a manner consistent with this Privacy Policy.
+			</p>
+			<h3>Geolocation Data</h3>
+			<p>
+				We may use and store information about Your location if You give Us
+				permission to do so (&quot;Location Data&quot;). We only use this data
+				to provide features of Our Service.
+			</p>
+			<p>
+				You can enable or disable location services when You use Our Service at
+				any time by way of Your Device settings.
 			</p>
 			<h2>Use of Your Personal Data</h2>
 			<p>The Company may use Personal Data for the following purposes:</p>
@@ -271,18 +284,6 @@ export function PrivacyPolicy() {
 					any merger, sale of Company assets, financing, or acquisition of all
 					or a portion of Our business to another company.
 				</li>
-				{/* <li>
-						<strong>With Affiliates:</strong> We may share Your information with
-						Our affiliates, in which case we will require those affiliates to
-						honor this Privacy Policy. Affiliates include Our parent company and
-						any other subsidiaries, joint venture partners or other companies
-						that We control or that are under common control with Us.
-					</li> */}
-				{/* <li>
-						<strong>With business partners:</strong> We may share Your
-						information with Our business partners to offer You certain
-						products, services or promotions.
-					</li> */}
 				<li>
 					<strong>With other users:</strong> Personal information you provide
 					may be viewed by all users who are authorized as members of your
@@ -437,6 +438,12 @@ export function PrivacyPolicy() {
 			<ul>
 				<li>By email: hi@gnocchi.club</li>
 			</ul>
+			<Divider className="my-4" />
+			<h2>Update history</h2>
+			<p>
+				<strong>February 5, 2025</strong>: Added geolocation data to types of
+				personal data collected.
+			</p>
 		</PageContent>
 	);
 }

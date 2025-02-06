@@ -33,7 +33,7 @@ export function RecipeList({}: RecipeListProps) {
 			<Suspense>
 				<PageFixedArea className="pt-2 w-full mb-2">
 					<div className="flex flex-row items-center justify-stretch w-full">
-						<RecipeSearchBar className="flex-1" />
+						<RecipeSearchBar className="flex-1 flex-basis-0" />
 						<RecipeCollectionMenu className="flex-0-0-auto" />
 					</div>
 					<RecipeListActions />

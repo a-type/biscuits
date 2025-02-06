@@ -1,12 +1,17 @@
-import { hooks } from '@/hooks.js';
+import { hooks, useAddPerson } from '@/hooks.js';
+import {
+	distance,
+	LOCATION_BROAD_SEARCH_RADIUS,
+	useGeolocation,
+} from '@/services/location.js';
 import { Person } from '@names.biscuits/verdant';
 import { useNavigate } from '@verdant-web/react-router';
-import { useCombobox } from 'downshift';
 import {
 	createContext,
 	ReactNode,
 	useCallback,
 	useContext,
+	useDeferredValue,
 	useMemo,
 	useState,
 } from 'react';
@@ -18,53 +23,99 @@ type ItemGroup = {
 
 const SuperBarContext = createContext<{
 	inputValue: string;
+	setInputValue: (value: string) => void;
 	groups: ItemGroup[];
-	highlightedId: string | null;
-	getInputProps: ReturnType<typeof useCombobox>['getInputProps'];
-	getMenuProps: ReturnType<typeof useCombobox>['getMenuProps'];
-	getItemProps: ReturnType<typeof useCombobox>['getItemProps'];
-	isOpen: boolean;
-	createNew: () => Promise<void>;
+	createNew: (options?: { attachLocation?: boolean }) => Promise<void>;
+	loading: boolean;
+	selectPerson: (person: Person) => void;
 }>({
 	inputValue: '',
+	setInputValue: () => {},
 	groups: [],
-	highlightedId: null,
-	getInputProps: () => ({}) as any,
-	getMenuProps: () => ({}) as any,
-	getItemProps: () => ({}) as any,
-	isOpen: false,
 	createNew: async () => {},
+	loading: false,
+	selectPerson: () => {},
 });
 
 export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 	const [inputValue, internalSetInputValue] = useState('');
+	const deferredInput = useDeferredValue(inputValue);
+	const deferredSearchWord = deferredInput.split(/\s+/)[0] ?? '';
 
 	const [recentPeople] = hooks.useAllPeoplePaginated({
 		index: {
 			where: 'createdAt',
 			order: 'desc',
 		},
+		key: 'recentPeople',
 		pageSize: 25,
 	});
-	const matchedPeopleByName = hooks.useAllPeople({
+	const matchedPeopleByNameRaw = hooks.useAllPeople({
 		index: {
 			where: 'matchName',
-			startsWith: inputValue.toLowerCase(),
+			startsWith: deferredSearchWord.toLowerCase(),
 		},
-		skip: inputValue.length < 2,
+		key: 'matchedPeopleByName',
+		skip: deferredSearchWord.length < 2,
 	});
-	const matchedPeopleByNote = hooks.useAllPeople({
+	const matchNameToInput = useCallback(
+		(person: Person) =>
+			person.get('name').toLowerCase().includes(deferredInput.toLowerCase()),
+		[deferredInput],
+	);
+	const matchedPeopleByName = useMemo(
+		() => matchedPeopleByNameRaw.filter(matchNameToInput),
+		[matchedPeopleByNameRaw, matchNameToInput],
+	);
+	const matchedPeopleByNoteRaw = hooks.useAllPeople({
 		index: {
 			where: 'matchNote',
-			startsWith: inputValue.toLowerCase(),
+			startsWith: deferredSearchWord.toLowerCase(),
 		},
-		skip: inputValue.length < 2,
+		key: 'matchedPeopleByNote',
+		skip: deferredSearchWord.length < 2,
 	});
+	const matchedPeopleByNote = useMemo(() => {
+		return matchedPeopleByNoteRaw.filter((person) => {
+			const note = person.get('note');
+			if (!note) return false;
+			return note.toLowerCase().includes(deferredInput.toLowerCase());
+		});
+	}, [matchedPeopleByNoteRaw, deferredInput]);
+	const location = useGeolocation();
+	const longitude = location?.longitude ?? 0;
+	const matchedByLongitude = hooks.useAllPeople({
+		index: {
+			where: 'longitude',
+			gte: longitude - LOCATION_BROAD_SEARCH_RADIUS,
+			lte: longitude + LOCATION_BROAD_SEARCH_RADIUS,
+		},
+		key: 'matchedByLongitude',
+		skip: !location,
+	});
+	const matchedByDistance = useMemo(
+		() =>
+			matchedByLongitude.filter(matchNameToInput).filter((person) => {
+				if (!location) return false;
+				const loc = person.get('geolocation');
+				if (!loc) return false;
+				const snap = loc.getSnapshot();
+				if (!snap) return false;
+				return distance(snap, location) < LOCATION_BROAD_SEARCH_RADIUS;
+			}),
+		[location, matchedByLongitude, matchNameToInput],
+	);
 
 	const isSearching = inputValue.length > 1;
 	const groups = useMemo(() => {
 		if (!isSearching) {
-			return [{ title: 'Recent people', items: recentPeople }];
+			return [
+				{ title: 'Recent people', items: recentPeople },
+				{
+					title: 'Met nearby',
+					items: matchedByDistance,
+				},
+			];
 		}
 		return [
 			{ title: 'By name', items: matchedPeopleByName },
@@ -72,53 +123,57 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 				title: 'By note',
 				items: matchedPeopleByNote,
 			},
+			{
+				title: 'Met nearby',
+				items: matchedByDistance,
+			},
 		];
-	}, [isSearching, recentPeople, matchedPeopleByName, matchedPeopleByNote]);
+	}, [
+		isSearching,
+		recentPeople,
+		matchedPeopleByName,
+		matchedPeopleByNote,
+		matchedByDistance,
+	]);
 
 	const navigate = useNavigate();
 
-	const items = groups.flatMap((group) => group.items);
-
-	const {
-		isOpen,
-		getMenuProps,
-		getItemProps,
-		getInputProps,
-		highlightedIndex,
-		setInputValue,
-	} = useCombobox({
-		items,
-		onInputValueChange: ({ inputValue }) => internalSetInputValue(inputValue),
-		async onSelectedItemChange(changes) {
-			navigate(`/people/${changes.selectedItem.get('id')}`);
+	const [loading, setLoading] = useState(false);
+	const addPerson = useAddPerson();
+	const createNew = useCallback(
+		async (options: { attachLocation?: boolean } = {}) => {
+			if (loading) return;
+			try {
+				setLoading(true);
+				const person = await addPerson(inputValue, options);
+				navigate(`/people/${person.get('id')}`);
+				internalSetInputValue('');
+			} finally {
+				setLoading(false);
+			}
 		},
-		itemToString: (item) => inputValue,
-		itemToKey: (item) => item?.get('id'),
-		defaultHighlightedIndex: 0,
-	});
+		[addPerson, navigate, inputValue, loading],
+	);
 
-	const highlightedId = items[highlightedIndex]?.get('id') ?? null;
-
-	const client = hooks.useClient();
-	const createNew = useCallback(async () => {
-		const person = await client.people.put({
-			name: inputValue,
-		});
-		navigate(`/people/${person.get('id')}`);
-		setInputValue('');
-	}, [client, navigate, inputValue]);
+	const selectPerson = useCallback(
+		(person: Person) => {
+			navigate(`/people/${person.get('id')}`, {
+				skipTransition: true,
+			});
+			internalSetInputValue('');
+		},
+		[navigate],
+	);
 
 	return (
 		<SuperBarContext.Provider
 			value={{
 				inputValue,
+				setInputValue: internalSetInputValue,
 				groups,
-				highlightedId,
-				getInputProps,
-				getMenuProps,
-				getItemProps,
-				isOpen,
 				createNew,
+				loading,
+				selectPerson,
 			}}
 		>
 			{children}
@@ -128,4 +183,10 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 
 export function useSuperBar() {
 	return useContext(SuperBarContext);
+}
+
+function isNewItem(
+	item: Person | { id: 'new'; name: string },
+): item is { readonly id: 'new'; readonly name: string } {
+	return (item as any).id === 'new';
 }

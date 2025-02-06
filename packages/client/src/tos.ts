@@ -1,1 +1,1 @@
-export const TOS_UPDATED_AT = new Date('2024-04-14T19:36:38.771Z');
+export const TOS_UPDATED_AT = new Date('2025-02-05T16:15:33.771Z');

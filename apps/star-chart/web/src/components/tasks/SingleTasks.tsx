@@ -17,14 +17,7 @@ export function SingleTasks({ className }: SingleTasksProps) {
 	});
 
 	return (
-		<Box
-			direction="col"
-			surface
-			border
-			p="none"
-			gap="none"
-			className={clsx(className)}
-		>
+		<Box d="col" surface border p="none" gap="none" className={clsx(className)}>
 			<H3 className="py-2 px-3 text-gray-7 font-normal uppercase text-xs">
 				One-off tasks
 			</H3>

@@ -297,6 +297,7 @@ type Query {
   publishedWishlist(id: ID!): PublishedWishlist
   recipeScan(input: RecipeScanInput!): RecipeScanResult
   storePageScan(input: StorePageScanInput!): StorePageScan
+  user(id: ID!): User
 
   """Get a weather forecast for a location over a given time period"""
   weatherForecast(input: WeatherForecastInput!): WeatherForecast!

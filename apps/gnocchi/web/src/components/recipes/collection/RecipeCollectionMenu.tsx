@@ -1,12 +1,6 @@
 import PaprikaImporter from '@/components/import/PaprikaImporter.jsx';
 import { TagManager } from '@/components/recipes/tags/TagManager.jsx';
-import {
-	Button,
-	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuTrigger,
-} from '@a-type/ui';
+import { Button, DropdownMenu } from '@a-type/ui';
 import { DotsVerticalIcon } from '@radix-ui/react-icons';
 import { Suspense, useCallback, useState } from 'react';
 
@@ -20,32 +14,32 @@ export function RecipeCollectionMenu({ className }: RecipeCollectionMenuProps) {
 
 	return (
 		<DropdownMenu open={open} onOpenChange={setOpen}>
-			<DropdownMenuTrigger asChild>
+			<DropdownMenu.Trigger asChild>
 				<Button size="icon" color="ghost" className={className}>
 					<DotsVerticalIcon />
 				</Button>
-			</DropdownMenuTrigger>
-			<DropdownMenuContent align="end">
+			</DropdownMenu.Trigger>
+			<DropdownMenu.Content align="end">
 				<Suspense>
-					<DropdownMenuItem
+					<DropdownMenu.Item
 						onSelect={(ev) => {
 							ev.preventDefault();
 						}}
 						asChild
 					>
 						<PaprikaImporter onClose={onSubmenuClose}>
-							import from Paprika 3
+							Import from Paprika 3
 						</PaprikaImporter>
-					</DropdownMenuItem>
+					</DropdownMenu.Item>
 				</Suspense>
 				<Suspense>
 					<TagManager onClose={onSubmenuClose}>
-						<DropdownMenuItem onSelect={(ev) => ev.preventDefault()}>
+						<DropdownMenu.Item onSelect={(ev) => ev.preventDefault()}>
 							Edit Tags
-						</DropdownMenuItem>
+						</DropdownMenu.Item>
 					</TagManager>
 				</Suspense>
-			</DropdownMenuContent>
+			</DropdownMenu.Content>
 		</DropdownMenu>
 	);
 }

@@ -18,7 +18,12 @@ export function RecipeIngredientsViewer({
 	className,
 }: RecipeIngredientsViewerProps) {
 	return (
-		<Box direction="col" p="none" className={clsx('w-full', className)}>
+		<Box
+			direction="col"
+			p="none"
+			gap="md"
+			className={clsx('w-full', className)}
+		>
 			<IngredientCheckoffView
 				recipe={recipe}
 				multiplierOverride={multiplierOverride}
@@ -41,7 +46,7 @@ export function EmbeddedRecipesIngredients({ recipe }: { recipe: Recipe }) {
 	}
 
 	return (
-		<Box direction="col" p="none">
+		<Box direction="col" p="none" gap="md">
 			{Object.entries(embeddedIds).map(([id, mult]) => (
 				<Suspense key={id}>
 					<EmbeddedRecipeIngredients
@@ -75,7 +80,7 @@ function EmbeddedRecipeIngredients({
 
 	return (
 		<>
-			<Box justify="between" items="center" p="none">
+			<Box justify="between" items="center" p="none" gap="md">
 				<H4 className="color-gray-7 italic">
 					<span className="font-medium">From sub-recipe</span>{' '}
 					{recipe.get('title')}

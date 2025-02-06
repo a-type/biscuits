@@ -147,12 +147,32 @@ export const apps = [
 		id: 'names',
 		name: 'Names',
 		iconPath: 'icon.png',
-		description: 'TODO',
+		description: "Remember people's names",
 		url: 'https://names.biscuits.club',
 		devOriginOverride: 'http://localhost:6227',
 		demoVideoSrc: '',
-		paidDescription: 'TODO',
-		paidFeatures: [],
+		paidDescription:
+			'Sync names with your devices and share with family, plus location-based search',
+		paidFeatures: [
+			{
+				imageUrl: '',
+				title: 'Location-Based Search',
+				description:
+					'Automatically record where you are when you add a name, so you can search later by where you met someone.',
+			},
+			{
+				imageUrl: '',
+				title: 'Family Sharing',
+				description:
+					'Share names with family members so you can all remember together.',
+				family: true,
+			},
+			{
+				imageUrl: '',
+				title: 'Sync Across Devices',
+				description: 'Access your names on all your devices.',
+			},
+		],
 		prerelease: true,
 	},
 ] as const;

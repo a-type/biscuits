@@ -42,13 +42,8 @@ const people = schema.collection({
 		photo: schema.fields.file({
 			nullable: true,
 		}),
-		relationships: schema.fields.array({
-			items: schema.fields.object({
-				properties: {
-					personId: schema.fields.string(),
-					type: schema.fields.string(),
-				},
-			}),
+		createdBy: schema.fields.string({
+			nullable: true,
 		}),
 	},
 	indexes: {
@@ -60,7 +55,7 @@ const people = schema.collection({
 			compute: (person) =>
 				person.name
 					.toLowerCase()
-					.split(/s/)
+					.split(/\s+/)
 					.concat(person.note?.toLowerCase().split(/\s+/) ?? []),
 		},
 		matchName: {
@@ -82,9 +77,31 @@ const people = schema.collection({
 	},
 });
 
+const relationships = schema.collection({
+	name: 'relationship',
+	primaryKey: 'id',
+	fields: {
+		id: schema.fields.id(),
+		personAId: schema.fields.string(),
+		personALabel: schema.fields.string({ nullable: true }),
+		personBId: schema.fields.string(),
+		personBLabel: schema.fields.string({ nullable: true }),
+	},
+	indexes: {
+		personId: {
+			type: 'string[]',
+			compute: (relationship) => [
+				relationship.personAId,
+				relationship.personBId,
+			],
+		},
+	},
+});
+
 export default schema({
 	version: 1,
 	collections: {
 		people,
+		relationships,
 	},
 });

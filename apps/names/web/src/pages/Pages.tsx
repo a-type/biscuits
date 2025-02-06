@@ -34,7 +34,11 @@ export function Pages() {
 	);
 	return (
 		<ErrorBoundary fallback={(props) => <ErrorFallback {...props} />}>
-			<Suspense fallback={<Spinner />}>
+			<Suspense
+				fallback={
+					<Spinner className="absolute left-1/2 top-1/2 translate--1/2" />
+				}
+			>
 				<Router routes={routes} onNavigate={handleNavigate}>
 					<Outlet />
 				</Router>

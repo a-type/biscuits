@@ -1,3 +1,4 @@
+import { LocationOffer } from '@/components/location/LocationOffer.jsx';
 import { checkForUpdate } from '@/updateState.js';
 import { Button, H1, Icon, PageContent, PageFixedArea } from '@a-type/ui';
 import { DarkModeToggle } from '@biscuits/client';
@@ -24,6 +25,7 @@ export function SettingsPage({}: SettingsPageProps) {
 			<H1>Settings</H1>
 			<div className="flex flex-col items-start w-full gap-4">
 				<DarkModeToggle />
+				<LocationOffer overrideDeny color="default" />
 				<ManageStorage />
 			</div>
 			<AutoRestoreScroll />

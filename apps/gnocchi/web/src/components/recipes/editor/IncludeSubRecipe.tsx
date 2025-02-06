@@ -87,7 +87,7 @@ function SubRecipeSearch({ onSelect }: IncludeSubRecipeProps) {
 	});
 
 	return (
-		<Box direction="col">
+		<Box direction="col" gap="md">
 			<Input {...getInputProps()} placeholder="Search..." />
 			<div
 				className="flex-1 w-full max-h-[50vh] overflow-auto"

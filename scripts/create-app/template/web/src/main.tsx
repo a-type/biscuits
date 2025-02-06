@@ -1,3 +1,4 @@
+import '@biscuits/client/henrietta.css';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import 'virtual:uno.css';

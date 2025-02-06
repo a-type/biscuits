@@ -334,7 +334,7 @@ function EmbeddedRecipeIngredientsEditors({ recipe }: { recipe: Recipe }) {
 	}
 
 	return (
-		<Box direction="col" p="none">
+		<Box direction="col" p="none" gap="md">
 			{Object.entries(embeddedIds).map(([id, mult]) => (
 				<Suspense key={id}>
 					<EmbeddedRecipeIngredientsEditor
@@ -363,7 +363,7 @@ function EmbeddedRecipeIngredientsEditor({
 	const multText = ` (x${multiplier})`;
 
 	return (
-		<Box justify="between" items="center" p="none">
+		<Box justify="between" items="center" p="none" gap="md">
 			<span className="font-bold">
 				Sub-recipe: {recipe?.get('title') ?? '<broken link>'}
 				{multText}

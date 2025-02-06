@@ -31,7 +31,9 @@ function PantryListInner({ className, ...rest }: PantryListProps) {
 				You can add expiration dates to foods to get notified when they&apos;re
 				about to expire. Tap any food to get started.
 			</OnboardingBanner>
-			<ExpiresSoonSection />
+			<Suspense>
+				<ExpiresSoonSection />
+			</Suspense>
 			<PantryListSectionTabs />
 			<div className="flex flex-col">
 				{categories.map((category) => {

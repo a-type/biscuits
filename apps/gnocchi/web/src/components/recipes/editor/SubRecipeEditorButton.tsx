@@ -42,7 +42,7 @@ export function SubRecipeEditorButton({
 			</Dialog.Trigger>
 			<Dialog.Content>
 				<Dialog.Title>Edit sub-recipe</Dialog.Title>
-				<Box direction="col">
+				<Box direction="col" gap="md">
 					<FieldLabel>Sub-recipe multiplier</FieldLabel>
 					<MultiplierStepper
 						onChange={setMultiplier}

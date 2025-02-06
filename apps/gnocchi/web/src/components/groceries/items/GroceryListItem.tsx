@@ -220,16 +220,20 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 									value={comment || ''}
 									onChange={(val) => item.set('comment', val)}
 									placeholder="Add a comment"
-									className="important:text-xs important:border-gray5 flex-grow-2 flex-shrink-1 flex-basis-50% md:flex-basis-120px my-1"
+									className="important:text-xs important:border-gray5 flex-grow-2 flex-shrink-1 flex-basis-50% md:flex-basis-120px md:flex-grow-3 my-1"
 								/>
-								<ListSelect
-									value={listId}
-									onChange={(listId) => item.set('listId', listId)}
-									className="flex-basis-25% flex-grow-1 flex-shrink-1 md:flex-basis-80px"
-								/>
+								<Suspense>
+									<ListSelect
+										value={listId}
+										onChange={(listId) => item.set('listId', listId)}
+										className="flex-basis-25% flex-grow-1 flex-shrink-1 md:flex-basis-60px"
+									/>
+								</Suspense>
 							</div>
 							<div className="flex flex-row gap-1 justify-end w-full items-center">
-								<QuantityEditor className="mr-auto" item={item} />
+								<Suspense>
+									<QuantityEditor className="mr-auto" item={item} />
+								</Suspense>
 								<Suspense>
 									<RecentPurchaseHint
 										foodName={food}
@@ -237,16 +241,19 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 									/>
 								</Suspense>
 								<OpenFoodDetailButton foodName={food} />
-								{/* <CategoryPicker item={item} /> */}
-								<ItemDeleteButton
-									size="icon"
-									color="ghostDestructive"
-									item={item}
-								>
-									<TrashIcon />
-								</ItemDeleteButton>
+								<Suspense>
+									<ItemDeleteButton
+										size="icon"
+										color="ghostDestructive"
+										item={item}
+									>
+										<TrashIcon />
+									</ItemDeleteButton>
+								</Suspense>
 							</div>
-							<ItemSources item={item} />
+							<Suspense>
+								<ItemSources item={item} />
+							</Suspense>
 						</div>
 					</Suspense>
 				</CollapsibleContent>

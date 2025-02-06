@@ -1,39 +1,55 @@
 import { hooks } from '@/hooks.js';
 import {
+	distance,
+	LOCATION_BROAD_SEARCH_RADIUS,
+	useGeolocation,
+} from '@/services/location.js';
+import {
+	Avatar,
+	Box,
 	Button,
 	clsx,
+	Divider,
 	EditableText,
 	Icon,
 	LiveUpdateTextField,
-	Note,
+	RelativeTime,
 } from '@a-type/ui';
+import { useUserInfo } from '@biscuits/client';
 import { Person } from '@names.biscuits/verdant';
-import { Link } from '@verdant-web/react-router';
 import { useState } from 'react';
+import { PersonPhoto } from './PersonPhoto.jsx';
+import { PersonRelationships } from './PersonRelationships.jsx';
 
 export interface PersonDetailsProps {
 	person: Person;
+	className?: string;
 }
 
-export function PersonDetails({ person }: PersonDetailsProps) {
-	const { name } = hooks.useWatch(person);
+export function PersonDetails({ person, className }: PersonDetailsProps) {
+	const { name, createdAt, createdBy } = hooks.useWatch(person);
 
 	return (
-		<div className="col items-start w-full">
-			<div className="row gap-0">
-				<Button color="ghost" size="icon" asChild>
-					<Link to="/">
-						<Icon name="arrowLeft" />
-					</Link>
-				</Button>
-				<EditableText
-					value={name}
-					onValueChange={(value) => person.set('name', value)}
-					className="text-xl"
-				/>
-			</div>
-			<NoteEditor person={person} />
-		</div>
+		<Box d="col" items="stretch" gap className={clsx('w-full', className)}>
+			<PersonPhoto person={person} />
+			<EditableText
+				value={name}
+				onValueChange={(value) => person.set('name', value)}
+				className="text-xl"
+			/>
+			<Box d="col" items="stretch" className="px-md" gap>
+				<Box className="text-xs text-gray-7" items="center" gap="sm">
+					<Icon name="clock" /> Added {new Date(createdAt).toLocaleDateString()}{' '}
+					(
+					<RelativeTime value={createdAt} />)
+				</Box>
+				{createdBy && <CreatedBy userId={createdBy} />}
+				<Location person={person} />
+				<NoteEditor person={person} />
+				<Divider />
+				<PersonRelationships person={person} />
+			</Box>
+		</Box>
 	);
 }
 
@@ -49,23 +65,57 @@ function NoteEditor({
 
 	if (!note && !open) {
 		return (
-			<Button size="small" onClick={() => setOpen(true)}>
+			<Button className="mr-auto" size="small" onClick={() => setOpen(true)}>
 				<Icon name="add_note" /> Add a note
 			</Button>
 		);
 	}
 
 	return (
-		<Note className={clsx('focus-within:shadow-focus', className)}>
-			<LiveUpdateTextField
-				className="!border-none outline-none resize-none w-full !rounded-none !shadow-none h-full p-0 m-0 [font-family:inherit] text-inherit [font-size:inherit] [font-style:inherit] bg-transparent shadow-none focus:(outline-none bg-transparent border-transparent shadow-none)"
-				textArea
-				value={note || ''}
-				onChange={(value) => person.set('note', value)}
-				onBlur={() => setOpen(false)}
-				placeholder="Add a note..."
-				autoFocus={open}
+		<LiveUpdateTextField
+			className="w-full text-sm bg-transparent shadow-none"
+			textArea
+			value={note || ''}
+			onChange={(value) => person.set('note', value)}
+			onBlur={() => setOpen(false)}
+			placeholder="Add a note..."
+			autoFocus={open}
+		/>
+	);
+}
+
+function Location({ person }: { person: Person }) {
+	const { geolocation } = hooks.useWatch(person);
+	const currentLocation = useGeolocation();
+
+	if (!geolocation) return null;
+	if (!currentLocation) return null;
+	if (
+		distance(geolocation.getAll(), currentLocation) >
+		LOCATION_BROAD_SEARCH_RADIUS
+	)
+		return null;
+
+	return (
+		<Box className="text-xs text-gray-7" items="center" gap="sm">
+			<Icon name="location" /> Met nearby
+		</Box>
+	);
+}
+
+function CreatedBy({ userId }: { userId: string }) {
+	const user = useUserInfo(userId);
+	if (!user) return null;
+	return (
+		<Box className="text-xs text-gray-7" items="center" gap="sm">
+			<Icon name="profile" /> Added by{' '}
+			<Avatar
+				popIn={false}
+				name={user.name}
+				className="opacity-70"
+				imageSrc={user.imageUrl ?? null}
 			/>
-		</Note>
+			<span>{user.name}</span>
+		</Box>
 	);
 }
