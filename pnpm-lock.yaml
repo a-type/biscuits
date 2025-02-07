@@ -12,6 +12,9 @@ catalogs:
     '@a-type/utils':
       specifier: 1.1.4
       version: 1.1.4
+    '@react-spring/web':
+      specifier: 9.7.5
+      version: 9.7.5
     '@types/react':
       specifier: ^19.0.0
       version: 19.0.2
@@ -443,7 +446,7 @@ importers:
         version: 6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1)
       vite-plugin-pwa:
         specifier: 'catalog:'
-        version: 0.21.1(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))(workbox-window@6.6.1)
+        version: 0.21.1(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))
       workbox-core:
         specifier: ^7.0.0
         version: 7.3.0
@@ -591,7 +594,7 @@ importers:
         version: 6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1)
       vite-plugin-pwa:
         specifier: 'catalog:'
-        version: 0.21.1(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))(workbox-window@7.3.0)
+        version: 0.21.1(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))
       workbox-core:
         specifier: 'catalog:'
         version: 7.3.0
@@ -700,7 +703,7 @@ importers:
         version: 6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1)
       vite-plugin-pwa:
         specifier: 'catalog:'
-        version: 0.21.1(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))(workbox-window@7.3.0)
+        version: 0.21.1(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))
       workbox-core:
         specifier: 'catalog:'
         version: 7.3.0
@@ -806,7 +809,7 @@ importers:
         version: 6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1)
       vite-plugin-pwa:
         specifier: 'catalog:'
-        version: 0.21.1(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))(workbox-window@7.3.0)
+        version: 0.21.1(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))
       workbox-core:
         specifier: 'catalog:'
         version: 7.3.0
@@ -924,7 +927,7 @@ importers:
         version: 6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1)
       vite-plugin-pwa:
         specifier: 'catalog:'
-        version: 0.21.1(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))(workbox-window@7.3.0)
+        version: 0.21.1(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))
       workbox-core:
         specifier: 'catalog:'
         version: 7.3.0
@@ -1039,7 +1042,7 @@ importers:
         version: 6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1)
       vite-plugin-pwa:
         specifier: 'catalog:'
-        version: 0.21.1(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))(workbox-window@7.3.0)
+        version: 0.21.1(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))
       workbox-core:
         specifier: 'catalog:'
         version: 7.3.0
@@ -1172,7 +1175,7 @@ importers:
         version: 6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1)
       vite-plugin-pwa:
         specifier: 'catalog:'
-        version: 0.21.1(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))(workbox-window@7.3.0)
+        version: 0.21.1(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))
       workbox-core:
         specifier: 'catalog:'
         version: 7.3.0
@@ -1369,7 +1372,7 @@ importers:
         version: 6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1)
       vite-plugin-pwa:
         specifier: 'catalog:'
-        version: 0.21.1(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))(workbox-window@7.3.0)
+        version: 0.21.1(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))
       workbox-core:
         specifier: 'catalog:'
         version: 7.3.0
@@ -1482,6 +1485,12 @@ importers:
       '@a-type/auth-client':
         specifier: 1.0.13
         version: 1.0.13(@a-type/ui@1.5.4(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
+      '@a-type/ui':
+        specifier: 'catalog:'
+        version: 1.5.4(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@a-type/utils':
+        specifier: 'catalog:'
+        version: 1.1.4
       '@biscuits/apps':
         specifier: workspace:*
         version: link:../apps
@@ -1494,19 +1503,52 @@ importers:
       '@biscuits/libraries':
         specifier: workspace:*
         version: link:../libraries
+      '@react-spring/web':
+        specifier: 'catalog:'
+        version: 9.7.5(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@stripe/react-stripe-js':
         specifier: 2.7.3
-        version: 2.7.3(@stripe/stripe-js@4.2.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 2.7.3(@stripe/stripe-js@4.2.0)(react@19.0.0)
       '@stripe/stripe-js':
         specifier: 4.2.0
         version: 4.2.0
+      '@verdant-web/react-router':
+        specifier: 'catalog:'
+        version: 0.7.1(react@19.0.0)
+      '@verdant-web/store':
+        specifier: 'catalog:'
+        version: 4.1.2
+      gql.tada:
+        specifier: 'catalog:'
+        version: 1.8.10(graphql@16.10.0)(typescript@5.7.2)
+      react:
+        specifier: 'catalog:'
+        version: 19.0.0
+      typescript:
+        specifier: 'catalog:'
+        version: 5.7.2
+      valtio:
+        specifier: 'catalog:'
+        version: 2.1.2(@types/react@19.0.2)(react@19.0.0)
     devDependencies:
       '@types/copy':
         specifier: ^0.3.5
         version: 0.3.5
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.0.2
+      '@unocss/transformer-variant-group':
+        specifier: 'catalog:'
+        version: 0.65.3
       copy:
         specifier: ^0.3.2
         version: 0.3.2
+      unocss:
+        specifier: 'catalog:'
+        version: 0.65.3(rollup@4.28.1)(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))
+      vite-plugin-pwa:
+        specifier: 'catalog:'
+        version: 0.21.1(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))
 
   packages/db:
     dependencies:
@@ -10333,7 +10375,6 @@ packages:
     peerDependencies:
       '@vite-pwa/assets-generator': ^0.2.6
       vite: ^3.1.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
-      workbox-window: ^7.3.0
     peerDependenciesMeta:
       '@vite-pwa/assets-generator':
         optional: true
@@ -14954,12 +14995,11 @@ snapshots:
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
 
-  '@stripe/react-stripe-js@2.7.3(@stripe/stripe-js@4.2.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@stripe/react-stripe-js@2.7.3(@stripe/stripe-js@4.2.0)(react@19.0.0)':
     dependencies:
       '@stripe/stripe-js': 4.2.0
       prop-types: 15.8.1
       react: 19.0.0
-      react-dom: 19.0.0(react@19.0.0)
 
   '@stripe/stripe-js@3.5.0': {}
 
@@ -21604,19 +21644,7 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  vite-plugin-pwa@0.21.1(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))(workbox-window@6.6.1):
-    dependencies:
-      debug: 4.4.0
-      pretty-bytes: 6.1.1
-      tinyglobby: 0.2.10
-      vite: 6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1)
-      workbox-build: 7.3.0
-      workbox-window: 6.6.1
-    transitivePeerDependencies:
-      - '@types/babel__core'
-      - supports-color
-
-  vite-plugin-pwa@0.21.1(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))(workbox-window@7.3.0):
+  vite-plugin-pwa@0.21.1(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1)):
     dependencies:
       debug: 4.4.0
       pretty-bytes: 6.1.1
