@@ -20,7 +20,7 @@ export default defineConfig(({ command, mode }) => ({
 				name: 'Names',
 				short_name: 'Names',
 				description: '',
-				theme_color: '#ffffff',
+				theme_color: '#8ff8d3',
 				background_color: '#ffffff',
 				icons: icons(),
 				categories: [],
