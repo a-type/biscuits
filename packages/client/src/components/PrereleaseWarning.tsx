@@ -25,7 +25,7 @@ export function PrereleaseWarning({}: PrereleaseWarningProps) {
 				>
 					Biscuits
 				</a>{' '}
-				app. It may be unstable or incomplete, and your data might be lost.
+				app. It may be unstable or incomplete, and your data may be lost.
 			</span>
 		</div>
 	);
