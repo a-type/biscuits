@@ -19,6 +19,8 @@ export async function getGeolocation() {
 	});
 }
 
+let permissionPromise = hasGeolocationPermission();
+
 export async function hasGeolocationPermission(): Promise<boolean> {
 	permissionPromise = (async function () {
 		return (
@@ -32,8 +34,6 @@ export async function hasGeolocationPermission(): Promise<boolean> {
 }
 
 export const hasLocationAbility = 'geolocation' in navigator;
-
-let permissionPromise = hasGeolocationPermission();
 
 export function useHasGeolocationPermission() {
 	return use(permissionPromise);
