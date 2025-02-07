@@ -10,87 +10,87 @@
 import { spawn } from 'child_process';
 import * as fs from 'fs/promises';
 
-import { createDnsRecord } from '../lib/porkbun.js';
 import { addRepositoryVariable } from '../lib/github.js';
+import { createDnsRecord } from '../lib/porkbun.js';
 
-const appId = process.argv[3] || process.argv[4];
+const appId = process.argv[3] || process.argv[4] || process.argv[2];
 
 const cdk = spawn(
-  'pnpm',
-  ['cdk-raw', 'deploy', appId, '--require-approval=never'],
-  {
-    stdio: ['ignore', 'pipe', 'pipe'],
-  },
+	'pnpm',
+	['cdk-raw', 'deploy', appId, '--require-approval=never'],
+	{
+		stdio: ['ignore', 'pipe', 'pipe'],
+	},
 );
 
 function constify(str: string) {
-  return str.toUpperCase().replace(/[^A-Z0-9]/g, '_');
+	return str.toUpperCase().replace(/[^A-Z0-9]/g, '_');
 }
 
 let allOutput = '';
 
 cdk.stdout.on('data', (data) => {
-  process.stdout.write(data);
-  allOutput += data;
+	process.stdout.write(data);
+	allOutput += data;
 
-  // detect Certificates and provision the required CNAME
-  // in porkbun
-  // Looks like: Content of DNS Record is: {Name: BLAH.biscuits.club.,Type: CNAME,Value: BLAH}
-  const match = data
-    .toString()
-    .match(
-      /Content of DNS Record is: {Name: ([^.]+)\.biscuits\.club.,Type: CNAME,Value: ([^.]+)}/,
-    );
-  if (match) {
-    const [, name, value] = match;
-    createDnsRecord('biscuits.club', {
-      type: 'CNAME',
-      name,
-      content: value,
-    });
-  }
+	// detect Certificates and provision the required CNAME
+	// in porkbun
+	// Looks like: Content of DNS Record is: {Name: BLAH.biscuits.club.,Type: CNAME,Value: BLAH}
+	const match = data
+		.toString()
+		.match(
+			/Content of DNS Record is: {Name: ([^.]+)\.biscuits\.club.,Type: CNAME,Value: ([^.]+)}/,
+		);
+	if (match) {
+		const [, name, value] = match;
+		createDnsRecord('biscuits.club', {
+			type: 'CNAME',
+			name,
+			content: value,
+		});
+	}
 
-  // detect S3 bucket name and add it to the GitHub repository
-  // Looks like: app-id.BucketName = BLAH.biscuits.club
-  const s3Match = data.toString().match(/BucketName = (.+)/);
-  if (s3Match) {
-    const bucketName = s3Match[1];
-    addRepositoryVariable('S3_BUCKET_' + constify(appId), bucketName);
-  }
+	// detect S3 bucket name and add it to the GitHub repository
+	// Looks like: app-id.BucketName = BLAH.biscuits.club
+	const s3Match = data.toString().match(/BucketName = (.+)/);
+	if (s3Match) {
+		const bucketName = s3Match[1];
+		addRepositoryVariable('S3_BUCKET_' + constify(appId), bucketName);
+	}
 
-  // detect Cloudfront distribution ID and add it to the
-  // GitHub repository
-  // Looks like: app-id.DistributionId = BLAH
-  const cfMatch = data.toString().match(/DistributionId = (.+)/);
-  if (cfMatch) {
-    const cfId = cfMatch[1];
-    addRepositoryVariable('CLOUDFRONT_ID_' + constify(appId), cfId);
-  }
+	// detect Cloudfront distribution ID and add it to the
+	// GitHub repository
+	// Looks like: app-id.DistributionId = BLAH
+	const cfMatch = data.toString().match(/DistributionId = (.+)/);
+	if (cfMatch) {
+		const cfId = cfMatch[1];
+		addRepositoryVariable('CLOUDFRONT_ID_' + constify(appId), cfId);
+	}
 
-  // detect Cloudfront domain and add a CNAME record to porkbun
-  // Looks like: app-id.DistributionDomainName = BLAH
-  const cfDomainMatch = data.toString().match(/DistributionDomainName = (.+)/);
-  if (cfDomainMatch) {
-    const domain = cfDomainMatch[1];
-    createDnsRecord('biscuits.club', {
-      type: 'CNAME',
-      name: appId,
-      content: domain,
-    });
-  }
+	// detect Cloudfront domain and add a CNAME record to porkbun
+	// Looks like: app-id.DistributionDomainName = BLAH
+	const cfDomainMatch = data.toString().match(/DistributionDomainName = (.+)/);
+	if (cfDomainMatch) {
+		const domain = cfDomainMatch[1];
+		createDnsRecord('biscuits.club', {
+			type: 'CNAME',
+			name: appId,
+			content: domain,
+		});
+	}
 });
 
 cdk.stderr.on('data', (data) => {
-  process.stderr.write(data);
-  allOutput += data;
+	process.stderr.write(data);
+	allOutput += data;
 });
 
 cdk.on('close', async (code) => {
-  await fs.writeFile('cdk-output.txt', allOutput);
-  if (code === 0) {
-    console.log('CDK exited cleanly');
-  } else {
-    console.error('CDK exited with code', code);
-    console.error(allOutput);
-  }
+	await fs.writeFile('cdk-output.txt', allOutput);
+	if (code === 0) {
+		console.log('CDK exited cleanly');
+	} else {
+		console.error('CDK exited with code', code);
+		console.error(allOutput);
+	}
 });

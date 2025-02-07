@@ -56,30 +56,28 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@a-type/ui": "catalog:",
+		"@a-type/utils": "catalog:",
 		"@a-type/auth-client": "1.0.13",
 		"@biscuits/apps": "workspace:*",
 		"@biscuits/error": "workspace:*",
 		"@biscuits/graphql": "workspace:*",
 		"@biscuits/libraries": "workspace:*",
 		"@stripe/react-stripe-js": "2.7.3",
-		"@stripe/stripe-js": "4.2.0"
-	},
-	"peerDependencies": {
-		"@a-type/ui": "catalog:",
-		"@a-type/utils": "catalog:",
+		"@stripe/stripe-js": "4.2.0",
 		"@react-spring/web": "catalog:",
 		"@verdant-web/react-router": "catalog:",
 		"@verdant-web/store": "catalog:",
 		"react": "catalog:",
 		"valtio": "catalog:",
-		"vite-plugin-pwa": "catalog:",
 		"gql.tada": "catalog:",
-		"typescript": "catalog:",
-		"@unocss/transformer-variant-group": "catalog:",
-		"@types/react": "catalog:",
-		"unocss": "catalog:"
+		"typescript": "catalog:"
 	},
 	"devDependencies": {
+		"@unocss/transformer-variant-group": "catalog:",
+		"@types/react": "catalog:",
+		"unocss": "catalog:",
+		"vite-plugin-pwa": "catalog:",
 		"@types/copy": "^0.3.5",
 		"copy": "^0.3.2"
 	}
