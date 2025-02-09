@@ -114,7 +114,7 @@ function SuggestionItem({
 					/>
 				)}
 				<CardTitle className="font-normal">{name}</CardTitle>
-				{tags.length && (
+				{!!tags.length && (
 					<CardContent
 						unstyled
 						className="flex flex-row gap-sm py-xs px-sm mx-0"
