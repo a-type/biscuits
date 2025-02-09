@@ -45,6 +45,9 @@ const people = schema.collection({
 		createdBy: schema.fields.string({
 			nullable: true,
 		}),
+		tags: schema.fields.array({
+			items: schema.fields.string(),
+		}),
 	},
 	indexes: {
 		createdAt: {
@@ -74,6 +77,15 @@ const people = schema.collection({
 			type: 'number',
 			compute: (person) => person.geolocation?.longitude ?? -10000,
 		},
+		tags: {
+			type: 'string[]',
+			compute: (person) => person.tags,
+		},
+	},
+	compounds: {
+		tag_createdAt: {
+			of: ['tags', 'createdAt'],
+		},
 	},
 });
 
@@ -98,10 +110,21 @@ const relationships = schema.collection({
 	},
 });
 
+const tags = schema.collection({
+	name: 'tag',
+	primaryKey: 'name',
+	fields: {
+		name: schema.fields.string(),
+		color: schema.fields.string({ nullable: true }),
+		icon: schema.fields.string({ nullable: true }),
+	},
+});
+
 export default schema({
-	version: 1,
+	version: 2,
 	collections: {
 		people,
 		relationships,
+		tags,
 	},
 });

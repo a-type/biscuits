@@ -7,7 +7,6 @@ import {
 import {
 	Avatar,
 	Box,
-	Button,
 	clsx,
 	Divider,
 	EditableText,
@@ -17,9 +16,9 @@ import {
 } from '@a-type/ui';
 import { useUserInfo } from '@biscuits/client';
 import { Person } from '@names.biscuits/verdant';
-import { useState } from 'react';
 import { PersonPhoto } from './PersonPhoto.jsx';
 import { PersonRelationships } from './PersonRelationships.jsx';
+import { PersonTagEditor } from './PersonTagEditor.jsx';
 
 export interface PersonDetailsProps {
 	person: Person;
@@ -45,6 +44,7 @@ export function PersonDetails({ person, className }: PersonDetailsProps) {
 				</Box>
 				{createdBy && <CreatedBy userId={createdBy} />}
 				<Location person={person} />
+				<PersonTagEditor person={person} />
 				<NoteEditor person={person} />
 				<Divider />
 				<PersonRelationships person={person} />
@@ -61,25 +61,14 @@ function NoteEditor({
 	className?: string;
 }) {
 	const { note } = hooks.useWatch(person);
-	const [open, setOpen] = useState(false);
-
-	if (!note && !open) {
-		return (
-			<Button className="mr-auto" size="small" onClick={() => setOpen(true)}>
-				<Icon name="add_note" /> Add a note
-			</Button>
-		);
-	}
 
 	return (
 		<LiveUpdateTextField
-			className="w-full text-sm bg-transparent shadow-none"
+			className={clsx('w-full text-sm bg-transparent shadow-none', className)}
 			textArea
 			value={note || ''}
 			onChange={(value) => person.set('note', value)}
-			onBlur={() => setOpen(false)}
 			placeholder="Add a note..."
-			autoFocus={open}
 		/>
 	);
 }

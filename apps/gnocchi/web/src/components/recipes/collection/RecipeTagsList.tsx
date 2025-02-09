@@ -1,9 +1,8 @@
-import { Icon } from '@/components/icons/Icon.jsx';
 import { RecipeTagMenuWrapper } from '@/components/recipes/tags/RecipeTagMenuWrapper.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { Button, ButtonProps } from '@a-type/ui';
+import { IconName, ThemeName } from '@a-type/ui';
+import { TagToggle } from '@biscuits/client';
 import classNames from 'classnames';
-import { forwardRef } from 'react';
 
 export function RecipeTagsList({
 	onSelect,
@@ -39,48 +38,28 @@ export function RecipeTagsList({
 	return (
 		<div className={classNames('flex flex-wrap gap-1 my-1', className)}>
 			{showNone && (
-				<TagButtonBase
+				<TagToggle
 					toggled={!selectedValues?.length}
-					onClick={() => {
+					onToggle={() => {
 						onSelect(null);
 					}}
 					className={buttonClassName}
-				>
-					None
-				</TagButtonBase>
+					name="none"
+					icon="x"
+				/>
 			)}
 			{filteredByOmit.map((tag) => (
 				<RecipeTagMenuWrapper tagName={tag.get('name')} key={tag.get('name')}>
-					<TagButtonBase
+					<TagToggle
 						toggled={!!selectedValues?.includes(tag.get('name'))}
-						onClick={() => onSelect(tag.get('name'))}
-						className={classNames(
-							tag.get('color') && `theme-${tag.get('color')}`,
-							buttonClassName,
-						)}
-					>
-						<span>{tag.get('icon') ?? <Icon name="tag" />}</span>
-						<span>{tag.get('name')}</span>
-					</TagButtonBase>
+						onToggle={() => onSelect(tag.get('name'))}
+						className={buttonClassName}
+						color={tag.get('color') as ThemeName | undefined}
+						icon={tag.get('icon') as IconName | undefined}
+						name={tag.get('name')}
+					/>
 				</RecipeTagMenuWrapper>
 			))}
 		</div>
 	);
 }
-
-const TagButtonBase = forwardRef<HTMLButtonElement, ButtonProps>(
-	function TagButtonBase({ className, ...props }, ref) {
-		return (
-			<Button
-				ref={ref}
-				size="small"
-				color="primary"
-				{...props}
-				className={classNames(
-					'flex items-center gap-1 [font-weight:inherit] [font-size:inherit]',
-					className,
-				)}
-			/>
-		);
-	},
-);

@@ -28,6 +28,8 @@ const SuperBarContext = createContext<{
 	createNew: (options?: { attachLocation?: boolean }) => Promise<void>;
 	loading: boolean;
 	selectPerson: (person: Person) => void;
+	setTagFilter: (updater: (prev: string[]) => string[]) => void;
+	tagFilter: string[];
 }>({
 	inputValue: '',
 	setInputValue: () => {},
@@ -35,6 +37,8 @@ const SuperBarContext = createContext<{
 	createNew: async () => {},
 	loading: false,
 	selectPerson: () => {},
+	setTagFilter: () => {},
+	tagFilter: [],
 });
 
 export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
@@ -42,13 +46,19 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 	const deferredInput = useDeferredValue(inputValue);
 	const deferredSearchWord = deferredInput.split(/\s+/)[0] ?? '';
 
+	const [tagFilter, setTagFilter] = useState<string[]>([]);
+	const firstTag = tagFilter[0];
+
 	const [recentPeople] = hooks.useAllPeoplePaginated({
-		index: {
-			where: 'createdAt',
-			order: 'desc',
-		},
+		index:
+			firstTag ?
+				{ where: 'tag_createdAt', match: { tags: firstTag }, order: 'desc' }
+			:	{
+					where: 'createdAt',
+					order: 'desc',
+				},
 		key: 'recentPeople',
-		pageSize: 25,
+		pageSize: 10,
 	});
 	const matchedPeopleByNameRaw = hooks.useAllPeople({
 		index: {
@@ -174,6 +184,8 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 				createNew,
 				loading,
 				selectPerson,
+				tagFilter,
+				setTagFilter,
 			}}
 		>
 			{children}

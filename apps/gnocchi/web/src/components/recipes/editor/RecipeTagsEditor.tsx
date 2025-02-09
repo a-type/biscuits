@@ -1,9 +1,8 @@
-import { Icon } from '@/components/icons/Icon.jsx';
 import { RecipeEditTags } from '@/components/recipes/editor/RecipeAddTag.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { Button, Chip, ThemeName } from '@a-type/ui';
+import { IconName, ThemeName } from '@a-type/ui';
+import { RemovableTag } from '@biscuits/client';
 import { Recipe } from '@gnocchi.biscuits/verdant';
-import { Cross2Icon } from '@radix-ui/react-icons';
 import classNames from 'classnames';
 import { Suspense } from 'react';
 
@@ -40,27 +39,17 @@ function TagDisplay({
 }) {
 	const data = hooks.useRecipeTagMetadata(tag);
 	hooks.useWatch(data);
-	const icon = data?.get('icon');
+	const icon = data?.get('icon') as IconName | undefined;
 	const color = data?.get('color') as ThemeName | undefined;
 
+	const name = data?.get('name') ?? tag;
+
 	return (
-		<Chip
-			color="primary"
-			className={classNames(
-				'flex items-center gap-1 px-2 rounded-full !bg-primary-light color-black border-gray-7 font-bold text-xs',
-				color && `theme-${color}`,
-			)}
-		>
-			<span>{icon ?? <Icon name="tag" className="w-[10px] h-[10px]" />}</span>
-			<span>{tag}</span>
-			<Button
-				size="icon"
-				color="ghost"
-				className="p-0"
-				onClick={() => onRemove(tag)}
-			>
-				<Cross2Icon className="w-[10px] h-[10px]" />
-			</Button>
-		</Chip>
+		<RemovableTag
+			icon={icon}
+			color={color}
+			name={name}
+			onRemove={() => onRemove(tag)}
+		/>
 	);
 }

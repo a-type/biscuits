@@ -24,6 +24,8 @@ import type {
   PersonFilter,
   Relationship,
   RelationshipFilter,
+  Tag,
+  TagFilter,
 } from "./index.js";
 
 type HookConfig<F> = {
@@ -241,6 +243,48 @@ export interface GeneratedHooks<Presence, Profile> {
     Relationship[],
     { loadMore: () => void; hasMore: boolean; status: QueryStatus },
   ];
+
+  useTag(id: string, config?: { skip?: boolean }): Tag | null;
+  useTagUnsuspended(
+    id: string,
+    config?: { skip?: boolean },
+  ): { data: Tag | null; status: QueryStatus };
+  useOneTag: <Config extends HookConfig<TagFilter>>(
+    config?: Config,
+  ) => Tag | null;
+  useOneTagsUnsuspended: <Config extends HookConfig<TagFilter>>(
+    config?: Config,
+  ) => { data: Tag | null; status: QueryStatus };
+  useAllTags: <Config extends HookConfig<TagFilter>>(config?: Config) => Tag[];
+  useAllTagsUnsuspended: <Config extends HookConfig<TagFilter>>(
+    config?: Config,
+  ) => { data: Tag[]; status: QueryStatus };
+  useAllTagsPaginated: <
+    Config extends HookConfig<TagFilter> & {
+      pageSize?: number;
+      suspend?: false;
+    },
+  >(
+    config?: Config,
+  ) => [
+    Tag[],
+    {
+      next: () => void;
+      previous: () => void;
+      setPage: (page: number) => void;
+      hasNext: boolean;
+      hasPrevious: boolean;
+      status: QueryStatus;
+    },
+  ];
+  useAllTagsInfinite: <
+    Config extends HookConfig<TagFilter> & {
+      pageSize?: number;
+      suspend?: false;
+    },
+  >(
+    config?: Config,
+  ) => [Tag[], { loadMore: () => void; hasMore: boolean; status: QueryStatus }];
 }
 
 type HookName = `use${string}`;

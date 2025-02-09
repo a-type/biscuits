@@ -1,13 +1,7 @@
 import { SuperBar } from '@/components/superBar/SuperBar.jsx';
 import { SuperBarCreate } from '@/components/superBar/SuperBarCreate.jsx';
 import { SuperBarSuggestions } from '@/components/superBar/SuperBarSuggestions.jsx';
-import {
-	Box,
-	PageContent,
-	PageNowPlaying,
-	PageRoot,
-	Spinner,
-} from '@a-type/ui';
+import { Box, PageContent, PageNowPlaying, PageRoot } from '@a-type/ui';
 import { AppIcon, UserMenu } from '@biscuits/client';
 import { Suspense } from 'react';
 
@@ -24,9 +18,7 @@ export function HomePage({}: HomePageProps) {
 					</Box>
 					<UserMenu />
 				</Box>
-				<Suspense fallback={<Spinner />}>
-					<SuperBarSuggestions />
-				</Suspense>
+				<SuperBarSuggestions />
 				<PageNowPlaying
 					unstyled
 					className="flex items-stretch justify-center overflow-visible"

@@ -1,9 +1,18 @@
 import { hooks } from '@/hooks.js';
-import { Card, cardGridColumns, clsx, Icon, withClassName } from '@a-type/ui';
+import {
+	Card,
+	CardContent,
+	cardGridColumns,
+	clsx,
+	Icon,
+	withClassName,
+} from '@a-type/ui';
 import { Person } from '@names.biscuits/verdant';
-import { ReactNode } from 'react';
+import { ReactNode, Suspense } from 'react';
 import { LocationOffer } from '../location/LocationOffer.jsx';
+import { TagDisplay } from '../tags/TagDisplay.jsx';
 import { useSuperBar } from './SuperBarContext.jsx';
+import { SuperBarTagFilter } from './SuperBarTagFilter.jsx';
 
 export interface SuperBarSuggestionsProps {
 	className?: string;
@@ -68,6 +77,7 @@ function SuggestionGroup({
 			<div className="text-xs uppercase text-gray-7 font-bold m2-1">
 				{title}
 			</div>
+			{title === 'Recent people' && <SuperBarTagFilter />}
 			<Card.Grid columns={cardGridColumns.small}>
 				{items.map((suggestion, index) => (
 					<SuggestionItem key={suggestion.get('id')} value={suggestion} />
@@ -86,7 +96,7 @@ function SuggestionItem({
 	className?: string;
 	value: Person;
 }) {
-	const { name, note, photo } = hooks.useWatch(value);
+	const { name, note, photo, tags } = hooks.useWatch(value);
 	hooks.useWatch(photo);
 	const { inputValue, selectPerson } = useSuperBar();
 
@@ -103,7 +113,19 @@ function SuggestionItem({
 						style={{ backgroundImage: `url(${photo.url})` }}
 					/>
 				)}
-				<CardTitle>{name}</CardTitle>
+				<CardTitle className="font-normal">{name}</CardTitle>
+				{tags.length && (
+					<CardContent
+						unstyled
+						className="flex flex-row gap-sm py-xs px-sm mx-0"
+					>
+						{tags.map((tag) => (
+							<Suspense>
+								<TagDisplay key={tag} name={tag} />
+							</Suspense>
+						))}
+					</CardContent>
+				)}
 				{note && (
 					<NoteMatch
 						overlay={!!photo?.url}

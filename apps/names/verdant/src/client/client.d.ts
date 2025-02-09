@@ -16,6 +16,7 @@ export class Client<Presence = any, Profile = any> {
     RelationshipInit,
     RelationshipFilter
   >;
+  readonly tags: CollectionQueries<Tag, TagInit, TagFilter>;
 
   sync: BaseClient<Presence, Profile>["sync"];
   undoHistory: BaseClient<Presence, Profile>["undoHistory"];
@@ -118,6 +119,12 @@ export type PersonGeolocationLongitude = number;
 export type PersonNote = string;
 export type PersonPhoto = string | null;
 export type PersonCreatedBy = string;
+export type PersonTags = ListEntity<
+  PersonTagsInit,
+  PersonTagsDestructured,
+  PersonTagsSnapshot
+>;
+export type PersonTagsItem = string;
 export type PersonInit = {
   id?: string;
   createdAt?: number;
@@ -126,12 +133,14 @@ export type PersonInit = {
   note?: string | null;
   photo?: File | null;
   createdBy?: string | null;
+  tags?: PersonTagsInit;
 };
 
 export type PersonGeolocationInit = {
   latitude: number;
   longitude: number;
 } | null;
+export type PersonTagsInit = string[];
 export type PersonDestructured = {
   id: string;
   createdAt: number;
@@ -140,12 +149,14 @@ export type PersonDestructured = {
   note: string | null;
   photo: EntityFile | null;
   createdBy: string | null;
+  tags: PersonTags;
 };
 
 export type PersonGeolocationDestructured = {
   latitude: number;
   longitude: number;
 };
+export type PersonTagsDestructured = string[];
 export type PersonSnapshot = {
   id: string;
   createdAt: number;
@@ -154,12 +165,14 @@ export type PersonSnapshot = {
   note: string | null;
   photo: EntityFileSnapshot | null;
   createdBy: string | null;
+  tags: PersonTagsSnapshot;
 };
 
 export type PersonGeolocationSnapshot = {
   latitude: number;
   longitude: number;
 } | null;
+export type PersonTagsSnapshot = string[];
 
 /** Index filters for Person **/
 
@@ -280,6 +293,36 @@ export interface PersonLongitudeRangeFilter {
   lt?: number;
   order?: "asc" | "desc";
 }
+export interface PersonTagsSortFilter {
+  where: "tags";
+  order: "asc" | "desc";
+}
+export interface PersonTagsMatchFilter {
+  where: "tags";
+  equals: string;
+  order?: "asc" | "desc";
+}
+export interface PersonTagsRangeFilter {
+  where: "tags";
+  gte?: string;
+  gt?: string;
+  lte?: string;
+  lt?: string;
+  order?: "asc" | "desc";
+}
+export interface PersonTagsStartsWithFilter {
+  where: "tags";
+  startsWith: string;
+  order?: "asc" | "desc";
+}
+export interface PersonTagCreatedAtCompoundFilter {
+  where: "tag_createdAt";
+  match: {
+    tags: string;
+    createdAt?: number;
+  };
+  order?: "asc" | "desc";
+}
 export type PersonFilter =
   | PersonCreatedAtSortFilter
   | PersonCreatedAtMatchFilter
@@ -301,7 +344,12 @@ export type PersonFilter =
   | PersonLatitudeRangeFilter
   | PersonLongitudeSortFilter
   | PersonLongitudeMatchFilter
-  | PersonLongitudeRangeFilter;
+  | PersonLongitudeRangeFilter
+  | PersonTagsSortFilter
+  | PersonTagsMatchFilter
+  | PersonTagsRangeFilter
+  | PersonTagsStartsWithFilter
+  | PersonTagCreatedAtCompoundFilter;
 
 /** Generated types for Relationship */
 
@@ -368,3 +416,31 @@ export type RelationshipFilter =
   | RelationshipPersonIdMatchFilter
   | RelationshipPersonIdRangeFilter
   | RelationshipPersonIdStartsWithFilter;
+
+/** Generated types for Tag */
+
+export type Tag = ObjectEntity<TagInit, TagDestructured, TagSnapshot>;
+export type TagName = string;
+export type TagColor = string;
+export type TagIcon = string;
+export type TagInit = {
+  name: string;
+  color?: string | null;
+  icon?: string | null;
+};
+
+export type TagDestructured = {
+  name: string;
+  color: string | null;
+  icon: string | null;
+};
+
+export type TagSnapshot = {
+  name: string;
+  color: string | null;
+  icon: string | null;
+};
+
+/** Index filters for Tag **/
+
+export type TagFilter = never;
