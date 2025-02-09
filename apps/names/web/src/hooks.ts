@@ -53,3 +53,24 @@ export function useAddPerson() {
 		[client, selfId],
 	);
 }
+
+export function useRecentPeople(tagFilter?: string[]) {
+	const firstTag = tagFilter?.[0];
+	const [recentPeopleRaw, pages] = hooks.useAllPeopleInfinite({
+		index:
+			firstTag ?
+				{ where: 'tag_createdAt', match: { tags: firstTag }, order: 'desc' }
+			:	{
+					where: 'createdAt',
+					order: 'desc',
+				},
+		key: 'recentPeople',
+		pageSize: 10,
+	});
+
+	const recentPeople = recentPeopleRaw.filter((person) =>
+		tagFilter?.every((tag) => person.get('tags').has(tag)),
+	);
+
+	return [recentPeople, pages] as const;
+}

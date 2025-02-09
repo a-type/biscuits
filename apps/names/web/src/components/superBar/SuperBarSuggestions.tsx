@@ -1,5 +1,6 @@
 import { hooks } from '@/hooks.js';
 import {
+	Button,
 	Card,
 	CardContent,
 	cardGridColumns,
@@ -64,9 +65,11 @@ function SuggestionGroup({
 	items: Person[];
 	className?: string;
 }) {
+	const { loadMoreRecents } = useSuperBar();
 	if (!items.length) {
 		return null;
 	}
+	const isRecents = title === 'Recent people';
 	return (
 		<div
 			className={clsx(
@@ -77,12 +80,22 @@ function SuggestionGroup({
 			<div className="text-xs uppercase text-gray-7 font-bold m2-1">
 				{title}
 			</div>
-			{title === 'Recent people' && <SuperBarTagFilter />}
+			{isRecents && <SuperBarTagFilter />}
 			<Card.Grid columns={cardGridColumns.small}>
 				{items.map((suggestion, index) => (
 					<SuggestionItem key={suggestion.get('id')} value={suggestion} />
 				))}
 			</Card.Grid>
+			{isRecents && loadMoreRecents && (
+				<Button
+					color="ghost"
+					onClick={loadMoreRecents}
+					className="w-full justify-center"
+				>
+					Load more
+					<Icon name="arrowDown" />
+				</Button>
+			)}
 		</div>
 	);
 }

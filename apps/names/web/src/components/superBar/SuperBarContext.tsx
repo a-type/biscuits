@@ -1,4 +1,4 @@
-import { hooks, useAddPerson } from '@/hooks.js';
+import { hooks, useAddPerson, useRecentPeople } from '@/hooks.js';
 import {
 	distance,
 	LOCATION_BROAD_SEARCH_RADIUS,
@@ -30,6 +30,7 @@ const SuperBarContext = createContext<{
 	selectPerson: (person: Person) => void;
 	setTagFilter: (updater: (prev: string[]) => string[]) => void;
 	tagFilter: string[];
+	loadMoreRecents?: () => void;
 }>({
 	inputValue: '',
 	setInputValue: () => {},
@@ -39,6 +40,7 @@ const SuperBarContext = createContext<{
 	selectPerson: () => {},
 	setTagFilter: () => {},
 	tagFilter: [],
+	loadMoreRecents: undefined,
 });
 
 export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
@@ -47,19 +49,8 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 	const deferredSearchWord = deferredInput.split(/\s+/)[0] ?? '';
 
 	const [tagFilter, setTagFilter] = useState<string[]>([]);
-	const firstTag = tagFilter[0];
 
-	const [recentPeople] = hooks.useAllPeoplePaginated({
-		index:
-			firstTag ?
-				{ where: 'tag_createdAt', match: { tags: firstTag }, order: 'desc' }
-			:	{
-					where: 'createdAt',
-					order: 'desc',
-				},
-		key: 'recentPeople',
-		pageSize: 10,
-	});
+	const [recentPeople, pageInfo] = useRecentPeople(tagFilter);
 	const matchedPeopleByNameRaw = hooks.useAllPeople({
 		index: {
 			where: 'matchName',
@@ -186,6 +177,7 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 				selectPerson,
 				tagFilter,
 				setTagFilter,
+				loadMoreRecents: pageInfo.hasMore ? pageInfo.loadMore : undefined,
 			}}
 		>
 			{children}
