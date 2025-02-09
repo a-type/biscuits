@@ -26,7 +26,10 @@ export function PersonTagEditor({ person }: PersonTagEditorProps) {
 		color?: ThemeName;
 		icon?: IconName;
 	}) => {
-		const tag = await client.tags.put(init);
+		const tag = await client.tags.put({
+			...init,
+			name: init.name.trim().toLowerCase(),
+		});
 		tags.add(tag.get('name'));
 	};
 	return (

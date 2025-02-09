@@ -31,7 +31,10 @@ export function TagCreateForm({
 				icon: undefined,
 			}}
 			onSubmit={async (values, bag) => {
-				await onCreate(values);
+				await onCreate({
+					...values,
+					name: values.name.trim().toLowerCase(),
+				});
 				bag.resetForm();
 			}}
 			className={className}
