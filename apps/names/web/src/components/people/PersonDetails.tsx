@@ -36,7 +36,7 @@ export function PersonDetails({ person, className }: PersonDetailsProps) {
 				onValueChange={(value) => person.set('name', value)}
 				className="text-xl"
 			/>
-			<Box d="col" items="stretch" className="px-md" gap>
+			<Box d="col" items="stretch" gap>
 				<Box className="text-xs text-gray-7" items="center" gap="sm">
 					<Icon name="clock" /> Added {new Date(createdAt).toLocaleDateString()}{' '}
 					(

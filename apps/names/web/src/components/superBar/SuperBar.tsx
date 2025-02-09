@@ -16,7 +16,6 @@ export function SuperBar({ className }: SuperBarProps) {
 				ref={inputRef}
 				className={clsx('w-full', !!inputValue ? 'pr-[32px]' : undefined)}
 				placeholder="Search or add..."
-				autoFocus
 				value={inputValue}
 				onValueChange={setInputValue}
 				onKeyDown={(e) => {

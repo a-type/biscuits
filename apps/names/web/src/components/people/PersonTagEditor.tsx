@@ -39,16 +39,20 @@ export function PersonTagEditor({ person }: PersonTagEditorProps) {
 			<Dialog>
 				<Dialog.Trigger asChild>
 					<Button size="small">
-						<Icon name="plus" />
-						<span>Tag</span>
+						<Icon name="plus" className="w-10px h-10px" />
+						<span className="text-xs">tag</span>
 					</Button>
 				</Dialog.Trigger>
-				<Dialog.Content className="flex flex-col gap-md">
+				<Dialog.Content className="flex flex-col">
 					<Suspense>
-						<TagFilter value={tags.getAll()} onToggle={toggleTag} />
+						<TagFilter
+							value={tags.getAll()}
+							onToggle={toggleTag}
+							className="mb-md"
+						/>
 						<TagCreateForm onCreate={createTag} defaultColor="leek" />
 					</Suspense>
-					<Dialog.Actions>
+					<Dialog.Actions className="border-0 border-t border-solid border-gray-5">
 						<Dialog.Close asChild>
 							<Button>Done</Button>
 						</Dialog.Close>

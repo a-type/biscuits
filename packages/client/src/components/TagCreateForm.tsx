@@ -39,11 +39,13 @@ export function TagCreateForm({
 			{({ setFieldValue, values }) => (
 				<>
 					<Box gap items="end" className="w-full">
-						<TextField name="name" label="New tag" className="flex-1" />
-						<ColorPicker
-							onChange={(v) => setFieldValue('color', v)}
-							value={values.color ?? defaultColor ?? null}
-						/>
+						<TextField name="name" label="New tag" className="flex-1-0-0" />
+						<Box className="flex-basis-auto">
+							<ColorPicker
+								onChange={(v) => setFieldValue('color', v)}
+								value={values.color ?? defaultColor ?? null}
+							/>
+						</Box>
 					</Box>
 					<Box justify="end" className="w-full">
 						<SubmitButton type="submit">Create</SubmitButton>
