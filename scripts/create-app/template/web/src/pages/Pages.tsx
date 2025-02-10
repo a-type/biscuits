@@ -16,7 +16,7 @@ const routes = makeRoutes([
 		component: lazy(() => import('./SettingsPage.jsx')),
 	},
 	{
-		path: '/:any',
+		path: '*',
 		component: lazy(() => import('./NotFoundPage.jsx')),
 	},
 ]);

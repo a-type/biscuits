@@ -48,7 +48,7 @@ const routes = makeRoutes([
 				component: lazy(() => import('./PersonPage.jsx')),
 			},
 			{
-				path: '/:any',
+				path: '*',
 				component: lazy(() => import('./NotFoundPage.js')),
 			},
 		],
