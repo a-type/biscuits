@@ -4,6 +4,7 @@ export * from './AppPreviewNotice.js';
 export * from './Changelog.js';
 export * from './Context.js';
 export * from './DarkModeToggle.js';
+export * from './EntityDeleteButton.js';
 export * from './Essentials.js';
 export * from './Explainer.js';
 export * from './FeatureFlag.js';

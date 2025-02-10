@@ -77,7 +77,7 @@ function SuggestionGroup({
 				className,
 			)}
 		>
-			<div className="text-xs uppercase text-gray-7 font-bold m2-1">
+			<div className="text-xs uppercase text-gray-7 font-bold mt-1">
 				{title}
 			</div>
 			{isRecents && <SuperBarTagFilter />}

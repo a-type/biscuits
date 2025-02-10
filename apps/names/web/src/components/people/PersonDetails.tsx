@@ -15,7 +15,7 @@ import {
 	LiveUpdateTextField,
 	RelativeTime,
 } from '@a-type/ui';
-import { useUserInfo } from '@biscuits/client';
+import { EntityDeleteButton, useUserInfo } from '@biscuits/client';
 import { Person } from '@names.biscuits/verdant';
 import { Suspense } from 'react';
 import { PersonPhoto } from './PersonPhoto.jsx';
@@ -56,6 +56,8 @@ export function PersonDetails({ person, className }: PersonDetailsProps) {
 				<NoteEditor person={person} />
 				<Divider />
 				<PersonRelationships person={person} />
+				<Divider />
+				<PersonManage person={person} />
 			</Box>
 		</Box>
 	);
@@ -113,6 +115,19 @@ function CreatedBy({ userId }: { userId: string }) {
 				imageSrc={user.imageUrl ?? null}
 			/>
 			<span>{user.name}</span>
+		</Box>
+	);
+}
+
+function PersonManage({ person }: { person: Person }) {
+	return (
+		<Box gap>
+			<EntityDeleteButton
+				redirectTo="/"
+				entity={person}
+				color="ghostDestructive"
+				entityName={person.get('name')}
+			/>
 		</Box>
 	);
 }
