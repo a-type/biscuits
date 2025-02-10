@@ -16,6 +16,10 @@ import { HomePage } from './HomePage.jsx';
 
 const routes = makeRoutes([
 	{
+		path: '/settings',
+		component: lazy(() => import('./SettingsPage.jsx')),
+	},
+	{
 		path: '/',
 		component: () => (
 			<PageRoot>
@@ -43,11 +47,11 @@ const routes = makeRoutes([
 				path: '/people/:id',
 				component: lazy(() => import('./PersonPage.jsx')),
 			},
+			{
+				path: '/:any',
+				component: lazy(() => import('./NotFoundPage.js')),
+			},
 		],
-	},
-	{
-		path: '/settings',
-		component: lazy(() => import('./SettingsPage.jsx')),
 	},
 ]);
 
