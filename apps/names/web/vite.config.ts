@@ -21,7 +21,7 @@ export default defineConfig(({ command, mode }) => ({
 				short_name: 'Names',
 				description: '',
 				theme_color: '#8ff8d3',
-				background_color: '#ffffff',
+				background_color: '#5CC787',
 				icons: icons(),
 				categories: [],
 				display: 'standalone',
