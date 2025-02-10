@@ -1,5 +1,12 @@
 import { hooks } from '@/hooks.js';
-import { Button, Dialog, Icon, IconName, ThemeName } from '@a-type/ui';
+import {
+	Button,
+	Dialog,
+	FieldLabel,
+	Icon,
+	IconName,
+	ThemeName,
+} from '@a-type/ui';
 import { RemovableTag, TagCreateForm } from '@biscuits/client';
 import { Person } from '@names.biscuits/verdant';
 import { Suspense } from 'react';
@@ -48,6 +55,7 @@ export function PersonTagEditor({ person }: PersonTagEditorProps) {
 				</Dialog.Trigger>
 				<Dialog.Content className="flex flex-col">
 					<Suspense>
+						<FieldLabel>Edit tags</FieldLabel>
 						<TagFilter
 							value={tags.getAll()}
 							onToggle={toggleTag}

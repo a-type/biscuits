@@ -82,7 +82,7 @@ function SuggestionGroup({
 			</div>
 			{isRecents && <SuperBarTagFilter />}
 			<Card.Grid columns={cardGridColumns.small}>
-				{items.map((suggestion, index) => (
+				{items.map((suggestion) => (
 					<SuggestionItem key={suggestion.get('id')} value={suggestion} />
 				))}
 			</Card.Grid>
@@ -114,40 +114,42 @@ function SuggestionItem({
 	const { inputValue, selectPerson } = useSuperBar();
 
 	return (
-		<Card {...rest}>
-			<Card.Main
-				className={clsx('min-h-0', photo?.url && 'min-h-100px')}
-				compact
-				onClick={() => selectPerson(value)}
-			>
-				{photo?.url && (
-					<Card.Image
-						className="bg-cover [background-position:center_20%]"
-						style={{ backgroundImage: `url(${photo.url})` }}
-					/>
-				)}
-				<CardTitle className="font-normal">{name}</CardTitle>
-				{!!tags.length && (
-					<CardContent
-						unstyled
-						className="flex flex-row gap-sm py-xs px-sm mx-0"
-					>
-						{tags.map((tag) => (
-							<Suspense>
-								<TagDisplay key={tag} name={tag} />
-							</Suspense>
-						))}
-					</CardContent>
-				)}
-				{note && (
-					<NoteMatch
-						overlay={!!photo?.url}
-						note={note}
-						inputValue={inputValue}
-					/>
-				)}
-			</Card.Main>
-		</Card>
+		<div className="flex flex-col items-start" {...rest}>
+			<Card className="w-auto select-none">
+				<Card.Main
+					className={clsx('min-h-0', photo?.url && 'min-h-100px')}
+					compact
+					onClick={() => selectPerson(value)}
+				>
+					{photo?.url && (
+						<Card.Image
+							className="bg-cover [background-position:center_20%]"
+							style={{ backgroundImage: `url(${photo.url})` }}
+						/>
+					)}
+					<CardTitle className="font-normal px-md">{name}</CardTitle>
+					{!!tags.length && (
+						<CardContent
+							unstyled
+							className="flex flex-row gap-sm py-xs px-sm mx-0"
+						>
+							{tags.map((tag) => (
+								<Suspense>
+									<TagDisplay key={tag} name={tag} />
+								</Suspense>
+							))}
+						</CardContent>
+					)}
+					{note && (
+						<NoteMatch
+							overlay={!!photo?.url}
+							note={note}
+							inputValue={inputValue}
+						/>
+					)}
+				</Card.Main>
+			</Card>
+		</div>
 	);
 }
 

@@ -19,17 +19,18 @@ export async function getGeolocation() {
 	});
 }
 
-let permissionPromise = hasGeolocationPermission();
+let permissionPromise = innerHasGeolocationPermission();
+async function innerHasGeolocationPermission(): Promise<boolean> {
+	return (
+		'geolocation' in navigator &&
+		'permissions' in navigator &&
+		(await navigator.permissions.query({ name: 'geolocation' })).state ===
+			'granted'
+	);
+}
 
 export async function hasGeolocationPermission(): Promise<boolean> {
-	permissionPromise = (async function () {
-		return (
-			'geolocation' in navigator &&
-			'permissions' in navigator &&
-			(await navigator.permissions.query({ name: 'geolocation' })).state ===
-				'granted'
-		);
-	})();
+	permissionPromise = innerHasGeolocationPermission();
 	return permissionPromise;
 }
 

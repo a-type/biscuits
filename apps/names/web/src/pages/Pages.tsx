@@ -1,5 +1,14 @@
+import { SuperBar } from '@/components/superBar/SuperBar.jsx';
 import { updateApp, updateState } from '@/updateState.js';
-import { Button, ErrorBoundary, H1, P, Spinner } from '@a-type/ui';
+import {
+	Button,
+	ErrorBoundary,
+	H1,
+	P,
+	PageContent,
+	PageRoot,
+	Spinner,
+} from '@a-type/ui';
 import { ReloadButton } from '@biscuits/client';
 import { Link, makeRoutes, Outlet, Router } from '@verdant-web/react-router';
 import { lazy, Suspense, useCallback } from 'react';
@@ -8,16 +17,37 @@ import { HomePage } from './HomePage.jsx';
 const routes = makeRoutes([
 	{
 		path: '/',
-		index: true,
-		component: HomePage,
+		component: () => (
+			<PageRoot>
+				<PageContent>
+					<Suspense
+						fallback={
+							<Spinner className="absolute left-1/2 top-1/2 translate--1/2" />
+						}
+					>
+						<Outlet />
+					</Suspense>
+					<Suspense>
+						<SuperBar />
+					</Suspense>
+				</PageContent>
+			</PageRoot>
+		),
+		children: [
+			{
+				path: '/',
+				index: true,
+				component: HomePage,
+			},
+			{
+				path: '/people/:id',
+				component: lazy(() => import('./PersonPage.jsx')),
+			},
+		],
 	},
 	{
 		path: '/settings',
 		component: lazy(() => import('./SettingsPage.jsx')),
-	},
-	{
-		path: '/people/:id',
-		component: lazy(() => import('./PersonPage.jsx')),
 	},
 ]);
 

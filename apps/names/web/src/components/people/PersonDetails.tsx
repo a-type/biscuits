@@ -10,12 +10,14 @@ import {
 	clsx,
 	Divider,
 	EditableText,
+	ErrorBoundary,
 	Icon,
 	LiveUpdateTextField,
 	RelativeTime,
 } from '@a-type/ui';
 import { useUserInfo } from '@biscuits/client';
 import { Person } from '@names.biscuits/verdant';
+import { Suspense } from 'react';
 import { PersonPhoto } from './PersonPhoto.jsx';
 import { PersonRelationships } from './PersonRelationships.jsx';
 import { PersonTagEditor } from './PersonTagEditor.jsx';
@@ -42,7 +44,13 @@ export function PersonDetails({ person, className }: PersonDetailsProps) {
 					(
 					<RelativeTime value={createdAt} />)
 				</Box>
-				{createdBy && <CreatedBy userId={createdBy} />}
+				{createdBy && (
+					<Suspense fallback={null}>
+						<ErrorBoundary fallback={null}>
+							<CreatedBy userId={createdBy} />
+						</ErrorBoundary>
+					</Suspense>
+				)}
 				<Location person={person} />
 				<PersonTagEditor person={person} />
 				<NoteEditor person={person} />

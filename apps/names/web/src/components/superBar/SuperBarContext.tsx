@@ -5,7 +5,7 @@ import {
 	useGeolocation,
 } from '@/services/location.js';
 import { Person } from '@names.biscuits/verdant';
-import { useNavigate } from '@verdant-web/react-router';
+import { useNavigate, useSearchParams } from '@verdant-web/react-router';
 import {
 	createContext,
 	ReactNode,
@@ -44,7 +44,15 @@ const SuperBarContext = createContext<{
 });
 
 export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
-	const [inputValue, internalSetInputValue] = useState('');
+	const [search] = useSearchParams();
+	const inputValue = search.get('q') ?? '';
+	const navigate = useNavigate();
+	const setInputValue = useCallback(
+		(v: string) => {
+			navigate(`/?q=${encodeURIComponent(v)}`);
+		},
+		[navigate],
+	);
 	const deferredInput = useDeferredValue(inputValue);
 	const deferredSearchWord = deferredInput.split(/\s+/)[0] ?? '';
 
@@ -137,8 +145,6 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 		matchedByDistance,
 	]);
 
-	const navigate = useNavigate();
-
 	const [loading, setLoading] = useState(false);
 	const addPerson = useAddPerson();
 	const createNew = useCallback(
@@ -148,7 +154,6 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 				setLoading(true);
 				const person = await addPerson(inputValue, options);
 				navigate(`/people/${person.get('id')}`);
-				internalSetInputValue('');
 			} finally {
 				setLoading(false);
 			}
@@ -160,8 +165,8 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 		(person: Person) => {
 			navigate(`/people/${person.get('id')}`, {
 				skipTransition: true,
+				preserveQuery: false,
 			});
-			internalSetInputValue('');
 		},
 		[navigate],
 	);
@@ -170,7 +175,7 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 		<SuperBarContext.Provider
 			value={{
 				inputValue,
-				setInputValue: internalSetInputValue,
+				setInputValue,
 				groups,
 				createNew,
 				loading,

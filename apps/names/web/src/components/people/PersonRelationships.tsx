@@ -89,7 +89,7 @@ function PersonRelationshipItem({
 		<div
 			className={clsx(
 				"grid [grid-template-areas:'avatar_name_arrow'_'remove_type_arrow'] [grid-template-columns:auto_1fr_auto] sm:([grid-template-areas:'remove_avatar_name_type_arrow'] [grid-template-columns:auto_auto_1fr_auto_auto]) gap-sm items-center",
-				'border border-solid border-gray-5 rounded-md p-sm',
+				'border border-solid border-gray-5 rounded-md p-sm select-none',
 			)}
 		>
 			<Button
@@ -158,7 +158,7 @@ function RelationshipSuggestions({
 			<Box wrap gap="sm" items="center">
 				{matches.map((match) => (
 					<Chip
-						className="cursor-pointer"
+						className="cursor-pointer select-none"
 						onClick={() => addRelationship(person.get('id'), match.get('id'))}
 					>
 						{match.get('name')}
@@ -218,6 +218,7 @@ function RelationshipTypeSelect({
 					<Select.Item value="cousin">Cousin</Select.Item>
 					<Select.Item value="niece">Niece</Select.Item>
 					<Select.Item value="nephew">Nephew</Select.Item>
+					<Select.Item value="inlaw">In-law</Select.Item>
 				</Select.Group>
 				<Select.Group>
 					<Select.Label>Professional & Acquaintances</Select.Label>
