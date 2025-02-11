@@ -17,7 +17,8 @@
 		"create-migration": "node ./scripts/createMigration.mjs",
 		"create-app": "node ./scripts/create-app/create-app.mjs",
 		"free-ports": "kill-port 6123 6124 6220 6221",
-		"latest": "pnpm --recursive update --latest"
+		"latest": "pnpm --recursive update --latest",
+		"compress-video": "node ./scripts/compress-video.mjs"
 	},
 	"keywords": [],
 	"author": "",

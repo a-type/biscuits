@@ -52,8 +52,16 @@ export function PersonDetails({ person, className }: PersonDetailsProps) {
 					</Suspense>
 				)}
 				<Location person={person} />
-				<PersonTagEditor person={person} />
-				<NoteEditor person={person} />
+				<Box gap="sm">
+					<Icon name="tag" className="text-gray-7 mt-1.5" />
+					<Suspense>
+						<PersonTagEditor person={person} />
+					</Suspense>
+				</Box>
+				<Box gap="sm">
+					<Icon name="note" className="text-gray-7 mt-18px" />
+					<NoteEditor person={person} className="flex-1" />
+				</Box>
 				<Divider />
 				<PersonRelationships person={person} />
 				<Divider />
@@ -74,7 +82,7 @@ function NoteEditor({
 
 	return (
 		<LiveUpdateTextField
-			className={clsx('w-full text-sm bg-transparent shadow-none', className)}
+			className={clsx('text-sm bg-transparent shadow-none', className)}
 			textArea
 			value={note || ''}
 			onChange={(value) => person.set('note', value)}

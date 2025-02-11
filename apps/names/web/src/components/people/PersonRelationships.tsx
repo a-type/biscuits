@@ -1,17 +1,6 @@
 import { hooks, useAddRelationship } from '@/hooks.js';
 import { relationshipOpposites } from '@/relationships.js';
-import {
-	Avatar,
-	Box,
-	Button,
-	Chip,
-	clsx,
-	FieldLabel,
-	H2,
-	H3,
-	Icon,
-	Select,
-} from '@a-type/ui';
+import { Avatar, Box, Button, Chip, clsx, H2, Icon, Select } from '@a-type/ui';
 import { Person, Relationship } from '@names.biscuits/verdant';
 import { Link } from '@verdant-web/react-router';
 import { Suspense } from 'react';
@@ -31,7 +20,9 @@ export function PersonRelationships({ person }: PersonRelationshipsProps) {
 
 	return (
 		<Box d="col" gap="md">
-			<H2 className="text-md">Relationships</H2>
+			<H2 className="text-md">
+				<Icon name="connection" className="text-gray-7 mr-1" /> Relationships
+			</H2>
 			<RelationshipSearch person={person} />
 
 			{relationships.map((relationship) => (
@@ -43,7 +34,9 @@ export function PersonRelationships({ person }: PersonRelationshipsProps) {
 					/>
 				</Suspense>
 			))}
-			<RelationshipSuggestions person={person} omit={relationships} />
+			<Suspense>
+				<RelationshipSuggestions person={person} omit={relationships} />
+			</Suspense>
 		</Box>
 	);
 }
@@ -103,6 +96,7 @@ function PersonRelationshipItem({
 			<Avatar
 				imageSrc={photo?.url ?? null}
 				name={person.get('name')}
+				popIn={false}
 				className="grid-area-[avatar] ml-6px sm:ml-0"
 			/>
 			<span className="grid-area-[name]">{person.get('name')}</span>
@@ -154,7 +148,10 @@ function RelationshipSuggestions({
 
 	return (
 		<Box d="col" items="stretch" gap="sm">
-			<H3>Suggested relationships</H3>
+			<Box className="text-gray-7" gap="sm" items="center">
+				<Icon name="magic" />
+				Suggested
+			</Box>
 			<Box wrap gap="sm" items="center">
 				{matches.map((match) => (
 					<Chip
@@ -238,11 +235,13 @@ function RelationshipTypeSelect({
 function RelationshipSearch({ person }: { person: Person }) {
 	const addRelationship = useAddRelationship();
 	return (
-		<Box d="col" gap="xs">
-			<FieldLabel>Add relationship</FieldLabel>
+		<Box d="row" gap="sm" items="center">
+			<Icon name="add_person" className="text-gray-7" />
 			<Suspense>
 				<PersonNameSearchField
 					onSelect={(otherId) => addRelationship(person.get('id'), otherId)}
+					placeholder="Add relationships..."
+					className="flex-1"
 				/>
 			</Suspense>
 		</Box>

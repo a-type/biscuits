@@ -9,7 +9,7 @@ import {
 	Icon,
 } from '@a-type/ui';
 import { useSuspenseQuery } from '@biscuits/graphql';
-import { ReactNode, Suspense } from 'react';
+import { ComponentProps, ReactNode, Suspense } from 'react';
 import * as CONFIG from '../config.js';
 import { graphql } from '../graphql.js';
 import {
@@ -20,7 +20,6 @@ import {
 import { getIsPWAInstalled } from '../platform.js';
 import { useAppId } from './Context.js';
 import { LoginButton } from './LoginButton.js';
-import { LogoutButton } from './LogoutButton.js';
 import { PresencePeople } from './PresencePeople.js';
 
 export interface UserMenuProps {
@@ -155,16 +154,7 @@ export function UserMenu({
 						</DropdownMenuItemRightSlot>
 					</a>
 				</DropdownMenu.Item>
-				{!!isLoggedIn && (
-					<DropdownMenu.Item asChild>
-						<LogoutButton className="border-none transition-none shadow-none">
-							Log out
-							<DropdownMenuItemRightSlot>
-								<Icon name="arrowRight" />
-							</DropdownMenuItemRightSlot>
-						</LogoutButton>
-					</DropdownMenu.Item>
-				)}
+				<DropdownMenu.Separator />
 				{extraItems}
 			</DropdownMenu.Content>
 		</DropdownMenu>
@@ -173,6 +163,12 @@ export function UserMenu({
 
 export function UserMenuItem(props: DropdownMenuItemProps) {
 	return <DropdownMenuItem {...props} />;
+}
+
+export function UserMenuItemRightSlot(
+	props: ComponentProps<typeof DropdownMenuItemRightSlot>,
+) {
+	return <DropdownMenuItemRightSlot {...props} />;
 }
 
 const userAvatarQuery = graphql(`

@@ -2,9 +2,13 @@ h1,
 h2,
 h3,
 .font-fancy {
-  font-family: Henrietta, 'Noto Serif', serif;
+	font-family: Henrietta, 'Noto Serif', serif;
 }
 
 a {
-  font-weight: bold;
+	font-weight: bold;
+}
+
+#root {
+	position: relative;
 }

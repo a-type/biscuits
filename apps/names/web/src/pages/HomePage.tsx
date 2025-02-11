@@ -1,6 +1,16 @@
 import { SuperBarSuggestions } from '@/components/superBar/SuperBarSuggestions.jsx';
-import { Box, HideWhileKeyboardOpen } from '@a-type/ui';
-import { AppIcon, InstallButton, UserMenu } from '@biscuits/client';
+import {
+	TagManagement,
+	TagManagementTrigger,
+} from '@/components/tags/TagManagement.jsx';
+import { Box, HideWhileKeyboardOpen, Icon } from '@a-type/ui';
+import {
+	AppIcon,
+	InstallButton,
+	UserMenu,
+	UserMenuItem,
+	UserMenuItemRightSlot,
+} from '@biscuits/client';
 
 export interface HomePageProps {}
 
@@ -15,11 +25,23 @@ export function HomePage({}: HomePageProps) {
 					</Box>
 					<Box items="center" gap="sm">
 						<InstallButton />
-						<UserMenu />
+						<UserMenu
+							extraItems={
+								<TagManagementTrigger>
+									<UserMenuItem>
+										Manage Tags
+										<UserMenuItemRightSlot>
+											<Icon name="tag" />
+										</UserMenuItemRightSlot>
+									</UserMenuItem>
+								</TagManagementTrigger>
+							}
+						/>
 					</Box>
 				</HideWhileKeyboardOpen>
 			</Box>
 			<SuperBarSuggestions />
+			<TagManagement />
 		</>
 	);
 }

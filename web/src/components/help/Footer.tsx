@@ -17,7 +17,7 @@ export function Footer({ className }: FooterProps) {
 				<Link to="/" className="font-fancy text-sm font-semibold">
 					Biscuits
 				</Link>
-				<span>© {new Date().getFullYear()} Grant Forrest</span>
+				<span>© 2023-{new Date().getFullYear()} Grant Forrest</span>
 				<Link to="/privacy">Privacy Policy</Link>
 				<Link to="/tos">Terms of Service</Link>
 			</div>

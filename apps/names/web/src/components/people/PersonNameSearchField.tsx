@@ -6,10 +6,14 @@ import { useDeferredValue, useState } from 'react';
 
 export interface PersonNameSearchFieldProps {
 	onSelect?: (personId: string) => void;
+	placeholder?: string;
+	className?: string;
 }
 
 export function PersonNameSearchField({
 	onSelect,
+	placeholder,
+	className,
 }: PersonNameSearchFieldProps) {
 	const [inputValue, setInputValue] = useState('');
 	const deferredInput = useDeferredValue(inputValue);
@@ -53,7 +57,12 @@ export function PersonNameSearchField({
 			}}
 		>
 			<Popover.Anchor asChild>
-				<Input {...getInputProps({ placeholder: 'Search names...' })} />
+				<Input
+					{...getInputProps({
+						placeholder: placeholder || 'Search names...',
+						className,
+					})}
+				/>
 			</Popover.Anchor>
 			<Popover.Content
 				{...getMenuProps()}

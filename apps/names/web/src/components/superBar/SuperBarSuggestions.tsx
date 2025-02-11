@@ -20,9 +20,12 @@ export interface SuperBarSuggestionsProps {
 }
 
 export function SuperBarSuggestions({ className }: SuperBarSuggestionsProps) {
-	const { groups, inputValue } = useSuperBar();
+	const { groups, inputValue, tagFilter } = useSuperBar();
 
-	if (groups.length === 0 || groups.every((g) => g.items.length === 0)) {
+	if (
+		groups.length === 0 ||
+		(groups.every((g) => g.items.length === 0) && tagFilter.length === 0)
+	) {
 		if (!inputValue) {
 			return (
 				<div className={clsx('p-8 col gap-6', className)}>
@@ -65,11 +68,11 @@ function SuggestionGroup({
 	items: Person[];
 	className?: string;
 }) {
-	const { loadMoreRecents } = useSuperBar();
-	if (!items.length) {
+	const { loadMoreRecents, tagFilter } = useSuperBar();
+	const isRecents = title === 'Recent people';
+	if (!items.length && (!isRecents || tagFilter.length === 0)) {
 		return null;
 	}
-	const isRecents = title === 'Recent people';
 	return (
 		<div
 			className={clsx(

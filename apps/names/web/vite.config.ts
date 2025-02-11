@@ -19,10 +19,22 @@ export default defineConfig(({ command, mode }) => ({
 				id: 'names-main',
 				name: 'Names',
 				short_name: 'Names',
-				description: '',
+				description: 'An app to help with remembering names',
 				theme_color: '#8ff8d3',
 				background_color: '#5CC787',
 				icons: icons(),
+				screenshots: [
+					{
+						src: 'screenshots/homepage.png',
+						type: 'image/png',
+						sizes: '477x1060',
+					},
+					{
+						src: 'screenshots/person.png',
+						type: 'image/png',
+						sizes: '477x1057',
+					},
+				],
 				categories: [],
 				display: 'standalone',
 				scope: 'https://names.biscuits.club/',

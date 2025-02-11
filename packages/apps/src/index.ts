@@ -25,7 +25,7 @@ export const apps = [
 		id: 'gnocchi',
 		url: 'https://gnocchi.biscuits.club',
 		name: 'Gnocchi',
-		description: 'Organize your weekly cooking and groceries',
+		description: 'Organize your weekly cooking',
 		mainImageUrl: 'https://gnocchi.biscuits.club/og-image.png',
 		iconPath: 'android-chrome-512x512.png',
 		size: 4,
@@ -150,7 +150,7 @@ export const apps = [
 		description: "Remember people's names",
 		url: 'https://names.biscuits.club',
 		devOriginOverride: 'http://localhost:6227',
-		demoVideoSrc: '',
+		demoVideoSrc: '/videos/names-compressed.mp4',
 		paidDescription:
 			'Sync names with your devices and share with family, plus location-based search',
 		paidFeatures: [

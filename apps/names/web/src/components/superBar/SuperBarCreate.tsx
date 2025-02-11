@@ -1,6 +1,6 @@
 import { useHasGeolocationPermission } from '@/services/location.js';
 import { Box, Button, Checkbox, CollapsibleSimple, Icon } from '@a-type/ui';
-import { useState } from 'react';
+import { useSessionStorage } from '@biscuits/client';
 import { useSuperBar } from './SuperBarContext.jsx';
 
 export interface SuperBarCreateProps {}
@@ -9,7 +9,10 @@ export function SuperBarCreate({}: SuperBarCreateProps) {
 	const { inputValue, createNew, loading } = useSuperBar();
 
 	const locationEnabled = useHasGeolocationPermission();
-	const [attachLocation, setAttachLocation] = useState(true);
+	const [attachLocation, setAttachLocation] = useSessionStorage(
+		'attachLocation',
+		true,
+	);
 
 	return (
 		<CollapsibleSimple open={!!inputValue} className="w-full">

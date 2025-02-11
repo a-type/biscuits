@@ -1,6 +1,6 @@
 import { useMe, VerdantProfile } from '@biscuits/client';
 import { createHooks } from '@names.biscuits/verdant';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import {
 	getGeolocation,
 	hasGeolocationPermission,
@@ -73,4 +73,42 @@ export function useRecentPeople(tagFilter?: string[]) {
 	);
 
 	return [recentPeople, pages] as const;
+}
+
+export function useDeleteTag() {
+	const client = hooks.useClient();
+
+	return useMemo(() => {
+		async function deleteTag(tagName: string) {
+			tagName = tagName.toLowerCase().trim();
+			const tag = await client.tags.get(tagName).resolved;
+			const tagInit = tag?.getSnapshot() ?? null;
+			const matches = await client.people.findAll({
+				index: { where: 'tags', equals: tagName },
+			}).resolved;
+			client.batch({ undoable: false }).run(() => {
+				for (const match of matches) {
+					match.get('tags').removeAll(tagName);
+				}
+			});
+			await client.tags.delete(tagName, {
+				undoable: false,
+			});
+			function undoDeleteTag() {
+				if (tagInit) {
+					client.tags.put(tagInit);
+					for (const match of matches) {
+						match.get('tags').add(tagName);
+					}
+				}
+
+				return async function () {
+					deleteTag(tagName);
+					return () => undoDeleteTag();
+				};
+			}
+			client.undoHistory.addUndo(undoDeleteTag);
+		}
+		return deleteTag;
+	}, [client]);
 }

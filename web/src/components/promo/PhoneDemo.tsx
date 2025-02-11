@@ -30,7 +30,7 @@ export function PhoneDemo({
 		>
 			<div
 				className={classNames(
-					'phone rounded-lg aspect-ratio-11/24 bg-[black] min-h-0',
+					'phone rounded-lg aspect-ratio-11/24 bg-[black] min-h-0 h-30vh sm:h-auto',
 					direction,
 				)}
 				style={{

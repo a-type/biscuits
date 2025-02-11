@@ -1,6 +1,7 @@
 import { hooks } from '@/hooks.js';
 import {
 	Button,
+	clsx,
 	Dialog,
 	FieldLabel,
 	Icon,
@@ -14,9 +15,10 @@ import { TagFilter } from '../tags/TagFilter.js';
 
 export interface PersonTagEditorProps {
 	person: Person;
+	className?: string;
 }
 
-export function PersonTagEditor({ person }: PersonTagEditorProps) {
+export function PersonTagEditor({ person, className }: PersonTagEditorProps) {
 	const { tags } = hooks.useWatch(person);
 	hooks.useWatch(tags);
 	const removeTag = (name: string) => tags.removeAll(name);
@@ -40,7 +42,7 @@ export function PersonTagEditor({ person }: PersonTagEditorProps) {
 		tags.add(tag.get('name'));
 	};
 	return (
-		<div className="flex flex-wrap gap-1 items-center">
+		<div className={clsx('flex flex-wrap gap-1 items-center', className)}>
 			{tags?.map((tag) => (
 				<Suspense key={tag}>
 					<TagDisplay key={tag} tag={tag} onRemove={removeTag} />
