@@ -4,6 +4,7 @@ import {
 	LOCATION_BROAD_SEARCH_RADIUS,
 	useGeolocation,
 } from '@/services/location.js';
+import { useSessionStorage } from '@biscuits/client';
 import { Person } from '@names.biscuits/verdant';
 import { useNavigate, useSearchParams } from '@verdant-web/react-router';
 import {
@@ -147,19 +148,17 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 
 	const [loading, setLoading] = useState(false);
 	const addPerson = useAddPerson();
-	const createNew = useCallback(
-		async (options: { attachLocation?: boolean } = {}) => {
-			if (loading) return;
-			try {
-				setLoading(true);
-				const person = await addPerson(inputValue, options);
-				navigate(`/people/${person.get('id')}`);
-			} finally {
-				setLoading(false);
-			}
-		},
-		[addPerson, navigate, inputValue, loading],
-	);
+	const [attachLocation] = useSessionStorage('attachLocation', true);
+	const createNew = useCallback(async () => {
+		if (loading) return;
+		try {
+			setLoading(true);
+			const person = await addPerson(inputValue, { attachLocation });
+			navigate(`/people/${person.get('id')}`);
+		} finally {
+			setLoading(false);
+		}
+	}, [addPerson, navigate, inputValue, loading]);
 
 	const selectPerson = useCallback(
 		(person: Person) => {

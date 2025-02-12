@@ -1,9 +1,11 @@
-import { GoogleProvider, createHandlers } from '@a-type/auth';
+import { GoogleProvider, createHandlers, honoAdapter } from '@a-type/auth';
 import { assert } from '@a-type/utils';
 import { comparePassword, db, hashPassword, id } from '@biscuits/db';
 import { BiscuitsError } from '@biscuits/error';
+import { Context } from 'hono';
 import { sessions } from '../auth/session.js';
 import { DEPLOYED_ORIGIN, UI_ORIGIN } from '../config/deployedContext.js';
+import { Env } from '../config/hono.js';
 import { email } from '../services/email.js';
 
 assert(!!process.env.GOOGLE_AUTH_CLIENT_ID, 'GOOGLE_CLIENT_ID must be set');
@@ -12,20 +14,29 @@ assert(
 	'GOOGLE_CLIENT_SECRET must be set',
 );
 
-export const authHandlers = createHandlers({
+export const authHandlers = createHandlers<Context<Env>>({
 	sessions,
-	returnToOrigin: UI_ORIGIN,
+	getRedirectConfig(ctx) {
+		return {
+			defaultReturnToOrigin: UI_ORIGIN,
+		};
+	},
 	providers: {
 		google: new GoogleProvider({
-			clientId: process.env.GOOGLE_AUTH_CLIENT_ID!,
-			clientSecret: process.env.GOOGLE_AUTH_CLIENT_SECRET!,
-			redirectUri: DEPLOYED_ORIGIN + '/auth/provider/google/callback',
+			getConfig(ctx) {
+				return {
+					clientId: process.env.GOOGLE_AUTH_CLIENT_ID!,
+					clientSecret: process.env.GOOGLE_AUTH_CLIENT_SECRET!,
+					redirectUri: DEPLOYED_ORIGIN + '/auth/provider/google/callback',
+				};
+			},
 		}),
 	},
+	adapter: honoAdapter,
 	addProvidersToExistingUsers: true,
 	defaultReturnToPath: '/',
-	email: email,
-	db: {
+	email,
+	getStorage: () => ({
 		getAccountByProviderAccountId: async (providerName, providerAccountId) => {
 			const dbAccount = await db
 				.selectFrom('Account')
@@ -40,7 +51,7 @@ export const authHandlers = createHandlers({
 
 			return {
 				...dbAccount,
-				expiresAt: dbAccount.accessTokenExpiresAt?.getTime() ?? null,
+				expiresAt: dbAccount.accessTokenExpiresAt ?? null,
 			};
 		},
 		getUserByEmail: async (email) => {
@@ -100,6 +111,7 @@ export const authHandlers = createHandlers({
 						planId: planResult.id,
 						planRole: 'admin',
 						...user,
+						emailVerifiedAt: user.emailVerifiedAt?.toUTCString() ?? undefined,
 					})
 					.returning('id')
 					.executeTakeFirstOrThrow();
@@ -107,12 +119,15 @@ export const authHandlers = createHandlers({
 				return userResult;
 			});
 			email
-				.sendMail({
-					to: 'hi@biscuits.club',
-					subject: 'New Biscuits User',
-					text: `A new user has signed up: ${user.email}`,
-					html: `<p>A new user has signed up: ${user.email}</p>`,
-				})
+				.sendCustomEmail(
+					{
+						to: 'hi@biscuits.club',
+						subject: 'New Biscuits User',
+						text: `A new user has signed up: ${user.email}`,
+						html: `<p>A new user has signed up: ${user.email}</p>`,
+					},
+					{},
+				)
 				.catch((error) => {
 					console.error('Failed to send new user email', error);
 				});
@@ -174,12 +189,12 @@ export const authHandlers = createHandlers({
 				.where('id', '=', id)
 				.set({
 					fullName: user.fullName ?? undefined,
-					emailVerifiedAt: user.emailVerifiedAt ?? undefined,
+					emailVerifiedAt: user.emailVerifiedAt?.toUTCString() ?? undefined,
 					friendlyName: user.friendlyName ?? undefined,
 					imageUrl: user.imageUrl ?? undefined,
 					password,
 				})
 				.executeTakeFirstOrThrow();
 		},
-	},
+	}),
 });

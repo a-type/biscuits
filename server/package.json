@@ -19,7 +19,8 @@
 	"type": "module",
 	"private": true,
 	"dependencies": {
-		"@a-type/auth": "0.6.9",
+		"@a-type/auth": "catalog:",
+		"@a-type/auth-email-nodemailer": "^2.0.9",
 		"@a-type/utils": "1.1.4",
 		"@aws-sdk/client-cloudfront": "^3.583.0",
 		"@aws-sdk/client-s3": "3.583.0",

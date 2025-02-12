@@ -21,7 +21,9 @@ export function SuperBarCreate({}: SuperBarCreateProps) {
 					color="ghost"
 					className="w-full justify-center text-wrap rounded-none justify-between gap-sm [--focus:var(--color-primary-dark)]"
 					loading={loading}
-					onClick={() => createNew({ attachLocation })}
+					onClick={() => {
+						createNew({ attachLocation });
+					}}
 				>
 					Create "{inputValue}"
 					<Icon name="enterKey" className="ml-auto" />

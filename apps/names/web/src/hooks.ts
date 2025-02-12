@@ -34,19 +34,33 @@ export function useAddPerson() {
 			name: string,
 			options: { attachLocation?: boolean } = { attachLocation: true },
 		) => {
+			console.log(options);
 			const person = await client.people.put({
 				name,
 				createdBy: selfId,
 			});
 			// if allowed, record location
-			if (options.attachLocation && (await hasGeolocationPermission())) {
+			if (options.attachLocation) {
+				console.log('Attaching location to', name);
 				// out of band location assignment
-				getGeolocation().then((location) => {
-					person.set('geolocation', {
-						latitude: location.latitude,
-						longitude: location.longitude,
+				hasGeolocationPermission()
+					.then((hasPermission) => {
+						if (!hasPermission) {
+							console.error('Location permission was not granted.');
+							return;
+						}
+						console.debug('Fetching location');
+						return getGeolocation().then((location) => {
+							console.debug('Fetched location', location);
+							person.set('geolocation', {
+								latitude: location.latitude,
+								longitude: location.longitude,
+							});
+						});
+					})
+					.catch((err) => {
+						console.error('Error fetching location', err);
 					});
-				});
 			}
 			return person;
 		},

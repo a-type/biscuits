@@ -21,16 +21,17 @@ export async function getGeolocation() {
 
 let permissionPromise = innerHasGeolocationPermission();
 async function innerHasGeolocationPermission(): Promise<boolean> {
-	return (
+	const value =
 		'geolocation' in navigator &&
 		'permissions' in navigator &&
 		(await navigator.permissions.query({ name: 'geolocation' })).state ===
-			'granted'
-	);
+			'granted';
+	console.debug('Geolocation permission:', value);
+	return value;
 }
 
 export async function hasGeolocationPermission(): Promise<boolean> {
-	permissionPromise = innerHasGeolocationPermission();
+	permissionPromise ??= innerHasGeolocationPermission();
 	return permissionPromise;
 }
 

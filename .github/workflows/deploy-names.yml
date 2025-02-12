@@ -37,6 +37,7 @@ jobs:
           VITE_HOME_ORIGIN: ${{ vars.HOME_ORIGIN }}
           VITE_PUBLIC_URL: https://names.biscuits.club
           VITE_STRIPE_PUBLISHABLE_KEY: ${{ vars.STRIPE_PUBLISHABLE_KEY }}
+          VITE_MAPBOX_TOKEN: ${{ secrets.MAPBOX_PUBLIC_TOKEN }}
 
       - name: Deploy names to S3
         uses: jakejarvis/s3-sync-action@master

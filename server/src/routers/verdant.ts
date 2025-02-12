@@ -15,8 +15,8 @@ const tokenProvider = new TokenProvider({
 	secret: VERDANT_SECRET,
 });
 
-verdantRouter.get('/token/:app', async ({ req }) => {
-	const session = await sessions.getSession(req.raw);
+verdantRouter.get('/token/:app', async (ctx) => {
+	const session = await sessions.getSession(ctx);
 
 	if (!session) {
 		throw new BiscuitsError(BiscuitsError.Code.NotLoggedIn);
@@ -24,7 +24,7 @@ verdantRouter.get('/token/:app', async ({ req }) => {
 
 	// for Wish Wash, users can use sync for 1 person, fetch-based only,
 	// with no subscription
-	const appId = req.param('app');
+	const appId = ctx.req.param('app');
 
 	if (!session.planId) {
 		throw new BiscuitsError(BiscuitsError.Code.NoPlan);
@@ -36,7 +36,7 @@ verdantRouter.get('/token/:app', async ({ req }) => {
 		throw new BiscuitsError(BiscuitsError.Code.SubscriptionInactive);
 	}
 
-	const access = req.query('access') ?? 'members';
+	const access = ctx.req.query('access') ?? 'members';
 	if (access !== 'members' && access !== 'user') {
 		throw new BiscuitsError(
 			BiscuitsError.Code.BadRequest,
@@ -49,7 +49,7 @@ verdantRouter.get('/token/:app', async ({ req }) => {
 
 	const libraryId = getLibraryName({
 		planId: session.planId,
-		app: req.param('app'),
+		app: ctx.req.param('app'),
 		access,
 		userId: session.userId,
 	});

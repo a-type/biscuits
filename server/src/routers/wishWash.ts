@@ -41,8 +41,8 @@ function itemImageUrls(item: WishlistSnapshot['items'][number]) {
 	return imageUrls;
 }
 
-wishWashRouter.get('/hubList/:listSlug', async ({ req }) => {
-	const listSlug = req.param('listSlug');
+wishWashRouter.get('/hubList/:listSlug', async (ctx) => {
+	const listSlug = ctx.req.param('listSlug');
 	// parse slug out of fragment
 	const slug = listSlug.split('-').pop()!;
 
@@ -80,7 +80,7 @@ wishWashRouter.get('/hubList/:listSlug', async ({ req }) => {
 
 	let session: Session | null = null;
 	try {
-		session = await sessions.getSession(req.raw);
+		session = await sessions.getSession(ctx);
 	} catch (err) {
 		// that's fine
 	}

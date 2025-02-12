@@ -10,7 +10,7 @@ authRouter
 	.post('/provider/:provider/login', (ctx) => {
 		const provider = ctx.req.param('provider');
 		try {
-			return authHandlers.handleOAuthLoginRequest(ctx.req.raw, { provider });
+			return authHandlers.handleOAuthLoginRequest(ctx, { provider });
 		} catch (err) {
 			return routeAuthErrorsToUi('/login')(err as Error);
 		}
@@ -18,43 +18,39 @@ authRouter
 	.get('/provider/:provider/callback', (ctx) => {
 		const provider = ctx.req.param('provider');
 		return authHandlers
-			.handleOAuthCallbackRequest(ctx.req.raw, { provider })
+			.handleOAuthCallbackRequest(ctx, { provider })
 			.catch(routeAuthErrorsToUi('/login'));
 	})
 	.all('/logout', (ctx) =>
-		authHandlers
-			.handleLogoutRequest(ctx.req.raw)
-			.catch(routeAuthErrorsToUi('/')),
+		authHandlers.handleLogoutRequest(ctx).catch(routeAuthErrorsToUi('/')),
 	)
 	.post('/begin-email-signup', (ctx) =>
 		authHandlers
-			.handleSendEmailVerificationRequest(ctx.req.raw)
+			.handleSendEmailVerificationRequest(ctx)
 			.catch(routeAuthErrorsToUi('/login')),
 	)
 	.post('/complete-email-signup', (ctx) =>
 		authHandlers
-			.handleVerifyEmailRequest(ctx.req.raw)
+			.handleVerifyEmailRequest(ctx)
 			.catch(routeAuthErrorsToUi('/login')),
 	)
 	.post('/email-login', (ctx) =>
 		authHandlers
-			.handleEmailLoginRequest(ctx.req.raw)
+			.handleEmailLoginRequest(ctx)
 			.catch(routeAuthErrorsToUi('/login')),
 	)
 	.post('/begin-reset-password', (ctx) =>
 		authHandlers
-			.handleResetPasswordRequest(ctx.req.raw)
+			.handleResetPasswordRequest(ctx)
 			.catch(routeAuthErrorsToUi('/login')),
 	)
 	.post('/complete-reset-password', (ctx) =>
 		authHandlers
-			.handleVerifyPasswordResetRequest(ctx.req.raw)
+			.handleVerifyPasswordResetRequest(ctx)
 			.catch(routeAuthErrorsToUi('/login')),
 	)
-	.post('/refresh', (ctx) =>
-		authHandlers.handleRefreshSessionRequest(ctx.req.raw),
-	)
-	.get('/session', (ctx) => authHandlers.handleSessionRequest(ctx.req.raw));
+	.post('/refresh', (ctx) => authHandlers.handleRefreshSessionRequest(ctx))
+	.get('/session', (ctx) => authHandlers.handleSessionRequest(ctx));
 
 function routeAuthErrorsToUi(path: string) {
 	return function (err: Error) {

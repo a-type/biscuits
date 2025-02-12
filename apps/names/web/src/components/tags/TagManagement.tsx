@@ -37,7 +37,7 @@ export function TagManagement({}: TagManagementProps) {
 				<Dialog.Title>Manage Tags</Dialog.Title>
 				<Box className="w-full" gap d="col">
 					{tags.map((tag) => (
-						<Suspense>
+						<Suspense key={tag.uid}>
 							<TagManagementRow tag={tag} />
 						</Suspense>
 					))}

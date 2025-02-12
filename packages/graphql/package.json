@@ -33,7 +33,7 @@
 		"typescript": "catalog:"
 	},
 	"dependencies": {
-		"@a-type/auth-client": "1.0.13",
+		"@a-type/auth-fetch": "catalog:",
 		"@apollo/client": "3.12.3",
 		"@biscuits/apps": "workspace:*",
 		"@biscuits/error": "workspace:*",

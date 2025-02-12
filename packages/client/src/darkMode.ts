@@ -51,6 +51,16 @@ export function getColorMode(): 'system' | 'light' | 'dark' {
   return (window.localStorage.getItem('colorMode') as any) || 'system';
 }
 
+export function getResolvedColorMode(): 'light' | 'dark' {
+  const mode = getColorMode();
+  if (mode === 'system') {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
+  }
+  return mode;
+}
+
 export function subscribeToColorModeChange(
   callback: (mode: 'system' | 'light' | 'dark') => void,
 ) {

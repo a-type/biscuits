@@ -76,11 +76,11 @@ stripeRouter.post('/webhook', async ({ req }) => {
 	}
 });
 
-stripeRouter.post('/checkout-session', async ({ req }) => {
-	const body = await req.json();
+stripeRouter.post('/checkout-session', async (ctx) => {
+	const body = await ctx.req.json();
 	const priceKey = body.priceKey;
 
-	const session = await sessions.getSession(req.raw);
+	const session = await sessions.getSession(ctx);
 	if (!session) {
 		throw new BiscuitsError(
 			BiscuitsError.Code.Unauthorized,
@@ -162,8 +162,8 @@ stripeRouter.post('/checkout-session', async ({ req }) => {
 	});
 });
 
-stripeRouter.post('/portal-session', async ({ req }) => {
-	const session = await sessions.getSession(req.raw);
+stripeRouter.post('/portal-session', async (ctx) => {
+	const session = await sessions.getSession(ctx);
 	if (!session) {
 		throw new BiscuitsError(
 			BiscuitsError.Code.Unauthorized,

@@ -69,6 +69,7 @@ export function PersonNameSearchField({
 				className="w-[var(--radix-popper-anchor-width)]"
 				onOpenAutoFocus={preventDefault}
 				sideOffset={8}
+				forceMount
 			>
 				{matches.map((person, index) => (
 					<Box

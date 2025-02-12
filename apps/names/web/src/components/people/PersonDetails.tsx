@@ -17,10 +17,12 @@ import {
 } from '@a-type/ui';
 import { EntityDeleteButton, useUserInfo } from '@biscuits/client';
 import { Person } from '@names.biscuits/verdant';
-import { Suspense } from 'react';
+import { lazy, Suspense } from 'react';
 import { PersonPhoto } from './PersonPhoto.jsx';
 import { PersonRelationships } from './PersonRelationships.jsx';
 import { PersonTagEditor } from './PersonTagEditor.jsx';
+
+const LazyMapView = lazy(() => import('../location/MapView.js'));
 
 export interface PersonDetailsProps {
 	person: Person;
@@ -96,16 +98,27 @@ function Location({ person }: { person: Person }) {
 	const currentLocation = useGeolocation();
 
 	if (!geolocation) return null;
-	if (!currentLocation) return null;
-	if (
+	const nearby =
+		currentLocation &&
 		distance(geolocation.getAll(), currentLocation) >
-		LOCATION_BROAD_SEARCH_RADIUS
-	)
-		return null;
+			LOCATION_BROAD_SEARCH_RADIUS;
+
+	if (!geolocation) return null;
 
 	return (
-		<Box className="text-xs text-gray-7" items="center" gap="sm">
-			<Icon name="location" /> Met nearby
+		<Box d="col" gap="sm">
+			<Box className="text-xs text-gray-7" items="start" gap="sm">
+				<Icon name="locate" />
+				<LazyMapView
+					location={geolocation.getAll()}
+					className="w-full h-[200px] rounded-md"
+				/>
+			</Box>
+			{nearby && (
+				<Box className="text-xs text-gray-7" items="center" gap="sm">
+					<Icon name="location" /> Met nearby
+				</Box>
+			)}
 		</Box>
 	);
 }

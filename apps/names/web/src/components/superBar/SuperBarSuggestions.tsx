@@ -54,7 +54,9 @@ export function SuperBarSuggestions({ className }: SuperBarSuggestionsProps) {
 					items={group.items}
 				/>
 			))}
-			<LocationOffer />
+			<Suspense>
+				<LocationOffer />
+			</Suspense>
 		</div>
 	);
 }
@@ -142,8 +144,8 @@ function SuggestionItem({
 							className="flex flex-row gap-sm py-xs px-sm mx-0"
 						>
 							{tags.map((tag) => (
-								<Suspense>
-									<TagDisplay key={tag} name={tag} />
+								<Suspense key={tag}>
+									<TagDisplay name={tag} />
 								</Suspense>
 							))}
 						</CardContent>

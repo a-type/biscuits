@@ -92,10 +92,10 @@ export const graphqlRouter = new Hono<Env>().all(
 			applyHeaders: new Headers(),
 			setLoginSession: async (ses: Session | null) => {
 				if (ses) {
-					const { headers } = await sessions.updateSession(ses);
+					const { headers } = await sessions.updateSession(ses, honoCtx);
 					auth.applyHeaders = new Headers(headers);
 				} else {
-					const { headers } = sessions.clearSession();
+					const { headers } = sessions.clearSession(honoCtx);
 					auth.applyHeaders = new Headers(headers);
 				}
 				// also update immediately in the context, so that
@@ -105,7 +105,7 @@ export const graphqlRouter = new Hono<Env>().all(
 		};
 		let session = null;
 		try {
-			session = await sessions.getSession(honoCtx.req.raw);
+			session = await sessions.getSession(honoCtx);
 		} catch (e) {
 			// if session expired, we need to tell the client to refresh it
 			if (e instanceof AuthError) {

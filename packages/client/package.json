@@ -58,7 +58,7 @@
 	"dependencies": {
 		"@a-type/ui": "catalog:",
 		"@a-type/utils": "catalog:",
-		"@a-type/auth-client": "1.0.13",
+		"@a-type/auth-fetch": "catalog:",
 		"@biscuits/apps": "workspace:*",
 		"@biscuits/error": "workspace:*",
 		"@biscuits/graphql": "workspace:*",

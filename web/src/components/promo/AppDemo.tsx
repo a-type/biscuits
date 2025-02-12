@@ -6,8 +6,9 @@ import {
 	useSpringRef,
 	useTransition,
 } from '@react-spring/web';
+import { useSearchParams } from '@verdant-web/react-router';
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import PhoneDemo from './PhoneDemo.jsx';
 
 export interface AppDemoProps {
@@ -15,7 +16,13 @@ export interface AppDemoProps {
 }
 
 export function AppDemo({ className }: AppDemoProps) {
-	const [appId, setAppId] = useState<AppId>('gnocchi');
+	const [search, updateSearch] = useSearchParams();
+	const appId = (search.get('appId') ?? 'gnocchi') as AppId;
+	const setAppId = (appId: AppId) =>
+		updateSearch((s) => {
+			s.set('appId', appId);
+			return s;
+		});
 
 	const app = appsById[appId];
 	const appIndex = visibleApps.findIndex((v) => v.id === appId);
