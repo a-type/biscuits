@@ -11,6 +11,7 @@ export type AppManifest<Id extends string> = {
 	paidDescription: string;
 	paidFeatures: PaidFeature[] | readonly PaidFeature[];
 	prerelease?: boolean;
+	theme: string;
 };
 
 export type PaidFeature = {
@@ -55,6 +56,7 @@ export const apps = [
 		],
 		paidDescription:
 			'Your personal cooking app becomes a family groceries list and recipe box.',
+		theme: 'lemon',
 	} as AppManifest<'gnocchi'>,
 	{
 		id: 'trip-tick',
@@ -81,6 +83,7 @@ export const apps = [
 		],
 		paidDescription:
 			'Now everyone can be on the same page when packing. Plus, get a weather forecast and more powerful trip planning tools.',
+		theme: 'eggplant',
 	} as AppManifest<'trip-tick'>,
 	{
 		id: 'wish-wash',
@@ -93,6 +96,7 @@ export const apps = [
 		paidFeatures: [],
 		url: 'https://wish-wash.biscuits.club',
 		prerelease: true,
+		theme: 'eggplant',
 	} as AppManifest<'wish-wash'>,
 	{
 		id: 'marginalia',
@@ -105,6 +109,7 @@ export const apps = [
 		paidFeatures: [],
 		url: 'https://marginalia.biscuits.club',
 		prerelease: true,
+		theme: 'tomato',
 	} as AppManifest<'marginalia'>,
 	{
 		id: 'star-chart',
@@ -117,6 +122,7 @@ export const apps = [
 		paidFeatures: [],
 		url: 'https://star-chart.biscuits.club',
 		prerelease: true,
+		theme: 'blueberry',
 	} as AppManifest<'star-chart'>,
 	{
 		id: 'humding',
@@ -130,6 +136,7 @@ export const apps = [
 		paidFeatures: [],
 		url: 'https://humding.biscuits.club',
 		prerelease: true,
+		theme: 'lemon',
 	} as AppManifest<'humding'>,
 	{
 		id: 'palette',
@@ -142,6 +149,7 @@ export const apps = [
 		paidFeatures: [],
 		url: 'https://palette.biscuits.club',
 		prerelease: false,
+		theme: 'lemon',
 	},
 	{
 		id: 'names',
@@ -173,7 +181,8 @@ export const apps = [
 				description: 'Access your names on all your devices.',
 			},
 		],
-		prerelease: true,
+		prerelease: false,
+		theme: 'leek',
 	},
 ] as const;
 
@@ -203,3 +212,5 @@ declare global {
 		readonly env: ImportMetaEnv;
 	}
 }
+
+export const visibleApps = apps.filter((app) => !app.prerelease);

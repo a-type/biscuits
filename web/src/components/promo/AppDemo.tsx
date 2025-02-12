@@ -1,5 +1,5 @@
 import { Box, Button, clsx, Icon } from '@a-type/ui';
-import { AppId, apps, appsById, getAppUrl } from '@biscuits/apps';
+import { AppId, appsById, getAppUrl, visibleApps } from '@biscuits/apps';
 import {
 	animated,
 	config,
@@ -13,8 +13,6 @@ import PhoneDemo from './PhoneDemo.jsx';
 export interface AppDemoProps {
 	className?: string;
 }
-
-const visibleApps = apps.filter((app) => !app.prerelease);
 
 export function AppDemo({ className }: AppDemoProps) {
 	const [appId, setAppId] = useState<AppId>('gnocchi');
@@ -44,7 +42,7 @@ export function AppDemo({ className }: AppDemoProps) {
 			gap="md"
 			items="stretch"
 			justify="center"
-			className={className}
+			className={clsx(className, `theme-${app.theme}`)}
 		>
 			<div
 				className={classNames(
