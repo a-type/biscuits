@@ -82,7 +82,7 @@ function RecipeEditorContent({ recipe }: { recipe: Recipe }) {
 				<RecipeIngredientsEditor recipe={recipe} />
 			</div>
 			<div>
-				<InstructionsProvider isEditing showTools recipeId={recipe.get('id')}>
+				<InstructionsProvider isEditing recipeId={recipe.get('id')}>
 					<H2 className="gutter-bottom">Instructions</H2>
 					<RecipeInstructionsField recipe={recipe} />
 				</InstructionsProvider>

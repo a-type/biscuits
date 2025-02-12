@@ -193,7 +193,7 @@ export function InstructionStepNodeView({
 					)}
 					{!hasContent && isEditing && (
 						<>
-							<div className="absolute left-0 top-2 opacity-50">
+							<div className="absolute left-0 top-4 sm:top-2 opacity-50 text-xs sm:text-sm">
 								Type something, or...
 							</div>
 							<IncludeSubRecipe

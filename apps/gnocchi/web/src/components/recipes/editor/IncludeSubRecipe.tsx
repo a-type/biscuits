@@ -57,7 +57,7 @@ export function IncludeSubRecipe({
 
 function SubRecipeSearch({ onSelect }: IncludeSubRecipeProps) {
 	const [searchTerm, setSearchTerm] = useState('');
-	const searchWord = searchTerm.split(/\s+/).pop();
+	const searchWord = searchTerm.split(/\s+/).pop()?.toLowerCase() ?? '';
 	const { data: recipes } = hooks.useAllRecipesUnsuspended({
 		index: {
 			where: 'generalSearch',
@@ -88,7 +88,6 @@ function SubRecipeSearch({ onSelect }: IncludeSubRecipeProps) {
 
 	return (
 		<Box direction="col" gap="md">
-			<Input {...getInputProps()} placeholder="Search..." />
 			<div
 				className="flex-1 w-full max-h-[50vh] overflow-auto"
 				{...getMenuProps()}
@@ -109,6 +108,7 @@ function SubRecipeSearch({ onSelect }: IncludeSubRecipeProps) {
 					))}
 				</Card.Grid>
 			</div>
+			<Input {...getInputProps()} placeholder="Search..." />
 		</Box>
 	);
 }
