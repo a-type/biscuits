@@ -118,7 +118,12 @@ function SuggestionItem({
 
 	return (
 		<div className="flex flex-col items-start" {...rest}>
-			<Card className="w-full md:w-auto select-none max-w-full">
+			<Card
+				className={clsx(
+					'select-none max-w-full',
+					!note && !tags.length && !photo?.url ? 'w-auto' : 'w-full',
+				)}
+			>
 				<Card.Main
 					className={clsx('min-h-0', photo?.url && 'min-h-100px')}
 					compact
