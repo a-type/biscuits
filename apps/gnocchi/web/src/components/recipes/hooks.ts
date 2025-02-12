@@ -141,7 +141,7 @@ function useSyncedEditor(
 		if (editor && !editor.isDestroyed && field) {
 			updatingRef.current = true;
 			const { from, to } = editor.state.selection;
-			editor.commands.setContent(field.getSnapshot(), false);
+			editor.commands.setContent(ensureDocShape(field.getSnapshot()), false);
 			editor.commands.setTextSelection({ from, to });
 			updatingRef.current = false;
 		}
@@ -151,7 +151,10 @@ function useSyncedEditor(
 				updatingRef.current = true;
 				if (editor) {
 					const { from, to } = editor.state.selection;
-					editor.commands.setContent(field.getSnapshot(), false);
+					editor.commands.setContent(
+						ensureDocShape(field.getSnapshot()),
+						false,
+					);
 					editor.commands?.setTextSelection({ from, to });
 				}
 				updatingRef.current = false;
