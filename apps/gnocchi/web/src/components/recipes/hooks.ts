@@ -177,6 +177,9 @@ function ensureDocShape(json: any) {
 		// needed for the editor to work, we'll ensure it here
 		if (node.type === 'step' && !node.content) {
 			node.content = [];
+		} else if (node.type === 'step') {
+			// remove undefined nodes
+			node.content = node.content.filter((n: any) => !!n);
 		}
 	}
 	return json;
