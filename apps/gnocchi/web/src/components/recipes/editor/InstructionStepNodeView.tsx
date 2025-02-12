@@ -144,10 +144,10 @@ export function InstructionStepNodeView({
 		[updateAttributes, editor],
 	);
 
-	const removeSubRecipe = useCallback(
-		() => updateAttributes({ subRecipeId: undefined }),
-		[updateAttributes],
-	);
+	const removeSelf = useCallback(() => {
+		editor.commands.deleteCurrentNode();
+		editor.commands.focus();
+	}, [editor]);
 
 	const isSubscribed = useHasServerAccess();
 
@@ -182,11 +182,6 @@ export function InstructionStepNodeView({
 									className="mt--1"
 								/>
 							</Suspense>
-							{isEditing && (
-								<Button size="icon" color="ghost" onClick={removeSubRecipe}>
-									<Icon name="x" />
-								</Button>
-							)}
 						</InstructionsContext>
 					) : (
 						<NodeViewContent />
@@ -259,6 +254,11 @@ export function InstructionStepNodeView({
 					className="flex flex-col items-center gap-1 [grid-area:endTools] w-32px ml-3"
 					contentEditable={false}
 				>
+					{isEditing && (
+						<Button color="ghost" size="icon-small" onClick={removeSelf}>
+							<Icon name="x" />
+						</Button>
+					)}
 					{!isEditing && isSubscribed && (
 						<PersonSelect
 							includeSelf

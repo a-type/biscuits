@@ -128,10 +128,7 @@ function useSyncedEditor(
 	const editor = useEditor(
 		{
 			extensions,
-			content: field?.getSnapshot() ?? {
-				type: 'doc',
-				content: [],
-			},
+			content: ensureDocShape(field?.getSnapshot()),
 			editable: !readonly,
 			onUpdate: ({ editor }) => {
 				update(editor);
@@ -163,6 +160,23 @@ function useSyncedEditor(
 	}, [field, editor]);
 
 	return editor;
+}
+
+function ensureDocShape(json: any) {
+	if (!json || !json.type) {
+		return {
+			type: 'doc',
+			content: [],
+		};
+	}
+	for (const node of json.content) {
+		// since the schema doesn't enforce this shape but it's
+		// needed for the editor to work, we'll ensure it here
+		if (node.type === 'step' && !node.content) {
+			node.content = [];
+		}
+	}
+	return json;
 }
 
 /**
