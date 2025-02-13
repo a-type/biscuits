@@ -4,6 +4,7 @@ import {
 	Divider,
 	H1,
 	H2,
+	IconSpritesheet,
 	Note,
 	P,
 	PageContent,
@@ -11,10 +12,7 @@ import {
 	PageRoot,
 } from '@a-type/ui';
 import { Suspense, useEffect } from 'react';
-import {
-	IngredientList,
-	IngredientListItem,
-} from './components/IngredientList.jsx';
+import { Ingredients } from './components/Ingredients.jsx';
 import { Instructions } from './components/Instructions.jsx';
 import { MainImage } from './components/MainImage.jsx';
 import { Prelude } from './components/Prelude.jsx';
@@ -49,6 +47,7 @@ export function App({
 
 	return (
 		<PageRoot className="theme-lemon">
+			<IconSpritesheet />
 			<PageContent innerProps={innerProps}>
 				<article
 					itemScope
@@ -72,7 +71,7 @@ export function App({
 								}?recipeUrl=${encodeURIComponent(url)}&hub=true&skipWelcome=true`}
 							>
 								<Button color="primary" className="shadow-lg">
-									Save Recipe
+									Cook with Gnocchi
 								</Button>
 							</a>
 							<div className="row flex-wrap">
@@ -117,24 +116,13 @@ export function App({
 					<Divider />
 					<div className="my-4">
 						<H2 className="gutter-bottom">Ingredients</H2>
-						<IngredientList>
-							{data.ingredients.map((ingredient: any) => (
-								<IngredientListItem key={ingredient.id}>
-									<div itemProp="recipeIngredient" className="p-ingredient">
-										{ingredient.text}
-									</div>
-									{ingredient.note && (
-										<Note className="ml-4">{ingredient.note}</Note>
-									)}
-								</IngredientListItem>
-							))}
-						</IngredientList>
+						<Ingredients data={data} />
 					</div>
 					<Divider />
 					<div className="mb-12 mt-4">
 						<H2 className="gutter-bottom">Instructions</H2>
 						<Suspense>
-							<Instructions instructions={data.instructions} />
+							<Instructions data={data} />
 						</Suspense>
 					</div>
 					<PageFixedArea className="flex flex-row justify-end bottom-4 top-auto mb-4 bg-transparent">
@@ -144,11 +132,11 @@ export function App({
 							}?recipeUrl=${encodeURIComponent(url)}&hub=true&skipWelcome=true`}
 						>
 							<Button color="primary" className="shadow-lg">
-								Save Recipe
+								Cook with Gnocchi
 							</Button>
 						</a>
 					</PageFixedArea>
-					<P className="color-gray7 ml-auto text-right text-sm">
+					<P className="color-gray7 ml-auto text-right text-xs">
 						Powered by{' '}
 						<a
 							className="font-bold color-black"

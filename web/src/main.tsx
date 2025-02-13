@@ -2,7 +2,7 @@ import '@biscuits/client/henrietta.css';
 import 'uno.css';
 import './main.css';
 
-import { handleAppState } from '@a-type/auth-client';
+import { handleAppState } from '@a-type/auth-ui';
 import { Provider as UIProvider } from '@a-type/ui';
 import { AppId, appsById } from '@biscuits/apps';
 import { Provider } from '@biscuits/client';

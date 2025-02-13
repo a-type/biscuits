@@ -1,7 +1,8 @@
-import { TextLink } from '@/components/nav/Link.jsx';
+import { Link, TextLink } from '@/components/nav/Link.jsx';
 import { graphql } from '@/graphql.js';
 import { hooks } from '@/stores/groceries/index.js';
 import {
+	Box,
 	Button,
 	Checkbox,
 	Dialog,
@@ -10,6 +11,7 @@ import {
 	DialogContent,
 	DialogTitle,
 	DialogTrigger,
+	Icon,
 	P,
 	toast,
 	Tooltip,
@@ -120,12 +122,16 @@ function PublishedContent({
 	const publishDate = new Date(publishedAt);
 
 	return (
-		<DialogContent>
+		<DialogContent className="flex flex-col gap-4">
 			<DialogTitle>Manage publication</DialogTitle>
 			<P>Published {format(publishDate, 'PPp')}</P>
-			<TextLink to={url} newTab>
-				View on the web
-			</TextLink>
+			<SubRecipeWarning recipe={recipe} />
+			<Button asChild color="default" className="self-start">
+				<Link to={url} newTab>
+					View on the web
+					<Icon name="new_window" />
+				</Link>
+			</Button>
 			<DialogActions>
 				<DialogClose asChild>
 					<Button>Close</Button>
@@ -185,6 +191,7 @@ function UnpublishedContent({
 						</TextLink>
 					</label>
 				</div>
+				<SubRecipeWarning recipe={recipe} />
 			</div>
 			<DialogActions>
 				<DialogClose asChild>
@@ -214,5 +221,20 @@ function UnpublishedContent({
 				</Button>
 			</DialogActions>
 		</DialogContent>
+	);
+}
+
+function SubRecipeWarning({ recipe }: { recipe: Recipe }) {
+	const hasSubRecipes = recipe
+		.get('instructions')
+		.get('content')
+		?.some((step: any) => !!step?.get('attrs')?.get('subRecipeId'));
+	if (!hasSubRecipes) return null;
+
+	return (
+		<Box surface="primary" p className="block">
+			<strong>Warning:</strong> This recipe contains sub-recipes. They will be
+			embedded in the published recipe.
+		</Box>
 	);
 }

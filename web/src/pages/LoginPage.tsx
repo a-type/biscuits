@@ -3,7 +3,7 @@ import {
 	EmailSigninForm,
 	EmailSignupForm,
 	OAuthSigninButton,
-} from '@a-type/auth-client';
+} from '@a-type/auth-ui';
 import {
 	Checkbox,
 	P,

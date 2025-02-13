@@ -20,11 +20,6 @@ const hubPath = path.join(
 );
 const hubClientPath = path.join(hubPath, 'client');
 
-const indexTemplate = fsSync.readFileSync(
-	path.join(hubClientPath, 'index.html'),
-	'utf8',
-);
-
 gnocchiRouter.get('/hubRecipe/assets/*', (ctx) =>
 	staticFile(hubClientPath, 'gnocchi/hubRecipe', ctx.req.raw),
 );
@@ -49,23 +44,84 @@ gnocchiRouter.get('/hubRecipe/:planId/:recipeSlug', async (ctx) => {
 		return new Response('Recipe not found', { status: 404 });
 	}
 
+	const data = await loadRecipeData(
+		planId,
+		{
+			id: recipe.publishedBy,
+			fullName: recipe.publisherFullName ?? 'Anonymous',
+		},
+		recipe.id,
+	);
+
+	if (!data) {
+		return new Response('Recipe not found', { status: 404 });
+	}
+
+	const { serverRender } = await import('@gnocchi.biscuits/hub');
+	const indexTemplate = fsSync.readFileSync(
+		path.join(hubClientPath, 'index.html'),
+		'utf8',
+	);
+
+	const appHtml = serverRender(data, ctx.req.url);
+	return renderTemplate(indexTemplate, appHtml, data);
+});
+
+gnocchiRouter.get('/hubRecipe/*', (ctx) =>
+	staticFile(hubClientPath, 'gnocchi/hubRecipe', ctx.req.raw),
+);
+
+function getEmbeddedRecipeIds(snapshot: any) {
+	const steps = snapshot?.instructions?.content ?? [];
+	const recipeIds = new Set<string>();
+	for (const step of steps) {
+		if (step?.attrs?.subRecipeId) {
+			recipeIds.add(step.attrs.subRecipeId);
+		}
+	}
+	return Array.from(recipeIds);
+}
+
+async function loadRecipeData(
+	planId: string,
+	publisher: { id: string; fullName: string },
+	recipeId: string,
+): Promise<HubRecipeData | null> {
 	const snapshot = await verdantServer.getDocumentSnapshot(
 		getLibraryName({
 			planId,
 			app: 'gnocchi',
 			access: 'members',
-			userId: recipe.publishedBy,
+			userId: publisher.id,
 		}),
 		'recipes',
-		recipe.id,
+		recipeId,
 	);
 
 	if (!snapshot) {
-		return new Response('Recipe not found', { status: 404 });
+		return null;
 	}
 
+	const embeddedRecipes = getEmbeddedRecipeIds(snapshot);
+
+	const embeddedRecipeData = await Promise.all(
+		embeddedRecipes.map((recipeId) =>
+			loadRecipeData(planId, publisher, recipeId),
+		),
+	);
+	const embeddedRecipeMap = embeddedRecipes.reduce(
+		(map, recipeId, index) => {
+			const data = embeddedRecipeData[index];
+			if (data) {
+				map[recipeId] = data;
+			}
+			return map;
+		},
+		{} as Record<string, HubRecipeData>,
+	);
+
 	const data: HubRecipeData = {
-		id: recipe.id,
+		id: recipeId,
 		title: snapshot.title,
 		prelude: snapshot.prelude,
 		mainImageUrl: snapshot.mainImage?.url,
@@ -76,17 +132,9 @@ gnocchiRouter.get('/hubRecipe/:planId/:recipeSlug', async (ctx) => {
 		cookTimeMinutes: snapshot.cookTimeMinutes,
 		totalTimeMinutes: snapshot.totalTimeMinutes,
 		servings: snapshot.servings,
-		publisher: {
-			fullName: recipe.publisherFullName ?? 'Anonymous',
-		},
+		publisher,
+		embeddedRecipes: embeddedRecipeMap,
 	};
 
-	const { serverRender } = await import('@gnocchi.biscuits/hub');
-
-	const appHtml = serverRender(data, ctx.req.url);
-	return renderTemplate(indexTemplate, appHtml, data);
-});
-
-gnocchiRouter.get('/hubRecipe/*', (ctx) =>
-	staticFile(hubClientPath, 'gnocchi/hubRecipe', ctx.req.raw),
-);
+	return data;
+}

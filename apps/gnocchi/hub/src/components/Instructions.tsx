@@ -1,8 +1,8 @@
 'use client';
 
-import { Note, RichEditor } from '@a-type/ui';
+import { Button, clsx, Collapsible, Icon, Note, RichEditor } from '@a-type/ui';
 // @ts-ignore
-import { Node, mergeAttributes } from '@tiptap/core';
+import { mergeAttributes, Node } from '@tiptap/core';
 import {
 	// @ts-ignore
 	NodeViewContent,
@@ -15,13 +15,16 @@ import {
 } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 // @ts-ignore
+import { HubRecipeData } from '@/types.js';
 import Link from '@tiptap/extension-link';
+import { createContext, useContext } from 'react';
 
 export interface InstructionsProps {
-	instructions: any;
+	data: HubRecipeData;
+	className?: string;
 }
 
-export function Instructions({ instructions }: InstructionsProps) {
+export function Instructions({ data, className }: InstructionsProps) {
 	const editor = useEditor({
 		extensions: [
 			StarterKit.configure({
@@ -31,12 +34,18 @@ export function Instructions({ instructions }: InstructionsProps) {
 			SectionTitle,
 			Link,
 		],
-		content: instructions,
+		content: data.instructions,
 		editable: false,
 	});
+	console.log('rendering instructions', data.title);
 	return (
-		<div className="e-instructions" itemProp="recipeInstructions">
-			<RichEditor editor={editor} readOnly />
+		<div
+			className={clsx('e-instructions', className)}
+			itemProp="recipeInstructions"
+		>
+			<InstructionsContext.Provider value={data}>
+				<RichEditor editor={editor} readOnly />
+			</InstructionsContext.Provider>
 		</div>
 	);
 }
@@ -69,6 +78,18 @@ const Step = Node.create({
 				renderHTML: (attributes: any) => {
 					return {
 						'data-note': attributes.note,
+					};
+				},
+			},
+			subRecipeId: {
+				default: undefined,
+				keepOnSplit: false,
+				rendered: false,
+				parseHTML: (element: HTMLElement) =>
+					element.getAttribute('data-sub-recipe-id'),
+				renderHTML: (attributes: any) => {
+					return {
+						'data-sub-recipe-id': attributes.subRecipeId,
 					};
 				},
 			},
@@ -144,23 +165,47 @@ function InstructionStepView({
 		attrs: {
 			id: string;
 			note?: string;
+			subRecipeId?: string;
 		};
 	};
 }) {
+	const data = useContext(InstructionsContext);
+	const embeddedRecipe =
+		node.attrs.subRecipeId ?
+			data.embeddedRecipes[node.attrs.subRecipeId]
+		:	null;
 	return (
 		<NodeViewWrapper
 			data-id={node.attrs.id}
-			className="flex flex-col mb-5 w-full p-1"
+			className="flex flex-col mb-5 w-full p-1 gap-sm"
 			contentEditable={false}
 		>
 			<div>
-				<NodeViewContent />
+				{!embeddedRecipe && <NodeViewContent />}
+				{embeddedRecipe && (
+					<Collapsible>
+						<Collapsible.Trigger asChild>
+							<Button color="ghost" size="small" className="italic">
+								<Icon
+									name="chevron"
+									className="transition-all [[data-state=open]_&]:rotate-180"
+								/>
+								Make {embeddedRecipe.title}
+							</Button>
+						</Collapsible.Trigger>
+						<Collapsible.Content>
+							<Instructions className="pl-sm" data={embeddedRecipe} />
+						</Collapsible.Content>
+					</Collapsible>
+				)}
 			</div>
 			{node.attrs.note && (
-				<Note className="mt-2 ml-8 max-w-80% w-max-content" data-note="true">
+				<Note className="mt-2 ml-auto max-w-80% w-max-content" data-note="true">
 					{node.attrs.note}
 				</Note>
 			)}
 		</NodeViewWrapper>
 	);
 }
+
+const InstructionsContext = createContext<HubRecipeData>(null!);

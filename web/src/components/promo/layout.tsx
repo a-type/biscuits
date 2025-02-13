@@ -175,14 +175,14 @@ export const Background = withClassName(
 
 const AppNameText = withClassName(
 	'h2',
-	'font-fancy font-bold text-[4vmax] color-primary-dark',
+	'font-fancy font-bold text-[4vmax] color-primary-dark m-0',
 );
 
 export const AppName = ({ appId }: { appId: AppId }) => {
 	const app = appsById[appId];
 
 	return (
-		<div className="row gap-4">
+		<div className="row gap-4 items-center py-2">
 			<img src={`${app.url}/${app.iconPath}`} alt={app.name} width={80} />
 			<AppNameText>{app.name}</AppNameText>
 		</div>

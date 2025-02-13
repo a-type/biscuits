@@ -16,10 +16,10 @@ import { Button, H2, P } from '@a-type/ui';
 import { useLocalStorage, useOnVisible } from '@biscuits/client';
 import { Link } from '@verdant-web/react-router';
 import classNames from 'classnames';
-import { lazy, Suspense, useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 
 // dynamically import Scene
-const Scene = lazy(() => import('@/components/promo/gnocchi/Scene.jsx'));
+// const Scene = lazy(() => import('@/components/promo/gnocchi/Scene.jsx'));
 
 export function GnocchiPage() {
 	const [_, setHasSeen] = useLocalStorage('hasSeenWelcome', true);
@@ -36,9 +36,7 @@ export function GnocchiPage() {
 	return (
 		<Root>
 			<Background>
-				<Suspense>
-					<Scene />
-				</Suspense>
+				<Suspense>{/* <Scene /> */}</Suspense>
 			</Background>
 			<Content className="bg-primary-light">
 				<TitleWrap>
@@ -104,7 +102,7 @@ export function GnocchiPage() {
 			</Content>
 			<Content
 				className={classNames(
-					'bg-primary border-t-10dvh border-b-20dvh border-solid border-primary-light pt-20dvh',
+					'bg-primary border-t-10dvh border-b-20dvh border-solid border-primary-light pt-10dvh',
 					'theme-leek',
 				)}
 				ref={upgradeSectionRef}

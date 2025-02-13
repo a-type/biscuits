@@ -8,16 +8,6 @@ import {
 	SoftShadows,
 } from '@react-three/drei';
 import { Canvas } from '@react-three/fiber';
-import {
-	// @ts-ignore
-	EffectComposer,
-	// @ts-ignore
-	Outline,
-	// @ts-ignore
-	Select,
-	// @ts-ignore
-	Selection,
-} from '@react-three/postprocessing';
 import { Suspense, useState } from 'react';
 import { CookingSpoon } from './foods/CookingSpoon.jsx';
 import { FryingPan } from './foods/FryingPan.jsx';
@@ -64,74 +54,72 @@ export function Scene(props: { className?: string }) {
 					</Plane>
 					<Bounds fit margin={1.2}>
 						<Float speed={0.5}>
-							<Select enabled>
-								<animated.group scale={[5, 5, 5]} position-x={1}>
-									<FryingPan rotation={[Math.PI / 4, 0.2, 0]} />
-									<FryingPanLid
-										rotation={[-Math.PI / 6, 0.2, 0.5]}
-										position={[0, 0.5, 0]}
-									/>
-									<group
-										rotation={[-Math.PI / 3, Math.PI / 6, Math.PI / 3]}
-										position={[-0.05, 0.1, 0.3]}
-									>
-										<Float floatIntensity={0.3}>
-											<OnionHalf />
-										</Float>
-									</group>
-									<group
-										rotation={[Math.PI / 2, Math.PI / 6, Math.PI / 3]}
-										position={[0.2, 0.25, 0.2]}
-									>
-										<Float floatIntensity={0.3}>
-											<Tomato />
-										</Float>
-									</group>
-									<group
-										position={[-0.4, 0.3, 0.2]}
-										rotation={[Math.PI / 3, -Math.PI / 6, -0.8]}
-									>
-										<Float floatIntensity={0.3}>
-											<CookingSpoon />
-										</Float>
-									</group>
-									<group
-										position={[0.6, 0.3, 0.1]}
-										rotation={[Math.PI, -Math.PI, -1]}
-									>
-										<Float floatIntensity={0.3}>
-											<ShakerSalt />
-										</Float>
-									</group>
-									<group
-										position={[0.3, 0.4, 0.2]}
-										rotation={[Math.PI / 8, 0, -0.8]}
-									>
-										<Float floatIntensity={0.3}>
-											<PepperMill />
-										</Float>
-									</group>
-									<group
-										rotation={[0, Math.PI / 12, -0.4]}
-										position={[-0.1, 0, 0.2]}
-									>
-										<Float floatIntensity={0.3}>
-											<Leek scale={[0.8, 0.8, 0.8]} />
-										</Float>
-									</group>
-									<group
-										position={[0.15, 0.05, 0.25]}
-										rotation={[Math.PI / 8, Math.PI / 4, 0.6]}
-									>
-										<Float floatIntensity={0.3}>
-											<Garlic />
-										</Float>
-									</group>
-								</animated.group>
-							</Select>
+							<animated.group scale={[5, 5, 5]} position-x={1}>
+								<FryingPan rotation={[Math.PI / 4, 0.2, 0]} />
+								<FryingPanLid
+									rotation={[-Math.PI / 6, 0.2, 0.5]}
+									position={[0, 0.5, 0]}
+								/>
+								<group
+									rotation={[-Math.PI / 3, Math.PI / 6, Math.PI / 3]}
+									position={[-0.05, 0.1, 0.3]}
+								>
+									<Float floatIntensity={0.3}>
+										<OnionHalf />
+									</Float>
+								</group>
+								<group
+									rotation={[Math.PI / 2, Math.PI / 6, Math.PI / 3]}
+									position={[0.2, 0.25, 0.2]}
+								>
+									<Float floatIntensity={0.3}>
+										<Tomato />
+									</Float>
+								</group>
+								<group
+									position={[-0.4, 0.3, 0.2]}
+									rotation={[Math.PI / 3, -Math.PI / 6, -0.8]}
+								>
+									<Float floatIntensity={0.3}>
+										<CookingSpoon />
+									</Float>
+								</group>
+								<group
+									position={[0.6, 0.3, 0.1]}
+									rotation={[Math.PI, -Math.PI, -1]}
+								>
+									<Float floatIntensity={0.3}>
+										<ShakerSalt />
+									</Float>
+								</group>
+								<group
+									position={[0.3, 0.4, 0.2]}
+									rotation={[Math.PI / 8, 0, -0.8]}
+								>
+									<Float floatIntensity={0.3}>
+										<PepperMill />
+									</Float>
+								</group>
+								<group
+									rotation={[0, Math.PI / 12, -0.4]}
+									position={[-0.1, 0, 0.2]}
+								>
+									<Float floatIntensity={0.3}>
+										<Leek scale={[0.8, 0.8, 0.8]} />
+									</Float>
+								</group>
+								<group
+									position={[0.15, 0.05, 0.25]}
+									rotation={[Math.PI / 8, Math.PI / 4, 0.6]}
+								>
+									<Float floatIntensity={0.3}>
+										<Garlic />
+									</Float>
+								</group>
+							</animated.group>
 						</Float>
 					</Bounds>
-					<EffectComposer multisampling={0} autoClear={false}>
+					{/* <EffectComposer multisampling={0} autoClear={false}>
 						<Outline
 							visibleEdgeColor={0x000000}
 							hiddenEdgeColor={0x000000}
@@ -142,7 +130,7 @@ export function Scene(props: { className?: string }) {
 							height={1000}
 							blur={false}
 						/>
-					</EffectComposer>
+					</EffectComposer> */}
 				</Selection>
 				<SoftShadows />
 			</Suspense>

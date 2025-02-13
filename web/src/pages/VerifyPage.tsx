@@ -1,4 +1,4 @@
-import { EmailCompleteSignupForm } from '@a-type/auth-client';
+import { EmailCompleteSignupForm } from '@a-type/auth-ui';
 import { H1, P, PageContent, PageRoot } from '@a-type/ui';
 import { CONFIG } from '@biscuits/client';
 import { useNavigate, useSearchParams } from '@verdant-web/react-router';
