@@ -14,7 +14,7 @@ export function RecipeInstructionsField({
 	const editor = useSyncedInstructionsEditor({
 		recipe,
 		readonly: false,
-		// useBasicEditor: isMobileOs(),
+		useBasicEditor: isMobileOs(),
 	});
 
 	return (
