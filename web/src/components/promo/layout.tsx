@@ -1,4 +1,4 @@
-import { Button, clsx, H2, Icon, withClassName } from '@a-type/ui';
+import { Button, clsx, H2, Icon, withClassName, withProps } from '@a-type/ui';
 import { AppId, appsById } from '@biscuits/apps';
 import { Link } from '@verdant-web/react-router';
 import { CSSProperties, forwardRef, ReactNode } from 'react';
@@ -9,7 +9,7 @@ export const DemoGrid = withClassName(
 	'grid grid-cols-[1fr] gap-5 items-start md:(grid-cols-[repeat(2,1fr)])',
 );
 export const Demo = withClassName(
-	PhoneDemo,
+	withProps(PhoneDemo, { size: 'large' }),
 	'relative z-1 [grid-row-end:span_2]',
 );
 export const Highlight = withClassName(

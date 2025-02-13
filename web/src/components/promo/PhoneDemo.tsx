@@ -7,6 +7,7 @@ export interface PhoneDemoProps {
 	direction?: 'left' | 'right';
 	type?: 'video' | 'image';
 	className?: string;
+	size?: 'default' | 'large';
 }
 
 export function PhoneDemo({
@@ -14,6 +15,7 @@ export function PhoneDemo({
 	direction = 'left',
 	type = 'video',
 	className,
+	size = 'default',
 }: PhoneDemoProps) {
 	const animationDelay = useMemo(() => {
 		return `${(Math.random() * 3).toFixed(2)}s`;
@@ -31,6 +33,7 @@ export function PhoneDemo({
 			<div
 				className={classNames(
 					'phone rounded-lg aspect-ratio-11/24 bg-[black] min-h-0 h-30vh sm:h-auto',
+					size === 'large' && '!h-auto',
 					direction,
 				)}
 				style={{

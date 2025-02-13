@@ -29,7 +29,7 @@ export async function staticFile(
 		return new Response('Not found', { status: 404 });
 	}
 
-	const file = await fs.readFile(filePath, 'utf-8');
+	const file = await fs.readFile(filePath);
 	return new Response(file, {
 		headers: {
 			'Content-Type': assetFileTypes[path.extname(filePath)] ?? 'text/plain',

@@ -17,7 +17,7 @@ export default function HomePage() {
 				{/* <Background /> */}
 
 				<Box className="w-full z-1" d="col" items="center">
-					<PageFixedArea className="bg-transparent flex flex-row justify-between items-center py-2 max-w-800px">
+					<PageFixedArea className="bg-transparent flex flex-row justify-between items-center py-2 md:max-w-800px">
 						<h1
 							className={classNames(
 								'text-2xl sm:text-4xl m-0 font-bold text-gray-9 text-shadow',
@@ -31,12 +31,12 @@ export default function HomePage() {
 						</Suspense>
 					</PageFixedArea>
 				</Box>
-				<Box d="col" className="z-1" gap="xl">
+				<Box d="col" className="w-full z-1" gap="xl">
 					<Box
 						d="col"
 						gap="xl"
 						items="stretch"
-						className="flex-grow max-w-800px"
+						className="flex-grow max-w-100vw md:max-w-800px"
 					>
 						<div
 							className={classNames(
@@ -66,7 +66,7 @@ export default function HomePage() {
 					<Box
 						p
 						surface="primary"
-						className="max-w-800px"
+						className="max-w-100vw md:max-w-800px"
 						d="col"
 						gap
 						items="start"
@@ -99,7 +99,7 @@ export default function HomePage() {
 							<Link to="/join">Join the Family Plan</Link>
 						</Button>
 					</Box>
-					<Box className="max-w-800px" d="col" gap items="start">
+					<Box className="max-w-100vw md:max-w-800px" d="col" gap items="start">
 						<H2 className="font-fancy font-semibold">
 							What is <em className="font-fancy font-light">local-first?</em>
 						</H2>
@@ -122,7 +122,7 @@ export default function HomePage() {
 					</Box>
 				</Box>
 				<Box className="w-full z-1 mt-300px" d="col" items="center">
-					<Footer className="max-w-800px" />
+					<Footer className="max-w-100vw md:max-w-800px" />
 				</Box>
 			</Box>
 			<Suspense>

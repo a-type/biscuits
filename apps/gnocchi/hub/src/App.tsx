@@ -1,4 +1,5 @@
 import {
+	Box,
 	Button,
 	Chip,
 	Divider,
@@ -17,6 +18,8 @@ import { Instructions } from './components/Instructions.jsx';
 import { MainImage } from './components/MainImage.jsx';
 import { Prelude } from './components/Prelude.jsx';
 import { TopLineRoot, TopLineTitle } from './components/layout.jsx';
+import './henrietta.css';
+import appIcon from './icon.png';
 import { HubRecipeData } from './types.js';
 
 const innerProps = {
@@ -54,6 +57,14 @@ export function App({
 					itemType="https://schema.org/Recipe"
 					className="h-recipe flex flex-col gap-4 items-stretch"
 				>
+					<Box gap items="center" asChild>
+						<a href="https://biscuits.club/gnocchi">
+							<img src={appIcon} className="w-30px h-30px" alt="Gnocchi icon" />
+							<H1 className="!text-lg !font-medium font-fancy">
+								Gnocchi Recipes
+							</H1>
+						</a>
+					</Box>
 					<TopLineRoot>
 						{data.mainImageUrl && (
 							<MainImage url={data.mainImageUrl} title={data.title} />
