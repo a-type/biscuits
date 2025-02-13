@@ -31,7 +31,7 @@ export default function HomePage() {
 						</Suspense>
 					</PageFixedArea>
 				</Box>
-				<Box d="col" className="w-full z-1" gap="xl">
+				<Box d="col" className="w-full z-1" items="center" gap="xl">
 					<Box
 						d="col"
 						gap="xl"
