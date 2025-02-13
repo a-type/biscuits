@@ -1,18 +1,21 @@
 import { Session } from '@a-type/auth';
 import { DB } from '@biscuits/db';
 import { Server as VerdantServer } from '@verdant-web/server';
+import { Context } from 'hono';
 import Stripe from 'stripe';
+import { Env } from '../config/hono.js';
 import { createDataloaders } from './dataloaders/index.js';
 
 export type GQLContext = {
-  session: Session | null;
-  req: Request;
-  db: DB;
-  verdant: VerdantServer;
-  auth: {
-    setLoginSession: (session: Session | null) => Promise<void>;
-    applyHeaders: Headers;
-  };
-  stripe: Stripe;
-  dataloaders: ReturnType<typeof createDataloaders>;
+	session: Session | null;
+	req: Request;
+	db: DB;
+	verdant: VerdantServer;
+	auth: {
+		setLoginSession: (session: Session | null) => Promise<void>;
+		applyHeaders: Headers;
+	};
+	stripe: Stripe;
+	dataloaders: ReturnType<typeof createDataloaders>;
+	reqCtx: Context<Env>;
 };

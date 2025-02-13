@@ -19,12 +19,12 @@ import { stripe } from '../services/stripe.js';
 
 export const stripeRouter = new Hono<Env>();
 
-stripeRouter.post('/webhook', async ({ req }) => {
-	const signature = req.header('stripe-signature')!;
+stripeRouter.post('/webhook', async (ctx) => {
+	const signature = ctx.req.header('stripe-signature')!;
 	let event;
 	try {
 		event = stripe.webhooks.constructEvent(
-			await req.text(),
+			await ctx.req.text(),
 			signature,
 			STRIPE_WEBHOOK_SECRET,
 		);
@@ -40,16 +40,16 @@ stripeRouter.post('/webhook', async ({ req }) => {
 	try {
 		switch (event.type) {
 			case 'customer.subscription.trial_will_end':
-				await handleTrialEnd(event);
+				await handleTrialEnd(event, ctx);
 				break;
 			case 'customer.subscription.deleted':
 				await handleSubscriptionDeleted(event);
 				break;
 			case 'customer.subscription.created':
-				await handleSubscriptionCreated(event);
+				await handleSubscriptionCreated(event, ctx);
 				break;
 			case 'customer.subscription.updated':
-				await handleSubscriptionUpdated(event);
+				await handleSubscriptionUpdated(event, ctx);
 				break;
 			case 'payment_intent.succeeded':
 				await handlePaymentIntentSucceeded(event);
@@ -58,10 +58,10 @@ stripeRouter.post('/webhook', async ({ req }) => {
 				await handlePaymentIntentProcessing(event);
 				break;
 			case 'payment_intent.canceled':
-				await handlePaymentIntentCanceled(event);
+				await handlePaymentIntentCanceled(event, ctx);
 				break;
 			case 'payment_intent.payment_failed':
-				await handlePaymentIntentPaymentFailed(event);
+				await handlePaymentIntentPaymentFailed(event, ctx);
 				break;
 		}
 

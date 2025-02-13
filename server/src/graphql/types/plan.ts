@@ -174,7 +174,7 @@ builder.mutationFields((t) => ({
 				throw new BiscuitsError(BiscuitsError.Code.NoPlan);
 			}
 
-			await cancelPlan(ctx.session.planId, userId);
+			await cancelPlan(ctx.session.planId, userId, ctx);
 
 			return {};
 		},
@@ -196,12 +196,15 @@ builder.mutationFields((t) => ({
 			}
 			const removed = await removeUserFromPlan(planId, id, ctx);
 			if (removed) {
-				await email.sendMail({
-					to: removed.email,
-					subject: 'You have been removed from your Biscuits plan',
-					text: `You have been removed from the Biscuits plan by an admin. If you believe this is a mistake, please contact support.`,
-					html: `You have been removed from the Biscuits plan by an admin. If you believe this is a mistake, please contact support.`,
-				});
+				await email.sendCustomEmail(
+					{
+						to: removed.email,
+						subject: 'You have been removed from your Biscuits plan',
+						text: `You have been removed from the Biscuits plan by an admin. If you believe this is a mistake, please contact support.`,
+						html: `You have been removed from the Biscuits plan by an admin. If you believe this is a mistake, please contact support.`,
+					},
+					ctx.reqCtx,
+				);
 			}
 			return { planId };
 		},

@@ -1,7 +1,9 @@
 import { db, userNameSelector } from '@biscuits/db';
 import { BiscuitsError } from '@biscuits/error';
+import { Context } from 'hono';
 import Stripe from 'stripe';
 import { UI_ORIGIN } from '../config/deployedContext.js';
+import { Env } from '../config/hono.js';
 import { GQLContext } from '../graphql/context.js';
 import { email } from '../services/email.js';
 import { stripe, stripeDateToDate } from '../services/stripe.js';
@@ -10,6 +12,7 @@ import { getProductMetadata } from './products.js';
 async function emailAllAdmins(
 	planId: string,
 	creator: (name: string) => { subject: string; text: string; html: string },
+	ctx: Context<Env>,
 ) {
 	const admins = await db
 		.selectFrom('User')
@@ -22,10 +25,13 @@ async function emailAllAdmins(
 	if (admins.length > 0) {
 		await Promise.all(
 			admins.map((admin) =>
-				email.sendMail({
-					to: admin.email,
-					...creator(admin.name),
-				}),
+				email.sendCustomEmail(
+					{
+						to: admin.email,
+						...creator(admin.name),
+					},
+					ctx,
+				),
 			),
 		);
 	}
@@ -33,6 +39,7 @@ async function emailAllAdmins(
 
 export async function handleTrialEnd(
 	event: Stripe.CustomerSubscriptionTrialWillEndEvent,
+	ctx: Context<Env>,
 ) {
 	const subscription = event.data.object;
 	const { status } = subscription;
@@ -61,17 +68,21 @@ export async function handleTrialEnd(
 
 	// notify plan admins their trial is ending
 	const planId = result.planId;
-	await emailAllAdmins(planId, (name) => ({
-		subject: 'Your Biscuits trial is ending',
-		text: `Hi ${name},\n\nYour Biscuits trial has ended. You will be charged for your first payment. You can manage (or cancel) your plan at ${UI_ORIGIN}/plan. Please contact support if you have any questions.\n\nThanks,\nGrant`,
-		html: `<div>
+	await emailAllAdmins(
+		planId,
+		(name) => ({
+			subject: 'Your Biscuits trial is ending',
+			text: `Hi ${name},\n\nYour Biscuits trial has ended. You will be charged for your first payment. You can manage (or cancel) your plan at ${UI_ORIGIN}/plan. Please contact support if you have any questions.\n\nThanks,\nGrant`,
+			html: `<div>
           <p>Hi ${name},</p>
           <p>Your Biscuits trial has ended. You will be charged for your first payment. You can manage (or cancel) your plan at <a href="${UI_ORIGIN}/plan">${UI_ORIGIN}/plan</a>.</p>
           <p>Please contact support if you have any questions.</p>
           <p>Thanks,</p>
           <p>Grant</p>
           </div>`,
-	}));
+		}),
+		ctx,
+	);
 }
 
 export async function handleSubscriptionDeleted(
@@ -104,6 +115,7 @@ export async function handleSubscriptionDeleted(
 
 export async function handleSubscriptionCreated(
 	event: Stripe.CustomerSubscriptionCreatedEvent,
+	ctx: Context<Env>,
 ) {
 	const subscription = event.data.object;
 	const { status } = subscription;
@@ -138,10 +150,12 @@ export async function handleSubscriptionCreated(
 		subscription.trial_end &&
 		subscription.trial_end < subscription.current_period_end
 	) {
-		await emailAllAdmins(result.planId, (name) => ({
-			subject: 'Your Biscuits free trial has started!',
-			text: `Hi ${name},\n\nYour Biscuits free trial has started! You can manage (or cancel) your plan at ${UI_ORIGIN}/plan. Please contact support if you have any questions.\n\nThanks,\nGrant`,
-			html: `<div>
+		await emailAllAdmins(
+			result.planId,
+			(name) => ({
+				subject: 'Your Biscuits free trial has started!',
+				text: `Hi ${name},\n\nYour Biscuits free trial has started! You can manage (or cancel) your plan at ${UI_ORIGIN}/plan. Please contact support if you have any questions.\n\nThanks,\nGrant`,
+				html: `<div>
       <h1>Your Biscuits free trial has started!</h1>
       <p>Hi ${name},</p>
       <p>Your Biscuits free trial has started! You can manage (or cancel) your plan at <a href="${UI_ORIGIN}/plan">${UI_ORIGIN}/plan</a>. You won't be charged until ${
@@ -152,16 +166,21 @@ export async function handleSubscriptionCreated(
       <p>Thanks,</p>
       <p>Grant</p>
       </div>`,
-		}));
+			}),
+			ctx,
+		);
 	}
 
 	email
-		.sendMail({
-			to: 'hi@biscuits.club',
-			subject: 'Biscuits Subscription Created',
-			text: `A new subscription was created: https://dashboard.stripe.com/subscriptions/${subscription.id}`,
-			html: `<p>A new subscription was created: <a href="https://dashboard.stripe.com/subscriptions/${subscription.id}">Link</a></p>`,
-		})
+		.sendCustomEmail(
+			{
+				to: 'hi@biscuits.club',
+				subject: 'Biscuits Subscription Created',
+				text: `A new subscription was created: https://dashboard.stripe.com/subscriptions/${subscription.id}`,
+				html: `<p>A new subscription was created: <a href="https://dashboard.stripe.com/subscriptions/${subscription.id}">Link</a></p>`,
+			},
+			ctx,
+		)
 		.catch((error) => {
 			console.error('Failed to send subscription creation email', error);
 		});
@@ -169,6 +188,7 @@ export async function handleSubscriptionCreated(
 
 export async function handleSubscriptionUpdated(
 	event: Stripe.CustomerSubscriptionUpdatedEvent,
+	ctx: Context<Env>,
 ) {
 	const subscription = event.data.object;
 	const { status } = subscription;
@@ -220,10 +240,12 @@ export async function handleSubscriptionUpdated(
 			subscription.current_period_end,
 		)?.toDateString();
 		// notify plan admins their subscription was cancelled
-		await emailAllAdmins(planId, (name) => ({
-			subject: 'Your Biscuits subscription was cancelled',
-			text: `Hi ${name},\n\nYour Biscuits subscription was cancelled. Please contact support if you have any questions.\n\nThanks,\nGrant`,
-			html: `<div>
+		await emailAllAdmins(
+			planId,
+			(name) => ({
+				subject: 'Your Biscuits subscription was cancelled',
+				text: `Hi ${name},\n\nYour Biscuits subscription was cancelled. Please contact support if you have any questions.\n\nThanks,\nGrant`,
+				html: `<div>
             <p>Hi ${name},</p>
             <p>Your Biscuits subscription was cancelled. Your plan will remain active until ${
 							endsAt ?? 'the end of the current billing period'
@@ -232,14 +254,19 @@ export async function handleSubscriptionUpdated(
             <p>Thanks,</p>
             <p>Grant</p>
           </div>`,
-		}));
+			}),
+			ctx,
+		);
 		email
-			.sendMail({
-				to: 'hi@biscuits.club',
-				subject: 'Biscuits Subscription Cancelled',
-				text: `A subscription was cancelled: https://dashboard.stripe.com/subscriptions/${subscription.id}`,
-				html: `<p>A subscription was cancelled: <a href="https://dashboard.stripe.com/subscriptions/${subscription.id}">Link</a></p>`,
-			})
+			.sendCustomEmail(
+				{
+					to: 'hi@biscuits.club',
+					subject: 'Biscuits Subscription Cancelled',
+					text: `A subscription was cancelled: https://dashboard.stripe.com/subscriptions/${subscription.id}`,
+					html: `<p>A subscription was cancelled: <a href="https://dashboard.stripe.com/subscriptions/${subscription.id}">Link</a></p>`,
+				},
+				ctx,
+			)
 			.catch((error) => {
 				console.error('Failed to send subscription cancelled email', error);
 			});
@@ -264,17 +291,21 @@ export async function handleSubscriptionUpdated(
 				.execute();
 
 			// notify plan admins their subscription is in violation
-			await emailAllAdmins(planId, (name) => ({
-				subject: 'Your Biscuits subscription needs attention',
-				text: `Hi ${name},\n\nYou recently changed your Biscuits subscription, and now it has more than the allowed number of members. Please visit ${UI_ORIGIN}/plan to remove extra members, or your subscription will remain paused.\n\nThanks,\nGrant`,
-				html: `<div>
+			await emailAllAdmins(
+				planId,
+				(name) => ({
+					subject: 'Your Biscuits subscription needs attention',
+					text: `Hi ${name},\n\nYou recently changed your Biscuits subscription, and now it has more than the allowed number of members. Please visit ${UI_ORIGIN}/plan to remove extra members, or your subscription will remain paused.\n\nThanks,\nGrant`,
+					html: `<div>
           <p>Hi ${name},</p>
           <p>You recently changed your Biscuits subscription, and now it has more than the allowed number of members. Please visit <a href="${UI_ORIGIN}/plan">${UI_ORIGIN}/plan</a> to remove extra members, or your subscription will remain paused.</p>
           <p>If you think this was a mistake, don't hesitate to reach out via <a href="${UI_ORIGIN}/contact">${UI_ORIGIN}/contact</a>.</p>
           <p>Thanks,</p>
           <p>Grant</p>
         </div>`,
-			}));
+				}),
+				ctx,
+			);
 		}
 	}
 }
@@ -333,6 +364,7 @@ export async function handlePaymentIntentSucceeded(
 
 export async function handlePaymentIntentCanceled(
 	event: Stripe.PaymentIntentCanceledEvent,
+	ctx: Context<Env>,
 ) {
 	const paymentIntent = event.data.object;
 	const subscription = await getSubscriptionIdOfPaymentIntent(paymentIntent);
@@ -372,17 +404,21 @@ export async function handlePaymentIntentCanceled(
 		.execute();
 
 	// notify plan admins their subscription was cancelled
-	await emailAllAdmins(plan.id, (name) => ({
-		subject: 'Your Biscuits subscription payment was cancelled',
-		text: `Hi ${name},\n\nYour Biscuits subscription payment was cancelled. Please contact support if you have any questions.\n\nThanks,\nGrant`,
-		html: `<div>
+	await emailAllAdmins(
+		plan.id,
+		(name) => ({
+			subject: 'Your Biscuits subscription payment was cancelled',
+			text: `Hi ${name},\n\nYour Biscuits subscription payment was cancelled. Please contact support if you have any questions.\n\nThanks,\nGrant`,
+			html: `<div>
           <p>Hi ${name},</p>
           <p>Your Biscuits subscription payment was cancelled. If this was a mistake, try checking out again at <a href="${UI_ORIGIN}/plan">${UI_ORIGIN}/plan</a>.</p>
           <p>Please contact support if you have any questions.</p>
           <p>Thanks,</p>
           <p>Grant</p>
           </div>`,
-	}));
+		}),
+		ctx,
+	);
 }
 
 export async function handlePaymentIntentProcessing(
@@ -422,6 +458,7 @@ export async function handlePaymentIntentProcessing(
 
 export async function handlePaymentIntentPaymentFailed(
 	event: Stripe.PaymentIntentPaymentFailedEvent,
+	ctx: Context<Env>,
 ) {
 	const paymentIntent = event.data.object;
 	const subscription = await getSubscriptionIdOfPaymentIntent(paymentIntent);
@@ -461,17 +498,21 @@ export async function handlePaymentIntentPaymentFailed(
 		.execute();
 
 	// notify plan admins their payment failed
-	await emailAllAdmins(plan.id, (name) => ({
-		subject: 'Your Biscuits payment failed',
-		text: `Hi ${name},\n\nYour Biscuits payment failed. Please contact support if you have any questions.\n\nThanks,\nGrant`,
-		html: `<div>
+	await emailAllAdmins(
+		plan.id,
+		(name) => ({
+			subject: 'Your Biscuits payment failed',
+			text: `Hi ${name},\n\nYour Biscuits payment failed. Please contact support if you have any questions.\n\nThanks,\nGrant`,
+			html: `<div>
           <p>Hi ${name},</p>
           <p>Your Biscuits subscription payment failed. If this was a mistake, try checking out again at <a href="${UI_ORIGIN}/plan">${UI_ORIGIN}/plan</a>.</p>
           <p>Please contact support if you have any questions.</p>
           <p>Thanks,</p>
           <p>Grant</p>
           </div>`,
-	}));
+		}),
+		ctx,
+	);
 }
 
 export async function cacheSubscriptionInfoOnPlan(

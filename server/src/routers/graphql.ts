@@ -130,6 +130,7 @@ export const graphqlRouter = new Hono<Env>().all(
 				stripe,
 				db,
 			}),
+			reqCtx: honoCtx,
 		};
 
 		const yogaResponse = await yoga.handle(honoCtx.req.raw, ctx);

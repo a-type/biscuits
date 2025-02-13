@@ -86,15 +86,16 @@ export async function removeUserFromPlan(
 					.executeTakeFirstOrThrow();
 
 				// send an email to the new admin about their new role
-				await email.sendMail({
-					to: newAdminDetails.email,
-					subject: 'You are now the admin of your Biscuits plan',
-					text: `Hi ${newAdminDetails.fullName},\n
+				await email.sendCustomEmail(
+					{
+						to: newAdminDetails.email,
+						subject: 'You are now the admin of your Biscuits plan',
+						text: `Hi ${newAdminDetails.fullName},\n
           You are now the admin of your Biscuits plan. This usually happens because the previous admin left the plan. Your plan may require a new payment method to remain active.\n
           You can manage your plan at ${UI_ORIGIN}/plan.\n
           Thanks,
           Grant`,
-					html: `<div>
+						html: `<div>
             <p>Hi ${newAdminDetails.fullName},</p>
             <p>
               You are now the admin of your Biscuits plan. This usually happens because the previous admin left the plan. Your plan may require a new payment method to remain active.
@@ -103,7 +104,9 @@ export async function removeUserFromPlan(
             <p>Thanks,</p>
             <p>Grant</p>
           </div>`,
-				});
+					},
+					ctx.reqCtx,
+				);
 			}
 		} else {
 			// if the subscription is under their customer ID, we must
@@ -403,7 +406,11 @@ export async function updatePlanSubscription({
 	return updatedPlan;
 }
 
-export async function cancelPlan(planId: string, userId: string) {
+export async function cancelPlan(
+	planId: string,
+	userId: string,
+	ctx: GQLContext,
+) {
 	const plan = await db
 		.selectFrom('Plan')
 		.select(['id', 'stripeSubscriptionId'])
@@ -427,12 +434,13 @@ export async function cancelPlan(planId: string, userId: string) {
 
 	await Promise.all(
 		members.map((m) =>
-			email.sendMail({
-				to: m.email,
-				subject: 'Your Biscuits plan has been canceled',
-				text: `Hi ${m.fullName},\n\nYour Biscuits plan has been canceled. If you have any questions, please contact us via
+			email.sendCustomEmail(
+				{
+					to: m.email,
+					subject: 'Your Biscuits plan has been canceled',
+					text: `Hi ${m.fullName},\n\nYour Biscuits plan has been canceled. If you have any questions, please contact us via
 ${UI_ORIGIN}/contact.\n\nThanks,\nGrant`,
-				html: `<div>
+					html: `<div>
         <p>Hi ${m.fullName},</p>
         <p>
           Your Biscuits plan has been canceled. If you have any questions, please contact us via
@@ -441,7 +449,9 @@ ${UI_ORIGIN}/contact.\n\nThanks,\nGrant`,
         <p>Thanks,</p>
         <p>Grant</p>
       </div>`,
-			}),
+				},
+				ctx.reqCtx,
+			),
 		),
 	);
 
