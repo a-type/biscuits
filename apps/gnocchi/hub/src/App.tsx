@@ -65,15 +65,6 @@ export function App({
 							<P itemProp="author" className="p-author">
 								Published by {data.publisher?.fullName ?? 'Anonymous'}
 							</P>
-							<a
-								href={`${
-									import.meta.env.VITE_APP_GNOCCHI_ORIGIN
-								}?recipeUrl=${encodeURIComponent(url)}&hub=true&skipWelcome=true`}
-							>
-								<Button color="primary" className="shadow-lg">
-									Cook with Gnocchi
-								</Button>
-							</a>
 							<div className="row flex-wrap">
 								{data.servings && <Chip>Serves {data.servings}</Chip>}
 								{data.prepTimeMinutes && (
