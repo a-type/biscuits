@@ -1,7 +1,7 @@
 import { AuthError } from '@a-type/auth';
 import { Hono } from 'hono';
 import { authHandlers } from '../auth/handlers.js';
-import { UI_ORIGIN } from '../config/deployedContext.js';
+import { DEPLOYED_ORIGIN, UI_ORIGIN } from '../config/deployedContext.js';
 import { Env } from '../config/hono.js';
 
 export const authRouter = new Hono<Env>();
@@ -21,9 +21,21 @@ authRouter
 			.handleOAuthCallbackRequest(ctx, { provider })
 			.catch(routeAuthErrorsToUi('/login'));
 	})
-	.all('/logout', (ctx) =>
-		authHandlers.handleLogoutRequest(ctx).catch(routeAuthErrorsToUi('/')),
-	)
+	.all('/logout', async (ctx) => {
+		const res = await authHandlers
+			.handleLogoutRequest(ctx)
+			.catch(routeAuthErrorsToUi('/'));
+		// also clear old cookies
+		res.headers.append(
+			'Set-Cookie',
+			`bsc-session=; Path=/; Max-Age=0; HttpOnly; SameSite=Lax; Domain=${DEPLOYED_ORIGIN}`,
+		);
+		res.headers.append(
+			'Set-Cookie',
+			`bsc-refresh=; Path=/; Max-Age=0; HttpOnly; SameSite=Lax; Domain=${DEPLOYED_ORIGIN}`,
+		);
+		return res;
+	})
 	.post('/begin-email-signup', (ctx) =>
 		authHandlers
 			.handleSendEmailVerificationRequest(ctx)
