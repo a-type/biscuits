@@ -1,6 +1,7 @@
 import { AuthError } from '@a-type/auth';
 import { Hono } from 'hono';
 import { authHandlers } from '../auth/handlers.js';
+import { sessions } from '../auth/session.js';
 import { DEPLOYED_ORIGIN, UI_ORIGIN } from '../config/deployedContext.js';
 import { Env } from '../config/hono.js';
 
@@ -61,7 +62,24 @@ authRouter
 			.handleVerifyPasswordResetRequest(ctx)
 			.catch(routeAuthErrorsToUi('/login')),
 	)
-	.post('/refresh', (ctx) => authHandlers.handleRefreshSessionRequest(ctx))
+	.post('/refresh', async (ctx) => {
+		try {
+			return await authHandlers.handleRefreshSessionRequest(ctx);
+		} catch (err) {
+			const { headers: clearHeaders } = await sessions.clearSession(ctx);
+			return new Response(
+				JSON.stringify({
+					error: String(err),
+				}),
+				{
+					status: 400,
+					headers: {
+						...clearHeaders,
+					},
+				},
+			);
+		}
+	})
 	.get('/session', (ctx) => authHandlers.handleSessionRequest(ctx));
 
 function routeAuthErrorsToUi(path: string) {
