@@ -19,6 +19,8 @@ declare module '@a-type/auth' {
 
 export const sessions = new SessionManager({
 	getSessionConfig(ctx) {
+		const url = new URL(DEPLOYED_ORIGIN);
+		const host = url.hostname;
 		return {
 			cookieName: 'bsc-session',
 			cookieOptions: {
@@ -27,7 +29,7 @@ export const sessions = new SessionManager({
 				// cross-site cookies are fully blocked everyone will be
 				// on gnocchi.biscuits.club
 				partitioned: false,
-				domain: DEPLOYED_ORIGIN,
+				domain: host,
 			},
 			expiration: process.env.NODE_ENV === 'production' ? '24h' : '1m',
 			async createSession(userId) {
