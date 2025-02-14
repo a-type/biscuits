@@ -7,8 +7,8 @@ settings:
 catalogs:
   default:
     '@a-type/auth':
-      specifier: 1.3.9
-      version: 1.3.9
+      specifier: 1.3.10
+      version: 1.3.10
     '@a-type/auth-fetch':
       specifier: 1.0.2
       version: 1.0.2
@@ -1622,10 +1622,10 @@ importers:
     dependencies:
       '@a-type/auth':
         specifier: 'catalog:'
-        version: 1.3.9
+        version: 1.3.10
       '@a-type/auth-email-nodemailer':
         specifier: ^2.0.9
-        version: 2.0.9(@a-type/auth@1.3.9)
+        version: 2.0.9(@a-type/auth@1.3.10)
       '@a-type/utils':
         specifier: 1.1.4
         version: 1.1.4
@@ -1925,8 +1925,8 @@ packages:
       '@a-type/ui': ^1.3.3
       react: ^19
 
-  '@a-type/auth@1.3.9':
-    resolution: {integrity: sha512-Gi4ZZ6wkRp0hVSLgXW56UmPZF+Ep4BKxK8HdtdvgG1rMCn+Enxn5aP4D5BUgiZ5zRc94jkQalOxyK0wTgjoVhA==}
+  '@a-type/auth@1.3.10':
+    resolution: {integrity: sha512-npbDQYijTvkPXXTAUTJCNAWak/jkK9KmddANsde8rZjBkOKnbI1WKyQomgW35BlmzHVwY20RQv89BpE1sfnRtw==}
 
   '@a-type/kysely@1.1.1':
     resolution: {integrity: sha512-JOCyXi09IEmhscHAoU/lLy7/prkPRtFLgTrWs5uK7q0nLL2zN6soFwtafOWsRh3iJsM/km47aXohyGx5mHRmnQ==}
@@ -11162,9 +11162,9 @@ snapshots:
       graphql: 16.10.0
       typescript: 5.7.2
 
-  '@a-type/auth-email-nodemailer@2.0.9(@a-type/auth@1.3.9)':
+  '@a-type/auth-email-nodemailer@2.0.9(@a-type/auth@1.3.10)':
     dependencies:
-      '@a-type/auth': 1.3.9
+      '@a-type/auth': 1.3.10
       nodemailer: 6.10.0
 
   '@a-type/auth-fetch@1.0.2': {}
@@ -11174,7 +11174,7 @@ snapshots:
       '@a-type/ui': 1.5.6(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react: 19.0.0
 
-  '@a-type/auth@1.3.9':
+  '@a-type/auth@1.3.10':
     dependencies:
       cookie: 0.6.0
       discord-oauth2: 2.12.1

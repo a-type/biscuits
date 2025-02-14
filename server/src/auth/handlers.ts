@@ -19,6 +19,14 @@ export const authHandlers = createHandlers<Context<Env>>({
 	getRedirectConfig(ctx) {
 		return {
 			defaultReturnToOrigin: UI_ORIGIN,
+			allowedReturnToOrigin: (origin: string) => {
+				if (origin === UI_ORIGIN) return true;
+				const asUrl = new URL(origin);
+				return (
+					asUrl.hostname === 'localhost' ||
+					asUrl.hostname.endsWith('biscuits.club')
+				);
+			},
 		};
 	},
 	providers: {
