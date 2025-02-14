@@ -1,6 +1,5 @@
 import { honoAdapter, SessionManager } from '@a-type/auth';
 import { db, userNameSelector } from '@biscuits/db';
-import { getRootDomain } from '../common/domains.js';
 import { DEPLOYED_ORIGIN, UI_ORIGIN } from '../config/deployedContext.js';
 import { SESSION_SECRET } from '../config/secrets.js';
 import { BiscuitsError } from '../error.js';
@@ -28,7 +27,7 @@ export const sessions = new SessionManager({
 				// cross-site cookies are fully blocked everyone will be
 				// on gnocchi.biscuits.club
 				partitioned: false,
-				domain: getRootDomain(DEPLOYED_ORIGIN),
+				domain: DEPLOYED_ORIGIN,
 			},
 			expiration: process.env.NODE_ENV === 'production' ? '24h' : '1m',
 			async createSession(userId) {
