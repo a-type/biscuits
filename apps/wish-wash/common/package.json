@@ -15,12 +15,14 @@
 	"scripts": {
 		"build": "tsc"
 	},
-	"peerDependencies": {
+	"dependencies": {
 		"@a-type/ui": "catalog:",
 		"@a-type/utils": "catalog:",
 		"@biscuits/graphql": "workspace:*",
 		"react": "catalog:",
-		"react-dom": "catalog:",
+		"react-dom": "catalog:"
+	},
+	"devDependencies": {
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
 		"typescript": "catalog:"

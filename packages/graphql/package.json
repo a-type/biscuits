@@ -21,23 +21,23 @@
 		}
 	},
 	"scripts": {
-		"build": "pnpm run build:transpile",
-		"build:transpile": "tsc",
+		"build": "tsc",
 		"dev": "tsc --watch"
 	},
 	"type": "module",
-	"peerDependencies": {
-		"@a-type/utils": "catalog:",
-		"gql.tada": "catalog:",
-		"react": "catalog:",
-		"typescript": "catalog:"
-	},
 	"dependencies": {
 		"@a-type/auth-fetch": "catalog:",
+		"@a-type/utils": "catalog:",
 		"@apollo/client": "3.12.3",
 		"@biscuits/apps": "workspace:*",
 		"@biscuits/error": "workspace:*",
 		"@biscuits/libraries": "workspace:*",
-		"graphql": "16.10.0"
+		"graphql": "16.10.0",
+		"gql.tada": "catalog:",
+		"react": "catalog:"
+	},
+	"devDependencies": {
+		"@types/react": "catalog:",
+		"typescript": "catalog:"
 	}
 }

@@ -6,6 +6,7 @@
 		"dev": "run-p dev:*",
 		"start": "node --conditions=production ./dist/server.js",
 		"start:local": "env-cmd pnpm start",
+		"start:local:timed": "node ./scripts/printTime.mjs && env-cmd pnpm start",
 		"build": "tsc --build tsconfig.json",
 		"vapid": "node ./scripts/generateVapidKeys.js",
 		"migrate": "dotenv biscuits-migrate",

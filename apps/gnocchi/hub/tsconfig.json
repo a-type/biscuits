@@ -1,14 +1,16 @@
 {
-  "extends": "../../../tsconfig.json",
-  "compilerOptions": {
-    "jsx": "preserve",
-    "outDir": "./dist/server",
-    "rootDir": "./src",
-    "baseUrl": ".",
-    "paths": {
-      "@/*": ["./src/*"]
-    },
-    "types": ["vite/client"]
-  },
-  "include": ["src"]
+	"extends": "../../../tsconfig.json",
+	"compilerOptions": {
+		"jsx": "preserve",
+		"outDir": "./dist/server",
+		"rootDir": "./src",
+		"baseUrl": ".",
+		"paths": {
+			"@/*": ["./src/*"]
+		},
+		"types": ["vite/client"],
+		"declaration": true,
+		"declarationDir": "./dist/server"
+	},
+	"include": ["src"]
 }

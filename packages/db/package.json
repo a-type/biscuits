@@ -25,12 +25,9 @@
 		"migrate-down": "cross-env DATABASE_FILE=../../server/database.sqlite node ./scripts/migrateDown.mjs"
 	},
 	"type": "module",
-	"peerDependencies": {
-		"@a-type/utils": "catalog:",
-		"typescript": "catalog:"
-	},
 	"dependencies": {
 		"@a-type/kysely": "^1.1.1",
+		"@a-type/utils": "catalog:",
 		"@paralleldrive/cuid2": "^2.2.2",
 		"better-sqlite3": "11.7.0",
 		"kysely": "^0.27.5",
@@ -40,6 +37,7 @@
 		"@types/better-sqlite3": "^7.6.12",
 		"@types/node": "^22.10.2",
 		"cross-env": "^7.0.3",
-		"tsx": "^4.6.2"
+		"tsx": "^4.6.2",
+		"typescript": "catalog:"
 	}
 }

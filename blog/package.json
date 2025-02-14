@@ -9,13 +9,13 @@
 		"preview": "astro preview",
 		"astro": "astro"
 	},
-	"peerDependencies": {
-		"@a-type/ui": "catalog:",
+	"devDependencies": {
 		"typescript": "catalog:",
 		"unocss": "catalog:",
 		"@unocss/transformer-variant-group": "catalog:"
 	},
 	"dependencies": {
+		"@a-type/ui": "catalog:",
 		"@astrojs/check": "^0.9.4",
 		"@astrojs/mdx": "^4.0.2",
 		"@astrojs/rss": "^4.0.10",
