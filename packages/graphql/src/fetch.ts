@@ -7,6 +7,7 @@ export { refreshSession } from '@a-type/auth-fetch';
 export const fetch = createFetch({
 	readBody: true,
 	refreshSessionEndpoint: `${API_ORIGIN}/auth/refresh`,
+	logoutEndpoint: `${API_ORIGIN}/auth/logout`,
 	isSessionExpired: (res, body) => {
 		const biscuitsError = BiscuitsError.readResponseBody(body);
 		if (biscuitsError) {
