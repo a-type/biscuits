@@ -27,13 +27,22 @@ authRouter
 			.handleLogoutRequest(ctx)
 			.catch(routeAuthErrorsToUi('/'));
 		// also clear old cookies
+		const host = new URL(DEPLOYED_ORIGIN).host;
 		res.headers.append(
 			'Set-Cookie',
-			`bsc-session=; Path=/; Max-Age=0; HttpOnly; SameSite=Lax; Domain=${DEPLOYED_ORIGIN}`,
+			`bsc-session=; Path=/; Max-Age=0; HttpOnly; SameSite=Lax; Domain=${host}`,
 		);
 		res.headers.append(
 			'Set-Cookie',
-			`bsc-refresh=; Path=/; Max-Age=0; HttpOnly; SameSite=Lax; Domain=${DEPLOYED_ORIGIN}`,
+			`bsc-refresh=; Path=/; Max-Age=0; HttpOnly; SameSite=Lax; Domain=${host}`,
+		);
+		res.headers.append(
+			'Set-Cookie',
+			`bsc-session=; Path=/; Max-Age=0; HttpOnly; SameSite=Lax;`,
+		);
+		res.headers.append(
+			'Set-Cookie',
+			`bsc-refresh=; Path=/; Max-Age=0; HttpOnly; SameSite=Lax;`,
 		);
 		return res;
 	})
