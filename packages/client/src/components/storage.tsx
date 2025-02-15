@@ -96,7 +96,7 @@ export function ImportDataButton({
 				></input>
 				{children || (
 					<>
-						import Data <Icon name="upload" />
+						Import Data <Icon name="upload" />
 					</>
 				)}
 			</label>

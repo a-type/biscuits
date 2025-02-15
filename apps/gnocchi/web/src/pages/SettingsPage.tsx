@@ -40,7 +40,7 @@ const contents = {
 	online: OnlineContents,
 } as const;
 
-export function PlanPage() {
+export function SettingsPage() {
 	const offline = useIsOffline();
 	const isLoggedIn = useIsLoggedIn();
 	const canSync = useHasServerAccess();
@@ -82,7 +82,7 @@ export function PlanPage() {
 	);
 }
 
-export default PlanPage;
+export default SettingsPage;
 
 const MainContainer = ({ children }: { children: ReactNode }) => (
 	<div className="flex flex-col items-start w-full gap-4">{children}</div>

@@ -28,7 +28,7 @@ import { lazyWithPreload } from 'react-lazy-with-preload';
 import { NotFoundPage } from './NotFoundPage.jsx';
 import { GroceriesPage } from './groceries/GroceriesPage.js';
 
-const PlanPage = lazyWithPreload(() => import('./PlanPage.jsx'));
+const SettingsPage = lazyWithPreload(() => import('./SettingsPage.jsx'));
 const RecipeViewPage = lazyWithPreload(
 	() => import('./recipe/RecipeViewPage.jsx'),
 );
@@ -58,7 +58,7 @@ const routes = makeRoutes([
 				onVisited: () => {
 					PantryPage.preload();
 					PantryListPage.preload();
-					PlanPage.preload();
+					SettingsPage.preload();
 					RecipesPage.preload();
 				},
 				data: {
@@ -71,7 +71,7 @@ const routes = makeRoutes([
 			},
 			{
 				path: 'settings',
-				component: PlanPage,
+				component: SettingsPage,
 				data: {
 					left: '/recipes',
 				},
