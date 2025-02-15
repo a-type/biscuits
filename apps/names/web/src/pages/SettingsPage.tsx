@@ -1,4 +1,5 @@
 import { LocationOffer } from '@/components/location/LocationOffer.jsx';
+import { UpdatePrompt } from '@/components/updatePrompt/UpdatePrompt.jsx';
 import { checkForUpdate } from '@/updateState.js';
 import {
 	Button,
@@ -31,6 +32,7 @@ export function SettingsPage({}: SettingsPageProps) {
 					</Button>
 				</PageFixedArea>
 				<H1>Settings</H1>
+				<UpdatePrompt />
 				<div className="flex flex-col items-start w-full gap-4">
 					<DarkModeToggle />
 					<LocationOffer overrideDeny color="default" />

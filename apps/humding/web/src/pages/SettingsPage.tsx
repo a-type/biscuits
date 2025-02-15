@@ -1,3 +1,4 @@
+import { UpdatePrompt } from '@/components/updatePrompt/UpdatePrompt.jsx';
 import { checkForUpdate } from '@/updateState.js';
 import { Button, H1, Icon, PageContent, PageFixedArea } from '@a-type/ui';
 import { DarkModeToggle } from '@biscuits/client';
@@ -22,6 +23,7 @@ export function SettingsPage({}: SettingsPageProps) {
 				</Button>
 			</PageFixedArea>
 			<H1>Settings</H1>
+			<UpdatePrompt />
 			<div className="flex flex-col items-start w-full gap-4">
 				<DarkModeToggle />
 				<ManageStorage />

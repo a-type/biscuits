@@ -1,3 +1,4 @@
+import { UpdatePrompt } from '@/components/updatePrompt/UpdatePrompt.jsx';
 import { TemperatureUnitSelect } from '@/components/weather/TemperatureUnit.jsx';
 import {
 	Button,
@@ -25,6 +26,7 @@ export function SettingsPage({}: SettingsPageProps) {
 				</Button>
 			</PageFixedArea>
 			<H1>Settings</H1>
+			<UpdatePrompt />
 			<div className="flex flex-col gap-4 my-6 mx-2 items-start">
 				<DarkModeToggle />
 				<TemperatureUnitSelect />
