@@ -50,10 +50,7 @@ export function CookingActionBar({ recipe }: CookingActionBarProps) {
 			<AddChefsAction />
 			<StopCookingAction recipe={recipe} />
 			<NoteToggleAction recipe={recipe} />
-			<RecipeViewerEditButton
-				recipe={recipe}
-				className="font-normal h-[30px]"
-			/>
+			<RecipeViewerEditButton recipe={recipe} className="font-bold h-[30px]" />
 			<RecipePublishControl recipe={recipe} />
 		</ActionBar>
 	);
