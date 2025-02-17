@@ -27,6 +27,7 @@ import { Suspense, useCallback } from 'react';
 import { lazyWithPreload } from 'react-lazy-with-preload';
 import { NotFoundPage } from './NotFoundPage.jsx';
 import { GroceriesPage } from './groceries/GroceriesPage.js';
+import RecipesWrapper from './recipe/RecipesWrapper.jsx';
 
 const SettingsPage = lazyWithPreload(() => import('./SettingsPage.jsx'));
 const RecipeViewPage = lazyWithPreload(
@@ -101,8 +102,7 @@ const routes = makeRoutes([
 			},
 			{
 				path: 'recipes',
-				exact: true,
-				component: RecipesPage,
+				component: RecipesWrapper,
 				onVisited: () => {
 					RecipeViewPage.preload();
 					RecipeOverviewPage.preload();
@@ -113,31 +113,37 @@ const routes = makeRoutes([
 					left: '/pantry',
 					right: '/settings',
 				},
-			},
-			{
-				path: 'recipes/:slug',
-				component: RecipeViewPage,
-				onVisited: () => {
-					RecipeEditPage.preload();
-				},
-				data: {
-					left: '/pantry',
-					right: '/settings',
-				},
 				children: [
 					{
-						path: '',
-						exact: true,
-						component: RecipeOverviewPage,
+						path: ':slug',
+						component: RecipeViewPage,
+						onVisited: () => {
+							RecipeEditPage.preload();
+						},
+						data: {
+							left: '/pantry',
+							right: '/settings',
+						},
+						children: [
+							{
+								path: '',
+								index: true,
+								component: RecipeOverviewPage,
+							},
+							{
+								path: 'edit',
+								component: RecipeEditPage,
+							},
+							{
+								// legacy path
+								path: 'cook',
+								component: RecipeOverviewPage,
+							},
+						],
 					},
 					{
-						path: 'edit',
-						component: RecipeEditPage,
-					},
-					{
-						// legacy path
-						path: 'cook',
-						component: RecipeOverviewPage,
+						index: true,
+						component: RecipesPage,
 					},
 				],
 			},

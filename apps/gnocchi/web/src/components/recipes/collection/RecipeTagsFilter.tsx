@@ -16,7 +16,9 @@ export function RecipeTagsFilter({
 	className?: string;
 	buttonClassName?: string;
 }) {
-	const allTags = hooks.useAllRecipeTagMetadata();
+	const allTags = hooks.useAllRecipeTagMetadata({
+		key: 'allRecipeTags',
+	});
 	const filteredByOmit = allTags.filter((tag) => {
 		if (selectedValues?.length) {
 			return selectedValues.includes(tag.get('name'));

@@ -11,7 +11,11 @@ function findScrollableParent(
 	const style = getComputedStyle(element);
 	const overflowY = style.overflowY || style.overflow;
 
-	if (overflowY !== 'visible' && overflowY !== 'hidden') {
+	if (
+		overflowY !== 'visible' &&
+		overflowY !== 'hidden' &&
+		element.scrollHeight > element.clientHeight
+	) {
 		return element;
 	}
 
@@ -37,6 +41,12 @@ export function AutoRestoreScroll({
 			if (!scrollable) return false;
 
 			if (scrollable instanceof HTMLElement) {
+				if (debug)
+					console.log(
+						'scrollable',
+						scrollable,
+						getComputedStyle(scrollable).overflowY,
+					);
 				return [scrollable.scrollLeft, scrollable.scrollTop];
 			}
 			return [scrollable.scrollX, scrollable.scrollY];

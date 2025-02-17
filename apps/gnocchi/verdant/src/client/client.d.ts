@@ -10,38 +10,87 @@ import type {
 export * from "@verdant-web/store";
 
 export class Client<Presence = any, Profile = any> {
+  /** Collection access for Category. Load queries, put and delete documents. */
   readonly categories: CollectionQueries<
     Category,
     CategoryInit,
     CategoryFilter
   >;
+
+  /** Collection access for Item. Load queries, put and delete documents. */
   readonly items: CollectionQueries<Item, ItemInit, ItemFilter>;
+
+  /** Collection access for Food. Load queries, put and delete documents. */
   readonly foods: CollectionQueries<Food, FoodInit, FoodFilter>;
+
+  /** Collection access for List. Load queries, put and delete documents. */
   readonly lists: CollectionQueries<List, ListInit, ListFilter>;
+
+  /** Collection access for CollaborationInfo. Load queries, put and delete documents. */
   readonly collaborationInfo: CollectionQueries<
     CollaborationInfo,
     CollaborationInfoInit,
     CollaborationInfoFilter
   >;
+
+  /** Collection access for Recipe. Load queries, put and delete documents. */
   readonly recipes: CollectionQueries<Recipe, RecipeInit, RecipeFilter>;
+
+  /** Collection access for RecipeTagMetadata. Load queries, put and delete documents. */
   readonly recipeTagMetadata: CollectionQueries<
     RecipeTagMetadata,
     RecipeTagMetadataInit,
     RecipeTagMetadataFilter
   >;
 
+  /**
+   * Turn on and off sync, or adjust the sync protocol and other settings.
+   */
   sync: BaseClient<Presence, Profile>["sync"];
+  /**
+   * Access and manipulate the undo/redo stack. You can also
+   * add custom undoable actions using addUndo, although the interface
+   * for doing this is pretty mind-bending at the moment (sorry).
+   */
   undoHistory: BaseClient<Presence, Profile>["undoHistory"];
+  /**
+   * The namespace used to construct this store.
+   */
   namespace: BaseClient<Presence, Profile>["namespace"];
+  /**
+   * @deprecated - do not use this. For batching, use .batch instead.
+   * Using methods on this property can cause data loss and corruption.
+   */
   entities: BaseClient<Presence, Profile>["entities"];
-  // queryStore: BaseClient<Presence, Profile>['queryStore'];
+  /**
+   * Tools for batching operations so they are bundled together
+   * in the undo/redo stack.
+   */
   batch: BaseClient<Presence, Profile>["batch"];
-  // files: BaseClient<Presence, Profile>['files'];
   close: BaseClient<Presence, Profile>["close"];
+  /**
+   * Export a backup of a full library
+   */
   export: BaseClient<Presence, Profile>["export"];
+  /**
+   * Import a full library from a backup. WARNING: this replaces
+   * existing data with no option for restore.
+   */
   import: BaseClient<Presence, Profile>["import"];
+  /**
+   * Subscribe to global store events
+   */
   subscribe: BaseClient<Presence, Profile>["subscribe"];
+  /**
+   * Read stats about storage usage
+   */
   stats: BaseClient<Presence, Profile>["stats"];
+  /**
+   * An interface for inspecting and manipulating active live queries.
+   * Particularly, see .keepAlive and .dropKeepAlive for placing keep-alive
+   * holds to keep query results in memory when unsubscribed.
+   */
+  queries: BaseClient<Presence, Profile>["queries"];
 
   /**
    * Deletes all local data. If the client is connected to sync,

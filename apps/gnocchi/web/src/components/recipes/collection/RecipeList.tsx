@@ -1,11 +1,7 @@
-import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
 import { EmptyState } from '@/components/recipes/collection/EmptyState.jsx';
 import { PinnedRecipes } from '@/components/recipes/collection/PinnedRecipes.jsx';
 import { RecipeCollectionMenu } from '@/components/recipes/collection/RecipeCollectionMenu.jsx';
-import {
-	RecipeListItem,
-	RecipePlaceholderItem,
-} from '@/components/recipes/collection/RecipeListItem.jsx';
+import { RecipeListItem } from '@/components/recipes/collection/RecipeListItem.jsx';
 import { RecipeSearchBar } from '@/components/recipes/collection/RecipeSearchBar.jsx';
 import { RecipePresenceNotification } from '@/components/sync/collaborationMenu/RecipePresenceNotification.jsx';
 import {
@@ -49,7 +45,7 @@ export function RecipeList({}: RecipeListProps) {
 				<TagFilterList />
 			</Suspense>
 
-			<Suspense
+			{/* <Suspense
 				fallback={
 					<CardGrid className="z-1">
 						<RecipePlaceholderItem className="min-h-200px md:(h-30dvh max-h-300px)" />
@@ -57,10 +53,9 @@ export function RecipeList({}: RecipeListProps) {
 						<RecipePlaceholderItem className="min-h-200px md:(h-30dvh max-h-300px)" />
 					</CardGrid>
 				}
-			>
-				<RecipeListContent />
-				<AutoRestoreScroll id="recipesList" />
-			</Suspense>
+			> */}
+			<RecipeListContent />
+			{/* </Suspense> */}
 		</div>
 	);
 }
