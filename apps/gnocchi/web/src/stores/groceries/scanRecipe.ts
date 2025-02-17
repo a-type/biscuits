@@ -18,6 +18,7 @@ const recipeScanQuery = graphql(`
 				rawIngredients
 				author
 				note
+				scanner
 				detailedIngredients {
 					original
 					foodName

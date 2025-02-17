@@ -336,6 +336,7 @@ type RecipeScan {
   note: String
   prepTimeMinutes: Int
   rawIngredients: [String!]
+  scanner: String!
   servings: Int
   steps: [String!]
   title: String

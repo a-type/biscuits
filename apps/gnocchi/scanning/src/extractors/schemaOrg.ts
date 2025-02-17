@@ -1,5 +1,5 @@
 import { CheerioAPI } from 'cheerio';
-import { ExtractorData } from './types.js';
+import { DetailedStep, ExtractorData } from './types.js';
 import { isoToMinutes, toYield } from './utils.js';
 
 export async function schemaOrg($: CheerioAPI): Promise<ExtractorData | null> {
@@ -31,6 +31,30 @@ export async function schemaOrg($: CheerioAPI): Promise<ExtractorData | null> {
 					data.recipeYield[0]
 				:	data.recipeYield
 			:	undefined;
+		const detailedSteps: DetailedStep[] = (data.recipeInstructions as any[])
+			.map((step: any): DetailedStep[] => {
+				if (step['@type'] === 'HowToSection' && step.itemListElement) {
+					return [
+						{
+							content: step.name,
+							type: 'sectionTitle',
+						},
+						...step.itemListElement.map((step: any) => ({
+							type: 'step',
+							content: step.text || step.name,
+						})),
+					];
+				}
+
+				return [
+					{
+						type: 'step',
+						content: step.text || step.name,
+					},
+				];
+			})
+			.flat()
+			.filter((v) => !!v.content);
 		return {
 			scanner: 'schemaOrg',
 			title: data.name || data.headline,
@@ -42,10 +66,11 @@ export async function schemaOrg($: CheerioAPI): Promise<ExtractorData | null> {
 			totalTimeMinutes:
 				data.totalTime ? isoToMinutes(data.totalTime) : undefined,
 			servings: yieldValue ? toYield(yieldValue) : undefined,
-			rawIngredients: data.recipeIngredient,
-			steps: data.recipeInstructions.map((step: any) => step.text),
+			rawIngredients: data.recipeIngredient.filter(Boolean),
 			copyrightHolder: data.copyrightHolder || data.publisher?.name,
 			copyrightYear: data.copyrightYear,
+			detailedSteps,
+			steps: detailedSteps.map((step) => step.content),
 		};
 	} catch (e) {
 		return null;

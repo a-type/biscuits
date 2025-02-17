@@ -77,6 +77,7 @@ builder.objectType('RecipeScan', {
 		note: t.exposeString('note', {
 			nullable: true,
 		}),
+		scanner: t.exposeString('scanner'),
 	}),
 });
 
