@@ -32,7 +32,7 @@ export function MapView({
 			const map = new mapboxgl.Map({
 				container,
 				center: [longitude, latitude], // starting position [lng, lat]
-				zoom: 9, // starting zoom,
+				zoom: 10, // starting zoom
 				accessToken: token,
 				style:
 					colorMode === 'light' ?
@@ -43,7 +43,8 @@ export function MapView({
 				new mapboxgl.GeolocateControl({
 					trackUserLocation: true,
 					fitBoundsOptions: {
-						minZoom: 12,
+						minZoom: 9,
+						maxZoom: 15,
 					},
 				}),
 			);

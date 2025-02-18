@@ -1,8 +1,10 @@
 import { hooks } from '@/hooks.js';
-import { Box, clsx, Input, Popover } from '@a-type/ui';
+import { Box, clsx, Icon, Input, Popover } from '@a-type/ui';
 import { preventDefault } from '@a-type/utils';
+import { Person } from '@names.biscuits/verdant';
 import { useCombobox } from 'downshift';
-import { useDeferredValue, useState } from 'react';
+import { Suspense, useDeferredValue, useState } from 'react';
+import { TagDisplay } from '../tags/TagDisplay.jsx';
 
 export interface PersonNameSearchFieldProps {
 	onSelect?: (personId: string) => void;
@@ -72,22 +74,56 @@ export function PersonNameSearchField({
 				forceMount
 			>
 				{matches.map((person, index) => (
-					<Box
+					<PersonItem
 						key={person.get('id')}
-						p="sm"
 						{...getItemProps({ item: person, index })}
-						className={clsx(
-							'rounded-sm',
-							highlightedIndex === index ? 'bg-gray-2' : '',
-						)}
-					>
-						{person.get('name')}
-					</Box>
+						highlighted={highlightedIndex === index}
+						person={person}
+					/>
 				))}
 				{!matches.length && (
 					<Box className="text-gray-7 text-sm p-2">No matches</Box>
 				)}
 			</Popover.Content>
 		</Popover>
+	);
+}
+
+function PersonItem({
+	person,
+	highlighted,
+	...props
+}: {
+	person: Person;
+	highlighted?: boolean;
+}) {
+	const { note, tags } = hooks.useWatch(person);
+
+	return (
+		<Box
+			key={person.get('id')}
+			p="sm"
+			{...props}
+			className={clsx('rounded-sm', highlighted ? 'bg-gray-2' : '')}
+			d="col"
+			gap="xs"
+		>
+			<Box>{person.get('name')}</Box>
+			{note && (
+				<Box className="text-gray-7 text-sm" gap="sm" items="center">
+					<Icon name="note" />
+					{note}
+				</Box>
+			)}
+			{tags && (
+				<Suspense>
+					<Box className="text-gray-7 text-sm" gap="sm" items="center">
+						{tags.map((tag) => (
+							<TagDisplay key={tag} name={tag} className="text-xs" />
+						))}
+					</Box>
+				</Suspense>
+			)}
+		</Box>
 	);
 }

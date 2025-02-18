@@ -29,16 +29,23 @@ export function useAddPerson() {
 	const client = hooks.useClient();
 	const { data: meData } = useMe();
 	const selfId = meData?.me?.id;
+	const addRelationship = useAddRelationship();
 	return useCallback(
 		async (
 			name: string,
-			options: { attachLocation?: boolean } = { attachLocation: true },
+			options: { attachLocation?: boolean; relateTo?: string[] } = {
+				attachLocation: true,
+			},
 		) => {
-			console.log(options);
 			const person = await client.people.put({
 				name,
 				createdBy: selfId,
 			});
+			if (options.relateTo) {
+				for (const otherId of options.relateTo) {
+					addRelationship(person.get('id'), otherId);
+				}
+			}
 			// if allowed, record location
 			if (options.attachLocation) {
 				console.log('Attaching location to', name);
@@ -64,7 +71,7 @@ export function useAddPerson() {
 			}
 			return person;
 		},
-		[client, selfId],
+		[client, selfId, addRelationship],
 	);
 }
 

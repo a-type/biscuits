@@ -16,8 +16,8 @@ catalogs:
       specifier: 1.0.15
       version: 1.0.15
     '@a-type/ui':
-      specifier: 1.5.7
-      version: 1.5.7
+      specifier: 1.5.8
+      version: 1.5.8
     '@a-type/utils':
       specifier: 1.1.4
       version: 1.1.4
@@ -155,7 +155,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 1.5.7(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 1.5.8(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.4
@@ -275,7 +275,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 1.5.7(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 1.5.8(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.4
@@ -549,7 +549,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 1.5.7(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 1.5.8(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.4
@@ -655,7 +655,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 1.5.7(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 1.5.8(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.4
@@ -764,7 +764,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 1.5.7(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 1.5.8(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.4
@@ -873,7 +873,7 @@ importers:
         version: 0.2.15(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 1.5.7(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 1.5.8(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.4
@@ -988,7 +988,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 1.5.7(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 1.5.8(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.4
@@ -1109,7 +1109,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 1.5.7(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 1.5.8(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.4
@@ -1230,7 +1230,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 1.5.7(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 1.5.8(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.4
@@ -1258,7 +1258,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 1.5.7(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 1.5.8(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.4
@@ -1344,7 +1344,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 1.5.7(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 1.5.8(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.4
@@ -1447,7 +1447,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 1.5.7(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 1.5.8(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@astrojs/check':
         specifier: ^0.9.4
         version: 0.9.4(prettier@3.4.2)(typescript@5.7.2)
@@ -1544,7 +1544,7 @@ importers:
         version: 2.0.0
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 1.5.7(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 1.5.8(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.4
@@ -1855,10 +1855,10 @@ importers:
     dependencies:
       '@a-type/auth-ui':
         specifier: 'catalog:'
-        version: 1.0.15(@a-type/ui@1.5.7(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
+        version: 1.0.15(@a-type/ui@1.5.8(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 1.5.7(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 1.5.8(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@biscuits/apps':
         specifier: workspace:*
         version: link:../packages/apps
@@ -2003,8 +2003,8 @@ packages:
       react: ^18.3.1
       react-dom: ^18.3.1
 
-  '@a-type/ui@1.5.7':
-    resolution: {integrity: sha512-k0DKhVLFY497p+Vsojr445IkRSsdTNTLws7kJ2iCjVZQSwphdgsSndTuVxZ6GAW57eAz3igT0W645OTZjKtlww==}
+  '@a-type/ui@1.5.8':
+    resolution: {integrity: sha512-ws3TWjrqdvQ06A/bnuVEKCWtfE86YbHZS9MnL4wnK+RyrowxsMXjHrlrF12pcvhnDs695Df/YOOrW18uB3rKaA==}
     peerDependencies:
       react: ^19
       react-dom: ^19
@@ -11239,9 +11239,9 @@ snapshots:
 
   '@a-type/auth-fetch@2.0.0': {}
 
-  '@a-type/auth-ui@1.0.15(@a-type/ui@1.5.7(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)':
+  '@a-type/auth-ui@1.0.15(@a-type/ui@1.5.8(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react@19.0.0)':
     dependencies:
-      '@a-type/ui': 1.5.7(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+      '@a-type/ui': 1.5.8(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       react: 19.0.0
 
   '@a-type/auth@1.3.11':
@@ -11276,7 +11276,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@a-type/ui@1.5.7(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@a-type/ui@1.5.8(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@a-type/utils': 1.1.4
       '@radix-ui/react-accordion': 1.2.2(@types/react-dom@19.0.2(@types/react@19.0.2))(@types/react@19.0.2)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)

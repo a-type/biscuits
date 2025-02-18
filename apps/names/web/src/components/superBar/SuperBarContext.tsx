@@ -32,6 +32,9 @@ const SuperBarContext = createContext<{
 	setTagFilter: (updater: (prev: string[]) => string[]) => void;
 	tagFilter: string[];
 	loadMoreRecents?: () => void;
+	addRelationshipToCurrentPerson: boolean;
+	setAddRelationshipToCurrentPerson: (v: boolean) => void;
+	relateTo: string[];
 }>({
 	inputValue: '',
 	setInputValue: () => {},
@@ -42,6 +45,9 @@ const SuperBarContext = createContext<{
 	setTagFilter: () => {},
 	tagFilter: [],
 	loadMoreRecents: undefined,
+	addRelationshipToCurrentPerson: false,
+	setAddRelationshipToCurrentPerson: () => {},
+	relateTo: [],
 });
 
 export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
@@ -50,7 +56,25 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 	const navigate = useNavigate();
 	const setInputValue = useCallback(
 		(v: string) => {
-			navigate(`/?q=${encodeURIComponent(v)}`);
+			const currentPersonId = /\/people\/([^/]+)/.exec(
+				window.location.pathname,
+			)?.[1];
+			if (v === '') {
+				const prev = new URLSearchParams(window.location.search).get('prev');
+				if (prev) {
+					navigate(`/people/${prev}`, { replace: true });
+				} else {
+					navigate('/', { replace: true });
+				}
+				return;
+			}
+
+			const search = new URLSearchParams(window.location.search);
+			search.set('q', encodeURIComponent(v));
+			if (currentPersonId) {
+				search.set('prev', currentPersonId);
+			}
+			navigate(`/?${search.toString()}`, { replace: true });
 		},
 		[navigate],
 	);
@@ -149,16 +173,35 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 	const [loading, setLoading] = useState(false);
 	const addPerson = useAddPerson();
 	const [attachLocation] = useSessionStorage('attachLocation', true);
+	const [addRelationshipToCurrentPerson, setAddRelationshipToCurrentPerson] =
+		useState(true);
+	const previousPersonId = search.get('prev');
+	const relateTo = useMemo(() => {
+		if (previousPersonId) {
+			return [previousPersonId];
+		}
+		return [];
+	}, [previousPersonId]);
 	const createNew = useCallback(async () => {
 		if (loading) return;
 		try {
 			setLoading(true);
-			const person = await addPerson(inputValue, { attachLocation });
+			const person = await addPerson(inputValue, {
+				attachLocation,
+				relateTo: addRelationshipToCurrentPerson ? relateTo : undefined,
+			});
 			navigate(`/people/${person.get('id')}`);
 		} finally {
 			setLoading(false);
 		}
-	}, [addPerson, navigate, inputValue, loading]);
+	}, [
+		addPerson,
+		navigate,
+		inputValue,
+		loading,
+		relateTo,
+		addRelationshipToCurrentPerson,
+	]);
 
 	const selectPerson = useCallback(
 		(person: Person) => {
@@ -182,6 +225,9 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 				tagFilter,
 				setTagFilter,
 				loadMoreRecents: pageInfo.hasMore ? pageInfo.loadMore : undefined,
+				addRelationshipToCurrentPerson,
+				setAddRelationshipToCurrentPerson,
+				relateTo,
 			}}
 		>
 			{children}
@@ -191,10 +237,4 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 
 export function useSuperBar() {
 	return useContext(SuperBarContext);
-}
-
-function isNewItem(
-	item: Person | { id: 'new'; name: string },
-): item is { readonly id: 'new'; readonly name: string } {
-	return (item as any).id === 'new';
 }
