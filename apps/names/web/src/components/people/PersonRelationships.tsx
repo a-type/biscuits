@@ -121,7 +121,8 @@ function RelationshipSuggestions({
 	person: Person;
 	omit: Relationship[];
 }) {
-	const { name } = hooks.useWatch(person);
+	const { name, dismissedSuggestions } = hooks.useWatch(person);
+	hooks.useWatch(dismissedSuggestions);
 	const surname = name.split(' ').pop();
 
 	const matches = hooks
@@ -133,6 +134,7 @@ function RelationshipSuggestions({
 			key: 'suggestionNameMatch',
 		})
 		.filter((match) => match.get('id') !== person.get('id'))
+		.filter((match) => !dismissedSuggestions.has(match.get('id')))
 		.filter(
 			(match) =>
 				!omit.some(
@@ -154,11 +156,20 @@ function RelationshipSuggestions({
 			</Box>
 			<Box wrap gap="sm" items="center">
 				{matches.map((match) => (
-					<Chip
-						className="cursor-pointer select-none"
-						onClick={() => addRelationship(person.get('id'), match.get('id'))}
-					>
-						{match.get('name')}
+					<Chip className="select-none !p-0 overflow-hidden">
+						<button
+							onClick={() => addRelationship(person.get('id'), match.get('id'))}
+							className="border-0 text-inherit font-inherit p-0 bg-transparent text-sm pl-3 pr-1 focus-visible:bg-primary-wash hover:bg-white focus:outline-none cursor-pointer self-stretch"
+						>
+							{match.get('name')}
+						</button>
+						<Button
+							size="icon-small"
+							color="ghostDestructive"
+							onClick={() => dismissedSuggestions.add(match.get('id'))}
+						>
+							<Icon name="x" />
+						</Button>
 					</Chip>
 				))}
 			</Box>

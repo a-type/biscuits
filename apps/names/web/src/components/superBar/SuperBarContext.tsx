@@ -94,7 +94,9 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 	});
 	const location = useGeolocation();
 	const longitude = location?.longitude ?? 0;
-	const matchedByLongitude = hooks.useAllPeople({
+	// don't suspend this as it may take a while to fetch location and we don't want
+	// to trigger suspense after the initial page load.
+	const { data: matchedByLongitude } = hooks.useAllPeopleUnsuspended({
 		index: {
 			where: 'longitude',
 			gte: longitude - LOCATION_BROAD_SEARCH_RADIUS,

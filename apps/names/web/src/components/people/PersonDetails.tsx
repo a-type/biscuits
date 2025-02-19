@@ -7,6 +7,7 @@ import {
 import {
 	Avatar,
 	Box,
+	Button,
 	clsx,
 	Divider,
 	EditableText,
@@ -14,6 +15,7 @@ import {
 	Icon,
 	LiveUpdateTextField,
 	RelativeTime,
+	toast,
 } from '@a-type/ui';
 import { EntityDeleteButton, useUserInfo } from '@biscuits/client';
 import { Person } from '@names.biscuits/verdant';
@@ -98,6 +100,28 @@ function Location({ person }: { person: Person }) {
 	hooks.useWatch(geolocation);
 	const currentLocation = useGeolocation();
 
+	const client = hooks.useClient();
+	const remove = () => {
+		person.set('geolocation', null);
+		const id = toast(
+			<Box gap="sm" items="center">
+				<span>Location removed</span>
+				<Button
+					size="small"
+					onClick={() => {
+						client.undoHistory.undo();
+						toast.remove(id);
+					}}
+				>
+					Undo
+				</Button>
+			</Box>,
+			{
+				duration: 10 * 1000,
+			},
+		);
+	};
+
 	if (!geolocation) return null;
 	const nearby =
 		currentLocation &&
@@ -117,6 +141,9 @@ function Location({ person }: { person: Person }) {
 					/>
 					{geolocation.get('label') && <span>{geolocation.get('label')}</span>}
 				</Box>
+				<Button onClick={remove} color="ghostDestructive" size="icon">
+					<Icon name="x" />
+				</Button>
 			</Box>
 			{nearby && (
 				<Box className="text-xs text-gray-7" items="center" gap="sm">
