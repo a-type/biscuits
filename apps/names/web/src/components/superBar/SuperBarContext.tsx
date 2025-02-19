@@ -64,13 +64,13 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 				if (prev) {
 					navigate(`/people/${prev}`, { replace: true });
 				} else {
-					navigate('/', { replace: true });
+					navigate(window.location.pathname, { replace: true });
 				}
 				return;
 			}
 
 			const search = new URLSearchParams(window.location.search);
-			search.set('q', encodeURIComponent(v));
+			search.set('q', v);
 			if (currentPersonId) {
 				search.set('prev', currentPersonId);
 			}
@@ -84,38 +84,14 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 	const [tagFilter, setTagFilter] = useState<string[]>([]);
 
 	const [recentPeople, pageInfo] = useRecentPeople(tagFilter);
-	const matchedPeopleByNameRaw = hooks.useAllPeople({
+	const matchedPeople = hooks.useAllPeople({
 		index: {
-			where: 'matchName',
+			where: 'matchText',
 			startsWith: deferredSearchWord.toLowerCase(),
 		},
-		key: 'matchedPeopleByName',
+		key: 'matchedPeople',
 		skip: deferredSearchWord.length < 2,
 	});
-	const matchNameToInput = useCallback(
-		(person: Person) =>
-			person.get('name').toLowerCase().includes(deferredInput.toLowerCase()),
-		[deferredInput],
-	);
-	const matchedPeopleByName = useMemo(
-		() => matchedPeopleByNameRaw.filter(matchNameToInput),
-		[matchedPeopleByNameRaw, matchNameToInput],
-	);
-	const matchedPeopleByNoteRaw = hooks.useAllPeople({
-		index: {
-			where: 'matchNote',
-			startsWith: deferredSearchWord.toLowerCase(),
-		},
-		key: 'matchedPeopleByNote',
-		skip: deferredSearchWord.length < 2,
-	});
-	const matchedPeopleByNote = useMemo(() => {
-		return matchedPeopleByNoteRaw.filter((person) => {
-			const note = person.get('note');
-			if (!note) return false;
-			return note.toLowerCase().includes(deferredInput.toLowerCase());
-		});
-	}, [matchedPeopleByNoteRaw, deferredInput]);
 	const location = useGeolocation();
 	const longitude = location?.longitude ?? 0;
 	const matchedByLongitude = hooks.useAllPeople({
@@ -127,21 +103,16 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 		key: 'matchedByLongitude',
 		skip: !location,
 	});
-	const matchedByDistance = useMemo(
-		() =>
-			matchedByLongitude.filter(matchNameToInput).filter((person) => {
-				if (!location) return false;
-				const loc = person.get('geolocation');
-				if (!loc) return false;
-				const snap = loc.getSnapshot();
-				if (!snap) return false;
-				return distance(snap, location) < LOCATION_BROAD_SEARCH_RADIUS;
-			}),
-		[location, matchedByLongitude, matchNameToInput],
-	);
 
 	const isSearching = inputValue.length > 1;
 	const groups = useMemo(() => {
+		const matchedByDistance =
+			location ?
+				matchedByLongitude
+					.filter((person) => matchesName(person, deferredInput))
+					.filter((person) => matchesLocation(person, location))
+			:	[];
+
 		if (!isSearching) {
 			return [
 				{ title: 'Recent people', items: recentPeople },
@@ -151,23 +122,39 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 				},
 			];
 		}
+
+		const matchedByName = matchedPeople.filter((person) =>
+			matchesName(person, deferredInput),
+		);
+		const matchedByNote = matchedPeople.filter((person) =>
+			matchesNote(person, deferredInput),
+		);
+		const matchedByLocation = matchedPeople.filter((person) =>
+			matchesLocationLabel(person, deferredInput),
+		);
+
 		return [
-			{ title: 'By name', items: matchedPeopleByName },
+			{ title: 'By name', items: matchedByName },
 			{
 				title: 'By note',
-				items: matchedPeopleByNote,
+				items: matchedByNote,
 			},
 			{
 				title: 'Met nearby',
 				items: matchedByDistance,
 			},
+			{
+				title: 'By place',
+				items: matchedByLocation,
+			},
 		];
 	}, [
 		isSearching,
 		recentPeople,
-		matchedPeopleByName,
-		matchedPeopleByNote,
-		matchedByDistance,
+		location,
+		matchedByLongitude,
+		matchedPeople,
+		deferredInput,
 	]);
 
 	const [loading, setLoading] = useState(false);
@@ -206,9 +193,13 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 	const selectPerson = useCallback(
 		(person: Person) => {
 			navigate(`/people/${person.get('id')}`, {
-				skipTransition: true,
-				preserveQuery: false,
+				preserveQuery: true,
 			});
+			// delay clearing search so we don't have a flash
+			// of unfiltered results
+			setTimeout(() => {
+				setInputValue('');
+			}, 200);
 		},
 		[navigate],
 	);
@@ -234,6 +225,39 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 		</SuperBarContext.Provider>
 	);
 };
+
+function matchWords(haystack: string, needle: string) {
+	return haystack.toLowerCase().includes(needle.toLowerCase());
+}
+
+function matchesName(person: Person, search: string) {
+	return matchWords(person.get('name'), search);
+}
+
+function matchesNote(person: Person, search: string) {
+	const note = person.get('note');
+	if (!note) return false;
+	return matchWords(note, search);
+}
+
+function matchesLocation(
+	person: Person,
+	location: { latitude: number; longitude: number },
+) {
+	const geolocation = person.get('geolocation');
+	if (!geolocation) return false;
+	const snap = geolocation.getSnapshot();
+	if (!snap) return false;
+	return distance(snap, location) < LOCATION_BROAD_SEARCH_RADIUS;
+}
+
+function matchesLocationLabel(person: Person, search: string) {
+	const geolocation = person.get('geolocation');
+	if (!geolocation) return false;
+	const label = geolocation.get('label');
+	if (!label) return false;
+	return matchWords(label, search);
+}
 
 export function useSuperBar() {
 	return useContext(SuperBarContext);

@@ -10,26 +10,67 @@ import type {
 export * from "@verdant-web/store";
 
 export class Client<Presence = any, Profile = any> {
+  /** Collection access for Person. Load queries, put and delete documents. */
   readonly people: CollectionQueries<Person, PersonInit, PersonFilter>;
+
+  /** Collection access for Relationship. Load queries, put and delete documents. */
   readonly relationships: CollectionQueries<
     Relationship,
     RelationshipInit,
     RelationshipFilter
   >;
+
+  /** Collection access for Tag. Load queries, put and delete documents. */
   readonly tags: CollectionQueries<Tag, TagInit, TagFilter>;
 
+  /**
+   * Turn on and off sync, or adjust the sync protocol and other settings.
+   */
   sync: BaseClient<Presence, Profile>["sync"];
+  /**
+   * Access and manipulate the undo/redo stack. You can also
+   * add custom undoable actions using addUndo, although the interface
+   * for doing this is pretty mind-bending at the moment (sorry).
+   */
   undoHistory: BaseClient<Presence, Profile>["undoHistory"];
+  /**
+   * The namespace used to construct this store.
+   */
   namespace: BaseClient<Presence, Profile>["namespace"];
+  /**
+   * @deprecated - do not use this. For batching, use .batch instead.
+   * Using methods on this property can cause data loss and corruption.
+   */
   entities: BaseClient<Presence, Profile>["entities"];
-  // queryStore: BaseClient<Presence, Profile>['queryStore'];
+  /**
+   * Tools for batching operations so they are bundled together
+   * in the undo/redo stack.
+   */
   batch: BaseClient<Presence, Profile>["batch"];
-  // files: BaseClient<Presence, Profile>['files'];
   close: BaseClient<Presence, Profile>["close"];
+  /**
+   * Export a backup of a full library
+   */
   export: BaseClient<Presence, Profile>["export"];
+  /**
+   * Import a full library from a backup. WARNING: this replaces
+   * existing data with no option for restore.
+   */
   import: BaseClient<Presence, Profile>["import"];
+  /**
+   * Subscribe to global store events
+   */
   subscribe: BaseClient<Presence, Profile>["subscribe"];
+  /**
+   * Read stats about storage usage
+   */
   stats: BaseClient<Presence, Profile>["stats"];
+  /**
+   * An interface for inspecting and manipulating active live queries.
+   * Particularly, see .keepAlive and .dropKeepAlive for placing keep-alive
+   * holds to keep query results in memory when unsubscribed.
+   */
+  queries: BaseClient<Presence, Profile>["queries"];
 
   /**
    * Deletes all local data. If the client is connected to sync,
@@ -113,11 +154,12 @@ export type PersonGeolocation = ObjectEntity<
   PersonGeolocationInit,
   PersonGeolocationDestructured,
   PersonGeolocationSnapshot
-> | null;
+>;
 export type PersonGeolocationLatitude = number;
 export type PersonGeolocationLongitude = number;
+export type PersonGeolocationLabel = string;
 export type PersonNote = string;
-export type PersonPhoto = string | null;
+export type PersonPhoto = EntityFile;
 export type PersonCreatedBy = string;
 export type PersonTags = ListEntity<
   PersonTagsInit,
@@ -125,54 +167,69 @@ export type PersonTags = ListEntity<
   PersonTagsSnapshot
 >;
 export type PersonTagsItem = string;
+export type PersonDismissedSuggestions = ListEntity<
+  PersonDismissedSuggestionsInit,
+  PersonDismissedSuggestionsDestructured,
+  PersonDismissedSuggestionsSnapshot
+>;
+export type PersonDismissedSuggestionsItem = string;
 export type PersonInit = {
   id?: string;
   createdAt?: number;
   name: string;
-  geolocation?: PersonGeolocationInit;
+  geolocation?: PersonGeolocationInit | null;
   note?: string | null;
   photo?: File | null;
   createdBy?: string | null;
   tags?: PersonTagsInit;
+  dismissedSuggestions?: PersonDismissedSuggestionsInit;
 };
 
 export type PersonGeolocationInit = {
   latitude: number;
   longitude: number;
-} | null;
+  label?: string | null;
+};
 export type PersonTagsInit = string[];
+export type PersonDismissedSuggestionsInit = string[];
 export type PersonDestructured = {
   id: string;
   createdAt: number;
   name: string;
-  geolocation: PersonGeolocation;
+  geolocation: PersonGeolocation | null;
   note: string | null;
   photo: EntityFile | null;
   createdBy: string | null;
   tags: PersonTags;
+  dismissedSuggestions: PersonDismissedSuggestions;
 };
 
 export type PersonGeolocationDestructured = {
   latitude: number;
   longitude: number;
+  label: string | null;
 };
 export type PersonTagsDestructured = string[];
+export type PersonDismissedSuggestionsDestructured = string[];
 export type PersonSnapshot = {
   id: string;
   createdAt: number;
   name: string;
-  geolocation: PersonGeolocationSnapshot;
+  geolocation: PersonGeolocationSnapshot | null;
   note: string | null;
   photo: EntityFileSnapshot | null;
   createdBy: string | null;
   tags: PersonTagsSnapshot;
+  dismissedSuggestions: PersonDismissedSuggestionsSnapshot;
 };
 
 export type PersonGeolocationSnapshot = {
   latitude: number;
   longitude: number;
-} | null;
+  label: string | null;
+};
 export type PersonTagsSnapshot = string[];
+export type PersonDismissedSuggestionsSnapshot = string[];
 
 /** Index filters for Person **/
 
@@ -259,6 +316,28 @@ export interface PersonMatchNoteStartsWithFilter {
   startsWith: string;
   order?: "asc" | "desc";
 }
+export interface PersonMatchLocationSortFilter {
+  where: "matchLocation";
+  order: "asc" | "desc";
+}
+export interface PersonMatchLocationMatchFilter {
+  where: "matchLocation";
+  equals: string;
+  order?: "asc" | "desc";
+}
+export interface PersonMatchLocationRangeFilter {
+  where: "matchLocation";
+  gte?: string;
+  gt?: string;
+  lte?: string;
+  lt?: string;
+  order?: "asc" | "desc";
+}
+export interface PersonMatchLocationStartsWithFilter {
+  where: "matchLocation";
+  startsWith: string;
+  order?: "asc" | "desc";
+}
 export interface PersonLatitudeSortFilter {
   where: "latitude";
   order: "asc" | "desc";
@@ -339,6 +418,10 @@ export type PersonFilter =
   | PersonMatchNoteMatchFilter
   | PersonMatchNoteRangeFilter
   | PersonMatchNoteStartsWithFilter
+  | PersonMatchLocationSortFilter
+  | PersonMatchLocationMatchFilter
+  | PersonMatchLocationRangeFilter
+  | PersonMatchLocationStartsWithFilter
   | PersonLatitudeSortFilter
   | PersonLatitudeMatchFilter
   | PersonLatitudeRangeFilter

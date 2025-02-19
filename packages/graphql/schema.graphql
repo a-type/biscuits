@@ -114,6 +114,11 @@ type KickMemberResult {
   plan: Plan!
 }
 
+enum LocationAddressFormat {
+  CITY
+  STREET
+}
+
 """Location autocomplete suggestion"""
 type LocationAutocompleteSuggestion {
   placeId: String!
@@ -283,6 +288,9 @@ type Query {
   Get the latitude and longitude of a location identified by location autocomplete
   """
   geographicLocation(placeId: String!): GeographicResult!
+
+  """Get a human-readable address for a geolocation"""
+  locationAddress(format: LocationAddressFormat = STREET, latitude: Float!, longitude: Float!): String
 
   """Suggest completions for a location based on a search string"""
   locationAutocomplete(search: String!): [LocationAutocompleteSuggestion!]!

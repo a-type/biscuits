@@ -45,16 +45,16 @@ export function SuperBarCreate({}: SuperBarCreateProps) {
 								size="small"
 								color="primary"
 								toggleMode="color"
-								toggled={attachLocation}
+								toggled={!attachLocation}
 								onClick={() => setAttachLocation(!attachLocation)}
 							>
-								<Icon name={attachLocation ? 'x' : 'check'} />
+								<Icon name={attachLocation ? 'x' : 'plus'} />
 								{attachLocation ? 'Current' : 'Add'} location
 							</Button>
 						)}
 						{relateTo.length > 0 && (
 							<AddRelationshipToPersonToggle
-								toggled={addRelationshipToCurrentPerson}
+								toggled={!addRelationshipToCurrentPerson}
 								onToggledChange={setAddRelationshipToCurrentPerson}
 								personId={relateTo[0]}
 							/>

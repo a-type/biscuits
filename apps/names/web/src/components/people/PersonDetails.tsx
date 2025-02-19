@@ -95,6 +95,7 @@ function NoteEditor({
 
 function Location({ person }: { person: Person }) {
 	const { geolocation } = hooks.useWatch(person);
+	hooks.useWatch(geolocation);
 	const currentLocation = useGeolocation();
 
 	if (!geolocation) return null;
@@ -109,10 +110,13 @@ function Location({ person }: { person: Person }) {
 		<Box d="col" gap="sm">
 			<Box className="text-xs text-gray-7" items="start" gap="sm">
 				<Icon name="locate" />
-				<LazyMapView
-					location={geolocation.getAll()}
-					className="w-full h-[200px] rounded-md"
-				/>
+				<Box d="col" gap="sm" className="flex-1">
+					<LazyMapView
+						location={geolocation.getAll()}
+						className="w-full h-[200px] rounded-md"
+					/>
+					{geolocation.get('label') && <span>{geolocation.get('label')}</span>}
+				</Box>
 			</Box>
 			{nearby && (
 				<Box className="text-xs text-gray-7" items="center" gap="sm">

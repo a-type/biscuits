@@ -8,7 +8,7 @@ import {
 	Icon,
 	withClassName,
 } from '@a-type/ui';
-import { Person } from '@names.biscuits/verdant';
+import { Person, PersonGeolocation } from '@names.biscuits/verdant';
 import { ReactNode, Suspense } from 'react';
 import { LocationOffer } from '../location/LocationOffer.jsx';
 import { TagDisplay } from '../tags/TagDisplay.jsx';
@@ -114,7 +114,7 @@ function SuggestionItem({
 	className?: string;
 	value: Person;
 }) {
-	const { name, note, photo, tags } = hooks.useWatch(value);
+	const { name, note, photo, tags, geolocation } = hooks.useWatch(value);
 	hooks.useWatch(photo);
 	const { inputValue, selectPerson } = useSuperBar();
 
@@ -157,6 +157,13 @@ function SuggestionItem({
 							inputValue={inputValue}
 						/>
 					)}
+					{geolocation && (
+						<GeolocationMatch
+							overlay={!!photo?.url}
+							geolocation={geolocation}
+							inputValue={inputValue}
+						/>
+					)}
 				</Card.Main>
 			</Card>
 		</div>
@@ -192,6 +199,51 @@ function NoteMatch({
 	return (
 		<InlineCardContent unstyled={!overlay}>
 			<Icon name="note" />{' '}
+			<span className="text-ellipsis overflow-hidden min-w-0 flex-1">
+				{content}
+			</span>
+		</InlineCardContent>
+	);
+}
+
+function GeolocationMatch({
+	geolocation,
+	inputValue,
+	overlay,
+}: {
+	geolocation: PersonGeolocation;
+	inputValue: string;
+	overlay?: boolean;
+}) {
+	const { label } = hooks.useWatch(geolocation);
+	const locationMatchIndex =
+		inputValue && label ?
+			label.toLowerCase().indexOf(inputValue.toLowerCase())
+		:	-1;
+
+	if (!label) return null;
+
+	let content: ReactNode = label;
+
+	if (locationMatchIndex !== -1) {
+		content = [
+			locationMatchIndex - 10 > 0 ? '...' : '',
+			label.slice(Math.max(0, locationMatchIndex - 10), locationMatchIndex),
+			<span key="match" className="font-bold">
+				{label.slice(
+					locationMatchIndex,
+					locationMatchIndex + inputValue.length,
+				)}
+			</span>,
+			label.slice(
+				locationMatchIndex + inputValue.length,
+				Math.min(label.length, locationMatchIndex + 10),
+			) + '...',
+		];
+	}
+	return (
+		<InlineCardContent unstyled={!overlay}>
+			<Icon name="location" />{' '}
 			<span className="text-ellipsis overflow-hidden min-w-0 flex-1">
 				{content}
 			</span>

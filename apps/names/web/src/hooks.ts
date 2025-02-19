@@ -1,4 +1,6 @@
-import { useMe, VerdantProfile } from '@biscuits/client';
+import { useHasServerAccess, useMe, VerdantProfile } from '@biscuits/client';
+import { graphql } from '@biscuits/client/graphql';
+import { graphqlClient } from '@biscuits/graphql';
 import { createHooks } from '@names.biscuits/verdant';
 import { useCallback, useMemo } from 'react';
 import {
@@ -25,11 +27,20 @@ export function useAddRelationship() {
 	);
 }
 
+const lookupLocation = graphql(`
+	query lookupLocation($latitude: Float!, $longitude: Float!) {
+		locationAddress(latitude: $latitude, longitude: $longitude, format: CITY)
+	}
+`);
+
 export function useAddPerson() {
 	const client = hooks.useClient();
 	const { data: meData } = useMe();
 	const selfId = meData?.me?.id;
 	const addRelationship = useAddRelationship();
+
+	const canLookup = useHasServerAccess();
+
 	return useCallback(
 		async (
 			name: string,
@@ -57,13 +68,35 @@ export function useAddPerson() {
 							return;
 						}
 						console.debug('Fetching location');
-						return getGeolocation().then((location) => {
-							console.debug('Fetched location', location);
-							person.set('geolocation', {
-								latitude: location.latitude,
-								longitude: location.longitude,
+						return getGeolocation()
+							.then((location) => {
+								console.debug('Fetched location', location);
+								client.batch({ batchName: 'geolocation' }).run(() => {
+									person.set('geolocation', {
+										latitude: location.latitude,
+										longitude: location.longitude,
+									});
+								});
+								return location;
+							})
+							.then(async (location) => {
+								if (!canLookup) return;
+
+								const lookupResult = await graphqlClient.query({
+									query: lookupLocation,
+									variables: {
+										latitude: location.latitude,
+										longitude: location.longitude,
+									},
+								});
+								const address = lookupResult.data.locationAddress;
+								if (address) {
+									client.batch({ batchName: 'geolocation' }).run(() => {
+										const location = person.get('geolocation');
+										location?.set('label', address);
+									});
+								}
 							});
-						});
 					})
 					.catch((err) => {
 						console.error('Error fetching location', err);

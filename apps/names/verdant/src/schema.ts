@@ -33,6 +33,9 @@ const people = schema.collection({
 			properties: {
 				latitude: schema.fields.number(),
 				longitude: schema.fields.number(),
+				label: schema.fields.string({
+					nullable: true,
+				}),
 			},
 			nullable: true,
 		}),
@@ -48,6 +51,9 @@ const people = schema.collection({
 		tags: schema.fields.array({
 			items: schema.fields.string(),
 		}),
+		dismissedSuggestions: schema.fields.array({
+			items: schema.fields.string(),
+		}),
 	},
 	indexes: {
 		createdAt: {
@@ -59,7 +65,8 @@ const people = schema.collection({
 				person.name
 					.toLowerCase()
 					.split(/\s+/)
-					.concat(person.note?.toLowerCase().split(/\s+/) ?? []),
+					.concat(person.note?.toLowerCase().split(/\s+/) ?? [])
+					.concat(person.geolocation?.label?.toLowerCase().split(/\s+/) ?? []),
 		},
 		matchName: {
 			type: 'string[]',
@@ -68,6 +75,11 @@ const people = schema.collection({
 		matchNote: {
 			type: 'string[]',
 			compute: (person) => person.note?.toLowerCase().split(/\s+/) ?? [],
+		},
+		matchLocation: {
+			type: 'string[]',
+			compute: (person) =>
+				person.geolocation?.label?.toLowerCase().split(/\s+/) ?? [],
 		},
 		latitude: {
 			type: 'number',
@@ -121,7 +133,7 @@ const tags = schema.collection({
 });
 
 export default schema({
-	version: 2,
+	version: 3,
 	collections: {
 		people,
 		relationships,
