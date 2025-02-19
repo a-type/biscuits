@@ -1,7 +1,9 @@
 import { hooks } from '@/hooks.js';
 import {
+	Box,
 	Button,
 	clsx,
+	Collapsible,
 	Dialog,
 	FieldLabel,
 	Icon,
@@ -63,7 +65,23 @@ export function PersonTagEditor({ person, className }: PersonTagEditorProps) {
 							onToggle={toggleTag}
 							className="mb-md"
 						/>
-						<TagCreateForm onCreate={createTag} defaultColor="leek" />
+						<Collapsible className="w-full">
+							<Collapsible.Trigger asChild>
+								<Button size="small">
+									<Icon name="plus" className="w-10px h-10px" />
+									<span className="text-xs">New tag</span>
+								</Button>
+							</Collapsible.Trigger>
+							<Collapsible.Content className="w-full ">
+								<Box className="w-full mt-sm" surface="primary" p>
+									<TagCreateForm
+										onCreate={createTag}
+										defaultColor="leek"
+										className="w-full"
+									/>
+								</Box>
+							</Collapsible.Content>
+						</Collapsible>
 					</Suspense>
 					<Dialog.Actions className="border-0 border-t border-solid border-gray-5">
 						<Dialog.Close asChild>
