@@ -1,24 +1,14 @@
 import { EmailCompleteSignupForm } from '@a-type/auth-ui';
 import { H1, P, PageContent, PageRoot } from '@a-type/ui';
 import { CONFIG } from '@biscuits/client';
-import { useNavigate, useSearchParams } from '@verdant-web/react-router';
+import { useSearchParams } from '@verdant-web/react-router';
 
 export interface VerifyPageProps {}
 
 export function VerifyPage({}: VerifyPageProps) {
 	const [searchParams] = useSearchParams();
-	const returnTo = searchParams.get('returnTo');
 	const code = searchParams.get('code');
 	const email = searchParams.get('email');
-
-	const navigate = useNavigate();
-	const onSuccess = () => {
-		if (returnTo) {
-			navigate(returnTo);
-		} else {
-			navigate('/');
-		}
-	};
 
 	if (!code || !email) {
 		return (

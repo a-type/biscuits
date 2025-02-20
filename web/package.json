@@ -7,8 +7,7 @@
 		"dev": "vite --host --mode=development",
 		"build": "vite build --mode=production",
 		"typecheck": "tsc --noEmit",
-		"up-ui": "cd .. && pnpm up-ui",
-		"prepare-video": "ffmpeg -c:v libx265 -crf 25 -filter:v scale=-1:720 -i"
+		"lint": "eslint src"
 	},
 	"dependencies": {
 		"@a-type/auth-ui": "catalog:",
@@ -46,8 +45,6 @@
 		"@originjs/vite-plugin-commonjs": "^1.0.3",
 		"@types/cookie": "^0.5.4",
 		"@types/three": "0.173.0",
-		"eslint": "9.1.1",
-		"eslint-config-next": "14.0.3",
 		"vite-plugin-circular-dependency": "^0.2.1"
 	}
 }

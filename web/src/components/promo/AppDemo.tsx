@@ -11,6 +11,10 @@ import classNames from 'classnames';
 import { useEffect } from 'react';
 import PhoneDemo from './PhoneDemo.jsx';
 
+const AImg = animated('img');
+const AH3 = animated('h3');
+const AP = animated('p');
+
 export interface AppDemoProps {
 	className?: string;
 }
@@ -41,7 +45,7 @@ export function AppDemo({ className }: AppDemoProps) {
 
 	useEffect(() => {
 		transRef.start();
-	}, [appId]);
+	}, [appId, transRef]);
 
 	return (
 		<Box
@@ -70,24 +74,24 @@ export function AppDemo({ className }: AppDemoProps) {
 						const app = visibleApps[i];
 						return (
 							<>
-								<animated.img
+								<AImg
 									src={`${app.url}/${visibleApps[i].iconPath}`}
 									alt={app.name}
 									className="h-auto rounded-lg w-[120px] h-[120px] object-contain object-center"
 									style={{ gridArea: 'icon', ...style }}
 								/>
-								<animated.h3
+								<AH3
 									className="text-2xl font-bold m-0"
 									style={{ gridArea: 'title', ...style }}
 								>
 									{app.name}
-								</animated.h3>
-								<animated.p
+								</AH3>
+								<AP
 									className="text-lg m-0 h-80px"
 									style={{ gridArea: 'description', ...style }}
 								>
 									{app.description}
-								</animated.p>
+								</AP>
 								<Button
 									color="primary"
 									className="justify-self-start sm:justify-self-end self-center"

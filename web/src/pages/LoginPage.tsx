@@ -17,13 +17,11 @@ import { AppId, appsById } from '@biscuits/apps';
 import { CONFIG } from '@biscuits/client';
 import { Link, useSearchParams } from '@verdant-web/react-router';
 import classNames from 'classnames';
-import { lazy, ReactNode, useEffect, useState } from 'react';
-
-const Paws = lazy(() => import('@/components/paws/Paws.jsx'));
+import { ReactNode, useEffect, useState } from 'react';
 
 export default function LoginPage() {
 	const [searchParams, setParams] = useSearchParams();
-	let returnTo = searchParams.get('returnTo') ?? undefined;
+	const returnTo = searchParams.get('returnTo') ?? undefined;
 	const appReferrer = searchParams.get('appReferrer') ?? undefined;
 	let appState: any = undefined;
 	if (!returnTo && appReferrer) {

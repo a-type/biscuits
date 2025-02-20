@@ -4,8 +4,6 @@ import {
 	ApolloProvider,
 	graphqlClient as defaultClient,
 } from '@biscuits/graphql';
-import { BiscuitsVerdantProfile } from '@biscuits/libraries';
-import { ClientDescriptor } from '@verdant-web/store';
 import { ReactNode, createContext, useContext } from 'react';
 import { VerdantContext } from '../verdant.js';
 import { AppPreviewNotice } from './AppPreviewNotice.js';
@@ -24,7 +22,7 @@ export function Provider({
 	appId?: AppId;
 	graphqlClient?: ApolloClient<any>;
 	children: ReactNode;
-	storeDescriptor?: ClientDescriptor<any, BiscuitsVerdantProfile> | null;
+	storeDescriptor?: any | null;
 	disablePreviewWarning?: boolean;
 }) {
 	return (

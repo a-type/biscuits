@@ -25,7 +25,7 @@ export function GnocchiPage() {
 	const [_, setHasSeen] = useLocalStorage('hasSeenWelcome', true);
 	useEffect(() => {
 		setHasSeen(true);
-	}, []);
+	}, [setHasSeen]);
 
 	const upgradeSectionRef = useRef<HTMLDivElement>(null);
 	const [staticSectionAccent, setStaticSectionAccent] = useState(false);

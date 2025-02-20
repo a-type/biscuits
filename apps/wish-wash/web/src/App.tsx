@@ -14,7 +14,7 @@ export function App({}: AppProps) {
 		<ErrorBoundary fallback={<ErrorFallback />}>
 			<UIProvider toastContainerClassName="mb-10 sm:mb-0" disableViewportOffset>
 				<Suspense>
-					<Provider appId="wish-wash" storeDescriptor={clientDescriptor as any}>
+					<Provider appId="wish-wash" storeDescriptor={clientDescriptor}>
 						<VerdantProvider>
 							<Pages />
 							<SubscriptionDialog />
