@@ -19,7 +19,7 @@ export function useDebouncedCallback<T extends (...args: any[]) => any>(
 	delay: number,
 ) {
 	const [debouncedCallback] = useState(() => {
-		let timeout: NodeJS.Timeout;
+		let timeout: number;
 		return (...args: Parameters<T>) => {
 			clearTimeout(timeout);
 			timeout = setTimeout(() => {
