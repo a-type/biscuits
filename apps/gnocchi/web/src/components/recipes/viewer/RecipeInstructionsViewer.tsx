@@ -1,5 +1,6 @@
-import { RichEditor } from '@a-type/ui';
+import { tipTapClassName, tipTapReadonlyClassName } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
+import { EditorContent } from '@tiptap/react';
 import classNames from 'classnames';
 import { useSyncedInstructionsEditor } from '../hooks.js';
 
@@ -14,8 +15,13 @@ export function RecipeInstructionsViewer({
 }: RecipeInstructionsViewerProps) {
 	const editor = useSyncedInstructionsEditor({ recipe, readonly: true });
 	return (
-		<RichEditor
-			className={classNames('w-full', className)}
+		<EditorContent
+			className={classNames(
+				'w-full',
+				tipTapClassName,
+				tipTapReadonlyClassName,
+				className,
+			)}
 			editor={editor}
 			readOnly
 		/>

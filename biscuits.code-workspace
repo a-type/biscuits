@@ -45,6 +45,10 @@
 			"path": "apps/names",
 		},
 		{
+			"name": "✍️ Post",
+			"path": "apps/post",
+		},
+		{
 			"name": "📃 Scripts",
 			"path": "scripts",
 		},

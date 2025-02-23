@@ -184,6 +184,18 @@ export const apps = [
 		prerelease: false,
 		theme: 'lemon',
 	},
+	{
+		id: 'post',
+		description: 'Write and share your thoughts',
+		devOriginOverride: 'http://localhost:6228',
+		iconPath: 'icon.png',
+		name: 'Post',
+		paidDescription: 'TODO',
+		paidFeatures: [],
+		url: 'https://post.biscuits.club',
+		prerelease: true,
+		theme: 'blueberry',
+	},
 ] as const;
 
 export type AppId = (typeof apps)[number]['id'];

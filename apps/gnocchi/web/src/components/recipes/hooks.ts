@@ -122,7 +122,7 @@ function useSyncedEditor(
 				});
 			}
 		},
-		[recipe],
+		[recipe, fieldName],
 	);
 
 	const editor = useEditor(

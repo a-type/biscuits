@@ -44,6 +44,8 @@ export function SubscriptionCheckout({
 	);
 }
 
+export default SubscriptionCheckout;
+
 function PaymentForm() {
 	const stripe = useStripe();
 	const elements = useElements();

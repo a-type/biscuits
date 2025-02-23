@@ -69,6 +69,7 @@
 		"@verdant-web/react-router": "catalog:",
 		"@verdant-web/store": "catalog:",
 		"react": "catalog:",
+		"react-dom": "catalog:",
 		"valtio": "catalog:",
 		"gql.tada": "catalog:",
 		"typescript": "catalog:"

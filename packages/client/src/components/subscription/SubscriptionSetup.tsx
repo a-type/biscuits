@@ -1,14 +1,16 @@
 import { P, Spinner } from '@a-type/ui';
 import { useQuery } from '@biscuits/graphql';
 import { useSearchParams } from '@verdant-web/react-router';
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { graphql } from '../../graphql.js';
 import {
 	ManageSubscription,
 	manageSubscriptionInfo,
 } from './ManageSubscription.js';
-import { checkoutData, SubscriptionCheckout } from './SubscriptionCheckout.js';
+import { checkoutData } from './SubscriptionCheckout.js';
 import { PriceKey, SubscriptionSelect } from './SubscriptionSelect.js';
+
+const SubscriptionCheckout = lazy(() => import('./SubscriptionCheckout.js'));
 
 export interface SubscriptionSetupProps {
 	priceKeys?: PriceKey[];
@@ -92,7 +94,11 @@ export function SubscriptionSetup({ priceKeys }: SubscriptionSetupProps) {
 
 	if (data?.plan?.checkoutData) {
 		// checkout in progress - show payment collection
-		return <SubscriptionCheckout checkoutData={data.plan.checkoutData} />;
+		return (
+			<Suspense fallback={<Spinner />}>
+				<SubscriptionCheckout checkoutData={data.plan.checkoutData} />
+			</Suspense>
+		);
 	}
 
 	if (data?.plan?.subscriptionStatus === 'incomplete') {

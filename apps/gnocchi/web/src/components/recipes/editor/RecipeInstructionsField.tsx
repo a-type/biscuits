@@ -1,7 +1,8 @@
-import { Button, P, RichEditor } from '@a-type/ui';
+import { Button, clsx, P, tipTapClassName } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { FontBoldIcon, FontItalicIcon } from '@radix-ui/react-icons';
 import { Editor } from '@tiptap/core';
+import { EditorContent } from '@tiptap/react';
 import { useSyncedInstructionsEditor } from '../hooks.js';
 
 export interface RecipeInstructionsFieldProps {
@@ -20,10 +21,7 @@ export function RecipeInstructionsField({
 	return (
 		<div className="flex flex-col gap-2">
 			{editor && <Toolbar editor={editor} />}
-			<RichEditor
-				editor={editor}
-				className="[&_.ProseMirror]:(bg-white rounded-[20px] px-4 py-2 shadow-sm-inset border-gray-5 border-solid border-1)"
-			/>
+			<EditorContent editor={editor} className={clsx(tipTapClassName)} />
 			<P className="text-xs">
 				Press <kbd>Enter</kbd> to create a new step. Each step line will have a
 				checkbox you can use to track completion. I recommend keeping steps
@@ -46,9 +44,9 @@ function Toolbar({ editor }: { editor: Editor }) {
 			<Button
 				color="ghost"
 				onClick={() => {
-					editor.chain().focus().toggleBold().run();
+					editor.chain().focus().toggleMark('bold').run();
 				}}
-				disabled={!editor.can().chain().focus().toggleBold().run()}
+				disabled={!editor.can().chain().focus().toggleMark('bold').run()}
 				toggled={editor.isActive('bold')}
 				className="[font-size:12px]"
 			>
@@ -57,9 +55,9 @@ function Toolbar({ editor }: { editor: Editor }) {
 			<Button
 				color="ghost"
 				onClick={() => {
-					editor.chain().focus().toggleItalic().run();
+					editor.chain().focus().toggleMark('italic').run();
 				}}
-				disabled={!editor.can().chain().focus().toggleItalic().run()}
+				disabled={!editor.can().chain().focus().toggleMark('italic').run()}
 				toggled={editor.isActive('italic')}
 				className="[font-size:12px]"
 			>
