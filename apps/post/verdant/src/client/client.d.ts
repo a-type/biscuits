@@ -13,6 +13,9 @@ export class Client<Presence = any, Profile = any> {
   /** Collection access for Post. Load queries, put and delete documents. */
   readonly posts: CollectionQueries<Post, PostInit, PostFilter>;
 
+  /** Collection access for Notebook. Load queries, put and delete documents. */
+  readonly notebooks: CollectionQueries<Notebook, NotebookInit, NotebookFilter>;
+
   /**
    * Turn on and off sync, or adjust the sync protocol and other settings.
    */
@@ -163,12 +166,15 @@ export type PostBodyMarks = ListEntity<
   PostBodyMarksSnapshot
 >;
 export type PostCoverImage = EntityFile;
+/** The ID of the notebook this post belongs to, if any. If null, the post is not in a notebook. */
+export type PostNotebookId = string;
 export type PostInit = {
   id?: string;
   createdAt?: number;
   title: string;
   body?: PostBodyInit;
   coverImage?: File | null;
+  notebookId?: string | null;
 };
 
 export type PostBodyAttrsInit = { [key: string]: PostBodyAttrsValueInit };
@@ -189,13 +195,14 @@ export type PostDestructured = {
   title: string;
   body: PostBody;
   coverImage: EntityFile | null;
+  notebookId: string | null;
 };
 
 export type PostBodyAttrsDestructured = {
   [key: string]: PostBodyAttrsValue | undefined;
 };
-export type PostBodyContentDestructured = PostBodyDestructured[];
-export type PostBodyMarksDestructured = PostBodyDestructured[];
+export type PostBodyContentDestructured = PostBody[];
+export type PostBodyMarksDestructured = PostBody[];
 export type PostBodyDestructured = {
   type: string;
   from: number | null;
@@ -211,6 +218,7 @@ export type PostSnapshot = {
   title: string;
   body: PostBodySnapshot;
   coverImage: EntityFileSnapshot | null;
+  notebookId: string | null;
 };
 
 export type PostBodyAttrsSnapshot = {
@@ -247,7 +255,108 @@ export interface PostCreatedAtRangeFilter {
   lt?: number;
   order?: "asc" | "desc";
 }
+export interface PostNotebookIdSortFilter {
+  where: "notebookId";
+  order: "asc" | "desc";
+}
+export interface PostNotebookIdMatchFilter {
+  where: "notebookId";
+  equals: string;
+  order?: "asc" | "desc";
+}
+export interface PostNotebookIdRangeFilter {
+  where: "notebookId";
+  gte?: string;
+  gt?: string;
+  lte?: string;
+  lt?: string;
+  order?: "asc" | "desc";
+}
+export interface PostNotebookIdStartsWithFilter {
+  where: "notebookId";
+  startsWith: string;
+  order?: "asc" | "desc";
+}
+export interface PostNotebookIdCreatedAtCompoundFilter {
+  where: "notebookId_createdAt";
+  match: {
+    notebookId: string | null;
+    createdAt?: number;
+  };
+  order?: "asc" | "desc";
+}
 export type PostFilter =
   | PostCreatedAtSortFilter
   | PostCreatedAtMatchFilter
-  | PostCreatedAtRangeFilter;
+  | PostCreatedAtRangeFilter
+  | PostNotebookIdSortFilter
+  | PostNotebookIdMatchFilter
+  | PostNotebookIdRangeFilter
+  | PostNotebookIdStartsWithFilter
+  | PostNotebookIdCreatedAtCompoundFilter;
+
+/** Generated types for Notebook */
+
+export type Notebook = ObjectEntity<
+  NotebookInit,
+  NotebookDestructured,
+  NotebookSnapshot
+>;
+export type NotebookId = string;
+export type NotebookCreatedAt = number;
+export type NotebookName = string;
+export type NotebookCoverImage = EntityFile;
+export type NotebookIcon = EntityFile;
+export type NotebookInit = {
+  id?: string;
+  createdAt?: number;
+  name: string;
+  coverImage?: File | null;
+  icon?: File | null;
+};
+
+export type NotebookDestructured = {
+  id: string;
+  createdAt: number;
+  name: string;
+  coverImage: EntityFile | null;
+  icon: EntityFile | null;
+};
+
+export type NotebookSnapshot = {
+  id: string;
+  createdAt: number;
+  name: string;
+  coverImage: EntityFileSnapshot | null;
+  icon: EntityFileSnapshot | null;
+};
+
+/** Index filters for Notebook **/
+
+export interface NotebookNameSortFilter {
+  where: "name";
+  order: "asc" | "desc";
+}
+export interface NotebookNameMatchFilter {
+  where: "name";
+  equals: string;
+  order?: "asc" | "desc";
+}
+export interface NotebookNameRangeFilter {
+  where: "name";
+  gte?: string;
+  gt?: string;
+  lte?: string;
+  lt?: string;
+  order?: "asc" | "desc";
+}
+export interface NotebookNameStartsWithFilter {
+  where: "name";
+  startsWith: string;
+  order?: "asc" | "desc";
+}
+export type NotebookFilter =
+  | NotebookNameSortFilter
+  | NotebookNameMatchFilter
+  | NotebookNameRangeFilter
+  | NotebookNameStartsWithFilter;

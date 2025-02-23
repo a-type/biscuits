@@ -1,6 +1,6 @@
-import { CreatePostButton } from '@/components/posts/CreatePostButton.jsx';
+import { NotebooksList } from '@/components/notebooks/NotebookList.jsx';
 import { PostsList } from '@/components/posts/PostsList.jsx';
-import { Icon, PageContent, PageNowPlaying, PageRoot } from '@a-type/ui';
+import { H2, PageContent, PageRoot } from '@a-type/ui';
 
 export interface HomePageProps {}
 
@@ -8,18 +8,10 @@ export function HomePage({}: HomePageProps) {
 	return (
 		<PageRoot>
 			<PageContent>
-				<PostsList />
-				<PageNowPlaying
-					unstyled
-					className="flex flex-row items-center justify-center"
-				>
-					<CreatePostButton
-						color="primary"
-						className="w-48px h-48px p-0 items-center justify-center"
-					>
-						<Icon name="plus" className="w-20px h-20px" />
-					</CreatePostButton>
-				</PageNowPlaying>
+				<H2>Notebooks</H2>
+				<NotebooksList />
+				<H2>Unsorted posts</H2>
+				<PostsList notebookId={null} />
 			</PageContent>
 		</PageRoot>
 	);

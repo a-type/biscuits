@@ -16,6 +16,10 @@ const routes = makeRoutes([
 		component: lazy(() => import('./SettingsPage.jsx')),
 	},
 	{
+		path: '/notebooks/:notebookId',
+		component: lazy(() => import('./NotebookPage.jsx')),
+	},
+	{
 		path: '/posts/:id',
 		component: lazy(() => import('./PostPage.jsx')),
 	},

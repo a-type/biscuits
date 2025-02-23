@@ -1,5 +1,6 @@
 import { PostCoverImageEditor } from '@/components/posts/PostCoverImageEditor.jsx';
 import { PostEditor } from '@/components/posts/PostEditor.jsx';
+import { PostNotebookEditor } from '@/components/posts/PostNotebookEditor.jsx';
 import { PostTitleEditor } from '@/components/posts/PostTitleEditor.jsx';
 import { hooks } from '@/hooks.js';
 import { Box, Button, Icon } from '@a-type/ui';
@@ -17,11 +18,12 @@ export function PostPage({}: PostPageProps) {
 
 	return (
 		<Box p className="bg-white flex-1" d="col">
-			<HomeButton />
+			<HomeButton notebookId={post.get('notebookId')} />
 			<Box d="col" gap container className="max-w-650px w-full mx-auto flex-1">
 				<PostCoverImageEditor post={post} className="w-full h-20vh" />
-				<Box gap items="center">
-					<PostTitleEditor post={post} className="text-xl flex-1 ml-[14px]" />
+				<PostTitleEditor post={post} className="text-xl ml-[14px]" />
+				<Box className="ml-[20px]" d="col" items="start">
+					<PostNotebookEditor post={post} />
 				</Box>
 				<PostEditor post={post} className="flex-1" />
 			</Box>
@@ -29,7 +31,7 @@ export function PostPage({}: PostPageProps) {
 	);
 }
 
-function HomeButton() {
+function HomeButton({ notebookId }: { notebookId: string | null }) {
 	return (
 		<Button
 			color="default"
@@ -37,7 +39,7 @@ function HomeButton() {
 			asChild
 			className="fixed top-4 left-4 z-menu"
 		>
-			<Link to="/">
+			<Link to={notebookId ? `/notebooks/${notebookId}` : '/'}>
 				<Icon name="arrowLeft" />
 			</Link>
 		</Button>

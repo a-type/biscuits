@@ -22,6 +22,8 @@ import type {
   EntityFile,
   Post,
   PostFilter,
+  Notebook,
+  NotebookFilter,
 } from "./index.js";
 
 type HookConfig<F> = {
@@ -186,6 +188,53 @@ export interface GeneratedHooks<Presence, Profile> {
     config?: Config,
   ) => [
     Post[],
+    { loadMore: () => void; hasMore: boolean; status: QueryStatus },
+  ];
+
+  useNotebook(id: string, config?: { skip?: boolean }): Notebook | null;
+  useNotebookUnsuspended(
+    id: string,
+    config?: { skip?: boolean },
+  ): { data: Notebook | null; status: QueryStatus };
+  useOneNotebook: <Config extends HookConfig<NotebookFilter>>(
+    config?: Config,
+  ) => Notebook | null;
+  useOneNotebooksUnsuspended: <Config extends HookConfig<NotebookFilter>>(
+    config?: Config,
+  ) => { data: Notebook | null; status: QueryStatus };
+  useAllNotebooks: <Config extends HookConfig<NotebookFilter>>(
+    config?: Config,
+  ) => Notebook[];
+  useAllNotebooksUnsuspended: <Config extends HookConfig<NotebookFilter>>(
+    config?: Config,
+  ) => { data: Notebook[]; status: QueryStatus };
+  useAllNotebooksPaginated: <
+    Config extends HookConfig<NotebookFilter> & {
+      pageSize?: number;
+      suspend?: false;
+    },
+  >(
+    config?: Config,
+  ) => [
+    Notebook[],
+    {
+      next: () => void;
+      previous: () => void;
+      setPage: (page: number) => void;
+      hasNext: boolean;
+      hasPrevious: boolean;
+      status: QueryStatus;
+    },
+  ];
+  useAllNotebooksInfinite: <
+    Config extends HookConfig<NotebookFilter> & {
+      pageSize?: number;
+      suspend?: false;
+    },
+  >(
+    config?: Config,
+  ) => [
+    Notebook[],
     { loadMore: () => void; hasMore: boolean; status: QueryStatus },
   ];
 }

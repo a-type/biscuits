@@ -36,17 +36,54 @@ const posts = schema.collection({
 		coverImage: schema.fields.file({
 			nullable: true,
 		}),
+		notebookId: schema.fields.string({
+			nullable: true,
+			documentation:
+				'The ID of the notebook this post belongs to, if any. If null, the post is not in a notebook.',
+		}),
 	},
 	indexes: {
 		createdAt: {
 			field: 'createdAt',
 		},
+		notebookId: {
+			field: 'notebookId',
+		},
+	},
+	compounds: {
+		notebookId_createdAt: {
+			of: ['notebookId', 'createdAt'],
+		},
+	},
+});
+
+const notebooks = schema.collection({
+	name: 'notebook',
+	primaryKey: 'id',
+	fields: {
+		id: schema.fields.id(),
+		createdAt: schema.fields.number({
+			default: () => Date.now(),
+		}),
+		name: schema.fields.string(),
+		coverImage: schema.fields.file({
+			nullable: true,
+		}),
+		icon: schema.fields.file({
+			nullable: true,
+		}),
+	},
+	indexes: {
+		name: {
+			field: 'name',
+		},
 	},
 });
 
 export default schema({
-	version: 1,
+	version: 2,
 	collections: {
 		posts,
+		notebooks,
 	},
 });

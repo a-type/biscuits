@@ -2,31 +2,27 @@ import { hooks } from '@/hooks.js';
 import { Button, ButtonProps } from '@a-type/ui';
 import { useNavigate } from '@verdant-web/react-router';
 
-export interface CreatePostButtonProps extends ButtonProps {
-	notebookId?: string | null;
-}
-export function CreatePostButton({
-	onClick,
+export interface CreateNotebookButtonProps extends ButtonProps {}
+export function CreateNotebookButton({
 	children,
-	notebookId,
+	onClick,
 	...rest
-}: CreatePostButtonProps) {
+}: CreateNotebookButtonProps) {
 	const client = hooks.useClient();
 	const navigate = useNavigate();
 
 	return (
 		<Button
 			onClick={async (ev) => {
-				const post = await client.posts.put({
-					title: `New Post`,
-					notebookId,
+				const notebook = await client.notebooks.put({
+					name: 'New Notebook',
 				});
 				onClick?.(ev);
-				navigate(`/posts/${post.get('id')}`);
+				navigate(`/notebooks/${notebook.get('id')}`);
 			}}
 			{...rest}
 		>
-			{children || 'New Post'}
+			{children || 'New Notebook'}
 		</Button>
 	);
 }
