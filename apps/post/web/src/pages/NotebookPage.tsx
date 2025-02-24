@@ -1,7 +1,18 @@
+import { NavBar } from '@/components/nav/NavBar.jsx';
 import { NotebookDetailsEditor } from '@/components/notebooks/NotebookDetailsEditor.jsx';
+import { CreatePostButton } from '@/components/posts/CreatePostButton.jsx';
 import { PostsList } from '@/components/posts/PostsList.jsx';
 import { hooks } from '@/hooks.js';
-import { Box, Button, H1, Icon, PageContent, PageRoot } from '@a-type/ui';
+import {
+	Box,
+	Button,
+	H1,
+	Icon,
+	PageContent,
+	PageNav,
+	PageNowPlaying,
+	PageRoot,
+} from '@a-type/ui';
 import { Link, useParams } from '@verdant-web/react-router';
 
 const NotebookPage = () => {
@@ -17,19 +28,31 @@ const NotebookPage = () => {
 						<Link to="/">Back to Home</Link>
 					</Button>
 				</PageContent>
+				<PageNav>
+					<NavBar />
+				</PageNav>
 			</PageRoot>
 		);
 	}
 
 	return (
 		<PageRoot>
-			<HomeButton />
 			<PageContent>
 				<Box d="col" gap container>
+					<HomeButton />
 					<NotebookDetailsEditor notebook={notebook} />
 					<PostsList notebookId={notebookId} />
 				</Box>
+				<PageNowPlaying unstyled className="items-center justify-center flex">
+					<CreatePostButton notebookId={notebookId} color="primary">
+						<Icon name="pencil" />
+						New Post
+					</CreatePostButton>
+				</PageNowPlaying>
 			</PageContent>
+			<PageNav>
+				<NavBar />
+			</PageNav>
 		</PageRoot>
 	);
 };
@@ -40,7 +63,7 @@ function HomeButton() {
 			color="default"
 			size="icon"
 			asChild
-			className="fixed top-4 left-4 z-menu"
+			className="absolute top-2 left-2 z-menu"
 		>
 			<Link to="/">
 				<Icon name="arrowLeft" />

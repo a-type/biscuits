@@ -5,6 +5,7 @@ import {
 	clsx,
 	Icon,
 	LiveUpdateTextField,
+	Popover,
 	tipTapClassName,
 	withClassName,
 } from '@a-type/ui';
@@ -116,10 +117,11 @@ export function PostEditor({ post, className }: PostEditorProps) {
 						getReferenceClientRect: getBlockMenuRect,
 					}}
 					shouldShow={({ state }) => {
-						const { selection } = state;
-						const { from } = selection;
-						const pos = state.doc.resolve(from);
-						return pos.start() === from;
+						return true;
+						// const { selection } = state;
+						// const { from } = selection;
+						// const pos = state.doc.resolve(from);
+						// return pos.start() === from;
 					}}
 				>
 					<Box
@@ -130,10 +132,22 @@ export function PostEditor({ post, className }: PostEditorProps) {
 						items="end"
 						className="opacity-70 hover:opacity-100 focus-within:opacity-100"
 					>
-						<H1Toggle editor={editor} />
-						<H2Toggle editor={editor} />
-						<H3Toggle editor={editor} />
-						<H4Toggle editor={editor} />
+						<Popover>
+							<Popover.Trigger asChild>
+								<Button size="icon-small" color="ghost">
+									<Icon name="dots" />
+								</Button>
+							</Popover.Trigger>
+							<Popover.Content align="start">
+								<Popover.Arrow />
+								<Box gap>
+									<H1Toggle editor={editor} />
+									<H2Toggle editor={editor} />
+									<H3Toggle editor={editor} />
+									<H4Toggle editor={editor} />
+								</Box>
+							</Popover.Content>
+						</Popover>
 					</Box>
 				</FloatingMenu>
 			)}
@@ -144,6 +158,7 @@ export function PostEditor({ post, className }: PostEditorProps) {
 					'flex-1 flex flex-col [&_.ProseMirror]:(p-md flex-1 bg-transparent border-none shadow-none)',
 					'[&_.tiptap_p.is-editor-empty:first-child::before]:(color-gray-5 content-[attr(data-placeholder)] h-0 float-left pointer-events-none)',
 					'[&_.ProseMirror_a]:(underline color-primary-dark)',
+					'[&_.ProseMirror_p]:(mb-lg)',
 				)}
 			/>
 		</Box>
@@ -173,7 +188,7 @@ function LinkEditor({ editor }: { editor: Editor }) {
 	return (
 		<Box gap items="center">
 			<Button size="icon-small" color="ghost" onClick={removeLink}>
-				<Icon name="connectionBreak" />
+				<Icon name="x" />
 			</Button>
 			<LiveUpdateTextField value={link.attrs.href} onChange={updateLink} />
 		</Box>
@@ -336,7 +351,7 @@ function LinkToggle({ editor }: { editor: Editor }) {
 			disabled={!editor.can().chain().focus().toggleMark('link').run()}
 			toggled={toggled}
 		>
-			<Icon name="connection" />
+			<Icon name="link" />
 		</EditorToggle>
 	);
 }

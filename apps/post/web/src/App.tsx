@@ -12,10 +12,7 @@ export function App({}: AppProps) {
 		<ErrorBoundary fallback={<ErrorFallback />}>
 			<UIProvider>
 				<Suspense>
-					<Provider
-						appId="post"
-						storeDescriptor={clientDescriptor as any}
-					>
+					<Provider appId="post" storeDescriptor={clientDescriptor as any}>
 						<VerdantProvider>
 							<Pages />
 						</VerdantProvider>

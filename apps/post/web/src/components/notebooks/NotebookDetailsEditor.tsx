@@ -14,8 +14,8 @@ export function NotebookDetailsEditor({
 	hooks.useWatch(icon);
 
 	return (
-		<Box container surface p className="min-h-20vh">
-			<div className="absolute inset-0">
+		<Box container surface p className="min-h-25vh">
+			<div className="absolute inset-0 bg-primary-wash rounded-lg overflow-hidden">
 				{coverImage?.url && (
 					<img
 						src={coverImage.url}
@@ -37,7 +37,7 @@ export function NotebookDetailsEditor({
 					</ImageUploader.EmptyControls>
 				</ImageUploader.Root>
 			</Box>
-			<Box className="relative z-10 mt-auto" d="col" gap>
+			<Box className="relative z-10 mt-auto w-full" d="col" gap items="start">
 				<ImageUploader.Root
 					value={icon?.url ?? null}
 					onChange={(file) => notebook.set('icon', file)}
@@ -49,12 +49,12 @@ export function NotebookDetailsEditor({
 							<Icon name="upload" />
 						</ImageUploader.FileButton>
 					</ImageUploader.EmptyControls>
-					<ImageUploader.RemoveButton />
 				</ImageUploader.Root>
 				<EditableText
 					value={name}
 					onValueChange={(name) => notebook.set('name', name)}
-					className="text-xl bg-wash"
+					className="text-xl bg-wash w-auto [input&]:w-full"
+					autoSelect
 				/>
 			</Box>
 		</Box>

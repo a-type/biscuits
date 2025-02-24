@@ -24,7 +24,7 @@ export function NotebooksList({ className }: NotebooksListProps) {
 				className="w-full"
 				columns={(w) => Math.max(1, Math.floor(w / 150))}
 			>
-				<CreateNotebookButton className="w-full aspect-1 items-center justify-center">
+				<CreateNotebookButton className="aspect-1 items-center justify-center">
 					<Icon name="plus" className="w-30px h-30px" />
 				</CreateNotebookButton>
 				{items.map((item, i) => (

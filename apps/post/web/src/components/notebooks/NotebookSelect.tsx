@@ -31,7 +31,7 @@ export function NotebookSelect({
 			}}
 			{...rest}
 		>
-			<Select.Trigger />
+			<Select.Trigger size="small" />
 			<Select.Content>
 				<Select.Item value="null">Unsorted</Select.Item>
 				{notebooks.map((notebook) => (

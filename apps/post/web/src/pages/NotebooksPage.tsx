@@ -1,20 +1,18 @@
 import { NavBar } from '@/components/nav/NavBar.jsx';
-import { PostsList } from '@/components/posts/PostsList.jsx';
+import { NotebooksList } from '@/components/notebooks/NotebookList.jsx';
 import { PageContent, PageNav, PageRoot } from '@a-type/ui';
 
-export interface HomePageProps {}
-
-export function HomePage({}: HomePageProps) {
+const NotebooksPage = () => {
 	return (
 		<PageRoot>
 			<PageContent>
-				<PostsList />
+				<NotebooksList />
 			</PageContent>
 			<PageNav>
 				<NavBar />
 			</PageNav>
 		</PageRoot>
 	);
-}
+};
 
-export default HomePage;
+export default NotebooksPage;
