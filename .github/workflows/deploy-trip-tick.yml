@@ -7,6 +7,7 @@ on:
       - 'packages/client/**'
       - 'packages/apps/**'
       - '.github/workflows/deploy-trip-tick.yml'
+      - 'pnpm-workspace.yaml'
 
 jobs:
   build-and-deploy-trip-tick:

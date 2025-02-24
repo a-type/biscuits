@@ -91,6 +91,7 @@ on:
       - 'packages/client/**'
       - 'packages/apps/**'
       - '.github/workflows/deploy-${appId}.yml'
+      - 'pnpm-workspace.yaml'
 
 jobs:
   build-and-deploy-${appId}:
