@@ -1,4 +1,5 @@
 import {
+	ActionBar,
 	Box,
 	Button,
 	ButtonProps,
@@ -24,6 +25,8 @@ import StarterKit from '@tiptap/starter-kit';
 import { NodeIdExtension } from '@verdant-web/tiptap';
 import { useSyncedEditor } from '@verdant-web/tiptap/react';
 import { useCallback, useEffect } from 'react';
+import { RedoAction } from '../actions/RedoAction.jsx';
+import { UndoAction } from '../actions/UndoAction.jsx';
 
 export interface PostEditorProps {
 	post: Post;
@@ -79,6 +82,10 @@ export function PostEditor({ post, className }: PostEditorProps) {
 
 	return (
 		<Box d="col" items="stretch" className={clsx('pl-[30px]', className)}>
+			<ActionBar className="sticky top-0 bg-white z-menu">
+				<UndoAction />
+				<RedoAction />
+			</ActionBar>
 			{editor && (
 				<BubbleMenu editor={editor} tippyOptions={{ duration: 100 }}>
 					<Box gap surface p="sm" border className="shadow-sm">
@@ -158,7 +165,7 @@ export function PostEditor({ post, className }: PostEditorProps) {
 					'flex-1 flex flex-col [&_.ProseMirror]:(p-md flex-1 bg-transparent border-none shadow-none)',
 					'[&_.tiptap_p.is-editor-empty:first-child::before]:(color-gray-5 content-[attr(data-placeholder)] h-0 float-left pointer-events-none)',
 					'[&_.ProseMirror_a]:(underline color-primary-dark)',
-					'[&_.ProseMirror_p]:(mb-lg)',
+					'[&_.ProseMirror_p]:(mb-lg leading-relaxed)',
 				)}
 			/>
 		</Box>

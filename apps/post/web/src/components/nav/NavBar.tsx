@@ -15,11 +15,11 @@ export function NavBar({}: NavBarProps) {
 				<h1 className="text-lg font-600 font-fancy m-0 ">Post</h1>
 			</Box>
 			<BaseNavBar.Item asChild>
-				<Link to="/" data-active={path === '/' || path.startsWith('/posts')}>
+				<Link to="/" data-active={path === '/'}>
 					<BaseNavBar.ItemIconWrapper>
-						<BaseNavBar.ItemIcon name="page" />
+						<BaseNavBar.ItemIcon name="home" />
 					</BaseNavBar.ItemIconWrapper>
-					<BaseNavBar.ItemText>Posts</BaseNavBar.ItemText>
+					<BaseNavBar.ItemText>Home</BaseNavBar.ItemText>
 				</Link>
 			</BaseNavBar.Item>
 			<BaseNavBar.Item asChild data-active={path.startsWith('/notebooks')}>
@@ -31,7 +31,7 @@ export function NavBar({}: NavBarProps) {
 				</Link>
 			</BaseNavBar.Item>
 			<Suspense fallback={null}>
-				<NotebooksSubnav open className="hidden md:flex ml-md" />
+				<NotebooksSubnav open className="hidden md:flex" />
 			</Suspense>
 		</BaseNavBar>
 	);
