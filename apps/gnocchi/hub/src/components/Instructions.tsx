@@ -1,22 +1,25 @@
 'use client';
 
-import { Button, clsx, Collapsible, Icon, Note, RichEditor } from '@a-type/ui';
-// @ts-ignore
-import { mergeAttributes, Node } from '@tiptap/core';
+import { HubRecipeData } from '@/types.js';
 import {
-	// @ts-ignore
+	Button,
+	clsx,
+	Collapsible,
+	Icon,
+	Note,
+	tipTapClassName,
+	tipTapReadonlyClassName,
+} from '@a-type/ui';
+import { mergeAttributes, Node } from '@tiptap/core';
+import Link from '@tiptap/extension-link';
+import {
+	EditorContent,
 	NodeViewContent,
-	// @ts-ignore
 	NodeViewWrapper,
-	// @ts-ignore
 	ReactNodeViewRenderer,
-	// @ts-ignore
 	useEditor,
 } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-// @ts-ignore
-import { HubRecipeData } from '@/types.js';
-import Link from '@tiptap/extension-link';
 import { createContext, useContext } from 'react';
 
 export interface InstructionsProps {
@@ -44,7 +47,11 @@ export function Instructions({ data, className }: InstructionsProps) {
 			itemProp="recipeInstructions"
 		>
 			<InstructionsContext.Provider value={data}>
-				<RichEditor editor={editor} readOnly />
+				<EditorContent
+					className={clsx(tipTapClassName, tipTapReadonlyClassName)}
+					editor={editor}
+					readOnly
+				/>
 			</InstructionsContext.Provider>
 		</div>
 	);
@@ -163,7 +170,7 @@ function InstructionStepView({
 }: {
 	node: {
 		attrs: {
-			id: string;
+			id?: string;
 			note?: string;
 			subRecipeId?: string;
 		};
