@@ -59,7 +59,10 @@ export const authHandlers = createHandlers<Context<Env>>({
 
 			return {
 				...dbAccount,
-				expiresAt: dbAccount.accessTokenExpiresAt ?? null,
+				expiresAt:
+					dbAccount.accessTokenExpiresAt ?
+						new Date(dbAccount.accessTokenExpiresAt)
+					:	null,
 			};
 		},
 		getUserByEmail: async (email) => {
@@ -164,10 +167,7 @@ export const authHandlers = createHandlers<Context<Env>>({
 				return undefined;
 			}
 
-			return {
-				...value,
-				expiresAt: value.expiresAt.getTime(),
-			};
+			return value;
 		},
 		consumeVerificationCode: async (id) => {
 			await db.deleteFrom('VerificationCode').where('id', '=', id).execute();

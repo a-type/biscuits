@@ -10,6 +10,7 @@ import {
 	TransformStream,
 	WritableStream,
 } from 'node:stream/web';
+import { ZodError } from 'zod';
 import { sessions } from '../auth/session.js';
 import { Env } from '../config/hono.js';
 import { GQLContext } from '../graphql/context.js';
@@ -54,6 +55,15 @@ const yoga = createYoga<GQLContext>({
 						unexpected: originalError.code === BiscuitsError.Code.Unexpected,
 						biscuitsCode: originalError.code,
 						...originalError.extraData,
+					},
+				});
+			} else if (originalError instanceof ZodError) {
+				console.error(`[Zod Error]`, error);
+				return new GraphQLError(originalError.message, {
+					extensions: {
+						zodErrors: originalError.errors.map((e) => ({
+							message: e.message,
+						})),
 					},
 				});
 			} else {

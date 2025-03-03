@@ -7,10 +7,9 @@ import {
 	DialogTitle,
 	Icon,
 } from '@a-type/ui';
-import { useQuery } from '@biscuits/graphql';
+import { graphql, useQuery } from '@biscuits/graphql';
 import { ReactNode } from 'react';
 import { proxy, useSnapshot } from 'valtio';
-import { graphql } from '../graphql.js';
 import { LoginButton } from './LoginButton.js';
 import { Price } from './Price.js';
 

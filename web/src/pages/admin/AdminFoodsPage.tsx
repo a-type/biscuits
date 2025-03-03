@@ -1,6 +1,5 @@
-import { graphql } from '@/graphql.js';
 import { Button } from '@a-type/ui';
-import { useSuspenseQuery } from '@biscuits/graphql';
+import { graphql, useSuspenseQuery } from '@biscuits/graphql';
 import { useState } from 'react';
 
 export interface AdminFoodsPageProps {}

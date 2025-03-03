@@ -30,6 +30,9 @@ import * as v0015 from './v0015_plan_allowed_apps.js';
 import * as v0016 from './v0016_wishlist_purchases.js';
 
 import * as v0017 from './v0017_usage_limits.js';
+
+import * as v0018 from './v0018_post_hub.js';
+
 export default {
 	v0001,
 	v0002,
@@ -48,4 +51,5 @@ export default {
 	v0015,
 	v0016,
 	v0017,
+	v0018,
 };

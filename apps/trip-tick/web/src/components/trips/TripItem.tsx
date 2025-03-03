@@ -2,7 +2,6 @@ import {
 	getComputedQuantity,
 	quantityForecast,
 } from '@/components/trips/utils.js';
-import { ResultOf } from '@/graphql.js';
 import { hooks } from '@/store.js';
 import {
 	Button,
@@ -16,6 +15,7 @@ import {
 	SliderTrack,
 	useParticles,
 } from '@a-type/ui';
+import { ResultOf } from '@biscuits/graphql';
 import {
 	ListItemsItem,
 	TripCompletionsValue,

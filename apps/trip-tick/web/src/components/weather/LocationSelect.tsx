@@ -1,4 +1,3 @@
-import { graphql } from '@/graphql.js';
 import { hooks } from '@/store.js';
 import {
 	Button,
@@ -12,7 +11,7 @@ import {
 } from '@a-type/ui';
 import { preventDefault } from '@a-type/utils';
 import { useDebounced, useHasServerAccess } from '@biscuits/client';
-import { useClient, useQuery } from '@biscuits/graphql';
+import { graphql, useClient, useQuery } from '@biscuits/graphql';
 import { TripLocation, TripLocationInit } from '@trip-tick.biscuits/verdant';
 import classNames from 'classnames';
 import { useCombobox } from 'downshift';

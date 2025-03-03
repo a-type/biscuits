@@ -5,6 +5,8 @@ import {
 	FoodCategory,
 	Plan,
 	PlanInvitation,
+	PublishedNotebook,
+	PublishedPost,
 	PublishedRecipe,
 	PublishedWishlist,
 	User,
@@ -31,6 +33,11 @@ import {
 	WeatherForecastInput,
 } from '../services/weather.js';
 import { GQLContext } from './context.js';
+import {
+	PublishPostInput,
+	PublishPostNotebookInput,
+	PublishPostPostInput,
+} from './otherTypes.js';
 
 export const builder = new SchemaBuilder<{
 	Context: GQLContext;
@@ -93,6 +100,11 @@ export const builder = new SchemaBuilder<{
 			__typename: 'WishlistIdeaRequest';
 		};
 
+		// Post
+		PublishedPost: PublishedPost & { __typename: 'PublishedPost' };
+		PublishedNotebook: PublishedNotebook & { __typename: 'PublishedNotebook' };
+		PublishPostResult: { postId: string; notebookId: string };
+
 		// Common Utils
 		WeatherForecast: WeatherForecast;
 		WeatherForecastDay: WeatherForecastDay;
@@ -111,7 +123,7 @@ export const builder = new SchemaBuilder<{
 	Scalars: {
 		DateTime: {
 			Input: Date;
-			Output: Date;
+			Output: Date | string;
 		};
 		Date: {
 			Input: string;
@@ -196,6 +208,11 @@ export const builder = new SchemaBuilder<{
 			responses: WishlistIdeaRequestResponse;
 		};
 
+		// Post
+		PublishPostInput: PublishPostInput;
+		PublishPostPostInput: PublishPostPostInput;
+		PublishPostNotebookInput: PublishPostNotebookInput;
+
 		// Common Utils
 		WeatherForecastInput: WeatherForecastInput;
 	};
@@ -259,12 +276,12 @@ export const builder = new SchemaBuilder<{
 				// check limit
 				if (limit.uses >= limitCount) {
 					// might be expired?
-					if (limit.resetsAt < new Date()) {
+					if (new Date(limit.resetsAt) < new Date()) {
 						await context.db
 							.updateTable('UserUsageLimit')
 							.set({
 								uses: 1,
-								resetsAt: addLimitPeriod(limit.resetsAt, limitPeriod),
+								resetsAt: addLimitPeriod(new Date(limit.resetsAt), limitPeriod),
 							})
 							.where('userId', '=', context.session.userId)
 							.where('limitType', '=', limitType)
@@ -276,7 +293,7 @@ export const builder = new SchemaBuilder<{
 						'Free usage limit reached. Please try again later.',
 						undefined,
 						{
-							resetsAt: limit.resetsAt.getTime(),
+							resetsAt: new Date(limit.resetsAt).getTime(),
 						},
 					);
 				}

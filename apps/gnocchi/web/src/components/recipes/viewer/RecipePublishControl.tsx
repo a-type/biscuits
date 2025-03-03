@@ -1,5 +1,4 @@
 import { Link, TextLink } from '@/components/nav/Link.jsx';
-import { graphql } from '@/graphql.js';
 import { hooks } from '@/stores/groceries/index.js';
 import {
 	Box,
@@ -17,7 +16,7 @@ import {
 	Tooltip,
 } from '@a-type/ui';
 import { useFeatureFlag, useHasServerAccess } from '@biscuits/client';
-import { useMutation, useQuery } from '@biscuits/graphql';
+import { graphql, useMutation, useQuery } from '@biscuits/graphql';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { format } from 'date-fns/esm';
 import { useState } from 'react';

@@ -1,0 +1,17 @@
+{
+	"extends": "../../../tsconfig.json",
+	"compilerOptions": {
+		"jsx": "preserve",
+		"outDir": "./dist/server",
+		"rootDir": "./src",
+		"baseUrl": ".",
+		"declaration": true,
+		"lib": ["esnext", "dom", "dom.iterable"],
+		"paths": {
+			"@/*": ["./src/*"]
+		},
+		"types": ["vite/client"],
+		"customConditions": ["development"]
+	},
+	"include": ["src"]
+}

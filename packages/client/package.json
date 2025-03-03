@@ -37,13 +37,6 @@
 			"import": "./dist/fetch.js",
 			"node": "./dist/fetch.js",
 			"default": "./dist/fetch.js"
-		},
-		"./graphql": {
-			"production": "./dist/graphql.js",
-			"development": "./src/graphql.ts",
-			"import": "./dist/graphql.js",
-			"node": "./dist/graphql.js",
-			"default": "./dist/graphql.js"
 		}
 	},
 	"scripts": {

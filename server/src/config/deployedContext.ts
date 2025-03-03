@@ -1,10 +1,12 @@
 export const DEPLOYED_ORIGIN =
-  process.env.HOST || `http://localhost:${process.env.PORT ?? '6124'}`;
+	process.env.HOST || `http://localhost:${process.env.PORT ?? '6124'}`;
 export const UI_ORIGIN = process.env.UI_ORIGIN || 'http://localhost:6123';
 export const PORT = process.env.PORT || DEPLOYED_ORIGIN.split(':')[2];
 export const ENVIRONMENT = process.env.NODE_ENV || 'development';
 
 export const GNOCCHI_HUB_ORIGIN =
-  process.env.GNOCCHI_HUB_ORIGIN || 'http://localhost:6124/gnocchi/hubRecipe';
+	process.env.GNOCCHI_HUB_ORIGIN || 'http://localhost:6124/gnocchi/hubRecipe';
 export const WISH_WASH_HUB_ORIGIN =
-  process.env.WISH_WASH_HUB_ORIGIN || 'http://localhost:6124/wishWash/hubList';
+	process.env.WISH_WASH_HUB_ORIGIN || 'http://localhost:6124/wishWash/hubList';
+export const POST_HUB_ORIGIN =
+	process.env.POST_HUB_ORIGIN || 'http://localhost:6124/post/hub';

@@ -1,5 +1,4 @@
 import { Footer } from '@/components/help/Footer.jsx';
-import { graphql } from '@/graphql.js';
 import {
 	Button,
 	H1,
@@ -9,7 +8,7 @@ import {
 	toast,
 	withClassName,
 } from '@a-type/ui';
-import { useMutation, useSuspenseQuery } from '@biscuits/graphql';
+import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
 import { useNavigate, useParams } from '@verdant-web/react-router';
 import { useEffect } from 'react';
 

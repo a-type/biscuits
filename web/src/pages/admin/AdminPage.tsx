@@ -1,4 +1,3 @@
-import { graphql } from '@/graphql.js';
 import {
 	PageContent,
 	PageRoot,
@@ -6,7 +5,7 @@ import {
 	TabsRoot,
 	TabsTrigger,
 } from '@a-type/ui';
-import { useSuspenseQuery } from '@biscuits/graphql';
+import { graphql, useSuspenseQuery } from '@biscuits/graphql';
 import { Link, Outlet, useNavigate } from '@verdant-web/react-router';
 
 export interface AdminPageProps {}

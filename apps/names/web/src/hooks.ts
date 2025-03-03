@@ -1,6 +1,5 @@
 import { useHasServerAccess, useMe, VerdantProfile } from '@biscuits/client';
-import { graphql } from '@biscuits/client/graphql';
-import { graphqlClient } from '@biscuits/graphql';
+import { graphql, graphqlClient } from '@biscuits/graphql';
 import { createHooks } from '@names.biscuits/verdant';
 import { useCallback, useMemo } from 'react';
 import {

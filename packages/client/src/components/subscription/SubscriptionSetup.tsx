@@ -1,8 +1,7 @@
 import { P, Spinner } from '@a-type/ui';
-import { useQuery } from '@biscuits/graphql';
+import { graphql, useQuery } from '@biscuits/graphql';
 import { useSearchParams } from '@verdant-web/react-router';
 import { lazy, Suspense, useEffect } from 'react';
-import { graphql } from '../../graphql.js';
 import {
 	ManageSubscription,
 	manageSubscriptionInfo,

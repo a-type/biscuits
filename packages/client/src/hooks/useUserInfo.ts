@@ -1,5 +1,4 @@
-import { useSuspenseQuery } from '@biscuits/graphql';
-import { graphql } from '../graphql.js';
+import { graphql, useSuspenseQuery } from '@biscuits/graphql';
 
 const userInfoQuery = graphql(`
 	query UserInfo($userId: ID!) {

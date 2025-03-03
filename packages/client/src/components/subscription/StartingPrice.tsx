@@ -1,5 +1,4 @@
-import { useQuery } from '@biscuits/graphql';
-import { graphql } from '../../graphql.js';
+import { graphql, useQuery } from '@biscuits/graphql';
 import { Price } from '../Price.js';
 
 const startingPriceQuery = graphql(`

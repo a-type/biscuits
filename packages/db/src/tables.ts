@@ -26,12 +26,30 @@ export interface Database {
 	PublishedWishlist: PublishedWishlistTable;
 	WishlistPurchase: WishlistPurchaseTable;
 	WishlistIdeaRequest: WishlistIdeaRequestTable;
+	PublishedNotebook: PublishedNotebookTable;
+	PublishedPost: PublishedPostTable;
 }
+
+// date serialization: Dates go in, strings come out.
+type DateColumnRequired = ColumnType<string, Date, Date>;
+type DateColumnOptional = ColumnType<
+	string | null,
+	Date | undefined,
+	Date | null | undefined
+> | null;
+type DateColumnGenerated = ColumnType<
+	string,
+	Date | undefined,
+	Date | null | undefined
+>;
+
+type CreatedAt = DateColumnGenerated;
+type UpdatedAt = DateColumnOptional;
 
 export interface UserTable {
 	id: string;
-	createdAt: ColumnType<Date, Date | undefined, never>;
-	updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
+	createdAt: CreatedAt;
+	updatedAt: UpdatedAt;
 
 	fullName: string;
 	friendlyName: string;
@@ -63,8 +81,8 @@ export type UserUpdate = Updateable<UserTable>;
 
 export interface AccountTable {
 	id: string;
-	createdAt: ColumnType<Date, Date | undefined, never>;
-	updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
+	createdAt: CreatedAt;
+	updatedAt: UpdatedAt;
 
 	type: string;
 	provider: string;
@@ -72,7 +90,7 @@ export interface AccountTable {
 	refreshToken: string | null;
 	accessToken: string | null;
 	tokenType: string | null;
-	accessTokenExpiresAt: ColumnType<Date, Date | undefined, Date> | null;
+	accessTokenExpiresAt: DateColumnOptional;
 	scope: string | null;
 	idToken: string | null;
 	userId: string;
@@ -84,19 +102,15 @@ export type AccountUpdate = Updateable<AccountTable>;
 
 export interface PlanTable {
 	id: string;
-	createdAt: ColumnType<Date, Date | undefined, never>;
-	updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
+	createdAt: CreatedAt;
+	updatedAt: UpdatedAt;
 
 	name: string;
 	stripeProductId: string | null;
 	stripePriceId: string | null;
 	stripeSubscriptionId: string | null;
 	subscriptionStatus: string | null;
-	subscriptionStatusCheckedAt: ColumnType<
-		Date,
-		number | undefined,
-		number
-	> | null;
+	subscriptionStatusCheckedAt: DateColumnOptional;
 	subscriptionExpiresAt: Date | null;
 	subscriptionCanceledAt: Date | null;
 	featureFlags: ColumnType<
@@ -114,14 +128,14 @@ export type PlanUpdate = Updateable<PlanTable>;
 
 export interface PlanInvitationTable {
 	id: string;
-	createdAt: ColumnType<Date, Date | undefined, never>;
-	updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
+	createdAt: CreatedAt;
+	updatedAt: UpdatedAt;
 
 	planId: string;
 	inviterId: string;
 	inviterName: string;
-	expiresAt: Date;
-	claimedAt: Date | null;
+	expiresAt: DateColumnRequired;
+	claimedAt: DateColumnOptional;
 	email: string;
 }
 
@@ -131,38 +145,23 @@ export type PlanInvitationUpdate = Updateable<PlanInvitationTable>;
 
 export interface VerificationCodeTable {
 	id: string;
-	createdAt: ColumnType<Date, Date | undefined, never>;
-	updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
+	createdAt: CreatedAt;
+	updatedAt: UpdatedAt;
 
 	code: string;
 	email: string;
 	name: string;
-	expiresAt: ColumnType<Date, Date | undefined, Date | undefined>;
+	expiresAt: DateColumnRequired;
 }
 
 export type VerificationCode = Selectable<VerificationCodeTable>;
 export type NewVerificationCode = Insertable<VerificationCodeTable>;
 export type VerificationCodeUpdate = Updateable<VerificationCodeTable>;
 
-export interface PasswordResetTable {
-	id: string;
-	createdAt: ColumnType<Date, Date | undefined, never>;
-	updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
-
-	code: string;
-	email: string;
-	name: string;
-	expiresAt: ColumnType<Date, Date | undefined, Date | undefined>;
-}
-
-export type PasswordReset = Selectable<PasswordResetTable>;
-export type NewPasswordReset = Insertable<PasswordResetTable>;
-export type PasswordResetUpdate = Updateable<PasswordResetTable>;
-
 export interface ActivityLogTable {
 	id: string;
-	createdAt: ColumnType<Date, Date | undefined, never>;
-	updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
+	createdAt: CreatedAt;
+	updatedAt: UpdatedAt;
 
 	userId: string | null;
 	action: string;
@@ -175,8 +174,8 @@ export type ActivityLogUpdate = Updateable<ActivityLogTable>;
 
 export interface PushSubscriptionTable {
 	endpoint: string;
-	createdAt: ColumnType<Date, Date | undefined, never>;
-	updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
+	createdAt: CreatedAt;
+	updatedAt: UpdatedAt;
 
 	appId: string;
 	auth: string | null;
@@ -190,8 +189,8 @@ export type PushSubscriptionUpdate = Updateable<PushSubscriptionTable>;
 
 export interface ChangelogItemTable {
 	id: string;
-	createdAt: ColumnType<Date, Date | undefined, never>;
-	updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
+	createdAt: CreatedAt;
+	updatedAt: UpdatedAt;
 
 	title: string;
 	details: string;
@@ -206,8 +205,8 @@ export type ChangelogItemUpdate = Updateable<ChangelogItemTable>;
 
 export interface FoodTable {
 	id: string;
-	createdAt: ColumnType<Date, Date | undefined, never>;
-	updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
+	createdAt: CreatedAt;
+	updatedAt: UpdatedAt;
 
 	canonicalName: string;
 }
@@ -217,8 +216,8 @@ export type NewFood = Insertable<FoodTable>;
 export type FoodUpdate = Updateable<FoodTable>;
 
 export interface FoodNameTable {
-	createdAt: ColumnType<Date, Date | undefined, never>;
-	updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
+	createdAt: CreatedAt;
+	updatedAt: UpdatedAt;
 
 	name: string;
 	foodId: string;
@@ -241,8 +240,8 @@ export type FoodCategoryAssignmentUpdate =
 
 export interface FoodCategoryTable {
 	id: string;
-	createdAt: ColumnType<Date, Date | undefined, never>;
-	updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
+	createdAt: CreatedAt;
+	updatedAt: UpdatedAt;
 
 	name: string;
 	sortKey: string;
@@ -254,10 +253,10 @@ export type FoodCategoryUpdate = Updateable<FoodCategoryTable>;
 
 export interface PublishedRecipeTable {
 	id: string;
-	createdAt: ColumnType<Date, Date | undefined, never>;
-	updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
+	createdAt: CreatedAt;
+	updatedAt: UpdatedAt;
 
-	publishedAt: Date;
+	publishedAt: DateColumnRequired;
 	publishedBy: string;
 
 	planId: string;
@@ -270,10 +269,10 @@ export type PublishedRecipeUpdate = Updateable<PublishedRecipeTable>;
 
 export interface PublishedWishlistTable {
 	id: string;
-	createdAt: ColumnType<Date, Date | undefined, never>;
-	updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
+	createdAt: CreatedAt;
+	updatedAt: UpdatedAt;
 
-	publishedAt: Date;
+	publishedAt: DateColumnRequired;
 	publishedBy: string;
 
 	planId: string;
@@ -286,9 +285,9 @@ export type PublishedWishlistUpdate = Updateable<PublishedWishlistTable>;
 
 export interface WishlistPurchaseTable {
 	id: string;
-	createdAt: ColumnType<Date, Date | undefined, never>;
-	updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
-	confirmedAt: ColumnType<Date, Date | undefined, Date | undefined> | null;
+	createdAt: CreatedAt;
+	updatedAt: UpdatedAt;
+	confirmedAt: DateColumnOptional;
 
 	wishlistId: string;
 	itemId: string;
@@ -305,8 +304,8 @@ export type WishlistIdeaRequestResponse = Record<string, string>;
 
 export interface WishlistIdeaRequestTable {
 	id: string;
-	createdAt: ColumnType<Date, Date | undefined, never>;
-	updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
+	createdAt: CreatedAt;
+	updatedAt: UpdatedAt;
 
 	planId: string;
 	wishlistId: string;
@@ -322,12 +321,59 @@ export type WishlistIdeaRequestUpdate = Updateable<WishlistIdeaRequestTable>;
 export interface UserUsageLimitTable {
 	userId: string;
 	limitType: string;
-	createdAt: ColumnType<Date, Date | undefined, never>;
-	updatedAt: ColumnType<Date, Date | undefined, Date | undefined>;
+	createdAt: CreatedAt;
+	updatedAt: UpdatedAt;
 	uses: number;
-	resetsAt: ColumnType<Date, Date | undefined, Date | undefined>;
+	resetsAt: DateColumnRequired;
 }
 
 export type UsageLimit = Selectable<UserUsageLimitTable>;
 export type NewUsageLimit = Insertable<UserUsageLimitTable>;
 export type UsageLimitUpdate = Updateable<UserUsageLimitTable>;
+
+export interface PublishedNotebookTable {
+	id: string;
+	createdAt: CreatedAt;
+	updatedAt: UpdatedAt;
+
+	publishedBy: string;
+	planId: string;
+	name: string;
+	iconUrl: string | null;
+	coverImageUrl: string | null;
+	description: RichTextNode | null;
+}
+
+export type PublishedNotebook = Selectable<PublishedNotebookTable>;
+export type NewPublishedNotebook = Insertable<PublishedNotebookTable>;
+export type PublishedNotebookUpdate = Updateable<PublishedNotebookTable>;
+
+export interface PublishedPostTable {
+	id: string;
+	createdAt: CreatedAt;
+	updatedAt: UpdatedAt;
+
+	publishedBy: string;
+	slug: string;
+	notebookId: string;
+	title: string;
+	summary: string | null;
+	coverImageUrl: string | null;
+	body: RichTextNode;
+}
+
+export interface RichTextNode {
+	type: string;
+	attrs?: {
+		[attribute: string]: unknown;
+	} | null;
+	content?: RichTextNode[] | null;
+	marks?: RichTextNode[] | null;
+	start?: number | null;
+	end?: number | null;
+	text?: string | null;
+}
+
+export type PublishedPost = Selectable<PublishedPostTable>;
+export type NewPublishedPost = Insertable<PublishedPostTable>;
+export type PublishedPostUpdate = Updateable<PublishedPostTable>;

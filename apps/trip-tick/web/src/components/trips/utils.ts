@@ -1,5 +1,4 @@
-import { graphql } from '@/graphql.js';
-import { ResultOf } from '@biscuits/graphql';
+import { graphql, ResultOf } from '@biscuits/graphql';
 import {
 	ListItemsItemConditionsItemSnapshot,
 	ListItemsItemConditionsSnapshot,

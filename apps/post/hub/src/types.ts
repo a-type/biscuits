@@ -1,0 +1,53 @@
+export interface HubNotebookData {
+	id: string;
+	name: string;
+	authorId: string;
+	authorName: string;
+	authorAvatarUrl: string | null;
+	iconUrl: string | null;
+	coverImageUrl: string | null;
+	description: RichTextNode | null;
+}
+
+export type HubNotebookSummaryData = Omit<
+	HubNotebookData,
+	'description' | 'authorId' | 'authorName' | 'authorAvatarUrl'
+>;
+
+export interface HubPostSummaryData {
+	id: string;
+	slug: string;
+	title: string;
+	coverImageUrl: string | null;
+	createdAt: string;
+	updatedAt: string;
+	excerpt: string | null;
+	authorId: string;
+	authorName: string;
+	authorAvatarUrl: string | null;
+}
+
+export interface HubPostData {
+	id: string;
+	title: string;
+	coverImageUrl: string | null;
+	createdAt: string;
+	updatedAt: string;
+	body: RichTextNode;
+	authorId: string;
+	authorName: string;
+	authorAvatarUrl: string | null;
+}
+
+export interface RichTextNode {
+	type: string;
+	attrs: {
+		id: string;
+		[attribute: string]: unknown;
+	} | null;
+	content: RichTextNode[] | null;
+	marks: RichTextNode[] | null;
+	start: number | null;
+	end: number | null;
+	text: string | null;
+}

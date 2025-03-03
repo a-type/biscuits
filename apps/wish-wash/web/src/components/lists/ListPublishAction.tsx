@@ -1,4 +1,3 @@
-import { graphql } from '@/graphql.js';
 import {
 	ActionButton,
 	ActionButtonProps,
@@ -14,7 +13,7 @@ import {
 	P,
 } from '@a-type/ui';
 import { useHasServerAccess } from '@biscuits/client';
-import { useMutation, useQuery } from '@biscuits/graphql';
+import { graphql, useMutation, useQuery } from '@biscuits/graphql';
 import { Link } from '@verdant-web/react-router';
 import { upsellState } from '../promotion/upsellState.js';
 

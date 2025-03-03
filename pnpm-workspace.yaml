@@ -51,3 +51,6 @@ catalog:
   '@tiptap/extension-link': 2.11.5
   '@tiptap/extension-document': 2.11.5
   '@tiptap/extension-paragraph': 2.11.5
+  '@tiptap/extension-placeholder': 2.11.5
+  '@tiptap/extension-typography': 2.11.5
+  '@tiptap/html': 2.11.5

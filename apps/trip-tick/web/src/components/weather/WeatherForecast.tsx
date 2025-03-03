@@ -1,4 +1,3 @@
-import { ResultOf, graphql } from '@/graphql.js';
 import {
 	Chip,
 	CollapsibleContent,
@@ -6,6 +5,7 @@ import {
 	CollapsibleTrigger,
 	Icon,
 } from '@a-type/ui';
+import { ResultOf, graphql } from '@biscuits/graphql';
 import classNames from 'classnames';
 import { TemperatureUnit } from './TemperatureUnit.jsx';
 import { useTemperatureUnit } from './useTemperatureUnit.js';

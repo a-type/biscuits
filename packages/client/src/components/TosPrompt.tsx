@@ -5,9 +5,8 @@ import {
 	DialogContent,
 	DialogTitle,
 } from '@a-type/ui';
-import { useMutation } from '@biscuits/graphql';
+import { graphql, useMutation } from '@biscuits/graphql';
 import * as CONFIG from '../config.js';
-import { graphql } from '../graphql.js';
 import { useMe } from '../hooks/graphql.js';
 import { TOS_UPDATED_AT } from '../tos.js';
 

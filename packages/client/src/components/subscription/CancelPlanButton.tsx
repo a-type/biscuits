@@ -1,7 +1,6 @@
 import { ConfirmedButton } from '@a-type/ui';
-import { useMutation } from '@biscuits/graphql';
+import { graphql, useMutation } from '@biscuits/graphql';
 import { useNavigate } from '@verdant-web/react-router';
-import { graphql } from '../../graphql.js';
 
 const cancelPlan = graphql(`
 	mutation CancelPlan {

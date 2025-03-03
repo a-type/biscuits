@@ -34,4 +34,5 @@ export * from './TagToggle.js';
 export * from './Tip.js';
 export * from './TopLoader.js';
 export * from './TosPrompt.js';
+export * from './UrlShare.js';
 export * from './UserMenu.js';

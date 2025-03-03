@@ -8,6 +8,7 @@ import { handleError } from './middleware/errors.js';
 import { authRouter } from './routers/auth.js';
 import { gnocchiRouter } from './routers/gnocchi.js';
 import { graphqlRouter } from './routers/graphql.js';
+import { postRouter } from './routers/post.js';
 import { stripeRouter } from './routers/stripe.js';
 import { verdantRouter } from './routers/verdant.js';
 import { wishWashRouter } from './routers/wishWash.js';
@@ -42,7 +43,8 @@ export const app = new Hono()
 	.route('/stripe', stripeRouter)
 	.route('/graphql', graphqlRouter)
 	.route('/gnocchi', gnocchiRouter)
-	.route('/wishWash', wishWashRouter);
+	.route('/wishWash', wishWashRouter)
+	.route('/post', postRouter);
 
 // for local dev, add endpoint to serve user files
 if (process.env.NODE_ENV !== 'production') {

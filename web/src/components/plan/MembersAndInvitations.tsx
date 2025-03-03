@@ -1,4 +1,3 @@
-import { graphql } from '@/graphql.js';
 import {
 	Avatar,
 	CardActions,
@@ -11,7 +10,7 @@ import {
 	ConfirmedButton,
 	H3,
 } from '@a-type/ui';
-import { useMutation, useSuspenseQuery } from '@biscuits/graphql';
+import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
 import { InviteMember } from './InviteMember.js';
 
 const membersQuery = graphql(`

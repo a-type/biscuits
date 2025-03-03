@@ -1,4 +1,3 @@
-import { graphql } from '@/graphql.js';
 import {
 	Button,
 	Checkbox,
@@ -9,7 +8,7 @@ import {
 	DialogTitle,
 } from '@a-type/ui';
 import { featureFlags } from '@biscuits/client';
-import { useMutation, useSuspenseQuery } from '@biscuits/graphql';
+import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
 import { useSearchParams } from '@verdant-web/react-router';
 
 export interface AdminPlansPageProps {}

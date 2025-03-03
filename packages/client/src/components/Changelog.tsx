@@ -13,9 +13,8 @@ import {
 	NavBarItemText,
 	withClassName,
 } from '@a-type/ui';
-import { useQuery } from '@biscuits/graphql';
+import { graphql, useQuery } from '@biscuits/graphql';
 import { useState } from 'react';
-import { graphql } from '../graphql.js';
 import { useLocalStorage } from '../hooks/useStorage.js';
 import { useAppId } from './Context.js';
 

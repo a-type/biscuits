@@ -10,18 +10,16 @@ import {
 	tipTapClassName,
 	withClassName,
 } from '@a-type/ui';
+import { tiptapExtensions } from '@post.biscuits/common';
 import { Post } from '@post.biscuits/verdant';
 import { Editor, posToDOMRect } from '@tiptap/core';
-import Link from '@tiptap/extension-link';
 import Placeholder from '@tiptap/extension-placeholder';
-import Typography from '@tiptap/extension-typography';
 import {
 	BubbleMenu,
 	EditorContent,
 	FloatingMenu,
 	useEditorState,
 } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
 import { NodeIdExtension } from '@verdant-web/tiptap';
 import { useSyncedEditor } from '@verdant-web/tiptap/react';
 import { useCallback, useEffect } from 'react';
@@ -39,18 +37,11 @@ export function PostEditor({ post, className }: PostEditorProps) {
 	const editor = useSyncedEditor(post, 'body', {
 		editorOptions: {
 			extensions: [
-				StarterKit.configure({
-					history: false,
-				}),
+				...tiptapExtensions,
 				IdExtension,
 				Placeholder.configure({
 					placeholder: 'Ah, the blank page...',
 				}),
-				Link.configure({
-					autolink: true,
-					openOnClick: 'whenNotEditable',
-				}),
-				Typography,
 			],
 		},
 	});
