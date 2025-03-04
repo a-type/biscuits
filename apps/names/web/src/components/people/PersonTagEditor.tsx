@@ -83,7 +83,7 @@ export function PersonTagEditor({ person, className }: PersonTagEditorProps) {
 							</Collapsible.Content>
 						</Collapsible>
 					</Suspense>
-					<Dialog.Actions className="border-0 border-t border-solid border-gray-5">
+					<Dialog.Actions className="border-0 border-t border-solid border-gray">
 						<Dialog.Close asChild>
 							<Button>Done</Button>
 						</Dialog.Close>

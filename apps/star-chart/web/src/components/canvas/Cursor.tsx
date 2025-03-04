@@ -56,7 +56,7 @@ export function Cursor({ userId }: CursorProps) {
 			}}
 		>
 			<CursorGraphic />
-			<div className="ml-2 text-xs text-white bg-primary rounded-full px-2 py-1 row shadow-lg">
+			<div className="ml-2 text-xs color-white bg-primary rounded-full px-2 py-1 row shadow-lg">
 				{profile.imageUrl && (
 					<Avatar className="w-12px h-12px" imageSrc={profile.imageUrl} />
 				)}

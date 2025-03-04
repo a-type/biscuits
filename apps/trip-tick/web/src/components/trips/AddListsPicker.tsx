@@ -40,7 +40,7 @@ export function AddListsPicker({ trip, className }: AddListsPickerProps) {
 						<Icon name={active ? 'check' : 'plus'} />
 						<div className="flex flex-col gap-1 text-start">
 							<span>{list.get('name')}</span>
-							<span className="text-sm text-gray-7">
+							<span className="text-sm color-gray-dark">
 								{list.get('items').length} items
 							</span>
 						</div>
@@ -48,9 +48,9 @@ export function AddListsPicker({ trip, className }: AddListsPickerProps) {
 				);
 			})}
 			{!lists.length && (
-				<div className="italic text-gray-7">
+				<div className="italic color-gray-dark">
 					You have no lists yet.{' '}
-					<Link to="/lists" className="text-primary-dark">
+					<Link to="/lists" className="color-primary-dark">
 						Create one
 					</Link>
 					?

@@ -37,7 +37,7 @@ export function TouchTools({ className }: TouchToolsProps) {
 				aria-pressed={dragLocked}
 				className={clsx(
 					'flex-col gap-0 rounded-md px-1 py-0',
-					dragLocked && 'bg-primary-wash text-primary-dark',
+					dragLocked && 'bg-primary-wash color-primary-dark',
 				)}
 			>
 				<span>
@@ -53,7 +53,7 @@ export function TouchTools({ className }: TouchToolsProps) {
 					aria-pressed={boxSelect}
 					className={clsx(
 						'flex-col gap-0 rounded-md px-1 py-0',
-						boxSelect && 'bg-primary-wash text-primary-dark',
+						boxSelect && 'bg-primary-wash color-primary-dark',
 					)}
 				>
 					<span>

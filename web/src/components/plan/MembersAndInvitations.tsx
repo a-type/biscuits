@@ -72,7 +72,7 @@ export function MembersAndInvitations() {
 				{plan?.pendingInvitations.map((invite) => (
 					<CardRoot key={invite.id}>
 						<CardMain>
-							<CardTitle className="flex-row mt-0 color-gray-7">
+							<CardTitle className="flex-row mt-0 color-gray-dark">
 								<Avatar />
 								<span>Invited: {invite.email}</span>
 							</CardTitle>
@@ -90,7 +90,7 @@ export function MembersAndInvitations() {
 					<H3>Invite someone</H3>
 					<InviteMember />
 				</div>
-			:	<div className="py-4 color-gray-9">
+			:	<div className="py-4 color-gray-dark">
 					You&apos;ve reached your membership limit. Upgrade to add more people.
 				</div>
 			}

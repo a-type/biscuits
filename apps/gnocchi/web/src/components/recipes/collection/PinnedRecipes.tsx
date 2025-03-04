@@ -71,7 +71,7 @@ function PinnedRecipeListItem({ recipe }: { recipe: Recipe }) {
 	const { title } = hooks.useWatch(recipe);
 
 	return (
-		<div className="flex flex-row items-center gap-1 border border-solid border-gray-5 rounded-lg px-3 py-2">
+		<div className="flex flex-row items-center gap-1 border border-solid border-gray rounded-lg px-3 py-2">
 			<Button
 				size="icon"
 				color="primary"

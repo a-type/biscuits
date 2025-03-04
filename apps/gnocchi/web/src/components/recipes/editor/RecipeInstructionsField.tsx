@@ -40,7 +40,7 @@ function isMobileOs() {
 function Toolbar({ editor }: { editor: Editor }) {
 	return (
 		// Sticks below the action bar
-		<div className="flex flex-row gap-2 items-center sticky z-1 top-44px bg-wash border-b border-b-gray-7 border-b-solid">
+		<div className="flex flex-row gap-2 items-center sticky z-1 top-44px bg-wash border-b border-b-gray-dark border-b-solid">
 			<Button
 				color="ghost"
 				onClick={() => {

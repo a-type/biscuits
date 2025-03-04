@@ -69,7 +69,7 @@ export default function LoginPage() {
 					<P className="px-3 py-1 rounded-full bg-accent-light">{message}</P>
 				)}
 				{appReferrer && (
-					<P className="italic color-gray-7 text-sm">A Biscuits.club app</P>
+					<P className="italic color-gray-dark text-sm">A Biscuits.club app</P>
 				)}
 				<TabsRoot
 					className="flex flex-col"
@@ -92,7 +92,7 @@ export default function LoginPage() {
 						<label
 							className={classNames(
 								'flex flex-row gap-3 max-w-400px text-sm transition-color  p-2 rounded-lg',
-								!tosAgreed && 'bg-primary-light text-black',
+								!tosAgreed && 'bg-primary-light color-black',
 							)}
 						>
 							<Checkbox
@@ -128,12 +128,12 @@ export default function LoginPage() {
 							appState={appState}
 						/>
 						{!tosAgreed && (
-							<P className="text-center text-sm text-gray-7">
+							<P className="text-center text-sm color-gray-dark">
 								You must agree to the terms to sign up
 							</P>
 						)}
 						{appReferrer && (
-							<P className="text-center text-sm text-gray-7">
+							<P className="text-center text-sm color-gray-dark">
 								Your account works with{' '}
 								<Link newTab to="/">
 									all Biscuits apps
@@ -172,9 +172,9 @@ export default function LoginPage() {
 function Or() {
 	return (
 		<div className="flex flex-row gap-2 items-center">
-			<div className="flex-1 border-t-solid border-t border-gray-5"></div>
-			<p className="text-gray-5">or</p>
-			<div className="flex-1 border-t-solid border-t border-gray-5"></div>
+			<div className="flex-1 border-t-solid border-t border-gray"></div>
+			<p className="color-gray">or</p>
+			<div className="flex-1 border-t-solid border-t border-gray"></div>
 		</div>
 	);
 }

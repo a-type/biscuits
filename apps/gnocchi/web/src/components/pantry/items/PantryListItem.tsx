@@ -82,7 +82,7 @@ export function PantryListItem({
 				<CardMain compact asChild>
 					<OpenFoodDetailButton
 						foodName={food}
-						className="font-normal p-0 border-none rounded-none items-start text-sm"
+						className="font-normal p-0 border-none shadow-none rounded-none items-start text-sm"
 					>
 						<CardTitle className={classNames('text-wrap', 'text-md')}>
 							<FoodName food={item} capitalize />
@@ -119,7 +119,7 @@ export function PantryListItem({
 								</Tooltip>
 							)}
 						</div>
-						<OpenInNewWindowIcon className="absolute right-2 top-2 z-1 color-gray-9 opacity-50" />
+						<OpenInNewWindowIcon className="absolute right-2 top-2 z-1 color-gray-dark opacity-50" />
 					</OpenFoodDetailButton>
 				</CardMain>
 				<CardFooter className={classNames(showLabels ? 'p-0' : '')}>

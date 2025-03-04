@@ -40,7 +40,7 @@ export function PhoneDemo({
 					animationDelay,
 				}}
 			>
-				<div className="absolute z--1 left-0 w-full h-full flex items-center justify-center text-gray-5 font-fancy text-lg p-6 text-center">
+				<div className="absolute z--1 left-0 w-full h-full flex items-center justify-center color-gray font-fancy text-lg p-6 text-center">
 					Video Coming Soon
 				</div>
 				<Media

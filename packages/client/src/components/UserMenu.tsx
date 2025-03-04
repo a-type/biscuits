@@ -77,12 +77,12 @@ export function UserMenu({
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Content>
 				{isOffline && (
-					<div className="pl-8 pr-4 py-1 text-gray-7 text-sm max-w-300px bg-attention-wash color-attention-dark">
+					<div className="pl-8 pr-4 py-1 color-gray-dark text-sm max-w-300px bg-attention-wash color-attention-dark">
 						Offline - some features may be unavailable
 					</div>
 				)}
 				{isLoggedIn && !hasServerAccess && (
-					<div className="bg-wash pl-8 pr-4 py-1 text-gray-7 text-sm max-w-300px color-gray-7">
+					<div className="bg-wash pl-8 pr-4 py-1 color-gray-dark text-sm max-w-300px color-gray-dark">
 						Your plan does not include sync for this app
 					</div>
 				)}

@@ -18,7 +18,7 @@ export default function HomePage() {
 					<PageFixedArea className="bg-transparent flex flex-row justify-between items-center py-2 md:max-w-800px">
 						<h1
 							className={classNames(
-								'text-2xl sm:text-4xl m-0 font-bold text-gray-9 text-shadow',
+								'text-2xl sm:text-4xl m-0 font-bold color-gray-dark text-shadow',
 								'bg-white p-2 rounded-lg leading-none',
 							)}
 						>
@@ -38,7 +38,7 @@ export default function HomePage() {
 					>
 						<div
 							className={classNames(
-								'text-lg sm:text-xl text-gray-7 mt-0 block font-light mx-sm leading-none italic font-fancy',
+								'text-lg sm:text-xl color-gray-dark mt-0 block font-light mx-sm leading-none italic font-fancy',
 							)}
 						>
 							Free scratch-made apps to organize your life
@@ -47,14 +47,14 @@ export default function HomePage() {
 						<Box
 							d="col"
 							gap
-							className="sm:mt-5 text-primary-dark font-semibold [flex:1_0_0]"
+							className="sm:mt-5 color-primary-dark font-semibold [flex:1_0_0]"
 						>
-							<P className="text-black text-lg leading-loose font-300 mb-4">
+							<P className="color-black text-lg leading-loose font-300 mb-4">
 								Biscuits' <em className="font-fancy font-300">local-first</em>{' '}
 								apps are designed to make your life easier. Free to use forever,
 								no ads, no tracking. <Link to="/about">Learn how</Link>.
 							</P>
-							<P className="text-black leading-loose font-300">
+							<P className="color-black leading-loose font-300">
 								No signup needed. No need to open the App Store. These are
 								instant web apps, no installation required. Just click
 								&quot;Open app&quot; to get started.

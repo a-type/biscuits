@@ -52,6 +52,7 @@ export function useMe() {
 
 export function useIsLoggedIn() {
 	const result = useMe();
+	console.log(result.error);
 	return [
 		!!result.data?.me?.id,
 		result.networkStatus === NetworkStatus.loading ||
@@ -73,7 +74,13 @@ export function useIsOffline() {
 function isOfflineError(error: ApolloError | undefined) {
 	if (!error) return false;
 	if (!error.networkError) return false;
-	if (error.networkError.message === 'Failed to fetch') return true;
+	if (
+		// Chrome
+		error.networkError.message === 'Failed to fetch' ||
+		// FF
+		error.networkError.message?.includes('NetworkError when attempting')
+	)
+		return true;
 	if ('statusCode' in error.networkError) {
 		return (
 			error.networkError.statusCode === 0 ||

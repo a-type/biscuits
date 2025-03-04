@@ -49,7 +49,7 @@ export function SubRecipeEditorButton({
 						value={subRecipeMultipliers.get(subRecipeId) || 1}
 						highlightChange
 					/>
-					<span className="text-sm text-gray-7">
+					<span className="text-sm color-gray-dark">
 						This applies a multiplier to the entire sub-recipe in addition to
 						any multiplier on the parent recipe.
 					</span>

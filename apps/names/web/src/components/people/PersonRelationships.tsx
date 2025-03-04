@@ -21,7 +21,8 @@ export function PersonRelationships({ person }: PersonRelationshipsProps) {
 	return (
 		<Box d="col" gap="md">
 			<H2 className="text-md">
-				<Icon name="connection" className="text-gray-7 mr-1" /> Relationships
+				<Icon name="connection" className="color-gray-dark mr-1" />{' '}
+				Relationships
 			</H2>
 			<RelationshipSearch person={person} />
 
@@ -82,7 +83,7 @@ function PersonRelationshipItem({
 		<div
 			className={clsx(
 				"grid [grid-template-areas:'avatar_name_arrow'_'remove_type_arrow'] [grid-template-columns:auto_1fr_auto] sm:([grid-template-areas:'remove_avatar_name_type_arrow'] [grid-template-columns:auto_auto_1fr_auto_auto]) gap-sm items-center",
-				'border border-solid border-gray-5 rounded-md p-sm select-none',
+				'border border-solid border-gray rounded-md p-sm select-none',
 			)}
 		>
 			<Button
@@ -150,7 +151,7 @@ function RelationshipSuggestions({
 
 	return (
 		<Box d="col" items="stretch" gap="sm">
-			<Box className="text-gray-7" gap="sm" items="center">
+			<Box className="color-gray-dark" gap="sm" items="center">
 				<Icon name="magic" />
 				Suggested
 			</Box>
@@ -247,7 +248,7 @@ function RelationshipSearch({ person }: { person: Person }) {
 	const addRelationship = useAddRelationship();
 	return (
 		<Box d="row" gap="sm" items="center">
-			<Icon name="add_person" className="text-gray-7" />
+			<Icon name="add_person" className="color-gray-dark" />
 			<Suspense>
 				<PersonNameSearchField
 					onSelect={(otherId) => addRelationship(person.get('id'), otherId)}

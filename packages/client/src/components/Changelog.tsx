@@ -84,7 +84,7 @@ export function ChangelogDisplay({
 				<div className="flex flex-col overflow-y-auto gap-4">
 					{data.map((item, idx) => (
 						<div key={item.id} className="relative">
-							<p className="text-xs italic text-gray-7 mb-1">
+							<p className="text-xs italic color-gray-dark mb-1">
 								{new Date(item.createdAt).toLocaleDateString()}
 							</p>
 							<h3 className="text-lg font-bold mt-0 mb-2">{item.title}</h3>
@@ -127,5 +127,5 @@ export function NavBarChangelog() {
 
 const NavBarChangelogButton = withClassName(
 	NavBarItem,
-	'[&[data-new=true]]:(bg-accent-wash text-accent-dark)',
+	'[&[data-new=true]]:(bg-accent-wash color-accent-dark)',
 );

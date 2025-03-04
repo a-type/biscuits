@@ -67,10 +67,7 @@ export function EmbeddedSubRecipeContent({
 
 	return (
 		<Collapsible.Content contentEditable={false} className={className}>
-			<Box
-				className="border-l border-l-gray-5 border-l-solid pl-2 ml-4"
-				p="none"
-			>
+			<Box className="border-l border-l-gray border-l-solid pl-2 ml-4" p="none">
 				<RecipeInstructionsViewer recipe={recipe} />
 			</Box>
 		</Collapsible.Content>

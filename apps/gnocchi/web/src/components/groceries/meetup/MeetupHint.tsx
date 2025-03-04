@@ -10,10 +10,13 @@ export function MeetupHint() {
 
 	return (
 		<div className="flex flex-col items-center justify-center flex-grow-1 text-center gap-3 p-4">
-			<p className="color-gray-7 italic text-sm max-w-300px">
+			<p className="color-gray-dark italic text-sm max-w-300px">
 				Time to regroup? Pick a location to meet up.
 			</p>
-			<label htmlFor="meetupHintSelect" className="text-xs color-gray-7 italic">
+			<label
+				htmlFor="meetupHintSelect"
+				className="text-xs color-gray-dark italic"
+			>
 				Meet at:
 			</label>
 			<MeetupSelect id="meetupHintSelect" emptyLabel="Choose..." />

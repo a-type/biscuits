@@ -154,7 +154,7 @@ export function PostEditor({ post, className }: PostEditorProps) {
 				className={clsx(
 					tipTapClassName,
 					'flex-1 flex flex-col [&_.ProseMirror]:(p-md flex-1 bg-transparent border-none shadow-none)',
-					'[&_.tiptap_p.is-editor-empty:first-child::before]:(color-gray-5 content-[attr(data-placeholder)] h-0 float-left pointer-events-none)',
+					'[&_.tiptap_p.is-editor-empty:first-child::before]:(color-gray content-[attr(data-placeholder)] h-0 float-left pointer-events-none)',
 					'[&_.ProseMirror_a]:(underline color-primary-dark)',
 					'[&_.ProseMirror_p]:(mb-lg leading-relaxed)',
 				)}

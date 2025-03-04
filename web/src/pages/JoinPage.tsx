@@ -33,7 +33,7 @@ export function JoinPage({}: JoinPageProps) {
 		<PageRoot className="bg-primary-wash">
 			<PageContent className="bg-primary-wash">
 				<div className="flex flex-col gap-6 w-full">
-					<h1 className={classNames('text-gray-9')}>
+					<h1 className={classNames('color-gray-dark')}>
 						Join Biscuits to unlock features and collaboration in every app
 					</h1>
 					<p>

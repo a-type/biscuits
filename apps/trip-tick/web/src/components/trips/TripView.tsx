@@ -198,7 +198,7 @@ function TripViewChecklists({
 
 	if (!days) {
 		return (
-			<div className="w-full flex-1 flex flex-col items-center justify-center text-gray-7 mt-8">
+			<div className="w-full flex-1 flex flex-col items-center justify-center color-gray-dark mt-8">
 				<div>Select dates to get started</div>
 			</div>
 		);
@@ -261,7 +261,7 @@ function TripViewChecklists({
 				);
 			})}
 			{startedWithNoLists && !mappedLists.length && (
-				<div className="w-full p-4 text-gray-7 italic">
+				<div className="w-full p-4 color-gray italic">
 					<span className="[font-style:normal]">💡</span> Add lists to this trip
 					for everything you want to pack. Once you start packing, check off
 					items as you go.
@@ -376,7 +376,7 @@ function TripViewChecklist({
 				>
 					<Icon name="plus" /> Add item
 				</Button>
-				<p className="text-sm italic text-gray-7">
+				<p className="text-sm italic color-gray-dark">
 					New items are only applied to this trip.{' '}
 					<Link className="font-bold" to={`/lists/${list.get('id')}`}>
 						Edit the list

@@ -155,7 +155,7 @@ function ChecklistItem({
 				<CheckboxRoot
 					checked={completed}
 					onCheckedChange={mainOnChecked}
-					className="w-32px h-32px rounded-full touch-none flex items-center justify-center text-black"
+					className="w-32px h-32px rounded-full touch-none flex items-center justify-center color-black"
 				>
 					<Icon name="check" />
 				</CheckboxRoot>
@@ -214,7 +214,7 @@ function ChecklistItem({
 							{new Array(computedQuantity - 1).fill(0).map((_, i) => (
 								<div
 									key={i}
-									className="w-1px h-full bg-gray-6 absolute top-0 left-0"
+									className="w-1px h-full bg-gray-dark absolute top-0 left-0"
 									style={{
 										left: `${(100 / computedQuantity) * (i + 1)}%`,
 									}}
@@ -225,7 +225,7 @@ function ChecklistItem({
 							data-color={completed ? 'default' : 'primary'}
 							className={classNames(
 								'transition-all ring-1 w-8px rounded-sm pointer-events-initial',
-								completed && 'bg-accent ring-black ring-1 text-white',
+								completed && 'bg-accent ring-black ring-1 color-white',
 								'flex items-center justify-center',
 								// completedQuantity === 0 && 'opacity-0',
 							)}
@@ -233,7 +233,7 @@ function ChecklistItem({
 					</SliderRoot>
 				</div>
 			</div>
-			<div className="flex flex-row justify-between gap-2 items-center text-xs text-gray-7">
+			<div className="flex flex-row justify-between gap-2 items-center text-xs color-gray-dark">
 				{subline && <div className="italic">{subline}</div>}
 				<span className="ml-auto">
 					{completedQuantity} / {computedQuantity}

@@ -44,7 +44,7 @@ export function TextWithMultipliedNumbers({
 									) as any
 								}
 							>
-								<span className="multiplied-number text-accent-dark font-bold flex-row inline-flex items-center gap-0.5">
+								<span className="multiplied-number color-accent-dark font-bold flex-row inline-flex items-center gap-0.5">
 									{fractionToText(parseFloat(fragment.trim()) * multiplier)}
 								</span>
 							</Tooltip>

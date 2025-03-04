@@ -190,7 +190,4 @@ const FieldArea = withClassName(
 	'div',
 	'flex flex-col gap-2 items-start w-full',
 );
-const FieldDescription = withClassName(
-	'div',
-	'text-xs italic text-gray-5 my-1',
-);
+const FieldDescription = withClassName('div', 'text-xs italic color-gray my-1');

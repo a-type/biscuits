@@ -37,7 +37,7 @@ export function AppPreviewNotice({}: AppPreviewNoticeProps) {
 	// this app is probably rendered inside a frame in the other app
 	return (
 		<div className="w-full bg-accent-light p-2 flex flex-row gap-3 items-center">
-			<p className="text-sm text-accent-dark flex-1">
+			<p className="text-sm color-accent-dark flex-1">
 				{`You're previewing this app.`}
 			</p>
 			<Button asChild>

@@ -325,7 +325,7 @@ function EmptyLine({ song }: { song: Song }) {
 	return (
 		<Button
 			color="unstyled"
-			className="py-2 italic text-gray-5 flex-shrink-0"
+			className="py-2 italic color-gray flex-shrink-0"
 			onClick={() => {
 				song.get('lines').push({
 					words: [{}],
@@ -423,7 +423,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 					}
 				}}
 				className={clsx(
-					'h-full p-1 border-none bg-gray-2 min-w-0px flex-shrink-0 focus:bg-gray-blend',
+					'h-full p-1 border-none bg-gray-light min-w-0px flex-shrink-0 focus:bg-gray-blend',
 					className,
 				)}
 				{...rest}

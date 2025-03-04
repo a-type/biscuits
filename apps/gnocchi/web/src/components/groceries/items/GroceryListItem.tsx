@@ -161,7 +161,7 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 						)}
 						<CollapsibleSimple
 							open={!!subline && !menuOpen && !isPurchased}
-							className="text-xs text-gray-6 italic pl-2 pr-1 self-stretch [grid-area:comment]"
+							className="text-xs color-gray-dark italic pl-2 pr-1 self-stretch [grid-area:comment]"
 						>
 							{subline}
 						</CollapsibleSimple>
@@ -199,7 +199,7 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 								content="Tap and hold to change category"
 								disableNext
 							>
-								<Icon name="grabby" className="text-gray-5" />
+								<Icon name="grabby" className="color-gray" />
 							</OnboardingTooltip>
 						</div>
 					</div>
@@ -207,7 +207,7 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 						<Button size="icon" color="ghost" className="p-1 flex-shrink-0">
 							<Icon
 								name="chevron"
-								className="[*[data-state=open]_&]:rotate-180deg text-gray-5 hover:text-gray-7"
+								className="[*[data-state=open]_&]:rotate-180deg color-gray hover:color-gray-dark"
 							/>
 						</Button>
 					</CollapsibleTrigger>
@@ -601,7 +601,7 @@ function RecentPurchaseHint({
 	return (
 		<div
 			className={clsx(
-				'text-xs text-gray-7 italic flex flex-row gap-1 items-center',
+				'text-xs color-gray-dark italic flex flex-row gap-1 items-center',
 				className,
 			)}
 		>

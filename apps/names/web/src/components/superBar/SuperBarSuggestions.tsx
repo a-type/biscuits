@@ -29,8 +29,8 @@ export function SuperBarSuggestions({ className }: SuperBarSuggestionsProps) {
 		if (!inputValue) {
 			return (
 				<div className={clsx('p-8 col gap-6', className)}>
-					<Icon name="profile" size={80} className="text-gray-5" />
-					<div className="text-gray-5 text-center text-lg">
+					<Icon name="profile" size={80} className="color-gray" />
+					<div className="color-gray text-center text-lg">
 						Add names to get started
 					</div>
 				</div>
@@ -39,8 +39,8 @@ export function SuperBarSuggestions({ className }: SuperBarSuggestionsProps) {
 
 		return (
 			<div className={clsx('p-8 col gap-6', className)}>
-				<Icon name="profile" size={80} className="text-gray-5" />
-				<div className="text-gray-5 text-center text-lg">No matches found</div>
+				<Icon name="profile" size={80} className="color-gray" />
+				<div className="color-gray text-center text-lg">No matches found</div>
 			</div>
 		);
 	}
@@ -78,11 +78,11 @@ function SuggestionGroup({
 	return (
 		<div
 			className={clsx(
-				'flex flex-col gap-2 repeated:(border-0 border-t border-gray-7 border-solid pt-md)',
+				'flex flex-col gap-2 repeated:(border-0 border-t border-gray-dark border-solid pt-md)',
 				className,
 			)}
 		>
-			<div className="text-xs uppercase text-gray-7 font-bold mt-1">
+			<div className="text-xs uppercase color-gray-dark font-bold mt-1">
 				{title}
 			</div>
 			{isRecents && <SuperBarTagFilter />}
@@ -254,7 +254,7 @@ function GeolocationMatch({
 const CardTitle = withClassName(
 	Card.Title,
 	'flex-row items-center gap-sm w-full rounded-none text-sm relative z-1',
-	'[:hover>&]:bg-gray-2',
+	'[:hover>&]:bg-gray-light',
 );
 
 const InlineCardContent = withClassName(

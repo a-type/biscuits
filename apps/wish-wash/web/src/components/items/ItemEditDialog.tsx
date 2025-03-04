@@ -53,7 +53,7 @@ export function ItemEditDialog({ list }: ItemEditDialogProps) {
 		>
 			<DialogContent onOpenAutoFocus={preventDefault}>
 				<DialogTitle>Edit item</DialogTitle>
-				<span className="text-xxs italic text-gray-5 pb-2">
+				<span className="text-xxs italic color-gray pb-2">
 					All fields save automatically
 				</span>
 				{item && <ItemEditor item={item} />}
@@ -286,7 +286,7 @@ function SingleLinkField({
 				autoFocus={autoFocus}
 			/>
 			{!!scanning && (
-				<span className="text-xs text-gray-7 pl-3">
+				<span className="text-xs color-gray-dark pl-3">
 					<Icon name="refresh" className="animate-spin w-10px h-10px" />{' '}
 					Scanning page...
 				</span>
@@ -295,7 +295,7 @@ function SingleLinkField({
 	);
 }
 
-const Label = withClassName('label', 'font-bold text-sm text-gray-7 py-1');
+const Label = withClassName('label', 'font-bold text-sm color-gray-dark py-1');
 
 function PriceRangeField({ item }: { item: Item }) {
 	const priceMinField = hooks.useField(item, 'priceMin');

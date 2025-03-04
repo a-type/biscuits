@@ -82,7 +82,7 @@ export function PersonNameSearchField({
 					/>
 				))}
 				{!matches.length && (
-					<Box className="text-gray-7 text-sm p-2">No matches</Box>
+					<Box className="color-gray-dark text-sm p-2">No matches</Box>
 				)}
 			</Popover.Content>
 		</Popover>
@@ -104,20 +104,20 @@ function PersonItem({
 			key={person.get('id')}
 			p="sm"
 			{...props}
-			className={clsx('rounded-sm', highlighted ? 'bg-gray-2' : '')}
+			className={clsx('rounded-sm', highlighted ? 'bg-gray-light' : '')}
 			d="col"
 			gap="xs"
 		>
 			<Box>{person.get('name')}</Box>
 			{note && (
-				<Box className="text-gray-7 text-sm" gap="sm" items="center">
+				<Box className="color-gray-dark text-sm" gap="sm" items="center">
 					<Icon name="note" />
 					{note}
 				</Box>
 			)}
 			{tags && (
 				<Suspense>
-					<Box className="text-gray-7 text-sm" gap="sm" items="center">
+					<Box className="color-gray-dark text-sm" gap="sm" items="center">
 						{tags.map((tag) => (
 							<TagDisplay key={tag} name={tag} className="text-xs" />
 						))}

@@ -27,7 +27,7 @@ export function RecipeNowPlayingLink({ recipe }: { recipe: Recipe }) {
 		<div className="flex flex-row items-center justify-between gap-2 pr-2">
 			<Link
 				to={makeRecipeLink(recipe, '')}
-				className="flex flex-row gap-2 items-center p-2 w-full overflow-hidden focus-visible:bg-gray-2 focus-visible:outline-none"
+				className="flex flex-row gap-2 items-center p-2 w-full overflow-hidden focus-visible:bg-gray-light focus-visible:outline-none"
 			>
 				<PieProgress value={progress} />
 				<div className="font-bold max-w-full text-ellipsis whitespace-nowrap text-sm overflow-hidden min-w-0">

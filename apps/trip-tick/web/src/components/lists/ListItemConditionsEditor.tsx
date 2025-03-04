@@ -110,7 +110,7 @@ function ConditionTypeLabel({
 					<DropdownMenuItemRightSlot>
 						<Icon
 							name="thermometer"
-							className="text-primary-dark theme-tomato"
+							className="color-primary-dark theme-tomato"
 						/>
 					</DropdownMenuItemRightSlot>
 				</>
@@ -122,7 +122,7 @@ function ConditionTypeLabel({
 					<DropdownMenuItemRightSlot>
 						<Icon
 							name="thermometer"
-							className="text-primary-dark theme-blueberry"
+							className="color-primary-dark theme-blueberry"
 						/>
 					</DropdownMenuItemRightSlot>
 				</>
@@ -173,7 +173,7 @@ function TemperatureConditionEditor({
 			<Icon
 				name="thermometer"
 				className={clsx(
-					'text-primary-dark',
+					'color-primary-dark',
 					`theme-${type === 'hot' ? 'tomato' : 'blueberry'}`,
 				)}
 			/>

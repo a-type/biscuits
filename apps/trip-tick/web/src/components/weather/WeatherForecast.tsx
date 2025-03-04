@@ -48,28 +48,28 @@ export function WeatherForecast({
 	return (
 		<CollapsibleRoot className={classNames('w-full', className)}>
 			<CollapsibleTrigger className="bg-transparent border-none flex flex-row items-center gap-1 flex-wrap p-2 w-full">
-				<Chip aria-label="High temperature" className="text-black">
+				<Chip aria-label="High temperature" className="color-black">
 					<Icon name="arrowUp" className="text-attention-dark" />
 					{toDisplay(data.high)}
 					<TemperatureUnit />
 				</Chip>
-				<Chip aria-label="Low temperature" className="text-black">
-					<Icon name="arrowDown" className="text-primary-dark" />
+				<Chip aria-label="Low temperature" className="color-black">
+					<Icon name="arrowDown" className="color-primary-dark" />
 					{toDisplay(data.low)}
 					<TemperatureUnit />
 				</Chip>
 				{data.willRain && (
-					<Chip className="text-black">
+					<Chip className="color-black">
 						<Raindrop /> Rain
 					</Chip>
 				)}
 				<Icon
 					name="arrowDown"
-					className="ml-auto [*[data-state=open]>&]:rotate-180 transition-transform text-black"
+					className="ml-auto [*[data-state=open]>&]:rotate-180 transition-transform color-black"
 				/>
 			</CollapsibleTrigger>
 			<CollapsibleContent>
-				<span className="text-gray-7 italic text-xs pl-2 py-1">
+				<span className="color-gray-dark italic text-xs pl-2 py-1">
 					Daily Forecast
 				</span>
 				<div className="flex flex-row gap-1 overflow-x-auto w-full min-w-0 py-2">
@@ -100,7 +100,7 @@ function DayForecast({ day }: { day: ResultOf<typeof forecastDay> }) {
 					{toDisplay(high)}
 				</div>
 				<div
-					className="text-primary-dark flex flex-row items-center"
+					className="color-primary-dark flex flex-row items-center"
 					aria-label="Low temperature"
 				>
 					<Icon name="arrowDown" />

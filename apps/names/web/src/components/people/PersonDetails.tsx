@@ -43,7 +43,7 @@ export function PersonDetails({ person, className }: PersonDetailsProps) {
 				className="text-xl"
 			/>
 			<Box d="col" items="stretch" gap>
-				<Box className="text-xs text-gray-7" items="center" gap="sm">
+				<Box className="text-xs color-gray-dark" items="center" gap="sm">
 					<Icon name="clock" /> Added {new Date(createdAt).toLocaleDateString()}{' '}
 					(
 					<RelativeTime value={createdAt} />)
@@ -57,13 +57,13 @@ export function PersonDetails({ person, className }: PersonDetailsProps) {
 				)}
 				<Location person={person} />
 				<Box gap="sm">
-					<Icon name="tag" className="text-gray-7 mt-1.5" />
+					<Icon name="tag" className="color-gray-dark mt-1.5" />
 					<Suspense>
 						<PersonTagEditor person={person} />
 					</Suspense>
 				</Box>
 				<Box gap="sm">
-					<Icon name="note" className="text-gray-7 mt-18px" />
+					<Icon name="note" className="color-gray-dark mt-18px" />
 					<NoteEditor person={person} className="flex-1" />
 				</Box>
 				<Divider />
@@ -132,7 +132,7 @@ function Location({ person }: { person: Person }) {
 
 	return (
 		<Box d="col" gap="sm">
-			<Box className="text-xs text-gray-7" items="start" gap="sm">
+			<Box className="text-xs color-gray-dark" items="start" gap="sm">
 				<Icon name="locate" />
 				<Box d="col" gap="sm" className="flex-1">
 					<LazyMapView
@@ -146,7 +146,7 @@ function Location({ person }: { person: Person }) {
 				</Button>
 			</Box>
 			{nearby && (
-				<Box className="text-xs text-gray-7" items="center" gap="sm">
+				<Box className="text-xs color-gray-dark" items="center" gap="sm">
 					<Icon name="location" /> Met nearby
 				</Box>
 			)}
@@ -158,7 +158,7 @@ function CreatedBy({ userId }: { userId: string }) {
 	const user = useUserInfo(userId);
 	if (!user) return null;
 	return (
-		<Box className="text-xs text-gray-7" items="center" gap="sm">
+		<Box className="text-xs color-gray-dark" items="center" gap="sm">
 			<Icon name="profile" /> Added by{' '}
 			<Avatar
 				popIn={false}

@@ -18,7 +18,7 @@ export function SuggestionGroup({
 }) {
 	return (
 		<div className={classNames('flex flex-col gap-2', className)} {...rest}>
-			<div className="text-xs uppercase text-gray-7 font-bold m2-1">
+			<div className="text-xs uppercase color-gray-dark font-bold m2-1">
 				{title}
 			</div>
 			<div className="flex flex-row gap-2 flex-wrap">
@@ -57,7 +57,7 @@ export const SuggestionItem = forwardRef<
 			color="default"
 			ref={ref}
 			className={classNames(
-				'rounded-full font-normal border-gray-5 max-w-100% overflow-hidden text-ellipsis flex flex-row',
+				'rounded-full font-normal border-gray max-w-100% overflow-hidden text-ellipsis flex flex-row',
 				'[&[aria-selected="true"]]:bg-primary-wash',
 				className,
 			)}

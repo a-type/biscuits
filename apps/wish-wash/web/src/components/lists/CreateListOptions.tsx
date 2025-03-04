@@ -139,5 +139,5 @@ export function CreateListOptions({
 
 const PremiumBadge = withClassName(
 	'div',
-	'text-xs font-bold text-accent-dark bg-accent-wash rounded-full py-1 px-4 border-accent-dark border-1 border-solid',
+	'text-xs font-bold color-accent-dark bg-accent-wash rounded-full py-1 px-4 border-accent-dark border-1 border-solid',
 );

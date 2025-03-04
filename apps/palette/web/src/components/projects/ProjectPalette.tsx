@@ -45,7 +45,7 @@ export function ProjectPalette({ project, className }: ProjectPaletteProps) {
 				<H3>Saved Colors</H3>
 			</OnboardingTooltip>
 			{!sorted.length && (
-				<span className="text-xs text-gray-5 italic m-auto">
+				<span className="text-xs color-gray italic m-auto">
 					Click the image to select colors
 				</span>
 			)}

@@ -122,7 +122,7 @@ function FoodDetailView({
 						</Row>
 					)}
 					{!!frozenAt && (
-						<Row className="text-accent-dark">
+						<Row className="color-accent-dark">
 							<Icon name="snowflake" />
 							<div className="text-xs italic">
 								Frozen <RelativeTime value={frozenAt} />
@@ -213,7 +213,7 @@ function FoodDetailView({
 					/>
 					<span>Staple food</span>
 				</label>
-				<span className="text-xs italic color-gray-7">
+				<span className="text-xs italic color-gray-dark">
 					Staples are automatically added to the list when they run out
 				</span>
 			</Box>

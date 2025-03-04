@@ -137,7 +137,7 @@ function RecipeOverviewContent({ recipe }: { recipe: Recipe }) {
 											Serves{' '}
 											<span
 												className={classNames({
-													'font-bold text-accent-dark': multiplier !== 1,
+													'font-bold color-accent-dark': multiplier !== 1,
 												})}
 											>
 												{multipliedServings.toLocaleString()}

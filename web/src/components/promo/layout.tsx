@@ -22,7 +22,7 @@ const ItemText = withClassName('span', 'block relative');
 
 export const Description = withClassName(
 	'p',
-	'font-light text-xl my-6 text-white',
+	'font-light text-xl my-6 color-white',
 );
 
 export const Section = forwardRef<
@@ -95,7 +95,7 @@ export const FeatureSection = ({
 					{item.premium && (
 						<Link
 							to="/join"
-							className="ml-auto relative -top-2 text-xs bg-primary-dark text-white px-3 py-1 rounded-full font-bold"
+							className="ml-auto relative -top-2 text-xs bg-primary-dark color-white px-3 py-1 rounded-full font-bold"
 						>
 							Premium feature
 						</Link>

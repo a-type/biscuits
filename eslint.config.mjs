@@ -34,6 +34,7 @@ export default tseslint.config(
 				},
 			],
 			'no-empty-pattern': 'off',
+			'no-extra-boolean-cast': 'off'
 		},
 	},
 );

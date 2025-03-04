@@ -65,7 +65,7 @@ export function IngredientTextRenderer({
 						) as any
 					}
 				>
-					<span className="text-accent-dark font-bold">
+					<span className="color-accent-dark font-bold">
 						{fractionToText(finalQuantity)}
 					</span>
 				</Tooltip>{' '}
