@@ -22,7 +22,7 @@
 	"scripts": {
 		"build": "tsc",
 		"//dev": "tsc -w",
-		"migrate-down": "cross-env DATABASE_FILE=../../server/database.sqlite node ./scripts/migrateDown.mjs"
+		"migrate-down": "pnpm build && cross-env DATABASE_FILE=../../server/database.sqlite node ./scripts/migrateDown.mjs"
 	},
 	"type": "module",
 	"dependencies": {

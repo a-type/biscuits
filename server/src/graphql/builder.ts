@@ -1,6 +1,7 @@
 import { AppId } from '@biscuits/apps';
 import {
 	ChangelogItem,
+	DomainRoute,
 	Food,
 	FoodCategory,
 	Plan,
@@ -71,6 +72,15 @@ export const builder = new SchemaBuilder<{
 		ChangelogItem: ChangelogItem & { __typename: 'ChangelogItem' };
 		SetUserPreferenceResult: { userId: string; key: string };
 		UserPreference: { userId: string; key: string; value: any };
+		DomainRoute: DomainRoute & { __typename: 'DomainRoute' };
+		CreateDomainRouteResult: {
+			domainRoute: DomainRoute & { __typename: 'DomainRoute' };
+		};
+		DnsRecord: {
+			type: string;
+			name: string;
+			value: string;
+		};
 
 		// Gnocchi
 		Food: Food & { __typename: 'Food' };
@@ -163,6 +173,15 @@ export const builder = new SchemaBuilder<{
 			value: any;
 		};
 		UpdateUserInfoInput: { name?: string | null };
+		CreateDomainRouteInput: {
+			appId: string;
+			resourceId: string;
+			domain: string;
+		};
+		GetDomainRouteByAppInput: {
+			appId: string;
+			resourceId: string;
+		};
 
 		// Gnocchi
 		AssignFoodCategoryInput: {

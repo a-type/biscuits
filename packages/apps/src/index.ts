@@ -12,6 +12,7 @@ export type AppManifest<Id extends string> = {
 	paidFeatures: PaidFeature[] | readonly PaidFeature[];
 	prerelease?: boolean;
 	theme: string;
+	domainRoutes?: (resourceId: string) => string;
 };
 
 export type PaidFeature = {
@@ -195,6 +196,7 @@ export const apps = [
 		url: 'https://post.biscuits.club',
 		prerelease: true,
 		theme: 'blueberry',
+		domainRoutes: (notebookId: string) => `/post/hub/${notebookId}`,
 	},
 ] as const;
 
@@ -207,7 +209,7 @@ export function isValidAppId(appId: string): appId is AppId {
 
 export const appsById = Object.fromEntries(
 	apps.map((app) => [app.id, app]),
-) as Record<AppId, (typeof apps)[number]>;
+) as Record<AppId, AppManifest<AppId>>;
 
 export function getAppUrl(app: AppManifest<AppId>) {
 	if (import.meta.env.DEV) {

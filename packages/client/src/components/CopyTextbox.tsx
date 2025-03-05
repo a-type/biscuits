@@ -1,10 +1,16 @@
 import { Box, BoxProps, Button, Icon, Input, clsx } from '@a-type/ui';
 
-export interface UrlShareProps extends BoxProps {
+export interface CopyTextboxProps extends BoxProps {
 	value: string;
+	hideShare?: boolean;
 }
 
-export function UrlShare({ value, className, ...rest }: UrlShareProps) {
+export function CopyTextbox({
+	value,
+	className,
+	hideShare,
+	...rest
+}: CopyTextboxProps) {
 	const copy = () => {
 		navigator.clipboard.writeText(value);
 	};
@@ -24,9 +30,11 @@ export function UrlShare({ value, className, ...rest }: UrlShareProps) {
 				<Button size="icon" onClick={copy}>
 					<Icon name="copy" />
 				</Button>
-				<Button size="icon" onClick={share} color="primary">
-					<Icon name="placeholder" />
-				</Button>
+				{!hideShare && (
+					<Button size="icon" onClick={share} color="primary">
+						<Icon name="share" />
+					</Button>
+				)}
 			</Box>
 		</Box>
 	);

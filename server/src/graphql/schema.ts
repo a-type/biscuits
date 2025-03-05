@@ -1,5 +1,6 @@
 import { builder } from './builder.js';
 import './types/changelog.js';
+import './types/domainRoutes.js';
 import './types/plan.js';
 import './types/planInvitation.js';
 import './types/planLibraryInfo.js';

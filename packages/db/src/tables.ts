@@ -16,6 +16,7 @@ export interface Database {
 	PushSubscription: PushSubscriptionTable;
 	ChangelogItem: ChangelogItemTable;
 	UserUsageLimit: UserUsageLimitTable;
+	DomainRoute: DomainRouteTable;
 
 	// app-specific data
 	Food: FoodTable;
@@ -377,3 +378,23 @@ export interface RichTextNode {
 export type PublishedPost = Selectable<PublishedPostTable>;
 export type NewPublishedPost = Insertable<PublishedPostTable>;
 export type PublishedPostUpdate = Updateable<PublishedPostTable>;
+
+export interface DomainRouteTable {
+	id: string;
+	createdAt: CreatedAt;
+	updatedAt: UpdatedAt;
+
+	domain: string;
+	dnsVerifiedAt: DateColumnOptional;
+
+	// for authorization
+	planId: string;
+
+	// routes are decided dynamically based on the app and resource routed to.
+	appId: string;
+	resourceId: string;
+}
+
+export type DomainRoute = Selectable<DomainRouteTable>;
+export type NewDomainRoute = Insertable<DomainRouteTable>;
+export type DomainRouteUpdate = Updateable<DomainRouteTable>;

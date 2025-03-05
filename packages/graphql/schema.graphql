@@ -58,6 +58,16 @@ input CreateChangelogItemInput {
   title: String!
 }
 
+input CreateDomainRouteInput {
+  appId: String!
+  domain: String!
+  resourceId: String!
+}
+
+type CreateDomainRouteResult {
+  domainRoute: DomainRoute!
+}
+
 input CreatePlanInvitationInput {
   """The email address of the person to invite"""
   email: String!
@@ -82,6 +92,34 @@ type DeleteCategoryResult {
   categories: [FoodCategory!]!
 }
 
+type DnsRecord {
+  name: String!
+  type: String!
+  value: String!
+}
+
+type DomainRoute {
+  appId: String!
+  createdAt: DateTime!
+  domain: String!
+  id: ID!
+  mainRecord: DnsRecord!
+  note: String
+  resourceId: String!
+  route: String!
+  status: DomainRouteStatus!
+  tlsRecord: DnsRecord
+  updatedAt: DateTime
+}
+
+enum DomainRouteStatus {
+  ERROR
+  MAIN_RECORD_SETUP
+  READY
+  TLS_SETUP
+  UNPROVISIONED
+}
+
 """Information about a food in Gnocchi"""
 type Food implements Node {
   alternateNames: [String!]!
@@ -103,6 +141,11 @@ type GeographicResult {
   id: String!
   latitude: Float!
   longitude: Float!
+}
+
+input GetDomainRouteByAppInput {
+  appId: String!
+  resourceId: String!
 }
 
 """
@@ -136,6 +179,7 @@ type Mutation {
   confirmPurchases(purchaseIds: [ID!]!): Boolean!
   createCategory(input: CreateCategoryInput!): CreateCategoryResult!
   createChangelogItem(input: CreateChangelogItemInput!): ChangelogItem!
+  createDomainRoute(input: CreateDomainRouteInput!): CreateDomainRouteResult!
   createPlanInvitation(input: CreatePlanInvitationInput!): CreatePlanInvitationResult!
   createPushSubscription(input: CreatePushSubscriptionInput!): Boolean!
   deleteCategory(categoryId: ID!): DeleteCategoryResult!
@@ -143,6 +187,7 @@ type Mutation {
     """The ID of the changelog item to delete"""
     id: String!
   ): ChangelogItem!
+  deleteDomainRoute(id: ID!): String!
   deletePlan(id: ID): Plan!
   deletePushSubscription(endpoint: String!): Boolean!
   kickMember(userId: ID!): KickMemberResult!
@@ -152,6 +197,11 @@ type Mutation {
   publishWishlist(input: PublishWishlistInput!): PublishedWishlist!
   purchasePublicItem(input: PurchasePublicItemInput!): Boolean!
   removeFoodName(foodId: ID!, name: String!): Food!
+
+  """
+  Reprovision the TLS certificate for a domain route if it was lost somehow
+  """
+  reprovisionDomainRoute(id: ID!): DomainRoute!
   resetSync(access: String!, app: String!, planId: ID): ResetSyncResult!
   setFeatureFlag(enabled: Boolean!, flagName: String!, planId: ID!): Plan!
   setSendEmailUpdates(value: Boolean!): User!
@@ -396,6 +446,7 @@ type Query {
     """The ID of the app to fetch the changelog for"""
     appId: String!
   ): [ChangelogItem!]!
+  domainRoute(byApp: GetDomainRouteByAppInput, validate: Boolean): DomainRoute
   food(id: ID, name: String): Food
   foodCategories: [FoodCategory!]!
   foods(after: ID, before: ID, first: Int, last: Int, startsWith: String): QueryFoodsConnection!

@@ -1,67 +1,67 @@
 {
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "type": "npm",
-      "script": "dev",
-      "problemMatcher": [],
-      "label": "Dev",
-      "detail": "run-p dev:*",
-      "runOptions": {
-        "reevaluateOnRerun": true
-      }
-    },
-    {
-      "type": "npm",
-      "script": "write-schema",
-      "problemMatcher": [],
-      "label": "npm: write-schema",
-      "detail": "env-cmd tsx watch --conditions=development ./scripts/writeSchema.ts",
-      "runOptions": {
-        "runOn": "folderOpen",
-        "instanceLimit": 1,
-        "reevaluateOnRerun": true
-      },
-      "hide": true,
-      "isBackground": true,
-      "presentation": {
-        "echo": true,
-        "reveal": "never",
-        "focus": false,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      }
-    },
-    {
-      "type": "npm",
-      "script": "create-app",
-      "problemMatcher": [],
-      "label": "Create App",
-      "detail": "cd .. && pnpm run create-app",
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": true,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      }
-    },
-    {
-      "type": "npm",
-      "script": "Create Migration",
-      "problemMatcher": [],
-      "label": "npm: create-migration",
-      "detail": "cd .. && pnpm run create-migration",
-      "presentation": {
-        "echo": true,
-        "reveal": "always",
-        "focus": true,
-        "panel": "shared",
-        "showReuseMessage": true,
-        "clear": false
-      }
-    }
-  ]
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "dev",
+			"problemMatcher": [],
+			"label": "Dev",
+			"detail": "run-p dev:*",
+			"runOptions": {
+				"reevaluateOnRerun": true
+			}
+		},
+		{
+			"type": "npm",
+			"script": "write-schema",
+			"problemMatcher": [],
+			"label": "npm: write-schema",
+			"detail": "env-cmd tsx watch --conditions=development ./scripts/writeSchema.ts",
+			"runOptions": {
+				"runOn": "folderOpen",
+				"instanceLimit": 1,
+				"reevaluateOnRerun": true
+			},
+			"hide": true,
+			"isBackground": true,
+			"presentation": {
+				"echo": true,
+				"reveal": "never",
+				"focus": false,
+				"panel": "shared",
+				"showReuseMessage": true,
+				"clear": false
+			}
+		},
+		{
+			"type": "npm",
+			"script": "create-app",
+			"problemMatcher": [],
+			"label": "Create App",
+			"detail": "cd .. && pnpm run create-app",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "shared",
+				"showReuseMessage": true,
+				"clear": false
+			}
+		},
+		{
+			"type": "npm",
+			"script": "create-migration",
+			"problemMatcher": [],
+			"label": "Create Migration",
+			"detail": "cd .. && pnpm run create-migration",
+			"presentation": {
+				"echo": true,
+				"reveal": "always",
+				"focus": true,
+				"panel": "shared",
+				"showReuseMessage": true,
+				"clear": false
+			}
+		}
+	]
 }

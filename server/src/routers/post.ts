@@ -23,7 +23,7 @@ postRouter.get('/hub/:notebookId', async (ctx) => {
 
 	const notebook = await db
 		.selectFrom('PublishedNotebook')
-		.where('id', '=', notebookId)
+		.where('PublishedNotebook.id', '=', notebookId)
 		.innerJoin('User', 'PublishedNotebook.publishedBy', 'User.id')
 		.selectAll('PublishedNotebook')
 		.select([
@@ -51,7 +51,7 @@ postRouter.get('/hub/:notebookId', async (ctx) => {
 			'User.imageUrl as authorAvatarUrl',
 		])
 		.limit(10)
-		.orderBy('createdAt', 'desc')
+		.orderBy('PublishedPost.createdAt', 'desc')
 		.execute();
 
 	const indexTemplate = await readFile(

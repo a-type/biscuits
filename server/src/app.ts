@@ -3,7 +3,12 @@ import { Hono } from 'hono';
 import { cors } from 'hono/cors';
 import { logger } from 'hono/logger';
 import { join } from 'path';
-import { ALLOWED_ORIGINS } from './config/cors.js';
+import {
+	ALLOWED_HEADERS,
+	ALLOWED_ORIGINS,
+	EXPOSED_HEADERS,
+} from './config/cors.js';
+import { domainRoutesMiddleware } from './middleware/domainRoutes.js';
 import { handleError } from './middleware/errors.js';
 import { authRouter } from './routers/auth.js';
 import { gnocchiRouter } from './routers/gnocchi.js';
@@ -15,28 +20,16 @@ import { wishWashRouter } from './routers/wishWash.js';
 
 export const app = new Hono()
 	.onError(handleError)
+	.use(logger())
+	.use(domainRoutesMiddleware)
 	.use(
 		cors({
 			origin: ALLOWED_ORIGINS,
 			credentials: true,
-			allowHeaders: [
-				'Authorization',
-				'Content-Type',
-				'X-Request-Id',
-				'X-Csrf-Token',
-			],
-			exposeHeaders: [
-				'Content-Type',
-				'Content-Length',
-				'X-Request-Id',
-				'Set-Cookie',
-				'X-Biscuits-Error',
-				'X-Biscuits-Message',
-				'X-Csrf-Token',
-			],
+			allowHeaders: ALLOWED_HEADERS,
+			exposeHeaders: EXPOSED_HEADERS,
 		}),
 	)
-	.use(logger())
 	.get('/', (ctx) => ctx.text('Hello, world!'))
 	.route('/auth', authRouter)
 	.route('/verdant', verdantRouter)

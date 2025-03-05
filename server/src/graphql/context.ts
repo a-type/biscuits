@@ -4,6 +4,7 @@ import { Server as VerdantServer } from '@verdant-web/server';
 import { Context } from 'hono';
 import Stripe from 'stripe';
 import { Env } from '../config/hono.js';
+import { FlyService } from '../services/fly.js';
 import { createDataloaders } from './dataloaders/index.js';
 
 export type GQLContext = {
@@ -16,6 +17,7 @@ export type GQLContext = {
 		applyHeaders: Headers;
 	};
 	stripe: Stripe;
+	fly: FlyService;
 	dataloaders: ReturnType<typeof createDataloaders>;
 	reqCtx: Context<Env>;
 };
