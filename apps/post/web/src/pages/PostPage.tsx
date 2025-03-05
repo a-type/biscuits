@@ -25,8 +25,8 @@ export function PostPage({}: PostPageProps) {
 					<PostPublishControl post={post} />
 				</Box>
 				<PostCoverImageEditor post={post} className="w-full h-20vh" />
-				<PostTitleEditor post={post} className="text-xl ml-[14px]" />
-				<Box className="ml-[36px]" d="col" items="start">
+				<PostTitleEditor post={post} className="text-2xl -mx-4" />
+				<Box d="col" items="start" className="px-2">
 					<PostCreatedTime post={post} className="text-xs color-gray-dark" />
 					{/* <PostNotebookEditor post={post} /> */}
 				</Box>

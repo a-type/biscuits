@@ -2,7 +2,7 @@ import { hooks } from '@/hooks.js';
 import { getBodySnippet } from '@/utils/getBodySnippet.js';
 import { getTitleSlug } from '@/utils/getTitleSlug.js';
 import { Box, Button, Dialog, Icon } from '@a-type/ui';
-import { UrlShare } from '@biscuits/client';
+import { CopyTextbox } from '@biscuits/client';
 import {
 	graphql,
 	readFragment,
@@ -121,7 +121,7 @@ export function PostPublishControl({ post }: PostPublishControlProps) {
 							Your post was last published to the internet on{' '}
 							{new Date(publishedPost!.publishedAt).toDateString()}.
 						</div>
-						<UrlShare value={publishedPost!.url} />
+						<CopyTextbox value={publishedPost!.url} />
 					</Box>
 				)}
 				{!isPublished && (

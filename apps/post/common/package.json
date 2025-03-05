@@ -17,6 +17,7 @@
 		"@tiptap/core": "catalog:",
 		"@tiptap/starter-kit": "catalog:",
 		"@tiptap/extension-link": "catalog:",
-		"@tiptap/extension-typography": "catalog:"
+		"@tiptap/extension-typography": "catalog:",
+		"@tiptap/extension-highlight": "2.11.5"
 	}
 }
