@@ -43,14 +43,18 @@ export function NotebookDetailsEditor({
 				<ImageUploader.Root
 					value={icon?.url ?? null}
 					onChange={(file) => notebook.set('icon', file)}
-					className="w-64px h-64px"
+					className="w-80px h-80px overflow-visible"
 				>
-					<ImageUploader.Display />
-					<ImageUploader.EmptyControls className="bg-wash">
+					<ImageUploader.Display className="rounded-md" />
+					<ImageUploader.EmptyControls className="bg-wash rounded-md">
 						<ImageUploader.FileButton className="w-full h-full items-center justify-center">
 							<Icon name="upload" />
 						</ImageUploader.FileButton>
 					</ImageUploader.EmptyControls>
+					<ImageUploader.RemoveButton
+						className="-top-2 -right-2 bg-overlay"
+						color="ghost"
+					/>
 				</ImageUploader.Root>
 				<EditableText
 					value={name}

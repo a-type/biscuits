@@ -41,11 +41,17 @@ export function PostsList({ className, notebookId }: PostsListProps) {
 }
 
 function PostsListItem({ item }: { item: Post }) {
-	const { title, createdAt, body, id } = hooks.useWatch(item);
+	const { title, createdAt, body, id, coverImage } = hooks.useWatch(item);
 	const snippet = getBodySnippet(body);
+	hooks.useWatch(coverImage);
 
 	return (
 		<Card className="min-h-10vh">
+			{coverImage?.url && (
+				<Card.Image>
+					<img src={coverImage.url} className="w-full h-full object-cover" />
+				</Card.Image>
+			)}
 			<Card.Main asChild>
 				<Link to={`/posts/${id}`}>
 					<Card.Title>{title}</Card.Title>
