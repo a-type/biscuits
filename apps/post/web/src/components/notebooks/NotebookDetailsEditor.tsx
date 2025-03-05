@@ -1,5 +1,11 @@
 import { hooks } from '@/hooks.js';
-import { Box, EditableText, Icon, ImageUploader } from '@a-type/ui';
+import {
+	Box,
+	EditableText,
+	ErrorBoundary,
+	Icon,
+	ImageUploader,
+} from '@a-type/ui';
 import { Notebook } from '@post.biscuits/verdant';
 import { NotebookPublishControl } from './NotebookPublishControl.jsx';
 
@@ -26,7 +32,9 @@ export function NotebookDetailsEditor({
 				)}
 			</div>
 			<Box gap="sm" className="absolute top-0 right-0 z-11" p>
-				<NotebookPublishControl notebook={notebook} size="small" />
+				<ErrorBoundary fallback={null}>
+					<NotebookPublishControl notebook={notebook} size="small" />
+				</ErrorBoundary>
 				<ImageUploader.Root
 					value={null}
 					onChange={(file) => notebook.set('coverImage', file)}

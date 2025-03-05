@@ -3,7 +3,7 @@ import { PostEditor } from '@/components/posts/PostEditor.jsx';
 import { PostPublishControl } from '@/components/posts/PostPublishControl.jsx';
 import { PostTitleEditor } from '@/components/posts/PostTitleEditor.jsx';
 import { hooks } from '@/hooks.js';
-import { Box, Button, Icon } from '@a-type/ui';
+import { Box, Button, ErrorBoundary, Icon } from '@a-type/ui';
 import { Link, useParams } from '@verdant-web/react-router';
 import { PostCreatedTime } from './PostCreatedTime.jsx';
 
@@ -22,7 +22,9 @@ export function PostPage({}: PostPageProps) {
 			<Box d="col" gap container className="max-w-650px w-full mx-auto flex-1">
 				<Box d="row" justify="between" p="sm">
 					<HomeButton notebookId={post.get('notebookId')} />
-					<PostPublishControl post={post} />
+					<ErrorBoundary fallback={null}>
+						<PostPublishControl post={post} />
+					</ErrorBoundary>
 				</Box>
 				<PostCoverImageEditor post={post} className="w-full h-20vh" />
 				<PostTitleEditor post={post} className="text-2xl -mx-4" />
