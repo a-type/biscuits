@@ -91,7 +91,7 @@ function RecipeOverviewContent({ recipe }: { recipe: Recipe }) {
 		<>
 			<div id="pageTop" className="w-0 h-0" />
 			<HeaderBar backUrl="/recipes">
-				<CookingActionBar recipe={recipe} />
+				<CookingActionBar recipe={recipe} className="flex-1" />
 			</HeaderBar>
 			<OnboardingBanner onboarding={saveHubRecipeOnboarding} step="recipe">
 				<H2>This is your copy!</H2>

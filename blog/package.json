@@ -12,7 +12,9 @@
 	"devDependencies": {
 		"typescript": "catalog:",
 		"unocss": "catalog:",
-		"@unocss/transformer-variant-group": "catalog:"
+		"@unocss/transformer-variant-group": "catalog:",
+		"@unocss/astro": "66.0.0",
+		"@unocss/reset": "66.0.0"
 	},
 	"dependencies": {
 		"@a-type/ui": "catalog:",
@@ -22,8 +24,6 @@
 		"@astrojs/sitemap": "^3.2.1",
 		"@biscuits/client": "workspace:*",
 		"@biscuits/graphql": "workspace:*",
-		"@unocss/astro": "^0.65.1",
-		"@unocss/reset": "^0.65.1",
 		"astro": "^5.0.5"
 	}
 }

@@ -39,11 +39,12 @@ import { RecipeViewerEditButton } from '../viewer/RecipeViewerEditButton.jsx';
 
 export interface CookingActionBarProps {
 	recipe: Recipe;
+	className?: string;
 }
 
-export function CookingActionBar({ recipe }: CookingActionBarProps) {
+export function CookingActionBar({ recipe, ...rest }: CookingActionBarProps) {
 	return (
-		<ActionBar>
+		<ActionBar {...rest}>
 			<RecipePinToggle recipe={recipe} className="mr-2" />
 			<CookingPeople recipeId={recipe.get('id')} />
 			<AddChefsAction />

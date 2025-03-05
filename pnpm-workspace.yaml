@@ -7,11 +7,10 @@ packages:
   - 'cdk'
 
 catalog:
-  '@a-type/ui': 1.7.5
+  '@a-type/ui': 1.7.6
   '@a-type/utils': 1.1.4
   '@originjs/vite-plugin-commonjs': 1.0.3
   '@react-spring/web': 9.7.5
-  '@unocss/transformer-variant-group': ^0.65.2
   '@verdant-web/cli': 4.8.2
   '@verdant-web/react': 40.2.4
   '@verdant-web/react-router': 0.7.2
@@ -24,7 +23,8 @@ catalog:
   react: 19.0.0
   react-dom: 19.0.0
   typescript: 5.7.2
-  unocss: ^0.65.2
+  unocss: 66.0.0
+  '@unocss/transformer-variant-group': 66.0.0
   valtio: ^2.1.2
   vite: ^6.0.3
   vite-plugin-pwa: ^0.21.1
