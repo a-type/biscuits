@@ -51,7 +51,7 @@ export function DomainRouteView({ resourceId }: DomainRouteViewProps) {
 		onCompleted: async (data) => {
 			// auto-fix if cert was not provisioned
 			const route = data?.domainRoute;
-			if (route && route.status === 'Unprovisioned') {
+			if (route && route.status === 'UNPROVISIONED') {
 				console.warn(`Reprovisioning domain ${route.domain}`);
 				await reprovision({
 					variables: { id: route.id },

@@ -86,8 +86,13 @@ export function DomainRouteValidation({
 			:	<>
 					<H3>Add your DNS record for {data?.domainRoute?.domain ?? '...'}</H3>
 					<P>To validate your domain, add the following DNS records:</P>
-					<DnsRecord {...tlsRecord} verified={status === 'MAIN_RECORD_SETUP'} />
-					<DnsRecord {...mainRecord} verified={status === 'READY'} />
+					{tlsRecord && (
+						<DnsRecord
+							{...tlsRecord}
+							verified={status === 'MAIN_RECORD_SETUP'}
+						/>
+					)}
+					{mainRecord && <DnsRecord {...mainRecord} />}
 					<Box d="col" gap items="start">
 						{note && <P>{note}</P>}
 						<P>
