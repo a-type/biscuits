@@ -1,13 +1,11 @@
 import { Icon } from '@/components/icons/Icon.jsx';
-import { PersonSelect } from '@/components/sync/people/PersonSelect.jsx';
-import { hooks } from '@/stores/groceries/index.js';
-import { Recipe } from '@gnocchi.biscuits/verdant';
-// @ts-ignore
 import { InstructionsContext } from '@/components/recipes/editor/InstructionsContext.jsx';
 import {
 	isActiveCookingSession,
 	useCookSessionAction,
 } from '@/components/recipes/hooks.js';
+import { PersonSelect } from '@/components/sync/people/PersonSelect.jsx';
+import { hooks } from '@/stores/groceries/index.js';
 import {
 	Button,
 	Checkbox,
@@ -20,6 +18,7 @@ import {
 	useToggle,
 } from '@a-type/ui';
 import { useHasServerAccess } from '@biscuits/client';
+import { Recipe } from '@gnocchi.biscuits/verdant';
 import {
 	NodeViewContent,
 	NodeViewWrapper,
@@ -42,7 +41,7 @@ import {
 import { IncludeSubRecipe } from './IncludeSubRecipe.jsx';
 
 export interface InstructionStepAttributes {
-	id: string;
+	id?: string;
 	note?: string;
 	subRecipeId?: string;
 }
@@ -90,14 +89,15 @@ export function InstructionStepNodeView({
 		: null;
 	hooks.useWatch(maybeAssignments);
 
-	const completed = maybeCompletedSteps?.has(id);
+	const completed = id && maybeCompletedSteps?.has(id);
 
 	const sessionAction = useCookSessionAction(maybeRecipe || null);
 
-	const assignedPersonId = maybeAssignments?.get(id) ?? null;
+	const assignedPersonId = id ? maybeAssignments?.get(id) ?? null : null;
 
 	const assignPersonId = useCallback(
 		(personId: string | null) => {
+			if (!id) return;
 			if (!maybeAssignments) {
 				if (maybeRecipe && personId) {
 					maybeRecipe.set('session', {
@@ -117,7 +117,7 @@ export function InstructionStepNodeView({
 				}
 			});
 		},
-		[maybeAssignments, id],
+		[maybeAssignments, id, maybeRecipe, sessionAction],
 	);
 
 	const isAssignedToMe = assignedPersonId === self.id;
@@ -231,7 +231,7 @@ export function InstructionStepNodeView({
 						contentEditable={false}
 					>
 						<Checkbox
-							checked={!isEditing && completed}
+							checked={!isEditing && !!completed}
 							contentEditable={false}
 							onCheckedChange={(checked) => {
 								if (!id) {

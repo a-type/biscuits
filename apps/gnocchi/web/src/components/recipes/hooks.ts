@@ -1,16 +1,11 @@
 import { SESSION_TIMEOUT } from '@/components/recipes/constants.js';
 import { hooks } from '@/stores/groceries/index.js';
 import { assert } from '@a-type/utils';
-import {
-	ObjectEntity,
-	Recipe,
-	RecipeDestructured,
-	RecipeSession,
-} from '@gnocchi.biscuits/verdant';
+import { Recipe, RecipeSession } from '@gnocchi.biscuits/verdant';
 import Link from '@tiptap/extension-link';
-import { AnyExtension, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import { useCallback, useEffect, useRef } from 'react';
+import { useSyncedEditor } from '@verdant-web/tiptap/react';
+import { useCallback, useEffect } from 'react';
 import { createTiptapExtensions } from './editor/tiptapExtensions.js';
 
 export function useRecipeFromSlugUrl(url: string) {
@@ -84,105 +79,26 @@ export function useSyncedInstructionsEditor({
 	readonly?: boolean;
 	useBasicEditor?: boolean;
 }) {
-	return useSyncedEditor(
-		recipe,
-		'instructions',
-		readonly,
-		createTiptapExtensions(recipe, useBasicEditor),
-	);
+	return useSyncedEditor(recipe, 'instructions', {
+		editorOptions: {
+			editable: !readonly,
+			extensions: createTiptapExtensions(recipe, useBasicEditor),
+		},
+	});
 }
 
 export function useSyncedPreludeEditor(recipe: Recipe, readonly = false) {
-	return useSyncedEditor(recipe, 'prelude', readonly, [StarterKit, Link]);
-}
-
-function useSyncedEditor(
-	recipe: Recipe,
-	fieldName: keyof RecipeDestructured,
-	readonly: boolean,
-	extensions: AnyExtension[],
-) {
-	const live = hooks.useWatch(recipe);
-	const field = live[fieldName] as ObjectEntity<any, any>;
-	const updatingRef = useRef(false);
-	const update = useCallback(
-		(editor: any) => {
-			if (updatingRef.current) {
-				return;
-			}
-
-			const newData = editor.getJSON();
-			const value = recipe.get(fieldName) as ObjectEntity<any, any> | null;
-			if (!value) {
-				recipe.set(fieldName, newData);
-			} else {
-				value.update(newData, {
-					merge: false,
-					replaceSubObjects: false,
-				});
-			}
-		},
-		[recipe, fieldName],
-	);
-
-	const editor = useEditor(
-		{
-			extensions,
-			content: ensureDocShape(field?.getSnapshot()),
+	return useSyncedEditor(recipe, 'prelude', {
+		editorOptions: {
 			editable: !readonly,
-			onUpdate: ({ editor }) => {
-				update(editor);
-			},
+			extensions: [
+				StarterKit.configure({ history: false }),
+				Link.configure({
+					openOnClick: 'whenNotEditable',
+				}),
+			],
 		},
-		[field, update],
-	);
-
-	useEffect(() => {
-		if (editor && !editor.isDestroyed && field) {
-			updatingRef.current = true;
-			const { from, to } = editor.state.selection;
-			editor.commands.setContent(ensureDocShape(field.getSnapshot()), false);
-			editor.commands.setTextSelection({ from, to });
-			updatingRef.current = false;
-		}
-
-		return field?.subscribe('changeDeep', (target, info) => {
-			if (!info.isLocal || target === field) {
-				updatingRef.current = true;
-				if (editor) {
-					const { from, to } = editor.state.selection;
-					editor.commands.setContent(
-						ensureDocShape(field.getSnapshot()),
-						false,
-					);
-					editor.commands?.setTextSelection({ from, to });
-				}
-				updatingRef.current = false;
-			}
-		});
-	}, [field, editor]);
-
-	return editor;
-}
-
-function ensureDocShape(json: any) {
-	if (!json || !json.type) {
-		return {
-			type: 'doc',
-			content: [],
-		};
-	}
-	for (const node of json.content) {
-		// since the schema doesn't enforce this shape but it's
-		// needed for the editor to work, we'll ensure it here
-		if (node.type === 'step' && !node.content) {
-			node.content = [];
-		} else if (node.type === 'step') {
-			// remove undefined nodes
-			node.content = node.content.filter((n: any) => !!n);
-		}
-	}
-	return json;
+	});
 }
 
 /**
@@ -191,11 +107,17 @@ function ensureDocShape(json: any) {
  */
 export function useWatchChanges(recipe: Recipe) {
 	const { ingredients, instructions, prelude } = hooks.useWatch(recipe);
+	const client = hooks.useClient();
 
 	useEffect(() => {
 		const unsubs = new Array<() => void>();
 		const updateTime = () => {
-			recipe.set('updatedAt', Date.now());
+			client
+				.batch({ undoable: false })
+				.run(() => {
+					recipe.set('updatedAt', Date.now());
+				})
+				.commit();
 		};
 		unsubs.push(ingredients.subscribe('changeDeep', updateTime));
 		unsubs.push(instructions.subscribe('changeDeep', updateTime));
@@ -203,7 +125,7 @@ export function useWatchChanges(recipe: Recipe) {
 		return () => {
 			unsubs.forEach((unsub) => unsub());
 		};
-	}, [ingredients, instructions, prelude]);
+	}, [ingredients, instructions, prelude, recipe, client]);
 }
 
 export function useSubRecipeIds(recipe: Recipe) {

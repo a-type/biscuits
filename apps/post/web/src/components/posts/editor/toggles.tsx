@@ -39,7 +39,7 @@ const MarkToggle = withClassName(
 export function BoldToggle({ editor }: { editor: Editor }) {
 	return (
 		<MarkToggle editor={editor} mark="bold">
-			<span className="font-bold">B</span>
+			<Icon name="bold" />
 		</MarkToggle>
 	);
 }
@@ -47,7 +47,7 @@ export function BoldToggle({ editor }: { editor: Editor }) {
 export function ItalicToggle({ editor }: { editor: Editor }) {
 	return (
 		<MarkToggle editor={editor} mark="italic">
-			<span className="italic">I</span>
+			<Icon name="italic" />
 		</MarkToggle>
 	);
 }
@@ -55,7 +55,7 @@ export function ItalicToggle({ editor }: { editor: Editor }) {
 export function HighlightToggle({ editor }: { editor: Editor }) {
 	return (
 		<MarkToggle editor={editor} mark="highlight">
-			<span className="bg-primary-wash">H</span>
+			<Icon name="highlight" />
 		</MarkToggle>
 	);
 }

@@ -10,14 +10,22 @@ export interface BlockSelectProps {
 export function BlockSelect({ editor, className }: BlockSelectProps) {
 	const currentNode = useEditorState({
 		editor,
-		selector: (state) => state.editor.state.selection.$head.parent,
+		selector: (state) => {
+			let current = state.editor.state.selection.$head.parent;
+			while ('parent' in current) {
+				current = current.parent as any;
+			}
+			return current;
+		},
 	});
+
+	const value = currentNode?.type.name || 'paragraph';
 
 	return (
 		<Select
-			value={currentNode?.type.name}
-			onValueChange={(value) => {
-				editor.chain().focus().setNode(value).run();
+			value={value}
+			onValueChange={(selected) => {
+				editor.chain().focus().setNode(selected).run();
 			}}
 		>
 			<Select.Trigger size="small" className={className} />
@@ -37,28 +45,10 @@ export function BlockSelect({ editor, className }: BlockSelectProps) {
 					Heading
 				</Select.Item>
 				<Select.Item
-					value="blockquote"
-					disabled={!editor.can().chain().focus().setNode('blockquote').run()}
-				>
-					Quote
-				</Select.Item>
-				<Select.Item
 					value="codeBlock"
 					disabled={!editor.can().chain().focus().setNode('codeBlock').run()}
 				>
 					Code
-				</Select.Item>
-				<Select.Item
-					value="bulletList"
-					disabled={!editor.can().chain().focus().setNode('bulletList').run()}
-				>
-					Bulleted List
-				</Select.Item>
-				<Select.Item
-					value="orderedList"
-					disabled={!editor.can().chain().focus().setNode('orderedList').run()}
-				>
-					Numbered List
 				</Select.Item>
 			</Select.Content>
 		</Select>

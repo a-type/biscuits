@@ -27,6 +27,7 @@
 		"@verdant-web/store": "catalog:",
 		"@verdant-web/react": "catalog:",
 		"@verdant-web/cli": "catalog:",
+		"@verdant-web/tiptap": "catalog:",
 		"gql.tada": "catalog:"
 	},
 	"devDependencies": {

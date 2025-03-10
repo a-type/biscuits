@@ -3,7 +3,6 @@ import { tiptapExtensions } from '@post.biscuits/common';
 import { Post } from '@post.biscuits/verdant';
 import Placeholder from '@tiptap/extension-placeholder';
 import { EditorContent } from '@tiptap/react';
-import { NodeIdExtension } from '@verdant-web/tiptap';
 import { useSyncedEditor } from '@verdant-web/tiptap/react';
 import { useEffect } from 'react';
 import { LinkMenu } from './editor/LinkMenu.jsx';
@@ -14,24 +13,28 @@ export interface PostEditorProps {
 	className?: string;
 }
 
-const IdExtension = NodeIdExtension();
-
 export function PostEditor({ post, className }: PostEditorProps) {
 	const editor = useSyncedEditor(post, 'body', {
 		editorOptions: {
 			extensions: [
 				...tiptapExtensions,
-				IdExtension,
 				Placeholder.configure({
 					placeholder: 'Ah, the blank page...',
 				}),
 			],
 		},
+		extensionOptions: {
+			batchConfig: {
+				batchName: 'tiptap',
+				undoable: false,
+			},
+		},
 	});
 
 	useEffect(() => {
 		(window as any).editor = editor;
-	}, [editor]);
+		(window as any).post = post;
+	}, [editor, post]);
 
 	return (
 		<Box d="col" items="stretch" className={clsx(className)}>

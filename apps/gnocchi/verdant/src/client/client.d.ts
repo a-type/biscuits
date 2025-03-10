@@ -175,7 +175,7 @@ export type CategoryClaim = ObjectEntity<
   CategoryClaimInit,
   CategoryClaimDestructured,
   CategoryClaimSnapshot
-> | null;
+>;
 export type CategoryClaimClaimedBy = string;
 export type CategoryClaimClaimedAt = number;
 export type CategoryInit = {
@@ -183,16 +183,16 @@ export type CategoryInit = {
   name: string;
   sortKey?: string;
   expirationDays?: number | null;
-  claim?: CategoryClaimInit;
+  claim?: CategoryClaimInit | null;
 };
 
-export type CategoryClaimInit = { claimedBy: string; claimedAt: number } | null;
+export type CategoryClaimInit = { claimedBy: string; claimedAt: number };
 export type CategoryDestructured = {
   id: string;
   name: string;
   sortKey: string;
   expirationDays: number | null;
-  claim: CategoryClaim;
+  claim: CategoryClaim | null;
 };
 
 export type CategoryClaimDestructured = {
@@ -204,13 +204,10 @@ export type CategorySnapshot = {
   name: string;
   sortKey: string;
   expirationDays: number | null;
-  claim: CategoryClaimSnapshot;
+  claim: CategoryClaimSnapshot | null;
 };
 
-export type CategoryClaimSnapshot = {
-  claimedBy: string;
-  claimedAt: number;
-} | null;
+export type CategoryClaimSnapshot = { claimedBy: string; claimedAt: number };
 
 /** Index filters for Category **/
 
@@ -810,21 +807,21 @@ export type CollaborationInfoMeetup = ObjectEntity<
   CollaborationInfoMeetupInit,
   CollaborationInfoMeetupDestructured,
   CollaborationInfoMeetupSnapshot
-> | null;
+>;
 export type CollaborationInfoMeetupCreatedAt = number;
 export type CollaborationInfoMeetupLocation = string;
 export type CollaborationInfoInit = {
   id?: string;
-  meetup?: CollaborationInfoMeetupInit;
+  meetup?: CollaborationInfoMeetupInit | null;
 };
 
 export type CollaborationInfoMeetupInit = {
   createdAt?: number;
   location: string;
-} | null;
+};
 export type CollaborationInfoDestructured = {
   id: string;
-  meetup: CollaborationInfoMeetup;
+  meetup: CollaborationInfoMeetup | null;
 };
 
 export type CollaborationInfoMeetupDestructured = {
@@ -833,13 +830,13 @@ export type CollaborationInfoMeetupDestructured = {
 };
 export type CollaborationInfoSnapshot = {
   id: string;
-  meetup: CollaborationInfoMeetupSnapshot;
+  meetup: CollaborationInfoMeetupSnapshot | null;
 };
 
 export type CollaborationInfoMeetupSnapshot = {
   createdAt: number;
   location: string;
-} | null;
+};
 
 /** Index filters for CollaborationInfo **/
 
@@ -862,7 +859,58 @@ export type RecipePrepTimeMinutes = number;
 export type RecipeCookTimeMinutes = number;
 export type RecipeTotalTimeMinutes = number;
 export type RecipeServings = number;
-export type RecipePrelude = any;
+export type RecipePrelude = ObjectEntity<
+  RecipePreludeInit,
+  RecipePreludeDestructured,
+  RecipePreludeSnapshot
+>;
+export type RecipePreludeType = string;
+export type RecipePreludeFrom = number;
+export type RecipePreludeTo = number;
+export type RecipePreludeAttrs = ObjectEntity<
+  RecipePreludeAttrsInit,
+  RecipePreludeAttrsDestructured,
+  RecipePreludeAttrsSnapshot
+>;
+export type RecipePreludeAttrsValue = any;
+export type RecipePreludeContent = ListEntity<
+  RecipePreludeContentInit,
+  RecipePreludeContentDestructured,
+  RecipePreludeContentSnapshot
+>;
+export type RecipePreludeContentItem = ObjectEntity<
+  RecipePreludeContentItemInit,
+  RecipePreludeContentItemDestructured,
+  RecipePreludeContentItemSnapshot
+>;
+export type RecipePreludeContentItemType = string;
+export type RecipePreludeContentItemFrom = number;
+export type RecipePreludeContentItemTo = number;
+export type RecipePreludeContentItemAttrs = ObjectEntity<
+  RecipePreludeContentItemAttrsInit,
+  RecipePreludeContentItemAttrsDestructured,
+  RecipePreludeContentItemAttrsSnapshot
+>;
+export type RecipePreludeContentItemAttrsValue = any;
+export type RecipePreludeContentItemContent = ListEntity<
+  RecipePreludeContentItemContentInit,
+  RecipePreludeContentItemContentDestructured,
+  RecipePreludeContentItemContentSnapshot
+>;
+
+export type RecipePreludeContentItemText = string;
+export type RecipePreludeContentItemMarks = ListEntity<
+  RecipePreludeContentItemMarksInit,
+  RecipePreludeContentItemMarksDestructured,
+  RecipePreludeContentItemMarksSnapshot
+>;
+
+export type RecipePreludeText = string;
+export type RecipePreludeMarks = ListEntity<
+  RecipePreludeMarksInit,
+  RecipePreludeMarksDestructured,
+  RecipePreludeMarksSnapshot
+>;
 export type RecipeNote = string;
 export type RecipeIngredients = ListEntity<
   RecipeIngredientsInit,
@@ -887,13 +935,64 @@ export type RecipeIngredientsItemComments = ListEntity<
 export type RecipeIngredientsItemCommentsItem = string;
 export type RecipeIngredientsItemNote = string;
 export type RecipeIngredientsItemIsSectionHeader = boolean;
-export type RecipeInstructions = any;
+export type RecipeInstructions = ObjectEntity<
+  RecipeInstructionsInit,
+  RecipeInstructionsDestructured,
+  RecipeInstructionsSnapshot
+>;
+export type RecipeInstructionsType = string;
+export type RecipeInstructionsFrom = number;
+export type RecipeInstructionsTo = number;
+export type RecipeInstructionsAttrs = ObjectEntity<
+  RecipeInstructionsAttrsInit,
+  RecipeInstructionsAttrsDestructured,
+  RecipeInstructionsAttrsSnapshot
+>;
+export type RecipeInstructionsAttrsValue = any;
+export type RecipeInstructionsContent = ListEntity<
+  RecipeInstructionsContentInit,
+  RecipeInstructionsContentDestructured,
+  RecipeInstructionsContentSnapshot
+>;
+export type RecipeInstructionsContentItem = ObjectEntity<
+  RecipeInstructionsContentItemInit,
+  RecipeInstructionsContentItemDestructured,
+  RecipeInstructionsContentItemSnapshot
+>;
+export type RecipeInstructionsContentItemType = string;
+export type RecipeInstructionsContentItemFrom = number;
+export type RecipeInstructionsContentItemTo = number;
+export type RecipeInstructionsContentItemAttrs = ObjectEntity<
+  RecipeInstructionsContentItemAttrsInit,
+  RecipeInstructionsContentItemAttrsDestructured,
+  RecipeInstructionsContentItemAttrsSnapshot
+>;
+export type RecipeInstructionsContentItemAttrsValue = any;
+export type RecipeInstructionsContentItemContent = ListEntity<
+  RecipeInstructionsContentItemContentInit,
+  RecipeInstructionsContentItemContentDestructured,
+  RecipeInstructionsContentItemContentSnapshot
+>;
+
+export type RecipeInstructionsContentItemText = string;
+export type RecipeInstructionsContentItemMarks = ListEntity<
+  RecipeInstructionsContentItemMarksInit,
+  RecipeInstructionsContentItemMarksDestructured,
+  RecipeInstructionsContentItemMarksSnapshot
+>;
+
+export type RecipeInstructionsText = string;
+export type RecipeInstructionsMarks = ListEntity<
+  RecipeInstructionsMarksInit,
+  RecipeInstructionsMarksDestructured,
+  RecipeInstructionsMarksSnapshot
+>;
 export type RecipeUrl = string;
 export type RecipeSession = ObjectEntity<
   RecipeSessionInit,
   RecipeSessionDestructured,
   RecipeSessionSnapshot
-> | null;
+>;
 export type RecipeSessionStartedAt = number;
 export type RecipeSessionCompletedInstructions = ListEntity<
   RecipeSessionCompletedInstructionsInit,
@@ -925,7 +1024,7 @@ export type RecipeTags = ListEntity<
   RecipeTagsSnapshot
 >;
 export type RecipeTagsItem = string;
-export type RecipeMainImage = string | null;
+export type RecipeMainImage = EntityFile;
 export type RecipeCookCount = number;
 export type RecipeLastCookedAt = number;
 export type RecipeLastAddedAt = number;
@@ -948,12 +1047,12 @@ export type RecipeInit = {
   cookTimeMinutes?: number | null;
   totalTimeMinutes?: number | null;
   servings?: number | null;
-  prelude?: any | null;
+  prelude?: RecipePreludeInit;
   note?: string | null;
   ingredients?: RecipeIngredientsInit;
-  instructions?: any | null;
+  instructions?: RecipeInstructionsInit;
   url?: string | null;
-  session?: RecipeSessionInit;
+  session?: RecipeSessionInit | null;
   tags?: RecipeTagsInit;
   mainImage?: File | null;
   cookCount?: number;
@@ -964,6 +1063,38 @@ export type RecipeInit = {
   subRecipeMultipliers?: RecipeSubRecipeMultipliersInit;
 };
 
+export type RecipePreludeAttrsInit = {
+  [key: string]: RecipePreludeAttrsValueInit;
+};
+export type RecipePreludeContentItemAttrsInit = {
+  [key: string]: RecipePreludeContentItemAttrsValueInit;
+};
+export type RecipePreludeContentItemContentInit =
+  | RecipePreludeContentInit[]
+  | null;
+export type RecipePreludeContentItemMarksInit =
+  | RecipePreludeContentInit[]
+  | null;
+export type RecipePreludeContentItemInit = {
+  type: string;
+  from?: number | null;
+  to?: number | null;
+  attrs?: RecipePreludeContentItemAttrsInit;
+  content?: RecipePreludeContentItemContentInit | null;
+  text?: string | null;
+  marks?: RecipePreludeContentItemMarksInit | null;
+};
+export type RecipePreludeContentInit = RecipePreludeContentItemInit[] | null;
+export type RecipePreludeMarksInit = RecipePreludeContentInit[] | null;
+export type RecipePreludeInit = {
+  type: string;
+  from?: number | null;
+  to?: number | null;
+  attrs?: RecipePreludeAttrsInit;
+  content?: RecipePreludeContentInit | null;
+  text?: string | null;
+  marks?: RecipePreludeMarksInit | null;
+};
 export type RecipeIngredientsItemCommentsInit = string[];
 export type RecipeIngredientsItemInit = {
   id?: string;
@@ -976,6 +1107,42 @@ export type RecipeIngredientsItemInit = {
   isSectionHeader?: boolean;
 };
 export type RecipeIngredientsInit = RecipeIngredientsItemInit[];
+export type RecipeInstructionsAttrsInit = {
+  [key: string]: RecipeInstructionsAttrsValueInit;
+};
+export type RecipeInstructionsContentItemAttrsInit = {
+  [key: string]: RecipeInstructionsContentItemAttrsValueInit;
+};
+export type RecipeInstructionsContentItemContentInit =
+  | RecipeInstructionsContentInit[]
+  | null;
+export type RecipeInstructionsContentItemMarksInit =
+  | RecipeInstructionsContentInit[]
+  | null;
+export type RecipeInstructionsContentItemInit = {
+  type: string;
+  from?: number | null;
+  to?: number | null;
+  attrs?: RecipeInstructionsContentItemAttrsInit;
+  content?: RecipeInstructionsContentItemContentInit | null;
+  text?: string | null;
+  marks?: RecipeInstructionsContentItemMarksInit | null;
+};
+export type RecipeInstructionsContentInit =
+  | RecipeInstructionsContentItemInit[]
+  | null;
+export type RecipeInstructionsMarksInit =
+  | RecipeInstructionsContentInit[]
+  | null;
+export type RecipeInstructionsInit = {
+  type: string;
+  from?: number | null;
+  to?: number | null;
+  attrs?: RecipeInstructionsAttrsInit;
+  content?: RecipeInstructionsContentInit | null;
+  text?: string | null;
+  marks?: RecipeInstructionsMarksInit | null;
+};
 export type RecipeSessionCompletedInstructionsInit = string[];
 export type RecipeSessionCompletedIngredientsInit = string[];
 export type RecipeSessionInstructionAssignmentsInit = {
@@ -990,7 +1157,7 @@ export type RecipeSessionInit = {
   completedIngredients?: RecipeSessionCompletedIngredientsInit;
   instructionAssignments?: RecipeSessionInstructionAssignmentsInit;
   ingredientAssignments?: RecipeSessionIngredientAssignmentsInit;
-} | null;
+};
 export type RecipeTagsInit = string[];
 export type RecipeSubRecipeMultipliersInit = {
   [key: string]: RecipeSubRecipeMultipliersValueInit;
@@ -1006,12 +1173,12 @@ export type RecipeDestructured = {
   cookTimeMinutes: number | null;
   totalTimeMinutes: number | null;
   servings: number | null;
-  prelude: any | null;
+  prelude: RecipePrelude;
   note: string | null;
   ingredients: RecipeIngredients;
-  instructions: any | null;
+  instructions: RecipeInstructions;
   url: string | null;
-  session: RecipeSession;
+  session: RecipeSession | null;
   tags: RecipeTags;
   mainImage: EntityFile | null;
   cookCount: number;
@@ -1022,6 +1189,35 @@ export type RecipeDestructured = {
   subRecipeMultipliers: RecipeSubRecipeMultipliers;
 };
 
+export type RecipePreludeAttrsDestructured = {
+  [key: string]: RecipePreludeAttrsValue | undefined;
+};
+export type RecipePreludeContentItemAttrsDestructured = {
+  [key: string]: RecipePreludeContentItemAttrsValue | undefined;
+};
+export type RecipePreludeContentItemContentDestructured =
+  RecipePreludeContent[];
+export type RecipePreludeContentItemMarksDestructured = RecipePreludeContent[];
+export type RecipePreludeContentItemDestructured = {
+  type: string;
+  from: number | null;
+  to: number | null;
+  attrs: RecipePreludeContentItemAttrs;
+  content: RecipePreludeContentItemContent | null;
+  text: string | null;
+  marks: RecipePreludeContentItemMarks | null;
+};
+export type RecipePreludeContentDestructured = RecipePreludeContentItem[];
+export type RecipePreludeMarksDestructured = RecipePreludeContent[];
+export type RecipePreludeDestructured = {
+  type: string;
+  from: number | null;
+  to: number | null;
+  attrs: RecipePreludeAttrs;
+  content: RecipePreludeContent | null;
+  text: string | null;
+  marks: RecipePreludeMarks | null;
+};
 export type RecipeIngredientsItemCommentsDestructured = string[];
 export type RecipeIngredientsItemDestructured = {
   id: string;
@@ -1034,6 +1230,37 @@ export type RecipeIngredientsItemDestructured = {
   isSectionHeader: boolean;
 };
 export type RecipeIngredientsDestructured = RecipeIngredientsItem[];
+export type RecipeInstructionsAttrsDestructured = {
+  [key: string]: RecipeInstructionsAttrsValue | undefined;
+};
+export type RecipeInstructionsContentItemAttrsDestructured = {
+  [key: string]: RecipeInstructionsContentItemAttrsValue | undefined;
+};
+export type RecipeInstructionsContentItemContentDestructured =
+  RecipeInstructionsContent[];
+export type RecipeInstructionsContentItemMarksDestructured =
+  RecipeInstructionsContent[];
+export type RecipeInstructionsContentItemDestructured = {
+  type: string;
+  from: number | null;
+  to: number | null;
+  attrs: RecipeInstructionsContentItemAttrs;
+  content: RecipeInstructionsContentItemContent | null;
+  text: string | null;
+  marks: RecipeInstructionsContentItemMarks | null;
+};
+export type RecipeInstructionsContentDestructured =
+  RecipeInstructionsContentItem[];
+export type RecipeInstructionsMarksDestructured = RecipeInstructionsContent[];
+export type RecipeInstructionsDestructured = {
+  type: string;
+  from: number | null;
+  to: number | null;
+  attrs: RecipeInstructionsAttrs;
+  content: RecipeInstructionsContent | null;
+  text: string | null;
+  marks: RecipeInstructionsMarks | null;
+};
 export type RecipeSessionCompletedInstructionsDestructured = string[];
 export type RecipeSessionCompletedIngredientsDestructured = string[];
 export type RecipeSessionInstructionAssignmentsDestructured = {
@@ -1064,12 +1291,12 @@ export type RecipeSnapshot = {
   cookTimeMinutes: number | null;
   totalTimeMinutes: number | null;
   servings: number | null;
-  prelude: any | null;
+  prelude: RecipePreludeSnapshot;
   note: string | null;
   ingredients: RecipeIngredientsSnapshot;
-  instructions: any | null;
+  instructions: RecipeInstructionsSnapshot;
   url: string | null;
-  session: RecipeSessionSnapshot;
+  session: RecipeSessionSnapshot | null;
   tags: RecipeTagsSnapshot;
   mainImage: EntityFileSnapshot | null;
   cookCount: number;
@@ -1080,6 +1307,40 @@ export type RecipeSnapshot = {
   subRecipeMultipliers: RecipeSubRecipeMultipliersSnapshot;
 };
 
+export type RecipePreludeAttrsSnapshot = {
+  [key: string]: RecipePreludeAttrsValueSnapshot;
+};
+export type RecipePreludeContentItemAttrsSnapshot = {
+  [key: string]: RecipePreludeContentItemAttrsValueSnapshot;
+};
+export type RecipePreludeContentItemContentSnapshot =
+  | RecipePreludeContentSnapshot[]
+  | null;
+export type RecipePreludeContentItemMarksSnapshot =
+  | RecipePreludeContentSnapshot[]
+  | null;
+export type RecipePreludeContentItemSnapshot = {
+  type: string;
+  from: number | null;
+  to: number | null;
+  attrs: RecipePreludeContentItemAttrsSnapshot;
+  content: RecipePreludeContentItemContentSnapshot | null;
+  text: string | null;
+  marks: RecipePreludeContentItemMarksSnapshot | null;
+};
+export type RecipePreludeContentSnapshot =
+  | RecipePreludeContentItemSnapshot[]
+  | null;
+export type RecipePreludeMarksSnapshot = RecipePreludeContentSnapshot[] | null;
+export type RecipePreludeSnapshot = {
+  type: string;
+  from: number | null;
+  to: number | null;
+  attrs: RecipePreludeAttrsSnapshot;
+  content: RecipePreludeContentSnapshot | null;
+  text: string | null;
+  marks: RecipePreludeMarksSnapshot | null;
+};
 export type RecipeIngredientsItemCommentsSnapshot = string[];
 export type RecipeIngredientsItemSnapshot = {
   id: string;
@@ -1092,6 +1353,42 @@ export type RecipeIngredientsItemSnapshot = {
   isSectionHeader: boolean;
 };
 export type RecipeIngredientsSnapshot = RecipeIngredientsItemSnapshot[];
+export type RecipeInstructionsAttrsSnapshot = {
+  [key: string]: RecipeInstructionsAttrsValueSnapshot;
+};
+export type RecipeInstructionsContentItemAttrsSnapshot = {
+  [key: string]: RecipeInstructionsContentItemAttrsValueSnapshot;
+};
+export type RecipeInstructionsContentItemContentSnapshot =
+  | RecipeInstructionsContentSnapshot[]
+  | null;
+export type RecipeInstructionsContentItemMarksSnapshot =
+  | RecipeInstructionsContentSnapshot[]
+  | null;
+export type RecipeInstructionsContentItemSnapshot = {
+  type: string;
+  from: number | null;
+  to: number | null;
+  attrs: RecipeInstructionsContentItemAttrsSnapshot;
+  content: RecipeInstructionsContentItemContentSnapshot | null;
+  text: string | null;
+  marks: RecipeInstructionsContentItemMarksSnapshot | null;
+};
+export type RecipeInstructionsContentSnapshot =
+  | RecipeInstructionsContentItemSnapshot[]
+  | null;
+export type RecipeInstructionsMarksSnapshot =
+  | RecipeInstructionsContentSnapshot[]
+  | null;
+export type RecipeInstructionsSnapshot = {
+  type: string;
+  from: number | null;
+  to: number | null;
+  attrs: RecipeInstructionsAttrsSnapshot;
+  content: RecipeInstructionsContentSnapshot | null;
+  text: string | null;
+  marks: RecipeInstructionsMarksSnapshot | null;
+};
 export type RecipeSessionCompletedInstructionsSnapshot = string[];
 export type RecipeSessionCompletedIngredientsSnapshot = string[];
 export type RecipeSessionInstructionAssignmentsSnapshot = {
@@ -1106,7 +1403,7 @@ export type RecipeSessionSnapshot = {
   completedIngredients: RecipeSessionCompletedIngredientsSnapshot;
   instructionAssignments: RecipeSessionInstructionAssignmentsSnapshot;
   ingredientAssignments: RecipeSessionIngredientAssignmentsSnapshot;
-} | null;
+};
 export type RecipeTagsSnapshot = string[];
 export type RecipeSubRecipeMultipliersSnapshot = {
   [key: string]: RecipeSubRecipeMultipliersValueSnapshot;

@@ -5,7 +5,7 @@ import { StarterKit } from '@tiptap/starter-kit';
 
 export const tiptapExtensions = [
 	StarterKit.configure({
-		history: false,
+		// history: false,
 	}),
 	Link.configure({
 		autolink: true,

@@ -1,4 +1,5 @@
 import { schema } from '@verdant-web/common';
+import { createTipTapFieldSchema } from '@verdant-web/tiptap';
 import cuid from 'cuid';
 import { fullTextIndex } from '../fullTextIndex.js';
 
@@ -36,7 +37,7 @@ export const recipes = schema.collection({
 		servings: schema.fields.number({
 			nullable: true,
 		}),
-		prelude: schema.fields.any({
+		prelude: createTipTapFieldSchema({
 			default: {
 				type: 'doc',
 				content: [],
@@ -73,43 +74,11 @@ export const recipes = schema.collection({
 				},
 			}),
 		}),
-		instructions: schema.fields.any({
+		instructions: createTipTapFieldSchema({
 			default: {
 				type: 'doc',
 				content: [],
 			},
-
-			/**
-			 * Potential instructions schema
-			 * for ProseMirror
-			type: 'object',
-			properties: {
-				type: {
-					type: 'string',
-					default: 'doc',
-				},
-				content: {
-					type: 'array',
-					items: {
-						type: 'object',
-						properties: {
-							type: {
-								type: 'string',
-							},
-							content: {
-								type: 'any',
-							},
-							attrs: {
-								type: 'map',
-								values: {
-									type: 'string'
-								}
-							}
-						},
-					},
-				}
-			}
-			 */
 		}),
 		url: schema.fields.string({
 			nullable: true,

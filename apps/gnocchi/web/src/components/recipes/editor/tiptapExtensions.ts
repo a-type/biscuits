@@ -203,12 +203,16 @@ export function createTiptapExtensions(recipe?: Recipe, basicEditor = false) {
 									node.type.name === 'sectionTitle') &&
 								(!node.attrs.id || usedIds.has(node.attrs.id))
 							) {
-								const id = cuid();
-								tr.setNodeMarkup(pos, node.type, {
-									...node.attrs,
-									id,
-								});
-								usedIds.add(id);
+								try {
+									const id = cuid();
+									tr.setNodeMarkup(pos, node.type, {
+										...node.attrs,
+										id,
+									});
+									usedIds.add(id);
+								} catch (err) {
+									console.error('Error assigning node ID', err);
+								}
 							} else {
 								usedIds.add(node.attrs.id);
 							}
@@ -222,7 +226,6 @@ export function createTiptapExtensions(recipe?: Recipe, basicEditor = false) {
 
 	// Until tiptap is full ESM, these types won't work...
 	return [
-		// @ts-ignore
 		StarterKit.configure({ history: false, document: false }),
 		Step,
 		SectionTitle,

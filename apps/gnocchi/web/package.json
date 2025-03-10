@@ -71,6 +71,7 @@
 		"@types/react-dom": "catalog:",
 		"@verdant-web/react-router": "catalog:",
 		"@verdant-web/store": "catalog:",
+		"@verdant-web/tiptap": "catalog:",
 		"typescript": "catalog:",
 		"vite": "catalog:",
 		"@vitejs/plugin-react-swc": "catalog:",

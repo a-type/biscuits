@@ -7,17 +7,17 @@ packages:
   - 'cdk'
 
 catalog:
-  '@a-type/ui': 1.7.7
+  '@a-type/ui': 1.7.10
   '@a-type/utils': 1.1.4
   '@originjs/vite-plugin-commonjs': 1.0.3
   '@react-spring/web': 9.7.5
   '@verdant-web/cli': 4.8.2
-  '@verdant-web/react': 40.2.4
+  '@verdant-web/react': 42.0.0
   '@verdant-web/react-router': 0.7.2
-  '@verdant-web/store': 4.1.6
-  '@verdant-web/server': 3.3.8
-  '@verdant-web/s3-file-storage': 1.0.35
-  '@verdant-web/tiptap': 0.1.5
+  '@verdant-web/store': 4.3.0
+  '@verdant-web/server': 3.3.10
+  '@verdant-web/s3-file-storage': 1.0.37
+  '@verdant-web/tiptap': 2.0.0
   '@vitejs/plugin-react-swc': 3.7.2
   gql.tada: 1.8.10
   react: 19.0.0
