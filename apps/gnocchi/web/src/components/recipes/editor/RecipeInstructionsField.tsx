@@ -1,4 +1,11 @@
-import { Button, clsx, Icon, P, tipTapClassName } from '@a-type/ui';
+import {
+	Button,
+	clsx,
+	HorizontalList,
+	Icon,
+	P,
+	tipTapClassName,
+} from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { Editor } from '@tiptap/core';
 import { EditorContent } from '@tiptap/react';
@@ -41,41 +48,51 @@ function isMobileOs() {
 function Toolbar({ editor }: { editor: Editor }) {
 	return (
 		// Sticks below the action bar
-		<div className="flex flex-row gap-sm items-center sticky z-1 top-44px bg-wash border-b border-b-gray-dark border-b-solid">
-			<Button
-				color="ghost"
-				onClick={() => {
-					editor.chain().focus().toggleMark('bold').run();
-				}}
-				disabled={!editor.can().chain().focus().toggleMark('bold').run()}
-				toggled={editor.isActive('bold')}
-				className="[font-size:12px]"
+		<div className="sticky top-[calc(var(--viewport-top-offset,0px)+48px)] z-menu">
+			<HorizontalList
+				contentClassName="items-center p-sm  bg-white"
+				className="rounded-sm"
 			>
-				<Icon name="bold" />
-			</Button>
-			<Button
-				color="ghost"
-				onClick={() => {
-					editor.chain().focus().toggleMark('italic').run();
-				}}
-				disabled={!editor.can().chain().focus().toggleMark('italic').run()}
-				toggled={editor.isActive('italic')}
-				className="[font-size:12px]"
-			>
-				<Icon name="italic" />
-			</Button>
-			<Button
-				color="ghost"
-				onClick={() => {
-					editor.chain().focus().toggleSectionTitle().run();
-				}}
-				disabled={!editor.can().chain().focus().toggleSectionTitle().run()}
-				toggled={editor.isActive('sectionTitle')}
-				className="[font-size:12px]"
-			>
-				<span>H</span>
-			</Button>
-			<ToolbarEmbedButton editor={editor} />
+				<Button
+					size="icon"
+					color={editor.isActive('bold') ? 'default' : 'ghost'}
+					toggleMode="state-only"
+					onClick={() => {
+						editor.chain().focus().toggleMark('bold').run();
+					}}
+					disabled={!editor.can().chain().focus().toggleMark('bold').run()}
+					toggled={editor.isActive('bold')}
+				>
+					<Icon name="bold" />
+				</Button>
+				<Button
+					size="icon"
+					color={editor.isActive('italic') ? 'default' : 'ghost'}
+					toggleMode="state-only"
+					onClick={() => {
+						editor.chain().focus().toggleMark('italic').run();
+					}}
+					disabled={!editor.can().chain().focus().toggleMark('italic').run()}
+					toggled={editor.isActive('italic')}
+				>
+					<Icon name="italic" />
+				</Button>
+				<Button
+					size="icon"
+					color={editor.isActive('sectionTitle') ? 'default' : 'ghost'}
+					toggleMode="state-only"
+					onClick={() => {
+						editor.chain().focus().toggleSectionTitle().run();
+					}}
+					disabled={!editor.can().chain().focus().toggleSectionTitle().run()}
+					toggled={editor.isActive('sectionTitle')}
+				>
+					<span className="[font-size:10px] w-[15px] h-[15px] flex items-center justify-center">
+						H
+					</span>
+				</Button>
+				<ToolbarEmbedButton editor={editor} />
+			</HorizontalList>
 		</div>
 	);
 }
@@ -96,6 +113,7 @@ function ToolbarEmbedButton({ editor }: { editor: Editor }) {
 		<IncludeSubRecipe
 			onSelect={embedToCurrentStep}
 			color="ghost"
+			size="small"
 			className="[font-size:12px] gap-sm"
 			disabled={
 				!editor
