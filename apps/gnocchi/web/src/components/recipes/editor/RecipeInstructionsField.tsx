@@ -1,9 +1,9 @@
-import { Button, clsx, P, tipTapClassName } from '@a-type/ui';
+import { Button, clsx, Icon, P, tipTapClassName } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
-import { FontBoldIcon, FontItalicIcon } from '@radix-ui/react-icons';
 import { Editor } from '@tiptap/core';
 import { EditorContent } from '@tiptap/react';
 import { useSyncedInstructionsEditor } from '../hooks.js';
+import { IncludeSubRecipe } from './IncludeSubRecipe.jsx';
 
 export interface RecipeInstructionsFieldProps {
 	recipe: Recipe;
@@ -17,6 +17,7 @@ export function RecipeInstructionsField({
 		readonly: false,
 		useBasicEditor: isMobileOs(),
 	});
+	(window as any).recipe = recipe;
 
 	return (
 		<div className="flex flex-col gap-2">
@@ -40,7 +41,7 @@ function isMobileOs() {
 function Toolbar({ editor }: { editor: Editor }) {
 	return (
 		// Sticks below the action bar
-		<div className="flex flex-row gap-2 items-center sticky z-1 top-44px bg-wash border-b border-b-gray-dark border-b-solid">
+		<div className="flex flex-row gap-sm items-center sticky z-1 top-44px bg-wash border-b border-b-gray-dark border-b-solid">
 			<Button
 				color="ghost"
 				onClick={() => {
@@ -50,7 +51,7 @@ function Toolbar({ editor }: { editor: Editor }) {
 				toggled={editor.isActive('bold')}
 				className="[font-size:12px]"
 			>
-				<FontBoldIcon />
+				<Icon name="bold" />
 			</Button>
 			<Button
 				color="ghost"
@@ -61,7 +62,7 @@ function Toolbar({ editor }: { editor: Editor }) {
 				toggled={editor.isActive('italic')}
 				className="[font-size:12px]"
 			>
-				<FontItalicIcon />
+				<Icon name="italic" />
 			</Button>
 			<Button
 				color="ghost"
@@ -72,8 +73,42 @@ function Toolbar({ editor }: { editor: Editor }) {
 				toggled={editor.isActive('sectionTitle')}
 				className="[font-size:12px]"
 			>
-				Heading
+				<span>H</span>
 			</Button>
+			<ToolbarEmbedButton editor={editor} />
 		</div>
+	);
+}
+
+function ToolbarEmbedButton({ editor }: { editor: Editor }) {
+	const embedToCurrentStep = (recipe: Recipe) => {
+		editor
+			.chain()
+			.focus()
+			.splitBlock()
+			.setNode('step', {
+				subRecipeId: recipe.get('id'),
+			})
+			.run();
+	};
+
+	return (
+		<IncludeSubRecipe
+			onSelect={embedToCurrentStep}
+			color="ghost"
+			className="[font-size:12px] gap-sm"
+			disabled={
+				!editor
+					.can()
+					.chain()
+					.focus()
+					.splitBlock()
+					.setNode('step', { subRecipeId: '' })
+					.run()
+			}
+		>
+			<Icon name="plus" size={10} />
+			Embed recipe
+		</IncludeSubRecipe>
 	);
 }

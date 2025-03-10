@@ -49,11 +49,7 @@ export function EmbeddedRecipesIngredients({ recipe }: { recipe: Recipe }) {
 		<Box direction="col" p="none" gap="md">
 			{Object.entries(embeddedIds).map(([id, mult]) => (
 				<Suspense key={id}>
-					<EmbeddedRecipeIngredients
-						id={id}
-						multiplier={mult * baseMult}
-						parent={recipe}
-					/>
+					<EmbeddedRecipeIngredients id={id} multiplier={mult * baseMult} />
 				</Suspense>
 			))}
 		</Box>
@@ -63,16 +59,28 @@ export function EmbeddedRecipesIngredients({ recipe }: { recipe: Recipe }) {
 function EmbeddedRecipeIngredients({
 	id,
 	multiplier,
-	parent,
 }: {
 	id: string;
 	multiplier: number;
-	parent: Recipe;
 }) {
 	const recipe = hooks.useRecipe(id);
+	if (!recipe) return null;
 
-	// not technically observable-safe but probably fine
-	if (!recipe?.get('ingredients')?.length) {
+	return (
+		<EmbeddedRecipeIngredientsImpl recipe={recipe} multiplier={multiplier} />
+	);
+}
+
+function EmbeddedRecipeIngredientsImpl({
+	recipe,
+	multiplier,
+}: {
+	recipe: Recipe;
+	multiplier: number;
+}) {
+	const embedded = useSubRecipeIds(recipe);
+	const { ingredients } = hooks.useWatch(recipe);
+	if (!ingredients.length && !Object.keys(embedded).length) {
 		return null;
 	}
 
@@ -80,13 +88,15 @@ function EmbeddedRecipeIngredients({
 
 	return (
 		<>
-			<Box justify="between" items="center" p="none" gap="md">
-				<H4 className="color-gray-dark italic">
-					<span className="font-medium">From sub-recipe</span>{' '}
-					{recipe.get('title')}
-					{multText}
-				</H4>
-			</Box>
+			{!!ingredients.length && (
+				<Box justify="between" items="center" p="none" gap="md">
+					<H4 className="color-gray-dark italic">
+						<span className="font-medium">From sub-recipe</span>{' '}
+						{recipe.get('title')}
+						{multText}
+					</H4>
+				</Box>
+			)}
 			<RecipeIngredientsViewer
 				recipe={recipe}
 				multiplierOverride={multiplier}

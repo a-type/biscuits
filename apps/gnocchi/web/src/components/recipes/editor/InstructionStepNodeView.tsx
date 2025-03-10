@@ -195,6 +195,7 @@ export function InstructionStepNodeView({
 								color="default"
 								size="small"
 								onSelect={embedRecipe}
+								className="opacity-50 hover:opacity-100"
 							/>
 						</>
 					)}

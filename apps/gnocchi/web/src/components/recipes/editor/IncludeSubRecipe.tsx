@@ -1,13 +1,5 @@
 import { hooks } from '@/stores/groceries/index.js';
-import {
-	Box,
-	Button,
-	ButtonProps,
-	Card,
-	clsx,
-	Dialog,
-	Input,
-} from '@a-type/ui';
+import { Box, Button, ButtonProps, Card, Dialog, Input } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { useCombobox } from 'downshift';
 import { Suspense, useState } from 'react';
@@ -21,6 +13,7 @@ export interface IncludeSubRecipeProps
 export function IncludeSubRecipe({
 	onSelect,
 	className,
+	children,
 	...rest
 }: IncludeSubRecipeProps) {
 	const [open, setOpen] = useState(false);
@@ -33,11 +26,8 @@ export function IncludeSubRecipe({
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<Dialog.Trigger asChild>
-				<Button
-					{...rest}
-					className={clsx('opacity-50 hover:opacity-100', className)}
-				>
-					Embed a recipe
+				<Button {...rest} className={className}>
+					{children || 'Embed a recipe'}
 				</Button>
 			</Dialog.Trigger>
 			<Dialog.Content>
