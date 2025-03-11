@@ -144,3 +144,5 @@ backups/
 vite.config.ts.*
 
 .turbo/*
+
+*.zip
