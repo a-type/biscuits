@@ -23,7 +23,7 @@ type ChangelogItem {
   imageUrl: String
   important: Boolean!
   title: String!
-  updatedAt: DateTime!
+  updatedAt: DateTime
 }
 
 type ClaimPlanInvitationResult {
