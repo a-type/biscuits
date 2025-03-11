@@ -27,6 +27,7 @@ COPY --chown=node:node packages ./packages
 COPY --chown=node:node server ./server
 COPY --chown=node:node apps/gnocchi ./apps/gnocchi
 COPY --chown=node:node apps/wish-wash ./apps/wish-wash
+COPY --chown=node:node apps/post ./apps/post
 
 RUN pnpm install --filter .
 RUN pnpm install --filter "@biscuits/server..."
