@@ -92,6 +92,16 @@ export function createTiptapExtensions(recipe?: Recipe, basicEditor = false) {
 		},
 
 		renderHTML({ node, HTMLAttributes }) {
+			if (node.attrs.subRecipeId) {
+				return [
+					'p',
+					mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {
+						'data-id': node.attrs.id,
+						'data-sub-recipe-id': node.attrs.subRecipeId,
+					}),
+					'<embedded recipe>',
+				];
+			}
 			return [
 				'p',
 				mergeAttributes(this.options.HTMLAttributes, HTMLAttributes, {

@@ -39,7 +39,10 @@ export function RecipeInstructionsField({
 	);
 }
 
+const simulateMobile =
+	typeof window !== 'undefined' && window.location.search.includes('mobile');
 function isMobileOs() {
+	if (simulateMobile) return true;
 	return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
 		navigator.userAgent,
 	);
