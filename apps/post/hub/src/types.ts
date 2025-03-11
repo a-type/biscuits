@@ -23,7 +23,7 @@ export interface HubPostSummaryData {
 	coverImageUrl: string | null;
 	createdAt: string;
 	updatedAt: string | null;
-	excerpt: string;
+	summary: string | null;
 	authorId: string;
 	authorName: string;
 	authorAvatarUrl: string | null;
@@ -43,10 +43,7 @@ export interface HubPostData {
 
 export interface RichTextNode {
 	type: string;
-	attrs?: {
-		id: string;
-		[attribute: string]: unknown;
-	} | null;
+	attrs?: Record<string, any> | null;
 	content?: RichTextNode[] | null;
 	marks?: RichTextNode[] | null;
 	start?: number | null;

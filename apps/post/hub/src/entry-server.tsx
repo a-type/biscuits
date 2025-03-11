@@ -4,7 +4,12 @@ import ReactDOMServer from 'react-dom/server';
 import 'virtual:uno.css';
 import { NotebookRoot } from './pages/notebook/NotebookRoot.js';
 import { PostRoot } from './pages/post/PostRoot.js';
-import { HubNotebookData, HubPostData, HubPostSummaryData } from './types.js';
+import {
+	HubNotebookData,
+	HubNotebookSummaryData,
+	HubPostData,
+	HubPostSummaryData,
+} from './types.js';
 
 export type * from './types.js';
 
@@ -17,7 +22,7 @@ export function serverRenderNotebook(props: {
 
 export function serverRenderPost(props: {
 	post: HubPostData;
-	notebook: HubNotebookData;
+	notebook: HubNotebookSummaryData;
 }): string {
 	return ReactDOMServer.renderToStaticMarkup(<PostRoot {...props} />);
 }

@@ -47,6 +47,8 @@ postRouter.get('/hub/:notebookId', async (ctx) => {
 			'PublishedPost.summary',
 			'PublishedPost.title',
 			'PublishedPost.coverImageUrl',
+			'PublishedPost.createdAt',
+			'PublishedPost.updatedAt',
 			'User.id as authorId',
 			sql<string>`COALESCE(User.friendlyName, User.fullName)`.as('authorName'),
 			'User.imageUrl as authorAvatarUrl',
@@ -143,7 +145,14 @@ postRouter.get('/hub/:notebookId/:postSlug', async (ctx) => {
 	const notebook = await db
 		.selectFrom('PublishedNotebook')
 		.where('id', '=', notebookId)
-		.select(['id', 'name', 'coverImageUrl', 'iconUrl'])
+		.select([
+			'id',
+			'name',
+			'coverImageUrl',
+			'iconUrl',
+			'createdAt',
+			'updatedAt',
+		])
 		.executeTakeFirstOrThrow(
 			() =>
 				new BiscuitsError(BiscuitsError.Code.NotFound, 'Notebook not found'),

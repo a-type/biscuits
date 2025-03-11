@@ -536,7 +536,7 @@ export async function cacheSubscriptionInfoOnPlan(
 			// go ahead and cache the rest
 			subscriptionCanceledAt: stripeDateToDate(subscription.canceled_at),
 			subscriptionExpiresAt: stripeDateToDate(subscription.current_period_end),
-			subscriptionStatusCheckedAt: Date.now(),
+			subscriptionStatusCheckedAt: new Date(),
 			stripeProductId: productId,
 			stripePriceId,
 		})

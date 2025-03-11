@@ -365,9 +365,7 @@ export interface PublishedPostTable {
 
 export interface RichTextNode {
 	type: string;
-	attrs?: {
-		[attribute: string]: unknown;
-	} | null;
+	attrs?: Record<string, any> | null;
 	content?: RichTextNode[] | null;
 	marks?: RichTextNode[] | null;
 	start?: number | null;
