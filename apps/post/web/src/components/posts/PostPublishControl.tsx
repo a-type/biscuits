@@ -1,5 +1,4 @@
 import { hooks } from '@/hooks.js';
-import { getBodySnippet } from '@/utils/getBodySnippet.js';
 import { getTitleSlug } from '@/utils/getTitleSlug.js';
 import { Box, Button, Dialog, Icon } from '@a-type/ui';
 import { CopyTextbox } from '@biscuits/client';
@@ -9,6 +8,7 @@ import {
 	useMutation,
 	useSuspenseQuery,
 } from '@biscuits/graphql';
+import { tiptapToString } from '@post.biscuits/common';
 import { Post } from '@post.biscuits/verdant';
 import { Link } from '@verdant-web/react-router';
 
@@ -84,7 +84,7 @@ export function PostPublishControl({ post }: PostPublishControlProps) {
 						coverImageId: coverImage?.id,
 						body,
 						// TODO: summary field
-						summary: getBodySnippet(post.get('body'), 200),
+						summary: tiptapToString(post.get('body'), 200),
 						slug: getTitleSlug(title),
 					},
 					notebook: {

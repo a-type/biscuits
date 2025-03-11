@@ -1,6 +1,6 @@
 import { hooks } from '@/hooks.js';
-import { getBodySnippet } from '@/utils/getBodySnippet.js';
 import { Box, Card, clsx, InfiniteLoadTrigger } from '@a-type/ui';
+import { tiptapToString } from '@post.biscuits/common';
 import { Post } from '@post.biscuits/verdant';
 import { Link } from '@verdant-web/react-router';
 
@@ -42,7 +42,7 @@ export function PostsList({ className, notebookId }: PostsListProps) {
 
 function PostsListItem({ item }: { item: Post }) {
 	const { title, createdAt, body, id, coverImage } = hooks.useWatch(item);
-	const snippet = getBodySnippet(body);
+	const snippet = tiptapToString(body, 100);
 	hooks.useWatch(coverImage);
 
 	return (

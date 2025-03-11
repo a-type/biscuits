@@ -34,7 +34,8 @@
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
 		"@tiptap/html": "catalog:",
-		"@post.biscuits/common": "workspace:*"
+		"@post.biscuits/common": "workspace:*",
+		"feed": "4.2.2"
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "^1.0.3",

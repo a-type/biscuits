@@ -18,6 +18,7 @@ export const domainRoutesMiddleware = createMiddleware<Env>(
 			return await next();
 		} else {
 			logger.debug(`Custom domain route: ${requestHost}`);
+			ctx.set('customDomain', requestHost);
 			const route = await domainRouteCache.get(requestHost);
 			if (!route) {
 				await next();

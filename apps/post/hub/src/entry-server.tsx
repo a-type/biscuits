@@ -1,3 +1,5 @@
+import { tiptapToString } from '@post.biscuits/common';
+import { Feed } from 'feed';
 import ReactDOMServer from 'react-dom/server';
 import 'virtual:uno.css';
 import { NotebookRoot } from './pages/notebook/NotebookRoot.js';
@@ -18,4 +20,58 @@ export function serverRenderPost(props: {
 	notebook: HubNotebookData;
 }): string {
 	return ReactDOMServer.renderToStaticMarkup(<PostRoot {...props} />);
+}
+
+type NotebookFeedProps = {
+	notebook: HubNotebookData;
+	posts: HubPostData[];
+	url: string;
+	feedUrl: string;
+	categories?: string[];
+};
+
+function createFeed(props: NotebookFeedProps) {
+	const feed = new Feed({
+		title: props.notebook.name,
+		description:
+			props.notebook.description ?
+				tiptapToString(props.notebook.description)
+			:	undefined,
+		id: props.feedUrl,
+		link: props.url,
+		image: props.notebook.iconUrl ?? undefined,
+		updated: new Date(props.notebook.updatedAt || props.notebook.createdAt),
+		generator: 'Biscuits Post',
+		feedLinks: {
+			atom: props.feedUrl,
+		},
+		author: {
+			name: props.notebook.authorName,
+		},
+		copyright: `© ${new Date(props.notebook.updatedAt || props.notebook.createdAt).getFullYear()} ${props.notebook.authorName}`,
+	});
+
+	for (const category of props.categories ?? []) {
+		feed.addCategory(category);
+	}
+
+	for (const post of props.posts) {
+		feed.addItem({
+			title: post.title,
+			id: post.id,
+			date: new Date(post.updatedAt || post.createdAt),
+			link: `${props.url}/posts/${post.id}`,
+			content: serverRenderPost({ post, notebook: props.notebook }),
+			author: [{ name: post.authorName }],
+			copyright: `© ${new Date(post.updatedAt || post.createdAt).getFullYear()} ${post.authorName}`,
+			image: post.coverImageUrl ?? undefined,
+			published: new Date(post.createdAt),
+		});
+	}
+
+	return feed;
+}
+
+export function serverRenderAtom(props: NotebookFeedProps) {
+	return createFeed(props).atom1();
 }

@@ -7,6 +7,8 @@ export interface HubNotebookData {
 	iconUrl: string | null;
 	coverImageUrl: string | null;
 	description: RichTextNode | null;
+	createdAt: string;
+	updatedAt: string | null;
 }
 
 export type HubNotebookSummaryData = Omit<
@@ -20,8 +22,8 @@ export interface HubPostSummaryData {
 	title: string;
 	coverImageUrl: string | null;
 	createdAt: string;
-	updatedAt: string;
-	excerpt: string | null;
+	updatedAt: string | null;
+	excerpt: string;
 	authorId: string;
 	authorName: string;
 	authorAvatarUrl: string | null;
@@ -32,7 +34,7 @@ export interface HubPostData {
 	title: string;
 	coverImageUrl: string | null;
 	createdAt: string;
-	updatedAt: string;
+	updatedAt: string | null;
 	body: RichTextNode;
 	authorId: string;
 	authorName: string;
@@ -41,13 +43,13 @@ export interface HubPostData {
 
 export interface RichTextNode {
 	type: string;
-	attrs: {
+	attrs?: {
 		id: string;
 		[attribute: string]: unknown;
 	} | null;
-	content: RichTextNode[] | null;
-	marks: RichTextNode[] | null;
-	start: number | null;
-	end: number | null;
-	text: string | null;
+	content?: RichTextNode[] | null;
+	marks?: RichTextNode[] | null;
+	start?: number | null;
+	end?: number | null;
+	text?: string | null;
 }
