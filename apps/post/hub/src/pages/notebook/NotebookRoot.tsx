@@ -1,3 +1,4 @@
+import { NotebookRenderer } from '@/components/notebooks/NotebookRenderer.jsx';
 import { HubNotebookData, HubPostSummaryData } from '../../types.js';
 
 export interface NotebookRootProps {
@@ -5,10 +6,6 @@ export interface NotebookRootProps {
 	posts: HubPostSummaryData[];
 }
 
-export function NotebookRoot({ notebook, posts }: NotebookRootProps) {
-	return (
-		<div>
-			Todo: Notebook {notebook.name}: {posts.length} posts
-		</div>
-	);
+export function NotebookRoot(props: NotebookRootProps) {
+	return <NotebookRenderer {...props} />;
 }

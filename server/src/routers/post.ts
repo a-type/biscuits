@@ -4,7 +4,7 @@ import { readFile } from 'fs/promises';
 import { Hono } from 'hono';
 import path from 'path';
 import { renderTemplate, staticFile } from '../common/hubs.js';
-import { DEPLOYED_ORIGIN } from '../config/deployedContext.js';
+import { POST_HUB_ORIGIN } from '../config/deployedContext.js';
 import { Env } from '../config/hono.js';
 
 export const postRouter = new Hono<Env>();
@@ -18,6 +18,28 @@ postRouter.get('/hub/assets/*', ({ req }) =>
 postRouter.get('/hub/favicon.ico', ({ req }) =>
 	staticFile(hubClientPath, 'post/hub', req.raw),
 );
+
+function addPostUrls<T extends { slug: string }>(
+	posts: T[],
+	notebookId: string,
+	customDomain: string | undefined,
+) {
+	return posts.map((post) => ({
+		...post,
+		url: `${customDomain || `${POST_HUB_ORIGIN}/${notebookId}`}/${post.slug}`,
+	}));
+}
+
+function addNotebookUrl<T extends { id: string }>(
+	notebook: T,
+	customDomain: string | undefined,
+) {
+	console.log(customDomain);
+	return {
+		...notebook,
+		url: customDomain || `${POST_HUB_ORIGIN}/${notebook.id}`,
+	};
+}
 
 postRouter.get('/hub/:notebookId', async (ctx) => {
 	const notebookId = ctx.req.param('notebookId');
@@ -62,7 +84,11 @@ postRouter.get('/hub/:notebookId', async (ctx) => {
 		'utf8',
 	);
 
-	const data = { notebook, posts };
+	const customDomain = ctx.get('customDomain');
+	const data = {
+		notebook: addNotebookUrl(notebook, customDomain),
+		posts: addPostUrls(posts, notebookId, customDomain),
+	};
 
 	const { serverRenderNotebook } = await import('@post.biscuits/hub');
 	const appHtml = serverRenderNotebook(data);
@@ -110,12 +136,11 @@ postRouter.get('/hub/:notebookId/atom.xml', async (ctx) => {
 
 	const { serverRenderAtom } = await import('@post.biscuits/hub');
 	const customDomain = ctx.get('customDomain');
-	const url =
-		customDomain ?
-			`https://${customDomain}`
-		:	`https://${DEPLOYED_ORIGIN}/post/hub/${notebookId}`;
 	return ctx.body(
-		serverRenderAtom({ notebook, posts, url, feedUrl: url + `/atom.xml` }),
+		serverRenderAtom({
+			notebook: addNotebookUrl(notebook, customDomain),
+			posts: addPostUrls(posts, notebookId, customDomain),
+		}),
 		200,
 		{
 			'Content-Type': 'application/atom+xml',
@@ -158,7 +183,12 @@ postRouter.get('/hub/:notebookId/:postSlug', async (ctx) => {
 				new BiscuitsError(BiscuitsError.Code.NotFound, 'Notebook not found'),
 		);
 
-	const data = { post, notebook };
+	const customDomain = ctx.get('customDomain');
+	const [postWithUrl] = addPostUrls([post], notebookId, customDomain);
+	const data = {
+		post: postWithUrl,
+		notebook: addNotebookUrl(notebook, customDomain),
+	};
 
 	const indexTemplate = await readFile(
 		path.join(hubClientPath, 'src/pages/post/index.html'),

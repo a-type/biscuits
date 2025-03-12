@@ -9,6 +9,7 @@ export interface HubNotebookData {
 	description: RichTextNode | null;
 	createdAt: string;
 	updatedAt: string | null;
+	url: string;
 }
 
 export type HubNotebookSummaryData = Omit<
@@ -27,6 +28,7 @@ export interface HubPostSummaryData {
 	authorId: string;
 	authorName: string;
 	authorAvatarUrl: string | null;
+	url: string;
 }
 
 export interface HubPostData {
@@ -39,6 +41,7 @@ export interface HubPostData {
 	authorId: string;
 	authorName: string;
 	authorAvatarUrl: string | null;
+	url: string;
 }
 
 export interface RichTextNode {

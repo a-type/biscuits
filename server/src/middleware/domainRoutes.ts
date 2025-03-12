@@ -18,7 +18,6 @@ export const domainRoutesMiddleware = createMiddleware<Env>(
 			return await next();
 		} else {
 			logger.debug(`Custom domain route: ${requestHost}`);
-			ctx.set('customDomain', requestHost);
 			const route = await domainRouteCache.get(requestHost);
 			if (!route) {
 				await next();
@@ -38,6 +37,8 @@ export const domainRoutesMiddleware = createMiddleware<Env>(
 					'App does not support custom domain routes',
 				);
 			}
+
+			ctx.set('customDomain', requestHost);
 			const routePath = app.domainRoutes(route.resourceId);
 			const routedUrl = new URL(routePath, `http://localhost:${PORT}`);
 			const res = await proxy(routedUrl, ctx.req);

@@ -6,6 +6,7 @@
 		"rootDir": "./src",
 		"baseUrl": ".",
 		"declaration": true,
+		"declarationDir": "./dist/server-types",
 		"lib": ["esnext", "dom", "dom.iterable"],
 		"paths": {
 			"@/*": ["./src/*"]

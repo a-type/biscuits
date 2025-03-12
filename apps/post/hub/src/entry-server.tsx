@@ -30,8 +30,6 @@ export function serverRenderPost(props: {
 type NotebookFeedProps = {
 	notebook: HubNotebookData;
 	posts: HubPostData[];
-	url: string;
-	feedUrl: string;
 	categories?: string[];
 };
 
@@ -42,13 +40,13 @@ function createFeed(props: NotebookFeedProps) {
 			props.notebook.description ?
 				tiptapToString(props.notebook.description)
 			:	undefined,
-		id: props.feedUrl,
-		link: props.url,
+		id: props.notebook.url,
+		link: props.notebook.url,
 		image: props.notebook.iconUrl ?? undefined,
 		updated: new Date(props.notebook.updatedAt || props.notebook.createdAt),
 		generator: 'Biscuits Post',
 		feedLinks: {
-			atom: props.feedUrl,
+			atom: props.notebook.url + '/atom.xml',
 		},
 		author: {
 			name: props.notebook.authorName,
@@ -65,7 +63,7 @@ function createFeed(props: NotebookFeedProps) {
 			title: post.title,
 			id: post.id,
 			date: new Date(post.updatedAt || post.createdAt),
-			link: `${props.url}/posts/${post.id}`,
+			link: `${post.url}`,
 			content: serverRenderPost({ post, notebook: props.notebook }),
 			author: [{ name: post.authorName }],
 			copyright: `© ${new Date(post.updatedAt || post.createdAt).getFullYear()} ${post.authorName}`,

@@ -1,4 +1,5 @@
 import { Box, BoxProps, Button, Icon, Input, clsx } from '@a-type/ui';
+import { Link } from '@verdant-web/react-router';
 
 export interface CopyTextboxProps extends BoxProps {
 	value: string;
@@ -11,12 +12,14 @@ export function CopyTextbox({
 	hideShare,
 	...rest
 }: CopyTextboxProps) {
+	const isUrl = value.startsWith('http');
 	const copy = () => {
 		navigator.clipboard.writeText(value);
 	};
 	const share = () => {
-		navigator.share({ url: value });
+		navigator.share(isUrl ? { url: value } : { text: value });
 	};
+
 	return (
 		<Box
 			d="row"
@@ -30,6 +33,13 @@ export function CopyTextbox({
 				<Button size="icon" onClick={copy}>
 					<Icon name="copy" />
 				</Button>
+				{isUrl && (
+					<Button size="icon" asChild>
+						<Link className="color-inherit" newTab to={value}>
+							<Icon name="new_window" />
+						</Link>
+					</Button>
+				)}
 				{!hideShare && (
 					<Button size="icon" onClick={share} color="primary">
 						<Icon name="share" />

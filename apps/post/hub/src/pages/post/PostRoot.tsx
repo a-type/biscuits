@@ -1,5 +1,6 @@
 import { PostRenderer } from '@/components/posts/PostRenderer.jsx';
-import { Box, H1 } from '@a-type/ui';
+import { PostTitleBlock } from '@/components/posts/PostTitleBlock.jsx';
+import { Box } from '@a-type/ui';
 import { HubNotebookSummaryData, HubPostData } from '../../types.js';
 
 export interface PostRootProps {
@@ -9,8 +10,8 @@ export interface PostRootProps {
 
 export function PostRoot({ post, notebook }: PostRootProps) {
 	return (
-		<Box d="col">
-			<H1>{post.title}</H1>
+		<Box d="col" className="max-w-800px mx-auto">
+			<PostTitleBlock post={post} notebook={notebook} />
 			<PostRenderer body={post.body} />
 		</Box>
 	);
