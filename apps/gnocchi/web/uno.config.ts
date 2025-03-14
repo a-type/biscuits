@@ -4,11 +4,7 @@ import variantGroup from '@unocss/transformer-variant-group';
 import { defineConfig } from 'unocss';
 
 export default defineConfig({
-	presets: [
-		preset({
-			saturation: 20,
-		}),
-	],
+	presets: [preset({})],
 	transformers: [variantGroup()],
 	preflights: [
 		{

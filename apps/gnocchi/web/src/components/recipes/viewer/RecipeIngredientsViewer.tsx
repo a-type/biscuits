@@ -23,6 +23,7 @@ export function RecipeIngredientsViewer({
 			p="none"
 			gap="md"
 			className={clsx('w-full', className)}
+			container="reset"
 		>
 			<IngredientCheckoffView
 				recipe={recipe}

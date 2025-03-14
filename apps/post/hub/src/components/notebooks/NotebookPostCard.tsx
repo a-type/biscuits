@@ -7,7 +7,7 @@ export interface NotebookPostCardProps {
 
 export function NotebookPostCard({ post }: NotebookPostCardProps) {
 	return (
-		<Card>
+		<Card className={post.coverImageUrl ? 'min-h-400px' : ''}>
 			{post.coverImageUrl && (
 				<Card.Image>
 					<img
@@ -19,7 +19,7 @@ export function NotebookPostCard({ post }: NotebookPostCardProps) {
 			<Card.Main asChild>
 				<a href={post.url} className="color-inherit decoration-none">
 					<Card.Title>{post.title}</Card.Title>
-					<Card.Content>
+					<Card.Content className="mt-auto">
 						{new Date(post.updatedAt ?? post.createdAt).toDateString()}
 					</Card.Content>
 					{post.summary && <Card.Content>{post.summary}</Card.Content>}
