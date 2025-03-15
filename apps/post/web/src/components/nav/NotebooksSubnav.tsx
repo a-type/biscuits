@@ -13,7 +13,7 @@ export function NotebooksSubnav({ open, className }: NotebooksSubnavProps) {
 	const notebooks = hooks.useAllNotebooks();
 	return (
 		<CollapsibleSimple open={open} className={className}>
-			<Box p="xs" surface d="col" gap="xs">
+			<Box p="xs" surface d="col" gap="xs" items="stretch">
 				{notebooks.map((notebook) => (
 					<NotebookSubnavItem key={notebook.get('id')} notebook={notebook} />
 				))}
@@ -32,7 +32,10 @@ function NotebookSubnavItem({ notebook }: { notebook: Notebook }) {
 		<NavBar.Item color="neutral" asChild active={matches}>
 			<Link to={`/notebooks/${notebook.get('id')}`}>
 				{icon?.url ?
-					<img src={icon.url} className="w-6 h-6 rounded-full object-cover" />
+					<img
+						src={icon.url}
+						className="w-[27px] h-[27px] rounded-full object-cover"
+					/>
 				:	<NavBar.ItemIconWrapper>
 						<NavBar.ItemIcon name="page" />
 					</NavBar.ItemIconWrapper>

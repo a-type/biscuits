@@ -3,8 +3,17 @@ import { PostEditor } from '@/components/posts/PostEditor.jsx';
 import { PostPublishControl } from '@/components/posts/PostPublishControl.jsx';
 import { PostTitleEditor } from '@/components/posts/PostTitleEditor.jsx';
 import { hooks } from '@/hooks.js';
-import { Box, Button, ErrorBoundary, Icon } from '@a-type/ui';
+import {
+	Box,
+	Button,
+	ErrorBoundary,
+	Icon,
+	withClassName,
+	withProps,
+} from '@a-type/ui';
+import { Post } from '@post.biscuits/verdant';
 import { Link, useParams } from '@verdant-web/react-router';
+import { ReactNode, Suspense } from 'react';
 import { PostCreatedTime } from './PostCreatedTime.jsx';
 
 export interface PostPageProps {}
@@ -18,12 +27,14 @@ export function PostPage({}: PostPageProps) {
 	}
 
 	return (
-		<Box p className="bg-white flex-1" d="col">
+		<ThemedRoot post={post}>
 			<Box d="col" gap container className="max-w-650px w-full mx-auto flex-1">
 				<Box d="row" justify="between" p="sm">
 					<HomeButton notebookId={post.get('notebookId')} />
 					<ErrorBoundary fallback={null}>
-						<PostPublishControl post={post} />
+						<Suspense>
+							<PostPublishControl post={post} />
+						</Suspense>
 					</ErrorBoundary>
 				</Box>
 				<PostCoverImageEditor post={post} className="w-full h-20vh" />
@@ -34,8 +45,33 @@ export function PostPage({}: PostPageProps) {
 				</Box>
 				<PostEditor post={post} className="flex-1" />
 			</Box>
-		</Box>
+		</ThemedRoot>
 	);
+}
+
+const Root = withClassName(
+	withProps(Box, {
+		p: true,
+		d: 'col',
+	}),
+	'bg-white flex-1',
+);
+
+function ThemedRoot({ post, children }: { post: Post; children?: ReactNode }) {
+	const { notebookId } = hooks.useWatch(post);
+	if (!notebookId) return <Root>{children}</Root>;
+	return <ThemedRootInner notebookId={notebookId}>{children}</ThemedRootInner>;
+}
+function ThemedRootInner({
+	notebookId,
+	children,
+}: {
+	notebookId: string;
+	children?: ReactNode;
+}) {
+	const notebook = hooks.useNotebook(notebookId);
+	if (!notebook) return <Root>{children}</Root>;
+	return <Root className={`theme-${notebook.get('theme')}`}>{children}</Root>;
 }
 
 function HomeButton({ notebookId }: { notebookId: string | null }) {

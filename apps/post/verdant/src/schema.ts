@@ -33,6 +33,9 @@ const posts = schema.collection({
 				type: 'doc',
 			},
 		}),
+		summary: schema.fields.string({
+			nullable: true,
+		}),
 		coverImage: schema.fields.file({
 			nullable: true,
 		}),
@@ -72,6 +75,17 @@ const notebooks = schema.collection({
 		icon: schema.fields.file({
 			nullable: true,
 		}),
+		description: createTipTapFieldSchema({
+			default: {
+				type: 'doc',
+			},
+		}),
+		theme: schema.fields.string({
+			nullable: true,
+		}),
+		font: schema.fields.string({
+			nullable: true,
+		}),
 	},
 	indexes: {
 		name: {
@@ -81,7 +95,7 @@ const notebooks = schema.collection({
 });
 
 export default schema({
-	version: 2,
+	version: 3,
 	collections: {
 		posts,
 		notebooks,

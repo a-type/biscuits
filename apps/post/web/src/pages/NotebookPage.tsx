@@ -1,4 +1,5 @@
 import { NavBar } from '@/components/nav/NavBar.jsx';
+import { NotebookDescriptionEditor } from '@/components/notebooks/NotebookDescriptionEditor.jsx';
 import { NotebookDetailsEditor } from '@/components/notebooks/NotebookDetailsEditor.jsx';
 import { CreatePostButton } from '@/components/posts/CreatePostButton.jsx';
 import { PostsList } from '@/components/posts/PostsList.jsx';
@@ -6,14 +7,18 @@ import { hooks } from '@/hooks.js';
 import {
 	Box,
 	Button,
+	clsx,
 	H1,
+	H3,
 	Icon,
 	PageContent,
 	PageNav,
 	PageNowPlaying,
 	PageRoot,
 } from '@a-type/ui';
+import { Notebook } from '@post.biscuits/verdant';
 import { Link, useParams } from '@verdant-web/react-router';
+import { ReactNode } from 'react';
 
 const NotebookPage = () => {
 	const { notebookId } = useParams();
@@ -36,11 +41,14 @@ const NotebookPage = () => {
 	}
 
 	return (
-		<PageRoot>
+		<ThemedRoot notebook={notebook}>
 			<PageContent>
 				<Box d="col" gap container>
 					<HomeButton />
 					<NotebookDetailsEditor notebook={notebook} />
+					<H3>Description</H3>
+					<NotebookDescriptionEditor notebook={notebook} />
+					<H3>Posts</H3>
 					<PostsList notebookId={notebookId} />
 				</Box>
 				<PageNowPlaying unstyled className="items-center justify-center flex">
@@ -53,9 +61,24 @@ const NotebookPage = () => {
 			<PageNav>
 				<NavBar />
 			</PageNav>
-		</PageRoot>
+		</ThemedRoot>
 	);
 };
+
+function ThemedRoot({
+	children,
+	notebook,
+}: {
+	children?: ReactNode;
+	notebook: Notebook;
+}) {
+	const { theme } = hooks.useWatch(notebook);
+	return (
+		<PageRoot className={clsx(theme ? `theme-${theme}` : '', 'bg-wash')}>
+			{children}
+		</PageRoot>
+	);
+}
 
 function HomeButton() {
 	return (

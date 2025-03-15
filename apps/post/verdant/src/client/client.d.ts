@@ -158,6 +158,32 @@ export type PostBodyContent = ListEntity<
   PostBodyContentDestructured,
   PostBodyContentSnapshot
 >;
+export type PostBodyContentItem = ObjectEntity<
+  PostBodyContentItemInit,
+  PostBodyContentItemDestructured,
+  PostBodyContentItemSnapshot
+>;
+export type PostBodyContentItemType = string;
+export type PostBodyContentItemFrom = number;
+export type PostBodyContentItemTo = number;
+export type PostBodyContentItemAttrs = ObjectEntity<
+  PostBodyContentItemAttrsInit,
+  PostBodyContentItemAttrsDestructured,
+  PostBodyContentItemAttrsSnapshot
+>;
+export type PostBodyContentItemAttrsValue = any;
+export type PostBodyContentItemContent = ListEntity<
+  PostBodyContentItemContentInit,
+  PostBodyContentItemContentDestructured,
+  PostBodyContentItemContentSnapshot
+>;
+
+export type PostBodyContentItemText = string;
+export type PostBodyContentItemMarks = ListEntity<
+  PostBodyContentItemMarksInit,
+  PostBodyContentItemMarksDestructured,
+  PostBodyContentItemMarksSnapshot
+>;
 
 export type PostBodyText = string;
 export type PostBodyMarks = ListEntity<
@@ -165,6 +191,7 @@ export type PostBodyMarks = ListEntity<
   PostBodyMarksDestructured,
   PostBodyMarksSnapshot
 >;
+export type PostSummary = string;
 export type PostCoverImage = EntityFile;
 /** The ID of the notebook this post belongs to, if any. If null, the post is not in a notebook. */
 export type PostNotebookId = string;
@@ -173,27 +200,43 @@ export type PostInit = {
   createdAt?: number;
   title: string;
   body?: PostBodyInit;
+  summary?: string | null;
   coverImage?: File | null;
   notebookId?: string | null;
 };
 
 export type PostBodyAttrsInit = { [key: string]: PostBodyAttrsValueInit };
-export type PostBodyContentInit = PostBodyInit[];
-export type PostBodyMarksInit = PostBodyInit[];
+export type PostBodyContentItemAttrsInit = {
+  [key: string]: PostBodyContentItemAttrsValueInit;
+};
+export type PostBodyContentItemContentInit = PostBodyContentInit[] | null;
+export type PostBodyContentItemMarksInit = PostBodyContentInit[] | null;
+export type PostBodyContentItemInit = {
+  type: string;
+  from?: number | null;
+  to?: number | null;
+  attrs?: PostBodyContentItemAttrsInit;
+  content?: PostBodyContentItemContentInit | null;
+  text?: string | null;
+  marks?: PostBodyContentItemMarksInit | null;
+};
+export type PostBodyContentInit = PostBodyContentItemInit[] | null;
+export type PostBodyMarksInit = PostBodyContentInit[] | null;
 export type PostBodyInit = {
   type: string;
   from?: number | null;
   to?: number | null;
   attrs?: PostBodyAttrsInit;
-  content?: PostBodyContentInit;
+  content?: PostBodyContentInit | null;
   text?: string | null;
-  marks?: PostBodyMarksInit;
+  marks?: PostBodyMarksInit | null;
 };
 export type PostDestructured = {
   id: string;
   createdAt: number;
   title: string;
   body: PostBody;
+  summary: string | null;
   coverImage: EntityFile | null;
   notebookId: string | null;
 };
@@ -201,22 +244,37 @@ export type PostDestructured = {
 export type PostBodyAttrsDestructured = {
   [key: string]: PostBodyAttrsValue | undefined;
 };
-export type PostBodyContentDestructured = PostBody[];
-export type PostBodyMarksDestructured = PostBody[];
+export type PostBodyContentItemAttrsDestructured = {
+  [key: string]: PostBodyContentItemAttrsValue | undefined;
+};
+export type PostBodyContentItemContentDestructured = PostBodyContent[];
+export type PostBodyContentItemMarksDestructured = PostBodyContent[];
+export type PostBodyContentItemDestructured = {
+  type: string;
+  from: number | null;
+  to: number | null;
+  attrs: PostBodyContentItemAttrs;
+  content: PostBodyContentItemContent | null;
+  text: string | null;
+  marks: PostBodyContentItemMarks | null;
+};
+export type PostBodyContentDestructured = PostBodyContentItem[];
+export type PostBodyMarksDestructured = PostBodyContent[];
 export type PostBodyDestructured = {
   type: string;
   from: number | null;
   to: number | null;
   attrs: PostBodyAttrs;
-  content: PostBodyContent;
+  content: PostBodyContent | null;
   text: string | null;
-  marks: PostBodyMarks;
+  marks: PostBodyMarks | null;
 };
 export type PostSnapshot = {
   id: string;
   createdAt: number;
   title: string;
   body: PostBodySnapshot;
+  summary: string | null;
   coverImage: EntityFileSnapshot | null;
   notebookId: string | null;
 };
@@ -224,16 +282,32 @@ export type PostSnapshot = {
 export type PostBodyAttrsSnapshot = {
   [key: string]: PostBodyAttrsValueSnapshot;
 };
-export type PostBodyContentSnapshot = PostBodySnapshot[];
-export type PostBodyMarksSnapshot = PostBodySnapshot[];
+export type PostBodyContentItemAttrsSnapshot = {
+  [key: string]: PostBodyContentItemAttrsValueSnapshot;
+};
+export type PostBodyContentItemContentSnapshot =
+  | PostBodyContentSnapshot[]
+  | null;
+export type PostBodyContentItemMarksSnapshot = PostBodyContentSnapshot[] | null;
+export type PostBodyContentItemSnapshot = {
+  type: string;
+  from: number | null;
+  to: number | null;
+  attrs: PostBodyContentItemAttrsSnapshot;
+  content: PostBodyContentItemContentSnapshot | null;
+  text: string | null;
+  marks: PostBodyContentItemMarksSnapshot | null;
+};
+export type PostBodyContentSnapshot = PostBodyContentItemSnapshot[] | null;
+export type PostBodyMarksSnapshot = PostBodyContentSnapshot[] | null;
 export type PostBodySnapshot = {
   type: string;
   from: number | null;
   to: number | null;
   attrs: PostBodyAttrsSnapshot;
-  content: PostBodyContentSnapshot;
+  content: PostBodyContentSnapshot | null;
   text: string | null;
-  marks: PostBodyMarksSnapshot;
+  marks: PostBodyMarksSnapshot | null;
 };
 
 /** Index filters for Post **/
@@ -307,28 +381,195 @@ export type NotebookCreatedAt = number;
 export type NotebookName = string;
 export type NotebookCoverImage = EntityFile;
 export type NotebookIcon = EntityFile;
+export type NotebookDescription = ObjectEntity<
+  NotebookDescriptionInit,
+  NotebookDescriptionDestructured,
+  NotebookDescriptionSnapshot
+>;
+export type NotebookDescriptionType = string;
+export type NotebookDescriptionFrom = number;
+export type NotebookDescriptionTo = number;
+export type NotebookDescriptionAttrs = ObjectEntity<
+  NotebookDescriptionAttrsInit,
+  NotebookDescriptionAttrsDestructured,
+  NotebookDescriptionAttrsSnapshot
+>;
+export type NotebookDescriptionAttrsValue = any;
+export type NotebookDescriptionContent = ListEntity<
+  NotebookDescriptionContentInit,
+  NotebookDescriptionContentDestructured,
+  NotebookDescriptionContentSnapshot
+>;
+export type NotebookDescriptionContentItem = ObjectEntity<
+  NotebookDescriptionContentItemInit,
+  NotebookDescriptionContentItemDestructured,
+  NotebookDescriptionContentItemSnapshot
+>;
+export type NotebookDescriptionContentItemType = string;
+export type NotebookDescriptionContentItemFrom = number;
+export type NotebookDescriptionContentItemTo = number;
+export type NotebookDescriptionContentItemAttrs = ObjectEntity<
+  NotebookDescriptionContentItemAttrsInit,
+  NotebookDescriptionContentItemAttrsDestructured,
+  NotebookDescriptionContentItemAttrsSnapshot
+>;
+export type NotebookDescriptionContentItemAttrsValue = any;
+export type NotebookDescriptionContentItemContent = ListEntity<
+  NotebookDescriptionContentItemContentInit,
+  NotebookDescriptionContentItemContentDestructured,
+  NotebookDescriptionContentItemContentSnapshot
+>;
+
+export type NotebookDescriptionContentItemText = string;
+export type NotebookDescriptionContentItemMarks = ListEntity<
+  NotebookDescriptionContentItemMarksInit,
+  NotebookDescriptionContentItemMarksDestructured,
+  NotebookDescriptionContentItemMarksSnapshot
+>;
+
+export type NotebookDescriptionText = string;
+export type NotebookDescriptionMarks = ListEntity<
+  NotebookDescriptionMarksInit,
+  NotebookDescriptionMarksDestructured,
+  NotebookDescriptionMarksSnapshot
+>;
+export type NotebookTheme = string;
+export type NotebookFont = string;
 export type NotebookInit = {
   id?: string;
   createdAt?: number;
   name: string;
   coverImage?: File | null;
   icon?: File | null;
+  description?: NotebookDescriptionInit;
+  theme?: string | null;
+  font?: string | null;
 };
 
+export type NotebookDescriptionAttrsInit = {
+  [key: string]: NotebookDescriptionAttrsValueInit;
+};
+export type NotebookDescriptionContentItemAttrsInit = {
+  [key: string]: NotebookDescriptionContentItemAttrsValueInit;
+};
+export type NotebookDescriptionContentItemContentInit =
+  | NotebookDescriptionContentInit[]
+  | null;
+export type NotebookDescriptionContentItemMarksInit =
+  | NotebookDescriptionContentInit[]
+  | null;
+export type NotebookDescriptionContentItemInit = {
+  type: string;
+  from?: number | null;
+  to?: number | null;
+  attrs?: NotebookDescriptionContentItemAttrsInit;
+  content?: NotebookDescriptionContentItemContentInit | null;
+  text?: string | null;
+  marks?: NotebookDescriptionContentItemMarksInit | null;
+};
+export type NotebookDescriptionContentInit =
+  | NotebookDescriptionContentItemInit[]
+  | null;
+export type NotebookDescriptionMarksInit =
+  | NotebookDescriptionContentInit[]
+  | null;
+export type NotebookDescriptionInit = {
+  type: string;
+  from?: number | null;
+  to?: number | null;
+  attrs?: NotebookDescriptionAttrsInit;
+  content?: NotebookDescriptionContentInit | null;
+  text?: string | null;
+  marks?: NotebookDescriptionMarksInit | null;
+};
 export type NotebookDestructured = {
   id: string;
   createdAt: number;
   name: string;
   coverImage: EntityFile | null;
   icon: EntityFile | null;
+  description: NotebookDescription;
+  theme: string | null;
+  font: string | null;
 };
 
+export type NotebookDescriptionAttrsDestructured = {
+  [key: string]: NotebookDescriptionAttrsValue | undefined;
+};
+export type NotebookDescriptionContentItemAttrsDestructured = {
+  [key: string]: NotebookDescriptionContentItemAttrsValue | undefined;
+};
+export type NotebookDescriptionContentItemContentDestructured =
+  NotebookDescriptionContent[];
+export type NotebookDescriptionContentItemMarksDestructured =
+  NotebookDescriptionContent[];
+export type NotebookDescriptionContentItemDestructured = {
+  type: string;
+  from: number | null;
+  to: number | null;
+  attrs: NotebookDescriptionContentItemAttrs;
+  content: NotebookDescriptionContentItemContent | null;
+  text: string | null;
+  marks: NotebookDescriptionContentItemMarks | null;
+};
+export type NotebookDescriptionContentDestructured =
+  NotebookDescriptionContentItem[];
+export type NotebookDescriptionMarksDestructured = NotebookDescriptionContent[];
+export type NotebookDescriptionDestructured = {
+  type: string;
+  from: number | null;
+  to: number | null;
+  attrs: NotebookDescriptionAttrs;
+  content: NotebookDescriptionContent | null;
+  text: string | null;
+  marks: NotebookDescriptionMarks | null;
+};
 export type NotebookSnapshot = {
   id: string;
   createdAt: number;
   name: string;
   coverImage: EntityFileSnapshot | null;
   icon: EntityFileSnapshot | null;
+  description: NotebookDescriptionSnapshot;
+  theme: string | null;
+  font: string | null;
+};
+
+export type NotebookDescriptionAttrsSnapshot = {
+  [key: string]: NotebookDescriptionAttrsValueSnapshot;
+};
+export type NotebookDescriptionContentItemAttrsSnapshot = {
+  [key: string]: NotebookDescriptionContentItemAttrsValueSnapshot;
+};
+export type NotebookDescriptionContentItemContentSnapshot =
+  | NotebookDescriptionContentSnapshot[]
+  | null;
+export type NotebookDescriptionContentItemMarksSnapshot =
+  | NotebookDescriptionContentSnapshot[]
+  | null;
+export type NotebookDescriptionContentItemSnapshot = {
+  type: string;
+  from: number | null;
+  to: number | null;
+  attrs: NotebookDescriptionContentItemAttrsSnapshot;
+  content: NotebookDescriptionContentItemContentSnapshot | null;
+  text: string | null;
+  marks: NotebookDescriptionContentItemMarksSnapshot | null;
+};
+export type NotebookDescriptionContentSnapshot =
+  | NotebookDescriptionContentItemSnapshot[]
+  | null;
+export type NotebookDescriptionMarksSnapshot =
+  | NotebookDescriptionContentSnapshot[]
+  | null;
+export type NotebookDescriptionSnapshot = {
+  type: string;
+  from: number | null;
+  to: number | null;
+  attrs: NotebookDescriptionAttrsSnapshot;
+  content: NotebookDescriptionContentSnapshot | null;
+  text: string | null;
+  marks: NotebookDescriptionMarksSnapshot | null;
 };
 
 /** Index filters for Notebook **/
