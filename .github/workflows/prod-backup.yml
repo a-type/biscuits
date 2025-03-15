@@ -30,7 +30,7 @@ jobs:
           FLY_APP_NAME: biscuits-club
 
       - name: Upload to S3 in directory by date
-        uses: jakejarvis/s3-sync-action@master
+        uses: jakejarvis/s3-sync-action@7ed8b112447abb09f1da74f3466e4194fc7a6311
         with:
           args: --follow-symlinks
         env:

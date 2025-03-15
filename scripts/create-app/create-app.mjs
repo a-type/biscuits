@@ -1,34 +1,25 @@
 #!/usr/bin/env node
 
-import {
-  intro,
-  outro,
-  spinner,
-  text,
-  confirm,
-  note,
-  select,
-  isCancel,
-} from '@clack/prompts';
-import { cpTpl } from 'cp-tpl';
-import * as url from 'url';
-import * as path from 'path';
+import { confirm, intro, outro, spinner, text } from '@clack/prompts';
 import { exec } from 'child_process';
+import { cpTpl } from 'cp-tpl';
 import * as fs from 'fs/promises';
+import * as path from 'path';
+import * as url from 'url';
 
 const __dirname = url.fileURLToPath(new URL('.', import.meta.url));
 
 intro('create biscuits app');
 
 const name = await text({
-  message: 'What is the app name?',
-  placeholder: 'new app',
-  initialValue: '',
-  validate: (value) => {
-    if (value === '') {
-      return 'Please enter a name';
-    }
-  },
+	message: 'What is the app name?',
+	placeholder: 'new app',
+	initialValue: '',
+	validate: (value) => {
+		if (value === '') {
+			return 'Please enter a name';
+		}
+	},
 });
 
 const appId = name.toLowerCase().replace(/\s/g, '-');
@@ -36,23 +27,23 @@ const appId = name.toLowerCase().replace(/\s/g, '-');
 const destinationDir = path.resolve(process.cwd(), 'apps', appId);
 
 const exists = await fs
-  .access(destinationDir)
-  .then(() => true)
-  .catch(() => false);
+	.access(destinationDir)
+	.then(() => true)
+	.catch(() => false);
 
 if (exists) {
-  const overwrite = await confirm({
-    message: 'This directory already exists. Do you want to overwrite it?',
-  });
-  if (!overwrite) {
-    outro('Cancelled');
-    process.exit(1);
-  } else {
-    const deleteSpinner = spinner();
-    deleteSpinner.start('Deleting directory...');
-    await fs.rm(destinationDir, { recursive: true });
-    deleteSpinner.stop('Directory deleted');
-  }
+	const overwrite = await confirm({
+		message: 'This directory already exists. Do you want to overwrite it?',
+	});
+	if (!overwrite) {
+		outro('Cancelled');
+		process.exit(1);
+	} else {
+		const deleteSpinner = spinner();
+		deleteSpinner.start('Deleting directory...');
+		await fs.rm(destinationDir, { recursive: true });
+		deleteSpinner.stop('Directory deleted');
+	}
 }
 
 const copySpinner = spinner();
@@ -60,27 +51,27 @@ const copySpinner = spinner();
 copySpinner.start('Copying files...');
 
 const dontCopy = [
-  'node_modules/**/*',
-  'package-lock.json',
-  'yarn.lock',
-  'pnpm-lock.yaml',
+	'node_modules/**/*',
+	'package-lock.json',
+	'yarn.lock',
+	'pnpm-lock.yaml',
 ];
 
 const copyConfig = {
-  replace: {
-    '{{todo}}': name,
-    '{{todoId}}': appId,
-    '.env-template': '.env',
-    '.gitignore-template': '.gitignore',
-  },
-  gitingore: true,
-  exclude: dontCopy,
+	replace: {
+		'{{todo}}': name,
+		'{{todoId}}': appId,
+		'.env-template': '.env',
+		'.gitignore-template': '.gitignore',
+	},
+	gitingore: true,
+	exclude: dontCopy,
 };
 
 await cpTpl(path.resolve(__dirname, `./template`), destinationDir, copyConfig);
 
 function constify(str) {
-  return str.toUpperCase().replace(/[^A-Z0-9]/g, '_');
+	return str.toUpperCase().replace(/[^A-Z0-9]/g, '_');
 }
 const deployAction = `name: ${name} deploy
 on:
@@ -124,7 +115,7 @@ jobs:
           VITE_STRIPE_PUBLISHABLE_KEY: \${{ vars.STRIPE_PUBLISHABLE_KEY }}
 
       - name: Deploy ${appId} to S3
-        uses: jakejarvis/s3-sync-action@master
+        uses: jakejarvis/s3-sync-action@7ed8b112447abb09f1da74f3466e4194fc7a6311
         with:
           args: --follow-symlinks --delete
         env:
@@ -134,7 +125,7 @@ jobs:
           SOURCE_DIR: './apps/${appId}/web/dist'
 
       - name: Invalidate CloudFront cache
-        uses: chetan/invalidate-cloudfront-action@v2
+        uses: chetan/invalidate-cloudfront-action@c384d5f09592318a77b1e5c0c8d4772317e48b25
         env:
           AWS_ACCESS_KEY_ID: \${{ secrets.DEPLOYER_AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: \${{ secrets.DEPLOYER_AWS_SECRET_ACCESS_KEY }}
@@ -143,8 +134,8 @@ jobs:
           AWS_REGION: 'us-east-1'
 `;
 await fs.writeFile(
-  path.resolve(process.cwd(), `.github/workflows/deploy-${appId}.yml`),
-  deployAction,
+	path.resolve(process.cwd(), `.github/workflows/deploy-${appId}.yml`),
+	deployAction,
 );
 
 copySpinner.stop('Copying complete');
@@ -155,7 +146,7 @@ installSpinner.start('Installing dependencies...');
 
 // exec pnpm i in the new directory
 await execAsync('pnpm i', {
-  cwd: process.cwd(),
+	cwd: process.cwd(),
 });
 
 installSpinner.stop('Dependencies installed');
@@ -166,25 +157,25 @@ const verdantDir = path.resolve(destinationDir, 'verdant');
 
 // exec pnpm generate in the new directory
 await execAsync('pnpm generate --select=wip --module=esm', {
-  cwd: verdantDir,
+	cwd: verdantDir,
 });
 
 installSpinner.stop('App created.');
 
 exec('code ./packages/apps/src/index.ts', {
-  cwd: process.cwd(),
+	cwd: process.cwd(),
 });
 
 outro('Done!');
 
 async function execAsync(command, options) {
-  return new Promise((resolve, reject) => {
-    exec(command, options, (err) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve();
-      }
-    });
-  });
+	return new Promise((resolve, reject) => {
+		exec(command, options, (err) => {
+			if (err) {
+				reject(err);
+			} else {
+				resolve();
+			}
+		});
+	});
 }

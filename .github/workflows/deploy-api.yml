@@ -20,7 +20,7 @@ jobs:
           fetch-depth: 0
       - name: Get API changed files
         id: api
-        uses: tj-actions/changed-files@v44
+        uses: trmlabs/changed-files@3cafe8b47d83dc1df61b7de8d274088004fda43c
         with:
           since_last_remote_commit: true
           files: |
@@ -87,7 +87,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: superfly/flyctl-actions/setup-flyctl@master
+      - uses: superfly/flyctl-actions/setup-flyctl@de6d3cb385db954d04942d536214580bd2b19d79
 
       - name: Add SHORT_SHA env property with commit short sha
         run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-7`" >> $GITHUB_ENV
@@ -102,7 +102,7 @@ jobs:
     needs: deploy
     steps:
       - name: Invalidate Gnocchi SSR cache
-        uses: chetan/invalidate-cloudfront-action@v2
+        uses: chetan/invalidate-cloudfront-action@c384d5f09592318a77b1e5c0c8d4772317e48b25
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.DEPLOYER_AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.DEPLOYER_AWS_SECRET_ACCESS_KEY }}
@@ -110,7 +110,7 @@ jobs:
           PATHS: '/*'
           AWS_REGION: 'us-east-1'
       # - name: Invalidate Wish Wash SSR cache
-      #   uses: chetan/invalidate-cloudfront-action@v2
+      #   uses: chetan/invalidate-cloudfront-action@c384d5f09592318a77b1e5c0c8d4772317e48b25
       #   env:
       #     AWS_ACCESS_KEY_ID: ${{ secrets.DEPLOYER_AWS_ACCESS_KEY_ID }}
       #     AWS_SECRET_ACCESS_KEY: ${{ secrets.DEPLOYER_AWS_SECRET_ACCESS_KEY }}
