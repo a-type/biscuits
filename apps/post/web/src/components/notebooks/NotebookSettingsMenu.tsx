@@ -2,23 +2,24 @@ import { Button, ButtonProps, Dialog, H3, Icon, P } from '@a-type/ui';
 import { DomainRouteView } from '@biscuits/client';
 import { Notebook } from '@post.biscuits/verdant';
 
-export interface NotebookPublishControlProps extends ButtonProps {
+export interface NotebookSettingsMenuProps extends ButtonProps {
 	notebook: Notebook;
 }
 
-export function NotebookPublishControl({
+export function NotebookSettingsMenu({
+	children,
 	notebook,
-	...props
-}: NotebookPublishControlProps) {
+	...rest
+}: NotebookSettingsMenuProps) {
 	return (
 		<Dialog>
 			<Dialog.Trigger asChild>
-				<Button color="accent" {...props}>
-					<Icon name="gear" /> Publishing
+				<Button size="icon" {...rest}>
+					{children || <Icon name="gear" />}
 				</Button>
 			</Dialog.Trigger>
-			<Dialog.Content className="flex flex-col gap-md">
-				<Dialog.Title>Notebook Publishing Settings</Dialog.Title>
+			<Dialog.Content>
+				<Dialog.Title>Settings</Dialog.Title>
 				<H3>Domain</H3>
 				<P>You can assign a custom domain you own to this notebook.</P>
 				<DomainRouteView resourceId={notebook.get('id')} />

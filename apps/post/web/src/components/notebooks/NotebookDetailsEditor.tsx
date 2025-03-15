@@ -7,7 +7,8 @@ import {
 	ImageUploader,
 } from '@a-type/ui';
 import { Notebook } from '@post.biscuits/verdant';
-import { NotebookPublishControl } from './NotebookPublishControl.jsx';
+import { NotebookIconEditor } from './NotebookIconEditor.jsx';
+import { NotebookSettingsMenu } from './NotebookSettingsMenu.jsx';
 
 export interface NotebookDetailsEditorProps {
 	notebook: Notebook;
@@ -33,8 +34,10 @@ export function NotebookDetailsEditor({
 			</div>
 			<Box gap="sm" className="absolute top-0 right-0 z-11" p>
 				<ErrorBoundary fallback={null}>
-					<NotebookPublishControl notebook={notebook} size="small" />
+					<NotebookSettingsMenu notebook={notebook} />
 				</ErrorBoundary>
+			</Box>
+			<Box gap="sm" className="absolute bottom-0 right-0 z-11" p>
 				<ImageUploader.Root
 					value={null}
 					onChange={(file) => notebook.set('coverImage', file)}
@@ -48,22 +51,7 @@ export function NotebookDetailsEditor({
 				</ImageUploader.Root>
 			</Box>
 			<Box className="relative z-10 mt-auto w-full" d="col" gap items="start">
-				<ImageUploader.Root
-					value={icon?.url ?? null}
-					onChange={(file) => notebook.set('icon', file)}
-					className="w-80px h-80px overflow-visible"
-				>
-					<ImageUploader.Display className="rounded-md" />
-					<ImageUploader.EmptyControls className="bg-wash rounded-md">
-						<ImageUploader.FileButton className="w-full h-full items-center justify-center">
-							<Icon name="upload" />
-						</ImageUploader.FileButton>
-					</ImageUploader.EmptyControls>
-					<ImageUploader.RemoveButton
-						className="-top-2 -right-2 bg-overlay"
-						color="ghost"
-					/>
-				</ImageUploader.Root>
+				<NotebookIconEditor notebook={notebook} className="w-80px" />
 				<EditableText
 					value={name}
 					onValueChange={(name) => notebook.set('name', name)}
