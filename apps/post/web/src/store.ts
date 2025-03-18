@@ -10,6 +10,7 @@ export interface Presence {
 
 export type Participant = UserInfo<VerdantProfile, Presence>;
 
+const DEBUG = localStorage.getItem('DEBUG') === 'true';
 export const clientDescriptor = new ClientDescriptor({
 	namespace: 'post',
 	migrations,
@@ -18,7 +19,16 @@ export const clientDescriptor = new ClientDescriptor({
 		access: 'members',
 		initialPresence: {},
 	}),
-	// log: console.debug,
+	log: (level, ...rest) => {
+		if (
+			DEBUG ||
+			level === 'error' ||
+			level === 'warn' ||
+			level === 'critical'
+		) {
+			console.log(`🌿 [${level}]`, ...rest);
+		}
+	},
 });
 
 // these are some helpers I like to use. You can delete them if you want.
