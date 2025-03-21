@@ -23,10 +23,6 @@ export function PostDetailsEditor({ post }: PostDetailsEditorProps) {
 			onKeyDown={
 				editing ? undefined : (
 					(ev) => {
-						if (ev.target === ev.currentTarget) {
-							// Only allow Enter and Space to trigger editing
-							ev.preventDefault();
-						}
 						if (ev.key === 'Enter' || ev.key === ' ') {
 							setEditing(true);
 						}

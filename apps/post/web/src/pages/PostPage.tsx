@@ -10,6 +10,7 @@ import {
 	withClassName,
 	withProps,
 } from '@a-type/ui';
+import { usePageTitle } from '@biscuits/client';
 import { Post } from '@post.biscuits/verdant';
 import { Link, useParams } from '@verdant-web/react-router';
 import { ReactNode, Suspense } from 'react';
@@ -20,6 +21,8 @@ export interface PostPageProps {}
 export function PostPage({}: PostPageProps) {
 	const { id } = useParams();
 	const post = hooks.usePost(id);
+
+	usePageTitle(`${post?.get('title') || 'Not found'} | Post`);
 
 	if (!post) {
 		return <div>Post not found</div>;
