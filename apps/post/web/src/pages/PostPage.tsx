@@ -1,7 +1,6 @@
-import { PostCoverImageEditor } from '@/components/posts/PostCoverImageEditor.jsx';
+import { PostDetailsEditor } from '@/components/posts/PostDetailsEditor.jsx';
 import { PostEditor } from '@/components/posts/PostEditor.jsx';
 import { PostPublishControl } from '@/components/posts/PostPublishControl.jsx';
-import { PostTitleEditor } from '@/components/posts/PostTitleEditor.jsx';
 import { hooks } from '@/hooks.js';
 import {
 	Box,
@@ -37,8 +36,7 @@ export function PostPage({}: PostPageProps) {
 						</Suspense>
 					</ErrorBoundary>
 				</Box>
-				<PostCoverImageEditor post={post} className="w-full h-20vh" />
-				<PostTitleEditor post={post} className="text-2xl -mx-4" />
+				<PostDetailsEditor post={post} />
 				<Box d="col" items="start" className="px-2">
 					<PostCreatedTime post={post} className="text-xs color-gray-dark" />
 					{/* <PostNotebookEditor post={post} /> */}

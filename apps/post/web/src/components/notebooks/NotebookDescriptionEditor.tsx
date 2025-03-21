@@ -17,7 +17,6 @@ export function NotebookDescriptionEditor({
 		editorOptions: {
 			extensions: tiptapExtensions,
 		},
-		editorDependencies: [notebook],
 	});
 	return (
 		<Box className={className}>
