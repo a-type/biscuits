@@ -1,3 +1,4 @@
+import { DeveloperErrorDialog } from './DeveloperErrorDialog.js';
 import { LogoutNotice } from './LogoutNotice.js';
 import { ResetNotifier } from './ResetNotifier.js';
 import { SubscriptionExpiredDialog } from './SubscriptionExpiredDialog.js';
@@ -10,6 +11,7 @@ export function Essentials() {
 			<TosPrompt />
 			<SubscriptionExpiredDialog />
 			<ResetNotifier />
+			<DeveloperErrorDialog />
 		</>
 	);
 }

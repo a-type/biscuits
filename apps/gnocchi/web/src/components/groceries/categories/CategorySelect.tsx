@@ -60,7 +60,10 @@ export const CategorySelect = withSuspense(function CategorySelect({
 	return (
 		<>
 			<Dialog open={open} onOpenChange={onOpenChange}>
-				<DialogSelectTrigger asChild={!!children}>
+				<DialogSelectTrigger
+					asChild={!!children}
+					className="text-sm font-normal py-1"
+				>
 					{children || category?.get('name') || 'Uncategorized'}
 				</DialogSelectTrigger>
 				<DialogContent>

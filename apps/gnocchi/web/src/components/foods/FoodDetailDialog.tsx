@@ -168,6 +168,9 @@ function FoodDetailView({
 					<span className="whitespace-nowrap">Expires after</span>
 					<LiveUpdateTextField
 						type="number"
+						// @ts-expect-error - not docd...
+						max={9999}
+						min={0}
 						value={food.get('expiresAfterDays')?.toString() ?? ''}
 						onChange={(val) => {
 							if (val === '') {
@@ -195,16 +198,6 @@ function FoodDetailView({
 					expire.
 				</span>
 			</div>
-			<Divider />
-			<H3>Alternate names</H3>
-			<FoodNamesEditor names={food.get('alternateNames')} />
-			<label className="row gap-1">
-				<Switch
-					checked={food.get('pluralizeName')}
-					onCheckedChange={(val) => food.set('pluralizeName', val === true)}
-				/>
-				<span>Use pluralized name</span>
-			</label>
 			<Box direction="col" gap="sm" p="none">
 				<label className="row gap-1">
 					<Switch
@@ -217,6 +210,16 @@ function FoodDetailView({
 					Staples are automatically added to the list when they run out
 				</span>
 			</Box>
+			<Divider />
+			<H3>Alternate names</H3>
+			<FoodNamesEditor names={food.get('alternateNames')} />
+			<label className="row gap-1">
+				<Switch
+					checked={food.get('pluralizeName')}
+					onCheckedChange={(val) => food.set('pluralizeName', val === true)}
+				/>
+				<span>Use pluralized name</span>
+			</label>
 			<Divider />
 			<label className="row gap-1">
 				<Switch
@@ -241,7 +244,7 @@ function FoodDetailView({
 	);
 }
 
-const Row = withClassName('div', 'flex flex-row items-center gap-1');
+const Row = withClassName('div', 'flex flex-row items-center gap-md');
 
 const FoodNameEditor = ({ food }: { food: Food }) => {
 	const changeName = hooks.useChangeFoodCanonicalName();

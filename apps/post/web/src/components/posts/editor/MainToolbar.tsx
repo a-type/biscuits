@@ -1,9 +1,11 @@
+import { RedoAction } from '@/components/actions/RedoAction.jsx';
+import { UndoAction } from '@/components/actions/UndoAction.jsx';
 import { clsx, HorizontalList } from '@a-type/ui';
 import type { Editor } from '@tiptap/core';
 import { useState } from 'react';
 import { BlockAttributeControls } from './BlockAttributeControls.jsx';
 import { BlockSelect } from './BlockSelect.jsx';
-import { BuiltinUndo } from './BuiltinUndo.jsx';
+import { InsertFile } from './InsertFile.jsx';
 import {
 	BoldToggle,
 	HighlightToggle,
@@ -34,12 +36,12 @@ export function MainToolbar({ editor, className, ...props }: MainToolbarProps) {
 			<HorizontalList
 				open={open}
 				onOpenChange={setOpen}
-				contentClassName="items-center p-sm"
+				contentClassName="items-center p-sm bg-white"
 				{...props}
 			>
-				{/* <UndoAction />
-				<RedoAction /> */}
-				<BuiltinUndo editor={editor} />
+				<UndoAction />
+				<RedoAction />
+				{/* <BuiltinUndo editor={editor} /> */}
 				<BlockSelect editor={editor} className="justify-between min-w-120px" />
 				<BlockAttributeControls editor={editor} />
 				<BoldToggle editor={editor} />
@@ -49,6 +51,7 @@ export function MainToolbar({ editor, className, ...props }: MainToolbarProps) {
 				<WrapBlockquote editor={editor} />
 				<WrapBulletList editor={editor} />
 				<WrapOrderedList editor={editor} />
+				<InsertFile editor={editor} />
 			</HorizontalList>
 		</div>
 	);

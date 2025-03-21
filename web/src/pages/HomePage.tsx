@@ -18,7 +18,7 @@ export default function HomePage() {
 					<PageFixedArea className="bg-transparent flex flex-row justify-between items-center py-2 md:max-w-800px">
 						<h1
 							className={classNames(
-								'text-2xl sm:text-4xl m-0 font-bold color-gray-dark text-shadow',
+								'text-2xl sm:text-4xl m-0 font-bold color-black text-shadow',
 								'bg-white p-2 rounded-lg leading-none',
 							)}
 						>

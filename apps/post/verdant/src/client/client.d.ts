@@ -191,6 +191,12 @@ export type PostBodyMarks = ListEntity<
   PostBodyMarksDestructured,
   PostBodyMarksSnapshot
 >;
+export type PostFiles = ObjectEntity<
+  PostFilesInit,
+  PostFilesDestructured,
+  PostFilesSnapshot
+>;
+export type PostFilesValue = EntityFile;
 export type PostSummary = string;
 export type PostCoverImage = EntityFile;
 /** The ID of the notebook this post belongs to, if any. If null, the post is not in a notebook. */
@@ -200,6 +206,7 @@ export type PostInit = {
   createdAt?: number;
   title: string;
   body?: PostBodyInit;
+  files?: PostFilesInit;
   summary?: string | null;
   coverImage?: File | null;
   notebookId?: string | null;
@@ -231,11 +238,13 @@ export type PostBodyInit = {
   text?: string | null;
   marks?: PostBodyMarksInit | null;
 };
+export type PostFilesInit = { [key: string]: PostFilesValueInit };
 export type PostDestructured = {
   id: string;
   createdAt: number;
   title: string;
   body: PostBody;
+  files: PostFiles;
   summary: string | null;
   coverImage: EntityFile | null;
   notebookId: string | null;
@@ -269,11 +278,15 @@ export type PostBodyDestructured = {
   text: string | null;
   marks: PostBodyMarks | null;
 };
+export type PostFilesDestructured = {
+  [key: string]: PostFilesValue | undefined;
+};
 export type PostSnapshot = {
   id: string;
   createdAt: number;
   title: string;
   body: PostBodySnapshot;
+  files: PostFilesSnapshot;
   summary: string | null;
   coverImage: EntityFileSnapshot | null;
   notebookId: string | null;
@@ -309,6 +322,7 @@ export type PostBodySnapshot = {
   text: string | null;
   marks: PostBodyMarksSnapshot | null;
 };
+export type PostFilesSnapshot = { [key: string]: PostFilesValueSnapshot };
 
 /** Index filters for Post **/
 

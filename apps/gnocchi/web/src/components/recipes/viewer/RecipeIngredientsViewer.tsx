@@ -91,7 +91,7 @@ function EmbeddedRecipeIngredientsImpl({
 		<>
 			{!!ingredients.length && (
 				<Box justify="between" items="center" p="none" gap="md">
-					<H4 className="color-gray-dark italic">
+					<H4 className="italic">
 						<span className="font-medium">From sub-recipe</span>{' '}
 						{recipe.get('title')}
 						{multText}

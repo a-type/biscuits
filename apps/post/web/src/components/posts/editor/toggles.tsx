@@ -33,7 +33,7 @@ const MarkToggle = withClassName(
 			/>
 		);
 	},
-	'aspect-1 items-center justify-center w-30px',
+	'items-center justify-center',
 );
 
 export function BoldToggle({ editor }: { editor: Editor }) {

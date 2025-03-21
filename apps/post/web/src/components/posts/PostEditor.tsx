@@ -1,3 +1,4 @@
+import { hooks } from '@/hooks.js';
 import { Box, clsx, tipTapClassName } from '@a-type/ui';
 import { tiptapExtensions } from '@post.biscuits/common';
 import { Post } from '@post.biscuits/verdant';
@@ -14,6 +15,7 @@ export interface PostEditorProps {
 }
 
 export function PostEditor({ post, className }: PostEditorProps) {
+	const { files } = hooks.useWatch(post);
 	const editor = useSyncedEditor(post, 'body', {
 		editorOptions: {
 			extensions: [
@@ -23,12 +25,8 @@ export function PostEditor({ post, className }: PostEditorProps) {
 				}),
 			],
 		},
-		extensionOptions: {
-			batchConfig: {
-				batchName: 'tiptap',
-				undoable: false,
-			},
-		},
+		extensionOptions: {},
+		files,
 	});
 
 	useEffect(() => {
@@ -45,6 +43,10 @@ export function PostEditor({ post, className }: PostEditorProps) {
 				className={clsx(
 					tipTapClassName,
 					'flex-1 flex flex-col [&_.ProseMirror]:(p-md flex-1 bg-transparent border-none shadow-none)',
+					'[&_[data-verdant-file]]:(w-full flex flex-col)',
+					'[&_img]:(max-w-full rounded-md h-auto max-h-60vh mx-auto)',
+					'[&_video]:(max-w-full rounded-md h-auto max-h-60vh mx-auto)',
+					'[&_audio]:(max-w-full h-auto)',
 					'[&_.tiptap_p.is-editor-empty:first-child::before]:(color-gray content-[attr(data-placeholder)] h-0 float-left pointer-events-none)',
 				)}
 			/>

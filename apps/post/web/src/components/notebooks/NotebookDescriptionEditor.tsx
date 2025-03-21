@@ -17,12 +17,16 @@ export function NotebookDescriptionEditor({
 		editorOptions: {
 			extensions: tiptapExtensions,
 		},
+		editorDependencies: [notebook],
 	});
 	return (
 		<Box className={className}>
 			<EditorContent
 				editor={editor}
-				className={clsx(tipTapClassName, 'h-120px [&_.ProseMirror]:h-full')}
+				className={clsx(
+					tipTapClassName,
+					'h-120px [&_.ProseMirror]:(h-full overflow-y-auto)',
+				)}
 			/>
 		</Box>
 	);

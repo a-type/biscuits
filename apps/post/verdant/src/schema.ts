@@ -1,5 +1,8 @@
 import { schema } from '@verdant-web/store';
-import { createTipTapFieldSchema } from '@verdant-web/tiptap';
+import {
+	createTipTapFieldSchema,
+	createTipTapFileMapSchema,
+} from '@verdant-web/tiptap';
 
 /**
  * Welcome to your Verdant schema!
@@ -33,6 +36,7 @@ const posts = schema.collection({
 				type: 'doc',
 			},
 		}),
+		files: createTipTapFileMapSchema(),
 		summary: schema.fields.string({
 			nullable: true,
 		}),
@@ -95,7 +99,7 @@ const notebooks = schema.collection({
 });
 
 export default schema({
-	version: 3,
+	version: 4,
 	collections: {
 		posts,
 		notebooks,
