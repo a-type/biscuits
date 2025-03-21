@@ -28,7 +28,7 @@
 		},
 		"./subscription": {
 			"production": "./dist/subscription/index.js",
-			"development": "./src/subscription/index.tsx",
+			"development": "./src/subscription/index.ts",
 			"import": "./dist/subscription/index.js",
 			"node": "./dist/subscription/index.js",
 			"default": "./dist/subscription/index.js",
@@ -36,7 +36,7 @@
 		},
 		"./apps": {
 			"production": "./dist/apps/index.js",
-			"development": "./src/apps/index.tsx",
+			"development": "./src/apps/index.ts",
 			"import": "./dist/apps/index.js",
 			"node": "./dist/apps/index.js",
 			"default": "./dist/apps/index.js",

@@ -211,9 +211,11 @@ function SmallUpdatePrompt() {
 	}
 
 	return (
-		<Box surface="accent" p="xs" gap="xs" asChild>
+		<Box surface="accent" p="xs" gap="sm" asChild>
 			<Button
 				color="ghostAccent"
+				size="small"
+				className="font-normal"
 				onClick={async () => {
 					try {
 						setLoading(true);
