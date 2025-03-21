@@ -1,17 +1,16 @@
-import { UpdatePrompt } from '@/components/updatePrompt/UpdatePrompt.jsx';
-import { checkForUpdate } from '@/updateState.js';
 import { Button, H1, Icon, PageContent, PageFixedArea } from '@a-type/ui';
 import { DarkModeToggle, usePageTitle } from '@biscuits/client';
-import { ManageStorage } from '@biscuits/client/storage';
+import {
+	ManageStorage,
+	UpdatePrompt,
+	usePollForUpdates,
+} from '@biscuits/client/apps';
 import { AutoRestoreScroll, Link } from '@verdant-web/react-router';
-import { useEffect } from 'react';
 
 export interface SettingsPageProps {}
 
 export function SettingsPage({}: SettingsPageProps) {
-	useEffect(() => {
-		checkForUpdate();
-	}, []);
+	usePollForUpdates();
 
 	usePageTitle('Palette | Settings');
 

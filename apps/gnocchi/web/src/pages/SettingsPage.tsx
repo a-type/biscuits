@@ -5,8 +5,6 @@ import { ManageCategoriesDialog } from '@/components/menu/ManageCategoriesDialog
 import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
 import { TextLink } from '@/components/nav/Link.jsx';
 import { ReloadButton } from '@/components/sync/ReloadButton.jsx';
-import { UpdatePrompt } from '@/components/updatePrompt/UpdatePrompt.jsx';
-import { checkForUpdate } from '@/components/updatePrompt/updateState.js';
 import { useInterval } from '@/hooks/useInterval.js';
 import {
 	Button,
@@ -20,7 +18,6 @@ import {
 import {
 	ChangelogDisplay,
 	DarkModeToggle,
-	InstallHint,
 	LoginButton,
 	ManagePlanButton,
 	PromoteSubscriptionButton,
@@ -29,9 +26,14 @@ import {
 	useIsOffline,
 	useMe,
 } from '@biscuits/client';
-import { ManageStorage } from '@biscuits/client/storage';
+import {
+	InstallHint,
+	ManageStorage,
+	UpdatePrompt,
+	usePollForUpdates,
+} from '@biscuits/client/apps';
 import { ArrowRightIcon } from '@radix-ui/react-icons';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode } from 'react';
 
 const contents = {
 	offline: OfflineContents,
@@ -56,9 +58,7 @@ export function SettingsPage() {
 
 	const Contents = contents[state];
 
-	useEffect(() => {
-		checkForUpdate();
-	}, []);
+	usePollForUpdates(30000);
 
 	return (
 		<PageContent fullHeight noPadding>

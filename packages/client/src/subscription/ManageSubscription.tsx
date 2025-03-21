@@ -7,7 +7,7 @@ import {
 } from '@biscuits/graphql';
 import { useSearchParams } from '@verdant-web/react-router';
 import { useEffect } from 'react';
-import * as CONFIG from '../../config.js';
+import * as CONFIG from '../config.js';
 import { CancelPlanButton } from './CancelPlanButton.js';
 import { PlanInfo, planProductInfo } from './PlanInfo.js';
 

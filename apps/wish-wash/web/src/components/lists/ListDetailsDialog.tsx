@@ -7,7 +7,7 @@ import {
 	Icon,
 	toast,
 } from '@a-type/ui';
-import { UserMenuItem } from '@biscuits/client';
+import { UserMenuItem } from '@biscuits/client/apps';
 import { useNavigate, useSearchParams } from '@verdant-web/react-router';
 import { authorization } from '@wish-wash.biscuits/verdant';
 import { useEditList } from './hooks.js';

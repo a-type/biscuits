@@ -16,7 +16,7 @@ import {
 	useAppInfo,
 	useHasServerAccess,
 } from '@biscuits/client';
-import { ExportDataButton } from '@biscuits/client/storage';
+import { ExportDataButton } from '@biscuits/client/apps';
 import { Link } from '@verdant-web/react-router';
 
 export interface AppMovedProps {}

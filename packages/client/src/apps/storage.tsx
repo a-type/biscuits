@@ -10,9 +10,9 @@ import {
 } from '@a-type/ui';
 import { appsById } from '@biscuits/apps';
 import { useContext, useState } from 'react';
+import { useAppId } from '../common/Context.js';
 import { useHasServerAccess } from '../hooks/graphql.js';
 import { VerdantContext } from '../verdant.js';
-import { useAppId } from './Context.js';
 
 export interface ExportDataButtonProps extends Omit<ButtonProps, 'onError'> {
 	onError: (error: Error) => void;

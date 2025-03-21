@@ -9,7 +9,8 @@ import {
 	PageNowPlaying,
 	PageRoot,
 } from '@a-type/ui';
-import { useHasServerAccess, UserMenu, UserMenuItem } from '@biscuits/client';
+import { useHasServerAccess } from '@biscuits/client';
+import { UserMenu, UserMenuItem } from '@biscuits/client/apps';
 import { useNavigate } from '@verdant-web/react-router';
 import { authorization } from '@wish-wash.biscuits/verdant';
 import { Suspense } from 'react';

@@ -10,7 +10,7 @@ import {
 	UserMenu,
 	UserMenuItem,
 	UserMenuItemRightSlot,
-} from '@biscuits/client';
+} from '@biscuits/client/apps';
 
 export interface HomePageProps {}
 

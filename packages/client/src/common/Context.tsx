@@ -5,9 +5,9 @@ import {
 	graphqlClient as defaultClient,
 } from '@biscuits/graphql';
 import { ReactNode, createContext, useContext } from 'react';
+import { AppPreviewNotice } from '../apps/AppPreviewNotice.js';
+import { Essentials } from '../apps/Essentials.js';
 import { VerdantContext } from '../verdant.js';
-import { AppPreviewNotice } from './AppPreviewNotice.js';
-import { Essentials } from './Essentials.js';
 import { GlobalSyncingIndicator } from './GlobalSyncingIndicator.js';
 import { PrereleaseWarning } from './PrereleaseWarning.js';
 import { TopLoader } from './TopLoader.js';

@@ -3,12 +3,8 @@ import { ListsList } from '@/components/lists/ListsList.jsx';
 import { AddTripButton } from '@/components/trips/AddTripButton.jsx';
 import { TripsList } from '@/components/trips/TripsList.jsx';
 import { Divider, Icon, PageContent, PageNowPlaying } from '@a-type/ui';
-import {
-	InfrequentSubscriptionHint,
-	InstallHint,
-	UserMenu,
-	usePageTitle,
-} from '@biscuits/client';
+import { InfrequentSubscriptionHint, usePageTitle } from '@biscuits/client';
+import { InstallHint, UserMenu } from '@biscuits/client/apps';
 import { AutoRestoreScroll } from '@verdant-web/react-router';
 import { Suspense } from 'react';
 

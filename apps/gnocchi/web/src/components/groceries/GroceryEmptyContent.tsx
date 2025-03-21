@@ -1,5 +1,6 @@
 import { P } from '@a-type/ui';
-import { InfrequentSubscriptionHint, InstallHint } from '@biscuits/client';
+import { InfrequentSubscriptionHint } from '@biscuits/client';
+import { InstallHint } from '@biscuits/client/apps';
 import { Cart } from '../graphics/Cart.jsx';
 import { MeetupHint } from './meetup/MeetupHint.jsx';
 

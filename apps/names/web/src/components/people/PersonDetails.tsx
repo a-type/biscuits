@@ -17,7 +17,9 @@ import {
 	RelativeTime,
 	toast,
 } from '@a-type/ui';
-import { EntityDeleteButton, useUserInfo } from '@biscuits/client';
+import { useUserInfo } from '@biscuits/client';
+
+import { EntityDeleteButton } from '@biscuits/client/apps';
 import { Person } from '@names.biscuits/verdant';
 import { lazy, Suspense } from 'react';
 import { PersonPhoto } from './PersonPhoto.jsx';

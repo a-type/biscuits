@@ -4,7 +4,8 @@ import { ListHero } from '@/components/lists/ListHero.jsx';
 import { ListView } from '@/components/lists/ListView.jsx';
 import { hooks } from '@/hooks.js';
 import { Button, H1, Icon, PageContent } from '@a-type/ui';
-import { useLocalStorage, UserMenu } from '@biscuits/client';
+import { useLocalStorage } from '@biscuits/client';
+import { UserMenu } from '@biscuits/client/apps';
 import { Link, useNavigate, useParams } from '@verdant-web/react-router';
 import { List } from '@wish-wash.biscuits/verdant';
 import { useEffect } from 'react';
@@ -21,14 +22,13 @@ export function ListPage({}: ListPageProps) {
 	useEffect(() => {
 		setLastList(listId);
 	}, [listId, setLastList]);
+	const hasList = !!list;
 	useEffect(() => {
-		if (!list) {
+		if (!hasList) {
 			setLastList(null);
 			navigate('/');
 		}
-	}, [!!list, setLastList]);
-
-	const client = hooks.useClient();
+	}, [hasList, navigate, setLastList]);
 
 	if (!list) {
 		return (

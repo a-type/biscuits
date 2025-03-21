@@ -1,15 +1,11 @@
-import { UpdatePrompt } from '@/components/updatePrompt/UpdatePrompt.jsx';
-import { checkForUpdate } from '@/updateState.js';
 import { H1, PageContent, PageRoot } from '@a-type/ui';
 import { DarkModeToggle } from '@biscuits/client';
-import { useEffect } from 'react';
+import { UpdatePrompt, usePollForUpdates } from '@biscuits/client/apps';
 
 export interface SettingsPageProps {}
 
 export function SettingsPage({}: SettingsPageProps) {
-	useEffect(() => {
-		checkForUpdate();
-	}, []);
+	usePollForUpdates();
 
 	return (
 		<PageRoot>

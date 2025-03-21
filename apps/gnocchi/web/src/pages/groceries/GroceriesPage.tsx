@@ -15,7 +15,8 @@ import {
 	UnknownListRedirect,
 } from '@/pages/groceries/layout.jsx';
 import { PageNowPlaying } from '@a-type/ui';
-import { ChangelogDisplay, InstallButton, UserMenu } from '@biscuits/client';
+import { ChangelogDisplay } from '@biscuits/client';
+import { InstallButton, UserMenu } from '@biscuits/client/apps';
 import { useNavigate, useParams } from '@verdant-web/react-router';
 import { Suspense, useCallback, useEffect } from 'react';
 

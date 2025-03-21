@@ -8,8 +8,8 @@ import {
 	PageRoot,
 	PageSectionGrid,
 } from '@a-type/ui';
-import { PaidFeature, apps, getAppUrl } from '@biscuits/apps';
-import { StartingPrice } from '@biscuits/client';
+import { PaidFeature, apps } from '@biscuits/apps';
+import { StartingPrice } from '@biscuits/client/subscription';
 import { Link, useSearchParams } from '@verdant-web/react-router';
 import classNames from 'classnames';
 
@@ -58,7 +58,7 @@ export function JoinPage({}: JoinPageProps) {
 							<div key={app.id} className="w-full max-w-none">
 								<div className="flex flex-row items-center gap-4">
 									<img
-										src={`${getAppUrl(app)}/${app.iconPath}`}
+										src={`${app.url}/${app.iconPath}`}
 										alt={app.name}
 										width={48}
 									/>

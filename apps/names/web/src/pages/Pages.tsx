@@ -1,5 +1,4 @@
 import { SuperBar } from '@/components/superBar/SuperBar.jsx';
-import { updateApp, updateState } from '@/updateState.js';
 import {
 	Button,
 	ErrorBoundary,
@@ -10,6 +9,7 @@ import {
 	Spinner,
 } from '@a-type/ui';
 import { ReloadButton } from '@biscuits/client';
+import { updateApp, updateState } from '@biscuits/client/apps';
 import { Link, makeRoutes, Outlet, Router } from '@verdant-web/react-router';
 import { lazy, Suspense, useCallback } from 'react';
 import { HomePage } from './HomePage.jsx';

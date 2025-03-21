@@ -10,7 +10,7 @@ import {
 } from '@a-type/ui';
 import { graphql, useMutation, useQuery } from '@biscuits/graphql';
 import { Suspense } from 'react';
-import { Price } from '../Price.js';
+import { Price } from '../common/Price.js';
 
 export interface SubscriptionSelectProps {
 	priceKeys?: PriceKey[];

@@ -2,7 +2,8 @@ import { CreateProject } from '@/components/projects/CreateProject.jsx';
 import { ProjectsList } from '@/components/projects/ProjectsList.jsx';
 import { basicsOnboarding } from '@/onboarding/basics.js';
 import { PageContent, PageFixedArea } from '@a-type/ui';
-import { OnboardingBanner, usePageTitle, UserMenu } from '@biscuits/client';
+import { OnboardingBanner, usePageTitle } from '@biscuits/client';
+import { UserMenu } from '@biscuits/client/apps';
 
 export interface HomePageProps {}
 

@@ -1,5 +1,5 @@
-import { updateApp, updateState } from '@/updateState.js';
 import { PageRoot } from '@a-type/ui';
+import { updateApp, updateState } from '@biscuits/client/apps';
 import { Outlet, Router, makeRoutes } from '@verdant-web/react-router';
 import { useCallback } from 'react';
 import { lazyWithPreload as lazy } from 'react-lazy-with-preload';

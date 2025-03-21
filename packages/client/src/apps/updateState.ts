@@ -1,4 +1,5 @@
-import { proxy } from 'valtio';
+import { useEffect } from 'react';
+import { proxy, useSnapshot } from 'valtio';
 import { registerSW } from 'virtual:pwa-register';
 
 export const updateState = proxy({
@@ -15,11 +16,14 @@ const update = registerSW({
 	onRegisteredSW(swUrl, registration) {
 		console.log('Service worker registered', swUrl);
 		if (registration) {
-			setInterval(() => {
-				registration.update();
-				check = registration.update;
-				// hourly
-			}, 60 * 60 * 1000);
+			setInterval(
+				() => {
+					registration.update();
+					check = registration.update;
+					// hourly
+				},
+				60 * 60 * 1000,
+			);
 		}
 	},
 	onRegisterError(error) {
@@ -33,4 +37,23 @@ export async function updateApp(reload?: boolean) {
 
 export function checkForUpdate() {
 	check?.();
+}
+
+export function useIsUpdateAvailable() {
+	return useSnapshot(updateState).updateAvailable;
+}
+
+export function usePollForUpdates(interval: number = 30_000) {
+	const updateAvailable = useSnapshot(updateState).updateAvailable;
+
+	useEffect(() => {
+		const iv = setInterval(() => {
+			checkForUpdate();
+		}, interval);
+		return () => {
+			clearInterval(iv);
+		};
+	}, [interval]);
+
+	return updateAvailable;
 }

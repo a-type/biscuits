@@ -10,18 +10,15 @@ import {
 	ReloadButton,
 	useHadRecentError,
 } from '@/components/sync/ReloadButton.jsx';
-import {
-	updateApp,
-	updateState,
-} from '@/components/updatePrompt/updateState.js';
 import { groceriesDescriptor, hooks } from '@/stores/groceries/index.js';
 import { ErrorBoundary, H1, P, PageRoot } from '@a-type/ui';
+import { SubscribedOnly, SubscriptionPromotion } from '@biscuits/client';
 import {
 	Essentials,
 	ResetToServer,
-	SubscribedOnly,
-	SubscriptionPromotion,
-} from '@biscuits/client';
+	updateApp,
+	updateState,
+} from '@biscuits/client/apps';
 import { Outlet, Router, makeRoutes } from '@verdant-web/react-router';
 import { Suspense, useCallback } from 'react';
 import { lazyWithPreload } from 'react-lazy-with-preload';

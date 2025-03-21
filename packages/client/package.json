@@ -8,14 +8,16 @@
 			"development": "./src/index.ts",
 			"import": "./dist/index.js",
 			"node": "./dist/index.js",
-			"default": "./dist/index.js"
+			"default": "./dist/index.js",
+			"types": "./dist/index.d.ts"
 		},
 		"./serviceWorkers": {
 			"production": "./dist/serviceWorkers.js",
 			"development": "./src/serviceWorkers.ts",
 			"import": "./dist/serviceWorkers.js",
 			"node": "./dist/serviceWorkers.js",
-			"default": "./dist/serviceWorkers.js"
+			"default": "./dist/serviceWorkers.js",
+			"types": "./dist/serviceWorkers.d.ts"
 		},
 		"./henrietta.css": {
 			"production": "./henrietta.css",
@@ -24,19 +26,29 @@
 			"node": "./henrietta.css",
 			"default": "./henrietta.css"
 		},
-		"./storage": {
-			"production": "./dist/components/storage.js",
-			"development": "./src/components/storage.tsx",
-			"import": "./dist/components/storage.js",
-			"node": "./dist/components/storage.js",
-			"default": "./dist/components/storage.js"
+		"./subscription": {
+			"production": "./dist/subscription/index.js",
+			"development": "./src/subscription/index.tsx",
+			"import": "./dist/subscription/index.js",
+			"node": "./dist/subscription/index.js",
+			"default": "./dist/subscription/index.js",
+			"types": "./dist/subscription/index.d.ts"
+		},
+		"./apps": {
+			"production": "./dist/apps/index.js",
+			"development": "./src/apps/index.tsx",
+			"import": "./dist/apps/index.js",
+			"node": "./dist/apps/index.js",
+			"default": "./dist/apps/index.js",
+			"types": "./dist/apps/index.d.ts"
 		},
 		"./fetch": {
 			"production": "./dist/fetch.js",
 			"development": "./src/fetch.ts",
 			"import": "./dist/fetch.js",
 			"node": "./dist/fetch.js",
-			"default": "./dist/fetch.js"
+			"default": "./dist/fetch.js",
+			"types": "./dist/fetch.d.ts"
 		}
 	},
 	"scripts": {

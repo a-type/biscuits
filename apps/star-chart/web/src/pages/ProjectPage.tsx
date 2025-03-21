@@ -1,7 +1,8 @@
 import { ProjectCanvas } from '@/components/project/ProjectCanvas.jsx';
 import { hooks } from '@/store.js';
 import { DropdownMenuItemRightSlot, Icon } from '@a-type/ui';
-import { usePageTitle, UserMenu } from '@biscuits/client';
+import { usePageTitle } from '@biscuits/client';
+import { UserMenu } from '@biscuits/client/apps';
 import { useParams, useSearchParams } from '@verdant-web/react-router';
 
 export interface ProjectPageProps {}

@@ -1,4 +1,3 @@
-import { UpdatePrompt } from '@/components/updatePrompt/UpdatePrompt.jsx';
 import { TemperatureUnitSelect } from '@/components/weather/TemperatureUnit.jsx';
 import {
 	Button,
@@ -9,13 +8,18 @@ import {
 	toast,
 } from '@a-type/ui';
 import { DarkModeToggle, usePageTitle } from '@biscuits/client';
-import { ManageStorage } from '@biscuits/client/storage';
+import {
+	ManageStorage,
+	UpdatePrompt,
+	usePollForUpdates,
+} from '@biscuits/client/apps';
 import { AutoRestoreScroll, Link } from '@verdant-web/react-router';
 
 export interface SettingsPageProps {}
 
 export function SettingsPage({}: SettingsPageProps) {
 	usePageTitle('Settings');
+	usePollForUpdates();
 	return (
 		<PageContent>
 			<PageFixedArea className="row py-2">

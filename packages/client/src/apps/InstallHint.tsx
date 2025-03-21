@@ -13,6 +13,7 @@ import {
 } from '@a-type/ui';
 import { appsById } from '@biscuits/apps';
 import { useSnapshot } from 'valtio';
+import { useAppId } from '../common/Context.js';
 import { useLocalStorage } from '../hooks/useStorage.js';
 import { installState, triggerInstall } from '../install.js';
 import {
@@ -22,7 +23,6 @@ import {
 	getIsSafari,
 	getOS,
 } from '../platform.js';
-import { useAppId } from './Context.js';
 
 export interface InstallHintProps {
 	content: string;

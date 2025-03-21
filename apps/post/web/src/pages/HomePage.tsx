@@ -1,7 +1,7 @@
 import { NavBar } from '@/components/nav/NavBar.jsx';
 import { PostsList } from '@/components/posts/PostsList.jsx';
 import { Box, PageContent, PageNav, PageRoot } from '@a-type/ui';
-import { UserMenu } from '@biscuits/client';
+import { UserMenu } from '@biscuits/client/apps';
 
 export interface HomePageProps {}
 

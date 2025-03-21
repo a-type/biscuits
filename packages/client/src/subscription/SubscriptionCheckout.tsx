@@ -7,7 +7,7 @@ import {
 	useStripe,
 } from '@stripe/react-stripe-js';
 import { useState } from 'react';
-import { stripe } from '../../stripe.js';
+import { stripe } from '../stripe.js';
 
 export const checkoutData = graphql(`
 	fragment SubscriptionCheckout_checkoutData on StripeCheckoutData {
