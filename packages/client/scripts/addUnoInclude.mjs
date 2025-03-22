@@ -5,8 +5,6 @@
 import fs from 'fs';
 import path from 'path';
 
-const distDir = path.join(process.cwd(), 'dist/components');
-
 const addInclude = (dir) => {
   const files = fs.readdirSync(dir);
 
@@ -21,9 +19,11 @@ const addInclude = (dir) => {
       // do nothing
     } else if (
       path.extname(filePath) === '.js' ||
+      path.extname(filePath) === '.jsx' ||
       path.extname(filePath) === '.mjs' ||
       path.extname(filePath) === '.cjs' ||
-      path.extname(filePath) === '.ts'
+      path.extname(filePath) === '.ts' ||
+      path.extname(filePath) === '.tsx'
     ) {
       const fileContents = fs.readFileSync(filePath, 'utf8');
       const lines = fileContents.split('\n');
@@ -33,6 +33,8 @@ const addInclude = (dir) => {
   });
 };
 
-addInclude(distDir);
+addInclude(path.join(process.cwd(), 'dist/apps'));
+addInclude(path.join(process.cwd(), 'dist/common'));
+addInclude(path.join(process.cwd(), 'dist/subscription'));
 
 console.log('Added @unocss-include to all files in dist');

@@ -60,7 +60,9 @@ export function PostPublishControl({ post }: PostPublishControlProps) {
 
 	const [publishMutation, { loading: publishing }] =
 		useMutation(publishPostMutation);
+
 	const client = hooks.useClient();
+
 	const publish = async () => {
 		// get notebook to include
 		const notebookId = post.get('notebookId');
@@ -74,7 +76,8 @@ export function PostPublishControl({ post }: PostPublishControlProps) {
 			throw new Error('Notebook not found');
 		}
 
-		const { id, title, coverImage, body } = post.getSnapshot();
+		const { id, title, coverImage, body, summary } = post.getSnapshot();
+		const { description } = notebook.getSnapshot();
 		await publishMutation({
 			variables: {
 				input: {
@@ -83,8 +86,7 @@ export function PostPublishControl({ post }: PostPublishControlProps) {
 						title,
 						coverImageId: coverImage?.id,
 						body,
-						// TODO: summary field
-						summary: tiptapToString(post.get('body'), 200),
+						summary: summary || tiptapToString(body as any, 200),
 						slug: getTitleSlug(title),
 					},
 					notebook: {
@@ -92,8 +94,7 @@ export function PostPublishControl({ post }: PostPublishControlProps) {
 						name: notebook.get('name'),
 						coverImageId: notebook.get('coverImage')?.id,
 						iconId: notebook.get('icon')?.id,
-						// TODO: notebook description
-						description: null,
+						description: description,
 					},
 				},
 			},
