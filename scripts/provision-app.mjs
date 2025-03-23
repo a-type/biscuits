@@ -83,6 +83,25 @@ if (setupDns) {
 		outro(dnsData.errors.map((error) => error.message).join(', '));
 		process.exit(1);
 	}
+
+	// now we provision the record on biscuits.club
+	const recordResponse = await fetch(
+		`https://api.cloudflare.com/client/v4/zones/${process.env.CLOUDFLARE_ZONE_ID}/dns_records`,
+		{
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+				Authorization: `Bearer ${process.env.CLOUDFLARE_API_TOKEN}`,
+			},
+			body: JSON.stringify({
+				type: 'CNAME',
+				name: `${appId}.biscuits.club`,
+				content: `prod-biscuits-${appId}-app.pages.dev`,
+				proxied: true,
+			}),
+		},
+	);
+
 	dnsSpinner.stop('Custom domain set up');
 }
 
