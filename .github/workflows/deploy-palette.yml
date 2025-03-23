@@ -48,6 +48,6 @@ jobs:
         uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          command: pages deploy dist --project-name=prod-biscuits-gnocchi-app
+          command: pages deploy dist --project-name=prod-biscuits-palette-app
           packageManager: pnpm
-          workingDirectory: ./apps/gnocchi/web
+          workingDirectory: ./apps/palette/web
