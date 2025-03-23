@@ -17,7 +17,8 @@
 		"up-verdant-next": "pnpm --recursive update \"@verdant-web/*@next\"",
 		"up-ui": "pnpm --recursive update \"@a-type/ui\" --latest",
 		"create-migration": "node ./scripts/createMigration.mjs",
-		"create-app": "node ./scripts/create-app/create-app.mjs",
+		"create-app": "node --env-file=.env ./scripts/create-app/create-app.mjs",
+		"provision-app": "node --env-file=.env ./scripts/provision-app.mjs",
 		"free-ports": "kill-port 6123 6124 6220 6221 6222 6223 6224 6225 6226 6227 6228 6229",
 		"latest": "pnpm --recursive update --latest",
 		"compress-video": "node ./scripts/compress-video.mjs"
