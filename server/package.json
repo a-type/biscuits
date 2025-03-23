@@ -43,6 +43,7 @@
 		"@pothos/plugin-scope-auth": "^3.21.1",
 		"@verdant-web/s3-file-storage": "catalog:",
 		"@verdant-web/server": "catalog:",
+		"@verdant-web/tiptap": "catalog:",
 		"@wish-wash.biscuits/hub": "workspace:*",
 		"@wish-wash.biscuits/scanning": "workspace:*",
 		"@wish-wash.biscuits/verdant": "workspace:*",

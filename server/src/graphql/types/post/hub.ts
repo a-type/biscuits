@@ -2,6 +2,7 @@ import { BiscuitsError } from '@biscuits/error';
 import { getLibraryName } from '@biscuits/libraries';
 import { z } from 'zod';
 import { POST_HUB_ORIGIN } from '../../../config/deployedContext.js';
+import { POST_HUB_CLOUDFRONT_ID } from '../../../config/secrets.js';
 import { verdantServer } from '../../../verdant/verdant.js';
 import { builder } from '../../builder.js';
 import { assignTypeName } from '../../relay.js';
@@ -185,6 +186,13 @@ builder.mutationFields((t) => ({
 					}),
 				)
 				.executeTakeFirstOrThrow();
+
+			if (POST_HUB_CLOUDFRONT_ID) {
+				// Invalidate the CloudFront cache for the published post
+				// createInvalidation(POST_HUB_CLOUDFRONT_ID, [
+				// 	/* todo */
+				// ]);
+			}
 
 			return {
 				notebookId: notebook.id,

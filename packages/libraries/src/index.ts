@@ -8,10 +8,13 @@ export function getLibraryName({
 }: {
 	planId: string;
 	app: string;
-	access: LibraryAccess;
-	userId: string;
+	access?: LibraryAccess;
+	userId?: string;
 }) {
 	if (access === 'user') {
+		if (!userId) {
+			throw new Error('userId is required for user access libraries');
+		}
 		return `${planId}__${app}__${userId}`;
 	}
 	return `${planId}__${app}`;

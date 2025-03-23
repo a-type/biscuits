@@ -1,11 +1,14 @@
 import { db, sql } from '@biscuits/db';
 import { BiscuitsError } from '@biscuits/error';
+import { getLibraryName } from '@biscuits/libraries';
+import { attachFileUrls } from '@verdant-web/tiptap/server';
 import { readFile } from 'fs/promises';
 import { Hono } from 'hono';
 import path from 'path';
 import { renderTemplate, staticFile } from '../common/hubs.js';
 import { POST_HUB_ORIGIN } from '../config/deployedContext.js';
 import { Env } from '../config/hono.js';
+import { verdantServer } from '../verdant/verdant.js';
 
 export const postRouter = new Hono<Env>();
 
@@ -19,26 +22,34 @@ postRouter.get('/hub/favicon.ico', ({ req }) =>
 	staticFile(hubClientPath, 'post/hub', req.raw),
 );
 
-function addPostUrls<T extends { slug: string }>(
-	posts: T[],
+function addPostUrl<T extends { slug: string }>(
+	post: T,
 	notebookId: string,
 	customDomain: string | undefined,
 ) {
-	return posts.map((post) => ({
+	return {
 		...post,
 		url: `${customDomain || `${POST_HUB_ORIGIN}/${notebookId}`}/${post.slug}`,
-	}));
+	};
 }
 
 function addNotebookUrl<T extends { id: string }>(
 	notebook: T,
 	customDomain: string | undefined,
 ) {
-	console.log(customDomain);
 	return {
 		...notebook,
 		url: customDomain || `${POST_HUB_ORIGIN}/${notebook.id}`,
 	};
+}
+
+async function processPost(post: any, planId: string) {
+	await attachFileUrls(
+		post.body,
+		getLibraryName({ planId, app: 'post' }),
+		verdantServer,
+	);
+	return post;
 }
 
 postRouter.get('/hub/:notebookId', async (ctx) => {
@@ -87,7 +98,7 @@ postRouter.get('/hub/:notebookId', async (ctx) => {
 	const customDomain = ctx.get('customDomain');
 	const data = {
 		notebook: addNotebookUrl(notebook, customDomain),
-		posts: addPostUrls(posts, notebookId, customDomain),
+		posts: posts.map((post) => addPostUrl(post, notebookId, customDomain)),
 	};
 
 	const { serverRenderNotebook } = await import('@post.biscuits/hub');
@@ -136,10 +147,15 @@ postRouter.get('/hub/:notebookId/atom.xml', async (ctx) => {
 
 	const { serverRenderAtom } = await import('@post.biscuits/hub');
 	const customDomain = ctx.get('customDomain');
+
 	return ctx.body(
 		serverRenderAtom({
 			notebook: addNotebookUrl(notebook, customDomain),
-			posts: addPostUrls(posts, notebookId, customDomain),
+			posts: await Promise.all(
+				posts
+					.map((post) => addPostUrl(post, notebookId, customDomain))
+					.map((post) => processPost(post, notebook.planId)),
+			),
 		}),
 		200,
 		{
@@ -177,6 +193,7 @@ postRouter.get('/hub/:notebookId/:postSlug', async (ctx) => {
 			'iconUrl',
 			'createdAt',
 			'updatedAt',
+			'planId',
 		])
 		.executeTakeFirstOrThrow(
 			() =>
@@ -184,7 +201,10 @@ postRouter.get('/hub/:notebookId/:postSlug', async (ctx) => {
 		);
 
 	const customDomain = ctx.get('customDomain');
-	const [postWithUrl] = addPostUrls([post], notebookId, customDomain);
+	const postWithUrl = await processPost(
+		addPostUrl(post, notebookId, customDomain),
+		notebook.planId,
+	);
 	const data = {
 		post: postWithUrl,
 		notebook: addNotebookUrl(notebook, customDomain),

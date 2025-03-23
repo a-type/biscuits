@@ -88,8 +88,8 @@ catalogs:
       specifier: 4.4.1
       version: 4.4.1
     '@verdant-web/tiptap':
-      specifier: 4.0.0
-      version: 4.0.0
+      specifier: 4.1.0
+      version: 4.1.0
     '@vitejs/plugin-react-swc':
       specifier: 3.7.2
       version: 3.7.2
@@ -313,7 +313,7 @@ importers:
         version: 4.4.1
       '@verdant-web/tiptap':
         specifier: 'catalog:'
-        version: 4.0.0(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@verdant-web/react@42.1.0(@verdant-web/store@4.4.1)(react@19.0.0))(@verdant-web/store@4.4.1)(react@19.0.0)
+        version: 4.1.0(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@verdant-web/react@42.1.0(@verdant-web/store@4.4.1)(react@19.0.0))(@verdant-web/store@4.4.1)(react@19.0.0)
       cuid:
         specifier: ^2.1.8
         version: 2.1.8
@@ -413,7 +413,7 @@ importers:
         version: 4.4.1
       '@verdant-web/tiptap':
         specifier: 'catalog:'
-        version: 4.0.0(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@verdant-web/react@42.1.0(@verdant-web/store@4.4.1)(react@19.0.0))(@verdant-web/store@4.4.1)(react@19.0.0)
+        version: 4.1.0(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@verdant-web/react@42.1.0(@verdant-web/store@4.4.1)(react@19.0.0))(@verdant-web/store@4.4.1)(react@19.0.0)
       '@vitejs/plugin-react-swc':
         specifier: 'catalog:'
         version: 3.7.2(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))
@@ -1097,7 +1097,7 @@ importers:
         version: 4.4.1
       '@verdant-web/tiptap':
         specifier: 'catalog:'
-        version: 4.0.0(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@verdant-web/react@42.1.0(@verdant-web/store@4.4.1)(react@19.0.0))(@verdant-web/store@4.4.1)(react@19.0.0)
+        version: 4.1.0(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@verdant-web/react@42.1.0(@verdant-web/store@4.4.1)(react@19.0.0))(@verdant-web/store@4.4.1)(react@19.0.0)
       react:
         specifier: 'catalog:'
         version: 19.0.0
@@ -1154,7 +1154,7 @@ importers:
         version: 4.4.1
       '@verdant-web/tiptap':
         specifier: 'catalog:'
-        version: 4.0.0(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@verdant-web/react@42.1.0(@verdant-web/store@4.4.1)(react@19.0.0))(@verdant-web/store@4.4.1)(react@19.0.0)
+        version: 4.1.0(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@verdant-web/react@42.1.0(@verdant-web/store@4.4.1)(react@19.0.0))(@verdant-web/store@4.4.1)(react@19.0.0)
       '@vitejs/plugin-react-swc':
         specifier: 'catalog:'
         version: 3.7.2(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))
@@ -1994,6 +1994,9 @@ importers:
       '@verdant-web/server':
         specifier: 'catalog:'
         version: 3.3.11
+      '@verdant-web/tiptap':
+        specifier: 'catalog:'
+        version: 4.1.0(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@verdant-web/react@42.1.0(@verdant-web/store@4.4.1)(react@19.0.0))(@verdant-web/store@4.4.1)(react@19.0.0)
       '@wish-wash.biscuits/hub':
         specifier: workspace:*
         version: link:../apps/wish-wash/hub
@@ -5880,8 +5883,8 @@ packages:
   '@verdant-web/store@4.4.1':
     resolution: {integrity: sha512-Yd2jN0VMLYXNCJRIo/Z/4257TUfSimLXVQsRniVeDpAB6OiWpRRP70G0w7CA5px/qLFlggeaC47MsFsk50cChw==}
 
-  '@verdant-web/tiptap@4.0.0':
-    resolution: {integrity: sha512-olmSiBxnwoNf6b8vXlLcJmQkSx5gaI/j+unX7g22mLTuN4Be/kZQGVubJOlp7LbFtaHzziga31DtzssP8n1jCw==}
+  '@verdant-web/tiptap@4.1.0':
+    resolution: {integrity: sha512-5sIvhy1/h+USFeCr9vDuSqvV/d4svau2tCfOqtNp+U35NxJFwLC6zA07yCaMIGG79hNU+ILNDLKJDyHe/ySfuw==}
     peerDependencies:
       '@tiptap/core': ^2.11.5
       '@tiptap/pm': ^2.11.5
@@ -5893,6 +5896,8 @@ packages:
       '@tiptap/react':
         optional: true
       '@verdant-web/react':
+        optional: true
+      '@verdant-web/store':
         optional: true
       react:
         optional: true
@@ -15831,15 +15836,15 @@ snapshots:
       jwt-decode: 3.1.2
       weak-event: 2.0.5
 
-  '@verdant-web/tiptap@4.0.0(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@verdant-web/react@42.1.0(@verdant-web/store@4.4.1)(react@19.0.0))(@verdant-web/store@4.4.1)(react@19.0.0)':
+  '@verdant-web/tiptap@4.1.0(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(@verdant-web/react@42.1.0(@verdant-web/store@4.4.1)(react@19.0.0))(@verdant-web/store@4.4.1)(react@19.0.0)':
     dependencies:
       '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
       '@tiptap/pm': 2.11.5
       '@verdant-web/common': 2.9.1
-      '@verdant-web/store': 4.4.1
     optionalDependencies:
       '@tiptap/react': 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@verdant-web/react': 42.1.0(@verdant-web/store@4.4.1)(react@19.0.0)
+      '@verdant-web/store': 4.4.1
       react: 19.0.0
 
   '@vitejs/plugin-react-swc@3.7.2(vite@6.0.3(@types/node@22.10.2)(jiti@2.4.2)(terser@5.37.0)(tsx@4.19.2)(yaml@2.6.1))':
