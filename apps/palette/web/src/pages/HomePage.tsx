@@ -8,7 +8,7 @@ import { UserMenu } from '@biscuits/client/apps';
 export interface HomePageProps {}
 
 export function HomePage({}: HomePageProps) {
-	usePageTitle('Palette');
+	usePageTitle('Home');
 	return (
 		<PageContent>
 			<PageFixedArea>

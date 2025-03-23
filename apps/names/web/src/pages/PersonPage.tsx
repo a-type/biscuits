@@ -11,7 +11,7 @@ export function PersonPage({}: PersonPageProps) {
 
 	const person = hooks.usePerson(id);
 
-	usePageTitle(person?.get('name') || 'Names');
+	usePageTitle(person?.get('name') || 'Not found');
 
 	if (!person) {
 		return (

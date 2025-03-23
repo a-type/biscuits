@@ -22,7 +22,7 @@ export function PostPage({}: PostPageProps) {
 	const { id } = useParams();
 	const post = hooks.usePost(id);
 
-	usePageTitle(`${post?.get('title') || 'Not found'} | Post`);
+	usePageTitle(post?.get('title') || 'Not found');
 
 	if (!post) {
 		return <div>Post not found</div>;

@@ -8,7 +8,6 @@ import { ProjectColorSpotlight } from '@/components/projects/ProjectColorSpotlig
 import { ProjectPalette } from '@/components/projects/ProjectPalette.jsx';
 import { hooks } from '@/hooks.js';
 import { ActionBar, Button, H1, Icon, PageContent } from '@a-type/ui';
-import { usePageTitle } from '@biscuits/client';
 import { Link, useParams } from '@verdant-web/react-router';
 
 export interface ProjectPageProps {}
@@ -16,7 +15,6 @@ export interface ProjectPageProps {}
 export function ProjectPage({}: ProjectPageProps) {
 	const id = useParams().id;
 	const project = hooks.useProject(id);
-	usePageTitle('Palette');
 
 	if (!project) {
 		return (
