@@ -123,7 +123,7 @@ jobs:
         with:
           apiToken: \${{ secrets.CLOUDFLARE_API_TOKEN }}
           command: pages deploy dist --project-name=prod-biscuits-${appId}-app
-          environment: production
+
           packageManager: pnpm
           workingDirectory: ./apps/${appId}/web
 `;
