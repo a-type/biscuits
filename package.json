@@ -13,14 +13,10 @@
 		"prepare": "husky install",
 		"backup-prod": "node ./scripts/backup-prod.mjs",
 		"mirror-prod": "node ./scripts/mirror-prod.mjs",
-		"up-verdant": "pnpm --recursive update \"@verdant-web/*\" --latest",
-		"up-verdant-next": "pnpm --recursive update \"@verdant-web/*@next\"",
-		"up-ui": "pnpm --recursive update \"@a-type/ui\" --latest",
 		"create-migration": "node ./scripts/createMigration.mjs",
 		"create-app": "node --env-file=.env ./scripts/create-app/create-app.mjs",
 		"provision-app": "node --env-file=.env ./scripts/provision-app.mjs",
 		"free-ports": "kill-port 6123 6124 6220 6221 6222 6223 6224 6225 6226 6227 6228 6229",
-		"latest": "pnpm --recursive update --latest",
 		"compress-video": "node ./scripts/compress-video.mjs"
 	},
 	"keywords": [],
@@ -28,7 +24,6 @@
 	"license": "ISC",
 	"dependencies": {
 		"@clack/prompts": "0.7.0",
-		"aws-cdk": "2.140.0",
 		"cp-tpl": "1.0.9",
 		"husky": "^8.0.3",
 		"kill-port": "2.0.1",
