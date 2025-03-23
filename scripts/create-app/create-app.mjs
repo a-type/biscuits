@@ -90,15 +90,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-
+        uses: actions/checkout@v4
       - name: Setup pnpm
         uses: pnpm/action-setup@v2.0.1
         with:
           version: 9.15.2
-
       - name: Setup node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: pnpm
@@ -114,24 +112,20 @@ jobs:
           VITE_PUBLIC_URL: https://${appId}.biscuits.club
           VITE_STRIPE_PUBLISHABLE_KEY: \${{ vars.STRIPE_PUBLISHABLE_KEY }}
 
-      - name: Deploy ${appId} to S3
-        uses: jakejarvis/s3-sync-action@7ed8b112447abb09f1da74f3466e4194fc7a6311
-        with:
-          args: --follow-symlinks --delete
-        env:
-          AWS_S3_BUCKET: \${{ vars.S3_BUCKET_${constify(appId)} }}
-          AWS_ACCESS_KEY_ID: \${{ secrets.DEPLOYER_AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: \${{ secrets.DEPLOYER_AWS_SECRET_ACCESS_KEY }}
-          SOURCE_DIR: './apps/${appId}/web/dist'
+      - name: Verify cloudflare token
+        run: |
+          curl -X GET "https://api.cloudflare.com/client/v4/user/tokens/verify" \
+          -H "Authorization: Bearer \${{secrets.CLOUDFLARE_API_TOKEN}}" \
+          -H "Content-Type:application/json"
 
-      - name: Invalidate CloudFront cache
-        uses: chetan/invalidate-cloudfront-action@c384d5f09592318a77b1e5c0c8d4772317e48b25
-        env:
-          AWS_ACCESS_KEY_ID: \${{ secrets.DEPLOYER_AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: \${{ secrets.DEPLOYER_AWS_SECRET_ACCESS_KEY }}
-          DISTRIBUTION: \${{ vars.CLOUDFRONT_ID_${constify(appId)} }}
-          PATHS: '/*'
-          AWS_REGION: 'us-east-1'
+      - name: Deploy app
+        uses: cloudflare/wrangler-action@707f63750981584eb6abc365a50d441516fb04b8
+        with:
+          apiToken: \${{ secrets.CLOUDFLARE_API_TOKEN }}
+          command: pages deploy dist --project-name=prod-biscuits-${appId}-app
+          environment: production
+          packageManager: pnpm
+          workingDirectory: ./apps/${appId}/web
 `;
 await fs.writeFile(
 	path.resolve(process.cwd(), `.github/workflows/deploy-${appId}.yml`),

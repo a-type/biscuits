@@ -15,15 +15,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-
+        uses: actions/checkout@v4
       - name: Setup pnpm
         uses: pnpm/action-setup@646cdf48217256a3d0b80361c5a50727664284f2
         with:
           version: 9.15.2
-
       - name: Setup node
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
           node-version: '22'
           cache: pnpm
@@ -38,22 +36,19 @@ jobs:
           VITE_HOME_ORIGIN: ${{ vars.HOME_ORIGIN }}
           VITE_PUBLIC_URL: https://wish-wash.biscuits.club
           VITE_STRIPE_PUBLISHABLE_KEY: ${{ vars.STRIPE_PUBLISHABLE_KEY }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
-      - name: Deploy wish-wash to S3
-        uses: jakejarvis/s3-sync-action@7ed8b112447abb09f1da74f3466e4194fc7a6311
+      - name: Verify cloudflare token
+        run: |
+          curl -X GET "https://api.cloudflare.com/client/v4/user/tokens/verify" \
+          -H "Authorization: Bearer ${{secrets.CLOUDFLARE_API_TOKEN}}" \
+          -H "Content-Type:application/json"
+
+      - name: Deploy app
+        uses: cloudflare/wrangler-action@707f63750981584eb6abc365a50d441516fb04b8
         with:
-          args: --follow-symlinks --delete
-        env:
-          AWS_S3_BUCKET: ${{ vars.S3_BUCKET_WISH_WASH }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.DEPLOYER_AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.DEPLOYER_AWS_SECRET_ACCESS_KEY }}
-          SOURCE_DIR: './apps/wish-wash/web/dist'
-
-      - name: Invalidate CloudFront cache
-        uses: chetan/invalidate-cloudfront-action@c384d5f09592318a77b1e5c0c8d4772317e48b25
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.DEPLOYER_AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.DEPLOYER_AWS_SECRET_ACCESS_KEY }}
-          DISTRIBUTION: ${{ vars.CLOUDFRONT_ID_WISH_WASH }}
-          PATHS: '/*'
-          AWS_REGION: 'us-east-1'
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          command: pages deploy dist --project-name=prod-biscuits-wish-wash-app
+          environment: production
+          packageManager: pnpm
+          workingDirectory: ./apps/wish-wash/web

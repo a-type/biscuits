@@ -11,13 +11,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-
+        uses: actions/checkout@v4
       - name: Setup pnpm
         uses: pnpm/action-setup@646cdf48217256a3d0b80361c5a50727664284f2
         with:
           version: 9.15.2
-
       - name: Setup node
         uses: actions/setup-node@v2
         with:
