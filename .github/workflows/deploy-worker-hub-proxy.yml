@@ -1,0 +1,42 @@
+name: Worker Hub-Proxy Deploy
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'workers/hub-proxy/**'
+      - '.github/workflows/deploy-worker-hub-proxy.yml'
+      - 'pnpm-workspace.yaml'
+
+jobs:
+  build-and-deploy-worker-hub-proxy:
+    name: Build and deploy worker Hub-Proxy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@646cdf48217256a3d0b80361c5a50727664284f2
+        with:
+          version: 9.15.2
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --filter @biscuits/worker-hub-proxy...
+
+      - name: Verify cloudflare token
+        run: |
+          curl -X GET "https://api.cloudflare.com/client/v4/user/tokens/verify" \
+          -H "Authorization: Bearer ${{secrets.CLOUDFLARE_API_TOKEN}}" \
+          -H "Content-Type:application/json"
+
+      - name: Deploy app
+        uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          command: publish --env=production
+          packageManager: pnpm
+          workingDirectory: ./workers/hub-proxy

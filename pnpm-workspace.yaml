@@ -3,6 +3,7 @@ packages:
   - 'server'
   - 'packages/*'
   - 'apps/**/*'
+  - 'workers/**/*'
   - 'blog'
   - 'cdk'
 
