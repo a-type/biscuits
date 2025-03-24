@@ -49,7 +49,9 @@ export function JoinPage({}: JoinPageProps) {
 							</Link>
 						</Button>
 						<Button asChild color="primary">
-							<Link to="/login?returnTo=/settings&tab=signup">Get started</Link>
+							<Link to="/login?returnTo=/settings?tab=subscription&tab=signup">
+								Get started
+							</Link>
 						</Button>
 					</PageFixedArea>
 					{sortedApps
