@@ -92,11 +92,13 @@ function AppFeature({ feature }: { feature: PaidFeature }) {
 				)}
 			</div>
 			<p className="my-0">{feature.description}</p>
-			<img
-				className="border border-solid border-1 border-black rounded-lg max-w-full flex-1-0-0 min-w-0"
-				src={feature.imageUrl}
-				alt="a visualization of the described feature"
-			/>
+			{feature.imageUrl && (
+				<img
+					className="border border-solid border-1 border-black rounded-lg max-w-full flex-1-0-0 min-w-0"
+					src={feature.imageUrl}
+					alt="a visualization of the described feature"
+				/>
+			)}
 		</div>
 	);
 }
