@@ -353,10 +353,10 @@ export async function updatePlanSubscription({
 		plan.stripeSubscriptionId,
 	);
 
-	if (!['active', 'incomplete'].includes(subscription.status)) {
+	if (!['active', 'incomplete', 'canceled'].includes(subscription.status)) {
 		throw new BiscuitsError(
 			BiscuitsError.Code.Unexpected,
-			`Subscription status is ${subscription.status}. Cannot change plans.`,
+			`Subscription status is ${subscription.status}. Cannot change plans. Cancel your existing subscription, first.`,
 		);
 	}
 
