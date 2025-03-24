@@ -31,7 +31,7 @@ processes = ['app']
 [http_service.tls_options]
 alpn = ["h2", "http/1.1"]
 versions = ["TLSv1.2", "TLSv1.3"]
-default_self_signed = true
+default_self_signed = false
 
 [http_service.concurrency]
 type = "connections"
