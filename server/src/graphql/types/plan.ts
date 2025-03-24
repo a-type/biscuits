@@ -8,7 +8,7 @@ import { logger } from '../../logger.js';
 import {
 	PlanVitalInfo,
 	canPlanAcceptAMember,
-	cancelPlan,
+	cancelPlanSubscription,
 	removeUserFromPlan,
 	setupNewPlan,
 	updatePlanSubscription,
@@ -146,6 +146,12 @@ builder.mutationFields((t) => ({
 			productAdmin: true,
 		},
 		resolve: async (_, { id }, ctx) => {
+			if (!ctx.session) {
+				throw new BiscuitsError(BiscuitsError.Code.NotLoggedIn);
+			}
+			const userId = ctx.session.userId;
+
+			await cancelPlanSubscription(`${id}`, userId, ctx);
 			const plan = await ctx.db
 				.deleteFrom('Plan')
 				.where('id', '=', `${id}`)
@@ -174,7 +180,7 @@ builder.mutationFields((t) => ({
 				throw new BiscuitsError(BiscuitsError.Code.NoPlan);
 			}
 
-			await cancelPlan(ctx.session.planId, userId, ctx);
+			await cancelPlanSubscription(ctx.session.planId, userId, ctx);
 
 			return {};
 		},
@@ -310,8 +316,8 @@ export const Plan = builder.loadableNodeRef('Plan', {
 				.executeTakeFirst();
 
 			if (!myPlan || myPlan.id !== planId) {
-				// user session is invalid.
-				throw new BiscuitsError(BiscuitsError.Code.SessionInvalid);
+				// user session is not allowed access to this unrelated plan
+				throw new BiscuitsError(BiscuitsError.Code.NotFound);
 			}
 
 			plans = [myPlan];

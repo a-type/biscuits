@@ -407,7 +407,7 @@ export async function updatePlanSubscription({
 	return updatedPlan;
 }
 
-export async function cancelPlan(
+export async function cancelPlanSubscription(
 	planId: string,
 	userId: string,
 	ctx: GQLContext,
@@ -438,13 +438,13 @@ export async function cancelPlan(
 			email.sendCustomEmail(
 				{
 					to: m.email,
-					subject: 'Your Biscuits plan has been canceled',
-					text: `Hi ${m.fullName},\n\nYour Biscuits plan has been canceled. If you have any questions, please contact us via
+					subject: 'Your Biscuits subscription has been canceled',
+					text: `Hi ${m.fullName},\n\nYour Biscuits subscription has been canceled. If you have any questions, please contact us via
 ${UI_ORIGIN}/contact.\n\nThanks,\nGrant`,
 					html: `<div>
         <p>Hi ${m.fullName},</p>
         <p>
-          Your Biscuits plan has been canceled. If you have any questions, please contact us via
+          Your Biscuits subscription has been canceled. If you have any questions, please contact us via
           <a href="${UI_ORIGIN}/contact">${UI_ORIGIN}/contact</a>.
         </p>
         <p>Thanks,</p>
@@ -456,31 +456,18 @@ ${UI_ORIGIN}/contact.\n\nThanks,\nGrant`,
 		),
 	);
 
-	await db.transaction().execute(async (tx) => {
-		await tx
-			.updateTable('User')
-			.set({
-				planId: null,
-				planRole: null,
-			})
-			.where('planId', '=', planId)
-			.execute();
-
-		await tx.deleteFrom('Plan').where('id', '=', planId).execute();
-
-		await tx
-			.insertInto('ActivityLog')
-			.values({
-				action: 'deletePlan',
-				id: id(),
-				userId,
-				data: JSON.stringify({
-					planId,
-					reason: 'user requested',
-				}),
-			})
-			.execute();
-	});
+	await db
+		.insertInto('ActivityLog')
+		.values({
+			action: 'cancelSubscription',
+			id: id(),
+			userId,
+			data: JSON.stringify({
+				planId,
+				reason: 'user requested',
+			}),
+		})
+		.execute();
 }
 
 export async function canPlanAcceptAMember(
