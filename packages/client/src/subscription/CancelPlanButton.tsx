@@ -1,25 +1,34 @@
 import { ConfirmedButton } from '@a-type/ui';
 import { graphql, useMutation } from '@biscuits/graphql';
-import { useNavigate } from '@verdant-web/react-router';
+import { manageSubscriptionInfo } from './ManageSubscription.js';
+import { checkoutData } from './SubscriptionCheckout.js';
 
-const cancelPlan = graphql(`
-	mutation CancelPlan {
-		cancelPlan {
-			user {
-				id
-				plan {
+const cancelPlan = graphql(
+	`
+		mutation CancelPlan {
+			cancelPlan {
+				user {
 					id
+					plan {
+						id
+						subscriptionStatus
+						isSubscribed
+						checkoutData {
+							...SubscriptionCheckout_checkoutData
+						}
+						...ManageSubscription_manageSubscriptionInfo
+					}
 				}
 			}
 		}
-	}
-`);
+	`,
+	[checkoutData, manageSubscriptionInfo],
+);
 
 export interface CancelPlanButtonProps {}
 
 export function CancelPlanButton({}: CancelPlanButtonProps) {
 	const [cancel] = useMutation(cancelPlan);
-	const navigate = useNavigate();
 	return (
 		<div>
 			<ConfirmedButton
@@ -29,7 +38,6 @@ export function CancelPlanButton({}: CancelPlanButtonProps) {
 				confirmText="Your data will all still be there on your device, but you won't be able to sync to other devices, with other plan members, or access member-only features anymore. You can come back anytime."
 				onConfirm={async () => {
 					await cancel();
-					navigate('/');
 				}}
 			>
 				Cancel your plan
