@@ -105,7 +105,10 @@ export function SubscriptionSetup({ priceKeys }: SubscriptionSetupProps) {
 		return <ManageSubscription data={data.plan} />;
 	}
 
-	if (data?.plan?.subscriptionStatus === 'active') {
+	if (
+		data?.plan?.subscriptionStatus === 'active' ||
+		data?.plan?.subscriptionStatus === 'trialing'
+	) {
 		// subscription active - show management
 		return <ManageSubscription data={data.plan} />;
 	}
