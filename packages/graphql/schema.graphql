@@ -247,6 +247,7 @@ type Plan implements Node {
   subscriptionCanceledAt: DateTime
   subscriptionExpiresAt: DateTime
   subscriptionStatus: String!
+  trialEndsAt: DateTime
 }
 
 """An invitation to join a plan"""

@@ -573,6 +573,22 @@ Plan.implement({
 				}
 			},
 		}),
+		trialEndsAt: t.field({
+			nullable: true,
+			type: 'DateTime',
+			resolve: async (plan, _, ctx) => {
+				if (!plan.stripeSubscriptionId) return null;
+				if (plan.subscriptionStatus === 'trialing') {
+					const subscription = await ctx.stripe.subscriptions.retrieve(
+						plan.stripeSubscriptionId,
+					);
+					return subscription.trial_end ?
+							new Date(subscription.trial_end)
+						:	null;
+				}
+				return null;
+			},
+		}),
 	}),
 });
 

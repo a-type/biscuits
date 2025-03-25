@@ -25,6 +25,7 @@ const PlanSubscriptionInfo = graphql(
 					...SubscriptionCheckout_checkoutData
 				}
 				subscriptionCanceledAt
+				trialEndsAt
 				...ManageSubscription_manageSubscriptionInfo
 			}
 		}
@@ -104,6 +105,20 @@ export function SubscriptionSetup({ priceKeys }: SubscriptionSetupProps) {
 	if (data?.plan?.subscriptionStatus === 'incomplete') {
 		// if there wasn't any checkoutData, that means we're in limbo.
 		return <ManageSubscription data={data.plan} />;
+	}
+
+	if (data?.plan?.subscriptionStatus === 'trialing') {
+		return (
+			<Box d="col" gap>
+				<Box surface="accent">
+					Your trial subscription period has begun! Billing will begin on{' '}
+					{new Date(data.plan.trialEndsAt || 0).toLocaleDateString()}. You can
+					cancel any time before then to avoid payment. We'll send you a
+					reminder email one week before.
+				</Box>
+				<ManageSubscription data={data.plan} />
+			</Box>
+		);
 	}
 
 	if (
