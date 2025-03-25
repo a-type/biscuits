@@ -110,7 +110,7 @@ export function SubscriptionSetup({ priceKeys }: SubscriptionSetupProps) {
 	if (data?.plan?.subscriptionStatus === 'trialing') {
 		return (
 			<Box d="col" gap>
-				<Box surface="accent">
+				<Box surface="accent" p>
 					Your trial subscription period has begun! Billing will begin on{' '}
 					{new Date(data.plan.trialEndsAt || 0).toLocaleDateString()}. You can
 					cancel any time before then to avoid payment. We'll send you a
