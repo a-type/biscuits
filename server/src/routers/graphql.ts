@@ -16,6 +16,7 @@ import { Env } from '../config/hono.js';
 import { GQLContext } from '../graphql/context.js';
 import { createDataloaders } from '../graphql/dataloaders/index.js';
 import { schema } from '../graphql/schema.js';
+import { customHosts } from '../services/customHosts.js';
 import { fly } from '../services/fly.js';
 import { stripe } from '../services/stripe.js';
 import { verdantServer } from '../verdant/verdant.js';
@@ -140,10 +141,11 @@ export const graphqlRouter = new Hono<Env>().all(
 			dataloaders: createDataloaders({
 				stripe,
 				db,
-				fly,
+				customHosts,
 			}),
 			fly,
 			reqCtx: honoCtx,
+			customHosts,
 		};
 
 		const yogaResponse = await yoga.handle(honoCtx.req.raw, ctx);

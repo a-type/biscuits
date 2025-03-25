@@ -1,5 +1,7 @@
 import { Box, BoxProps, Button, H3, Icon, P } from '@a-type/ui';
 import { graphql, useQuery } from '@biscuits/graphql';
+import { Link } from '@verdant-web/react-router';
+import { useEffect } from 'react';
 import { CopyTextbox, useAppId } from '../index.js';
 
 export interface DomainRouteValidationProps extends BoxProps {
@@ -19,11 +21,6 @@ const validateRouteQuery = graphql(`
 			status
 			domain
 			note
-			tlsRecord {
-				name
-				value
-				type
-			}
 			mainRecord {
 				name
 				value
@@ -39,7 +36,7 @@ export function DomainRouteValidation({
 }: DomainRouteValidationProps) {
 	const appId = useAppId();
 
-	const { data, error, refetch } = useQuery(validateRouteQuery, {
+	const { data, error, refetch, loading } = useQuery(validateRouteQuery, {
 		variables: {
 			input: {
 				appId,
@@ -54,9 +51,18 @@ export function DomainRouteValidation({
 	});
 
 	const status = data?.domainRoute?.status;
-	const tlsRecord = data?.domainRoute?.tlsRecord;
 	const mainRecord = data?.domainRoute?.mainRecord;
 	const note = data?.domainRoute?.note;
+
+	useEffect(() => {
+		if (status === 'TLS_SETUP' || status === 'MAIN_RECORD_SETUP') {
+			const interval = setInterval(() => {
+				refetch();
+			}, 15000); // Refetch every 15 seconds
+
+			return () => clearInterval(interval);
+		}
+	}, [status, refetch]);
 
 	return (
 		<Box d="col" gap {...rest}>
@@ -75,31 +81,48 @@ export function DomainRouteValidation({
 						<strong>Success</strong>
 					</Box>
 					<P>
-						<strong>{data?.domainRoute?.domain ?? 'This domain'}</strong> has
-						been validated. If it's not working right, try deleting it and
+						{data?.domainRoute?.domain ?
+							<Link
+								to={`https://${data.domainRoute.domain}`}
+								className="font-bold"
+							>
+								{data.domainRoute.domain}
+							</Link>
+						:	<strong>This domain</strong>}{' '}
+						has been validated. If it's not working right, try deleting it and
 						adding it again.
 					</P>
-					<Button size="small" onClick={() => refetch()}>
+					<Button size="small" onClick={() => refetch()} loading={loading}>
 						Check again
 					</Button>
 				</Box>
+			: status === 'TLS_SETUP' ?
+				<>
+					<H3>Waiting for your certificates...</H3>
+					<P>
+						Our provider is verifying your domain ownership and generating TLS
+						certificates for you, which keeps your site visitors safe. This can
+						take a few minutes.
+					</P>
+				</>
 			:	<>
 					<H3>Add your DNS record for {data?.domainRoute?.domain ?? '...'}</H3>
-					<P>To validate your domain, add the following DNS records:</P>
-					{tlsRecord && (
-						<DnsRecord
-							{...tlsRecord}
-							verified={status === 'MAIN_RECORD_SETUP'}
-						/>
-					)}
+					<P>
+						To validate your domain, add the following DNS record in your domain
+						provider's dashboard:
+					</P>
 					{mainRecord && <DnsRecord {...mainRecord} />}
 					<Box d="col" gap items="start">
-						{note && <P>{note}</P>}
+						{note && (
+							<Box surface="primary" p>
+								{note}
+							</Box>
+						)}
 						<P>
 							It can take up to 24 hours for your changes to take effect. Return
 							to this menu any time to recheck your configuration.
 						</P>
-						<Button onClick={() => refetch()} color="primary">
+						<Button onClick={() => refetch()} loading={loading} color="primary">
 							Check again now
 						</Button>
 					</Box>
@@ -140,7 +163,7 @@ function DnsRecord({
 				<span>{type}</span>
 			</Box>
 			<Box d="col" gap>
-				<span className="font-bold">Host:</span>
+				<span className="font-bold">Name:</span>
 				<CopyTextbox value={name} hideShare />
 			</Box>
 			<Box d="col" gap>

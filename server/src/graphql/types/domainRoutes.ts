@@ -2,6 +2,7 @@ import { assert } from '@a-type/utils';
 import { appsById, isValidAppId } from '@biscuits/apps';
 import { id } from '@biscuits/db';
 import { BiscuitsError } from '@biscuits/error';
+import { logger } from '../../logger.js';
 import { doesHostnameRouteToCustomDnsHost } from '../../services/dns.js';
 import { builder } from '../builder.js';
 import { assignTypeName } from '../relay.js';
@@ -17,12 +18,13 @@ builder.queryFields((b) => ({
 			}),
 			validate: b.arg.boolean({
 				required: false,
+				deprecationReason: 'No longer used, validation happens automatically',
 			}),
 		},
 		authScopes: {
 			member: true,
 		},
-		resolve: async (parent, { byApp, validate }, context) => {
+		resolve: async (parent, { byApp }, context) => {
 			if (!byApp) {
 				throw new BiscuitsError(BiscuitsError.Code.BadRequest, 'Invalid input');
 			}
@@ -36,26 +38,6 @@ builder.queryFields((b) => ({
 
 			if (!domainRoute) {
 				return null;
-			}
-
-			// if validate was requested, do so now.
-			if (validate) {
-				const certResult = await context.fly.validateCertificate(
-					domainRoute.domain,
-				);
-				if (certResult.clientStatus === 'Ready' && !domainRoute.dnsVerifiedAt) {
-					// also check the main route
-					const matches = await doesHostnameRouteToCustomDnsHost(
-						domainRoute.domain,
-					);
-					if (matches) {
-						await context.db
-							.updateTable('DomainRoute')
-							.set({ dnsVerifiedAt: new Date() })
-							.where('id', '=', domainRoute.id)
-							.execute();
-					}
-				}
 			}
 
 			return assignTypeName('DomainRoute')(domainRoute);
@@ -101,7 +83,7 @@ builder.mutationFields((b) => ({
 				.executeTakeFirstOrThrow();
 
 			// provision TLS certificate
-			await context.fly.provisionCertificate(domainRoute.domain);
+			await context.customHosts.create(domainRoute);
 
 			return {
 				domainRoute: assignTypeName('DomainRoute')(domainRoute),
@@ -128,7 +110,7 @@ builder.mutationFields((b) => ({
 				.where('id', '=', id)
 				.executeTakeFirstOrThrow();
 
-			await context.fly.provisionCertificate(domainRoute.domain);
+			await context.customHosts.create(domainRoute);
 
 			return assignTypeName('DomainRoute')(domainRoute);
 		},
@@ -152,7 +134,19 @@ builder.mutationFields((b) => ({
 				.executeTakeFirst();
 
 			if (route) {
-				await context.fly.deprovisionCertificate(route.domain);
+				try {
+					await context.customHosts.remove(route.domain);
+				} catch (error) {
+					if (
+						error instanceof BiscuitsError &&
+						error.code === BiscuitsError.Code.NotFound
+					) {
+						// that's fine.
+						return id;
+					} else {
+						logger.urgent(error);
+					}
+				}
 			}
 
 			return id;
@@ -189,29 +183,54 @@ builder.objectType('DomainRoute', {
 		status: t.field({
 			type: DomainRouteStatus,
 			resolve: async (parent, _, ctx) => {
-				if (parent.dnsVerifiedAt) {
+				const details = await ctx.dataloaders.customHostDetailsLoader.load(
+					parent.domain,
+				);
+				if (BiscuitsError.isInstance(details)) {
+					throw details;
+				}
+				if (!details) {
+					return 'UNPROVISIONED';
+				}
+
+				// I think this is represented in details for us.
+				// const matches = await doesHostnameRouteToCustomDnsHost(parent.domain);
+
+				// if (!matches) {
+				// 	return 'MAIN_RECORD_SETUP';
+				// }
+
+				if (
+					details.status === 'blocked' ||
+					details.status === 'test_failed' ||
+					details.ssl?.status.includes('timed_out')
+				) {
+					return 'ERROR';
+				}
+
+				if (details.status !== 'active') {
+					return 'MAIN_RECORD_SETUP';
+				}
+
+				if (details.status === 'active' && details.ssl?.status !== 'active') {
+					return 'TLS_SETUP';
+				}
+
+				if (
+					details.status === 'active' &&
+					details.ssl?.status === 'active' &&
+					!parent.dnsVerifiedAt
+				) {
+					// oh, we're good.
+					await ctx.db
+						.updateTable('DomainRoute')
+						.set({ dnsVerifiedAt: new Date() })
+						.where('id', '=', parent.id)
+						.execute();
 					return 'READY';
 				}
 
-				const cert = await ctx.dataloaders.flyCertificateLoader.load(
-					parent.domain,
-				);
-				if (BiscuitsError.isInstance(cert)) {
-					throw cert;
-				}
-				if (!cert) {
-					return 'UNPROVISIONED';
-				}
-				if (cert.clientStatus === 'Error') {
-					return 'ERROR';
-				}
-				if (
-					cert.clientStatus === 'Awaiting configuration' ||
-					cert.clientStatus !== 'Ready'
-				) {
-					return 'TLS_SETUP';
-				}
-				return 'MAIN_RECORD_SETUP';
+				return 'READY';
 			},
 		}),
 		note: t.string({
@@ -221,54 +240,55 @@ builder.objectType('DomainRoute', {
 					return null;
 				}
 
-				const cert = await ctx.dataloaders.flyCertificateLoader.load(
+				const matches = await doesHostnameRouteToCustomDnsHost(parent.domain);
+
+				if (!matches) {
+					return "Main DNS record hasn't connected yet. Please double-check your DNS settings.";
+				}
+
+				const details = await ctx.dataloaders.customHostDetailsLoader.load(
 					parent.domain,
 				);
-				if (BiscuitsError.isInstance(cert)) {
-					throw cert;
+				if (BiscuitsError.isInstance(details)) {
+					throw details;
 				}
-				if (!cert) {
+				if (!details) {
 					return 'No provisioning in progress. You may need to delete and start over.';
 				}
 
-				if (cert.clientStatus === 'Error') {
+				if (details.status === 'blocked' || details.status === 'test_failed') {
 					return 'An unexpected error occurred. You may need to delete and start over.';
 				}
 
-				if (cert.clientStatus === 'Awaiting certificates') {
+				if (
+					details?.ssl &&
+					(details.ssl.status === 'initializing' ||
+						details.ssl.status.includes('pending'))
+				) {
 					return 'Generating your TLS certificates...';
-				}
-
-				if (cert.clientStatus === 'Ready') {
-					const matches = await doesHostnameRouteToCustomDnsHost(parent.domain);
-
-					if (!matches) {
-						return 'Main record not set up correctly. Please check your DNS settings.';
-					}
 				}
 
 				return null;
 			},
 		}),
-		tlsRecord: t.field({
+		verificationRecord: t.field({
 			type: 'DnsRecord',
 			nullable: true,
 			resolve: async (parent, _, ctx) => {
-				const cert = await ctx.dataloaders.flyCertificateLoader.load(
+				const details = await ctx.dataloaders.customHostDetailsLoader.load(
 					parent.domain,
 				);
-				if (BiscuitsError.isInstance(cert)) {
-					throw cert;
+				if (BiscuitsError.isInstance(details)) {
+					throw details;
 				}
-				if (!cert) {
+				if (!details) {
+					return null;
+				}
+				if (!details.ownership_verification) {
 					return null;
 				}
 
-				return {
-					name: cert.dnsValidationHostname,
-					type: getRecordTypeFromInstructions(cert.dnsValidationInstructions),
-					value: cert.dnsValidationTarget,
-				};
+				return details.ownership_verification;
 			},
 		}),
 		mainRecord: t.field({
@@ -328,11 +348,3 @@ builder.objectType('DnsRecord', {
 const DomainRouteStatus = builder.enumType('DomainRouteStatus', {
 	values: ['UNPROVISIONED', 'TLS_SETUP', 'MAIN_RECORD_SETUP', 'READY', 'ERROR'],
 });
-
-const checkInstructionsForTypes = ['TXT', 'CNAME', 'A'];
-function getRecordTypeFromInstructions(instructions: string) {
-	return (
-		checkInstructionsForTypes.find((type) => instructions.includes(type)) ||
-		'CNAME'
-	);
-}

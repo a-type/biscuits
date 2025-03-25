@@ -108,8 +108,8 @@ type DomainRoute {
   resourceId: String!
   route: String!
   status: DomainRouteStatus!
-  tlsRecord: DnsRecord
   updatedAt: DateTime
+  verificationRecord: DnsRecord
 }
 
 enum DomainRouteStatus {
@@ -447,7 +447,7 @@ type Query {
     """The ID of the app to fetch the changelog for"""
     appId: String!
   ): [ChangelogItem!]!
-  domainRoute(byApp: GetDomainRouteByAppInput, validate: Boolean): DomainRoute
+  domainRoute(byApp: GetDomainRouteByAppInput, validate: Boolean @deprecated(reason: "No longer used, validation happens automatically")): DomainRoute
   food(id: ID, name: String): Food
   foodCategories: [FoodCategory!]!
   foods(after: ID, before: ID, first: Int, last: Int, startsWith: String): QueryFoodsConnection!

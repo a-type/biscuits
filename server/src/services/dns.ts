@@ -18,12 +18,14 @@ export async function doesHostnameResolveMatch(
 	hostnameA: string,
 	hostnameB: string,
 ) {
-	const [a, b] = await Promise.all([
+	const [a, b] = await Promise.allSettled([
 		lookupPromise(hostnameA),
 		lookupPromise(hostnameB),
 	]);
-
-	console.log(a, b);
-
-	return a.address === b.address;
+	if (a.status === 'rejected' || b.status === 'rejected') {
+		return false;
+	}
+	const aResult = a.value;
+	const bResult = b.value;
+	return aResult.address === bResult.address;
 }

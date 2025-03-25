@@ -2,7 +2,7 @@ import { DB } from '@biscuits/db';
 import { BiscuitsError } from '@biscuits/error';
 import DataLoader from 'dataloader';
 import Stripe from 'stripe';
-import { FlyService } from '../../services/fly.js';
+import { CustomHostsService } from '../../services/customHosts.js';
 
 const priceLookupKeyCache = new Map<string, Stripe.Price>();
 const priceIdCache = new Map<string, Stripe.Price>();
@@ -20,11 +20,11 @@ export function createResults<T>(ids: readonly string[], defaultValue?: T) {
 export function createDataloaders({
 	stripe,
 	db,
-	fly,
+	customHosts,
 }: {
 	stripe: Stripe;
 	db: DB;
-	fly: FlyService;
+	customHosts: CustomHostsService;
 }) {
 	const stripePriceLookupKeyLoader = new DataLoader(
 		async (lookupKeys: readonly string[]) => {
@@ -75,16 +75,17 @@ export function createDataloaders({
 		return result;
 	});
 
-	const flyCertificateLoader = new DataLoader(
+	const customHostDetailsLoader = new DataLoader(
 		async (hostnames: readonly string[]) => {
 			const result = await Promise.allSettled(
-				hostnames.map((hostname) => fly.getCertificate(hostname)),
+				hostnames.map((hostname) => customHosts.get(hostname)),
 			);
 			return result.map((r) => {
 				if (r.status === 'fulfilled') return r.value;
+				if (r.reason instanceof BiscuitsError) return r.reason;
 				return new BiscuitsError(
 					BiscuitsError.Code.Unexpected,
-					'Failed to fetch certificate',
+					'Failed to fetch custom host details',
 					r.reason,
 				);
 			});
@@ -94,6 +95,6 @@ export function createDataloaders({
 	return {
 		stripePriceLookupKeyLoader,
 		stripePriceIdLoader,
-		flyCertificateLoader,
+		customHostDetailsLoader,
 	};
 }
