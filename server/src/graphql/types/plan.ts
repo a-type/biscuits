@@ -418,7 +418,6 @@ Plan.implement({
 				// if we haven't yet synced with Stripe
 				if (
 					plan.subscriptionStatus !== 'incomplete' &&
-					plan.subscriptionStatus !== 'trialing' &&
 					plan.subscriptionStatus !== null
 				) {
 					console.debug(
@@ -438,10 +437,7 @@ Plan.implement({
 					},
 				);
 				// double check
-				if (
-					subscription.status !== 'incomplete' &&
-					subscription.status !== 'trialing'
-				) {
+				if (subscription.status !== 'incomplete') {
 					// changed since we last looked - let's store the new data.
 					await cacheSubscriptionInfoOnPlan(subscription, ctx);
 					return null;
