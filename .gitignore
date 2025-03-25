@@ -134,6 +134,7 @@ dist
 *.sqlite-shm
 *.db
 .env.*
+.dev.vars
 
 backups/
 

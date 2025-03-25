@@ -13,7 +13,8 @@ const deployedDomain = new URL(DEPLOYED_ORIGIN).hostname;
 
 export const domainRoutesMiddleware = createMiddleware<Env>(
 	async (ctx, next) => {
-		const requestHost = ctx.req.header('host');
+		const requestHost =
+			ctx.req.header('x-forwarded-host') || ctx.req.header('host');
 		if (!requestHost || requestHost === deployedDomain) {
 			return await next();
 		} else {

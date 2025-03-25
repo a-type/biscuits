@@ -5,6 +5,10 @@
 			"path": "server",
 		},
 		{
+			"name": "📡 Workers",
+			"path": "workers",
+		},
+		{
 			"name": "🌐 Web",
 			"path": "web",
 		},
