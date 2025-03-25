@@ -27,6 +27,7 @@ const CreatePlan = graphql(`
 						subscriptionId
 						clientSecret
 					}
+					subscriptionStatus
 				}
 			}
 		}

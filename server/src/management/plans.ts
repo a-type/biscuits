@@ -331,7 +331,7 @@ export async function updatePlanSubscription({
 	// one is incomplete_expired or cancelled
 	const provisionNewSubscription =
 		!existingSubscription ||
-		['incomplete_expired', 'cancelled'].includes(existingSubscription.status);
+		['incomplete_expired', 'canceled'].includes(existingSubscription.status);
 
 	if (provisionNewSubscription) {
 		// we provision a new subscription
