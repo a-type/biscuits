@@ -1,4 +1,4 @@
-import { P, Spinner } from '@a-type/ui';
+import { Box, P, Spinner } from '@a-type/ui';
 import { graphql, useQuery } from '@biscuits/graphql';
 import { useSearchParams } from '@verdant-web/react-router';
 import { lazy, Suspense, useEffect } from 'react';
@@ -24,6 +24,7 @@ const PlanSubscriptionInfo = graphql(
 				checkoutData {
 					...SubscriptionCheckout_checkoutData
 				}
+				subscriptionCanceledAt
 				...ManageSubscription_manageSubscriptionInfo
 			}
 		}
@@ -111,6 +112,21 @@ export function SubscriptionSetup({ priceKeys }: SubscriptionSetupProps) {
 	) {
 		// subscription active - show management
 		return <ManageSubscription data={data.plan} />;
+	}
+
+	if (data?.plan?.subscriptionStatus === 'canceled') {
+		return (
+			<Box d="col" gap>
+				<Box surface="primary">
+					Your subscription was canceled on{' '}
+					{new Date(
+						data.plan.subscriptionCanceledAt ?? Date.now(),
+					).toLocaleDateString()}
+					. You can restart it by selecting a plan below.
+				</Box>
+				<SubscriptionSelect priceKeys={priceKeys} />
+			</Box>
+		);
 	}
 
 	// subscription inactive - show plan selection
