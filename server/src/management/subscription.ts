@@ -171,13 +171,19 @@ export async function handleSubscriptionCreated(
 		);
 	}
 
+	const adminEmail = await db
+		.selectFrom('User')
+		.select('email')
+		.where('planId', '=', result.planId)
+		.where('planRole', '=', 'admin')
+		.executeTakeFirst();
 	email
 		.sendCustomEmail(
 			{
 				to: 'hi@biscuits.club',
 				subject: 'Biscuits Subscription Created',
-				text: `A new subscription was created: https://dashboard.stripe.com/subscriptions/${subscription.id}`,
-				html: `<p>A new subscription was created: <a href="https://dashboard.stripe.com/subscriptions/${subscription.id}">Link</a></p>`,
+				text: `A new subscription was created for ${adminEmail}: https://dashboard.stripe.com/subscriptions/${subscription.id}`,
+				html: `<p>A new subscription was created for ${adminEmail}: <a href="https://dashboard.stripe.com/subscriptions/${subscription.id}">Link</a></p>`,
 			},
 			ctx,
 		)
