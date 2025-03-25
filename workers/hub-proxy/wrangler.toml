@@ -3,15 +3,15 @@ compatibility_date = "2025-01-01"
 main = "src/index.ts"
 account_id = "5f843fcad78a2f4e1fee091c1d6c21ab"
 
+routes = [
+	{ pattern = "fallback.biscuits.page", custom_domain = true },
+	# handles all traffic to biscuits.page zone, where custom domains are CNAMEd to
+	{ zone_name = "biscuits.page", pattern = "*/*" },
+]
+
 [observability]
 enabled = true
 head_sampling_rate = 1 # optional. default = 1.
 
 [vars]
 API_ORIGIN = "https://api.biscuits.club"
-
-routes = [
-	{ pattern = "fallback.biscuits.page", custom_domain = true },
-	# handles all traffic to biscuits.page zone, where custom domains are CNAMEd to
-	{ zone_name = "biscuits.page", pattern = "*/*" },
-]
