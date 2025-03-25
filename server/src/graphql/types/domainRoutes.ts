@@ -274,9 +274,8 @@ builder.objectType('DomainRoute', {
 		mainRecord: t.field({
 			type: 'DnsRecord',
 			resolve: async (parent, _, ctx) => {
-				// TODO: make this real
 				return {
-					value: 'custom-dns.biscuits.club',
+					value: 'my.biscuits.page',
 					type: 'CNAME',
 					name: parent.domain,
 				};
