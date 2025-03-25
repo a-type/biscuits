@@ -477,7 +477,7 @@ Plan.implement({
 					plan.subscriptionStatus !== 'trialing' &&
 					plan.subscriptionStatus !== null
 				) {
-					console.debug(
+					logger.debug(
 						'Subscription status is not incomplete or trialing. Cannot route to checkout.',
 						{
 							planId: plan.id,
