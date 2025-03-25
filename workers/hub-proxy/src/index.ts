@@ -11,7 +11,7 @@ interface Environment {
  * the main server.
  */
 export default {
-	async fetch(request, env, ctx): Promise<Response> {
+	async fetch(request, env): Promise<Response> {
 		const incomingHost = request.headers.get('host');
 		if (!incomingHost) {
 			return new Response('No host header', {
@@ -38,8 +38,15 @@ export default {
 			'x-forwarded-url': request.headers.get('x-forwarded-url') || '/',
 		};
 
-		return fetch(url, {
-			headers,
-		});
+		try {
+			return await fetch(url, {
+				headers,
+			});
+		} catch (e) {
+			console.error(e);
+			return new Response('Failed to proxy request', {
+				status: 500,
+			});
+		}
 	},
 } satisfies ExportedHandler<Environment>;
