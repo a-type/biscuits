@@ -582,6 +582,19 @@ Plan.implement({
 					const subscription = await ctx.stripe.subscriptions.retrieve(
 						plan.stripeSubscriptionId,
 					);
+					if (subscription.status !== 'trialing') {
+						logger.warn(
+							'Subscription status changed while fetching trial end',
+							{
+								planId: plan.id,
+								subscriptionId: plan.stripeSubscriptionId,
+								oldStatus: plan.subscriptionStatus,
+								newStatus: subscription.status,
+							},
+						);
+						await cacheSubscriptionInfoOnPlan(subscription, ctx);
+						return null;
+					}
 					return subscription.trial_end ?
 							new Date(subscription.trial_end)
 						:	null;
