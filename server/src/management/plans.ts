@@ -323,9 +323,19 @@ export async function updatePlanSubscription({
 		throw new BiscuitsError(BiscuitsError.Code.Unexpected, 'Price not found');
 	}
 
-	if (!plan.stripeSubscriptionId) {
+	const existingSubscription =
+		plan.stripeSubscriptionId ?
+			await stripe.subscriptions.retrieve(plan.stripeSubscriptionId)
+		:	null;
+	// provision a new subscription if no existing, or if the existing
+	// one is incomplete_expired or cancelled
+	const provisionNewSubscription =
+		!existingSubscription ||
+		['incomplete_expired', 'cancelled'].includes(existingSubscription.status);
+
+	if (provisionNewSubscription) {
 		// we provision a new subscription
-		const { stripeSubscription, productId, metadata, stripeCustomerId } =
+		const { stripeSubscription, productId, metadata } =
 			await provisionSubscription({
 				userDetails,
 				ctx,
@@ -349,18 +359,16 @@ export async function updatePlanSubscription({
 		return updatedPlan;
 	}
 
-	const subscription = await stripe.subscriptions.retrieve(
-		plan.stripeSubscriptionId,
-	);
-
-	if (!['active', 'incomplete', 'canceled'].includes(subscription.status)) {
+	if (
+		!['active', 'incomplete', 'canceled'].includes(existingSubscription.status)
+	) {
 		throw new BiscuitsError(
 			BiscuitsError.Code.Unexpected,
-			`Subscription status is ${subscription.status}. Cannot change plans. Cancel your existing subscription, first.`,
+			`Subscription status is ${existingSubscription.status}. Cannot change plans. Cancel your existing subscription, first.`,
 		);
 	}
 
-	if (subscription.customer !== userDetails.stripeCustomerId) {
+	if (existingSubscription.customer !== userDetails.stripeCustomerId) {
 		throw new BiscuitsError(
 			BiscuitsError.Code.Unexpected,
 			'Your plan is administered by another member. Please ask them to change the plan.',
@@ -368,7 +376,7 @@ export async function updatePlanSubscription({
 	}
 
 	// if the subscription already has an item, we update it
-	const item = subscription.items.data[0];
+	const item = existingSubscription.items.data[0];
 
 	if (item.price.id === price.id) {
 		// no change
@@ -381,7 +389,7 @@ export async function updatePlanSubscription({
 	const productMetadata = await getProductMetadata(item.price.product);
 
 	const updatedSubscription = await stripe.subscriptions.update(
-		plan.stripeSubscriptionId,
+		existingSubscription.id,
 		{
 			items: [
 				{
