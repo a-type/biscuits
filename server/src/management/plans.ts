@@ -349,6 +349,9 @@ export async function updatePlanSubscription({
 				stripePriceId: price.id,
 				stripeProductId: productId,
 				subscriptionStatus: stripeSubscription.status,
+				subscriptionCanceledAt: null,
+				subscriptionExpiresAt: null,
+				subscriptionStatusCheckedAt: new Date(),
 				memberLimit: metadata.memberLimit,
 				allowedApp: metadata.app,
 			})
