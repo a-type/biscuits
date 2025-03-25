@@ -12,7 +12,7 @@ export async function removeUserFromPlan(
 	planId: string,
 	userId: string,
 	ctx: GQLContext,
-) {
+): Promise<{ id: string; fullName: string; email: string } | undefined> {
 	return ctx.db.transaction().execute(async (tx) => {
 		// if user was admin of their plan and there are no other admins,
 		// promote another user to admin. if there are no other users,

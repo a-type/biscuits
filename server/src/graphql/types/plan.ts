@@ -206,13 +206,68 @@ builder.mutationFields((t) => ({
 					{
 						to: removed.email,
 						subject: 'You have been removed from your Biscuits plan',
-						text: `You have been removed from the Biscuits plan by an admin. If you believe this is a mistake, please contact support.`,
-						html: `You have been removed from the Biscuits plan by an admin. If you believe this is a mistake, please contact support.`,
+						text: `You have been removed from the Biscuits plan by an admin. If you believe this is a mistake, please contact support (https://biscuits.club/contact).`,
+						html: `You have been removed from the Biscuits plan by an admin. If you believe this is a mistake, please <a href="https://biscuits.club/contact">contact support.</a>`,
 					},
 					ctx.reqCtx,
 				);
 			}
 			return { planId };
+		},
+	}),
+	leavePlan: t.field({
+		type: 'LeavePlanResult',
+		authScopes: {
+			member: true,
+		},
+		resolve: async (_, __, ctx) => {
+			const planId = ctx.session?.planId;
+			if (!planId) {
+				throw new BiscuitsError(
+					BiscuitsError.Code.BadRequest,
+					'User is not in a plan',
+				);
+			}
+			assert(ctx.session);
+
+			const removed = await removeUserFromPlan(planId, ctx.session.userId, ctx);
+			if (removed) {
+				await email.sendCustomEmail(
+					{
+						to: removed.email,
+						subject: 'You have left your Biscuits plan',
+						text: `You have left the Biscuits plan. If you believe this is a mistake, ask your plan admin for another invite.`,
+						html: `You have left the Biscuits plan. If you believe this is a mistake, ask your plan admin for another invite.`,
+					},
+					ctx.reqCtx,
+				);
+			} else {
+				const user = await ctx.db
+					.selectFrom('User')
+					.select(['email', 'fullName'])
+					.where('id', '=', ctx.session.userId)
+					.executeTakeFirst();
+				if (user) {
+					// this means the plan was cancelled.
+					await email.sendCustomEmail(
+						{
+							to: user.email,
+							subject: 'Your Biscuits plan has been closed',
+							text: `Your Biscuits plan has been closed. If you believe this is a mistake, please contact support (https://biscuits.club/contact).`,
+							html: `Your Biscuits plan has been closed. If you believe this is a mistake, please <a href="https://biscuits.club/contact">contact support.</a>`,
+						},
+						ctx.reqCtx,
+					);
+				}
+			}
+
+			// clear the session
+			await ctx.auth.setLoginSession({
+				...ctx.session,
+				planId: null,
+				role: 'user',
+			});
+			return {};
 		},
 	}),
 	setFeatureFlag: t.field({
@@ -304,6 +359,7 @@ export const Plan = builder.loadableNodeRef('Plan', {
 			}
 			const planId = ctx.session.planId;
 			if (!planId) {
+				logger.warn(`Plan not found, ${planId}`);
 				return createResults<DBPlan & { __typename: 'Plan' }>(ids);
 			}
 
@@ -418,10 +474,11 @@ Plan.implement({
 				// if we haven't yet synced with Stripe
 				if (
 					plan.subscriptionStatus !== 'incomplete' &&
+					plan.subscriptionStatus !== 'trialing' &&
 					plan.subscriptionStatus !== null
 				) {
 					console.debug(
-						'Subscription status is not incomplete. Cannot route to checkout.',
+						'Subscription status is not incomplete or trialing. Cannot route to checkout.',
 						{
 							planId: plan.id,
 							status: plan.subscriptionStatus,
@@ -433,44 +490,76 @@ Plan.implement({
 				const subscription = await ctx.stripe.subscriptions.retrieve(
 					plan.stripeSubscriptionId,
 					{
-						expand: ['latest_invoice.payment_intent'],
+						expand: ['latest_invoice.payment_intent', 'pending_setup_intent'],
 					},
 				);
 				// double check
-				if (subscription.status !== 'incomplete') {
+				if (
+					subscription.status !== 'incomplete' &&
+					subscription.status !== 'trialing'
+				) {
 					// changed since we last looked - let's store the new data.
 					await cacheSubscriptionInfoOnPlan(subscription, ctx);
 					return null;
 				}
 
-				assert(
-					typeof subscription.latest_invoice !== 'string',
-					'did not expand latest_invoice field',
-				);
-				assert(
-					typeof subscription.latest_invoice?.payment_intent !== 'string',
-					'did not expand latest_invoice.payment_intent field',
-				);
-				const clientSecret =
-					subscription.latest_invoice?.payment_intent?.client_secret;
-
-				if (!clientSecret) {
-					logger.urgent('Stripe subscription does not have client secret', {
-						subscriptionId: subscription.id,
-						latestInvoice: subscription.latest_invoice,
-						paymentIntent: subscription.latest_invoice?.payment_intent,
-					});
-					throw new BiscuitsError(
-						BiscuitsError.Code.Unexpected,
-						'Failed to begin the checkout process. This is unexpected. Please try again.',
+				if (subscription.status === 'incomplete') {
+					assert(
+						typeof subscription.latest_invoice !== 'string',
+						'did not expand latest_invoice field',
 					);
-				}
+					assert(
+						typeof subscription.latest_invoice?.payment_intent !== 'string',
+						'did not expand latest_invoice.payment_intent field',
+					);
+					const clientSecret =
+						subscription.latest_invoice?.payment_intent?.client_secret;
 
-				const subscriptionData = {
-					subscriptionId: subscription.id,
-					clientSecret,
-				};
-				return subscriptionData;
+					if (!clientSecret) {
+						logger.urgent('Stripe subscription does not have client secret', {
+							subscriptionId: subscription.id,
+							latestInvoice: subscription.latest_invoice,
+							paymentIntent: subscription.latest_invoice?.payment_intent,
+						});
+						throw new BiscuitsError(
+							BiscuitsError.Code.Unexpected,
+							'Failed to begin the checkout process. This is unexpected. Please try again.',
+						);
+					}
+
+					return {
+						subscriptionId: subscription.id,
+						clientSecret,
+						mode: 'payment' as const,
+					};
+				} else if (subscription.status === 'trialing') {
+					// provide checkout data for the setup intent
+					assert(
+						typeof subscription.pending_setup_intent !== 'string',
+						'did not expand pending_setup_intent field',
+					);
+					if (!subscription.pending_setup_intent) {
+						// might happen who knows
+						return null;
+					}
+					const clientSecret = subscription.pending_setup_intent?.client_secret;
+					if (!clientSecret) {
+						logger.urgent('Stripe subscription does not have client secret', {
+							subscriptionId: subscription.id,
+							pendingSetupIntent: subscription.pending_setup_intent,
+						});
+						throw new BiscuitsError(
+							BiscuitsError.Code.Unexpected,
+							'Failed to begin the checkout process. This is unexpected. Please try again.',
+						);
+					}
+
+					return {
+						subscriptionId: subscription.id,
+						clientSecret,
+						mode: 'setup' as const,
+					};
+				}
 			},
 		}),
 		members: t.field({
@@ -596,10 +685,16 @@ Plan.implement({
 						return null;
 					}
 					return subscription.trial_end ?
-							new Date(subscription.trial_end)
+							new Date(subscription.trial_end * 1000)
 						:	null;
 				}
 				return null;
+			},
+		}),
+		userIsAdmin: t.field({
+			type: 'Boolean',
+			resolve: (plan, _, ctx) => {
+				return ctx.session?.planId === plan.id && ctx.session?.role === 'admin';
 			},
 		}),
 	}),
@@ -609,6 +704,7 @@ builder.objectType('StripeCheckoutData', {
 	fields: (t) => ({
 		subscriptionId: t.exposeString('subscriptionId'),
 		clientSecret: t.exposeString('clientSecret'),
+		mode: t.exposeString('mode'),
 	}),
 });
 
@@ -648,6 +744,20 @@ builder.objectType('KickMemberResult', {
 		plan: t.field({
 			type: Plan,
 			resolve: (result) => result.planId,
+		}),
+	}),
+});
+
+builder.objectType('LeavePlanResult', {
+	fields: (t) => ({
+		me: t.field({
+			type: User,
+			resolve: (_, __, ctx) => {
+				if (!ctx.session) {
+					throw new BiscuitsError(BiscuitsError.Code.Unexpected);
+				}
+				return ctx.session.userId;
+			},
 		}),
 	}),
 });

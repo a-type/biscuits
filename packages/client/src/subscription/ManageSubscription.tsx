@@ -1,4 +1,4 @@
-import { Button, Chip, clsx, H2, Icon, toast } from '@a-type/ui';
+import { Box, Button, Chip, clsx, H2, Icon, toast } from '@a-type/ui';
 import {
 	FragmentOf,
 	graphql,
@@ -9,6 +9,7 @@ import { useSearchParams } from '@verdant-web/react-router';
 import { useEffect } from 'react';
 import * as CONFIG from '../config.js';
 import { CancelPlanButton } from './CancelPlanButton.js';
+import { LeavePlanButton } from './LeavePlanButton.js';
 import { PlanInfo, planProductInfo } from './PlanInfo.js';
 
 export const manageSubscriptionInfo = graphql(
@@ -16,6 +17,7 @@ export const manageSubscriptionInfo = graphql(
 		fragment ManageSubscription_manageSubscriptionInfo on Plan {
 			id
 			subscriptionStatus
+			userIsAdmin
 			productInfo {
 				id
 				...PlanInfo_productInfo
@@ -91,13 +93,25 @@ export function ManageSubscription({
 				</div>
 				{data.productInfo && <PlanInfo data={data.productInfo} />}
 			</div>
-			<form action={`${CONFIG.API_ORIGIN}/stripe/portal-session`} method="POST">
-				<Button type="submit">Change your subscription</Button>
-				<span className="text-xs">
-					Update your plan, change your card, or unsubscribe
-				</span>
-			</form>
-			<CancelPlanButton />
+			{data.userIsAdmin ?
+				<>
+					<form
+						action={`${CONFIG.API_ORIGIN}/stripe/portal-session`}
+						method="POST"
+					>
+						<Button type="submit">Change your subscription</Button>
+						<span className="text-xs">
+							Update your plan, change your card, or unsubscribe
+						</span>
+					</form>
+					<CancelPlanButton />
+				</>
+			:	<Box d="col" gap items="start">
+					Someone else manages your subscription. Reach out to them to make
+					changes.
+					<LeavePlanButton />
+				</Box>
+			}
 		</div>
 	);
 }

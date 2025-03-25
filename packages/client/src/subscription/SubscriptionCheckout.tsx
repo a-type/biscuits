@@ -13,6 +13,7 @@ export const checkoutData = graphql(`
 	fragment SubscriptionCheckout_checkoutData on StripeCheckoutData {
 		subscriptionId
 		clientSecret
+		mode
 	}
 `);
 
@@ -39,14 +40,14 @@ export function SubscriptionCheckout({
 				},
 			}}
 		>
-			<PaymentForm />
+			<PaymentForm mode={data.mode} />
 		</Elements>
 	);
 }
 
 export default SubscriptionCheckout;
 
-function PaymentForm() {
+function PaymentForm({ mode }: { mode: string }) {
 	const stripe = useStripe();
 	const elements = useElements();
 	const [error, setError] = useState<string | null>(null);
@@ -58,19 +59,36 @@ function PaymentForm() {
 			return;
 		}
 
-		const result = await stripe.confirmPayment({
-			elements,
-			confirmParams: {
-				return_url: `${window.location.origin}/settings?paymentComplete=true`,
-			},
-		});
+		if (mode === 'setup') {
+			const result = await stripe.confirmSetup({
+				elements,
+				confirmParams: {
+					return_url: `${window.location.origin}/settings?tab=subscription&paymentComplete=true`,
+				},
+			});
 
-		if (result.error) {
-			console.error('Stripe failed to confirm payment', result.error);
-			setError(
-				result.error.message ?? 'An unexpected error occurred. Try again?',
-			);
-			return;
+			if (result.error) {
+				console.error('Stripe failed to confirm setup', result.error);
+				setError(
+					result.error.message ?? 'An unexpected error occurred. Try again?',
+				);
+				return;
+			}
+		} else {
+			const result = await stripe.confirmPayment({
+				elements,
+				confirmParams: {
+					return_url: `${window.location.origin}/settings?tab=subscription&paymentComplete=true`,
+				},
+			});
+
+			if (result.error) {
+				console.error('Stripe failed to confirm payment', result.error);
+				setError(
+					result.error.message ?? 'An unexpected error occurred. Try again?',
+				);
+				return;
+			}
 		}
 	};
 

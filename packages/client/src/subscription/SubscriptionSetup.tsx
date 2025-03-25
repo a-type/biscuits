@@ -93,69 +93,75 @@ export function SubscriptionSetup({ priceKeys }: SubscriptionSetupProps) {
 		return <Spinner />;
 	}
 
-	if (data?.plan?.checkoutData) {
-		// checkout in progress - show payment collection
-		return (
-			<Suspense fallback={<Spinner />}>
-				{data.plan.subscriptionStatus === 'trialing' && (
+	if (data?.plan) {
+		if (data?.plan?.checkoutData) {
+			// checkout in progress - show payment collection
+			return (
+				<Box d="col" gap>
+					<Suspense fallback={<Spinner />}>
+						{data.plan.subscriptionStatus === 'trialing' && (
+							<Box surface="accent" p d="col">
+								<P>
+									Your trial subscription period has begun! Billing will begin
+									on {new Date(data.plan.trialEndsAt || 0).toLocaleDateString()}
+									. You can cancel any time before then to avoid payment. We'll
+									send you a reminder email one week before.
+								</P>
+								<P>
+									You can enter your payment information below now if you'd like
+									to ensure no hiccups. You still won't be billed until the
+									trial ends.
+								</P>
+							</Box>
+						)}
+						<SubscriptionCheckout checkoutData={data.plan.checkoutData} />
+						<ManageSubscription data={data.plan} />
+					</Suspense>
+				</Box>
+			);
+		}
+
+		if (data?.plan?.subscriptionStatus === 'incomplete') {
+			// if there wasn't any checkoutData, that means we're in limbo.
+			return <ManageSubscription data={data.plan} />;
+		}
+
+		if (data?.plan?.subscriptionStatus === 'trialing') {
+			return (
+				<Box d="col" gap>
 					<Box surface="accent" p>
-						<P>
-							Your trial subscription period has begun! Billing will begin on{' '}
-							{new Date(data.plan.trialEndsAt || 0).toLocaleDateString()}. You
-							can cancel any time before then to avoid payment. We'll send you a
-							reminder email one week before.
-						</P>
-						<P>
-							You can enter your payment information below now if you like to
-							ensure no hiccups. You still won't be billed until the trial ends.
-						</P>
+						Your trial subscription period has begun! Billing will begin on{' '}
+						{new Date(data.plan.trialEndsAt || 0).toLocaleDateString()}. You can
+						cancel any time before then to avoid payment. We'll send you a
+						reminder email one week before.
 					</Box>
-				)}
-				<SubscriptionCheckout checkoutData={data.plan.checkoutData} />
-			</Suspense>
-		);
-	}
-
-	if (data?.plan?.subscriptionStatus === 'incomplete') {
-		// if there wasn't any checkoutData, that means we're in limbo.
-		return <ManageSubscription data={data.plan} />;
-	}
-
-	if (data?.plan?.subscriptionStatus === 'trialing') {
-		return (
-			<Box d="col" gap>
-				<Box surface="accent" p>
-					Your trial subscription period has begun! Billing will begin on{' '}
-					{new Date(data.plan.trialEndsAt || 0).toLocaleDateString()}. You can
-					cancel any time before then to avoid payment. We'll send you a
-					reminder email one week before.
+					<ManageSubscription data={data.plan} />
 				</Box>
-				<ManageSubscription data={data.plan} />
-			</Box>
-		);
-	}
+			);
+		}
 
-	if (
-		data?.plan?.subscriptionStatus === 'active' ||
-		data?.plan?.subscriptionStatus === 'trialing'
-	) {
-		// subscription active - show management
-		return <ManageSubscription data={data.plan} />;
-	}
+		if (
+			data?.plan?.subscriptionStatus === 'active' ||
+			data?.plan?.subscriptionStatus === 'trialing'
+		) {
+			// subscription active - show management
+			return <ManageSubscription data={data.plan} />;
+		}
 
-	if (data?.plan?.subscriptionStatus === 'canceled') {
-		return (
-			<Box d="col" gap>
-				<Box surface="primary">
-					Your subscription was canceled on{' '}
-					{new Date(
-						data.plan.subscriptionCanceledAt ?? Date.now(),
-					).toLocaleDateString()}
-					. You can restart it by selecting a plan below.
+		if (data?.plan?.subscriptionStatus === 'canceled') {
+			return (
+				<Box d="col" gap>
+					<Box surface="primary">
+						Your subscription was canceled on{' '}
+						{new Date(
+							data.plan.subscriptionCanceledAt ?? Date.now(),
+						).toLocaleDateString()}
+						. You can restart it by selecting a plan below.
+					</Box>
+					<SubscriptionSelect priceKeys={priceKeys} />
 				</Box>
-				<SubscriptionSelect priceKeys={priceKeys} />
-			</Box>
-		);
+			);
+		}
 	}
 
 	// subscription inactive - show plan selection

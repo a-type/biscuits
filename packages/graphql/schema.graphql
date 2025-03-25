@@ -157,6 +157,10 @@ type KickMemberResult {
   plan: Plan!
 }
 
+type LeavePlanResult {
+  me: User!
+}
+
 enum LocationAddressFormat {
   CITY
   STREET
@@ -191,6 +195,7 @@ type Mutation {
   deletePlan(id: ID): Plan!
   deletePushSubscription(endpoint: String!): Boolean!
   kickMember(userId: ID!): KickMemberResult!
+  leavePlan: LeavePlanResult!
   overrideFoodCategory(categoryId: ID!, foodId: ID!): AssignFoodCategoryResult!
   publishPost(input: PublishPostInput!): PublishPostResult!
   publishRecipe(input: PublishRecipeInput!): PublishedRecipe!
@@ -248,6 +253,7 @@ type Plan implements Node {
   subscriptionExpiresAt: DateTime
   subscriptionStatus: String!
   trialEndsAt: DateTime
+  userIsAdmin: Boolean!
 }
 
 """An invitation to join a plan"""
@@ -596,6 +602,7 @@ input StorePageScanInput {
 
 type StripeCheckoutData {
   clientSecret: String!
+  mode: String!
   subscriptionId: String!
 }
 

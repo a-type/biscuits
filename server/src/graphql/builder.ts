@@ -60,12 +60,14 @@ export const builder = new SchemaBuilder<{
 		StripeCheckoutData: {
 			subscriptionId: string;
 			clientSecret: string;
+			mode: 'payment' | 'setup';
 		};
 		ProductInfo: {
 			lookupKey: string;
 		};
 		CancelPlanResult: {};
 		KickMemberResult: { planId: string };
+		LeavePlanResult: {};
 		CreatePlanInvitationResult: { planId: string; planInvitationId: string };
 		CancelPlanInvitationResult: { planId: string };
 		ResetSyncResult: { planId: string };
