@@ -15,6 +15,7 @@ export default {
 		try {
 			const incomingHost = request.headers.get('host');
 			if (!incomingHost) {
+				console.error('No host header', request.url);
 				return new Response('No host header', {
 					status: 400,
 				});
@@ -25,19 +26,11 @@ export default {
 			const url = new URL(request.url);
 			url.hostname = apiHost;
 
+			console.info(`Proxying request ${request.url} to ${url.toString()}`);
+
 			const headers: HeadersInit = {
 				'x-forwarded-host': incomingHost,
-				'x-forwarded-proto':
-					request.headers.get('x-forwarded-proto') || 'https',
-				'x-forwarded-for':
-					request.headers.get('x-forwarded-for') ||
-					request.headers.get('cf-connecting-ip') ||
-					request.headers.get('x-real-ip') ||
-					request.headers.get('x-forwarded-host') ||
-					'',
-				'x-forwarded-port': request.headers.get('x-forwarded-port') || '443',
-				'x-forwarded-path': request.headers.get('x-forwarded-path') || '/',
-				'x-forwarded-url': request.headers.get('x-forwarded-url') || '/',
+				'x-forwarded-for': request.headers.get('x-real-ip') || '',
 			};
 
 			return await fetch(url, {
