@@ -97,6 +97,20 @@ export function SubscriptionSetup({ priceKeys }: SubscriptionSetupProps) {
 		// checkout in progress - show payment collection
 		return (
 			<Suspense fallback={<Spinner />}>
+				{data.plan.subscriptionStatus === 'trialing' && (
+					<Box surface="accent" p>
+						<P>
+							Your trial subscription period has begun! Billing will begin on{' '}
+							{new Date(data.plan.trialEndsAt || 0).toLocaleDateString()}. You
+							can cancel any time before then to avoid payment. We'll send you a
+							reminder email one week before.
+						</P>
+						<P>
+							You can enter your payment information below now if you like to
+							ensure no hiccups. You still won't be billed until the trial ends.
+						</P>
+					</Box>
+				)}
 				<SubscriptionCheckout checkoutData={data.plan.checkoutData} />
 			</Suspense>
 		);
