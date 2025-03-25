@@ -11,6 +11,7 @@ head_sampling_rate = 1 # optional. default = 1.
 API_ORIGIN = "https://api.biscuits.club"
 
 routes = [
+	{ pattern = "fallback.biscuits.page", custom_domain = true },
 	# handles all traffic to biscuits.page zone, where custom domains are CNAMEd to
 	{ zone_name = "biscuits.page", pattern = "*/*" },
 ]
