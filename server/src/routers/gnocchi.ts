@@ -20,11 +20,11 @@ const hubPath = path.join(
 );
 const hubClientPath = path.join(hubPath, 'client');
 
-gnocchiRouter.get('/hubRecipe/assets/*', (ctx) =>
-	staticFile(hubClientPath, 'gnocchi/hubRecipe', ctx.req.raw),
+gnocchiRouter.get('/hub/assets/*', (ctx) =>
+	staticFile(hubClientPath, 'gnocchi/hub', ctx.req.raw),
 );
 
-gnocchiRouter.get('/hubRecipe/:planId/:recipeSlug', async (ctx) => {
+gnocchiRouter.get('/hub/:planId/:recipeSlug', async (ctx) => {
 	const planId = ctx.req.param('planId');
 	const recipeSlug = ctx.req.param('recipeSlug');
 
@@ -67,8 +67,8 @@ gnocchiRouter.get('/hubRecipe/:planId/:recipeSlug', async (ctx) => {
 	return renderTemplate(indexTemplate, appHtml, data);
 });
 
-gnocchiRouter.get('/hubRecipe/*', (ctx) =>
-	staticFile(hubClientPath, 'gnocchi/hubRecipe', ctx.req.raw),
+gnocchiRouter.get('/hub/*', (ctx) =>
+	staticFile(hubClientPath, 'gnocchi/hub', ctx.req.raw),
 );
 
 function getEmbeddedRecipeIds(snapshot: any) {

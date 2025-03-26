@@ -23,12 +23,12 @@ const hubPath = path.join(
 );
 const hubClientPath = path.join(hubPath, 'client');
 
-wishWashRouter.get('/hubList/assets/*', ({ req }) =>
-	staticFile(hubClientPath, 'wishWash/hubList', req.raw),
+wishWashRouter.get('/hub/assets/*', ({ req }) =>
+	staticFile(hubClientPath, 'wishWash/hub', req.raw),
 );
 
-wishWashRouter.get('/hubList/favicon.ico', ({ req }) =>
-	staticFile(hubClientPath, 'wishWash/hubList', req.raw),
+wishWashRouter.get('/hub/favicon.ico', ({ req }) =>
+	staticFile(hubClientPath, 'wishWash/hub', req.raw),
 );
 
 function itemImageUrls(item: WishlistSnapshot['items'][number]) {
@@ -41,7 +41,7 @@ function itemImageUrls(item: WishlistSnapshot['items'][number]) {
 	return imageUrls;
 }
 
-wishWashRouter.get('/hubList/:listSlug', async (ctx) => {
+wishWashRouter.get('/hub/:listSlug', async (ctx) => {
 	const listSlug = ctx.req.param('listSlug');
 	// parse slug out of fragment
 	const slug = listSlug.split('-').pop()!;
@@ -120,6 +120,6 @@ wishWashRouter.get('/hubList/:listSlug', async (ctx) => {
 	return renderTemplate(indexTemplate, appHtml, data);
 });
 
-wishWashRouter.get('/hubList/*', ({ req }) =>
-	staticFile(hubClientPath, 'wishWash/hubList', req.raw),
+wishWashRouter.get('/hub/*', ({ req }) =>
+	staticFile(hubClientPath, 'wishWash/hub', req.raw),
 );

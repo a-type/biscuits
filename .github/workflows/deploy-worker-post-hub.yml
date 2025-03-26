@@ -1,0 +1,44 @@
+name: Post Hub deploy
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/post-hub/**'
+      - 'packages/client/**'
+      - 'packages/apps/**'
+      - '.github/workflows/deploy-post-hub.yml'
+      - 'pnpm-workspace.yaml'
+
+jobs:
+  build-and-deploy-post-hub:
+    name: Build and deploy post-hub
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: 9.15.2
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --filter @worker.biscuits/post-hub...
+
+      - name: Verify cloudflare token
+        run: |
+          curl -X GET "https://api.cloudflare.com/client/v4/user/tokens/verify" \
+          -H "Authorization: Bearer ${{secrets.CLOUDFLARE_API_TOKEN}}" \
+          -H "Content-Type:application/json"
+
+      - name: Deploy app
+        uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          command: deploy
+          packageManager: pnpm
+          workingDirectory: ./workers/post-hub/web

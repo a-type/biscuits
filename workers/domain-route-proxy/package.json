@@ -1,5 +1,5 @@
 {
-	"name": "@biscuits/hub-proxy",
+	"name": "@worker.biscuits/domain-route-proxy",
 	"private": true,
 	"type": "module",
 	"devDependencies": {

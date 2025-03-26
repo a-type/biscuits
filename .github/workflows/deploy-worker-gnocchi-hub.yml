@@ -1,21 +1,23 @@
-name: Worker Hub-Proxy Deploy
+name: Gnocchi Hub deploy
 on:
   push:
     branches: [main]
     paths:
-      - 'workers/hub-proxy/**'
-      - '.github/workflows/deploy-worker-hub-proxy.yml'
+      - 'apps/gnocchi-hub/**'
+      - 'packages/client/**'
+      - 'packages/apps/**'
+      - '.github/workflows/deploy-gnocchi-hub.yml'
       - 'pnpm-workspace.yaml'
 
 jobs:
-  build-and-deploy-worker-hub-proxy:
-    name: Build and deploy worker Hub-Proxy
+  build-and-deploy-gnocchi-hub:
+    name: Build and deploy gnocchi-hub
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Setup pnpm
-        uses: pnpm/action-setup@646cdf48217256a3d0b80361c5a50727664284f2
+        uses: pnpm/action-setup@v2.0.1
         with:
           version: 9.15.2
       - name: Setup node
@@ -25,7 +27,7 @@ jobs:
           cache: pnpm
 
       - name: Install dependencies
-        run: pnpm install --filter @biscuits/worker-hub-proxy...
+        run: pnpm install --filter @worker.biscuits/gnocchi-hub...
 
       - name: Verify cloudflare token
         run: |
@@ -37,6 +39,6 @@ jobs:
         uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          command: deploy --config wrangler.toml
+          command: deploy
           packageManager: pnpm
-          workingDirectory: ./workers/hub-proxy
+          workingDirectory: ./workers/gnocchi-hub/web

@@ -25,7 +25,7 @@ export const app = new Hono()
 	.route('/stripe', stripeRouter)
 	.route('/graphql', graphqlRouter)
 	.route('/gnocchi', gnocchiRouter)
-	.route('/wishWash', wishWashRouter)
+	.route('/wish-wash', wishWashRouter)
 	.route('/post', postRouter);
 
 // for local dev, add endpoint to serve user files

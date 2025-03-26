@@ -1,0 +1,8 @@
+{
+	"name": "@worker.biscuits/domain-route-proxy",
+	"private": true,
+	"type": "module",
+	"devDependencies": {
+		"@cloudflare/workers-types": "4.20250321.0"
+	}
+}
