@@ -114,7 +114,7 @@ jobs:
           apiToken: \${{ secrets.CLOUDFLARE_API_TOKEN }}
           command: deploy
           packageManager: pnpm
-          workingDirectory: ./workers/${workerId}/web
+          workingDirectory: ./workers/${workerId}
 `;
 await fs.writeFile(
 	path.resolve(

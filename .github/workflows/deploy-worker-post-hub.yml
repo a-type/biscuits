@@ -39,4 +39,4 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           command: deploy
           packageManager: pnpm
-          workingDirectory: ./workers/post-hub/web
+          workingDirectory: ./workers/post-hub
