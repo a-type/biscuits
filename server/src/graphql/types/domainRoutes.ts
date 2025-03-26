@@ -72,15 +72,11 @@ builder.mutationFields((b) => ({
 
 			assert(context.session?.planId);
 
-			const domainRoute = await context.db
-				.insertInto('DomainRoute')
-				.values({
-					id: id(),
-					planId: context.session.planId,
-					...input,
-				})
-				.returningAll()
-				.executeTakeFirstOrThrow();
+			const domainRoute = await context.domainRoutes.add({
+				id: id(),
+				planId: context.session.planId,
+				...input,
+			});
 
 			// provision TLS certificate
 			await context.customHosts.create(domainRoute);
@@ -104,12 +100,13 @@ builder.mutationFields((b) => ({
 			planAdmin: true,
 		},
 		resolve: async (parent, { id }, context) => {
-			const domainRoute = await context.db
-				.selectFrom('DomainRoute')
-				.selectAll()
-				.where('id', '=', id)
-				.executeTakeFirstOrThrow();
-
+			const domainRoute = await context.domainRoutes.getById(id);
+			if (!domainRoute) {
+				throw new BiscuitsError(
+					BiscuitsError.Code.NotFound,
+					'Domain route not found',
+				);
+			}
 			await context.customHosts.create(domainRoute);
 
 			return assignTypeName('DomainRoute')(domainRoute);
@@ -127,11 +124,7 @@ builder.mutationFields((b) => ({
 			planAdmin: true,
 		},
 		resolve: async (_, { id }, context) => {
-			const route = await context.db
-				.deleteFrom('DomainRoute')
-				.where('id', '=', id)
-				.returningAll()
-				.executeTakeFirst();
+			const route = await context.domainRoutes.deleteById(id);
 
 			if (route) {
 				try {

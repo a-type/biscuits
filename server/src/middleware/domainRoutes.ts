@@ -7,7 +7,7 @@ import { ALLOWED_HEADERS, EXPOSED_HEADERS } from '../config/cors.js';
 import { DEPLOYED_ORIGIN, PORT } from '../config/deployedContext.js';
 import { Env } from '../config/hono.js';
 import { logger } from '../logger.js';
-import { domainRouteCache } from '../services/domainRouteCache.js';
+import { domainRoutes } from '../services/domainRouteCache.js';
 
 const deployedDomain = new URL(DEPLOYED_ORIGIN).hostname;
 
@@ -19,7 +19,7 @@ export const domainRoutesMiddleware = createMiddleware<Env>(
 			return await next();
 		} else {
 			logger.debug(`Custom domain route: ${requestHost}`);
-			const route = await domainRouteCache.get(requestHost);
+			const route = domainRoutes.get(requestHost);
 			if (!route) {
 				await next();
 				return;

@@ -1,13 +1,9 @@
 import { readFile } from 'fs/promises';
 import { Hono } from 'hono';
-import { cors } from 'hono/cors';
 import { logger } from 'hono/logger';
 import { join } from 'path';
-import {
-	ALLOWED_HEADERS,
-	ALLOWED_ORIGINS,
-	EXPOSED_HEADERS,
-} from './config/cors.js';
+
+import { corsMiddleware } from './middleware/cors.js';
 import { domainRoutesMiddleware } from './middleware/domainRoutes.js';
 import { handleError } from './middleware/errors.js';
 import { authRouter } from './routers/auth.js';
@@ -22,14 +18,7 @@ export const app = new Hono()
 	.onError(handleError)
 	.use(logger())
 	.use(domainRoutesMiddleware)
-	.use(
-		cors({
-			origin: ALLOWED_ORIGINS,
-			credentials: true,
-			allowHeaders: ALLOWED_HEADERS,
-			exposeHeaders: EXPOSED_HEADERS,
-		}),
-	)
+	.use(corsMiddleware)
 	.get('/', (ctx) => ctx.text('Hello, world!'))
 	.route('/auth', authRouter)
 	.route('/verdant', verdantRouter)

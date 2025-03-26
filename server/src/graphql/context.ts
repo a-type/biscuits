@@ -5,6 +5,7 @@ import { Context } from 'hono';
 import Stripe from 'stripe';
 import { Env } from '../config/hono.js';
 import { CustomHostsService } from '../services/customHosts.js';
+import { DomainRouteService } from '../services/domainRouteCache.js';
 import { FlyService } from '../services/fly.js';
 import { createDataloaders } from './dataloaders/index.js';
 
@@ -22,4 +23,5 @@ export type GQLContext = {
 	customHosts: CustomHostsService;
 	dataloaders: ReturnType<typeof createDataloaders>;
 	reqCtx: Context<Env>;
+	domainRoutes: DomainRouteService;
 };
