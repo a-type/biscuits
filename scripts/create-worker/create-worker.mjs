@@ -78,10 +78,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'apps/${workerId}/**'
-      - 'packages/client/**'
-      - 'packages/apps/**'
-      - '.github/workflows/deploy-${workerId}.yml'
+      - 'workers/${workerId}/**'
+      - '.github/workflows/deploy-worker-${workerId}.yml'
       - 'pnpm-workspace.yaml'
 
 jobs:

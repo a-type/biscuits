@@ -3,10 +3,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'apps/wish-wash-hub/**'
-      - 'packages/client/**'
-      - 'packages/apps/**'
-      - '.github/workflows/deploy-wish-wash-hub.yml'
+      - 'workers/wish-wash-hub/**'
+      - '.github/workflows/deploy-worker-wish-wash-hub.yml'
       - 'pnpm-workspace.yaml'
 
 jobs:

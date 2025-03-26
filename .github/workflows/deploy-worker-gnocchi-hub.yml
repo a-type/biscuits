@@ -3,10 +3,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'apps/gnocchi-hub/**'
-      - 'packages/client/**'
-      - 'packages/apps/**'
-      - '.github/workflows/deploy-gnocchi-hub.yml'
+      - 'workers/gnocchi-hub/**'
+      - '.github/workflows/deploy-worker-gnocchi-hub.yml'
       - 'pnpm-workspace.yaml'
 
 jobs:

@@ -3,10 +3,8 @@ on:
   push:
     branches: [main]
     paths:
-      - 'apps/post-hub/**'
-      - 'packages/client/**'
-      - 'packages/apps/**'
-      - '.github/workflows/deploy-post-hub.yml'
+      - 'workers/post-hub/**'
+      - '.github/workflows/deploy-worker-post-hub.yml'
       - 'pnpm-workspace.yaml'
 
 jobs:
