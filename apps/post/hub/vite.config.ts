@@ -10,7 +10,7 @@ export default defineConfig(({ mode }) => ({
 	plugins: [UnoCSS(), react(), viteCommonjs()],
 	base:
 		mode === 'production' ?
-			'https://pub.post.biscuts.club/'
+			'https://pub.post.biscuits.club/'
 		:	'http://localhost:6124/post/hub/',
 	optimizeDeps: {
 		exclude: ['@a-type/ui'],
