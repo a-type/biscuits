@@ -8,6 +8,8 @@ import { domainRoutes } from '../services/domainRouteCache.js';
 
 export const corsMiddleware = cors({
 	origin: (origin) => {
+		if (!origin) return;
+
 		if (ALLOWED_ORIGINS.includes(origin)) {
 			return origin;
 		}
