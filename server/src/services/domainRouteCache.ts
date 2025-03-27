@@ -63,6 +63,10 @@ export class DomainRouteService {
 	get size() {
 		return this.#cache.size;
 	}
+
+	debug() {
+		console.log('Domain routes registered:', this.#cache.keys());
+	}
 }
 
 export const domainRoutes = new DomainRouteService();

@@ -17,6 +17,8 @@ export const corsMiddleware = cors({
 			return;
 		}
 		const host = new URL(origin).host;
+		console.log(host);
+		domainRoutes.debug();
 		if (domainRoutes.has(host)) {
 			return origin;
 		}
