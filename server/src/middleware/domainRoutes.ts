@@ -13,9 +13,11 @@ const deployedDomain = new URL(DEPLOYED_ORIGIN).hostname;
 
 export const domainRoutesMiddleware = createMiddleware<Env>(
 	async (ctx, next) => {
+		const wasProxied = ctx.req.header('x-biscuits-domain-route-proxy');
+
 		const requestHost =
 			ctx.req.header('x-forwarded-host') || ctx.req.header('host');
-		if (!requestHost || requestHost === deployedDomain) {
+		if (!requestHost || requestHost === deployedDomain || wasProxied) {
 			return await next();
 		} else {
 			logger.debug(`Custom domain route: ${requestHost}`);
@@ -42,7 +44,13 @@ export const domainRoutesMiddleware = createMiddleware<Env>(
 			ctx.set('customDomain', requestHost);
 			const routePath = app.domainRoutes(route.resourceId);
 			const routedUrl = new URL(routePath, `http://localhost:${PORT}`);
-			const res = await proxy(routedUrl, ctx.req);
+			const res = await proxy(routedUrl, {
+				headers: {
+					...ctx.req.header(),
+					// add a header to prevent infinite loop
+					'x-biscuits-domain-route-proxy': 'true',
+				},
+			});
 			res.headers.set('X-Route-Id', route.id);
 			res.headers.set(
 				'Access-Control-Expose-Headers',
