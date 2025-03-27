@@ -3,9 +3,7 @@ compatibility_date = "2025-01-01"
 main = "src/index.ts"
 account_id = "5f843fcad78a2f4e1fee091c1d6c21ab"
 
-routes = [
-	#{ pattern = "recipes.gnocchi.biscuits.club", custom_domain = true },
-]
+routes = [{ pattern = "recipes.gnocchi.biscuits.club", custom_domain = true }]
 
 [observability]
 enabled = true
