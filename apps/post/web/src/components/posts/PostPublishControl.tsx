@@ -91,7 +91,7 @@ export function PostPublishControl({ post }: PostPublishControlProps) {
 					},
 					notebook: {
 						id: notebookId,
-						name: notebook.get('name'),
+						name: notebook.get('publishedTitle') || notebook.get('name'),
 						coverImageId: notebook.get('coverImage')?.id,
 						iconId: notebook.get('icon')?.id,
 						description: description,

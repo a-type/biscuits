@@ -395,6 +395,7 @@ export type NotebookCreatedAt = number;
 export type NotebookName = string;
 export type NotebookCoverImage = EntityFile;
 export type NotebookIcon = EntityFile;
+export type NotebookPublishedTitle = string;
 export type NotebookDescription = ObjectEntity<
   NotebookDescriptionInit,
   NotebookDescriptionDestructured,
@@ -455,6 +456,7 @@ export type NotebookInit = {
   name: string;
   coverImage?: File | null;
   icon?: File | null;
+  publishedTitle?: string | null;
   description?: NotebookDescriptionInit;
   theme?: string | null;
   font?: string | null;
@@ -502,6 +504,7 @@ export type NotebookDestructured = {
   name: string;
   coverImage: EntityFile | null;
   icon: EntityFile | null;
+  publishedTitle: string | null;
   description: NotebookDescription;
   theme: string | null;
   font: string | null;
@@ -544,6 +547,7 @@ export type NotebookSnapshot = {
   name: string;
   coverImage: EntityFileSnapshot | null;
   icon: EntityFileSnapshot | null;
+  publishedTitle: string | null;
   description: NotebookDescriptionSnapshot;
   theme: string | null;
   font: string | null;

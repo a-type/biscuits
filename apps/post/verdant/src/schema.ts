@@ -79,6 +79,9 @@ const notebooks = schema.collection({
 		icon: schema.fields.file({
 			nullable: true,
 		}),
+		publishedTitle: schema.fields.string({
+			nullable: true,
+		}),
 		description: createTipTapFieldSchema({
 			default: {
 				type: 'doc',
@@ -99,7 +102,7 @@ const notebooks = schema.collection({
 });
 
 export default schema({
-	version: 4,
+	version: 5,
 	collections: {
 		posts,
 		notebooks,
