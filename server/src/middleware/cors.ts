@@ -4,7 +4,6 @@ import {
 	ALLOWED_ORIGINS,
 	EXPOSED_HEADERS,
 } from '../config/cors.js';
-import { logger } from '../logger.js';
 import { domainRoutes } from '../services/domainRouteCache.js';
 
 export const corsMiddleware = cors({
@@ -12,13 +11,12 @@ export const corsMiddleware = cors({
 		if (ALLOWED_ORIGINS.includes(origin)) {
 			return origin;
 		}
-		try {
-			const host = new URL(origin).host;
-			if (domainRoutes.has(host)) {
-				return origin;
-			}
-		} catch (err) {
-			logger.fatal('Error parsing origin', origin, err);
+		if (!URL.canParse(origin)) {
+			return;
+		}
+		const host = new URL(origin).host;
+		if (domainRoutes.has(host)) {
+			return origin;
 		}
 	},
 	credentials: true,
