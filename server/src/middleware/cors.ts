@@ -14,6 +14,7 @@ export const corsMiddleware = cors({
 			return origin;
 		}
 		if (!URL.canParse(origin)) {
+			console.log('Invalid origin', origin);
 			return;
 		}
 		const host = new URL(origin).host;
