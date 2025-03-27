@@ -104,6 +104,9 @@ export function DomainRouteValidation({
 						certificates for you, which keeps your site visitors safe. This can
 						take a few minutes.
 					</P>
+					<Button onClick={() => refetch()} loading={loading} color="primary">
+						Check again now
+					</Button>
 				</>
 			:	<>
 					<H3>Add your DNS record for {data?.domainRoute?.domain ?? '...'}</H3>
