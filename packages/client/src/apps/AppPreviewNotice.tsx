@@ -1,6 +1,6 @@
 import { Button } from '@a-type/ui';
 import { appsById, isValidAppId } from '@biscuits/apps';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { useSnapshot } from 'valtio';
 import { installState } from '../install.js';
 import { InstallButton } from './InstallButton.js';
@@ -45,7 +45,9 @@ export function AppPreviewNotice({}: AppPreviewNoticeProps) {
 					{`Back to ${fromApp.name}`}
 				</a>
 			</Button>
-			<InstallButton />
+			<Suspense>
+				<InstallButton />
+			</Suspense>
 		</div>
 	);
 }

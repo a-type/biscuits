@@ -13,6 +13,8 @@ if (typeof window !== 'undefined') {
 	window.addEventListener('beforeinstallprompt', (e) => {
 		// Prevent the mini-infobar from appearing on mobile
 		e.preventDefault();
+		e.stopImmediatePropagation();
+		e.stopPropagation();
 		// Stash the event so it can be triggered later.
 		deferredPrompt = e as any;
 		// Update UI notify the user they can install the PWA
@@ -26,4 +28,8 @@ export function triggerInstall() {
 	if (!deferredPrompt) return;
 	// Show the install prompt
 	deferredPrompt.prompt();
+}
+
+export function getDeferredPrompt() {
+	return deferredPrompt;
 }

@@ -12,7 +12,7 @@ import {
 import { graphql, useSuspenseQuery } from '@biscuits/graphql';
 import { ComponentProps, ReactNode, Suspense, useState } from 'react';
 import { useAppId } from '../common/Context.js';
-import { LoginButton } from '../common/LoginButton.js';
+import { LoginLink } from '../common/LoginButton.js';
 import { PresencePeople } from '../common/PresencePeople.js';
 import * as CONFIG from '../config.js';
 import {
@@ -21,6 +21,8 @@ import {
 	useIsOffline,
 } from '../hooks/graphql.js';
 import { getIsPWAInstalled } from '../platform.js';
+import { LogoutLink } from '../react.js';
+import { InstallButton } from './InstallButton.js';
 import { updateApp, useIsUpdateAvailable } from './updateState.js';
 
 export interface UserMenuProps {
@@ -95,7 +97,7 @@ export function UserMenu({
 						<>
 							<DropdownMenu.Item
 								asChild
-								className="theme-leek bg-primary-wash color-primary-dark"
+								className="theme-leek bg-primary-wash color-primary-ink focus-visible:bg-primary-light"
 							>
 								<a href={`${CONFIG.HOME_ORIGIN}/join?appReferrer=${appId}`}>
 									Upgrade for sync
@@ -105,22 +107,32 @@ export function UserMenu({
 								</a>
 							</DropdownMenu.Item>
 							<DropdownMenu.Item asChild>
-								<LoginButton className="border-none transition-none shadow-none">
+								<LoginLink className="color-inherit font-inherit">
 									Log in
 									<DropdownMenuItemRightSlot>
 										<Icon name="arrowRight" />
 									</DropdownMenuItemRightSlot>
-								</LoginButton>
+								</LoginLink>
 							</DropdownMenu.Item>
 						</>
-					:	<DropdownMenu.Item asChild>
-							<a href={`${CONFIG.HOME_ORIGIN}/settings?appReferrer=${appId}`}>
-								Mange plan
-								<DropdownMenuItemRightSlot>
-									<Icon name="profile" />
-								</DropdownMenuItemRightSlot>
-							</a>
-						</DropdownMenu.Item>
+					:	<>
+							<DropdownMenu.Item asChild>
+								<a href={`${CONFIG.HOME_ORIGIN}/settings?appReferrer=${appId}`}>
+									Mange plan
+									<DropdownMenuItemRightSlot>
+										<Icon name="profile" />
+									</DropdownMenuItemRightSlot>
+								</a>
+							</DropdownMenu.Item>
+							<DropdownMenu.Item asChild>
+								<LogoutLink className="color-inherit font-inherit">
+									Log out
+									<DropdownMenuItemRightSlot>
+										<Icon name="arrowRight" />
+									</DropdownMenuItemRightSlot>
+								</LogoutLink>
+							</DropdownMenu.Item>
+						</>
 					}
 
 					{!disableAppSettings && (
@@ -140,14 +152,16 @@ export function UserMenu({
 								<Icon name="new_window" />
 							</DropdownMenuItemRightSlot>
 						</DropdownMenu.Item>
-					:	<DropdownMenu.Item asChild>
-							<a href={`${CONFIG.HOME_ORIGIN}`} target="_blank">
-								More apps
-								<DropdownMenuItemRightSlot>
-									<Icon name="new_window" />
-								</DropdownMenuItemRightSlot>
-							</a>
-						</DropdownMenu.Item>
+					:	<>
+							<DropdownMenu.Item asChild>
+								<a href={`${CONFIG.HOME_ORIGIN}`} target="_blank">
+									More apps
+									<DropdownMenuItemRightSlot>
+										<Icon name="new_window" />
+									</DropdownMenuItemRightSlot>
+								</a>
+							</DropdownMenu.Item>
+						</>
 					}
 					<DropdownMenu.Item asChild>
 						<a href={`${CONFIG.HOME_ORIGIN}/contact`} target="_blank">
@@ -157,7 +171,21 @@ export function UserMenu({
 							</DropdownMenuItemRightSlot>
 						</a>
 					</DropdownMenu.Item>
-					<DropdownMenu.Separator />
+					{!getIsPWAInstalled() && (
+						<Suspense>
+							<DropdownMenu.Item asChild>
+								<InstallButton
+									color="primary"
+									size="small"
+									className="justify-between mx-lg my-sm"
+								>
+									Install app
+									<Icon name="download" />
+								</InstallButton>
+							</DropdownMenu.Item>
+						</Suspense>
+					)}
+					{extraItems && <DropdownMenu.Separator />}
 					{extraItems}
 				</DropdownMenu.Content>
 			</DropdownMenu>

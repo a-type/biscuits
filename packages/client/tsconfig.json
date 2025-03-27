@@ -5,7 +5,11 @@
 		"rootDir": "./src",
 		"declaration": true,
 		"declarationDir": "./dist",
-		"types": ["vite-plugin-pwa/client"],
+		"types": [
+			"vite-plugin-pwa/client",
+			"dom-chromium-installation-events",
+			"web-app-manifest"
+		],
 		"plugins": [
 			{
 				"name": "gql.tada/ts-plugin",

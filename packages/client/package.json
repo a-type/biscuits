@@ -73,8 +73,10 @@
 		"@react-spring/web": "catalog:",
 		"@verdant-web/react-router": "catalog:",
 		"@verdant-web/store": "catalog:",
+		"@khmyznikov/pwa-install": "0.5.4",
 		"react": "catalog:",
 		"react-dom": "catalog:",
+		"lit": "3.2.1",
 		"valtio": "catalog:",
 		"gql.tada": "catalog:",
 		"typescript": "catalog:"
