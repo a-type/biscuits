@@ -9,6 +9,8 @@ export default {
 		const apiHost = new URL(env.API_ORIGIN).hostname;
 		url.hostname = apiHost;
 		url.pathname = `/post/hub${url.pathname}`;
-		return fetch(url);
+		return fetch(url, {
+			headers: request.headers,
+		});
 	},
 } satisfies ExportedHandler<Environment>;
