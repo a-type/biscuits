@@ -276,7 +276,7 @@ export function useAddBarSuggestions({
 	const showRecipeMatches = !!suggestionPrompt && showRichSuggestions;
 
 	const allSuggestions = useMemo(() => {
-		let allSuggestions: SuggestionData[] = [];
+		const allSuggestions: SuggestionData[] = [];
 		const indexRef = { current: 0 };
 		if (showSuggested) {
 			allSuggestions.push(
@@ -336,18 +336,9 @@ export function useAddBarSuggestions({
 		];
 	}, [frequencyFoodsSuggestions, recipeSuggestions, showRecipeMatches]);
 
-	const matchSuggestions = useMemo(() => {
-		return [
-			...favoriteFoodsSuggestions,
-			...searchFoodsSuggestions,
-			...(showRecipeMatches ? searchRecipeSuggestions : []),
-		];
-	}, [
-		searchFoodsSuggestions,
-		searchRecipeSuggestions,
-		showRecipeMatches,
-		favoriteFoodsSuggestions,
-	]);
+	const foodMatchSuggestions = useMemo(() => {
+		return [...favoriteFoodsSuggestions, ...searchFoodsSuggestions];
+	}, [searchFoodsSuggestions, favoriteFoodsSuggestions]);
 
 	return {
 		allSuggestions,
@@ -361,7 +352,8 @@ export function useAddBarSuggestions({
 		showRecipeMatches,
 		searchRecipeSuggestions,
 		mainSuggestions,
-		matchSuggestions,
+		foodMatchSuggestions,
+		recipeMatchSuggestions: searchRecipeSuggestions,
 	};
 }
 
@@ -371,12 +363,14 @@ export function useAddBarCombobox({
 	onAdd,
 	open,
 	onOpenChange,
+	reverse,
 }: {
 	setSuggestionPrompt: (val: string) => void;
 	allSuggestions: SuggestionData[];
 	onAdd: (text: string[], focusInput: boolean) => Promise<void> | void;
 	open?: boolean;
 	onOpenChange?: (open: boolean) => void;
+	reverse?: boolean;
 }) {
 	const isSubscribed = useHasServerAccess();
 
@@ -395,7 +389,7 @@ export function useAddBarCombobox({
 		setInputValue('');
 		setSuggestionPrompt('');
 		setHighlightedIndex(-1);
-	}, []);
+	}, [setSuggestionPrompt]);
 
 	const selectItem = useCallback(
 		async (selected: SuggestionData, focusInput: boolean) => {
@@ -436,11 +430,19 @@ export function useAddBarCombobox({
 		async (ev: KeyboardEvent) => {
 			switch (ev.key) {
 				case 'ArrowDown':
-					setHighlightedIndex((index) => (index + 1) % (maxIndex + 1));
+					if (reverse) {
+						setHighlightedIndex((index) => (index + maxIndex) % (maxIndex + 1));
+					} else {
+						setHighlightedIndex((index) => (index + 1) % (maxIndex + 1));
+					}
 					onOpenChange?.(true);
 					break;
 				case 'ArrowUp':
-					setHighlightedIndex((index) => (index + maxIndex) % (maxIndex + 1));
+					if (reverse) {
+						setHighlightedIndex((index) => (index + 1) % (maxIndex + 1));
+					} else {
+						setHighlightedIndex((index) => (index + maxIndex) % (maxIndex + 1));
+					}
 					break;
 				case 'Enter':
 					if (highlightedIndex >= 0 && allSuggestions[highlightedIndex]) {
@@ -464,6 +466,8 @@ export function useAddBarCombobox({
 			clear,
 			selectItem,
 			selectInputValue,
+			onOpenChange,
+			reverse,
 		],
 	);
 
@@ -479,35 +483,32 @@ export function useAddBarCombobox({
 				setSuggestionPrompt('');
 			}
 		},
-		[onAdd],
+		[onAdd, setSuggestionPrompt],
 	);
 
-	const getInputProps = useCallback(
-		(rest: any): ComponentProps<'input'> => {
-			return {
-				...rest,
-				onKeyDown: onInputKeyDown,
-				onPaste: onInputPaste,
-				onChange: (ev) => {
-					setInputValue(ev.target.value);
-					startTransition(() => {
-						setSuggestionPrompt(ev.target.value);
-					});
-				},
-				id: inputId,
-				'aria-autocomplete': 'list',
-				'aria-controls': menuId,
-				'aria-activedescendant': allSuggestions[highlightedIndex]?.id,
-				'aria-expanded': open,
-				value: inputValue,
-				autoComplete: 'off',
-				autoCorrect: 'off',
-				autoCapitalize: 'off',
-				spellCheck: false,
-			};
-		},
-		[onInputKeyDown, onInputPaste, inputId],
-	);
+	const getInputProps = (rest: any): ComponentProps<'input'> => {
+		return {
+			...rest,
+			onKeyDown: onInputKeyDown,
+			onPaste: onInputPaste,
+			onChange: (ev) => {
+				setInputValue(ev.target.value);
+				startTransition(() => {
+					setSuggestionPrompt(ev.target.value);
+				});
+			},
+			id: inputId,
+			'aria-autocomplete': 'list',
+			'aria-controls': menuId,
+			'aria-activedescendant': allSuggestions[highlightedIndex]?.id,
+			'aria-expanded': open,
+			value: inputValue,
+			autoComplete: 'off',
+			autoCorrect: 'off',
+			autoCapitalize: 'off',
+			spellCheck: false,
+		};
+	};
 
 	const ref = useOnPointerDownOutside((ev) => {
 		if ((ev.target as HTMLElement).id === inputId) return;
@@ -521,7 +522,7 @@ export function useAddBarCombobox({
 			ref,
 			...rest,
 		}),
-		[menuId, inputId],
+		[menuId, inputId, ref],
 	);
 
 	const getItemProps = useCallback(
@@ -554,7 +555,7 @@ export function useAddBarCombobox({
 				clear();
 			},
 		}),
-		[inputValue, onAdd, clear],
+		[inputValue, onAdd, clear, isSubscribed],
 	);
 
 	return {

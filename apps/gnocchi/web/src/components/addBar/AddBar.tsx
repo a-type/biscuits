@@ -40,7 +40,8 @@ export const AddBarImpl = forwardRef<HTMLDivElement, AddBarProps>(
 			showExpiring,
 			showSuggested,
 			mainSuggestions,
-			matchSuggestions,
+			foodMatchSuggestions,
+			recipeMatchSuggestions,
 		} = useAddBarSuggestions({
 			showRichSuggestions,
 			suggestionPrompt,
@@ -132,11 +133,20 @@ export const AddBarImpl = forwardRef<HTMLDivElement, AddBarProps>(
 							/>
 						)}
 						{!noSuggestions && (
-							<SuggestionGroup
-								title={suggestionPrompt ? 'Matches' : 'Favorites'}
-								suggestions={matchSuggestions}
-								getItemProps={getItemProps}
-							/>
+							<>
+								<SuggestionGroup
+									title={suggestionPrompt ? 'Matching foods' : 'Favorite foods'}
+									suggestions={foodMatchSuggestions}
+									getItemProps={getItemProps}
+								/>
+								{!!recipeMatchSuggestions.length && (
+									<SuggestionGroup
+										title="Matching recipes"
+										suggestions={recipeMatchSuggestions}
+										getItemProps={getItemProps}
+									/>
+								)}
+							</>
 						)}
 						{noSuggestions && <div>No suggestions</div>}
 					</PopoverContent>

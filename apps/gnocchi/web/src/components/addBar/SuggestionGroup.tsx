@@ -1,5 +1,4 @@
-import { Button, ButtonProps, Icon } from '@a-type/ui';
-import classNames from 'classnames';
+import { Button, ButtonProps, clsx, Icon } from '@a-type/ui';
 import { UseComboboxGetItemPropsOptions } from 'downshift';
 import { forwardRef } from 'react';
 import { SuggestionData } from './hooks.js';
@@ -17,11 +16,11 @@ export function SuggestionGroup({
 	getItemProps: (opts: UseComboboxGetItemPropsOptions<SuggestionData>) => any;
 }) {
 	return (
-		<div className={classNames('flex flex-col gap-2', className)} {...rest}>
+		<div className={clsx('flex flex-col gap-2', className)} {...rest}>
 			<div className="text-xs uppercase color-gray-dark font-bold m2-1">
 				{title}
 			</div>
-			<div className="flex flex-row gap-2 flex-wrap">
+			<div className={clsx('flex gap-2 flex-wrap')}>
 				{suggestions.map((suggestion) => (
 					<SuggestionItem
 						key={suggestion.id}
@@ -56,7 +55,8 @@ export const SuggestionItem = forwardRef<
 			size="small"
 			color="default"
 			ref={ref}
-			className={classNames(
+			data-index={value.index}
+			className={clsx(
 				'rounded-full font-normal border-gray max-w-100% overflow-hidden text-ellipsis flex flex-row',
 				'[&[aria-selected="true"]]:bg-primary-wash',
 				className,

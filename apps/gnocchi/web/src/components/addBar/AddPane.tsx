@@ -37,7 +37,8 @@ const AddPaneImpl = forwardRef<
 		showExpiring,
 		showSuggested,
 		mainSuggestions,
-		matchSuggestions,
+		foodMatchSuggestions,
+		recipeMatchSuggestions,
 	} = useAddBarSuggestions({
 		showRichSuggestions,
 		suggestionPrompt,
@@ -70,6 +71,7 @@ const AddPaneImpl = forwardRef<
 				inputRef.current?.blur();
 			}
 		},
+		// reverse: true,
 	});
 
 	const mergedRef = useMergedRef(ref, innerRef);
@@ -132,7 +134,7 @@ const AddPaneImpl = forwardRef<
 				onScroll={stopPropagation}
 				background="white"
 			>
-				<div className="flex flex-col gap-4 items-stretch p-3">
+				<div className="flex flex-col-reverse gap-4 items-stretch p-3">
 					{showSuggested && (
 						<SuggestionGroup
 							title="Suggested"
@@ -148,11 +150,20 @@ const AddPaneImpl = forwardRef<
 						/>
 					)}
 					{!noSuggestions && (
-						<SuggestionGroup
-							title={suggestionPrompt ? 'Matches' : 'Favorites'}
-							suggestions={matchSuggestions}
-							getItemProps={getItemProps}
-						/>
+						<>
+							<SuggestionGroup
+								title={suggestionPrompt ? 'Matching foods' : 'Favorite foods'}
+								suggestions={foodMatchSuggestions}
+								getItemProps={getItemProps}
+							/>
+							{!!recipeMatchSuggestions.length && (
+								<SuggestionGroup
+									title="Matching recipes"
+									suggestions={recipeMatchSuggestions}
+									getItemProps={getItemProps}
+								/>
+							)}
+						</>
 					)}
 					{noSuggestions && <div>No suggestions</div>}
 				</div>
