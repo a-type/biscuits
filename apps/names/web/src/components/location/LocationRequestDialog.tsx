@@ -22,9 +22,14 @@ export function LocationRequestDialog() {
 
 	const allow = async () => {
 		await getGeolocation();
-		if (await hasGeolocationPermission()) {
-			setHide(true);
-		} else {
+		try {
+			if (await hasGeolocationPermission()) {
+				setHide(true);
+			} else {
+				setBeganDeny(true);
+			}
+		} catch (err) {
+			console.error(err);
 			setBeganDeny(true);
 		}
 	};
@@ -51,7 +56,7 @@ export function LocationRequestDialog() {
 						</Button>
 					</Dialog.Actions>
 				</Dialog.Content>
-			:	<Dialog.Content>
+			:	<Dialog.Content width="md">
 					<Dialog.Title>Detect Location</Dialog.Title>
 					<Box className="relative h-40vmin bg-accentWash rounded-lg" gap="md">
 						<div className="absolute left-3/8 z-1 top-1/2 translate--1/2 c-accentLight w-30vmin h-30vmin bg-overlay rounded-full flex items-center justify-center">

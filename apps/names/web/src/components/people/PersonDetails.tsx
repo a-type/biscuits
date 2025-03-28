@@ -23,6 +23,7 @@ import { EntityDeleteButton } from '@biscuits/client/apps';
 import { Person } from '@names.biscuits/verdant';
 import { lazy, Suspense } from 'react';
 import { PersonPhoto } from './PersonPhoto.jsx';
+import { PersonQuickActions } from './PersonQuickActions.jsx';
 import { PersonRelationships } from './PersonRelationships.jsx';
 import { PersonTagEditor } from './PersonTagEditor.jsx';
 
@@ -44,8 +45,9 @@ export function PersonDetails({ person, className }: PersonDetailsProps) {
 				onValueChange={(value) => person.set('name', value)}
 				className="text-xl"
 			/>
+			<PersonQuickActions person={person} />
 			<Box d="col" items="stretch" gap>
-				<Box className="text-xs color-gray-dark" items="center" gap="sm">
+				<Box className="text-xs color-gray-dark" items="center" gap="md">
 					<Icon name="clock" /> Added {new Date(createdAt).toLocaleDateString()}{' '}
 					(
 					<RelativeTime value={createdAt} />)
@@ -58,13 +60,13 @@ export function PersonDetails({ person, className }: PersonDetailsProps) {
 					</Suspense>
 				)}
 				<Location person={person} />
-				<Box gap="sm">
+				<Box gap="md">
 					<Icon name="tag" className="color-gray-dark mt-1.5" />
 					<Suspense>
 						<PersonTagEditor person={person} />
 					</Suspense>
 				</Box>
-				<Box gap="sm">
+				<Box gap="md">
 					<Icon name="note" className="color-gray-dark mt-18px" />
 					<NoteEditor person={person} className="flex-1" />
 				</Box>
@@ -134,12 +136,12 @@ function Location({ person }: { person: Person }) {
 
 	return (
 		<Box d="col" gap="sm">
-			<Box className="text-xs color-gray-dark" items="start" gap="sm">
+			<Box className="text-xs color-gray-dark" items="start" gap="md">
 				<Icon name="locate" />
 				<Box d="col" gap="sm" className="flex-1">
 					<LazyMapView
 						location={geolocation.getAll()}
-						className="w-full h-[200px] rounded-md"
+						className="w-full h-[200px] rounded-md pointer-events-none"
 					/>
 					{geolocation.get('label') && <span>{geolocation.get('label')}</span>}
 				</Box>
@@ -148,7 +150,7 @@ function Location({ person }: { person: Person }) {
 				</Button>
 			</Box>
 			{nearby && (
-				<Box className="text-xs color-gray-dark" items="center" gap="sm">
+				<Box className="text-xs color-gray-dark" items="center" gap="md">
 					<Icon name="location" /> Met nearby
 				</Box>
 			)}

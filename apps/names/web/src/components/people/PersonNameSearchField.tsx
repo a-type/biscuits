@@ -1,4 +1,4 @@
-import { hooks } from '@/hooks.js';
+import { hooks, useAddPerson } from '@/hooks.js';
 import { Box, clsx, Icon, Input, Popover } from '@a-type/ui';
 import { preventDefault } from '@a-type/utils';
 import { Person } from '@names.biscuits/verdant';
@@ -7,15 +7,24 @@ import { Suspense, useDeferredValue, useState } from 'react';
 import { TagDisplay } from '../tags/TagDisplay.jsx';
 
 export interface PersonNameSearchFieldProps {
-	onSelect?: (personId: string) => void;
+	onSelect?: (personId: string, wasAdded: boolean) => void;
 	placeholder?: string;
 	className?: string;
+	allowAdd?: boolean;
+}
+
+const ADD_TOKEN = { addPerson: true };
+function isAddToken(v: any): v is typeof ADD_TOKEN {
+	// This function checks if the value is the special token we use to indicate
+	// that a new person should be added.
+	return v && typeof v === 'object' && v.addPerson === true;
 }
 
 export function PersonNameSearchField({
 	onSelect,
 	placeholder,
 	className,
+	allowAdd,
 }: PersonNameSearchFieldProps) {
 	const [inputValue, setInputValue] = useState('');
 	const deferredInput = useDeferredValue(inputValue);
@@ -28,6 +37,10 @@ export function PersonNameSearchField({
 		skip: deferredInput.length < 2,
 	});
 
+	const addPerson = useAddPerson();
+
+	const items = allowAdd && inputValue ? [...matches, ADD_TOKEN] : matches;
+
 	const {
 		isOpen,
 		getMenuProps,
@@ -35,17 +48,24 @@ export function PersonNameSearchField({
 		getInputProps,
 		highlightedIndex,
 		closeMenu,
-	} = useCombobox({
-		items: matches,
+	} = useCombobox<Person | typeof ADD_TOKEN>({
+		items,
 		onInputValueChange: ({ inputValue }) => setInputValue(inputValue),
 		async onSelectedItemChange({ selectedItem }) {
+			console.log('here', inputValue, selectedItem);
 			if (selectedItem) {
-				onSelect?.(selectedItem.get('id'));
+				if (isAddToken(selectedItem)) {
+					if (!inputValue) return;
+					const newPerson = await addPerson(inputValue);
+					onSelect?.(newPerson.get('id'), true);
+				} else {
+					onSelect?.(selectedItem.get('id'), false);
+				}
 			}
 			setInputValue('');
 		},
 		itemToString: (item) => '',
-		itemToKey: (item) => item?.get('id'),
+		itemToKey: (item) => (isAddToken(item) ? 'add_person' : item?.get('id')),
 		defaultHighlightedIndex: 0,
 	});
 
@@ -82,7 +102,23 @@ export function PersonNameSearchField({
 					/>
 				))}
 				{!matches.length && (
-					<Box className="color-gray-dark text-sm p-2">No matches</Box>
+					<Box className="color-gray-dark text-sm p-2">
+						{!!inputValue ? 'No matches' : 'Search people'}
+					</Box>
+				)}
+				{allowAdd && !!inputValue && (
+					<Box
+						p="sm"
+						className={clsx(
+							highlightedIndex === items.length - 1 ? 'bg-gray-light' : '',
+						)}
+						{...getItemProps({ item: ADD_TOKEN, index: items.length - 1 })}
+						items="center"
+						gap
+					>
+						<Icon name="add_person" />
+						New person: "{inputValue}"
+					</Box>
 				)}
 			</Popover.Content>
 		</Popover>
@@ -101,7 +137,6 @@ function PersonItem({
 
 	return (
 		<Box
-			key={person.get('id')}
 			p="sm"
 			{...props}
 			className={clsx('rounded-sm', highlighted ? 'bg-gray-light' : '')}

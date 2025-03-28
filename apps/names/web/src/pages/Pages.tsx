@@ -24,15 +24,15 @@ const routes = makeRoutes([
 		component: () => (
 			<PageRoot>
 				<PageContent>
+					<Suspense>
+						<SuperBar />
+					</Suspense>
 					<Suspense
 						fallback={
 							<Spinner className="absolute left-1/2 top-1/2 translate--1/2" />
 						}
 					>
 						<Outlet />
-					</Suspense>
-					<Suspense>
-						<SuperBar />
 					</Suspense>
 				</PageContent>
 			</PageRoot>

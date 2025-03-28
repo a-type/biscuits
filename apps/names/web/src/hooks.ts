@@ -1,7 +1,7 @@
 import { useHasServerAccess, useMe, VerdantProfile } from '@biscuits/client';
 import { graphql, graphqlClient } from '@biscuits/graphql';
-import { createHooks } from '@names.biscuits/verdant';
-import { useCallback, useMemo } from 'react';
+import { createHooks, Person } from '@names.biscuits/verdant';
+import { useCallback, useMemo, useState } from 'react';
 import {
 	getGeolocation,
 	hasGeolocationPermission,
@@ -36,75 +36,69 @@ export function useAddPerson() {
 	const client = hooks.useClient();
 	const { data: meData } = useMe();
 	const selfId = meData?.me?.id;
-	const addRelationship = useAddRelationship();
-
-	const canLookup = useHasServerAccess();
 
 	return useCallback(
-		async (
-			name: string,
-			options: { attachLocation?: boolean; relateTo?: string[] } = {
-				attachLocation: true,
-			},
-		) => {
+		async (name: string) => {
 			const person = await client.people.put({
 				name,
 				createdBy: selfId,
 			});
-			if (options.relateTo) {
-				for (const otherId of options.relateTo) {
-					addRelationship(person.get('id'), otherId);
-				}
-			}
-			// if allowed, record location
-			if (options.attachLocation) {
-				console.log('Attaching location to', name);
-				// out of band location assignment
-				hasGeolocationPermission()
-					.then((hasPermission) => {
-						if (!hasPermission) {
-							console.error('Location permission was not granted.');
-							return;
-						}
-						console.debug('Fetching location');
-						return getGeolocation()
-							.then((location) => {
-								console.debug('Fetched location', location);
-								client.batch({ batchName: 'geolocation' }).run(() => {
-									person.set('geolocation', {
-										latitude: location.latitude,
-										longitude: location.longitude,
-									});
-								});
-								return location;
-							})
-							.then(async (location) => {
-								if (!canLookup) return;
-
-								const lookupResult = await graphqlClient.query({
-									query: lookupLocation,
-									variables: {
-										latitude: location.latitude,
-										longitude: location.longitude,
-									},
-								});
-								const address = lookupResult.data.locationAddress;
-								if (address) {
-									client.batch({ batchName: 'geolocation' }).run(() => {
-										const location = person.get('geolocation');
-										location?.set('label', address);
-									});
-								}
-							});
-					})
-					.catch((err) => {
-						console.error('Error fetching location', err);
-					});
-			}
 			return person;
 		},
-		[client, selfId, addRelationship],
+		[client, selfId],
 	);
+}
+
+export function useAddLocation() {
+	const canLookup = useHasServerAccess();
+	const client = hooks.useClient();
+	const [loading, setLoading] = useState(false);
+	const attach = useCallback(
+		async (person: Person) => {
+			try {
+				setLoading(true);
+				console.log('Attaching location to', person.get('name'));
+				// out of band location assignment
+				const hasPermission = await hasGeolocationPermission();
+				if (!hasPermission) {
+					console.error('Location permission was not granted.');
+					return;
+				}
+				console.debug('Fetching location');
+				const location = await getGeolocation();
+				console.debug('Fetched location', location);
+				client.batch({ batchName: 'geolocation' }).run(() => {
+					person.set('geolocation', {
+						latitude: location.latitude,
+						longitude: location.longitude,
+					});
+				});
+
+				// if allowed, lookup place name
+				if (!canLookup) return;
+
+				const lookupResult = await graphqlClient.query({
+					query: lookupLocation,
+					variables: {
+						latitude: location.latitude,
+						longitude: location.longitude,
+					},
+				});
+				const address = lookupResult.data.locationAddress;
+				if (address) {
+					client.batch({ batchName: 'geolocation' }).run(() => {
+						const location = person.get('geolocation');
+						location?.set('label', address);
+					});
+				}
+			} finally {
+				setLoading(false);
+			}
+		},
+		[canLookup, client],
+	);
+
+	return [attach, loading] as const;
 }
 
 export function useRecentPeople(tagFilter?: string[]) {
@@ -164,4 +158,37 @@ export function useDeleteTag() {
 		}
 		return deleteTag;
 	}, [client]);
+}
+
+export function useRelationshipSuggestions(person: Person) {
+	const { id: ownId, name, dismissedSuggestions } = hooks.useWatch(person);
+	hooks.useWatch(dismissedSuggestions);
+	const surname = name.split(' ').pop();
+
+	const unfilteredMatches = hooks.useAllPeople({
+		index: {
+			where: 'matchName',
+			equals: surname?.toLowerCase() ?? '',
+		},
+		key: 'relationshipMatches',
+	});
+
+	const matches = useMemo(() => {
+		return unfilteredMatches
+			.filter((match) => match.get('id') !== ownId)
+			.filter((match) => !dismissedSuggestions.has(match.get('id')));
+	}, [unfilteredMatches, dismissedSuggestions, ownId]);
+
+	return matches;
+}
+
+export function useJustAddedPeople() {
+	return hooks.useAllPeople({
+		index: {
+			where: 'createdAt',
+			order: 'desc',
+			gte: new Date(Date.now() - 1000 * 60 * 60).getTime(), // last hour
+		},
+		key: 'justAddedPeople',
+	});
 }

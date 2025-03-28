@@ -4,7 +4,6 @@ import {
 	LOCATION_BROAD_SEARCH_RADIUS,
 	useGeolocation,
 } from '@/services/location.js';
-import { useSessionStorage } from '@biscuits/client';
 import { Person } from '@names.biscuits/verdant';
 import { useNavigate, useSearchParams } from '@verdant-web/react-router';
 import {
@@ -161,7 +160,6 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 
 	const [loading, setLoading] = useState(false);
 	const addPerson = useAddPerson();
-	const [attachLocation] = useSessionStorage('attachLocation', true);
 	const [addRelationshipToCurrentPerson, setAddRelationshipToCurrentPerson] =
 		useState(true);
 	const previousPersonId = search.get('prev');
@@ -175,22 +173,12 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 		if (loading) return;
 		try {
 			setLoading(true);
-			const person = await addPerson(inputValue, {
-				attachLocation,
-				relateTo: addRelationshipToCurrentPerson ? relateTo : undefined,
-			});
+			const person = await addPerson(inputValue);
 			navigate(`/people/${person.get('id')}`);
 		} finally {
 			setLoading(false);
 		}
-	}, [
-		addPerson,
-		navigate,
-		inputValue,
-		loading,
-		relateTo,
-		addRelationshipToCurrentPerson,
-	]);
+	}, [addPerson, navigate, inputValue, loading]);
 
 	const selectPerson = useCallback(
 		(person: Person) => {
@@ -203,7 +191,7 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 				setInputValue('');
 			}, 200);
 		},
-		[navigate],
+		[navigate, setInputValue],
 	);
 
 	return (

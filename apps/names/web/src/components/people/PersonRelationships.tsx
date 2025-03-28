@@ -1,6 +1,16 @@
 import { hooks, useAddRelationship } from '@/hooks.js';
 import { relationshipOpposites } from '@/relationships.js';
-import { Avatar, Box, Button, Chip, clsx, H2, Icon, Select } from '@a-type/ui';
+import {
+	Avatar,
+	Box,
+	Button,
+	Chip,
+	clsx,
+	H2,
+	Icon,
+	Masonry,
+	Select,
+} from '@a-type/ui';
 import { Person, Relationship } from '@names.biscuits/verdant';
 import { Link } from '@verdant-web/react-router';
 import { Suspense } from 'react';
@@ -19,25 +29,30 @@ export function PersonRelationships({ person }: PersonRelationshipsProps) {
 	});
 
 	return (
-		<Box d="col" gap="md">
+		<Box d="col" gap="lg">
 			<H2 className="text-md">
-				<Icon name="connection" className="color-gray-dark mr-1" />{' '}
+				<Icon name="connection" className="color-gray-dark mr-md" />{' '}
 				Relationships
 			</H2>
 			<RelationshipSearch person={person} />
 
-			{relationships.map((relationship) => (
-				<Suspense>
-					<PersonRelationshipItem
-						key={relationship.uid}
-						relationship={relationship}
-						sourcePerson={person}
-					/>
-				</Suspense>
-			))}
-			<Suspense>
-				<RelationshipSuggestions person={person} omit={relationships} />
-			</Suspense>
+			<Masonry
+				columns={(width) => {
+					if (width < 640) return 1;
+					if (width < 900) return 2;
+					return 3;
+				}}
+			>
+				{relationships.map((relationship) => (
+					<Suspense>
+						<PersonRelationshipItem
+							key={relationship.uid}
+							relationship={relationship}
+							sourcePerson={person}
+						/>
+					</Suspense>
+				))}
+			</Masonry>
 		</Box>
 	);
 }
@@ -82,8 +97,9 @@ function PersonRelationshipItem({
 	return (
 		<div
 			className={clsx(
-				"grid [grid-template-areas:'avatar_name_arrow'_'remove_type_arrow'] [grid-template-columns:auto_1fr_auto] sm:([grid-template-areas:'remove_avatar_name_type_arrow'] [grid-template-columns:auto_auto_1fr_auto_auto]) gap-sm items-center",
+				"grid [grid-template-areas:'avatar_name_arrow'_'remove_type_arrow'] [grid-template-columns:auto_1fr_auto] gap-sm items-center",
 				'border border-solid border-gray rounded-md p-sm select-none',
+				'sm:p-md',
 			)}
 		>
 			<Button
@@ -112,69 +128,6 @@ function PersonRelationshipItem({
 				</Link>
 			</Button>
 		</div>
-	);
-}
-
-function RelationshipSuggestions({
-	person,
-	omit,
-}: {
-	person: Person;
-	omit: Relationship[];
-}) {
-	const { name, dismissedSuggestions } = hooks.useWatch(person);
-	hooks.useWatch(dismissedSuggestions);
-	const surname = name.split(' ').pop();
-
-	const matches = hooks
-		.useAllPeople({
-			index: {
-				where: 'matchName',
-				equals: surname?.toLowerCase() ?? '',
-			},
-			key: 'suggestionNameMatch',
-		})
-		.filter((match) => match.get('id') !== person.get('id'))
-		.filter((match) => !dismissedSuggestions.has(match.get('id')))
-		.filter(
-			(match) =>
-				!omit.some(
-					(r) =>
-						r.get('personAId') === match.get('id') ||
-						r.get('personBId') === match.get('id'),
-				),
-		);
-
-	const addRelationship = useAddRelationship();
-
-	if (!matches.length) return null;
-
-	return (
-		<Box d="col" items="stretch" gap="sm">
-			<Box className="color-gray-dark" gap="sm" items="center">
-				<Icon name="magic" />
-				Suggested
-			</Box>
-			<Box wrap gap="sm" items="center">
-				{matches.map((match) => (
-					<Chip className="select-none !p-0 overflow-hidden">
-						<button
-							onClick={() => addRelationship(person.get('id'), match.get('id'))}
-							className="border-0 text-inherit font-inherit p-0 bg-transparent text-sm pl-3 pr-1 focus-visible:bg-primary-wash hover:bg-white focus:outline-none cursor-pointer self-stretch"
-						>
-							{match.get('name')}
-						</button>
-						<Button
-							size="icon-small"
-							color="ghostDestructive"
-							onClick={() => dismissedSuggestions.add(match.get('id'))}
-						>
-							<Icon name="x" />
-						</Button>
-					</Chip>
-				))}
-			</Box>
-		</Box>
 	);
 }
 
@@ -238,6 +191,10 @@ function RelationshipTypeSelect({
 					<Select.Item value="coach">Coach</Select.Item>
 					<Select.Item value="teacher">Teacher</Select.Item>
 					<Select.Item value="student">Student</Select.Item>
+					<Select.Item value="nanny">Nanny</Select.Item>
+					<Select.Item value="babysitter">Babysitter</Select.Item>
+					<Select.Item value="doctor">Doctor</Select.Item>
+					<Select.Item value="nurse">Nurse</Select.Item>
 				</Select.Group>
 			</Select.Content>
 		</Select>
@@ -247,13 +204,14 @@ function RelationshipTypeSelect({
 function RelationshipSearch({ person }: { person: Person }) {
 	const addRelationship = useAddRelationship();
 	return (
-		<Box d="row" gap="sm" items="center">
+		<Box d="row" gap="md" items="center">
 			<Icon name="add_person" className="color-gray-dark" />
 			<Suspense>
 				<PersonNameSearchField
 					onSelect={(otherId) => addRelationship(person.get('id'), otherId)}
 					placeholder="Add relationships..."
 					className="flex-1"
+					allowAdd
 				/>
 			</Suspense>
 		</Box>
