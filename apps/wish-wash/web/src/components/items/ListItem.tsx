@@ -117,17 +117,20 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 								</Link>
 							</Button>
 						)}
-						<Button
-							toggled={!!purchased}
-							color={purchased ? 'default' : 'primary'}
-							toggleMode="indicator"
-							onClick={() => {
-								// TODO: Implement
-							}}
-							size="small"
-						>
-							{purchased ? 'Bought' : 'Buy'}
-						</Button>
+						{type === 'link' && (
+							<Button
+								toggled={!!purchased}
+								color={purchased ? 'default' : 'primary'}
+								toggleMode="indicator"
+								onClick={() => {
+									item.set('purchasedCount', purchasedCount + 1);
+									item.set('lastPurchasedAt', Date.now());
+								}}
+								size="small"
+							>
+								{purchased ? 'Bought' : 'Buy'}
+							</Button>
+						)}
 					</Card.Actions>
 				</Card.Footer>
 			</Card>

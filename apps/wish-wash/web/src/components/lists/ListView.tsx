@@ -6,14 +6,19 @@ import {
 	CardMain,
 	CardTitle,
 	clsx,
+	Dialog,
 	H2,
 	Icon,
 	IconName,
 	P,
 } from '@a-type/ui';
-import { WishlistOnboarding } from '@wish-wash.biscuits/common';
+import {
+	OnboardingQuestion,
+	onboardingQuestions,
+	WishlistOnboarding,
+} from '@wish-wash.biscuits/common';
 import { List } from '@wish-wash.biscuits/verdant';
-import { ReactNode, Suspense } from 'react';
+import { ReactNode, Suspense, useCallback, useState } from 'react';
 import { useItemSize } from '../items/hooks.js';
 import { ItemEditDialog } from '../items/ItemEditDialog.jsx';
 import { ListItem } from '../items/ListItem.jsx';
@@ -60,6 +65,32 @@ function smallColumns(size: number) {
 	return 2;
 }
 
+function useListOnboardingProps(list: List, onDone?: () => void) {
+	const { items, completedQuestions } = hooks.useWatch(list);
+	hooks.useWatch(completedQuestions);
+	const onAnswers = useCallback(
+		(answers: Map<OnboardingQuestion, string>) => {
+			for (const [question, answer] of answers) {
+				console.log(question, answer);
+				if (answer) {
+					items.push({
+						description: answer,
+						prompt: question.prompt,
+						type: 'idea',
+					});
+				}
+				completedQuestions.push(question.id);
+			}
+			onDone?.();
+		},
+		[items, completedQuestions, onDone],
+	);
+	return {
+		answeredQuestions: completedQuestions.getSnapshot(),
+		onAnswers,
+	};
+}
+
 export function ListView({ list, className }: ListViewProps) {
 	const { items, type, completedQuestions } = hooks.useWatch(list);
 	hooks.useWatch(items);
@@ -68,6 +99,7 @@ export function ListView({ list, className }: ListViewProps) {
 
 	const needsOnboarding =
 		type === 'wishlist' && completedQuestions.length === 0;
+	const onboardingProps = useListOnboardingProps(list);
 
 	if (needsOnboarding) {
 		return (
@@ -76,17 +108,7 @@ export function ListView({ list, className }: ListViewProps) {
 					<H2>Welcome to your wishlist!</H2>
 					<P>Let's get your wish list started with some ideas.</P>
 					<WishlistOnboarding
-						answeredQuestions={completedQuestions.getSnapshot()}
-						onAnswers={(answers) => {
-							for (const [question, answer] of answers) {
-								items.push({
-									description: answer,
-									prompt: question.prompt,
-									type: 'idea',
-								});
-								completedQuestions.push(question.id);
-							}
-						}}
+						{...onboardingProps}
 						thanksText="That'll get your list started. Now add more ideas!"
 					/>
 				</div>
@@ -107,6 +129,7 @@ export function ListView({ list, className }: ListViewProps) {
 							<ListItem item={item} key={item.get('id')} />
 						))}
 						{items.length === 0 && <TutorialCards />}
+						{items.length > 0 && <KeepAnsweringQuestionsCard list={list} />}
 					</CardGrid>
 				</div>
 				<ItemSorter list={list} />
@@ -176,5 +199,37 @@ function TutorialCard({
 				</CardContent>
 			</CardMain>
 		</Card>
+	);
+}
+
+function KeepAnsweringQuestionsCard({ list }: { list: List }) {
+	const { completedQuestions } = hooks.useWatch(list);
+	const totalQuestions = onboardingQuestions.length;
+	const [open, setOpen] = useState(false);
+	const onDone = useCallback(() => setOpen(false), []);
+	const onboardingProps = useListOnboardingProps(list, onDone);
+
+	if (completedQuestions.length >= totalQuestions) {
+		return null;
+	}
+
+	return (
+		<Dialog open={open} onOpenChange={setOpen}>
+			<Card>
+				<Dialog.Trigger asChild>
+					<Card.Main>
+						<Card.Content unstyled className="p-sm text-sm">
+							Improve your list with more ideas
+						</Card.Content>
+					</Card.Main>
+				</Dialog.Trigger>
+			</Card>
+			<Dialog.Content>
+				<WishlistOnboarding
+					{...onboardingProps}
+					thanksText="Nice, all done for now."
+				/>
+			</Dialog.Content>
+		</Dialog>
 	);
 }

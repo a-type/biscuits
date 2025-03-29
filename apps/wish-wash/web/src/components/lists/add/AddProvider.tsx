@@ -115,7 +115,6 @@ function stateReducer(
 	actionAndChanges: UseComboboxStateChangeOptions<ListItemsItemType>,
 ) {
 	const { changes, type } = actionAndChanges;
-	console.log(type, changes);
 	switch (type) {
 		case useCombobox.stateChangeTypes.InputKeyDownEnter:
 		case useCombobox.stateChangeTypes.ItemClick:

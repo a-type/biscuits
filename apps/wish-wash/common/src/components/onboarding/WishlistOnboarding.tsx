@@ -1,5 +1,5 @@
 import { Button, clsx, H1, H2, P, Progress, TextArea } from '@a-type/ui';
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import { OnboardingQuestion, onboardingQuestions } from './questions.js';
 
 export interface WishlistOnboardingProps {
@@ -98,6 +98,10 @@ export function WishlistOnboarding({
 				key={currentQuestion.id}
 				answer={answer}
 				onAnswer={setAnswer}
+				onCommit={(answer) => {
+					setAnswer(answer);
+					handleAnswer();
+				}}
 			/>
 			<div className="row justify-between items-center gap-4 w-full">
 				<Button type="button" onClick={handleSkip}>
@@ -115,21 +119,13 @@ function Question({
 	question,
 	answer,
 	onAnswer,
+	onCommit,
 }: {
 	question: OnboardingQuestion;
 	answer: string;
 	onAnswer: (answer: string) => void;
+	onCommit: (answer: string) => void;
 }) {
-	const ref = useRef<HTMLTextAreaElement>(null);
-	useEffect(() => {
-		const interval = setInterval(() => {
-			if (ref.current) {
-				const placeholder = shuffle(question.suggestions)[0];
-				ref.current.placeholder = placeholder;
-			}
-		}, 5000);
-		return () => clearInterval(interval);
-	}, []);
 	return (
 		<div className="col w-full items-stretch flex-1 gap-4">
 			<label className="text-xl" htmlFor={question.id}>
@@ -137,12 +133,18 @@ function Question({
 			</label>
 			<TextArea
 				id={question.id}
-				ref={ref}
 				autoSize
 				autoFocus
-				padBottomPixels={80}
+				padBottomPixels={40}
 				value={answer}
 				onChange={(ev) => onAnswer(ev.currentTarget.value)}
+				placeholders={question.suggestions}
+				onKeyDown={(ev) => {
+					if (ev.key === 'Enter' && !ev.shiftKey) {
+						ev.preventDefault();
+						onCommit(answer);
+					}
+				}}
 			/>
 		</div>
 	);

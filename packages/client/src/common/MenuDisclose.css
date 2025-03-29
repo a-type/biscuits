@@ -24,6 +24,7 @@
 				var(--content-initial-y-offset)
 			)
 			scale(var(--content-scale-compensate));
+		opacity: 0;
 	}
 	20% {
 		clip-path: var(--clip-intermediate);
@@ -32,6 +33,7 @@
 				var(--content-initial-y-offset)
 			)
 			scale(var(--content-scale-compensate));
+		opacity: 1;
 	}
 	50% {
 		transform: translateX(0);
@@ -50,6 +52,9 @@
 		width: auto;
 		height: auto;
 	}
+	20% {
+		opacity: 0;
+	}
 	80% {
 		transform: translate(
 				calc(-50% + var(--clip-center)),
@@ -64,9 +69,6 @@
 				var(--content-initial-y-offset)
 			)
 			scale(var(--content-scale-compensate));
-	}
-	99% {
-		opacity: 1;
 	}
 	100% {
 		clip-path: var(--clip-initial);

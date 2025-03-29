@@ -1,26 +1,22 @@
 import { clsx, Input } from '@a-type/ui';
-import { forwardRef, useEffect, useState } from 'react';
+import { forwardRef, useEffect, useRef } from 'react';
 import { useAddItem } from './AddProvider.jsx';
 
 export interface AddInputProps {
 	className?: string;
+	autoFocus?: boolean;
 }
 
 export const AddInput = forwardRef<HTMLDivElement, AddInputProps>(
-	function AddInput({ className }, ref) {
+	function AddInput({ className, autoFocus }, ref) {
 		const { setInputValue, getInputProps } = useAddItem();
+		const inputRef = useRef<HTMLInputElement>(null);
 
-		const [placeholderIndex, setPlaceholderIndex] = useState(() =>
-			Math.floor(Math.random() * placeholders.length),
-		);
 		useEffect(() => {
-			const interval = setInterval(() => {
-				setPlaceholderIndex(Math.floor(Math.random() * placeholders.length));
-			}, 5000);
-			return () => clearInterval(interval);
-		}, []);
-
-		const placeholder = placeholders[placeholderIndex];
+			if (autoFocus) {
+				inputRef.current?.focus();
+			}
+		}, [autoFocus]);
 
 		return (
 			<div ref={ref} className={clsx('flex flex-col gap-1', className)}>
@@ -28,10 +24,13 @@ export const AddInput = forwardRef<HTMLDivElement, AddInputProps>(
 					Add to this list
 				</label>
 				<Input
+					className="w-full"
 					onChange={(e) => setInputValue(e.target.value)}
 					{...getInputProps({
-						placeholder,
 						id: 'add-item',
+						autoFocus,
+						ref: inputRef,
+						placeholders,
 					})}
 				/>
 			</div>

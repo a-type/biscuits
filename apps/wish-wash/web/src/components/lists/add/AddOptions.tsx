@@ -1,4 +1,4 @@
-import { Button, Card, Icon, withClassName } from '@a-type/ui';
+import { Card, Icon } from '@a-type/ui';
 import {
 	typeDescriptions,
 	typeIcons,
@@ -35,11 +35,3 @@ export function AddOptions() {
 		</div>
 	);
 }
-
-const ItemButton = withClassName(
-	Button,
-	'rounded-lg [flex:1_0_0] min-w-80px aspect-square flex-col p-6 items-center justify-center [--bg:var(--color-primary-wash)]',
-	'font-light',
-);
-
-const ItemIcon = withClassName(Icon, 'w-1/2 h-1/2 flex-1 stroke-width-0.3');
