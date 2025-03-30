@@ -34,6 +34,8 @@ import * as v0017 from "./v0017_usage_limits.js";
 import * as v0018 from "./v0018_post_hub.js";
 
 import * as v0019 from "./v0019_domain_routes.js";
+
+import * as v0020 from "./v0020_notebook_themes.js";
 export default {
   v0001,
   v0002,
@@ -54,4 +56,5 @@ export default {
   v0017,
   v0018,
   v0019,
+  v0020,
 };

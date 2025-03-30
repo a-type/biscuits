@@ -71,8 +71,26 @@ function ThemedRootInner({
 	children?: ReactNode;
 }) {
 	const notebook = hooks.useNotebook(notebookId);
+	const theme = notebook?.get('theme') ?? null;
+	hooks.useWatch(theme);
+	const { primaryColor, fontStyle } = theme?.getAll() ?? {
+		spacing: 'md',
+		primaryColor: 'blueberry',
+		fontStyle: 'sans-serif',
+	};
 	if (!notebook) return <Root>{children}</Root>;
-	return <Root className={`theme-${notebook.get('theme')}`}>{children}</Root>;
+	return (
+		<Root
+			style={
+				{
+					'--font-default': fontStyle === 'serif' ? 'serif' : 'sans-serif',
+				} as any
+			}
+			className={`theme-${primaryColor}`}
+		>
+			{children}
+		</Root>
+	);
 }
 
 function HomeButton({ notebookId }: { notebookId: string | null }) {

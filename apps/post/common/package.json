@@ -18,6 +18,7 @@
 		"@tiptap/starter-kit": "catalog:",
 		"@tiptap/extension-link": "catalog:",
 		"@tiptap/extension-typography": "catalog:",
-		"@tiptap/extension-highlight": "2.11.5"
+		"@tiptap/extension-highlight": "2.11.5",
+		"@verdant-web/tiptap": "catalog:"
 	}
 }

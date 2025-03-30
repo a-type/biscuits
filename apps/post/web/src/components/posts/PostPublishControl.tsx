@@ -95,6 +95,7 @@ export function PostPublishControl({ post }: PostPublishControlProps) {
 						coverImageId: notebook.get('coverImage')?.id,
 						iconId: notebook.get('icon')?.id,
 						description: description,
+						theme: notebook.get('theme').getSnapshot(),
 					},
 				},
 			},

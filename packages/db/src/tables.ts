@@ -343,6 +343,11 @@ export interface PublishedNotebookTable {
 	iconUrl: string | null;
 	coverImageUrl: string | null;
 	description: RichTextNode | null;
+	theme: {
+		primaryColor: string;
+		fontStyle: 'serif' | 'sans-serif';
+		spacing: 'sm' | 'md' | 'lg';
+	} | null;
 }
 
 export type PublishedNotebook = Selectable<PublishedNotebookTable>;

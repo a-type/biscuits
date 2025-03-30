@@ -37,6 +37,7 @@ import { GQLContext } from './context.js';
 import {
 	PublishPostInput,
 	PublishPostNotebookInput,
+	PublishPostNotebookThemeInput,
 	PublishPostPostInput,
 } from './otherTypes.js';
 
@@ -233,6 +234,7 @@ export const builder = new SchemaBuilder<{
 		PublishPostInput: PublishPostInput;
 		PublishPostPostInput: PublishPostPostInput;
 		PublishPostNotebookInput: PublishPostNotebookInput;
+		PublishPostNotebookThemeInput: PublishPostNotebookThemeInput;
 
 		// Common Utils
 		WeatherForecastInput: WeatherForecastInput;

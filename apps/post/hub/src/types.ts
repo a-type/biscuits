@@ -10,6 +10,11 @@ export interface HubNotebookData {
 	createdAt: string;
 	updatedAt: string | null;
 	url: string;
+	theme: {
+		primaryColor: string;
+		fontStyle: 'serif' | 'sans-serif';
+		spacing: 'sm' | 'md' | 'lg';
+	} | null;
 }
 
 export type HubNotebookSummaryData = Omit<

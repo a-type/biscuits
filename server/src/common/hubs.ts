@@ -39,16 +39,52 @@ export async function staticFile(
 
 export function renderTemplate(
 	indexTemplate: string,
-	appHtml: string,
-	data?: any,
+	{
+		data,
+		appHtml,
+		theme,
+		globalStyle,
+		cacheTime = 7 * 24 * 60 * 60,
+	}: {
+		appHtml: string;
+		data?: any;
+		theme?: string;
+		globalStyle?: string;
+		cacheTime?: number;
+	},
 ) {
 	let val = indexTemplate.replace(`<!--app-html-->`, appHtml);
 	if (data) {
 		val = val.replace(`{/*snapshot*/}`, JSON.stringify(data));
 	}
+	if (theme) {
+		val = val.replace(/class="theme-\w+"/, `class="theme-${theme}"`);
+	}
+	if (globalStyle) {
+		if (val.includes('<style id="global-style">')) {
+			val = val.replace(
+				'<style id="global-style">',
+				`<style id="global-style">${globalStyle}`,
+			);
+		} else {
+			val = val.replace(
+				'</head>',
+				`<style id="global-style">${globalStyle}</style></head>`,
+			);
+		}
+	}
 	return new Response(val, {
 		headers: {
 			'Content-Type': 'text/html',
+			'Cache-Control': `public, max-age=${cacheTime}`,
+			'X-Content-Type-Options': 'nosniff',
+			'X-Frame-Options': 'DENY',
+			'X-XSS-Protection': '1; mode=block',
+			'Referrer-Policy': 'no-referrer',
+			'Permissions-Policy': 'geolocation=(self), microphone=()',
+			'Cross-Origin-Embedder-Policy': 'require-corp',
+			'Cross-Origin-Opener-Policy': 'same-origin',
+			'Cross-Origin-Resource-Policy': 'same-origin',
 		},
 	});
 }

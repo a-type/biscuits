@@ -117,7 +117,7 @@ wishWashRouter.get('/hub/:listSlug', async (ctx) => {
 
 	const { serverRender } = await import('@wish-wash.biscuits/hub');
 	const appHtml = serverRender(data);
-	return renderTemplate(indexTemplate, appHtml, data);
+	return renderTemplate(indexTemplate, { appHtml, data });
 });
 
 wishWashRouter.get('/hub/*', ({ req }) =>

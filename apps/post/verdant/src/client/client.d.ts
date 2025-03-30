@@ -448,8 +448,20 @@ export type NotebookDescriptionMarks = ListEntity<
   NotebookDescriptionMarksDestructured,
   NotebookDescriptionMarksSnapshot
 >;
-export type NotebookTheme = string;
-export type NotebookFont = string;
+export type NotebookTheme = ObjectEntity<
+  NotebookThemeInit,
+  NotebookThemeDestructured,
+  NotebookThemeSnapshot
+>;
+export type NotebookThemePrimaryColor =
+  | "lemon"
+  | "blueberry"
+  | "tomato"
+  | "leek"
+  | "eggplant"
+  | "salt";
+export type NotebookThemeFontStyle = "serif" | "sans-serif";
+export type NotebookThemeSpacing = "sm" | "md" | "lg";
 export type NotebookInit = {
   id?: string;
   createdAt?: number;
@@ -458,8 +470,7 @@ export type NotebookInit = {
   icon?: File | null;
   publishedTitle?: string | null;
   description?: NotebookDescriptionInit;
-  theme?: string | null;
-  font?: string | null;
+  theme: NotebookThemeInit;
 };
 
 export type NotebookDescriptionAttrsInit = {
@@ -498,6 +509,17 @@ export type NotebookDescriptionInit = {
   text?: string | null;
   marks?: NotebookDescriptionMarksInit | null;
 };
+export type NotebookThemeInit = {
+  primaryColor?:
+    | "lemon"
+    | "blueberry"
+    | "tomato"
+    | "leek"
+    | "eggplant"
+    | "salt";
+  fontStyle?: "serif" | "sans-serif";
+  spacing?: "sm" | "md" | "lg";
+};
 export type NotebookDestructured = {
   id: string;
   createdAt: number;
@@ -506,8 +528,7 @@ export type NotebookDestructured = {
   icon: EntityFile | null;
   publishedTitle: string | null;
   description: NotebookDescription;
-  theme: string | null;
-  font: string | null;
+  theme: NotebookTheme;
 };
 
 export type NotebookDescriptionAttrsDestructured = {
@@ -541,6 +562,11 @@ export type NotebookDescriptionDestructured = {
   text: string | null;
   marks: NotebookDescriptionMarks | null;
 };
+export type NotebookThemeDestructured = {
+  primaryColor: "lemon" | "blueberry" | "tomato" | "leek" | "eggplant" | "salt";
+  fontStyle: "serif" | "sans-serif";
+  spacing: "sm" | "md" | "lg";
+};
 export type NotebookSnapshot = {
   id: string;
   createdAt: number;
@@ -549,8 +575,7 @@ export type NotebookSnapshot = {
   icon: EntityFileSnapshot | null;
   publishedTitle: string | null;
   description: NotebookDescriptionSnapshot;
-  theme: string | null;
-  font: string | null;
+  theme: NotebookThemeSnapshot;
 };
 
 export type NotebookDescriptionAttrsSnapshot = {
@@ -588,6 +613,11 @@ export type NotebookDescriptionSnapshot = {
   content: NotebookDescriptionContentSnapshot | null;
   text: string | null;
   marks: NotebookDescriptionMarksSnapshot | null;
+};
+export type NotebookThemeSnapshot = {
+  primaryColor: "lemon" | "blueberry" | "tomato" | "leek" | "eggplant" | "salt";
+  fontStyle: "serif" | "sans-serif";
+  spacing: "sm" | "md" | "lg";
 };
 
 /** Index filters for Notebook **/

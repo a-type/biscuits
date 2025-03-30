@@ -15,7 +15,12 @@ export interface PostEditorProps {
 }
 
 export function PostEditor({ post, className }: PostEditorProps) {
-	const { files } = hooks.useWatch(post);
+	const { files, notebookId } = hooks.useWatch(post);
+	const notebook = hooks.useNotebook(notebookId!, { skip: !notebookId });
+	const theme = notebook?.get('theme') ?? null;
+	hooks.useWatch(theme);
+	const spacingScale = theme?.get('spacing') || 'md';
+
 	const editor = useSyncedEditor(post, 'body', {
 		editorOptions: {
 			extensions: [
@@ -34,15 +39,23 @@ export function PostEditor({ post, className }: PostEditorProps) {
 		(window as any).post = post;
 	}, [editor, post]);
 
+	const style = {
+		'--global-spacing-scale':
+			spacingScale === 'sm' ? '0.5'
+			: spacingScale === 'lg' ? '2'
+			: '1',
+	} as any;
+
 	return (
 		<Box d="col" items="stretch" className={clsx(className)}>
 			{editor && <LinkMenu editor={editor} />}
 			{editor && <MainToolbar editor={editor} />}
 			<EditorContent
 				editor={editor}
+				style={style}
 				className={clsx(
 					tipTapClassName,
-					'flex-1 flex flex-col [&_.ProseMirror]:(p-md flex-1 bg-transparent border-none shadow-none)',
+					'flex-1 flex flex-col [&_.ProseMirror]:(p-8px flex-1 bg-transparent border-none shadow-none)',
 					'[&_[data-verdant-file]]:(w-full flex flex-col)',
 					'[&_img]:(max-w-full rounded-md h-auto max-h-60vh mx-auto)',
 					'[&_video]:(max-w-full rounded-md h-auto max-h-60vh mx-auto)',

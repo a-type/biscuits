@@ -87,11 +87,21 @@ const notebooks = schema.collection({
 				type: 'doc',
 			},
 		}),
-		theme: schema.fields.string({
-			nullable: true,
-		}),
-		font: schema.fields.string({
-			nullable: true,
+		theme: schema.fields.object({
+			properties: {
+				primaryColor: schema.fields.string({
+					default: 'blueberry',
+					options: ['lemon', 'blueberry', 'tomato', 'leek', 'eggplant', 'salt'],
+				}),
+				fontStyle: schema.fields.string({
+					default: 'sans-serif',
+					options: ['serif', 'sans-serif'],
+				}),
+				spacing: schema.fields.string({
+					default: 'md',
+					options: ['sm', 'md', 'lg'],
+				}),
+			},
 		}),
 	},
 	indexes: {
@@ -102,7 +112,7 @@ const notebooks = schema.collection({
 });
 
 export default schema({
-	version: 5,
+	version: 6,
 	collections: {
 		posts,
 		notebooks,

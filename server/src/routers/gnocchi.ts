@@ -64,7 +64,7 @@ gnocchiRouter.get('/hub/:planId/:recipeSlug', async (ctx) => {
 	);
 
 	const appHtml = serverRender(data, ctx.req.url);
-	return renderTemplate(indexTemplate, appHtml, data);
+	return renderTemplate(indexTemplate, { appHtml, data });
 });
 
 gnocchiRouter.get('/hub/*', (ctx) =>

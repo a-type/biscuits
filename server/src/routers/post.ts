@@ -1,4 +1,4 @@
-import { db, sql } from '@biscuits/db';
+import { db, PublishedNotebook, sql } from '@biscuits/db';
 import { BiscuitsError } from '@biscuits/error';
 import { getLibraryName } from '@biscuits/libraries';
 import { attachFileUrls } from '@verdant-web/tiptap/server';
@@ -52,6 +52,21 @@ async function processPost(post: any, planId: string) {
 	return post;
 }
 
+function getNotebookGlobalStyle(notebook: Pick<PublishedNotebook, 'theme'>) {
+	return {
+		theme: notebook.theme?.primaryColor ?? 'blueberry',
+		globalStyle: `:root:root {
+					--global-spacing-scale: ${
+						notebook.theme?.spacing === 'sm' ? '0.5'
+						: notebook.theme?.spacing === 'lg' ? '2'
+						: '1'
+					};
+					--font-default: ${notebook.theme?.fontStyle === 'serif' ? 'var(--font-serif)' : 'var(--font-sans)'};
+					--font-title: var(--font-default);
+				}`,
+	};
+}
+
 postRouter.get('/hub/:notebookId', async (ctx) => {
 	const notebookId = ctx.req.param('notebookId');
 
@@ -103,7 +118,8 @@ postRouter.get('/hub/:notebookId', async (ctx) => {
 
 	const { serverRenderNotebook } = await import('@post.biscuits/hub');
 	const appHtml = serverRenderNotebook(data);
-	return renderTemplate(indexTemplate, appHtml, data);
+	const { theme, globalStyle } = getNotebookGlobalStyle(notebook);
+	return renderTemplate(indexTemplate, { appHtml, data, theme, globalStyle });
 });
 
 postRouter.get('/hub/:notebookId/atom.xml', async (ctx) => {
@@ -194,6 +210,7 @@ postRouter.get('/hub/:notebookId/:postSlug', async (ctx) => {
 			'createdAt',
 			'updatedAt',
 			'planId',
+			'theme',
 		])
 		.executeTakeFirstOrThrow(
 			() =>
@@ -217,7 +234,9 @@ postRouter.get('/hub/:notebookId/:postSlug', async (ctx) => {
 
 	const { serverRenderPost } = await import('@post.biscuits/hub');
 	const appHtml = serverRenderPost(data);
-	return renderTemplate(indexTemplate, appHtml, data);
+	const { theme, globalStyle } = getNotebookGlobalStyle(notebook);
+	console.log(theme, globalStyle);
+	return renderTemplate(indexTemplate, { appHtml, data, theme, globalStyle });
 });
 
 postRouter.get('/hub/*', ({ req }) =>

@@ -115,6 +115,8 @@ builder.mutationFields((t) => ({
 				notebook.description ?
 					richTextNodeSchema.parse(notebook.description)
 				:	null;
+			const validatedTheme =
+				notebook.theme ? notebookThemeSchema.parse(notebook.theme) : null;
 
 			let notebookCoverImageUrl: string | null = null;
 			let notebookIconUrl: string | null = null;
@@ -153,6 +155,7 @@ builder.mutationFields((t) => ({
 					coverImageUrl: notebookCoverImageUrl,
 					iconUrl: notebookIconUrl,
 					description: validatedDescription,
+					theme: validatedTheme,
 				})
 				.onConflict((cb) =>
 					cb.column('id').doUpdateSet({
@@ -160,6 +163,7 @@ builder.mutationFields((t) => ({
 						coverImageUrl: notebookCoverImageUrl,
 						iconUrl: notebookIconUrl,
 						description: validatedDescription,
+						theme: validatedTheme,
 					}),
 				)
 				.executeTakeFirstOrThrow();
@@ -420,6 +424,28 @@ builder.inputType('PublishPostNotebookInput', {
 			description: 'The description of the notebook',
 			required: false,
 		}),
+		theme: t.field({
+			type: 'PublishPostNotebookThemeInput',
+			description: 'The theme of the notebook',
+			required: false,
+		}),
+	}),
+});
+
+builder.inputType('PublishPostNotebookThemeInput', {
+	fields: (t) => ({
+		primaryColor: t.string({
+			description: 'The primary color of the notebook',
+			required: true,
+		}),
+		fontStyle: t.string({
+			description: 'The font style of the notebook',
+			required: true,
+		}),
+		spacing: t.string({
+			description: 'The spacing of the notebook',
+			required: true,
+		}),
 	}),
 });
 
@@ -445,3 +471,8 @@ const richTextNodeSchema: z.ZodType<RichTextNode> =
 			.nullable()
 			.optional(),
 	});
+const notebookThemeSchema = z.object({
+	primaryColor: z.string(),
+	fontStyle: z.enum(['serif', 'sans-serif']),
+	spacing: z.enum(['sm', 'md', 'lg']),
+});
