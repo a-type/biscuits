@@ -1,0 +1,14 @@
+{
+	"extends": "../../tsconfig.json",
+	"compilerOptions": {
+		"outDir": "./dist",
+		"rootDir": ".",
+		"lib": ["es2021", "es2022"]
+	},
+	"include": [
+		"scripts/**/*.ts",
+		"scripts/**/*.mts",
+		"src/config/secrets",
+		"src/tasks/writeSchema.ts"
+	]
+}

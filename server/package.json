@@ -77,7 +77,8 @@
 		"npm-run-all2": "6.1.2",
 		"tsx": "^4.6.2",
 		"vitest": "^0.22.1",
-		"web-push": "^3.6.6"
+		"web-push": "^3.6.6",
+		"@gql.tada/cli-utils": "1.6.3"
 	},
 	"volta": {
 		"node": "22.12.0"
