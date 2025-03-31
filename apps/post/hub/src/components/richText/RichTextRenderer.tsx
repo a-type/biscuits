@@ -2,6 +2,7 @@ import { RichTextNode } from '@/types.js';
 import { clsx, tipTapClassName, tipTapReadonlyClassName } from '@a-type/ui';
 import { tiptapExtensions } from '@post.biscuits/common';
 import { generateHTML } from '@tiptap/html';
+import { VerdantMediaRendererExtension } from '@verdant-web/tiptap/server';
 
 export interface RichTextRendererProps {
 	content: RichTextNode;
@@ -39,10 +40,21 @@ type WithoutNulls<TObject> =
 	: TObject;
 
 export function RichTextRenderer({ content }: RichTextRendererProps) {
-	const html = generateHTML(removeNulls(content), tiptapExtensions);
-
+	const html = generateHTML(removeNulls(content), [
+		...tiptapExtensions,
+		VerdantMediaRendererExtension.configure({}),
+	]);
 	return (
-		<div className={clsx(tipTapClassName, tipTapReadonlyClassName)}>
+		<div
+			className={clsx(
+				tipTapClassName,
+				tipTapReadonlyClassName,
+				'[&_[data-verdant-file]]:(w-full flex flex-col)',
+				'[&_img]:(max-w-full rounded-md h-auto max-h-60vh mx-auto)',
+				'[&_video]:(max-w-full rounded-md h-auto max-h-60vh mx-auto)',
+				'[&_audio]:(max-w-full h-auto)',
+			)}
+		>
 			<div dangerouslySetInnerHTML={{ __html: html }} className="ProseMirror" />
 		</div>
 	);

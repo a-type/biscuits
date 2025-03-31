@@ -119,7 +119,13 @@ postRouter.get('/hub/:notebookId', async (ctx) => {
 	const { serverRenderNotebook } = await import('@post.biscuits/hub');
 	const appHtml = serverRenderNotebook(data);
 	const { theme, globalStyle } = getNotebookGlobalStyle(notebook);
-	return renderTemplate(indexTemplate, { appHtml, data, theme, globalStyle });
+	return renderTemplate(indexTemplate, {
+		appHtml,
+		data,
+		theme,
+		globalStyle,
+		title: notebook.name,
+	});
 });
 
 postRouter.get('/hub/:notebookId/atom.xml', async (ctx) => {
@@ -236,7 +242,13 @@ postRouter.get('/hub/:notebookId/:postSlug', async (ctx) => {
 	const appHtml = serverRenderPost(data);
 	const { theme, globalStyle } = getNotebookGlobalStyle(notebook);
 	console.log(theme, globalStyle);
-	return renderTemplate(indexTemplate, { appHtml, data, theme, globalStyle });
+	return renderTemplate(indexTemplate, {
+		appHtml,
+		data,
+		theme,
+		globalStyle,
+		title: `${post.title} | ${notebook.name}`,
+	});
 });
 
 postRouter.get('/hub/*', ({ req }) =>

@@ -1,6 +1,7 @@
 import { PostDetailsEditor } from '@/components/posts/PostDetailsEditor.jsx';
 import { PostEditor } from '@/components/posts/PostEditor.jsx';
 import { PostPublishControl } from '@/components/posts/PostPublishControl.jsx';
+import { Themed } from '@/components/Themed.jsx';
 import { hooks } from '@/hooks.js';
 import {
 	Box,
@@ -50,7 +51,7 @@ export function PostPage({}: PostPageProps) {
 	);
 }
 
-const Root = withClassName(
+export const Root = withClassName(
 	withProps(Box, {
 		p: true,
 		d: 'col',
@@ -61,35 +62,10 @@ const Root = withClassName(
 function ThemedRoot({ post, children }: { post: Post; children?: ReactNode }) {
 	const { notebookId } = hooks.useWatch(post);
 	if (!notebookId) return <Root>{children}</Root>;
-	return <ThemedRootInner notebookId={notebookId}>{children}</ThemedRootInner>;
-}
-function ThemedRootInner({
-	notebookId,
-	children,
-}: {
-	notebookId: string;
-	children?: ReactNode;
-}) {
-	const notebook = hooks.useNotebook(notebookId);
-	const theme = notebook?.get('theme') ?? null;
-	hooks.useWatch(theme);
-	const { primaryColor, fontStyle } = theme?.getAll() ?? {
-		spacing: 'md',
-		primaryColor: 'blueberry',
-		fontStyle: 'sans-serif',
-	};
-	if (!notebook) return <Root>{children}</Root>;
 	return (
-		<Root
-			style={
-				{
-					'--font-default': fontStyle === 'serif' ? 'serif' : 'sans-serif',
-				} as any
-			}
-			className={`theme-${primaryColor}`}
-		>
-			{children}
-		</Root>
+		<Themed notebookId={notebookId} asChild>
+			<Root>{children}</Root>
+		</Themed>
 	);
 }
 

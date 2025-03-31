@@ -37,9 +37,13 @@ export function NotebookSettingsMenu({
 					{children || <Icon name="gear" />}
 				</Button>
 			</Dialog.Trigger>
-			<Dialog.Content>
+			<Dialog.Content width="md">
 				<Box d="col" gap>
 					<Dialog.Title>Settings</Dialog.Title>
+					<Box surface="accent" p d="col" gap="sm">
+						These settings apply globally to all posts published in this
+						notebook.
+					</Box>
 					<H3>Published title</H3>
 					<P>
 						Change the title that appears if you publish this notebook online.
@@ -67,7 +71,7 @@ export function NotebookSettingsMenu({
 							} as any
 						}
 						className={clsx(
-							`theme-${primaryColor} bg-wash p-8px`,
+							`theme-${primaryColor} bg-wash p-8px font-default`,
 							tipTapClassName,
 							tipTapReadonlyClassName,
 						)}

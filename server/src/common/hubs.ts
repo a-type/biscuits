@@ -45,12 +45,14 @@ export function renderTemplate(
 		theme,
 		globalStyle,
 		cacheTime = 7 * 24 * 60 * 60,
+		title,
 	}: {
 		appHtml: string;
 		data?: any;
 		theme?: string;
 		globalStyle?: string;
 		cacheTime?: number;
+		title?: string;
 	},
 ) {
 	let val = indexTemplate.replace(`<!--app-html-->`, appHtml);
@@ -72,6 +74,9 @@ export function renderTemplate(
 				`<style id="global-style">${globalStyle}</style></head>`,
 			);
 		}
+	}
+	if (title) {
+		val = val.replace(/<title>.*<\/title>/, `<title>${title}</title>`);
 	}
 	return new Response(val, {
 		headers: {

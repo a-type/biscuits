@@ -11,6 +11,7 @@ import {
 import { tiptapToString } from '@post.biscuits/common';
 import { Post } from '@post.biscuits/verdant';
 import { Link } from '@verdant-web/react-router';
+import { NotebookSettingsMenu } from '../notebooks/NotebookSettingsMenu.jsx';
 
 export interface PostPublishControlProps {
 	post: Post;
@@ -117,25 +118,29 @@ export function PostPublishControl({ post }: PostPublishControlProps) {
 			</Dialog.Trigger>
 			<Dialog.Content>
 				<Dialog.Title>Publish Post</Dialog.Title>
-				{isPublished && (
-					<Box surface="accent" p d="col" gap="sm" items="stretch">
-						<div>
-							Your post was last published to the internet on{' '}
-							{new Date(publishedPost!.publishedAt).toDateString()}.
-						</div>
-						<CopyTextbox value={publishedPost!.url} />
-					</Box>
-				)}
-				{!isPublished && (
-					<Box d="col" gap="sm">
-						<div>
-							By publishing your post to the internet, you agree to abide by the{' '}
-							<Link to={`https://biscuits.club/tos`} newTab>
-								Terms and Conditions
-							</Link>
-						</div>
-					</Box>
-				)}
+				<Box d="col" gap>
+					{isPublished && (
+						<Box surface="accent" p d="col" gap="sm" items="stretch">
+							<div>
+								Your post was last published to the internet on{' '}
+								{new Date(publishedPost!.publishedAt).toDateString()}.
+							</div>
+							<CopyTextbox value={publishedPost!.url} />
+						</Box>
+					)}
+					{!isPublished && (
+						<Box d="col" gap="sm">
+							<div>
+								By publishing your post to the internet, you agree to abide by
+								the{' '}
+								<Link to={`https://biscuits.club/tos`} newTab>
+									Terms and Conditions
+								</Link>
+							</div>
+						</Box>
+					)}
+					{notebookId && <NotebookSettingsButton notebookId={notebookId} />}
+				</Box>
 				<Dialog.Actions>
 					<Dialog.Close asChild>
 						<Button>Close</Button>
@@ -146,5 +151,15 @@ export function PostPublishControl({ post }: PostPublishControlProps) {
 				</Dialog.Actions>
 			</Dialog.Content>
 		</Dialog>
+	);
+}
+
+function NotebookSettingsButton({ notebookId }: { notebookId: string }) {
+	const notebook = hooks.useNotebook(notebookId);
+	if (!notebook) return null;
+	return (
+		<NotebookSettingsMenu notebook={notebook} size="icon" color="ghost">
+			<Icon name="new_window" /> Notebook settings
+		</NotebookSettingsMenu>
 	);
 }

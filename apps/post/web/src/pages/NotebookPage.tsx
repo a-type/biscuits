@@ -3,11 +3,11 @@ import { NotebookDescriptionEditor } from '@/components/notebooks/NotebookDescri
 import { NotebookDetailsEditor } from '@/components/notebooks/NotebookDetailsEditor.jsx';
 import { CreatePostButton } from '@/components/posts/CreatePostButton.jsx';
 import { PostsList } from '@/components/posts/PostsList.jsx';
+import { Themed } from '@/components/Themed.jsx';
 import { hooks } from '@/hooks.js';
 import {
 	Box,
 	Button,
-	clsx,
 	H1,
 	H3,
 	Icon,
@@ -72,11 +72,10 @@ function ThemedRoot({
 	children?: ReactNode;
 	notebook: Notebook;
 }) {
-	const { theme } = hooks.useWatch(notebook);
 	return (
-		<PageRoot className={clsx(theme ? `theme-${theme}` : '', 'bg-wash')}>
-			{children}
-		</PageRoot>
+		<Themed notebookId={notebook.get('id')} asChild>
+			<PageRoot className={'bg-wash'}>{children}</PageRoot>
+		</Themed>
 	);
 }
 

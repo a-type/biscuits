@@ -35,6 +35,7 @@
 		"@types/react-dom": "catalog:",
 		"@tiptap/html": "catalog:",
 		"@post.biscuits/common": "workspace:*",
+		"@verdant-web/tiptap": "catalog:",
 		"feed": "4.2.2"
 	},
 	"devDependencies": {
