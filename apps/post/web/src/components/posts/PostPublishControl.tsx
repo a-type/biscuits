@@ -59,6 +59,10 @@ export function PostPublishControl({ post }: PostPublishControlProps) {
 		data?.publishedPost ? readFragment(postFragment, data.publishedPost) : null;
 	const isPublished = !!publishedPost;
 
+	const updatedAt = new Date(post.deepUpdatedAt);
+	const needsUpdate =
+		publishedPost && new Date(publishedPost.publishedAt) < updatedAt;
+
 	const [publishMutation, { loading: publishing }] =
 		useMutation(publishPostMutation);
 
@@ -145,8 +149,16 @@ export function PostPublishControl({ post }: PostPublishControlProps) {
 					<Dialog.Close asChild>
 						<Button>Close</Button>
 					</Dialog.Close>
-					<Button color="primary" loading={publishing} onClick={publish}>
-						{isPublished ? 'Update' : 'Publish'}
+					<Button
+						color={needsUpdate ? 'primary' : 'default'}
+						loading={publishing}
+						onClick={publish}
+					>
+						{isPublished ?
+							needsUpdate ?
+								'Update'
+							:	'Published'
+						:	'Publish'}
 					</Button>
 				</Dialog.Actions>
 			</Dialog.Content>

@@ -1,5 +1,6 @@
 import { HubNotebookData, HubPostSummaryData } from '@/types.js';
 import { Box, Card, H1 } from '@a-type/ui';
+import { tiptapToString } from '@post.biscuits/common';
 import { RichTextRenderer } from '../richText/RichTextRenderer.jsx';
 import { NotebookPostCard } from './NotebookPostCard.jsx';
 
@@ -9,17 +10,27 @@ export interface NotebookRendererProps {
 }
 
 export function NotebookRenderer({ notebook, posts }: NotebookRendererProps) {
+	const descriptionIsEmpty =
+		!notebook.description || tiptapToString(notebook.description) === '';
 	return (
 		<Box d="col">
 			{notebook.coverImageUrl && (
 				<Box
-					className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-30vh max-w-1920px overflow-hidden"
-					p="sm"
+					className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-40vh max-w-1920px overflow-hidden"
+					p={{ default: 'xs', md: 'sm' }}
 				>
 					<img
 						src={notebook.coverImageUrl}
 						className="w-full h-full object-cover rounded-b-lg rounded-t-sm"
 					/>
+					{notebook.iconUrl && (
+						<div className="absolute top-md left-md">
+							<img
+								src={notebook.iconUrl}
+								className="aspect-1 w-80px rounded-md absolute"
+							/>
+						</div>
+					)}
 				</Box>
 			)}
 			<Box
@@ -29,19 +40,10 @@ export function NotebookRenderer({ notebook, posts }: NotebookRendererProps) {
 				p
 				items="start"
 			>
-				<Box surface p gap className="mt-25vh left-20px" items="center">
-					{notebook.iconUrl && (
-						<>
-							<img
-								src={notebook.iconUrl}
-								className="aspect-1 w-80px rounded-md absolute -left-[20px]"
-							/>
-							<div className="w-50px" />
-						</>
-					)}
+				<Box surface p gap className="mt-25vh" items="center">
 					<H1 className="text-3xl">{notebook.name}</H1>
 				</Box>
-				{notebook.description && (
+				{!!notebook.description && !descriptionIsEmpty && (
 					<Box surface p>
 						<RichTextRenderer content={notebook.description} />
 					</Box>
