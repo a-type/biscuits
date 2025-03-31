@@ -63,6 +63,7 @@ function getNotebookGlobalStyle(notebook: Pick<PublishedNotebook, 'theme'>) {
 					};
 					--font-default: ${notebook.theme?.fontStyle === 'serif' ? 'var(--font-serif)' : 'var(--font-sans)'};
 					--font-title: var(--font-default);
+					--global-corner-scale: ${notebook.theme?.corners === 'square' ? '0.25' : '1'};
 				}`,
 	};
 }

@@ -13,24 +13,31 @@ export function NotebookRenderer({ notebook, posts }: NotebookRendererProps) {
 	const descriptionIsEmpty =
 		!notebook.description || tiptapToString(notebook.description) === '';
 	return (
-		<Box d="col">
+		<Box d="col" gap="lg">
 			{notebook.coverImageUrl && (
 				<Box
-					className="absolute top-0 left-1/2 transform -translate-x-1/2 w-full h-40vh max-w-1920px overflow-hidden"
+					className="w-full h-40vh max-w-1920px overflow-hidden"
+					d="col"
 					p={{ default: 'xs', md: 'sm' }}
+					items="start"
 				>
 					<img
 						src={notebook.coverImageUrl}
-						className="w-full h-full object-cover rounded-b-lg rounded-t-sm"
+						className="w-full h-full object-cover rounded-b-lg rounded-t-sm absolute inset-0"
 					/>
 					{notebook.iconUrl && (
-						<div className="absolute top-md left-md">
+						<div>
 							<img
 								src={notebook.iconUrl}
 								className="aspect-1 w-80px rounded-md absolute"
 							/>
 						</div>
 					)}
+					<Box className="mt-auto w-full max-w-800px mx-auto" p justify="start">
+						<Box surface p gap items="center">
+							<H1 className="text-3xl">{notebook.name}</H1>
+						</Box>
+					</Box>
 				</Box>
 			)}
 			<Box
@@ -40,9 +47,6 @@ export function NotebookRenderer({ notebook, posts }: NotebookRendererProps) {
 				p
 				items="start"
 			>
-				<Box surface p gap className="mt-25vh" items="center">
-					<H1 className="text-3xl">{notebook.name}</H1>
-				</Box>
 				{!!notebook.description && !descriptionIsEmpty && (
 					<Box surface p>
 						<RichTextRenderer content={notebook.description} />

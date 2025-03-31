@@ -347,6 +347,7 @@ export interface PublishedNotebookTable {
 		primaryColor: string;
 		fontStyle: 'serif' | 'sans-serif';
 		spacing: 'sm' | 'md' | 'lg';
+		corners?: 'square' | 'rounded';
 	} | null;
 }
 

@@ -462,6 +462,7 @@ export type NotebookThemePrimaryColor =
   | "salt";
 export type NotebookThemeFontStyle = "serif" | "sans-serif";
 export type NotebookThemeSpacing = "sm" | "md" | "lg";
+export type NotebookThemeCorners = "rounded" | "square";
 export type NotebookInit = {
   id?: string;
   createdAt?: number;
@@ -519,6 +520,7 @@ export type NotebookThemeInit = {
     | "salt";
   fontStyle?: "serif" | "sans-serif";
   spacing?: "sm" | "md" | "lg";
+  corners: "rounded" | "square";
 };
 export type NotebookDestructured = {
   id: string;
@@ -566,6 +568,7 @@ export type NotebookThemeDestructured = {
   primaryColor: "lemon" | "blueberry" | "tomato" | "leek" | "eggplant" | "salt";
   fontStyle: "serif" | "sans-serif";
   spacing: "sm" | "md" | "lg";
+  corners: "rounded" | "square";
 };
 export type NotebookSnapshot = {
   id: string;
@@ -618,6 +621,7 @@ export type NotebookThemeSnapshot = {
   primaryColor: "lemon" | "blueberry" | "tomato" | "leek" | "eggplant" | "salt";
   fontStyle: "serif" | "sans-serif";
   spacing: "sm" | "md" | "lg";
+  corners: "rounded" | "square";
 };
 
 /** Index filters for Notebook **/

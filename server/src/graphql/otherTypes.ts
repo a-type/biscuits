@@ -20,6 +20,7 @@ export interface PublishPostNotebookThemeInput {
 	primaryColor: string;
 	fontStyle: string;
 	spacing: string;
+	corners?: string | null;
 }
 
 export interface PublishPostInput {

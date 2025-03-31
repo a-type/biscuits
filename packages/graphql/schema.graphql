@@ -326,13 +326,16 @@ input PublishPostNotebookInput {
 }
 
 input PublishPostNotebookThemeInput {
-  """The font style of the notebook"""
+  """Corner radiuses"""
+  corners: String
+
+  """The font style of the notebook and posts"""
   fontStyle: String!
 
   """The primary color of the notebook"""
   primaryColor: String!
 
-  """The spacing of the notebook"""
+  """Overall spacing scale"""
   spacing: String!
 }
 

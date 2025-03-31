@@ -439,12 +439,16 @@ builder.inputType('PublishPostNotebookThemeInput', {
 			required: true,
 		}),
 		fontStyle: t.string({
-			description: 'The font style of the notebook',
+			description: 'The font style of the notebook and posts',
 			required: true,
 		}),
 		spacing: t.string({
-			description: 'The spacing of the notebook',
+			description: 'Overall spacing scale',
 			required: true,
+		}),
+		corners: t.string({
+			description: 'Corner radiuses',
+			required: false,
 		}),
 	}),
 });
@@ -475,4 +479,9 @@ const notebookThemeSchema = z.object({
 	primaryColor: z.string(),
 	fontStyle: z.enum(['serif', 'sans-serif']),
 	spacing: z.enum(['sm', 'md', 'lg']),
+	corners: z
+		.enum(['rounded', 'square'])
+		.nullable()
+		.optional()
+		.transform((val) => val ?? 'rounded'),
 });
