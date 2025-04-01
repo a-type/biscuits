@@ -1,8 +1,9 @@
 import { hooks } from '@/stores/groceries/index.js';
 import { useLocalStorage } from '@biscuits/client';
 import { useSearchParams } from '@verdant-web/react-router';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { removeStopwords } from 'stopword';
+import { THREE_WEEKS_AGO } from './PinnedRecipes.jsx';
 
 export function useRecipeTagFilter() {
 	const [params, setParams] = useSearchParams();
@@ -186,4 +187,21 @@ export const gridStyles = ['card-big', 'card-small'] as const;
 export type GridStyle = (typeof gridStyles)[number];
 export function useGridStyle() {
 	return useLocalStorage<GridStyle>('recipeGridStyle', 'card-big');
+}
+
+export function usePinnedRecipes() {
+	// prevent thrashing
+	const endOfDay = useMemo(() => {
+		const date = new Date();
+		date.setHours(23, 59, 59, 999);
+		return date.getTime();
+	}, []);
+	return hooks.useAllRecipes({
+		index: {
+			where: 'pinnedAt',
+			gt: THREE_WEEKS_AGO,
+			lt: endOfDay,
+		},
+		key: 'pinnedRecipes',
+	});
 }

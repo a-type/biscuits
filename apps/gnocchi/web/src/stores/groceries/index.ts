@@ -441,12 +441,12 @@ export const hooks = createHooks<Presence, Profile>({
 					client,
 				);
 				// FIXME: verdant will have a fix for this soon
-				let copyWithoutUndefined = Object.entries(scanned)
+				const copyWithoutUndefined = Object.entries(scanned)
 					.filter(([_, v]) => v !== undefined)
 					.reduce((acc, [k, v]) => {
 						acc[k as keyof RecipeInit] = v;
 						return acc;
-					}, {} as Partial<RecipeInit>);
+					}, {} as any);
 				recipe.update(copyWithoutUndefined);
 
 				// set this separately - do not merge
@@ -635,6 +635,7 @@ export const hooks = createHooks<Presence, Profile>({
 
 const DEBUG = localStorage.getItem('DEBUG') === 'true';
 const NO_SYNC = window.location.search.includes('nosync');
+const DASHBOARD_MODE = window.location.search.includes('dashboard');
 export function createClientDescriptor(options: { namespace: string }) {
 	return new ClientDescriptor({
 		sync: NO_SYNC
@@ -647,6 +648,7 @@ export function createClientDescriptor(options: { namespace: string }) {
 						lastInteractedCategory: null,
 					} satisfies Presence,
 					access: 'members',
+					dashboardMode: DASHBOARD_MODE,
 			  }),
 		migrations,
 		namespace: options.namespace,

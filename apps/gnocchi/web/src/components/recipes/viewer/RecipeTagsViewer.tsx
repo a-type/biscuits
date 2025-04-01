@@ -8,25 +8,33 @@ export interface RecipeTagsViewerProps {
 	recipe: Recipe;
 	limit?: number;
 	className?: string;
+	unwrapped?: boolean;
 }
 
 export function RecipeTagsViewer({
 	recipe,
 	limit,
 	className,
+	unwrapped,
 }: RecipeTagsViewerProps) {
 	const { tags } = hooks.useWatch(recipe);
 	hooks.useWatch(tags);
 
 	if (!tags) return null;
 
-	let tagsToDisplay = limit ? tags.getSnapshot().slice(0, limit) : tags;
+	const tagsToDisplay = limit ? tags.getSnapshot().slice(0, limit) : tags;
+
+	const content = tagsToDisplay.map((tag) => (
+		<RecipeTagViewer key={tag} tag={tag} />
+	));
+
+	if (unwrapped) {
+		return <>{content}</>;
+	}
 
 	return (
 		<div className={classNames('flex flex-wrap gap-1 text-sm', className)}>
-			{tagsToDisplay.map((tag) => (
-				<RecipeTagViewer key={tag} tag={tag} />
-			))}
+			{content}
 		</div>
 	);
 }

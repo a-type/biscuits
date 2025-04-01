@@ -12,6 +12,7 @@ import {
 	CardMenu,
 	CardRoot,
 	CardTitle,
+	Chip,
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
@@ -40,7 +41,7 @@ export const RecipeListItem = memo(function RecipeListItem({
 	recipe: Recipe;
 	className?: string;
 }) {
-	const { title, mainImage } = hooks.useWatch(recipe);
+	const { title, mainImage, totalTimeMinutes } = hooks.useWatch(recipe);
 	const [gridStyle] = useGridStyle();
 
 	return (
@@ -65,9 +66,16 @@ export const RecipeListItem = memo(function RecipeListItem({
 					>
 						<span className="line-clamp-2 text-ellipsis">{title}</span>
 					</CardTitle>
-					<div className="m-2">
+					<div className="m-2 flex flex-row gap-sm flex-wrap">
+						{totalTimeMinutes && (
+							<Chip>
+								<Icon name="clock" />
+								{totalTimeMinutes} min
+							</Chip>
+						)}
 						<Suspense>
 							<RecipeTagsViewer
+								unwrapped
 								recipe={recipe}
 								className={gridStyle === 'card-small' ? 'text-xxs' : 'text-xs'}
 							/>

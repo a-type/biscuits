@@ -2,6 +2,7 @@ import { Icon } from '@/components/icons/Icon.jsx';
 import { HelpTip } from '@/components/promotional/HelpTip.jsx';
 import { RecipeListItemMenu } from '@/components/recipes/collection/RecipeListItem.jsx';
 import {
+	usePinnedRecipes,
 	useRecipeFoodFilter,
 	useRecipeTagFilter,
 	useRecipeTitleFilter,
@@ -21,23 +22,10 @@ export interface PinnedRecipesProps {
 	className?: string;
 }
 
-const THREE_WEEKS_AGO = addWeeks(Date.now(), -3).getTime();
+export const THREE_WEEKS_AGO = addWeeks(Date.now(), -3).getTime();
 
 export function PinnedRecipes({ className }: PinnedRecipesProps) {
-	// prevent thrashing
-	const endOfDay = useMemo(() => {
-		const date = new Date();
-		date.setHours(23, 59, 59, 999);
-		return date.getTime();
-	}, []);
-	const pinnedRecipes = hooks.useAllRecipes({
-		index: {
-			where: 'pinnedAt',
-			gt: THREE_WEEKS_AGO,
-			lt: endOfDay,
-		},
-		key: 'pinnedRecipes',
-	});
+	const pinnedRecipes = usePinnedRecipes();
 
 	const [tagFilter] = useRecipeTagFilter();
 	const [foodFilter] = useRecipeFoodFilter();
