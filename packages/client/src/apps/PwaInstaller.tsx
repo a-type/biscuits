@@ -1,11 +1,17 @@
 import { PWAInstallElement } from '@khmyznikov/pwa-install';
 import { HTMLAttributes, Ref, useEffect, useRef } from 'react';
 import { getDeferredPrompt, installState, triggerInstall } from '../install.js';
-import { useAppInfo } from '../react.js';
+import { useAppInfo, useMaybeAppId } from '../react.js';
 
 let singleton: any;
 
 export function PwaInstaller() {
+	const maybeApp = useMaybeAppId();
+	if (!maybeApp) return null;
+	return <PwaInstallerInner />;
+}
+
+function PwaInstallerInner() {
 	const app = useAppInfo();
 	const ref = useRef<PWAInstallElement>(null);
 
