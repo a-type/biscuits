@@ -4,7 +4,6 @@ import { logger } from 'hono/logger';
 import { join } from 'path';
 
 import { corsMiddleware } from './middleware/cors.js';
-import { domainRoutesMiddleware } from './middleware/domainRoutes.js';
 import { handleError } from './middleware/errors.js';
 import { authRouter } from './routers/auth.js';
 import { gnocchiRouter } from './routers/gnocchi.js';
@@ -18,7 +17,6 @@ export const app = new Hono()
 	.onError(handleError)
 	.use(logger())
 	.use(corsMiddleware)
-	.use(domainRoutesMiddleware)
 	.get('/', (ctx) => ctx.text('Hello, world!'))
 	.route('/auth', authRouter)
 	.route('/verdant', verdantRouter)

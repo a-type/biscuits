@@ -12,7 +12,6 @@ export type AppManifest<Id extends string> = {
 	paidFeatures: PaidFeature[] | readonly PaidFeature[];
 	prerelease?: boolean;
 	theme: string;
-	domainRoutes?: (resourceId: string) => string;
 };
 
 export type PaidFeature = {
@@ -196,7 +195,6 @@ export const apps = [
 		url: 'https://post.biscuits.club',
 		prerelease: true,
 		theme: 'blueberry',
-		domainRoutes: (notebookId: string) => `/post/hub/${notebookId}`,
 	},
 ] as const;
 

@@ -1,6 +1,7 @@
 import {
 	ActionButton,
 	ActionButtonProps,
+	Box,
 	Button,
 	clsx,
 	Dialog,
@@ -9,10 +10,12 @@ import {
 	DialogContent,
 	DialogTitle,
 	DialogTrigger,
+	Divider,
+	H3,
 	Icon,
 	P,
 } from '@a-type/ui';
-import { useHasServerAccess } from '@biscuits/client';
+import { DomainRouteView, useHasServerAccess } from '@biscuits/client';
 import { graphql, useMutation, useQuery } from '@biscuits/graphql';
 import { Link } from '@verdant-web/react-router';
 import { upsellState } from '../promotion/upsellState.js';
@@ -61,15 +64,15 @@ export function ListPublishAction({
 		<Dialog>
 			<DialogTrigger asChild>
 				<ActionButton
-					color={isPublished ? 'default' : 'accent'}
+					color="accent"
 					{...rest}
 					className={clsx('self-start', className)}
 				>
 					<Icon name="send" />
-					{isPublished ? 'Edit sharing' : 'Share list'}
+					{isPublished ? 'Sharing' : 'Share list'}
 				</ActionButton>
 			</DialogTrigger>
-			<DialogContent>
+			<DialogContent className="flex flex-col gap-lg">
 				{isPublished ?
 					<ManagePublishedList
 						listId={listId}
@@ -137,15 +140,25 @@ function ManagePublishedList({ listId, url }: { listId: string; url: string }) {
 	return (
 		<>
 			<DialogTitle>Manage sharing</DialogTitle>
-			<P className="mb-2">
-				Your list is currently public on the internet. You can unpublish it at
-				any time.
-			</P>
-			<Button asChild color="accent" className="self-start">
-				<Link to={url} newTab>
-					View your list <Icon name="new_window" />
-				</Link>
-			</Button>
+			<Box d="col" gap="sm">
+				<P className="mb-2">
+					Your list is currently public on the internet. You can unpublish it at
+					any time.
+				</P>
+				<Button asChild color="accent" className="self-start">
+					<Link to={url} newTab>
+						View your list <Icon name="new_window" />
+					</Link>
+				</Button>
+			</Box>
+			<Divider />
+			<Box d="col" gap="sm">
+				<H3>Custom domain</H3>
+				<P>
+					If you own a domain, you can set up a subdomain to point to your list.
+				</P>
+				<DomainRouteView resourceId={listId} />
+			</Box>
 			<DialogActions>
 				<Button color="ghostDestructive" onClick={unpublish}>
 					Unpublish
