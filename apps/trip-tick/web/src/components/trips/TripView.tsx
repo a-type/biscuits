@@ -261,7 +261,7 @@ function TripViewChecklists({
 				);
 			})}
 			{startedWithNoLists && !mappedLists.length && (
-				<div className="w-full p-4 color-gray italic">
+				<div className="w-full p-4 color-gray-dark italic">
 					<span className="[font-style:normal]">💡</span> Add lists to this trip
 					for everything you want to pack. Once you start packing, check off
 					items as you go.

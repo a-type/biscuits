@@ -68,7 +68,7 @@ export function ProjectColorSpotlight({
 				className,
 			)}
 		>
-			<span className="text-xs color-gray italic">
+			<span className="text-xs color-gray-dark italic">
 				Select a color to see it here
 			</span>
 		</div>

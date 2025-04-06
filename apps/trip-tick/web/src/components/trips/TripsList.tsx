@@ -76,7 +76,7 @@ export function TripsList({}: TripsListProps) {
 						<TripsListItem key={trip.get('id')} trip={trip} />
 					))}
 				</CardGrid>
-			:	<div className="color-gray p-8 italic font-lg flex flex-col gap-3 items-center justify-center">
+			:	<div className="color-gray-dark p-8 italic font-lg flex flex-col gap-3 items-center justify-center">
 					No upcoming trips.{' '}
 					<AddTripButton color="default">Plan one</AddTripButton>
 				</div>

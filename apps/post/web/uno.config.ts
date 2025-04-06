@@ -1,14 +1,14 @@
 // uno.config.ts
-import { defineConfig } from 'unocss';
-import variantGroup from '@unocss/transformer-variant-group';
 import presetAglio from '@a-type/ui/uno-preset';
+import variantGroup from '@unocss/transformer-variant-group';
+import { defineConfig } from 'unocss';
 
 export default defineConfig({
-  presets: [presetAglio()],
-  transformers: [variantGroup()],
-  preflights: [
-    {
-      getCSS: () => `
+	presets: [presetAglio({ saturation: 30 })],
+	transformers: [variantGroup()],
+	preflights: [
+		{
+			getCSS: () => `
 			html, body, #root {
 				display: flex;
 				flex-direction: column;
@@ -19,6 +19,6 @@ export default defineConfig({
 				flex: 1;
 			}
 		`,
-    },
-  ],
+		},
+	],
 });

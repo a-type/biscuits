@@ -53,7 +53,7 @@ export function ItemEditDialog({ list }: ItemEditDialogProps) {
 		>
 			<DialogContent onOpenAutoFocus={preventDefault}>
 				<DialogTitle>Edit item</DialogTitle>
-				<span className="text-xxs italic color-gray pb-2">
+				<span className="text-xxs italic color-gray-dark pb-2">
 					All fields save automatically
 				</span>
 				{item && <ItemEditor item={item} />}

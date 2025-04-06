@@ -199,7 +199,7 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 								content="Tap and hold to change category"
 								disableNext
 							>
-								<Icon name="grabby" className="color-gray" />
+								<Icon name="grabby" className="color-gray-dark" />
 							</OnboardingTooltip>
 						</div>
 					</div>
@@ -207,7 +207,7 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 						<Button size="icon" color="ghost" className="p-1 flex-shrink-0">
 							<Icon
 								name="chevron"
-								className="[*[data-state=open]_&]:rotate-180deg color-gray hover:color-gray-dark"
+								className="[*[data-state=open]_&]:rotate-180deg color-gray-dark hover:color-gray-ink"
 							/>
 						</Button>
 					</CollapsibleTrigger>

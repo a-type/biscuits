@@ -325,7 +325,7 @@ function EmptyLine({ song }: { song: Song }) {
 	return (
 		<Button
 			color="unstyled"
-			className="py-2 italic color-gray flex-shrink-0"
+			className="py-2 italic color-gray-dark flex-shrink-0"
 			onClick={() => {
 				song.get('lines').push({
 					words: [{}],

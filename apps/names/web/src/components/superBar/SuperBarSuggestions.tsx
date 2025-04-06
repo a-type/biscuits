@@ -30,7 +30,7 @@ export function SuperBarSuggestions({ className }: SuperBarSuggestionsProps) {
 			return (
 				<div className={clsx('p-8 col gap-6', className)}>
 					<Icon name="profile" size={80} className="color-gray" />
-					<div className="color-gray text-center text-lg">
+					<div className="color-gray-dark text-center text-lg">
 						Add names to get started
 					</div>
 				</div>
@@ -40,7 +40,9 @@ export function SuperBarSuggestions({ className }: SuperBarSuggestionsProps) {
 		return (
 			<div className={clsx('p-8 col gap-6', className)}>
 				<Icon name="profile" size={80} className="color-gray" />
-				<div className="color-gray text-center text-lg">No matches found</div>
+				<div className="color-gray-dark text-center text-lg">
+					No matches found
+				</div>
 			</div>
 		);
 	}

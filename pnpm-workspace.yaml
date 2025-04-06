@@ -8,7 +8,7 @@ packages:
   - 'cdk'
 
 catalog:
-  '@a-type/ui': 1.8.18
+  '@a-type/ui': 2.0.1
   '@a-type/utils': 1.1.4
   '@originjs/vite-plugin-commonjs': 1.0.3
   '@react-spring/web': 9.7.5
