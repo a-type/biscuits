@@ -57,7 +57,15 @@ const routes = makeRoutes([
 
 export function Pages() {
 	const handleNavigate = useCallback(
-		(_: Location, ev: { state?: any; skipTransition?: boolean }) => {
+		(
+			loc: Location,
+			ev: { state?: any; skipTransition?: boolean },
+			prev: { pathname: string },
+		) => {
+			// if only the search params changed, don't update the app
+			if (prev.pathname === loc.pathname) {
+				return true;
+			}
 			if (updateState.updateAvailable) {
 				console.info('Update ready to install, intercepting navigation...');
 				updateApp();

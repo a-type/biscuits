@@ -37,15 +37,27 @@ const routes = makeRoutes([
 ]);
 
 export function Pages() {
-	const onNavigate = useCallback(() => {
-		if (updateState.updateAvailable) {
-			updateApp(true);
-			return false;
-		}
-	}, []);
+	const handleNavigate = useCallback(
+		(
+			loc: Location,
+			ev: { state?: any; skipTransition?: boolean },
+			prev: { pathname: string },
+		) => {
+			// if only the search params changed, don't update the app
+			if (prev.pathname === loc.pathname) {
+				return true;
+			}
+			if (updateState.updateAvailable) {
+				console.info('Update ready to install, intercepting navigation...');
+				updateApp();
+				return false;
+			}
+		},
+		[],
+	);
 	return (
 		<PageRoot>
-			<Router routes={routes} onNavigate={onNavigate}>
+			<Router routes={routes} onNavigate={handleNavigate}>
 				<Outlet />
 			</Router>
 		</PageRoot>
