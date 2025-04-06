@@ -12,6 +12,7 @@ export type AppManifest<Id extends string> = {
 	paidFeatures: PaidFeature[] | readonly PaidFeature[];
 	prerelease?: boolean;
 	theme: string;
+	domainRoutes?: (resourceId: string) => string;
 };
 
 export type PaidFeature = {
@@ -57,6 +58,7 @@ export const apps = [
 		paidDescription:
 			'Your personal cooking app becomes a family groceries list and recipe box.',
 		theme: 'lemon',
+		domainRoutes: (planId) => `/gnocchi/hub/${planId}`,
 	} as AppManifest<'gnocchi'>,
 	{
 		id: 'trip-tick',
@@ -97,6 +99,7 @@ export const apps = [
 		url: 'https://wish-wash.biscuits.club',
 		prerelease: true,
 		theme: 'eggplant',
+		domainRoutes: (listId) => `/wish-wash/hub/${listId}`,
 	} as AppManifest<'wish-wash'>,
 	{
 		id: 'marginalia',
@@ -195,6 +198,7 @@ export const apps = [
 		url: 'https://post.biscuits.club',
 		prerelease: true,
 		theme: 'blueberry',
+		domainRoutes: (notebookId: string) => `/post/hub/${notebookId}`,
 	},
 ] as const;
 
