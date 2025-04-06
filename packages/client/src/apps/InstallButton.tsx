@@ -2,7 +2,7 @@ import { Button, ButtonProps, Icon } from '@a-type/ui';
 import '@khmyznikov/pwa-install';
 import { useSnapshot } from 'valtio';
 import { installState } from '../install.js';
-import { PwaInstaller } from './PwaInstaller.jsx';
+import { PwaInstaller } from './PwaInstaller.js';
 
 export function InstallButton(props: ButtonProps) {
 	const { installReady } = useSnapshot(installState);
