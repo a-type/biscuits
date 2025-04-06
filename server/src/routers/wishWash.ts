@@ -24,11 +24,11 @@ const hubPath = path.join(
 const hubClientPath = path.join(hubPath, 'client');
 
 wishWashRouter.get('/hub/assets/*', ({ req }) =>
-	staticFile(hubClientPath, 'wishWash/hub', req.raw),
+	staticFile(hubClientPath, 'wish-wash/hub', req.raw),
 );
 
 wishWashRouter.get('/hub/favicon.ico', ({ req }) =>
-	staticFile(hubClientPath, 'wishWash/hub', req.raw),
+	staticFile(hubClientPath, 'wish-wash/hub', req.raw),
 );
 
 function itemImageUrls(item: WishlistSnapshot['items'][number]) {
@@ -121,5 +121,5 @@ wishWashRouter.get('/hub/:listSlug', async (ctx) => {
 });
 
 wishWashRouter.get('/hub/*', ({ req }) =>
-	staticFile(hubClientPath, 'wishWash/hub', req.raw),
+	staticFile(hubClientPath, 'wish-wash/hub', req.raw),
 );

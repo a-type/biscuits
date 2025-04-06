@@ -41,7 +41,6 @@ function VibeCardBuyExperience({
 			<Dialog.Trigger asChild>{children}</Dialog.Trigger>
 			<Dialog.Content>
 				<Dialog.Title>Shop this vibe</Dialog.Title>
-				<Dialog.Description></Dialog.Description>
 				<P>{descriptionContent}</P>
 				<Dialog.Actions>
 					<Dialog.Close>Close</Dialog.Close>
