@@ -157,7 +157,7 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 							<span>{displayString}</span>
 						</div>
 						{isPurchased && (
-							<div className="absolute left-0 right-52px top-20px border-0 border-b border-b-gray5 border-solid h-1px transform-origin-left animate-expand-scale-x animate-duration-100 animate-ease-out" />
+							<div className="absolute left-0 right-52px top-20px border-0 border-b border-b-gray-dark border-solid h-1px transform-origin-left animate-expand-scale-x animate-duration-100 animate-ease-out" />
 						)}
 						<CollapsibleSimple
 							open={!!subline && !menuOpen && !isPurchased}
@@ -220,7 +220,7 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 									value={comment || ''}
 									onChange={(val) => item.set('comment', val)}
 									placeholder="Add a comment"
-									className="important:text-xs important:border-gray5 flex-grow-2 flex-shrink-1 flex-basis-50% md:flex-basis-120px md:flex-grow-3 my-1"
+									className="important:text-xs important:border-gray-dark flex-grow-2 flex-shrink-1 flex-basis-50% md:flex-basis-120px md:flex-grow-3 my-1"
 								/>
 								<Suspense>
 									<ListSelect

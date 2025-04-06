@@ -207,7 +207,7 @@ function LocationSelectAutocomplete({
 						{...getItemProps({ item, index })}
 						className={classNames(
 							'p-2 cursor-pointer flex flex-col',
-							index === highlightedIndex && 'bg-gray-100',
+							index === highlightedIndex && 'bg-gray-light',
 						)}
 					>
 						<span className="">{item.text}</span>

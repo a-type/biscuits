@@ -40,7 +40,7 @@ function AppIcons() {
 					return (
 						<button
 							key={app.id}
-							className="bg-gray-200 rounded p-0 w-auto h-auto flex appearance-none border-none cursor-pointer"
+							className="bg-gray-light rounded p-0 w-auto h-auto flex appearance-none border-none cursor-pointer"
 							onClick={() => goTo(app.id)}
 						>
 							<img
