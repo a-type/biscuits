@@ -174,9 +174,13 @@ export function useRelationshipSuggestions(person: Person) {
 	});
 
 	const matches = useMemo(() => {
-		return unfilteredMatches
-			.filter((match) => match.get('id') !== ownId)
-			.filter((match) => !dismissedSuggestions.has(match.get('id')));
+		return (
+			unfilteredMatches
+				.filter((match) => match.get('id') !== ownId)
+				// only match names with surnames
+				.filter((match) => match.get('name').includes(' '))
+				.filter((match) => !dismissedSuggestions.has(match.get('id')))
+		);
 	}, [unfilteredMatches, dismissedSuggestions, ownId]);
 
 	return matches;
