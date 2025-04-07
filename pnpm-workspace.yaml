@@ -23,7 +23,7 @@ catalog:
   gql.tada: 1.8.10
   react: 19.0.0
   react-dom: 19.0.0
-  typescript: 5.7.2
+  typescript: 5.8.3
   unocss: 66.0.0
   '@unocss/transformer-variant-group': 66.0.0
   valtio: ^2.1.2
