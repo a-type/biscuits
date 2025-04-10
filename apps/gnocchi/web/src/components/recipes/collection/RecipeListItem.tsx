@@ -13,6 +13,7 @@ import {
 	CardRoot,
 	CardTitle,
 	Chip,
+	clsx,
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
@@ -66,19 +67,20 @@ export const RecipeListItem = memo(function RecipeListItem({
 					>
 						<span className="line-clamp-2 text-ellipsis">{title}</span>
 					</CardTitle>
-					<div className="m-2 flex flex-row gap-sm flex-wrap">
+					<div
+						className={clsx(
+							'm-2 flex flex-row gap-sm flex-wrap',
+							gridStyle === 'card-small' ? 'text-xxs' : 'text-xs',
+						)}
+					>
 						{totalTimeMinutes && (
-							<Chip>
+							<Chip className="bg-wash">
 								<Icon name="clock" />
 								{totalTimeMinutes} min
 							</Chip>
 						)}
 						<Suspense>
-							<RecipeTagsViewer
-								unwrapped
-								recipe={recipe}
-								className={gridStyle === 'card-small' ? 'text-xxs' : 'text-xs'}
-							/>
+							<RecipeTagsViewer unwrapped recipe={recipe} />
 						</Suspense>
 					</div>
 				</Link>
