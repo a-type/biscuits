@@ -23,7 +23,9 @@ export function ItemCard({ item, listAuthor, className }: ItemCardProps) {
 				`theme-${typeThemes[item.type]}`,
 				'bg-primary-wash color-primary-ink',
 				boughtAll && 'opacity-50',
+				item.prioritized && !boughtAll && 'min-h-200px sm:min-h-250px',
 			)}
+			data-span={item.prioritized && !boughtAll ? 2 : 1}
 		>
 			<ItemCardStar item={item} />
 			<ItemCardMarquee item={item} />
