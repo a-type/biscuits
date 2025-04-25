@@ -46,6 +46,9 @@ const lists = schema.collection({
 		description: schema.fields.string({
 			nullable: true,
 		}),
+		coverImage: schema.fields.file({
+			nullable: true,
+		}),
 		items: schema.fields.array({
 			items: schema.fields.object({
 				properties: {
@@ -110,7 +113,7 @@ const lists = schema.collection({
 });
 
 export default schema({
-	version: 10,
+	version: 11,
 	collections: {
 		lists,
 	},

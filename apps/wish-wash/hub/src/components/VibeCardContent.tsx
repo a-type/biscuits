@@ -1,7 +1,11 @@
 import { HubWishlistItem } from '@/types.js';
-import { Card, Dialog, P } from '@a-type/ui';
+import { Dialog, P } from '@a-type/ui';
 import { ReactNode } from 'react';
+import { ItemCardMain } from './ItemCardMain.jsx';
+import { ItemCardNote } from './ItemCardNote.jsx';
+import { ItemCardPurchases } from './ItemCardPurchases.jsx';
 import { ItemCardTitle } from './ItemCardTitle.jsx';
+import { ItemCardTypeChip } from './ItemCardTypeChip.jsx';
 
 export interface VibeCardContentProps {
 	item: HubWishlistItem;
@@ -16,9 +20,12 @@ export function VibeCardContent({
 }: VibeCardContentProps) {
 	return (
 		<VibeCardBuyExperience item={item} listAuthor={listAuthor}>
-			<Card.Main className={className}>
+			<ItemCardMain item={item} className={className}>
+				<ItemCardTypeChip item={item} />
 				<ItemCardTitle item={item} />
-			</Card.Main>
+				<ItemCardPurchases item={item} />
+				<ItemCardNote item={item} />
+			</ItemCardMain>
 		</VibeCardBuyExperience>
 	);
 }

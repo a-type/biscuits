@@ -23,7 +23,7 @@ export function ItemStar({ item, className }: ItemStarProps) {
 				name="star"
 				className={clsx(
 					'w-20px h-20px',
-					prioritizedField.value && 'fill-accent',
+					prioritizedField.value && 'fill-primary',
 				)}
 			/>
 		</Button>

@@ -5,6 +5,7 @@ export interface HubWishlistData {
 	items: HubWishlistItem[];
 	hidePurchases: boolean;
 	author: string;
+	coverImageUrl?: string | null;
 }
 
 export interface HubWishlistItem {
@@ -20,4 +21,6 @@ export interface HubWishlistItem {
 	priceMax: string | null;
 	note: string | null;
 	type: 'link' | 'idea' | 'vibe';
+	remoteImageUrl?: string | null;
+	prompt?: string | null;
 }

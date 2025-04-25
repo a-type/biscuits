@@ -10,7 +10,7 @@ export function ItemCardPrice({ item, className }: ItemCardPriceProps) {
 	const priceDisplay =
 		item.priceMin && item.priceMax ?
 			`${item.priceMin} - ${item.priceMax}`
-		:	item.priceMin ?? item.priceMax;
+		:	(item.priceMin ?? item.priceMax);
 
 	if (!priceDisplay) {
 		return null;
@@ -18,7 +18,7 @@ export function ItemCardPrice({ item, className }: ItemCardPriceProps) {
 
 	return (
 		<Card.Content className={className}>
-			<span className="text-md font-bold">{priceDisplay}</span>
+			<span className="text-md">{priceDisplay}</span>
 		</Card.Content>
 	);
 }

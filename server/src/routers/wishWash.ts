@@ -83,9 +83,23 @@ wishWashRouter.get('/hub/:listSlug', async (ctx) => {
 		session = await sessions.getSession(ctx);
 	} catch (err) {
 		// that's fine
+		console.warn(err);
 	}
 	// is this the user's list?
 	const isUsersList = session?.userId === wishList.publishedBy;
+
+	const purchases = await db
+		.selectFrom('WishlistPurchase')
+		.where('WishlistPurchase.wishlistId', '=', wishList.id)
+		// confirmed means the user knows about it, which means it will be included in the purchasedCount
+		// already.
+		.where('WishlistPurchase.confirmedAt', 'is', null)
+		.select([
+			'WishlistPurchase.itemId',
+			'WishlistPurchase.quantity',
+			'WishlistPurchase.confirmedAt',
+		])
+		.execute();
 
 	const data: HubWishlistData = {
 		id: wishList.id,
@@ -93,21 +107,33 @@ wishWashRouter.get('/hub/:listSlug', async (ctx) => {
 		slug: wishList.slug,
 		hidePurchases: isUsersList,
 		author: wishList.publisherFullName ?? 'Someone',
+		coverImageUrl: snapshot.coverImage?.url,
 		// mapping manually here to avoid leaking unintended data.
-		items: snapshot.items.map((item) => ({
-			id: item.id,
-			description: item.description,
-			count: item.count,
-			purchasedCount: item.purchasedCount,
-			links: item.links,
-			prioritized: item.prioritized,
-			imageUrls: itemImageUrls(item),
-			createdAt: item.createdAt,
-			note: item.note,
-			priceMin: item.priceMin ?? null,
-			priceMax: item.priceMax ?? null,
-			type: item.type,
-		})),
+		items: snapshot.items.map((item) => {
+			// do not show the user unconfirmed purchases
+			const purchasesForThisItem =
+				isUsersList ? 0 : (
+					purchases
+						.filter((p) => p.itemId === item.id)
+						.reduce((acc, p) => acc + p.quantity, 0)
+				);
+			return {
+				id: item.id,
+				description: item.description,
+				count: item.count,
+				purchasedCount: item.purchasedCount + purchasesForThisItem,
+				links: item.links,
+				prioritized: item.prioritized,
+				imageUrls: itemImageUrls(item),
+				createdAt: item.createdAt,
+				note: item.note,
+				priceMin: item.priceMin ?? null,
+				priceMax: item.priceMax ?? null,
+				type: item.type,
+				prompt: item.prompt,
+				remoteImageUrl: item.remoteImageUrl,
+			};
+		}),
 	};
 
 	const indexTemplate = fsSync.readFileSync(

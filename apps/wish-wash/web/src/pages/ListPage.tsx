@@ -1,9 +1,8 @@
 import { ListActions } from '@/components/lists/ListActions.jsx';
-import { ListDetailsEditButton } from '@/components/lists/ListDetailsDialog.jsx';
 import { ListHero } from '@/components/lists/ListHero.jsx';
 import { ListView } from '@/components/lists/ListView.jsx';
 import { hooks } from '@/hooks.js';
-import { Button, H1, Icon, PageContent } from '@a-type/ui';
+import { Box, Button, H1, Icon, PageContent, PageRoot } from '@a-type/ui';
 import { useLocalStorage } from '@biscuits/client';
 import { UserMenu } from '@biscuits/client/apps';
 import { Link, useNavigate, useParams } from '@verdant-web/react-router';
@@ -32,12 +31,14 @@ export function ListPage({}: ListPageProps) {
 
 	if (!list) {
 		return (
-			<PageContent>
-				<H1>List not found</H1>
-				<Button asChild>
-					<Link to="/">Go back</Link>
-				</Button>
-			</PageContent>
+			<PageRoot>
+				<PageContent>
+					<H1>List not found</H1>
+					<Button asChild>
+						<Link to="/">Go back</Link>
+					</Button>
+				</PageContent>
+			</PageRoot>
 		);
 	}
 
@@ -46,33 +47,28 @@ export function ListPage({}: ListPageProps) {
 
 function ListPageContent({ list }: { list: List }) {
 	return (
-		<div className="w-full h-full p-4 gap-4 flex flex-col">
-			<div className="row -ml-3">
-				<Button asChild size="small" color="ghost">
+		<Box d="col" full p gap="lg" items="center">
+			<Box
+				gap
+				justify="between"
+				items="center"
+				className="sticky py-sm top-0 z-[10000] bg-wash w-full max-w-800px"
+			>
+				<Button asChild color="ghost">
 					<Link to="/">
 						<Icon name="arrowLeft" />
 						Home
 					</Link>
 				</Button>
-				<UserMenu
-					className="ml-auto my-auto"
-					extraItems={
-						<ListDetailsEditButton
-							listId={list.get('id')}
-							key="list-details-edit"
-						/>
-					}
-				/>
-			</div>
-			<ListHero list={list} />
-			<ListActions className="sticky top-0 z-10" listId={list.get('id')} />
-			<ListView list={list} className="pb-10" />
-		</div>
+				<UserMenu />
+			</Box>
+			<Box d="col" gap className="w-full max-w-800px">
+				<ListHero list={list} />
+				<ListActions className="sticky top-0 z-10" listId={list.get('id')} />
+			</Box>
+			<ListView list={list} className="pb-[200px] w-full max-w-1690px" />
+		</Box>
 	);
 }
 
 export default ListPage;
-
-const innerContentProps = {
-	className: 'max-w-1200px',
-};

@@ -64,6 +64,8 @@ export const AddItemProvider = ({
 				setSuggestionPrompt(inputValue);
 			});
 		},
+		initialHighlightedIndex: 0,
+		defaultHighlightedIndex: 0,
 		items: suggestions,
 		itemToString: (item) => item || '',
 		async onSelectedItemChange({ selectedItem, type }) {

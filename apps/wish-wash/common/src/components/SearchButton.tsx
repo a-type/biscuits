@@ -17,6 +17,10 @@ export interface SearchButtonProps {
 }
 
 const searchConfigs = {
+	google: {
+		name: 'Google',
+		template: 'https://www.google.com/search?q=$1',
+	},
 	amazon: {
 		name: 'Amazon',
 		template: 'https://www.amazon.com/s?k=$1',
@@ -24,10 +28,6 @@ const searchConfigs = {
 	ebay: {
 		name: 'Ebay',
 		template: 'https://www.ebay.com/sch/i.html?_nkw=$1',
-	},
-	google: {
-		name: 'Google',
-		template: 'https://www.google.com/search?q=$1',
 	},
 	walmart: {
 		name: 'Walmart',
@@ -51,10 +51,7 @@ export function SearchButton({ prompt, provider }: SearchButtonProps) {
 		<div className="flex flex-row">
 			<Button
 				asChild
-				className={clsx(
-					'rounded-r-none relative z-1',
-					!provider && 'rounded-r-none',
-				)}
+				className={clsx('relative z-1', !provider && 'rounded-r-none')}
 				size="small"
 			>
 				<a

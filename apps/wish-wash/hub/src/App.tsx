@@ -1,4 +1,5 @@
 import {
+	Box,
 	H1,
 	P,
 	PageContent,
@@ -10,10 +11,6 @@ import { FC, useEffect } from 'react';
 import { HubContextProvider } from './components/Context.jsx';
 import { Items } from './components/Items.jsx';
 import { HubWishlistData } from './types.js';
-
-const innerProps = {
-	className: 'max-w-600px',
-};
 
 export const App: FC<{ list: HubWishlistData }> = function App({
 	list: data,
@@ -27,7 +24,7 @@ export const App: FC<{ list: HubWishlistData }> = function App({
 
 	if (!data) {
 		return (
-			<PageRoot className="theme-leek">
+			<PageRoot>
 				<PageContent>
 					<H1>Wish list not found</H1>
 				</PageContent>
@@ -35,17 +32,50 @@ export const App: FC<{ list: HubWishlistData }> = function App({
 		);
 	}
 
+	const sortedItems = data.items.sort((a, b) => {
+		if (a.purchasedCount >= a.count) {
+			return 1;
+		}
+		if (b.purchasedCount >= b.count) {
+			return -1;
+		}
+		if (a.prioritized && !b.prioritized) {
+			return -1;
+		}
+		if (!a.prioritized && b.prioritized) {
+			return 1;
+		}
+		return a.createdAt < b.createdAt ? 1 : -1;
+	});
+
 	return (
 		<HubContextProvider wishlistSlug={data.slug}>
 			<ApolloProvider client={graphqlClient}>
 				<UIProvider>
-					<PageRoot className="theme-leek">
-						<PageContent innerProps={innerProps}>
+					<Box
+						d="col"
+						full="width"
+						p
+						gap="lg"
+						items="center"
+						className="flex-[1_0_auto]"
+					>
+						<Box d="col" gap className="w-full max-w-800px">
+							{data.coverImageUrl && (
+								<img
+									src={data.coverImageUrl}
+									className="w-full h-[20vh] object-cover rounded-lg"
+								/>
+							)}
 							<H1>{data.title}</H1>
 							<P>{data.items.length} items</P>
-							<Items items={data.items} listAuthor={data.author} />
-						</PageContent>
-					</PageRoot>
+						</Box>
+						<Items
+							items={sortedItems}
+							listAuthor={data.author}
+							className="pb-10 w-full max-w-1690px"
+						/>
+					</Box>
 				</UIProvider>
 			</ApolloProvider>
 		</HubContextProvider>

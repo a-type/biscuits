@@ -3,6 +3,7 @@ import {
 	Card,
 	CardContent,
 	CardGrid,
+	cardGridColumns,
 	CardMain,
 	CardTitle,
 	clsx,
@@ -19,7 +20,6 @@ import {
 } from '@wish-wash.biscuits/common';
 import { List } from '@wish-wash.biscuits/verdant';
 import { ReactNode, Suspense, useCallback, useState } from 'react';
-import { useItemSize } from '../items/hooks.js';
 import { ItemEditDialog } from '../items/ItemEditDialog.jsx';
 import { ListItem } from '../items/ListItem.jsx';
 import { AddItem } from './add/AddItem.jsx';
@@ -28,41 +28,6 @@ import { ItemSorter } from './ItemSorter.jsx';
 export interface ListViewProps {
 	list: List;
 	className?: string;
-}
-
-function largeColumns(size: number) {
-	if (size > 2000) {
-		return 5;
-	}
-	if (size > 1500) {
-		return 4;
-	}
-	if (size > 1000) {
-		return 3;
-	}
-	if (size > 500) {
-		return 2;
-	}
-	return 1;
-}
-
-function smallColumns(size: number) {
-	if (size > 2000) {
-		return 7;
-	}
-	if (size > 1500) {
-		return 6;
-	}
-	if (size > 1000) {
-		return 5;
-	}
-	if (size > 750) {
-		return 4;
-	}
-	if (size > 500) {
-		return 3;
-	}
-	return 2;
 }
 
 function useListOnboardingProps(list: List, onDone?: () => void) {
@@ -95,7 +60,6 @@ export function ListView({ list, className }: ListViewProps) {
 	const { items, type, completedQuestions } = hooks.useWatch(list);
 	hooks.useWatch(items);
 	hooks.useWatch(completedQuestions);
-	const [itemSize] = useItemSize();
 
 	const needsOnboarding =
 		type === 'wishlist' && completedQuestions.length === 0;
@@ -121,10 +85,7 @@ export function ListView({ list, className }: ListViewProps) {
 			<AddItem list={list} />
 			<div className="row items-stretch">
 				<div className="flex-1">
-					<CardGrid
-						columns={itemSize === 'large' ? largeColumns : smallColumns}
-						className="flex-1 z-0"
-					>
+					<CardGrid columns={cardGridColumns.small} className="flex-1 z-0">
 						{items.map((item) => (
 							<ListItem item={item} key={item.get('id')} />
 						))}

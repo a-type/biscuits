@@ -1,5 +1,6 @@
 import { hooks } from '@/hooks.js';
 import {
+	Box,
 	Button,
 	clsx,
 	Dialog,
@@ -19,12 +20,14 @@ import { preventDefault } from '@a-type/utils';
 import { useHasServerAccess } from '@biscuits/client';
 import { graphql, useLazyQuery } from '@biscuits/graphql';
 import { useSearchParams } from '@verdant-web/react-router';
+import { typeThemes } from '@wish-wash.biscuits/common';
 import {
 	Item,
 	List,
 	ListItemsItemImageFilesDestructured,
 } from '@wish-wash.biscuits/verdant';
 import { ReactNode, useCallback } from 'react';
+import { ItemNote } from './ItemNote.jsx';
 
 export interface ItemEditDialogProps {
 	list: List;
@@ -51,13 +54,34 @@ export function ItemEditDialog({ list }: ItemEditDialogProps) {
 				}
 			}}
 		>
-			<DialogContent onOpenAutoFocus={preventDefault}>
-				<DialogTitle>Edit item</DialogTitle>
-				<span className="text-xxs italic color-gray-dark pb-2">
+			<DialogContent
+				onOpenAutoFocus={preventDefault}
+				className={clsx(
+					'theme',
+					`theme-${typeThemes[item?.get('type') ?? 'idea']}`,
+					'bg-wash gap-sm flex flex-col items-stretch',
+				)}
+				width="md"
+			>
+				<DialogTitle className="m-0">Edit item</DialogTitle>
+				<span className="text-xs italic color-gray-dark">
 					All fields save automatically
 				</span>
 				{item && <ItemEditor item={item} />}
-				<DialogActions>
+				<DialogActions className="justify-between">
+					<Button
+						color="destructive"
+						onClick={() => {
+							item?.deleteSelf();
+							setSearch((p) => {
+								p.delete('itemId');
+								return p;
+							});
+						}}
+					>
+						<Icon name="trash" />
+						Delete
+					</Button>
 					<DialogClose asChild>
 						<Button color="primary">Done</Button>
 					</DialogClose>
@@ -82,7 +106,11 @@ function ItemEditor({ item }: { item: Item }) {
 			break;
 	}
 
-	return <div className="col w-full items-stretch">{content}</div>;
+	return (
+		<Box d="col" items="stretch" full="width" gap>
+			{content}
+		</Box>
+	);
 }
 
 function IdeaEditor({ item }: { item: Item }) {
@@ -94,6 +122,7 @@ function IdeaEditor({ item }: { item: Item }) {
 				placeholder="What kind of thing do you want?"
 				autoFocus
 			/>
+			<ItemNote item={item} />
 			<PriceRangeField item={item} />
 			<CountField item={item} />
 		</>
@@ -106,6 +135,7 @@ function ProductEditor({ item }: { item: Item }) {
 			<RemoteImage item={item} />
 			<SingleLinkField item={item} autoFocus />
 			<DescriptionField item={item} label="What is it?" />
+			<ItemNote item={item} />
 			<PriceField item={item} />
 			<CountField item={item} />
 		</>
@@ -117,6 +147,7 @@ function VibeEditor({ item }: { item: Item }) {
 		<>
 			<ImagesField item={item} />
 			<DescriptionField item={item} label="What's the vibe?" autoFocus />
+			<ItemNote item={item} />
 		</>
 	);
 }
@@ -201,7 +232,7 @@ function DescriptionField({
 			<Label htmlFor="description">{label ?? 'Description'}</Label>
 			<TextArea
 				id="description"
-				{...descriptionField.inputProps}
+				{...(descriptionField.inputProps as any)}
 				autoSelect
 				placeholder={placeholder}
 				autoFocus={autoFocus}

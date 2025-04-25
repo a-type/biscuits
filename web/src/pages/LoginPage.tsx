@@ -5,6 +5,7 @@ import {
 	OAuthSigninButton,
 } from '@a-type/auth-ui';
 import {
+	Box,
 	Checkbox,
 	P,
 	TabsContent,
@@ -63,108 +64,112 @@ export default function LoginPage() {
 
 	return (
 		<div className="flex flex-col items-center justify-center h-screen flex-1 bg-primary-wash">
-			<div className="flex flex-col gap-3 p-6 items-center bg-white border-solid border border-1 border-black rounded-lg relative z-1">
-				<h1 className="font-fancy mb-0">{title}</h1>
-				{message && (
-					<P className="px-3 py-1 rounded-full bg-accent-light">{message}</P>
-				)}
-				{appReferrer && (
-					<P className="italic color-gray-dark text-sm">A Biscuits.club app</P>
-				)}
-				<TabsRoot
-					className="flex flex-col"
-					value={activeTab}
-					onValueChange={(val) =>
-						setParams((old) => {
-							old.set('tab', val);
-							return old;
-						})
-					}
-				>
-					<TabsList className="mb-4">
-						<TabsTrigger value="signin">Log in</TabsTrigger>
-						<TabsTrigger value="signup">Create account</TabsTrigger>
-					</TabsList>
-					<TabsContent
-						value="signup"
-						className="flex flex-col gap-3 items-stretch"
+			<Box d="col" gap>
+				<Box surface p d="col" items="center" border className="relative z-1">
+					<h1 className="font-fancy mb-0">{title}</h1>
+					{message && (
+						<P className="px-3 py-1 rounded-full bg-accent-light">{message}</P>
+					)}
+					{appReferrer && (
+						<P className="italic color-gray-dark text-sm">
+							A Biscuits.club app
+						</P>
+					)}
+					<TabsRoot
+						className="flex flex-col"
+						value={activeTab}
+						onValueChange={(val) =>
+							setParams((old) => {
+								old.set('tab', val);
+								return old;
+							})
+						}
 					>
-						<label
-							className={classNames(
-								'flex flex-row gap-3 max-w-400px text-sm transition-color  p-2 rounded-lg',
-								!tosAgreed && 'bg-primary-light color-black',
-							)}
+						<TabsList className="mb-4">
+							<TabsTrigger value="signin">Log in</TabsTrigger>
+							<TabsTrigger value="signup">Create account</TabsTrigger>
+						</TabsList>
+						<TabsContent
+							value="signup"
+							className="flex flex-col gap-3 items-stretch"
 						>
-							<Checkbox
-								checked={tosAgreed}
-								onCheckedChange={(c) => setTosAgreed(!!c)}
+							<label
+								className={classNames(
+									'flex flex-row gap-3 max-w-400px text-sm transition-color  p-2 rounded-lg',
+									!tosAgreed && 'bg-primary-light color-black',
+								)}
+							>
+								<Checkbox
+									checked={tosAgreed}
+									onCheckedChange={(c) => setTosAgreed(!!c)}
+								/>
+								<span>
+									I agree to the{' '}
+									<a href="/tos" className="font-bold" target="_blank">
+										terms of service
+									</a>{' '}
+									and have read the{' '}
+									<a href="/privacy" className="font-bold" target="_blank">
+										privacy policy
+									</a>
+								</span>
+							</label>
+							<OAuthSigninButton
+								endpoint={`${CONFIG.API_ORIGIN}/auth/provider/google/login`}
+								returnTo={returnTo || '/settings?tab=subscription'}
+								inviteId={searchParams.get('inviteId')}
+								className="mx-auto"
+								disabled={!tosAgreed}
+								appState={appState}
+							>
+								Sign up with Google
+							</OAuthSigninButton>
+							<Or />
+							<EmailSignupForm
+								endpoint={`${CONFIG.API_ORIGIN}/auth/begin-email-signup`}
+								returnTo={returnTo || '/settings?tab=subscription'}
+								disabled={!tosAgreed}
+								appState={appState}
 							/>
-							<span>
-								I agree to the{' '}
-								<a href="/tos" className="font-bold" target="_blank">
-									terms of service
-								</a>{' '}
-								and have read the{' '}
-								<a href="/privacy" className="font-bold" target="_blank">
-									privacy policy
-								</a>
-							</span>
-						</label>
-						<OAuthSigninButton
-							endpoint={`${CONFIG.API_ORIGIN}/auth/provider/google/login`}
-							returnTo={returnTo || '/settings?tab=subscription'}
-							inviteId={searchParams.get('inviteId')}
-							className="mx-auto"
-							disabled={!tosAgreed}
-							appState={appState}
+							{!tosAgreed && (
+								<P className="text-center text-sm color-gray-dark">
+									You must agree to the terms to sign up
+								</P>
+							)}
+							{appReferrer && (
+								<P className="text-center text-sm color-gray-dark">
+									Your account works with{' '}
+									<Link newTab to="/">
+										all Biscuits apps
+									</Link>
+								</P>
+							)}
+						</TabsContent>
+						<TabsContent
+							value="signin"
+							className="flex flex-col gap-3 items-stretch"
 						>
-							Sign up with Google
-						</OAuthSigninButton>
-						<Or />
-						<EmailSignupForm
-							endpoint={`${CONFIG.API_ORIGIN}/auth/begin-email-signup`}
-							returnTo={returnTo || '/settings?tab=subscription'}
-							disabled={!tosAgreed}
-							appState={appState}
-						/>
-						{!tosAgreed && (
-							<P className="text-center text-sm color-gray-dark">
-								You must agree to the terms to sign up
-							</P>
-						)}
-						{appReferrer && (
-							<P className="text-center text-sm color-gray-dark">
-								Your account works with{' '}
-								<Link newTab to="/">
-									all Biscuits apps
-								</Link>
-							</P>
-						)}
-					</TabsContent>
-					<TabsContent
-						value="signin"
-						className="flex flex-col gap-3 items-stretch"
-					>
-						<OAuthSigninButton
-							endpoint={`${CONFIG.API_ORIGIN}/auth/provider/google/login`}
-							returnTo={returnTo}
-							inviteId={searchParams.get('inviteId')}
-							className="mx-auto"
-							appState={appState}
-						>
-							Sign in with Google
-						</OAuthSigninButton>
-						<Or />
-						<EmailSigninForm
-							returnTo={returnTo}
-							endpoint={`${CONFIG.API_ORIGIN}/auth/email-login`}
-							resetPasswordEndpoint={`${CONFIG.API_ORIGIN}/auth/begin-reset-password`}
-							appState={appState}
-						/>
-					</TabsContent>
-				</TabsRoot>
-			</div>
-			<Footer className="px-12" />
+							<OAuthSigninButton
+								endpoint={`${CONFIG.API_ORIGIN}/auth/provider/google/login`}
+								returnTo={returnTo}
+								inviteId={searchParams.get('inviteId')}
+								className="mx-auto"
+								appState={appState}
+							>
+								Sign in with Google
+							</OAuthSigninButton>
+							<Or />
+							<EmailSigninForm
+								returnTo={returnTo}
+								endpoint={`${CONFIG.API_ORIGIN}/auth/email-login`}
+								resetPasswordEndpoint={`${CONFIG.API_ORIGIN}/auth/begin-reset-password`}
+								appState={appState}
+							/>
+						</TabsContent>
+					</TabsRoot>
+				</Box>
+				<Footer className="px-12" />
+			</Box>
 		</div>
 	);
 }

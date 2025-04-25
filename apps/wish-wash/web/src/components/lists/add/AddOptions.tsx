@@ -1,4 +1,4 @@
-import { Card, Icon } from '@a-type/ui';
+import { Card, Icon, clsx } from '@a-type/ui';
 import {
 	typeDescriptions,
 	typeIcons,
@@ -19,7 +19,13 @@ export function AddOptions() {
 	return (
 		<div className="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-3">
 			{options.map((option, i) => (
-				<Card key={option} className={typeThemes[option]}>
+				<Card
+					key={option}
+					className={clsx(
+						`theme theme-${typeThemes[option]}`,
+						'bg-primary-wash color-primary-ink',
+					)}
+				>
 					<Card.Main
 						{...getItemProps({ item: option })}
 						visuallyFocused={highlightedIndex === i}
