@@ -81,11 +81,13 @@ export const AddItemProvider = ({
 					type: 'link',
 					links: [inputValue],
 					description: 'Web link',
+					count: 1,
 				});
 			} else {
 				createItem({
 					type: selectedItem,
 					description: inputValue,
+					count: 0,
 				});
 			}
 		},

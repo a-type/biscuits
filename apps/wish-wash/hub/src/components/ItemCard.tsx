@@ -14,7 +14,7 @@ export interface ItemCardProps {
 }
 
 export function ItemCard({ item, listAuthor, className }: ItemCardProps) {
-	const boughtAll = item.purchasedCount >= item.count;
+	const boughtAll = item.count > 0 && item.purchasedCount >= item.count;
 
 	return (
 		<Card
