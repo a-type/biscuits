@@ -6,7 +6,7 @@
 	"exports": {
 		".": {
 			"import": "./dist/server/entry-server.js",
-			"types": "./dist/server/entry-server.d.ts"
+			"types": "./dist/server-types/entry-server.d.ts"
 		}
 	},
 	"scripts": {
