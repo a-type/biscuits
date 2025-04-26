@@ -1,7 +1,7 @@
 import {
 	Box,
+	Chip,
 	H1,
-	P,
 	PageContent,
 	PageRoot,
 	Provider as UIProvider,
@@ -48,6 +48,8 @@ export const App: FC<{ list: HubWishlistData }> = function App({
 		return a.createdAt < b.createdAt ? 1 : -1;
 	});
 
+	const createdAtDate = new Date(data.createdAt);
+
 	return (
 		<HubContextProvider wishlistSlug={data.slug}>
 			<ApolloProvider client={graphqlClient}>
@@ -60,7 +62,7 @@ export const App: FC<{ list: HubWishlistData }> = function App({
 						items="center"
 						className="flex-[1_0_auto]"
 					>
-						<Box d="col" gap className="w-full max-w-800px">
+						<Box d="col" gap="lg" className="w-full max-w-800px">
 							{data.coverImageUrl && (
 								<img
 									src={data.coverImageUrl}
@@ -69,12 +71,19 @@ export const App: FC<{ list: HubWishlistData }> = function App({
 								/>
 							)}
 							<H1>{data.title}</H1>
-							<P>{data.items.length} items</P>
+							<Box gap className="text-xs">
+								<Chip>{data.items.length} items</Chip>
+								<Chip>By {data.author}</Chip>
+								<Chip>Created {createdAtDate.toLocaleDateString()}</Chip>
+							</Box>
+							<Box surface="primary" className="mr-auto" p>
+								Click any item to see details and links
+							</Box>
 						</Box>
 						<Items
 							items={sortedItems}
 							listAuthor={data.author}
-							className="pb-10 w-full max-w-1690px"
+							className="pb-10 w-full max-w-1280px"
 						/>
 					</Box>
 				</UIProvider>

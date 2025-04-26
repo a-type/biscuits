@@ -66,7 +66,7 @@ function ListPageContent({ list }: { list: List }) {
 				<ListHero list={list} />
 				<ListActions className="sticky top-0 z-10" listId={list.get('id')} />
 			</Box>
-			<ListView list={list} className="pb-[200px] w-full max-w-1690px" />
+			<ListView list={list} className="pb-[200px] w-full max-w-1280px" />
 		</Box>
 	);
 }

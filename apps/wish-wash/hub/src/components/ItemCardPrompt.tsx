@@ -13,7 +13,11 @@ export function ItemCardPrompt({ item, className }: ItemCardPromptProps) {
 	return (
 		<Card.Content
 			unstyled={!hasImage}
-			className={clsx('p-xs text-sm color-primary-ink', className)}
+			className={clsx(
+				'text-sm',
+				!hasImage ? 'p-xs text-sm color-primary-ink' : 'px-md',
+				className,
+			)}
 		>
 			{item.prompt}
 		</Card.Content>

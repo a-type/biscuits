@@ -108,6 +108,8 @@ wishWashRouter.get('/hub/:listSlug', async (ctx) => {
 		hidePurchases: isUsersList,
 		author: wishList.publisherFullName ?? 'Someone',
 		coverImageUrl: snapshot.coverImage?.url,
+		createdAt: snapshot.createdAt,
+		description: snapshot.description,
 		// mapping manually here to avoid leaking unintended data.
 		items: snapshot.items.map((item) => {
 			// do not show the user unconfirmed purchases

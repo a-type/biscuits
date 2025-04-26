@@ -2,6 +2,7 @@ import { HubWishlistItem } from '@/types.js';
 import { Button, Dialog, DialogActions } from '@a-type/ui';
 import { SearchButton, searchProviders } from '@wish-wash.biscuits/common';
 import { ReactNode, useEffect, useState } from 'react';
+import { ItemCardImageGallery } from './ItemCardImageGallery.jsx';
 import { ItemCardPurchases } from './ItemCardPurchases.js';
 import { PostBuyExperienceContent } from './PostBuyExperienceContent.js';
 
@@ -79,6 +80,7 @@ function PreBuyExperienceContent({
 	return (
 		<>
 			<Dialog.Title>Search for {item.description}</Dialog.Title>
+			<ItemCardImageGallery item={item} maxCols={2} />
 			<ItemCardPurchases item={item} className="!bg-accent-wash mr-auto" />
 			<Dialog.Description>
 				{description || (

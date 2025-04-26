@@ -14,6 +14,7 @@ import { useState } from 'react';
 export interface SearchButtonProps {
 	prompt: string;
 	provider?: keyof typeof searchConfigs;
+	className?: string;
 }
 
 const searchConfigs = {
@@ -42,13 +43,13 @@ export const searchProviders = Object.keys(
 	searchConfigs,
 ) as (keyof typeof searchConfigs)[];
 
-export function SearchButton({ prompt, provider }: SearchButtonProps) {
+export function SearchButton({ prompt, provider, className }: SearchButtonProps) {
 	const [selectedProvider, setSelectedProvider] =
 		useState<keyof typeof searchConfigs>('amazon');
 	const finalProvider = provider || selectedProvider;
 
 	return (
-		<div className="flex flex-row">
+		<div className={clsx("flex flex-row", className)}>
 			<Button
 				asChild
 				className={clsx('relative z-1', !provider && 'rounded-r-none')}

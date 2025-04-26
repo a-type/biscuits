@@ -6,6 +6,8 @@ export interface HubWishlistData {
 	hidePurchases: boolean;
 	author: string;
 	coverImageUrl?: string | null;
+	description?: string | null;
+	createdAt: number;
 }
 
 export interface HubWishlistItem {
