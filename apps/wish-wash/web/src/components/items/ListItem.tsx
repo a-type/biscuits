@@ -80,17 +80,13 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 					<Card.Content unstyled className="pt-2 pl-1">
 						<ItemTypeChip item={item} />
 					</Card.Content>
-					{prompt && (
-						<Card.Content className="p-1" unstyled>
-							{prompt}
-						</Card.Content>
-					)}
+					{prompt && <Card.Content unstyled={!hasImage}>{prompt}</Card.Content>}
 					<Card.Content
 						unstyled
 						className={clsx(
 							'p-1 font-bold',
 							hasImage ?
-								'bg-[rgba(0,0,0,0.5)] text-[white] text-xl'
+								'bg-[rgba(0,0,0,0.5)] px-md text-[white] text-xl'
 							:	'text-lg color-primary-dark',
 						)}
 					>
