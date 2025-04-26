@@ -1,7 +1,7 @@
 import { Session } from '@a-type/auth';
 import { db } from '@biscuits/db';
 import { getLibraryName } from '@biscuits/libraries';
-import { serverRender, type HubWishlistData } from '@wish-wash.biscuits/hub';
+import { type HubWishlistData } from '@wish-wash.biscuits/hub';
 import type { ListSnapshot as WishlistSnapshot } from '@wish-wash.biscuits/verdant';
 import * as fsSync from 'fs';
 import { Hono } from 'hono';
@@ -141,6 +141,7 @@ wishWashRouter.get('/hub/:listSlug', async (ctx) => {
 		'utf8',
 	);
 
+	const { serverRender } = await import('@wish-wash.biscuits/hub');
 	const appHtml = serverRender(data);
 	return renderTemplate(indexTemplate, { appHtml, data });
 });
