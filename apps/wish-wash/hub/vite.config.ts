@@ -12,7 +12,7 @@ export default defineConfig(({ mode }) => ({
 			'https://lists.wish-wash.biscuits.club/'
 		:	'http://localhost:6124/wish-wash/hub/',
 	optimizeDeps: {
-		exclude: ['@a-type/ui', '@biscuits/client'],
+		exclude: ['@a-type/ui', '@biscuits/client', '@biscuits/graphql'],
 		include: [
 			'react/jsx-runtime',
 			'react',
