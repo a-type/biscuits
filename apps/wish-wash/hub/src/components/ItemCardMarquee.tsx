@@ -16,6 +16,7 @@ export function ItemCardMarquee({ item }: ItemCardMarqueeProps) {
 				{item.imageUrls.map((url, i) => (
 					<Marquee.Item asChild>
 						<img
+							crossOrigin="anonymous"
 							src={url}
 							alt={'Picture of ' + item.description}
 							className="object-cover"

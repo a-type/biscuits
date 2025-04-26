@@ -65,6 +65,7 @@ export const App: FC<{ list: HubWishlistData }> = function App({
 								<img
 									src={data.coverImageUrl}
 									className="w-full h-[20vh] object-cover rounded-lg"
+									crossOrigin="anonymous"
 								/>
 							)}
 							<H1>{data.title}</H1>
