@@ -1,4 +1,3 @@
-import { ListDetailsDialog } from '@/components/lists/ListDetailsDialog.jsx';
 import { ShareTargetListPicker } from '@/components/shareTarget/ShareTargetListPicker.jsx';
 import { Button, ErrorBoundary, H1, P, Spinner } from '@a-type/ui';
 import { ReloadButton } from '@biscuits/client';
@@ -56,7 +55,6 @@ export function Pages() {
 			<Suspense fallback={<Spinner />}>
 				<Router routes={routes} onNavigate={handleNavigate}>
 					<Outlet />
-					<ListDetailsDialog />
 					<ShareTargetListPicker />
 				</Router>
 			</Suspense>
