@@ -1,11 +1,11 @@
 import { HubWishlistItem } from '@/types.js';
 import { Dialog, P } from '@a-type/ui';
 import { ReactNode } from 'react';
-import { ItemCardMain } from './ItemCardMain.jsx';
-import { ItemCardNote } from './ItemCardNote.jsx';
-import { ItemCardPurchases } from './ItemCardPurchases.jsx';
-import { ItemCardTitle } from './ItemCardTitle.jsx';
-import { ItemCardTypeChip } from './ItemCardTypeChip.jsx';
+import { ItemCardMain } from './ItemCardMain.js';
+import { ItemCardNote } from './ItemCardNote.js';
+import { ItemCardPurchases } from './ItemCardPurchases.js';
+import { ItemCardTitle } from './ItemCardTitle.js';
+import { ItemCardTypeChip } from './ItemCardTypeChip.js';
 
 export interface VibeCardContentProps {
 	item: HubWishlistItem;

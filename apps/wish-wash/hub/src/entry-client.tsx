@@ -1,8 +1,7 @@
 import ReactDOM from 'react-dom/client';
 import 'virtual:uno.css';
-import { App } from './App.jsx';
+import { App } from './App.js';
 
-// @ts-ignore
-const snapshot = window.__SNAPSHOT__;
+const snapshot = (window as any).__SNAPSHOT__;
 
 ReactDOM.hydrateRoot(document.getElementById('root')!, <App list={snapshot} />);

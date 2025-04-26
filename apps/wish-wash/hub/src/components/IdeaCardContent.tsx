@@ -1,12 +1,12 @@
 import { HubWishlistItem } from '@/types.js';
-import { ItemCardMain } from './ItemCardMain.jsx';
-import { ItemCardNote } from './ItemCardNote.jsx';
-import { ItemCardPrice } from './ItemCardPrice.jsx';
-import { ItemCardPrompt } from './ItemCardPrompt.jsx';
-import { ItemCardPurchases } from './ItemCardPurchases.jsx';
-import { ItemCardTitle } from './ItemCardTitle.jsx';
-import { ItemCardTypeChip } from './ItemCardTypeChip.jsx';
-import { SearchAndBuyExperience } from './SearchAndBuyExperience.jsx';
+import { ItemCardMain } from './ItemCardMain.js';
+import { ItemCardNote } from './ItemCardNote.js';
+import { ItemCardPrice } from './ItemCardPrice.js';
+import { ItemCardPrompt } from './ItemCardPrompt.js';
+import { ItemCardPurchases } from './ItemCardPurchases.js';
+import { ItemCardTitle } from './ItemCardTitle.js';
+import { ItemCardTypeChip } from './ItemCardTypeChip.js';
+import { SearchAndBuyExperience } from './SearchAndBuyExperience.js';
 
 export interface IdeaCardContentProps {
 	item: HubWishlistItem;

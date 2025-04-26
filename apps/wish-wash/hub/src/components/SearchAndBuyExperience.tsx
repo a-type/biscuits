@@ -2,8 +2,8 @@ import { HubWishlistItem } from '@/types.js';
 import { Button, Dialog, DialogActions } from '@a-type/ui';
 import { SearchButton, searchProviders } from '@wish-wash.biscuits/common';
 import { ReactNode, useEffect, useState } from 'react';
-import { ItemCardPurchases } from './ItemCardPurchases.jsx';
-import { PostBuyExperienceContent } from './PostBuyExperienceContent.jsx';
+import { ItemCardPurchases } from './ItemCardPurchases.js';
+import { PostBuyExperienceContent } from './PostBuyExperienceContent.js';
 
 export function SearchAndBuyExperience({
 	item,

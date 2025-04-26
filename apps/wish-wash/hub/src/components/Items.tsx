@@ -1,6 +1,6 @@
 import { HubWishlistItem } from '@/types.js';
 import { CardGrid, cardGridColumns, clsx } from '@a-type/ui';
-import { ItemCard } from './ItemCard.jsx';
+import { ItemCard } from './ItemCard.js';
 
 export interface ItemsProps {
 	items: HubWishlistItem[];

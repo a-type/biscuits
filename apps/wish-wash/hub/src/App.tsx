@@ -8,8 +8,8 @@ import {
 } from '@a-type/ui';
 import { ApolloProvider, graphqlClient } from '@biscuits/graphql';
 import { FC, useEffect } from 'react';
-import { HubContextProvider } from './components/Context.jsx';
-import { Items } from './components/Items.jsx';
+import { HubContextProvider } from './components/Context.js';
+import { Items } from './components/Items.js';
 import { HubWishlistData } from './types.js';
 
 export const App: FC<{ list: HubWishlistData }> = function App({

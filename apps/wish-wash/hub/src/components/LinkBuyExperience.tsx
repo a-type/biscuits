@@ -1,8 +1,8 @@
 import { HubWishlistItem } from '@/types.js';
 import { Box, Button, Dialog, Icon } from '@a-type/ui';
 import { ReactNode, useEffect, useState } from 'react';
-import { PostBuyExperienceContent } from './PostBuyExperienceContent.jsx';
-import { SearchAndBuyExperience } from './SearchAndBuyExperience.jsx';
+import { PostBuyExperienceContent } from './PostBuyExperienceContent.js';
+import { SearchAndBuyExperience } from './SearchAndBuyExperience.js';
 
 export function LinkBuyExperience({
 	item,

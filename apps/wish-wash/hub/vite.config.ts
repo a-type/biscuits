@@ -12,7 +12,7 @@ export default defineConfig(({ mode }) => ({
 			'https://lists.wish-wash.biscuits.club/'
 		:	'http://localhost:6124/wish-wash/hub/',
 	optimizeDeps: {
-		exclude: ['@a-type/ui', '@biscuits/client', '@biscuits/graphql'],
+		exclude: ['@a-type/ui'],
 		include: [
 			'react/jsx-runtime',
 			'react',
@@ -21,9 +21,6 @@ export default defineConfig(({ mode }) => ({
 			'formik',
 			'hoist-non-react-statics',
 		],
-	},
-	ssr: {
-		noExternal: ['@apollo/client', '@a-type/ui', '@biscuits/client'],
 	},
 	resolve: {
 		conditions:
