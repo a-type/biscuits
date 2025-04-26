@@ -67,7 +67,7 @@ export const onboardingQuestions: OnboardingQuestion[] = [
 	{
 		id: 'music',
 		question: 'What music do you like to listen to?',
-		prompt: 'Favorite music genre',
+		prompt: 'Favorite music',
 		suggestions: ['Pop', 'Jazz', 'Classical', 'Metal'],
 	},
 	{
@@ -93,5 +93,11 @@ export const onboardingQuestions: OnboardingQuestion[] = [
 		question: 'What sports do you play?',
 		prompt: 'Played sport(s)',
 		suggestions: ['Basketball', 'Soccer', 'Golf', 'Tennis'],
+	},
+	{
+		id: 'gift-cards',
+		question: 'What gift cards would be most useful to you?',
+		prompt: 'Preferred gift cards',
+		suggestions: ['Amazon', 'Target', 'Starbucks', 'Best Buy', 'Home Depot'],
 	},
 ];
