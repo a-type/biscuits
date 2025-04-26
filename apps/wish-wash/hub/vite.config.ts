@@ -22,6 +22,12 @@ export default defineConfig(({ mode }) => ({
 			'hoist-non-react-statics',
 		],
 	},
+	ssr: {
+		noExternal: ['@apollo/client'],
+		optimizeDeps: {
+			exclude: ['@a-type/ui'],
+		},
+	},
 	resolve: {
 		conditions:
 			mode === 'production' ?
