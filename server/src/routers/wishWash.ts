@@ -41,8 +41,8 @@ function itemImageUrls(item: WishlistSnapshot['items'][number]) {
 	return imageUrls;
 }
 
-wishWashRouter.get('/hub/:listSlug', async (ctx) => {
-	const listSlug = ctx.req.param('listSlug');
+wishWashRouter.get('/hub/:id', async (ctx) => {
+	const listSlug = ctx.req.param('id');
 	// parse slug out of fragment
 	const slug = listSlug.split('-').pop()!;
 
@@ -56,7 +56,7 @@ wishWashRouter.get('/hub/:listSlug', async (ctx) => {
 			'PublishedWishlist.publishedBy',
 			'PublishedWishlist.slug',
 		])
-		.where('slug', '=', slug)
+		.where('PublishedWishlist.id', '=', slug)
 		.executeTakeFirst();
 
 	if (!wishList) {

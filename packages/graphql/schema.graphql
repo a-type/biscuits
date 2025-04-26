@@ -455,6 +455,9 @@ type PublishedRecipe {
 type PublishedWishlist {
   id: ID!
   publishedAt: DateTime!
+
+  """The slug of the wishlist"""
+  slug: String
   url: String!
 }
 

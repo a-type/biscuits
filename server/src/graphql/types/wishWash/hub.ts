@@ -1,5 +1,4 @@
 import { BiscuitsError } from '@biscuits/error';
-import cuid from '@paralleldrive/cuid2';
 import { WISH_WASH_HUB_ORIGIN } from '../../../config/deployedContext.js';
 import { builder } from '../../builder.js';
 import { assignTypeName, hasTypeName } from '../../relay.js';
@@ -55,7 +54,6 @@ builder.mutationFields((t) => ({
 			const { id } = input;
 			const planId = ctx.session?.planId;
 			const userId = ctx.session?.userId;
-			const slug = cuid.createId();
 			if (!planId || !userId) {
 				throw new BiscuitsError(
 					BiscuitsError.Code.Forbidden,
@@ -84,7 +82,7 @@ builder.mutationFields((t) => ({
 				.values({
 					id,
 					planId,
-					slug,
+					slug: id,
 					publishedAt: new Date(),
 					publishedBy: userId,
 				})
@@ -136,8 +134,12 @@ builder.objectType('PublishedWishlist', {
 		}),
 		url: t.string({
 			resolve: (source, _, ctx) => {
-				return WISH_WASH_HUB_ORIGIN + `/${source.slug}`;
+				return WISH_WASH_HUB_ORIGIN + `/${source.id}`;
 			},
+		}),
+		slug: t.exposeString('slug', {
+			nullable: true,
+			description: 'The slug of the wishlist',
 		}),
 	}),
 });
