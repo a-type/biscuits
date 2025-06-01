@@ -39,7 +39,7 @@
 		"copy-to-clipboard": "^3.3.2",
 		"csstype": "^3.1.0",
 		"cuid": "^2.1.8",
-		"date-fns": "^2.29.3",
+		"date-fns": "catalog:",
 		"downshift": "9.0.6",
 		"fractional-indexing": "^3.0.1",
 		"jotai": "^1.13.0",

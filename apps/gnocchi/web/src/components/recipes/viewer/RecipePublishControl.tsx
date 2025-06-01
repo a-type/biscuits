@@ -18,7 +18,7 @@ import {
 import { useFeatureFlag, useHasServerAccess } from '@biscuits/client';
 import { graphql, useMutation, useQuery } from '@biscuits/graphql';
 import { Recipe } from '@gnocchi.biscuits/verdant';
-import { format } from 'date-fns/esm';
+import { format } from 'date-fns';
 import { useState } from 'react';
 
 export interface RecipePublishControlProps {

@@ -234,6 +234,7 @@ export function InstructionStepNodeView({
 						<Checkbox
 							checked={!isEditing && !!completed}
 							contentEditable={false}
+							checkedMode="faded"
 							onCheckedChange={(checked) => {
 								if (!id) {
 									return;

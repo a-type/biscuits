@@ -8,7 +8,7 @@ packages:
   - 'cdk'
 
 catalog:
-  '@a-type/ui': 2.0.3
+  '@a-type/ui': 2.1.12
   '@a-type/utils': 1.1.4
   '@originjs/vite-plugin-commonjs': 1.0.3
   '@react-spring/web': 9.7.5
@@ -55,3 +55,4 @@ catalog:
   '@tiptap/extension-placeholder': 2.11.5
   '@tiptap/extension-typography': 2.11.5
   '@tiptap/html': 2.11.5
+  date-fns: 4.1.0

@@ -14,8 +14,7 @@ import { categorizeOnboarding } from '@/onboarding/categorizeOnboarding.js';
 import { Person, hooks } from '@/stores/groceries/index.js';
 import {
 	Button,
-	CheckboxIndicator,
-	CheckboxRoot,
+	Checkbox,
 	CollapsibleContent,
 	CollapsibleRoot,
 	CollapsibleSimple,
@@ -511,8 +510,9 @@ function ItemCheckbox({
 	}, [isPurchased, particles]);
 
 	return (
-		<CheckboxRoot
+		<Checkbox
 			ref={ref}
+			checkedMode="faded"
 			checked={
 				isPurchased ? true : isPartiallyPurchased ? 'indeterminate' : false
 			}
@@ -524,13 +524,8 @@ function ItemCheckbox({
 			onPointerDown={stopPropagation}
 			onPointerUp={stopPropagation}
 			data-test="grocery-list-item-checkbox"
-			className={clsx(
-				'[grid-area:check] mt-2 mx-3 overflow-hidden',
-				isPurchased && 'checkbox-purchased',
-			)}
-		>
-			<CheckboxIndicator />
-		</CheckboxRoot>
+			className={clsx('[grid-area:check] mt-2 mx-3 overflow-hidden')}
+		/>
 	);
 }
 

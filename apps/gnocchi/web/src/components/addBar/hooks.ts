@@ -9,7 +9,7 @@ import {
 } from '@biscuits/client';
 import { depluralize } from '@gnocchi.biscuits/conversion';
 import { Food, Recipe } from '@gnocchi.biscuits/verdant';
-import { addDays, startOfDay } from 'date-fns/esm';
+import { addDays, startOfDay } from 'date-fns';
 import pluralize from 'pluralize';
 import {
 	ComponentProps,

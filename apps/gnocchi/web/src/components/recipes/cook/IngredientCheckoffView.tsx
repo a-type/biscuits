@@ -84,6 +84,7 @@ function IngredientCheckoffItem({
 				<Checkbox
 					checked={checked}
 					onCheckedChange={(checked) => onCheckedChange(checked === true)}
+					checkedMode="faded"
 				/>
 			)}
 			<RecipeIngredientViewer

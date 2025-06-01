@@ -27,7 +27,7 @@ import { Recipe } from '@gnocchi.biscuits/verdant';
 import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import { Link } from '@verdant-web/react-router';
 import classNames from 'classnames';
-import { format } from 'date-fns/esm';
+import { format } from 'date-fns';
 import { Suspense, useEffect, useRef } from 'react';
 import { useSnapshot } from 'valtio';
 import { RecipeNotFound } from '../RecipeNotFound.jsx';
@@ -202,8 +202,8 @@ function PreludeSection({ recipe }: { recipe: Recipe }) {
 		!prelude.get('content') ||
 		prelude
 			.get('content')
-			.getSnapshot()
-			.every((p: any) => !p.content);
+			?.getSnapshot()
+			?.every((p: any) => !p.content);
 
 	if (empty) {
 		return null;
