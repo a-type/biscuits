@@ -158,7 +158,7 @@ export function createTiptapExtensions(recipe?: Recipe, basicEditor = false) {
 
 		renderHTML({ HTMLAttributes }) {
 			return [
-				'h2',
+				'h3',
 				mergeAttributes(this.options.HTMLAttributes, HTMLAttributes),
 				0,
 			];
