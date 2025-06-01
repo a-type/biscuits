@@ -9,7 +9,7 @@ export interface TripPageProps {}
 export function TripPage({}: TripPageProps) {
 	const params = useParams();
 	const tripId = params.tripId;
-	useTitleBarColor('var(--color-purple-wash)');
+	useTitleBarColor('var(--color-primary-wash)');
 	return (
 		<PageContent fullHeight className="initial">
 			<Suspense>
