@@ -14,7 +14,7 @@ export function PostSummaryEditor({ post, readonly }: PostSummaryEditorProps) {
 		return (
 			<P
 				className={clsx(
-					'text-xs color-gray-dark whitespace-pre leading-relaxed',
+					'text-xs color-gray-dark whitespace-pre leading-relaxed w-full text-wrap',
 				)}
 			>
 				{summary || 'Add a post summary'}
