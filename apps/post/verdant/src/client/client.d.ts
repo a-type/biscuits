@@ -471,7 +471,7 @@ export type NotebookInit = {
   icon?: File | null;
   publishedTitle?: string | null;
   description?: NotebookDescriptionInit;
-  theme: NotebookThemeInit;
+  theme?: NotebookThemeInit;
 };
 
 export type NotebookDescriptionAttrsInit = {
@@ -520,7 +520,7 @@ export type NotebookThemeInit = {
     | "salt";
   fontStyle?: "serif" | "sans-serif";
   spacing?: "sm" | "md" | "lg";
-  corners: "rounded" | "square";
+  corners?: "rounded" | "square";
 };
 export type NotebookDestructured = {
   id: string;

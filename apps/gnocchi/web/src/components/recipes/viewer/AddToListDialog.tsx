@@ -291,7 +291,7 @@ class RecipeAddableIngredientsView {
 	#applyRecipeIngredients = (recipe: Recipe) => {
 		const recipeId = recipe.get('id');
 		const ingredients = recipe.get('ingredients');
-		const snaps = ingredients.getSnapshot() as AddableIngredient[];
+		const snaps = (ingredients.getSnapshot() || []) as AddableIngredient[];
 		const multiplier = this.#getRecipeMultiplier(recipeId);
 		for (const snap of snaps) {
 			snap.multiplier = multiplier;

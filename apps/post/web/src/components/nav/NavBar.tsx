@@ -10,7 +10,7 @@ export function NavBar({}: NavBarProps) {
 	useOnLocationChange((location) => setPath(location.pathname));
 
 	return (
-		<BaseNavBar>
+		<BaseNavBar className="md:w-200px">
 			<Box className="hidden md:flex self-end" p>
 				<h1 className="text-lg font-600 font-fancy m-0 ">Post</h1>
 			</Box>

@@ -102,9 +102,11 @@ const notebooks = schema.collection({
 					options: ['sm', 'md', 'lg'],
 				}),
 				corners: schema.fields.string({
+					default: 'rounded',
 					options: ['rounded', 'square'],
 				}),
 			},
+			default: {},
 		}),
 	},
 	indexes: {
@@ -115,7 +117,7 @@ const notebooks = schema.collection({
 });
 
 export default schema({
-	version: 7,
+	version: 8,
 	collections: {
 		posts,
 		notebooks,

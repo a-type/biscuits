@@ -18,6 +18,9 @@ export function CreateNotebookButton({
 				const notebook = await client.notebooks.put(
 					{
 						name: 'New Notebook',
+						theme: {
+							corners: 'rounded',
+						},
 					},
 					{
 						access: authorization.private,
