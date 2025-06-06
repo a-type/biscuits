@@ -26,7 +26,7 @@ import { DrawingPinFilledIcon } from '@radix-ui/react-icons';
 import { useNavigate } from '@verdant-web/react-router';
 import classNames from 'classnames';
 import cuid from 'cuid';
-import addWeeks from 'date-fns/addWeeks';
+import { addWeeks } from 'date-fns/addWeeks';
 import { memo, Suspense, useState } from 'react';
 import { RecipeMainImageViewer } from '../viewer/RecipeMainImageViewer.jsx';
 import { RecipePinToggle } from '../viewer/RecipePinToggle.jsx';
