@@ -21,6 +21,7 @@ import {
 	DropdownMenuTrigger,
 	Icon,
 } from '@a-type/ui';
+import { formatMinutes } from '@a-type/utils';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { DrawingPinFilledIcon } from '@radix-ui/react-icons';
 import { useNavigate } from '@verdant-web/react-router';
@@ -76,7 +77,7 @@ export const RecipeListItem = memo(function RecipeListItem({
 						{!!totalTimeMinutes && (
 							<Chip className="bg-wash">
 								<Icon name="clock" />
-								{totalTimeMinutes} min
+								{formatMinutes(totalTimeMinutes)}
 							</Chip>
 						)}
 						<Suspense>
