@@ -73,7 +73,7 @@ export const RecipeListItem = memo(function RecipeListItem({
 							gridStyle === 'card-small' ? 'text-xxs' : 'text-xs',
 						)}
 					>
-						{totalTimeMinutes && (
+						{!!totalTimeMinutes && (
 							<Chip className="bg-wash">
 								<Icon name="clock" />
 								{totalTimeMinutes} min
