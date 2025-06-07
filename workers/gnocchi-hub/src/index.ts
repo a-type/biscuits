@@ -11,10 +11,7 @@ export default {
 		url.hostname = apiHost;
 		url.pathname = `/gnocchi/hub${url.pathname}`;
 		return fetch(url, {
-			headers: {
-				...request.headers,
-				'x-forwarded-host': originalHost,
-			},
+			headers: request.headers,
 		});
 	},
 } satisfies ExportedHandler<Environment>;
