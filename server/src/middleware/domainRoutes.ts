@@ -18,8 +18,15 @@ export const domainRoutesMiddleware = createMiddleware<Env>(
 		const requestHost =
 			ctx.req.header('x-forwarded-host') || ctx.req.header('host');
 		if (!requestHost || requestHost === deployedDomain || wasProxied) {
+			// I think this is what's needed to properly configure
+			// the custom domain downstream...
+			if (!!ctx.req.header('x-forwarded-host')) {
+				ctx.set('customDomain', requestHost);
+			}
 			return await next();
 		} else {
+			// TODO: untangle this mess - is this path even still
+			// useful?
 			logger.debug(`Custom domain route: ${requestHost}`);
 			const route = domainRoutes.get(requestHost);
 			if (!route) {
