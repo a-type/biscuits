@@ -27,9 +27,13 @@ function addPostUrl<T extends { slug: string }>(
 	notebookId: string,
 	customDomain: string | undefined,
 ) {
+	const postUrl =
+		customDomain ?
+			`https://${customDomain}/${post.slug}`
+		:	`${POST_HUB_ORIGIN}/${notebookId}/${post.slug}`;
 	return {
 		...post,
-		url: `${customDomain || `${POST_HUB_ORIGIN}/${notebookId}`}/${post.slug}`,
+		url: postUrl,
 	};
 }
 
