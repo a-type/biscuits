@@ -11,17 +11,17 @@ import { useCallback } from 'react';
 // keeping this static to make the query reusable
 export const THREE_DAYS_FROM_NOW = addDays(endOfDay(new Date()), 3).getTime();
 export function useExpiresSoonItems({
-  skip,
-  key,
+	skip,
+	key,
 }: { skip?: boolean; key?: string } = {}) {
-  return hooks.useAllFoodsUnsuspended({
-    index: {
-      where: 'purchasedAndExpiresAt',
-      lt: THREE_DAYS_FROM_NOW,
-    },
-    skip,
-    key,
-  }).data;
+	return hooks.useAllFoodsUnsuspended({
+		index: {
+			where: 'purchasedAndExpiresAt',
+			lt: THREE_DAYS_FROM_NOW,
+		},
+		skip,
+		key: key ?? 'expiresSoonItems',
+	}).data;
 }
 
 // something weird is going on in this hook, or the
@@ -29,43 +29,43 @@ export function useExpiresSoonItems({
 // module scope to keep it alive.
 let newerExpireTime: number | undefined = undefined;
 export function useHasNewExpirations() {
-  const [latestSeen, setLatestSeen] = useLocalStorage(
-    'latestSeenExpiration',
-    Date.now(),
-  );
-  const expiresSoonItems = useExpiresSoonItems();
-  const latestExpiration = expiresSoonItems.reduce((latest, item) => {
-    const expiresAt = item.get('expiresAt')!;
-    if (expiresAt > latest) return expiresAt;
-    return latest;
-  }, 0);
-  newerExpireTime =
-    latestExpiration > latestSeen ? latestExpiration : undefined;
-  const onSeen = () => {
-    if (newerExpireTime) {
-      setLatestSeen(newerExpireTime);
-    }
-  };
-  return [!!newerExpireTime, onSeen] as const;
+	const [latestSeen, setLatestSeen] = useLocalStorage(
+		'latestSeenExpiration',
+		Date.now(),
+	);
+	const expiresSoonItems = useExpiresSoonItems();
+	const latestExpiration = expiresSoonItems.reduce((latest, item) => {
+		const expiresAt = item.get('expiresAt')!;
+		if (expiresAt > latest) return expiresAt;
+		return latest;
+	}, 0);
+	newerExpireTime =
+		latestExpiration > latestSeen ? latestExpiration : undefined;
+	const onSeen = () => {
+		if (newerExpireTime) {
+			setLatestSeen(newerExpireTime);
+		}
+	};
+	return [!!newerExpireTime, onSeen] as const;
 }
 
 export function useExpiresText(food: Food | null, abbreviate = false) {
-  hooks.useWatch(food);
-  const expiresAt = food?.get('expiresAt');
-  if (!expiresAt) return '';
-  const inThePast = expiresAt < Date.now();
-  const toNow = formatDistanceToNowStrict(expiresAt, { addSuffix: true });
-  return `${inThePast ? 'Expired' : 'Expires'} ${
-    abbreviate ? shortenTimeUnits(toNow) : toNow
-  }`;
+	hooks.useWatch(food);
+	const expiresAt = food?.get('expiresAt');
+	if (!expiresAt) return '';
+	const inThePast = expiresAt < Date.now();
+	const toNow = formatDistanceToNowStrict(expiresAt, { addSuffix: true });
+	return `${inThePast ? 'Expired' : 'Expires'} ${
+		abbreviate ? shortenTimeUnits(toNow) : toNow
+	}`;
 }
 
 export function usePurchasedText(food: Food | null, abbreviate = false) {
-  hooks.useWatch(food);
-  const purchasedAt = food?.get('lastPurchasedAt');
-  if (!purchasedAt) return '';
-  const toNow = formatDistanceToNowStrict(purchasedAt, { addSuffix: true });
-  return `Purchased ${abbreviate ? shortenTimeUnits(toNow) : toNow}`;
+	hooks.useWatch(food);
+	const purchasedAt = food?.get('lastPurchasedAt');
+	if (!purchasedAt) return '';
+	const toNow = formatDistanceToNowStrict(purchasedAt, { addSuffix: true });
+	return `Purchased ${abbreviate ? shortenTimeUnits(toNow) : toNow}`;
 }
 
 /**
@@ -73,34 +73,34 @@ export function usePurchasedText(food: Food | null, abbreviate = false) {
  * items or only purchased items. Defaults to purchased.
  */
 export function useFilter() {
-  const [params, setParams] = useSearchParams();
-  const filter: 'purchased' | 'all' | 'frozen' =
-    (params.get('filter') as any) ?? 'purchased';
-  const setFilter = (filter: 'purchased' | 'all' | 'frozen') => {
-    setParams((old) => {
-      old.set('filter', filter);
-      return old;
-    });
-  };
-  return [filter, setFilter] as const;
+	const [params, setParams] = useSearchParams();
+	const filter: 'purchased' | 'all' | 'frozen' =
+		(params.get('filter') as any) ?? 'purchased';
+	const setFilter = (filter: 'purchased' | 'all' | 'frozen') => {
+		setParams((old) => {
+			old.set('filter', filter);
+			return old;
+		});
+	};
+	return [filter, setFilter] as const;
 }
 
 export function useSearch() {
-  const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get('query') || '';
-  const setSearch = useCallback(
-    (search: string) => {
-      if (!search) {
-        navigate(`/pantry`);
-        return;
-      } else {
-        navigate(
-          `/pantry/search?query=${encodeURIComponent(search.toLowerCase())}`,
-        );
-      }
-    },
-    [setSearchParams, navigate],
-  );
-  return [query.toLowerCase(), setSearch] as const;
+	const navigate = useNavigate();
+	const [searchParams, setSearchParams] = useSearchParams();
+	const query = searchParams.get('query') || '';
+	const setSearch = useCallback(
+		(search: string) => {
+			if (!search) {
+				navigate(`/pantry`);
+				return;
+			} else {
+				navigate(
+					`/pantry/search?query=${encodeURIComponent(search.toLowerCase())}`,
+				);
+			}
+		},
+		[setSearchParams, navigate],
+	);
+	return [query.toLowerCase(), setSearch] as const;
 }
