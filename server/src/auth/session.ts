@@ -68,6 +68,7 @@ export const sessions = new SessionManager({
 			mode: 'production',
 			refreshPath: '/auth/refresh',
 			refreshTokenCookieName: 'bsc-refresh',
+			refreshTokenDurationMinutes: 60 * 24 * 90,
 		};
 	},
 	shortNames: {
