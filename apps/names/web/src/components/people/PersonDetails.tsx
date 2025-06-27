@@ -59,7 +59,9 @@ export function PersonDetails({ person, className }: PersonDetailsProps) {
 						</ErrorBoundary>
 					</Suspense>
 				)}
-				<Location person={person} />
+				<Suspense fallback={null}>
+					<Location person={person} />
+				</Suspense>
 				<Box gap="md">
 					<Icon name="tag" className="color-gray-dark mt-1.5" />
 					<Suspense>

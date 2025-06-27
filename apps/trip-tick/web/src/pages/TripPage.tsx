@@ -11,7 +11,7 @@ export function TripPage({}: TripPageProps) {
 	const tripId = params.tripId;
 	useTitleBarColor('var(--color-primary-wash)');
 	return (
-		<PageContent fullHeight className="initial">
+		<PageContent className="initial">
 			<Suspense>
 				<TripView tripId={tripId} />
 			</Suspense>

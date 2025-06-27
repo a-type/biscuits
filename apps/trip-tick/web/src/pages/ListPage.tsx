@@ -31,7 +31,7 @@ function ListPageEditor({ listId }: { listId: string }) {
 	}
 
 	return (
-		<>
+		<PageContent p="none">
 			<PageFixedArea className="!row justify-between w-full py-3">
 				<Button asChild color="ghost" size="icon">
 					<Link to="/">
@@ -42,7 +42,7 @@ function ListPageEditor({ listId }: { listId: string }) {
 				<ListMenu list={list} />
 			</PageFixedArea>
 			<ListEditor list={list} />
-		</>
+		</PageContent>
 	);
 }
 

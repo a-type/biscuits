@@ -14,7 +14,7 @@ export function SettingsPage({}: SettingsPageProps) {
 
 	return (
 		<PageRoot>
-			<PageContent fullHeight noPadding>
+			<PageContent p="none">
 				<div className="flex flex-col w-full mt-6 p-4 gap-4 items-start">
 					<Button asChild color="ghost">
 						<Link to="/">

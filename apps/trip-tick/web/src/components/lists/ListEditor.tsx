@@ -33,7 +33,7 @@ export function ListEditor({ list }: ListEditorProps) {
 	);
 
 	return (
-		<div className="flex flex-col gap-6">
+		<div className="flex flex-col gap-6 flex-1">
 			<div className="flex flex-row gap-1 items-center">
 				{editName ?
 					<LiveUpdateTextField
@@ -71,7 +71,7 @@ function ListItemsEditor({ list }: { list: List }) {
 	hooks.useWatch(items);
 
 	return (
-		<div className="flex flex-col gap-4">
+		<div className="flex flex-col gap-4 flex-1">
 			<H2>Items</H2>
 			<CardGrid>
 				{items.map((item) => (

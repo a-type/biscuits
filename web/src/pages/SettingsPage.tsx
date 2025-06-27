@@ -92,7 +92,7 @@ export function PlanPage({}: PlanPageProps) {
 
 	return (
 		<PageRoot>
-			<PageContent innerProps={{ className: 'flex flex-col gap-6' }}>
+			<PageContent gap="lg">
 				<PageFixedArea className="mb-10 flex flex-row items-center w-full justify-between">
 					<Button asChild color="primary">
 						<Link to={returnToAppUrl ?? '/'}>

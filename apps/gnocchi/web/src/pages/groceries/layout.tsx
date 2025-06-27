@@ -84,8 +84,8 @@ function ThemedPageContentInner({
 	return (
 		<Suspense fallback={children}>
 			<PageContent
-				fullHeight
-				noPadding
+				gap="none"
+				p="none"
 				className={classNames(className, theme)}
 				id="page-content"
 			>

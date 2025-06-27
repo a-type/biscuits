@@ -6,7 +6,7 @@ export interface PreviewRequestPageProps {}
 export function PreviewRequestPage({}: PreviewRequestPageProps) {
 	return (
 		<PageRoot>
-			<PageContent noPadding fullHeight className="bg-primary-wash">
+			<PageContent p="none" className="bg-primary-wash">
 				<WishlistOnboarding
 					onAnswers={() => {
 						window.location.reload();

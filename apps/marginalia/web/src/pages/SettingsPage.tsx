@@ -8,7 +8,7 @@ export function SettingsPage({}: SettingsPageProps) {
 	usePollForUpdates();
 
 	return (
-		<PageContent fullHeight noPadding>
+		<PageContent p="none">
 			<div className="flex flex-col w-full mt-6 p-4 gap-4 items-start">
 				<H1>Settings</H1>
 				<UpdatePrompt />

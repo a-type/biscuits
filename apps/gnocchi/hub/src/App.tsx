@@ -22,10 +22,6 @@ import './henrietta.css';
 import appIcon from './icon.png';
 import { HubRecipeData } from './types.js';
 
-const innerProps = {
-	className: 'max-w-600px',
-};
-
 export function App({
 	recipe: data,
 	url,
@@ -51,7 +47,7 @@ export function App({
 	return (
 		<PageRoot className="theme-lemon">
 			<IconSpritesheet />
-			<PageContent innerProps={innerProps}>
+			<PageContent className="max-w-600px">
 				<article
 					itemScope
 					itemType="https://schema.org/Recipe"

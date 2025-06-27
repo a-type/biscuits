@@ -47,7 +47,7 @@ export function NavBar({}: NavBarProps) {
 	return (
 		<PageNav>
 			<Suspense>
-				<div className="hidden md:(flex flex-row gap-2 items-center justify-center px-2 py-2 mt-3)">
+				<div className="hidden md:(flex flex-row gap-2 items-center justify-center px-2 py-2)">
 					<img src="/android-chrome-192x192.png" className="w-30px h-30px" />
 					<h1 className="text-md [font-family:'Henrietta','Noto_Serif',serif] font-semibold">
 						Gnocchi
