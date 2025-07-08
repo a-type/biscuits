@@ -8,9 +8,9 @@ packages:
   - 'cdk'
 
 catalog:
-  '@a-type/ui': 2.3.2
-  '@a-type/utils': 1.1.4
-  '@a-type/auth-fetch': 2.0.2
+  '@a-type/ui': 2.3.7
+  '@a-type/utils': 1.1.5
+  '@a-type/auth-fetch': 2.1.2
   '@a-type/auth-ui': 1.0.18
   '@a-type/auth': 1.3.13
   '@originjs/vite-plugin-commonjs': 1.0.3
