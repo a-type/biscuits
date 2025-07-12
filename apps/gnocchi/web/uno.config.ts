@@ -7,6 +7,7 @@ export default defineConfig({
 	presets: [
 		preset({
 			saturation: 40,
+			// hardShadows: true,
 		}),
 	],
 	transformers: [variantGroup()],

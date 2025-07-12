@@ -8,7 +8,7 @@ packages:
   - 'cdk'
 
 catalog:
-  '@a-type/ui': 2.3.7
+  '@a-type/ui': 2.6.2
   '@a-type/utils': 1.1.5
   '@a-type/auth-fetch': 2.1.2
   '@a-type/auth-ui': 1.0.18

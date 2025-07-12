@@ -48,18 +48,18 @@ export function FoodDetailDialog({}: FoodDetailDialogProps) {
 		);
 	};
 	return (
-		<Dialog open={open} onOpenChange={onClose}>
-			<DialogContent onOpenAutoFocus={preventDefault}>
-				<Suspense>
+		<Suspense>
+			<Dialog open={open} onOpenChange={onClose}>
+				<DialogContent onOpenAutoFocus={preventDefault}>
 					{foodName && <FoodDetailView foodName={foodName} open={open} />}
-				</Suspense>
-				<DialogActions>
-					<DialogClose asChild>
-						<Button>Close</Button>
-					</DialogClose>
-				</DialogActions>
-			</DialogContent>
-		</Dialog>
+					<DialogActions>
+						<DialogClose asChild>
+							<Button>Close</Button>
+						</DialogClose>
+					</DialogActions>
+				</DialogContent>
+			</Dialog>
+		</Suspense>
 	);
 }
 
