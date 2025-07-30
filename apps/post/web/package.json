@@ -43,5 +43,8 @@
 		"workbox-routing": "catalog:",
 		"workbox-strategies": "catalog:",
 		"workbox-window": "catalog:"
+	},
+	"devDependencies": {
+		"@biscuits/uno-config": "workspace:*"
 	}
 }

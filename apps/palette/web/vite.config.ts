@@ -1,9 +1,9 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react-swc';
-import { fileURLToPath } from 'url';
-import { VitePWA } from 'vite-plugin-pwa';
-import UnoCSS from 'unocss/vite';
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
+import react from '@vitejs/plugin-react-swc';
+import UnoCSS from 'unocss/vite';
+import { fileURLToPath } from 'url';
+import { defineConfig } from 'vite';
+import { VitePWA } from 'vite-plugin-pwa';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => ({
@@ -44,7 +44,7 @@ export default defineConfig(({ command, mode }) => ({
 		viteCommonjs(),
 	],
 	optimizeDeps: {
-		exclude: ['@a-type/ui', '@biscuits/client'],
+		exclude: ['@biscuits/client'],
 		include: ['react/jsx-runtime', 'react', 'react-dom', 'react-dom/client'],
 	},
 	resolve: {

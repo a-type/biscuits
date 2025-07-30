@@ -36,5 +36,8 @@
 		"workbox-strategies": "catalog:",
 		"workbox-window": "catalog:",
 		"@originjs/vite-plugin-commonjs": "catalog:"
+	},
+	"devDependencies": {
+		"@biscuits/uno-config": "workspace:*"
 	}
 }

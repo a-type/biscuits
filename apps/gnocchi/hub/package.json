@@ -42,6 +42,7 @@
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "^1.0.3",
 		"concurrently": "^7.5.0",
-		"dotenv": "^16.0.1"
+		"dotenv": "^16.0.1",
+		"@biscuits/uno-config": "workspace:*"
 	}
 }

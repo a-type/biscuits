@@ -18,7 +18,6 @@ export default defineConfig(({ mode }) => ({
 		viteCommonjs(),
 	],
 	optimizeDeps: {
-		exclude: ['@a-type/ui'],
 		include: ['react/jsx-runtime', 'react', 'react-dom', 'react-dom/client'],
 	},
 	resolve: {

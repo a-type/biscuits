@@ -43,6 +43,7 @@
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "1.0.3",
-		"vite-plugin-circular-dependency": "^0.2.1"
+		"vite-plugin-circular-dependency": "^0.2.1",
+		"@biscuits/uno-config": "workspace:*"
 	}
 }

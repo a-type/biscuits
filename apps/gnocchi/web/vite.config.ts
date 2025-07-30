@@ -95,7 +95,7 @@ export default defineConfig(({ command, mode }) => ({
 		viteCommonjs(),
 	],
 	optimizeDeps: {
-		exclude: ['@a-type/ui', '@biscuits/client'],
+		exclude: ['@biscuits/client'],
 		include: [
 			'react/jsx-runtime',
 			'react',

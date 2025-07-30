@@ -12,7 +12,6 @@ export default defineConfig(({ mode }) => ({
 			'https://lists.wish-wash.biscuits.club/'
 		:	'http://localhost:6124/wish-wash/hub/',
 	optimizeDeps: {
-		exclude: ['@a-type/ui'],
 		include: [
 			'react/jsx-runtime',
 			'react',
@@ -24,9 +23,6 @@ export default defineConfig(({ mode }) => ({
 	},
 	ssr: {
 		noExternal: ['@apollo/client'],
-		optimizeDeps: {
-			exclude: ['@a-type/ui'],
-		},
 	},
 	resolve: {
 		conditions:

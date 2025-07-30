@@ -1,0 +1,16 @@
+{
+	"name": "@biscuits/uno-config",
+	"version": "1.0.0",
+	"private": true,
+	"exports": {
+		".": {
+			"import": "./index.mjs",
+			"types": "./index.d.ts"
+		}
+	},
+	"devDependencies": {
+		"@a-type/ui": "catalog:",
+		"unocss": "catalog:",
+		"@unocss/transformer-variant-group": "catalog:"
+	}
+}
