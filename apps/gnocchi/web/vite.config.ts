@@ -79,6 +79,10 @@ export default defineConfig(({ command, mode }) => ({
 				'og-image.png',
 			],
 
+			injectManifest: {
+				maximumFileSizeToCacheInBytes: 3 * 1024 * 1024, // 3 MiB
+			},
+
 			workbox: {
 				sourcemap: true,
 			},
