@@ -39,13 +39,13 @@ hard_limit = 10000
 soft_limit = 10000
 
 [[http_service.checks]]
-interval = "10s"
-grace_period = "5s"
+interval = "20s"
+grace_period = "10s"
 method = "get"
 path = "/"
 protocol = "http"
 restart_limit = 0
-timeout = "2s"
+timeout = "10s"
 tls_skip_verify = false
 
 [[mounts]]
