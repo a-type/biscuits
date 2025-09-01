@@ -3,6 +3,7 @@ import { RecipeTagMenuWrapper } from '@/components/recipes/tags/RecipeTagMenuWra
 import { hooks } from '@/stores/groceries/index.js';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import classNames from 'classnames';
+import { Suspense } from 'react';
 
 export interface RecipeTagsViewerProps {
 	recipe: Recipe;
@@ -25,7 +26,9 @@ export function RecipeTagsViewer({
 	const tagsToDisplay = limit ? tags.getSnapshot().slice(0, limit) : tags;
 
 	const content = tagsToDisplay.map((tag) => (
-		<RecipeTagViewer key={tag} tag={tag} />
+		<Suspense key={tag}>
+			<RecipeTagViewer tag={tag} />
+		</Suspense>
 	));
 
 	if (unwrapped) {

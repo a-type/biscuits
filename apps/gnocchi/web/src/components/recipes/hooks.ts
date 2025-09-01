@@ -15,8 +15,19 @@ export function useRecipeFromSlugUrl(url: string) {
 			where: 'slug',
 			equals: slug,
 		},
+		key: `recipeBySlug:${slug}`,
 	});
 	return recipe;
+}
+
+export function useKeepAliveSlugQuery(slug: string) {
+	const client = hooks.useClient();
+	useEffect(() => {
+		client.queries.keepAlive(`recipeBySlug:${slug}`);
+		return () => {
+			client.queries.dropKeepAlive(`recipeBySlug:${slug}`);
+		};
+	}, [slug, client]);
 }
 
 /**

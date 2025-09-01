@@ -5,12 +5,17 @@ import { ConfirmedButton } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { Link } from '@verdant-web/react-router';
+import { useKeepAliveSlugQuery } from '../hooks.js';
 
 export function RecipeNowPlayingLink({ recipe }: { recipe: Recipe }) {
-	const { title, instructions, session } = hooks.useWatch(recipe);
+	const { title, instructions, session, slug } = hooks.useWatch(recipe);
+
+	// prewarm / keep alive slug query so that navigation
+	// to recipe is faster.
+	useKeepAliveSlugQuery(slug);
 
 	const rawInstructions =
-		instructions.getSnapshot() as RecipeInstructionsDocument | null;
+		instructions.getSnapshot() as unknown as RecipeInstructionsDocument | null;
 	const stepsLength =
 		rawInstructions?.content.filter((c) => c.type === 'step').length ?? 0;
 
@@ -62,7 +67,7 @@ function PieProgress({ value }: { value: number }) {
 				cy="50%"
 				strokeDasharray="100"
 				strokeDashoffset="100"
-				className="fill-gray2"
+				className="fill-gray-light"
 			/>
 			<circle
 				r="50%"

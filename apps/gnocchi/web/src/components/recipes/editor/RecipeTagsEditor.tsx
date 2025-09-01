@@ -22,10 +22,12 @@ export function RecipeTagsEditor({ recipe, className }: RecipeTagsEditorProps) {
 		<div className={classNames('flex flex-wrap gap-1 items-center')}>
 			{tags?.map((tag) => (
 				<Suspense key={tag}>
-					<TagDisplay key={tag} tag={tag} onRemove={removeTag} />
+					<TagDisplay tag={tag} onRemove={removeTag} />
 				</Suspense>
 			))}
-			<RecipeEditTags recipe={recipe} className="text-xs" />
+			<Suspense>
+				<RecipeEditTags recipe={recipe} className="text-xs" />
+			</Suspense>
 		</div>
 	);
 }
