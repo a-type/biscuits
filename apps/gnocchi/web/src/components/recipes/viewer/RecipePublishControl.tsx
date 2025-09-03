@@ -1,4 +1,5 @@
 import { Link, TextLink } from '@/components/nav/Link.jsx';
+import { withSuspense } from '@/hocs/withSuspense.jsx';
 import { hooks } from '@/stores/groceries/index.js';
 import {
 	Box,
@@ -50,59 +51,64 @@ const unpublishMutation = graphql(`
 	}
 `);
 
-export function RecipePublishControl({ recipe }: RecipePublishControlProps) {
-	const enabled = useFeatureFlag('hub');
-	const { data, loading, refetch } = useQuery(publishedQuery, {
-		variables: { recipeId: recipe.get('id') },
-	});
+export const RecipePublishControl = withSuspense(
+	function RecipePublishControl({ recipe }: RecipePublishControlProps) {
+		const enabled = useFeatureFlag('hub');
+		const { data, loading, refetch } = useQuery(publishedQuery, {
+			variables: { recipeId: recipe.get('id') },
+		});
 
-	const { url } = hooks.useWatch(recipe);
-	const notAllowed = !!url;
+		const { url } = hooks.useWatch(recipe);
+		const notAllowed = !!url;
 
-	const canPublish = useHasServerAccess();
+		const canPublish = useHasServerAccess();
 
-	if (!canPublish || !enabled) return null;
+		if (!canPublish || !enabled) return null;
 
-	if (loading || !data) {
-		return (
-			<Button size="small" disabled>
-				Publish
-			</Button>
-		);
-	}
-
-	if (notAllowed) {
-		return (
-			<Tooltip content="You can't publish web recipes, only your own.">
+		if (loading || !data) {
+			return (
 				<Button size="small" disabled>
 					Publish
 				</Button>
-			</Tooltip>
+			);
+		}
+
+		if (notAllowed) {
+			return (
+				<Tooltip content="You can't publish web recipes, only your own.">
+					<Button size="small" disabled>
+						Publish
+					</Button>
+				</Tooltip>
+			);
+		}
+
+		const publishedRecipe = data.publishedRecipe;
+		const isPublished = !!publishedRecipe;
+
+		return (
+			<Dialog>
+				<DialogTrigger asChild>
+					<Button size="small" color={isPublished ? 'accent' : 'default'}>
+						{isPublished ? 'Published' : 'Publish'}
+					</Button>
+				</DialogTrigger>
+				{publishedRecipe ? (
+					<PublishedContent
+						recipe={recipe}
+						publishedRecipe={publishedRecipe}
+						onChange={refetch}
+					/>
+				) : (
+					<UnpublishedContent recipe={recipe} onChange={refetch} />
+				)}
+			</Dialog>
 		);
-	}
-
-	const publishedRecipe = data.publishedRecipe;
-	const isPublished = !!publishedRecipe;
-
-	return (
-		<Dialog>
-			<DialogTrigger asChild>
-				<Button size="small" color={isPublished ? 'accent' : 'default'}>
-					{isPublished ? 'Published' : 'Publish'}
-				</Button>
-			</DialogTrigger>
-			{publishedRecipe ? (
-				<PublishedContent
-					recipe={recipe}
-					publishedRecipe={publishedRecipe}
-					onChange={refetch}
-				/>
-			) : (
-				<UnpublishedContent recipe={recipe} onChange={refetch} />
-			)}
-		</Dialog>
-	);
-}
+	},
+	<Button size="small" disabled>
+		Publish
+	</Button>,
+);
 
 function PublishedContent({
 	recipe,

@@ -2,7 +2,7 @@
 	"name": "@biscuits/server",
 	"scripts": {
 		"dev:server": "env-cmd tsx watch --clear-screen=false --conditions=development ./src/server.ts",
-		"dev:stripe": "stripe listen -f http://localhost:6124/stripe/webhook",
+		"stripe": "stripe listen -f http://localhost:6124/stripe/webhook",
 		"dev": "run-p dev:*",
 		"start": "node --conditions=production ./dist/server.js",
 		"start:local": "env-cmd pnpm start",
