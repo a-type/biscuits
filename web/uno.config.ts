@@ -13,7 +13,7 @@ export default defineConfig({
 					hueRotate: -8,
 				},
 				accent: {
-					hue: 180,
+					hue: 170,
 					hueRotate: 2,
 				},
 			},

@@ -4,7 +4,7 @@ export interface PawsProps {}
 
 export function Paws({}: PawsProps) {
 	return (
-		<div className="absolute right-0 bottom-0 w-full max-w-[300px] aspect-ratio-9/16 overflow-hidden">
+		<div className="absolute right-0 bottom-0 w-full max-w-[50%] md:max-w-[300px] aspect-ratio-9/16 overflow-hidden">
 			<div className="absolute left-0 bottom-0 w-full h-full drift" aria-hidden>
 				<img
 					src="/animations/paws1-v.001.png"

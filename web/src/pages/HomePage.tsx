@@ -12,8 +12,20 @@ const Paws = lazy(() => import('@/components/paws/Paws.jsx'));
 
 export default function HomePage() {
 	return (
-		<>
-			<Box d="col" items="center" p gap="xl" className="w-full flex-1 bg-white">
+		<Box
+			full
+			col
+			gap
+			p={{ default: 'xs', lg: 'sm' }}
+			className="bg-primary-wash bg-darken-2"
+		>
+			<Box
+				d="col"
+				items="center"
+				p
+				gap="xl"
+				className="w-full flex-1 bg-white rounded-lg shadow-sm"
+			>
 				<Box className="w-full z-1" d="col" items="center">
 					<PageFixedArea className="bg-transparent flex flex-col sm:flex-row justify-stretch sm:justify-between sm:items-center py-2 md:max-w-800px">
 						<Box gap>
@@ -50,7 +62,7 @@ export default function HomePage() {
 						>
 							Made for you
 							<br />
-							and yours
+							&amp; yours
 						</div>
 						<Box
 							d="col"
@@ -74,12 +86,14 @@ export default function HomePage() {
 					</Box>
 					<Box
 						p
-						surface="accent"
-						className="max-w-100vw md:max-w-800px"
+						surface="primary"
+						className="max-w-90vw lg:max-w-800px theme"
+						style={{ '--dyn-primary-source': 170 } as any}
 						d="col"
 						gap
 						items="start"
 						container="reset"
+						border
 					>
 						<H2 className="font-fancy font-semibold">Family Plan</H2>
 						<P className="italic font-fancy font-300">
@@ -105,11 +119,18 @@ export default function HomePage() {
 							share all your data with up to 3 other people. Plus, you get
 							access to special features in every app.
 						</P>
-						<Button asChild color="accent" className="ml-auto">
-							<Link to="/join">Join the Family Plan</Link>
+						<Button asChild color="primary" className="ml-auto">
+							<Link to="/join">
+								Learn more <Icon name="arrowRight" />
+							</Link>
 						</Button>
 					</Box>
-					<Box className="max-w-100vw md:max-w-800px" d="col" gap items="start">
+					<Box
+						className="max-w-100vw md:max-w-800px pb-xl"
+						d="col"
+						gap
+						items="start"
+					>
 						<H2 className="font-fancy font-semibold">
 							What is <em className="font-fancy font-light">local-first?</em>
 						</H2>
@@ -134,13 +155,13 @@ export default function HomePage() {
 						</Link>
 					</Box>
 				</Box>
-				<Box className="w-full z-1 mt-300px" d="col" items="center">
-					<Footer className="max-w-100vw md:max-w-800px" />
-				</Box>
+			</Box>
+			<Box className="w-full z-1 mt-xl" p="sm" d="col" items="center">
+				<Footer className="max-w-100vw md:max-w-800px" />
 			</Box>
 			<Suspense>
 				<Paws />
 			</Suspense>
-		</>
+		</Box>
 	);
 }
