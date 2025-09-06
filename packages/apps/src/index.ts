@@ -199,6 +199,7 @@ export const apps = [
 		prerelease: true,
 		theme: 'blueberry',
 		domainRoutes: (notebookId: string) => `/post/hub/${notebookId}`,
+		demoVideoSrc: '',
 	} as AppManifest<'post'>,
 ] as const;
 
