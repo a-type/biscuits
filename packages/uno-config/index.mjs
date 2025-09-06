@@ -2,6 +2,10 @@ import atype from '@a-type/ui/uno-preset';
 import variantGroup from '@unocss/transformer-variant-group';
 import { defineConfig } from 'unocss';
 
+export const contentConfig = {
+	filesystem: ['./node_modules/@a-type/ui/dist/esm/**'],
+};
+
 export default defineConfig({
 	presets: [atype({ saturation: 40 })],
 	transformers: [variantGroup()],
@@ -16,12 +20,12 @@ export default defineConfig({
 			#root {
 				flex: 1;
 			}
+
+			.hidden {
+				display: none;
+			}
 			`,
 		},
 	],
-	content: {
-		pipeline: {
-			include: [/\.(tsx|html)($|\?)/, '**/@a-type_ui.js*'],
-		},
-	},
+	content: contentConfig,
 });

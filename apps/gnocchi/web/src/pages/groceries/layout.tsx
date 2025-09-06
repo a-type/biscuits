@@ -86,7 +86,7 @@ function ThemedPageContentInner({
 			<PageContent
 				gap="none"
 				p="none"
-				className={classNames(className, theme)}
+				className={classNames('md:mt-lg', className, theme)}
 				id="page-content"
 			>
 				{children}

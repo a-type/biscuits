@@ -15,6 +15,7 @@
 		"@biscuits/client": "workspace:*",
 		"@biscuits/error": "workspace:*",
 		"@biscuits/graphql": "workspace:*",
+		"@biscuits/uno-config": "workspace:*",
 		"@react-spring/three": "9.7.5",
 		"@react-spring/web": "^9.7.5",
 		"@react-three/drei": "9.121.4",

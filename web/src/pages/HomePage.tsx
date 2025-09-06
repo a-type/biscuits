@@ -20,11 +20,11 @@ export default function HomePage() {
 							<img
 								src="/icon.png"
 								alt="The Biscuits logo: an outlined 'B' with two cat paws overlaid"
-								className="rounded-xs w-8 h-8"
+								className="rounded-xs w-8 h-8 border-solid border-1 border-primary-dark"
 							/>
 							<h1
 								className={classNames(
-									'text-md m-0 font-semibold color-primary-ink',
+									'text-md m-0 font-semibold color-primary-ink color-darken-1',
 									'bg-white p-2 rounded-lg leading-none',
 								)}
 							>

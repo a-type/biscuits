@@ -2,12 +2,14 @@ import { Link } from '@/components/nav/Link.jsx';
 import { saveHubRecipeOnboarding } from '@/onboarding/saveHubRecipeOnboarding.js';
 import { hooks } from '@/stores/groceries/index.js';
 import {
+	Box,
 	NavBarItem,
 	NavBarItemIcon,
 	NavBarItemIconWrapper,
 	NavBarItemText,
 	NavBarRoot,
 	PageNav,
+	clsx,
 	withClassName,
 } from '@a-type/ui';
 import {
@@ -16,7 +18,6 @@ import {
 	OnboardingTooltip,
 } from '@biscuits/client';
 import { useOnLocationChange } from '@verdant-web/react-router';
-import classNames from 'classnames';
 import {
 	ReactNode,
 	Suspense,
@@ -47,12 +48,10 @@ export function NavBar({}: NavBarProps) {
 	return (
 		<PageNav>
 			<Suspense>
-				<div className="hidden md:(flex flex-row gap-2 items-center justify-center px-2 py-2)">
+				<Box gap="sm" layout="center center" p="sm" className="hidden lg:flex">
 					<img src="/android-chrome-192x192.png" className="w-30px h-30px" />
-					<h1 className="text-md [font-family:'Henrietta','Noto_Serif',serif] font-semibold">
-						Gnocchi
-					</h1>
-				</div>
+					<h1 className="text-md font-fancy font-semibold">Gnocchi</h1>
+				</Box>
 				<NavBarRoot>
 					<GroceriesNavBarLink active={matchGroceries} />
 					<PantryNavBarLink active={matchPurchased} />
@@ -85,8 +84,8 @@ const NavBarLink = memo(
 			<NavBarItem asChild>
 				<Link
 					to={to}
-					className={classNames({
-						active: active,
+					className={clsx({
+						active,
 					})}
 					data-active={active}
 					onMouseOver={onHover}
@@ -109,7 +108,7 @@ function RecipesNavBarLink({ active }: { active: boolean }) {
 	const preload = useCallback(() => {
 		// fire off the query to preload it
 		client.recipes.findAll();
-	}, []);
+	}, [client]);
 
 	const { peer: someoneViewingRecipe } = useRecipePresenceNotification();
 

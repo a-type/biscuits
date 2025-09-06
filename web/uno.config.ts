@@ -1,4 +1,5 @@
 import atype from '@a-type/ui/uno-preset';
+import { contentConfig } from '@biscuits/uno-config';
 import variantGroup from '@unocss/transformer-variant-group';
 import { defineConfig, extractorDefault } from 'unocss';
 
@@ -31,11 +32,7 @@ export default defineConfig({
       `,
 		},
 	],
-	content: {
-		pipeline: {
-			include: [/\.(tsx|tsx|html)($|\?)/, '**/@a-type_ui.js*'],
-		},
-	},
+	content: contentConfig,
 	extractors: [
 		{
 			name: 'log',
