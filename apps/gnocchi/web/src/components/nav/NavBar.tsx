@@ -48,7 +48,7 @@ export function NavBar({}: NavBarProps) {
 	return (
 		<PageNav>
 			<Suspense>
-				<Box gap="sm" layout="center center" p="sm" className="hidden lg:flex">
+				<Box gap="sm" layout="center center" p="sm" className="lt-md:hidden">
 					<img src="/android-chrome-192x192.png" className="w-30px h-30px" />
 					<h1 className="text-md font-fancy font-semibold">Gnocchi</h1>
 				</Box>
