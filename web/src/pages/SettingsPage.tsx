@@ -92,7 +92,7 @@ export function PlanPage({}: PlanPageProps) {
 
 	return (
 		<PageRoot>
-			<PageContent gap="lg">
+			<PageContent gap="lg" className="self-stretch">
 				<PageFixedArea className="mb-10 flex flex-row items-center w-full justify-between">
 					<Button asChild color="primary">
 						<Link to={returnToAppUrl ?? '/'}>

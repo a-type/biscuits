@@ -1,3 +1,4 @@
+import '@a-type/ui/main.css';
 import '@biscuits/client/henrietta.css';
 import 'uno.css';
 import './main.css';

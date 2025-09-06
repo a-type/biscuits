@@ -22,7 +22,7 @@ const ItemText = withClassName('span', 'block relative');
 
 export const Description = withClassName(
 	'p',
-	'font-light text-xl my-6 color-white',
+	'font-light text-xl my-6 color-black',
 );
 
 export const Section = forwardRef<
@@ -107,7 +107,7 @@ export const FeatureSection = ({
 };
 
 export const Footer = ({ className }: { className?: string }) => (
-	<Content className={clsx('important:bg-primary-light pb-20dvh', className)}>
+	<Content className={clsx('important:bg-primary pb-20dvh', className)}>
 		<div className="mt-6 gap-4 flex flex-col">
 			<Link to="/privacy-policy" newTab>
 				Read the privacy policy
@@ -131,22 +131,21 @@ export const CallToAction = ({
 }) => (
 	<div
 		className={clsx(
-			'flex flex-col fixed bottom-0 bg-primary-light border-0 border-t border-solid border-t-primary-dark m-0 w-full p-3 items-center gap-3 z-2 transition-colors',
+			'flex flex-col fixed bottom-0 bg-primary-wash border-0 border-t border-solid border-t-primary-dark m-0 w-full p-3 items-center gap-3 z-2 transition-colors',
 			className,
 		)}
 	>
 		<div className="flex flex-col sm:flex-row-reverse justify-between md:justify-center items-center w-full gap-xs sm:gap-lg">
-			<Button asChild>
+			<Button asChild color="primary">
 				<Link
 					to={appsById[appId].url}
 					data-test="get-started"
 					className="justify-center self-center"
-					color="default"
 				>
 					Get Started
 				</Link>
 			</Button>
-			<Button asChild color="ghost" className="opacity-70 hover:opacity-100">
+			<Button asChild color="default">
 				<Link to="/">
 					<Icon name="arrowLeft" />
 					More Biscuits apps

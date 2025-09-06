@@ -13,6 +13,7 @@ const meQuery = graphql(`
 		me {
 			id
 			name
+			imageUrl
 			plan {
 				id
 				hasAppAccess(appId: $appId)

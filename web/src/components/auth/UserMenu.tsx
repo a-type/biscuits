@@ -1,4 +1,4 @@
-import { Button, clsx, Icon } from '@a-type/ui';
+import { Avatar, Box, Button, clsx, Icon } from '@a-type/ui';
 import { useMe } from '@biscuits/client';
 import { Link } from '@verdant-web/react-router';
 
@@ -12,7 +12,7 @@ export function UserMenu({ className }: UserMenuProps) {
 	if (!data?.me) {
 		return (
 			<Link to="/login">
-				<Button color="primary" className={className}>
+				<Button size="small" color="primary" className={className}>
 					Join the club
 				</Button>
 			</Link>
@@ -22,13 +22,17 @@ export function UserMenu({ className }: UserMenuProps) {
 	const name = data.me.name;
 
 	return (
-		<Button asChild color="ghost" className={clsx(className, 'gap-4')}>
-			<Link to="/settings">
-				<span>Hi, {name}!</span>
-				<div className="rounded-full bg-white border-default flex items-center justify-center w-32px h-32px">
+		<Box gap="lg" items="center" justify="between" className={clsx(className)}>
+			<Box gap items="center">
+				<Avatar imageSrc={data.me.imageUrl} name={name} />
+				<div>Hi, {name}!</div>
+			</Box>
+			<Button asChild color="default">
+				<Link to="/settings">
+					Your plan
 					<Icon name="gear" />
-				</div>
-			</Link>
-		</Button>
+				</Link>
+			</Button>
+		</Box>
 	);
 }

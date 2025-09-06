@@ -9,7 +9,7 @@ export function Footer({ className }: FooterProps) {
 	return (
 		<div
 			className={classNames(
-				'flex flex-row gap-3 justify-between items-start text-xs pt-8 pb-4 opacity-50 hover:opacity-100 w-full',
+				'flex flex-row gap-3 justify-between items-end text-xs pt-8 pb-4 opacity-50 hover:opacity-100 w-full',
 				className,
 			)}
 		>

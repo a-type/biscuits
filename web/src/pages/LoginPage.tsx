@@ -64,8 +64,17 @@ export default function LoginPage() {
 
 	return (
 		<div className="flex flex-col items-center justify-center h-screen flex-1 bg-primary-wash">
-			<Box d="col" gap>
-				<Box surface p d="col" items="center" border className="relative z-1">
+			<Box d="col" gap grow layout="center center">
+				<Box
+					surface
+					elevated="sm"
+					p
+					container="reset"
+					d="col"
+					items="center"
+					border
+					className="relative z-1"
+				>
 					<h1 className="font-fancy mb-0">{title}</h1>
 					{message && (
 						<P className="px-3 py-1 rounded-full bg-accent-light">{message}</P>
@@ -91,7 +100,7 @@ export default function LoginPage() {
 						</TabsList>
 						<TabsContent
 							value="signup"
-							className="flex flex-col gap-3 items-stretch"
+							className="flex flex-col gap-md items-stretch"
 						>
 							<label
 								className={classNames(
@@ -147,7 +156,7 @@ export default function LoginPage() {
 						</TabsContent>
 						<TabsContent
 							value="signin"
-							className="flex flex-col gap-3 items-stretch"
+							className="flex flex-col gap-md items-stretch"
 						>
 							<OAuthSigninButton
 								endpoint={`${CONFIG.API_ORIGIN}/auth/provider/google/login`}
@@ -168,8 +177,8 @@ export default function LoginPage() {
 						</TabsContent>
 					</TabsRoot>
 				</Box>
-				<Footer className="px-12" />
 			</Box>
+			<Footer className="px-12" />
 		</div>
 	);
 }
@@ -177,9 +186,9 @@ export default function LoginPage() {
 function Or() {
 	return (
 		<div className="flex flex-row gap-2 items-center">
-			<div className="flex-1 border-t-solid border-t border-gray"></div>
-			<p className="color-gray">or</p>
-			<div className="flex-1 border-t-solid border-t border-gray"></div>
+			<div className="flex-1 border-t-solid border-t border-gray-dark"></div>
+			<div className="color-gray-dark">or</div>
+			<div className="flex-1 border-t-solid border-t border-gray-dark"></div>
 		</div>
 	);
 }

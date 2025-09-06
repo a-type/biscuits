@@ -1,5 +1,6 @@
 import { Footer } from '@/components/help/Footer.jsx';
 import {
+	Box,
 	Button,
 	Divider,
 	Icon,
@@ -33,7 +34,7 @@ export function JoinPage({}: JoinPageProps) {
 		<PageRoot className="bg-primary-wash">
 			<PageContent className="bg-primary-wash">
 				<div className="flex flex-col gap-6 w-full">
-					<h1 className={classNames('color-gray-dark')}>
+					<h1 className={classNames('color-primary-ink')}>
 						Join Biscuits to unlock features and collaboration in every app
 					</h1>
 					<p>
@@ -57,14 +58,14 @@ export function JoinPage({}: JoinPageProps) {
 					{sortedApps
 						.filter((app) => !app.prerelease)
 						.map((app) => (
-							<div key={app.id} className="w-full max-w-none">
-								<div className="flex flex-row items-center gap-4">
+							<Box gap col full="width" key={app.id}>
+								<div className="flex flex-row items-center gap-md">
 									<img
 										src={`${app.url}/${app.iconPath}`}
 										alt={app.name}
 										width={48}
 									/>
-									<h2>{app.name}</h2>
+									<h2 className="m-0">{app.name}</h2>
 								</div>
 								<p>{app.paidDescription}</p>
 								<PageSectionGrid>
@@ -73,7 +74,7 @@ export function JoinPage({}: JoinPageProps) {
 									))}
 								</PageSectionGrid>
 								<Divider className="my-8" />
-							</div>
+							</Box>
 						))}
 				</div>
 				<Footer />
@@ -86,9 +87,9 @@ function AppFeature({ feature }: { feature: PaidFeature }) {
 	return (
 		<div className="flex flex-col gap-4 items-start">
 			<div className="flex flex-row items-center gap-3 flex-wrap">
-				<h3 className="text-md font-bold my-0">{feature.title}</h3>
+				<h3 className="text-md font-normal my-0">{feature.title}</h3>
 				{feature.family && (
-					<div className="px-3 py-1 rounded-full bg-accent-dark color-white text-xxs">
+					<div className="px-3 py-1 rounded-full bg-accent-dark color-white text-xs">
 						Family Style Plan
 					</div>
 				)}

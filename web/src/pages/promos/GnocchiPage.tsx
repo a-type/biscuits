@@ -34,11 +34,11 @@ export function GnocchiPage() {
 	});
 
 	return (
-		<Root>
+		<Root className="theme-lemon">
 			<Background>
 				<Suspense>{/* <Scene /> */}</Suspense>
 			</Background>
-			<Content className="bg-primary-light">
+			<Content className="bg-primary-wash">
 				<TitleWrap>
 					<AppName appId="gnocchi" />
 					<HeroTitle>Your weekly cooking, in one place.</HeroTitle>
@@ -102,13 +102,13 @@ export function GnocchiPage() {
 			</Content>
 			<Content
 				className={classNames(
-					'bg-primary border-t-10dvh border-b-20dvh border-solid border-primary-light pt-10dvh',
+					'bg-primary-light border-t-10dvh border-b-20dvh border-solid border-primary pt-10dvh',
 					'theme-leek',
 				)}
 				ref={upgradeSectionRef}
 			>
 				<TitleWrap className="bg-primary-wash border-1 border-solid border-primary-dark rounded-lg p-4">
-					<H2 className="[font-size:5vmax] gutter-bottom">
+					<H2 className="[font-size:5vmax] font-medium gutter-bottom flex-shrink-0 leading-tight [text-wrap:balanced]">
 						Upgrade to the world's most collaborative cooking app
 					</H2>
 					<P>

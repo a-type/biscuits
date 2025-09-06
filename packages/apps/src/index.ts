@@ -173,7 +173,7 @@ export const apps = [
 		],
 		prerelease: false,
 		theme: 'leek',
-	},
+	} as AppManifest<'names'>,
 	{
 		id: 'palette',
 		demoVideoSrc: '/videos/palette-compressed.mp4',
@@ -186,7 +186,7 @@ export const apps = [
 		url: 'https://palette.biscuits.club',
 		prerelease: false,
 		theme: 'lemon',
-	},
+	} as AppManifest<'palette'>,
 	{
 		id: 'post',
 		description: 'Write and share your thoughts',
@@ -199,7 +199,7 @@ export const apps = [
 		prerelease: true,
 		theme: 'blueberry',
 		domainRoutes: (notebookId: string) => `/post/hub/${notebookId}`,
-	},
+	} as AppManifest<'post'>,
 ] as const;
 
 export type AppId = (typeof apps)[number]['id'];
@@ -213,7 +213,7 @@ export const appsById = Object.fromEntries(
 	apps.map((app) => [app.id, app]),
 ) as Record<AppId, AppManifest<AppId>>;
 
-export function getAppUrl(app: AppManifest<AppId>) {
+export function getAppUrl(app: AppManifest<any>) {
 	if (import.meta.env.DEV) {
 		return app.devOriginOverride;
 	}
