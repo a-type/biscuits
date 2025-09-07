@@ -53,6 +53,10 @@
 			"path": "apps/post",
 		},
 		{
+			"name": "📏 Floorplan",
+			"path": "apps/floorplan",
+		},
+		{
 			"name": "📃 Scripts",
 			"path": "scripts",
 		},

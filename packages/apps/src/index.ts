@@ -201,6 +201,19 @@ export const apps = [
 		domainRoutes: (notebookId: string) => `/post/hub/${notebookId}`,
 		demoVideoSrc: '',
 	} as AppManifest<'post'>,
+	{
+		id: 'floorplan',
+		description: '',
+		devOriginOverride: 'http://localhost:6229',
+		iconPath: 'icon.png',
+		name: 'Floorplan',
+		paidDescription: 'TODO',
+		paidFeatures: [],
+		url: 'https://floorplan.biscuits.club',
+		prerelease: true,
+		theme: 'tomato',
+		demoVideoSrc: '',
+	} as AppManifest<'floorplan'>,
 ] as const;
 
 export type AppId = (typeof apps)[number]['id'];
