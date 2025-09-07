@@ -183,6 +183,19 @@ export const apps = [
 		prerelease: true,
 		theme: 'blueberry',
 	} satisfies AppManifest<'mood'>,
+	{
+		id: 'floorplan',
+		description: '',
+		devOriginOverride: 'http://localhost:6229',
+		iconPath: 'icon.png',
+		name: 'Floorplan',
+		paidDescription: 'TODO',
+		paidFeatures: [],
+		url: 'https://floorplan.biscuits.club',
+		prerelease: true,
+		theme: 'tomato',
+		demoVideoSrc: '',
+	} as AppManifest<'floorplan'>,
 ] as const;
 
 export type AppId = (typeof apps)[number]['id'];

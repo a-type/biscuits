@@ -45,6 +45,10 @@
 			"path": "apps/mood",
 		},
 		{
+			"name": "📏 Floorplan",
+			"path": "apps/floorplan",
+		},
+		{
 			"name": "📃 Scripts",
 			"path": "scripts",
 		},
