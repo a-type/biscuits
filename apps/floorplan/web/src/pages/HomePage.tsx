@@ -1,3 +1,4 @@
+import { CreateFloorButton } from '@/components/floorplans/CreateFloor.jsx';
 import { useInitialFloorId } from '@/hooks/useLastFloorId.js';
 import { PageRoot } from '@a-type/ui';
 import { useNavigate } from '@verdant-web/react-router';
@@ -13,7 +14,11 @@ export function HomePage({}: HomePageProps) {
 			navigate(`/floors/${initialFloor}`);
 		}
 	}, [initialFloor, navigate]);
-	return <PageRoot>...</PageRoot>;
+	return (
+		<PageRoot>
+			<CreateFloorButton />
+		</PageRoot>
+	);
 }
 
 export default HomePage;

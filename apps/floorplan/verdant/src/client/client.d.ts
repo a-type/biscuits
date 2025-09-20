@@ -146,6 +146,7 @@ export type FloorLinesItem = ObjectEntity<
   FloorLinesItemDestructured,
   FloorLinesItemSnapshot
 >;
+export type FloorLinesItemId = string;
 export type FloorLinesItemStart = ObjectEntity<
   FloorLinesItemStartInit,
   FloorLinesItemStartDestructured,
@@ -153,6 +154,13 @@ export type FloorLinesItemStart = ObjectEntity<
 >;
 export type FloorLinesItemStartX = number;
 export type FloorLinesItemStartY = number;
+export type FloorLinesItemEnd = ObjectEntity<
+  FloorLinesItemEndInit,
+  FloorLinesItemEndDestructured,
+  FloorLinesItemEndSnapshot
+>;
+export type FloorLinesItemEndX = number;
+export type FloorLinesItemEndY = number;
 export type FloorLabels = ListEntity<
   FloorLabelsInit,
   FloorLabelsDestructured,
@@ -163,7 +171,14 @@ export type FloorLabelsItem = ObjectEntity<
   FloorLabelsItemDestructured,
   FloorLabelsItemSnapshot
 >;
-
+export type FloorLabelsItemId = string;
+export type FloorLabelsItemPosition = ObjectEntity<
+  FloorLabelsItemPositionInit,
+  FloorLabelsItemPositionDestructured,
+  FloorLabelsItemPositionSnapshot
+>;
+export type FloorLabelsItemPositionX = number;
+export type FloorLabelsItemPositionY = number;
 export type FloorLabelsItemContent = string;
 export type FloorInit = {
   id?: string;
@@ -174,13 +189,17 @@ export type FloorInit = {
 };
 
 export type FloorLinesItemStartInit = { x: number; y: number };
+export type FloorLinesItemEndInit = { x: number; y: number };
 export type FloorLinesItemInit = {
+  id?: string;
   start: FloorLinesItemStartInit;
-  end: FloorLinesPropertiesInit;
+  end: FloorLinesItemEndInit;
 };
 export type FloorLinesInit = FloorLinesItemInit[];
+export type FloorLabelsItemPositionInit = { x: number; y: number };
 export type FloorLabelsItemInit = {
-  position: FloorLinesPropertiesInit;
+  id?: string;
+  position: FloorLabelsItemPositionInit;
   content: string;
 };
 export type FloorLabelsInit = FloorLabelsItemInit[];
@@ -193,13 +212,17 @@ export type FloorDestructured = {
 };
 
 export type FloorLinesItemStartDestructured = { x: number; y: number };
+export type FloorLinesItemEndDestructured = { x: number; y: number };
 export type FloorLinesItemDestructured = {
+  id: string;
   start: FloorLinesItemStart;
-  end: FloorLinesProperties;
+  end: FloorLinesItemEnd;
 };
 export type FloorLinesDestructured = FloorLinesItem[];
+export type FloorLabelsItemPositionDestructured = { x: number; y: number };
 export type FloorLabelsItemDestructured = {
-  position: FloorLinesProperties;
+  id: string;
+  position: FloorLabelsItemPosition;
   content: string;
 };
 export type FloorLabelsDestructured = FloorLabelsItem[];
@@ -212,13 +235,17 @@ export type FloorSnapshot = {
 };
 
 export type FloorLinesItemStartSnapshot = { x: number; y: number };
+export type FloorLinesItemEndSnapshot = { x: number; y: number };
 export type FloorLinesItemSnapshot = {
+  id: string;
   start: FloorLinesItemStartSnapshot;
-  end: FloorLinesPropertiesSnapshot;
+  end: FloorLinesItemEndSnapshot;
 };
 export type FloorLinesSnapshot = FloorLinesItemSnapshot[];
+export type FloorLabelsItemPositionSnapshot = { x: number; y: number };
 export type FloorLabelsItemSnapshot = {
-  position: FloorLinesPropertiesSnapshot;
+  id: string;
+  position: FloorLabelsItemPositionSnapshot;
   content: string;
 };
 export type FloorLabelsSnapshot = FloorLabelsItemSnapshot[];

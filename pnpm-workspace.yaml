@@ -61,7 +61,6 @@ catalog:
   wrangler: 4.49.0
   '@cloudflare/workers-types': ^4.20251119.0
   '@types/node': ^22
-
   cookie: ^1.0.2
   babel-plugin-react-compiler: ^1.0.0
   motion: ^12.23.24
@@ -75,3 +74,4 @@ catalog:
   graphql-request: ^7.3.4
   vite-tsconfig-paths: ^5.1.4
   '@vite-pwa/assets-generator': ^1.0.2
+  '@use-gesture/react': 10.3.1
