@@ -2,19 +2,11 @@
 
 // src/schema.ts
 import { schema } from "@verdant-web/store";
-var coordinateSchema = schema.fields.object({
-  fields: {
-    x: schema.fields.number(),
-    y: schema.fields.number()
-  }
-});
 var floors = schema.collection({
   name: "floor",
   primaryKey: "id",
   fields: {
-    id: schema.fields.string({
-      default: schema.generated.id
-    }),
+    id: schema.fields.id(),
     createdAt: schema.fields.number({
       default: () => Date.now()
     }),
@@ -22,15 +14,32 @@ var floors = schema.collection({
     lines: schema.fields.array({
       items: schema.fields.object({
         fields: {
-          start: coordinateSchema,
-          end: coordinateSchema
+          id: schema.fields.id(),
+          start: schema.fields.object({
+            fields: {
+              x: schema.fields.number(),
+              y: schema.fields.number()
+            }
+          }),
+          end: schema.fields.object({
+            fields: {
+              x: schema.fields.number(),
+              y: schema.fields.number()
+            }
+          })
         }
       })
     }),
     labels: schema.fields.array({
       items: schema.fields.object({
         fields: {
-          position: coordinateSchema,
+          id: schema.fields.id(),
+          position: schema.fields.object({
+            fields: {
+              x: schema.fields.number(),
+              y: schema.fields.number()
+            }
+          }),
           content: schema.fields.string()
         }
       })

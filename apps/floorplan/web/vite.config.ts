@@ -56,7 +56,7 @@ export default defineConfig(({ command, mode }) => ({
 		},
 	},
 	server: {
-		port: 5555,
+		port: 6229,
 		strictPort: true,
 	},
 	build: {

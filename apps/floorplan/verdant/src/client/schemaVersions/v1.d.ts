@@ -11,13 +11,17 @@ export type FloorSnapshot = {
 };
 
 export type FloorLinesItemStartSnapshot = { x: number; y: number };
+export type FloorLinesItemEndSnapshot = { x: number; y: number };
 export type FloorLinesItemSnapshot = {
+  id: string;
   start: FloorLinesItemStartSnapshot;
-  end: FloorLinesPropertiesSnapshot;
+  end: FloorLinesItemEndSnapshot;
 };
 export type FloorLinesSnapshot = FloorLinesItemSnapshot[];
+export type FloorLabelsItemPositionSnapshot = { x: number; y: number };
 export type FloorLabelsItemSnapshot = {
-  position: FloorLinesPropertiesSnapshot;
+  id: string;
+  position: FloorLabelsItemPositionSnapshot;
   content: string;
 };
 export type FloorLabelsSnapshot = FloorLabelsItemSnapshot[];
@@ -30,13 +34,17 @@ export type FloorInit = {
 };
 
 export type FloorLinesItemStartInit = { x: number; y: number };
+export type FloorLinesItemEndInit = { x: number; y: number };
 export type FloorLinesItemInit = {
+  id?: string;
   start: FloorLinesItemStartInit;
-  end: FloorLinesPropertiesInit;
+  end: FloorLinesItemEndInit;
 };
 export type FloorLinesInit = FloorLinesItemInit[];
+export type FloorLabelsItemPositionInit = { x: number; y: number };
 export type FloorLabelsItemInit = {
-  position: FloorLinesPropertiesInit;
+  id?: string;
+  position: FloorLabelsItemPositionInit;
   content: string;
 };
 export type FloorLabelsInit = FloorLabelsItemInit[];
