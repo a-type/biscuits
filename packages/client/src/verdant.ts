@@ -5,8 +5,8 @@ import { ClientDescriptor } from '@verdant-web/store';
 import { createContext } from 'react';
 import * as CONFIG from './config.js';
 
-const FOUR_HOURS = 4 * 60 * 60 * 1000;
-const FIFTEEN_SECONDS = 15 * 1000;
+const LONG_PULL = 4 * 60 * 60 * 1000;
+const SHORT_PULL = 45 * 1000;
 
 const syncOriginOverride = localStorage.getItem('apiOriginOverride');
 
@@ -31,7 +31,7 @@ export function getVerdantSync<Presence>({
 		authEndpoint: `${syncOriginOverride || CONFIG.API_ORIGIN}/verdant/token/${appId}?access=${access}`,
 		useBroadcastChannel: true,
 		fetch,
-		pullInterval: dashboardMode ? FOUR_HOURS : FIFTEEN_SECONDS,
+		pullInterval: dashboardMode ? LONG_PULL : SHORT_PULL,
 	};
 }
 
