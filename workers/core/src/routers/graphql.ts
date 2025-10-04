@@ -117,10 +117,15 @@ export const graphqlRouter = new Hono<HonoEnv>().all(
 		} catch (e) {
 			// if session expired, we need to tell the client to refresh it
 			if (e instanceof AuthError) {
-				if (e.message === 'Session expired') {
+				if (e.message === AuthError.Messages.SessionExpired) {
 					throw new BiscuitsError(
 						BiscuitsError.Code.SessionExpired,
 						'Session expired',
+					);
+				} else if (e.message === AuthError.Messages.InvalidSession) {
+					throw new BiscuitsError(
+						BiscuitsError.Code.SessionInvalid,
+						'Session invalid',
 					);
 				}
 			}

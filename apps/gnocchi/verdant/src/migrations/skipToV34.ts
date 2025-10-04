@@ -6,7 +6,6 @@ import v34Schema, {
 import { API_HOST_HTTP } from '../config.js';
 import { graphql } from '../graphql.js';
 
-// @ts-ignore
 export default createMigration<V34Types>(v34Schema, async ({ mutations }) => {
 	await mutations.collaborationInfo.put({});
 	try {
