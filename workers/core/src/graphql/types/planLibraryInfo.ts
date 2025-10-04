@@ -74,18 +74,31 @@ builder.objectType('PlanLibraryInfo', {
 			args: {
 				includeTruant: t.arg.boolean(),
 			},
-			resolve: (library, args) => {
+			resolve: async (library, args, ctx) => {
 				const baseReplicas =
 					args.includeTruant ?
 						library.replicas
 					:	library.replicas.filter((replica) => !replica.truant);
-				const profiles = baseReplicas
-					.map((replica) => replica.profile as BiscuitsVerdantProfile)
+				const userIds = baseReplicas
+					// TODO: update when verdant types are fixed
+					.map((replica) => (replica as any).userId)
 					.filter((p) => !!p);
+				const profilesRaw =
+					await ctx.dataloaders.replicaProfileLoader.loadMany(userIds);
+				const profiles = profilesRaw
+					.map((p) => {
+						if (p instanceof Error) {
+							return null;
+						}
+						if (!p) return null;
+						return p;
+					})
+					.filter((p) => !!p) as BiscuitsVerdantProfile[];
 				// deduplicate
 				const deduplicatedProfiles: BiscuitsVerdantProfile[] = [];
 				const seen = new Set<string>();
 				for (const profile of profiles) {
+					if (!profile) continue;
 					if (!seen.has(profile.id)) {
 						deduplicatedProfiles.push(profile);
 						seen.add(profile.id);
@@ -121,9 +134,17 @@ builder.objectType('PlanLibraryReplica', {
 		}),
 		profile: t.field({
 			type: 'PlanLibraryReplicaProfile',
-			resolve: (replica) => replica.profile as any,
+			nullable: true,
+			resolve: async (replica, _, ctx) => {
+				// TODO: update when verdant types are fixed
+				const userId = (replica as any).userId;
+				if (!userId) return null;
+				const profile = await ctx.dataloaders.replicaProfileLoader.load(userId);
+				if (profile instanceof Error) return null;
+				if (!profile) return null;
+				return profile;
+			},
 		}),
-		// TODO: profile - once it's decided what a Biscuits Profile type is.
 	}),
 });
 

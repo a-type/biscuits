@@ -2,7 +2,7 @@ import { BiscuitsError } from '@biscuits/error';
 import DataLoader from 'dataloader';
 import Stripe from 'stripe';
 import { CustomHostsService } from '../../services/customHosts.js';
-import { DB } from '../../services/db/index.js';
+import { DB, userNameSelector } from '../../services/db/index.js';
 
 const priceLookupKeyCache = new Map<string, Stripe.Price>();
 const priceIdCache = new Map<string, Stripe.Price>();
@@ -92,9 +92,33 @@ export function createDataloaders({
 		},
 	);
 
+	const replicaProfileLoader = new DataLoader(
+		async (userIds: readonly string[]) => {
+			const result = await Promise.allSettled(
+				userIds.map((userId) =>
+					db
+						.selectFrom('User')
+						.select(['id', userNameSelector, 'imageUrl'])
+						.where('id', '=', userId)
+						.executeTakeFirst(),
+				),
+			);
+			return result.map((r) => {
+				if (r.status === 'fulfilled') return r.value;
+				if (r.reason instanceof BiscuitsError) return r.reason;
+				return new BiscuitsError(
+					BiscuitsError.Code.Unexpected,
+					'Failed to fetch user profile',
+					r.reason,
+				);
+			});
+		},
+	);
+
 	return {
 		stripePriceLookupKeyLoader,
 		stripePriceIdLoader,
 		customHostDetailsLoader,
+		replicaProfileLoader,
 	};
 }
