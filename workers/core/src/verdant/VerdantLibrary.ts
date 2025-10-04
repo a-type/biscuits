@@ -9,6 +9,7 @@ export class VerdantLibrary extends DurableObject<Env> implements LibraryApi {
 	private verdant: DurableObjectLibrary;
 	constructor(ctx: DurableObjectState, env: Env) {
 		super(ctx, env);
+		const logger = new Logger('🌿');
 		this.verdant = new DurableObjectLibrary(ctx, {
 			tokenSecret: env.VERDANT_SECRET,
 			fileStorage: new R2FileStorage({
@@ -17,21 +18,21 @@ export class VerdantLibrary extends DurableObject<Env> implements LibraryApi {
 				bucket: env.USER_FILES,
 			}),
 			profiles: new Profiles(env.CORE_DB),
-			log: new Logger('🌿').debug,
+			log: (level, ...args) => {
+				if (level in logger) {
+					logger[level as keyof Logger](...args);
+				} else {
+					logger.debug(...args);
+				}
+			},
 		});
 		const changeListener = new VerdantChangeListener(env);
 		this.verdant.events.subscribe('changes', changeListener.update);
 	}
 
 	// mandatory bindings
-	async fetch(request: Request) {
-		const res = await this.verdant.fetch(request);
-		if (!res.ok) {
-			const clone = res.clone();
-			const text = await clone.text();
-			console.log('Verdant error', res.status, text);
-		}
-		return res;
+	fetch(request: Request) {
+		return this.verdant.fetch(request);
 	}
 	webSocketMessage(
 		ws: WebSocket,
