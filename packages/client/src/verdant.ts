@@ -8,6 +8,8 @@ import * as CONFIG from './config.js';
 const FOUR_HOURS = 4 * 60 * 60 * 1000;
 const FIFTEEN_SECONDS = 15 * 1000;
 
+const syncOriginOverride = localStorage.getItem('verdantSyncOrigin');
+
 export function getVerdantSync<Presence>({
 	appId,
 	initialPresence,
@@ -26,7 +28,7 @@ export function getVerdantSync<Presence>({
 			name: 'Anonymous',
 			imageUrl: null,
 		} satisfies BiscuitsVerdantProfile,
-		authEndpoint: `${CONFIG.API_ORIGIN}/verdant/token/${appId}?access=${access}`,
+		authEndpoint: `${syncOriginOverride || CONFIG.API_ORIGIN}/verdant/token/${appId}?access=${access}`,
 		useBroadcastChannel: true,
 		fetch,
 		pullInterval: dashboardMode ? FOUR_HOURS : FIFTEEN_SECONDS,
