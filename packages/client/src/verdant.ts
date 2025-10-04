@@ -8,7 +8,7 @@ import * as CONFIG from './config.js';
 const FOUR_HOURS = 4 * 60 * 60 * 1000;
 const FIFTEEN_SECONDS = 15 * 1000;
 
-const syncOriginOverride = localStorage.getItem('verdantSyncOrigin');
+const syncOriginOverride = localStorage.getItem('apiOriginOverride');
 
 export function getVerdantSync<Presence>({
 	appId,
