@@ -133,7 +133,7 @@ export const graphqlRouter = new Hono<HonoEnv>().all(
 		const maps = new Maps(honoCtx.env.GOOGLE_MAPS_API_KEY);
 		const weather = new Weather(honoCtx.env.OPENWEATHER_API_KEY);
 		const customHosts = new CustomHostsService(
-			honoCtx.env.CLOUDFLARE_API_TOKEN,
+			honoCtx.env.CLOUDFLARE_APP_API_TOKEN,
 			honoCtx.env.CLOUDFLARE_ZONE_ID,
 		);
 		const domainRoutes = new DomainRouteService(db, honoCtx.env.DOMAIN_ROUTES);

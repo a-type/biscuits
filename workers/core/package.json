@@ -17,6 +17,7 @@
 		"migrate:apply:remote": "wrangler d1 migrations apply prod-biscuits-core --remote",
 		"migrate:list": "wrangler d1 migrations list prod-biscuits-core --local",
 		"sql": "wrangler d1 execute prod-biscuits-core --local --file",
+		"sql:remote": "wrangler d1 execute prod-biscuits-core --remote --file",
 		"wrangler": "wrangler"
 	},
 	"dependencies": {
