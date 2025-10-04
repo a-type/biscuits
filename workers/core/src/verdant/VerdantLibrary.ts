@@ -14,7 +14,7 @@ export class VerdantLibrary extends DurableObject<Env> implements LibraryApi {
 			tokenSecret: env.VERDANT_SECRET,
 			fileStorage: new R2FileStorage({
 				// see verdant router
-				host: env.DEPLOYED_ORIGIN + '/verdant/files/',
+				host: env.DEPLOYED_ORIGIN + '/verdant/files',
 				bucket: env.USER_FILES,
 			}),
 			profiles: new Profiles(env.CORE_DB),
