@@ -1,4 +1,4 @@
-name: Post Hub deploy
+name: Core API Deploy
 on:
   push:
     branches: [main]
