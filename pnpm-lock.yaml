@@ -2018,6 +2018,9 @@ importers:
       '@a-type/auth-email-ses':
         specifier: ^2.1.16
         version: 2.1.16(@a-type/auth@1.3.16)
+      '@a-type/kysely':
+        specifier: ^1.1.1
+        version: 1.1.1(kysely@0.28.7)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.5
@@ -2123,6 +2126,9 @@ importers:
       kysely-d1:
         specifier: ^0.4.0
         version: 0.4.0(kysely@0.28.7)
+      kysely-plugin-serialize:
+        specifier: 0.8.2
+        version: 0.8.2(kysely@0.28.7)
       rate-limiter-flexible:
         specifier: ^5.0.3
         version: 5.0.4
@@ -2219,6 +2225,11 @@ packages:
 
   '@a-type/auth@1.3.16':
     resolution: {integrity: sha512-1FPvmHcCQsW0M0wAP9XCHIADdDxYsYUl31vIZGHrnZB+3YJHaqHMyLz/R3jDIx7RAIojalzEPRY/ANR4rI1uHQ==}
+
+  '@a-type/kysely@1.1.1':
+    resolution: {integrity: sha512-JOCyXi09IEmhscHAoU/lLy7/prkPRtFLgTrWs5uK7q0nLL2zN6soFwtafOWsRh3iJsM/km47aXohyGx5mHRmnQ==}
+    peerDependencies:
+      kysely: ^0.27.2
 
   '@a-type/react-space@0.2.15':
     resolution: {integrity: sha512-BCBy3PbOtmXMbayRjUq4B7Y8QYT1BkrLQwSCm35BHWgPBn09oI/lobEUc6hnMZdW68A3n60g9//Tl8eyonuUTg==}
@@ -6471,6 +6482,10 @@ packages:
   base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
 
+  bcrypt-ts@5.0.3:
+    resolution: {integrity: sha512-2FcgD12xPbwCoe5i9/HK0jJ1xA1m+QfC1e6htG9Bl/hNOnLyaFmQSlqLKcfe3QdnoMPKpKEGFCbESBTg+SJNOw==}
+    engines: {node: '>=18'}
+
   better-sqlite3@11.10.0:
     resolution: {integrity: sha512-EwhOpyXiOEL/lKzHz9AW1msWFNzGc/z+LzeB3/jnFJpxu+th2yqvzsSWas1v9jgs9+xiXJcD5A8CJxAG2TaghQ==}
 
@@ -8545,6 +8560,11 @@ packages:
     resolution: {integrity: sha512-wUcVvQNtm30OTfuo7Ad5vYJ1qHqPXOCZc+zWchVKNyuvqY3u8OuGw4gmUx1Ypdx2wRVFLHVQC9I7v0pTmF7Nkw==}
     peerDependencies:
       kysely: '*'
+
+  kysely-plugin-serialize@0.8.2:
+    resolution: {integrity: sha512-81nyTvDPGNHTzs9/Si+GW69YkcQgy2PMlkCieihEyF9EmlGY/TURUZMhVRrLV1k3Hsit+AWCfoEOLJczbK3hDw==}
+    peerDependencies:
+      kysely: '>=0.26'
 
   kysely@0.28.7:
     resolution: {integrity: sha512-u/cAuTL4DRIiO2/g4vNGRgklEKNIj5Q3CG7RoUB5DV5SfEC2hMvPxKi0GWPmnzwL2ryIeud2VTcEEmqzTzEPNw==}
@@ -11307,6 +11327,12 @@ snapshots:
     transitivePeerDependencies:
       - encoding
       - supports-color
+
+  '@a-type/kysely@1.1.1(kysely@0.28.7)':
+    dependencies:
+      '@paralleldrive/cuid2': 2.2.2
+      bcrypt-ts: 5.0.3
+      kysely: 0.28.7
 
   '@a-type/react-space@0.2.15(@types/react@19.1.12)(react-dom@19.1.1(react@19.1.1))(react@19.1.1)':
     dependencies:
@@ -16750,6 +16776,8 @@ snapshots:
 
   base64-js@1.5.1: {}
 
+  bcrypt-ts@5.0.3: {}
+
   better-sqlite3@11.10.0:
     dependencies:
       bindings: 1.5.0
@@ -19045,6 +19073,10 @@ snapshots:
   kolorist@1.8.0: {}
 
   kysely-d1@0.4.0(kysely@0.28.7):
+    dependencies:
+      kysely: 0.28.7
+
+  kysely-plugin-serialize@0.8.2(kysely@0.28.7):
     dependencies:
       kysely: 0.28.7
 

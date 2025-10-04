@@ -27,6 +27,9 @@ jobs:
       - name: Install dependencies
         run: pnpm install --filter @worker.biscuits/core...
 
+      - name: Build dependencies
+        run: pnpm build --filter @worker.biscuits/core...
+
       - name: Verify cloudflare token
         run: |
           curl -X GET "https://api.cloudflare.com/client/v4/user/tokens/verify" \
