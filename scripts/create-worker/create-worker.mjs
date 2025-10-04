@@ -90,7 +90,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Setup pnpm
-        uses: pnpm/action-setup@v2.0.1
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda
         with:
           version: 9.15.2
       - name: Setup node

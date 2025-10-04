@@ -3,7 +3,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'blog/**'
+      - "blog/**"
 
 jobs:
   build-and-deploy-blog:
@@ -13,13 +13,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Setup pnpm
-        uses: pnpm/action-setup@646cdf48217256a3d0b80361c5a50727664284f2
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda
         with:
           version: 9.15.2
       - name: Setup node
         uses: actions/setup-node@v2
         with:
-          node-version: '22'
+          node-version: "22"
           cache: pnpm
 
       - name: Install dependencies
@@ -36,7 +36,7 @@ jobs:
           AWS_S3_BUCKET: ${{ secrets.S3_BUCKET_BLOG }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          SOURCE_DIR: './blog/dist'
+          SOURCE_DIR: "./blog/dist"
 
       - name: Invalidate CloudFront cache
         uses: chetan/invalidate-cloudfront-action@c384d5f09592318a77b1e5c0c8d4772317e48b25
@@ -44,5 +44,5 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           DISTRIBUTION: ${{ secrets.CLOUDFRONT_ID_BLOG }}
-          PATHS: '/*'
-          AWS_REGION: 'us-east-1'
+          PATHS: "/*"
+          AWS_REGION: "us-east-1"

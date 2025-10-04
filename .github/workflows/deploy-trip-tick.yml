@@ -3,11 +3,11 @@ on:
   push:
     branches: [main]
     paths:
-      - 'apps/trip-tick/**'
-      - 'packages/client/**'
-      - 'packages/apps/**'
-      - '.github/workflows/deploy-trip-tick.yml'
-      - 'pnpm-workspace.yaml'
+      - "apps/trip-tick/**"
+      - "packages/client/**"
+      - "packages/apps/**"
+      - ".github/workflows/deploy-trip-tick.yml"
+      - "pnpm-workspace.yaml"
 
 jobs:
   build-and-deploy-trip-tick:
@@ -17,13 +17,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Setup pnpm
-        uses: pnpm/action-setup@646cdf48217256a3d0b80361c5a50727664284f2
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda
         with:
           version: 9.15.2
       - name: Setup node
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: "22"
           cache: pnpm
 
       - name: Install dependencies

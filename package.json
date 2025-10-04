@@ -2,7 +2,7 @@
 	"name": "biscuits",
 	"version": "1.0.0",
 	"description": "",
-	"packageManager": "pnpm@9.15.0",
+	"packageManager": "pnpm@9.15.2",
 	"type": "module",
 	"scripts": {
 		"dev": "turbo run dev",
