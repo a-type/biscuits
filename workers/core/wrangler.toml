@@ -5,6 +5,9 @@ account_id = "5f843fcad78a2f4e1fee091c1d6c21ab"
 
 compatibility_flags = ["nodejs_compat"]
 
+[vars]
+DEPLOYED_ORIGIN = "https://next-api.biscuits.club"
+
 [observability]
 enabled = true
 head_sampling_rate = 1 # optional. default = 1.
