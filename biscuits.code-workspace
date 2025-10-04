@@ -1,8 +1,8 @@
 {
 	"folders": [
 		{
-			"name": "💽 Server",
-			"path": "server",
+			"name": "💽 Core",
+			"path": "workers/core",
 		},
 		{
 			"name": "📡 Workers",

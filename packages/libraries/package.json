@@ -1,20 +1,21 @@
 {
-  "name": "@biscuits/libraries",
-  "private": true,
-  "version": "0.0.1",
-  "exports": {
-    ".": {
-      "production": "./dist/index.js",
-      "development": "./src/index.ts",
-      "import": "./dist/index.js",
-      "node": "./dist/index.js",
-      "default": "./dist/index.js"
-    }
-  },
-  "scripts": {
-    "build": "tsc"
-  },
-  "type": "module",
-  "dependencies": {},
-  "devDependencies": {}
+	"name": "@biscuits/libraries",
+	"private": true,
+	"version": "0.0.1",
+	"exports": {
+		".": {
+			"production": "./dist/index.js",
+			"development": "./src/index.ts",
+			"workerd": "./src/index.ts",
+			"import": "./dist/index.js",
+			"node": "./dist/index.js",
+			"default": "./dist/index.js"
+		}
+	},
+	"scripts": {
+		"build": "tsc"
+	},
+	"type": "module",
+	"dependencies": {},
+	"devDependencies": {}
 }

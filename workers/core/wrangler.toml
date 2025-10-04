@@ -1,0 +1,31 @@
+name = "biscuits-core"
+compatibility_date = "2025-01-01"
+main = "src/index.ts"
+account_id = "5f843fcad78a2f4e1fee091c1d6c21ab"
+
+compatibility_flags = ["nodejs_compat"]
+
+[observability]
+enabled = true
+head_sampling_rate = 1 # optional. default = 1.
+
+[[durable_objects.bindings]]
+name = "VERDANT_LIBRARY"
+class_name = "VerdantLibrary"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["VerdantLibrary"]
+
+[[d1_databases]]
+binding = "CORE_DB"
+database_name = "prod-biscuits-core"
+database_id = "7c48df65-eca0-487f-b66f-aee7f180d605"
+
+[[r2_buckets]]
+binding = "USER_FILES"
+bucket_name = "prod-biscuits-user-files"
+
+[[kv_namespaces]]
+binding = "DOMAIN_ROUTES"
+id = "bf051ad1228c4ad0b1fa614a4e56dd3d"

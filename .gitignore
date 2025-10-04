@@ -147,3 +147,10 @@ vite.config.ts.*
 .turbo/*
 
 *.zip
+
+# just to be sure
+prod.sql
+prod.sqlite
+*.sqlite
+
+.wrangler

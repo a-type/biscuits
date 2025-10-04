@@ -1,7 +1,7 @@
 import atype from '@a-type/ui/uno-preset';
 import { contentConfig } from '@biscuits/uno-config';
 import variantGroup from '@unocss/transformer-variant-group';
-import { defineConfig, extractorDefault } from 'unocss';
+import { defineConfig } from 'unocss';
 
 export default defineConfig({
 	presets: [
@@ -33,13 +33,13 @@ export default defineConfig({
 		},
 	],
 	content: contentConfig,
-	extractors: [
-		{
-			name: 'log',
-			extract: (ctx) => {
-				console.log(ctx.id);
-				return extractorDefault.extract!(ctx);
-			},
-		},
-	],
+	// extractors: [
+	// 	{
+	// 		name: 'log',
+	// 		extract: (ctx) => {
+	// 			console.log(ctx.id);
+	// 			return extractorDefault.extract!(ctx);
+	// 		},
+	// 	},
+	// ],
 });

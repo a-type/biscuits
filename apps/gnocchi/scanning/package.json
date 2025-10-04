@@ -6,6 +6,7 @@
 		".": {
 			"production": "./dist/esm/index.js",
 			"development": "./src/index.ts",
+			"workerd": "./src/index.ts",
 			"import": "./dist/esm/index.js",
 			"node": "./dist/esm/index.js",
 			"default": "./dist/esm/index.js"
