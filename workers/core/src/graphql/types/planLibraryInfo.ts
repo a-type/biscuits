@@ -79,9 +79,9 @@ builder.objectType('PlanLibraryInfo', {
 					args.includeTruant ?
 						library.replicas
 					:	library.replicas.filter((replica) => !replica.truant);
-				const profiles = baseReplicas.map(
-					(replica) => replica.profile as BiscuitsVerdantProfile,
-				);
+				const profiles = baseReplicas
+					.map((replica) => replica.profile as BiscuitsVerdantProfile)
+					.filter((p) => !!p);
 				// deduplicate
 				const deduplicatedProfiles: BiscuitsVerdantProfile[] = [];
 				const seen = new Set<string>();
