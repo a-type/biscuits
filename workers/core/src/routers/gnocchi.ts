@@ -1,27 +1,19 @@
 import { getLibraryName } from '@biscuits/libraries';
 import { type HubRecipeData } from '@gnocchi.biscuits/hub';
 import { LibraryApi } from '@verdant-web/server';
-import * as fsSync from 'fs';
 import { Hono } from 'hono';
-import * as path from 'path';
 import { renderTemplate, staticFile } from '../common/hubs.js';
 import { HonoEnv } from '../config/hono.js';
 import { createDb } from '../services/db/index.js';
 
 export const gnocchiRouter = new Hono<HonoEnv>();
 
-const hubPath = path.join(
-	process.cwd(),
-	'..',
-	'apps',
-	'gnocchi',
-	'hub',
-	'dist',
-);
-const hubClientPath = path.join(hubPath, 'client');
-
 gnocchiRouter.get('/hub/assets/*', (ctx) =>
-	staticFile(hubClientPath, 'gnocchi/hub', ctx.req.raw),
+	staticFile('gnocchi', 'client', ctx, 'gnocchi/hub'),
+);
+
+gnocchiRouter.get('/hub/favicon.ico', (ctx) =>
+	staticFile('gnocchi', 'client', ctx, 'gnocchi/hub', 'favicon.ico'),
 );
 
 gnocchiRouter.get('/hub/:planId/:recipeSlug', async (ctx) => {
@@ -68,17 +60,13 @@ gnocchiRouter.get('/hub/:planId/:recipeSlug', async (ctx) => {
 	}
 
 	const { serverRender } = await import('@gnocchi.biscuits/hub');
-	const indexTemplate = fsSync.readFileSync(
-		path.join(hubClientPath, 'index.html'),
-		'utf8',
-	);
 
 	const appHtml = serverRender(data, ctx.req.url);
-	return renderTemplate(indexTemplate, { appHtml, data });
+	return renderTemplate('gnocchi', ctx, { appHtml, data });
 });
 
 gnocchiRouter.get('/hub/*', (ctx) =>
-	staticFile(hubClientPath, 'gnocchi/hub', ctx.req.raw),
+	staticFile('gnocchi', 'client', ctx, 'gnocchi/hub'),
 );
 
 function getEmbeddedRecipeIds(snapshot: any) {

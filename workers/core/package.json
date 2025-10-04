@@ -5,7 +5,9 @@
 	"scripts": {
 		"dev": "wrangler dev --local --port 6124 ./src/index.ts",
 		"stripe": "stripe listen -f http://localhost:6124/stripe/webhook",
-		"build": "wrangler build",
+		"build": "pnpm run build:src && pnpm run build:assets",
+		"build:src": "wrangler build",
+		"build:assets": "tsx ./scripts/copyHubAssets.mts",
 		"publish": "wrangler publish",
 		"types": "wrangler types",
 		"vapid": "node ./scripts/generateVapidKeys.js",

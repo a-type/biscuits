@@ -10,7 +10,7 @@ export default defineConfig(({ command, mode }) => ({
 	base:
 		mode === 'production' ?
 			'https://recipes.gnocchi.biscuits.club/'
-		:	'http://localhost:6124/gnocchi/hubRecipe/',
+		:	'http://localhost:6124/gnocchi/hub/',
 	optimizeDeps: {
 		include: [
 			'react/jsx-runtime',

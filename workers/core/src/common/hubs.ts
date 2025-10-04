@@ -1,44 +1,32 @@
-import * as fsSync from 'fs';
-import * as fs from 'fs/promises';
+import { Context } from 'hono';
 import * as path from 'path';
-
-const assetFileTypes: Record<string, string> = {
-	'.css': 'text/css',
-	'.js': 'application/javascript',
-	'.json': 'application/json',
-	'.ico': 'image/x-icon',
-	'.png': 'image/png',
-	'.jpg': 'image/jpeg',
-	'.jpeg': 'image/jpeg',
-	'.svg': 'image/svg+xml',
-	'.gif': 'image/gif',
-	'.webp': 'image/webp',
-	'.woff': 'font/woff',
-	'.woff2': 'font/woff2',
-};
+import { HonoEnv } from '../config/hono.js';
 
 export async function staticFile(
-	basePath: string,
-	prefix: string,
-	req: Request,
+	appName: string,
+	type: 'client' | 'server',
+	ctx: Context<HonoEnv>,
+	prefix?: string,
+	file?: string, // if not provided, inherits from ctx.req
 ) {
-	const url = new URL(req.url);
-	const filePath = path.join(basePath, url.pathname.replace(`/${prefix}`, ''));
+	const url = new URL(ctx.req.raw.url);
+	const unprefixedPath =
+		file ? `/${file}`
+		: prefix ? url.pathname.replace(`/${prefix}`, '')
+		: url.pathname;
+	const filePath = path.join('hubs', appName, type, unprefixedPath);
 
-	if (!fsSync.existsSync(filePath)) {
-		return new Response('Not found', { status: 404 });
-	}
+	url.pathname = `/${filePath}`;
 
-	const file = await fs.readFile(filePath);
-	return new Response(file, {
-		headers: {
-			'Content-Type': assetFileTypes[path.extname(filePath)] ?? 'text/plain',
-		},
-	});
+	console.debug(`Fetching static asset: ${url.pathname}`);
+	const assetReq = new Request(url);
+
+	return ctx.env.ASSETS.fetch(assetReq);
 }
 
-export function renderTemplate(
-	indexTemplate: string,
+export async function renderTemplate(
+	appName: string,
+	ctx: Context<HonoEnv>,
 	{
 		data,
 		appHtml,
@@ -55,6 +43,19 @@ export function renderTemplate(
 		title?: string;
 	},
 ) {
+	const indexRes = await staticFile(
+		appName,
+		'client',
+		ctx,
+		undefined,
+		'index.html',
+	);
+	if (!indexRes.ok) {
+		console.error(`Failed to load index.html for ${appName} hub`, indexRes);
+		return new Response('Not found', { status: 404 });
+	}
+	const indexTemplate = await indexRes.text();
+
 	let val = indexTemplate.replace(`<!--app-html-->`, appHtml);
 	if (data) {
 		val = val.replace(`{/*snapshot*/}`, JSON.stringify(data));

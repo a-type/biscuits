@@ -2,9 +2,7 @@ import { Session } from '@a-type/auth';
 import { getLibraryName } from '@biscuits/libraries';
 import { type HubWishlistData } from '@wish-wash.biscuits/hub';
 import type { ListSnapshot as WishlistSnapshot } from '@wish-wash.biscuits/verdant';
-import * as fsSync from 'fs';
 import { Hono } from 'hono';
-import * as path from 'path';
 import { sessions } from '../auth/session.js';
 import { renderTemplate, staticFile } from '../common/hubs.js';
 import { HonoEnv } from '../config/hono.js';
@@ -12,22 +10,12 @@ import { createDb } from '../services/db/index.js';
 
 export const wishWashRouter = new Hono<HonoEnv>();
 
-const hubPath = path.join(
-	process.cwd(),
-	'..',
-	'apps',
-	'wish-wash',
-	'hub',
-	'dist',
-);
-const hubClientPath = path.join(hubPath, 'client');
-
-wishWashRouter.get('/hub/assets/*', ({ req }) =>
-	staticFile(hubClientPath, 'wish-wash/hub', req.raw),
+wishWashRouter.get('/hub/assets/*', (ctx) =>
+	staticFile('wish-wash', 'client', ctx, 'wish-wash/hub'),
 );
 
-wishWashRouter.get('/hub/favicon.ico', ({ req }) =>
-	staticFile(hubClientPath, 'wish-wash/hub', req.raw),
+wishWashRouter.get('/hub/favicon.ico', (ctx) =>
+	staticFile('wish-wash', 'client', ctx, 'wish-wash/hub', 'favicon.ico'),
 );
 
 function itemImageUrls(item: WishlistSnapshot['items'][number]) {
@@ -141,16 +129,11 @@ wishWashRouter.get('/hub/:id', async (ctx) => {
 		}),
 	};
 
-	const indexTemplate = fsSync.readFileSync(
-		path.join(hubClientPath, 'index.html'),
-		'utf8',
-	);
-
 	const { serverRender } = await import('@wish-wash.biscuits/hub');
 	const appHtml = serverRender(data);
-	return renderTemplate(indexTemplate, { appHtml, data });
+	return renderTemplate('wish-wash', ctx, { appHtml, data });
 });
 
-wishWashRouter.get('/hub/*', ({ req }) =>
-	staticFile(hubClientPath, 'wish-wash/hub', req.raw),
+wishWashRouter.get('/hub/*', (ctx) =>
+	staticFile('wish-wash', 'client', ctx, 'wish-wash/hub'),
 );

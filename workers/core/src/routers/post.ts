@@ -2,23 +2,18 @@ import { BiscuitsError } from '@biscuits/error';
 import { getLibraryName } from '@biscuits/libraries';
 import { LibraryApi } from '@verdant-web/server';
 import { attachFileUrls } from '@verdant-web/tiptap/server';
-import { readFile } from 'fs/promises';
 import { Context, Hono } from 'hono';
-import path from 'path';
 import { renderTemplate, staticFile } from '../common/hubs.js';
 import { HonoEnv } from '../config/hono.js';
 import { createDb, PublishedNotebook, sql } from '../services/db/index.js';
 
 export const postRouter = new Hono<HonoEnv>();
 
-const hubPath = path.join(process.cwd(), '..', 'apps', 'post', 'hub', 'dist');
-const hubClientPath = path.join(hubPath, 'client');
-
-postRouter.get('/hub/assets/*', ({ req }) =>
-	staticFile(hubClientPath, 'post/hub', req.raw),
+postRouter.get('/hub/assets/*', (ctx) =>
+	staticFile('post', 'client', ctx, 'post/hub'),
 );
-postRouter.get('/hub/favicon.ico', ({ req }) =>
-	staticFile(hubClientPath, 'post/hub', req.raw),
+postRouter.get('/hub/favicon.ico', (ctx) =>
+	staticFile('post', 'client', ctx, 'post/hub'),
 );
 
 function addPostUrl<T extends { slug: string }>(
@@ -112,11 +107,6 @@ postRouter.get('/hub/:notebookId', async (ctx) => {
 		.orderBy('PublishedPost.createdAt', 'desc')
 		.execute();
 
-	const indexTemplate = await readFile(
-		path.join(hubClientPath, 'src/pages/notebook/index.html'),
-		'utf8',
-	);
-
 	const customDomain = ctx.get('customDomain');
 	const data = {
 		notebook: addNotebookUrl(notebook, customDomain, ctx),
@@ -126,7 +116,7 @@ postRouter.get('/hub/:notebookId', async (ctx) => {
 	const { serverRenderNotebook } = await import('@post.biscuits/hub');
 	const appHtml = serverRenderNotebook(data);
 	const { theme, globalStyle } = getNotebookGlobalStyle(notebook);
-	return renderTemplate(indexTemplate, {
+	return renderTemplate('post', ctx, {
 		appHtml,
 		data,
 		theme,
@@ -252,16 +242,10 @@ postRouter.get('/hub/:notebookId/:postSlug', async (ctx) => {
 		notebook: addNotebookUrl(notebook, customDomain, ctx),
 	};
 
-	const indexTemplate = await readFile(
-		path.join(hubClientPath, 'src/pages/post/index.html'),
-		'utf8',
-	);
-
 	const { serverRenderPost } = await import('@post.biscuits/hub');
 	const appHtml = serverRenderPost(data);
 	const { theme, globalStyle } = getNotebookGlobalStyle(notebook);
-	console.log(theme, globalStyle);
-	return renderTemplate(indexTemplate, {
+	return renderTemplate('post', ctx, {
 		appHtml,
 		data,
 		theme,
@@ -270,6 +254,6 @@ postRouter.get('/hub/:notebookId/:postSlug', async (ctx) => {
 	});
 });
 
-postRouter.get('/hub/*', ({ req }) =>
-	staticFile(hubClientPath, 'post/hub', req.raw),
+postRouter.get('/hub/*', (ctx) =>
+	staticFile('post', 'client', ctx, 'post/hub'),
 );

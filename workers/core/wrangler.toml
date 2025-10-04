@@ -32,3 +32,7 @@ bucket_name = "prod-biscuits-user-files"
 [[kv_namespaces]]
 binding = "DOMAIN_ROUTES"
 id = "bf051ad1228c4ad0b1fa614a4e56dd3d"
+
+[assets]
+directory = "./assets"
+binding = "ASSETS"
