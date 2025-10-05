@@ -76,7 +76,8 @@
 		"@types/web-push": "^3.6.4",
 		"env-cmd": "^10.1.0",
 		"vitest": "^0.22.1",
-		"web-push": "^3.6.6"
+		"web-push": "^3.6.6",
+		"tsx": "^4.20.6"
 	},
 	"volta": {
 		"node": "22.12.0"
