@@ -103,6 +103,10 @@ verdantRouter.get('/files/:library/:fileId/:filename', async (ctx) => {
 		headers: {
 			'Content-Type':
 				obj.httpMetadata?.contentType || 'application/octet-stream',
+			// allow cross-origin use
+			'Cross-Origin-Resource-Policy': 'cross-origin',
+			// cache for 30 days
+			'Cache-Control': 'public, max-age=2592000',
 		},
 	});
 });
