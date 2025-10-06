@@ -46,7 +46,8 @@ jobs:
 
       - name: Capture deploy failure output
         if: ${{ failure() }}
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: deploy-failure-log
           path: ./workers/core/.wrangler/tmp/startup-profile-*/worker.cpuprofile
+          if-no-files-found: ignore
