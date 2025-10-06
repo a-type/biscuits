@@ -30,13 +30,8 @@ import classNames from 'classnames';
 import { format } from 'date-fns';
 import { Suspense, useEffect, useRef } from 'react';
 import { useSnapshot } from 'valtio';
-import { RecipeNotFound } from '../RecipeNotFound.jsx';
 import { RecipeTagsEditor } from '../editor/RecipeTagsEditor.jsx';
-import {
-	useActiveCookingSession,
-	useRecipeFromSlugUrl,
-	useWatchChanges,
-} from '../hooks.js';
+import { useActiveCookingSession, useWatchChanges } from '../hooks.js';
 import {
 	ImageContainer,
 	TitleAndImageLayout,
@@ -50,20 +45,10 @@ import { RecipeMultiplierField } from './RecipeMultiplierField.jsx';
 import { RecipePreludeViewer } from './RecipePreludeViewer.jsx';
 
 export interface RecipeOverviewProps {
-	slug: string;
+	recipe: Recipe;
 }
 
-export function RecipeOverview({ slug }: RecipeOverviewProps) {
-	const recipe = useRecipeFromSlugUrl(slug);
-
-	if (!recipe) {
-		return <RecipeNotFound />;
-	}
-
-	return <RecipeOverviewContent recipe={recipe} />;
-}
-
-function RecipeOverviewContent({ recipe }: { recipe: Recipe }) {
+export function RecipeOverview({ recipe }: RecipeOverviewProps) {
 	const {
 		title,
 		createdAt,
@@ -152,7 +137,9 @@ function RecipeOverviewContent({ recipe }: { recipe: Recipe }) {
 											</Link>
 										</Chip>
 									)}
-									<RecipeTagsEditor recipe={recipe} className="flex-1" />
+									<Suspense>
+										<RecipeTagsEditor recipe={recipe} className="flex-1" />
+									</Suspense>
 								</div>
 							</div>
 						</div>
@@ -163,7 +150,9 @@ function RecipeOverviewContent({ recipe }: { recipe: Recipe }) {
 						</ImageContainer>
 					)}
 				</TitleAndImageLayout>
-				<PreludeSection recipe={recipe} />
+				<Suspense>
+					<PreludeSection recipe={recipe} />
+				</Suspense>
 
 				<Divider />
 				<div className="w-full gap-4 flex flex-col">
@@ -177,14 +166,18 @@ function RecipeOverviewContent({ recipe }: { recipe: Recipe }) {
 							<span>Bulk add...</span>
 						</AddToListButton>
 					</div>
-					<RecipeIngredientsViewer recipe={recipe} />
+					<Suspense>
+						<RecipeIngredientsViewer recipe={recipe} />
+					</Suspense>
 				</div>
 				<Divider />
 				<div className="w-full flex flex-col gap-4" ref={stepsRef}>
 					<H2 id="#steps">Steps</H2>
-					<InstructionsProvider isEditing={false} recipeId={recipe.get('id')}>
-						<RecipeInstructionsViewer recipe={recipe} />
-					</InstructionsProvider>
+					<Suspense>
+						<InstructionsProvider isEditing={false} recipeId={recipe.get('id')}>
+							<RecipeInstructionsViewer recipe={recipe} />
+						</InstructionsProvider>
+					</Suspense>
 				</div>
 				<PostCooking recipe={recipe} />
 				<OverviewNowPlaying recipe={recipe} />

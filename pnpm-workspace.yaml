@@ -25,27 +25,27 @@ catalog:
   '@verdant-web/cloudflare': 0.1.4
   '@vitejs/plugin-react-swc': 3.7.2
   gql.tada: 1.8.10
-  react: 19.1.1
-  react-dom: 19.1.1
-  typescript: 5.8.3
-  unocss: 66.5.0
-  '@unocss/transformer-variant-group': 66.5.0
-  valtio: ^2.1.2
-  vite: ^6.0.3
-  vite-plugin-pwa: ^0.21.1
+  react: 19.2.0
+  react-dom: 19.2.0
+  '@types/react': ^19.2.0
+  '@types/react-dom': ^19.2.0
+  typescript: 5.9.3
+  unocss: 66.5.2
+  '@unocss/transformer-variant-group': 66.5.2
+  valtio: ^2.1.8
+  vite: ^6.3.6
+  vite-plugin-pwa: ^0.21.2
   workbox-core: ^7.3.0
   workbox-expiration: ^7.3.0
   workbox-precaching: ^7.3.0
   workbox-routing: ^7.3.0
   workbox-strategies: ^7.3.0
   workbox-window: ^7.3.0
-  '@types/react': ^19.1.12
-  '@types/react-dom': ^19.1.9
-  eslint: 9.20.1
-  eslint-plugin-react: 7.37.4
-  '@eslint/js': 9.20.0
-  eslint-plugin-react-hooks: 5.1.0
-  typescript-eslint: 8.24.1
+  eslint: 9.37.0
+  eslint-plugin-react: 7.37.5
+  '@eslint/js': 9.37.0
+  eslint-plugin-react-hooks: 6.1.1
+  typescript-eslint: 8.45.0
   '@tiptap/core': 2.11.5
   '@tiptap/starter-kit': 2.11.5
   '@tiptap/react': 2.11.5

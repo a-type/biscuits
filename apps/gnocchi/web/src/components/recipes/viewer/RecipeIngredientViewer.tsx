@@ -39,8 +39,7 @@ export function RecipeIngredientViewer({
 	disableAddToList,
 	recipeId,
 }: RecipeIngredientViewerProps) {
-	const { note, isSectionHeader, quantity, unit, food } =
-		hooks.useWatch(ingredient);
+	const { note, isSectionHeader, quantity, unit } = hooks.useWatch(ingredient);
 	const officialUnit = lookupUnit(unit);
 	const [conversion, setConversion] = useUnitConversion(officialUnit?.abbr);
 
