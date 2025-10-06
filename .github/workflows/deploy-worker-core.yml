@@ -44,7 +44,7 @@ jobs:
           packageManager: pnpm
           workingDirectory: ./workers/core
 
-      - name: Capture deploy failure output
+      - name: Capture deploy startup profile failure output
         if: ${{ failure() }}
         uses: actions/upload-artifact@v4
         with:
