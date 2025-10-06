@@ -512,7 +512,7 @@ importers:
         version: 6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
       vite-plugin-pwa:
         specifier: 'catalog:'
-        version: 0.21.2(vite@6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+        version: 0.21.2(vite@6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(workbox-window@6.6.1)
       workbox-core:
         specifier: ^7.0.0
         version: 7.3.0
@@ -663,7 +663,7 @@ importers:
         version: 6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
       vite-plugin-pwa:
         specifier: 'catalog:'
-        version: 0.21.2(vite@6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+        version: 0.21.2(vite@6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(workbox-window@7.3.0)
       workbox-core:
         specifier: 'catalog:'
         version: 7.3.0
@@ -775,7 +775,7 @@ importers:
         version: 6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
       vite-plugin-pwa:
         specifier: 'catalog:'
-        version: 0.21.2(vite@6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+        version: 0.21.2(vite@6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(workbox-window@7.3.0)
       workbox-core:
         specifier: 'catalog:'
         version: 7.3.0
@@ -887,7 +887,7 @@ importers:
         version: 6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
       vite-plugin-pwa:
         specifier: 'catalog:'
-        version: 0.21.2(vite@6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+        version: 0.21.2(vite@6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(workbox-window@7.3.0)
       workbox-core:
         specifier: 'catalog:'
         version: 7.3.0
@@ -1008,7 +1008,7 @@ importers:
         version: 6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
       vite-plugin-pwa:
         specifier: 'catalog:'
-        version: 0.21.2(vite@6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+        version: 0.21.2(vite@6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(workbox-window@7.3.0)
       workbox-core:
         specifier: 'catalog:'
         version: 7.3.0
@@ -1217,7 +1217,7 @@ importers:
         version: 6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
       vite-plugin-pwa:
         specifier: 'catalog:'
-        version: 0.21.2(vite@6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+        version: 0.21.2(vite@6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(workbox-window@7.3.0)
       workbox-core:
         specifier: 'catalog:'
         version: 7.3.0
@@ -1332,7 +1332,7 @@ importers:
         version: 6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
       vite-plugin-pwa:
         specifier: 'catalog:'
-        version: 0.21.2(vite@6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+        version: 0.21.2(vite@6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(workbox-window@7.3.0)
       workbox-core:
         specifier: 'catalog:'
         version: 7.3.0
@@ -1468,7 +1468,7 @@ importers:
         version: 6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
       vite-plugin-pwa:
         specifier: 'catalog:'
-        version: 0.21.2(vite@6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+        version: 0.21.2(vite@6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(workbox-window@7.3.0)
       workbox-core:
         specifier: 'catalog:'
         version: 7.3.0
@@ -1697,7 +1697,7 @@ importers:
         version: 6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
       vite-plugin-pwa:
         specifier: 'catalog:'
-        version: 0.21.2(vite@6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+        version: 0.21.2(vite@6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(workbox-window@7.3.0)
       workbox-core:
         specifier: 'catalog:'
         version: 7.3.0
@@ -1849,7 +1849,7 @@ importers:
         version: 66.5.2(vite@6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       vite-plugin-pwa:
         specifier: 'catalog:'
-        version: 0.21.2(vite@6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+        version: 0.21.2(vite@6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(workbox-window@7.3.0)
 
   packages/error: {}
 
@@ -2132,9 +2132,6 @@ importers:
       kysely-plugin-serialize:
         specifier: 0.8.2
         version: 0.8.2(kysely@0.28.7)
-      rate-limiter-flexible:
-        specifier: ^5.0.3
-        version: 5.0.4
       stripe:
         specifier: ^14.5.0
         version: 14.25.0
@@ -2213,7 +2210,6 @@ packages:
   '@0no-co/graphqlsp@1.12.16':
     resolution: {integrity: sha512-B5pyYVH93Etv7xjT6IfB7QtMBdaaC07yjbhN6v8H7KgFStMkPvi+oWYBTibMFRMY89qwc9H8YixXg8SXDVgYWw==}
     peerDependencies:
-      graphql: ^15.5.0 || ^16.0.0 || ^17.0.0
       typescript: ^5.0.0
 
   '@a-type/auth-email-ses@2.1.16':
@@ -3956,7 +3952,6 @@ packages:
     peerDependencies:
       '@gql.tada/svelte-support': 1.0.1
       '@gql.tada/vue-support': 1.0.1
-      graphql: ^15.5.0 || ^16.0.0 || ^17.0.0
       typescript: ^5.0.0
     peerDependenciesMeta:
       '@gql.tada/svelte-support':
@@ -9631,9 +9626,6 @@ packages:
   randombytes@2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
 
-  rate-limiter-flexible@5.0.4:
-    resolution: {integrity: sha512-ftYHrIfSqWYDIJZ4yPTrgOduByAp+86gUS9iklv0JoXVM8eQCAjTnydCj1hAT4MmhmkSw86NaFEJ28m/LC1pKA==}
-
   rc@1.2.8:
     resolution: {integrity: sha512-y3bGgqKj3QBdxLbLkomlohkvsA8gdAiUQlSBJnBhfn+BPxg4bc62d8TcBW15wavDfgexCgccckhcZvywyQYPOw==}
     hasBin: true
@@ -10863,6 +10855,7 @@ packages:
     peerDependencies:
       '@vite-pwa/assets-generator': ^0.2.6
       vite: ^3.1.0 || ^4.0.0 || ^5.0.0 || ^6.0.0
+      workbox-window: ^7.3.0
     peerDependenciesMeta:
       '@vite-pwa/assets-generator':
         optional: true
@@ -11517,13 +11510,7 @@ snapshots:
     optionalDependencies:
       graphql: 16.11.0
 
-  '@0no-co/graphqlsp@1.12.16(graphql@16.10.0)(typescript@5.9.3)':
-    dependencies:
-      '@gql.tada/internal': 1.0.8(graphql@16.10.0)(typescript@5.9.3)
-      graphql: 16.10.0
-      typescript: 5.9.3
-
-  '@0no-co/graphqlsp@1.12.16(graphql@16.11.0)(typescript@5.9.3)':
+  '@0no-co/graphqlsp@1.12.16(typescript@5.9.3)':
     dependencies:
       '@gql.tada/internal': 1.0.8(graphql@16.11.0)(typescript@5.9.3)
       graphql: 16.11.0
@@ -11882,8 +11869,8 @@ snapshots:
       '@aws-crypto/sha1-browser': 3.0.0
       '@aws-crypto/sha256-browser': 3.0.0
       '@aws-crypto/sha256-js': 3.0.0
-      '@aws-sdk/client-sso-oidc': 3.583.0
-      '@aws-sdk/client-sts': 3.583.0(@aws-sdk/client-sso-oidc@3.583.0)
+      '@aws-sdk/client-sso-oidc': 3.583.0(@aws-sdk/client-sts@3.583.0)
+      '@aws-sdk/client-sts': 3.583.0
       '@aws-sdk/core': 3.582.0
       '@aws-sdk/credential-provider-node': 3.583.0(@aws-sdk/client-sso-oidc@3.583.0)(@aws-sdk/client-sts@3.583.0)
       '@aws-sdk/middleware-bucket-endpoint': 3.577.0
@@ -11985,11 +11972,11 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  '@aws-sdk/client-sso-oidc@3.583.0':
+  '@aws-sdk/client-sso-oidc@3.583.0(@aws-sdk/client-sts@3.583.0)':
     dependencies:
       '@aws-crypto/sha256-browser': 3.0.0
       '@aws-crypto/sha256-js': 3.0.0
-      '@aws-sdk/client-sts': 3.583.0(@aws-sdk/client-sso-oidc@3.583.0)
+      '@aws-sdk/client-sts': 3.583.0
       '@aws-sdk/core': 3.582.0
       '@aws-sdk/credential-provider-node': 3.583.0(@aws-sdk/client-sso-oidc@3.583.0)(@aws-sdk/client-sts@3.583.0)
       '@aws-sdk/middleware-host-header': 3.577.0
@@ -12028,6 +12015,7 @@ snapshots:
       '@smithy/util-utf8': 3.0.0
       tslib: 2.8.1
     transitivePeerDependencies:
+      - '@aws-sdk/client-sts'
       - aws-crt
 
   '@aws-sdk/client-sso@3.583.0':
@@ -12116,11 +12104,11 @@ snapshots:
     transitivePeerDependencies:
       - aws-crt
 
-  '@aws-sdk/client-sts@3.583.0(@aws-sdk/client-sso-oidc@3.583.0)':
+  '@aws-sdk/client-sts@3.583.0':
     dependencies:
       '@aws-crypto/sha256-browser': 3.0.0
       '@aws-crypto/sha256-js': 3.0.0
-      '@aws-sdk/client-sso-oidc': 3.583.0
+      '@aws-sdk/client-sso-oidc': 3.583.0(@aws-sdk/client-sts@3.583.0)
       '@aws-sdk/core': 3.582.0
       '@aws-sdk/credential-provider-node': 3.583.0(@aws-sdk/client-sso-oidc@3.583.0)(@aws-sdk/client-sts@3.583.0)
       '@aws-sdk/middleware-host-header': 3.577.0
@@ -12159,7 +12147,6 @@ snapshots:
       '@smithy/util-utf8': 3.0.0
       tslib: 2.8.1
     transitivePeerDependencies:
-      - '@aws-sdk/client-sso-oidc'
       - aws-crt
 
   '@aws-sdk/core@3.582.0':
@@ -12230,7 +12217,7 @@ snapshots:
 
   '@aws-sdk/credential-provider-ini@3.583.0(@aws-sdk/client-sso-oidc@3.583.0)(@aws-sdk/client-sts@3.583.0)':
     dependencies:
-      '@aws-sdk/client-sts': 3.583.0(@aws-sdk/client-sso-oidc@3.583.0)
+      '@aws-sdk/client-sts': 3.583.0
       '@aws-sdk/credential-provider-env': 3.577.0
       '@aws-sdk/credential-provider-process': 3.577.0
       '@aws-sdk/credential-provider-sso': 3.583.0(@aws-sdk/client-sso-oidc@3.583.0)
@@ -12344,7 +12331,7 @@ snapshots:
 
   '@aws-sdk/credential-provider-web-identity@3.577.0(@aws-sdk/client-sts@3.583.0)':
     dependencies:
-      '@aws-sdk/client-sts': 3.583.0(@aws-sdk/client-sso-oidc@3.583.0)
+      '@aws-sdk/client-sts': 3.583.0
       '@aws-sdk/types': 3.577.0
       '@smithy/property-provider': 3.1.11
       '@smithy/types': 3.7.2
@@ -12592,7 +12579,7 @@ snapshots:
 
   '@aws-sdk/token-providers@3.577.0(@aws-sdk/client-sso-oidc@3.583.0)':
     dependencies:
-      '@aws-sdk/client-sso-oidc': 3.583.0
+      '@aws-sdk/client-sso-oidc': 3.583.0(@aws-sdk/client-sts@3.583.0)
       '@aws-sdk/types': 3.577.0
       '@smithy/property-provider': 3.1.11
       '@smithy/shared-ini-file-loader': 3.1.12
@@ -13871,23 +13858,16 @@ snapshots:
     dependencies:
       crypto-js: 4.2.0
 
-  '@gql.tada/cli-utils@1.6.3(graphql@16.10.0)(typescript@5.9.3)':
+  '@gql.tada/cli-utils@1.6.3(typescript@5.9.3)':
     dependencies:
-      '@0no-co/graphqlsp': 1.12.16(graphql@16.10.0)(typescript@5.9.3)
-      '@gql.tada/internal': 1.0.8(graphql@16.10.0)(typescript@5.9.3)
-      graphql: 16.10.0
-      typescript: 5.9.3
-
-  '@gql.tada/cli-utils@1.6.3(graphql@16.11.0)(typescript@5.9.3)':
-    dependencies:
-      '@0no-co/graphqlsp': 1.12.16(graphql@16.11.0)(typescript@5.9.3)
+      '@0no-co/graphqlsp': 1.12.16(typescript@5.9.3)
       '@gql.tada/internal': 1.0.8(graphql@16.11.0)(typescript@5.9.3)
       graphql: 16.11.0
       typescript: 5.9.3
 
   '@gql.tada/cli-utils@1.7.1(graphql@16.11.0)(typescript@5.9.3)':
     dependencies:
-      '@0no-co/graphqlsp': 1.12.16(graphql@16.11.0)(typescript@5.9.3)
+      '@0no-co/graphqlsp': 1.12.16(typescript@5.9.3)
       '@gql.tada/internal': 1.0.8(graphql@16.11.0)(typescript@5.9.3)
       graphql: 16.11.0
       typescript: 5.9.3
@@ -18737,8 +18717,8 @@ snapshots:
   gql.tada@1.8.10(graphql@16.10.0)(typescript@5.9.3):
     dependencies:
       '@0no-co/graphql.web': 1.0.12(graphql@16.10.0)
-      '@0no-co/graphqlsp': 1.12.16(graphql@16.10.0)(typescript@5.9.3)
-      '@gql.tada/cli-utils': 1.6.3(graphql@16.10.0)(typescript@5.9.3)
+      '@0no-co/graphqlsp': 1.12.16(typescript@5.9.3)
+      '@gql.tada/cli-utils': 1.6.3(typescript@5.9.3)
       '@gql.tada/internal': 1.0.8(graphql@16.10.0)(typescript@5.9.3)
       typescript: 5.9.3
     transitivePeerDependencies:
@@ -18749,8 +18729,8 @@ snapshots:
   gql.tada@1.8.10(graphql@16.11.0)(typescript@5.9.3):
     dependencies:
       '@0no-co/graphql.web': 1.0.12(graphql@16.11.0)
-      '@0no-co/graphqlsp': 1.12.16(graphql@16.11.0)(typescript@5.9.3)
-      '@gql.tada/cli-utils': 1.6.3(graphql@16.11.0)(typescript@5.9.3)
+      '@0no-co/graphqlsp': 1.12.16(typescript@5.9.3)
+      '@gql.tada/cli-utils': 1.6.3(typescript@5.9.3)
       '@gql.tada/internal': 1.0.8(graphql@16.11.0)(typescript@5.9.3)
       typescript: 5.9.3
     transitivePeerDependencies:
@@ -20673,8 +20653,6 @@ snapshots:
     dependencies:
       safe-buffer: 5.2.1
 
-  rate-limiter-flexible@5.0.4: {}
-
   rc@1.2.8:
     dependencies:
       deep-extend: 0.6.0
@@ -22081,7 +22059,19 @@ snapshots:
     transitivePeerDependencies:
       - rollup
 
-  vite-plugin-pwa@0.21.2(vite@6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)):
+  vite-plugin-pwa@0.21.2(vite@6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(workbox-window@6.6.1):
+    dependencies:
+      debug: 4.4.1
+      pretty-bytes: 6.1.1
+      tinyglobby: 0.2.14
+      vite: 6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
+      workbox-build: 7.3.0
+      workbox-window: 6.6.1
+    transitivePeerDependencies:
+      - '@types/babel__core'
+      - supports-color
+
+  vite-plugin-pwa@0.21.2(vite@6.3.6(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(workbox-window@7.3.0):
     dependencies:
       debug: 4.4.1
       pretty-bytes: 6.1.1
