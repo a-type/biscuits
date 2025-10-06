@@ -43,3 +43,10 @@ jobs:
           command: deploy
           packageManager: pnpm
           workingDirectory: ./workers/core
+
+      - name: Capture deploy failure output
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: deploy-failure-log
+          path: ./workers/core/.wrangler/tmp/startup-profile-*/worker.cpuprofile
