@@ -69,19 +69,21 @@ export function ItemEditDialog({ list }: ItemEditDialogProps) {
 				</span>
 				{item && <ItemEditor item={item} />}
 				<DialogActions className="justify-between">
-					<Button
-						color="destructive"
-						onClick={() => {
-							item?.deleteSelf();
-							setSearch((p) => {
-								p.delete('itemId');
-								return p;
-							});
-						}}
-					>
-						<Icon name="trash" />
-						Delete
-					</Button>
+					{item && (
+						<Button
+							color="destructive"
+							onClick={() => {
+								items.removeAll(item);
+								setSearch((p) => {
+									p.delete('itemId');
+									return p;
+								});
+							}}
+						>
+							<Icon name="trash" />
+							Delete
+						</Button>
+					)}
 					<DialogClose asChild>
 						<Button color="primary">Done</Button>
 					</DialogClose>
