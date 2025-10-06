@@ -36,3 +36,13 @@ id = "bf051ad1228c4ad0b1fa614a4e56dd3d"
 [assets]
 directory = "./assets"
 binding = "ASSETS"
+
+[[ratelimits]]
+name = "PUBLIC_RATE_LIMITER"
+namespace_id = "1010"
+simple = { limit = 50, period = 60 }
+
+[[ratelimits]]
+name = "AUTHENTICATED_RATE_LIMITER"
+namespace_id = "1020"
+simple = { limit = 500, period = 60 }

@@ -1,5 +1,4 @@
 import { BiscuitsError } from '@biscuits/error';
-import { rateLimiter } from '../../../rateLimiter.js';
 import { id } from '../../../services/db/index.js';
 import { builder } from '../../builder.js';
 import { assignTypeName } from '../../relay.js';
@@ -65,16 +64,10 @@ builder.mutationFields((t) => ({
 			}),
 		},
 		type: 'Boolean',
+		authScopes: {
+			public: true,
+		},
 		resolve: async (_, { input }, context) => {
-			try {
-				await rateLimiter.consume(
-					`wish-wash-purchase:${input.wishlistSlug}`,
-					1,
-				);
-			} catch (err) {
-				throw new BiscuitsError(BiscuitsError.Code.RateLimited);
-			}
-
 			const wishlist = await context.db
 				.selectFrom('PublishedWishlist')
 				.select(['id'])

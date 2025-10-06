@@ -25,8 +25,8 @@
 	"dependencies": {
 		"@a-type/auth": "catalog:",
 		"@a-type/auth-email-ses": "^2.1.16",
-		"@a-type/utils": "catalog:",
 		"@a-type/kysely": "^1.1.1",
+		"@a-type/utils": "catalog:",
 		"@biscuits/apps": "workspace:*",
 		"@biscuits/error": "workspace:*",
 		"@biscuits/libraries": "workspace:*",
@@ -34,6 +34,7 @@
 		"@gnocchi.biscuits/scanning": "workspace:*",
 		"@googlemaps/google-maps-services-js": "^3.4.2",
 		"@graphql-yoga/plugin-csrf-prevention": "^3.16.0",
+		"@hono-rate-limiter/cloudflare": "^0.2.2",
 		"@hono/zod-validator": "^0.7.3",
 		"@paralleldrive/cuid2": "2.2.2",
 		"@post.biscuits/hub": "workspace:*",
@@ -75,9 +76,9 @@
 		"@types/node": "22.10.2",
 		"@types/web-push": "^3.6.4",
 		"env-cmd": "^10.1.0",
+		"tsx": "^4.20.6",
 		"vitest": "^0.22.1",
-		"web-push": "^3.6.6",
-		"tsx": "^4.20.6"
+		"web-push": "^3.6.6"
 	},
 	"volta": {
 		"node": "22.12.0"

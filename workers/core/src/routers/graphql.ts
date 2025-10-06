@@ -1,4 +1,4 @@
-import { AuthError, Session } from '@a-type/auth';
+import { Session } from '@a-type/auth';
 import { BiscuitsError } from '@biscuits/error';
 import { useCSRFPrevention as withCsrf } from '@graphql-yoga/plugin-csrf-prevention';
 import { GraphQLError } from 'graphql';
@@ -76,21 +76,6 @@ const yoga = createYoga<GQLContext>({
 			requestHeaders: ['x-csrf-token'],
 		}),
 	],
-	// fetchAPI: {
-	// 	Response: Response,
-	// 	Request: Request,
-	// 	Blob: Blob,
-	// 	ReadableStream: ReadableStream,
-	// 	fetch: fetch,
-	// 	Headers: Headers,
-	// 	FormData: FormData,
-	// 	TextDecoder: TextDecoder,
-	// 	TextEncoder: TextEncoder,
-	// 	TransformStream: TransformStream,
-	// 	URLSearchParams: URLSearchParams,
-	// 	WritableStream: WritableStream,
-	// 	URL: URL,
-	// },
 });
 
 export const graphqlRouter = new Hono<HonoEnv>().all(
@@ -111,26 +96,7 @@ export const graphqlRouter = new Hono<HonoEnv>().all(
 				ctx.session = ses;
 			},
 		};
-		let session = null;
-		try {
-			session = await sessions.getSession(honoCtx);
-		} catch (e) {
-			// if session expired, we need to tell the client to refresh it
-			if (e instanceof AuthError) {
-				if (e.message === AuthError.Messages.SessionExpired) {
-					throw new BiscuitsError(
-						BiscuitsError.Code.SessionExpired,
-						'Session expired',
-					);
-				} else if (e.message === AuthError.Messages.InvalidSession) {
-					throw new BiscuitsError(
-						BiscuitsError.Code.SessionInvalid,
-						'Session invalid',
-					);
-				}
-			}
-			throw e;
-		}
+		const session = honoCtx.get('session');
 
 		const db = createDb(honoCtx.env.CORE_DB);
 		const stripe = getStripe(honoCtx.env.STRIPE_SECRET_KEY);

@@ -254,7 +254,9 @@ export const builder = new SchemaBuilder<{
 			(context.session.planHasSubscription === undefined ||
 				!!context.session.planHasSubscription);
 		return {
-			public: true,
+			public: async () => {
+				return true;
+			},
 			user: !!context.session,
 			member,
 			planAdmin: context.session?.role === 'admin',

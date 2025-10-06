@@ -4,6 +4,8 @@ import { logger } from 'hono/logger';
 import { corsMiddleware } from './middleware/cors.js';
 import { domainRoutesMiddleware } from './middleware/domainRoutes.js';
 import { handleError } from './middleware/errors.js';
+import { rateLimiterMiddleware } from './middleware/rateLimiter.js';
+import { sessionMiddleware } from './middleware/session.js';
 import { authRouter } from './routers/auth.js';
 import { gnocchiRouter } from './routers/gnocchi.js';
 import { graphqlRouter } from './routers/graphql.js';
@@ -16,6 +18,8 @@ export const app = new Hono()
 	.onError(handleError)
 	.use(logger())
 	.use(corsMiddleware)
+	.use(sessionMiddleware)
+	.use(rateLimiterMiddleware)
 	.use(domainRoutesMiddleware)
 	.get('/', (ctx) => ctx.text('Hello, world!'))
 	.get('/health', (ctx) => ctx.json({ status: 'ok' }))
