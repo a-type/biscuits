@@ -1,8 +1,8 @@
+import { DB, userNameSelector } from '@biscuits/db';
 import { BiscuitsError } from '@biscuits/error';
 import DataLoader from 'dataloader';
 import Stripe from 'stripe';
 import { CustomHostsService } from '../../services/customHosts.js';
-import { DB, userNameSelector } from '../../services/db/index.js';
 
 const priceLookupKeyCache = new Map<string, Stripe.Price>();
 const priceIdCache = new Map<string, Stripe.Price>();

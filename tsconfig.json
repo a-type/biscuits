@@ -18,7 +18,15 @@
 		"downlevelIteration": true,
 		"experimentalDecorators": true,
 		"isolatedModules": true,
-		"customConditions": ["development"]
+		"customConditions": ["development"],
+		"plugins": [
+			{
+				"name": "gql.tada/ts-plugin",
+				"schema": "./packages/graphql/schema.graphql",
+				"tadaOutputLocation": "./packages/graphql/src/graphql-env.d.ts",
+				"tadaTurboLocation": "./packages/graphql/src/graphql-cache.d.ts"
+			}
+		]
 	},
 	"exclude": ["node_modules", "**/*/dist"]
 }

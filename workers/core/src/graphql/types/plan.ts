@@ -1,5 +1,6 @@
 import { Session } from '@a-type/auth';
 import { assert } from '@a-type/utils';
+import { Plan as DBPlan } from '@biscuits/db';
 import { getLibraryName } from '@biscuits/libraries';
 import { isSubscribed } from '../../auth/subscription.js';
 import { BiscuitsError } from '../../error.js';
@@ -13,7 +14,6 @@ import {
 	updatePlanSubscription,
 } from '../../management/plans.js';
 import { cacheSubscriptionInfoOnPlan } from '../../management/subscription.js';
-import { Plan as DBPlan } from '../../services/db/index.js';
 import { email } from '../../services/email.js';
 import { builder } from '../builder.js';
 import { createResults, keyIndexes } from '../dataloaders/index.js';

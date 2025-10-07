@@ -6,6 +6,7 @@ export enum BiscuitsErrorCode {
 	SessionExpired = 4012,
 	// requires re-login
 	SessionInvalid = 4013,
+	SessionError = 4014,
 	Forbidden = 4030,
 	NoPlan = 4031,
 	SubscriptionInactive = 4032,

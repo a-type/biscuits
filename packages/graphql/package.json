@@ -18,6 +18,15 @@
 			"node": "./dist/fetch.js",
 			"default": "./dist/fetch.js",
 			"types": "./dist/fetch.d.ts"
+		},
+		"./server": {
+			"production": "./dist/server.js",
+			"development": "./src/server.ts",
+			"workerd": "./src/server.ts",
+			"import": "./dist/server.js",
+			"node": "./dist/server.js",
+			"default": "./dist/server.js",
+			"types": "./dist/server.d.ts"
 		}
 	},
 	"scripts": {

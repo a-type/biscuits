@@ -1,14 +1,9 @@
 import { GoogleProvider, createHandlers, honoAdapter } from '@a-type/auth';
+import { comparePassword, createDb, hashPassword, id } from '@biscuits/db';
 import { BiscuitsError } from '@biscuits/error';
 import { Context } from 'hono';
 import { sessions } from '../auth/session.js';
 import { HonoEnv } from '../config/hono.js';
-import {
-	comparePassword,
-	createDb,
-	hashPassword,
-	id,
-} from '../services/db/index.js';
 import { email } from '../services/email.js';
 
 export const authHandlers = createHandlers<Context<HonoEnv>>({

@@ -1,0 +1,20 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "wish-wash-share",
+	"compatibility_date": "2025-09-24",
+	"compatibility_flags": ["nodejs_compat"],
+	"main": "@tanstack/react-start/server-entry",
+	"d1_databases": [
+		{
+			"binding": "CORE_DB",
+			"database_name": "prod-biscuits-core",
+			"database_id": "7c48df65-eca0-487f-b66f-aee7f180d605",
+		},
+	],
+	"services": [
+		{
+			"binding": "CORE_API",
+			"service": "biscuits-core",
+		},
+	],
+}

@@ -1,9 +1,9 @@
+import { createDb, userNameSelector } from '@biscuits/db';
 import { BiscuitsError } from '@biscuits/error';
 import { Context } from 'hono';
 import Stripe from 'stripe';
 import { HonoEnv } from '../config/hono.js';
 import { GQLContext } from '../graphql/context.js';
-import { createDb, userNameSelector } from '../services/db/index.js';
 import { email } from '../services/email.js';
 import { getStripe, stripeDateToDate } from '../services/stripe.js';
 import { getProductMetadata } from './products.js';

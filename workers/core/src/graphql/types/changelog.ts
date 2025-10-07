@@ -1,4 +1,4 @@
-import { id } from '../../services/db/index.js';
+import { id } from '@biscuits/db';
 import { builder } from '../builder.js';
 import { assignTypeName } from '../relay.js';
 

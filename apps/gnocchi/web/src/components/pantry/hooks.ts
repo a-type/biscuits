@@ -1,11 +1,11 @@
-import { useLocalStorage } from '@/hooks/useLocalStorage.js';
 import { hooks } from '@/stores/groceries/index.js';
 import { shortenTimeUnits } from '@a-type/utils';
+import { useLocalStorage } from '@biscuits/client';
 import { Food } from '@gnocchi.biscuits/verdant';
 import { useNavigate, useSearchParams } from '@verdant-web/react-router';
-import addDays from 'date-fns/addDays';
-import endOfDay from 'date-fns/endOfDay';
-import formatDistanceToNowStrict from 'date-fns/formatDistanceToNowStrict';
+import { addDays } from 'date-fns/addDays';
+import { endOfDay } from 'date-fns/endOfDay';
+import { formatDistanceToNowStrict } from 'date-fns/formatDistanceToNowStrict';
 import { useCallback } from 'react';
 
 // keeping this static to make the query reusable

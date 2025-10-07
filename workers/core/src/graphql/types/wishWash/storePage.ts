@@ -53,6 +53,9 @@ builder.objectType('StorePageScan', {
 				return `${root.currency ?? '$'}${root.price}`;
 			},
 		}),
+		failedReason: t.exposeString('failedReason', {
+			nullable: true,
+		}),
 	}),
 });
 

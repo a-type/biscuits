@@ -1,10 +1,10 @@
-import { describe, it, expect } from 'vitest';
 import { load } from 'cheerio';
+import { describe, expect, it } from 'vitest';
 import { microdata } from './microdata.js';
 
 describe('microdata extractor', () => {
-  it('extracts detailed steps', async () => {
-    const html = `
+	it('extracts detailed steps', async () => {
+		const html = `
       <html>
         <body>
           <div itemscope itemtype="http://schema.org/Product">
@@ -20,15 +20,15 @@ describe('microdata extractor', () => {
       </html>
     `;
 
-    const $ = load(html);
-    const data = await microdata($);
+		const $ = load(html);
+		const data = await microdata($, '');
 
-    expect(data).not.toBeNull();
-    expect(data!.productName).toBe('Nintendo Switch');
-    expect(data!.imageUrl).toBe(
-      'https://fakesite.com/wp-content/uploads/2019/08/best-chocolate-chip-cookies.jpg',
-    );
-    expect(data!.price).toBe(299.99);
-    expect(data!.currency).toBe('USD');
-  });
+		expect(data).not.toBeNull();
+		expect(data!.productName).toBe('Nintendo Switch');
+		expect(data!.imageUrl).toBe(
+			'https://fakesite.com/wp-content/uploads/2019/08/best-chocolate-chip-cookies.jpg',
+		);
+		expect(data!.price).toBe(299.99);
+		expect(data!.currency).toBe('USD');
+	});
 });

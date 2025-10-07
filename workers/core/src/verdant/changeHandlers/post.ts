@@ -1,5 +1,5 @@
+import { createDb } from '@biscuits/db';
 import { decomposeOid } from '@verdant-web/common';
-import { createDb } from '../../services/db/index.js';
 import { ChangeHandler } from '../changeHander.js';
 
 export const postDeleteTracker: ChangeHandler<{

@@ -1,3 +1,4 @@
+import { createDb, PublishedNotebook, sql } from '@biscuits/db';
 import { BiscuitsError } from '@biscuits/error';
 import { getLibraryName } from '@biscuits/libraries';
 import { LibraryApi } from '@verdant-web/server';
@@ -5,7 +6,6 @@ import { attachFileUrls } from '@verdant-web/tiptap/server';
 import { Context, Hono } from 'hono';
 import { renderTemplate, staticFile } from '../common/hubs.js';
 import { HonoEnv } from '../config/hono.js';
-import { createDb, PublishedNotebook, sql } from '../services/db/index.js';
 
 export const postRouter = new Hono<HonoEnv>();
 

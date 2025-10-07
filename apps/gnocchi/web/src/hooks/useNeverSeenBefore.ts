@@ -1,4 +1,4 @@
-import { useLocalStorage } from '@/hooks/useLocalStorage.js';
+import { useLocalStorage } from '@biscuits/client';
 import { useEffect, useState } from 'react';
 
 export function useNeverSeenBefore(onNeverSeenBefore?: () => void) {

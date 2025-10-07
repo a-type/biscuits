@@ -1,4 +1,5 @@
 import { appsById, isValidAppId } from '@biscuits/apps';
+import { createDb } from '@biscuits/db';
 import { BiscuitsError } from '@biscuits/error';
 import { createMiddleware } from 'hono/factory';
 import { proxy } from 'hono/proxy';
@@ -6,7 +7,6 @@ import { URL } from 'node:url';
 import { ALLOWED_HEADERS, EXPOSED_HEADERS } from '../config/cors.js';
 import { HonoEnv } from '../config/hono.js';
 import { logger } from '../logger.js';
-import { createDb } from '../services/db/index.js';
 import { DomainRouteService } from '../services/domainRouteCache.js';
 
 export const domainRoutesMiddleware = createMiddleware<HonoEnv>(

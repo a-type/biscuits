@@ -10,7 +10,7 @@ export type * from './tables.js';
 // knows your database structure.
 // Dialect is passed to Kysely's constructor, and from now on, Kysely knows how
 // to communicate with your database.
-export const createDb = (d1: D1Database) =>
+export const createDb = (d1: any) =>
 	new Kysely<Database>({
 		dialect: new D1Dialect({ database: d1 }),
 		plugins: [

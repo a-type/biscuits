@@ -1,4 +1,4 @@
-import { DB, DomainRoute, NewDomainRoute } from './db/index.js';
+import { DB, DomainRoute, NewDomainRoute } from '@biscuits/db';
 
 export class DomainRouteService {
 	constructor(

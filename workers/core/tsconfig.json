@@ -3,7 +3,14 @@
 	"compilerOptions": {
 		"outDir": "./dist",
 		"rootDir": "./src",
-		"types": ["worker-configuration.d.ts"],
-		"moduleResolution": "bundler"
-	}
+		"moduleResolution": "bundler",
+		"module": "esnext",
+		"types": ["./worker-configuration.d.ts"]
+	},
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.tsx",
+		"src/**/*.mts",
+		"worker-configuration.d.ts"
+	]
 }

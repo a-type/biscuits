@@ -1,5 +1,5 @@
+import { createDb } from '@biscuits/db';
 import { Hono } from 'hono';
-import { sessions } from '../auth/session.js';
 import { HonoEnv } from '../config/hono.js';
 import { BiscuitsError } from '../error.js';
 import {
@@ -12,7 +12,7 @@ import {
 	handleSubscriptionUpdated,
 	handleTrialEnd,
 } from '../management/subscription.js';
-import { createDb } from '../services/db/index.js';
+import { sessionRefreshMiddleware } from '../middleware/session.js';
 import { getStripe } from '../services/stripe.js';
 
 export const stripeRouter = new Hono<HonoEnv>();
@@ -75,96 +75,100 @@ stripeRouter.post('/webhook', async (ctx) => {
 	}
 });
 
-stripeRouter.post('/checkout-session', async (ctx) => {
-	const body = await ctx.req.json();
-	const priceKey = body.priceKey;
+stripeRouter.post(
+	'/checkout-session',
+	sessionRefreshMiddleware,
+	async (ctx) => {
+		const body = await ctx.req.json();
+		const priceKey = body.priceKey;
 
-	const session = await sessions.getSession(ctx);
-	if (!session) {
-		throw new BiscuitsError(
-			BiscuitsError.Code.Unauthorized,
-			'Unauthorized',
-			'No session found',
-		);
-	}
+		const session = ctx.get('session');
+		if (!session) {
+			throw new BiscuitsError(
+				BiscuitsError.Code.Unauthorized,
+				'Unauthorized',
+				'No session found',
+			);
+		}
 
-	const db = createDb(ctx.env.CORE_DB);
-	const user = await db
-		.selectFrom('User')
-		.where('id', '=', session.userId)
-		.select(['email', 'planId'])
-		.executeTakeFirst();
+		const db = createDb(ctx.env.CORE_DB);
+		const user = await db
+			.selectFrom('User')
+			.where('id', '=', session.userId)
+			.select(['email', 'planId'])
+			.executeTakeFirst();
 
-	if (!user) {
-		console.error(`No user for ID ${session.userId} in database`);
-		throw new BiscuitsError(
-			BiscuitsError.Code.BadRequest,
-			'Invalid session. Please log in again.',
-		);
-	}
+		if (!user) {
+			console.error(`No user for ID ${session.userId} in database`);
+			throw new BiscuitsError(
+				BiscuitsError.Code.BadRequest,
+				'Invalid session. Please log in again.',
+			);
+		}
 
-	if (!user.planId) {
-		// TODO: create plan here?
-		throw new BiscuitsError(
-			BiscuitsError.Code.BadRequest,
-			'You must create a plan before purchasing a membership.',
-		);
-	}
+		if (!user.planId) {
+			// TODO: create plan here?
+			throw new BiscuitsError(
+				BiscuitsError.Code.BadRequest,
+				'You must create a plan before purchasing a membership.',
+			);
+		}
 
-	const stripe = getStripe(ctx.env.STRIPE_SECRET_KEY);
-	const prices = await stripe.prices.list({
-		lookup_keys: [priceKey],
-		expand: ['data.product'],
-	});
+		const stripe = getStripe(ctx.env.STRIPE_SECRET_KEY);
+		const prices = await stripe.prices.list({
+			lookup_keys: [priceKey],
+			expand: ['data.product'],
+		});
 
-	const price = prices.data[0];
+		const price = prices.data[0];
 
-	if (!price) {
-		throw new BiscuitsError(
-			BiscuitsError.Code.BadRequest,
-			'Could not purchase membership. Please contact support.',
-		);
-	}
+		if (!price) {
+			throw new BiscuitsError(
+				BiscuitsError.Code.BadRequest,
+				'Could not purchase membership. Please contact support.',
+			);
+		}
 
-	const checkout = await stripe.checkout.sessions.create({
-		mode: 'subscription',
-		payment_method_types: ['card'],
-		line_items: [
-			{
-				price: price.id,
-				quantity: 1,
+		const checkout = await stripe.checkout.sessions.create({
+			mode: 'subscription',
+			payment_method_types: ['card'],
+			line_items: [
+				{
+					price: price.id,
+					quantity: 1,
+				},
+			],
+			success_url: `${ctx.env.UI_ORIGIN}/account`,
+			cancel_url: `${ctx.env.UI_ORIGIN}/account`,
+			customer_email: user.email,
+			allow_promotion_codes: true,
+			billing_address_collection: 'auto',
+			subscription_data: {
+				metadata: {
+					planId: user.planId,
+				},
+				trial_period_days: 14,
 			},
-		],
-		success_url: `${ctx.env.UI_ORIGIN}/account`,
-		cancel_url: `${ctx.env.UI_ORIGIN}/account`,
-		customer_email: user.email,
-		allow_promotion_codes: true,
-		billing_address_collection: 'auto',
-		subscription_data: {
-			metadata: {
-				planId: user.planId,
+		});
+
+		if (!checkout.url) {
+			throw new BiscuitsError(
+				BiscuitsError.Code.Unexpected,
+				'Could not create checkout session',
+			);
+		}
+
+		return new Response(null, {
+			status: 302,
+			headers: {
+				Location: checkout.url,
 			},
-			trial_period_days: 14,
-		},
-	});
+		});
+	},
+);
 
-	if (!checkout.url) {
-		throw new BiscuitsError(
-			BiscuitsError.Code.Unexpected,
-			'Could not create checkout session',
-		);
-	}
-
-	return new Response(null, {
-		status: 302,
-		headers: {
-			Location: checkout.url,
-		},
-	});
-});
-
-stripeRouter.post('/portal-session', async (ctx) => {
-	const session = await sessions.getSession(ctx);
+stripeRouter.post('/portal-session', sessionRefreshMiddleware, async (ctx) => {
+	const session = ctx.get('session');
 	if (!session) {
 		throw new BiscuitsError(
 			BiscuitsError.Code.Unauthorized,

@@ -1,6 +1,5 @@
 import { TextLink } from '@/components/nav/Link.jsx';
 import { recipeSavePromptState } from '@/components/recipes/savePrompt/state.js';
-import { useLocalStorage } from '@/hooks/useLocalStorage.js';
 import { firstTimeOnboarding } from '@/onboarding/firstTimeOnboarding.js';
 import { saveHubRecipeOnboarding } from '@/onboarding/saveHubRecipeOnboarding.js';
 import { hooks } from '@/stores/groceries/index.js';
@@ -14,7 +13,7 @@ import {
 	H2,
 	P,
 } from '@a-type/ui';
-import { OnboardingBanner } from '@biscuits/client';
+import { OnboardingBanner, useLocalStorage } from '@biscuits/client';
 import { useNavigate, useSearchParams } from '@verdant-web/react-router';
 import { useEffect, useState } from 'react';
 import { useSnapshot } from 'valtio';

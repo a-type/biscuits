@@ -3,7 +3,6 @@ import { getLibraryName } from '@biscuits/libraries';
 import { createVerdantWorkerApp } from '@verdant-web/cloudflare';
 import { ReplicaType, TokenProvider } from '@verdant-web/server';
 import { Hono } from 'hono';
-import { sessions } from '../auth/session.js';
 import { HonoEnv } from '../config/hono.js';
 import { isPlanInGoodStanding } from '../management/plans.js';
 
@@ -27,7 +26,7 @@ const syncRouter = createVerdantWorkerApp({
 verdantRouter.route('/sync', syncRouter);
 
 verdantRouter.get('/token/:app', async (ctx) => {
-	const session = await sessions.getSession(ctx);
+	const session = ctx.get('session');
 
 	if (!session) {
 		throw new BiscuitsError(BiscuitsError.Code.NotLoggedIn);

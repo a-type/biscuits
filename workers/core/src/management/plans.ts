@@ -1,8 +1,8 @@
 import { assert } from '@a-type/utils';
+import { createDb, id, jsonArrayFrom } from '@biscuits/db';
 import { BiscuitsError, BiscuitsErrorCode } from '@biscuits/error';
 import { isSubscribed } from '../auth/subscription.js';
 import { GQLContext } from '../graphql/context.js';
-import { createDb, id, jsonArrayFrom } from '../services/db/index.js';
 import { email } from '../services/email.js';
 import { getProductMetadata } from './products.js';
 

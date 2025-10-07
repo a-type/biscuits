@@ -1,10 +1,7 @@
+import { FoodCategory as DBFoodCategory, id } from '@biscuits/db';
 import { BiscuitsError } from '@biscuits/error';
 import { decodeGlobalID } from '@pothos/plugin-relay';
 import { logger } from '../../../logger.js';
-import {
-	FoodCategory as DBFoodCategory,
-	id,
-} from '../../../services/db/index.js';
 import { builder } from '../../builder.js';
 import { GQLContext } from '../../context.js';
 import { createResults, keyIndexes } from '../../dataloaders/index.js';

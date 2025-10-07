@@ -1,6 +1,6 @@
+import { createDb, userNameSelector } from '@biscuits/db';
 import { BiscuitsVerdantProfile } from '@biscuits/libraries';
 import { UserProfiles } from '@verdant-web/server';
-import { createDb, userNameSelector } from '../services/db/index.js';
 
 export class Profiles implements UserProfiles<BiscuitsVerdantProfile> {
 	private db;

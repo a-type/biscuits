@@ -1,0 +1,40 @@
+{
+	"name": "@wish-wash.biscuits/share",
+	"private": true,
+	"sideEffects": false,
+	"type": "module",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build && tsc --noEmit",
+		"preview": "vite preview",
+		"deploy": "wrangler deploy",
+		"types": "wrangler types -c wrangler.jsonc -c ../../../workers/core/wrangler.toml",
+		"postinstall": "pnpm run types"
+	},
+	"dependencies": {
+		"@a-type/ui": "catalog:",
+		"@biscuits/graphql": "workspace:*",
+		"@tanstack/react-query": "^5.90.2",
+		"@tanstack/react-router": "^1.132.47",
+		"@tanstack/react-router-devtools": "^1.132.47",
+		"@tanstack/react-router-ssr-query": "^1.132.47",
+		"@tanstack/react-start": "^1.132.48",
+		"@wish-wash.biscuits/common": "workspace:*",
+		"gql.tada": "catalog:",
+		"graphql-request": "^7.2.0",
+		"react": "catalog:",
+		"react-dom": "catalog:"
+	},
+	"devDependencies": {
+		"@cloudflare/vite-plugin": "^1.13.10",
+		"@types/node": "catalog:",
+		"@types/react": "catalog:",
+		"@types/react-dom": "catalog:",
+		"@vitejs/plugin-react-swc": "catalog:",
+		"typescript": "catalog:",
+		"unocss": "catalog:",
+		"vite": "catalog:",
+		"vite-tsconfig-paths": "^5.1.4",
+		"wrangler": "catalog:"
+	}
+}

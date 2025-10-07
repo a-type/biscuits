@@ -1,4 +1,5 @@
 import { Session } from '@a-type/auth';
+import { createDb } from '@biscuits/db';
 import { BiscuitsError } from '@biscuits/error';
 import { useCSRFPrevention as withCsrf } from '@graphql-yoga/plugin-csrf-prevention';
 import { GraphQLError } from 'graphql';
@@ -11,7 +12,6 @@ import { GQLContext } from '../graphql/context.js';
 import { createDataloaders } from '../graphql/dataloaders/index.js';
 import { schema } from '../graphql/schema.js';
 import { CustomHostsService } from '../services/customHosts.js';
-import { createDb } from '../services/db/index.js';
 import { DomainRouteService } from '../services/domainRouteCache.js';
 import { Maps } from '../services/maps.js';
 import { getStripe } from '../services/stripe.js';
