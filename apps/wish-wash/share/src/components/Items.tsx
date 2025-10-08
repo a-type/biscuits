@@ -1,14 +1,29 @@
-import { HubWishlistItem } from '@/types.js';
 import { CardGrid } from '@a-type/ui';
-import { ItemCard } from './ItemCard.js';
+import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
+import { ItemCard, itemCardFragment } from './ItemCard.js';
+
+export const itemsFragment = graphql(
+	`
+		fragment Items on PublicWishlistItem {
+			id
+			...ItemCard
+		}
+	`,
+	[itemCardFragment],
+);
 
 export interface ItemsProps {
-	items: HubWishlistItem[];
+	items: FragmentOf<typeof itemsFragment>[];
 	listAuthor: string;
 	className?: string;
 }
 
-export function Items({ items, listAuthor, className }: ItemsProps) {
+export function Items({
+	items: itemsMasked,
+	listAuthor,
+	className,
+}: ItemsProps) {
+	const items = itemsMasked.map((item) => readFragment(itemsFragment, item));
 	return (
 		<CardGrid
 			className={className}
@@ -19,7 +34,7 @@ export function Items({ items, listAuthor, className }: ItemsProps) {
 				return 5;
 			}}
 		>
-			{items.map((item, i) => (
+			{items.map((item) => (
 				<ItemCard key={item.id} item={item} listAuthor={listAuthor} />
 			))}
 		</CardGrid>

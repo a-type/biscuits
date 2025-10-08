@@ -1,17 +1,25 @@
-import { HubWishlistItem } from '@/types.js';
 import { clsx, Masonry } from '@a-type/ui';
+import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
+
+export const itemCardImageGalleryFragment = graphql(`
+	fragment ItemCardImageGallery on PublicWishlistItem {
+		id
+		imageUrls
+	}
+`);
 
 export interface ItemCardImageGalleryProps {
-	item: HubWishlistItem;
+	item: FragmentOf<typeof itemCardImageGalleryFragment>;
 	className?: string;
 	maxCols?: number;
 }
 
 export function ItemCardImageGallery({
-	item,
+	item: itemMasked,
 	className,
 	maxCols = 3,
 }: ItemCardImageGalleryProps) {
+	const item = readFragment(itemCardImageGalleryFragment, itemMasked);
 	return (
 		<Masonry
 			className={clsx('w-full', className)}

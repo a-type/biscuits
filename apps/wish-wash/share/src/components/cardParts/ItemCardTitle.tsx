@@ -1,12 +1,25 @@
-import { HubWishlistItem } from '@/types.js';
 import { Card, clsx } from '@a-type/ui';
+import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
+
+export const itemCardTitleFragment = graphql(`
+	fragment ItemCardTitle on PublicWishlistItem {
+		id
+		imageUrls
+		description
+		prioritized
+	}
+`);
 
 export interface ItemCardTitleProps {
-	item: HubWishlistItem;
+	item: FragmentOf<typeof itemCardTitleFragment>;
 	className?: string;
 }
 
-export function ItemCardTitle({ item, className }: ItemCardTitleProps) {
+export function ItemCardTitle({
+	item: itemMasked,
+	className,
+}: ItemCardTitleProps) {
+	const item = readFragment(itemCardTitleFragment, itemMasked);
 	const hasImage = item.imageUrls.length > 0;
 	return (
 		<Card.Content

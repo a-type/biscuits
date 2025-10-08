@@ -20,7 +20,7 @@ builder.queryFields((t) => ({
 				defaultValue: false,
 			}),
 		},
-		resolve: async (_, { id, hidePurchases }, ctx) => {
+		resolve: async (_, { id, hidePurchases: userHidePurchases }, ctx) => {
 			const wishList = await ctx.db
 				.selectFrom('PublishedWishlist')
 				.leftJoin('User', 'PublishedWishlist.publishedBy', 'User.id')
@@ -68,6 +68,11 @@ builder.queryFields((t) => ({
 					'WishlistPurchase.confirmedAt',
 				])
 				.execute();
+
+			const isUsersList = ctx.session?.userId === wishList.publishedBy;
+			// if it's the user's own list, hide purchases unless they pass false
+			const hidePurchases =
+				userHidePurchases || (isUsersList && userHidePurchases !== false);
 
 			const data: HubWishlistData = {
 				id: wishList.id,
@@ -166,8 +171,18 @@ builder.objectType('PublicWishlistItem', {
 		priceMin: t.exposeString('priceMin', { nullable: true }),
 		priceMax: t.exposeString('priceMax', { nullable: true }),
 		note: t.exposeString('note', { nullable: true }),
-		type: t.exposeString('type'),
+		type: t.field({
+			type: PublicWishlistItemType,
+			resolve: (parent) => parent.type,
+		}),
 		prompt: t.exposeString('prompt', { nullable: true }),
 		remoteImageUrl: t.exposeString('remoteImageUrl', { nullable: true }),
 	}),
 });
+
+export const PublicWishlistItemType = builder.enumType(
+	'PublicWishlistItemType',
+	{
+		values: ['link', 'idea', 'vibe'],
+	},
+);

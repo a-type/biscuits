@@ -1,18 +1,39 @@
-import { HubWishlistItem } from '@/types.js';
 import { Box, Button, Dialog, Icon } from '@a-type/ui';
+import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 import { ReactNode, useEffect, useState } from 'react';
-import { PostBuyExperienceContent } from './PostBuyExperienceContent.js';
-import { SearchAndBuyExperience } from './SearchAndBuyExperience.js';
+import {
+	PostBuyExperienceContent,
+	postBuyExperienceContentFragment,
+} from './PostBuyExperienceContent.js';
+import {
+	SearchAndBuyExperience,
+	searchAndBuyExperienceFragment,
+} from './SearchAndBuyExperience.js';
+
+export const linkBuyExperienceFragment = graphql(
+	`
+		fragment LinkBuyExperience on PublicWishlistItem {
+			id
+			links
+			count
+			purchasedCount
+			...SearchAndBuyExperience
+			...PostBuyExperienceContent
+		}
+	`,
+	[searchAndBuyExperienceFragment, postBuyExperienceContentFragment],
+);
 
 export function LinkBuyExperience({
-	item,
+	item: itemMasked,
 	listAuthor,
 	children,
 }: {
-	item: HubWishlistItem;
+	item: FragmentOf<typeof linkBuyExperienceFragment>;
 	listAuthor: string;
 	children?: ReactNode;
 }) {
+	const item = readFragment(linkBuyExperienceFragment, itemMasked);
 	const [open, setOpen] = useState(false);
 	const [showPost, setShowPost] = useState(false);
 
@@ -57,7 +78,7 @@ export function LinkBuyExperience({
 				{showPost ?
 					<PostBuyExperienceContent item={item} listAuthor={listAuthor} />
 				:	<PreLinkBuyExperienceContent
-						item={item}
+						item={itemMasked}
 						listAuthor={listAuthor}
 						onVisit={onVisit}
 						link={link}
@@ -81,16 +102,17 @@ export function LinkBuyExperience({
 }
 
 function PreLinkBuyExperienceContent({
-	item,
+	item: itemMasked,
 	link,
 	onVisit,
 	listAuthor,
 }: {
-	item: HubWishlistItem;
+	item: FragmentOf<typeof linkBuyExperienceFragment>;
 	listAuthor: string;
 	link: string;
 	onVisit: () => void;
 }) {
+	const item = readFragment(linkBuyExperienceFragment, itemMasked);
 	const needs = Math.max(0, item.count - item.purchasedCount);
 	return (
 		<>

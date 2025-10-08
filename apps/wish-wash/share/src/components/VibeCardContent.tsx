@@ -1,25 +1,63 @@
-import { HubWishlistItem } from '@/types.js';
-import { Dialog, P } from '@a-type/ui';
-import { SearchButton } from '@wish-wash.biscuits/common';
-import { ReactNode } from 'react';
-import { ItemCardImageGallery } from './ItemCardImageGallery.jsx';
-import { ItemCardMain } from './ItemCardMain.js';
-import { ItemCardNote } from './ItemCardNote.js';
-import { ItemCardPurchases } from './ItemCardPurchases.js';
-import { ItemCardTitle } from './ItemCardTitle.js';
-import { ItemCardTypeChip } from './ItemCardTypeChip.js';
+import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
+import {
+	VibeCardBuyExperience,
+	vibeCardBuyExperienceFragment,
+} from './buyExperience/VibeCardBuyExperience.js';
+import {
+	ItemCardMain,
+	itemCardMainFragment,
+} from './cardParts/ItemCardMain.js';
+import {
+	ItemCardNote,
+	itemCardNoteFragment,
+} from './cardParts/ItemCardNote.js';
+import {
+	ItemCardPurchases,
+	itemCardPurchasesFragment,
+} from './cardParts/ItemCardPurchases.js';
+import {
+	ItemCardTitle,
+	itemCardTitleFragment,
+} from './cardParts/ItemCardTitle.js';
+import {
+	ItemCardTypeChip,
+	itemCardTypeChipFragment,
+} from './cardParts/ItemCardTypeChip.js';
+
+export const vibeCardContentFragment = graphql(
+	`
+		fragment VibeCardContent on PublicWishlistItem {
+			id
+			...ItemCardMain
+			...ItemCardTypeChip
+			...ItemCardTitle
+			...ItemCardPurchases
+			...ItemCardNote
+			...VibeCardBuyExperience
+		}
+	`,
+	[
+		itemCardMainFragment,
+		itemCardTypeChipFragment,
+		itemCardTitleFragment,
+		itemCardPurchasesFragment,
+		itemCardNoteFragment,
+		vibeCardBuyExperienceFragment,
+	],
+);
 
 export interface VibeCardContentProps {
-	item: HubWishlistItem;
+	item: FragmentOf<typeof vibeCardContentFragment>;
 	className?: string;
 	listAuthor: string;
 }
 
 export function VibeCardContent({
-	item,
+	item: itemMasked,
 	className,
 	listAuthor,
 }: VibeCardContentProps) {
+	const item = readFragment(vibeCardContentFragment, itemMasked);
 	return (
 		<VibeCardBuyExperience item={item} listAuthor={listAuthor}>
 			<ItemCardMain item={item} className={className}>
@@ -29,34 +67,5 @@ export function VibeCardContent({
 				<ItemCardNote item={item} />
 			</ItemCardMain>
 		</VibeCardBuyExperience>
-	);
-}
-
-function VibeCardBuyExperience({
-	item,
-	children,
-	listAuthor,
-}: {
-	item: HubWishlistItem;
-	children: ReactNode;
-	listAuthor: string;
-}) {
-	return (
-		<>
-			<Dialog>
-				<Dialog.Trigger asChild>{children}</Dialog.Trigger>
-				<Dialog.Content width="lg">
-					{item.description && <Dialog.Title>{item.description}</Dialog.Title>}
-					<ItemCardImageGallery item={item} maxCols={3} />
-					<P>Be on the lookout for stuff that feels like this.</P>
-					<Dialog.Actions>
-						{item.description && (
-							<SearchButton prompt={item.description} className="mr-auto" />
-						)}
-						<Dialog.Close>Close</Dialog.Close>
-					</Dialog.Actions>
-				</Dialog.Content>
-			</Dialog>
-		</>
 	);
 }

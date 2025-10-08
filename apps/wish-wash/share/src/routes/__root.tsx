@@ -51,7 +51,7 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
 	return (
-		<html>
+		<html className="theme-eggplant">
 			<head>
 				<HeadContent />
 			</head>

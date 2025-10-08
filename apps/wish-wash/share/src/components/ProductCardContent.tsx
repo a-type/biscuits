@@ -1,26 +1,72 @@
-import { HubWishlistItem } from '@/types.js';
 import { FormikForm as BaseFormikForm } from '@a-type/ui';
-import { ItemCardMain } from './ItemCardMain.js';
-import { ItemCardNote } from './ItemCardNote.js';
-import { ItemCardPrice } from './ItemCardPrice.js';
-import { ItemCardPurchases } from './ItemCardPurchases.js';
-import { ItemCardTitle } from './ItemCardTitle.js';
-import { ItemCardTypeChip } from './ItemCardTypeChip.js';
-import { LinkBuyExperience } from './LinkBuyExperience.js';
+import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
+import {
+	LinkBuyExperience,
+	linkBuyExperienceFragment,
+} from './buyExperience/LinkBuyExperience.js';
+import {
+	ItemCardMain,
+	itemCardMainFragment,
+} from './cardParts/ItemCardMain.js';
+import {
+	ItemCardNote,
+	itemCardNoteFragment,
+} from './cardParts/ItemCardNote.js';
+import {
+	ItemCardPrice,
+	itemCardPriceFragment,
+} from './cardParts/ItemCardPrice.js';
+import {
+	ItemCardPurchases,
+	itemCardPurchasesFragment,
+} from './cardParts/ItemCardPurchases.js';
+import {
+	ItemCardTitle,
+	itemCardTitleFragment,
+} from './cardParts/ItemCardTitle.js';
+import {
+	ItemCardTypeChip,
+	itemCardTypeChipFragment,
+} from './cardParts/ItemCardTypeChip.js';
+
+export const productCardContentFragment = graphql(
+	`
+		fragment ProductCardContent on PublicWishlistItem {
+			id
+			...ItemCardMain
+			...ItemCardTypeChip
+			...ItemCardTitle
+			...ItemCardPrice
+			...ItemCardPurchases
+			...ItemCardNote
+			...LinkBuyExperience
+		}
+	`,
+	[
+		itemCardMainFragment,
+		itemCardTypeChipFragment,
+		itemCardPriceFragment,
+		itemCardPurchasesFragment,
+		itemCardNoteFragment,
+		itemCardTitleFragment,
+		linkBuyExperienceFragment,
+	],
+);
 
 export const FormikForm = BaseFormikForm as any;
 
 export interface ProductCardContentProps {
-	item: HubWishlistItem;
+	item: FragmentOf<typeof productCardContentFragment>;
 	className?: string;
 	listAuthor: string;
 }
 
 export function ProductCardContent({
-	item,
+	item: itemMasked,
 	className,
 	listAuthor,
 }: ProductCardContentProps) {
+	const item = readFragment(productCardContentFragment, itemMasked);
 	return (
 		<LinkBuyExperience item={item} listAuthor={listAuthor}>
 			<ItemCardMain item={item} className={className}>

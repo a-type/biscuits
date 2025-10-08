@@ -7,16 +7,25 @@ import {
 	SubmitButton,
 	TextField,
 } from '@a-type/ui';
+import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 import { usePurchaseItem } from '~/hooks.js';
-import { HubWishlistItem } from '~/types.js';
+
+export const postBuyExperienceContentFragment = graphql(`
+	fragment PostBuyExperienceContent on PublicWishlistItem {
+		id
+		description
+		count
+	}
+`);
 
 export function PostBuyExperienceContent({
-	item,
+	item: itemMasked,
 	listAuthor,
 }: {
-	item: HubWishlistItem;
+	item: FragmentOf<typeof postBuyExperienceContentFragment>;
 	listAuthor: string;
 }) {
+	const item = readFragment(postBuyExperienceContentFragment, itemMasked);
 	const [purchase, { data }] = usePurchaseItem(item.id);
 
 	if (data?.purchasePublicItem) {

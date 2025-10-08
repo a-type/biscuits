@@ -1,10 +1,61 @@
 import { Box, Chip, H1, Provider as UIProvider } from '@a-type/ui';
-import { ApolloProvider, graphqlClient } from '@biscuits/graphql';
-import { createFileRoute } from '@tanstack/react-router';
+import { ApolloProvider, graphql, graphqlClient } from '@biscuits/graphql';
+import { createFileRoute, notFound } from '@tanstack/react-router';
+import { createServerFn } from '@tanstack/react-start';
+import { env } from 'cloudflare:workers';
+import request from 'graphql-request';
 import { useEffect } from 'react';
 import { HubContextProvider } from '~/components/Context.js';
-import { Items } from '~/components/Items.js';
-import { fetchList } from '~/utils/lists.js';
+import { Items, itemsFragment } from '~/components/Items.js';
+import { proxyAuthMiddleware } from '~/utils/proxyAuthMiddleware.js';
+
+export const homeQuery = graphql(
+	`
+		query Home($listId: ID!) {
+			publicWishlist(id: $listId) {
+				id
+				slug
+				title
+				author
+				coverImageUrl
+				createdAt
+				description
+				items {
+					id
+					purchasedCount
+					count
+					prioritized
+					createdAt
+					...Items
+				}
+			}
+		}
+	`,
+	[itemsFragment],
+);
+
+const fetchList = createServerFn()
+	.inputValidator((id: string) => id)
+	.middleware([proxyAuthMiddleware])
+	.handler(async ({ data, context }) => {
+		const hidePurchases = false;
+		console.log(context.headers);
+		const res = await request(
+			`${env.API_ORIGIN}/graphql`,
+			homeQuery,
+			{
+				listId: data,
+				hidePurchases,
+			},
+			context.headers,
+		);
+
+		if (!res?.publicWishlist) {
+			throw notFound();
+		}
+
+		return res.publicWishlist;
+	});
 
 export const Route = createFileRoute('/$listId')({
 	loader: ({ params: { listId } }) => fetchList({ data: listId }),

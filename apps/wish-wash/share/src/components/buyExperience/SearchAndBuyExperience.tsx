@@ -1,22 +1,47 @@
-import { HubWishlistItem } from '@/types.js';
 import { Button, Dialog, DialogActions } from '@a-type/ui';
-import { SearchButton, searchProviders } from '@wish-wash.biscuits/common';
+import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 import { ReactNode, useEffect, useState } from 'react';
-import { ItemCardImageGallery } from './ItemCardImageGallery.jsx';
-import { ItemCardPurchases } from './ItemCardPurchases.js';
-import { PostBuyExperienceContent } from './PostBuyExperienceContent.js';
+import { itemCardImageGalleryFragment } from '../cardParts/ItemCardImageGallery.js';
+import { itemCardPurchasesFragment } from '../cardParts/ItemCardPurchases.js';
+import {
+	PostBuyExperienceContent,
+	postBuyExperienceContentFragment,
+} from './PostBuyExperienceContent.js';
+import {
+	PreBuyExperienceContent,
+	preBuyExperienceContentFragment,
+} from './PreBuyExperienceContent.js';
+
+export const searchAndBuyExperienceFragment = graphql(
+	`
+		fragment SearchAndBuyExperience on PublicWishlistItem {
+			id
+			...ItemCardImageGallery
+			...ItemCardPurchases
+			...PostBuyExperienceContent
+			...PreBuyExperienceContent
+		}
+	`,
+	[
+		itemCardImageGalleryFragment,
+		itemCardPurchasesFragment,
+		postBuyExperienceContentFragment,
+		preBuyExperienceContentFragment,
+	],
+);
 
 export function SearchAndBuyExperience({
-	item,
+	item: itemMasked,
 	children,
 	listAuthor,
 	description,
 }: {
-	item: HubWishlistItem;
+	item: FragmentOf<typeof searchAndBuyExperienceFragment>;
 	listAuthor: string;
 	children: ReactNode;
 	description?: ReactNode;
 }) {
+	const item = readFragment(searchAndBuyExperienceFragment, itemMasked);
 	const [open, setOpen] = useState(false);
 	const [showPost, setShowPost] = useState(false);
 	useEffect(() => {
@@ -65,36 +90,5 @@ export function SearchAndBuyExperience({
 				</DialogActions>
 			</Dialog.Content>
 		</Dialog>
-	);
-}
-
-function PreBuyExperienceContent({
-	item,
-	description,
-	listAuthor,
-}: {
-	item: HubWishlistItem;
-	description?: ReactNode;
-	listAuthor: string;
-}) {
-	return (
-		<>
-			<Dialog.Title>Search for {item.description}</Dialog.Title>
-			<ItemCardImageGallery item={item} maxCols={2} />
-			<ItemCardPurchases item={item} className="!bg-accent-wash mr-auto" />
-			<Dialog.Description>
-				{description || (
-					<>
-						Find something online that fits the bill, then come back here to
-						tell {listAuthor} you bought it!
-					</>
-				)}
-			</Dialog.Description>
-			<div className="row flex-wrap">
-				{searchProviders.map((provider) => (
-					<SearchButton prompt={item.description} provider={provider} />
-				))}
-			</div>
-		</>
 	);
 }

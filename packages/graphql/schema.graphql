@@ -326,7 +326,13 @@ type PublicWishlistItem {
   prompt: String
   purchasedCount: Int!
   remoteImageUrl: String
-  type: String!
+  type: PublicWishlistItemType!
+}
+
+enum PublicWishlistItemType {
+  idea
+  link
+  vibe
 }
 
 input PublishPostInput {
