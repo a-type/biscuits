@@ -30,7 +30,7 @@
 		"@types/node": "catalog:",
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
-		"@vitejs/plugin-react-swc": "catalog:",
+		"@vitejs/plugin-react": "catalog:",
 		"typescript": "catalog:",
 		"unocss": "catalog:",
 		"vite": "catalog:",
