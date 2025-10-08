@@ -84,31 +84,52 @@ builder.queryFields((t) => ({
 				createdAt: snapshot.createdAt,
 				description: snapshot.description,
 				// mapping manually here to avoid leaking unintended data.
-				items: snapshot.items.map((item) => {
-					// do not show the user unconfirmed purchases
-					const purchasesForThisItem =
-						hidePurchases ? 0 : (
-							purchases
-								.filter((p) => p.itemId === item.id)
-								.reduce((acc, p) => acc + p.quantity, 0)
+				items: snapshot.items
+					.map((item) => {
+						// do not show the user unconfirmed purchases
+						const purchasesForThisItem =
+							hidePurchases ? 0 : (
+								purchases
+									.filter((p) => p.itemId === item.id)
+									.reduce((acc, p) => acc + p.quantity, 0)
+							);
+						return {
+							id: item.id,
+							description: item.description,
+							count: item.count,
+							purchasedCount: item.purchasedCount + purchasesForThisItem,
+							links: item.links,
+							prioritized: item.prioritized,
+							imageUrls: itemImageUrls(item),
+							createdAt: item.createdAt,
+							note: item.note,
+							priceMin: item.priceMin ?? null,
+							priceMax: item.priceMax ?? null,
+							type: item.type,
+							prompt: item.prompt,
+							remoteImageUrl: item.remoteImageUrl,
+						};
+					})
+					.sort((a, b) => {
+						// purchased last
+						if (a.purchasedCount >= a.count) {
+							return 1;
+						}
+						if (b.purchasedCount >= b.count) {
+							return -1;
+						}
+						// prioritized first
+						if (a.prioritized && !b.prioritized) {
+							return -1;
+						}
+						if (!a.prioritized && b.prioritized) {
+							return 1;
+						}
+						// then by createdAt
+						return (
+							new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
 						);
-					return {
-						id: item.id,
-						description: item.description,
-						count: item.count,
-						purchasedCount: item.purchasedCount + purchasesForThisItem,
-						links: item.links,
-						prioritized: item.prioritized,
-						imageUrls: itemImageUrls(item),
-						createdAt: item.createdAt,
-						note: item.note,
-						priceMin: item.priceMin ?? null,
-						priceMax: item.priceMax ?? null,
-						type: item.type,
-						prompt: item.prompt,
-						remoteImageUrl: item.remoteImageUrl,
-					};
-				}),
+					}),
 			};
 			return assignTypeName('PublicWishlist')(data);
 		},

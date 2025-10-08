@@ -39,7 +39,6 @@ const fetchList = createServerFn()
 	.middleware([proxyAuthMiddleware])
 	.handler(async ({ data, context }) => {
 		const hidePurchases = false;
-		console.log(context.headers);
 		const res = await request(
 			`${env.API_ORIGIN}/graphql`,
 			homeQuery,
@@ -69,22 +68,6 @@ function Home() {
 		// set page title to list title on load
 		document.title = data.title;
 	}, [data.title]);
-
-	const sortedItems = data.items.sort((a, b) => {
-		if (a.purchasedCount >= a.count) {
-			return 1;
-		}
-		if (b.purchasedCount >= b.count) {
-			return -1;
-		}
-		if (a.prioritized && !b.prioritized) {
-			return -1;
-		}
-		if (!a.prioritized && b.prioritized) {
-			return 1;
-		}
-		return a.createdAt < b.createdAt ? 1 : -1;
-	});
 
 	const createdAtDate = new Date(data.createdAt);
 
@@ -119,7 +102,7 @@ function Home() {
 							</Box>
 						</Box>
 						<Items
-							items={sortedItems}
+							items={data.items}
 							listAuthor={data.author}
 							className="pb-10 w-full max-w-1280px"
 						/>
