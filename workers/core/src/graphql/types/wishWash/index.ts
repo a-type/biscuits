@@ -1,3 +1,4 @@
-import './hub.js';
-import './storePage.js';
+import './public.js';
+import './publish.js';
 import './purchases.js';
+import './storePage.js';

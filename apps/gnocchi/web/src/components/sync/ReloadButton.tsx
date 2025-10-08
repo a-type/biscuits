@@ -1,5 +1,5 @@
-import { useLocalStorage } from '@/hooks/useLocalStorage.js';
 import { Button, ButtonProps } from '@a-type/ui';
+import { useLocalStorage } from '@biscuits/client';
 import { ReloadIcon } from '@radix-ui/react-icons';
 import { useRegisterSW } from 'virtual:pwa-register/react';
 

@@ -1,9 +1,9 @@
+import { id } from '@biscuits/db';
 import { BiscuitsError } from '../../error.js';
 import {
 	canPlanAcceptAMember,
 	removeUserFromPlan,
 } from '../../management/plans.js';
-import { id } from '../../services/db/index.js';
 import { email } from '../../services/email.js';
 import { builder } from '../builder.js';
 import { assignTypeName, hasTypeName } from '../relay.js';

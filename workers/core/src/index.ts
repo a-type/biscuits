@@ -5,7 +5,10 @@ import { corsMiddleware } from './middleware/cors.js';
 import { domainRoutesMiddleware } from './middleware/domainRoutes.js';
 import { handleError } from './middleware/errors.js';
 import { rateLimiterMiddleware } from './middleware/rateLimiter.js';
-import { sessionMiddleware } from './middleware/session.js';
+import {
+	sessionMiddleware,
+	sessionRefreshMiddleware,
+} from './middleware/session.js';
 import { authRouter } from './routers/auth.js';
 import { gnocchiRouter } from './routers/gnocchi.js';
 import { graphqlRouter } from './routers/graphql.js';
@@ -21,12 +24,15 @@ export const app = new Hono()
 	.use(sessionMiddleware)
 	.use(rateLimiterMiddleware)
 	.use(domainRoutesMiddleware)
-	.get('/', (ctx) => ctx.text('Hello, world!'))
 	.get('/health', (ctx) => ctx.json({ status: 'ok' }))
 	.route('/auth', authRouter)
-	.route('/verdant', verdantRouter)
+	// Verdant sync, auth, files
+	.route('/verdant', verdantRouter.use(sessionRefreshMiddleware))
+	// GraphQL API
+	.route('/graphql', graphqlRouter.use(sessionRefreshMiddleware))
+	// Stripe webhooks, also checkout session stuff
 	.route('/stripe', stripeRouter)
-	.route('/graphql', graphqlRouter)
+	// Hub pages
 	.route('/gnocchi', gnocchiRouter)
 	.route('/wish-wash', wishWashRouter)
 	.route('/post', postRouter);

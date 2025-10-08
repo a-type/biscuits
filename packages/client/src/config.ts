@@ -1,9 +1,7 @@
 export const SECURE =
 	typeof window !== 'undefined' && window.location.protocol === 'https:';
 export const API_ORIGIN =
-	localStorage.getItem('apiOriginOverride') ||
-	import.meta.env.VITE_API_ORIGIN ||
-	'http://localhost:6124';
+	import.meta.env.VITE_API_ORIGIN || 'http://localhost:6124';
 export const HOME_ORIGIN =
 	import.meta.env.VITE_HOME_ORIGIN || 'http://localhost:6123';
 

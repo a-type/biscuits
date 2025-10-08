@@ -6,7 +6,6 @@ import {
 	PeopleListItem,
 } from '@/components/sync/people/People.jsx';
 import { PersonAvatar } from '@/components/sync/people/PersonAvatar.jsx';
-import { useLocalStorage } from '@/hooks/useLocalStorage.js';
 import { hooks } from '@/stores/groceries/index.js';
 import {
 	ActionBar,
@@ -30,6 +29,7 @@ import {
 	PromoteSubscriptionButton,
 	useHasServerAccess,
 	useIsLoggedIn,
+	useLocalStorage,
 } from '@biscuits/client';
 import { graphql, useQuery } from '@biscuits/graphql';
 import { Recipe } from '@gnocchi.biscuits/verdant';

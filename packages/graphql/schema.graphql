@@ -279,7 +279,7 @@ type PlanLibraryReplica {
   ackedLogicalTime: String
   ackedServerOrder: Int!
   id: ID!
-  profile: PlanLibraryReplicaProfile!
+  profile: PlanLibraryReplicaProfile
   truant: Boolean!
   type: ReplicaType!
 }
@@ -298,6 +298,41 @@ type ProductInfo {
   name: String
   period: String!
   price: Int
+}
+
+type PublicWishlist {
+  author: String!
+  coverImageUrl: String
+  createdAt: DateTime!
+  description: String
+  hidePurchases: Boolean
+  id: ID!
+  items: [PublicWishlistItem!]!
+  slug: String!
+  title: String!
+}
+
+type PublicWishlistItem {
+  count: Int!
+  createdAt: DateTime!
+  description: String!
+  id: ID!
+  imageUrls: [String!]!
+  links: [String!]!
+  note: String
+  priceMax: String
+  priceMin: String
+  prioritized: Boolean!
+  prompt: String
+  purchasedCount: Int!
+  remoteImageUrl: String
+  type: PublicWishlistItemType!
+}
+
+enum PublicWishlistItemType {
+  idea
+  link
+  vibe
 }
 
 input PublishPostInput {
@@ -495,6 +530,7 @@ type Query {
   planInvitation(code: String!): PlanInvitation
   plans(after: ID, before: ID, first: Int, last: Int): QueryPlansConnection!
   productInfo(lookupKey: String!): ProductInfo!
+  publicWishlist(hidePurchases: Boolean = false, id: ID!): PublicWishlist
   publishedNotebook(id: ID!): PublishedNotebook
   publishedPost(id: ID!): PublishedPost
   publishedRecipe(id: ID!): PublishedRecipe
@@ -608,6 +644,7 @@ type SetupPlanResult {
 
 type StorePageScan {
   currency: String
+  failedReason: String
   imageUrl: String
   price: String
   priceString: String

@@ -7,7 +7,7 @@ export function writeSchema() {
 	const sortedSchema = lexicographicSortSchema(schema);
 	const printedSchema = printSchema(sortedSchema);
 	writeFile(
-		join(import.meta.dirname, '../../../packages/graphql/schema.graphql'),
+		join(import.meta.dirname, '../../../../packages/graphql/schema.graphql'),
 		printedSchema,
 	).catch((err) => {
 		console.error('Error writing schema', err);

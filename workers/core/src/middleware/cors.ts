@@ -1,10 +1,10 @@
+import { createDb } from '@biscuits/db';
 import { cors } from 'hono/cors';
 import {
 	ALLOWED_HEADERS,
 	ALLOWED_ORIGINS,
 	EXPOSED_HEADERS,
 } from '../config/cors.js';
-import { createDb } from '../services/db/index.js';
 import { DomainRouteService } from '../services/domainRouteCache.js';
 
 export const corsMiddleware = cors({

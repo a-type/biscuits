@@ -1,5 +1,5 @@
+import { id } from '@biscuits/db';
 import { BiscuitsError } from '@biscuits/error';
-import { id } from '../../../services/db/index.js';
 import { builder } from '../../builder.js';
 import { assignTypeName } from '../../relay.js';
 

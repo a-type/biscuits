@@ -1,10 +1,10 @@
+import { Food as DBFood, id, sql } from '@biscuits/db';
 import { BiscuitsError } from '@biscuits/error';
 import {
 	ResolveCursorConnectionArgs,
 	resolveCursorConnection,
 } from '@pothos/plugin-relay';
 import { logger } from '../../../logger.js';
-import { Food as DBFood, id, sql } from '../../../services/db/index.js';
 import { builder } from '../../builder.js';
 import { createResults, keyIndexes } from '../../dataloaders/index.js';
 import { assignTypeName, hasTypeName } from '../../relay.js';

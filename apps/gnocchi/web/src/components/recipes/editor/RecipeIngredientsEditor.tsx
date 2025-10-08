@@ -1,4 +1,3 @@
-import { useSessionStorage } from '@/hooks/useLocalStorage.js';
 import { hooks } from '@/stores/groceries/index.js';
 import {
 	Box,
@@ -20,6 +19,7 @@ import {
 	TextAreaField,
 	TextField,
 } from '@a-type/ui';
+import { useSessionStorage } from '@biscuits/client';
 import {
 	DndContext,
 	KeyboardSensor,

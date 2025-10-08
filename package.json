@@ -35,7 +35,8 @@
 		"eslint": "catalog:",
 		"eslint-plugin-react": "catalog:",
 		"eslint-plugin-react-hooks": "catalog:",
-		"@eslint/js": "catalog:"
+		"@eslint/js": "catalog:",
+		"gql.tada": "catalog:"
 	},
 	"volta": {
 		"node": "22.12.0"

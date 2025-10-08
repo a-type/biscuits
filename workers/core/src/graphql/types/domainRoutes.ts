@@ -1,8 +1,8 @@
 import { assert } from '@a-type/utils';
 import { appsById, isValidAppId } from '@biscuits/apps';
+import { id } from '@biscuits/db';
 import { BiscuitsError } from '@biscuits/error';
 import { logger } from '../../logger.js';
-import { id } from '../../services/db/index.js';
 import { doesHostnameRouteToCustomDnsHost } from '../../services/dns.js';
 import { builder } from '../builder.js';
 import { assignTypeName } from '../relay.js';

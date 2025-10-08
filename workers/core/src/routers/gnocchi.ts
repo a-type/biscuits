@@ -1,10 +1,10 @@
+import { createDb } from '@biscuits/db';
 import { getLibraryName } from '@biscuits/libraries';
 import { type HubRecipeData } from '@gnocchi.biscuits/hub';
 import { LibraryApi } from '@verdant-web/server';
 import { Hono } from 'hono';
 import { renderTemplate, staticFile } from '../common/hubs.js';
 import { HonoEnv } from '../config/hono.js';
-import { createDb } from '../services/db/index.js';
 
 export const gnocchiRouter = new Hono<HonoEnv>();
 

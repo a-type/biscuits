@@ -1,13 +1,4 @@
 import { AppId } from '@biscuits/apps';
-import { BiscuitsError } from '@biscuits/error';
-import { BiscuitsVerdantProfile } from '@biscuits/libraries';
-import { ExtractorData as GnocchiRecipeScan } from '@gnocchi.biscuits/scanning';
-import SchemaBuilder from '@pothos/core';
-import DataloaderPlugin from '@pothos/plugin-dataloader';
-import RelayPlugin from '@pothos/plugin-relay';
-import AuthPlugin from '@pothos/plugin-scope-auth';
-import { LibraryInfo } from '@verdant-web/server';
-import { ExtractorData as WishWashStorePageScan } from '@wish-wash.biscuits/scanning';
 import {
 	ChangelogItem,
 	DomainRoute,
@@ -23,7 +14,16 @@ import {
 	WishlistIdeaRequest,
 	WishlistIdeaRequestResponse,
 	WishlistPurchase,
-} from '../services/db/index.js';
+} from '@biscuits/db';
+import { BiscuitsError } from '@biscuits/error';
+import { BiscuitsVerdantProfile } from '@biscuits/libraries';
+import { ExtractorData as GnocchiRecipeScan } from '@gnocchi.biscuits/scanning';
+import SchemaBuilder from '@pothos/core';
+import DataloaderPlugin from '@pothos/plugin-dataloader';
+import RelayPlugin from '@pothos/plugin-relay';
+import AuthPlugin from '@pothos/plugin-scope-auth';
+import { LibraryInfo } from '@verdant-web/server';
+import { ExtractorData as WishWashStorePageScan } from '@wish-wash.biscuits/scanning';
 import {
 	AutocompleteSuggestion,
 	PlaceLocationDetails,
@@ -35,6 +35,8 @@ import {
 } from '../services/weather.js';
 import { GQLContext } from './context.js';
 import {
+	PublicWishlistData,
+	PublicWishlistItem,
 	PublishPostInput,
 	PublishPostNotebookInput,
 	PublishPostNotebookThemeInput,
@@ -111,6 +113,12 @@ export const builder = new SchemaBuilder<{
 		WishlistPurchase: WishlistPurchase & { __typename: 'WishlistPurchase' };
 		WishlistIdeaRequest: WishlistIdeaRequest & {
 			__typename: 'WishlistIdeaRequest';
+		};
+		PublicWishlist: PublicWishlistData & {
+			__typename: 'PublicWishlist';
+		};
+		PublicWishlistItem: PublicWishlistItem & {
+			__typename: 'PublicWishlistItem';
 		};
 
 		// Post

@@ -69,19 +69,21 @@ export function ItemEditDialog({ list }: ItemEditDialogProps) {
 				</span>
 				{item && <ItemEditor item={item} />}
 				<DialogActions className="justify-between">
-					<Button
-						color="destructive"
-						onClick={() => {
-							item?.deleteSelf();
-							setSearch((p) => {
-								p.delete('itemId');
-								return p;
-							});
-						}}
-					>
-						<Icon name="trash" />
-						Delete
-					</Button>
+					{item && (
+						<Button
+							color="destructive"
+							onClick={() => {
+								items.removeAll(item);
+								setSearch((p) => {
+									p.delete('itemId');
+									return p;
+								});
+							}}
+						>
+							<Icon name="trash" />
+							Delete
+						</Button>
+					)}
 					<DialogClose asChild>
 						<Button color="primary">Done</Button>
 					</DialogClose>
@@ -265,6 +267,7 @@ const scanPage = graphql(`
 			productName
 			scanner
 			imageUrl
+			failedReason
 		}
 	}
 `);
@@ -281,10 +284,13 @@ function SingleLinkField({
 	const firstLink = links.get(0) ?? null;
 
 	const subscribed = useHasServerAccess();
-	const [doScan, { loading: scanning }] = useLazyQuery(scanPage);
+	const [doScan, { loading: scanning, data: scanData }] =
+		useLazyQuery(scanPage);
 	const maybeScanPage = useCallback(async () => {
 		if (!subscribed) return;
 		if (!firstLink) return;
+		if (!URL.canParse(firstLink)) return;
+		if (item.get('description') || item.get('priceMin')) return;
 
 		const result = await doScan({
 			variables: {
@@ -320,6 +326,12 @@ function SingleLinkField({
 				<span className="text-xs color-gray-dark pl-3">
 					<Icon name="refresh" className="animate-spin w-10px h-10px" />{' '}
 					Scanning page...
+				</span>
+			)}
+			{!!scanData?.storePageScan?.failedReason && (
+				<span className="text-xs color-attention-dark pl-3">
+					<Icon name="warning" className="w-10px h-10px" />{' '}
+					{scanData.storePageScan.failedReason}
 				</span>
 			)}
 		</>

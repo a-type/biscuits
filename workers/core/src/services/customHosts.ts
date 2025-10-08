@@ -1,5 +1,5 @@
+import { DomainRoute } from '@biscuits/db';
 import { BiscuitsError } from '@biscuits/error';
-import { DomainRoute } from './db/index.js';
 
 export class CustomHostsService {
 	constructor(

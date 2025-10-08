@@ -1,9 +1,9 @@
 import { Session } from '@a-type/auth';
+import { DB } from '@biscuits/db';
 import { Context } from 'hono';
 import Stripe from 'stripe';
 import { HonoEnv } from '../config/hono.js';
 import { CustomHostsService } from '../services/customHosts.js';
-import { DB } from '../services/db/index.js';
 import { DomainRouteService } from '../services/domainRouteCache.js';
 import { Maps } from '../services/maps.js';
 import { Weather } from '../services/weather.js';

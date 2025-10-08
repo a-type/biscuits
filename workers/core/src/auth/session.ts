@@ -1,9 +1,9 @@
 import { honoAdapter, SessionManager } from '@a-type/auth';
+import { createDb, userNameSelector } from '@biscuits/db';
 import { Context } from 'hono';
 import { getRootDomain } from '../common/domains.js';
 import { HonoEnv } from '../config/hono.js';
 import { BiscuitsError } from '../error.js';
-import { createDb, userNameSelector } from '../services/db/index.js';
 
 declare module '@a-type/auth' {
 	interface Session {
@@ -27,7 +27,7 @@ export const sessions = new SessionManager<Context<HonoEnv>>({
 				sameSite: 'lax',
 				domain: getRootDomain(ctx.env.DEPLOYED_ORIGIN),
 			},
-			expiration: ctx.env.ENVIRONMENT === 'production' ? '24h' : '1m',
+			expiration: ctx.env.ENVIRONMENT === 'production' ? '24h' : '15m',
 			async createSession(userId) {
 				const user = await db
 					.selectFrom('User')

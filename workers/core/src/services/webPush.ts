@@ -1,5 +1,5 @@
+import { createDb, PushSubscription } from '@biscuits/db';
 import webPush from 'web-push';
-import { createDb, PushSubscription } from './db/index.js';
 
 export async function sendPush(
 	subscription: Pick<PushSubscription, 'auth' | 'p256dh' | 'endpoint'>,

@@ -1,0 +1,22 @@
+{
+	"name": "@biscuits/db",
+	"type": "module",
+	"sideEffects": false,
+	"exports": {
+		".": {
+			"development": "./src/index.ts",
+			"workerd": "./src/index.ts",
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js"
+		}
+	},
+	"dependencies": {
+		"@a-type/kysely": "^1.1.1",
+		"kysely": "^0.28.7",
+		"kysely-d1": "^0.4.0",
+		"kysely-plugin-serialize": "0.8.2"
+	},
+	"devDependencies": {
+		"typescript": "catalog:"
+	}
+}
