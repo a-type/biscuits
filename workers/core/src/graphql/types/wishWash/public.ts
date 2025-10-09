@@ -1,5 +1,4 @@
 import { getLibraryName } from '@biscuits/libraries';
-import { HubWishlistData } from '@wish-wash.biscuits/hub';
 import type { ListSnapshot as WishlistSnapshot } from '@wish-wash.biscuits/verdant';
 import { builder } from '../../builder.js';
 import { assignTypeName } from '../../relay.js';
@@ -74,7 +73,7 @@ builder.queryFields((t) => ({
 			const hidePurchases =
 				userHidePurchases || (isUsersList && userHidePurchases !== false);
 
-			const data: HubWishlistData = {
+			const data = {
 				id: wishList.id,
 				title: snapshot.name,
 				slug: wishList.slug,

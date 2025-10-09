@@ -47,7 +47,6 @@
 		"@verdant-web/s3-file-storage": "catalog:",
 		"@verdant-web/server": "catalog:",
 		"@verdant-web/tiptap": "catalog:",
-		"@wish-wash.biscuits/hub": "workspace:*",
 		"@wish-wash.biscuits/scanning": "workspace:*",
 		"@wish-wash.biscuits/verdant": "workspace:*",
 		"change-case": "5.4.4",
