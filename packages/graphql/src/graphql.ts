@@ -29,7 +29,9 @@ function createErrorHandler(
 						operation.setContext(async () => {
 							// attempt to refresh the session
 							console.log('Attempting to refresh session');
-							const success = await refreshSession(CONFIG.API_ORIGIN);
+							const success = await refreshSession(
+								`${CONFIG.API_ORIGIN}/auth/refresh`,
+							);
 							console.log('Refresh session succeeded:', success);
 							if (success) {
 								// retry the original request

@@ -16,7 +16,7 @@ async function copyDir(src: string, dest: string) {
 }
 
 async function main() {
-	const hubApps = ['gnocchi', 'post', 'wish-wash'];
+	const hubApps = ['gnocchi', 'post'];
 	for (const app of hubApps) {
 		const src = path.join(
 			import.meta.dirname,

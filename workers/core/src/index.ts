@@ -15,7 +15,6 @@ import { graphqlRouter } from './routers/graphql.js';
 import { postRouter } from './routers/post.js';
 import { stripeRouter } from './routers/stripe.js';
 import { verdantRouter } from './routers/verdant.js';
-import { wishWashRouter } from './routers/wishWash.js';
 
 export const app = new Hono()
 	.onError(handleError)
@@ -34,7 +33,6 @@ export const app = new Hono()
 	.route('/stripe', stripeRouter)
 	// Hub pages
 	.route('/gnocchi', gnocchiRouter)
-	.route('/wish-wash', wishWashRouter)
 	.route('/post', postRouter);
 
 export default app;

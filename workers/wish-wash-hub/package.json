@@ -1,8 +1,0 @@
-{
-	"name": "@worker.biscuits/wish-wash-hub",
-	"private": true,
-	"type": "module",
-	"devDependencies": {
-		"@cloudflare/workers-types": "4.20250321.0"
-	}
-}
