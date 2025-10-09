@@ -99,7 +99,7 @@ export const apps = [
 		url: 'https://wish-wash.biscuits.club',
 		prerelease: true,
 		theme: 'eggplant',
-		domainRoutes: (listId) => `/wish-wash/hub/${listId}`,
+		domainRoutes: (listId) => `https://lists.wish-wash.biscuits.club/${listId}`,
 	} as AppManifest<'wish-wash'>,
 	{
 		id: 'marginalia',
