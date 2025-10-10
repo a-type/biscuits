@@ -6,8 +6,6 @@ import {
 	FoodCategory,
 	Plan,
 	PlanInvitation,
-	PublishedNotebook,
-	PublishedPost,
 	PublishedRecipe,
 	PublishedWishlist,
 	User,
@@ -34,14 +32,7 @@ import {
 	WeatherForecastInput,
 } from '../services/weather.js';
 import { GQLContext } from './context.js';
-import {
-	PublicWishlistData,
-	PublicWishlistItem,
-	PublishPostInput,
-	PublishPostNotebookInput,
-	PublishPostNotebookThemeInput,
-	PublishPostPostInput,
-} from './otherTypes.js';
+import { PublicWishlistData, PublicWishlistItem } from './otherTypes.js';
 
 export const builder = new SchemaBuilder<{
 	Context: GQLContext;
@@ -120,11 +111,6 @@ export const builder = new SchemaBuilder<{
 		PublicWishlistItem: PublicWishlistItem & {
 			__typename: 'PublicWishlistItem';
 		};
-
-		// Post
-		PublishedPost: PublishedPost & { __typename: 'PublishedPost' };
-		PublishedNotebook: PublishedNotebook & { __typename: 'PublishedNotebook' };
-		PublishPostResult: { postId: string; notebookId: string };
 
 		// Common Utils
 		WeatherForecast: WeatherForecast;
@@ -237,12 +223,6 @@ export const builder = new SchemaBuilder<{
 			ideaRequestId: string;
 			responses: WishlistIdeaRequestResponse;
 		};
-
-		// Post
-		PublishPostInput: PublishPostInput;
-		PublishPostPostInput: PublishPostPostInput;
-		PublishPostNotebookInput: PublishPostNotebookInput;
-		PublishPostNotebookThemeInput: PublishPostNotebookThemeInput;
 
 		// Common Utils
 		WeatherForecastInput: WeatherForecastInput;

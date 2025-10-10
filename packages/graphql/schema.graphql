@@ -197,7 +197,6 @@ type Mutation {
   kickMember(userId: ID!): KickMemberResult!
   leavePlan: LeavePlanResult!
   overrideFoodCategory(categoryId: ID!, foodId: ID!): AssignFoodCategoryResult!
-  publishPost(input: PublishPostInput!): PublishPostResult!
   publishRecipe(input: PublishRecipeInput!): PublishedRecipe!
   publishWishlist(input: PublishWishlistInput!): PublishedWishlist!
   purchasePublicItem(input: PurchasePublicItemInput!): Boolean!
@@ -213,7 +212,6 @@ type Mutation {
   setUserPreference(input: SetUserPreferenceInput!): SetUserPreferenceResult!
   setUserRole(role: String!, userId: ID!): User!
   setupPlan(input: SetupPlanInput!): SetupPlanResult!
-  unpublishPost(postId: ID!): ID!
   unpublishRecipe(recipeId: ID!): ID!
   unpublishWishlist(wishlistId: ID!): ID!
   updateCategory(input: UpdateCategoryInput!): UpdateCategoryResult!
@@ -335,73 +333,6 @@ enum PublicWishlistItemType {
   vibe
 }
 
-input PublishPostInput {
-  notebook: PublishPostNotebookInput!
-  post: PublishPostPostInput!
-}
-
-input PublishPostNotebookInput {
-  """The URL of the cover image for the notebook"""
-  coverImageId: String
-
-  """The description of the notebook"""
-  description: JSON
-
-  """The URL of the icon for the notebook"""
-  iconId: String
-
-  """The ID of the notebook to publish"""
-  id: ID!
-
-  """The name of the notebook"""
-  name: String!
-
-  """The theme of the notebook"""
-  theme: PublishPostNotebookThemeInput
-}
-
-input PublishPostNotebookThemeInput {
-  """Corner radiuses"""
-  corners: String
-
-  """The font style of the notebook and posts"""
-  fontStyle: String!
-
-  """The primary color of the notebook"""
-  primaryColor: String!
-
-  """Overall spacing scale"""
-  spacing: String!
-}
-
-input PublishPostPostInput {
-  """The body of the post"""
-  body: JSON!
-
-  """The URL of the cover image for the post"""
-  coverImageId: String
-
-  """The ID of the post to publish"""
-  id: ID!
-
-  """The slug of the post"""
-  slug: String!
-
-  """The summary of the post"""
-  summary: String
-
-  """The title of the post"""
-  title: String!
-}
-
-"""The result of publishing a post"""
-type PublishPostResult {
-  notebook: PublishedNotebook!
-
-  """The ID of the post that was published"""
-  post: PublishedPost!
-}
-
 input PublishRecipeInput {
   """The ID of the recipe to publish"""
   id: ID!
@@ -413,70 +344,6 @@ input PublishRecipeInput {
 input PublishWishlistInput {
   """The ID of the wishlist to publish"""
   id: ID!
-}
-
-"""A published notebook"""
-type PublishedNotebook {
-  """The URL of the cover image for the notebook"""
-  coverImageUrl: String
-
-  """The date and time the notebook was published"""
-  createdAt: DateTime!
-
-  """The description of the notebook"""
-  description: JSON!
-
-  """The URL of the icon for the notebook"""
-  iconUrl: String
-
-  """The ID of the notebook"""
-  id: ID!
-
-  """The name of the notebook"""
-  name: String!
-
-  """The ID of the user who published the notebook"""
-  publishedBy: User!
-
-  """The date and time the notebook was last updated"""
-  updatedAt: DateTime
-}
-
-"""A published post"""
-type PublishedPost {
-  """The body of the post"""
-  body: JSON!
-
-  """The URL of the cover image for the post"""
-  coverImageUrl: String
-
-  """The date and time the post was published"""
-  createdAt: DateTime!
-
-  """The ID of the post"""
-  id: ID!
-
-  """The ID of the notebook the post belongs to"""
-  notebookId: ID!
-
-  """The last time the post was republished"""
-  publishedAt: DateTime!
-
-  """The ID of the user who published the post"""
-  publishedBy: User!
-
-  """The slug of the post"""
-  slug: String!
-
-  """The summary of the post"""
-  summary: String
-
-  """The title of the post"""
-  title: String!
-
-  """The date and time the post was last updated"""
-  updatedAt: DateTime
-  url: String!
 }
 
 """A published recipe"""
@@ -531,8 +398,6 @@ type Query {
   plans(after: ID, before: ID, first: Int, last: Int): QueryPlansConnection!
   productInfo(lookupKey: String!): ProductInfo!
   publicWishlist(hidePurchases: Boolean = false, id: ID!): PublicWishlist
-  publishedNotebook(id: ID!): PublishedNotebook
-  publishedPost(id: ID!): PublishedPost
   publishedRecipe(id: ID!): PublishedRecipe
   publishedWishlist(id: ID!): PublishedWishlist
   recipeScan(input: RecipeScanInput!): RecipeScanResult

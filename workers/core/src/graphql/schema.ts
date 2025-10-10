@@ -10,7 +10,6 @@ import './types/scalars.js';
 import './types/user.js';
 
 import './types/gnocchi/index.js';
-import './types/post/index.js';
 import './types/wishWash/index.js';
 
 import './types/common/index.js';

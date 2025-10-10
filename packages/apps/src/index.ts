@@ -107,19 +107,6 @@ export const apps = [
 		},
 	} as AppManifest<'wish-wash'>,
 	{
-		id: 'marginalia',
-		demoVideoSrc: '',
-		description: 'TODO',
-		devOriginOverride: 'http://localhost:6223',
-		iconPath: 'icon.png',
-		name: 'Marginalia',
-		paidDescription: 'TODO',
-		paidFeatures: [],
-		url: 'https://marginalia.biscuits.club',
-		prerelease: true,
-		theme: 'tomato',
-	} as AppManifest<'marginalia'>,
-	{
 		id: 'star-chart',
 		demoVideoSrc: '',
 		description: 'TODO',
@@ -132,20 +119,6 @@ export const apps = [
 		prerelease: true,
 		theme: 'blueberry',
 	} as AppManifest<'star-chart'>,
-	{
-		id: 'humding',
-		demoVideoSrc: '',
-		description: 'An app for playing it by ear',
-		devOriginOverride: 'http://localhost:6225',
-		iconPath: 'icon.png',
-		name: 'Humding',
-		paidDescription:
-			'Share your songs with others and sync to all your devices',
-		paidFeatures: [],
-		url: 'https://humding.biscuits.club',
-		prerelease: true,
-		theme: 'lemon',
-	} as AppManifest<'humding'>,
 	{
 		id: 'names',
 		name: 'Names',
@@ -192,19 +165,6 @@ export const apps = [
 		prerelease: false,
 		theme: 'lemon',
 	} as AppManifest<'palette'>,
-	{
-		id: 'post',
-		description: 'Write and share your thoughts',
-		devOriginOverride: 'http://localhost:6228',
-		iconPath: 'icon.png',
-		name: 'Post',
-		paidDescription: 'TODO',
-		paidFeatures: [],
-		url: 'https://post.biscuits.club',
-		prerelease: true,
-		theme: 'blueberry',
-		demoVideoSrc: '',
-	} as AppManifest<'post'>,
 ] as const;
 
 export type AppId = (typeof apps)[number]['id'];

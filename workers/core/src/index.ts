@@ -11,7 +11,6 @@ import {
 import { authRouter } from './routers/auth.js';
 import { gnocchiRouter } from './routers/gnocchi.js';
 import { graphqlRouter } from './routers/graphql.js';
-import { postRouter } from './routers/post.js';
 import { stripeRouter } from './routers/stripe.js';
 import { verdantRouter } from './routers/verdant.js';
 
@@ -30,8 +29,7 @@ export const app = new Hono()
 	// Stripe webhooks, also checkout session stuff
 	.route('/stripe', stripeRouter)
 	// Hub pages
-	.route('/gnocchi', gnocchiRouter)
-	.route('/post', postRouter);
+	.route('/gnocchi', gnocchiRouter);
 
 export default app;
 

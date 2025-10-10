@@ -27,9 +27,6 @@ catalogs:
     '@eslint/js':
       specifier: 9.37.0
       version: 9.37.0
-    '@originjs/vite-plugin-commonjs':
-      specifier: 1.0.3
-      version: 1.0.3
     '@react-spring/web':
       specifier: 9.7.5
       version: 9.7.5
@@ -43,15 +40,6 @@ catalogs:
       specifier: 2.11.5
       version: 2.11.5
     '@tiptap/extension-paragraph':
-      specifier: 2.11.5
-      version: 2.11.5
-    '@tiptap/extension-placeholder':
-      specifier: 2.11.5
-      version: 2.11.5
-    '@tiptap/extension-typography':
-      specifier: 2.11.5
-      version: 2.11.5
-    '@tiptap/html':
       specifier: 2.11.5
       version: 2.11.5
     '@tiptap/pm':
@@ -599,227 +587,6 @@ importers:
         specifier: ^0.2.1
         version: 0.2.1(rollup@4.52.4)
 
-  apps/humding/verdant:
-    dependencies:
-      '@verdant-web/cli':
-        specifier: 'catalog:'
-        version: 4.8.3
-      '@verdant-web/react':
-        specifier: 'catalog:'
-        version: 42.1.1(@verdant-web/store@4.6.1)(react@19.2.0)
-      '@verdant-web/store':
-        specifier: 'catalog:'
-        version: 4.6.1
-      react:
-        specifier: 'catalog:'
-        version: 19.2.0
-
-  apps/humding/web:
-    dependencies:
-      '@a-type/ui':
-        specifier: 'catalog:'
-        version: 2.8.12(@types/react-dom@19.2.0(@types/react@19.2.0))(@types/react@19.2.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.2(vite@7.1.9(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
-      '@a-type/utils':
-        specifier: 'catalog:'
-        version: 1.1.5
-      '@biscuits/client':
-        specifier: workspace:*
-        version: link:../../../packages/client
-      '@biscuits/graphql':
-        specifier: workspace:*
-        version: link:../../../packages/graphql
-      '@humding.biscuits/verdant':
-        specifier: workspace:*
-        version: link:../verdant
-      '@react-spring/web':
-        specifier: ^9.7.3
-        version: 9.7.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      '@types/react':
-        specifier: 'catalog:'
-        version: 19.2.0
-      '@types/react-dom':
-        specifier: 'catalog:'
-        version: 19.2.0(@types/react@19.2.0)
-      '@unocss/transformer-variant-group':
-        specifier: 'catalog:'
-        version: 66.5.2
-      '@use-gesture/react':
-        specifier: ^10.2.24
-        version: 10.3.1(react@19.2.0)
-      '@verdant-web/react-router':
-        specifier: 'catalog:'
-        version: 0.8.0(react@19.2.0)
-      '@verdant-web/store':
-        specifier: 'catalog:'
-        version: 4.6.1
-      '@vitejs/plugin-react-swc':
-        specifier: 'catalog:'
-        version: 4.1.0(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
-      gql.tada:
-        specifier: 'catalog:'
-        version: 1.8.13(graphql@16.11.0)(typescript@5.9.3)
-      react:
-        specifier: 'catalog:'
-        version: 19.2.0
-      react-dom:
-        specifier: 'catalog:'
-        version: 19.2.0(react@19.2.0)
-      typescript:
-        specifier: 'catalog:'
-        version: 5.9.3
-      unocss:
-        specifier: 'catalog:'
-        version: 66.5.2(vite@7.1.9(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
-      valtio:
-        specifier: 'catalog:'
-        version: 2.1.8(@types/react@19.2.0)(react@19.2.0)
-      vite:
-        specifier: 'catalog:'
-        version: 7.1.9(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
-      vite-plugin-pwa:
-        specifier: 'catalog:'
-        version: 1.0.3(@types/babel__core@7.20.5)(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(workbox-window@7.3.0)
-      workbox-core:
-        specifier: 'catalog:'
-        version: 7.3.0
-      workbox-expiration:
-        specifier: 'catalog:'
-        version: 7.3.0
-      workbox-precaching:
-        specifier: 'catalog:'
-        version: 7.3.0
-      workbox-routing:
-        specifier: 'catalog:'
-        version: 7.3.0
-      workbox-strategies:
-        specifier: 'catalog:'
-        version: 7.3.0
-      workbox-window:
-        specifier: 'catalog:'
-        version: 7.3.0
-    devDependencies:
-      '@biscuits/uno-config':
-        specifier: workspace:*
-        version: link:../../../packages/uno-config
-      '@originjs/vite-plugin-commonjs':
-        specifier: ^1.0.3
-        version: 1.0.3
-
-  apps/marginalia/verdant:
-    dependencies:
-      '@verdant-web/cli':
-        specifier: 'catalog:'
-        version: 4.8.3
-      '@verdant-web/react':
-        specifier: 'catalog:'
-        version: 42.1.1(@verdant-web/store@4.6.1)(react@19.2.0)
-      '@verdant-web/store':
-        specifier: 'catalog:'
-        version: 4.6.1
-      cuid:
-        specifier: ^2.1.8
-        version: 2.1.8
-      react:
-        specifier: 'catalog:'
-        version: 19.2.0
-
-  apps/marginalia/web:
-    dependencies:
-      '@a-type/ui':
-        specifier: 'catalog:'
-        version: 2.8.12(@types/react-dom@19.2.0(@types/react@19.2.0))(@types/react@19.2.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.2(vite@7.1.9(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
-      '@a-type/utils':
-        specifier: 'catalog:'
-        version: 1.1.5
-      '@biscuits/client':
-        specifier: workspace:*
-        version: link:../../../packages/client
-      '@biscuits/graphql':
-        specifier: workspace:*
-        version: link:../../../packages/graphql
-      '@marginalia.biscuits/verdant':
-        specifier: workspace:*
-        version: link:../verdant
-      '@react-spring/web':
-        specifier: ^9.7.3
-        version: 9.7.5(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      '@tanstack/react-query':
-        specifier: 5.39.0
-        version: 5.39.0(react@19.2.0)
-      '@types/react':
-        specifier: 'catalog:'
-        version: 19.2.0
-      '@types/react-dom':
-        specifier: 'catalog:'
-        version: 19.2.0(@types/react@19.2.0)
-      '@unocss/transformer-variant-group':
-        specifier: 'catalog:'
-        version: 66.5.2
-      '@verdant-web/react-router':
-        specifier: 'catalog:'
-        version: 0.8.0(react@19.2.0)
-      '@verdant-web/store':
-        specifier: 'catalog:'
-        version: 4.6.1
-      '@vitejs/plugin-react-swc':
-        specifier: 'catalog:'
-        version: 4.1.0(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
-      classnames:
-        specifier: ^2.5.0
-        version: 2.5.1
-      gql.tada:
-        specifier: 'catalog:'
-        version: 1.8.13(graphql@16.11.0)(typescript@5.9.3)
-      react:
-        specifier: 'catalog:'
-        version: 19.2.0
-      react-dom:
-        specifier: 'catalog:'
-        version: 19.2.0(react@19.2.0)
-      typescript:
-        specifier: 'catalog:'
-        version: 5.9.3
-      unocss:
-        specifier: 'catalog:'
-        version: 66.5.2(vite@7.1.9(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
-      valtio:
-        specifier: 'catalog:'
-        version: 2.1.8(@types/react@19.2.0)(react@19.2.0)
-      vite:
-        specifier: 'catalog:'
-        version: 7.1.9(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
-      vite-plugin-pwa:
-        specifier: 'catalog:'
-        version: 1.0.3(@types/babel__core@7.20.5)(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(workbox-window@7.3.0)
-      workbox-core:
-        specifier: 'catalog:'
-        version: 7.3.0
-      workbox-expiration:
-        specifier: 'catalog:'
-        version: 7.3.0
-      workbox-precaching:
-        specifier: 'catalog:'
-        version: 7.3.0
-      workbox-routing:
-        specifier: 'catalog:'
-        version: 7.3.0
-      workbox-strategies:
-        specifier: 'catalog:'
-        version: 7.3.0
-      workbox-window:
-        specifier: 'catalog:'
-        version: 7.3.0
-    devDependencies:
-      '@biscuits/uno-config':
-        specifier: workspace:*
-        version: link:../../../packages/uno-config
-      '@originjs/vite-plugin-commonjs':
-        specifier: ^1.0.3
-        version: 1.0.3
-      '@types/unist':
-        specifier: ^3.0.2
-        version: 3.0.3
-
   apps/names/verdant:
     dependencies:
       '@verdant-web/cli':
@@ -1049,212 +816,6 @@ importers:
       '@originjs/vite-plugin-commonjs':
         specifier: ^1.0.3
         version: 1.0.3
-
-  apps/post/common:
-    dependencies:
-      '@tiptap/core':
-        specifier: 'catalog:'
-        version: 2.11.5(@tiptap/pm@2.11.5)
-      '@tiptap/extension-highlight':
-        specifier: 2.11.5
-        version: 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))
-      '@tiptap/extension-link':
-        specifier: 'catalog:'
-        version: 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)
-      '@tiptap/extension-typography':
-        specifier: 'catalog:'
-        version: 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))
-      '@tiptap/starter-kit':
-        specifier: 'catalog:'
-        version: 2.11.5
-      '@verdant-web/tiptap':
-        specifier: 'catalog:'
-        version: 6.0.1(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@verdant-web/react@42.1.1(@verdant-web/store@4.6.1)(react@19.2.0))(@verdant-web/store@4.6.1)(react@19.2.0)
-
-  apps/post/hub:
-    dependencies:
-      '@a-type/ui':
-        specifier: 'catalog:'
-        version: 2.8.12(@types/react-dom@19.2.0(@types/react@19.2.0))(@types/react@19.2.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.2(vite@7.1.9(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
-      '@a-type/utils':
-        specifier: 'catalog:'
-        version: 1.1.5
-      '@post.biscuits/common':
-        specifier: workspace:*
-        version: link:../common
-      '@tiptap/html':
-        specifier: 'catalog:'
-        version: 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)
-      '@types/react':
-        specifier: 'catalog:'
-        version: 19.2.0
-      '@types/react-dom':
-        specifier: 'catalog:'
-        version: 19.2.0(@types/react@19.2.0)
-      '@unocss/transformer-variant-group':
-        specifier: 'catalog:'
-        version: 66.5.2
-      '@verdant-web/tiptap':
-        specifier: 'catalog:'
-        version: 6.0.1(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@verdant-web/react@42.1.1(@verdant-web/store@4.6.1)(react@19.2.0))(@verdant-web/store@4.6.1)(react@19.2.0)
-      '@vitejs/plugin-react-swc':
-        specifier: 'catalog:'
-        version: 4.1.0(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
-      feed:
-        specifier: 4.2.2
-        version: 4.2.2
-      react:
-        specifier: 'catalog:'
-        version: 19.2.0
-      react-dom:
-        specifier: 'catalog:'
-        version: 19.2.0(react@19.2.0)
-      typescript:
-        specifier: 'catalog:'
-        version: 5.9.3
-      unocss:
-        specifier: 'catalog:'
-        version: 66.5.2(vite@7.1.9(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
-      vite:
-        specifier: 'catalog:'
-        version: 7.1.9(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
-    devDependencies:
-      '@biscuits/uno-config':
-        specifier: workspace:*
-        version: link:../../../packages/uno-config
-      '@originjs/vite-plugin-commonjs':
-        specifier: ^1.0.3
-        version: 1.0.3
-      concurrently:
-        specifier: ^7.5.0
-        version: 7.6.0
-      dotenv:
-        specifier: ^16.0.1
-        version: 16.4.5
-
-  apps/post/verdant:
-    dependencies:
-      '@verdant-web/cli':
-        specifier: 'catalog:'
-        version: 4.8.3
-      '@verdant-web/react':
-        specifier: 'catalog:'
-        version: 42.1.1(@verdant-web/store@4.6.1)(react@19.2.0)
-      '@verdant-web/store':
-        specifier: 'catalog:'
-        version: 4.6.1
-      '@verdant-web/tiptap':
-        specifier: 'catalog:'
-        version: 6.0.1(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@verdant-web/react@42.1.1(@verdant-web/store@4.6.1)(react@19.2.0))(@verdant-web/store@4.6.1)(react@19.2.0)
-      react:
-        specifier: 'catalog:'
-        version: 19.2.0
-
-  apps/post/web:
-    dependencies:
-      '@a-type/ui':
-        specifier: 'catalog:'
-        version: 2.8.12(@types/react-dom@19.2.0(@types/react@19.2.0))(@types/react@19.2.0)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.2(vite@7.1.9(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
-      '@a-type/utils':
-        specifier: 'catalog:'
-        version: 1.1.5
-      '@biscuits/client':
-        specifier: workspace:*
-        version: link:../../../packages/client
-      '@biscuits/graphql':
-        specifier: workspace:*
-        version: link:../../../packages/graphql
-      '@emoji-mart/react':
-        specifier: ^1.1.1
-        version: 1.1.1(emoji-mart@5.6.0)(react@19.2.0)
-      '@originjs/vite-plugin-commonjs':
-        specifier: 'catalog:'
-        version: 1.0.3
-      '@post.biscuits/common':
-        specifier: workspace:*
-        version: link:../common
-      '@post.biscuits/verdant':
-        specifier: workspace:*
-        version: link:../verdant
-      '@tiptap/core':
-        specifier: 'catalog:'
-        version: 2.11.5(@tiptap/pm@2.11.5)
-      '@tiptap/extension-placeholder':
-        specifier: 'catalog:'
-        version: 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)
-      '@tiptap/react':
-        specifier: 'catalog:'
-        version: 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      '@types/react':
-        specifier: 'catalog:'
-        version: 19.2.0
-      '@types/react-dom':
-        specifier: 'catalog:'
-        version: 19.2.0(@types/react@19.2.0)
-      '@unocss/transformer-variant-group':
-        specifier: 'catalog:'
-        version: 66.5.2
-      '@verdant-web/react-router':
-        specifier: 'catalog:'
-        version: 0.8.0(react@19.2.0)
-      '@verdant-web/store':
-        specifier: 'catalog:'
-        version: 4.6.1
-      '@verdant-web/tiptap':
-        specifier: 'catalog:'
-        version: 6.0.1(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@verdant-web/react@42.1.1(@verdant-web/store@4.6.1)(react@19.2.0))(@verdant-web/store@4.6.1)(react@19.2.0)
-      '@vitejs/plugin-react-swc':
-        specifier: 'catalog:'
-        version: 4.1.0(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
-      emoji-mart:
-        specifier: ^5.6.0
-        version: 5.6.0
-      gql.tada:
-        specifier: 'catalog:'
-        version: 1.8.13(graphql@16.11.0)(typescript@5.9.3)
-      react:
-        specifier: 'catalog:'
-        version: 19.2.0
-      react-dom:
-        specifier: 'catalog:'
-        version: 19.2.0(react@19.2.0)
-      typescript:
-        specifier: 'catalog:'
-        version: 5.9.3
-      unocss:
-        specifier: 'catalog:'
-        version: 66.5.2(vite@7.1.9(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
-      valtio:
-        specifier: 'catalog:'
-        version: 2.1.8(@types/react@19.2.0)(react@19.2.0)
-      vite:
-        specifier: 'catalog:'
-        version: 7.1.9(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
-      vite-plugin-pwa:
-        specifier: 'catalog:'
-        version: 1.0.3(@types/babel__core@7.20.5)(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(workbox-window@7.3.0)
-      workbox-core:
-        specifier: 'catalog:'
-        version: 7.3.0
-      workbox-expiration:
-        specifier: 'catalog:'
-        version: 7.3.0
-      workbox-precaching:
-        specifier: 'catalog:'
-        version: 7.3.0
-      workbox-routing:
-        specifier: 'catalog:'
-        version: 7.3.0
-      workbox-strategies:
-        specifier: 'catalog:'
-        version: 7.3.0
-      workbox-window:
-        specifier: 'catalog:'
-        version: 7.3.0
-    devDependencies:
-      '@biscuits/uno-config':
-        specifier: workspace:*
-        version: link:../../../packages/uno-config
 
   apps/star-chart/verdant:
     dependencies:
@@ -2116,9 +1677,6 @@ importers:
       '@paralleldrive/cuid2':
         specifier: 2.2.2
         version: 2.2.2
-      '@post.biscuits/hub':
-        specifier: workspace:*
-        version: link:../../apps/post/hub
       '@pothos/core':
         specifier: ^3.41.0
         version: 3.41.2(graphql@16.11.0)
@@ -2249,12 +1807,6 @@ importers:
         version: 4.42.1(@cloudflare/workers-types@4.20251008.0)
 
   workers/gnocchi-hub:
-    devDependencies:
-      '@cloudflare/workers-types':
-        specifier: 4.20250321.0
-        version: 4.20250321.0
-
-  workers/post-hub:
     devDependencies:
       '@cloudflare/workers-types':
         specifier: 4.20250321.0
@@ -3460,12 +3012,6 @@ packages:
 
   '@emnapi/runtime@1.3.1':
     resolution: {integrity: sha512-kEBmG8KyqtxJZv+ygbEim+KCGtIq1fC22Ms3S4ziXmYKm8uyoLX0MHONVKwp+9opg390VaKRNt4a7A9NwmpNhw==}
-
-  '@emoji-mart/react@1.1.1':
-    resolution: {integrity: sha512-NMlFNeWgv1//uPsvLxvGQoIerPuVdXwK/EUek8OOkJ6wVOWPUizRBJU0hDqWZCOROVpfBgCemaC3m6jDOXi03g==}
-    peerDependencies:
-      emoji-mart: ^5.2
-      react: ^16.8 || ^17 || ^18
 
   '@envelop/core@5.3.2':
     resolution: {integrity: sha512-06Mu7fmyKzk09P2i2kHpGfItqLLgCq7uO5/nX4fc/iHMplWPNuAx4iYR+WXUQoFHDnP6EUbceQNQ5iyeMz9f3g==}
@@ -5811,9 +5357,6 @@ packages:
   '@tanstack/query-core@4.36.1':
     resolution: {integrity: sha512-DJSilV5+ytBP1FbFcEJovv4rnnm/CokuVvrBEtW/Va9DvuJ3HksbXUJEpI0aV1KtuL4ZoO9AVE6PyNLzF7tLeA==}
 
-  '@tanstack/query-core@5.38.0':
-    resolution: {integrity: sha512-QtkoxvFcu52mNpp3+qOo9H265m3rt83Dgbw5WnNyJvr83cegrQ7zT8haHhL4Rul6ZQkeovxyWbXVW9zI0WYx6g==}
-
   '@tanstack/query-core@5.90.2':
     resolution: {integrity: sha512-k/TcR3YalnzibscALLwxeiLUub6jN5EDLwKDiO7q5f4ICEoptJ+n9+7vcEFy5/x/i6Q+Lb/tXrsKCggf5uQJXQ==}
 
@@ -5828,11 +5371,6 @@ packages:
         optional: true
       react-native:
         optional: true
-
-  '@tanstack/react-query@5.39.0':
-    resolution: {integrity: sha512-zc0WnyEffyTgG+myLv8cY2tJOUT6jOprCiprpbMqylCaCFipSDUPCYCt2AC+qxgk2CFuqiI/fjb1u5/HhLkrPg==}
-    peerDependencies:
-      react: ^18.0.0
 
   '@tanstack/react-query@5.90.2':
     resolution: {integrity: sha512-CLABiR+h5PYfOWr/z+vWFt5VsOA2ekQeRQBFSKlcoW6Ndx/f8rfyVmq4LbgOM4GG2qtxAxjLYLOpCNTYm4uKzw==}
@@ -6042,11 +5580,6 @@ packages:
     peerDependencies:
       '@tiptap/core': ^2.7.0
 
-  '@tiptap/extension-highlight@2.11.5':
-    resolution: {integrity: sha512-VBZfT869L9CiTLF8qr+3FBUtJcmlyUTECORNo0ceEiNDg4H6V9uNPwaROMXrWiQCc+DYVCOkx541QrXwNMzxlg==}
-    peerDependencies:
-      '@tiptap/core': ^2.7.0
-
   '@tiptap/extension-history@2.11.5':
     resolution: {integrity: sha512-b+wOS33Dz1azw6F1i9LFTEIJ/gUui0Jwz5ZvmVDpL2ZHBhq1Ui0/spTT+tuZOXq7Y/uCbKL8Liu4WoedIvhboQ==}
     peerDependencies:
@@ -6085,12 +5618,6 @@ packages:
     peerDependencies:
       '@tiptap/core': ^2.7.0
 
-  '@tiptap/extension-placeholder@2.11.5':
-    resolution: {integrity: sha512-Pr+0Ju/l2ZvXMd9VQxtaoSZbs0BBp1jbBDqwms88ctpyvQFRfLSfSkqudQcSHyw2ROOz2E31p/7I7fpI8Y0CLA==}
-    peerDependencies:
-      '@tiptap/core': ^2.7.0
-      '@tiptap/pm': ^2.7.0
-
   '@tiptap/extension-strike@2.11.5':
     resolution: {integrity: sha512-PVfUiCqrjvsLpbIoVlegSY8RlkR64F1Rr2RYmiybQfGbg+AkSZXDeO0eIrc03//4gua7D9DfIozHmAKv1KN3ow==}
     peerDependencies:
@@ -6105,17 +5632,6 @@ packages:
     resolution: {integrity: sha512-Gq1WwyhFpCbEDrLPIHt5A8aLSlf8bfz4jm417c8F/JyU0J5dtYdmx0RAxjnLw1i7ZHE7LRyqqAoS0sl7JHDNSQ==}
     peerDependencies:
       '@tiptap/core': ^2.7.0
-
-  '@tiptap/extension-typography@2.11.5':
-    resolution: {integrity: sha512-K+mwkyyH3bhnw8f6dKt0AIIh7ipPPVTY5XiWxm1ZMnS6p7TkXeqSJRU6mT1a47YLX4IGBEMlTQdvDVvJ1hwTjA==}
-    peerDependencies:
-      '@tiptap/core': ^2.7.0
-
-  '@tiptap/html@2.11.5':
-    resolution: {integrity: sha512-B7ZuFV4Z6JytBhcj4865yGldPite+xX7O3X4hBUNoPpxhDf7BD+lSOgeZabZteQPnP6TKKqFT50q/Wll2t8eGQ==}
-    peerDependencies:
-      '@tiptap/core': ^2.7.0
-      '@tiptap/pm': ^2.7.0
 
   '@tiptap/pm@2.11.5':
     resolution: {integrity: sha512-z9JFtqc5ZOsdQLd9vRnXfTCQ8v5ADAfRt9Nm7SqP6FUHII8E1hs38ACzf5xursmth/VonJYb5+73Pqxk1hGIPw==}
@@ -7581,9 +7097,6 @@ packages:
   emmet@2.4.11:
     resolution: {integrity: sha512-23QPJB3moh/U9sT4rQzGgeyyGIrcM+GH5uVYg2C6wZIxAIJq7Ng3QLT79tl8FUwDXhyq9SusfknOrofAKqvgyQ==}
 
-  emoji-mart@5.6.0:
-    resolution: {integrity: sha512-eJp3QRe79pjwa+duv+n7+5YsNhRcMl812EcFVwrnRvYKoNPoQb5qxU8DG6Bgwji0akHdp6D4Ln6tYLG58MFSow==}
-
   emoji-regex-xs@1.0.0:
     resolution: {integrity: sha512-LRlerrMYoIDrT6jgpeZ2YYl/L8EulRTt5hQcYjy5AInh7HWXKimpqx68aknBFpGL2+/IcogTcaydJEgaTmOpDg==}
 
@@ -7601,10 +7114,6 @@ packages:
 
   entities@4.5.0:
     resolution: {integrity: sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw==}
-    engines: {node: '>=0.12'}
-
-  entities@5.0.0:
-    resolution: {integrity: sha512-BeJFvFRJddxobhvEdm5GqHzRV/X+ACeuw0/BuuxsCh1EUZcAIz8+kYmBp/LrQuloy6K1f3a0M7+IhmZ7QnkISA==}
     engines: {node: '>=0.12'}
 
   env-cmd@10.1.0:
@@ -8102,10 +7611,6 @@ packages:
     peerDependenciesMeta:
       picomatch:
         optional: true
-
-  feed@4.2.2:
-    resolution: {integrity: sha512-u5/sxGfiMfZNtJ3OvQpXcvotFpYkL0n9u9mM2vkui2nGo8b4wvDkJ8gAkYqbA8QpGyFCv3RK0Z+Iv+9veCS9bQ==}
-    engines: {node: '>=0.4.0'}
 
   fetchdts@0.1.7:
     resolution: {integrity: sha512-YoZjBdafyLIop9lSxXVI33oLD5kN31q4Td+CasofLLYeLXRFeOsuOw0Uo+XNRi9PZlbfdlN2GmRtm4tCEQ9/KA==}
@@ -11767,10 +11272,6 @@ packages:
       utf-8-validate:
         optional: true
 
-  xml-js@1.6.11:
-    resolution: {integrity: sha512-7rVi2KMfwfWFl+GpPg6m80IVMWXLRjO+PxTq7V2CDhoGak0wzYzFgUY2m4XJ47OGdXd8eLE8EmwfAmdjw7lC1g==}
-    hasBin: true
-
   xmlbuilder2@3.1.1:
     resolution: {integrity: sha512-WCSfbfZnQDdLQLiMdGUQpMxxckeQ4oZNMNhLVkcekTu7xhD4tuUDyAPoY8CwXvBYE6LwBHd6QW2WZXlOWr1vCw==}
     engines: {node: '>=12.0'}
@@ -11834,10 +11335,6 @@ packages:
 
   youch@4.1.0-beta.10:
     resolution: {integrity: sha512-rLfVLB4FgQneDr0dv1oddCVZmKjcJ6yX6mS4pU82Mq/Dt9a3cLZQ62pDBL4AUO+uVrCvtWz3ZFUL2HFAFJ/BXQ==}
-
-  zeed-dom@0.15.1:
-    resolution: {integrity: sha512-dtZ0aQSFyZmoJS0m06/xBN1SazUBPL5HpzlAcs/KcRW0rzadYw12deQBjeMhGKMMeGEp7bA9vmikMLaO4exBcg==}
-    engines: {node: '>=14.13.1'}
 
   zen-observable-ts@1.2.5:
     resolution: {integrity: sha512-QZWQekv6iB72Naeake9hS1KxHlotfRpe+WGNbNx5/ta+R3DNjVO2bswf63gXlWDcs+EMd7XY8HfVQyP1X6T4Zg==}
@@ -14071,11 +13568,6 @@ snapshots:
     dependencies:
       tslib: 2.8.1
     optional: true
-
-  '@emoji-mart/react@1.1.1(emoji-mart@5.6.0)(react@19.2.0)':
-    dependencies:
-      emoji-mart: 5.6.0
-      react: 19.2.0
 
   '@envelop/core@5.3.2':
     dependencies:
@@ -16452,8 +15944,6 @@ snapshots:
 
   '@tanstack/query-core@4.36.1': {}
 
-  '@tanstack/query-core@5.38.0': {}
-
   '@tanstack/query-core@5.90.2': {}
 
   '@tanstack/react-query@4.36.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)':
@@ -16463,11 +15953,6 @@ snapshots:
       use-sync-external-store: 1.4.0(react@19.2.0)
     optionalDependencies:
       react-dom: 19.2.0(react@19.2.0)
-
-  '@tanstack/react-query@5.39.0(react@19.2.0)':
-    dependencies:
-      '@tanstack/query-core': 5.38.0
-      react: 19.2.0
 
   '@tanstack/react-query@5.90.2(react@19.2.0)':
     dependencies:
@@ -16787,10 +16272,6 @@ snapshots:
     dependencies:
       '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
 
-  '@tiptap/extension-highlight@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))':
-    dependencies:
-      '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
-
   '@tiptap/extension-history@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)':
     dependencies:
       '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
@@ -16823,11 +16304,6 @@ snapshots:
     dependencies:
       '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
 
-  '@tiptap/extension-placeholder@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)':
-    dependencies:
-      '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
-      '@tiptap/pm': 2.11.5
-
   '@tiptap/extension-strike@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))':
     dependencies:
       '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
@@ -16839,16 +16315,6 @@ snapshots:
   '@tiptap/extension-text@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))':
     dependencies:
       '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
-
-  '@tiptap/extension-typography@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))':
-    dependencies:
-      '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
-
-  '@tiptap/html@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)':
-    dependencies:
-      '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
-      '@tiptap/pm': 2.11.5
-      zeed-dom: 0.15.1
 
   '@tiptap/pm@2.11.5':
     dependencies:
@@ -18695,8 +18161,6 @@ snapshots:
       '@emmetio/abbreviation': 2.3.3
       '@emmetio/css-abbreviation': 2.1.8
 
-  emoji-mart@5.6.0: {}
-
   emoji-regex-xs@1.0.0: {}
 
   emoji-regex@10.4.0: {}
@@ -18713,8 +18177,6 @@ snapshots:
       once: 1.4.0
 
   entities@4.5.0: {}
-
-  entities@5.0.0: {}
 
   env-cmd@10.1.0:
     dependencies:
@@ -19299,10 +18761,6 @@ snapshots:
   fdir@6.5.0(picomatch@4.0.3):
     optionalDependencies:
       picomatch: 4.0.3
-
-  feed@4.2.2:
-    dependencies:
-      xml-js: 1.6.11
 
   fetchdts@0.1.7: {}
 
@@ -23619,10 +23077,6 @@ snapshots:
 
   ws@8.18.0: {}
 
-  xml-js@1.6.11:
-    dependencies:
-      sax: 1.4.1
-
   xmlbuilder2@3.1.1:
     dependencies:
       '@oozcitak/dom': 1.15.10
@@ -23693,11 +23147,6 @@ snapshots:
       '@speed-highlight/core': 1.2.7
       cookie: 1.0.2
       youch-core: 0.3.3
-
-  zeed-dom@0.15.1:
-    dependencies:
-      css-what: 6.1.0
-      entities: 5.0.0
 
   zen-observable-ts@1.2.5:
     dependencies:
