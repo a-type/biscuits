@@ -7,4 +7,10 @@
 	"vars": {
 		"API_ORIGIN": "https://api.biscuits.club",
 	},
+	"routes": [
+		{
+			"pattern": "*.lists.wish-wash.biscuits.club/*",
+			"custom_domain": true,
+		},
+	],
 }

@@ -1,10 +1,14 @@
-import { DB, DomainRoute, NewDomainRoute } from '@biscuits/db';
+import { createDb, DB, DomainRoute, NewDomainRoute } from '@biscuits/db';
+import { D1Database, KVNamespace } from '@cloudflare/workers-types';
 
 export class DomainRouteService {
+	#db: DB;
 	constructor(
-		private db: DB,
+		private d1: D1Database,
 		private kv: KVNamespace,
-	) {}
+	) {
+		this.#db = createDb(d1);
+	}
 
 	#put = (domain: string, route: DomainRoute) => {
 		this.kv.put(domain, JSON.stringify(route));
@@ -19,7 +23,7 @@ export class DomainRouteService {
 	};
 
 	async preload() {
-		const routes = await this.db
+		const routes = await this.#db
 			.selectFrom('DomainRoute')
 			.selectAll()
 			.execute();
@@ -30,7 +34,7 @@ export class DomainRouteService {
 	}
 
 	async add(init: NewDomainRoute) {
-		const route = await this.db
+		const route = await this.#db
 			.insertInto('DomainRoute')
 			.values(init)
 			.returningAll()
@@ -40,7 +44,7 @@ export class DomainRouteService {
 	}
 
 	async deleteById(id: string) {
-		const route = await this.db
+		const route = await this.#db
 			.deleteFrom('DomainRoute')
 			.where('id', '=', id)
 			.returningAll()
@@ -56,7 +60,7 @@ export class DomainRouteService {
 	}
 
 	async getById(id: string) {
-		const route = await this.db
+		const route = await this.#db
 			.selectFrom('DomainRoute')
 			.selectAll()
 			.where('id', '=', id)
@@ -78,8 +82,3 @@ export class DomainRouteService {
 		);
 	}
 }
-
-// export const domainRoutes = new DomainRouteService();
-// domainRoutes.preload().then(() => {
-// 	logger.info('DomainRouteCache preloaded', domainRoutes.size, 'routes');
-// });

@@ -1,0 +1,37 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "prod-biscuits-worker-domain-route-proxy",
+	"compatibility_date": "2025-09-24",
+	"main": "src/index.ts",
+	"account_id": "5f843fcad78a2f4e1fee091c1d6c21ab",
+	"routes": [
+		{
+			"pattern": "fallback.biscuits.page",
+			"custom_domain": true,
+		},
+		{
+			"zone_name": "biscuits.page",
+			"pattern": "*/*",
+		},
+	],
+	"observability": {
+		"enabled": true,
+		"head_sampling_rate": 1,
+	},
+	"vars": {
+		"TLD": "biscuits.club",
+	},
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "prod-biscuits-core",
+			"database_id": "7c48df65-eca0-487f-b66f-aee7f180d605",
+		},
+	],
+	"kv_namespaces": [
+		{
+			"binding": "DOMAIN_ROUTES",
+			"id": "bf051ad1228c4ad0b1fa614a4e56dd3d",
+		},
+	],
+}

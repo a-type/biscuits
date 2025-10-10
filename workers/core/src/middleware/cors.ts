@@ -1,11 +1,10 @@
-import { createDb } from '@biscuits/db';
 import { cors } from 'hono/cors';
 import {
 	ALLOWED_HEADERS,
 	ALLOWED_ORIGINS,
 	EXPOSED_HEADERS,
 } from '../config/cors.js';
-import { DomainRouteService } from '../services/domainRouteCache.js';
+import { domainRoutes } from '../services/domainRoutes.js';
 
 export const corsMiddleware = cors({
 	origin: (origin, ctx) => {
@@ -22,14 +21,10 @@ export const corsMiddleware = cors({
 			return;
 		}
 		const host = new URL(origin).host;
-		console.log(host);
-		const domainRoutes = new DomainRouteService(
-			createDb(ctx.env.CORE_DB),
-			ctx.env.DOMAIN_ROUTES,
-		);
-		domainRoutes.debug();
 		if (domainRoutes.has(host)) {
 			return origin;
+		} else {
+			console.log('Origin not allowed', origin);
 		}
 	},
 	credentials: true,

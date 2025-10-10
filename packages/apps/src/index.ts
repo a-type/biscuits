@@ -12,7 +12,7 @@ export type AppManifest<Id extends string> = {
 	paidFeatures: PaidFeature[] | readonly PaidFeature[];
 	prerelease?: boolean;
 	theme: string;
-	domainRoutes?: (resourceId: string) => string;
+	domainRoutes?: (resourceId: string, ctx: { tld: string }) => string;
 };
 
 export type PaidFeature = {
@@ -99,7 +99,12 @@ export const apps = [
 		url: 'https://wish-wash.biscuits.club',
 		prerelease: true,
 		theme: 'eggplant',
-		domainRoutes: (listId) => `https://lists.wish-wash.biscuits.club/${listId}`,
+		domainRoutes: (listId, ctx) => {
+			if (ctx.tld.startsWith('localhost')) {
+				return `http://localhost:6401?listId=${listId}`;
+			}
+			return `https://${listId}.lists.wish-wash.${ctx.tld}`;
+		},
 	} as AppManifest<'wish-wash'>,
 	{
 		id: 'marginalia',
@@ -198,7 +203,6 @@ export const apps = [
 		url: 'https://post.biscuits.club',
 		prerelease: true,
 		theme: 'blueberry',
-		domainRoutes: (notebookId: string) => `/post/hub/${notebookId}`,
 		demoVideoSrc: '',
 	} as AppManifest<'post'>,
 ] as const;

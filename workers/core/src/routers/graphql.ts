@@ -12,7 +12,7 @@ import { GQLContext } from '../graphql/context.js';
 import { createDataloaders } from '../graphql/dataloaders/index.js';
 import { schema } from '../graphql/schema.js';
 import { CustomHostsService } from '../services/customHosts.js';
-import { DomainRouteService } from '../services/domainRouteCache.js';
+import { domainRoutes } from '../services/domainRoutes.js';
 import { Maps } from '../services/maps.js';
 import { getStripe } from '../services/stripe.js';
 import { Weather } from '../services/weather.js';
@@ -107,7 +107,6 @@ export const graphqlRouter = new Hono<HonoEnv>().all(
 			honoCtx.env.CLOUDFLARE_APP_API_TOKEN,
 			honoCtx.env.CLOUDFLARE_ZONE_ID,
 		);
-		const domainRoutes = new DomainRouteService(db, honoCtx.env.DOMAIN_ROUTES);
 
 		const ctx: GQLContext = {
 			req: honoCtx.req.raw,

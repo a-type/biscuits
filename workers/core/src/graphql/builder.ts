@@ -270,6 +270,7 @@ export const builder = new SchemaBuilder<{
 			planAdmin: context.session?.role === 'admin',
 			productAdmin: !!context.session?.isProductAdmin,
 			app: (appId) => {
+				console.log(context.session, appId);
 				return (
 					!!context.session &&
 					(!context.session?.allowedApp ||

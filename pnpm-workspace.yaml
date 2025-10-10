@@ -8,7 +8,7 @@ packages:
   - 'cdk'
 
 catalog:
-  '@a-type/ui': 2.8.11
+  '@a-type/ui': 2.8.12
   '@a-type/utils': 1.1.5
   '@a-type/auth-fetch': 2.1.2
   '@a-type/auth-ui': 1.1.0
@@ -58,5 +58,8 @@ catalog:
   '@tiptap/extension-typography': 2.11.5
   '@tiptap/html': 2.11.5
   date-fns: 4.1.0
-  wrangler: 4.42.0
+  wrangler: 4.42.1
+  '@cloudflare/workers-types': ^4.20251008.0
   '@types/node': ^22
+
+  cookie: ^1.0.2

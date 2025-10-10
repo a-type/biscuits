@@ -2,7 +2,6 @@ import { Hono } from 'hono';
 import { logger } from 'hono/logger';
 
 import { corsMiddleware } from './middleware/cors.js';
-import { domainRoutesMiddleware } from './middleware/domainRoutes.js';
 import { handleError } from './middleware/errors.js';
 import { rateLimiterMiddleware } from './middleware/rateLimiter.js';
 import {
@@ -22,7 +21,6 @@ export const app = new Hono()
 	.use(corsMiddleware)
 	.use(sessionMiddleware)
 	.use(rateLimiterMiddleware)
-	.use(domainRoutesMiddleware)
 	.get('/health', (ctx) => ctx.json({ status: 'ok' }))
 	.route('/auth', authRouter)
 	// Verdant sync, auth, files

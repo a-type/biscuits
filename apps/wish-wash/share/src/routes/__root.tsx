@@ -40,7 +40,7 @@ export const Route = createRootRoute({
 				sizes: '16x16',
 				href: '/icons/ios/16.png',
 			},
-			{ rel: 'manifest', href: '/site.webmanifest', color: '#fffff' },
+			// { rel: 'manifest', href: '/site.webmanifest', color: '#fffff' },
 			{ rel: 'icon', href: '/favicon.ico' },
 		],
 	}),
@@ -56,8 +56,6 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body>
-				<div className="p-2 flex gap-2 text-lg"></div>
-				<hr />
 				{children}
 				<TanStackRouterDevtools position="bottom-right" />
 				<Scripts />
