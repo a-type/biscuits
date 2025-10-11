@@ -11,7 +11,7 @@
 	"routes": [
 		{
 			"pattern": "*.recipes.gnocchi.biscuits.club/*",
-			"custom_domain": true,
+			"zone_name": "biscuits.club",
 		},
 	],
 }
