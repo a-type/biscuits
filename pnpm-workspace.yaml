@@ -28,11 +28,11 @@ catalog:
   gql.tada: 1.8.13
   react: 19.2.0
   react-dom: 19.2.0
-  '@types/react': ^19.2.0
-  '@types/react-dom': ^19.2.0
+  '@types/react': ^19.2.2
+  '@types/react-dom': ^19.2.1
   typescript: 5.9.3
-  unocss: 66.5.2
-  '@unocss/transformer-variant-group': 66.5.2
+  unocss: 66.5.3
+  '@unocss/transformer-variant-group': 66.5.3
   valtio: ^2.1.8
   vite: ^7.1.9
   vite-plugin-pwa: ^1.0.3
@@ -45,8 +45,8 @@ catalog:
   eslint: 9.37.0
   eslint-plugin-react: 7.37.5
   '@eslint/js': 9.37.0
-  eslint-plugin-react-hooks: 6.1.1
-  typescript-eslint: 8.45.0
+  eslint-plugin-react-hooks: 7.0.0
+  typescript-eslint: 8.46.0
   '@tiptap/core': 2.11.5
   '@tiptap/starter-kit': 2.11.5
   '@tiptap/react': 2.11.5
@@ -58,8 +58,8 @@ catalog:
   '@tiptap/extension-typography': 2.11.5
   '@tiptap/html': 2.11.5
   date-fns: 4.1.0
-  wrangler: 4.42.1
-  '@cloudflare/workers-types': ^4.20251008.0
+  wrangler: 4.42.2
+  '@cloudflare/workers-types': ^4.20251011.0
   '@types/node': ^22
 
   cookie: ^1.0.2
