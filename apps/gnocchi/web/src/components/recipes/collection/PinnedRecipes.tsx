@@ -1,4 +1,3 @@
-import { Icon } from '@/components/icons/Icon.jsx';
 import { HelpTip } from '@/components/promotional/HelpTip.jsx';
 import { RecipeListItemMenu } from '@/components/recipes/collection/RecipeListItem.jsx';
 import {
@@ -10,12 +9,11 @@ import {
 import { makeRecipeLink } from '@/components/recipes/makeRecipeLink.js';
 import { AddToListButton } from '@/components/recipes/viewer/AddToListButton.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { Button, CollapsibleSimple, Divider, H2 } from '@a-type/ui';
+import { Button, CollapsibleSimple, Divider, H2, Icon } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { Link } from '@verdant-web/react-router';
 import classNames from 'classnames';
-import addWeeks from 'date-fns/addWeeks';
-import { useMemo } from 'react';
+import { addWeeks } from 'date-fns/addWeeks';
 import { PinIcon } from './PinIcon.jsx';
 
 export interface PinnedRecipesProps {

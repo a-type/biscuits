@@ -1,4 +1,3 @@
-import { Icon } from '@/components/icons/Icon.jsx';
 import { InstructionsContext } from '@/components/recipes/editor/InstructionsContext.jsx';
 import {
 	isActiveCookingSession,
@@ -12,6 +11,7 @@ import {
 	clsx,
 	CollapsibleContent,
 	CollapsibleRoot,
+	Icon,
 	Note,
 	TextArea,
 	Tooltip,

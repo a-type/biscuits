@@ -1,6 +1,5 @@
-import { Icon } from '@/components/icons/Icon.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { Button, Dialog, LiveUpdateTextField } from '@a-type/ui';
+import { Button, Dialog, Icon, LiveUpdateTextField } from '@a-type/ui';
 import { LoginButton, useIsLoggedIn } from '@biscuits/client';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { useState } from 'react';
@@ -11,7 +10,6 @@ export interface RecipeUrlFieldProps {
 
 export function RecipeUrlField({ recipe }: RecipeUrlFieldProps) {
 	const { url } = hooks.useWatch(recipe);
-	const [initialUrl] = useState(() => recipe.get('url'));
 	const [scanning, setScanning] = useState(false);
 	const [isLoggedIn] = useIsLoggedIn();
 	const updateRecipeFromUrl = hooks.useUpdateRecipeFromUrl();

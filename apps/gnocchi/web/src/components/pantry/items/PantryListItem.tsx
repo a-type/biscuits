@@ -1,7 +1,6 @@
 import { FoodName } from '@/components/foods/FoodName.jsx';
 import { OpenFoodDetailButton } from '@/components/foods/OpenFoodDetailButton.jsx';
 import { groceriesState } from '@/components/groceries/state.js';
-import { Icon } from '@/components/icons/Icon.jsx';
 import { hooks } from '@/stores/groceries/index.js';
 import {
 	Button,
@@ -18,6 +17,7 @@ import {
 	DialogContent,
 	DialogTitle,
 	DialogTrigger,
+	Icon,
 	RelativeTime,
 	TextSkeleton,
 	Tooltip,

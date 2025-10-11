@@ -1,4 +1,3 @@
-import { Icon } from '@/components/icons/Icon.jsx';
 import { TextLink } from '@/components/nav/Link.jsx';
 import { useActiveCookingSession } from '@/components/recipes/hooks.js';
 import {
@@ -18,6 +17,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 	ErrorBoundary,
+	Icon,
 	Note,
 	Popover,
 	PopoverContent,

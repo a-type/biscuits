@@ -1,7 +1,6 @@
-import { Icon } from '@/components/icons/Icon.jsx';
 import { NoteEditor } from '@/components/recipes/editor/NoteEditor.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { Button, Note, useToggle } from '@a-type/ui';
+import { Button, Icon, Note, useToggle } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 
 export interface RecipeNoteProps {

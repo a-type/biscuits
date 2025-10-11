@@ -1,7 +1,6 @@
-import { Icon } from '@/components/icons/Icon.jsx';
 import { RecipeTagMenuWrapper } from '@/components/recipes/tags/RecipeTagMenuWrapper.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { Button, ButtonProps, HorizontalList } from '@a-type/ui';
+import { Button, ButtonProps, HorizontalList, Icon } from '@a-type/ui';
 import classNames from 'classnames';
 import { forwardRef } from 'react';
 

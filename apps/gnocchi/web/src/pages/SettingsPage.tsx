@@ -1,5 +1,4 @@
 import { useKeepOpenAfterSelect } from '@/components/addBar/hooks.js';
-import { Icon } from '@/components/icons/Icon.jsx';
 import { BugButton } from '@/components/menu/BugButton.jsx';
 import { ManageCategoriesDialog } from '@/components/menu/ManageCategoriesDialog.jsx';
 import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
@@ -11,6 +10,7 @@ import {
 	Divider,
 	H1,
 	H2,
+	Icon,
 	PageContent,
 	Switch,
 	toast,

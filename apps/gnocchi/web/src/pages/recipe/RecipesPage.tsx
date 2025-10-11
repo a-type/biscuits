@@ -1,9 +1,8 @@
-import { Icon } from '@/components/icons/Icon.jsx';
 import { RecipeCreateButton } from '@/components/recipes/collection/RecipeCreateButton.jsx';
 import { RecipeList } from '@/components/recipes/collection/RecipeList.jsx';
 import { RecipesNowPlaying } from '@/components/recipes/nowPlaying/RecipesNowPlaying.jsx';
 import { usePageTitle } from '@/hooks/usePageTitle.jsx';
-import { PageContent, PageNowPlaying } from '@a-type/ui';
+import { Icon, PageContent, PageNowPlaying } from '@a-type/ui';
 import { RestoreScroll } from '@verdant-web/react-router';
 import { Suspense } from 'react';
 

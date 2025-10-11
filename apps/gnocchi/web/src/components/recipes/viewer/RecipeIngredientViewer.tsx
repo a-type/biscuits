@@ -1,4 +1,3 @@
-import { Icon } from '@/components/icons/Icon.jsx';
 import { useUnitConversion } from '@/components/recipes/viewer/unitConversion.js';
 import { hooks } from '@/stores/groceries/index.js';
 import {
@@ -10,6 +9,7 @@ import {
 	DropdownMenuItem,
 	DropdownMenuLabel,
 	DropdownMenuTrigger,
+	Icon,
 	useToggle,
 } from '@a-type/ui';
 import { fractionToText } from '@a-type/utils';

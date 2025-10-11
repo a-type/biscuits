@@ -1,16 +1,15 @@
 import {
 	Button,
 	ButtonProps,
+	Icon,
 	Input,
 	InputProps,
 	useParticles,
 } from '@a-type/ui';
-import { isUrl } from '@a-type/utils';
 import classNames from 'classnames';
 import { forwardRef, useEffect, useRef } from 'react';
 import { useSnapshot } from 'valtio';
 import { groceriesState } from '../groceries/state.js';
-import { Icon } from '../icons/Icon.jsx';
 
 export interface AddInputProps {
 	inputProps: InputProps;
@@ -37,7 +36,6 @@ export const AddInput = forwardRef<HTMLDivElement, AddInputProps>(
 		ref,
 	) {
 		const inputValue = inputProps.value?.toString() ?? '';
-		const inputIsUrl = isUrl(inputValue);
 
 		return (
 			<div
@@ -62,7 +60,6 @@ export const AddInput = forwardRef<HTMLDivElement, AddInputProps>(
 					<SubmitButton {...getSubmitButtonProps()} />
 					{!!inputValue && (
 						<Button
-							size="icon"
 							color="ghost"
 							onClick={clear}
 							aria-label="clear input"

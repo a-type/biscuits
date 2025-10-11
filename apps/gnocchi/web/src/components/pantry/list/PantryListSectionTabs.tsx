@@ -1,5 +1,4 @@
-import { Icon } from '@/components/icons/Icon.jsx';
-import { TabsList, TabsRoot, TabsTrigger } from '@a-type/ui';
+import { Icon, TabsList, TabsRoot, TabsTrigger } from '@a-type/ui';
 import { useFilter } from '../hooks.js';
 
 export interface PantryListSectionTabsProps {}

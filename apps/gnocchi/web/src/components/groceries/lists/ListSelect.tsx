@@ -1,9 +1,9 @@
-import { Icon } from '@/components/icons/Icon.jsx';
 import { hooks } from '@/stores/groceries/index.js';
 import {
 	Dialog,
 	DialogContent,
 	FormikForm,
+	Icon,
 	Select,
 	SelectContent,
 	SelectItem,
@@ -81,7 +81,7 @@ export function ListSelect({
 				<DialogContent>
 					<FormikForm
 						initialValues={{ name: '' }}
-						onSubmit={async ({ name }, bag) => {
+						onSubmit={async ({ name }) => {
 							const list = await client.lists.put({
 								name,
 								color: getRandomColor(),

@@ -1,8 +1,6 @@
-import { Icon } from '@/components/icons/Icon.jsx';
 import { RecipeCreateButton } from '@/components/recipes/collection/RecipeCreateButton.jsx';
 import { useIsFiltered } from '@/components/recipes/collection/hooks.js';
-import { P } from '@a-type/ui';
-import { FilePlusIcon } from '@radix-ui/react-icons';
+import { Icon, P } from '@a-type/ui';
 import classNames from 'classnames';
 import { Suspense } from 'react';
 
@@ -34,7 +32,8 @@ export function EmptyState({ className }: EmptyStateProps) {
 				className,
 			)}
 		>
-			<FilePlusIcon
+			<Icon
+				name="book"
 				style={{ width: 120, height: 120 }}
 				className="color-gray5"
 			/>

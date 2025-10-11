@@ -1,5 +1,4 @@
-import { Icon } from '@/components/icons/Icon.jsx';
-import { ActionButton } from '@a-type/ui';
+import { ActionButton, Icon } from '@a-type/ui';
 import { useSnapshot } from 'valtio';
 import { groceriesState } from '../state.js';
 

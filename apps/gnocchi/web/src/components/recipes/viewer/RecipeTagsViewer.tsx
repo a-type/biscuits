@@ -1,6 +1,6 @@
-import { Icon } from '@/components/icons/Icon.jsx';
 import { RecipeTagMenuWrapper } from '@/components/recipes/tags/RecipeTagMenuWrapper.jsx';
 import { hooks } from '@/stores/groceries/index.js';
+import { Icon } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import classNames from 'classnames';
 import { Suspense } from 'react';

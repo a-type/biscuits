@@ -1,9 +1,8 @@
 import { AddPane } from '@/components/addBar/AddPane.jsx';
 import { useKeepOpenAfterSelect } from '@/components/addBar/hooks.js';
-import { Icon } from '@/components/icons/Icon.jsx';
 import { useListId } from '@/contexts/ListContext.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { Button } from '@a-type/ui';
+import { Button, Icon } from '@a-type/ui';
 import { MenuDisclose } from '@biscuits/client';
 import classNames from 'classnames';
 import { useCallback, useState } from 'react';

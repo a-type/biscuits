@@ -1,6 +1,5 @@
-import { Icon } from '@/components/icons/Icon.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { Select, SelectTrigger, UnstyledSelectTrigger } from '@a-type/ui';
+import { Icon, Select, SelectTrigger, UnstyledSelectTrigger } from '@a-type/ui';
 import classNames from 'classnames';
 import { ReactNode, useCallback, useEffect } from 'react';
 

@@ -1,7 +1,5 @@
-import { Icon } from '@/components/icons/Icon.jsx';
-import { Button } from '@a-type/ui';
+import { Button, Icon } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
-import { ArrowUpIcon, ListBulletIcon } from '@radix-ui/react-icons';
 import { animated, useSpring } from '@react-spring/web';
 import { useDrag } from '@use-gesture/react';
 import classNames from 'classnames';
@@ -45,7 +43,7 @@ export function CookingToolbar({ recipe, className }: CookingToolbarProps) {
 							),
 						}}
 					>
-						<ListBulletIcon />
+						<Icon name="bulletList" />
 					</animated.span>
 					<animated.span
 						className="inline-flex h-15px items-center justify-center"
@@ -73,7 +71,7 @@ export function CookingToolbar({ recipe, className }: CookingToolbarProps) {
 						top?.scrollIntoView({ behavior: 'smooth' });
 					}}
 				>
-					<ArrowUpIcon />
+					<Icon name="arrowUp" />
 				</Button>
 			</div>
 

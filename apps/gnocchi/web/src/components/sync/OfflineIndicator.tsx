@@ -1,5 +1,4 @@
-import { Icon } from '@/components/icons/Icon.jsx';
-import { Tooltip } from '@a-type/ui';
+import { Icon, Tooltip } from '@a-type/ui';
 import { useIsOffline } from '@biscuits/client';
 
 export function OfflineIndicator() {
