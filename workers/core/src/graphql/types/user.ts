@@ -10,6 +10,9 @@ builder.queryField('me', (t) =>
 	t.field({
 		type: 'User',
 		nullable: false,
+		authScopes: {
+			user: true,
+		},
 		resolve: async (_, __, ctx) => {
 			if (!ctx.session?.userId) {
 				throw new BiscuitsError(

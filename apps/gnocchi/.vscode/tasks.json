@@ -1,21 +1,29 @@
 {
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "type": "npm",
-      "script": "app-dev",
-      "path": "web",
-      "problemMatcher": [],
-      "label": "Dev",
-      "detail": "vite --host --mode development"
-    },
-    {
-      "type": "npm",
-      "script": "generate",
-      "path": "verdant",
-      "problemMatcher": [],
-      "label": "Generate",
-      "detail": "verdant -s ./src/schema.ts -o ./src/client -r"
-    }
-  ]
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "app-dev",
+			"path": "web",
+			"problemMatcher": [],
+			"label": "Dev",
+			"detail": "vite --host --mode development"
+		},
+		{
+			"type": "npm",
+			"script": "dev",
+			"path": "share",
+			"problemMatcher": [],
+			"label": "Share Dev",
+			"detail": "vite"
+		},
+		{
+			"type": "npm",
+			"script": "generate",
+			"path": "verdant",
+			"problemMatcher": [],
+			"label": "Generate",
+			"detail": "verdant -s ./src/schema.ts -o ./src/client -r"
+		}
+	]
 }

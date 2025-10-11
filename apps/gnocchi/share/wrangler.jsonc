@@ -1,0 +1,17 @@
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "gnocchi-share",
+	"compatibility_date": "2025-09-24",
+	"compatibility_flags": ["nodejs_compat"],
+	"main": "@tanstack/react-start/server-entry",
+	"vars": {
+		"API_ORIGIN": "https://api.biscuits.club",
+		"VITE_APP_ORIGIN": "https://gnocchi.biscuits.club",
+	},
+	"routes": [
+		{
+			"pattern": "*.recipes.gnocchi.biscuits.club/*",
+			"custom_domain": true,
+		},
+	],
+}

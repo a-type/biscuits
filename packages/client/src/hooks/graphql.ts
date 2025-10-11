@@ -53,6 +53,7 @@ export function useMe() {
 
 export function useIsLoggedIn() {
 	const result = useMe();
+	console.log(result.networkStatus, result.data, result.error);
 	return [
 		!!result.data?.me?.id,
 		result.networkStatus === NetworkStatus.loading ||

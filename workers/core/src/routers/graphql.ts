@@ -11,6 +11,7 @@ import { HonoEnv } from '../config/hono.js';
 import { GQLContext } from '../graphql/context.js';
 import { createDataloaders } from '../graphql/dataloaders/index.js';
 import { schema } from '../graphql/schema.js';
+import { sessionRefreshMiddleware } from '../middleware/session.js';
 import { CustomHostsService } from '../services/customHosts.js';
 import { domainRoutes } from '../services/domainRoutes.js';
 import { Maps } from '../services/maps.js';
@@ -44,9 +45,8 @@ const yoga = createYoga<GQLContext>({
 				// log more details for server errors
 				if (originalError.statusCode >= 500) {
 					console.error(`[Internal Error]`, error);
-				} else {
-					// no need to log these I think.
-					// console.debug(`[Validation Error]`, originalError.message);
+				} else if (isDev) {
+					console.debug(`[Validation Error]`, originalError.message);
 				}
 				return new GraphQLError(originalError.message, {
 					extensions: {
@@ -54,6 +54,7 @@ const yoga = createYoga<GQLContext>({
 						biscuitsCode: originalError.code,
 						...originalError.extraData,
 					},
+					originalError,
 				});
 			} else if (originalError instanceof ZodError) {
 				console.error(`[Zod Error]`, error);
@@ -63,6 +64,7 @@ const yoga = createYoga<GQLContext>({
 							message: e.message,
 						})),
 					},
+					originalError,
 				});
 			} else {
 				console.error(`[GraphQL Error]`, error);
@@ -78,9 +80,9 @@ const yoga = createYoga<GQLContext>({
 	],
 });
 
-export const graphqlRouter = new Hono<HonoEnv>().all(
-	'/',
-	async function handleGraphQLRequest(honoCtx) {
+export const graphqlRouter = new Hono<HonoEnv>()
+	.use(sessionRefreshMiddleware)
+	.all('/', async function handleGraphQLRequest(honoCtx) {
 		const auth = {
 			applyHeaders: new Headers(),
 			setLoginSession: async (ses: Session | null) => {
@@ -128,5 +130,4 @@ export const graphqlRouter = new Hono<HonoEnv>().all(
 
 		const yogaResponse = await yoga.handle(honoCtx.req.raw, ctx);
 		return yogaResponse;
-	},
-);
+	});

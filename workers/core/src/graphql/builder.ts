@@ -32,7 +32,12 @@ import {
 	WeatherForecastInput,
 } from '../services/weather.js';
 import { GQLContext } from './context.js';
-import { PublicWishlistData, PublicWishlistItem } from './otherTypes.js';
+import {
+	PublicRecipeData,
+	PublicRecipeIngredient,
+	PublicWishlistData,
+	PublicWishlistItem,
+} from './otherTypes.js';
 
 export const builder = new SchemaBuilder<{
 	Context: GQLContext;
@@ -97,6 +102,11 @@ export const builder = new SchemaBuilder<{
 			GnocchiRecipeScan['detailedSteps']
 		>[number];
 		PublishedRecipe: PublishedRecipe & { __typename: 'PublishedRecipe' };
+		PublicRecipe: PublicRecipeData & { __typename: 'PublicRecipe' };
+		PublicRecipeIngredient: PublicRecipeIngredient & {
+			__typename: 'PublicRecipeIngredient';
+		};
+		PublicRecipePublisher: { fullName: string };
 
 		// WishWash
 		PublishedWishlist: PublishedWishlist & { __typename: 'PublishedWishlist' };
@@ -250,7 +260,6 @@ export const builder = new SchemaBuilder<{
 			planAdmin: context.session?.role === 'admin',
 			productAdmin: !!context.session?.isProductAdmin,
 			app: (appId) => {
-				console.log(context.session, appId);
 				return (
 					!!context.session &&
 					(!context.session?.allowedApp ||

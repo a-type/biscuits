@@ -5,8 +5,9 @@ import { ReplicaType, TokenProvider } from '@verdant-web/server';
 import { Hono } from 'hono';
 import { HonoEnv } from '../config/hono.js';
 import { isPlanInGoodStanding } from '../management/plans.js';
+import { sessionRefreshMiddleware } from '../middleware/session.js';
 
-export const verdantRouter = new Hono<HonoEnv>();
+export const verdantRouter = new Hono<HonoEnv>().use(sessionRefreshMiddleware);
 
 const syncRouter = createVerdantWorkerApp({
 	durableObjectBindingName: 'VERDANT_LIBRARY',

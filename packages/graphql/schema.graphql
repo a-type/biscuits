@@ -298,6 +298,37 @@ type ProductInfo {
   price: Int
 }
 
+type PublicRecipe {
+  cookTimeMinutes: Int
+  embeddedRecipes: [PublicRecipe!]!
+  id: ID!
+  ingredients: [PublicRecipeIngredient!]!
+  instructions: JSON!
+  mainImageUrl: String
+  note: String
+  prelude: JSON!
+  prepTimeMinutes: Int
+  publisher: PublicRecipePublisher!
+  servings: Int
+  title: String!
+  totalTimeMinutes: Int
+}
+
+type PublicRecipeIngredient {
+  comments: [String!]!
+  food: String!
+  id: ID!
+  isSectionHeader: Boolean!
+  note: String
+  quantity: Float!
+  text: String!
+  unit: String
+}
+
+type PublicRecipePublisher {
+  fullName: String!
+}
+
 type PublicWishlist {
   author: String!
   coverImageUrl: String
@@ -397,6 +428,7 @@ type Query {
   planInvitation(code: String!): PlanInvitation
   plans(after: ID, before: ID, first: Int, last: Int): QueryPlansConnection!
   productInfo(lookupKey: String!): ProductInfo!
+  publicRecipe(planId: ID!, slug: String!): PublicRecipe
   publicWishlist(hidePurchases: Boolean = false, id: ID!): PublicWishlist
   publishedRecipe(id: ID!): PublishedRecipe
   publishedWishlist(id: ID!): PublishedWishlist

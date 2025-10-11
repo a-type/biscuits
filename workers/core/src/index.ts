@@ -4,12 +4,8 @@ import { logger } from 'hono/logger';
 import { corsMiddleware } from './middleware/cors.js';
 import { handleError } from './middleware/errors.js';
 import { rateLimiterMiddleware } from './middleware/rateLimiter.js';
-import {
-	sessionMiddleware,
-	sessionRefreshMiddleware,
-} from './middleware/session.js';
+import { sessionMiddleware } from './middleware/session.js';
 import { authRouter } from './routers/auth.js';
-import { gnocchiRouter } from './routers/gnocchi.js';
 import { graphqlRouter } from './routers/graphql.js';
 import { stripeRouter } from './routers/stripe.js';
 import { verdantRouter } from './routers/verdant.js';
@@ -23,13 +19,11 @@ export const app = new Hono()
 	.get('/health', (ctx) => ctx.json({ status: 'ok' }))
 	.route('/auth', authRouter)
 	// Verdant sync, auth, files
-	.route('/verdant', verdantRouter.use(sessionRefreshMiddleware))
+	.route('/verdant', verdantRouter)
 	// GraphQL API
-	.route('/graphql', graphqlRouter.use(sessionRefreshMiddleware))
+	.route('/graphql', graphqlRouter)
 	// Stripe webhooks, also checkout session stuff
-	.route('/stripe', stripeRouter)
-	// Hub pages
-	.route('/gnocchi', gnocchiRouter);
+	.route('/stripe', stripeRouter);
 
 export default app;
 

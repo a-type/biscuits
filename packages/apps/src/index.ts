@@ -58,7 +58,12 @@ export const apps = [
 		paidDescription:
 			'Your personal cooking app becomes a family groceries list and recipe box.',
 		theme: 'lemon',
-		domainRoutes: (planId) => `/gnocchi/hub/${planId}`,
+		domainRoutes: (planId, ctx) => {
+			if (ctx.tld.startsWith('localhost')) {
+				return `http://localhost:6401?planId=${planId}`;
+			}
+			return `https://${planId}.plan.gnocchi.${ctx.tld}`;
+		},
 	} as AppManifest<'gnocchi'>,
 	{
 		id: 'trip-tick',

@@ -133,7 +133,13 @@ builder.objectType('PublishedWishlist', {
 		}),
 		url: t.string({
 			resolve: (source, _, ctx) => {
-				return ctx.reqCtx.env.WISH_WASH_HUB_ORIGIN + `/${source.id}`;
+				const pubUrl = new URL(ctx.reqCtx.env.WISH_WASH_HUB_ORIGIN);
+				if (pubUrl.hostname.includes('localhost')) {
+					pubUrl.searchParams.set('listId', source.id);
+				} else {
+					pubUrl.hostname = `${source.id}.${pubUrl.hostname}`;
+				}
+				return pubUrl.toString();
 			},
 		}),
 		slug: t.exposeString('slug', {

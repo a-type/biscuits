@@ -1,0 +1,47 @@
+{
+	"name": "@gnocchi.biscuits/share",
+	"private": true,
+	"sideEffects": false,
+	"type": "module",
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build && tsc --noEmit",
+		"preview": "vite preview",
+		"deploy": "wrangler deploy",
+		"types": "wrangler types -c wrangler.jsonc",
+		"postinstall": "pnpm run types"
+	},
+	"dependencies": {
+		"@a-type/ui": "catalog:",
+		"@a-type/utils": "catalog:",
+		"@tiptap/core": "catalog:",
+		"@tiptap/extension-document": "catalog:",
+		"@tiptap/extension-link": "catalog:",
+		"@tiptap/extension-paragraph": "catalog:",
+		"@tiptap/pm": "catalog:",
+		"@tiptap/react": "catalog:",
+		"@tiptap/starter-kit": "catalog:",
+		"@biscuits/graphql": "workspace:*",
+		"@tanstack/react-query": "^5.90.2",
+		"@tanstack/react-router": "^1.132.47",
+		"@tanstack/react-router-devtools": "^1.132.47",
+		"@tanstack/react-router-ssr-query": "^1.132.47",
+		"@tanstack/react-start": "^1.132.48",
+		"gql.tada": "catalog:",
+		"graphql-request": "^7.2.0",
+		"react": "catalog:",
+		"react-dom": "catalog:"
+	},
+	"devDependencies": {
+		"@cloudflare/vite-plugin": "^1.13.10",
+		"@types/node": "catalog:",
+		"@types/react": "catalog:",
+		"@types/react-dom": "catalog:",
+		"@vitejs/plugin-react": "catalog:",
+		"typescript": "catalog:",
+		"unocss": "catalog:",
+		"vite": "catalog:",
+		"vite-tsconfig-paths": "^5.1.4",
+		"wrangler": "catalog:"
+	}
+}

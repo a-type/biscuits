@@ -27,7 +27,7 @@ export const sessions = new SessionManager<Context<HonoEnv>>({
 				sameSite: 'lax',
 				domain: getRootDomain(ctx.env.DEPLOYED_ORIGIN),
 			},
-			expiration: ctx.env.ENVIRONMENT === 'production' ? '24h' : '15m',
+			expiration: ctx.env.ENVIRONMENT === 'production' ? '24h' : '1m',
 			async createSession(userId) {
 				const user = await db
 					.selectFrom('User')
