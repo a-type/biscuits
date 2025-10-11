@@ -26,9 +26,9 @@ export function PostBuyExperienceContent({
 	listAuthor: string;
 }) {
 	const item = readFragment(postBuyExperienceContentFragment, itemMasked);
-	const [purchase, { data }] = usePurchaseItem(item.id);
+	const [purchase, { data: succeeded }] = usePurchaseItem(item.id);
 
-	if (data?.purchasePublicItem) {
+	if (succeeded) {
 		return (
 			<Box d="col" gap>
 				<Dialog.Title>Thanks for telling us!</Dialog.Title>
