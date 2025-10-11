@@ -72,10 +72,12 @@ export function usePurchaseItem(id: string) {
 
 	const execute = ({ quantity, name }: { quantity: number; name: string }) => {
 		return mutation.mutateAsync({
-			wishlistSlug,
-			itemId: id,
-			quantity,
-			name,
+			data: {
+				wishlistSlug,
+				itemId: id,
+				quantity,
+				name,
+			},
 		});
 	};
 
