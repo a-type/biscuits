@@ -118,7 +118,7 @@ export function UserMenu({
 					:	<>
 							<DropdownMenu.Item asChild>
 								<a href={`${CONFIG.HOME_ORIGIN}/settings?appReferrer=${appId}`}>
-									Mange plan
+									Manage plan
 									<DropdownMenuItemRightSlot>
 										<Icon name="profile" />
 									</DropdownMenuItemRightSlot>

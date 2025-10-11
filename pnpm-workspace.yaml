@@ -63,3 +63,4 @@ catalog:
   '@types/node': ^22
 
   cookie: ^1.0.2
+  babel-plugin-react-compiler: ^1.0.0

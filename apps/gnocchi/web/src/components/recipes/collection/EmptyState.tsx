@@ -19,7 +19,7 @@ export function EmptyState({ className }: EmptyStateProps) {
 					className,
 				)}
 			>
-				<Icon name="filter" size={120} className="color-gray5" />
+				<Icon name="filter" size={120} className="color-gray" />
 				<P>No recipes match your search.</P>
 			</div>
 		);
@@ -35,7 +35,7 @@ export function EmptyState({ className }: EmptyStateProps) {
 			<Icon
 				name="book"
 				style={{ width: 120, height: 120 }}
-				className="color-gray5"
+				className="color-gray"
 			/>
 			<P>There are no recipes in your collection.</P>
 			<Suspense>
