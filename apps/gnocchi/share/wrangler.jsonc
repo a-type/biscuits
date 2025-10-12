@@ -10,8 +10,8 @@
 	},
 	"routes": [
 		{
-			"pattern": "*.recipes.gnocchi.biscuits.club/*",
-			"zone_name": "biscuits.club",
+			"pattern": "recipes.gnocchi.biscuits.club",
+			"custom_domain": true,
 		},
 	],
 }

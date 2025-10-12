@@ -9,8 +9,8 @@
 	},
 	"routes": [
 		{
-			"pattern": "*.lists.wish-wash.biscuits.club/*",
-			"zone_name": "biscuits.club",
+			"pattern": "lists.wish-wash.biscuits.club",
+			"custom_domain": true,
 		},
 	],
 }
