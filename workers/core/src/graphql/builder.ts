@@ -334,7 +334,10 @@ export const builder = new SchemaBuilder<{
 		};
 	},
 	scopeAuthOptions: {
-		unauthorizedError: (_, _ctx, _info, _result) => {
+		unauthorizedError: (_, ctx, _info, _result) => {
+			if (ctx.reqCtx.get('sessionError')) {
+				return ctx.reqCtx.get('sessionError')!;
+			}
 			return new BiscuitsError(
 				BiscuitsError.Code.Forbidden,
 				'You do not have access to this feature',

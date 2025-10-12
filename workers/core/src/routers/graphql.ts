@@ -11,7 +11,6 @@ import { HonoEnv } from '../config/hono.js';
 import { GQLContext } from '../graphql/context.js';
 import { createDataloaders } from '../graphql/dataloaders/index.js';
 import { schema } from '../graphql/schema.js';
-import { sessionRefreshMiddleware } from '../middleware/session.js';
 import { CustomHostsService } from '../services/customHosts.js';
 import { domainRoutes } from '../services/domainRoutes.js';
 import { Maps } from '../services/maps.js';
@@ -81,7 +80,7 @@ const yoga = createYoga<GQLContext>({
 });
 
 export const graphqlRouter = new Hono<HonoEnv>()
-	.use(sessionRefreshMiddleware)
+	// .use(sessionRefreshMiddleware) // session refresh is handled only when an authorization error occurs.
 	.all('/', async function handleGraphQLRequest(honoCtx) {
 		const auth = {
 			applyHeaders: new Headers(),
