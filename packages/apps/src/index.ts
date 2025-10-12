@@ -60,9 +60,9 @@ export const apps = [
 		theme: 'lemon',
 		domainRoutes: (planId, ctx) => {
 			if (ctx.tld.startsWith('localhost')) {
-				return `http://localhost:6401?planId=${planId}`;
+				return `http://localhost:6402/p/${planId}`;
 			}
-			return `https://${planId}.plan.gnocchi.${ctx.tld}`;
+			return `https://recipes.gnocchi.${ctx.tld}/p/${planId}`;
 		},
 	} as AppManifest<'gnocchi'>,
 	{
@@ -106,9 +106,9 @@ export const apps = [
 		theme: 'eggplant',
 		domainRoutes: (listId, ctx) => {
 			if (ctx.tld.startsWith('localhost')) {
-				return `http://localhost:6401?listId=${listId}`;
+				return `http://localhost:6401/l/${listId}`;
 			}
-			return `https://${listId}.lists.wish-wash.${ctx.tld}`;
+			return `https://lists.wish-wash.${ctx.tld}/l/${listId}`;
 		},
 	} as AppManifest<'wish-wash'>,
 	{

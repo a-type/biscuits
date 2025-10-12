@@ -1,0 +1,15 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "dev",
+			"problemMatcher": [],
+			"label": "Dev: Domain Routes",
+			"detail": "wrangler dev",
+			"runOptions": {
+				"reevaluateOnRerun": true
+			}
+		}
+	]
+}

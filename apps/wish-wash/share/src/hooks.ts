@@ -67,17 +67,18 @@ export function usePurchaseItem(id: string) {
 	const { wishlistSlug } = useHubContext();
 	const doPurchase = useServerFn(purchaseItem);
 	const mutation = useMutation({
-		mutationFn: doPurchase,
+		mutationFn: (input: VariablesOf<typeof purchase>['input']) =>
+			doPurchase({
+				data: input,
+			}),
 	});
 
 	const execute = ({ quantity, name }: { quantity: number; name: string }) => {
 		return mutation.mutateAsync({
-			data: {
-				wishlistSlug,
-				itemId: id,
-				quantity,
-				name,
-			},
+			wishlistSlug,
+			itemId: id,
+			quantity,
+			name,
 		});
 	};
 

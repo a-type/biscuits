@@ -10,33 +10,53 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SlugRouteImport } from './routes/$slug'
+import { Route as PlanIdSlugRouteImport } from './routes/$planId.$slug'
+import { Route as PPlanIdSlugRouteImport } from './routes/p.$planId.$slug'
 
 const SlugRoute = SlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlanIdSlugRoute = PlanIdSlugRouteImport.update({
+  id: '/$planId/$slug',
+  path: '/$planId/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PPlanIdSlugRoute = PPlanIdSlugRouteImport.update({
+  id: '/p/$planId/$slug',
+  path: '/p/$planId/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/$slug': typeof SlugRoute
+  '/$planId/$slug': typeof PlanIdSlugRoute
+  '/p/$planId/$slug': typeof PPlanIdSlugRoute
 }
 export interface FileRoutesByTo {
   '/$slug': typeof SlugRoute
+  '/$planId/$slug': typeof PlanIdSlugRoute
+  '/p/$planId/$slug': typeof PPlanIdSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/$slug': typeof SlugRoute
+  '/$planId/$slug': typeof PlanIdSlugRoute
+  '/p/$planId/$slug': typeof PPlanIdSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/$slug'
+  fullPaths: '/$slug' | '/$planId/$slug' | '/p/$planId/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/$slug'
-  id: '__root__' | '/$slug'
+  to: '/$slug' | '/$planId/$slug' | '/p/$planId/$slug'
+  id: '__root__' | '/$slug' | '/$planId/$slug' | '/p/$planId/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   SlugRoute: typeof SlugRoute
+  PlanIdSlugRoute: typeof PlanIdSlugRoute
+  PPlanIdSlugRoute: typeof PPlanIdSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +68,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/$planId/$slug': {
+      id: '/$planId/$slug'
+      path: '/$planId/$slug'
+      fullPath: '/$planId/$slug'
+      preLoaderRoute: typeof PlanIdSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/p/$planId/$slug': {
+      id: '/p/$planId/$slug'
+      path: '/p/$planId/$slug'
+      fullPath: '/p/$planId/$slug'
+      preLoaderRoute: typeof PPlanIdSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   SlugRoute: SlugRoute,
+  PlanIdSlugRoute: PlanIdSlugRoute,
+  PPlanIdSlugRoute: PPlanIdSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

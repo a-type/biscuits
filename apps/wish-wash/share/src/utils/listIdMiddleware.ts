@@ -2,17 +2,16 @@ import { createMiddleware } from '@tanstack/react-start';
 
 export const listIdMiddleware = createMiddleware().server(
 	({ next, request, context }) => {
-		// the list ID is either the first subdomain,
-		// or attached to a query param
-		const host = request.headers.get('host') || '';
 		const url = new URL(request.url);
-		let listId = url.searchParams.get('listId') || undefined;
-
-		if (!listId) {
-			const hostParts = host.split('.');
-			if (hostParts.length > 2) {
-				listId = hostParts[0];
-			}
+		let listId;
+		const pathSegments = url.pathname.split('/').filter(Boolean);
+		if (pathSegments[0] === 'l' && pathSegments.length >= 2) {
+			listId = pathSegments[1];
+		} else {
+			listId =
+				url.searchParams.get('listId') ||
+				request.headers.get('x-routed-resource') ||
+				undefined;
 		}
 
 		if (!listId) {

@@ -1,4 +1,6 @@
+import { appsById } from '@biscuits/apps';
 import { BiscuitsError } from '@biscuits/error';
+import { getTld } from '../../../services/domainRoutes.js';
 import { builder } from '../../builder.js';
 import { assignTypeName, hasTypeName } from '../../relay.js';
 
@@ -117,16 +119,12 @@ builder.objectType('PublishedRecipe', {
 		}),
 		url: t.string({
 			resolve: (source, _, ctx) => {
-				const pubUrl = new URL(
-					`/${source.slug}`,
-					ctx.reqCtx.env.GNOCCHI_HUB_ORIGIN,
-				);
-				if (pubUrl.hostname.includes('localhost')) {
-					// localhost support - not using subdomains
-					pubUrl.searchParams.set('planId', source.planId);
-				} else {
-					pubUrl.hostname = `${source.planId}.${pubUrl.hostname}`;
-				}
+				const deployedOrigin = new URL(ctx.reqCtx.env.DEPLOYED_ORIGIN);
+				const routed = appsById.gnocchi.domainRoutes!(source.planId, {
+					tld: getTld(deployedOrigin.hostname),
+				});
+				const pubUrl = new URL(routed);
+				pubUrl.pathname += `/${source.slug}`;
 				return pubUrl.toString();
 			},
 		}),

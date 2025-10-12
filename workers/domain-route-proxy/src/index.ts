@@ -76,6 +76,7 @@ export default {
 			const headers: HeadersInit = {
 				'x-forwarded-host': incomingHost,
 				'x-forwarded-for': request.headers.get('x-real-ip') || '',
+				'x-routed-resource': route.resourceId,
 				origin: request.headers.get('origin') || '',
 			};
 
