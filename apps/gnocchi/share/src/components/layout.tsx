@@ -18,7 +18,7 @@ export const TopLineImage = (props: any) => (
 	<div
 		{...props}
 		className={clsx(
-			'[grid-area:image] w-full h-30dvh md:w-full md:w-200px md:h-auto',
+			'[grid-area:image] w-full h-30dvh md:w-200px md:h-auto',
 			props.className,
 		)}
 	/>
