@@ -1,4 +1,3 @@
-import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
 import { useListId } from '@/contexts/ListContext.jsx';
 import { firstTimeOnboarding } from '@/onboarding/firstTimeOnboarding.js';
 import { saveHubRecipeOnboarding } from '@/onboarding/saveHubRecipeOnboarding.js';
@@ -23,7 +22,7 @@ import {
 } from '@dnd-kit/core';
 import { snapCenterToCursor } from '@dnd-kit/modifiers';
 import { Item } from '@gnocchi.biscuits/verdant';
-import { forwardRef, memo, useCallback, useState } from 'react';
+import { forwardRef, memo, Suspense, useCallback, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { ref as valtioRef } from 'valtio';
 import { GroceryEmptyContent } from './GroceryEmptyContent.jsx';
@@ -59,27 +58,31 @@ export const GroceryList = forwardRef<HTMLDivElement, GroceryListProps>(
 				sensors={sensors}
 				modifiers={[snapCenterToCursor]}
 			>
-				<OnboardingBanner onboarding={firstTimeOnboarding} step="welcome">
-					<H3>Welcome to Gnocchi!</H3>
-					<P>
-						This is your grocery list. Add items by typing in the box above.
-					</P>
-					<P>Give it a shot! What do you want to be eating soon?</P>
-				</OnboardingBanner>
-				<OnboardingBanner onboarding={saveHubRecipeOnboarding} step="subscribe">
-					<H3>Upgrade for sync and more</H3>
-					<P style={{ textWrap: 'balance' }}>
-						Sync between devices and other members of your household,
-						collaborate in real time while shopping or cooking, and make copies
-						of recipes from anywhere on the web.
-					</P>
-					<Box>
-						<PromoteSubscriptionButton>Upgrade now</PromoteSubscriptionButton>
-					</Box>
-				</OnboardingBanner>
+				<Suspense>
+					<OnboardingBanner onboarding={firstTimeOnboarding} step="welcome">
+						<H3>Welcome to Gnocchi!</H3>
+						<P>
+							This is your grocery list. Add items by typing in the box above.
+						</P>
+						<P>Give it a shot! What do you want to be eating soon?</P>
+					</OnboardingBanner>
+					<OnboardingBanner
+						onboarding={saveHubRecipeOnboarding}
+						step="subscribe"
+					>
+						<H3>Upgrade for sync and more</H3>
+						<P style={{ textWrap: 'balance' }}>
+							Sync between devices and other members of your household,
+							collaborate in real time while shopping or cooking, and make
+							copies of recipes from anywhere on the web.
+						</P>
+						<Box>
+							<PromoteSubscriptionButton>Upgrade now</PromoteSubscriptionButton>
+						</Box>
+					</OnboardingBanner>
+				</Suspense>
 				<GroceryListCategories {...rest} ref={ref} />
 				<GroceryListDragOverlay />
-				<AutoRestoreScroll id="groceriesList" debug />
 			</DndContext>
 		);
 	},

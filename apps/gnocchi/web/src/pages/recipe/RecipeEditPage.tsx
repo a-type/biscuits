@@ -1,10 +1,10 @@
 import { RecipeEditor } from '@/components/recipes/editor/RecipeEditor.jsx';
-import { useParams } from '@verdant-web/react-router';
+import { Route } from '@/routes/recipes/$slug/edit.jsx';
 
 export interface RecipeEditPageProps {}
 
 export function RecipeEditPage({}: RecipeEditPageProps) {
-	const { slug } = useParams();
+	const { slug } = Route.useParams();
 
 	return <RecipeEditor slug={slug as string} />;
 }

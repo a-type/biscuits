@@ -1,8 +1,8 @@
+import { Route } from '@/routes/pantry/route.jsx';
 import { hooks } from '@/stores/groceries/index.js';
 import { shortenTimeUnits } from '@a-type/utils';
 import { useLocalStorage } from '@biscuits/client';
 import { Food } from '@gnocchi.biscuits/verdant';
-import { useNavigate, useSearchParams } from '@verdant-web/react-router';
 import { addDays } from 'date-fns/addDays';
 import { endOfDay } from 'date-fns/endOfDay';
 import { formatDistanceToNowStrict } from 'date-fns/formatDistanceToNowStrict';
@@ -77,31 +77,36 @@ export function usePurchasedText(food: Food | null, abbreviate = false) {
  * items or only purchased items. Defaults to purchased.
  */
 export function useFilter() {
-	const [params, setParams] = useSearchParams();
-	const filter: 'purchased' | 'all' | 'frozen' =
-		(params.get('filter') as any) ?? 'purchased';
+	const { filter = 'purchased' } = Route.useSearch();
+	const navigate = Route.useNavigate();
 	const setFilter = (filter: 'purchased' | 'all' | 'frozen') => {
-		setParams((old) => {
-			old.set('filter', filter);
-			return old;
+		navigate({
+			search: {
+				filter,
+			},
 		});
 	};
 	return [filter, setFilter] as const;
 }
 
 export function useSearch() {
-	const navigate = useNavigate();
-	const [searchParams] = useSearchParams();
-	const query = searchParams.get('query') || '';
+	const navigate = Route.useNavigate();
+	const { query = '' } = Route.useSearch();
 	const setSearch = useCallback(
 		(search: string) => {
 			if (!search) {
-				navigate(`/pantry`);
+				navigate({
+					search: {
+						query: undefined,
+					},
+				});
 				return;
 			} else {
-				navigate(
-					`/pantry/search?query=${encodeURIComponent(search.toLowerCase())}`,
-				);
+				navigate({
+					search: {
+						query: search.toLowerCase(),
+					},
+				});
 			}
 		},
 		[navigate],

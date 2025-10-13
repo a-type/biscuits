@@ -4,7 +4,7 @@ import GroceryList from '@/components/groceries/GroceryList.jsx';
 import { useListThemeClass } from '@/components/groceries/lists/hooks.js';
 import { hooks } from '@/stores/groceries/index.js';
 import { PageContent, PageFixedArea } from '@a-type/ui';
-import { useNavigate } from '@verdant-web/react-router';
+import { useNavigate } from '@tanstack/react-router';
 import classNames from 'classnames';
 import { ReactNode, Suspense, useEffect } from 'react';
 import cls from './layout.module.css';
@@ -47,7 +47,7 @@ export const MainActions = () => {
 };
 
 export const List = () => (
-	<Suspense>
+	<Suspense fallback={<div>LIST LOADING</div>}>
 		<GroceryList />
 	</Suspense>
 );

@@ -4,6 +4,7 @@
 		"jsx": "preserve",
 		"outDir": "./dist",
 		"rootDir": "./src",
+		"strictNullChecks": true,
 		"paths": {
 			"@/*": ["./src/*"]
 		},

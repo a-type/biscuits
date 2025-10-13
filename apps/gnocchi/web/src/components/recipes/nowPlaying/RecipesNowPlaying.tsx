@@ -1,19 +1,20 @@
 import { RecipeNowPlayingLink } from '@/components/recipes/nowPlaying/RecipeNowPlayingLink.jsx';
 import { useNowPlayingRecipes } from '@/components/recipes/nowPlaying/hooks.js';
 import { Box, Button, Collapsible, Icon, Text } from '@a-type/ui';
-import { useParams } from '@verdant-web/react-router';
 
 export interface RecipesNowPlayingProps {
 	showSingle?: boolean;
 	defaultOpen?: boolean;
+	slug?: string;
 }
 
 export function RecipesNowPlaying({
 	showSingle,
 	defaultOpen,
+	slug,
 }: RecipesNowPlayingProps) {
 	const { firstRecipe, otherRecipes } = useNowPlayingRecipes();
-	const activeRecipe = useParams().slug?.split('-').pop();
+	const activeRecipe = slug?.split('-').pop();
 
 	if (!firstRecipe) {
 		return null;

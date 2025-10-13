@@ -75,6 +75,7 @@ catalog:
   '@tanstack/react-router-devtools': ^1.167.0
   '@tanstack/react-router-ssr-query': ^1.167.1
   '@tanstack/react-start': ^1.168.31
+  '@tanstack/zod-adapter': ^1.167.0
   graphql-request: ^7.4.0
   vite-tsconfig-paths: ^6.1.1
   '@vite-pwa/assets-generator': ^1.0.2

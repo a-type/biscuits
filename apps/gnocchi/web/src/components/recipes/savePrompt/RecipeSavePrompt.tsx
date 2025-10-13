@@ -8,7 +8,7 @@ import {
 } from '@/stores/groceries/mutations.js';
 import { Button, Dialog, H2, P, Text } from '@a-type/ui';
 import { OnboardingBanner, useLocalStorage } from '@biscuits/client';
-import { useNavigate, useSearchParams } from '@verdant-web/react-router';
+import { useNavigate, useSearch } from '@tanstack/react-router';
 import { useEffect, useState } from 'react';
 import { useSnapshot } from 'valtio';
 
@@ -17,18 +17,35 @@ export interface RecipeSavePromptProps {}
 export function RecipeSavePrompt({}: RecipeSavePromptProps) {
 	const { url: externalUrl } = useSnapshot(recipeSavePromptState);
 	const navigate = useNavigate();
-	const [search] = useSearchParams();
+	const {
+		recipeUrl: urlParam,
+		recipeSlug: slugParam,
+		recipeTitle: titleParam,
+	} = useSearch({
+		strict: false,
+	});
 	const [hasScannedBefore, setHasScannedBefore] = useLocalStorage(
 		'hasScannedBefore',
 		false,
 	);
 
-	const urlParam = search.get('recipeUrl');
-	const slugParam = search.get('recipeSlug');
+	useEffect(() => {
+		if (urlParam) {
+			recipeSavePromptState.url = urlParam;
+		}
+	}, [urlParam]);
+	useEffect(() => {
+		if (slugParam) {
+			recipeSavePromptState.slug = slugParam;
+		}
+	}, [slugParam]);
+	useEffect(() => {
+		if (titleParam) {
+			recipeSavePromptState.title = titleParam;
+		}
+	}, [titleParam]);
 
 	const url = externalUrl || urlParam || '';
-
-	const titleParam = search.get('recipeTitle');
 
 	const isGnocchi = !!slugParam;
 
@@ -57,14 +74,14 @@ export function RecipeSavePrompt({}: RecipeSavePromptProps) {
 				: await addRecipeFromUrl(url);
 			setHasScannedBefore(true);
 			if (recipe) {
-				navigate(
-					`/recipes/${recipe.get(
-						'slug',
-					)}?firstTimeScanFlow=true&skipWelcome=true`,
-					{
-						replace: true,
+				navigate({
+					to: `/recipes/${recipe.get('slug')}`,
+					search: {
+						firstTimeScanFlow: true,
+						skipWelcome: true,
 					},
-				);
+					replace: true,
+				});
 			}
 			recipeSavePromptState.url = '';
 		} finally {

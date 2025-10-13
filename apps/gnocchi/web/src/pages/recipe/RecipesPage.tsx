@@ -3,7 +3,6 @@ import { RecipeList } from '@/components/recipes/collection/RecipeList.jsx';
 import { RecipesNowPlaying } from '@/components/recipes/nowPlaying/RecipesNowPlaying.jsx';
 import { usePageTitle } from '@/hooks/usePageTitle.jsx';
 import { Icon, PageContent, PageNowPlaying } from '@a-type/ui';
-import { RestoreScroll } from '@verdant-web/react-router';
 import { Suspense } from 'react';
 
 export function RecipesPage() {
@@ -26,7 +25,6 @@ export function RecipesPage() {
 					</PageNowPlaying>
 				</Suspense>
 			</PageContent>
-			<RestoreScroll />
 		</>
 	);
 }

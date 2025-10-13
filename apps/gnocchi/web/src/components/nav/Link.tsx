@@ -1,2 +1,1 @@
-export { LinkButton, TextLink } from '@biscuits/client';
-export { Link } from '@verdant-web/react-router';
+export { Link, LinkButton, TextLink, type LinkProps } from '@biscuits/client';

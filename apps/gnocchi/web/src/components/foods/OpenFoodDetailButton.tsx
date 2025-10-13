@@ -1,38 +1,27 @@
-import { Button, ButtonProps, Icon } from '@a-type/ui';
-import { useSearchParams } from '@verdant-web/react-router';
+import { Icon } from '@a-type/ui';
+import { LinkButton, LinkButtonProps } from '@biscuits/client';
 import { forwardRef } from 'react';
 
-export type OpenFoodDetailButtonProps = ButtonProps & {
+export interface OpenFoodDetailButtonProps extends LinkButtonProps {
 	foodName: string;
-};
+}
 
 export const OpenFoodDetailButton = forwardRef<
-	HTMLButtonElement,
+	HTMLAnchorElement,
 	OpenFoodDetailButtonProps
 >(function OpenFoodDetailButton(
 	{ foodName, emphasis, children, ...rest },
 	ref,
 ) {
-	const [_, setParams] = useSearchParams();
-	const openDialog = () => {
-		setParams(
-			(old) => {
-				old.set('showFood', foodName);
-				return old;
-			},
-			{ state: { noUpdate: true } },
-		);
-	};
-
 	return (
-		<Button
+		<LinkButton
 			ref={ref}
-			onClick={openDialog}
 			emphasis={!children && emphasis === undefined ? 'ghost' : emphasis}
-			aria-label="Open food details"
+			to="."
+			search={{ showFood: foodName }}
 			{...rest}
 		>
 			{children || <Icon name="food" />}
-		</Button>
+		</LinkButton>
 	);
 });

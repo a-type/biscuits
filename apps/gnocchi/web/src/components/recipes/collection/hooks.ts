@@ -1,95 +1,59 @@
+import { Route } from '@/routes/recipes/index.jsx';
 import { hooks } from '@/stores/groceries/index.js';
 import { useLocalStorage } from '@biscuits/client';
-import { useSearchParams } from '@verdant-web/react-router';
 import { useCallback, useMemo } from 'react';
 import { removeStopwords } from 'stopword';
 import { RECIPE_PINNED_CUTOFF } from '../constants.js';
 
 export function useRecipeTagFilter() {
-	const [params, setParams] = useSearchParams();
-	const tag = params.get('tag');
+	const { tag } = Route.useSearch();
+	const navigate = Route.useNavigate();
 
 	const setTag = useCallback(
 		(tag: string | null) => {
-			if (tag) {
-				setParams(
-					(params) => {
-						params.set('tag', tag);
-						return params;
-					},
-					{ state: { noUpdate: true } },
-				);
-			} else {
-				setParams(
-					(params) => {
-						params.delete('tag');
-						return params;
-					},
-					{ state: { noUpdate: true } },
-				);
-			}
+			navigate({
+				search: {
+					tag: tag || undefined,
+				},
+			});
 		},
-		[setParams],
+		[navigate],
 	);
 
 	return [tag, setTag] as const;
 }
 
 export function useRecipeFoodFilter() {
-	const [params, setParams] = useSearchParams();
-	const food = params.get('food');
+	const { food } = Route.useSearch();
+	const navigate = Route.useNavigate();
 
 	const setFood = useCallback(
 		(food: string | null) => {
-			if (food) {
-				setParams(
-					(params) => {
-						params.set('food', food);
-						return params;
-					},
-					{ state: { noUpdate: true } },
-				);
-			} else {
-				setParams(
-					(params) => {
-						params.delete('food');
-						return params;
-					},
-					{ state: { noUpdate: true } },
-				);
-			}
+			navigate({
+				search: {
+					food: food || undefined,
+				},
+			});
 		},
-		[setParams],
+		[navigate],
 	);
 
 	return [food, setFood] as const;
 }
 
 export function useRecipeTitleFilter() {
-	const [params, setParams] = useSearchParams();
-	const value = params.get('search') || '';
+	const { search: value } = Route.useSearch();
+	const navigate = Route.useNavigate();
 
 	const setValue = useCallback(
 		(value: string | null) => {
-			if (value) {
-				setParams(
-					(params) => {
-						params.set('search', value);
-						return params;
-					},
-					{ state: { noUpdate: true } },
-				);
-			} else {
-				setParams(
-					(params) => {
-						params.delete('search');
-						return params;
-					},
-					{ state: { noUpdate: true } },
-				);
-			}
+			navigate({
+				search: {
+					search: value || undefined,
+				},
+			});
 		},
-		[setParams],
+		[navigate],
 	);
 
 	return [value, setValue] as const;

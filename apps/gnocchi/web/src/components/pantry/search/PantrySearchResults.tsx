@@ -1,4 +1,3 @@
-import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
 import { useSearch } from '@/components/pantry/hooks.js';
 import { PantryListItem } from '@/components/pantry/items/PantryListItem.jsx';
 import { hooks } from '@/stores/groceries/index.js';
@@ -37,7 +36,6 @@ export function PantrySearchResults({}: PantrySearchResultsProps) {
 					Load more
 				</Button>
 			)}
-			<AutoRestoreScroll />
 		</Box>
 	);
 }

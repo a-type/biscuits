@@ -2,7 +2,7 @@ import { useRecipeFromSlugUrl } from '@/components/recipes/hooks.js';
 import { useNowPlayingRecipes } from '@/components/recipes/nowPlaying/hooks.js';
 import { RecipeNotFound } from '@/components/recipes/RecipeNotFound.jsx';
 import { RecipeOverview as RecipeOverviewBase } from '@/components/recipes/viewer/RecipeOverview.jsx';
-import { useParams } from '@verdant-web/react-router';
+import { Route } from '@/routes/recipes/$slug/index.jsx';
 import { Activity, memo } from 'react';
 
 const RecipeOverview = memo(RecipeOverviewBase);
@@ -10,7 +10,7 @@ const RecipeOverview = memo(RecipeOverviewBase);
 export interface RecipeOverviewPageProps {}
 
 export function RecipeOverviewPage({}: RecipeOverviewPageProps) {
-	const { slug: activeSlugFull } = useParams();
+	const { slug: activeSlugFull } = Route.useParams();
 	const { allRecipes } = useNowPlayingRecipes();
 	const activeRecipe = useRecipeFromSlugUrl(activeSlugFull);
 

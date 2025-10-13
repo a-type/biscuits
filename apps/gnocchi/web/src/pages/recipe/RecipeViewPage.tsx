@@ -1,5 +1,5 @@
 import { PageContent } from '@a-type/ui';
-import { Outlet } from '@verdant-web/react-router';
+import { Outlet } from '@tanstack/react-router';
 
 export interface RecipeViewPageProps {}
 

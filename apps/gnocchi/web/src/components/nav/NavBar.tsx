@@ -14,7 +14,7 @@ import {
 } from '@a-type/ui';
 import { NavBarChangelog, OnboardingTooltip } from '@biscuits/client';
 import { NavLockup } from '@biscuits/client/apps';
-import { useOnLocationChange } from '@verdant-web/react-router';
+import { useMatch } from '@tanstack/react-router';
 import {
 	ReactNode,
 	Suspense,
@@ -22,7 +22,6 @@ import {
 	memo,
 	useCallback,
 	useEffect,
-	useState,
 } from 'react';
 import { useSnapshot } from 'valtio';
 import { groceriesState } from '../groceries/state.js';
@@ -34,13 +33,23 @@ import { PopEffect } from './PopEffect.jsx';
 export interface NavBarProps {}
 
 export function NavBar({}: NavBarProps) {
-	const [pathname, setPathname] = useState(() => window.location.pathname);
-	useOnLocationChange((location) => setPathname(location.pathname));
-	const matchDefaultList = pathname === '/';
-	const matchList = pathname.startsWith('/list');
+	const matchDefaultList = !!useMatch({
+		from: '/',
+		shouldThrow: false,
+	});
+	const matchPurchased = !!useMatch({
+		from: '/pantry',
+		shouldThrow: false,
+	});
+	const matchList = !!useMatch({
+		from: '/list/$listId',
+		shouldThrow: false,
+	});
 	const matchGroceries = matchDefaultList || matchList;
-	const matchPurchased = pathname.startsWith('/pantry');
-	const matchRecipes = pathname.startsWith('/recipes');
+	const matchRecipes = !!useMatch({
+		from: '/recipes',
+		shouldThrow: false,
+	});
 
 	return (
 		<PageNav>

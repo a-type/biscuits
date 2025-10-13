@@ -1,5 +1,5 @@
 import { hooks } from '@/stores/groceries/index.js';
-import { Outlet } from '@verdant-web/react-router';
+import { Outlet } from '@tanstack/react-router';
 import { useEffect } from 'react';
 
 export interface RecipesWrapperProps {}

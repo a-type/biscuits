@@ -1,7 +1,7 @@
 import { makeRecipeLink } from '@/components/recipes/makeRecipeLink.js';
 import { hooks } from '@/stores/groceries/index.js';
 import { Button, ButtonProps } from '@a-type/ui';
-import { useNavigate } from '@verdant-web/react-router';
+import { useNavigate } from '@tanstack/react-router';
 
 export function RecipeCreateButton({ children, ...rest }: ButtonProps) {
 	const navigate = useNavigate();

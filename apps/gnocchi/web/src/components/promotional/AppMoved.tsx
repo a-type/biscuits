@@ -1,6 +1,5 @@
 import {
 	Box,
-	Button,
 	Dialog,
 	DialogActions,
 	DialogContent,
@@ -11,15 +10,15 @@ import {
 } from '@a-type/ui';
 import {
 	CONFIG,
+	LinkButton,
 	LoginButton,
+	TextLink,
 	getIsPWAInstalled,
 	getOS,
 	useAppInfo,
 	useHasServerAccess,
 } from '@biscuits/client';
 import { ExportDataButton } from '@biscuits/client/apps';
-import { Link } from '@verdant-web/react-router';
-import { TextLink } from '../nav/Link.jsx';
 
 export interface AppMovedProps {}
 
@@ -56,15 +55,12 @@ export function AppMoved({}: AppMovedProps) {
 				{!canSync ? <LoggedOut /> : <LoggedIn />}
 				<InstallNote />
 				<DialogActions>
-					<Button render={<Link to={`${CONFIG.HOME_ORIGIN}/contact`} newTab />}>
+					<LinkButton to={`${CONFIG.HOME_ORIGIN}/contact`} newTab>
 						Contact Support
-					</Button>
-					<Button
-						emphasis="primary"
-						render={<Link newTab to={goTo.toString()} />}
-					>
+					</LinkButton>
+					<LinkButton emphasis="primary" to={goTo.toString()} newTab>
 						Open Gnocchi
-					</Button>
+					</LinkButton>
 				</DialogActions>
 			</DialogContent>
 		</Dialog>

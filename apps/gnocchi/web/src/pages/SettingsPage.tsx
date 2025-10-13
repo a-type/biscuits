@@ -1,6 +1,5 @@
 import { useKeepOpenAfterSelect } from '@/components/groceries/addBar/hooks.js';
 import { ManageCategoriesDialog } from '@/components/menu/ManageCategoriesDialog.jsx';
-import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
 import { Button, Field, PageContent, Switch, Text } from '@a-type/ui';
 import { SettingsPageWrapper } from '@biscuits/client/apps';
 
@@ -11,7 +10,6 @@ export function SettingsPage() {
 				<ManageCategories />
 				<ManageSettings />
 			</SettingsPageWrapper>
-			<AutoRestoreScroll />
 		</PageContent>
 	);
 }

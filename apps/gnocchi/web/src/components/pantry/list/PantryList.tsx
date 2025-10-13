@@ -1,4 +1,3 @@
-import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
 import { PantryListItemSkeleton } from '@/components/pantry/items/PantryListItem.jsx';
 import { pantryOnboarding } from '@/onboarding/pantryOnboarding.js';
 import { hooks } from '@/stores/groceries/index.js';
@@ -46,7 +45,6 @@ function PantryListInner({ className, ...rest }: PantryListProps) {
 				})}
 				<PantryListCategory category={null} />
 			</Box>
-			<AutoRestoreScroll id="pantryList" />
 		</Box>
 	);
 }

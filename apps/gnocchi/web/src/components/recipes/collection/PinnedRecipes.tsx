@@ -11,7 +11,7 @@ import { AddToListButton } from '@/components/recipes/viewer/AddToListButton.jsx
 import { hooks } from '@/stores/groceries/index.js';
 import { Box, CollapsibleSimple, Divider, H2, Icon, Text } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@tanstack/react-router';
 import classNames from 'classnames';
 import { RecipePinToggle } from '../viewer/RecipePinToggle.jsx';
 import cls from './PinnedRecipes.module.css';

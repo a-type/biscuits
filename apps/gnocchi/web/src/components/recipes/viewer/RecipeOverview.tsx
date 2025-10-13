@@ -27,7 +27,6 @@ import {
 import { formatMinutes } from '@a-type/utils';
 import { OnboardingBanner } from '@biscuits/client';
 import { Recipe } from '@gnocchi.biscuits/verdant';
-import { Link } from '@verdant-web/react-router';
 import classNames from 'classnames';
 import { format } from 'date-fns';
 import { Suspense, useEffect, useRef } from 'react';
@@ -148,7 +147,10 @@ export function RecipeOverview({ recipe }: RecipeOverviewProps) {
 										</Chip>
 									)}
 									{url && (
-										<Chip color="accent" render={<Link to={url} newTab />}>
+										<Chip
+											color="accent"
+											render={<a href={url} target="_blank" rel="noreferrer" />}
+										>
 											View original{' '}
 											<Icon
 												name="new_window"
@@ -252,13 +254,14 @@ function PreludeSection({ recipe }: { recipe: Recipe }) {
 
 function OverviewNowPlaying({ recipe }: { recipe: Recipe }) {
 	const { showCookTools } = useSnapshot(viewerState);
+	const { slug } = hooks.useWatch(recipe);
 	return (
 		<PageNowPlaying>
 			<Box full="width" items="center" justify="end" gap="sm">
 				{showCookTools && <CookingToolbar recipe={recipe} />}
 			</Box>
 			<Suspense>
-				<RecipesNowPlaying showSingle={false} />
+				<RecipesNowPlaying showSingle={false} slug={slug} />
 			</Suspense>
 		</PageNowPlaying>
 	);

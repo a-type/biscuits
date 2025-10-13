@@ -23,7 +23,7 @@ import {
 } from '@a-type/ui';
 import { formatMinutes } from '@a-type/utils';
 import { Recipe } from '@gnocchi.biscuits/verdant';
-import { useNavigate } from '@verdant-web/react-router';
+import { useNavigate } from '@tanstack/react-router';
 import classNames from 'classnames';
 import cuid from 'cuid';
 import { memo, Suspense, useState } from 'react';
@@ -123,8 +123,8 @@ export function RecipeListItemMenu({
 			session: null,
 			updatedAt: Date.now(),
 		});
-		navigate(makeRecipeLink(copy, '/edit'), {
-			skipTransition: true,
+		navigate({
+			to: makeRecipeLink(copy, '/edit'),
 		});
 	};
 

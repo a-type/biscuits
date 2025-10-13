@@ -29,6 +29,8 @@
 		"@gnocchi.biscuits/verdant": "workspace:*",
 		"@gnocchi.biscuits/share-schema": "workspace:*",
 		"@react-spring/web": "catalog:",
+		"@tanstack/react-router": "catalog:",
+		"@tanstack/zod-adapter": "catalog:",
 		"@tiptap/core": "catalog:",
 		"@tiptap/extension-document": "catalog:",
 		"@tiptap/extension-link": "catalog:",
@@ -39,7 +41,6 @@
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
 		"@use-gesture/react": "^10.2.24",
-		"@verdant-web/react-router": "catalog:",
 		"@verdant-web/store": "catalog:",
 		"@verdant-web/tiptap": "catalog:",
 		"@zip.js/zip.js": "^2.7.6",
@@ -77,10 +78,12 @@
 		"workbox-precaching": "^7.0.0",
 		"workbox-routing": "^7.0.0",
 		"workbox-strategies": "^7.0.0",
-		"workbox-window": "^6.5.4"
+		"workbox-window": "^6.5.4",
+		"zod": "^4.1.11"
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "^1.0.3",
+		"@tanstack/router-plugin": "^1.132.51",
 		"@types/convert-units": "^2.3.5",
 		"@types/dom-screen-wake-lock": "^1.0.0",
 		"@types/pako": "^2.0.0",

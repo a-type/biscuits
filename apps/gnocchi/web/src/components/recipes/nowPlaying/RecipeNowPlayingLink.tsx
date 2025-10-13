@@ -2,7 +2,7 @@ import { makeRecipeLink } from '@/components/recipes/makeRecipeLink.js';
 import { hooks } from '@/stores/groceries/index.js';
 import { clsx, ConfirmedButton, Icon, Text } from '@a-type/ui';
 import { Recipe, RecipeInstructionsInit } from '@gnocchi.biscuits/verdant';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@tanstack/react-router';
 import { useKeepAliveSlugQuery } from '../hooks.js';
 import cls from './RecipeNowPlayingLink.module.css';
 

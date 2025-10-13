@@ -7,17 +7,20 @@ import { groceriesState } from './state.js';
 export function useItemsGroupedAndSorted(
 	listId: string | null | undefined = undefined,
 ) {
-	const items = hooks.useAllItems(
-		listId === undefined
-			? undefined
-			: {
-					index: {
+	const items = hooks.useAllItems({
+		key: `groceries:${listId ?? 'all'}`,
+		index:
+			listId === undefined
+				? undefined
+				: {
 						where: 'listId',
 						equals: listId,
-					},
-			  },
-	);
-	const categories = hooks.useAllCategories();
+				  },
+	});
+
+	const categories = hooks.useAllCategories({
+		key: `groceryCategories`,
+	});
 	const { purchasedThisSession } = useSnapshot(groceriesState);
 
 	const visibleItems = useMemo(
@@ -45,7 +48,6 @@ export function useItemsGroupedAndSorted(
 	}, [visibleItems]);
 
 	const categoryGroups = useMemo(() => {
-		// reference dep item
 		// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 		forcedChange;
 		const categoryGroups: { category: Category | null; items: Item[] }[] = [];

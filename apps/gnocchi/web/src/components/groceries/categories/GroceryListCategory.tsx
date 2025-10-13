@@ -7,8 +7,7 @@ import { useSizeCssVars, withClassName } from '@a-type/ui';
 import { useMergedRef } from '@biscuits/client';
 import { useDndMonitor, useDroppable } from '@dnd-kit/core';
 import { Category, Item } from '@gnocchi.biscuits/verdant';
-import { AnimatePresence } from 'motion/react';
-import { memo, useCallback, useEffect, useRef } from 'react';
+import { memo, Suspense, useCallback, useEffect, useRef } from 'react';
 import { useIsDragging } from '../dndHooks.js';
 import { GroceryListItemDraggable } from '../items/GroceryListItem.js';
 import cls from './GroceryListCategory.module.css';
@@ -69,11 +68,13 @@ export function GroceryListCategory({
 				)}
 			</CategoryTitleRow>
 			<CategoryItems data-is-item-dragging={isDragging}>
-				<AnimatePresence initial={true}>
-					{items.map((item) => {
-						return <MemoizedDraggableItem key={item.get('id')} item={item} />;
-					})}
-				</AnimatePresence>
+				{items.map((item) => {
+					return (
+						<Suspense key={item.uid}>
+							<MemoizedDraggableItem key={item.get('id')} item={item} />
+						</Suspense>
+					);
+				})}
 			</CategoryItems>
 		</CategoryRoot>
 	);
@@ -103,7 +104,7 @@ function useDragExpansion({
 	empty: boolean;
 }) {
 	const heightPriorToDragRef = useRef(0);
-	const priorAnimationRef = useRef<Animation>(undefined);
+	const priorAnimationRef = useRef<Animation>(null);
 
 	const collapse = useCallback(async () => {
 		const element = internalRef.current;

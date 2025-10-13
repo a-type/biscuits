@@ -1,7 +1,7 @@
 import { hooks } from '@/stores/groceries/index.js';
 import { Button } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
-import { useNavigate } from '@verdant-web/react-router';
+import { useNavigate } from '@tanstack/react-router';
 import { CSSProperties } from 'react';
 
 export interface RecipeDeleteButtonProps {
