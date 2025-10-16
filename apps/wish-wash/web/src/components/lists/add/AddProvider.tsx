@@ -45,7 +45,7 @@ export const AddItemProvider = ({
 		setSearch((s) => {
 			s.set('itemId', item.get('id'));
 			return s;
-		});
+		}, { replace: true });
 	};
 
 	const [suggestionPrompt, setSuggestionPrompt] = useState('');
