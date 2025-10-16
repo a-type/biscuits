@@ -110,10 +110,15 @@ const AddListItemButton = forwardRef<HTMLButtonElement, { list: List }>(
 						description: 'New item',
 					});
 					const item = items.get(items.length - 1);
-					setParams((p) => {
-						p.set('item', item.get('id'));
-						return p;
-					});
+					setParams(
+						(p) => {
+							p.set('item', item.get('id'));
+							return p;
+						},
+						{
+							replace: true,
+						},
+					);
 				}}
 				ref={ref}
 			>

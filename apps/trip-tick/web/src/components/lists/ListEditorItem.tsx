@@ -31,15 +31,25 @@ export function ListEditorItem({ item, onDelete }: ListEditorItemProps) {
 	const [params, setParams] = useSearchParams();
 	const open = params.get('item') === id;
 	const onClose = () =>
-		setParams((p) => {
-			p.delete('item');
-			return p;
-		});
+		setParams(
+			(p) => {
+				p.delete('item');
+				return p;
+			},
+			{
+				replace: true,
+			},
+		);
 	const onOpen = () =>
-		setParams((p) => {
-			p.set('item', id);
-			return p;
-		});
+		setParams(
+			(p) => {
+				p.set('item', id);
+				return p;
+			},
+			{
+				replace: true,
+			},
+		);
 
 	return (
 		<Dialog
