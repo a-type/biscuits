@@ -9,6 +9,7 @@ import {
 } from '@a-type/ui';
 import { useNavigate } from '@verdant-web/react-router';
 import { useSnapshot } from 'valtio';
+import { addToList } from '../lists/add/util.js';
 import { shareTargetState } from './shareTargetState.js';
 
 export interface ShareTargetListPickerProps {}
@@ -23,19 +24,18 @@ export function ShareTargetListPicker({}: ShareTargetListPickerProps) {
 	const show = !!share;
 
 	const navigate = useNavigate();
-	const addToList = async (listId: string) => {
+	const doAdd = async (listId: string) => {
 		if (!share) return;
 		const list = lists.find((list) => list.get('id') === listId);
 		if (!list) return;
 
-		// TODO: scan webpage for subscribers
-
-		const items = list.get('items');
-		items.push({
-			links: share.url ? [share.url] : undefined,
-			description: share.title || share.text,
+		const itemId = addToList(list, {
+			description: share.title || share.text || 'Shared item',
+			links: share.url ? [share.url] : [],
+			type: share.url ? 'link' : 'idea',
 		});
-		navigate(`/${listId}`);
+		navigate(`/${listId}?itemId=${itemId}`);
+		shareTargetState.share = null;
 	};
 
 	return (
@@ -49,9 +49,13 @@ export function ShareTargetListPicker({}: ShareTargetListPickerProps) {
 		>
 			<DialogContent>
 				<DialogTitle>Add to list</DialogTitle>
-				<DialogSelectList onValueChange={addToList}>
+				<DialogSelectList onValueChange={doAdd}>
 					{lists.map((list) => (
-						<DialogSelectItem value={list.get('id')} key={list.get('id')}>
+						<DialogSelectItem
+							value={list.get('id')}
+							key={list.get('id')}
+							className="[&>span]:(flex flex-row items-center gap-md)"
+						>
 							<Icon name={list.isAuthorized ? 'lock' : 'add_person'} />
 							{list.get('name')}
 						</DialogSelectItem>

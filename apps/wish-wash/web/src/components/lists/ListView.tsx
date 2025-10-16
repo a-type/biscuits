@@ -22,8 +22,8 @@ import { List } from '@wish-wash.biscuits/verdant';
 import { ReactNode, Suspense, useCallback, useState } from 'react';
 import { ItemEditDialog } from '../items/ItemEditDialog.jsx';
 import { ListItem } from '../items/ListItem.jsx';
-import { AddItem } from './add/AddItem.jsx';
 import { ItemSorter } from './ItemSorter.jsx';
+import { AddBar } from './add/AddBar.jsx';
 
 export interface ListViewProps {
 	list: List;
@@ -82,7 +82,10 @@ export function ListView({ list, className }: ListViewProps) {
 
 	return (
 		<div className={clsx('col items-stretch gap-4', className)}>
-			<AddItem list={list} />
+			<AddBar
+				list={list}
+				className="fixed bottom-sm left-1/2 center-x z-now-playing"
+			/>
 			<div className="row items-stretch">
 				<div className="flex-1">
 					<CardGrid columns={cardGridColumns.small} className="flex-1 z-0">

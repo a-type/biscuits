@@ -4,15 +4,10 @@ import {
 	Button,
 	clsx,
 	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
-	DialogTitle,
 	Icon,
 	ImageUploader,
 	Input,
 	NumberStepper,
-	ScrollArea,
 	TextArea,
 	withClassName,
 } from '@a-type/ui';
@@ -27,6 +22,8 @@ import {
 	ListItemsItemImageFilesDestructured,
 } from '@wish-wash.biscuits/verdant';
 import { ReactNode, useCallback } from 'react';
+import { useSnapshot } from 'valtio';
+import { createdItemState } from '../lists/state.js';
 import { ItemNote } from './ItemNote.jsx';
 
 export interface ItemEditDialogProps {
@@ -42,6 +39,8 @@ export function ItemEditDialog({ list }: ItemEditDialogProps) {
 
 	const item = items.find((i) => i.get('id') === itemId);
 
+	const justAdded = useSnapshot(createdItemState).justCreatedId === itemId;
+
 	return (
 		<Dialog
 			open={!!item}
@@ -54,45 +53,86 @@ export function ItemEditDialog({ list }: ItemEditDialogProps) {
 				}
 			}}
 		>
-			<DialogContent
+			<Dialog.Content
 				onOpenAutoFocus={preventDefault}
 				className={clsx(
 					'theme',
 					`theme-${typeThemes[item?.get('type') ?? 'idea']}`,
-					'bg-wash gap-sm flex flex-col items-stretch',
+					'bg-wash gap-md flex flex-col items-stretch',
 				)}
 				width="md"
 			>
-				<DialogTitle className="m-0">Edit item</DialogTitle>
-				<span className="text-xs italic color-gray-dark">
+				<Dialog.Title className="m-0">Edit item</Dialog.Title>
+				<Dialog.Description className="text-xs italic color-gray-dark">
 					All fields save automatically
-				</span>
+				</Dialog.Description>
+				{item && <ItemTypePicker item={item} />}
 				{item && <ItemEditor item={item} />}
-				<DialogActions className="justify-between">
+				<Dialog.Actions className="justify-between">
 					{item && (
 						<Button
 							color="destructive"
 							onClick={() => {
 								items.removeAll(item);
-								setSearch((p) => {
-									p.delete('itemId');
-									return p;
-								});
+								setSearch(
+									(p) => {
+										p.delete('itemId');
+										return p;
+									},
+									{
+										replace: true,
+									},
+								);
 							}}
 						>
 							<Icon name="trash" />
-							Delete
+							{justAdded ? 'Discard' : 'Delete'}
 						</Button>
 					)}
-					<DialogClose asChild>
+					<Dialog.Close asChild>
 						<Button color="primary">Done</Button>
-					</DialogClose>
-				</DialogActions>
-			</DialogContent>
+					</Dialog.Close>
+				</Dialog.Actions>
+			</Dialog.Content>
 		</Dialog>
 	);
 }
 
+function ItemTypePicker({ item }: { item: Item }) {
+	const { type } = hooks.useWatch(item);
+
+	return (
+		<Box gap="sm" items="center">
+			<Button
+				size="small"
+				toggled={type === 'idea'}
+				onClick={() => item.set('type', 'idea')}
+				className="theme-lemon"
+				color="primary"
+			>
+				<Icon name="lightbulb" /> Idea
+			</Button>
+			<Button
+				size="small"
+				toggled={type === 'link'}
+				onClick={() => item.set('type', 'link')}
+				className="theme-leek"
+				color="primary"
+			>
+				<Icon name="gift" /> Product
+			</Button>
+			<Button
+				size="small"
+				toggled={type === 'vibe'}
+				onClick={() => item.set('type', 'vibe')}
+				className="theme-eggplant"
+				color="primary"
+			>
+				<Icon name="magic" /> Vibe
+			</Button>
+		</Box>
+	);
+}
 function ItemEditor({ item }: { item: Item }) {
 	const { type } = hooks.useWatch(item);
 	let content: ReactNode = null;
@@ -160,7 +200,7 @@ function ImagesField({ item }: { item: Item }) {
 
 	return (
 		<div>
-			<ScrollArea background="white" className="max-h-400px w-full">
+			<Box surface overflow="auto-y" className="max-h-400px w-full py-sm">
 				<div className="grid sm:grid-cols-3 gap-1">
 					{imageFiles.map((file, index) => (
 						<ImageField
@@ -172,7 +212,7 @@ function ImagesField({ item }: { item: Item }) {
 						/>
 					))}
 				</div>
-			</ScrollArea>
+			</Box>
 			<Label>Add images</Label>
 			<ImageUploader
 				value={null}

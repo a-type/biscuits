@@ -55,7 +55,9 @@ export function Pages() {
 			<Suspense fallback={<Spinner />}>
 				<Router routes={routes} onNavigate={handleNavigate}>
 					<Outlet />
-					<ShareTargetListPicker />
+					<Suspense>
+						<ShareTargetListPicker />
+					</Suspense>
 				</Router>
 			</Suspense>
 		</ErrorBoundary>
