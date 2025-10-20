@@ -39,8 +39,11 @@ export function AddBar({ className, list }: AddBarProps) {
 			<form
 				onSubmit={(ev) => {
 					ev.preventDefault();
+					const isUrl = URL.canParse(value);
 					const itemId = addToList(list, {
-						description: value,
+						type: isUrl ? 'link' : 'idea',
+						links: isUrl ? [value] : undefined,
+						description: isUrl ? undefined : value,
 					});
 					open(itemId);
 					setValue('');
