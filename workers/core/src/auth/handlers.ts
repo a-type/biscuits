@@ -90,43 +90,40 @@ export const authHandlers = createHandlers<Context<HonoEnv>>({
 			}) => {
 				const password =
 					plaintextPassword ? await hashPassword(plaintextPassword) : undefined;
-				const result = await db.transaction().execute(async (tx) => {
-					const planResult = await tx
-						.insertInto('Plan')
-						.values({
-							id: id(),
-							name: `${fullName ?? 'Anonymous'}'s Plan`,
-							subscriptionStatus: 'none',
-							memberLimit: 1,
-							featureFlags: {},
-						})
-						.returning('id')
-						.executeTakeFirstOrThrow(
-							() =>
-								new BiscuitsError(
-									BiscuitsError.Code.Unexpected,
-									'Failed to create plan',
-								),
-						);
-					const userResult = await tx
-						.insertInto('User')
-						.values({
-							id: id(),
-							password,
-							fullName: fullName || 'Anonymous',
-							friendlyName: friendlyName || fullName || 'Anonymous',
-							isProductAdmin: false,
-							acceptedTosAt: new Date(),
-							planId: planResult.id,
-							planRole: 'admin',
-							...user,
-							emailVerifiedAt: user.emailVerifiedAt?.toUTCString() ?? undefined,
-						})
-						.returning('id')
-						.executeTakeFirstOrThrow();
+				const planResult = await db
+					.insertInto('Plan')
+					.values({
+						id: id(),
+						name: `${fullName ?? 'Anonymous'}'s Plan`,
+						subscriptionStatus: 'none',
+						memberLimit: 1,
+						featureFlags: {},
+					})
+					.returning('id')
+					.executeTakeFirstOrThrow(
+						() =>
+							new BiscuitsError(
+								BiscuitsError.Code.Unexpected,
+								'Failed to create plan',
+							),
+					);
+				const result = await db
+					.insertInto('User')
+					.values({
+						id: id(),
+						password,
+						fullName: fullName || 'Anonymous',
+						friendlyName: friendlyName || fullName || 'Anonymous',
+						isProductAdmin: false,
+						acceptedTosAt: new Date(),
+						planId: planResult.id,
+						planRole: 'admin',
+						...user,
+						emailVerifiedAt: user.emailVerifiedAt?.toUTCString() ?? undefined,
+					})
+					.returning('id')
+					.executeTakeFirstOrThrow();
 
-					return userResult;
-				});
 				email
 					.sendCustomEmail(
 						{
