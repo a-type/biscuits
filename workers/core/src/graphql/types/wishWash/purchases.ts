@@ -26,7 +26,7 @@ builder.queryFields((t) => ({
 				.where('wishlistId', '=', args.wishlistId);
 
 			if (!args.includeConfirmed) {
-				query = query.where('confirmedAt', '=', null);
+				query = query.where('confirmedAt', 'is', null);
 			}
 
 			const purchases = await query.execute();

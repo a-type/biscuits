@@ -1,11 +1,7 @@
 import { hooks } from '@/hooks.js';
-import { Button, clsx } from '@a-type/ui';
-import {
-	graphql,
-	useHasServerAccess,
-	useMutation,
-	useQuery,
-} from '@biscuits/client';
+import { Box, Button } from '@a-type/ui';
+import { useHasServerAccess } from '@biscuits/client';
+import { graphql, useMutation, useQuery } from '@biscuits/graphql';
 import { List } from '@wish-wash.biscuits/verdant';
 
 const getPurchases = graphql(`
@@ -37,7 +33,7 @@ export function SyncPurchases({ className, list }: SyncPurchasesProps) {
 
 	const { id: listId, confirmedRemotePurchases, items } = hooks.useWatch(list);
 	hooks.useWatch(confirmedRemotePurchases);
-	const { data, loading } = useQuery(getPurchases, {
+	const { data, loading, refetch } = useQuery(getPurchases, {
 		variables: { listId },
 		skip: !hasAccess,
 	});
@@ -59,12 +55,7 @@ export function SyncPurchases({ className, list }: SyncPurchasesProps) {
 	}
 
 	return (
-		<div
-			className={clsx(
-				'flex flex-col items-stretch gap-2 p-3 bg-accent-wash rounded-lg',
-				className,
-			)}
-		>
+		<Box col gap items="start" surface="accent" p className={className}>
 			<span className="text-lg font-bold">Good things coming...</span>
 			<span>
 				Some of your items have been purchased by others. We don't want to spoil
@@ -99,11 +90,12 @@ export function SyncPurchases({ className, list }: SyncPurchasesProps) {
 							purchaseIds: unconfirmedPurchases.map((purchase) => purchase.id),
 						},
 					});
+					await refetch();
 				}}
 				loading={confirming}
 			>
 				Reveal
 			</Button>
-		</div>
+		</Box>
 	);
 }

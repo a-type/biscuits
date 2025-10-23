@@ -1,6 +1,7 @@
 import { ListActions } from '@/components/lists/ListActions.jsx';
 import { ListHero } from '@/components/lists/ListHero.jsx';
 import { ListView } from '@/components/lists/ListView.jsx';
+import { SyncPurchases } from '@/components/lists/SyncPurchases.jsx';
 import { hooks } from '@/hooks.js';
 import { Box, Button, H1, Icon, PageContent, PageRoot } from '@a-type/ui';
 import { useLocalStorage } from '@biscuits/client';
@@ -64,6 +65,7 @@ function ListPageContent({ list }: { list: List }) {
 			</Box>
 			<Box d="col" gap className="w-full max-w-800px">
 				<ListHero list={list} />
+				<SyncPurchases list={list} />
 				<ListActions className="sticky top-0 z-10" listId={list.get('id')} />
 			</Box>
 			<ListView list={list} className="pb-[200px] w-full max-w-1280px" />
