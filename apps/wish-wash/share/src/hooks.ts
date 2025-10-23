@@ -1,3 +1,4 @@
+import { toast } from '@a-type/ui';
 import { graphql, VariablesOf } from '@biscuits/graphql';
 import { useMutation } from '@tanstack/react-query';
 import { notFound } from '@tanstack/react-router';
@@ -6,7 +7,6 @@ import { env } from 'cloudflare:workers';
 import request from 'graphql-request';
 import { useEffect, useState } from 'react';
 import { useHubContext } from './components/Context.jsx';
-import { listIdMiddleware } from './utils/listIdMiddleware.js';
 import { proxyAuthMiddleware } from './utils/proxyAuthMiddleware.js';
 
 export function useTimer(timeout: number) {
@@ -45,7 +45,7 @@ const purchase = graphql(`
 
 const purchaseItem = createServerFn()
 	.inputValidator((input: VariablesOf<typeof purchase>['input']) => input)
-	.middleware([proxyAuthMiddleware, listIdMiddleware])
+	.middleware([proxyAuthMiddleware])
 	.handler(async ({ data, context }) => {
 		const res = await request(
 			`${env.API_ORIGIN}/graphql`,
@@ -71,6 +71,10 @@ export function usePurchaseItem(id: string) {
 			doPurchase({
 				data: input,
 			}),
+		onError: (error: unknown) => {
+			console.error(error);
+			toast.error(`Hm, something went wrong. Try again?`);
+		},
 	});
 
 	const execute = ({ quantity, name }: { quantity: number; name: string }) => {
