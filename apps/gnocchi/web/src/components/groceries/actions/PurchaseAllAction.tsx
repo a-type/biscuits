@@ -26,7 +26,7 @@ export function PurchaseAllAction() {
 			visible={items.length > 0}
 			size="small"
 			onActivate={onActivate}
-			progressColor="primaryLight"
+			progressColor="primary"
 		>
 			<CheckboxIcon />
 			Purchase All

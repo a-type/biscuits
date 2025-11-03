@@ -15,7 +15,7 @@ import { useEffect, useRef, useState } from 'react';
 export type LongPressActionProps = ActionButtonProps & {
 	onActivate: () => void;
 	duration?: number;
-	progressColor?: 'attentionLight' | 'accentLight' | 'primaryLight';
+	progressColor?: 'attention' | 'accent' | 'primary';
 	delay?: number;
 };
 
@@ -30,7 +30,7 @@ const CANCEL_DISTANCE = 30;
 
 export function LongPressAction({
 	onActivate,
-	progressColor = 'attentionLight',
+	progressColor = 'attention',
 	children,
 	duration = 2000,
 	delay = 200,
@@ -160,12 +160,8 @@ export function LongPressAction({
 				<div className="relative overflow-hidden px-4 py-2 rounded-lg">
 					<div
 						className={classNames(
-							'position-absolute top-0 left-0 h-full',
-							{
-								'bg-attentionLight': progressColor === 'attentionLight',
-								'bg-accentLight': progressColor === 'accentLight',
-								'bg-primaryLight': progressColor === 'primaryLight',
-							},
+							`palette-${progressColor}`,
+							'position-absolute top-0 left-0 h-full bg-main-light',
 							state === 'holding' &&
 								`animate-keyframes-progress-bar animate-forwards animate-ease-linear`,
 						)}
