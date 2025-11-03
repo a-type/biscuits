@@ -67,7 +67,7 @@ export function SubscriptionPromotion({
 				<div className="flex flex-row items-start gap-2">
 					<DialogTitle className="flex-1">{title}</DialogTitle>
 					<DialogClose asChild>
-						<Button size="small" color="ghost">
+						<Button size="small" emphasis="ghost">
 							<Icon name="x" />
 						</Button>
 					</DialogClose>
@@ -77,7 +77,7 @@ export function SubscriptionPromotion({
 				<DialogActions>
 					<div className="flex flex-col gap-2 items-center m-auto mt-1">
 						<LoginButton
-							color="primary"
+							emphasis="primary"
 							returnTo="/"
 							onClick={() => (subscriptionPromotionState.status = 'closed')}
 						>

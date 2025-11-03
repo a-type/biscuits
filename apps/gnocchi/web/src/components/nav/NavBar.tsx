@@ -3,6 +3,7 @@ import { saveHubRecipeOnboarding } from '@/onboarding/saveHubRecipeOnboarding.js
 import { hooks } from '@/stores/groceries/index.js';
 import {
 	Box,
+	IconName,
 	NavBarItem,
 	NavBarItemIcon,
 	NavBarItemIconWrapper,
@@ -29,7 +30,6 @@ import {
 } from 'react';
 import { useSnapshot } from 'valtio';
 import { groceriesState } from '../groceries/state.js';
-import { IconName } from '../icons/generated/iconNames.js';
 import { useHasNewExpirations } from '../pantry/hooks.js';
 import { useRecipePresenceNotification } from '../sync/collaborationMenu/RecipePresenceNotification.jsx';
 import { PopEffect } from './PopEffect.jsx';

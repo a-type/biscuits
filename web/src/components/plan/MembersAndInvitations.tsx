@@ -129,7 +129,8 @@ function KickMemberButton({
 			disabled={loading}
 			onConfirm={() => kick({ variables: { memberId } })}
 			size="small"
-			color="destructive"
+			emphasis="primary"
+			color="attention"
 		>
 			Remove member
 		</ConfirmedButton>
@@ -159,7 +160,8 @@ function CancelInvitationButton({ id }: { id: string }) {
 			disabled={loading}
 			onConfirm={() => cancel({ variables: { id } })}
 			size="small"
-			color="destructive"
+			emphasis="primary"
+			color="attention"
 		>
 			Cancel invitation
 		</ConfirmedButton>

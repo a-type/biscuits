@@ -28,20 +28,28 @@ export function InstallHint({
 	}
 
 	return (
-		<Box surface="primary" p d="col" gap items="stretch" className={className}>
+		<Box
+			surface
+			color="primary"
+			p
+			d="col"
+			gap
+			items="stretch"
+			className={className}
+		>
 			<P>{contentStr}</P>
 			<div className="flex flex-row items-center justify-end gap-4 w-full">
-				<Button color="ghost" onClick={() => setIsDismissed(true)}>
+				<Button emphasis="ghost" onClick={() => setIsDismissed(true)}>
 					Dismiss
 				</Button>
 				<Suspense
 					fallback={
-						<Button size="small" disabled loading color="ghost">
+						<Button size="small" disabled loading emphasis="ghost">
 							...
 						</Button>
 					}
 				>
-					<InstallButton color="primary" />
+					<InstallButton emphasis="primary" />
 				</Suspense>
 			</div>
 		</Box>

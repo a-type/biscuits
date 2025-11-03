@@ -26,7 +26,7 @@ export function PersonPage({}: PersonPageProps) {
 
 	return (
 		<>
-			<Button asChild className="mr-auto mb-4" color="ghost">
+			<Button asChild className="mr-auto mb-4" emphasis="ghost">
 				<Link to="/">
 					<Icon name="arrowLeft" />
 					Home

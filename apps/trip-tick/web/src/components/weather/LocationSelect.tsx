@@ -66,7 +66,7 @@ export function LocationSelect({
 	if (!showEdit && value) {
 		return (
 			<Button
-				color="ghost"
+				emphasis="ghost"
 				size="small"
 				className={classNames('font-normal', className)}
 				onClick={() => setShowEdit(true)}

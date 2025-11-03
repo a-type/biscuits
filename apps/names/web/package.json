@@ -7,7 +7,8 @@
 		"app-dev": "vite",
 		"build": "vite build",
 		"preview": "vite preview",
-		"generate": "cd ../verdant && pnpm generate"
+		"generate": "cd ../verdant && pnpm generate",
+		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
 		"@a-type/ui": "catalog:",

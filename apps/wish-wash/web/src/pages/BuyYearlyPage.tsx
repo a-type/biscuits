@@ -38,7 +38,7 @@ function MemberUpsell() {
 				features and device sync, including all Wish Wash features like list
 				sharing.
 			</P>
-			<Button asChild color="accent">
+			<Button asChild emphasis="light" color="accent">
 				<Link
 					to={`${CONFIG.HOME_ORIGIN}/join?returnTo=${window.location.href}`}
 				>

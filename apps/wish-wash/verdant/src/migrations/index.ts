@@ -9,5 +9,6 @@ import v8 from "./v8.js";
 import v9 from "./v9.js";
 import v10 from "./v10.js";
 import v11 from "./v11.js";
+import v12 from "./v12.js";
 
-export default [v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11];
+export default [v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12];

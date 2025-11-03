@@ -79,7 +79,8 @@ export function DomainRouteView({ resourceId }: DomainRouteViewProps) {
 		<Dialog open={open} onOpenChange={setOpen}>
 			<Dialog.Trigger asChild>
 				<Button
-					color={status === 'READY' ? 'accent' : 'default'}
+					color={status === 'READY' ? 'accent' : 'primary'}
+					emphasis={status === 'READY' ? 'primary' : 'default'}
 					className="justify-between"
 				>
 					{domain ?? <TextSkeleton maxLength={30} />}
@@ -161,7 +162,7 @@ function DomainRouteRegister({
 					label="Register a domain"
 					className="flex-1"
 				/>
-				<SubmitButton color="primary" size="icon">
+				<SubmitButton emphasis="primary">
 					<Icon name="arrowRight" />
 				</SubmitButton>
 			</Box>

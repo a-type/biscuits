@@ -1,6 +1,6 @@
 import { hooks } from '@/stores/groceries/index.js';
 import { Box, Button, Dialog, FieldLabel, Icon } from '@a-type/ui';
-import { ListEntity, ObjectEntity, Recipe } from '@gnocchi.biscuits/verdant';
+import { Recipe } from '@gnocchi.biscuits/verdant';
 import { MultiplierStepper } from '../viewer/MultiplierStepper.jsx';
 
 export function SubRecipeEditorButton({
@@ -18,25 +18,19 @@ export function SubRecipeEditorButton({
 	};
 
 	function removeStepWithRecipe() {
-		const steps = instructions.get('content') as ListEntity<
-			any,
-			ObjectEntity<
-				any,
-				{ attributes: ObjectEntity<any, { subRecipeId?: string }> }
-			>[]
-		>;
-		const step = steps.find((step) => {
-			return step?.get('attributes')?.get('subRecipeId') === subRecipeId;
+		const steps = instructions.get('content');
+		const step = steps?.find((step) => {
+			return step?.get('attrs')?.get('subRecipeId') === subRecipeId;
 		});
 		if (step) {
-			steps.removeAll(step);
+			steps?.removeAll(step);
 		}
 	}
 
 	return (
 		<Dialog>
 			<Dialog.Trigger asChild>
-				<Button size="icon" color="ghost">
+				<Button emphasis="ghost">
 					<Icon name="dots" />
 				</Button>
 			</Dialog.Trigger>
@@ -55,7 +49,11 @@ export function SubRecipeEditorButton({
 					</span>
 				</Box>
 				<Dialog.Actions className="justify-between">
-					<Button color="destructive" onClick={removeStepWithRecipe}>
+					<Button
+						emphasis="primary"
+						color="attention"
+						onClick={removeStepWithRecipe}
+					>
 						Remove this sub-recipe
 					</Button>
 					<Dialog.Close asChild>

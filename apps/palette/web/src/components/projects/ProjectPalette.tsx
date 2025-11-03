@@ -5,6 +5,7 @@ import { useColorSelection, useSort } from './hooks.js';
 // @ts-ignore
 import { basicsOnboarding } from '@/onboarding/basics.js';
 import { OnboardingTooltip } from '@biscuits/client';
+// @ts-ignore
 import { Color } from '@dynamize/color-utilities';
 
 export interface ProjectPaletteProps {

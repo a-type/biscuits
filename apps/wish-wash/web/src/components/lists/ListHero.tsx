@@ -42,7 +42,7 @@ export function ListHero({ list, className }: ListHeroProps) {
 				<Dialog>
 					<Icon name={list.isAuthorized ? 'lock' : 'add_person'} />
 					<Dialog.Trigger asChild>
-						<Button color="ghost" className="text-xl font-bold gap-md">
+						<Button emphasis="ghost" className="text-xl font-bold gap-md">
 							{name}
 							<Icon name="gear" />
 						</Button>
@@ -79,7 +79,11 @@ export function ListHero({ list, className }: ListHeroProps) {
 										Convert to private list
 									</ConfirmedButton>
 								}
-								<Button color="destructive" onClick={deleteList}>
+								<Button
+									emphasis="primary"
+									color="attention"
+									onClick={deleteList}
+								>
 									Delete list
 								</Button>
 							</Box>

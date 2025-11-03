@@ -1,7 +1,7 @@
 import { getComputedQuantity } from '@/components/trips/utils.js';
 import { hooks } from '@/store.js';
 import { Trip } from '@trip-tick.biscuits/verdant';
-import differenceInDays from 'date-fns/differenceInDays';
+import { differenceInDays } from 'date-fns/differenceInDays';
 
 export function useTripProgress(
 	trip: Trip,

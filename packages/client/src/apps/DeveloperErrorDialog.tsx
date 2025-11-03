@@ -51,7 +51,7 @@ export function DeveloperErrorDialog(props: DeveloperErrorDialogProps) {
 						</Button>
 					</Dialog.Actions>
 				:	<Dialog.Actions>
-						<Button color="primary" onClick={reload}>
+						<Button emphasis="primary" onClick={reload}>
 							Reload
 						</Button>
 					</Dialog.Actions>

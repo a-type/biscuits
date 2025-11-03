@@ -1,6 +1,5 @@
 import { Tooltip } from '@a-type/ui';
 import { fractionToText } from '@a-type/utils';
-import { useFeatureFlag } from '@biscuits/client';
 
 export interface TextWithMultipliedNumbersProps {
 	text: string | null;
@@ -17,8 +16,6 @@ export function TextWithMultipliedNumbers({
 	text,
 	multiplier,
 }: TextWithMultipliedNumbersProps) {
-	const enabled = useFeatureFlag('multipliedIngredients');
-	if (!enabled) return <>{text}</>;
 	if (multiplier === 1) return <>{text}</>;
 	if (!text) return <>{text}</>;
 

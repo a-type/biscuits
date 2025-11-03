@@ -4,7 +4,7 @@ import { apps } from '@biscuits/apps';
 import { Suspense, useState } from 'react';
 
 export function AdminChangelogsPage() {
-	const [val, setVal] = useState(apps[0].id);
+	const [val, setVal] = useState<string>(apps[0].id);
 	return (
 		<div className="col">
 			<TabsRoot value={val} onValueChange={setVal}>

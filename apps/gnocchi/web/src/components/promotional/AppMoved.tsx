@@ -59,7 +59,7 @@ export function AppMoved({}: AppMovedProps) {
 							Contact Support
 						</Link>
 					</Button>
-					<Button asChild color="primary">
+					<Button asChild emphasis="primary">
 						<Link newTab to={goTo.toString()}>
 							Open Gnocchi
 						</Link>

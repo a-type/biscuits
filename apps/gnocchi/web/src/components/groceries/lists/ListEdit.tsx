@@ -32,7 +32,7 @@ export function ListEdit({ listId }: ListEditProps) {
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger asChild>
-				<Button color="ghost" size="small">
+				<Button emphasis="ghost" size="small">
 					<GearIcon />
 				</Button>
 			</DialogTrigger>
@@ -51,7 +51,8 @@ export function ListEdit({ listId }: ListEditProps) {
 						/>
 					</div>
 					<Button
-						color="destructive"
+						emphasis="primary"
+						color="attention"
 						onClick={async () => {
 							await deleteList(list.get('id'));
 							setOpen(false);
@@ -61,7 +62,7 @@ export function ListEdit({ listId }: ListEditProps) {
 					</Button>
 					<DialogActions>
 						<DialogClose asChild>
-							<Button color="primary">Done</Button>
+							<Button emphasis="primary">Done</Button>
 						</DialogClose>
 					</DialogActions>
 				</div>

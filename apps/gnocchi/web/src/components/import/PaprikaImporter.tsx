@@ -118,7 +118,7 @@ export const PaprikaImporter = forwardRef<
 							slug: cuid.slug() + i,
 							title: recipe.name,
 							prelude: recipe.description
-								? stringToDoc(recipe.description)
+								? (stringToDoc(recipe.description) as any)
 								: undefined,
 							ingredients: recipe.ingredients?.split('\n').map((text) => {
 								const parsed = parseIngredient(text);
@@ -217,7 +217,7 @@ export const PaprikaImporter = forwardRef<
 					<DialogClose asChild>
 						<Button>Cancel</Button>
 					</DialogClose>
-					<Button loading={loading} color="primary" onClick={importSelected}>
+					<Button loading={loading} emphasis="primary" onClick={importSelected}>
 						import
 					</Button>
 				</DialogActions>

@@ -45,6 +45,14 @@ export function PersonQuickActions({
 	const [addLocation, addingLocation] = useAddLocation();
 	const [open, setOpen] = useState(true);
 
+	const empty =
+		!showAttachLocation &&
+		recentlyAdded.length === 0 &&
+		relationshipSuggestions.length === 0;
+	if (empty) {
+		return null;
+	}
+
 	return (
 		<HorizontalList
 			open={open}
@@ -56,6 +64,7 @@ export function PersonQuickActions({
 					size="small"
 					loading={addingLocation}
 					onClick={() => addLocation(person)}
+					emphasis="light"
 					color="accent"
 					className="font-normal my-auto"
 				>
@@ -70,7 +79,7 @@ export function PersonQuickActions({
 					<Button
 						size="small"
 						onClick={() => addRelationship(personId, recentPerson.get('id'))}
-						color="default"
+						emphasis="default"
 						className="font-normal my-auto"
 					>
 						<Icon name="clock" />
@@ -86,12 +95,12 @@ export function PersonQuickActions({
 					<Button
 						key={relatedPerson.get('id')}
 						size="small"
-						color="default"
+						emphasis="default"
 						asChild
 					>
 						<div className="p-0 gap-0 my-auto">
 							<Button
-								color="ghost"
+								emphasis="ghost"
 								size="small"
 								className="border-0 font-normal"
 								onClick={() =>
@@ -102,8 +111,9 @@ export function PersonQuickActions({
 								Connect with {relatedPerson.get('name')}
 							</Button>
 							<Button
-								size="icon-small"
-								color="ghostDestructive"
+								size="small"
+								color="attention"
+								emphasis="ghost"
 								onClick={() =>
 									dismissedSuggestions.add(relatedPerson.get('id'))
 								}

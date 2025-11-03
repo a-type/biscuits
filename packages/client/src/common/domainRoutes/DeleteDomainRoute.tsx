@@ -28,10 +28,11 @@ export function DeleteDomainRoute({
 	});
 	return (
 		<ConfirmedButton
-			color="destructive"
+			emphasis="primary"
 			confirmText="Remember to remove your DNS entries for this domain to completely disconnect it."
 			confirmAction="Remove my domain"
-			confirmColor="destructive"
+			confirmColor="primary"
+			color="attention"
 			{...rest}
 			onConfirm={async () => {
 				await mutate();

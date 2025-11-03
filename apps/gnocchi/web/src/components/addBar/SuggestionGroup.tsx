@@ -53,7 +53,7 @@ export const SuggestionItem = forwardRef<
 	return (
 		<Button
 			size="small"
-			color="default"
+			emphasis="default"
 			ref={ref}
 			data-index={value.index}
 			className={clsx(

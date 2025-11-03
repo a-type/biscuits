@@ -30,18 +30,18 @@ export function CopyTextbox({
 		>
 			<Input disabled value={value} className="flex-[1_1_0]" />
 			<Box d="row" gap="sm">
-				<Button size="icon" onClick={copy}>
+				<Button onClick={copy}>
 					<Icon name="copy" />
 				</Button>
 				{isUrl && (
-					<Button size="icon" asChild>
+					<Button asChild>
 						<Link className="color-inherit" newTab to={value}>
 							<Icon name="new_window" />
 						</Link>
 					</Button>
 				)}
 				{!hideShare && (
-					<Button size="icon" onClick={share} color="primary">
+					<Button onClick={share} emphasis="primary">
 						<Icon name="share" />
 					</Button>
 				)}

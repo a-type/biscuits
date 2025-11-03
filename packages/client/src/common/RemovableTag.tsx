@@ -1,8 +1,8 @@
-import { Button, Chip, clsx, Icon, IconName, ThemeName } from '@a-type/ui';
+import { Button, Chip, clsx, Icon, IconName, PaletteName } from '@a-type/ui';
 
 export interface RemovableTagProps {
 	name: string;
-	color?: ThemeName | null;
+	color?: PaletteName | null;
 	icon?: IconName | null;
 	onRemove?: () => void;
 	className?: string;
@@ -17,10 +17,9 @@ export function RemovableTag({
 }: RemovableTagProps) {
 	return (
 		<Chip
-			color="primary"
+			color={color || 'primary'}
 			className={clsx(
-				'flex items-center gap-1 px-2 rounded-full !bg-primary-light color-black border-gray-dark font-bold text-xs',
-				color && `theme-${color}`,
+				'flex items-center gap-1 px-2 rounded-full !bg-main-light color-black border-gray-dark font-bold text-xs',
 				className,
 			)}
 		>
@@ -29,7 +28,7 @@ export function RemovableTag({
 			</span>
 			<span>{name}</span>
 			{onRemove && (
-				<Button size="icon" color="ghost" className="p-0" onClick={onRemove}>
+				<Button emphasis="ghost" className="p-0" onClick={onRemove}>
 					<Icon name="x" className="w-[10px] h-[10px]" />
 				</Button>
 			)}

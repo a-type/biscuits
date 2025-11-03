@@ -38,7 +38,7 @@ export function Explainer({ stages }: ExplainerProps) {
 					</DialogClose>
 					<Button
 						className="ml-auto"
-						color="primary"
+						emphasis="primary"
 						onClick={() => {
 							if (stage === stages.length - 1) {
 								setExplainerDismissed(true);

@@ -36,7 +36,7 @@ export interface ListSelectProps {
 	className?: string;
 }
 
-const FilledIcon = withClassName(Icon, 'important:fill-primary');
+const FilledIcon = withClassName(Icon, 'important:fill-main');
 
 export function ListSelect({
 	value,
@@ -66,7 +66,7 @@ export function ListSelect({
 					{includeAll && <SelectItem value="undefined">All lists</SelectItem>}
 					<SelectItem value={'null'}>
 						<div className="flex flex-row gap-2 items-center">
-							<FilledIcon name="tag" className="theme-lemon" />
+							<FilledIcon name="tag" className="palette-lemon" />
 							<span>Default</span>
 						</div>
 					</SelectItem>
@@ -109,7 +109,7 @@ function ListSelectItem({ list }: { list: List }) {
 	return (
 		<SelectItem value={id}>
 			<div className="flex flex-row gap-2 items-center">
-				<FilledIcon name="tag" className={`theme-${color ?? 'lemon'}`} />
+				<FilledIcon name="tag" className={`palette-${color ?? 'lemon'}`} />
 				<span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-full">
 					{name}
 				</span>

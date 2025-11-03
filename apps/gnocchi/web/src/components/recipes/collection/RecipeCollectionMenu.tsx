@@ -1,7 +1,6 @@
 import PaprikaImporter from '@/components/import/PaprikaImporter.jsx';
 import { TagManager } from '@/components/recipes/tags/TagManager.jsx';
-import { Button, DropdownMenu } from '@a-type/ui';
-import { DotsVerticalIcon } from '@radix-ui/react-icons';
+import { Button, DropdownMenu, Icon } from '@a-type/ui';
 import { Suspense, useCallback, useState } from 'react';
 
 export interface RecipeCollectionMenuProps {
@@ -15,8 +14,8 @@ export function RecipeCollectionMenu({ className }: RecipeCollectionMenuProps) {
 	return (
 		<DropdownMenu open={open} onOpenChange={setOpen}>
 			<DropdownMenu.Trigger asChild>
-				<Button size="icon" color="ghost" className={className}>
-					<DotsVerticalIcon />
+				<Button emphasis="ghost" className={className}>
+					<Icon name="dots" />
 				</Button>
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Content align="end">

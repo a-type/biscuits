@@ -108,7 +108,7 @@ function OfflineContents() {
 		<MainContainer>
 			<InstallHint content="Always have your list on hand. Install the app!" />
 			<DarkModeToggle />
-			<Button size="small" color="default" onClick={() => refetch()}>
+			<Button size="small" emphasis="default" onClick={() => refetch()}>
 				Retry connection
 			</Button>
 			<ManageSection />
@@ -126,10 +126,10 @@ function AnonymousContents() {
 			<DarkModeToggle />
 			<div>
 				<div className="flex flex-row items-center gap-2">
-					<PromoteSubscriptionButton color="primary">
+					<PromoteSubscriptionButton emphasis="primary">
 						Upgrade now
 					</PromoteSubscriptionButton>
-					<LoginButton color="default" returnTo="/">
+					<LoginButton emphasis="default" returnTo="/">
 						<ArrowRightIcon />
 						<span>Sign in</span>
 					</LoginButton>

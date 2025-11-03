@@ -149,7 +149,7 @@ function RecipeIngredientItem({
 					{text}
 				</span>
 				<div className="flex flex-row gap-1 items-center">
-					<Button color="ghost" onClick={addNote}>
+					<Button emphasis="ghost" onClick={addNote}>
 						<Icon name="add_note" />
 					</Button>
 					<IngredientMenu ingredient={ingredient} onDelete={onDelete} />
@@ -174,7 +174,7 @@ function IngredientMenu({
 		<>
 			<DropdownMenu modal={false}>
 				<DropdownMenuTrigger asChild>
-					<Button size="icon" color="ghost">
+					<Button emphasis="ghost">
 						<Icon name="dots" />
 					</Button>
 				</DropdownMenuTrigger>
@@ -259,7 +259,7 @@ function IngredientDetailsDialog({
 						<DialogClose asChild>
 							<Button>Cancel</Button>
 						</DialogClose>
-						<SubmitButton color="primary">Save</SubmitButton>
+						<SubmitButton emphasis="primary">Save</SubmitButton>
 					</DialogActions>
 				</FormikForm>
 			</DialogContent>

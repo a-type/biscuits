@@ -106,11 +106,11 @@ function useDragExpansion({
 	internalRef,
 	empty,
 }: {
-	internalRef: React.RefObject<HTMLDivElement>;
+	internalRef: React.RefObject<HTMLDivElement | null>;
 	empty: boolean;
 }) {
 	const heightPriorToDragRef = useRef(0);
-	const priorAnimationRef = useRef<Animation>();
+	const priorAnimationRef = useRef<Animation>(undefined);
 
 	const collapse = useCallback(async () => {
 		const element = internalRef.current;

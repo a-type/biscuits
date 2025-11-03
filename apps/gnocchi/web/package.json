@@ -26,7 +26,7 @@
 		"@gnocchi.biscuits/conversion": "workspace:*",
 		"@gnocchi.biscuits/verdant": "workspace:*",
 		"@radix-ui/react-icons": "^1.1.1",
-		"@react-spring/web": "9.7.3",
+		"@react-spring/web": "catalog:",
 		"@tiptap/core": "catalog:",
 		"@tiptap/extension-document": "catalog:",
 		"@tiptap/extension-link": "catalog:",

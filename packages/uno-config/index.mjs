@@ -7,7 +7,7 @@ export const contentConfig = {
 };
 
 export default defineConfig({
-	presets: [atype({ saturation: 40 })],
+	presets: [atype()],
 	transformers: [variantGroup()],
 	preflights: [
 		{

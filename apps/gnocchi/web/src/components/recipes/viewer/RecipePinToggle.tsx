@@ -1,7 +1,7 @@
 import { hooks } from '@/stores/groceries/index.js';
 import { Button, clsx } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
-import addWeeks from 'date-fns/addWeeks';
+import { addWeeks } from 'date-fns/addWeeks';
 import { useCallback } from 'react';
 import { PinIcon } from '../collection/PinIcon.jsx';
 
@@ -26,8 +26,7 @@ export function RecipePinToggle({ recipe, className }: RecipePinToggleProps) {
 
 	return (
 		<Button
-			size="icon"
-			color={isPinned ? 'primary' : 'default'}
+			emphasis={isPinned ? 'primary' : 'default'}
 			onClick={togglePinned}
 			className={clsx('relative', className)}
 		>

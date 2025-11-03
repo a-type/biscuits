@@ -65,7 +65,7 @@ export const CategoryClaim = memo(function CategoryClaim({
 
 	return (
 		<Button
-			color="ghost"
+			emphasis="ghost"
 			size="small"
 			className="p-0 h-auto w-auto"
 			onClick={claim}

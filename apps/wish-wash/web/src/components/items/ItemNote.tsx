@@ -13,7 +13,7 @@ export function ItemNote({ item }: ItemNoteProps) {
 
 	if (!note && !show) {
 		return (
-			<Button color="ghost" size="small" onClick={() => setShow(true)}>
+			<Button emphasis="ghost" size="small" onClick={() => setShow(true)}>
 				<Icon name="add_note" />
 				Add note
 			</Button>

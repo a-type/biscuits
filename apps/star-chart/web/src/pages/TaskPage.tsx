@@ -26,7 +26,7 @@ export function TaskPage({}: TaskPageProps) {
 					</div>
 				}
 				<PageNowPlaying className="flex-row justify-start w-auto left-50% -translate-x-1/2 right-auto bg-white">
-					<Button size="icon" asChild color="ghost">
+					<Button asChild emphasis="ghost">
 						<Link to="/">
 							<Icon name="arrowLeft" />
 						</Link>

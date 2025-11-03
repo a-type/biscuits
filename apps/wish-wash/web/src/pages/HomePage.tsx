@@ -32,7 +32,10 @@ export function HomePage({}: HomePageProps) {
 				</PageFixedArea>
 				<ListsList />
 				<PageNowPlaying unstyled>
-					<CreateListButton className="self-center shadow-lg" color="primary" />
+					<CreateListButton
+						className="self-center shadow-lg"
+						emphasis="primary"
+					/>
 				</PageNowPlaying>
 			</PageContent>
 		</PageRoot>

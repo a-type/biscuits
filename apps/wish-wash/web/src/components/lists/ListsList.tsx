@@ -73,7 +73,7 @@ function ListMenu({ list }: { list: List }) {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button size="icon" color="ghost">
+				<Button emphasis="ghost">
 					<Icon name="dots" />
 				</Button>
 			</DropdownMenuTrigger>
@@ -108,7 +108,7 @@ function ListMenu({ list }: { list: List }) {
 							</div>,
 						);
 					}}
-					color="destructive"
+					color="attention"
 				>
 					Delete list
 					<DropdownMenuItemRightSlot>

@@ -98,7 +98,7 @@ function PaymentForm({ mode }: { mode: string }) {
 			<PaymentElement />
 			{error && <p className="text-red">{error}</p>}
 			<Button
-				color="primary"
+				emphasis="primary"
 				disabled={!stripe}
 				type="submit"
 				className="self-end"

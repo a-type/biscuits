@@ -146,10 +146,10 @@ export function AddToListDialog({
 				</div>
 				<DialogActions>
 					<DialogClose asChild>
-						<Button color="ghost">Cancel</Button>
+						<Button emphasis="ghost">Cancel</Button>
 					</DialogClose>
 					<Button
-						color="primary"
+						emphasis="primary"
 						loading={loading}
 						onClick={async () => {
 							setLoading(true);

@@ -6,7 +6,7 @@
 			"script": "app-dev",
 			"path": "web",
 			"problemMatcher": [],
-			"label": "Dev",
+			"label": "Wish Wash Dev",
 			"detail": "vite"
 		},
 		{
@@ -14,7 +14,7 @@
 			"script": "generate",
 			"path": "verdant",
 			"problemMatcher": [],
-			"label": "Generate",
+			"label": "Wish Wash Generate",
 			"detail": "verdant -s ./src/schema.ts -o ./src/client -r"
 		},
 		{
@@ -22,7 +22,7 @@
 			"script": "dev",
 			"path": "share",
 			"problemMatcher": [],
-			"label": "Share: Dev",
+			"label": "Wish Wash Share Dev",
 			"detail": "vite dev"
 		}
 	]

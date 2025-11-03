@@ -4,7 +4,7 @@ export function useListThemeClass(listId: string | null | undefined) {
 	const list = useListOrNull(listId);
 	hooks.useWatch(list);
 	const color = list?.get('color') || 'lemon';
-	return `theme-${color || 'lemon'}`;
+	return `palette-${color || 'lemon'}`;
 }
 
 export function useListOrNull(listId: string | null | undefined) {

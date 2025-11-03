@@ -19,7 +19,8 @@ export function RecipeDeleteButton({
 	return (
 		<Button
 			{...rest}
-			color="destructive"
+			emphasis="primary"
+			color="attention"
 			onClick={() => {
 				client.recipes.delete(recipe.get('id'));
 				navigate('/recipes');

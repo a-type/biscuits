@@ -92,7 +92,7 @@ export function RecipeOverview({ recipe }: RecipeOverviewProps) {
 							</div>
 
 							<div className="flex flex-col justify-between items-start w-full gap-3">
-								<div className="flex flex-row gap-1 flex-wrap">
+								<div className="flex flex-row gap-1 flex-wrap palette-gray">
 									<Chip
 										asChild
 										className="cursor-pointer"
@@ -102,7 +102,7 @@ export function RecipeOverview({ recipe }: RecipeOverviewProps) {
 												?.scrollIntoView({ behavior: 'smooth' });
 										}}
 									>
-										<Button color="ghost" className="font-normal text-xs">
+										<Button emphasis="ghost" className="font-normal text-xs">
 											<Icon name="arrowDown" />
 											<span>Jump to steps</span>
 										</Button>
@@ -138,7 +138,10 @@ export function RecipeOverview({ recipe }: RecipeOverviewProps) {
 										</Chip>
 									)}
 									<Suspense>
-										<RecipeTagsEditor recipe={recipe} className="flex-1" />
+										<RecipeTagsEditor
+											recipe={recipe}
+											className="palette-primary"
+										/>
 									</Suspense>
 								</div>
 							</div>
@@ -161,7 +164,7 @@ export function RecipeOverview({ recipe }: RecipeOverviewProps) {
 						<RecipeMultiplierField recipe={recipe} />
 					</div>
 					<div className="flex flex-row gap-2 justify-between items-center w-full">
-						<AddToListButton size="small" color="primary" recipe={recipe}>
+						<AddToListButton size="small" emphasis="primary" recipe={recipe}>
 							<Icon name="add_to_list" />
 							<span>Bulk add...</span>
 						</AddToListButton>

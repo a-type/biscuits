@@ -13,7 +13,7 @@ export function PantrySearch() {
 				className="flex-1 rounded-full"
 			/>
 			{!!search && (
-				<Button size="icon" color="default" onClick={() => setSearch('')}>
+				<Button emphasis="default" onClick={() => setSearch('')}>
 					<Cross2Icon />
 				</Button>
 			)}

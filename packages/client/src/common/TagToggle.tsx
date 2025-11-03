@@ -20,7 +20,7 @@ export function TagToggle({
 	return (
 		<Button
 			size="small"
-			color="primary"
+			emphasis="primary"
 			className={clsx(
 				'flex items-center gap-1 [font-weight:inherit] text-xs',
 				color && `theme-${color}`,

@@ -7,16 +7,8 @@ export default defineConfig({
 	presets: [
 		atype({
 			saturation: 40,
-			customTheme: {
-				primary: {
-					hue: 78,
-					hueRotate: -8,
-				},
-				accent: {
-					hue: 170,
-					hueRotate: 2,
-				},
-			},
+			primaryHue: 78,
+			accentHue: 170,
 		}) as any,
 	],
 	// required to support styling in this library

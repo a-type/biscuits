@@ -16,7 +16,7 @@ export function SettingsPage({}: SettingsPageProps) {
 	return (
 		<PageContent>
 			<PageFixedArea className="row py-2">
-				<Button asChild color="ghost">
+				<Button asChild emphasis="ghost">
 					<Link to="/">
 						<Icon name="arrowLeft" /> Back
 					</Link>

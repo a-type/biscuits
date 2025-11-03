@@ -29,16 +29,8 @@
 			"path": "apps/wish-wash",
 		},
 		{
-			"name": "📚 Marginalia",
-			"path": "apps/marginalia",
-		},
-		{
 			"name": "🌟 Star Chart",
 			"path": "apps/star-chart",
-		},
-		{
-			"name": "🎸 Humding",
-			"path": "apps/humding",
 		},
 		{
 			"name": "🎨 Palette",
@@ -84,6 +76,10 @@
 		"prettier.useTabs": true,
 		"prettier.singleQuote": true,
 		"prettier.experimentalTernaries": true,
+		"search.exclude": {
+			"**/dist": true,
+			"**/node_modules/**": true,
+		},
 	},
 	"extensions": {
 		"recommendations": ["antfu.pnpm-catalog-lens"],

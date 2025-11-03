@@ -67,6 +67,7 @@ export class BiscuitsError extends Error {
 		cause?: unknown,
 		public readonly extraData?: Record<string, any>,
 	) {
+		// @ts-ignore
 		super(message, {
 			cause,
 		});

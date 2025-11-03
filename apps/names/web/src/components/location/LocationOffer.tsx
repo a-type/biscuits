@@ -21,7 +21,7 @@ export function LocationOffer({ overrideDeny, ...rest }: LocationOfferProps) {
 	return (
 		<Button
 			size="small"
-			color="ghost"
+			emphasis="ghost"
 			{...rest}
 			onClick={() => {
 				locationRequestDialogState.show = true;

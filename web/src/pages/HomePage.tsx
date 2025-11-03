@@ -86,9 +86,9 @@ export default function HomePage() {
 					</Box>
 					<Box
 						p
-						surface="primary"
+						surface
+						color="accent"
 						className="max-w-90vw lg:max-w-800px theme"
-						style={{ '--dyn-primary-source': 170 } as any}
 						d="col"
 						gap
 						items="start"
@@ -119,7 +119,7 @@ export default function HomePage() {
 							share all your data with up to 3 other people. Plus, you get
 							access to special features in every app.
 						</P>
-						<Button asChild color="primary" className="ml-auto">
+						<Button asChild emphasis="primary" className="ml-auto">
 							<Link to="/join">
 								Learn more <Icon name="arrowRight" />
 							</Link>

@@ -43,7 +43,7 @@ export function ProjectColorSpotlight({
 						{!!pickingColor && (
 							<Button
 								size="small"
-								color="primary"
+								emphasis="primary"
 								onClick={() => {
 									colors.push(pickingColor);
 									const color = colors.get(colors.length - 1);

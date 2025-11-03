@@ -2,7 +2,7 @@ import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
 import { PantryListItemSkeleton } from '@/components/pantry/items/PantryListItem.jsx';
 import { pantryOnboarding } from '@/onboarding/pantryOnboarding.js';
 import { hooks } from '@/stores/groceries/index.js';
-import { CardGrid } from '@a-type/ui';
+import { Box, CardGrid } from '@a-type/ui';
 import { OnboardingBanner } from '@biscuits/client';
 import { Suspense } from 'react';
 import { ExpiresSoonSection } from './ExpiresSoonSection.jsx';
@@ -34,7 +34,9 @@ function PantryListInner({ className, ...rest }: PantryListProps) {
 			<Suspense>
 				<ExpiresSoonSection />
 			</Suspense>
-			<PantryListSectionTabs />
+			<Box p col items="center">
+				<PantryListSectionTabs />
+			</Box>
 			<div className="flex flex-col">
 				{categories.map((category) => {
 					return (

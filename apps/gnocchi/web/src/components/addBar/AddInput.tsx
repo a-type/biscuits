@@ -60,7 +60,7 @@ export const AddInput = forwardRef<HTMLDivElement, AddInputProps>(
 					<SubmitButton {...getSubmitButtonProps()} />
 					{!!inputValue && (
 						<Button
-							color="ghost"
+							emphasis="ghost"
 							onClick={clear}
 							aria-label="clear input"
 							tabIndex={disableInteraction ? -1 : 0}
@@ -104,8 +104,7 @@ function SubmitButton({
 	return (
 		<Button
 			data-test="grocery-list-add-button"
-			color="primary"
-			size="icon"
+			emphasis="primary"
 			className="md:(w-35px h-35px p-0) items-center justify-center relative z-2"
 			aria-label={inputIsUrl ? 'scan recipe page' : 'add item'}
 			tabIndex={disableInteraction ? -1 : 0}

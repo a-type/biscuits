@@ -112,7 +112,7 @@ export function RecipeIngredientViewer({
 								}}
 							>
 								<DropdownMenuTrigger asChild>
-									<Button size="icon" color="ghost">
+									<Button emphasis="ghost">
 										<Icon name="convert" />
 									</Button>
 								</DropdownMenuTrigger>
@@ -133,12 +133,12 @@ export function RecipeIngredientViewer({
 						</>
 					)}
 					{!isSectionHeader && !disableAddToList && (
-						<Button size="icon" color="ghost" onClick={addToList}>
+						<Button emphasis="ghost" onClick={addToList}>
 							<Icon name="add_to_list" className="color-gray7" />
 						</Button>
 					)}
 					{!disableAddNote && (
-						<Button size="icon" color="ghost" onClick={toggleShowNote}>
+						<Button emphasis="ghost" onClick={toggleShowNote}>
 							{!!note ? (
 								<Icon
 									name="note"

@@ -68,7 +68,7 @@ export function ListEditorItem({ item, onDelete }: ListEditorItemProps) {
 				</DialogTrigger>
 				<CardFooter>
 					<CardActions>
-						<Button size="icon" color="ghostDestructive" onClick={onDelete}>
+						<Button color="attention" emphasis="ghost" onClick={onDelete}>
 							<Icon name="trash" />
 						</Button>
 					</CardActions>

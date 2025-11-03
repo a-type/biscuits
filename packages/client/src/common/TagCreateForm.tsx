@@ -44,14 +44,18 @@ export function TagCreateForm({
 					<Box gap items="end" className="w-full">
 						<TextField name="name" label="New tag" className="flex-1-0-0" />
 						<Box className="flex-basis-auto">
-							<ColorPicker
-								onChange={(v) => setFieldValue('color', v)}
-								value={values.color ?? defaultColor ?? null}
-							/>
+							<div className="mb-sm">
+								<ColorPicker
+									onChange={(v) => setFieldValue('color', v)}
+									value={values.color ?? defaultColor ?? null}
+								/>
+							</div>
 						</Box>
 					</Box>
 					<Box justify="end" className="w-full">
-						<SubmitButton type="submit">Create</SubmitButton>
+						<SubmitButton emphasis="light" type="submit">
+							Create
+						</SubmitButton>
 					</Box>
 				</>
 			)}

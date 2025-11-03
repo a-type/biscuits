@@ -10,20 +10,28 @@ export function PantryListSectionTabs({}: PantryListSectionTabsProps) {
 		<TabsRoot
 			value={filter}
 			onValueChange={(f) => setFilter(f as 'purchased' | 'all' | 'frozen')}
-			className="overflow-x-auto overflow-y-hidden"
 		>
-			<TabsList>
-				<TabsTrigger className="text-nowrap" value="purchased">
+			<TabsList className="[&>*]:text-xs">
+				<TabsTrigger
+					className="text-nowrap flex flex-col items-center sm:flex-row"
+					value="purchased"
+				>
 					<Icon name="check" />
-					Purchased
+					<span className="">Purchased</span>
 				</TabsTrigger>
-				<TabsTrigger value="frozen" className="text-nowrap">
+				<TabsTrigger
+					value="frozen"
+					className="text-nowrap flex flex-col sm:flex-row palette-accent"
+				>
 					<Icon name="snowflake" />
-					Frozen
+					<span className="">Frozen</span>
 				</TabsTrigger>
-				<TabsTrigger className="text-nowrap" value="all">
+				<TabsTrigger
+					className="text-nowrap flex flex-col items-center sm:flex-row"
+					value="all"
+				>
 					<Icon name="food" />
-					All foods
+					<span className="">All foods</span>
 				</TabsTrigger>
 			</TabsList>
 		</TabsRoot>

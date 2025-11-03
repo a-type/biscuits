@@ -55,7 +55,7 @@ function ListPageContent({ list }: { list: List }) {
 				items="center"
 				className="sticky py-sm top-0 z-[10000] bg-wash w-full max-w-800px"
 			>
-				<Button asChild color="ghost">
+				<Button asChild emphasis="ghost">
 					<Link to="/">
 						<Icon name="arrowLeft" />
 						Home

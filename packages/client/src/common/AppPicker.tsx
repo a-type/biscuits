@@ -58,7 +58,7 @@ export function AppPicker({ className, children }: AppPickerProps) {
 		<Popover>
 			<PopoverTrigger className={className} asChild>
 				{children ?? (
-					<Button size="icon" color="ghost">
+					<Button emphasis="ghost">
 						<Icon name="cardsGrid" />
 					</Button>
 				)}

@@ -32,7 +32,8 @@ export function CancelPlanButton({}: CancelPlanButtonProps) {
 	return (
 		<div>
 			<ConfirmedButton
-				color="destructive"
+				emphasis="primary"
+				color="attention"
 				confirmTitle="Are you sure you want to cancel?"
 				confirmAction="I'm sure"
 				confirmText="Your data will all still be there on your device, but you won't be able to sync to other devices, with other plan members, or access member-only features anymore. You can come back anytime."

@@ -24,7 +24,7 @@ export function SubscriptionDialog({}: SubscriptionDialogProps) {
 					<Dialog.Close>Nevermind</Dialog.Close>
 					<LoginButton
 						tab="signup"
-						color="primary"
+						emphasis="primary"
 						onClick={() => (upsellState.show = false)}
 					>
 						Get started

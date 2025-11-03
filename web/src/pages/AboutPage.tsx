@@ -86,7 +86,7 @@ export function AboutPage({}: AboutPageProps) {
 						src="https://resources.biscuits.club/images/pashka.jpg"
 						alt="Pashka the cat"
 					/>
-					<Button asChild className="self-start" color="primary">
+					<Button asChild className="self-start" emphasis="primary">
 						<Link to="/">Go home</Link>
 					</Button>
 				</div>

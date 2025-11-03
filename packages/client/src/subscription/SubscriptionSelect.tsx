@@ -154,7 +154,7 @@ function SinglePriceExperience({
 				/>
 				.
 			</P>
-			<Button color="primary" onClick={onProceed}>
+			<Button emphasis="primary" onClick={onProceed}>
 				Enter payment info
 			</Button>
 		</div>

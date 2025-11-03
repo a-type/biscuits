@@ -55,7 +55,7 @@ export function SyncPurchases({ className, list }: SyncPurchasesProps) {
 	}
 
 	return (
-		<Box col gap items="start" surface="accent" p className={className}>
+		<Box col gap items="start" surface color="accent" p className={className}>
 			<span className="text-lg font-bold">Good things coming...</span>
 			<span>
 				Some of your items have been purchased by others. We don't want to spoil

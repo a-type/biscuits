@@ -57,7 +57,7 @@ const TagButtonBase = forwardRef<HTMLButtonElement, ButtonProps>(
 			<Button
 				ref={ref}
 				size="small"
-				color="primary"
+				emphasis="primary"
 				{...props}
 				className={classNames(
 					'flex items-center gap-1 [font-weight:inherit] [font-size:inherit]',

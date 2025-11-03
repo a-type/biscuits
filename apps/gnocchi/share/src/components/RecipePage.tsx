@@ -153,7 +153,7 @@ export function RecipePage({ data }: RecipePageProps) {
 							</Suspense>
 						</div>
 						<PageFixedArea className="flex flex-row justify-end bottom-4 top-auto mb-4 bg-transparent">
-							<Button color="primary" className="shadow-lg" asChild>
+							<Button emphasis="primary" className="shadow-lg" asChild>
 								<a
 									href={`${
 										import.meta.env.VITE_APP_ORIGIN

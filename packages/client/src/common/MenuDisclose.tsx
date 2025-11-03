@@ -102,8 +102,7 @@ const DefaultButton = forwardRef<HTMLButtonElement, ButtonProps>(
 	function DefaultButton({ className, ...props }, ref) {
 		return (
 			<Button
-				size="icon"
-				color="primary"
+				emphasis="primary"
 				className={clsx('absolute shadow-xl', className)}
 				{...props}
 			/>

@@ -34,7 +34,7 @@ export function EmbeddedSubRecipeInstructionsToggle({
 	return (
 		<Collapsible.Trigger asChild>
 			<Button
-				color="ghost"
+				emphasis="ghost"
 				className={clsx('w-full gap-2 items-center text-start', className)}
 				size="small"
 				contentEditable={false}

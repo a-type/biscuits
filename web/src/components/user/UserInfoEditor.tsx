@@ -44,7 +44,7 @@ export function UserInfoEditor({ user, className }: UserInfoEditorProps) {
 			<div className={clsx('col w-full items-start py-3', className)}>
 				<div className="row justify-between w-full">
 					<H2>Your profile</H2>
-					<Button color="ghost" onClick={() => setEditing(true)}>
+					<Button emphasis="ghost" onClick={() => setEditing(true)}>
 						<Icon name="pencil" /> Edit
 					</Button>
 				</div>

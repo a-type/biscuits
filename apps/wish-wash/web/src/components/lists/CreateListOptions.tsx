@@ -65,7 +65,7 @@ export function CreateListOptions({
 								<Icon name="arrowLeft" />
 								Back
 							</Button>
-							<Button color="primary" type="submit">
+							<Button emphasis="primary" type="submit">
 								Create
 							</Button>
 						</div>

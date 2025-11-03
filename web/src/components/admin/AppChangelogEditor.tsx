@@ -88,7 +88,8 @@ export function AppChangelogEditor({ appId }: AppChangelogEditorProps) {
 						</CardMain>
 						<CardFooter>
 							<ConfirmedButton
-								color="destructive"
+								emphasis="primary"
+								color="attention"
 								confirmText="Sure?"
 								onConfirm={async () => {
 									await deleteItem({ variables: { id: item.id } });

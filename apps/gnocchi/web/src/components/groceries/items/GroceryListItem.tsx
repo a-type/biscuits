@@ -203,7 +203,7 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 						</div>
 					</div>
 					<CollapsibleTrigger asChild>
-						<Button size="icon" color="ghost" className="p-1 flex-shrink-0">
+						<Button emphasis="ghost" className="p-1 flex-shrink-0">
 							<Icon
 								name="chevron"
 								className="[*[data-state=open]_&]:rotate-180deg color-gray-dark hover:color-gray-ink"
@@ -242,8 +242,8 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 								<OpenFoodDetailButton foodName={food} />
 								<Suspense>
 									<ItemDeleteButton
-										size="icon"
-										color="ghostDestructive"
+										color="attention"
+										emphasis="ghost"
 										item={item}
 									>
 										<TrashIcon />
@@ -452,11 +452,7 @@ function QuantityEditor({
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
-				<Button
-					size="icon"
-					className={clsx('p-1 font-normal', className)}
-					color="ghost"
-				>
+				<Button className={clsx('p-1 font-normal', className)} emphasis="ghost">
 					<Pencil1Icon />
 					<span>Edit</span>
 				</Button>

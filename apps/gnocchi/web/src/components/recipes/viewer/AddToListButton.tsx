@@ -39,7 +39,7 @@ export function AddToListButton({
 				>
 					<AddToListDialog recipe={recipe} listId={listId}>
 						<DialogTrigger asChild>
-							<Button color="default" {...rest}>
+							<Button emphasis="default" {...rest}>
 								{children || 'Add to list'}
 							</Button>
 						</DialogTrigger>

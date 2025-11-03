@@ -18,7 +18,7 @@ export function HeaderBar({ children, backUrl, className }: HeaderBarProps) {
 				className,
 			)}
 		>
-			<LinkButton to={backUrl} color="ghost">
+			<LinkButton to={backUrl} emphasis="ghost">
 				<ArrowLeftIcon />
 				Back
 			</LinkButton>

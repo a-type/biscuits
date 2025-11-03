@@ -42,10 +42,10 @@ export function LogoutNotice({}: LogoutNoticeProps) {
 				<P>To resume syncing your data, please sign in again.</P>
 				<div className="flex flex-row gap-3 justify-end items-center">
 					<DialogClose asChild>
-						<Button color="ghost">Cancel</Button>
+						<Button emphasis="ghost">Cancel</Button>
 					</DialogClose>
 					<DialogClose asChild>
-						<LoginButton color="primary" onClick={() => setClose(true)}>
+						<LoginButton emphasis="primary" onClick={() => setClose(true)}>
 							Sign in
 						</LoginButton>
 					</DialogClose>

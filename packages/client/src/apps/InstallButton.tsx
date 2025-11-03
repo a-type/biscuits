@@ -21,7 +21,7 @@ export function InstallButton(props: ButtonProps) {
 
 	return (
 		<>
-			<Button color="ghost" size="small" onClick={onClick} {...props}>
+			<Button emphasis="ghost" size="small" onClick={onClick} {...props}>
 				{props.children || (
 					<>
 						<Icon name="arrowDown" />

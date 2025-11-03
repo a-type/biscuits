@@ -33,7 +33,12 @@ export function ConnectionMenu({ connection }: ConnectionMenuProps) {
 			}}
 			className="absolute z-10 bg-white shadow-md rounded-md p-2"
 		>
-			<Button size="small" onClick={deleteConnection} color="ghostDestructive">
+			<Button
+				size="small"
+				onClick={deleteConnection}
+				color="attention"
+				emphasis="ghost"
+			>
 				<Icon name="connectionBreak" />
 				Delete
 			</Button>

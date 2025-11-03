@@ -25,7 +25,7 @@ export function SettingsPage({}: SettingsPageProps) {
 		<PageRoot>
 			<PageContent>
 				<PageFixedArea className="row py-2">
-					<Button asChild color="ghost">
+					<Button asChild emphasis="ghost">
 						<Link to="/">
 							<Icon name="arrowLeft" /> Back
 						</Link>
@@ -35,7 +35,7 @@ export function SettingsPage({}: SettingsPageProps) {
 				<UpdatePrompt />
 				<div className="flex flex-col items-start w-full gap-4">
 					<DarkModeToggle />
-					<LocationOffer overrideDeny color="default" />
+					<LocationOffer overrideDeny emphasis="default" />
 					<ManageStorage />
 				</div>
 				<AutoRestoreScroll />

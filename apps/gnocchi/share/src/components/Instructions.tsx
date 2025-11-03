@@ -214,7 +214,7 @@ function InstructionStepView({
 				{embeddedRecipe && (
 					<Collapsible>
 						<Collapsible.Trigger asChild>
-							<Button color="ghost" size="small" className="italic">
+							<Button emphasis="ghost" size="small" className="italic">
 								<Icon
 									name="chevron"
 									className="transition-all [[data-state=open]_&]:rotate-180"

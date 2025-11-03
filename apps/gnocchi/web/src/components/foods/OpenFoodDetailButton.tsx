@@ -10,7 +10,7 @@ export const OpenFoodDetailButton = forwardRef<
 	HTMLButtonElement,
 	OpenFoodDetailButtonProps
 >(function OpenFoodDetailButton(
-	{ foodName, size, color, children, ...rest },
+	{ foodName, emphasis, children, ...rest },
 	ref,
 ) {
 	const [_, setParams] = useSearchParams();
@@ -28,8 +28,7 @@ export const OpenFoodDetailButton = forwardRef<
 		<Button
 			ref={ref}
 			onClick={openDialog}
-			size={!children && size === undefined ? 'icon' : size}
-			color={!children && color === undefined ? 'ghost' : color}
+			emphasis={!children && emphasis === undefined ? 'ghost' : emphasis}
 			{...rest}
 		>
 			{children || <Icon name="food" />}

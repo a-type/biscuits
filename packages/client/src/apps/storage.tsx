@@ -131,7 +131,8 @@ export function ManageStorage({
 				</P>
 				<div className="flex flex-row gap-2 flex-wrap">
 					<ConfirmedButton
-						color="destructive"
+						emphasis="primary"
+						color="attention"
 						confirmText="This will delete your local data and replace it with the server's data. It cannot be undone."
 						onConfirm={() => {
 							clientDesc?.__dangerous__resetLocal();
@@ -155,7 +156,8 @@ export function ManageStorage({
 				<ExportDataButton onError={onError} />
 				<ImportDataButton onError={onError} />
 				<ConfirmedButton
-					color="destructive"
+					emphasis="primary"
+					color="attention"
 					confirmText="This will delete your data. It cannot be undone."
 					onConfirm={() => {
 						clientDesc?.__dangerous__resetLocal();

@@ -136,7 +136,7 @@ function TripViewInfo({
 			)}
 		>
 			<div className="flex flex-row gap-1 items-center">
-				<Button asChild color="ghost" size="icon">
+				<Button asChild emphasis="ghost">
 					<Link to="/">
 						<Icon name="arrowLeft" />
 						<span className="sr-only">Back to trips</span>
@@ -152,7 +152,7 @@ function TripViewInfo({
 						autoSelect
 					/>
 				:	<Button
-						color="ghost"
+						emphasis="ghost"
 						className="text-xl"
 						onClick={() => setEditName(true)}
 					>
@@ -225,8 +225,9 @@ function TripViewChecklists({
 					</H4>
 					<Button
 						className="flex-0-0-auto m-1"
-						size={editingLists ? 'small' : 'icon'}
-						color={editingLists ? 'accent' : 'ghost'}
+						size={editingLists ? 'small' : 'default'}
+						color="accent"
+						emphasis={editingLists ? 'primary' : 'ghost'}
 						onClick={() => setEditingLists((v) => !v)}
 					>
 						{editingLists ?
@@ -239,7 +240,7 @@ function TripViewChecklists({
 				<CollapsibleSimple open={editingLists}>
 					<AddListsPicker trip={trip} className="p-2" />
 				</CollapsibleSimple>
-				<TabsList className="important:justify-start sticky top-0 z-2 bg-wash overflow-x-auto overflow-y-hidden w-full">
+				<TabsList className="important:justify-start border-none shadow-none sticky top-0 z-2 bg-wash overflow-x-auto overflow-y-hidden w-full">
 					{mappedLists.map((list) => (
 						<ListTab list={list} key={list.get('id')} trip={trip} />
 					))}

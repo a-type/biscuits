@@ -180,7 +180,7 @@ export function OnboardingBanner<O extends Onboarding<any>>({
 					<div>{children}</div>
 					<div className="flex justify-end gap-3">
 						{!disableNext && (
-							<Button color="ghost" onClick={next}>
+							<Button emphasis="ghost" onClick={next}>
 								{isLast ?
 									isOnly ?
 										'Ok'
@@ -255,7 +255,7 @@ export const OnboardingTooltip = function OnboardingTooltip<
 					{content}
 					{!disableNext && (
 						<Button
-							color={isLast ? 'primary' : 'ghost'}
+							emphasis={isLast ? 'primary' : 'ghost'}
 							size="small"
 							onClick={next}
 						>

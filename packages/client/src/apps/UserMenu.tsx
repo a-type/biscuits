@@ -57,22 +57,19 @@ export function UserMenu({
 			<DropdownMenu>
 				<DropdownMenu.Trigger asChild>
 					{(children ?? (!isLoggedIn && loading && !isOffline)) ?
-						<Button size="small" color="ghost">
+						<Button size="small" emphasis="ghost">
 							<Icon name="refresh" className="animate-spin" />
-							{/* match height with avatar */}
-							<Icon name="gear" className="h-25px" />
 						</Button>
 					: isLoggedIn ?
-						<Button size="small" color="ghost">
+						<Button size="small" emphasis="ghost">
 							{!hasServerAccess && <Icon name="refreshDisabled" />}
 							<ErrorBoundary fallback={<Avatar />}>
 								<Suspense fallback={<Avatar />}>
 									<PresencePeople />
 								</Suspense>
 							</ErrorBoundary>
-							<Icon name="gear" className="h-25px" />
 						</Button>
-					:	<Button size="small" color="ghost">
+					:	<Button size="small" emphasis="ghost">
 							<Icon
 								name="refreshDisabled"
 								className={isOffline ? 'color-attention' : ''}
@@ -175,7 +172,7 @@ export function UserMenu({
 						<Suspense>
 							<DropdownMenu.Item asChild>
 								<InstallButton
-									color="primary"
+									emphasis="primary"
 									size="small"
 									className="justify-between mx-lg my-sm"
 								>
@@ -239,9 +236,10 @@ function SmallUpdatePrompt() {
 	}
 
 	return (
-		<Box surface="accent" p="xs" gap="sm" asChild>
+		<Box surface color="accent" p="xs" gap="sm" asChild>
 			<Button
-				color="ghostAccent"
+				color="accent"
+				emphasis="ghost"
 				size="small"
 				className="font-normal"
 				onClick={async () => {

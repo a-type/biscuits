@@ -1,5 +1,5 @@
 import { Button, clsx, Icon, Input, withClassName } from '@a-type/ui';
-import { useRef } from 'react';
+import { CSSProperties, useRef } from 'react';
 import { useSuperBar } from './SuperBarContext.jsx';
 import { SuperBarCreate } from './SuperBarCreate.jsx';
 
@@ -18,6 +18,8 @@ export function SuperBar({ className }: SuperBarProps) {
 				<Input
 					ref={inputRef}
 					className={clsx('w-full', !!inputValue ? 'pr-[32px]' : undefined)}
+					// makes focus ring, which is normally accent, use primary color
+					style={{ '--p-accent-hue': 'var(--p-primary-hue)' } as CSSProperties}
 					placeholder="Search or add..."
 					value={inputValue}
 					onValueChange={setInputValue}
@@ -29,8 +31,8 @@ export function SuperBar({ className }: SuperBarProps) {
 				/>
 				{!!inputValue && (
 					<Button
-						size="icon-small"
-						color="ghost"
+						size="small"
+						emphasis="ghost"
 						className="absolute right-[-4px] top-[55%] translate--1/2"
 						onClick={() => {
 							setInputValue('');

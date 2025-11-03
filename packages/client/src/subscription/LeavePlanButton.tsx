@@ -24,7 +24,8 @@ export function LeavePlanButton({ children, ...props }: LeavePlanButtonProps) {
 
 	return (
 		<ConfirmedButton
-			color="destructive"
+			emphasis="primary"
+			color="attention"
 			{...props}
 			loading={loading}
 			confirmText="Are you sure you want to leave your plan? Your devices will stop syncing and you will lose access to subscriber features."

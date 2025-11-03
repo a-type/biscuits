@@ -83,7 +83,7 @@ export function PantryListCategory({
 			</CategoryItems>
 			{showShowMore && (
 				<div className="flex justify-center mt-4">
-					<Button color="ghost" onClick={pagination.loadMore}>
+					<Button emphasis="ghost" onClick={pagination.loadMore}>
 						Show more
 					</Button>
 				</div>

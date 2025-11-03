@@ -192,7 +192,7 @@ export function InstructionStepNodeView({
 								Type something, or...
 							</div>
 							<IncludeSubRecipe
-								color="default"
+								emphasis="default"
 								size="small"
 								onSelect={embedRecipe}
 								className="opacity-50 hover:opacity-100"
@@ -257,7 +257,7 @@ export function InstructionStepNodeView({
 					contentEditable={false}
 				>
 					{isEditing && (
-						<Button color="ghost" size="icon-small" onClick={removeSelf}>
+						<Button emphasis="ghost" size="small" onClick={removeSelf}>
 							<Icon name="x" />
 						</Button>
 					)}
@@ -279,7 +279,7 @@ export function InstructionStepNodeView({
 								: 'Show note'
 						}
 					>
-						<Button color="ghost" size="icon" onClick={toggleShowNote}>
+						<Button emphasis="ghost" onClick={toggleShowNote}>
 							{!!note ? (
 								<Icon
 									name="note"

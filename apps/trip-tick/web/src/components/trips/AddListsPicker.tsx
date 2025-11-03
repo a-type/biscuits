@@ -27,7 +27,7 @@ export function AddListsPicker({ trip, className }: AddListsPickerProps) {
 				return (
 					<Button
 						key={id}
-						color={active ? 'primary' : 'default'}
+						emphasis={active ? 'primary' : 'default'}
 						onClick={() => {
 							if (active) {
 								trip.get('lists').removeAll(list.get('id'));

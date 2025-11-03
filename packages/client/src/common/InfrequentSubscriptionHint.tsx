@@ -37,7 +37,7 @@ export function InfrequentSubscriptionHint() {
 			<div className="border-light rounded-md flex flex-col p-4 gap-3 color-gray8">
 				<P>Enjoying {appName}? A subscription unlocks device sync and more</P>
 				<div className="flex items-center justify-end gap-2">
-					<Button color="ghost" onClick={() => setDismissedAt(Date.now())}>
+					<Button emphasis="ghost" onClick={() => setDismissedAt(Date.now())}>
 						Dismiss
 					</Button>
 					<PromoteSubscriptionButton>Learn more</PromoteSubscriptionButton>

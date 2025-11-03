@@ -8,6 +8,7 @@ import {
 	FieldLabel,
 	Icon,
 	IconName,
+	PaletteName,
 	ThemeName,
 } from '@a-type/ui';
 import { RemovableTag, TagCreateForm } from '@biscuits/client';
@@ -73,7 +74,7 @@ export function PersonTagEditor({ person, className }: PersonTagEditorProps) {
 								</Button>
 							</Collapsible.Trigger>
 							<Collapsible.Content className="w-full ">
-								<Box className="w-full mt-sm" surface="primary" p>
+								<Box className="w-full mt-sm" surface color="primary" p>
 									<TagCreateForm
 										onCreate={createTag}
 										defaultColor="leek"
@@ -104,7 +105,7 @@ function TagDisplay({
 	const data = hooks.useTag(tag);
 	hooks.useWatch(data);
 	const icon = data?.get('icon') as IconName | undefined;
-	const color = data?.get('color') as ThemeName | undefined;
+	const color = data?.get('color') as PaletteName | undefined;
 	const name = data?.get('name') ?? tag;
 
 	return (

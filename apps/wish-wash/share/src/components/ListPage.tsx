@@ -70,7 +70,7 @@ export function ListPage({ data }: ListPageProps) {
 							<Chip>By {data.author}</Chip>
 							<Chip>Created {createdAtDate.toLocaleDateString()}</Chip>
 						</Box>
-						<Box surface="primary" className="mr-auto" p>
+						<Box surface color="primary" className="mr-auto" p>
 							Click any item to see details and links
 						</Box>
 					</Box>

@@ -9,7 +9,7 @@ import {
 	PopoverTrigger,
 } from '@a-type/ui';
 import { Trip } from '@trip-tick.biscuits/verdant';
-import format from 'date-fns/format';
+import { format } from 'date-fns/format';
 import { useState } from 'react';
 import { useTripDays } from './hooks.js';
 
@@ -54,7 +54,7 @@ export function TripDateRange({ trip }: TripDateRangeProps) {
 		<Popover open={open} onOpenChange={setOpen}>
 			<PopoverTrigger asChild>
 				<Button
-					color={nights === 0 ? 'primary' : 'ghost'}
+					emphasis={nights === 0 ? 'primary' : 'ghost'}
 					className={
 						nights === 0 ? 'ml-4' : 'font-normal text-wrap text-start text-sm'
 					}

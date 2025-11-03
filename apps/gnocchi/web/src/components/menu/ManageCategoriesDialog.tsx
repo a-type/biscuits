@@ -30,7 +30,7 @@ export function ManageCategoriesDialog({ children }: { children: ReactNode }) {
 					<CategoryManager />
 				</Suspense>
 				<DialogActions>
-					<Button color="ghost" onClick={resetToDefaults}>
+					<Button emphasis="ghost" onClick={resetToDefaults}>
 						Reset to defaults
 					</Button>
 					<DialogClose asChild>

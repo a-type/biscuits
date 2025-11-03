@@ -10,20 +10,63 @@ import type {
 export * from "@verdant-web/store";
 
 export class Client<Presence = any, Profile = any> {
+  /** Collection access for Project. Load queries, put and delete documents. */
   readonly projects: CollectionQueries<Project, ProjectInit, ProjectFilter>;
 
+  /**
+   * Turn on and off sync, or adjust the sync protocol and other settings.
+   */
   sync: BaseClient<Presence, Profile>["sync"];
+  /**
+   * Access and manipulate the undo/redo stack. You can also
+   * add custom undoable actions using addUndo, although the interface
+   * for doing this is pretty mind-bending at the moment (sorry).
+   */
   undoHistory: BaseClient<Presence, Profile>["undoHistory"];
+  /**
+   * The namespace used to construct this store.
+   */
   namespace: BaseClient<Presence, Profile>["namespace"];
+  /**
+   * @deprecated - do not use this. For batching, use .batch instead.
+   * Using methods on this property can cause data loss and corruption.
+   */
   entities: BaseClient<Presence, Profile>["entities"];
-  // queryStore: BaseClient<Presence, Profile>['queryStore'];
+  /**
+   * Tools for batching operations so they are bundled together
+   * in the undo/redo stack.
+   */
   batch: BaseClient<Presence, Profile>["batch"];
-  // files: BaseClient<Presence, Profile>['files'];
   close: BaseClient<Presence, Profile>["close"];
+  /**
+   * Export a backup of a full library
+   */
   export: BaseClient<Presence, Profile>["export"];
+  /**
+   * Import a full library from a backup. WARNING: this replaces
+   * existing data with no option for restore.
+   */
   import: BaseClient<Presence, Profile>["import"];
+  /**
+   * Subscribe to global store events
+   */
   subscribe: BaseClient<Presence, Profile>["subscribe"];
+  /**
+   * Read stats about storage usage
+   */
   stats: BaseClient<Presence, Profile>["stats"];
+  /**
+   * An interface for inspecting and manipulating active live queries.
+   * Particularly, see .keepAlive and .dropKeepAlive for placing keep-alive
+   * holds to keep query results in memory when unsubscribed.
+   */
+  queries: BaseClient<Presence, Profile>["queries"];
+
+  /**
+   * Get the local replica ID for this client instance.
+   * Not generally useful for people besides me.
+   */
+  getReplicaId: BaseClient<Presence, Profile>["getReplicaId"];
 
   /**
    * Deletes all local data. If the client is connected to sync,
@@ -59,10 +102,12 @@ export class Client<Presence = any, Profile = any> {
 export interface ClientDescriptorOptions<Presence = any, Profile = any>
   extends Omit<
     BaseClientDescriptorOptions<Presence, Profile>,
-    "schema" | "migrations"
+    "schema" | "migrations" | "oldSchemas"
   > {
   /** WARNING: overriding the schema is dangerous and almost definitely not what you want. */
   schema?: StorageSchema;
+  /** WARNING: overriding old schemas is dangerous and almost definitely not what you want. */
+  oldSchemas?: StorageSchema[];
   /** WARNING: overriding the migrations is dangerous and almost definitely not what you want. */
   migrations?: Migration[];
 }
@@ -100,7 +145,7 @@ export type Project = ObjectEntity<
 >;
 export type ProjectId = string;
 export type ProjectCreatedAt = number;
-export type ProjectImage = string;
+export type ProjectImage = EntityFile;
 export type ProjectColors = ListEntity<
   ProjectColorsInit,
   ProjectColorsDestructured,

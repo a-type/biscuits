@@ -72,7 +72,8 @@ export function SelectionMenu({ className }: SelectionMenuProps) {
 				{mixed && (
 					<Button
 						onClick={() => deleteSelected('connection')}
-						color="ghostDestructive"
+						color="attention"
+						emphasis="ghost"
 						size="small"
 						className="flex-1 justify-center"
 					>
@@ -82,7 +83,8 @@ export function SelectionMenu({ className }: SelectionMenuProps) {
 				)}
 				<Button
 					onClick={() => deleteSelected()}
-					color="ghostDestructive"
+					color="attention"
+					emphasis="ghost"
 					size="small"
 					className="flex-1 justify-center"
 				>

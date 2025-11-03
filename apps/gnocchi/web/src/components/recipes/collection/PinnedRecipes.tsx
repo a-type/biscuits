@@ -58,11 +58,7 @@ function PinnedRecipeListItem({ recipe }: { recipe: Recipe }) {
 
 	return (
 		<div className="flex flex-row items-center gap-1 border border-solid border-gray rounded-lg px-3 py-2">
-			<Button
-				size="icon"
-				color="primary"
-				onClick={() => recipe.set('pinnedAt', null)}
-			>
+			<Button emphasis="primary" onClick={() => recipe.set('pinnedAt', null)}>
 				<PinIcon isPinned />
 			</Button>
 			<Link
@@ -78,8 +74,7 @@ function PinnedRecipeListItem({ recipe }: { recipe: Recipe }) {
 			</Link>
 			<AddToListButton
 				recipe={recipe}
-				size="icon"
-				color="ghost"
+				emphasis="ghost"
 				className="flex-shrink-0"
 			>
 				<Icon name="add_to_list" />

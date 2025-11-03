@@ -20,7 +20,7 @@ export function RecipeNote({ recipe, readOnly, className }: RecipeNoteProps) {
 	if (!note && !showWhenEmpty && !readOnly) {
 		return (
 			<div className={className}>
-				<Button size="small" color="default" onClick={toggleShowWhenEmpty}>
+				<Button size="small" emphasis="default" onClick={toggleShowWhenEmpty}>
 					<Icon name="add_note" />
 					Add note
 				</Button>

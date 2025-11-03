@@ -40,12 +40,12 @@ export function TosPrompt() {
 					continue using Biscuits apps.
 				</p>
 				<div className="flex flex-col items-start gap-2">
-					<Button asChild color="ghost">
+					<Button asChild emphasis="ghost">
 						<a href={`${CONFIG.HOME_ORIGIN}/tos`} target="_blank">
 							Terms of Service
 						</a>
 					</Button>
-					<Button asChild color="ghost">
+					<Button asChild emphasis="ghost">
 						<a href={`${CONFIG.HOME_ORIGIN}/privacy`} target="_blank">
 							Privacy Policy
 						</a>
@@ -57,7 +57,7 @@ export function TosPrompt() {
 							Manage Plan or Log Out
 						</a>
 					</Button>
-					<Button color="primary" onClick={() => acceptTos()}>
+					<Button emphasis="primary" onClick={() => acceptTos()}>
 						Accept
 					</Button>
 				</DialogActions>

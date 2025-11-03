@@ -49,9 +49,8 @@ function FoodNameTag({
 		<div className="inline-flex flex-row items-center whitespace-nowrap gap-1 px-3 py-1 rounded-2xl border border-solid border-black text-sm max-w-full overflow-hidden">
 			<span className="overflow-hidden text-ellipsis">{name}</span>
 			<Button
-				size="icon"
 				onClick={() => onDelete(name)}
-				color="ghost"
+				emphasis="ghost"
 				className="important:p-2px"
 			>
 				<Cross2Icon />

@@ -54,9 +54,8 @@ export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
 			</MenuDisclose.Content>
 			<MenuDisclose.Trigger asChild>
 				<Button
-					size="icon"
 					onClick={() => setOpen(true)}
-					color="primary"
+					emphasis="primary"
 					className={classNames('absolute shadow-xl')}
 				>
 					<Icon name="plus" className="w-20px h-20px" />

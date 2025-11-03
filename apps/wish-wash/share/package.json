@@ -9,7 +9,8 @@
 		"preview": "vite preview",
 		"deploy": "wrangler deploy",
 		"types": "wrangler types -c wrangler.jsonc",
-		"postinstall": "pnpm run types"
+		"postinstall": "pnpm run types",
+		"typecheck": "tsc --noEmit"
 	},
 	"dependencies": {
 		"@a-type/ui": "catalog:",

@@ -136,7 +136,7 @@ export const CallToAction = ({
 		)}
 	>
 		<div className="flex flex-col sm:flex-row-reverse justify-between md:justify-center items-center w-full gap-xs sm:gap-lg">
-			<Button asChild color="primary">
+			<Button asChild emphasis="primary">
 				<Link
 					to={appsById[appId].url}
 					data-test="get-started"
@@ -145,7 +145,7 @@ export const CallToAction = ({
 					Get Started
 				</Link>
 			</Button>
-			<Button asChild color="default">
+			<Button asChild emphasis="default">
 				<Link to="/">
 					<Icon name="arrowLeft" />
 					More Biscuits apps

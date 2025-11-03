@@ -71,7 +71,8 @@ export function ItemEditDialog({ list }: ItemEditDialogProps) {
 				<Dialog.Actions className="justify-between">
 					{item && (
 						<Button
-							color="destructive"
+							emphasis="primary"
+							color="attention"
 							onClick={() => {
 								items.removeAll(item);
 								setSearch(
@@ -90,7 +91,7 @@ export function ItemEditDialog({ list }: ItemEditDialogProps) {
 						</Button>
 					)}
 					<Dialog.Close asChild>
-						<Button color="primary">Done</Button>
+						<Button emphasis="primary">Done</Button>
 					</Dialog.Close>
 				</Dialog.Actions>
 			</Dialog.Content>
@@ -108,7 +109,7 @@ function ItemTypePicker({ item }: { item: Item }) {
 				toggled={type === 'idea'}
 				onClick={() => item.set('type', 'idea')}
 				className="theme-lemon"
-				color="primary"
+				emphasis="primary"
 			>
 				<Icon name="lightbulb" /> Idea
 			</Button>
@@ -117,7 +118,7 @@ function ItemTypePicker({ item }: { item: Item }) {
 				toggled={type === 'link'}
 				onClick={() => item.set('type', 'link')}
 				className="theme-leek"
-				color="primary"
+				emphasis="primary"
 			>
 				<Icon name="gift" /> Product
 			</Button>
@@ -126,7 +127,7 @@ function ItemTypePicker({ item }: { item: Item }) {
 				toggled={type === 'vibe'}
 				onClick={() => item.set('type', 'vibe')}
 				className="theme-eggplant"
-				color="primary"
+				emphasis="primary"
 			>
 				<Icon name="magic" /> Vibe
 			</Button>
@@ -245,8 +246,8 @@ function ImageField({
 				src={file.url ?? ''}
 			/>
 			<Button
-				size="icon"
-				color="destructive"
+				emphasis="primary"
+				color="attention"
 				className="absolute top-1 right-1"
 				onClick={onRemove}
 			>

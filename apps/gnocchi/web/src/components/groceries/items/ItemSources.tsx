@@ -153,7 +153,7 @@ function RecipePreviewContent({
 	return (
 		<div className="flex flex-col gap-3">
 			<H2>{title}</H2>
-			<LinkButton color="primary" align="start" to={makeRecipeLink(recipe)}>
+			<LinkButton emphasis="primary" align="start" to={makeRecipeLink(recipe)}>
 				View recipe
 			</LinkButton>
 			<H3>Ingredients</H3>

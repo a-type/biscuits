@@ -78,7 +78,7 @@ export function TripsList({}: TripsListProps) {
 				</CardGrid>
 			:	<div className="color-gray-dark p-8 italic font-lg flex flex-col gap-3 items-center justify-center">
 					No upcoming trips.{' '}
-					<AddTripButton color="default">Plan one</AddTripButton>
+					<AddTripButton emphasis="default">Plan one</AddTripButton>
 				</div>
 			}
 			{!!past.length && showPast ?
@@ -97,7 +97,7 @@ export function TripsList({}: TripsListProps) {
 			: !!past.length ?
 				<Button
 					className="self-center opacity-50"
-					color="ghost"
+					emphasis="ghost"
 					onClick={() => setShowPast(true)}
 				>
 					Show past trips

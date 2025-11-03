@@ -6,7 +6,7 @@
 			"script": "app-dev",
 			"path": "web",
 			"problemMatcher": [],
-			"label": "Dev",
+			"label": "Gnocchi Dev",
 			"detail": "vite --host --mode development"
 		},
 		{
@@ -14,7 +14,7 @@
 			"script": "dev",
 			"path": "share",
 			"problemMatcher": [],
-			"label": "Share Dev",
+			"label": "Gnocchi Share Dev",
 			"detail": "vite"
 		},
 		{
@@ -22,7 +22,7 @@
 			"script": "generate",
 			"path": "verdant",
 			"problemMatcher": [],
-			"label": "Generate",
+			"label": "Gnocchi Generate",
 			"detail": "verdant -s ./src/schema.ts -o ./src/client -r"
 		}
 	]

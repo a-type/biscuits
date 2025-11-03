@@ -43,13 +43,13 @@ export function JoinPage({}: JoinPageProps) {
 						and friends. Plans start at <StartingPrice />.
 					</p>
 					<PageFixedArea className="flex flex-row gap-3 py-4 justify-between bg-transparent">
-						<Button asChild color="default">
+						<Button asChild emphasis="default">
 							<Link to={backTo || '/'}>
 								<Icon name="arrowLeft" />
 								{backTo ? 'Go back' : 'Back to apps'}
 							</Link>
 						</Button>
-						<Button asChild color="primary">
+						<Button asChild emphasis="primary">
 							<Link to="/login?returnTo=/settings?tab=subscription&tab=signup">
 								Get started
 							</Link>

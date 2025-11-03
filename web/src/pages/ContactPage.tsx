@@ -18,7 +18,7 @@ export function ContactPage({}: ContactPageProps) {
 						</a>{' '}
 						and I&apos;ll see what I can do.
 					</P>
-					<Button asChild className="self-start" color="primary">
+					<Button asChild className="self-start" emphasis="primary">
 						<Link to="/">Go home</Link>
 					</Button>
 				</div>

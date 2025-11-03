@@ -113,7 +113,11 @@ function AddChefsAction() {
 			}}
 		>
 			<DialogTrigger asChild>
-				<ActionButton visible={showTip && !dismissed} color="accent">
+				<ActionButton
+					visible={showTip && !dismissed}
+					emphasis="light"
+					color="accent"
+				>
 					<Icon name="add_person" />
 					<span className="hidden sm:display-inline">Invite chefs</span>
 				</ActionButton>
@@ -182,7 +186,7 @@ function NoteToggleAction({ recipe }: { recipe: Recipe }) {
 	return (
 		<Popover>
 			<PopoverTrigger asChild>
-				<ActionButton color="primary">
+				<ActionButton emphasis="primary">
 					<Icon name="note" />
 					<span className="hidden sm:display-inline">Add note</span>
 				</ActionButton>

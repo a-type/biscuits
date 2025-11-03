@@ -49,14 +49,14 @@ function ProjectCardMenu({ projectId }: { projectId: string }) {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button size="icon">
+				<Button>
 					<Icon name="dots" />
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent>
 				<DropdownMenuArrow />
-				<DropdownMenuItem color="destructive" onClick={deleteProject}>
-					Delete{' '}
+				<DropdownMenuItem color="attention" onClick={deleteProject}>
+					Delete
 					<DropdownMenuItemRightSlot>
 						<Icon name="trash" />
 					</DropdownMenuItemRightSlot>

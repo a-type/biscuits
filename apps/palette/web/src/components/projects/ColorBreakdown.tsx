@@ -2,6 +2,7 @@
 import { basicsOnboarding } from '@/onboarding/basics.js';
 import { clsx, useBoundsCssVars } from '@a-type/ui';
 import { OnboardingTooltip } from '@biscuits/client';
+// @ts-ignore
 import { Color } from '@dynamize/color-utilities';
 
 export interface ColorBreakdownProps {

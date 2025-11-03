@@ -88,7 +88,7 @@ function FoodDetailView({
 			<div className="flex flex-col items-center gap-4">
 				<div>No food data for &quot;{foodName}&quot;</div>
 				{justDeleted && (
-					<Button color="ghost" onClick={() => client.undoHistory.undo()}>
+					<Button emphasis="ghost" onClick={() => client.undoHistory.undo()}>
 						Undo delete
 					</Button>
 				)}
@@ -235,7 +235,8 @@ function FoodDetailView({
 						client.foods.delete(food.get('canonicalName'));
 						setJustDeleted(true);
 					}}
-					color="destructive"
+					emphasis="primary"
+					color="attention"
 				>
 					Delete
 				</Button>
@@ -264,7 +265,7 @@ const FoodNameEditor = ({ food }: { food: Food }) => {
 				{newName !== food.get('canonicalName') && (
 					<Suspense
 						fallback={
-							<Button disabled color="primary">
+							<Button disabled emphasis="primary">
 								<Icon name="check" />
 								<span>Rename</span>
 							</Button>
@@ -287,7 +288,7 @@ const FoodNameEditor = ({ food }: { food: Food }) => {
 		<div className="row">
 			<FoodName food={food} capitalize />
 			<Tooltip content="Rename or merge">
-				<Button size="icon" color="ghost" onClick={() => setEditing(true)}>
+				<Button emphasis="ghost" onClick={() => setEditing(true)}>
 					<Icon name="pencil" />
 				</Button>
 			</Tooltip>
@@ -312,7 +313,7 @@ function FoodNameEditorSaveButton({
 	});
 	const merge = !!foodToMerge && foodToMerge !== food;
 	return (
-		<Button color="primary" onClick={onSave}>
+		<Button emphasis="primary" onClick={onSave}>
 			<Icon name={!!merge ? 'convert' : 'check'} />
 			<span>{!!merge ? 'Merge' : 'Rename'}</span>
 		</Button>

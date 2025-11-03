@@ -67,7 +67,7 @@ export function DomainRouteValidation({
 	return (
 		<Box d="col" gap {...rest}>
 			{!!error && (
-				<Box gap items="center" surface="attention" p>
+				<Box gap items="center" surface color="attention" p>
 					<Icon name="warning" />
 					<span>
 						Failed to refresh validation status. Please try again in a bit.
@@ -75,7 +75,7 @@ export function DomainRouteValidation({
 				</Box>
 			)}
 			{status === 'READY' ?
-				<Box surface="accent" p="lg" d="col" gap items="start">
+				<Box surface color="accent" p="lg" d="col" gap items="start">
 					<Box gap items="center">
 						<Icon name="check" />
 						<strong>Success</strong>
@@ -104,7 +104,11 @@ export function DomainRouteValidation({
 						certificates for you, which keeps your site visitors safe. This can
 						take a few minutes.
 					</P>
-					<Button onClick={() => refetch()} loading={loading} color="primary">
+					<Button
+						onClick={() => refetch()}
+						loading={loading}
+						emphasis="primary"
+					>
 						Check again now
 					</Button>
 				</>
@@ -117,7 +121,7 @@ export function DomainRouteValidation({
 					{mainRecord && <DnsRecord {...mainRecord} />}
 					<Box d="col" gap items="start">
 						{note && (
-							<Box surface="primary" p>
+							<Box surface color="primary" p>
 								{note}
 							</Box>
 						)}
@@ -125,7 +129,11 @@ export function DomainRouteValidation({
 							It can take up to 24 hours for your changes to take effect. Return
 							to this menu any time to recheck your configuration.
 						</P>
-						<Button onClick={() => refetch()} loading={loading} color="primary">
+						<Button
+							onClick={() => refetch()}
+							loading={loading}
+							emphasis="primary"
+						>
 							Check again now
 						</Button>
 					</Box>
@@ -148,7 +156,8 @@ function DnsRecord({
 }) {
 	return (
 		<Box
-			surface={verified ? 'accent' : 'default'}
+			surface
+			color={verified ? 'success' : undefined}
 			container
 			border
 			gap
@@ -156,10 +165,7 @@ function DnsRecord({
 			d="col"
 		>
 			{verified && (
-				<Icon
-					name="check"
-					className="color-accent-dark absolute top-2 right-2"
-				/>
+				<Icon name="check" className="color-main-dark absolute top-2 right-2" />
 			)}
 			<Box gap>
 				<span className="font-bold">Type:</span>

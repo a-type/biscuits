@@ -79,7 +79,7 @@ export function SearchAndBuyExperience({
 				<DialogActions>
 					{showPost && (
 						<Button
-							color="ghost"
+							emphasis="ghost"
 							onClick={() => setShowPost(false)}
 							className="mr-auto"
 						>

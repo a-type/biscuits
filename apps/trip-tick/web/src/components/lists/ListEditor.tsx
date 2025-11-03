@@ -45,7 +45,7 @@ export function ListEditor({ list }: ListEditorProps) {
 						autoSelect
 					/>
 				:	<Button
-						color="ghost"
+						emphasis="ghost"
 						className="text-xl"
 						onClick={() => setEditName(true)}
 					>
@@ -103,8 +103,8 @@ const AddListItemButton = forwardRef<HTMLButtonElement, { list: List }>(
 
 		return (
 			<Button
-				color="primary"
-				className="self-center items-center justify-center"
+				emphasis="primary"
+				className="self-center items-center justify-center sticky bottom-md"
 				onClick={() => {
 					items.push({
 						description: 'New item',

@@ -89,7 +89,11 @@ export const RecipePublishControl = withSuspense(
 		return (
 			<Dialog>
 				<DialogTrigger asChild>
-					<Button size="small" color={isPublished ? 'accent' : 'default'}>
+					<Button
+						size="small"
+						color="accent"
+						emphasis={isPublished ? 'light' : 'default'}
+					>
 						{isPublished ? 'Published' : 'Publish'}
 					</Button>
 				</DialogTrigger>
@@ -131,7 +135,7 @@ function PublishedContent({
 			<DialogTitle>Manage publication</DialogTitle>
 			<P>Published {format(publishDate, 'PPp')}</P>
 			<SubRecipeWarning recipe={recipe} />
-			<Button asChild color="default" className="self-start">
+			<Button asChild emphasis="default" className="self-start">
 				<Link to={url} newTab>
 					View on the web
 					<Icon name="new_window" />
@@ -142,7 +146,8 @@ function PublishedContent({
 					<Button>Close</Button>
 				</DialogClose>
 				<Button
-					color="destructive"
+					emphasis="primary"
+					color="attention"
 					onClick={async () => {
 						try {
 							await unpublish({
@@ -203,7 +208,7 @@ function UnpublishedContent({
 					<Button>Cancel</Button>
 				</DialogClose>
 				<Button
-					color="primary"
+					emphasis="primary"
 					disabled={!consent}
 					loading={publishing}
 					onClick={async () => {
@@ -237,7 +242,7 @@ function SubRecipeWarning({ recipe }: { recipe: Recipe }) {
 	if (!hasSubRecipes) return null;
 
 	return (
-		<Box surface="primary" p className="block">
+		<Box surface color="primary" p className="block">
 			<strong>Warning:</strong> This recipe contains sub-recipes. They will be
 			embedded in the published recipe.
 		</Box>

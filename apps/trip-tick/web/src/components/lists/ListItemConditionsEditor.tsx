@@ -45,8 +45,8 @@ export function ListItemConditionsEditor({
 				<div key={i} className="row w-full">
 					<ListItemConditionEditor condition={cond} />
 					<Button
-						size="icon"
-						color="ghostDestructive"
+						color="attention"
+						emphasis="ghost"
 						onClick={() => conditions.removeAll(cond)}
 					>
 						<Icon name="x" />
@@ -62,7 +62,7 @@ function AddCondition({ conditions }: { conditions: ListItemsItemConditions }) {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button color="default" size="small" className="self-start">
+				<Button emphasis="default" size="small" className="self-start">
 					<Icon name="plus" />
 					<span>Add condition...</span>
 				</Button>
@@ -99,7 +99,7 @@ function ConditionTypeLabel({
 				<>
 					Only when raining
 					<DropdownMenuItemRightSlot>
-						<Icon name="waterDrop" className="fill-primary-light" />
+						<Icon name="waterDrop" className=" fill-main-light" />
 					</DropdownMenuItemRightSlot>
 				</>
 			);
@@ -110,7 +110,7 @@ function ConditionTypeLabel({
 					<DropdownMenuItemRightSlot>
 						<Icon
 							name="thermometer"
-							className="color-primary-dark theme-tomato"
+							className="color-main-dark palette-tomato"
 						/>
 					</DropdownMenuItemRightSlot>
 				</>
@@ -122,7 +122,7 @@ function ConditionTypeLabel({
 					<DropdownMenuItemRightSlot>
 						<Icon
 							name="thermometer"
-							className="color-primary-dark theme-blueberry"
+							className="color-main-dark palette-blueberry"
 						/>
 					</DropdownMenuItemRightSlot>
 				</>

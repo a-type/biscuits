@@ -63,6 +63,12 @@ export class Client<Presence = any, Profile = any> {
   queries: BaseClient<Presence, Profile>["queries"];
 
   /**
+   * Get the local replica ID for this client instance.
+   * Not generally useful for people besides me.
+   */
+  getReplicaId: BaseClient<Presence, Profile>["getReplicaId"];
+
+  /**
    * Deletes all local data. If the client is connected to sync,
    * this will cause the client to re-sync all data from the server.
    * Use this very carefully, and only as a last resort.
@@ -169,6 +175,8 @@ export type ListItemsItemDescription = string;
 export type ListItemsItemPrompt = string;
 export type ListItemsItemLastPurchasedAt = number;
 export type ListItemsItemCreatedAt = number;
+/** If set, the item is considered expired after this timestamp asn the user is prompted as to whether it is still wanted. */
+export type ListItemsItemExpiresAt = number;
 export type ListItemsItemLinks = ListEntity<
   ListItemsItemLinksInit,
   ListItemsItemLinksDestructured,
@@ -219,6 +227,7 @@ export type ListItemsItemInit = {
   prompt?: string | null;
   lastPurchasedAt?: number | null;
   createdAt?: number;
+  expiresAt?: number | null;
   links?: ListItemsItemLinksInit;
   imageFiles?: ListItemsItemImageFilesInit;
   remoteImageUrl?: string | null;
@@ -256,6 +265,7 @@ export type ListItemsItemDestructured = {
   prompt: string | null;
   lastPurchasedAt: number | null;
   createdAt: number;
+  expiresAt: number | null;
   links: ListItemsItemLinks;
   imageFiles: ListItemsItemImageFiles;
   remoteImageUrl: string | null;
@@ -293,6 +303,7 @@ export type ListItemsItemSnapshot = {
   prompt: string | null;
   lastPurchasedAt: number | null;
   createdAt: number;
+  expiresAt: number | null;
   links: ListItemsItemLinksSnapshot;
   imageFiles: ListItemsItemImageFilesSnapshot;
   remoteImageUrl: string | null;

@@ -15,7 +15,7 @@ export function RecipeCreateButton({ children, ...rest }: ButtonProps) {
 					skipTransition: true,
 				});
 			}}
-			color="primary"
+			emphasis="primary"
 			{...rest}
 		>
 			{children || 'New Recipe'}

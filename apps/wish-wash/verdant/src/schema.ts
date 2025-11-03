@@ -67,6 +67,11 @@ const lists = schema.collection({
 					createdAt: schema.fields.number({
 						default: Date.now,
 					}),
+					expiresAt: schema.fields.number({
+						nullable: true,
+						documentation:
+							'If set, the item is considered expired after this timestamp asn the user is prompted as to whether it is still wanted.',
+					}),
 					links: schema.fields.array({
 						items: schema.fields.string(),
 					}),
@@ -113,7 +118,7 @@ const lists = schema.collection({
 });
 
 export default schema({
-	version: 11,
+	version: 12,
 	collections: {
 		lists,
 	},

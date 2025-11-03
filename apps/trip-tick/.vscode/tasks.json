@@ -1,21 +1,21 @@
 {
-  "version": "2.0.0",
-  "tasks": [
-    {
-      "type": "npm",
-      "script": "app-dev",
-      "path": "web",
-      "problemMatcher": [],
-      "label": "Dev",
-      "detail": "vite"
-    },
-    {
-      "type": "npm",
-      "script": "generate",
-      "path": "verdant",
-      "problemMatcher": [],
-      "label": "Generate",
-      "detail": "verdant -s ./src/schema.ts -o ./src/client -r"
-    }
-  ]
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "app-dev",
+			"path": "web",
+			"problemMatcher": [],
+			"label": "Trip Tick Dev",
+			"detail": "vite"
+		},
+		{
+			"type": "npm",
+			"script": "generate",
+			"path": "verdant",
+			"problemMatcher": [],
+			"label": "Trip Tick Generate",
+			"detail": "verdant -s ./src/schema.ts -o ./src/client -r"
+		}
+	]
 }

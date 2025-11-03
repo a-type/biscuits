@@ -95,7 +95,7 @@ function SuggestionGroup({
 			</Card.Grid>
 			{isRecents && loadMoreRecents && (
 				<Button
-					color="ghost"
+					emphasis="ghost"
 					onClick={loadMoreRecents}
 					className="w-full justify-center"
 				>

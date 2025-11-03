@@ -87,7 +87,7 @@ export function LinkBuyExperience({
 				<Dialog.Actions>
 					{showPost && (
 						<Button
-							color="ghost"
+							emphasis="ghost"
 							onClick={() => setShowPost(false)}
 							className="mr-auto"
 						>
@@ -121,15 +121,15 @@ function PreLinkBuyExperienceContent({
 				Come back to this tab to mark this item as purchased when you're done!
 			</Dialog.Description>
 			{needs === 0 && item.count > 0 ?
-				<Box surface="attention" p>
+				<Box surface color="attention" p>
 					This item is already purchased!
 				</Box>
-			:	<Box surface="primary" p>
+			:	<Box surface color="primary" p>
 					{listAuthor} wants {needs}
 					{item.count > 1 ? ' more' : ''}
 				</Box>
 			}
-			<Button asChild color="primary" onClick={onVisit}>
+			<Button asChild emphasis="primary" onClick={onVisit}>
 				<a href={link} target="_blank" rel="noreferrer">
 					Go to store page
 					<Icon name="new_window" />

@@ -24,7 +24,7 @@ export function TripMenu({ tripId }: TripMenuProps) {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button size="icon" color="ghost">
+				<Button emphasis="ghost">
 					<Icon name="dots" />
 				</Button>
 			</DropdownMenuTrigger>
@@ -34,7 +34,7 @@ export function TripMenu({ tripId }: TripMenuProps) {
 					onClick={() => {
 						client.trips.delete(trip.get('id'));
 						navigate('/', { skipTransition: true });
-						toast((t) => (
+						toast((t: any) => (
 							<span className="flex gap-2 items-center">
 								<Icon name="check" />
 								<span>Trip deleted!</span>

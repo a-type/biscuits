@@ -9,7 +9,7 @@ export function PromoteSubscriptionButton({
 }: PromoteSubscriptionButtonProps) {
 	return (
 		<Button
-			color="primary"
+			emphasis="primary"
 			{...rest}
 			onClick={() => showSubscriptionPromotion()}
 		>

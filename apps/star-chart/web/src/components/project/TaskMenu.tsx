@@ -13,11 +13,7 @@ export function TaskMenu({ task, className, ...rest }: TaskMenuProps) {
 
 	return (
 		<div className={clsx('row justify-end', className)} {...rest}>
-			<Button
-				size="icon"
-				color="ghostDestructive"
-				onClick={() => deleteTask(id)}
-			>
+			<Button color="attention" emphasis="ghost" onClick={() => deleteTask(id)}>
 				<Icon name="trash" />
 			</Button>
 		</div>

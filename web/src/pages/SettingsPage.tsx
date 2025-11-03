@@ -94,7 +94,7 @@ export function PlanPage({}: PlanPageProps) {
 		<PageRoot>
 			<PageContent gap="lg" className="self-stretch">
 				<PageFixedArea className="mb-10 flex flex-row items-center w-full justify-between">
-					<Button asChild color="primary">
+					<Button asChild emphasis="primary">
 						<Link to={returnToAppUrl ?? '/'}>
 							<Icon name="arrowLeft" />
 							<span>Back to {returnToApp?.name ?? 'apps'}</span>

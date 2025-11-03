@@ -10,14 +10,18 @@ export interface LinkButtonProps extends LinkProps {
 	color?: ButtonProps['color'];
 	size?: ButtonProps['size'];
 	align?: ButtonProps['align'];
+	emphasis?: ButtonProps['emphasis'];
 }
 
 export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
-	function LinkButton({ className, color, size, align, ...props }, ref) {
+	function LinkButton(
+		{ className, color, size, align, emphasis, ...props },
+		ref,
+	) {
 		return (
 			<Link
 				className={classNames(
-					getButtonClassName({ color, size, align }),
+					getButtonClassName({ color, size, align, emphasis }),
 					'[&[data-transitioning=true]]:opacity-70',
 					className,
 				)}

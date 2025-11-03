@@ -20,7 +20,8 @@ export function DeleteColorAction({ project }: { project: Project }) {
 
 	return (
 		<ActionButton
-			color="destructive"
+			emphasis="primary"
+			color="attention"
 			onClick={deleteSelectedColor}
 			visible={!!selectedId}
 		>

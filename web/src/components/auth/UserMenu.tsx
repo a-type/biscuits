@@ -12,7 +12,7 @@ export function UserMenu({ className }: UserMenuProps) {
 	if (!data?.me) {
 		return (
 			<Link to="/login">
-				<Button size="small" color="primary" className={className}>
+				<Button size="small" emphasis="primary" className={className}>
 					Join the club
 				</Button>
 			</Link>
@@ -27,7 +27,7 @@ export function UserMenu({ className }: UserMenuProps) {
 				<Avatar imageSrc={data.me.imageUrl} name={name} />
 				<div>Hi, {name}!</div>
 			</Box>
-			<Button asChild color="default">
+			<Button asChild emphasis="default">
 				<Link to="/settings">
 					Your plan
 					<Icon name="gear" />

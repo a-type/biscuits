@@ -1,9 +1,8 @@
 import { RecipeEditTags } from '@/components/recipes/editor/RecipeAddTag.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { IconName, ThemeName } from '@a-type/ui';
+import { IconName, PaletteName, clsx } from '@a-type/ui';
 import { RemovableTag } from '@biscuits/client';
 import { Recipe } from '@gnocchi.biscuits/verdant';
-import classNames from 'classnames';
 import { Suspense } from 'react';
 
 export interface RecipeTagsEditorProps {
@@ -19,7 +18,7 @@ export function RecipeTagsEditor({ recipe, className }: RecipeTagsEditorProps) {
 	const removeTag = (name: string) => tags.removeAll(name);
 
 	return (
-		<div className={classNames('flex flex-wrap gap-1 items-center')}>
+		<div className={clsx('flex flex-wrap gap-1 items-center', className)}>
 			{tags?.map((tag) => (
 				<Suspense key={tag}>
 					<TagDisplay tag={tag} onRemove={removeTag} />
@@ -42,7 +41,7 @@ function TagDisplay({
 	const data = hooks.useRecipeTagMetadata(tag);
 	hooks.useWatch(data);
 	const icon = data?.get('icon') as IconName | undefined;
-	const color = data?.get('color') as ThemeName | undefined;
+	const color = data?.get('color') as PaletteName | undefined;
 
 	const name = data?.get('name') ?? tag;
 

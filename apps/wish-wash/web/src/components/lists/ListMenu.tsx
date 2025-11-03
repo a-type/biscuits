@@ -35,7 +35,7 @@ export function ListMenu(props: ListMenuProps) {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button size="icon" color="ghost" {...props}>
+				<Button emphasis="ghost" {...props}>
 					<Icon name="dots" />
 				</Button>
 			</DropdownMenuTrigger>

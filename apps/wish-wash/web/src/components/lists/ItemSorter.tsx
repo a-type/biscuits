@@ -71,7 +71,7 @@ export function ItemSorter({ list, className }: ItemSorterProps) {
 			>
 				<Dialog.Title>Reorder items</Dialog.Title>
 				<Dialog.Close asChild>
-					<Button size="icon" color="ghost" className="absolute top-2 right-2">
+					<Button emphasis="ghost" className="absolute top-2 right-2">
 						<Icon name="x" />
 					</Button>
 				</Dialog.Close>

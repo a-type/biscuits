@@ -1,8 +1,7 @@
 import { makeRecipeLink } from '@/components/recipes/makeRecipeLink.js';
-import { RecipeInstructionsDocument } from '@/lib/tiptap.js';
 import { hooks } from '@/stores/groceries/index.js';
 import { ConfirmedButton } from '@a-type/ui';
-import { Recipe } from '@gnocchi.biscuits/verdant';
+import { Recipe, RecipeInstructionsInit } from '@gnocchi.biscuits/verdant';
 import { Cross2Icon } from '@radix-ui/react-icons';
 import { Link } from '@verdant-web/react-router';
 import { useKeepAliveSlugQuery } from '../hooks.js';
@@ -15,9 +14,9 @@ export function RecipeNowPlayingLink({ recipe }: { recipe: Recipe }) {
 	useKeepAliveSlugQuery(slug);
 
 	const rawInstructions =
-		instructions.getSnapshot() as unknown as RecipeInstructionsDocument | null;
+		instructions.getSnapshot() as unknown as RecipeInstructionsInit | null;
 	const stepsLength =
-		rawInstructions?.content.filter((c) => c.type === 'step').length ?? 0;
+		rawInstructions?.content?.filter((c) => c.type === 'step').length ?? 0;
 
 	hooks.useWatch(session);
 	const completedSteps = session?.get('completedInstructions').length ?? 0;
@@ -45,7 +44,7 @@ export function RecipeNowPlayingLink({ recipe }: { recipe: Recipe }) {
 				confirmAction="Stop"
 				cancelAction="Keep Cooking"
 				onConfirm={stopCooking}
-				color="ghost"
+				emphasis="ghost"
 				skip={progress === 1}
 			>
 				<Cross2Icon />

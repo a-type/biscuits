@@ -79,7 +79,7 @@ export function WishlistOnboarding({
 					</div>
 				)}
 				<div className="row justify-start">
-					<Button color="primary" onClick={() => onAnswers(answers)}>
+					<Button emphasis="primary" onClick={() => onAnswers(answers)}>
 						Finish up
 					</Button>
 				</div>
@@ -107,7 +107,7 @@ export function WishlistOnboarding({
 				<Button type="button" onClick={handleSkip}>
 					Skip
 				</Button>
-				<Button color="primary" onClick={handleAnswer}>
+				<Button emphasis="primary" onClick={handleAnswer}>
 					Next
 				</Button>
 			</div>

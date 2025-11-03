@@ -103,8 +103,8 @@ function PersonRelationshipItem({
 			)}
 		>
 			<Button
-				size="icon"
-				color="ghostDestructive"
+				color="attention"
+				emphasis="ghost"
 				onClick={remove}
 				className="grid-area-[remove]"
 			>
@@ -122,7 +122,7 @@ function PersonRelationshipItem({
 				onChange={setOtherPersonLabel}
 				className="grid-area-[type]"
 			/>
-			<Button asChild size="icon" color="ghost" className="grid-area-[arrow]">
+			<Button asChild emphasis="ghost" className="grid-area-[arrow]">
 				<Link to={`/people/${otherPersonId}`}>
 					<Icon name="arrowRight" />
 				</Link>

@@ -18,7 +18,7 @@ export function AddListButton({
 
 	return (
 		<Button
-			color="primary"
+			emphasis="primary"
 			onClick={async () => {
 				if (hasLists) {
 					const list = await client.lists.put({

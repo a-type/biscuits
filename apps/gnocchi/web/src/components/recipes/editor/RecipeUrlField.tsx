@@ -36,14 +36,14 @@ export function RecipeUrlField({ recipe }: RecipeUrlFieldProps) {
 				autoSelect
 			/>
 			{isLoggedIn ? (
-				<Button color="primary" onClick={scan} disabled={!url || scanning}>
+				<Button emphasis="primary" onClick={scan} disabled={!url || scanning}>
 					<Icon name="scan" style={{ width: 15, height: 15 }} />
 					<span className="ml-2">Scan</span>
 				</Button>
 			) : (
 				<Dialog>
 					<Dialog.Trigger asChild>
-						<Button color="primary">
+						<Button emphasis="primary">
 							<Icon name="scan" style={{ width: 15, height: 15 }} />
 							<span className="ml-2">Scan</span>
 						</Button>
@@ -56,7 +56,7 @@ export function RecipeUrlField({ recipe }: RecipeUrlFieldProps) {
 						</Dialog.Description>
 						<Dialog.Actions>
 							<Dialog.Close>Cancel</Dialog.Close>
-							<LoginButton color="primary" asChild returnTo="/">
+							<LoginButton emphasis="primary" asChild returnTo="/">
 								Get started
 							</LoginButton>
 						</Dialog.Actions>

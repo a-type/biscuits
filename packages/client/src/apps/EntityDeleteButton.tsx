@@ -23,7 +23,8 @@ export function EntityDeleteButton({
 
 	return (
 		<Button
-			color="destructive"
+			emphasis="primary"
+			color="attention"
 			{...rest}
 			onClick={(ev) => {
 				entity.deleteSelf();

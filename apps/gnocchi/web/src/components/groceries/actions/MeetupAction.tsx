@@ -12,7 +12,8 @@ export function MeetupAction({}: MeetupActionProps) {
 			{(location) => (
 				<ActionButton
 					size="small"
-					color={!!location ? 'accent' : 'default'}
+					color="accent"
+					emphasis={!!location ? 'light' : 'default'}
 					visible={hasPeers}
 				>
 					<Icon name="location" />

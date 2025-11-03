@@ -23,7 +23,7 @@ export function TaskListItem({ task }: TaskListItemProps) {
 				}}
 			/>
 			<Button
-				color="ghost"
+				emphasis="ghost"
 				className="rounded-none font-normal justify-between flex-1"
 				asChild
 			>

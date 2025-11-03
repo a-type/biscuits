@@ -12,7 +12,8 @@ export function ResetToServer({
 
 	return (
 		<ConfirmedButton
-			color="destructive"
+			emphasis="primary"
+			color="attention"
 			confirmText="This will reset your local data to the server's version."
 			onConfirm={() => {
 				clientDescriptor.__dangerous__resetLocal();

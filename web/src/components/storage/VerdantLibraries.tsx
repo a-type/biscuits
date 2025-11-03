@@ -112,7 +112,8 @@ function VerdantLibrary({
 					<ConfirmedButton
 						onConfirm={() => doReset({ variables: { appId: app.id, access } })}
 						size="small"
-						color="destructive"
+						emphasis="primary"
+						color="attention"
 						confirmText="When you reset server data for this app, it will be re-initialized by the next device to open the app."
 					>
 						Reset server data

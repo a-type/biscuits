@@ -65,8 +65,8 @@ export function TagManager({
 								/>
 								<div className="flex-1 text-md">{tag.get('name')}</div>
 								<Button
-									size="icon"
-									color="ghostDestructive"
+									color="attention"
+									emphasis="ghost"
 									onClick={() => deleteTag(tag.get('name'))}
 								>
 									<TrashIcon />
@@ -89,7 +89,7 @@ export function TagManager({
 							name="tagName"
 							label="New Tag Name"
 						/>
-						<Button type="submit" color="primary">
+						<Button type="submit" emphasis="primary">
 							Create
 						</Button>
 					</FormikForm>

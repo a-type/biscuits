@@ -22,7 +22,7 @@ export function RecipeSearchBar({
 				{...props}
 			/>
 			{!!value && (
-				<Button size="icon" color="ghost" onClick={() => setValue('')}>
+				<Button emphasis="ghost" onClick={() => setValue('')}>
 					<Cross2Icon />
 				</Button>
 			)}

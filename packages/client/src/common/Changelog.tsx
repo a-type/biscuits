@@ -71,9 +71,8 @@ export function ChangelogDisplay({
 			<DialogTrigger asChild className={className} data-new={hasNew}>
 				{children || (
 					<Button
-						color="ghost"
+						emphasis="ghost"
 						className={hasNew ? 'color-accent-dark bg-accent-wash' : undefined}
-						size="icon"
 					>
 						<Icon name="gift" />
 					</Button>

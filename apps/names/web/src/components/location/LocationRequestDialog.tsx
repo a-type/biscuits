@@ -81,7 +81,7 @@ export function LocationRequestDialog() {
 					</Dialog.Description>
 					<Dialog.Actions>
 						<Button onClick={() => setBeganDeny(true)}>Deny</Button>
-						<Button color="primary" onClick={allow}>
+						<Button emphasis="primary" onClick={allow}>
 							Grant access
 						</Button>
 					</Dialog.Actions>

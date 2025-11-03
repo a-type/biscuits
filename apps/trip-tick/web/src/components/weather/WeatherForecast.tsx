@@ -85,11 +85,15 @@ export function WeatherForecast({
 function DayForecast({ day }: { day: ResultOf<typeof forecastDay> }) {
 	const { date, high, low, willRain } = day;
 	const { toDisplay } = useTemperatureUnit();
-	const dateNumber = date.split('-').pop();
+	const dateParts = date.split('-');
+	const dateNumber = dateParts.pop();
+	const monthNumber = dateParts.pop()?.replace(/^0/, '');
 
 	return (
 		<div className="flex flex-col items-center gap-1 border border-1 border-solid border-black bg-white rounded-md text-xs py-1 px-4 relative">
-			<div className="font-bold text-sm">{dateNumber}</div>
+			<div className="font-bold text-xs">
+				{monthNumber}/{dateNumber}
+			</div>
 			{!!willRain && <Raindrop className="absolute top-1 right-1" />}
 			<div className="flex flex-col items-center">
 				<div

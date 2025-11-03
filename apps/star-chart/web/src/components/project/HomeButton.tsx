@@ -7,7 +7,7 @@ export interface HomeButtonProps {}
 export function HomeButton({}: HomeButtonProps) {
 	return (
 		<CanvasOverlayContent className="absolute z-100 top-2 left-2">
-			<Button asChild color="ghost">
+			<Button asChild emphasis="ghost">
 				<Link to="/">
 					<Icon name="arrowLeft" />
 					Home

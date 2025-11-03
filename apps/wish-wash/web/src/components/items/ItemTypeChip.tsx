@@ -12,10 +12,7 @@ export function ItemTypeChip({ item, className }: ItemTypeChipProps) {
 	const { type } = hooks.useWatch(item);
 
 	return (
-		<Chip
-			color="primary"
-			className={clsx(`theme-${typeThemes[type]} inline-flex`, className)}
-		>
+		<Chip color={typeThemes[type]} className={clsx(`inline-flex`, className)}>
 			<Icon name={typeIcons[type]} />
 			{type}
 		</Chip>

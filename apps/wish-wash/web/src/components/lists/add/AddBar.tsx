@@ -28,13 +28,14 @@ export function AddBar({ className, list }: AddBarProps) {
 	return (
 		<Box
 			gap="sm"
-			surface="primary"
+			surface
+			color="primary"
 			p="sm"
 			elevated="lg"
 			border
 			layout="center stretch"
 			asChild
-			className={clsx('rounded-full', className)}
+			className={clsx('rounded-full z-now-playing', className)}
 		>
 			<form
 				onSubmit={(ev) => {
@@ -54,7 +55,7 @@ export function AddBar({ className, list }: AddBarProps) {
 					value={value}
 					onValueChange={setValue}
 				/>
-				<Button color="primary">
+				<Button emphasis="primary">
 					<Icon name="plus" />
 				</Button>
 			</form>

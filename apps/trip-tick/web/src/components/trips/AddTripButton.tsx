@@ -19,7 +19,7 @@ export function AddTripButton({
 
 	return (
 		<Button
-			color="primary"
+			emphasis="primary"
 			onClick={async () => {
 				const trip = await client.trips.put({});
 				navigate(`/trips/${trip.get('id')}`);

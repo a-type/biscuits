@@ -66,12 +66,7 @@ function RecipePresenceLink({
 
 	return (
 		<div className="flex flex-row gap-2 items-center p-2 w-full max-w-full overflow-hidden border-default rounded-lg bg-white">
-			<Button
-				size="icon"
-				onClick={onDismiss}
-				color="ghost"
-				className="flex-0-0-auto"
-			>
+			<Button onClick={onDismiss} emphasis="ghost" className="flex-0-0-auto">
 				<Cross2Icon />
 			</Button>
 			<Link

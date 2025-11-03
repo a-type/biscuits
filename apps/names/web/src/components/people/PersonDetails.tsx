@@ -43,7 +43,7 @@ export function PersonDetails({ person, className }: PersonDetailsProps) {
 			<EditableText
 				value={name}
 				onValueChange={(value) => person.set('name', value)}
-				className="text-xl"
+				className="text-xl mr-auto"
 			/>
 			<PersonQuickActions person={person} />
 			<Box d="col" items="stretch" gap>
@@ -147,7 +147,7 @@ function Location({ person }: { person: Person }) {
 					/>
 					{geolocation.get('label') && <span>{geolocation.get('label')}</span>}
 				</Box>
-				<Button onClick={remove} color="ghostDestructive" size="icon">
+				<Button onClick={remove} color="attention" emphasis="ghost">
 					<Icon name="x" />
 				</Button>
 			</Box>
@@ -183,7 +183,8 @@ function PersonManage({ person }: { person: Person }) {
 			<EntityDeleteButton
 				redirectTo="/"
 				entity={person}
-				color="ghostDestructive"
+				color="attention"
+				emphasis="ghost"
 				entityName={person.get('name')}
 			/>
 		</Box>

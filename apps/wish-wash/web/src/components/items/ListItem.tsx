@@ -6,6 +6,7 @@ import { Item } from '@wish-wash.biscuits/verdant';
 import { CSSProperties, forwardRef } from 'react';
 import { useEditItem } from './hooks.js';
 import { ImageMarquee } from './ImageMarquee.jsx';
+import { ItemOldBadge } from './ItemOldBadge.jsx';
 import { ItemStar } from './ItemStar.jsx';
 import { ItemTypeChip } from './ItemTypeChip.jsx';
 import { SearchButton } from './SearchButton.jsx';
@@ -99,6 +100,7 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 								Bought: {new Date(lastPurchasedAt).toLocaleDateString()}
 							</Chip>
 						)}
+						<ItemOldBadge item={item} />
 					</Card.Content>
 				</Card.Main>
 				<ItemStar item={item} className="absolute right-1 top-1 z-1" />
@@ -107,7 +109,7 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 						{type === 'idea' ||
 							(type === 'link' && !link && <SearchButton item={item} />)}
 						{link && (
-							<Button asChild color="default" size="small">
+							<Button asChild emphasis="default" size="small">
 								<Link to={link} newTab>
 									<Icon name="link" /> View
 								</Link>
@@ -116,7 +118,7 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 						{type === 'link' && (
 							<Button
 								toggled={!!purchased}
-								color={purchased ? 'default' : 'primary'}
+								emphasis={purchased ? 'default' : 'primary'}
 								toggleMode="indicator"
 								onClick={() => {
 									item.set('purchasedCount', purchasedCount + 1);

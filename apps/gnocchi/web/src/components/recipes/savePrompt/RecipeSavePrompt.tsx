@@ -121,7 +121,7 @@ export function RecipeSavePrompt({}: RecipeSavePromptProps) {
 					<DialogClose asChild>
 						<Button onClick={cancelOnboarding}>Cancel</Button>
 					</DialogClose>
-					<Button color="primary" onClick={save} loading={loading}>
+					<Button emphasis="primary" onClick={save} loading={loading}>
 						{isGnocchi ? 'Save it!' : 'Scan it!'}
 					</Button>
 				</DialogActions>

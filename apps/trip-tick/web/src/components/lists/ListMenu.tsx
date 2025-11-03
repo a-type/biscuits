@@ -19,7 +19,7 @@ export function ListMenu({ list }: { list: List }) {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
-				<Button size="icon" color="ghost">
+				<Button emphasis="ghost">
 					<Icon name="dots" />
 				</Button>
 			</DropdownMenuTrigger>
@@ -30,7 +30,7 @@ export function ListMenu({ list }: { list: List }) {
 					onClick={() => {
 						client.lists.delete(list.get('id'));
 						navigate('/');
-						toast((t) => (
+						toast((t: any) => (
 							<span className="flex gap-2 items-center">
 								<Icon name="check" />
 								<span>List deleted!</span>

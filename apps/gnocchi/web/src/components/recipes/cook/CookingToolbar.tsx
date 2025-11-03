@@ -62,8 +62,7 @@ export function CookingToolbar({ recipe, className }: CookingToolbarProps) {
 					</animated.span>
 				</AnimatedButton>
 				<Button
-					size="icon"
-					color="default"
+					emphasis="default"
 					className="shadow-lg [grid-area:top] justify-self-end mr-2"
 					onClick={() => {
 						// careful, this relies on page structure in RecipeOverview...

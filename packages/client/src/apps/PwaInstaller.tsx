@@ -1,5 +1,5 @@
 import { PWAInstallElement } from '@khmyznikov/pwa-install';
-import { HTMLAttributes, Ref, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { getDeferredPrompt, installState, triggerInstall } from '../install.js';
 import { useAppInfo, useMaybeAppId } from '../react.js';
 
@@ -37,12 +37,12 @@ PwaInstaller.show = () => {
 	else if (installState.installReady) triggerInstall();
 };
 
-declare module 'react/jsx-runtime' {
+declare module 'react' {
 	// eslint-disable-next-line @typescript-eslint/no-namespace
 	namespace JSX {
 		interface IntrinsicElements {
-			'pwa-install': HTMLAttributes<PWAInstallElement> & {
-				ref: Ref<PWAInstallElement>;
+			'pwa-install': React.HTMLAttributes<PWAInstallElement> & {
+				ref: React.Ref<PWAInstallElement>;
 			};
 		}
 	}

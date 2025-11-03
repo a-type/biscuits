@@ -93,7 +93,7 @@ export function AppDemo({ className }: AppDemoProps) {
 									{app.description}
 								</AP>
 								<Button
-									color="primary"
+									emphasis="primary"
 									className="justify-self-start sm:justify-self-end self-center"
 									asChild
 									style={{ gridArea: 'button' }}
@@ -121,8 +121,7 @@ export function AppDemo({ className }: AppDemoProps) {
 			>
 				{visibleApps.map((app) => (
 					<Button
-						color="ghost"
-						size="icon"
+						emphasis="ghost"
 						onClick={() => setAppId(app.id)}
 						key={app.id}
 						toggled={app.id === appId}

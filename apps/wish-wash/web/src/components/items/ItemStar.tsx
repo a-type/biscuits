@@ -12,8 +12,7 @@ export function ItemStar({ item, className }: ItemStarProps) {
 
 	return (
 		<Button
-			size="icon"
-			color="ghost"
+			emphasis="ghost"
 			toggled={prioritizedField.value}
 			toggleMode="state-only"
 			onClick={() => prioritizedField.setValue(!prioritizedField.value)}

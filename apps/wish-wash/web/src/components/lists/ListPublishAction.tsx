@@ -49,6 +49,7 @@ export function ListPublishAction({
 	if (!canPublish && !isPublished) {
 		return (
 			<ActionButton
+				emphasis="light"
 				color="accent"
 				{...rest}
 				className={clsx('self-start', className)}
@@ -64,6 +65,7 @@ export function ListPublishAction({
 		<Dialog>
 			<DialogTrigger asChild>
 				<ActionButton
+					emphasis="light"
 					color="accent"
 					{...rest}
 					className={clsx('self-start', className)}
@@ -119,7 +121,7 @@ function PublishList({ listId }: { listId: string }) {
 				<DialogClose asChild>
 					<Button>Cancel</Button>
 				</DialogClose>
-				<Button color="primary" onClick={publish}>
+				<Button emphasis="primary" onClick={publish}>
 					Publish
 				</Button>
 			</DialogActions>
@@ -145,7 +147,7 @@ function ManagePublishedList({ listId, url }: { listId: string; url: string }) {
 					Your list is currently public on the internet. You can unpublish it at
 					any time.
 				</P>
-				<Button asChild color="accent" className="self-start">
+				<Button asChild emphasis="light" color="accent" className="self-start">
 					<Link to={url} newTab>
 						View your list <Icon name="new_window" />
 					</Link>
@@ -160,7 +162,7 @@ function ManagePublishedList({ listId, url }: { listId: string; url: string }) {
 				<DomainRouteView resourceId={listId} />
 			</Box>
 			<DialogActions>
-				<Button color="ghostDestructive" onClick={unpublish}>
+				<Button color="attention" emphasis="ghost" onClick={unpublish}>
 					Unpublish
 				</Button>
 				<DialogClose asChild>

@@ -28,7 +28,7 @@ export function UpdatePrompt({}: UpdatePromptProps) {
 			</div>
 			<Button
 				loading={loading}
-				color="primary"
+				emphasis="primary"
 				onClick={async () => {
 					try {
 						setLoading(true);

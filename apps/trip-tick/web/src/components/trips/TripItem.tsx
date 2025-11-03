@@ -6,6 +6,7 @@ import { hooks } from '@/store.js';
 import {
 	Button,
 	CheckboxRoot,
+	clsx,
 	Icon,
 	LiveUpdateTextField,
 	NumberStepper,
@@ -155,7 +156,7 @@ function ChecklistItem({
 				<CheckboxRoot
 					checked={completed}
 					onCheckedChange={mainOnChecked}
-					className="w-32px h-32px rounded-full touch-none flex items-center justify-center color-black"
+					className="w-32px h-32px rounded-full touch-none flex items-center justify-center color-black palette-accent"
 				>
 					<Icon name="check" />
 				</CheckboxRoot>
@@ -179,14 +180,13 @@ function ChecklistItem({
 							/>
 						)}
 						{editing && onDelete && (
-							<Button size="icon" color="ghostDestructive" onClick={onDelete}>
+							<Button color="attention" emphasis="ghost" onClick={onDelete}>
 								<Icon name="x" />
 							</Button>
 						)}
 						{canEdit && (
 							<Button
-								size="icon"
-								color={editing ? 'default' : 'ghost'}
+								emphasis={editing ? 'default' : 'ghost'}
 								onClick={() => setEditing((v) => !v)}
 							>
 								<Icon name={editing ? 'check' : 'pencil'} />
@@ -194,7 +194,10 @@ function ChecklistItem({
 						)}
 					</div>
 					<SliderRoot
-						className="flex-1 pointer-events-none"
+						className={clsx(
+							'flex-1 pointer-events-none',
+							completed ? 'palette-accent' : 'palette-primary',
+						)}
 						value={[completedQuantity]}
 						min={0}
 						max={computedQuantity}
@@ -207,10 +210,7 @@ function ChecklistItem({
 						ref={barRef}
 					>
 						<SliderTrack className="pointer-events-none">
-							<SliderRange
-								className="transition-all pointer-events-none"
-								data-color={completed ? 'default' : 'primary'}
-							/>
+							<SliderRange className="transition-all pointer-events-none" />
 							{new Array(computedQuantity - 1).fill(0).map((_, i) => (
 								<div
 									key={i}
@@ -222,10 +222,9 @@ function ChecklistItem({
 							))}
 						</SliderTrack>
 						<SliderThumb
-							data-color={completed ? 'default' : 'primary'}
 							className={classNames(
 								'transition-all ring-1 w-8px rounded-sm pointer-events-initial',
-								completed && 'bg-accent ring-black ring-1 color-white',
+								completed && 'bg-main ring-black ring-1 color-white',
 								'flex items-center justify-center',
 								// completedQuantity === 0 && 'opacity-0',
 							)}

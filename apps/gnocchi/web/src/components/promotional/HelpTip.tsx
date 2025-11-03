@@ -10,7 +10,7 @@ export function HelpTip({ children }: HelpTipProps) {
 	return (
 		<Popover>
 			<PopoverTrigger asChild>
-				<Button color="ghost" size="icon">
+				<Button emphasis="ghost">
 					<QuestionMarkCircledIcon />
 				</Button>
 			</PopoverTrigger>

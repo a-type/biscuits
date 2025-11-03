@@ -7,10 +7,5 @@
 		"module": "esnext",
 		"types": ["./worker-configuration.d.ts"]
 	},
-	"include": [
-		"src/**/*.ts",
-		"src/**/*.tsx",
-		"src/**/*.mts",
-		"worker-configuration.d.ts"
-	]
+	"include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.mts"]
 }

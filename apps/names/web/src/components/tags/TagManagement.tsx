@@ -57,14 +57,14 @@ function TagManagementRow({ tag }: { tag: Tag }) {
 
 	return (
 		<Box key={tag.uid} className="w-full" gap justify="between" items="center">
-			<Box gap>
+			<Box gap items="center">
 				<ColorPicker
 					value={(color ?? 'leek') as ThemeName}
 					onChange={(v) => tag.set('color', v)}
 				/>
 				<TagDisplay name={tag.get('name')} />
 			</Box>
-			<Button color="ghostDestructive" onClick={deleteSelf} size="icon">
+			<Button color="attention" emphasis="ghost" onClick={deleteSelf}>
 				<Icon name="trash" />
 			</Button>
 		</Box>

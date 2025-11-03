@@ -114,7 +114,8 @@ function CategoryManagerItem({
 			<DragHandleDots2Icon {...handleProps} style={{ touchAction: 'none' }} />
 			<div className="flex-grow-1">{category.get('name')}</div>
 			<Button
-				color="ghostDestructive"
+				color="attention"
+				emphasis="ghost"
 				onClick={() => {
 					const ok = confirm('Delete category ' + category.get('name') + '?');
 					if (ok) {

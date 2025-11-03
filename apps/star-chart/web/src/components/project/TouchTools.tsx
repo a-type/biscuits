@@ -32,7 +32,7 @@ export function TouchTools({ className }: TouchToolsProps) {
 		>
 			<Button
 				size="small"
-				color="ghost"
+				emphasis="ghost"
 				onClick={() => (canvas.tools.dragLocked = !dragLocked)}
 				aria-pressed={dragLocked}
 				className={clsx(
@@ -48,7 +48,7 @@ export function TouchTools({ className }: TouchToolsProps) {
 			{isTouchscreen && (
 				<Button
 					size="small"
-					color="ghost"
+					emphasis="ghost"
 					onClick={() => (canvas.tools.boxSelect = !boxSelect)}
 					aria-pressed={boxSelect}
 					className={clsx(

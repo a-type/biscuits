@@ -26,7 +26,7 @@ export function CameraControls({}: CameraControlsProps) {
 				min={viewport.config.zoomLimits.min}
 				max={viewport.config.zoomLimits.max}
 				step={0.01}
-				color="default"
+				emphasis="default"
 				className="pointer-events-auto w-100px max-w-80dvw cursor-pointer"
 			/>
 		</CanvasOverlayContent>

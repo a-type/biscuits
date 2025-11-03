@@ -93,7 +93,7 @@ export const RecipeListItem = memo(function RecipeListItem({
 				<CardActions>
 					<RecipePinToggle recipe={recipe} />
 
-					<AddToListButton recipe={recipe} color="ghost" size="icon">
+					<AddToListButton recipe={recipe} emphasis="ghost">
 						<Icon name="add_to_list" />
 					</AddToListButton>
 				</CardActions>
@@ -151,7 +151,7 @@ export function RecipeListItemMenu({
 			modal={false}
 		>
 			<DropdownMenuTrigger asChild>
-				<Button size="icon-small" color="ghost" {...rest}>
+				<Button size="small" emphasis="ghost" {...rest}>
 					<Icon name="dots" className="w-20px h-20px" />
 				</Button>
 			</DropdownMenuTrigger>
@@ -192,7 +192,7 @@ export function RecipeListItemMenu({
 					</DropdownMenuItemRightSlot>
 				</DropdownMenuItem>
 				<DropdownMenuItem
-					color="destructive"
+					color="attention"
 					onSelect={() => {
 						deleteRecipe(recipe.get('id'));
 						setMenuOpen(false);

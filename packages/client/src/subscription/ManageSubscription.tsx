@@ -75,14 +75,13 @@ export function ManageSubscription({
 							data.subscriptionStatus === 'active' ? 'accent'
 							: data.subscriptionStatus === 'trialing' ?
 								'primary'
-							:	'neutral'
+							:	'gray'
 						}
 						className="pl-6"
 					>
 						{data.subscriptionStatus}
 						<Button
-							size="icon"
-							color="ghost"
+							emphasis="ghost"
 							onClick={() => {
 								refetchStatus({ fetchPolicy: 'network-only' });
 							}}

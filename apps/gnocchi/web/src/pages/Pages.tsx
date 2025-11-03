@@ -20,7 +20,7 @@ import {
 	updateState,
 } from '@biscuits/client/apps';
 import { makeRoutes, Outlet, Router } from '@verdant-web/react-router';
-import { lazy, Suspense, useCallback } from 'react';
+import { Suspense, useCallback } from 'react';
 import { lazyWithPreload } from 'react-lazy-with-preload';
 import { NotFoundPage } from './NotFoundPage.jsx';
 import { GroceriesPage } from './groceries/GroceriesPage.js';
@@ -46,10 +46,6 @@ const PantrySearchPage = lazyWithPreload(
 const RecipesPage = lazyWithPreload(() => import('./recipe/RecipesPage.jsx'));
 
 const routes = makeRoutes([
-	{
-		path: '/dashboard',
-		component: lazy(() => import('./DashboardPage.jsx')),
-	},
 	{
 		path: '/',
 		component: LayoutWithNavBar,

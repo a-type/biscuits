@@ -82,6 +82,7 @@ export function PantryListItem({
 				<CardMain compact asChild>
 					<OpenFoodDetailButton
 						foodName={food}
+						emphasis="unstyled"
 						className="font-normal p-0 border-none shadow-none rounded-none items-start text-sm"
 					>
 						<CardTitle className={classNames('text-wrap', 'text-md')}>
@@ -124,25 +125,25 @@ export function PantryListItem({
 				</CardMain>
 				<CardFooter className={classNames(showLabels ? 'p-0' : '')}>
 					<CardActions
-						className={classNames('flex-wrap', {
-							'rounded-none p-1': showLabels,
-						})}
+						className={classNames(
+							'flex-wrap',
+							{
+								'rounded-none p-1': showLabels,
+							},
+							'border-b-none border-l-none border-r-none',
+						)}
 					>
 						<Suspense
 							fallback={
-								<Button
-									size="icon"
-									color="default"
-									className="w-[32px] h-[32px]"
-								/>
+								<Button emphasis="default" className="w-[32px] h-[32px]" />
 							}
 						>
 							<QuickAddButton food={item} showLabel={showLabels} />
 						</Suspense>
 						{snoozable && expiresAt && (
 							<Button
-								size={showLabels ? 'small' : 'icon'}
-								color="ghost"
+								size={showLabels ? 'small' : 'default'}
+								emphasis="ghost"
 								onClick={snooze}
 							>
 								<Icon name="clock" />
@@ -151,8 +152,9 @@ export function PantryListItem({
 						)}
 						{inInventory && (
 							<Button
-								size={showLabels ? 'small' : 'icon'}
-								color="ghostDestructive"
+								size={showLabels ? 'small' : 'default'}
+								color="attention"
+								emphasis="ghost"
 								onClick={clear}
 							>
 								<TrashIcon />
@@ -183,7 +185,7 @@ export const PantryListItemSkeleton = ({
 			</CardMain>
 			<CardFooter>
 				<CardActions>
-					<Button size={showLabels ? 'small' : 'icon'} color="default">
+					<Button size={showLabels ? 'small' : 'default'} emphasis="default">
 						<Icon name="plus" />
 						{showLabels && <TextSkeleton maxLength={8} />}
 					</Button>
@@ -225,8 +227,8 @@ const QuickAddButton = ({
 
 	return (
 		<Button
-			size={showLabel ? 'small' : 'icon'}
-			color="default"
+			size={showLabel ? 'small' : 'default'}
+			emphasis="default"
 			onClick={repurchaseItem}
 			disabled={isOnList}
 		>
@@ -253,7 +255,11 @@ const FreezeButton = ({
 		return (
 			<Dialog>
 				<DialogTrigger asChild>
-					<Button size={showLabel ? 'small' : 'icon'} color="accent">
+					<Button
+						size={showLabel ? 'small' : 'default'}
+						emphasis="light"
+						color="accent"
+					>
 						<Icon name="snowflake" />
 						{showLabel && <span className="font-normal">Frozen</span>}
 					</Button>
@@ -268,8 +274,9 @@ const FreezeButton = ({
 	return (
 		<Tooltip content="Mark as frozen" disabled={showLabel}>
 			<Button
-				size={showLabel ? 'small' : 'icon'}
-				color={frozenAt ? 'accent' : 'ghost'}
+				size={showLabel ? 'small' : 'default'}
+				color="accent"
+				emphasis={frozenAt ? 'light' : 'ghost'}
 				onClick={() => {
 					food.update({
 						frozenAt: Date.now(),
@@ -306,7 +313,7 @@ function FrozenTimeAdjuster({ food: item }: { food: Food }) {
 				}}
 			/>
 			<DialogActions>
-				<Button color="destructive" onClick={unfreeze}>
+				<Button emphasis="primary" color="attention" onClick={unfreeze}>
 					Unfreeze
 				</Button>
 				<DialogClose asChild>

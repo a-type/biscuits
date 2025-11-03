@@ -22,8 +22,7 @@ export function ListPicker({ className, value, ...props }: ListPickerProps) {
 			>
 				<ListsPickerLists value={value} />
 				<CreateListButton
-					size="icon"
-					color="default"
+					emphasis="default"
 					// className="sticky right-2 bottom-2 ml-auto"
 				>
 					<Icon name="plus" />
@@ -73,7 +72,8 @@ function ListPickerListButton({
 	return (
 		<Button
 			size="small"
-			color={selected ? 'accent' : 'ghost'}
+			color="accent"
+			emphasis={selected ? 'light' : 'ghost'}
 			asChild
 			// className={clsx(selected && 'sticky left-2 right-12 z-1')}
 			ref={ref}

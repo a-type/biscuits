@@ -31,7 +31,7 @@ export function ProjectPage({}: ProjectPageProps) {
 	return (
 		<div className="w-full min-h-100dvh flex flex-col md:h-100dvh">
 			<div className="row py-1 sticky z-100 bg-wash top-0">
-				<Button asChild color="ghost" size="small">
+				<Button asChild emphasis="ghost" size="small">
 					<Link to="/">
 						<Icon name="arrowLeft" />
 						Projects

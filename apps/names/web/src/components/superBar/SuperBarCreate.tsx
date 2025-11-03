@@ -8,9 +8,9 @@ export function SuperBarCreate({}: SuperBarCreateProps) {
 
 	return (
 		<CollapsibleSimple open={!!inputValue} className="w-full">
-			<Box d="col" gap="xs" surface="primary" className="rounded-none">
+			<Box d="col" gap="xs" surface color="primary" className="rounded-none">
 				<Button
-					color="ghost"
+					emphasis="ghost"
 					className="w-full justify-center text-wrap rounded-none justify-between gap-sm [--focus:var(--color-primary-dark)]"
 					loading={loading}
 					onClick={() => {

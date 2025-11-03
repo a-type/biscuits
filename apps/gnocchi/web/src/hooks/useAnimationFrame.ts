@@ -5,11 +5,11 @@ export function useAnimationFrame<Context>(
 	callback: (deltaTime: number, context: Context) => void,
 	initialContext?: Context,
 ) {
-	const requestRef = useRef<number>();
-	const previousTimeRef = useRef<number>();
+	const requestRef = useRef<number>(null);
+	const previousTimeRef = useRef<number>(null);
 	const contextRef = useRef<Context>(initialContext!);
 	const animate = useStableCallback((time: number) => {
-		if (previousTimeRef.current !== undefined) {
+		if (previousTimeRef.current !== null) {
 			const deltaTime = time - previousTimeRef.current;
 			callback(deltaTime, contextRef.current);
 		}

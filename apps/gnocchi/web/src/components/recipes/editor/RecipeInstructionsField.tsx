@@ -57,8 +57,7 @@ function Toolbar({ editor }: { editor: Editor }) {
 				className="rounded-sm"
 			>
 				<Button
-					size="icon"
-					color={editor.isActive('bold') ? 'default' : 'ghost'}
+					emphasis={editor.isActive('bold') ? 'default' : 'ghost'}
 					toggleMode="state-only"
 					onClick={() => {
 						editor.chain().focus().toggleMark('bold').run();
@@ -69,8 +68,7 @@ function Toolbar({ editor }: { editor: Editor }) {
 					<Icon name="bold" />
 				</Button>
 				<Button
-					size="icon"
-					color={editor.isActive('italic') ? 'default' : 'ghost'}
+					emphasis={editor.isActive('italic') ? 'default' : 'ghost'}
 					toggleMode="state-only"
 					onClick={() => {
 						editor.chain().focus().toggleMark('italic').run();
@@ -81,8 +79,7 @@ function Toolbar({ editor }: { editor: Editor }) {
 					<Icon name="italic" />
 				</Button>
 				<Button
-					size="icon"
-					color={editor.isActive('sectionTitle') ? 'default' : 'ghost'}
+					emphasis={editor.isActive('sectionTitle') ? 'default' : 'ghost'}
 					toggleMode="state-only"
 					onClick={() => {
 						editor.chain().focus().toggleSectionTitle().run();
@@ -115,7 +112,7 @@ function ToolbarEmbedButton({ editor }: { editor: Editor }) {
 	return (
 		<IncludeSubRecipe
 			onSelect={embedToCurrentStep}
-			color="ghost"
+			emphasis="ghost"
 			size="small"
 			className="[font-size:12px] gap-sm"
 			disabled={
