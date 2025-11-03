@@ -30,20 +30,10 @@ function PwaInstallerInner() {
 		pwaInstall.disableChrome = true;
 	}, [app]);
 
+	// @ts-ignore
 	return <pwa-install ref={ref} />;
 }
 PwaInstaller.show = () => {
 	if (singleton) singleton.showDialog();
 	else if (installState.installReady) triggerInstall();
 };
-
-declare module 'react' {
-	// eslint-disable-next-line @typescript-eslint/no-namespace
-	namespace JSX {
-		interface IntrinsicElements {
-			'pwa-install': React.HTMLAttributes<PWAInstallElement> & {
-				ref: React.Ref<PWAInstallElement>;
-			};
-		}
-	}
-}

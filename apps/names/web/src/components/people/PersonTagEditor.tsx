@@ -9,7 +9,6 @@ import {
 	Icon,
 	IconName,
 	PaletteName,
-	ThemeName,
 } from '@a-type/ui';
 import { RemovableTag, TagCreateForm } from '@biscuits/client';
 import { Person } from '@names.biscuits/verdant';
@@ -35,7 +34,7 @@ export function PersonTagEditor({ person, className }: PersonTagEditorProps) {
 	const client = hooks.useClient();
 	const createTag = async (init: {
 		name: string;
-		color?: ThemeName;
+		color?: PaletteName;
 		icon?: IconName;
 	}) => {
 		const tag = await client.tags.put({

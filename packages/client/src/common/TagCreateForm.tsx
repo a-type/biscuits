@@ -3,19 +3,19 @@ import {
 	ColorPicker,
 	FormikForm,
 	IconName,
+	PaletteName,
 	SubmitButton,
 	TextField,
-	ThemeName,
 } from '@a-type/ui';
 
 export interface TagCreateFormProps {
 	onCreate: (init: {
 		name: string;
-		color?: ThemeName;
+		color?: PaletteName;
 		icon?: IconName;
 	}) => void | Promise<void>;
 	className?: string;
-	defaultColor?: ThemeName;
+	defaultColor?: PaletteName;
 }
 
 export function TagCreateForm({

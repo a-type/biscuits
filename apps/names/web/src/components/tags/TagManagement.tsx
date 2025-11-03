@@ -5,8 +5,8 @@ import {
 	ColorPicker,
 	Dialog,
 	Icon,
+	PaletteName,
 	SlotDiv,
-	ThemeName,
 } from '@a-type/ui';
 import { Tag } from '@names.biscuits/verdant';
 import { ReactNode, Suspense } from 'react';
@@ -59,7 +59,7 @@ function TagManagementRow({ tag }: { tag: Tag }) {
 		<Box key={tag.uid} className="w-full" gap justify="between" items="center">
 			<Box gap items="center">
 				<ColorPicker
-					value={(color ?? 'leek') as ThemeName}
+					value={(color ?? 'leek') as PaletteName}
 					onChange={(v) => tag.set('color', v)}
 				/>
 				<TagDisplay name={tag.get('name')} />

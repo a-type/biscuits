@@ -1,6 +1,6 @@
 import { RecipeTagMenuWrapper } from '@/components/recipes/tags/RecipeTagMenuWrapper.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { IconName, ThemeName } from '@a-type/ui';
+import { IconName, PaletteName } from '@a-type/ui';
 import { TagToggle } from '@biscuits/client';
 import classNames from 'classnames';
 
@@ -54,7 +54,7 @@ export function RecipeTagsList({
 						toggled={!!selectedValues?.includes(tag.get('name'))}
 						onToggle={() => onSelect(tag.get('name'))}
 						className={buttonClassName}
-						color={tag.get('color') as ThemeName | undefined}
+						color={tag.get('color') as PaletteName | undefined}
 						icon={tag.get('icon') as IconName | undefined}
 						name={tag.get('name')}
 					/>

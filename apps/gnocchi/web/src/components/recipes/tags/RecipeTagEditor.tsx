@@ -8,7 +8,7 @@ import {
 	DialogClose,
 	DialogContent,
 	DialogTitle,
-	ThemeName,
+	PaletteName,
 } from '@a-type/ui';
 import { useSnapshot } from 'valtio';
 
@@ -36,7 +36,7 @@ export function RecipeTagEditor() {
 					<div>Color:</div>
 					<ColorPicker
 						onChange={(color) => tag?.set('color', color)}
-						value={tag?.get('color') as ThemeName | null}
+						value={tag?.get('color') as PaletteName | null}
 					/>
 				</div>
 

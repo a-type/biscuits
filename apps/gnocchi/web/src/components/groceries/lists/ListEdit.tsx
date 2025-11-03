@@ -9,7 +9,7 @@ import {
 	DialogTrigger,
 	H2,
 	LiveUpdateTextField,
-	ThemeName,
+	PaletteName,
 } from '@a-type/ui';
 import { GearIcon } from '@radix-ui/react-icons';
 import { useState } from 'react';
@@ -46,7 +46,7 @@ export function ListEdit({ listId }: ListEditProps) {
 							required
 						/>
 						<ColorPicker
-							value={list.get('color') as ThemeName}
+							value={list.get('color') as PaletteName}
 							onChange={(color) => list.set('color', color)}
 						/>
 					</div>

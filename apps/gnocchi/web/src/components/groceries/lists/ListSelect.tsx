@@ -4,6 +4,7 @@ import {
 	DialogContent,
 	FormikForm,
 	Icon,
+	PaletteName,
 	Select,
 	SelectContent,
 	SelectItem,
@@ -11,14 +12,13 @@ import {
 	SelectTrigger,
 	SubmitButton,
 	TextField,
-	ThemeName,
 	withClassName,
 } from '@a-type/ui';
 import { List } from '@gnocchi.biscuits/verdant';
 import { useState } from 'react';
 
-function getRandomColor(): ThemeName {
-	const colors: ThemeName[] = [
+function getRandomColor(): PaletteName {
+	const colors: PaletteName[] = [
 		'lemon',
 		'blueberry',
 		'tomato',

@@ -1,5 +1,5 @@
 import { hooks } from '@/hooks.js';
-import { Box, IconName, ThemeName } from '@a-type/ui';
+import { Box, IconName, PaletteName } from '@a-type/ui';
 import { TagToggle } from '@biscuits/client';
 
 export interface TagFilterProps {
@@ -19,7 +19,7 @@ export function TagFilter({ value, onToggle, className }: TagFilterProps) {
 					name={tag.get('name')}
 					onToggle={() => onToggle(tag.get('name'))}
 					toggled={value.includes(tag.get('name'))}
-					color={tag.get('color') as ThemeName | undefined}
+					color={tag.get('color') as PaletteName | undefined}
 					icon={tag.get('icon') as IconName | undefined}
 				/>
 			))}

@@ -11,8 +11,8 @@ import {
 	DialogTrigger,
 	Divider,
 	FormikForm,
+	PaletteName,
 	TextField,
-	ThemeName,
 } from '@a-type/ui';
 import { TrashIcon } from '@radix-ui/react-icons';
 import classNames from 'classnames';
@@ -61,7 +61,7 @@ export function TagManager({
 							>
 								<ColorPicker
 									onChange={(color) => tag.set('color', color)}
-									value={tag.get('color') as ThemeName}
+									value={tag.get('color') as PaletteName}
 								/>
 								<div className="flex-1 text-md">{tag.get('name')}</div>
 								<Button
