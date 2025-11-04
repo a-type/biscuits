@@ -53,7 +53,7 @@ function ListPageContent({ list }: { list: List }) {
 				gap
 				justify="between"
 				items="center"
-				className="sticky py-sm top-0 z-[10000] bg-wash w-full max-w-800px"
+				className="sticky py-sm top-0 z-nav bg-wash w-full max-w-800px"
 			>
 				<Button asChild emphasis="ghost">
 					<Link to="/">

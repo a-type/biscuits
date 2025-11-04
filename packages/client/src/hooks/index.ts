@@ -11,7 +11,6 @@ export * from './useOnVisible.js';
 export * from './usePageTitle.js';
 export * from './useStableCallback.js';
 export * from './useStorage.js';
-export * from './useTitleBarColor.js';
 export * from './useUserInfo.js';
 export * from './useUserPreference.js';
 export * from './useWasLoggedIn.js';
