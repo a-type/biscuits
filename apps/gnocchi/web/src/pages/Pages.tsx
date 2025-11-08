@@ -3,7 +3,6 @@ import { FoodDetailDialog } from '@/components/foods/FoodDetailDialog.jsx';
 import { BugButton } from '@/components/menu/BugButton.jsx';
 import { LinkButton } from '@/components/nav/Link.jsx';
 import { NavBar } from '@/components/nav/NavBar.jsx';
-import { TopLoader } from '@/components/nav/TopLoader.jsx';
 import { SubscriptionPromotionContent } from '@/components/promotional/SubscriptionPromotionContent.jsx';
 import { RecipeTagEditor } from '@/components/recipes/tags/RecipeTagEditor.jsx';
 import {
@@ -195,7 +194,6 @@ export function Pages() {
 		<ErrorBoundary fallback={(props) => <ErrorFallback {...props} />}>
 			<Suspense fallback={<GlobalLoader />}>
 				<Router routes={routes} onNavigate={handleNavigate}>
-					<TopLoader />
 					<Outlet />
 					<Essentials />
 					<RecipeTagEditor />

@@ -3,7 +3,7 @@ import { GroceryListAdd } from '@/components/groceries/addBar/GroceryListAdd.jsx
 import GroceryList from '@/components/groceries/GroceryList.jsx';
 import { useListThemeClass } from '@/components/groceries/lists/hooks.js';
 import { hooks } from '@/stores/groceries/index.js';
-import { PageContent, PageFixedArea, PageRoot } from '@a-type/ui';
+import { PageContent, PageFixedArea } from '@a-type/ui';
 import { useNavigate } from '@verdant-web/react-router';
 import classNames from 'classnames';
 import { ReactNode, Suspense, useEffect } from 'react';
@@ -62,7 +62,7 @@ export function ThemedPageContent({
 	className?: string;
 }) {
 	return (
-		<Suspense fallback={<PageRoot>{children}</PageRoot>}>
+		<Suspense fallback={<PageContent>{children}</PageContent>}>
 			<ThemedPageContentInner listId={listId} className={className}>
 				{children}
 			</ThemedPageContentInner>
@@ -86,7 +86,11 @@ function ThemedPageContentInner({
 			<PageContent
 				gap="none"
 				p="none"
-				className={classNames('md:mt-lg', className, theme)}
+				className={classNames(
+					'md:mt-lg lt-md:(overflow-y-auto max-h-full)',
+					className,
+					theme,
+				)}
 				id="page-content"
 			>
 				{children}
