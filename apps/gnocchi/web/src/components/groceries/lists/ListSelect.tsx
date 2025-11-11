@@ -63,7 +63,18 @@ export function ListSelect({
 			>
 				<SelectTrigger className={className} size="small" />
 				<SelectContent inDialog={inDialog}>
-					{includeAll && <SelectItem value="undefined">All lists</SelectItem>}
+					{includeAll && (
+						<SelectItem value="undefined">
+							<div className="relative inline">
+								<Icon name="tag" className="relative -left-3px" />
+								<Icon
+									name="tag"
+									className="absolute top-0 left-1px fill-white"
+								/>
+							</div>{' '}
+							All lists
+						</SelectItem>
+					)}
 					<SelectItem value={'null'}>
 						<div className="flex flex-row gap-2 items-center">
 							<FilledIcon name="tag" className="palette-lemon" />

@@ -38,7 +38,8 @@ export function GroceriesPage() {
 		[navigate],
 	);
 	const { listId: listIdParam } = useParams();
-	const listId = listIdParam === 'null' ? null : listIdParam;
+	const listId =
+		listIdParam === 'null' || listIdParam === 'all' ? null : listIdParam;
 
 	const start = firstTimeOnboarding.useBegin();
 	useEffect(() => {
