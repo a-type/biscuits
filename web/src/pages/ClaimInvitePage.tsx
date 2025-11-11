@@ -8,6 +8,7 @@ import {
 	toast,
 	withClassName,
 } from '@a-type/ui';
+import { BiscuitsError } from '@biscuits/error';
 import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
 import { useNavigate, useParams } from '@verdant-web/react-router';
 import { useEffect } from 'react';
@@ -69,6 +70,13 @@ function ClaimInvitePage() {
 				duration: 15000,
 			});
 			navigate('/settings');
+		} else {
+			const biscuitsError = BiscuitsError.readFirstGraphQLError(result.errors);
+			if (biscuitsError?.code === BiscuitsError.Code.NotFound) {
+				toast.error(
+					'This invitation code is invalid or has already been used. Ask them to send another one!',
+				);
+			}
 		}
 	};
 
@@ -77,8 +85,8 @@ function ClaimInvitePage() {
 	}
 
 	return (
-		<PageRoot>
-			<PageContent>
+		<PageRoot className="flex-1">
+			<PageContent className="h-full flex flex-col justify-between gap-lg">
 				<div className="flex flex-col items-start gap-6">
 					<H1>
 						Join {infoResult.data?.planInvitation?.inviterName ?? 'someone'}’s

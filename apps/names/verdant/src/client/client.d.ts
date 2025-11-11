@@ -1,8 +1,7 @@
 /** Generated types for Verdant client */
 import type {
   Client as BaseClient,
-  ClientDescriptor as BaseClientDescriptor,
-  ClientDescriptorOptions as BaseClientDescriptorOptions,
+  ClientInitOptions as BaseClientInitOptions,
   CollectionQueries,
   StorageSchema,
   Migration,
@@ -73,6 +72,12 @@ export class Client<Presence = any, Profile = any> {
   queries: BaseClient<Presence, Profile>["queries"];
 
   /**
+   * Get the local replica ID for this client instance.
+   * Not generally useful for people besides me.
+   */
+  getReplicaId: BaseClient<Presence, Profile>["getReplicaId"];
+
+  /**
    * Deletes all local data. If the client is connected to sync,
    * this will cause the client to re-sync all data from the server.
    * Use this very carefully, and only as a last resort.
@@ -86,7 +91,7 @@ export class Client<Presence = any, Profile = any> {
    * Export all data, then re-import it. This might resolve
    * some issues with the local database, but it should
    * only be done as a second-to-last resort. The last resort
-   * would be __dangerous__resetLocal on ClientDescriptor, which
+   * would be __dangerous__resetLocal on Client, which
    * clears all local data.
    *
    * Unlike __dangerous__resetLocal, this method allows local-only
@@ -101,11 +106,13 @@ export class Client<Presence = any, Profile = any> {
    * during normal operation, so you probably don't need this.
    */
   __manualRebase: () => Promise<void>;
+
+  constructor(init: ClientInitOptions<Presence, Profile>);
 }
 
-export interface ClientDescriptorOptions<Presence = any, Profile = any>
+export interface ClientInitOptions<Presence = any, Profile = any>
   extends Omit<
-    BaseClientDescriptorOptions<Presence, Profile>,
+    BaseClientInitOptions<Presence, Profile>,
     "schema" | "migrations" | "oldSchemas"
   > {
   /** WARNING: overriding the schema is dangerous and almost definitely not what you want. */
@@ -114,23 +121,6 @@ export interface ClientDescriptorOptions<Presence = any, Profile = any>
   oldSchemas?: StorageSchema[];
   /** WARNING: overriding the migrations is dangerous and almost definitely not what you want. */
   migrations?: Migration[];
-}
-
-export class ClientDescriptor<Presence = any, Profile = any> {
-  constructor(init: ClientDescriptorOptions<Presence, Profile>);
-  open: () => Promise<Client<Presence, Profile>>;
-  close: () => Promise<void>;
-  readonly current: Client<Presence, Profile> | null;
-  readonly readyPromise: Promise<Client<Presence, Profile>>;
-  readonly schema: StorageSchema;
-  readonly namespace: string;
-  /**
-   * Resets all local data for this client, including the schema and migrations.
-   * If the client is not connected to sync, this causes the irretrievable loss of all data.
-   * If the client is connected to sync, this will cause the client to re-sync all data from the server.
-   * Use this very carefully, and only as a last resort.
-   */
-  __dangerous__resetLocal: () => Promise<void>;
 }
 
 import {

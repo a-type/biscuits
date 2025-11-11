@@ -15,6 +15,9 @@ export default defineConfig({
 			html, body, #root {
 				display: flex;
 				flex-direction: column;
+				flex: 1;
+				min-height: 100%;
+				margin: 0;
 			}
 
 			#root {

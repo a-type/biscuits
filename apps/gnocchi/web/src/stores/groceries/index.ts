@@ -6,7 +6,6 @@ import { graphqlClient } from '@biscuits/graphql';
 import { depluralize, parseIngredient } from '@gnocchi.biscuits/conversion';
 import {
 	Client,
-	ClientDescriptor,
 	createHooks,
 	Food,
 	Item,
@@ -440,7 +439,6 @@ export const hooks = createHooks<Presence, Profile>({
 					url,
 					client,
 				);
-				// FIXME: verdant will have a fix for this soon
 				const copyWithoutUndefined = Object.entries(scanned)
 					.filter(([_, v]) => v !== undefined)
 					.reduce((acc, [k, v]) => {
@@ -636,8 +634,8 @@ export const hooks = createHooks<Presence, Profile>({
 const DEBUG = localStorage.getItem('DEBUG') === 'true';
 const NO_SYNC = window.location.search.includes('nosync');
 const DASHBOARD_MODE = window.location.search.includes('dashboard');
-export function createClientDescriptor(options: { namespace: string }) {
-	return new ClientDescriptor({
+export function createClient(options: { namespace: string }) {
+	return new Client({
 		sync: NO_SYNC
 			? undefined
 			: getVerdantSync({
@@ -654,7 +652,7 @@ export function createClientDescriptor(options: { namespace: string }) {
 		namespace: options.namespace,
 		log:
 			import.meta.env.DEV || DEBUG
-				? (level, ...args: any[]) => {
+				? (level: string, ...args: any[]) => {
 						if (level === 'debug') {
 							if (DEBUG) {
 								console.debug('🌿', ...args);
@@ -672,18 +670,14 @@ export function createClientDescriptor(options: { namespace: string }) {
 	});
 }
 
-export const groceriesDescriptor = createClientDescriptor({
+export const verdant = createClient({
 	namespace: 'groceries',
 });
-(window as any).groceriesDescriptor = groceriesDescriptor;
-const _groceries = groceriesDescriptor.open();
+(window as any).groceries = verdant;
 
 (window as any).stats = async () => {
-	(await _groceries).stats().then(console.info);
+	(await verdant).stats().then(console.info);
 };
-_groceries.then((g) => {
-	(window as any).groceries = g;
-});
 
 export async function addItems(
 	client: Client,
@@ -1025,7 +1019,7 @@ async function purchaseItem(client: Client, item: Item, batchName?: string) {
 document.addEventListener('keydown', async (e) => {
 	if (e.key === 'z' && (e.ctrlKey || e.metaKey) && !e.shiftKey) {
 		e.preventDefault();
-		const result = await (await _groceries).undoHistory.undo();
+		const result = await verdant.undoHistory.undo();
 		if (!result) {
 			console.log('Nothing to undo');
 		}
@@ -1035,7 +1029,7 @@ document.addEventListener('keydown', async (e) => {
 		(e.key === 'z' && e.shiftKey && (e.ctrlKey || e.metaKey))
 	) {
 		e.preventDefault();
-		const result = await (await _groceries).undoHistory.redo();
+		const result = await verdant.undoHistory.redo();
 		if (!result) {
 			console.log('Nothing to redo');
 		}
@@ -1043,28 +1037,30 @@ document.addEventListener('keydown', async (e) => {
 });
 
 // startup tasks
-_groceries.then(async (g) => {
-	// delete any purchased items older than 1 year
-	const purchased = await g.items.findAll({
-		index: {
-			where: 'purchased',
-			equals: 'yes',
-		},
-	}).resolved;
-	const now = Date.now();
-	const itemsToDelete = purchased
-		.filter((item) => {
-			const purchasedAt = item.get('purchasedAt');
-			return purchasedAt && purchasedAt < now - 365 * 24 * 60 * 60 * 1000;
-		})
-		.map((i) => i.get('id'));
-	await g.items.deleteAll(itemsToDelete);
+// delete any purchased items older than 1 year
+const purchased = await verdant.items.findAll({
+	index: {
+		where: 'purchased',
+		equals: 'yes',
+	},
+}).resolved;
+const now = Date.now();
+const itemsToDelete = purchased
+	.filter((item) => {
+		const purchasedAt = item.get('purchasedAt');
+		return purchasedAt && purchasedAt < now - 365 * 24 * 60 * 60 * 1000;
+	})
+	.map((i) => i.get('id'));
+await verdant.items.deleteAll(itemsToDelete);
 
-	const backup = await import('@verdant-web/store/backup');
-	backup.transferOrigins(
-		g,
-		'https://gnocchi.club',
-		'https://gnocchi.biscuits.club',
-	);
-	backup.transferOrigins(g, 'http://localhost:6299', 'http://localhost:6220');
-});
+const backup = await import('@verdant-web/store/backup');
+backup.transferOrigins(
+	verdant,
+	'https://gnocchi.club',
+	'https://gnocchi.biscuits.club',
+);
+backup.transferOrigins(
+	verdant,
+	'http://localhost:6299',
+	'http://localhost:6220',
+);

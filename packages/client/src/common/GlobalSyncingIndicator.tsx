@@ -6,14 +6,12 @@ export interface GlobalSyncingIndicatorProps {}
 
 export function GlobalSyncingIndicator({}: GlobalSyncingIndicatorProps) {
 	const [syncing, setSyncing] = useState(false);
-	const clientDesc = useContext(VerdantContext);
+	const client = useContext(VerdantContext);
 	useEffect(() => {
-		if (!clientDesc?.current) return;
-		const client = clientDesc.current;
-		return client.sync.subscribe('syncingChange', setSyncing);
-	}, [clientDesc]);
+		return client?.sync.subscribe('syncingChange', setSyncing);
+	}, [client]);
 
-	if (!clientDesc) return null;
+	if (!client) return null;
 
 	return (
 		<div

@@ -13,8 +13,7 @@ export function PresencePeople({
 	hideIfAlone?: boolean;
 	avatarClassName?: string;
 }) {
-	const desc = useContext(VerdantContext);
-	const client = desc?.current;
+	const client = useContext(VerdantContext);
 	const syncing = useSyncExternalStore(
 		(onChange) =>
 			client?.sync.subscribe('onlineChange', onChange) ?? (() => {}),

@@ -2,9 +2,9 @@ import { ConfirmedButton } from '@a-type/ui';
 import { useHasServerAccess } from '../hooks/graphql.js';
 
 export function ResetToServer({
-	clientDescriptor,
+	client,
 }: {
-	clientDescriptor: { __dangerous__resetLocal: () => void };
+	client: { __dangerous__resetLocal: () => void };
 }) {
 	const canSync = useHasServerAccess();
 
@@ -16,7 +16,7 @@ export function ResetToServer({
 			color="attention"
 			confirmText="This will reset your local data to the server's version."
 			onConfirm={() => {
-				clientDescriptor.__dangerous__resetLocal();
+				client.__dangerous__resetLocal();
 			}}
 		>
 			Reset local data

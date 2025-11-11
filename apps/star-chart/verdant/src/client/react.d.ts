@@ -7,7 +7,6 @@ import {
 } from "react";
 import type {
   Client,
-  ClientDescriptor,
   Schema,
   QueryStatus,
   UserInfo,
@@ -49,14 +48,14 @@ export interface GeneratedHooks<Presence, Profile> {
    * React tree to provide a Client to all hooks.
    */
   Provider: ComponentType<{
-    value: ClientDescriptor<any, any>;
+    value: Client<any, any>;
     children: ReactNode;
     sync?: boolean;
   }>;
   /**
    * Direct access to the React Context, if needed.
    */
-  Context: Context<ClientDescriptor<any, any>>;
+  Context: Context<Client<any, any>>;
   /** @deprecated use useClient instead */
   useStorage: () => Client<Presence, Profile>;
   useClient: () => Client<Presence, Profile>;
@@ -115,7 +114,12 @@ export interface GeneratedHooks<Presence, Profile> {
   useSyncStatus: () => boolean;
   useWatch<T extends AnyEntity<any, any, any> | null>(
     entity: T,
-    options?: { deep?: boolean },
+    options?: {
+      /** Observes changes to all sub-objects */
+      deep?: boolean;
+      /** Disables performance enhancements that prevent re-renders if the changed keys aren't used in the component */
+      untracked?: boolean;
+    },
   ): EntityDestructured<T>;
   useWatch<T extends EntityFile | null>(file: T): string | null;
   useOnChange<T extends AnyEntity<any, any, any> | null>(

@@ -7,7 +7,6 @@ import {
 } from "react";
 import type {
   Client,
-  ClientDescriptor,
   Schema,
   QueryStatus,
   UserInfo,
@@ -57,14 +56,14 @@ export interface GeneratedHooks<Presence, Profile> {
    * React tree to provide a Client to all hooks.
    */
   Provider: ComponentType<{
-    value: ClientDescriptor<any, any>;
+    value: Client<any, any>;
     children: ReactNode;
     sync?: boolean;
   }>;
   /**
    * Direct access to the React Context, if needed.
    */
-  Context: Context<ClientDescriptor<any, any>>;
+  Context: Context<Client<any, any>>;
   /** @deprecated use useClient instead */
   useStorage: () => Client<Presence, Profile>;
   useClient: () => Client<Presence, Profile>;

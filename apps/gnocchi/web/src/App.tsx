@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import { Suspense } from 'react';
 import { AppMoved } from './components/promotional/AppMoved.jsx';
 import { Pages } from './pages/Pages.jsx';
-import { groceriesDescriptor } from './stores/groceries/index.js';
+import { verdant } from './stores/groceries/index.js';
 import { Provider as GroceriesProvider } from './stores/groceries/Provider.jsx';
 
 export function App() {
@@ -20,10 +20,7 @@ export function App() {
 			<ErrorBoundary fallback={<ErrorFallback />}>
 				<UIProvider>
 					<Suspense fallback={<GlobalLoader />}>
-						<Provider
-							appId="gnocchi"
-							storeDescriptor={groceriesDescriptor as any}
-						>
+						<Provider appId="gnocchi" verdantClient={verdant as any}>
 							<GroceriesProvider>
 								<Pages />
 								<AppMoved />

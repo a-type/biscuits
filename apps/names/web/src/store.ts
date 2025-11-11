@@ -1,9 +1,5 @@
 import { getVerdantSync, VerdantProfile } from '@biscuits/client';
-import {
-	ClientDescriptor,
-	migrations,
-	UserInfo,
-} from '@names.biscuits/verdant';
+import { Client, migrations, UserInfo } from '@names.biscuits/verdant';
 
 export interface Presence {
 	/**
@@ -14,7 +10,7 @@ export interface Presence {
 
 export type Participant = UserInfo<VerdantProfile, Presence>;
 
-export const clientDescriptor = new ClientDescriptor({
+export const verdant = new Client({
 	namespace: 'names',
 	migrations,
 	sync: getVerdantSync({
@@ -28,12 +24,12 @@ export const clientDescriptor = new ClientDescriptor({
 // these are some helpers I like to use. You can delete them if you want.
 
 async function exposeClientOnWindowForDebug() {
-	const client = await clientDescriptor.open();
+	const client = verdant;
 	(window as any).client = client;
 }
 
 async function registerUndoKeybinds() {
-	const client = await clientDescriptor.open();
+	const client = verdant;
 	document.addEventListener('keydown', async (e) => {
 		if (e.key === 'z' && (e.ctrlKey || e.metaKey) && !e.shiftKey) {
 			e.preventDefault();

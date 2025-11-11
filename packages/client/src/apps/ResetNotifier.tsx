@@ -14,14 +14,12 @@ export interface ResetNotifierProps {}
 
 export function ResetNotifier({}: ResetNotifierProps) {
 	const [shown, setShown] = useState(false);
-	const clientDesc = useContext(VerdantContext);
+	const client = useContext(VerdantContext);
 	useEffect(() => {
-		if (!clientDesc?.current) return;
-		const client = clientDesc.current;
-		return client.subscribe('resetToServer', () => {
+		return client?.subscribe('resetToServer', () => {
 			setShown(true);
 		});
-	}, [clientDesc]);
+	}, [client]);
 
 	const [waiting, setWaiting] = useState(false);
 	useEffect(() => {

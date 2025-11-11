@@ -1,4 +1,4 @@
-import { addItems, groceriesDescriptor } from '@/stores/groceries/index.js';
+import { addItems, verdant } from '@/stores/groceries/index.js';
 import { recipeSavePromptState } from './components/recipes/savePrompt/state.js';
 
 export function attachToPwaEvents() {
@@ -9,7 +9,7 @@ export function attachToPwaEvents() {
 		if (event.data.type === 'pwa-share') {
 			const items = event.data.items as string[] | undefined;
 			if (items) {
-				const client = await groceriesDescriptor.open();
+				const client = await verdant.open();
 				await addItems(client, items, {
 					sourceInfo: { title: 'Shared list' },
 				});

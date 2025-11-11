@@ -39,9 +39,15 @@ export class BiscuitsError extends Error {
 			return new BiscuitsError(parsed.code, parsed.message);
 		}
 		if ('errors' in parsed && Array.isArray(parsed.errors)) {
-			const first = parsed.errors[0];
+			return BiscuitsError.readFirstGraphQLError(parsed.errors);
+		}
+		return null;
+	}
+
+	static readFirstGraphQLError(errors: readonly any[] | null | undefined) {
+		if (errors && errors.length > 0) {
+			const first = errors[0];
 			if ('extensions' in first && 'biscuitsCode' in first.extensions) {
-				console.log('Biscuits error from GraphQL', first);
 				return new BiscuitsError(
 					first.extensions.biscuitsCode,
 					first.message || 'An unexpected error occurred',

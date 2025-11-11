@@ -1,8 +1,7 @@
 /** Generated types for Verdant client */
 import type {
   Client as BaseClient,
-  ClientDescriptor as BaseClientDescriptor,
-  ClientDescriptorOptions as BaseClientDescriptorOptions,
+  ClientInitOptions as BaseClientInitOptions,
   CollectionQueries,
   StorageSchema,
   Migration,
@@ -10,26 +9,73 @@ import type {
 export * from "@verdant-web/store";
 
 export class Client<Presence = any, Profile = any> {
+  /** Collection access for Project. Load queries, put and delete documents. */
   readonly projects: CollectionQueries<Project, ProjectInit, ProjectFilter>;
+
+  /** Collection access for Task. Load queries, put and delete documents. */
   readonly tasks: CollectionQueries<Task, TaskInit, TaskFilter>;
+
+  /** Collection access for Connection. Load queries, put and delete documents. */
   readonly connections: CollectionQueries<
     Connection,
     ConnectionInit,
     ConnectionFilter
   >;
 
+  /**
+   * Turn on and off sync, or adjust the sync protocol and other settings.
+   */
   sync: BaseClient<Presence, Profile>["sync"];
+  /**
+   * Access and manipulate the undo/redo stack. You can also
+   * add custom undoable actions using addUndo, although the interface
+   * for doing this is pretty mind-bending at the moment (sorry).
+   */
   undoHistory: BaseClient<Presence, Profile>["undoHistory"];
+  /**
+   * The namespace used to construct this store.
+   */
   namespace: BaseClient<Presence, Profile>["namespace"];
+  /**
+   * @deprecated - do not use this. For batching, use .batch instead.
+   * Using methods on this property can cause data loss and corruption.
+   */
   entities: BaseClient<Presence, Profile>["entities"];
-  // queryStore: BaseClient<Presence, Profile>['queryStore'];
+  /**
+   * Tools for batching operations so they are bundled together
+   * in the undo/redo stack.
+   */
   batch: BaseClient<Presence, Profile>["batch"];
-  // files: BaseClient<Presence, Profile>['files'];
   close: BaseClient<Presence, Profile>["close"];
+  /**
+   * Export a backup of a full library
+   */
   export: BaseClient<Presence, Profile>["export"];
+  /**
+   * Import a full library from a backup. WARNING: this replaces
+   * existing data with no option for restore.
+   */
   import: BaseClient<Presence, Profile>["import"];
+  /**
+   * Subscribe to global store events
+   */
   subscribe: BaseClient<Presence, Profile>["subscribe"];
+  /**
+   * Read stats about storage usage
+   */
   stats: BaseClient<Presence, Profile>["stats"];
+  /**
+   * An interface for inspecting and manipulating active live queries.
+   * Particularly, see .keepAlive and .dropKeepAlive for placing keep-alive
+   * holds to keep query results in memory when unsubscribed.
+   */
+  queries: BaseClient<Presence, Profile>["queries"];
+
+  /**
+   * Get the local replica ID for this client instance.
+   * Not generally useful for people besides me.
+   */
+  getReplicaId: BaseClient<Presence, Profile>["getReplicaId"];
 
   /**
    * Deletes all local data. If the client is connected to sync,
@@ -45,7 +91,7 @@ export class Client<Presence = any, Profile = any> {
    * Export all data, then re-import it. This might resolve
    * some issues with the local database, but it should
    * only be done as a second-to-last resort. The last resort
-   * would be __dangerous__resetLocal on ClientDescriptor, which
+   * would be __dangerous__resetLocal on Client, which
    * clears all local data.
    *
    * Unlike __dangerous__resetLocal, this method allows local-only
@@ -60,11 +106,13 @@ export class Client<Presence = any, Profile = any> {
    * during normal operation, so you probably don't need this.
    */
   __manualRebase: () => Promise<void>;
+
+  constructor(init: ClientInitOptions<Presence, Profile>);
 }
 
-export interface ClientDescriptorOptions<Presence = any, Profile = any>
+export interface ClientInitOptions<Presence = any, Profile = any>
   extends Omit<
-    BaseClientDescriptorOptions<Presence, Profile>,
+    BaseClientInitOptions<Presence, Profile>,
     "schema" | "migrations" | "oldSchemas"
   > {
   /** WARNING: overriding the schema is dangerous and almost definitely not what you want. */
@@ -73,23 +121,6 @@ export interface ClientDescriptorOptions<Presence = any, Profile = any>
   oldSchemas?: StorageSchema[];
   /** WARNING: overriding the migrations is dangerous and almost definitely not what you want. */
   migrations?: Migration[];
-}
-
-export class ClientDescriptor<Presence = any, Profile = any> {
-  constructor(init: ClientDescriptorOptions<Presence, Profile>);
-  open: () => Promise<Client<Presence, Profile>>;
-  close: () => Promise<void>;
-  readonly current: Client<Presence, Profile> | null;
-  readonly readyPromise: Promise<Client<Presence, Profile>>;
-  readonly schema: StorageSchema;
-  readonly namespace: string;
-  /**
-   * Resets all local data for this client, including the schema and migrations.
-   * If the client is not connected to sync, this causes the irretrievable loss of all data.
-   * If the client is connected to sync, this will cause the client to re-sync all data from the server.
-   * Use this very carefully, and only as a last resort.
-   */
-  __dangerous__resetLocal: () => Promise<void>;
 }
 
 import {
@@ -155,7 +186,7 @@ export type TaskPosition = ObjectEntity<
   TaskPositionInit,
   TaskPositionDestructured,
   TaskPositionSnapshot
-> | null;
+>;
 export type TaskPositionX = number;
 export type TaskPositionY = number;
 export type TaskImages = ListEntity<
@@ -163,7 +194,7 @@ export type TaskImages = ListEntity<
   TaskImagesDestructured,
   TaskImagesSnapshot
 >;
-export type TaskImagesItem = string;
+export type TaskImagesItem = EntityFile;
 export type TaskNote = string;
 export type TaskAssignedTo = string;
 export type TaskTimeEstimateMinutes = number;
@@ -174,7 +205,7 @@ export type TaskInit = {
   createdAt?: number;
   content: string;
   completedAt?: number | null;
-  position?: TaskPositionInit;
+  position?: TaskPositionInit | null;
   images?: TaskImagesInit;
   note?: string | null;
   assignedTo?: string | null;
@@ -182,7 +213,7 @@ export type TaskInit = {
   scheduledAt?: number | null;
 };
 
-export type TaskPositionInit = { x: number; y: number } | null;
+export type TaskPositionInit = { x: number; y: number };
 export type TaskImagesInit = File[];
 export type TaskDestructured = {
   id: string;
@@ -190,7 +221,7 @@ export type TaskDestructured = {
   createdAt: number;
   content: string;
   completedAt: number | null;
-  position: TaskPosition;
+  position: TaskPosition | null;
   images: TaskImages;
   note: string | null;
   assignedTo: string | null;
@@ -206,7 +237,7 @@ export type TaskSnapshot = {
   createdAt: number;
   content: string;
   completedAt: number | null;
-  position: TaskPositionSnapshot;
+  position: TaskPositionSnapshot | null;
   images: TaskImagesSnapshot;
   note: string | null;
   assignedTo: string | null;
@@ -214,7 +245,7 @@ export type TaskSnapshot = {
   scheduledAt: number | null;
 };
 
-export type TaskPositionSnapshot = { x: number; y: number } | null;
+export type TaskPositionSnapshot = { x: number; y: number };
 export type TaskImagesSnapshot = EntityFileSnapshot[];
 
 /** Index filters for Task **/

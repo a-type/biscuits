@@ -1,4 +1,3 @@
-import { TopLoader } from '@/components/nav/TopLoader.jsx';
 import { Button, ErrorBoundary, H1, P, Spinner } from '@a-type/ui';
 import { ReloadButton } from '@biscuits/client';
 import { updateApp, updateState } from '@biscuits/client/apps';
@@ -49,7 +48,6 @@ export function Pages() {
 		<ErrorBoundary fallback={(props) => <ErrorFallback {...props} />}>
 			<Suspense fallback={<Spinner />}>
 				<Router routes={routes} onNavigate={handleNavigate}>
-					<TopLoader />
 					<Outlet />
 				</Router>
 			</Suspense>

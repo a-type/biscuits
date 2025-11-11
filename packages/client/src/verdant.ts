@@ -1,7 +1,7 @@
 import { AppId } from '@biscuits/apps';
 import { fetch } from '@biscuits/graphql';
 import { BiscuitsVerdantProfile, LibraryAccess } from '@biscuits/libraries';
-import { ClientDescriptor } from '@verdant-web/store';
+import { Client } from '@verdant-web/store';
 import { createContext } from 'react';
 import * as CONFIG from './config.js';
 
@@ -33,7 +33,7 @@ export function getVerdantSync<Presence>({
 	};
 }
 
-export const VerdantContext = createContext<ClientDescriptor<
+export const VerdantContext = createContext<Client<
 	any,
 	BiscuitsVerdantProfile
 > | null>(null);

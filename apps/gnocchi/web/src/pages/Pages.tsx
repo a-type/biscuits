@@ -9,7 +9,7 @@ import {
 	ReloadButton,
 	useHadRecentError,
 } from '@/components/sync/ReloadButton.jsx';
-import { groceriesDescriptor, hooks } from '@/stores/groceries/index.js';
+import { hooks, verdant } from '@/stores/groceries/index.js';
 import { ErrorBoundary, H1, P, PageRoot } from '@a-type/ui';
 import { SubscribedOnly, SubscriptionPromotion } from '@biscuits/client';
 import {
@@ -228,7 +228,7 @@ function ErrorFallback({ clearError }: { clearError: () => void }) {
 				<BugButton />
 				{hadRecentError && (
 					<SubscribedOnly>
-						<ResetToServer clientDescriptor={groceriesDescriptor} />
+						<ResetToServer client={verdant} />
 					</SubscribedOnly>
 				)}
 			</div>

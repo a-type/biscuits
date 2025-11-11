@@ -10,10 +10,7 @@ export function DeveloperErrorDialog(props: DeveloperErrorDialogProps) {
 	const verdant = useContext(VerdantContext);
 	const [error, setError] = useState<null | Error>(null);
 	useEffect(() => {
-		let unsub: (() => void) | undefined;
-		verdant?.open().then((client) => {
-			unsub = client.subscribe('developerError', setError);
-		});
+		const unsub = verdant?.subscribe('developerError', setError);
 		return () => {
 			unsub?.();
 		};

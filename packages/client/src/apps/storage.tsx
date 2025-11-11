@@ -24,17 +24,16 @@ export function ExportDataButton({
 	...props
 }: ExportDataButtonProps) {
 	const [loading, setLoading] = useState(false);
-	const clientDesc = useContext(VerdantContext);
+	const client = useContext(VerdantContext);
 	const appId = useAppId();
 	const app = appsById[appId];
-	if (!clientDesc) return null;
+	if (!client) return null;
 	return (
 		<Button
 			onClick={async () => {
 				setLoading(true);
 				try {
 					const backup = await import('@verdant-web/store/backup');
-					const client = await clientDesc.open();
 					const file = await backup.createClientBackup(client);
 					const url = URL.createObjectURL(file);
 					const a = document.createElement('a');
@@ -66,8 +65,8 @@ export function ImportDataButton({
 	...props
 }: ExportDataButtonProps) {
 	const [loading, setLoading] = useState(false);
-	const clientDesc = useContext(VerdantContext);
-	if (!clientDesc) return null;
+	const client = useContext(VerdantContext);
+	if (!client) return null;
 	return (
 		<Button asChild loading={loading} {...props}>
 			<label>
@@ -79,7 +78,6 @@ export function ImportDataButton({
 						setLoading(true);
 						try {
 							const backup = await import('@verdant-web/store/backup');
-							const client = await clientDesc.open();
 							const file = ev.target.files?.[0];
 							if (!file) {
 								throw new Error('No file selected');

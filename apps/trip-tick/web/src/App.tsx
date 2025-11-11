@@ -1,5 +1,5 @@
 import { Pages } from '@/pages/Pages.jsx';
-import { clientDescriptor, hooks } from '@/store.js';
+import { hooks, verdant } from '@/store.js';
 import { FullScreenSpinner, Provider as UIProvider } from '@a-type/ui';
 import { Provider, useHasServerAccess } from '@biscuits/client';
 import { ReactNode, Suspense } from 'react';
@@ -10,7 +10,7 @@ export function App() {
 		<div className="flex flex-col flex-1 w-full h-full">
 			<Suspense fallback={<FullScreenSpinner />}>
 				<UIProvider disableViewportOffset>
-					<Provider appId="trip-tick" storeDescriptor={clientDescriptor as any}>
+					<Provider appId="trip-tick" verdantClient={verdant as any}>
 						<LofiProvider>
 							<Pages />
 							<Explainer />
@@ -26,7 +26,7 @@ function LofiProvider({ children }: { children: ReactNode }) {
 	// only sync if logged in to the server
 	const isLoggedIn = useHasServerAccess();
 	return (
-		<hooks.Provider value={clientDescriptor} sync={isLoggedIn}>
+		<hooks.Provider value={verdant} sync={isLoggedIn}>
 			{children}
 		</hooks.Provider>
 	);

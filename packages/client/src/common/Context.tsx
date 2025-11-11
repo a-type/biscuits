@@ -16,23 +16,23 @@ export function Provider({
 	graphqlClient = defaultClient,
 	appId,
 	children,
-	storeDescriptor = null,
+	verdantClient = null,
 	disablePreviewWarning,
 }: {
 	appId?: AppId;
 	graphqlClient?: ApolloClient<any>;
 	children: ReactNode;
-	storeDescriptor?: any | null;
+	verdantClient?: any | null;
 	disablePreviewWarning?: boolean;
 }) {
 	return (
 		<ApolloProvider client={graphqlClient}>
 			<BiscuitsContext.Provider value={{ appId }}>
-				<VerdantContext.Provider value={storeDescriptor}>
+				<VerdantContext.Provider value={verdantClient}>
 					{appId && <AppPreviewNotice />}
 					{appId && !disablePreviewWarning && <PrereleaseWarning />}
 					<TopLoader />
-					{storeDescriptor && <GlobalSyncingIndicator />}
+					{verdantClient && <GlobalSyncingIndicator />}
 					{children}
 					<Essentials />
 				</VerdantContext.Provider>

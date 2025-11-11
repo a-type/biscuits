@@ -19,7 +19,7 @@ export function EntityDeleteButton({
 	...rest
 }: EntityDeleteButtonProps) {
 	const navigate = useNavigate();
-	const desc = useContext(VerdantContext);
+	const client = useContext(VerdantContext);
 
 	return (
 		<Button
@@ -37,7 +37,6 @@ export function EntityDeleteButton({
 						<Button
 							size="small"
 							onClick={() => {
-								const client = desc?.current;
 								if (client) {
 									client.undoHistory.undo();
 									toast.dismiss(id);

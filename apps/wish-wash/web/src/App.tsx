@@ -1,6 +1,6 @@
 import { hooks } from '@/hooks.js';
 import { Pages } from '@/pages/Pages.jsx';
-import { clientDescriptor } from '@/store.js';
+import { verdant } from '@/store.js';
 import { ErrorBoundary, H1, P, Provider as UIProvider } from '@a-type/ui';
 import { Provider, ReloadButton, useHasServerAccess } from '@biscuits/client';
 import '@biscuits/client/henrietta.css';
@@ -14,7 +14,7 @@ export function App({}: AppProps) {
 		<ErrorBoundary fallback={<ErrorFallback />}>
 			<UIProvider toastContainerClassName="mb-10 sm:mb-0" disableViewportOffset>
 				<Suspense>
-					<Provider appId="wish-wash" storeDescriptor={clientDescriptor}>
+					<Provider appId="wish-wash" verdantClient={verdant}>
 						<VerdantProvider>
 							<Pages />
 							<SubscriptionDialog />
@@ -29,7 +29,7 @@ export function App({}: AppProps) {
 function VerdantProvider({ children }: { children: ReactNode }) {
 	const canSync = useHasServerAccess();
 	return (
-		<hooks.Provider value={clientDescriptor} sync={canSync}>
+		<hooks.Provider value={verdant} sync={canSync}>
 			{children}
 		</hooks.Provider>
 	);

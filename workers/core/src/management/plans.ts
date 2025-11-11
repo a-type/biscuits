@@ -11,94 +11,88 @@ export async function removeUserFromPlan(
 	userId: string,
 	ctx: GQLContext,
 ): Promise<{ id: string; fullName: string; email: string } | undefined> {
-	return ctx.db.transaction().execute(async (tx) => {
-		// if user was admin of their plan and there are no other admins,
-		// promote another user to admin. if there are no other users,
-		// delete the plan
-		const plan = await tx
-			.selectFrom('Plan')
-			.select(['id', 'stripeSubscriptionId'])
-			.where('id', '=', planId)
-			.select((eb) => [
-				jsonArrayFrom(
-					eb
-						.selectFrom('User')
-						.select(['id', 'planRole', 'stripeCustomerId'])
-						.whereRef('planId', '=', 'Plan.id'),
-				).as('members'),
-			])
-			.executeTakeFirst();
+	// if user was admin of their plan and there are no other admins,
+	// promote another user to admin. if there are no other users,
+	// delete the plan
+	const plan = await ctx.db
+		.selectFrom('Plan')
+		.select(['id', 'stripeSubscriptionId'])
+		.where('id', '=', planId)
+		.select((eb) => [
+			jsonArrayFrom(
+				eb
+					.selectFrom('User')
+					.select(['id', 'planRole', 'stripeCustomerId'])
+					.whereRef('planId', '=', 'Plan.id'),
+			).as('members'),
+		])
+		.executeTakeFirst();
 
-		if (!plan) {
-			throw new BiscuitsError(BiscuitsError.Code.NoPlan);
+	if (!plan) {
+		throw new BiscuitsError(BiscuitsError.Code.NoPlan);
+	}
+
+	const userMember = plan.members.find((m) => m.id === userId);
+	if (!userMember) {
+		console.error('User not found in plan from their session', {
+			planId,
+			userId,
+		});
+		throw new BiscuitsError(BiscuitsError.Code.SessionInvalid);
+	}
+
+	// if they're not an admin, just remove them. if there's
+	// another admin, we can rely on them.
+	const canJustDeleteThem =
+		userMember.planRole !== 'admin' ||
+		plan.members.filter((m) => m.planRole === 'admin').length > 1;
+	if (!canJustDeleteThem) {
+		// user was the only admin, so we need to promote someone else
+
+		// when the only admin leaves, we always cancel the subscription, too.
+		if (plan.stripeSubscriptionId) {
+			await cancelSubscription(planId, userId, plan.stripeSubscriptionId, ctx);
 		}
 
-		const userMember = plan.members.find((m) => m.id === userId);
-		if (!userMember) {
-			console.error('User not found in plan from their session', {
-				planId,
-				userId,
-			});
-			throw new BiscuitsError(BiscuitsError.Code.SessionInvalid);
-		}
-
-		// if they're not an admin, just remove them. if there's
-		// another admin, we can rely on them.
-		const canJustDeleteThem =
-			userMember.planRole !== 'admin' ||
-			plan.members.filter((m) => m.planRole === 'admin').length > 1;
-		if (!canJustDeleteThem) {
-			// user was the only admin, so we need to promote someone else
-
-			// when the only admin leaves, we always cancel the subscription, too.
-			if (plan.stripeSubscriptionId) {
-				await cancelSubscription(
-					planId,
+		const newAdmin = plan.members.find((m) => m.planRole === 'user');
+		if (!newAdmin) {
+			// no other users, so delete the plan.
+			await ctx.db.deleteFrom('Plan').where('id', '=', planId).execute();
+			await ctx.db
+				.insertInto('ActivityLog')
+				.values({
+					action: 'deletePlan',
+					id: id(),
 					userId,
-					plan.stripeSubscriptionId,
-					ctx,
-				);
-			}
+					data: JSON.stringify({
+						planId,
+						reason: 'all users left',
+					}),
+				})
+				.execute();
+			return;
+		} else {
+			// promote the new admin
+			const newAdminDetails = await ctx.db
+				.updateTable('User')
+				.where('id', '=', newAdmin.id)
+				.set({
+					planRole: 'admin',
+				})
+				.returning(['id', 'email', 'fullName'])
+				.executeTakeFirstOrThrow();
 
-			const newAdmin = plan.members.find((m) => m.planRole === 'user');
-			if (!newAdmin) {
-				// no other users, so delete the plan.
-				await tx.deleteFrom('Plan').where('id', '=', planId).execute();
-				await tx
-					.insertInto('ActivityLog')
-					.values({
-						action: 'deletePlan',
-						id: id(),
-						userId,
-						data: JSON.stringify({
-							planId,
-							reason: 'all users left',
-						}),
-					})
-					.execute();
-				return;
-			} else {
-				// promote the new admin
-				const newAdminDetails = await tx
-					.updateTable('User')
-					.where('id', '=', newAdmin.id)
-					.set({
-						planRole: 'admin',
-					})
-					.returning(['id', 'email', 'fullName'])
-					.executeTakeFirstOrThrow();
-
-				// send an email to the new admin about their new role
-				await email.sendCustomEmail(
-					{
-						to: newAdminDetails.email,
-						subject: 'You are now the admin of your Biscuits plan',
-						text: `Hi ${newAdminDetails.fullName},\n
+			// send an email to the new admin about their new role
+			await email.sendCustomEmail(
+				{
+					to: newAdminDetails.email,
+					subject: 'You are now the admin of your Biscuits plan',
+					text: `Hi ${newAdminDetails.fullName},\n
           You are now the admin of your Biscuits plan. This usually happens because the previous admin left the plan. Your plan may require a new payment method to remain active.\n
           You can manage your plan at ${ctx.reqCtx.env.UI_ORIGIN}/plan.\n
           Thanks,
           Grant`,
-						html: `<div>
+					html: `<div>
             <p>Hi ${newAdminDetails.fullName},</p>
             <p>
               You are now the admin of your Biscuits plan. This usually happens because the previous admin left the plan. Your plan may require a new payment method to remain active.
@@ -107,43 +101,42 @@ export async function removeUserFromPlan(
             <p>Thanks,</p>
             <p>Grant</p>
           </div>`,
-					},
-					ctx.reqCtx,
-				);
-			}
-		} else {
-			// if the subscription is under their customer ID, we must
-			// cancel it.
-			if (userMember.stripeCustomerId && plan.stripeSubscriptionId) {
-				const subscriptionDetails = await ctx.stripe.subscriptions.retrieve(
+				},
+				ctx.reqCtx,
+			);
+		}
+	} else {
+		// if the subscription is under their customer ID, we must
+		// cancel it.
+		if (userMember.stripeCustomerId && plan.stripeSubscriptionId) {
+			const subscriptionDetails = await ctx.stripe.subscriptions.retrieve(
+				plan.stripeSubscriptionId,
+			);
+			if (subscriptionDetails.customer === userMember.stripeCustomerId) {
+				await cancelSubscription(
+					planId,
+					userId,
 					plan.stripeSubscriptionId,
+					ctx,
 				);
-				if (subscriptionDetails.customer === userMember.stripeCustomerId) {
-					await cancelSubscription(
-						planId,
-						userId,
-						plan.stripeSubscriptionId,
-						ctx,
-					);
-					// an automated email from the webhook will notify other admins the
-					// subscription is canceled.
-				}
+				// an automated email from the webhook will notify other admins the
+				// subscription is canceled.
 			}
 		}
+	}
 
-		// null out the old admin's planId and planRole
-		const removedUser = await tx
-			.updateTable('User')
-			.where('id', '=', userId)
-			.set({
-				planId: null,
-				planRole: null,
-			})
-			.returning(['User.id', 'User.email', 'User.fullName'])
-			.executeTakeFirstOrThrow();
+	// null out the old admin's planId and planRole
+	const removedUser = await ctx.db
+		.updateTable('User')
+		.where('id', '=', userId)
+		.set({
+			planId: null,
+			planRole: null,
+		})
+		.returning(['User.id', 'User.email', 'User.fullName'])
+		.executeTakeFirstOrThrow();
 
-		return removedUser;
-	});
+	return removedUser;
 }
 
 async function cancelSubscription(
@@ -152,22 +145,41 @@ async function cancelSubscription(
 	stripeSubscriptionId: string,
 	ctx: GQLContext,
 ): Promise<void> {
-	await ctx.db.transaction().execute(async (tx) => {
-		await tx
+	await ctx.db
+		.insertInto('ActivityLog')
+		.values({
+			action: 'cancelSubscription',
+			id: id(),
+			userId,
+			data: JSON.stringify({
+				planId,
+				subscriptionId: stripeSubscriptionId,
+				reason: 'user requested',
+			}),
+		})
+		.execute();
+	try {
+		await ctx.stripe.subscriptions.cancel(stripeSubscriptionId);
+	} catch (err) {
+		console.error('Error cancelling subscription', {
+			err,
+			planId,
+			stripeSubscriptionId,
+		});
+		await ctx.db
 			.insertInto('ActivityLog')
 			.values({
-				action: 'cancelSubscription',
+				action: 'errorCancellingSubscription',
 				id: id(),
 				userId,
 				data: JSON.stringify({
 					planId,
 					subscriptionId: stripeSubscriptionId,
-					reason: 'user requested',
+					error: (err as Error).message,
 				}),
 			})
 			.execute();
-		await ctx.stripe.subscriptions.cancel(stripeSubscriptionId);
-	});
+	}
 }
 
 export async function createSubscription({
@@ -223,36 +235,32 @@ export async function setupNewPlan({
 			ctx,
 		});
 
-	const plan = await ctx.db.transaction().execute(async (tx) => {
-		const plan = await tx
-			.insertInto('Plan')
-			.values({
-				id: id(),
-				featureFlags: {},
-				name: 'New Plan',
-				stripeSubscriptionId: stripeSubscription.id,
-				stripePriceId: stripeSubscription.items.data[0].price.id,
-				stripeProductId: productId,
-				// go ahead and pre-seed this so we don't have to wait for the webhook
-				subscriptionStatus: 'incomplete',
-				memberLimit: metadata.memberLimit,
-				allowedApp: metadata.app,
-			})
-			.returning(['id', 'allowedApp'])
-			.executeTakeFirstOrThrow();
+	const plan = await ctx.db
+		.insertInto('Plan')
+		.values({
+			id: id(),
+			featureFlags: {},
+			name: 'New Plan',
+			stripeSubscriptionId: stripeSubscription.id,
+			stripePriceId: stripeSubscription.items.data[0].price.id,
+			stripeProductId: productId,
+			// go ahead and pre-seed this so we don't have to wait for the webhook
+			subscriptionStatus: 'incomplete',
+			memberLimit: metadata.memberLimit,
+			allowedApp: metadata.app,
+		})
+		.returning(['id', 'allowedApp'])
+		.executeTakeFirstOrThrow();
 
-		await tx
-			.updateTable('User')
-			.set({
-				planId: plan.id,
-				planRole: 'admin',
-				stripeCustomerId,
-			})
-			.where('id', '=', userDetails.id)
-			.execute();
-
-		return plan;
-	});
+	await ctx.db
+		.updateTable('User')
+		.set({
+			planId: plan.id,
+			planRole: 'admin',
+			stripeCustomerId,
+		})
+		.where('id', '=', userDetails.id)
+		.execute();
 
 	return plan;
 }

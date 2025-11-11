@@ -64,14 +64,14 @@ catalogs:
       specifier: 66.5.3
       version: 66.5.3
     '@verdant-web/cli':
-      specifier: 4.8.3
-      version: 4.8.3
+      specifier: 5.0.0
+      version: 5.0.0
     '@verdant-web/cloudflare':
-      specifier: 0.1.5
-      version: 0.1.5
+      specifier: 0.1.6
+      version: 0.1.6
     '@verdant-web/react':
-      specifier: 42.1.1
-      version: 42.1.1
+      specifier: 43.0.0
+      version: 43.0.0
     '@verdant-web/react-router':
       specifier: 0.8.0
       version: 0.8.0
@@ -79,11 +79,11 @@ catalogs:
       specifier: 4.0.3
       version: 4.0.3
     '@verdant-web/store':
-      specifier: 4.6.1
-      version: 4.6.1
+      specifier: 5.0.0
+      version: 5.0.0
     '@verdant-web/tiptap':
-      specifier: 6.0.1
-      version: 6.0.1
+      specifier: 7.0.0
+      version: 7.0.0
     '@vitejs/plugin-react':
       specifier: 5.0.4
       version: 5.0.4
@@ -340,16 +340,16 @@ importers:
         version: link:../../../packages/graphql
       '@verdant-web/cli':
         specifier: 'catalog:'
-        version: 4.8.3
+        version: 5.0.0
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 42.1.1(@verdant-web/store@4.6.1)(react@19.2.0)
+        version: 43.0.0(@verdant-web/store@5.0.0)(react@19.2.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.6.1
+        version: 5.0.0
       '@verdant-web/tiptap':
         specifier: 'catalog:'
-        version: 6.0.1(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@verdant-web/react@42.1.1(@verdant-web/store@4.6.1)(react@19.2.0))(@verdant-web/store@4.6.1)(react@19.2.0)
+        version: 7.0.0(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@verdant-web/react@43.0.0(@verdant-web/store@5.0.0)(react@19.2.0))(@verdant-web/store@5.0.0)(react@19.2.0)
       cuid:
         specifier: ^2.1.8
         version: 2.1.8
@@ -446,10 +446,10 @@ importers:
         version: 0.8.0(react@19.2.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.6.1
+        version: 5.0.0
       '@verdant-web/tiptap':
         specifier: 'catalog:'
-        version: 6.0.1(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@verdant-web/react@42.1.1(@verdant-web/store@4.6.1)(react@19.2.0))(@verdant-web/store@4.6.1)(react@19.2.0)
+        version: 7.0.0(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@verdant-web/react@43.0.0(@verdant-web/store@5.0.0)(react@19.2.0))(@verdant-web/store@5.0.0)(react@19.2.0)
       '@zip.js/zip.js':
         specifier: ^2.7.6
         version: 2.7.54
@@ -612,13 +612,13 @@ importers:
     dependencies:
       '@verdant-web/cli':
         specifier: 'catalog:'
-        version: 4.8.3
+        version: 5.0.0
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 42.1.1(@verdant-web/store@4.6.1)(react@19.2.0)
+        version: 43.0.0(@verdant-web/store@5.0.0)(react@19.2.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.6.1
+        version: 5.0.0
       react:
         specifier: 'catalog:'
         version: 19.2.0
@@ -657,7 +657,7 @@ importers:
         version: 0.8.0(react@19.2.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.6.1
+        version: 5.0.0
       '@vitejs/plugin-react-swc':
         specifier: 'catalog:'
         version: 4.1.0(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
@@ -721,13 +721,13 @@ importers:
     dependencies:
       '@verdant-web/cli':
         specifier: 'catalog:'
-        version: 4.8.3
+        version: 5.0.0
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 42.1.1(@verdant-web/store@4.6.1)(react@19.2.0)
+        version: 43.0.0(@verdant-web/store@5.0.0)(react@19.2.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.6.1
+        version: 5.0.0
       react:
         specifier: 'catalog:'
         version: 19.2.0
@@ -778,7 +778,7 @@ importers:
         version: 0.8.0(react@19.2.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.6.1
+        version: 5.0.0
       '@vitejs/plugin-react-swc':
         specifier: 'catalog:'
         version: 4.1.0(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
@@ -842,13 +842,13 @@ importers:
     dependencies:
       '@verdant-web/cli':
         specifier: 'catalog:'
-        version: 4.8.3
+        version: 5.0.0
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 42.1.1(@verdant-web/store@4.6.1)(react@19.2.0)
+        version: 43.0.0(@verdant-web/store@5.0.0)(react@19.2.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.6.1
+        version: 5.0.0
       react:
         specifier: 'catalog:'
         version: 19.2.0
@@ -893,7 +893,7 @@ importers:
         version: 0.8.0(react@19.2.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.6.1
+        version: 5.0.0
       '@vitejs/plugin-react-swc':
         specifier: 'catalog:'
         version: 4.1.0(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
@@ -963,13 +963,13 @@ importers:
     dependencies:
       '@verdant-web/cli':
         specifier: 'catalog:'
-        version: 4.8.3
+        version: 5.0.0
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 42.1.1(@verdant-web/store@4.6.1)(react@19.2.0)
+        version: 43.0.0(@verdant-web/store@5.0.0)(react@19.2.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.6.1
+        version: 5.0.0
       cuid:
         specifier: ^2.1.8
         version: 2.1.8
@@ -1017,13 +1017,13 @@ importers:
         version: 66.5.3
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 42.1.1(@verdant-web/store@4.6.1)(react@19.2.0)
+        version: 43.0.0(@verdant-web/store@5.0.0)(react@19.2.0)
       '@verdant-web/react-router':
         specifier: 'catalog:'
         version: 0.8.0(react@19.2.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.6.1
+        version: 5.0.0
       '@vitejs/plugin-react-swc':
         specifier: 'catalog:'
         version: 4.1.0(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
@@ -1219,13 +1219,13 @@ importers:
     dependencies:
       '@verdant-web/cli':
         specifier: 'catalog:'
-        version: 4.8.3
+        version: 5.0.0
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 42.1.1(@verdant-web/store@4.6.1)(react@19.2.0)
+        version: 43.0.0(@verdant-web/store@5.0.0)(react@19.2.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.6.1
+        version: 5.0.0
       react:
         specifier: 'catalog:'
         version: 19.2.0
@@ -1270,7 +1270,7 @@ importers:
         version: 0.8.0(react@19.2.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.6.1
+        version: 5.0.0
       '@vitejs/plugin-react-swc':
         specifier: 'catalog:'
         version: 4.1.0(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
@@ -1421,7 +1421,7 @@ importers:
         version: 0.8.0(react@19.2.0)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 4.6.1
+        version: 5.0.0
       gql.tada:
         specifier: 'catalog:'
         version: 1.8.13(graphql@16.11.0)(typescript@5.9.3)
@@ -1709,13 +1709,13 @@ importers:
         version: 3.22.1(@pothos/core@3.41.2(graphql@16.11.0))(graphql@16.11.0)
       '@verdant-web/cloudflare':
         specifier: 'catalog:'
-        version: 0.1.5(@hono/node-server@1.19.5(hono@4.9.9))(hono@4.9.9)
+        version: 0.1.6(@hono/node-server@1.19.5(hono@4.9.9))(hono@4.9.9)
       '@verdant-web/server':
         specifier: 'catalog:'
         version: 4.0.3(hono@4.9.9)
       '@verdant-web/tiptap':
         specifier: 'catalog:'
-        version: 6.0.1(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@verdant-web/react@42.1.1(@verdant-web/store@4.6.1)(react@19.2.0))(@verdant-web/store@4.6.1)(react@19.2.0)
+        version: 7.0.0(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@verdant-web/react@43.0.0(@verdant-web/store@5.0.0)(react@19.2.0))(@verdant-web/store@5.0.0)(react@19.2.0)
       '@wish-wash.biscuits/scanning':
         specifier: workspace:*
         version: link:../../apps/wish-wash/scanning
@@ -4821,22 +4821,10 @@ packages:
   '@surma/rollup-plugin-off-main-thread@2.2.3':
     resolution: {integrity: sha512-lR8q/9W7hZpMWweNiAKU7NQerBnzQQLvi8qnTDU/fxItPhtZVMbPV3lbCwjhIlNBe9Bbr5V+KHshvWmVSG9cxQ==}
 
-  '@swc/core-darwin-arm64@1.10.4':
-    resolution: {integrity: sha512-sV/eurLhkjn/197y48bxKP19oqcLydSel42Qsy2zepBltqUx+/zZ8+/IS0Bi7kaWVFxerbW1IPB09uq8Zuvm3g==}
-    engines: {node: '>=10'}
-    cpu: [arm64]
-    os: [darwin]
-
   '@swc/core-darwin-arm64@1.13.5':
     resolution: {integrity: sha512-lKNv7SujeXvKn16gvQqUQI5DdyY8v7xcoO3k06/FJbHJS90zEwZdQiMNRiqpYw/orU543tPaWgz7cIYWhbopiQ==}
     engines: {node: '>=10'}
     cpu: [arm64]
-    os: [darwin]
-
-  '@swc/core-darwin-x64@1.10.4':
-    resolution: {integrity: sha512-gjYNU6vrAUO4+FuovEo9ofnVosTFXkF0VDuo1MKPItz6e2pxc2ale4FGzLw0Nf7JB1sX4a8h06CN16/pLJ8Q2w==}
-    engines: {node: '>=10'}
-    cpu: [x64]
     os: [darwin]
 
   '@swc/core-darwin-x64@1.13.5':
@@ -4845,32 +4833,14 @@ packages:
     cpu: [x64]
     os: [darwin]
 
-  '@swc/core-linux-arm-gnueabihf@1.10.4':
-    resolution: {integrity: sha512-zd7fXH5w8s+Sfvn2oO464KDWl+ZX1MJiVmE4Pdk46N3PEaNwE0koTfgx2vQRqRG4vBBobzVvzICC3618WcefOA==}
-    engines: {node: '>=10'}
-    cpu: [arm]
-    os: [linux]
-
   '@swc/core-linux-arm-gnueabihf@1.13.5':
     resolution: {integrity: sha512-Q6eS3Pt8GLkXxqz9TAw+AUk9HpVJt8Uzm54MvPsqp2yuGmY0/sNaPPNVqctCX9fu/Nu8eaWUen0si6iEiCsazQ==}
     engines: {node: '>=10'}
     cpu: [arm]
     os: [linux]
 
-  '@swc/core-linux-arm64-gnu@1.10.4':
-    resolution: {integrity: sha512-+UGfoHDxsMZgFD3tABKLeEZHqLNOkxStu+qCG7atGBhS4Slri6h6zijVvf4yI5X3kbXdvc44XV/hrP/Klnui2A==}
-    engines: {node: '>=10'}
-    cpu: [arm64]
-    os: [linux]
-
   '@swc/core-linux-arm64-gnu@1.13.5':
     resolution: {integrity: sha512-aNDfeN+9af+y+M2MYfxCzCy/VDq7Z5YIbMqRI739o8Ganz6ST+27kjQFd8Y/57JN/hcnUEa9xqdS3XY7WaVtSw==}
-    engines: {node: '>=10'}
-    cpu: [arm64]
-    os: [linux]
-
-  '@swc/core-linux-arm64-musl@1.10.4':
-    resolution: {integrity: sha512-cDDj2/uYsOH0pgAnDkovLZvKJpFmBMyXkxEG6Q4yw99HbzO6QzZ5HDGWGWVq/6dLgYKlnnmpjZCPPQIu01mXEg==}
     engines: {node: '>=10'}
     cpu: [arm64]
     os: [linux]
@@ -4881,20 +4851,8 @@ packages:
     cpu: [arm64]
     os: [linux]
 
-  '@swc/core-linux-x64-gnu@1.10.4':
-    resolution: {integrity: sha512-qJXh9D6Kf5xSdGWPINpLGixAbB5JX8JcbEJpRamhlDBoOcQC79dYfOMEIxWPhTS1DGLyFakAx2FX/b2VmQmj0g==}
-    engines: {node: '>=10'}
-    cpu: [x64]
-    os: [linux]
-
   '@swc/core-linux-x64-gnu@1.13.5':
     resolution: {integrity: sha512-WD530qvHrki8Ywt/PloKUjaRKgstQqNGvmZl54g06kA+hqtSE2FTG9gngXr3UJxYu/cNAjJYiBifm7+w4nbHbA==}
-    engines: {node: '>=10'}
-    cpu: [x64]
-    os: [linux]
-
-  '@swc/core-linux-x64-musl@1.10.4':
-    resolution: {integrity: sha512-A76lIAeyQnHCVt0RL/pG+0er8Qk9+acGJqSZOZm67Ve3B0oqMd871kPtaHBM0BW3OZAhoILgfHW3Op9Q3mx3Cw==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [linux]
@@ -4905,22 +4863,10 @@ packages:
     cpu: [x64]
     os: [linux]
 
-  '@swc/core-win32-arm64-msvc@1.10.4':
-    resolution: {integrity: sha512-e6j5kBu4fIY7fFxFxnZI0MlEovRvp50Lg59Fw+DVbtqHk3C85dckcy5xKP+UoXeuEmFceauQDczUcGs19SRGSQ==}
-    engines: {node: '>=10'}
-    cpu: [arm64]
-    os: [win32]
-
   '@swc/core-win32-arm64-msvc@1.13.5':
     resolution: {integrity: sha512-cZ6UpumhF9SDJvv4DA2fo9WIzlNFuKSkZpZmPG1c+4PFSEMy5DFOjBSllCvnqihCabzXzpn6ykCwBmHpy31vQw==}
     engines: {node: '>=10'}
     cpu: [arm64]
-    os: [win32]
-
-  '@swc/core-win32-ia32-msvc@1.10.4':
-    resolution: {integrity: sha512-RSYHfdKgNXV/amY5Tqk1EWVsyQnhlsM//jeqMLw5Fy9rfxP592W9UTumNikNRPdjI8wKKzNMXDb1U29tQjN0dg==}
-    engines: {node: '>=10'}
-    cpu: [ia32]
     os: [win32]
 
   '@swc/core-win32-ia32-msvc@1.13.5':
@@ -4929,26 +4875,11 @@ packages:
     cpu: [ia32]
     os: [win32]
 
-  '@swc/core-win32-x64-msvc@1.10.4':
-    resolution: {integrity: sha512-1ujYpaqfqNPYdwKBlvJnOqcl+Syn3UrQ4XE0Txz6zMYgyh6cdU6a3pxqLqIUSJ12MtXRA9ZUhEz1ekU3LfLWXw==}
-    engines: {node: '>=10'}
-    cpu: [x64]
-    os: [win32]
-
   '@swc/core-win32-x64-msvc@1.13.5':
     resolution: {integrity: sha512-YrKdMVxbYmlfybCSbRtrilc6UA8GF5aPmGKBdPvjrarvsmf4i7ZHGCEnLtfOMd3Lwbs2WUZq3WdMbozYeLU93Q==}
     engines: {node: '>=10'}
     cpu: [x64]
     os: [win32]
-
-  '@swc/core@1.10.4':
-    resolution: {integrity: sha512-ut3zfiTLORMxhr6y/GBxkHmzcGuVpwJYX4qyXWuBKkpw/0g0S5iO1/wW7RnLnZbAi8wS/n0atRZoaZlXWBkeJg==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      '@swc/helpers': '*'
-    peerDependenciesMeta:
-      '@swc/helpers':
-        optional: true
 
   '@swc/core@1.13.5':
     resolution: {integrity: sha512-WezcBo8a0Dg2rnR82zhwoR6aRNxeTGfK5QCD6TQ+kg3xx/zNT02s/0o+81h/3zhvFSB24NtqEr8FTw88O5W/JQ==}
@@ -4961,9 +4892,6 @@ packages:
 
   '@swc/counter@0.1.3':
     resolution: {integrity: sha512-e2BR4lsJkkRlKZ/qCHPw9ZaSxc0MVUd7gtbtaB7aMvHeJVYe8sOB8DBZkP2DtISHGSku9sCK6T6cnY0CtXrOCQ==}
-
-  '@swc/types@0.1.17':
-    resolution: {integrity: sha512-V5gRru+aD8YVyCOMAjMpWR1Ui577DD5KSJsHP8RAxopAH22jFz6GZd/qxqjO6MJHQhcsjvjOFXyDhyLQUnMveQ==}
 
   '@swc/types@0.1.25':
     resolution: {integrity: sha512-iAoY/qRhNH8a/hBvm3zKj9qQ4oc2+3w1unPJa2XvTK3XjeLXtzcCingVPw/9e5mn1+0yPqxcBGp9Jf0pkfMb1g==}
@@ -5661,12 +5589,12 @@ packages:
     peerDependencies:
       react: '>= 16.8.0'
 
-  '@verdant-web/cli@4.8.3':
-    resolution: {integrity: sha512-B/Sqc7ngchkVHURtK/DU/i7DAUbNC7hpFaBQKKCUBtGoaKExhJlJFdiChh18jXptxW2+9tSLFmUT7k7yf4MKsw==}
+  '@verdant-web/cli@5.0.0':
+    resolution: {integrity: sha512-HDpGc9fjBM+u8uOenQt59Py5zo9F1c99wr5lwhJkaNZA4jp1QJPUg5An5qyKVZJ6pbG2yuxDpVhtZvXpFqi6UQ==}
     hasBin: true
 
-  '@verdant-web/cloudflare@0.1.5':
-    resolution: {integrity: sha512-GbWB7GXRbUUqarUxRhpdteaWphBWZ08FFYFRYfduKWVdzGNG1nm4IxrvX7Ecf5YSiWLGKYKkF2iMxc+dhWDXng==}
+  '@verdant-web/cloudflare@0.1.6':
+    resolution: {integrity: sha512-vDzMikCeMlqUyjU4S57jdgOttLGJZ1iK0Gt/HqviiMdRj46rJXZL3WoRu+2o2ogitJVaHq4rp46TzSnXYRn+Dg==}
     peerDependencies:
       '@hono/node-server': ^1.13.8
       hono: ^4.7.2
@@ -5684,10 +5612,10 @@ packages:
     peerDependencies:
       react: ^19
 
-  '@verdant-web/react@42.1.1':
-    resolution: {integrity: sha512-yQjn80xi18HeacNiNFsycuPkIgwR+ggc1DaNiDylYyr665oF+903NCU4OKNEEK6md/CmtlgXPr+8pSWw6iL3Xg==}
+  '@verdant-web/react@43.0.0':
+    resolution: {integrity: sha512-fWV/NpZe1b3O/zVguuGlghUirRRGo7+pfcP30v9zOU3Htu4Urec4GJ6/PjGDXsJJi4pTXc/R+VUzZIRBjHD/1A==}
     peerDependencies:
-      '@verdant-web/store': ^4.3.0
+      '@verdant-web/store': ^5.0.0
       react: ^19.0.0
 
   '@verdant-web/server@4.0.3':
@@ -5699,17 +5627,17 @@ packages:
       hono:
         optional: true
 
-  '@verdant-web/store@4.6.1':
-    resolution: {integrity: sha512-07Ggo2omJVpkG30xqXugJ5KYfaKGaCAZENPJDYUw+AZz1y3WZpLWwdhmysmdRGuPYiIblBqjk25f7+G8tB6F1A==}
+  '@verdant-web/store@5.0.0':
+    resolution: {integrity: sha512-CXexI3wj5yOUld54F2IC5iHk1F+tiKagkfqyUmitIJXwvLQluJX2b/WQu0W8M/j6SiiRRUH8xct0Y4ChCWiAKA==}
 
-  '@verdant-web/tiptap@6.0.1':
-    resolution: {integrity: sha512-+kBKGgkYe9vp+EwqIGqi/YTozdIJ96V+cq3w8BcR/1aBJd8lCMKoou9+DHUw6MalR0lX8OSyo+560V1S68erZw==}
+  '@verdant-web/tiptap@7.0.0':
+    resolution: {integrity: sha512-sQ4nAnaC1LVczvWHev/pShqquxRadvXFQbLz94WuSpFlm9Texn+5uvwY90sVPCRpi+zDU/D0Uj1LLoZE637BOQ==}
     peerDependencies:
       '@tiptap/core': ^2.11.5
       '@tiptap/pm': ^2.11.5
       '@tiptap/react': ^2.11.5
-      '@verdant-web/react': 42.1.1
-      '@verdant-web/store': 4.6.1
+      '@verdant-web/react': 43.0.0
+      '@verdant-web/store': 5.0.0
       react: ^19.0.0
     peerDependenciesMeta:
       '@tiptap/react':
@@ -14515,81 +14443,35 @@ snapshots:
       magic-string: 0.25.9
       string.prototype.matchall: 4.0.12
 
-  '@swc/core-darwin-arm64@1.10.4':
-    optional: true
-
   '@swc/core-darwin-arm64@1.13.5':
-    optional: true
-
-  '@swc/core-darwin-x64@1.10.4':
     optional: true
 
   '@swc/core-darwin-x64@1.13.5':
     optional: true
 
-  '@swc/core-linux-arm-gnueabihf@1.10.4':
-    optional: true
-
   '@swc/core-linux-arm-gnueabihf@1.13.5':
-    optional: true
-
-  '@swc/core-linux-arm64-gnu@1.10.4':
     optional: true
 
   '@swc/core-linux-arm64-gnu@1.13.5':
     optional: true
 
-  '@swc/core-linux-arm64-musl@1.10.4':
-    optional: true
-
   '@swc/core-linux-arm64-musl@1.13.5':
-    optional: true
-
-  '@swc/core-linux-x64-gnu@1.10.4':
     optional: true
 
   '@swc/core-linux-x64-gnu@1.13.5':
     optional: true
 
-  '@swc/core-linux-x64-musl@1.10.4':
-    optional: true
-
   '@swc/core-linux-x64-musl@1.13.5':
-    optional: true
-
-  '@swc/core-win32-arm64-msvc@1.10.4':
     optional: true
 
   '@swc/core-win32-arm64-msvc@1.13.5':
     optional: true
 
-  '@swc/core-win32-ia32-msvc@1.10.4':
-    optional: true
-
   '@swc/core-win32-ia32-msvc@1.13.5':
-    optional: true
-
-  '@swc/core-win32-x64-msvc@1.10.4':
     optional: true
 
   '@swc/core-win32-x64-msvc@1.13.5':
     optional: true
-
-  '@swc/core@1.10.4':
-    dependencies:
-      '@swc/counter': 0.1.3
-      '@swc/types': 0.1.17
-    optionalDependencies:
-      '@swc/core-darwin-arm64': 1.10.4
-      '@swc/core-darwin-x64': 1.10.4
-      '@swc/core-linux-arm-gnueabihf': 1.10.4
-      '@swc/core-linux-arm64-gnu': 1.10.4
-      '@swc/core-linux-arm64-musl': 1.10.4
-      '@swc/core-linux-x64-gnu': 1.10.4
-      '@swc/core-linux-x64-musl': 1.10.4
-      '@swc/core-win32-arm64-msvc': 1.10.4
-      '@swc/core-win32-ia32-msvc': 1.10.4
-      '@swc/core-win32-x64-msvc': 1.10.4
 
   '@swc/core@1.13.5':
     dependencies:
@@ -14608,10 +14490,6 @@ snapshots:
       '@swc/core-win32-x64-msvc': 1.13.5
 
   '@swc/counter@0.1.3': {}
-
-  '@swc/types@0.1.17':
-    dependencies:
-      '@swc/counter': 0.1.3
 
   '@swc/types@0.1.25':
     dependencies:
@@ -15589,19 +15467,19 @@ snapshots:
       '@use-gesture/core': 10.3.1
       react: 19.2.0
 
-  '@verdant-web/cli@4.8.3':
+  '@verdant-web/cli@5.0.0':
     dependencies:
       '@clack/prompts': 0.5.1
-      '@swc/core': 1.10.4
+      '@swc/core': 1.13.5
       change-case: 4.1.2
       esbuild: 0.19.12
       prettier: 3.4.2
       yargs: 17.7.2
-      zod: 3.24.1
+      zod: 3.25.76
     transitivePeerDependencies:
       - '@swc/helpers'
 
-  '@verdant-web/cloudflare@0.1.5(@hono/node-server@1.19.5(hono@4.9.9))(hono@4.9.9)':
+  '@verdant-web/cloudflare@0.1.6(@hono/node-server@1.19.5(hono@4.9.9))(hono@4.9.9)':
     dependencies:
       '@hono/node-server': 1.19.5(hono@4.9.9)
       '@verdant-web/common': 3.0.0
@@ -15627,13 +15505,13 @@ snapshots:
       path-to-regexp: 6.3.0
       react: 19.2.0
 
-  '@verdant-web/react@42.1.1(@verdant-web/store@4.6.1)(react@19.2.0)':
+  '@verdant-web/react@43.0.0(@verdant-web/store@5.0.0)(react@19.2.0)':
     dependencies:
       '@verdant-web/common': 3.0.0
-      '@verdant-web/store': 4.6.1
+      '@verdant-web/store': 5.0.0
       react: 19.2.0
       suspend-react: 0.1.3(react@19.2.0)
-      use-sync-external-store: 1.4.0(react@19.2.0)
+      use-sync-external-store: 1.6.0(react@19.2.0)
 
   '@verdant-web/server@4.0.3(hono@4.9.9)':
     dependencies:
@@ -15649,7 +15527,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@verdant-web/store@4.6.1':
+  '@verdant-web/store@5.0.0':
     dependencies:
       '@verdant-web/common': 3.0.0
       cuid: 2.1.8
@@ -15657,15 +15535,15 @@ snapshots:
       jwt-decode: 3.1.2
       weak-event: 2.0.5
 
-  '@verdant-web/tiptap@6.0.1(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@verdant-web/react@42.1.1(@verdant-web/store@4.6.1)(react@19.2.0))(@verdant-web/store@4.6.1)(react@19.2.0)':
+  '@verdant-web/tiptap@7.0.0(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0))(@verdant-web/react@43.0.0(@verdant-web/store@5.0.0)(react@19.2.0))(@verdant-web/store@5.0.0)(react@19.2.0)':
     dependencies:
       '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
       '@tiptap/pm': 2.11.5
       '@verdant-web/common': 3.0.0
     optionalDependencies:
       '@tiptap/react': 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
-      '@verdant-web/react': 42.1.1(@verdant-web/store@4.6.1)(react@19.2.0)
-      '@verdant-web/store': 4.6.1
+      '@verdant-web/react': 43.0.0(@verdant-web/store@5.0.0)(react@19.2.0)
+      '@verdant-web/store': 5.0.0
       react: 19.2.0
 
   '@vitejs/plugin-react-swc@4.1.0(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))':

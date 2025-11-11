@@ -12,3 +12,15 @@ a {
 #root {
 	position: relative;
 }
+
+body,
+html {
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
+}
+
+body,
+#root {
+	flex: 1;
+}

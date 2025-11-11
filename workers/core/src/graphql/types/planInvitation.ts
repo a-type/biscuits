@@ -163,23 +163,21 @@ builder.mutationFields((t) => ({
 				await removeUserFromPlan(ctx.session.planId, ctx.session.userId, ctx);
 			}
 
-			await ctx.db.transaction().execute(async (tx) => {
-				await tx
-					.updateTable('User')
-					.where('id', '=', userId)
-					.set({
-						planId: invite.planId,
-						planRole: 'user',
-					})
-					.execute();
-				await tx
-					.updateTable('PlanInvitation')
-					.where('id', '=', code)
-					.set({
-						claimedAt: new Date(),
-					})
-					.execute();
-			});
+			await ctx.db
+				.updateTable('User')
+				.where('id', '=', userId)
+				.set({
+					planId: invite.planId,
+					planRole: 'user',
+				})
+				.execute();
+			await ctx.db
+				.updateTable('PlanInvitation')
+				.where('id', '=', code)
+				.set({
+					claimedAt: new Date(),
+				})
+				.execute();
 
 			// get plan info needed for session
 			const plan = await ctx.db

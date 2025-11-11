@@ -66,7 +66,7 @@ export default function LoginPage() {
 		<div className="flex flex-col items-center justify-center h-screen flex-1 bg-primary-wash">
 			<Box d="col" gap grow layout="center center">
 				<Box
-					surface
+					surface="white"
 					elevated="sm"
 					p
 					container="reset"

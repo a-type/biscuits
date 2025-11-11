@@ -1,5 +1,5 @@
 import { Pages } from '@/pages/Pages.jsx';
-import { clientDescriptor, hooks } from '@/store.js';
+import { hooks, verdant } from '@/store.js';
 import { ErrorBoundary, H1, P, Provider as UIProvider } from '@a-type/ui';
 import { Provider, ReloadButton, useHasServerAccess } from '@biscuits/client';
 import { ReactNode, Suspense } from 'react';
@@ -12,10 +12,7 @@ export function App({}: AppProps) {
 		<ErrorBoundary fallback={<ErrorFallback />}>
 			<UIProvider>
 				<Suspense>
-					<Provider
-						appId="star-chart"
-						storeDescriptor={clientDescriptor as any}
-					>
+					<Provider appId="star-chart" verdantClient={verdant as any}>
 						<VerdantProvider>
 							<Pages />
 							<ProjectSettingsDialog />
@@ -31,7 +28,7 @@ function VerdantProvider({ children }: { children: ReactNode }) {
 	// only sync if logged in to the server
 	const isLoggedIn = useHasServerAccess();
 	return (
-		<hooks.Provider value={clientDescriptor} sync={isLoggedIn}>
+		<hooks.Provider value={verdant} sync={isLoggedIn}>
 			{children}
 		</hooks.Provider>
 	);

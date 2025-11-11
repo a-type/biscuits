@@ -1,5 +1,11 @@
 import { hooks } from '@/stores/groceries/index.js';
-import { Icon, Select, SelectTrigger, UnstyledSelectTrigger } from '@a-type/ui';
+import {
+	Button,
+	Icon,
+	Select,
+	SelectTrigger,
+	UnstyledSelectTrigger,
+} from '@a-type/ui';
 import classNames from 'classnames';
 import { ReactNode, useCallback, useEffect } from 'react';
 
@@ -64,11 +70,11 @@ export function MeetupSelect({ children, id, emptyLabel }: MeetupSelectProps) {
 				{children ? (
 					children(location)
 				) : (
-					<>
+					<Button>
 						<Icon name="locate" />
 						<Select.Value />
 						<Select.Icon />
-					</>
+					</Button>
 				)}
 			</Trigger>
 			<Select.Content>

@@ -108,7 +108,7 @@ function ItemTypePicker({ item }: { item: Item }) {
 				size="small"
 				toggled={type === 'idea'}
 				onClick={() => item.set('type', 'idea')}
-				className="theme-lemon"
+				color="lemon"
 				emphasis="primary"
 			>
 				<Icon name="lightbulb" /> Idea
@@ -117,7 +117,7 @@ function ItemTypePicker({ item }: { item: Item }) {
 				size="small"
 				toggled={type === 'link'}
 				onClick={() => item.set('type', 'link')}
-				className="theme-leek"
+				color="leek"
 				emphasis="primary"
 			>
 				<Icon name="gift" /> Product
@@ -126,7 +126,7 @@ function ItemTypePicker({ item }: { item: Item }) {
 				size="small"
 				toggled={type === 'vibe'}
 				onClick={() => item.set('type', 'vibe')}
-				className="theme-eggplant"
+				color="eggplant"
 				emphasis="primary"
 			>
 				<Icon name="magic" /> Vibe
