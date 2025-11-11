@@ -16,8 +16,8 @@ catalogs:
       specifier: 1.1.0
       version: 1.1.0
     '@a-type/ui':
-      specifier: 3.0.18
-      version: 3.0.18
+      specifier: 3.0.19
+      version: 3.0.19
     '@a-type/utils':
       specifier: 1.1.9
       version: 1.1.9
@@ -243,7 +243,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.18(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.19(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -371,7 +371,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.18(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.19(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -627,7 +627,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.18(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.19(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -739,7 +739,7 @@ importers:
         version: 0.2.15(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.18(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.19(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -857,7 +857,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.18(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.19(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -981,7 +981,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.18(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.19(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1105,7 +1105,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.18(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.19(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1149,7 +1149,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.18(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.19(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@biscuits/graphql':
         specifier: workspace:*
         version: link:../../../packages/graphql
@@ -1234,7 +1234,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.18(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.19(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1340,7 +1340,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.18(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.19(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@astrojs/check':
         specifier: ^0.9.4
         version: 0.9.4(prettier@3.6.2)(typescript@5.9.3)
@@ -1388,7 +1388,7 @@ importers:
         version: 2.1.3
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.18(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.19(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1537,7 +1537,7 @@ importers:
     devDependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.18(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.19(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@unocss/transformer-variant-group':
         specifier: 'catalog:'
         version: 66.5.3
@@ -1549,10 +1549,10 @@ importers:
     dependencies:
       '@a-type/auth-ui':
         specifier: 'catalog:'
-        version: 1.1.0(@a-type/ui@3.0.18(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))))(react@19.2.0)
+        version: 1.1.0(@a-type/ui@3.0.19(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))))(react@19.2.0)
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.18(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.19(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@biscuits/apps':
         specifier: workspace:*
         version: link:../packages/apps
@@ -1864,8 +1864,8 @@ packages:
       react: ^18.3.1
       react-dom: ^18.3.1
 
-  '@a-type/ui@3.0.18':
-    resolution: {integrity: sha512-yOTbXRlHC67eQ5JkBt6gQfsg1rITtj+c5z7ZTwsptVEAKKdaP3cXmvKLVQChr6KTP0EFwtvuoG9BQz6qeEXiTA==}
+  '@a-type/ui@3.0.19':
+    resolution: {integrity: sha512-orBluYtk9CbLxUIgOE66O01zWlZGuqoSJ5YCxmtDVVPBO7SpPwyqcwRNmVn+x00090RJ3va2WK389cknmHmGYA==}
     peerDependencies:
       react: ^19
       react-dom: ^19
@@ -10979,9 +10979,9 @@ snapshots:
 
   '@a-type/auth-fetch@2.1.3': {}
 
-  '@a-type/auth-ui@1.1.0(@a-type/ui@3.0.18(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))))(react@19.2.0)':
+  '@a-type/auth-ui@1.1.0(@a-type/ui@3.0.19(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))))(react@19.2.0)':
     dependencies:
-      '@a-type/ui': 3.0.18(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+      '@a-type/ui': 3.0.19(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       react: 19.2.0
 
   '@a-type/auth@1.3.16':
@@ -11016,7 +11016,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@a-type/ui@3.0.18(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))':
+  '@a-type/ui@3.0.19(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.3(vite@7.1.9(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))':
     dependencies:
       '@a-type/utils': 1.1.9
       '@radix-ui/react-accordion': 1.2.2(@types/react-dom@19.2.1(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
