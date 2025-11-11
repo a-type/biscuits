@@ -11,7 +11,7 @@ export function ItemCardPurchaseButton({
 	...props
 }: ItemCardPurchaseButtonProps) {
 	const [hasPurchased] = useLocalPurchase(itemId);
-	const [purchaseItem, { loading }] = usePurchaseItem(itemId);
+	const [purchaseItem, { isPending: loading }] = usePurchaseItem(itemId);
 
 	return (
 		<Button
