@@ -11,9 +11,9 @@ export function PantryListSectionTabs({}: PantryListSectionTabsProps) {
 			value={filter}
 			onValueChange={(f) => setFilter(f as 'purchased' | 'all' | 'frozen')}
 		>
-			<TabsList className="[&>*]:text-xs">
+			<TabsList className="[&>*]:text-xs rounded-full">
 				<TabsTrigger
-					className="text-nowrap flex flex-col items-center sm:flex-row"
+					className="text-nowrap flex flex-col items-center rounded-full sm:flex-row"
 					value="purchased"
 				>
 					<Icon name="check" />
@@ -21,13 +21,13 @@ export function PantryListSectionTabs({}: PantryListSectionTabsProps) {
 				</TabsTrigger>
 				<TabsTrigger
 					value="frozen"
-					className="text-nowrap flex flex-col sm:flex-row palette-accent"
+					className="text-nowrap flex flex-col sm:flex-row rounded-full palette-accent"
 				>
 					<Icon name="snowflake" />
 					<span className="">Frozen</span>
 				</TabsTrigger>
 				<TabsTrigger
-					className="text-nowrap flex flex-col items-center sm:flex-row"
+					className="text-nowrap flex flex-col items-center rounded-full sm:flex-row"
 					value="all"
 				>
 					<Icon name="food" />

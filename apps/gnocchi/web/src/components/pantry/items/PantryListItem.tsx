@@ -125,13 +125,10 @@ export function PantryListItem({
 				</CardMain>
 				<CardFooter className={classNames(showLabels ? 'p-0' : '')}>
 					<CardActions
-						className={classNames(
-							'flex-wrap',
-							{
-								'rounded-none p-1': showLabels,
-							},
-							'border-b-none border-l-none border-r-none',
-						)}
+						className={classNames('flex-wrap', {
+							'rounded-none p-1 border-b-none border-l-none border-r-none':
+								showLabels,
+						})}
 					>
 						<Suspense
 							fallback={
