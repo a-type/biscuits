@@ -83,8 +83,8 @@ builder.mutationFields((t) => ({
 				.values({
 					wishlistId: wishlist.id,
 					itemId: input.itemId,
-					purchasedBy: input.name,
-					quantity: input.quantity,
+					purchasedBy: input.name ?? '',
+					quantity: input.quantity ?? 1,
 					id: id(),
 				})
 				.execute();
@@ -118,11 +118,7 @@ builder.inputType('PurchasePublicItemInput', {
 		itemId: t.id({
 			required: true,
 		}),
-		quantity: t.int({
-			required: true,
-		}),
-		name: t.string({
-			required: true,
-		}),
+		quantity: t.int(),
+		name: t.string(),
 	}),
 });

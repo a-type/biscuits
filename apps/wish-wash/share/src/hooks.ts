@@ -1,4 +1,4 @@
-import { toast } from '@a-type/ui';
+import { toast, useLocalStorage } from '@a-type/ui';
 import { graphql, VariablesOf } from '@biscuits/graphql';
 import { useMutation } from '@tanstack/react-query';
 import { notFound } from '@tanstack/react-router';
@@ -7,6 +7,7 @@ import { env } from 'cloudflare:workers';
 import request from 'graphql-request';
 import { useEffect, useState } from 'react';
 import { useHubContext } from './components/Context.jsx';
+import { useLocalPurchase } from './utils/localPurchases.js';
 import { proxyAuthMiddleware } from './utils/proxyAuthMiddleware.js';
 
 export function useTimer(timeout: number) {
@@ -66,6 +67,7 @@ const purchaseItem = createServerFn()
 export function usePurchaseItem(id: string) {
 	const { wishlistSlug } = useHubContext();
 	const doPurchase = useServerFn(purchaseItem);
+	const [_, setLocalPurchase] = useLocalPurchase(id);
 	const mutation = useMutation({
 		mutationFn: (input: VariablesOf<typeof purchase>['input']) =>
 			doPurchase({
@@ -74,6 +76,10 @@ export function usePurchaseItem(id: string) {
 		onError: (error: unknown) => {
 			console.error(error);
 			toast.error(`Hm, something went wrong. Try again?`);
+		},
+		onSuccess: () => {
+			setLocalPurchase(true);
+			toast.success(`Thanks for letting us know!`);
 		},
 	});
 
@@ -87,4 +93,8 @@ export function usePurchaseItem(id: string) {
 	};
 
 	return [execute, mutation] as const;
+}
+
+export function useShowPurchased() {
+	return useLocalStorage('show-purchased-items', false, false);
 }

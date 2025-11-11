@@ -11,6 +11,7 @@ import {
 	ItemCardNote,
 	itemCardNoteFragment,
 } from './cardParts/ItemCardNote.js';
+import { ItemCardOpenCta } from './cardParts/ItemCardOpenCta.js';
 import {
 	ItemCardPrice,
 	itemCardPriceFragment,
@@ -74,7 +75,7 @@ export function IdeaCardContent({
 		<SearchAndBuyExperience
 			item={item}
 			listAuthor={listAuthor}
-			description={`${listAuthor} added this idea to their list as inspiration. Does it
+			description={`They added this idea to their list as inspiration. Does it
 					give you any ideas of your own?`}
 		>
 			<ItemCardMain item={item} className={className}>
@@ -84,6 +85,7 @@ export function IdeaCardContent({
 				<ItemCardPrice item={item} />
 				<ItemCardPurchases item={item} />
 				<ItemCardNote item={item} />
+				<ItemCardOpenCta />
 			</ItemCardMain>
 		</SearchAndBuyExperience>
 	);

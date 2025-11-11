@@ -1,4 +1,4 @@
-import { clsx, Masonry } from '@a-type/ui';
+import { Box, clsx } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 
 export const itemCardImageGalleryFragment = graphql(`
@@ -21,20 +21,26 @@ export function ItemCardImageGallery({
 }: ItemCardImageGalleryProps) {
 	const item = readFragment(itemCardImageGalleryFragment, itemMasked);
 	return (
-		<Masonry
-			className={clsx('w-full', className)}
-			columns={() => {
-				return Math.min(item.imageUrls.length, maxCols);
-			}}
+		<Box
+			p
+			gap
+			items="center"
+			className={clsx(
+				'w-full overflow-y-auto justify-center-safe',
+				'grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))]',
+				className,
+			)}
+			border
+			surface
 		>
 			{item.imageUrls.map((url, i) => (
 				<img
 					key={i}
-					className="w-full rounded-lg cursor-pointer"
+					className="rounded-lg cursor-pointer h-auto w-full object-contain flex-basis-200px min-w-200px flex-shrink-1 flex-grow-1"
 					crossOrigin="anonymous"
 					src={url}
 				/>
 			))}
-		</Masonry>
+		</Box>
 	);
 }

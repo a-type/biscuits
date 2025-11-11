@@ -1,8 +1,9 @@
-import { Box, Chip, H1, Provider as UIProvider } from '@a-type/ui';
+import { Box, Chip, H1, Switch, Provider as UIProvider } from '@a-type/ui';
 import { graphql, ResultOf } from '@biscuits/graphql';
 import { useEffect } from 'react';
 import { HubContextProvider } from '~/components/Context.js';
 import { Items, itemsFragment } from '~/components/Items.js';
+import { useShowPurchased } from '~/hooks.js';
 
 export const listPageQuery = graphql(
 	`
@@ -45,6 +46,8 @@ export function ListPage({ data }: ListPageProps) {
 
 	const createdAtDate = new Date(data.createdAt);
 
+	const [showPurchased, setShowPurchased] = useShowPurchased();
+
 	return (
 		<HubContextProvider wishlistSlug={data.slug}>
 			<UIProvider>
@@ -70,8 +73,25 @@ export function ListPage({ data }: ListPageProps) {
 							<Chip>By {data.author}</Chip>
 							<Chip>Created {createdAtDate.toLocaleDateString()}</Chip>
 						</Box>
-						<Box surface color="primary" className="mr-auto" p>
-							Click any item to see details and links
+						<Box
+							className="flex-col md:flex-row"
+							justify="between"
+							items="start"
+							full="width"
+							gap
+						>
+							<Box surface color="primary" p>
+								Click any item to see details and links
+							</Box>
+							<Box surface p items="center" asChild gap>
+								<label>
+									Show purchased items
+									<Switch
+										checked={showPurchased}
+										onCheckedChange={setShowPurchased}
+									/>
+								</label>
+							</Box>
 						</Box>
 					</Box>
 					<Items

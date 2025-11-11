@@ -2,6 +2,10 @@ import { Card, clsx } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 import { typeThemes } from '@wish-wash.biscuits/common';
 import {
+	ItemCardActions,
+	itemCardActionsFragment,
+} from './cardParts/ItemCardActions.js';
+import {
 	ItemCardMarquee,
 	itemCardMarqueeFragment,
 } from './cardParts/ItemCardMarquee.js';
@@ -30,6 +34,7 @@ export const itemCardFragment = graphql(
 			...IdeaCardContent
 			...ProductCardContent
 			...VibeCardContent
+			...ItemCardActions
 		}
 	`,
 	[
@@ -38,6 +43,7 @@ export const itemCardFragment = graphql(
 		ideaCardContentFragment,
 		productCardContentFragment,
 		vibeCardContentFragment,
+		itemCardActionsFragment,
 	],
 );
 
@@ -69,6 +75,9 @@ export function ItemCard({
 			<ItemCardStar item={item} />
 			<ItemCardMarquee item={item} />
 			<ItemCardContent item={itemMasked} listAuthor={listAuthor} />
+			<Card.Footer>
+				<ItemCardActions item={item} />
+			</Card.Footer>
 		</Card>
 	);
 }

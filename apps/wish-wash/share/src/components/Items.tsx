@@ -1,11 +1,14 @@
 import { CardGrid } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
+import { useShowPurchased } from '~/hooks.js';
 import { ItemCard, itemCardFragment } from './ItemCard.js';
 
 export const itemsFragment = graphql(
 	`
 		fragment Items on PublicWishlistItem {
 			id
+			purchasedCount
+			count
 			...ItemCard
 		}
 	`,
@@ -24,6 +27,16 @@ export function Items({
 	className,
 }: ItemsProps) {
 	const items = itemsMasked.map((item) => readFragment(itemsFragment, item));
+
+	const unpurchasedItems = items.filter(
+		(item) => item.purchasedCount < (item.count || Infinity),
+	);
+	const purchasedItems = items.filter(
+		(item) => item.purchasedCount >= (item.count || Infinity),
+	);
+
+	const [showPurchased] = useShowPurchased();
+
 	return (
 		<CardGrid
 			className={className}
@@ -34,9 +47,13 @@ export function Items({
 				return 5;
 			}}
 		>
-			{items.map((item) => (
+			{unpurchasedItems.map((item) => (
 				<ItemCard key={item.id} item={item} listAuthor={listAuthor} />
 			))}
+			{showPurchased &&
+				purchasedItems.map((item) => (
+					<ItemCard key={item.id} item={item} listAuthor={listAuthor} />
+				))}
 		</CardGrid>
 	);
 }

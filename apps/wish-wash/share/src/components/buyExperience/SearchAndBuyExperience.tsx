@@ -2,6 +2,7 @@ import { Button, Dialog, DialogActions } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 import { ReactNode, useEffect, useState } from 'react';
 import { itemCardImageGalleryFragment } from '../cardParts/ItemCardImageGallery.js';
+import { ItemCardPurchaseButton } from '../cardParts/ItemCardPurchaseButton.js';
 import { itemCardPurchasesFragment } from '../cardParts/ItemCardPurchases.js';
 import {
 	PostBuyExperienceContent,
@@ -67,7 +68,7 @@ export function SearchAndBuyExperience({
 			}}
 		>
 			<Dialog.Trigger asChild>{children}</Dialog.Trigger>
-			<Dialog.Content>
+			<Dialog.Content width="lg" className="gap-md">
 				{showPost ?
 					<PostBuyExperienceContent item={item} listAuthor={listAuthor} />
 				:	<PreBuyExperienceContent
@@ -77,15 +78,21 @@ export function SearchAndBuyExperience({
 					/>
 				}
 				<DialogActions>
-					{showPost && (
+					{showPost ?
 						<Button
 							emphasis="ghost"
 							onClick={() => setShowPost(false)}
 							className="mr-auto"
+							size="default"
 						>
 							What was it again?
 						</Button>
-					)}
+					:	<ItemCardPurchaseButton
+							itemId={item.id}
+							className="mr-auto"
+							size="default"
+						/>
+					}
 					<Dialog.Close>Close</Dialog.Close>
 				</DialogActions>
 			</Dialog.Content>

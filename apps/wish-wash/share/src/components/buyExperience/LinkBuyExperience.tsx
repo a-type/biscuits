@@ -1,6 +1,11 @@
 import { Box, Button, Dialog, Icon } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 import { ReactNode, useEffect, useState } from 'react';
+import { ItemCardPurchaseButton } from '../cardParts/ItemCardPurchaseButton.js';
+import {
+	ItemCardTypeChip,
+	itemCardTypeChipFragment,
+} from '../cardParts/ItemCardTypeChip.js';
 import {
 	PostBuyExperienceContent,
 	postBuyExperienceContentFragment,
@@ -19,9 +24,14 @@ export const linkBuyExperienceFragment = graphql(
 			purchasedCount
 			...SearchAndBuyExperience
 			...PostBuyExperienceContent
+			...ItemCardTypeChip
 		}
 	`,
-	[searchAndBuyExperienceFragment, postBuyExperienceContentFragment],
+	[
+		searchAndBuyExperienceFragment,
+		postBuyExperienceContentFragment,
+		itemCardTypeChipFragment,
+	],
 );
 
 export function LinkBuyExperience({
@@ -74,7 +84,7 @@ export function LinkBuyExperience({
 			}}
 		>
 			<Dialog.Trigger asChild>{children}</Dialog.Trigger>
-			<Dialog.Content className="flex flex-col gap-md">
+			<Dialog.Content width="lg" className="flex flex-col gap-md">
 				{showPost ?
 					<PostBuyExperienceContent item={item} listAuthor={listAuthor} />
 				:	<PreLinkBuyExperienceContent
@@ -85,7 +95,7 @@ export function LinkBuyExperience({
 					/>
 				}
 				<Dialog.Actions>
-					{showPost && (
+					{showPost ?
 						<Button
 							emphasis="ghost"
 							onClick={() => setShowPost(false)}
@@ -93,7 +103,12 @@ export function LinkBuyExperience({
 						>
 							What was it again?
 						</Button>
-					)}
+					:	<ItemCardPurchaseButton
+							size="default"
+							itemId={item.id}
+							className="mr-auto"
+						/>
+					}
 					<Dialog.Close />
 				</Dialog.Actions>
 			</Dialog.Content>
@@ -116,20 +131,21 @@ function PreLinkBuyExperienceContent({
 	const needs = Math.max(0, item.count - item.purchasedCount);
 	return (
 		<>
+			<ItemCardTypeChip item={item} className="mr-auto" />
 			<Dialog.Title>Visit the store page</Dialog.Title>
 			<Dialog.Description>
 				Come back to this tab to mark this item as purchased when you're done!
 			</Dialog.Description>
 			{needs === 0 && item.count > 0 ?
 				<Box surface color="attention" p>
-					This item is already purchased!
+					This item was already purchased!
 				</Box>
 			:	<Box surface color="primary" p>
 					{listAuthor} wants {needs}
 					{item.count > 1 ? ' more' : ''}
 				</Box>
 			}
-			<Button asChild emphasis="primary" onClick={onVisit}>
+			<Button asChild emphasis="primary" className="ml-auto" onClick={onVisit}>
 				<a href={link} target="_blank" rel="noreferrer">
 					Go to store page
 					<Icon name="new_window" />

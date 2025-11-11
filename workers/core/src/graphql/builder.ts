@@ -222,8 +222,8 @@ export const builder = new SchemaBuilder<{
 		PurchasePublicItemInput: {
 			wishlistSlug: string;
 			itemId: string;
-			name: string;
-			quantity: number;
+			name: string | null;
+			quantity: number | null;
 		};
 		WishlistIdeaRequestCreateInput: {
 			wishlistId: string;

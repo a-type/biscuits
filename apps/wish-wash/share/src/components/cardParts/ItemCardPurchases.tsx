@@ -6,6 +6,7 @@ export const itemCardPurchasesFragment = graphql(`
 		id
 		count
 		purchasedCount
+		type
 	}
 `);
 
@@ -19,12 +20,24 @@ export function ItemCardPurchases({
 	className,
 }: ItemCardPurchasesProps) {
 	const item = readFragment(itemCardPurchasesFragment, itemMasked);
-	if (!item.purchasedCount) return null;
+	if (!item.purchasedCount) {
+		if (item.count && item.count !== Infinity && item.type !== 'vibe') {
+			return (
+				<CardContent className={clsx('text-sm block items-center', className)}>
+					Wants <strong>{item.count}</strong>
+				</CardContent>
+			);
+		}
+		return null;
+	}
 
 	return (
 		<CardContent
 			className={clsx(
-				'text-sm block items-center bg-white color-black',
+				'text-sm block items-center',
+				item.purchasedCount >= item.count ?
+					'bg-main-dark color-contrast'
+				:	'bg-white',
 				className,
 			)}
 		>
@@ -32,7 +45,7 @@ export function ItemCardPurchases({
 				{item.purchasedCount}
 				{item.count ? ` / ${item.count}` : ''}
 			</strong>{' '}
-			bought already
+			bought
 		</CardContent>
 	);
 }

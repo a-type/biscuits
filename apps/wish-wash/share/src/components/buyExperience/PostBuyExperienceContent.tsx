@@ -54,19 +54,23 @@ export function PostBuyExperienceContent({
 			{item.count !== 1 ?
 				<>
 					<Dialog.Description>
-						Tell {listAuthor} how many you bought to avoid duplicates
+						Tell them how many you bought to avoid duplicates
 					</Dialog.Description>
 					<NumberStepperField name="quantity" label="I bought..." />
 				</>
 			:	<>
 					<Dialog.Description>
-						Tell {listAuthor} you bought it to avoid duplicates
+						Tell them you bought it to avoid duplicates
 					</Dialog.Description>
 					<input type="hidden" name="quantity" value={1} />
 				</>
 			}
-			<TextField name="name" label="Your name (optional)" />
-			<SubmitButton>I bought it!</SubmitButton>
+			<Box surface col gap p full="width">
+				<TextField name="name" label="Your name (optional)" />
+				<SubmitButton emphasis="primary" className="ml-auto">
+					I bought it!
+				</SubmitButton>
+			</Box>
 		</FormikForm>
 	);
 }

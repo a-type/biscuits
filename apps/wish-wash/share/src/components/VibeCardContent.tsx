@@ -11,6 +11,7 @@ import {
 	ItemCardNote,
 	itemCardNoteFragment,
 } from './cardParts/ItemCardNote.js';
+import { ItemCardOpenCta } from './cardParts/ItemCardOpenCta.js';
 import {
 	ItemCardPurchases,
 	itemCardPurchasesFragment,
@@ -65,6 +66,7 @@ export function VibeCardContent({
 				<ItemCardTitle item={item} />
 				<ItemCardPurchases item={item} />
 				<ItemCardNote item={item} />
+				<ItemCardOpenCta />
 			</ItemCardMain>
 		</VibeCardBuyExperience>
 	);

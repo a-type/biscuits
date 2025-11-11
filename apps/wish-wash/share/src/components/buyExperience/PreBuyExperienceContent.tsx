@@ -10,6 +10,10 @@ import {
 	ItemCardPurchases,
 	itemCardPurchasesFragment,
 } from '../cardParts/ItemCardPurchases.js';
+import {
+	ItemCardTypeChip,
+	itemCardTypeChipFragment,
+} from '../cardParts/ItemCardTypeChip.js';
 
 export const preBuyExperienceContentFragment = graphql(
 	`
@@ -18,9 +22,14 @@ export const preBuyExperienceContentFragment = graphql(
 			description
 			...ItemCardImageGallery
 			...ItemCardPurchases
+			...ItemCardTypeChip
 		}
 	`,
-	[itemCardImageGalleryFragment, itemCardPurchasesFragment],
+	[
+		itemCardImageGalleryFragment,
+		itemCardPurchasesFragment,
+		itemCardTypeChipFragment,
+	],
 );
 
 export function PreBuyExperienceContent({
@@ -35,6 +44,7 @@ export function PreBuyExperienceContent({
 	const item = readFragment(preBuyExperienceContentFragment, itemMasked);
 	return (
 		<>
+			<ItemCardTypeChip item={item} className="mr-auto" />
 			<Dialog.Title>Search for {item.description}</Dialog.Title>
 			<ItemCardImageGallery item={item} maxCols={2} />
 			<ItemCardPurchases item={item} className="!bg-accent-wash mr-auto" />
