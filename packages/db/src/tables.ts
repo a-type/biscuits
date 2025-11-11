@@ -26,9 +26,6 @@ export interface Database {
 	PublishedRecipe: PublishedRecipeTable;
 	PublishedWishlist: PublishedWishlistTable;
 	WishlistPurchase: WishlistPurchaseTable;
-	WishlistIdeaRequest: WishlistIdeaRequestTable;
-	PublishedNotebook: PublishedNotebookTable;
-	PublishedPost: PublishedPostTable;
 }
 
 // date serialization: Dates go in, strings come out.
@@ -300,25 +297,6 @@ export type WishlistPurchase = Selectable<WishlistPurchaseTable>;
 export type NewWishlistPurchase = Insertable<WishlistPurchaseTable>;
 export type WishlistPurchaseUpdate = Updateable<WishlistPurchaseTable>;
 
-// a map of question id -> answer
-export type WishlistIdeaRequestResponse = Record<string, string>;
-
-export interface WishlistIdeaRequestTable {
-	id: string;
-	createdAt: CreatedAt;
-	updatedAt: UpdatedAt;
-
-	planId: string;
-	wishlistId: string;
-	requestedBy: string;
-	receiverName: string;
-	responseJson: WishlistIdeaRequestResponse | null;
-}
-
-export type WishlistIdeaRequest = Selectable<WishlistIdeaRequestTable>;
-export type NewWishlistIdeaRequest = Insertable<WishlistIdeaRequestTable>;
-export type WishlistIdeaRequestUpdate = Updateable<WishlistIdeaRequestTable>;
-
 export interface UserUsageLimitTable {
 	userId: string;
 	limitType: string;
@@ -332,43 +310,6 @@ export type UsageLimit = Selectable<UserUsageLimitTable>;
 export type NewUsageLimit = Insertable<UserUsageLimitTable>;
 export type UsageLimitUpdate = Updateable<UserUsageLimitTable>;
 
-export interface PublishedNotebookTable {
-	id: string;
-	createdAt: CreatedAt;
-	updatedAt: UpdatedAt;
-
-	publishedBy: string;
-	planId: string;
-	name: string;
-	iconUrl: string | null;
-	coverImageUrl: string | null;
-	description: RichTextNode | null;
-	theme: {
-		primaryColor: string;
-		fontStyle: 'serif' | 'sans-serif';
-		spacing: 'sm' | 'md' | 'lg';
-		corners?: 'square' | 'rounded';
-	} | null;
-}
-
-export type PublishedNotebook = Selectable<PublishedNotebookTable>;
-export type NewPublishedNotebook = Insertable<PublishedNotebookTable>;
-export type PublishedNotebookUpdate = Updateable<PublishedNotebookTable>;
-
-export interface PublishedPostTable {
-	id: string;
-	createdAt: CreatedAt;
-	updatedAt: UpdatedAt;
-
-	publishedBy: string;
-	slug: string;
-	notebookId: string;
-	title: string;
-	summary: string | null;
-	coverImageUrl: string | null;
-	body: RichTextNode;
-}
-
 export interface RichTextNode {
 	type: string;
 	attrs?: Record<string, any> | null;
@@ -378,10 +319,6 @@ export interface RichTextNode {
 	end?: number | null;
 	text?: string | null;
 }
-
-export type PublishedPost = Selectable<PublishedPostTable>;
-export type NewPublishedPost = Insertable<PublishedPostTable>;
-export type PublishedPostUpdate = Updateable<PublishedPostTable>;
 
 export interface DomainRouteTable {
 	id: string;
