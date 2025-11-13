@@ -1,9 +1,10 @@
 import { Link, TextLink } from '@/components/nav/Link.jsx';
 import { withSuspense } from '@/hocs/withSuspense.jsx';
-import { hooks } from '@/stores/groceries/index.js';
+import { GnocchiClient, hooks } from '@/stores/groceries/index.js';
 import {
 	Box,
 	Button,
+	ButtonProps,
 	Checkbox,
 	Dialog,
 	DialogActions,
@@ -18,9 +19,11 @@ import {
 } from '@a-type/ui';
 import { useFeatureFlag, useHasServerAccess } from '@biscuits/client';
 import { graphql, useMutation, useQuery } from '@biscuits/graphql';
+import type { PublicRecipe } from '@gnocchi.biscuits/share-schema';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { format } from 'date-fns';
 import { useState } from 'react';
+import { getSubRecipeIds } from '../hooks.js';
 
 export interface RecipePublishControlProps {
 	recipe: Recipe;
@@ -58,7 +61,7 @@ export const RecipePublishControl = withSuspense(
 			variables: { recipeId: recipe.get('id') },
 		});
 
-		const { url } = hooks.useWatch(recipe);
+		const { url, updatedAt } = hooks.useWatch(recipe);
 		const notAllowed = !!url;
 
 		const canPublish = useHasServerAccess();
@@ -86,15 +89,23 @@ export const RecipePublishControl = withSuspense(
 		const publishedRecipe = data.publishedRecipe;
 		const isPublished = !!publishedRecipe;
 
+		const publishDate = publishedRecipe
+			? new Date(publishedRecipe.publishedAt)
+			: new Date();
+		const updatedDate = new Date(updatedAt);
+
+		const outOfDate = updatedDate > publishDate;
+
 		return (
 			<Dialog>
 				<DialogTrigger asChild>
 					<Button
 						size="small"
 						color="accent"
-						emphasis={isPublished ? 'light' : 'default'}
+						emphasis={outOfDate ? 'light' : 'default'}
 					>
-						{isPublished ? 'Published' : 'Publish'}
+						<Icon name={outOfDate ? 'clock' : 'send'} />
+						{isPublished ? (outOfDate ? 'Outdated' : 'Shared') : 'Share'}
 					</Button>
 				</DialogTrigger>
 				{publishedRecipe ? (
@@ -102,6 +113,7 @@ export const RecipePublishControl = withSuspense(
 						recipe={recipe}
 						publishedRecipe={publishedRecipe}
 						onChange={refetch}
+						outOfDate={outOfDate}
 					/>
 				) : (
 					<UnpublishedContent recipe={recipe} onChange={refetch} />
@@ -118,10 +130,12 @@ function PublishedContent({
 	recipe,
 	publishedRecipe: { publishedAt, url },
 	onChange,
+	outOfDate,
 }: {
 	recipe: Recipe;
 	publishedRecipe: { publishedAt: string; url: string };
 	onChange?: () => void;
+	outOfDate?: boolean;
 }) {
 	const { id } = hooks.useWatch(recipe);
 	const [unpublish] = useMutation(unpublishMutation, {
@@ -133,7 +147,6 @@ function PublishedContent({
 	return (
 		<DialogContent className="flex flex-col gap-4">
 			<DialogTitle>Manage publication</DialogTitle>
-			<P>Published {format(publishDate, 'PPp')}</P>
 			<SubRecipeWarning recipe={recipe} />
 			<Button asChild emphasis="default" className="self-start">
 				<Link to={url} newTab>
@@ -141,6 +154,24 @@ function PublishedContent({
 					<Icon name="new_window" />
 				</Link>
 			</Button>
+			{outOfDate ? (
+				<Box surface gap col items="end" color="accent" p>
+					This recipe has been updated since it was published on{' '}
+					{format(publishDate, 'PPp')}. Click "Republish" to update the
+					published version.
+					<PublishButton recipe={recipe} onChange={onChange} emphasis="primary">
+						Republish
+					</PublishButton>
+				</Box>
+			) : (
+				<Box surface="white" gap col items="end" p>
+					This recipe was published on {format(publishDate, 'PPp')} and should
+					be up to date. But you can still republish it if there's a problem.
+					<PublishButton recipe={recipe} onChange={onChange} emphasis="ghost">
+						Republish
+					</PublishButton>
+				</Box>
+			)}
 			<DialogActions>
 				<DialogClose asChild>
 					<Button>Close</Button>
@@ -173,11 +204,7 @@ function UnpublishedContent({
 	recipe: Recipe;
 	onChange?: () => void;
 }) {
-	const { id, slug } = hooks.useWatch(recipe);
 	const [consent, setConsent] = useState(false);
-	const [publish, { loading: publishing }] = useMutation(publishMutation, {
-		onCompleted: onChange,
-	});
 
 	return (
 		<DialogContent>
@@ -207,28 +234,14 @@ function UnpublishedContent({
 				<DialogClose asChild>
 					<Button>Cancel</Button>
 				</DialogClose>
-				<Button
+				<PublishButton
+					recipe={recipe}
+					onChange={onChange}
 					emphasis="primary"
 					disabled={!consent}
-					loading={publishing}
-					onClick={async () => {
-						try {
-							await publish({
-								variables: {
-									input: {
-										id,
-										slug,
-									},
-								},
-							});
-						} catch (err) {
-							console.error(err);
-							toast.error('Failed to publish recipe');
-						}
-					}}
 				>
 					Publish
-				</Button>
+				</PublishButton>
 			</DialogActions>
 		</DialogContent>
 	);
@@ -247,4 +260,77 @@ function SubRecipeWarning({ recipe }: { recipe: Recipe }) {
 			embedded in the published recipe.
 		</Box>
 	);
+}
+
+function PublishButton({
+	recipe,
+	onChange,
+	children,
+	...props
+}: { recipe: Recipe; onChange?: () => void } & Omit<
+	ButtonProps,
+	'onChange' | 'onClick'
+>) {
+	const { id, slug } = hooks.useWatch(recipe);
+	const [publish, { loading: publishing, called }] = useMutation(
+		publishMutation,
+		{
+			onCompleted: onChange,
+		},
+	);
+	const client = hooks.useClient();
+	return (
+		<Button
+			size="small"
+			color="accent"
+			emphasis="default"
+			{...props}
+			onClick={async () => {
+				try {
+					await publish({
+						variables: {
+							input: {
+								id,
+								slug,
+								data: await getPublicRecipeData(recipe, client),
+							},
+						},
+					});
+				} catch (err) {
+					console.error(err);
+					toast.error('Failed to publish recipe');
+				}
+			}}
+			loading={publishing}
+		>
+			{children}
+			{called && !publishing && <Icon name="check" />}
+		</Button>
+	);
+}
+
+async function getPublicRecipeData(
+	recipe: Recipe,
+	client: GnocchiClient,
+	seen: Set<string> = new Set(),
+): Promise<PublicRecipe> {
+	const snapshot = recipe.getSnapshot();
+	const subRecipeIds = getSubRecipeIds(recipe);
+	const subRecipes = (
+		await Promise.all(
+			subRecipeIds
+				.filter((id) => !seen.has(id))
+				.map((subRecipeId) => client.recipes.get(subRecipeId).resolved),
+		)
+	).filter((r): r is Recipe => !!r);
+	// avoid circular loops
+	subRecipeIds.forEach((r) => seen.add(r));
+
+	return {
+		...snapshot,
+		mainImageUrl: snapshot.mainImage?.url ?? undefined,
+		subRecipes: await Promise.all(
+			subRecipes.map((r) => getPublicRecipeData(r, client, seen)),
+		),
+	} satisfies PublicRecipe;
 }

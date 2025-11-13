@@ -1,8 +1,4 @@
-import { getLibraryName } from '@biscuits/libraries';
-import { LibraryApi } from '@verdant-web/server';
-import { loadRecipeData } from '../../../routers/gnocchi.js';
 import { builder } from '../../builder.js';
-import { PublicRecipeData } from '../../otherTypes.js';
 import { assignTypeName } from '../../relay.js';
 
 builder.queryFields((t) => ({
@@ -29,6 +25,8 @@ builder.queryFields((t) => ({
 					'PublishedRecipe.id',
 					'User.fullName as publisherFullName',
 					'PublishedRecipe.publishedBy',
+					'PublishedRecipe.planId',
+					'PublishedRecipe.data',
 				])
 				.where('slug', '=', recipeSlug)
 				.where('PublishedRecipe.planId', '=', planId)
@@ -38,83 +36,86 @@ builder.queryFields((t) => ({
 				return null;
 			}
 
-			const libraryName = getLibraryName({
-				planId,
-				app: 'gnocchi',
-				access: 'members',
-				userId: recipe.publishedBy,
-			});
-			const library =
-				await ctx.reqCtx.env.VERDANT_LIBRARY.getByName(libraryName);
+			if (!recipe.data || !Object.keys(recipe.data).length) {
+				return null;
+			}
 
-			const data = await loadRecipeData(
-				recipe.id,
-				{
-					id: recipe.publishedBy,
-					planId,
-					fullName: recipe.publisherFullName ?? 'Anonymous',
-				},
-				library,
-			);
-
-			if (!data) return null;
-
-			return assignTypeName('PublicRecipe')(data);
+			return assignTypeName('PublicRecipe')(recipe);
 		},
 	}),
 }));
 
 builder.objectType('PublicRecipe', {
 	fields: (t) => ({
-		id: t.exposeID('id'),
-		title: t.exposeString('title'),
+		id: t.field({
+			type: 'ID',
+			resolve: (recipe) => recipe.data.id,
+		}),
+		title: t.field({
+			type: 'String',
+			resolve: (recipe) => recipe.data.title,
+		}),
 		prelude: t.field({
 			type: 'JSON',
-			resolve: (recipe) => recipe.prelude,
+			resolve: (recipe) => recipe.data.prelude,
 		}),
-		mainImageUrl: t.exposeString('mainImageUrl', { nullable: true }),
+		mainImageUrl: t.field({
+			type: 'String',
+			nullable: true,
+			resolve: (recipe) => recipe.data.mainImageUrl,
+		}),
 		ingredients: t.field({
 			type: ['PublicRecipeIngredient'],
 			resolve: (recipe) =>
-				recipe.ingredients.map(assignTypeName('PublicRecipeIngredient')),
+				recipe.data.ingredients.map(assignTypeName('PublicRecipeIngredient')),
 		}),
 		instructions: t.field({
 			type: 'JSON',
-			resolve: (recipe) => recipe.instructions,
+			resolve: (recipe) => recipe.data.instructions,
 		}),
 		publisher: t.field({
 			type: 'PublicRecipePublisher',
-			resolve: (recipe) => recipe.publisher,
+			resolve: (recipe) => ({
+				fullName: recipe.publisherFullName ?? 'Anonymous',
+			}),
 		}),
-		note: t.exposeString('note', { nullable: true }),
-		servings: t.exposeInt('servings', { nullable: true }),
-		prepTimeMinutes: t.exposeInt('prepTimeMinutes', { nullable: true }),
-		cookTimeMinutes: t.exposeInt('cookTimeMinutes', { nullable: true }),
-		totalTimeMinutes: t.exposeInt('totalTimeMinutes', { nullable: true }),
+		note: t.field({
+			type: 'String',
+			nullable: true,
+			resolve: (recipe) => recipe.data.note,
+		}),
+		servings: t.field({
+			type: 'Int',
+			nullable: true,
+			resolve: (recipe) => recipe.data.servings,
+		}),
+		prepTimeMinutes: t.field({
+			type: 'Int',
+			nullable: true,
+			resolve: (recipe) => recipe.data.prepTimeMinutes,
+		}),
+		cookTimeMinutes: t.field({
+			type: 'Int',
+			nullable: true,
+			resolve: (recipe) => recipe.data.cookTimeMinutes,
+		}),
+		totalTimeMinutes: t.field({
+			type: 'Int',
+			nullable: true,
+			resolve: (recipe) => recipe.data.totalTimeMinutes,
+		}),
 
 		embeddedRecipes: t.field({
 			type: ['PublicRecipe'],
 			resolve: async (recipe, _, ctx) => {
-				const embeddedIds = getEmbeddedRecipeIds(recipe);
-				if (embeddedIds.length === 0) {
-					return [];
-				}
-				const library = await ctx.reqCtx.env.VERDANT_LIBRARY.getByName(
-					getLibraryName({
-						planId: recipe.publisher.planId,
-						app: 'gnocchi',
-						access: 'members',
-						userId: recipe.publisher.id,
-					}),
-				);
-				const embeddedRecipes = await Promise.all(
-					embeddedIds.map((id) =>
-						loadRecipeData(id, recipe.publisher, library),
-					),
-				);
-
-				return embeddedRecipes
-					.filter((r): r is PublicRecipeData => !!r)
+				return recipe.data.subRecipes
+					.map((subRecipe) => ({
+						data: subRecipe,
+						// fill in rest of the data from parent.
+						planId: recipe.planId,
+						publishedBy: recipe.publishedBy,
+						publisherFullName: recipe.publisherFullName,
+					}))
 					.map(assignTypeName('PublicRecipe'));
 			},
 		}),
@@ -137,47 +138,8 @@ builder.objectType('PublicRecipeIngredient', {
 		quantity: t.exposeFloat('quantity'),
 		unit: t.exposeString('unit', { nullable: true }),
 		isSectionHeader: t.exposeBoolean('isSectionHeader'),
-		food: t.exposeString('food'),
+		food: t.exposeString('food', { nullable: true }),
 		id: t.exposeID('id'),
 		note: t.exposeString('note', { nullable: true }),
 	}),
 });
-
-// helpers
-function getEmbeddedRecipeIds(snapshot: any) {
-	const steps = snapshot?.instructions?.content ?? [];
-	const recipeIds = new Set<string>();
-	for (const step of steps) {
-		if (step?.attrs?.subRecipeId) {
-			recipeIds.add(step.attrs.subRecipeId);
-		}
-	}
-	return Array.from(recipeIds);
-}
-
-async function loadRecipeData(
-	recipeId: string,
-	publisher: { planId: string; id: string; fullName: string },
-	library: LibraryApi,
-): Promise<PublicRecipeData | null> {
-	const snapshot = await library.getDocumentSnapshot('recipes', recipeId);
-
-	if (!snapshot) {
-		return null;
-	}
-
-	return {
-		id: recipeId,
-		title: snapshot.title,
-		prelude: snapshot.prelude,
-		mainImageUrl: snapshot.mainImage?.url,
-		ingredients: snapshot.ingredients,
-		instructions: snapshot.instructions,
-		note: snapshot.note,
-		prepTimeMinutes: snapshot.prepTimeMinutes,
-		cookTimeMinutes: snapshot.cookTimeMinutes,
-		totalTimeMinutes: snapshot.totalTimeMinutes,
-		servings: snapshot.servings,
-		publisher,
-	} satisfies PublicRecipeData;
-}

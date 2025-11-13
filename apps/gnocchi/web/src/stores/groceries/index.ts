@@ -674,6 +674,7 @@ export const verdant = createClient({
 	namespace: 'groceries',
 });
 (window as any).groceries = verdant;
+export type GnocchiClient = typeof verdant;
 
 (window as any).stats = async () => {
 	(await verdant).stats().then(console.info);

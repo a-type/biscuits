@@ -32,6 +32,7 @@
 		"@biscuits/error": "workspace:*",
 		"@biscuits/libraries": "workspace:*",
 		"@gnocchi.biscuits/scanning": "workspace:*",
+		"@gnocchi.biscuits/share-schema": "workspace:*",
 		"@googlemaps/google-maps-services-js": "^3.4.2",
 		"@graphql-yoga/plugin-csrf-prevention": "^3.16.0",
 		"@hono-rate-limiter/cloudflare": "^0.2.2",

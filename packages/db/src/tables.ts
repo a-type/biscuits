@@ -1,3 +1,4 @@
+import { PublicRecipe } from '@gnocchi.biscuits/share-schema';
 import {
 	ColumnType,
 	Generated,
@@ -259,6 +260,8 @@ export interface PublishedRecipeTable {
 
 	planId: string;
 	slug: string;
+
+	data: PublicRecipe;
 }
 
 export type PublishedRecipe = Selectable<PublishedRecipeTable>;

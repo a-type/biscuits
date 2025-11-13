@@ -1060,10 +1060,10 @@ export type RecipePreludeContentItemAttrsInit = {
   [key: string]: RecipePreludeContentItemAttrsValueInit;
 };
 export type RecipePreludeContentItemContentInit =
-  | RecipePreludeContentInit[]
+  | RecipePreludeContentItemInit[]
   | null;
 export type RecipePreludeContentItemMarksInit =
-  | RecipePreludeContentInit[]
+  | RecipePreludeContentItemInit[]
   | null;
 export type RecipePreludeContentItemInit = {
   type: string;
@@ -1075,7 +1075,7 @@ export type RecipePreludeContentItemInit = {
   marks?: RecipePreludeContentItemMarksInit | null;
 };
 export type RecipePreludeContentInit = RecipePreludeContentItemInit[] | null;
-export type RecipePreludeMarksInit = RecipePreludeContentInit[] | null;
+export type RecipePreludeMarksInit = RecipePreludeContentItemInit[] | null;
 export type RecipePreludeInit = {
   type: string;
   from?: number | null;
@@ -1104,10 +1104,10 @@ export type RecipeInstructionsContentItemAttrsInit = {
   [key: string]: RecipeInstructionsContentItemAttrsValueInit;
 };
 export type RecipeInstructionsContentItemContentInit =
-  | RecipeInstructionsContentInit[]
+  | RecipeInstructionsContentItemInit[]
   | null;
 export type RecipeInstructionsContentItemMarksInit =
-  | RecipeInstructionsContentInit[]
+  | RecipeInstructionsContentItemInit[]
   | null;
 export type RecipeInstructionsContentItemInit = {
   type: string;
@@ -1122,7 +1122,7 @@ export type RecipeInstructionsContentInit =
   | RecipeInstructionsContentItemInit[]
   | null;
 export type RecipeInstructionsMarksInit =
-  | RecipeInstructionsContentInit[]
+  | RecipeInstructionsContentItemInit[]
   | null;
 export type RecipeInstructionsInit = {
   type: string;
@@ -1186,8 +1186,9 @@ export type RecipePreludeContentItemAttrsDestructured = {
   [key: string]: RecipePreludeContentItemAttrsValue | undefined;
 };
 export type RecipePreludeContentItemContentDestructured =
-  RecipePreludeContent[];
-export type RecipePreludeContentItemMarksDestructured = RecipePreludeContent[];
+  RecipePreludeContentItem[];
+export type RecipePreludeContentItemMarksDestructured =
+  RecipePreludeContentItem[];
 export type RecipePreludeContentItemDestructured = {
   type: string;
   from: number | null;
@@ -1198,7 +1199,7 @@ export type RecipePreludeContentItemDestructured = {
   marks: RecipePreludeContentItemMarks | null;
 };
 export type RecipePreludeContentDestructured = RecipePreludeContentItem[];
-export type RecipePreludeMarksDestructured = RecipePreludeContent[];
+export type RecipePreludeMarksDestructured = RecipePreludeContentItem[];
 export type RecipePreludeDestructured = {
   type: string;
   from: number | null;
@@ -1227,9 +1228,9 @@ export type RecipeInstructionsContentItemAttrsDestructured = {
   [key: string]: RecipeInstructionsContentItemAttrsValue | undefined;
 };
 export type RecipeInstructionsContentItemContentDestructured =
-  RecipeInstructionsContent[];
+  RecipeInstructionsContentItem[];
 export type RecipeInstructionsContentItemMarksDestructured =
-  RecipeInstructionsContent[];
+  RecipeInstructionsContentItem[];
 export type RecipeInstructionsContentItemDestructured = {
   type: string;
   from: number | null;
@@ -1241,7 +1242,8 @@ export type RecipeInstructionsContentItemDestructured = {
 };
 export type RecipeInstructionsContentDestructured =
   RecipeInstructionsContentItem[];
-export type RecipeInstructionsMarksDestructured = RecipeInstructionsContent[];
+export type RecipeInstructionsMarksDestructured =
+  RecipeInstructionsContentItem[];
 export type RecipeInstructionsDestructured = {
   type: string;
   from: number | null;
@@ -1304,10 +1306,10 @@ export type RecipePreludeContentItemAttrsSnapshot = {
   [key: string]: RecipePreludeContentItemAttrsValueSnapshot;
 };
 export type RecipePreludeContentItemContentSnapshot =
-  | RecipePreludeContentSnapshot[]
+  | RecipePreludeContentItemSnapshot[]
   | null;
 export type RecipePreludeContentItemMarksSnapshot =
-  | RecipePreludeContentSnapshot[]
+  | RecipePreludeContentItemSnapshot[]
   | null;
 export type RecipePreludeContentItemSnapshot = {
   type: string;
@@ -1321,7 +1323,9 @@ export type RecipePreludeContentItemSnapshot = {
 export type RecipePreludeContentSnapshot =
   | RecipePreludeContentItemSnapshot[]
   | null;
-export type RecipePreludeMarksSnapshot = RecipePreludeContentSnapshot[] | null;
+export type RecipePreludeMarksSnapshot =
+  | RecipePreludeContentItemSnapshot[]
+  | null;
 export type RecipePreludeSnapshot = {
   type: string;
   from: number | null;
@@ -1350,10 +1354,10 @@ export type RecipeInstructionsContentItemAttrsSnapshot = {
   [key: string]: RecipeInstructionsContentItemAttrsValueSnapshot;
 };
 export type RecipeInstructionsContentItemContentSnapshot =
-  | RecipeInstructionsContentSnapshot[]
+  | RecipeInstructionsContentItemSnapshot[]
   | null;
 export type RecipeInstructionsContentItemMarksSnapshot =
-  | RecipeInstructionsContentSnapshot[]
+  | RecipeInstructionsContentItemSnapshot[]
   | null;
 export type RecipeInstructionsContentItemSnapshot = {
   type: string;
@@ -1368,7 +1372,7 @@ export type RecipeInstructionsContentSnapshot =
   | RecipeInstructionsContentItemSnapshot[]
   | null;
 export type RecipeInstructionsMarksSnapshot =
-  | RecipeInstructionsContentSnapshot[]
+  | RecipeInstructionsContentItemSnapshot[]
   | null;
 export type RecipeInstructionsSnapshot = {
   type: string;

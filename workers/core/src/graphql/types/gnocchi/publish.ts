@@ -1,5 +1,6 @@
 import { appsById } from '@biscuits/apps';
 import { BiscuitsError } from '@biscuits/error';
+import { publicRecipeSchema } from '@gnocchi.biscuits/share-schema';
 import { getTld } from '../../../services/domainRoutes.js';
 import { builder } from '../../builder.js';
 import { assignTypeName, hasTypeName } from '../../relay.js';
@@ -62,6 +63,21 @@ builder.mutationFields((t) => ({
 				);
 			}
 
+			// validate incoming data
+			const valid = publicRecipeSchema.safeParse(input.data);
+			if (!valid.success) {
+				throw new BiscuitsError(
+					BiscuitsError.Code.BadRequest,
+					`Invalid recipe data: ${valid.error.message}`,
+				);
+			}
+			if (valid.data.id !== id) {
+				throw new BiscuitsError(
+					BiscuitsError.Code.BadRequest,
+					`Recipe ID in data does not match input ID. Input ID is ${id}, but data ID is ${valid.data.id}`,
+				);
+			}
+
 			const recipe = await ctx.db
 				.insertInto('PublishedRecipe')
 				.values({
@@ -70,7 +86,16 @@ builder.mutationFields((t) => ({
 					slug,
 					publishedAt: new Date(),
 					publishedBy: userId,
+					data: valid.data,
 				})
+				.onConflict((oc) =>
+					oc.column('id').where('planId', '=', planId).doUpdateSet({
+						slug,
+						publishedAt: new Date(),
+						publishedBy: userId,
+						data: valid.data,
+					}),
+				)
 				.returningAll()
 				.executeTakeFirstOrThrow();
 
@@ -139,6 +164,10 @@ builder.inputType('PublishRecipeInput', {
 		}),
 		slug: t.string({
 			description: 'The slug for the published recipe',
+			required: true,
+		}),
+		data: t.field({
+			type: 'JSON',
 			required: true,
 		}),
 	}),

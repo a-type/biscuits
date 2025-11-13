@@ -16,6 +16,7 @@ export enum BiscuitsErrorCode {
 	RateLimited = 4290,
 	UsageLimitReached = 4291,
 	Unexpected = 5000,
+	DataCorrupted = 5001,
 }
 
 export class BiscuitsError extends Error {

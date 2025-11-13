@@ -12,9 +12,10 @@
 	},
 	"dependencies": {
 		"@a-type/kysely": "^1.1.1",
-		"kysely": "^0.28.7",
+		"kysely": "^0.28.8",
 		"kysely-d1": "^0.4.0",
-		"kysely-plugin-serialize": "0.8.2"
+		"kysely-plugin-serialize": "0.8.2",
+		"@gnocchi.biscuits/share-schema": "workspace:^"
 	},
 	"devDependencies": {
 		"typescript": "catalog:"

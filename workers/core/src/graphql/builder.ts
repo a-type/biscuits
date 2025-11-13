@@ -9,13 +9,15 @@ import {
 	PublishedRecipe,
 	PublishedWishlist,
 	User,
-	WishlistIdeaRequest,
-	WishlistIdeaRequestResponse,
 	WishlistPurchase,
 } from '@biscuits/db';
 import { BiscuitsError } from '@biscuits/error';
 import { BiscuitsVerdantProfile } from '@biscuits/libraries';
 import { ExtractorData as GnocchiRecipeScan } from '@gnocchi.biscuits/scanning';
+import {
+	PublicRecipe,
+	PublicRecipeIngredient,
+} from '@gnocchi.biscuits/share-schema';
 import SchemaBuilder from '@pothos/core';
 import DataloaderPlugin from '@pothos/plugin-dataloader';
 import RelayPlugin from '@pothos/plugin-relay';
@@ -32,12 +34,7 @@ import {
 	WeatherForecastInput,
 } from '../services/weather.js';
 import { GQLContext } from './context.js';
-import {
-	PublicRecipeData,
-	PublicRecipeIngredient,
-	PublicWishlistData,
-	PublicWishlistItem,
-} from './otherTypes.js';
+import { PublicWishlistData, PublicWishlistItem } from './otherTypes.js';
 
 export const builder = new SchemaBuilder<{
 	Context: GQLContext;
@@ -102,7 +99,13 @@ export const builder = new SchemaBuilder<{
 			GnocchiRecipeScan['detailedSteps']
 		>[number];
 		PublishedRecipe: PublishedRecipe & { __typename: 'PublishedRecipe' };
-		PublicRecipe: PublicRecipeData & { __typename: 'PublicRecipe' };
+		PublicRecipe: {
+			publishedBy: string;
+			publisherFullName: string | null;
+			planId: string;
+			data: PublicRecipe;
+			__typename: 'PublicRecipe';
+		};
 		PublicRecipeIngredient: PublicRecipeIngredient & {
 			__typename: 'PublicRecipeIngredient';
 		};
@@ -112,9 +115,6 @@ export const builder = new SchemaBuilder<{
 		PublishedWishlist: PublishedWishlist & { __typename: 'PublishedWishlist' };
 		StorePageScan: WishWashStorePageScan & { __typename: 'StorePageScan' };
 		WishlistPurchase: WishlistPurchase & { __typename: 'WishlistPurchase' };
-		WishlistIdeaRequest: WishlistIdeaRequest & {
-			__typename: 'WishlistIdeaRequest';
-		};
 		PublicWishlist: PublicWishlistData & {
 			__typename: 'PublicWishlist';
 		};
@@ -210,6 +210,7 @@ export const builder = new SchemaBuilder<{
 		PublishRecipeInput: {
 			id: string;
 			slug: string;
+			data: any;
 		};
 
 		// WishWash
@@ -224,14 +225,6 @@ export const builder = new SchemaBuilder<{
 			itemId: string;
 			name: string | null;
 			quantity: number | null;
-		};
-		WishlistIdeaRequestCreateInput: {
-			wishlistId: string;
-			name: string;
-		};
-		WishlistIdeaRequestResponseInput: {
-			ideaRequestId: string;
-			responses: WishlistIdeaRequestResponse;
 		};
 
 		// Common Utils

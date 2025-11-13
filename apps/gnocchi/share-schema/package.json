@@ -1,0 +1,22 @@
+{
+	"name": "@gnocchi.biscuits/share-schema",
+	"private": true,
+	"sideEffects": false,
+	"type": "module",
+	"exports": {
+		".": {
+			"development": "./src/index.ts",
+			"types": "./dist/index.d.ts",
+			"import": "./dist/index.js"
+		}
+	},
+	"scripts": {
+		"build": "tsc"
+	},
+	"dependencies": {
+		"zod": "catalog:"
+	},
+	"devDependencies": {
+		"typescript": "catalog:"
+	}
+}
