@@ -281,7 +281,6 @@ function PublishButton({
 	const client = hooks.useClient();
 	return (
 		<Button
-			size="small"
 			color="accent"
 			emphasis="default"
 			{...props}
