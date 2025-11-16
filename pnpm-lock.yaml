@@ -502,6 +502,9 @@ importers:
       just-mix:
         specifier: ^0.3.3
         version: 0.3.3
+      motion:
+        specifier: 'catalog:'
+        version: 12.23.24(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       pako:
         specifier: ^2.1.0
         version: 2.1.0

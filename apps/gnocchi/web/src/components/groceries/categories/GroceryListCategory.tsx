@@ -8,6 +8,7 @@ import { useSizeCssVars, withClassName } from '@a-type/ui';
 import { useDndMonitor, useDroppable } from '@dnd-kit/core';
 import { Category, Item } from '@gnocchi.biscuits/verdant';
 import classNames from 'classnames';
+import { AnimatePresence } from 'motion/react';
 import { memo, useCallback, useEffect, useRef } from 'react';
 import { useIsDragging } from '../dndHooks.js';
 import { GroceryListItemDraggable } from '../items/GroceryListItem.js';
@@ -65,9 +66,11 @@ export function GroceryListCategory({
 				)}
 			</CategoryTitleRow>
 			<CategoryItems data-is-item-dragging={isDragging}>
-				{items.map((item) => {
-					return <MemoizedDraggableItem key={item.get('id')} item={item} />;
-				})}
+				<AnimatePresence initial={true}>
+					{items.map((item) => {
+						return <MemoizedDraggableItem key={item.get('id')} item={item} />;
+					})}
+				</AnimatePresence>
 			</CategoryItems>
 		</CategoryRoot>
 	);

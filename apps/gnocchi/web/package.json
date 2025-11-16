@@ -54,6 +54,7 @@
 		"gql.tada": "catalog:",
 		"jotai": "^1.13.0",
 		"just-mix": "^0.3.3",
+		"motion": "catalog:",
 		"pako": "^2.1.0",
 		"parse-fraction": "^1.2.1",
 		"pluralize": "^8.0.0",
