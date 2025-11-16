@@ -1,17 +1,9 @@
 import { OpenFoodDetailButton } from '@/components/foods/OpenFoodDetailButton.jsx';
 import { ItemSources } from '@/components/groceries/items/ItemSources.jsx';
-import { Link } from '@/components/nav/Link.jsx';
-import { usePurchasedText } from '@/components/pantry/hooks.js';
-import {
-	PeopleList,
-	PeopleListItem,
-} from '@/components/sync/people/People.jsx';
-import { PersonAvatar } from '@/components/sync/people/PersonAvatar.js';
-import { useListId } from '@/contexts/ListContext.jsx';
 import useMergedRef from '@/hooks/useMergedRef.js';
 import { useIsFirstRender, usePrevious } from '@/hooks/usePrevious.js';
 import { categorizeOnboarding } from '@/onboarding/categorizeOnboarding.js';
-import { Person, hooks } from '@/stores/groceries/index.js';
+import { hooks } from '@/stores/groceries/index.js';
 import {
 	Button,
 	Checkbox,
@@ -19,16 +11,8 @@ import {
 	CollapsibleRoot,
 	CollapsibleSimple,
 	CollapsibleTrigger,
-	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
-	DialogTitle,
-	DialogTrigger,
 	Icon,
 	LiveUpdateTextField,
-	NumberStepper,
-	Tooltip,
 	clsx,
 	useParticles,
 	useSizeCssVars,
@@ -38,7 +22,7 @@ import { OnboardingTooltip } from '@biscuits/client';
 import { useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 import { Item } from '@gnocchi.biscuits/verdant';
-import { ClockIcon, Pencil1Icon, TrashIcon } from '@radix-ui/react-icons';
+import { TrashIcon } from '@radix-ui/react-icons';
 import {
 	CSSProperties,
 	Suspense,
@@ -51,11 +35,14 @@ import {
 } from 'react';
 import { useSnapshot } from 'valtio';
 import { ListSelect } from '../lists/ListSelect.jsx';
-import { useListOrNull, useListThemeClass } from '../lists/hooks.js';
+import { ListTag } from '../lists/ListTag.jsx';
 import { groceriesState } from '../state.js';
 import './GroceryListItem.css';
-import { ItemDeleteButton } from './ItemDeleteButton.js';
 import { useItemDisplayText, useItemSubline } from './hooks.js';
+import { ItemDeleteButton } from './ItemDeleteButton.js';
+import { QuantityEditor } from './QuantityEditor.jsx';
+import { RecentPeople } from './RecentPeople.jsx';
+import { RecentPurchaseHint } from './RecentPurchaseHint.jsx';
 
 export interface GroceryListItemProps {
 	className?: string;
@@ -74,9 +61,6 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 
 		const isPurchased = !!purchasedAt;
 
-		// TODO: clean this up
-		const purchasedHiddenState = 'visible';
-
 		const previousPurchasedAt = usePrevious(isPurchased);
 		const wasPurchasedSinceMount = isPurchased && !previousPurchasedAt;
 		useEffect(() => {
@@ -90,8 +74,7 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 			}
 		}, [isPurchased]);
 
-		const [menuToggleOpen, setMenuOpen] = useState(false);
-		const menuOpen = menuToggleOpen && purchasedHiddenState === 'visible';
+		const [menuOpen, setMenuOpen] = useState(false);
 
 		const sectionStateSnap = useSnapshot(groceriesState);
 
@@ -123,7 +106,6 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 					'[&[data-highlighted=true]]:bg-primary-wash',
 					'[&[data-menu-open=true]]:(bg-white border-light)',
 					'[&[data-just-moved=true][data-hidden-state=visible]]:(animate-keyframes-pop-up animate-duration-400)',
-					'[&[data-hidden-state=hidden]]:(animate-item-disappear animate-mode-forwards)',
 					className,
 				)}
 				open={menuOpen}
@@ -134,10 +116,8 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 				data-highlighted={quantityJustChanged}
 				data-dragging={isDragActive}
 				data-item-id={id}
-				data-oid={(item as any).oid}
 				data-menu-open={menuOpen}
 				data-just-moved={justMoved}
-				data-hidden-state={purchasedHiddenState}
 				data-test="grocery-list-item"
 			>
 				<ItemCheckbox
@@ -332,156 +312,6 @@ export function GroceryListItemDraggable({ item, ...rest }: { item: Item }) {
 	);
 }
 
-function RecentPeople({ item, className }: { item: Item; className?: string }) {
-	const people = usePeopleWhoLastEditedThis(item.get('id'));
-
-	if (people.length === 0) {
-		return null;
-	}
-
-	return (
-		<PeopleList count={people.length} className={className}>
-			{people.map((person, index) => (
-				<PeopleListItem index={index} key={person.profile.id}>
-					<PersonAvatar
-						key={person.profile.id}
-						person={person}
-						className="relative z-[var(--index)] left-[calc(var(--index)*-8px)]"
-					/>
-				</PeopleListItem>
-			))}
-		</PeopleList>
-	);
-}
-
-function usePeopleWhoLastEditedThis(itemId: string) {
-	const groceries = hooks.useClient();
-	const [people, setPeople] = useState<Person[]>(() => {
-		return Object.values(groceries.sync.presence.peers).filter(
-			(p) => p.presence.lastInteractedItem === itemId,
-		);
-	});
-	useEffect(() => {
-		return groceries.sync.presence.subscribe('peersChanged', () => {
-			setPeople(
-				Object.values(groceries.sync.presence.peers).filter(
-					(p) => p.presence.lastInteractedItem === itemId,
-				),
-			);
-		});
-	}, []);
-
-	return people;
-}
-
-function ListTag({
-	item,
-	collapsed,
-	className,
-}: {
-	item: Item;
-	collapsed?: boolean;
-	className?: string;
-}) {
-	const filteredListId = useListId();
-
-	const { listId } = hooks.useWatch(item);
-
-	const list = useListOrNull(listId);
-	const listThemeClass = useListThemeClass(listId);
-
-	if (filteredListId !== undefined) {
-		// only show list tag when showing all items
-		return null;
-	}
-
-	if (!list) {
-		return null;
-	}
-
-	const name = list.get('name');
-
-	return (
-		<Tooltip content={list.get('name')}>
-			<CollapsibleRoot open={!collapsed} className={className}>
-				<CollapsibleContent
-					data-horizontal
-					className="rounded-md focus-within:(outline-none shadow-focus)"
-				>
-					<Link
-						to={`/list/${list.get('id')}`}
-						className="focus-visible:outline-none"
-					>
-						<div
-							className={clsx(
-								listThemeClass,
-								'flex items-center justify-center p-1 color-black rounded-md bg-primary-light text-xs min-w-3 min-h-3 gap-1 lg:px-2',
-							)}
-						>
-							<Icon name="tag" className="inline" />
-							<span className="hidden whitespace-nowrap overflow-hidden text-ellipsis max-w-full lg:inline">
-								{name}
-							</span>
-							<span className="inline whitespace-nowrap overflow-hidden text-ellipsis max-w-full lg:hidden">
-								{getInitials(name).toUpperCase()}
-							</span>
-						</div>
-					</Link>
-				</CollapsibleContent>
-			</CollapsibleRoot>
-		</Tooltip>
-	);
-}
-
-function getInitials(name: string) {
-	return name
-		.split(' ')
-		.map((word) => word[0])
-		.join('');
-}
-
-function QuantityEditor({
-	item,
-	className,
-}: {
-	item: Item;
-	className?: string;
-}) {
-	const { totalQuantity, textOverride } = hooks.useWatch(item);
-	const displayText = useItemDisplayText(item);
-	return (
-		<Dialog>
-			<DialogTrigger asChild>
-				<Button className={clsx('p-1 font-normal', className)} emphasis="ghost">
-					<Pencil1Icon />
-					<span>Edit</span>
-				</Button>
-			</DialogTrigger>
-			<DialogContent onOpenAutoFocus={preventDefault}>
-				<DialogTitle>Edit item</DialogTitle>
-				<div className="flex flex-row items-center justify-center gap-4 flex-wrap">
-					<LiveUpdateTextField
-						placeholder={displayText}
-						value={textOverride || ''}
-						onChange={(v) => item.set('textOverride', v)}
-						className="flex-basis-240px flex-1"
-					/>
-					<NumberStepper
-						value={totalQuantity}
-						onChange={(v) => item.set('totalQuantity', v)}
-						className=""
-					/>
-				</div>
-				<DialogActions>
-					<DialogClose asChild>
-						<Button align="end">Done</Button>
-					</DialogClose>
-				</DialogActions>
-			</DialogContent>
-		</Dialog>
-	);
-}
-
 function ItemCheckbox({
 	isPurchased,
 	isPartiallyPurchased,
@@ -522,82 +352,5 @@ function ItemCheckbox({
 			data-test="grocery-list-item-checkbox"
 			className={clsx('[grid-area:check] mt-2 mx-3 overflow-hidden')}
 		/>
-	);
-}
-
-function useFood(foodName: string) {
-	return hooks.useOneFood({
-		index: {
-			where: 'anyName',
-			equals: foodName,
-		},
-	});
-}
-
-function RecentPurchaseHint({
-	foodName,
-	compact,
-	className,
-}: {
-	foodName: string;
-	compact?: boolean;
-	className?: string;
-}) {
-	const food = useFood(foodName);
-	hooks.useWatch(food);
-
-	const lastPurchasedAt = food?.get('lastPurchasedAt');
-	const expiresAt = food?.get('expiresAt');
-	const hasExpiration = !!food?.get('expiresAfterDays');
-	const inInventory = food?.get('inInventory');
-
-	const purchasedText = usePurchasedText(food, true);
-
-	if (!food) {
-		return null;
-	}
-
-	// no need to warn if the item was used; might as well rebuy if needed
-	if (!inInventory) {
-		return null;
-	}
-
-	const isExpired =
-		// items without expirations are not expired
-		!!expiresAt &&
-		// items whose purchase date is within the expiration window are not expired
-		expiresAt < Date.now();
-
-	// also show warning for non-perishable (no expiration) that were
-	// bought in the last week
-	const wasBoughtThisWeek =
-		lastPurchasedAt && lastPurchasedAt > Date.now() - 1000 * 60 * 60 * 24 * 7;
-
-	// only show small version if the food isn't yet expired
-	if (compact && (isExpired || (!hasExpiration && !wasBoughtThisWeek))) {
-		return null;
-	}
-
-	if (compact) {
-		return (
-			<Tooltip content={purchasedText}>
-				<ClockIcon className={clsx('color-primary-dark', className)} />
-			</Tooltip>
-		);
-	}
-
-	// only show the large version if it was purchased at all
-	if (!lastPurchasedAt) return null;
-
-	return (
-		<div
-			className={clsx(
-				'text-xs color-gray-dark italic flex flex-row gap-1 items-center',
-				className,
-			)}
-		>
-			<ClockIcon />
-			<span>{purchasedText}</span>
-		</div>
 	);
 }
