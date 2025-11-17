@@ -26,3 +26,8 @@ export interface PublicWishlistItem {
 	remoteImageUrl?: string | null;
 	prompt?: string | null;
 }
+
+export interface PublicRecipeAuthor {
+	name: string;
+	profileImageUrl: string | null;
+}

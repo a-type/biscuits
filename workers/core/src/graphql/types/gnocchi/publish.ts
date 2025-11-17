@@ -1,4 +1,5 @@
 import { appsById } from '@biscuits/apps';
+import { userNameSelector } from '@biscuits/db';
 import { BiscuitsError } from '@biscuits/error';
 import { publicRecipeSchema } from '@gnocchi.biscuits/share-schema';
 import { getTld } from '../../../services/domainRoutes.js';
@@ -153,6 +154,102 @@ builder.objectType('PublishedRecipe', {
 				return pubUrl.toString();
 			},
 		}),
+		author: t.field({
+			type: 'RecipeAuthor',
+			resolve: async (recipe, _, ctx) => {
+				const user = await ctx.db
+					.selectFrom('User')
+					.select('User.imageUrl')
+					.select(userNameSelector)
+					.where('id', '=', recipe.publishedBy)
+					.executeTakeFirst();
+
+				return assignTypeName('RecipeAuthor')({
+					name: user?.name ?? 'Anonymous',
+					profileImageUrl: user?.imageUrl ?? null,
+				});
+			},
+		}),
+
+		publication: t.field({
+			type: 'RecipePublication',
+			nullable: true,
+			resolve: async (recipe, _, ctx) => {
+				const publication = await ctx.db
+					.selectFrom('RecipePublication')
+					.selectAll()
+					.where('planId', '=', recipe.planId)
+					.executeTakeFirst();
+
+				if (!publication) {
+					return null;
+				}
+
+				return assignTypeName('RecipePublication')(publication);
+			},
+		}),
+
+		data: t.field({
+			type: 'PublishedRecipeData',
+			resolve: (recipe) => assignTypeName('PublishedRecipeData')(recipe.data),
+		}),
+	}),
+});
+
+builder.objectType('PublishedRecipeData', {
+	description: 'A published sub-recipe embedded within a published recipe',
+
+	fields: (t) => ({
+		id: t.exposeID('id'),
+		title: t.exposeString('title'),
+		prelude: t.field({
+			type: 'JSON',
+			resolve: (recipe) => recipe.prelude,
+		}),
+		mainImageUrl: t.exposeString('mainImageUrl', { nullable: true }),
+		ingredients: t.field({
+			type: ['PublishedRecipeIngredient'],
+			resolve: (recipe) =>
+				recipe.ingredients.map(assignTypeName('PublishedRecipeIngredient')),
+		}),
+		instructions: t.field({
+			type: 'JSON',
+			resolve: (recipe) => recipe.instructions,
+		}),
+		note: t.exposeString('note', { nullable: true }),
+		servings: t.exposeInt('servings', { nullable: true }),
+		prepTimeMinutes: t.exposeInt('prepTimeMinutes', { nullable: true }),
+		cookTimeMinutes: t.exposeInt('cookTimeMinutes', { nullable: true }),
+		totalTimeMinutes: t.exposeInt('totalTimeMinutes', { nullable: true }),
+		embeddedRecipes: t.field({
+			type: ['PublishedRecipeData'],
+			resolve: async (recipe, _, ctx) => {
+				return recipe.subRecipes.map(assignTypeName('PublishedRecipeData'));
+			},
+		}),
+	}),
+});
+
+builder.objectType('RecipeAuthor', {
+	fields: (t) => ({
+		name: t.exposeString('name'),
+		profileImageUrl: t.exposeString('profileImageUrl', { nullable: true }),
+	}),
+});
+
+builder.objectType('PublishedRecipeIngredient', {
+	fields: (t) => ({
+		text: t.exposeString('text'),
+		comments: t.field({
+			type: ['String'],
+			resolve: (ingredient) => ingredient.comments,
+		}),
+		quantity: t.exposeFloat('quantity'),
+		unit: t.exposeString('unit', { nullable: true }),
+		isSectionHeader: t.exposeBoolean('isSectionHeader'),
+		food: t.exposeString('food', { nullable: true }),
+		id: t.exposeID('id'),
+		note: t.exposeString('note', { nullable: true }),
 	}),
 });
 

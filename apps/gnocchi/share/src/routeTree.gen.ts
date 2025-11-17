@@ -10,17 +10,29 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as SlugRouteImport } from './routes/$slug'
+import { Route as IndexRouteImport } from './routes/index'
 import { Route as PlanIdSlugRouteImport } from './routes/$planId.$slug'
-import { Route as PPlanIdSlugRouteImport } from './routes/p.$planId.$slug'
+import { Route as PPlanIdIndexRouteImport } from './routes/p/$planId/index'
+import { Route as PPlanIdSlugRouteImport } from './routes/p/$planId/$slug'
 
 const SlugRoute = SlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PlanIdSlugRoute = PlanIdSlugRouteImport.update({
   id: '/$planId/$slug',
   path: '/$planId/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PPlanIdIndexRoute = PPlanIdIndexRouteImport.update({
+  id: '/p/$planId/',
+  path: '/p/$planId/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PPlanIdSlugRoute = PPlanIdSlugRouteImport.update({
@@ -30,33 +42,52 @@ const PPlanIdSlugRoute = PPlanIdSlugRouteImport.update({
 } as any)
 
 export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
   '/$slug': typeof SlugRoute
   '/$planId/$slug': typeof PlanIdSlugRoute
   '/p/$planId/$slug': typeof PPlanIdSlugRoute
+  '/p/$planId': typeof PPlanIdIndexRoute
 }
 export interface FileRoutesByTo {
+  '/': typeof IndexRoute
   '/$slug': typeof SlugRoute
   '/$planId/$slug': typeof PlanIdSlugRoute
   '/p/$planId/$slug': typeof PPlanIdSlugRoute
+  '/p/$planId': typeof PPlanIdIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/': typeof IndexRoute
   '/$slug': typeof SlugRoute
   '/$planId/$slug': typeof PlanIdSlugRoute
   '/p/$planId/$slug': typeof PPlanIdSlugRoute
+  '/p/$planId/': typeof PPlanIdIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/$slug' | '/$planId/$slug' | '/p/$planId/$slug'
+  fullPaths:
+    | '/'
+    | '/$slug'
+    | '/$planId/$slug'
+    | '/p/$planId/$slug'
+    | '/p/$planId'
   fileRoutesByTo: FileRoutesByTo
-  to: '/$slug' | '/$planId/$slug' | '/p/$planId/$slug'
-  id: '__root__' | '/$slug' | '/$planId/$slug' | '/p/$planId/$slug'
+  to: '/' | '/$slug' | '/$planId/$slug' | '/p/$planId/$slug' | '/p/$planId'
+  id:
+    | '__root__'
+    | '/'
+    | '/$slug'
+    | '/$planId/$slug'
+    | '/p/$planId/$slug'
+    | '/p/$planId/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
   SlugRoute: typeof SlugRoute
   PlanIdSlugRoute: typeof PlanIdSlugRoute
   PPlanIdSlugRoute: typeof PPlanIdSlugRoute
+  PPlanIdIndexRoute: typeof PPlanIdIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -68,11 +99,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/$planId/$slug': {
       id: '/$planId/$slug'
       path: '/$planId/$slug'
       fullPath: '/$planId/$slug'
       preLoaderRoute: typeof PlanIdSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/p/$planId/': {
+      id: '/p/$planId/'
+      path: '/p/$planId'
+      fullPath: '/p/$planId'
+      preLoaderRoute: typeof PPlanIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/p/$planId/$slug': {
@@ -86,9 +131,11 @@ declare module '@tanstack/react-router' {
 }
 
 const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
   SlugRoute: SlugRoute,
   PlanIdSlugRoute: PlanIdSlugRoute,
   PPlanIdSlugRoute: PPlanIdSlugRoute,
+  PPlanIdIndexRoute: PPlanIdIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

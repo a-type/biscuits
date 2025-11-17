@@ -25,6 +25,7 @@ export interface Database {
 	FoodCategoryAssignment: FoodCategoryAssignmentTable;
 	FoodCategory: FoodCategoryTable;
 	PublishedRecipe: PublishedRecipeTable;
+	RecipePublication: RecipePublicationTable;
 	PublishedWishlist: PublishedWishlistTable;
 	WishlistPurchase: WishlistPurchaseTable;
 }
@@ -267,6 +268,19 @@ export interface PublishedRecipeTable {
 export type PublishedRecipe = Selectable<PublishedRecipeTable>;
 export type NewPublishedRecipe = Insertable<PublishedRecipeTable>;
 export type PublishedRecipeUpdate = Updateable<PublishedRecipeTable>;
+
+export interface RecipePublicationTable {
+	id: string;
+	createdAt: CreatedAt;
+	updatedAt: UpdatedAt;
+
+	planId: string;
+	publicationName: string | null;
+}
+
+export type RecipePublication = Selectable<RecipePublicationTable>;
+export type NewRecipePublication = Insertable<RecipePublicationTable>;
+export type RecipePublicationUpdate = Updateable<RecipePublicationTable>;
 
 export interface PublishedWishlistTable {
 	id: string;

@@ -28,19 +28,21 @@ export const recipePageQuery = graphql(
 		query RecipePage($planId: ID!, $slug: String!) {
 			publicRecipe(planId: $planId, slug: $slug) {
 				id
-				title
-				note
-				prepTimeMinutes
-				cookTimeMinutes
-				totalTimeMinutes
-				servings
-				mainImageUrl
-				prelude
-				publisher {
-					fullName
+				data {
+					title
+					note
+					prepTimeMinutes
+					cookTimeMinutes
+					totalTimeMinutes
+					servings
+					mainImageUrl
+					prelude
+					...Ingredients
+					...Instructions
 				}
-				...Ingredients
-				...Instructions
+				author {
+					name
+				}
 			}
 		}
 	`,
@@ -51,7 +53,8 @@ export interface RecipePageProps {
 	data: ResultOf<typeof recipePageQuery>['publicRecipe'];
 }
 
-export function RecipePage({ data }: RecipePageProps) {
+export function RecipePage({ data: response }: RecipePageProps) {
+	const { data = null, author = null } = response ?? {};
 	const url = useLocation().href;
 
 	useEffect(() => {
@@ -99,7 +102,7 @@ export function RecipePage({ data }: RecipePageProps) {
 								{data.title}
 							</H1>
 							<P itemProp="author" className="p-author">
-								Published by {data.publisher?.fullName ?? 'Anonymous'}
+								Published by {author?.name ?? 'Anonymous'}
 							</P>
 							<div className="row flex-wrap">
 								{data.servings && <Chip>Serves {data.servings}</Chip>}

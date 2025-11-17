@@ -21,9 +21,8 @@ import StarterKit from '@tiptap/starter-kit';
 import { createContext, useContext } from 'react';
 
 export const instructionsFragment = graphql(`
-	fragment Instructions on PublicRecipe {
+	fragment Instructions on PublishedRecipeData {
 		id
-		title
 		instructions
 		embeddedRecipes {
 			id

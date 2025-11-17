@@ -3,7 +3,7 @@ import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 import { IngredientList, IngredientListItem } from './IngredientList.jsx';
 
 export const ingredientFragment = graphql(`
-	fragment Ingredient on PublicRecipeIngredient {
+	fragment Ingredient on PublishedRecipeIngredient {
 		id
 		text
 		note
@@ -12,7 +12,7 @@ export const ingredientFragment = graphql(`
 
 export const ingredientsFragment = graphql(
 	`
-		fragment Ingredients on PublicRecipe {
+		fragment Ingredients on PublishedRecipeData {
 			ingredients {
 				...Ingredient
 			}

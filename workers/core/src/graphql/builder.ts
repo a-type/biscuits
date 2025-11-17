@@ -8,6 +8,7 @@ import {
 	PlanInvitation,
 	PublishedRecipe,
 	PublishedWishlist,
+	RecipePublication,
 	User,
 	WishlistPurchase,
 } from '@biscuits/db';
@@ -34,7 +35,11 @@ import {
 	WeatherForecastInput,
 } from '../services/weather.js';
 import { GQLContext } from './context.js';
-import { PublicWishlistData, PublicWishlistItem } from './otherTypes.js';
+import {
+	PublicRecipeAuthor,
+	PublicWishlistData,
+	PublicWishlistItem,
+} from './otherTypes.js';
 
 export const builder = new SchemaBuilder<{
 	Context: GQLContext;
@@ -99,17 +104,16 @@ export const builder = new SchemaBuilder<{
 			GnocchiRecipeScan['detailedSteps']
 		>[number];
 		PublishedRecipe: PublishedRecipe & { __typename: 'PublishedRecipe' };
-		PublicRecipe: {
-			publishedBy: string;
-			publisherFullName: string | null;
-			planId: string;
-			data: PublicRecipe;
-			__typename: 'PublicRecipe';
+		PublishedRecipeData: PublicRecipe & { __typename: 'PublishedRecipeData' };
+		PublishedRecipeIngredient: PublicRecipeIngredient & {
+			__typename: 'PublishedRecipeIngredient';
 		};
-		PublicRecipeIngredient: PublicRecipeIngredient & {
-			__typename: 'PublicRecipeIngredient';
+		RecipePublication: RecipePublication & {
+			__typename: 'RecipePublication';
 		};
-		PublicRecipePublisher: { fullName: string };
+		RecipeAuthor: PublicRecipeAuthor & {
+			__typename: 'RecipeAuthor';
+		};
 
 		// WishWash
 		PublishedWishlist: PublishedWishlist & { __typename: 'PublishedWishlist' };
