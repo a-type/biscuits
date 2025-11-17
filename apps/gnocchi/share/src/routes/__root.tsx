@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+import { Provider } from '@a-type/ui';
 import { QueryClient } from '@tanstack/react-query';
 import {
 	HeadContent,
@@ -7,7 +8,7 @@ import {
 } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import * as React from 'react';
-import 'uno.css';
+import 'virtual:uno.css';
 import { DefaultCatchBoundary } from '~/components/DefaultCatchBoundary';
 import { NotFound } from '~/components/NotFound';
 import { seo } from '~/utils/seo';
@@ -64,7 +65,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body>
-				{children}
+				<Provider disableParticles>{children}</Provider>
 				<TanStackRouterDevtools position="bottom-right" />
 				<Scripts />
 			</body>

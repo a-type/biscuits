@@ -48,7 +48,7 @@ export function Ingredients({ data: dataMasked }: IngredientsProps) {
 				))}
 			</IngredientList>
 			{embedded.map((recipe) => (
-				<Box d="col" gap>
+				<Box d="col" gap key={recipe.id}>
 					<H3>From sub-recipe: {recipe.title}</H3>
 					<Ingredients data={recipe as any} />
 				</Box>

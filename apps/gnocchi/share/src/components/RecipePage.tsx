@@ -10,7 +10,6 @@ import {
 	PageContent,
 	PageFixedArea,
 	PageRoot,
-	Provider as UIProvider,
 } from '@a-type/ui';
 import { graphql, ResultOf } from '@biscuits/graphql';
 import { useLocation } from '@tanstack/react-router';
@@ -72,110 +71,108 @@ export function RecipePage({ data }: RecipePageProps) {
 	}
 
 	return (
-		<UIProvider>
-			<PageRoot className="theme-lemon">
-				<PageContent className="max-w-600px">
-					<article
-						itemScope
-						itemType="https://schema.org/Recipe"
-						className="h-recipe flex flex-col gap-4 items-stretch"
-					>
-						<Box gap items="center" asChild>
-							<a href="https://biscuits.club/gnocchi">
-								<img
-									src="/icon.png"
-									className="w-30px h-30px"
-									alt="Gnocchi icon"
-								/>
-								<H1 className="!text-lg !font-medium font-fancy">
-									Gnocchi Recipes
-								</H1>
-							</a>
-						</Box>
-						<TopLineRoot>
-							{data.mainImageUrl && (
-								<MainImage url={data.mainImageUrl} title={data.title} />
-							)}
-							<TopLineTitle>
-								<H1 itemProp="name" className="p-name">
-									{data.title}
-								</H1>
-								<P itemProp="author" className="p-author">
-									Published by {data.publisher?.fullName ?? 'Anonymous'}
-								</P>
-								<div className="row flex-wrap">
-									{data.servings && <Chip>Serves {data.servings}</Chip>}
-									{data.prepTimeMinutes && (
-										<>
-											<Chip>Prep {data.prepTimeMinutes} min</Chip>
-											<span className="hidden" itemProp="prepTime">
-												P0Y0M0DT0H{data.prepTimeMinutes}M0S
-											</span>
-										</>
-									)}
-									{data.cookTimeMinutes && (
-										<>
-											<Chip>Cook {data.cookTimeMinutes} min</Chip>
-											<span className="hidden" itemProp="cookTime">
-												P0Y0M0DT0H{data.cookTimeMinutes}M0S
-											</span>
-										</>
-									)}
-									{data.totalTimeMinutes && (
-										<>
-											<Chip>Total {data.totalTimeMinutes} min</Chip>
-											<span className="hidden" itemProp="totalTime">
-												P0Y0M0DT0H{data.totalTimeMinutes}M0S
-											</span>
-										</>
-									)}
-								</div>
-							</TopLineTitle>
-						</TopLineRoot>
-						{data.note && (
-							<Note className="self-start max-w-400px">{data.note}</Note>
+		<PageRoot className="theme-lemon">
+			<PageContent className="max-w-600px">
+				<article
+					itemScope
+					itemType="https://schema.org/Recipe"
+					className="h-recipe flex flex-col gap-4 items-stretch"
+				>
+					<Box gap items="center" asChild>
+						<a href="https://biscuits.club/gnocchi">
+							<img
+								src="/icon.png"
+								className="w-30px h-30px"
+								alt="Gnocchi icon"
+							/>
+							<H1 className="!text-lg !font-medium font-fancy">
+								Gnocchi Recipes
+							</H1>
+						</a>
+					</Box>
+					<TopLineRoot>
+						{data.mainImageUrl && (
+							<MainImage url={data.mainImageUrl} title={data.title} />
 						)}
-						{data.prelude && (
-							<div>
-								<Prelude content={data.prelude} />
+						<TopLineTitle>
+							<H1 itemProp="name" className="p-name">
+								{data.title}
+							</H1>
+							<P itemProp="author" className="p-author">
+								Published by {data.publisher?.fullName ?? 'Anonymous'}
+							</P>
+							<div className="row flex-wrap">
+								{data.servings && <Chip>Serves {data.servings}</Chip>}
+								{data.prepTimeMinutes && (
+									<>
+										<Chip>Prep {data.prepTimeMinutes} min</Chip>
+										<span className="hidden" itemProp="prepTime">
+											P0Y0M0DT0H{data.prepTimeMinutes}M0S
+										</span>
+									</>
+								)}
+								{data.cookTimeMinutes && (
+									<>
+										<Chip>Cook {data.cookTimeMinutes} min</Chip>
+										<span className="hidden" itemProp="cookTime">
+											P0Y0M0DT0H{data.cookTimeMinutes}M0S
+										</span>
+									</>
+								)}
+								{data.totalTimeMinutes && (
+									<>
+										<Chip>Total {data.totalTimeMinutes} min</Chip>
+										<span className="hidden" itemProp="totalTime">
+											P0Y0M0DT0H{data.totalTimeMinutes}M0S
+										</span>
+									</>
+								)}
 							</div>
-						)}
-						<Divider />
-						<div className="my-4">
-							<H2 className="gutter-bottom">Ingredients</H2>
-							<Ingredients data={data} />
+						</TopLineTitle>
+					</TopLineRoot>
+					{data.note && (
+						<Note className="self-start max-w-400px">{data.note}</Note>
+					)}
+					{data.prelude && (
+						<div>
+							<Prelude content={data.prelude} />
 						</div>
-						<Divider />
-						<div className="mb-12 mt-4">
-							<H2 className="gutter-bottom">Instructions</H2>
-							<Suspense>
-								<Instructions data={data} />
-							</Suspense>
-						</div>
-						<PageFixedArea className="flex flex-row justify-end bottom-4 top-auto mb-4 bg-transparent">
-							<Button emphasis="primary" className="shadow-lg" asChild>
-								<a
-									href={`${
-										import.meta.env.VITE_APP_ORIGIN
-									}?recipeUrl=${encodeURIComponent(url)}&hub=true&skipWelcome=true`}
-								>
-									Cook with Gnocchi
-								</a>
-							</Button>
-						</PageFixedArea>
-						<P className="color-gray7 ml-auto text-right text-xs">
-							Powered by{' '}
+					)}
+					<Divider />
+					<div className="my-4">
+						<H2 className="gutter-bottom">Ingredients</H2>
+						<Ingredients data={data} />
+					</div>
+					<Divider />
+					<div className="mb-12 mt-4">
+						<H2 className="gutter-bottom">Instructions</H2>
+						<Suspense>
+							<Instructions data={data} />
+						</Suspense>
+					</div>
+					<PageFixedArea className="flex flex-row justify-end bottom-4 top-auto mb-4 bg-transparent">
+						<Button emphasis="primary" className="shadow-lg" asChild>
 							<a
-								className="font-bold color-black"
-								href="https://biscuits.club/gnocchi"
+								href={`${
+									import.meta.env.VITE_APP_ORIGIN
+								}?recipeUrl=${encodeURIComponent(url)}&hub=true&skipWelcome=true`}
 							>
-								Gnocchi
+								Cook with Gnocchi
 							</a>
-							, the freshest way to manage your weekly cooking
-						</P>
-					</article>
-				</PageContent>
-			</PageRoot>
-		</UIProvider>
+						</Button>
+					</PageFixedArea>
+					<P className="color-gray7 ml-auto text-right text-xs">
+						Powered by{' '}
+						<a
+							className="font-bold color-black"
+							href="https://biscuits.club/gnocchi"
+						>
+							Gnocchi
+						</a>
+						, the freshest way to manage your weekly cooking
+					</P>
+				</article>
+			</PageContent>
+		</PageRoot>
 	);
 }
