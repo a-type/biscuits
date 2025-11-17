@@ -100,4 +100,10 @@ export const onboardingQuestions: OnboardingQuestion[] = [
 		prompt: 'Preferred gift cards',
 		suggestions: ['Amazon', 'Target', 'Starbucks', 'Best Buy', 'Home Depot'],
 	},
+	{
+		id: 'clothing-size',
+		question: 'What size clothing do you wear?',
+		prompt: 'Clothing size',
+		suggestions: ['Shirts: SM', '34" inseam', 'Size 7.5 shoes'],
+	},
 ];
