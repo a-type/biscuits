@@ -9,10 +9,6 @@ export default defineConfig(({ mode }) => ({
 	server: {
 		port: 6401,
 	},
-	// base:
-	// 	mode === 'production' ?
-	// 		'https://lists.wish-wash.biscuits.club/'
-	// 	:	undefined,
 	plugins: [
 		UnoCSS(),
 		tsConfigPaths({

@@ -50,7 +50,7 @@ export function ListPage({ data }: ListPageProps) {
 
 	return (
 		<HubContextProvider wishlistSlug={data.slug}>
-			<UIProvider>
+			<UIProvider disableParticles>
 				<Box
 					d="col"
 					full="width"
@@ -58,6 +58,7 @@ export function ListPage({ data }: ListPageProps) {
 					gap="lg"
 					items="center"
 					className="flex-[1_0_auto]"
+					data-testid="list-page"
 				>
 					<Box d="col" gap="lg" className="w-full max-w-800px">
 						{data.coverImageUrl && (
