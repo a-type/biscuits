@@ -276,6 +276,10 @@ export interface RecipePublicationTable {
 
 	planId: string;
 	publicationName: string | null;
+	// if null, publication is disabled
+	publishedAt: DateColumnOptional;
+	/** tiptap free text */
+	description: any;
 }
 
 export type RecipePublication = Selectable<RecipePublicationTable>;

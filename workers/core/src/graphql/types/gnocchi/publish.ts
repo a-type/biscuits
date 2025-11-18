@@ -1,5 +1,5 @@
 import { appsById } from '@biscuits/apps';
-import { userNameSelector } from '@biscuits/db';
+import { id, userNameSelector } from '@biscuits/db';
 import { BiscuitsError } from '@biscuits/error';
 import { publicRecipeSchema } from '@gnocchi.biscuits/share-schema';
 import { getTld } from '../../../services/domainRoutes.js';
@@ -39,6 +39,34 @@ builder.queryFields((t) => ({
 			return assignTypeName('PublishedRecipe')(publishedRecipe);
 		},
 	}),
+	recipePublication: t.field({
+		type: 'RecipePublication',
+		authScopes: {
+			app: 'gnocchi',
+		},
+		nullable: true,
+		resolve: async (_, __, ctx) => {
+			const planId = ctx.session?.planId;
+			if (!planId) {
+				throw new BiscuitsError(
+					BiscuitsError.Code.Forbidden,
+					'You must be a member to view recipe publication settings',
+				);
+			}
+
+			const publication = await ctx.db
+				.selectFrom('RecipePublication')
+				.selectAll()
+				.where('planId', '=', planId)
+				.executeTakeFirst();
+
+			if (!publication) {
+				return null;
+			}
+
+			return assignTypeName('RecipePublication')(publication);
+		},
+	}),
 }));
 
 builder.mutationFields((t) => ({
@@ -54,7 +82,7 @@ builder.mutationFields((t) => ({
 			}),
 		},
 		resolve: async (_, { input }, ctx) => {
-			const { id, slug } = input;
+			const { id: recipeId, slug } = input;
 			const planId = ctx.session?.planId;
 			const userId = ctx.session?.userId;
 			if (!planId || !userId) {
@@ -72,17 +100,17 @@ builder.mutationFields((t) => ({
 					`Invalid recipe data: ${valid.error.message}`,
 				);
 			}
-			if (valid.data.id !== id) {
+			if (valid.data.id !== recipeId) {
 				throw new BiscuitsError(
 					BiscuitsError.Code.BadRequest,
-					`Recipe ID in data does not match input ID. Input ID is ${id}, but data ID is ${valid.data.id}`,
+					`Recipe ID in data does not match input ID. Input ID is ${recipeId}, but data ID is ${valid.data.id}`,
 				);
 			}
 
 			const recipe = await ctx.db
 				.insertInto('PublishedRecipe')
 				.values({
-					id,
+					id: recipeId,
 					planId,
 					slug,
 					publishedAt: new Date(),
@@ -132,6 +160,74 @@ builder.mutationFields((t) => ({
 			return recipeId;
 		},
 	}),
+
+	updateRecipePublication: t.field({
+		type: 'RecipePublication',
+		authScopes: {
+			app: 'gnocchi',
+		},
+		args: {
+			input: t.arg({
+				type: 'UpdateRecipePublicationInput',
+				required: true,
+			}),
+		},
+		nullable: true,
+		resolve: async (_, { input }, ctx) => {
+			const planId = ctx.session?.planId;
+			if (!planId) {
+				throw new BiscuitsError(
+					BiscuitsError.Code.Forbidden,
+					'You must be a member to update a recipe publication',
+				);
+			}
+
+			const publication = await ctx.db
+				.selectFrom('RecipePublication')
+				.selectAll()
+				.where('planId', '=', planId)
+				.executeTakeFirst();
+
+			if (!publication) {
+				if (!input.isPublished) {
+					return null;
+				}
+				const newPublication = await ctx.db
+					.insertInto('RecipePublication')
+					.values({
+						planId,
+						publicationName: input.publicationName,
+						description: input.description,
+						publishedAt: new Date(),
+						id: id(),
+					})
+					.returningAll()
+					.executeTakeFirstOrThrow();
+
+				return assignTypeName('RecipePublication')(newPublication);
+			}
+
+			const updatedPublication = await ctx.db
+				.updateTable('RecipePublication')
+				.set({
+					publicationName: input.publicationName,
+					description: input.description,
+					publishedAt: input.isPublished ? new Date() : null,
+				})
+				.returningAll()
+				.where('id', '=', publication.id)
+				.executeTakeFirst();
+
+			if (!updatedPublication) {
+				throw new BiscuitsError(
+					BiscuitsError.Code.NotFound,
+					'Updated recipe publication not found',
+				);
+			}
+
+			return assignTypeName('RecipePublication')(updatedPublication);
+		},
+	}),
 }));
 
 builder.objectType('PublishedRecipe', {
@@ -142,7 +238,9 @@ builder.objectType('PublishedRecipe', {
 		id: t.exposeID('id'),
 		publishedAt: t.expose('publishedAt', {
 			type: 'DateTime',
+			nullable: true,
 		}),
+		slug: t.exposeString('slug'),
 		url: t.string({
 			resolve: (source, _, ctx) => {
 				const deployedOrigin = new URL(ctx.reqCtx.env.DEPLOYED_ORIGIN);
@@ -191,7 +289,15 @@ builder.objectType('PublishedRecipe', {
 
 		data: t.field({
 			type: 'PublishedRecipeData',
-			resolve: (recipe) => assignTypeName('PublishedRecipeData')(recipe.data),
+			resolve: (recipe) => {
+				return assignTypeName('PublishedRecipeData')({
+					// @ts-ignore
+					id: recipe.id,
+					// @ts-ignore
+					title: '',
+					...recipe.data,
+				});
+			},
 		}),
 	}),
 });
@@ -265,6 +371,24 @@ builder.inputType('PublishRecipeInput', {
 		}),
 		data: t.field({
 			type: 'JSON',
+			required: true,
+		}),
+	}),
+});
+
+builder.inputType('UpdateRecipePublicationInput', {
+	fields: (t) => ({
+		publicationName: t.string({
+			description: 'The name of the recipe publication',
+			required: true,
+		}),
+		description: t.field({
+			type: 'JSON',
+			description: 'A description of the recipe publication',
+			required: true,
+		}),
+		isPublished: t.boolean({
+			description: 'Whether the publication is published',
 			required: true,
 		}),
 	}),

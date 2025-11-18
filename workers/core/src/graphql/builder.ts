@@ -216,6 +216,11 @@ export const builder = new SchemaBuilder<{
 			slug: string;
 			data: any;
 		};
+		UpdateRecipePublicationInput: {
+			publicationName?: string | null;
+			description?: any | null;
+			isPublished?: boolean | null;
+		};
 
 		// WishWash
 		PublishWishlistInput: {

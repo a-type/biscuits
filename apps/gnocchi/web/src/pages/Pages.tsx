@@ -43,6 +43,9 @@ const PantrySearchPage = lazyWithPreload(
 	() => import('./pantry/PantrySearchPage.js'),
 );
 const RecipesPage = lazyWithPreload(() => import('./recipe/RecipesPage.jsx'));
+const PublishedRecipesPage = lazyWithPreload(
+	() => import('./recipe/PublishedRecipesPage.jsx'),
+);
 
 const routes = makeRoutes([
 	{
@@ -110,6 +113,10 @@ const routes = makeRoutes([
 					right: '/settings',
 				},
 				children: [
+					{
+						path: 'published',
+						component: PublishedRecipesPage,
+					},
 					{
 						path: ':slug',
 						component: RecipeViewPage,

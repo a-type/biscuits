@@ -163,7 +163,9 @@ function DomainRouteRegister({
 					className="flex-1"
 				/>
 				<SubmitButton emphasis="primary">
-					<Icon name="arrowRight" />
+					<Button.Icon>
+						<Icon name="arrowRight" />
+					</Button.Icon>
 				</SubmitButton>
 			</Box>
 		</FormikForm>

@@ -67,6 +67,15 @@ builder.objectType('RecipePublication', {
 	fields: (t) => ({
 		id: t.exposeID('planId'),
 		publicationName: t.exposeString('publicationName', { nullable: true }),
+		publishedAt: t.field({
+			type: 'DateTime',
+			nullable: true,
+			resolve: (publication) => publication.publishedAt,
+		}),
+		description: t.expose('description', {
+			type: 'JSON',
+			nullable: true,
+		}),
 
 		recipesConnection: t.connection({
 			type: 'PublishedRecipe',
@@ -81,18 +90,18 @@ builder.objectType('RecipePublication', {
 					.selectFrom('PublishedRecipe')
 					.selectAll()
 					.where('planId', '=', publication.planId)
-					.orderBy('publishedAt', 'desc')
+					.orderBy('createdAt', 'desc')
 					.limit(limit + 1);
 
 				if (args.after) {
 					const afterDate = Buffer.from(args.after, 'base64').toString('utf-8');
-					query.where('publishedAt', '<', afterDate);
+					query.where('createdAt', '>', afterDate);
 				}
 
 				const recipes = await query.execute();
 
 				const edges = recipes.slice(0, limit).map((recipe) => ({
-					cursor: Buffer.from(recipe.publishedAt).toString('base64'),
+					cursor: Buffer.from(recipe.createdAt.toString()).toString('base64'),
 					node: assignTypeName('PublishedRecipe')(recipe),
 				}));
 

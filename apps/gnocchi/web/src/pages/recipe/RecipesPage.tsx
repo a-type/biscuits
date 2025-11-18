@@ -6,9 +6,7 @@ import { Icon, PageContent, PageNowPlaying } from '@a-type/ui';
 import { RestoreScroll } from '@verdant-web/react-router';
 import { Suspense } from 'react';
 
-export interface RecipesPageProps {}
-
-export function RecipesPage({}: RecipesPageProps) {
+export function RecipesPage() {
 	usePageTitle('Recipes');
 
 	return (
