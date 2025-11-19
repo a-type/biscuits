@@ -82,7 +82,7 @@ builder.objectType('RecipePublication', {
 				const route = await ctx.db
 					.selectFrom('DomainRoute')
 					.select(['DomainRoute.domain', 'DomainRoute.dnsVerifiedAt'])
-					.where('resourceId', '=', publication.id)
+					.where('resourceId', '=', publication.planId)
 					.where('appId', '=', 'gnocchi')
 					.executeTakeFirst();
 
@@ -90,7 +90,7 @@ builder.objectType('RecipePublication', {
 					return `https://${route.domain}`;
 				}
 
-				return `https://recipes.gnocchi.biscuits.app/p/${publication.planId}`;
+				return `https://recipes.gnocchi.biscuits.club/p/${publication.planId}`;
 			},
 		}),
 
