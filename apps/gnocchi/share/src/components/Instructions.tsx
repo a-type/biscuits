@@ -68,11 +68,7 @@ export function MachineReadableInstructions({
 						);
 					case 'sectionTitle':
 						return (
-							<h2
-								key={block.attrs.id}
-								data-section-title="true"
-								itemProp="recipeInstructions"
-							>
+							<h2 key={block.attrs.id} data-section-title="true">
 								{tiptapToString(block)}
 							</h2>
 						);
