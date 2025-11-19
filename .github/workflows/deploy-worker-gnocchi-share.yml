@@ -29,6 +29,8 @@ jobs:
 
       - name: Build app
         run: pnpm build --filter @gnocchi.biscuits/share...
+        env:
+          VITE_APP_ORIGIN: https://gnocchi.biscuits.club
 
       - name: Verify cloudflare token
         run: |
