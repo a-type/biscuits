@@ -8,7 +8,8 @@ import {
 } from '@a-type/ui';
 import { tiptapToString } from '@biscuits/client';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
-import Link from '@tiptap/extension-link';
+import { Link } from '@tanstack/react-router';
+import LinkExt from '@tiptap/extension-link';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 
@@ -64,14 +65,14 @@ export function PublicationPage({ data }: PublicationPageProps) {
 								asChild
 								className={node.data.mainImageUrl ? 'min-h-120px' : ''}
 							>
-								<a href={node.url}>
+								<Link to={node.url}>
 									<Card.Title>{node.data.title}</Card.Title>
 									{node.data.prelude && (
 										<Card.Content>
 											{tiptapToString(node.data.prelude)}
 										</Card.Content>
 									)}
-								</a>
+								</Link>
 							</Card.Main>
 						</Card>
 					))}
@@ -83,7 +84,7 @@ export function PublicationPage({ data }: PublicationPageProps) {
 
 const descriptionExtensions = [
 	StarterKit.configure(),
-	Link.configure({
+	LinkExt.configure({
 		openOnClick: false,
 	}),
 ];
