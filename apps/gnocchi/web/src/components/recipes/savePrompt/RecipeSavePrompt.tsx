@@ -21,7 +21,7 @@ import { useSnapshot } from 'valtio';
 export interface RecipeSavePromptProps {}
 
 export function RecipeSavePrompt({}: RecipeSavePromptProps) {
-	const { url } = useSnapshot(recipeSavePromptState);
+	const { url: externalUrl } = useSnapshot(recipeSavePromptState);
 	const navigate = useNavigate();
 	const [search] = useSearchParams();
 	const [hasScannedBefore, setHasScannedBefore] = useLocalStorage(
@@ -30,20 +30,13 @@ export function RecipeSavePrompt({}: RecipeSavePromptProps) {
 	);
 
 	const urlParam = search.get('recipeUrl');
-	useEffect(() => {
-		if (urlParam) {
-			recipeSavePromptState.url = urlParam;
-		}
-	}, [urlParam]);
 	const slugParam = search.get('recipeSlug');
-	useEffect(() => {
-		if (slugParam) {
-			recipeSavePromptState.hubSlug = slugParam;
-		}
-	}, [slugParam]);
 
-	const isGnocchi =
-		url.includes('gnocchi.biscuits.club') || url.includes('localhost:6124');
+	const url = externalUrl || urlParam || '';
+
+	const titleParam = search.get('recipeTitle');
+
+	const isGnocchi = !!slugParam;
 
 	const beginOnboarding = saveHubRecipeOnboarding.useBegin();
 	const cancelOnboarding = saveHubRecipeOnboarding.useCancel();
@@ -60,11 +53,14 @@ export function RecipeSavePrompt({}: RecipeSavePromptProps) {
 	}, [isGnocchi, hasScannedBefore, beginOnboarding, cancelFirstTimeOnboarding]);
 
 	const addRecipeFromUrl = hooks.useAddRecipeFromUrl();
+	const addRecipeFromSlug = hooks.useAddRecipeFromSlug();
 	const [loading, setLoading] = useState(false);
 	const save = async () => {
 		setLoading(true);
 		try {
-			const recipe = await addRecipeFromUrl(url);
+			const recipe = slugParam
+				? await addRecipeFromSlug(slugParam)
+				: await addRecipeFromUrl(url);
 			setHasScannedBefore(true);
 			if (recipe) {
 				navigate(
@@ -82,32 +78,36 @@ export function RecipeSavePrompt({}: RecipeSavePromptProps) {
 		}
 	};
 
+	const open = !!url || !!slugParam;
+
 	return (
-		<Dialog open={!!url} onOpenChange={() => (recipeSavePromptState.url = '')}>
-			<DialogContent>
+		<Dialog open={open} onOpenChange={() => (recipeSavePromptState.url = '')}>
+			<DialogContent className="flex flex-col gap-sm">
 				<DialogTitle>
 					{isGnocchi ? 'Save recipe?' : 'Scan web recipe?'}
 				</DialogTitle>
-				<OnboardingBanner
-					disableNext
-					onboarding={saveHubRecipeOnboarding}
-					step="save"
-				>
-					<H2>Welcome to Gnocchi!</H2>
-					<P>
-						You&apos;re about to save a copy of a recipe to your collection.
-						Press the Save button to get started.
-					</P>
-				</OnboardingBanner>
+				{open && (
+					<OnboardingBanner
+						disableNext
+						onboarding={saveHubRecipeOnboarding}
+						step="save"
+					>
+						<H2>Welcome to Gnocchi!</H2>
+						<P>
+							You&apos;re about to save a copy of a recipe to your collection.
+							Press the Save button to get started.
+						</P>
+					</OnboardingBanner>
+				)}
 				<P>
 					Add a copy of this recipe to your collection and access it any time.
 				</P>
-				{!isGnocchi && (
+				{(titleParam || url) && (
 					<P
 						className="my-2"
 						style={{ textOverflow: 'ellipsis', overflow: 'hidden' }}
 					>
-						{url}
+						{titleParam || url}
 					</P>
 				)}
 

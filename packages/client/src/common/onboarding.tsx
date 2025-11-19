@@ -1,4 +1,5 @@
 import {
+	Box,
 	Button,
 	clsx,
 	CollapsibleContent,
@@ -9,7 +10,14 @@ import {
 	PopoverArrow,
 	PopoverContent,
 } from '@a-type/ui';
-import { ReactNode, useCallback, useEffect, useId, useState } from 'react';
+import {
+	ReactNode,
+	useCallback,
+	useDebugValue,
+	useEffect,
+	useLayoutEffect,
+	useState,
+} from 'react';
 import { proxy, subscribe, useSnapshot } from 'valtio';
 import { useEffectOnce } from '../hooks/useEffectOnce.js';
 
@@ -19,7 +27,8 @@ export type Onboarding<Steps extends StringTuple> = {
 	useSkip: () => () => void;
 	useStep: (
 		name: Steps[number],
-	) => readonly [boolean, () => void, boolean, boolean];
+	) => readonly [boolean, () => void, boolean, boolean, { id: string }];
+	useNext: (name: Steps[number]) => () => void;
 	useCancel: () => () => void;
 	begin: () => void;
 	skip: () => void;
@@ -46,6 +55,7 @@ export function createOnboarding<Steps extends StringTuple>(
 
 	const state = proxy({
 		active: activeState,
+		stepClaims: {} as Record<string, string>,
 	});
 
 	subscribe(state, () => {
@@ -71,25 +81,7 @@ export function createOnboarding<Steps extends StringTuple>(
 			state.active = 'complete';
 		}, []);
 	}
-
-	const stepClaims: Record<string, string> = {};
-
-	function useStep(name: Steps[number], disableNextOnUnmount = false) {
-		// a unique ID for this invocation of this hook. useful if there
-		// are multiple mounted components using this same hook and name.
-		const id = useId();
-		const hasClaim = stepClaims[name] === id;
-		useEffect(() => {
-			if (!stepClaims[name]) {
-				stepClaims[name] = id;
-				return () => {
-					delete stepClaims[name];
-				};
-			}
-		}, [id]);
-
-		const active = useSnapshot(state).active;
-
+	function useNext(name: Steps[number]) {
 		const next = useCallback(() => {
 			if (state.active !== name) return;
 			const index = steps.indexOf(name);
@@ -99,20 +91,55 @@ export function createOnboarding<Steps extends StringTuple>(
 				state.active = steps[index + 1];
 			}
 		}, [name]);
+		return next;
+	}
+
+	function useStep(name: Steps[number], disableNextOnUnmount = false) {
+		// a unique ID for this invocation of this hook. useful if there
+		// are multiple mounted components using this same hook and name.
+		const id = useState(() => Math.random().toString(16).slice(2))[0];
+		const hasClaim = useSnapshot(state.stepClaims)[name] === id;
+		useLayoutEffect(() => {
+			if (!state.stepClaims[name]) {
+				console.debug(`Step ${name} claiming with id ${id}`);
+				state.stepClaims[name] = id;
+				return () => {
+					console.debug(`Step ${name} releasing claim of id ${id}`);
+					delete state.stepClaims[name];
+				};
+			} else {
+				console.debug(
+					`Step ${name} already claimed; not claiming with id ${id}`,
+				);
+			}
+		});
+
+		const active = useSnapshot(state).active;
+
+		const next = useNext(name);
 
 		const isLast = steps.indexOf(name) === steps.length - 1;
 		const isOnly = steps.length === 1;
 
 		useEffectOnce(() => {
-			if (!hasClaim) return;
+			if (state.stepClaims[name] !== id) {
+				console.debug(`Step ${name} (${id}) has no claim; not activating`);
+				return;
+			}
 
 			stepUnmounted[name] = false;
 
 			if (disableNextOnUnmount) {
+				console.debug(
+					`Step ${name} disableNextOnUnmount is true; not auto-advancing on unmount`,
+				);
 				return;
 			}
 
 			return () => {
+				console.debug(
+					`Step ${name} unmounted; auto-advancing in 1s if still unmounted`,
+				);
 				stepUnmounted[name] = true;
 				setTimeout(() => {
 					if (stepUnmounted[name]) {
@@ -122,7 +149,11 @@ export function createOnboarding<Steps extends StringTuple>(
 			};
 		});
 
-		return [active === name && hasClaim, next, isLast, isOnly] as const;
+		useDebugValue(
+			`Step ${name} is ${active === name && hasClaim ? 'active' : 'inactive'} with id ${id}`,
+		);
+
+		return [active === name && hasClaim, next, isLast, isOnly, { id }] as const;
 	}
 	function useCancel() {
 		return useCallback(() => {
@@ -135,6 +166,7 @@ export function createOnboarding<Steps extends StringTuple>(
 		useSkip,
 		useStep,
 		useCancel,
+		useNext,
 		begin: () => {
 			if (state.active === null) {
 				state.active = steps[0];
@@ -167,20 +199,23 @@ export function OnboardingBanner<O extends Onboarding<any>>({
 	className,
 	disableNext,
 }: OnboardingBannerProps<O>) {
-	const [show, next, isLast, isOnly] = onboarding.useStep(step);
-	const id = useId();
+	const [show, next, isLast, isOnly, { id }] = onboarding.useStep(step);
 
 	return (
 		<CollapsibleRoot
 			open={show}
 			className={clsx('theme-leek', 'w-full', className)}
+			data-step-id={id}
+			data-step-name={step}
 		>
 			<CollapsibleContent>
 				<div className="flex flex-col w-full bg-primary-wash color-black p-4 rounded-lg gap-3">
-					<div>{children}</div>
+					<Box col gap="sm">
+						{children}
+					</Box>
 					<div className="flex justify-end gap-3">
 						{!disableNext && (
-							<Button emphasis="ghost" onClick={next}>
+							<Button emphasis="light" onClick={next}>
 								{isLast ?
 									isOnly ?
 										'Ok'
@@ -203,7 +238,7 @@ export interface OnboardingTooltipProps<O extends Onboarding<any>> {
 	disableNext?: boolean;
 	content: ReactNode;
 	/** Pass a filter to ignore interactions for auto-next */
-	ignoreOutsideInteraction?: (target: HTMLElement) => boolean;
+	ignoreOutsideInteraction?: ((target: HTMLElement) => boolean) | boolean;
 }
 
 export const OnboardingTooltip = function OnboardingTooltip<
@@ -216,7 +251,7 @@ export const OnboardingTooltip = function OnboardingTooltip<
 	content,
 	ignoreOutsideInteraction,
 }: OnboardingTooltipProps<O>) {
-	const [show, next, isLast] = onboarding.useStep(step);
+	const [show, next, isLast, _, { id }] = onboarding.useStep(step);
 
 	// delay
 	const [delayedOpen, setDelayedOpen] = useState(false);
@@ -231,7 +266,9 @@ export const OnboardingTooltip = function OnboardingTooltip<
 
 	return (
 		<Popover open={delayedOpen && show} modal={false}>
-			<PopoverAnchor asChild>{children}</PopoverAnchor>
+			<PopoverAnchor asChild data-step-id={id} data-step-name={step}>
+				{children}
+			</PopoverAnchor>
 			<PopoverContent
 				disableBlur
 				className={clsx(
@@ -244,6 +281,9 @@ export const OnboardingTooltip = function OnboardingTooltip<
 					// and it's with anything besides a button or input,
 					// go to the next step
 					const target = event.target as HTMLElement;
+					if (ignoreOutsideInteraction === true) {
+						return;
+					}
 					if (!ignoreOutsideInteraction || !ignoreOutsideInteraction(target)) {
 						next();
 					}

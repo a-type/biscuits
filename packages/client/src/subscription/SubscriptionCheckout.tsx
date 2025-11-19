@@ -6,8 +6,8 @@ import {
 	useElements,
 	useStripe,
 } from '@stripe/react-stripe-js';
-import { useState } from 'react';
-import { stripe } from '../stripe.js';
+import { type Stripe } from '@stripe/stripe-js';
+import { useEffect, useState } from 'react';
 
 export const checkoutData = graphql(`
 	fragment SubscriptionCheckout_checkoutData on StripeCheckoutData {
@@ -24,7 +24,21 @@ export interface SubscriptionCheckoutProps {
 export function SubscriptionCheckout({
 	checkoutData: $checkoutData,
 }: SubscriptionCheckoutProps) {
+	const [stripe, setStripe] = useState<Stripe | null>(null);
+	useEffect(() => {
+		import('@stripe/stripe-js').then((module) => {
+			module
+				.loadStripe(import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY!)
+				.then((stripeInstance) => {
+					setStripe(stripeInstance);
+				});
+		});
+	}, []);
 	const data = readFragment(checkoutData, $checkoutData);
+
+	if (!stripe) {
+		return <div>Loading payment gateway...</div>;
+	}
 
 	return (
 		<Elements

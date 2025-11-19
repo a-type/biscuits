@@ -425,7 +425,19 @@ export const hooks = createHooks<Presence, Profile>({
 	useAddRecipeFromUrl: (client) =>
 		useCallback(
 			async (url: string) => {
-				const scanned = await getScannedRecipe(url, client);
+				const scanned = await getScannedRecipe({ url }, client);
+				const recipe = await client.recipes.put(scanned);
+				return recipe;
+			},
+			[client],
+		),
+	useAddRecipeFromSlug: (client) =>
+		useCallback(
+			async (slug: string) => {
+				const scanned = await getScannedRecipe(
+					{ publicRecipeSlug: slug },
+					client,
+				);
 				const recipe = await client.recipes.put(scanned);
 				return recipe;
 			},
@@ -436,7 +448,7 @@ export const hooks = createHooks<Presence, Profile>({
 		useCallback(
 			async (recipe: Recipe, url: string) => {
 				const { instructions, ...scanned } = await getScannedRecipe(
-					url,
+					{ url },
 					client,
 				);
 				const copyWithoutUndefined = Object.entries(scanned)

@@ -45,18 +45,18 @@ const recipeScanQuery = graphql(`
 `);
 
 export async function getScannedRecipe(
-	url: string,
+	input: { url?: string; publicRecipeSlug?: string },
 	client: Client,
 ): Promise<RecipeInit> {
 	try {
 		const scanResult = await graphqlClient.query({
 			query: recipeScanQuery,
 			variables: {
-				input: { url },
+				input,
 			},
 		});
 		let result: RecipeInit = {
-			url,
+			url: scanResult.data?.recipeScan?.data?.url,
 			title: 'Web Recipe',
 		};
 

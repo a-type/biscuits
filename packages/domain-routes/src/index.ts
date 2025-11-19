@@ -4,7 +4,7 @@ import { D1Database, KVNamespace } from '@cloudflare/workers-types';
 export class DomainRouteService {
 	#db: DB;
 	constructor(
-		private d1: D1Database,
+		d1: D1Database,
 		private kv: KVNamespace,
 	) {
 		this.#db = createDb(d1);

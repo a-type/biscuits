@@ -44,9 +44,11 @@ function isUrl(text: string) {
 }
 
 // debugging tools
-(window as any).simulateShare = (data: ShareData) => {
-	if (typeof window === 'undefined') return;
-	simulateTarget.dispatchEvent(
-		new CustomEvent('simulate-share', { detail: data }),
-	);
-};
+if (typeof window !== 'undefined') {
+	(window as any).simulateShare = (data: ShareData) => {
+		if (typeof window === 'undefined') return;
+		simulateTarget.dispatchEvent(
+			new CustomEvent('simulate-share', { detail: data }),
+		);
+	};
+}

@@ -65,9 +65,11 @@ export const GroceryList = forwardRef<HTMLDivElement, GroceryListProps>(
 				</OnboardingBanner>
 				<OnboardingBanner onboarding={saveHubRecipeOnboarding} step="subscribe">
 					<H3>Upgrade for sync and more</H3>
-					<P>Sync between devices and other members of your household,</P>
-					<P>collaborate in real time while shopping or cooking,</P>
-					<P>and make copies of recipes from anywhere on the web.</P>
+					<P className="text-balance">
+						Sync between devices and other members of your household,
+						collaborate in real time while shopping or cooking, and make copies
+						of recipes from anywhere on the web.
+					</P>
 					<div className="flex flex-row">
 						<PromoteSubscriptionButton>Upgrade now</PromoteSubscriptionButton>
 					</div>

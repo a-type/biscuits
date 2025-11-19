@@ -1,9 +1,13 @@
-import { PWAInstallElement } from '@khmyznikov/pwa-install';
+import { type PWAInstallElement } from '@khmyznikov/pwa-install';
 import { useEffect, useRef } from 'react';
 import { getDeferredPrompt, installState, triggerInstall } from '../install.js';
 import { useAppInfo, useMaybeAppId } from '../react.js';
 
 let singleton: any;
+
+if (typeof window !== 'undefined') {
+	import('@khmyznikov/pwa-install');
+}
 
 export function PwaInstaller() {
 	const maybeApp = useMaybeAppId();

@@ -15,7 +15,7 @@ export function PublicationDetails(props: PublicationDetailsProps) {
 		return (
 			<Box col gap {...props}>
 				<P>
-					Recipe blog no enabled. You can still share recipes individually as
+					Recipe blog not enabled. You can still share recipes individually as
 					links.
 				</P>
 				<ManagePublication asChild>

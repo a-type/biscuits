@@ -24,10 +24,9 @@ export function AddToListButton({
 			}
 			onboarding={saveHubRecipeOnboarding}
 			step="addToList"
-			disableNext
 			// prevent interactions inside the dialog
 			// from skipping the step
-			ignoreOutsideInteraction={(el) => !!el.closest('[role="dialog"]')}
+			ignoreOutsideInteraction
 		>
 			<div className={className}>
 				<Suspense

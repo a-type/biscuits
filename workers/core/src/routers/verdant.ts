@@ -7,7 +7,7 @@ import { HonoEnv } from '../config/hono.js';
 import { isPlanInGoodStanding } from '../management/plans.js';
 import { sessionRefreshMiddleware } from '../middleware/session.js';
 
-export const verdantRouter = new Hono<HonoEnv>().use(sessionRefreshMiddleware);
+export const verdantRouter = new Hono<HonoEnv>();
 
 const syncRouter = createVerdantWorkerApp({
 	durableObjectBindingName: 'VERDANT_LIBRARY',
@@ -24,9 +24,9 @@ const syncRouter = createVerdantWorkerApp({
 // 	return ctx.text('test', 500);
 // });
 
-verdantRouter.route('/sync', syncRouter);
+verdantRouter.use('/sync', sessionRefreshMiddleware).route('/sync', syncRouter);
 
-verdantRouter.get('/token/:app', async (ctx) => {
+verdantRouter.get('/token/:app', sessionRefreshMiddleware, async (ctx) => {
 	const session = ctx.get('session');
 
 	if (!session) {

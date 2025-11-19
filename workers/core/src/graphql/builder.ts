@@ -209,7 +209,8 @@ export const builder = new SchemaBuilder<{
 			sortKey: string | null;
 		};
 		RecipeScanInput: {
-			url: string;
+			url: string | null;
+			publicRecipeSlug: string | null;
 		};
 		PublishRecipeInput: {
 			id: string;

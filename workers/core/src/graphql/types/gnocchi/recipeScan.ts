@@ -11,16 +11,44 @@ builder.queryFields((t) => ({
 				required: true,
 			}),
 		},
-		authScopes: {
-			freeLimited: ['gnocchi_recipe_scan', 5, 'month'],
+		authScopes: (_, { input }, ctx) => {
+			// allow unlimited free access to recipe scanning for
+			// our own recipes
+			if (input.publicRecipeSlug && !input.url) {
+				return {
+					public: true,
+				};
+			}
+			return {
+				freeLimited: ['gnocchi_recipe_scan', 5, 'month'],
+			};
 		},
 		resolve: async (_, { input }, ctx) => {
-			const result = await scanWebRecipe(input.url);
-			if (!result) return null;
-			return {
-				type: 'web' as const,
-				data: result,
-			};
+			if (input.url) {
+				const result = await scanWebRecipe(input.url);
+				if (!result) return null;
+				return {
+					type: 'web' as const,
+					data: result,
+				};
+			}
+			if (input.publicRecipeSlug) {
+				const recipe = await ctx.db
+					.selectFrom('PublishedRecipe')
+					.where('slug', '=', input.publicRecipeSlug)
+					.select(['PublishedRecipe.planId', 'PublishedRecipe.slug'])
+					.executeTakeFirst();
+				if (!recipe) {
+					return null;
+				}
+				const publicUrl = `${ctx.reqCtx.env.GNOCCHI_HUB_ORIGIN}/p/${recipe.planId}/${recipe.slug}`;
+				const result = await scanWebRecipe(publicUrl);
+				if (!result) return null;
+				return {
+					type: 'web' as const,
+					data: result,
+				};
+			}
 		},
 	}),
 }));
@@ -125,8 +153,7 @@ builder.objectType('RecipeScanDetailedStep', {
 
 builder.inputType('RecipeScanInput', {
 	fields: (t) => ({
-		url: t.string({
-			required: true,
-		}),
+		url: t.string(),
+		publicRecipeSlug: t.string(),
 	}),
 });

@@ -48,7 +48,7 @@ export function AddToListDialog({
 	const [adding, setAdding] = useState(false);
 	const [loading, setLoading] = useState(false);
 
-	const [_, next] = saveHubRecipeOnboarding.useStep('addToList');
+	const next = saveHubRecipeOnboarding.useNext('addToList');
 
 	// because this component stays mounted... have to reset this...
 	const isReallyOpen = open === undefined ? adding : open;
@@ -146,7 +146,14 @@ export function AddToListDialog({
 				</div>
 				<DialogActions>
 					<DialogClose asChild>
-						<Button emphasis="ghost">Cancel</Button>
+						<Button
+							emphasis="ghost"
+							onClick={() => {
+								next();
+							}}
+						>
+							Cancel
+						</Button>
 					</DialogClose>
 					<Button
 						emphasis="primary"

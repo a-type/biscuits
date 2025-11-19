@@ -24,8 +24,8 @@ export function SubscriptionPromotionContent({}: SubscriptionPromotionContentPro
 				<div>
 					<H2 className="mb-2">More recipe tools</H2>
 					<P className="mb-4">
-						Unlock the recipe scanner &mdash; just paste a URL and Gnocchi will
-						create a copy of the recipe for you.
+						Unlock unlimited scanned web recipes &mdash; just paste a URL and
+						Gnocchi will create a copy of the recipe for you.
 					</P>
 					<P>
 						Collaborate on cooking in real-time, assign steps to each cook, and

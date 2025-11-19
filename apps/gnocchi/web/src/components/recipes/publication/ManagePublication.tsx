@@ -73,7 +73,7 @@ export function ManagePublication({
 			<Dialog.Trigger asChild={asChild} className={className}>
 				{children}
 			</Dialog.Trigger>
-			<Dialog.Content className="flex flex-col gap-md">
+			<Dialog.Content className="flex flex-col gap-md" width="md">
 				<Dialog.Title>Your Publication</Dialog.Title>
 				<Dialog.Description>
 					You can manage how your recipes are published online here.
@@ -99,7 +99,7 @@ export function ManagePublication({
 						toast.success('Updated your blog config!');
 					}}
 				>
-					{({ values }) => {
+					{({ values, dirty }) => {
 						return (
 							<Box col gap>
 								<Box
@@ -142,9 +142,11 @@ export function ManagePublication({
 										</Suspense>
 									</Box>
 								</CollapsibleSimple>
-								<Box gap justify="end">
-									<FormikForm.SubmitButton>Save</FormikForm.SubmitButton>
-								</Box>
+								{dirty && (
+									<Box gap justify="end">
+										<FormikForm.SubmitButton>Save</FormikForm.SubmitButton>
+									</Box>
+								)}
 							</Box>
 						);
 					}}
@@ -152,7 +154,11 @@ export function ManagePublication({
 
 				<Box surface p col gap>
 					<P className="font-bold">Custom domain</P>
-					{publicationId && <DomainRouteView resourceId={publicationId} />}
+					{publicationId ? (
+						<DomainRouteView resourceId={publicationId} />
+					) : (
+						<P>Enable your blog first to set up a custom domain.</P>
+					)}
 				</Box>
 
 				<Dialog.Actions>

@@ -65,7 +65,7 @@ export function DomainRouteValidation({
 	}, [status, refetch]);
 
 	return (
-		<Box d="col" gap {...rest}>
+		<Box d="col" items="start" gap {...rest}>
 			{!!error && (
 				<Box gap items="center" surface color="attention" p>
 					<Icon name="warning" />

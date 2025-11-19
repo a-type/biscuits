@@ -5,6 +5,7 @@ import {
 	Divider,
 	H1,
 	H2,
+	Icon,
 	Note,
 	P,
 	PageContent,
@@ -12,12 +13,13 @@ import {
 	PageRoot,
 } from '@a-type/ui';
 import { graphql, ResultOf } from '@biscuits/graphql';
-import { useLocation } from '@tanstack/react-router';
+import { Link } from '@tanstack/react-router';
 import { Suspense, useEffect } from 'react';
 import { Ingredients, ingredientsFragment } from '~/components/Ingredients.js';
 import {
 	Instructions,
 	instructionsFragment,
+	MachineReadableInstructions,
 } from '~/components/Instructions.js';
 import { TopLineRoot, TopLineTitle } from '~/components/layout.js';
 import { MainImage } from '~/components/MainImage.js';
@@ -28,6 +30,8 @@ export const recipePageQuery = graphql(
 		query RecipePage($planId: ID!, $slug: String!) {
 			publicRecipe(planId: $planId, slug: $slug) {
 				id
+				url
+				slug
 				data {
 					title
 					note
@@ -43,6 +47,10 @@ export const recipePageQuery = graphql(
 				author {
 					name
 				}
+				publication {
+					id
+					publicationName
+				}
 			}
 		}
 	`,
@@ -54,8 +62,7 @@ export interface RecipePageProps {
 }
 
 export function RecipePage({ data: response }: RecipePageProps) {
-	const { data = null, author = null } = response ?? {};
-	const url = useLocation().href;
+	const { data = null, author = null, publication, url, slug } = response ?? {};
 
 	useEffect(() => {
 		if (!data?.title) return;
@@ -63,11 +70,35 @@ export function RecipePage({ data: response }: RecipePageProps) {
 		document.title = data.title;
 	}, [data?.title]);
 
+	useEffect(() => {
+		// set canonical link to recipe url
+		if (!url) return;
+		let link: HTMLLinkElement | null = document.querySelector(
+			"link[rel='canonical']",
+		);
+		if (!link) {
+			link = document.createElement('link');
+			link.setAttribute('rel', 'canonical');
+			document.head.appendChild(link);
+		}
+		link.setAttribute('href', url);
+		return () => {
+			if (link && link.parentNode) {
+				link.parentNode.removeChild(link);
+			}
+		};
+	}, [url]);
+
 	if (!data) {
 		return (
 			<PageRoot className="theme-lemon">
 				<PageContent>
 					<H1>Not found</H1>
+					{!!publication && (
+						<Link to="..">
+							Back to {publication?.publicationName ?? 'recipe list'}
+						</Link>
+					)}
 				</PageContent>
 			</PageRoot>
 		);
@@ -81,18 +112,14 @@ export function RecipePage({ data: response }: RecipePageProps) {
 					itemType="https://schema.org/Recipe"
 					className="h-recipe flex flex-col gap-4 items-stretch"
 				>
-					<Box gap items="center" asChild>
-						<a href="https://biscuits.club/gnocchi">
-							<img
-								src="/icon.png"
-								className="w-30px h-30px"
-								alt="Gnocchi icon"
-							/>
-							<H1 className="!text-lg !font-medium font-fancy">
-								Gnocchi Recipes
-							</H1>
-						</a>
-					</Box>
+					{publication ?
+						<Box asChild gap items="center">
+							<Link to="..">
+								<Icon name="arrowLeft" /> Back to{' '}
+								<b>{publication?.publicationName ?? 'recipe list'}</b>
+							</Link>
+						</Box>
+					:	<GnocchiHeader />}
 					<TopLineRoot>
 						{data.mainImageUrl && (
 							<MainImage url={data.mainImageUrl} title={data.title} />
@@ -102,7 +129,10 @@ export function RecipePage({ data: response }: RecipePageProps) {
 								{data.title}
 							</H1>
 							<P itemProp="author" className="p-author">
-								Published by {author?.name ?? 'Anonymous'}
+								By{' '}
+								<span itemProp="author" className="p-author">
+									{author?.name ?? 'Anonymous'}
+								</span>
 							</P>
 							<div className="row flex-wrap">
 								{data.servings && <Chip>Serves {data.servings}</Chip>}
@@ -143,12 +173,13 @@ export function RecipePage({ data: response }: RecipePageProps) {
 					)}
 					<Divider />
 					<div className="my-4">
-						<H2 className="gutter-bottom">Ingredients</H2>
+						<H2 className="mb-md">Ingredients</H2>
 						<Ingredients data={data} />
 					</div>
 					<Divider />
 					<div className="mb-12 mt-4">
-						<H2 className="gutter-bottom">Instructions</H2>
+						<H2 className="mb-md">Instructions</H2>
+						<MachineReadableInstructions data={data} />
 						<Suspense>
 							<Instructions data={data} />
 						</Suspense>
@@ -158,7 +189,7 @@ export function RecipePage({ data: response }: RecipePageProps) {
 							<a
 								href={`${
 									import.meta.env.VITE_APP_ORIGIN
-								}?recipeUrl=${encodeURIComponent(url)}&hub=true&skipWelcome=true`}
+								}?recipeSlug=${slug}&hub=true&skipWelcome=true&recipeTitle=${data.title}`}
 							>
 								Cook with Gnocchi
 							</a>
@@ -177,5 +208,16 @@ export function RecipePage({ data: response }: RecipePageProps) {
 				</article>
 			</PageContent>
 		</PageRoot>
+	);
+}
+
+function GnocchiHeader() {
+	return (
+		<Box gap items="center" asChild>
+			<a href="https://biscuits.club/gnocchi">
+				<img src="/icon.png" className="w-30px h-30px" alt="Gnocchi icon" />
+				<H1 className="!text-lg !font-medium font-fancy">Gnocchi Recipes</H1>
+			</a>
+		</Box>
 	);
 }

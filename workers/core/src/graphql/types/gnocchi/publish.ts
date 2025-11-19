@@ -310,17 +310,24 @@ builder.objectType('PublishedRecipeData', {
 		title: t.exposeString('title'),
 		prelude: t.field({
 			type: 'JSON',
+			nullable: true,
 			resolve: (recipe) => recipe.prelude,
 		}),
 		mainImageUrl: t.exposeString('mainImageUrl', { nullable: true }),
 		ingredients: t.field({
 			type: ['PublishedRecipeIngredient'],
 			resolve: (recipe) =>
-				recipe.ingredients.map(assignTypeName('PublishedRecipeIngredient')),
+				(recipe.ingredients || []).map(
+					assignTypeName('PublishedRecipeIngredient'),
+				),
 		}),
 		instructions: t.field({
 			type: 'JSON',
-			resolve: (recipe) => recipe.instructions,
+			resolve: (recipe) =>
+				recipe.instructions ?? {
+					type: 'doc',
+					content: [],
+				},
 		}),
 		note: t.exposeString('note', { nullable: true }),
 		servings: t.exposeInt('servings', { nullable: true }),

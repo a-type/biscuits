@@ -250,9 +250,15 @@ importers:
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
+      '@biscuits/client':
+        specifier: workspace:*
+        version: link:../../../packages/client
       '@biscuits/graphql':
         specifier: workspace:*
         version: link:../../../packages/graphql
+      '@gnocchi.biscuits/share-schema':
+        specifier: workspace:*
+        version: link:../share-schema
       '@tanstack/react-query':
         specifier: ^5.90.2
         version: 5.90.2(react@19.2.0)

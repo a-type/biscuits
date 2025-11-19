@@ -76,6 +76,24 @@ builder.objectType('RecipePublication', {
 			type: 'JSON',
 			nullable: true,
 		}),
+		url: t.field({
+			type: 'String',
+			resolve: async (publication, _, ctx) => {
+				const route = await ctx.db
+					.selectFrom('DomainRoute')
+					.select(['DomainRoute.domain', 'DomainRoute.dnsVerifiedAt'])
+					.where('planId', '=', publication.planId)
+					.where('resourceId', '=', publication.id)
+					.where('appId', '=', 'gnocchi')
+					.executeTakeFirst();
+
+				if (route && route.dnsVerifiedAt) {
+					return `https://${route.domain}`;
+				}
+
+				return `https://recipes.gnocchi.biscuits.app/p/${publication.planId}`;
+			},
+		}),
 
 		recipesConnection: t.connection({
 			type: 'PublishedRecipe',

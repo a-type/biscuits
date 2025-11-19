@@ -7,7 +7,12 @@ import {
 	tipTapClassName,
 	tipTapReadonlyClassName,
 } from '@a-type/ui';
+import { tiptapToString } from '@biscuits/client';
 import { FragmentOf, graphql, readFragment, Unmasked } from '@biscuits/graphql';
+import {
+	PublicRecipeStepNode,
+	type PublicRecipe,
+} from '@gnocchi.biscuits/share-schema';
 import { mergeAttributes, Node } from '@tiptap/core';
 import Link from '@tiptap/extension-link';
 import {
@@ -42,6 +47,67 @@ export interface InstructionsProps {
 	className?: string;
 }
 
+export function MachineReadableInstructions({
+	data: dataMasked,
+}: InstructionsProps) {
+	const data = readFragment(instructionsFragment, dataMasked);
+	const instructionsData = data.instructions as PublicRecipe['instructions'];
+	return (
+		<div className="e-instructions hidden" itemProp="recipeInstructions">
+			{(instructionsData.content ?? []).map((block) => {
+				if (!block) return null;
+
+				switch (block.type) {
+					case 'step':
+						return (
+							<MachineReadableStep
+								key={block.attrs.id}
+								data={dataMasked}
+								step={block as PublicRecipeStepNode}
+							/>
+						);
+					case 'sectionTitle':
+						return (
+							<h2
+								key={block.attrs.id}
+								data-section-title="true"
+								itemProp="recipeInstructions"
+							>
+								{tiptapToString(block)}
+							</h2>
+						);
+					default:
+						return null;
+				}
+			})}
+		</div>
+	);
+}
+
+function MachineReadableStep({
+	step,
+	data: masked,
+}: {
+	step: PublicRecipeStepNode;
+	data: FragmentOf<typeof instructionsFragment>;
+}) {
+	if (step.attrs.subRecipeId) {
+		const data = readFragment(instructionsFragment, masked);
+		const embeddedRecipe = data.embeddedRecipes.find(
+			(r) => r.id === step.attrs.subRecipeId,
+		);
+		if (embeddedRecipe) {
+			return (
+				<div>
+					<h2>Make {embeddedRecipe.title}:</h2>
+					<MachineReadableInstructions data={embeddedRecipe as any} />
+				</div>
+			);
+		}
+	}
+	return <p>{tiptapToString(step)}</p>;
+}
+
 export function Instructions({
 	data: dataMasked,
 	className,
@@ -60,18 +126,17 @@ export function Instructions({
 		editable: false,
 	});
 	return (
-		<div
-			className={clsx('e-instructions', className)}
-			itemProp="recipeInstructions"
-		>
-			<InstructionsContext.Provider value={data as any}>
-				<EditorContent
-					className={clsx(tipTapClassName, tipTapReadonlyClassName)}
-					editor={editor}
-					readOnly
-				/>
-			</InstructionsContext.Provider>
-		</div>
+		<InstructionsContext.Provider value={data as any}>
+			<EditorContent
+				className={clsx(
+					tipTapClassName,
+					tipTapReadonlyClassName,
+					'[&>div]:p-0',
+				)}
+				editor={editor}
+				readOnly
+			/>
+		</InstructionsContext.Provider>
 	);
 }
 

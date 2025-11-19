@@ -1,9 +1,12 @@
 import { Button, ButtonProps, Icon } from '@a-type/ui';
-import '@khmyznikov/pwa-install';
 import { useSnapshot } from 'valtio';
 import { installState, triggerInstall } from '../install.js';
 import { getIsFirefox, getIsSafari, getOS } from '../platform.js';
 import { PwaInstaller } from './PwaInstaller.js';
+
+if (typeof window !== 'undefined') {
+	import('@khmyznikov/pwa-install');
+}
 
 export function InstallButton(props: ButtonProps) {
 	const { installReady } = useSnapshot(installState);

@@ -17,7 +17,7 @@ export async function microdata($: CheerioAPI): Promise<ExtractorData | null> {
 	}
 
 	const first = $(elems.get(0)!);
-	const name = first.find(' > [itemprop="name"]').text().trim();
+	const name = first.find('[itemprop="name"]').text().trim();
 	const author = first.find('[itemprop="author"]').text().trim();
 	const copyrightHolder = first
 		.find('[itemprop="copyrightHolder"]')

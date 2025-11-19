@@ -14,6 +14,8 @@
 	"dependencies": {
 		"@a-type/ui": "catalog:",
 		"@a-type/utils": "catalog:",
+		"@biscuits/client": "workspace:*",
+		"@gnocchi.biscuits/share-schema": "workspace:*",
 		"@tiptap/core": "catalog:",
 		"@tiptap/extension-document": "catalog:",
 		"@tiptap/extension-link": "catalog:",

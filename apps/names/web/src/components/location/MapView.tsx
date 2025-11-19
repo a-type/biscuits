@@ -1,4 +1,4 @@
-import { getResolvedColorMode } from '@biscuits/client';
+import { getResolvedColorMode } from '@a-type/ui';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useEffect, useRef } from 'react';

@@ -20,11 +20,15 @@ export function Prelude({ content }: PreludeProps) {
 	});
 	return (
 		<Peek peekHeight={400}>
-			<div className={clsx('p-summary', 'pb-4')} itemProp="description">
+			<div className={clsx('p-summary')} itemProp="description">
 				<EditorContent
 					editor={editor}
 					readOnly
-					className={clsx(tipTapClassName, tipTapReadonlyClassName)}
+					className={clsx(
+						tipTapClassName,
+						tipTapReadonlyClassName,
+						'[&>div]:p-0',
+					)}
 				/>
 			</div>
 		</Peek>

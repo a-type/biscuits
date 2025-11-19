@@ -7,6 +7,7 @@ export const HOME_ORIGIN =
 
 declare global {
 	interface ImportMetaEnv {
+		VITE_STRIPE_PUBLISHABLE_KEY: string;
 		VITE_API_ORIGIN: string;
 		VITE_HOME_ORIGIN: string;
 		DEV: boolean;

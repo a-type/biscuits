@@ -6,6 +6,7 @@ import {
 	PageRoot,
 	tipTapReadonlyClassName,
 } from '@a-type/ui';
+import { tiptapToString } from '@biscuits/client';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 import Link from '@tiptap/extension-link';
 import { EditorContent, useEditor } from '@tiptap/react';
@@ -25,6 +26,7 @@ export const publicationPageFragment = graphql(`
 					data {
 						title
 						mainImageUrl
+						prelude
 					}
 				}
 			}
@@ -54,7 +56,7 @@ export function PublicationPage({ data }: PublicationPageProps) {
 					{publication.recipesConnection.edges.map(({ node }) => (
 						<Card key={node.id}>
 							{node.data.mainImageUrl && (
-								<Card.Image>
+								<Card.Image asChild>
 									<img src={node.data.mainImageUrl} alt={node.data.title} />
 								</Card.Image>
 							)}
@@ -64,6 +66,11 @@ export function PublicationPage({ data }: PublicationPageProps) {
 							>
 								<a href={node.url}>
 									<Card.Title>{node.data.title}</Card.Title>
+									{node.data.prelude && (
+										<Card.Content>
+											{tiptapToString(node.data.prelude)}
+										</Card.Content>
+									)}
 								</a>
 							</Card.Main>
 						</Card>
