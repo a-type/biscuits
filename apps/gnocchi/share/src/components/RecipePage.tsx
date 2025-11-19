@@ -49,6 +49,7 @@ export const recipePageQuery = graphql(
 				}
 				publication {
 					id
+					url
 					publicationName
 				}
 			}
@@ -114,9 +115,9 @@ export function RecipePage({ data: response }: RecipePageProps) {
 				>
 					{publication ?
 						<Box asChild gap items="center">
-							<Link to="..">
+							<Link to={publication.url}>
 								<Icon name="arrowLeft" /> Back to{' '}
-								<b>{publication?.publicationName ?? 'recipe list'}</b>
+								<b>{publication.publicationName ?? 'recipe list'}</b>
 							</Link>
 						</Box>
 					:	<GnocchiHeader />}
