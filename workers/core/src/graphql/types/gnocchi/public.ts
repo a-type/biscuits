@@ -82,7 +82,6 @@ builder.objectType('RecipePublication', {
 				const route = await ctx.db
 					.selectFrom('DomainRoute')
 					.select(['DomainRoute.domain', 'DomainRoute.dnsVerifiedAt'])
-					.where('planId', '=', publication.planId)
 					.where('resourceId', '=', publication.id)
 					.where('appId', '=', 'gnocchi')
 					.executeTakeFirst();

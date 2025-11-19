@@ -242,7 +242,19 @@ builder.objectType('PublishedRecipe', {
 		}),
 		slug: t.exposeString('slug'),
 		url: t.string({
-			resolve: (source, _, ctx) => {
+			resolve: async (source, _, ctx) => {
+				// try domain route first
+				const route = await ctx.db
+					.selectFrom('DomainRoute')
+					.select(['DomainRoute.domain', 'DomainRoute.dnsVerifiedAt'])
+					.where('resourceId', '=', source.planId)
+					.where('appId', '=', 'gnocchi')
+					.executeTakeFirst();
+
+				if (route && route.dnsVerifiedAt) {
+					return `https://${route.domain}/${source.slug}`;
+				}
+
 				const deployedOrigin = new URL(ctx.reqCtx.env.DEPLOYED_ORIGIN);
 				const routed = appsById.gnocchi.domainRoutes!(source.planId, {
 					tld: getTld(deployedOrigin.hostname),
