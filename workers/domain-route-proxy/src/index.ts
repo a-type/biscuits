@@ -16,7 +16,6 @@ const domainRoutes = new DomainRouteService(env.DB, env.DOMAIN_ROUTES);
 export default {
 	async fetch(request, env): Promise<Response> {
 		try {
-			console.log('Domain route proxy received request', request.url);
 			const requestUrl = new URL(request.url);
 			let incomingHost;
 			if (env.TLD === 'localhost') {
@@ -71,7 +70,7 @@ export default {
 				routeUrl.search = '';
 			}
 
-			console.info(`Proxying request ${request.url} to ${routeUrl}`);
+			console.info(`Proxying request to ${routeUrl}`);
 
 			const headers: HeadersInit = {
 				...request.headers,
@@ -82,6 +81,12 @@ export default {
 			};
 
 			const res = await fetch(routeUrl, {
+				...request,
+				body:
+					request.method === 'GET' || request.method === 'HEAD' ?
+						null
+					:	request.body,
+				redirect: 'manual',
 				headers,
 			});
 
