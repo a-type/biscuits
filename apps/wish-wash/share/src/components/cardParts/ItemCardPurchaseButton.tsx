@@ -33,7 +33,7 @@ export function ItemCardPurchaseButton({
 						loading={unpurchaseLoading}
 						color="attention"
 						emphasis="light"
-						onClick={() => unpurchaseItem(itemId)}
+						onClick={() => unpurchaseItem()}
 					>
 						<Icon name="undo" />
 					</Button>

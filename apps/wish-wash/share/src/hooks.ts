@@ -43,7 +43,7 @@ export function usePurchaseItem(id: string) {
 	const { wishlistSlug } = useHubContext();
 	const doPurchase = useServerFn(purchaseItem);
 	const [_, setLocalPurchase] = useLocalPurchase(id);
-	const mutation = useMutation<string>({
+	const mutation = useMutation({
 		mutationFn: (input: PurchaseItemInput) =>
 			doPurchase({
 				data: input,
