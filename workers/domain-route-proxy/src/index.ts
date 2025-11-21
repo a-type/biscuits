@@ -70,7 +70,7 @@ export default {
 				routeUrl.search = '';
 			}
 
-			console.info(`Proxying request to ${routeUrl}`);
+			console.info(`Proxying request to ${routeUrl}`, request);
 
 			const headers: HeadersInit = {
 				...request.headers,
