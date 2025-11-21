@@ -48,20 +48,25 @@ const purchaseItem = createServerFn()
 	.inputValidator((input: VariablesOf<typeof purchase>['input']) => input)
 	.middleware([proxyAuthMiddleware])
 	.handler(async ({ data, context }) => {
-		const res = await request(
-			`${env.API_ORIGIN}/graphql`,
-			purchase,
-			{
-				input: data,
-			},
-			context.headers,
-		);
+		try {
+			const res = await request(
+				`${env.API_ORIGIN}/graphql`,
+				purchase,
+				{
+					input: data,
+				},
+				context.headers,
+			);
 
-		if (!res?.purchasePublicItem) {
-			throw notFound();
+			if (!res?.purchasePublicItem) {
+				throw notFound();
+			}
+
+			return res.purchasePublicItem;
+		} catch (err) {
+			console.error(`[Purchase Item Error]`, err);
+			throw err;
 		}
-
-		return res.purchasePublicItem;
 	});
 
 export function usePurchaseItem(id: string) {
