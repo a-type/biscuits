@@ -77,6 +77,7 @@ const yoga = createYoga<GQLContext>({
 			requestHeaders: ['x-csrf-token'],
 		}),
 	],
+	logging: 'debug',
 });
 
 export const graphqlRouter = new Hono<HonoEnv>()
