@@ -52,6 +52,10 @@ builder.queryFields((t) => ({
 			)) as WishlistSnapshot | null;
 
 			if (!snapshot) {
+				console.error(
+					`[GraphQL Error] Wishlist snapshot not found in Verdant`,
+					{ id },
+				);
 				return null;
 			}
 

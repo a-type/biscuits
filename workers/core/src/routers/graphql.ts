@@ -31,6 +31,18 @@ function applyHeaders(): Plugin<any, GQLContext> {
 	};
 }
 
+function log(): Plugin<any, GQLContext> {
+	return {
+		onExecute({ args, context }) {
+			console.log(`[GraphQL Request]`, {
+				query: args.document?.definitions?.[0]?.name?.value || 'Unnamed Query',
+				variables: args.variableValues,
+				userId: context.session?.userId || null,
+			});
+		},
+	};
+}
+
 const yoga = createYoga<GQLContext>({
 	schema,
 	graphiql: true,
@@ -72,12 +84,12 @@ const yoga = createYoga<GQLContext>({
 		},
 	},
 	plugins: [
+		log(),
 		applyHeaders(),
 		withCsrf({
 			requestHeaders: ['x-csrf-token'],
 		}),
 	],
-	logging: 'debug',
 });
 
 export const graphqlRouter = new Hono<HonoEnv>()
