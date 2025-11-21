@@ -76,7 +76,7 @@ export function useShowPurchased() {
 
 export function useUnpurchaseItem(itemId: string) {
 	const [localPurchaseId, setLocalPurchase] = useLocalPurchase(itemId);
-	const mutation = useMutation<boolean>({
+	const mutation = useMutation({
 		mutationFn: (input: UnpurchaseItemInput) =>
 			unpurchaseItem({
 				data: input,
