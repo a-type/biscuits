@@ -1,14 +1,15 @@
 import { toast, useLocalStorage } from '@a-type/ui';
-import { graphql, VariablesOf } from '@biscuits/graphql';
 import { useMutation } from '@tanstack/react-query';
-import { notFound } from '@tanstack/react-router';
-import { createServerFn, useServerFn } from '@tanstack/react-start';
-import { env } from 'cloudflare:workers';
-import request from 'graphql-request';
+import { useServerFn } from '@tanstack/react-start';
 import { useEffect, useState } from 'react';
 import { useHubContext } from './components/Context.jsx';
 import { useLocalPurchase } from './utils/localPurchases.js';
-import { proxyAuthMiddleware } from './utils/proxyAuthMiddleware.js';
+import {
+	purchaseItem,
+	PurchaseItemInput,
+	unpurchaseItem,
+	UnpurchaseItemInput,
+} from './utils/purchasing.js';
 
 export function useTimer(timeout: number) {
 	const [triggered, setTriggered] = useState(false);
@@ -38,43 +39,12 @@ export function useTimers(times: number[]) {
 	return new Array(times.length).fill(false).map((_, i) => i >= timerIndex);
 }
 
-const purchase = graphql(`
-	mutation PurchaseItem($input: PurchasePublicItemInput!) {
-		purchasePublicItem(input: $input)
-	}
-`);
-
-const purchaseItem = createServerFn()
-	.inputValidator((input: VariablesOf<typeof purchase>['input']) => input)
-	.middleware([proxyAuthMiddleware])
-	.handler(async ({ data, context }) => {
-		try {
-			const res = await request(
-				`${env.API_ORIGIN}/graphql`,
-				purchase,
-				{
-					input: data,
-				},
-				context.headers,
-			);
-
-			if (!res?.purchasePublicItem) {
-				throw notFound();
-			}
-
-			return res.purchasePublicItem;
-		} catch (err) {
-			console.error(`[Purchase Item Error]`, err);
-			throw err;
-		}
-	});
-
 export function usePurchaseItem(id: string) {
 	const { wishlistSlug } = useHubContext();
 	const doPurchase = useServerFn(purchaseItem);
 	const [_, setLocalPurchase] = useLocalPurchase(id);
-	const mutation = useMutation({
-		mutationFn: (input: VariablesOf<typeof purchase>['input']) =>
+	const mutation = useMutation<string>({
+		mutationFn: (input: PurchaseItemInput) =>
 			doPurchase({
 				data: input,
 			}),
@@ -82,8 +52,8 @@ export function usePurchaseItem(id: string) {
 			console.error(error);
 			toast.error(`Hm, something went wrong. Try again?`);
 		},
-		onSuccess: () => {
-			setLocalPurchase(true);
+		onSuccess: (purchaseId) => {
+			setLocalPurchase(purchaseId);
 			toast.success(`Thanks for letting us know!`);
 		},
 	});
@@ -102,4 +72,34 @@ export function usePurchaseItem(id: string) {
 
 export function useShowPurchased() {
 	return useLocalStorage('show-purchased-items', false, false);
+}
+
+export function useUnpurchaseItem(itemId: string) {
+	const [localPurchaseId, setLocalPurchase] = useLocalPurchase(itemId);
+	const mutation = useMutation<boolean>({
+		mutationFn: (input: UnpurchaseItemInput) =>
+			unpurchaseItem({
+				data: input,
+			}),
+		onError: (error: unknown) => {
+			console.error(error);
+			toast.error(`Hm, something went wrong. Try again?`);
+		},
+		onSuccess: () => {
+			setLocalPurchase(null);
+			toast.success(`Purchase removed.`);
+		},
+	});
+
+	const execute = () => {
+		if (!localPurchaseId) {
+			return Promise.reject(new Error('No local purchase found'));
+		}
+		return mutation.mutateAsync({
+			itemId,
+			purchaseId: localPurchaseId,
+		});
+	};
+
+	return [execute, mutation] as const;
 }

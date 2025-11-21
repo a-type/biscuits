@@ -236,6 +236,10 @@ export const builder = new SchemaBuilder<{
 			name: string | null;
 			quantity: number | null;
 		};
+		UnpurchasePublicItemInput: {
+			itemId: string;
+			purchaseId: string;
+		};
 
 		// Common Utils
 		WeatherForecastInput: WeatherForecastInput;

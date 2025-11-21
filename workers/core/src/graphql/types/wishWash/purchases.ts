@@ -63,7 +63,7 @@ builder.mutationFields((t) => ({
 				required: true,
 			}),
 		},
-		type: 'Boolean',
+		type: 'String',
 		authScopes: {
 			public: true,
 		},
@@ -78,7 +78,7 @@ builder.mutationFields((t) => ({
 				throw new BiscuitsError(BiscuitsError.Code.NotFound);
 			}
 
-			await context.db
+			const result = await context.db
 				.insertInto('WishlistPurchase')
 				.values({
 					wishlistId: wishlist.id,
@@ -87,8 +87,32 @@ builder.mutationFields((t) => ({
 					quantity: input.quantity ?? 1,
 					id: id(),
 				})
-				.execute();
+				.returning('id')
+				.executeTakeFirstOrThrow();
 
+			return result.id;
+		},
+	}),
+	unpurchasePublicItem: t.field({
+		args: {
+			input: t.arg({
+				type: 'UnpurchasePublicItemInput',
+				required: true,
+			}),
+		},
+		type: 'Boolean',
+		authScopes: {
+			public: true,
+		},
+		resolve: async (_, { input }, context) => {
+			const result = await context.db
+				.deleteFrom('WishlistPurchase')
+				.where('id', '=', input.purchaseId)
+				.where('itemId', '=', input.itemId)
+				.execute();
+			if (result[0]?.numDeletedRows === BigInt(0)) {
+				throw new BiscuitsError(BiscuitsError.Code.NotFound);
+			}
 			return true;
 		},
 	}),
@@ -120,5 +144,16 @@ builder.inputType('PurchasePublicItemInput', {
 		}),
 		quantity: t.int(),
 		name: t.string(),
+	}),
+});
+
+builder.inputType('UnpurchasePublicItemInput', {
+	fields: (t) => ({
+		itemId: t.id({
+			required: true,
+		}),
+		purchaseId: t.id({
+			required: true,
+		}),
 	}),
 });

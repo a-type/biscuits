@@ -1,5 +1,5 @@
-import { Button, ButtonProps } from '@a-type/ui';
-import { usePurchaseItem } from '~/hooks.js';
+import { Box, Button, ButtonProps, Icon } from '@a-type/ui';
+import { usePurchaseItem, useUnpurchaseItem } from '~/hooks.js';
 import { useLocalPurchase } from '~/utils/localPurchases.js';
 
 export interface ItemCardPurchaseButtonProps extends ButtonProps {
@@ -10,17 +10,45 @@ export function ItemCardPurchaseButton({
 	itemId,
 	...props
 }: ItemCardPurchaseButtonProps) {
-	const [hasPurchased] = useLocalPurchase(itemId);
+	const [localPurchaseId] = useLocalPurchase(itemId);
 	const [purchaseItem, { isPending: loading }] = usePurchaseItem(itemId);
+	const [unpurchaseItem, { isPending: unpurchaseLoading }] =
+		useUnpurchaseItem(itemId);
+
+	if (localPurchaseId) {
+		return (
+			<Box
+				surface
+				items="center"
+				color="success"
+				rounded
+				gap="sm"
+				className="text-xs pl-md h-touch"
+			>
+				<Icon name="check" />
+				<span>You bought it!</span>
+				{typeof localPurchaseId === 'string' ?
+					<Button
+						size="small"
+						loading={unpurchaseLoading}
+						color="attention"
+						emphasis="light"
+						onClick={() => unpurchaseItem(itemId)}
+					>
+						<Icon name="undo" />
+					</Button>
+				:	<div className="w-3" />}
+			</Box>
+		);
+	}
 
 	return (
 		<Button
 			size="small"
 			color="accent"
-			emphasis={hasPurchased ? 'primary' : 'default'}
+			emphasis="default"
 			toggleMode="indicator"
 			{...props}
-			toggled={hasPurchased}
 			onClick={() =>
 				purchaseItem({
 					quantity: 1,
