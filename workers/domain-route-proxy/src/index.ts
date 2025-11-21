@@ -74,6 +74,7 @@ export default {
 			console.info(`Proxying request ${request.url} to ${routeUrl}`);
 
 			const headers: HeadersInit = {
+				...request.headers,
 				'x-forwarded-host': incomingHost,
 				'x-forwarded-for': request.headers.get('x-real-ip') || '',
 				'x-routed-resource': route.resourceId,
