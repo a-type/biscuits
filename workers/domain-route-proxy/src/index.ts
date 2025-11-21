@@ -65,7 +65,10 @@ export default {
 			});
 			const routeUrl = new URL(routeUrlRaw);
 			routeUrl.pathname = requestUrl.pathname;
+			routeUrl.search = requestUrl.search;
+			routeUrl.hash = requestUrl.hash;
 
+			// I think this handles some Vite internals?
 			if (routeUrl.pathname.startsWith('/@')) {
 				routeUrl.search = '';
 			}
