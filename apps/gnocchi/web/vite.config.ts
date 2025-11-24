@@ -49,17 +49,17 @@ export default defineConfig(({ mode }) => ({
 					{
 						src: 'images/screenshots/list.png',
 						type: 'image/png',
-						sizes: '1170x2532',
+						sizes: '1080x2219',
 					},
 					{
-						src: 'images/screenshots/recipe_overview.png',
+						src: 'images/screenshots/recipes.png',
 						type: 'image/png',
-						sizes: '1170x2532',
+						sizes: '847x1742',
 					},
 					{
 						src: 'images/screenshots/cooking.png',
 						type: 'image/png',
-						sizes: '1170x2532',
+						sizes: '1079x2220',
 					},
 				],
 				categories: ['food'],
