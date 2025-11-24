@@ -30,6 +30,9 @@ catalogs:
     '@eslint/js':
       specifier: 9.37.0
       version: 9.37.0
+    '@originjs/vite-plugin-commonjs':
+      specifier: 1.0.3
+      version: 1.0.3
     '@react-spring/web':
       specifier: 10.0.3
       version: 10.0.3
@@ -656,6 +659,112 @@ importers:
       vite-plugin-circular-dependency:
         specifier: ^0.2.1
         version: 0.2.1(rollup@4.52.4)
+
+  apps/mood/verdant:
+    dependencies:
+      '@verdant-web/cli':
+        specifier: 'catalog:'
+        version: 5.1.0
+      '@verdant-web/react':
+        specifier: 'catalog:'
+        version: 43.0.0(@verdant-web/store@5.0.2)(react@19.2.0)
+      '@verdant-web/store':
+        specifier: 'catalog:'
+        version: 5.0.2
+      date-fns:
+        specifier: 'catalog:'
+        version: 4.1.0
+      react:
+        specifier: 'catalog:'
+        version: 19.2.0
+
+  apps/mood/web:
+    dependencies:
+      '@a-type/ui':
+        specifier: 'catalog:'
+        version: 3.0.26(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+      '@a-type/utils':
+        specifier: 'catalog:'
+        version: 1.1.9
+      '@biscuits/client':
+        specifier: workspace:*
+        version: link:../../../packages/client
+      '@biscuits/graphql':
+        specifier: workspace:*
+        version: link:../../../packages/graphql
+      '@mood.biscuits/verdant':
+        specifier: workspace:*
+        version: link:../verdant
+      '@originjs/vite-plugin-commonjs':
+        specifier: 'catalog:'
+        version: 1.0.3
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.2
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.2.2(@types/react@19.2.2)
+      '@unocss/transformer-variant-group':
+        specifier: 'catalog:'
+        version: 66.5.5
+      '@verdant-web/react-router':
+        specifier: 'catalog:'
+        version: 0.8.0(react@19.2.0)
+      '@verdant-web/store':
+        specifier: 'catalog:'
+        version: 5.0.2
+      '@vitejs/plugin-react-swc':
+        specifier: 'catalog:'
+        version: 4.2.1(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+      date-fns:
+        specifier: 'catalog:'
+        version: 4.1.0
+      gql.tada:
+        specifier: 'catalog:'
+        version: 1.8.13(graphql@16.11.0)(typescript@5.9.3)
+      react:
+        specifier: 'catalog:'
+        version: 19.2.0
+      react-dom:
+        specifier: 'catalog:'
+        version: 19.2.0(react@19.2.0)
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+      unocss:
+        specifier: 'catalog:'
+        version: 66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+      valtio:
+        specifier: 'catalog:'
+        version: 2.1.8(@types/react@19.2.2)(react@19.2.0)
+      vite:
+        specifier: 'catalog:'
+        version: 7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
+      vite-plugin-pwa:
+        specifier: 'catalog:'
+        version: 1.1.0(@types/babel__core@7.20.5)(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(workbox-window@7.3.0)
+      workbox-core:
+        specifier: 'catalog:'
+        version: 7.3.0
+      workbox-expiration:
+        specifier: 'catalog:'
+        version: 7.3.0
+      workbox-precaching:
+        specifier: 'catalog:'
+        version: 7.3.0
+      workbox-routing:
+        specifier: 'catalog:'
+        version: 7.3.0
+      workbox-strategies:
+        specifier: 'catalog:'
+        version: 7.3.0
+      workbox-window:
+        specifier: 'catalog:'
+        version: 7.3.0
+    devDependencies:
+      '@biscuits/uno-config':
+        specifier: workspace:*
+        version: link:../../../packages/uno-config
 
   apps/names/verdant:
     dependencies:
@@ -2255,11 +2364,6 @@ packages:
   '@babel/helpers@7.28.4':
     resolution: {integrity: sha512-HFN59MmQXGHVyYadKLVumYsA9dBFun/ldYxipEjzA4196jpLZd8UjEEBLkbEkvfYreDqJhZxYAWFPtrfhNpj4w==}
     engines: {node: '>=6.9.0'}
-
-  '@babel/parser@7.26.3':
-    resolution: {integrity: sha512-WJ/CvmY8Mea8iDXo6a7RK2wbmJITT5fN3BEkRuFlxVyNx8jOKIIhmC4fSkTcPcf8JyavbBwIe6OpiCOBXt/IcA==}
-    engines: {node: '>=6.0.0'}
-    hasBin: true
 
   '@babel/parser@7.27.7':
     resolution: {integrity: sha512-qnzXzDXdr/po3bOTbTIQZ7+TxNKxpkN5IifVLXS+r7qwynkZfPyjZfE7hCXbo7IoO9TNcSyibgONsf2HauUd3Q==}
@@ -11785,10 +11889,6 @@ snapshots:
       '@babel/template': 7.27.2
       '@babel/types': 7.28.4
 
-  '@babel/parser@7.26.3':
-    dependencies:
-      '@babel/types': 7.28.4
-
   '@babel/parser@7.27.7':
     dependencies:
       '@babel/types': 7.28.4
@@ -18495,7 +18595,7 @@ snapshots:
 
   magicast@0.3.5:
     dependencies:
-      '@babel/parser': 7.26.3
+      '@babel/parser': 7.28.4
       '@babel/types': 7.28.4
       source-map-js: 1.2.1
 

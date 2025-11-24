@@ -41,6 +41,10 @@
 			"path": "apps/names",
 		},
 		{
+			"name": "😊 Mood",
+			"path": "apps/mood",
+		},
+		{
 			"name": "📃 Scripts",
 			"path": "scripts",
 		},

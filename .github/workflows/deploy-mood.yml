@@ -1,0 +1,50 @@
+name: mood deploy
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/mood/**'
+      - 'packages/client/**'
+      - 'packages/apps/**'
+      - '.github/workflows/deploy-mood.yml'
+      - 'pnpm-workspace.yaml'
+
+jobs:
+  build-and-deploy-mood:
+    name: Build and deploy mood
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup pnpm
+        uses: pnpm/action-setup@a7487c7e89a18df4991f7f222e4898a00d66ddda
+        with:
+          version: 9.15.2
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --filter @mood.biscuits/web...
+
+      - name: Build mood
+        run: pnpm --filter @mood.biscuits/web... run build
+        env:
+          VITE_API_ORIGIN: ${{ vars.API_ORIGIN }}
+          VITE_HOME_ORIGIN: ${{ vars.HOME_ORIGIN }}
+          VITE_PUBLIC_URL: https://mood.biscuits.club
+          VITE_STRIPE_PUBLISHABLE_KEY: ${{ vars.STRIPE_PUBLISHABLE_KEY }}
+
+      - name: Verify cloudflare token
+        run: |
+          curl -X GET "https://api.cloudflare.com/client/v4/user/tokens/verify"           -H "Authorization: Bearer ${{secrets.CLOUDFLARE_API_TOKEN}}"           -H "Content-Type:application/json"
+
+      - name: Deploy app
+        uses: cloudflare/wrangler-action@da0e0dfe58b7a431659754fdf3f186c529afbe65
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          command: pages deploy dist --project-name=prod-biscuits-mood-app
+          packageManager: pnpm
+          workingDirectory: ./apps/mood/web

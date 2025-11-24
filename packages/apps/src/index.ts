@@ -170,6 +170,19 @@ export const apps = [
 		prerelease: false,
 		theme: 'lemon',
 	} as AppManifest<'palette'>,
+	{
+		id: 'mood',
+		demoVideoSrc: '',
+		description: 'Track and improve your mood',
+		devOriginOverride: 'http://localhost:6228',
+		iconPath: 'icon.png',
+		name: 'Mood',
+		paidDescription: 'TODO',
+		paidFeatures: [],
+		url: 'https://mood.biscuits.club',
+		prerelease: true,
+		theme: 'blueberry',
+	} satisfies AppManifest<'mood'>,
 ] as const;
 
 export type AppId = (typeof apps)[number]['id'];

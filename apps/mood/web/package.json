@@ -1,0 +1,44 @@
+{
+	"name": "@mood.biscuits/web",
+	"version": "1.0.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"app-dev": "vite",
+		"build": "vite build",
+		"preview": "vite preview",
+		"generate": "cd ../verdant && pnpm generate"
+	},
+	"dependencies": {
+		"@mood.biscuits/verdant": "workspace:*",
+		"@biscuits/client": "workspace:*",
+		"@biscuits/graphql": "workspace:*",
+		"@a-type/ui": "catalog:",
+		"@a-type/utils": "catalog:",
+		"date-fns": "catalog:",
+		"gql.tada": "catalog:",
+		"react": "catalog:",
+		"react-dom": "catalog:",
+		"valtio": "catalog:",
+		"@types/react": "catalog:",
+		"@types/react-dom": "catalog:",
+		"@verdant-web/react-router": "catalog:",
+		"@verdant-web/store": "catalog:",
+		"typescript": "catalog:",
+		"vite": "catalog:",
+		"@vitejs/plugin-react-swc": "catalog:",
+		"vite-plugin-pwa": "catalog:",
+		"unocss": "catalog:",
+		"@unocss/transformer-variant-group": "catalog:",
+		"workbox-core": "catalog:",
+		"workbox-expiration": "catalog:",
+		"workbox-precaching": "catalog:",
+		"workbox-routing": "catalog:",
+		"workbox-strategies": "catalog:",
+		"workbox-window": "catalog:",
+		"@originjs/vite-plugin-commonjs": "catalog:"
+	},
+	"devDependencies": {
+		"@biscuits/uno-config": "workspace:*"
+	}
+}
