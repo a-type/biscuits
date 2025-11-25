@@ -1,8 +1,6 @@
-import { Button } from '@a-type/ui';
+import { Button, useIsInstallReady } from '@a-type/ui';
 import { appsById, isValidAppId } from '@biscuits/apps';
 import { Suspense, useEffect } from 'react';
-import { useSnapshot } from 'valtio';
-import { installState } from '../install.js';
 import { InstallButton } from './InstallButton.js';
 
 export interface AppPreviewNoticeProps {}
@@ -11,7 +9,7 @@ export function AppPreviewNotice({}: AppPreviewNoticeProps) {
 	const searchParams = new URLSearchParams(window.location.search);
 	const appPickerFrom = searchParams.get('appPickerFrom');
 
-	const { installReady } = useSnapshot(installState);
+	const installReady = useIsInstallReady();
 
 	useEffect(() => {
 		// consume the param if present

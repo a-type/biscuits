@@ -73,7 +73,6 @@
 		"@react-spring/web": "catalog:",
 		"@verdant-web/react-router": "catalog:",
 		"@verdant-web/store": "catalog:",
-		"@khmyznikov/pwa-install": "0.5.8",
 		"react": "catalog:",
 		"react-dom": "catalog:",
 		"lit": "3.3.1",

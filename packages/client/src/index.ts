@@ -2,7 +2,6 @@ export { type BiscuitsVerdantProfile as VerdantProfile } from '@biscuits/librari
 export * from './common/index.js';
 export * as CONFIG from './config.js';
 export * from './featureFlags.js';
-export * from './install.js';
 export * from './pageError.js';
 export * from './platform.js';
 export * from './react.js';

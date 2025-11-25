@@ -52,7 +52,7 @@ export function usePurchaseItem(id: string) {
 			console.error(error);
 			toast.error(`Hm, something went wrong. Try again?`);
 		},
-		onSuccess: (purchaseId) => {
+		onSuccess: (purchaseId: string) => {
 			setLocalPurchase(purchaseId);
 			toast.success(`Thanks for letting us know!`);
 		},

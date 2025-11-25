@@ -1,11 +1,6 @@
-import { Box, Button, P } from '@a-type/ui';
-import { lazy, Suspense } from 'react';
-import { useSnapshot } from 'valtio';
+import { Box, Button, P, useIsInstalled, useIsInstallReady } from '@a-type/ui';
 import { useLocalStorage } from '../hooks/useStorage.js';
-import { installState } from '../install.js';
-import { getIsPWAInstalled } from '../platform.js';
-
-const InstallButton = lazy(() => import('./InstallButton.js'));
+import { InstallButton } from './InstallButton.js';
 
 export interface InstallHintProps {
 	content: string;
@@ -21,9 +16,10 @@ export function InstallHint({
 		false,
 	);
 
-	const { installReady } = useSnapshot(installState);
+	const installReady = useIsInstallReady();
+	const isInstalled = useIsInstalled();
 
-	if (isDismissed || getIsPWAInstalled() || !installReady) {
+	if (isDismissed || isInstalled || !installReady) {
 		return null;
 	}
 
@@ -42,15 +38,7 @@ export function InstallHint({
 				<Button emphasis="ghost" onClick={() => setIsDismissed(true)}>
 					Dismiss
 				</Button>
-				<Suspense
-					fallback={
-						<Button size="small" disabled loading emphasis="ghost">
-							...
-						</Button>
-					}
-				>
-					<InstallButton emphasis="primary" />
-				</Suspense>
+				<InstallButton emphasis="primary" />
 			</div>
 		</Box>
 	);

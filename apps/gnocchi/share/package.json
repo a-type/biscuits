@@ -24,18 +24,18 @@
 		"@tiptap/react": "catalog:",
 		"@tiptap/starter-kit": "catalog:",
 		"@biscuits/graphql": "workspace:*",
-		"@tanstack/react-query": "^5.90.2",
-		"@tanstack/react-router": "^1.132.47",
-		"@tanstack/react-router-devtools": "^1.132.47",
-		"@tanstack/react-router-ssr-query": "^1.132.47",
-		"@tanstack/react-start": "^1.132.48",
+		"@tanstack/react-query": "catalog:",
+		"@tanstack/react-router": "catalog:",
+		"@tanstack/react-router-devtools": "catalog:",
+		"@tanstack/react-router-ssr-query": "catalog:",
+		"@tanstack/react-start": "catalog:",
 		"gql.tada": "catalog:",
-		"graphql-request": "^7.2.0",
+		"graphql-request": "catalog:",
 		"react": "catalog:",
 		"react-dom": "catalog:"
 	},
 	"devDependencies": {
-		"@cloudflare/vite-plugin": "^1.13.10",
+		"@cloudflare/vite-plugin": "catalog:",
 		"@types/node": "catalog:",
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
@@ -43,7 +43,7 @@
 		"typescript": "catalog:",
 		"unocss": "catalog:",
 		"vite": "catalog:",
-		"vite-tsconfig-paths": "^5.1.4",
+		"vite-tsconfig-paths": "catalog:",
 		"wrangler": "catalog:"
 	}
 }

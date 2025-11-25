@@ -1,30 +1,9 @@
-import { Button, ButtonProps, Icon } from '@a-type/ui';
-import { useSnapshot } from 'valtio';
-import { installState, triggerInstall } from '../install.js';
-import { getIsFirefox, getIsSafari, getOS } from '../platform.js';
-import { PwaInstaller } from './PwaInstaller.js';
-
-if (typeof window !== 'undefined') {
-	import('@khmyznikov/pwa-install');
-}
+import { Button, ButtonProps, Icon, PwaInstallTrigger } from '@a-type/ui';
 
 export function InstallButton(props: ButtonProps) {
-	const { installReady } = useSnapshot(installState);
-
-	const onClick = () => {
-		const os = getOS();
-		if (getIsSafari() || getIsFirefox() || os === 'iOS' || os === 'Mac OS') {
-			PwaInstaller.show();
-		} else {
-			triggerInstall();
-		}
-	};
-
-	if (!installReady) return null;
-
 	return (
-		<>
-			<Button emphasis="ghost" size="small" onClick={onClick} {...props}>
+		<PwaInstallTrigger asChild>
+			<Button emphasis="ghost" size="small" {...props}>
 				{props.children || (
 					<>
 						<Icon name="arrowDown" />
@@ -32,7 +11,6 @@ export function InstallButton(props: ButtonProps) {
 					</>
 				)}
 			</Button>
-		</>
+		</PwaInstallTrigger>
 	);
 }
-export default InstallButton;
