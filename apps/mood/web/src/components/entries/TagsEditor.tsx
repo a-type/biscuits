@@ -15,6 +15,7 @@ export function TagsEditor({ tags }: TagsEditorProps) {
 		},
 	});
 	hooks.useWatch(tags);
+	const client = hooks.useClient();
 
 	return (
 		<Box wrap gap p items="center">
@@ -30,9 +31,21 @@ export function TagsEditor({ tags }: TagsEditorProps) {
 						size="small"
 						onClick={() => {
 							if (tags.has(tag.get('value'))) {
-								tags.removeAll(tag.get('value'));
+								client
+									.batch()
+									.run(() => {
+										tags.removeAll(tag.get('value'));
+										tag.set('useCount', tag.get('useCount') - 1);
+									})
+									.commit();
 							} else {
-								tags.add(tag.get('value'));
+								client
+									.batch()
+									.run(() => {
+										tags.add(tag.get('value'));
+										tag.set('useCount', tag.get('useCount') + 1);
+									})
+									.commit();
 							}
 						}}
 						toggled={tags.has(tag.get('value'))}
@@ -45,7 +58,13 @@ export function TagsEditor({ tags }: TagsEditorProps) {
 			})}
 			<AddTag
 				onAdd={(tag) => {
-					tags.add(tag.get('value'));
+					client
+						.batch()
+						.run(() => {
+							tags.add(tag.get('value'));
+							tag.set('useCount', tag.get('useCount') + 1);
+						})
+						.commit();
 				}}
 			/>
 		</Box>
