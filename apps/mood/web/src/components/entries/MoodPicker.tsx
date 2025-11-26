@@ -1,4 +1,4 @@
-import { Box, clsx, Popover, Slider } from '@a-type/ui';
+import { Box, clsx, Popover, Slider, Tooltip } from '@a-type/ui';
 import { getIsTouch } from '@biscuits/client';
 import { useEffect, useState } from 'react';
 
@@ -54,61 +54,68 @@ export function MoodPicker({
 				className,
 			)}
 		>
-			<Slider.Root
-				defaultValue={[0]}
-				value={localValue !== null ? [localValue] : undefined}
-				onValueChange={([val]) => setLocalValue(val)}
-				onValueCommit={([val]) => {
-					onValueChange(val);
-					setLocalValue(val);
-					setActive(false);
-				}}
-				min={min}
-				max={max}
-				orientation="vertical"
-				onPointerDown={() => {
-					setActive(true);
-				}}
-				onPointerUp={() => {
-					setActive(false);
-					if (value === null) {
-						onValueChange(localValue);
-					}
-				}}
+			<Tooltip
+				content="Slide to select mood"
+				open={!active && value === null}
+				side="left"
+				asChild
 			>
-				<Slider.Track
-					className={clsx('w-6', {
-						'bg-attention': localValue === min,
-						'bg-attention-light':
-							localValue !== null && localValue < 0 && localValue > min,
-						'bg-main-light': !localValue,
-						'bg-success-light':
-							localValue !== null && localValue > 0 && localValue < max,
-						'bg-success': localValue === max,
-					})}
-				/>
-				<Popover open={active && getIsTouch()}>
-					<Popover.Anchor asChild>
-						<Slider.Thumb
-							className={clsx(
-								'w-touch-large h-touch-large text-2xl',
-								value === null && 'border-dashed',
-							)}
+				<Slider.Root
+					defaultValue={[0]}
+					value={localValue !== null ? [localValue] : undefined}
+					onValueChange={([val]) => setLocalValue(val)}
+					onValueCommit={([val]) => {
+						onValueChange(val);
+						setLocalValue(val);
+						setActive(false);
+					}}
+					min={min}
+					max={max}
+					orientation="vertical"
+					onPointerDown={() => {
+						setActive(true);
+					}}
+					onPointerUp={() => {
+						setActive(false);
+						if (value === null) {
+							onValueChange(localValue);
+						}
+					}}
+				>
+					<Slider.Track
+						className={clsx('w-6', {
+							'bg-attention': localValue === min,
+							'bg-attention-light':
+								localValue !== null && localValue < 0 && localValue > min,
+							'bg-main-light': !localValue,
+							'bg-success-light':
+								localValue !== null && localValue > 0 && localValue < max,
+							'bg-success': localValue === max,
+						})}
+					/>
+					<Popover open={active && getIsTouch()}>
+						<Popover.Anchor asChild>
+							<Slider.Thumb
+								className={clsx(
+									'w-touch-large h-touch-large text-2xl',
+									value === null && 'border-dashed',
+								)}
+							>
+								{value === null && !active ? '' : moodIcon}
+							</Slider.Thumb>
+						</Popover.Anchor>
+						<Popover.Content
+							side="left"
+							sideOffset={16}
+							className="min-w-0 min-h-0"
 						>
-							{value === null ? '' : moodIcon}
-						</Slider.Thumb>
-					</Popover.Anchor>
-					<Popover.Content
-						side="left"
-						sideOffset={16}
-						className="min-w-0 min-h-0"
-					>
-						<Box p="xs" col gap layout="center center" className="text-3xl">
-							{moodIcon}
-						</Box>
-					</Popover.Content>
-				</Popover>
-			</Slider.Root>
+							<Box p="xs" col gap layout="center center" className="text-3xl">
+								{moodIcon}
+							</Box>
+						</Popover.Content>
+					</Popover>
+				</Slider.Root>
+			</Tooltip>
 		</Box>
 	);
 }

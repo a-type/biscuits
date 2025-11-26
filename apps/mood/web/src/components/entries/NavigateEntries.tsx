@@ -10,7 +10,7 @@ import {
 	Popover,
 } from '@a-type/ui';
 import { addDays, startOfDay } from 'date-fns';
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
 
 export interface NavigateEntriesProps extends BoxProps {
 	className?: string;
@@ -89,8 +89,9 @@ function CalendarPicker({
 	value: Date;
 	onChange: (value: Date) => void;
 }) {
+	const [open, setOpen] = useState(false);
 	return (
-		<Popover>
+		<Popover open={open} onOpenChange={setOpen}>
 			<Popover.Trigger asChild>
 				<Button size="small" emphasis="ghost">
 					<Icon name="calendar" />
@@ -102,16 +103,17 @@ function CalendarPicker({
 					onChange={(d) => {
 						if (!d) return;
 						onChange(d);
+						setOpen(false);
 					}}
 				>
 					<DatePicker.MonthControls />
 					<DatePicker.CalendarGrid>
-						{(value) => (
+						{(day) => (
 							<Suspense
-								key={value.key}
-								fallback={<DatePicker.CalendarDay value={value} disabled />}
+								key={day.key}
+								fallback={<DatePicker.CalendarDay value={day} disabled />}
 							>
-								<DateWithEntry value={value} key={value.key} />
+								<DateWithEntry value={day} key={day.key} />
 							</Suspense>
 						)}
 					</DatePicker.CalendarGrid>
@@ -135,13 +137,16 @@ function DateWithEntry({ value }: { value: CalendarDayValue }) {
 		<DatePicker.CalendarDay
 			value={value}
 			disabled={!entry}
-			className={clsx({
-				'bg-attention-light': moodValue === -2,
-				'bg-attention': moodValue === -1,
-				'bg-neutral-light': moodValue === 0,
-				'bg-success-light': moodValue === 1,
-				'bg-success': moodValue === 2,
-			})}
+			className={clsx(
+				{
+					'bg-attention-light': moodValue === -2,
+					'bg-attention': moodValue === -1,
+					'bg-neutral-light': moodValue === 0,
+					'bg-success-light': moodValue === 1,
+					'bg-success': moodValue === 2,
+				},
+				'[&[data-selected=true]]:(ring ring-2 ring-bg ring-offset-1)',
+			)}
 		/>
 	);
 }
