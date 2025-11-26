@@ -24,12 +24,14 @@ export type TagSnapshot = {
   createdAt: number;
   lastUsedAt: number;
   useCount: number;
+  color: string | null;
 };
 export type TagInit = {
   value: string;
   createdAt?: number;
   lastUsedAt?: number;
   useCount?: number;
+  color?: string | null;
 };
 
 export type MigrationTypes = {

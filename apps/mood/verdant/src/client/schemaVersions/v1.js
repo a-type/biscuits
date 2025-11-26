@@ -2,7 +2,7 @@
 
 // src/schema.ts
 import { schema } from "@verdant-web/store";
-import { startOfDay } from "date-fns";
+import { getDay, startOfDay } from "date-fns";
 var entries = schema.collection({
   name: "entry",
   primaryKey: "id",
@@ -28,6 +28,12 @@ var entries = schema.collection({
         const date = startOfDay(new Date(value.createdAt));
         return date.getTime();
       }
+    },
+    weekday: {
+      type: "number",
+      compute(value) {
+        return getDay(new Date(value.createdAt));
+      }
     }
   }
 });
@@ -44,6 +50,9 @@ var tags = schema.collection({
     }),
     useCount: schema.fields.number({
       default: () => 0
+    }),
+    color: schema.fields.string({
+      nullable: true
     })
   },
   indexes: {

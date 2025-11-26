@@ -1,4 +1,6 @@
-import { Box, Button } from '@a-type/ui';
+import { Box, clsx, Popover, Slider } from '@a-type/ui';
+import { getIsTouch } from '@biscuits/client';
+import { useEffect, useState } from 'react';
 
 const MOODS = [
 	{ value: -2, label: '😞' },
@@ -8,25 +10,105 @@ const MOODS = [
 	{ value: 2, label: '😄' },
 ];
 
+const min = Math.min(...MOODS.map((mood) => mood.value));
+const max = Math.max(...MOODS.map((mood) => mood.value));
+
 export interface MoodPickerProps {
 	value: number | null;
 	onValueChange: (val: number) => void;
-	row?: boolean;
+	className?: string;
 }
 
-export function MoodPicker({ value, onValueChange, row }: MoodPickerProps) {
+export function MoodPicker({
+	value,
+	onValueChange,
+	className,
+}: MoodPickerProps) {
+	const [localValue, setLocalValue] = useState<number>(value ?? 0);
+
+	useEffect(() => {
+		setLocalValue(value ?? 0);
+	}, [value]);
+
+	const moodIcon =
+		MOODS.find((mood) => mood.value === localValue)?.label ?? '❓';
+
+	const [active, setActive] = useState(false);
+
 	return (
-		<Box className={row ? 'flex-row' : 'flex-col'}>
-			{MOODS.map((mood) => (
-				<Box
-					key={mood.value}
-					onClick={() => onValueChange(mood.value)}
-					className="w-full flex-1 p-md"
-					layout="center center"
-				>
-					<Button toggled={value === mood.value}>{mood.label}</Button>
-				</Box>
-			))}
+		<Box
+			p="lg"
+			full
+			layout="center center"
+			className={clsx(
+				'transition-colors',
+				{
+					'bg-attention-light': localValue === min,
+					'bg-attention-wash':
+						localValue !== null && localValue < 0 && localValue > min,
+					'bg-main-wash': !localValue,
+					'bg-success-wash':
+						localValue !== null && localValue > 0 && localValue < max,
+					'bg-success-light': localValue === max,
+				},
+				className,
+			)}
+		>
+			<Slider.Root
+				defaultValue={[0]}
+				value={localValue !== null ? [localValue] : undefined}
+				onValueChange={([val]) => setLocalValue(val)}
+				onValueCommit={([val]) => {
+					onValueChange(val);
+					setLocalValue(val);
+					setActive(false);
+				}}
+				min={min}
+				max={max}
+				orientation="vertical"
+				onPointerDown={() => {
+					setActive(true);
+				}}
+				onPointerUp={() => {
+					setActive(false);
+					if (value === null) {
+						onValueChange(localValue);
+					}
+				}}
+			>
+				<Slider.Track
+					className={clsx('w-6', {
+						'bg-attention': localValue === min,
+						'bg-attention-light':
+							localValue !== null && localValue < 0 && localValue > min,
+						'bg-main-light': !localValue,
+						'bg-success-light':
+							localValue !== null && localValue > 0 && localValue < max,
+						'bg-success': localValue === max,
+					})}
+				/>
+				<Popover open={active && getIsTouch()}>
+					<Popover.Anchor asChild>
+						<Slider.Thumb
+							className={clsx(
+								'w-touch-large h-touch-large text-2xl',
+								value === null && 'border-dashed',
+							)}
+						>
+							{value === null ? '' : moodIcon}
+						</Slider.Thumb>
+					</Popover.Anchor>
+					<Popover.Content
+						side="left"
+						sideOffset={16}
+						className="min-w-0 min-h-0"
+					>
+						<Box p="xs" col gap layout="center center" className="text-3xl">
+							{moodIcon}
+						</Box>
+					</Popover.Content>
+				</Popover>
+			</Slider.Root>
 		</Box>
 	);
 }

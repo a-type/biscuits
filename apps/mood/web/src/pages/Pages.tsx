@@ -12,6 +12,10 @@ const routes = makeRoutes([
 		component: HomePage,
 	},
 	{
+		path: '/entry/:date',
+		component: lazy(() => import('./EntryPage.jsx')),
+	},
+	{
 		path: '/settings',
 		component: lazy(() => import('./SettingsPage.jsx')),
 	},

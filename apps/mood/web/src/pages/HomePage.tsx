@@ -1,13 +1,23 @@
-import { TodoList } from '@/components/todos/TodoList.jsx';
+import { NavigateEntries } from '@/components/entries/NavigateEntries.jsx';
+import { UpsertEntry } from '@/components/entries/UpsertEntry.jsx';
+import { useNavigate } from '@verdant-web/react-router';
+import { startOfDay } from 'date-fns';
 
-export interface HomePageProps {}
+export function HomePage() {
+	const today = startOfDay(new Date());
+	const navigate = useNavigate();
 
-export function HomePage({}: HomePageProps) {
 	return (
-		<div>
-			<h1>Hello Verdant!</h1>
-			<TodoList />
-		</div>
+		<>
+			<UpsertEntry date={today} />
+			<NavigateEntries
+				value={today.getTime()}
+				onValueChange={(value: number) => {
+					const newDate = startOfDay(new Date(value));
+					navigate(`/entry/${newDate.toISOString()}`);
+				}}
+			/>
+		</>
 	);
 }
 

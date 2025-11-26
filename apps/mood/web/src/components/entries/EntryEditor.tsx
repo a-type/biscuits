@@ -1,6 +1,8 @@
 import { hooks } from '@/hooks.js';
-import { Box } from '@a-type/ui';
+import { Box, clsx } from '@a-type/ui';
 import { Entry } from '@mood.biscuits/verdant';
+import { Suspense } from 'react';
+import { MetadataDisplay } from './MetadataDisplay.jsx';
 import { MoodPicker } from './MoodPicker.jsx';
 import { TagsEditor } from './TagsEditor.jsx';
 
@@ -12,23 +14,27 @@ export interface EntryEditorProps {
 export function EntryEditor({ entry, className }: EntryEditorProps) {
 	const { value, tags } = hooks.useWatch(entry);
 
-	if (value === null) {
-		return (
-			<MoodPicker
-				value={value}
-				onValueChange={(val) => entry.set('value', val)}
-			/>
-		);
-	}
-
 	return (
-		<Box col className={className} gap="sm">
+		<Box col className={className} items="center">
 			<MoodPicker
-				row
+				className={clsx(
+					'w-full transition-height duration-300',
+					value === null ? 'h-100dvh' : 'h-50dvh',
+				)}
 				value={value}
 				onValueChange={(val) => entry.set('value', val)}
 			/>
-			<TagsEditor tags={tags} />
+			<Box
+				col
+				className="max-w-lg w-full pb-xl pt-md b-t-solid b-t-2 b-t-main-ink"
+			>
+				<Suspense>
+					<MetadataDisplay entry={entry} />
+				</Suspense>
+				<Suspense>
+					<TagsEditor tags={tags} />
+				</Suspense>
+			</Box>
 		</Box>
 	);
 }

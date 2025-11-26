@@ -196,13 +196,33 @@ export interface EntryDateRangeFilter {
   lt?: number;
   order?: "asc" | "desc";
 }
+export interface EntryWeekdaySortFilter {
+  where: "weekday";
+  order: "asc" | "desc";
+}
+export interface EntryWeekdayMatchFilter {
+  where: "weekday";
+  equals: number;
+  order?: "asc" | "desc";
+}
+export interface EntryWeekdayRangeFilter {
+  where: "weekday";
+  gte?: number;
+  gt?: number;
+  lte?: number;
+  lt?: number;
+  order?: "asc" | "desc";
+}
 export type EntryFilter =
   | EntryCreatedAtSortFilter
   | EntryCreatedAtMatchFilter
   | EntryCreatedAtRangeFilter
   | EntryDateSortFilter
   | EntryDateMatchFilter
-  | EntryDateRangeFilter;
+  | EntryDateRangeFilter
+  | EntryWeekdaySortFilter
+  | EntryWeekdayMatchFilter
+  | EntryWeekdayRangeFilter;
 
 /** Generated types for Tag */
 
@@ -211,11 +231,13 @@ export type TagValue = string;
 export type TagCreatedAt = number;
 export type TagLastUsedAt = number;
 export type TagUseCount = number;
+export type TagColor = string;
 export type TagInit = {
   value: string;
   createdAt?: number;
   lastUsedAt?: number;
   useCount?: number;
+  color?: string | null;
 };
 
 export type TagDestructured = {
@@ -223,6 +245,7 @@ export type TagDestructured = {
   createdAt: number;
   lastUsedAt: number;
   useCount: number;
+  color: string | null;
 };
 
 export type TagSnapshot = {
@@ -230,6 +253,7 @@ export type TagSnapshot = {
   createdAt: number;
   lastUsedAt: number;
   useCount: number;
+  color: string | null;
 };
 
 /** Index filters for Tag **/

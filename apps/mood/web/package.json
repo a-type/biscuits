@@ -36,7 +36,8 @@
 		"workbox-routing": "catalog:",
 		"workbox-strategies": "catalog:",
 		"workbox-window": "catalog:",
-		"@originjs/vite-plugin-commonjs": "catalog:"
+		"@originjs/vite-plugin-commonjs": "catalog:",
+		"motion": "catalog:"
 	},
 	"devDependencies": {
 		"@biscuits/uno-config": "workspace:*"

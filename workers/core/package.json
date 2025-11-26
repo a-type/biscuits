@@ -11,7 +11,6 @@
 		"types": "wrangler types worker-configuration.d.ts",
 		"vapid": "node ./scripts/generateVapidKeys.js",
 		"//typecheck": "tsc -p tsconfig.json --noEmit",
-		"write-schema": "env-cmd tsx watch --conditions=development ./scripts/writeSchema.ts",
 		"test": "vitest",
 		"migrate:create": "wrangler d1 migrations create prod-biscuits-core",
 		"migrate:apply": "wrangler d1 migrations apply prod-biscuits-core --local",

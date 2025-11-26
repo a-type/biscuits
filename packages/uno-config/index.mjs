@@ -6,12 +6,15 @@ export const contentConfig = {
 	filesystem: ['./node_modules/@a-type/ui/dist/esm/**'],
 };
 
-export default defineConfig({
-	presets: [atype()],
-	transformers: [variantGroup()],
-	preflights: [
-		{
-			getCSS: () => `
+export default withOptions({});
+
+export function withOptions(options) {
+	return defineConfig({
+		presets: [atype(options)],
+		transformers: [variantGroup()],
+		preflights: [
+			{
+				getCSS: () => `
 			html, body, #root {
 				display: flex;
 				flex-direction: column;
@@ -22,13 +25,15 @@ export default defineConfig({
 
 			#root {
 				flex: 1;
+				isolation: isolate;
 			}
 
 			.hidden {
 				display: none;
 			}
 			`,
-		},
-	],
-	content: contentConfig,
-});
+			},
+		],
+		content: contentConfig,
+	});
+}

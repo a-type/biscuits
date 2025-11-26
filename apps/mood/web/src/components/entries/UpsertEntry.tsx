@@ -4,25 +4,28 @@ import { startOfDay } from 'date-fns';
 import { useEffect } from 'react';
 import { EntryEditor } from './EntryEditor.jsx';
 
-export interface NewEntryProps {
+export interface UpsertEntryProps {
 	className?: string;
+	date: Date;
 }
 
-export function NewEntry({ className }: NewEntryProps) {
-	const today = startOfDay(new Date());
+export function UpsertEntry({ className, date }: UpsertEntryProps) {
+	const start = startOfDay(date);
 	const entry = hooks.useOneEntry({
 		index: {
 			where: 'date',
-			equals: today.getTime(),
+			equals: start.getTime(),
 		},
 	});
 
 	const exists = !!entry;
 	useEffect(() => {
 		if (!exists) {
-			verdant.entries.put({});
+			verdant.entries.put({
+				createdAt: start.getTime(),
+			});
 		}
-	}, [exists]);
+	}, [exists, start]);
 
 	if (!entry) {
 		return null;

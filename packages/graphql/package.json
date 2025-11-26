@@ -31,7 +31,8 @@
 	},
 	"scripts": {
 		"build": "tsc",
-		"dev": "tsc --watch"
+		"dev": "tsc --watch",
+		"gen": "gql-tada generate-output"
 	},
 	"type": "module",
 	"dependencies": {

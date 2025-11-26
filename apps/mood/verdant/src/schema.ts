@@ -1,5 +1,5 @@
 import { schema } from '@verdant-web/store';
-import { startOfDay } from 'date-fns';
+import { getDay, startOfDay } from 'date-fns';
 
 /**
  * Welcome to your Verdant schema!
@@ -45,6 +45,12 @@ const entries = schema.collection({
 				return date.getTime();
 			},
 		},
+		weekday: {
+			type: 'number',
+			compute(value) {
+				return getDay(new Date(value.createdAt));
+			},
+		},
 	},
 });
 
@@ -61,6 +67,9 @@ const tags = schema.collection({
 		}),
 		useCount: schema.fields.number({
 			default: () => 0,
+		}),
+		color: schema.fields.string({
+			nullable: true,
 		}),
 	},
 	indexes: {
