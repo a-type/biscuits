@@ -17,8 +17,8 @@ export default defineConfig(({ command, mode }) => ({
 			filename: 'service-worker.ts',
 			manifest: {
 				id: 'mood-main',
-				name: 'mood',
-				short_name: 'mood',
+				name: 'Mood',
+				short_name: 'Mood',
 				description: '',
 				theme_color: '#ffffff',
 				background_color: '#ffffff',
