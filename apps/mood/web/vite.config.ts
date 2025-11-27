@@ -391,6 +391,11 @@ function icons() {
 			sizes: '512x512',
 		},
 		{
+			src: 'icons/android/android-launchericon-512-512.png',
+			sizes: '512x512',
+			purpose: 'maskable',
+		},
+		{
 			src: 'icons/android/android-launchericon-192-192.png',
 			sizes: '192x192',
 		},
@@ -409,6 +414,11 @@ function icons() {
 		{
 			src: 'icons/android/android-launchericon-48-48.png',
 			sizes: '48x48',
+		},
+		{
+			src: 'icons/android-android-launchericon-48-48.png',
+			sizes: '48x48',
+			purpose: 'maskable',
 		},
 		{
 			src: 'icons/ios/16.png',
