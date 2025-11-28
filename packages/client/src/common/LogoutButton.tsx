@@ -2,12 +2,19 @@ import { Button, ButtonProps, Icon } from '@a-type/ui';
 import { ReactNode } from 'react';
 import * as CONFIG from '../config.js';
 import { useWasLoggedIn } from '../hooks/useWasLoggedIn.js';
+import { useIsLoggedIn } from '../react.js';
 
 export interface LogoutButtonProps extends ButtonProps {
 	returnTo?: string;
 }
 
 export function LogoutButton({ children, ...props }: LogoutButtonProps) {
+	const isLoggedIn = useIsLoggedIn();
+
+	if (!isLoggedIn) {
+		return null;
+	}
+
 	return (
 		<Button asChild {...props}>
 			<LogoutLink returnTo={props.returnTo}>

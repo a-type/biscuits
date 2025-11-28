@@ -21,7 +21,6 @@ import {
 	useIsOffline,
 } from '../hooks/graphql.js';
 import { getIsPWAInstalled } from '../platform.js';
-import { LogoutLink } from '../react.js';
 import { InstallButton } from './InstallButton.js';
 import { updateApp, useIsUpdateAvailable } from './updateState.js';
 
@@ -120,14 +119,6 @@ export function UserMenu({
 										<Icon name="profile" />
 									</DropdownMenuItemRightSlot>
 								</a>
-							</DropdownMenu.Item>
-							<DropdownMenu.Item asChild>
-								<LogoutLink className="color-inherit font-inherit">
-									Log out
-									<DropdownMenuItemRightSlot>
-										<Icon name="arrowRight" />
-									</DropdownMenuItemRightSlot>
-								</LogoutLink>
 							</DropdownMenu.Item>
 						</>
 					}

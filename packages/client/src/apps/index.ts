@@ -6,6 +6,7 @@ export * from './InstallButton.js';
 export * from './InstallHint.js';
 export * from './ResetNotifier.js';
 export * from './ResetToServer.js';
+export * from './SettingsPageWrapper.js';
 export * from './storage.js';
 export * from './UpdatePrompt.js';
 export * from './updateState.js';
