@@ -36,7 +36,7 @@ export function NavigateEntries({
 	const next = hooks.useOneEntry({
 		index: {
 			where: 'createdAt',
-			gt: addDays(normalized, 1).getTime(),
+			gte: addDays(normalized, 1).getTime(),
 			order: 'asc',
 		},
 	});
