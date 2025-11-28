@@ -38,7 +38,7 @@ export function InstallHint({
 				<Button emphasis="ghost" onClick={() => setIsDismissed(true)}>
 					Dismiss
 				</Button>
-				<InstallButton emphasis="primary" />
+				<InstallButton emphasis="primary" size="default" />
 			</div>
 		</Box>
 	);

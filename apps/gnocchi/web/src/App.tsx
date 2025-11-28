@@ -18,7 +18,7 @@ export function App() {
 			)}
 		>
 			<ErrorBoundary fallback={<ErrorFallback />}>
-				<UIProvider>
+				<UIProvider manifestPath="/manifest.webmanifest">
 					<Suspense fallback={<GlobalLoader />}>
 						<Provider appId="gnocchi" verdantClient={verdant as any}>
 							<GroceriesProvider>

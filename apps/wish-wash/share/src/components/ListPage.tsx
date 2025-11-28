@@ -50,7 +50,7 @@ export function ListPage({ data }: ListPageProps) {
 
 	return (
 		<HubContextProvider wishlistSlug={data.slug}>
-			<UIProvider disableParticles>
+			<UIProvider disableParticles manifestPath="/manifest.webmanifest">
 				<Box
 					d="col"
 					full="width"

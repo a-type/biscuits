@@ -12,7 +12,7 @@ export interface AppProps {}
 export function App({}: AppProps) {
 	return (
 		<ErrorBoundary fallback={<ErrorFallback />}>
-			<UIProvider toastContainerClassName="mb-10 sm:mb-0" disableViewportOffset>
+			<UIProvider disableViewportOffset manifestPath="/manifest.webmanifest">
 				<Suspense>
 					<Provider appId="wish-wash" verdantClient={verdant}>
 						<VerdantProvider>

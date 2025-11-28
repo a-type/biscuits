@@ -10,7 +10,7 @@ export interface AppProps {}
 export function App({}: AppProps) {
 	return (
 		<ErrorBoundary fallback={<ErrorFallback />}>
-			<UIProvider>
+			<UIProvider manifestPath="/manifest.webmanifest">
 				<Suspense>
 					<Provider appId="{{todoId}}" verdantClient={verdant as any}>
 						<VerdantProvider>

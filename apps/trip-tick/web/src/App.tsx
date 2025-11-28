@@ -9,7 +9,7 @@ export function App() {
 	return (
 		<div className="flex flex-col flex-1 w-full h-full">
 			<Suspense fallback={<FullScreenSpinner />}>
-				<UIProvider disableViewportOffset>
+				<UIProvider disableViewportOffset manifestPath="/manifest.webmanifest">
 					<Provider appId="trip-tick" verdantClient={verdant as any}>
 						<LofiProvider>
 							<Pages />
