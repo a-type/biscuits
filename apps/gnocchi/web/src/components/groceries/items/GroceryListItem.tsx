@@ -216,7 +216,7 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 										<ListSelect
 											value={listId}
 											onChange={(listId) => item.set('listId', listId)}
-											className="flex-basis-25% flex-grow-1 flex-shrink-1 md:flex-basis-60px"
+											className="flex-basis-0 flex-grow-1 flex-shrink-1"
 										/>
 									</Suspense>
 								</div>

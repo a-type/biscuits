@@ -170,7 +170,7 @@ export function UserMenu({
 					</DropdownMenu.Item>
 					{!getIsPWAInstalled() && (
 						<Suspense>
-							<DropdownMenu.Item asChild>
+							<DropdownMenu.Item asChild color="accent">
 								<InstallButton
 									emphasis="primary"
 									size="small"

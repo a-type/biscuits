@@ -10,7 +10,12 @@ export default withOptions({});
 
 export function withOptions(options) {
 	return defineConfig({
-		presets: [atype(options)],
+		presets: [
+			atype({
+				...options,
+				disableZIndexes: true,
+			}),
+		],
 		transformers: [variantGroup()],
 		preflights: [
 			{

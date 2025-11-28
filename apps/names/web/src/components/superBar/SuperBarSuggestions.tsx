@@ -139,7 +139,9 @@ function SuggestionItem({
 							style={{ backgroundImage: `url(${photo.url})` }}
 						/>
 					)}
-					<CardTitle className="font-normal px-md">{name}</CardTitle>
+					<CardTitle className="font-normal px-md m-0 border-none">
+						{name}
+					</CardTitle>
 					{!!tags.length && (
 						<CardContent
 							unstyled

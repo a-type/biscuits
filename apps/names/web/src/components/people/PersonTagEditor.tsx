@@ -67,7 +67,7 @@ export function PersonTagEditor({ person, className }: PersonTagEditorProps) {
 						/>
 						<Collapsible className="w-full">
 							<Collapsible.Trigger asChild>
-								<Button size="small">
+								<Button size="small" className="min-h-24px leading-1">
 									<Icon name="plus" className="w-10px h-10px" />
 									<span className="text-xs">New tag</span>
 								</Button>

@@ -37,7 +37,7 @@ export function RecipeTagsFilter({
 						toggled={!!selectedValues?.includes(tag.get('name'))}
 						onClick={() => onSelect(tag.get('name'))}
 						className={classNames(
-							'my-auto',
+							'my-auto min-h-24px',
 							tag.get('color') && `theme-${tag.get('color')}`,
 							buttonClassName,
 						)}

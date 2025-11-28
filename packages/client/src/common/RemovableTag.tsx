@@ -19,7 +19,7 @@ export function RemovableTag({
 		<Chip
 			color={color || 'primary'}
 			className={clsx(
-				'flex items-center gap-1 px-2 rounded-full !bg-main-light color-black border-gray-dark font-bold text-xs',
+				'flex items-center gap-1 px-2 rounded-full !bg-main-light color-black border-gray-dark font-bold text-xs min-h-touch',
 				className,
 			)}
 		>
