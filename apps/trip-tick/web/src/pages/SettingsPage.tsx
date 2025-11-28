@@ -7,7 +7,7 @@ export interface SettingsPageProps {}
 
 export function SettingsPage({}: SettingsPageProps) {
 	return (
-		<PageContent>
+		<PageContent p="none">
 			<SettingsPageWrapper>
 				<TemperatureUnitSelect />
 			</SettingsPageWrapper>

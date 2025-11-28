@@ -79,7 +79,7 @@ export function SettingsPageWrapper({
 			:	<ManagePlanButton />}
 			<Divider />
 			{children}
-			<Divider />
+			{children && <Divider />}
 			<H2>Troubleshoot</H2>
 			<ManageStorage />
 			<Box gap>

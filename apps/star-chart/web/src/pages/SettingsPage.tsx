@@ -7,7 +7,7 @@ export function SettingsPage({}: SettingsPageProps) {
 	usePollForUpdates();
 
 	return (
-		<PageContent>
+		<PageContent p="none">
 			<SettingsPageWrapper />
 		</PageContent>
 	);

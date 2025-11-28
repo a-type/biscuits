@@ -8,7 +8,7 @@ export interface SettingsPageProps {}
 export function SettingsPage({}: SettingsPageProps) {
 	return (
 		<PageRoot>
-			<PageContent>
+			<PageContent p="none">
 				<SettingsPageWrapper>
 					<LocationOffer overrideDeny emphasis="default" />
 				</SettingsPageWrapper>
