@@ -27,11 +27,25 @@ const entries = schema.collection({
 		createdAt: schema.fields.number({
 			default: () => Date.now(),
 		}),
+		createdBy: schema.fields.string({
+			nullable: true,
+		}),
 		value: schema.fields.number({
 			nullable: true,
 		}),
 		tags: schema.fields.array({
 			items: schema.fields.string(),
+		}),
+		weather: schema.fields.object({
+			nullable: true,
+			fields: {
+				unit: schema.fields.string({
+					options: ['F', 'C', 'K'],
+				}),
+				high: schema.fields.number({ nullable: true }),
+				low: schema.fields.number({ nullable: true }),
+				precipitationMM: schema.fields.number({ nullable: true }),
+			},
 		}),
 	},
 	indexes: {
@@ -52,12 +66,18 @@ const entries = schema.collection({
 			},
 		},
 	},
+	compounds: {
+		createdBy_date: {
+			of: ['createdBy', 'date'],
+		},
+	},
 });
 
-const tags = schema.collection({
-	name: 'tag',
-	primaryKey: 'value',
+const tagMetadata = schema.collection({
+	name: 'tagMetadata',
+	primaryKey: 'id',
 	fields: {
+		id: schema.fields.id(),
 		value: schema.fields.string(),
 		createdAt: schema.fields.number({
 			default: () => Date.now(),
@@ -73,6 +93,9 @@ const tags = schema.collection({
 		}),
 	},
 	indexes: {
+		value: {
+			field: 'value',
+		},
 		useCount: {
 			field: 'useCount',
 		},
@@ -83,9 +106,9 @@ const tags = schema.collection({
 });
 
 export default schema({
-	version: 1,
+	version: 2,
 	collections: {
 		entries,
-		tags,
+		tagMetadata,
 	},
 });

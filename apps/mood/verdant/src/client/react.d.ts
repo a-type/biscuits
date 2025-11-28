@@ -21,8 +21,8 @@ import type {
   EntityFile,
   Entry,
   EntryFilter,
-  Tag,
-  TagFilter,
+  TagMetadata,
+  TagMetadataFilter,
 } from "./index.js";
 
 type HookConfig<F> = {
@@ -190,30 +190,32 @@ export interface GeneratedHooks<Presence, Profile> {
     { loadMore: () => void; hasMore: boolean; status: QueryStatus },
   ];
 
-  useTag(id: string, config?: { skip?: boolean }): Tag | null;
-  useTagUnsuspended(
+  useTagMetadata(id: string, config?: { skip?: boolean }): TagMetadata | null;
+  useTagMetadataUnsuspended(
     id: string,
     config?: { skip?: boolean },
-  ): { data: Tag | null; status: QueryStatus };
-  useOneTag: <Config extends HookConfig<TagFilter>>(
+  ): { data: TagMetadata | null; status: QueryStatus };
+  useOneTagMetadata: <Config extends HookConfig<TagMetadataFilter>>(
     config?: Config,
-  ) => Tag | null;
-  useOneTagsUnsuspended: <Config extends HookConfig<TagFilter>>(
+  ) => TagMetadata | null;
+  useOneTagMetadataUnsuspended: <Config extends HookConfig<TagMetadataFilter>>(
     config?: Config,
-  ) => { data: Tag | null; status: QueryStatus };
-  useAllTags: <Config extends HookConfig<TagFilter>>(config?: Config) => Tag[];
-  useAllTagsUnsuspended: <Config extends HookConfig<TagFilter>>(
+  ) => { data: TagMetadata | null; status: QueryStatus };
+  useAllTagMetadata: <Config extends HookConfig<TagMetadataFilter>>(
     config?: Config,
-  ) => { data: Tag[]; status: QueryStatus };
-  useAllTagsPaginated: <
-    Config extends HookConfig<TagFilter> & {
+  ) => TagMetadata[];
+  useAllTagMetadataUnsuspended: <Config extends HookConfig<TagMetadataFilter>>(
+    config?: Config,
+  ) => { data: TagMetadata[]; status: QueryStatus };
+  useAllTagMetadataPaginated: <
+    Config extends HookConfig<TagMetadataFilter> & {
       pageSize?: number;
       suspend?: false;
     },
   >(
     config?: Config,
   ) => [
-    Tag[],
+    TagMetadata[],
     {
       next: () => void;
       previous: () => void;
@@ -223,14 +225,17 @@ export interface GeneratedHooks<Presence, Profile> {
       status: QueryStatus;
     },
   ];
-  useAllTagsInfinite: <
-    Config extends HookConfig<TagFilter> & {
+  useAllTagMetadataInfinite: <
+    Config extends HookConfig<TagMetadataFilter> & {
       pageSize?: number;
       suspend?: false;
     },
   >(
     config?: Config,
-  ) => [Tag[], { loadMore: () => void; hasMore: boolean; status: QueryStatus }];
+  ) => [
+    TagMetadata[],
+    { loadMore: () => void; hasMore: boolean; status: QueryStatus },
+  ];
 }
 
 type HookName = `use${string}`;

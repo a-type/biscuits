@@ -1,11 +1,11 @@
 import { hooks } from '@/hooks.js';
 import { Box, Button, Dialog, FormikForm, Icon } from '@a-type/ui';
-import { Tag } from '@mood.biscuits/verdant';
+import { authorization, TagMetadata } from '@mood.biscuits/verdant';
 import { useState } from 'react';
 
 export interface AddTagProps {
 	className?: string;
-	onAdd?: (tag: Tag) => void;
+	onAdd?: (tag: TagMetadata) => void;
 }
 
 export function AddTag({ className, onAdd }: AddTagProps) {
@@ -14,7 +14,25 @@ export function AddTag({ className, onAdd }: AddTagProps) {
 	const [open, setOpen] = useState(false);
 
 	async function handleAdd(name: string) {
-		const tag = await client.tags.put({ value: name });
+		const existing = await client.tagMetadata.findOne({
+			index: {
+				where: 'value',
+				equals: name,
+			},
+		}).resolved;
+		if (existing) {
+			if (onAdd) {
+				onAdd(existing);
+			}
+			setOpen(false);
+			return;
+		}
+		const tag = await client.tagMetadata.put(
+			{ value: name },
+			{
+				access: authorization.private,
+			},
+		);
 		if (onAdd) {
 			onAdd(tag);
 		}

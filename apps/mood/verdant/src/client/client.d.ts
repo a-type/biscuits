@@ -12,8 +12,12 @@ export class Client<Presence = any, Profile = any> {
   /** Collection access for Entry. Load queries, put and delete documents. */
   readonly entries: CollectionQueries<Entry, EntryInit, EntryFilter>;
 
-  /** Collection access for Tag. Load queries, put and delete documents. */
-  readonly tags: CollectionQueries<Tag, TagInit, TagFilter>;
+  /** Collection access for TagMetadata. Load queries, put and delete documents. */
+  readonly tagMetadata: CollectionQueries<
+    TagMetadata,
+    TagMetadataInit,
+    TagMetadataFilter
+  >;
 
   /**
    * Turn on and off sync, or adjust the sync protocol and other settings.
@@ -128,6 +132,7 @@ import {
 export type Entry = ObjectEntity<EntryInit, EntryDestructured, EntrySnapshot>;
 export type EntryId = string;
 export type EntryCreatedAt = number;
+export type EntryCreatedBy = string;
 export type EntryValue = number;
 export type EntryTags = ListEntity<
   EntryTagsInit,
@@ -135,30 +140,63 @@ export type EntryTags = ListEntity<
   EntryTagsSnapshot
 >;
 export type EntryTagsItem = string;
+export type EntryWeather = ObjectEntity<
+  EntryWeatherInit,
+  EntryWeatherDestructured,
+  EntryWeatherSnapshot
+>;
+export type EntryWeatherUnit = "F" | "C" | "K";
+export type EntryWeatherHigh = number;
+export type EntryWeatherLow = number;
+export type EntryWeatherPrecipitationMm = number;
 export type EntryInit = {
   id?: string;
   createdAt?: number;
+  createdBy?: string | null;
   value?: number | null;
   tags?: EntryTagsInit;
+  weather?: EntryWeatherInit | null;
 };
 
 export type EntryTagsInit = string[];
+export type EntryWeatherInit = {
+  unit: "F" | "C" | "K";
+  high?: number | null;
+  low?: number | null;
+  precipitationMM?: number | null;
+};
 export type EntryDestructured = {
   id: string;
   createdAt: number;
+  createdBy: string | null;
   value: number | null;
   tags: EntryTags;
+  weather: EntryWeather | null;
 };
 
 export type EntryTagsDestructured = string[];
+export type EntryWeatherDestructured = {
+  unit: "F" | "C" | "K";
+  high: number | null;
+  low: number | null;
+  precipitationMM: number | null;
+};
 export type EntrySnapshot = {
   id: string;
   createdAt: number;
+  createdBy: string | null;
   value: number | null;
   tags: EntryTagsSnapshot;
+  weather: EntryWeatherSnapshot | null;
 };
 
 export type EntryTagsSnapshot = string[];
+export type EntryWeatherSnapshot = {
+  unit: "F" | "C" | "K";
+  high: number | null;
+  low: number | null;
+  precipitationMM: number | null;
+};
 
 /** Index filters for Entry **/
 
@@ -213,6 +251,14 @@ export interface EntryWeekdayRangeFilter {
   lt?: number;
   order?: "asc" | "desc";
 }
+export interface EntryCreatedByDateCompoundFilter {
+  where: "createdBy_date";
+  match: {
+    createdBy: string | null;
+    date?: number;
+  };
+  order?: "asc" | "desc";
+}
 export type EntryFilter =
   | EntryCreatedAtSortFilter
   | EntryCreatedAtMatchFilter
@@ -222,17 +268,24 @@ export type EntryFilter =
   | EntryDateRangeFilter
   | EntryWeekdaySortFilter
   | EntryWeekdayMatchFilter
-  | EntryWeekdayRangeFilter;
+  | EntryWeekdayRangeFilter
+  | EntryCreatedByDateCompoundFilter;
 
-/** Generated types for Tag */
+/** Generated types for TagMetadata */
 
-export type Tag = ObjectEntity<TagInit, TagDestructured, TagSnapshot>;
-export type TagValue = string;
-export type TagCreatedAt = number;
-export type TagLastUsedAt = number;
-export type TagUseCount = number;
-export type TagColor = string;
-export type TagInit = {
+export type TagMetadata = ObjectEntity<
+  TagMetadataInit,
+  TagMetadataDestructured,
+  TagMetadataSnapshot
+>;
+export type TagMetadataId = string;
+export type TagMetadataValue = string;
+export type TagMetadataCreatedAt = number;
+export type TagMetadataLastUsedAt = number;
+export type TagMetadataUseCount = number;
+export type TagMetadataColor = string;
+export type TagMetadataInit = {
+  id?: string;
   value: string;
   createdAt?: number;
   lastUsedAt?: number;
@@ -240,7 +293,8 @@ export type TagInit = {
   color?: string | null;
 };
 
-export type TagDestructured = {
+export type TagMetadataDestructured = {
+  id: string;
   value: string;
   createdAt: number;
   lastUsedAt: number;
@@ -248,7 +302,8 @@ export type TagDestructured = {
   color: string | null;
 };
 
-export type TagSnapshot = {
+export type TagMetadataSnapshot = {
+  id: string;
   value: string;
   createdAt: number;
   lastUsedAt: number;
@@ -256,18 +311,40 @@ export type TagSnapshot = {
   color: string | null;
 };
 
-/** Index filters for Tag **/
+/** Index filters for TagMetadata **/
 
-export interface TagUseCountSortFilter {
+export interface TagMetadataValueSortFilter {
+  where: "value";
+  order: "asc" | "desc";
+}
+export interface TagMetadataValueMatchFilter {
+  where: "value";
+  equals: string;
+  order?: "asc" | "desc";
+}
+export interface TagMetadataValueRangeFilter {
+  where: "value";
+  gte?: string;
+  gt?: string;
+  lte?: string;
+  lt?: string;
+  order?: "asc" | "desc";
+}
+export interface TagMetadataValueStartsWithFilter {
+  where: "value";
+  startsWith: string;
+  order?: "asc" | "desc";
+}
+export interface TagMetadataUseCountSortFilter {
   where: "useCount";
   order: "asc" | "desc";
 }
-export interface TagUseCountMatchFilter {
+export interface TagMetadataUseCountMatchFilter {
   where: "useCount";
   equals: number;
   order?: "asc" | "desc";
 }
-export interface TagUseCountRangeFilter {
+export interface TagMetadataUseCountRangeFilter {
   where: "useCount";
   gte?: number;
   gt?: number;
@@ -275,16 +352,16 @@ export interface TagUseCountRangeFilter {
   lt?: number;
   order?: "asc" | "desc";
 }
-export interface TagLastUsedAtSortFilter {
+export interface TagMetadataLastUsedAtSortFilter {
   where: "lastUsedAt";
   order: "asc" | "desc";
 }
-export interface TagLastUsedAtMatchFilter {
+export interface TagMetadataLastUsedAtMatchFilter {
   where: "lastUsedAt";
   equals: number;
   order?: "asc" | "desc";
 }
-export interface TagLastUsedAtRangeFilter {
+export interface TagMetadataLastUsedAtRangeFilter {
   where: "lastUsedAt";
   gte?: number;
   gt?: number;
@@ -292,10 +369,14 @@ export interface TagLastUsedAtRangeFilter {
   lt?: number;
   order?: "asc" | "desc";
 }
-export type TagFilter =
-  | TagUseCountSortFilter
-  | TagUseCountMatchFilter
-  | TagUseCountRangeFilter
-  | TagLastUsedAtSortFilter
-  | TagLastUsedAtMatchFilter
-  | TagLastUsedAtRangeFilter;
+export type TagMetadataFilter =
+  | TagMetadataValueSortFilter
+  | TagMetadataValueMatchFilter
+  | TagMetadataValueRangeFilter
+  | TagMetadataValueStartsWithFilter
+  | TagMetadataUseCountSortFilter
+  | TagMetadataUseCountMatchFilter
+  | TagMetadataUseCountRangeFilter
+  | TagMetadataLastUsedAtSortFilter
+  | TagMetadataLastUsedAtMatchFilter
+  | TagMetadataLastUsedAtRangeFilter;

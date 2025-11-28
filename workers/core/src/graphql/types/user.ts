@@ -74,6 +74,16 @@ builder.queryField('user', (t) =>
 		},
 	}),
 );
+builder.queryField('myId', (t) =>
+	t.field({
+		type: 'String',
+		description: 'Get the current logged in user ID. Quick and cheap.',
+		nullable: true,
+		resolve: (_, __, ctx) => {
+			return ctx.session?.userId || null;
+		},
+	}),
+);
 
 builder.mutationFields((t) => ({
 	setUserRole: t.field({

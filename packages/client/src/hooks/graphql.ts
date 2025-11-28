@@ -52,14 +52,26 @@ export function useMe() {
 }
 
 export function useIsLoggedIn() {
-	const result = useMe();
-	console.log(result.networkStatus, result.data, result.error);
+	const idResult = useUserId();
 	return [
-		!!result.data?.me?.id,
-		result.networkStatus === NetworkStatus.loading ||
-			result.networkStatus === NetworkStatus.refetch ||
-			isOfflineError(result.error),
+		!!idResult.data,
+		idResult.networkStatus === NetworkStatus.loading ||
+			idResult.networkStatus === NetworkStatus.refetch ||
+			isOfflineError(idResult.error),
 	] as const;
+}
+
+const userIdQuery = graphql(`
+	query CommonUserId {
+		myId
+	}
+`)
+
+export function useUserId() {
+	return useQuery(userIdQuery, {
+		fetchPolicy: 'cache-first',
+		context: { hideErrors: true },
+	});
 }
 
 export function useHasServerAccess() {
@@ -68,7 +80,7 @@ export function useHasServerAccess() {
 }
 
 export function useIsOffline() {
-	const { error } = useMe();
+	const { error } = useUserId();
 	return isOfflineError(error);
 }
 

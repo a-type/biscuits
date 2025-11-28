@@ -8,7 +8,7 @@ export interface TagsEditorProps {
 }
 
 export function TagsEditor({ tags }: TagsEditorProps) {
-	const allTags = hooks.useAllTags({
+	const allTags = hooks.useAllTagMetadata({
 		index: {
 			where: 'useCount',
 			order: 'desc',
