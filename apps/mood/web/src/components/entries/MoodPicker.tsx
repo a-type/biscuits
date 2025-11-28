@@ -1,4 +1,12 @@
-import { Box, clsx, Popover, Slider, Tooltip } from '@a-type/ui';
+import {
+	Box,
+	clsx,
+	PaletteName,
+	Popover,
+	Slider,
+	Tooltip,
+	useThemedTitleBar,
+} from '@a-type/ui';
 import { getIsTouch } from '@biscuits/client';
 import { useEffect, useState } from 'react';
 
@@ -34,6 +42,13 @@ export function MoodPicker({
 		MOODS.find((mood) => mood.value === localValue)?.label ?? '❓';
 
 	const [active, setActive] = useState(false);
+
+	const palette: PaletteName =
+		localValue < 0 ? 'attention'
+		: localValue > 0 ? 'success'
+		: 'primary';
+	const shade = localValue === min || localValue === max ? 'light' : 'wash';
+	useThemedTitleBar(palette, shade);
 
 	return (
 		<Box
