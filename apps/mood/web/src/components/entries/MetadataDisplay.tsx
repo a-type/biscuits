@@ -13,7 +13,7 @@ export function MetadataDisplay({ entry, className }: MetadataDisplayProps) {
 	const date = new Date(createdAt);
 
 	return (
-		<Box col gap>
+		<Box col gap p>
 			<H2>
 				{date.toLocaleDateString(undefined, {
 					year: 'numeric',
@@ -21,7 +21,7 @@ export function MetadataDisplay({ entry, className }: MetadataDisplayProps) {
 					day: 'numeric',
 				})}
 			</H2>
-			<Box gap wrap p items="center">
+			<Box gap wrap items="center">
 				<Chip>{format(date, 'EEEE')}</Chip>
 			</Box>
 		</Box>
