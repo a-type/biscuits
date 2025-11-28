@@ -10,20 +10,25 @@ export const fetchList = createServerFn()
 	.inputValidator((listId?: string) => listId)
 	.middleware([proxyAuthMiddleware, listIdMiddleware])
 	.handler(async ({ context, data }) => {
-		const hidePurchases = false;
-		const res = await request(
-			`${env.API_ORIGIN}/graphql`,
-			listPageQuery,
-			{
-				listId: data || context.listId,
-				hidePurchases,
-			},
-			context.headers,
-		);
+		try {
+			const hidePurchases = false;
+			const res = await request(
+				`${env.API_ORIGIN}/graphql`,
+				listPageQuery,
+				{
+					listId: data || context.listId,
+					hidePurchases,
+				},
+				context.headers,
+			);
 
-		if (!res?.publicWishlist) {
-			throw notFound();
+			if (!res?.publicWishlist) {
+				throw notFound();
+			}
+
+			return res.publicWishlist;
+		} catch (err) {
+			console.error('Error fetching list:', err);
+			throw err;
 		}
-
-		return res.publicWishlist;
 	});

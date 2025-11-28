@@ -15,6 +15,7 @@ export const listIdMiddleware = createMiddleware().server(
 		}
 
 		if (!listId) {
+			console.error('No list ID found in request');
 			throw new Error('No list ID found in request');
 		}
 
