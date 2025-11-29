@@ -1,9 +1,11 @@
+import { clsx } from '@a-type/ui';
 import {
 	motion,
 	MotionValue,
 	useMotionTemplate,
 	useTransform,
 } from 'motion/react';
+import { MouseEvent, PointerEvent } from 'react';
 
 export interface LineRendererProps {
 	startX: MotionValue<number>;
@@ -11,6 +13,8 @@ export interface LineRendererProps {
 	endX: MotionValue<number>;
 	endY: MotionValue<number>;
 	lineDash?: string;
+	onClick?: (ev: PointerEvent | MouseEvent) => void;
+	selected?: boolean;
 }
 
 export function LineRenderer({
@@ -19,6 +23,8 @@ export function LineRenderer({
 	endX,
 	endY,
 	lineDash,
+	onClick,
+	selected,
 }: LineRendererProps) {
 	return (
 		<>
@@ -27,15 +33,21 @@ export function LineRenderer({
 				y1={startY}
 				x2={endX}
 				y2={endY}
-				stroke="black"
 				strokeWidth="2"
 				strokeDasharray={lineDash}
+				onClick={onClick}
+				className={clsx({
+					'stroke-black': !selected,
+					'stroke-main': selected,
+				})}
 			/>
 			<LineLengthLabel
 				startX={startX}
 				startY={startY}
 				endX={endX}
 				endY={endY}
+				onClick={onClick}
+				selected={selected}
 			/>
 		</>
 	);
@@ -46,11 +58,15 @@ export function LineLengthLabel({
 	startY,
 	endX,
 	endY,
+	onClick,
+	selected,
 }: {
 	startX: MotionValue<number>;
 	startY: MotionValue<number>;
 	endX: MotionValue<number>;
 	endY: MotionValue<number>;
+	onClick?: (ev: PointerEvent | MouseEvent) => void;
+	selected?: boolean;
 }) {
 	const centerX = useTransform(
 		() => (endX.get() - startX.get()) / 2 + startX.get(),
@@ -63,8 +79,9 @@ export function LineLengthLabel({
 	);
 	const transform = useMotionTemplate`translate(${centerX}px, ${centerY}px)`;
 	const label = useMotionTemplate`${length}m`;
+
 	return (
-		<motion.g style={{ transform }}>
+		<motion.g style={{ transform }} onClick={onClick}>
 			<rect
 				width={30}
 				height={10}
@@ -72,7 +89,7 @@ export function LineLengthLabel({
 				y={-5}
 				rx={2}
 				ry={2}
-				className="fill-black"
+				className={selected ? 'fill-main' : 'fill-black'}
 			/>
 			<motion.text
 				x={0}

@@ -27,6 +27,7 @@
 		"motion": "^12.23.12",
 		"react": "catalog:",
 		"react-dom": "catalog:",
+		"react-hotkeys-hook": "^4.5.0",
 		"typescript": "catalog:",
 		"unocss": "catalog:",
 		"valtio": "catalog:",

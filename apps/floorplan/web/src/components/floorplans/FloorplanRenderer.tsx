@@ -7,6 +7,8 @@ import { Suspense, useState } from 'react';
 import { FloorLine } from './FloorLine.jsx';
 import { Grid } from './Grid.jsx';
 import { LineRenderer } from './LineRenderer.jsx';
+import { editorState } from './editorState.js';
+import { useEditorGlobalKeys } from './useEditorGlobalKeys.js';
 
 export interface FloorplanRendererProps {
 	className?: string;
@@ -14,15 +16,14 @@ export interface FloorplanRendererProps {
 }
 
 export function FloorplanRenderer({ className, id }: FloorplanRendererProps) {
-	const [activeTool, setActiveTool] = useState('line');
 	return (
 		<Viewport
-			className={clsx('bg-gray', className)}
+			className={clsx('bg-gray w-full h-full flex-1 flex flex-col', className)}
 			gestureOptions={{
 				filterDrag: (state) => {
 					const isFirstButton = (state.buttons & 1) === 1;
 					const isTouch = state.touches > 0;
-					return (isFirstButton || isTouch) && !!activeTool;
+					return (isFirstButton || isTouch) && editorState.tool !== 'pan';
 				},
 			}}
 		>
@@ -46,6 +47,7 @@ function FloorplanContent({ id }: { id: string }) {
 	const toolStartY = useMotionValue(0);
 	const toolEndX = useMotionValue(0);
 	const toolEndY = useMotionValue(0);
+
 	const bind = useDrag((state) => {
 		const pos = viewport.viewportToWorld({
 			x: state.xy[0],
@@ -53,13 +55,19 @@ function FloorplanContent({ id }: { id: string }) {
 		});
 
 		if (state.first) {
-			setToolActive(true);
 			toolStartX.set(pos.x);
 			toolStartY.set(pos.y);
 		}
 
+		if (Math.sqrt(state.delta[0] ** 2 + state.delta[1] ** 2) > 5) {
+			setToolActive(true);
+		}
+
 		if (state.last) {
 			setToolActive(false);
+			if (state.tap) {
+				return;
+			}
 			floor?.get('lines').push({
 				start: viewport.viewportToWorld({
 					x: state.initial[0],
@@ -72,6 +80,8 @@ function FloorplanContent({ id }: { id: string }) {
 		toolEndX.set(pos.x);
 		toolEndY.set(pos.y);
 	});
+
+	useEditorGlobalKeys(floor);
 
 	if (!floor) {
 		return <Box>Missing floor</Box>;

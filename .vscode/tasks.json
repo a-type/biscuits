@@ -6,6 +6,160 @@
 			"script": "free-ports",
 			"problemMatcher": [],
 			"label": "Free Ports"
+		},
+		{
+			"type": "npm",
+			"script": "dev",
+			"label": "💽 Core",
+			"path": "workers/core",
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "migrate:create",
+			"label": "🗃️ New DB Migration",
+			"path": "workers/core",
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "dev",
+			"label": "🌐 Web",
+			"path": "web",
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "gen",
+			"label": "🕸️ GraphQL",
+			"path": "packages/graphql",
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "app-dev",
+			"label": "🍝 Gnocchi: Web",
+			"path": "apps/gnocchi/web",
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "generate",
+			"label": "🍝 Gnocchi: Generate",
+			"path": "apps/gnocchi/verdant",
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "dev",
+			"label": "🍝 Gnocchi: Share",
+			"path": "apps/gnocchi/share",
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "app-dev",
+			"label": "🎨 Palette: Web",
+			"path": "apps/palette/web",
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "generate",
+			"label": "🎨 Palette: Generate",
+			"path": "apps/palette/verdant",
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "app-dev",
+			"label": "🙋‍♂️ Names: Web",
+			"path": "apps/names/web",
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "generate",
+			"label": "🙋‍♂️ Names: Generate",
+			"path": "apps/names/verdant",
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "app-dev",
+			"label": "🌟 Star Chart: Web",
+			"path": "apps/star-chart/web",
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "generate",
+			"label": "🌟 Star Chart: Generate",
+			"path": "apps/star-chart/verdant",
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "app-dev",
+			"label": "🏖️ Trip Tick: Web",
+			"path": "apps/trip-tick/web",
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "generate",
+			"label": "🏖️ Trip Tick: Generate",
+			"path": "apps/trip-tick/verdant",
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "app-dev",
+			"label": "🛒 Wish Wash: Web",
+			"path": "apps/wish-wash/web",
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "generate",
+			"label": "🛒 Wish Wash: Generate",
+			"path": "apps/wish-wash/verdant",
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "dev",
+			"label": "🛒 Wish Wash: Share",
+			"path": "apps/wish-wash/share",
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "app-dev",
+			"label": "😊 Mood: Web",
+			"path": "apps/mood/web",
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "generate",
+			"label": "😊 Mood: Generate",
+			"path": "apps/mood/verdant",
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "app-dev",
+			"label": "📏 Floorplan: Web",
+			"path": "apps/floorplan/web",
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "generate",
+			"label": "📏 Floorplan: Generate",
+			"path": "apps/floorplan/verdant",
+			"problemMatcher": []
 		}
 	]
 }

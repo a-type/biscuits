@@ -1,58 +1,44 @@
-import {
-  ClientDescriptor,
-  migrations,
-  UserInfo,
-} from '@floorplan.biscuits/verdant';
 import { getVerdantSync, VerdantProfile } from '@biscuits/client';
+import { Client, migrations, UserInfo } from '@floorplan.biscuits/verdant';
 
 export interface Presence {
-  /**
-   * Put any transient presence state for users
-   * you want here
-   */
+	/**
+	 * Put any transient presence state for users
+	 * you want here
+	 */
 }
 
 export type Participant = UserInfo<VerdantProfile, Presence>;
 
-export const clientDescriptor = new ClientDescriptor({
-  namespace: 'floorplan',
-  migrations,
-  sync: getVerdantSync({
-    appId: 'floorplan',
-    access: 'members',
-    initialPresence: {},
-  }),
+export const verdant = new Client({
+	namespace: 'floorplan',
+	migrations,
+	sync: getVerdantSync({
+		appId: 'floorplan',
+		access: 'members',
+		initialPresence: {},
+	}),
 });
 
 // these are some helpers I like to use. You can delete them if you want.
 
-async function exposeClientOnWindowForDebug() {
-  const client = await clientDescriptor.open();
-  (window as any).client = client;
-}
-
-async function registerUndoKeybinds() {
-  const client = await clientDescriptor.open();
-  document.addEventListener('keydown', async (e) => {
-    if (e.key === 'z' && (e.ctrlKey || e.metaKey) && !e.shiftKey) {
-      e.preventDefault();
-      const result = await client.undoHistory.undo();
-      if (!result) {
-        console.log('Nothing to undo');
-      }
-    }
-    if (
-      (e.key === 'y' && (e.ctrlKey || e.metaKey)) ||
-      (e.key === 'z' && e.shiftKey && (e.ctrlKey || e.metaKey))
-    ) {
-      e.preventDefault();
-      const result = await client.undoHistory.redo();
-      if (!result) {
-        console.log('Nothing to redo');
-      }
-    }
-  });
-}
-
-exposeClientOnWindowForDebug();
-registerUndoKeybinds();
+(window as any).verdant = verdant;
+document.addEventListener('keydown', async (e) => {
+	if (e.key === 'z' && (e.ctrlKey || e.metaKey) && !e.shiftKey) {
+		e.preventDefault();
+		const result = await verdant.undoHistory.undo();
+		if (!result) {
+			console.log('Nothing to undo');
+		}
+	}
+	if (
+		(e.key === 'y' && (e.ctrlKey || e.metaKey)) ||
+		(e.key === 'z' && e.shiftKey && (e.ctrlKey || e.metaKey))
+	) {
+		e.preventDefault();
+		const result = await verdant.undoHistory.redo();
+		if (!result) {
+			console.log('Nothing to redo');
+		}
+	}
+});

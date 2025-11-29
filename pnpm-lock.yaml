@@ -259,7 +259,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -308,12 +308,15 @@ importers:
       react-dom:
         specifier: 'catalog:'
         version: 19.2.0(react@19.2.0)
+      react-hotkeys-hook:
+        specifier: ^4.5.0
+        version: 4.6.1(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
       unocss:
         specifier: 'catalog:'
-        version: 66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+        version: 66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       valtio:
         specifier: 'catalog:'
         version: 2.1.8(@types/react@19.2.2)(react@19.2.0)
@@ -385,7 +388,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -467,7 +470,7 @@ importers:
         version: 5.9.3
       unocss:
         specifier: 'catalog:'
-        version: 66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+        version: 66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       vite:
         specifier: 'catalog:'
         version: 7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
@@ -529,7 +532,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -688,7 +691,7 @@ importers:
         version: 5.9.3
       unocss:
         specifier: 'catalog:'
-        version: 66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+        version: 66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       valtio:
         specifier: 'catalog:'
         version: 2.1.8(@types/react@19.2.2)(react@19.2.0)
@@ -797,7 +800,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -851,7 +854,7 @@ importers:
         version: 5.9.3
       unocss:
         specifier: 'catalog:'
-        version: 66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+        version: 66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       valtio:
         specifier: 'catalog:'
         version: 2.1.8(@types/react@19.2.2)(react@19.2.0)
@@ -906,7 +909,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -960,7 +963,7 @@ importers:
         version: 5.9.3
       unocss:
         specifier: 'catalog:'
-        version: 66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+        version: 66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       valtio:
         specifier: 'catalog:'
         version: 2.1.8(@types/react@19.2.2)(react@19.2.0)
@@ -1021,7 +1024,7 @@ importers:
         version: 0.2.15(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1084,7 +1087,7 @@ importers:
         version: 5.9.3
       unocss:
         specifier: 'catalog:'
-        version: 66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+        version: 66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       valtio:
         specifier: 'catalog:'
         version: 2.1.8(@types/react@19.2.2)(react@19.2.0)
@@ -1142,7 +1145,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1205,7 +1208,7 @@ importers:
         version: 5.9.3
       unocss:
         specifier: 'catalog:'
-        version: 66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+        version: 66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       valtio:
         specifier: 'catalog:'
         version: 2.1.8(@types/react@19.2.2)(react@19.2.0)
@@ -1269,7 +1272,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1344,7 +1347,7 @@ importers:
         version: 5.9.3
       unocss:
         specifier: 'catalog:'
-        version: 66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+        version: 66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       valtio:
         specifier: 'catalog:'
         version: 2.1.8(@types/react@19.2.2)(react@19.2.0)
@@ -1396,7 +1399,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1440,7 +1443,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@biscuits/graphql':
         specifier: workspace:*
         version: link:../../../packages/graphql
@@ -1495,7 +1498,7 @@ importers:
         version: 5.9.3
       unocss:
         specifier: 'catalog:'
-        version: 66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+        version: 66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       vite:
         specifier: 'catalog:'
         version: 7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
@@ -1525,7 +1528,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1588,7 +1591,7 @@ importers:
         version: 5.9.3
       unocss:
         specifier: 'catalog:'
-        version: 66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+        version: 66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       valtio:
         specifier: 'catalog:'
         version: 2.1.8(@types/react@19.2.2)(react@19.2.0)
@@ -1634,7 +1637,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@astrojs/check':
         specifier: ^0.9.4
         version: 0.9.4(prettier@3.6.2)(typescript@5.9.3)
@@ -1671,7 +1674,7 @@ importers:
         version: 5.9.3
       unocss:
         specifier: 'catalog:'
-        version: 66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+        version: 66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
 
   packages/apps: {}
 
@@ -1682,7 +1685,7 @@ importers:
         version: 2.1.3
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1749,7 +1752,7 @@ importers:
         version: 0.3.2
       unocss:
         specifier: 'catalog:'
-        version: 66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+        version: 66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       vite-plugin-pwa:
         specifier: 'catalog:'
         version: 1.1.0(@types/babel__core@7.20.5)(@vite-pwa/assets-generator@1.0.2)(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(workbox-window@7.3.0)
@@ -1831,13 +1834,13 @@ importers:
     devDependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@unocss/transformer-variant-group':
         specifier: 'catalog:'
         version: 66.5.5
       unocss:
         specifier: 'catalog:'
-        version: 66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+        version: 66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
 
   web:
     dependencies:
@@ -1846,7 +1849,7 @@ importers:
         version: 1.1.0(@a-type/ui@3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))))(react@19.2.0)
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@biscuits/apps':
         specifier: workspace:*
         version: link:../packages/apps
@@ -1927,7 +1930,7 @@ importers:
         version: 5.9.3
       unocss:
         specifier: 'catalog:'
-        version: 66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+        version: 66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       vite:
         specifier: 'catalog:'
         version: 7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
@@ -2131,7 +2134,6 @@ packages:
   '@0no-co/graphqlsp@1.12.16':
     resolution: {integrity: sha512-B5pyYVH93Etv7xjT6IfB7QtMBdaaC07yjbhN6v8H7KgFStMkPvi+oWYBTibMFRMY89qwc9H8YixXg8SXDVgYWw==}
     peerDependencies:
-      graphql: ^15.5.0 || ^16.0.0 || ^17.0.0
       typescript: ^5.0.0
 
   '@a-type/auth-email-ses@2.1.16':
@@ -11151,13 +11153,7 @@ snapshots:
     optionalDependencies:
       graphql: 16.11.0
 
-  '@0no-co/graphqlsp@1.12.16(graphql@16.10.0)(typescript@5.9.3)':
-    dependencies:
-      '@gql.tada/internal': 1.0.8(graphql@16.10.0)(typescript@5.9.3)
-      graphql: 16.10.0
-      typescript: 5.9.3
-
-  '@0no-co/graphqlsp@1.12.16(graphql@16.11.0)(typescript@5.9.3)':
+  '@0no-co/graphqlsp@1.12.16(typescript@5.9.3)':
     dependencies:
       '@gql.tada/internal': 1.0.8(graphql@16.11.0)(typescript@5.9.3)
       graphql: 16.11.0
@@ -11174,7 +11170,7 @@ snapshots:
 
   '@a-type/auth-ui@1.1.0(@a-type/ui@3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))))(react@19.2.0)':
     dependencies:
-      '@a-type/ui': 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+      '@a-type/ui': 3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       react: 19.2.0
 
   '@a-type/auth@1.3.16':
@@ -11215,7 +11211,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@a-type/ui@3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))':
+  '@a-type/ui@3.0.38(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(unocss@66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))':
     dependencies:
       '@a-type/utils': 1.1.9
       '@radix-ui/react-accordion': 1.2.2(@types/react-dom@19.2.2(@types/react@19.2.2))(@types/react@19.2.2)(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
@@ -11254,7 +11250,7 @@ snapshots:
       react-dom: 19.2.0(react@19.2.0)
       react-hot-toast: 2.6.0(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       react-is: 19.1.0
-      unocss: 66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+      unocss: 66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       valtio: 2.1.8(@types/react@19.2.2)(react@19.2.0)
     transitivePeerDependencies:
       - '@emotion/is-prop-valid'
@@ -12998,14 +12994,14 @@ snapshots:
 
   '@gql.tada/cli-utils@1.7.1(graphql@16.10.0)(typescript@5.9.3)':
     dependencies:
-      '@0no-co/graphqlsp': 1.12.16(graphql@16.10.0)(typescript@5.9.3)
+      '@0no-co/graphqlsp': 1.12.16(typescript@5.9.3)
       '@gql.tada/internal': 1.0.8(graphql@16.10.0)(typescript@5.9.3)
       graphql: 16.10.0
       typescript: 5.9.3
 
   '@gql.tada/cli-utils@1.7.1(graphql@16.11.0)(typescript@5.9.3)':
     dependencies:
-      '@0no-co/graphqlsp': 1.12.16(graphql@16.11.0)(typescript@5.9.3)
+      '@0no-co/graphqlsp': 1.12.16(typescript@5.9.3)
       '@gql.tada/internal': 1.0.8(graphql@16.11.0)(typescript@5.9.3)
       graphql: 16.11.0
       typescript: 5.9.3
@@ -15373,11 +15369,11 @@ snapshots:
     transitivePeerDependencies:
       - vue
 
-  '@unocss/astro@66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))':
+  '@unocss/astro@66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))':
     dependencies:
       '@unocss/core': 66.5.5
       '@unocss/reset': 66.5.5
-      '@unocss/vite': 66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+      '@unocss/vite': 66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
     optionalDependencies:
       vite: 7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
 
@@ -15579,7 +15575,7 @@ snapshots:
     transitivePeerDependencies:
       - vue
 
-  '@unocss/vite@66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))':
+  '@unocss/vite@66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))':
     dependencies:
       '@jridgewell/remapping': 2.3.5
       '@unocss/config': 66.5.5
@@ -17793,7 +17789,7 @@ snapshots:
   gql.tada@1.8.13(graphql@16.10.0)(typescript@5.9.3):
     dependencies:
       '@0no-co/graphql.web': 1.0.12(graphql@16.10.0)
-      '@0no-co/graphqlsp': 1.12.16(graphql@16.10.0)(typescript@5.9.3)
+      '@0no-co/graphqlsp': 1.12.16(typescript@5.9.3)
       '@gql.tada/cli-utils': 1.7.1(graphql@16.10.0)(typescript@5.9.3)
       '@gql.tada/internal': 1.0.8(graphql@16.10.0)(typescript@5.9.3)
       typescript: 5.9.3
@@ -17805,7 +17801,7 @@ snapshots:
   gql.tada@1.8.13(graphql@16.11.0)(typescript@5.9.3):
     dependencies:
       '@0no-co/graphql.web': 1.0.12(graphql@16.11.0)
-      '@0no-co/graphqlsp': 1.12.16(graphql@16.11.0)(typescript@5.9.3)
+      '@0no-co/graphqlsp': 1.12.16(typescript@5.9.3)
       '@gql.tada/cli-utils': 1.7.1(graphql@16.11.0)(typescript@5.9.3)
       '@gql.tada/internal': 1.0.8(graphql@16.11.0)(typescript@5.9.3)
       typescript: 5.9.3
@@ -20991,9 +20987,9 @@ snapshots:
 
   universalify@2.0.1: {}
 
-  unocss@66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)):
+  unocss@66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)):
     dependencies:
-      '@unocss/astro': 66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+      '@unocss/astro': 66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       '@unocss/cli': 66.5.5
       '@unocss/core': 66.5.5
       '@unocss/postcss': 66.5.5
@@ -21011,7 +21007,7 @@ snapshots:
       '@unocss/transformer-compile-class': 66.5.5
       '@unocss/transformer-directives': 66.5.5
       '@unocss/transformer-variant-group': 66.5.5
-      '@unocss/vite': 66.5.5(vite@7.2.2(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
+      '@unocss/vite': 66.5.5(vite@7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
     optionalDependencies:
       vite: 7.2.2(@types/node@22.10.2)(jiti@2.5.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
     transitivePeerDependencies:
