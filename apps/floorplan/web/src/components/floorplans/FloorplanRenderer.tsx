@@ -1,12 +1,12 @@
 import { hooks } from '@/hooks.js';
-import { Box, clsx, useViewport, Viewport } from '@a-type/ui';
+import { Box, clsx, Viewport } from '@a-type/ui';
 import { Floor } from '@floorplan.biscuits/verdant';
-import { useDrag } from '@use-gesture/react';
-import { useMotionValue } from 'motion/react';
-import { Suspense, useState } from 'react';
+import { Suspense } from 'react';
+import { ConstraintToggles } from './ConstraintToggles.jsx';
 import { FloorLine } from './FloorLine.jsx';
 import { Grid } from './Grid.jsx';
-import { LineRenderer } from './LineRenderer.jsx';
+import { NewLine } from './NewLine.jsx';
+import { Toolbar } from './Toolbar.jsx';
 import { editorState } from './editorState.js';
 import { useEditorGlobalKeys } from './useEditorGlobalKeys.js';
 
@@ -33,53 +33,18 @@ export function FloorplanRenderer({ className, id }: FloorplanRendererProps) {
 			<Viewport.Control>
 				<Viewport.ZoomControls />
 			</Viewport.Control>
+			<Viewport.Control position="top-left">
+				<ConstraintToggles />
+			</Viewport.Control>
+			<Viewport.Control position="bottom-left">
+				<Toolbar />
+			</Viewport.Control>
 		</Viewport>
 	);
 }
 
 function FloorplanContent({ id }: { id: string }) {
 	const floor = hooks.useFloor(id);
-
-	const viewport = useViewport();
-
-	const [toolActive, setToolActive] = useState(false);
-	const toolStartX = useMotionValue(0);
-	const toolStartY = useMotionValue(0);
-	const toolEndX = useMotionValue(0);
-	const toolEndY = useMotionValue(0);
-
-	const bind = useDrag((state) => {
-		const pos = viewport.viewportToWorld({
-			x: state.xy[0],
-			y: state.xy[1],
-		});
-
-		if (state.first) {
-			toolStartX.set(pos.x);
-			toolStartY.set(pos.y);
-		}
-
-		if (Math.sqrt(state.delta[0] ** 2 + state.delta[1] ** 2) > 5) {
-			setToolActive(true);
-		}
-
-		if (state.last) {
-			setToolActive(false);
-			if (state.tap) {
-				return;
-			}
-			floor?.get('lines').push({
-				start: viewport.viewportToWorld({
-					x: state.initial[0],
-					y: state.initial[1],
-				}),
-				end: pos,
-			});
-		}
-
-		toolEndX.set(pos.x);
-		toolEndY.set(pos.y);
-	});
 
 	useEditorGlobalKeys(floor);
 
@@ -88,19 +53,11 @@ function FloorplanContent({ id }: { id: string }) {
 	}
 
 	return (
-		<svg width={1000} height={1000} className="bg-white relative" {...bind()}>
+		<svg width={1000} height={1000} className="bg-white relative">
 			<g transform="translate(500, 500)">
 				<Grid />
 				<FloorplanLines floor={floor} />
-
-				{toolActive && (
-					<LineRenderer
-						startX={toolStartX}
-						startY={toolStartY}
-						endX={toolEndX}
-						endY={toolEndY}
-					/>
-				)}
+				<NewLine floor={floor} />
 			</g>
 		</svg>
 	);
