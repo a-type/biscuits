@@ -7,7 +7,8 @@
 		"app-dev": "vite --open --host",
 		"build": "vite build",
 		"preview": "vite preview",
-		"//typecheck": "tsc --noEmit"
+		"//typecheck": "tsc --noEmit",
+		"assets": "pwa-assets-generator"
 	},
 	"dependencies": {
 		"@biscuits/client": "workspace:*",
@@ -45,6 +46,7 @@
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "^1.0.3",
-		"@biscuits/uno-config": "workspace:*"
+		"@biscuits/uno-config": "workspace:*",
+		"@vite-pwa/assets-generator": "catalog:"
 	}
 }

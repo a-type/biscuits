@@ -74,3 +74,4 @@ catalog:
   '@tanstack/react-start': ^1.139.3
   graphql-request: ^7.3.4
   vite-tsconfig-paths: ^5.1.4
+  '@vite-pwa/assets-generator': ^1.0.2

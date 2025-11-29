@@ -8,7 +8,8 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"generate": "cd ../verdant && pnpm generate",
-		"typecheck": "tsc --noEmit"
+		"typecheck": "tsc --noEmit",
+		"assets": "pwa-assets-generator"
 	},
 	"dependencies": {
 		"@a-type/ui": "catalog:",
@@ -42,6 +43,7 @@
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "^1.0.3",
-		"@biscuits/uno-config": "workspace:*"
+		"@biscuits/uno-config": "workspace:*",
+		"@vite-pwa/assets-generator": "catalog:"
 	}
 }

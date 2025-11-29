@@ -11,7 +11,8 @@
 		"link-verdant": "pnpm link --global @verdant-web/store && pnpm link --global @verdant-web/common && pnpm link --global @verdant-web/react && pnpm link --global @verdant-web/cli && pnpm link --global @verdant-web/react-router",
 		"clear": "rm -rf node_modules/.vite",
 		"icons": "node ./scripts/generateIcons.js",
-		"typecheck": "tsc --build tsconfig.json"
+		"typecheck": "tsc --build tsconfig.json",
+		"assets": "pwa-assets-generator"
 	},
 	"dependencies": {
 		"@a-type/ui": "catalog:",
@@ -96,6 +97,7 @@
 		"fs-extra": "^11.1.0",
 		"prettier": "^2.8.4",
 		"vite-plugin-checker": "^0.6.2",
-		"vite-plugin-circular-dependency": "^0.2.1"
+		"vite-plugin-circular-dependency": "^0.2.1",
+		"@vite-pwa/assets-generator": "catalog:"
 	}
 }

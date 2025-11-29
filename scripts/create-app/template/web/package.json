@@ -7,7 +7,8 @@
 		"app-dev": "vite",
 		"build": "vite build",
 		"preview": "vite preview",
-		"generate": "cd ../verdant && pnpm generate"
+		"generate": "cd ../verdant && pnpm generate",
+		"assets": "pwa-assets-generator"
 	},
 	"dependencies": {
 		"@{{todoId}}.biscuits/verdant": "workspace:*",
@@ -38,6 +39,7 @@
 		"@originjs/vite-plugin-commonjs": "catalog:"
 	},
 	"devDependencies": {
-		"@biscuits/uno-config": "workspace:*"
+		"@biscuits/uno-config": "workspace:*",
+		"@vite-pwa/assets-generator": "catalog:"
 	}
 }
