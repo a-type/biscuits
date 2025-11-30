@@ -9,24 +9,26 @@ export interface ConstraintTogglesProps {
 export function ConstraintToggles(props: ConstraintTogglesProps) {
 	const { angles, snapCorners } = useSnapshot(editorState).constraints;
 	return (
-		<Box gap {...props}>
+		<Box gap p="xs" {...props}>
 			<Button
 				size="small"
+				emphasis="ghost"
 				toggled={angles}
 				onClick={() => {
 					editorState.constraints.angles = !angles;
 				}}
 			>
-				<Icon name="placeholder" />
+				<Icon name="angles" />
 			</Button>
 			<Button
 				size="small"
+				emphasis="ghost"
 				toggled={snapCorners}
 				onClick={() => {
 					editorState.constraints.snapCorners = !snapCorners;
 				}}
 			>
-				<Icon name="placeholder" />
+				<Icon name="magnet" />
 			</Button>
 		</Box>
 	);

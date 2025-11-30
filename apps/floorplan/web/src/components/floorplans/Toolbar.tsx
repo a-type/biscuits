@@ -18,13 +18,13 @@ export function Toolbar(props: ToolbarProps) {
 				}}
 			>
 				<ToggleGroup.Item value="select">
-					<Icon name="placeholder" />
+					<Icon name="boxSelect" size={25} />
 				</ToggleGroup.Item>
 				<ToggleGroup.Item value="line">
-					<Icon name="connection" />
+					<Icon name="connection" size={25} />
 				</ToggleGroup.Item>
 				<ToggleGroup.Item value="pan">
-					<Icon name="placeholder" />
+					<Icon name="hand" size={25} />
 				</ToggleGroup.Item>
 			</ToggleGroup>
 		</Box>
