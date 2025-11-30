@@ -1,5 +1,6 @@
 import { hooks } from '@/hooks.js';
 import { Box, Button, clsx, Viewport } from '@a-type/ui';
+import { UserMenu } from '@biscuits/client/apps';
 import { Floor } from '@floorplan.biscuits/verdant';
 import { Link } from '@verdant-web/react-router';
 import { Suspense } from 'react';
@@ -31,8 +32,11 @@ export function FloorplanRenderer({ className, id }: FloorplanRendererProps) {
 			<Suspense>
 				<FloorplanContent id={id} />
 			</Suspense>
-			<Viewport.Control>
-				<Viewport.ZoomControls />
+			<Viewport.Control position="top-right">
+				<UserMenu />
+			</Viewport.Control>
+			<Viewport.Control position="bottom-right">
+				<Viewport.ZoomControls className="flex-row" />
 			</Viewport.Control>
 			<Viewport.Control position="top-left">
 				<ConstraintToggles />
