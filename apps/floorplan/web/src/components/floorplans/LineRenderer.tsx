@@ -13,8 +13,8 @@ export interface LineRendererProps {
 	endX: MotionValue<number>;
 	endY: MotionValue<number>;
 	lineDash?: string;
-	onClick?: (ev: PointerEvent | MouseEvent) => void;
-	selected?: boolean;
+	onClick?: (ev: PointerEvent | MouseEvent, target: 'line' | 'label') => void;
+	editingLength?: boolean;
 }
 
 export function LineRenderer({
@@ -24,7 +24,8 @@ export function LineRenderer({
 	endY,
 	lineDash,
 	onClick,
-	selected,
+	editingLength,
+	...rest
 }: LineRendererProps) {
 	return (
 		<>
@@ -35,19 +36,17 @@ export function LineRenderer({
 				y2={endY}
 				strokeWidth="2"
 				strokeDasharray={lineDash}
-				onClick={onClick}
-				className={clsx({
-					'stroke-black': !selected,
-					'stroke-main': selected,
-				})}
+				onClick={(ev) => onClick?.(ev, 'line')}
+				className="stroke-inherit"
+				{...rest}
 			/>
 			<LineLengthLabel
 				startX={startX}
 				startY={startY}
 				endX={endX}
 				endY={endY}
-				onClick={onClick}
-				selected={selected}
+				onClick={(ev) => onClick?.(ev, 'label')}
+				editing={editingLength}
 			/>
 		</>
 	);
@@ -59,14 +58,14 @@ export function LineLengthLabel({
 	endX,
 	endY,
 	onClick,
-	selected,
+	editing,
 }: {
 	startX: MotionValue<number>;
 	startY: MotionValue<number>;
 	endX: MotionValue<number>;
 	endY: MotionValue<number>;
 	onClick?: (ev: PointerEvent | MouseEvent) => void;
-	selected?: boolean;
+	editing?: boolean;
 }) {
 	const centerX = useTransform(
 		() => (endX.get() - startX.get()) / 2 + startX.get(),
@@ -89,14 +88,17 @@ export function LineLengthLabel({
 				y={-5}
 				rx={2}
 				ry={2}
-				className={selected ? 'fill-main' : 'fill-black'}
+				className={editing ? 'fill-white' : 'fill-black'}
 			/>
 			<motion.text
 				x={0}
 				y={0}
 				dominantBaseline="middle"
 				textAnchor="middle"
-				className="fill-white font-mono text-[5px]"
+				className={clsx(
+					editing ? 'fill-black' : 'fill-white',
+					'stroke-none font-mono text-[5px]',
+				)}
 			>
 				{label}
 			</motion.text>

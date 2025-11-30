@@ -16,15 +16,35 @@ var floors = schema.collection({
         fields: {
           id: schema.fields.id(),
           start: schema.fields.object({
+            documentation: "The start point of the line. Either point or snapKey must be provided.",
             fields: {
               x: schema.fields.number(),
-              y: schema.fields.number()
+              y: schema.fields.number(),
+              snap: schema.fields.object({
+                nullable: true,
+                fields: {
+                  lineId: schema.fields.string(),
+                  side: schema.fields.string({
+                    options: ["start", "end"]
+                  })
+                }
+              })
             }
           }),
           end: schema.fields.object({
+            documentation: "The end point of the line. Either point or snapKey must be provided.",
             fields: {
               x: schema.fields.number(),
-              y: schema.fields.number()
+              y: schema.fields.number(),
+              snap: schema.fields.object({
+                nullable: true,
+                fields: {
+                  lineId: schema.fields.string(),
+                  side: schema.fields.string({
+                    options: ["start", "end"]
+                  })
+                }
+              })
             }
           })
         }

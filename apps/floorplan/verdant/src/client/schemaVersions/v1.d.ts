@@ -10,8 +10,24 @@ export type FloorSnapshot = {
   labels: FloorLabelsSnapshot;
 };
 
-export type FloorLinesItemStartSnapshot = { x: number; y: number };
-export type FloorLinesItemEndSnapshot = { x: number; y: number };
+export type FloorLinesItemStartSnapSnapshot = {
+  lineId: string;
+  side: "start" | "end";
+};
+export type FloorLinesItemStartSnapshot = {
+  x: number;
+  y: number;
+  snap: FloorLinesItemStartSnapSnapshot | null;
+};
+export type FloorLinesItemEndSnapSnapshot = {
+  lineId: string;
+  side: "start" | "end";
+};
+export type FloorLinesItemEndSnapshot = {
+  x: number;
+  y: number;
+  snap: FloorLinesItemEndSnapSnapshot | null;
+};
 export type FloorLinesItemSnapshot = {
   id: string;
   start: FloorLinesItemStartSnapshot;
@@ -33,8 +49,24 @@ export type FloorInit = {
   labels?: FloorLabelsInit;
 };
 
-export type FloorLinesItemStartInit = { x: number; y: number };
-export type FloorLinesItemEndInit = { x: number; y: number };
+export type FloorLinesItemStartSnapInit = {
+  lineId: string;
+  side: "start" | "end";
+};
+export type FloorLinesItemStartInit = {
+  x: number;
+  y: number;
+  snap?: FloorLinesItemStartSnapInit | null;
+};
+export type FloorLinesItemEndSnapInit = {
+  lineId: string;
+  side: "start" | "end";
+};
+export type FloorLinesItemEndInit = {
+  x: number;
+  y: number;
+  snap?: FloorLinesItemEndSnapInit | null;
+};
 export type FloorLinesItemInit = {
   id?: string;
   start: FloorLinesItemStartInit;

@@ -1,6 +1,7 @@
 import { hooks } from '@/hooks.js';
-import { Box, clsx, Viewport } from '@a-type/ui';
+import { Box, Button, clsx, Viewport } from '@a-type/ui';
 import { Floor } from '@floorplan.biscuits/verdant';
+import { Link } from '@verdant-web/react-router';
 import { Suspense } from 'react';
 import { ConstraintToggles } from './ConstraintToggles.jsx';
 import { FloorLine } from './FloorLine.jsx';
@@ -49,7 +50,14 @@ function FloorplanContent({ id }: { id: string }) {
 	useEditorGlobalKeys(floor);
 
 	if (!floor) {
-		return <Box>Missing floor</Box>;
+		return (
+			<Box col gap>
+				Missing floor{' '}
+				<Button asChild>
+					<Link to="/">Go home</Link>
+				</Button>
+			</Box>
+		);
 	}
 
 	return (
@@ -70,7 +78,7 @@ function FloorplanLines({ floor }: { floor: Floor }) {
 	return (
 		<>
 			{lines.map((line) => (
-				<FloorLine key={line.get('id')} line={line} />
+				<FloorLine floor={floor} key={line.get('id')} line={line} />
 			))}
 		</>
 	);

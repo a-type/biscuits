@@ -1,12 +1,14 @@
+import { hooks } from '@/hooks.js';
 import { useViewport } from '@a-type/ui';
 import { Floor, id } from '@floorplan.biscuits/verdant';
 import { useDrag } from '@use-gesture/react';
 import { useMotionValue } from 'motion/react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useSnapshot } from 'valtio';
 import { editorState } from './editorState.js';
 import { LineRenderer } from './LineRenderer.jsx';
-import { getPointPosition } from './positioning.js';
+import { applyPointSnap } from './pointLogic.js';
+import { getPointPosition, PointPositionResult } from './positioning.js';
 
 export interface NewLineProps {
 	floor: Floor;
@@ -24,11 +26,14 @@ export function NewLine({ floor }: NewLineProps) {
 	const toolStartY = useMotionValue(0);
 	const toolEndX = useMotionValue(0);
 	const toolEndY = useMotionValue(0);
+	const initialRef = useRef<PointPositionResult | null>(null);
+
+	const client = hooks.useClient();
 
 	useDrag(
 		(state) => {
-			const pos = getPointPosition({
-				pos: viewport.viewportToWorld({
+			const result = getPointPosition({
+				input: viewport.viewportToWorld({
 					x: state.xy[0],
 					y: state.xy[1],
 				}),
@@ -37,6 +42,9 @@ export function NewLine({ floor }: NewLineProps) {
 				startY: toolStartY,
 				floor,
 			});
+			if (state.first) {
+				initialRef.current = result;
+			}
 
 			const length = Math.sqrt(state.distance[0] ** 2 + state.distance[1] ** 2);
 			if (length > 10) {
@@ -44,24 +52,39 @@ export function NewLine({ floor }: NewLineProps) {
 			}
 
 			if (state.last) {
-				setToolActive(false);
-				if (state.tap || length <= 10 || !floor) {
-					return;
-				}
-				const lineId = id();
-				floor.get('lines').push({
-					id: lineId,
-					start: {
-						x: toolStartX.get(),
-						y: toolStartY.get(),
-					},
-					end: pos,
-				});
-				editorState.selections = [lineId];
+				client
+					.batch()
+					.run(() => {
+						setToolActive(false);
+						if (state.tap || length <= 10 || !floor || !initialRef.current) {
+							return;
+						}
+						const lineId = id();
+						floor.get('lines').push({
+							id: lineId,
+							start: {
+								x: initialRef.current.x,
+								y: initialRef.current.y,
+							},
+							end: {
+								x: result.x,
+								y: result.y,
+							},
+						});
+						const line = floor.get('lines').find((l) => l.get('id') === lineId);
+						if (!line) {
+							throw new Error('Unknown error: Failed to create line');
+						}
+						applyPointSnap(floor, line.get('start'), initialRef.current);
+						applyPointSnap(floor, line.get('end'), result);
+						initialRef.current = null;
+						editorState.selections = [lineId];
+					})
+					.commit();
 			}
 
-			toolEndX.set(pos.x);
-			toolEndY.set(pos.y);
+			toolEndX.set(result.x);
+			toolEndY.set(result.y);
 		},
 		{
 			target: viewport.element,
@@ -74,11 +97,13 @@ export function NewLine({ floor }: NewLineProps) {
 	}
 
 	return (
-		<LineRenderer
-			startX={toolStartX}
-			startY={toolStartY}
-			endX={toolEndX}
-			endY={toolEndY}
-		/>
+		<g className="stroke-black">
+			<LineRenderer
+				startX={toolStartX}
+				startY={toolStartY}
+				endX={toolEndX}
+				endY={toolEndY}
+			/>
+		</g>
 	);
 }

@@ -137,6 +137,7 @@ export type FloorLinesItem = ObjectEntity<
   FloorLinesItemSnapshot
 >;
 export type FloorLinesItemId = string;
+/** The start point of the line. Either point or snapKey must be provided. */
 export type FloorLinesItemStart = ObjectEntity<
   FloorLinesItemStartInit,
   FloorLinesItemStartDestructured,
@@ -144,6 +145,14 @@ export type FloorLinesItemStart = ObjectEntity<
 >;
 export type FloorLinesItemStartX = number;
 export type FloorLinesItemStartY = number;
+export type FloorLinesItemStartSnap = ObjectEntity<
+  FloorLinesItemStartSnapInit,
+  FloorLinesItemStartSnapDestructured,
+  FloorLinesItemStartSnapSnapshot
+>;
+export type FloorLinesItemStartSnapLineId = string;
+export type FloorLinesItemStartSnapSide = "start" | "end";
+/** The end point of the line. Either point or snapKey must be provided. */
 export type FloorLinesItemEnd = ObjectEntity<
   FloorLinesItemEndInit,
   FloorLinesItemEndDestructured,
@@ -151,6 +160,13 @@ export type FloorLinesItemEnd = ObjectEntity<
 >;
 export type FloorLinesItemEndX = number;
 export type FloorLinesItemEndY = number;
+export type FloorLinesItemEndSnap = ObjectEntity<
+  FloorLinesItemEndSnapInit,
+  FloorLinesItemEndSnapDestructured,
+  FloorLinesItemEndSnapSnapshot
+>;
+export type FloorLinesItemEndSnapLineId = string;
+export type FloorLinesItemEndSnapSide = "start" | "end";
 export type FloorLabels = ListEntity<
   FloorLabelsInit,
   FloorLabelsDestructured,
@@ -178,8 +194,24 @@ export type FloorInit = {
   labels?: FloorLabelsInit;
 };
 
-export type FloorLinesItemStartInit = { x: number; y: number };
-export type FloorLinesItemEndInit = { x: number; y: number };
+export type FloorLinesItemStartSnapInit = {
+  lineId: string;
+  side: "start" | "end";
+};
+export type FloorLinesItemStartInit = {
+  x: number;
+  y: number;
+  snap?: FloorLinesItemStartSnapInit | null;
+};
+export type FloorLinesItemEndSnapInit = {
+  lineId: string;
+  side: "start" | "end";
+};
+export type FloorLinesItemEndInit = {
+  x: number;
+  y: number;
+  snap?: FloorLinesItemEndSnapInit | null;
+};
 export type FloorLinesItemInit = {
   id?: string;
   start: FloorLinesItemStartInit;
@@ -201,8 +233,24 @@ export type FloorDestructured = {
   labels: FloorLabels;
 };
 
-export type FloorLinesItemStartDestructured = { x: number; y: number };
-export type FloorLinesItemEndDestructured = { x: number; y: number };
+export type FloorLinesItemStartSnapDestructured = {
+  lineId: string;
+  side: "start" | "end";
+};
+export type FloorLinesItemStartDestructured = {
+  x: number;
+  y: number;
+  snap: FloorLinesItemStartSnap | null;
+};
+export type FloorLinesItemEndSnapDestructured = {
+  lineId: string;
+  side: "start" | "end";
+};
+export type FloorLinesItemEndDestructured = {
+  x: number;
+  y: number;
+  snap: FloorLinesItemEndSnap | null;
+};
 export type FloorLinesItemDestructured = {
   id: string;
   start: FloorLinesItemStart;
@@ -224,8 +272,24 @@ export type FloorSnapshot = {
   labels: FloorLabelsSnapshot;
 };
 
-export type FloorLinesItemStartSnapshot = { x: number; y: number };
-export type FloorLinesItemEndSnapshot = { x: number; y: number };
+export type FloorLinesItemStartSnapSnapshot = {
+  lineId: string;
+  side: "start" | "end";
+};
+export type FloorLinesItemStartSnapshot = {
+  x: number;
+  y: number;
+  snap: FloorLinesItemStartSnapSnapshot | null;
+};
+export type FloorLinesItemEndSnapSnapshot = {
+  lineId: string;
+  side: "start" | "end";
+};
+export type FloorLinesItemEndSnapshot = {
+  x: number;
+  y: number;
+  snap: FloorLinesItemEndSnapSnapshot | null;
+};
 export type FloorLinesItemSnapshot = {
   id: string;
   start: FloorLinesItemStartSnapshot;
