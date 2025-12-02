@@ -5,15 +5,13 @@ import {
 	useMotionTemplate,
 	useTransform,
 } from 'motion/react';
-import { MouseEvent, PointerEvent } from 'react';
 
-export interface LineRendererProps {
+export interface LineRendererProps extends React.SVGProps<SVGGElement> {
 	startX: MotionValue<number>;
 	startY: MotionValue<number>;
 	endX: MotionValue<number>;
 	endY: MotionValue<number>;
 	lineDash?: string;
-	onClick?: (ev: PointerEvent | MouseEvent, target: 'line' | 'label') => void;
 	editingLength?: boolean;
 }
 
@@ -23,12 +21,12 @@ export function LineRenderer({
 	endX,
 	endY,
 	lineDash,
-	onClick,
 	editingLength,
+	className,
 	...rest
 }: LineRendererProps) {
 	return (
-		<>
+		<g className="touch-none" {...rest}>
 			<motion.line
 				x1={startX}
 				y1={startY}
@@ -36,19 +34,16 @@ export function LineRenderer({
 				y2={endY}
 				strokeWidth="2"
 				strokeDasharray={lineDash}
-				onClick={(ev) => onClick?.(ev, 'line')}
-				className="stroke-inherit"
-				{...rest}
+				className={clsx('stroke-inherit pointer-events-none', className)}
 			/>
 			<LineLengthLabel
 				startX={startX}
 				startY={startY}
 				endX={endX}
 				endY={endY}
-				onClick={(ev) => onClick?.(ev, 'label')}
 				editing={editingLength}
 			/>
-		</>
+		</g>
 	);
 }
 
@@ -57,14 +52,12 @@ export function LineLengthLabel({
 	startY,
 	endX,
 	endY,
-	onClick,
 	editing,
 }: {
 	startX: MotionValue<number>;
 	startY: MotionValue<number>;
 	endX: MotionValue<number>;
 	endY: MotionValue<number>;
-	onClick?: (ev: PointerEvent | MouseEvent) => void;
 	editing?: boolean;
 }) {
 	const centerX = useTransform(
@@ -76,11 +69,11 @@ export function LineLengthLabel({
 	const length = useTransform(() =>
 		Math.hypot(endX.get() - startX.get(), endY.get() - startY.get()).toFixed(2),
 	);
-	const transform = useMotionTemplate`translate(${centerX}px, ${centerY}px)`;
+	const transform = useMotionTemplate`translate(${centerX}px, ${centerY}px) scale(calc(2/var(--zoom-settled, 1)))`;
 	const label = useMotionTemplate`${length}m`;
 
 	return (
-		<motion.g style={{ transform }} onClick={onClick}>
+		<motion.g style={{ transform }}>
 			<rect
 				width={30}
 				height={10}

@@ -14,7 +14,7 @@ export interface PointPositionResult {
 	};
 }
 
-export function getPointPosition({
+export function computeConstrainedInput({
 	first,
 	startX,
 	startY,

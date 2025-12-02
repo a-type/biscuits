@@ -28,10 +28,20 @@ export type FloorLinesItemEndSnapshot = {
   y: number;
   snap: FloorLinesItemEndSnapSnapshot | null;
 };
+export type FloorLinesItemAttachmentsItemSnapshot = {
+  id: string;
+  start: number;
+  end: number;
+  type: string;
+  direction: "normal" | "reversed";
+};
+export type FloorLinesItemAttachmentsSnapshot =
+  FloorLinesItemAttachmentsItemSnapshot[];
 export type FloorLinesItemSnapshot = {
   id: string;
   start: FloorLinesItemStartSnapshot;
   end: FloorLinesItemEndSnapshot;
+  attachments: FloorLinesItemAttachmentsSnapshot;
 };
 export type FloorLinesSnapshot = FloorLinesItemSnapshot[];
 export type FloorLabelsItemPositionSnapshot = { x: number; y: number };
@@ -67,10 +77,19 @@ export type FloorLinesItemEndInit = {
   y: number;
   snap?: FloorLinesItemEndSnapInit | null;
 };
+export type FloorLinesItemAttachmentsItemInit = {
+  id?: string;
+  start: number;
+  end: number;
+  type: string;
+  direction: "normal" | "reversed";
+};
+export type FloorLinesItemAttachmentsInit = FloorLinesItemAttachmentsItemInit[];
 export type FloorLinesItemInit = {
   id?: string;
   start: FloorLinesItemStartInit;
   end: FloorLinesItemEndInit;
+  attachments?: FloorLinesItemAttachmentsInit;
 };
 export type FloorLinesInit = FloorLinesItemInit[];
 export type FloorLabelsItemPositionInit = { x: number; y: number };

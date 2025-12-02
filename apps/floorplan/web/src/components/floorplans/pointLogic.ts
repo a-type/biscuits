@@ -14,6 +14,14 @@ export function getPointValue(
 	return primary.get(val);
 }
 
+export function getPoint(floor: Floor, point: FloorLinesItemStart) {
+	const primary = getPrimarySnapPoint(floor, point);
+	return {
+		x: primary.get('x'),
+		y: primary.get('y'),
+	};
+}
+
 export function getPrimarySnapPoint(floor: Floor, point: FloorLinesItemStart) {
 	const snap = point.get('snap');
 	if (!snap) {

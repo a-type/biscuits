@@ -167,6 +167,23 @@ export type FloorLinesItemEndSnap = ObjectEntity<
 >;
 export type FloorLinesItemEndSnapLineId = string;
 export type FloorLinesItemEndSnapSide = "start" | "end";
+/** Objects attached along this wall, like doors or windows. */
+export type FloorLinesItemAttachments = ListEntity<
+  FloorLinesItemAttachmentsInit,
+  FloorLinesItemAttachmentsDestructured,
+  FloorLinesItemAttachmentsSnapshot
+>;
+export type FloorLinesItemAttachmentsItem = ObjectEntity<
+  FloorLinesItemAttachmentsItemInit,
+  FloorLinesItemAttachmentsItemDestructured,
+  FloorLinesItemAttachmentsItemSnapshot
+>;
+export type FloorLinesItemAttachmentsItemId = string;
+export type FloorLinesItemAttachmentsItemStart = number;
+export type FloorLinesItemAttachmentsItemEnd = number;
+export type FloorLinesItemAttachmentsItemType = string;
+/** Reversed flips the outward swing direction of doors, for example */
+export type FloorLinesItemAttachmentsItemDirection = "normal" | "reversed";
 export type FloorLabels = ListEntity<
   FloorLabelsInit,
   FloorLabelsDestructured,
@@ -212,10 +229,19 @@ export type FloorLinesItemEndInit = {
   y: number;
   snap?: FloorLinesItemEndSnapInit | null;
 };
+export type FloorLinesItemAttachmentsItemInit = {
+  id?: string;
+  start: number;
+  end: number;
+  type: string;
+  direction: "normal" | "reversed";
+};
+export type FloorLinesItemAttachmentsInit = FloorLinesItemAttachmentsItemInit[];
 export type FloorLinesItemInit = {
   id?: string;
   start: FloorLinesItemStartInit;
   end: FloorLinesItemEndInit;
+  attachments?: FloorLinesItemAttachmentsInit;
 };
 export type FloorLinesInit = FloorLinesItemInit[];
 export type FloorLabelsItemPositionInit = { x: number; y: number };
@@ -251,10 +277,20 @@ export type FloorLinesItemEndDestructured = {
   y: number;
   snap: FloorLinesItemEndSnap | null;
 };
+export type FloorLinesItemAttachmentsItemDestructured = {
+  id: string;
+  start: number;
+  end: number;
+  type: string;
+  direction: "normal" | "reversed";
+};
+export type FloorLinesItemAttachmentsDestructured =
+  FloorLinesItemAttachmentsItem[];
 export type FloorLinesItemDestructured = {
   id: string;
   start: FloorLinesItemStart;
   end: FloorLinesItemEnd;
+  attachments: FloorLinesItemAttachments;
 };
 export type FloorLinesDestructured = FloorLinesItem[];
 export type FloorLabelsItemPositionDestructured = { x: number; y: number };
@@ -290,10 +326,20 @@ export type FloorLinesItemEndSnapshot = {
   y: number;
   snap: FloorLinesItemEndSnapSnapshot | null;
 };
+export type FloorLinesItemAttachmentsItemSnapshot = {
+  id: string;
+  start: number;
+  end: number;
+  type: string;
+  direction: "normal" | "reversed";
+};
+export type FloorLinesItemAttachmentsSnapshot =
+  FloorLinesItemAttachmentsItemSnapshot[];
 export type FloorLinesItemSnapshot = {
   id: string;
   start: FloorLinesItemStartSnapshot;
   end: FloorLinesItemEndSnapshot;
+  attachments: FloorLinesItemAttachmentsSnapshot;
 };
 export type FloorLinesSnapshot = FloorLinesItemSnapshot[];
 export type FloorLabelsItemPositionSnapshot = { x: number; y: number };

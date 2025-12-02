@@ -6,6 +6,7 @@ import { Link } from '@verdant-web/react-router';
 import { Suspense } from 'react';
 import { ConstraintToggles } from './ConstraintToggles.jsx';
 import { FloorLine } from './FloorLine.jsx';
+import { FloorProvider } from './FloorProvider.jsx';
 import { Grid } from './Grid.jsx';
 import { NewLine } from './NewLine.jsx';
 import { Toolbar } from './Toolbar.jsx';
@@ -28,6 +29,9 @@ export function FloorplanRenderer({ className, id }: FloorplanRendererProps) {
 					return (isFirstButton || isTouch) && editorState.tool !== 'pan';
 				},
 			}}
+			maxZoom={100}
+			minZoom={1}
+			defaultZoom={50}
 		>
 			<Suspense>
 				<FloorplanContent id={id} />
@@ -65,13 +69,15 @@ function FloorplanContent({ id }: { id: string }) {
 	}
 
 	return (
-		<svg width={1000} height={1000} className="bg-white relative">
-			<g transform="translate(500, 500)">
-				<Grid />
-				<FloorplanLines floor={floor} />
-				<NewLine floor={floor} />
-			</g>
-		</svg>
+		<FloorProvider value={floor}>
+			<svg width={1000} height={1000} className="bg-white relative">
+				<g transform="translate(500, 500)">
+					<Grid />
+					<FloorplanLines floor={floor} />
+					<NewLine floor={floor} />
+				</g>
+			</svg>
+		</FloorProvider>
 	);
 }
 

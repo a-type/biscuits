@@ -1,18 +1,18 @@
 import { hooks } from '@/hooks.js';
 import { useMotionPoint } from '@/hooks/useVerdantMotion.js';
 import { useViewport } from '@a-type/ui';
-import { Floor, FloorLinesItemStart } from '@floorplan.biscuits/verdant';
+import { FloorLinesItemStart } from '@floorplan.biscuits/verdant';
 import { useDrag } from '@use-gesture/react';
 import { motion } from 'motion/react';
+import { useFloor } from './FloorProvider.jsx';
 import {
 	applyPointSnap,
 	getPrimarySnapPoint,
 	getSnapChain,
 } from './pointLogic.js';
-import { getPointPosition } from './positioning.js';
+import { computeConstrainedInput } from './positioning.js';
 
 export interface LinePointHandleProps {
-	floor: Floor;
 	point: FloorLinesItemStart;
 	oppositePoint: FloorLinesItemStart;
 }
@@ -20,18 +20,18 @@ export interface LinePointHandleProps {
 export function LinePointHandle({
 	point,
 	oppositePoint,
-	floor,
 }: LinePointHandleProps) {
-	const { x, y } = useMotionPoint(floor, point);
-	const { x: oppositeX, y: oppositeY } = useMotionPoint(floor, oppositePoint);
+	const { x, y } = useMotionPoint(point);
+	const { x: oppositeX, y: oppositeY } = useMotionPoint(oppositePoint);
 
 	const { snap } = hooks.useWatch(point); // side effect.
+	const floor = useFloor();
 	const snapChain = getSnapChain(floor, point);
 
 	const viewport = useViewport();
 
 	const bind = useDrag((state) => {
-		const result = getPointPosition({
+		const result = computeConstrainedInput({
 			input: viewport.viewportToWorld({
 				x: state.xy[0],
 				y: state.xy[1],

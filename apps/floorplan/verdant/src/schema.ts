@@ -47,6 +47,22 @@ const floors = schema.collection({
 							}),
 						},
 					}),
+					attachments: schema.fields.array({
+						documentation: `Objects attached along this wall, like doors or windows.`,
+						items: schema.fields.object({
+							fields: {
+								id: schema.fields.id(),
+								start: schema.fields.number(),
+								end: schema.fields.number(),
+								type: schema.fields.string(),
+								direction: schema.fields.string({
+									documentation:
+										'Reversed flips the outward swing direction of doors, for example',
+									options: ['normal', 'reversed'],
+								}),
+							},
+						}),
+					}),
 				},
 			}),
 		}),

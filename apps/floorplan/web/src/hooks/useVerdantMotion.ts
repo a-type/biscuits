@@ -1,19 +1,21 @@
+import { useFloor } from '@/components/floorplans/FloorProvider.jsx';
 import {
 	getPointValue,
 	getPrimarySnapPoint,
 } from '@/components/floorplans/pointLogic.js';
 import { hooks } from '@/hooks.js';
-import { Floor, FloorLinesItemStart } from '@floorplan.biscuits/verdant';
+import { FloorLinesItemStart } from '@floorplan.biscuits/verdant';
 import { MotionValue, useMotionValue } from 'motion/react';
 import { useEffect } from 'react';
 
 export function useMotionPoint(
-	floor: Floor,
 	point: FloorLinesItemStart,
+	{ value = 0 }: { value?: number } = {},
 ): {
 	x: MotionValue<number>;
 	y: MotionValue<number>;
 } {
+	const floor = useFloor();
 	const x = useMotionValue(getPointValue(floor, point, 'x'));
 	const y = useMotionValue(getPointValue(floor, point, 'y'));
 
@@ -29,7 +31,7 @@ export function useMotionPoint(
 		return () => {
 			unsubPoint();
 		};
-	}, [floor, point, x, y]);
+	}, [floor, point, x, y, value]);
 
 	return { x, y };
 }

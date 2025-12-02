@@ -8,7 +8,7 @@ import { useSnapshot } from 'valtio';
 import { editorState } from './editorState.js';
 import { LineRenderer } from './LineRenderer.jsx';
 import { applyPointSnap } from './pointLogic.js';
-import { getPointPosition, PointPositionResult } from './positioning.js';
+import { computeConstrainedInput, PointPositionResult } from './positioning.js';
 
 export interface NewLineProps {
 	floor: Floor;
@@ -32,7 +32,7 @@ export function NewLine({ floor }: NewLineProps) {
 
 	useDrag(
 		(state) => {
-			const result = getPointPosition({
+			const result = computeConstrainedInput({
 				input: viewport.viewportToWorld({
 					x: state.xy[0],
 					y: state.xy[1],
