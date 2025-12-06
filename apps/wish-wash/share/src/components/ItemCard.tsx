@@ -75,10 +75,10 @@ export function ItemCard({
 			<ItemCardStar item={item} />
 			<ItemCardMarquee item={item} />
 			<ItemCardContent item={itemMasked} listAuthor={listAuthor} />
-			<Card.Footer>
+			{item.type === 'link' && (<Card.Footer>
 				<ItemCardActions item={item} />
 			</Card.Footer>
-		</Card>
+		</Card>)}
 	);
 }
 
