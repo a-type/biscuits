@@ -77,8 +77,8 @@ export function ItemCard({
 			<ItemCardContent item={itemMasked} listAuthor={listAuthor} />
 			{item.type === 'link' && (<Card.Footer>
 				<ItemCardActions item={item} />
-			</Card.Footer>
-		</Card>)}
+			</Card.Footer>)}
+		</Card>
 	);
 }
 
