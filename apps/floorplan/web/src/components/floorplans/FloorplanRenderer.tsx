@@ -29,9 +29,9 @@ export function FloorplanRenderer({ className, id }: FloorplanRendererProps) {
 					return (isFirstButton || isTouch) && editorState.tool !== 'pan';
 				},
 			}}
-			maxZoom={100}
-			minZoom={1}
-			defaultZoom={50}
+			maxZoom={1000}
+			minZoom={10}
+			defaultZoom={500}
 		>
 			<Suspense>
 				<FloorplanContent id={id} />
@@ -70,8 +70,8 @@ function FloorplanContent({ id }: { id: string }) {
 
 	return (
 		<FloorProvider value={floor}>
-			<svg width={1000} height={1000} className="bg-white relative">
-				<g transform="translate(500, 500)">
+			<svg width={100} height={100} className="bg-white relative">
+				<g transform="translate(50, 50)">
 					<Grid />
 					<FloorplanLines floor={floor} />
 					<NewLine floor={floor} />

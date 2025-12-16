@@ -4,6 +4,7 @@ import { useViewport } from '@a-type/ui';
 import { FloorLinesItemStart } from '@floorplan.biscuits/verdant';
 import { useDrag } from '@use-gesture/react';
 import { motion } from 'motion/react';
+import { useSyncExternalStore } from 'react';
 import { useFloor } from './FloorProvider.jsx';
 import {
 	applyPointSnap,
@@ -29,6 +30,11 @@ export function LinePointHandle({
 	const snapChain = getSnapChain(floor, point);
 
 	const viewport = useViewport();
+	const zoom = useSyncExternalStore(
+		(cb) => viewport.subscribe('zoomChanged', cb),
+		() => viewport.zoom,
+		() => viewport.zoom,
+	);
 
 	const bind = useDrag((state) => {
 		const result = computeConstrainedInput({
@@ -65,8 +71,8 @@ export function LinePointHandle({
 		<motion.circle
 			cx={x}
 			cy={y}
-			r={6}
-			className="fill-white stroke-inherit cursor-grab touch-none"
+			r={8 / zoom}
+			className="fill-white stroke-inherit cursor-grab touch-none stroke-width-[calc(2/var(--zoom-settled))] z-1"
 			strokeWidth={2}
 			data-snapped-to={
 				snap ? `${snap.get('lineId')}-${snap.get('side')}` : undefined

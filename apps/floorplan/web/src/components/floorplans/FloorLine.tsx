@@ -9,7 +9,7 @@ import {
 } from '@floorplan.biscuits/verdant';
 import { FullGestureState, useDrag } from '@use-gesture/react';
 import { motion, MotionValue, useTransform } from 'motion/react';
-import { useRef } from 'react';
+import { useRef, useSyncExternalStore } from 'react';
 import { useSnapshot } from 'valtio';
 import { editorState, toggleSelection } from './editorState.js';
 import { LinePointHandle } from './LinePointHandle.jsx';
@@ -68,13 +68,13 @@ export function FloorLine({ line, floor }: FloorLineProps) {
 			data-attachment-count={attachments.length}
 			ref={ref}
 		>
+			{/* hittest */}
 			<motion.line
 				x1={startX}
 				y1={startY}
 				x2={endX}
 				y2={endY}
-				strokeWidth="10"
-				className="stroke-transparent cursor-pointer touch-none"
+				className="stroke-transparent cursor-pointer touch-none stroke-width-[calc(10/var(--zoom-settled))]"
 			/>
 			{attachments.length === 0 ?
 				<LineRenderer
@@ -143,14 +143,20 @@ export function FloorLine({ line, floor }: FloorLineProps) {
 function SnapIndicator({ point }: { point: FloorLinesItemStart }) {
 	const { snap } = hooks.useWatch(point);
 	const position = useMotionPoint(point);
+	const viewport = useViewport();
+	const zoom = useSyncExternalStore(
+		(cb) => viewport.subscribe('zoomChanged', cb),
+		() => viewport.zoom,
+		() => viewport.zoom,
+	);
 
 	if (snap) {
 		return (
 			<motion.circle
 				cx={position.x}
 				cy={position.y}
-				r={5}
-				className="stroke-gray fill-none"
+				r={5 / zoom}
+				className="stroke-gray fill-none stroke-width-[calc(2/var(--zoom-settled))] pointer-events-none"
 			/>
 		);
 	}

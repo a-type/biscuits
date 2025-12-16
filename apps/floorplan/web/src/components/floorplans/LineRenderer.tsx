@@ -32,9 +32,11 @@ export function LineRenderer({
 				y1={startY}
 				x2={endX}
 				y2={endY}
-				strokeWidth="2"
 				strokeDasharray={lineDash}
-				className={clsx('stroke-inherit pointer-events-none', className)}
+				className={clsx(
+					'stroke-inherit pointer-events-none stroke-width-[calc(2/var(--zoom-settled))]',
+					className,
+				)}
 			/>
 			<LineLengthLabel
 				startX={startX}
