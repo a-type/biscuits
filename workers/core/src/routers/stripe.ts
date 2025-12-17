@@ -22,7 +22,7 @@ stripeRouter.post('/webhook', async (ctx) => {
 	const stripe = getStripe(ctx.env.STRIPE_SECRET_KEY);
 	let event;
 	try {
-		event = stripe.webhooks.constructEvent(
+		event = await stripe.webhooks.constructEventAsync(
 			await ctx.req.text(),
 			signature,
 			ctx.env.STRIPE_WEBHOOK_SECRET,
