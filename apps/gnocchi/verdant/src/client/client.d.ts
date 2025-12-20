@@ -1026,6 +1026,7 @@ export type RecipeSubRecipeMultipliers = ObjectEntity<
   RecipeSubRecipeMultipliersSnapshot
 >;
 export type RecipeSubRecipeMultipliersValue = number;
+export type RecipeCopyOf = string;
 export type RecipeInit = {
   id?: string;
   slug?: string;
@@ -1051,6 +1052,7 @@ export type RecipeInit = {
   addIntervalGuess?: number | null;
   pinnedAt?: number | null;
   subRecipeMultipliers?: RecipeSubRecipeMultipliersInit;
+  copyOf?: string | null;
 };
 
 export type RecipePreludeAttrsInit = {
@@ -1177,6 +1179,7 @@ export type RecipeDestructured = {
   addIntervalGuess: number | null;
   pinnedAt: number | null;
   subRecipeMultipliers: RecipeSubRecipeMultipliers;
+  copyOf: string | null;
 };
 
 export type RecipePreludeAttrsDestructured = {
@@ -1297,6 +1300,7 @@ export type RecipeSnapshot = {
   addIntervalGuess: number | null;
   pinnedAt: number | null;
   subRecipeMultipliers: RecipeSubRecipeMultipliersSnapshot;
+  copyOf: string | null;
 };
 
 export type RecipePreludeAttrsSnapshot = {
@@ -1583,6 +1587,28 @@ export interface RecipeSessionStartedAtRangeFilter {
   lt?: number;
   order?: "asc" | "desc";
 }
+export interface RecipeCopyOfSortFilter {
+  where: "copyOf";
+  order: "asc" | "desc";
+}
+export interface RecipeCopyOfMatchFilter {
+  where: "copyOf";
+  equals: string;
+  order?: "asc" | "desc";
+}
+export interface RecipeCopyOfRangeFilter {
+  where: "copyOf";
+  gte?: string;
+  gt?: string;
+  lte?: string;
+  lt?: string;
+  order?: "asc" | "desc";
+}
+export interface RecipeCopyOfStartsWithFilter {
+  where: "copyOf";
+  startsWith: string;
+  order?: "asc" | "desc";
+}
 export type RecipeFilter =
   | RecipeSlugSortFilter
   | RecipeSlugMatchFilter
@@ -1615,7 +1641,11 @@ export type RecipeFilter =
   | RecipeGeneralSearchStartsWithFilter
   | RecipeSessionStartedAtSortFilter
   | RecipeSessionStartedAtMatchFilter
-  | RecipeSessionStartedAtRangeFilter;
+  | RecipeSessionStartedAtRangeFilter
+  | RecipeCopyOfSortFilter
+  | RecipeCopyOfMatchFilter
+  | RecipeCopyOfRangeFilter
+  | RecipeCopyOfStartsWithFilter;
 
 /** Generated types for RecipeTagMetadata */
 

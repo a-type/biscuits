@@ -131,6 +131,9 @@ export const recipes = schema.collection({
 		subRecipeMultipliers: schema.fields.map({
 			values: schema.fields.number(),
 		}),
+		copyOf: schema.fields.string({
+			nullable: true,
+		}),
 	},
 	indexes: {
 		slug: {
@@ -191,6 +194,10 @@ export const recipes = schema.collection({
 			compute: (recipe) => {
 				return recipe.session?.startedAt || 0;
 			},
+		},
+		copyOf: {
+			type: 'string',
+			field: 'copyOf',
 		},
 	},
 });

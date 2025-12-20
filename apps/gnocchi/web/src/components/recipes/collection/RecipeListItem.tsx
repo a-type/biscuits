@@ -81,7 +81,7 @@ export const RecipeListItem = memo(function RecipeListItem({
 							</Chip>
 						)}
 						<Suspense>
-							<RecipeTagsViewer unwrapped recipe={recipe} />
+							<RecipeTagsViewer unwrapped recipe={recipe} max={3} />
 						</Suspense>
 					</div>
 				</Link>

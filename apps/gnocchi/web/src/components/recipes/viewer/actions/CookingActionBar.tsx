@@ -33,9 +33,10 @@ import {
 } from '@biscuits/client';
 import { graphql, useQuery } from '@biscuits/graphql';
 import { Recipe } from '@gnocchi.biscuits/verdant';
-import { RecipePinToggle } from '../viewer/RecipePinToggle.jsx';
-import { RecipePublishControl } from '../viewer/RecipePublishControl.jsx';
-import { RecipeViewerEditButton } from '../viewer/RecipeViewerEditButton.jsx';
+import { RecipePinToggle } from '../RecipePinToggle.jsx';
+import { RecipeViewerEditButton } from '../RecipeViewerEditButton.jsx';
+import { RecipeCloneAction } from './RecipeCloneAction.jsx';
+import { RecipePublishAction } from './RecipePublishAction.jsx';
 
 export interface CookingActionBarProps {
 	recipe: Recipe;
@@ -50,8 +51,9 @@ export function CookingActionBar({ recipe, ...rest }: CookingActionBarProps) {
 			<AddChefsAction />
 			<StopCookingAction recipe={recipe} />
 			<NoteToggleAction recipe={recipe} />
-			<RecipeViewerEditButton recipe={recipe} className="font-bold h-[30px]" />
-			<RecipePublishControl recipe={recipe} />
+			<RecipeViewerEditButton recipe={recipe} />
+			<RecipePublishAction recipe={recipe} />
+			<RecipeCloneAction recipe={recipe} />
 		</ActionBar>
 	);
 }

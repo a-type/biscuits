@@ -1,10 +1,10 @@
 import { AddImagePrompt } from '@/components/recipes/cook/AddImagePrompt.jsx';
 import { AddNotePrompt } from '@/components/recipes/cook/AddNotePrompt.jsx';
-import { CookingActionBar } from '@/components/recipes/cook/CookingActionBar.jsx';
 import { CookingToolbar } from '@/components/recipes/cook/CookingToolbar.jsx';
 import { InstructionsProvider } from '@/components/recipes/editor/InstructionStepNodeView.jsx';
 import { HeaderBar } from '@/components/recipes/layout/HeaderBar.jsx';
 import { RecipesNowPlaying } from '@/components/recipes/nowPlaying/RecipesNowPlaying.jsx';
+import { CookingActionBar } from '@/components/recipes/viewer/actions/CookingActionBar.jsx';
 import { RecipeNote } from '@/components/recipes/viewer/RecipeNote.jsx';
 import { viewerState } from '@/components/recipes/viewer/state.js';
 import { usePageTitle } from '@/hooks/usePageTitle.jsx';
@@ -38,6 +38,8 @@ import {
 	TitleContainer,
 } from '../layout/TitleAndImageLayout.jsx';
 import { AddToListButton } from './AddToListButton.jsx';
+import { RecipeCopiesTag } from './RecipeCopiesTag.jsx';
+import { RecipeCopyOriginalLink } from './RecipeCopyOriginalLink.jsx';
 import { RecipeIngredientsViewer } from './RecipeIngredientsViewer.jsx';
 import { RecipeInstructionsViewer } from './RecipeInstructionsViewer.jsx';
 import { RecipeMainImageViewer } from './RecipeMainImageViewer.jsx';
@@ -59,6 +61,7 @@ export function RecipeOverview({ recipe }: RecipeOverviewProps) {
 		totalTimeMinutes,
 		servings,
 		multiplier,
+		copyOf,
 	} = hooks.useWatch(recipe);
 	useWatchChanges(recipe);
 
@@ -137,6 +140,12 @@ export function RecipeOverview({ recipe }: RecipeOverviewProps) {
 											</Link>
 										</Chip>
 									)}
+									{copyOf && (
+										<Chip asChild>
+											<RecipeCopyOriginalLink recipe={recipe} />
+										</Chip>
+									)}
+									<RecipeCopiesTag recipe={recipe} />
 									<Suspense>
 										<RecipeTagsEditor
 											recipe={recipe}

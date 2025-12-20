@@ -45,6 +45,7 @@ import v43 from "./v43.js";
 import v44 from "./v44.js";
 import v45 from "./v45.js";
 import v46 from "./v46.js";
+import v47 from "./v47.js";
 
 export default [
   skipToV34,
@@ -94,4 +95,5 @@ export default [
   v44,
   v45,
   v46,
+  v47,
 ];

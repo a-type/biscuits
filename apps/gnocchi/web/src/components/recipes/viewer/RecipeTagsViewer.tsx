@@ -10,6 +10,7 @@ export interface RecipeTagsViewerProps {
 	limit?: number;
 	className?: string;
 	unwrapped?: boolean;
+	max?: number;
 }
 
 export function RecipeTagsViewer({
@@ -17,6 +18,7 @@ export function RecipeTagsViewer({
 	limit,
 	className,
 	unwrapped,
+	max,
 }: RecipeTagsViewerProps) {
 	const { tags } = hooks.useWatch(recipe);
 	hooks.useWatch(tags);
@@ -25,11 +27,13 @@ export function RecipeTagsViewer({
 
 	const tagsToDisplay = limit ? tags.getSnapshot().slice(0, limit) : tags;
 
-	const content = tagsToDisplay.map((tag) => (
-		<Suspense key={tag}>
-			<RecipeTagViewer tag={tag} />
-		</Suspense>
-	));
+	const content = tagsToDisplay
+		.map((tag) => (
+			<Suspense key={tag}>
+				<RecipeTagViewer tag={tag} />
+			</Suspense>
+		))
+		.slice(0, max);
 
 	if (unwrapped) {
 		return <>{content}</>;

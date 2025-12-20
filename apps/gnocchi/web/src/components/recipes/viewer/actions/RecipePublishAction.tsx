@@ -2,6 +2,7 @@ import { Link, TextLink } from '@/components/nav/Link.jsx';
 import { withSuspense } from '@/hocs/withSuspense.jsx';
 import { GnocchiClient, hooks } from '@/stores/groceries/index.js';
 import {
+	ActionButton,
 	Box,
 	Button,
 	ButtonProps,
@@ -23,7 +24,7 @@ import type { PublicRecipe } from '@gnocchi.biscuits/share-schema';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { format } from 'date-fns';
 import { useState } from 'react';
-import { getSubRecipeIds } from '../hooks.js';
+import { getSubRecipeIds } from '../../hooks.js';
 
 export interface RecipePublishControlProps {
 	recipe: Recipe;
@@ -54,7 +55,7 @@ const unpublishMutation = graphql(`
 	}
 `);
 
-export const RecipePublishControl = withSuspense(
+export const RecipePublishAction = withSuspense(
 	function RecipePublishControl({ recipe }: RecipePublishControlProps) {
 		const enabled = useFeatureFlag('hub');
 		const { data, loading, refetch } = useQuery(publishedQuery, {
@@ -69,19 +70,13 @@ export const RecipePublishControl = withSuspense(
 		if (!canPublish || !enabled) return null;
 
 		if (loading || !data) {
-			return (
-				<Button size="small" disabled>
-					Publish
-				</Button>
-			);
+			return <ActionButton disabled>Publish</ActionButton>;
 		}
 
 		if (notAllowed) {
 			return (
 				<Tooltip content="You can't publish web recipes, only your own.">
-					<Button size="small" disabled>
-						Publish
-					</Button>
+					<ActionButton disabled>Publish</ActionButton>
 				</Tooltip>
 			);
 		}
@@ -90,7 +85,7 @@ export const RecipePublishControl = withSuspense(
 		const isPublished = !!publishedRecipe;
 
 		const publishDate = publishedRecipe
-			? new Date(publishedRecipe.publishedAt)
+			? new Date(publishedRecipe.publishedAt ?? Date.now())
 			: new Date();
 		const updatedDate = new Date(updatedAt);
 
@@ -99,14 +94,13 @@ export const RecipePublishControl = withSuspense(
 		return (
 			<Dialog>
 				<DialogTrigger asChild>
-					<Button
-						size="small"
+					<ActionButton
 						color="accent"
 						emphasis={outOfDate ? 'light' : 'default'}
 					>
 						<Icon name={outOfDate ? 'clock' : 'send'} />
 						{isPublished ? (outOfDate ? 'Outdated' : 'Shared') : 'Share'}
-					</Button>
+					</ActionButton>
 				</DialogTrigger>
 				{publishedRecipe ? (
 					<PublishedContent
@@ -121,9 +115,9 @@ export const RecipePublishControl = withSuspense(
 			</Dialog>
 		);
 	},
-	<Button size="small" disabled>
+	<ActionButton size="small" disabled>
 		Publish
-	</Button>,
+	</ActionButton>,
 );
 
 function PublishedContent({
@@ -133,7 +127,7 @@ function PublishedContent({
 	outOfDate,
 }: {
 	recipe: Recipe;
-	publishedRecipe: { publishedAt: string; url: string };
+	publishedRecipe: { publishedAt: string | null; url: string };
 	onChange?: () => void;
 	outOfDate?: boolean;
 }) {
@@ -142,7 +136,7 @@ function PublishedContent({
 		onCompleted: onChange,
 	});
 
-	const publishDate = new Date(publishedAt);
+	const publishDate = new Date(publishedAt ?? Date.now());
 
 	return (
 		<DialogContent className="flex flex-col gap-4">
