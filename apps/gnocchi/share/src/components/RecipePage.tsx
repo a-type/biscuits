@@ -67,6 +67,7 @@ export function RecipePage({ data: response }: RecipePageProps) {
 
 	useEffect(() => {
 		if (!data?.title) return;
+		if (typeof document === 'undefined') return;
 		// set page title to recipe title on load
 		document.title = data.title;
 	}, [data?.title]);
@@ -74,6 +75,7 @@ export function RecipePage({ data: response }: RecipePageProps) {
 	useEffect(() => {
 		// set canonical link to recipe url
 		if (!url) return;
+		if (typeof document === 'undefined') return;
 		let link: HTMLLinkElement | null = document.querySelector(
 			"link[rel='canonical']",
 		);
