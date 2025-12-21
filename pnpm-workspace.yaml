@@ -58,8 +58,8 @@ catalog:
   '@tiptap/extension-typography': 2.11.5
   '@tiptap/html': 2.11.5
   date-fns: 4.1.0
-  wrangler: 4.49.0
-  '@cloudflare/workers-types': ^4.20251119.0
+  wrangler: 4.56.0
+  '@cloudflare/workers-types': ^4.20251220.0
   '@types/node': ^22
   cookie: ^1.0.2
   babel-plugin-react-compiler: ^1.0.0
