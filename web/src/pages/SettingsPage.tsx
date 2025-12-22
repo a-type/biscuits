@@ -7,6 +7,7 @@ import {
 	userInfoFragment,
 } from '@/components/user/UserInfoEditor.jsx';
 import {
+	Box,
 	Button,
 	ErrorBoundary,
 	H3,
@@ -15,7 +16,6 @@ import {
 	PageFixedArea,
 	PageRoot,
 	Tabs,
-	toast,
 } from '@a-type/ui';
 import { apps } from '@biscuits/apps';
 import { LogoutButton, useLocalStorage } from '@biscuits/client';
@@ -46,7 +46,7 @@ export interface PlanPageProps {}
 export function PlanPage({}: PlanPageProps) {
 	const result = useQuery(PlanPageData);
 	const { data } = result;
-	const [searchParams] = useSearchParams();
+	const [searchParams, updateSearchParams] = useSearchParams();
 	const returnToAppId = searchParams.get('appReferrer');
 	const returnToApp = apps.find((app) => app.id === returnToAppId) ?? undefined;
 	const returnToAppUrl =
@@ -72,14 +72,6 @@ export function PlanPage({}: PlanPageProps) {
 			navigate(`/login?returnTo=${returnTo}`);
 		}
 	}, [result, navigate, hasAccount]);
-
-	useEffect(() => {
-		if (justPaid) {
-			toast.success('Thanks for subscribing! 🎉', {
-				id: 'justPaid',
-			});
-		}
-	}, [justPaid]);
 
 	const [search, setSearch] = useSearchParams();
 	const tab = search.get('tab') ?? 'profile';
@@ -109,7 +101,33 @@ export function PlanPage({}: PlanPageProps) {
 						<Tabs.Trigger value="members">Members</Tabs.Trigger>
 						<Tabs.Trigger value="data">Data</Tabs.Trigger>
 					</Tabs.List>
-					<div className="px-2 py-6 flex-1">
+					<Box gap col className="px-2 py-6 flex-1">
+						{justPaid && (
+							<Box
+								surface
+								color="success"
+								p
+								gap
+								items="center"
+								className="mx-auto"
+							>
+								<Icon name="suitHeart" /> Thanks for subscribing!
+								<Button
+									onClick={() => {
+										updateSearchParams((params) => {
+											params.delete('paymentComplete');
+											params.delete('redirect_status');
+											return params;
+										});
+									}}
+									aria-label="Close notification"
+									emphasis="ghost"
+									className="ml-auto"
+								>
+									<Icon name="x" />
+								</Button>
+							</Box>
+						)}
 						<Tabs.Content value="profile">
 							<ErrorBoundary>
 								<Suspense>
@@ -163,7 +181,7 @@ export function PlanPage({}: PlanPageProps) {
 								</Suspense>
 							</ErrorBoundary>
 						</Tabs.Content>
-					</div>
+					</Box>
 				</Tabs>
 				<Footer />
 			</PageContent>

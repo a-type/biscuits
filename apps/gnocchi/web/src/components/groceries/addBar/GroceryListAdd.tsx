@@ -15,7 +15,6 @@ export const GroceryListAdd = forwardRef<HTMLDivElement, GroceryListAddProps>(
 			(items: string[]) => {
 				return addItems(items, {
 					listId,
-					showToast: true,
 				});
 			},
 			[listId, addItems],

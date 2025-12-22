@@ -100,7 +100,7 @@ function ListMenu({ list }: { list: List }) {
 									size="small"
 									onClick={() => {
 										client.undoHistory.undo();
-										toast.dismiss(t);
+										toast.close(t);
 									}}
 								>
 									Undo

@@ -1,5 +1,6 @@
 import { pickBestNameMatch } from '@/components/foods/lookup.jsx';
 import { groceriesState } from '@/components/groceries/state.js';
+import { RECIPE_PINNED_CUTOFF } from '@/components/recipes/constants.js';
 import { toast } from '@a-type/ui';
 import { getVerdantSync, VerdantContext } from '@biscuits/client';
 import { graphqlClient } from '@biscuits/graphql';
@@ -897,7 +898,9 @@ export async function addItems(
 			.find((r): r is PromiseFulfilledResult<any> => r.status === 'fulfilled')
 			?.value?.get('id') ?? null;
 
-	if (sourceInfo?.recipeId) {
+	const recipeId = sourceInfo?.recipeId;
+
+	if (recipeId) {
 		// record usage for this recipe
 		const recipe = await client.recipes.get(sourceInfo.recipeId).resolved;
 		if (recipe) {
@@ -948,13 +951,39 @@ export async function addItems(
 		} else {
 			message = 'Added ' + lines.length + ' items';
 		}
-		toast.success(message, {
-			id: 'add-items',
-			duration: 5000,
+
+		const recipe = recipeId
+			? await client.recipes.get(recipeId).resolved
+			: null;
+		const recipePinnedAt = recipe?.get('pinnedAt');
+
+		const toastId = toast.success(message, {
+			timeout: recipe ? 5000 : 2000,
+			data:
+				recipe && (!recipePinnedAt || recipePinnedAt < RECIPE_PINNED_CUTOFF)
+					? {
+							actions: [
+								{
+									label: 'Pin recipe',
+									onClick: async () => {
+										recipe.set('pinnedAt', Date.now());
+										toast.update(toastId, 'Recipe pinned', {
+											data: {},
+											type: 'success',
+											timeout: 2000,
+										});
+									},
+								},
+							],
+					  }
+					: undefined,
 		});
-		groceriesState.justAddedSomething = true;
 	}
+	groceriesState.justAddedSomething = true;
+	console.log(`Added items: ${lines.length}`);
 }
+
+(window as any).toast = toast;
 
 async function purchaseItem(client: Client, item: Item, batchName?: string) {
 	// also set expiration based on food info

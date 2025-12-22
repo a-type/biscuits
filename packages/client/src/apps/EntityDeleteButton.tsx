@@ -39,7 +39,7 @@ export function EntityDeleteButton({
 							onClick={() => {
 								if (client) {
 									client.undoHistory.undo();
-									toast.dismiss(id);
+									toast.close(id);
 									toast(`Restored ${entityName}`, {
 										duration: 5000,
 									});

@@ -34,21 +34,21 @@ export function TripMenu({ tripId }: TripMenuProps) {
 					onClick={() => {
 						client.trips.delete(trip.get('id'));
 						navigate('/', { skipTransition: true });
-						toast((t: any) => (
-							<span className="flex gap-2 items-center">
-								<Icon name="check" />
-								<span>Trip deleted!</span>
-								<Button
-									size="small"
-									onClick={() => {
-										client.undoHistory.undo();
-										toast.dismiss(t.id);
-									}}
-								>
-									Undo
-								</Button>
-							</span>
-						));
+						const id = toast.success('Trip deleted', {
+							data: {
+								actions: [
+									{
+										label: 'Undo',
+										onClick: () => {
+											client.undoHistory.undo();
+											toast.update(id, 'Trip restored', {
+												type: 'success',
+											});
+										},
+									},
+								],
+							},
+						});
 					}}
 				>
 					Delete trip

@@ -27,14 +27,12 @@ import { DrawingPinFilledIcon } from '@radix-ui/react-icons';
 import { useNavigate } from '@verdant-web/react-router';
 import classNames from 'classnames';
 import cuid from 'cuid';
-import { addWeeks } from 'date-fns/addWeeks';
 import { memo, Suspense, useState } from 'react';
+import { RECIPE_PINNED_CUTOFF } from '../constants.js';
 import { RecipeMainImageViewer } from '../viewer/RecipeMainImageViewer.jsx';
 import { RecipePinToggle } from '../viewer/RecipePinToggle.jsx';
 import { RecipeTagsViewer } from '../viewer/RecipeTagsViewer.jsx';
 import { useGridStyle } from './hooks.js';
-
-const THREE_WEEKS_AGO = addWeeks(Date.now(), -3).getTime();
 
 export const RecipeListItem = memo(function RecipeListItem({
 	recipe,
@@ -118,7 +116,7 @@ export function RecipeListItemMenu({
 }) {
 	const deleteRecipe = hooks.useDeleteRecipe();
 	const { pinnedAt } = hooks.useWatch(recipe);
-	const isPinned = pinnedAt && pinnedAt > THREE_WEEKS_AGO;
+	const isPinned = pinnedAt && pinnedAt > RECIPE_PINNED_CUTOFF;
 	const client = hooks.useClient();
 	const navigate = useNavigate();
 	const copyRecipe = async () => {

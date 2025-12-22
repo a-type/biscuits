@@ -16,7 +16,7 @@ import { fractionToText } from '@a-type/utils';
 import { convertUnits, lookupUnit } from '@gnocchi.biscuits/conversion';
 import { RecipeIngredientsItem } from '@gnocchi.biscuits/verdant';
 import classNames from 'classnames';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { NoteEditor } from '../editor/NoteEditor.jsx';
 import { IngredientText } from './IngredientText.jsx';
 
@@ -84,8 +84,10 @@ export function RecipeIngredientViewer({
 	}, [setConversion]);
 
 	const add = hooks.useAddIngredients();
+	const [added, setAdded] = useState(false);
 	const addToList = useCallback(async () => {
-		add([ingredient.getSnapshot()], { multiplier, recipeId, showToast: true });
+		add([ingredient.getSnapshot()], { multiplier, recipeId });
+		setAdded(true);
 	}, [ingredient, multiplier, add, recipeId]);
 
 	return (
@@ -133,8 +135,8 @@ export function RecipeIngredientViewer({
 						</>
 					)}
 					{!isSectionHeader && !disableAddToList && (
-						<Button emphasis="ghost" onClick={addToList}>
-							<Icon name="add_to_list" className="color-gray7" />
+						<Button emphasis="ghost" onClick={addToList} disabled={added}>
+							<Icon name={added ? 'check' : 'add_to_list'} />
 						</Button>
 					)}
 					{!disableAddNote && (
@@ -145,11 +147,11 @@ export function RecipeIngredientViewer({
 									className={
 										showNote
 											? undefined
-											: 'color-primaryDark fill-primary stroke-primaryDark'
+											: 'color-primary-dark fill-primary stroke-primary-dark'
 									}
 								/>
 							) : (
-								<Icon name="add_note" className="color-gray7" />
+								<Icon name="add_note" />
 							)}
 						</Button>
 					)}
@@ -157,7 +159,7 @@ export function RecipeIngredientViewer({
 			</div>
 			<CollapsibleRoot
 				open={!!conversion}
-				className="mr-auto self-start italic color-gray7"
+				className="mr-auto self-start italic"
 			>
 				<CollapsibleContent className="pr-2">
 					<span className="text-xs inline-flex items-center gap-1">

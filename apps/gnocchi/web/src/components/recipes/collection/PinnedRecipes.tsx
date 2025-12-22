@@ -9,18 +9,15 @@ import {
 import { makeRecipeLink } from '@/components/recipes/makeRecipeLink.js';
 import { AddToListButton } from '@/components/recipes/viewer/AddToListButton.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { Button, CollapsibleSimple, Divider, H2, Icon } from '@a-type/ui';
+import { CollapsibleSimple, Divider, H2, Icon } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { Link } from '@verdant-web/react-router';
 import classNames from 'classnames';
-import { addWeeks } from 'date-fns/addWeeks';
-import { PinIcon } from './PinIcon.jsx';
+import { RecipePinToggle } from '../viewer/RecipePinToggle.jsx';
 
 export interface PinnedRecipesProps {
 	className?: string;
 }
-
-export const THREE_WEEKS_AGO = addWeeks(Date.now(), -3).getTime();
 
 export function PinnedRecipes({ className }: PinnedRecipesProps) {
 	const pinnedRecipes = usePinnedRecipes();
@@ -58,9 +55,7 @@ function PinnedRecipeListItem({ recipe }: { recipe: Recipe }) {
 
 	return (
 		<div className="flex flex-row items-center gap-1 border border-solid border-gray rounded-lg px-3 py-2">
-			<Button emphasis="primary" onClick={() => recipe.set('pinnedAt', null)}>
-				<PinIcon isPinned />
-			</Button>
+			<RecipePinToggle recipe={recipe} />
 			<Link
 				to={makeRecipeLink(recipe, '')}
 				className={classNames(

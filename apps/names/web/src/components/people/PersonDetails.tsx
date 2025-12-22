@@ -106,26 +106,25 @@ function Location({ person }: { person: Person }) {
 	hooks.useWatch(geolocation);
 	const currentLocation = useGeolocation();
 
-	const client = hooks.useClient();
 	const remove = () => {
+		const prev = person.get('geolocation')?.getSnapshot();
 		person.set('geolocation', null);
-		const id = toast(
-			<Box gap="sm" items="center">
-				<span>Location removed</span>
-				<Button
-					size="small"
-					onClick={() => {
-						client.undoHistory.undo();
-						toast.remove(id);
-					}}
-				>
-					Undo
-				</Button>
-			</Box>,
-			{
-				duration: 10 * 1000,
+		const id = toast.success('Location removed', {
+			timeout: 10_000,
+			data: {
+				actions: [
+					{
+						label: 'Undo',
+						onClick: () => {
+							person.set('geolocation', prev);
+							toast.update(id, 'Location restored', {
+								type: 'success',
+							});
+						},
+					},
+				],
 			},
-		);
+		});
 	};
 
 	if (!geolocation) return null;

@@ -3,7 +3,7 @@ import { useLocalStorage } from '@biscuits/client';
 import { useSearchParams } from '@verdant-web/react-router';
 import { useCallback, useMemo } from 'react';
 import { removeStopwords } from 'stopword';
-import { THREE_WEEKS_AGO } from './PinnedRecipes.jsx';
+import { RECIPE_PINNED_CUTOFF } from '../constants.js';
 
 export function useRecipeTagFilter() {
 	const [params, setParams] = useSearchParams();
@@ -199,7 +199,7 @@ export function usePinnedRecipes() {
 	return hooks.useAllRecipes({
 		index: {
 			where: 'pinnedAt',
-			gt: THREE_WEEKS_AGO,
+			gt: RECIPE_PINNED_CUTOFF,
 			lt: endOfDay,
 		},
 		key: 'pinnedRecipes',

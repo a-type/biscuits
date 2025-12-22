@@ -21,7 +21,6 @@ export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
 		async (items: string[]) => {
 			await addItems(items, {
 				listId,
-				showToast: true,
 			});
 			if (!keepOpenOnSelect) {
 				setOpen(false);

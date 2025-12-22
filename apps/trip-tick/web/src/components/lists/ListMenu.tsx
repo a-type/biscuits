@@ -30,21 +30,21 @@ export function ListMenu({ list }: { list: List }) {
 					onClick={() => {
 						client.lists.delete(list.get('id'));
 						navigate('/');
-						toast((t: any) => (
-							<span className="flex gap-2 items-center">
-								<Icon name="check" />
-								<span>List deleted!</span>
-								<Button
-									size="small"
-									onClick={() => {
-										client.undoHistory.undo();
-										toast.dismiss(t.id);
-									}}
-								>
-									Undo
-								</Button>
-							</span>
-						));
+						const id = toast.success('List deleted', {
+							data: {
+								actions: [
+									{
+										label: 'Undo',
+										onClick: () => {
+											client.undoHistory.undo();
+											toast.update(id, 'List restored', {
+												type: 'success',
+											});
+										},
+									},
+								],
+							},
+						});
 					}}
 				>
 					Delete list
