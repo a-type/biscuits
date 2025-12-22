@@ -1,4 +1,4 @@
-import { hooks } from '@/stores/groceries/index.js';
+import { useCreateCategory } from '@/stores/groceries/mutations.js';
 import { FormikForm, SubmitButton, TextField } from '@a-type/ui';
 import { Category } from '@gnocchi.biscuits/verdant';
 
@@ -9,7 +9,7 @@ export function NewCategoryForm({
 	onDone: (category: Category) => void;
 	autoFocus?: boolean;
 }) {
-	const createCategory = hooks.useCreateCategory();
+	const createCategory = useCreateCategory();
 	return (
 		<div className="flex flex-col gap-2 items-stretch w-full">
 			<FormikForm

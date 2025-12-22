@@ -1,6 +1,7 @@
 import { RecipeNote } from '@/components/recipes/viewer/RecipeNote.jsx';
 import { saveHubRecipeOnboarding } from '@/onboarding/saveHubRecipeOnboarding.js';
 import { hooks } from '@/stores/groceries/index.js';
+import { useAddIngredients } from '@/stores/groceries/mutations.js';
 import {
 	ActionBar,
 	ActionButton,
@@ -59,7 +60,7 @@ export function AddToListDialog({
 		}
 	}, [isReallyOpen, defaultMultiplier]);
 
-	const addItems = hooks.useAddIngredients();
+	const addItems = useAddIngredients();
 	const allIngredients = useAllAddableIngredients(recipe);
 	const [unchecked, setUnchecked] = useState({} as Record<string, boolean>);
 

@@ -3,6 +3,7 @@ import { FoodNamesEditor } from '@/components/foods/FoodNamesEditor.jsx';
 import { ListSelect } from '@/components/groceries/lists/ListSelect.jsx';
 import { useExpiresText } from '@/components/pantry/hooks.js';
 import { hooks } from '@/stores/groceries/index.js';
+import { useChangeFoodCanonicalName } from '@/stores/groceries/mutations.js';
 import {
 	Box,
 	Button,
@@ -248,7 +249,7 @@ function FoodDetailView({
 const Row = withClassName('div', 'flex flex-row items-center gap-md');
 
 const FoodNameEditor = ({ food }: { food: Food }) => {
-	const changeName = hooks.useChangeFoodCanonicalName();
+	const changeName = useChangeFoodCanonicalName();
 	const [newName, setNewName] = useState(food.get('canonicalName'));
 	const [editing, setEditing] = useState(false);
 

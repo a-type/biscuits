@@ -1,5 +1,6 @@
 import { useUnitConversion } from '@/components/recipes/viewer/unitConversion.js';
 import { hooks } from '@/stores/groceries/index.js';
+import { useAddIngredients } from '@/stores/groceries/mutations.js';
 import {
 	Button,
 	CollapsibleContent,
@@ -54,8 +55,8 @@ export function RecipeIngredientViewer({
 	const convertedValue = useMemo(() => {
 		if (!conversion || !officialUnit) return undefined;
 		const result = convertUnits(quantity * multiplier)
-			.from(officialUnit.abbr)
-			.to(conversion);
+			.from(officialUnit.abbr as any)
+			.to(conversion as any);
 		return `${fractionToText(result)} ${friendlyUnit(
 			conversion,
 			result === 1,
@@ -66,7 +67,7 @@ export function RecipeIngredientViewer({
 		if (!officialUnit) return [];
 		try {
 			const possibilities = convertUnits()
-				.from(officialUnit.abbr)
+				.from(officialUnit.abbr as any)
 				.possibilities();
 			return possibilities
 				.filter((opt: string) => usefulUnits.includes(opt))
@@ -83,7 +84,7 @@ export function RecipeIngredientViewer({
 		setConversion(undefined);
 	}, [setConversion]);
 
-	const add = hooks.useAddIngredients();
+	const add = useAddIngredients();
 	const [added, setAdded] = useState(false);
 	const addToList = useCallback(async () => {
 		add([ingredient.getSnapshot()], { multiplier, recipeId });
@@ -184,7 +185,7 @@ export function RecipeIngredientViewer({
 
 const defaultConvert = convertUnits();
 function friendlyUnit(abbr: string, singular = false) {
-	const details = defaultConvert.describe(abbr);
+	const details = defaultConvert.describe(abbr as any);
 	if (!details) return '';
 	return singular ? details.singular : details.plural;
 }

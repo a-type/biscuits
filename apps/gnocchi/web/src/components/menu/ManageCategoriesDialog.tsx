@@ -1,4 +1,4 @@
-import { hooks } from '@/stores/groceries/index.js';
+import { useResetCategoriesToDefault } from '@/stores/groceries/mutations.js';
 import {
 	Button,
 	Dialog,
@@ -13,7 +13,7 @@ import { CategoryManager } from '../groceries/categories/CategoryManager.js';
 import { menuState } from './state.js';
 
 export function ManageCategoriesDialog({ children }: { children: ReactNode }) {
-	const resetToDefaults = hooks.useResetCategoriesToDefault();
+	const resetToDefaults = useResetCategoriesToDefault();
 
 	return (
 		<Dialog

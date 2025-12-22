@@ -2,7 +2,10 @@ import { TextLink } from '@/components/nav/Link.jsx';
 import { recipeSavePromptState } from '@/components/recipes/savePrompt/state.js';
 import { firstTimeOnboarding } from '@/onboarding/firstTimeOnboarding.js';
 import { saveHubRecipeOnboarding } from '@/onboarding/saveHubRecipeOnboarding.js';
-import { hooks } from '@/stores/groceries/index.js';
+import {
+	useAddRecipeFromSlug,
+	useAddRecipeFromUrl,
+} from '@/stores/groceries/mutations.js';
 import {
 	Button,
 	Dialog,
@@ -52,8 +55,8 @@ export function RecipeSavePrompt({}: RecipeSavePromptProps) {
 		}
 	}, [isGnocchi, hasScannedBefore, beginOnboarding, cancelFirstTimeOnboarding]);
 
-	const addRecipeFromUrl = hooks.useAddRecipeFromUrl();
-	const addRecipeFromSlug = hooks.useAddRecipeFromSlug();
+	const addRecipeFromUrl = useAddRecipeFromUrl();
+	const addRecipeFromSlug = useAddRecipeFromSlug();
 	const [loading, setLoading] = useState(false);
 	const save = async () => {
 		setLoading(true);

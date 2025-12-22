@@ -1,6 +1,6 @@
 import { AddBar } from '@/components/addBar/AddBar.jsx';
 import { useListId } from '@/contexts/ListContext.jsx';
-import { hooks } from '@/stores/groceries/index.js';
+import { useAddItems } from '@/stores/groceries/mutations.js';
 import { forwardRef, useCallback } from 'react';
 
 export interface GroceryListAddProps {
@@ -10,7 +10,7 @@ export interface GroceryListAddProps {
 export const GroceryListAdd = forwardRef<HTMLDivElement, GroceryListAddProps>(
 	function GroceryListAddImpl({ ...rest }, ref) {
 		const listId = useListId() || null;
-		const addItems = hooks.useAddItems();
+		const addItems = useAddItems();
 		const onAdd = useCallback(
 			(items: string[]) => {
 				return addItems(items, {

@@ -1,4 +1,3 @@
-import { graphql } from '@/graphql.js';
 import {
 	Box,
 	clsx,
@@ -13,7 +12,7 @@ import {
 	useField,
 } from '@a-type/ui';
 import { DomainRouteView } from '@biscuits/client';
-import { useMutation, useSuspenseQuery } from '@biscuits/graphql';
+import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
 import Link from '@tiptap/extension-link';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';

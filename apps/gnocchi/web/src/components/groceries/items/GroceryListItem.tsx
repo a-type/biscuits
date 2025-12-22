@@ -4,6 +4,7 @@ import useMergedRef from '@/hooks/useMergedRef.js';
 import { useIsFirstRender, usePrevious } from '@/hooks/usePrevious.js';
 import { categorizeOnboarding } from '@/onboarding/categorizeOnboarding.js';
 import { hooks } from '@/stores/groceries/index.js';
+import { useToggleItemPurchased } from '@/stores/groceries/mutations.js';
 import {
 	Button,
 	Checkbox,
@@ -82,7 +83,7 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 		const isPartiallyPurchased = false;
 		const displayString = useItemDisplayText(item);
 
-		const toggleItemPurchased = hooks.useToggleItemPurchased();
+		const toggleItemPurchased = useToggleItemPurchased();
 		const togglePurchased = useCallback(async () => {
 			await toggleItemPurchased(item);
 		}, [item]);

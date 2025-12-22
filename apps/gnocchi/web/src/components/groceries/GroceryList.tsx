@@ -2,7 +2,10 @@ import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
 import { useListId } from '@/contexts/ListContext.jsx';
 import { firstTimeOnboarding } from '@/onboarding/firstTimeOnboarding.js';
 import { saveHubRecipeOnboarding } from '@/onboarding/saveHubRecipeOnboarding.js';
-import { hooks } from '@/stores/groceries/index.js';
+import {
+	useDeleteItem,
+	useSetItemCategory,
+} from '@/stores/groceries/mutations.js';
 import { H3, P } from '@a-type/ui';
 import { OnboardingBanner, PromoteSubscriptionButton } from '@biscuits/client';
 import {
@@ -187,8 +190,8 @@ function useOnDragStart() {
 }
 
 function useOnDragEnd() {
-	const setItemCategory = hooks.useSetItemCategory();
-	const deleteItem = hooks.useDeleteItem();
+	const setItemCategory = useSetItemCategory();
+	const deleteItem = useDeleteItem();
 
 	return useCallback(
 		async ({ over, active }: DragEndEvent) => {

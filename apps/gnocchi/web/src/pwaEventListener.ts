@@ -1,5 +1,6 @@
-import { addItems, verdant } from '@/stores/groceries/index.js';
+import { verdant } from '@/stores/groceries/index.js';
 import { recipeSavePromptState } from './components/recipes/savePrompt/state.js';
+import { addItems } from './stores/groceries/mutations.js';
 
 export function attachToPwaEvents() {
 	if (typeof window === 'undefined') return;
@@ -9,8 +10,7 @@ export function attachToPwaEvents() {
 		if (event.data.type === 'pwa-share') {
 			const items = event.data.items as string[] | undefined;
 			if (items) {
-				const client = await verdant.open();
-				await addItems(client, items, {
+				await addItems(verdant, items, {
 					sourceInfo: { title: 'Shared list' },
 				});
 				console.log('Added shared items to list');

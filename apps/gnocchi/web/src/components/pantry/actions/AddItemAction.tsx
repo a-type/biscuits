@@ -1,4 +1,4 @@
-import { hooks } from '@/stores/groceries/index.js';
+import { useAddPantryItem } from '@/stores/groceries/mutations.js';
 import {
 	ActionButton,
 	Button,
@@ -14,7 +14,7 @@ import {
 import { PlusIcon } from '@radix-ui/react-icons';
 
 export function AddItemAction() {
-	const addItem = hooks.useAddPantryItem();
+	const addItem = useAddPantryItem();
 
 	return (
 		<Dialog>

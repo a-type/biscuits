@@ -1,4 +1,5 @@
 import { hooks } from '@/stores/groceries/index.js';
+import { useAddRecipeIngredients } from '@/stores/groceries/mutations.js';
 import {
 	Box,
 	Button,
@@ -294,7 +295,7 @@ function AddIngredientsForm({
 		false,
 	);
 
-	const addIngredients = hooks.useAddRecipeIngredients();
+	const addIngredients = useAddRecipeIngredients();
 	return (
 		<FormikForm
 			initialValues={{ text: storedValue || '' }}

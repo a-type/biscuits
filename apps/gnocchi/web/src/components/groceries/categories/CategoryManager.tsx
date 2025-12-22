@@ -1,4 +1,8 @@
 import { hooks } from '@/stores/groceries/index.js';
+import {
+	useCreateCategory,
+	useDeleteCategory,
+} from '@/stores/groceries/mutations.js';
 import { Button, FormikForm, SubmitButton, TextField } from '@a-type/ui';
 import { DndContext, DragOverlay, useDndMonitor } from '@dnd-kit/core';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
@@ -107,7 +111,7 @@ function CategoryManagerItem({
 	nodeProps?: any;
 }) {
 	hooks.useWatch(category);
-	const deleteCategory = hooks.useDeleteCategory();
+	const deleteCategory = useDeleteCategory();
 
 	return (
 		<div className="flex flex-row items-center gap-3 w-full" {...nodeProps}>
@@ -194,7 +198,7 @@ function CategoryDragOverlay() {
 }
 
 function AddCategoryForm() {
-	const createCategory = hooks.useCreateCategory();
+	const createCategory = useCreateCategory();
 	return (
 		<FormikForm
 			initialValues={{ name: '' }}

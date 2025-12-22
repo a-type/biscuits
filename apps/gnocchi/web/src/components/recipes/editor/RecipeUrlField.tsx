@@ -1,4 +1,5 @@
 import { hooks } from '@/stores/groceries/index.js';
+import { useUpdateRecipeFromUrl } from '@/stores/groceries/mutations.js';
 import { Button, Dialog, Icon, LiveUpdateTextField } from '@a-type/ui';
 import { LoginButton, useIsLoggedIn } from '@biscuits/client';
 import { Recipe } from '@gnocchi.biscuits/verdant';
@@ -12,7 +13,7 @@ export function RecipeUrlField({ recipe }: RecipeUrlFieldProps) {
 	const { url } = hooks.useWatch(recipe);
 	const [scanning, setScanning] = useState(false);
 	const [isLoggedIn] = useIsLoggedIn();
-	const updateRecipeFromUrl = hooks.useUpdateRecipeFromUrl();
+	const updateRecipeFromUrl = useUpdateRecipeFromUrl();
 
 	const scan = async () => {
 		if (url) {

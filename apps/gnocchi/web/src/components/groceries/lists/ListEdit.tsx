@@ -1,4 +1,5 @@
 import { hooks } from '@/stores/groceries/index.js';
+import { useDeleteList } from '@/stores/groceries/mutations.js';
 import {
 	Button,
 	ColorPicker,
@@ -21,7 +22,7 @@ export interface ListEditProps {
 export function ListEdit({ listId }: ListEditProps) {
 	const list = hooks.useList(listId);
 	hooks.useWatch(list);
-	const deleteList = hooks.useDeleteList();
+	const deleteList = useDeleteList();
 
 	const [open, setOpen] = useState(false);
 

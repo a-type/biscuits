@@ -1,4 +1,4 @@
-import { hooks } from '@/stores/groceries/index.js';
+import { useDeleteItem } from '@/stores/groceries/mutations.js';
 import { Button, ButtonProps } from '@a-type/ui';
 import { Item } from '@gnocchi.biscuits/verdant';
 
@@ -7,7 +7,7 @@ export interface ItemDeleteButtonProps extends Omit<ButtonProps, 'onClick'> {
 }
 
 export function ItemDeleteButton({ item, ...rest }: ItemDeleteButtonProps) {
-	const deleteItem = hooks.useDeleteItem();
+	const deleteItem = useDeleteItem();
 	const onDelete = () => {
 		deleteItem(item);
 	};

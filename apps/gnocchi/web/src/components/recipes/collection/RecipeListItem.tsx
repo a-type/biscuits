@@ -3,6 +3,7 @@ import { RecipeEditTags } from '@/components/recipes/editor/RecipeAddTag.jsx';
 import { makeRecipeLink } from '@/components/recipes/makeRecipeLink.js';
 import { AddToListButton } from '@/components/recipes/viewer/AddToListButton.jsx';
 import { hooks } from '@/stores/groceries/index.js';
+import { useDeleteRecipe } from '@/stores/groceries/mutations.js';
 import {
 	Button,
 	CardActions,
@@ -114,7 +115,7 @@ export function RecipeListItemMenu({
 	recipe: Recipe;
 	className?: string;
 }) {
-	const deleteRecipe = hooks.useDeleteRecipe();
+	const deleteRecipe = useDeleteRecipe();
 	const { pinnedAt } = hooks.useWatch(recipe);
 	const isPinned = pinnedAt && pinnedAt > RECIPE_PINNED_CUTOFF;
 	const client = hooks.useClient();

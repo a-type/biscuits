@@ -1,7 +1,11 @@
-import { graphql } from '@/graphql.js';
 import { hooks } from '@/stores/groceries/index.js';
 import { Card } from '@a-type/ui';
-import { FragmentOf, readFragment, useSuspenseQuery } from '@biscuits/graphql';
+import {
+	FragmentOf,
+	graphql,
+	readFragment,
+	useSuspenseQuery,
+} from '@biscuits/graphql';
 import { RecipeListItem } from '../collection/RecipeListItem.jsx';
 
 const publishedRecipeCardFragment = graphql(`

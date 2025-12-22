@@ -3,6 +3,10 @@ import { OpenFoodDetailButton } from '@/components/foods/OpenFoodDetailButton.js
 import { groceriesState } from '@/components/groceries/state.js';
 import { hooks } from '@/stores/groceries/index.js';
 import {
+	useAddItems,
+	useClearPantryItem,
+} from '@/stores/groceries/mutations.js';
+import {
 	Button,
 	CardActions,
 	CardFooter,
@@ -54,7 +58,7 @@ export function PantryListItem({
 		isStaple,
 	} = hooks.useWatch(item);
 
-	const clearItem = hooks.useClearPantryItem();
+	const clearItem = useClearPantryItem();
 	const clear = () => {
 		clearItem(item);
 		setLeaving(true);
@@ -201,7 +205,7 @@ const QuickAddButton = ({
 }) => {
 	const { canonicalName: foodName } = hooks.useWatch(food);
 
-	const addItems = hooks.useAddItems();
+	const addItems = useAddItems();
 
 	const repurchaseItem = useCallback(async () => {
 		addItems([food.get('canonicalName')], {

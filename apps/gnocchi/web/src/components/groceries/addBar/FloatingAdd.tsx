@@ -1,7 +1,7 @@
 import { AddPane } from '@/components/addBar/AddPane.jsx';
 import { useKeepOpenAfterSelect } from '@/components/addBar/hooks.js';
 import { useListId } from '@/contexts/ListContext.jsx';
-import { hooks } from '@/stores/groceries/index.js';
+import { useAddItems } from '@/stores/groceries/mutations.js';
 import { Button, Icon } from '@a-type/ui';
 import { MenuDisclose } from '@biscuits/client';
 import classNames from 'classnames';
@@ -13,7 +13,7 @@ export interface FloatingAddProps {
 
 export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
 	const listId = useListId() || null;
-	const addItems = hooks.useAddItems();
+	const addItems = useAddItems();
 	const [open, setOpen] = useState(false);
 
 	const [keepOpenOnSelect] = useKeepOpenAfterSelect();
