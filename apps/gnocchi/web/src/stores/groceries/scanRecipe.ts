@@ -1,3 +1,4 @@
+import { pickBestNameMatch } from '@/components/foods/lookup.jsx';
 import { detailedInstructionsToDoc, instructionsToDoc } from '@/lib/tiptap.js';
 import { toast } from '@a-type/ui';
 import { showSubscriptionPromotion } from '@biscuits/client';
@@ -101,20 +102,15 @@ export async function getScannedRecipe(
 					try {
 						if (!ingredient.food) return ingredient;
 
-						const lookup = await client.foods.findOne({
+						const lookups = await client.foods.findAll({
 							index: {
 								where: 'nameLookup',
 								equals: ingredient.food,
 							},
 						}).resolved;
-						// make this match a little more strict - avoids things like
-						// "sugar" matching "brown sugar"
-						if (
-							lookup &&
-							(lookup.get('canonicalName') === ingredient.food ||
-								lookup.get('alternateNames').includes(ingredient.food))
-						) {
-							ingredient.food = lookup.get('canonicalName');
+						const best = pickBestNameMatch(lookups, ingredient.food, true);
+						if (best) {
+							ingredient.food = best.get('canonicalName');
 						}
 						return ingredient;
 					} catch (err) {

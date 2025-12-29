@@ -476,14 +476,15 @@ export function useAddRecipeIngredients() {
 						if (food) {
 							// attempt to find a matching food
 							try {
-								const lookup = await client.foods.findOne({
+								const lookups = await client.foods.findAll({
 									index: {
 										where: 'nameLookup',
 										equals: parsedItem.food,
 									},
 								}).resolved;
-								if (lookup) {
-									food = lookup.get('canonicalName');
+								const best = pickBestNameMatch(lookups, parsedItem.food, true);
+								if (best) {
+									food = best.get('canonicalName');
 								}
 							} catch (err) {
 								// ignore

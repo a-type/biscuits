@@ -196,10 +196,7 @@ function IngredientMenu({
 					>
 						Edit details
 					</DropdownMenuItem>
-					<DropdownMenuItem
-						className="color-attention-dark"
-						onSelect={onDelete}
-					>
+					<DropdownMenuItem color="attention" onSelect={onDelete}>
 						<span>Delete</span>
 						<DropdownMenuItemRightSlot>
 							<Icon name="trash" />

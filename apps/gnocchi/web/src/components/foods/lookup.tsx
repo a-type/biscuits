@@ -24,6 +24,7 @@ export function pickBestNameMatch(
 	name: string,
 	exactOnly = false,
 ): Food | null {
+	console.log('Picking best match for', name, 'from', foods);
 	const normalized = depluralize(name).toLowerCase();
 	const exactCanonical = foods.find(
 		(f) => f.get('canonicalName') === normalized,
