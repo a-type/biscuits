@@ -57,22 +57,22 @@ export function PublicationPage({ data }: PublicationPageProps) {
 					{publication.recipesConnection.edges.map(({ node }) => (
 						<Card key={node.id}>
 							{node.data.mainImageUrl && (
-								<Card.Image asChild>
-									<img src={node.data.mainImageUrl} alt={node.data.title} />
-								</Card.Image>
+								<Card.Image
+									render={
+										<img src={node.data.mainImageUrl} alt={node.data.title} />
+									}
+								/>
 							)}
 							<Card.Main
-								asChild
 								className={node.data.mainImageUrl ? 'min-h-120px' : ''}
+								render={<Link to={node.url} />}
 							>
-								<Link to={node.url}>
-									<Card.Title>{node.data.title}</Card.Title>
-									{node.data.prelude && (
-										<Card.Content>
-											{tiptapToString(node.data.prelude)}
-										</Card.Content>
-									)}
-								</Link>
+								<Card.Title>{node.data.title}</Card.Title>
+								{node.data.prelude && (
+									<Card.Content>
+										{tiptapToString(node.data.prelude)}
+									</Card.Content>
+								)}
 							</Card.Main>
 						</Card>
 					))}

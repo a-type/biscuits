@@ -37,10 +37,8 @@ function ProjectsListItem({ item }: { item: Project }) {
 	hooks.useWatch(image);
 	return (
 		<CardRoot className="h-240px">
-			<CardMain asChild>
-				<Link to={`/projects/${id}`} />
-			</CardMain>
-			<CardImage asChild>{image.url && <img src={image.url} />}</CardImage>
+			<CardMain render={<Link to={`/projects/${id}`} />} />
+			{image.url && <CardImage render={<img src={image.url} />} />}
 		</CardRoot>
 	);
 }

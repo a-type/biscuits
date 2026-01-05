@@ -62,11 +62,12 @@ export function AddTag({ className, onAdd }: AddTagProps) {
 						</FormikForm.SubmitButton>
 					</Dialog.Actions>
 				</FormikForm>
-			</Dialog.Content>{' '}
-			<Dialog.Trigger asChild className={className}>
-				<Button size="small" onClick={() => setOpen(true)}>
-					<Icon name="plus" /> New Tag
-				</Button>
+			</Dialog.Content>
+			<Dialog.Trigger
+				className={className}
+				render={<Button size="small" onClick={() => setOpen(true)} />}
+			>
+				<Icon name="plus" /> New Tag
 			</Dialog.Trigger>
 		</Dialog>
 	);

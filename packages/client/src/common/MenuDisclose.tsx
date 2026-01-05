@@ -1,11 +1,5 @@
-import { Button, ButtonProps, clsx, Slot } from '@a-type/ui';
-import {
-	ComponentProps,
-	createContext,
-	forwardRef,
-	useContext,
-	useState,
-} from 'react';
+import { Button, ButtonProps, clsx, SlotDiv, SlotDivProps } from '@a-type/ui';
+import { createContext, forwardRef, useContext, useState } from 'react';
 import { useMergedRef, useOnPointerDownOutside } from '../react.js';
 import './MenuDisclose.css';
 
@@ -18,21 +12,19 @@ const MenuDiscloseContext = createContext<MenuDiscloseContextValue>({
 	setOpen: () => {},
 });
 
-export interface MenuDiscloseRootProps extends ComponentProps<'div'> {
+export interface MenuDiscloseRootProps extends SlotDivProps {
 	open?: boolean;
 	onOpenChange?: (open: boolean) => void;
-	asChild?: boolean;
 }
 
 export const MenuDiscloseRoot = forwardRef<
 	HTMLDivElement,
 	MenuDiscloseRootProps
 >(function MenuDiscloseRootImpl(
-	{ children, open: userOpen, onOpenChange, asChild, className, ...rest },
+	{ children, open: userOpen, onOpenChange, className, ...rest },
 	ref,
 ) {
 	const [internalOpen, setInternalOpen] = useState(false);
-	const Comp = asChild ? Slot : 'div';
 
 	const open = userOpen ?? internalOpen;
 
@@ -51,7 +43,7 @@ export const MenuDiscloseRoot = forwardRef<
 
 	return (
 		<MenuDiscloseContext.Provider value={{ open, setOpen }}>
-			<Comp
+			<SlotDiv
 				{...rest}
 				ref={finalRef as any}
 				className={clsx('relative', 'menu-disclose-root', className)}
@@ -60,26 +52,21 @@ export const MenuDiscloseRoot = forwardRef<
 				{open && (
 					<div className="opacity-0 bg-overlay fixed inset-0 z-0 pointer-events-none animate-fade-in animate-delay-200 animate-forwards" />
 				)}
-			</Comp>
+			</SlotDiv>
 		</MenuDiscloseContext.Provider>
 	);
 });
 
-export interface MenuDiscloseTriggerProps
-	extends Omit<ComponentProps<'button'>, 'color'> {
-	asChild?: boolean;
-}
+export interface MenuDiscloseTriggerProps extends Omit<ButtonProps, 'color'> {}
 
 export const MenuDiscloseTrigger = forwardRef<
 	HTMLButtonElement,
 	MenuDiscloseTriggerProps
->(function MenuDiscloseTriggerImpl({ children, asChild, ...rest }, ref) {
+>(function MenuDiscloseTriggerImpl({ children, ...rest }, ref) {
 	const { setOpen, open } = useContext(MenuDiscloseContext);
 
-	const Comp = asChild ? Slot : DefaultButton;
-
 	return (
-		<Comp
+		<DefaultButton
 			{...rest}
 			ref={ref}
 			className={clsx(
@@ -94,43 +81,34 @@ export const MenuDiscloseTrigger = forwardRef<
 			}}
 		>
 			{children}
-		</Comp>
+		</DefaultButton>
 	);
 });
 
-const DefaultButton = forwardRef<HTMLButtonElement, ButtonProps>(
-	function DefaultButton({ className, ...props }, ref) {
-		return (
-			<Button
-				emphasis="primary"
-				className={clsx('absolute shadow-xl', className)}
-				{...props}
-			/>
-		);
-	},
-);
-
-export interface MenuDiscloseContentProps extends ComponentProps<'div'> {
-	asChild?: boolean;
+function DefaultButton({ className, ...props }: ButtonProps) {
+	return (
+		<Button
+			emphasis="primary"
+			className={clsx('absolute shadow-xl', className)}
+			{...props}
+		/>
+	);
 }
+
+export interface MenuDiscloseContentProps extends SlotDivProps {}
 
 export const MenuDiscloseContent = forwardRef<
 	HTMLDivElement,
 	MenuDiscloseContentProps
->(function MenuDiscloseContentImpl(
-	{ children, className, asChild, ...rest },
-	ref,
-) {
+>(function MenuDiscloseContentImpl({ children, className, ...rest }, ref) {
 	const { open } = useContext(MenuDiscloseContext);
 	const [disableAnimation, setDisableAnimation] = useState(true);
 	if (disableAnimation && open) {
 		setDisableAnimation(false);
 	}
 
-	const Comp = asChild ? Slot : 'div';
-
 	return (
-		<Comp
+		<SlotDiv
 			{...rest}
 			ref={ref}
 			className={clsx(
@@ -144,7 +122,7 @@ export const MenuDiscloseContent = forwardRef<
 			)}
 		>
 			{children}
-		</Comp>
+		</SlotDiv>
 	);
 });
 

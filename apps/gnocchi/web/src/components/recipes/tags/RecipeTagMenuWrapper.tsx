@@ -5,11 +5,11 @@ import {
 	ContextMenuRoot,
 	ContextMenuTrigger,
 } from '@a-type/ui';
-import { ReactNode } from 'react';
+import { ReactElement } from 'react';
 
 export interface RecipeTagMenuWrapperProps {
 	tagName: string;
-	children: ReactNode;
+	children: ReactElement;
 }
 
 export function RecipeTagMenuWrapper({
@@ -18,7 +18,7 @@ export function RecipeTagMenuWrapper({
 }: RecipeTagMenuWrapperProps) {
 	return (
 		<ContextMenuRoot>
-			<ContextMenuTrigger asChild>{children}</ContextMenuTrigger>
+			<ContextMenuTrigger render={children} />
 			<ContextMenuContent>
 				<ContextMenuItem
 					onClick={() => (recipeTagEditorState.editingTag = tagName)}

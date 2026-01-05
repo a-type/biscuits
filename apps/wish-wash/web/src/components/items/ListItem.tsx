@@ -109,10 +109,12 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 						{type === 'idea' ||
 							(type === 'link' && !link && <SearchButton item={item} />)}
 						{link && (
-							<Button asChild emphasis="default" size="small">
-								<Link to={link} newTab>
-									<Icon name="link" /> View
-								</Link>
+							<Button
+								emphasis="default"
+								size="small"
+								render={<Link to={link} newTab />}
+							>
+								<Icon name="link" /> View
 							</Button>
 						)}
 						{type === 'link' && (

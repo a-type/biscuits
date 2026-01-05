@@ -23,18 +23,23 @@ export function RecipeCopiesTag({ recipe }: RecipeCopiesTagProps) {
 
 	return (
 		<Dialog>
-			<Dialog.Trigger asChild>
-				<Chip asChild>
-					<Button
-						size="small"
-						emphasis="default"
-						className="font-normal shadow-none"
-					>
-						{copies.length} {pluralize('copy', copies.length)}{' '}
-						<Icon name="new_window" />
-					</Button>
-				</Chip>
-			</Dialog.Trigger>
+			<Dialog.Trigger
+				render={
+					<Chip
+						render={
+							<Button
+								size="small"
+								emphasis="default"
+								className="font-normal shadow-none"
+							>
+								{copies.length} {pluralize('copy', copies.length)}{' '}
+								<Icon name="new_window" />
+							</Button>
+						}
+					/>
+				}
+			/>
+
 			<Dialog.Content>
 				<Dialog.Title>Copies of {title}</Dialog.Title>
 

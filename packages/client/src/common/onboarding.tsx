@@ -6,11 +6,11 @@ import {
 	CollapsibleRoot,
 	Icon,
 	Popover,
-	PopoverAnchor,
 	PopoverArrow,
 	PopoverContent,
 } from '@a-type/ui';
 import {
+	ReactElement,
 	ReactNode,
 	useCallback,
 	useDebugValue,
@@ -233,7 +233,7 @@ export function OnboardingBanner<O extends Onboarding<any>>({
 export interface OnboardingTooltipProps<O extends Onboarding<any>> {
 	onboarding: O;
 	step: O extends Onboarding<infer S> ? S[number] : never;
-	children: ReactNode;
+	children: ReactElement;
 	className?: string;
 	disableNext?: boolean;
 	content: ReactNode;
@@ -265,10 +265,31 @@ export const OnboardingTooltip = function OnboardingTooltip<
 	}, [show]);
 
 	return (
-		<Popover open={delayedOpen && show} modal={false}>
-			<PopoverAnchor asChild data-step-id={id} data-step-name={step}>
-				{children}
-			</PopoverAnchor>
+		<Popover
+			open={delayedOpen && show}
+			onOpenChange={(open, ev) => {
+				if (!open) {
+					// if the user interacts outside the popover,
+					// and it's with anything besides a button or input,
+					// go to the next step
+					const ignored =
+						ignoreOutsideInteraction === true ||
+						(typeof ignoreOutsideInteraction === 'function' &&
+							ev.event.target instanceof HTMLElement &&
+							ignoreOutsideInteraction(ev.event.target));
+					if (ev.reason === 'outside-press' && ignored) {
+						return;
+					}
+					next();
+				}
+			}}
+			modal={false}
+		>
+			<Popover.Anchor
+				render={children}
+				data-step-id={id}
+				data-step-name={step}
+			/>
 			<PopoverContent
 				disableBlur
 				className={clsx(
@@ -276,18 +297,6 @@ export const OnboardingTooltip = function OnboardingTooltip<
 					'bg-primary-wash flex py-2 px-3',
 					'overflow-visible',
 				)}
-				onInteractOutside={(event) => {
-					// if the user interacts outside the popover,
-					// and it's with anything besides a button or input,
-					// go to the next step
-					const target = event.target as HTMLElement;
-					if (ignoreOutsideInteraction === true) {
-						return;
-					}
-					if (!ignoreOutsideInteraction || !ignoreOutsideInteraction(target)) {
-						next();
-					}
-				}}
 				collisionPadding={16}
 			>
 				<PopoverArrow className="!fill-primary-wash" />

@@ -3,6 +3,7 @@ export * from './Changelog.js';
 export * from './Context.js';
 export * from './CopyTextbox.js';
 export * from './DarkModeToggle.js';
+export * from './DefaultErrorBoundary.js';
 export * from './domainRoutes/index.js';
 export * from './Explainer.js';
 export * from './FeatureFlag.js';

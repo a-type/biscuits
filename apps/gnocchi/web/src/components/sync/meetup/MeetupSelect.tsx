@@ -38,8 +38,8 @@ export function MeetupSelect({ children, id, emptyLabel }: MeetupSelectProps) {
 	const options = categories.map((cat) => cat.get('name'));
 
 	const setMeetup = useCallback(
-		(value: string) => {
-			if (value === 'clear') {
+		(value: string | null) => {
+			if (value === 'clear' || !value) {
 				info?.set('meetup', null);
 			} else {
 				client
@@ -58,9 +58,14 @@ export function MeetupSelect({ children, id, emptyLabel }: MeetupSelectProps) {
 	const Trigger = children ? UnstyledSelectTrigger : SelectTrigger;
 
 	return (
-		<Select value={location || 'clear'} onValueChange={setMeetup}>
+		<Select
+			value={location || 'clear'}
+			onValueChange={(v) => {
+				setMeetup(v);
+			}}
+		>
 			<Trigger
-				asChild
+				render={<Button />}
 				className={classNames(
 					!children && 'py-3 px-6',
 					!!location && 'bg-accent-wash color-accent-dark',
@@ -78,11 +83,11 @@ export function MeetupSelect({ children, id, emptyLabel }: MeetupSelectProps) {
 				)}
 			</Trigger>
 			<Select.Content>
-				<Select.Item value="clear">
+				<Select.Item value={null}>
 					{location ? 'Clear' : emptyLabel || 'Regroup'}
 				</Select.Item>
 				<Select.Group>
-					<Select.Label>Choose a location</Select.Label>
+					<Select.GroupLabel>Choose a location</Select.GroupLabel>
 					<Select.Item value="Checkout Lanes">Checkout Lanes</Select.Item>
 					<Select.Item value="Self Checkout">Self Checkout</Select.Item>
 					{options.map((option) => (

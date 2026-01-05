@@ -1,6 +1,6 @@
 import { Box, Button, Dialog, Icon } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { ItemCardPurchaseButton } from '../cardParts/ItemCardPurchaseButton.js';
 import {
 	ItemCardTypeChip,
@@ -41,7 +41,7 @@ export function LinkBuyExperience({
 }: {
 	item: FragmentOf<typeof linkBuyExperienceFragment>;
 	listAuthor: string;
-	children?: ReactNode;
+	children?: ReactElement;
 }) {
 	const item = readFragment(linkBuyExperienceFragment, itemMasked);
 	const [open, setOpen] = useState(false);
@@ -83,7 +83,7 @@ export function LinkBuyExperience({
 				}
 			}}
 		>
-			<Dialog.Trigger asChild>{children}</Dialog.Trigger>
+			<Dialog.Trigger render={children} />
 			<Dialog.Content width="lg" className="flex flex-col gap-md">
 				{showPost ?
 					<PostBuyExperienceContent item={item} listAuthor={listAuthor} />
@@ -145,11 +145,14 @@ function PreLinkBuyExperienceContent({
 					{item.count > 1 ? ' more' : ''}
 				</Box>
 			}
-			<Button asChild emphasis="primary" className="ml-auto" onClick={onVisit}>
-				<a href={link} target="_blank" rel="noreferrer">
-					Go to store page
-					<Icon name="new_window" />
-				</a>
+			<Button
+				render={<a href={link} target="_blank" rel="noreferrer" />}
+				emphasis="primary"
+				className="ml-auto"
+				onClick={onVisit}
+			>
+				Go to store page
+				<Icon name="new_window" />
 			</Button>
 		</>
 	);

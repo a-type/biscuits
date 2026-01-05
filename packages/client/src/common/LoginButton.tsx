@@ -3,22 +3,23 @@ import { ReactNode } from 'react';
 import * as CONFIG from '../config.js';
 import { useMaybeAppId } from './Context.js';
 
-export interface LoginButtonProps extends ButtonProps {
+export type LoginButtonProps = ButtonProps & {
 	returnTo?: string;
 	tab?: 'login' | 'signup';
-}
+};
 
 export function LoginButton({ children, tab, ...props }: LoginButtonProps) {
 	return (
-		<Button asChild {...props}>
-			<LoginLink tab={tab} returnTo={props.returnTo}>
-				{children ?? (
-					<>
-						Log in
-						<Icon name="arrowRight" />
-					</>
-				)}
-			</LoginLink>
+		<Button
+			{...props}
+			render={<LoginLink tab={tab} returnTo={props.returnTo} />}
+		>
+			{children ?? (
+				<>
+					Log in
+					<Icon name="arrowRight" />
+				</>
+			)}
 		</Button>
 	);
 }

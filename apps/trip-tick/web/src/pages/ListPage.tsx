@@ -33,11 +33,9 @@ function ListPageEditor({ listId }: { listId: string }) {
 	return (
 		<PageContent p="none">
 			<PageFixedArea className="!row justify-between w-full py-3">
-				<Button asChild emphasis="ghost">
-					<Link to="/">
-						<Icon name="arrowLeft" />
-						<span className="sr-only">Back to lists</span>
-					</Link>
+				<Button render={<Link to="/" />} emphasis="ghost">
+					<Icon name="arrowLeft" />
+					<span className="sr-only">Back to lists</span>
 				</Button>
 				<ListMenu list={list} />
 			</PageFixedArea>

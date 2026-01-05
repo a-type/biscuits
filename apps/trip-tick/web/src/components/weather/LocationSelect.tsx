@@ -1,14 +1,5 @@
 import { hooks } from '@/store.js';
-import {
-	Button,
-	Icon,
-	Input,
-	Popover,
-	PopoverAnchor,
-	PopoverContent,
-	toast,
-	useSize,
-} from '@a-type/ui';
+import { Button, Icon, Input, Popover, toast, useSize } from '@a-type/ui';
 import { preventDefault } from '@a-type/utils';
 import { useDebounced, useHasServerAccess } from '@biscuits/client';
 import { graphql, useClient, useQuery } from '@biscuits/graphql';
@@ -162,34 +153,36 @@ function LocationSelectAutocomplete({
 	});
 	return (
 		<Popover open={isOpen}>
-			<PopoverAnchor asChild>
-				<div
-					data-state={isOpen ? 'open' : 'closed'}
-					className={classNames(
-						'flex gap-1 flex-col w-full relative',
-						className,
-					)}
-					ref={innerRef}
-				>
-					<label htmlFor="location-input" className="font-bold">
-						Where are you going?
-					</label>
-					<Input
-						data-test="location-input"
-						id="location-input"
-						{...getInputProps({
-							placeholder: 'Raleigh, NC',
-						})}
-						className="flex-1"
-						required
-						autoComplete="off"
-						name="location"
-						autoFocus={autoFocus}
-						autoSelect
+			<Popover.Anchor
+				render={
+					<div
+						data-state={isOpen ? 'open' : 'closed'}
+						className={classNames(
+							'flex gap-1 flex-col w-full relative',
+							className,
+						)}
+						ref={innerRef}
 					/>
-				</div>
-			</PopoverAnchor>
-			<PopoverContent
+				}
+			>
+				<label htmlFor="location-input" className="font-bold">
+					Where are you going?
+				</label>
+				<Input
+					data-test="location-input"
+					id="location-input"
+					{...getInputProps({
+						placeholder: 'Raleigh, NC',
+					})}
+					className="flex-1"
+					required
+					autoComplete="off"
+					name="location"
+					autoFocus={autoFocus}
+					autoSelect
+				/>
+			</Popover.Anchor>
+			<Popover.Content
 				radius="md"
 				align="start"
 				forceMount
@@ -216,7 +209,7 @@ function LocationSelectAutocomplete({
 				{!options?.length && (
 					<div className="px-2 text-center">No results found</div>
 				)}
-			</PopoverContent>
+			</Popover.Content>
 		</Popover>
 	);
 }

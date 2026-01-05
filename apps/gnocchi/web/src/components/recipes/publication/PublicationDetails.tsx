@@ -1,4 +1,4 @@
-import { Box, BoxProps, Button, P } from '@a-type/ui';
+import { Box, BoxProps, P } from '@a-type/ui';
 import { DomainRouteView } from '@biscuits/client';
 import { useSuspenseQuery } from '@biscuits/graphql';
 import {
@@ -18,10 +18,8 @@ export function PublicationDetails(props: PublicationDetailsProps) {
 					Recipe blog not enabled. You can still share recipes individually as
 					links.
 				</P>
-				<ManagePublication asChild>
-					<Button emphasis="light" className="ml-auto">
-						Set up your blog
-					</Button>
+				<ManagePublication className="ml-auto">
+					Set up your blog
 				</ManagePublication>
 			</Box>
 		);
@@ -40,10 +38,8 @@ export function PublicationDetails(props: PublicationDetailsProps) {
 			<div>
 				<DomainRouteView resourceId={data.recipePublication.id} />
 			</div>
-			<ManagePublication asChild>
-				<Button emphasis="light" className="ml-auto">
-					Manage your blog
-				</Button>
+			<ManagePublication className="ml-auto">
+				Manage your blog
 			</ManagePublication>
 		</Box>
 	);

@@ -17,20 +17,20 @@ export function PersonPage({}: PersonPageProps) {
 		return (
 			<>
 				<H1>Not found</H1>
-				<Button asChild>
-					<Link to="/">Go back</Link>
-				</Button>
+				<Button render={<Link to="/" />}>Go back</Button>
 			</>
 		);
 	}
 
 	return (
 		<>
-			<Button asChild className="mr-auto mb-4" emphasis="ghost">
-				<Link to="/">
-					<Icon name="arrowLeft" />
-					Home
-				</Link>
+			<Button
+				className="mr-auto mb-4"
+				emphasis="ghost"
+				render={<Link to="/" />}
+			>
+				<Icon name="arrowLeft" />
+				Home
 			</Button>
 			<PersonDetails person={person} />
 		</>

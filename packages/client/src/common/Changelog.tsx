@@ -19,7 +19,7 @@ import { useLocalStorage } from '../hooks/useStorage.js';
 import { useAppId } from './Context.js';
 
 export interface ChangelogDisplayProps {
-	children?: React.ReactNode;
+	children?: React.ReactElement;
 	open?: boolean;
 	onOpenChange?: (open: boolean) => void;
 	hideOnSeen?: boolean;
@@ -68,16 +68,22 @@ export function ChangelogDisplay({
 				}
 			}}
 		>
-			<DialogTrigger asChild className={className} data-new={hasNew}>
-				{children || (
-					<Button
-						emphasis="ghost"
-						className={hasNew ? 'color-accent-dark bg-accent-wash' : undefined}
-					>
-						<Icon name="gift" />
-					</Button>
-				)}
-			</DialogTrigger>
+			<DialogTrigger
+				className={className}
+				data-new={hasNew}
+				render={() =>
+					children || (
+						<Button
+							emphasis="ghost"
+							className={
+								hasNew ? 'color-accent-dark bg-accent-wash' : undefined
+							}
+						>
+							<Icon name="gift" />
+						</Button>
+					)
+				}
+			/>
 			<DialogContent>
 				<DialogTitle>What&apos;s new</DialogTitle>
 				<div className="flex flex-col overflow-y-auto gap-4">
@@ -102,9 +108,7 @@ export function ChangelogDisplay({
 					))}
 				</div>
 				<DialogActions>
-					<DialogClose asChild>
-						<Button>Close</Button>
-					</DialogClose>
+					<DialogClose />
 				</DialogActions>
 			</DialogContent>
 		</Dialog>

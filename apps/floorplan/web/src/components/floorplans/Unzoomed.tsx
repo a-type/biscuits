@@ -1,17 +1,11 @@
-import { Slot, withClassName } from '@a-type/ui';
+import { useRender, UseRenderComponentProps, withClassName } from '@a-type/ui';
 
-function GSlot({
-	children,
-	asChild,
-	...rest
-}: {
-	children: React.ReactNode;
-	asChild?: boolean;
-}) {
-	if (asChild) {
-		return <Slot {...rest}>{children}</Slot>;
-	}
-	return <g {...rest}>{children}</g>;
+function GSlot({ render, ...rest }: UseRenderComponentProps<'g'>) {
+	return useRender({
+		defaultTagName: 'g',
+		props: rest,
+		render,
+	});
 }
 
 export const Unzoomed = withClassName(

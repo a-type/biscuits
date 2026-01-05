@@ -136,11 +136,9 @@ function TripViewInfo({
 			)}
 		>
 			<div className="flex flex-row gap-1 items-center">
-				<Button asChild emphasis="ghost">
-					<Link to="/">
-						<Icon name="arrowLeft" />
-						<span className="sr-only">Back to trips</span>
-					</Link>
+				<Button emphasis="ghost" render={<Link to="/" />}>
+					<Icon name="arrowLeft" />
+					<span className="sr-only">Back to trips</span>
 				</Button>
 				{editName ?
 					<LiveUpdateTextField

@@ -43,11 +43,9 @@ export function RecipeUrlField({ recipe }: RecipeUrlFieldProps) {
 				</Button>
 			) : (
 				<Dialog>
-					<Dialog.Trigger asChild>
-						<Button emphasis="primary">
-							<Icon name="scan" style={{ width: 15, height: 15 }} />
-							<span className="ml-2">Scan</span>
-						</Button>
+					<Dialog.Trigger render={<Button emphasis="primary" />}>
+						<Icon name="scan" style={{ width: 15, height: 15 }} />
+						<span className="ml-2">Scan</span>
 					</Dialog.Trigger>
 					<Dialog.Content>
 						<Dialog.Title>Sign up to scan web recipes</Dialog.Title>
@@ -57,7 +55,7 @@ export function RecipeUrlField({ recipe }: RecipeUrlFieldProps) {
 						</Dialog.Description>
 						<Dialog.Actions>
 							<Dialog.Close>Cancel</Dialog.Close>
-							<LoginButton emphasis="primary" asChild returnTo="/">
+							<LoginButton emphasis="primary" returnTo="/">
 								Get started
 							</LoginButton>
 						</Dialog.Actions>

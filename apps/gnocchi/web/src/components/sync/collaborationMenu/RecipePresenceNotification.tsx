@@ -83,8 +83,8 @@ function RecipePresenceLink({
 						{recipe.get('title')}
 					</div>
 				</div>
-				<Button size="small" className="whitespace-nowrap" asChild>
-					<div>Join</div>
+				<Button size="small" className="whitespace-nowrap" render={<div />}>
+					Join
 				</Button>
 			</Link>
 		</div>

@@ -73,11 +73,7 @@ function ErrorFallback({ clearError }: { clearError: () => void }) {
 					Sorry about this. The app has crashed. You can try refreshing, but if
 					that doesn't work, use the button below to report the issue.
 				</P>
-				<Button asChild>
-					<Link to="/" onClick={clearError}>
-						Go Home
-					</Link>
-				</Button>
+				<Button render={<Link to="/" onClick={clearError} />}>Go Home</Button>
 				<ReloadButton />
 			</div>
 		</div>

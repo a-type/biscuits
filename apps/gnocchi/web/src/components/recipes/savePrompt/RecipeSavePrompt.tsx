@@ -6,16 +6,7 @@ import {
 	useAddRecipeFromSlug,
 	useAddRecipeFromUrl,
 } from '@/stores/groceries/mutations.js';
-import {
-	Button,
-	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
-	DialogTitle,
-	H2,
-	P,
-} from '@a-type/ui';
+import { Button, Dialog, H2, P } from '@a-type/ui';
 import { OnboardingBanner, useLocalStorage } from '@biscuits/client';
 import { useNavigate, useSearchParams } from '@verdant-web/react-router';
 import { useEffect, useState } from 'react';
@@ -85,10 +76,10 @@ export function RecipeSavePrompt({}: RecipeSavePromptProps) {
 
 	return (
 		<Dialog open={open} onOpenChange={() => (recipeSavePromptState.url = '')}>
-			<DialogContent className="flex flex-col gap-sm">
-				<DialogTitle>
+			<Dialog.Content className="flex flex-col gap-sm">
+				<Dialog.Title>
 					{isGnocchi ? 'Save recipe?' : 'Scan web recipe?'}
-				</DialogTitle>
+				</Dialog.Title>
 				{open && (
 					<OnboardingBanner
 						disableNext
@@ -120,15 +111,15 @@ export function RecipeSavePrompt({}: RecipeSavePromptProps) {
 						the terms and conditions of usage.
 					</TextLink>
 				</span>
-				<DialogActions>
-					<DialogClose asChild>
-						<Button onClick={cancelOnboarding}>Cancel</Button>
-					</DialogClose>
+				<Dialog.Actions>
+					<Dialog.Close render={<Button onClick={cancelOnboarding} />}>
+						Cancel
+					</Dialog.Close>
 					<Button emphasis="primary" onClick={save} loading={loading}>
 						{isGnocchi ? 'Save it!' : 'Scan it!'}
 					</Button>
-				</DialogActions>
-			</DialogContent>
+				</Dialog.Actions>
+			</Dialog.Content>
 		</Dialog>
 	);
 }

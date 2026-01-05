@@ -77,15 +77,17 @@ export function DomainRouteView({ resourceId }: DomainRouteViewProps) {
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
-			<Dialog.Trigger asChild>
-				<Button
-					color={status === 'READY' ? 'accent' : 'primary'}
-					emphasis={status === 'READY' ? 'primary' : 'default'}
-					className="justify-between"
-				>
-					{domain ?? <TextSkeleton maxLength={30} />}
-					<Icon name={status === 'READY' ? 'check' : 'warning'} />
-				</Button>
+			<Dialog.Trigger
+				render={
+					<Button
+						color={status === 'READY' ? 'accent' : 'primary'}
+						emphasis={status === 'READY' ? 'primary' : 'default'}
+						className="justify-between"
+					/>
+				}
+			>
+				{domain ?? <TextSkeleton maxLength={30} />}
+				<Icon name={status === 'READY' ? 'check' : 'warning'} />
 			</Dialog.Trigger>
 			<Dialog.Content className="flex flex-col gap-md">
 				<DomainRouteValidation resourceId={resourceId} />
@@ -97,9 +99,7 @@ export function DomainRouteView({ resourceId }: DomainRouteViewProps) {
 					/>
 				)}
 				<Dialog.Actions>
-					<Dialog.Close asChild>
-						<Button>Close</Button>
-					</Dialog.Close>
+					<Dialog.Close />
 				</Dialog.Actions>
 			</Dialog.Content>
 		</Dialog>

@@ -34,10 +34,8 @@ export function CopyTextbox({
 					<Icon name="copy" />
 				</Button>
 				{isUrl && (
-					<Button asChild>
-						<Link className="color-inherit" newTab to={value}>
-							<Icon name="new_window" />
-						</Link>
+					<Button render={<Link className="color-inherit" newTab to={value} />}>
+						<Icon name="new_window" />
 					</Button>
 				)}
 				{!hideShare && (

@@ -122,10 +122,12 @@ function PersonRelationshipItem({
 				onChange={setOtherPersonLabel}
 				className="grid-area-[type]"
 			/>
-			<Button asChild emphasis="ghost" className="grid-area-[arrow]">
-				<Link to={`/people/${otherPersonId}`}>
-					<Icon name="arrowRight" />
-				</Link>
+			<Button
+				emphasis="ghost"
+				className="grid-area-[arrow]"
+				render={<Link to={`/people/${otherPersonId}`} />}
+			>
+				<Icon name="arrowRight" />
 			</Button>
 		</div>
 	);
@@ -141,21 +143,26 @@ function RelationshipTypeSelect({
 	className?: string;
 }) {
 	return (
-		<Select value={value || 'unknown'} onValueChange={onChange}>
-			<Select.Trigger asChild>
-				<Chip
-					className={clsx(
-						'text-sm px-4 self-center justify-self-start',
-						className,
-					)}
-				>
-					<Select.Value />
-				</Chip>
+		<Select
+			value={value || 'unknown'}
+			onValueChange={(v) => onChange(v || 'unknown')}
+		>
+			<Select.Trigger
+				render={
+					<Chip
+						className={clsx(
+							'text-sm px-4 self-center justify-self-start',
+							className,
+						)}
+					/>
+				}
+			>
+				<Select.Value />
 			</Select.Trigger>
 			<Select.Content>
 				<Select.Item value="unknown">Select type...</Select.Item>
 				<Select.Group>
-					<Select.Label>Close Family</Select.Label>
+					<Select.GroupLabel>Close Family</Select.GroupLabel>
 					<Select.Item value="family">Family</Select.Item>
 					<Select.Item value="spouse">Spouse</Select.Item>
 					<Select.Item value="partner">Partner</Select.Item>
@@ -167,14 +174,14 @@ function RelationshipTypeSelect({
 					<Select.Item value="grandchild">Grandchild</Select.Item>
 				</Select.Group>
 				<Select.Group>
-					<Select.Label>Friends</Select.Label>
+					<Select.GroupLabel>Friends</Select.GroupLabel>
 					<Select.Item value="friend">Friend</Select.Item>
 					<Select.Item value="neighbor">Neighbor</Select.Item>
 					<Select.Item value="classmate">Classmate</Select.Item>
 					<Select.Item value="roommate">Roommate</Select.Item>
 				</Select.Group>
 				<Select.Group>
-					<Select.Label>Extended Family</Select.Label>
+					<Select.GroupLabel>Extended Family</Select.GroupLabel>
 					<Select.Item value="aunt">Aunt</Select.Item>
 					<Select.Item value="uncle">Uncle</Select.Item>
 					<Select.Item value="cousin">Cousin</Select.Item>
@@ -183,7 +190,7 @@ function RelationshipTypeSelect({
 					<Select.Item value="inlaw">In-law</Select.Item>
 				</Select.Group>
 				<Select.Group>
-					<Select.Label>Professional & Acquaintances</Select.Label>
+					<Select.GroupLabel>Professional & Acquaintances</Select.GroupLabel>
 					<Select.Item value="colleague">Colleague</Select.Item>
 					<Select.Item value="landlord">Acquaintance</Select.Item>
 					<Select.Item value="boss">Boss</Select.Item>

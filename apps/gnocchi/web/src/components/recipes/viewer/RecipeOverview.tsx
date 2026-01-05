@@ -97,18 +97,21 @@ export function RecipeOverview({ recipe }: RecipeOverviewProps) {
 							<div className="flex flex-col justify-between items-start w-full gap-3">
 								<div className="flex flex-row gap-1 flex-wrap palette-gray">
 									<Chip
-										asChild
 										className="cursor-pointer"
 										onClick={() => {
 											document
 												.getElementById('#steps')
 												?.scrollIntoView({ behavior: 'smooth' });
 										}}
+										render={
+											<Button
+												emphasis="ghost"
+												className="font-normal text-xs"
+											/>
+										}
 									>
-										<Button emphasis="ghost" className="font-normal text-xs">
-											<Icon name="arrowDown" />
-											<span>Jump to steps</span>
-										</Button>
+										<Icon name="arrowDown" />
+										<span>Jump to steps</span>
 									</Chip>
 									<Chip>Created on {format(createdAt, 'LLL do, yyyy')}</Chip>
 									{!!totalTimeMinutes && (
@@ -133,17 +136,13 @@ export function RecipeOverview({ recipe }: RecipeOverviewProps) {
 										</Chip>
 									)}
 									{url && (
-										<Chip asChild color="accent">
-											<Link to={url} newTab>
-												View original{' '}
-												<OpenInNewWindowIcon className="ml-2 relative b--1" />
-											</Link>
+										<Chip color="accent" render={<Link to={url} newTab />}>
+											View original{' '}
+											<OpenInNewWindowIcon className="ml-2 relative b--1" />
 										</Chip>
 									)}
 									{copyOf && (
-										<Chip asChild>
-											<RecipeCopyOriginalLink recipe={recipe} />
-										</Chip>
+										<Chip render={<RecipeCopyOriginalLink recipe={recipe} />} />
 									)}
 									<RecipeCopiesTag recipe={recipe} />
 									<Suspense>

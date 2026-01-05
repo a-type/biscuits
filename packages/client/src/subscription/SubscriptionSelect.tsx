@@ -114,18 +114,16 @@ function SubscriptionChoiceButton({
 	});
 	return (
 		<CardRoot>
-			<CardMain asChild>
-				<button onClick={onClick} disabled={disabled}>
-					<CardTitle>{data?.productInfo.name}</CardTitle>
-					<CardContent>{data?.productInfo.description}</CardContent>
-					<CardContent>
-						<Price
-							value={data?.productInfo.price}
-							currency={data?.productInfo.currency}
-							period={data?.productInfo.period}
-						/>
-					</CardContent>
-				</button>
+			<CardMain render={<button disabled={disabled} />} onClick={onClick}>
+				<CardTitle>{data?.productInfo.name}</CardTitle>
+				<CardContent>{data?.productInfo.description}</CardContent>
+				<CardContent>
+					<Price
+						value={data?.productInfo.price}
+						currency={data?.productInfo.currency}
+						period={data?.productInfo.period}
+					/>
+				</CardContent>
 			</CardMain>
 		</CardRoot>
 	);

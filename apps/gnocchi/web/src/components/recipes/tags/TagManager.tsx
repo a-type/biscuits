@@ -5,10 +5,6 @@ import {
 	Button,
 	ColorPicker,
 	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
-	DialogTrigger,
 	Divider,
 	FormikForm,
 	PaletteName,
@@ -16,13 +12,13 @@ import {
 } from '@a-type/ui';
 import { TrashIcon } from '@radix-ui/react-icons';
 import classNames from 'classnames';
-import { ReactNode } from 'react';
+import { ReactElement } from 'react';
 
 export function TagManager({
 	children,
 	onClose,
 }: {
-	children: ReactNode;
+	children: ReactElement;
 	onClose?: () => void;
 }) {
 	const tags = hooks.useAllRecipeTagMetadata().sort((a, b) => {
@@ -45,8 +41,8 @@ export function TagManager({
 				if (!open) onClose?.();
 			}}
 		>
-			<DialogTrigger asChild>{children}</DialogTrigger>
-			<DialogContent>
+			<Dialog.Trigger render={children} />
+			<Dialog.Content>
 				<ActionBar>
 					<UndoAction />
 				</ActionBar>
@@ -94,12 +90,10 @@ export function TagManager({
 						</Button>
 					</FormikForm>
 				</div>
-				<DialogActions>
-					<DialogClose asChild>
-						<Button>Done</Button>
-					</DialogClose>
-				</DialogActions>
-			</DialogContent>
+				<Dialog.Actions>
+					<Dialog.Close>Done</Dialog.Close>
+				</Dialog.Actions>
+			</Dialog.Content>
 		</Dialog>
 	);
 }

@@ -1,6 +1,5 @@
 import { hooks, useAddPerson } from '@/hooks.js';
 import { Box, clsx, Icon, Input, Popover } from '@a-type/ui';
-import { preventDefault } from '@a-type/utils';
 import { Person } from '@names.biscuits/verdant';
 import { useCombobox } from 'downshift';
 import { Suspense, useDeferredValue, useState } from 'react';
@@ -78,18 +77,20 @@ export function PersonNameSearchField({
 				}
 			}}
 		>
-			<Popover.Anchor asChild>
-				<Input
-					{...getInputProps({
-						placeholder: placeholder || 'Search names...',
-						className,
-					})}
-				/>
-			</Popover.Anchor>
+			<Popover.Anchor
+				render={
+					<Input
+						{...getInputProps({
+							placeholder: placeholder || 'Search names...',
+							className,
+						})}
+					/>
+				}
+			/>
 			<Popover.Content
 				{...getMenuProps()}
 				className="w-[var(--radix-popper-anchor-width)]"
-				onOpenAutoFocus={preventDefault}
+				initialFocus={false}
 				sideOffset={8}
 				forceMount
 			>

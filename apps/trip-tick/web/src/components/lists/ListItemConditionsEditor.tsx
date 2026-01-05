@@ -61,11 +61,13 @@ export function ListItemConditionsEditor({
 function AddCondition({ conditions }: { conditions: ListItemsItemConditions }) {
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger asChild>
-				<Button emphasis="default" size="small" className="self-start">
-					<Icon name="plus" />
-					<span>Add condition...</span>
-				</Button>
+			<DropdownMenuTrigger
+				render={
+					<Button emphasis="default" size="small" className="self-start" />
+				}
+			>
+				<Icon name="plus" />
+				<span>Add condition...</span>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="!z-10000">
 				<DropdownMenuArrow />

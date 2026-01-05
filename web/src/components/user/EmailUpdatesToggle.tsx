@@ -30,32 +30,31 @@ export function EmailUpdatesToggle({ isSubscribed }: EmailUpdatesToggleProps) {
 
 	return (
 		<Box
-			asChild
+			render={<label />}
 			border
 			p
 			surface
 			color={data.me.sendEmailUpdates ? 'accent' : 'gray'}
 			full="width"
 			gap
+			className="text-sm transition-color"
 		>
-			<label className="text-sm transition-color">
-				<Switch
-					checked={data.me.sendEmailUpdates}
-					onCheckedChange={(v) => setValue({ variables: { enabled: !!v } })}
-				/>
-				<div className="flex flex-col gap-2 items-stretch flex-1 mt-1">
-					<div>
-						Send me an email when a new Biscuits app launches or significant
-						features are added
-					</div>
-					{isSubscribed && (
-						<div className="font-bold">
-							As a Biscuits subscriber, you get full access to all features on
-							new apps. This lets you know that new stuff is available!
-						</div>
-					)}
+			<Switch
+				checked={data.me.sendEmailUpdates}
+				onCheckedChange={(v) => setValue({ variables: { enabled: !!v } })}
+			/>
+			<div className="flex flex-col gap-2 items-stretch flex-1 mt-1">
+				<div>
+					Send me an email when a new Biscuits app launches or significant
+					features are added
 				</div>
-			</label>
+				{isSubscribed && (
+					<div className="font-bold">
+						As a Biscuits subscriber, you get full access to all features on new
+						apps. This lets you know that new stuff is available!
+					</div>
+				)}
+			</div>
 		</Box>
 	);
 }

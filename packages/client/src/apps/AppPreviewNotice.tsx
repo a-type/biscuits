@@ -38,10 +38,12 @@ export function AppPreviewNotice({}: AppPreviewNoticeProps) {
 			<p className="text-sm color-accent-dark flex-1">
 				{`You're previewing this app.`}
 			</p>
-			<Button asChild>
-				<a href={fromApp.url} target="_blank" rel="noopener noreferrer">
-					{`Back to ${fromApp.name}`}
-				</a>
+			<Button
+				render={
+					<a href={fromApp.url} target="_blank" rel="noopener noreferrer" />
+				}
+			>
+				{`Back to ${fromApp.name}`}
 			</Button>
 			<Suspense>
 				<InstallButton />

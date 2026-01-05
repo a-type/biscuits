@@ -6,20 +6,13 @@ import { hooks } from '@/stores/groceries/index.js';
 import { useDeleteRecipe } from '@/stores/groceries/mutations.js';
 import {
 	Button,
-	CardActions,
-	CardFooter,
-	CardImage,
-	CardMain,
-	CardMenu,
+	Card,
 	CardRoot,
 	CardTitle,
 	Chip,
 	clsx,
 	DropdownMenu,
-	DropdownMenuContent,
-	DropdownMenuItem,
 	DropdownMenuItemRightSlot,
-	DropdownMenuTrigger,
 	Icon,
 } from '@a-type/ui';
 import { formatMinutes } from '@a-type/utils';
@@ -46,7 +39,7 @@ export const RecipeListItem = memo(function RecipeListItem({
 	const [gridStyle] = useGridStyle();
 
 	return (
-		<CardRoot
+		<Card
 			className={classNames(
 				'self-end',
 				{
@@ -57,50 +50,48 @@ export const RecipeListItem = memo(function RecipeListItem({
 				className,
 			)}
 		>
-			<CardMain asChild>
-				<Link to={makeRecipeLink(recipe)} preserveQuery>
-					<CardTitle
-						className={classNames(
-							'flex-shrink-0',
-							gridStyle === 'card-small' ? 'text-sm sm:text-md' : '',
-						)}
-					>
-						<span className="line-clamp-2 text-ellipsis">{title}</span>
-					</CardTitle>
-					<div
-						className={clsx(
-							'm-2 flex flex-row gap-sm flex-wrap',
-							gridStyle === 'card-small' ? 'text-xxs' : 'text-xs',
-						)}
-					>
-						{!!totalTimeMinutes && (
-							<Chip className="bg-wash">
-								<Icon name="clock" />
-								{formatMinutes(totalTimeMinutes)}
-							</Chip>
-						)}
-						<Suspense>
-							<RecipeTagsViewer unwrapped recipe={recipe} max={3} />
-						</Suspense>
-					</div>
-				</Link>
-			</CardMain>
-			<CardImage>
+			<Card.Main render={<Link to={makeRecipeLink(recipe)} preserveQuery />}>
+				<CardTitle
+					className={classNames(
+						'flex-shrink-0',
+						gridStyle === 'card-small' ? 'text-sm sm:text-md' : '',
+					)}
+				>
+					<span className="line-clamp-2 text-ellipsis">{title}</span>
+				</CardTitle>
+				<div
+					className={clsx(
+						'm-2 flex flex-row gap-sm flex-wrap',
+						gridStyle === 'card-small' ? 'text-xxs' : 'text-xs',
+					)}
+				>
+					{!!totalTimeMinutes && (
+						<Chip className="bg-wash">
+							<Icon name="clock" />
+							{formatMinutes(totalTimeMinutes)}
+						</Chip>
+					)}
+					<Suspense>
+						<RecipeTagsViewer unwrapped recipe={recipe} max={3} />
+					</Suspense>
+				</div>
+			</Card.Main>
+			<Card.Image>
 				<RecipeMainImageViewer recipe={recipe} className="w-full h-full" />
-			</CardImage>
-			<CardFooter>
-				<CardActions>
+			</Card.Image>
+			<Card.Footer>
+				<Card.Actions>
 					<RecipePinToggle recipe={recipe} />
 
 					<AddToListButton recipe={recipe} emphasis="ghost">
 						<Icon name="add_to_list" />
 					</AddToListButton>
-				</CardActions>
-				<CardMenu>
+				</Card.Actions>
+				<Card.Menu>
 					<RecipeListItemMenu recipe={recipe} />
-				</CardMenu>
-			</CardFooter>
-		</CardRoot>
+				</Card.Menu>
+			</Card.Footer>
+		</Card>
 	);
 });
 
@@ -144,35 +135,38 @@ export function RecipeListItemMenu({
 	return (
 		<DropdownMenu
 			open={menuOpen}
-			onOpenChange={(open) => {
+			onOpenChange={(open, ev) => {
 				if (open) setMenuOpen(true);
+				if (!open && ev.reason === 'outside-press') {
+					setMenuOpen(false);
+				}
 			}}
 			modal={false}
 		>
-			<DropdownMenuTrigger asChild>
-				<Button size="small" emphasis="ghost" {...rest}>
-					<Icon name="dots" className="w-20px h-20px" />
-				</Button>
-			</DropdownMenuTrigger>
-			<DropdownMenuContent onPointerDownOutside={() => setMenuOpen(false)}>
+			<DropdownMenu.Trigger
+				render={<Button size="small" emphasis="ghost" {...rest} />}
+			>
+				<Icon name="dots" className="w-20px h-20px" />
+			</DropdownMenu.Trigger>
+			<DropdownMenu.Content>
 				<RecipeEditTags recipe={recipe} onClose={() => setMenuOpen(false)}>
-					<DropdownMenuItem>
+					<DropdownMenu.Item>
 						<span>Tags</span>
 						<DropdownMenuItemRightSlot>
 							<Icon name="tag" />
 						</DropdownMenuItemRightSlot>
-					</DropdownMenuItem>
+					</DropdownMenu.Item>
 				</RecipeEditTags>
-				<DropdownMenuItem asChild>
-					<Link to={makeRecipeLink(recipe, '/edit')} preserveQuery>
-						<span>Edit</span>
-						<DropdownMenuItemRightSlot>
-							<Icon name="pencil" />
-						</DropdownMenuItemRightSlot>
-					</Link>
-				</DropdownMenuItem>
+				<DropdownMenu.Item
+					render={<Link to={makeRecipeLink(recipe, '/edit')} preserveQuery />}
+				>
+					<span>Edit</span>
+					<DropdownMenuItemRightSlot>
+						<Icon name="pencil" />
+					</DropdownMenuItemRightSlot>
+				</DropdownMenu.Item>
 				{isPinned && (
-					<DropdownMenuItem
+					<DropdownMenu.Item
 						onSelect={() => {
 							recipe.set('pinnedAt', null);
 							setMenuOpen(false);
@@ -182,15 +176,15 @@ export function RecipeListItemMenu({
 						<DropdownMenuItemRightSlot>
 							<DrawingPinFilledIcon />
 						</DropdownMenuItemRightSlot>
-					</DropdownMenuItem>
+					</DropdownMenu.Item>
 				)}
-				<DropdownMenuItem onSelect={copyRecipe}>
+				<DropdownMenu.Item onSelect={copyRecipe}>
 					<span>Make a copy</span>
 					<DropdownMenuItemRightSlot>
 						<Icon name="copy" />
 					</DropdownMenuItemRightSlot>
-				</DropdownMenuItem>
-				<DropdownMenuItem
+				</DropdownMenu.Item>
+				<DropdownMenu.Item
 					color="attention"
 					onSelect={() => {
 						deleteRecipe(recipe.get('id'));
@@ -201,8 +195,8 @@ export function RecipeListItemMenu({
 					<DropdownMenuItemRightSlot>
 						<Icon name="trash" />
 					</DropdownMenuItemRightSlot>
-				</DropdownMenuItem>
-			</DropdownMenuContent>
+				</DropdownMenu.Item>
+			</DropdownMenu.Content>
 		</DropdownMenu>
 	);
 }

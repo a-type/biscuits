@@ -9,10 +9,8 @@ export interface HelpTipProps {
 export function HelpTip({ children }: HelpTipProps) {
 	return (
 		<Popover>
-			<PopoverTrigger asChild>
-				<Button emphasis="ghost">
-					<QuestionMarkCircledIcon />
-				</Button>
+			<PopoverTrigger render={<Button emphasis="ghost" />}>
+				<QuestionMarkCircledIcon />
 			</PopoverTrigger>
 			<PopoverContent>
 				<span className="text-sm">{children}</span>

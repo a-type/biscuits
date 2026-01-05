@@ -4,8 +4,6 @@ import {
 	Dialog,
 	DialogActions,
 	DialogClose,
-	DialogContent,
-	DialogTrigger,
 	FormikForm,
 	SubmitButton,
 	TextField,
@@ -65,16 +63,18 @@ function AddNameButton({ names }: { names: FoodAlternateNames }) {
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
-			<DialogTrigger asChild>
-				<Button
-					size="small"
-					className="important:rounded-2xl important:px-3 important:py-1"
-				>
-					<PlusIcon />
-					<span>Add name</span>
-				</Button>
-			</DialogTrigger>
-			<DialogContent>
+			<Dialog.Trigger
+				render={
+					<Button
+						size="small"
+						className="important:rounded-2xl important:px-3 important:py-1"
+					/>
+				}
+			>
+				<PlusIcon />
+				<span>Add name</span>
+			</Dialog.Trigger>
+			<Dialog.Content>
 				<FormikForm
 					initialValues={{ name: '' }}
 					onSubmit={async (values, bag) => {
@@ -107,13 +107,11 @@ function AddNameButton({ names }: { names: FoodAlternateNames }) {
 				>
 					<TextField name="name" label="Name" required />
 					<DialogActions>
-						<DialogClose asChild>
-							<Button>Cancel</Button>
-						</DialogClose>
+						<DialogClose />
 						<SubmitButton>Add</SubmitButton>
 					</DialogActions>
 				</FormikForm>
-			</DialogContent>
+			</Dialog.Content>
 		</Dialog>
 	);
 }

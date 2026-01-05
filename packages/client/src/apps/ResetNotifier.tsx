@@ -42,9 +42,7 @@ export function ResetNotifier({}: ResetNotifierProps) {
 					from the server!
 				</P>
 				<DialogActions>
-					<DialogClose asChild>
-						<Button loading={waiting}>Ok</Button>
-					</DialogClose>
+					<DialogClose render={<Button loading={waiting} />}>Ok</DialogClose>
 				</DialogActions>
 			</DialogContent>
 		</Dialog>

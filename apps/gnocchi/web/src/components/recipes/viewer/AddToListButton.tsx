@@ -5,10 +5,11 @@ import { OnboardingTooltip } from '@biscuits/client';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { Suspense } from 'react';
 
-export interface AddToListButtonProps extends ButtonProps {
+export type AddToListButtonProps = Omit<ButtonProps, 'className'> & {
 	recipe: Recipe;
 	listId?: string | null;
-}
+	className?: string;
+};
 
 export function AddToListButton({
 	recipe,
@@ -37,10 +38,8 @@ export function AddToListButton({
 					}
 				>
 					<AddToListDialog recipe={recipe} listId={listId}>
-						<DialogTrigger asChild>
-							<Button emphasis="default" {...rest}>
-								{children || 'Add to list'}
-							</Button>
+						<DialogTrigger render={<Button emphasis="default" {...rest} />}>
+							{children || 'Add to list'}
 						</DialogTrigger>
 					</AddToListDialog>
 				</Suspense>

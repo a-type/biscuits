@@ -95,13 +95,13 @@ export function AppDemo({ className }: AppDemoProps) {
 								<Button
 									emphasis="primary"
 									className="justify-self-start sm:justify-self-end self-center"
-									asChild
+									render={
+										<a href={url} target="_blank" rel="noopener noreferrer" />
+									}
 									style={{ gridArea: 'button' }}
 								>
-									<a href={url} target="_blank" rel="noopener noreferrer">
-										Open app
-										<Icon name="new_window" />
-									</a>
+									Open app
+									<Icon name="new_window" />
 								</Button>
 							</>
 						);

@@ -1,5 +1,5 @@
 import { hooks } from '@/hooks.js';
-import { Button, clsx, Dialog, Icon, ScrollArea } from '@a-type/ui';
+import { clsx, Dialog, Icon, ScrollArea } from '@a-type/ui';
 import {
 	closestCenter,
 	DndContext,
@@ -70,11 +70,6 @@ export function ItemSorter({ list, className }: ItemSorterProps) {
 				className="left-auto right-2 top-4 translate-0 h-90dvh animate-fade-in-right flex flex-col"
 			>
 				<Dialog.Title>Reorder items</Dialog.Title>
-				<Dialog.Close asChild>
-					<Button emphasis="ghost" className="absolute top-2 right-2">
-						<Icon name="x" />
-					</Button>
-				</Dialog.Close>
 				<DndContext
 					sensors={sensors}
 					collisionDetection={closestCenter}
@@ -85,18 +80,17 @@ export function ItemSorter({ list, className }: ItemSorterProps) {
 						items={items.map((i) => i.get('id'))}
 						strategy={verticalListSortingStrategy}
 					>
-						<ScrollArea
-							className={clsx('p-1 flex-1', className)}
-							background="white"
-						>
-							{items.map((item, i) => (
-								<SortableItem
-									item={item}
-									key={item.get('id')}
-									index={i}
-									data-id={item.get('id')}
-								/>
-							))}
+						<ScrollArea className={clsx('flex-1', className)}>
+							<ScrollArea.Content className="p-1">
+								{items.map((item, i) => (
+									<SortableItem
+										item={item}
+										key={item.get('id')}
+										index={i}
+										data-id={item.get('id')}
+									/>
+								))}
+							</ScrollArea.Content>
 						</ScrollArea>
 						<DragOverlay>
 							{draggingItem && <SorterItem item={draggingItem} />}

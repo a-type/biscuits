@@ -54,29 +54,30 @@ export function UserMenu({
 		<Box d="row" items="center" gap="sm" className={className}>
 			<SmallUpdatePrompt />
 			<DropdownMenu>
-				<DropdownMenu.Trigger asChild>
-					{(children ?? (!isLoggedIn && loading && !isOffline)) ?
-						<Button size="small" emphasis="ghost">
-							<Icon name="refresh" className="animate-spin" />
-						</Button>
-					: isLoggedIn ?
-						<Button size="small" emphasis="ghost">
-							{!hasServerAccess && <Icon name="refreshDisabled" />}
-							<ErrorBoundary fallback={<Avatar />}>
-								<Suspense fallback={<Avatar />}>
-									<PresencePeople />
-								</Suspense>
-							</ErrorBoundary>
-						</Button>
-					:	<Button size="small" emphasis="ghost">
-							<Icon
-								name="refreshDisabled"
-								className={isOffline ? 'color-attention' : ''}
-							/>
-							<Icon name="gear" className="h-25px" />
-						</Button>
+				<DropdownMenu.Trigger
+					render={() =>
+						(children ?? (!isLoggedIn && loading && !isOffline)) ?
+							<Button size="small" emphasis="ghost">
+								<Icon name="refresh" className="animate-spin" />
+							</Button>
+						: isLoggedIn ?
+							<Button size="small" emphasis="ghost">
+								{!hasServerAccess && <Icon name="refreshDisabled" />}
+								<ErrorBoundary fallback={<Avatar />}>
+									<Suspense fallback={<Avatar />}>
+										<PresencePeople />
+									</Suspense>
+								</ErrorBoundary>
+							</Button>
+						:	<Button size="small" emphasis="ghost">
+								<Icon
+									name="refreshDisabled"
+									className={isOffline ? 'color-attention' : ''}
+								/>
+								<Icon name="gear" className="h-25px" />
+							</Button>
 					}
-				</DropdownMenu.Trigger>
+				/>
 				<DropdownMenu.Content>
 					{isOffline && (
 						<div className="pl-8 pr-4 py-1 color-gray-dark text-sm max-w-300px bg-attention-wash color-attention-dark">
@@ -92,45 +93,47 @@ export function UserMenu({
 					{!isLoggedIn ?
 						<>
 							<DropdownMenu.Item
-								asChild
+								render={
+									<a href={`${CONFIG.HOME_ORIGIN}/join?appReferrer=${appId}`} />
+								}
 								className="theme-leek bg-primary-wash color-primary-ink focus-visible:bg-primary-light"
 							>
-								<a href={`${CONFIG.HOME_ORIGIN}/join?appReferrer=${appId}`}>
-									Upgrade for sync
-									<DropdownMenuItemRightSlot>
-										<Icon name="gift" />
-									</DropdownMenuItemRightSlot>
-								</a>
+								Upgrade for sync
+								<DropdownMenuItemRightSlot>
+									<Icon name="gift" />
+								</DropdownMenuItemRightSlot>
 							</DropdownMenu.Item>
-							<DropdownMenu.Item asChild>
-								<LoginLink className="color-inherit font-inherit">
-									Log in
-									<DropdownMenuItemRightSlot>
-										<Icon name="arrowRight" />
-									</DropdownMenuItemRightSlot>
-								</LoginLink>
+							<DropdownMenu.Item
+								render={<LoginLink className="color-inherit font-inherit" />}
+							>
+								Log in
+								<DropdownMenuItemRightSlot>
+									<Icon name="arrowRight" />
+								</DropdownMenuItemRightSlot>
 							</DropdownMenu.Item>
 						</>
 					:	<>
-							<DropdownMenu.Item asChild>
-								<a href={`${CONFIG.HOME_ORIGIN}/settings?appReferrer=${appId}`}>
-									Manage plan
-									<DropdownMenuItemRightSlot>
-										<Icon name="profile" />
-									</DropdownMenuItemRightSlot>
-								</a>
+							<DropdownMenu.Item
+								render={
+									<a
+										href={`${CONFIG.HOME_ORIGIN}/settings?appReferrer=${appId}`}
+									/>
+								}
+							>
+								Manage plan
+								<DropdownMenuItemRightSlot>
+									<Icon name="profile" />
+								</DropdownMenuItemRightSlot>
 							</DropdownMenu.Item>
 						</>
 					}
 
 					{!disableAppSettings && (
-						<DropdownMenu.Item asChild>
-							<a href={`/settings`}>
-								App settings
-								<DropdownMenuItemRightSlot>
-									<Icon name="gear" />
-								</DropdownMenuItemRightSlot>
-							</a>
+						<DropdownMenu.Item render={<a href="/settings" />}>
+							App settings
+							<DropdownMenuItemRightSlot>
+								<Icon name="gear" />
+							</DropdownMenuItemRightSlot>
 						</DropdownMenu.Item>
 					)}
 					{getIsPWAInstalled() ?
@@ -141,35 +144,40 @@ export function UserMenu({
 							</DropdownMenuItemRightSlot>
 						</DropdownMenu.Item>
 					:	<>
-							<DropdownMenu.Item asChild>
-								<a href={`${CONFIG.HOME_ORIGIN}`} target="_blank">
-									More apps
-									<DropdownMenuItemRightSlot>
-										<Icon name="new_window" />
-									</DropdownMenuItemRightSlot>
-								</a>
+							<DropdownMenu.Item
+								render={<a href={`${CONFIG.HOME_ORIGIN}`} target="_blank" />}
+							>
+								More apps
+								<DropdownMenuItemRightSlot>
+									<Icon name="new_window" />
+								</DropdownMenuItemRightSlot>
 							</DropdownMenu.Item>
 						</>
 					}
-					<DropdownMenu.Item asChild>
-						<a href={`${CONFIG.HOME_ORIGIN}/contact`} target="_blank">
-							Contact support
-							<DropdownMenuItemRightSlot>
-								<Icon name="profile" />
-							</DropdownMenuItemRightSlot>
-						</a>
+					<DropdownMenu.Item
+						render={
+							<a href={`${CONFIG.HOME_ORIGIN}/contact`} target="_blank" />
+						}
+					>
+						Contact support
+						<DropdownMenuItemRightSlot>
+							<Icon name="profile" />
+						</DropdownMenuItemRightSlot>
 					</DropdownMenu.Item>
 					{!getIsPWAInstalled() && (
 						<Suspense>
-							<DropdownMenu.Item asChild color="accent">
-								<InstallButton
-									emphasis="primary"
-									size="small"
-									className="justify-between mx-lg my-sm"
-								>
-									Install app
-									<Icon name="download" />
-								</InstallButton>
+							<DropdownMenu.Item
+								render={
+									<InstallButton
+										emphasis="primary"
+										size="small"
+										className="justify-between mx-lg my-sm"
+									/>
+								}
+								color="accent"
+							>
+								Install app
+								<Icon name="download" />
 							</DropdownMenu.Item>
 						</Suspense>
 					)}
@@ -227,25 +235,23 @@ function SmallUpdatePrompt() {
 	}
 
 	return (
-		<Box surface color="accent" p="xs" gap="sm" asChild>
-			<Button
-				color="accent"
-				emphasis="ghost"
-				size="small"
-				className="font-normal"
-				onClick={async () => {
-					try {
-						setLoading(true);
-						await updateApp(true);
-					} finally {
-						setLoading(false);
-					}
-				}}
-				loading={loading}
-			>
-				<Icon name="star" />
-				<span>Update</span>
-			</Button>
-		</Box>
+		<Button
+			color="accent"
+			emphasis="ghost"
+			size="small"
+			className="font-normal"
+			onClick={async () => {
+				try {
+					setLoading(true);
+					await updateApp(true);
+				} finally {
+					setLoading(false);
+				}
+			}}
+			loading={loading}
+		>
+			<Icon name="star" />
+			<span>Update</span>
+		</Button>
 	);
 }

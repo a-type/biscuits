@@ -87,20 +87,6 @@
 		{
 			"type": "npm",
 			"script": "app-dev",
-			"label": "🌟 Star Chart: Web",
-			"path": "apps/star-chart/web",
-			"problemMatcher": []
-		},
-		{
-			"type": "npm",
-			"script": "generate",
-			"label": "🌟 Star Chart: Generate",
-			"path": "apps/star-chart/verdant",
-			"problemMatcher": []
-		},
-		{
-			"type": "npm",
-			"script": "app-dev",
 			"label": "🏖️ Trip Tick: Web",
 			"path": "apps/trip-tick/web",
 			"problemMatcher": []

@@ -27,11 +27,9 @@ export function UserMenu({ className }: UserMenuProps) {
 				<Avatar imageSrc={data.me.imageUrl} name={name} />
 				<div>Hi, {name}!</div>
 			</Box>
-			<Button asChild emphasis="default">
-				<Link to="/settings">
-					Your plan
-					<Icon name="gear" />
-				</Link>
+			<Button render={<Link to="/settings" />} emphasis="default">
+				Your plan
+				<Icon name="gear" />
 			</Button>
 		</Box>
 	);

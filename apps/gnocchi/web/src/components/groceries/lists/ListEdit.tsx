@@ -32,10 +32,8 @@ export function ListEdit({ listId }: ListEditProps) {
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
-			<DialogTrigger asChild>
-				<Button emphasis="ghost" size="small">
-					<GearIcon />
-				</Button>
+			<DialogTrigger render={<Button emphasis="ghost" size="small" />}>
+				<GearIcon />
 			</DialogTrigger>
 			<DialogContent>
 				<div className="flex flex-col gap-2 items-start">
@@ -62,8 +60,8 @@ export function ListEdit({ listId }: ListEditProps) {
 						Delete List
 					</Button>
 					<DialogActions>
-						<DialogClose asChild>
-							<Button emphasis="primary">Done</Button>
+						<DialogClose render={<Button emphasis="primary" />}>
+							Done
 						</DialogClose>
 					</DialogActions>
 				</div>

@@ -1,5 +1,6 @@
 import {
 	Box,
+	Button,
 	clsx,
 	CollapsibleSimple,
 	Dialog,
@@ -16,12 +17,11 @@ import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
 import Link from '@tiptap/extension-link';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import { ReactNode, Suspense, useState } from 'react';
+import { ReactElement, Suspense, useState } from 'react';
 
 export interface ManagePublicationProps {
 	className?: string;
-	asChild?: boolean;
-	children?: ReactNode;
+	children?: ReactElement | string;
 }
 
 export const managePublicationQuery = graphql(`
@@ -48,7 +48,6 @@ const updatePublicationMutation = graphql(`
 
 export function ManagePublication({
 	className,
-	asChild,
 	children,
 }: ManagePublicationProps) {
 	const { data, refetch } = useSuspenseQuery(managePublicationQuery);
@@ -69,7 +68,10 @@ export function ManagePublication({
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
-			<Dialog.Trigger asChild={asChild} className={className}>
+			<Dialog.Trigger
+				render={<Button emphasis="light" />}
+				className={className}
+			>
 				{children}
 			</Dialog.Trigger>
 			<Dialog.Content className="flex flex-col gap-md" width="md">

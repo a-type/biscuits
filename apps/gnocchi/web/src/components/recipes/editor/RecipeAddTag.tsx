@@ -8,12 +8,11 @@ import {
 	DialogClose,
 	DialogContent,
 	DialogTitle,
-	DialogTrigger,
 } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { PlusIcon } from '@radix-ui/react-icons';
 import classNames from 'classnames';
-import { ReactNode, Suspense, forwardRef, useState } from 'react';
+import { ReactElement, Suspense, forwardRef, useState } from 'react';
 
 export function RecipeEditTags({
 	recipe,
@@ -23,7 +22,7 @@ export function RecipeEditTags({
 	onClose,
 }: {
 	recipe: Recipe;
-	children?: ReactNode;
+	children?: ReactElement;
 	contentClassName?: string;
 	className?: string;
 	onClose?: () => void;
@@ -50,11 +49,9 @@ export function RecipeEditTags({
 			}}
 		>
 			{children ? (
-				<DialogTrigger asChild>{children}</DialogTrigger>
+				<Dialog.Trigger render={children} />
 			) : (
-				<DialogTrigger asChild className={className}>
-					<DefaultTrigger />
-				</DialogTrigger>
+				<Dialog.Trigger render={<DefaultTrigger />} className={className} />
 			)}
 			<DialogContent className={contentClassName}>
 				<DialogTitle>Tags for {title}</DialogTitle>
@@ -69,9 +66,7 @@ export function RecipeEditTags({
 					<NewTagForm onCreate={toggleTag} />
 				</Suspense>
 				<DialogActions>
-					<DialogClose asChild>
-						<Button>Done</Button>
-					</DialogClose>
+					<DialogClose>Done</DialogClose>
 				</DialogActions>
 			</DialogContent>
 		</Dialog>

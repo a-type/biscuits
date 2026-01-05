@@ -86,11 +86,12 @@ export function PlanPage({}: PlanPageProps) {
 		<PageRoot>
 			<PageContent gap="lg" className="self-stretch">
 				<PageFixedArea className="mb-10 flex flex-row items-center w-full justify-between">
-					<Button asChild emphasis="primary">
-						<Link to={returnToAppUrl ?? '/'}>
-							<Icon name="arrowLeft" />
-							<span>Back to {returnToApp?.name ?? 'apps'}</span>
-						</Link>
+					<Button
+						render={<Link to={returnToAppUrl ?? '/'} />}
+						emphasis="primary"
+					>
+						<Icon name="arrowLeft" />
+						<span>Back to {returnToApp?.name ?? 'apps'}</span>
 					</Button>
 					<LogoutButton />
 				</PageFixedArea>

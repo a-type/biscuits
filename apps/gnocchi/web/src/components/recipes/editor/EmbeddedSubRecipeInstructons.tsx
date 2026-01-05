@@ -1,17 +1,24 @@
 import { hooks } from '@/stores/groceries/index.js';
-import { Box, Button, clsx, Collapsible, Icon } from '@a-type/ui';
+import {
+	Box,
+	Button,
+	clsx,
+	Collapsible,
+	Icon,
+	UseRenderRenderProp,
+} from '@a-type/ui';
 import { ReactNode, Suspense } from 'react';
 import { RecipeInstructionsViewer } from '../viewer/RecipeInstructionsViewer.jsx';
 
 export function EmbeddedSubRecipeInstructionsWrapper({
 	children,
-	asChild,
+	render,
 }: {
 	children: ReactNode;
-	asChild?: boolean;
+	render?: UseRenderRenderProp;
 }) {
 	return (
-		<Collapsible asChild={asChild}>
+		<Collapsible render={render}>
 			<Suspense>{children}</Suspense>
 		</Collapsible>
 	);
@@ -20,9 +27,11 @@ export function EmbeddedSubRecipeInstructionsWrapper({
 export function EmbeddedSubRecipeInstructionsToggle({
 	recipeId,
 	className,
+	render,
 }: {
 	recipeId: string;
 	className?: string;
+	render?: UseRenderRenderProp;
 }) {
 	const recipe = hooks.useRecipe(recipeId);
 	hooks.useWatch(recipe);
@@ -32,7 +41,7 @@ export function EmbeddedSubRecipeInstructionsToggle({
 	}
 
 	return (
-		<Collapsible.Trigger asChild>
+		<Collapsible.Trigger render={render}>
 			<Button
 				emphasis="ghost"
 				className={clsx('w-full gap-2 items-center text-start', className)}

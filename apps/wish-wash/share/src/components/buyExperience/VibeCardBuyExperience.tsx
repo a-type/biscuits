@@ -1,7 +1,7 @@
 import { Dialog, P } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 import { SearchButton } from '@wish-wash.biscuits/common';
-import { ReactNode } from 'react';
+import { ReactElement } from 'react';
 import {
 	ItemCardImageGallery,
 	itemCardImageGalleryFragment,
@@ -29,14 +29,14 @@ export function VibeCardBuyExperience({
 	children,
 }: {
 	item: FragmentOf<typeof vibeCardBuyExperienceFragment>;
-	children: ReactNode;
+	children: ReactElement;
 	listAuthor: string;
 }) {
 	const item = readFragment(vibeCardBuyExperienceFragment, itemMasked);
 	return (
 		<>
 			<Dialog>
-				<Dialog.Trigger asChild>{children}</Dialog.Trigger>
+				<Dialog.Trigger render={children} />
 				<Dialog.Content width="lg" className="gap-md">
 					<ItemCardTypeChip item={item} className="mr-auto" />
 					{item.description && <Dialog.Title>{item.description}</Dialog.Title>}

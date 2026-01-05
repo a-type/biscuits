@@ -41,13 +41,13 @@ export function LogoutNotice({}: LogoutNoticeProps) {
 				<DialogTitle>Session expired</DialogTitle>
 				<P>To resume syncing your data, please sign in again.</P>
 				<div className="flex flex-row gap-3 justify-end items-center">
-					<DialogClose asChild>
-						<Button emphasis="ghost">Cancel</Button>
-					</DialogClose>
-					<DialogClose asChild>
-						<LoginButton emphasis="primary" onClick={() => setClose(true)}>
-							Sign in
-						</LoginButton>
+					<DialogClose render={<Button emphasis="ghost" />}>Cancel</DialogClose>
+					<DialogClose
+						render={
+							<LoginButton emphasis="primary" onClick={() => setClose(true)} />
+						}
+					>
+						Sign in
 					</DialogClose>
 				</div>
 			</DialogContent>

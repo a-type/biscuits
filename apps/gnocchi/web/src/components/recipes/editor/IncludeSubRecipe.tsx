@@ -25,10 +25,8 @@ export function IncludeSubRecipe({
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
-			<Dialog.Trigger asChild>
-				<Button {...rest} className={className}>
-					{children || 'Embed a recipe'}
-				</Button>
+			<Dialog.Trigger render={<Button {...rest} className={className} />}>
+				{children || 'Embed a recipe'}
 			</Dialog.Trigger>
 			<Dialog.Content>
 				<Dialog.Title>Select a recipe</Dialog.Title>
@@ -36,9 +34,7 @@ export function IncludeSubRecipe({
 					<SubRecipeSearch onSelect={handleSelect} />
 				</Suspense>
 				<Dialog.Actions>
-					<Dialog.Close asChild>
-						<Button>Cancel</Button>
-					</Dialog.Close>
+					<Dialog.Close />
 				</Dialog.Actions>
 			</Dialog.Content>
 		</Dialog>

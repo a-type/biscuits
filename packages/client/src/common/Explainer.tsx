@@ -33,9 +33,7 @@ export function Explainer({ stages }: ExplainerProps) {
 			>
 				<div className="col gap-4 flex-1 items-start">{stages[stage]}</div>
 				<DialogActions>
-					<DialogClose asChild>
-						<Button>Skip</Button>
-					</DialogClose>
+					<DialogClose render={<Button />}>Skip</DialogClose>
 					<Button
 						className="ml-auto"
 						emphasis="primary"

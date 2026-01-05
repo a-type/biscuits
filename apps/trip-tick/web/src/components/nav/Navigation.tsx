@@ -29,26 +29,22 @@ export function Navigation({}: NavigationProps) {
 			</div>
 			<NavBarRoot>
 				<NavBarItem
-					asChild
 					className="[&[data-active=true]]:(bg-primary-wash color-black)"
+					render={<Link to="/" data-active={matchTrips} />}
 				>
-					<Link to="/" data-active={matchTrips}>
-						<NavBarItemIconWrapper>
-							<NavBarItemIcon className="i-solar-suitcase-tag-linear fill-inherit" />
-						</NavBarItemIconWrapper>
-						<NavBarItemText>Trips</NavBarItemText>
-					</Link>
+					<NavBarItemIconWrapper>
+						<NavBarItemIcon className="i-solar-suitcase-tag-linear fill-inherit" />
+					</NavBarItemIconWrapper>
+					<NavBarItemText>Trips</NavBarItemText>
 				</NavBarItem>
 				<NavBarItem
-					asChild
 					className="[&[data-active=true]]:(bg-primary-wash color-black)"
+					render={<Link to="/lists" data-active={matchLists} />}
 				>
-					<Link to="/lists" data-active={matchLists}>
-						<NavBarItemIconWrapper>
-							<NavBarItemIcon className="i-solar-checklist-linear" />
-						</NavBarItemIconWrapper>
-						<NavBarItemText>Lists</NavBarItemText>
-					</Link>
+					<NavBarItemIconWrapper>
+						<NavBarItemIcon className="i-solar-checklist-linear" />
+					</NavBarItemIconWrapper>
+					<NavBarItemText>Lists</NavBarItemText>
 				</NavBarItem>
 
 				<AppPickerNavItem />

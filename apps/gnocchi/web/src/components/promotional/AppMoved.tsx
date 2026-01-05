@@ -54,15 +54,14 @@ export function AppMoved({}: AppMovedProps) {
 				{!canSync ? <LoggedOut /> : <LoggedIn />}
 				<InstallNote />
 				<DialogActions>
-					<Button asChild>
-						<Link to={`${CONFIG.HOME_ORIGIN}/contact`} newTab>
-							Contact Support
-						</Link>
+					<Button render={<Link to={`${CONFIG.HOME_ORIGIN}/contact`} newTab />}>
+						Contact Support
 					</Button>
-					<Button asChild emphasis="primary">
-						<Link newTab to={goTo.toString()}>
-							Open Gnocchi
-						</Link>
+					<Button
+						emphasis="primary"
+						render={<Link newTab to={goTo.toString()} />}
+					>
+						Open Gnocchi
 					</Button>
 				</DialogActions>
 			</DialogContent>

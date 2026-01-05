@@ -41,10 +41,10 @@ export function DeveloperErrorDialog(props: DeveloperErrorDialogProps) {
 				{justReloaded ?
 					<Dialog.Actions>
 						<Button onClick={reload}>Reload again</Button>
-						<Button asChild>
-							<Link to={`${CONFIG.HOME_ORIGIN}/contact`} newTab>
-								Contact support
-							</Link>
+						<Button
+							render={<Link to={`${CONFIG.HOME_ORIGIN}/contact`} newTab />}
+						>
+							Contact support
 						</Button>
 					</Dialog.Actions>
 				:	<Dialog.Actions>

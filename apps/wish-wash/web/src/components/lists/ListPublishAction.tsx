@@ -63,16 +63,18 @@ export function ListPublishAction({
 
 	return (
 		<Dialog>
-			<DialogTrigger asChild>
-				<ActionButton
-					emphasis="light"
-					color="accent"
-					{...rest}
-					className={clsx('self-start', className)}
-				>
-					<Icon name="send" />
-					{isPublished ? 'Sharing' : 'Share list'}
-				</ActionButton>
+			<DialogTrigger
+				render={
+					<ActionButton
+						emphasis="light"
+						color="accent"
+						{...rest}
+						className={clsx('self-start', className)}
+					/>
+				}
+			>
+				<Icon name="send" />
+				{isPublished ? 'Sharing' : 'Share list'}
 			</DialogTrigger>
 			<DialogContent className="flex flex-col gap-lg">
 				{isPublished ?
@@ -118,9 +120,7 @@ function PublishList({ listId }: { listId: string }) {
 				as purchased if they buy them for you!
 			</P>
 			<DialogActions>
-				<DialogClose asChild>
-					<Button>Cancel</Button>
-				</DialogClose>
+				<DialogClose>Cancel</DialogClose>
 				<Button emphasis="primary" onClick={publish}>
 					Publish
 				</Button>
@@ -147,10 +147,13 @@ function ManagePublishedList({ listId, url }: { listId: string; url: string }) {
 					Your list is currently public on the internet. You can unpublish it at
 					any time.
 				</P>
-				<Button asChild emphasis="light" color="accent" className="self-start">
-					<Link to={url} newTab>
-						View your list <Icon name="new_window" />
-					</Link>
+				<Button
+					emphasis="light"
+					color="accent"
+					className="self-start"
+					render={<Link to={url} newTab />}
+				>
+					View your list <Icon name="new_window" />
 				</Button>
 			</Box>
 			<Divider />
@@ -165,9 +168,7 @@ function ManagePublishedList({ listId, url }: { listId: string; url: string }) {
 				<Button color="attention" emphasis="ghost" onClick={unpublish}>
 					Unpublish
 				</Button>
-				<DialogClose asChild>
-					<Button>Done</Button>
-				</DialogClose>
+				<DialogClose>Done</DialogClose>
 			</DialogActions>
 		</>
 	);

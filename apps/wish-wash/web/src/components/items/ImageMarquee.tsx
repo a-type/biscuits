@@ -24,12 +24,14 @@ function ImageMarqueeItem({ image }: { image: EntityFile }) {
 	hooks.useWatch(image);
 
 	return (
-		<Marquee.Item asChild>
-			<img
-				src={image.url ?? ''}
-				alt={image.name ?? undefined}
-				className="object-cover"
-			/>
-		</Marquee.Item>
+		<Marquee.Item
+			render={
+				<img
+					src={image.url ?? ''}
+					alt={image.name ?? undefined}
+					className="object-cover"
+				/>
+			}
+		/>
 	);
 }

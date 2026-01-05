@@ -96,32 +96,27 @@ export function PersonQuickActions({
 						key={relatedPerson.get('id')}
 						size="small"
 						emphasis="default"
-						asChild
+						render={<div />}
+						className="p-0 gap-0 my-auto"
 					>
-						<div className="p-0 gap-0 my-auto">
-							<Button
-								emphasis="ghost"
-								size="small"
-								className="border-0 font-normal"
-								onClick={() =>
-									addRelationship(personId, relatedPerson.get('id'))
-								}
-							>
-								<Icon name="connection" />
-								Connect with {relatedPerson.get('name')}
-							</Button>
-							<Button
-								size="small"
-								color="attention"
-								emphasis="ghost"
-								onClick={() =>
-									dismissedSuggestions.add(relatedPerson.get('id'))
-								}
-								className="border-0"
-							>
-								<Icon name="x" />
-							</Button>
-						</div>
+						<Button
+							emphasis="ghost"
+							size="small"
+							className="border-0 font-normal"
+							onClick={() => addRelationship(personId, relatedPerson.get('id'))}
+						>
+							<Icon name="connection" />
+							Connect with {relatedPerson.get('name')}
+						</Button>
+						<Button
+							size="small"
+							color="attention"
+							emphasis="ghost"
+							onClick={() => dismissedSuggestions.add(relatedPerson.get('id'))}
+							className="border-0"
+						>
+							<Icon name="x" />
+						</Button>
 					</Button>
 				);
 			})}

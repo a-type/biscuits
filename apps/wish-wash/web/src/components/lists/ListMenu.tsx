@@ -34,10 +34,8 @@ export function ListMenu(props: ListMenuProps) {
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger asChild>
-				<Button emphasis="ghost" {...props}>
-					<Icon name="dots" />
-				</Button>
+			<DropdownMenuTrigger render={<Button emphasis="ghost" {...props} />}>
+				<Icon name="dots" />
 			</DropdownMenuTrigger>
 			<DropdownMenuContent>
 				<DropdownMenuArrow />

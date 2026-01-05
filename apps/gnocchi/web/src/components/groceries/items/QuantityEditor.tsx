@@ -7,7 +7,6 @@ import {
 	LiveUpdateTextField,
 	NumberStepper,
 } from '@a-type/ui';
-import { preventDefault } from '@a-type/utils';
 import { Item } from '@gnocchi.biscuits/verdant';
 import { useItemDisplayText } from './hooks.js';
 
@@ -22,13 +21,18 @@ export function QuantityEditor({
 	const displayText = useItemDisplayText(item);
 	return (
 		<Dialog>
-			<Dialog.Trigger asChild>
-				<Button className={clsx('p-1 font-normal', className)} emphasis="ghost">
-					<Icon name="pencil" />
-					<span>Edit</span>
-				</Button>
+			<Dialog.Trigger
+				render={
+					<Button
+						className={clsx('p-1 font-normal', className)}
+						emphasis="ghost"
+					/>
+				}
+			>
+				<Icon name="pencil" />
+				<span>Edit</span>
 			</Dialog.Trigger>
-			<Dialog.Content onOpenAutoFocus={preventDefault}>
+			<Dialog.Content initialFocus={false}>
 				<Dialog.Title>Edit item</Dialog.Title>
 				<div className="flex flex-row items-center justify-center gap-4 flex-wrap">
 					<LiveUpdateTextField
@@ -44,9 +48,7 @@ export function QuantityEditor({
 					/>
 				</div>
 				<Dialog.Actions>
-					<Dialog.Close asChild>
-						<Button align="end">Done</Button>
-					</Dialog.Close>
+					<Dialog.Close render={<Button align="end" />}>Done</Dialog.Close>
 				</Dialog.Actions>
 			</Dialog.Content>
 		</Dialog>

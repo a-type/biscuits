@@ -8,12 +8,6 @@ import {
 	DialogClose,
 	DialogContent,
 	DropdownMenu,
-	DropdownMenuCheckboxItem,
-	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuItemIndicator,
-	DropdownMenuItemRightSlot,
-	DropdownMenuTrigger,
 	FormikForm,
 	Icon,
 	SubmitButton,
@@ -174,35 +168,33 @@ function IngredientMenu({
 	return (
 		<>
 			<DropdownMenu modal={false}>
-				<DropdownMenuTrigger asChild>
-					<Button emphasis="ghost">
-						<Icon name="dots" />
-					</Button>
-				</DropdownMenuTrigger>
-				<DropdownMenuContent>
-					<DropdownMenuCheckboxItem
+				<DropdownMenu.Trigger render={<Button emphasis="ghost" />}>
+					<Icon name="dots" />
+				</DropdownMenu.Trigger>
+				<DropdownMenu.Content>
+					<DropdownMenu.CheckboxItem
 						checked={isSectionHeader}
 						onCheckedChange={(v) => ingredient.set('isSectionHeader', !!v)}
 					>
-						<DropdownMenuItemIndicator>
+						<DropdownMenu.ItemIndicator>
 							<CheckIcon />
-						</DropdownMenuItemIndicator>
+						</DropdownMenu.ItemIndicator>
 						Section header
-					</DropdownMenuCheckboxItem>
-					<DropdownMenuItem
+					</DropdownMenu.CheckboxItem>
+					<DropdownMenu.Item
 						onSelect={(ev) => {
 							setDetailsOpen(true);
 						}}
 					>
 						Edit details
-					</DropdownMenuItem>
-					<DropdownMenuItem color="attention" onSelect={onDelete}>
+					</DropdownMenu.Item>
+					<DropdownMenu.Item color="attention" onSelect={onDelete}>
 						<span>Delete</span>
-						<DropdownMenuItemRightSlot>
+						<DropdownMenu.ItemRightSlot>
 							<Icon name="trash" />
-						</DropdownMenuItemRightSlot>
-					</DropdownMenuItem>
-				</DropdownMenuContent>
+						</DropdownMenu.ItemRightSlot>
+					</DropdownMenu.Item>
+				</DropdownMenu.Content>
 			</DropdownMenu>
 			<IngredientDetailsDialog
 				ingredient={ingredient}
@@ -254,9 +246,7 @@ function IngredientDetailsDialog({
 					)}
 					{!isSectionHeader && <TextField name="unit" label="Unit" />}
 					<DialogActions>
-						<DialogClose asChild>
-							<Button>Cancel</Button>
-						</DialogClose>
+						<DialogClose>Cancel</DialogClose>
 						<SubmitButton emphasis="primary">Save</SubmitButton>
 					</DialogActions>
 				</FormikForm>

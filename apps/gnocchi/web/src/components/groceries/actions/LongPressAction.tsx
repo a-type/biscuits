@@ -1,13 +1,6 @@
 import { useAnimationFrame } from '@/hooks/useAnimationFrame.js';
 import { preventDefault } from '@/lib/eventHandlers.js';
-import {
-	ActionButton,
-	ActionButtonProps,
-	Popover,
-	PopoverAnchor,
-	PopoverArrow,
-	PopoverContent,
-} from '@a-type/ui';
+import { ActionButton, ActionButtonProps, Popover } from '@a-type/ui';
 import { useDrag } from '@use-gesture/react';
 import classNames from 'classnames';
 import { useEffect, useRef, useState } from 'react';
@@ -144,19 +137,21 @@ export function LongPressAction({
 
 	return (
 		<Popover modal={false} open={state !== 'idle' && state !== 'pending'}>
-			<PopoverAnchor asChild>
-				<ActionButton
-					size="small"
-					onContextMenu={preventDefault}
-					ref={ref}
-					{...rest}
-					className={classNames(rest.className)}
-				>
-					{children}
-				</ActionButton>
-			</PopoverAnchor>
-			<PopoverContent className="p-0" side="top" sideOffset={0}>
-				<PopoverArrow className="w-5 h-3" />
+			<Popover.Anchor
+				render={
+					<ActionButton
+						size="small"
+						onContextMenu={preventDefault}
+						ref={ref}
+						{...rest}
+						className={classNames(rest.className)}
+					>
+						{children}
+					</ActionButton>
+				}
+			/>
+			<Popover.Content className="p-0" side="top" sideOffset={0}>
+				<Popover.Arrow className="w-5 h-3" />
 				<div className="relative overflow-hidden px-4 py-2 rounded-lg">
 					<div
 						className={classNames(
@@ -172,7 +167,7 @@ export function LongPressAction({
 					/>
 					<div className="position-relative z-1">Hold for 2 seconds</div>
 				</div>
-			</PopoverContent>
+			</Popover.Content>
 		</Popover>
 	);
 }

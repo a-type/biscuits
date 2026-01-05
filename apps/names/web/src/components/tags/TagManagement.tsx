@@ -6,10 +6,9 @@ import {
 	Dialog,
 	Icon,
 	PaletteName,
-	SlotDiv,
 } from '@a-type/ui';
 import { Tag } from '@names.biscuits/verdant';
-import { ReactNode, Suspense } from 'react';
+import { Suspense } from 'react';
 import { proxy, useSnapshot } from 'valtio';
 import { TagDisplay } from './TagDisplay.jsx';
 
@@ -19,12 +18,8 @@ const state = proxy({
 	open: false,
 });
 
-export function TagManagementTrigger({ children }: { children: ReactNode }) {
-	return (
-		<SlotDiv onClick={() => (state.open = true)} asChild>
-			{children}
-		</SlotDiv>
-	);
+export function openTagManagement() {
+	state.open = true;
 }
 
 export function TagManagement({}: TagManagementProps) {

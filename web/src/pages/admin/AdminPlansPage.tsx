@@ -2,8 +2,6 @@ import {
 	Button,
 	Checkbox,
 	Dialog,
-	DialogActions,
-	DialogClose,
 	DialogContent,
 	DialogTitle,
 } from '@a-type/ui';
@@ -140,11 +138,6 @@ export function AdminPlansPage({}: AdminPlansPageProps) {
 							</li>
 						))}
 					</ul>
-					<DialogActions>
-						<DialogClose asChild>
-							<Button>Close</Button>
-						</DialogClose>
-					</DialogActions>
 				</DialogContent>
 			</Dialog>
 		</div>

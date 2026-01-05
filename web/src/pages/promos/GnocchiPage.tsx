@@ -149,11 +149,11 @@ export function GnocchiPage() {
 					]}
 				/>
 				<div className="flex flex-row flex-wrap items-center justify-center gap-4 w-full py-8 md:[grid-column-end:span_2]">
-					<Button asChild emphasis="primary">
-						<Link to="/join">Upgrade now</Link>
+					<Button render={<Link to="/join" />} emphasis="primary">
+						Upgrade now
 					</Button>
-					<Button asChild>
-						<Link to="/apps">See other included apps</Link>
+					<Button render={<Link to="/apps" />}>
+						See other included apps
 					</Button>
 				</div>
 			</Content>

@@ -21,9 +21,7 @@ export function ProjectPage({}: ProjectPageProps) {
 			<PageContent className="gap-4">
 				<H1>Project missing</H1>
 				<p>Sorry, couldn't find this project. Maybe it was deleted?</p>
-				<Button asChild>
-					<Link to="/">Back to projects</Link>
-				</Button>
+				<Button render={<Link to="/" />}>Back to projects</Button>
 			</PageContent>
 		);
 	}
@@ -31,11 +29,9 @@ export function ProjectPage({}: ProjectPageProps) {
 	return (
 		<div className="w-full min-h-100dvh flex flex-col md:h-100dvh">
 			<div className="row py-1 sticky z-100 bg-wash top-0">
-				<Button asChild emphasis="ghost" size="small">
-					<Link to="/">
-						<Icon name="arrowLeft" />
-						Projects
-					</Link>
+				<Button render={<Link to="/" />} emphasis="ghost" size="small">
+					<Icon name="arrowLeft" />
+					Projects
 				</Button>
 				<ActionBar>
 					<UndoAction />

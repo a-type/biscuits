@@ -92,10 +92,8 @@ function CalendarPicker({
 	const [open, setOpen] = useState(false);
 	return (
 		<Popover open={open} onOpenChange={setOpen}>
-			<Popover.Trigger asChild>
-				<Button size="small" emphasis="ghost">
-					<Icon name="calendar" />
-				</Button>
+			<Popover.Trigger render={<Button size="small" emphasis="ghost" />}>
+				<Icon name="calendar" />
 			</Popover.Trigger>
 			<Popover.Content side="bottom" align="start">
 				<DatePicker.Root

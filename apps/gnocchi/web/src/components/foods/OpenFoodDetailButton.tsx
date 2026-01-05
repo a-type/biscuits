@@ -2,9 +2,9 @@ import { Button, ButtonProps, Icon } from '@a-type/ui';
 import { useSearchParams } from '@verdant-web/react-router';
 import { forwardRef } from 'react';
 
-export interface OpenFoodDetailButtonProps extends ButtonProps {
+export type OpenFoodDetailButtonProps = ButtonProps & {
 	foodName: string;
-}
+};
 
 export const OpenFoodDetailButton = forwardRef<
 	HTMLButtonElement,

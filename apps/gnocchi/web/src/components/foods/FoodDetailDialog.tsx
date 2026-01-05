@@ -8,9 +8,6 @@ import {
 	Box,
 	Button,
 	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
 	DialogTitle,
 	Divider,
 	H3,
@@ -22,7 +19,6 @@ import {
 	Tooltip,
 	withClassName,
 } from '@a-type/ui';
-import { preventDefault } from '@a-type/utils';
 import { Food } from '@gnocchi.biscuits/verdant';
 import {
 	ClockIcon,
@@ -51,14 +47,12 @@ export function FoodDetailDialog({}: FoodDetailDialogProps) {
 	return (
 		<Suspense>
 			<Dialog open={open} onOpenChange={onClose}>
-				<DialogContent onOpenAutoFocus={preventDefault}>
+				<Dialog.Content initialFocus={false}>
 					{foodName && <FoodDetailView foodName={foodName} open={open} />}
-					<DialogActions>
-						<DialogClose asChild>
-							<Button>Close</Button>
-						</DialogClose>
-					</DialogActions>
-				</DialogContent>
+					<Dialog.Actions>
+						<Dialog.Close />
+					</Dialog.Actions>
+				</Dialog.Content>
 			</Dialog>
 		</Suspense>
 	);

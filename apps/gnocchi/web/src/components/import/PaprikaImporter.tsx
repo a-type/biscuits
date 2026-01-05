@@ -1,16 +1,6 @@
 import { instructionsToDoc, stringToDoc } from '@/lib/tiptap.js';
 import { hooks } from '@/stores/groceries/index.js';
-import {
-	ActionBar,
-	ActionButton,
-	Button,
-	Checkbox,
-	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
-	DialogTitle,
-} from '@a-type/ui';
+import { ActionBar, ActionButton, Button, Checkbox, Dialog } from '@a-type/ui';
 import { parseIngredient } from '@gnocchi.biscuits/conversion';
 import cuid from 'cuid';
 import { ReactNode, forwardRef, useCallback, useState } from 'react';
@@ -183,8 +173,8 @@ export const PaprikaImporter = forwardRef<
 				/>
 				{children}
 			</label>
-			<DialogContent>
-				<DialogTitle>Choose recipes</DialogTitle>
+			<Dialog.Content>
+				<Dialog.Title>Choose recipes</Dialog.Title>
 				<ActionBar className="flex-shrink-0">
 					<ActionButton onClick={() => setSelected({})}>
 						Select none
@@ -213,15 +203,13 @@ export const PaprikaImporter = forwardRef<
 						/>
 					))}
 				</div>
-				<DialogActions>
-					<DialogClose asChild>
-						<Button>Cancel</Button>
-					</DialogClose>
+				<Dialog.Actions>
+					<Dialog.Close />
 					<Button loading={loading} emphasis="primary" onClick={importSelected}>
-						import
+						Import
 					</Button>
-				</DialogActions>
-			</DialogContent>
+				</Dialog.Actions>
+			</Dialog.Content>
 		</Dialog>
 	);
 });

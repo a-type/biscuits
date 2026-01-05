@@ -66,10 +66,8 @@ export function SubscriptionPromotion({
 			<DialogContent width="lg">
 				<div className="flex flex-row items-start gap-2">
 					<DialogTitle className="flex-1">{title}</DialogTitle>
-					<DialogClose asChild>
-						<Button size="small" emphasis="ghost">
-							<Icon name="x" />
-						</Button>
+					<DialogClose render={<Button size="small" emphasis="ghost" />}>
+						<Icon name="x" />
 					</DialogClose>
 				</div>
 				{description && <Dialog.Description>{description}</Dialog.Description>}

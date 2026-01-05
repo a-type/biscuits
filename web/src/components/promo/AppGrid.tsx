@@ -14,27 +14,25 @@ export function AppGrid({ className }: AppGridProps) {
 		>
 			{visibleApps.map((app) => (
 				<Card key={app.id}>
-					<Card.Main asChild>
-						<Link
-							to={getAppUrl(app)}
-							className="grid gap-md grid-areas-[icon_name]-[description_description] grid-cols-[auto_1fr] font-normal items-center p-md group"
-						>
-							<h3 className="text-lg font-semibold grid-area-[name] m-0">
-								{app.name}
-							</h3>
-							<img
-								src={`${app.url}/${app.iconPath}`}
-								alt=""
-								className="w-16 h-16 grid-area-[icon]"
-							/>
-							<div className="text-sm text-gray-ink grid-area-[description]">
-								{app.description}
-							</div>
-							<Icon
-								name="new_window"
-								className="absolute top-md right-md transition-transform [.group:hover>&]:(translate-x-2 -translate-y-2)"
-							/>
-						</Link>
+					<Card.Main
+						render={<Link to={getAppUrl(app)} />}
+						className="grid gap-md grid-areas-[icon_name]-[description_description] grid-cols-[auto_1fr] font-normal items-center p-md group"
+					>
+						<h3 className="text-lg font-semibold grid-area-[name] m-0">
+							{app.name}
+						</h3>
+						<img
+							src={`${app.url}/${app.iconPath}`}
+							alt=""
+							className="w-16 h-16 grid-area-[icon]"
+						/>
+						<div className="text-sm text-gray-ink grid-area-[description]">
+							{app.description}
+						</div>
+						<Icon
+							name="new_window"
+							className="absolute top-md right-md transition-transform [.group:hover>&]:(translate-x-2 -translate-y-2)"
+						/>
 					</Card.Main>
 				</Card>
 			))}

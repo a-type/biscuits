@@ -114,10 +114,8 @@ export function RecipeIngredientViewer({
 									if (open) resetConversion();
 								}}
 							>
-								<DropdownMenuTrigger asChild>
-									<Button emphasis="ghost">
-										<Icon name="convert" />
-									</Button>
+								<DropdownMenuTrigger render={<Button emphasis="ghost" />}>
+									<Icon name="convert" />
 								</DropdownMenuTrigger>
 								<DropdownMenuContent>
 									<DropdownMenuLabel className="text-sm font-bold py-1 pl-3">

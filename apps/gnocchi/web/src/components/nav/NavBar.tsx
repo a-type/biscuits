@@ -81,23 +81,25 @@ const NavBarLink = memo(
 		ref,
 	) {
 		return (
-			<NavBarItem asChild>
-				<Link
-					to={to}
-					className={clsx({
-						active,
-					})}
-					data-active={active}
-					onMouseOver={onHover}
-					onClick={onClick}
-					ref={ref}
-				>
-					<NavBarItemIconWrapper className="flex">
-						<PopEffect active={animate} />
-						<NavBarItemIcon name={icon} />
-					</NavBarItemIconWrapper>
-					<NavBarItemText data-active={!!active}>{children}</NavBarItemText>
-				</Link>
+			<NavBarItem
+				render={
+					<Link
+						to={to}
+						className={clsx({
+							active,
+						})}
+						data-active={active}
+						onMouseOver={onHover}
+						onClick={onClick}
+						ref={ref}
+					/>
+				}
+			>
+				<NavBarItemIconWrapper className="flex">
+					<PopEffect active={animate} />
+					<NavBarItemIcon name={icon} />
+				</NavBarItemIconWrapper>
+				<NavBarItemText data-active={!!active}>{children}</NavBarItemText>
 			</NavBarItem>
 		);
 	}),

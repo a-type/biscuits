@@ -73,13 +73,12 @@ export function MoodPicker({
 				content="Slide to select mood"
 				open={!active && value === null}
 				side="left"
-				asChild
 			>
 				<Slider.Root
 					defaultValue={[0]}
 					value={localValue !== null ? [localValue] : undefined}
 					onValueChange={([val]) => setLocalValue(val)}
-					onValueCommit={([val]) => {
+					onValueCommitted={([val]) => {
 						onValueChange(val);
 						setLocalValue(val);
 						setActive(false);
@@ -109,16 +108,18 @@ export function MoodPicker({
 						})}
 					/>
 					<Popover open={active && getIsTouch()}>
-						<Popover.Anchor asChild>
-							<Slider.Thumb
-								className={clsx(
-									'w-touch-large h-touch-large text-2xl',
-									value === null && 'border-dashed',
-								)}
-							>
-								{value === null && !active ? '' : moodIcon}
-							</Slider.Thumb>
-						</Popover.Anchor>
+						<Popover.Anchor
+							render={
+								<Slider.Thumb
+									className={clsx(
+										'w-touch-large h-touch-large text-2xl',
+										value === null && 'border-dashed',
+									)}
+								>
+									{value === null && !active ? '' : moodIcon}
+								</Slider.Thumb>
+							}
+						/>
 						<Popover.Content
 							side="left"
 							sideOffset={16}

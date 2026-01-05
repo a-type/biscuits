@@ -8,10 +8,6 @@ import {
 	Button,
 	Checkbox,
 	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
-	DialogTitle,
 	Note,
 } from '@a-type/ui';
 import {
@@ -67,8 +63,8 @@ export function AddToListDialog({
 	return (
 		<Dialog open={isReallyOpen} onOpenChange={setIsReallyOpen} {...rest}>
 			{children}
-			<DialogContent>
-				<DialogTitle>Add to list</DialogTitle>
+			<Dialog.Content>
+				<Dialog.Title>Add to list</Dialog.Title>
 				<div className="flex flex-col items-start gap-3">
 					<RecipeNote recipe={recipe} readOnly />
 					<MultiplierStepper
@@ -145,17 +141,19 @@ export function AddToListDialog({
 						})}
 					</ul>
 				</div>
-				<DialogActions>
-					<DialogClose asChild>
-						<Button
-							emphasis="ghost"
-							onClick={() => {
-								next();
-							}}
-						>
-							Cancel
-						</Button>
-					</DialogClose>
+				<Dialog.Actions>
+					<Dialog.Close
+						render={
+							<Button
+								emphasis="ghost"
+								onClick={() => {
+									next();
+								}}
+							/>
+						}
+					>
+						Cancel
+					</Dialog.Close>
 					<Button
 						emphasis="primary"
 						loading={loading}
@@ -187,8 +185,8 @@ export function AddToListDialog({
 					>
 						Add
 					</Button>
-				</DialogActions>
-			</DialogContent>
+				</Dialog.Actions>
+			</Dialog.Content>
 		</Dialog>
 	);
 }

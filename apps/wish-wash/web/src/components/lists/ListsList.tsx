@@ -1,10 +1,8 @@
 import { hooks } from '@/hooks.js';
 import {
 	Button,
-	CardFooter,
+	Card,
 	CardGrid,
-	CardMain,
-	CardRoot,
 	CardTitle,
 	DropdownMenu,
 	DropdownMenuArrow,
@@ -51,18 +49,16 @@ export function ListsList({}: ListsListProps) {
 function ListsListItem({ item }: { item: List }) {
 	const { name, id } = hooks.useWatch(item);
 	return (
-		<CardRoot>
-			<CardMain asChild>
-				<Link to={`/${id}`}>
-					<CardTitle className="flex-row gap-2 items-center">
-						<Icon name={item.isAuthorized ? 'lock' : 'add_person'} /> {name}
-					</CardTitle>
-				</Link>
-			</CardMain>
-			<CardFooter>
+		<Card>
+			<Card.Main render={<Link to={`/${id}`} />}>
+				<CardTitle className="flex-row gap-2 items-center">
+					<Icon name={item.isAuthorized ? 'lock' : 'add_person'} /> {name}
+				</CardTitle>
+			</Card.Main>
+			<Card.Footer>
 				<ListMenu list={item} />
-			</CardFooter>
-		</CardRoot>
+			</Card.Footer>
+		</Card>
 	);
 }
 
@@ -72,10 +68,8 @@ function ListMenu({ list }: { list: List }) {
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger asChild>
-				<Button emphasis="ghost">
-					<Icon name="dots" />
-				</Button>
+			<DropdownMenuTrigger render={<Button emphasis="ghost" />}>
+				<Icon name="dots" />
 			</DropdownMenuTrigger>
 			<DropdownMenuContent>
 				<DropdownMenuArrow />

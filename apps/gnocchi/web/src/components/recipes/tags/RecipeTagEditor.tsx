@@ -1,7 +1,6 @@
 import { recipeTagEditorState } from '@/components/recipes/tags/recipeTagEditorState.js';
 import { hooks } from '@/stores/groceries/index.js';
 import {
-	Button,
 	ColorPicker,
 	Dialog,
 	DialogActions,
@@ -41,9 +40,7 @@ export function RecipeTagEditor() {
 				</div>
 
 				<DialogActions>
-					<DialogClose asChild>
-						<Button>Done</Button>
-					</DialogClose>
+					<DialogClose>Done</DialogClose>
 				</DialogActions>
 			</DialogContent>
 		</Dialog>

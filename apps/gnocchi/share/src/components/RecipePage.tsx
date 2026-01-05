@@ -116,11 +116,9 @@ export function RecipePage({ data: response }: RecipePageProps) {
 					className="h-recipe flex flex-col gap-4 items-stretch"
 				>
 					{publication ?
-						<Box asChild gap items="center">
-							<Link to={publication.url}>
-								<Icon name="arrowLeft" /> Back to{' '}
-								<b>{publication.publicationName ?? 'recipe list'}</b>
-							</Link>
+						<Box gap items="center" render={<Link to={publication.url} />}>
+							<Icon name="arrowLeft" /> Back to{' '}
+							<b>{publication.publicationName ?? 'recipe list'}</b>
 						</Box>
 					:	<GnocchiHeader />}
 					<TopLineRoot>
@@ -188,14 +186,18 @@ export function RecipePage({ data: response }: RecipePageProps) {
 						</Suspense>
 					</div>
 					<PageFixedArea className="flex flex-row justify-end bottom-4 top-auto mb-4 bg-transparent">
-						<Button emphasis="primary" className="shadow-lg" asChild>
-							<a
-								href={`${
-									import.meta.env.VITE_APP_ORIGIN
-								}?recipeSlug=${slug}&hub=true&skipWelcome=true&recipeTitle=${data.title}`}
-							>
-								Cook with Gnocchi
-							</a>
+						<Button
+							emphasis="primary"
+							className="shadow-lg"
+							render={
+								<a
+									href={`${
+										import.meta.env.VITE_APP_ORIGIN
+									}?recipeSlug=${slug}&hub=true&skipWelcome=true&recipeTitle=${data.title}`}
+								/>
+							}
+						>
+							Cook with Gnocchi
 						</Button>
 					</PageFixedArea>
 					<P className="color-gray7 ml-auto text-right text-xs">
@@ -216,11 +218,9 @@ export function RecipePage({ data: response }: RecipePageProps) {
 
 function GnocchiHeader() {
 	return (
-		<Box gap items="center" asChild>
-			<a href="https://biscuits.club/gnocchi">
-				<img src="/icon.png" className="w-30px h-30px" alt="Gnocchi icon" />
-				<H1 className="!text-lg !font-medium font-fancy">Gnocchi Recipes</H1>
-			</a>
+		<Box gap items="center" render={<a href="https://biscuits.club/gnocchi" />}>
+			<img src="/icon.png" className="w-30px h-30px" alt="Gnocchi icon" />
+			<H1 className="!text-lg !font-medium font-fancy">Gnocchi Recipes</H1>
 		</Box>
 	);
 }

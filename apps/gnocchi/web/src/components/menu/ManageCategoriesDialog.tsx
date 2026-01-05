@@ -1,18 +1,14 @@
 import { useResetCategoriesToDefault } from '@/stores/groceries/mutations.js';
-import {
-	Button,
-	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
-	DialogTitle,
-	DialogTrigger,
-} from '@a-type/ui';
-import { ReactNode, Suspense } from 'react';
+import { Button, Dialog } from '@a-type/ui';
+import { ReactElement, Suspense } from 'react';
 import { CategoryManager } from '../groceries/categories/CategoryManager.js';
 import { menuState } from './state.js';
 
-export function ManageCategoriesDialog({ children }: { children: ReactNode }) {
+export function ManageCategoriesDialog({
+	children,
+}: {
+	children: ReactElement;
+}) {
 	const resetToDefaults = useResetCategoriesToDefault();
 
 	return (
@@ -23,21 +19,19 @@ export function ManageCategoriesDialog({ children }: { children: ReactNode }) {
 				}
 			}}
 		>
-			<DialogTrigger asChild>{children}</DialogTrigger>
-			<DialogContent>
-				<DialogTitle>Categories</DialogTitle>
+			<Dialog.Trigger render={children} />
+			<Dialog.Content>
+				<Dialog.Title>Categories</Dialog.Title>
 				<Suspense fallback={null}>
 					<CategoryManager />
 				</Suspense>
-				<DialogActions>
+				<Dialog.Actions>
 					<Button emphasis="ghost" onClick={resetToDefaults}>
 						Reset to defaults
 					</Button>
-					<DialogClose asChild>
-						<Button>Done</Button>
-					</DialogClose>
-				</DialogActions>
-			</DialogContent>
+					<Dialog.Close />
+				</Dialog.Actions>
+			</Dialog.Content>
 		</Dialog>
 	);
 }

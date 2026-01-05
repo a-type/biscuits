@@ -119,137 +119,139 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 				data-item-id={id}
 				data-menu-open={menuOpen}
 				data-test="grocery-list-item"
-				asChild
-			>
-				<motion.div
-					initial={{
-						height: 0,
-						y: -4,
-					}}
-					animate={{ height: 'auto', y: 0 }}
-					exit={{
-						height: 0,
-					}}
-					transition={{ type: 'spring', duration: 0.2 }}
-				>
-					<ItemCheckbox
-						isPurchased={isPurchased}
-						isPartiallyPurchased={isPartiallyPurchased}
-						togglePurchased={togglePurchased}
-					/>
-					<div className="flex flex-row items-start [grid-area:main] pt-2 pr-3 pb-2 relative focus:(shadow-focus)">
-						<div
-							className={clsx(
-								'flex flex-col gap-1 items-start flex-1 mr-2',
-								isPurchased && 'item-purchased',
-							)}
-						>
-							<div className="flex flex-row items-start gap-1 mt-1 max-w-full overflow-hidden text-ellipsis relative">
-								<span>{displayString}</span>
-							</div>
-							{isPurchased && (
-								<div className="absolute left-0 right-52px top-20px border-0 border-b border-b-gray-dark border-solid h-1px transform-origin-left animate-expand-scale-x animate-duration-100 animate-ease-out" />
-							)}
-							<CollapsibleSimple
-								open={!!subline && !menuOpen && !isPurchased}
-								className="text-xs color-gray-dark italic pl-2 pr-1 self-stretch [grid-area:comment]"
-							>
-								{subline}
-							</CollapsibleSimple>
-						</div>
-						<RecentPeople item={item} className="mr-1" />
-						<Suspense>
-							<ListTag item={item} collapsed={menuOpen} className="mr-1" />
-						</Suspense>
-						{!isPurchased && (
-							<Suspense>
-								<RecentPurchaseHint
-									compact
-									className="mt-1 mr-1"
-									foodName={food}
-								/>
-							</Suspense>
-						)}
-						<div
-							onTouchStart={stopPropagation}
-							onTouchMove={stopPropagation}
-							onTouchEnd={stopPropagation}
-							onPointerDown={stopPropagation}
-							onPointerMove={stopPropagation}
-							onPointerUp={stopPropagation}
-							className="mr-1"
-						>
+				render={
+					<motion.div
+						initial={{
+							height: 0,
+							y: -4,
+						}}
+						animate={{ height: 'auto', y: 0 }}
+						exit={{
+							height: 0,
+						}}
+						transition={{ type: 'spring', duration: 0.2 }}
+					>
+						<ItemCheckbox
+							isPurchased={isPurchased}
+							isPartiallyPurchased={isPartiallyPurchased}
+							togglePurchased={togglePurchased}
+						/>
+						<div className="flex flex-row items-start [grid-area:main] pt-2 pr-3 pb-2 relative focus:(shadow-focus)">
 							<div
-								className="relative py-1 px-2 select-none"
-								onContextMenu={preventDefault}
-								{...menuProps}
+								className={clsx(
+									'flex flex-col gap-1 items-start flex-1 mr-2',
+									isPurchased && 'item-purchased',
+								)}
 							>
-								<OnboardingTooltip
-									onboarding={categorizeOnboarding}
-									step="categorize"
-									content="Tap and hold to change category"
-									disableNext
+								<div className="flex flex-row items-start gap-1 mt-1 max-w-full overflow-hidden text-ellipsis relative">
+									<span>{displayString}</span>
+								</div>
+								{isPurchased && (
+									<div className="absolute left-0 right-52px top-20px border-0 border-b border-b-gray-dark border-solid h-1px transform-origin-left animate-expand-scale-x animate-duration-100 animate-ease-out" />
+								)}
+								<CollapsibleSimple
+									open={!!subline && !menuOpen && !isPurchased}
+									className="text-xs color-gray-dark italic pl-2 pr-1 self-stretch [grid-area:comment]"
 								>
-									<Icon name="grabby" className="color-gray-dark" />
-								</OnboardingTooltip>
+									{subline}
+								</CollapsibleSimple>
 							</div>
-						</div>
-						<CollapsibleTrigger asChild>
-							<Button emphasis="ghost" className="p-1 flex-shrink-0">
+							<RecentPeople item={item} className="mr-1" />
+							<Suspense>
+								<ListTag item={item} collapsed={menuOpen} className="mr-1" />
+							</Suspense>
+							{!isPurchased && (
+								<Suspense>
+									<RecentPurchaseHint
+										compact
+										className="mt-1 mr-1"
+										foodName={food}
+									/>
+								</Suspense>
+							)}
+							<div
+								onTouchStart={stopPropagation}
+								onTouchMove={stopPropagation}
+								onTouchEnd={stopPropagation}
+								onPointerDown={stopPropagation}
+								onPointerMove={stopPropagation}
+								onPointerUp={stopPropagation}
+								className="mr-1"
+							>
+								<div
+									className="relative py-1 px-2 select-none"
+									onContextMenu={preventDefault}
+									{...menuProps}
+								>
+									<OnboardingTooltip
+										onboarding={categorizeOnboarding}
+										step="categorize"
+										content="Tap and hold to change category"
+										disableNext
+									>
+										<Icon name="grabby" className="color-gray-dark" />
+									</OnboardingTooltip>
+								</div>
+							</div>
+							<CollapsibleTrigger
+								render={
+									<Button emphasis="ghost" className="p-1 flex-shrink-0" />
+								}
+							>
 								<Icon
 									name="chevron"
 									className="[*[data-state=open]_&]:rotate-180deg color-gray-dark hover:color-gray-ink"
 								/>
-							</Button>
-						</CollapsibleTrigger>
-					</div>
-					<CollapsibleContent className="[grid-area:secondary]">
-						<Suspense>
-							<div className="flex flex-col gap-2 justify-end p-3 pt-0 items-end">
-								<div className="flex flex-row gap-3 justify-end w-full items-center">
-									<LiveUpdateTextField
-										value={comment || ''}
-										onChange={(val) => item.set('comment', val)}
-										placeholder="Add a comment"
-										className="important:text-xs important:border-gray-dark flex-grow-2 flex-shrink-1 flex-basis-50% md:flex-basis-120px md:flex-grow-3 my-1"
-									/>
-									<Suspense>
-										<ListSelect
-											value={listId}
-											onChange={(listId) => item.set('listId', listId)}
-											className="flex-basis-0 flex-grow-1 flex-shrink-1"
+							</CollapsibleTrigger>
+						</div>
+						<CollapsibleContent className="[grid-area:secondary]">
+							<Suspense>
+								<div className="flex flex-col gap-2 justify-end p-3 pt-0 items-end">
+									<div className="flex flex-row gap-3 justify-end w-full items-center">
+										<LiveUpdateTextField
+											value={comment || ''}
+											onChange={(val) => item.set('comment', val)}
+											placeholder="Add a comment"
+											className="important:text-xs important:border-gray-dark flex-grow-2 flex-shrink-1 flex-basis-50% md:flex-basis-120px md:flex-grow-3 my-1"
 										/>
+										<Suspense>
+											<ListSelect
+												value={listId}
+												onChange={(listId) => item.set('listId', listId)}
+												className="flex-basis-0 flex-grow-1 flex-shrink-1"
+											/>
+										</Suspense>
+									</div>
+									<div className="flex flex-row gap-1 justify-end w-full items-center">
+										<Suspense>
+											<QuantityEditor className="mr-auto" item={item} />
+										</Suspense>
+										<Suspense>
+											<RecentPurchaseHint
+												foodName={food}
+												className="flex-basis-50% justify-end"
+											/>
+										</Suspense>
+										<OpenFoodDetailButton foodName={food} />
+										<Suspense>
+											<ItemDeleteButton
+												color="attention"
+												emphasis="ghost"
+												item={item}
+											>
+												<TrashIcon />
+											</ItemDeleteButton>
+										</Suspense>
+									</div>
+									<Suspense>
+										<ItemSources item={item} />
 									</Suspense>
 								</div>
-								<div className="flex flex-row gap-1 justify-end w-full items-center">
-									<Suspense>
-										<QuantityEditor className="mr-auto" item={item} />
-									</Suspense>
-									<Suspense>
-										<RecentPurchaseHint
-											foodName={food}
-											className="flex-basis-50% justify-end"
-										/>
-									</Suspense>
-									<OpenFoodDetailButton foodName={food} />
-									<Suspense>
-										<ItemDeleteButton
-											color="attention"
-											emphasis="ghost"
-											item={item}
-										>
-											<TrashIcon />
-										</ItemDeleteButton>
-									</Suspense>
-								</div>
-								<Suspense>
-									<ItemSources item={item} />
-								</Suspense>
-							</div>
-						</Suspense>
-					</CollapsibleContent>
-				</motion.div>
-			</CollapsibleRoot>
+							</Suspense>
+						</CollapsibleContent>
+					</motion.div>
+				}
+			/>
 		);
 	},
 );
@@ -347,9 +349,8 @@ function ItemCheckbox({
 		<Checkbox
 			ref={ref}
 			checkedMode="faded"
-			checked={
-				isPurchased ? true : isPartiallyPurchased ? 'indeterminate' : false
-			}
+			checked={isPurchased}
+			indeterminate={isPartiallyPurchased}
 			onCheckedChange={togglePurchased}
 			// prevent click/tap from reaching draggable container -
 			// don't disrupt a check action

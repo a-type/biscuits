@@ -8,10 +8,6 @@ import {
 	CardRoot,
 	CardTitle,
 	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
-	DialogTrigger,
 	Icon,
 } from '@a-type/ui';
 import { ListItemsItem } from '@trip-tick.biscuits/verdant';
@@ -60,12 +56,10 @@ export function ListEditorItem({ item, onDelete }: ListEditorItemProps) {
 			}}
 		>
 			<CardRoot>
-				<DialogTrigger asChild>
-					<CardMain>
-						<CardTitle>{description}</CardTitle>
-						<CardContent>{shortString}</CardContent>
-					</CardMain>
-				</DialogTrigger>
+				<Dialog.Trigger render={<CardMain />}>
+					<CardTitle>{description}</CardTitle>
+					<CardContent>{shortString}</CardContent>
+				</Dialog.Trigger>
 				<CardFooter>
 					<CardActions>
 						<Button color="attention" emphasis="ghost" onClick={onDelete}>
@@ -74,14 +68,12 @@ export function ListEditorItem({ item, onDelete }: ListEditorItemProps) {
 					</CardActions>
 				</CardFooter>
 			</CardRoot>
-			<DialogContent>
+			<Dialog.Content>
 				<ListItemEditor item={item} />
-				<DialogActions>
-					<DialogClose asChild>
-						<Button>Done</Button>
-					</DialogClose>
-				</DialogActions>
-			</DialogContent>
+				<Dialog.Actions>
+					<Dialog.Close>Done</Dialog.Close>
+				</Dialog.Actions>
+			</Dialog.Content>
 		</Dialog>
 	);
 }

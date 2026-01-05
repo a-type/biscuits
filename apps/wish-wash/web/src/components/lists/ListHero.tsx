@@ -41,11 +41,13 @@ export function ListHero({ list, className }: ListHeroProps) {
 			<Box items="center">
 				<Dialog>
 					<Icon name={list.isAuthorized ? 'lock' : 'add_person'} />
-					<Dialog.Trigger asChild>
-						<Button emphasis="ghost" className="text-xl font-bold gap-md">
-							{name}
-							<Icon name="gear" />
-						</Button>
+					<Dialog.Trigger
+						render={
+							<Button emphasis="ghost" className="text-xl font-bold gap-md" />
+						}
+					>
+						{name}
+						<Icon name="gear" />
 					</Dialog.Trigger>
 					<Dialog.Content>
 						<Dialog.Title>Edit list</Dialog.Title>

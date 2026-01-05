@@ -29,10 +29,8 @@ export function SubRecipeEditorButton({
 
 	return (
 		<Dialog>
-			<Dialog.Trigger asChild>
-				<Button emphasis="ghost">
-					<Icon name="dots" />
-				</Button>
+			<Dialog.Trigger render={<Button emphasis="ghost" />}>
+				<Icon name="dots" />
 			</Dialog.Trigger>
 			<Dialog.Content>
 				<Dialog.Title>Edit sub-recipe</Dialog.Title>
@@ -56,9 +54,7 @@ export function SubRecipeEditorButton({
 					>
 						Remove this sub-recipe
 					</Button>
-					<Dialog.Close asChild>
-						<Button>Done</Button>
-					</Dialog.Close>
+					<Dialog.Close>Done</Dialog.Close>
 				</Dialog.Actions>
 			</Dialog.Content>
 		</Dialog>

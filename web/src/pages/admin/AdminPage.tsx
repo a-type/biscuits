@@ -33,17 +33,23 @@ export function AdminPage({}: AdminPageProps) {
 			<PageContent>
 				<TabsRoot value={tabValue}>
 					<TabsList>
-						<TabsTrigger value="plans" asChild>
-							<Link to="/admin/plans">Plans</Link>
+						<TabsTrigger value="plans" render={<Link to="/admin/plans" />}>
+							Plans
 						</TabsTrigger>
-						<TabsTrigger value="foods" asChild>
-							<Link to="/admin/foods">Foods</Link>
+						<TabsTrigger value="foods" render={<Link to="/admin/foods" />}>
+							Foods
 						</TabsTrigger>
-						<TabsTrigger value="foodCategories" asChild>
-							<Link to="/admin/foodCategories">Food Categories</Link>
+						<TabsTrigger
+							value="foodCategories"
+							render={<Link to="/admin/foodCategories" />}
+						>
+							Food Categories
 						</TabsTrigger>
-						<TabsTrigger value="changelogs" asChild>
-							<Link to="/admin/changelogs">Changelogs</Link>
+						<TabsTrigger
+							value="changelogs"
+							render={<Link to="/admin/changelogs" />}
+						>
+							Changelogs
 						</TabsTrigger>
 					</TabsList>
 				</TabsRoot>

@@ -11,17 +11,10 @@ import {
 	ActionButton,
 	Button,
 	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
-	DialogTitle,
-	DialogTrigger,
 	ErrorBoundary,
 	Icon,
 	Note,
 	Popover,
-	PopoverContent,
-	PopoverTrigger,
 } from '@a-type/ui';
 import {
 	CONFIG,
@@ -114,18 +107,20 @@ function AddChefsAction() {
 				if (!open) setDismissed(true);
 			}}
 		>
-			<DialogTrigger asChild>
-				<ActionButton
-					visible={showTip && !dismissed}
-					emphasis="light"
-					color="accent"
-				>
-					<Icon name="add_person" />
-					<span className="hidden sm:display-inline">Invite chefs</span>
-				</ActionButton>
-			</DialogTrigger>
-			<DialogContent>
-				<DialogTitle>Invite chefs</DialogTitle>
+			<Dialog.Trigger
+				render={
+					<ActionButton
+						visible={showTip && !dismissed}
+						emphasis="light"
+						color="accent"
+					/>
+				}
+			>
+				<Icon name="add_person" />
+				<span className="hidden sm:display-inline">Invite chefs</span>
+			</Dialog.Trigger>
+			<Dialog.Content>
+				<Dialog.Title>Invite chefs</Dialog.Title>
 				{showSubscribe ? (
 					<>
 						<p>
@@ -149,10 +144,8 @@ function AddChefsAction() {
 						shared for all plan members in real-time.
 					</p>
 				)}
-				<DialogActions>
-					<DialogClose asChild>
-						<Button align="start">Dismiss</Button>
-					</DialogClose>
+				<Dialog.Actions>
+					<Dialog.Close render={<Button align="start" />}>Dismiss</Dialog.Close>
 					{showSubscribe ? (
 						<PromoteSubscriptionButton className="">
 							Subscribe now
@@ -160,8 +153,8 @@ function AddChefsAction() {
 					) : (
 						<ManagePlanButton />
 					)}
-				</DialogActions>
-			</DialogContent>
+				</Dialog.Actions>
+			</Dialog.Content>
 		</Dialog>
 	);
 }
@@ -187,19 +180,17 @@ function NoteToggleAction({ recipe }: { recipe: Recipe }) {
 
 	return (
 		<Popover>
-			<PopoverTrigger asChild>
-				<ActionButton emphasis="primary">
-					<Icon name="note" />
-					<span className="hidden sm:display-inline">Add note</span>
-				</ActionButton>
-			</PopoverTrigger>
-			<PopoverContent
+			<Popover.Trigger render={<ActionButton emphasis="primary" />}>
+				<Icon name="note" />
+				<span className="hidden sm:display-inline">Add note</span>
+			</Popover.Trigger>
+			<Popover.Content
 				sideOffset={8}
 				align="start"
 				className="p-0 bg-transparent border-none rounded-0 max-w-2/3"
 			>
 				<Note className="w-full h-full">{note}</Note>
-			</PopoverContent>
+			</Popover.Content>
 		</Popover>
 	);
 }

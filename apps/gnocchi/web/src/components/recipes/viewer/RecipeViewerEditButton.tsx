@@ -12,11 +12,12 @@ export function RecipeViewerEditButton({
 	...rest
 }: RecipeViewerEditButtonProps) {
 	return (
-		<ActionButton asChild {...rest}>
-			<Link to={makeRecipeLink(recipe, '/edit')}>
-				<Icon name="pencil" />
-				Edit
-			</Link>
+		<ActionButton
+			{...rest}
+			render={<Link to={makeRecipeLink(recipe, '/edit')} />}
+		>
+			<Icon name="pencil" />
+			Edit
 		</ActionButton>
 	);
 }

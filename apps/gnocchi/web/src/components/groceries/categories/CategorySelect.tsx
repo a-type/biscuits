@@ -1,16 +1,7 @@
 import { hooks } from '@/stores/groceries/index.js';
-import {
-	Button,
-	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
-	DialogSelectItem,
-	DialogSelectList,
-	DialogSelectTrigger,
-} from '@a-type/ui';
+import { Button, Dialog, DialogContent, DialogSelectItem } from '@a-type/ui';
 import { Category } from '@gnocchi.biscuits/verdant';
-import { ReactNode, useCallback, useState } from 'react';
+import { ReactElement, useCallback, useState } from 'react';
 import { withSuspense } from '../../../hocs/withSuspense.jsx';
 import { NewCategoryForm } from '../NewCategoryForm.js';
 
@@ -21,7 +12,7 @@ export const CategorySelect = withSuspense(function CategorySelect({
 }: {
 	value: string | null;
 	onChange: (v: string | null) => void;
-	children?: ReactNode;
+	children?: ReactElement;
 }) {
 	const [open, onOpenChange] = useState(false);
 	const [state, setState] = useState<'idle' | 'create'>('idle');
@@ -60,38 +51,36 @@ export const CategorySelect = withSuspense(function CategorySelect({
 	return (
 		<>
 			<Dialog open={open} onOpenChange={onOpenChange}>
-				<DialogSelectTrigger
-					asChild={!!children}
+				<Dialog.SelectTrigger
 					className="text-sm font-normal py-1"
+					render={children}
 				>
-					{children || category?.get('name') || 'Uncategorized'}
-				</DialogSelectTrigger>
-				<DialogContent>
-					<DialogSelectList
+					{category?.get('name') || 'Uncategorized'}
+				</Dialog.SelectTrigger>
+				<Dialog.Content>
+					<Dialog.SelectList
 						className="mb-4"
 						value={value || 'null'}
-						onValueChange={selectCategory}
+						onValueChange={selectCategory as any}
 					>
 						{categories.map((category) => (
-							<DialogSelectItem
+							<Dialog.SelectItem
 								key={category.get('id')}
 								value={category.get('id')}
 							>
 								{category.get('name')}
-							</DialogSelectItem>
+							</Dialog.SelectItem>
 						))}
 						<DialogSelectItem value="null">Uncategorized</DialogSelectItem>
-					</DialogSelectList>
+					</Dialog.SelectList>
 
-					<DialogActions className="justify-between">
+					<Dialog.Actions className="justify-between">
 						<Button emphasis="ghost" onClick={() => setState('create')}>
 							New category
 						</Button>
-						<DialogClose asChild>
-							<Button>Close</Button>
-						</DialogClose>
-					</DialogActions>
-				</DialogContent>
+						<Dialog.Close />
+					</Dialog.Actions>
+				</Dialog.Content>
 			</Dialog>
 			<CreateCategory
 				onCreate={onCreateCategory}

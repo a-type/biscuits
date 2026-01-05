@@ -4,9 +4,9 @@ import * as CONFIG from '../config.js';
 import { useWasLoggedIn } from '../hooks/useWasLoggedIn.js';
 import { useIsLoggedIn } from '../react.js';
 
-export interface LogoutButtonProps extends ButtonProps {
+export type LogoutButtonProps = ButtonProps & {
 	returnTo?: string;
-}
+};
 
 export function LogoutButton({ children, ...props }: LogoutButtonProps) {
 	const isLoggedIn = useIsLoggedIn();
@@ -16,15 +16,13 @@ export function LogoutButton({ children, ...props }: LogoutButtonProps) {
 	}
 
 	return (
-		<Button asChild {...props}>
-			<LogoutLink returnTo={props.returnTo}>
-				{children ?? (
-					<>
-						Log out
-						<Icon name="arrowRight" />
-					</>
-				)}
-			</LogoutLink>
+		<Button {...props} render={<LogoutLink returnTo={props.returnTo} />}>
+			{children ?? (
+				<>
+					Log out
+					<Icon name="arrowRight" />
+				</>
+			)}
 		</Button>
 	);
 }

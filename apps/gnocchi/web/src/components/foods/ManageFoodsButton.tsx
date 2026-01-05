@@ -15,18 +15,14 @@ import { Suspense } from 'react';
 export function ManageFoodsButton() {
 	return (
 		<Dialog>
-			<DialogTrigger asChild>
-				<Button>Manage foods</Button>
-			</DialogTrigger>
+			<DialogTrigger render={<Button />}>Manage foods</DialogTrigger>
 			<DialogContent>
 				<DialogTitle>Manage foods</DialogTitle>
 				<Suspense>
 					<FoodsList />
 				</Suspense>
 				<DialogActions>
-					<DialogClose asChild>
-						<Button>Close</Button>
-					</DialogClose>
+					<DialogClose />
 				</DialogActions>
 			</DialogContent>
 		</Dialog>

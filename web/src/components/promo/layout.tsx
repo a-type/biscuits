@@ -136,20 +136,16 @@ export const CallToAction = ({
 		)}
 	>
 		<div className="flex flex-col sm:flex-row-reverse justify-between md:justify-center items-center w-full gap-xs sm:gap-lg">
-			<Button asChild emphasis="primary">
-				<Link
-					to={appsById[appId].url}
-					data-test="get-started"
-					className="justify-center self-center"
-				>
-					Get Started
-				</Link>
+			<Button
+				render={<Link to={appsById[appId].url} data-test="get-started" />}
+				emphasis="primary"
+				className="justify-center self-center"
+			>
+				Get Started
 			</Button>
-			<Button asChild emphasis="default">
-				<Link to="/">
-					<Icon name="arrowLeft" />
-					More Biscuits apps
-				</Link>
+			<Button render={<Link to="/" />} emphasis="default">
+				<Icon name="arrowLeft" />
+				More Biscuits apps
 			</Button>
 		</div>
 

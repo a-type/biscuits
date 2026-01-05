@@ -1,6 +1,6 @@
 import { Button, Dialog, DialogActions } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
-import { ReactNode, useEffect, useState } from 'react';
+import { ReactElement, ReactNode, useEffect, useState } from 'react';
 import { itemCardImageGalleryFragment } from '../cardParts/ItemCardImageGallery.js';
 import { ItemCardPurchaseButton } from '../cardParts/ItemCardPurchaseButton.js';
 import { itemCardPurchasesFragment } from '../cardParts/ItemCardPurchases.js';
@@ -39,7 +39,7 @@ export function SearchAndBuyExperience({
 }: {
 	item: FragmentOf<typeof searchAndBuyExperienceFragment>;
 	listAuthor: string;
-	children: ReactNode;
+	children: ReactElement;
 	description?: ReactNode;
 }) {
 	const item = readFragment(searchAndBuyExperienceFragment, itemMasked);
@@ -67,7 +67,7 @@ export function SearchAndBuyExperience({
 				}
 			}}
 		>
-			<Dialog.Trigger asChild>{children}</Dialog.Trigger>
+			<Dialog.Trigger render={children} />
 			<Dialog.Content width="lg" className="gap-md">
 				{showPost ?
 					<PostBuyExperienceContent item={item} listAuthor={listAuthor} />

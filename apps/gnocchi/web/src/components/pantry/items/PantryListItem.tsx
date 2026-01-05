@@ -8,19 +8,10 @@ import {
 } from '@/stores/groceries/mutations.js';
 import {
 	Button,
-	CardActions,
-	CardFooter,
-	CardMain,
-	CardRoot,
-	CardTitle,
+	Card,
 	Chip,
 	DatePicker,
 	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
-	DialogTitle,
-	DialogTrigger,
 	Icon,
 	RelativeTime,
 	TextSkeleton,
@@ -76,59 +67,62 @@ export function PantryListItem({
 
 	return (
 		<Suspense>
-			<CardRoot
+			<Card
 				{...rest}
 				className={classNames(
 					frozenAt ? 'border-accent-dark' : '',
 					leaving && 'animate-fade-out-down animate-forwards',
 				)}
 			>
-				<CardMain compact asChild>
-					<OpenFoodDetailButton
-						foodName={food}
-						emphasis="unstyled"
-						className="font-normal p-0 border-none shadow-none rounded-none items-start text-sm"
-					>
-						<CardTitle className={classNames('text-wrap', 'text-md')}>
-							<FoodName food={item} capitalize />
-						</CardTitle>
-						<div className="flex flex-row gap-1 items-center flex-wrap p-1 text-xs italic">
-							{purchasedAt && (
-								<Chip title={new Date(purchasedAt).toLocaleDateString()}>
-									<Icon name="clock" />
-									<RelativeTime value={purchasedAt} abbreviate />
+				<Card.Main
+					compact
+					render={
+						<OpenFoodDetailButton
+							foodName={food}
+							emphasis="unstyled"
+							className="font-normal p-0 border-none shadow-none rounded-none items-start text-sm"
+						/>
+					}
+				>
+					<Card.Title className={classNames('text-wrap', 'text-md')}>
+						<FoodName food={item} capitalize />
+					</Card.Title>
+					<div className="flex flex-row gap-1 items-center flex-wrap p-1 text-xs italic">
+						{purchasedAt && (
+							<Chip title={new Date(purchasedAt).toLocaleDateString()}>
+								<Icon name="clock" />
+								<RelativeTime value={purchasedAt} abbreviate />
+							</Chip>
+						)}
+						{purchasedAt && isAlmostOrExpired && !frozenAt && (
+							<Tooltip disabled={!expiresAt} content={expiresAtText}>
+								<Chip className="important:color-attentionDark">
+									<ExclamationTriangleIcon />
+									{expiresAtText}
 								</Chip>
-							)}
-							{purchasedAt && isAlmostOrExpired && !frozenAt && (
-								<Tooltip disabled={!expiresAt} content={expiresAtText}>
-									<Chip className="important:color-attentionDark">
-										<ExclamationTriangleIcon />
-										{expiresAtText}
-									</Chip>
-								</Tooltip>
-							)}
-							{frozenAt && (
-								<Tooltip content="You marked this item as frozen">
-									<Chip color="accent">
-										<Icon name="snowflake" />
-										<RelativeTime value={frozenAt} abbreviate />
-									</Chip>
-								</Tooltip>
-							)}
-							{isStaple && (
-								<Tooltip content="Staple foods are automatically added to the list when used up">
-									<Chip>
-										<Icon name="cart" />
-										Staple
-									</Chip>
-								</Tooltip>
-							)}
-						</div>
-						<OpenInNewWindowIcon className="absolute right-2 top-2 z-1 color-gray-dark opacity-50" />
-					</OpenFoodDetailButton>
-				</CardMain>
-				<CardFooter className={classNames(showLabels ? 'p-0' : '')}>
-					<CardActions
+							</Tooltip>
+						)}
+						{frozenAt && (
+							<Tooltip content="You marked this item as frozen">
+								<Chip color="accent">
+									<Icon name="snowflake" />
+									<RelativeTime value={frozenAt} abbreviate />
+								</Chip>
+							</Tooltip>
+						)}
+						{isStaple && (
+							<Tooltip content="Staple foods are automatically added to the list when used up">
+								<Chip>
+									<Icon name="cart" />
+									Staple
+								</Chip>
+							</Tooltip>
+						)}
+					</div>
+					<OpenInNewWindowIcon className="absolute right-2 top-2 z-1 color-gray-dark opacity-50" />
+				</Card.Main>
+				<Card.Footer className={classNames(showLabels ? 'p-0' : '')}>
+					<Card.Actions
 						className={classNames('flex-wrap', {
 							'rounded-none p-1 border-b-none border-l-none border-r-none':
 								showLabels,
@@ -165,9 +159,9 @@ export function PantryListItem({
 						{(inInventory || !!frozenAt) && (
 							<FreezeButton food={item} showLabel={showLabels} />
 						)}
-					</CardActions>
-				</CardFooter>
-			</CardRoot>
+					</Card.Actions>
+				</Card.Footer>
+			</Card>
 		</Suspense>
 	);
 }
@@ -178,21 +172,21 @@ export const PantryListItemSkeleton = ({
 	showLabels?: boolean;
 }) => {
 	return (
-		<CardRoot>
-			<CardMain compact>
-				<CardTitle>
+		<Card>
+			<Card.Main compact>
+				<Card.Title>
 					<TextSkeleton maxLength={12} />
-				</CardTitle>
-			</CardMain>
-			<CardFooter>
-				<CardActions>
+				</Card.Title>
+			</Card.Main>
+			<Card.Footer>
+				<Card.Actions>
 					<Button size={showLabels ? 'small' : 'default'} emphasis="default">
 						<Icon name="plus" />
 						{showLabels && <TextSkeleton maxLength={8} />}
 					</Button>
-				</CardActions>
-			</CardFooter>
-		</CardRoot>
+				</Card.Actions>
+			</Card.Footer>
+		</Card>
 	);
 };
 
@@ -255,19 +249,21 @@ const FreezeButton = ({
 	if (frozenAt) {
 		return (
 			<Dialog>
-				<DialogTrigger asChild>
-					<Button
-						size={showLabel ? 'small' : 'default'}
-						emphasis="light"
-						color="accent"
-					>
-						<Icon name="snowflake" />
-						{showLabel && <span className="font-normal">Frozen</span>}
-					</Button>
-				</DialogTrigger>
-				<DialogContent>
+				<Dialog.Trigger
+					render={
+						<Button
+							size={showLabel ? 'small' : 'default'}
+							emphasis="light"
+							color="accent"
+						/>
+					}
+				>
+					<Icon name="snowflake" />
+					{showLabel && <span className="font-normal">Frozen</span>}
+				</Dialog.Trigger>
+				<Dialog.Content>
 					<FrozenTimeAdjuster food={food} />
-				</DialogContent>
+				</Dialog.Content>
 			</Dialog>
 		);
 	}
@@ -302,7 +298,7 @@ function FrozenTimeAdjuster({ food: item }: { food: Food }) {
 
 	return (
 		<>
-			<DialogTitle>Change freeze time</DialogTitle>
+			<Dialog.Title>Change freeze time</Dialog.Title>
 			<DatePicker
 				className="self-center"
 				value={frozenAtDate}
@@ -313,14 +309,12 @@ function FrozenTimeAdjuster({ food: item }: { food: Food }) {
 					item.set('frozenAt', date?.getTime());
 				}}
 			/>
-			<DialogActions>
+			<Dialog.Actions>
 				<Button emphasis="primary" color="attention" onClick={unfreeze}>
 					Unfreeze
 				</Button>
-				<DialogClose asChild>
-					<Button>Close</Button>
-				</DialogClose>
-			</DialogActions>
+				<Dialog.Close />
+			</Dialog.Actions>
 		</>
 	);
 }

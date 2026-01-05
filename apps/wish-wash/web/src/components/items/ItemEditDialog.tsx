@@ -90,8 +90,8 @@ export function ItemEditDialog({ list }: ItemEditDialogProps) {
 							{justAdded ? 'Discard' : 'Delete'}
 						</Button>
 					)}
-					<Dialog.Close asChild>
-						<Button emphasis="primary">Done</Button>
+					<Dialog.Close render={<Button emphasis="primary" />}>
+						Done
 					</Dialog.Close>
 				</Dialog.Actions>
 			</Dialog.Content>

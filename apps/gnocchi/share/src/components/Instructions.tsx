@@ -273,14 +273,16 @@ function InstructionStepView({
 				{!embeddedRecipe && <NodeViewContent />}
 				{embeddedRecipe && (
 					<Collapsible>
-						<Collapsible.Trigger asChild>
-							<Button emphasis="ghost" size="small" className="italic">
-								<Icon
-									name="chevron"
-									className="transition-all [[data-state=open]_&]:rotate-180"
-								/>
-								Make {embeddedRecipe.title}
-							</Button>
+						<Collapsible.Trigger
+							render={
+								<Button emphasis="ghost" size="small" className="italic" />
+							}
+						>
+							<Icon
+								name="chevron"
+								className="transition-all [[data-state=open]_&]:rotate-180"
+							/>
+							Make {embeddedRecipe.title}
 						</Collapsible.Trigger>
 						<Collapsible.Content>
 							<Instructions className="pl-sm" data={embeddedRecipe as any} />

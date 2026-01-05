@@ -1,18 +1,6 @@
 import { useTripProgress } from '@/components/trips/hooks.js';
 import { hooks } from '@/store.js';
-import {
-	Button,
-	CardActions,
-	CardFooter,
-	CardGrid,
-	CardMain,
-	CardRoot,
-	CardTitle,
-	Chip,
-	Divider,
-	H2,
-	P,
-} from '@a-type/ui';
+import { Button, Card, CardGrid, Chip, Divider, H2, P } from '@a-type/ui';
 import { Trip } from '@trip-tick.biscuits/verdant';
 import { Link } from '@verdant-web/react-router';
 import { useState } from 'react';
@@ -121,38 +109,39 @@ function TripsListItem({ trip }: { trip: Trip }) {
 	} = useTripProgress(trip);
 
 	return (
-		<CardRoot>
-			<CardMain compact={!!isPast} asChild>
-				<Link to={`/trips/${trip.get('id')}`} className="relative bg-white">
-					<CardTitle className="relative z-1">{name}</CardTitle>
-					<div className="text-xs px-2 relative z-1 flex flex-row gap-1 flex-wrap">
-						{locationName && <Chip className="bg-white">{locationName}</Chip>}
-						<Chip className="bg-white">
-							{startsAt ?
-								new Date(startsAt).toLocaleDateString()
-							:	'Unscheduled'}
-						</Chip>
-						{!isPast && (
-							<Chip className="bg-white">
-								{completedItems} / {totalItems} items
-							</Chip>
-						)}
-					</div>
+		<Card>
+			<Card.Main
+				compact={!!isPast}
+				render={
+					<Link to={`/trips/${trip.get('id')}`} className="relative bg-white" />
+				}
+			>
+				<Card.Title className="relative z-1">{name}</Card.Title>
+				<div className="text-xs px-2 relative z-1 flex flex-row gap-1 flex-wrap">
+					{locationName && <Chip className="bg-white">{locationName}</Chip>}
+					<Chip className="bg-white">
+						{startsAt ? new Date(startsAt).toLocaleDateString() : 'Unscheduled'}
+					</Chip>
 					{!isPast && (
-						<div
-							className="absolute left-0 top-0 bottom-0 bg-accent-wash"
-							style={{
-								width: `${completion * 100}%`,
-							}}
-						/>
+						<Chip className="bg-white">
+							{completedItems} / {totalItems} items
+						</Chip>
 					)}
-				</Link>
-			</CardMain>
-			<CardFooter>
-				<CardActions>
+				</div>
+				{!isPast && (
+					<div
+						className="absolute left-0 top-0 bottom-0 bg-accent-wash"
+						style={{
+							width: `${completion * 100}%`,
+						}}
+					/>
+				)}
+			</Card.Main>
+			<Card.Footer>
+				<Card.Actions>
 					<TripMenu tripId={trip.get('id')} />
-				</CardActions>
-			</CardFooter>
-		</CardRoot>
+				</Card.Actions>
+			</Card.Footer>
+		</Card>
 	);
 }

@@ -68,36 +68,34 @@ export function ImportDataButton({
 	const client = useContext(VerdantContext);
 	if (!client) return null;
 	return (
-		<Button asChild loading={loading} {...props}>
-			<label>
-				<input
-					type="file"
-					hidden
-					accept=".zip"
-					onChange={async (ev) => {
-						setLoading(true);
-						try {
-							const backup = await import('@verdant-web/store/backup');
-							const file = ev.target.files?.[0];
-							if (!file) {
-								throw new Error('No file selected');
-							}
-							await backup.importClientBackup(client, file);
-							window.location.reload();
-						} catch (e) {
-							console.error(e);
-							onError(e as Error);
-						} finally {
-							setLoading(false);
+		<Button render={<label />} loading={loading} {...props}>
+			<input
+				type="file"
+				hidden
+				accept=".zip"
+				onChange={async (ev) => {
+					setLoading(true);
+					try {
+						const backup = await import('@verdant-web/store/backup');
+						const file = ev.target.files?.[0];
+						if (!file) {
+							throw new Error('No file selected');
 						}
-					}}
-				></input>
-				{children || (
-					<>
-						Import Data <Icon name="upload" />
-					</>
-				)}
-			</label>
+						await backup.importClientBackup(client, file);
+						window.location.reload();
+					} catch (e) {
+						console.error(e);
+						onError(e as Error);
+					} finally {
+						setLoading(false);
+					}
+				}}
+			></input>
+			{children || (
+				<>
+					Import Data <Icon name="upload" />
+				</>
+			)}
 		</Button>
 	);
 }

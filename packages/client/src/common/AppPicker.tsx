@@ -9,14 +9,14 @@ import {
 	PopoverTrigger,
 } from '@a-type/ui';
 import { apps } from '@biscuits/apps';
-import { ReactNode, useEffect } from 'react';
+import { ReactElement, useEffect } from 'react';
 import * as CONFIG from '../config.js';
 import { getIsPWAInstalled } from '../platform.js';
 import { useAppId } from './Context.js';
 
 export interface AppPickerProps {
 	className?: string;
-	children?: ReactNode;
+	children?: ReactElement;
 }
 
 export function AppPicker({ className, children }: AppPickerProps) {
@@ -56,13 +56,16 @@ export function AppPicker({ className, children }: AppPickerProps) {
 
 	return (
 		<Popover>
-			<PopoverTrigger className={className} asChild>
-				{children ?? (
-					<Button emphasis="ghost">
-						<Icon name="cardsGrid" />
-					</Button>
-				)}
-			</PopoverTrigger>
+			<PopoverTrigger
+				className={className}
+				render={() =>
+					children ?? (
+						<Button emphasis="ghost">
+							<Icon name="cardsGrid" />
+						</Button>
+					)
+				}
+			/>
 			<PopoverContent
 				align="end"
 				side="top"

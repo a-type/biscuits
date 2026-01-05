@@ -23,14 +23,17 @@ export function ItemCardMarquee({ item: itemMasked }: ItemCardMarqueeProps) {
 		<Card.Image>
 			<Marquee>
 				{item.imageUrls.map((url) => (
-					<Marquee.Item asChild key={url}>
-						<img
-							crossOrigin="anonymous"
-							src={url}
-							alt={'Picture of ' + item.description}
-							className="object-cover"
-						/>
-					</Marquee.Item>
+					<Marquee.Item
+						key={url}
+						render={
+							<img
+								crossOrigin="anonymous"
+								src={url}
+								alt={'Picture of ' + item.description}
+								className="object-cover"
+							/>
+						}
+					/>
 				))}
 			</Marquee>
 		</Card.Image>

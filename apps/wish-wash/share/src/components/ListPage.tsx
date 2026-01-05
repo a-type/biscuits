@@ -84,14 +84,12 @@ export function ListPage({ data }: ListPageProps) {
 							<Box surface color="primary" p>
 								Click any item to see details and links
 							</Box>
-							<Box surface p items="center" asChild gap>
-								<label>
-									Show purchased items
-									<Switch
-										checked={showPurchased}
-										onCheckedChange={setShowPurchased}
-									/>
-								</label>
+							<Box surface p items="center" render={<label />} gap>
+								Show purchased items
+								<Switch
+									checked={showPurchased}
+									onCheckedChange={setShowPurchased}
+								/>
 							</Box>
 						</Box>
 					</Box>

@@ -8,8 +8,6 @@ import {
 	ButtonProps,
 	Checkbox,
 	Dialog,
-	DialogActions,
-	DialogClose,
 	DialogContent,
 	DialogTitle,
 	DialogTrigger,
@@ -93,14 +91,16 @@ export const RecipePublishAction = withSuspense(
 
 		return (
 			<Dialog>
-				<DialogTrigger asChild>
-					<ActionButton
-						color="accent"
-						emphasis={outOfDate ? 'light' : 'default'}
-					>
-						<Icon name={outOfDate ? 'clock' : 'send'} />
-						{isPublished ? (outOfDate ? 'Outdated' : 'Shared') : 'Share'}
-					</ActionButton>
+				<DialogTrigger
+					render={
+						<ActionButton
+							color="accent"
+							emphasis={outOfDate ? 'light' : 'default'}
+						/>
+					}
+				>
+					<Icon name={outOfDate ? 'clock' : 'send'} />
+					{isPublished ? (outOfDate ? 'Outdated' : 'Shared') : 'Share'}
 				</DialogTrigger>
 				{publishedRecipe ? (
 					<PublishedContent
@@ -139,14 +139,16 @@ function PublishedContent({
 	const publishDate = new Date(publishedAt ?? Date.now());
 
 	return (
-		<DialogContent className="flex flex-col gap-4">
-			<DialogTitle>Manage publication</DialogTitle>
+		<Dialog.Content className="flex flex-col gap-4">
+			<Dialog.Title>Manage publication</Dialog.Title>
 			<SubRecipeWarning recipe={recipe} />
-			<Button asChild emphasis="default" className="self-start">
-				<Link to={url} newTab>
-					View on the web
-					<Icon name="new_window" />
-				</Link>
+			<Button
+				render={<Link to={url} newTab />}
+				emphasis="default"
+				className="self-start"
+			>
+				View on the web
+				<Icon name="new_window" />
 			</Button>
 			{outOfDate ? (
 				<Box surface gap col items="end" color="accent" p>
@@ -166,10 +168,8 @@ function PublishedContent({
 					</PublishButton>
 				</Box>
 			)}
-			<DialogActions>
-				<DialogClose asChild>
-					<Button>Close</Button>
-				</DialogClose>
+			<Dialog.Actions>
+				<Dialog.Close>Close</Dialog.Close>
 				<Button
 					emphasis="primary"
 					color="attention"
@@ -186,8 +186,8 @@ function PublishedContent({
 				>
 					Unpublish
 				</Button>
-			</DialogActions>
-		</DialogContent>
+			</Dialog.Actions>
+		</Dialog.Content>
 	);
 }
 
@@ -224,10 +224,8 @@ function UnpublishedContent({
 				</div>
 				<SubRecipeWarning recipe={recipe} />
 			</div>
-			<DialogActions>
-				<DialogClose asChild>
-					<Button>Cancel</Button>
-				</DialogClose>
+			<Dialog.Actions>
+				<Dialog.Close>Cancel</Dialog.Close>
 				<PublishButton
 					recipe={recipe}
 					onChange={onChange}
@@ -236,7 +234,7 @@ function UnpublishedContent({
 				>
 					Publish
 				</PublishButton>
-			</DialogActions>
+			</Dialog.Actions>
 		</DialogContent>
 	);
 }

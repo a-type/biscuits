@@ -6,9 +6,7 @@ const NotFoundPage = () => {
 		<PageRoot>
 			<PageContent>
 				<H1>Not found</H1>
-				<Button asChild>
-					<Link to="/">Go home</Link>
-				</Button>
+				<Button render={<Link to="/" />}>Go home</Button>
 			</PageContent>
 		</PageRoot>
 	);

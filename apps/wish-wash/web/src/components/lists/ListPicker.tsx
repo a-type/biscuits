@@ -74,14 +74,12 @@ function ListPickerListButton({
 			size="small"
 			color="accent"
 			emphasis={selected ? 'light' : 'ghost'}
-			asChild
 			// className={clsx(selected && 'sticky left-2 right-12 z-1')}
 			ref={ref}
+			render={<Link to={`/${list.get('id')}`} />}
 		>
-			<Link to={`/${list.get('id')}`}>
-				<Icon name={list.isAuthorized ? 'lock' : 'add_person'} />{' '}
-				{list.get('name')}
-			</Link>
+			<Icon name={list.isAuthorized ? 'lock' : 'add_person'} />{' '}
+			{list.get('name')}
 		</Button>
 	);
 }

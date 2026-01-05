@@ -16,10 +16,10 @@ export function RecipeCollectionMenu({ className }: RecipeCollectionMenuProps) {
 
 	return (
 		<DropdownMenu open={open} onOpenChange={setOpen}>
-			<DropdownMenu.Trigger asChild>
-				<Button emphasis="ghost" className={className}>
-					<Icon name="dots" />
-				</Button>
+			<DropdownMenu.Trigger
+				render={<Button emphasis="ghost" className={className} />}
+			>
+				<Icon name="dots" />
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Content align="end">
 				<Suspense>
@@ -27,11 +27,9 @@ export function RecipeCollectionMenu({ className }: RecipeCollectionMenuProps) {
 						onSelect={(ev) => {
 							ev.preventDefault();
 						}}
-						asChild
+						render={<PaprikaImporter onClose={onSubmenuClose} />}
 					>
-						<PaprikaImporter onClose={onSubmenuClose}>
-							Import from Paprika 3
-						</PaprikaImporter>
+						Import from Paprika 3
 					</DropdownMenu.Item>
 				</Suspense>
 				<Suspense>
@@ -43,8 +41,8 @@ export function RecipeCollectionMenu({ className }: RecipeCollectionMenuProps) {
 				</Suspense>
 				{publishEnabled && (
 					<Suspense>
-						<DropdownMenu.Item asChild>
-							<Link to="/recipes/published">Shared Recipes</Link>
+						<DropdownMenu.Item render={<Link to="/recipes/published" />}>
+							Shared Recipes
 						</DropdownMenu.Item>
 					</Suspense>
 				)}

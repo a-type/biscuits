@@ -9,11 +9,9 @@ export interface TipProps extends Omit<ChipProps, 'content' | 'children'> {
 export function Tip({ content, title, ...rest }: TipProps) {
 	return (
 		<Dialog>
-			<Dialog.Trigger asChild>
-				<Chip color="accent" {...rest}>
-					<Icon name="lightbulb" />
-					<span>{title}</span>
-				</Chip>
+			<Dialog.Trigger render={<Chip color="accent" {...rest} />}>
+				<Icon name="lightbulb" />
+				<span>{title}</span>
 			</Dialog.Trigger>
 			<Dialog.Content>
 				<Dialog.Title>{title}</Dialog.Title>

@@ -180,12 +180,10 @@ function KeepAnsweringQuestionsCard({ list }: { list: List }) {
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<Card>
-				<Dialog.Trigger asChild>
-					<Card.Main>
-						<Card.Content unstyled className="p-sm text-sm">
-							Improve your list with more ideas
-						</Card.Content>
-					</Card.Main>
+				<Dialog.Trigger render={<Card.Main />}>
+					<Card.Content unstyled className="p-sm text-sm">
+						Improve your list with more ideas
+					</Card.Content>
 				</Dialog.Trigger>
 			</Card>
 			<Dialog.Content>

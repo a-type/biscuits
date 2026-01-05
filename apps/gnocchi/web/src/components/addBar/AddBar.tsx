@@ -1,12 +1,6 @@
 import { AddToListDialog } from '@/components/recipes/viewer/AddToListDialog.jsx';
 import useMergedRef from '@/hooks/useMergedRef.js';
-import {
-	Input,
-	Popover,
-	PopoverAnchor,
-	PopoverContent,
-	useSize,
-} from '@a-type/ui';
+import { Input, Popover, useSize } from '@a-type/ui';
 import { preventDefault, stopPropagation } from '@a-type/utils';
 import classNames from 'classnames';
 import { Suspense, forwardRef, useRef, useState } from 'react';
@@ -82,21 +76,23 @@ export const AddBarImpl = forwardRef<HTMLDivElement, AddBarProps>(
 		return (
 			<>
 				<Popover open={open}>
-					<PopoverAnchor asChild>
-						<AddInput
-							inputProps={getInputProps({
-								placeholder,
-								onFocus: () => onOpenChange?.(true),
-							})}
-							getSubmitButtonProps={getSubmitButtonProps}
-							isOpen={open}
-							className={className}
-							clear={() => clear()}
-							ref={mergedRef}
-							{...rest}
-						/>
-					</PopoverAnchor>
-					<PopoverContent
+					<Popover.Anchor
+						render={
+							<AddInput
+								inputProps={getInputProps({
+									placeholder,
+									onFocus: () => onOpenChange?.(true),
+								})}
+								getSubmitButtonProps={getSubmitButtonProps}
+								isOpen={open}
+								className={className}
+								clear={() => clear()}
+								ref={mergedRef}
+								{...rest}
+							/>
+						}
+					/>
+					<Popover.Content
 						forceMount
 						disableBlur
 						radius="md"
@@ -149,7 +145,7 @@ export const AddBarImpl = forwardRef<HTMLDivElement, AddBarProps>(
 							</>
 						)}
 						{noSuggestions && <div>No suggestions</div>}
-					</PopoverContent>
+					</Popover.Content>
 				</Popover>
 				{addingRecipe && (
 					<Suspense>

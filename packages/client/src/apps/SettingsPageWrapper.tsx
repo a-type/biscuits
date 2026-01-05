@@ -45,14 +45,12 @@ export function SettingsPageWrapper({
 		<Box col p gap items="start" className={clsx('mt-lg', className)}>
 			<Box gap items="center">
 				<Button
-					asChild
+					render={<Link to="/" />}
 					emphasis="ghost"
 					aria-label="Back to home"
 					className="sticky top-sm"
 				>
-					<Link to="/">
-						<Icon name="arrowLeft" />
-					</Link>
+					<Icon name="arrowLeft" />
 				</Button>
 				<H1>Settings</H1>
 			</Box>

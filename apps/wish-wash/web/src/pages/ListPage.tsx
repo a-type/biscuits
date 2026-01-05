@@ -35,9 +35,7 @@ export function ListPage({}: ListPageProps) {
 			<PageRoot>
 				<PageContent>
 					<H1>List not found</H1>
-					<Button asChild>
-						<Link to="/">Go back</Link>
-					</Button>
+					<Button render={<Link to="/" />}>Go back</Button>
 				</PageContent>
 			</PageRoot>
 		);
@@ -55,11 +53,9 @@ function ListPageContent({ list }: { list: List }) {
 				items="center"
 				className="sticky py-sm top-0 z-nav bg-wash w-full max-w-800px"
 			>
-				<Button asChild emphasis="ghost">
-					<Link to="/">
-						<Icon name="arrowLeft" />
-						Home
-					</Link>
+				<Button emphasis="ghost" render={<Link to="/" />}>
+					<Icon name="arrowLeft" />
+					Home
 				</Button>
 				<UserMenu />
 			</Box>

@@ -13,15 +13,13 @@ export function CreateListButton({
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
-			<Dialog.Trigger asChild>
-				<Button {...props}>
-					{children || (
-						<>
-							<Icon name="plus" />
-							New List
-						</>
-					)}
-				</Button>
+			<Dialog.Trigger render={<Button {...props} />}>
+				{children || (
+					<>
+						<Icon name="plus" />
+						New List
+					</>
+				)}
 			</Dialog.Trigger>
 			<Dialog.Content>
 				{stage === 'type' ?

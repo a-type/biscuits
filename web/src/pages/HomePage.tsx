@@ -119,10 +119,12 @@ export default function HomePage() {
 							share all your data with up to 3 other people. Plus, you get
 							access to special features in every app.
 						</P>
-						<Button asChild emphasis="primary" className="ml-auto">
-							<Link to="/join">
-								Learn more <Icon name="arrowRight" />
-							</Link>
+						<Button
+							render={<Link to="/join" />}
+							emphasis="primary"
+							className="ml-auto"
+						>
+							Learn more <Icon name="arrowRight" />
 						</Button>
 					</Box>
 					<Box

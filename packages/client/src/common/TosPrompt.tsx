@@ -40,22 +40,28 @@ export function TosPrompt() {
 					continue using Biscuits apps.
 				</p>
 				<div className="flex flex-col items-start gap-2">
-					<Button asChild emphasis="ghost">
-						<a href={`${CONFIG.HOME_ORIGIN}/tos`} target="_blank">
-							Terms of Service
-						</a>
+					<Button
+						emphasis="ghost"
+						render={<a href={`${CONFIG.HOME_ORIGIN}/tos`} target="_blank" />}
+					>
+						Terms of Service
 					</Button>
-					<Button asChild emphasis="ghost">
-						<a href={`${CONFIG.HOME_ORIGIN}/privacy`} target="_blank">
-							Privacy Policy
-						</a>
+					<Button
+						emphasis="ghost"
+						render={
+							<a href={`${CONFIG.HOME_ORIGIN}/privacy`} target="_blank" />
+						}
+					>
+						Privacy Policy
 					</Button>
 				</div>
 				<DialogActions>
-					<Button asChild>
-						<a href={`${CONFIG.HOME_ORIGIN}/settings`} target="_blank">
-							Manage Plan or Log Out
-						</a>
+					<Button
+						render={
+							<a href={`${CONFIG.HOME_ORIGIN}/settings`} target="_blank" />
+						}
+					>
+						Manage Plan or Log Out
 					</Button>
 					<Button emphasis="primary" onClick={() => acceptTos()}>
 						Accept

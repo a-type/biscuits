@@ -16,8 +16,8 @@ export const NavigationTab = ({
 	...props
 }: ComponentPropsWithoutRef<typeof TabsTrigger>) => {
 	return (
-		<TabsTrigger asChild {...props}>
-			<Link to={props.value}>{children}</Link>
+		<TabsTrigger {...props} render={<Link to={props.value} />}>
+			{children}
 		</TabsTrigger>
 	);
 };

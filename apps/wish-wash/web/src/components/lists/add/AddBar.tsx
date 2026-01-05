@@ -34,31 +34,31 @@ export function AddBar({ className, list }: AddBarProps) {
 			elevated="lg"
 			border
 			layout="center stretch"
-			asChild
 			className={clsx('rounded-full z-now-playing', className)}
-		>
-			<form
-				onSubmit={(ev) => {
-					ev.preventDefault();
-					const isUrl = URL.canParse(value);
-					const itemId = addToList(list, {
-						type: isUrl ? 'link' : 'idea',
-						links: isUrl ? [value] : undefined,
-						description: isUrl ? undefined : value,
-					});
-					open(itemId);
-					setValue('');
-				}}
-			>
-				<Input
-					placeholders={placeholders}
-					value={value}
-					onValueChange={setValue}
+			render={
+				<form
+					onSubmit={(ev) => {
+						ev.preventDefault();
+						const isUrl = URL.canParse(value);
+						const itemId = addToList(list, {
+							type: isUrl ? 'link' : 'idea',
+							links: isUrl ? [value] : undefined,
+							description: isUrl ? undefined : value,
+						});
+						open(itemId);
+						setValue('');
+					}}
 				/>
-				<Button emphasis="primary">
-					<Icon name="plus" />
-				</Button>
-			</form>
+			}
+		>
+			<Input
+				placeholders={placeholders}
+				value={value}
+				onValueChange={setValue}
+			/>
+			<Button emphasis="primary">
+				<Icon name="plus" />
+			</Button>
 		</Box>
 	);
 }

@@ -13,8 +13,12 @@ export function NotFoundPage({}: NotFoundPageProps) {
 						Lots of people put cute graphics on this page, but I&apos;m just too
 						busy!
 					</P>
-					<Button asChild className="self-start" emphasis="primary">
-						<Link to="/">Go home</Link>
+					<Button
+						render={<Link to="/" />}
+						className="self-start"
+						emphasis="primary"
+					>
+						Go home
 					</Button>
 				</div>
 			</PageContent>

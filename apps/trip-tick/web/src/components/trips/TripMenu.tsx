@@ -23,10 +23,8 @@ export function TripMenu({ tripId }: TripMenuProps) {
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger asChild>
-				<Button emphasis="ghost">
-					<Icon name="dots" />
-				</Button>
+			<DropdownMenuTrigger render={<Button emphasis="ghost" />}>
+				<Icon name="dots" />
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className="items-start">
 				<DropdownMenuItem

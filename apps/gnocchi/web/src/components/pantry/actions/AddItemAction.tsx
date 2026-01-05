@@ -1,7 +1,6 @@
 import { useAddPantryItem } from '@/stores/groceries/mutations.js';
 import {
 	ActionButton,
-	Button,
 	Dialog,
 	DialogActions,
 	DialogClose,
@@ -18,11 +17,9 @@ export function AddItemAction() {
 
 	return (
 		<Dialog>
-			<DialogTrigger asChild>
-				<ActionButton>
-					<PlusIcon />
-					Add items
-				</ActionButton>
+			<DialogTrigger render={<ActionButton />}>
+				<PlusIcon />
+				Add items
 			</DialogTrigger>
 			<DialogContent>
 				<FormikForm
@@ -34,9 +31,7 @@ export function AddItemAction() {
 				>
 					<TextField name="name" label="Name" placeholder="garlic" />
 					<DialogActions>
-						<DialogClose asChild>
-							<Button>Done</Button>
-						</DialogClose>
+						<DialogClose>Done</DialogClose>
 						<SubmitButton>Add</SubmitButton>
 					</DialogActions>
 				</FormikForm>

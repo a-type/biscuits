@@ -27,8 +27,12 @@ export function ListsList({}: ListsListProps) {
 			<H2>Lists</H2>
 			<div className="flex flex-row flex-wrap gap-2 max-h-80px">
 				{lists.map((list) => (
-					<Button size="small" asChild key={list.get('id')}>
-						<Link to={`/lists/${list.get('id')}`}>{list.get('name')}</Link>
+					<Button
+						size="small"
+						key={list.get('id')}
+						render={<Link to={`/lists/${list.get('id')}`} />}
+					>
+						{list.get('name')}
 					</Button>
 				))}
 				<AddListButton size="small">

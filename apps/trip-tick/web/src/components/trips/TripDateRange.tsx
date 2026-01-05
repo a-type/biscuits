@@ -52,16 +52,18 @@ export function TripDateRange({ trip }: TripDateRangeProps) {
 
 	return (
 		<Popover open={open} onOpenChange={setOpen}>
-			<PopoverTrigger asChild>
-				<Button
-					emphasis={nights === 0 ? 'primary' : 'ghost'}
-					className={
-						nights === 0 ? 'ml-4' : 'font-normal text-wrap text-start text-sm'
-					}
-				>
-					<Icon name="calendar" />
-					<span>{displayString}</span>
-				</Button>
+			<PopoverTrigger
+				render={
+					<Button
+						emphasis={nights === 0 ? 'primary' : 'ghost'}
+						className={
+							nights === 0 ? 'ml-4' : 'font-normal text-wrap text-start text-sm'
+						}
+					/>
+				}
+			>
+				<Icon name="calendar" />
+				<span>{displayString}</span>
 			</PopoverTrigger>
 			<PopoverContent className="z-dialog color-black">
 				<PopoverArrow />

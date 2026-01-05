@@ -51,19 +51,26 @@ export function SearchButton({ item }: SearchButtonProps) {
 
 	return (
 		<div className="flex flex-row">
-			<Button asChild className="rounded-r-none relative z-1" size="small">
-				<Link
-					to={searchConfigs[selectedProvider].template.replace(
-						'$1',
-						item.get('description'),
-					)}
-					newTab
-				>
-					<Icon name="search" />
-					{searchConfigs[selectedProvider].name}
-				</Link>
+			<Button
+				className="rounded-r-none relative z-1"
+				size="small"
+				render={
+					<Link
+						to={searchConfigs[selectedProvider].template.replace(
+							'$1',
+							item.get('description'),
+						)}
+						newTab
+					/>
+				}
+			>
+				<Icon name="search" />
+				{searchConfigs[selectedProvider].name}
 			</Button>
-			<Select value={selectedProvider} onValueChange={setSelectedProvider}>
+			<Select
+				value={selectedProvider}
+				onValueChange={(v) => (v ? setSelectedProvider(v) : undefined)}
+			>
 				<SelectTrigger
 					className="rounded-l-none border-l-none !gap-0"
 					size="small"

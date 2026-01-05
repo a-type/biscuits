@@ -60,10 +60,7 @@ function FloorplanContent({ id }: { id: string }) {
 	if (!floor) {
 		return (
 			<Box col gap>
-				Missing floor{' '}
-				<Button asChild>
-					<Link to="/">Go home</Link>
-				</Button>
+				Missing floor <Button render={<Link to="/" />}>Go home</Button>
 			</Box>
 		);
 	}

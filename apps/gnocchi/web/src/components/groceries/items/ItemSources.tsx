@@ -104,10 +104,8 @@ function RecipePreview({
 	hooks.useWatch(recipe);
 	return (
 		<Dialog>
-			<DialogTrigger asChild>
-				<span className="font-bold">
-					{recipe ? truncate(recipe.get('title')) : 'a recipe'}
-				</span>
+			<DialogTrigger render={<span className="font-bold" />}>
+				{recipe ? truncate(recipe.get('title')) : 'a recipe'}
 			</DialogTrigger>
 			<DialogContent>
 				<Suspense>
@@ -118,9 +116,7 @@ function RecipePreview({
 					/>
 				</Suspense>
 				<DialogActions>
-					<DialogClose asChild>
-						<Button align="end">Close</Button>
-					</DialogClose>
+					<DialogClose render={<Button align="end" />}>Close</DialogClose>
 				</DialogActions>
 			</DialogContent>
 		</Dialog>

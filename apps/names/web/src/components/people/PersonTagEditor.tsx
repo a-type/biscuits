@@ -51,11 +51,9 @@ export function PersonTagEditor({ person, className }: PersonTagEditorProps) {
 				</Suspense>
 			))}
 			<Dialog>
-				<Dialog.Trigger asChild>
-					<Button size="small">
-						<Icon name="plus" className="w-10px h-10px" />
-						<span className="text-xs">tag</span>
-					</Button>
+				<Dialog.Trigger render={<Button size="small" />}>
+					<Icon name="plus" className="w-10px h-10px" />
+					<span className="text-xs">tag</span>
 				</Dialog.Trigger>
 				<Dialog.Content className="flex flex-col">
 					<Suspense>
@@ -66,11 +64,13 @@ export function PersonTagEditor({ person, className }: PersonTagEditorProps) {
 							className="mb-md"
 						/>
 						<Collapsible className="w-full">
-							<Collapsible.Trigger asChild>
-								<Button size="small" className="min-h-24px leading-1">
-									<Icon name="plus" className="w-10px h-10px" />
-									<span className="text-xs">New tag</span>
-								</Button>
+							<Collapsible.Trigger
+								render={
+									<Button size="small" className="min-h-24px leading-1" />
+								}
+							>
+								<Icon name="plus" className="w-10px h-10px" />
+								<span className="text-xs">New tag</span>
 							</Collapsible.Trigger>
 							<Collapsible.Content className="w-full ">
 								<Box className="w-full mt-sm" surface color="primary" p>
@@ -84,9 +84,7 @@ export function PersonTagEditor({ person, className }: PersonTagEditorProps) {
 						</Collapsible>
 					</Suspense>
 					<Dialog.Actions className="border-0 border-t border-solid border-gray">
-						<Dialog.Close asChild>
-							<Button>Done</Button>
-						</Dialog.Close>
+						<Dialog.Close>Done</Dialog.Close>
 					</Dialog.Actions>
 				</Dialog.Content>
 			</Dialog>

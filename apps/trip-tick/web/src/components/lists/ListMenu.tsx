@@ -18,10 +18,8 @@ export function ListMenu({ list }: { list: List }) {
 
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger asChild>
-				<Button emphasis="ghost">
-					<Icon name="dots" />
-				</Button>
+			<DropdownMenuTrigger render={<Button emphasis="ghost" />}>
+				<Icon name="dots" />
 			</DropdownMenuTrigger>
 			<DropdownMenuContent>
 				<DropdownMenuArrow />
