@@ -2,7 +2,7 @@ import { hooks, useAddPerson } from '@/hooks.js';
 import { Box, clsx, Icon, Input, Popover } from '@a-type/ui';
 import { Person } from '@names.biscuits/verdant';
 import { useCombobox } from 'downshift';
-import { Suspense, useDeferredValue, useState } from 'react';
+import { Suspense, useDeferredValue, useRef, useState } from 'react';
 import { TagDisplay } from '../tags/TagDisplay.jsx';
 
 export interface PersonNameSearchFieldProps {
@@ -68,6 +68,8 @@ export function PersonNameSearchField({
 		defaultHighlightedIndex: 0,
 	});
 
+	const anchorRef = useRef<HTMLInputElement>(null);
+
 	return (
 		<Popover
 			open={isOpen}
@@ -77,22 +79,20 @@ export function PersonNameSearchField({
 				}
 			}}
 		>
-			<Popover.Anchor
-				render={
-					<Input
-						{...getInputProps({
-							placeholder: placeholder || 'Search names...',
-							className,
-						})}
-					/>
-				}
+			<Input
+				{...getInputProps({
+					placeholder: placeholder || 'Search names...',
+					className,
+					ref: anchorRef,
+				})}
 			/>
 			<Popover.Content
 				{...getMenuProps()}
-				className="w-[var(--radix-popper-anchor-width)]"
+				className="w-[var(--anchor-width)]"
 				initialFocus={false}
 				sideOffset={8}
 				forceMount
+				anchor={anchorRef}
 			>
 				{matches.map((person, index) => (
 					<PersonItem

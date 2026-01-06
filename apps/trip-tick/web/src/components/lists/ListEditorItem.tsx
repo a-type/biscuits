@@ -69,6 +69,7 @@ export function ListEditorItem({ item, onDelete }: ListEditorItemProps) {
 				</CardFooter>
 			</CardRoot>
 			<Dialog.Content>
+				<Dialog.Title>Edit item</Dialog.Title>
 				<ListItemEditor item={item} />
 				<Dialog.Actions>
 					<Dialog.Close>Done</Dialog.Close>

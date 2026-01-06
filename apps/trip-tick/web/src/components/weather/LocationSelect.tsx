@@ -152,17 +152,10 @@ function LocationSelectAutocomplete({
 	});
 	return (
 		<Popover open={isOpen}>
-			<Popover.Anchor
-				render={
-					<div
-						data-state={isOpen ? 'open' : 'closed'}
-						className={classNames(
-							'flex gap-1 flex-col w-full relative',
-							className,
-						)}
-						ref={innerRef}
-					/>
-				}
+			<div
+				data-state={isOpen ? 'open' : 'closed'}
+				className={classNames('flex gap-1 flex-col w-full relative', className)}
+				ref={innerRef}
 			>
 				<label htmlFor="location-input" className="font-bold">
 					Where are you going?
@@ -180,7 +173,7 @@ function LocationSelectAutocomplete({
 					autoFocus={autoFocus}
 					autoSelect
 				/>
-			</Popover.Anchor>
+			</div>
 			<Popover.Content
 				radius="md"
 				align="start"
@@ -192,6 +185,7 @@ function LocationSelectAutocomplete({
 				className={classNames(
 					'overflow-x-hidden overflow-y-auto overscroll-contain shadow-lg',
 				)}
+				anchor={innerRef}
 			>
 				{options.map((item, index) => (
 					<div

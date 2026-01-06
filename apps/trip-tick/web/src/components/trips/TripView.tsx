@@ -275,12 +275,12 @@ function ListTab({ trip, list }: { list: List; trip: Trip }) {
 	return (
 		<TabsTrigger
 			value={list.get('id')}
-			className="relative overflow-hidden flex-shrink-0"
+			className="relative z-1 overflow-hidden flex-shrink-0"
 		>
 			<span className="text-nowrap">{list.get('name')}</span>
 			<Progress.Root
 				value={value}
-				className="absolute bottom-0 left-2 right-2 overflow-hidden rounded-full border border-t-solid border-l-solid border-r-solid border-primary"
+				className="absolute z-1 bottom-0 left-2 right-2 overflow-hidden rounded-full border border-t-solid border-l-solid border-r-solid border-primary"
 			>
 				<Progress.Indicator
 					className="bg-accent w-full h-4px"

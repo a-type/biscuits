@@ -1,14 +1,4 @@
-import {
-	Button,
-	clsx,
-	Icon,
-	Select,
-	SelectContent,
-	SelectIcon,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from '@a-type/ui';
+import { Button, clsx, Icon, Select } from '@a-type/ui';
 import { useState } from 'react';
 
 export interface SearchButtonProps {
@@ -73,20 +63,20 @@ export function SearchButton({
 					value={selectedProvider}
 					onValueChange={(v) => (v ? setSelectedProvider(v) : void 0)}
 				>
-					<SelectTrigger
+					<Select.Trigger
 						className="rounded-l-none border-l-none !gap-0"
 						size="small"
 					>
-						<SelectValue>{null}</SelectValue>
-						<SelectIcon />
-					</SelectTrigger>
-					<SelectContent>
+						<Select.Value>{null}</Select.Value>
+						<Select.Icon />
+					</Select.Trigger>
+					<Select.Content>
 						{Object.entries(searchConfigs).map(([key, { name }]) => (
-							<SelectItem key={key} value={key}>
+							<Select.Item key={key} value={key}>
 								{name}
-							</SelectItem>
+							</Select.Item>
 						))}
-					</SelectContent>
+					</Select.Content>
 				</Select>
 			)}
 		</div>

@@ -10,10 +10,7 @@ import {
 	Icon,
 	LiveUpdateTextField,
 	NumberStepper,
-	SliderRange,
-	SliderRoot,
-	SliderThumb,
-	SliderTrack,
+	Slider,
 	useParticles,
 } from '@a-type/ui';
 import { ResultOf } from '@biscuits/graphql';
@@ -160,7 +157,7 @@ function ChecklistItem({
 				>
 					<Icon name="check" />
 				</CheckboxRoot>
-				<div className="col items-start flex-1">
+				<div className="flex flex-col items-start flex-1">
 					<div className="w-full flex flex-row items-center gap-2 flex-wrap">
 						{onDescriptionChanged && editing ?
 							<LiveUpdateTextField
@@ -193,15 +190,15 @@ function ChecklistItem({
 							</Button>
 						)}
 					</div>
-					<SliderRoot
+					<Slider.Base
 						className={clsx(
-							'flex-1 pointer-events-none',
+							'flex-1 pointer-events-none w-full',
 							completed ? 'palette-accent' : 'palette-primary',
 						)}
-						value={[completedQuantity]}
+						value={completedQuantity}
 						min={0}
 						max={computedQuantity}
-						onValueChange={([v]) => onCompletionChanged(v)}
+						onValueChange={(v) => onCompletionChanged(v as number)}
 						style={{
 							// Fix overflow clipping in Safari
 							// https://gist.github.com/domske/b66047671c780a238b51c51ffde8d3a0
@@ -209,27 +206,27 @@ function ChecklistItem({
 						}}
 						ref={barRef}
 					>
-						<SliderTrack className="pointer-events-none">
-							<SliderRange className="transition-all pointer-events-none" />
+						<Slider.Track className="pointer-events-none">
+							<Slider.Indicator className="transition-all pointer-events-none" />
 							{new Array(computedQuantity - 1).fill(0).map((_, i) => (
 								<div
 									key={i}
-									className="w-1px h-full bg-gray-dark absolute top-0 left-0"
+									className="w-1px h-full bg-gray-dark absolute top-0 left-0 pointer-events-none"
 									style={{
 										left: `${(100 / computedQuantity) * (i + 1)}%`,
 									}}
 								/>
 							))}
-						</SliderTrack>
-						<SliderThumb
-							className={classNames(
-								'transition-all ring-1 w-8px rounded-sm pointer-events-initial',
-								completed && 'bg-main ring-black ring-1 color-white',
-								'flex items-center justify-center',
-								// completedQuantity === 0 && 'opacity-0',
-							)}
-						/>
-					</SliderRoot>
+							<Slider.Thumb
+								className={classNames(
+									'transition-all ring-1 w-8px rounded-sm pointer-events-initial',
+									completed && 'bg-main ring-black ring-1 color-white',
+									'flex items-center justify-center',
+									// completedQuantity === 0 && 'opacity-0',
+								)}
+							/>
+						</Slider.Track>
+					</Slider.Base>
 				</div>
 			</div>
 			<div className="flex flex-row justify-between gap-2 items-center text-xs color-gray-dark">

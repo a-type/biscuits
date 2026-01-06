@@ -1,11 +1,4 @@
-import {
-	Select,
-	SelectContent,
-	SelectIcon,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
-} from '@a-type/ui';
+import { Select, SelectContent, SelectItem, SelectTrigger } from '@a-type/ui';
 import classNames from 'classnames';
 import { useTemperatureUnit } from './useTemperatureUnit.js';
 
@@ -20,11 +13,15 @@ export function TemperatureUnitSelect({ className }: { className?: string }) {
 	return (
 		<div className={classNames('flex flex-row gap-2 items-center', className)}>
 			Temperature unit:
-			<Select value={unit} onValueChange={setUnit}>
-				<SelectTrigger>
-					<SelectValue />
-					<SelectIcon />
-				</SelectTrigger>
+			<Select
+				value={unit}
+				onValueChange={setUnit}
+				items={[
+					{ value: 'fahrenheit', label: '°F' },
+					{ value: 'celsius', label: '°C' },
+				]}
+			>
+				<SelectTrigger />
 				<SelectContent>
 					<SelectItem value="fahrenheit">°F</SelectItem>
 					<SelectItem value="celsius">°C</SelectItem>

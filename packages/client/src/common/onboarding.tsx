@@ -8,6 +8,7 @@ import {
 	Popover,
 	PopoverArrow,
 	PopoverContent,
+	SlotDiv,
 } from '@a-type/ui';
 import {
 	ReactElement,
@@ -16,6 +17,7 @@ import {
 	useDebugValue,
 	useEffect,
 	useLayoutEffect,
+	useRef,
 	useState,
 } from 'react';
 import { proxy, subscribe, useSnapshot } from 'valtio';
@@ -264,6 +266,8 @@ export const OnboardingTooltip = function OnboardingTooltip<
 		}
 	}, [show]);
 
+	const anchorRef = useRef<any>(null);
+
 	return (
 		<Popover
 			open={delayedOpen && show}
@@ -285,11 +289,7 @@ export const OnboardingTooltip = function OnboardingTooltip<
 			}}
 			modal={false}
 		>
-			<Popover.Anchor
-				render={children}
-				data-step-id={id}
-				data-step-name={step}
-			/>
+			<SlotDiv render={children} ref={anchorRef} />
 			<PopoverContent
 				disableBlur
 				className={clsx(
@@ -298,6 +298,7 @@ export const OnboardingTooltip = function OnboardingTooltip<
 					'overflow-visible',
 				)}
 				collisionPadding={16}
+				anchor={anchorRef}
 			>
 				<PopoverArrow className="!fill-primary-wash" />
 				<div className="flex flex-row gap-3 items-center">

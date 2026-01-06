@@ -146,6 +146,11 @@ function RelationshipTypeSelect({
 		<Select
 			value={value || 'unknown'}
 			onValueChange={(v) => onChange(v || 'unknown')}
+			itemToStringLabel={(v) => {
+				if (v === 'unknown') return 'Relationship...';
+				const [firstLetter, ...rest] = v;
+				return firstLetter.toUpperCase() + rest.join('');
+			}}
 		>
 			<Select.Trigger
 				render={

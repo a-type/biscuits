@@ -65,7 +65,7 @@ export function WeatherForecast({
 				)}
 				<Icon
 					name="arrowDown"
-					className="ml-auto [*[data-state=open]>&]:rotate-180 transition-transform color-black"
+					className="ml-auto [[data-panel-open]>&]:rotate-180 transition-transform color-black"
 				/>
 			</CollapsibleTrigger>
 			<CollapsibleContent>

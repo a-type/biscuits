@@ -63,7 +63,9 @@ export function ListItemEditor({ item }: { item: ListItemsItem }) {
 					content="Set rules for how many of this item you want to pack for each trip"
 				>
 					<FieldGroup>
-						<FieldLabel className="font-bold">for every</FieldLabel>
+						<FieldLabel className="font-bold" htmlFor="periodMultiplier">
+							for every
+						</FieldLabel>
 						<FieldArea>
 							<NumberStepper
 								value={periodMultiplier}
@@ -73,6 +75,7 @@ export function ListItemEditor({ item }: { item: ListItemsItem }) {
 								}}
 								className="bg-white"
 								disabled={period === 'trip'}
+								id="periodMultiplier"
 							/>
 							<Select
 								value={period}
@@ -84,10 +87,7 @@ export function ListItemEditor({ item }: { item: ListItemsItem }) {
 								}}
 								itemToStringLabel={(v) => pluralize(v, periodMultiplier)}
 							>
-								<Select.Trigger className="bg-white justify-between border-default py-1.5 px-4">
-									<Select.Value />
-									<Select.Icon />
-								</Select.Trigger>
+								<Select.Trigger />
 								<Select.Content>
 									{Object.entries(periodNames).map(([key, value]) => (
 										<Select.Item value={key} key={key}>
