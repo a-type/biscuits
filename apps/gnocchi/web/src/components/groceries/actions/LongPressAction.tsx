@@ -137,20 +137,17 @@ export function LongPressAction({
 
 	return (
 		<Popover modal={false} open={state !== 'idle' && state !== 'pending'}>
-			<Popover.Anchor
-				render={
-					<ActionButton
-						size="small"
-						onContextMenu={preventDefault}
-						ref={ref}
-						{...rest}
-						className={classNames(rest.className)}
-					>
-						{children}
-					</ActionButton>
-				}
-			/>
-			<Popover.Content className="p-0" side="top" sideOffset={0}>
+			<ActionButton
+				size="small"
+				onContextMenu={preventDefault}
+				ref={ref}
+				{...rest}
+				className={classNames(rest.className)}
+			>
+				{children}
+			</ActionButton>
+
+			<Popover.Content anchor={ref} className="p-0" side="top" sideOffset={0}>
 				<Popover.Arrow className="w-5 h-3" />
 				<div className="relative overflow-hidden px-4 py-2 rounded-lg">
 					<div

@@ -8,7 +8,7 @@ import {
 	useThemedTitleBar,
 } from '@a-type/ui';
 import { getIsTouch } from '@biscuits/client';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const MOODS = [
 	{ value: -2, label: '😞' },
@@ -50,6 +50,8 @@ export function MoodPicker({
 	const shade = localValue === min || localValue === max ? 'light' : 'wash';
 	useThemedTitleBar(palette, shade);
 
+	const thumbRef = useRef<HTMLDivElement>(null);
+
 	return (
 		<Box
 			p="lg"
@@ -74,13 +76,13 @@ export function MoodPicker({
 				open={!active && value === null}
 				side="left"
 			>
-				<Slider.Root
+				<Slider.Base
 					defaultValue={[0]}
-					value={localValue !== null ? [localValue] : undefined}
-					onValueChange={([val]) => setLocalValue(val)}
-					onValueCommitted={([val]) => {
-						onValueChange(val);
-						setLocalValue(val);
+					value={localValue !== null ? localValue : undefined}
+					onValueChange={(val) => setLocalValue(val as number)}
+					onValueCommitted={(val) => {
+						onValueChange(val as number);
+						setLocalValue(val as number);
 						setActive(false);
 					}}
 					min={min}
@@ -95,6 +97,7 @@ export function MoodPicker({
 							onValueChange(localValue);
 						}
 					}}
+					className="w-auto h-full"
 				>
 					<Slider.Track
 						className={clsx('w-6', {
@@ -106,31 +109,31 @@ export function MoodPicker({
 								localValue !== null && localValue > 0 && localValue < max,
 							'bg-success': localValue === max,
 						})}
-					/>
-					<Popover open={active && getIsTouch()}>
-						<Popover.Anchor
-							render={
-								<Slider.Thumb
-									className={clsx(
-										'w-touch-large h-touch-large text-2xl',
-										value === null && 'border-dashed',
-									)}
-								>
-									{value === null && !active ? '' : moodIcon}
-								</Slider.Thumb>
-							}
-						/>
-						<Popover.Content
-							side="left"
-							sideOffset={16}
-							className="min-w-0 min-h-0"
-						>
-							<Box p="xs" col gap layout="center center" className="text-3xl">
-								{moodIcon}
-							</Box>
-						</Popover.Content>
-					</Popover>
-				</Slider.Root>
+					>
+						<Popover open={active && getIsTouch()}>
+							<Slider.Thumb
+								className={clsx(
+									'w-touch-large h-touch-large text-2xl',
+									value === null && 'border-dashed',
+								)}
+								ref={thumbRef}
+							>
+								{value === null && !active ? '' : moodIcon}
+							</Slider.Thumb>
+
+							<Popover.Content
+								anchor={thumbRef}
+								side="left"
+								sideOffset={16}
+								className="min-w-0 min-h-0"
+							>
+								<Box p="xs" col gap layout="center center" className="text-3xl">
+									{moodIcon}
+								</Box>
+							</Popover.Content>
+						</Popover>
+					</Slider.Track>
+				</Slider.Base>
 			</Tooltip>
 		</Box>
 	);
