@@ -1,15 +1,13 @@
 import { Person, hooks } from '@/stores/groceries/index.js';
 import {
+	Box,
+	Button,
 	Select,
-	SelectContent,
-	SelectGroup,
 	SelectItemRoot as SelectItem,
 	SelectItemIndicator,
+	SelectItemRoot,
 	SelectItemText,
-	SelectLabel,
 	SelectProps,
-	SelectTrigger,
-	SelectValue,
 } from '@a-type/ui';
 import { useCallback } from 'react';
 import { PersonAvatar } from './PersonAvatar.jsx';
@@ -42,7 +40,7 @@ export function PersonSelect({
 	const self = hooks.useSelf();
 
 	const onChangeInternal = useCallback(
-		(value: string) => {
+		(value: string | null) => {
 			const person = people.find((person) => person.id === value);
 			onChange(value === 'null' ? null : value, person || null);
 		},
@@ -55,34 +53,43 @@ export function PersonSelect({
 			onValueChange={onChangeInternal}
 			{...rest}
 		>
-			<SelectTrigger
-				className="border-none p-0 rounded-full [&[data-state=open]]:scale-[1.05]"
+			<Select.Trigger
+				className="[&[data-state=open]]:scale-[1.05]"
 				contentEditable={false}
+				render={<Button emphasis="ghost" size="small" />}
 			>
-				<SelectValue contentEditable={false}>
-					{value === null ? (
-						<PersonAvatar popIn={false} person={null} className="opacity-50" />
-					) : (
-						<PersonAvatar
-							popIn={false}
-							person={people.find((person) => person.id === value) || null}
-						/>
-					)}
-				</SelectValue>
-			</SelectTrigger>
+				<Button.Icon
+					render={
+						<Select.Value contentEditable={false}>
+							{value === null ? (
+								<PersonAvatar
+									popIn={false}
+									person={null}
+									className="opacity-50"
+								/>
+							) : (
+								<PersonAvatar
+									popIn={false}
+									person={people.find((person) => person.id === value) || null}
+								/>
+							)}
+						</Select.Value>
+					}
+				/>
+			</Select.Trigger>
 
-			<SelectContent>
-				<SelectGroup>
-					{label && <SelectLabel>{label}</SelectLabel>}
+			<Select.Content>
+				<Select.Group>
+					{label && <Select.GroupLabel>{label}</Select.GroupLabel>}
 					{allowNone && (
-						<SelectItem
+						<SelectItemRoot
 							className="flex flex-row gap-2 items-center"
 							value="null"
 						>
-							<PersonAvatar popIn={false} person={null} />{' '}
+							<PersonAvatar popIn={false} person={null} />
 							<SelectItemText>None</SelectItemText>
 							<SelectItemIndicator />
-						</SelectItem>
+						</SelectItemRoot>
 					)}
 					{people.map((person) => (
 						<PersonSelectItem
@@ -91,8 +98,8 @@ export function PersonSelect({
 							isSelf={person.id === self.id}
 						/>
 					))}
-				</SelectGroup>
-			</SelectContent>
+				</Select.Group>
+			</Select.Content>
 		</Select>
 	);
 }
@@ -112,9 +119,23 @@ function PersonSelectItem({
 			value={person.profile.id}
 			className="flex flex-row gap-2 items-center"
 		>
-			<PersonAvatar popIn={false} person={person} />
-			<SelectItemText>{isSelf ? 'Me' : person.profile.name}</SelectItemText>
+			<PersonSelectItemLabel person={person} isSelf={isSelf} />
 			<SelectItemIndicator />
 		</SelectItem>
+	);
+}
+
+function PersonSelectItemLabel({
+	person,
+	isSelf,
+}: {
+	person: Person;
+	isSelf: boolean;
+}) {
+	return (
+		<Box items="center" gap="sm">
+			<PersonAvatar popIn={false} person={person} />
+			{isSelf ? 'Me' : person.profile.name}
+		</Box>
 	);
 }

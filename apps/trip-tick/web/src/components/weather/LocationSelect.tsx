@@ -1,6 +1,5 @@
 import { hooks } from '@/store.js';
 import { Button, Icon, Input, Popover, toast, useSize } from '@a-type/ui';
-import { preventDefault } from '@a-type/utils';
 import { useDebounced, useHasServerAccess } from '@biscuits/client';
 import { graphql, useClient, useQuery } from '@biscuits/graphql';
 import { TripLocation, TripLocationInit } from '@trip-tick.biscuits/verdant';
@@ -186,7 +185,7 @@ function LocationSelectAutocomplete({
 				radius="md"
 				align="start"
 				forceMount
-				onOpenAutoFocus={preventDefault}
+				initialFocus={false}
 				{...getMenuProps({
 					ref: contentRef,
 				})}

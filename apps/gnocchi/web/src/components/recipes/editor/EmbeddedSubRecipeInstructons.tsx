@@ -41,21 +41,25 @@ export function EmbeddedSubRecipeInstructionsToggle({
 	}
 
 	return (
-		<Collapsible.Trigger render={render}>
-			<Button
-				emphasis="ghost"
-				className={clsx('w-full gap-2 items-center text-start', className)}
-				size="small"
-				contentEditable={false}
-			>
-				<Icon
-					name="chevron"
-					className="[[data-state=open]>&]:rotate-180deg transition-all"
-				/>
-				<span className="italic">
-					<span className="font-medium">Make</span> {recipe.get('title')}
-				</span>
-			</Button>
+		<Collapsible.Trigger
+			render={
+				render || (
+					<Button
+						emphasis="ghost"
+						className={clsx('w-full gap-2 items-center text-start', className)}
+						size="small"
+						contentEditable={false}
+					/>
+				)
+			}
+		>
+			<Icon
+				name="chevron"
+				className="[[data-state=open]>&]:rotate-180deg transition-all"
+			/>
+			<span className="italic">
+				<span className="font-medium">Make</span> {recipe.get('title')}
+			</span>
 		</Collapsible.Trigger>
 	);
 }

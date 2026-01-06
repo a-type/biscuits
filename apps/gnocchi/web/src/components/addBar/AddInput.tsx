@@ -1,3 +1,4 @@
+import useMergedRef from '@/hooks/useMergedRef.js';
 import {
 	Button,
 	ButtonProps,
@@ -17,7 +18,7 @@ export interface AddInputProps {
 	className?: string;
 	clear: () => void;
 	disableInteraction?: boolean;
-	getSubmitButtonProps: () => any;
+	submitButtonProps: ButtonProps;
 	onFocus?: () => void;
 }
 
@@ -25,7 +26,7 @@ export const AddInput = forwardRef<HTMLDivElement, AddInputProps>(
 	function AddInput(
 		{
 			inputProps,
-			getSubmitButtonProps,
+			submitButtonProps,
 			isOpen,
 			className,
 			clear,
@@ -36,6 +37,7 @@ export const AddInput = forwardRef<HTMLDivElement, AddInputProps>(
 		ref,
 	) {
 		const inputValue = inputProps.value?.toString() ?? '';
+		const inputIsUrl = URL.canParse(inputValue);
 
 		return (
 			<div
@@ -57,7 +59,11 @@ export const AddInput = forwardRef<HTMLDivElement, AddInputProps>(
 					{...inputProps}
 				/>
 				<div className="absolute flex flex-row-reverse gap-1 right-0px top-0px">
-					<SubmitButton {...getSubmitButtonProps()} />
+					<SubmitButton
+						{...submitButtonProps}
+						disableInteraction={disableInteraction}
+						inputIsUrl={inputIsUrl}
+					/>
 					{!!inputValue && (
 						<Button
 							emphasis="ghost"
@@ -78,22 +84,25 @@ function SubmitButton({
 	children,
 	inputIsUrl,
 	disableInteraction,
+	ref: outerRef,
 	...rest
 }: ButtonProps & {
-	inputIsUrl: boolean;
-	disableInteraction: boolean;
+	inputIsUrl?: boolean;
+	disableInteraction?: boolean;
+	ref?: React.Ref<HTMLButtonElement>;
 }) {
 	const { justAddedSomething } = useSnapshot(groceriesState);
 
-	const ref = useRef<HTMLButtonElement>(null);
+	const innerRef = useRef<HTMLButtonElement>(null);
+	const ref = useMergedRef(outerRef, innerRef);
 
 	const particles = useParticles();
 	useEffect(() => {
 		if (justAddedSomething) {
-			if (ref.current) {
+			if (innerRef.current) {
 				particles?.addParticles(
 					particles.elementExplosion({
-						element: ref.current,
+						element: innerRef.current,
 						count: 20,
 					}),
 				);

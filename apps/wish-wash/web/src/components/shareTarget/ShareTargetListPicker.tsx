@@ -49,7 +49,9 @@ export function ShareTargetListPicker({}: ShareTargetListPickerProps) {
 		>
 			<DialogContent>
 				<DialogTitle>Add to list</DialogTitle>
-				<DialogSelectList onValueChange={doAdd}>
+				<DialogSelectList
+					onValueChange={(v) => (v ? doAdd(v as string) : null)}
+				>
 					{lists.map((list) => (
 						<DialogSelectItem
 							value={list.get('id')}

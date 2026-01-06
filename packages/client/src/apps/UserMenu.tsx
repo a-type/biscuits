@@ -55,29 +55,30 @@ export function UserMenu({
 			<SmallUpdatePrompt />
 			<DropdownMenu>
 				<DropdownMenu.Trigger
-					render={() =>
-						(children ?? (!isLoggedIn && loading && !isOffline)) ?
-							<Button size="small" emphasis="ghost">
-								<Icon name="refresh" className="animate-spin" />
-							</Button>
-						: isLoggedIn ?
-							<Button size="small" emphasis="ghost">
-								{!hasServerAccess && <Icon name="refreshDisabled" />}
-								<ErrorBoundary fallback={<Avatar />}>
-									<Suspense fallback={<Avatar />}>
-										<PresencePeople />
-									</Suspense>
-								</ErrorBoundary>
-							</Button>
-						:	<Button size="small" emphasis="ghost">
-								<Icon
-									name="refreshDisabled"
-									className={isOffline ? 'color-attention' : ''}
-								/>
-								<Icon name="gear" className="h-25px" />
-							</Button>
+					render={(props: any) => (
+						<Button size="small" emphasis="ghost" {...props} />
+					)}
+				>
+					{(children ?? (!isLoggedIn && loading && !isOffline)) ?
+						<Icon name="refresh" className="animate-spin" />
+					: isLoggedIn ?
+						<>
+							{!hasServerAccess && <Icon name="refreshDisabled" />}
+							<ErrorBoundary fallback={<Avatar />}>
+								<Suspense fallback={<Avatar />}>
+									<PresencePeople />
+								</Suspense>
+							</ErrorBoundary>
+						</>
+					:	<>
+							<Icon
+								name="refreshDisabled"
+								className={isOffline ? 'color-attention' : ''}
+							/>
+							<Icon name="gear" className="h-25px" />
+						</>
 					}
-				/>
+				</DropdownMenu.Trigger>
 				<DropdownMenu.Content>
 					{isOffline && (
 						<div className="pl-8 pr-4 py-1 color-gray-dark text-sm max-w-300px bg-attention-wash color-attention-dark">

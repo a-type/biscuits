@@ -154,7 +154,6 @@ function FoodDetailView({
 					value={food.get('defaultListId')}
 					onChange={(val) => food.set('defaultListId', val)}
 					includeAll={false}
-					inDialog
 				/>
 			</Row>
 			<Divider />

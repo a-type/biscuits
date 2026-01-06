@@ -17,7 +17,7 @@ export function MeetupAction({}: MeetupActionProps) {
 					visible={hasPeers}
 				>
 					<Icon name="location" />
-					<SelectValue />
+					<SelectValue>{(v) => v || 'Meet up'}</SelectValue>
 				</ActionButton>
 			)}
 		</MeetupSelect>

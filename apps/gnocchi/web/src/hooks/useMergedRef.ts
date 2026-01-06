@@ -1,6 +1,8 @@
 import * as React from 'react';
 
-function useMergedRef<T>(...refs: React.Ref<T>[]): React.RefCallback<T> {
+function useMergedRef<T>(
+	...refs: (React.Ref<T> | null | undefined)[]
+): React.RefCallback<T> {
 	return React.useCallback((element: T) => {
 		for (let i = 0; i < refs.length; i++) {
 			const ref = refs[i];

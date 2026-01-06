@@ -13,11 +13,6 @@ import {
 	LiveUpdateTextField,
 	NumberStepper,
 	Select,
-	SelectContent,
-	SelectIcon,
-	SelectItem,
-	SelectTrigger,
-	SelectValue,
 	withClassName,
 } from '@a-type/ui';
 import { OnboardingTooltip, useHasServerAccess } from '@biscuits/client';
@@ -82,23 +77,24 @@ export function ListItemEditor({ item }: { item: ListItemsItem }) {
 							<Select
 								value={period}
 								onValueChange={(v) => {
-									item.set('period', v);
+									item.set('period', v || undefined);
 									if (v === 'trip') {
 										item.set('periodMultiplier', 1);
 									}
 								}}
+								itemToStringLabel={(v) => pluralize(v, periodMultiplier)}
 							>
-								<SelectTrigger className="bg-white justify-between border-default py-1.5 px-4">
-									<SelectValue />
-									<SelectIcon />
-								</SelectTrigger>
-								<SelectContent>
+								<Select.Trigger className="bg-white justify-between border-default py-1.5 px-4">
+									<Select.Value />
+									<Select.Icon />
+								</Select.Trigger>
+								<Select.Content>
 									{Object.entries(periodNames).map(([key, value]) => (
-										<SelectItem value={key} key={key}>
+										<Select.Item value={key} key={key}>
 											{pluralize(value, periodMultiplier)}
-										</SelectItem>
+										</Select.Item>
 									))}
-								</SelectContent>
+								</Select.Content>
 							</Select>
 						</FieldArea>
 						<FieldDescription>

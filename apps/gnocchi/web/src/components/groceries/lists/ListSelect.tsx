@@ -1,15 +1,13 @@
 import { hooks } from '@/stores/groceries/index.js';
 import {
+	Box,
 	Dialog,
 	DialogContent,
 	FormikForm,
 	Icon,
 	PaletteName,
 	Select,
-	SelectContent,
 	SelectItem,
-	SelectSeparator,
-	SelectTrigger,
 	SubmitButton,
 	TextField,
 	withClassName,
@@ -32,7 +30,6 @@ export interface ListSelectProps {
 	includeAll?: boolean;
 	value: string | null | undefined;
 	onChange: (value: string | null | undefined) => void;
-	inDialog?: boolean;
 	className?: string;
 }
 
@@ -42,17 +39,18 @@ export function ListSelect({
 	value,
 	onChange,
 	includeAll,
-	inDialog,
 	className,
 }: ListSelectProps) {
 	const lists = hooks.useAllLists();
 	const [isCreating, setIsCreating] = useState(false);
 	const client = hooks.useClient();
 
+	const resolvedValue = includeAll ? value : value === undefined ? null : value;
+
 	return (
 		<>
 			<Select
-				value={value ?? `${value}`}
+				value={resolvedValue ?? `${resolvedValue}`}
 				onValueChange={(val) => {
 					if (val === 'null') onChange(null);
 					if (val === 'undefined') onChange(undefined);
@@ -61,32 +59,33 @@ export function ListSelect({
 					} else onChange(val);
 				}}
 			>
-				<SelectTrigger className={className} size="small" />
-				<SelectContent inDialog={inDialog}>
+				<Select.Trigger className={className} size="small">
+					<Select.Value>
+						<ListSelectItemLabel
+							list={
+								resolvedValue === undefined || resolvedValue === null
+									? resolvedValue
+									: lists.find((l) => l.get('id') === resolvedValue) ?? null
+							}
+						/>
+					</Select.Value>
+					<Select.Icon />
+				</Select.Trigger>
+				<Select.Content>
 					{includeAll && (
-						<SelectItem value="undefined">
-							<div className="relative inline">
-								<Icon name="tag" className="relative -left-3px" />
-								<Icon
-									name="tag"
-									className="absolute top-0 left-1px fill-white"
-								/>
-							</div>{' '}
-							All lists
-						</SelectItem>
+						<Select.Item value="undefined">
+							<ListSelectItemLabel list={undefined} />
+						</Select.Item>
 					)}
-					<SelectItem value={'null'}>
-						<div className="flex flex-row gap-2 items-center">
-							<FilledIcon name="tag" className="palette-lemon" />
-							<span>Default</span>
-						</div>
-					</SelectItem>
+					<Select.Item value={'null'}>
+						<ListSelectItemLabel list={null} />
+					</Select.Item>
 					{lists.map((list) => (
 						<ListSelectItem key={list.get('id')} list={list} />
 					))}
-					<SelectSeparator />
-					<SelectItem value={'new'}>New List</SelectItem>
-				</SelectContent>
+					<Select.Separator />
+					<Select.Item value={'new'}>New List</Select.Item>
+				</Select.Content>
 			</Select>
 			<Dialog open={isCreating} onOpenChange={() => setIsCreating(false)}>
 				<DialogContent>
@@ -116,15 +115,55 @@ export function ListSelect({
 }
 
 function ListSelectItem({ list }: { list: List }) {
-	const { color, id, name } = hooks.useWatch(list);
+	hooks.useWatch(list);
 	return (
-		<SelectItem value={id}>
-			<div className="flex flex-row gap-2 items-center">
-				<FilledIcon name="tag" className={`palette-${color ?? 'lemon'}`} />
-				<span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-full">
-					{name}
-				</span>
-			</div>
+		<SelectItem value={list.get('id')}>
+			<ListSelectItemLabel list={list} />
 		</SelectItem>
+	);
+}
+
+function ListSelectItemLabel({ list }: { list: List | null | undefined }) {
+	if (list === null) {
+		return (
+			<Box items="center" gap="sm">
+				<FilledIcon name="tag" className="palette-lemon" />
+				<span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-full">
+					Default
+				</span>
+			</Box>
+		);
+	}
+
+	if (list === undefined) {
+		return (
+			<Box items="center" gap="sm">
+				<MultiListIcon />
+				<span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-full">
+					All lists
+				</span>
+			</Box>
+		);
+	}
+
+	return (
+		<Box items="center" gap="sm">
+			<FilledIcon
+				name="tag"
+				className={`palette-${list.get('color') ?? 'lemon'}`}
+			/>
+			<span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-full">
+				{list.get('name')}
+			</span>
+		</Box>
+	);
+}
+
+function MultiListIcon() {
+	return (
+		<div className="relative inline">
+			<Icon name="tag" className="relative -left-3px" />
+			<Icon name="tag" className="absolute top-0 left-1px fill-white" />
+		</div>
 	);
 }

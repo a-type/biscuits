@@ -6,7 +6,7 @@
 	"scripts": {
 		"dev": "vite --host --mode=development",
 		"build": "vite build --mode=production",
-		"typecheck": "tsc --noEmit",
+		"tsc": "tsc --noEmit",
 		"lint": "eslint src"
 	},
 	"dependencies": {

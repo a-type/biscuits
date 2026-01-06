@@ -39,7 +39,7 @@ export function SearchAndBuyExperience({
 }: {
 	item: FragmentOf<typeof searchAndBuyExperienceFragment>;
 	listAuthor: string;
-	children: ReactElement;
+	children?: ReactElement;
 	description?: ReactNode;
 }) {
 	const item = readFragment(searchAndBuyExperienceFragment, itemMasked);

@@ -57,7 +57,8 @@
 		"build:prefix": "node ./scripts/addUnoInclude.mjs",
 		"build:copy": "node ./scripts/copyCss.mjs",
 		"dev": "tsc --watch",
-		"gql": "gql-tada"
+		"gql": "gql-tada",
+		"tsc": "tsc --noEmit"
 	},
 	"type": "module",
 	"dependencies": {

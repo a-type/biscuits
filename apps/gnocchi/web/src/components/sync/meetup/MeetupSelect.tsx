@@ -7,10 +7,10 @@ import {
 	UnstyledSelectTrigger,
 } from '@a-type/ui';
 import classNames from 'classnames';
-import { ReactNode, useCallback, useEffect } from 'react';
+import { ReactElement, useCallback, useEffect } from 'react';
 
 export interface MeetupSelectProps {
-	children?: (value: string | undefined) => ReactNode;
+	children?: (value: string | undefined) => ReactElement;
 	id?: string;
 	emptyLabel?: string;
 }
@@ -59,40 +59,48 @@ export function MeetupSelect({ children, id, emptyLabel }: MeetupSelectProps) {
 
 	return (
 		<Select
-			value={location || 'clear'}
+			value={location || null}
 			onValueChange={(v) => {
 				setMeetup(v);
 			}}
 		>
 			<Trigger
-				render={<Button />}
 				className={classNames(
 					!children && 'py-3 px-6',
 					!!location && 'bg-accent-wash color-accent-dark',
 				)}
 				id={id}
-			>
-				{children ? (
-					children(location)
-				) : (
-					<Button>
-						<Icon name="locate" />
-						<Select.Value />
-						<Select.Icon />
-					</Button>
-				)}
-			</Trigger>
+				render={
+					children ? (
+						children(location)
+					) : (
+						<Button>
+							<Icon name="locate" />
+							<Select.Value>
+								{(v) => (!v ? emptyLabel || 'Meet up...' : v)}
+							</Select.Value>
+							<Select.Icon />
+						</Button>
+					)
+				}
+			/>
 			<Select.Content>
-				<Select.Item value={null}>
-					{location ? 'Clear' : emptyLabel || 'Regroup'}
+				<Select.Item value={null} disabled={!!location}>
+					<Select.ItemText>
+						{location ? 'Clear' : emptyLabel || 'Meet up...'}
+					</Select.ItemText>
 				</Select.Item>
 				<Select.Group>
 					<Select.GroupLabel>Choose a location</Select.GroupLabel>
-					<Select.Item value="Checkout Lanes">Checkout Lanes</Select.Item>
-					<Select.Item value="Self Checkout">Self Checkout</Select.Item>
+					<Select.Item value="Checkout Lanes">
+						<Select.ItemText>Checkout Lanes</Select.ItemText>
+					</Select.Item>
+					<Select.Item value="Self Checkout">
+						<Select.ItemText>Self Checkout</Select.ItemText>
+					</Select.Item>
 					{options.map((option) => (
 						<Select.Item value={option} key={option}>
-							{option}
+							<Select.ItemText>{option}</Select.ItemText>
 						</Select.Item>
 					))}
 				</Select.Group>

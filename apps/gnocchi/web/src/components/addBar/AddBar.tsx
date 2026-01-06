@@ -1,7 +1,7 @@
 import { AddToListDialog } from '@/components/recipes/viewer/AddToListDialog.jsx';
 import useMergedRef from '@/hooks/useMergedRef.js';
 import { Input, Popover, useSize } from '@a-type/ui';
-import { preventDefault, stopPropagation } from '@a-type/utils';
+import { stopPropagation } from '@a-type/utils';
 import classNames from 'classnames';
 import { Suspense, forwardRef, useRef, useState } from 'react';
 import { AddInput } from './AddInput.jsx';
@@ -73,32 +73,35 @@ export const AddBarImpl = forwardRef<HTMLDivElement, AddBarProps>(
 
 		const noSuggestions = allSuggestions.length === 0;
 
+		const submitButtonRef = useRef<HTMLButtonElement>(null);
+
 		return (
 			<>
 				<Popover open={open}>
-					<Popover.Anchor
-						render={
-							<AddInput
-								inputProps={getInputProps({
-									placeholder,
-									onFocus: () => onOpenChange?.(true),
-								})}
-								getSubmitButtonProps={getSubmitButtonProps}
-								isOpen={open}
-								className={className}
-								clear={() => clear()}
-								ref={mergedRef}
-								{...rest}
-							/>
-						}
+					<AddInput
+						inputProps={getInputProps({
+							placeholder,
+							onFocus: () => onOpenChange?.(true),
+						})}
+						submitButtonProps={{
+							...getSubmitButtonProps(),
+							ref: submitButtonRef,
+						}}
+						isOpen={open}
+						className={className}
+						clear={() => clear()}
+						ref={mergedRef}
+						{...rest}
 					/>
 					<Popover.Content
+						anchor={innerRef}
 						forceMount
 						disableBlur
 						radius="md"
 						align="start"
 						sideOffset={12}
-						onOpenAutoFocus={preventDefault}
+						initialFocus={false}
+						finalFocus={submitButtonRef}
 						{...getMenuProps({
 							ref: contentRef,
 						})}

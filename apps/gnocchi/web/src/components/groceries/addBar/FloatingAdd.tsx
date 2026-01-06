@@ -41,7 +41,7 @@ export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
 			onOpenChange={setOpen}
 		>
 			<MenuDisclose.Content
-				render={() => (
+				render={
 					<AddPane
 						onAdd={onAdd}
 						showRichSuggestions
@@ -51,20 +51,19 @@ export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
 						disabled={!open}
 						{...rest}
 					/>
-				)}
+				}
 			/>
 			<MenuDisclose.Trigger
-				render={(props) => (
+				render={
 					<Button
 						onClick={() => setOpen(true)}
 						emphasis="primary"
 						className={classNames('absolute shadow-xl')}
-						{...props}
-					>
-						<Icon name="plus" className="w-20px h-20px" />
-					</Button>
-				)}
-			/>
+					/>
+				}
+			>
+				<Icon name="plus" className="w-20px h-20px" />
+			</MenuDisclose.Trigger>
 		</MenuDisclose>
 	);
 }

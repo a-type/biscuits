@@ -11,7 +11,6 @@ import {
 	TextArea,
 	withClassName,
 } from '@a-type/ui';
-import { preventDefault } from '@a-type/utils';
 import { useHasServerAccess } from '@biscuits/client';
 import { graphql, useLazyQuery } from '@biscuits/graphql';
 import { useSearchParams } from '@verdant-web/react-router';
@@ -54,7 +53,7 @@ export function ItemEditDialog({ list }: ItemEditDialogProps) {
 			}}
 		>
 			<Dialog.Content
-				onOpenAutoFocus={preventDefault}
+				initialFocus={false}
 				className={clsx(
 					'theme',
 					`theme-${typeThemes[item?.get('type') ?? 'idea']}`,
