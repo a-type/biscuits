@@ -2,6 +2,7 @@ import { useMe } from './hooks/graphql.js';
 
 export const featureFlags = {
   hub: false,
+  overlayKeyboard: false,
 } as const;
 
 export type FeatureFlagName = keyof typeof featureFlags;

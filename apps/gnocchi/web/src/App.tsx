@@ -1,7 +1,7 @@
 import { ReloadButton } from '@/components/sync/ReloadButton.jsx';
 import { GlobalLoader } from '@/GlobalLoader.jsx';
 import { ErrorBoundary, H1, P, Provider as UIProvider } from '@a-type/ui';
-import { Provider } from '@biscuits/client';
+import { Provider, useFeatureFlag } from '@biscuits/client';
 import classNames from 'classnames';
 import { Suspense } from 'react';
 import { AppMoved } from './components/promotional/AppMoved.jsx';
@@ -10,6 +10,8 @@ import { verdant } from './stores/groceries/index.js';
 import { Provider as GroceriesProvider } from './stores/groceries/Provider.jsx';
 
 export function App() {
+	const keyboardOverlay = useFeatureFlag('overlayKeyboard');
+
 	return (
 		<div
 			className={classNames(
@@ -18,7 +20,10 @@ export function App() {
 			)}
 		>
 			<ErrorBoundary fallback={<ErrorFallback />}>
-				<UIProvider manifestPath="/manifest.webmanifest">
+				<UIProvider
+					manifestPath="/manifest.webmanifest"
+					virtualKeyboardBehavior={keyboardOverlay ? 'overlay' : undefined}
+				>
 					<Suspense fallback={<GlobalLoader />}>
 						<Provider appId="gnocchi" verdantClient={verdant as any}>
 							<GroceriesProvider>
