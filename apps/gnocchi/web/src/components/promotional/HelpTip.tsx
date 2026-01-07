@@ -1,5 +1,10 @@
-import { Button, Popover, PopoverContent, PopoverTrigger } from '@a-type/ui';
-import { QuestionMarkCircledIcon } from '@radix-ui/react-icons';
+import {
+	Button,
+	Icon,
+	Popover,
+	PopoverContent,
+	PopoverTrigger,
+} from '@a-type/ui';
 import { ReactNode } from 'react';
 
 export interface HelpTipProps {
@@ -10,7 +15,7 @@ export function HelpTip({ children }: HelpTipProps) {
 	return (
 		<Popover>
 			<PopoverTrigger render={<Button emphasis="ghost" />}>
-				<QuestionMarkCircledIcon />
+				<Icon name="info" />
 			</PopoverTrigger>
 			<PopoverContent>
 				<span className="text-sm">{children}</span>

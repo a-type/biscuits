@@ -17,7 +17,6 @@ import {
 } from '@a-type/ui';
 import { formatMinutes } from '@a-type/utils';
 import { Recipe } from '@gnocchi.biscuits/verdant';
-import { DrawingPinFilledIcon } from '@radix-ui/react-icons';
 import { useNavigate } from '@verdant-web/react-router';
 import classNames from 'classnames';
 import cuid from 'cuid';
@@ -174,7 +173,7 @@ export function RecipeListItemMenu({
 					>
 						<span>Remove pin</span>
 						<DropdownMenuItemRightSlot>
-							<DrawingPinFilledIcon />
+							<Icon name="pinFilled" />
 						</DropdownMenuItemRightSlot>
 					</DropdownMenu.Item>
 				)}

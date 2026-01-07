@@ -1,6 +1,5 @@
 import { LinkButton } from '@/components/nav/Link.jsx';
-import { PageFixedArea } from '@a-type/ui';
-import { ArrowLeftIcon } from '@radix-ui/react-icons';
+import { Icon, PageFixedArea } from '@a-type/ui';
 import classNames from 'classnames';
 import { ReactNode } from 'react';
 
@@ -19,7 +18,7 @@ export function HeaderBar({ children, backUrl, className }: HeaderBarProps) {
 			)}
 		>
 			<LinkButton to={backUrl} emphasis="ghost">
-				<ArrowLeftIcon />
+				<Icon name="arrowLeft" />
 				Back
 			</LinkButton>
 			{children}

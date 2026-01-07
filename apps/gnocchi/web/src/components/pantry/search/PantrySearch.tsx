@@ -1,6 +1,5 @@
 import { useSearch } from '@/components/pantry/hooks.js';
-import { Button, LiveUpdateTextField } from '@a-type/ui';
-import { Cross2Icon } from '@radix-ui/react-icons';
+import { Button, Icon, LiveUpdateTextField } from '@a-type/ui';
 
 export function PantrySearch() {
 	const [search, setSearch] = useSearch();
@@ -14,7 +13,7 @@ export function PantrySearch() {
 			/>
 			{!!search && (
 				<Button emphasis="default" onClick={() => setSearch('')}>
-					<Cross2Icon />
+					<Icon name="x" />
 				</Button>
 			)}
 		</div>

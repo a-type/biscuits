@@ -34,7 +34,6 @@ import {
 	RecipeIngredients,
 	RecipeIngredientsItem,
 } from '@gnocchi.biscuits/verdant';
-import { CheckIcon, DragHandleDots2Icon } from '@radix-ui/react-icons';
 import classNames from 'classnames';
 import { Suspense, useState } from 'react';
 import { useSubRecipeIds } from '../hooks.js';
@@ -130,7 +129,8 @@ function RecipeIngredientItem({
 			style={style}
 		>
 			<div className="flex flex-row gap-2 items-start">
-				<DragHandleDots2Icon
+				<Icon
+					name="grabby"
 					className="touch-none relative top-2"
 					{...listeners}
 				/>
@@ -177,7 +177,7 @@ function IngredientMenu({
 						onCheckedChange={(v) => ingredient.set('isSectionHeader', !!v)}
 					>
 						<DropdownMenu.ItemIndicator>
-							<CheckIcon />
+							<Icon name="check" />
 						</DropdownMenu.ItemIndicator>
 						Section header
 					</DropdownMenu.CheckboxItem>

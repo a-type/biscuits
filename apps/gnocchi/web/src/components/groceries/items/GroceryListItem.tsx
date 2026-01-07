@@ -23,7 +23,6 @@ import { OnboardingTooltip } from '@biscuits/client';
 import { useDraggable } from '@dnd-kit/core';
 import { CSS } from '@dnd-kit/utilities';
 import { Item } from '@gnocchi.biscuits/verdant';
-import { TrashIcon } from '@radix-ui/react-icons';
 import { motion } from 'motion/react';
 import {
 	CSSProperties,
@@ -239,7 +238,7 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 												emphasis="ghost"
 												item={item}
 											>
-												<TrashIcon />
+												<Icon name="trash" />
 											</ItemDeleteButton>
 										</Suspense>
 									</div>

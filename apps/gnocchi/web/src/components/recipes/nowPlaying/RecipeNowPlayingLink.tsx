@@ -1,8 +1,7 @@
 import { makeRecipeLink } from '@/components/recipes/makeRecipeLink.js';
 import { hooks } from '@/stores/groceries/index.js';
-import { ConfirmedButton } from '@a-type/ui';
+import { ConfirmedButton, Icon } from '@a-type/ui';
 import { Recipe, RecipeInstructionsInit } from '@gnocchi.biscuits/verdant';
-import { Cross2Icon } from '@radix-ui/react-icons';
 import { Link } from '@verdant-web/react-router';
 import { useKeepAliveSlugQuery } from '../hooks.js';
 
@@ -47,7 +46,7 @@ export function RecipeNowPlayingLink({ recipe }: { recipe: Recipe }) {
 				emphasis="ghost"
 				skip={progress === 1}
 			>
-				<Cross2Icon />
+				<Icon name="x" />
 			</ConfirmedButton>
 		</div>
 	);

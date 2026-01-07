@@ -9,10 +9,10 @@ import {
 	DialogContent,
 	DialogTrigger,
 	H2,
+	Icon,
 	LiveUpdateTextField,
 	PaletteName,
 } from '@a-type/ui';
-import { GearIcon } from '@radix-ui/react-icons';
 import { useState } from 'react';
 
 export interface ListEditProps {
@@ -33,7 +33,7 @@ export function ListEdit({ listId }: ListEditProps) {
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<DialogTrigger render={<Button emphasis="ghost" size="small" />}>
-				<GearIcon />
+				<Icon name="gear" />
 			</DialogTrigger>
 			<DialogContent>
 				<div className="flex flex-col gap-2 items-start">

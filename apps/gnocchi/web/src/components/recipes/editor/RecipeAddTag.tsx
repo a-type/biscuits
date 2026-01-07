@@ -10,7 +10,6 @@ import {
 	DialogTitle,
 } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
-import { PlusIcon } from '@radix-ui/react-icons';
 import classNames from 'classnames';
 import { ReactElement, Suspense, forwardRef, useState } from 'react';
 
@@ -82,7 +81,7 @@ const DefaultTrigger = forwardRef<HTMLButtonElement, { className?: string }>(
 				ref={ref}
 				{...rest}
 			>
-				<PlusIcon />
+				<Icon name="plus" />
 				<span>Tag</span>
 			</Button>
 		);

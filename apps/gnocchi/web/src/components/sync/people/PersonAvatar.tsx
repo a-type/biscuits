@@ -1,6 +1,6 @@
 import { Profile } from '@/stores/groceries/index.js';
+import { Icon } from '@a-type/ui';
 import { UserInfo } from '@gnocchi.biscuits/verdant';
-import { PersonIcon } from '@radix-ui/react-icons';
 import classNames from 'classnames';
 import { CSSProperties } from 'react';
 
@@ -28,7 +28,7 @@ export function PersonAvatar({
 			{...rest}
 		>
 			{person && <AvatarContent user={person} />}
-			{!person && <PersonIcon />}
+			{!person && <Icon name="profile" />}
 		</div>
 	);
 }

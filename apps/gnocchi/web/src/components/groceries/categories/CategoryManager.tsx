@@ -3,13 +3,12 @@ import {
 	useCreateCategory,
 	useDeleteCategory,
 } from '@/stores/groceries/mutations.js';
-import { Button, FormikForm, SubmitButton, TextField } from '@a-type/ui';
+import { Button, FormikForm, Icon, SubmitButton, TextField } from '@a-type/ui';
 import { DndContext, DragOverlay, useDndMonitor } from '@dnd-kit/core';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { SortableContext, useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { Category } from '@gnocchi.biscuits/verdant';
-import { DragHandleDots2Icon, TrashIcon } from '@radix-ui/react-icons';
 import { generateKeyBetween } from 'fractional-indexing';
 import { useMemo, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -115,7 +114,7 @@ function CategoryManagerItem({
 
 	return (
 		<div className="flex flex-row items-center gap-3 w-full" {...nodeProps}>
-			<DragHandleDots2Icon {...handleProps} style={{ touchAction: 'none' }} />
+			<Icon name="grabby" {...handleProps} style={{ touchAction: 'none' }} />
 			<div className="flex-grow-1">{category.get('name')}</div>
 			<Button
 				color="attention"
@@ -127,7 +126,7 @@ function CategoryManagerItem({
 					}
 				}}
 			>
-				<TrashIcon />
+				<Icon name="trash" />
 			</Button>
 		</div>
 	);

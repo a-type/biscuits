@@ -8,6 +8,7 @@ import {
 	Button,
 	Checkbox,
 	Dialog,
+	Icon,
 	Note,
 } from '@a-type/ui';
 import {
@@ -16,7 +17,6 @@ import {
 	RecipeIngredientsItemSnapshot,
 	RecipeSubRecipeMultipliers,
 } from '@gnocchi.biscuits/verdant';
-import { CheckboxIcon, SquareIcon } from '@radix-ui/react-icons';
 import classNames from 'classnames';
 import { ReactNode, use, useEffect, useState } from 'react';
 import { getSubRecipeIds } from '../hooks.js';
@@ -74,7 +74,7 @@ export function AddToListDialog({
 					/>
 					<ActionBar>
 						<ActionButton onClick={() => setUnchecked({})}>
-							<CheckboxIcon />
+							<Icon name="check" />
 							Select all
 						</ActionButton>
 						<ActionButton
@@ -90,7 +90,7 @@ export function AddToListDialog({
 								)
 							}
 						>
-							<SquareIcon />
+							<Icon name="x" />
 							Select none
 						</ActionButton>
 					</ActionBar>

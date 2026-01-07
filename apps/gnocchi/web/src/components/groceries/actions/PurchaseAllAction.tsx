@@ -2,7 +2,7 @@ import { LongPressAction } from '@/components/groceries/actions/LongPressAction.
 import { useListId } from '@/contexts/ListContext.jsx';
 import { hooks } from '@/stores/groceries/index.js';
 import { usePurchaseItems } from '@/stores/groceries/mutations.js';
-import { CheckboxIcon } from '@radix-ui/react-icons';
+import { Icon } from '@a-type/ui';
 import { useCallback } from 'react';
 
 export function PurchaseAllAction() {
@@ -29,7 +29,7 @@ export function PurchaseAllAction() {
 			onActivate={onActivate}
 			progressColor="primary"
 		>
-			<CheckboxIcon />
+			<Icon name="check" />
 			Purchase All
 		</LongPressAction>
 	);

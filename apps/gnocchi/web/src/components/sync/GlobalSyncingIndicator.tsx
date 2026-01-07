@@ -1,5 +1,5 @@
 import { hooks } from '@/stores/groceries/index.js';
-import { ReloadIcon } from '@radix-ui/react-icons';
+import { Icon } from '@a-type/ui';
 import classNames from 'classnames';
 import { useEffect, useState } from 'react';
 
@@ -22,7 +22,7 @@ export function GlobalSyncingIndicator({}: GlobalSyncingIndicatorProps) {
 			)}
 			aria-hidden={!syncing}
 		>
-			<ReloadIcon className="animate-spin" />
+			<Icon name="refresh" className="animate-spin" />
 			<span>Syncing</span>
 		</div>
 	);

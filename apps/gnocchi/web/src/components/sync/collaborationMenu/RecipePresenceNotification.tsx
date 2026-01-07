@@ -1,9 +1,8 @@
 import { Link } from '@/components/nav/Link.jsx';
 import { makeRecipeLink } from '@/components/recipes/makeRecipeLink.js';
 import { Person, hooks } from '@/stores/groceries/index.js';
-import { Button } from '@a-type/ui';
+import { Button, Icon } from '@a-type/ui';
 import { useHasServerAccess } from '@biscuits/client';
-import { Cross2Icon } from '@radix-ui/react-icons';
 import { Suspense, useState } from 'react';
 import { PersonAvatar } from '../people/PersonAvatar.jsx';
 
@@ -67,7 +66,7 @@ function RecipePresenceLink({
 	return (
 		<div className="flex flex-row gap-2 items-center p-2 w-full max-w-full overflow-hidden border-default rounded-lg bg-white">
 			<Button onClick={onDismiss} emphasis="ghost" className="flex-0-0-auto">
-				<Cross2Icon />
+				<Icon name="x" />
 			</Button>
 			<Link
 				to={makeRecipeLink(recipe)}

@@ -24,7 +24,6 @@ import {
 import { formatMinutes } from '@a-type/utils';
 import { OnboardingBanner } from '@biscuits/client';
 import { Recipe } from '@gnocchi.biscuits/verdant';
-import { OpenInNewWindowIcon } from '@radix-ui/react-icons';
 import { Link } from '@verdant-web/react-router';
 import classNames from 'classnames';
 import { format } from 'date-fns';
@@ -138,7 +137,7 @@ export function RecipeOverview({ recipe }: RecipeOverviewProps) {
 									{url && (
 										<Chip color="accent" render={<Link to={url} newTab />}>
 											View original{' '}
-											<OpenInNewWindowIcon className="ml-2 relative b--1" />
+											<Icon name="new_window" className="ml-2 relative b--1" />
 										</Chip>
 									)}
 									{copyOf && (

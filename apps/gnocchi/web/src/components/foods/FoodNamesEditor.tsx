@@ -5,12 +5,12 @@ import {
 	DialogActions,
 	DialogClose,
 	FormikForm,
+	Icon,
 	SubmitButton,
 	TextField,
 	toast,
 } from '@a-type/ui';
 import { FoodAlternateNames } from '@gnocchi.biscuits/verdant';
-import { Cross2Icon, PlusIcon } from '@radix-ui/react-icons';
 import { useState } from 'react';
 
 export interface FoodNamesEditorProps {
@@ -51,7 +51,7 @@ function FoodNameTag({
 				emphasis="ghost"
 				className="important:p-2px"
 			>
-				<Cross2Icon />
+				<Icon name="x" />
 			</Button>
 		</div>
 	);
@@ -71,7 +71,7 @@ function AddNameButton({ names }: { names: FoodAlternateNames }) {
 					/>
 				}
 			>
-				<PlusIcon />
+				<Icon name="plus" />
 				<span>Add name</span>
 			</Dialog.Trigger>
 			<Dialog.Content>

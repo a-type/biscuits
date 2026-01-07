@@ -7,10 +7,10 @@ import {
 	DialogContent,
 	DialogTrigger,
 	FormikForm,
+	Icon,
 	SubmitButton,
 	TextField,
 } from '@a-type/ui';
-import { PlusIcon } from '@radix-ui/react-icons';
 
 export function AddItemAction() {
 	const addItem = useAddPantryItem();
@@ -18,7 +18,7 @@ export function AddItemAction() {
 	return (
 		<Dialog>
 			<DialogTrigger render={<ActionButton />}>
-				<PlusIcon />
+				<Icon name="plus" />
 				Add items
 			</DialogTrigger>
 			<DialogContent>

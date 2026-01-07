@@ -1,6 +1,5 @@
 import { useRecipeTitleFilter } from '@/components/recipes/collection/hooks.js';
-import { Button, LiveUpdateTextField } from '@a-type/ui';
-import { Cross2Icon } from '@radix-ui/react-icons';
+import { Button, Icon, LiveUpdateTextField } from '@a-type/ui';
 import classNames from 'classnames';
 
 export function RecipeSearchBar({
@@ -23,7 +22,7 @@ export function RecipeSearchBar({
 			/>
 			{!!value && (
 				<Button emphasis="ghost" onClick={() => setValue('')}>
-					<Cross2Icon />
+					<Icon name="x" />
 				</Button>
 			)}
 		</div>

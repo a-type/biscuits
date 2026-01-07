@@ -7,10 +7,10 @@ import {
 	Dialog,
 	Divider,
 	FormikForm,
+	Icon,
 	PaletteName,
 	TextField,
 } from '@a-type/ui';
-import { TrashIcon } from '@radix-ui/react-icons';
 import classNames from 'classnames';
 import { ReactElement } from 'react';
 
@@ -65,7 +65,7 @@ export function TagManager({
 									emphasis="ghost"
 									onClick={() => deleteTag(tag.get('name'))}
 								>
-									<TrashIcon />
+									<Icon name="trash" />
 								</Button>
 							</div>
 							<Divider className="opacity-50" />

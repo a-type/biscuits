@@ -1,6 +1,5 @@
-import { Button, ButtonProps } from '@a-type/ui';
+import { Button, ButtonProps, Icon } from '@a-type/ui';
 import { useLocalStorage } from '@biscuits/client';
-import { ReloadIcon } from '@radix-ui/react-icons';
 import { useRegisterSW } from 'virtual:pwa-register/react';
 
 export interface ReloadButtonProps extends ButtonProps {}
@@ -23,7 +22,7 @@ export function ReloadButton({ onClick, ...props }: ReloadButtonProps) {
 				refresh();
 			}}
 		>
-			<ReloadIcon />
+			<Icon name="refresh" />
 			<span>Refresh</span>
 		</Button>
 	);

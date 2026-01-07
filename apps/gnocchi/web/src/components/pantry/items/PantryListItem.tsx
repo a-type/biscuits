@@ -18,11 +18,6 @@ import {
 	Tooltip,
 } from '@a-type/ui';
 import { Food } from '@gnocchi.biscuits/verdant';
-import {
-	ExclamationTriangleIcon,
-	OpenInNewWindowIcon,
-	TrashIcon,
-} from '@radix-ui/react-icons';
 import classNames from 'classnames';
 import { Suspense, useCallback, useState } from 'react';
 import { THREE_DAYS_FROM_NOW, useExpiresText } from '../hooks.js';
@@ -97,7 +92,7 @@ export function PantryListItem({
 						{purchasedAt && isAlmostOrExpired && !frozenAt && (
 							<Tooltip disabled={!expiresAt} content={expiresAtText}>
 								<Chip className="important:color-attentionDark">
-									<ExclamationTriangleIcon />
+									<Icon name="warning" />
 									{expiresAtText}
 								</Chip>
 							</Tooltip>
@@ -119,7 +114,10 @@ export function PantryListItem({
 							</Tooltip>
 						)}
 					</div>
-					<OpenInNewWindowIcon className="absolute right-2 top-2 z-1 color-gray-dark opacity-50" />
+					<Icon
+						name="new_window"
+						className="absolute right-2 top-2 z-1 color-gray-dark opacity-50"
+					/>
 				</Card.Main>
 				<Card.Footer className={classNames(showLabels ? 'p-0' : '')}>
 					<Card.Actions
@@ -152,7 +150,7 @@ export function PantryListItem({
 								emphasis="ghost"
 								onClick={clear}
 							>
-								<TrashIcon />
+								<Icon name="trash" />
 								{showLabels && <span className="font-normal">Used</span>}
 							</Button>
 						)}

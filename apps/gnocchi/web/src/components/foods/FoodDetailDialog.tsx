@@ -20,11 +20,6 @@ import {
 	withClassName,
 } from '@a-type/ui';
 import { Food } from '@gnocchi.biscuits/verdant';
-import {
-	ClockIcon,
-	ExclamationTriangleIcon,
-	ReloadIcon,
-} from '@radix-ui/react-icons';
 import { useSearchParams } from '@verdant-web/react-router';
 import { Suspense, useState } from 'react';
 import { CategorySelect } from '../groceries/categories/CategorySelect.jsx';
@@ -110,7 +105,7 @@ function FoodDetailView({
 				<div className="flex flex-col gap-2">
 					{!!lastPurchasedAt && (
 						<Row>
-							<ClockIcon />
+							<Icon name="clock" />
 							<div className="text-xs italic">
 								Added <RelativeTime value={lastPurchasedAt} />
 							</div>
@@ -126,13 +121,13 @@ function FoodDetailView({
 					)}
 					{!!expiresText && (
 						<Row>
-							<ExclamationTriangleIcon />
+							<Icon name="warning" />
 							<div className="text-xs italic">{expiresText}</div>
 						</Row>
 					)}
 					{!!purchaseIntervalDays && (
 						<Row>
-							<ReloadIcon />
+							<Icon name="refresh" />
 							<div className="text-xs italic">
 								You buy this about every {purchaseIntervalDays} day
 								{purchaseIntervalDays === 1 ? '' : 's'}

@@ -2,8 +2,7 @@ import {
 	updateApp,
 	updateState,
 } from '@/components/updatePrompt/updateState.js';
-import { Button } from '@a-type/ui';
-import { StarIcon } from '@radix-ui/react-icons';
+import { Button, Icon } from '@a-type/ui';
 import { useState } from 'react';
 import { useSnapshot } from 'valtio';
 
@@ -23,7 +22,7 @@ export function UpdatePrompt({}: UpdatePromptProps) {
 	return (
 		<div className="flex flex-col gap-3 items-start bg-primary-wash color-black p-4 rounded-lg border border-solid border-primary w-full">
 			<div>
-				<StarIcon />
+				<Icon name="star" />
 				&nbsp;App update available!
 			</div>
 			<Button
