@@ -3,15 +3,14 @@ import { GlobalLoader } from '@/GlobalLoader.jsx';
 import { ErrorBoundary, H1, P, Provider as UIProvider } from '@a-type/ui';
 import { Provider, useFeatureFlag } from '@biscuits/client';
 import classNames from 'classnames';
-import { Suspense } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { AppMoved } from './components/promotional/AppMoved.jsx';
 import { Pages } from './pages/Pages.jsx';
 import { verdant } from './stores/groceries/index.js';
 import { Provider as GroceriesProvider } from './stores/groceries/Provider.jsx';
 
 export function App() {
-	const keyboardOverlay = useFeatureFlag('overlayKeyboard');
-
+	const [keyboardOverlay, setKeyboardOverlay] = useState(false);
 	return (
 		<div
 			className={classNames(
@@ -30,12 +29,21 @@ export function App() {
 								<Pages />
 								<AppMoved />
 							</GroceriesProvider>
+							<KeyboardOverlayReader set={setKeyboardOverlay} />
 						</Provider>
 					</Suspense>
 				</UIProvider>
 			</ErrorBoundary>
 		</div>
 	);
+}
+
+function KeyboardOverlayReader({ set }: { set: (value: boolean) => void }) {
+	const value = useFeatureFlag('overlayKeyboard');
+	useEffect(() => {
+		set(!!value);
+	}, [value]);
+	return null;
 }
 
 function ErrorFallback() {
