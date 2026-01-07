@@ -147,8 +147,8 @@ export function LongPressAction({
 				{children}
 			</ActionButton>
 
-			<Popover.Content anchor={ref} className="p-0" side="top" sideOffset={0}>
-				<Popover.Arrow className="w-5 h-3" />
+			<Popover.Content anchor={ref} className="p-0" side="top" sideOffset={16}>
+				<Popover.Arrow />
 				<div className="relative overflow-hidden px-4 py-2 rounded-lg">
 					<div
 						className={classNames(

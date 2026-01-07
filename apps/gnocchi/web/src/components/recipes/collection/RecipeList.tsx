@@ -104,7 +104,6 @@ function TagFilterList() {
 			onSelect={toggleTagFilter}
 			selectedValues={tagFilter ? [tagFilter] : []}
 			className="mb-1 font-normal text-xs"
-			buttonClassName="py-1 px-2 text-xs"
 		/>
 	);
 }

@@ -1,19 +1,16 @@
 import { RecipeTagMenuWrapper } from '@/components/recipes/tags/RecipeTagMenuWrapper.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { Button, ButtonProps, HorizontalList, Icon } from '@a-type/ui';
+import { Button, HorizontalList, Icon } from '@a-type/ui';
 import classNames from 'classnames';
-import { forwardRef } from 'react';
 
 export function RecipeTagsFilter({
 	onSelect,
 	selectedValues = [],
 	className,
-	buttonClassName,
 }: {
 	onSelect: (name: string | null) => void;
 	selectedValues?: string[] | null;
 	className?: string;
-	buttonClassName?: string;
 }) {
 	const allTags = hooks.useAllRecipeTagMetadata({
 		key: 'allRecipeTags',
@@ -33,37 +30,22 @@ export function RecipeTagsFilter({
 		<HorizontalList className={className}>
 			{filteredByOmit.map((tag) => (
 				<RecipeTagMenuWrapper tagName={tag.get('name')} key={tag.get('name')}>
-					<TagButtonBase
+					<Button
+						size="small"
+						emphasis="light"
 						toggled={!!selectedValues?.includes(tag.get('name'))}
+						toggleMode="indicator"
 						onClick={() => onSelect(tag.get('name'))}
 						className={classNames(
-							'my-auto min-h-24px',
-							tag.get('color') && `theme-${tag.get('color')}`,
-							buttonClassName,
+							'my-auto min-h-24px py-1 px-2 text-xs',
+							tag.get('color') && `palette-${tag.get('color')}`,
 						)}
 					>
 						<span>{tag.get('icon') ?? <Icon name="tag" />}</span>
 						<span>{tag.get('name')}</span>
-					</TagButtonBase>
+					</Button>
 				</RecipeTagMenuWrapper>
 			))}
 		</HorizontalList>
 	);
 }
-
-const TagButtonBase = forwardRef<HTMLButtonElement, ButtonProps>(
-	function TagButtonBase({ className, ...props }, ref) {
-		return (
-			<Button
-				ref={ref}
-				size="small"
-				emphasis="primary"
-				{...props}
-				className={classNames(
-					'flex items-center gap-1 [font-weight:inherit] [font-size:inherit]',
-					className,
-				)}
-			/>
-		);
-	},
-);

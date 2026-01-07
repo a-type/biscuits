@@ -1,4 +1,4 @@
-import { Icon, TabsList, TabsRoot, TabsTrigger } from '@a-type/ui';
+import { clsx, Icon, TabsList, TabsRoot, TabsTrigger } from '@a-type/ui';
 import { useFilter } from '../hooks.js';
 
 export interface PantryListSectionTabsProps {}
@@ -11,7 +11,13 @@ export function PantryListSectionTabs({}: PantryListSectionTabsProps) {
 			value={filter}
 			onValueChange={(f) => setFilter(f as 'purchased' | 'all' | 'frozen')}
 		>
-			<TabsList className="[&>*]:text-xs rounded-full">
+			<TabsList
+				className={clsx(
+					'[&>*]:text-xs rounded-full',
+					filter === 'frozen' && 'palette-accent',
+				)}
+				color="primary"
+			>
 				<TabsTrigger
 					className="text-nowrap flex flex-col items-center rounded-full sm:flex-row"
 					value="purchased"
@@ -21,7 +27,7 @@ export function PantryListSectionTabs({}: PantryListSectionTabsProps) {
 				</TabsTrigger>
 				<TabsTrigger
 					value="frozen"
-					className="text-nowrap flex flex-col sm:flex-row rounded-full palette-accent"
+					className="text-nowrap flex flex-col sm:flex-row rounded-full"
 				>
 					<Icon name="snowflake" />
 					<span className="">Frozen</span>
