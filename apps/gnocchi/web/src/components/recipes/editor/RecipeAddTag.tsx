@@ -8,6 +8,7 @@ import {
 	DialogClose,
 	DialogContent,
 	DialogTitle,
+	Icon,
 } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import classNames from 'classnames';
