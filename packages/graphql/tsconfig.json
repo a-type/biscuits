@@ -3,6 +3,7 @@
 	"compilerOptions": {
 		"outDir": "./dist",
 		"rootDir": "./src",
+		"declaration": true,
 		"plugins": [
 			{
 				"name": "gql.tada/ts-plugin",
@@ -10,7 +11,19 @@
 				"tadaOutputLocation": "./src/graphql-env.d.ts",
 				"tadaTurboLocation": "./src/graphql-cache.d.ts"
 			}
-		]
+		],
+		"composite": true
 	},
-	"include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.mts", "./typings"]
+	"include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.mts", "./typings"],
+	"references": [
+		{
+			"path": "../apps"
+		},
+		{
+			"path": "../error"
+		},
+		{
+			"path": "../libraries"
+		}
+	]
 }

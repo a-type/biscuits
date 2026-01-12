@@ -16,8 +16,20 @@
 				"tadaOutputLocation": "../packages/graphql/src/graphql-env.d.ts",
 				"tadaTurboLocation": "../packages/graphql/src/graphql-cache.d.ts"
 			}
-		]
+		],
+		"outDir": "dist"
 	},
 	"include": ["**/*.ts", "**/*.tsx"],
-	"exclude": ["node_modules"]
+	"exclude": ["node_modules"],
+	"references": [
+		{
+			"path": "../packages/client"
+		},
+		{
+			"path": "../packages/error"
+		},
+		{
+			"path": "../packages/graphql"
+		}
+	]
 }

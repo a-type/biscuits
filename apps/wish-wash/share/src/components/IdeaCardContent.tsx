@@ -35,7 +35,7 @@ import {
 
 export const ideaCardContentFragment = graphql(
 	`
-		fragment IdeaCardContent on PublicWishlistItem {
+		fragment IdeaCardContent on PublishedWishlistItem {
 			id
 			...ItemCardMain
 			...ItemCardTypeChip

@@ -115,10 +115,41 @@ export function createDataloaders({
 		},
 	);
 
+	const wishlistPurchasesLoader = new DataLoader(
+		async (wishlistIds: readonly string[]) => {
+			const result = await Promise.allSettled(
+				wishlistIds.map((wishlistId) =>
+					db
+						.selectFrom('WishlistPurchase')
+						.where('WishlistPurchase.wishlistId', '=', wishlistId)
+						// confirmed means the user knows about it, which means it will be included in the purchasedCount
+						// already.
+						.where('WishlistPurchase.confirmedAt', 'is', null)
+						.select([
+							'WishlistPurchase.itemId',
+							'WishlistPurchase.quantity',
+							'WishlistPurchase.confirmedAt',
+						])
+						.execute(),
+				),
+			);
+			return result.map((r) => {
+				if (r.status === 'fulfilled') return r.value;
+				if (r.reason instanceof BiscuitsError) return r.reason;
+				return new BiscuitsError(
+					BiscuitsError.Code.Unexpected,
+					'Failed to fetch wishlist purchases',
+					r.reason,
+				);
+			});
+		},
+	);
+
 	return {
 		stripePriceLookupKeyLoader,
 		stripePriceIdLoader,
 		customHostDetailsLoader,
 		replicaProfileLoader,
+		wishlistPurchasesLoader,
 	};
 }

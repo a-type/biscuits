@@ -3,7 +3,7 @@ import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 import { ItemCardPurchaseButton } from './ItemCardPurchaseButton.js';
 
 export const itemCardActionsFragment = graphql(`
-	fragment ItemCardActions on PublicWishlistItem {
+	fragment ItemCardActions on PublishedWishlistItem {
 		id
 	}
 `);

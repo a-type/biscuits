@@ -7,7 +7,7 @@
 	"scripts": {
 		"generate": "verdant -s ./src/schema.ts -o ./src/client -r",
 		"preflight": "verdant preflight -s ./src/schema.ts -o ./src/client",
-		"build": "pnpm run preflight"
+		"//build": "pnpm run preflight"
 	},
 	"dependencies": {
 		"react": "catalog:",

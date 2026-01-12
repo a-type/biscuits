@@ -9,9 +9,9 @@
 			"outputs": [],
 			"inputs": ["**/*.tsx", "**/*.ts", "**/*.test.tsx", "**/*.test.ts"]
 		},
-		"typecheck": {
+		"tsc": {
 			"outputs": [],
-			"inputs": ["**/*.tsx", "**/*.ts"]
+			"inputs": ["**/*.tsx", "**/*.ts", "tsconfig.json", "tsconfig.*.json"]
 		},
 		"dev": {
 			"cache": false

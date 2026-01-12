@@ -2,7 +2,7 @@ import { Card, Note } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 
 export const itemCardNoteFragment = graphql(`
-	fragment ItemCardNote on PublicWishlistItem {
+	fragment ItemCardNote on PublishedWishlistItem {
 		id
 		note
 	}

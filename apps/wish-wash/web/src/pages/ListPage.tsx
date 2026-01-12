@@ -62,7 +62,7 @@ function ListPageContent({ list }: { list: List }) {
 			<Box d="col" gap className="w-full max-w-800px">
 				<ListHero list={list} />
 				<SyncPurchases list={list} />
-				<ListActions className="sticky top-0 z-10" listId={list.get('id')} />
+				<ListActions className="sticky top-0 z-10" list={list} />
 			</Box>
 			<ListView list={list} className="pb-[200px] w-full max-w-1280px" />
 		</Box>

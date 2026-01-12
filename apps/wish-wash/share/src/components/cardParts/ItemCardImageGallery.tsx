@@ -2,7 +2,7 @@ import { Box, clsx } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 
 export const itemCardImageGalleryFragment = graphql(`
-	fragment ItemCardImageGallery on PublicWishlistItem {
+	fragment ItemCardImageGallery on PublishedWishlistItem {
 		id
 		imageUrls
 	}

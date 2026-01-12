@@ -2,7 +2,7 @@ import { Card, clsx } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 
 export const itemCardPromptFragment = graphql(`
-	fragment ItemCardPrompt on PublicWishlistItem {
+	fragment ItemCardPrompt on PublishedWishlistItem {
 		id
 		imageUrls
 		prompt

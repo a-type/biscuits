@@ -32,7 +32,7 @@ import {
 
 export const productCardContentFragment = graphql(
 	`
-		fragment ProductCardContent on PublicWishlistItem {
+		fragment ProductCardContent on PublishedWishlistItem {
 			id
 			...ItemCardMain
 			...ItemCardTypeChip

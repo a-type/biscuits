@@ -1,11 +1,10 @@
 import { createDb, DB, DomainRoute, NewDomainRoute } from '@biscuits/db';
-import { D1Database, KVNamespace } from '@cloudflare/workers-types';
 
 export class DomainRouteService {
 	#db: DB;
 	constructor(
-		d1: D1Database,
-		private kv: KVNamespace,
+		d1: any,
+		private kv: any,
 	) {
 		this.#db = createDb(d1);
 	}
@@ -78,7 +77,7 @@ export class DomainRouteService {
 	async debug() {
 		console.log(
 			'Domain routes registered:',
-			(await this.kv.list()).keys.map((k) => k.name),
+			(await this.kv.list()).keys.map((k: any) => k.name),
 		);
 	}
 }

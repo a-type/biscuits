@@ -349,7 +349,9 @@ builder.objectType('PublishedRecipeData', {
 		embeddedRecipes: t.field({
 			type: ['PublishedRecipeData'],
 			resolve: async (recipe, _, ctx) => {
-				return recipe.subRecipes.map(assignTypeName('PublishedRecipeData'));
+				return recipe.subRecipes.map(
+					assignTypeName('PublishedRecipeData'),
+				) as any;
 			},
 		}),
 	}),

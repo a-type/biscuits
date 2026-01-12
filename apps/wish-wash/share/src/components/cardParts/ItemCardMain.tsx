@@ -3,7 +3,7 @@ import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 import { ReactNode } from 'react';
 
 export const itemCardMainFragment = graphql(`
-	fragment ItemCardMain on PublicWishlistItem {
+	fragment ItemCardMain on PublishedWishlistItem {
 		id
 		imageUrls
 	}

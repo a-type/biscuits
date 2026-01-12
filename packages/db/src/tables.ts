@@ -1,4 +1,5 @@
 import { PublicRecipe } from '@gnocchi.biscuits/share-schema';
+import { PublicWishlist } from '@wish-wash.biscuits/share-schema';
 import {
 	ColumnType,
 	Generated,
@@ -296,6 +297,8 @@ export interface PublishedWishlistTable {
 
 	planId: string;
 	slug: string;
+
+	data: PublicWishlist;
 }
 
 export type PublishedWishlist = Selectable<PublishedWishlistTable>;

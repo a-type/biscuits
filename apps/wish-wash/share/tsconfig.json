@@ -14,14 +14,14 @@
 		"paths": {
 			"~/*": ["./src/*"]
 		},
-		"noEmit": true,
-		"plugins": [
-			{
-				"name": "gql.tada/ts-plugin",
-				"schema": "../../packages/graphql/schema.graphql",
-				"tadaOutputLocation": "../../packages/graphql/src/graphql-env.d.ts",
-				"tadaTurboLocation": "../../packages/graphql/src/graphql-cache.d.ts"
-			}
-		]
-	}
+		"outDir": "dist"
+	},
+	"references": [
+		{
+			"path": "../../../packages/graphql"
+		},
+		{
+			"path": "../common"
+		}
+	]
 }

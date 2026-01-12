@@ -27,7 +27,7 @@ import {
 
 export const vibeCardContentFragment = graphql(
 	`
-		fragment VibeCardContent on PublicWishlistItem {
+		fragment VibeCardContent on PublishedWishlistItem {
 			id
 			...ItemCardMain
 			...ItemCardTypeChip

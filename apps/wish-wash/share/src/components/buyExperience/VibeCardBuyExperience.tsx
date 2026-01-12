@@ -14,7 +14,7 @@ import {
 
 export const vibeCardBuyExperienceFragment = graphql(
 	`
-		fragment VibeCardBuyExperience on PublicWishlistItem {
+		fragment VibeCardBuyExperience on PublishedWishlistItem {
 			id
 			description
 			...ItemCardImageGallery

@@ -7,5 +7,10 @@
 		"baseUrl": ".",
 		"customConditions": ["development"]
 	},
-	"include": ["src"]
+	"include": ["src"],
+	"references": [
+		{
+			"path": "../../../packages/graphql"
+		}
+	]
 }

@@ -26,6 +26,10 @@ import AuthPlugin from '@pothos/plugin-scope-auth';
 import { LibraryInfo } from '@verdant-web/server';
 import { ExtractorData as WishWashStorePageScan } from '@wish-wash.biscuits/scanning';
 import {
+	PublicWishlist,
+	PublicWishlistItem,
+} from '@wish-wash.biscuits/share-schema';
+import {
 	AutocompleteSuggestion,
 	PlaceLocationDetails,
 } from '../services/maps.js';
@@ -35,11 +39,7 @@ import {
 	WeatherForecastInput,
 } from '../services/weather.js';
 import { GQLContext } from './context.js';
-import {
-	PublicRecipeAuthor,
-	PublicWishlistData,
-	PublicWishlistItem,
-} from './otherTypes.js';
+import { PublicRecipeAuthor, PublicWishlistAuthor } from './otherTypes.js';
 
 export const builder = new SchemaBuilder<{
 	Context: GQLContext;
@@ -117,13 +117,17 @@ export const builder = new SchemaBuilder<{
 
 		// WishWash
 		PublishedWishlist: PublishedWishlist & { __typename: 'PublishedWishlist' };
+		PublishedWishlistData: PublicWishlist & {
+			wishlist: PublishedWishlist;
+			__typename: 'PublishedWishlistData';
+		};
 		StorePageScan: WishWashStorePageScan & { __typename: 'StorePageScan' };
 		WishlistPurchase: WishlistPurchase & { __typename: 'WishlistPurchase' };
-		PublicWishlist: PublicWishlistData & {
-			__typename: 'PublicWishlist';
+		PublishedWishlistAuthor: PublicWishlistAuthor & {
+			__typename: 'PublishedWishlistAuthor';
 		};
-		PublicWishlistItem: PublicWishlistItem & {
-			__typename: 'PublicWishlistItem';
+		PublishedWishlistItem: PublicWishlistItem & {
+			__typename: 'PublishedWishlistItem';
 		};
 
 		// Common Utils
@@ -226,6 +230,7 @@ export const builder = new SchemaBuilder<{
 		// WishWash
 		PublishWishlistInput: {
 			id: string;
+			data: any;
 		};
 		StorePageScanInput: {
 			url: string;

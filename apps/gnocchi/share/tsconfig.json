@@ -22,6 +22,16 @@
 				"tadaOutputLocation": "../../../packages/graphql/src/graphql-env.d.ts",
 				"tadaTurboLocation": "../../../packages/graphql/src/graphql-cache.d.ts"
 			}
-		]
-	}
+		],
+		"composite": true,
+		"outDir": "dist"
+	},
+	"references": [
+		{
+			"path": "../../../packages/client"
+		},
+		{
+			"path": "../share-schema"
+		}
+	]
 }

@@ -78,7 +78,7 @@ export const gnocchiListNotifications: ChangeHandler<{
 						originatorName: senderName,
 						payload,
 					},
-					db,
+					env,
 				);
 			}
 		}

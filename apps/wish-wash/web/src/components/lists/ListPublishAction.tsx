@@ -5,11 +5,6 @@ import {
 	Button,
 	clsx,
 	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
-	DialogTitle,
-	DialogTrigger,
 	Divider,
 	H3,
 	Icon,
@@ -18,10 +13,12 @@ import {
 import { DomainRouteView, useHasServerAccess } from '@biscuits/client';
 import { graphql, useMutation, useQuery } from '@biscuits/graphql';
 import { Link } from '@verdant-web/react-router';
+import type { PublicWishlist } from '@wish-wash.biscuits/share-schema';
+import { List } from '@wish-wash.biscuits/verdant';
 import { upsellState } from '../promotion/upsellState.js';
 
 export interface ListPublishActionProps extends ActionButtonProps {
-	listId: string;
+	list: List;
 }
 
 const publishedListQuery = graphql(`
@@ -34,14 +31,14 @@ const publishedListQuery = graphql(`
 `);
 
 export function ListPublishAction({
-	listId,
+	list,
 	className,
 	...rest
 }: ListPublishActionProps) {
 	const canPublish = useHasServerAccess();
 
 	const { data } = useQuery(publishedListQuery, {
-		variables: { listId },
+		variables: { listId: list.get('id') },
 		skip: !canPublish,
 	});
 	const isPublished = data?.publishedWishlist;
@@ -63,7 +60,7 @@ export function ListPublishAction({
 
 	return (
 		<Dialog>
-			<DialogTrigger
+			<Dialog.Trigger
 				render={
 					<ActionButton
 						emphasis="light"
@@ -75,22 +72,24 @@ export function ListPublishAction({
 			>
 				<Icon name="send" />
 				{isPublished ? 'Sharing' : 'Share list'}
-			</DialogTrigger>
-			<DialogContent className="flex flex-col gap-lg">
-				{isPublished ?
-					<ManagePublishedList
-						listId={listId}
-						url={data.publishedWishlist?.url ?? ''}
-					/>
-				:	<PublishList listId={listId} />}
-			</DialogContent>
+			</Dialog.Trigger>
+			<Dialog.Content>
+				<Box col gap>
+					{isPublished ?
+						<ManagePublishedList
+							list={list}
+							url={data.publishedWishlist?.url ?? ''}
+						/>
+					:	<PublishList list={list} />}
+				</Box>
+			</Dialog.Content>
 		</Dialog>
 	);
 }
 
 const publishList = graphql(`
-	mutation PublishListMutation($listId: ID!) {
-		publishWishlist(input: { id: $listId }) {
+	mutation PublishListMutation($listId: ID!, $data: JSON!) {
+		publishWishlist(input: { id: $listId, data: $data }) {
 			id
 		}
 	}
@@ -102,9 +101,9 @@ const unpublishList = graphql(`
 	}
 `);
 
-function PublishList({ listId }: { listId: string }) {
+function PublishList({ list }: { list: List }) {
 	const [doPublish] = useMutation(publishList, {
-		variables: { listId },
+		variables: { listId: list.get('id'), data: getPublicWishlistData(list) },
 		refetchQueries: [publishedListQuery],
 	});
 
@@ -114,34 +113,38 @@ function PublishList({ listId }: { listId: string }) {
 
 	return (
 		<>
-			<DialogTitle>Publish list</DialogTitle>
+			<Dialog.Title>Publish list</Dialog.Title>
 			<P>
 				You can share your list as a link with anyone, and they can mark items
 				as purchased if they buy them for you!
 			</P>
-			<DialogActions>
-				<DialogClose>Cancel</DialogClose>
+			<Dialog.Actions>
+				<Dialog.Close>Cancel</Dialog.Close>
 				<Button emphasis="primary" onClick={publish}>
 					Publish
 				</Button>
-			</DialogActions>
+			</Dialog.Actions>
 		</>
 	);
 }
 
-function ManagePublishedList({ listId, url }: { listId: string; url: string }) {
+function ManagePublishedList({ list, url }: { list: List; url: string }) {
 	const [doUnpublish] = useMutation(unpublishList, {
-		variables: { listId },
+		variables: { listId: list.get('id') },
 		refetchQueries: [publishedListQuery],
 	});
 
-	const unpublish = async () => {
-		await doUnpublish();
-	};
+	const [doRepublish, { loading: republishLoading }] = useMutation(
+		publishList,
+		{
+			variables: { listId: list.get('id'), data: getPublicWishlistData(list) },
+			refetchQueries: [publishedListQuery],
+		},
+	);
 
 	return (
 		<>
-			<DialogTitle>Manage sharing</DialogTitle>
+			<Dialog.Title>Manage sharing</Dialog.Title>
 			<Box d="col" gap="sm">
 				<P className="mb-2">
 					Your list is currently public on the internet. You can unpublish it at
@@ -155,6 +158,14 @@ function ManagePublishedList({ listId, url }: { listId: string; url: string }) {
 				>
 					View your list <Icon name="new_window" />
 				</Button>
+				<Button
+					emphasis="default"
+					className="self-start"
+					onClick={() => doRepublish()}
+					loading={republishLoading}
+				>
+					Republish
+				</Button>
 			</Box>
 			<Divider />
 			<Box d="col" gap="sm">
@@ -162,14 +173,32 @@ function ManagePublishedList({ listId, url }: { listId: string; url: string }) {
 				<P>
 					If you own a domain, you can set up a subdomain to point to your list.
 				</P>
-				<DomainRouteView resourceId={listId} />
+				<DomainRouteView resourceId={list.get('id')} />
 			</Box>
-			<DialogActions>
-				<Button color="attention" emphasis="ghost" onClick={unpublish}>
+			<Dialog.Actions>
+				<Button
+					color="attention"
+					emphasis="ghost"
+					onClick={() => doUnpublish()}
+				>
 					Unpublish
 				</Button>
-				<DialogClose>Done</DialogClose>
-			</DialogActions>
+				<Dialog.Close>Done</Dialog.Close>
+			</Dialog.Actions>
 		</>
 	);
+}
+
+function getPublicWishlistData(wishlist: List): PublicWishlist {
+	const snapshot = wishlist.getSnapshot();
+	return {
+		...snapshot,
+		title: snapshot.name,
+		items: snapshot.items.map((item) => ({
+			...item,
+			imageUrls: item.imageFiles
+				.map((file) => file.url)
+				.filter((url): url is string => !!url),
+		})),
+	};
 }

@@ -7,7 +7,7 @@
 		"app-dev": "vite --host",
 		"build": "vite build",
 		"preview": "vite preview",
-		"typecheck": "tsc --noEmit",
+		"tsc": "tsc --build",
 		"assets": "pwa-assets-generator"
 	},
 	"dependencies": {
@@ -18,7 +18,7 @@
 		"@radix-ui/react-progress": "^1.0.3",
 		"@radix-ui/react-toggle-group": "^1.0.4",
 		"@react-spring/web": "catalog:",
-		"@tanstack/react-query": "^4.24.10",
+		"@tanstack/react-query": "catalog:",
 		"@trip-tick.biscuits/verdant": "workspace:*",
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",

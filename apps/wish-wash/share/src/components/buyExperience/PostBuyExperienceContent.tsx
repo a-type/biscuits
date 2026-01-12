@@ -11,7 +11,7 @@ import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 import { usePurchaseItem } from '~/hooks.js';
 
 export const postBuyExperienceContentFragment = graphql(`
-	fragment PostBuyExperienceContent on PublicWishlistItem {
+	fragment PostBuyExperienceContent on PublishedWishlistItem {
 		id
 		description
 		count

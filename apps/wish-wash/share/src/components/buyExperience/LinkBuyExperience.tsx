@@ -17,7 +17,7 @@ import {
 
 export const linkBuyExperienceFragment = graphql(
 	`
-		fragment LinkBuyExperience on PublicWishlistItem {
+		fragment LinkBuyExperience on PublishedWishlistItem {
 			id
 			links
 			count

@@ -4,5 +4,5 @@
 		"types": ["node"]
 	},
 	"include": ["./scripts/**/*.ts"],
-	"exclude": ["./src"]
+	"exclude": ["./src", "./worker-configuration.d.ts"]
 }

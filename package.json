@@ -7,8 +7,7 @@
 	"scripts": {
 		"dev": "turbo run dev",
 		"build": "turbo run build",
-		"typecheck": "turbo run typecheck",
-		"tsc": "pnpm run typecheck",
+		"tsc": "turbo run tsc",
 		"lint": "turbo run lint",
 		"test": "turbo run test",
 		"prepare": "husky install",
@@ -16,7 +15,6 @@
 		"mirror-prod": "node ./scripts/mirror-prod.mjs",
 		"create-migration": "node ./scripts/createMigration.mjs",
 		"create-app": "node ./scripts/create-app/create-app.mjs",
-		"create-worker": "node --env-file=.env ./scripts/create-worker/create-worker.mjs",
 		"provision-app": "node --env-file=.env ./scripts/provision-app.mjs",
 		"free-ports": "kill-port 6123 6124 6220 6221 6222 6223 6224 6225 6226 6227 6228 6229",
 		"compress-video": "node ./scripts/compress-video.mjs"

@@ -8,7 +8,7 @@
 		"build": "vite build",
 		"preview": "vite preview",
 		"generate": "cd ../verdant && pnpm generate",
-		"typecheck": "tsc --noEmit",
+		"tsc": "tsc --build",
 		"assets": "pwa-assets-generator"
 	},
 	"dependencies": {

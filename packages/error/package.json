@@ -13,7 +13,7 @@
 		}
 	},
 	"scripts": {
-		"build": "tsc"
+		"build": "tsc --build"
 	},
 	"type": "module",
 	"dependencies": {},

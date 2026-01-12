@@ -5,7 +5,6 @@
 	"exports": {
 		".": {
 			"production": "./dist/index.js",
-			"development": "./src/index.ts",
 			"import": "./dist/index.js",
 			"node": "./dist/index.js",
 			"default": "./dist/index.js",
@@ -13,7 +12,6 @@
 		},
 		"./serviceWorkers": {
 			"production": "./dist/serviceWorkers.js",
-			"development": "./src/serviceWorkers.ts",
 			"import": "./dist/serviceWorkers.js",
 			"node": "./dist/serviceWorkers.js",
 			"default": "./dist/serviceWorkers.js",
@@ -21,14 +19,12 @@
 		},
 		"./henrietta.css": {
 			"production": "./henrietta.css",
-			"development": "./henrietta.css",
 			"import": "./henrietta.css",
 			"node": "./henrietta.css",
 			"default": "./henrietta.css"
 		},
 		"./subscription": {
 			"production": "./dist/subscription/index.js",
-			"development": "./src/subscription/index.ts",
 			"import": "./dist/subscription/index.js",
 			"node": "./dist/subscription/index.js",
 			"default": "./dist/subscription/index.js",
@@ -36,7 +32,6 @@
 		},
 		"./apps": {
 			"production": "./dist/apps/index.js",
-			"development": "./src/apps/index.ts",
 			"import": "./dist/apps/index.js",
 			"node": "./dist/apps/index.js",
 			"default": "./dist/apps/index.js",
@@ -44,7 +39,6 @@
 		},
 		"./fetch": {
 			"production": "./dist/fetch.js",
-			"development": "./src/fetch.ts",
 			"import": "./dist/fetch.js",
 			"node": "./dist/fetch.js",
 			"default": "./dist/fetch.js",
@@ -53,12 +47,12 @@
 	},
 	"scripts": {
 		"build": "pnpm run build:transpile && pnpm run build:prefix && pnpm run build:copy",
-		"build:transpile": "tsc",
+		"build:transpile": "tsc --build",
 		"build:prefix": "node ./scripts/addUnoInclude.mjs",
 		"build:copy": "node ./scripts/copyCss.mjs",
-		"dev": "tsc --watch",
+		"dev": "tsc --build --watch",
 		"gql": "gql-tada",
-		"tsc": "tsc --noEmit"
+		"tsc": "tsc --build"
 	},
 	"type": "module",
 	"dependencies": {
@@ -88,6 +82,7 @@
 		"unocss": "catalog:",
 		"vite-plugin-pwa": "catalog:",
 		"@types/copy": "^0.3.5",
-		"copy": "^0.3.2"
+		"copy": "^0.3.2",
+		"gql.tada": "catalog:"
 	}
 }

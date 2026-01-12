@@ -15,7 +15,7 @@ import {
 
 export const searchAndBuyExperienceFragment = graphql(
 	`
-		fragment SearchAndBuyExperience on PublicWishlistItem {
+		fragment SearchAndBuyExperience on PublishedWishlistItem {
 			id
 			...ItemCardImageGallery
 			...ItemCardPurchases

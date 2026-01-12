@@ -2,7 +2,7 @@ import { Card, clsx } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 
 export const itemCardTitleFragment = graphql(`
-	fragment ItemCardTitle on PublicWishlistItem {
+	fragment ItemCardTitle on PublishedWishlistItem {
 		id
 		imageUrls
 		description

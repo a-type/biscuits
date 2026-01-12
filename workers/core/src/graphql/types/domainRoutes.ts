@@ -4,6 +4,7 @@ import { id } from '@biscuits/db';
 import { BiscuitsError } from '@biscuits/error';
 import { logger } from '../../logger.js';
 import { doesHostnameRouteToCustomDnsHost } from '../../services/dns.js';
+import { getTld } from '../../services/domainRoutes.js';
 import { builder } from '../builder.js';
 import { assignTypeName } from '../relay.js';
 
@@ -159,7 +160,7 @@ builder.objectType('DomainRoute', {
 		}),
 		domain: t.exposeString('domain'),
 		route: t.string({
-			resolve: (parent) => {
+			resolve: (parent, _, ctx) => {
 				assert(isValidAppId(parent.appId));
 				const app = appsById[parent.appId];
 				if (!app.domainRoutes) {
@@ -168,7 +169,9 @@ builder.objectType('DomainRoute', {
 						'App does not support custom domain routes',
 					);
 				}
-				return app.domainRoutes(parent.resourceId);
+				const deployedOrigin = new URL(ctx.reqCtx.env.DEPLOYED_ORIGIN);
+				const tld = getTld(deployedOrigin.hostname);
+				return app.domainRoutes(parent.resourceId, { tld });
 			},
 		}),
 		appId: t.exposeString('appId'),

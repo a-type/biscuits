@@ -123,7 +123,7 @@ const AddPaneImpl = forwardRef<
 				clear={() => clear()}
 				ref={mergedRef}
 				disableInteraction={disabled}
-				getSubmitButtonProps={getSubmitButtonProps}
+				submitButtonProps={getSubmitButtonProps()}
 				{...rest}
 			/>
 			<ScrollArea

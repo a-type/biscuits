@@ -5,12 +5,12 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build && tsc --noEmit",
+		"build": "vite build",
 		"preview": "vite preview",
 		"deploy": "wrangler deploy",
 		"types": "wrangler types -c wrangler.jsonc",
 		"postinstall": "pnpm run types",
-		"typecheck": "tsc --noEmit"
+		"tsc": "tsc --build"
 	},
 	"dependencies": {
 		"@a-type/ui": "catalog:",

@@ -5,15 +5,23 @@
 		"rootDir": "./src",
 		"declaration": true,
 		"declarationDir": "./dist",
+		"sourceMap": true,
 		"types": ["vite-plugin-pwa/client"],
-		"plugins": [
-			{
-				"name": "gql.tada/ts-plugin",
-				"schema": "../graphql/schema.graphql",
-				"tadaOutputLocation": "../graphql/src/graphql-env.d.ts",
-				"tadaTurboLocation": "../graphql/src/graphql-cache.d.ts"
-			}
-		]
+		"composite": true
 	},
-	"include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.mts", "./typings"]
+	"include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.mts", "./typings"],
+	"references": [
+		{
+			"path": "../apps"
+		},
+		{
+			"path": "../error"
+		},
+		{
+			"path": "../graphql"
+		},
+		{
+			"path": "../libraries"
+		}
+	]
 }

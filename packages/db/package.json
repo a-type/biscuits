@@ -4,18 +4,20 @@
 	"sideEffects": false,
 	"exports": {
 		".": {
-			"development": "./src/index.ts",
-			"workerd": "./src/index.ts",
 			"types": "./dist/index.d.ts",
 			"import": "./dist/index.js"
 		}
+	},
+	"scripts": {
+		"build": "tsc --build"
 	},
 	"dependencies": {
 		"@a-type/kysely": "^1.1.1",
 		"kysely": "^0.28.8",
 		"kysely-d1": "^0.4.0",
 		"kysely-plugin-serialize": "0.8.2",
-		"@gnocchi.biscuits/share-schema": "workspace:^"
+		"@gnocchi.biscuits/share-schema": "workspace:^",
+		"@wish-wash.biscuits/share-schema": "workspace:^"
 	},
 	"devDependencies": {
 		"typescript": "catalog:"

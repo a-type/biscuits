@@ -13,13 +13,10 @@
 		}
 	},
 	"scripts": {
-		"build": "tsc"
+		"build": "tsc --build"
 	},
 	"type": "module",
 	"dependencies": {
 		"@biscuits/db": "workspace:*"
-	},
-	"devDependencies": {
-		"@cloudflare/workers-types": "catalog:"
 	}
 }

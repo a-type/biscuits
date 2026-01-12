@@ -7,5 +7,39 @@
 		"module": "esnext",
 		"types": ["./worker-configuration.d.ts"]
 	},
-	"include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.mts"]
+	"include": [
+		"src/**/*.ts",
+		"src/**/*.tsx",
+		"src/**/*.mts",
+		"worker-configuration.d.ts"
+	],
+	"references": [
+		{
+			"path": "../../packages/apps"
+		},
+		{
+			"path": "../../packages/db"
+		},
+		{
+			"path": "../../packages/domain-routes"
+		},
+		{
+			"path": "../../packages/error"
+		},
+		{
+			"path": "../../packages/libraries"
+		},
+		{
+			"path": "../../apps/gnocchi/scanning"
+		},
+		{
+			"path": "../../apps/gnocchi/share-schema"
+		},
+		{
+			"path": "../../apps/wish-wash/scanning"
+		},
+		{
+			"path": "../../apps/wish-wash/share-schema"
+		}
+	]
 }

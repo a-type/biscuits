@@ -5,7 +5,6 @@
 	"exports": {
 		".": {
 			"production": "./dist/index.js",
-			"development": "./src/index.ts",
 			"import": "./dist/index.js",
 			"node": "./dist/index.js",
 			"default": "./dist/index.js",
@@ -13,7 +12,6 @@
 		},
 		"./fetch": {
 			"production": "./dist/fetch.js",
-			"development": "./src/fetch.ts",
 			"import": "./dist/fetch.js",
 			"node": "./dist/fetch.js",
 			"default": "./dist/fetch.js",
@@ -21,8 +19,6 @@
 		},
 		"./server": {
 			"production": "./dist/server.js",
-			"development": "./src/server.ts",
-			"workerd": "./src/server.ts",
 			"import": "./dist/server.js",
 			"node": "./dist/server.js",
 			"default": "./dist/server.js",
@@ -30,9 +26,13 @@
 		}
 	},
 	"scripts": {
-		"build": "tsc",
-		"dev": "tsc --watch",
-		"gen": "gql-tada generate-output"
+		"build": "pnpm build:transpile && pnpm build:copy",
+		"build:transpile": "tsc --build",
+		"build:copy": "cp src/graphql-env.d.ts dist/graphql-env.d.ts && cp src/graphql-cache.d.ts dist/graphql-cache.d.ts",
+		"dev": "tsc --build --watch",
+		"gen": "pnpm gen:schema && pnpm gen:types",
+		"gen:schema": "gql-tada generate-schema http://localhost:6124/graphql -o schema.graphql",
+		"gen:types": "gql-tada generate-output"
 	},
 	"type": "module",
 	"dependencies": {

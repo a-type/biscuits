@@ -22,11 +22,14 @@
 		"plugins": [
 			{
 				"name": "gql.tada/ts-plugin",
-				"schema": "http://localhost:6124/graphql",
+				"schema": "./packages/graphql/schema.graphql",
 				"tadaOutputLocation": "./packages/graphql/src/graphql-env.d.ts",
 				"tadaTurboLocation": "./packages/graphql/src/graphql-cache.d.ts"
 			}
-		]
+		],
+		"composite": true,
+		"declarationMap": true,
+		"declaration": true
 	},
 	"exclude": ["node_modules", "**/*/dist"]
 }

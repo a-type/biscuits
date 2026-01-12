@@ -2,7 +2,7 @@ import { CardContent, clsx } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 
 export const itemCardPurchasesFragment = graphql(`
-	fragment ItemCardPurchases on PublicWishlistItem {
+	fragment ItemCardPurchases on PublishedWishlistItem {
 		id
 		count
 		purchasedCount

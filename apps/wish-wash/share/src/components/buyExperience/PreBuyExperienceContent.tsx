@@ -17,7 +17,7 @@ import {
 
 export const preBuyExperienceContentFragment = graphql(
 	`
-		fragment PreBuyExperienceContent on PublicWishlistItem {
+		fragment PreBuyExperienceContent on PublishedWishlistItem {
 			id
 			description
 			...ItemCardImageGallery

@@ -11,18 +11,23 @@ export const listPageQuery = graphql(
 			publicWishlist(id: $listId) {
 				id
 				slug
-				title
-				author
-				coverImageUrl
-				createdAt
-				description
-				items {
-					id
-					purchasedCount
-					count
-					prioritized
-					createdAt
-					...Items
+				author {
+					name
+					profileImageUrl
+				}
+				publishedAt
+				data {
+					title
+					coverImageUrl
+					description
+					items {
+						id
+						purchasedCount
+						count
+						prioritized
+						createdAt
+						...Items
+					}
 				}
 			}
 		}
@@ -39,14 +44,16 @@ export interface ListPageProps {
 
 export function ListPage({ data }: ListPageProps) {
 	useEffect(() => {
-		if (!data?.title) return;
+		if (!data?.data.title) return;
 		// set page title to list title on load
-		document.title = data.title;
-	}, [data?.title]);
+		document.title = data.data.title;
+	}, [data?.data.title]);
 
-	const createdAtDate = new Date(data.createdAt);
+	const createdAtDate = new Date(data.publishedAt);
 
 	const [showPurchased, setShowPurchased] = useShowPurchased();
+
+	const snapshot = data.data;
 
 	return (
 		<HubContextProvider wishlistSlug={data.slug}>
@@ -61,17 +68,17 @@ export function ListPage({ data }: ListPageProps) {
 					data-testid="list-page"
 				>
 					<Box d="col" gap="lg" className="w-full max-w-800px">
-						{data.coverImageUrl && (
+						{snapshot.coverImageUrl && (
 							<img
-								src={data.coverImageUrl}
+								src={snapshot.coverImageUrl}
 								className="w-full h-[20vh] object-cover rounded-lg"
 								crossOrigin="anonymous"
 							/>
 						)}
-						<H1>{data.title}</H1>
+						<H1>{snapshot.title}</H1>
 						<Box gap className="text-xs">
-							<Chip>{data.items.length} items</Chip>
-							<Chip>By {data.author}</Chip>
+							<Chip>{snapshot.items.length} items</Chip>
+							<Chip>By {data.author.name}</Chip>
 							<Chip>Created {createdAtDate.toLocaleDateString()}</Chip>
 						</Box>
 						<Box
@@ -94,8 +101,8 @@ export function ListPage({ data }: ListPageProps) {
 						</Box>
 					</Box>
 					<Items
-						items={data.items}
-						listAuthor={data.author}
+						items={snapshot.items}
+						listAuthor={data.author.name}
 						className="pb-10 w-full max-w-1280px"
 					/>
 				</Box>

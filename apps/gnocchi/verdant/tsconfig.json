@@ -7,12 +7,12 @@
 		"allowJs": true
 	},
 	"include": ["**/*.ts", "**/*.mts"],
-	"plugins": [
+	"references": [
 		{
-			"name": "gql.tada/ts-plugin",
-			"schema": "../../packages/graphql/schema.graphql",
-			"tadaOutputLocation": "./src/graphql-env.d.ts",
-			"tadaTurboLocation": "./src/graphql-cache.d.ts"
+			"path": "../../../packages/client"
+		},
+		{
+			"path": "../../../packages/graphql"
 		}
 	]
 }

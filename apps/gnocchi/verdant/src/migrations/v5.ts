@@ -1,4 +1,4 @@
-import { createMinimalGraphQLClient } from '@biscuits/graphql';
+import { createMinimalGraphQLClient, graphql } from '@biscuits/graphql';
 import { createMigration } from '@verdant-web/store';
 import v4Schema, {
 	MigrationTypes as V4Types,
@@ -7,7 +7,6 @@ import v5Schema, {
 	MigrationTypes as V5Types,
 } from '../client/schemaVersions/v5.js';
 import { API_HOST_HTTP } from '../config.js';
-import { graphql } from '../graphql.js';
 
 export default createMigration<V4Types, V5Types>(
 	v4Schema,

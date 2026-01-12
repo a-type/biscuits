@@ -5,7 +5,8 @@
 	"type": "module",
 	"scripts": {
 		"dev": "vite dev",
-		"build": "vite build && tsc --noEmit",
+		"build": "vite build",
+		"tsc": "tsc --build",
 		"preview": "vite preview",
 		"deploy": "wrangler deploy",
 		"types": "wrangler types -c wrangler.jsonc",

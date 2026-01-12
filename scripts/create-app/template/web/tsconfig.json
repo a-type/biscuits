@@ -19,5 +19,16 @@
 			}
 		]
 	},
-	"include": ["src"]
+	"include": ["src"],
+	"references": [
+		{
+			"path": "../../../packages/client"
+		},
+		{
+			"path": "../../../packages/graphql"
+		},
+		{
+			"path": "../verdant"
+		}
+	]
 }

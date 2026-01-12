@@ -22,7 +22,7 @@ import { VibeCardContent, vibeCardContentFragment } from './VibeCardContent.js';
 
 export const itemCardFragment = graphql(
 	`
-		fragment ItemCard on PublicWishlistItem {
+		fragment ItemCard on PublishedWishlistItem {
 			id
 			count
 			purchasedCount
@@ -75,9 +75,11 @@ export function ItemCard({
 			<ItemCardStar item={item} />
 			<ItemCardMarquee item={item} />
 			<ItemCardContent item={itemMasked} listAuthor={listAuthor} />
-			{item.type === 'link' && (<Card.Footer>
-				<ItemCardActions item={item} />
-			</Card.Footer>)}
+			{item.type === 'link' && (
+				<Card.Footer>
+					<ItemCardActions item={item} />
+				</Card.Footer>
+			)}
 		</Card>
 	);
 }

@@ -1,9 +1,10 @@
 {
-  "extends": "../../../tsconfig.json",
-  "compilerOptions": {
-    "outDir": "./dist/esm",
-    "rootDir": "./src",
-    "lib": ["es2021", "dom"]
-  },
-  "include": ["**/*.ts", "**/*.mts"]
+	"extends": "../../../tsconfig.json",
+	"compilerOptions": {
+		"outDir": "./dist/esm",
+		"rootDir": "./src",
+		"lib": ["es2021", "dom"],
+		"composite": true
+	},
+	"include": ["**/*.ts", "**/*.mts"]
 }

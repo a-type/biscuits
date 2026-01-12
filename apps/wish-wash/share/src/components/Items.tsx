@@ -5,7 +5,7 @@ import { ItemCard, itemCardFragment } from './ItemCard.js';
 
 export const itemsFragment = graphql(
 	`
-		fragment Items on PublicWishlistItem {
+		fragment Items on PublishedWishlistItem {
 			id
 			purchasedCount
 			count

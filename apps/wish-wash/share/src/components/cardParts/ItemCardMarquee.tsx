@@ -2,7 +2,7 @@ import { Card, Marquee } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 
 export const itemCardMarqueeFragment = graphql(`
-	fragment ItemCardMarquee on PublicWishlistItem {
+	fragment ItemCardMarquee on PublishedWishlistItem {
 		id
 		imageUrls
 		description

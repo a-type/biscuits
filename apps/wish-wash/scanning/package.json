@@ -5,8 +5,6 @@
 	"exports": {
 		".": {
 			"production": "./dist/esm/index.js",
-			"development": "./src/index.ts",
-			"workerd": "./src/index.ts",
 			"import": "./dist/esm/index.js",
 			"node": "./dist/esm/index.js",
 			"default": "./dist/esm/index.js"
@@ -15,7 +13,7 @@
 	"type": "module",
 	"scripts": {
 		"test": "vitest",
-		"build": "tsc"
+		"build": "tsc --build"
 	},
 	"dependencies": {
 		"cheerio": "^1.0.0-rc.12",

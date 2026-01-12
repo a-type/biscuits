@@ -3,7 +3,7 @@ import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 import { typeIcons } from '@wish-wash.biscuits/common';
 
 export const itemCardTypeChipFragment = graphql(`
-	fragment ItemCardTypeChip on PublicWishlistItem {
+	fragment ItemCardTypeChip on PublishedWishlistItem {
 		id
 		type
 	}
