@@ -2,6 +2,7 @@ import { RecipeTagsList } from '@/components/recipes/collection/RecipeTagsList.j
 import { NewTagForm } from '@/components/recipes/editor/NewTagForm.jsx';
 import { hooks } from '@/stores/groceries/index.js';
 import {
+	Box,
 	Button,
 	Dialog,
 	DialogActions,
@@ -17,13 +18,11 @@ import { ReactElement, Suspense, forwardRef, useState } from 'react';
 export function RecipeEditTags({
 	recipe,
 	children,
-	contentClassName,
 	className,
 	onClose,
 }: {
 	recipe: Recipe;
 	children?: ReactElement;
-	contentClassName?: string;
 	className?: string;
 	onClose?: () => void;
 }) {
@@ -53,18 +52,18 @@ export function RecipeEditTags({
 			) : (
 				<Dialog.Trigger render={<DefaultTrigger />} className={className} />
 			)}
-			<DialogContent className={contentClassName}>
-				<DialogTitle>Tags for {title}</DialogTitle>
-				<Suspense>
-					<div className="mb-4 w-full">
+			<DialogContent>
+				<Box col gap full="width">
+					<DialogTitle>Tags for {title}</DialogTitle>
+					<Suspense>
 						<RecipeTagsList
 							onSelect={toggleTag}
 							selectedValues={tags.getSnapshot()}
 							className="w-full font-bold"
 						/>
-					</div>
-					<NewTagForm onCreate={toggleTag} />
-				</Suspense>
+						<NewTagForm onCreate={toggleTag} />
+					</Suspense>
+				</Box>
 				<DialogActions>
 					<DialogClose>Done</DialogClose>
 				</DialogActions>
