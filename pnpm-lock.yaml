@@ -1457,6 +1457,9 @@ importers:
       '@wish-wash.biscuits/verdant':
         specifier: workspace:*
         version: link:../verdant
+      date-fns:
+        specifier: 'catalog:'
+        version: 4.1.0
       downshift:
         specifier: ^9.0.8
         version: 9.0.8(react@19.2.3)

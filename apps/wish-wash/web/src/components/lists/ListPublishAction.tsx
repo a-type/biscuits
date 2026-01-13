@@ -15,6 +15,7 @@ import { graphql, useMutation, useQuery } from '@biscuits/graphql';
 import { Link } from '@verdant-web/react-router';
 import type { PublicWishlist } from '@wish-wash.biscuits/share-schema';
 import { List } from '@wish-wash.biscuits/verdant';
+import { format } from 'date-fns';
 import { upsellState } from '../promotion/upsellState.js';
 
 export interface ListPublishActionProps extends ActionButtonProps {
@@ -26,6 +27,7 @@ const publishedListQuery = graphql(`
 		publishedWishlist(id: $listId) {
 			id
 			url
+			publishedAt
 		}
 	}
 `);
@@ -35,13 +37,23 @@ export function ListPublishAction({
 	className,
 	...rest
 }: ListPublishActionProps) {
+	(window as any).list = list;
 	const canPublish = useHasServerAccess();
 
 	const { data } = useQuery(publishedListQuery, {
 		variables: { listId: list.get('id') },
 		skip: !canPublish,
 	});
-	const isPublished = data?.publishedWishlist;
+	const publishedWishlist = data?.publishedWishlist;
+	const isPublished = !!publishedWishlist;
+
+	const publishDate =
+		publishedWishlist ?
+			new Date(publishedWishlist.publishedAt ?? Date.now())
+		:	new Date();
+	const updatedDate = new Date(list.deepUpdatedAt);
+
+	const outOfDate = isPublished && publishDate < updatedDate;
 
 	if (!canPublish && !isPublished) {
 		return (
@@ -63,15 +75,19 @@ export function ListPublishAction({
 			<Dialog.Trigger
 				render={
 					<ActionButton
-						emphasis="light"
+						emphasis={outOfDate ? 'light' : 'default'}
 						color="accent"
 						{...rest}
 						className={clsx('self-start', className)}
 					/>
 				}
 			>
-				<Icon name="send" />
-				{isPublished ? 'Sharing' : 'Share list'}
+				<Icon name={outOfDate ? 'clock' : 'send'} />
+				{isPublished ?
+					outOfDate ?
+						'Outdated'
+					:	'Sharing'
+				:	'Share list'}
 			</Dialog.Trigger>
 			<Dialog.Content>
 				<Box col gap>
@@ -79,6 +95,8 @@ export function ListPublishAction({
 						<ManagePublishedList
 							list={list}
 							url={data.publishedWishlist?.url ?? ''}
+							outOfDate={outOfDate}
+							publishedAt={data.publishedWishlist?.publishedAt}
 						/>
 					:	<PublishList list={list} />}
 				</Box>
@@ -128,7 +146,17 @@ function PublishList({ list }: { list: List }) {
 	);
 }
 
-function ManagePublishedList({ list, url }: { list: List; url: string }) {
+function ManagePublishedList({
+	list,
+	url,
+	outOfDate,
+	publishedAt,
+}: {
+	list: List;
+	url: string;
+	outOfDate: boolean;
+	publishedAt?: string;
+}) {
 	const [doUnpublish] = useMutation(unpublishList, {
 		variables: { listId: list.get('id') },
 		refetchQueries: [publishedListQuery],
@@ -141,6 +169,8 @@ function ManagePublishedList({ list, url }: { list: List; url: string }) {
 			refetchQueries: [publishedListQuery],
 		},
 	);
+
+	const publishedDate = new Date(publishedAt ?? Date.now());
 
 	return (
 		<>
@@ -158,14 +188,32 @@ function ManagePublishedList({ list, url }: { list: List; url: string }) {
 				>
 					View your list <Icon name="new_window" />
 				</Button>
-				<Button
-					emphasis="default"
-					className="self-start"
-					onClick={() => doRepublish()}
-					loading={republishLoading}
-				>
-					Republish
-				</Button>
+				{outOfDate ?
+					<Box surface gap col items="end" color="accent" p>
+						This list has been updated since it was published. Click "Republish"
+						to update the published version.
+						<Button
+							emphasis="primary"
+							className="self-start"
+							onClick={() => doRepublish()}
+							loading={republishLoading}
+						>
+							Republish
+						</Button>
+					</Box>
+				:	<Box surface="white" gap col items="end" p>
+						This list was published on {format(publishedDate, 'PPp')} and should
+						be up to date. But you can still republish it if there's a problem.
+						<Button
+							emphasis="default"
+							className="self-start"
+							onClick={() => doRepublish()}
+							loading={republishLoading}
+						>
+							Republish
+						</Button>
+					</Box>
+				}
 			</Box>
 			<Divider />
 			<Box d="col" gap="sm">

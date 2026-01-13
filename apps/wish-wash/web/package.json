@@ -28,6 +28,7 @@
 		"@wish-wash.biscuits/common": "workspace:*",
 		"@wish-wash.biscuits/share-schema": "workspace:*",
 		"@wish-wash.biscuits/verdant": "workspace:*",
+		"date-fns": "catalog:",
 		"downshift": "^9.0.8",
 		"gql.tada": "catalog:",
 		"react": "catalog:",
