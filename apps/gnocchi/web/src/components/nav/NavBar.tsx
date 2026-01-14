@@ -13,11 +13,7 @@ import {
 	clsx,
 	withClassName,
 } from '@a-type/ui';
-import {
-	AppPickerNavItem,
-	NavBarChangelog,
-	OnboardingTooltip,
-} from '@biscuits/client';
+import { NavBarChangelog, OnboardingTooltip } from '@biscuits/client';
 import { useOnLocationChange } from '@verdant-web/react-router';
 import {
 	ReactNode,
@@ -56,7 +52,6 @@ export function NavBar({}: NavBarProps) {
 					<GroceriesNavBarLink active={matchGroceries} />
 					<PantryNavBarLink active={matchPurchased} />
 					<RecipesNavBarLink active={matchRecipes} />
-					<AppPickerNavItem />
 					<NavBarChangelog />
 				</NavBarRoot>
 			</Suspense>

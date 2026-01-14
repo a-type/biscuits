@@ -6,7 +6,6 @@ import {
 	NavBarRoot,
 	PageNav,
 } from '@a-type/ui';
-import { AppPickerNavItem } from '@biscuits/client';
 import { Link, useOnLocationChange } from '@verdant-web/react-router';
 import { useState } from 'react';
 import { Logo } from '../brand/Logo.jsx';
@@ -46,8 +45,6 @@ export function Navigation({}: NavigationProps) {
 					</NavBarItemIconWrapper>
 					<NavBarItemText>Lists</NavBarItemText>
 				</NavBarItem>
-
-				<AppPickerNavItem />
 			</NavBarRoot>
 		</PageNav>
 	);

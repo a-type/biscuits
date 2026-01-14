@@ -1,9 +1,6 @@
 import {
 	Button,
 	Icon,
-	NavBarItem,
-	NavBarItemIconWrapper,
-	NavBarItemText,
 	Popover,
 	PopoverContent,
 	PopoverTrigger,
@@ -83,18 +80,5 @@ export function AppPicker({ className, children }: AppPickerProps) {
 				/>
 			</PopoverContent>
 		</Popover>
-	);
-}
-
-export function AppPickerNavItem({ className }: { className?: string }) {
-	return (
-		<AppPicker>
-			<NavBarItem className={className}>
-				<NavBarItemIconWrapper>
-					<Icon name="cardsGrid" />
-				</NavBarItemIconWrapper>
-				<NavBarItemText>More apps</NavBarItemText>
-			</NavBarItem>
-		</AppPicker>
 	);
 }
