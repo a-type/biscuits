@@ -16,11 +16,11 @@
 		"build": "tsc --build"
 	},
 	"dependencies": {
-		"cheerio": "^1.0.0-rc.12",
-		"robots-parser": "^3.0.1"
+		"cheerio": "catalog:",
+		"robots-parser": "catalog:"
 	},
 	"devDependencies": {
-		"@types/node": "^22.10.2",
-		"vitest": "2.1.8"
+		"@types/node": "catalog:",
+		"vitest": "catalog:"
 	}
 }

@@ -74,3 +74,7 @@ catalog:
   vite-tsconfig-paths: ^6.0.4
   '@vite-pwa/assets-generator': ^1.0.2
   '@use-gesture/react': 10.3.1
+  vitest: ^4.0.17
+  cheerio: 1.1.2
+  robots-parser: ^3.0.1
+  iso8601-duration: ^2.1.3

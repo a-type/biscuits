@@ -89,7 +89,6 @@
 			"source.fixAll": "always",
 			"source.organizeImports": "always",
 			"source.removeUnusedImports": "explicit",
-			"source.sort.json": "explicit",
 		},
 	},
 	"extensions": {
