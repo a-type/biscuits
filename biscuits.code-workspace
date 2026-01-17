@@ -84,6 +84,13 @@
 			"**/dist": true,
 			"**/node_modules/**": true,
 		},
+		"editor.formatOnSave": true,
+		"editor.codeActionsOnSave": {
+			"source.fixAll": "always",
+			"source.organizeImports": "always",
+			"source.removeUnusedImports": "explicit",
+			"source.sort.json": "explicit",
+		},
 	},
 	"extensions": {
 		"recommendations": ["antfu.pnpm-catalog-lens"],
