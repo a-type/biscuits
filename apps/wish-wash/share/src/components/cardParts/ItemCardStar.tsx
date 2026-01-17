@@ -23,7 +23,7 @@ export function ItemCardStar({
 		<Icon
 			name="star"
 			className={clsx(
-				'w-20px h-20px',
+				'h-20px w-20px',
 				'absolute right-md top-md z-1',
 				'fill-primary',
 				className,

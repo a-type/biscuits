@@ -16,7 +16,7 @@ export function RecipeSearchBar({
 				placeholder="Search recipes"
 				value={value}
 				onChange={setValue}
-				className="rounded-full flex-1"
+				className="flex-1 rounded-full"
 				autoSelect
 				{...props}
 			/>

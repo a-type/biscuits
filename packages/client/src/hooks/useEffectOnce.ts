@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 
+// FIXME: I don't think this is actually reliable.
 export const useEffectOnce = (effect: () => void | (() => void)) => {
 	const effectFn = useRef<() => void | (() => void)>(effect);
 	const destroyFn = useRef<void | (() => void)>(undefined);
@@ -7,7 +8,9 @@ export const useEffectOnce = (effect: () => void | (() => void)) => {
 	const rendered = useRef(false);
 	const [, setVal] = useState<number>(0);
 
+	// eslint-disable-next-line react-hooks/refs
 	if (effectCalled.current) {
+		// eslint-disable-next-line react-hooks/refs
 		rendered.current = true;
 	}
 

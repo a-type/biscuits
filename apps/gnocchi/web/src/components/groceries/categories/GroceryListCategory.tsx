@@ -3,8 +3,8 @@ import {
 	CategoryTitle,
 	CategoryTitleRow,
 } from '@/components/groceries/categories/CategoryTitleRow.jsx';
-import useMergedRef from '@/hooks/useMergedRef.js';
 import { useSizeCssVars, withClassName } from '@a-type/ui';
+import { useMergedRef } from '@biscuits/client';
 import { useDndMonitor, useDroppable } from '@dnd-kit/core';
 import { Category, Item } from '@gnocchi.biscuits/verdant';
 import classNames from 'classnames';
@@ -60,7 +60,7 @@ export function GroceryListCategory({
 					{category?.get('name') ?? 'Uncategorized'}
 				</CategoryTitle>
 				{category && (
-					<div className="flex flex-row items-center justify-between absolute right-4px top-1/2 -translate-1/2">
+					<div className="absolute right-4px top-1/2 flex flex-row items-center justify-between -translate-1/2">
 						<CategoryClaim category={category} />
 					</div>
 				)}
@@ -188,9 +188,12 @@ function useCategoryItemVisibilityState(items: Item[]) {
 	}, []);
 	const mountedEmpty = useRef(empty);
 
+	// eslint-disable-next-line react-hooks/refs
 	return {
 		empty,
+		// eslint-disable-next-line react-hooks/refs
 		mountedEmpty: mountedEmpty.current,
+		// eslint-disable-next-line react-hooks/refs
 		justMounted: justMounted.current,
 	};
 }

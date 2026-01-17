@@ -26,7 +26,7 @@ export function EntryEditor({ entry, className }: EntryEditorProps) {
 			/>
 			<Box
 				col
-				className="max-w-lg w-full pb-xl pt-md b-t-solid b-t-2 b-t-main-ink"
+				className="max-w-lg w-full b-t-2 b-t-main-ink b-t-solid pb-xl pt-md"
 			>
 				<Suspense>
 					<MetadataDisplay entry={entry} />

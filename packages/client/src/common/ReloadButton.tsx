@@ -29,12 +29,12 @@ function useLastErrorReload() {
 	return useLocalStorage('lastErrorReload', 0);
 }
 
+const now = Date.now();
 export function useHadRecentError() {
 	const [lastErrorReload] = useLocalStorage('lastErrorReload', 0);
 
 	const hadRecentError =
-		lastErrorReload < Date.now() &&
-		lastErrorReload > Date.now() - 1000 * 60 * 60;
+		lastErrorReload < now && lastErrorReload > now - 1000 * 60 * 60;
 
 	return hadRecentError;
 }

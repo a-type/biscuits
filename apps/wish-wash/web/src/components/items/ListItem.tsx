@@ -72,13 +72,13 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 						:	<img
 								src={remoteImageUrl!}
 								alt={description}
-								className="w-full h-full object-cover object-center"
+								className="h-full w-full object-cover object-center"
 							/>
 						}
 					</Card.Image>
 				)}
 				<Card.Main className="col items-start" onClick={() => editItem(id)}>
-					<Card.Content unstyled className="pt-2 pl-1">
+					<Card.Content unstyled className="pl-1 pt-2">
 						<ItemTypeChip item={item} />
 					</Card.Content>
 					{prompt && <Card.Content unstyled={!hasImage}>{prompt}</Card.Content>}
@@ -87,7 +87,7 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 						className={clsx(
 							'p-1 font-bold',
 							hasImage ?
-								'bg-[rgba(0,0,0,0.5)] px-md text-[white] text-xl'
+								'px-md text-xl text-[white] bg-[rgba(0,0,0,0.5)]'
 							:	'text-lg color-primary-dark',
 						)}
 					>

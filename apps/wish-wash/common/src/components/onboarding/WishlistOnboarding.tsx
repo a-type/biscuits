@@ -55,11 +55,11 @@ export function WishlistOnboarding({
 
 	if (mode === 'summary') {
 		return (
-			<div className={clsx('col w-full items-stretch gap-6', className)}>
+			<div className={clsx('w-full col items-stretch gap-6', className)}>
 				<H1>Thanks!</H1>
 				<P>{thanksText}</P>
 				{hasMoreQuestions && (
-					<div className="col items-start bg-white border-default rounded-lg p-4">
+					<div className="col items-start border-default rounded-lg p-4 bg-white">
 						<H2>More questions are available</H2>
 						<P>
 							Answering more questions increases the variety and quality of
@@ -88,7 +88,7 @@ export function WishlistOnboarding({
 	}
 
 	return (
-		<div className={clsx('col w-full items-stretch gap-6', className)}>
+		<div className={clsx('w-full col items-stretch gap-6', className)}>
 			<div className="col items-start">
 				{sampleIndex + 1}/{questionsSample.length}
 				<Progress value={sampleIndex} max={questionsSample.length} />
@@ -103,7 +103,7 @@ export function WishlistOnboarding({
 					handleAnswer();
 				}}
 			/>
-			<div className="row justify-between items-center gap-4 w-full">
+			<div className="w-full row items-center justify-between gap-4">
 				<Button type="button" onClick={handleSkip}>
 					Skip
 				</Button>
@@ -127,7 +127,7 @@ function Question({
 	onCommit: (answer: string) => void;
 }) {
 	return (
-		<div className="col w-full items-stretch flex-1 gap-4">
+		<div className="w-full col flex-1 items-stretch gap-4">
 			<label className="text-xl" htmlFor={question.id}>
 				{question.question}
 			</label>

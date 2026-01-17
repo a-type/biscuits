@@ -33,7 +33,7 @@ export function JoinPage({}: JoinPageProps) {
 	return (
 		<PageRoot className="bg-primary-wash">
 			<PageContent className="bg-primary-wash">
-				<div className="flex flex-col gap-6 w-full">
+				<div className="w-full flex flex-col gap-6">
 					<h1 className={classNames('color-primary-ink')}>
 						Join Biscuits to unlock features and collaboration in every app
 					</h1>
@@ -42,7 +42,7 @@ export function JoinPage({}: JoinPageProps) {
 						across devices, use fancy new features, and even share with family
 						and friends. Plans start at <StartingPrice />.
 					</p>
-					<PageFixedArea className="flex flex-row gap-3 py-4 justify-between bg-transparent">
+					<PageFixedArea className="flex flex-row justify-between gap-3 py-4 bg-transparent">
 						<Button render={<Link to={backTo || '/'} />} emphasis="default">
 							<Icon name="arrowLeft" />
 							{backTo ? 'Go back' : 'Back to apps'}
@@ -86,11 +86,11 @@ export function JoinPage({}: JoinPageProps) {
 
 function AppFeature({ feature }: { feature: PaidFeature }) {
 	return (
-		<div className="flex flex-col gap-4 items-start">
-			<div className="flex flex-row items-center gap-3 flex-wrap">
-				<h3 className="text-md font-normal my-0">{feature.title}</h3>
+		<div className="flex flex-col items-start gap-4">
+			<div className="flex flex-row flex-wrap items-center gap-3">
+				<h3 className="my-0 text-md font-normal">{feature.title}</h3>
 				{feature.family && (
-					<div className="px-3 py-1 rounded-full bg-accent-dark color-white text-xs">
+					<div className="rounded-full px-3 py-1 text-xs color-white bg-accent-dark">
 						Family Style Plan
 					</div>
 				)}
@@ -98,7 +98,7 @@ function AppFeature({ feature }: { feature: PaidFeature }) {
 			<p className="my-0">{feature.description}</p>
 			{feature.imageUrl && (
 				<img
-					className="border border-solid border-1 border-black rounded-lg max-w-full flex-1-0-0 min-w-0"
+					className="max-w-full min-w-0 flex-1-0-0 border-1 border rounded-lg border-solid border-black"
 					src={feature.imageUrl}
 					alt="a visualization of the described feature"
 				/>

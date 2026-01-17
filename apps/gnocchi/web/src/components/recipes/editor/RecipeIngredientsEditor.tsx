@@ -110,7 +110,9 @@ function RecipeIngredientItem({
 
 	if (transform) {
 		// fixes the stretching effect as the item moves to different spots...
+		// eslint-disable-next-line react-hooks/immutability
 		transform.scaleY = 1;
+		// eslint-disable-next-line react-hooks/immutability
 		transform.scaleX = 1;
 	}
 
@@ -124,26 +126,26 @@ function RecipeIngredientItem({
 	return (
 		<div
 			ref={setNodeRef}
-			className="flex flex-col gap-2 items-stretch p-2"
+			className="flex flex-col items-stretch gap-2 p-2"
 			{...attributes}
 			style={style}
 		>
-			<div className="flex flex-row gap-2 items-start">
+			<div className="flex flex-row items-start gap-2">
 				<Icon
 					name="grabby"
-					className="touch-none relative top-2"
+					className="relative top-2 touch-none"
 					{...listeners}
 				/>
 
 				<span
 					className={classNames(
-						'flex-1 min-w-40px mt-1',
+						'mt-1 min-w-40px flex-1',
 						isSectionHeader && 'font-bold',
 					)}
 				>
 					{text}
 				</span>
-				<div className="flex flex-row gap-1 items-center">
+				<div className="flex flex-row items-center gap-1">
 					<Button emphasis="ghost" onClick={addNote}>
 						<Icon name="add_note" />
 					</Button>
@@ -182,7 +184,7 @@ function IngredientMenu({
 						Section header
 					</DropdownMenu.CheckboxItem>
 					<DropdownMenu.Item
-						onSelect={(ev) => {
+						onSelect={() => {
 							setDetailsOpen(true);
 						}}
 					>
@@ -296,7 +298,7 @@ function AddIngredientsForm({
 			}}
 			validateOnBlur
 		>
-			{({ setFieldValue }) => (
+			{() => (
 				<>
 					<TextAreaField
 						name="text"
@@ -305,7 +307,7 @@ function AddIngredientsForm({
 						autoSize
 						padBottomPixels={40}
 					/>
-					<div className="flex flex-row gap-1 justify-between items-center w-full">
+					<div className="w-full flex flex-row items-center justify-between gap-1">
 						<SubmitButton>Add</SubmitButton>
 					</div>
 				</>

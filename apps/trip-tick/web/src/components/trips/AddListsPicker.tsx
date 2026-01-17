@@ -17,7 +17,7 @@ export function AddListsPicker({ trip, className }: AddListsPickerProps) {
 	return (
 		<div
 			className={classNames(
-				'flex flex-row items-center flex-wrap gap-2 w-full',
+				'w-full flex flex-row flex-wrap items-center gap-2',
 				className,
 			)}
 		>
@@ -35,7 +35,7 @@ export function AddListsPicker({ trip, className }: AddListsPickerProps) {
 								trip.get('lists').add(list.get('id'));
 							}
 						}}
-						className="rounded-md gap-4 py-4"
+						className="gap-4 rounded-md py-4"
 					>
 						<Icon name={active ? 'check' : 'plus'} />
 						<div className="flex flex-col gap-1 text-start">

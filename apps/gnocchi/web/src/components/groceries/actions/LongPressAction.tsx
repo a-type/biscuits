@@ -149,17 +149,18 @@ export function LongPressAction({
 
 			<Popover.Content anchor={ref} className="p-0" side="top" sideOffset={16}>
 				<Popover.Arrow />
-				<div className="relative overflow-hidden px-4 py-2 rounded-lg">
+				<div className="relative overflow-hidden rounded-lg px-4 py-2">
 					<div
 						className={classNames(
 							`palette-${progressColor}`,
-							'position-absolute top-0 left-0 h-full bg-main-light',
+							'position-absolute left-0 top-0 h-full bg-main-light',
 							state === 'holding' &&
-								`animate-keyframes-progress-bar animate-forwards animate-ease-linear`,
+								`animate-keyframes-progress-bar animate-ease-linear animate-forwards`,
 						)}
 						style={{
 							animationDuration: `${duration}ms`,
 						}}
+						// eslint-disable-next-line react-hooks/refs
 						key={timeoutRef.current as any}
 					/>
 					<div className="position-relative z-1">Hold for 2 seconds</div>

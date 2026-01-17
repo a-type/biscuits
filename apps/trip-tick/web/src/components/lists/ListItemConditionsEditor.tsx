@@ -36,13 +36,13 @@ const conditionTypeInits: Record<
 export function ListItemConditionsEditor({
 	item,
 }: ListItemConditionsEditorProps) {
-	const { conditions, period } = hooks.useWatch(item);
+	const { conditions } = hooks.useWatch(item);
 	hooks.useWatch(conditions);
 
 	return (
 		<div className="col items-stretch">
 			{conditions.map((cond, i) => (
-				<div key={i} className="row w-full">
+				<div key={i} className="w-full row">
 					<ListItemConditionEditor condition={cond} />
 					<Button
 						color="attention"
@@ -101,7 +101,7 @@ function ConditionTypeLabel({
 				<>
 					Only when raining
 					<DropdownMenuItemRightSlot>
-						<Icon name="waterDrop" className=" fill-main-light" />
+						<Icon name="waterDrop" className="fill-main-light" />
 					</DropdownMenuItemRightSlot>
 				</>
 			);
@@ -112,7 +112,7 @@ function ConditionTypeLabel({
 					<DropdownMenuItemRightSlot>
 						<Icon
 							name="thermometer"
-							className="color-main-dark palette-tomato"
+							className="palette-tomato color-main-dark"
 						/>
 					</DropdownMenuItemRightSlot>
 				</>
@@ -124,7 +124,7 @@ function ConditionTypeLabel({
 					<DropdownMenuItemRightSlot>
 						<Icon
 							name="thermometer"
-							className="color-main-dark palette-blueberry"
+							className="palette-blueberry color-main-dark"
 						/>
 					</DropdownMenuItemRightSlot>
 				</>

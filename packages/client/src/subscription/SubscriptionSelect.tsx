@@ -141,7 +141,7 @@ function SinglePriceExperience({
 	});
 
 	return (
-		<div className="flex flex-col gap-3 items-start">
+		<div className="flex flex-col items-start gap-3">
 			<H2>Checkout</H2>
 			<P>
 				You're about to subscribe to {data?.productInfo.name} for{' '}

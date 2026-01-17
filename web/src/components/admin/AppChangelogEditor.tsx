@@ -72,7 +72,7 @@ export function AppChangelogEditor({ appId }: AppChangelogEditorProps) {
 	const [showCreate, setShowCreate] = useState(false);
 
 	return (
-		<div className="col w-full">
+		<div className="w-full col">
 			<CardGrid className="w-full">
 				{data.changelog.map((item: any) => (
 					<CardRoot key={item.id}>

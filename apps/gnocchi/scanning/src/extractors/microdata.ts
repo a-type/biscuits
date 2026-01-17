@@ -26,16 +26,16 @@ export async function microdata($: CheerioAPI): Promise<ExtractorData | null> {
 	const copyrightYear = first.find('[itemprop="copyrightYear"]').text().trim();
 	const description = first.find('[itemprop="description"]').text().trim();
 	const image = first.find('[itemprop="image"]').attr('src');
-	const datePublished = first.find('[itemprop="datePublished"]').text().trim();
+	const _datePublished = first.find('[itemprop="datePublished"]').text().trim();
 	const cookTime = first.find('[itemprop="cookTime"]').text().trim();
 	const prepTime = first.find('[itemprop="prepTime"]').text().trim();
 	const totalTime = first.find('[itemprop="totalTime"]').text().trim();
-	const cookingMethod = first.find('[itemprop="cookingMethod"]').text().trim();
-	const recipeCategory = first
+	const _cookingMethod = first.find('[itemprop="cookingMethod"]').text().trim();
+	const _recipeCategory = first
 		.find('[itemprop="recipeCategory"]')
 		.text()
 		.trim();
-	const recipeCuisine = first.find('[itemprop="recipeCuisine"]').text().trim();
+	const _recipeCuisine = first.find('[itemprop="recipeCuisine"]').text().trim();
 	const recipeYield = first.find('[itemprop="recipeYield"]').text().trim();
 	const recipeIngredient = first
 		.find('[itemprop="recipeIngredient"]')

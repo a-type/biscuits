@@ -31,7 +31,7 @@ export function PersonRelationships({ person }: PersonRelationshipsProps) {
 	return (
 		<Box d="col" gap="lg">
 			<H2 className="text-md">
-				<Icon name="connection" className="color-gray-dark mr-md" />{' '}
+				<Icon name="connection" className="mr-md color-gray-dark" />{' '}
 				Relationships
 			</H2>
 			<RelationshipSearch person={person} />
@@ -97,8 +97,8 @@ function PersonRelationshipItem({
 	return (
 		<div
 			className={clsx(
-				"grid [grid-template-areas:'avatar_name_arrow'_'remove_type_arrow'] [grid-template-columns:auto_1fr_auto] gap-sm items-center",
-				'border border-solid border-gray rounded-md p-sm select-none',
+				"[grid-template-areas:'avatar_name_arrow'_'remove_type_arrow'] [grid-template-columns:auto_1fr_auto] grid items-center gap-sm",
+				'select-none border rounded-md border-solid p-sm border-gray',
 				'sm:p-md',
 			)}
 		>
@@ -156,7 +156,7 @@ function RelationshipTypeSelect({
 				render={
 					<Chip
 						className={clsx(
-							'text-sm px-4 self-center justify-self-start',
+							'self-center justify-self-start px-4 text-sm',
 							className,
 						)}
 					/>

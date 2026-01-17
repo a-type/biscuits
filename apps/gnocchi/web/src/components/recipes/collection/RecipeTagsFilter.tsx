@@ -37,7 +37,7 @@ export function RecipeTagsFilter({
 						toggleMode="indicator"
 						onClick={() => onSelect(tag.get('name'))}
 						className={classNames(
-							'my-auto min-h-24px py-1 px-2 text-xs',
+							'my-auto min-h-24px px-2 py-1 text-xs',
 							tag.get('color') && `palette-${tag.get('color')}`,
 						)}
 					>

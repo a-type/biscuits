@@ -85,7 +85,7 @@ export function PlanPage({}: PlanPageProps) {
 	return (
 		<PageRoot>
 			<PageContent gap="lg" className="self-stretch">
-				<PageFixedArea className="mb-10 flex flex-row items-center w-full justify-between">
+				<PageFixedArea className="mb-10 w-full flex flex-row items-center justify-between">
 					<Button
 						render={<Link to={returnToAppUrl ?? '/'} />}
 						emphasis="primary"
@@ -102,7 +102,7 @@ export function PlanPage({}: PlanPageProps) {
 						<Tabs.Trigger value="members">Members</Tabs.Trigger>
 						<Tabs.Trigger value="data">Data</Tabs.Trigger>
 					</Tabs.List>
-					<Box gap col className="px-2 py-6 flex-1">
+					<Box gap col className="flex-1 px-2 py-6">
 						{justPaid && (
 							<Box
 								surface

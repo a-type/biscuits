@@ -36,7 +36,7 @@ export function ListEdit({ listId }: ListEditProps) {
 				<Icon name="gear" />
 			</DialogTrigger>
 			<DialogContent>
-				<div className="flex flex-col gap-2 items-start">
+				<div className="flex flex-col items-start gap-2">
 					<H2>Edit List</H2>
 					<div className="flex flex-row gap-2">
 						<LiveUpdateTextField

@@ -50,11 +50,11 @@ export function ProjectCanvas({ project, className }: ProjectCanvasProps) {
 		>
 			<div
 				className={clsx(
-					'relative flex flex-col w-full sm:(w-auto h-full)',
+					'relative w-full flex flex-col sm:(h-full w-auto)',
 					className,
 				)}
 			>
-				<ViewportRoot viewport={viewport} className="flex-grow-1 h-auto">
+				<ViewportRoot viewport={viewport} className="h-auto flex-grow-1">
 					<ColorPickerCanvas image={image} />
 					{showBubbles && !activelyPicking && <Bubbles colors={colors} />}
 					<PickingBubble />
@@ -174,53 +174,50 @@ function BubblePicker({
 
 	const canvas = useCanvas();
 
-	const updatePreview = useCallback(
-		(x: number, y: number) => {
-			// sample 17x17 pixels around the pointer
-			const colors = getCanvasColors(x - 8, y - 8, 17, 17);
-			if (!colors) return;
-			// write them to the preview canvas, scaled up to fill the whole thing
-			const previewCanvas = previewCanvasRef.current;
-			if (previewCanvas) {
-				previewCanvas.width = 17;
-				previewCanvas.height = 17;
-				const previewCtx = previewCanvas.getContext('2d');
-				if (previewCtx) {
-					const previewImageData = previewCtx.createImageData(17, 17);
-					const previewData = previewImageData.data;
-					for (let i = 0; i < 17 * 17; i++) {
-						previewData[i * 4] = colors[i * 4];
-						previewData[i * 4 + 1] = colors[i * 4 + 1];
-						previewData[i * 4 + 2] = colors[i * 4 + 2];
-						previewData[i * 4 + 3] = 255;
-					}
-					previewCtx.putImageData(previewImageData, 0, 0);
+	const updatePreview = (x: number, y: number) => {
+		// sample 17x17 pixels around the pointer
+		const colors = getCanvasColors(x - 8, y - 8, 17, 17);
+		if (!colors) return;
+		// write them to the preview canvas, scaled up to fill the whole thing
+		const previewCanvas = previewCanvasRef.current;
+		if (previewCanvas) {
+			previewCanvas.width = 17;
+			previewCanvas.height = 17;
+			const previewCtx = previewCanvas.getContext('2d');
+			if (previewCtx) {
+				const previewImageData = previewCtx.createImageData(17, 17);
+				const previewData = previewImageData.data;
+				for (let i = 0; i < 17 * 17; i++) {
+					previewData[i * 4] = colors[i * 4];
+					previewData[i * 4 + 1] = colors[i * 4 + 1];
+					previewData[i * 4 + 2] = colors[i * 4 + 2];
+					previewData[i * 4 + 3] = 255;
 				}
-
-				// also update color state with center color
-				const centerColor = {
-					r: colors[576],
-					g: colors[577],
-					b: colors[578],
-				};
-				const canvasRect = canvas.limits.value;
-				const canvasWidth = canvasRect.max.x - canvasRect.min.x;
-				const canvasHeight = canvasRect.max.y - canvasRect.min.y;
-				const canvasX = x / canvasWidth;
-				const canvasY = y / canvasHeight;
-				toolState.pickedColor = ref({
-					value: centerColor,
-					percentage: { x: canvasX, y: canvasY },
-					pixel: { x, y },
-				});
-				dotRef.current?.style.setProperty(
-					'background-color',
-					`rgb(${centerColor.r}, ${centerColor.g}, ${centerColor.b})`,
-				);
+				previewCtx.putImageData(previewImageData, 0, 0);
 			}
-		},
-		[previewCanvasRef],
-	);
+
+			// also update color state with center color
+			const centerColor = {
+				r: colors[576],
+				g: colors[577],
+				b: colors[578],
+			};
+			const canvasRect = canvas.limits.value;
+			const canvasWidth = canvasRect.max.x - canvasRect.min.x;
+			const canvasHeight = canvasRect.max.y - canvasRect.min.y;
+			const canvasX = x / canvasWidth;
+			const canvasY = y / canvasHeight;
+			toolState.pickedColor = ref({
+				value: centerColor,
+				percentage: { x: canvasX, y: canvasY },
+				pixel: { x, y },
+			});
+			dotRef.current?.style.setProperty(
+				'background-color',
+				`rgb(${centerColor.r}, ${centerColor.g}, ${centerColor.b})`,
+			);
+		}
+	};
 
 	const updatePosition = useCallback(
 		(worldPosition: Vector2, screenPosition: Vector2) => {
@@ -294,19 +291,19 @@ function BubblePicker({
 		<div
 			ref={previewRef}
 			className={clsx(
-				'[--size:160px] [--pointer-size:32px] [--x-mult:1] [--y-mult:1] [--x:0] [--y:0]',
-				'md:[--size:84px] md:[--pointer-size:0px]',
+				'[--pointer-size:32px] [--size:160px] [--x-mult:1] [--x:0] [--y-mult:1] [--y:0]',
+				'md:[--pointer-size:0px] md:[--size:84px]',
 				'[transform:translate(-50%,-50%)_translate(calc(var(--x-mult,1)*(var(--size)+var(--pointer-size))/2/var(--zoom,1)),calc(var(--y-mult,1)*(var(--size)+var(--pointer-size))/2/var(--zoom,1)))]',
 				'left-[var(--x)] top-[var(--y)]',
-				'w-[calc(var(--size)/var(--zoom,1))] h-[calc(var(--size)/var(--zoom,1))]',
-				'fixed pointer-events-none border-1 border-solid border-gray-4 overflow-hidden',
+				'h-[calc(var(--size)/var(--zoom,1))] w-[calc(var(--size)/var(--zoom,1))]',
+				'border-gray-4 pointer-events-none fixed overflow-hidden border-1 border-solid',
 				show ? 'block' : 'hidden',
 			)}
 		>
-			<canvas ref={previewCanvasRef} className="w-full h-full" />
+			<canvas ref={previewCanvasRef} className="h-full w-full" />
 			<div
 				ref={dotRef}
-				className="absolute z-1 left-1/2 top-1/2 -translate-1/2 w-[calc(var(--size)/6/var(--zoom))] h-[calc(var(--size)/6/var(--zoom))] rounded-full border-1 border-solid border-gray-4"
+				className="border-gray-4 absolute left-1/2 top-1/2 z-1 h-[calc(var(--size)/6/var(--zoom))] w-[calc(var(--size)/6/var(--zoom))] border-1 rounded-full border-solid -translate-1/2"
 			/>
 		</div>
 	);
@@ -316,7 +313,7 @@ function Bubbles({ colors }: { colors: ProjectColors }) {
 	const liveColors = hooks.useWatch(colors);
 
 	return (
-		<div className="absolute inset-0 pointer-events-none">
+		<div className="pointer-events-none absolute inset-0">
 			{liveColors.map((color, i) => (
 				<Bubble color={color} key={i} />
 			))}
@@ -341,7 +338,7 @@ function Bubble({ color: colorVal }: { color: ProjectColorsItem }) {
 				toolState.pickedColor = null;
 			}}
 			className={clsx(
-				'absolute rounded-full pointer-events-auto -translate-1/2 border-solid border-black appearance-none min-h-0 min-w-0 p-0 m-0',
+				'pointer-events-auto absolute m-0 min-h-0 min-w-0 appearance-none rounded-full border-solid p-0 border-black -translate-1/2',
 			)}
 			style={{
 				backgroundColor: `rgb(${r}, ${g}, ${b})`,
@@ -364,7 +361,7 @@ function PickingBubble() {
 
 	return (
 		<div
-			className="absolute pointer-events-none -translate-1/2"
+			className="pointer-events-none absolute -translate-1/2"
 			style={{
 				left: `${pickedColor.percentage.x * 100}%`,
 				top: `${pickedColor.percentage.y * 100}%`,
@@ -374,7 +371,7 @@ function PickingBubble() {
 		>
 			<div
 				className={clsx(
-					'absolute rounded-full pointer-events-none border-dashed border-white animate-spin animate-duration-20s w-full h-full',
+					'pointer-events-none absolute h-full w-full animate-spin animate-duration-20s rounded-full border-dashed border-white',
 				)}
 				style={{
 					backgroundColor: `rgb(${pickedColor.value.r}, ${pickedColor.value.g}, ${pickedColor.value.b})`,

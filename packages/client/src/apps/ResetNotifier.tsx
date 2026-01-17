@@ -24,6 +24,7 @@ export function ResetNotifier({}: ResetNotifierProps) {
 	const [waiting, setWaiting] = useState(false);
 	useEffect(() => {
 		if (shown) {
+			// eslint-disable-next-line react-hooks/set-state-in-effect
 			setWaiting(true);
 			const timeout = setTimeout(() => {
 				setWaiting(false);

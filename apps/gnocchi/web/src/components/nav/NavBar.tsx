@@ -45,8 +45,8 @@ export function NavBar({}: NavBarProps) {
 		<PageNav>
 			<Suspense>
 				<Box gap="sm" layout="center center" p="sm" className="lt-md:hidden">
-					<img src="/android-chrome-192x192.png" className="w-30px h-30px" />
-					<h1 className="text-md font-fancy font-semibold">Gnocchi</h1>
+					<img src="/android-chrome-192x192.png" className="h-30px w-30px" />
+					<h1 className="font-fancy text-md font-semibold">Gnocchi</h1>
 				</Box>
 				<NavBarRoot>
 					<GroceriesNavBarLink active={matchGroceries} />

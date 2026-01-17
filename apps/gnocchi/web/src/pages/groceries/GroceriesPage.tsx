@@ -56,7 +56,7 @@ export function GroceriesPage() {
 						{listId && <ListEdit listId={listId} />}
 					</ListSelectWrapper>
 
-					<div className="flex flex-row gap-2 items-center">
+					<div className="flex flex-row items-center gap-2">
 						<Suspense>
 							<ChangelogDisplay className="sm:hidden" hideOnSeen />
 						</Suspense>
@@ -73,7 +73,7 @@ export function GroceriesPage() {
 				<PageNowPlaying
 					unstyled
 					keepAboveKeyboard
-					className="items-center pointer-events-none z-nav"
+					className="pointer-events-none z-nav items-center"
 				>
 					<FloatingAdd />
 				</PageNowPlaying>

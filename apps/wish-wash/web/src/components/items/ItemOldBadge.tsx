@@ -7,10 +7,11 @@ export interface ItemOldBadgeProps {
 	item: Item;
 }
 
+const now = Date.now();
 export function ItemOldBadge({ item }: ItemOldBadgeProps) {
 	const { expiresAt, createdAt, id } = hooks.useWatch(item);
 
-	if (!expiresAt || expiresAt > Date.now()) {
+	if (!expiresAt || expiresAt > now) {
 		return null;
 	}
 

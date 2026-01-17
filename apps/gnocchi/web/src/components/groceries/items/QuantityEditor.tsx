@@ -34,12 +34,12 @@ export function QuantityEditor({
 			</Dialog.Trigger>
 			<Dialog.Content initialFocus={false}>
 				<Dialog.Title>Edit item</Dialog.Title>
-				<div className="flex flex-row items-center justify-center gap-4 flex-wrap">
+				<div className="flex flex-row flex-wrap items-center justify-center gap-4">
 					<LiveUpdateTextField
 						placeholder={displayText}
 						value={textOverride || ''}
 						onChange={(v) => item.set('textOverride', v)}
-						className="flex-basis-240px flex-1"
+						className="flex-1 flex-basis-240px"
 					/>
 					<NumberStepper
 						value={totalQuantity}

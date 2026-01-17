@@ -4,7 +4,7 @@ import { Button, Icon, LiveUpdateTextField } from '@a-type/ui';
 export function PantrySearch() {
 	const [search, setSearch] = useSearch();
 	return (
-		<div className="flex flex-row gap-1 items-center">
+		<div className="flex flex-row items-center gap-1">
 			<LiveUpdateTextField
 				placeholder="Search foods"
 				value={search}

@@ -128,6 +128,7 @@ export function Instructions({
 					tipTapClassName,
 					tipTapReadonlyClassName,
 					'[&>div]:p-0',
+					className,
 				)}
 				editor={editor}
 				readOnly
@@ -266,7 +267,7 @@ function InstructionStepView({
 	return (
 		<NodeViewWrapper
 			data-id={node.attrs.id}
-			className="flex flex-col mb-5 w-full p-1 gap-sm"
+			className="mb-5 w-full flex flex-col gap-sm p-1"
 			contentEditable={false}
 		>
 			<div>
@@ -291,7 +292,7 @@ function InstructionStepView({
 				)}
 			</div>
 			{node.attrs.note && (
-				<Note className="mt-2 ml-auto max-w-80% w-max-content" data-note="true">
+				<Note className="ml-auto mt-2 max-w-80% w-max-content" data-note="true">
 					{node.attrs.note}
 				</Note>
 			)}

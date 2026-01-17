@@ -99,14 +99,14 @@ export function RecipeIngredientViewer({
 				className,
 			)}
 		>
-			<div className="flex flex-row w-full items-start">
+			<div className="w-full flex flex-row items-start">
 				<IngredientText
-					className="flex-1 block mt-1"
+					className="mt-1 block flex-1"
 					// don't multiply section headers.
 					multiplier={isSectionHeader ? 1 : multiplier}
 					ingredient={ingredient}
 				/>
-				<div className="flex flex-row gap-2 items-center relative top--1">
+				<div className="relative top--1 flex flex-row items-center gap-2">
 					{conversionEnabled && (
 						<>
 							<DropdownMenu
@@ -118,7 +118,7 @@ export function RecipeIngredientViewer({
 									<Icon name="convert" />
 								</DropdownMenuTrigger>
 								<DropdownMenuContent>
-									<DropdownMenuLabel className="text-sm font-bold py-1 pl-3">
+									<DropdownMenuLabel className="py-1 pl-3 text-sm font-bold">
 										Convert to:
 									</DropdownMenuLabel>
 									{convertOptions.map((opt) => (
@@ -161,7 +161,7 @@ export function RecipeIngredientViewer({
 				className="mr-auto self-start italic"
 			>
 				<CollapsibleContent className="pr-2">
-					<span className="text-xs inline-flex items-center gap-1">
+					<span className="inline-flex items-center gap-1 text-xs">
 						<Icon name="convert" size={15} />
 						{convertedValue}
 					</span>

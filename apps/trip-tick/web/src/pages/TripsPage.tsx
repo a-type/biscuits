@@ -14,11 +14,11 @@ export function TripsPage({}: TripsPageProps) {
 	usePageTitle('Trips');
 	return (
 		<PageContent>
-			<div className="col !gap-10 items-stretch">
-				<div className="flex flex-row items-center justify-between mb-4">
+			<div className="col items-stretch !gap-10">
+				<div className="mb-4 flex flex-row items-center justify-between">
 					<div className="row">
 						<Logo />
-						<h1 className="text-md [font-family:'Henrietta','Noto_Serif',serif] font-semibold">
+						<h1 className="[font-family:'Henrietta','Noto_Serif',serif] text-md font-semibold">
 							Trip Tick
 						</h1>
 					</div>

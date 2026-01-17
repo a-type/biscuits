@@ -18,7 +18,7 @@ export function RecipeMainImageViewer({
 		<img
 			src={src}
 			className={classNames(
-				'w-full h-full overflow-hidden rounded-lg object-cover',
+				'h-full w-full overflow-hidden rounded-lg object-cover',
 				className,
 			)}
 		/>

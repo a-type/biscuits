@@ -20,7 +20,7 @@ export function HomePage({}: HomePageProps) {
 			<OnboardingBanner
 				onboarding={basicsOnboarding}
 				step="intro"
-				className="max-w-400px mx-auto mb-4"
+				className="mx-auto mb-4 max-w-400px"
 			>
 				Palette is a painting tool which helps you analyze colors in reference
 				photos. Add an image to start a new project.

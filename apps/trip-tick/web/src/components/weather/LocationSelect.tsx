@@ -108,7 +108,7 @@ function LocationSelectAutocomplete({
 		getInputProps,
 		highlightedIndex,
 		getItemProps,
-		setInputValue,
+		// setInputValue,
 	} = useCombobox({
 		items: options,
 		initialInputValue: name,
@@ -117,7 +117,7 @@ function LocationSelectAutocomplete({
 				setSearchValue(inputValue || '');
 			});
 		},
-		async onSelectedItemChange({ selectedItem, inputValue }) {
+		async onSelectedItemChange({ selectedItem, inputValue: _ }) {
 			if (selectedItem) {
 				// we must now fetch the geocoded location
 				const result = await client.query({
@@ -154,7 +154,7 @@ function LocationSelectAutocomplete({
 		<Popover open={isOpen}>
 			<div
 				data-state={isOpen ? 'open' : 'closed'}
-				className={classNames('flex gap-1 flex-col w-full relative', className)}
+				className={classNames('relative w-full flex flex-col gap-1', className)}
 				ref={innerRef}
 			>
 				<label htmlFor="location-input" className="font-bold">
@@ -179,11 +179,12 @@ function LocationSelectAutocomplete({
 				align="start"
 				forceMount
 				initialFocus={false}
+				// eslint-disable-next-line react-hooks/refs
 				{...getMenuProps({
 					ref: contentRef,
 				})}
 				className={classNames(
-					'overflow-x-hidden overflow-y-auto overscroll-contain shadow-lg',
+					'overflow-x-hidden overscroll-contain shadow-lg overflow-y-auto',
 				)}
 				anchor={innerRef}
 			>
@@ -192,7 +193,7 @@ function LocationSelectAutocomplete({
 						key={item.placeId}
 						{...getItemProps({ item, index })}
 						className={classNames(
-							'p-2 cursor-pointer flex flex-col',
+							'flex flex-col cursor-pointer p-2',
 							index === highlightedIndex && 'bg-gray-light',
 						)}
 					>

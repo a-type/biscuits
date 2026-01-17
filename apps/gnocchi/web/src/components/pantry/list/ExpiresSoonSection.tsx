@@ -13,8 +13,8 @@ export function ExpiresSoonSection({ className }: ExpiresSoonSectionProps) {
 	if (expiresSoonItems.length === 0) return null;
 
 	return (
-		<div className={classNames('flex flex-col mb-6', className)}>
-			<H2 className="important:text-md gutter-bottom ml-3">Expiring soon</H2>
+		<div className={classNames('mb-6 flex flex-col', className)}>
+			<H2 className="gutter-bottom ml-3 important:text-md">Expiring soon</H2>
 			<CardGrid columns={cardGridColumns.default}>
 				{expiresSoonItems.map((item) => (
 					<PantryListItem

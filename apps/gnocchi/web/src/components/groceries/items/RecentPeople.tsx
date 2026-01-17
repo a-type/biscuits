@@ -27,7 +27,7 @@ export function RecentPeople({
 					<PersonAvatar
 						key={person.profile.id}
 						person={person}
-						className="relative z-[var(--index)] left-[calc(var(--index)*-8px)]"
+						className="relative left-[calc(var(--index)*-8px)] z-[var(--index)]"
 					/>
 				</PeopleListItem>
 			))}
@@ -50,7 +50,7 @@ function usePeopleWhoLastEditedThis(itemId: string) {
 				),
 			);
 		});
-	}, []);
+	}, [groceries.sync.presence, itemId]);
 
 	return people;
 }

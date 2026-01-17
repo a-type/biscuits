@@ -53,8 +53,8 @@ export function toYield(yieldStr: string) {
 }
 
 export function findFirstMatch($: CheerioAPI, selectors: string[]) {
-	for (var i = 0; i < selectors.length; i++) {
-		var el = $(selectors[i]);
+	for (let i = 0; i < selectors.length; i++) {
+		const el = $(selectors[i]);
 		if (el.length) {
 			return $(el.get(0));
 		}
@@ -63,8 +63,8 @@ export function findFirstMatch($: CheerioAPI, selectors: string[]) {
 }
 
 export function findFirstMatches($: CheerioAPI, selectors: string[]) {
-	for (var i = 0; i < selectors.length; i++) {
-		var els = $(selectors[i]);
+	for (let i = 0; i < selectors.length; i++) {
+		const els = $(selectors[i]);
 		if (els && els.length) {
 			return els;
 		}

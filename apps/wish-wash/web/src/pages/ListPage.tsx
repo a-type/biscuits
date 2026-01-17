@@ -51,7 +51,7 @@ function ListPageContent({ list }: { list: List }) {
 				gap
 				justify="between"
 				items="center"
-				className="sticky py-sm top-0 z-nav bg-wash w-full max-w-800px"
+				className="sticky top-0 z-nav max-w-800px w-full py-sm bg-wash"
 			>
 				<Button emphasis="ghost" render={<Link to="/" />}>
 					<Icon name="arrowLeft" />
@@ -59,12 +59,12 @@ function ListPageContent({ list }: { list: List }) {
 				</Button>
 				<UserMenu />
 			</Box>
-			<Box d="col" gap className="w-full max-w-800px">
+			<Box d="col" gap className="max-w-800px w-full">
 				<ListHero list={list} />
 				<SyncPurchases list={list} />
 				<ListActions className="sticky top-0 z-10" list={list} />
 			</Box>
-			<ListView list={list} className="pb-[200px] w-full max-w-1280px" />
+			<ListView list={list} className="max-w-1280px w-full pb-[200px]" />
 		</Box>
 	);
 }

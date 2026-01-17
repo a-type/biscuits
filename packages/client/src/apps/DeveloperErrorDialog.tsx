@@ -6,6 +6,8 @@ import { useLocalStorage } from '../react.js';
 
 export interface DeveloperErrorDialogProps extends DialogProps {}
 
+const now = Date.now();
+
 export function DeveloperErrorDialog(props: DeveloperErrorDialogProps) {
 	const verdant = useContext(VerdantContext);
 	const [error, setError] = useState<null | Error>(null);
@@ -20,7 +22,7 @@ export function DeveloperErrorDialog(props: DeveloperErrorDialogProps) {
 		0,
 		false,
 	);
-	const justReloaded = Date.now() - lastReloadTime < 2000;
+	const justReloaded = now - lastReloadTime < 2000;
 
 	const reload = () => {
 		setLastReloadTime(Date.now());

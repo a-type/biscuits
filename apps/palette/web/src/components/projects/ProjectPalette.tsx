@@ -37,7 +37,7 @@ export function ProjectPalette({ project, className }: ProjectPaletteProps) {
 	const [selectedId, selectId] = useColorSelection();
 
 	return (
-		<div className={clsx('flex flex-col items-stretch m-1', className)}>
+		<div className={clsx('m-1 flex flex-col items-stretch', className)}>
 			<OnboardingTooltip
 				onboarding={basicsOnboarding}
 				step="palette"
@@ -46,13 +46,13 @@ export function ProjectPalette({ project, className }: ProjectPaletteProps) {
 				<H3>Saved Colors</H3>
 			</OnboardingTooltip>
 			{!sorted.length && (
-				<span className="text-xs color-gray-dark italic m-auto">
+				<span className="m-auto text-xs italic color-gray-dark">
 					Click the image to select colors
 				</span>
 			)}
 			<div
 				className={clsx(
-					'grid grid-cols-6 gap-1 justify-start items-start content-start',
+					'grid grid-cols-6 content-start items-start justify-start gap-1',
 					'md:grid-cols-4',
 				)}
 				onClick={() => {
@@ -63,7 +63,7 @@ export function ProjectPalette({ project, className }: ProjectPaletteProps) {
 					<button
 						key={i}
 						className={clsx(
-							'rounded appearance-none p-0 [border-image:none] border-solid aspect-1',
+							'[border-image:none] aspect-1 appearance-none rounded border-solid p-0',
 							selectedId === color.id ? 'border-2 border-black' : 'border-0',
 						)}
 						onClick={(ev) => {
@@ -78,25 +78,4 @@ export function ProjectPalette({ project, className }: ProjectPaletteProps) {
 			</div>
 		</div>
 	);
-}
-
-function rgbToHue(r: number, g: number, b: number) {
-	const max = Math.max(r, g, b);
-	const min = Math.min(r, g, b);
-	const delta = max - min;
-	let hue = 0;
-	if (delta === 0) {
-		hue = 0;
-	} else if (max === r) {
-		hue = ((g - b) / delta) % 6;
-	} else if (max === g) {
-		hue = (b - r) / delta + 2;
-	} else {
-		hue = (r - g) / delta + 4;
-	}
-	hue *= 60;
-	if (hue < 0) {
-		hue += 360;
-	}
-	return hue;
 }

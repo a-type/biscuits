@@ -37,7 +37,7 @@ function FoodsList() {
 			{foods.map((food) => (
 				<div
 					key={food.get('canonicalName')}
-					className="flex flex-row gap-4 justify-between p-2"
+					className="flex flex-row justify-between gap-4 p-2"
 				>
 					<div className="flex flex-1 text-md font-bold">
 						<FoodName food={food} />

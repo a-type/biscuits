@@ -29,17 +29,17 @@ export function ProjectColorSpotlight({
 		return (
 			<div
 				className={clsx(
-					'm-1 relative flex flex-col md:flex-row gap-1',
+					'relative m-1 flex flex-col gap-1 md:flex-row',
 					className,
 				)}
 			>
 				<div
-					className={'relative flex-1-0-0 h-full rounded-lg'}
+					className={'relative h-full flex-1-0-0 rounded-lg'}
 					style={{
 						backgroundColor: `rgb(${color.r}, ${color.g}, ${color.b})`,
 					}}
 				>
-					<div className="absolute right-3 bottom-3 row">
+					<div className="absolute bottom-3 right-3 row">
 						{!!pickingColor && (
 							<Button
 								size="small"
@@ -64,11 +64,11 @@ export function ProjectColorSpotlight({
 	return (
 		<div
 			className={clsx(
-				'flex flex-col p-2 items-center justify-center border-1 border-solid border-gray-4 rounded-lg',
+				'border-gray-4 flex flex-col items-center justify-center border-1 rounded-lg border-solid p-2',
 				className,
 			)}
 		>
-			<span className="text-xs color-gray-dark italic">
+			<span className="text-xs italic color-gray-dark">
 				Select a color to see it here
 			</span>
 		</div>

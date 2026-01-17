@@ -66,7 +66,7 @@ export function ItemCard({
 			className={clsx(
 				className,
 				`theme-${typeThemes[item.type]}`,
-				'bg-primary-wash color-primary-ink',
+				'color-primary-ink bg-primary-wash',
 				boughtAll && 'opacity-50',
 				item.prioritized && !boughtAll && 'min-h-200px sm:min-h-250px',
 			)}

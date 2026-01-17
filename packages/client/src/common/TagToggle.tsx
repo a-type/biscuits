@@ -23,7 +23,7 @@ export function TagToggle({
 			size="small"
 			emphasis="light"
 			className={clsx(
-				'flex items-center gap-1 [font-weight:inherit] text-xs',
+				'[font-weight:inherit] flex items-center gap-1 text-xs',
 				className,
 			)}
 			toggled={toggled}
@@ -32,7 +32,7 @@ export function TagToggle({
 			{...rest}
 		>
 			<span>
-				<Icon name={icon || 'tag'} className="w-10px h-10px" />
+				<Icon name={icon || 'tag'} className="h-10px w-10px" />
 			</span>
 			<span>{name}</span>
 		</Button>

@@ -8,10 +8,10 @@ export function CreateProject(props: CreateProjectProps) {
 	const navigate = useNavigate();
 
 	return (
-		<div className="col">
+		<div className="col" {...props}>
 			<H2>Start a new project</H2>
 			<ImageUploader
-				className="h-400px w-full max-w-600px"
+				className="h-400px max-w-600px w-full"
 				onChange={async (value) => {
 					if (value) {
 						const project = await client.projects.put({

@@ -75,14 +75,14 @@ export function PantryListItem({
 						<OpenFoodDetailButton
 							foodName={food}
 							emphasis="unstyled"
-							className="font-normal p-0 border-none shadow-none rounded-none items-start text-sm"
+							className="items-start rounded-none border-none p-0 text-sm font-normal shadow-none"
 						/>
 					}
 				>
 					<Card.Title className={classNames('text-wrap', 'text-md')}>
 						<FoodName food={item} capitalize />
 					</Card.Title>
-					<div className="flex flex-row gap-1 items-center flex-wrap p-1 text-xs italic">
+					<div className="flex flex-row flex-wrap items-center gap-1 p-1 text-xs italic">
 						{purchasedAt && (
 							<Chip title={new Date(purchasedAt).toLocaleDateString()}>
 								<Icon name="clock" />
@@ -116,19 +116,19 @@ export function PantryListItem({
 					</div>
 					<Icon
 						name="new_window"
-						className="absolute right-2 top-2 z-1 color-gray-dark opacity-50"
+						className="absolute right-2 top-2 z-1 opacity-50 color-gray-dark"
 					/>
 				</Card.Main>
 				<Card.Footer className={classNames(showLabels ? 'p-0' : '')}>
 					<Card.Actions
 						className={classNames('flex-wrap', {
-							'rounded-none p-1 border-b-none border-l-none border-r-none':
+							'rounded-none border-b-none border-l-none border-r-none p-1':
 								showLabels,
 						})}
 					>
 						<Suspense
 							fallback={
-								<Button emphasis="default" className="w-[32px] h-[32px]" />
+								<Button emphasis="default" className="h-[32px] w-[32px]" />
 							}
 						>
 							<QuickAddButton food={item} showLabel={showLabels} />

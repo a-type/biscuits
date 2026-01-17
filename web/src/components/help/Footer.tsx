@@ -9,11 +9,11 @@ export function Footer({ className }: FooterProps) {
 	return (
 		<div
 			className={classNames(
-				'flex flex-row gap-3 justify-between items-end text-xs pt-8 pb-4 opacity-50 hover:opacity-100 w-full',
+				'w-full flex flex-row items-end justify-between gap-3 pb-4 pt-8 text-xs opacity-50 hover:opacity-100',
 				className,
 			)}
 		>
-			<div className="flex flex-col gap-3 items-start">
+			<div className="flex flex-col items-start gap-3">
 				<Link to="/" className="font-fancy text-sm font-semibold">
 					Biscuits
 				</Link>
@@ -21,7 +21,7 @@ export function Footer({ className }: FooterProps) {
 				<Link to="/privacy">Privacy Policy</Link>
 				<Link to="/tos">Terms of Service</Link>
 			</div>
-			<div className="flex flex-col gap-3 items-end">
+			<div className="flex flex-col items-end gap-3">
 				<Link to="/contact">Contact</Link>
 				<span>Made in Raleigh, NC</span>
 			</div>

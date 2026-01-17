@@ -15,7 +15,7 @@ export function PrereleaseWarning({}: PrereleaseWarningProps) {
 	}
 
 	return (
-		<div className="bg-attention-light color-black row p-1 text-xxs items-center justify-center">
+		<div className="row items-center justify-center p-1 text-xxs color-black bg-attention-light">
 			<Icon name="warning" />
 			<span>
 				{app.name} is an unreleased{' '}

@@ -7,7 +7,7 @@ export function ContactPage({}: ContactPageProps) {
 	return (
 		<PageRoot>
 			<PageContent>
-				<div className="flex flex-col gap-6 relative px-8">
+				<div className="relative flex flex-col gap-6 px-8">
 					<H1>Contact</H1>
 					<P>
 						Biscuits is kinda just one person! I just like making little apps.

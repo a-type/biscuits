@@ -60,7 +60,7 @@ export const RecipeListItem = memo(function RecipeListItem({
 				</CardTitle>
 				<div
 					className={clsx(
-						'm-2 flex flex-row gap-sm flex-wrap',
+						'm-2 flex flex-row flex-wrap gap-sm',
 						gridStyle === 'card-small' ? 'text-xxs' : 'text-xs',
 					)}
 				>
@@ -76,7 +76,7 @@ export const RecipeListItem = memo(function RecipeListItem({
 				</div>
 			</Card.Main>
 			<Card.Image>
-				<RecipeMainImageViewer recipe={recipe} className="w-full h-full" />
+				<RecipeMainImageViewer recipe={recipe} className="h-full w-full" />
 			</Card.Image>
 			<Card.Footer>
 				<Card.Actions>
@@ -145,7 +145,7 @@ export function RecipeListItemMenu({
 			<DropdownMenu.Trigger
 				render={<Button size="small" emphasis="ghost" {...rest} />}
 			>
-				<Icon name="dots" className="w-20px h-20px" />
+				<Icon name="dots" className="h-20px w-20px" />
 			</DropdownMenu.Trigger>
 			<DropdownMenu.Content>
 				<RecipeEditTags recipe={recipe} onClose={() => setMenuOpen(false)}>

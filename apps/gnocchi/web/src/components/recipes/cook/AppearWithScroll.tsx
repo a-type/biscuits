@@ -6,6 +6,7 @@ export interface AppearWithScrollProps {
 	className?: string;
 }
 
+// TODO: rewrite to use scroll state animations
 export function AppearWithScroll({
 	children,
 	className,
@@ -42,7 +43,7 @@ export function AppearWithScroll({
 		return () => {
 			observer.disconnect();
 		};
-	}, []);
+	}, [spring]);
 
 	return (
 		<animated.div ref={ref} style={style} className={className}>

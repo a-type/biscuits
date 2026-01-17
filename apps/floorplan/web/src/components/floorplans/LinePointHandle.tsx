@@ -72,7 +72,7 @@ export function LinePointHandle({
 			cx={x}
 			cy={y}
 			r={8 / zoom}
-			className="fill-white stroke-inherit cursor-grab touch-none stroke-width-[calc(2/var(--zoom-settled))] z-1"
+			className="stroke-inherit z-1 cursor-grab touch-none fill-white stroke-width-[calc(2/var(--zoom-settled))]"
 			strokeWidth={2}
 			data-snapped-to={
 				snap ? `${snap.get('lineId')}-${snap.get('side')}` : undefined

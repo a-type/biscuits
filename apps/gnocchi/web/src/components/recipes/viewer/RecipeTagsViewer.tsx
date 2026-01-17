@@ -54,13 +54,13 @@ function RecipeTagViewer({ tag }: { tag: string }) {
 		<RecipeTagMenuWrapper tagName={tag}>
 			<div
 				className={classNames(
-					'flex flex-row items-center gap-1 px-3 py-1 rounded-full bg-primary-light border border-solid border-gray-dark color-black font-bold text-inherit',
+					'flex flex-row items-center gap-1 border rounded-full border-solid px-3 py-1 text-inherit font-bold color-black bg-primary-light border-gray-dark',
 					data?.get('color') && `theme-${data.get('color')}`,
 				)}
 			>
 				<span>
 					{data?.get('icon') ?? (
-						<Icon name="tag" className="w-1em h-1em relative top-0.1em" />
+						<Icon name="tag" className="relative top-0.1em h-1em w-1em" />
 					)}
 				</span>
 				<span>{tag}</span>

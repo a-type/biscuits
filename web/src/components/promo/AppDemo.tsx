@@ -57,17 +57,17 @@ export function AppDemo({ className }: AppDemoProps) {
 		>
 			<div
 				className={classNames(
-					'flex gap-8 p-md items-center flex-col-reverse flex-1',
+					'flex flex-1 flex-col-reverse items-center gap-8 p-md',
 					'sm:flex-row',
 				)}
 			>
 				<div
 					className={classNames(
-						'flex-shrink-0 w-full sm:w-1/2 items-center grid gap-4 justify-items-start',
+						'grid w-full flex-shrink-0 items-center justify-items-start gap-4 sm:w-1/2',
 						'[grid-template-areas:"icon_title""icon_description""icon_button"]',
 						'[grid-template-columns:auto_1fr]',
 						'sm:[grid-template-areas:"icon""title""description""button"]',
-						'sm:(justify-items-end text-end [grid-template-columns:auto])',
+						'sm:([grid-template-columns:auto] justify-items-end text-end)',
 					)}
 				>
 					{transitions((style, i) => {
@@ -77,24 +77,24 @@ export function AppDemo({ className }: AppDemoProps) {
 								<AImg
 									src={`${app.url}/${visibleApps[i].iconPath}`}
 									alt={app.name}
-									className="h-auto rounded-lg w-[120px] h-[120px] object-contain object-center"
+									className="h-[120px] h-auto w-[120px] rounded-lg object-contain object-center"
 									style={{ gridArea: 'icon', ...style }}
 								/>
 								<AH3
-									className="text-2xl font-bold m-0"
+									className="m-0 text-2xl font-bold"
 									style={{ gridArea: 'title', ...style }}
 								>
 									{app.name}
 								</AH3>
 								<AP
-									className="text-lg m-0 h-80px"
+									className="m-0 h-80px text-lg"
 									style={{ gridArea: 'description', ...style }}
 								>
 									{app.description}
 								</AP>
 								<Button
 									emphasis="primary"
-									className="justify-self-start sm:justify-self-end self-center"
+									className="self-center justify-self-start sm:justify-self-end"
 									render={
 										<a href={url} target="_blank" rel="noopener noreferrer" />
 									}
@@ -116,7 +116,7 @@ export function AppDemo({ className }: AppDemoProps) {
 				wrap
 				gap="md"
 				items="center"
-				className="w-full md:(w-auto h-full flex-0-0-auto)"
+				className="w-full md:(h-full w-auto flex-0-0-auto)"
 				justify="center"
 			>
 				{visibleApps.map((app) => (
@@ -134,7 +134,7 @@ export function AppDemo({ className }: AppDemoProps) {
 						<img
 							src={`${app.url}/${app.iconPath}`}
 							alt={app.name}
-							className="w-60px h-60px"
+							className="h-60px w-60px"
 						/>
 					</Button>
 				))}

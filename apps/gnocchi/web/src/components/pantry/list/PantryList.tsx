@@ -22,7 +22,7 @@ function PantryListInner({ className, ...rest }: PantryListProps) {
 	});
 
 	return (
-		<div className="flex flex-col items-stretch w-full" {...rest}>
+		<div className="w-full flex flex-col items-stretch" {...rest}>
 			<OnboardingBanner
 				onboarding={pantryOnboarding}
 				step="expirations"

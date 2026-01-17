@@ -73,7 +73,7 @@ export function SubscriptionPromotion({
 				{description && <Dialog.Description>{description}</Dialog.Description>}
 				{children}
 				<DialogActions>
-					<div className="flex flex-col gap-2 items-center m-auto mt-1">
+					<div className="m-auto mt-1 flex flex-col items-center gap-2">
 						<LoginButton
 							emphasis="primary"
 							returnTo="/"

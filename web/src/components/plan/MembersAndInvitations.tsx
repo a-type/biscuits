@@ -49,7 +49,7 @@ export function MembersAndInvitations() {
 					return (
 						<CardRoot key={member.id}>
 							<CardMain className="justify-start">
-								<CardTitle className="flex-row mt-0">
+								<CardTitle className="mt-0 flex-row">
 									<Avatar imageSrc={member.imageUrl ?? undefined} />
 									{member.name}
 									{isMe && <span className="font-bold"> (you)</span>}
@@ -72,7 +72,7 @@ export function MembersAndInvitations() {
 				{plan?.pendingInvitations.map((invite) => (
 					<CardRoot key={invite.id}>
 						<CardMain>
-							<CardTitle className="flex-row mt-0 color-gray-dark">
+							<CardTitle className="mt-0 flex-row color-gray-dark">
 								<Avatar />
 								<span>Invited: {invite.email}</span>
 							</CardTitle>
@@ -86,7 +86,7 @@ export function MembersAndInvitations() {
 				))}
 			</CardGrid>
 			{plan?.canInviteMore ?
-				<div className="p-4 flex flex-col items-stretch gap-3 bg-primary-wash border-primary-dark border-1 border-solid rounded-lg theme-leek">
+				<div className="theme-leek flex flex-col items-stretch gap-3 border-1 rounded-lg border-solid p-4 bg-primary-wash border-primary-dark">
 					<H3>Invite someone</H3>
 					<InviteMember />
 				</div>

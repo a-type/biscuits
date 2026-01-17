@@ -43,7 +43,7 @@ export function PersonDetails({ person, className }: PersonDetailsProps) {
 			<EditableText
 				value={name}
 				onValueChange={(value) => person.set('name', value)}
-				className="text-xl mr-auto"
+				className="mr-auto text-xl"
 			/>
 			<PersonQuickActions person={person} />
 			<Box d="col" items="stretch" gap>
@@ -63,13 +63,13 @@ export function PersonDetails({ person, className }: PersonDetailsProps) {
 					<Location person={person} />
 				</Suspense>
 				<Box gap="md">
-					<Icon name="tag" className="color-gray-dark mt-1.5" />
+					<Icon name="tag" className="mt-1.5 color-gray-dark" />
 					<Suspense>
 						<PersonTagEditor person={person} />
 					</Suspense>
 				</Box>
 				<Box gap="md">
-					<Icon name="note" className="color-gray-dark mt-18px" />
+					<Icon name="note" className="mt-18px color-gray-dark" />
 					<NoteEditor person={person} className="flex-1" />
 				</Box>
 				<Divider />
@@ -92,7 +92,7 @@ function NoteEditor({
 
 	return (
 		<LiveUpdateTextField
-			className={clsx('text-sm bg-transparent shadow-none', className)}
+			className={clsx('text-sm shadow-none bg-transparent', className)}
 			textArea
 			value={note || ''}
 			onChange={(value) => person.set('note', value)}
@@ -142,7 +142,7 @@ function Location({ person }: { person: Person }) {
 				<Box d="col" gap="sm" className="flex-1">
 					<LazyMapView
 						location={geolocation.getAll()}
-						className="w-full h-[200px] rounded-md pointer-events-none"
+						className="pointer-events-none h-[200px] w-full rounded-md"
 					/>
 					{geolocation.get('label') && <span>{geolocation.get('label')}</span>}
 				</Box>

@@ -86,23 +86,23 @@ export function ChangelogDisplay({
 			/>
 			<DialogContent>
 				<DialogTitle>What&apos;s new</DialogTitle>
-				<div className="flex flex-col overflow-y-auto gap-4">
+				<div className="flex flex-col gap-4 overflow-y-auto">
 					{data.map((item, idx) => (
 						<div key={item.id} className="relative">
-							<p className="text-xs italic color-gray-dark mb-1">
+							<p className="mb-1 text-xs italic color-gray-dark">
 								{new Date(item.createdAt).toLocaleDateString()}
 							</p>
-							<h3 className="text-lg font-bold mt-0 mb-2">{item.title}</h3>
+							<h3 className="mb-2 mt-0 text-lg font-bold">{item.title}</h3>
 							{item.imageUrl && (
 								<img
 									src={item.imageUrl}
 									alt={item.title}
-									className="w-full h-auto"
+									className="h-auto w-full"
 								/>
 							)}
-							<p className="text-sm mt-0">{item.details}</p>
+							<p className="mt-0 text-sm">{item.details}</p>
 							{(lastSeenIndex === -1 || idx < lastSeenIndex) && (
-								<div className="absolute top-4 right-4 w-2 h-2 bg-accent rounded-full" />
+								<div className="absolute right-4 top-4 h-2 w-2 rounded-full bg-accent" />
 							)}
 						</div>
 					))}

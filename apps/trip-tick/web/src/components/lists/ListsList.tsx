@@ -10,7 +10,7 @@ export function ListsList({}: ListsListProps) {
 
 	if (lists.length === 0) {
 		return (
-			<div className="flex flex-col gap-4 items-start">
+			<div className="flex flex-col items-start gap-4">
 				<H2>Welcome!</H2>
 				<P>
 					Trip Tick is a list-making app purpose-made for planning what to pack
@@ -25,7 +25,7 @@ export function ListsList({}: ListsListProps) {
 	return (
 		<div className="col items-start">
 			<H2>Lists</H2>
-			<div className="flex flex-row flex-wrap gap-2 max-h-80px">
+			<div className="max-h-80px flex flex-row flex-wrap gap-2">
 				{lists.map((list) => (
 					<Button
 						size="small"

@@ -9,12 +9,12 @@ export interface MetadataDisplayProps {
 	className?: string;
 }
 
-export function MetadataDisplay({ entry, className }: MetadataDisplayProps) {
+export function MetadataDisplay({ entry, ...rest }: MetadataDisplayProps) {
 	const { createdAt } = hooks.useWatch(entry);
 	const date = new Date(createdAt);
 
 	return (
-		<Box col gap p>
+		<Box col gap p {...rest}>
 			<Box items="center" gap="lg">
 				<AccessIcon entry={entry} />
 				<H2>

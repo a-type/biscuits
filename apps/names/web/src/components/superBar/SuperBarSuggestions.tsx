@@ -28,9 +28,9 @@ export function SuperBarSuggestions({ className }: SuperBarSuggestionsProps) {
 	) {
 		if (!inputValue) {
 			return (
-				<div className={clsx('p-8 col gap-6', className)}>
+				<div className={clsx('col gap-6 p-8', className)}>
 					<Icon name="profile" size={80} className="color-gray" />
-					<div className="color-gray-dark text-center text-lg">
+					<div className="text-center text-lg color-gray-dark">
 						Add names to get started
 					</div>
 				</div>
@@ -38,9 +38,9 @@ export function SuperBarSuggestions({ className }: SuperBarSuggestionsProps) {
 		}
 
 		return (
-			<div className={clsx('p-8 col gap-6', className)}>
+			<div className={clsx('col gap-6 p-8', className)}>
 				<Icon name="profile" size={80} className="color-gray" />
-				<div className="color-gray-dark text-center text-lg">
+				<div className="text-center text-lg color-gray-dark">
 					No matches found
 				</div>
 			</div>
@@ -48,7 +48,7 @@ export function SuperBarSuggestions({ className }: SuperBarSuggestionsProps) {
 	}
 
 	return (
-		<div className={clsx('flex flex-col gap-md w-full ', className)}>
+		<div className={clsx('w-full flex flex-col gap-md', className)}>
 			{groups.map((group) => (
 				<SuggestionGroup
 					key={group.title}
@@ -80,11 +80,11 @@ function SuggestionGroup({
 	return (
 		<div
 			className={clsx(
-				'flex flex-col gap-2 repeated:(border-0 border-t border-gray-dark border-solid pt-md)',
+				'flex flex-col gap-2 repeated:(border-0 border-t border-solid pt-md border-gray-dark)',
 				className,
 			)}
 		>
-			<div className="text-xs uppercase color-gray-dark font-bold mt-1">
+			<div className="mt-1 text-xs font-bold uppercase color-gray-dark">
 				{title}
 			</div>
 			{isRecents && <SuperBarTagFilter />}
@@ -124,7 +124,7 @@ function SuggestionItem({
 		<div className="flex flex-col items-start" {...rest}>
 			<Card
 				className={clsx(
-					'select-none max-w-full',
+					'max-w-full select-none',
 					!note && !tags.length && !photo?.url ? 'w-auto' : 'w-full',
 				)}
 			>
@@ -135,17 +135,17 @@ function SuggestionItem({
 				>
 					{photo?.url && (
 						<Card.Image
-							className="bg-cover [background-position:center_20%]"
+							className="[background-position:center_20%] bg-cover"
 							style={{ backgroundImage: `url(${photo.url})` }}
 						/>
 					)}
-					<CardTitle className="font-normal px-md m-0 border-none">
+					<CardTitle className="m-0 border-none px-md font-normal">
 						{name}
 					</CardTitle>
 					{!!tags.length && (
 						<CardContent
 							unstyled
-							className="flex flex-row gap-sm py-xs px-sm mx-0"
+							className="mx-0 flex flex-row gap-sm px-sm py-xs"
 						>
 							{tags.map((tag) => (
 								<Suspense key={tag}>
@@ -203,7 +203,7 @@ function NoteMatch({
 	return (
 		<InlineCardContent unstyled={!overlay}>
 			<Icon name="note" />{' '}
-			<span className="text-ellipsis overflow-hidden min-w-0 flex-1">
+			<span className="min-w-0 flex-1 overflow-hidden text-ellipsis">
 				{content}
 			</span>
 		</InlineCardContent>
@@ -248,7 +248,7 @@ function GeolocationMatch({
 	return (
 		<InlineCardContent unstyled={!overlay}>
 			<Icon name="location" />{' '}
-			<span className="text-ellipsis overflow-hidden min-w-0 flex-1">
+			<span className="min-w-0 flex-1 overflow-hidden text-ellipsis">
 				{content}
 			</span>
 		</InlineCardContent>

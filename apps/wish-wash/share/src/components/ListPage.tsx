@@ -67,11 +67,11 @@ export function ListPage({ data }: ListPageProps) {
 					className="flex-[1_0_auto]"
 					data-testid="list-page"
 				>
-					<Box d="col" gap="lg" className="w-full max-w-800px">
+					<Box d="col" gap="lg" className="max-w-800px w-full">
 						{snapshot.coverImageUrl && (
 							<img
 								src={snapshot.coverImageUrl}
-								className="w-full h-[20vh] object-cover rounded-lg"
+								className="h-[20vh] w-full rounded-lg object-cover"
 								crossOrigin="anonymous"
 							/>
 						)}
@@ -103,7 +103,7 @@ export function ListPage({ data }: ListPageProps) {
 					<Items
 						items={snapshot.items}
 						listAuthor={data.author.name}
-						className="pb-10 w-full max-w-1280px"
+						className="max-w-1280px w-full pb-10"
 					/>
 				</Box>
 			</UIProvider>

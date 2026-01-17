@@ -31,6 +31,7 @@ let newerExpireTime: number | undefined = undefined;
 export function useHasNewExpirations() {
 	const [latestSeen, setLatestSeen] = useLocalStorage(
 		'latestSeenExpiration',
+		// eslint-disable-next-line react-hooks/purity
 		Date.now(),
 	);
 	const expiresSoonItems = useExpiresSoonItems();
@@ -39,6 +40,7 @@ export function useHasNewExpirations() {
 		if (expiresAt > latest) return expiresAt;
 		return latest;
 	}, 0);
+	// eslint-disable-next-line react-hooks/globals
 	newerExpireTime =
 		latestExpiration > latestSeen ? latestExpiration : undefined;
 	const onSeen = () => {
@@ -87,7 +89,7 @@ export function useFilter() {
 
 export function useSearch() {
 	const navigate = useNavigate();
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [searchParams] = useSearchParams();
 	const query = searchParams.get('query') || '';
 	const setSearch = useCallback(
 		(search: string) => {
@@ -100,7 +102,7 @@ export function useSearch() {
 				);
 			}
 		},
-		[setSearchParams, navigate],
+		[navigate],
 	);
 	return [query.toLowerCase(), setSearch] as const;
 }

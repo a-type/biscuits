@@ -27,7 +27,7 @@ export function ItemCardTitle({
 			className={clsx(
 				'p-1 font-bold',
 				hasImage ?
-					'bg-[rgba(0,0,0,0.5)] text-[white] px-md'
+					'px-md text-[white] bg-[rgba(0,0,0,0.5)]'
 				:	'color-primary-dark',
 				item.prioritized || hasImage ? 'text-xl' : 'text-lg',
 				className,

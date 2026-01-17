@@ -157,7 +157,7 @@ export function InstructionStepNodeView({
 					className={classNames(
 						'grid grid-areas-[label_label_label]-[tools_content_endTools]-[note_note_note]-[embed_embed_embed]',
 						'grid-cols-[min-content_1fr_min-content] grid-rows-[repeat(3,min-content)]',
-						'mb-2 rounded-md w-full transition-colors items-start',
+						'mb-2 w-full items-start rounded-md transition-colors',
 						completed && !isEditing && 'opacity-60',
 						isAssignedToMe && !isEditing && 'bg-primaryWash mb-2',
 					)}
@@ -166,7 +166,7 @@ export function InstructionStepNodeView({
 		>
 			<div
 				className={clsx(
-					'[grid-area:content] relative flex flex-row gap-2 items-start pt-2 justify-between',
+					'[grid-area:content] relative flex flex-row items-start justify-between gap-2 pt-2',
 					!subRecipeId && 'items-center',
 				)}
 			>
@@ -184,7 +184,7 @@ export function InstructionStepNodeView({
 				)}
 				{!hasContent && isEditing && (
 					<>
-						<div className="absolute left-0 top-4 sm:top-2 opacity-50 text-xs sm:text-sm">
+						<div className="absolute left-0 top-4 text-xs opacity-50 sm:top-2 sm:text-sm">
 							Type something, or...
 						</div>
 						<IncludeSubRecipe
@@ -198,13 +198,13 @@ export function InstructionStepNodeView({
 			</div>
 			<CollapsibleRoot
 				open={showNote}
-				className="[grid-area:note] mt-2 ml-auto w-max-content max-w-400px"
+				className="[grid-area:note] ml-auto mt-2 max-w-400px w-max-content"
 				contentEditable={false}
 			>
 				<CollapsibleContent>
 					<Note className="focus-within:shadow-focus" contentEditable={false}>
 						<TextArea
-							className="p-0 m-0 rounded-none border-none shadow-none bg-transparent text-sm w-full text-inherit [font-style:inherit] focus:(outline-none bg-transparent shadow-none)"
+							className="[font-style:inherit] m-0 w-full rounded-none border-none p-0 text-sm text-inherit shadow-none bg-transparent focus:(shadow-none outline-none bg-transparent)"
 							value={note || ''}
 							onValueChange={updateNote}
 							onBlur={onNoteBlur}
@@ -217,14 +217,14 @@ export function InstructionStepNodeView({
 			{!isEditing && isAssignedToMe && (
 				<label
 					contentEditable={false}
-					className="[grid-area:label] text-xs italic color-black animate-keyframes-fade-in-up animate-duration-200 animate-ease-out mb-2"
+					className="[grid-area:label] mb-2 animate-keyframes-fade-in-up animate-duration-200 animate-ease-out text-xs italic color-black"
 				>
 					Assigned to you
 				</label>
 			)}
 			{!isEditing && (
 				<div
-					className="flex flex-col items-center gap-2 [grid-area:tools] w-32px mr-2 pt-1"
+					className="[grid-area:tools] mr-2 w-32px flex flex-col items-center gap-2 pt-1"
 					contentEditable={false}
 				>
 					<Checkbox
@@ -249,7 +249,7 @@ export function InstructionStepNodeView({
 				</div>
 			)}
 			<div
-				className="flex flex-col items-center gap-1 [grid-area:endTools] w-32px ml-3"
+				className="[grid-area:endTools] ml-3 w-32px flex flex-col items-center gap-1"
 				contentEditable={false}
 			>
 				{isEditing && (

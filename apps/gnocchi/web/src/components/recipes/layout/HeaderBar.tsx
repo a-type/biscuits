@@ -13,7 +13,7 @@ export function HeaderBar({ children, backUrl, className }: HeaderBarProps) {
 	return (
 		<PageFixedArea
 			className={classNames(
-				'z-10 top-0 flex flex-row items-center gap-3 py-1',
+				'top-0 z-10 flex flex-row items-center gap-3 py-1',
 				className,
 			)}
 		>

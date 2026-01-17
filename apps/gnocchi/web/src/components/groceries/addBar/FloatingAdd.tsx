@@ -32,7 +32,7 @@ export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
 	return (
 		<MenuDisclose
 			className={classNames(
-				'relative flex flex-col items-stretch justify-stretch w-full z-100',
+				'relative z-100 w-full flex flex-col items-stretch justify-stretch',
 				// only visible on mobile
 				'md:hidden',
 				className,
@@ -62,7 +62,7 @@ export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
 					/>
 				}
 			>
-				<Icon name="plus" className="w-20px h-20px" />
+				<Icon name="plus" className="h-20px w-20px" />
 			</MenuDisclose.Trigger>
 		</MenuDisclose>
 	);

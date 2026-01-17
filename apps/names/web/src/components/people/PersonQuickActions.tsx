@@ -57,7 +57,7 @@ export function PersonQuickActions({
 		<HorizontalList
 			open={open}
 			onOpenChange={setOpen}
-			className={clsx('gap-0 items-center', className)}
+			className={clsx('items-center gap-0', className)}
 		>
 			{showAttachLocation && (
 				<Button
@@ -66,7 +66,7 @@ export function PersonQuickActions({
 					onClick={() => addLocation(person)}
 					emphasis="light"
 					color="accent"
-					className="font-normal my-auto"
+					className="my-auto font-normal"
 				>
 					<Icon name="location" />
 					Attach current location
@@ -80,7 +80,7 @@ export function PersonQuickActions({
 						size="small"
 						onClick={() => addRelationship(personId, recentPerson.get('id'))}
 						emphasis="default"
-						className="font-normal my-auto"
+						className="my-auto font-normal"
 					>
 						<Icon name="clock" />
 						Connect with {recentPerson.get('name')}
@@ -97,7 +97,7 @@ export function PersonQuickActions({
 						size="small"
 						emphasis="default"
 						render={<div />}
-						className="p-0 gap-0 my-auto"
+						className="my-auto gap-0 p-0"
 					>
 						<Button
 							emphasis="ghost"

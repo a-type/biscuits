@@ -10,7 +10,7 @@ export function NewTagForm({ onCreate }: NewTagFormProps) {
 
 	return (
 		<FormikForm
-			className="flex items-center gap-2 important:flex-row max-w-full"
+			className="max-w-full flex items-center gap-2 important:flex-row"
 			initialValues={{ name: '' }}
 			onSubmit={async (values, bag) => {
 				try {
@@ -32,7 +32,7 @@ export function NewTagForm({ onCreate }: NewTagFormProps) {
 			<TextField
 				name="name"
 				placeholder="tag name"
-				className="flex-1-0-0 min-w-60px"
+				className="min-w-60px flex-1-0-0"
 				autoComplete="off"
 			/>
 			<SubmitButton>Create</SubmitButton>

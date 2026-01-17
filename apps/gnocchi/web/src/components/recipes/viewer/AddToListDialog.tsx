@@ -94,13 +94,13 @@ export function AddToListDialog({
 							Select none
 						</ActionButton>
 					</ActionBar>
-					<ul className="flex flex-col items-start list-none p-0 m-0 gap-3 w-full">
+					<ul className="m-0 w-full flex flex-col list-none items-start gap-3 p-0">
 						{allIngredients.map((ingredient) => {
 							const isSectionHeader = ingredient.isSectionHeader;
 							return (
 								<li
 									key={ingredient.id}
-									className="flex flex-row items-start gap-2 w-full"
+									className="w-full flex flex-row items-start gap-2"
 								>
 									<Checkbox
 										checked={!unchecked[ingredient.id]}
@@ -119,7 +119,7 @@ export function AddToListDialog({
 									<label
 										htmlFor={`ingredient-${ingredient.id}`}
 										className={classNames(
-											'flex-1 flex flex-col gap-1',
+											'flex flex-1 flex-col gap-1',
 											isSectionHeader ? 'font-bold' : undefined,
 										)}
 									>
@@ -130,7 +130,7 @@ export function AddToListDialog({
 													? 1
 													: (ingredient.multiplier ?? 1) * multiplier
 											}
-											className="flex-1 block mt-1"
+											className="mt-1 block flex-1"
 										/>
 										{ingredient.note && (
 											<Note className="self-end">{ingredient.note}</Note>

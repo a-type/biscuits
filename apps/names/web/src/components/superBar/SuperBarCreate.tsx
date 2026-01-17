@@ -11,7 +11,7 @@ export function SuperBarCreate({}: SuperBarCreateProps) {
 			<Box d="col" gap="xs" surface color="primary" className="rounded-none">
 				<Button
 					emphasis="ghost"
-					className="w-full justify-center text-wrap rounded-none justify-between gap-sm [--focus:var(--color-primary-dark)]"
+					className="[--focus:var(--color-primary-dark)] w-full justify-center justify-between gap-sm rounded-none text-wrap"
 					loading={loading}
 					onClick={() => {
 						createNew();

@@ -1,17 +1,9 @@
 import { Dialog, DialogContent } from '@a-type/ui';
-import {
-	Outlet,
-	RouteRenderer,
-	useMatchingRoute,
-	useNavigate,
-} from '@verdant-web/react-router';
+import { Outlet, RouteRenderer, useNavigate } from '@verdant-web/react-router';
 import { Suspense } from 'react';
 
-export interface RouteDialogProps {}
-
-export function RouteDialog(props: RouteDialogProps) {
+export function RouteDialog() {
 	const navigate = useNavigate();
-	const upper = useMatchingRoute();
 	return (
 		<Outlet>
 			{(match, params) => (
@@ -27,7 +19,7 @@ export function RouteDialog(props: RouteDialogProps) {
 						}
 					}}
 				>
-					<DialogContent className="important:(max-h-none h-90dvh) important:sm:(max-w-75dvw)">
+					<DialogContent className="important:(h-90dvh max-h-none) important:sm:(max-w-75dvw)">
 						<Suspense>
 							{match ?
 								<RouteRenderer value={match} params={params} />

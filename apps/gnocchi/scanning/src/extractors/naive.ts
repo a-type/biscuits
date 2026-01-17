@@ -10,7 +10,7 @@ import {
 } from './utils.js';
 
 export async function naive($: CheerioAPI): Promise<ExtractorData | null> {
-	let titleElement = findFirstMatch($, [
+	const titleElement = findFirstMatch($, [
 		'#title',
 		'h1',
 		'h2.title',
@@ -22,7 +22,7 @@ export async function naive($: CheerioAPI): Promise<ExtractorData | null> {
 		'.mv-create-title',
 		'o-AssetTitle__a-Headline',
 	]);
-	let authorElement = findFirstMatch($, [
+	const authorElement = findFirstMatch($, [
 		'.recipe .author',
 		'.recipe [class*="author"]',
 		'.author',
@@ -30,7 +30,7 @@ export async function naive($: CheerioAPI): Promise<ExtractorData | null> {
 		'[class*="author"]',
 		'o-Attribution__a-Name',
 	]);
-	let prepTimeElement = findFirstMatch($, [
+	const prepTimeElement = findFirstMatch($, [
 		'.recipe .prep-time',
 		'.recipe .prepTime',
 		'.recipe [class*="prep"][class*="time"]',
@@ -39,7 +39,7 @@ export async function naive($: CheerioAPI): Promise<ExtractorData | null> {
 		'.mv-create-time-prep > .mv-create-time-format',
 		'.RecipePostIntro__infoEntry--prepTime > .RecipePostIntro__infoText',
 	]);
-	let cookTimeElement = findFirstMatch($, [
+	const cookTimeElement = findFirstMatch($, [
 		'.recipe .cook-time',
 		'.recipe .cookTime',
 		'.recipe [class*="cook"][class*="time"]',
@@ -49,7 +49,7 @@ export async function naive($: CheerioAPI): Promise<ExtractorData | null> {
 		'm-RecipeInfo__a-Description--Active',
 		'.RecipePostIntro__infoEntry--cookTime > .RecipePostIntro__infoText',
 	]);
-	let totalTimeElement = findFirstMatch($, [
+	const totalTimeElement = findFirstMatch($, [
 		'.recipe .total-time',
 		'.recipe .totalTime',
 		'.recipe [class*="total"][class*="time"]',
@@ -58,7 +58,7 @@ export async function naive($: CheerioAPI): Promise<ExtractorData | null> {
 		'.mv-create-time-total > .mv-create-time-format',
 		'm-RecipeInfo__a-Description--Total',
 	]);
-	let servingsElement = findFirstMatch($, [
+	const servingsElement = findFirstMatch($, [
 		'.recipe .servings',
 		'.recipe [class*="servings"]',
 		'.servings',
@@ -66,7 +66,7 @@ export async function naive($: CheerioAPI): Promise<ExtractorData | null> {
 		'.mv-create-time-yield > .mv-create-time-format',
 		'o-RecipeInfo__m-Yield o_RecipeInfo__a-Description',
 	]);
-	let ingredientsList = findFirstMatches($, [
+	const ingredientsList = findFirstMatches($, [
 		'.recipe .ingredients .ingredient',
 		'.ingredients .ingredient',
 		'li.ingredient',
@@ -79,7 +79,7 @@ export async function naive($: CheerioAPI): Promise<ExtractorData | null> {
 		'.mv-create-ingredients li',
 		'.o-Ingredients__a-Ingredient',
 	]);
-	let instructionsList = findFirstMatches($, [
+	const instructionsList = findFirstMatches($, [
 		'.recipe .instructions .instruction',
 		'.recipe .steps .step',
 		'.instructions .instruction',
@@ -100,7 +100,7 @@ export async function naive($: CheerioAPI): Promise<ExtractorData | null> {
 		'.mv-create-instructions p',
 		'o-Method__m-Step',
 	]);
-	let imageElement = findFirstMatch($, [
+	const imageElement = findFirstMatch($, [
 		'.recipe img.image',
 		'.recipe img[class*="image"]',
 		'.recipe img',
@@ -109,7 +109,7 @@ export async function naive($: CheerioAPI): Promise<ExtractorData | null> {
 		'img',
 	]);
 
-	let ingredientsText: string[] = [];
+	const ingredientsText: string[] = [];
 	if (ingredientsList) {
 		ingredientsList.each(function (i, el) {
 			ingredientsText.push($(el).text().trim());

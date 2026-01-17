@@ -24,8 +24,8 @@ export function HomePage({}: HomePageProps) {
 				render={<HideWhileKeyboardOpen />}
 			>
 				<Box items="center" gap="sm">
-					<AppIcon className="w-32px h-32px" />
-					<h1 className="font-fancy m-0 text-md font-semibold p-0">Names</h1>
+					<AppIcon className="h-32px w-32px" />
+					<h1 className="font-fancy m-0 p-0 text-md font-semibold">Names</h1>
 				</Box>
 				<Box items="center" gap="sm">
 					<InstallButton />

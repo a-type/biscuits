@@ -48,7 +48,7 @@ export function PublishedRecipes({ className }: PublishedRecipesProps) {
 		[];
 
 	return (
-		<Card.Grid>
+		<Card.Grid className={className}>
 			{recipes.map((recipe) => (
 				<PublishedRecipeCard key={recipe.id} recipe={recipe} />
 			))}

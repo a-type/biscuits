@@ -44,7 +44,7 @@ export function PersonTagEditor({ person, className }: PersonTagEditorProps) {
 		tags.add(tag.get('name'));
 	};
 	return (
-		<div className={clsx('flex flex-wrap gap-1 items-center', className)}>
+		<div className={clsx('flex flex-wrap items-center gap-1', className)}>
 			{tags?.map((tag) => (
 				<Suspense key={tag}>
 					<TagDisplay key={tag} tag={tag} onRemove={removeTag} />
@@ -52,7 +52,7 @@ export function PersonTagEditor({ person, className }: PersonTagEditorProps) {
 			))}
 			<Dialog>
 				<Dialog.Trigger render={<Button size="small" />}>
-					<Icon name="plus" className="w-10px h-10px" />
+					<Icon name="plus" className="h-10px w-10px" />
 					<span className="text-xs">tag</span>
 				</Dialog.Trigger>
 				<Dialog.Content className="flex flex-col">
@@ -69,11 +69,11 @@ export function PersonTagEditor({ person, className }: PersonTagEditorProps) {
 									<Button size="small" className="min-h-24px leading-1" />
 								}
 							>
-								<Icon name="plus" className="w-10px h-10px" />
+								<Icon name="plus" className="h-10px w-10px" />
 								<span className="text-xs">New tag</span>
 							</Collapsible.Trigger>
-							<Collapsible.Content className="w-full ">
-								<Box className="w-full mt-sm" surface color="primary" p>
+							<Collapsible.Content className="w-full">
+								<Box className="mt-sm w-full" surface color="primary" p>
 									<TagCreateForm
 										onCreate={createTag}
 										defaultColor="leek"

@@ -25,7 +25,7 @@ function AppIcons() {
 
 	return (
 		<div
-			className="grid grid-cols-2 gap-4 h-auto p-4"
+			className="grid grid-cols-2 h-auto gap-4 p-4"
 			style={{
 				width: 40 * 2 + 16 + 32,
 			}}
@@ -40,13 +40,13 @@ function AppIcons() {
 					return (
 						<button
 							key={app.id}
-							className="bg-gray-light rounded p-0 w-auto h-auto flex appearance-none border-none cursor-pointer"
+							className="h-auto w-auto flex cursor-pointer appearance-none rounded border-none p-0 bg-gray-light"
 							onClick={() => goTo(app.id)}
 						>
 							<img
 								src={iconUrl.toString()}
 								alt={app.name}
-								className="w-[40px] h-[40px] block"
+								className="block h-[40px] w-[40px]"
 							/>
 						</button>
 					);

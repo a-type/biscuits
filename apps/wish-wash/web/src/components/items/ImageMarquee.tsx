@@ -10,10 +10,10 @@ export interface ImageMarqueeProps {
 /**
  * Automatically flips through a list of images.
  */
-export function ImageMarquee({ images, className }: ImageMarqueeProps) {
+export function ImageMarquee({ images, ...rest }: ImageMarqueeProps) {
 	return (
-		<Marquee>
-			{images.map((image, i) => (
+		<Marquee {...rest}>
+			{images.map((image) => (
 				<ImageMarqueeItem key={image.id} image={image} />
 			))}
 		</Marquee>

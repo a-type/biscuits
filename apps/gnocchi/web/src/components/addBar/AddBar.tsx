@@ -1,7 +1,7 @@
 import { AddToListDialog } from '@/components/recipes/viewer/AddToListDialog.jsx';
-import useMergedRef from '@/hooks/useMergedRef.js';
 import { Input, Popover, useSize } from '@a-type/ui';
 import { stopPropagation } from '@a-type/utils';
+import { useMergedRef } from '@biscuits/client';
 import classNames from 'classnames';
 import { Suspense, forwardRef, useRef, useState } from 'react';
 import { AddInput } from './AddInput.jsx';
@@ -59,7 +59,7 @@ export const AddBarImpl = forwardRef<HTMLDivElement, AddBarProps>(
 		} = useAddBarCombobox({
 			setSuggestionPrompt,
 			allSuggestions,
-			onAdd: (items: string[], focusInput: boolean) => {
+			onAdd: (items: string[]) => {
 				onAdd(items);
 				if (!keepOpenOnSelect) {
 					onOpenChange(false);
@@ -96,17 +96,17 @@ export const AddBarImpl = forwardRef<HTMLDivElement, AddBarProps>(
 					<Popover.Content
 						anchor={innerRef}
 						forceMount
-						disableBlur
 						radius="md"
 						align="start"
 						sideOffset={12}
 						initialFocus={false}
 						finalFocus={submitButtonRef}
+						// eslint-disable-next-line react-hooks/refs
 						{...getMenuProps({
 							ref: contentRef,
 						})}
 						className={classNames(
-							'overflow-x-hidden overflow-y-auto overscroll-contain max-h-[calc(var(--viewport-height,40dvh)-140px)] lg:max-h-50dvh rounded-lg w-full max-w-none gap-4 p-3',
+							'max-h-[calc(var(--viewport-height,40dvh)-140px)] max-w-none w-full gap-4 overflow-x-hidden overscroll-contain rounded-lg p-3 overflow-y-auto lg:max-h-50dvh',
 							'shadow-xl',
 						)}
 						onPointerDown={stopPropagation}
@@ -179,7 +179,7 @@ function Skeleton({ className }: { className?: string }) {
 	return (
 		<div
 			className={classNames(
-				'layer-components:(flex flex-1 w-full flex-row gap-2)',
+				'layer-components:(w-full flex flex-1 flex-row gap-2)',
 				className,
 			)}
 		>

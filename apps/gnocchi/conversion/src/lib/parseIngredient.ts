@@ -1,4 +1,3 @@
-import { isAllAdjectives } from './adjectives.js';
 import { commentsParser, extractParentheticals } from './commentsParser.js';
 import { depluralize } from './depluralize.js';
 import {
@@ -13,7 +12,6 @@ import { unitParser } from './unitParser.js';
 
 const DEFAULT_UNIT = '';
 const DEFAULT_QUANTITY = 1;
-const DEFAULT_FOOD = null;
 
 /**
  * Algorithmic process:
@@ -54,12 +52,14 @@ export function parseIngredient(source: string): {
 	return {
 		original: source,
 		sanitized,
-		quantity: numberResult.matched
-			? numberParser(numberResult.matched.trim())
-			: DEFAULT_QUANTITY,
-		unit: unitResult.matched
-			? depluralize(unitParser(unitResult.matched.trim())).toLowerCase()
-			: DEFAULT_UNIT,
+		quantity:
+			numberResult.matched ?
+				numberParser(numberResult.matched.trim())
+			:	DEFAULT_QUANTITY,
+		unit:
+			unitResult.matched ?
+				depluralize(unitParser(unitResult.matched.trim())).toLowerCase()
+			:	DEFAULT_UNIT,
 		food: depluralize(food).toLowerCase(),
 		comments: extractedComments.concat(
 			commentResult.matched ? commentsParser(commentResult.matched.trim()) : [],

@@ -8,10 +8,10 @@ export function PinIcon({ isPinned }: PinIconProps) {
 	if (isPinned) {
 		return (
 			<div className="flex">
-				<Icon name="pin" className="relative top--2px left-0px" />
+				<Icon name="pin" className="relative left-0px top--2px" />
 				<Icon
 					name="x"
-					className="absolute w-10px h-10px bottom-5px right-8px"
+					className="absolute bottom-5px right-8px h-10px w-10px"
 				/>
 			</div>
 		);

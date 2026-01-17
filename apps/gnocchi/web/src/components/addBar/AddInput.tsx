@@ -1,4 +1,3 @@
-import useMergedRef from '@/hooks/useMergedRef.js';
 import {
 	Button,
 	ButtonProps,
@@ -7,6 +6,7 @@ import {
 	InputProps,
 	useParticles,
 } from '@a-type/ui';
+import { useMergedRef } from '@biscuits/client';
 import classNames from 'classnames';
 import { forwardRef, useEffect, useRef } from 'react';
 import { useSnapshot } from 'valtio';
@@ -43,7 +43,7 @@ export const AddInput = forwardRef<HTMLDivElement, AddInputProps>(
 			<div
 				data-state={isOpen ? 'open' : 'closed'}
 				className={classNames(
-					'layer-components:(flex gap-2 flex-row w-full relative)',
+					'layer-components:(relative w-full flex flex-row gap-2)',
 					className,
 				)}
 				{...rest}
@@ -53,12 +53,12 @@ export const AddInput = forwardRef<HTMLDivElement, AddInputProps>(
 					data-test="grocery-list-add-input"
 					name="text"
 					required
-					className="flex-1 pr-[72px] max-w-none"
+					className="max-w-none flex-1 pr-[72px]"
 					autoComplete="off"
 					tabIndex={disableInteraction ? -1 : 0}
 					{...inputProps}
 				/>
-				<div className="absolute flex flex-row-reverse gap-1 right-0px top-0px">
+				<div className="absolute right-0px top-0px flex flex-row-reverse gap-1">
 					<SubmitButton
 						{...submitButtonProps}
 						disableInteraction={disableInteraction}
@@ -108,13 +108,13 @@ function SubmitButton({
 				);
 			}
 		}
-	}, [justAddedSomething]);
+	}, [justAddedSomething, particles]);
 
 	return (
 		<Button
 			data-test="grocery-list-add-button"
 			emphasis="primary"
-			className="md:(w-35px h-35px p-0) items-center justify-center relative z-2"
+			className="relative z-2 items-center justify-center md:(h-35px w-35px p-0)"
 			aria-label={inputIsUrl ? 'scan recipe page' : 'add item'}
 			tabIndex={disableInteraction ? -1 : 0}
 			{...rest}

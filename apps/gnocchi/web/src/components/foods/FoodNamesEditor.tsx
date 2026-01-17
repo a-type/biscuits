@@ -23,7 +23,7 @@ export function FoodNamesEditor({ names }: FoodNamesEditorProps) {
 	const unique = Array.from(new Set(asArray));
 
 	return (
-		<div className="flex flex-row items-center flex-wrap gap-2">
+		<div className="flex flex-row flex-wrap items-center gap-2">
 			{unique.map((name) => (
 				<FoodNameTag
 					key={name}
@@ -44,7 +44,7 @@ function FoodNameTag({
 	onDelete: (name: string) => void;
 }) {
 	return (
-		<div className="inline-flex flex-row items-center whitespace-nowrap gap-1 px-3 py-1 rounded-2xl border border-solid border-black text-sm max-w-full overflow-hidden">
+		<div className="max-w-full inline-flex flex-row items-center gap-1 overflow-hidden whitespace-nowrap border rounded-2xl border-solid px-3 py-1 text-sm border-black">
 			<span className="overflow-hidden text-ellipsis">{name}</span>
 			<Button
 				onClick={() => onDelete(name)}

@@ -34,7 +34,7 @@ export function PinnedRecipes({ className }: PinnedRecipesProps) {
 			open={show}
 			className={classNames('flex flex-col', className)}
 		>
-			<div className="flex flex-row gap-2 items-center">
+			<div className="flex flex-row items-center gap-2">
 				<H2 className="mb-0">Pinned</H2>
 				<HelpTip>
 					Pins help you organize upcoming dishes. They expire after 3 weeks.
@@ -54,16 +54,16 @@ function PinnedRecipeListItem({ recipe }: { recipe: Recipe }) {
 	const { title } = hooks.useWatch(recipe);
 
 	return (
-		<div className="flex flex-row items-center gap-1 border border-solid border-gray rounded-lg px-3 py-2">
+		<div className="flex flex-row items-center gap-1 border rounded-lg border-solid px-3 py-2 border-gray">
 			<RecipePinToggle recipe={recipe} />
 			<Link
 				to={makeRecipeLink(recipe, '')}
 				className={classNames(
-					'flex-1 flex flex-col gap-2px min-w-0',
+					'min-w-0 flex flex-1 flex-col gap-2px',
 					title.length > 20 && 'text-sm',
 				)}
 			>
-				<div className="pl-2 text-md overflow-hidden text-ellipsis whitespace-nowrap min-w-0">
+				<div className="min-w-0 overflow-hidden text-ellipsis whitespace-nowrap pl-2 text-md">
 					{title}
 				</div>
 			</Link>

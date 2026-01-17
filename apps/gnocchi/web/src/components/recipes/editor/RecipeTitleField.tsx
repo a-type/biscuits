@@ -19,7 +19,7 @@ export function RecipeTitleField({ recipe }: RecipeTitleFieldProps) {
 					updatedAt: Date.now(),
 				});
 			}}
-			className="important:text-3xl max-w-full w-full"
+			className="max-w-full w-full important:text-3xl"
 			autoSelect
 		/>
 	);

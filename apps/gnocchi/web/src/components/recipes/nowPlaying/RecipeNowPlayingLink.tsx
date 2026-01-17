@@ -30,10 +30,10 @@ export function RecipeNowPlayingLink({ recipe }: { recipe: Recipe }) {
 		<div className="flex flex-row items-center justify-between gap-2 pr-2">
 			<Link
 				to={makeRecipeLink(recipe, '')}
-				className="flex flex-row gap-2 items-center p-2 w-full overflow-hidden focus-visible:bg-gray-light focus-visible:outline-none"
+				className="w-full flex flex-row items-center gap-2 overflow-hidden p-2 focus-visible:outline-none focus-visible:bg-gray-light"
 			>
 				<PieProgress value={progress} />
-				<div className="font-bold max-w-full text-ellipsis whitespace-nowrap text-sm overflow-hidden min-w-0">
+				<div className="max-w-full min-w-0 overflow-hidden text-ellipsis whitespace-nowrap text-sm font-bold">
 					{title}
 				</div>
 			</Link>
@@ -57,7 +57,7 @@ function PieProgress({ value }: { value: number }) {
 	return (
 		<svg
 			viewBox="0 0 32 32"
-			className="w-32px h-32px flex-shrink-0 rounded-full overflow-hidden border-light"
+			className="h-32px w-32px flex-shrink-0 overflow-hidden border-light rounded-full"
 		>
 			<circle
 				r="50%"
@@ -73,7 +73,7 @@ function PieProgress({ value }: { value: number }) {
 				cy="50%"
 				fill="transparent"
 				strokeDasharray={`${value * circumference} ${circumference}`}
-				className="stroke-primary stroke-32px transform rotate-270 origin-center"
+				className="origin-center rotate-270 transform stroke-32px stroke-primary"
 				opacity={0.7 + value * 0.3}
 			/>
 			{value >= 1 && (
@@ -82,7 +82,7 @@ function PieProgress({ value }: { value: number }) {
 					<path
 						d="M 12 16 L 16 20 L 22 12"
 						fill="none"
-						className="stroke-white stroke-2"
+						className="stroke-2 stroke-white"
 					/>
 				</>
 			)}

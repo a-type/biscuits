@@ -13,13 +13,13 @@ export function PantryListSectionTabs({}: PantryListSectionTabsProps) {
 		>
 			<TabsList
 				className={clsx(
-					'[&>*]:text-xs rounded-full',
+					'rounded-full [&>*]:text-xs',
 					filter === 'frozen' && 'palette-accent',
 				)}
 				color="primary"
 			>
 				<TabsTrigger
-					className="text-nowrap flex flex-col items-center rounded-full sm:flex-row"
+					className="flex flex-col items-center rounded-full text-nowrap sm:flex-row"
 					value="purchased"
 				>
 					<Icon name="check" />
@@ -27,13 +27,13 @@ export function PantryListSectionTabs({}: PantryListSectionTabsProps) {
 				</TabsTrigger>
 				<TabsTrigger
 					value="frozen"
-					className="text-nowrap flex flex-col sm:flex-row rounded-full"
+					className="flex flex-col rounded-full text-nowrap sm:flex-row"
 				>
 					<Icon name="snowflake" />
 					<span className="">Frozen</span>
 				</TabsTrigger>
 				<TabsTrigger
-					className="text-nowrap flex flex-col items-center rounded-full sm:flex-row"
+					className="flex flex-col items-center rounded-full text-nowrap sm:flex-row"
 					value="all"
 				>
 					<Icon name="food" />

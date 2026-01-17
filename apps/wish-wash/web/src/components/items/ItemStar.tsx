@@ -21,7 +21,7 @@ export function ItemStar({ item, className }: ItemStarProps) {
 			<Icon
 				name="star"
 				className={clsx(
-					'w-20px h-20px',
+					'h-20px w-20px',
 					prioritizedField.value && 'fill-primary',
 				)}
 			/>

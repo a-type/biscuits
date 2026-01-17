@@ -9,7 +9,7 @@ import v2Schema, {
 export default createMigration<V1Types, V2Types>(
 	v1Schema,
 	v2Schema,
-	async ({ migrate, info, mutations, queries }) => {
+	async ({ mutations, queries }) => {
 		// copy tags to tagMetadata
 		const allTags = await queries.tags.findAll();
 		for (const tag of allTags) {

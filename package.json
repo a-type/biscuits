@@ -8,7 +8,7 @@
 		"dev": "turbo run dev",
 		"build": "turbo run build",
 		"tsc": "turbo run tsc",
-		"lint": "turbo run lint",
+		"lint": "eslint ./packages ./web ./workers ./apps",
 		"test": "turbo run test",
 		"prepare": "husky install",
 		"backup-prod": "node ./scripts/backup-prod.mjs",
@@ -24,20 +24,24 @@
 	"license": "ISC",
 	"dependencies": {
 		"@clack/prompts": "0.7.0",
+		"@eslint/js": "catalog:",
 		"cp-tpl": "1.0.9",
+		"eslint": "catalog:",
+		"eslint-plugin-react": "catalog:",
+		"eslint-plugin-react-hooks": "catalog:",
+		"gql.tada": "catalog:",
 		"husky": "^8.0.3",
 		"kill-port": "2.0.1",
 		"prettier": "3.4.2",
 		"turbo": "^2.3.3",
 		"typescript": "catalog:",
 		"typescript-eslint": "catalog:",
-		"eslint": "catalog:",
-		"eslint-plugin-react": "catalog:",
-		"eslint-plugin-react-hooks": "catalog:",
-		"@eslint/js": "catalog:",
-		"gql.tada": "catalog:"
+		"@biscuits/uno-config": "workspace:*"
 	},
 	"volta": {
 		"node": "22.12.0"
+	},
+	"devDependencies": {
+		"@unocss/eslint-config": "^66.6.0"
 	}
 }

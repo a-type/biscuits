@@ -60,7 +60,7 @@ export function CreateListOptions({
 							required
 							className="w-full"
 						/>
-						<div className="row w-full justify-between">
+						<div className="w-full row justify-between">
 							<Button type="button" onClick={() => setStage('type')}>
 								<Icon name="arrowLeft" />
 								Back

@@ -15,6 +15,7 @@ export interface MeetupSelectProps {
 	emptyLabel?: string;
 }
 
+const now = Date.now();
 export function MeetupSelect({ children, id, emptyLabel }: MeetupSelectProps) {
 	const client = hooks.useClient();
 	const info = hooks.useCollaborationInfo('default');
@@ -30,7 +31,7 @@ export function MeetupSelect({ children, id, emptyLabel }: MeetupSelectProps) {
 
 	let location = meetup?.get('location');
 	const createdAt = meetup?.get('createdAt') || 0;
-	if (createdAt < Date.now() - 1000 * 60 * 60) {
+	if (createdAt < now - 1000 * 60 * 60) {
 		location = undefined;
 	}
 
@@ -66,8 +67,8 @@ export function MeetupSelect({ children, id, emptyLabel }: MeetupSelectProps) {
 		>
 			<Trigger
 				className={classNames(
-					!children && 'py-3 px-6',
-					!!location && 'bg-accent-wash color-accent-dark',
+					!children && 'px-6 py-3',
+					!!location && 'color-accent-dark bg-accent-wash',
 				)}
 				id={id}
 				render={

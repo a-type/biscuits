@@ -228,6 +228,12 @@ builder.objectType('PublishedWishlistData', {
 		hidePurchases: t.exposeBoolean('hidePurchases', { nullable: true }),
 		items: t.field({
 			type: ['PublishedWishlistItem'],
+			args: {
+				hidePurchases: t.arg.boolean({
+					description:
+						'Whether to hide purchased items. Defaults to the wishlist setting. Defaults to true if this is your list, false otherwise.',
+				}),
+			},
 			resolve: async (source, { hidePurchases: userHidePurchases }, ctx) => {
 				const purchases = await ctx.dataloaders.wishlistPurchasesLoader.load(
 					source.id,
@@ -236,11 +242,13 @@ builder.objectType('PublishedWishlistData', {
 					throw purchases;
 				}
 				const isUsersList = ctx.session?.userId === source.wishlist.publishedBy;
-				userHidePurchases || (isUsersList && userHidePurchases !== false);
+
 				return processItems(
 					source.items,
 					purchases,
-					!!source.hidePurchases,
+					userHidePurchases ||
+						(isUsersList && userHidePurchases !== false) ||
+						!!source.hidePurchases,
 				).map((item) => assignTypeName('PublishedWishlistItem')(item));
 			},
 		}),

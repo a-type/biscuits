@@ -157,9 +157,9 @@ export function usePurchaseItems() {
 				max: null,
 			});
 			await Promise.all(items.map((item) => purchaseItem(item, batchName)));
-			batch.flush();
+			batch.commit();
 		},
-		[client],
+		[client, purchaseItem],
 	);
 }
 
@@ -191,7 +191,7 @@ export function useSetItemCategory() {
 				lastInteractedCategory: categoryId,
 			});
 		},
-		[client],
+		[client, upsertFoodCategoryAssignment],
 	);
 }
 
@@ -486,7 +486,7 @@ export function useAddRecipeIngredients() {
 								if (best) {
 									food = best.get('canonicalName');
 								}
-							} catch (err) {
+							} catch {
 								// ignore
 							}
 						}

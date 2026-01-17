@@ -148,27 +148,27 @@ function ChecklistItem({
 	}, [completed, particles]);
 
 	return (
-		<div className="w-full p-2 flex flex-col gap-2">
-			<div className="row w-full">
+		<div className="w-full flex flex-col gap-2 p-2">
+			<div className="w-full row">
 				<CheckboxRoot
 					checked={completed}
 					onCheckedChange={mainOnChecked}
-					className="w-32px h-32px rounded-full touch-none flex items-center justify-center color-black palette-accent"
+					className="palette-accent h-32px w-32px flex touch-none items-center justify-center rounded-full color-black"
 				>
 					<Icon name="check" />
 				</CheckboxRoot>
-				<div className="flex flex-col items-start flex-1">
-					<div className="w-full flex flex-row items-center gap-2 flex-wrap">
+				<div className="flex flex-1 flex-col items-start">
+					<div className="w-full flex flex-row flex-wrap items-center gap-2">
 						{onDescriptionChanged && editing ?
 							<LiveUpdateTextField
 								value={description}
 								onChange={onDescriptionChanged}
 								placeholder="What is it?"
-								className="flex-1 min-w-50%"
+								className="min-w-50% flex-1"
 								autoSelect
 								autoFocus
 							/>
-						:	<label className="font-bold select-none">{description}</label>}
+						:	<label className="select-none font-bold">{description}</label>}
 						{!!onQuantityChanged && editing && (
 							<NumberStepper
 								value={computedQuantity}
@@ -192,7 +192,7 @@ function ChecklistItem({
 					</div>
 					<Slider.Base
 						className={clsx(
-							'flex-1 pointer-events-none w-full',
+							'pointer-events-none w-full flex-1',
 							completed ? 'palette-accent' : 'palette-primary',
 						)}
 						value={completedQuantity}
@@ -207,11 +207,11 @@ function ChecklistItem({
 						ref={barRef}
 					>
 						<Slider.Track className="pointer-events-none">
-							<Slider.Indicator className="transition-all pointer-events-none" />
+							<Slider.Indicator className="pointer-events-none transition-all" />
 							{new Array(computedQuantity - 1).fill(0).map((_, i) => (
 								<div
 									key={i}
-									className="w-1px h-full bg-gray-dark absolute top-0 left-0 pointer-events-none"
+									className="pointer-events-none absolute left-0 top-0 h-full w-1px bg-gray-dark"
 									style={{
 										left: `${(100 / computedQuantity) * (i + 1)}%`,
 									}}
@@ -219,8 +219,8 @@ function ChecklistItem({
 							))}
 							<Slider.Thumb
 								className={classNames(
-									'transition-all ring-1 w-8px rounded-sm pointer-events-initial',
-									completed && 'bg-main ring-black ring-1 color-white',
+									'pointer-events-initial w-8px rounded-sm ring-1 transition-all',
+									completed && 'ring-1 color-white bg-main ring-black',
 									'flex items-center justify-center',
 									// completedQuantity === 0 && 'opacity-0',
 								)}
@@ -229,7 +229,7 @@ function ChecklistItem({
 					</Slider.Base>
 				</div>
 			</div>
-			<div className="flex flex-row justify-between gap-2 items-center text-xs color-gray-dark">
+			<div className="flex flex-row items-center justify-between gap-2 text-xs color-gray-dark">
 				{subline && <div className="italic">{subline}</div>}
 				<span className="ml-auto">
 					{completedQuantity} / {computedQuantity}

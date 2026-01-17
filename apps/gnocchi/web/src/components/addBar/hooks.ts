@@ -401,7 +401,7 @@ export function useAddBarCombobox({
 					} else {
 						await onAdd([selected.name], focusInput);
 					}
-				} catch (e) {
+				} catch {
 					setInputValue(inputValue || '');
 				}
 			} else if (selected.type === 'recipe') {

@@ -32,7 +32,7 @@ export function ColorBreakdown({ color, className }: ColorBreakdownProps) {
 			step="color"
 			content="This section shows the selected color and mixing helpers."
 		>
-			<div className={clsx('flex flex-row gap-3 justify-around', className)}>
+			<div className={clsx('flex flex-row justify-around gap-3', className)}>
 				<PieChart
 					segments={[
 						{
@@ -52,9 +52,9 @@ export function ColorBreakdown({ color, className }: ColorBreakdownProps) {
 						},
 					]}
 				/>
-				<div className="h-100% w-32px flex-shrink-0 bg-gradient-to-b from-#000000 to-#ffffff relative">
+				<div className="relative h-100% w-32px flex-shrink-0 from-#000000 to-#ffffff bg-gradient-to-b">
 					<div
-						className="w-full h-5px absolute"
+						className="absolute h-5px w-full"
 						style={{
 							top: `${hsl.lightness}%`,
 							background: hsl.lightness > 50 ? 'black' : 'white',
@@ -91,6 +91,7 @@ function PieChart({
 	const segmentLabelRadians = segments.map(({ percent }) => {
 		const angle = (percent / 100) * Math.PI * 2;
 		const angleCenter = totalAngle + angle / 2 - Math.PI / 2;
+		// eslint-disable-next-line react-hooks/immutability
 		totalAngle += angle;
 		return angleCenter;
 	});
@@ -104,11 +105,11 @@ function PieChart({
 				backgroundImage: gradient,
 			}}
 			className={clsx(
-				'rounded-full aspect-1 relative transition-all',
+				'relative aspect-1 rounded-full transition-all',
 				className,
 			)}
 		>
-			<div className="left-1/2 top-1/2 absolute overflow-visible">
+			<div className="absolute left-1/2 top-1/2 overflow-visible">
 				{/* Render percentage values in the correct positions */}
 				{segments.map(({ label, percent }, i) => {
 					const x = Math.cos(segmentLabelRadians[i]);
@@ -117,7 +118,7 @@ function PieChart({
 					return (
 						<span
 							key={label}
-							className="absolute rounded-full py-1 px-3 bg-white border-default"
+							className="absolute border-default rounded-full px-3 py-1 bg-white"
 							style={{
 								transform: `translate(-50%, -50%) translate(calc(var(--height) * 0.33 * ${x}), calc(var(--height) * 0.33 * ${y}))`,
 							}}

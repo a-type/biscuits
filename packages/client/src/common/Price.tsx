@@ -17,7 +17,7 @@ export function Price({
 	const currencySymbol =
 		currencySymbols[currency?.toUpperCase() ?? 'USD'] ?? '$';
 	return (
-		<span className={clsx('font-bold text-nowrap', className)} {...rest}>
+		<span className={clsx('text-nowrap font-bold', className)} {...rest}>
 			{currencySymbol}
 			{((value ?? 0) / 100).toFixed(2)} / {period}
 		</span>

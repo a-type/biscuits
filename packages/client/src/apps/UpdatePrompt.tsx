@@ -16,7 +16,7 @@ export function UpdatePrompt({}: UpdatePromptProps) {
 	}
 
 	return (
-		<div className="flex flex-col gap-3 items-start bg-primary-wash color-black p-4 rounded-lg border border-solid border-primary w-full">
+		<div className="w-full flex flex-col items-start gap-3 border rounded-lg border-solid p-4 color-black bg-primary-wash border-primary">
 			<div>
 				<Icon name="star" />
 				&nbsp;App update available!

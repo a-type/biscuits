@@ -23,7 +23,7 @@ export function ItemNote({ item }: ItemNoteProps) {
 	return (
 		<Note>
 			<LiveUpdateTextField
-				className="!border-none outline-none resize-none w-full !rounded-none !ring-none h-full p-0 m-0 [font-family:inherit] text-inherit [font-size:inherit] [font-style:inherit] bg-transparent !ring-none focus:(outline-none bg-transparent border-transparent !shadow-none)"
+				className="[font-family:inherit] [font-size:inherit] [font-style:inherit] m-0 h-full w-full resize-none p-0 text-inherit outline-none bg-transparent !rounded-none !border-none focus:(outline-none bg-transparent border-transparent) !ring-none !ring-none !focus:shadow-none"
 				placeholder="Add a note..."
 				autoFocus={show}
 				textArea

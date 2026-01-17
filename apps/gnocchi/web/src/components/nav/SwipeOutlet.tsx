@@ -47,7 +47,7 @@ export function SwipeOutlet({
 		spring.start({
 			x: 0,
 		});
-	}, [match?.route]);
+	}, [match?.route, spring]);
 
 	const goToLeft = () => {
 		if (!leftPath) {
@@ -141,7 +141,7 @@ export function SwipeOutlet({
 		<animated.div
 			{...bind()}
 			className={classNames(
-				'relative overflow-hidden flex-1 w-full h-full touch-pan-y',
+				'relative h-full w-full flex-1 touch-pan-y overflow-hidden',
 				'[--now-playing-bottom:0px]',
 				className,
 			)}
@@ -154,7 +154,7 @@ export function SwipeOutlet({
 						transform: style.x.to((v) => `translateX(${v}px)`),
 					}}
 					className={classNames(
-						'absolute inset-0 left--100% w-full h-full overflow-hidden',
+						'absolute inset-0 left--100% h-full w-full overflow-hidden',
 						{
 							'will-change-transform': swipeDirection !== undefined,
 						},
@@ -176,14 +176,14 @@ export function SwipeOutlet({
 					transform: style.x.to((v) => `translateX(${v}px)`),
 					// z: style.z,
 				}}
-				className={classNames('w-full h-full', {
+				className={classNames('h-full w-full', {
 					'will-change-transform': swipeDirection !== undefined,
 				})}
 			>
 				<div
 					className={classNames(
-						'flex flex-col items-center w-full h-full',
-						scroll && 'overflow-y-auto touch-pan-y',
+						'h-full w-full flex flex-col items-center',
+						scroll && 'touch-pan-y overflow-y-auto',
 					)}
 					ref={scrollContainerRef}
 				>
@@ -198,7 +198,7 @@ export function SwipeOutlet({
 						transform: style.x.to((v) => `translateX(${v}px)`),
 					}}
 					className={classNames(
-						'absolute inset-0 left-100% w-full h-full overflow-hidden',
+						'absolute inset-0 left-100% h-full w-full overflow-hidden',
 						{
 							'will-change-transform': swipeDirection !== undefined,
 						},

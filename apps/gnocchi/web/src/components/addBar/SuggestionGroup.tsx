@@ -17,10 +17,10 @@ export function SuggestionGroup({
 }) {
 	return (
 		<div className={clsx('flex flex-col gap-2', className)} {...rest}>
-			<div className="text-xs uppercase color-gray-dark font-bold m2-1">
+			<div className="m2-1 text-xs font-bold uppercase color-gray-dark">
 				{title}
 			</div>
-			<div className={clsx('flex gap-2 flex-wrap')}>
+			<div className={clsx('flex flex-wrap gap-2')}>
 				{suggestions.map((suggestion) => (
 					<SuggestionItem
 						key={suggestion.id}
@@ -57,7 +57,7 @@ export const SuggestionItem = forwardRef<
 			ref={ref}
 			data-index={value.index}
 			className={clsx(
-				'rounded-full font-normal border-gray max-w-100% overflow-hidden text-ellipsis flex flex-row',
+				'max-w-100% flex flex-row overflow-hidden text-ellipsis rounded-full font-normal border-gray',
 				'[&[aria-selected="true"]]:bg-primary-wash',
 				className,
 			)}

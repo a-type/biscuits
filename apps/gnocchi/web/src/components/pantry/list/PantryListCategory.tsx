@@ -82,7 +82,7 @@ export function PantryListCategory({
 				</CardGrid>
 			</CategoryItems>
 			{showShowMore && (
-				<div className="flex justify-center mt-4">
+				<div className="mt-4 flex justify-center">
 					<Button emphasis="ghost" onClick={pagination.loadMore}>
 						Show more
 					</Button>

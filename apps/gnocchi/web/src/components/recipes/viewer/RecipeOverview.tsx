@@ -76,7 +76,7 @@ export function RecipeOverview({ recipe }: RecipeOverviewProps) {
 
 	return (
 		<>
-			<div id="pageTop" className="w-0 h-0" />
+			<div id="pageTop" className="h-0 w-0" />
 			<HeaderBar backUrl="/recipes">
 				<CookingActionBar recipe={recipe} className="flex-1" />
 			</HeaderBar>
@@ -84,17 +84,17 @@ export function RecipeOverview({ recipe }: RecipeOverviewProps) {
 				<H2>This is your copy!</H2>
 				<P>Feel free to make changes, add notes, etc.</P>
 			</OnboardingBanner>
-			<div className="flex flex-col gap-6 items-start w-full pb-33dvh">
+			<div className="w-full flex flex-col items-start gap-6 pb-33dvh">
 				<TitleAndImageLayout>
 					<TitleContainer>
-						<div className="w-full flex flex-col items-start self-start text-xs my-3 gap-4">
+						<div className="my-3 w-full flex flex-col items-start self-start gap-4 text-xs">
 							<H1>{title}</H1>
-							<div className="flex flex-row gap-2 items-start">
+							<div className="flex flex-row items-start gap-2">
 								<RecipeNote recipe={recipe} />
 							</div>
 
-							<div className="flex flex-col justify-between items-start w-full gap-3">
-								<div className="flex flex-row gap-1 flex-wrap palette-gray">
+							<div className="w-full flex flex-col items-start justify-between gap-3">
+								<div className="palette-gray flex flex-row flex-wrap gap-1">
 									<Chip
 										className="cursor-pointer"
 										onClick={() => {
@@ -105,7 +105,7 @@ export function RecipeOverview({ recipe }: RecipeOverviewProps) {
 										render={
 											<Button
 												emphasis="ghost"
-												className="font-normal text-xs"
+												className="text-xs font-normal"
 											/>
 										}
 									>
@@ -137,7 +137,7 @@ export function RecipeOverview({ recipe }: RecipeOverviewProps) {
 									{url && (
 										<Chip color="accent" render={<Link to={url} newTab />}>
 											View original{' '}
-											<Icon name="new_window" className="ml-2 relative b--1" />
+											<Icon name="new_window" className="relative ml-2 b--1" />
 										</Chip>
 									)}
 									{copyOf && (
@@ -165,12 +165,12 @@ export function RecipeOverview({ recipe }: RecipeOverviewProps) {
 				</Suspense>
 
 				<Divider />
-				<div className="w-full gap-4 flex flex-col">
-					<div className="w-auto flex flex-row items-center justify-between self-start gap-6 w-full">
+				<div className="w-full flex flex-col gap-4">
+					<div className="w-auto w-full flex flex-row items-center self-start justify-between gap-6">
 						<H2>Ingredients</H2>
 						<RecipeMultiplierField recipe={recipe} />
 					</div>
-					<div className="flex flex-row gap-2 justify-between items-center w-full">
+					<div className="w-full flex flex-row items-center justify-between gap-2">
 						<AddToListButton size="small" emphasis="primary" recipe={recipe}>
 							<Icon name="add_to_list" />
 							<span>Bulk add...</span>
@@ -224,11 +224,11 @@ function OverviewNowPlaying({ recipe }: { recipe: Recipe }) {
 	const { showCookTools } = useSnapshot(viewerState);
 	return (
 		<PageNowPlaying unstyled>
-			<div className="flex flex-row gap-2 items-center justify-end w-full">
+			<div className="w-full flex flex-row items-center justify-end gap-2">
 				{showCookTools && (
 					<CookingToolbar
 						recipe={recipe}
-						className="animate-pop-up animate-duration-200 animate-springy"
+						className="animate-springy animate-pop-up animate-duration-200"
 					/>
 				)}
 			</div>
@@ -281,7 +281,7 @@ function PostCooking({ recipe }: { recipe: Recipe }) {
 
 	return (
 		<Suspense>
-			<div className="w-full flex flex-col items-stretch mt-10 gap-3">
+			<div className="mt-10 w-full flex flex-col items-stretch gap-3">
 				<AddImagePrompt recipe={recipe} />
 				<AddNotePrompt recipe={recipe} />
 			</div>

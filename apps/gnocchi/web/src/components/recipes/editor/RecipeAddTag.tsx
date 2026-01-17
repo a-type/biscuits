@@ -77,7 +77,7 @@ const DefaultTrigger = forwardRef<HTMLButtonElement, { className?: string }>(
 		return (
 			<Button
 				size="small"
-				className={classNames('py-1 px-2 text-xs min-h-24px', className)}
+				className={classNames('min-h-24px px-2 py-1 text-xs', className)}
 				ref={ref}
 				{...rest}
 			>

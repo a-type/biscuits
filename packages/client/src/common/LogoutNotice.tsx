@@ -40,7 +40,7 @@ export function LogoutNotice({}: LogoutNoticeProps) {
 			<DialogContent>
 				<DialogTitle>Session expired</DialogTitle>
 				<P>To resume syncing your data, please sign in again.</P>
-				<div className="flex flex-row gap-3 justify-end items-center">
+				<div className="flex flex-row items-center justify-end gap-3">
 					<DialogClose render={<Button emphasis="ghost" />}>Cancel</DialogClose>
 					<DialogClose
 						render={

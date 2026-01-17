@@ -7,7 +7,7 @@ export function NotFoundPage({}: NotFoundPageProps) {
 	return (
 		<PageRoot>
 			<PageContent>
-				<div className="flex flex-col gap-6 relative px-8">
+				<div className="relative flex flex-col gap-6 px-8">
 					<H1>404 Not Found</H1>
 					<P>
 						Lots of people put cute graphics on this page, but I&apos;m just too

@@ -11,14 +11,14 @@ export function DemoFrame({ demo, className, ...rest }: DemoFrameProps) {
 	return (
 		<div
 			className={classNames(
-				'flex flex-col border-default rounded-lg overflow-hidden mb-auto',
+				'mb-auto flex flex-col overflow-hidden border-default rounded-lg',
 				className,
 			)}
 			{...rest}
 		>
 			<img
 				src={`https://biscuits.club/images/gnocchi/${demo}.png`}
-				className="w-full h-auto object-cover"
+				className="h-auto w-full object-cover"
 			/>
 		</div>
 	);

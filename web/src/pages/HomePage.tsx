@@ -24,20 +24,20 @@ export default function HomePage() {
 				items="center"
 				p
 				gap="xl"
-				className="w-full flex-1 bg-white rounded-lg shadow-sm"
+				className="w-full flex-1 rounded-lg shadow-sm bg-white"
 			>
-				<Box className="w-full z-1" d="col" items="center">
-					<PageFixedArea className="bg-transparent flex flex-col sm:flex-row justify-stretch sm:justify-between sm:items-center py-2 md:max-w-800px">
+				<Box className="z-1 w-full" d="col" items="center">
+					<PageFixedArea className="flex flex-col justify-stretch py-2 bg-transparent md:max-w-800px sm:flex-row sm:items-center sm:justify-between">
 						<Box gap>
 							<img
 								src="/icon.png"
 								alt="The Biscuits logo: an outlined 'B' with two cat paws overlaid"
-								className="rounded-xs w-8 h-8 border-solid border-1 border-primary-dark"
+								className="h-8 w-8 border-1 rounded-xs border-solid border-primary-dark"
 							/>
 							<h1
 								className={classNames(
-									'text-md m-0 font-semibold color-primary-ink color-darken-1',
-									'bg-white p-2 rounded-lg leading-none',
+									'm-0 text-md font-semibold color-primary-ink color-darken-1',
+									'rounded-lg p-2 leading-none bg-white',
 								)}
 							>
 								Biscuits
@@ -48,16 +48,16 @@ export default function HomePage() {
 						</Suspense>
 					</PageFixedArea>
 				</Box>
-				<Box d="col" className="w-full z-1" items="center" gap="xl">
+				<Box d="col" className="z-1 w-full" items="center" gap="xl">
 					<Box
 						d="col"
 						gap="xl"
 						items="stretch"
-						className="flex-grow max-w-100vw md:max-w-800px"
+						className="max-w-100vw flex-grow md:max-w-800px"
 					>
 						<div
 							className={classNames(
-								'text-10vmin color-black mt-0 block mx-sm leading-none font-fancy',
+								'font-fancy mx-sm mt-0 block text-10vmin leading-none color-black',
 							)}
 						>
 							Made for you
@@ -67,9 +67,9 @@ export default function HomePage() {
 						<Box
 							d="col"
 							gap
-							className="sm:mt-5 color-primary-dark font-semibold [flex:1_0_0]"
+							className="[flex:1_0_0] font-semibold color-primary-dark sm:mt-5"
 						>
-							<P className="color-gray-dark text-lg leading-relaxed font-300 mb-4">
+							<P className="mb-4 text-lg font-300 leading-relaxed color-gray-dark">
 								Biscuits' <em className="font-fancy font-300">local-first</em>{' '}
 								apps are designed to make life easier for you and your family.
 								Free to use forever, no ads, no tracking.
@@ -78,7 +78,7 @@ export default function HomePage() {
 					</Box>
 					<AppGrid />
 					<Box className="max-w-100vw md:max-w-800px" d="col" gap items="start">
-						<P className="color-gray-dark leading-loose font-300">
+						<P className="font-300 leading-loose color-gray-dark">
 							No signup needed. No need to open the App Store. These are instant
 							web apps, no installation required. Just click &quot;Open
 							app&quot; to get started.
@@ -88,7 +88,7 @@ export default function HomePage() {
 						p
 						surface
 						color="accent"
-						className="max-w-90vw lg:max-w-800px theme"
+						className="theme max-w-90vw lg:max-w-800px"
 						d="col"
 						gap
 						items="start"
@@ -96,7 +96,7 @@ export default function HomePage() {
 						border
 					>
 						<H2 className="font-fancy font-semibold">Family Plan</H2>
-						<P className="italic font-fancy font-300">
+						<P className="font-fancy font-300 italic">
 							One subscription, every Biscuits app.
 						</P>
 						<LazyScroll>
@@ -128,7 +128,7 @@ export default function HomePage() {
 						</Button>
 					</Box>
 					<Box
-						className="max-w-100vw md:max-w-800px pb-xl"
+						className="max-w-100vw pb-xl md:max-w-800px"
 						d="col"
 						gap
 						items="start"
@@ -151,14 +151,14 @@ export default function HomePage() {
 						</P>
 						<Link
 							to="/about"
-							className="inline-flex items-center gap-sm ml-auto"
+							className="ml-auto inline-flex items-center gap-sm"
 						>
 							Learn more <Icon name="new_window" />
 						</Link>
 					</Box>
 				</Box>
 			</Box>
-			<Box className="w-full z-1 mt-xl" p="sm" d="col" items="center">
+			<Box className="z-1 mt-xl w-full" p="sm" d="col" items="center">
 				<Footer className="max-w-100vw md:max-w-800px" />
 			</Box>
 			<Suspense>

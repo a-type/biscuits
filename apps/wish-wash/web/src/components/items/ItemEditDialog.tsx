@@ -57,7 +57,7 @@ export function ItemEditDialog({ list }: ItemEditDialogProps) {
 				className={clsx(
 					'theme',
 					`theme-${typeThemes[item?.get('type') ?? 'idea']}`,
-					'bg-wash gap-md flex flex-col items-stretch',
+					'flex flex-col items-stretch gap-md bg-wash',
 				)}
 				width="md"
 			>
@@ -201,8 +201,8 @@ function ImagesField({ item }: { item: Item }) {
 	return (
 		<div>
 			<Box surface overflow="auto-y" className="max-h-400px w-full py-sm">
-				<div className="grid sm:grid-cols-3 gap-1">
-					{imageFiles.map((file, index) => (
+				<div className="grid gap-1 sm:grid-cols-3">
+					{imageFiles.map((file) => (
 						<ImageField
 							key={file.id}
 							file={file}
@@ -221,7 +221,7 @@ function ImagesField({ item }: { item: Item }) {
 						imageFiles.push(v);
 					}
 				}}
-				className="w-full h-200px rounded-lg"
+				className="h-200px w-full rounded-lg"
 			/>
 		</div>
 	);
@@ -241,13 +241,13 @@ function ImageField({
 	return (
 		<div className={clsx('relative', className)}>
 			<img
-				className="h-full w-full object-cover rounded-lg"
+				className="h-full w-full rounded-lg object-cover"
 				src={file.url ?? ''}
 			/>
 			<Button
 				emphasis="primary"
 				color="attention"
-				className="absolute top-1 right-1"
+				className="absolute right-1 top-1"
 				onClick={onRemove}
 			>
 				<Icon name="trash" />
@@ -348,7 +348,7 @@ function SingleLinkField({
 		} else {
 			console.error('scan failed', result.error);
 		}
-	}, [firstLink, item, subscribed]);
+	}, [firstLink, item, subscribed, doScan]);
 
 	return (
 		<>
@@ -363,14 +363,14 @@ function SingleLinkField({
 				autoFocus={autoFocus}
 			/>
 			{!!scanning && (
-				<span className="text-xs color-gray-dark pl-3">
-					<Icon name="refresh" className="animate-spin w-10px h-10px" />{' '}
+				<span className="pl-3 text-xs color-gray-dark">
+					<Icon name="refresh" className="h-10px w-10px animate-spin" />{' '}
 					Scanning page...
 				</span>
 			)}
 			{!!scanData?.storePageScan?.failedReason && (
-				<span className="text-xs color-attention-dark pl-3">
-					<Icon name="warning" className="w-10px h-10px" />{' '}
+				<span className="pl-3 text-xs color-attention-dark">
+					<Icon name="warning" className="h-10px w-10px" />{' '}
 					{scanData.storePageScan.failedReason}
 				</span>
 			)}

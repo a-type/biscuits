@@ -64,7 +64,7 @@ function RecipeEditorContent({ recipe }: { recipe: Recipe }) {
 			</div>
 			<RecipeNoteEditor recipe={recipe} />
 			<RecipeTimeFields recipe={recipe} />
-			<label className="flex flex-row items-center justify-between mt-1">
+			<label className="mt-1 flex flex-row items-center justify-between">
 				<span>Servings</span>
 				<LiveUpdateTextField
 					value={recipe.get('servings')?.toString() ?? ''}

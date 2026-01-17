@@ -3,11 +3,11 @@ import { DetailedStep, ExtractorData } from './types.js';
 import { isoToMinutes, toYield } from './utils.js';
 
 export async function schemaOrg($: CheerioAPI): Promise<ExtractorData | null> {
-	let scripts = $('script');
+	const scripts = $('script');
 	// find a script that has a Schema.org JSON-LD object for a Recipe
-	let s = scripts
+	const s = scripts
 		.filter((i, el) => {
-			let text = $(el).text();
+			const text = $(el).text();
 			try {
 				let parsed = JSON.parse(text);
 				if (Array.isArray(parsed)) {
@@ -16,7 +16,7 @@ export async function schemaOrg($: CheerioAPI): Promise<ExtractorData | null> {
 				return (
 					parsed['@type'] === 'Recipe' || parsed['@type'].includes('Recipe')
 				);
-			} catch (e) {
+			} catch {
 				return false;
 			}
 		})
@@ -25,7 +25,7 @@ export async function schemaOrg($: CheerioAPI): Promise<ExtractorData | null> {
 	let data = JSON.parse($(s).text());
 	if (Array.isArray(data)) data = data[0];
 	try {
-		let yieldValue =
+		const yieldValue =
 			data.recipeYield ?
 				Array.isArray(data.recipeYield) ?
 					data.recipeYield[0]
@@ -72,7 +72,7 @@ export async function schemaOrg($: CheerioAPI): Promise<ExtractorData | null> {
 			detailedSteps,
 			steps: detailedSteps.map((step) => step.content),
 		};
-	} catch (e) {
+	} catch {
 		return null;
 	}
 }

@@ -75,7 +75,7 @@ function SubRecipeSearch({ onSelect }: IncludeSubRecipeProps) {
 	return (
 		<Box direction="col" gap="md">
 			<div
-				className="flex-1 w-full max-h-[50vh] overflow-auto"
+				className="max-h-[50vh] w-full flex-1 overflow-auto"
 				{...getMenuProps()}
 			>
 				<Card.Grid>
@@ -87,7 +87,7 @@ function SubRecipeSearch({ onSelect }: IncludeSubRecipeProps) {
 							<Card.Image>
 								<RecipeMainImageViewer
 									recipe={recipe}
-									className="w-full h-full"
+									className="h-full w-full"
 								/>
 							</Card.Image>
 						</Card>

@@ -1,7 +1,7 @@
 import { AddToListDialog } from '@/components/recipes/viewer/AddToListDialog.jsx';
-import useMergedRef from '@/hooks/useMergedRef.js';
 import { ScrollArea, useSize } from '@a-type/ui';
 import { preventDefault, stopPropagation } from '@a-type/utils';
+import { useMergedRef } from '@biscuits/client';
 import classNames from 'classnames';
 import { Suspense, forwardRef, useEffect, useRef, useState } from 'react';
 import { AddBarProps } from './AddBar.jsx';
@@ -103,6 +103,7 @@ const AddPaneImpl = forwardRef<
 
 	const noSuggestions = allSuggestions.length === 0;
 
+	// eslint-disable-next-line react-hooks/refs
 	const menuProps = getMenuProps({
 		ref: contentRef,
 	});
@@ -110,11 +111,12 @@ const AddPaneImpl = forwardRef<
 	return (
 		<div
 			className={classNames(
-				'flex flex-col-reverse rounded-lg bg-white border-default rounded-b-21px border-b-none',
+				'flex flex-col-reverse border-default rounded-lg rounded-b-21px border-b-none bg-white',
 				className,
 			)}
 		>
 			<AddInput
+				// eslint-disable-next-line react-hooks/refs
 				inputProps={getInputProps({
 					placeholder,
 					ref: inputRef,
@@ -129,12 +131,12 @@ const AddPaneImpl = forwardRef<
 			<ScrollArea
 				{...menuProps}
 				className={classNames(
-					'flex flex-col max-h-[calc(var(--viewport-height,40dvh)-80px)] lg:max-h-50dvh w-full max-w-none gap-4 rounded-t-lg',
+					'max-h-[calc(var(--viewport-height,40dvh)-80px)] max-w-none w-full flex flex-col gap-4 rounded-t-lg lg:max-h-50dvh',
 				)}
 				onScroll={stopPropagation}
 				background="white"
 			>
-				<div className="flex flex-col-reverse gap-4 items-stretch p-3">
+				<div className="flex flex-col-reverse items-stretch gap-4 p-3">
 					{showSuggested && (
 						<SuggestionGroup
 							title="Suggested"

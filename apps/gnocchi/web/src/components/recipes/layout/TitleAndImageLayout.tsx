@@ -5,8 +5,8 @@ import { HTMLAttributes } from 'react';
 export const TitleAndImageLayout = withClassName(
 	'div',
 	classNames(
-		'grid grid-cols-[1fr] grid-rows-[repeat(2,auto)] grid-areas-[image]-[title] gap-4 w-full items-stretch',
-		'lg:(grid-cols-[1fr_auto] grid-rows-[1fr] grid-areas-[title_image] gap-4 items-start)',
+		'grid grid-cols-[1fr] grid-rows-[repeat(2,auto)] grid-areas-[image]-[title] w-full items-stretch gap-4',
+		'lg:(grid-cols-[1fr_auto] grid-rows-[1fr] grid-areas-[title_image] items-start gap-4)',
 	),
 );
 
@@ -22,7 +22,7 @@ export const ImageContainer = ({
 	return (
 		<div
 			className={classNames(
-				'[grid-area:image] w-full h-300px lg:(w-200px h-200px)',
+				'[grid-area:image] h-300px w-full lg:(h-200px w-200px)',
 				className,
 			)}
 			{...props}

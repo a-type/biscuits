@@ -31,7 +31,7 @@ export function Explainer({ stages }: ExplainerProps) {
 				outerClassName="h-screen max-h-90dvh sm:(h-auto max-h-[80dvh]) overflow-y-auto"
 				className="h-full sm:h-auto"
 			>
-				<div className="col gap-4 flex-1 items-start">{stages[stage]}</div>
+				<div className="col flex-1 items-start gap-4">{stages[stage]}</div>
 				<DialogActions>
 					<DialogClose render={<Button />}>Skip</DialogClose>
 					<Button

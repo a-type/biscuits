@@ -64,11 +64,11 @@ export function ManageSubscription({
 
 	return (
 		<div
-			className={clsx('flex flex-col gap-4 items-start', className)}
+			className={clsx('flex flex-col items-start gap-4', className)}
 			{...props}
 		>
-			<div className="flex flex-col gap-4 w-full">
-				<div className="row justify-between w-full">
+			<div className="w-full flex flex-col gap-4">
+				<div className="w-full row justify-between">
 					<H2>Your Subscription</H2>
 					<Chip
 						color={

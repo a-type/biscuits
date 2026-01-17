@@ -12,7 +12,7 @@ export function BuyYearlyPage({}: BuyYearlyPageProps) {
 	return (
 		<PageRoot>
 			<PageContent>
-				<div className="flex flex-col gap-4 m-auto">
+				<div className="m-auto flex flex-col gap-4">
 					<H1 className="font-fancy font-medium">Finish your subscription</H1>
 					<P>
 						You're about to get device sync and list sharing for a full year.
@@ -29,7 +29,7 @@ export default BuyYearlyPage;
 
 function MemberUpsell() {
 	return (
-		<div className="col items-start p-3 bg-accent-wash border-accent-dark border-1 border-solid rounded-lg">
+		<div className="col items-start border-1 rounded-lg border-solid p-3 bg-accent-wash border-accent-dark">
 			<H2>
 				<Icon name="lightbulb" /> Or, get all our apps
 			</H2>

@@ -27,7 +27,7 @@ export function RecipeUrlField({ recipe }: RecipeUrlFieldProps) {
 	};
 
 	return (
-		<div className="flex gap-2 self-stretch w-full">
+		<div className="w-full flex self-stretch gap-2">
 			<LiveUpdateTextField
 				placeholder="Paste a website"
 				value={url || ''}

@@ -16,7 +16,6 @@ export function PushSubscriptionToggle({
 	vapidKey,
 }: PushSubscriptionToggleProps) {
 	const subscribed = useIsSubscribedToPush();
-	const loadingSubscription = subscribed === undefined;
 	const [loading, setLoading] = useState(false);
 
 	const subscribeToPush = useSubscribeToPush(vapidKey);
@@ -45,7 +44,7 @@ export function PushSubscriptionToggle({
 	}
 
 	return (
-		<div className="flex flex-row gap-2 items-center">
+		<div className="flex flex-row items-center gap-2">
 			<Switch
 				checked={subscribed}
 				onCheckedChange={toggle}

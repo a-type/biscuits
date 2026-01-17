@@ -37,7 +37,7 @@ export function TopLoader({ className }: TopLoaderProps) {
 				width: '100%',
 			});
 		};
-	}, [show, spring]);
+	}, [spring]);
 
 	useEffect(() => {
 		if (show) {
@@ -48,7 +48,7 @@ export function TopLoader({ className }: TopLoaderProps) {
 	return (
 		<div
 			className={clsx(
-				'fixed top-0 left-0 w-full h-4px pointer-events-none op-0 z-100000',
+				'pointer-events-none fixed left-0 top-0 z-100000 h-4px w-full op-0',
 				'[&[data-state=visible]]:(opacity-100 transition-opacity)',
 				'md:(h-2px)',
 				'motion-reduce:hidden',

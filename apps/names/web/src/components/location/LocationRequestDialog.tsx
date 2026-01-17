@@ -58,12 +58,12 @@ export function LocationRequestDialog() {
 				</Dialog.Content>
 			:	<Dialog.Content width="md">
 					<Dialog.Title>Detect Location</Dialog.Title>
-					<Box className="relative h-40vmin bg-accentWash rounded-lg" gap="md">
-						<div className="absolute left-3/8 z-1 top-1/2 translate--1/2 c-accentLight w-30vmin h-30vmin bg-overlay rounded-full flex items-center justify-center">
-							<Icon name="location" className="w-20vmin h-20vmin" />
+					<Box className="bg-accentWash relative h-40vmin rounded-lg" gap="md">
+						<div className="c-accentLight bg-overlay absolute left-3/8 top-1/2 z-1 h-30vmin w-30vmin flex translate--1/2 items-center justify-center rounded-full">
+							<Icon name="location" className="h-20vmin w-20vmin" />
 						</div>
-						<div className="absolute left-5/8 z-2 top-1/2 translate--1/2 c-accentDark w-30vmin h-30vmin bg-overlay rounded-full flex items-center justify-center">
-							<Icon name="add_person" className="w-20vmin h-20vmin" />
+						<div className="c-accentDark bg-overlay absolute left-5/8 top-1/2 z-2 h-30vmin w-30vmin flex translate--1/2 items-center justify-center rounded-full">
+							<Icon name="add_person" className="h-20vmin w-20vmin" />
 						</div>
 					</Box>
 					<Dialog.Description>

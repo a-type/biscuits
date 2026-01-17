@@ -34,8 +34,8 @@ export function ListItemEditor({ item }: { item: ListItemsItem }) {
 	const isSubscribed = useHasServerAccess();
 
 	return (
-		<div className="flex flex-col gap-3 w-full">
-			<div className="flex flex-row justify-between items-center">
+		<div className="w-full flex flex-col gap-3">
+			<div className="flex flex-row items-center justify-between">
 				<LiveUpdateTextField
 					value={description}
 					onChange={(v) => item.set('description', v)}
@@ -43,7 +43,7 @@ export function ListItemEditor({ item }: { item: ListItemsItem }) {
 					autoSelect
 				/>
 			</div>
-			<div className="flex flex-col gap-3 items-start">
+			<div className="flex flex-col items-start gap-3">
 				<FieldGroup>
 					<FieldLabel className="font-bold">Pack</FieldLabel>
 					<FieldArea>
@@ -105,7 +105,7 @@ export function ListItemEditor({ item }: { item: ListItemsItem }) {
 				<FieldGroup>
 					<FieldLabel>plus</FieldLabel>
 					<FieldArea>
-						<div className="flex flex-row gap-2 items-center">
+						<div className="flex flex-row items-center gap-2">
 							<NumberStepper
 								value={additional}
 								onChange={(v) => {
@@ -133,7 +133,7 @@ export function ListItemEditor({ item }: { item: ListItemsItem }) {
 					</FieldGroup>
 				)}
 			</div>
-			<div className="flex flex-col gap-3 items-start p-1">
+			<div className="flex flex-col items-start gap-3 p-1">
 				{periodMultiplier > 1 && (
 					<FieldGroup>
 						<FieldLabel>rounded</FieldLabel>

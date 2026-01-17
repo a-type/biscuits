@@ -54,7 +54,7 @@ export function Pages() {
 function ErrorFallback({ clearError }: { clearError: () => void }) {
 	return (
 		<div className="flex flex-col items-center justify-center p-4">
-			<div className="flex flex-col items-start justify-center gap-4 max-w-content">
+			<div className="max-w-content flex flex-col items-start justify-center gap-4">
 				<H1>Something went wrong</H1>
 				<P>
 					Sorry about this. The app has crashed. You can try refreshing, but if

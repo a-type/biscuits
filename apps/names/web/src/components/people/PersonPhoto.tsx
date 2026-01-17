@@ -13,7 +13,7 @@ export function PersonPhoto({ person, className }: PersonPhotoProps) {
 
 	return (
 		<ImageUploader
-			className={clsx('w-full min-h-160px', photoUrl && 'aspect-1', className)}
+			className={clsx('min-h-160px w-full', photoUrl && 'aspect-1', className)}
 			value={photoUrl}
 			onChange={(v) => person.set('photo', v)}
 			facingMode="environment"

@@ -25,7 +25,7 @@ export function PersonPage({}: PersonPageProps) {
 	return (
 		<>
 			<Button
-				className="mr-auto mb-4"
+				className="mb-4 mr-auto"
 				emphasis="ghost"
 				render={<Link to="/" />}
 			>

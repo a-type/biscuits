@@ -20,15 +20,15 @@ export function Navigation({}: NavigationProps) {
 
 	return (
 		<PageNav className="">
-			<div className="hidden sm:(flex flex-row gap-2 items-center justify-center px-2 py-2 mt-3)">
+			<div className="hidden sm:(mt-3 flex flex-row items-center justify-center gap-2 px-2 py-2)">
 				<Logo className="w-12" />
-				<h1 className="text-md [font-family:'Henrietta','Noto_Serif',serif] font-semibold">
+				<h1 className="[font-family:'Henrietta','Noto_Serif',serif] text-md font-semibold">
 					Trip Tick
 				</h1>
 			</div>
 			<NavBarRoot>
 				<NavBarItem
-					className="[&[data-active=true]]:(bg-primary-wash color-black)"
+					className="[&[data-active=true]]:(color-black bg-primary-wash)"
 					render={<Link to="/" data-active={matchTrips} />}
 				>
 					<NavBarItemIconWrapper>
@@ -37,7 +37,7 @@ export function Navigation({}: NavigationProps) {
 					<NavBarItemText>Trips</NavBarItemText>
 				</NavBarItem>
 				<NavBarItem
-					className="[&[data-active=true]]:(bg-primary-wash color-black)"
+					className="[&[data-active=true]]:(color-black bg-primary-wash)"
 					render={<Link to="/lists" data-active={matchLists} />}
 				>
 					<NavBarItemIconWrapper>

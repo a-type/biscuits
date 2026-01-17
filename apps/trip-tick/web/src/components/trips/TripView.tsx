@@ -106,10 +106,10 @@ function TripViewImpl({ trip }: { trip: Trip }) {
 	const { forecast } = useWeather(trip);
 
 	return (
-		<div className="flex flex-col gap-4 w-full">
+		<div className="w-full flex flex-col gap-4">
 			<TripViewInfo trip={trip} forecast={forecast} />
 			<TripViewChecklists trip={trip} forecast={forecast} />
-			<div className="fixed bottom-0 left-0 right-0 bg-wash p-1 w-full">
+			<div className="fixed bottom-0 left-0 right-0 w-full p-1 bg-wash">
 				<TripGlobalProgress trip={trip} />
 			</div>
 		</div>
@@ -128,14 +128,14 @@ function TripViewInfo({
 	return (
 		<div
 			className={classNames(
-				'flex flex-col items-start transition sm:rounded-md bg-primary-wash ring-16px sm:ring-8px ring-primary-wash',
+				'flex flex-col items-start ring-16px transition bg-primary-wash ring-primary-wash sm:rounded-md sm:ring-8px',
 				{
 					'gap-4': !startsAt || !endsAt,
 					'gap-1': startsAt && endsAt,
 				},
 			)}
 		>
-			<div className="flex flex-row gap-1 items-center">
+			<div className="flex flex-row items-center gap-1">
 				<Button emphasis="ghost" render={<Link to="/" />}>
 					<Icon name="arrowLeft" />
 					<span className="sr-only">Back to trips</span>
@@ -144,7 +144,7 @@ function TripViewInfo({
 					<LiveUpdateTextField
 						value={name}
 						onChange={(v) => trip.set('name', v)}
-						className="text-xl w-full"
+						className="w-full text-xl"
 						autoFocus={editName}
 						onBlur={() => setEditName(false)}
 						autoSelect
@@ -196,7 +196,7 @@ function TripViewChecklists({
 
 	if (!days) {
 		return (
-			<div className="w-full flex-1 flex flex-col items-center justify-center color-gray-dark mt-8">
+			<div className="mt-8 w-full flex flex-1 flex-col items-center justify-center color-gray-dark">
 				<div>Select dates to get started</div>
 			</div>
 		);
@@ -212,8 +212,8 @@ function TripViewChecklists({
 				});
 			}}
 		>
-			<div className="display-unset mb-4">
-				<div className="flex flex-row gap-2 items-center px-2">
+			<div className="mb-4 display-unset">
+				<div className="flex flex-row items-center gap-2 px-2">
 					<H4 className="flex-1">
 						{editingLists ?
 							startedWithNoLists ?
@@ -222,7 +222,7 @@ function TripViewChecklists({
 						:	'Lists'}
 					</H4>
 					<Button
-						className="flex-0-0-auto m-1"
+						className="m-1 flex-0-0-auto"
 						size={editingLists ? 'small' : 'default'}
 						color="accent"
 						emphasis={editingLists ? 'primary' : 'ghost'}
@@ -238,7 +238,7 @@ function TripViewChecklists({
 				<CollapsibleSimple open={editingLists}>
 					<AddListsPicker trip={trip} className="p-2" />
 				</CollapsibleSimple>
-				<TabsList className="important:justify-start border-none shadow-none sticky top-0 z-2 bg-wash overflow-x-auto overflow-y-hidden w-full">
+				<TabsList className="sticky top-0 z-2 w-full overflow-y-hidden border-none shadow-none bg-wash overflow-x-auto important:justify-start">
 					{mappedLists.map((list) => (
 						<ListTab list={list} key={list.get('id')} trip={trip} />
 					))}
@@ -260,7 +260,7 @@ function TripViewChecklists({
 				);
 			})}
 			{startedWithNoLists && !mappedLists.length && (
-				<div className="w-full p-4 color-gray-dark italic">
+				<div className="w-full p-4 italic color-gray-dark">
 					<span className="[font-style:normal]">💡</span> Add lists to this trip
 					for everything you want to pack. Once you start packing, check off
 					items as you go.
@@ -275,15 +275,15 @@ function ListTab({ trip, list }: { list: List; trip: Trip }) {
 	return (
 		<TabsTrigger
 			value={list.get('id')}
-			className="relative z-1 overflow-hidden flex-shrink-0"
+			className="relative z-1 flex-shrink-0 overflow-hidden"
 		>
 			<span className="text-nowrap">{list.get('name')}</span>
 			<Progress.Root
 				value={value}
-				className="absolute z-1 bottom-0 left-2 right-2 overflow-hidden rounded-full border border-t-solid border-l-solid border-r-solid border-primary"
+				className="absolute bottom-0 left-2 right-2 z-1 overflow-hidden border rounded-full border-l-solid border-r-solid border-t-solid border-primary"
 			>
 				<Progress.Indicator
-					className="bg-accent w-full h-4px"
+					className="h-4px w-full bg-accent"
 					style={{
 						transform: `translateX(-${100 * (1 - value)}%)`,
 					}}
@@ -320,7 +320,7 @@ function TripViewChecklist({
 
 	return (
 		<div className="flex flex-col">
-			<ul className="list-none flex flex-col gap-1 m-0 p-0 mb-6">
+			<ul className="m-0 mb-6 flex flex-col list-none gap-1 p-0">
 				{items.map((item) => {
 					const completion = completions.get(item.get('id')) ?? 0;
 					return (

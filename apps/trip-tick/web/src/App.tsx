@@ -7,7 +7,7 @@ import { Explainer } from './components/onboarding/Explainer.jsx';
 
 export function App() {
 	return (
-		<div className="flex flex-col flex-1 w-full h-full">
+		<div className="h-full w-full flex flex-1 flex-col">
 			<Suspense fallback={<FullScreenSpinner />}>
 				<UIProvider disableViewportOffset manifestPath="/manifest.webmanifest">
 					<Provider appId="trip-tick" verdantClient={verdant as any}>

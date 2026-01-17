@@ -46,7 +46,7 @@ export function EmbeddedSubRecipeInstructionsToggle({
 				render || (
 					<Button
 						emphasis="ghost"
-						className={clsx('w-full gap-2 items-center text-start', className)}
+						className={clsx('w-full items-center gap-2 text-start', className)}
 						size="small"
 						contentEditable={false}
 					/>
@@ -55,7 +55,7 @@ export function EmbeddedSubRecipeInstructionsToggle({
 		>
 			<Icon
 				name="chevron"
-				className="[[data-state=open]>&]:rotate-180deg transition-all"
+				className="transition-all [[data-state=open]>&]:rotate-180deg"
 			/>
 			<span className="italic">
 				<span className="font-medium">Make</span> {recipe.get('title')}
@@ -80,7 +80,7 @@ export function EmbeddedSubRecipeContent({
 
 	return (
 		<Collapsible.Content contentEditable={false} className={className}>
-			<Box className="border-l border-l-gray border-l-solid pl-2 ml-4" p="none">
+			<Box className="ml-4 border-l border-l-solid pl-2 border-l-gray" p="none">
 				<RecipeInstructionsViewer recipe={recipe} />
 			</Box>
 		</Collapsible.Content>

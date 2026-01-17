@@ -33,13 +33,13 @@ export function ListEditor({ list }: ListEditorProps) {
 	);
 
 	return (
-		<div className="flex flex-col gap-6 flex-1">
-			<div className="flex flex-row gap-1 items-center">
+		<div className="flex flex-1 flex-col gap-6">
+			<div className="flex flex-row items-center gap-1">
 				{editName ?
 					<LiveUpdateTextField
 						value={name}
 						onChange={(v) => list.set('name', v)}
-						className="text-xl w-full"
+						className="w-full text-xl"
 						autoFocus={editName}
 						onBlur={() => setEditName(false)}
 						autoSelect
@@ -71,7 +71,7 @@ function ListItemsEditor({ list }: { list: List }) {
 	hooks.useWatch(items);
 
 	return (
-		<div className="flex flex-col gap-4 flex-1">
+		<div className="flex flex-1 flex-col gap-4">
 			<H2>Items</H2>
 			<CardGrid>
 				{items.map((item) => (
@@ -104,7 +104,7 @@ const AddListItemButton = forwardRef<HTMLButtonElement, { list: List }>(
 		return (
 			<Button
 				emphasis="primary"
-				className="self-center items-center justify-center sticky bottom-md"
+				className="sticky bottom-md items-center self-center justify-center"
 				onClick={() => {
 					items.push({
 						description: 'New item',

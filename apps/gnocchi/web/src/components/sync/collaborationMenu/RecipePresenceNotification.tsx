@@ -64,21 +64,21 @@ function RecipePresenceLink({
 	if (!recipe) return null;
 
 	return (
-		<div className="flex flex-row gap-2 items-center p-2 w-full max-w-full overflow-hidden border-default rounded-lg bg-white">
+		<div className="max-w-full w-full flex flex-row items-center gap-2 overflow-hidden border-default rounded-lg p-2 bg-white">
 			<Button onClick={onDismiss} emphasis="ghost" className="flex-0-0-auto">
 				<Icon name="x" />
 			</Button>
 			<Link
 				to={makeRecipeLink(recipe)}
 				onClick={onDismiss}
-				className="flex flex-row gap-2 items-center flex-1"
+				className="flex flex-1 flex-row items-center gap-2"
 			>
 				<PersonAvatar person={person} />
-				<div className="flex flex-col gap-2px flex-[1_1_0] min-w-0">
-					<div className="text-xxs ml--2px">
+				<div className="min-w-0 flex flex-[1_1_0] flex-col gap-2px">
+					<div className="ml--2px text-xxs">
 						&nbsp;{person.profile.name} is viewing
 					</div>
-					<div className="text-xs font-bold overflow-hidden text-ellipsis whitespace-nowrap">
+					<div className="overflow-hidden text-ellipsis whitespace-nowrap text-xs font-bold">
 						{recipe.get('title')}
 					</div>
 				</div>

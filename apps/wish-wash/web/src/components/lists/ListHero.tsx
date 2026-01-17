@@ -22,7 +22,7 @@ export interface ListHeroProps {
 }
 
 export function ListHero({ list, className }: ListHeroProps) {
-	const { name, coverImage, id } = hooks.useWatch(list);
+	const { name, coverImage } = hooks.useWatch(list);
 	hooks.useWatch(coverImage);
 
 	const convertToShared = useConvertToShared(list);
@@ -35,7 +35,7 @@ export function ListHero({ list, className }: ListHeroProps) {
 			{coverImage?.url && (
 				<img
 					src={coverImage.url}
-					className="w-full h-[20vh] object-cover rounded-lg"
+					className="h-[20vh] w-full rounded-lg object-cover"
 				/>
 			)}
 			<Box items="center">
@@ -43,7 +43,7 @@ export function ListHero({ list, className }: ListHeroProps) {
 					<Icon name={list.isAuthorized ? 'lock' : 'add_person'} />
 					<Dialog.Trigger
 						render={
-							<Button emphasis="ghost" className="text-xl font-bold gap-md" />
+							<Button emphasis="ghost" className="gap-md text-xl font-bold" />
 						}
 					>
 						{name}
@@ -56,7 +56,7 @@ export function ListHero({ list, className }: ListHeroProps) {
 						</Dialog.Description>
 						<Box d="col" gap>
 							<ImageUploader
-								className="w-full aspect-16/8"
+								className="aspect-16/8 w-full"
 								value={coverImage?.url ?? null}
 								onChange={(v) => list.set('coverImage', v)}
 							/>

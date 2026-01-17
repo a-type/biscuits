@@ -8,8 +8,8 @@ export interface GroceryItemDragPreviewProps {
 export function GroceryItemDragPreview({ item }: GroceryItemDragPreviewProps) {
 	const display = useItemDisplayText(item);
 	return (
-		<div className="flex flex-row items-center justify-center pointer-events-none relative w-32px h-32px">
-			<div className="absolute translate-y--130% p-3 rounded-lg bg-white border-default whitespace-nowrap shadow-lg select-none pointer-events-none max-w-200px overflow-hidden">
+		<div className="pointer-events-none relative h-32px w-32px flex flex-row items-center justify-center">
+			<div className="pointer-events-none absolute max-w-200px translate-y--130% select-none overflow-hidden whitespace-nowrap border-default rounded-lg p-3 shadow-lg bg-white">
 				{display}
 			</div>
 		</div>

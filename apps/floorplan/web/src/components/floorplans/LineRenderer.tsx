@@ -92,7 +92,7 @@ export function LineLengthLabel({
 				textAnchor="middle"
 				className={clsx(
 					editing ? 'fill-black' : 'fill-white',
-					'stroke-none font-mono text-[5px]',
+					'stroke-none text-[5px] font-mono',
 				)}
 			>
 				{label}

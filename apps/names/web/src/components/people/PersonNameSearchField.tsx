@@ -63,7 +63,7 @@ export function PersonNameSearchField({
 			}
 			setInputValue('');
 		},
-		itemToString: (item) => '',
+		itemToString: () => '',
 		itemToKey: (item) => (isAddToken(item) ? 'add_person' : item?.get('id')),
 		defaultHighlightedIndex: 0,
 	});
@@ -80,6 +80,7 @@ export function PersonNameSearchField({
 			}}
 		>
 			<Input
+				// eslint-disable-next-line react-hooks/refs
 				{...getInputProps({
 					placeholder: placeholder || 'Search names...',
 					className,
@@ -103,7 +104,7 @@ export function PersonNameSearchField({
 					/>
 				))}
 				{!matches.length && (
-					<Box className="color-gray-dark text-sm p-2">
+					<Box className="p-2 text-sm color-gray-dark">
 						{!!inputValue ? 'No matches' : 'Search people'}
 					</Box>
 				)}
@@ -146,14 +147,14 @@ function PersonItem({
 		>
 			<Box>{person.get('name')}</Box>
 			{note && (
-				<Box className="color-gray-dark text-sm" gap="sm" items="center">
+				<Box className="text-sm color-gray-dark" gap="sm" items="center">
 					<Icon name="note" />
 					{note}
 				</Box>
 			)}
 			{tags && (
 				<Suspense>
-					<Box className="color-gray-dark text-sm" gap="sm" items="center">
+					<Box className="text-sm color-gray-dark" gap="sm" items="center">
 						{tags.map((tag) => (
 							<TagDisplay key={tag} name={tag} className="text-xs" />
 						))}

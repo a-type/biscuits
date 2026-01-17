@@ -23,7 +23,7 @@ export function ItemCardPurchases({
 	if (!item.purchasedCount) {
 		if (item.count && item.count !== Infinity && item.type !== 'vibe') {
 			return (
-				<CardContent className={clsx('text-sm block items-center', className)}>
+				<CardContent className={clsx('block items-center text-sm', className)}>
 					Wants <strong>{item.count}</strong>
 				</CardContent>
 			);
@@ -34,9 +34,9 @@ export function ItemCardPurchases({
 	return (
 		<CardContent
 			className={clsx(
-				'text-sm block items-center',
+				'block items-center text-sm',
 				item.purchasedCount >= item.count ?
-					'bg-main-dark color-contrast'
+					'color-contrast bg-main-dark'
 				:	'bg-white',
 				className,
 			)}

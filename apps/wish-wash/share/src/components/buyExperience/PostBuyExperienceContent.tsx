@@ -20,7 +20,7 @@ export const postBuyExperienceContentFragment = graphql(`
 
 export function PostBuyExperienceContent({
 	item: itemMasked,
-	listAuthor,
+	listAuthor: _,
 }: {
 	item: FragmentOf<typeof postBuyExperienceContentFragment>;
 	listAuthor: string;

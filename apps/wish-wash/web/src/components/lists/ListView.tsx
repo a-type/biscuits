@@ -68,7 +68,7 @@ export function ListView({ list, className }: ListViewProps) {
 	if (needsOnboarding) {
 		return (
 			<div className="flex flex-col items-stretch gap-4">
-				<div className="mx-auto bg-primary-wash p-4 rounded-lg max-w-800px w-full">
+				<div className="mx-auto max-w-800px w-full rounded-lg p-4 bg-primary-wash">
 					<H2>Welcome to your wishlist!</H2>
 					<P>Let's get your wish list started with some ideas.</P>
 					<WishlistOnboarding
@@ -84,11 +84,11 @@ export function ListView({ list, className }: ListViewProps) {
 		<div className={clsx('col items-stretch gap-4', className)}>
 			<AddBar
 				list={list}
-				className="fixed bottom-sm left-1/2 center-x z-now-playing"
+				className="fixed bottom-sm center-x left-1/2 z-now-playing"
 			/>
 			<div className="row items-stretch">
 				<div className="flex-1">
-					<CardGrid columns={cardGridColumns.small} className="flex-1 z-0">
+					<CardGrid columns={cardGridColumns.small} className="z-0 flex-1">
 						{items.map((item) => (
 							<ListItem item={item} key={item.get('id')} />
 						))}
@@ -148,14 +148,14 @@ function TutorialCard({
 }) {
 	return (
 		<Card
-			className={clsx(`theme-${theme}`, 'bg-primary-wash color-primary-dark')}
+			className={clsx(`theme-${theme}`, 'color-primary-dark bg-primary-wash')}
 		>
 			<CardMain>
 				<CardContent
 					unstyled
-					className="flex flex-row items-center gap-3 p-3 font-bold text-lg"
+					className="flex flex-row items-center gap-3 p-3 text-lg font-bold"
 				>
-					<Icon className="w-[30px] h-[30px] [stroke-width:0.3]" name={icon} />
+					<Icon className="[stroke-width:0.3] h-[30px] w-[30px]" name={icon} />
 					{title}
 				</CardContent>
 				<CardContent unstyled className="p-2">

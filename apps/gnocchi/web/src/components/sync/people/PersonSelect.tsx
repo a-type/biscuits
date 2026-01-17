@@ -83,7 +83,7 @@ export function PersonSelect({
 					{label && <Select.GroupLabel>{label}</Select.GroupLabel>}
 					{allowNone && (
 						<SelectItemRoot
-							className="flex flex-row gap-2 items-center"
+							className="flex flex-row items-center gap-2"
 							value="null"
 						>
 							<PersonAvatar popIn={false} person={null} />
@@ -117,7 +117,7 @@ function PersonSelectItem({
 	return (
 		<SelectItem
 			value={person.profile.id}
-			className="flex flex-row gap-2 items-center"
+			className="flex flex-row items-center gap-2"
 		>
 			<PersonSelectItemLabel person={person} isSelf={isSelf} />
 			<SelectItemIndicator />

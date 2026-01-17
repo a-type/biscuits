@@ -38,12 +38,12 @@ function VerdantProvider({ children }: { children: ReactNode }) {
 function ErrorFallback() {
 	return (
 		<div className="flex flex-col items-center justify-center p-4">
-			<div className="flex flex-col items-start justify-center gap-4 max-w-700px">
+			<div className="max-w-700px flex flex-col items-start justify-center gap-4">
 				<H1>Something went wrong</H1>
 				<P>
 					Sorry about this. The app has crashed. You can try refreshing, but if
 					that doesn&apos;t work,{' '}
-					<a className="underline font-bold" href="mailto:hi@biscuits.club">
+					<a className="font-bold underline" href="mailto:hi@biscuits.club">
 						let me know about it.
 					</a>
 				</P>

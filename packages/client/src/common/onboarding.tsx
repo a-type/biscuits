@@ -211,7 +211,7 @@ export function OnboardingBanner<O extends Onboarding<any>>({
 			data-step-name={step}
 		>
 			<CollapsibleContent>
-				<div className="flex flex-col w-full bg-primary-wash color-black p-4 rounded-lg gap-3">
+				<div className="w-full flex flex-col gap-3 rounded-lg p-4 color-black bg-primary-wash">
 					<Box col gap="sm">
 						{children}
 					</Box>
@@ -253,7 +253,7 @@ export const OnboardingTooltip = function OnboardingTooltip<
 	content,
 	ignoreOutsideInteraction,
 }: OnboardingTooltipProps<O>) {
-	const [show, next, isLast, _, { id }] = onboarding.useStep(step);
+	const [show, next, isLast] = onboarding.useStep(step);
 
 	// delay
 	const [delayedOpen, setDelayedOpen] = useState(false);
@@ -291,17 +291,16 @@ export const OnboardingTooltip = function OnboardingTooltip<
 		>
 			<SlotDiv render={children} ref={anchorRef} />
 			<PopoverContent
-				disableBlur
 				className={clsx(
 					'theme-leek',
-					'bg-primary-wash flex py-2 px-3',
+					'flex px-3 py-2 bg-primary-wash',
 					'overflow-visible',
 				)}
 				collisionPadding={16}
 				anchor={anchorRef}
 			>
 				<PopoverArrow className="!fill-primary-wash" />
-				<div className="flex flex-row gap-3 items-center">
+				<div className="flex flex-row items-center gap-3">
 					{content}
 					{!disableNext && (
 						<Button

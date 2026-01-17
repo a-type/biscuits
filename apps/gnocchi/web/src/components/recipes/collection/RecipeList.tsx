@@ -25,11 +25,11 @@ export interface RecipeListProps {}
 
 export function RecipeList({}: RecipeListProps) {
 	return (
-		<div className="flex flex-col p-0 m-0 mb-6 gap-2">
+		<div className="m-0 mb-6 flex flex-col gap-2 p-0">
 			<Suspense>
-				<PageFixedArea className="pt-2 w-full mb-2">
-					<div className="flex flex-row items-center justify-stretch w-full">
-						<RecipeSearchBar className="flex-grow-1 flex-shrink-1 flex-basis-0 min-w-80px" />
+				<PageFixedArea className="mb-2 w-full pt-2">
+					<div className="w-full flex flex-row items-center justify-stretch">
+						<RecipeSearchBar className="min-w-80px flex-shrink-1 flex-grow-1 flex-basis-0" />
 						<RecipeCollectionMenu className="flex-0-0-auto" />
 					</div>
 					<RecipeListActions />
@@ -103,7 +103,7 @@ function TagFilterList() {
 		<RecipeTagsFilter
 			onSelect={toggleTagFilter}
 			selectedValues={tagFilter ? [tagFilter] : []}
-			className="mb-1 font-normal text-xs"
+			className="mb-1 text-xs font-normal"
 		/>
 	);
 }

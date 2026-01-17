@@ -18,6 +18,7 @@ export function PhoneDemo({
 	size = 'default',
 }: PhoneDemoProps) {
 	const animationDelay = useMemo(() => {
+		// eslint-disable-next-line react-hooks/purity
 		return `${(Math.random() * 3).toFixed(2)}s`;
 	}, []);
 
@@ -26,13 +27,13 @@ export function PhoneDemo({
 	return (
 		<div
 			className={classNames(
-				'phone-wrapper overflow-hidden px-2 py-8 flex items-center justify-center',
+				'phone-wrapper flex items-center justify-center overflow-hidden px-2 py-8',
 				className,
 			)}
 		>
 			<div
 				className={classNames(
-					'phone rounded-lg aspect-ratio-11/24 bg-[black] min-h-0 h-30vh sm:h-auto',
+					'phone aspect-ratio-11/24 h-30vh min-h-0 rounded-lg bg-[black] sm:h-auto',
 					size === 'large' && '!h-auto',
 					direction,
 				)}
@@ -40,12 +41,12 @@ export function PhoneDemo({
 					animationDelay,
 				}}
 			>
-				<div className="absolute z--1 left-0 w-full h-full flex items-center justify-center color-gray-dark font-fancy text-lg p-6 text-center">
+				<div className="font-fancy absolute left-0 z--1 h-full w-full flex items-center justify-center p-6 text-center text-lg color-gray-dark">
 					Video Coming Soon
 				</div>
 				<Media
 					src={src}
-					className="w-full h-full object-center object-cover rounded-lg"
+					className="h-full w-full rounded-lg object-cover object-center"
 				/>
 			</div>
 		</div>

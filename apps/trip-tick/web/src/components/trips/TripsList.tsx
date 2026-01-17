@@ -22,7 +22,7 @@ export function TripsList({}: TripsListProps) {
 	const [past, future] = trips.reduce(
 		([past, future], trip) => {
 			const startsAt = trip.get('startsAt');
-			if (startsAt && startsAt < Date.now() - 24 * 60 * 60 * 1000) {
+			if (startsAt && startsAt < now - 24 * 60 * 60 * 1000) {
 				return [[...past, trip], future];
 			} else {
 				return [past, [...future, trip]];
@@ -47,7 +47,7 @@ export function TripsList({}: TripsListProps) {
 		return (
 			<div className="col items-stretch">
 				<H2>Trips</H2>
-				<div className="col bg-primary-wash rounded-lg p-8">
+				<div className="col rounded-lg p-8 bg-primary-wash">
 					<P>No trips yet</P>
 					<AddTripButton>Plan one</AddTripButton>
 				</div>
@@ -59,12 +59,12 @@ export function TripsList({}: TripsListProps) {
 		<div className="flex flex-col gap-4">
 			<H2>Trips</H2>
 			{!!future.length ?
-				<CardGrid className="list-none p-0 m-0">
+				<CardGrid className="m-0 list-none p-0">
 					{future.map((trip) => (
 						<TripsListItem key={trip.get('id')} trip={trip} />
 					))}
 				</CardGrid>
-			:	<div className="color-gray-dark p-8 italic font-lg flex flex-col gap-3 items-center justify-center">
+			:	<div className="font-lg flex flex-col items-center justify-center gap-3 p-8 italic color-gray-dark">
 					No upcoming trips.{' '}
 					<AddTripButton emphasis="default">Plan one</AddTripButton>
 				</div>
@@ -73,7 +73,7 @@ export function TripsList({}: TripsListProps) {
 				<>
 					<Divider />
 					<H2>Past Trips</H2>
-					<CardGrid className="list-none p-0 m-0">
+					<CardGrid className="m-0 list-none p-0">
 						{past.map((trip) => (
 							<TripsListItem key={trip.get('id')} trip={trip} />
 						))}
@@ -95,12 +95,13 @@ export function TripsList({}: TripsListProps) {
 	);
 }
 
+const now = Date.now();
 function TripsListItem({ trip }: { trip: Trip }) {
 	const { name, startsAt, endsAt, location } = hooks.useWatch(trip);
 	hooks.useWatch(location);
 	const locationName = location?.get('name');
 
-	const isPast = endsAt && endsAt < Date.now();
+	const isPast = endsAt && endsAt < now;
 
 	const {
 		value: completion,
@@ -117,7 +118,7 @@ function TripsListItem({ trip }: { trip: Trip }) {
 				}
 			>
 				<Card.Title className="relative z-1">{name}</Card.Title>
-				<div className="text-xs px-2 relative z-1 flex flex-row gap-1 flex-wrap">
+				<div className="relative z-1 flex flex-row flex-wrap gap-1 px-2 text-xs">
 					{locationName && <Chip className="bg-white">{locationName}</Chip>}
 					<Chip className="bg-white">
 						{startsAt ? new Date(startsAt).toLocaleDateString() : 'Unscheduled'}
@@ -130,7 +131,7 @@ function TripsListItem({ trip }: { trip: Trip }) {
 				</div>
 				{!isPast && (
 					<div
-						className="absolute left-0 top-0 bottom-0 bg-accent-wash"
+						className="absolute bottom-0 left-0 top-0 bg-accent-wash"
 						style={{
 							width: `${completion * 100}%`,
 						}}

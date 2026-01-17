@@ -19,6 +19,7 @@ export function useMotionPoint(
 	const x = useMotionValue(getPointValue(floor, point, 'x'));
 	const y = useMotionValue(getPointValue(floor, point, 'y'));
 
+	// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 	hooks.useWatch(point).snap; // side effect.
 
 	useEffect(() => {

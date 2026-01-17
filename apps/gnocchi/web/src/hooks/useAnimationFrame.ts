@@ -14,6 +14,7 @@ export function useAnimationFrame<Context>(
 			callback(deltaTime, contextRef.current);
 		}
 		previousTimeRef.current = time;
+		// eslint-disable-next-line react-hooks/immutability
 		requestRef.current = requestAnimationFrame(animate);
 	});
 	useEffect(() => {

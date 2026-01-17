@@ -31,7 +31,7 @@ const update = registerSW({
 });
 
 export async function updateApp(reload?: boolean) {
-  let timeout = setTimeout(() => {
+  const timeout = setTimeout(() => {
     window.location.reload();
   }, 5000);
   await update(!!reload);

@@ -32,6 +32,7 @@ export const CategoryClaim = memo(function CategoryClaim({
 	const [showTooltip, setShowTooltip] = useState(false);
 	useEffect(() => {
 		if (claimer) {
+			// eslint-disable-next-line react-hooks/set-state-in-effect
 			setShowTooltip(true);
 		}
 	}, [claimer]);
@@ -67,7 +68,7 @@ export const CategoryClaim = memo(function CategoryClaim({
 		<Button
 			emphasis="ghost"
 			size="small"
-			className="p-0 h-auto w-auto"
+			className="h-auto w-auto p-0"
 			onClick={claim}
 		>
 			<PeopleList count={peopleCount} size={20}>

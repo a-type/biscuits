@@ -128,7 +128,7 @@ function ListSelectItemLabel({ list }: { list: List | null | undefined }) {
 		return (
 			<Box items="center" gap="sm">
 				<FilledIcon name="tag" className="palette-lemon" />
-				<span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-full">
+				<span className="max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
 					Default
 				</span>
 			</Box>
@@ -139,7 +139,7 @@ function ListSelectItemLabel({ list }: { list: List | null | undefined }) {
 		return (
 			<Box items="center" gap="sm">
 				<MultiListIcon />
-				<span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-full">
+				<span className="max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
 					All lists
 				</span>
 			</Box>
@@ -152,7 +152,7 @@ function ListSelectItemLabel({ list }: { list: List | null | undefined }) {
 				name="tag"
 				className={`palette-${list.get('color') ?? 'lemon'}`}
 			/>
-			<span className="whitespace-nowrap overflow-hidden text-ellipsis max-w-full">
+			<span className="max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
 				{list.get('name')}
 			</span>
 		</Box>
@@ -163,7 +163,7 @@ function MultiListIcon() {
 	return (
 		<div className="relative inline">
 			<Icon name="tag" className="relative -left-3px" />
-			<Icon name="tag" className="absolute top-0 left-1px fill-white" />
+			<Icon name="tag" className="absolute left-1px top-0 fill-white" />
 		</div>
 	);
 }

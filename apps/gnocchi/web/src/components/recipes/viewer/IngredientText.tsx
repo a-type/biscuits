@@ -59,13 +59,13 @@ export function IngredientTextRenderer({
 				<Tooltip
 					content={
 						(
-							<span className="text-wrap max-w-80dvw">
+							<span className="max-w-80dvw text-wrap">
 								Multiplier {multiplier}x applied. Original value: {quantity}
 							</span>
 						) as any
 					}
 				>
-					<span className="color-accent-dark font-bold">
+					<span className="font-bold color-accent-dark">
 						{fractionToText(finalQuantity)}
 					</span>
 				</Tooltip>{' '}

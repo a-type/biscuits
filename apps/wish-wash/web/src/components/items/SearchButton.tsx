@@ -52,7 +52,7 @@ export function SearchButton({ item }: SearchButtonProps) {
 	return (
 		<div className="flex flex-row">
 			<Button
-				className="rounded-r-none relative z-1"
+				className="relative z-1 rounded-r-none"
 				size="small"
 				render={
 					<Link

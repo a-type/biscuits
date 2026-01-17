@@ -47,7 +47,7 @@ export function WeatherForecast({
 	const { toDisplay } = useTemperatureUnit();
 	return (
 		<CollapsibleRoot className={classNames('w-full', className)}>
-			<CollapsibleTrigger className="bg-transparent border-none flex flex-row items-center gap-1 flex-wrap p-2 w-full">
+			<CollapsibleTrigger className="w-full flex flex-row flex-wrap items-center gap-1 border-none p-2 bg-transparent">
 				<Chip aria-label="High temperature" className="color-black">
 					<Icon name="arrowUp" className="text-attention-dark" />
 					{toDisplay(data.high)}
@@ -65,14 +65,14 @@ export function WeatherForecast({
 				)}
 				<Icon
 					name="arrowDown"
-					className="ml-auto [[data-panel-open]>&]:rotate-180 transition-transform color-black"
+					className="ml-auto transition-transform color-black [[data-panel-open]>&]:rotate-180"
 				/>
 			</CollapsibleTrigger>
 			<CollapsibleContent>
-				<span className="color-gray-dark italic text-xs pl-2 py-1">
+				<span className="py-1 pl-2 text-xs italic color-gray-dark">
 					Daily Forecast
 				</span>
-				<div className="flex flex-row gap-1 overflow-x-auto w-full min-w-0 py-2">
+				<div className="min-w-0 w-full flex flex-row gap-1 py-2 overflow-x-auto">
 					{data.days.map((day, i) => (
 						<DayForecast day={day} key={i} />
 					))}
@@ -90,21 +90,21 @@ function DayForecast({ day }: { day: ResultOf<typeof forecastDay> }) {
 	const monthNumber = dateParts.pop()?.replace(/^0/, '');
 
 	return (
-		<div className="flex flex-col items-center gap-1 border border-1 border-solid border-black bg-white rounded-md text-xs py-1 px-4 relative">
-			<div className="font-bold text-xs">
+		<div className="relative flex flex-col items-center gap-1 border-1 border rounded-md border-solid px-4 py-1 text-xs bg-white border-black">
+			<div className="text-xs font-bold">
 				{monthNumber}/{dateNumber}
 			</div>
-			{!!willRain && <Raindrop className="absolute top-1 right-1" />}
+			{!!willRain && <Raindrop className="absolute right-1 top-1" />}
 			<div className="flex flex-col items-center">
 				<div
-					className="text-attention-dark flex flex-row items-center"
+					className="flex flex-row items-center text-attention-dark"
 					aria-label="High temperature"
 				>
 					<Icon name="arrowUp" />
 					{toDisplay(high)}
 				</div>
 				<div
-					className="color-primary-dark flex flex-row items-center"
+					className="flex flex-row items-center color-primary-dark"
 					aria-label="Low temperature"
 				>
 					<Icon name="arrowDown" />
@@ -127,7 +127,7 @@ function Raindrop({ className }: { className?: string }) {
 			<path
 				d="M9.49985 9.99999C8.49988 14 2.49988 14 1.49985 9.99999C0.49983 5.99997 5.49975 1 5.49975 1C5.49975 1 10.4998 5.99997 9.49985 9.99999Z"
 				strokeLinejoin="round"
-				className="stroke-primary-dark fill-primary"
+				className="fill-primary stroke-primary-dark"
 			/>
 		</svg>
 	);

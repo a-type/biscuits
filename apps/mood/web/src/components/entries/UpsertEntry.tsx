@@ -35,7 +35,7 @@ export function UpsertEntry({ className, date }: UpsertEntryProps) {
 				},
 			);
 		}
-	}, [exists, start]);
+	}, [exists, start, myIdResult?.myId]);
 
 	if (!entry) {
 		return null;

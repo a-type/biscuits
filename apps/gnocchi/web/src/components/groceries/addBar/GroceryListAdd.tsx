@@ -20,6 +20,6 @@ export const GroceryListAdd = forwardRef<HTMLDivElement, GroceryListAddProps>(
 			[listId, addItems],
 		);
 
-		return <AddBar onAdd={onAdd} showRichSuggestions {...rest} />;
+		return <AddBar onAdd={onAdd} showRichSuggestions ref={ref} {...rest} />;
 	},
 );

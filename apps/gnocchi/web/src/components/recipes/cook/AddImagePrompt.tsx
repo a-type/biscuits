@@ -26,7 +26,7 @@ export function AddImagePrompt({ recipe }: AddImagePromptProps) {
 						updatedAt: Date.now(),
 					});
 				}}
-				className="h-200px rounded-sm overflow-hidden"
+				className="h-200px overflow-hidden rounded-sm"
 				maxDimension={1080}
 				facingMode="environment"
 			/>

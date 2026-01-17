@@ -16,14 +16,14 @@ export function RecipesPage() {
 				<Suspense>
 					<PageNowPlaying
 						unstyled
-						className="flex flex-col items-center pointer-events-none z-now-playing"
+						className="pointer-events-none z-now-playing flex flex-col items-center"
 					>
 						<Suspense>
-							<RecipeCreateButton className="pointer-events-auto w-48px h-48px items-center justify-center md:w-auto md:h-auto md:gap-2 shadow-xl">
+							<RecipeCreateButton className="pointer-events-auto h-48px w-48px items-center justify-center shadow-xl md:h-auto md:w-auto md:gap-2">
 								<span className="hidden md:block">New Recipe</span>
 								<Icon
 									name="plus"
-									className="w-20px h-20px md:(w-15px h-15px)"
+									className="h-20px w-20px md:(h-15px w-15px)"
 								/>
 							</RecipeCreateButton>
 						</Suspense>

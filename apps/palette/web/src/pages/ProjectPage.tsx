@@ -27,8 +27,8 @@ export function ProjectPage({}: ProjectPageProps) {
 	}
 
 	return (
-		<div className="w-full min-h-100dvh flex flex-col md:h-100dvh">
-			<div className="row py-1 sticky z-100 bg-wash top-0">
+		<div className="min-h-100dvh w-full flex flex-col md:h-100dvh">
+			<div className="sticky top-0 z-100 row py-1 bg-wash">
 				<Button render={<Link to="/" />} emphasis="ghost" size="small">
 					<Icon name="arrowLeft" />
 					Projects
@@ -41,8 +41,8 @@ export function ProjectPage({}: ProjectPageProps) {
 					<SortAction />
 				</ActionBar>
 			</div>
-			<div className="flex flex-col items-stretch md:flex-row w-full gap-1 flex-1 items-stretch md:min-h-0">
-				<div className="flex flex-col gap-1 [flex:3_0_auto] min-h-80dvh md:h-auto md:[flex:3_0_0]">
+			<div className="w-full flex flex-1 flex-col items-stretch items-stretch gap-1 md:min-h-0 md:flex-row">
+				<div className="[flex:3_0_auto] min-h-80dvh flex flex-col gap-1 md:[flex:3_0_0] md:h-auto">
 					<ProjectCanvas project={project} className="[flex:3_0_200px]" />
 					<ProjectColorSpotlight
 						project={project}
@@ -51,7 +51,7 @@ export function ProjectPage({}: ProjectPageProps) {
 				</div>
 				<ProjectPalette
 					project={project}
-					className="[flex:1_0_auto] md:(overflow-y-auto min-h-100px [flex:1_0_0])"
+					className="[flex:1_0_auto] md:([flex:1_0_0] min-h-100px overflow-y-auto)"
 				/>
 			</div>
 		</div>

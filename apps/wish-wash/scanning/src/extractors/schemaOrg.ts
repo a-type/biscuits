@@ -18,7 +18,7 @@ export async function schemaOrg(
 				return (
 					parsed['@type'] === 'Recipe' || parsed['@type'].includes('Recipe')
 				);
-			} catch (e) {
+			} catch {
 				return false;
 			}
 		})

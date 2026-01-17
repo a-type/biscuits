@@ -16,7 +16,7 @@ export function ListPicker({ className, value, ...props }: ListPickerProps) {
 	return (
 		<div {...props} className={clsx('relative w-full', className)}>
 			<HorizontalList
-				className="w-full min-w-0 rounded-lg"
+				className="min-w-0 w-full rounded-lg"
 				open={open}
 				onOpenChange={setOpen}
 			>

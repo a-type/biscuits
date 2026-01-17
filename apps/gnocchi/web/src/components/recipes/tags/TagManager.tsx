@@ -46,13 +46,13 @@ export function TagManager({
 				<ActionBar>
 					<UndoAction />
 				</ActionBar>
-				<div className="flex flex-col gap-2 overflow-y-auto min-h-0 flex-1">
+				<div className="min-h-0 flex flex-1 flex-col gap-2 overflow-y-auto">
 					{tags.map((tag) => (
 						<>
 							<div
 								key={tag.get('name')}
 								className={classNames(
-									'flex flex-row gap-2 items-center flex-shrink-0',
+									'flex flex-shrink-0 flex-row items-center gap-2',
 								)}
 							>
 								<ColorPicker
@@ -78,10 +78,10 @@ export function TagManager({
 						onSubmit={(values) => {
 							createTag(values.tagName);
 						}}
-						className="flex flex-row gap-2 items-end"
+						className="flex flex-row items-end gap-2"
 					>
 						<TextField
-							className="flex-1 min-w-64px"
+							className="min-w-64px flex-1"
 							name="tagName"
 							label="New Tag Name"
 						/>

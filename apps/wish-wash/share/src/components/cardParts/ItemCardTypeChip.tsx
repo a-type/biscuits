@@ -20,7 +20,7 @@ export function ItemCardTypeChip({
 }: ItemCardTypeChipProps) {
 	const item = readFragment(itemCardTypeChipFragment, itemMasked);
 	return (
-		<Card.Content unstyled className={clsx('pt-2 pl-1', className)}>
+		<Card.Content unstyled className={clsx('pl-1 pt-2', className)}>
 			<Chip color="primary" className="inline-flex">
 				<Icon name={typeIcons[item.type]} />
 				{item.type}

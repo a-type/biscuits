@@ -24,7 +24,6 @@ export function RecipeInstructionsField({
 		readonly: false,
 		useBasicEditor: isMobileOs(),
 	});
-	(window as any).recipe = recipe;
 
 	return (
 		<div className="flex flex-col gap-2">
@@ -87,7 +86,7 @@ function Toolbar({ editor }: { editor: Editor }) {
 					disabled={!editor.can().chain().focus().toggleSectionTitle().run()}
 					toggled={editor.isActive('sectionTitle')}
 				>
-					<span className="[font-size:10px] w-[15px] h-[15px] flex items-center justify-center">
+					<span className="[font-size:10px] h-[15px] w-[15px] flex items-center justify-center">
 						H
 					</span>
 				</Button>

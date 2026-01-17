@@ -50,7 +50,7 @@ export const MenuDiscloseRoot = forwardRef<
 			>
 				{children}
 				{open && (
-					<div className="opacity-0 bg-overlay fixed inset-0 z-0 pointer-events-none animate-fade-in animate-delay-200 animate-forwards" />
+					<div className="bg-overlay pointer-events-none fixed inset-0 z-0 animate-fade-in animate-delay-200 animate-forwards opacity-0" />
 				)}
 			</SlotDiv>
 		</MenuDiscloseContext.Provider>
@@ -72,7 +72,7 @@ export const MenuDiscloseTrigger = forwardRef<
 			className={clsx(
 				'pointer-events-auto',
 				'menu-disclose-trigger',
-				'bottom-0 left-1/2 transform -translate-x-1/2 pointer-events-auto',
+				'pointer-events-auto bottom-0 left-1/2 transform -translate-x-1/2',
 				open && 'menu-disclose-trigger-hidden',
 			)}
 			onClick={(ev) => {
@@ -112,7 +112,7 @@ export const MenuDiscloseContent = forwardRef<
 			{...rest}
 			ref={ref}
 			className={clsx(
-				'relative z-1 border-default bg-white rounded-lg shadow-xl',
+				'relative z-1 border-default rounded-lg shadow-xl bg-white',
 				'menu-disclose-content',
 				open ?
 					'menu-disclose-content-visible pointer-events-auto'

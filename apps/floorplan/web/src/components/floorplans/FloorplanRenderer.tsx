@@ -21,7 +21,7 @@ export interface FloorplanRendererProps {
 export function FloorplanRenderer({ className, id }: FloorplanRendererProps) {
 	return (
 		<Viewport
-			className={clsx('bg-gray w-full h-full flex-1 flex flex-col', className)}
+			className={clsx('h-full w-full flex flex-1 flex-col bg-gray', className)}
 			gestureOptions={{
 				filterDrag: (state) => {
 					const isFirstButton = (state.buttons & 1) === 1;
@@ -67,7 +67,7 @@ function FloorplanContent({ id }: { id: string }) {
 
 	return (
 		<FloorProvider value={floor}>
-			<svg width={100} height={100} className="bg-white relative">
+			<svg width={100} height={100} className="relative bg-white">
 				<g transform="translate(50, 50)">
 					<Grid />
 					<FloorplanLines floor={floor} />

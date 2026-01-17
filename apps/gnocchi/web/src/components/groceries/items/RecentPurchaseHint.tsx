@@ -36,11 +36,13 @@ export function RecentPurchaseHint({
 		// items without expirations are not expired
 		!!expiresAt &&
 		// items whose purchase date is within the expiration window are not expired
+		// eslint-disable-next-line react-hooks/purity
 		expiresAt < Date.now();
 
 	// also show warning for non-perishable (no expiration) that were
 	// bought in the last week
 	const wasBoughtThisWeek =
+		// eslint-disable-next-line react-hooks/purity
 		lastPurchasedAt && lastPurchasedAt > Date.now() - 1000 * 60 * 60 * 24 * 7;
 
 	// only show small version if the food isn't yet expired
@@ -62,7 +64,7 @@ export function RecentPurchaseHint({
 	return (
 		<div
 			className={clsx(
-				'text-xs color-gray-dark italic flex flex-row gap-1 items-center',
+				'flex flex-row items-center gap-1 text-xs italic color-gray-dark',
 				className,
 			)}
 		>

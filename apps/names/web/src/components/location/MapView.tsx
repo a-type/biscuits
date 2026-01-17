@@ -48,7 +48,7 @@ export function MapView({
 					},
 				}),
 			);
-			const marker = new mapboxgl.Marker({
+			new mapboxgl.Marker({
 				color: 'var(--color-primary-dark)',
 			})
 				.setLngLat([longitude, latitude])

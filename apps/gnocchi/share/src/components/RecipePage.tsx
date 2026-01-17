@@ -113,7 +113,7 @@ export function RecipePage({ data: response }: RecipePageProps) {
 				<article
 					itemScope
 					itemType="https://schema.org/Recipe"
-					className="h-recipe flex flex-col gap-4 items-stretch"
+					className="h-recipe flex flex-col items-stretch gap-4"
 				>
 					{publication ?
 						<Box gap items="center" render={<Link to={publication.url} />}>
@@ -165,7 +165,7 @@ export function RecipePage({ data: response }: RecipePageProps) {
 						</TopLineTitle>
 					</TopLineRoot>
 					{data.note && (
-						<Note className="self-start max-w-400px">{data.note}</Note>
+						<Note className="max-w-400px self-start">{data.note}</Note>
 					)}
 					{data.prelude && (
 						<div>
@@ -185,7 +185,7 @@ export function RecipePage({ data: response }: RecipePageProps) {
 							<Instructions data={data} />
 						</Suspense>
 					</div>
-					<PageFixedArea className="flex flex-row justify-end bottom-4 top-auto mb-4 bg-transparent">
+					<PageFixedArea className="bottom-4 top-auto mb-4 flex flex-row justify-end bg-transparent">
 						<Button
 							emphasis="primary"
 							className="shadow-lg"
@@ -219,8 +219,8 @@ export function RecipePage({ data: response }: RecipePageProps) {
 function GnocchiHeader() {
 	return (
 		<Box gap items="center" render={<a href="https://biscuits.club/gnocchi" />}>
-			<img src="/icon.png" className="w-30px h-30px" alt="Gnocchi icon" />
-			<H1 className="!text-lg !font-medium font-fancy">Gnocchi Recipes</H1>
+			<img src="/icon.png" className="h-30px w-30px" alt="Gnocchi icon" />
+			<H1 className="font-fancy !text-lg !font-medium">Gnocchi Recipes</H1>
 		</Box>
 	);
 }

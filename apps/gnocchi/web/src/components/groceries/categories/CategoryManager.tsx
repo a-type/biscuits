@@ -77,7 +77,7 @@ function CategoryList() {
 
 	return (
 		<SortableContext items={categoryIds}>
-			<div className="flex flex-col min-h-0 mb-3 overflow-y-auto">
+			<div className="mb-3 min-h-0 flex flex-col overflow-y-auto">
 				{categories.map((category) => {
 					const { prev, next } = getNextAndPrevSortKeys(
 						categoryKeys,
@@ -113,7 +113,7 @@ function CategoryManagerItem({
 	const deleteCategory = useDeleteCategory();
 
 	return (
-		<div className="flex flex-row items-center gap-3 w-full" {...nodeProps}>
+		<div className="w-full flex flex-row items-center gap-3" {...nodeProps}>
 			<Icon name="grabby" {...handleProps} style={{ touchAction: 'none' }} />
 			<div className="flex-grow-1">{category.get('name')}</div>
 			<Button

@@ -36,7 +36,7 @@ export const IngredientCheckoffView = forwardRef<
 		<ul
 			ref={ref}
 			className={classNames(
-				'list-none m-0 flex flex-col gap-4 p-0 w-full',
+				'm-0 w-full flex flex-col list-none gap-4 p-0',
 				className,
 			)}
 		>
@@ -79,7 +79,7 @@ function IngredientCheckoffItem({
 }) {
 	const { isSectionHeader } = hooks.useWatch(ingredient);
 	return (
-		<li className={'flex flex-row gap-2 w-full'}>
+		<li className={'w-full flex flex-row gap-2'}>
 			{!isSectionHeader && (
 				<Checkbox
 					checked={checked}

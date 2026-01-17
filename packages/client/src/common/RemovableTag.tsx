@@ -19,17 +19,17 @@ export function RemovableTag({
 		<Chip
 			color={color || 'primary'}
 			className={clsx(
-				'flex items-center gap-1 px-2 rounded-full !bg-main-light color-black border-gray-dark font-bold text-xs min-h-24px',
+				'min-h-24px flex items-center gap-1 rounded-full px-2 text-xs font-bold color-black border-gray-dark !bg-main-light',
 				className,
 			)}
 		>
 			<span>
-				<Icon name={icon || 'tag'} className="w-10px h-10px" />
+				<Icon name={icon || 'tag'} className="h-10px w-10px" />
 			</span>
 			<span>{name}</span>
 			{onRemove && (
 				<Button emphasis="ghost" className="p-0" onClick={onRemove}>
-					<Icon name="x" className="w-[10px] h-[10px]" />
+					<Icon name="x" className="h-[10px] w-[10px]" />
 				</Button>
 			)}
 		</Chip>

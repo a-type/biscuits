@@ -25,15 +25,15 @@ export interface ItemSourcesProps {
 export function ItemSources({ item, ...rest }: ItemSourcesProps) {
 	hooks.useWatch(item.get('inputs'));
 	return (
-		<div className="mr-auto mt-2 mb-0 text-xs leading-tight min-w-0" {...rest}>
-			<label className="italic inline mr-2">Sources:</label>
+		<div className="mb-0 mr-auto mt-2 min-w-0 text-xs leading-tight" {...rest}>
+			<label className="mr-2 inline italic">Sources:</label>
 			<ul
-				className="color-gray7 list-none p-0 m-0 max-w-full overflow-hidden inline-flex flex-col"
+				className="color-gray7 m-0 max-w-full inline-flex flex-col list-none overflow-hidden p-0"
 				{...rest}
 			>
 				{item.get('inputs').map((input) => (
 					<li
-						className="color-inherit text-inherit inline text-ellipsis max-w-full after:[&:not(:last-child)]:content-[',_']"
+						className="inline max-w-full text-ellipsis text-inherit color-inherit after:[&:not(:last-child)]:content-[',_']"
 						key={(input as any).oid}
 					>
 						<InputRenderer input={input} />
@@ -56,7 +56,6 @@ function InputRenderer({ input }: { input: ItemInputsItem }) {
 				(from{' '}
 				<RecipePreview
 					recipeId={recipeId}
-					title={title}
 					multiplier={multiplier}
 					highlightIngredient={text}
 				/>
@@ -91,12 +90,10 @@ function truncate(str: string, max = 20) {
 
 function RecipePreview({
 	recipeId,
-	title,
 	multiplier,
 	highlightIngredient,
 }: {
 	recipeId: string;
-	title?: string | null;
 	multiplier?: number | null;
 	highlightIngredient?: string;
 }) {

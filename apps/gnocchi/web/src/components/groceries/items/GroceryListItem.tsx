@@ -1,6 +1,5 @@
 import { OpenFoodDetailButton } from '@/components/foods/OpenFoodDetailButton.jsx';
 import { ItemSources } from '@/components/groceries/items/ItemSources.jsx';
-import useMergedRef from '@/hooks/useMergedRef.js';
 import { useIsFirstRender, usePrevious } from '@/hooks/usePrevious.js';
 import { categorizeOnboarding } from '@/onboarding/categorizeOnboarding.js';
 import { hooks } from '@/stores/groceries/index.js';
@@ -19,16 +18,14 @@ import {
 	useSizeCssVars,
 } from '@a-type/ui';
 import { preventDefault, stopPropagation } from '@a-type/utils';
-import { OnboardingTooltip } from '@biscuits/client';
+import { OnboardingTooltip, useMergedRef } from '@biscuits/client';
 import { useDraggable } from '@dnd-kit/core';
-import { CSS } from '@dnd-kit/utilities';
 import { Item } from '@gnocchi.biscuits/verdant';
 import { motion } from 'motion/react';
 import {
 	CSSProperties,
 	Suspense,
 	forwardRef,
-	useCallback,
 	useEffect,
 	useMemo,
 	useRef,
@@ -73,7 +70,7 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 			if (!isPurchased) {
 				groceriesState.purchasedThisSession.delete(id);
 			}
-		}, [isPurchased]);
+		}, [isPurchased, id]);
 
 		const [menuOpen, setMenuOpen] = useState(false);
 
@@ -83,9 +80,9 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 		const displayString = useItemDisplayText(item);
 
 		const toggleItemPurchased = useToggleItemPurchased();
-		const togglePurchased = useCallback(async () => {
+		const togglePurchased = async () => {
 			await toggleItemPurchased(item);
-		}, [item]);
+		};
 
 		const quantityJustChanged = useDidQuantityJustChange(item);
 
@@ -99,12 +96,12 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 			<CollapsibleRoot
 				className={clsx(
 					'item',
-					'grid grid-areas-[check_main]-[check_comment]-[secondary_secondary] grid-cols-[min-content_1fr_min-content] grid-rows-[min-content_min-content_min-content]',
-					'w-full bg-wash rounded-lg relative select-none transition ease-springy',
+					'grid grid-cols-[min-content_1fr_min-content] grid-rows-[min-content_min-content_min-content] grid-areas-[check_main]-[check_comment]-[secondary_secondary]',
+					'relative w-full select-none rounded-lg transition ease-springy bg-wash',
 					'mt-1',
-					'[&[data-dragging=true]]:(shadow-xl cursor-grabbing touch-none border-light)',
+					'[&[data-dragging=true]]:(cursor-grabbing touch-none border-light shadow-xl)',
 					'[&[data-highlighted=true]]:bg-primary-wash',
-					'[&[data-menu-open=true]]:(bg-white border-light)',
+					'[&[data-menu-open=true]]:(border-light bg-white)',
 					isPurchased && 'opacity-90',
 					className,
 				)}
@@ -135,22 +132,22 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 							isPartiallyPurchased={isPartiallyPurchased}
 							togglePurchased={togglePurchased}
 						/>
-						<div className="flex flex-row items-start [grid-area:main] pt-2 pr-3 pb-2 relative focus:(shadow-focus)">
+						<div className="focus:shadow-focus [grid-area:main] relative flex flex-row items-start pb-2 pr-3 pt-2">
 							<div
 								className={clsx(
-									'flex flex-col gap-1 items-start flex-1 mr-2',
+									'mr-2 flex flex-1 flex-col items-start gap-1',
 									isPurchased && 'item-purchased',
 								)}
 							>
-								<div className="flex flex-row items-start gap-1 mt-1 max-w-full overflow-hidden text-ellipsis relative">
+								<div className="relative mt-1 max-w-full flex flex-row items-start gap-1 overflow-hidden text-ellipsis">
 									<span>{displayString}</span>
 								</div>
 								{isPurchased && (
-									<div className="absolute left-0 right-52px top-20px border-0 border-b border-b-gray-dark border-solid h-1px transform-origin-left animate-expand-scale-x animate-duration-100 animate-ease-out" />
+									<div className="absolute left-0 right-52px top-20px h-1px transform-origin-left animate-expand-scale-x animate-duration-100 animate-ease-out border-0 border-b border-solid border-b-gray-dark" />
 								)}
 								<CollapsibleSimple
 									open={!!subline && !menuOpen && !isPurchased}
-									className="text-xs color-gray-dark italic pl-2 pr-1 self-stretch [grid-area:comment]"
+									className="[grid-area:comment] self-stretch pl-2 pr-1 text-xs italic color-gray-dark"
 								>
 									{subline}
 								</CollapsibleSimple>
@@ -163,7 +160,7 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 								<Suspense>
 									<RecentPurchaseHint
 										compact
-										className="mt-1 mr-1"
+										className="mr-1 mt-1"
 										foodName={food}
 									/>
 								</Suspense>
@@ -178,7 +175,7 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 								className="mr-1"
 							>
 								<div
-									className="relative py-1 px-2 select-none"
+									className="relative select-none px-2 py-1"
 									onContextMenu={preventDefault}
 									{...menuProps}
 								>
@@ -194,34 +191,34 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 							</div>
 							<CollapsibleTrigger
 								render={
-									<Button emphasis="ghost" className="p-1 flex-shrink-0" />
+									<Button emphasis="ghost" className="flex-shrink-0 p-1" />
 								}
 							>
 								<Icon
 									name="chevron"
-									className="[*[data-state=open]_&]:rotate-180deg color-gray-dark hover:color-gray-ink"
+									className="color-gray-dark [*[data-state=open]_&]:rotate-180deg hover:color-gray-ink"
 								/>
 							</CollapsibleTrigger>
 						</div>
 						<CollapsibleContent className="[grid-area:secondary]">
 							<Suspense>
-								<div className="flex flex-col gap-2 justify-end p-3 pt-0 items-end">
-									<div className="flex flex-row gap-3 justify-end w-full items-center">
+								<div className="flex flex-col items-end justify-end gap-2 p-3 pt-0">
+									<div className="w-full flex flex-row items-center justify-end gap-3">
 										<LiveUpdateTextField
 											value={comment || ''}
 											onChange={(val) => item.set('comment', val)}
 											placeholder="Add a comment"
-											className="important:text-xs important:border-gray-dark flex-grow-2 flex-shrink-1 flex-basis-50% md:flex-basis-120px md:flex-grow-3 my-1"
+											className="my-1 flex-shrink-1 flex-grow-2 flex-basis-50% md:flex-grow-3 md:flex-basis-120px important:text-xs important:border-gray-dark"
 										/>
 										<Suspense>
 											<ListSelect
 												value={listId}
 												onChange={(listId) => item.set('listId', listId)}
-												className="flex-basis-0 flex-grow-1 flex-shrink-1"
+												className="flex-shrink-1 flex-grow-1 flex-basis-0"
 											/>
 										</Suspense>
 									</div>
-									<div className="flex flex-row gap-1 justify-end w-full items-center">
+									<div className="w-full flex flex-row items-center justify-end gap-1">
 										<Suspense>
 											<QuantityEditor className="mr-auto" item={item} />
 										</Suspense>
@@ -263,6 +260,7 @@ function useDidQuantityJustChange(item: Item) {
 		if (isFirstRenderRef.current) {
 			// nothing
 		} else {
+			// eslint-disable-next-line react-hooks/set-state-in-effect
 			setDidQuantityChange(true);
 			const timeout = setTimeout(() => setDidQuantityChange(false), 1000);
 			return () => clearTimeout(timeout);
@@ -273,20 +271,14 @@ function useDidQuantityJustChange(item: Item) {
 }
 
 export function GroceryListItemDraggable({ item, ...rest }: { item: Item }) {
-	const {
-		attributes,
-		listeners,
-		setNodeRef,
-		transform,
-		isDragging,
-		setActivatorNodeRef,
-	} = useDraggable({
-		id: item.get('id'),
-		data: {
-			type: 'item',
-			value: item,
-		},
-	});
+	const { attributes, listeners, setNodeRef, isDragging, setActivatorNodeRef } =
+		useDraggable({
+			id: item.get('id'),
+			data: {
+				type: 'item',
+				value: item,
+			},
+		});
 
 	const handleProps = useMemo(
 		() => ({
@@ -301,13 +293,12 @@ export function GroceryListItemDraggable({ item, ...rest }: { item: Item }) {
 		[listeners, attributes, setActivatorNodeRef, isDragging],
 	);
 
-	const transformString = CSS.Transform.toString(transform);
 	const style = useMemo(
 		() => ({
 			// transform: transformString,
 			opacity: isDragging ? 0.2 : undefined,
 		}),
-		[isDragging, transformString],
+		[isDragging],
 	);
 
 	return (
@@ -358,7 +349,7 @@ function ItemCheckbox({
 			onPointerDown={stopPropagation}
 			onPointerUp={stopPropagation}
 			data-test="grocery-list-item-checkbox"
-			className={clsx('[grid-area:check] mt-2 mx-3 overflow-hidden')}
+			className={clsx('[grid-area:check] mx-3 mt-2 overflow-hidden')}
 		/>
 	);
 }

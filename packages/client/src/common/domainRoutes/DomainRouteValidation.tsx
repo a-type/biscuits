@@ -165,7 +165,7 @@ function DnsRecord({
 			d="col"
 		>
 			{verified && (
-				<Icon name="check" className="color-main-dark absolute top-2 right-2" />
+				<Icon name="check" className="absolute right-2 top-2 color-main-dark" />
 			)}
 			<Box gap>
 				<span className="font-bold">Type:</span>

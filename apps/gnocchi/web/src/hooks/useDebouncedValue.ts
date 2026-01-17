@@ -17,6 +17,7 @@ export function useDebouncedValue<T>(
 		return () => {
 			clearTimeout(timeout);
 		};
-	}, [getValue, ...dependencies]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [getValue, duration, ...dependencies]);
 	return debouncedValue;
 }

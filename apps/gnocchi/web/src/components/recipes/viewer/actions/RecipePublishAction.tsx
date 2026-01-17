@@ -120,6 +120,7 @@ export const RecipePublishAction = withSuspense(
 	</ActionButton>,
 );
 
+const now = Date.now();
 function PublishedContent({
 	recipe,
 	publishedRecipe: { publishedAt, url },
@@ -136,7 +137,7 @@ function PublishedContent({
 		onCompleted: onChange,
 	});
 
-	const publishDate = new Date(publishedAt ?? Date.now());
+	const publishDate = new Date(publishedAt ?? now);
 
 	return (
 		<Dialog.Content className="flex flex-col gap-4">

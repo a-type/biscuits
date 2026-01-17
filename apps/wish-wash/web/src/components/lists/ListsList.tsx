@@ -51,7 +51,7 @@ function ListsListItem({ item }: { item: List }) {
 	return (
 		<Card>
 			<Card.Main render={<Link to={`/${id}`} />}>
-				<CardTitle className="flex-row gap-2 items-center">
+				<CardTitle className="flex-row items-center gap-2">
 					<Icon name={item.isAuthorized ? 'lock' : 'add_person'} /> {name}
 				</CardTitle>
 			</Card.Main>

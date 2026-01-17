@@ -38,7 +38,7 @@ export const TextLink = forwardRef<HTMLAnchorElement, LinkProps>(
 			<Link
 				{...props}
 				className={classNames(
-					'layer-components:([&[data-transitioning=true]]:opacity-70 font-bold cursor-pointer text-gray9)',
+					'layer-components:([&[data-transitioning=true]]:opacity-70 text-gray9) cursor-pointer font-bold',
 					className,
 				)}
 				ref={ref}

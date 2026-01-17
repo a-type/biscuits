@@ -14,7 +14,7 @@ export function App() {
 	return (
 		<div
 			className={classNames(
-				'flex flex-col flex-1 w-full h-full',
+				'h-full w-full flex flex-1 flex-col',
 				'theme-lemon',
 			)}
 		>
@@ -42,19 +42,18 @@ function KeyboardOverlayReader({ set }: { set: (value: boolean) => void }) {
 	const value = useFeatureFlag('overlayKeyboard');
 	useEffect(() => {
 		set(!!value);
-	}, [value]);
+	}, [value, set]);
 	return null;
 }
 
 function ErrorFallback() {
 	return (
 		<div className="flex flex-col items-center justify-center p-4">
-			<div className="flex flex-col items-start justify-center gap-4 max-w-700px">
+			<div className="max-w-700px flex flex-col items-start justify-center gap-4">
 				<H1>Something went wrong</H1>
 				<P>
-					Sorry about this. The app has crashed. You can try refreshing, but if
-					that doesn&apos;t work,{' '}
-					<a className="underline font-bold" href="mailto:hi@biscuits.club">
+					{`Sorry about this. The app has crashed. You can try refreshing, but if that doesn't work, `}
+					<a className="font-bold underline" href="mailto:hi@biscuits.club">
 						let me know about it.
 					</a>
 				</P>

@@ -12,10 +12,10 @@ export function TripGlobalProgress({ trip }: TripGlobalProgressProps) {
 	return (
 		<Progress
 			value={value}
-			className="w-full relative overflow-hidden border border-default rounded-full"
+			className="relative w-full overflow-hidden border border-default rounded-full"
 		>
 			<ProgressIndicator
-				className="bg-accent w-full h-6px"
+				className="h-6px w-full bg-accent"
 				style={{
 					transform: `translateX(-${100 * (1 - value)}%`,
 				}}

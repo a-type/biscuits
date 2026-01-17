@@ -51,7 +51,7 @@ export default function LoginPage() {
 				<span className="row">
 					<img
 						src={`${appInfo.url}/${appInfo.iconPath}`}
-						className="w-60px h-60px inline-block mr-2"
+						className="mr-2 inline-block h-60px w-60px"
 						alt=""
 					/>
 					{activeTab === 'signin' ?
@@ -63,7 +63,7 @@ export default function LoginPage() {
 	}
 
 	return (
-		<div className="flex flex-col items-center justify-center h-screen flex-1 bg-primary-wash">
+		<div className="h-screen flex flex-1 flex-col items-center justify-center bg-primary-wash">
 			<Box d="col" gap grow layout="center center">
 				<Box
 					surface="white"
@@ -77,10 +77,10 @@ export default function LoginPage() {
 				>
 					<h1 className="font-fancy mb-0">{title}</h1>
 					{message && (
-						<P className="px-3 py-1 rounded-full bg-accent-light">{message}</P>
+						<P className="rounded-full px-3 py-1 bg-accent-light">{message}</P>
 					)}
 					{appReferrer && (
-						<P className="italic color-gray-dark text-sm">
+						<P className="text-sm italic color-gray-dark">
 							A Biscuits.club app
 						</P>
 					)}
@@ -100,12 +100,12 @@ export default function LoginPage() {
 						</TabsList>
 						<TabsContent
 							value="signup"
-							className="flex flex-col gap-md items-stretch"
+							className="flex flex-col items-stretch gap-md"
 						>
 							<label
 								className={classNames(
-									'flex flex-row gap-3 max-w-400px text-sm transition-color  p-2 rounded-lg',
-									!tosAgreed && 'bg-primary-light color-black',
+									'max-w-400px flex flex-row gap-3 rounded-lg p-2 text-sm transition-color',
+									!tosAgreed && 'color-black bg-primary-light',
 								)}
 							>
 								<Checkbox
@@ -156,7 +156,7 @@ export default function LoginPage() {
 						</TabsContent>
 						<TabsContent
 							value="signin"
-							className="flex flex-col gap-md items-stretch"
+							className="flex flex-col items-stretch gap-md"
 						>
 							<OAuthSigninButton
 								endpoint={`${CONFIG.API_ORIGIN}/auth/provider/google/login`}
@@ -185,10 +185,10 @@ export default function LoginPage() {
 
 function Or() {
 	return (
-		<div className="flex flex-row gap-2 items-center">
-			<div className="flex-1 border-t-solid border-t border-gray-dark"></div>
+		<div className="flex flex-row items-center gap-2">
+			<div className="flex-1 border-t border-t-solid border-gray-dark"></div>
 			<div className="color-gray-dark">or</div>
-			<div className="flex-1 border-t-solid border-t border-gray-dark"></div>
+			<div className="flex-1 border-t border-t-solid border-gray-dark"></div>
 		</div>
 	);
 }

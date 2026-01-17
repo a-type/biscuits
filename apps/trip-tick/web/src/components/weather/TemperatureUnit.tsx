@@ -11,7 +11,7 @@ export function TemperatureUnitSelect({ className }: { className?: string }) {
 	const { unit, setUnit } = useTemperatureUnit();
 
 	return (
-		<div className={classNames('flex flex-row gap-2 items-center', className)}>
+		<div className={classNames('flex flex-row items-center gap-2', className)}>
 			Temperature unit:
 			<Select
 				value={unit}

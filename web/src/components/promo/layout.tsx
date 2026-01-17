@@ -38,8 +38,8 @@ export const Section = forwardRef<
 		<section
 			ref={ref}
 			className={clsx(
-				'bg-primary-wash relative flex flex-col items-start mb-auto p-6 rounded-lg text-sm border border-solid border-primary-dark [line-height:1.5] color-black',
-				color === 'white' && 'bg-white border-default',
+				'[line-height:1.5] relative mb-auto flex flex-col items-start border rounded-lg border-solid p-6 text-sm color-black bg-primary-wash border-primary-dark',
+				color === 'white' && 'border-default bg-white',
 				className,
 			)}
 			{...rest}
@@ -49,7 +49,7 @@ export const Section = forwardRef<
 
 export function HeroTitle({ children }: { children: string }) {
 	return (
-		<h1 className="w-full m-0 mb-6 font-fancy [font-size:7vmax] color-black font-normal text-shadow-[0_0_16px_var(--color-primary-light)] md:[font-size:7vmin]">
+		<h1 className="font-fancy [font-size:7vmax] m-0 mb-6 w-full font-normal text-shadow-[0_0_16px_var(--color-primary-light)] color-black md:[font-size:7vmin]">
 			{children}
 		</h1>
 	);
@@ -69,7 +69,7 @@ export const Content = forwardRef<
 			className={clsx('w-full flex flex-col gap-6 bg-primary', className)}
 			{...rest}
 		>
-			<DemoGrid className="max-w-800px w-full my-0 mx-auto p-6 relative z-1">
+			<DemoGrid className="relative z-1 mx-auto my-0 max-w-800px w-full p-6">
 				{children}
 			</DemoGrid>
 		</div>
@@ -88,14 +88,14 @@ export const FeatureSection = ({
 			<H2 className="gutter-bottom">{title}</H2>
 			{items.map((item, index) => (
 				<div className="col gap-0" key={index}>
-					<div className="row items-start my-2">
+					<div className="my-2 row items-start">
 						<Emoji>{item.emoji}</Emoji>
 						<ItemText>{item.text}</ItemText>
 					</div>
 					{item.premium && (
 						<Link
 							to="/join"
-							className="ml-auto relative -top-2 text-xs bg-primary-dark color-white px-3 py-1 rounded-full font-bold"
+							className="relative ml-auto rounded-full px-3 py-1 text-xs font-bold color-white bg-primary-dark -top-2"
 						>
 							Premium feature
 						</Link>
@@ -107,8 +107,8 @@ export const FeatureSection = ({
 };
 
 export const Footer = ({ className }: { className?: string }) => (
-	<Content className={clsx('important:bg-primary pb-20dvh', className)}>
-		<div className="mt-6 gap-4 flex flex-col">
+	<Content className={clsx('pb-20dvh important:bg-primary', className)}>
+		<div className="mt-6 flex flex-col gap-4">
 			<Link to="/privacy-policy" newTab>
 				Read the privacy policy
 			</Link>
@@ -131,15 +131,15 @@ export const CallToAction = ({
 }) => (
 	<div
 		className={clsx(
-			'flex flex-col fixed bottom-0 bg-primary-wash border-0 border-t border-solid border-t-primary-dark m-0 w-full p-3 items-center gap-3 z-2 transition-colors',
+			'fixed bottom-0 z-2 m-0 w-full flex flex-col items-center gap-3 border-0 border-t border-solid p-3 transition-colors bg-primary-wash border-t-primary-dark',
 			className,
 		)}
 	>
-		<div className="flex flex-col sm:flex-row-reverse justify-between md:justify-center items-center w-full gap-xs sm:gap-lg">
+		<div className="w-full flex flex-col items-center justify-between gap-xs sm:flex-row-reverse md:justify-center sm:gap-lg">
 			<Button
 				render={<Link to={appsById[appId].url} data-test="get-started" />}
 				emphasis="primary"
-				className="justify-center self-center"
+				className="self-center justify-center"
 			>
 				Get Started
 			</Button>
@@ -177,7 +177,7 @@ export const AppName = ({ appId }: { appId: AppId }) => {
 	const app = appsById[appId];
 
 	return (
-		<div className="row gap-4 items-center py-2">
+		<div className="row items-center gap-4 py-2">
 			<img src={`${app.url}/${app.iconPath}`} alt={app.name} width={80} />
 			<AppNameText>{app.name}</AppNameText>
 		</div>

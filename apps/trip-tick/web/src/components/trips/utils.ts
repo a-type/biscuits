@@ -25,7 +25,7 @@ export function getComputedQuantity({
 	weather?: ResultOf<typeof quantityForecast>;
 }) {
 	let unrounded = 0;
-	let conditionedDays =
+	const conditionedDays =
 		conditions?.length ?
 			(forecast?.days ?? []).filter((day) => {
 				if (!conditions) return true;

@@ -23,7 +23,7 @@ export function ItemCardPurchaseButton({
 				color="success"
 				rounded
 				gap="sm"
-				className="text-xs pl-md h-touch"
+				className="h-touch pl-md text-xs"
 			>
 				<Icon name="check" />
 				<span>You bought it!</span>

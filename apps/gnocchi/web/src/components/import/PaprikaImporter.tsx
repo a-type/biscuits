@@ -137,8 +137,8 @@ export const PaprikaImporter = forwardRef<
 					})
 					.finally(() => setLoading(false));
 			})
-			.flush();
-	}, [data, selected, onClose]);
+			.commit();
+	}, [data, selected, onClose, client]);
 
 	return (
 		<Dialog
@@ -191,7 +191,7 @@ export const PaprikaImporter = forwardRef<
 						Select all
 					</ActionButton>
 				</ActionBar>
-				<div className="flex flex-col items-stretch p-0 m-0 gap-2">
+				<div className="m-0 flex flex-col items-stretch gap-2 p-0">
 					{data.map((recipe) => (
 						<RecipeItem
 							key={recipe.uid}
@@ -226,7 +226,7 @@ function RecipeItem({
 	onSelectedChange: (selected: boolean) => void;
 }) {
 	return (
-		<label className="flex flex-row items-center p-2 gap-2">
+		<label className="flex flex-row items-center gap-2 p-2">
 			<Checkbox checked={selected} onCheckedChange={onSelectedChange} />
 			<div className="flex-1 font-bold">{recipe.name}</div>
 		</label>

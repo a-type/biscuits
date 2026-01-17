@@ -117,7 +117,7 @@ function AddChefsAction() {
 				}
 			>
 				<Icon name="add_person" />
-				<span className="hidden sm:display-inline">Invite chefs</span>
+				<span className="sm:display-inline hidden">Invite chefs</span>
 			</Dialog.Trigger>
 			<Dialog.Content>
 				<Dialog.Title>Invite chefs</Dialog.Title>
@@ -182,14 +182,14 @@ function NoteToggleAction({ recipe }: { recipe: Recipe }) {
 		<Popover>
 			<Popover.Trigger render={<ActionButton emphasis="primary" />}>
 				<Icon name="note" />
-				<span className="hidden sm:display-inline">Add note</span>
+				<span className="sm:display-inline hidden">Add note</span>
 			</Popover.Trigger>
 			<Popover.Content
 				sideOffset={8}
 				align="start"
-				className="p-0 bg-transparent border-none rounded-0 max-w-2/3"
+				className="max-w-2/3 rounded-0 border-none p-0 bg-transparent"
 			>
-				<Note className="w-full h-full">{note}</Note>
+				<Note className="h-full w-full">{note}</Note>
 			</Popover.Content>
 		</Popover>
 	);

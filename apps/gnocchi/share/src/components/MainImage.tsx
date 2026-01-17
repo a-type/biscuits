@@ -8,12 +8,12 @@ export interface MainImageProps {
 
 export function MainImage({ url, title }: MainImageProps) {
 	return (
-		<TopLineImage className="block relative overflow-hidden">
+		<TopLineImage className="relative block overflow-hidden">
 			<img
 				src={url}
 				className={clsx(
 					'u-photo',
-					'object-cover object-center w-full h-full rounded-lg md:h-auto md:aspect-square',
+					'h-full w-full rounded-lg object-cover object-center md:aspect-square md:h-auto',
 				)}
 				alt={`A photo of ${title}`}
 			/>

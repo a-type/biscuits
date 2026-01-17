@@ -38,7 +38,7 @@ export function RecipeTimeFields({ recipe }: RecipeTimeFieldsProps) {
 	);
 
 	return (
-		<div className="flex flex-col gap-1 items-stretch">
+		<div className="flex flex-col items-stretch gap-1">
 			<Row>
 				<label htmlFor="recipePrepTime" className="flex-1">
 					Prep Time (minutes)

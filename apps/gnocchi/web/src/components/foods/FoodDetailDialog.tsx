@@ -152,7 +152,7 @@ function FoodDetailView({
 				/>
 			</Row>
 			<Divider />
-			<div className="flex gap-1 flex-col">
+			<div className="flex flex-col gap-1">
 				<Row>
 					<span className="whitespace-nowrap">Expires after</span>
 					<LiveUpdateTextField

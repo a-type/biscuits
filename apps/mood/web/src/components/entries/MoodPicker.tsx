@@ -35,6 +35,7 @@ export function MoodPicker({
 	const [localValue, setLocalValue] = useState<number>(value ?? 0);
 
 	useEffect(() => {
+		// eslint-disable-next-line react-hooks/set-state-in-effect
 		setLocalValue(value ?? 0);
 	}, [value]);
 
@@ -97,7 +98,7 @@ export function MoodPicker({
 							onValueChange(localValue);
 						}
 					}}
-					className="w-auto h-full"
+					className="h-full w-auto"
 				>
 					<Slider.Track
 						className={clsx('w-6', {
@@ -113,7 +114,7 @@ export function MoodPicker({
 						<Popover open={active && getIsTouch()}>
 							<Slider.Thumb
 								className={clsx(
-									'w-touch-large h-touch-large text-2xl',
+									'h-touch-large w-touch-large text-2xl',
 									value === null && 'border-dashed',
 								)}
 								ref={thumbRef}
@@ -125,7 +126,7 @@ export function MoodPicker({
 								anchor={thumbRef}
 								side="left"
 								sideOffset={16}
-								className="min-w-0 min-h-0"
+								className="min-h-0 min-w-0"
 							>
 								<Box p="xs" col gap layout="center center" className="text-3xl">
 									{moodIcon}

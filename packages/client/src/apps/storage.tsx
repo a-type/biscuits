@@ -121,11 +121,11 @@ export function ManageStorage({
 		return (
 			<div className={clsx('flex flex-col items-start gap-2', className)}>
 				<H2>Manage Device Storage</H2>
-				<P className="text-xs mb-2">
+				<P className="mb-2 text-xs">
 					Your data is synced to Biscuits. If you're experiencing issues, you
 					can try resetting your local device to the server's data.
 				</P>
-				<div className="flex flex-row gap-2 flex-wrap">
+				<div className="flex flex-row flex-wrap gap-2">
 					<ConfirmedButton
 						emphasis="primary"
 						color="attention"
@@ -144,11 +144,11 @@ export function ManageStorage({
 	return (
 		<div className={clsx('flex flex-col items-start gap-2', className)}>
 			<H2>Manage App Storage</H2>
-			<P className="text-xs mb-2">
+			<P className="mb-2 text-xs">
 				This app stores all data on your device. You can export and import your
 				data, or reset it.
 			</P>
-			<div className="flex flex-row gap-2 flex-wrap">
+			<div className="flex flex-row flex-wrap gap-2">
 				<ExportDataButton onError={onError} />
 				<ImportDataButton onError={onError} />
 				<ConfirmedButton

@@ -11,7 +11,7 @@ export function NewCategoryForm({
 }) {
 	const createCategory = useCreateCategory();
 	return (
-		<div className="flex flex-col gap-2 items-stretch w-full">
+		<div className="w-full flex flex-col items-stretch gap-2">
 			<FormikForm
 				initialValues={{ name: '' }}
 				onSubmit={async ({ name }) => {
@@ -21,7 +21,7 @@ export function NewCategoryForm({
 				}}
 				className="w-full"
 			>
-				<div className="flex flex-row items-end justify-stretch w-full gap-2">
+				<div className="w-full flex flex-row items-end justify-stretch gap-2">
 					<TextField
 						placeholder="Dairy & Eggs"
 						autoFocusDelay={autoFocus ? 100 : undefined}

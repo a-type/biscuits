@@ -6,7 +6,7 @@ const SNAPSHOT_MATCH = /window\.__SNAPSHOT__\s+=\s+(.*);/;
 export async function gnocchi($: CheerioAPI): Promise<ExtractorData | null> {
 	const scripts = $('script');
 
-	let s = scripts.filter((i, el) => {
+	const s = scripts.filter((i, el) => {
 		const text = $(el).text();
 		return SNAPSHOT_MATCH.test(text);
 	});

@@ -44,7 +44,7 @@ export function AppPicker({ className, children }: AppPickerProps) {
 		};
 		window.addEventListener('message', listener);
 		return () => window.removeEventListener('message', listener);
-	}, []);
+	}, [hostApp]);
 
 	if (getIsPWAInstalled()) {
 		// app picker doesn't really work in a PWA :(
@@ -66,11 +66,11 @@ export function AppPicker({ className, children }: AppPickerProps) {
 			<PopoverContent
 				align="end"
 				side="top"
-				className="p-0 min-w-0"
+				className="min-w-0 p-0"
 				sideOffset={-40}
 			>
 				<iframe
-					className="p-0 border-none shadow-none focus:outline-none"
+					className="border-none p-0 shadow-none focus:outline-none"
 					src={`${CONFIG.HOME_ORIGIN}/appPicker/index.html?hostApp=${hostApp}`}
 					title="App Picker"
 					style={{

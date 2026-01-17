@@ -6,8 +6,8 @@ import { MeetupHint } from './meetup/MeetupHint.jsx';
 
 export function GroceryEmptyContent() {
 	return (
-		<div className="flex flex-col p-4 gap-6 select-none">
-			<div className="flex flex-col items-center justify-center flex-grow-1 text-center color-gray7 italic text-sm gap-3 p-4">
+		<div className="flex flex-col select-none gap-6 p-4">
+			<div className="color-gray7 flex flex-grow-1 flex-col items-center justify-center gap-3 p-4 text-center text-sm italic">
 				<Cart
 					width="15vmax"
 					style={{

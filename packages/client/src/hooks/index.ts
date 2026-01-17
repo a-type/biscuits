@@ -2,7 +2,6 @@ export * from './graphql.js';
 export * from './useAppInfo.js';
 export * from './useDebounced.js';
 export * from './useEffectOnce.js';
-export * from './useIsInitialMount.js';
 export * from './useIsServiceWorkerRegistered.js';
 export * from './useIsTouch.js';
 export * from './useMergedRef.js';

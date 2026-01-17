@@ -11,13 +11,11 @@ export const itemCardImageGalleryFragment = graphql(`
 export interface ItemCardImageGalleryProps {
 	item: FragmentOf<typeof itemCardImageGalleryFragment>;
 	className?: string;
-	maxCols?: number;
 }
 
 export function ItemCardImageGallery({
 	item: itemMasked,
 	className,
-	maxCols = 3,
 }: ItemCardImageGalleryProps) {
 	const item = readFragment(itemCardImageGalleryFragment, itemMasked);
 	return (
@@ -26,7 +24,7 @@ export function ItemCardImageGallery({
 			gap
 			items="center"
 			className={clsx(
-				'w-full overflow-y-auto justify-center-safe',
+				'w-full justify-center-safe overflow-y-auto',
 				'grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))]',
 				className,
 			)}
@@ -36,7 +34,7 @@ export function ItemCardImageGallery({
 			{item.imageUrls.map((url, i) => (
 				<img
 					key={i}
-					className="rounded-lg cursor-pointer h-auto w-full object-contain flex-basis-200px min-w-200px flex-shrink-1 flex-grow-1"
+					className="h-auto min-w-200px w-full flex-shrink-1 flex-grow-1 flex-basis-200px cursor-pointer rounded-lg object-contain"
 					crossOrigin="anonymous"
 					src={url}
 				/>

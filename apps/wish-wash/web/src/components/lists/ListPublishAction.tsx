@@ -32,12 +32,12 @@ const publishedListQuery = graphql(`
 	}
 `);
 
+const now = Date.now();
 export function ListPublishAction({
 	list,
 	className,
 	...rest
 }: ListPublishActionProps) {
-	(window as any).list = list;
 	const canPublish = useHasServerAccess();
 
 	const { data } = useQuery(publishedListQuery, {
@@ -49,7 +49,7 @@ export function ListPublishAction({
 
 	const publishDate =
 		publishedWishlist ?
-			new Date(publishedWishlist.publishedAt ?? Date.now())
+			new Date(publishedWishlist.publishedAt ?? now)
 		:	new Date();
 	const updatedDate = new Date(list.deepUpdatedAt);
 
@@ -170,7 +170,7 @@ function ManagePublishedList({
 		},
 	);
 
-	const publishedDate = new Date(publishedAt ?? Date.now());
+	const publishedDate = new Date(publishedAt ?? now);
 
 	return (
 		<>

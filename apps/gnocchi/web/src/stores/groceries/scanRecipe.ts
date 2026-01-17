@@ -55,7 +55,7 @@ export async function getScannedRecipe(
 				input,
 			},
 		});
-		let result: RecipeInit = {
+		const result: RecipeInit = {
 			url: scanResult.data?.recipeScan?.data?.url,
 			title: 'Web Recipe',
 		};
@@ -114,6 +114,7 @@ export async function getScannedRecipe(
 						}
 						return ingredient;
 					} catch (err) {
+						console.error(err);
 						// we tried...
 						return ingredient;
 					}

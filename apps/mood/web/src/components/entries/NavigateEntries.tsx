@@ -47,7 +47,7 @@ export function NavigateEntries({
 			border
 			gap
 			elevated="md"
-			className={clsx('z-1 fixed top-sm left-sm', className)}
+			className={clsx('fixed left-sm top-sm z-1', className)}
 			{...rest}
 		>
 			<Button
@@ -143,7 +143,7 @@ function DateWithEntry({ value }: { value: CalendarDayValue }) {
 					'bg-success-light': moodValue === 1,
 					'bg-success': moodValue === 2,
 				},
-				'[&[data-selected=true]]:(ring ring-2 ring-bg ring-offset-1)',
+				'[&[data-selected=true]]:(ring ring-2 ring-offset-1 ring-bg)',
 			)}
 		/>
 	);

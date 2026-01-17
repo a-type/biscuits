@@ -18,7 +18,7 @@ export function readErrorFromQuery() {
 	if (error) {
 		// give the app a moment to register a handler
 		setTimeout(() => {
-			let result = callback(error);
+			const result = callback(error);
 			if (result) {
 				urlParams.delete('error');
 				window.history.replaceState(

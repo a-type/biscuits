@@ -5,7 +5,7 @@ export interface RecipeNotFoundProps {}
 
 export function RecipeNotFound({}: RecipeNotFoundProps) {
 	return (
-		<div className="flex flex-col gap-6 items-start">
+		<div className="flex flex-col items-start gap-6">
 			<H1>Recipe not found</H1>
 			<P>Perhaps it was deleted, or you typed the URL incorrectly.</P>
 			<div>

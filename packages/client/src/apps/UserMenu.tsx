@@ -81,12 +81,12 @@ export function UserMenu({
 				</DropdownMenu.Trigger>
 				<DropdownMenu.Content>
 					{isOffline && (
-						<div className="pl-8 pr-4 py-1 color-gray-dark text-sm max-w-300px bg-attention-wash color-attention-dark">
+						<div className="max-w-300px py-1 pl-8 pr-4 text-sm color-attention-dark color-gray-dark bg-attention-wash">
 							Offline - some features may be unavailable
 						</div>
 					)}
 					{isLoggedIn && !hasServerAccess && (
-						<div className="bg-wash pl-8 pr-4 py-1 color-gray-dark text-sm max-w-300px color-gray-dark">
+						<div className="max-w-300px py-1 pl-8 pr-4 text-sm color-gray-dark color-gray-dark bg-wash">
 							Your plan does not include sync for this app
 						</div>
 					)}
@@ -97,7 +97,7 @@ export function UserMenu({
 								render={
 									<a href={`${CONFIG.HOME_ORIGIN}/join?appReferrer=${appId}`} />
 								}
-								className="theme-leek bg-primary-wash color-primary-ink focus-visible:bg-primary-light"
+								className="theme-leek color-primary-ink bg-primary-wash focus-visible:bg-primary-light"
 							>
 								Upgrade for sync
 								<DropdownMenuItemRightSlot>
@@ -105,7 +105,7 @@ export function UserMenu({
 								</DropdownMenuItemRightSlot>
 							</DropdownMenu.Item>
 							<DropdownMenu.Item
-								render={<LoginLink className="color-inherit font-inherit" />}
+								render={<LoginLink className="font-inherit color-inherit" />}
 							>
 								Log in
 								<DropdownMenuItemRightSlot>
@@ -172,7 +172,7 @@ export function UserMenu({
 									<InstallButton
 										emphasis="primary"
 										size="small"
-										className="justify-between mx-lg my-sm"
+										className="mx-lg my-sm justify-between"
 									/>
 								}
 								color="accent"

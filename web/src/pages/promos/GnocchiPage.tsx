@@ -102,13 +102,13 @@ export function GnocchiPage() {
 			</Content>
 			<Content
 				className={classNames(
-					'bg-primary-light border-t-10dvh border-b-20dvh border-solid border-primary pt-10dvh',
+					'border-b-20dvh border-t-10dvh border-solid pt-10dvh bg-primary-light border-primary',
 					'theme-leek',
 				)}
 				ref={upgradeSectionRef}
 			>
-				<TitleWrap className="bg-primary-wash border-1 border-solid border-primary-dark rounded-lg p-4">
-					<H2 className="[font-size:5vmax] font-medium gutter-bottom flex-shrink-0 leading-tight [text-wrap:balanced]">
+				<TitleWrap className="border-1 rounded-lg border-solid p-4 bg-primary-wash border-primary-dark">
+					<H2 className="gutter-bottom [font-size:5vmax] [text-wrap:balanced] flex-shrink-0 font-medium leading-tight">
 						Upgrade to the world's most collaborative cooking app
 					</H2>
 					<P>
@@ -148,7 +148,7 @@ export function GnocchiPage() {
 						},
 					]}
 				/>
-				<div className="flex flex-row flex-wrap items-center justify-center gap-4 w-full py-8 md:[grid-column-end:span_2]">
+				<div className="w-full flex flex-row flex-wrap items-center justify-center gap-4 py-8 md:[grid-column-end:span_2]">
 					<Button render={<Link to="/join" />} emphasis="primary">
 						Upgrade now
 					</Button>

@@ -18,7 +18,7 @@ export function RecipeTagsEditor({ recipe, className }: RecipeTagsEditorProps) {
 	const removeTag = (name: string) => tags.removeAll(name);
 
 	return (
-		<div className={clsx('flex flex-wrap gap-1 items-center', className)}>
+		<div className={clsx('flex flex-wrap items-center gap-1', className)}>
 			{tags?.map((tag) => (
 				<Suspense key={tag}>
 					<TagDisplay tag={tag} onRemove={removeTag} />

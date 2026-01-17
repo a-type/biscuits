@@ -19,6 +19,7 @@ export function PopEffect({ active, className }: PopEffectProps) {
 
 	useEffect(() => {
 		if (active) {
+			// eslint-disable-next-line react-hooks/set-state-in-effect
 			setAnimate(true);
 			cancelAnimation();
 			if (ref.current) {
@@ -30,12 +31,12 @@ export function PopEffect({ active, className }: PopEffectProps) {
 				);
 			}
 		}
-	}, [active]);
+	}, [active, cancelAnimation, particles]);
 
 	return (
 		<div
 			className={classNames(
-				'absolute center translate--50% scale-0 bg-primary rounded-full w-50px h-50px overflow-hidden z--1',
+				'absolute center z--1 h-50px w-50px translate--50% scale-0 overflow-hidden rounded-full bg-primary',
 				'[&[data-active=true]]:(animate-keyframes-pop animate-duration-1500 animate-ease-out animate-iteration-1)',
 				className,
 			)}
@@ -44,8 +45,8 @@ export function PopEffect({ active, className }: PopEffectProps) {
 		>
 			<div
 				className={classNames(
-					'absolute center translate--50% scale-0 w-48px h-48px bg-white rounded-full z-0',
-					'[&[data-active=true]]:(animate-keyframes-pop animate-duration-1000 animate-ease-out delay-500 animate-iteration-1)',
+					'absolute center z-0 h-48px w-48px translate--50% scale-0 rounded-full bg-white',
+					'[&[data-active=true]]:(animate-keyframes-pop animate-duration-1000 animate-ease-out animate-iteration-1 delay-500)',
 				)}
 				data-active={animate}
 			/>

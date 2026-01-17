@@ -15,7 +15,7 @@ export const TopControls = ({
 	children: ReactNode;
 }) => (
 	<div
-		className="w-full flex flex-row justify-between items-center gap-2 p-2 mt-1"
+		className="mt-1 w-full flex flex-row items-center justify-between gap-2 p-2"
 		{...props}
 	>
 		{children}
@@ -36,7 +36,7 @@ export const ListSelectWrapper = ({
 export const MainActions = () => {
 	return (
 		<PageFixedArea className="flex flex-col gap-2 px-3 py-2">
-			<Suspense fallback={<div className="w-full h-41px hidden md:flex" />}>
+			<Suspense fallback={<div className="hidden h-41px w-full md:flex" />}>
 				<GroceryListAdd className="hidden md:flex" />
 			</Suspense>
 			<Suspense>
@@ -87,7 +87,7 @@ function ThemedPageContentInner({
 				gap="none"
 				p="none"
 				className={classNames(
-					'md:mt-lg lt-md:(overflow-y-auto max-h-full)',
+					'md:mt-lg lt-md:(max-h-full overflow-y-auto)',
 					className,
 					theme,
 				)}

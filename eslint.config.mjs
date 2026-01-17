@@ -1,4 +1,5 @@
 import js from '@eslint/js';
+import unocss from '@unocss/eslint-config/flat';
 import reactHooks from 'eslint-plugin-react-hooks';
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
@@ -8,7 +9,8 @@ export default defineConfig([
 	{ ignores: ['dist'] },
 	js.configs.recommended,
 	tseslint.configs.recommended,
-	reactHooks.configs.recommended,
+	reactHooks.configs.flat.recommended,
+	unocss,
 	{
 		files: ['**/*.{ts,tsx}'],
 		languageOptions: {
@@ -17,11 +19,12 @@ export default defineConfig([
 		},
 		rules: {
 			'@typescript-eslint/no-explicit-any': 'off',
+			'@typescript-eslint/ban-ts-comment': 'off',
 			'@typescript-eslint/no-unused-vars': [
 				'warn',
 				{
 					ignoreRestSiblings: true,
-					argsIgnorePattern: '^_',
+					argsIgnorePattern: '(^_|ctx|migrate)',
 					varsIgnorePattern: '^_',
 				},
 			],
@@ -29,11 +32,26 @@ export default defineConfig([
 				'warn',
 				{
 					allowWithName: '.*Props$',
-					allowInterfaces: 'with-single-extends',
+					allowInterfaces: 'always',
 				},
 			],
 			'no-empty-pattern': 'off',
 			'no-extra-boolean-cast': 'off',
 		},
+	},
+	{
+		ignores: [
+			'**/dist/**/*',
+			'**/node_modules/**/*',
+			'**/assets/**/*',
+			'**/*.js',
+			'**/*.cjs',
+			'**/*.mjs',
+			'**/vite.config.*',
+			'**/eslint.config.*',
+			'**/worker-configuration.d.ts',
+			'**/verdant/src/client/**/*',
+			'**/verdant/src/migrations/**/*',
+		],
 	},
 ]);

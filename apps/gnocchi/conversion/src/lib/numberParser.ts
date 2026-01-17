@@ -37,7 +37,7 @@ function identifyLeadingNumberGroup(source: string): [number, string] | null {
 		return [knownWord[1], trimmedSource.slice(knownWord[0].length)];
 	}
 
-	// lookeahead for a fraction structure
+	// lookahead for a fraction structure
 	const leadingFractionMatch = /^\d+\s?\/\s?\d+/.exec(trimmedSource);
 	if (leadingFractionMatch) {
 		const [num, denom] = leadingFractionMatch[0].split('/').map(Number);
@@ -66,6 +66,7 @@ function identifyLeadingNumberGroup(source: string): [number, string] | null {
 	}
 
 	// lookahead for any number
+	// eslint-disable-next-line no-useless-escape
 	const leadingDigitsMatch = /[\d\.]+/.exec(trimmedSource);
 	if (leadingDigitsMatch) {
 		return [

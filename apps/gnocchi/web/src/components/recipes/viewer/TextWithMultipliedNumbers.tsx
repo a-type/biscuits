@@ -34,14 +34,14 @@ export function TextWithMultipliedNumbers({
 							<Tooltip
 								content={
 									(
-										<span className="text-wrap max-w-80dvw">
+										<span className="max-w-80dvw text-wrap">
 											Multiplier {fractionToText(multiplier)}x applied. Original
 											value: {fragment}
 										</span>
 									) as any
 								}
 							>
-								<span className="multiplied-number color-accent-dark font-bold flex-row inline-flex items-center gap-0.5">
+								<span className="multiplied-number inline-flex flex-row items-center gap-0.5 font-bold color-accent-dark">
 									{fractionToText(parseFloat(fragment.trim()) * multiplier)}
 								</span>
 							</Tooltip>

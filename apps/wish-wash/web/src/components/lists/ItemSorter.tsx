@@ -67,7 +67,7 @@ export function ItemSorter({ list, className }: ItemSorterProps) {
 		<Dialog open={reordering} onOpenChange={setReordering}>
 			<Dialog.Content
 				disableSheet
-				className="left-auto right-2 top-4 translate-0 h-90dvh animate-fade-in-right flex flex-col"
+				className="left-auto right-2 top-4 h-90dvh flex flex-col translate-0 animate-fade-in-right"
 			>
 				<Dialog.Title>Reorder items</Dialog.Title>
 				<DndContext
@@ -106,10 +106,10 @@ const SorterItem = forwardRef<
 	HTMLDivElement,
 	{ item: Item; style?: CSSProperties; handleProps?: any }
 >(function SorterItem({ item, handleProps, ...rest }, ref) {
-	const { id, description } = hooks.useWatch(item);
+	const { description } = hooks.useWatch(item);
 
 	return (
-		<div ref={ref} className="row p-4 rounded-md bg-wash mb-2" {...rest}>
+		<div ref={ref} className="mb-2 row rounded-md p-4 bg-wash" {...rest}>
 			<Icon name="grabby" className="mr-2" {...handleProps} />
 			<ItemTypeChip item={item} />
 			<div>{description}</div>

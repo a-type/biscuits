@@ -43,7 +43,7 @@ export function ListTag({
 			<CollapsibleRoot open={!collapsed} className={className}>
 				<CollapsibleContent
 					data-horizontal
-					className="rounded-md focus-within:(outline-none shadow-focus)"
+					className="focus-within:shadow-focus rounded-md focus-within:(outline-none)"
 				>
 					<Link
 						to={`/list/${list.get('id')}`}
@@ -52,14 +52,14 @@ export function ListTag({
 						<div
 							className={clsx(
 								listThemeClass,
-								'flex items-center justify-center p-1 color-black rounded-md bg-main-light text-xs min-w-3 min-h-3 gap-1 lg:px-2',
+								'min-h-3 min-w-3 flex items-center justify-center gap-1 rounded-md p-1 text-xs color-black bg-main-light lg:px-2',
 							)}
 						>
 							<Icon name="tag" className="inline" />
-							<span className="hidden whitespace-nowrap overflow-hidden text-ellipsis max-w-full lg:inline">
+							<span className="hidden max-w-full overflow-hidden text-ellipsis whitespace-nowrap lg:inline">
 								{name}
 							</span>
-							<span className="inline whitespace-nowrap overflow-hidden text-ellipsis max-w-full lg:hidden">
+							<span className="inline max-w-full overflow-hidden text-ellipsis whitespace-nowrap lg:hidden">
 								{getInitials(name).toUpperCase()}
 							</span>
 						</div>

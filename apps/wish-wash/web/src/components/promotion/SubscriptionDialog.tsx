@@ -1,5 +1,5 @@
 import { Dialog, P } from '@a-type/ui';
-import { LoginButton, useIsLoggedIn } from '@biscuits/client';
+import { LoginButton } from '@biscuits/client';
 import { useSnapshot } from 'valtio';
 import { upsellState } from './upsellState.js';
 
@@ -7,7 +7,6 @@ export interface SubscriptionDialogProps {}
 
 export function SubscriptionDialog({}: SubscriptionDialogProps) {
 	const { show } = useSnapshot(upsellState);
-	const isSignedIn = useIsLoggedIn();
 
 	return (
 		<Dialog open={show} onOpenChange={(o) => (upsellState.show = o)}>

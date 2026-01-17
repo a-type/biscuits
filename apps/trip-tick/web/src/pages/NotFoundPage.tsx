@@ -8,7 +8,7 @@ export function NotFoundPage({}: NotFoundPageProps) {
 	usePageTitle('Not found');
 	return (
 		<PageContent>
-			<div className="flex flex-col gap-4 items-start">
+			<div className="flex flex-col items-start gap-4">
 				<H1>Not Found</H1>
 				<Button render={<Link to="/" />}>Go Home</Button>
 			</div>

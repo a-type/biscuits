@@ -207,7 +207,7 @@ export function createTiptapExtensions(recipe?: Recipe, basicEditor = false) {
 						if (newState.doc === oldState.doc) return;
 						const tr = newState.tr;
 						const usedIds = new Set<string>();
-						newState.doc.descendants((node: any, pos: any, parent: any) => {
+						newState.doc.descendants((node: any, pos: any, _parent: any) => {
 							if (
 								(node.type.name === 'step' ||
 									node.type.name === 'sectionTitle') &&

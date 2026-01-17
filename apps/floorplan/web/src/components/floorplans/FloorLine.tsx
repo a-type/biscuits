@@ -63,7 +63,7 @@ export function FloorLine({ line, floor }: FloorLineProps) {
 
 	return (
 		<g
-			className={clsx(selected ? 'stroke-primary z-100' : 'stroke-black')}
+			className={clsx(selected ? 'z-100 stroke-primary' : 'stroke-black')}
 			data-line-id={id}
 			data-attachment-count={attachments.length}
 			ref={ref}
@@ -74,7 +74,7 @@ export function FloorLine({ line, floor }: FloorLineProps) {
 				y1={startY}
 				x2={endX}
 				y2={endY}
-				className="stroke-transparent cursor-pointer touch-none stroke-width-[calc(10/var(--zoom-settled))]"
+				className="cursor-pointer touch-none stroke-width-[calc(10/var(--zoom-settled))] stroke-transparent"
 			/>
 			{attachments.length === 0 ?
 				<LineRenderer
@@ -156,7 +156,7 @@ function SnapIndicator({ point }: { point: FloorLinesItemStart }) {
 				cx={position.x}
 				cy={position.y}
 				r={5 / zoom}
-				className="stroke-gray fill-none stroke-width-[calc(2/var(--zoom-settled))] pointer-events-none"
+				className="pointer-events-none fill-none stroke-width-[calc(2/var(--zoom-settled))] stroke-gray"
 			/>
 		);
 	}
@@ -178,7 +178,7 @@ function PointDebug({
 		<motion.text
 			x={position.x}
 			y={position.y}
-			className="text-xxs fill-black pointer-events-none"
+			className="pointer-events-none fill-black text-xxs"
 		>
 			{side} |{' '}
 			{snap ? `snapped to ${snap.get('lineId')}-${snap.get('side')}` : 'free'}
@@ -204,7 +204,7 @@ function LineDebug({ line }: { line: FloorLinesItem }) {
 		<motion.text
 			x={midX}
 			y={midY}
-			className="text-xxs fill-black pointer-events-none"
+			className="pointer-events-none fill-black text-xxs"
 		>
 			{id}
 		</motion.text>
@@ -232,7 +232,6 @@ function FloorLineAttachment({
 	hooks.useWatch(next);
 	const nextStart = next?.get('start') ?? 1;
 	hooks.useWatch(prev);
-	const prevEnd = prev?.get('end') ?? 0;
 
 	const normalized = useTransform(() => {
 		const dx = trueEndX.get() - trueStartX.get();

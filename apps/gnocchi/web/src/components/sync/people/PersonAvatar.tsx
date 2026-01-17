@@ -19,9 +19,9 @@ export function PersonAvatar({
 		<div
 			data-pop={popIn}
 			className={classNames(
-				'layer-components:(flex items-center justify-center rounded-full border-default overflow-hidden w-24px h-24px select-none relative bg-white flex-shrink-0)',
+				'layer-components:(relative h-24px w-24px flex flex-shrink-0 select-none items-center justify-center overflow-hidden border-default rounded-full bg-white)',
 				popIn &&
-					'layer-variants:(animate-pop-in-from-half animate-ease-springy animate-duration-200)',
+					'layer-variants:(animate-pop-in-from-half animate-duration-200 animate-ease-springy)',
 				!person && 'layer-components(border-dashed bg-gray2)',
 				className,
 			)}
@@ -37,7 +37,7 @@ function AvatarContent({ user }: { user: UserInfo<Profile, any> }) {
 	if (user.profile?.imageUrl) {
 		return (
 			<img
-				className="w-full h-full object-cover rounded-full"
+				className="h-full w-full rounded-full object-cover"
 				referrerPolicy="no-referrer"
 				crossOrigin="anonymous"
 				src={user.profile.imageUrl}
@@ -45,7 +45,7 @@ function AvatarContent({ user }: { user: UserInfo<Profile, any> }) {
 		);
 	}
 	return (
-		<div className="color-black items-center justify-center flex text-sm font-bold rounded-full">
+		<div className="flex items-center justify-center rounded-full text-sm font-bold color-black">
 			{user.profile.name?.charAt(0) || '?'}
 		</div>
 	);

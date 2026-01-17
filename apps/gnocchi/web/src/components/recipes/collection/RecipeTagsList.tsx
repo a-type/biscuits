@@ -36,7 +36,7 @@ export function RecipeTagsList({
 	}
 
 	return (
-		<div className={classNames('flex flex-wrap gap-1 my-1', className)}>
+		<div className={classNames('my-1 flex flex-wrap gap-1', className)}>
 			{showNone && (
 				<TagToggle
 					toggled={!selectedValues?.length}

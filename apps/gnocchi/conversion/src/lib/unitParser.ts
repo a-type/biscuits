@@ -33,5 +33,6 @@ export function unitParser(rawInput: string) {
 
 function normalizeInput(input: string) {
 	// remove any trailing punctuation
+	// eslint-disable-next-line no-useless-escape
 	return input.replace(/[\.,;:]$/, '');
 }

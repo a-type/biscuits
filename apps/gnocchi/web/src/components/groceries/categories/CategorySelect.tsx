@@ -38,7 +38,7 @@ export const CategorySelect = withSuspense(function CategorySelect({
 			}
 			// onOpenChange(false);
 		},
-		[onChange, onOpenChange],
+		[onChange, value],
 	);
 
 	const onCreateCategory = (category: Category) => {
@@ -52,7 +52,7 @@ export const CategorySelect = withSuspense(function CategorySelect({
 		<>
 			<Dialog open={open} onOpenChange={onOpenChange}>
 				<Dialog.SelectTrigger
-					className="text-sm font-normal py-1"
+					className="py-1 text-sm font-normal"
 					render={children}
 				>
 					{category?.get('name') || 'Uncategorized'}

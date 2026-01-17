@@ -41,8 +41,8 @@ export function UserInfoEditor({ user, className }: UserInfoEditorProps) {
 
 	if (!editing) {
 		return (
-			<div className={clsx('col w-full items-start py-3', className)}>
-				<div className="row justify-between w-full">
+			<div className={clsx('w-full col items-start py-3', className)}>
+				<div className="w-full row justify-between">
 					<H2>Your profile</H2>
 					<Button emphasis="ghost" onClick={() => setEditing(true)}>
 						<Icon name="pencil" /> Edit
@@ -64,7 +64,7 @@ export function UserInfoEditor({ user, className }: UserInfoEditorProps) {
 			className="py-3"
 		>
 			<TextField name="name" label="Name" />
-			<div className="row justify-end w-full">
+			<div className="w-full row justify-end">
 				<Button onClick={() => setEditing(false)}>Cancel</Button>
 				<SubmitButton>Save</SubmitButton>
 			</div>

@@ -47,7 +47,7 @@ export function PreBuyExperienceContent({
 			<ItemCardTypeChip item={item} className="mr-auto" />
 			<Dialog.Title>Search for {item.description}</Dialog.Title>
 			<ItemCardImageGallery item={item} maxCols={2} />
-			<ItemCardPurchases item={item} className="!bg-accent-wash mr-auto" />
+			<ItemCardPurchases item={item} className="mr-auto !bg-accent-wash" />
 			<Dialog.Description>
 				{description || (
 					<>
