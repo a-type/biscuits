@@ -132,6 +132,7 @@ function Question({
 				{question.question}
 			</label>
 			<TextArea
+				className="w-full"
 				id={question.id}
 				autoSize
 				autoFocus

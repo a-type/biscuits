@@ -59,7 +59,7 @@ function RecipeEditorContent({ recipe }: { recipe: Recipe }) {
 			</div>
 			<RecipeTagsEditor recipe={recipe} />
 			<div>
-				<H2 className="gutter-bottom">Description</H2>
+				<H2 className="mb-xs">Description</H2>
 				<RecipePreludeEditor recipe={recipe} />
 			</div>
 			<RecipeNoteEditor recipe={recipe} />
@@ -78,17 +78,17 @@ function RecipeEditorContent({ recipe }: { recipe: Recipe }) {
 				/>
 			</label>
 			<div>
-				<H2 className="gutter-bottom">Ingredients</H2>
+				<H2 className="mb-xs">Ingredients</H2>
 				<RecipeIngredientsEditor recipe={recipe} />
 			</div>
 			<div>
 				<InstructionsProvider isEditing recipeId={recipe.get('id')}>
-					<H2 className="gutter-bottom">Instructions</H2>
+					<H2 className="mb-xs">Instructions</H2>
 					<RecipeInstructionsField recipe={recipe} />
 				</InstructionsProvider>
 			</div>
 			<div>
-				<H2 className="gutter-bottom">Danger zone</H2>
+				<H2 className="mb-xs">Danger zone</H2>
 				<RecipeDeleteButton className="self-start" recipe={recipe} />
 			</div>
 		</div>

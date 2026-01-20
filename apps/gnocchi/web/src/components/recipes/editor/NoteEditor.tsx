@@ -1,4 +1,4 @@
-import { LiveUpdateTextField, Note } from '@a-type/ui';
+import { Note } from '@a-type/ui';
 import classNames from 'classnames';
 
 export interface NoteEditorProps {
@@ -21,11 +21,10 @@ export function NoteEditor({
 	};
 	return (
 		<Note className={classNames('focus-within:shadow-focus', className)}>
-			<LiveUpdateTextField
+			<Note.Input
 				className="[font-family:inherit] [font-size:inherit] [font-style:inherit] m-0 h-full w-full resize-none p-0 text-inherit outline-none bg-transparent !rounded-none !border-none focus:(outline-none bg-transparent border-transparent) !ring-none !ring-none !focus:shadow-none"
-				textArea
 				value={value}
-				onChange={handleChange}
+				onValueChange={handleChange}
 				autoFocus={autoFocus}
 				onBlur={onBlur}
 				placeholder="Add a note..."

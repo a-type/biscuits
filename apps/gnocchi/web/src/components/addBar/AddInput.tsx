@@ -1,13 +1,13 @@
 import {
 	Button,
 	ButtonProps,
+	clsx,
 	Icon,
 	Input,
 	InputProps,
 	useParticles,
 } from '@a-type/ui';
 import { useMergedRef } from '@biscuits/client';
-import classNames from 'classnames';
 import { forwardRef, useEffect, useRef } from 'react';
 import { useSnapshot } from 'valtio';
 import { groceriesState } from '../groceries/state.js';
@@ -40,42 +40,37 @@ export const AddInput = forwardRef<HTMLDivElement, AddInputProps>(
 		const inputIsUrl = URL.canParse(inputValue);
 
 		return (
-			<div
-				data-state={isOpen ? 'open' : 'closed'}
-				className={classNames(
-					'layer-components:(relative w-full flex flex-row gap-2)',
-					className,
-				)}
+			<Input
 				{...rest}
-				ref={ref}
-			>
-				<Input
-					data-test="grocery-list-add-input"
-					name="text"
-					required
-					className="max-w-none flex-1 pr-[72px]"
-					autoComplete="off"
-					tabIndex={disableInteraction ? -1 : 0}
-					{...inputProps}
-				/>
-				<div className="absolute right-0px top-0px flex flex-row-reverse gap-1">
-					<SubmitButton
-						{...submitButtonProps}
-						disableInteraction={disableInteraction}
-						inputIsUrl={inputIsUrl}
-					/>
-					{!!inputValue && (
-						<Button
-							emphasis="ghost"
-							onClick={clear}
-							aria-label="clear input"
-							tabIndex={disableInteraction ? -1 : 0}
-						>
-							<Icon name="x" />
-						</Button>
-					)}
-				</div>
-			</div>
+				borderRef={ref}
+				data-state={isOpen ? 'open' : 'closed'}
+				data-test="grocery-list-add-input"
+				name="text"
+				required
+				className={clsx('max-w-none w-full', className)}
+				autoComplete="off"
+				tabIndex={disableInteraction ? -1 : 0}
+				endAccessory={
+					<div className="flex flex-row-reverse gap-1">
+						<SubmitButton
+							{...submitButtonProps}
+							disableInteraction={disableInteraction}
+							inputIsUrl={inputIsUrl}
+						/>
+						{!!inputValue && (
+							<Button
+								emphasis="ghost"
+								onClick={clear}
+								aria-label="clear input"
+								tabIndex={disableInteraction ? -1 : 0}
+							>
+								<Icon name="x" />
+							</Button>
+						)}
+					</div>
+				}
+				{...inputProps}
+			/>
 		);
 	},
 );

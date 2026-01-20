@@ -98,6 +98,7 @@ export const AddBarImpl = forwardRef<HTMLDivElement, AddBarProps>(
 						forceMount
 						radius="md"
 						align="start"
+						side="bottom"
 						sideOffset={12}
 						initialFocus={false}
 						finalFocus={submitButtonRef}

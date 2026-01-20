@@ -13,7 +13,6 @@ import {
 	CollapsibleRoot,
 	Icon,
 	Note,
-	TextArea,
 	Tooltip,
 	useToggle,
 } from '@a-type/ui';
@@ -203,7 +202,7 @@ export function InstructionStepNodeView({
 			>
 				<CollapsibleContent>
 					<Note className="focus-within:shadow-focus" contentEditable={false}>
-						<TextArea
+						<Note.Input
 							className="[font-style:inherit] m-0 w-full rounded-none border-none p-0 text-sm text-inherit shadow-none bg-transparent focus:(shadow-none outline-none bg-transparent)"
 							value={note || ''}
 							onValueChange={updateNote}

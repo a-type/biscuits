@@ -297,6 +297,7 @@ function AddIngredientsForm({
 				setStoredValue(text);
 			}}
 			validateOnBlur
+			className="gap-xs"
 		>
 			{() => (
 				<>
@@ -306,6 +307,7 @@ function AddIngredientsForm({
 						placeholder="Add ingredient line(s)"
 						autoSize
 						padBottomPixels={40}
+						textAreaClassName="w-full"
 					/>
 					<div className="w-full flex flex-row items-center justify-between gap-1">
 						<SubmitButton>Add</SubmitButton>

@@ -37,6 +37,12 @@ export default defineConfig([
 			],
 			'no-empty-pattern': 'off',
 			'no-extra-boolean-cast': 'off',
+			'unocss/order': [
+				'error',
+				{
+					unoFunctions: ['clsx', 'classNames', 'css', 'withClassName'],
+				},
+			],
 		},
 	},
 	{

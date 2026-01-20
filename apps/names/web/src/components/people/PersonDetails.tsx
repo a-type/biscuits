@@ -92,7 +92,7 @@ function NoteEditor({
 
 	return (
 		<LiveUpdateTextField
-			className={clsx('text-sm shadow-none bg-transparent', className)}
+			className={clsx('w-full text-sm', className)}
 			textArea
 			value={note || ''}
 			onChange={(value) => person.set('note', value)}

@@ -275,6 +275,7 @@ function DescriptionField({
 			<TextArea
 				id="description"
 				{...(descriptionField.inputProps as any)}
+				className="w-full"
 				autoSelect
 				placeholder={placeholder}
 				autoFocus={autoFocus}
@@ -378,7 +379,7 @@ function SingleLinkField({
 	);
 }
 
-const Label = withClassName('label', 'font-bold text-sm color-gray-dark py-1');
+const Label = withClassName('label', 'py-1 text-sm font-bold color-gray-dark');
 
 function PriceRangeField({ item }: { item: Item }) {
 	const priceMinField = hooks.useField(item, 'priceMin');

@@ -16,8 +16,8 @@ export function SuggestionGroup({
 	getItemProps: (opts: UseComboboxGetItemPropsOptions<SuggestionData>) => any;
 }) {
 	return (
-		<div className={clsx('flex flex-col gap-2', className)} {...rest}>
-			<div className="m2-1 text-xs font-bold uppercase color-gray-dark">
+		<div className={clsx('mb-sm flex flex-col gap-xs', className)} {...rest}>
+			<div className="ml-xs text-xs font-bold uppercase color-gray-dark">
 				{title}
 			</div>
 			<div className={clsx('flex flex-wrap gap-2')}>
