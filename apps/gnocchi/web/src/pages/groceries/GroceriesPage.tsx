@@ -71,9 +71,8 @@ export function GroceriesPage() {
 				<UnknownListRedirect listId={listId} />
 				<AutoRestoreScroll />
 				<PageNowPlaying
-					unstyled
 					keepAboveKeyboard
-					className="pointer-events-none z-nav items-center"
+					className="pointer-events-none z-nav items-center children:pointer-events-auto"
 				>
 					<FloatingAdd />
 				</PageNowPlaying>

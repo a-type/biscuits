@@ -132,14 +132,14 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 							isPartiallyPurchased={isPartiallyPurchased}
 							togglePurchased={togglePurchased}
 						/>
-						<div className="focus:shadow-focus [grid-area:main] relative flex flex-row items-start pb-2 pr-3 pt-2">
+						<div className="focus:shadow-focus [grid-area:main] relative min-w-0 flex flex-row items-start pb-2 pr-3 pt-2">
 							<div
 								className={clsx(
-									'mr-2 flex flex-1 flex-col items-start gap-1',
+									'mr-2 min-w-0 flex flex-1 flex-col items-start gap-1',
 									isPurchased && 'item-purchased',
 								)}
 							>
-								<div className="relative mt-1 max-w-full flex flex-row items-start gap-1 overflow-hidden text-ellipsis">
+								<div className="relative mt-1 max-w-full min-w-0 flex flex-row items-start gap-1 overflow-hidden text-ellipsis">
 									<span>{displayString}</span>
 								</div>
 								{isPurchased && (

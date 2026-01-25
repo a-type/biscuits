@@ -1,4 +1,4 @@
-import { useKeepOpenAfterSelect } from '@/components/addBar/hooks.js';
+import { useKeepOpenAfterSelect } from '@/components/groceries/addBar/hooks.js';
 import { ManageCategoriesDialog } from '@/components/menu/ManageCategoriesDialog.jsx';
 import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
 import { Button, PageContent, Switch } from '@a-type/ui';

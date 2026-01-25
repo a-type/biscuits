@@ -16,6 +16,7 @@ import {
 	LiveUpdateTextField,
 	RelativeTime,
 	Switch,
+	TextSkeleton,
 	Tooltip,
 	withClassName,
 } from '@a-type/ui';
@@ -43,7 +44,9 @@ export function FoodDetailDialog({}: FoodDetailDialogProps) {
 		<Suspense>
 			<Dialog open={open} onOpenChange={onClose}>
 				<Dialog.Content initialFocus={false}>
-					{foodName && <FoodDetailView foodName={foodName} open={open} />}
+					<Suspense fallback={<SkeletonDetails />}>
+						{foodName && <FoodDetailView foodName={foodName} open={open} />}
+					</Suspense>
 					<Dialog.Actions>
 						<Dialog.Close />
 					</Dialog.Actions>
@@ -231,6 +234,40 @@ function FoodDetailView({
 				</Button>
 			</Row>
 		</div>
+	);
+}
+
+function SkeletonDetails() {
+	return (
+		<Box col gap full="width">
+			<TextSkeleton maxLength={20} className="text-xl" />
+			<Box col gap>
+				<TextSkeleton maxLength={15} />
+				<TextSkeleton maxLength={25} />
+				<TextSkeleton maxLength={25} />
+			</Box>
+			<Divider />
+			<Box col gap>
+				<TextSkeleton maxLength={20} />
+				<TextSkeleton maxLength={30} />
+				<TextSkeleton maxLength={30} />
+			</Box>
+			<Divider />
+			<Box col gap>
+				<TextSkeleton maxLength={15} />
+				<TextSkeleton maxLength={25} />
+				<TextSkeleton maxLength={25} />
+			</Box>
+			<Divider />
+			<Box col gap>
+				<TextSkeleton maxLength={15} />
+				<TextSkeleton maxLength={25} />
+			</Box>
+			<Box col gap>
+				<TextSkeleton maxLength={15} />
+				<TextSkeleton maxLength={25} />
+			</Box>
+		</Box>
 	);
 }
 

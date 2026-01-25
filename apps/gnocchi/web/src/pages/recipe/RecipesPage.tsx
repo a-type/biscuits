@@ -14,10 +14,7 @@ export function RecipesPage() {
 			<PageContent>
 				<RecipeList />
 				<Suspense>
-					<PageNowPlaying
-						unstyled
-						className="pointer-events-none z-now-playing flex flex-col items-center"
-					>
+					<PageNowPlaying className="pointer-events-none z-now-playing flex flex-col items-center">
 						<Suspense>
 							<RecipeCreateButton className="pointer-events-auto h-48px w-48px items-center justify-center shadow-xl md:h-auto md:w-auto md:gap-2">
 								<span className="hidden md:block">New Recipe</span>

@@ -1,69 +1,46 @@
-import { AddPane } from '@/components/addBar/AddPane.jsx';
-import { useKeepOpenAfterSelect } from '@/components/addBar/hooks.js';
-import { useListId } from '@/contexts/ListContext.jsx';
-import { useAddItems } from '@/stores/groceries/mutations.js';
-import { Button, Icon } from '@a-type/ui';
-import { MenuDisclose } from '@biscuits/client';
-import classNames from 'classnames';
-import { useCallback, useState } from 'react';
+import { clsx, Icon, QuickAction, ScrollArea } from '@a-type/ui';
+import { useState } from 'react';
+import {
+	AddBarComboboxInput,
+	AddBarComboboxItems,
+	AddBarComboboxRoot,
+} from './combobox.jsx';
+import { useKeepOpenAfterSelect, useParticlesOnAdd } from './hooks.js';
 
 export interface FloatingAddProps {
 	className?: string;
 }
 
 export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
-	const listId = useListId() || null;
-	const addItems = useAddItems();
 	const [open, setOpen] = useState(false);
-
 	const [keepOpenOnSelect] = useKeepOpenAfterSelect();
-	const onAdd = useCallback(
-		async (items: string[]) => {
-			await addItems(items, {
-				listId,
-			});
-			if (!keepOpenOnSelect) {
-				setOpen(false);
-			}
-		},
-		[listId, addItems, keepOpenOnSelect],
-	);
+	const particleRef = useParticlesOnAdd(!keepOpenOnSelect);
 
 	return (
-		<MenuDisclose
-			className={classNames(
-				'relative z-100 w-full flex flex-col items-stretch justify-stretch',
-				// only visible on mobile
-				'md:hidden',
-				className,
-			)}
-			open={open}
-			onOpenChange={setOpen}
-		>
-			<MenuDisclose.Content
-				render={
-					<AddPane
-						onAdd={onAdd}
-						showRichSuggestions
-						className={classNames('relative z-1')}
-						onOpenChange={setOpen}
-						open={open}
-						disabled={!open}
-						{...rest}
-					/>
-				}
-			/>
-			<MenuDisclose.Trigger
-				render={
-					<Button
-						onClick={() => setOpen(true)}
-						emphasis="primary"
-						className={classNames('absolute shadow-xl')}
-					/>
-				}
-			>
-				<Icon name="plus" className="h-20px w-20px" />
-			</MenuDisclose.Trigger>
-		</MenuDisclose>
+		<AddBarComboboxRoot onOpenChange={setOpen}>
+			<QuickAction open={open} onOpenChange={setOpen}>
+				<QuickAction.Content
+					initialFocus={false}
+					className="max-h-[calc(var(--viewport-height,40dvh)-140px)] max-w-96vw w-full flex flex-col"
+				>
+					<ScrollArea className="w-full flex-1" direction="vertical">
+						<AddBarComboboxItems />
+					</ScrollArea>
+					<AddBarComboboxInput className="rounded-md" />
+				</QuickAction.Content>
+				<QuickAction.Trigger
+					ref={particleRef}
+					emphasis="primary"
+					className={clsx(
+						'z-100 h-48px w-48px items-center justify-center rounded-lg shadow-xl',
+						// only visible on mobile
+						'md:hidden',
+					)}
+					{...rest}
+				>
+					<Icon name="plus" size={20} />
+				</QuickAction.Trigger>
+			</QuickAction>
+		</AddBarComboboxRoot>
 	);
 }
