@@ -20,7 +20,7 @@ import { RecipeIngredientsEditor } from './RecipeIngredientsEditor.jsx';
 import { RecipeInstructionsField } from './RecipeInstructionsField.jsx';
 import { RecipeMainImageEditor } from './RecipeMainImageEditor.jsx';
 import { RecipePreludeEditor } from './RecipePreludeEditor.jsx';
-import { RecipeTagsEditor } from './RecipeTagsEditor.jsx';
+import { RecipeTagsFullEditor } from './RecipeTagsFullEditor.jsx';
 import { RecipeTitleField } from './RecipeTitleField.jsx';
 import { RecipeUrlField } from './RecipeUrlField.jsx';
 
@@ -57,7 +57,7 @@ function RecipeEditorContent({ recipe }: { recipe: Recipe }) {
 				</TitleAndImageLayout>
 				<RecipeUrlField recipe={recipe} />
 			</div>
-			<RecipeTagsEditor recipe={recipe} />
+			<RecipeTagsFullEditor recipe={recipe} />
 			<div>
 				<H2 className="mb-xs">Description</H2>
 				<RecipePreludeEditor recipe={recipe} />

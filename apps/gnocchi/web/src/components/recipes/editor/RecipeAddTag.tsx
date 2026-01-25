@@ -1,5 +1,3 @@
-import { RecipeTagsList } from '@/components/recipes/collection/RecipeTagsList.jsx';
-import { NewTagForm } from '@/components/recipes/editor/NewTagForm.jsx';
 import { hooks } from '@/stores/groceries/index.js';
 import {
 	Box,
@@ -14,6 +12,7 @@ import {
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import classNames from 'classnames';
 import { ReactElement, Suspense, forwardRef, useState } from 'react';
+import { RecipeTagsFullEditor } from './RecipeTagsFullEditor.jsx';
 
 export function RecipeEditTags({
 	recipe,
@@ -27,15 +26,6 @@ export function RecipeEditTags({
 	onClose?: () => void;
 }) {
 	const [open, setOpen] = useState(false);
-	const toggleTag = (tagName: string | null) => {
-		if (tagName === null) return;
-		const tags = recipe.get('tags');
-		if (tags.has(tagName)) {
-			tags.removeAll(tagName);
-		} else {
-			tags.add(tagName);
-		}
-	};
 	const { tags, title } = hooks.useWatch(recipe);
 	hooks.useWatch(tags);
 
@@ -56,12 +46,7 @@ export function RecipeEditTags({
 				<Box col gap full="width">
 					<DialogTitle>Tags for {title}</DialogTitle>
 					<Suspense>
-						<RecipeTagsList
-							onSelect={toggleTag}
-							selectedValues={tags.getSnapshot()}
-							className="w-full font-bold"
-						/>
-						<NewTagForm onCreate={toggleTag} />
+						<RecipeTagsFullEditor recipe={recipe} />
 					</Suspense>
 				</Box>
 				<DialogActions>
@@ -81,8 +66,8 @@ const DefaultTrigger = forwardRef<HTMLButtonElement, { className?: string }>(
 				ref={ref}
 				{...rest}
 			>
-				<Icon name="plus" />
-				<span>Tag</span>
+				<Icon name="pencil" />
+				<span>Tags</span>
 			</Button>
 		);
 	},

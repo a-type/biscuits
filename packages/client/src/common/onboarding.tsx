@@ -73,7 +73,6 @@ export function createOnboarding<Steps extends StringTuple>(
 	function useBegin() {
 		return useCallback(() => {
 			if (state.active === null) {
-				console.debug('Begin onboarding', name);
 				state.active = steps[0];
 			}
 		}, []);
@@ -103,16 +102,10 @@ export function createOnboarding<Steps extends StringTuple>(
 		const hasClaim = useSnapshot(state.stepClaims)[name] === id;
 		useLayoutEffect(() => {
 			if (!state.stepClaims[name]) {
-				console.debug(`Step ${name} claiming with id ${id}`);
 				state.stepClaims[name] = id;
 				return () => {
-					console.debug(`Step ${name} releasing claim of id ${id}`);
 					delete state.stepClaims[name];
 				};
-			} else {
-				console.debug(
-					`Step ${name} already claimed; not claiming with id ${id}`,
-				);
 			}
 		});
 
@@ -125,23 +118,16 @@ export function createOnboarding<Steps extends StringTuple>(
 
 		useEffectOnce(() => {
 			if (state.stepClaims[name] !== id) {
-				console.debug(`Step ${name} (${id}) has no claim; not activating`);
 				return;
 			}
 
 			stepUnmounted[name] = false;
 
 			if (disableNextOnUnmount) {
-				console.debug(
-					`Step ${name} disableNextOnUnmount is true; not auto-advancing on unmount`,
-				);
 				return;
 			}
 
 			return () => {
-				console.debug(
-					`Step ${name} unmounted; auto-advancing in 1s if still unmounted`,
-				);
 				stepUnmounted[name] = true;
 				setTimeout(() => {
 					if (stepUnmounted[name]) {

@@ -193,7 +193,7 @@ export function AddBarComboboxItems(props: { className?: string }) {
 						</BaseCombobox.GroupLabel>
 						<BaseCombobox.GroupItemList className="gap-sm">
 							{group.items.map((item) => (
-								<BaseCombobox.Item key={item.id} value={item}>
+								<BaseCombobox.Item data-id={item.id} key={item.id} value={item}>
 									{item.type === 'recipe' && <Icon name="page" />}
 									<span className="flex-1 overflow-hidden text-ellipsis text-sm">
 										{suggestionToDisplayString(item).toLowerCase()}
