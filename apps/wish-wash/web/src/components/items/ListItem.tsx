@@ -58,8 +58,8 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 					prioritized ? 'min-h-200px sm:min-h-250px'
 					: imageFiles.length ? 'min-h-300px'
 					: '',
-					`theme-${typeThemes[type]}`,
-					'bg-primary-wash',
+					`palette-${typeThemes[type]}`,
+					'bg-main-wash',
 					className,
 				)}
 				data-span={prioritized ? 2 : 1}
@@ -88,7 +88,7 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 							'p-1 font-bold',
 							hasImage ?
 								'px-md text-xl text-[white] bg-[rgba(0,0,0,0.5)]'
-							:	'text-lg color-primary-dark',
+							:	'text-lg color-main-dark',
 						)}
 					>
 						<span>{description}</span>

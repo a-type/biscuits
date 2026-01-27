@@ -65,8 +65,8 @@ export function ItemCard({
 		<Card
 			className={clsx(
 				className,
-				`theme-${typeThemes[item.type]}`,
-				'color-primary-ink bg-primary-wash',
+				`palette-${typeThemes[item.type]}`,
+				'color-main-ink bg-main-wash',
 				boughtAll && 'opacity-50',
 				item.prioritized && !boughtAll && 'min-h-200px sm:min-h-250px',
 			)}
@@ -94,6 +94,4 @@ function ItemCardContent({ item: itemMasked, ...rest }: ItemCardProps) {
 		case 'vibe':
 			return <VibeCardContent item={item} {...rest} />;
 	}
-
-	return null;
 }

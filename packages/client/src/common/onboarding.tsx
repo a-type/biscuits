@@ -192,7 +192,7 @@ export function OnboardingBanner<O extends Onboarding<any>>({
 	return (
 		<CollapsibleRoot
 			open={show}
-			className={clsx('theme-leek', 'w-full', className)}
+			className={clsx('palette-leek', 'w-full', className)}
 			data-step-id={id}
 			data-step-name={step}
 		>

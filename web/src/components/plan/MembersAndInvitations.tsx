@@ -1,5 +1,6 @@
 import {
 	Avatar,
+	Box,
 	CardActions,
 	CardContent,
 	CardFooter,
@@ -86,10 +87,10 @@ export function MembersAndInvitations() {
 				))}
 			</CardGrid>
 			{plan?.canInviteMore ?
-				<div className="theme-leek flex flex-col items-stretch gap-3 border-1 rounded-lg border-solid p-4 bg-primary-wash border-primary-dark">
+				<Box color="leek" col gap p surface border>
 					<H3>Invite someone</H3>
 					<InviteMember />
-				</div>
+				</Box>
 			:	<div className="py-4 color-gray-dark">
 					You&apos;ve reached your membership limit. Upgrade to add more people.
 				</div>

@@ -147,9 +147,7 @@ function TutorialCard({
 	icon: IconName;
 }) {
 	return (
-		<Card
-			className={clsx(`theme-${theme}`, 'color-primary-dark bg-primary-wash')}
-		>
+		<Card className={clsx(`palette-${theme}`, 'color-main-dark bg-main-wash')}>
 			<CardMain>
 				<CardContent
 					unstyled

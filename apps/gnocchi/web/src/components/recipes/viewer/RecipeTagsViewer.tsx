@@ -54,8 +54,8 @@ function RecipeTagViewer({ tag }: { tag: string }) {
 		<RecipeTagMenuWrapper tagName={tag}>
 			<div
 				className={classNames(
-					'flex flex-row items-center gap-1 border rounded-full border-solid px-3 py-1 text-inherit font-bold color-black bg-primary-light border-gray-dark',
-					data?.get('color') && `theme-${data.get('color')}`,
+					data?.get('color') && `palette-${data.get('color')}`,
+					'flex flex-row items-center gap-1 border rounded-full border-solid px-3 py-1 text-inherit font-bold color-black bg-main-light border-gray-dark',
 				)}
 			>
 				<span>

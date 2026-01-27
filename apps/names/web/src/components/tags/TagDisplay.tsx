@@ -15,7 +15,7 @@ export function TagDisplay({ name, className }: TagDisplayProps) {
 	return (
 		<Chip
 			color="primary"
-			className={clsx(color && `theme-${color}`, className)}
+			className={clsx(color && `palette-${color}`, className)}
 		>
 			<Icon name={icon || 'tag'} className="h-10px w-10px" />
 			<span>{name}</span>

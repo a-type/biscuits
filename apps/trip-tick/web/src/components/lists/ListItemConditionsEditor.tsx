@@ -175,8 +175,8 @@ function TemperatureConditionEditor({
 			<Icon
 				name="thermometer"
 				className={clsx(
-					'color-primary-dark',
-					`theme-${type === 'hot' ? 'tomato' : 'blueberry'}`,
+					'color-main-dark',
+					`palette-${type === 'hot' ? 'tomato' : 'blueberry'}`,
 				)}
 			/>
 			<span>When it's {type === 'hot' ? 'hotter' : 'colder'} than</span>

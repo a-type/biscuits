@@ -97,7 +97,8 @@ export function UserMenu({
 								render={
 									<a href={`${CONFIG.HOME_ORIGIN}/join?appReferrer=${appId}`} />
 								}
-								className="theme-leek color-primary-ink bg-primary-wash focus-visible:bg-primary-light"
+								color="accent"
+								className="color-main-ink bg-main-wash focus-visible:bg-main-light"
 							>
 								Upgrade for sync
 								<DropdownMenuItemRightSlot>

@@ -55,8 +55,7 @@ export function ItemEditDialog({ list }: ItemEditDialogProps) {
 			<Dialog.Content
 				initialFocus={false}
 				className={clsx(
-					'theme',
-					`theme-${typeThemes[item?.get('type') ?? 'idea']}`,
+					`palette-${typeThemes[item?.get('type') ?? 'idea']}`,
 					'flex flex-col items-stretch gap-md bg-wash',
 				)}
 				width="md"
