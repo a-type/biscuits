@@ -208,7 +208,7 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 											value={comment || ''}
 											onChange={(val) => item.set('comment', val)}
 											placeholder="Add a comment"
-											className="my-1 flex-shrink-1 flex-grow-2 flex-basis-50% md:flex-grow-3 md:flex-basis-120px important:text-xs important:border-gray-dark"
+											className="my-1 min-w-60px flex-shrink-1 flex-grow-2 flex-basis-50% md:flex-grow-3 md:flex-basis-120px important:text-xs important:border-gray-dark"
 										/>
 										<Suspense>
 											<ListSelect
