@@ -122,6 +122,7 @@ export function useAddBarSuggestions({
 			where: 'purchased',
 			equals: 'no',
 		},
+		key: 'addBar_existingItems',
 	});
 	const existingFoods = useMemo(() => {
 		const foods = new Set<string>();

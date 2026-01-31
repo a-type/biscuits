@@ -31,12 +31,15 @@ const InternalContext = createContext<{
 	add: () => {},
 });
 
+const OpenContext = createContext<[boolean, (open: boolean) => void]>([
+	false,
+	() => {},
+]);
+
 export function AddBarComboboxRoot({
-	onOpenChange,
 	...props
 }: {
 	className?: string;
-	onOpenChange?: (v: boolean) => void;
 	children?: ReactNode;
 }) {
 	const [query, setQuery] = useState('');
@@ -58,12 +61,12 @@ export function AddBarComboboxRoot({
 		);
 		if (!keepOpenOnSelect) {
 			setOpen(false);
-			onOpenChange?.(false);
 		}
 	};
 	const listId = useListId() || null;
 	const [keepOpenOnSelect] = useKeepOpenAfterSelect();
-	const [open, setOpen] = useState(false);
+	const openState = useState(false);
+	const [open, setOpen] = openState;
 
 	const [addingRecipe, setAddingRecipe] = useState<Recipe | null>(null);
 	const clearAddingRecipe = () => setAddingRecipe(null);
@@ -75,64 +78,68 @@ export function AddBarComboboxRoot({
 				add: onAdd,
 			}}
 		>
-			<BaseCombobox
-				open={open}
-				// respect keep open on select setting
-				onOpenChange={(isOpen, event) => {
-					if (event.reason === 'item-press' && keepOpenOnSelect) return;
-					setOpen(isOpen);
-					onOpenChange?.(isOpen);
-				}}
-				inputValue={query}
-				onInputValueChange={(v, ev) => {
-					if (ev.reason === 'item-press') return;
-					setQuery(v);
-				}}
-				items={groupedSuggestions}
-				itemToStringValue={suggestionToString}
-				itemToStringLabel={suggestionToDisplayString}
-				value={null}
-				onValueChange={async (item) => {
-					setQuery('');
-					if (!item) return;
-					if (item.type === 'food') {
-						const { quantity } = destructureSearchPrompt(query || '');
-						if (quantity) {
-							await onAdd(`${quantity} ${item.name}`);
+			<OpenContext.Provider value={openState}>
+				<BaseCombobox
+					open={open}
+					// respect keep open on select setting
+					onOpenChange={(isOpen, event) => {
+						if (event.reason === 'item-press' && keepOpenOnSelect) return;
+						setOpen(isOpen);
+					}}
+					inputValue={query}
+					onInputValueChange={(v, ev) => {
+						if (ev.reason === 'item-press') return;
+						setQuery(v);
+					}}
+					items={groupedSuggestions}
+					itemToStringValue={suggestionToString}
+					itemToStringLabel={suggestionToDisplayString}
+					value={null}
+					onValueChange={async (item) => {
+						setQuery('');
+						if (!item) return;
+						if (item.type === 'food') {
+							const { quantity } = destructureSearchPrompt(query || '');
+							if (quantity) {
+								await onAdd(`${quantity} ${item.name}`);
+							} else {
+								await onAdd(item.name);
+							}
+						} else if (item.type === 'recipe') {
+							setAddingRecipe(item.recipe);
+							if (!keepOpenOnSelect) {
+								setOpen(false);
+							}
 						} else {
-							await onAdd(item.name);
+							await onAdd(suggestionToString(item));
 						}
-					} else if (item.type === 'recipe') {
-						setAddingRecipe(item.recipe);
-						if (!keepOpenOnSelect) {
-							setOpen(false);
-							onOpenChange?.(false);
+					}}
+					onCreate={async (text) => {
+						setQuery('');
+						if (URL.canParse(text)) {
+							recipeSavePromptState.url = text;
+						} else {
+							await onAdd(text);
 						}
-					} else {
-						await onAdd(suggestionToString(item));
-					}
-				}}
-				onCreate={async (text) => {
-					setQuery('');
-					if (URL.canParse(text)) {
-						recipeSavePromptState.url = text;
-					} else {
-						await onAdd(text);
-					}
-				}}
-				{...props}
-			/>
-			{addingRecipe && (
-				<Suspense>
-					<AddToListDialog
-						recipe={addingRecipe}
-						onOpenChange={clearAddingRecipe}
-						open
-					/>
-				</Suspense>
-			)}
+					}}
+					{...props}
+				/>
+				{addingRecipe && (
+					<Suspense>
+						<AddToListDialog
+							recipe={addingRecipe}
+							onOpenChange={clearAddingRecipe}
+							open
+						/>
+					</Suspense>
+				)}
+			</OpenContext.Provider>
 		</InternalContext.Provider>
 	);
+}
+
+export function useIsAddBarOpen() {
+	return useContext(OpenContext);
 }
 
 export function AddBarComboboxInput({

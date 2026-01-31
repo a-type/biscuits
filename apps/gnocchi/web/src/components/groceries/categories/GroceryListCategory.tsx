@@ -38,6 +38,10 @@ export function GroceryListCategory({
 			type: 'category',
 			value: category?.get('id'),
 		},
+		resizeObserverConfig: {
+			timeout: 200,
+			updateMeasurementsFor: [],
+		},
 	});
 
 	const measureRef = useSizeCssVars(300);
@@ -78,14 +82,14 @@ export function GroceryListCategory({
 
 export const CategoryRoot = withClassName(
 	'div',
-	'flex flex-col rounded-md bg-wash overflow-hidden ease-springy transition mb-2',
-	'[&[data-dragged-over=true]]:(bg-primary-wash ring ring-primary-dark)',
-	'[&[data-is-item-dragging=true]]:(ring ring-gray-light mb-0)',
-	'[&[data-is-empty=true]:not([data-is-item-dragging=true])]:(h-0 op-0 pointer-events-none mb-0 [animation-name:category-collapse] animate animate-duration-200 animate-ease-default animate-forwards [visibility:hidden])',
+	'mb-2 flex flex-col overflow-hidden rounded-md transition ease-springy bg-wash',
+	'[&[data-dragged-over=true]]:(ring bg-primary-wash ring-primary-dark)',
+	'[&[data-is-item-dragging=true]]:(mb-0 ring ring-gray-light)',
+	'[&[data-is-empty=true]:not([data-is-item-dragging=true])]:animate [&[data-is-empty=true]:not([data-is-item-dragging=true])]:([animation-name:category-collapse] [visibility:hidden] pointer-events-none mb-0 h-0 animate-duration-200 animate-ease-default animate-forwards op-0)',
 	'important:[&[data-do-not-animate=true]]:(animate-none) important:motion-reduce:animate-none',
 	'[&[data-is-item-dragging=true][data-dragged-over=false]]:(scale-95)',
 	'[&[data-pop-in=true][data-dragged-over=false][data-is-item-dragging=false]]:(animate-keyframes-fade-in-up animate-duration-200 animate-ease-springy)',
-	'focus-visible:(color-primary-dark outline-1 outline-solid outline-primary)',
+	'focus-visible:(outline-1 outline-primary outline-solid color-primary-dark)',
 );
 
 export const CategoryItems = withClassName(

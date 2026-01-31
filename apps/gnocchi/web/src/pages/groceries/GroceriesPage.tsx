@@ -1,3 +1,4 @@
+import { AddBarComboboxRoot } from '@/components/groceries/addBar/combobox.jsx';
 import { FloatingAdd } from '@/components/groceries/addBar/FloatingAdd.jsx';
 import { ListEdit } from '@/components/groceries/lists/ListEdit.jsx';
 import { ListSelect } from '@/components/groceries/lists/ListSelect.jsx';
@@ -48,35 +49,37 @@ export function GroceriesPage() {
 
 	return (
 		<ListContext.Provider value={listId}>
-			<RecipeSavePrompt />
-			<ThemedPageContent listId={listId}>
-				<TopControls>
-					<ListSelectWrapper>
-						<ListSelect includeAll value={listId} onChange={onListChange} />
-						{listId && <ListEdit listId={listId} />}
-					</ListSelectWrapper>
+			<AddBarComboboxRoot>
+				<RecipeSavePrompt />
+				<ThemedPageContent listId={listId}>
+					<TopControls>
+						<ListSelectWrapper>
+							<ListSelect includeAll value={listId} onChange={onListChange} />
+							{listId && <ListEdit listId={listId} />}
+						</ListSelectWrapper>
 
-					<div className="flex flex-row items-center gap-2">
-						<Suspense>
-							<ChangelogDisplay className="sm:hidden" hideOnSeen />
-						</Suspense>
-						<InstallButton />
-						<Suspense>
-							<UserMenu />
-						</Suspense>
-					</div>
-				</TopControls>
-				<MainActions />
-				<List />
-				<UnknownListRedirect listId={listId} />
-				<AutoRestoreScroll />
-				<PageNowPlaying
-					keepAboveKeyboard
-					className="pointer-events-none z-nav items-center children:pointer-events-auto"
-				>
-					<FloatingAdd />
-				</PageNowPlaying>
-			</ThemedPageContent>
+						<div className="flex flex-row items-center gap-2">
+							<Suspense>
+								<ChangelogDisplay className="sm:hidden" hideOnSeen />
+							</Suspense>
+							<InstallButton />
+							<Suspense>
+								<UserMenu />
+							</Suspense>
+						</div>
+					</TopControls>
+					<MainActions />
+					<List />
+					<UnknownListRedirect listId={listId} />
+					<AutoRestoreScroll />
+					<PageNowPlaying
+						keepAboveKeyboard
+						className="pointer-events-none z-nav items-center children:pointer-events-auto"
+					>
+						<FloatingAdd />
+					</PageNowPlaying>
+				</ThemedPageContent>
+			</AddBarComboboxRoot>
 		</ListContext.Provider>
 	);
 }
