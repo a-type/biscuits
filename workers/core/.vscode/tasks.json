@@ -1,0 +1,12 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "npm",
+			"script": "stripe",
+			"problemMatcher": [],
+			"label": "npm: stripe",
+			"detail": "stripe listen -f http://localhost:6124/stripe/webhook"
+		}
+	]
+}

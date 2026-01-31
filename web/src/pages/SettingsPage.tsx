@@ -161,14 +161,12 @@ export function PlanPage({}: PlanPageProps) {
 						<Tabs.Content value="members">
 							<ErrorBoundary>
 								<Suspense>
-									{!!data?.me?.plan && (
-										<>
-											<div className="flex flex-col gap-3">
-												<H3>Members</H3>
-												<MembersAndInvitations />
-											</div>
-										</>
-									)}
+									<>
+										<Box col gap>
+											<H3>Members</H3>
+											<MembersAndInvitations />
+										</Box>
+									</>
 								</Suspense>
 							</ErrorBoundary>
 						</Tabs.Content>

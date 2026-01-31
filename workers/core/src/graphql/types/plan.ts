@@ -2,6 +2,7 @@ import { Session } from '@a-type/auth';
 import { assert } from '@a-type/utils';
 import { Plan as DBPlan } from '@biscuits/db';
 import { getLibraryName } from '@biscuits/libraries';
+import { isAppAllowed } from '../../auth/allowedApp.js';
 import { isSubscribed } from '../../auth/subscription.js';
 import { BiscuitsError } from '../../error.js';
 import { logger } from '../../logger.js';
@@ -219,6 +220,7 @@ builder.mutationFields((t) => ({
 		type: 'LeavePlanResult',
 		authScopes: {
 			member: true,
+			user: true,
 		},
 		resolve: async (_, __, ctx) => {
 			const planId = ctx.session?.planId;
@@ -429,7 +431,7 @@ Plan.implement({
 
 				return (
 					isSubscribed(plan.subscriptionStatus) &&
-					(!plan.allowedApp || plan.allowedApp === appId)
+					isAppAllowed(plan.allowedApp, appId)
 				);
 			},
 		}),

@@ -1,23 +1,20 @@
 import { AppId } from '@biscuits/apps';
 import { fetch } from '@biscuits/graphql';
 import { BiscuitsVerdantProfile, LibraryAccess } from '@biscuits/libraries';
-import { Client } from '@verdant-web/store';
+import { Client, ServerSyncOptions } from '@verdant-web/store';
 import { createContext } from 'react';
 import * as CONFIG from './config.js';
 
-const LONG_PULL = 4 * 60 * 60 * 1000;
 const SHORT_PULL = 45 * 1000;
 
 export function getVerdantSync<Presence>({
 	appId,
 	initialPresence,
 	access,
-	dashboardMode,
 }: {
 	appId: AppId;
 	initialPresence: Presence;
 	access: LibraryAccess;
-	dashboardMode?: boolean;
 }) {
 	return {
 		initialPresence,
@@ -28,9 +25,24 @@ export function getVerdantSync<Presence>({
 		} satisfies BiscuitsVerdantProfile,
 		authEndpoint: `${CONFIG.API_ORIGIN}/verdant/token/${appId}?access=${access}`,
 		useBroadcastChannel: true,
-		fetch,
-		pullInterval: dashboardMode ? LONG_PULL : SHORT_PULL,
-	};
+		fetchAuth: async () => {
+			const response = await fetch(
+				`${CONFIG.API_ORIGIN}/verdant/token/${appId}?access=${access}`,
+				{
+					credentials: 'include',
+				},
+			);
+			if (!response.ok) {
+				throw new Error(
+					`Failed to fetch Verdant auth token: ${response.status} ${response.statusText}`,
+				);
+			}
+			const data = await response.json();
+			return data;
+		},
+		pullInterval: SHORT_PULL,
+		automaticTransportSelection: 'peers-only',
+	} satisfies ServerSyncOptions;
 }
 
 export const VerdantContext = createContext<Client<

@@ -152,5 +152,6 @@ vite.config.ts.*
 prod.sql
 prod.sqlite
 *.sqlite
+test.sql
 
 .wrangler

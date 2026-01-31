@@ -60,7 +60,6 @@ export const hooks = createHooks<Presence, Profile>({
 
 const DEBUG = localStorage.getItem('DEBUG') === 'true';
 const NO_SYNC = window.location.search.includes('nosync');
-const DASHBOARD_MODE = window.location.search.includes('dashboard');
 export function createClient(options: { namespace: string }) {
 	return new Client({
 		sync: NO_SYNC
@@ -73,7 +72,6 @@ export function createClient(options: { namespace: string }) {
 						lastInteractedCategory: null,
 					} satisfies Presence,
 					access: 'members',
-					dashboardMode: DASHBOARD_MODE,
 			  }),
 		migrations,
 		namespace: options.namespace,

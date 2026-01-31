@@ -195,7 +195,7 @@ builder.mutationFields((t) => ({
 
 			return {
 				userId,
-				planId: invite.planId,
+				planId: plan.id,
 			};
 		},
 	}),

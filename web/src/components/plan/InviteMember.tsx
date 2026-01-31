@@ -28,8 +28,9 @@ export function InviteMember({}: InviteMemberProps) {
 				bag.resetForm();
 				toast.success('Invitation sent!');
 			}}
+			className="w-full"
 		>
-			<TextField name="email" label="Email" />
+			<TextField name="email" label="Email" className="w-full" />
 			<SubmitButton>Invite</SubmitButton>
 		</FormikForm>
 	);

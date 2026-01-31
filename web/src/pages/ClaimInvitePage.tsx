@@ -1,8 +1,17 @@
 import { Footer } from '@/components/help/Footer.jsx';
-import { Box, Button, H1, P, PageContent, PageRoot, toast } from '@a-type/ui';
+import {
+	Box,
+	Button,
+	H1,
+	Icon,
+	P,
+	PageContent,
+	PageRoot,
+	toast,
+} from '@a-type/ui';
 import { BiscuitsError } from '@biscuits/error';
 import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
-import { useNavigate, useParams } from '@verdant-web/react-router';
+import { Link, useNavigate, useParams } from '@verdant-web/react-router';
 import { useEffect } from 'react';
 
 const claimInviteInfo = graphql(`
@@ -25,9 +34,6 @@ const claimInviteAction = graphql(`
 		claimPlanInvitation(code: $code) {
 			user {
 				id
-				plan {
-					id
-				}
 			}
 		}
 	}
@@ -58,7 +64,7 @@ function ClaimInvitePage() {
 	const claim = async () => {
 		const result = await mutateClaim({ variables: { code } });
 		if (!result.errors) {
-			toast.success('Welcome to your new membership!', {
+			toast.success('Welcome to your new plan!', {
 				duration: 15000,
 			});
 			navigate('/settings');
@@ -79,7 +85,7 @@ function ClaimInvitePage() {
 	return (
 		<PageRoot className="flex-1">
 			<PageContent className="h-full flex flex-col justify-between gap-lg">
-				<div className="flex flex-col items-start gap-6">
+				<Box col items="start" gap grow justify="center">
 					<H1>
 						Join {infoResult.data?.planInvitation?.inviterName ?? 'someone'}’s
 						plan
@@ -96,8 +102,16 @@ function ClaimInvitePage() {
 							you&apos;ll be removed from your current plan.
 						</Box>
 					)}
-					<Button onClick={claim}>Claim Invite</Button>
-				</div>
+					<Box justify="between" items="center" full="width">
+						<Button render={<Link to="/" />}>
+							<Icon name="arrowLeft" />
+							Home
+						</Button>
+						<Button emphasis="primary" onClick={claim}>
+							Claim Invite
+						</Button>
+					</Box>
+				</Box>
 				<Footer />
 			</PageContent>
 		</PageRoot>

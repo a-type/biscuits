@@ -23,6 +23,20 @@
 		},
 		{
 			"type": "npm",
+			"script": "migrate:apply",
+			"label": "🗄️ Apply DB Migrations",
+			"path": "workers/core",
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "stripe",
+			"problemMatcher": [],
+			"label": "💳 Stripe Listen",
+			"path": "workers/core"
+		},
+		{
+			"type": "npm",
 			"script": "dev",
 			"label": "🌐 Web",
 			"path": "web",

@@ -69,6 +69,7 @@ export default function LoginPage() {
 					surface="white"
 					elevated="sm"
 					p
+					gap
 					container="reset"
 					d="col"
 					items="center"
@@ -85,7 +86,7 @@ export default function LoginPage() {
 						</P>
 					)}
 					<TabsRoot
-						className="flex flex-col"
+						className="flex flex-col gap-sm"
 						value={activeTab}
 						onValueChange={(val) =>
 							setParams((old) => {
@@ -94,7 +95,7 @@ export default function LoginPage() {
 							})
 						}
 					>
-						<TabsList className="mb-4">
+						<TabsList className="mx-auto">
 							<TabsTrigger value="signin">Log in</TabsTrigger>
 							<TabsTrigger value="signup">Create account</TabsTrigger>
 						</TabsList>
@@ -104,7 +105,7 @@ export default function LoginPage() {
 						>
 							<label
 								className={classNames(
-									'max-w-400px flex flex-row gap-3 rounded-lg p-2 text-sm transition-color',
+									'max-w-400px flex flex-row gap-3 rounded-lg p-md text-sm transition-color',
 									!tosAgreed && 'color-black bg-primary-light',
 								)}
 							>

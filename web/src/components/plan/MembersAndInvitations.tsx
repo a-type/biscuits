@@ -12,6 +12,7 @@ import {
 	H3,
 } from '@a-type/ui';
 import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
+import { Link } from '@verdant-web/react-router';
 import { InviteMember } from './InviteMember.js';
 
 const membersQuery = graphql(`
@@ -41,6 +42,15 @@ export function MembersAndInvitations() {
 	const { data } = useSuspenseQuery(membersQuery);
 	const plan = data?.me?.plan;
 	const isAdmin = data?.me?.role === 'admin';
+
+	if (!plan) {
+		return (
+			<p>
+				<Link to="?tab=subscription">Subscribe to a plan</Link> to manage
+				members.
+			</p>
+		);
+	}
 
 	return (
 		<div>
