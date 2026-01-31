@@ -197,7 +197,7 @@ export function OnboardingBanner<O extends Onboarding<any>>({
 			data-step-name={step}
 		>
 			<CollapsibleContent>
-				<div className="w-full flex flex-col gap-3 rounded-lg p-4 color-black bg-primary-wash">
+				<div className="w-full flex flex-col gap-3 rounded-lg p-4 color-black bg-main-wash">
 					<Box col gap="sm">
 						{children}
 					</Box>
@@ -279,13 +279,13 @@ export const OnboardingTooltip = function OnboardingTooltip<
 			<PopoverContent
 				className={clsx(
 					'theme-leek',
-					'flex px-3 py-2 bg-primary-wash',
+					'flex px-3 py-2 bg-main-wash',
 					'overflow-visible',
 				)}
 				collisionPadding={16}
 				anchor={anchorRef}
 			>
-				<PopoverArrow className="!fill-primary-wash" />
+				<PopoverArrow className="!fill-main-wash" />
 				<div className="flex flex-row items-center gap-3">
 					{content}
 					{!disableNext && (

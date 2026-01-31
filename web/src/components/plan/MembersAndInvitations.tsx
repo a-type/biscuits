@@ -50,7 +50,7 @@ export function MembersAndInvitations() {
 					return (
 						<CardRoot key={member.id}>
 							<CardMain className="justify-start">
-								<CardTitle className="mt-0 flex-row">
+								<CardTitle className="flex-row">
 									<Avatar imageSrc={member.imageUrl ?? undefined} />
 									{member.name}
 									{isMe && <span className="font-bold"> (you)</span>}
@@ -73,7 +73,7 @@ export function MembersAndInvitations() {
 				{plan?.pendingInvitations.map((invite) => (
 					<CardRoot key={invite.id}>
 						<CardMain>
-							<CardTitle className="mt-0 flex-row color-gray-dark">
+							<CardTitle className="flex-row color-gray-dark">
 								<Avatar />
 								<span>Invited: {invite.email}</span>
 							</CardTitle>

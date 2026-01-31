@@ -1,13 +1,5 @@
 import { Footer } from '@/components/help/Footer.jsx';
-import {
-	Button,
-	H1,
-	P,
-	PageContent,
-	PageRoot,
-	toast,
-	withClassName,
-} from '@a-type/ui';
+import { Box, Button, H1, P, PageContent, PageRoot, toast } from '@a-type/ui';
 import { BiscuitsError } from '@biscuits/error';
 import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
 import { useNavigate, useParams } from '@verdant-web/react-router';
@@ -99,10 +91,10 @@ function ClaimInvitePage() {
 						access to all member-only features.
 					</P>
 					{!!infoResult.data?.me?.plan && (
-						<Warning>
+						<Box color="attention" surface p border>
 							You&apos;re already a member of a plan. If you join this plan,
 							you&apos;ll be removed from your current plan.
-						</Warning>
+						</Box>
 					)}
 					<Button onClick={claim}>Claim Invite</Button>
 				</div>
@@ -113,8 +105,3 @@ function ClaimInvitePage() {
 }
 
 export default ClaimInvitePage;
-
-const Warning = withClassName(
-	'p',
-	'text-destructive-dark bg-destructive-wash block p-4 rounded-md mb-4',
-);

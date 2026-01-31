@@ -1,6 +1,7 @@
 import { assert } from '@a-type/utils';
 import { createDb, id, jsonArrayFrom } from '@biscuits/db';
 import { BiscuitsError, BiscuitsErrorCode } from '@biscuits/error';
+import { Stripe } from 'stripe';
 import { isSubscribed } from '../auth/subscription.js';
 import { GQLContext } from '../graphql/context.js';
 import { email } from '../services/email.js';
@@ -179,6 +180,22 @@ async function cancelSubscription(
 				}),
 			})
 			.execute();
+		if (err instanceof Stripe.errors.StripeError) {
+			if (err.code === 'resource_missing') {
+				// swallow missing resource errors
+				return;
+			}
+			throw new BiscuitsError(
+				BiscuitsError.Code.Unexpected,
+				`Error cancelling subscription: ${err.message}`,
+				err,
+			);
+		}
+		throw new BiscuitsError(
+			BiscuitsError.Code.Unexpected,
+			`Error cancelling subscription: ${(err as Error)?.message}`,
+			err,
+		);
 	}
 }
 

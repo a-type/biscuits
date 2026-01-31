@@ -13,8 +13,8 @@ catalogs:
       specifier: 2.1.3
       version: 2.1.3
     '@a-type/auth-ui':
-      specifier: 1.1.0
-      version: 1.1.0
+      specifier: 2.0.0
+      version: 2.0.0
     '@a-type/ui':
       specifier: ^5.0.8
       version: 5.0.8
@@ -1750,7 +1750,7 @@ importers:
     dependencies:
       '@a-type/auth-ui':
         specifier: 'catalog:'
-        version: 1.1.0(@a-type/ui@5.0.8(@types/react@19.2.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(unocss@66.5.12(vite@7.3.1(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))))(react@19.2.3)
+        version: 2.0.0(@a-type/ui@5.0.8(@types/react@19.2.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(unocss@66.5.12(vite@7.3.1(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))))(react@19.2.3)
       '@a-type/ui':
         specifier: 'catalog:'
         version: 5.0.8(@types/react@19.2.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(unocss@66.5.12(vite@7.3.1(@types/node@22.10.2)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
@@ -2048,10 +2048,10 @@ packages:
   '@a-type/auth-fetch@2.1.3':
     resolution: {integrity: sha512-aA0CFZdLGNVxtjAPVZnpQeG8i6zN6ki09xAevfF1+2cfYZ5kx2e+IdJFn4u5hov3LzGH3kyVW7D/EK0MpFnCQA==}
 
-  '@a-type/auth-ui@1.1.0':
-    resolution: {integrity: sha512-7TWP/Zxy28eHNRq9tHQv/WxQ1Xzk+3TXhoblonpP7CFRB1XfUqrvc5yHLxqm62RrMFGZuNWlgxlHzldojAbc3g==}
+  '@a-type/auth-ui@2.0.0':
+    resolution: {integrity: sha512-ga1sEJ/5XKGbPB0vxMkZJ4QKdoJk787TKgcGcFurMJH1rtfOzN6pe12y4c0nht2pFADkh5U0uzLfplnDEVcvFw==}
     peerDependencies:
-      '@a-type/ui': '>=1.0.0 <3.0.0'
+      '@a-type/ui': '>=5.0.0'
       react: ^19
 
   '@a-type/auth@1.3.16':
@@ -10726,7 +10726,7 @@ snapshots:
 
   '@a-type/auth-fetch@2.1.3': {}
 
-  '@a-type/auth-ui@1.1.0(@a-type/ui@5.0.8(@types/react@19.2.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(unocss@66.5.12(vite@7.3.1(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))))(react@19.2.3)':
+  '@a-type/auth-ui@2.0.0(@a-type/ui@5.0.8(@types/react@19.2.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(unocss@66.5.12(vite@7.3.1(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))))(react@19.2.3)':
     dependencies:
       '@a-type/ui': 5.0.8(@types/react@19.2.8)(react-dom@19.2.3(react@19.2.3))(react@19.2.3)(unocss@66.5.12(vite@7.3.1(@types/node@22.10.2)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       react: 19.2.3

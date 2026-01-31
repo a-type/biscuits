@@ -182,7 +182,7 @@ builder.mutationFields((t) => ({
 
 			await cancelPlanSubscription(ctx.session.planId, userId, ctx);
 
-			return {};
+			return true;
 		},
 	}),
 	kickMember: t.field({
@@ -267,7 +267,7 @@ builder.mutationFields((t) => ({
 				planId: null,
 				role: 'user',
 			});
-			return {};
+			return true;
 		},
 	}),
 	setFeatureFlag: t.field({
@@ -373,7 +373,10 @@ export const Plan = builder.loadableNodeRef('Plan', {
 
 			if (!myPlan || myPlan.id !== planId) {
 				// user session is not allowed access to this unrelated plan
-				throw new BiscuitsError(BiscuitsError.Code.NotFound);
+				throw new BiscuitsError(
+					BiscuitsError.Code.NotFound,
+					`Could not load that plan`,
+				);
 			}
 
 			plans = [myPlan];

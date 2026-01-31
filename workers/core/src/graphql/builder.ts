@@ -66,9 +66,9 @@ export const builder = new SchemaBuilder<{
 		ProductInfo: {
 			lookupKey: string;
 		};
-		CancelPlanResult: any;
+		CancelPlanResult: boolean;
 		KickMemberResult: { planId: string };
-		LeavePlanResult: any;
+		LeavePlanResult: boolean;
 		CreatePlanInvitationResult: { planId: string; planInvitationId: string };
 		CancelPlanInvitationResult: { planId: string };
 		ResetSyncResult: { planId: string };
