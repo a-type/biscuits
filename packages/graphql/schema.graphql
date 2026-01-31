@@ -33,11 +33,12 @@ type ClaimPlanInvitationResult {
 
 input CreateCategoryInput {
   name: String!
-  sortKey: String!
+  sortKey: String
 }
 
 type CreateCategoryResult {
   categories: [FoodCategory!]!
+  category: FoodCategory!
 }
 
 """Input for creating a new changelog item"""
@@ -181,17 +182,17 @@ type Mutation {
   changeFoodCanonicalName(foodId: ID!, name: String!): Food!
   claimPlanInvitation(code: String!): ClaimPlanInvitationResult!
   confirmPurchases(purchaseIds: [ID!]!): Boolean!
-  createCategory(input: CreateCategoryInput!): CreateCategoryResult!
   createChangelogItem(input: CreateChangelogItemInput!): ChangelogItem!
   createDomainRoute(input: CreateDomainRouteInput!): CreateDomainRouteResult!
+  createFoodCategory(input: CreateCategoryInput!): CreateCategoryResult!
   createPlanInvitation(input: CreatePlanInvitationInput!): CreatePlanInvitationResult!
   createPushSubscription(input: CreatePushSubscriptionInput!): Boolean!
-  deleteCategory(categoryId: ID!): DeleteCategoryResult!
   deleteChangelogItem(
     """The ID of the changelog item to delete"""
     id: String!
   ): ChangelogItem!
   deleteDomainRoute(id: ID!): String!
+  deleteFoodCategory(categoryId: ID!): DeleteCategoryResult!
   deletePlan(id: ID): Plan!
   deletePushSubscription(endpoint: String!): Boolean!
   kickMember(userId: ID!): KickMemberResult!
@@ -215,7 +216,7 @@ type Mutation {
   unpublishRecipe(recipeId: ID!): ID!
   unpublishWishlist(wishlistId: ID!): ID!
   unpurchasePublicItem(input: UnpurchasePublicItemInput!): Boolean!
-  updateCategory(input: UpdateCategoryInput!): UpdateCategoryResult!
+  updateFoodCategory(input: UpdateCategoryInput!): UpdateCategoryResult!
   updateRecipePublication(input: UpdateRecipePublicationInput!): RecipePublication
   updateUserInfo(input: UpdateUserInfoInput!): User!
 }
@@ -378,7 +379,12 @@ type PublishedWishlistData {
   description: String
   hidePurchases: Boolean
   id: ID!
-  items: [PublishedWishlistItem!]!
+  items(
+    """
+    Whether to hide purchased items. Defaults to the wishlist setting. Defaults to true if this is your list, false otherwise.
+    """
+    hidePurchases: Boolean
+  ): [PublishedWishlistItem!]!
   title: String!
 }
 
@@ -621,6 +627,7 @@ input UpdateCategoryInput {
 
 type UpdateCategoryResult {
   categories: [FoodCategory!]!
+  category: FoodCategory!
 }
 
 input UpdateRecipePublicationInput {

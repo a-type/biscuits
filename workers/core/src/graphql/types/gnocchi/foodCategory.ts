@@ -1,6 +1,7 @@
 import { FoodCategory as DBFoodCategory, id } from '@biscuits/db';
 import { BiscuitsError } from '@biscuits/error';
 import { decodeGlobalID } from '@pothos/plugin-relay';
+import { generateKeyBetween } from 'fractional-indexing';
 import { logger } from '../../../logger.js';
 import { builder } from '../../builder.js';
 import { GQLContext } from '../../context.js';
@@ -17,6 +18,20 @@ async function getAllCategories(ctx: GQLContext) {
 	return categories.map(assignTypeName('FoodCategory'));
 }
 
+async function getCategory(ctx: GQLContext, id: string) {
+	const category = await ctx.db
+		.selectFrom('FoodCategory')
+		.selectAll()
+		.where('id', '=', id)
+		.executeTakeFirst();
+
+	if (!category) {
+		throw new BiscuitsError(BiscuitsError.Code.NotFound);
+	}
+
+	return assignTypeName('FoodCategory')(category);
+}
+
 builder.queryFields((t) => ({
 	foodCategories: t.field({
 		type: [FoodCategory],
@@ -25,7 +40,7 @@ builder.queryFields((t) => ({
 }));
 
 builder.mutationFields((t) => ({
-	createCategory: t.field({
+	createFoodCategory: t.field({
 		type: 'CreateCategoryResult',
 		authScopes: {
 			productAdmin: true,
@@ -36,19 +51,29 @@ builder.mutationFields((t) => ({
 				required: true,
 			}),
 		},
-		resolve: async (_, { input }, ctx) => {
+		resolve: async (_, { input: { name, sortKey } }, ctx) => {
+			let resolvedSortKey = sortKey;
+			if (!resolvedSortKey) {
+				const maxSortKeyRow = await ctx.db
+					.selectFrom('FoodCategory')
+					.select(ctx.db.fn.max('sortKey').as('maxSortKey'))
+					.executeTakeFirst();
+
+				const maxSortKey = maxSortKeyRow?.maxSortKey ?? null;
+				resolvedSortKey = generateKeyBetween(maxSortKey, null);
+			}
 			const category = await ctx.db
 				.insertInto('FoodCategory')
 				.values({
 					id: id(),
-					name: input.name,
-					sortKey: input.sortKey,
+					name,
+					sortKey: resolvedSortKey,
 				})
 				.returning('id')
 				.executeTakeFirst();
 
 			if (!category) {
-				logger.urgent('Failed to create category', input.name);
+				logger.urgent('Failed to create category', name);
 				throw new BiscuitsError(BiscuitsError.Code.Unexpected);
 			}
 
@@ -56,7 +81,7 @@ builder.mutationFields((t) => ({
 		},
 	}),
 
-	updateCategory: t.field({
+	updateFoodCategory: t.field({
 		type: 'UpdateCategoryResult',
 		authScopes: {
 			productAdmin: true,
@@ -88,7 +113,7 @@ builder.mutationFields((t) => ({
 		},
 	}),
 
-	deleteCategory: t.field({
+	deleteFoodCategory: t.field({
 		type: 'DeleteCategoryResult',
 		authScopes: {
 			productAdmin: true,
@@ -152,13 +177,24 @@ builder.objectType('CreateCategoryResult', {
 			type: [FoodCategory],
 			resolve: (_, __, ctx) => getAllCategories(ctx),
 		}),
+		category: t.field({
+			type: FoodCategory,
+			resolve: async ({ categoryId }, __, ctx) => {
+				const category = await getCategory(ctx, categoryId);
+				if (!category) {
+					throw new BiscuitsError(BiscuitsError.Code.NotFound);
+				}
+
+				return assignTypeName('FoodCategory')(category);
+			},
+		}),
 	}),
 });
 
 builder.inputType('CreateCategoryInput', {
 	fields: (t) => ({
 		name: t.field({ type: 'String', required: true }),
-		sortKey: t.field({ type: 'String', required: true }),
+		sortKey: t.field({ type: 'String', required: false }),
 	}),
 });
 
@@ -168,14 +204,25 @@ builder.objectType('UpdateCategoryResult', {
 			type: [FoodCategory],
 			resolve: (_, __, ctx) => getAllCategories(ctx),
 		}),
+		category: t.field({
+			type: FoodCategory,
+			resolve: async ({ categoryId }, __, ctx) => {
+				const category = await getCategory(ctx, categoryId);
+				if (!category) {
+					throw new BiscuitsError(BiscuitsError.Code.NotFound);
+				}
+
+				return assignTypeName('FoodCategory')(category);
+			},
+		}),
 	}),
 });
 
 builder.inputType('UpdateCategoryInput', {
 	fields: (t) => ({
 		id: t.id({ required: true }),
-		name: t.field({ type: 'String' }),
-		sortKey: t.field({ type: 'String' }),
+		name: t.field({ type: 'String', required: false }),
+		sortKey: t.field({ type: 'String', required: false }),
 	}),
 });
 

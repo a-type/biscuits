@@ -27,6 +27,7 @@
 		"classnames": "^2.3.2",
 		"cookie": "^0.6.0",
 		"formik": "^2.4.5",
+		"fractional-indexting": "catalog:",
 		"three": "0.173.0",
 		"react": "catalog:",
 		"react-dom": "catalog:",

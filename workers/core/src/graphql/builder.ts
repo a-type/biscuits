@@ -205,12 +205,12 @@ export const builder = new SchemaBuilder<{
 		};
 		CreateCategoryInput: {
 			name: string;
-			sortKey: string;
+			sortKey?: string | null;
 		};
 		UpdateCategoryInput: {
 			id: string | number;
-			name: string | null;
-			sortKey: string | null;
+			name?: string | null;
+			sortKey?: string | null;
 		};
 		RecipeScanInput: {
 			url: string | null;
