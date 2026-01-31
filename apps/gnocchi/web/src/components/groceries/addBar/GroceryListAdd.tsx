@@ -2,6 +2,7 @@ import {
 	AddBarComboboxContent,
 	AddBarComboboxInput,
 	AddBarComboboxItems,
+	AddBarComboboxRoot,
 } from './combobox.jsx';
 
 export interface GroceryListAddProps {
@@ -10,11 +11,11 @@ export interface GroceryListAddProps {
 
 export function GroceryListAdd(props: GroceryListAddProps) {
 	return (
-		<>
+		<AddBarComboboxRoot>
 			<AddBarComboboxInput {...props} />
 			<AddBarComboboxContent className="<md:hidden">
 				<AddBarComboboxItems />
 			</AddBarComboboxContent>
-		</>
+		</AddBarComboboxRoot>
 	);
 }

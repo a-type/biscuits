@@ -9,7 +9,6 @@ import {
 	ReactNode,
 	Suspense,
 	useContext,
-	useDeferredValue,
 	useState,
 } from 'react';
 import {
@@ -17,10 +16,10 @@ import {
 	SuggestionGroup,
 	suggestionToDisplayString,
 	suggestionToString,
-	useAddBarSuggestions,
 	useKeepOpenAfterSelect,
 	useParticlesOnAdd,
 } from './hooks.js';
+import { useAddBarSuggestions } from './SuggestionContext.jsx';
 
 const BaseCombobox = Combobox.createGrouped<SuggestionGroup>();
 
@@ -42,12 +41,12 @@ export function AddBarComboboxRoot({
 	className?: string;
 	children?: ReactNode;
 }) {
-	const [query, setQuery] = useState('');
-	const deferredQuery = useDeferredValue(query);
-	const { groupedSuggestions, placeholder } = useAddBarSuggestions({
-		showRichSuggestions: true,
-		suggestionPrompt: deferredQuery,
-	});
+	const {
+		suggestionPrompt: query,
+		setSuggestionPrompt: setQuery,
+		groupedSuggestions,
+		placeholder,
+	} = useAddBarSuggestions();
 	const addItems = useAddItems();
 	const onAdd = async (itemText: string) => {
 		await addItems(

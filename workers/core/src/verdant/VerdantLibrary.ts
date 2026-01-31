@@ -25,6 +25,7 @@ export class VerdantLibrary extends DurableObject<Env> implements LibraryApi {
 					logger.debug(...args);
 				}
 			},
+			EXPERIMENTAL_autoHeartbeatResponses: false,
 		});
 		const changeListener = new VerdantChangeListener(env);
 		this.verdant.events.subscribe('changes', changeListener.update);
@@ -49,6 +50,9 @@ export class VerdantLibrary extends DurableObject<Env> implements LibraryApi {
 		reason: string,
 		wasClean: boolean,
 	): void | Promise<void> {
+		console.info(
+			`🔌 WebSocket closed: code=${code} reason=${reason} wasClean=${wasClean}`,
+		);
 		return this.verdant.webSocketClose(ws, code, reason, wasClean);
 	}
 

@@ -1,5 +1,5 @@
-import { AddBarComboboxRoot } from '@/components/groceries/addBar/combobox.jsx';
 import { FloatingAdd } from '@/components/groceries/addBar/FloatingAdd.jsx';
+import { AddBarSuggestionProvider } from '@/components/groceries/addBar/SuggestionContext.jsx';
 import { ListEdit } from '@/components/groceries/lists/ListEdit.jsx';
 import { ListSelect } from '@/components/groceries/lists/ListSelect.jsx';
 import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
@@ -49,7 +49,7 @@ export function GroceriesPage() {
 
 	return (
 		<ListContext.Provider value={listId}>
-			<AddBarComboboxRoot>
+			<AddBarSuggestionProvider>
 				<RecipeSavePrompt />
 				<ThemedPageContent listId={listId}>
 					<TopControls>
@@ -79,7 +79,7 @@ export function GroceriesPage() {
 						<FloatingAdd />
 					</PageNowPlaying>
 				</ThemedPageContent>
-			</AddBarComboboxRoot>
+			</AddBarSuggestionProvider>
 		</ListContext.Provider>
 	);
 }
