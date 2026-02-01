@@ -86,7 +86,7 @@ export function MeetupSelect({ children, id, emptyLabel }: MeetupSelectProps) {
 				}
 			/>
 			<Select.Content>
-				<Select.Item value={null} disabled={!!location}>
+				<Select.Item value={null} disabled={!location}>
 					<Select.ItemText>
 						{location ? 'Clear' : emptyLabel || 'Meet up...'}
 					</Select.ItemText>

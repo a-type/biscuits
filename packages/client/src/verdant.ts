@@ -23,9 +23,9 @@ export function getVerdantSync<Presence>({
 			name: 'Anonymous',
 			imageUrl: null,
 		} satisfies BiscuitsVerdantProfile,
-		authEndpoint: `${CONFIG.API_ORIGIN}/verdant/token/${appId}?access=${access}`,
 		useBroadcastChannel: true,
 		fetchAuth: async () => {
+			console.log('HERE');
 			const response = await fetch(
 				`${CONFIG.API_ORIGIN}/verdant/token/${appId}?access=${access}`,
 				{

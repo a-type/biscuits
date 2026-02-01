@@ -10,6 +10,7 @@ export class VerdantLibrary extends DurableObject<Env> implements LibraryApi {
 	constructor(ctx: DurableObjectState, env: Env) {
 		super(ctx, env);
 		const logger = new Logger('🌿');
+		logger.info(`VerdantLibrary startup...`);
 		this.verdant = new DurableObjectLibrary(ctx, {
 			tokenSecret: env.VERDANT_SECRET,
 			fileStorage: new R2FileStorage({
@@ -25,7 +26,7 @@ export class VerdantLibrary extends DurableObject<Env> implements LibraryApi {
 					logger.debug(...args);
 				}
 			},
-			EXPERIMENTAL_autoHeartbeatResponses: false,
+			EXPERIMENTAL_autoHeartbeatResponses: true,
 		});
 		const changeListener = new VerdantChangeListener(env);
 		this.verdant.events.subscribe('changes', changeListener.update);
@@ -35,11 +36,8 @@ export class VerdantLibrary extends DurableObject<Env> implements LibraryApi {
 	fetch(request: Request) {
 		return this.verdant.fetch(request);
 	}
-	webSocketMessage(
-		ws: WebSocket,
-		message: string | ArrayBuffer,
-	): void | Promise<void> {
-		return this.verdant.webSocketMessage(ws, message);
+	async webSocketMessage(ws: WebSocket, message: string | ArrayBuffer) {
+		await this.verdant.webSocketMessage(ws, message);
 	}
 	webSocketError(ws: WebSocket, error: unknown): void | Promise<void> {
 		return this.verdant.webSocketError(ws, error);

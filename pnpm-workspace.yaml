@@ -16,13 +16,12 @@ catalog:
   '@originjs/vite-plugin-commonjs': 1.0.3
   '@react-spring/web': 10.0.3
   '@verdant-web/cli': 5.1.0
-  '@verdant-web/react': 43.0.0
+  '@verdant-web/react': 43.0.2
   '@verdant-web/react-router': 0.8.0
-  '@verdant-web/store': 5.0.2
-  '@verdant-web/server': 4.0.4
-  '@verdant-web/s3-file-storage': 1.0.43
-  '@verdant-web/tiptap': 7.0.2
-  '@verdant-web/cloudflare': 0.1.8
+  '@verdant-web/store': 5.3.0
+  '@verdant-web/server': 4.2.3
+  '@verdant-web/tiptap': 10.0.0
+  '@verdant-web/cloudflare': 0.4.4
   '@vitejs/plugin-react-swc': 4.2.2
   '@vitejs/plugin-react': 5.1.2
   gql.tada: 1.9.0
