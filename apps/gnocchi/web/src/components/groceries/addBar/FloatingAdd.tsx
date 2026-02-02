@@ -19,15 +19,6 @@ export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
 	return (
 		<AddBarComboboxRoot onOpenChange={setOpen}>
 			<QuickAction modal="trap-focus" open={open} onOpenChange={setOpen}>
-				<QuickAction.Content
-					initialFocus={false}
-					className="max-h-[calc(var(--viewport-height,40dvh)-140px)] max-w-96vw w-full flex flex-col"
-				>
-					<ScrollArea className="w-full flex-1" direction="vertical">
-						<AddBarComboboxItems />
-					</ScrollArea>
-					<AddBarComboboxInput className="rounded-md" />
-				</QuickAction.Content>
 				<QuickAction.Trigger
 					ref={particleRef}
 					emphasis="primary"
@@ -40,6 +31,15 @@ export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
 				>
 					<Icon name="plus" size={20} />
 				</QuickAction.Trigger>
+				<QuickAction.Content
+					initialFocus={false}
+					className="max-h-[calc(var(--viewport-height,40dvh)-140px)] max-w-96vw w-full flex flex-col"
+				>
+					<ScrollArea className="w-full flex-1" direction="vertical">
+						<AddBarComboboxItems />
+					</ScrollArea>
+					<AddBarComboboxInput className="rounded-md" />
+				</QuickAction.Content>
 			</QuickAction>
 		</AddBarComboboxRoot>
 	);

@@ -74,7 +74,7 @@ export function GroceriesPage() {
 					<AutoRestoreScroll />
 					<PageNowPlaying
 						keepAboveKeyboard
-						className="pointer-events-none z-nav items-center children:pointer-events-auto"
+						className="pointer-events-none z-auto items-center children:pointer-events-auto"
 					>
 						<FloatingAdd />
 					</PageNowPlaying>
