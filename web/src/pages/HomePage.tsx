@@ -20,13 +20,13 @@ export default function HomePage() {
 			className="bg-primary-wash bg-darken-2"
 		>
 			<Box
-				d="col"
+				col
 				items="center"
 				p
 				gap="xl"
 				className="w-full flex-1 rounded-lg shadow-sm bg-white"
 			>
-				<Box className="z-1 w-full" d="col" items="center">
+				<Box className="z-1 w-full" col items="center">
 					<PageFixedArea className="flex flex-col justify-stretch py-2 bg-transparent md:max-w-800px sm:flex-row sm:items-center sm:justify-between">
 						<Box gap>
 							<img
@@ -48,9 +48,9 @@ export default function HomePage() {
 						</Suspense>
 					</PageFixedArea>
 				</Box>
-				<Box d="col" className="z-1 w-full" items="center" gap="xl">
+				<Box col className="z-1 w-full" items="center" gap="xl">
 					<Box
-						d="col"
+						col
 						gap="xl"
 						items="stretch"
 						className="max-w-100vw flex-grow md:max-w-800px"
@@ -65,7 +65,7 @@ export default function HomePage() {
 							&amp; yours
 						</div>
 						<Box
-							d="col"
+							col
 							gap
 							className="[flex:1_0_0] font-semibold color-primary-dark sm:mt-5"
 						>
@@ -77,7 +77,7 @@ export default function HomePage() {
 						</Box>
 					</Box>
 					<AppGrid />
-					<Box className="max-w-100vw md:max-w-800px" d="col" gap items="start">
+					<Box className="max-w-100vw md:max-w-800px" col gap items="start">
 						<P className="font-300 leading-loose color-gray-dark">
 							No signup needed. No need to open the App Store. These are instant
 							web apps, no installation required. Just click &quot;Open
@@ -89,7 +89,7 @@ export default function HomePage() {
 						surface
 						color="accent"
 						className="theme max-w-90vw lg:max-w-800px"
-						d="col"
+						col
 						gap
 						items="start"
 						container="reset"
@@ -129,7 +129,7 @@ export default function HomePage() {
 					</Box>
 					<Box
 						className="max-w-100vw pb-xl md:max-w-800px"
-						d="col"
+						col
 						gap
 						items="start"
 					>
@@ -158,7 +158,7 @@ export default function HomePage() {
 					</Box>
 				</Box>
 			</Box>
-			<Box className="z-1 mt-xl w-full" p="sm" d="col" items="center">
+			<Box className="z-1 mt-xl w-full" p="sm" col items="center">
 				<Footer className="max-w-100vw md:max-w-800px" />
 			</Box>
 			<Suspense>

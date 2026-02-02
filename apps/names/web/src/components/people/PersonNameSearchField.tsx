@@ -142,7 +142,7 @@ function PersonItem({
 			p="sm"
 			{...props}
 			className={clsx('rounded-sm', highlighted ? 'bg-gray-light' : '')}
-			d="col"
+			col
 			gap="xs"
 		>
 			<Box>{person.get('name')}</Box>

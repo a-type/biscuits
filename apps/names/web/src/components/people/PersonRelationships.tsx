@@ -29,7 +29,7 @@ export function PersonRelationships({ person }: PersonRelationshipsProps) {
 	});
 
 	return (
-		<Box d="col" gap="lg">
+		<Box col gap="lg">
 			<H2 className="text-md">
 				<Icon name="connection" className="mr-md color-gray-dark" />{' '}
 				Relationships

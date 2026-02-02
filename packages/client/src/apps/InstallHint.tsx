@@ -28,7 +28,7 @@ export function InstallHint({
 			surface
 			color="primary"
 			p
-			d="col"
+			col
 			gap
 			items="stretch"
 			className={className}

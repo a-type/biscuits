@@ -105,7 +105,7 @@ export function ManageSubscription({
 					</form>
 					<CancelPlanButton />
 				</>
-			:	<Box d="col" gap items="start">
+			:	<Box col gap items="start">
 					Someone else manages your subscription. Reach out to them to make
 					changes.
 					<LeavePlanButton />

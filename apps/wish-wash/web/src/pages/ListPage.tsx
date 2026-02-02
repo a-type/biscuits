@@ -46,7 +46,7 @@ export function ListPage({}: ListPageProps) {
 
 function ListPageContent({ list }: { list: List }) {
 	return (
-		<Box d="col" full p gap="lg" items="center">
+		<Box col full p gap="lg" items="center">
 			<Box
 				gap
 				justify="between"
@@ -59,7 +59,7 @@ function ListPageContent({ list }: { list: List }) {
 				</Button>
 				<UserMenu />
 			</Box>
-			<Box d="col" gap className="max-w-800px w-full">
+			<Box col gap className="max-w-800px w-full">
 				<ListHero list={list} />
 				<SyncPurchases list={list} />
 				<ListActions className="sticky top-0 z-10" list={list} />

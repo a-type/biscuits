@@ -97,10 +97,10 @@ export function SubscriptionSetup({ priceKeys }: SubscriptionSetupProps) {
 		if (data?.plan?.checkoutData) {
 			// checkout in progress - show payment collection
 			return (
-				<Box d="col" gap>
+				<Box col gap>
 					<Suspense fallback={<Spinner />}>
 						{data.plan.subscriptionStatus === 'trialing' && (
-							<Box surface color="accent" p d="col">
+							<Box surface color="accent" p col>
 								<P>
 									Your trial subscription period has begun! Billing will begin
 									on {new Date(data.plan.trialEndsAt || 0).toLocaleDateString()}
@@ -128,7 +128,7 @@ export function SubscriptionSetup({ priceKeys }: SubscriptionSetupProps) {
 
 		if (data?.plan?.subscriptionStatus === 'trialing') {
 			return (
-				<Box d="col" gap>
+				<Box col gap>
 					<Box surface color="accent" p>
 						Your trial subscription period has begun! Billing will begin on{' '}
 						{new Date(data.plan.trialEndsAt || 0).toLocaleDateString()}. You can
@@ -150,7 +150,7 @@ export function SubscriptionSetup({ priceKeys }: SubscriptionSetupProps) {
 
 		if (data?.plan?.subscriptionStatus === 'canceled') {
 			return (
-				<Box d="col" gap>
+				<Box col gap>
 					<Box surface color="primary">
 						Your subscription was canceled on{' '}
 						{new Date(

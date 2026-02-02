@@ -148,7 +148,7 @@ function ItemEditor({ item }: { item: Item }) {
 	}
 
 	return (
-		<Box d="col" items="stretch" full="width" gap>
+		<Box col items="stretch" full="width" gap>
 			{content}
 		</Box>
 	);

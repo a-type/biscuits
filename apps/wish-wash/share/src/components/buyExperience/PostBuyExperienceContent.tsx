@@ -30,7 +30,7 @@ export function PostBuyExperienceContent({
 
 	if (succeeded) {
 		return (
-			<Box d="col" gap>
+			<Box col gap>
 				<Dialog.Title>Thanks for telling us!</Dialog.Title>
 				<P>
 					Sometimes people don't bother. That's how you get three waffle irons!

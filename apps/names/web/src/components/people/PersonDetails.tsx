@@ -38,7 +38,7 @@ export function PersonDetails({ person, className }: PersonDetailsProps) {
 	const { name, createdAt, createdBy } = hooks.useWatch(person);
 
 	return (
-		<Box d="col" items="stretch" gap className={clsx('w-full', className)}>
+		<Box col items="stretch" gap className={clsx('w-full', className)}>
 			<PersonPhoto person={person} />
 			<EditableText
 				value={name}
@@ -46,7 +46,7 @@ export function PersonDetails({ person, className }: PersonDetailsProps) {
 				className="mr-auto text-xl"
 			/>
 			<PersonQuickActions person={person} />
-			<Box d="col" items="stretch" gap>
+			<Box col items="stretch" gap>
 				<Box className="text-xs color-gray-dark" items="center" gap="md">
 					<Icon name="clock" /> Added {new Date(createdAt).toLocaleDateString()}{' '}
 					(
@@ -136,10 +136,10 @@ function Location({ person }: { person: Person }) {
 	if (!geolocation) return null;
 
 	return (
-		<Box d="col" gap="sm">
+		<Box col gap="sm">
 			<Box className="text-xs color-gray-dark" items="start" gap="md">
 				<Icon name="locate" />
-				<Box d="col" gap="sm" className="flex-1">
+				<Box col gap="sm" className="flex-1">
 					<LazyMapView
 						location={geolocation.getAll()}
 						className="pointer-events-none h-[200px] w-full rounded-md"

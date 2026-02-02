@@ -31,7 +31,7 @@ export function ListHero({ list, className }: ListHeroProps) {
 	const isPrivate = list.isAuthorized;
 
 	return (
-		<Box d="col" items="start" className={className}>
+		<Box col items="start" className={className}>
 			{coverImage?.url && (
 				<img
 					src={coverImage.url}
@@ -54,7 +54,7 @@ export function ListHero({ list, className }: ListHeroProps) {
 						<Dialog.Description>
 							Edit list details or change privacy settings.
 						</Dialog.Description>
-						<Box d="col" gap>
+						<Box col gap>
 							<ImageUploader
 								className="aspect-16/8 w-full"
 								value={coverImage?.url ?? null}
@@ -65,7 +65,7 @@ export function ListHero({ list, className }: ListHeroProps) {
 								value={name}
 								onChange={(v) => list.set('name', v)}
 							/>
-							<Box d="col" gap items="start">
+							<Box col gap items="start">
 								<H3>Manage</H3>
 								{isPrivate ?
 									<ConfirmedButton

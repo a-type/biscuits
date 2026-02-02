@@ -64,14 +64,14 @@ export default function LoginPage() {
 
 	return (
 		<div className="h-screen flex flex-1 flex-col items-center justify-center bg-primary-wash">
-			<Box d="col" gap grow layout="center center">
+			<Box col gap grow layout="center center">
 				<Box
 					surface="white"
 					elevated="sm"
 					p
 					gap
 					container="reset"
-					d="col"
+					col
 					items="center"
 					border
 					className="relative z-1"

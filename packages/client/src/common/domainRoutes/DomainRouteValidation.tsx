@@ -65,7 +65,7 @@ export function DomainRouteValidation({
 	}, [status, refetch]);
 
 	return (
-		<Box d="col" items="start" gap {...rest}>
+		<Box col items="start" gap {...rest}>
 			{!!error && (
 				<Box gap items="center" surface color="attention" p>
 					<Icon name="warning" />
@@ -75,7 +75,7 @@ export function DomainRouteValidation({
 				</Box>
 			)}
 			{status === 'READY' ?
-				<Box surface color="accent" p="lg" d="col" gap items="start">
+				<Box surface color="accent" p="lg" col gap items="start">
 					<Box gap items="center">
 						<Icon name="check" />
 						<strong>Success</strong>
@@ -119,7 +119,7 @@ export function DomainRouteValidation({
 						provider's dashboard:
 					</P>
 					{mainRecord && <DnsRecord {...mainRecord} />}
-					<Box d="col" gap items="start">
+					<Box col gap items="start">
 						{note && (
 							<Box surface color="primary" p>
 								{note}
@@ -162,7 +162,7 @@ function DnsRecord({
 			border
 			gap
 			p="lg"
-			d="col"
+			col
 		>
 			{verified && (
 				<Icon name="check" className="absolute right-2 top-2 color-main-dark" />
@@ -171,11 +171,11 @@ function DnsRecord({
 				<span className="font-bold">Type:</span>
 				<span>{type}</span>
 			</Box>
-			<Box d="col" gap>
+			<Box col gap>
 				<span className="font-bold">Name:</span>
 				<CopyTextbox value={name} hideShare />
 			</Box>
-			<Box d="col" gap>
+			<Box col gap>
 				<span className="font-bold">Target:</span>
 				<CopyTextbox value={value} hideShare />
 			</Box>

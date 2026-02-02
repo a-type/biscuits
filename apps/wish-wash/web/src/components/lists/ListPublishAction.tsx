@@ -175,7 +175,7 @@ function ManagePublishedList({
 	return (
 		<>
 			<Dialog.Title>Manage sharing</Dialog.Title>
-			<Box d="col" gap="sm">
+			<Box col gap="sm">
 				<P className="mb-2">
 					Your list is currently public on the internet. You can unpublish it at
 					any time.
@@ -216,7 +216,7 @@ function ManagePublishedList({
 				}
 			</Box>
 			<Divider />
-			<Box d="col" gap="sm">
+			<Box col gap="sm">
 				<H3>Custom domain</H3>
 				<P>
 					If you own a domain, you can set up a subdomain to point to your list.

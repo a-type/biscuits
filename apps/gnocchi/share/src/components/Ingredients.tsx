@@ -36,7 +36,7 @@ export function Ingredients({ data: dataMasked }: IngredientsProps) {
 	const data = readFragment(ingredientsFragment, dataMasked);
 	const embedded = data.embeddedRecipes;
 	return (
-		<Box d="col" gap>
+		<Box col gap>
 			<IngredientList>
 				{data.ingredients.map((ingredient: any) => (
 					<IngredientListItem key={ingredient.id}>
@@ -48,7 +48,7 @@ export function Ingredients({ data: dataMasked }: IngredientsProps) {
 				))}
 			</IngredientList>
 			{embedded.map((recipe) => (
-				<Box d="col" gap key={recipe.id}>
+				<Box col gap key={recipe.id}>
 					<H3>From sub-recipe: {recipe.title}</H3>
 					<Ingredients data={recipe as any} />
 				</Box>

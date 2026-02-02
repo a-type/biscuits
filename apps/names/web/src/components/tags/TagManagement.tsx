@@ -30,7 +30,7 @@ export function TagManagement({}: TagManagementProps) {
 		<Dialog open={open} onOpenChange={(v) => (state.open = v)}>
 			<Dialog.Content>
 				<Dialog.Title>Manage Tags</Dialog.Title>
-				<Box className="w-full" gap d="col">
+				<Box className="w-full" gap col>
 					{tags.map((tag) => (
 						<Suspense key={tag.uid}>
 							<TagManagementRow tag={tag} />
