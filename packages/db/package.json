@@ -4,6 +4,7 @@
 	"sideEffects": false,
 	"exports": {
 		".": {
+			"workerd": "./src/index.ts",
 			"types": "./dist/index.d.ts",
 			"import": "./dist/index.js"
 		}
