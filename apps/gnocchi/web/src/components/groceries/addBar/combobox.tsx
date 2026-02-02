@@ -36,11 +36,21 @@ const OpenContext = createContext<[boolean, (open: boolean) => void]>([
 ]);
 
 export function AddBarComboboxRoot({
+	onOpenChange,
 	...props
 }: {
 	className?: string;
 	children?: ReactNode;
+	onOpenChange?: (open: boolean) => void;
 }) {
+	const openState = useState(false);
+	const [open, setOpenInternal] = openState;
+
+	const setOpen = (isOpen: boolean) => {
+		setOpenInternal(isOpen);
+		onOpenChange?.(isOpen);
+	};
+
 	const {
 		suggestionPrompt: query,
 		setSuggestionPrompt: setQuery,
@@ -64,8 +74,6 @@ export function AddBarComboboxRoot({
 	};
 	const listId = useListId() || null;
 	const [keepOpenOnSelect] = useKeepOpenAfterSelect();
-	const openState = useState(false);
-	const [open, setOpen] = openState;
 
 	const [addingRecipe, setAddingRecipe] = useState<Recipe | null>(null);
 	const clearAddingRecipe = () => setAddingRecipe(null);

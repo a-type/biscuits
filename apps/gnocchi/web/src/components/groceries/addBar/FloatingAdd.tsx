@@ -1,9 +1,9 @@
 import { clsx, Icon, QuickAction, ScrollArea } from '@a-type/ui';
+import { useState } from 'react';
 import {
 	AddBarComboboxInput,
 	AddBarComboboxItems,
 	AddBarComboboxRoot,
-	useIsAddBarOpen,
 } from './combobox.jsx';
 import { useKeepOpenAfterSelect, useParticlesOnAdd } from './hooks.js';
 
@@ -14,10 +14,10 @@ export interface FloatingAddProps {
 export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
 	const [keepOpenOnSelect] = useKeepOpenAfterSelect();
 	const particleRef = useParticlesOnAdd(!keepOpenOnSelect);
-	const [open, setOpen] = useIsAddBarOpen();
+	const [open, setOpen] = useState(false);
 
 	return (
-		<AddBarComboboxRoot>
+		<AddBarComboboxRoot onOpenChange={setOpen}>
 			<QuickAction modal="trap-focus" open={open} onOpenChange={setOpen}>
 				<QuickAction.Content
 					initialFocus={false}
