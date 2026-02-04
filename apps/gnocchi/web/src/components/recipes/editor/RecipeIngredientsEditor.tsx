@@ -4,9 +4,6 @@ import {
 	Box,
 	Button,
 	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
 	DropdownMenu,
 	FormikForm,
 	Icon,
@@ -184,13 +181,13 @@ function IngredientMenu({
 						Section header
 					</DropdownMenu.CheckboxItem>
 					<DropdownMenu.Item
-						onSelect={() => {
+						onClick={() => {
 							setDetailsOpen(true);
 						}}
 					>
 						Edit details
 					</DropdownMenu.Item>
-					<DropdownMenu.Item color="attention" onSelect={onDelete}>
+					<DropdownMenu.Item color="attention" onClick={onDelete}>
 						<span>Delete</span>
 						<DropdownMenu.ItemRightSlot>
 							<Icon name="trash" />
@@ -218,7 +215,8 @@ function IngredientDetailsDialog({
 	const { isSectionHeader } = hooks.useWatch(ingredient);
 	return (
 		<Dialog {...rest}>
-			<DialogContent>
+			<Dialog.Content>
+				<Dialog.Title>Ingredient Details</Dialog.Title>
 				<FormikForm
 					initialValues={{
 						text: ingredient.get('text'),
@@ -247,12 +245,12 @@ function IngredientDetailsDialog({
 						<TextField name="quantity" label="Quantity" type="number" />
 					)}
 					{!isSectionHeader && <TextField name="unit" label="Unit" />}
-					<DialogActions>
-						<DialogClose>Cancel</DialogClose>
+					<Dialog.Actions>
+						<Dialog.Close>Cancel</Dialog.Close>
 						<SubmitButton emphasis="primary">Save</SubmitButton>
-					</DialogActions>
+					</Dialog.Actions>
 				</FormikForm>
-			</DialogContent>
+			</Dialog.Content>
 		</Dialog>
 	);
 }

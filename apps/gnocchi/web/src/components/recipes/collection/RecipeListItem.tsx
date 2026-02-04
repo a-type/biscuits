@@ -166,7 +166,7 @@ export function RecipeListItemMenu({
 				</DropdownMenu.Item>
 				{isPinned && (
 					<DropdownMenu.Item
-						onSelect={() => {
+						onClick={() => {
 							recipe.set('pinnedAt', null);
 							setMenuOpen(false);
 						}}
@@ -177,7 +177,7 @@ export function RecipeListItemMenu({
 						</DropdownMenuItemRightSlot>
 					</DropdownMenu.Item>
 				)}
-				<DropdownMenu.Item onSelect={copyRecipe}>
+				<DropdownMenu.Item onClick={copyRecipe}>
 					<span>Make a copy</span>
 					<DropdownMenuItemRightSlot>
 						<Icon name="copy" />
@@ -185,7 +185,7 @@ export function RecipeListItemMenu({
 				</DropdownMenu.Item>
 				<DropdownMenu.Item
 					color="attention"
-					onSelect={() => {
+					onClick={() => {
 						deleteRecipe(recipe.get('id'));
 						setMenuOpen(false);
 					}}

@@ -51,7 +51,6 @@ export function PersonNameSearchField({
 		items,
 		onInputValueChange: ({ inputValue }) => setInputValue(inputValue),
 		async onSelectedItemChange({ selectedItem }) {
-			console.log('here', inputValue, selectedItem);
 			if (selectedItem) {
 				if (isAddToken(selectedItem)) {
 					if (!inputValue) return;

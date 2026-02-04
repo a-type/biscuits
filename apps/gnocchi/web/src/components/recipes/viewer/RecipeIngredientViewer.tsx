@@ -124,7 +124,7 @@ export function RecipeIngredientViewer({
 									{convertOptions.map((opt) => (
 										<DropdownMenuItem
 											key={opt}
-											onSelect={() => setConversion(opt)}
+											onClick={() => setConversion(opt)}
 										>
 											{friendlyUnit(opt)}
 										</DropdownMenuItem>

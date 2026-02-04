@@ -24,7 +24,7 @@ export function RecipeCollectionMenu({ className }: RecipeCollectionMenuProps) {
 			<DropdownMenu.Content align="end">
 				<Suspense>
 					<DropdownMenu.Item
-						onSelect={(ev) => {
+						onClick={(ev) => {
 							ev.preventDefault();
 						}}
 						render={<PaprikaImporter onClose={onSubmenuClose} />}
@@ -34,7 +34,7 @@ export function RecipeCollectionMenu({ className }: RecipeCollectionMenuProps) {
 				</Suspense>
 				<Suspense>
 					<TagManager onClose={onSubmenuClose}>
-						<DropdownMenu.Item onSelect={(ev) => ev.preventDefault()}>
+						<DropdownMenu.Item onClick={(ev) => ev.preventDefault()}>
 							Edit Tags
 						</DropdownMenu.Item>
 					</TagManager>
