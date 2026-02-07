@@ -17,7 +17,7 @@ export function NoteEditor({
 	onBlur,
 }: NoteEditorProps) {
 	const handleChange = (v: string) => {
-		onChange(v.trim());
+		onChange(v);
 	};
 	return (
 		<Note className={classNames('focus-within:shadow-focus', className)}>
