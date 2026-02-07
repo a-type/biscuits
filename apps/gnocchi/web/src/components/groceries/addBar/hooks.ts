@@ -233,12 +233,11 @@ export function useAddBarSuggestions({
 		);
 	}, [searchFoods, mapFoodsToSuggestions, foodMatchPrompt]);
 
-	const [favoriteFoods] = hooks.useAllFoodsPaginated({
+	const favoriteFoods = hooks.useAllFoods({
 		index: {
 			where: 'purchaseCount',
 			order: 'desc',
 		},
-		pageSize: 20,
 		key: 'addBar_favoriteFoods',
 		skip: !!foodSearchPrompt,
 	});
