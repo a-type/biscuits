@@ -59,6 +59,7 @@ export function AddBarComboboxRoot({
 	} = useAddBarSuggestions();
 	const addItems = useAddItems();
 	const onAdd = async (itemText: string) => {
+		setQuery('');
 		await addItems(
 			itemText
 				.split(/\n/)
@@ -98,7 +99,7 @@ export function AddBarComboboxRoot({
 						if (ev.reason === 'item-press') return;
 						setQuery(v);
 					}}
-					items={groupedSuggestions}
+					filteredItems={groupedSuggestions}
 					itemToStringValue={suggestionToString}
 					itemToStringLabel={suggestionToDisplayString}
 					value={null}
