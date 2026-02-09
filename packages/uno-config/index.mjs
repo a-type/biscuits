@@ -14,6 +14,7 @@ export function withOptions(options) {
 			atype({
 				...options,
 				disableZIndexes: true,
+				focusColor: 'primary',
 			}),
 		],
 		transformers: [variantGroup()],

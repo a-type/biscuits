@@ -130,6 +130,7 @@ export default defineConfig(({ mode }) => ({
 	},
 	server: {
 		port: 6220,
+		strictPort: true,
 	},
 	build: {
 		sourcemap: true,
