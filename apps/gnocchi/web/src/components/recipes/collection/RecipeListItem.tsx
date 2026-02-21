@@ -1,5 +1,9 @@
 import { Link } from '@/components/nav/Link.jsx';
-import { RecipeEditTags } from '@/components/recipes/editor/RecipeAddTag.jsx';
+import {
+	RecipeEditTagsContent,
+	RecipeEditTagsRoot,
+	RecipeEditTagsTrigger,
+} from '@/components/recipes/editor/RecipeAddTag.jsx';
 import { makeRecipeLink } from '@/components/recipes/makeRecipeLink.js';
 import { AddToListButton } from '@/components/recipes/viewer/AddToListButton.jsx';
 import { hooks } from '@/stores/groceries/index.js';
@@ -60,13 +64,13 @@ export const RecipeListItem = memo(function RecipeListItem({
 				</CardTitle>
 				<div
 					className={clsx(
-						'm-2 flex flex-row flex-wrap gap-sm',
+						'm-2 flex flex-row flex-wrap items-center gap-sm',
 						gridStyle === 'card-small' ? 'text-xxs' : 'text-xs',
 					)}
 				>
 					{!!totalTimeMinutes && (
 						<Chip className="bg-wash">
-							<Icon name="clock" />
+							<Icon name="clock" size={12} />
 							{formatMinutes(totalTimeMinutes)}
 						</Chip>
 					)}
@@ -132,70 +136,71 @@ export function RecipeListItemMenu({
 	const [menuOpen, setMenuOpen] = useState(false);
 
 	return (
-		<DropdownMenu
-			open={menuOpen}
-			onOpenChange={(open, ev) => {
-				if (open) setMenuOpen(true);
-				if (!open && ev.reason === 'outside-press') {
-					setMenuOpen(false);
-				}
-			}}
-			modal={false}
-		>
-			<DropdownMenu.Trigger
-				render={<Button size="small" emphasis="ghost" {...rest} />}
+		<RecipeEditTagsRoot>
+			<DropdownMenu
+				open={menuOpen}
+				onOpenChange={(open, ev) => {
+					if (open) setMenuOpen(true);
+					if (!open && ev.reason === 'outside-press') {
+						setMenuOpen(false);
+					}
+				}}
+				modal={false}
 			>
-				<Icon name="dots" className="h-20px w-20px" />
-			</DropdownMenu.Trigger>
-			<DropdownMenu.Content>
-				<RecipeEditTags recipe={recipe} onClose={() => setMenuOpen(false)}>
-					<DropdownMenu.Item>
+				<DropdownMenu.Trigger
+					render={<Button size="small" emphasis="ghost" {...rest} />}
+				>
+					<Icon name="dots" className="h-20px w-20px" />
+				</DropdownMenu.Trigger>
+				<DropdownMenu.Content>
+					<RecipeEditTagsTrigger render={<DropdownMenu.Item />}>
 						<span>Tags</span>
 						<DropdownMenuItemRightSlot>
 							<Icon name="tag" />
 						</DropdownMenuItemRightSlot>
-					</DropdownMenu.Item>
-				</RecipeEditTags>
-				<DropdownMenu.Item
-					render={<Link to={makeRecipeLink(recipe, '/edit')} preserveQuery />}
-				>
-					<span>Edit</span>
-					<DropdownMenuItemRightSlot>
-						<Icon name="pencil" />
-					</DropdownMenuItemRightSlot>
-				</DropdownMenu.Item>
-				{isPinned && (
+					</RecipeEditTagsTrigger>
 					<DropdownMenu.Item
+						render={<Link to={makeRecipeLink(recipe, '/edit')} preserveQuery />}
+					>
+						<span>Edit</span>
+						<DropdownMenuItemRightSlot>
+							<Icon name="pencil" />
+						</DropdownMenuItemRightSlot>
+					</DropdownMenu.Item>
+					{isPinned && (
+						<DropdownMenu.Item
+							onClick={() => {
+								recipe.set('pinnedAt', null);
+								setMenuOpen(false);
+							}}
+						>
+							<span>Remove pin</span>
+							<DropdownMenuItemRightSlot>
+								<Icon name="pinFilled" />
+							</DropdownMenuItemRightSlot>
+						</DropdownMenu.Item>
+					)}
+					<DropdownMenu.Item onClick={copyRecipe}>
+						<span>Make a copy</span>
+						<DropdownMenuItemRightSlot>
+							<Icon name="copy" />
+						</DropdownMenuItemRightSlot>
+					</DropdownMenu.Item>
+					<DropdownMenu.Item
+						color="attention"
 						onClick={() => {
-							recipe.set('pinnedAt', null);
+							deleteRecipe(recipe.get('id'));
 							setMenuOpen(false);
 						}}
 					>
-						<span>Remove pin</span>
+						<span>Delete</span>
 						<DropdownMenuItemRightSlot>
-							<Icon name="pinFilled" />
+							<Icon name="trash" />
 						</DropdownMenuItemRightSlot>
 					</DropdownMenu.Item>
-				)}
-				<DropdownMenu.Item onClick={copyRecipe}>
-					<span>Make a copy</span>
-					<DropdownMenuItemRightSlot>
-						<Icon name="copy" />
-					</DropdownMenuItemRightSlot>
-				</DropdownMenu.Item>
-				<DropdownMenu.Item
-					color="attention"
-					onClick={() => {
-						deleteRecipe(recipe.get('id'));
-						setMenuOpen(false);
-					}}
-				>
-					<span>Delete</span>
-					<DropdownMenuItemRightSlot>
-						<Icon name="trash" />
-					</DropdownMenuItemRightSlot>
-				</DropdownMenu.Item>
-			</DropdownMenu.Content>
-		</DropdownMenu>
+				</DropdownMenu.Content>
+			</DropdownMenu>
+			<RecipeEditTagsContent recipe={recipe} />
+		</RecipeEditTagsRoot>
 	);
 }

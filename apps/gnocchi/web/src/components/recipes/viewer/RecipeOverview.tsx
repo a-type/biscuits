@@ -94,7 +94,7 @@ export function RecipeOverview({ recipe }: RecipeOverviewProps) {
 							</div>
 
 							<div className="w-full flex flex-col items-start justify-between gap-3">
-								<div className="palette-gray flex flex-row flex-wrap gap-1">
+								<div className="palette-gray flex flex-row flex-wrap items-center gap-1">
 									<Chip
 										className="cursor-pointer"
 										onClick={() => {
@@ -223,7 +223,7 @@ function PreludeSection({ recipe }: { recipe: Recipe }) {
 function OverviewNowPlaying({ recipe }: { recipe: Recipe }) {
 	const { showCookTools } = useSnapshot(viewerState);
 	return (
-		<PageNowPlaying unstyled>
+		<PageNowPlaying>
 			<div className="w-full flex flex-row items-center justify-end gap-2">
 				{showCookTools && (
 					<CookingToolbar

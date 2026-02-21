@@ -5,55 +5,40 @@ import {
 	Dialog,
 	DialogActions,
 	DialogClose,
-	DialogContent,
 	DialogTitle,
 	Icon,
 } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import classNames from 'classnames';
-import { ReactElement, Suspense, forwardRef, useState } from 'react';
+import { ComponentPropsWithRef, ReactNode, Suspense, forwardRef } from 'react';
 import { RecipeTagsFullEditor } from './RecipeTagsFullEditor.jsx';
 
-export function RecipeEditTags({
-	recipe,
-	children,
-	className,
-	onClose,
-}: {
-	recipe: Recipe;
-	children?: ReactElement;
-	className?: string;
-	onClose?: () => void;
-}) {
-	const [open, setOpen] = useState(false);
+export function RecipeEditTagsRoot(props: { children: ReactNode }) {
+	return <Dialog {...props} />;
+}
+
+export function RecipeEditTagsTrigger(
+	props: ComponentPropsWithRef<typeof Dialog.Trigger>,
+) {
+	return <Dialog.Trigger render={<DefaultTrigger />} {...props} />;
+}
+
+export function RecipeEditTagsContent({ recipe }: { recipe: Recipe }) {
 	const { tags, title } = hooks.useWatch(recipe);
 	hooks.useWatch(tags);
 
 	return (
-		<Dialog
-			open={open}
-			onOpenChange={(o) => {
-				setOpen(o);
-				if (!o && onClose) onClose();
-			}}
-		>
-			{children ? (
-				<Dialog.Trigger render={children} />
-			) : (
-				<Dialog.Trigger render={<DefaultTrigger />} className={className} />
-			)}
-			<DialogContent>
-				<Box col gap full="width">
-					<DialogTitle>Tags for {title}</DialogTitle>
-					<Suspense>
-						<RecipeTagsFullEditor recipe={recipe} />
-					</Suspense>
-				</Box>
-				<DialogActions>
-					<DialogClose>Done</DialogClose>
-				</DialogActions>
-			</DialogContent>
-		</Dialog>
+		<Dialog.Content>
+			<Box col gap full="width">
+				<DialogTitle>Tags for {title}</DialogTitle>
+				<Suspense>
+					<RecipeTagsFullEditor recipe={recipe} />
+				</Suspense>
+			</Box>
+			<DialogActions>
+				<DialogClose>Done</DialogClose>
+			</DialogActions>
+		</Dialog.Content>
 	);
 }
 

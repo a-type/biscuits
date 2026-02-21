@@ -1,6 +1,7 @@
 import { hooks } from '@/stores/groceries/index.js';
 import { Combobox, Icon, IconName, PaletteName, clsx } from '@a-type/ui';
 import { Recipe, RecipeTagMetadata } from '@gnocchi.biscuits/verdant';
+import { useState } from 'react';
 
 export interface RecipeTagsFullEditorProps {
 	recipe: Recipe;
@@ -28,10 +29,16 @@ export function RecipeTagsFullEditor({
 		)
 		.filter((t) => !!t);
 
+	const [inputValue, setInputValue] = useState('');
+
 	return (
 		<TagCombobox.Multi
+			inputValue={inputValue}
+			onInputValueChange={setInputValue}
 			items={allTags}
 			value={mappedValues}
+			itemToStringValue={(tag) => tag?.get('name') || ''}
+			itemToStringLabel={(tag) => tag?.get('name') || ''}
 			onValueChange={(value) => {
 				const currentTags = new Set(tags.getAll());
 				const newTags = new Set(value.map((t) => t.get('name') as string));
@@ -93,7 +100,7 @@ export function RecipeTagsFullEditor({
 					)}
 				</TagCombobox.List>
 				<TagCombobox.Empty className="flex flex-row items-center justify-end gap-sm">
-					<Icon name="enterKey" /> Press enter to create new tag
+					<Icon name="enterKey" /> Press enter to create new tag "{inputValue}"
 				</TagCombobox.Empty>
 			</TagCombobox.Content>
 		</TagCombobox.Multi>
