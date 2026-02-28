@@ -63,7 +63,11 @@ builder.objectType('PlanLibraryInfo', {
 			},
 			resolve: (library, args) => {
 				if (args.includeTruant) {
-					return library.replicas;
+					return library.replicas.sort((a, b) => {
+						if (a.truant === b.truant) return 0;
+						if (a.truant) return 1;
+						return -1;
+					});
 				} else {
 					return library.replicas.filter((replica) => !replica.truant);
 				}

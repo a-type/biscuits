@@ -72,6 +72,31 @@ builder.queryFields((t) => ({
 			};
 		},
 	}),
+	adminPlan: t.field({
+		type: Plan,
+		authScopes: {
+			productAdmin: true,
+		},
+		args: {
+			id: t.arg.globalID({
+				required: true,
+			}),
+		},
+		resolve: async (_, { id: encodedId }, ctx) => {
+			const id = encodedId.id;
+			const plan = await ctx.db
+				.selectFrom('Plan')
+				.selectAll()
+				.where('id', '=', `${id}`)
+				.executeTakeFirst();
+
+			if (!plan) {
+				throw new BiscuitsError(BiscuitsError.Code.NotFound);
+			}
+
+			return assignTypeName('Plan')(plan);
+		},
+	}),
 }));
 
 builder.mutationFields((t) => ({

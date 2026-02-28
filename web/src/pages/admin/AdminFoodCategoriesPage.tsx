@@ -74,7 +74,7 @@ const adminDeleteFoodCategoryMutation = graphql(
 const AdminFoodCategoriesPage = () => {
 	const { data } = useSuspenseQuery(adminFoodCategoriesQuery, {});
 	const categories = data.foodCategories.toSorted((a, b) =>
-		a.sortKey.localeCompare(b.sortKey),
+		a.sortKey > b.sortKey ? 1 : -1,
 	);
 	return (
 		<Box col gap>

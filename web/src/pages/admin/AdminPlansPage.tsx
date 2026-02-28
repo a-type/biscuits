@@ -1,10 +1,13 @@
+import { AdminPlanLibraryInfo } from '@/components/admin/AdminPlanLibraryInfo.jsx';
 import {
+	Box,
 	Button,
 	Checkbox,
 	Dialog,
 	DialogContent,
 	DialogTitle,
 } from '@a-type/ui';
+import { apps } from '@biscuits/apps';
 import { featureFlags } from '@biscuits/client';
 import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
 import { useSearchParams } from '@verdant-web/react-router';
@@ -109,8 +112,10 @@ export function AdminPlansPage({}: AdminPlansPageProps) {
 						});
 				}}
 			>
-				<DialogContent>
-					<DialogTitle>{selected?.id}</DialogTitle>
+				<DialogContent width="lg">
+					<DialogTitle className="min-w-0 text-ellipsis">
+						{selected?.id}
+					</DialogTitle>
 					<ul>
 						{selected?.members.map((member) => (
 							<li key={member.id}>
@@ -118,6 +123,17 @@ export function AdminPlansPage({}: AdminPlansPageProps) {
 							</li>
 						))}
 					</ul>
+					{!!selected && (
+						<Box p gap full="width" wrap>
+							{apps.map((app) => (
+								<AdminPlanLibraryInfo
+									key={app.id}
+									appId={app.id}
+									planId={selected.id}
+								/>
+							))}
+						</Box>
+					)}
 					<h3>Feature Flags</h3>
 					<ul>
 						{Object.keys(featureFlags).map((flag) => (

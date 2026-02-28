@@ -420,6 +420,7 @@ input PurchasePublicItemInput {
 }
 
 type Query {
+  adminPlan(id: ID!): Plan!
   changelog(
     """The ID of the app to fetch the changelog for"""
     appId: String!
