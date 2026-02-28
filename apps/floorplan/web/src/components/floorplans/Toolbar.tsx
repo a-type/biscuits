@@ -45,6 +45,9 @@ export function Toolbar(props: ToolbarProps) {
 				<ToggleGroup.Item value="shape">
 					<Icon name="fridge" size={25} />
 				</ToggleGroup.Item>
+				<ToggleGroup.Item value="label">
+					<Icon name="capitalization" size={25} />
+				</ToggleGroup.Item>
 			</ToggleGroup>
 		</Box>
 	);

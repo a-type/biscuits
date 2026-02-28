@@ -5,6 +5,7 @@ import { FloorLinesValueStart as SnapPoint } from '@floorplan.biscuits/verdant';
 import { useDrag } from '@use-gesture/react';
 import { motion } from 'motion/react';
 import { useSyncExternalStore } from 'react';
+import { gestureClaim } from './editorState.js';
 import { useFloor } from './FloorProvider.jsx';
 import {
 	applyPointSnap,
@@ -37,6 +38,9 @@ export function LinePointHandle({
 	);
 
 	const bind = useDrag((state) => {
+		gestureClaim(state);
+
+		console.log('dragging line point', { point, snapChain });
 		const result = computeConstrainedInput({
 			input: viewport.viewportToWorld({
 				x: state.xy[0],

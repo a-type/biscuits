@@ -21,10 +21,20 @@ export function useEditorGlobalKeys(floor: Floor | null) {
 
 		client.batch().run(() => {
 			const lines = floor.get('lines');
+			const shapes = floor.get('shapes');
+			const labels = floor.get('labels');
 			selections.forEach((id) => {
 				const line = lines.get(id);
 				if (line) {
 					lines.delete(id);
+				}
+				const shape = shapes.get(id);
+				if (shape) {
+					shapes.delete(id);
+				}
+				const label = labels.get(id);
+				if (label) {
+					labels.delete(id);
 				}
 			});
 		});
@@ -36,7 +46,12 @@ export function useEditorGlobalKeys(floor: Floor | null) {
 			return;
 		}
 		const lines = floor.get('lines');
-		editorState.selections = lines.keys();
-		console.log('selecting all', editorState.selections);
+		const shapes = floor.get('shapes');
+		const labels = floor.get('labels');
+		editorState.selections = [
+			...lines.keys(),
+			...shapes.keys(),
+			...labels.keys(),
+		];
 	});
 }

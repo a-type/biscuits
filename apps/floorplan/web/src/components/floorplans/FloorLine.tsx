@@ -9,7 +9,7 @@ import { useDrag } from '@use-gesture/react';
 import { motion, useTransform } from 'motion/react';
 import { useRef, useSyncExternalStore } from 'react';
 import { useSnapshot } from 'valtio';
-import { editorState, toggleSelection } from './editorState.js';
+import { editorState, gestureClaim, toggleSelection } from './editorState.js';
 import { LinePointHandle } from './LinePointHandle.jsx';
 import { LineRenderer } from './LineRenderer.jsx';
 
@@ -29,6 +29,7 @@ export function FloorLine({ line }: FloorLineProps) {
 
 	useDrag(
 		(state) => {
+			gestureClaim(state);
 			if (state.last) {
 				if (state.tap) {
 					if (editorState.tool === 'select' || editorState.tool === 'line') {
@@ -52,23 +53,24 @@ export function FloorLine({ line }: FloorLineProps) {
 				selected ? 'z-100 stroke-primary' : 'stroke-black',
 			)}
 			data-line-id={id}
-			ref={ref}
 		>
-			{/* hittest */}
-			<motion.line
-				x1={startX}
-				y1={startY}
-				x2={endX}
-				y2={endY}
-				className="cursor-pointer touch-none stroke-width-[calc(10/var(--zoom-settled))] stroke-transparent"
-			/>
-			<LineRenderer
-				startX={startX}
-				startY={startY}
-				endX={endX}
-				endY={endY}
-				ref={ref}
-			/>
+			<g ref={ref} data-role="line-hitbox">
+				{/* hittest */}
+				<motion.line
+					x1={startX}
+					y1={startY}
+					x2={endX}
+					y2={endY}
+					className="cursor-pointer touch-none stroke-width-[calc(10/var(--zoom-settled))] stroke-transparent"
+				/>
+				<LineRenderer
+					startX={startX}
+					startY={startY}
+					endX={endX}
+					endY={endY}
+					ref={ref}
+				/>
+			</g>
 			{selected && (
 				<>
 					<LinePointHandle point={start} oppositePoint={end} />

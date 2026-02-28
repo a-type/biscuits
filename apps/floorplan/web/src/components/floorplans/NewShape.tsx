@@ -37,6 +37,10 @@ export function NewShape({ floor }: NewShapeProps) {
 
 	useDrag(
 		(state) => {
+			if (editorState.gestureClaimedByManipulation) {
+				return;
+			}
+
 			const result = computeConstrainedInput({
 				input: viewport.viewportToWorld({
 					x: state.xy[0],
@@ -72,8 +76,8 @@ export function NewShape({ floor }: NewShapeProps) {
 								x: initial.x,
 								y: initial.y,
 							},
-							width: Math.abs(result.x - initial.x),
-							height: Math.abs(result.y - initial.y),
+							width: Math.max(1, Math.abs(result.x - initial.x)),
+							height: Math.max(1, Math.abs(result.y - initial.y)),
 							type: stateSnap.shapeType,
 						});
 						const shape = floor.get('shapes').get(shapeId);

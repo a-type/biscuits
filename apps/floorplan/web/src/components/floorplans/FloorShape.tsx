@@ -6,7 +6,7 @@ import { useDrag } from '@use-gesture/react';
 import { motion, useMotionTemplate, useTransform } from 'motion/react';
 import { useRef } from 'react';
 import { useSnapshot } from 'valtio';
-import { editorState, toggleSelection } from './editorState.js';
+import { editorState, gestureClaim, toggleSelection } from './editorState.js';
 import { useFloor } from './FloorProvider.jsx';
 import { applyPointSnap } from './pointLogic.js';
 import { computeConstrainedInput } from './positioning.js';
@@ -32,6 +32,8 @@ export function FloorShape({ shape }: FloorShapeProps) {
 
 	useDrag(
 		(state) => {
+			gestureClaim(state);
+
 			if (state.last && state.tap && editorState.tool === 'select') {
 				toggleSelection(id, state.ctrlKey || state.metaKey || state.shiftKey);
 			}
@@ -106,6 +108,8 @@ function FloorShapeResizeHandle({
 
 	useDrag(
 		(state) => {
+			gestureClaim(state);
+
 			const x = state.xy[0];
 			const y = state.xy[1];
 			const result = viewport.viewportToWorld({ x, y });

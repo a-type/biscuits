@@ -1,8 +1,9 @@
 import { FloorShapesValueType } from '@floorplan.biscuits/verdant';
+import { CommonGestureState } from '@use-gesture/react';
 import { proxy } from 'valtio';
 
 export const editorState = proxy({
-	tool: 'select' as 'select' | 'line' | 'pan' | 'shape',
+	tool: 'select' as 'select' | 'line' | 'pan' | 'shape' | 'label',
 	selections: [] as string[],
 	editingLength: false,
 	constraints: {
@@ -10,6 +11,7 @@ export const editorState = proxy({
 		angles: true,
 	},
 	shapeType: 'rectangle' as FloorShapesValueType,
+	gestureClaimedByManipulation: false,
 });
 
 export function toggleSelection(id: string, multi = false) {
@@ -27,3 +29,9 @@ export function toggleSelection(id: string, multi = false) {
 (window as any).debugEditorState = () => {
 	console.log('editorState', JSON.stringify(editorState));
 };
+
+export function gestureClaim(state: CommonGestureState) {
+	editorState.gestureClaimedByManipulation = !state.last;
+	state.event.stopImmediatePropagation?.();
+	state.event.stopPropagation?.();
+}

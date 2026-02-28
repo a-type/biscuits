@@ -32,6 +32,10 @@ export function NewLine({ floor }: NewLineProps) {
 
 	useDrag(
 		(state) => {
+			if (editorState.gestureClaimedByManipulation) {
+				return;
+			}
+
 			const result = computeConstrainedInput({
 				input: viewport.viewportToWorld({
 					x: state.xy[0],
