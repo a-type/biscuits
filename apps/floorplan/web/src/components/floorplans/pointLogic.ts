@@ -1,20 +1,21 @@
 import {
 	Floor,
-	FloorLinesItemStart,
-	FloorLinesItemStartSnap,
+	FloorLinesValue,
+	FloorLinesValueStart as SnapPoint,
+	FloorLinesValueStartSnap as SnapPointSnap,
 } from '@floorplan.biscuits/verdant';
 import { PointPositionResult } from './positioning.js';
 
 export function getPointValue(
 	floor: Floor,
-	point: FloorLinesItemStart,
+	point: SnapPoint,
 	val: 'x' | 'y',
 ): number {
 	const primary = getPrimarySnapPoint(floor, point);
 	return primary.get(val);
 }
 
-export function getPoint(floor: Floor, point: FloorLinesItemStart) {
+export function getPoint(floor: Floor, point: SnapPoint) {
 	const primary = getPrimarySnapPoint(floor, point);
 	return {
 		x: primary.get('x'),
@@ -22,14 +23,14 @@ export function getPoint(floor: Floor, point: FloorLinesItemStart) {
 	};
 }
 
-export function getPrimarySnapPoint(floor: Floor, point: FloorLinesItemStart) {
+export function getPrimarySnapPoint(floor: Floor, point: SnapPoint) {
 	const snap = point.get('snap');
 	if (!snap) {
 		return point;
 	}
 	const line = floor
 		.get('lines')
-		.find((l) => l.get('id') === snap.get('lineId'));
+		.get(snap.get('lineId'));
 	if (!line) {
 		return point;
 	}
@@ -49,22 +50,22 @@ class SnapChain {
 		return this.#set.has(`${lineId}|${side}`);
 	}
 }
-export function getSnapChain(floor: Floor, point: FloorLinesItemStart) {
+export function getSnapChain(floor: Floor, point: SnapPoint) {
 	const chain = new SnapChain();
-	let currentPoint: FloorLinesItemStart | null = point;
+	let currentPoint: SnapPoint | null = point;
 	while (true) {
-		const snap: FloorLinesItemStartSnap | null = currentPoint.get('snap');
+		const snap: SnapPointSnap | null = currentPoint?.get('snap') ?? null;
 		if (!snap) {
 			break;
 		}
-		const lineId = snap.get('lineId');
+		const lineId: string = snap.get('lineId');
 		const side: 'start' | 'end' = snap.get('side');
 		if (chain.has(lineId, side)) {
 			// already seen this snap, break to avoid infinite loop
 			break;
 		}
 		chain.add(lineId, side);
-		const line = floor.get('lines').find((l) => l.get('id') === lineId);
+		const line: FloorLinesValue | null = floor.get('lines').get(lineId) ?? null;
 		if (!line) {
 			break;
 		}
@@ -75,7 +76,7 @@ export function getSnapChain(floor: Floor, point: FloorLinesItemStart) {
 
 export function applyPointSnap(
 	floor: Floor,
-	point: FloorLinesItemStart,
+	point: SnapPoint,
 	result: PointPositionResult,
 ) {
 	const pointPrimary = getPrimarySnapPoint(floor, point);
@@ -105,7 +106,7 @@ export function applyPointSnap(
 
 export function updatePointOrSnap(
 	floor: Floor,
-	point: FloorLinesItemStart,
+	point: SnapPoint,
 	position: { x: number; y: number },
 ) {
 	const primary = getPrimarySnapPoint(floor, point);

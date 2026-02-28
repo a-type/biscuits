@@ -126,229 +126,191 @@ export type Floor = ObjectEntity<FloorInit, FloorDestructured, FloorSnapshot>;
 export type FloorId = string;
 export type FloorCreatedAt = number;
 export type FloorName = string;
-export type FloorLines = ListEntity<
+/** Lines represent walls. Their start and end points can snap to one another. */
+export type FloorLines = ObjectEntity<
   FloorLinesInit,
   FloorLinesDestructured,
   FloorLinesSnapshot
 >;
-export type FloorLinesItem = ObjectEntity<
-  FloorLinesItemInit,
-  FloorLinesItemDestructured,
-  FloorLinesItemSnapshot
+export type FloorLinesValue = ObjectEntity<
+  FloorLinesValueInit,
+  FloorLinesValueDestructured,
+  FloorLinesValueSnapshot
 >;
-export type FloorLinesItemId = string;
-/** The start point of the line. Either point or snapKey must be provided. */
-export type FloorLinesItemStart = ObjectEntity<
-  FloorLinesItemStartInit,
-  FloorLinesItemStartDestructured,
-  FloorLinesItemStartSnapshot
+export type FloorLinesValueId = string;
+/** Point is required, snap will override it. */
+export type FloorLinesValueStart = ObjectEntity<
+  FloorLinesValueStartInit,
+  FloorLinesValueStartDestructured,
+  FloorLinesValueStartSnapshot
 >;
-export type FloorLinesItemStartX = number;
-export type FloorLinesItemStartY = number;
-export type FloorLinesItemStartSnap = ObjectEntity<
-  FloorLinesItemStartSnapInit,
-  FloorLinesItemStartSnapDestructured,
-  FloorLinesItemStartSnapSnapshot
+export type FloorLinesValueStartX = number;
+export type FloorLinesValueStartY = number;
+export type FloorLinesValueStartSnap = ObjectEntity<
+  FloorLinesValueStartSnapInit,
+  FloorLinesValueStartSnapDestructured,
+  FloorLinesValueStartSnapSnapshot
 >;
-export type FloorLinesItemStartSnapLineId = string;
-export type FloorLinesItemStartSnapSide = "start" | "end";
-/** The end point of the line. Either point or snapKey must be provided. */
-export type FloorLinesItemEnd = ObjectEntity<
-  FloorLinesItemEndInit,
-  FloorLinesItemEndDestructured,
-  FloorLinesItemEndSnapshot
+export type FloorLinesValueStartSnapLineId = string;
+export type FloorLinesValueStartSnapSide = "start" | "end";
+export type FloorLinesValueStartSnapOffset = number;
+/** Shapes represent doors, walls, and furniture. They can be attached to lines or free-floating. */
+export type FloorShapes = ObjectEntity<
+  FloorShapesInit,
+  FloorShapesDestructured,
+  FloorShapesSnapshot
 >;
-export type FloorLinesItemEndX = number;
-export type FloorLinesItemEndY = number;
-export type FloorLinesItemEndSnap = ObjectEntity<
-  FloorLinesItemEndSnapInit,
-  FloorLinesItemEndSnapDestructured,
-  FloorLinesItemEndSnapSnapshot
+export type FloorShapesValue = ObjectEntity<
+  FloorShapesValueInit,
+  FloorShapesValueDestructured,
+  FloorShapesValueSnapshot
 >;
-export type FloorLinesItemEndSnapLineId = string;
-export type FloorLinesItemEndSnapSide = "start" | "end";
-/** Objects attached along this wall, like doors or windows. */
-export type FloorLinesItemAttachments = ListEntity<
-  FloorLinesItemAttachmentsInit,
-  FloorLinesItemAttachmentsDestructured,
-  FloorLinesItemAttachmentsSnapshot
->;
-export type FloorLinesItemAttachmentsItem = ObjectEntity<
-  FloorLinesItemAttachmentsItemInit,
-  FloorLinesItemAttachmentsItemDestructured,
-  FloorLinesItemAttachmentsItemSnapshot
->;
-export type FloorLinesItemAttachmentsItemId = string;
-export type FloorLinesItemAttachmentsItemStart = number;
-export type FloorLinesItemAttachmentsItemEnd = number;
-export type FloorLinesItemAttachmentsItemType = string;
-/** Reversed flips the outward swing direction of doors, for example */
-export type FloorLinesItemAttachmentsItemDirection = "normal" | "reversed";
-export type FloorLabels = ListEntity<
+export type FloorShapesValueId = string;
+
+export type FloorShapesValueWidth = number;
+export type FloorShapesValueHeight = number;
+export type FloorShapesValueAngle = number;
+export type FloorShapesValueType = "ellipse" | "rectangle";
+/** Labels are used to add lengths, angles, or general notes. */
+export type FloorLabels = ObjectEntity<
   FloorLabelsInit,
   FloorLabelsDestructured,
   FloorLabelsSnapshot
 >;
-export type FloorLabelsItem = ObjectEntity<
-  FloorLabelsItemInit,
-  FloorLabelsItemDestructured,
-  FloorLabelsItemSnapshot
+export type FloorLabelsValue = ObjectEntity<
+  FloorLabelsValueInit,
+  FloorLabelsValueDestructured,
+  FloorLabelsValueSnapshot
 >;
-export type FloorLabelsItemId = string;
-export type FloorLabelsItemPosition = ObjectEntity<
-  FloorLabelsItemPositionInit,
-  FloorLabelsItemPositionDestructured,
-  FloorLabelsItemPositionSnapshot
->;
-export type FloorLabelsItemPositionX = number;
-export type FloorLabelsItemPositionY = number;
-export type FloorLabelsItemContent = string;
+export type FloorLabelsValueId = string;
+
+export type FloorLabelsValueContent = string;
 export type FloorInit = {
   id?: string;
   createdAt?: number;
   name: string;
   lines?: FloorLinesInit;
+  shapes?: FloorShapesInit;
   labels?: FloorLabelsInit;
 };
 
-export type FloorLinesItemStartSnapInit = {
+export type FloorLinesValueStartSnapInit = {
   lineId: string;
   side: "start" | "end";
+  offset?: number;
 };
-export type FloorLinesItemStartInit = {
+export type FloorLinesValueStartInit = {
   x: number;
   y: number;
-  snap?: FloorLinesItemStartSnapInit | null;
+  snap?: FloorLinesValueStartSnapInit | null;
 };
-export type FloorLinesItemEndSnapInit = {
-  lineId: string;
-  side: "start" | "end";
-};
-export type FloorLinesItemEndInit = {
-  x: number;
-  y: number;
-  snap?: FloorLinesItemEndSnapInit | null;
-};
-export type FloorLinesItemAttachmentsItemInit = {
+export type FloorLinesValueInit = {
   id?: string;
-  start: number;
-  end: number;
-  type: string;
-  direction: "normal" | "reversed";
+  start: FloorLinesValueStartInit;
+  end: FloorLinesValuePropertiesInit;
 };
-export type FloorLinesItemAttachmentsInit = FloorLinesItemAttachmentsItemInit[];
-export type FloorLinesItemInit = {
+export type FloorLinesInit = { [key: string]: FloorLinesValueInit };
+export type FloorShapesValueInit = {
   id?: string;
-  start: FloorLinesItemStartInit;
-  end: FloorLinesItemEndInit;
-  attachments?: FloorLinesItemAttachmentsInit;
+  center: FloorLinesValuePropertiesInit;
+  width: number;
+  height: number;
+  angle?: number;
+  type?: "ellipse" | "rectangle";
 };
-export type FloorLinesInit = FloorLinesItemInit[];
-export type FloorLabelsItemPositionInit = { x: number; y: number };
-export type FloorLabelsItemInit = {
+export type FloorShapesInit = { [key: string]: FloorShapesValueInit };
+export type FloorLabelsValueInit = {
   id?: string;
-  position: FloorLabelsItemPositionInit;
+  center: FloorLinesValuePropertiesInit;
   content: string;
 };
-export type FloorLabelsInit = FloorLabelsItemInit[];
+export type FloorLabelsInit = { [key: string]: FloorLabelsValueInit };
 export type FloorDestructured = {
   id: string;
   createdAt: number;
   name: string;
   lines: FloorLines;
+  shapes: FloorShapes;
   labels: FloorLabels;
 };
 
-export type FloorLinesItemStartSnapDestructured = {
+export type FloorLinesValueStartSnapDestructured = {
   lineId: string;
   side: "start" | "end";
+  offset: number;
 };
-export type FloorLinesItemStartDestructured = {
+export type FloorLinesValueStartDestructured = {
   x: number;
   y: number;
-  snap: FloorLinesItemStartSnap | null;
+  snap: FloorLinesValueStartSnap | null;
 };
-export type FloorLinesItemEndSnapDestructured = {
-  lineId: string;
-  side: "start" | "end";
-};
-export type FloorLinesItemEndDestructured = {
-  x: number;
-  y: number;
-  snap: FloorLinesItemEndSnap | null;
-};
-export type FloorLinesItemAttachmentsItemDestructured = {
+export type FloorLinesValueDestructured = {
   id: string;
-  start: number;
-  end: number;
-  type: string;
-  direction: "normal" | "reversed";
+  start: FloorLinesValueStart;
+  end: FloorLinesValueProperties;
 };
-export type FloorLinesItemAttachmentsDestructured =
-  FloorLinesItemAttachmentsItem[];
-export type FloorLinesItemDestructured = {
-  id: string;
-  start: FloorLinesItemStart;
-  end: FloorLinesItemEnd;
-  attachments: FloorLinesItemAttachments;
+export type FloorLinesDestructured = {
+  [key: string]: FloorLinesValue | undefined;
 };
-export type FloorLinesDestructured = FloorLinesItem[];
-export type FloorLabelsItemPositionDestructured = { x: number; y: number };
-export type FloorLabelsItemDestructured = {
+export type FloorShapesValueDestructured = {
   id: string;
-  position: FloorLabelsItemPosition;
+  center: FloorLinesValueProperties;
+  width: number;
+  height: number;
+  angle: number;
+  type: "ellipse" | "rectangle";
+};
+export type FloorShapesDestructured = {
+  [key: string]: FloorShapesValue | undefined;
+};
+export type FloorLabelsValueDestructured = {
+  id: string;
+  center: FloorLinesValueProperties;
   content: string;
 };
-export type FloorLabelsDestructured = FloorLabelsItem[];
+export type FloorLabelsDestructured = {
+  [key: string]: FloorLabelsValue | undefined;
+};
 export type FloorSnapshot = {
   id: string;
   createdAt: number;
   name: string;
   lines: FloorLinesSnapshot;
+  shapes: FloorShapesSnapshot;
   labels: FloorLabelsSnapshot;
 };
 
-export type FloorLinesItemStartSnapSnapshot = {
+export type FloorLinesValueStartSnapSnapshot = {
   lineId: string;
   side: "start" | "end";
+  offset: number;
 };
-export type FloorLinesItemStartSnapshot = {
+export type FloorLinesValueStartSnapshot = {
   x: number;
   y: number;
-  snap: FloorLinesItemStartSnapSnapshot | null;
+  snap: FloorLinesValueStartSnapSnapshot | null;
 };
-export type FloorLinesItemEndSnapSnapshot = {
-  lineId: string;
-  side: "start" | "end";
-};
-export type FloorLinesItemEndSnapshot = {
-  x: number;
-  y: number;
-  snap: FloorLinesItemEndSnapSnapshot | null;
-};
-export type FloorLinesItemAttachmentsItemSnapshot = {
+export type FloorLinesValueSnapshot = {
   id: string;
-  start: number;
-  end: number;
-  type: string;
-  direction: "normal" | "reversed";
+  start: FloorLinesValueStartSnapshot;
+  end: FloorLinesValuePropertiesSnapshot;
 };
-export type FloorLinesItemAttachmentsSnapshot =
-  FloorLinesItemAttachmentsItemSnapshot[];
-export type FloorLinesItemSnapshot = {
+export type FloorLinesSnapshot = { [key: string]: FloorLinesValueSnapshot };
+export type FloorShapesValueSnapshot = {
   id: string;
-  start: FloorLinesItemStartSnapshot;
-  end: FloorLinesItemEndSnapshot;
-  attachments: FloorLinesItemAttachmentsSnapshot;
+  center: FloorLinesValuePropertiesSnapshot;
+  width: number;
+  height: number;
+  angle: number;
+  type: "ellipse" | "rectangle";
 };
-export type FloorLinesSnapshot = FloorLinesItemSnapshot[];
-export type FloorLabelsItemPositionSnapshot = { x: number; y: number };
-export type FloorLabelsItemSnapshot = {
+export type FloorShapesSnapshot = { [key: string]: FloorShapesValueSnapshot };
+export type FloorLabelsValueSnapshot = {
   id: string;
-  position: FloorLabelsItemPositionSnapshot;
+  center: FloorLinesValuePropertiesSnapshot;
   content: string;
 };
-export type FloorLabelsSnapshot = FloorLabelsItemSnapshot[];
+export type FloorLabelsSnapshot = { [key: string]: FloorLabelsValueSnapshot };
 
 /** Index filters for Floor **/
 

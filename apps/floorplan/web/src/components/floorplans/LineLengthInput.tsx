@@ -14,9 +14,9 @@ export function LineLengthInput({ floor }: LineLengthInputProps) {
 	const { lines } = hooks.useWatch(floor);
 	hooks.useWatch(lines, { deep: true });
 
-	const selectedLines = lines.filter((line) =>
-		editorState.selections.includes(line.get('id')),
-	);
+	const selectedLines = editorState.selections
+		.map((id) => lines.get(id))
+		.filter((line) => !!line);
 
 	const client = hooks.useClient();
 

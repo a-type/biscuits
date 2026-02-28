@@ -2,30 +2,35 @@ import { hooks } from '@/hooks.js';
 import { useViewport } from '@a-type/ui';
 import { Floor, id } from '@floorplan.biscuits/verdant';
 import { useDrag } from '@use-gesture/react';
-import { useMotionValue } from 'motion/react';
+import { useMotionValue, useTransform } from 'motion/react';
 import { useRef, useState } from 'react';
 import { useSnapshot } from 'valtio';
 import { editorState } from './editorState.js';
-import { LineRenderer } from './LineRenderer.jsx';
 import { applyPointSnap } from './pointLogic.js';
 import { computeConstrainedInput, PointPositionResult } from './positioning.js';
+import { ShapeRenderer } from './ShapeRenderer.jsx';
 
-export interface NewLineProps {
+export interface NewShapeProps {
 	floor: Floor;
 }
 
-export const SNAP_DISTANCE = 3;
-
-export function NewLine({ floor }: NewLineProps) {
+export function NewShape({ floor }: NewShapeProps) {
 	const viewport = useViewport();
 
 	const stateSnap = useSnapshot(editorState);
-	const enabled = stateSnap.tool === 'line';
+	const enabled = stateSnap.tool === 'shape';
 	const [toolActive, setToolActive] = useState(false);
 	const toolStartX = useMotionValue(0);
 	const toolStartY = useMotionValue(0);
 	const toolEndX = useMotionValue(0);
 	const toolEndY = useMotionValue(0);
+
+	const width = useTransform(() => Math.abs(toolEndX.get() - toolStartX.get()));
+	const height = useTransform(() =>
+		Math.abs(toolEndY.get() - toolStartY.get()),
+	);
+	const angle = useMotionValue(0);
+
 	const initialRef = useRef<PointPositionResult | null>(null);
 
 	const client = hooks.useClient();
@@ -46,45 +51,41 @@ export function NewLine({ floor }: NewLineProps) {
 				initialRef.current = result;
 			}
 
-			const length = Math.sqrt(state.distance[0] ** 2 + state.distance[1] ** 2);
-			if (length > 10) {
-				setToolActive(true);
-			}
+			setToolActive(true);
+
+			toolEndX.set(result.x);
+			toolEndY.set(result.y);
 
 			if (state.last) {
+				const initial = initialRef.current;
+				if (!initial) {
+					return;
+				}
 				client
 					.batch()
 					.run(() => {
 						setToolActive(false);
-						if (state.tap || length <= 10 || !floor || !initialRef.current) {
-							return;
-						}
-						const lineId = id();
-						floor.get('lines').set(lineId, {
-							id: lineId,
-							start: {
-								x: initialRef.current.x,
-								y: initialRef.current.y,
+						const shapeId = id();
+						floor.get('shapes').set(shapeId, {
+							id: shapeId,
+							center: {
+								x: initial.x,
+								y: initial.y,
 							},
-							end: {
-								x: result.x,
-								y: result.y,
-							},
+							width: Math.abs(result.x - initial.x),
+							height: Math.abs(result.y - initial.y),
+							type: stateSnap.shapeType,
 						});
-						const line = floor.get('lines').get(lineId);
-						if (!line) {
-							throw new Error('Unknown error: Failed to create line');
+						const shape = floor.get('shapes').get(shapeId);
+						if (!shape) {
+							throw new Error('Shape not found after creation');
 						}
-						applyPointSnap(floor, line.get('start'), initialRef.current);
-						applyPointSnap(floor, line.get('end'), result);
+						applyPointSnap(floor, shape.get('center'), initial);
 						initialRef.current = null;
-						editorState.selections = [lineId];
+						editorState.selections = [shapeId];
 					})
 					.commit();
 			}
-
-			toolEndX.set(result.x);
-			toolEndY.set(result.y);
 		},
 		{
 			target: viewport.element,
@@ -98,11 +99,13 @@ export function NewLine({ floor }: NewLineProps) {
 
 	return (
 		<g className="stroke-black">
-			<LineRenderer
-				startX={toolStartX}
-				startY={toolStartY}
-				endX={toolEndX}
-				endY={toolEndY}
+			<ShapeRenderer
+				centerX={toolStartX}
+				centerY={toolStartY}
+				height={height}
+				width={width}
+				type={stateSnap.shapeType}
+				angle={angle}
 			/>
 		</g>
 	);

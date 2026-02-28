@@ -1,7 +1,7 @@
 import { hooks } from '@/hooks.js';
 import { useMotionPoint } from '@/hooks/useVerdantMotion.js';
 import { useViewport } from '@a-type/ui';
-import { FloorLinesItemStart } from '@floorplan.biscuits/verdant';
+import { FloorLinesValueStart as SnapPoint } from '@floorplan.biscuits/verdant';
 import { useDrag } from '@use-gesture/react';
 import { motion } from 'motion/react';
 import { useSyncExternalStore } from 'react';
@@ -14,8 +14,8 @@ import {
 import { computeConstrainedInput } from './positioning.js';
 
 export interface LinePointHandleProps {
-	point: FloorLinesItemStart;
-	oppositePoint: FloorLinesItemStart;
+	point: SnapPoint;
+	oppositePoint: SnapPoint;
 }
 
 export function LinePointHandle({
@@ -65,6 +65,7 @@ export function LinePointHandle({
 			},
 		});
 		applyPointSnap(floor, point, result);
+		// TODO: if a line is 0 length, auto-delete?
 	});
 
 	return (

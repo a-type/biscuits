@@ -22,11 +22,21 @@ export function useEditorGlobalKeys(floor: Floor | null) {
 		client.batch().run(() => {
 			const lines = floor.get('lines');
 			selections.forEach((id) => {
-				const line = lines.find((val) => val.get('id') === id);
+				const line = lines.get(id);
 				if (line) {
-					lines.removeAll(line);
+					lines.delete(id);
 				}
 			});
 		});
+	});
+
+	useHotkeys(['meta+a', 'ctrl+a'], (ev) => {
+		ev.preventDefault();
+		if (!floor) {
+			return;
+		}
+		const lines = floor.get('lines');
+		editorState.selections = lines.keys();
+		console.log('selecting all', editorState.selections);
 	});
 }

@@ -1,14 +1,15 @@
+import { FloorShapesValueType } from '@floorplan.biscuits/verdant';
 import { proxy } from 'valtio';
 
 export const editorState = proxy({
-	tool: 'select' as 'select' | 'line' | 'pan' | 'attachments',
+	tool: 'select' as 'select' | 'line' | 'pan' | 'shape',
 	selections: [] as string[],
 	editingLength: false,
 	constraints: {
 		snapCorners: true,
 		angles: true,
 	},
-	activeAttachment: 'door' as 'door' | 'window',
+	shapeType: 'rectangle' as FloorShapesValueType,
 });
 
 export function toggleSelection(id: string, multi = false) {
@@ -22,3 +23,7 @@ export function toggleSelection(id: string, multi = false) {
 		}
 	}
 }
+
+(window as any).debugEditorState = () => {
+	console.log('editorState', JSON.stringify(editorState));
+};

@@ -7,8 +7,10 @@ import { Suspense } from 'react';
 import { ConstraintToggles } from './ConstraintToggles.jsx';
 import { FloorLine } from './FloorLine.jsx';
 import { FloorProvider } from './FloorProvider.jsx';
+import { FloorShape } from './FloorShape.jsx';
 import { Grid } from './Grid.jsx';
 import { NewLine } from './NewLine.jsx';
+import { NewShape } from './NewShape.jsx';
 import { Toolbar } from './Toolbar.jsx';
 import { editorState } from './editorState.js';
 import { useEditorGlobalKeys } from './useEditorGlobalKeys.js';
@@ -71,7 +73,9 @@ function FloorplanContent({ id }: { id: string }) {
 				<g transform="translate(50, 50)">
 					<Grid />
 					<FloorplanLines floor={floor} />
+					<FloorplanShapes floor={floor} />
 					<NewLine floor={floor} />
+					<NewShape floor={floor} />
 				</g>
 			</svg>
 		</FloorProvider>
@@ -84,8 +88,21 @@ function FloorplanLines({ floor }: { floor: Floor }) {
 
 	return (
 		<>
-			{lines.map((line) => (
-				<FloorLine floor={floor} key={line.get('id')} line={line} />
+			{lines.values().map((line) => (
+				<FloorLine key={line.get('id')} line={line} />
+			))}
+		</>
+	);
+}
+
+function FloorplanShapes({ floor }: { floor: Floor }) {
+	const { shapes } = hooks.useWatch(floor);
+	hooks.useWatch(shapes);
+
+	return (
+		<>
+			{shapes.values().map((shape) => (
+				<FloorShape key={shape.get('id')} shape={shape} />
 			))}
 		</>
 	);

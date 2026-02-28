@@ -1,4 +1,7 @@
-import { Floor, FloorLinesItemStart } from '@floorplan.biscuits/verdant';
+import {
+	Floor,
+	FloorLinesValueStart as SnapPoint,
+} from '@floorplan.biscuits/verdant';
 import { MotionValue } from 'motion/react';
 import { editorState } from './editorState.js';
 import { SNAP_DISTANCE } from './NewLine.jsx';
@@ -10,7 +13,7 @@ export interface PointPositionResult {
 	snappedTo?: {
 		lineId: string;
 		side: 'start' | 'end';
-		value: FloorLinesItemStart;
+		value: SnapPoint;
 	};
 }
 
@@ -30,7 +33,7 @@ export function computeConstrainedInput({
 	filterSnap?: (
 		lineId: string,
 		end: 'start' | 'end',
-		point: FloorLinesItemStart,
+		point: SnapPoint,
 	) => boolean;
 }) {
 	const result: PointPositionResult = {
@@ -44,10 +47,10 @@ export function computeConstrainedInput({
 		let closest: {
 			lineId: string;
 			point: 'start' | 'end';
-			value: FloorLinesItemStart;
+			value: SnapPoint;
 			distance: number;
 		} | null = null;
-		for (const line of lines) {
+		for (const line of lines.values()) {
 			const start = line.get('start');
 			const end = line.get('end');
 			const distToStart = Math.hypot(

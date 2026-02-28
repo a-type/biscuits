@@ -7,23 +7,23 @@ export interface ToolbarProps {
 }
 
 export function Toolbar(props: ToolbarProps) {
-	const { tool, activeAttachment } = useSnapshot(editorState);
+	const { tool, shapeType } = useSnapshot(editorState);
 
 	return (
 		<Box col {...props}>
-			<CollapsibleSimple open={tool === 'attachments'}>
+			<CollapsibleSimple open={tool === 'shape'}>
 				<ToggleGroup
-					value={[activeAttachment]}
+					value={[shapeType]}
 					onValueChange={([v]) => {
-						editorState.activeAttachment = v as any;
+						editorState.shapeType = v as any;
 					}}
 					className="mb-sm"
 				>
-					<ToggleGroup.Item value="door">
-						<Icon name="fridge" size={25} />
-					</ToggleGroup.Item>
-					<ToggleGroup.Item value="window">
+					<ToggleGroup.Item value="rectangle">
 						<Icon name="cardsGrid" size={25} />
+					</ToggleGroup.Item>
+					<ToggleGroup.Item value="ellipse">
+						<Icon name="info" size={25} />
 					</ToggleGroup.Item>
 				</ToggleGroup>
 			</CollapsibleSimple>
@@ -42,7 +42,7 @@ export function Toolbar(props: ToolbarProps) {
 				<ToggleGroup.Item value="line">
 					<Icon name="connection" size={25} />
 				</ToggleGroup.Item>
-				<ToggleGroup.Item value="attachments">
+				<ToggleGroup.Item value="shape">
 					<Icon name="fridge" size={25} />
 				</ToggleGroup.Item>
 			</ToggleGroup>

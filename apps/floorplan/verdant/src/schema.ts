@@ -1,5 +1,25 @@
 import { schema } from '@verdant-web/store';
 
+const snapPoint = schema.fields.object({
+	documentation: 'Point is required, snap will override it.',
+	fields: {
+		x: schema.fields.number(),
+		y: schema.fields.number(),
+		snap: schema.fields.object({
+			nullable: true,
+			fields: {
+				lineId: schema.fields.string(),
+				side: schema.fields.string({
+					options: ['start', 'end'],
+				}),
+				offset: schema.fields.number({
+					default: 0,
+				}),
+			},
+		}),
+	},
+});
+
 const floors = schema.collection({
 	name: 'floor',
 	primaryKey: 'id',
@@ -9,73 +29,40 @@ const floors = schema.collection({
 			default: () => Date.now(),
 		}),
 		name: schema.fields.string(),
-		lines: schema.fields.array({
-			items: schema.fields.object({
+		lines: schema.fields.map({
+			documentation: `Lines represent walls. Their start and end points can snap to one another.`,
+			values: schema.fields.object({
 				fields: {
 					id: schema.fields.id(),
-					start: schema.fields.object({
-						documentation:
-							'The start point of the line. Either point or snapKey must be provided.',
-						fields: {
-							x: schema.fields.number(),
-							y: schema.fields.number(),
-							snap: schema.fields.object({
-								nullable: true,
-								fields: {
-									lineId: schema.fields.string(),
-									side: schema.fields.string({
-										options: ['start', 'end'],
-									}),
-								},
-							}),
-						},
+					start: snapPoint,
+					end: snapPoint,
+				},
+			}),
+		}),
+		shapes: schema.fields.map({
+			documentation: `Shapes represent doors, walls, and furniture. They can be attached to lines or free-floating.`,
+			values: schema.fields.object({
+				fields: {
+					id: schema.fields.id(),
+					center: snapPoint,
+					width: schema.fields.number(),
+					height: schema.fields.number(),
+					angle: schema.fields.number({
+						default: 0,
 					}),
-					end: schema.fields.object({
-						documentation:
-							'The end point of the line. Either point or snapKey must be provided.',
-						fields: {
-							x: schema.fields.number(),
-							y: schema.fields.number(),
-							snap: schema.fields.object({
-								nullable: true,
-								fields: {
-									lineId: schema.fields.string(),
-									side: schema.fields.string({
-										options: ['start', 'end'],
-									}),
-								},
-							}),
-						},
-					}),
-					attachments: schema.fields.array({
-						documentation: `Objects attached along this wall, like doors or windows.`,
-						items: schema.fields.object({
-							fields: {
-								id: schema.fields.id(),
-								start: schema.fields.number(),
-								end: schema.fields.number(),
-								type: schema.fields.string(),
-								direction: schema.fields.string({
-									documentation:
-										'Reversed flips the outward swing direction of doors, for example',
-									options: ['normal', 'reversed'],
-								}),
-							},
-						}),
+					type: schema.fields.string({
+						options: ['ellipse', 'rectangle'],
+						default: 'rectangle',
 					}),
 				},
 			}),
 		}),
-		labels: schema.fields.array({
-			items: schema.fields.object({
+		labels: schema.fields.map({
+			documentation: `Labels are used to add lengths, angles, or general notes.`,
+			values: schema.fields.object({
 				fields: {
 					id: schema.fields.id(),
-					position: schema.fields.object({
-						fields: {
-							x: schema.fields.number(),
-							y: schema.fields.number(),
-						},
-					}),
+					center: snapPoint,
 					content: schema.fields.string(),
 				},
 			}),

@@ -7,98 +7,81 @@ export type FloorSnapshot = {
   createdAt: number;
   name: string;
   lines: FloorLinesSnapshot;
+  shapes: FloorShapesSnapshot;
   labels: FloorLabelsSnapshot;
 };
 
-export type FloorLinesItemStartSnapSnapshot = {
+export type FloorLinesValueStartSnapSnapshot = {
   lineId: string;
   side: "start" | "end";
+  offset: number;
 };
-export type FloorLinesItemStartSnapshot = {
+export type FloorLinesValueStartSnapshot = {
   x: number;
   y: number;
-  snap: FloorLinesItemStartSnapSnapshot | null;
+  snap: FloorLinesValueStartSnapSnapshot | null;
 };
-export type FloorLinesItemEndSnapSnapshot = {
-  lineId: string;
-  side: "start" | "end";
-};
-export type FloorLinesItemEndSnapshot = {
-  x: number;
-  y: number;
-  snap: FloorLinesItemEndSnapSnapshot | null;
-};
-export type FloorLinesItemAttachmentsItemSnapshot = {
+export type FloorLinesValueSnapshot = {
   id: string;
-  start: number;
-  end: number;
-  type: string;
-  direction: "normal" | "reversed";
+  start: FloorLinesValueStartSnapshot;
+  end: FloorLinesValuePropertiesSnapshot;
 };
-export type FloorLinesItemAttachmentsSnapshot =
-  FloorLinesItemAttachmentsItemSnapshot[];
-export type FloorLinesItemSnapshot = {
+export type FloorLinesSnapshot = { [key: string]: FloorLinesValueSnapshot };
+export type FloorShapesValueSnapshot = {
   id: string;
-  start: FloorLinesItemStartSnapshot;
-  end: FloorLinesItemEndSnapshot;
-  attachments: FloorLinesItemAttachmentsSnapshot;
+  center: FloorLinesValuePropertiesSnapshot;
+  width: number;
+  height: number;
+  angle: number;
+  type: "ellipse" | "rectangle";
 };
-export type FloorLinesSnapshot = FloorLinesItemSnapshot[];
-export type FloorLabelsItemPositionSnapshot = { x: number; y: number };
-export type FloorLabelsItemSnapshot = {
+export type FloorShapesSnapshot = { [key: string]: FloorShapesValueSnapshot };
+export type FloorLabelsValueSnapshot = {
   id: string;
-  position: FloorLabelsItemPositionSnapshot;
+  center: FloorLinesValuePropertiesSnapshot;
   content: string;
 };
-export type FloorLabelsSnapshot = FloorLabelsItemSnapshot[];
+export type FloorLabelsSnapshot = { [key: string]: FloorLabelsValueSnapshot };
 export type FloorInit = {
   id?: string;
   createdAt?: number;
   name: string;
   lines?: FloorLinesInit;
+  shapes?: FloorShapesInit;
   labels?: FloorLabelsInit;
 };
 
-export type FloorLinesItemStartSnapInit = {
+export type FloorLinesValueStartSnapInit = {
   lineId: string;
   side: "start" | "end";
+  offset?: number;
 };
-export type FloorLinesItemStartInit = {
+export type FloorLinesValueStartInit = {
   x: number;
   y: number;
-  snap?: FloorLinesItemStartSnapInit | null;
+  snap?: FloorLinesValueStartSnapInit | null;
 };
-export type FloorLinesItemEndSnapInit = {
-  lineId: string;
-  side: "start" | "end";
-};
-export type FloorLinesItemEndInit = {
-  x: number;
-  y: number;
-  snap?: FloorLinesItemEndSnapInit | null;
-};
-export type FloorLinesItemAttachmentsItemInit = {
+export type FloorLinesValueInit = {
   id?: string;
-  start: number;
-  end: number;
-  type: string;
-  direction: "normal" | "reversed";
+  start: FloorLinesValueStartInit;
+  end: FloorLinesValuePropertiesInit;
 };
-export type FloorLinesItemAttachmentsInit = FloorLinesItemAttachmentsItemInit[];
-export type FloorLinesItemInit = {
+export type FloorLinesInit = { [key: string]: FloorLinesValueInit };
+export type FloorShapesValueInit = {
   id?: string;
-  start: FloorLinesItemStartInit;
-  end: FloorLinesItemEndInit;
-  attachments?: FloorLinesItemAttachmentsInit;
+  center: FloorLinesValuePropertiesInit;
+  width: number;
+  height: number;
+  angle?: number;
+  type?: "ellipse" | "rectangle";
 };
-export type FloorLinesInit = FloorLinesItemInit[];
-export type FloorLabelsItemPositionInit = { x: number; y: number };
-export type FloorLabelsItemInit = {
+export type FloorShapesInit = { [key: string]: FloorShapesValueInit };
+export type FloorLabelsValueInit = {
   id?: string;
-  position: FloorLabelsItemPositionInit;
+  center: FloorLinesValuePropertiesInit;
   content: string;
 };
-export type FloorLabelsInit = FloorLabelsItemInit[];
+export type FloorLabelsInit = { [key: string]: FloorLabelsValueInit };
 
 export type MigrationTypes = {
   floors: { init: FloorInit; snapshot: FloorSnapshot };
