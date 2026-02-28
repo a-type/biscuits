@@ -13,9 +13,8 @@ export function Toolbar(props: ToolbarProps) {
 		<Box col {...props}>
 			<CollapsibleSimple open={tool === 'attachments'}>
 				<ToggleGroup
-					type="single"
-					value={activeAttachment}
-					onValueChange={(v) => {
+					value={[activeAttachment]}
+					onValueChange={([v]) => {
 						editorState.activeAttachment = v as any;
 					}}
 					className="mb-sm"
@@ -29,9 +28,8 @@ export function Toolbar(props: ToolbarProps) {
 				</ToggleGroup>
 			</CollapsibleSimple>
 			<ToggleGroup
-				type="single"
-				value={tool}
-				onValueChange={(v) => {
+				value={[tool]}
+				onValueChange={([v]) => {
 					editorState.tool = v as any;
 				}}
 			>

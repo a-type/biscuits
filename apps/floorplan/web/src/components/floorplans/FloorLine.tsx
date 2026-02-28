@@ -63,7 +63,10 @@ export function FloorLine({ line, floor }: FloorLineProps) {
 
 	return (
 		<g
-			className={clsx(selected ? 'z-100 stroke-primary' : 'stroke-black')}
+			className={clsx(
+				'touch-none',
+				selected ? 'z-100 stroke-primary' : 'stroke-black',
+			)}
 			data-line-id={id}
 			data-attachment-count={attachments.length}
 			ref={ref}
