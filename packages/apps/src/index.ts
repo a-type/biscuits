@@ -29,7 +29,7 @@ export const apps = [
 		name: 'Gnocchi',
 		description: 'Organize your weekly cooking',
 		mainImageUrl: 'https://gnocchi.biscuits.club/og-image.png',
-		iconPath: 'android-chrome-512x512.png',
+		iconPath: 'icon.png',
 		size: 4,
 		devOriginOverride: 'http://localhost:6220',
 		demoVideoSrc: '/videos/gnocchi-compressed.mp4',
