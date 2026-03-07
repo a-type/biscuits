@@ -6,23 +6,23 @@ import PhoneDemo from './PhoneDemo.jsx';
 
 export const DemoGrid = withClassName(
 	'div',
-	'grid grid-cols-[1fr] gap-5 items-start md:(grid-cols-[repeat(2,1fr)])',
+	'grid grid-cols-[1fr] items-start gap-5 md:(grid-cols-[repeat(2,1fr)])',
 );
 export const Demo = withClassName(
 	withProps(PhoneDemo, { size: 'large' }),
-	'relative z-1 [grid-row-end:span_2]',
+	'[grid-row-end:span_2] relative z-1',
 );
 export const Highlight = withClassName(
 	'img',
-	'flex-1 [grid-row-end:span_2] min-w-0 w-full object-contain rounded-lg border-default',
+	'[grid-row-end:span_2] min-w-0 w-full flex-1 border-default rounded-lg object-contain',
 );
 export const TitleWrap = withClassName('div', 'md:[grid-column-end:span_2]');
 const Emoji = withClassName('span', 'block');
-const ItemText = withClassName('span', 'block relative');
+const ItemText = withClassName('span', 'relative block');
 
 export const Description = withClassName(
 	'p',
-	'font-light text-xl my-6 color-black',
+	'my-6 text-xl font-light color-black',
 );
 
 export const Section = forwardRef<
@@ -131,7 +131,7 @@ export const CallToAction = ({
 }) => (
 	<div
 		className={clsx(
-			'fixed bottom-0 z-2 m-0 w-full flex flex-col items-center gap-3 border-0 border-t border-solid p-3 transition-colors bg-primary-wash border-t-primary-dark',
+			'sticky bottom-0 z-2 m-0 w-full flex flex-col items-center gap-3 border-0 border-t border-solid p-3 transition-colors bg-primary-wash border-t-primary-dark',
 			className,
 		)}
 	>
@@ -160,17 +160,17 @@ export const CallToAction = ({
 
 export const Root = withClassName(
 	'div',
-	'bg-white color-black flex flex-col items-stretch',
+	'flex flex-col items-stretch color-black bg-white',
 );
 
 export const Background = withClassName(
 	'div',
-	'layer-components:(fixed top-0 left-0 w-full h-80% pointer-events-none)',
+	'layer-components:(pointer-events-none fixed left-0 top-0 h-80% w-full)',
 );
 
 const AppNameText = withClassName(
 	'h2',
-	'font-fancy font-bold text-[4vmax] color-primary-dark m-0',
+	'font-fancy m-0 text-[4vmax] font-bold color-primary-dark',
 );
 
 export const AppName = ({ appId }: { appId: AppId }) => {
