@@ -121,6 +121,7 @@ function PersonRelationshipItem({
 				value={otherPersonLabel}
 				onChange={setOtherPersonLabel}
 				className="grid-area-[type]"
+				personName={person.get('name')}
 			/>
 			<Button
 				emphasis="ghost"
@@ -137,10 +138,12 @@ function RelationshipTypeSelect({
 	value,
 	onChange,
 	className,
+	personName,
 }: {
 	value: string | null;
 	onChange: (value: string) => void;
 	className?: string;
+	personName: string;
 }) {
 	return (
 		<Select
@@ -165,7 +168,7 @@ function RelationshipTypeSelect({
 				<Select.Value />
 			</Select.Trigger>
 			<Select.Content>
-				<Select.Item value="unknown">Select type...</Select.Item>
+				<Select.Item value="unknown">{personName} is...</Select.Item>
 				<Select.Group>
 					<Select.GroupLabel>Close Family</Select.GroupLabel>
 					<Select.Item value="family">Family</Select.Item>

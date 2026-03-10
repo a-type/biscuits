@@ -49,9 +49,9 @@ export function SuperBar({ className }: SuperBarProps) {
 
 const BottomContainer = withClassName(
 	'div',
-	'fixed bottom-0 left-1/2 translate-x--1/2 z-[var(--z-now-playing)] md:max-w-512px',
+	'fixed bottom-0 left-1/2 z-[var(--z-now-playing)] translate-x--1/2 md:max-w-512px',
 	'flex flex-col items-stretch justify-center overflow-hidden bg-primary-wash',
-	'border-gray border-solid border-1 lt-sm:(border-b-0 border-l-0 border-r-0) rounded-t-md',
+	'border-1 rounded-t-md border-solid border-gray lt-sm:(border-b-0 border-r-0 border-l-0)',
 	'pb-[var(--nav-height,env(safe-area-inset-bottom,0px))]',
-	'shadow-md w-full overflow-hidden animate-pop-up animate-duration-200',
+	'w-full animate-pop-up animate-duration-200 overflow-hidden shadow-md',
 );
