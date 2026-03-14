@@ -4,7 +4,9 @@ import { fetchRecipe } from '~/utils/fetchRecipe.js';
 
 export const Route = createFileRoute('/$slug')({
 	component: RouteComponent,
-	loader: ({ params }) => fetchRecipe({ data: { slug: params.slug } }),
+	loader: ({ params }) => {
+		return fetchRecipe({ data: { slug: params.slug } });
+	},
 });
 
 function RouteComponent() {

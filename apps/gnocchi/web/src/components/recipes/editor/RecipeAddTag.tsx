@@ -23,12 +23,18 @@ export function RecipeEditTagsTrigger(
 	return <Dialog.Trigger render={<DefaultTrigger />} {...props} />;
 }
 
-export function RecipeEditTagsContent({ recipe }: { recipe: Recipe }) {
+export function RecipeEditTagsContent({
+	recipe,
+	className,
+}: {
+	recipe: Recipe;
+	className?: string;
+}) {
 	const { tags, title } = hooks.useWatch(recipe);
 	hooks.useWatch(tags);
 
 	return (
-		<Dialog.Content>
+		<Dialog.Content className={className}>
 			<Box col gap full="width">
 				<DialogTitle>Tags for {title}</DialogTitle>
 				<Suspense>

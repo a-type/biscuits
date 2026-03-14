@@ -65,7 +65,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				<HeadContent />
 			</head>
 			<body>
-				<Provider disableParticles>{children}</Provider>
+				<Provider disableParticles manifestPath={false}>
+					{children}
+				</Provider>
 				<TanStackRouterDevtools position="bottom-right" />
 				<Scripts />
 			</body>

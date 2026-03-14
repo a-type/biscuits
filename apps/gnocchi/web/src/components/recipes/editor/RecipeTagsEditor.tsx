@@ -1,4 +1,8 @@
-import { RecipeEditTags } from '@/components/recipes/editor/RecipeAddTag.jsx';
+import {
+	RecipeEditTagsContent,
+	RecipeEditTagsRoot,
+	RecipeEditTagsTrigger,
+} from '@/components/recipes/editor/RecipeAddTag.js';
 import { hooks } from '@/stores/groceries/index.js';
 import { IconName, PaletteName, clsx } from '@a-type/ui';
 import { RemovableTag } from '@biscuits/client';
@@ -25,7 +29,10 @@ export function RecipeTagsEditor({ recipe, className }: RecipeTagsEditorProps) {
 				</Suspense>
 			))}
 			<Suspense>
-				<RecipeEditTags recipe={recipe} className="text-xs" />
+				<RecipeEditTagsRoot>
+					<RecipeEditTagsTrigger />
+					<RecipeEditTagsContent recipe={recipe} className="text-xs" />
+				</RecipeEditTagsRoot>
 			</Suspense>
 		</div>
 	);
