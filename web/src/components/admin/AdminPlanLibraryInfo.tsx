@@ -18,6 +18,7 @@ const LibraryInfoQuery = graphql(`
 				latestServerOrder
 				operationsCount
 				replicas(includeTruant: true) {
+					id
 					ackedLogicalTime
 					ackedServerOrder
 					truant
