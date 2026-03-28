@@ -59,7 +59,7 @@ export function SettingsPageWrapper({
 			<ColorModeToggle />
 			<LogoutButton />
 			{!subscribed ?
-				<Box surface color="accent" p>
+				<Box surface col color="accent" p>
 					<Box gap items="center">
 						<PromoteSubscriptionButton emphasis="primary">
 							Upgrade your plan
