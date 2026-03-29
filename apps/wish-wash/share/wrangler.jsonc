@@ -12,6 +12,10 @@
 			"pattern": "lists.wish-wash.biscuits.club",
 			"custom_domain": true,
 		},
+		{
+			"pattern": "lists.wishlist.biscuits.club",
+			"custom_domain": true,
+		},
 	],
 	"observability": {
 		"logs": {

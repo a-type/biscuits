@@ -13,6 +13,10 @@
 			"pattern": "recipes.gnocchi.biscuits.club",
 			"custom_domain": true,
 		},
+		{
+			"pattern": "recipes.cooking.biscuits.club",
+			"custom_domain": true,
+		},
 	],
 	"observability": {
 		"logs": {
