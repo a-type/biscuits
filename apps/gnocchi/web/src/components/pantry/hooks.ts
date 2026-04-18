@@ -13,13 +13,15 @@ export const THREE_DAYS_FROM_NOW = addDays(endOfDay(new Date()), 3).getTime();
 export function useExpiresSoonItems({
 	skip,
 	key,
-}: { skip?: boolean; key?: string } = {}) {
+	limit,
+}: { skip?: boolean; key?: string; limit?: number } = {}) {
 	return hooks.useAllFoodsUnsuspended({
 		index: {
 			where: 'purchasedAndExpiresAt',
 			lt: THREE_DAYS_FROM_NOW,
 		},
 		skip,
+		limit,
 		key: key ?? 'expiresSoonItems',
 	}).data;
 }

@@ -165,10 +165,10 @@ export interface GeneratedHooks<Presence, Profile> {
     config?: Config,
   ) => { data: Category | null; status: QueryStatus };
   useAllCategories: <Config extends HookConfig<CategoryFilter>>(
-    config?: Config,
+    config?: Config & { limit?: number },
   ) => Category[];
   useAllCategoriesUnsuspended: <Config extends HookConfig<CategoryFilter>>(
-    config?: Config,
+    config?: Config & { limit?: number },
   ) => { data: Category[]; status: QueryStatus };
   useAllCategoriesPaginated: <
     Config extends HookConfig<CategoryFilter> & {
@@ -212,10 +212,10 @@ export interface GeneratedHooks<Presence, Profile> {
     config?: Config,
   ) => { data: Item | null; status: QueryStatus };
   useAllItems: <Config extends HookConfig<ItemFilter>>(
-    config?: Config,
+    config?: Config & { limit?: number },
   ) => Item[];
   useAllItemsUnsuspended: <Config extends HookConfig<ItemFilter>>(
-    config?: Config,
+    config?: Config & { limit?: number },
   ) => { data: Item[]; status: QueryStatus };
   useAllItemsPaginated: <
     Config extends HookConfig<ItemFilter> & {
@@ -259,10 +259,10 @@ export interface GeneratedHooks<Presence, Profile> {
     config?: Config,
   ) => { data: Food | null; status: QueryStatus };
   useAllFoods: <Config extends HookConfig<FoodFilter>>(
-    config?: Config,
+    config?: Config & { limit?: number },
   ) => Food[];
   useAllFoodsUnsuspended: <Config extends HookConfig<FoodFilter>>(
-    config?: Config,
+    config?: Config & { limit?: number },
   ) => { data: Food[]; status: QueryStatus };
   useAllFoodsPaginated: <
     Config extends HookConfig<FoodFilter> & {
@@ -306,10 +306,10 @@ export interface GeneratedHooks<Presence, Profile> {
     config?: Config,
   ) => { data: List | null; status: QueryStatus };
   useAllLists: <Config extends HookConfig<ListFilter>>(
-    config?: Config,
+    config?: Config & { limit?: number },
   ) => List[];
   useAllListsUnsuspended: <Config extends HookConfig<ListFilter>>(
-    config?: Config,
+    config?: Config & { limit?: number },
   ) => { data: List[]; status: QueryStatus };
   useAllListsPaginated: <
     Config extends HookConfig<ListFilter> & {
@@ -358,12 +358,12 @@ export interface GeneratedHooks<Presence, Profile> {
     config?: Config,
   ) => { data: CollaborationInfo | null; status: QueryStatus };
   useAllCollaborationInfo: <Config extends HookConfig<CollaborationInfoFilter>>(
-    config?: Config,
+    config?: Config & { limit?: number },
   ) => CollaborationInfo[];
   useAllCollaborationInfoUnsuspended: <
     Config extends HookConfig<CollaborationInfoFilter>,
   >(
-    config?: Config,
+    config?: Config & { limit?: number },
   ) => { data: CollaborationInfo[]; status: QueryStatus };
   useAllCollaborationInfoPaginated: <
     Config extends HookConfig<CollaborationInfoFilter> & {
@@ -407,10 +407,10 @@ export interface GeneratedHooks<Presence, Profile> {
     config?: Config,
   ) => { data: Recipe | null; status: QueryStatus };
   useAllRecipes: <Config extends HookConfig<RecipeFilter>>(
-    config?: Config,
+    config?: Config & { limit?: number },
   ) => Recipe[];
   useAllRecipesUnsuspended: <Config extends HookConfig<RecipeFilter>>(
-    config?: Config,
+    config?: Config & { limit?: number },
   ) => { data: Recipe[]; status: QueryStatus };
   useAllRecipesPaginated: <
     Config extends HookConfig<RecipeFilter> & {
@@ -459,12 +459,12 @@ export interface GeneratedHooks<Presence, Profile> {
     config?: Config,
   ) => { data: RecipeTagMetadata | null; status: QueryStatus };
   useAllRecipeTagMetadata: <Config extends HookConfig<RecipeTagMetadataFilter>>(
-    config?: Config,
+    config?: Config & { limit?: number },
   ) => RecipeTagMetadata[];
   useAllRecipeTagMetadataUnsuspended: <
     Config extends HookConfig<RecipeTagMetadataFilter>,
   >(
-    config?: Config,
+    config?: Config & { limit?: number },
   ) => { data: RecipeTagMetadata[]; status: QueryStatus };
   useAllRecipeTagMetadataPaginated: <
     Config extends HookConfig<RecipeTagMetadataFilter> & {

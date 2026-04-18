@@ -117,7 +117,7 @@ export function useAddBarSuggestions({
 }) {
 	const [randomPlaceholder] = useState(getRandomPlaceholder);
 
-	const { data: existingItems } = hooks.useAllItemsUnsuspended({
+	const existingItems = hooks.useAllItems({
 		index: {
 			where: 'purchased',
 			equals: 'no',
@@ -139,7 +139,7 @@ export function useAddBarSuggestions({
 	const { firstWord, quantity } = destructureSearchPrompt(foodSearchPrompt);
 	const foodMatchPrompt = foodSearchPrompt.replace(quantity, '').trim();
 
-	const { data: searchFoods } = hooks.useAllFoodsUnsuspended({
+	const searchFoods = hooks.useAllFoods({
 		index: {
 			where: 'nameLookup',
 			// only use first word... only one word can match the index.
@@ -157,12 +157,14 @@ export function useAddBarSuggestions({
 			lt: SUGGESTION_INTERVAL_END,
 			order: 'desc',
 		},
+		limit: 20,
 		skip: !showRichSuggestions,
 		key: 'addBar_frequencyFoods',
 	});
 
 	const expiresSoonItems = useExpiresSoonItems({
 		skip: !showRichSuggestions,
+		limit: 20,
 		key: 'addBar_expiresSoon',
 	});
 
@@ -206,6 +208,7 @@ export function useAddBarSuggestions({
 			lt: SUGGESTION_INTERVAL_END,
 			order: 'desc',
 		},
+		limit: 10,
 		skip: !showRichSuggestions,
 		key: 'addBar_frequencyRecipes',
 	});
@@ -238,6 +241,7 @@ export function useAddBarSuggestions({
 			where: 'purchaseCount',
 			order: 'desc',
 		},
+		limit: 20,
 		key: 'addBar_favoriteFoods',
 		skip: !!foodSearchPrompt,
 	});
@@ -246,11 +250,12 @@ export function useAddBarSuggestions({
 		return mapFoodsToSuggestions(favoriteFoods, hasFewSuggestions ? 20 : 10);
 	}, [favoriteFoods, mapFoodsToSuggestions, hasFewSuggestions]);
 
-	const { data: searchRecipes } = hooks.useAllRecipesUnsuspended({
+	const searchRecipes = hooks.useAllRecipes({
 		index: {
 			where: 'titleMatch',
 			startsWith: suggestionPrompt?.toLowerCase().trim() ?? '',
 		},
+		limit: 10,
 		skip: !showRichSuggestions || !suggestionPrompt,
 		key: 'addBar_searchRecipes',
 	});
