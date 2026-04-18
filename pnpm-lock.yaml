@@ -16,8 +16,8 @@ catalogs:
       specifier: 2.0.2
       version: 2.0.2
     '@a-type/ui':
-      specifier: ^5.0.21
-      version: 5.0.21
+      specifier: ^5.0.22
+      version: 5.0.22
     '@a-type/utils':
       specifier: ^1.1.9
       version: 1.1.9
@@ -278,7 +278,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.21(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -407,7 +407,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.21(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -551,7 +551,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.21(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -816,7 +816,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.21(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -925,7 +925,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.21(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1040,7 +1040,7 @@ importers:
         version: 0.2.15(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.21(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1164,7 +1164,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.21(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1291,7 +1291,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.21(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1335,7 +1335,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.21(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@biscuits/graphql':
         specifier: workspace:*
         version: link:../../../packages/graphql
@@ -1430,7 +1430,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.21(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1545,7 +1545,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.21(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@astrojs/check':
         specifier: ^0.9.4
         version: 0.9.4(prettier@3.6.2)(typescript@5.9.3)
@@ -1593,7 +1593,7 @@ importers:
         version: 2.1.3
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.21(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1741,7 +1741,7 @@ importers:
     devDependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.21(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@unocss/transformer-variant-group':
         specifier: 'catalog:'
         version: 66.6.7
@@ -1753,10 +1753,10 @@ importers:
     dependencies:
       '@a-type/auth-ui':
         specifier: 'catalog:'
-        version: 2.0.2(@a-type/ui@5.0.21(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))))(react@19.2.4)
+        version: 2.0.2(@a-type/ui@5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))))(react@19.2.4)
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.21(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       '@biscuits/apps':
         specifier: workspace:*
         version: link:../packages/apps
@@ -2077,8 +2077,8 @@ packages:
       react: ^18.3.1
       react-dom: ^18.3.1
 
-  '@a-type/ui@5.0.21':
-    resolution: {integrity: sha512-6DWRcN2EAXe44UpxqeXFHnm9HrJeD00LbVHAjauIV91acm+N0Ep3UmK639PP37WO4o+P1RSMOuwfhD2Cc83pPg==}
+  '@a-type/ui@5.0.22':
+    resolution: {integrity: sha512-LA1ZOzDPyVrUqHZ8bZz2pLa9gnGF0nG/7YSmI5VfgDwnjR8xZhIPjdZysAEiYUO5M0j9y6luqTz44ci0+H3OhA==}
     peerDependencies:
       react: ^19
       react-dom: ^19
@@ -2821,6 +2821,10 @@ packages:
     resolution: {integrity: sha512-Q/N6JNWvIvPnLDvjlE1OUBLPQHH6l3CltCEsHIujp45zQUSSh8K+gHnaEX45yAT1nyngnINhvWtzN+Nb9D8RAQ==}
     engines: {node: '>=6.9.0'}
 
+  '@babel/runtime@7.29.2':
+    resolution: {integrity: sha512-JiDShH45zKHWyGe4ZNVRrCjBz8Nh9TMmZG1kh4QTK8hCBTWBi8Da+i7s1fJw7/lYpM4ccepSNfqzZ/QvABBi5g==}
+    engines: {node: '>=6.9.0'}
+
   '@babel/template@7.27.2':
     resolution: {integrity: sha512-LPDZ85aEJyYSd18/DkjNh4/y1ntkE5KwUHWTiqgRxruuZL2F1yuHligVHLvcHY2vMHXttKFpJn6LwfI7cw7ODw==}
     engines: {node: '>=6.9.0'}
@@ -2841,19 +2845,21 @@ packages:
     resolution: {integrity: sha512-qQ5m48eI/MFLQ5PxQj4PFaprjyCTLI37ElWMmNs0K8Lk3dVeOdNpB3ks8jc7yM5CDmVC73eMVk/trk3fgmrUpA==}
     engines: {node: '>=6.9.0'}
 
-  '@base-ui/react@1.0.0':
-    resolution: {integrity: sha512-4USBWz++DUSLTuIYpbYkSgy1F9ZmNG9S/lXvlUN6qMK0P0RlW+6eQmDUB4DgZ7HVvtXl4pvi4z5J2fv6Z3+9hg==}
+  '@base-ui/react@1.4.0':
+    resolution: {integrity: sha512-QcqdVbr/+ba2/RAKJIV1PV6S02Q5+r6a4Eym8ndBw+ZbBILkkmQAyRxXCg/pArrHnkrGeU8goe26aw0h6eE8pg==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
+      '@date-fns/tz': ^1.2.0
       '@types/react': ^17 || ^18 || ^19
+      date-fns: ^4.0.0
       react: ^17 || ^18 || ^19
       react-dom: ^17 || ^18 || ^19
     peerDependenciesMeta:
       '@types/react':
         optional: true
 
-  '@base-ui/utils@0.2.3':
-    resolution: {integrity: sha512-/CguQ2PDaOzeVOkllQR8nocJ0FFIDqsWIcURsVmm53QGo8NhFNpePjNlyPIB41luxfOqnG7PU0xicMEw3ls7XQ==}
+  '@base-ui/utils@0.2.7':
+    resolution: {integrity: sha512-nXYKhiL/0JafyJE8PfcflipGftOftlIwKd72rU15iZ1M5yqgg5J9P8NHU71GReDuXco5MJA/eVQqUT5WRqX9sA==}
     peerDependencies:
       '@types/react': ^17 || ^18 || ^19
       react: ^17 || ^18 || ^19
@@ -3809,20 +3815,20 @@ packages:
   '@fastify/busboy@3.1.1':
     resolution: {integrity: sha512-5DGmA8FTdB2XbDeEwc/5ZXBl6UbBAyBOOLlPuBnZ/N1SwdH9Ii+cOX3tBROlDgcTXxjOYnLMVoKk9+FXAw0CJw==}
 
-  '@floating-ui/core@1.7.3':
-    resolution: {integrity: sha512-sGnvb5dmrJaKEZ+LDIpguvdX3bDlEllmv4/ClQ9awcmCZrlx5jQyyMWFM5kBI+EyNOCDDiKk8il0zeuX3Zlg/w==}
+  '@floating-ui/core@1.7.5':
+    resolution: {integrity: sha512-1Ih4WTWyw0+lKyFMcBHGbb5U5FtuHJuujoyyr5zTaWS5EYMeT6Jb2AuDeftsCsEuchO+mM2ij5+q9crhydzLhQ==}
 
-  '@floating-ui/dom@1.7.4':
-    resolution: {integrity: sha512-OOchDgh4F2CchOX94cRVqhvy7b3AFb+/rQXyswmzmGakRfkMgoWVjfnLWkRirfLEfuD4ysVW16eXzwt3jHIzKA==}
+  '@floating-ui/dom@1.7.6':
+    resolution: {integrity: sha512-9gZSAI5XM36880PPMm//9dfiEngYoC6Am2izES1FF406YFsjvyBMmeJ2g4SAju3xWwtuynNRFL2s9hgxpLI5SQ==}
 
-  '@floating-ui/react-dom@2.1.6':
-    resolution: {integrity: sha512-4JX6rEatQEvlmgU80wZyq9RT96HZJa88q8hp0pBd+LrczeDI4o6uA2M+uvxngVHo4Ihr8uibXxH6+70zhAFrVw==}
+  '@floating-ui/react-dom@2.1.8':
+    resolution: {integrity: sha512-cC52bHwM/n/CxS87FH0yWdngEZrjdtLW/qVruo68qg+prK7ZQ4YGdut2GyDVpoGeAYe/h899rVeOVm6Oi40k2A==}
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
 
-  '@floating-ui/utils@0.2.10':
-    resolution: {integrity: sha512-aGTxbpbg8/b5JfU1HXSrbH3wXZuLPJcNEcZQFMxLs3oSzgtVu6nFPkbbGGUvBcUjKV2YyB9Wxxabo+HEH9tcRQ==}
+  '@floating-ui/utils@0.2.11':
+    resolution: {integrity: sha512-RiB/yIh78pcIxl6lLMG0CgBXAZ2Y0eVHqMPYugu+9U0AeT6YBeiJpf7lbdJNIugFP5SIjwNRgo4DhR1Qxi26Gg==}
 
   '@googlemaps/google-maps-services-js@3.4.2':
     resolution: {integrity: sha512-QjxiJSt8woyPaaQIUUDNL1nRfCEXTiv8KfJSNq/YzKEUVXABT75GLG+Zo267UwOcq70n8OsZbaro5VrY962mJg==}
@@ -10263,9 +10269,6 @@ packages:
     resolution: {integrity: sha512-Bh7QjT8/SuKUIfObSXNHNSK6WHo6J1tHCqJsuaFDP7gP0fkzSfTxI8y85JrppZ0h8l0maIgc2tfuZQ6/t3GtnQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
 
-  tabbable@6.3.0:
-    resolution: {integrity: sha512-EIHvdY5bPLuWForiR/AN2Bxngzpuwn1is4asboytXtpTgsArc+WmSJKVLlhdh71u7jFcryDqB2A8lQvj78MkyQ==}
-
   table-layout@1.0.2:
     resolution: {integrity: sha512-qd/R7n5rQTRFi+Zf2sk5XVVd9UQl6ZkduPFC3S7WEGJAmetDTjY3qPN50eSKzwuzEyQKy5TN2TiZdkIjos2L6A==}
     engines: {node: '>=8.0.0'}
@@ -11462,9 +11465,9 @@ snapshots:
 
   '@a-type/auth-fetch@2.1.3': {}
 
-  '@a-type/auth-ui@2.0.2(@a-type/ui@5.0.21(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))))(react@19.2.4)':
+  '@a-type/auth-ui@2.0.2(@a-type/ui@5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))))(react@19.2.4)':
     dependencies:
-      '@a-type/ui': 5.0.21(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+      '@a-type/ui': 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
       react: 19.2.4
 
   '@a-type/auth@1.3.16':
@@ -11505,10 +11508,10 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@a-type/ui@5.0.21(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))':
+  '@a-type/ui@5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))':
     dependencies:
       '@a-type/utils': 1.1.9
-      '@base-ui/react': 1.0.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@base-ui/react': 1.4.0(@types/react@19.2.14)(date-fns@4.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@emotion/is-prop-valid': 1.4.0
       '@unocss/preset-mini': 66.5.4
       '@unocss/preset-wind3': 66.5.4
@@ -11530,12 +11533,13 @@ snapshots:
       unocss-preset-completion: 0.3.0
       valtio: 2.3.1(@types/react@19.2.14)(react@19.2.4)
     transitivePeerDependencies:
+      - '@date-fns/tz'
       - '@types/react'
 
-  '@a-type/ui@5.0.21(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))':
+  '@a-type/ui@5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))':
     dependencies:
       '@a-type/utils': 1.1.9
-      '@base-ui/react': 1.0.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@base-ui/react': 1.4.0(@types/react@19.2.14)(date-fns@4.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@emotion/is-prop-valid': 1.4.0
       '@unocss/preset-mini': 66.5.4
       '@unocss/preset-wind3': 66.5.4
@@ -11557,6 +11561,7 @@ snapshots:
       unocss-preset-completion: 0.3.0
       valtio: 2.3.1(@types/react@19.2.14)(react@19.2.4)
     transitivePeerDependencies:
+      - '@date-fns/tz'
       - '@types/react'
 
   '@a-type/utils@1.1.9': {}
@@ -12793,6 +12798,8 @@ snapshots:
 
   '@babel/runtime@7.28.4': {}
 
+  '@babel/runtime@7.29.2': {}
+
   '@babel/template@7.27.2':
     dependencies:
       '@babel/code-frame': 7.27.1
@@ -12833,24 +12840,23 @@ snapshots:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
 
-  '@base-ui/react@1.0.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@base-ui/react@1.4.0(@types/react@19.2.14)(date-fns@4.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
-      '@babel/runtime': 7.28.4
-      '@base-ui/utils': 0.2.3(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      '@floating-ui/react-dom': 2.1.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      '@floating-ui/utils': 0.2.10
+      '@babel/runtime': 7.29.2
+      '@base-ui/utils': 0.2.7(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@floating-ui/react-dom': 2.1.8(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@floating-ui/utils': 0.2.11
+      date-fns: 4.1.0
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
-      reselect: 5.1.1
-      tabbable: 6.3.0
       use-sync-external-store: 1.6.0(react@19.2.4)
     optionalDependencies:
       '@types/react': 19.2.14
 
-  '@base-ui/utils@0.2.3(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@base-ui/utils@0.2.7(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
-      '@babel/runtime': 7.28.4
-      '@floating-ui/utils': 0.2.10
+      '@babel/runtime': 7.29.2
+      '@floating-ui/utils': 0.2.11
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
       reselect: 5.1.1
@@ -13441,22 +13447,22 @@ snapshots:
 
   '@fastify/busboy@3.1.1': {}
 
-  '@floating-ui/core@1.7.3':
+  '@floating-ui/core@1.7.5':
     dependencies:
-      '@floating-ui/utils': 0.2.10
+      '@floating-ui/utils': 0.2.11
 
-  '@floating-ui/dom@1.7.4':
+  '@floating-ui/dom@1.7.6':
     dependencies:
-      '@floating-ui/core': 1.7.3
-      '@floating-ui/utils': 0.2.10
+      '@floating-ui/core': 1.7.5
+      '@floating-ui/utils': 0.2.11
 
-  '@floating-ui/react-dom@2.1.6(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@floating-ui/react-dom@2.1.8(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
-      '@floating-ui/dom': 1.7.4
+      '@floating-ui/dom': 1.7.6
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
 
-  '@floating-ui/utils@0.2.10': {}
+  '@floating-ui/utils@0.2.11': {}
 
   '@googlemaps/google-maps-services-js@3.4.2':
     dependencies:
@@ -21022,8 +21028,6 @@ snapshots:
   synckit@0.11.12:
     dependencies:
       '@pkgr/core': 0.2.9
-
-  tabbable@6.3.0: {}
 
   table-layout@1.0.2:
     dependencies:
