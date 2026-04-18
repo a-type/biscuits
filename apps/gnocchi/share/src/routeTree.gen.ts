@@ -39,7 +39,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$slug': typeof SlugRoute
   '/p/$planId/$slug': typeof PPlanIdSlugRoute
-  '/p/$planId': typeof PPlanIdIndexRoute
+  '/p/$planId/': typeof PPlanIdIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -56,7 +56,7 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$slug' | '/p/$planId/$slug' | '/p/$planId'
+  fullPaths: '/' | '/$slug' | '/p/$planId/$slug' | '/p/$planId/'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/$slug' | '/p/$planId/$slug' | '/p/$planId'
   id: '__root__' | '/' | '/$slug' | '/p/$planId/$slug' | '/p/$planId/'
@@ -88,7 +88,7 @@ declare module '@tanstack/react-router' {
     '/p/$planId/': {
       id: '/p/$planId/'
       path: '/p/$planId'
-      fullPath: '/p/$planId'
+      fullPath: '/p/$planId/'
       preLoaderRoute: typeof PPlanIdIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
