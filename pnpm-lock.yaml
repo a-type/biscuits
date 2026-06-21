@@ -16,11 +16,17 @@ catalogs:
       specifier: 2.0.2
       version: 2.0.2
     '@a-type/ui':
-      specifier: ^5.0.22
-      version: 5.0.22
+      specifier: ^6.0.0
+      version: 6.0.0
     '@a-type/utils':
       specifier: ^1.1.9
       version: 1.1.9
+    '@arbor-css/core':
+      specifier: ^0.0.127
+      version: 0.0.127
+    '@arbor-css/postcss':
+      specifier: ^0.0.127
+      version: 0.0.127
     '@cloudflare/vite-plugin':
       specifier: ^1.31.0
       version: 1.31.0
@@ -165,9 +171,6 @@ catalogs:
     typescript-eslint:
       specifier: 8.58.0
       version: 8.58.0
-    unocss:
-      specifier: 66.6.7
-      version: 66.6.7
     valtio:
       specifier: ^2.3.1
       version: 2.3.1
@@ -278,10 +281,16 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 6.0.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
+      '@arbor-css/core':
+        specifier: 'catalog:'
+        version: 0.0.127
+      '@arbor-css/postcss':
+        specifier: 'catalog:'
+        version: 0.0.127(@arbor-css/core@0.0.127)
       '@biscuits/client':
         specifier: workspace:*
         version: link:../../../packages/client
@@ -320,7 +329,7 @@ importers:
         version: 1.9.2(graphql@16.11.0)(typescript@5.9.3)
       motion:
         specifier: ^12.23.12
-        version: 12.23.12(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 12.23.12(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react:
         specifier: 'catalog:'
         version: 19.2.4
@@ -333,9 +342,6 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
-      unocss:
-        specifier: 'catalog:'
-        version: 66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       valtio:
         specifier: 'catalog:'
         version: 2.3.1(@types/react@19.2.14)(react@19.2.4)
@@ -407,7 +413,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 6.0.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -469,6 +475,12 @@ importers:
         specifier: 'catalog:'
         version: 19.2.4(react@19.2.4)
     devDependencies:
+      '@arbor-css/core':
+        specifier: 'catalog:'
+        version: 0.0.127
+      '@arbor-css/postcss':
+        specifier: 'catalog:'
+        version: 0.0.127(@arbor-css/core@0.0.127)
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
         version: 1.31.0(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(workerd@1.20260401.1)(wrangler@4.80.0)
@@ -487,9 +499,6 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
-      unocss:
-        specifier: 'catalog:'
-        version: 66.6.7(@emnapi/runtime@1.9.2)(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       vite:
         specifier: 'catalog:'
         version: 8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
@@ -551,10 +560,16 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 6.0.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
+      '@arbor-css/core':
+        specifier: 'catalog:'
+        version: 0.0.127
+      '@arbor-css/postcss':
+        specifier: 'catalog:'
+        version: 0.0.127(@arbor-css/core@0.0.127)
       '@biscuits/client':
         specifier: workspace:*
         version: link:../../../packages/client
@@ -668,7 +683,7 @@ importers:
         version: 0.3.3
       motion:
         specifier: 'catalog:'
-        version: 12.23.24(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 12.23.24(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       pako:
         specifier: ^2.1.0
         version: 2.1.0
@@ -705,9 +720,6 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
-      unocss:
-        specifier: 'catalog:'
-        version: 66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       valtio:
         specifier: 'catalog:'
         version: 2.3.1(@types/react@19.2.14)(react@19.2.4)
@@ -816,10 +828,16 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 6.0.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
+      '@arbor-css/core':
+        specifier: 'catalog:'
+        version: 0.0.127
+      '@arbor-css/postcss':
+        specifier: 'catalog:'
+        version: 0.0.127(@arbor-css/core@0.0.127)
       '@biscuits/client':
         specifier: workspace:*
         version: link:../../../packages/client
@@ -858,7 +876,7 @@ importers:
         version: 1.9.2(graphql@16.11.0)(typescript@5.9.3)
       motion:
         specifier: 'catalog:'
-        version: 12.23.24(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 12.23.24(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react:
         specifier: 'catalog:'
         version: 19.2.4
@@ -868,9 +886,6 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
-      unocss:
-        specifier: 'catalog:'
-        version: 66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       valtio:
         specifier: 'catalog:'
         version: 2.3.1(@types/react@19.2.14)(react@19.2.4)
@@ -925,10 +940,16 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 6.0.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
+      '@arbor-css/core':
+        specifier: 'catalog:'
+        version: 0.0.127
+      '@arbor-css/postcss':
+        specifier: 'catalog:'
+        version: 0.0.127(@arbor-css/core@0.0.127)
       '@biscuits/client':
         specifier: workspace:*
         version: link:../../../packages/client
@@ -977,9 +998,6 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
-      unocss:
-        specifier: 'catalog:'
-        version: 66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       valtio:
         specifier: 'catalog:'
         version: 2.3.1(@types/react@19.2.14)(react@19.2.4)
@@ -1040,10 +1058,16 @@ importers:
         version: 0.2.15(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 6.0.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
+      '@arbor-css/core':
+        specifier: 'catalog:'
+        version: 0.0.127
+      '@arbor-css/postcss':
+        specifier: 'catalog:'
+        version: 0.0.127(@arbor-css/core@0.0.127)
       '@biscuits/client':
         specifier: workspace:*
         version: link:../../../packages/client
@@ -1101,9 +1125,6 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
-      unocss:
-        specifier: 'catalog:'
-        version: 66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       valtio:
         specifier: 'catalog:'
         version: 2.3.1(@types/react@19.2.14)(react@19.2.4)
@@ -1164,10 +1185,16 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 6.0.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
+      '@arbor-css/core':
+        specifier: 'catalog:'
+        version: 0.0.127
+      '@arbor-css/postcss':
+        specifier: 'catalog:'
+        version: 0.0.127(@arbor-css/core@0.0.127)
       '@biscuits/client':
         specifier: workspace:*
         version: link:../../../packages/client
@@ -1237,9 +1264,6 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
-      unocss:
-        specifier: 'catalog:'
-        version: 66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       valtio:
         specifier: 'catalog:'
         version: 2.3.1(@types/react@19.2.14)(react@19.2.4)
@@ -1291,7 +1315,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 6.0.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1335,7 +1359,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 6.0.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@biscuits/graphql':
         specifier: workspace:*
         version: link:../../../packages/graphql
@@ -1370,6 +1394,12 @@ importers:
         specifier: 'catalog:'
         version: 19.2.4(react@19.2.4)
     devDependencies:
+      '@arbor-css/core':
+        specifier: 'catalog:'
+        version: 0.0.127
+      '@arbor-css/postcss':
+        specifier: 'catalog:'
+        version: 0.0.127(@arbor-css/core@0.0.127)
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
         version: 1.31.0(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(workerd@1.20260401.1)(wrangler@4.80.0)
@@ -1388,9 +1418,6 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
-      unocss:
-        specifier: 'catalog:'
-        version: 66.6.7(@emnapi/runtime@1.9.2)(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       vite:
         specifier: 'catalog:'
         version: 8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
@@ -1430,10 +1457,16 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 6.0.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
+      '@arbor-css/core':
+        specifier: 'catalog:'
+        version: 0.0.127
+      '@arbor-css/postcss':
+        specifier: 'catalog:'
+        version: 0.0.127(@arbor-css/core@0.0.127)
       '@biscuits/client':
         specifier: workspace:*
         version: link:../../../packages/client
@@ -1497,9 +1530,6 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
-      unocss:
-        specifier: 'catalog:'
-        version: 66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       valtio:
         specifier: 'catalog:'
         version: 2.3.1(@types/react@19.2.14)(react@19.2.4)
@@ -1545,7 +1575,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 6.0.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@astrojs/check':
         specifier: ^0.9.4
         version: 0.9.4(prettier@3.6.2)(typescript@5.9.3)
@@ -1568,6 +1598,12 @@ importers:
         specifier: ^5.0.5
         version: 5.0.9(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.52.4)(terser@5.37.0)(tsx@4.20.6)(typescript@5.9.3)(yaml@2.6.1)
     devDependencies:
+      '@arbor-css/core':
+        specifier: 'catalog:'
+        version: 0.0.127
+      '@arbor-css/postcss':
+        specifier: 'catalog:'
+        version: 0.0.127(@arbor-css/core@0.0.127)
       '@unocss/astro':
         specifier: 66.0.0
         version: 66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
@@ -1580,9 +1616,6 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
-      unocss:
-        specifier: 'catalog:'
-        version: 66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
 
   packages/apps: {}
 
@@ -1593,7 +1626,7 @@ importers:
         version: 2.1.3
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 6.0.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1632,7 +1665,7 @@ importers:
         version: 3.3.1
       motion:
         specifier: 'catalog:'
-        version: 12.23.24(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 12.23.24(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react:
         specifier: 'catalog:'
         version: 19.2.4
@@ -1646,6 +1679,12 @@ importers:
         specifier: 'catalog:'
         version: 2.3.1(@types/react@19.2.14)(react@19.2.4)
     devDependencies:
+      '@arbor-css/core':
+        specifier: 'catalog:'
+        version: 0.0.127
+      '@arbor-css/postcss':
+        specifier: 'catalog:'
+        version: 0.0.127(@arbor-css/core@0.0.127)
       '@types/copy':
         specifier: ^0.3.5
         version: 0.3.5
@@ -1658,9 +1697,6 @@ importers:
       copy:
         specifier: ^0.3.2
         version: 0.3.2
-      unocss:
-        specifier: 'catalog:'
-        version: 66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       vite-plugin-pwa:
         specifier: 'catalog:'
         version: 1.2.0(@vite-pwa/assets-generator@1.0.2)(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(workbox-window@7.4.0)
@@ -1741,22 +1777,31 @@ importers:
     devDependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 6.0.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@arbor-css/core':
+        specifier: 'catalog:'
+        version: 0.0.127
+      '@arbor-css/postcss':
+        specifier: 'catalog:'
+        version: 0.0.127(@arbor-css/core@0.0.127)
       '@unocss/transformer-variant-group':
         specifier: 'catalog:'
         version: 66.6.7
-      unocss:
-        specifier: 'catalog:'
-        version: 66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
 
   web:
     dependencies:
       '@a-type/auth-ui':
         specifier: 'catalog:'
-        version: 2.0.2(@a-type/ui@5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))))(react@19.2.4)
+        version: 2.0.2(@a-type/ui@6.0.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+        version: 6.0.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@arbor-css/core':
+        specifier: 'catalog:'
+        version: 0.0.127
+      '@arbor-css/postcss':
+        specifier: 'catalog:'
+        version: 0.0.127(@arbor-css/core@0.0.127)
       '@biscuits/apps':
         specifier: workspace:*
         version: link:../packages/apps
@@ -1838,9 +1883,6 @@ importers:
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
-      unocss:
-        specifier: 'catalog:'
-        version: 66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       vite:
         specifier: 'catalog:'
         version: 8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
@@ -2077,12 +2119,11 @@ packages:
       react: ^18.3.1
       react-dom: ^18.3.1
 
-  '@a-type/ui@5.0.22':
-    resolution: {integrity: sha512-LA1ZOzDPyVrUqHZ8bZz2pLa9gnGF0nG/7YSmI5VfgDwnjR8xZhIPjdZysAEiYUO5M0j9y6luqTz44ci0+H3OhA==}
+  '@a-type/ui@6.0.0':
+    resolution: {integrity: sha512-W72BeynXr30iZ/AzrrgwTH1WAlsJSZgUSOvZQhs6wDdM1HoMFe+2yqVUMzfKpzI85MFdRX42ipN+pyJFVYh98A==}
     peerDependencies:
       react: ^19
       react-dom: ^19
-      unocss: ^66
 
   '@a-type/utils@1.1.9':
     resolution: {integrity: sha512-uVk5+Q0jKFCaGPrHybp7LNnfrp4BKurJNYEzoOAfCsDuri1vewmbXKg35ClsTQX2lxU3xPNm/2l/0mwP8NdpGg==}
@@ -2093,9 +2134,6 @@ packages:
 
   '@antfu/install-pkg@1.0.0':
     resolution: {integrity: sha512-xvX6P/lo1B3ej0OsaErAjqgFYzYVcJpamjLAFLYh9vRJngBrMoUG7aVnrGTeqM7yxbyTD5p3F2+0/QUEh8Vzhw==}
-
-  '@antfu/install-pkg@1.1.0':
-    resolution: {integrity: sha512-MGQsmw10ZyI+EJo45CdSER4zEb+p31LpDAFp2Z3gkSd1yqVZGi0Ebx++YTEMonJy4oChEMLsxZ64j8FH6sSqtQ==}
 
   '@antfu/utils@8.1.1':
     resolution: {integrity: sha512-Mex9nXf9vR6AhcXmMrlz/HVgYYZpVGJ6YlPgwl7UnaFpnshXs6EK/oa5Gpf3CzENMjkvEx2tQtntGnb7UtSTOQ==}
@@ -2123,6 +2161,36 @@ packages:
         optional: true
       subscriptions-transport-ws:
         optional: true
+
+  '@arbor-css/core@0.0.127':
+    resolution: {integrity: sha512-kbzdNhZH8KpKADToPAJQbx4d+jBYbnWOB9cW1PsGqWq/EiX3mrk5NrvZVa1qK4qfpmf3BOKSkZwioWOeV5VijQ==}
+    hasBin: true
+
+  '@arbor-css/css-eval@0.0.127':
+    resolution: {integrity: sha512-Zc2L/YfpVw9ivAjok+NN4rdz6tYIWHQ72jJVLsLIDX93wXAS3tAP4aSRjD7DQRuSa5K/3id225xhuN1pn+THeQ==}
+
+  '@arbor-css/functions@0.0.127':
+    resolution: {integrity: sha512-OMKtpNDI8oJHEuju0g7Cq0D9hW4JPq9e/ZTakFUSyUMHa7GXgUbD3KpOEJYdvkQQChXCd6ZMyOfB1fZbLr4nBg==}
+
+  '@arbor-css/globals@0.0.127':
+    resolution: {integrity: sha512-bv4PUwrb1K8Q9n9CCL9IslBevVDVo8NER408GQwHvecCENpQLRwpbU+i/rOseZ1/WuZeMWZYrXfB++krGyStvw==}
+
+  '@arbor-css/modes@0.0.127':
+    resolution: {integrity: sha512-3KYY0mMIRSHb/mF4oktfADk4F3j8nBqI9PkychVL/DmWY+GF4sAfFuQOiAnEXSyrX6L74Odsrq9kbyUNVQXk3A==}
+
+  '@arbor-css/postcss@0.0.127':
+    resolution: {integrity: sha512-dvGdx3zXJKBYzNiXkg2Q33AmnhDwtiSuJZto9gZWHFVVReVyse5jIk46OlN9xm+IaEvKlb0xTDhK4dE13oG8Zg==}
+    peerDependencies:
+      '@arbor-css/core': '*'
+
+  '@arbor-css/preset@0.0.127':
+    resolution: {integrity: sha512-ReydWWOJ7po3WhMjOmbb1nOYOtCe0RZHUFgArLubUVOqt60VUmM5R9yd69kSVHeTn3FHoSFPSLNvLBH2Lu22uQ==}
+
+  '@arbor-css/tokens@0.0.127':
+    resolution: {integrity: sha512-lmDic+VO6oisBU43zb9H0OD2VnxDffoH801oPWK9q7HjGd09j7IeCaGPTGu2XiHfUsnG+7MMuhZFXD167k7qmg==}
+
+  '@arbor-css/util@0.0.127':
+    resolution: {integrity: sha512-pVt8Hlrg1Qs5s5KD5i3bHNClv7AohOUXcFq+2bYQmYGuYJ/ellGtom3oCCyUNiDghKOIHP3tN5k8cm7/YIBS7Q==}
 
   '@astrojs/check@0.9.4':
     resolution: {integrity: sha512-IOheHwCtpUfvogHHsvu0AbeRZEnjJg3MopdLddkJE70mULItS/Vh37BHcI00mcOJcH1vhD3odbpvWokpxam7xA==}
@@ -2845,8 +2913,8 @@ packages:
     resolution: {integrity: sha512-qQ5m48eI/MFLQ5PxQj4PFaprjyCTLI37ElWMmNs0K8Lk3dVeOdNpB3ks8jc7yM5CDmVC73eMVk/trk3fgmrUpA==}
     engines: {node: '>=6.9.0'}
 
-  '@base-ui/react@1.4.0':
-    resolution: {integrity: sha512-QcqdVbr/+ba2/RAKJIV1PV6S02Q5+r6a4Eym8ndBw+ZbBILkkmQAyRxXCg/pArrHnkrGeU8goe26aw0h6eE8pg==}
+  '@base-ui/react@1.6.0':
+    resolution: {integrity: sha512-/jzjTWJYXhRFO45Bev9lc3cHbmjzCMpUqbMZ2AgKy/z25mY9B6shGSNcXcjQar9n5doM0KYW1W8fcFv2jZBuMw==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       '@date-fns/tz': ^1.2.0
@@ -2855,11 +2923,15 @@ packages:
       react: ^17 || ^18 || ^19
       react-dom: ^17 || ^18 || ^19
     peerDependenciesMeta:
+      '@date-fns/tz':
+        optional: true
       '@types/react':
         optional: true
+      date-fns:
+        optional: true
 
-  '@base-ui/utils@0.2.7':
-    resolution: {integrity: sha512-nXYKhiL/0JafyJE8PfcflipGftOftlIwKd72rU15iZ1M5yqgg5J9P8NHU71GReDuXco5MJA/eVQqUT5WRqX9sA==}
+  '@base-ui/utils@0.3.1':
+    resolution: {integrity: sha512-gFFiltORVmW/N6IILTGxizP3PBpVpysqML1ALY5Vk0mH+7faVkCknOU31goYHN5Aoek2dkjxva1XOD2Ce9WuIg==}
     peerDependencies:
       '@types/react': ^17 || ^18 || ^19
       react: ^17 || ^18 || ^19
@@ -2997,12 +3069,6 @@ packages:
 
   '@emnapi/runtime@1.9.2':
     resolution: {integrity: sha512-3U4+MIWHImeyu1wnmVygh5WlgfYDtyf0k8AbLhMFxOipihf6nrWC4syIm/SwEeec0mNSafiiNnMJwbza/Is6Lw==}
-
-  '@emotion/is-prop-valid@1.4.0':
-    resolution: {integrity: sha512-QgD4fyscGcbbKwJmqNvUMSE02OsHUa+lAWKdEUIJKgqe5IwRSKd7+KhibEWdaKwgjLj0DRSHA9biAIqGBk05lw==}
-
-  '@emotion/memoize@0.9.0':
-    resolution: {integrity: sha512-30FAj7/EoJ5mwVPOWhAyCX+FPfMDrVecJAM+Iw9NRoSl4BBAQeqj4cApHHUXOVvIPgLVDsCFoz/hGD+5QQD1GQ==}
 
   '@envelop/core@5.3.2':
     resolution: {integrity: sha512-06Mu7fmyKzk09P2i2kHpGfItqLLgCq7uO5/nX4fc/iHMplWPNuAx4iYR+WXUQoFHDnP6EUbceQNQ5iyeMz9f3g==}
@@ -3973,9 +4039,6 @@ packages:
   '@iconify/utils@2.3.0':
     resolution: {integrity: sha512-GmQ78prtwYW6EtzXRU1rY+KwOKfz32PD7iJh6Iyqw68GiKuoZ2A6pRtzWONz5VQJbp50mEjXh/7NkumtrAgRKA==}
 
-  '@iconify/utils@3.1.0':
-    resolution: {integrity: sha512-Zlzem1ZXhI1iHeeERabLNzBHdOa4VhQbqAcOQaMKuTuyZCpwKbC2R4Dd0Zo3g9EAc+Y4fiarO8HIHRAth7+skw==}
-
   '@img/colour@1.1.0':
     resolution: {integrity: sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ==}
     engines: {node: '>=18'}
@@ -4269,6 +4332,9 @@ packages:
   '@lit-labs/ssr-dom-shim@1.4.0':
     resolution: {integrity: sha512-ficsEARKnmmW5njugNYKipTm4SFnbik7CXtoencDZzmzo/dQ+2Q0bgkzJuoJP20Aj0F+izzJjOqsnkd6F/o1bw==}
 
+  '@lit-labs/ssr-dom-shim@1.6.0':
+    resolution: {integrity: sha512-VHb0ALPMTlgKjM6yIxxoQNnpKyUKLD04VzeQdsiXkMqkvYlAHxq9glGLmgbb889/1GsohSOAjvQYoiBppXFqrQ==}
+
   '@lit/reactive-element@2.1.1':
     resolution: {integrity: sha512-N+dm5PAYdQ8e6UlywyyrgI2t++wFGXfHx+dSJ1oBrg6FAxUj40jId++EaRm80MKX5JnlH1sBsyZ5h0bcZKemCg==}
 
@@ -4349,128 +4415,6 @@ packages:
 
   '@oslojs/encoding@1.1.0':
     resolution: {integrity: sha512-70wQhgYmndg4GCPxPPxPGevRKqTIJ2Nh4OkiMWmDAVYsTQ+Ta7Sq+rPevXyXGdzr30/qZBnyOalCszoMxlyldQ==}
-
-  '@oxc-parser/binding-android-arm-eabi@0.115.0':
-    resolution: {integrity: sha512-VoB2rhgoqgYf64d6Qs5emONQW8ASiTc0xp+aUE4JUhxjX+0pE3gblTYDO0upcN5vt9UlBNmUhAwfSifkfre7nw==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    cpu: [arm]
-    os: [android]
-
-  '@oxc-parser/binding-android-arm64@0.115.0':
-    resolution: {integrity: sha512-lWRX75u+gqfB4TF3pWCHuvhaeneAmRl2b2qNBcl4S6yJ0HtnT4VXOMEZrq747i4Zby1ZTxj6mtOe678Bg8gRLw==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    cpu: [arm64]
-    os: [android]
-
-  '@oxc-parser/binding-darwin-arm64@0.115.0':
-    resolution: {integrity: sha512-ii/oOZjfGY1aszXTy29Z5DRyCEnBOrAXDVCvfdfXFQsOZlbbOa7NMHD7D+06YFe5qdxfmbWAYv4yn6QJi/0d2g==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    cpu: [arm64]
-    os: [darwin]
-
-  '@oxc-parser/binding-darwin-x64@0.115.0':
-    resolution: {integrity: sha512-R/sW/p8l77wglbjpMcF+h/3rWbp9zk1mRP3U14mxTYIC2k3m+aLBpXXgk2zksqf9qKk5mcc4GIYsuCn9l8TgDg==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    cpu: [x64]
-    os: [darwin]
-
-  '@oxc-parser/binding-freebsd-x64@0.115.0':
-    resolution: {integrity: sha512-CSJ5ldNm9wIGGkhaIJeGmxRMZbgxThRN+X1ufYQQUNi5jZDV/U3C2QDMywpP93fczNBj961hXtcUPO/oVGq4Pw==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    cpu: [x64]
-    os: [freebsd]
-
-  '@oxc-parser/binding-linux-arm-gnueabihf@0.115.0':
-    resolution: {integrity: sha512-uWFwssE5dHfQ8lH+ktrsD9JA49+Qa0gtxZHUs62z1e91NgGz6O7jefHGI6aygNyKNS45pnnBSDSP/zV977MsOQ==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    cpu: [arm]
-    os: [linux]
-
-  '@oxc-parser/binding-linux-arm-musleabihf@0.115.0':
-    resolution: {integrity: sha512-fZbqt8y/sKQ+v6bBCuv/mYYFoC0+fZI3mGDDEemmDOhT78+aUs2+4ZMdbd2btlXmnLaScl37r8IRbhnok5Ka9w==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    cpu: [arm]
-    os: [linux]
-
-  '@oxc-parser/binding-linux-arm64-gnu@0.115.0':
-    resolution: {integrity: sha512-1ej/MjuTY9tJEunU/hUPIFmgH5PqgMQoRjNOvOkibtJ3Zqlw/+Lc+HGHDNET8sjbgIkWzdhX+p4J96A5CPdbag==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    cpu: [arm64]
-    os: [linux]
-
-  '@oxc-parser/binding-linux-arm64-musl@0.115.0':
-    resolution: {integrity: sha512-HjsZbJPH9mMd4swJRywVMsDZsJX0hyKb1iNHo5ijRl5yhtbO3lj7ImSrrL1oZ1VEg0te4iKmDGGz/6YPLd1G8w==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    cpu: [arm64]
-    os: [linux]
-
-  '@oxc-parser/binding-linux-ppc64-gnu@0.115.0':
-    resolution: {integrity: sha512-zhhePoBrd7kQx3oClX/W6NldsuCbuMqaN9rRsY+6/WoorAb4j490PG/FjqgAXscWp2uSW2WV9L+ksn0wHrvsrg==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    cpu: [ppc64]
-    os: [linux]
-
-  '@oxc-parser/binding-linux-riscv64-gnu@0.115.0':
-    resolution: {integrity: sha512-t/IRojvUE9XrKu+/H1b8YINug+7Q6FLls5rsm2lxB5mnS8GN/eYAYrPgHkcg9/1SueRDSzGpDYu3lGWTObk1zw==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    cpu: [riscv64]
-    os: [linux]
-
-  '@oxc-parser/binding-linux-riscv64-musl@0.115.0':
-    resolution: {integrity: sha512-79jBHSSh/YpQRAmvYoaCfpyToRbJ/HBrdB7hxK2ku2JMehjopTVo+xMJss/RV7/ZYqeezgjvKDQzapJbgcjVZA==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    cpu: [riscv64]
-    os: [linux]
-
-  '@oxc-parser/binding-linux-s390x-gnu@0.115.0':
-    resolution: {integrity: sha512-nA1TpxkhNTIOMMyiSSsa7XIVJVoOU/SsVrHIz3gHvWweB5PHCQfO7w+Lb2EP0lBWokv7HtA/KbF7aLDoXzmuMw==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    cpu: [s390x]
-    os: [linux]
-
-  '@oxc-parser/binding-linux-x64-gnu@0.115.0':
-    resolution: {integrity: sha512-9iVX789DoC3SaOOG+X6NcF/tVChgLp2vcHffzOC2/Z1JTPlz6bMG2ogvcW6/9s0BG2qvhNQImd+gbWYeQbOwVw==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    cpu: [x64]
-    os: [linux]
-
-  '@oxc-parser/binding-linux-x64-musl@0.115.0':
-    resolution: {integrity: sha512-RmQmk+mjCB0nMNfEYhaCxwofLo1Z95ebHw1AGvRiWGCd4zhCNOyskgCbMogIcQzSB3SuEKWgkssyaiQYVAA4hQ==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    cpu: [x64]
-    os: [linux]
-
-  '@oxc-parser/binding-openharmony-arm64@0.115.0':
-    resolution: {integrity: sha512-viigraWWQhhDvX5aGq+wrQq58k00Xq3MHz/0R4AFMxGlZ8ogNonpEfNc73Q5Ly87Z6sU9BvxEdG0dnYTfVnmew==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    cpu: [arm64]
-    os: [openharmony]
-
-  '@oxc-parser/binding-wasm32-wasi@0.115.0':
-    resolution: {integrity: sha512-IzGCrMwXhpb4kTXy/8lnqqqwjI7eOvy+r9AhVw+hsr8t1ecBBEHprcNy0aKatFHN6hsX7UMHHQmBAQjVvL/p1A==}
-    engines: {node: '>=14.0.0'}
-    cpu: [wasm32]
-
-  '@oxc-parser/binding-win32-arm64-msvc@0.115.0':
-    resolution: {integrity: sha512-/ym+Absk/TLFvbhh3se9XYuI1D7BrUVHw4RaG/2dmWKgBenrZHaJsgnRb7NJtaOyjEOLIPtULx1wDdVL0SX2eg==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    cpu: [arm64]
-    os: [win32]
-
-  '@oxc-parser/binding-win32-ia32-msvc@0.115.0':
-    resolution: {integrity: sha512-AQSZjIR+b+Te7uaO/hGTMjT8/oxlYrvKrOTi4KTHF/O6osjHEatUQ3y6ZW2+8+lJxy20zIcGz6iQFmFq/qDKkg==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    cpu: [ia32]
-    os: [win32]
-
-  '@oxc-parser/binding-win32-x64-msvc@0.115.0':
-    resolution: {integrity: sha512-oxUl82N+fIO9jIaXPph8SPPHQXrA08BHokBBJW8ct9F/x6o6bZE6eUAhUtWajbtvFhL8UYcCWRMba+kww6MBlA==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-    cpu: [x64]
-    os: [win32]
-
-  '@oxc-project/types@0.115.0':
-    resolution: {integrity: sha512-4n91DKnebUS4yjUHl2g3/b2T+IUdCfmoZGhmwsovZCDaJSs+QkVAM+0AqqTxHSsHfeiMuueT75cZaZcT/m0pSw==}
 
   '@oxc-project/types@0.122.0':
     resolution: {integrity: sha512-oLAl5kBpV4w69UtFZ9xqcmTi+GENWOcPF7FCrczTiBbmC0ibXxCwyvZGbO39rCVEuLGAZM84DH0pUIyyv/YJzA==}
@@ -5998,11 +5942,6 @@ packages:
       vite:
         optional: true
 
-  '@unocss/cli@66.6.7':
-    resolution: {integrity: sha512-m/yW5HMVyxfAOeyO4OyA4JB9dY+/gTsk25ucI8xVCFVDEENPEGr+vEqTDOA+vfe6pdURtyDYS7OrhikIRU1WNA==}
-    engines: {node: '>=14'}
-    hasBin: true
-
   '@unocss/config@66.0.0':
     resolution: {integrity: sha512-nFRGop/guBa4jLkrgXjaRDm5JPz4x3YpP10m5IQkHpHwlnHUVn1L9smyPl04ohYWhYn9ZcAHgR28Ih2jwta8hw==}
     engines: {node: '>=14'}
@@ -6011,15 +5950,8 @@ packages:
     resolution: {integrity: sha512-YvNk/b9jGmT1TQGDbHR+0VALnTsPLzSTzw90t09ggny9YxeF0XnsP06M5+H0EJPwpmdigBC++KEIMaK8SYDsaQ==}
     engines: {node: '>=14'}
 
-  '@unocss/config@66.6.7':
-    resolution: {integrity: sha512-1uleyRLyJc6PNNc2L3hEaKL89zXwvQAtP36oFySgL47RAxZHPZ4vfqFpbwR0eEN4iSqTS24ZFr7CTRWCaEGjzQ==}
-    engines: {node: '>=14'}
-
   '@unocss/core@66.0.0':
     resolution: {integrity: sha512-PdVbSMHNDDkr++9nkqzsZRAkaU84gxMTEgYbqI7dt2p1DXp/5tomVtmMsr2/whXGYKRiUc0xZ3p4Pzraz8TcXA==}
-
-  '@unocss/core@66.5.4':
-    resolution: {integrity: sha512-UDS2CRgyQCEFH+5kStDyJd7OFtgkIUZYn5Ahr5z7v3jc/pEfeOJ0mxsNAr+FgMS/xb17vy4sVFvx3jj/FwMZ1A==}
 
   '@unocss/core@66.6.0':
     resolution: {integrity: sha512-Sxm7HmhsPIIzxbPnWembPyobuCeA5j9KxL+jIOW2c+kZiTFjHeju7vuVWX9jmAMMC+UyDuuCQ4yE+kBo3Y7SWQ==}
@@ -6035,56 +5967,11 @@ packages:
     resolution: {integrity: sha512-6i+kNVVGb5I+XOCUgLDHol6sxb28ahbJrmLL/eiAWflT850MUqtAlFeyHDYHzScnOFcPy1AcmeY0yM77GgERmg==}
     engines: {node: '>=14'}
 
-  '@unocss/extractor-arbitrary-variants@66.5.4':
-    resolution: {integrity: sha512-JsgITF11Z2WdXzF8eO2/qkcFIff/dEEc9C2eKYOSUv5pe+RMZxXHoAw4x+D4n0UrGAbHpoUVaJ8E7kG0ayTbGw==}
-
-  '@unocss/extractor-arbitrary-variants@66.6.7':
-    resolution: {integrity: sha512-PQiBHK0yUJ0BR+3GYnTPU6va6HVSRPV+O+s1zZmt23TWbyIeucoKCNR47TDtv+Z1xuksY8krIjtDYtufdrVWKw==}
-
   '@unocss/inspector@66.0.0':
     resolution: {integrity: sha512-mkIxieVm0kMOKw+E4ABpIerihYMdjgq9A92RD5h2+W/ebpxTEw5lTTK1xcMLiAlmOrVYMQKjpgPeu3vQmDyGZQ==}
 
-  '@unocss/inspector@66.6.7':
-    resolution: {integrity: sha512-4lA70A/wy9dfSDm7rJ5Uq5fKz+/Szm2rUcHjdbLCVNEc6vv2YXeI7aFvP5qDjTp4ClBSF2AMPnF1mtoMQOfDvA==}
-
-  '@unocss/preset-attributify@66.6.7':
-    resolution: {integrity: sha512-thtoLQb53+Acy2QJYT6n+YhgNJ5ilhS8k9bqi+UzflbsuK4TJqOuQQjC9fRkULP5QjtNxgqN3d5Up7ms8tBPDA==}
-
   '@unocss/preset-icons@66.0.0':
     resolution: {integrity: sha512-6ObwTvEGuPBbKWRoMMiDioHtwwQTFI5oojFLJ32Y8tW6TdXvBLkO88d7qpgQxEjgVt4nJrqF1WEfR4niRgBm0Q==}
-
-  '@unocss/preset-icons@66.6.7':
-    resolution: {integrity: sha512-mGAOyI/qz1pZUV1BcOtWAMm5czdFCjhFCYcDk0KY+Jw37pKRVSQRFeh4gpHuYKmehGv36caLyVrWXpTAwRBdFQ==}
-
-  '@unocss/preset-mini@66.5.4':
-    resolution: {integrity: sha512-KaBGsw3+Pi5ZTsp5u0OrUUUXFVltHin02cYhv3A4b9392Kej5R3y7zIf1VjiQ3ZXR4KZWfv0CQj0LBqIqAJ5WA==}
-
-  '@unocss/preset-mini@66.6.7':
-    resolution: {integrity: sha512-tf0mqiSEhPQ49WZOqjNhxlbZbNakiBLzCoxfLSzqfIGglOPYShP8mxsdp9Jv0n+Ntn0rHcBiX5KTLfax1/Bd9g==}
-
-  '@unocss/preset-tagify@66.6.7':
-    resolution: {integrity: sha512-0WeQf+Dx9Ztv3aewkBKEnAfOauSjvWBlfkpsgLpXcCkyGMnCqq87UrAq3+b76TDJvQc8i2ADlvVGK7V1z0JZQg==}
-
-  '@unocss/preset-typography@66.6.7':
-    resolution: {integrity: sha512-RA7MwPDD5N9xGrbWnguVm5tP+F4/n/9X1rJsq2nBjvvK2dbtIRJZjRFM1vBDsR0GIhtvbHMoTchZaSZed5I+Hw==}
-
-  '@unocss/preset-uno@66.6.7':
-    resolution: {integrity: sha512-imGCe6Yv2XgrJxP77gV8WZCz0xL99MsGov5rYn64lh2/tcsHF2rUIhTj/Urgxt0kwk8rLFtGbR1JuwPMNL5EDw==}
-
-  '@unocss/preset-web-fonts@66.6.7':
-    resolution: {integrity: sha512-GLjUoSL/kYt1Yw2zpzixKnxvpHgLHAg0JXiPglct4PZ9YmUzCPbvJ/vVn+0AnB8Fxr29Z8NAFSNoX625ZaRonQ==}
-
-  '@unocss/preset-wind3@66.5.4':
-    resolution: {integrity: sha512-cqQGg9E2476YVpnX3sgO/jEoA4cKCA5rEl2NgemoAJpKAgdM68JPB+Tve4LlSLssxRQZ7ZYNO6hOfW8R2gVVuw==}
-
-  '@unocss/preset-wind3@66.6.7':
-    resolution: {integrity: sha512-PKyqeRzlIMd3Irdt6fCKMm73zgwweiXESk5edUK8dVWndvPIcZCOqrEq7yg6Pr/Q8tHdq26viYSkVY3a3t8RSg==}
-
-  '@unocss/preset-wind4@66.6.7':
-    resolution: {integrity: sha512-9grhWeBsFzpv8iER9AFATRaxLyXMCwGQ5HzeI4XZh2ZZ9O6vC7nYfGhns4/I+F/RpFglzU1bjqMWRS/DS8OpGQ==}
-
-  '@unocss/preset-wind@66.6.7':
-    resolution: {integrity: sha512-jxtAN96jljd+KglbhPv6Y/ujceI5rVdrLQimj4KUTPoYBPEiWadzsGKN3o8Q07hlPRg+hBlO0r4tGSUWl+/EZQ==}
 
   '@unocss/reset@66.0.0':
     resolution: {integrity: sha512-YLFz/5yT7mFJC8JSmIUA5+bS3CBCJbtztOw+8rWzjQr/BEVSGuihWUUpI2Df6VVxXIXxKanZR6mIl59yvf+GEA==}
@@ -6093,26 +5980,9 @@ packages:
     resolution: {integrity: sha512-UJ51YHbwxYTGyj35ugsPlOT4gaa7tCbXdywZ3m5Nn0JgywwIqGmBFyiN9ZjHBHfJuDxmmPd6lxojoBscih/WMQ==}
     engines: {node: '>=14'}
 
-  '@unocss/rule-utils@66.5.4':
-    resolution: {integrity: sha512-LFzLuXQfZKI/qJBrsqkaVKlw0ECU8Xw7m+MaKIKyFH/hqggzkvNG0PyWU2HnPNzz1dIiVBn+Epfpz8pzi+MLFA==}
-    engines: {node: '>=14'}
-
   '@unocss/rule-utils@66.6.0':
     resolution: {integrity: sha512-v16l6p5VrefDx8P/gzWnp0p6/hCA0vZ4UMUN6SxHGVE6V+IBpX6I6Du3Egk9TdkhZ7o+Pe1NHxksHcjT0V/tww==}
     engines: {node: '>=14'}
-
-  '@unocss/rule-utils@66.6.7':
-    resolution: {integrity: sha512-4PT/s8yKIShSqP9XPSw4EjbZopcu3wlIB9i3kbGbzQwF91H+0Yy10guK3kHDGtkmWVN6Np6VvaGIj2UcbmaivA==}
-    engines: {node: '>=14'}
-
-  '@unocss/transformer-attributify-jsx@66.6.7':
-    resolution: {integrity: sha512-r5bsnaPVe4iySLK5G5rA/QPSKmpPjYT9lixEv+KElvZcqZ+cPpkGoo+E+rnTcapu9KDMOVJItH/4Zy9m4AQ1ZQ==}
-
-  '@unocss/transformer-compile-class@66.6.7':
-    resolution: {integrity: sha512-4uz4jCyq8VUaSPveXhelUWUNaTnetPFvEmXzmbYJ5BygAlUlipNynffUlUusDQmBBRrfZhJNB5J1Zif2Q6oUiA==}
-
-  '@unocss/transformer-directives@66.6.7':
-    resolution: {integrity: sha512-z3gi8/cD2P0I+c6jOPZUtsPXknHwVNlMIitSh7LhyM6W3EqbqvDcYH2gFeGhdhoYcN2r5OpTBujq34iz4IdUxA==}
 
   '@unocss/transformer-variant-group@66.6.7':
     resolution: {integrity: sha512-XouJuQCjYJpvR3sY4QDXnGXxtyJ4qgWFG+S9bAB01TTslhQLvNPE9o2+4gZlltnJLqxiPQWuLeJA1KdPD6ciww==}
@@ -6121,11 +5991,6 @@ packages:
     resolution: {integrity: sha512-IVcPX8xL+2edyXKt4tp9yu5A6gcbPVCsspfcL0XgziCr01kS+4qSoZ90F3IUs3hXc/AyO5eCpRtGFMPLpOjXQg==}
     peerDependencies:
       vite: ^2.9.0 || ^3.0.0-0 || ^4.0.0 || ^5.0.0-0 || ^6.0.0-0
-
-  '@unocss/vite@66.6.7':
-    resolution: {integrity: sha512-8AHrVzAecnQaPLJv3/mpyFt5j2iL3gEwkZcZ8HzjH5ttK2XON1YE9vgujN5NS/yvZwlJxCMNPxn0S410/Ek61A==}
-    peerDependencies:
-      vite: ^2.9.0 || ^3.0.0-0 || ^4.0.0 || ^5.0.0-0 || ^6.0.0-0 || ^7.0.0-0 || ^8.0.0-0
 
   '@use-gesture/core@10.3.1':
     resolution: {integrity: sha512-WcINiDt8WjqBdUXye25anHiNxPc0VOrlT8F6LLkU6cycrOGUDyY/yyFmsg3k8i5OLvv25llc0QC45GhR/C8llw==}
@@ -6727,10 +6592,6 @@ packages:
     resolution: {integrity: sha512-Qgzu8kfBvo+cA4962jnP1KkS6Dop5NS6g7R5LFYJr4b8Ub94PPQXUksCw9PvXoeXPRRddRNC5C1JQUR2SMGtnA==}
     engines: {node: '>= 14.16.0'}
 
-  chokidar@5.0.0:
-    resolution: {integrity: sha512-TQMmc3w+5AxjpL8iIiwebF73dRDF4fBIieAqGn9RGCWaEVwQ6Fb2cGe31Yns0RRIzii5goJ1Y7xbMwo1TxMplw==}
-    engines: {node: '>= 20.19.0'}
-
   chownr@1.1.4:
     resolution: {integrity: sha512-jJ0bqzaylmJtVnNgzTeSOs8DPavpbYgEr/b0YL8/2GO3xJEhInFmhKMUnEJQjZumK7KXGFhUy89PrsJWlakBVg==}
 
@@ -6748,6 +6609,10 @@ packages:
   cliui@8.0.1:
     resolution: {integrity: sha512-BSeNnyus75C4//NQ9gQt1/csTXyo/8Sb+afLAkzAptFuMsod9HFokGNudZpi/oQV73hnVK+sR+5PVRMd+Dr7YQ==}
     engines: {node: '>=12'}
+
+  cliui@9.0.1:
+    resolution: {integrity: sha512-k7ndgKhwoQveBL+/1tqGJYNz097I7WOvwbmmU2AR5+magtbjPWQTS1C5vzGkBC8Ym8UWRzfKUzUUqFLypY4Q+w==}
+    engines: {node: '>=20'}
 
   clone-stats@0.0.1:
     resolution: {integrity: sha512-dhUqc57gSMCo6TX85FLfe51eC/s+Im2MLkAgJwfaRRexR2tA4dd3eLEW4L6efzHc2iNorrRRXITifnDLlRrhaA==}
@@ -6918,10 +6783,6 @@ packages:
   css-select@5.1.0:
     resolution: {integrity: sha512-nwoRF1rvRRnnCqqY7updORDsuqKzqYJ28+oSMaJMMgOauh3fvwHqMS7EZpIPqK8GL+g9mKxF1vP/ZjSeNjEVHg==}
 
-  css-tree@3.1.0:
-    resolution: {integrity: sha512-0eW44TGN5SQXU1mWSkKwFstI/22X2bG1nYzZTYMAWjylYURhse752YgbE4Cx46AC+bAvI+/dYTPRk1LqSUnu6w==}
-    engines: {node: ^10 || ^12.20.0 || ^14.13.0 || >=15.0.0}
-
   css-what@6.1.0:
     resolution: {integrity: sha512-HTUrgRJ7r4dsZKU6GjmpfRK1O76h97Z8MfS1G0FozR+oF2kG6Vfe8JE6zwrkbxigziPHinCJ+gCPjA9EaBDtRw==}
     engines: {node: '>= 6'}
@@ -7058,11 +6919,11 @@ packages:
     resolution: {integrity: sha512-0je+qPKHEMohvfRTCEo3CrPG6cAzAYgmzKyxRiYSSDkS6eGJdyVJm7WaYA5ECaAD9wLB2T4EEeymA5aFVcYXCA==}
     engines: {node: '>=6'}
 
+  design-tokens-format-module@0.11.2:
+    resolution: {integrity: sha512-5AAGiHtYrNQrt9QOd58A8GP7/ch5cS8pTeni34pCupJEFYHmffZi0xnPvm8lVhR31zRbC6jcIUVWMlvxDxaOBw==}
+
   destr@2.0.3:
     resolution: {integrity: sha512-2N3BOUU4gYMpTP24s5rF5iP7BDr7uNTCs4ozw3kf/eKfvWSIu93GEBi5m427YoyJoeOzQ5smuu4nNAPGb8idSQ==}
-
-  destr@2.0.5:
-    resolution: {integrity: sha512-ugFTXCtDZunbzasqBxrK93Ik/DRYsO6S/fedkWEMKqt04xZ4csmnmwGDBAb07QWNaGMAmnTIemsYZCksjATwsA==}
 
   detect-gpu@5.0.70:
     resolution: {integrity: sha512-bqerEP1Ese6nt3rFkwPnGbsUF9a4q+gMmpTVVOEzoCyeCc+y7/RvJnQZJx1JwhgQI5Ntg0Kgat8Uu7XpBqnz1w==}
@@ -8658,6 +8519,9 @@ packages:
     resolution: {integrity: sha512-NXYBzinNrblfraPGyrbPoD19C1h9lfI/1mzgWYvXUTe414Gz/X1FD2XBZSZM7rRTrMA8JL3OtAaGifrIKhQ5yQ==}
     engines: {node: '>= 12.0.0'}
 
+  lil-gui@0.21.0:
+    resolution: {integrity: sha512-tpvxN7v1GvE/Tv+GRopfOp0W7fVEjF4PltkuX8vOCIfim22rD1ztvfkoEMcv9lzQeuNUSeIrUmUjBwmlW/oUew==}
+
   linkify-it@5.0.0:
     resolution: {integrity: sha512-5aHCbzQRADcdP+ATqnDuhhJ/MRIqDkZX5pyjFHRRysS8vZ5AbqGEoFIb6pYHPZ+L/OC2Lc+xT8uHVVR5CAK/wQ==}
 
@@ -8666,6 +8530,9 @@ packages:
 
   lit-element@4.2.1:
     resolution: {integrity: sha512-WGAWRGzirAgyphK2urmYOV72tlvnxw7YfyLDgQ+OZnM9vQQBQnumQ7jUJe6unEzwGU3ahFOjuz1iz1jjrpCPuw==}
+
+  lit-element@4.2.2:
+    resolution: {integrity: sha512-aFKhNToWxoyhkNDmWZwEva2SlQia+jfG0fjIWV//YeTaWrVnOxD89dPKfigCUspXFmjzOEUQpOkejH5Ly6sG0w==}
 
   lit-html@3.3.1:
     resolution: {integrity: sha512-S9hbyDu/vs1qNrithiNyeyv64c9yqiW9l+DBgI18fL+MTvOtWoFR0FWiyq1TxaYef5wNlpEmzlXoBlZEO+WjoA==}
@@ -8764,9 +8631,6 @@ packages:
       '@types/three': '>=0.144.0'
       three: '>=0.144.0'
 
-  magic-regexp@0.10.0:
-    resolution: {integrity: sha512-Uly1Bu4lO1hwHUW0CQeSWuRtzCMNO00CmXtS8N6fyvB3B979GOEEeAkiTUDsmbYLAbvpUS/Kt5c4ibosAzVyVg==}
-
   magic-string@0.25.9:
     resolution: {integrity: sha512-RmF0AsMzgt25qzqqLc1+MbHmhdx0ojF2Fvs4XnOqz2ZOBXzzkEwc/dJQZCYHAn7v1jbVOjAZfK8msRn4BxO4VQ==}
 
@@ -8855,9 +8719,6 @@ packages:
 
   mdast-util-to-string@4.0.0:
     resolution: {integrity: sha512-0H44vDimn51F0YwvxSJSm0eCDOJTRlmN0R1yBh4HLj9wiV1Dn0QoXGbvFAWj2hSItVTlCmBF1hqKlIyUBVFLPg==}
-
-  mdn-data@2.12.2:
-    resolution: {integrity: sha512-IEn+pegP1aManZuckezWCO+XZQDplx1366JoVhTpMpBB1sPey/SbveZQUosKiKiGYjg1wH4pMlNgXbCiYgihQA==}
 
   mdurl@2.0.0:
     resolution: {integrity: sha512-Lf+9+2r+Tdp5wXDXC4PcIBjTDtq4UKjCPMQhKIuzpJNW0b96kVqSwW0bT7FhRSfmAiFYgP+SCRvdrDozfh0U5w==}
@@ -9039,9 +8900,6 @@ packages:
   mlly@1.7.4:
     resolution: {integrity: sha512-qmdSIPC4bDJXgZTCR7XosJiNKySV7O215tsPtDN9iEO/7q/76b/ijtgRu/+epFXSJhijtTCCGp3DWS549P3xKw==}
 
-  mlly@1.8.0:
-    resolution: {integrity: sha512-l8D9ODSRWLe2KHJSifWGwBqpTZXIXTeo8mlKjY+E2HAakaTeNpqAyBZ8GSqLzHgw4XmHmC8whvpjJNMbFZN7/g==}
-
   motion-dom@12.23.12:
     resolution: {integrity: sha512-RcR4fvMCTESQBD/uKQe49D5RUeDOokkGRmz4ceaJKDBgHYtZtntC/s2vLvY38gqGaytinij/yi3hMcWVcEF5Kw==}
 
@@ -9126,9 +8984,6 @@ packages:
   node-fetch-native@1.6.4:
     resolution: {integrity: sha512-IhOigYzAKHd244OC0JIMIUrjzctirCmPkaIfhDeGcEETWof5zKYUW7e7MYvChGWh/4CJeXEgsRyGzuF334rOOQ==}
 
-  node-fetch-native@1.6.7:
-    resolution: {integrity: sha512-g9yhqoedzIUm0nTnTqAQvueMPVOuIY16bqgAJJC8XOOubYFNwz6IER9qs0Gq2Xd0+CecCKFjtdDTMA4u4xG06Q==}
-
   node-fetch@2.7.0:
     resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
     engines: {node: 4.x || >=6.0.0}
@@ -9190,9 +9045,6 @@ packages:
   ofetch@1.4.1:
     resolution: {integrity: sha512-QZj2DfGplQAr2oj9KzceK9Hwz6Whxazmn85yYeVuS3u9XTMOGMRx0kO95MQ+vLsj/S/NwBDMMLU5hpxvI6Tklw==}
 
-  ofetch@1.5.1:
-    resolution: {integrity: sha512-2W4oUZlVaqAPAil6FUg/difl6YhqhUR7x2eZY4bQCko22UXg3hptq9KLQdqFClV+Wu85UX7hNtdGTngi/1BxcA==}
-
   once@1.4.0:
     resolution: {integrity: sha512-lNaJgI+2Q5URQBkccEKHTQOPaXdUxnZZElQTZY0MFUAuaEqe1E+Nyvgdz/aIyNi6Z9MzO5dv1H8n58/GELp3+w==}
 
@@ -9216,15 +9068,6 @@ packages:
   os-homedir@1.0.2:
     resolution: {integrity: sha512-B5JU3cabzk8c67mRRd3ECmROafjYMXbuzlwtqdM8IbS8ktlTix8aFGb2bAGKrSRIlnfKwovGUUr72JUPyOb6kQ==}
     engines: {node: '>=0.10.0'}
-
-  oxc-parser@0.115.0:
-    resolution: {integrity: sha512-2w7Xn3CbS/zwzSY82S5WLemrRu3CT57uF7Lx8llrE/2bul6iMTcJE4Rbls7GDNbLn3ttATI68PfOz2Pt3KZ2cQ==}
-    engines: {node: ^20.19.0 || >=22.12.0}
-
-  oxc-walker@0.7.0:
-    resolution: {integrity: sha512-54B4KUhrzbzc4sKvKwVYm7E2PgeROpGba0/2nlNZMqfDyca+yOor5IMb4WLGBatGDT0nkzYdYuzylg7n3YfB7A==}
-    peerDependencies:
-      oxc-parser: '>=0.98.0'
 
   p-limit@2.3.0:
     resolution: {integrity: sha512-//88mFWSJx8lxCzwdAABTJL2MyWB12+eIY7MDL2SqLmAkeKU9qxRvWuSyTjm3FUmpBEMuFfckAIqEaVGUDxb6w==}
@@ -9263,9 +9106,6 @@ packages:
 
   package-manager-detector@0.2.11:
     resolution: {integrity: sha512-BEnLolu+yuz22S56CU1SUKq3XC3PkwD5wv4ikR4MfGvnRVcmzXR9DwSlW2fEamyTPyXHomBJRzgapeuBvRNzJQ==}
-
-  package-manager-detector@1.3.0:
-    resolution: {integrity: sha512-ZsEbbZORsyHuO00lY1kV3/t72yp6Ysay6Pd17ZAlNGuGwmWDLCJxFpRs0IzfXfj1o4icJOkUEioexFHzyPurSQ==}
 
   pako@1.0.11:
     resolution: {integrity: sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==}
@@ -9346,9 +9186,6 @@ packages:
   pbf@3.3.0:
     resolution: {integrity: sha512-XDF38WCH3z5OV/OVa8GKUNtLAyneuzbCisx7QUCF8Q6Nutx0WnJrQe5O+kOtBlLfRNUws98Y58Lblp+NJG5T4Q==}
     hasBin: true
-
-  perfect-debounce@2.1.0:
-    resolution: {integrity: sha512-LjgdTytVFXeUgtHZr9WYViYSM/g8MkcTPYDlPa3cDqMirHjKiSZPYd6DoL7pK8AJQr+uWkQvCjHNdiMqsrJs+g==}
 
   performance-now@2.1.0:
     resolution: {integrity: sha512-7EAHlyLHI56VEIdK57uwHdHKIaAGbnXPiw0yWbarQZOKaKpvUIgW0jWRVLiatnM+XXlSwsanIBH/hzGMJulMow==}
@@ -9598,13 +9435,6 @@ packages:
   react-fast-compare@2.0.4:
     resolution: {integrity: sha512-suNP+J1VU1MWFKcyt7RtjiSWUjvidmQSlqu+eHslq+342xCbGTYmC0mEhPCOHxlW0CywylOC1u2DFAT+bv4dBw==}
 
-  react-hot-toast@2.6.0:
-    resolution: {integrity: sha512-bH+2EBMZ4sdyou/DPrfgIouFpcRLCJ+HoCA32UoAYHn6T3Ur5yfcDCeSr5mwldl6pFOsiocmrXMuoCJ1vV8bWg==}
-    engines: {node: '>=10'}
-    peerDependencies:
-      react: '>=16'
-      react-dom: '>=16'
-
   react-hotkeys-hook@4.6.1:
     resolution: {integrity: sha512-XlZpbKUj9tkfgPgT9gA+1p7Ey6vFIZHttUjPqpTdyT5nqQ8mHL7elxvSbaC+dpSiHUSmr21Ya1mDxBZG3aje4Q==}
     peerDependencies:
@@ -9619,9 +9449,6 @@ packages:
 
   react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
-
-  react-is@19.1.0:
-    resolution: {integrity: sha512-Oe56aUPnkHyyDxxkvqtd7KkdQP5uIUfHxd5XTb3wE9d/kRnZLmKbDB0GWk919tdQ+mxxPtG6EAs6RMT6i1qtHg==}
 
   react-lazy-with-preload@2.2.1:
     resolution: {integrity: sha512-ONSb8gizLE5jFpdHAclZ6EAAKuFX2JydnFXPPPjoUImZlLjGtKzyBS8SJgJq7CpLgsGKh9QCZdugJyEEOVC16Q==}
@@ -9665,10 +9492,6 @@ packages:
   readdirp@4.0.2:
     resolution: {integrity: sha512-yDMz9g+VaZkqBYS/ozoBJwaBhTbZo3UNYQHNRw1D3UFQB8oHB4uS/tAODO+ZLjGWmUbKnIlOWO+aaIiAxrUWHA==}
     engines: {node: '>= 14.16.0'}
-
-  readdirp@5.0.0:
-    resolution: {integrity: sha512-9u/XQ1pvrQtYyMpZe7DXKv2p5CNvyVwzUB6uhLAnQwHMSgKMBR62lc7AHljaeteeHXn11XTAaLLUVZYVZyuRBQ==}
-    engines: {node: '>= 20.19.0'}
 
   recast@0.23.11:
     resolution: {integrity: sha512-YTUo+Flmw4ZXiWfQKGcwwc11KnoRAYgzAE2E7mXKCjSviTKShtxBsN6YUUBB2gtaBzKzeKunxhUwNHQuRryhWA==}
@@ -9718,10 +9541,6 @@ packages:
 
   regex@5.0.2:
     resolution: {integrity: sha512-/pczGbKIQgfTMRV0XjABvc5RzLqQmwqxLHdQao2RTXPk+pmTXB2P0IaUHYdYyk412YLwUIkaeMd5T+RzVgTqnQ==}
-
-  regexp-tree@0.1.27:
-    resolution: {integrity: sha512-iETxpjK6YoRWJG5o6hXLwvjYAoW+FEZn9os0PD/b6AP6xQwsa/Y7lCVgIixBbUPMfhu+i2LtdeAqVTgGlQarfA==}
-    hasBin: true
 
   regexp.prototype.flags@1.5.3:
     resolution: {integrity: sha512-vqlC04+RQoFalODCbCumG2xIOvapzVMHwsyIGM/SIE8fRhFFsXeH8/QQ+s0T0kDAhKc4k30s73/0ydkHQz6HlQ==}
@@ -9801,8 +9620,8 @@ packages:
     resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
     engines: {node: '>=0.10.0'}
 
-  reselect@5.1.1:
-    resolution: {integrity: sha512-K/BG6eIky/SBpzfHZv/dd+9JBFiS4SWV7FIujVyJRux6e45+73RaUHXLmIR1f7WOMaQ0U1km6qwklRQxpJJY0w==}
+  reselect@5.2.0:
+    resolution: {integrity: sha512-AgZ3UOZm3YndfrJ4OYjgrT7bmCm/1iqkjvEfH/oYjzh6PD2qw4QuT3jjnXIrpdt4MTpMXclMT3lXbmRY+XRakw==}
 
   resolve-dir@0.1.1:
     resolution: {integrity: sha512-QxMPqI6le2u0dCLyiGzgy92kjkkL6zO0XyvHzjdTNH3zM6e5Hz3BwG6+aEyNgiQ5Xz6PwTwgQEj3U50dByPKIA==}
@@ -10033,10 +9852,6 @@ packages:
 
   sirv@3.0.0:
     resolution: {integrity: sha512-BPwJGUeDaDCHihkORDchNyyTvWFhcusy1XMmhEVTQTwGeybFbp8YEmB+njbPnth1FibULBSBVwCQni25XlCUDg==}
-    engines: {node: '>=18'}
-
-  sirv@3.0.2:
-    resolution: {integrity: sha512-2wcC/oGxHis/BoHkkPwldgiPSYcpZK3JU28WoMVv55yHJgcZ8rlXvuG9iZggz+sU1d4bRgIGASwyWqjxu3FM0g==}
     engines: {node: '>=18'}
 
   sisteransi@1.0.5:
@@ -10490,9 +10305,6 @@ packages:
     resolution: {integrity: sha512-UJShLPYi1aWqCdq9HycOL/gwsuqda1OISdBO3t8RlXQC4QvtuIz4b5FCfe2dQIWEpmlRExKmcTBfP1r9bhY7ig==}
     engines: {node: '>=16'}
 
-  type-level-regexp@0.1.17:
-    resolution: {integrity: sha512-wTk4DH3cxwk196uGLK/E9pE45aLfeKJacKmcEgEOA/q5dnPGNxXt0cfYdFxb57L+sEpf1oJH4Dnx/pnRcku9jg==}
-
   typed-array-buffer@1.0.3:
     resolution: {integrity: sha512-nAYYwfY3qnzX30IkA6AQZjVbtK6duGontcQm1WSG1MD94YLqK0515GNApXkoxKOWMusVssAHWLh9SeaoefYFGw==}
     engines: {node: '>= 0.4'}
@@ -10558,9 +10370,6 @@ packages:
   unconfig-core@7.4.2:
     resolution: {integrity: sha512-VgPCvLWugINbXvMQDf8Jh0mlbvNjNC6eSUziHsBCMpxR05OPrNrvDnyatdMjRgcHaaNsCqz+wjNXxNw1kRLHUg==}
 
-  unconfig-core@7.5.0:
-    resolution: {integrity: sha512-Su3FauozOGP44ZmKdHy2oE6LPjk51M/TRRjHv2HNCWiDvfvCoxC2lno6jevMA91MYAdCdwP05QnWdWpSbncX/w==}
-
   unconfig@7.0.0:
     resolution: {integrity: sha512-G5CJSoG6ZTxgzCJblEfgpdRK2tos9+UdD2WtecDUVfImzQ0hFjwpH5RVvGMhP4pRpC9ML7NrC4qBsBl0Ttj35A==}
 
@@ -10569,9 +10378,6 @@ packages:
 
   unconfig@7.4.2:
     resolution: {integrity: sha512-nrMlWRQ1xdTjSnSUqvYqJzbTBFugoqHobQj58B2bc8qxHKBBHMNNsWQFP3Cd3/JZK907voM2geYPWqD4VK3MPQ==}
-
-  unconfig@7.5.0:
-    resolution: {integrity: sha512-oi8Qy2JV4D3UQ0PsopR28CzdQ3S/5A1zwsUwp/rosSbfhJ5z7b90bIyTwi/F7hCLD4SGcZVjDzd4XoUQcEanvA==}
 
   undici-types@6.20.0:
     resolution: {integrity: sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg==}
@@ -10648,31 +10454,9 @@ packages:
     resolution: {integrity: sha512-gptHNQghINnc/vTGIk0SOFGFNXw7JVrlRUtConJRlvaw6DuX0wO5Jeko9sWrMBhh+PsYAZ7oXAiOnf/UKogyiw==}
     engines: {node: '>= 10.0.0'}
 
-  unocss-preset-completion@0.3.0:
-    resolution: {integrity: sha512-Xmn9binBjTef3EN8rqaDqIKvPuUnK75+hAVEcPkoGyB0bsqMfKn3tEC7r8xPSmnhcipm8ETPZ9sAZQwoidUf5A==}
-
-  unocss@66.6.7:
-    resolution: {integrity: sha512-TdZ/JnKhrqkknrMvLl0KOwrGzFThEspFIyYiylFYJki2JkMN/5EJIr+vIZEGRX69hFTjTLi6utIpbipueqzNbw==}
-    engines: {node: '>=14'}
-    peerDependencies:
-      '@unocss/astro': 66.6.7
-      '@unocss/postcss': 66.6.7
-      '@unocss/webpack': 66.6.7
-    peerDependenciesMeta:
-      '@unocss/astro':
-        optional: true
-      '@unocss/postcss':
-        optional: true
-      '@unocss/webpack':
-        optional: true
-
   unplugin-utils@0.2.4:
     resolution: {integrity: sha512-8U/MtpkPkkk3Atewj1+RcKIjb5WBimZ/WSLhhR3w6SsIj8XJuKTacSP8g+2JhfSGw0Cb125Y+2zA/IzJZDVbhA==}
     engines: {node: '>=18.12.0'}
-
-  unplugin-utils@0.3.1:
-    resolution: {integrity: sha512-5lWVjgi6vuHhJ526bI4nlCOmkCIF3nnfXkCMDeMJrtdvxTs6ZFCM8oNufGTsDbKv/tJ/xj8RpvXjRuPBZJuJog==}
-    engines: {node: '>=20.19.0'}
 
   unplugin@2.3.10:
     resolution: {integrity: sha512-6NCPkv1ClwH+/BGE9QeoTIl09nuiAt0gS28nn1PvYXsGKRwM2TCbFA2QiilmehPDTXIe684k4rZI1yl3A1PCUw==}
@@ -11343,9 +11127,17 @@ packages:
     resolution: {integrity: sha512-tVpsJW7DdjecAiFpbIB1e3qxIQsE6NoPc5/eTdrbbIC4h0LVsWhnoa3g+m2HclBIujHzsxZ4VJVA+GUuc2/LBw==}
     engines: {node: '>=12'}
 
+  yargs-parser@22.0.0:
+    resolution: {integrity: sha512-rwu/ClNdSMpkSrUb+d6BRsSkLUq1fmfsY6TOpYzTwvwkg1/NRG85KBy3kq++A8LKQwX6lsu+aWad+2khvuXrqw==}
+    engines: {node: ^20.19.0 || ^22.12.0 || >=23}
+
   yargs@17.7.2:
     resolution: {integrity: sha512-7dSzzRQ++CKnNI/krKnYRV7JKKPUXMEh61soaHKg9mrWEhzFWhFnxPxGl+69cD1Ou63C13NUPCnmIcrvqCuM6w==}
     engines: {node: '>=12'}
+
+  yargs@18.0.0:
+    resolution: {integrity: sha512-4UEqdc2RYGHZc7Doyqkrqiln3p9X2DZVxaGbwhn2pi7MrRagKaOcIKe8L3OxYcbhXLgLFUS3zAYuQjKBQgmuNg==}
+    engines: {node: ^20.19.0 || ^22.12.0 || >=23}
 
   yocto-queue@0.1.0:
     resolution: {integrity: sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==}
@@ -11465,9 +11257,9 @@ snapshots:
 
   '@a-type/auth-fetch@2.1.3': {}
 
-  '@a-type/auth-ui@2.0.2(@a-type/ui@5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))))(react@19.2.4)':
+  '@a-type/auth-ui@2.0.2(@a-type/ui@6.0.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4))(react@19.2.4)':
     dependencies:
-      '@a-type/ui': 5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))
+      '@a-type/ui': 6.0.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       react: 19.2.4
 
   '@a-type/auth@1.3.16':
@@ -11508,60 +11300,27 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@a-type/ui@5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))':
+  '@a-type/ui@6.0.0(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@a-type/utils': 1.1.9
-      '@base-ui/react': 1.4.0(@types/react@19.2.14)(date-fns@4.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      '@emotion/is-prop-valid': 1.4.0
-      '@unocss/preset-mini': 66.5.4
-      '@unocss/preset-wind3': 66.5.4
+      '@arbor-css/core': 0.0.127
+      '@arbor-css/postcss': 0.0.127(@arbor-css/core@0.0.127)
+      '@base-ui/react': 1.6.0(@types/react@19.2.14)(date-fns@4.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@use-gesture/react': 10.3.1(react@19.2.4)
       browser-image-resizer: 2.4.1
       calendar-blocks: 0.4.0(react@19.2.4)
       clsx: 2.1.1
-      csstype: 3.2.3
       date-fns: 4.1.0
       formik: 2.4.6(react@19.2.4)
       frimousse: 0.2.0(react@19.2.4)
-      motion: 12.23.24(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      motion: 12.23.24(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       pluralize: 8.0.0
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
-      react-hot-toast: 2.6.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      react-is: 19.1.0
-      unocss: 66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
-      unocss-preset-completion: 0.3.0
       valtio: 2.3.1(@types/react@19.2.14)(react@19.2.4)
     transitivePeerDependencies:
       - '@date-fns/tz'
-      - '@types/react'
-
-  '@a-type/ui@5.0.22(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(unocss@66.6.7(@emnapi/runtime@1.9.2)(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))':
-    dependencies:
-      '@a-type/utils': 1.1.9
-      '@base-ui/react': 1.4.0(@types/react@19.2.14)(date-fns@4.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      '@emotion/is-prop-valid': 1.4.0
-      '@unocss/preset-mini': 66.5.4
-      '@unocss/preset-wind3': 66.5.4
-      '@use-gesture/react': 10.3.1(react@19.2.4)
-      browser-image-resizer: 2.4.1
-      calendar-blocks: 0.4.0(react@19.2.4)
-      clsx: 2.1.1
-      csstype: 3.2.3
-      date-fns: 4.1.0
-      formik: 2.4.6(react@19.2.4)
-      frimousse: 0.2.0(react@19.2.4)
-      motion: 12.23.24(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      pluralize: 8.0.0
-      react: 19.2.4
-      react-dom: 19.2.4(react@19.2.4)
-      react-hot-toast: 2.6.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
-      react-is: 19.1.0
-      unocss: 66.6.7(@emnapi/runtime@1.9.2)(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
-      unocss-preset-completion: 0.3.0
-      valtio: 2.3.1(@types/react@19.2.14)(react@19.2.4)
-    transitivePeerDependencies:
-      - '@date-fns/tz'
+      - '@emotion/is-prop-valid'
       - '@types/react'
 
   '@a-type/utils@1.1.9': {}
@@ -11575,11 +11334,6 @@ snapshots:
     dependencies:
       package-manager-detector: 0.2.11
       tinyexec: 0.3.2
-
-  '@antfu/install-pkg@1.1.0':
-    dependencies:
-      package-manager-detector: 1.3.0
-      tinyexec: 1.0.2
 
   '@antfu/utils@8.1.1': {}
 
@@ -11612,6 +11366,68 @@ snapshots:
       react-dom: 19.2.4(react@19.2.4)
     transitivePeerDependencies:
       - '@types/react'
+
+  '@arbor-css/core@0.0.127':
+    dependencies:
+      '@arbor-css/css-eval': 0.0.127
+      '@arbor-css/functions': 0.0.127
+      '@arbor-css/globals': 0.0.127
+      '@arbor-css/modes': 0.0.127
+      '@arbor-css/preset': 0.0.127
+      '@arbor-css/tokens': 0.0.127
+      '@arbor-css/util': 0.0.127
+      design-tokens-format-module: 0.11.2
+      jiti: 2.6.1
+      lil-gui: 0.21.0
+      lit-element: 4.2.2
+      yargs: 18.0.0
+
+  '@arbor-css/css-eval@0.0.127':
+    dependencies:
+      '@arbor-css/tokens': 0.0.127
+      '@arbor-css/util': 0.0.127
+      lightningcss: 1.32.0
+
+  '@arbor-css/functions@0.0.127':
+    dependencies:
+      '@arbor-css/css-eval': 0.0.127
+      '@arbor-css/tokens': 0.0.127
+
+  '@arbor-css/globals@0.0.127':
+    dependencies:
+      '@arbor-css/functions': 0.0.127
+      '@arbor-css/tokens': 0.0.127
+
+  '@arbor-css/modes@0.0.127':
+    dependencies:
+      '@arbor-css/css-eval': 0.0.127
+      '@arbor-css/globals': 0.0.127
+      '@arbor-css/tokens': 0.0.127
+      '@arbor-css/util': 0.0.127
+
+  '@arbor-css/postcss@0.0.127(@arbor-css/core@0.0.127)':
+    dependencies:
+      '@arbor-css/core': 0.0.127
+      '@arbor-css/css-eval': 0.0.127
+      '@arbor-css/functions': 0.0.127
+      '@arbor-css/globals': 0.0.127
+      '@arbor-css/tokens': 0.0.127
+      '@arbor-css/util': 0.0.127
+      jiti: 2.6.1
+      postcss: 8.5.8
+
+  '@arbor-css/preset@0.0.127':
+    dependencies:
+      '@arbor-css/css-eval': 0.0.127
+      '@arbor-css/functions': 0.0.127
+      '@arbor-css/globals': 0.0.127
+      '@arbor-css/modes': 0.0.127
+      '@arbor-css/tokens': 0.0.127
+      '@arbor-css/util': 0.0.127
+
+  '@arbor-css/tokens@0.0.127': {}
+
+  '@arbor-css/util@0.0.127': {}
 
   '@astrojs/check@0.9.4(prettier@3.6.2)(typescript@5.9.3)':
     dependencies:
@@ -12840,26 +12656,26 @@ snapshots:
       '@babel/helper-string-parser': 7.27.1
       '@babel/helper-validator-identifier': 7.28.5
 
-  '@base-ui/react@1.4.0(@types/react@19.2.14)(date-fns@4.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@base-ui/react@1.6.0(@types/react@19.2.14)(date-fns@4.1.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@babel/runtime': 7.29.2
-      '@base-ui/utils': 0.2.7(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@base-ui/utils': 0.3.1(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@floating-ui/react-dom': 2.1.8(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@floating-ui/utils': 0.2.11
-      date-fns: 4.1.0
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
       use-sync-external-store: 1.6.0(react@19.2.4)
     optionalDependencies:
       '@types/react': 19.2.14
+      date-fns: 4.1.0
 
-  '@base-ui/utils@0.2.7(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@base-ui/utils@0.3.1(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@babel/runtime': 7.29.2
       '@floating-ui/utils': 0.2.11
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
-      reselect: 5.1.1
+      reselect: 5.2.0
       use-sync-external-store: 1.6.0(react@19.2.4)
     optionalDependencies:
       '@types/react': 19.2.14
@@ -12994,12 +12810,6 @@ snapshots:
     dependencies:
       tslib: 2.8.1
     optional: true
-
-  '@emotion/is-prop-valid@1.4.0':
-    dependencies:
-      '@emotion/memoize': 0.9.0
-
-  '@emotion/memoize@0.9.0': {}
 
   '@envelop/core@5.3.2':
     dependencies:
@@ -13624,12 +13434,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@iconify/utils@3.1.0':
-    dependencies:
-      '@antfu/install-pkg': 1.1.0
-      '@iconify/types': 2.0.0
-      mlly: 1.8.0
-
   '@img/colour@1.1.0': {}
 
   '@img/sharp-darwin-arm64@0.33.5':
@@ -13862,6 +13666,8 @@ snapshots:
 
   '@lit-labs/ssr-dom-shim@1.4.0': {}
 
+  '@lit-labs/ssr-dom-shim@1.6.0': {}
+
   '@lit/reactive-element@2.1.1':
     dependencies:
       '@lit-labs/ssr-dom-shim': 1.4.0
@@ -13961,73 +13767,6 @@ snapshots:
       esbuild: 0.14.54
 
   '@oslojs/encoding@1.1.0': {}
-
-  '@oxc-parser/binding-android-arm-eabi@0.115.0':
-    optional: true
-
-  '@oxc-parser/binding-android-arm64@0.115.0':
-    optional: true
-
-  '@oxc-parser/binding-darwin-arm64@0.115.0':
-    optional: true
-
-  '@oxc-parser/binding-darwin-x64@0.115.0':
-    optional: true
-
-  '@oxc-parser/binding-freebsd-x64@0.115.0':
-    optional: true
-
-  '@oxc-parser/binding-linux-arm-gnueabihf@0.115.0':
-    optional: true
-
-  '@oxc-parser/binding-linux-arm-musleabihf@0.115.0':
-    optional: true
-
-  '@oxc-parser/binding-linux-arm64-gnu@0.115.0':
-    optional: true
-
-  '@oxc-parser/binding-linux-arm64-musl@0.115.0':
-    optional: true
-
-  '@oxc-parser/binding-linux-ppc64-gnu@0.115.0':
-    optional: true
-
-  '@oxc-parser/binding-linux-riscv64-gnu@0.115.0':
-    optional: true
-
-  '@oxc-parser/binding-linux-riscv64-musl@0.115.0':
-    optional: true
-
-  '@oxc-parser/binding-linux-s390x-gnu@0.115.0':
-    optional: true
-
-  '@oxc-parser/binding-linux-x64-gnu@0.115.0':
-    optional: true
-
-  '@oxc-parser/binding-linux-x64-musl@0.115.0':
-    optional: true
-
-  '@oxc-parser/binding-openharmony-arm64@0.115.0':
-    optional: true
-
-  '@oxc-parser/binding-wasm32-wasi@0.115.0(@emnapi/runtime@1.9.2)':
-    dependencies:
-      '@napi-rs/wasm-runtime': 1.1.2(@emnapi/runtime@1.9.2)
-    transitivePeerDependencies:
-      - '@emnapi/core'
-      - '@emnapi/runtime'
-    optional: true
-
-  '@oxc-parser/binding-win32-arm64-msvc@0.115.0':
-    optional: true
-
-  '@oxc-parser/binding-win32-ia32-msvc@0.115.0':
-    optional: true
-
-  '@oxc-parser/binding-win32-x64-msvc@0.115.0':
-    optional: true
-
-  '@oxc-project/types@0.115.0': {}
 
   '@oxc-project/types@0.122.0': {}
 
@@ -15685,24 +15424,6 @@ snapshots:
     transitivePeerDependencies:
       - vue
 
-  '@unocss/cli@66.6.7':
-    dependencies:
-      '@jridgewell/remapping': 2.3.5
-      '@unocss/config': 66.6.7
-      '@unocss/core': 66.6.7
-      '@unocss/preset-wind3': 66.6.7
-      '@unocss/preset-wind4': 66.6.7
-      '@unocss/transformer-directives': 66.6.7
-      cac: 6.7.14
-      chokidar: 5.0.0
-      colorette: 2.0.20
-      consola: 3.4.2
-      magic-string: 0.30.21
-      pathe: 2.0.3
-      perfect-debounce: 2.1.0
-      tinyglobby: 0.2.15
-      unplugin-utils: 0.3.1
-
   '@unocss/config@66.0.0':
     dependencies:
       '@unocss/core': 66.0.0
@@ -15713,16 +15434,7 @@ snapshots:
       '@unocss/core': 66.6.0
       unconfig: 7.4.2
 
-  '@unocss/config@66.6.7':
-    dependencies:
-      '@unocss/core': 66.6.7
-      colorette: 2.0.20
-      consola: 3.4.2
-      unconfig: 7.5.0
-
   '@unocss/core@66.0.0': {}
-
-  '@unocss/core@66.5.4': {}
 
   '@unocss/core@66.6.0': {}
 
@@ -15749,14 +15461,6 @@ snapshots:
       - supports-color
       - typescript
 
-  '@unocss/extractor-arbitrary-variants@66.5.4':
-    dependencies:
-      '@unocss/core': 66.5.4
-
-  '@unocss/extractor-arbitrary-variants@66.6.7':
-    dependencies:
-      '@unocss/core': 66.6.7
-
   '@unocss/inspector@66.0.0':
     dependencies:
       '@unocss/core': 66.0.0
@@ -15768,18 +15472,6 @@ snapshots:
     transitivePeerDependencies:
       - vue
 
-  '@unocss/inspector@66.6.7':
-    dependencies:
-      '@unocss/core': 66.6.7
-      '@unocss/rule-utils': 66.6.7
-      colorette: 2.0.20
-      gzip-size: 6.0.0
-      sirv: 3.0.2
-
-  '@unocss/preset-attributify@66.6.7':
-    dependencies:
-      '@unocss/core': 66.6.7
-
   '@unocss/preset-icons@66.0.0':
     dependencies:
       '@iconify/utils': 2.3.0
@@ -15788,66 +15480,6 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@unocss/preset-icons@66.6.7':
-    dependencies:
-      '@iconify/utils': 3.1.0
-      '@unocss/core': 66.6.7
-      ofetch: 1.5.1
-
-  '@unocss/preset-mini@66.5.4':
-    dependencies:
-      '@unocss/core': 66.5.4
-      '@unocss/extractor-arbitrary-variants': 66.5.4
-      '@unocss/rule-utils': 66.5.4
-
-  '@unocss/preset-mini@66.6.7':
-    dependencies:
-      '@unocss/core': 66.6.7
-      '@unocss/extractor-arbitrary-variants': 66.6.7
-      '@unocss/rule-utils': 66.6.7
-
-  '@unocss/preset-tagify@66.6.7':
-    dependencies:
-      '@unocss/core': 66.6.7
-
-  '@unocss/preset-typography@66.6.7':
-    dependencies:
-      '@unocss/core': 66.6.7
-      '@unocss/rule-utils': 66.6.7
-
-  '@unocss/preset-uno@66.6.7':
-    dependencies:
-      '@unocss/core': 66.6.7
-      '@unocss/preset-wind3': 66.6.7
-
-  '@unocss/preset-web-fonts@66.6.7':
-    dependencies:
-      '@unocss/core': 66.6.7
-      ofetch: 1.5.1
-
-  '@unocss/preset-wind3@66.5.4':
-    dependencies:
-      '@unocss/core': 66.5.4
-      '@unocss/preset-mini': 66.5.4
-      '@unocss/rule-utils': 66.5.4
-
-  '@unocss/preset-wind3@66.6.7':
-    dependencies:
-      '@unocss/core': 66.6.7
-      '@unocss/preset-mini': 66.6.7
-      '@unocss/rule-utils': 66.6.7
-
-  '@unocss/preset-wind4@66.6.7':
-    dependencies:
-      '@unocss/core': 66.6.7
-      '@unocss/extractor-arbitrary-variants': 66.6.7
-      '@unocss/rule-utils': 66.6.7
-
-  '@unocss/preset-wind@66.6.7':
-    dependencies:
-      '@unocss/core': 66.6.7
-      '@unocss/preset-wind3': 66.6.7
-
   '@unocss/reset@66.0.0': {}
 
   '@unocss/rule-utils@66.0.0':
@@ -15855,39 +15487,10 @@ snapshots:
       '@unocss/core': 66.6.0
       magic-string: 0.30.21
 
-  '@unocss/rule-utils@66.5.4':
-    dependencies:
-      '@unocss/core': 66.6.7
-      magic-string: 0.30.21
-
   '@unocss/rule-utils@66.6.0':
     dependencies:
       '@unocss/core': 66.6.0
       magic-string: 0.30.21
-
-  '@unocss/rule-utils@66.6.7':
-    dependencies:
-      '@unocss/core': 66.6.7
-      magic-string: 0.30.21
-
-  '@unocss/transformer-attributify-jsx@66.6.7(@emnapi/runtime@1.9.2)':
-    dependencies:
-      '@unocss/core': 66.6.7
-      oxc-parser: 0.115.0(@emnapi/runtime@1.9.2)
-      oxc-walker: 0.7.0(oxc-parser@0.115.0(@emnapi/runtime@1.9.2))
-    transitivePeerDependencies:
-      - '@emnapi/core'
-      - '@emnapi/runtime'
-
-  '@unocss/transformer-compile-class@66.6.7':
-    dependencies:
-      '@unocss/core': 66.6.7
-
-  '@unocss/transformer-directives@66.6.7':
-    dependencies:
-      '@unocss/core': 66.6.7
-      '@unocss/rule-utils': 66.6.7
-      css-tree: 3.1.0
 
   '@unocss/transformer-variant-group@66.6.7':
     dependencies:
@@ -15906,19 +15509,6 @@ snapshots:
       vite: 8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
     transitivePeerDependencies:
       - vue
-
-  '@unocss/vite@66.6.7(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))':
-    dependencies:
-      '@jridgewell/remapping': 2.3.5
-      '@unocss/config': 66.6.7
-      '@unocss/core': 66.6.7
-      '@unocss/inspector': 66.6.7
-      chokidar: 5.0.0
-      magic-string: 0.30.21
-      pathe: 2.0.3
-      tinyglobby: 0.2.15
-      unplugin-utils: 0.3.1
-      vite: 8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
 
   '@use-gesture/core@10.3.1': {}
 
@@ -16720,10 +16310,6 @@ snapshots:
     dependencies:
       readdirp: 4.0.2
 
-  chokidar@5.0.0:
-    dependencies:
-      readdirp: 5.0.0
-
   chownr@1.1.4: {}
 
   ci-info@4.1.0: {}
@@ -16737,6 +16323,12 @@ snapshots:
       string-width: 4.2.3
       strip-ansi: 6.0.1
       wrap-ansi: 7.0.0
+
+  cliui@9.0.1:
+    dependencies:
+      string-width: 7.2.0
+      strip-ansi: 7.1.0
+      wrap-ansi: 9.0.0
 
   clone-stats@0.0.1: {}
 
@@ -16909,11 +16501,6 @@ snapshots:
       domutils: 3.2.2
       nth-check: 2.1.1
 
-  css-tree@3.1.0:
-    dependencies:
-      mdn-data: 2.12.2
-      source-map-js: 1.2.1
-
   css-what@6.1.0: {}
 
   csscolorparser@1.0.3: {}
@@ -17021,9 +16608,9 @@ snapshots:
 
   dequal@2.0.3: {}
 
-  destr@2.0.3: {}
+  design-tokens-format-module@0.11.2: {}
 
-  destr@2.0.5: {}
+  destr@2.0.3: {}
 
   detect-gpu@5.0.70:
     dependencies:
@@ -17829,23 +17416,21 @@ snapshots:
 
   fractional-indexing@3.2.0: {}
 
-  framer-motion@12.23.12(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
+  framer-motion@12.23.12(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
     dependencies:
       motion-dom: 12.23.12
       motion-utils: 12.23.6
       tslib: 2.8.1
     optionalDependencies:
-      '@emotion/is-prop-valid': 1.4.0
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
 
-  framer-motion@12.23.24(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
+  framer-motion@12.23.24(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
     dependencies:
       motion-dom: 12.23.23
       motion-utils: 12.23.6
       tslib: 2.8.1
     optionalDependencies:
-      '@emotion/is-prop-valid': 1.4.0
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
 
@@ -18880,6 +18465,8 @@ snapshots:
       lightningcss-win32-arm64-msvc: 1.32.0
       lightningcss-win32-x64-msvc: 1.32.0
 
+  lil-gui@0.21.0: {}
+
   linkify-it@5.0.0:
     dependencies:
       uc.micro: 2.1.0
@@ -18889,6 +18476,12 @@ snapshots:
   lit-element@4.2.1:
     dependencies:
       '@lit-labs/ssr-dom-shim': 1.4.0
+      '@lit/reactive-element': 2.1.1
+      lit-html: 3.3.1
+
+  lit-element@4.2.2:
+    dependencies:
+      '@lit-labs/ssr-dom-shim': 1.6.0
       '@lit/reactive-element': 2.1.1
       lit-html: 3.3.1
 
@@ -18981,16 +18574,6 @@ snapshots:
     dependencies:
       '@types/three': 0.165.0
       three: 0.173.0
-
-  magic-regexp@0.10.0:
-    dependencies:
-      estree-walker: 3.0.3
-      magic-string: 0.30.21
-      mlly: 1.8.0
-      regexp-tree: 0.1.27
-      type-level-regexp: 0.1.17
-      ufo: 1.6.1
-      unplugin: 2.3.10
 
   magic-string@0.25.9:
     dependencies:
@@ -19238,8 +18821,6 @@ snapshots:
   mdast-util-to-string@4.0.0:
     dependencies:
       '@types/mdast': 4.0.4
-
-  mdn-data@2.12.2: {}
 
   mdurl@2.0.0: {}
 
@@ -19581,13 +19162,6 @@ snapshots:
       pkg-types: 1.3.1
       ufo: 1.5.4
 
-  mlly@1.8.0:
-    dependencies:
-      acorn: 8.15.0
-      pathe: 2.0.3
-      pkg-types: 1.3.1
-      ufo: 1.6.1
-
   motion-dom@12.23.12:
     dependencies:
       motion-utils: 12.23.6
@@ -19598,21 +19172,19 @@ snapshots:
 
   motion-utils@12.23.6: {}
 
-  motion@12.23.12(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
+  motion@12.23.12(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
     dependencies:
-      framer-motion: 12.23.12(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      framer-motion: 12.23.12(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       tslib: 2.8.1
     optionalDependencies:
-      '@emotion/is-prop-valid': 1.4.0
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
 
-  motion@12.23.24(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
+  motion@12.23.24(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
     dependencies:
-      framer-motion: 12.23.24(@emotion/is-prop-valid@1.4.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      framer-motion: 12.23.24(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       tslib: 2.8.1
     optionalDependencies:
-      '@emotion/is-prop-valid': 1.4.0
       react: 19.2.4
       react-dom: 19.2.4(react@19.2.4)
 
@@ -19651,8 +19223,6 @@ snapshots:
       semver: 7.7.3
 
   node-fetch-native@1.6.4: {}
-
-  node-fetch-native@1.6.7: {}
 
   node-fetch@2.7.0:
     dependencies:
@@ -19716,12 +19286,6 @@ snapshots:
       node-fetch-native: 1.6.4
       ufo: 1.5.4
 
-  ofetch@1.5.1:
-    dependencies:
-      destr: 2.0.5
-      node-fetch-native: 1.6.7
-      ufo: 1.6.1
-
   once@1.4.0:
     dependencies:
       wrappy: 1.0.2
@@ -19753,39 +19317,6 @@ snapshots:
   orderedmap@2.1.1: {}
 
   os-homedir@1.0.2: {}
-
-  oxc-parser@0.115.0(@emnapi/runtime@1.9.2):
-    dependencies:
-      '@oxc-project/types': 0.115.0
-    optionalDependencies:
-      '@oxc-parser/binding-android-arm-eabi': 0.115.0
-      '@oxc-parser/binding-android-arm64': 0.115.0
-      '@oxc-parser/binding-darwin-arm64': 0.115.0
-      '@oxc-parser/binding-darwin-x64': 0.115.0
-      '@oxc-parser/binding-freebsd-x64': 0.115.0
-      '@oxc-parser/binding-linux-arm-gnueabihf': 0.115.0
-      '@oxc-parser/binding-linux-arm-musleabihf': 0.115.0
-      '@oxc-parser/binding-linux-arm64-gnu': 0.115.0
-      '@oxc-parser/binding-linux-arm64-musl': 0.115.0
-      '@oxc-parser/binding-linux-ppc64-gnu': 0.115.0
-      '@oxc-parser/binding-linux-riscv64-gnu': 0.115.0
-      '@oxc-parser/binding-linux-riscv64-musl': 0.115.0
-      '@oxc-parser/binding-linux-s390x-gnu': 0.115.0
-      '@oxc-parser/binding-linux-x64-gnu': 0.115.0
-      '@oxc-parser/binding-linux-x64-musl': 0.115.0
-      '@oxc-parser/binding-openharmony-arm64': 0.115.0
-      '@oxc-parser/binding-wasm32-wasi': 0.115.0(@emnapi/runtime@1.9.2)
-      '@oxc-parser/binding-win32-arm64-msvc': 0.115.0
-      '@oxc-parser/binding-win32-ia32-msvc': 0.115.0
-      '@oxc-parser/binding-win32-x64-msvc': 0.115.0
-    transitivePeerDependencies:
-      - '@emnapi/core'
-      - '@emnapi/runtime'
-
-  oxc-walker@0.7.0(oxc-parser@0.115.0(@emnapi/runtime@1.9.2)):
-    dependencies:
-      magic-regexp: 0.10.0
-      oxc-parser: 0.115.0(@emnapi/runtime@1.9.2)
 
   p-limit@2.3.0:
     dependencies:
@@ -19821,8 +19352,6 @@ snapshots:
   package-manager-detector@0.2.11:
     dependencies:
       quansync: 0.2.11
-
-  package-manager-detector@1.3.0: {}
 
   pako@1.0.11: {}
 
@@ -19914,8 +19443,6 @@ snapshots:
     dependencies:
       ieee754: 1.2.1
       resolve-protobuf-schema: 2.1.0
-
-  perfect-debounce@2.1.0: {}
 
   performance-now@2.1.0: {}
 
@@ -20195,13 +19722,6 @@ snapshots:
 
   react-fast-compare@2.0.4: {}
 
-  react-hot-toast@2.6.0(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
-    dependencies:
-      csstype: 3.2.3
-      goober: 2.1.16(csstype@3.2.3)
-      react: 19.2.4
-      react-dom: 19.2.4(react@19.2.4)
-
   react-hotkeys-hook@4.6.1(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
     dependencies:
       react: 19.2.4
@@ -20212,8 +19732,6 @@ snapshots:
   react-is@17.0.2: {}
 
   react-is@18.2.0: {}
-
-  react-is@19.1.0: {}
 
   react-lazy-with-preload@2.2.1: {}
 
@@ -20257,8 +19775,6 @@ snapshots:
       picomatch: 2.3.1
 
   readdirp@4.0.2: {}
-
-  readdirp@5.0.0: {}
 
   recast@0.23.11:
     dependencies:
@@ -20334,8 +19850,6 @@ snapshots:
   regex@5.0.2:
     dependencies:
       regex-utilities: 2.3.0
-
-  regexp-tree@0.1.27: {}
 
   regexp.prototype.flags@1.5.3:
     dependencies:
@@ -20455,7 +19969,7 @@ snapshots:
 
   require-from-string@2.0.2: {}
 
-  reselect@5.1.1: {}
+  reselect@5.2.0: {}
 
   resolve-dir@0.1.1:
     dependencies:
@@ -20793,12 +20307,6 @@ snapshots:
       is-arrayish: 0.3.2
 
   sirv@3.0.0:
-    dependencies:
-      '@polka/url': 1.0.0-next.28
-      mrmime: 2.0.0
-      totalist: 3.0.1
-
-  sirv@3.0.2:
     dependencies:
       '@polka/url': 1.0.0-next.28
       mrmime: 2.0.0
@@ -21255,8 +20763,6 @@ snapshots:
 
   type-fest@4.30.2: {}
 
-  type-level-regexp@0.1.17: {}
-
   typed-array-buffer@1.0.3:
     dependencies:
       call-bound: 1.0.4
@@ -21335,16 +20841,11 @@ snapshots:
       '@quansync/fs': 1.0.0
       quansync: 1.0.0
 
-  unconfig-core@7.5.0:
-    dependencies:
-      '@quansync/fs': 1.0.0
-      quansync: 1.0.0
-
   unconfig@7.0.0:
     dependencies:
       '@antfu/utils': 8.1.1
       defu: 6.1.4
-      jiti: 2.5.1
+      jiti: 2.6.1
 
   unconfig@7.3.3:
     dependencies:
@@ -21360,14 +20861,6 @@ snapshots:
       jiti: 2.6.1
       quansync: 1.0.0
       unconfig-core: 7.4.2
-
-  unconfig@7.5.0:
-    dependencies:
-      '@quansync/fs': 1.0.0
-      defu: 6.1.4
-      jiti: 2.6.1
-      quansync: 1.0.0
-      unconfig-core: 7.5.0
 
   undici-types@6.20.0: {}
 
@@ -21454,64 +20947,7 @@ snapshots:
 
   universalify@2.0.1: {}
 
-  unocss-preset-completion@0.3.0: {}
-
-  unocss@66.6.7(@emnapi/runtime@1.9.2)(@unocss/astro@66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)))(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)):
-    dependencies:
-      '@unocss/cli': 66.6.7
-      '@unocss/core': 66.6.7
-      '@unocss/preset-attributify': 66.6.7
-      '@unocss/preset-icons': 66.6.7
-      '@unocss/preset-mini': 66.6.7
-      '@unocss/preset-tagify': 66.6.7
-      '@unocss/preset-typography': 66.6.7
-      '@unocss/preset-uno': 66.6.7
-      '@unocss/preset-web-fonts': 66.6.7
-      '@unocss/preset-wind': 66.6.7
-      '@unocss/preset-wind3': 66.6.7
-      '@unocss/preset-wind4': 66.6.7
-      '@unocss/transformer-attributify-jsx': 66.6.7(@emnapi/runtime@1.9.2)
-      '@unocss/transformer-compile-class': 66.6.7
-      '@unocss/transformer-directives': 66.6.7
-      '@unocss/transformer-variant-group': 66.6.7
-      '@unocss/vite': 66.6.7(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
-    optionalDependencies:
-      '@unocss/astro': 66.0.0(vite@8.0.5(@emnapi/runtime@1.9.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
-    transitivePeerDependencies:
-      - '@emnapi/core'
-      - '@emnapi/runtime'
-      - vite
-
-  unocss@66.6.7(@emnapi/runtime@1.9.2)(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)):
-    dependencies:
-      '@unocss/cli': 66.6.7
-      '@unocss/core': 66.6.7
-      '@unocss/preset-attributify': 66.6.7
-      '@unocss/preset-icons': 66.6.7
-      '@unocss/preset-mini': 66.6.7
-      '@unocss/preset-tagify': 66.6.7
-      '@unocss/preset-typography': 66.6.7
-      '@unocss/preset-uno': 66.6.7
-      '@unocss/preset-web-fonts': 66.6.7
-      '@unocss/preset-wind': 66.6.7
-      '@unocss/preset-wind3': 66.6.7
-      '@unocss/preset-wind4': 66.6.7
-      '@unocss/transformer-attributify-jsx': 66.6.7(@emnapi/runtime@1.9.2)
-      '@unocss/transformer-compile-class': 66.6.7
-      '@unocss/transformer-directives': 66.6.7
-      '@unocss/transformer-variant-group': 66.6.7
-      '@unocss/vite': 66.6.7(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
-    transitivePeerDependencies:
-      - '@emnapi/core'
-      - '@emnapi/runtime'
-      - vite
-
   unplugin-utils@0.2.4:
-    dependencies:
-      pathe: 2.0.3
-      picomatch: 4.0.3
-
-  unplugin-utils@0.3.1:
     dependencies:
       pathe: 2.0.3
       picomatch: 4.0.3
@@ -22220,6 +21656,8 @@ snapshots:
 
   yargs-parser@21.1.1: {}
 
+  yargs-parser@22.0.0: {}
+
   yargs@17.7.2:
     dependencies:
       cliui: 8.0.1
@@ -22229,6 +21667,15 @@ snapshots:
       string-width: 4.2.3
       y18n: 5.0.8
       yargs-parser: 21.1.1
+
+  yargs@18.0.0:
+    dependencies:
+      cliui: 9.0.1
+      escalade: 3.2.0
+      get-caller-file: 2.0.5
+      string-width: 7.2.0
+      y18n: 5.0.8
+      yargs-parser: 22.0.0
 
   yocto-queue@0.1.0: {}
 

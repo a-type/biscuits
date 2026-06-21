@@ -10,7 +10,8 @@
 	},
 	"devDependencies": {
 		"@a-type/ui": "catalog:",
-		"unocss": "catalog:",
+		"@arbor-css/core": "catalog:",
+		"@arbor-css/postcss": "catalog:",
 		"@unocss/transformer-variant-group": "catalog:"
 	}
 }

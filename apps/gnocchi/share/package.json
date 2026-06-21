@@ -42,7 +42,8 @@
 		"@types/react-dom": "catalog:",
 		"@vitejs/plugin-react": "catalog:",
 		"typescript": "catalog:",
-		"unocss": "catalog:",
+		"@arbor-css/core": "catalog:",
+		"@arbor-css/postcss": "catalog:",
 		"vite": "catalog:",
 		"vite-tsconfig-paths": "catalog:",
 		"wrangler": "catalog:"
