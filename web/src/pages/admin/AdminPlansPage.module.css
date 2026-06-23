@@ -1,0 +1,18 @@
+.col {
+	display: flex;
+	flex-direction: column;
+}
+
+.dialogTitle {
+	min-width: 0;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+.flagRow {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: var(--m-spacing-xs);
+}

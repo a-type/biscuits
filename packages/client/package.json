@@ -77,7 +77,6 @@
 		"motion": "catalog:"
 	},
 	"devDependencies": {
-		"@unocss/transformer-variant-group": "catalog:",
 		"@types/react": "catalog:",
 		"@arbor-css/core": "catalog:",
 		"@arbor-css/postcss": "catalog:",

@@ -1,6 +1,7 @@
 import { Footer } from '@/components/help/Footer.jsx';
-import { Button, H1, H2, P, PageContent, PageRoot } from '@a-type/ui';
+import { Box, Button, Heading, P, PageContent, PageRoot } from '@a-type/ui';
 import { Link } from '@verdant-web/react-router';
+import classes from './AboutPage.module.css';
 
 export interface AboutPageProps {}
 
@@ -8,8 +9,8 @@ export function AboutPage({}: AboutPageProps) {
 	return (
 		<PageRoot>
 			<PageContent>
-				<div className="flex flex-col gap-8">
-					<H1>What is Biscuits, anyway?</H1>
+				<Box col gap="lg">
+					<Heading emphasis="primary">What is Biscuits, anyway?</Heading>
 					<P>
 						Biscuits is a collection of small, scratch-made apps designed to
 						make your life easier. They&apos;re free to use forever, with no ads
@@ -32,7 +33,9 @@ export function AboutPage({}: AboutPageProps) {
 						through your browser, but they run on your device, and your data
 						stays on your device, too.
 					</P>
-					<H2>Why are some things free, and others paid?</H2>
+					<Heading emphasis="secondary">
+						Why are some things free, and others paid?
+					</Heading>
 					<P>
 						I&apos;ve tried to design Biscuits paid features to make sense, and
 						make as much available for free as possible. The way it works out is
@@ -57,14 +60,14 @@ export function AboutPage({}: AboutPageProps) {
 						what value membership provides and what you&apos;re always entitled
 						to as a free user.
 					</P>
-					<H2>Why these apps?</H2>
+					<Heading emphasis="secondary">Why these apps?</Heading>
 					<P>
 						Honestly, I&apos;m making Biscuits for me first! All the apps I make
 						are ones I want to use in my own life. You may find them relevant,
 						you may not. But hopefully at least some of them are useful to you -
 						maybe even enough to join as a member?
 					</P>
-					<H2>Why &quot;Biscuits?&quot;</H2>
+					<Heading emphasis="secondary">Why &quot;Biscuits?&quot;</Heading>
 					<P>
 						Biscuits was a throwaway name that kinda stuck. It has a few things
 						going for it:
@@ -82,18 +85,18 @@ export function AboutPage({}: AboutPageProps) {
 					</P>
 					<P>Here&apos;s my own cat, Pashka, as a gift for reading all this:</P>
 					<img
-						className="w-full"
+						className={classes.fullImage}
 						src="https://resources.biscuits.club/images/pashka.jpg"
 						alt="Pashka the cat"
 					/>
 					<Button
 						render={<Link to="/" />}
-						className="self-start"
 						emphasis="primary"
+						style={{ alignSelf: 'start' }}
 					>
 						Go home
 					</Button>
-				</div>
+				</Box>
 				<Footer />
 			</PageContent>
 		</PageRoot>

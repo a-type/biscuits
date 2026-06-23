@@ -1,0 +1,21 @@
+.cardMainJustifyStart {
+	justify-content: flex-start;
+}
+
+.cardTitleRow {
+	flex-direction: row;
+}
+
+.you {
+	font-weight: var(--m-typography-weight-bold);
+}
+
+.cardTitleRowMuted {
+	flex-direction: row;
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+}
+
+.membershipLimit {
+	padding-block: var(--m-spacing-md);
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+}

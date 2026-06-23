@@ -18,7 +18,6 @@
 		"@originjs/vite-plugin-commonjs": "catalog:",
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
-		"@unocss/transformer-variant-group": "catalog:",
 		"@use-gesture/react": "catalog:",
 		"@verdant-web/react-router": "catalog:",
 		"@verdant-web/store": "catalog:",

@@ -1,0 +1,5 @@
+.root {
+	height: --fn-literal(120px);
+	width: 100%;
+	overflow: clip;
+}

@@ -3,12 +3,10 @@ import { hooks } from '@/stores/groceries/index.js';
 import {
 	ActionBar,
 	Button,
-	ColorPicker,
 	Dialog,
 	Divider,
 	FormikForm,
 	Icon,
-	PaletteName,
 	TextField,
 } from '@a-type/ui';
 import classNames from 'classnames';
@@ -55,10 +53,11 @@ export function TagManager({
 									'flex flex-shrink-0 flex-row items-center gap-2',
 								)}
 							>
-								<ColorPicker
+								{/* TODO: color picker */}
+								{/* <ColorPicker
 									onChange={(color) => tag.set('color', color)}
 									value={tag.get('color') as PaletteName}
-								/>
+								/> */}
 								<div className="flex-1 text-md">{tag.get('name')}</div>
 								<Button
 									color="attention"

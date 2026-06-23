@@ -31,7 +31,6 @@
 		"vite-plugin-pwa": "catalog:",
 		"@arbor-css/core": "catalog:",
 		"@arbor-css/postcss": "catalog:",
-		"@unocss/transformer-variant-group": "catalog:",
 		"workbox-core": "catalog:",
 		"workbox-expiration": "catalog:",
 		"workbox-precaching": "catalog:",

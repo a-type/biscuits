@@ -1,6 +1,7 @@
 import {
 	AvatarList,
 	AvatarListItem,
+	Box,
 	CardActions,
 	CardContent,
 	CardFooter,
@@ -89,7 +90,7 @@ function VerdantLibrary({
 	return (
 		<CardRoot>
 			<CardMain>
-				<CardTitle className="flex flex-row items-center gap-2">
+				<CardTitle render={<Box gap="sm" items="center" />}>
 					<img width={24} src={`${getAppUrl(app)}/${app.iconPath}`} />
 					{app.name}
 					{access === 'user' && <span> (private data)</span>}

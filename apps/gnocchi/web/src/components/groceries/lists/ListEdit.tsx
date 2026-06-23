@@ -2,7 +2,6 @@ import { hooks } from '@/stores/groceries/index.js';
 import { useDeleteList } from '@/stores/groceries/mutations.js';
 import {
 	Button,
-	ColorPicker,
 	Dialog,
 	DialogActions,
 	DialogClose,
@@ -11,7 +10,6 @@ import {
 	H2,
 	Icon,
 	LiveUpdateTextField,
-	PaletteName,
 } from '@a-type/ui';
 import { useState } from 'react';
 
@@ -44,10 +42,11 @@ export function ListEdit({ listId }: ListEditProps) {
 							onChange={(name) => list.set('name', name)}
 							required
 						/>
-						<ColorPicker
+						{/* TODO: color picker */}
+						{/* <ColorPicker
 							value={list.get('color') as PaletteName}
 							onChange={(color) => list.set('color', color)}
-						/>
+						/> */}
 					</div>
 					<Button
 						emphasis="primary"

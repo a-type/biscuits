@@ -2,11 +2,12 @@ import { UserMenu } from '@/components/auth/UserMenu.js';
 import { Footer } from '@/components/help/Footer.jsx';
 import { AppGrid } from '@/components/promo/AppGrid.jsx';
 import { LazyScroll } from '@/components/promo/LazyScroll.jsx';
-import { Box, Button, H2, Icon, P, PageFixedArea } from '@a-type/ui';
+import { Box, Button, clsx, Heading, Icon, P, PageFixedArea } from '@a-type/ui';
 import { visibleApps } from '@biscuits/apps';
 import { Link } from '@verdant-web/react-router';
 import classNames from 'classnames';
-import { Suspense, lazy } from 'react';
+import { lazy, Suspense } from 'react';
+import cls from './HomePage.module.css';
 
 const Paws = lazy(() => import('@/components/paws/Paws.jsx'));
 
@@ -16,87 +17,89 @@ export default function HomePage() {
 			full
 			col
 			gap
-			p={{ default: 'xs', lg: 'sm' }}
-			className="bg-primary-wash bg-darken-2"
+			p="sm"
+			rounded={false}
+			surface="secondary"
+			className={cls.bg}
 		>
 			<Box
 				col
 				items="center"
 				p
 				gap="xl"
-				className="w-full flex-1 rounded-lg shadow-sm bg-white"
+				full="width"
+				rounded
+				className={cls.main}
 			>
-				<Box className="z-1 w-full" col items="center">
-					<PageFixedArea className="flex flex-col justify-stretch py-2 bg-transparent md:max-w-800px sm:flex-row sm:items-center sm:justify-between">
-						<Box gap>
+				<Box
+					full="width"
+					className={cls.nav}
+					render={<nav />}
+					col
+					items="center"
+				>
+					<PageFixedArea className={clsx('@mode-dense', cls.navFixed)}>
+						<Box gap items="center">
 							<img
 								src="/icon.png"
 								alt="The Biscuits logo: an outlined 'B' with two cat paws overlaid"
-								className="h-8 w-8 border-1 rounded-xs border-solid border-primary-dark"
+								className={cls.logo}
 							/>
-							<h1
-								className={classNames(
-									'm-0 text-md font-semibold color-primary-ink color-darken-1',
-									'rounded-lg p-2 leading-none bg-white',
-								)}
-							>
-								Biscuits
-							</h1>
+							<h1 className={cls.navTitle}>Biscuits</h1>
 						</Box>
 						<Suspense>
 							<UserMenu />
 						</Suspense>
 					</PageFixedArea>
 				</Box>
-				<Box col className="z-1 w-full" items="center" gap="xl">
+				<Box col full="width" items="center" gap="xl" style={{ zIndex: 1 }}>
 					<Box
 						col
-						gap="xl"
+						gap="lg"
 						items="stretch"
-						className="max-w-100vw flex-grow md:max-w-800px"
+						className={clsx('@mode-hero', cls.hero, cls.section)}
 					>
-						<div
-							className={classNames(
-								'font-fancy mx-sm mt-0 block text-10vmin leading-none color-black',
-							)}
-						>
+						<div className={classNames('font-fancy', cls.heroTagline)}>
 							Made for you
-							<br />
-							&amp; yours
+							<br /> &amp; yours
 						</div>
-						<Box
-							col
-							gap
-							className="[flex:1_0_0] font-semibold color-primary-dark sm:mt-5"
-						>
-							<P className="mb-4 text-lg font-300 leading-relaxed color-gray-dark">
-								Biscuits' <em className="font-fancy font-300">local-first</em>{' '}
+						<Box col gap>
+							<P className={cls.heroDescription}>
+								Biscuits'{' '}
+								<em className={clsx('font-fancy', cls.emphasis)}>
+									local-first
+								</em>{' '}
 								apps are designed to make life easier for you and your family.
 								Free to use forever, no ads, no tracking.
 							</P>
 						</Box>
 					</Box>
 					<AppGrid />
-					<Box className="max-w-100vw md:max-w-800px" col gap items="start">
-						<P className="font-300 leading-loose color-gray-dark">
-							No signup needed. No need to open the App Store. These are instant
-							web apps, no installation required. Just click &quot;Open
-							app&quot; to get started.
-						</P>
-					</Box>
 					<Box
-						p
-						surface
-						color="accent"
-						className="theme max-w-90vw lg:max-w-800px"
+						className={clsx(cls.section, cls.heroDescription)}
 						col
 						gap
 						items="start"
-						container="reset"
+						render={<P />}
+					>
+						No signup needed. No need to open the App Store. These are instant
+						web apps, no installation required. Just click &quot;Open app&quot;
+						to get started.
+					</Box>
+					<Box
+						p
+						surface="secondary"
+						color="accent"
+						className={cls.section}
+						col
+						gap
+						items="start"
 						border
 					>
-						<H2 className="font-fancy font-semibold">Family Plan</H2>
-						<P className="font-fancy font-300 italic">
+						<Heading emphasis="secondary" className="font-fancy">
+							Family Plan
+						</Heading>
+						<P className={clsx('font-fancy', cls.emphasis)}>
 							One subscription, every Biscuits app.
 						</P>
 						<LazyScroll>
@@ -110,7 +113,7 @@ export default function HomePage() {
 										key={url}
 										src={url}
 										alt=""
-										className="h-full w-auto rounded-md"
+										className={cls.carouselImage}
 									/>
 								))}
 						</LazyScroll>
@@ -122,20 +125,15 @@ export default function HomePage() {
 						<Button
 							render={<Link to="/join" />}
 							emphasis="primary"
-							className="ml-auto"
+							style={{ marginLeft: 'auto' }}
 						>
 							Learn more <Icon name="arrowRight" />
 						</Button>
 					</Box>
-					<Box
-						className="max-w-100vw pb-xl md:max-w-800px"
-						col
-						gap
-						items="start"
-					>
-						<H2 className="font-fancy font-semibold">
-							What is <em className="font-fancy font-light">local-first?</em>
-						</H2>
+					<Box className={cls.section} col gap items="start">
+						<Heading emphasis="secondary" className="font-fancy">
+							What is <em className={cls.emphasis}>local-first?</em>
+						</Heading>
 						<P>
 							Local-first is kind of like how software used to work, only with a
 							modern twist. Instead of relying on the cloud or mandating a user
@@ -149,17 +147,20 @@ export default function HomePage() {
 							service like Google Docs. Biscuits apps support these extra
 							features with a reasonably-priced plan.
 						</P>
-						<Link
-							to="/about"
-							className="ml-auto inline-flex items-center gap-sm"
-						>
+						<Link to="/about" className={cls.learnMore}>
 							Learn more <Icon name="new_window" />
 						</Link>
 					</Box>
 				</Box>
 			</Box>
-			<Box className="z-1 mt-xl w-full" p="sm" col items="center">
-				<Footer className="max-w-100vw md:max-w-800px" />
+			<Box
+				className={clsx('@mode-dense', cls.footer, cls.section)}
+				p="xl"
+				col
+				full="width"
+				items="center"
+			>
+				<Footer />
 			</Box>
 			<Suspense>
 				<Paws />

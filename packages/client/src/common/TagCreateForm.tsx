@@ -1,21 +1,13 @@
-import {
-	Box,
-	ColorPicker,
-	FormikForm,
-	IconName,
-	PaletteName,
-	SubmitButton,
-	TextField,
-} from '@a-type/ui';
+import { Box, FormikForm, IconName, SubmitButton, TextField } from '@a-type/ui';
 
 export interface TagCreateFormProps {
 	onCreate: (init: {
 		name: string;
-		color?: PaletteName;
+		color?: string;
 		icon?: IconName;
 	}) => void | Promise<void>;
 	className?: string;
-	defaultColor?: PaletteName;
+	defaultColor?: string;
 }
 
 export function TagCreateForm({
@@ -45,10 +37,11 @@ export function TagCreateForm({
 						<TextField name="name" label="New tag" className="flex-1-0-0" />
 						<Box className="flex-basis-auto">
 							<div className="mb-sm">
-								<ColorPicker
+								{/* TODO: color picker */}
+								{/* <ColorPicker
 									onChange={(v) => setFieldValue('color', v)}
 									value={values.color ?? defaultColor ?? null}
-								/>
+								/> */}
 							</div>
 						</Box>
 					</Box>

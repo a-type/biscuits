@@ -1,4 +1,5 @@
 import { Divider, PageContent } from '@a-type/ui';
+import classes from './PrivacyPage.module.css';
 
 export function PrivacyPolicy() {
 	return (
@@ -438,7 +439,7 @@ export function PrivacyPolicy() {
 			<ul>
 				<li>By email: hi@gnocchi.club</li>
 			</ul>
-			<Divider className="my-4" />
+			<Divider className={classes.divider} />
 			<h2>Update history</h2>
 			<p>
 				<strong>February 5, 2025</strong>: Added geolocation data to types of

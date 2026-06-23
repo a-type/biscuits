@@ -1,9 +1,9 @@
-import { Button, clsx, Icon, IconName, PaletteName } from '@a-type/ui';
+import { Button, clsx, Icon, IconName } from '@a-type/ui';
 
 export interface TagToggleProps {
 	name: string;
 	icon?: IconName | null;
-	color?: PaletteName | null;
+	color?: string | null;
 	className?: string;
 	onToggle?: () => void;
 	toggled?: boolean;

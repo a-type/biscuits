@@ -2,11 +2,12 @@ import { AppChangelogEditor } from '@/components/admin/AppChangelogEditor.jsx';
 import { TabsContent, TabsList, TabsRoot, TabsTrigger } from '@a-type/ui';
 import { apps } from '@biscuits/apps';
 import { Suspense, useState } from 'react';
+import classes from './AdminChangelogsPage.module.css';
 
 export function AdminChangelogsPage() {
 	const [val, setVal] = useState<string>(apps[0].id);
 	return (
-		<div className="col">
+		<div className={classes.col}>
 			<TabsRoot value={val} onValueChange={setVal}>
 				<TabsList>
 					{apps.map((app) => (

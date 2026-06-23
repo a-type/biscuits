@@ -92,7 +92,7 @@ Some token examples: `--m-action-primary-bg`, `--m-surface-ambient-fg`, `--m-act
 
 Basic design tokens like colors, spacing, typography, are mapped under appropriate token namespaces, if an intent doesn't align with the need. These values are relative to the configuration of the active mode; for example, `--m-color-main` takes on the "main" color of a mode like `@mode-accent` or `@mode-success`, and `--m-spacing-md` gets larger in `@mode-hero` and smaller in `@mode-dense`. Thus proper usage depends on the applied modes on the component. Don't think in absolute terms; use tokens with semantic relationship to the local component; "medium" spacing is medium relative to the component itself, not a global range.
 
-Some token examples: `--m-color-main-light`, `--m-color-neutral-ink`, `--m-spacing-lg`, `--m-radius-sm`, `--m-typography-size-lg`, `--m-typography-weight-bold`, `--m-lineWidth`. See the CLI `arbor tokens:list` for a full list of available mode tokens and use `--filter color`, `--filter spacing`, etc. to find specific types of tokens. Semantic categories include: color, spacing, radius, typography, shadow, duration, easing, and lineWidth.
+Some token examples: `--m-color-main-light`, `--m-color-neutral-ink`, `--m-spacing-lg`, `--m-radius-sm`, `--m-typography-size-lg`, `--m-typography-weight-bold`, `--m-lineWidth`. See the CLI `arbor tokens:list` for a full list of available mode tokens. Semantic categories include: color, spacing, radius, typography, shadow, duration, easing, and lineWidth. These categories will be prefixes in the token names, like `--m-color-`, `--m-spacing-`, etc.
 
 ### Referencing other colors
 

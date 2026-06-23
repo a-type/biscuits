@@ -7,6 +7,7 @@ import {
 	useSuspenseQuery,
 } from '@biscuits/graphql';
 import { generateKeyBetween } from 'fractional-indexing';
+import classes from './AdminFoodCategoriesPage.module.css';
 
 const adminCategoryFragment = graphql(`
 	fragment AdminCategory on FoodCategory {
@@ -150,7 +151,7 @@ function CategoryItem({
 				<Button onClick={movePrev} disabled={!prev}>
 					<Icon name="arrowUp" />
 				</Button>
-				<span className="text-sm text-gray-dark">{category.sortKey}</span>
+				<span className={classes.sortKey}>{category.sortKey}</span>
 				<Button onClick={moveNext} disabled={!next}>
 					<Icon name="arrowDown" />
 				</Button>

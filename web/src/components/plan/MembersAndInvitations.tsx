@@ -14,6 +14,7 @@ import {
 import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
 import { Link } from '@verdant-web/react-router';
 import { InviteMember } from './InviteMember.js';
+import classes from './MembersAndInvitations.module.css';
 
 const membersQuery = graphql(`
 	query PlanMembers {
@@ -59,11 +60,11 @@ export function MembersAndInvitations() {
 					const isMe = member.id === data?.me?.id;
 					return (
 						<CardRoot key={member.id}>
-							<CardMain className="justify-start">
-								<CardTitle className="flex-row">
+							<CardMain className={classes.cardMainJustifyStart}>
+								<CardTitle className={classes.cardTitleRow}>
 									<Avatar imageSrc={member.imageUrl ?? undefined} />
 									{member.name}
-									{isMe && <span className="font-bold"> (you)</span>}
+									{isMe && <span className={classes.you}> (you)</span>}
 								</CardTitle>
 								<CardContent>{member.email}</CardContent>
 							</CardMain>
@@ -83,7 +84,7 @@ export function MembersAndInvitations() {
 				{plan?.pendingInvitations.map((invite) => (
 					<CardRoot key={invite.id}>
 						<CardMain>
-							<CardTitle className="flex-row color-gray-dark">
+							<CardTitle className={classes.cardTitleRowMuted}>
 								<Avatar />
 								<span>Invited: {invite.email}</span>
 							</CardTitle>
@@ -97,11 +98,11 @@ export function MembersAndInvitations() {
 				))}
 			</CardGrid>
 			{plan?.canInviteMore ?
-				<Box color="leek" col gap p surface border>
+				<Box className="@mode-leek" col gap p surface border>
 					<H3>Invite someone</H3>
 					<InviteMember />
 				</Box>
-			:	<div className="py-4 color-gray-dark">
+			:	<div className={classes.membershipLimit}>
 					You&apos;ve reached your membership limit. Upgrade to add more people.
 				</div>
 			}
@@ -141,7 +142,7 @@ function KickMemberButton({
 			onConfirm={() => kick({ variables: { memberId } })}
 			size="small"
 			emphasis="primary"
-			color="attention"
+			className="@mode-attention"
 		>
 			Remove member
 		</ConfirmedButton>
@@ -172,7 +173,7 @@ function CancelInvitationButton({ id }: { id: string }) {
 			onConfirm={() => cancel({ variables: { id } })}
 			size="small"
 			emphasis="primary"
-			color="attention"
+			className="@mode-attention"
 		>
 			Cancel invitation
 		</ConfirmedButton>

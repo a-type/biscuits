@@ -23,6 +23,7 @@ import {
 import { AppId } from '@biscuits/apps';
 import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
 import { useState } from 'react';
+import classes from './AppChangelogEditor.module.css';
 
 export interface AppChangelogEditorProps {
 	appId: AppId;
@@ -72,8 +73,8 @@ export function AppChangelogEditor({ appId }: AppChangelogEditorProps) {
 	const [showCreate, setShowCreate] = useState(false);
 
 	return (
-		<div className="w-full col">
-			<CardGrid className="w-full">
+		<div className={classes.container}>
+			<CardGrid className={classes.fullWidth}>
 				{data.changelog.map((item: any) => (
 					<CardRoot key={item.id}>
 						{item.imageUrl && (

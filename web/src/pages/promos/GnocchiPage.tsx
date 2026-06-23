@@ -6,17 +6,18 @@ import {
 	Demo,
 	FeatureSection,
 	Footer,
+	Hero,
 	HeroTitle,
 	Highlight,
 	Root,
 	Section,
 	TitleWrap,
 } from '@/components/promo/layout.jsx';
-import { Button, H2, P } from '@a-type/ui';
+import { Button, clsx, H2, P } from '@a-type/ui';
 import { useLocalStorage, useOnVisible } from '@biscuits/client';
 import { Link } from '@verdant-web/react-router';
-import classNames from 'classnames';
 import { Suspense, useEffect, useRef, useState } from 'react';
+import classes from './GnocchiPage.module.css';
 
 // dynamically import Scene
 // const Scene = lazy(() => import('@/components/promo/gnocchi/Scene.jsx'));
@@ -38,11 +39,11 @@ export function GnocchiPage() {
 			<Background>
 				<Suspense>{/* <Scene /> */}</Suspense>
 			</Background>
-			<Content className="bg-primary-wash">
-				<TitleWrap>
+			<Content className={classes.washContent}>
+				<Hero>
 					<AppName appId="gnocchi" />
 					<HeroTitle>Your weekly cooking, in one place.</HeroTitle>
-				</TitleWrap>
+				</Hero>
 				<FeatureSection
 					title="How it works"
 					items={[
@@ -84,7 +85,9 @@ export function GnocchiPage() {
 					]}
 				/>
 				<Section color="white">
-					<H2 className="gutter-bottom">Less improv at the grocery store</H2>
+					<H2 className={classes.gutterBottom}>
+						Less improv at the grocery store
+					</H2>
 					<p>
 						If you're like me, you usually leave the grocery store with some
 						foods you didn't plan on buying. But you also get home, start
@@ -101,14 +104,11 @@ export function GnocchiPage() {
 				<Demo src="/images/gnocchi/addBar.png" type="image" />
 			</Content>
 			<Content
-				className={classNames(
-					'border-b-20dvh border-t-10dvh border-solid pt-10dvh bg-primary-light border-primary',
-					'theme-leek',
-				)}
+				className={clsx('@mode-leek', classes.upgradeSectionContent)}
 				ref={upgradeSectionRef}
 			>
-				<TitleWrap className="border-1 rounded-lg border-solid p-4 bg-primary-wash border-primary-dark">
-					<H2 className="gutter-bottom [font-size:5vmax] [text-wrap:balanced] flex-shrink-0 font-medium leading-tight">
+				<TitleWrap>
+					<H2 className={classes.upgradeHeading}>
 						Upgrade to the world's most collaborative cooking app
 					</H2>
 					<P>
@@ -148,19 +148,17 @@ export function GnocchiPage() {
 						},
 					]}
 				/>
-				<div className="w-full flex flex-row flex-wrap items-center justify-center gap-4 py-8 md:[grid-column-end:span_2]">
+				<div className={classes.upgradeActions}>
 					<Button render={<Link to="/join" />} emphasis="primary">
 						Upgrade now
 					</Button>
-					<Button render={<Link to="/apps" />}>
-						See other included apps
-					</Button>
+					<Button render={<Link to="/apps" />}>See other included apps</Button>
 				</div>
 			</Content>
-			<Footer className="theme-leek" />
+			<Footer className="@mode-leek" />
 			<CallToAction
 				appId="gnocchi"
-				className={staticSectionAccent ? 'theme-leek' : undefined}
+				className={staticSectionAccent ? '@mode-leek' : undefined}
 			/>
 		</Root>
 	);

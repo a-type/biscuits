@@ -1,6 +1,7 @@
 import { Box, Switch } from '@a-type/ui';
 import { useMutation, useSuspenseQuery } from '@biscuits/graphql';
 import { graphql } from '../../graphql.js';
+import classes from './EmailUpdatesToggle.module.css';
 
 export interface EmailUpdatesToggleProps {
 	isSubscribed?: boolean;
@@ -37,19 +38,19 @@ export function EmailUpdatesToggle({ isSubscribed }: EmailUpdatesToggleProps) {
 			color={data.me.sendEmailUpdates ? 'accent' : 'gray'}
 			full="width"
 			gap
-			className="text-sm transition-color"
+			className={classes.toggleLabel}
 		>
 			<Switch
 				checked={data.me.sendEmailUpdates}
 				onCheckedChange={(v) => setValue({ variables: { enabled: !!v } })}
 			/>
-			<div className="mt-1 flex flex-1 flex-col items-stretch gap-2">
+			<div className={classes.content}>
 				<div>
 					Send me an email when a new Biscuits app launches or significant
 					features are added
 				</div>
 				{isSubscribed && (
-					<div className="font-bold">
+					<div className={classes.subscriberNote}>
 						As a Biscuits subscriber, you get full access to all features on new
 						apps. This lets you know that new stuff is available!
 					</div>

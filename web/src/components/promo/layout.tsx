@@ -1,29 +1,30 @@
-import { Button, clsx, H2, Icon, withClassName, withProps } from '@a-type/ui';
+import {
+	Box,
+	Button,
+	clsx,
+	H2,
+	Icon,
+	withClassName,
+	withProps,
+} from '@a-type/ui';
 import { AppId, appsById } from '@biscuits/apps';
 import { Link } from '@verdant-web/react-router';
 import { CSSProperties, forwardRef, ReactNode } from 'react';
 import PhoneDemo from './PhoneDemo.jsx';
+import classes from './layout.module.css';
 
-export const DemoGrid = withClassName(
-	'div',
-	'grid grid-cols-[1fr] items-start gap-5 md:(grid-cols-[repeat(2,1fr)])',
-);
+export const DemoGrid = withClassName('div', classes.demoGrid);
 export const Demo = withClassName(
 	withProps(PhoneDemo, { size: 'large' }),
-	'[grid-row-end:span_2] relative z-1',
+	classes.demo,
 );
-export const Highlight = withClassName(
-	'img',
-	'[grid-row-end:span_2] min-w-0 w-full flex-1 border-default rounded-lg object-contain',
-);
-export const TitleWrap = withClassName('div', 'md:[grid-column-end:span_2]');
-const Emoji = withClassName('span', 'block');
-const ItemText = withClassName('span', 'relative block');
+export const Highlight = withClassName('img', classes.highlight);
+export const TitleWrap = withClassName('div', classes.titleWrap);
+export const Hero = withClassName('div', '@mode-hero', classes.hero);
+const Emoji = withClassName('span', classes.emoji);
+const ItemText = withClassName('span', classes.itemText);
 
-export const Description = withClassName(
-	'p',
-	'my-6 text-xl font-light color-black',
-);
+export const Description = withClassName('p', classes.description);
 
 export const Section = forwardRef<
 	HTMLDivElement,
@@ -35,24 +36,21 @@ export const Section = forwardRef<
 	}
 >(function Section({ color = 'default', className, ...rest }, ref) {
 	return (
-		<section
+		<Box
 			ref={ref}
-			className={clsx(
-				'[line-height:1.5] relative mb-auto flex flex-col items-start border rounded-lg border-solid p-6 text-sm color-black bg-primary-wash border-primary-dark',
-				color === 'white' && 'border-default bg-white',
-				className,
-			)}
+			p
+			rounded
+			border
+			surface={color === 'white' ? 'ambient' : 'secondary'}
+			render={<section />}
+			className={clsx(classes.section, className)}
 			{...rest}
 		/>
 	);
 });
 
 export function HeroTitle({ children }: { children: string }) {
-	return (
-		<h1 className="font-fancy [font-size:7vmax] m-0 mb-6 w-full font-normal text-shadow-[0_0_16px_var(--color-primary-light)] color-black md:[font-size:7vmin]">
-			{children}
-		</h1>
-	);
+	return <h1 className={clsx('font-fancy', classes.heroTitle)}>{children}</h1>;
 }
 
 export const Content = forwardRef<
@@ -64,14 +62,8 @@ export const Content = forwardRef<
 	}
 >(function Content({ children, className, ...rest }, ref) {
 	return (
-		<div
-			ref={ref}
-			className={clsx('w-full flex flex-col gap-6 bg-primary', className)}
-			{...rest}
-		>
-			<DemoGrid className="relative z-1 mx-auto my-0 max-w-800px w-full p-6">
-				{children}
-			</DemoGrid>
+		<div ref={ref} className={clsx(classes.content, className)} {...rest}>
+			<DemoGrid className={classes.contentInner}>{children}</DemoGrid>
 		</div>
 	);
 });
@@ -85,18 +77,15 @@ export const FeatureSection = ({
 }) => {
 	return (
 		<Section>
-			<H2 className="gutter-bottom">{title}</H2>
+			<H2 className={classes.gutterBottom}>{title}</H2>
 			{items.map((item, index) => (
-				<div className="col gap-0" key={index}>
-					<div className="my-2 row items-start">
+				<div className={classes.featureItem} key={index}>
+					<div className={classes.featureRow}>
 						<Emoji>{item.emoji}</Emoji>
 						<ItemText>{item.text}</ItemText>
 					</div>
 					{item.premium && (
-						<Link
-							to="/join"
-							className="relative ml-auto rounded-full px-3 py-1 text-xs font-bold color-white bg-primary-dark -top-2"
-						>
+						<Link to="/join" className={classes.premiumBadge}>
 							Premium feature
 						</Link>
 					)}
@@ -107,8 +96,8 @@ export const FeatureSection = ({
 };
 
 export const Footer = ({ className }: { className?: string }) => (
-	<Content className={clsx('pb-20dvh important:bg-primary', className)}>
-		<div className="mt-6 flex flex-col gap-4">
+	<Content className={clsx('@mode-dense', className)}>
+		<div className={classes.footerLinks}>
 			<Link to="/privacy-policy" newTab>
 				Read the privacy policy
 			</Link>
@@ -129,17 +118,12 @@ export const CallToAction = ({
 	className?: string;
 	appId: AppId;
 }) => (
-	<div
-		className={clsx(
-			'sticky bottom-0 z-2 m-0 w-full flex flex-col items-center gap-3 border-0 border-t border-solid p-3 transition-colors bg-primary-wash border-t-primary-dark',
-			className,
-		)}
-	>
-		<div className="w-full flex flex-col items-center justify-between gap-xs sm:flex-row-reverse md:justify-center sm:gap-lg">
+	<div className={clsx(classes.cta, className)}>
+		<div className={classes.ctaButtons}>
 			<Button
 				render={<Link to={appsById[appId].url} data-test="get-started" />}
 				emphasis="primary"
-				className="self-center justify-center"
+				className={classes.ctaGetStarted}
 			>
 				Get Started
 			</Button>
@@ -149,7 +133,7 @@ export const CallToAction = ({
 			</Button>
 		</div>
 
-		<span className="text-xxs">
+		<span className={classes.ctaDisclaimer}>
 			Free, no signup required. By continuing you agree to{' '}
 			<Link to="/tos" newTab>
 				the terms and conditions of usage.
@@ -158,26 +142,20 @@ export const CallToAction = ({
 	</div>
 );
 
-export const Root = withClassName(
-	'div',
-	'flex flex-col items-stretch color-black bg-white',
-);
+export const Root = withClassName('div', classes.root);
 
-export const Background = withClassName(
-	'div',
-	'layer-components:(pointer-events-none fixed left-0 top-0 h-80% w-full)',
-);
+export const Background = withClassName('div', classes.background);
 
 const AppNameText = withClassName(
 	'h2',
-	'font-fancy m-0 text-[4vmax] font-bold color-primary-dark',
+	clsx('font-fancy', classes.appNameText),
 );
 
 export const AppName = ({ appId }: { appId: AppId }) => {
 	const app = appsById[appId];
 
 	return (
-		<div className="row items-center gap-4 py-2">
+		<div className={clsx('@mode-heading', classes.appNameRow)}>
 			<img src={`${app.url}/${app.iconPath}`} alt={app.name} width={80} />
 			<AppNameText>{app.name}</AppNameText>
 		</div>

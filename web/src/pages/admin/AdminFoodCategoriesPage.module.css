@@ -1,0 +1,4 @@
+.sortKey {
+	font-size: var(--m-typography-size-sm);
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+}

@@ -1,7 +1,6 @@
 import { apps } from '@biscuits/apps';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import 'uno.css';
 
 function main() {
 	const root = createRoot(document.getElementById('root')!);

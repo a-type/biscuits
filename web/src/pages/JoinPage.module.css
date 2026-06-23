@@ -1,0 +1,88 @@
+.pageRoot {
+	@apply --mx-bg(var(--m-color-main-wash));
+}
+
+.pageContent {
+	@apply --mx-bg(var(--m-color-main-wash));
+}
+
+.mainCol {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: var(--m-spacing-xl);
+}
+
+.heading {
+	@apply --mx-fg(var(--m-color-main-ink));
+}
+
+.topBar {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	gap: var(--m-spacing-sm);
+	padding-block: var(--m-spacing-sm);
+	background: transparent;
+}
+
+.appRow {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: var(--m-spacing-md);
+}
+
+.appName {
+	margin: 0;
+}
+
+.divider {
+	margin-block: var(--m-spacing-xl);
+}
+
+.featureItem {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: var(--m-spacing-md);
+}
+
+.featureHeader {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--m-spacing-sm);
+}
+
+.featureTitle {
+	margin-block: 0;
+	font-size: var(--m-typography-size-md);
+	font-weight: var(--m-typography-weight-normal);
+}
+
+.premiumBadge {
+	border-radius: --fn-literal(9999px);
+	padding-inline: var(--m-spacing-sm);
+	padding-block: var(--m-spacing-xs);
+	font-size: var(--m-typography-size-sm);
+	color: white;
+	@apply --mx-bg(var(--m-color-accent-heavy));
+}
+
+.featureDescription {
+	margin-block: 0;
+}
+
+.featureImage {
+	max-width: 100%;
+	min-width: 0;
+	flex: 1 0 0;
+	border: var(--m-lineWidth) solid;
+	border-radius: var(--m-radius-sm);
+	object-fit: contain;
+	@apply --mx-borderColor {
+		--color: var(--m-color-neutral-ink);
+	}
+}

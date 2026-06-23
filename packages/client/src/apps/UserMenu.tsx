@@ -97,8 +97,7 @@ export function UserMenu({
 								render={
 									<a href={`${CONFIG.HOME_ORIGIN}/join?appReferrer=${appId}`} />
 								}
-								color="accent"
-								className="color-main-ink bg-main-wash focus-visible:bg-main-light"
+								className="@mode-accent color-main-ink bg-main-wash focus-visible:bg-main-light"
 							>
 								Upgrade for sync
 								<DropdownMenuItemRightSlot>
@@ -173,10 +172,9 @@ export function UserMenu({
 									<InstallButton
 										emphasis="primary"
 										size="small"
-										className="mx-lg my-sm justify-between"
+										className="@mode-accent mx-lg my-sm justify-between"
 									/>
 								}
-								color="accent"
 							>
 								Install app
 								<Icon name="download" />

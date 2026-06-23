@@ -1,0 +1,98 @@
+.info {
+	display: flex;
+	flex: 1;
+	flex-direction: column-reverse;
+	align-items: center;
+	gap: var(--m-spacing-xl);
+	padding: var(--m-spacing-md);
+
+	@media (min-width: 640px) {
+		flex-direction: row;
+	}
+}
+
+.details {
+	display: grid;
+	width: 100%;
+	flex-shrink: 0;
+	align-items: center;
+	justify-items: start;
+	gap: var(--m-spacing-md);
+	grid-template-areas:
+		'icon title'
+		'icon description'
+		'icon button';
+	grid-template-columns: auto 1fr;
+
+	@media (min-width: 640px) {
+		width: 50%;
+		grid-template-areas: 'icon' 'title' 'description' 'button';
+		grid-template-columns: auto;
+		justify-items: end;
+		text-align: end;
+	}
+}
+
+.appIcon {
+	height: auto;
+	width: --fn-literal(120px);
+	border-radius: var(--m-radius-sm);
+	object-fit: contain;
+	object-position: center;
+}
+
+.appName {
+	margin: 0;
+	font-size: var(--m-text-primary-size);
+	font-weight: var(--m-typography-weight-bold);
+}
+
+.appDescription {
+	margin: 0;
+	height: --fn-literal(80px);
+	font-size: var(--m-typography-size-lg);
+}
+
+.openButton {
+	align-self: center;
+	justify-self: start;
+
+	@media (min-width: 640px) {
+		justify-self: end;
+	}
+}
+
+.phoneDemoWrap {
+	display: flex;
+	flex-direction: column;
+	gap: var(--m-spacing-xs);
+}
+
+.sidebar {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+
+	@media (min-width: 768px) {
+		height: 100%;
+		width: auto;
+		flex: 0 0 auto;
+		flex-direction: column;
+	}
+}
+
+.appButton {
+	border-radius: var(--m-radius-xs);
+}
+
+.appButtonActive {
+	border-radius: var(--m-radius-xs);
+	@apply --mx-bg {
+		--color: var(--m-color-main-light);
+	}
+}
+
+.pickerIcon {
+	height: --fn-literal(60px);
+	width: --fn-literal(60px);
+}

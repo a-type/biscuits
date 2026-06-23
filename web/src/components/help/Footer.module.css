@@ -1,0 +1,36 @@
+.footer {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: var(--m-spacing-sm);
+	padding-bottom: var(--m-spacing-sm);
+	padding-top: var(--m-spacing-xl);
+	font-size: var(--m-typography-size-sm);
+	opacity: 0.5;
+
+	&:hover {
+		opacity: 1;
+	}
+}
+
+.leftCol {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: var(--m-spacing-sm);
+}
+
+.brand {
+	font-family: Henrietta, 'Noto Serif', serif;
+	font-size: var(--m-typography-size-sm);
+	font-weight: var(--m-typography-weight-bold);
+}
+
+.rightCol {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: var(--m-spacing-sm);
+}

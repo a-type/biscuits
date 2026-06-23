@@ -22,7 +22,6 @@
 		"@trip-tick.biscuits/verdant": "workspace:*",
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
-		"@unocss/transformer-variant-group": "catalog:",
 		"@verdant-web/react": "catalog:",
 		"@verdant-web/react-router": "catalog:",
 		"@verdant-web/store": "catalog:",
@@ -53,7 +52,6 @@
 		"@iconify-json/solar": "^1.1.3",
 		"@originjs/vite-plugin-commonjs": "^1.0.3",
 		"@types/pluralize": "^0.0.29",
-		"@unocss/preset-icons": "66.0.0",
 		"@vite-pwa/assets-generator": "catalog:"
 	}
 }

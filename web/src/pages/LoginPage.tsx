@@ -1,12 +1,11 @@
+import { EmailSigninForm } from '@/components/auth/EmailSigninForm.jsx';
+import { EmailSignupForm } from '@/components/auth/EmailSignupForm.jsx';
+import { OAuthSigninButton } from '@/components/auth/OAuthSigninButton.jsx';
 import { Footer } from '@/components/help/Footer.jsx';
-import {
-	EmailSigninForm,
-	EmailSignupForm,
-	OAuthSigninButton,
-} from '@a-type/auth-ui';
 import {
 	Box,
 	Checkbox,
+	Heading,
 	P,
 	TabsContent,
 	TabsList,
@@ -19,6 +18,7 @@ import { CONFIG } from '@biscuits/client';
 import { Link, useSearchParams } from '@verdant-web/react-router';
 import classNames from 'classnames';
 import { ReactNode, useEffect, useState } from 'react';
+import cls from './LoginPage.module.css';
 
 export default function LoginPage() {
 	const [searchParams, setParams] = useSearchParams();
@@ -48,10 +48,10 @@ export default function LoginPage() {
 		const appInfo = appsById[appReferrer as AppId];
 		if (appInfo) {
 			title = (
-				<span className="row">
+				<span className={cls.titleRow}>
 					<img
 						src={`${appInfo.url}/${appInfo.iconPath}`}
-						className="mr-2 inline-block h-60px w-60px"
+						className={cls.appLogo}
 						alt=""
 					/>
 					{activeTab === 'signin' ?
@@ -63,30 +63,31 @@ export default function LoginPage() {
 	}
 
 	return (
-		<div className="h-screen flex flex-1 flex-col items-center justify-center bg-primary-wash">
+		<div className={cls.root}>
 			<Box col gap grow layout="center center">
 				<Box
-					surface="white"
+					surface="ambient"
 					elevated="sm"
 					p
 					gap
-					container="reset"
 					col
 					items="center"
 					border
-					className="relative z-1"
+					className={cls.positioned}
 				>
-					<h1 className="font-fancy mb-0">{title}</h1>
+					<Heading className="font-fancy">{title}</Heading>
 					{message && (
-						<P className="rounded-full px-3 py-1 bg-accent-light">{message}</P>
+						<Box surface="secondary" className="@mode-accent @mode-dense">
+							<P>{message}</P>
+						</Box>
 					)}
 					{appReferrer && (
-						<P className="text-sm italic color-gray-dark">
+						<P emphasis="ambient" className={cls.referrerNote}>
 							A Biscuits.club app
 						</P>
 					)}
 					<TabsRoot
-						className="flex flex-col gap-sm"
+						className={cls.tabs}
 						value={activeTab}
 						onValueChange={(val) =>
 							setParams((old) => {
@@ -95,19 +96,18 @@ export default function LoginPage() {
 							})
 						}
 					>
-						<TabsList className="mx-auto">
+						<TabsList className={cls.tabsList}>
 							<TabsTrigger value="signin">Log in</TabsTrigger>
 							<TabsTrigger value="signup">Create account</TabsTrigger>
 						</TabsList>
-						<TabsContent
-							value="signup"
-							className="flex flex-col items-stretch gap-md"
-						>
-							<label
-								className={classNames(
-									'max-w-400px flex flex-row gap-3 rounded-lg p-md text-sm transition-color',
-									!tosAgreed && 'color-black bg-primary-light',
-								)}
+						<TabsContent value="signup" className={cls.tabContent}>
+							<Box
+								render={<label />}
+								gap="lg"
+								rounded
+								p
+								surface={tosAgreed ? 'ambient' : 'secondary'}
+								className={classNames('@mode-dense', cls.toc)}
 							>
 								<Checkbox
 									checked={tosAgreed}
@@ -115,20 +115,19 @@ export default function LoginPage() {
 								/>
 								<span>
 									I agree to the{' '}
-									<a href="/tos" className="font-bold" target="_blank">
+									<a href="/tos" className={cls.link} target="_blank">
 										terms of service
 									</a>{' '}
 									and have read the{' '}
-									<a href="/privacy" className="font-bold" target="_blank">
+									<a href="/privacy" className={cls.link} target="_blank">
 										privacy policy
 									</a>
 								</span>
-							</label>
+							</Box>
 							<OAuthSigninButton
 								endpoint={`${CONFIG.API_ORIGIN}/auth/provider/google/login`}
 								returnTo={returnTo || '/settings?tab=subscription'}
 								inviteId={searchParams.get('inviteId')}
-								className="mx-auto"
 								disabled={!tosAgreed}
 								appState={appState}
 							>
@@ -142,28 +141,22 @@ export default function LoginPage() {
 								appState={appState}
 							/>
 							{!tosAgreed && (
-								<P className="text-center text-sm color-gray-dark">
+								<P className={cls.aside}>
 									You must agree to the terms to sign up
 								</P>
 							)}
-							{appReferrer && (
-								<P className="text-center text-sm color-gray-dark">
-									Your account works with{' '}
-									<Link newTab to="/">
-										all Biscuits apps
-									</Link>
-								</P>
-							)}
+							<P className={cls.aside}>
+								Your account works with{' '}
+								<Link newTab to="/">
+									all Biscuits apps
+								</Link>
+							</P>
 						</TabsContent>
-						<TabsContent
-							value="signin"
-							className="flex flex-col items-stretch gap-md"
-						>
+						<TabsContent value="signin" className={cls.tabContent}>
 							<OAuthSigninButton
 								endpoint={`${CONFIG.API_ORIGIN}/auth/provider/google/login`}
 								returnTo={returnTo}
 								inviteId={searchParams.get('inviteId')}
-								className="mx-auto"
 								appState={appState}
 							>
 								Sign in with Google
@@ -179,17 +172,19 @@ export default function LoginPage() {
 					</TabsRoot>
 				</Box>
 			</Box>
-			<Footer className="px-12" />
+			<Box p="lg" full="width">
+				<Footer />
+			</Box>
 		</div>
 	);
 }
 
 function Or() {
 	return (
-		<div className="flex flex-row items-center gap-2">
-			<div className="flex-1 border-t border-t-solid border-gray-dark"></div>
-			<div className="color-gray-dark">or</div>
-			<div className="flex-1 border-t border-t-solid border-gray-dark"></div>
-		</div>
+		<Box items="center" gap="sm" d="row" full="width">
+			<div className={cls.orBorder}></div>
+			<div className={cls.or}>or</div>
+			<div className={cls.orBorder}></div>
+		</Box>
 	);
 }

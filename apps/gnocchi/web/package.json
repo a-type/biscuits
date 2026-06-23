@@ -37,7 +37,6 @@
 		"@tiptap/starter-kit": "catalog:",
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
-		"@unocss/transformer-variant-group": "catalog:",
 		"@use-gesture/react": "^10.2.24",
 		"@verdant-web/react-router": "catalog:",
 		"@verdant-web/store": "catalog:",

@@ -1,13 +1,11 @@
 import { recipeTagEditorState } from '@/components/recipes/tags/recipeTagEditorState.js';
 import { hooks } from '@/stores/groceries/index.js';
 import {
-	ColorPicker,
 	Dialog,
 	DialogActions,
 	DialogClose,
 	DialogContent,
 	DialogTitle,
-	PaletteName,
 } from '@a-type/ui';
 import { useSnapshot } from 'valtio';
 
@@ -33,10 +31,11 @@ export function RecipeTagEditor() {
 				<DialogTitle>Edit {tag?.get('name')}</DialogTitle>
 				<div className="flex flex-row gap-3">
 					<div>Color:</div>
-					<ColorPicker
+					{/* TODO: color picker */}
+					{/* <ColorPicker
 						onChange={(color) => tag?.set('color', color)}
 						value={tag?.get('color') as PaletteName | null}
-					/>
+					/> */}
 				</div>
 
 				<DialogActions>

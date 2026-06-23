@@ -1,6 +1,5 @@
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
 import react from '@vitejs/plugin-react';
-import UnoCSS from 'unocss/vite';
 import { fileURLToPath } from 'url';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
@@ -8,7 +7,6 @@ import { VitePWA } from 'vite-plugin-pwa';
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
 	plugins: [
-		UnoCSS(),
 		react({
 			babel: {
 				// plugins: ['babel-plugin-react-compiler'],

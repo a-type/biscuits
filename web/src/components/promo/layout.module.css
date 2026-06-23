@@ -1,0 +1,231 @@
+/* withClassName components */
+
+.demoGrid {
+	display: grid;
+	grid-template-columns: 1fr;
+	align-items: start;
+	gap: var(--m-spacing-lg);
+
+	@media (min-width: 768px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+.demo {
+	grid-row-end: span 2;
+	position: relative;
+	z-index: 1;
+}
+
+.highlight {
+	grid-row-end: span 2;
+	min-width: 0;
+	width: 100%;
+	flex: 1;
+	border: var(--m-lineWidth) solid;
+	@apply --mx-borderColor(var(--m-surface-secondary-borderColor));
+	border-radius: var(--m-surface-radius);
+	object-fit: contain;
+}
+
+.titleWrap {
+	border: none;
+	padding: var(--m-surface-padding);
+	@media (min-width: 768px) {
+		grid-column-end: span 2;
+	}
+}
+
+.hero {
+	@media (min-width: 768px) {
+		grid-column-end: span 2;
+	}
+}
+
+.heroTitle {
+	@apply --mx-text-primary;
+	font-family: Henrietta, 'Noto Serif', serif;
+	font-size: 7vmax;
+	margin: 0;
+	margin-bottom: var(--m-spacing-xl);
+	width: 100%;
+	font-weight: var(--m-typography-weight-normal);
+	text-shadow: 0 0 16px var(--m-color-main-light);
+	@apply --mx-fg(var(--m-color-neutral-ink));
+
+	@media (min-width: 768px) {
+		font-size: 7vmin;
+	}
+}
+
+.description {
+	margin-block: var(--m-spacing-xl);
+	@apply --mx-text-ambient;
+	font-weight: var(--m-typography-weight-thin);
+	@apply --mx-fg(var(--m-color-neutral-ink));
+}
+
+.emoji {
+	display: block;
+}
+
+.itemText {
+	position: relative;
+	display: block;
+}
+
+.root {
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	@apply --mx-fg(var(--m-color-neutral-ink));
+	background: white;
+}
+
+.background {
+	pointer-events: none;
+	position: fixed;
+	left: 0;
+	top: 0;
+	height: 80%;
+	width: 100%;
+}
+
+.appNameText {
+	@apply --mx-text-primary;
+	font-family: Henrietta, 'Noto Serif', serif;
+	margin: 0;
+	font-weight: var(--m-typography-weight-bold);
+	@apply --mx-fg(var(--m-color-main-heavy));
+}
+
+/* Section component */
+
+.section {
+	line-height: 1.5;
+	position: relative;
+	margin-bottom: auto;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	font-size: var(--m-text-ambient-size);
+}
+
+/* Content component */
+
+.content {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: var(--m-spacing-xl);
+	@apply --mx-bg(var(--m-color-main));
+}
+
+.contentInner {
+	position: relative;
+	z-index: 1;
+	margin-inline: auto;
+	margin-block: 0;
+	max-width: 800px;
+	width: 100%;
+	padding: var(--m-spacing-xl);
+}
+
+/* FeatureSection */
+
+.gutterBottom {
+	margin-bottom: var(--m-spacing-md);
+}
+
+.featureItem {
+	display: flex;
+	flex-direction: column;
+	gap: 0;
+}
+
+.featureRow {
+	margin-block: var(--m-spacing-xs);
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+}
+
+.premiumBadge {
+	position: relative;
+	margin-inline-start: auto;
+	border-radius: --fn-literal(9999px);
+	padding-inline: var(--m-spacing-md);
+	padding-block: var(--m-spacing-xs);
+	font-size: var(--m-typography-size-sm);
+	font-weight: var(--m-typography-weight-bold);
+	color: white;
+	top: calc(-1 * var(--m-spacing-xs));
+	@apply --mx-bg(var(--m-color-main-heavy));
+}
+
+/* Footer (promo) */
+
+.footerContent {
+	padding-bottom: 20dvh;
+	@apply --mx-bg(var(--m-color-main));
+}
+
+.footerLinks {
+	margin-top: var(--m-spacing-lg);
+	display: flex;
+	flex-direction: column;
+	gap: var(--m-spacing-md);
+}
+
+/* CallToAction */
+
+.cta {
+	position: sticky;
+	bottom: 0;
+	z-index: 2;
+	margin: 0;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--m-spacing-sm);
+	border-top: var(--m-lineWidth) solid;
+	padding: var(--m-spacing-sm);
+	transition: background-color var(--m-duration) var(--m-easing);
+	@apply --mx-bg(var(--m-color-main-wash));
+	@apply --mx-borderColor(var(--m-color-main-heavy));
+}
+
+.ctaButtons {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--m-spacing-xs);
+
+	@media (min-width: 640px) {
+		flex-direction: row-reverse;
+		justify-content: center;
+		gap: var(--m-spacing-lg);
+	}
+}
+
+.ctaGetStarted {
+	align-self: center;
+	justify-content: center;
+}
+
+.ctaDisclaimer {
+	font-size: var(--m-text-ambient-size);
+}
+
+/* AppName */
+
+.appNameRow {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: var(--m-spacing-md);
+	padding-block: var(--m-spacing-xs);
+}

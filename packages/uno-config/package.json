@@ -11,7 +11,6 @@
 	"devDependencies": {
 		"@a-type/ui": "catalog:",
 		"@arbor-css/core": "catalog:",
-		"@arbor-css/postcss": "catalog:",
-		"@unocss/transformer-variant-group": "catalog:"
+		"@arbor-css/postcss": "catalog:"
 	}
 }

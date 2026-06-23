@@ -1,8 +1,8 @@
-import { Button, Chip, clsx, Icon, IconName, PaletteName } from '@a-type/ui';
+import { Button, Chip, clsx, Icon, IconName } from '@a-type/ui';
 
 export interface RemovableTagProps {
 	name: string;
-	color?: PaletteName | null;
+	color?: string | null;
 	icon?: IconName | null;
 	onRemove?: () => void;
 	className?: string;

@@ -9,7 +9,6 @@
 		"tsc": "tsc --build"
 	},
 	"dependencies": {
-		"@a-type/auth-ui": "catalog:",
 		"@biscuits/apps": "workspace:*",
 		"@biscuits/client": "workspace:*",
 		"@biscuits/error": "workspace:*",
@@ -37,7 +36,6 @@
 		"gql.tada": "catalog:",
 		"@arbor-css/core": "catalog:",
 		"@arbor-css/postcss": "catalog:",
-		"@unocss/transformer-variant-group": "catalog:",
 		"typescript": "catalog:",
 		"vite": "catalog:",
 		"@vitejs/plugin-react-swc": "catalog:"

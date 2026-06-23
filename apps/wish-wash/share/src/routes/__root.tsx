@@ -7,7 +7,7 @@ import {
 } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import * as React from 'react';
-import 'uno.css';
+
 import { DefaultCatchBoundary } from '~/components/DefaultCatchBoundary';
 import { NotFound } from '~/components/NotFound';
 import { seo } from '~/utils/seo';

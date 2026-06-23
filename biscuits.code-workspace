@@ -63,17 +63,6 @@
 	],
 	"settings": {
 		"typescript.tsdk": "🌐 Web/node_modules/typescript/lib",
-		"unocss.root": [
-			"🌐 Web",
-			"🍝 Gnocchi\\web",
-			"🏖️ Trip Tick\\web",
-			"🛒 Wish Wash\\web",
-			"📚 Marginalia\\web",
-			"🌟 Star Chart\\web",
-			"🎸 Humding\\web",
-			"🎨 Palette\\web",
-			"🙋 Names\\web",
-		],
 		"typescript.enablePromptUseWorkspaceTsdk": true,
 		"typescript.preferences.importModuleSpecifierEnding": "js",
 		"prettier.trailingComma": "all",
@@ -89,6 +78,9 @@
 			"source.fixAll": "always",
 			"source.organizeImports": "always",
 			"source.removeUnusedImports": "explicit",
+		},
+		"chat.tools.terminal.autoApprove": {
+			"npx arbor": true,
 		},
 	},
 	"extensions": {
