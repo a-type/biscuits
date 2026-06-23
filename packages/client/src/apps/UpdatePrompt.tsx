@@ -1,12 +1,14 @@
-import { Button, Icon } from '@a-type/ui';
+import { Box, Button, Icon } from '@a-type/ui';
 import { useState } from 'react';
 import { updateApp, useIsUpdateAvailable } from './updateState.js';
 
-export interface UpdatePromptProps {}
+export interface UpdatePromptProps {
+	className?: string;
+}
 
 const TEST = false;
 
-export function UpdatePrompt({}: UpdatePromptProps) {
+export function UpdatePrompt({ className }: UpdatePromptProps) {
 	const updateAvailable = useIsUpdateAvailable();
 
 	const [loading, setLoading] = useState(false);
@@ -16,7 +18,16 @@ export function UpdatePrompt({}: UpdatePromptProps) {
 	}
 
 	return (
-		<div className="w-full flex flex-col items-start gap-3 border rounded-lg border-solid p-4 color-black bg-primary-wash border-primary">
+		<Box
+			full="width"
+			surface="primary"
+			gap
+			col
+			items="start"
+			rounded
+			p
+			className={className}
+		>
 			<div>
 				<Icon name="star" />
 				&nbsp;App update available!
@@ -35,6 +46,6 @@ export function UpdatePrompt({}: UpdatePromptProps) {
 			>
 				Get the latest
 			</Button>
-		</div>
+		</Box>
 	);
 }

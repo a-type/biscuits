@@ -1,6 +1,7 @@
-import { Button, useIsInstallReady } from '@a-type/ui';
+import { Button, clsx, useIsInstallReady } from '@a-type/ui';
 import { appsById, isValidAppId } from '@biscuits/apps';
 import { Suspense, useEffect } from 'react';
+import cls from './AppPreviewNotice.module.css';
 import { InstallButton } from './InstallButton.js';
 
 export interface AppPreviewNoticeProps {}
@@ -34,10 +35,8 @@ export function AppPreviewNotice({}: AppPreviewNoticeProps) {
 
 	// this app is probably rendered inside a frame in the other app
 	return (
-		<div className="w-full flex flex-row items-center gap-3 p-2 bg-accent-light">
-			<p className="flex-1 text-sm color-accent-dark">
-				{`You're previewing this app.`}
-			</p>
+		<div className={clsx('@mode-accent @mode-dense', cls.root)}>
+			<p className={cls.content}>{`You're previewing this app.`}</p>
 			<Button
 				render={
 					<a href={fromApp.url} target="_blank" rel="noopener noreferrer" />

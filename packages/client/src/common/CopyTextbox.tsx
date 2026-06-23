@@ -28,13 +28,15 @@ export function CopyTextbox({
 			className={clsx('w-full', className)}
 			{...rest}
 		>
-			<Input disabled value={value} className="flex-[1_1_0]" />
+			<Input disabled value={value} style={{ flex: '1 1 0' }} />
 			<Box d="row" gap="sm">
 				<Button onClick={copy}>
 					<Icon name="copy" />
 				</Button>
 				{isUrl && (
-					<Button render={<Link className="color-inherit" newTab to={value} />}>
+					<Button
+						render={<Link style={{ color: 'inherit' }} newTab to={value} />}
+					>
 						<Icon name="new_window" />
 					</Button>
 				)}

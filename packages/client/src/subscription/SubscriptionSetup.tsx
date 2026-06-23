@@ -166,12 +166,12 @@ export function SubscriptionSetup({ priceKeys }: SubscriptionSetupProps) {
 
 	// subscription inactive - show plan selection
 	return (
-		<div className="flex flex-col gap-3">
+		<Box col gap>
 			<P>
 				You don't have an active subscription. Subscribe to unlock all Biscuits
 				app features.
 			</P>
 			<SubscriptionSelect priceKeys={priceKeys} />
-		</div>
+		</Box>
 	);
 }

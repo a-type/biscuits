@@ -89,15 +89,17 @@ export function DomainRouteView({ resourceId }: DomainRouteViewProps) {
 				{domain ?? <TextSkeleton maxLength={30} />}
 				<Icon name={status === 'READY' ? 'check' : 'warning'} />
 			</Dialog.Trigger>
-			<Dialog.Content className="flex flex-col gap-md">
-				<DomainRouteValidation resourceId={resourceId} />
-				{data?.domainRoute && (
-					<DeleteDomainRoute
-						domainRouteId={data.domainRoute.id}
-						onDelete={refetch}
-						className="self-start"
-					/>
-				)}
+			<Dialog.Content>
+				<Box col gap>
+					<DomainRouteValidation resourceId={resourceId} />
+					{data?.domainRoute && (
+						<DeleteDomainRoute
+							domainRouteId={data.domainRoute.id}
+							onDelete={refetch}
+							style={{ alignSelf: 'start' }}
+						/>
+					)}
+				</Box>
 				<Dialog.Actions>
 					<Dialog.Close />
 				</Dialog.Actions>
@@ -160,7 +162,7 @@ function DomainRouteRegister({
 					placeholder="blog.yourdomain.club"
 					name="domain"
 					label="Register a domain"
-					className="flex-1"
+					style={{ flex: 1 }}
 				/>
 				<SubmitButton emphasis="primary">
 					<Button.Icon>

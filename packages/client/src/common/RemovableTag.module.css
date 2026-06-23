@@ -1,0 +1,11 @@
+.root {
+	min-height: --fn-literal(24px);
+	display: flex;
+	align-items: center;
+	gap: var(--m-spacing-xs);
+	border-radius: var(--m-action-radius);
+	padding-inline: var(--m-spacing-xs);
+	font-weight: var(--m-typography-weight-bold);
+	@apply --mx-borderColor(var(--m-color-neutral-heavy));
+	@apply --mx-bg(var(--m-color-main-light));
+}

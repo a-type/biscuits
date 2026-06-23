@@ -1,6 +1,7 @@
 import { clsx, Icon } from '@a-type/ui';
 import { useContext, useEffect, useState } from 'react';
 import { VerdantContext } from '../verdant.js';
+import cls from './GlobalSyncingIndicator.module.css';
 
 export interface GlobalSyncingIndicatorProps {}
 
@@ -15,15 +16,12 @@ export function GlobalSyncingIndicator({}: GlobalSyncingIndicatorProps) {
 
 	return (
 		<div
-			className={clsx(
-				'pointer-events-none fixed right-2 top-2 z-tooltip flex flex-row items-center gap-1 rounded-full p-1 text-xs opacity-0 transition-opacity transition-delay-500 bg-gray-wash',
-				{
-					'opacity-100': syncing,
-				},
-			)}
+			className={clsx(cls.root, '@mode-denser', {
+				'opacity-100': syncing,
+			})}
 			aria-hidden={!syncing}
 		>
-			<Icon name="refresh" className="animate-spin" />
+			<Icon name="refresh" className={cls.spin} />
 			<span>Syncing</span>
 		</div>
 	);

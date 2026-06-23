@@ -1,4 +1,4 @@
-import { H3, P } from '@a-type/ui';
+import { Heading, P } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 import { Price } from '../common/Price.js';
 
@@ -21,7 +21,7 @@ export function PlanInfo({ data: $data }: PlanInfoProps) {
 	const data = readFragment(planProductInfo, $data);
 	return (
 		<div>
-			<H3 className="text-sm">{data.name}</H3>
+			<Heading emphasis="ambient">{data.name}</Heading>
 			<P>{data.description}</P>
 			<Price value={data.price} currency={data.currency} period={data.period} />
 		</div>

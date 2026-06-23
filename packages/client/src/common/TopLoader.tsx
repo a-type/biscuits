@@ -2,6 +2,7 @@ import { clsx } from '@a-type/ui';
 import { animated, useSpring } from '@react-spring/web';
 import { useIsRouteTransitioning } from '@verdant-web/react-router';
 import { useCallback, useEffect } from 'react';
+import cls from './TopLoader.module.css';
 
 export interface TopLoaderProps {
 	className?: string;
@@ -47,18 +48,12 @@ export function TopLoader({ className }: TopLoaderProps) {
 
 	return (
 		<div
-			className={clsx(
-				'pointer-events-none fixed left-0 top-0 z-100000 h-4px w-full op-0',
-				'[&[data-state=visible]]:(opacity-100 transition-opacity)',
-				'md:(h-2px)',
-				'motion-reduce:hidden',
-				className,
-			)}
+			className={clsx(cls.root, className)}
 			data-state={show ? 'visible' : 'hidden'}
 		>
 			<animated.div
 				{...({
-					className: 'absolute top-0 left-0 h-full bg-accent',
+					className: cls.bar,
 					style,
 				} as any)}
 			/>

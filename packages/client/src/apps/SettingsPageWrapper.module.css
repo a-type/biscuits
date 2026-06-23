@@ -1,0 +1,12 @@
+.root {
+	margin-block-start: var(--m-spacing-lg);
+}
+
+.back {
+	position: sticky;
+	top: var(--m-spacing-sm);
+}
+
+.link {
+	font-weight: var(--m-typography-weight-bold);
+}

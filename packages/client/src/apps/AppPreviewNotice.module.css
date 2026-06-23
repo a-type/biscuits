@@ -1,0 +1,15 @@
+.root {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: var(--m-spacing-sm);
+	padding: var(--m-spacing-sm);
+	@apply --mx-bg(var(--m-surface-secondary-bg));
+	@apply --mx-fg(var(--m-surface-secondary-fg));
+}
+
+.content {
+	flex: 1;
+	@apply --mx-text-secondary;
+}

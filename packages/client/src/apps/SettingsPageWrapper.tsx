@@ -22,6 +22,7 @@ import {
 	usePageTitle,
 } from '../react.js';
 import { InstallHint } from './InstallHint.js';
+import cls from './SettingsPageWrapper.module.css';
 import { ManageStorage } from './storage.js';
 import { UpdatePrompt } from './UpdatePrompt.js';
 import { usePollForUpdates } from './updateState.js';
@@ -42,13 +43,13 @@ export function SettingsPageWrapper({
 	const subscribed = useHasServerAccess();
 
 	return (
-		<Box col p gap items="start" className={clsx('mt-lg', className)}>
+		<Box col p gap items="start" className={clsx(cls.root, className)}>
 			<Box gap items="center">
 				<Button
 					render={<Link to="/" />}
 					emphasis="ghost"
 					aria-label="Back to home"
-					className="sticky top-sm"
+					className={cls.back}
 				>
 					<Icon name="arrowLeft" />
 				</Button>
@@ -91,10 +92,10 @@ export function SettingsPageWrapper({
 					<span>What's new</span>
 				</Button>
 			</ChangelogDisplay>
-			<Link className="font-bold" to="https://biscuits.club/privacy-policy">
+			<Link className={cls.link} to="https://biscuits.club/privacy-policy">
 				Privacy policy
 			</Link>
-			<Link className="font-bold" to="https://biscuits.club/tos">
+			<Link className={cls.link} to="https://biscuits.club/tos">
 				Terms and conditions of use
 			</Link>
 		</Box>

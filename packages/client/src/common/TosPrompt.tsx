@@ -1,4 +1,5 @@
 import {
+	Box,
 	Button,
 	Dialog,
 	DialogActions,
@@ -39,7 +40,7 @@ export function TosPrompt() {
 					We&apos;ve updated our terms of service. Please review and accept to
 					continue using Biscuits apps.
 				</p>
-				<div className="flex flex-col items-start gap-2">
+				<Box col items="start" gap="sm">
 					<Button
 						emphasis="ghost"
 						render={<a href={`${CONFIG.HOME_ORIGIN}/tos`} target="_blank" />}
@@ -54,7 +55,7 @@ export function TosPrompt() {
 					>
 						Privacy Policy
 					</Button>
-				</div>
+				</Box>
 				<DialogActions>
 					<Button
 						render={

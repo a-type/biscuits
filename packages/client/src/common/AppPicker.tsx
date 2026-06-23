@@ -66,14 +66,20 @@ export function AppPicker({ className, children }: AppPickerProps) {
 			<PopoverContent
 				align="end"
 				side="top"
-				className="min-w-0 p-0"
+				style={{
+					minWidth: 0,
+					padding: 0,
+				}}
 				sideOffset={-40}
 			>
 				<iframe
-					className="border-none p-0 shadow-none focus:outline-none"
 					src={`${CONFIG.HOME_ORIGIN}/appPicker/index.html?hostApp=${hostApp}`}
 					title="App Picker"
 					style={{
+						border: 'none',
+						padding: 'none',
+						boxShadow: 'none',
+						outline: 'none',
 						width: 40 * 2 + 16 + 32,
 						height: 40 * 2 + 16 + 32,
 					}}

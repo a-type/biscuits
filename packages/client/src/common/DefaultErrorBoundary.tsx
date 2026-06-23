@@ -1,4 +1,4 @@
-import { Button, ErrorBoundary, H1, P } from '@a-type/ui';
+import { Box, Button, ErrorBoundary, H1, P } from '@a-type/ui';
 import { Link } from '@verdant-web/react-router';
 import { ReloadButton } from './ReloadButton.js';
 
@@ -8,8 +8,14 @@ export function DefaultErrorFallback({
 	clearError: () => void;
 }) {
 	return (
-		<div className="flex flex-col items-center justify-center p-4">
-			<div className="max-w-content flex flex-col items-start justify-center gap-4">
+		<Box col items="center" justify="center" p>
+			<Box
+				col
+				items="start"
+				justify="center"
+				gap
+				style={{ maxWidth: 'min-content' }}
+			>
 				<H1>Something went wrong</H1>
 				<P>
 					Sorry about this. The app has crashed. You can try refreshing, but if
@@ -17,8 +23,8 @@ export function DefaultErrorFallback({
 				</P>
 				<Button render={<Link to="/" onClick={clearError} />}>Go Home</Button>
 				<ReloadButton />
-			</div>
-		</div>
+			</Box>
+		</Box>
 	);
 }
 

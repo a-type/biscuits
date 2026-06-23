@@ -1,4 +1,5 @@
 import { Button, Chip, clsx, Icon, IconName } from '@a-type/ui';
+import cls from './RemovableTag.module.css';
 
 export interface RemovableTagProps {
 	name: string;
@@ -18,18 +19,15 @@ export function RemovableTag({
 	return (
 		<Chip
 			color={color || 'primary'}
-			className={clsx(
-				'min-h-24px flex items-center gap-1 rounded-full px-2 text-xs font-bold color-black border-gray-dark !bg-main-light',
-				className,
-			)}
+			className={clsx(`@mode-${color || 'primary'}`, cls.root, className)}
 		>
 			<span>
-				<Icon name={icon || 'tag'} className="h-10px w-10px" />
+				<Icon name={icon || 'tag'} size={10} />
 			</span>
 			<span>{name}</span>
 			{onRemove && (
-				<Button emphasis="ghost" className="p-0" onClick={onRemove}>
-					<Icon name="x" className="h-[10px] w-[10px]" />
+				<Button emphasis="ghost" size="wrapper" onClick={onRemove}>
+					<Icon name="x" size={10} />
 				</Button>
 			)}
 		</Chip>

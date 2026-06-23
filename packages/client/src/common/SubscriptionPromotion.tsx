@@ -1,4 +1,5 @@
 import {
+	Box,
 	Button,
 	Dialog,
 	DialogActions,
@@ -64,16 +65,21 @@ export function SubscriptionPromotion({
 			}}
 		>
 			<DialogContent width="lg">
-				<div className="flex flex-row items-start gap-2">
+				<Box items="start" gap="sm">
 					<DialogTitle className="flex-1">{title}</DialogTitle>
 					<DialogClose render={<Button size="small" emphasis="ghost" />}>
 						<Icon name="x" />
 					</DialogClose>
-				</div>
+				</Box>
 				{description && <Dialog.Description>{description}</Dialog.Description>}
 				{children}
 				<DialogActions>
-					<div className="m-auto mt-1 flex flex-col items-center gap-2">
+					<Box
+						col
+						items="center"
+						gap="sm"
+						style={{ margin: 'auto', marginTop: '4px' }}
+					>
 						<LoginButton
 							emphasis="primary"
 							returnTo="/"
@@ -86,7 +92,7 @@ export function SubscriptionPromotion({
 							<Price value={price} currency={currency} period={period} />. 14
 							days free.
 						</span>
-					</div>
+					</Box>
 				</DialogActions>
 			</DialogContent>
 		</Dialog>

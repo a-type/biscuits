@@ -1,4 +1,4 @@
-import { Button, H2 } from '@a-type/ui';
+import { Box, Button, H2, P } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 import {
 	Elements,
@@ -107,18 +107,22 @@ function PaymentForm({ mode }: { mode: string }) {
 	};
 
 	return (
-		<form onSubmit={submit} className="flex flex-col gap-4">
+		<Box render={<form onSubmit={submit} />} gap col>
 			<H2>Complete your subscription</H2>
 			<PaymentElement />
-			{error && <p className="text-red">{error}</p>}
+			{error && (
+				<Box surface="secondary" color="attention">
+					<P>{error}</P>
+				</Box>
+			)}
 			<Button
 				emphasis="primary"
 				disabled={!stripe}
 				type="submit"
-				className="self-end"
+				style={{ alignSelf: 'end' }}
 			>
 				Subscribe
 			</Button>
-		</form>
+		</Box>
 	);
 }

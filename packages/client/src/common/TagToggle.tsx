@@ -22,17 +22,13 @@ export function TagToggle({
 		<Button
 			size="small"
 			emphasis="light"
-			className={clsx(
-				'[font-weight:inherit] flex items-center gap-1 text-xs',
-				className,
-			)}
+			className={clsx(`@mode-${color} @mode-dense`, className)}
 			toggled={toggled}
 			onClick={onToggle}
-			color={color ?? undefined}
 			{...rest}
 		>
 			<span>
-				<Icon name={icon || 'tag'} className="h-10px w-10px" />
+				<Icon name={icon || 'tag'} size={10} />
 			</span>
 			<span>{name}</span>
 		</Button>

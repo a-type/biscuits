@@ -22,6 +22,7 @@ import {
 } from 'react';
 import { proxy, subscribe, useSnapshot } from 'valtio';
 import { useEffectOnce } from '../hooks/useEffectOnce.js';
+import cls from './onboarding.module.css';
 
 type StringTuple = readonly string[];
 export type Onboarding<Steps extends StringTuple> = {
@@ -192,16 +193,16 @@ export function OnboardingBanner<O extends Onboarding<any>>({
 	return (
 		<CollapsibleRoot
 			open={show}
-			className={clsx('palette-leek', 'w-full', className)}
+			className={clsx('@mode-leek', 'w-full', className)}
 			data-step-id={id}
 			data-step-name={step}
 		>
 			<CollapsibleContent>
-				<div className="w-full flex flex-col gap-3 rounded-lg p-4 color-black bg-main-wash">
+				<Box p surface="secondary" full="width" col gap="sm" rounded>
 					<Box col gap="sm">
 						{children}
 					</Box>
-					<div className="flex justify-end gap-3">
+					<Box items="center" justify="end" gap="sm">
 						{!disableNext && (
 							<Button emphasis="light" onClick={next}>
 								{isLast ?
@@ -211,8 +212,8 @@ export function OnboardingBanner<O extends Onboarding<any>>({
 								:	'Next'}
 							</Button>
 						)}
-					</div>
-				</div>
+					</Box>
+				</Box>
 			</CollapsibleContent>
 		</CollapsibleRoot>
 	);
@@ -277,16 +278,12 @@ export const OnboardingTooltip = function OnboardingTooltip<
 		>
 			<SlotDiv render={children} ref={anchorRef} />
 			<PopoverContent
-				className={clsx(
-					'theme-leek',
-					'flex px-3 py-2 bg-main-wash',
-					'overflow-visible',
-				)}
+				className={clsx('@mode-leek', cls.popover)}
 				collisionPadding={16}
 				anchor={anchorRef}
 			>
 				<PopoverArrow className="!fill-main-wash" />
-				<div className="flex flex-row items-center gap-3">
+				<Box items="center" gap="sm">
 					{content}
 					{!disableNext && (
 						<Button
@@ -297,7 +294,7 @@ export const OnboardingTooltip = function OnboardingTooltip<
 							{isLast ? 'Finish' : <Icon name="x" />}
 						</Button>
 					)}
-				</div>
+				</Box>
 			</PopoverContent>
 		</Popover>
 	);

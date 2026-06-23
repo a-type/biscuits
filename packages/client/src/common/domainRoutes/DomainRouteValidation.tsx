@@ -1,4 +1,4 @@
-import { Box, BoxProps, Button, H3, Icon, P } from '@a-type/ui';
+import { Box, BoxProps, Button, H3, Icon, P, Text } from '@a-type/ui';
 import { graphql, useQuery } from '@biscuits/graphql';
 import { Link } from '@verdant-web/react-router';
 import { useEffect } from 'react';
@@ -165,18 +165,26 @@ function DnsRecord({
 			col
 		>
 			{verified && (
-				<Icon name="check" className="absolute right-2 top-2 color-main-dark" />
+				<Icon
+					name="check"
+					style={{
+						position: 'absolute',
+						top: 'var(--m-spacing-sm)',
+						right: 'var(--m-spacing-sm)',
+						color: 'var(--m-color-main-heavy)',
+					}}
+				/>
 			)}
 			<Box gap>
-				<span className="font-bold">Type:</span>
+				<Text italic>Type:</Text>
 				<span>{type}</span>
 			</Box>
 			<Box col gap>
-				<span className="font-bold">Name:</span>
+				<Text italic>Name:</Text>
 				<CopyTextbox value={name} hideShare />
 			</Box>
 			<Box col gap>
-				<span className="font-bold">Target:</span>
+				<Text italic>Target:</Text>
 				<CopyTextbox value={value} hideShare />
 			</Box>
 		</Box>

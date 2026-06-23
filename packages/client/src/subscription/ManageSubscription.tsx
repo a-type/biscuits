@@ -1,4 +1,4 @@
-import { Box, Button, Chip, clsx, H2, Icon, toast } from '@a-type/ui';
+import { Box, Button, Chip, H2, Icon, toast } from '@a-type/ui';
 import {
 	FragmentOf,
 	graphql,
@@ -63,21 +63,16 @@ export function ManageSubscription({
 	const [refetchStatus] = useLazyQuery(refetchPlanStatus);
 
 	return (
-		<div
-			className={clsx('flex flex-col items-start gap-4', className)}
-			{...props}
-		>
-			<div className="w-full flex flex-col gap-4">
-				<div className="w-full row justify-between">
+		<Box col items="start" gap className={className} {...props}>
+			<Box col gap full="width">
+				<Box full="width" justify="between">
 					<H2>Your Subscription</H2>
 					<Chip
-						color={
+						className={`@mode-${
 							data.subscriptionStatus === 'active' ? 'accent'
-							: data.subscriptionStatus === 'trialing' ?
-								'primary'
-							:	'gray'
-						}
-						className="pl-6"
+							: data.subscriptionStatus === 'trialing' ? 'primary'
+							: 'neutral'
+						}`}
 					>
 						{data.subscriptionStatus}
 						<Button
@@ -89,9 +84,9 @@ export function ManageSubscription({
 							<Icon name="refresh" />
 						</Button>
 					</Chip>
-				</div>
+				</Box>
 				{data.productInfo && <PlanInfo data={data.productInfo} />}
-			</div>
+			</Box>
 			{data.userIsAdmin ?
 				<>
 					<form
@@ -111,6 +106,6 @@ export function ManageSubscription({
 					<LeavePlanButton />
 				</Box>
 			}
-		</div>
+		</Box>
 	);
 }

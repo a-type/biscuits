@@ -13,7 +13,6 @@ export * from './LoginButton.js';
 export * from './LogoutButton.js';
 export * from './LogoutNotice.js';
 export * from './ManagePlanButton.js';
-export * from './MenuDisclose.js';
 export * from './onboarding.js';
 export * from './PrereleaseWarning.js';
 export * from './PresencePeople.js';

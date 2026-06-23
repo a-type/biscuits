@@ -1,4 +1,5 @@
 import {
+	Box,
 	Button,
 	CardContent,
 	CardGrid,
@@ -69,7 +70,7 @@ export function SubscriptionSelect({
 	}
 
 	return (
-		<div className="flex flex-col gap-4">
+		<Box col gap>
 			<H2>Select a Plan</H2>
 			<Suspense>
 				<CardGrid>
@@ -83,7 +84,7 @@ export function SubscriptionSelect({
 					))}
 				</CardGrid>
 			</Suspense>
-		</div>
+		</Box>
 	);
 }
 
@@ -141,7 +142,7 @@ function SinglePriceExperience({
 	});
 
 	return (
-		<div className="flex flex-col items-start gap-3">
+		<Box col gap items="start">
 			<H2>Checkout</H2>
 			<P>
 				You're about to subscribe to {data?.productInfo.name} for{' '}
@@ -155,6 +156,6 @@ function SinglePriceExperience({
 			<Button emphasis="primary" onClick={onProceed}>
 				Enter payment info
 			</Button>
-		</div>
+		</Box>
 	);
 }

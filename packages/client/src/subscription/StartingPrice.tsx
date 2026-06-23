@@ -16,7 +16,6 @@ export const StartingPrice = () => {
 		<Price
 			value={data?.productInfo.price}
 			currency={data?.productInfo.currency}
-			className="font-bold"
 		/>
 	);
 };
