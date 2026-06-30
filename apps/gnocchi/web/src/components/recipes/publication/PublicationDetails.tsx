@@ -1,4 +1,4 @@
-import { Box, BoxProps, P } from '@a-type/ui';
+import { Box, BoxProps, Heading, P } from '@a-type/ui';
 import { DomainRouteView } from '@biscuits/client';
 import { useSuspenseQuery } from '@biscuits/graphql';
 import {
@@ -28,9 +28,9 @@ export function PublicationDetails(props: PublicationDetailsProps) {
 	return (
 		<Box col gap {...props}>
 			<div>Your blog</div>
-			<div className="text-lg font-medium">
+			<Heading emphasis="ambient">
 				{data.recipePublication.publicationName}
-			</div>
+			</Heading>
 			<div>
 				Published{' '}
 				{new Date(data.recipePublication.publishedAt).toLocaleDateString()}
@@ -38,7 +38,7 @@ export function PublicationDetails(props: PublicationDetailsProps) {
 			<div>
 				<DomainRouteView resourceId={data.recipePublication.id} />
 			</div>
-			<ManagePublication className="ml-auto">
+			<ManagePublication style={{ marginLeft: 'auto' }}>
 				Manage your blog
 			</ManagePublication>
 		</Box>

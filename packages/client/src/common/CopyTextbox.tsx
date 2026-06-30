@@ -22,14 +22,13 @@ export function CopyTextbox({
 
 	return (
 		<Box
-			d="row"
 			gap="sm"
 			items="center"
 			className={clsx('w-full', className)}
 			{...rest}
 		>
 			<Input disabled value={value} style={{ flex: '1 1 0' }} />
-			<Box d="row" gap="sm">
+			<Box gap="sm">
 				<Button onClick={copy}>
 					<Icon name="copy" />
 				</Button>

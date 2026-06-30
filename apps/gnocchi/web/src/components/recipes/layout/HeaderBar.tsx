@@ -1,6 +1,5 @@
 import { LinkButton } from '@/components/nav/Link.jsx';
-import { Icon, PageFixedArea } from '@a-type/ui';
-import classNames from 'classnames';
+import { Box, Icon, PageFixedArea } from '@a-type/ui';
 import { ReactNode } from 'react';
 
 export interface HeaderBarProps {
@@ -12,16 +11,19 @@ export interface HeaderBarProps {
 export function HeaderBar({ children, backUrl, className }: HeaderBarProps) {
 	return (
 		<PageFixedArea
-			className={classNames(
-				'top-0 z-10 flex flex-row items-center gap-3 py-1',
-				className,
-			)}
+			style={{
+				top: 0,
+				zIndex: 10,
+			}}
+			className={className}
 		>
-			<LinkButton to={backUrl} emphasis="ghost">
-				<Icon name="arrowLeft" />
-				Back
-			</LinkButton>
-			{children}
+			<Box items="center" gap="sm" p="xs">
+				<LinkButton to={backUrl} emphasis="ghost">
+					<Icon name="arrowLeft" />
+					Back
+				</LinkButton>
+				{children}
+			</Box>
 		</PageFixedArea>
 	);
 }

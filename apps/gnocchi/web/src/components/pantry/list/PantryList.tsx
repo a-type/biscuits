@@ -6,6 +6,7 @@ import { Box, CardGrid } from '@a-type/ui';
 import { OnboardingBanner } from '@biscuits/client';
 import { Suspense } from 'react';
 import { ExpiresSoonSection } from './ExpiresSoonSection.jsx';
+import cls from './PantryList.module.css';
 import { PantryListCategory } from './PantryListCategory.jsx';
 import { PantryListSectionTabs } from './PantryListSectionTabs.jsx';
 
@@ -22,11 +23,11 @@ function PantryListInner({ className, ...rest }: PantryListProps) {
 	});
 
 	return (
-		<div className="w-full flex flex-col items-stretch" {...rest}>
+		<Box full="width" col items="stretch" {...rest}>
 			<OnboardingBanner
 				onboarding={pantryOnboarding}
 				step="expirations"
-				className="mb-3"
+				className={cls.onboardingBanner}
 			>
 				You can add expiration dates to foods to get notified when they&apos;re
 				about to expire. Tap any food to get started.
@@ -34,19 +35,19 @@ function PantryListInner({ className, ...rest }: PantryListProps) {
 			<Suspense>
 				<ExpiresSoonSection />
 			</Suspense>
-			<Box p col items="center">
+			<Box p col items="center" style={{ minWidth: 0 }}>
 				<PantryListSectionTabs />
 			</Box>
-			<div className="flex flex-col">
+			<Box col>
 				{categories.map((category) => {
 					return (
 						<PantryListCategory key={category.get('id')} category={category} />
 					);
 				})}
 				<PantryListCategory category={null} />
-			</div>
+			</Box>
 			<AutoRestoreScroll id="pantryList" />
-		</div>
+		</Box>
 	);
 }
 
@@ -60,13 +61,13 @@ export function PantryList(props: PantryListProps) {
 
 function SkeletonList() {
 	return (
-		<div className="flex flex-col items-stretch">
-			<div style={{ height: 30 }} />
-			<CardGrid className="grid-cols-[repeat(2,1fr)]">
+		<Box col items="stretch">
+			<Box style={{ height: 30 }} />
+			<CardGrid className={cls.grid}>
 				{new Array(8).fill(null).map((_, i) => (
 					<PantryListItemSkeleton key={i} />
 				))}
 			</CardGrid>
-		</div>
+		</Box>
 	);
 }

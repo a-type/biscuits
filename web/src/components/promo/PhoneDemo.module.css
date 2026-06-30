@@ -6,8 +6,8 @@
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
-	padding-inline: var(--m-spacing-xs);
-	padding-block: var(--m-spacing-xl);
+	padding-inline: var(--m-space-xs);
+	padding-block: var(--m-space-xl);
 }
 
 @keyframes drift-3d-left {
@@ -123,9 +123,9 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: var(--m-spacing-md);
+	padding: var(--m-space-md);
 	text-align: center;
-	font-size: var(--m-typography-size-lg);
+	font-size: var(--m-text-size-lg);
 	@apply --mx-fg(var(--m-color-neutral-heavy));
 }
 

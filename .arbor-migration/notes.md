@@ -68,9 +68,9 @@ Simple layout utilities (`flex`, `grid`, `gap-*`, `p-*`, etc.) are converted to 
 | Legacy class                      | Arbor equivalent                                                                                                                                            |
 | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `font-fancy`                      | `font-family: Henrietta, 'Noto Serif', serif` literal — no Arbor token exists for display font, use literal or the `.font-fancy` global class from main.css |
-| `font-semibold` / `font-bold`     | `font-weight: var(--m-typography-weight-bold)`                                                                                                              |
-| `font-300` / `font-light`         | `font-weight: 300` (or `var(--m-typography-weight-light)` if token exists)                                                                                  |
-| `text-sm` / `text-xs` / `text-lg` | `font-size: var(--m-typography-size-sm)` etc.                                                                                                               |
+| `font-semibold` / `font-bold`     | `font-weight: var(--m-text-weight-bold)`                                                                                                                    |
+| `font-300` / `font-light`         | `font-weight: 300` (or `var(--m-text-weight-light)` if token exists)                                                                                        |
+| `text-sm` / `text-xs` / `text-lg` | `font-size: var(--m-text-size-sm)` etc.                                                                                                                     |
 
 ## Opacity utilities
 

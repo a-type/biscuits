@@ -21,13 +21,16 @@ export function RemovableTag({
 			color={color || 'primary'}
 			className={clsx(`@mode-${color || 'primary'}`, cls.root, className)}
 		>
-			<span>
-				<Icon name={icon || 'tag'} size={10} />
-			</span>
+			<Icon name={icon || 'tag'} />
 			<span>{name}</span>
 			{onRemove && (
-				<Button emphasis="ghost" size="wrapper" onClick={onRemove}>
-					<Icon name="x" size={10} />
+				<Button
+					emphasis="ghost"
+					size="wrapper"
+					className="@mode-dense"
+					onClick={onRemove}
+				>
+					<Icon name="x" />
 				</Button>
 			)}
 		</Chip>

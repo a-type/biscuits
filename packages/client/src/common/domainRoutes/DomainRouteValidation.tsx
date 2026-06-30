@@ -169,8 +169,8 @@ function DnsRecord({
 					name="check"
 					style={{
 						position: 'absolute',
-						top: 'var(--m-spacing-sm)',
-						right: 'var(--m-spacing-sm)',
+						top: 'var(--m-space-sm)',
+						right: 'var(--m-space-sm)',
 						color: 'var(--m-color-main-heavy)',
 					}}
 				/>

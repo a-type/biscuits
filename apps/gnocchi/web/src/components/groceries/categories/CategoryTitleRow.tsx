@@ -1,12 +1,6 @@
 import { withClassName } from '@a-type/ui';
+import cls from './CategoryTitleRow.module.css';
 
-export const CategoryTitleRow = withClassName(
-	'div',
-	'flex flex-row items-center py-1 px-3 select-none',
-);
+export const CategoryTitleRow = withClassName('div', cls.row);
 
-export const CategoryTitle = withClassName(
-	'h2',
-	'text-xs font-sans font-normal uppercase italic color-black user-select-none m-0 min-w-0 whitespace-nowrap overflow-hidden text-ellipsis pr-1 flex-1-0-0',
-	'[[data-is-item-dragging=true]_&]:(text-sm mt-2)',
-);
+export const CategoryTitle = withClassName('h2', cls.header);

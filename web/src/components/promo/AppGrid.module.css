@@ -1,7 +1,7 @@
 .grid {
 	display: grid;
 	grid-template-columns: 1fr;
-	gap: var(--m-spacing-lg);
+	gap: var(--m-space-lg);
 	width: 100%;
 
 	@media (min-width: 640px) {
@@ -16,17 +16,17 @@
 		'icon name'
 		'description description';
 	align-items: center;
-	gap: var(--m-spacing-md);
-	padding: var(--m-spacing-md);
-	font-weight: var(--m-typography-weight-normal);
+	gap: var(--m-space-md);
+	padding: var(--m-space-md);
+	font-weight: var(--m-text-weight-normal);
 	position: relative;
 }
 
 .name {
 	grid-area: name;
 	margin: 0;
-	font-size: var(--m-typography-size-lg);
-	font-weight: var(--m-typography-weight-bold);
+	font-size: var(--m-text-size-lg);
+	font-weight: var(--m-text-weight-bold);
 }
 
 .appIcon {
@@ -37,17 +37,17 @@
 
 .description {
 	grid-area: description;
-	font-size: var(--m-typography-size-sm);
+	font-size: var(--m-text-size-sm);
 	@apply --mx-fg(var(--m-color-neutral-ink));
 }
 
 .externalIcon {
 	position: absolute;
-	right: var(--m-spacing-lg);
-	top: var(--m-spacing-lg);
+	right: var(--m-space-lg);
+	top: var(--m-space-lg);
 	transition: transform 0.15s ease;
 
 	.cardMain:hover & {
-		transform: translate(var(--m-spacing-sm), calc(-1 * var(--m-spacing-sm)));
+		transform: translate(var(--m-space-sm), calc(-1 * var(--m-space-sm)));
 	}
 }

@@ -1,5 +1,6 @@
 import { hooks } from '@/stores/groceries/index.js';
 import {
+	Box,
 	Button,
 	Dialog,
 	DialogActions,
@@ -10,6 +11,7 @@ import {
 	TextField,
 	toast,
 } from '@a-type/ui';
+import { RemovableTag } from '@biscuits/client';
 import { FoodAlternateNames } from '@gnocchi.biscuits/verdant';
 import { useState } from 'react';
 
@@ -23,7 +25,7 @@ export function FoodNamesEditor({ names }: FoodNamesEditorProps) {
 	const unique = Array.from(new Set(asArray));
 
 	return (
-		<div className="flex flex-row flex-wrap items-center gap-2">
+		<Box wrap items="center" gap="sm">
 			{unique.map((name) => (
 				<FoodNameTag
 					key={name}
@@ -32,7 +34,7 @@ export function FoodNamesEditor({ names }: FoodNamesEditorProps) {
 				/>
 			))}
 			<AddNameButton names={names} />
-		</div>
+		</Box>
 	);
 }
 
@@ -43,18 +45,7 @@ function FoodNameTag({
 	name: string;
 	onDelete: (name: string) => void;
 }) {
-	return (
-		<div className="max-w-full inline-flex flex-row items-center gap-1 overflow-hidden whitespace-nowrap border rounded-2xl border-solid px-3 py-1 text-sm border-black">
-			<span className="overflow-hidden text-ellipsis">{name}</span>
-			<Button
-				onClick={() => onDelete(name)}
-				emphasis="ghost"
-				className="important:p-2px"
-			>
-				<Icon name="x" />
-			</Button>
-		</div>
-	);
+	return <RemovableTag name={name} onRemove={() => onDelete(name)} />;
 }
 
 function AddNameButton({ names }: { names: FoodAlternateNames }) {
@@ -63,14 +54,7 @@ function AddNameButton({ names }: { names: FoodAlternateNames }) {
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
-			<Dialog.Trigger
-				render={
-					<Button
-						size="small"
-						className="important:rounded-2xl important:px-3 important:py-1"
-					/>
-				}
-			>
+			<Dialog.Trigger render={<Button size="small" />}>
 				<Icon name="plus" />
 				<span>Add name</span>
 			</Dialog.Trigger>

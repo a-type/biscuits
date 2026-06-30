@@ -1,13 +1,13 @@
 .root {
 	pointer-events: none;
 	position: fixed;
-	top: var(--m-spacing-md);
-	right: var(--m-spacing-md);
+	top: var(--m-space-md);
+	right: var(--m-space-md);
 	z-index: 1000;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: var(--m-spacing-md);
+	gap: var(--m-space-md);
 	border-radius: var(--m-surface-radius);
 	opacity: 1;
 	transition: opacity var(--m-duration-short) var(--m-easing);

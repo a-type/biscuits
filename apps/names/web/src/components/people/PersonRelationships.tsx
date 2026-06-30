@@ -219,7 +219,7 @@ function RelationshipTypeSelect({
 function RelationshipSearch({ person }: { person: Person }) {
 	const addRelationship = useAddRelationship();
 	return (
-		<Box d="row" gap="md" items="center">
+		<Box gap="md" items="center">
 			<Icon name="add_person" className="color-gray-dark" />
 			<Suspense>
 				<PersonNameSearchField

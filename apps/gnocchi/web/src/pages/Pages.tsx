@@ -10,7 +10,7 @@ import {
 	useHadRecentError,
 } from '@/components/sync/ReloadButton.jsx';
 import { hooks, verdant } from '@/stores/groceries/index.js';
-import { ErrorBoundary, H1, P, PageRoot } from '@a-type/ui';
+import { Box, ErrorBoundary, H1, P, PageRoot } from '@a-type/ui';
 import { SubscribedOnly, SubscriptionPromotion } from '@biscuits/client';
 import {
 	Essentials,
@@ -218,8 +218,14 @@ function ErrorFallback({ clearError }: { clearError: () => void }) {
 	const hadRecentError = useHadRecentError();
 
 	return (
-		<div className="flex flex-col items-center justify-center p-4">
-			<div className="max-w-content flex flex-col items-start justify-center gap-4">
+		<Box col layout="center center" p>
+			<Box
+				col
+				items="start"
+				justify="center"
+				gap
+				style={{ maxWidth: 'max-content' }}
+			>
 				<H1>Something went wrong</H1>
 				<P>
 					Sorry about this. The app has crashed.{' '}
@@ -238,7 +244,7 @@ function ErrorFallback({ clearError }: { clearError: () => void }) {
 						<ResetToServer client={verdant} />
 					</SubscribedOnly>
 				)}
-			</div>
-		</div>
+			</Box>
+		</Box>
 	);
 }

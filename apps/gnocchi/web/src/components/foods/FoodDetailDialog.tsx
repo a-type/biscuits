@@ -10,15 +10,16 @@ import {
 	Dialog,
 	DialogTitle,
 	Divider,
+	Field,
 	H3,
 	Icon,
 	Input,
-	LiveUpdateTextField,
 	RelativeTime,
 	Switch,
+	Text,
 	TextSkeleton,
 	Tooltip,
-	withClassName,
+	withProps,
 } from '@a-type/ui';
 import { Food } from '@gnocchi.biscuits/verdant';
 import { useSearchParams } from '@verdant-web/react-router';
@@ -78,14 +79,14 @@ function FoodDetailView({
 
 	if (!food)
 		return (
-			<div className="flex flex-col items-center gap-4">
+			<Box col items="center" gap>
 				<div>No food data for &quot;{foodName}&quot;</div>
 				{justDeleted && (
 					<Button emphasis="ghost" onClick={() => client.undoHistory.undo()}>
 						Undo delete
 					</Button>
 				)}
-			</div>
+			</Box>
 		);
 
 	const lastPurchasedAt = food.get('lastPurchasedAt');
@@ -100,127 +101,150 @@ function FoodDetailView({
 		: 0;
 
 	return (
-		<div className="flex flex-col gap-3">
+		<Box col gap>
 			<DialogTitle>
 				<FoodNameEditor food={food} />
 			</DialogTitle>
 			{lastPurchasedAt || expiresText || purchaseIntervalDays ? (
-				<div className="flex flex-col gap-2">
+				<Box col gap="sm">
 					{!!lastPurchasedAt && (
 						<Row>
 							<Icon name="clock" />
-							<div className="text-xs italic">
+							<Text emphasis="ambient" italic>
 								Added <RelativeTime value={lastPurchasedAt} />
-							</div>
+							</Text>
 						</Row>
 					)}
 					{!!frozenAt && (
-						<Row className="color-accent-dark">
+						<Row style={{ color: 'var(--m-color-accent-heavy)' }}>
 							<Icon name="snowflake" />
-							<div className="text-xs italic">
+							<Text emphasis="ambient" italic>
 								Frozen <RelativeTime value={frozenAt} />
-							</div>
+							</Text>
 						</Row>
 					)}
 					{!!expiresText && (
 						<Row>
 							<Icon name="warning" />
-							<div className="text-xs italic">{expiresText}</div>
+							<Text emphasis="ambient" italic>
+								{expiresText}
+							</Text>
 						</Row>
 					)}
 					{!!purchaseIntervalDays && (
 						<Row>
 							<Icon name="refresh" />
-							<div className="text-xs italic">
+							<Text emphasis="ambient" italic>
 								You buy this about every {purchaseIntervalDays} day
 								{purchaseIntervalDays === 1 ? '' : 's'}
-							</div>
+							</Text>
 						</Row>
 					)}
-				</div>
+				</Box>
 			) : null}
-			<Row>
-				<span>Category:</span>
-				<CategorySelect
-					value={food.get('categoryId')}
-					onChange={(val) => food.set('categoryId', val)}
+			<Field id="categoryId">
+				<Field.Label>Category:</Field.Label>
+				<Field.Control
+					render={
+						<CategorySelect
+							value={food.get('categoryId')}
+							onChange={(val) => food.set('categoryId', val)}
+						/>
+					}
 				/>
-			</Row>
-			<Row>
-				<span>Default list:</span>
-				<ListSelect
-					value={food.get('defaultListId')}
-					onChange={(val) => food.set('defaultListId', val)}
-					includeAll={false}
+			</Field>
+			<Field id="defaultListId">
+				<Field.Label>Default list:</Field.Label>
+				<Field.Control
+					render={
+						<ListSelect
+							value={food.get('defaultListId')}
+							onChange={(val) => food.set('defaultListId', val)}
+							includeAll={false}
+						/>
+					}
 				/>
-			</Row>
+			</Field>
 			<Divider />
-			<div className="flex flex-col gap-1">
-				<Row>
-					<span className="whitespace-nowrap">Expires after</span>
-					<LiveUpdateTextField
-						type="number"
-						// @ts-expect-error - not docd...
-						max={9999}
-						min={0}
-						value={food.get('expiresAfterDays')?.toString() ?? ''}
-						onChange={(val) => {
-							if (val === '') {
-								food.set('expiresAfterDays', null);
-								food.set('expiresAt', null);
-								return;
-							} else {
-								const v = parseInt(val);
-								if (isNaN(v)) return;
-								food.set('expiresAfterDays', v);
-								const lastPurchasedAt = food.get('lastPurchasedAt');
-								if (lastPurchasedAt) {
-									food.set(
-										'expiresAt',
-										lastPurchasedAt + v * 1000 * 60 * 60 * 24,
-									);
-								}
-							}
-						}}
-					/>
-					<span>days</span>
-				</Row>
-				<span className="text-xs">
+			<Field>
+				<Field.Label htmlFor="expiresAfterDays">Expires after</Field.Label>
+				<Field.Control
+					render={
+						<Input.Border>
+							<Input.Input
+								id="expiresAfterDays"
+								type="number"
+								max={9999}
+								min={0}
+								value={food.get('expiresAfterDays')?.toString() ?? ''}
+								onValueChange={(val) => {
+									if (val === '') {
+										food.set('expiresAfterDays', null);
+										food.set('expiresAt', null);
+										return;
+									} else {
+										const v = parseInt(val);
+										if (isNaN(v)) return;
+										food.set('expiresAfterDays', v);
+										const lastPurchasedAt = food.get('lastPurchasedAt');
+										if (lastPurchasedAt) {
+											food.set(
+												'expiresAt',
+												lastPurchasedAt + v * 1000 * 60 * 60 * 24,
+											);
+										}
+									}
+								}}
+							/>
+							<span>days</span>
+						</Input.Border>
+					}
+				/>
+				<Field.Description>
 					Set this and the app will remind you when something is about to
 					expire.
-				</span>
-			</div>
-			<Box direction="col" gap="sm" p="none">
-				<label className="row gap-1">
-					<Switch
-						checked={food.get('isStaple')}
-						onCheckedChange={(val) => food.set('isStaple', val === true)}
-					/>
-					<span>Staple food</span>
-				</label>
-				<span className="text-xs italic color-gray-dark">
+				</Field.Description>
+			</Field>
+			<Box col gap="sm" p="none">
+				<Field horizontal>
+					<Field.Control>
+						<Switch
+							checked={food.get('isStaple')}
+							onCheckedChange={(val) => food.set('isStaple', val === true)}
+							id="isStaple"
+						/>
+					</Field.Control>
+					<Field.Label htmlFor="isStaple">Staple food</Field.Label>
+				</Field>
+				<Field.Description>
 					Staples are automatically added to the list when they run out
-				</span>
+				</Field.Description>
 			</Box>
 			<Divider />
 			<H3>Alternate names</H3>
 			<FoodNamesEditor names={food.get('alternateNames')} />
-			<label className="row gap-1">
-				<Switch
-					checked={food.get('pluralizeName')}
-					onCheckedChange={(val) => food.set('pluralizeName', val === true)}
-				/>
-				<span>Use pluralized name</span>
-			</label>
+			<Field horizontal>
+				<Field.Control>
+					<Switch
+						checked={food.get('pluralizeName')}
+						onCheckedChange={(val) => food.set('pluralizeName', val === true)}
+						id="pluralizeName"
+					/>
+				</Field.Control>
+				<Field.Label htmlFor="pluralizeName">Use pluralized name</Field.Label>
+			</Field>
 			<Divider />
-			<label className="row gap-1">
-				<Switch
-					checked={food.get('doNotSuggest')}
-					onCheckedChange={(val) => food.set('doNotSuggest', val === true)}
-					className="[&[data-state=checked]]:bg-attention"
-				/>
-				<span>Do not suggest</span>
-			</label>
+			<Field horizontal>
+				<Field.Control>
+					<Switch
+						checked={food.get('doNotSuggest')}
+						onCheckedChange={(val) => food.set('doNotSuggest', val === true)}
+						id="doNotSuggest"
+						className="@mode-attention"
+					/>
+				</Field.Control>
+				<Field.Label htmlFor="doNotSuggest">Do not suggest</Field.Label>
+			</Field>
 			<Row>
 				<Button
 					onClick={() => {
@@ -233,14 +257,16 @@ function FoodDetailView({
 					Delete
 				</Button>
 			</Row>
-		</div>
+		</Box>
 	);
 }
 
 function SkeletonDetails() {
 	return (
 		<Box col gap full="width">
-			<TextSkeleton maxLength={20} className="text-xl" />
+			<Dialog.Title>
+				<TextSkeleton maxLength={20} aria-label="Loading" />
+			</Dialog.Title>
 			<Box col gap>
 				<TextSkeleton maxLength={15} />
 				<TextSkeleton maxLength={25} />
@@ -271,7 +297,7 @@ function SkeletonDetails() {
 	);
 }
 
-const Row = withClassName('div', 'flex flex-row items-center gap-md');
+const Row = withProps(Box, { gap: true, items: 'center' });
 
 const FoodNameEditor = ({ food }: { food: Food }) => {
 	const changeName = useChangeFoodCanonicalName();
@@ -280,14 +306,23 @@ const FoodNameEditor = ({ food }: { food: Food }) => {
 
 	if (editing) {
 		return (
-			<div className="row">
-				<Input
-					value={newName}
-					onChange={(ev) => setNewName(ev.target.value ?? '')}
-					placeholder={food.get('canonicalName')}
-					autoSelect
-					autoFocus
-				/>
+			<Box gap="sm">
+				<Input.Border>
+					<Input.Input
+						value={newName}
+						onChange={(ev) => setNewName(ev.target.value ?? '')}
+						placeholder={food.get('canonicalName')}
+						autoSelect
+						autoFocus
+					/>
+					<Button
+						size="small"
+						emphasis="ghost"
+						onClick={() => setEditing(false)}
+					>
+						<Icon name="x" />
+					</Button>
+				</Input.Border>
 				{newName !== food.get('canonicalName') && (
 					<Suspense
 						fallback={
@@ -307,18 +342,22 @@ const FoodNameEditor = ({ food }: { food: Food }) => {
 						/>
 					</Suspense>
 				)}
-			</div>
+			</Box>
 		);
 	}
 	return (
-		<div className="row">
+		<Box gap="sm">
 			<FoodName food={food} capitalize />
 			<Tooltip content="Rename or merge">
-				<Button emphasis="ghost" onClick={() => setEditing(true)}>
+				<Button
+					emphasis="ghost"
+					onClick={() => setEditing(true)}
+					style={{ position: 'relative', top: -1 }}
+				>
 					<Icon name="pencil" />
 				</Button>
 			</Tooltip>
-		</div>
+		</Box>
 	);
 };
 

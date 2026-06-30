@@ -54,7 +54,6 @@ export function PersonSelect({
 			{...rest}
 		>
 			<Select.Trigger
-				className="[&[data-state=open]]:scale-[1.05]"
 				contentEditable={false}
 				render={<Button emphasis="ghost" size="small" />}
 			>
@@ -62,14 +61,9 @@ export function PersonSelect({
 					render={
 						<Select.Value contentEditable={false}>
 							{value === null ? (
-								<PersonAvatar
-									popIn={false}
-									person={null}
-									className="opacity-50"
-								/>
+								<PersonAvatar person={null} style={{ opacity: 0.5 }} />
 							) : (
 								<PersonAvatar
-									popIn={false}
 									person={people.find((person) => person.id === value) || null}
 								/>
 							)}
@@ -82,11 +76,8 @@ export function PersonSelect({
 				<Select.Group>
 					{label && <Select.GroupLabel>{label}</Select.GroupLabel>}
 					{allowNone && (
-						<SelectItemRoot
-							className="flex flex-row items-center gap-2"
-							value="null"
-						>
-							<PersonAvatar popIn={false} person={null} />
+						<SelectItemRoot value="null">
+							<PersonAvatar person={null} />
 							<SelectItemText>None</SelectItemText>
 							<SelectItemIndicator />
 						</SelectItemRoot>
@@ -115,10 +106,7 @@ function PersonSelectItem({
 		return null;
 	}
 	return (
-		<SelectItem
-			value={person.profile.id}
-			className="flex flex-row items-center gap-2"
-		>
+		<SelectItem value={person.profile.id}>
 			<PersonSelectItemLabel person={person} isSelf={isSelf} />
 			<SelectItemIndicator />
 		</SelectItem>
@@ -134,7 +122,7 @@ function PersonSelectItemLabel({
 }) {
 	return (
 		<Box items="center" gap="sm">
-			<PersonAvatar popIn={false} person={person} />
+			<PersonAvatar person={person} />
 			{isSelf ? 'Me' : person.profile.name}
 		</Box>
 	);

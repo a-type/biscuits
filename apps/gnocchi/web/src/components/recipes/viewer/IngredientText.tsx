@@ -1,25 +1,37 @@
 import { hooks } from '@/stores/groceries/index.js';
-import { Tooltip } from '@a-type/ui';
+import { Text, Tooltip } from '@a-type/ui';
 import { fractionToText } from '@a-type/utils';
 import {
 	RecipeIngredientsItem,
 	RecipeIngredientsItemComments,
 } from '@gnocchi.biscuits/verdant';
 import pluralize from 'pluralize';
+import { CSSProperties } from 'react';
 import { TextWithMultipliedNumbers } from './TextWithMultipliedNumbers.jsx';
 
 export interface IngredientTextProps {
 	ingredient: RecipeIngredientsItem;
 	multiplier: number;
 	className?: string;
+	style?: CSSProperties;
 }
 
 export function IngredientText({
 	ingredient,
 	multiplier,
 	className,
+	style,
 }: IngredientTextProps) {
-	const { text, quantity, unit, food, comments } = hooks.useWatch(ingredient);
+	const { text, quantity, unit, food, comments, isSectionHeader } =
+		hooks.useWatch(ingredient);
+
+	if (isSectionHeader) {
+		return (
+			<Text bold className={className} style={style}>
+				{text}
+			</Text>
+		);
+	}
 
 	return (
 		<IngredientTextRenderer
@@ -30,6 +42,7 @@ export function IngredientText({
 			comments={comments}
 			multiplier={multiplier}
 			className={className}
+			style={style}
 		/>
 	);
 }
@@ -42,6 +55,7 @@ export function IngredientTextRenderer({
 	comments,
 	multiplier = 1,
 	className,
+	style,
 }: {
 	text: string;
 	quantity: number;
@@ -50,24 +64,29 @@ export function IngredientTextRenderer({
 	comments: string[] | RecipeIngredientsItemComments;
 	multiplier?: number;
 	className?: string;
+	style?: CSSProperties;
 }) {
 	if (multiplier !== 1) {
 		const finalQuantity = quantity * multiplier;
 		const showPlural = finalQuantity !== 1;
 		return (
-			<span className={className}>
+			<span className={className} style={style}>
 				<Tooltip
 					content={
 						(
-							<span className="max-w-80dvw text-wrap">
+							<Text style={{ maxWidth: '80dvw', textWrap: 'wrap' }}>
 								Multiplier {multiplier}x applied. Original value: {quantity}
-							</span>
+							</Text>
 						) as any
 					}
 				>
-					<span className="font-bold color-accent-dark">
+					<Text
+						bold
+						className="@mode-accent"
+						style={{ color: 'var(--m-color-main-heavy)' }}
+					>
 						{fractionToText(finalQuantity)}
-					</span>
+					</Text>
 				</Tooltip>{' '}
 				<span className="unit">
 					{unit ? (showPlural ? pluralize(unit) : unit) : ''}
@@ -89,7 +108,11 @@ export function IngredientTextRenderer({
 		);
 	}
 
-	return <span className={className}>{replaceNumbersWithFractions(text)}</span>;
+	return (
+		<span className={className} style={style}>
+			{replaceNumbersWithFractions(text)}
+		</span>
+	);
 }
 
 function replaceNumbersWithFractions(text: string) {

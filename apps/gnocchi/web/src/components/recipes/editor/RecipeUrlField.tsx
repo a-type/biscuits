@@ -1,6 +1,6 @@
 import { hooks } from '@/stores/groceries/index.js';
 import { useUpdateRecipeFromUrl } from '@/stores/groceries/mutations.js';
-import { Button, Dialog, Icon, LiveUpdateTextField } from '@a-type/ui';
+import { Box, Button, Dialog, Icon, LiveUpdateTextField } from '@a-type/ui';
 import { LoginButton, useIsLoggedIn } from '@biscuits/client';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { useState } from 'react';
@@ -27,25 +27,25 @@ export function RecipeUrlField({ recipe }: RecipeUrlFieldProps) {
 	};
 
 	return (
-		<div className="w-full flex self-stretch gap-2">
+		<Box full="width" gap="sm" style={{ alignSelf: 'stretch' }}>
 			<LiveUpdateTextField
 				placeholder="Paste a website"
 				value={url || ''}
 				onChange={(url) => recipe.set('url', url)}
 				type="url"
-				className="flex-1"
+				style={{ flex: 1 }}
 				autoSelect
 			/>
 			{isLoggedIn ? (
 				<Button emphasis="primary" onClick={scan} disabled={!url || scanning}>
 					<Icon name="scan" style={{ width: 15, height: 15 }} />
-					<span className="ml-2">Scan</span>
+					<span>Scan</span>
 				</Button>
 			) : (
 				<Dialog>
 					<Dialog.Trigger render={<Button emphasis="primary" />}>
 						<Icon name="scan" style={{ width: 15, height: 15 }} />
-						<span className="ml-2">Scan</span>
+						<span>Scan</span>
 					</Dialog.Trigger>
 					<Dialog.Content>
 						<Dialog.Title>Sign up to scan web recipes</Dialog.Title>
@@ -62,6 +62,6 @@ export function RecipeUrlField({ recipe }: RecipeUrlFieldProps) {
 					</Dialog.Content>
 				</Dialog>
 			)}
-		</div>
+		</Box>
 	);
 }

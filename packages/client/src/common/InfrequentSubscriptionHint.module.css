@@ -2,14 +2,14 @@
 	@apply --mx-bg(var(--m-color-neutral-wash));
 	display: flex;
 	flex-direction: column;
-	gap: var(--m-spacing-sm);
+	gap: var(--m-space-sm);
 	border-radius: var(--m-radius-md);
-	padding: var(--m-spacing-md);
+	padding: var(--m-space-md);
 }
 
 .actions {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
-	gap: var(--m-spacing-sm);
+	gap: var(--m-space-sm);
 }

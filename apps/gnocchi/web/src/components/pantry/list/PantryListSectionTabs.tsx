@@ -10,34 +10,24 @@ export function PantryListSectionTabs({}: PantryListSectionTabsProps) {
 		<TabsRoot
 			value={filter}
 			onValueChange={(f) => setFilter(f as 'purchased' | 'all' | 'frozen')}
+			style={{ minWidth: 0 }}
 		>
 			<TabsList
-				className={clsx(
-					'rounded-full [&>*]:text-xs',
-					filter === 'frozen' && 'palette-accent',
-				)}
+				className={clsx(filter === 'frozen' && '@mode-accent')}
+				style={{ minWidth: 0, maxWidth: '98dvw' }}
 				color="primary"
 			>
-				<TabsTrigger
-					className="flex flex-col items-center rounded-full text-nowrap sm:flex-row"
-					value="purchased"
-				>
+				<TabsTrigger value="purchased">
 					<Icon name="check" />
 					<span className="">Purchased</span>
 				</TabsTrigger>
-				<TabsTrigger
-					value="frozen"
-					className="flex flex-col rounded-full text-nowrap sm:flex-row"
-				>
+				<TabsTrigger value="frozen">
 					<Icon name="snowflake" />
 					<span className="">Frozen</span>
 				</TabsTrigger>
-				<TabsTrigger
-					className="flex flex-col items-center rounded-full text-nowrap sm:flex-row"
-					value="all"
-				>
+				<TabsTrigger value="all">
 					<Icon name="food" />
-					<span className="">All foods</span>
+					<span className="">All</span>
 				</TabsTrigger>
 			</TabsList>
 		</TabsRoot>

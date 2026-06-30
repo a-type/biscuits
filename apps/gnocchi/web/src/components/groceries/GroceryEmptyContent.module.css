@@ -1,0 +1,25 @@
+.root {
+	display: flex;
+	flex-direction: column;
+	user-select: none;
+	gap: var(--m-space-lg);
+	padding: var(--m-space-md);
+}
+
+.content {
+	@apply --mx-fg(var(--m-color-neutral-ink));
+	display: flex;
+	flex-grow: 1;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: var(--m-space-sm);
+	padding: var(--m-space-md);
+	text-align: center;
+	font-size: var(--m-prose-ambient-size);
+	font-style: italic;
+}
+
+.text {
+	font-size: inherit;
+}

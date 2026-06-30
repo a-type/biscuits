@@ -4,10 +4,10 @@
 	flex-direction: row;
 	align-items: flex-end;
 	justify-content: space-between;
-	gap: var(--m-spacing-sm);
-	padding-bottom: var(--m-spacing-sm);
-	padding-top: var(--m-spacing-xl);
-	font-size: var(--m-typography-size-sm);
+	gap: var(--m-space-sm);
+	padding-bottom: var(--m-space-sm);
+	padding-top: var(--m-space-xl);
+	font-size: var(--m-text-size-sm);
 	opacity: 0.5;
 
 	&:hover {
@@ -19,18 +19,18 @@
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	gap: var(--m-spacing-sm);
+	gap: var(--m-space-sm);
 }
 
 .brand {
 	font-family: Henrietta, 'Noto Serif', serif;
-	font-size: var(--m-typography-size-sm);
-	font-weight: var(--m-typography-weight-bold);
+	font-size: var(--m-text-size-sm);
+	font-weight: var(--m-text-weight-bold);
 }
 
 .rightCol {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
-	gap: var(--m-spacing-sm);
+	gap: var(--m-space-sm);
 }

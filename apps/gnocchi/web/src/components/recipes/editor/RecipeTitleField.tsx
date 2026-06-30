@@ -19,7 +19,8 @@ export function RecipeTitleField({ recipe }: RecipeTitleFieldProps) {
 					updatedAt: Date.now(),
 				});
 			}}
-			className="max-w-full w-full important:text-3xl"
+			style={{ maxWidth: '100%', width: '100%' }}
+			className="@mode-heading"
 			autoSelect
 		/>
 	);

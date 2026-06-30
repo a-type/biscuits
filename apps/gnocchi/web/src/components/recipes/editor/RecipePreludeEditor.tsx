@@ -11,10 +11,7 @@ export function RecipePreludeEditor({ recipe }: RecipePreludeEditor) {
 	const editor = useSyncedPreludeEditor(recipe, false);
 	return (
 		<div>
-			<EditorContent
-				editor={editor}
-				className={clsx(tipTapClassName, '[&_a]:font-bold')}
-			/>
+			<EditorContent editor={editor} className={clsx(tipTapClassName)} />
 		</div>
 	);
 }

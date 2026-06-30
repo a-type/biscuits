@@ -1,11 +1,6 @@
 import { RecipeNowPlayingLink } from '@/components/recipes/nowPlaying/RecipeNowPlayingLink.jsx';
 import { useNowPlayingRecipes } from '@/components/recipes/nowPlaying/hooks.js';
-import {
-	CollapsibleContent,
-	CollapsibleRoot,
-	CollapsibleTrigger,
-	Icon,
-} from '@a-type/ui';
+import { Box, Button, Collapsible, Icon, Text } from '@a-type/ui';
 import { useParams } from '@verdant-web/react-router';
 
 export interface RecipesNowPlayingProps {
@@ -32,24 +27,36 @@ export function RecipesNowPlaying({
 	}
 
 	return (
-		<div className="pointer-events-auto w-full flex flex-col items-start overflow-hidden border-default rounded-lg shadow-lg bg-white">
-			<CollapsibleRoot defaultOpen={defaultOpen} className="w-full">
-				<CollapsibleTrigger className="w-full flex flex-row items-center justify-between px-1 py-1 pr-5 bg-transparent">
-					<span className="px-2 py-1 text-xs italic">Now Cooking</span>
-					<Icon
-						name="chevron"
-						className="transition-transform duration-200 [[data-closed]_&]:rotate-180"
-					/>
-				</CollapsibleTrigger>
-				<CollapsibleContent>
-					<div className="flex flex-col gap-2">
+		<Box
+			surface="ambient"
+			full="width"
+			col
+			items="start"
+			overflow="hidden"
+			elevated="lg"
+			style={{ pointerEvents: 'auto' }}
+		>
+			<Collapsible defaultOpen={defaultOpen} className="w-full">
+				<Button
+					emphasis="unstyled"
+					style={{ width: '100%', justifyContent: 'space-between' }}
+				>
+					<Text italic emphasis="ambient">
+						Now Cooking
+					</Text>
+					<Collapsible.Icon>
+						<Icon name="chevron" />
+					</Collapsible.Icon>
+				</Button>
+				<Collapsible.Content>
+					<Box col gap="sm">
 						<RecipeNowPlayingLink recipe={firstRecipe} />
 						{otherRecipes.map((recipe) => (
 							<RecipeNowPlayingLink key={recipe.get('id')} recipe={recipe} />
 						))}
-					</div>
-				</CollapsibleContent>
-			</CollapsibleRoot>
-		</div>
+					</Box>
+				</Collapsible.Content>
+			</Collapsible>
+		</Box>
 	);
 }

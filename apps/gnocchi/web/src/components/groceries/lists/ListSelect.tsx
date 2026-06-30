@@ -5,24 +5,18 @@ import {
 	DialogContent,
 	FormikForm,
 	Icon,
-	PaletteName,
 	Select,
 	SelectItem,
 	SubmitButton,
+	Text,
 	TextField,
 	withClassName,
 } from '@a-type/ui';
 import { List } from '@gnocchi.biscuits/verdant';
 import { useState } from 'react';
 
-function getRandomColor(): PaletteName {
-	const colors: PaletteName[] = [
-		'lemon',
-		'blueberry',
-		'tomato',
-		'eggplant',
-		'leek',
-	];
+function getRandomColor(): string {
+	const colors: string[] = ['lemon', 'blueberry', 'tomato', 'eggplant', 'leek'];
 	return colors[Math.floor(Math.random() * colors.length)] as any;
 }
 
@@ -106,7 +100,7 @@ export function ListSelect({
 							placeholder="Custom list"
 							required
 						/>
-						<SubmitButton className="self-end">Create</SubmitButton>
+						<SubmitButton>Create</SubmitButton>
 					</FormikForm>
 				</DialogContent>
 			</Dialog>
@@ -127,10 +121,8 @@ function ListSelectItemLabel({ list }: { list: List | null | undefined }) {
 	if (list === null) {
 		return (
 			<Box items="center" gap="sm">
-				<FilledIcon name="tag" className="palette-lemon" />
-				<span className="max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
-					Default
-				</span>
+				<FilledIcon name="tag" className="@mode-lemon" />
+				<Text truncate>Default</Text>
 			</Box>
 		);
 	}
@@ -139,9 +131,7 @@ function ListSelectItemLabel({ list }: { list: List | null | undefined }) {
 		return (
 			<Box items="center" gap="sm">
 				<MultiListIcon />
-				<span className="max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
-					All lists
-				</span>
+				<Text truncate>All lists</Text>
 			</Box>
 		);
 	}
@@ -150,20 +140,32 @@ function ListSelectItemLabel({ list }: { list: List | null | undefined }) {
 		<Box items="center" gap="sm">
 			<FilledIcon
 				name="tag"
-				className={`palette-${list.get('color') ?? 'lemon'}`}
+				className={`@mode-${list.get('color') ?? 'lemon'}`}
 			/>
-			<span className="max-w-full overflow-hidden text-ellipsis whitespace-nowrap">
-				{list.get('name')}
-			</span>
+			<Text truncate>{list.get('name')}</Text>
 		</Box>
 	);
 }
 
 function MultiListIcon() {
 	return (
-		<div className="relative inline">
-			<Icon name="tag" className="relative -left-3px" />
-			<Icon name="tag" className="absolute left-1px top-0 fill-white" />
+		<div style={{ position: 'relative', display: 'inline' }}>
+			<Icon
+				name="tag"
+				style={{
+					position: 'relative',
+					left: -3,
+				}}
+			/>
+			<Icon
+				name="tag"
+				style={{
+					position: 'absolute',
+					left: 1,
+					top: 0,
+					fill: 'var(--m-color-neutral-paper)',
+				}}
+			/>
 		</div>
 	);
 }

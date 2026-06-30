@@ -1,0 +1,31 @@
+.trigger {
+	z-index: 100;
+	height: --fn-literal(48px);
+	width: --fn-literal(48px);
+	align-items: center;
+	justify-content: center;
+	border-radius: var(--m-radius-lg);
+	box-shadow: var(--m-shadow-lg);
+	pointer-events: auto;
+
+	@media (min-width: 768px) {
+		display: none;
+	}
+}
+
+.content {
+	max-height: calc(var(--viewport-height, 40dvh) - 140px);
+	max-width: 96vw;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.scrollArea {
+	width: 100%;
+	flex: 1;
+}
+
+.input {
+	border-radius: var(--m-radius-md);
+}

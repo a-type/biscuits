@@ -1,21 +1,21 @@
 import { useSearch } from '@/components/pantry/hooks.js';
-import { Button, Icon, LiveUpdateTextField } from '@a-type/ui';
+import { Box, Button, Icon, LiveUpdateTextField } from '@a-type/ui';
 
 export function PantrySearch() {
 	const [search, setSearch] = useSearch();
 	return (
-		<div className="flex flex-row items-center gap-1">
+		<Box items="center" gap="xs" full="width">
 			<LiveUpdateTextField
 				placeholder="Search foods"
 				value={search}
 				onChange={setSearch}
-				className="flex-1 rounded-full"
+				style={{ flex: 1 }}
 			/>
 			{!!search && (
 				<Button emphasis="default" onClick={() => setSearch('')}>
 					<Icon name="x" />
 				</Button>
 			)}
-		</div>
+		</Box>
 	);
 }

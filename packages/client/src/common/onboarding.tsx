@@ -11,6 +11,7 @@ import {
 	SlotDiv,
 } from '@a-type/ui';
 import {
+	CSSProperties,
 	ReactElement,
 	ReactNode,
 	useCallback,
@@ -179,6 +180,7 @@ export interface OnboardingBannerProps<O extends Onboarding<any>> {
 	children: ReactNode;
 	className?: string;
 	disableNext?: boolean;
+	style?: CSSProperties;
 }
 
 export function OnboardingBanner<O extends Onboarding<any>>({
@@ -187,6 +189,7 @@ export function OnboardingBanner<O extends Onboarding<any>>({
 	children,
 	className,
 	disableNext,
+	style,
 }: OnboardingBannerProps<O>) {
 	const [show, next, isLast, isOnly, { id }] = onboarding.useStep(step);
 
@@ -196,6 +199,7 @@ export function OnboardingBanner<O extends Onboarding<any>>({
 			className={clsx('@mode-leek', 'w-full', className)}
 			data-step-id={id}
 			data-step-name={step}
+			style={style}
 		>
 			<CollapsibleContent>
 				<Box p surface="secondary" full="width" col gap="sm" rounded>

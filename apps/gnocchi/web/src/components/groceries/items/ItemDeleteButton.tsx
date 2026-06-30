@@ -12,5 +12,5 @@ export function ItemDeleteButton({ item, ...rest }: ItemDeleteButtonProps) {
 		deleteItem(item);
 	};
 
-	return <Button onClick={onDelete} {...rest} />;
+	return <Button aria-label="Delete item" onClick={onDelete} {...rest} />;
 }

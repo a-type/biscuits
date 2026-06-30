@@ -12,7 +12,7 @@ export function RecipeMainImageEditor({ recipe }: RecipeMainImageEditorProps) {
 
 	return (
 		<ImageUploader
-			className="h-full w-full rounded-lg"
+			className="h-full w-full"
 			value={mainImage?.url ?? null}
 			onChange={(file) => {
 				recipe.update({

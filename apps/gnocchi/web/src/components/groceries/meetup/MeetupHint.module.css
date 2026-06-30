@@ -1,0 +1,23 @@
+.root {
+	display: flex;
+	flex-grow: 1;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: var(--m-space-sm);
+	padding: var(--m-space-md);
+	text-align: center;
+}
+
+.text {
+	max-width: 300px;
+	@apply --mx-prose-ambient;
+	font-style: italic;
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+}
+
+.label {
+	@apply --mx-prose-ambient;
+	font-style: italic;
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+}

@@ -1,0 +1,229 @@
+@keyframes checkAndFade {
+	from {
+		opacity: 1;
+		background-color: var(--color-primary);
+	}
+	to {
+		opacity: 0.5;
+		background-color: transparent;
+		border-color: transparent;
+	}
+}
+
+@keyframes itemFade {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0.5;
+	}
+}
+
+@keyframes expand-scale-x {
+	from {
+		transform: scaleX(0);
+	}
+	to {
+		transform: scaleX(1);
+	}
+}
+
+.checkbox-purchased {
+	animation: checkAndFade 5s forwards linear;
+}
+
+.item-purchased {
+	animation: itemFade 5s forwards linear;
+}
+
+.root {
+	display: grid;
+	grid-template-columns: min-content 1fr min-content;
+	grid-template-rows: min-content min-content min-content;
+	grid-template-areas: 'check main' 'check comment' 'secondary secondary';
+	position: relative;
+	width: 100%;
+	user-select: none;
+	border-radius: var(--m-radius-lg);
+	transition: all var(--m-duration) var(--m-easing);
+	margin-top: var(--m-space-xs);
+	padding: var(--m-space-md);
+	@apply --mx-borderColor(transparent);
+	@apply --mx-shadow;
+
+	&[data-dragging='true'] {
+		cursor: grabbing;
+		touch-action: none;
+		@apply --mx-borderColor(var(--m-color-neutral-light));
+		box-shadow: var(--m-shadow-xl);
+	}
+
+	&[data-highlighted='true'] {
+		@apply --mx-bg(var(--m-color-main-wash));
+	}
+
+	&[data-menu-open='true'] {
+		@apply --mx-borderColor(var(--m-color-neutral));
+		@apply --mx-bg(var(--m-color-neutral-paper));
+		@apply --mx-shadow(var(--m-shadow-md));
+	}
+
+	&[data-purchased='true'] {
+		opacity: 90%;
+	}
+}
+
+.main {
+	grid-area: main;
+	position: relative;
+	min-width: 0;
+	display: flex;
+	flex-direction: row;
+	align-items: start;
+
+	@apply --mx-focus;
+}
+
+.content {
+	margin-right: var(--m-space-sm);
+	min-width: 0;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	align-items: start;
+	gap: var(--m-space-xs);
+	padding-block-start: var(--m-space-xs);
+	padding-inline: var(--m-space-xs);
+	margin-bottom: var(--m-space-md);
+	margin-left: var(--m-space-md);
+}
+
+.name {
+	position: relative;
+	margin-top: var(--m-space-xs);
+	max-width: 100%;
+	min-width: 0;
+	display: flex;
+	flex-direction: row;
+	align-items: start;
+	gap: var(--m-space-xs);
+	overflow: clip;
+	text-overflow: ellipsis;
+}
+
+.crossout {
+	position: absolute;
+	left: 0;
+	right: --fn-literal(52px);
+	top: --fn-literal(15px);
+	height: --fn-literal(1px);
+	transform-origin: left;
+	animation: expand-scale-x var(--m-duration-short) cubic-bezier(0, 0, 0.2, 1);
+	border-bottom-width: var(--m-lineWidth);
+	border-bottom-style: solid;
+	@apply --mx-borderColor(var(--m-color-neutral));
+}
+
+.comment {
+	grid-area: comment;
+	align-self: stretch;
+	padding-left: var(--m-space-sm);
+	padding-right: var(--m-space-xs);
+	font-size: var(--m-prose-ambient-size);
+	font-style: italic;
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+}
+
+.accessories {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: var(--m-space-sm);
+}
+
+.accessory {
+	margin-right: var(--m-space-xs);
+	align-self: center;
+}
+
+.grab {
+	position: relative;
+	user-select: none;
+	padding-inline: var(--m-space-sm);
+	width: --fn-literal(15px);
+	height: --fn-literal(15px);
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+}
+
+.collapseTrigger {
+	flex-shrink: 0;
+	padding: var(--m-space-xs);
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+
+	&[data-state='open'] .icon {
+		transform: rotate(180deg);
+	}
+
+	&:hover {
+		@apply --mx-fg(var(--m-color-neutral-ink));
+	}
+}
+
+.secondary {
+	grid-area: secondary;
+}
+
+.secondaryContent {
+	display: flex;
+	flex-direction: column;
+	align-items: end;
+	justify-content: end;
+	gap: var(--m-space-sm);
+	padding: var(--m-space-sm);
+	padding-top: 0;
+}
+
+.commentSection {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: end;
+	gap: var(--m-space-sm);
+}
+
+.commentField {
+	margin-block: var(--m-space-xs);
+	min-width: --fn-literal(60px);
+	flex-shrink: 1;
+	flex-grow: 2;
+	flex-basis: 50%;
+	@apply --mx-borderColor(var(--m-color-neutral-heavy));
+
+	@media (min-width: 768px) {
+		flex-grow: 3;
+		flex-basis: 120px;
+	}
+}
+
+.listSelect {
+	flex-shrink: 1;
+	flex-grow: 1;
+	flex-basis: 0;
+}
+
+.recentHint {
+	flex-basis: 50%;
+	justify-content: end;
+}
+
+.checkbox {
+	grid-area: check;
+	overflow: clip;
+}
+
+.editButton {
+	margin-inline-end: auto;
+	flex-grow: 0;
+	min-width: --fn-literal(80px);
+}

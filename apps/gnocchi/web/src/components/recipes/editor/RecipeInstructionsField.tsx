@@ -11,6 +11,7 @@ import { Editor } from '@tiptap/core';
 import { EditorContent } from '@tiptap/react';
 import { useSyncedInstructionsEditor } from '../hooks.js';
 import { IncludeSubRecipe } from './IncludeSubRecipe.jsx';
+import cls from './RecipeInstructionsField.module.css';
 
 export interface RecipeInstructionsFieldProps {
 	recipe: Recipe;
@@ -50,11 +51,8 @@ function isMobileOs() {
 function Toolbar({ editor }: { editor: Editor }) {
 	return (
 		// Sticks below the action bar
-		<div className="sticky top-[calc(var(--viewport-top-offset,0px)+48px)] z-menu">
-			<HorizontalList
-				contentClassName="items-center p-sm  bg-white"
-				className="rounded-sm"
-			>
+		<div className={cls.root}>
+			<HorizontalList contentClassName={cls.list} className={cls.listOuter}>
 				<Button
 					emphasis={editor.isActive('bold') ? 'default' : 'ghost'}
 					toggleMode="state-only"
@@ -86,7 +84,7 @@ function Toolbar({ editor }: { editor: Editor }) {
 					disabled={!editor.can().chain().focus().toggleSectionTitle().run()}
 					toggled={editor.isActive('sectionTitle')}
 				>
-					<span className="[font-size:10px] h-[15px] w-[15px] flex items-center justify-center">
+					<span aria-hidden className={cls.headingIcon}>
 						H
 					</span>
 				</Button>
@@ -113,7 +111,7 @@ function ToolbarEmbedButton({ editor }: { editor: Editor }) {
 			onSelect={embedToCurrentStep}
 			emphasis="ghost"
 			size="small"
-			className="[font-size:12px] gap-sm"
+			className="@mode-denser"
 			disabled={
 				!editor
 					.can()

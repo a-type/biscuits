@@ -12,11 +12,11 @@
 }
 
 .upgradeHeading {
-	margin-bottom: var(--m-spacing-md);
+	margin-bottom: var(--m-space-md);
 	font-size: 5vmax;
 	text-wrap: balance;
 	flex-shrink: 0;
-	font-weight: var(--m-typography-weight-normal);
+	font-weight: var(--m-text-weight-normal);
 	line-height: 1.2;
 }
 
@@ -27,8 +27,8 @@
 	flex-wrap: wrap;
 	align-items: center;
 	justify-content: center;
-	gap: var(--m-spacing-md);
-	padding-block: var(--m-spacing-xl);
+	gap: var(--m-space-md);
+	padding-block: var(--m-space-xl);
 
 	@media (min-width: 768px) {
 		grid-column-end: span 2;

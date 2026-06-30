@@ -1,0 +1,13 @@
+.first {
+	position: relative;
+	left: 0;
+	top: --fn-literal(-2px);
+}
+
+.second {
+	position: absolute;
+	bottom: --fn-literal(5px);
+	right: --fn-literal(8px);
+	height: --fn-literal(10px);
+	width: --fn-literal(10px);
+}

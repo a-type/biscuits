@@ -7,12 +7,11 @@ import { useSizeCssVars, withClassName } from '@a-type/ui';
 import { useMergedRef } from '@biscuits/client';
 import { useDndMonitor, useDroppable } from '@dnd-kit/core';
 import { Category, Item } from '@gnocchi.biscuits/verdant';
-import classNames from 'classnames';
 import { AnimatePresence } from 'motion/react';
 import { memo, useCallback, useEffect, useRef } from 'react';
 import { useIsDragging } from '../dndHooks.js';
 import { GroceryListItemDraggable } from '../items/GroceryListItem.js';
-import './GroceryListCategory.css';
+import cls from './GroceryListCategory.module.css';
 
 const EMPTY_DROPPABLE_SIZE = 48;
 
@@ -50,7 +49,7 @@ export function GroceryListCategory({
 
 	return (
 		<CategoryRoot
-			className={classNames('groceryCategory')}
+			className={'groceryCategory'}
 			data-dragged-over={isOver}
 			data-is-item-dragging={isDragging}
 			data-is-empty={empty}
@@ -59,12 +58,12 @@ export function GroceryListCategory({
 			ref={finalRef}
 			{...rest}
 		>
-			<CategoryTitleRow className="relative">
+			<CategoryTitleRow style={{ position: 'relative' }}>
 				<CategoryTitle>
 					{category?.get('name') ?? 'Uncategorized'}
 				</CategoryTitle>
 				{category && (
-					<div className="absolute right-4px top-1/2 flex flex-row items-center justify-between -translate-1/2">
+					<div className={cls.claim}>
 						<CategoryClaim category={category} />
 					</div>
 				)}
@@ -80,22 +79,9 @@ export function GroceryListCategory({
 	);
 }
 
-export const CategoryRoot = withClassName(
-	'div',
-	'mb-2 flex flex-col overflow-hidden rounded-md transition ease-springy bg-wash',
-	'[&[data-dragged-over=true]]:(ring bg-primary-wash ring-primary-dark)',
-	'[&[data-is-item-dragging=true]]:(mb-0 ring ring-gray-light)',
-	'[&[data-is-empty=true]:not([data-is-item-dragging=true])]:animate [&[data-is-empty=true]:not([data-is-item-dragging=true])]:([animation-name:category-collapse] [visibility:hidden] pointer-events-none mb-0 h-0 animate-duration-200 animate-ease-default animate-forwards op-0)',
-	'important:[&[data-do-not-animate=true]]:(animate-none) important:motion-reduce:animate-none',
-	'[&[data-is-item-dragging=true][data-dragged-over=false]]:(scale-95)',
-	'[&[data-pop-in=true][data-dragged-over=false][data-is-item-dragging=false]]:(animate-keyframes-fade-in-up animate-duration-200 animate-ease-springy)',
-	'focus-visible:(outline-1 outline-primary outline-solid color-primary-dark)',
-);
+export const CategoryRoot = withClassName('div', cls.root);
 
-export const CategoryItems = withClassName(
-	'div',
-	'flex flex-col transition-opacity duration-200 ease-springy [&[data-is-item-dragging=true]]:op-0',
-);
+export const CategoryItems = withClassName('div', cls.items);
 
 function waitForAnimationCancel(animation: Animation) {
 	return new Promise((resolve) => {

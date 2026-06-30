@@ -1,0 +1,12 @@
+.icon {
+	@apply --mx-fg(var(--m-color-main-heavy));
+}
+
+.root {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: var(--m-space-xs);
+	font-style: italic;
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+}

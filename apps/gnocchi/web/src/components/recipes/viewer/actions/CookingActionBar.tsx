@@ -26,6 +26,7 @@ import {
 } from '@biscuits/client';
 import { graphql, useQuery } from '@biscuits/graphql';
 import { Recipe } from '@gnocchi.biscuits/verdant';
+import { CSSProperties } from 'react';
 import { RecipePinToggle } from '../RecipePinToggle.jsx';
 import { RecipeViewerEditButton } from '../RecipeViewerEditButton.jsx';
 import { RecipeCloneAction } from './RecipeCloneAction.jsx';
@@ -34,12 +35,13 @@ import { RecipePublishAction } from './RecipePublishAction.jsx';
 export interface CookingActionBarProps {
 	recipe: Recipe;
 	className?: string;
+	style?: CSSProperties;
 }
 
 export function CookingActionBar({ recipe, ...rest }: CookingActionBarProps) {
 	return (
-		<ActionBar {...rest}>
-			<RecipePinToggle recipe={recipe} className="mr-2" />
+		<ActionBar style={{ minWidth: 0, maxWidth: '100%' }} {...rest}>
+			<RecipePinToggle recipe={recipe} />
 			<CookingPeople recipeId={recipe.get('id')} />
 			<AddChefsAction />
 			<StopCookingAction recipe={recipe} />
@@ -117,7 +119,7 @@ function AddChefsAction() {
 				}
 			>
 				<Icon name="add_person" />
-				<span className="sm:display-inline hidden">Invite chefs</span>
+				<span className="gt-sm">Invite chefs</span>
 			</Dialog.Trigger>
 			<Dialog.Content>
 				<Dialog.Title>Invite chefs</Dialog.Title>
@@ -145,7 +147,9 @@ function AddChefsAction() {
 					</p>
 				)}
 				<Dialog.Actions>
-					<Dialog.Close render={<Button align="start" />}>Dismiss</Dialog.Close>
+					<Dialog.Close render={<Button style={{ alignSelf: 'start' }} />}>
+						Dismiss
+					</Dialog.Close>
 					{showSubscribe ? (
 						<PromoteSubscriptionButton className="">
 							Subscribe now
@@ -182,12 +186,18 @@ function NoteToggleAction({ recipe }: { recipe: Recipe }) {
 		<Popover>
 			<Popover.Trigger render={<ActionButton emphasis="primary" />}>
 				<Icon name="note" />
-				<span className="sm:display-inline hidden">Add note</span>
+				<span className="gt-sm">Add note</span>
 			</Popover.Trigger>
 			<Popover.Content
 				sideOffset={8}
 				align="start"
-				className="max-w-2/3 rounded-0 border-none p-0 bg-transparent"
+				style={{
+					maxWidth: '66%',
+					borderRadius: 0,
+					border: 'none',
+					padding: 0,
+					background: 'transparent',
+				}}
 			>
 				<Note className="h-full w-full">{note}</Note>
 			</Popover.Content>

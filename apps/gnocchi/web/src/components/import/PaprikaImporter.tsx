@@ -1,6 +1,14 @@
 import { instructionsToDoc, stringToDoc } from '@/lib/tiptap.js';
 import { hooks } from '@/stores/groceries/index.js';
-import { ActionBar, ActionButton, Button, Checkbox, Dialog } from '@a-type/ui';
+import {
+	ActionBar,
+	ActionButton,
+	Box,
+	Button,
+	Checkbox,
+	Dialog,
+	Text,
+} from '@a-type/ui';
 import { parseIngredient } from '@gnocchi.biscuits/conversion';
 import cuid from 'cuid';
 import { ReactNode, forwardRef, useCallback, useState } from 'react';
@@ -169,13 +177,15 @@ export const PaprikaImporter = forwardRef<
 							);
 						}
 					}}
-					className="hidden-input"
+					style={{
+						display: 'none',
+					}}
 				/>
 				{children}
 			</label>
 			<Dialog.Content>
 				<Dialog.Title>Choose recipes</Dialog.Title>
-				<ActionBar className="flex-shrink-0">
+				<ActionBar style={{ flexShrink: 0 }}>
 					<ActionButton onClick={() => setSelected({})}>
 						Select none
 					</ActionButton>
@@ -191,7 +201,7 @@ export const PaprikaImporter = forwardRef<
 						Select all
 					</ActionButton>
 				</ActionBar>
-				<div className="m-0 flex flex-col items-stretch gap-2 p-0">
+				<Box col items="stretch" gap="sm" style={{ margin: 0 }}>
 					{data.map((recipe) => (
 						<RecipeItem
 							key={recipe.uid}
@@ -202,7 +212,7 @@ export const PaprikaImporter = forwardRef<
 							}}
 						/>
 					))}
-				</div>
+				</Box>
 				<Dialog.Actions>
 					<Dialog.Close />
 					<Button loading={loading} emphasis="primary" onClick={importSelected}>
@@ -226,9 +236,11 @@ function RecipeItem({
 	onSelectedChange: (selected: boolean) => void;
 }) {
 	return (
-		<label className="flex flex-row items-center gap-2 p-2">
+		<Box render={<label />} items="center" gap="sm" p="sm">
 			<Checkbox checked={selected} onCheckedChange={onSelectedChange} />
-			<div className="flex-1 font-bold">{recipe.name}</div>
-		</label>
+			<Text bold style={{ flex: 1 }}>
+				{recipe.name}
+			</Text>
+		</Box>
 	);
 }

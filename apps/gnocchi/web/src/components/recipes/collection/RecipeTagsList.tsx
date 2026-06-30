@@ -1,8 +1,7 @@
 import { RecipeTagMenuWrapper } from '@/components/recipes/tags/RecipeTagMenuWrapper.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { IconName, PaletteName } from '@a-type/ui';
+import { Box, IconName } from '@a-type/ui';
 import { TagToggle } from '@biscuits/client';
-import classNames from 'classnames';
 
 export function RecipeTagsList({
 	onSelect,
@@ -36,7 +35,7 @@ export function RecipeTagsList({
 	}
 
 	return (
-		<div className={classNames('my-1 flex flex-wrap gap-1', className)}>
+		<Box gap="xs" wrap className={className}>
 			{showNone && (
 				<TagToggle
 					toggled={!selectedValues?.length}
@@ -54,12 +53,12 @@ export function RecipeTagsList({
 						toggled={!!selectedValues?.includes(tag.get('name'))}
 						onToggle={() => onSelect(tag.get('name'))}
 						className={buttonClassName}
-						color={tag.get('color') as PaletteName | undefined}
+						color={tag.get('color')}
 						icon={tag.get('icon') as IconName | undefined}
 						name={tag.get('name')}
 					/>
 				</RecipeTagMenuWrapper>
 			))}
-		</div>
+		</Box>
 	);
 }

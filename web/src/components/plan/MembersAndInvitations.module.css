@@ -7,7 +7,7 @@
 }
 
 .you {
-	font-weight: var(--m-typography-weight-bold);
+	font-weight: var(--m-text-weight-bold);
 }
 
 .cardTitleRowMuted {
@@ -16,6 +16,6 @@
 }
 
 .membershipLimit {
-	padding-block: var(--m-spacing-md);
+	padding-block: var(--m-space-md);
 	@apply --mx-fg(var(--m-color-neutral-heavy));
 }

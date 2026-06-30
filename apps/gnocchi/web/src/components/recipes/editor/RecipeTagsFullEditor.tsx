@@ -1,5 +1,5 @@
 import { hooks } from '@/stores/groceries/index.js';
-import { Combobox, Icon, IconName, PaletteName, clsx } from '@a-type/ui';
+import { Combobox, Icon, IconName } from '@a-type/ui';
 import { Recipe, RecipeTagMetadata } from '@gnocchi.biscuits/verdant';
 import { useState } from 'react';
 
@@ -68,15 +68,15 @@ export function RecipeTagsFullEditor({
 				tags.add(name);
 			}}
 		>
-			<TagCombobox.Chips className={clsx('w-full flex flex-row', className)}>
-				<TagCombobox.MultiValue className="flex-1">
+			<TagCombobox.Chips style={{ width: '100%' }} className={className}>
+				<TagCombobox.MultiValue>
 					{(tags) => (
 						<>
 							<TagCombobox.ChipsList>
 								{tags.map((tag) => (
 									<TagCombobox.Chip
 										key={tag.get('name')}
-										color={tag.get('color') as PaletteName}
+										color={tag.get('color') ?? undefined}
 									>
 										<TagDisplay tag={tag} />
 									</TagCombobox.Chip>
@@ -88,18 +88,18 @@ export function RecipeTagsFullEditor({
 				</TagCombobox.MultiValue>
 			</TagCombobox.Chips>
 			<TagCombobox.Content>
-				<TagCombobox.List className="flex flex-row flex-wrap gap-sm p-sm">
+				<TagCombobox.List render={<TagCombobox.GroupItemList />}>
 					{(tag) => (
 						<TagCombobox.GroupItem
 							value={tag}
 							key={tag.get('name')}
-							color={tag.get('color') as PaletteName}
+							color={tag.get('color') ?? undefined}
 						>
 							<TagDisplay tag={tag} />
 						</TagCombobox.GroupItem>
 					)}
 				</TagCombobox.List>
-				<TagCombobox.Empty className="flex flex-row items-center justify-end gap-sm">
+				<TagCombobox.Empty>
 					<Icon name="enterKey" /> Press enter to create new tag "{inputValue}"
 				</TagCombobox.Empty>
 			</TagCombobox.Content>
@@ -110,13 +110,13 @@ export function RecipeTagsFullEditor({
 function TagDisplay({ tag: data }: { tag: RecipeTagMetadata }) {
 	hooks.useWatch(data);
 	const icon = data?.get('icon') as IconName | undefined;
-	const color = data?.get('color') as PaletteName | undefined;
+	const color = data?.get('color') ?? undefined;
 
 	const name = data?.get('name') ?? 'unknown';
 
 	return (
 		<>
-			<Icon name={(icon as IconName) ?? 'tag'} color={color as PaletteName} />
+			<Icon name={(icon as IconName) ?? 'tag'} color={color} />
 			{name}
 		</>
 	);

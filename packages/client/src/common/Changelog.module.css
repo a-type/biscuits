@@ -1,7 +1,7 @@
 .pip {
 	position: absolute;
-	right: var(--m-spacing-md);
-	top: var(--m-spacing-md);
+	right: var(--m-space-md);
+	top: var(--m-space-md);
 	width: --fn-literal(8px);
 	height: --fn-literal(8px);
 	border-radius: 50%;

@@ -1,6 +1,7 @@
 import { usePurchasedText } from '@/components/pantry/hooks.js';
 import { hooks } from '@/stores/groceries/index.js';
-import { clsx, Icon, Tooltip } from '@a-type/ui';
+import { clsx, Icon, Text, Tooltip } from '@a-type/ui';
+import cls from './RecentPurchaseHint.module.css';
 
 export function RecentPurchaseHint({
 	foodName,
@@ -53,7 +54,7 @@ export function RecentPurchaseHint({
 	if (compact) {
 		return (
 			<Tooltip content={purchasedText}>
-				<Icon name="clock" className={clsx('color-primary-dark', className)} />
+				<Icon name="clock" className={clsx(cls.icon, className)} />
 			</Tooltip>
 		);
 	}
@@ -62,14 +63,14 @@ export function RecentPurchaseHint({
 	if (!lastPurchasedAt) return null;
 
 	return (
-		<div
-			className={clsx(
-				'flex flex-row items-center gap-1 text-xs italic color-gray-dark',
-				className,
-			)}
+		<Text
+			emphasis="ambient"
+			dim
+			italic
+			className={clsx('@mode-dense', cls.root, className)}
 		>
-			<Icon name="clock" />
-			<span>{purchasedText}</span>
-		</div>
+			<Icon name="clock" style={{ marginRight: 4 }} />
+			<Text>{purchasedText}</Text>
+		</Text>
 	);
 }

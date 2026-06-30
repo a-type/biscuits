@@ -3,8 +3,8 @@
 	flex: 1;
 	flex-direction: column-reverse;
 	align-items: center;
-	gap: var(--m-spacing-xl);
-	padding: var(--m-spacing-md);
+	gap: var(--m-space-xl);
+	padding: var(--m-space-md);
 
 	@media (min-width: 640px) {
 		flex-direction: row;
@@ -17,7 +17,7 @@
 	flex-shrink: 0;
 	align-items: center;
 	justify-items: start;
-	gap: var(--m-spacing-md);
+	gap: var(--m-space-md);
 	grid-template-areas:
 		'icon title'
 		'icon description'
@@ -43,14 +43,14 @@
 
 .appName {
 	margin: 0;
-	font-size: var(--m-text-primary-size);
-	font-weight: var(--m-typography-weight-bold);
+	font-size: var(--m-prose-primary-size);
+	font-weight: var(--m-text-weight-bold);
 }
 
 .appDescription {
 	margin: 0;
 	height: --fn-literal(80px);
-	font-size: var(--m-typography-size-lg);
+	font-size: var(--m-text-size-lg);
 }
 
 .openButton {
@@ -65,7 +65,7 @@
 .phoneDemoWrap {
 	display: flex;
 	flex-direction: column;
-	gap: var(--m-spacing-xs);
+	gap: var(--m-space-xs);
 }
 
 .sidebar {

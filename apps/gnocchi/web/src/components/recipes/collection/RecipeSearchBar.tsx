@@ -1,6 +1,5 @@
 import { useRecipeTitleFilter } from '@/components/recipes/collection/hooks.js';
-import { Button, Icon, Input } from '@a-type/ui';
-import classNames from 'classnames';
+import { Box, Button, Icon, Input } from '@a-type/ui';
 import { startTransition, useState } from 'react';
 
 export function RecipeSearchBar({
@@ -13,7 +12,7 @@ export function RecipeSearchBar({
 	const [inputValue, setInputValue] = useState(value);
 
 	return (
-		<div className={classNames('flex flex-row gap-3', className)}>
+		<Box gap="sm" className={className}>
 			<Input
 				placeholder="Search recipes"
 				value={inputValue}
@@ -23,7 +22,7 @@ export function RecipeSearchBar({
 						setValue(v);
 					});
 				}}
-				className="flex-1 rounded-full"
+				style={{ flex: 1 }}
 				autoSelect
 				endAccessory={
 					inputValue ? (
@@ -40,6 +39,6 @@ export function RecipeSearchBar({
 				}
 				{...props}
 			/>
-		</div>
+		</Box>
 	);
 }

@@ -18,6 +18,7 @@ import {
 	DropdownMenu,
 	DropdownMenuItemRightSlot,
 	Icon,
+	Text,
 } from '@a-type/ui';
 import { formatMinutes } from '@a-type/utils';
 import { Recipe } from '@gnocchi.biscuits/verdant';
@@ -30,6 +31,7 @@ import { RecipeMainImageViewer } from '../viewer/RecipeMainImageViewer.jsx';
 import { RecipePinToggle } from '../viewer/RecipePinToggle.jsx';
 import { RecipeTagsViewer } from '../viewer/RecipeTagsViewer.jsx';
 import { useGridStyle } from './hooks.js';
+import cls from './RecipeListItem.module.css';
 
 export const RecipeListItem = memo(function RecipeListItem({
 	recipe,
@@ -43,33 +45,22 @@ export const RecipeListItem = memo(function RecipeListItem({
 
 	return (
 		<Card
-			className={classNames(
-				'self-end',
-				{
-					'!max-h-20dvh': gridStyle === 'card-small',
-					'min-h-200px md:(h-30dvh max-h-300px)': !!mainImage,
-				},
-				'shadow-sm',
-				className,
-			)}
+			className={classNames(cls.root, className)}
+			data-style={gridStyle}
+			data-image={!!mainImage}
 		>
 			<Card.Main render={<Link to={makeRecipeLink(recipe)} preserveQuery />}>
-				<CardTitle
-					className={classNames(
-						'flex-shrink-0',
-						gridStyle === 'card-small' ? 'text-sm sm:text-md' : '',
-					)}
-				>
-					<span className="line-clamp-2 text-ellipsis">{title}</span>
+				<CardTitle className={cls.title}>
+					<Text truncate>{title}</Text>
 				</CardTitle>
 				<div
 					className={clsx(
-						'm-2 flex flex-row flex-wrap items-center gap-sm',
-						gridStyle === 'card-small' ? 'text-xxs' : 'text-xs',
+						cls.content,
+						gridStyle === 'card-small' ? '@mode-denser' : '@mode-dense',
 					)}
 				>
 					{!!totalTimeMinutes && (
-						<Chip className="bg-wash">
+						<Chip>
 							<Icon name="clock" size={12} />
 							{formatMinutes(totalTimeMinutes)}
 						</Chip>
@@ -80,7 +71,7 @@ export const RecipeListItem = memo(function RecipeListItem({
 				</div>
 			</Card.Main>
 			<Card.Image>
-				<RecipeMainImageViewer recipe={recipe} className="h-full w-full" />
+				<RecipeMainImageViewer recipe={recipe} className={cls.full} />
 			</Card.Image>
 			<Card.Footer>
 				<Card.Actions>
@@ -150,7 +141,7 @@ export function RecipeListItemMenu({
 				<DropdownMenu.Trigger
 					render={<Button size="small" emphasis="ghost" {...rest} />}
 				>
-					<Icon name="dots" className="h-20px w-20px" />
+					<Icon name="dots" size={20} />
 				</DropdownMenu.Trigger>
 				<DropdownMenu.Content>
 					<RecipeEditTagsTrigger render={<DropdownMenu.Item />}>
@@ -187,7 +178,7 @@ export function RecipeListItemMenu({
 						</DropdownMenuItemRightSlot>
 					</DropdownMenu.Item>
 					<DropdownMenu.Item
-						color="attention"
+						className="@mode-attention"
 						onClick={() => {
 							deleteRecipe(recipe.get('id'));
 							setMenuOpen(false);

@@ -1,4 +1,4 @@
-import { Button } from '@a-type/ui';
+import { Box, Button } from '@a-type/ui';
 import type { ErrorComponentProps } from '@tanstack/react-router';
 import { ErrorComponent, useRouter } from '@tanstack/react-router';
 
@@ -8,9 +8,9 @@ export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
 	console.error('DefaultCatchBoundary Error:', error);
 
 	return (
-		<div className="min-w-0 flex flex-1 flex-col items-center justify-center gap-6 p-4">
+		<Box grow col layout="center center" gap="lg" p style={{ minWidth: 0 }}>
 			<ErrorComponent error={error} />
-			<div className="flex flex-wrap items-center gap-2">
+			<Box wrap items="center" gap="sm">
 				<Button
 					onClick={() => {
 						router.invalidate();
@@ -18,7 +18,7 @@ export function DefaultCatchBoundary({ error }: ErrorComponentProps) {
 				>
 					Try Again
 				</Button>
-			</div>
-		</div>
+			</Box>
+		</Box>
 	);
 }

@@ -3,6 +3,7 @@ import { saveHubRecipeOnboarding } from '@/onboarding/saveHubRecipeOnboarding.js
 import { hooks } from '@/stores/groceries/index.js';
 import {
 	Box,
+	Heading,
 	IconName,
 	NavBarItem,
 	NavBarItemIcon,
@@ -28,6 +29,7 @@ import { useSnapshot } from 'valtio';
 import { groceriesState } from '../groceries/state.js';
 import { useHasNewExpirations } from '../pantry/hooks.js';
 import { useRecipePresenceNotification } from '../sync/collaborationMenu/RecipePresenceNotification.jsx';
+import cls from './NavBar.module.css';
 import { PopEffect } from './PopEffect.jsx';
 
 export interface NavBarProps {}
@@ -44,9 +46,21 @@ export function NavBar({}: NavBarProps) {
 	return (
 		<PageNav>
 			<Suspense>
-				<Box gap="sm" layout="center center" p="sm" className="lt-md:hidden">
-					<img src="/android-chrome-192x192.png" className="h-30px w-30px" />
-					<h1 className="font-fancy text-md font-semibold">Gnocchi</h1>
+				<Box gap="sm" layout="center center" p="sm" className={cls.heading}>
+					<img
+						src="/android-chrome-192x192.png"
+						style={{
+							height: 30,
+							width: 30,
+						}}
+					/>
+					<Heading
+						render={<h1 />}
+						emphasis="ambient"
+						className={clsx('font-fancy @mode-denser', cls.title)}
+					>
+						Gnocchi
+					</Heading>
 				</Box>
 				<NavBarRoot>
 					<GroceriesNavBarLink active={matchGroceries} />
@@ -90,7 +104,7 @@ const NavBarLink = memo(
 					/>
 				}
 			>
-				<NavBarItemIconWrapper className="flex">
+				<NavBarItemIconWrapper style={{ display: 'flex' }}>
 					<PopEffect active={animate} />
 					<NavBarItemIcon name={icon} />
 				</NavBarItemIconWrapper>
@@ -117,10 +131,7 @@ function RecipesNavBarLink({ active }: { active: boolean }) {
 	);
 }
 
-const Pip = withClassName(
-	'div',
-	'absolute top-6px right-6px w-6px h-6px rounded-full bg-attention shadow-sm',
-);
+const Pip = withClassName('div', cls.pip);
 
 function PantryNavBarLink({ active }: { active: boolean }) {
 	const [newExpiredTime, onSeen] = useHasNewExpirations();

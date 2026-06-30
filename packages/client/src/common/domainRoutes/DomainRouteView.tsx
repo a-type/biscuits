@@ -157,7 +157,7 @@ function DomainRouteRegister({
 				});
 			}}
 		>
-			<Box d="row" gap items="end" full>
+			<Box gap items="end" full>
 				<TextField
 					placeholder="blog.yourdomain.club"
 					name="domain"

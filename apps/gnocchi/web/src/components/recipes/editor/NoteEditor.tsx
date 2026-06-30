@@ -1,10 +1,11 @@
 import { Note } from '@a-type/ui';
-import classNames from 'classnames';
+import { CSSProperties } from 'react';
 
 export interface NoteEditorProps {
 	value: string;
 	onChange: (value: string) => void;
 	className?: string;
+	style?: CSSProperties;
 	autoFocus?: boolean;
 	onBlur?: () => void;
 }
@@ -15,14 +16,14 @@ export function NoteEditor({
 	value,
 	onChange,
 	onBlur,
+	style,
 }: NoteEditorProps) {
 	const handleChange = (v: string) => {
 		onChange(v);
 	};
 	return (
-		<Note className={classNames('focus-within:shadow-focus', className)}>
+		<Note className={className} style={style}>
 			<Note.Input
-				className="[font-family:inherit] [font-size:inherit] [font-style:inherit] m-0 h-full w-full resize-none p-0 text-inherit outline-none bg-transparent !rounded-none !border-none focus:(outline-none bg-transparent border-transparent) !ring-none !ring-none !focus:shadow-none"
 				value={value}
 				onValueChange={handleChange}
 				autoFocus={autoFocus}

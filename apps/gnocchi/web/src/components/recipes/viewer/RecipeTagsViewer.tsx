@@ -1,6 +1,6 @@
 import { RecipeTagMenuWrapper } from '@/components/recipes/tags/RecipeTagMenuWrapper.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { Icon } from '@a-type/ui';
+import { Box, Chip, Icon } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import classNames from 'classnames';
 import { Suspense } from 'react';
@@ -40,9 +40,9 @@ export function RecipeTagsViewer({
 	}
 
 	return (
-		<div className={classNames('flex flex-wrap gap-1 text-sm', className)}>
+		<Box wrap gap="xs" className={classNames('@mode-denser', className)}>
 			{content}
-		</div>
+		</Box>
 	);
 }
 
@@ -52,19 +52,25 @@ function RecipeTagViewer({ tag }: { tag: string }) {
 
 	return (
 		<RecipeTagMenuWrapper tagName={tag}>
-			<div
+			<Chip
 				className={classNames(
-					data?.get('color') && `palette-${data.get('color')}`,
-					'flex flex-row items-center gap-1 border rounded-full border-solid px-3 py-1 text-inherit font-bold color-black bg-main-light border-gray-dark',
+					data?.get('color') && `@mode-${data.get('color')}`,
 				)}
 			>
 				<span>
 					{data?.get('icon') ?? (
-						<Icon name="tag" className="relative top-0.1em h-1em w-1em" />
+						<Icon
+							name="tag"
+							style={{
+								position: 'relative',
+								top: -1,
+							}}
+							size={12}
+						/>
 					)}
 				</span>
 				<span>{tag}</span>
-			</div>
+			</Chip>
 		</RecipeTagMenuWrapper>
 	);
 }

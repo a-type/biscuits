@@ -6,7 +6,7 @@ import {
 	useDeleteItem,
 	useSetItemCategory,
 } from '@/stores/groceries/mutations.js';
-import { H3, P } from '@a-type/ui';
+import { Box, H3, P } from '@a-type/ui';
 import { OnboardingBanner, PromoteSubscriptionButton } from '@biscuits/client';
 import {
 	DndContext,
@@ -68,14 +68,14 @@ export const GroceryList = forwardRef<HTMLDivElement, GroceryListProps>(
 				</OnboardingBanner>
 				<OnboardingBanner onboarding={saveHubRecipeOnboarding} step="subscribe">
 					<H3>Upgrade for sync and more</H3>
-					<P className="text-balance">
+					<P style={{ textWrap: 'balance' }}>
 						Sync between devices and other members of your household,
 						collaborate in real time while shopping or cooking, and make copies
 						of recipes from anywhere on the web.
 					</P>
-					<div className="flex flex-row">
+					<Box>
 						<PromoteSubscriptionButton>Upgrade now</PromoteSubscriptionButton>
-					</div>
+					</Box>
 				</OnboardingBanner>
 				<GroceryListCategories {...rest} ref={ref} />
 				<GroceryListDragOverlay />
@@ -99,9 +99,15 @@ const GroceryListCategories = forwardRef<
 	}
 
 	return (
-		<div
+		<Box
 			id="groceryList"
-			className="mb-20 w-full flex flex-grow-1 flex-col p-2"
+			style={{
+				marginBottom: 80,
+			}}
+			col
+			p="sm"
+			full="width"
+			grow
 			ref={ref}
 			{...props}
 		>
@@ -114,7 +120,7 @@ const GroceryListCategories = forwardRef<
 					/>
 				);
 			})}
-		</div>
+		</Box>
 	);
 });
 

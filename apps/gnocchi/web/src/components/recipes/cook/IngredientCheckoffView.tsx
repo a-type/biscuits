@@ -8,6 +8,7 @@ import { Recipe, RecipeIngredientsItem } from '@gnocchi.biscuits/verdant';
 import classNames from 'classnames';
 import { forwardRef } from 'react';
 import { RecipeIngredientViewer } from '../viewer/RecipeIngredientViewer.jsx';
+import cls from './IngredientCheckoffView.module.css';
 
 export interface IngredientCheckoffViewProps {
 	recipe: Recipe;
@@ -33,13 +34,7 @@ export const IngredientCheckoffView = forwardRef<
 	const multiplier = multiplierOverride ?? baseMultiplier;
 
 	return (
-		<ul
-			ref={ref}
-			className={classNames(
-				'm-0 w-full flex flex-col list-none gap-4 p-0',
-				className,
-			)}
-		>
+		<ul ref={ref} className={classNames(cls.root, className)}>
 			{ingredients.map((ingredient) => (
 				<IngredientCheckoffItem
 					key={ingredient.get('id')}
@@ -79,7 +74,7 @@ function IngredientCheckoffItem({
 }) {
 	const { isSectionHeader } = hooks.useWatch(ingredient);
 	return (
-		<li className={'w-full flex flex-row gap-2'}>
+		<li className={cls.item}>
 			{!isSectionHeader && (
 				<Checkbox
 					checked={checked}
@@ -88,7 +83,7 @@ function IngredientCheckoffItem({
 				/>
 			)}
 			<RecipeIngredientViewer
-				className="flex-1"
+				style={{ flex: 1 }}
 				ingredient={ingredient}
 				multiplier={multiplier}
 				recipeId={recipeId}

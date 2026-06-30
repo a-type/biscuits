@@ -1,5 +1,6 @@
 export * from './AppPicker.js';
 export * from './Changelog.js';
+export * from './ColorPicker.js';
 export * from './Context.js';
 export * from './CopyTextbox.js';
 export * from './DarkModeToggle.js';

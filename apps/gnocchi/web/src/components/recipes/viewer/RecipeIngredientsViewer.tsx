@@ -1,5 +1,5 @@
 import { hooks } from '@/stores/groceries/index.js';
-import { Box, clsx, H4 } from '@a-type/ui';
+import { Box, Text } from '@a-type/ui';
 import { fractionToText } from '@a-type/utils';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { createContext, Suspense } from 'react';
@@ -19,11 +19,12 @@ export function RecipeIngredientsViewer({
 }: RecipeIngredientsViewerProps) {
 	return (
 		<Box
-			direction="col"
+			col
 			p="none"
 			gap="md"
-			className={clsx('w-full', className)}
-			container="reset"
+			full="width"
+			items="stretch"
+			className={className}
 		>
 			<IngredientCheckoffView
 				recipe={recipe}
@@ -47,7 +48,7 @@ export function EmbeddedRecipesIngredients({ recipe }: { recipe: Recipe }) {
 	}
 
 	return (
-		<Box direction="col" p="none" gap="md">
+		<Box col p="none" gap="md">
 			{Object.entries(embeddedIds).map(([id, mult]) => (
 				<Suspense key={id}>
 					<EmbeddedRecipeIngredients id={id} multiplier={mult * baseMult} />
@@ -90,12 +91,11 @@ function EmbeddedRecipeIngredientsImpl({
 	return (
 		<>
 			{!!ingredients.length && (
-				<Box justify="between" items="center" p="none" gap="md">
-					<H4 className="italic">
-						<span className="font-medium">From sub-recipe</span>{' '}
-						{recipe.get('title')}
+				<Box dim justify="between" items="center" p="none" gap="md">
+					<Text emphasis="ambient" italic>
+						<Text bold>From sub-recipe</Text> {recipe.get('title')}
 						{multText}
-					</H4>
+					</Text>
 				</Box>
 			)}
 			<RecipeIngredientsViewer

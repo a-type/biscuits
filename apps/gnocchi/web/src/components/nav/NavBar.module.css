@@ -1,0 +1,21 @@
+.heading {
+	margin-block: var(--m-space-md);
+	@media (max-width: 768px) {
+		display: none;
+	}
+}
+
+.title {
+	font-weight: var(--m-text-weight-bold);
+}
+
+.pip {
+	position: absolute;
+	top: var(--m-space-xs);
+	right: var(--m-space-xs);
+	width: --fn-literal(6px);
+	height: --fn-literal(6px);
+	border-radius: 50%;
+	@apply --mx-bg(var(--m-color-palette-attention));
+	@apply --mx-shadow(var(--m-shadow-sm));
+}

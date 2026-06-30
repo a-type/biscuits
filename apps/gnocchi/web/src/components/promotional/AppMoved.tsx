@@ -1,4 +1,5 @@
 import {
+	Box,
 	Button,
 	Dialog,
 	DialogActions,
@@ -18,6 +19,7 @@ import {
 } from '@biscuits/client';
 import { ExportDataButton } from '@biscuits/client/apps';
 import { Link } from '@verdant-web/react-router';
+import { TextLink } from '../nav/Link.jsx';
 
 export interface AppMovedProps {}
 
@@ -41,14 +43,14 @@ export function AppMoved({}: AppMovedProps) {
 
 	return (
 		<Dialog open>
-			<DialogContent className="gap-3">
+			<DialogContent>
 				<DialogTitle>Gnocchi has moved</DialogTitle>
 				<P>
 					Sorry, I know this is annoying, but Gnocchi has moved to a new app to
 					join{' '}
-					<Link newTab to={CONFIG.HOME_ORIGIN} className="font-bold">
+					<TextLink newTab to={CONFIG.HOME_ORIGIN}>
 						Biscuits
-					</Link>
+					</TextLink>
 					. You'll have to go there to use the app now.
 				</P>
 				{!canSync ? <LoggedOut /> : <LoggedIn />}
@@ -72,7 +74,7 @@ export function AppMoved({}: AppMovedProps) {
 function LoggedOut() {
 	if (getOS() === 'iOS' && getIsPWAInstalled()) {
 		return (
-			<div className="col">
+			<Box col>
 				<P>
 					You're not currently logged in to sync. If you have a subscription,
 					log in now so your data syncs to the new app.
@@ -84,11 +86,11 @@ function LoggedOut() {
 					top right after opening the new app).
 				</P>
 				<ExportDataButton onError={(e) => toast.error(e.message)} />
-			</div>
+			</Box>
 		);
 	} else {
 		return (
-			<div className="col">
+			<Box col>
 				<P>
 					Your data should transfer automatically when you open the new app. If
 					that doesn't seem to work, come back to this app and export your data
@@ -96,7 +98,7 @@ function LoggedOut() {
 					the new app to import the file.
 				</P>
 				<ExportDataButton onError={(e) => toast.error(e.message)} />
-			</div>
+			</Box>
 		);
 	}
 }

@@ -8,6 +8,7 @@ import {
 	FormikForm,
 	Icon,
 	SubmitButton,
+	Text,
 	TextAreaField,
 	TextField,
 } from '@a-type/ui';
@@ -31,7 +32,6 @@ import {
 	RecipeIngredients,
 	RecipeIngredientsItem,
 } from '@gnocchi.biscuits/verdant';
-import classNames from 'classnames';
 import { Suspense, useState } from 'react';
 import { useSubRecipeIds } from '../hooks.js';
 import { NoteEditor } from './NoteEditor.jsx';
@@ -56,7 +56,7 @@ export function RecipeIngredientsEditor({
 	);
 
 	return (
-		<div className="border-light rounded-lg p-2">
+		<Box border rounded p="sm">
 			<DndContext
 				sensors={sensors}
 				onDragEnd={({ active, over }) => {
@@ -68,7 +68,7 @@ export function RecipeIngredientsEditor({
 				}}
 			>
 				<SortableContext items={ids} strategy={verticalListSortingStrategy}>
-					<div className="flex flex-col gap-2">
+					<Box col gap="sm">
 						{ingredients
 							.filter((i) => !!i)
 							.map((ingredient, index) => (
@@ -80,12 +80,12 @@ export function RecipeIngredientsEditor({
 									}}
 								/>
 							))}
-					</div>
+					</Box>
 				</SortableContext>
 			</DndContext>
 			<EmbeddedRecipeIngredientsEditors recipe={recipe} />
 			<AddIngredientsForm ingredients={ingredients} recipeId={id} />
-		</div>
+		</Box>
 	);
 }
 
@@ -121,36 +121,41 @@ function RecipeIngredientItem({
 	const { text, isSectionHeader } = hooks.useWatch(ingredient);
 
 	return (
-		<div
+		<Box
 			ref={setNodeRef}
-			className="flex flex-col items-stretch gap-2 p-2"
+			col
+			items="stretch"
+			gap="sm"
+			p="sm"
 			{...attributes}
 			style={style}
 		>
-			<div className="flex flex-row items-start gap-2">
+			<Box gap="sm" items="start">
 				<Icon
 					name="grabby"
 					className="relative top-2 touch-none"
 					{...listeners}
 				/>
 
-				<span
-					className={classNames(
-						'mt-1 min-w-40px flex-1',
-						isSectionHeader && 'font-bold',
-					)}
+				<Text
+					style={{
+						marginTop: 4,
+						minWidth: 40,
+						flex: 1,
+					}}
+					bold={isSectionHeader}
 				>
 					{text}
-				</span>
-				<div className="flex flex-row items-center gap-1">
+				</Text>
+				<Box items="center" gap="xs">
 					<Button emphasis="ghost" onClick={addNote}>
 						<Icon name="add_note" />
 					</Button>
 					<IngredientMenu ingredient={ingredient} onDelete={onDelete} />
-				</div>
-			</div>
+				</Box>
+			</Box>
 			<IngredientNote ingredient={ingredient} />
-		</div>
+		</Box>
 	);
 }
 
@@ -187,7 +192,7 @@ function IngredientMenu({
 					>
 						Edit details
 					</DropdownMenu.Item>
-					<DropdownMenu.Item color="attention" onClick={onDelete}>
+					<DropdownMenu.Item className="@mode-attention" onClick={onDelete}>
 						<span>Delete</span>
 						<DropdownMenu.ItemRightSlot>
 							<Icon name="trash" />
@@ -264,7 +269,7 @@ function IngredientNote({ ingredient }: { ingredient: RecipeIngredientsItem }) {
 		<NoteEditor
 			value={note}
 			onChange={(value) => ingredient.set('note', value)}
-			className="self-end"
+			style={{ alignSelf: 'end' }}
 		/>
 	);
 }
@@ -295,7 +300,6 @@ function AddIngredientsForm({
 				setStoredValue(text);
 			}}
 			validateOnBlur
-			className="gap-xs"
 		>
 			{() => (
 				<>
@@ -307,9 +311,9 @@ function AddIngredientsForm({
 						padBottomPixels={40}
 						textAreaClassName="w-full"
 					/>
-					<div className="w-full flex flex-row items-center justify-between gap-1">
+					<Box full="width" items="center" justify="between" gap="xs">
 						<SubmitButton>Add</SubmitButton>
-					</div>
+					</Box>
 				</>
 			)}
 		</FormikForm>
@@ -324,7 +328,7 @@ function EmbeddedRecipeIngredientsEditors({ recipe }: { recipe: Recipe }) {
 	}
 
 	return (
-		<Box direction="col" p="none" gap="md">
+		<Box col p="none" gap="md">
 			{Object.entries(embeddedIds).map(([id, mult]) => (
 				<Suspense key={id}>
 					<EmbeddedRecipeIngredientsEditor
@@ -354,10 +358,10 @@ function EmbeddedRecipeIngredientsEditor({
 
 	return (
 		<Box justify="between" items="center" p="none" gap="md">
-			<span className="font-bold">
+			<Text bold>
 				Sub-recipe: {recipe?.get('title') ?? '<broken link>'}
 				{multText}
-			</span>
+			</Text>
 			<SubRecipeEditorButton parentRecipe={parent} subRecipeId={id} />
 		</Box>
 	);

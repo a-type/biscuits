@@ -1,7 +1,8 @@
-import { ButtonProps, getButtonClassName } from '@a-type/ui';
+import { Button, ButtonProps, clsx } from '@a-type/ui';
 import { Link, LinkProps } from '@verdant-web/react-router';
 import classNames from 'classnames';
 import { forwardRef } from 'react';
+import cls from './Link.module.css';
 
 export { Link };
 export type { LinkProps };
@@ -9,24 +10,23 @@ export type { LinkProps };
 export interface LinkButtonProps extends LinkProps {
 	color?: ButtonProps['color'];
 	size?: ButtonProps['size'];
-	align?: ButtonProps['align'];
 	emphasis?: ButtonProps['emphasis'];
 }
 
 export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
-	function LinkButton(
-		{ className, color, size, align, emphasis, ...props },
-		ref,
-	) {
+	function LinkButton({ className, color, size, emphasis, ...props }, ref) {
 		return (
-			<Link
-				className={classNames(
-					getButtonClassName({ color, size, align, emphasis }),
-					'[&[data-transitioning=true]]:opacity-70',
-					className,
-				)}
-				{...props}
-				ref={ref}
+			<Button
+				render={
+					<Link
+						ref={ref}
+						className={clsx(cls.linkButton, className)}
+						{...props}
+					/>
+				}
+				color={color}
+				size={size}
+				emphasis={emphasis}
 			/>
 		);
 	},
@@ -37,10 +37,7 @@ export const TextLink = forwardRef<HTMLAnchorElement, LinkProps>(
 		return (
 			<Link
 				{...props}
-				className={classNames(
-					'layer-components:([&[data-transitioning=true]]:opacity-70 text-gray9) cursor-pointer font-bold',
-					className,
-				)}
+				className={classNames(cls.textLink, className)}
 				ref={ref}
 			/>
 		);

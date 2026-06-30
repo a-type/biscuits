@@ -23,7 +23,6 @@ import {
 	NodeViewWrapper,
 	Editor as TipTapEditor,
 } from '@tiptap/react';
-import classNames from 'classnames';
 import { ReactNode, Suspense, useCallback, useContext, useMemo } from 'react';
 import {
 	EmbeddedSubRecipeContent,
@@ -31,6 +30,7 @@ import {
 	EmbeddedSubRecipeInstructionsWrapper,
 } from './EmbeddedSubRecipeInstructons.jsx';
 import { IncludeSubRecipe } from './IncludeSubRecipe.jsx';
+import cls from './InstructionStepNodeView.module.css';
 
 export interface InstructionStepAttributes {
 	id?: string;
@@ -153,22 +153,13 @@ export function InstructionStepNodeView({
 			render={
 				<NodeViewWrapper
 					data-id={node.attrs.id}
-					className={classNames(
-						'grid grid-areas-[label_label_label]-[tools_content_endTools]-[note_note_note]-[embed_embed_embed]',
-						'grid-cols-[min-content_1fr_min-content] grid-rows-[repeat(3,min-content)]',
-						'mb-2 w-full items-start rounded-md transition-colors',
-						completed && !isEditing && 'opacity-60',
-						isAssignedToMe && !isEditing && 'bg-primaryWash mb-2',
-					)}
+					className={cls.nodeView}
+					data-completed={completed && !isEditing}
+					data-assigned-to-me={isAssignedToMe && !isEditing}
 				/>
 			}
 		>
-			<div
-				className={clsx(
-					'[grid-area:content] relative flex flex-row items-start justify-between gap-2 pt-2',
-					!subRecipeId && 'items-center',
-				)}
-			>
+			<div className={clsx(cls.content)} data-has-sub-recipe={!!subRecipeId}>
 				{subRecipeId ? (
 					<InstructionsContext value={embeddedCtx}>
 						<Suspense fallback={<div>Loading sub-recipe</div>}>
@@ -183,27 +174,24 @@ export function InstructionStepNodeView({
 				)}
 				{!hasContent && isEditing && (
 					<>
-						<div className="absolute left-0 top-4 text-xs opacity-50 sm:top-2 sm:text-sm">
-							Type something, or...
-						</div>
+						<div className={cls.placeholder}>Type something, or...</div>
 						<IncludeSubRecipe
 							emphasis="default"
 							size="small"
 							onSelect={embedRecipe}
-							className="opacity-50 hover:opacity-100"
+							className={cls.subRecipeAdd}
 						/>
 					</>
 				)}
 			</div>
 			<CollapsibleRoot
 				open={showNote}
-				className="[grid-area:note] ml-auto mt-2 max-w-400px w-max-content"
+				className={cls.noteWrap}
 				contentEditable={false}
 			>
 				<CollapsibleContent>
-					<Note className="focus-within:shadow-focus" contentEditable={false}>
+					<Note contentEditable={false}>
 						<Note.Input
-							className="[font-style:inherit] m-0 w-full rounded-none border-none p-0 text-sm text-inherit shadow-none bg-transparent focus:(shadow-none outline-none bg-transparent)"
 							value={note || ''}
 							onValueChange={updateNote}
 							onBlur={onNoteBlur}
@@ -214,18 +202,12 @@ export function InstructionStepNodeView({
 				</CollapsibleContent>
 			</CollapsibleRoot>
 			{!isEditing && isAssignedToMe && (
-				<label
-					contentEditable={false}
-					className="[grid-area:label] mb-2 animate-keyframes-fade-in-up animate-duration-200 animate-ease-out text-xs italic color-black"
-				>
+				<label contentEditable={false} className={cls.assignLabel}>
 					Assigned to you
 				</label>
 			)}
 			{!isEditing && (
-				<div
-					className="[grid-area:tools] mr-2 w-32px flex flex-col items-center gap-2 pt-1"
-					contentEditable={false}
-				>
+				<div className={cls.tools} contentEditable={false}>
 					<Checkbox
 						checked={!isEditing && !!completed}
 						contentEditable={false}
@@ -243,14 +225,10 @@ export function InstructionStepNodeView({
 								}
 							});
 						}}
-						className="relative"
 					/>
 				</div>
 			)}
-			<div
-				className="[grid-area:endTools] ml-3 w-32px flex flex-col items-center gap-1"
-				contentEditable={false}
-			>
+			<div className={cls.endTools} contentEditable={false}>
 				{isEditing && (
 					<Button emphasis="ghost" size="small" onClick={removeSelf}>
 						<Icon name="x" />
@@ -278,14 +256,10 @@ export function InstructionStepNodeView({
 						{!!note ? (
 							<Icon
 								name="note"
-								className={
-									showNote
-										? undefined
-										: 'fill-primary stroke-primaryDark color-primaryDark'
-								}
+								className={showNote ? undefined : cls.noteIconFilled}
 							/>
 						) : (
-							<Icon name="add_note" className="color-gray7" />
+							<Icon name="add_note" className={cls.noteIconEmpty} />
 						)}
 					</Button>
 				</Tooltip>
@@ -293,7 +267,7 @@ export function InstructionStepNodeView({
 			{subRecipeId && (
 				<EmbeddedSubRecipeContent
 					recipeId={subRecipeId}
-					className="[grid-area:embed]"
+					className={cls.embed}
 				/>
 			)}
 		</EmbeddedSubRecipeInstructionsWrapper>

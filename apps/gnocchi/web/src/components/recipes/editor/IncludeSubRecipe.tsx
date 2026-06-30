@@ -73,9 +73,12 @@ function SubRecipeSearch({ onSelect }: IncludeSubRecipeProps) {
 	});
 
 	return (
-		<Box direction="col" gap="md">
-			<div
-				className="max-h-[50vh] w-full flex-1 overflow-auto"
+		<Box col gap="md">
+			<Box
+				full="width"
+				grow
+				overflow="auto"
+				style={{ maxHeight: '50vh' }}
 				{...getMenuProps()}
 			>
 				<Card.Grid>
@@ -93,7 +96,7 @@ function SubRecipeSearch({ onSelect }: IncludeSubRecipeProps) {
 						</Card>
 					))}
 				</Card.Grid>
-			</div>
+			</Box>
 			<Input {...getInputProps()} placeholder="Search..." />
 		</Box>
 	);

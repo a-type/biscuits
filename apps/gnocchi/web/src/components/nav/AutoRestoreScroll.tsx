@@ -69,6 +69,15 @@ export function AutoRestoreScroll({
 	});
 
 	return (
-		<div className="pointer-events-none absolute z--1 h-0 w-0" ref={ref} />
+		<div
+			style={{
+				pointerEvents: 'none',
+				position: 'absolute',
+				zIndex: -1,
+				height: 0,
+				width: 0,
+			}}
+			ref={ref}
+		/>
 	);
 }

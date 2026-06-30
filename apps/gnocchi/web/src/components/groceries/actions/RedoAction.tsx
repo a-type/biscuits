@@ -13,7 +13,7 @@ export function RedoAction({ showName }: { showName?: boolean }) {
 			}}
 			visible={canRedo}
 		>
-			<Icon name="undo" className="-scale-x-100" />
+			<Icon name="redo" />
 			{showName ? 'Redo' : undefined}
 		</ActionButton>
 	);

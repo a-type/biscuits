@@ -1,4 +1,5 @@
-import { Icon } from '@a-type/ui';
+import { Box, Icon } from '@a-type/ui';
+import cls from './PinIcon.module.css';
 
 export interface PinIconProps {
 	isPinned: boolean;
@@ -7,19 +8,16 @@ export interface PinIconProps {
 export function PinIcon({ isPinned }: PinIconProps) {
 	if (isPinned) {
 		return (
-			<div className="flex">
-				<Icon name="pin" className="relative left-0px top--2px" />
-				<Icon
-					name="x"
-					className="absolute bottom-5px right-8px h-10px w-10px"
-				/>
-			</div>
+			<Box>
+				<Icon name="pin" className={cls.first} />
+				<Icon name="x" className={cls.second} />
+			</Box>
 		);
 	}
 
 	return (
-		<div className="flex">
+		<Box>
 			<Icon name="pinFilled" />
-		</div>
+		</Box>
 	);
 }

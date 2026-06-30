@@ -1,5 +1,6 @@
 import { presetAtype } from '@a-type/ui/arbor';
 
-export default presetAtype({
+const preset = presetAtype({
 	mainColor: 'lemon',
 });
+export default preset;

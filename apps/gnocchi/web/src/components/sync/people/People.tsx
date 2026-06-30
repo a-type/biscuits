@@ -1,8 +1,7 @@
 import { Presence, Profile, hooks } from '@/stores/groceries/index.js';
 import { ErrorBoundary } from '@a-type/ui';
 import { UserInfo } from '@gnocchi.biscuits/verdant';
-import classNames from 'classnames';
-import { ReactNode, createContext, useContext } from 'react';
+import { CSSProperties, ReactNode, createContext, useContext } from 'react';
 import { PersonAvatar } from './PersonAvatar.js';
 
 const PeopleContext = createContext<{ size: number }>({
@@ -57,8 +56,14 @@ export function PeopleList({
 	return (
 		<PeopleContext.Provider value={{ size }}>
 			<div
-				className={classNames('relative flex-basis-auto', className)}
-				style={{ width, minWidth: width, height: size }}
+				className={className}
+				style={{
+					width,
+					minWidth: width,
+					height: size,
+					position: 'relative',
+					flexBasis: 'auto',
+				}}
 			>
 				{children}
 			</div>
@@ -70,19 +75,23 @@ export function PeopleListItem({
 	index,
 	children,
 	className,
+	style,
 }: {
 	index: number;
 	children: ReactNode;
 	className?: string;
+	style?: CSSProperties;
 }) {
 	const { size } = useContext(PeopleContext);
 	return (
 		<div
-			className={classNames('absolute', className)}
+			className={className}
 			style={{
+				position: 'absolute',
 				left: index === 0 ? 0 : index * ((size * 2) / 3),
 				zIndex: index,
 				top: 0,
+				...style,
 			}}
 		>
 			{children}
@@ -122,16 +131,18 @@ export function PeopleListAvatar({
 	person,
 	index,
 	className,
+	style,
 	...rest
 }: {
 	person: UserInfo<Profile, Presence> | null;
 	index: number;
 	popIn?: boolean;
 	className?: string;
+	style?: CSSProperties;
 }) {
 	const { size } = useContext(PeopleContext);
 	return (
-		<PeopleListItem index={index} className={className}>
+		<PeopleListItem index={index} className={className} style={style}>
 			<PersonAvatar
 				person={person}
 				style={{ width: size, height: size }}

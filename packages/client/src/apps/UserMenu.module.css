@@ -19,8 +19,8 @@
 
 .banner {
 	max-width: 300px;
-	padding-block: var(--m-spacing-xs);
-	padding-inline: var(--m-spacing-md);
+	padding-block: var(--m-space-xs);
+	padding-inline: var(--m-space-md);
 }
 
 .highlightedOption {
@@ -33,7 +33,7 @@
 }
 
 .installButton {
-	margin-block: var(--m-spacing-sm);
-	margin-inline: var(--m-spacing-md);
+	margin-block: var(--m-space-sm);
+	margin-inline: var(--m-space-md);
 	justify-content: space-between;
 }

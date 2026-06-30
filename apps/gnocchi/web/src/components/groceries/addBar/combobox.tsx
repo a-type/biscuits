@@ -2,7 +2,7 @@ import { recipeSavePromptState } from '@/components/recipes/savePrompt/state.js'
 import { AddToListDialog } from '@/components/recipes/viewer/AddToListDialog.jsx';
 import { useListId } from '@/contexts/ListContext.jsx';
 import { useAddItems } from '@/stores/groceries/mutations.js';
-import { clsx, Combobox, Icon, toast, withClassName } from '@a-type/ui';
+import { Combobox, Icon, toast, withClassName } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import {
 	createContext,
@@ -11,6 +11,7 @@ import {
 	useContext,
 	useState,
 } from 'react';
+import cls from './combobox.module.css';
 import {
 	destructureSearchPrompt,
 	SuggestionGroup,
@@ -88,6 +89,7 @@ export function AddBarComboboxRoot({
 		>
 			<OpenContext.Provider value={openState}>
 				<BaseCombobox
+					modal={false}
 					open={open}
 					// respect keep open on select setting
 					onOpenChange={(isOpen, event) => {
@@ -161,7 +163,7 @@ export function AddBarComboboxInput({
 		<BaseCombobox.Input
 			{...props}
 			disableCaret
-			className={clsx('w-full border-black', className)}
+			className={className}
 			placeholder={placeholder}
 			onPaste={(event) => {
 				const paste = event.clipboardData.getData('text');
@@ -174,6 +176,7 @@ export function AddBarComboboxInput({
 				add(lines.join('\n'));
 				toast.success(`Added ${lines.length} items`);
 			}}
+			style={{ width: '100%', borderRadius: 9999 }}
 		>
 			<CreateButton />
 		</BaseCombobox.Input>
@@ -189,7 +192,7 @@ function CreateButton() {
 			emphasis="primary"
 			ref={ref}
 			data-test="grocery-list-add-button"
-			className="relative z-2 aspect-1 h-34px items-center justify-center rounded-md -my-1px md:rounded-full"
+			className={cls.createButton}
 			aria-label="add to list"
 		>
 			<Icon name="plus" />
@@ -203,30 +206,29 @@ export function AddBarComboboxItems(props: { className?: string }) {
 			<BaseCombobox.List {...props}>
 				{(group) => (
 					<BaseCombobox.Group key={group.id} items={group.items}>
-						<BaseCombobox.GroupLabel className="color-gray-dark color-darken-2">
-							{group.label}
-						</BaseCombobox.GroupLabel>
-						<BaseCombobox.GroupItemList className="gap-sm">
+						<BaseCombobox.GroupLabel>{group.label}</BaseCombobox.GroupLabel>
+						<BaseCombobox.GroupItemList>
 							{group.items.map((item) => (
-								<BaseCombobox.Item data-id={item.id} key={item.id} value={item}>
+								<BaseCombobox.Item
+									className="@mode-neutral"
+									data-id={item.id}
+									key={item.id}
+									value={item}
+								>
 									{item.type === 'recipe' && <Icon name="page" />}
-									<span className="flex-1 overflow-hidden text-ellipsis text-sm">
-										{suggestionToDisplayString(item).toLowerCase()}
-									</span>
+									<span>{suggestionToDisplayString(item).toLowerCase()}</span>
 								</BaseCombobox.Item>
 							))}
 						</BaseCombobox.GroupItemList>
 					</BaseCombobox.Group>
 				)}
 			</BaseCombobox.List>
-			<BaseCombobox.Empty className="text-gray-dark italic">
-				No suggestions
-			</BaseCombobox.Empty>
+			<BaseCombobox.Empty>No suggestions</BaseCombobox.Empty>
 		</>
 	);
 }
 
 export const AddBarComboboxContent = withClassName(
 	BaseCombobox.Content,
-	'p-sm',
+	cls.content,
 );

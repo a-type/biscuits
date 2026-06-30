@@ -1,5 +1,5 @@
 import { hooks } from '@/stores/groceries/index.js';
-import { LiveUpdateTextField, withClassName } from '@a-type/ui';
+import { Box, Field, LiveUpdateTextField } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { useCallback } from 'react';
 
@@ -38,61 +38,61 @@ export function RecipeTimeFields({ recipe }: RecipeTimeFieldsProps) {
 	);
 
 	return (
-		<div className="flex flex-col items-stretch gap-1">
-			<Row>
-				<label htmlFor="recipePrepTime" className="flex-1">
-					Prep Time (minutes)
-				</label>
-				<LiveUpdateTextField
-					id="recipePrepTime"
-					type="number"
-					value={prepTimeMinutes?.toString() ?? '0'}
-					onChange={(val) => {
-						updateComponentTime('prepTimeMinutes', val);
-					}}
-					className="w-24"
-					autoSelect
-				/>
-			</Row>
-			<Row>
-				<label htmlFor="recipeCookTime" className="flex-1">
-					Cook Time (minutes)
-				</label>
-				<LiveUpdateTextField
-					id="recipeCookTime"
-					type="number"
-					value={cookTimeMinutes?.toString() ?? '0'}
-					onChange={(val) => {
-						updateComponentTime('cookTimeMinutes', val);
-					}}
-					className="w-24"
-					autoSelect
-				/>
-			</Row>
-			<Row>
-				<label htmlFor="recipeTotalTime" className="flex-1">
+		<Box col items="stretch" gap="xs">
+			<Field>
+				<Field.Label htmlFor="recipePrepTime">Prep Time (minutes)</Field.Label>
+				<Field.Control>
+					<LiveUpdateTextField
+						id="recipePrepTime"
+						type="number"
+						value={prepTimeMinutes?.toString() ?? '0'}
+						onChange={(val) => {
+							updateComponentTime('prepTimeMinutes', val);
+						}}
+						style={{ width: 100 }}
+						autoSelect
+					/>
+				</Field.Control>
+			</Field>
+			<Field>
+				<Field.Label htmlFor="recipeCookTime">Cook Time (minutes)</Field.Label>
+				<Field.Control>
+					<LiveUpdateTextField
+						id="recipeCookTime"
+						type="number"
+						value={cookTimeMinutes?.toString() ?? '0'}
+						onChange={(val) => {
+							updateComponentTime('cookTimeMinutes', val);
+						}}
+						style={{ width: 100 }}
+						autoSelect
+					/>
+				</Field.Control>
+			</Field>
+			<Field>
+				<Field.Label htmlFor="recipeTotalTime">
 					Total Time (minutes)
-				</label>
-				<LiveUpdateTextField
-					id="recipeTotalTime"
-					type="number"
-					value={totalTimeMinutes?.toString() ?? '0'}
-					onChange={(val) => {
-						if (val === '') {
-							recipe.set('totalTimeMinutes', null);
-							return;
-						} else {
-							const v = parseInt(val);
-							if (isNaN(v)) return;
-							recipe.set('totalTimeMinutes', v);
-						}
-					}}
-					className="w-24"
-					autoSelect
-				/>
-			</Row>
-		</div>
+				</Field.Label>
+				<Field.Control>
+					<LiveUpdateTextField
+						id="recipeTotalTime"
+						type="number"
+						value={totalTimeMinutes?.toString() ?? '0'}
+						onChange={(val) => {
+							if (val === '') {
+								recipe.set('totalTimeMinutes', null);
+								return;
+							} else {
+								const v = parseInt(val);
+								if (isNaN(v)) return;
+								recipe.set('totalTimeMinutes', v);
+							}
+						}}
+						style={{ width: 100 }}
+						autoSelect
+					/>
+				</Field.Control>
+			</Field>
+		</Box>
 	);
 }
-
-const Row = withClassName('div', 'flex flex-row items-center');

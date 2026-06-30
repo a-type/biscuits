@@ -22,7 +22,7 @@
 	flex-direction: column;
 	justify-content: stretch;
 	align-items: center;
-	padding-block: var(--m-spacing-sm);
+	padding-block: var(--m-space-sm);
 	width: 100%;
 	@apply --mx-bg(transparent);
 
@@ -46,11 +46,11 @@
 }
 
 .navTitle {
-	@apply --mx-text-primary;
-	font-weight: var(--m-typography-weight-bold);
+	@apply --mx-prose-primary;
+	font-weight: var(--m-text-weight-bold);
 	@apply --mx-fg(var(--color-main-ink));
 	margin: 0;
-	padding: var(--m-spacing-xs);
+	padding: var(--m-space-xs);
 	border-radius: var(--m-radius-lg);
 	@apply --mx-bg(var(--m-surface-ambient-bg));
 	font-family: Henrietta, 'Noto Serif', serif;
@@ -72,14 +72,14 @@
 .heroTagline {
 	margin-top: 0;
 	display: block;
-	font-weight: var(--m-typography-weight-normal);
+	font-weight: var(--m-text-weight-normal);
 	font-size: 10vmin;
 	@apply --mx-fg(var(--m-color-main-ink));
 }
 
 .heroDescription {
 	margin: 0;
-	@apply --mx-text-ambient;
+	@apply --mx-prose-ambient;
 	@apply --mx-fg(var(--m-color-neutral-heavy));
 	font-family:
 		system-ui,
@@ -97,7 +97,7 @@
 
 .emphasis {
 	font-family: Henrietta, 'Noto Serif', serif;
-	font-weight: var(--m-typography-weight-thin);
+	font-weight: var(--m-text-weight-thin);
 }
 
 .carouselImage {
@@ -110,7 +110,7 @@
 	margin-inline-start: auto;
 	display: inline-flex;
 	align-items: center;
-	gap: var(--m-spacing-sm);
+	gap: var(--m-space-sm);
 }
 
 .footer {

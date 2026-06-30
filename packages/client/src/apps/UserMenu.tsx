@@ -53,7 +53,7 @@ export function UserMenu({
 	};
 
 	return (
-		<Box d="row" items="center" gap="sm" className={className}>
+		<Box items="center" gap="sm" className={className}>
 			<SmallUpdatePrompt />
 			<DropdownMenu>
 				<DropdownMenu.Trigger
@@ -77,7 +77,7 @@ export function UserMenu({
 								name="refreshDisabled"
 								className={isOffline ? cls.offline : ''}
 							/>
-							<Icon name="gear" size={25} />
+							<Icon name="gear" size={15} />
 						</>
 					}
 				</DropdownMenu.Trigger>

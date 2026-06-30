@@ -4,6 +4,7 @@ import {
 	Popover,
 	PopoverContent,
 	PopoverTrigger,
+	Text,
 } from '@a-type/ui';
 import { ReactNode } from 'react';
 
@@ -18,7 +19,7 @@ export function HelpTip({ children }: HelpTipProps) {
 				<Icon name="info" />
 			</PopoverTrigger>
 			<PopoverContent>
-				<span className="text-sm">{children}</span>
+				<Text emphasis="ambient">{children}</Text>
 			</PopoverContent>
 		</Popover>
 	);

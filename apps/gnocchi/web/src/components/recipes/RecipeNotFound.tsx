@@ -1,16 +1,16 @@
 import { LinkButton } from '@/components/nav/Link.jsx';
-import { H1, P } from '@a-type/ui';
+import { Box, H1, P } from '@a-type/ui';
 
 export interface RecipeNotFoundProps {}
 
 export function RecipeNotFound({}: RecipeNotFoundProps) {
 	return (
-		<div className="flex flex-col items-start gap-6">
+		<Box col items="start" gap="lg">
 			<H1>Recipe not found</H1>
 			<P>Perhaps it was deleted, or you typed the URL incorrectly.</P>
-			<div>
+			<Box>
 				<LinkButton to="/recipes">Go back to recipes</LinkButton>
-			</div>
-		</div>
+			</Box>
+		</Box>
 	);
 }

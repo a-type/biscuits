@@ -10,7 +10,7 @@
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	gap: var(--m-spacing-xl);
+	gap: var(--m-space-xl);
 }
 
 .heading {
@@ -21,8 +21,8 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	gap: var(--m-spacing-sm);
-	padding-block: var(--m-spacing-sm);
+	gap: var(--m-space-sm);
+	padding-block: var(--m-space-sm);
 	background: transparent;
 }
 
@@ -30,7 +30,7 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: var(--m-spacing-md);
+	gap: var(--m-space-md);
 }
 
 .appName {
@@ -38,14 +38,14 @@
 }
 
 .divider {
-	margin-block: var(--m-spacing-xl);
+	margin-block: var(--m-space-xl);
 }
 
 .featureItem {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	gap: var(--m-spacing-md);
+	gap: var(--m-space-md);
 }
 
 .featureHeader {
@@ -53,20 +53,20 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 	align-items: center;
-	gap: var(--m-spacing-sm);
+	gap: var(--m-space-sm);
 }
 
 .featureTitle {
 	margin-block: 0;
-	font-size: var(--m-typography-size-md);
-	font-weight: var(--m-typography-weight-normal);
+	font-size: var(--m-text-size-md);
+	font-weight: var(--m-text-weight-normal);
 }
 
 .premiumBadge {
 	border-radius: --fn-literal(9999px);
-	padding-inline: var(--m-spacing-sm);
-	padding-block: var(--m-spacing-xs);
-	font-size: var(--m-typography-size-sm);
+	padding-inline: var(--m-space-sm);
+	padding-block: var(--m-space-xs);
+	font-size: var(--m-text-size-sm);
 	color: white;
 	@apply --mx-bg(var(--m-color-accent-heavy));
 }

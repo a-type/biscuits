@@ -1,7 +1,7 @@
 import { hooks } from '@/stores/groceries/index.js';
 import {
+	Box,
 	Button,
-	clsx,
 	Dialog,
 	Icon,
 	LiveUpdateTextField,
@@ -22,33 +22,29 @@ export function QuantityEditor({
 	return (
 		<Dialog>
 			<Dialog.Trigger
-				render={
-					<Button
-						className={clsx('p-1 font-normal', className)}
-						emphasis="ghost"
-					/>
-				}
+				render={<Button className={className} size="small" emphasis="ghost" />}
 			>
 				<Icon name="pencil" />
 				<span>Edit</span>
 			</Dialog.Trigger>
 			<Dialog.Content initialFocus={false}>
 				<Dialog.Title>Edit item</Dialog.Title>
-				<div className="flex flex-row flex-wrap items-center justify-center gap-4">
+				<Box wrap items="center" justify="center" gap>
 					<LiveUpdateTextField
 						placeholder={displayText}
 						value={textOverride || ''}
 						onChange={(v) => item.set('textOverride', v)}
-						className="flex-1 flex-basis-240px"
+						style={{ flex: 1, flexBasis: 240 }}
 					/>
 					<NumberStepper
 						value={totalQuantity}
 						onChange={(v) => item.set('totalQuantity', v)}
-						className=""
 					/>
-				</div>
+				</Box>
 				<Dialog.Actions>
-					<Dialog.Close render={<Button align="end" />}>Done</Dialog.Close>
+					<Dialog.Close render={<Button style={{ alignSelf: 'end' }} />}>
+						Done
+					</Dialog.Close>
 				</Dialog.Actions>
 			</Dialog.Content>
 		</Dialog>

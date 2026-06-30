@@ -1,6 +1,7 @@
 import { hooks } from '@/stores/groceries/index.js';
 import { useDeleteList } from '@/stores/groceries/mutations.js';
 import {
+	Box,
 	Button,
 	Dialog,
 	DialogActions,
@@ -11,6 +12,7 @@ import {
 	Icon,
 	LiveUpdateTextField,
 } from '@a-type/ui';
+import { ColorPicker } from '@biscuits/client';
 import { useState } from 'react';
 
 export interface ListEditProps {
@@ -34,20 +36,19 @@ export function ListEdit({ listId }: ListEditProps) {
 				<Icon name="gear" />
 			</DialogTrigger>
 			<DialogContent>
-				<div className="flex flex-col items-start gap-2">
+				<Box col items="start" gap="sm">
 					<H2>Edit List</H2>
-					<div className="flex flex-row gap-2">
+					<Box gap="sm">
 						<LiveUpdateTextField
 							value={list.get('name')}
 							onChange={(name) => list.set('name', name)}
 							required
 						/>
-						{/* TODO: color picker */}
-						{/* <ColorPicker
-							value={list.get('color') as PaletteName}
-							onChange={(color) => list.set('color', color)}
-						/> */}
-					</div>
+						<ColorPicker
+							value={list.get('color')}
+							onValueChange={(color) => color && list.set('color', color)}
+						/>
+					</Box>
 					<Button
 						emphasis="primary"
 						color="attention"
@@ -63,7 +64,7 @@ export function ListEdit({ listId }: ListEditProps) {
 							Done
 						</DialogClose>
 					</DialogActions>
-				</div>
+				</Box>
 			</DialogContent>
 		</Dialog>
 	);

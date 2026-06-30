@@ -3,7 +3,14 @@ import {
 	useCreateCategory,
 	useDeleteCategory,
 } from '@/stores/groceries/mutations.js';
-import { Button, FormikForm, Icon, SubmitButton, TextField } from '@a-type/ui';
+import {
+	Box,
+	Button,
+	FormikForm,
+	Icon,
+	SubmitButton,
+	TextField,
+} from '@a-type/ui';
 import { DndContext, DragOverlay, useDndMonitor } from '@dnd-kit/core';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { SortableContext, useSortable } from '@dnd-kit/sortable';
@@ -77,7 +84,15 @@ function CategoryList() {
 
 	return (
 		<SortableContext items={categoryIds}>
-			<div className="mb-3 min-h-0 flex flex-col overflow-y-auto">
+			<div
+				style={{
+					marginBottom: 12,
+					minHeight: 0,
+					display: 'flex',
+					flexDirection: 'column',
+					overflowY: 'auto',
+				}}
+			>
 				{categories.map((category) => {
 					const { prev, next } = getNextAndPrevSortKeys(
 						categoryKeys,
@@ -113,9 +128,9 @@ function CategoryManagerItem({
 	const deleteCategory = useDeleteCategory();
 
 	return (
-		<div className="w-full flex flex-row items-center gap-3" {...nodeProps}>
+		<Box full="width" items="center" gap="sm" {...nodeProps}>
 			<Icon name="grabby" {...handleProps} style={{ touchAction: 'none' }} />
-			<div className="flex-grow-1">{category.get('name')}</div>
+			<Box grow>{category.get('name')}</Box>
 			<Button
 				color="attention"
 				emphasis="ghost"
@@ -128,7 +143,7 @@ function CategoryManagerItem({
 			>
 				<Icon name="trash" />
 			</Button>
-		</div>
+		</Box>
 	);
 }
 

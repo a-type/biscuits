@@ -6,7 +6,6 @@ import {
 	SelectTrigger,
 	UnstyledSelectTrigger,
 } from '@a-type/ui';
-import classNames from 'classnames';
 import { ReactElement, useCallback, useEffect } from 'react';
 
 export interface MeetupSelectProps {
@@ -66,16 +65,12 @@ export function MeetupSelect({ children, id, emptyLabel }: MeetupSelectProps) {
 			}}
 		>
 			<Trigger
-				className={classNames(
-					!children && 'px-6 py-3',
-					!!location && 'color-accent-dark bg-accent-wash',
-				)}
 				id={id}
 				render={
 					children ? (
 						children(location)
 					) : (
-						<Button>
+						<Button color="accent" emphasis={location ? 'light' : 'default'}>
 							<Icon name="locate" />
 							<Select.Value>
 								{(v) => (!v ? emptyLabel || 'Meet up...' : v)}

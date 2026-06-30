@@ -7,6 +7,7 @@ import { PageContent, PageFixedArea } from '@a-type/ui';
 import { useNavigate } from '@verdant-web/react-router';
 import classNames from 'classnames';
 import { ReactNode, Suspense, useEffect } from 'react';
+import cls from './layout.module.css';
 
 export const TopControls = ({
 	children,
@@ -14,10 +15,7 @@ export const TopControls = ({
 }: {
 	children: ReactNode;
 }) => (
-	<div
-		className="mt-1 w-full flex flex-row items-center justify-between gap-2 p-2"
-		{...props}
-	>
+	<div className={cls.topControls} {...props}>
 		{children}
 	</div>
 );
@@ -28,16 +26,18 @@ export const ListSelectWrapper = ({
 }: {
 	children: ReactNode;
 }) => (
-	<div className="flex flex-row items-center gap-2 pl-1" {...props}>
-		<Suspense fallback={<div className="h-28px w-full" />}>{children}</Suspense>
+	<div className={cls.listSelectWrapper} {...props}>
+		<Suspense fallback={<div className={cls.listSelectPlaceholder} />}>
+			{children}
+		</Suspense>
 	</div>
 );
 
 export const MainActions = () => {
 	return (
-		<PageFixedArea className="flex flex-col gap-2 px-3 py-2">
-			<Suspense fallback={<div className="hidden h-41px w-full md:flex" />}>
-				<GroceryListAdd className="hidden md:flex" />
+		<PageFixedArea className={cls.mainActions}>
+			<Suspense fallback={<div className={cls.addPlaceholder} />}>
+				<GroceryListAdd className={cls.add} />
 			</Suspense>
 			<Suspense>
 				<GroceriesActionBar />
@@ -86,11 +86,7 @@ function ThemedPageContentInner({
 			<PageContent
 				gap="none"
 				p="none"
-				className={classNames(
-					'md:mt-lg lt-md:(max-h-full overflow-y-auto)',
-					className,
-					theme,
-				)}
+				className={classNames(cls.pageContent, className, theme)}
 				id="page-content"
 			>
 				{children}

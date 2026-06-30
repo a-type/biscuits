@@ -51,15 +51,12 @@ export const CategorySelect = withSuspense(function CategorySelect({
 	return (
 		<>
 			<Dialog open={open} onOpenChange={onOpenChange}>
-				<Dialog.SelectTrigger
-					className="py-1 text-sm font-normal"
-					render={children}
-				>
+				<Dialog.SelectTrigger render={children}>
 					{category?.get('name') || 'Uncategorized'}
 				</Dialog.SelectTrigger>
 				<Dialog.Content>
 					<Dialog.SelectList
-						className="mb-4"
+						style={{ marginBottom: 16 }}
 						value={value || 'null'}
 						onValueChange={selectCategory as any}
 					>
@@ -74,7 +71,7 @@ export const CategorySelect = withSuspense(function CategorySelect({
 						<DialogSelectItem value="null">Uncategorized</DialogSelectItem>
 					</Dialog.SelectList>
 
-					<Dialog.Actions className="justify-between">
+					<Dialog.Actions style={{ justifyContent: 'space-between' }}>
 						<Button emphasis="ghost" onClick={() => setState('create')}>
 							New category
 						</Button>

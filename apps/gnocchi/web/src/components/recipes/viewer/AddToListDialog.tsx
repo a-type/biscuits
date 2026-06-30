@@ -5,11 +5,14 @@ import { useAddIngredients } from '@/stores/groceries/mutations.js';
 import {
 	ActionBar,
 	ActionButton,
+	Box,
 	Button,
 	Checkbox,
 	Dialog,
 	Icon,
 	Note,
+	Text,
+	Ul,
 } from '@a-type/ui';
 import {
 	Client,
@@ -17,7 +20,6 @@ import {
 	RecipeIngredientsItemSnapshot,
 	RecipeSubRecipeMultipliers,
 } from '@gnocchi.biscuits/verdant';
-import classNames from 'classnames';
 import { ReactNode, use, useEffect, useState } from 'react';
 import { getSubRecipeIds } from '../hooks.js';
 import { IngredientTextRenderer } from './IngredientText.jsx';
@@ -65,7 +67,7 @@ export function AddToListDialog({
 			{children}
 			<Dialog.Content>
 				<Dialog.Title>Add to list</Dialog.Title>
-				<div className="flex flex-col items-start gap-3">
+				<Box col items="start" gap="sm">
 					<RecipeNote recipe={recipe} readOnly />
 					<MultiplierStepper
 						highlightChange
@@ -94,13 +96,25 @@ export function AddToListDialog({
 							Select none
 						</ActionButton>
 					</ActionBar>
-					<ul className="m-0 w-full flex flex-col list-none items-start gap-3 p-0">
+					<Ul unstyled style={{ gap: 12, width: '100%' }}>
 						{allIngredients.map((ingredient) => {
 							const isSectionHeader = ingredient.isSectionHeader;
+
+							if (isSectionHeader) {
+								return (
+									<Ul.Item key={ingredient.id}>
+										<Text bold>{ingredient.text}</Text>
+									</Ul.Item>
+								);
+							}
+
 							return (
-								<li
+								<Box
+									items="start"
+									full="width"
+									gap="sm"
+									render={<Ul.Item />}
 									key={ingredient.id}
-									className="w-full flex flex-row items-start gap-2"
 								>
 									<Checkbox
 										checked={!unchecked[ingredient.id]}
@@ -110,18 +124,14 @@ export function AddToListDialog({
 												[ingredient.id]: !checked,
 											}));
 										}}
-										className={
-											isSectionHeader ? '[visibility:hidden]' : undefined
-										}
 										disabled={isSectionHeader}
 										id={`ingredient-${ingredient.id}`}
 									/>
-									<label
-										htmlFor={`ingredient-${ingredient.id}`}
-										className={classNames(
-											'flex flex-1 flex-col gap-1',
-											isSectionHeader ? 'font-bold' : undefined,
-										)}
+									<Box
+										col
+										grow
+										gap="xs"
+										render={<label htmlFor={`ingredient-${ingredient.id}`} />}
 									>
 										<IngredientTextRenderer
 											{...ingredient}
@@ -130,17 +140,18 @@ export function AddToListDialog({
 													? 1
 													: (ingredient.multiplier ?? 1) * multiplier
 											}
-											className="mt-1 block flex-1"
 										/>
 										{ingredient.note && (
-											<Note className="self-end">{ingredient.note}</Note>
+											<Note style={{ alignSelf: 'end' }}>
+												{ingredient.note}
+											</Note>
 										)}
-									</label>
-								</li>
+									</Box>
+								</Box>
 							);
 						})}
-					</ul>
-				</div>
+					</Ul>
+				</Box>
 				<Dialog.Actions>
 					<Dialog.Close
 						render={

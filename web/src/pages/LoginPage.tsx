@@ -181,7 +181,7 @@ export default function LoginPage() {
 
 function Or() {
 	return (
-		<Box items="center" gap="sm" d="row" full="width">
+		<Box items="center" gap="sm" full="width">
 			<div className={cls.orBorder}></div>
 			<div className={cls.or}>or</div>
 			<div className={cls.orBorder}></div>

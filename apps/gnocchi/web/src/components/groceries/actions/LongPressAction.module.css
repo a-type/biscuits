@@ -1,0 +1,30 @@
+.popup {
+	padding-inline: var(--m-space-md);
+	padding-block: var(--m-space-sm);
+}
+
+.progress {
+	position: absolute;
+	left: 0;
+	top: 0;
+	height: 100%;
+
+	&[data-state='holding'] {
+		animation-name: progress-bar;
+		animation-timing-function: linear;
+		animation-fill-mode: forwards;
+	}
+}
+
+@keyframes progress-bar {
+	from {
+		width: 0%;
+	}
+	to {
+		width: 100%;
+	}
+}
+
+.z {
+	z-index: 1;
+}

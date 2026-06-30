@@ -86,13 +86,13 @@ Arbor CSS organizes design tokens into modes with layers of tokens:
 
 The mode includes grouped tokens called "intents": 'action', 'control', 'surface', and 'text'. These represent broad categories of UI elements and their semantic intent.
 
-Some token examples: `--m-action-primary-bg`, `--m-surface-ambient-fg`, `--m-action-radius`, `--m-control-bg`, `--m-text-secondary-size`. See the CLI `arbor tokens:list --filter intent` for a full list of available intent tokens.
+Some token examples: `--m-action-primary-bg`, `--m-surface-ambient-fg`, `--m-action-radius`, `--m-control-bg`, `--m-prose-secondary-size`. See the CLI `arbor tokens:list --filter intent` for a full list of available intent tokens.
 
 ### Semantic tokens
 
-Basic design tokens like colors, spacing, typography, are mapped under appropriate token namespaces, if an intent doesn't align with the need. These values are relative to the configuration of the active mode; for example, `--m-color-main` takes on the "main" color of a mode like `@mode-accent` or `@mode-success`, and `--m-spacing-md` gets larger in `@mode-hero` and smaller in `@mode-dense`. Thus proper usage depends on the applied modes on the component. Don't think in absolute terms; use tokens with semantic relationship to the local component; "medium" spacing is medium relative to the component itself, not a global range.
+Basic design tokens like colors, spacing, typography, are mapped under appropriate token namespaces, if an intent doesn't align with the need. These values are relative to the configuration of the active mode; for example, `--m-color-main` takes on the "main" color of a mode like `@mode-accent` or `@mode-success`, and `--m-space-md` gets larger in `@mode-hero` and smaller in `@mode-dense`. Thus proper usage depends on the applied modes on the component. Don't think in absolute terms; use tokens with semantic relationship to the local component; "medium" spacing is medium relative to the component itself, not a global range.
 
-Some token examples: `--m-color-main-light`, `--m-color-neutral-ink`, `--m-spacing-lg`, `--m-radius-sm`, `--m-typography-size-lg`, `--m-typography-weight-bold`, `--m-lineWidth`. See the CLI `arbor tokens:list` for a full list of available mode tokens. Semantic categories include: color, spacing, radius, typography, shadow, duration, easing, and lineWidth. These categories will be prefixes in the token names, like `--m-color-`, `--m-spacing-`, etc.
+Some token examples: `--m-color-main-light`, `--m-color-neutral-ink`, `--m-space-lg`, `--m-radius-sm`, `--m-text-size-lg`, `--m-text-weight-bold`, `--m-lineWidth`. See the CLI `arbor tokens:list` for a full list of available mode tokens. Semantic categories include: color, spacing, radius, typography, shadow, duration, easing, and lineWidth. These categories will be prefixes in the token names, like `--m-color-`, `--m-space-`, etc.
 
 ### Referencing other colors
 
@@ -111,6 +111,7 @@ Some judgment is required here to determine which semantic meaning aligns with a
 - Surface: containers, cards, sheets, modals, popovers - any box which visually wraps content. Surface tokens provide a border option, but surfaces are not always bordered. They do often use a background and foreground color. Common examples: cards, modals, popovers.
 - Action: interactive elements which trigger something. Actions are meant to stand out from text and usually incorporate color, at least at primary emphasis. Common examples; buttons, links, badges, tags.
 - Control: Data entry elements. Control does not include emphasis levels; uniformity is important to a user's expectations around data entry. Common examples: text fields, checkboxes, radio buttons, selects, sliders, etc.
+- Prose: general text content. Prose applies line-height and other typography properties which may not be appropriate inside controls and actions, but are suited for textual content, explainers, hints, etc. Common examples: paragraphs, headings, lists, code blocks, etc.
 
 ### Utilizing appropriate color and system mixins
 
