@@ -5,6 +5,7 @@ import {
 	IngredientListHeading,
 	IngredientListItem,
 } from './IngredientList.jsx';
+import cls from './Ingredients.module.css';
 
 export const ingredientFragment = graphql(`
 	fragment Ingredient on PublishedRecipeIngredient {
@@ -48,7 +49,6 @@ export function Ingredients({ data: dataMasked }: IngredientsProps) {
 	);
 
 	const groups = groupUnderHeadings(ingredients);
-	console.log(ingredients, groups);
 
 	return (
 		<Box col gap>
@@ -65,7 +65,7 @@ export function Ingredients({ data: dataMasked }: IngredientsProps) {
 								{ingredient.text}
 							</div>
 							{ingredient.note && (
-								<Note className="ml-4">{ingredient.note}</Note>
+								<Note className={cls.note}>{ingredient.note}</Note>
 							)}
 						</IngredientListItem>
 					))}

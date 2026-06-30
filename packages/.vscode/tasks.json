@@ -8,6 +8,13 @@
 			"problemMatcher": ["$tsc-watch"],
 			"group": "build",
 			"label": "Dev - Client Components"
+		},
+		{
+			"type": "npm",
+			"script": "build",
+			"problemMatcher": ["$tsc"],
+			"group": "build",
+			"label": "Build - Client Components"
 		}
 	]
 }

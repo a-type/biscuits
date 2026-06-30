@@ -31,12 +31,7 @@
 }
 
 .content {
-	margin: var(--spacing-sm);
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	align-items: center;
-	gap: var(--spacing-sm);
+	margin: var(--space-sm);
 }
 
 .full {

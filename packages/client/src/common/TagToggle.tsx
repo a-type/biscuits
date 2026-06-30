@@ -27,9 +27,7 @@ export function TagToggle({
 			onClick={onToggle}
 			{...rest}
 		>
-			<span>
-				<Icon name={icon || 'tag'} size={10} />
-			</span>
+			<Icon name={icon || 'tag'} size={10} />
 			<span>{name}</span>
 		</Button>
 	);

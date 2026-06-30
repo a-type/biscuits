@@ -1,5 +1,6 @@
 import { clsx } from '@a-type/ui';
 import { TopLineImage } from './layout.jsx';
+import cls from './MainImage.module.css';
 
 export interface MainImageProps {
 	url: string;
@@ -8,13 +9,10 @@ export interface MainImageProps {
 
 export function MainImage({ url, title }: MainImageProps) {
 	return (
-		<TopLineImage className="relative block overflow-hidden">
+		<TopLineImage className={cls.root}>
 			<img
 				src={url}
-				className={clsx(
-					'u-photo',
-					'h-full w-full rounded-lg object-cover object-center md:aspect-square md:h-auto',
-				)}
+				className={clsx('u-photo', cls.img)}
 				alt={`A photo of ${title}`}
 			/>
 		</TopLineImage>

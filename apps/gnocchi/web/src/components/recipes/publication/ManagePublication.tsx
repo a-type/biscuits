@@ -4,8 +4,7 @@ import {
 	clsx,
 	CollapsibleSimple,
 	Dialog,
-	FieldLabel,
-	FieldRoot,
+	Field,
 	FormikForm,
 	P,
 	tipTapClassName,
@@ -189,10 +188,14 @@ function DescriptionField() {
 	});
 
 	return (
-		<FieldRoot>
-			<FieldLabel>Description</FieldLabel>
-			<EditorContent editor={editor} className={clsx(tipTapClassName)} />
-		</FieldRoot>
+		<Field id="description">
+			<Field.Label>Description</Field.Label>
+			<Field.Control
+				render={
+					<EditorContent editor={editor} className={clsx(tipTapClassName)} />
+				}
+			/>
+		</Field>
 	);
 }
 

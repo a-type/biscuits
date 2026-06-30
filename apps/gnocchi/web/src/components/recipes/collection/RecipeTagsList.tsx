@@ -35,7 +35,7 @@ export function RecipeTagsList({
 	}
 
 	return (
-		<Box gap="xs" wrap className={className}>
+		<Box gap="sm" wrap className={className}>
 			{showNone && (
 				<TagToggle
 					toggled={!selectedValues?.length}

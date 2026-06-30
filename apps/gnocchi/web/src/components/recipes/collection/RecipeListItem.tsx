@@ -9,6 +9,7 @@ import { AddToListButton } from '@/components/recipes/viewer/AddToListButton.jsx
 import { hooks } from '@/stores/groceries/index.js';
 import { useDeleteRecipe } from '@/stores/groceries/mutations.js';
 import {
+	Box,
 	Button,
 	Card,
 	CardRoot,
@@ -53,7 +54,10 @@ export const RecipeListItem = memo(function RecipeListItem({
 				<CardTitle className={cls.title}>
 					<Text truncate>{title}</Text>
 				</CardTitle>
-				<div
+				<Box
+					items="center"
+					gap="sm"
+					wrap
 					className={clsx(
 						cls.content,
 						gridStyle === 'card-small' ? '@mode-denser' : '@mode-dense',
@@ -68,7 +72,7 @@ export const RecipeListItem = memo(function RecipeListItem({
 					<Suspense>
 						<RecipeTagsViewer unwrapped recipe={recipe} max={3} />
 					</Suspense>
-				</div>
+				</Box>
 			</Card.Main>
 			<Card.Image>
 				<RecipeMainImageViewer recipe={recipe} className={cls.full} />
