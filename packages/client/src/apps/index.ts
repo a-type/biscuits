@@ -4,6 +4,7 @@ export * from './EntityDeleteButton.js';
 export * from './Essentials.js';
 export * from './InstallButton.js';
 export * from './InstallHint.js';
+export * from './NavLockup.js';
 export * from './ResetNotifier.js';
 export * from './ResetToServer.js';
 export * from './SettingsPageWrapper.js';

@@ -1,5 +1,6 @@
 import { hooks } from '@/store.js';
 import {
+	Box,
 	Button,
 	clsx,
 	DropdownMenu,
@@ -40,9 +41,9 @@ export function ListItemConditionsEditor({
 	hooks.useWatch(conditions);
 
 	return (
-		<div className="col items-stretch">
+		<Box col items="stretch">
 			{conditions.map((cond, i) => (
-				<div key={i} className="w-full row">
+				<Box key={i} full="width" items="center" gap>
 					<ListItemConditionEditor condition={cond} />
 					<Button
 						color="attention"
@@ -51,10 +52,10 @@ export function ListItemConditionsEditor({
 					>
 						<Icon name="x" />
 					</Button>
-				</div>
+				</Box>
 			))}
 			<AddCondition conditions={conditions} />
-		</div>
+		</Box>
 	);
 }
 
@@ -63,13 +64,17 @@ function AddCondition({ conditions }: { conditions: ListItemsItemConditions }) {
 		<DropdownMenu>
 			<DropdownMenuTrigger
 				render={
-					<Button emphasis="default" size="small" className="self-start" />
+					<Button
+						emphasis="default"
+						size="small"
+						style={{ alignSelf: 'start' }}
+					/>
 				}
 			>
 				<Icon name="plus" />
 				<span>Add condition...</span>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent className="!z-10000">
+			<DropdownMenuContent style={{ zIndex: 10000 }}>
 				<DropdownMenuArrow />
 				{Object.keys(conditionTypeInits).map((type) => (
 					<DropdownMenuItem
@@ -101,7 +106,7 @@ function ConditionTypeLabel({
 				<>
 					Only when raining
 					<DropdownMenuItemRightSlot>
-						<Icon name="waterDrop" className="fill-main-light" />
+						<Icon name="waterDrop" filled className="@mode-blueberry" />
 					</DropdownMenuItemRightSlot>
 				</>
 			);
@@ -110,10 +115,7 @@ function ConditionTypeLabel({
 				<>
 					When it's hotter than...
 					<DropdownMenuItemRightSlot>
-						<Icon
-							name="thermometer"
-							className="palette-tomato color-main-dark"
-						/>
+						<Icon name="thermometer" filled className="@mode-tomato" />
 					</DropdownMenuItemRightSlot>
 				</>
 			);
@@ -122,10 +124,7 @@ function ConditionTypeLabel({
 				<>
 					When it's colder than...
 					<DropdownMenuItemRightSlot>
-						<Icon
-							name="thermometer"
-							className="palette-blueberry color-main-dark"
-						/>
+						<Icon name="thermometer" filled className="@mode-blueberry" />
 					</DropdownMenuItemRightSlot>
 				</>
 			);
@@ -155,7 +154,7 @@ function RainConditionEditor({
 }) {
 	return (
 		<div className="row">
-			<Icon name="waterDrop" className="fill-primary-light" />
+			<Icon name="waterDrop" filled />
 			<span>Only when raining</span>
 		</div>
 	);
@@ -174,14 +173,12 @@ function TemperatureConditionEditor({
 		<div className="row">
 			<Icon
 				name="thermometer"
-				className={clsx(
-					'color-main-dark',
-					`palette-${type === 'hot' ? 'tomato' : 'blueberry'}`,
-				)}
+				filled
+				className={clsx(`@mode-${type === 'hot' ? 'tomato' : 'blueberry'}`)}
 			/>
 			<span>When it's {type === 'hot' ? 'hotter' : 'colder'} than</span>
 			<Input
-				className="w-80px"
+				style={{ width: 80 }}
 				type="number"
 				value={toDisplay(temperatureField.value)}
 				onChange={(ev) => {

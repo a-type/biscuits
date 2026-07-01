@@ -6,7 +6,7 @@ import {
 	DialogClose,
 	DialogContent,
 	DialogTrigger,
-	FieldLabel,
+	Field,
 	FormikForm,
 	Input,
 	P,
@@ -49,16 +49,33 @@ export function EmailSigninForm({
 			className={className}
 			{...rest}
 		>
-			<FieldLabel htmlFor="email">Email</FieldLabel>
-			<Input name="email" autoComplete="email" required className="w-full" />
-			<FieldLabel htmlFor="password">Password</FieldLabel>
-			<Input
-				autoComplete="current-password"
-				name="password"
-				type="password"
-				required
-				className="w-full"
-			/>
+			<Field stretch id="email">
+				<Field.Label>Email</Field.Label>
+				<Field.Control
+					render={
+						<Input
+							name="email"
+							autoComplete="email"
+							required
+							className="w-full"
+						/>
+					}
+				/>
+			</Field>
+			<Field stretch id="password">
+				<Field.Label>Password</Field.Label>
+				<Field.Control
+					render={
+						<Input
+							autoComplete="current-password"
+							name="password"
+							type="password"
+							required
+							className="w-full"
+						/>
+					}
+				/>
+			</Field>
 			<input type="hidden" name="csrfToken" value={appState?.csrfToken || ''} />
 			<input type="hidden" name="returnTo" value={returnTo} />
 			<input type="hidden" name="appState" value={JSON.stringify(appState)} />

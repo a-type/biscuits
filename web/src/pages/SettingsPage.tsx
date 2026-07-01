@@ -106,9 +106,11 @@ export function PlanPage({}: PlanPageProps) {
 					<Box gap col className={classes.tabsContent}>
 						{justPaid && (
 							<Box
-								surface
+								surface="secondary"
 								color="success"
-								p
+								border
+								elevated="sm"
+								p="sm"
 								gap
 								items="center"
 								className={classes.successBanner}

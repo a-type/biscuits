@@ -100,7 +100,7 @@ export function SubscriptionSetup({ priceKeys }: SubscriptionSetupProps) {
 				<Box col gap>
 					<Suspense fallback={<Spinner />}>
 						{data.plan.subscriptionStatus === 'trialing' && (
-							<Box surface color="accent" p col>
+							<Box surface="secondary" className="@mode-success" p col>
 								<P>
 									Your trial subscription period has begun! Billing will begin
 									on {new Date(data.plan.trialEndsAt || 0).toLocaleDateString()}
@@ -129,7 +129,7 @@ export function SubscriptionSetup({ priceKeys }: SubscriptionSetupProps) {
 		if (data?.plan?.subscriptionStatus === 'trialing') {
 			return (
 				<Box col gap>
-					<Box surface color="accent" p>
+					<Box surface="secondary" className="@mode-success" p>
 						Your trial subscription period has begun! Billing will begin on{' '}
 						{new Date(data.plan.trialEndsAt || 0).toLocaleDateString()}. You can
 						cancel any time before then to avoid payment. We'll send you a
@@ -151,7 +151,7 @@ export function SubscriptionSetup({ priceKeys }: SubscriptionSetupProps) {
 		if (data?.plan?.subscriptionStatus === 'canceled') {
 			return (
 				<Box col gap>
-					<Box surface color="primary">
+					<Box surface="secondary" color="primary">
 						Your subscription was canceled on{' '}
 						{new Date(
 							data.plan.subscriptionCanceledAt ?? Date.now(),

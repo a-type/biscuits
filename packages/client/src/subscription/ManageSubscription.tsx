@@ -77,6 +77,7 @@ export function ManageSubscription({
 						{data.subscriptionStatus}
 						<Button
 							emphasis="ghost"
+							size="small"
 							onClick={() => {
 								refetchStatus({ fetchPolicy: 'network-only' });
 							}}

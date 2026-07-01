@@ -24,7 +24,7 @@ export function ListMenu({ list }: { list: List }) {
 			<DropdownMenuContent>
 				<DropdownMenuArrow />
 				<DropdownMenuItem
-					className="text-red"
+					className="@mode-attention"
 					onClick={() => {
 						client.lists.delete(list.get('id'));
 						navigate('/');

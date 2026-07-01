@@ -19,7 +19,13 @@ export function RouteDialog() {
 						}
 					}}
 				>
-					<DialogContent className="important:(h-90dvh max-h-none) important:sm:(max-w-75dvw)">
+					<DialogContent
+						style={{
+							height: '90dvh',
+							maxHeight: 'none',
+							maxWidth: '75dvw',
+						}}
+					>
 						<Suspense>
 							{match ?
 								<RouteRenderer value={match} params={params} />

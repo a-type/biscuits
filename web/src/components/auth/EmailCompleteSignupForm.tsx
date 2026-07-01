@@ -1,4 +1,4 @@
-import { Box, Button, FieldLabel, Input } from '@a-type/ui';
+import { Box, Button, Field, Input } from '@a-type/ui';
 
 export interface EmailCompleteSignUpFormProps {
 	code: string;
@@ -24,14 +24,20 @@ export function EmailCompleteSignupForm({
 		>
 			<input type="hidden" name="code" value={code} />
 			<input type="hidden" name="email" value={email} />
-			<FieldLabel htmlFor="password">Password</FieldLabel>
-			<Input
-				name="password"
-				type="password"
-				autoComplete="new-password"
-				required
-				className="w-full"
-			/>
+			<Field stretch id="password">
+				<Field.Label>Password</Field.Label>
+				<Field.Control
+					render={
+						<Input
+							name="password"
+							type="password"
+							autoComplete="new-password"
+							required
+							className="w-full"
+						/>
+					}
+				/>
+			</Field>
 			<Button style={{ alignSelf: 'end' }} emphasis="primary" type="submit">
 				Sign In
 			</Button>

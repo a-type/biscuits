@@ -4,9 +4,9 @@ import {
 	clsx,
 	ColorModeToggle,
 	Divider,
-	H1,
-	H2,
+	Heading,
 	Icon,
+	Text,
 } from '@a-type/ui';
 import { Link } from '@verdant-web/react-router';
 import { ReactNode } from 'react';
@@ -53,14 +53,15 @@ export function SettingsPageWrapper({
 				>
 					<Icon name="arrowLeft" />
 				</Button>
-				<H1>Settings</H1>
+				<Heading render={<h1 />} emphasis="primary">
+					Settings
+				</Heading>
 			</Box>
 			<InstallHint content={installPitch || 'Install the app'} />
 			<UpdatePrompt />
 			<ColorModeToggle />
-			<LogoutButton />
 			{!subscribed ?
-				<Box surface col color="accent" p>
+				<Box surface col color="accent">
 					<Box gap items="center">
 						<PromoteSubscriptionButton emphasis="primary">
 							Upgrade your plan
@@ -70,16 +71,19 @@ export function SettingsPageWrapper({
 							<span>Sign in</span>
 						</LoginButton>
 					</Box>
-					<div>
+					<Text emphasis="ambient" dim italic>
 						Sync devices, collaborate with others, and more with a Biscuits
 						subscription.
-					</div>
+					</Text>
 				</Box>
 			:	<ManagePlanButton />}
+			<LogoutButton full="width" emphasis="ghost" color="attention" />
 			<Divider />
 			{children}
 			{children && <Divider />}
-			<H2>Troubleshoot</H2>
+			<Heading render={<h2 />} emphasis="secondary">
+				Troubleshoot
+			</Heading>
 			<ManageStorage />
 			<Box gap>
 				<BugButton />

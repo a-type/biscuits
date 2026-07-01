@@ -2,8 +2,6 @@ import { Link } from '@/components/nav/Link.jsx';
 import { saveHubRecipeOnboarding } from '@/onboarding/saveHubRecipeOnboarding.js';
 import { hooks } from '@/stores/groceries/index.js';
 import {
-	Box,
-	Heading,
 	IconName,
 	NavBarItem,
 	NavBarItemIcon,
@@ -15,6 +13,7 @@ import {
 	withClassName,
 } from '@a-type/ui';
 import { NavBarChangelog, OnboardingTooltip } from '@biscuits/client';
+import { NavLockup } from '@biscuits/client/apps';
 import { useOnLocationChange } from '@verdant-web/react-router';
 import {
 	ReactNode,
@@ -46,22 +45,7 @@ export function NavBar({}: NavBarProps) {
 	return (
 		<PageNav>
 			<Suspense>
-				<Box gap="sm" layout="center center" p="sm" className={cls.heading}>
-					<img
-						src="/android-chrome-192x192.png"
-						style={{
-							height: 30,
-							width: 30,
-						}}
-					/>
-					<Heading
-						render={<h1 />}
-						emphasis="ambient"
-						className={clsx('font-fancy @mode-denser', cls.title)}
-					>
-						Gnocchi
-					</Heading>
-				</Box>
+				<NavLockup />
 				<NavBarRoot>
 					<GroceriesNavBarLink active={matchGroceries} />
 					<PantryNavBarLink active={matchPurchased} />

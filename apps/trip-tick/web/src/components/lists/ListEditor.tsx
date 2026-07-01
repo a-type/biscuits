@@ -1,11 +1,11 @@
 import { firstList } from '@/onboarding/firstList.js';
 import { hooks } from '@/store.js';
 import {
+	Box,
 	Button,
 	CardGrid,
-	H2,
-	Icon,
-	LiveUpdateTextField,
+	EditableText,
+	Heading,
 	toast,
 } from '@a-type/ui';
 import { debounce } from '@a-type/utils';
@@ -33,29 +33,20 @@ export function ListEditor({ list }: ListEditorProps) {
 	);
 
 	return (
-		<div className="flex flex-1 flex-col gap-6">
-			<div className="flex flex-row items-center gap-1">
-				{editName ?
-					<LiveUpdateTextField
+		<Box grow col gap="lg">
+			<Box items="center" gap="xs">
+				<Heading emphasis="primary" render={<h1 />}>
+					<EditableText
+						editing={editName}
+						onEditingChange={setEditName}
 						value={name}
-						onChange={(v) => list.set('name', v)}
-						className="w-full text-xl"
-						autoFocus={editName}
-						onBlur={() => setEditName(false)}
+						onValueChange={(v) => list.set('name', v)}
 						autoSelect
 					/>
-				:	<Button
-						emphasis="ghost"
-						className="text-xl"
-						onClick={() => setEditName(true)}
-					>
-						{name}
-						<Icon className="ml-2" name="pencil" />
-					</Button>
-				}
-			</div>
+				</Heading>
+			</Box>
 			<ListItemsEditor list={list} />
-		</div>
+		</Box>
 	);
 }
 
@@ -71,8 +62,8 @@ function ListItemsEditor({ list }: { list: List }) {
 	hooks.useWatch(items);
 
 	return (
-		<div className="flex flex-1 flex-col gap-4">
-			<H2>Items</H2>
+		<Box col grow gap>
+			<Heading render={<h2 />}>Items</Heading>
 			<CardGrid>
 				{items.map((item) => (
 					<ListEditorItem
@@ -92,7 +83,7 @@ function ListItemsEditor({ list }: { list: List }) {
 				<AddListItemButton list={list} />
 			</OnboardingTooltip>
 			<AddSuggested items={items} />
-		</div>
+		</Box>
 	);
 }
 
@@ -104,7 +95,13 @@ const AddListItemButton = forwardRef<HTMLButtonElement, { list: List }>(
 		return (
 			<Button
 				emphasis="primary"
-				className="sticky bottom-md items-center self-center justify-center"
+				style={{
+					position: 'sticky',
+					bottom: 'var(--m-space)',
+					alignSelf: 'center',
+					alignItems: 'center',
+					justifyContent: 'center',
+				}}
 				onClick={() => {
 					items.push({
 						description: 'New item',

@@ -121,7 +121,7 @@ function PaymentForm({ mode }: { mode: string }) {
 				type="submit"
 				style={{ alignSelf: 'end' }}
 			>
-				Subscribe
+				Complete subscription
 			</Button>
 		</Box>
 	);

@@ -18,7 +18,7 @@ export default function HomePage() {
 			col
 			gap
 			p="sm"
-			rounded={false}
+			round={false}
 			surface="secondary"
 			className={cls.bg}
 		>
@@ -28,7 +28,7 @@ export default function HomePage() {
 				p
 				gap="xl"
 				full="width"
-				rounded
+				round
 				className={cls.main}
 			>
 				<Box

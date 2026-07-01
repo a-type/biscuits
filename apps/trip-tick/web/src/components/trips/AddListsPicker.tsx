@@ -1,8 +1,7 @@
 import { hooks } from '@/store.js';
-import { Button, Icon } from '@a-type/ui';
+import { Box, Button, Icon, Text } from '@a-type/ui';
 import { Trip } from '@trip-tick.biscuits/verdant';
 import { Link } from '@verdant-web/react-router';
-import classNames from 'classnames';
 
 export interface AddListsPickerProps {
 	trip: Trip;
@@ -15,12 +14,7 @@ export function AddListsPicker({ trip, className }: AddListsPickerProps) {
 	const tripLists = hooks.useWatch(trip.get('lists'));
 
 	return (
-		<div
-			className={classNames(
-				'w-full flex flex-row flex-wrap items-center gap-2',
-				className,
-			)}
-		>
+		<Box full="width" wrap items="center" gap="sm" className={className}>
 			{lists.map((list) => {
 				const id = list.get('id');
 				const active = tripLists.includes(id);
@@ -35,27 +29,25 @@ export function AddListsPicker({ trip, className }: AddListsPickerProps) {
 								trip.get('lists').add(list.get('id'));
 							}
 						}}
-						className="gap-4 rounded-md py-4"
+						style={{
+							borderRadius: 'var(--m-radius)',
+						}}
 					>
 						<Icon name={active ? 'check' : 'plus'} />
-						<div className="flex flex-col gap-1 text-start">
-							<span>{list.get('name')}</span>
-							<span className="text-sm color-gray-dark">
+						<Box col gap="xs">
+							<Text>{list.get('name')}</Text>
+							<Text emphasis="ambient" dim>
 								{list.get('items').length} items
-							</span>
-						</div>
+							</Text>
+						</Box>
 					</Button>
 				);
 			})}
 			{!lists.length && (
-				<div className="italic color-gray-dark">
-					You have no lists yet.{' '}
-					<Link to="/lists" className="color-primary-dark">
-						Create one
-					</Link>
-					?
-				</div>
+				<Text italic dim>
+					You have no lists yet. <Link to="/lists">Create one</Link>?
+				</Text>
 			)}
-		</div>
+		</Box>
 	);
 }

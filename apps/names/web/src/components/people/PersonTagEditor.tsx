@@ -5,7 +5,7 @@ import {
 	clsx,
 	Collapsible,
 	Dialog,
-	FieldLabel,
+	Field,
 	Icon,
 	IconName,
 	PaletteName,
@@ -57,12 +57,18 @@ export function PersonTagEditor({ person, className }: PersonTagEditorProps) {
 				</Dialog.Trigger>
 				<Dialog.Content className="flex flex-col">
 					<Suspense>
-						<FieldLabel>Edit tags</FieldLabel>
-						<TagFilter
-							value={tags.getAll()}
-							onToggle={toggleTag}
-							className="mb-md"
-						/>
+						<Field>
+							<Field.Label>Edit tags</Field.Label>
+							<Field.Control
+								render={
+									<TagFilter
+										value={tags.getAll()}
+										onToggle={toggleTag}
+										className="mb-md"
+									/>
+								}
+							/>
+						</Field>
 						<Collapsible className="w-full">
 							<Collapsible.Trigger
 								render={

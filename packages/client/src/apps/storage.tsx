@@ -3,7 +3,7 @@ import {
 	Button,
 	ButtonProps,
 	ConfirmedButton,
-	H2,
+	Heading,
 	Icon,
 	P,
 	toast,
@@ -120,12 +120,15 @@ export function ManageStorage({
 	if (isSubscribed) {
 		return (
 			<Box col gap="sm" items="start" className={className}>
-				<H2>Manage Device Storage</H2>
+				<Heading emphasis="ambient" render={<h3 />}>
+					Manage Device Storage
+				</Heading>
 				<P emphasis="secondary">
 					Your data is synced to Biscuits. If you're experiencing issues, you
 					can try resetting your local device to the server's data.
 				</P>
 				<ConfirmedButton
+					align="start"
 					emphasis="primary"
 					color="attention"
 					confirmText="This will delete your local data and replace it with the server's data. It cannot be undone."
@@ -141,7 +144,9 @@ export function ManageStorage({
 
 	return (
 		<Box col gap="sm" items="start" className={className}>
-			<H2>Manage App Storage</H2>
+			<Heading emphasis="ambient" render={<h3 />}>
+				Manage App Storage
+			</Heading>
 			<P emphasis="secondary">
 				This app stores all data on your device. You can export and import your
 				data, or reset it.

@@ -1,6 +1,17 @@
 import { useTripProgress } from '@/components/trips/hooks.js';
 import { hooks } from '@/store.js';
-import { Button, Card, CardGrid, Chip, Divider, H2, P } from '@a-type/ui';
+import {
+	Box,
+	Button,
+	Card,
+	CardGrid,
+	Chip,
+	Divider,
+	H2,
+	Heading,
+	P,
+	Text,
+} from '@a-type/ui';
 import { Trip } from '@trip-tick.biscuits/verdant';
 import { Link } from '@verdant-web/react-router';
 import { useState } from 'react';
@@ -45,35 +56,39 @@ export function TripsList({}: TripsListProps) {
 
 	if (!trips.length) {
 		return (
-			<div className="col items-stretch">
+			<Box col gap items="stretch">
 				<H2>Trips</H2>
-				<div className="col rounded-lg p-8 bg-primary-wash">
+				<Box col gap items="center" surface="secondary" p="lg">
 					<P>No trips yet</P>
 					<AddTripButton>Plan one</AddTripButton>
-				</div>
-			</div>
+				</Box>
+			</Box>
 		);
 	}
 
 	return (
-		<div className="flex flex-col gap-4">
-			<H2>Trips</H2>
+		<Box col gap>
+			<Heading render={<h2 />} emphasis="secondary">
+				Trips
+			</Heading>
 			{!!future.length ?
-				<CardGrid className="m-0 list-none p-0">
+				<CardGrid>
 					{future.map((trip) => (
 						<TripsListItem key={trip.get('id')} trip={trip} />
 					))}
 				</CardGrid>
-			:	<div className="font-lg flex flex-col items-center justify-center gap-3 p-8 italic color-gray-dark">
-					No upcoming trips.{' '}
+			:	<Box dim col items="center" justify="center" p="lg" gap>
+					<Text italic>No upcoming trips.</Text>
 					<AddTripButton emphasis="default">Plan one</AddTripButton>
-				</div>
+				</Box>
 			}
 			{!!past.length && showPast ?
 				<>
 					<Divider />
-					<H2>Past Trips</H2>
-					<CardGrid className="m-0 list-none p-0">
+					<Heading render={<h2 />} emphasis="secondary">
+						Past Trips
+					</Heading>
+					<CardGrid>
 						{past.map((trip) => (
 							<TripsListItem key={trip.get('id')} trip={trip} />
 						))}
@@ -84,14 +99,14 @@ export function TripsList({}: TripsListProps) {
 				</>
 			: !!past.length ?
 				<Button
-					className="self-center opacity-50"
+					style={{ alignSelf: 'center', opacity: 0.5 }}
 					emphasis="ghost"
 					onClick={() => setShowPast(true)}
 				>
 					Show past trips
 				</Button>
 			:	null}
-		</div>
+		</Box>
 	);
 }
 
@@ -112,27 +127,32 @@ function TripsListItem({ trip }: { trip: Trip }) {
 	return (
 		<Card>
 			<Card.Main
-				compact={!!isPast}
-				render={
-					<Link to={`/trips/${trip.get('id')}`} className="relative bg-white" />
-				}
+				size={isPast ? 'sm' : 'md'}
+				render={<Link to={`/trips/${trip.get('id')}`} />}
 			>
-				<Card.Title className="relative z-1">{name}</Card.Title>
-				<div className="relative z-1 flex flex-row flex-wrap gap-1 px-2 text-xs">
-					{locationName && <Chip className="bg-white">{locationName}</Chip>}
-					<Chip className="bg-white">
+				<Card.Title style={{ position: 'relative', zIndex: 1 }}>
+					{name}
+				</Card.Title>
+				<Box style={{ zIndex: 1 }} wrap gap="sm" p="md" className="@mode-dense">
+					{locationName && <Chip>{locationName}</Chip>}
+					<Chip>
 						{startsAt ? new Date(startsAt).toLocaleDateString() : 'Unscheduled'}
 					</Chip>
 					{!isPast && (
-						<Chip className="bg-white">
+						<Chip>
 							{completedItems} / {totalItems} items
 						</Chip>
 					)}
-				</div>
+				</Box>
 				{!isPast && (
-					<div
-						className="absolute bottom-0 left-0 top-0 bg-accent-wash"
+					<Box
+						surface="secondary"
+						className="@mode-success"
 						style={{
+							position: 'absolute',
+							bottom: 0,
+							left: 0,
+							top: 0,
 							width: `${completion * 100}%`,
 						}}
 					/>

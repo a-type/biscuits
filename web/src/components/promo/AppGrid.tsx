@@ -16,13 +16,19 @@ export function AppGrid({ className }: AppGridProps) {
 						render={<Link to={getAppUrl(app)} />}
 						className={classes.cardMain}
 					>
-						<h3 className={classes.name}>{app.name}</h3>
+						<Card.Title
+							className={clsx(classes.name, '@mode-heading font-fancy')}
+						>
+							{app.name}
+						</Card.Title>
 						<img
 							src={`${app.url}/${app.iconPath}`}
 							alt=""
 							className={classes.appIcon}
 						/>
-						<div className={classes.description}>{app.description}</div>
+						<Card.Content unstyled className={classes.description}>
+							{app.description}
+						</Card.Content>
 						<Icon name="new_window" className={classes.externalIcon} />
 					</Card.Main>
 				</Card>

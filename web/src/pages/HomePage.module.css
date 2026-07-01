@@ -1,8 +1,8 @@
 .bg {
 	@apply --mx-bg(
 		--fn-color-lighter(
-		--fn-color-desaturated(var(--m-color-main), 25),
-		0.1)
+		--fn-color-desaturated(var(--m-color-main), 2),
+		1)
 	);
 }
 
@@ -19,18 +19,13 @@
 
 .navFixed {
 	display: flex;
-	flex-direction: column;
-	justify-content: stretch;
-	align-items: center;
+	flex-direction: row;
 	padding-block: var(--m-space-sm);
 	width: 100%;
 	@apply --mx-bg(transparent);
 
-	@media (min-width: 600px) {
-		flex-direction: row;
-		align-items: center;
-		justify-content: space-between;
-	}
+	align-items: center;
+	justify-content: space-between;
 
 	@media (min-width: 1200px) {
 		max-width: 800px;

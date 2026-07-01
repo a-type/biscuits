@@ -1,7 +1,7 @@
 import { ListEditor } from '@/components/lists/ListEditor.jsx';
 import { ListMenu } from '@/components/lists/ListMenu.jsx';
 import { hooks } from '@/store.js';
-import { Button, Icon, PageContent, PageFixedArea } from '@a-type/ui';
+import { Box, Button, Icon, PageContent, PageFixedArea } from '@a-type/ui';
 import { usePageTitle } from '@biscuits/client';
 import { AutoRestoreScroll, Link, useParams } from '@verdant-web/react-router';
 import { Suspense } from 'react';
@@ -32,13 +32,21 @@ function ListPageEditor({ listId }: { listId: string }) {
 
 	return (
 		<PageContent p="none">
-			<PageFixedArea className="w-full justify-between py-3 !row">
-				<Button render={<Link to="/" />} emphasis="ghost">
+			<Box
+				full="width"
+				justify="between"
+				gap
+				render={<PageFixedArea style={{ flexDirection: 'row' }} />}
+			>
+				<Button
+					render={<Link to="/" />}
+					aria-label="Back to lists"
+					emphasis="ghost"
+				>
 					<Icon name="arrowLeft" />
-					<span className="sr-only">Back to lists</span>
 				</Button>
 				<ListMenu list={list} />
-			</PageFixedArea>
+			</Box>
 			<ListEditor list={list} />
 		</PageContent>
 	);

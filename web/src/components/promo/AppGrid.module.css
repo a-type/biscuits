@@ -3,6 +3,7 @@
 	grid-template-columns: 1fr;
 	gap: var(--m-space-lg);
 	width: 100%;
+	max-width: 1000px;
 
 	@media (min-width: 640px) {
 		grid-template-columns: repeat(2, 1fr);
@@ -25,8 +26,10 @@
 .name {
 	grid-area: name;
 	margin: 0;
-	font-size: var(--m-text-size-lg);
+	font-size: var(--m-text-size);
 	font-weight: var(--m-text-weight-bold);
+	background: transparent;
+	font-family: Henrietta, 'Noto Serif', serif;
 }
 
 .appIcon {
@@ -38,6 +41,7 @@
 .description {
 	grid-area: description;
 	font-size: var(--m-text-size-sm);
+	padding: var(--m-space-md) !important;
 	@apply --mx-fg(var(--m-color-neutral-ink));
 }
 
