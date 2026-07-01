@@ -54,14 +54,13 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 		return (
 			<Card
 				ref={ref}
-				className={clsx(
-					prioritized ? 'min-h-200px sm:min-h-250px'
-					: imageFiles.length ? 'min-h-300px'
-					: '',
-					`palette-${typeThemes[type]}`,
-					'bg-main-wash',
-					className,
-				)}
+				className={clsx(`@mode-${typeThemes[type]}`, 'bg-main-wash', className)}
+				style={{
+					minHeight:
+						imageFiles.length ? 300
+						: prioritized ? 200
+						: undefined,
+				}}
 				data-span={prioritized ? 2 : 1}
 				{...rest}
 			>
@@ -77,22 +76,12 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 						}
 					</Card.Image>
 				)}
-				<Card.Main className="col items-start" onClick={() => editItem(id)}>
-					<Card.Content unstyled className="pl-1 pt-2">
+				<Card.Main size="lg" onClick={() => editItem(id)}>
+					<Card.Content unstyled>
 						<ItemTypeChip item={item} />
 					</Card.Content>
-					{prompt && <Card.Content unstyled={!hasImage}>{prompt}</Card.Content>}
-					<Card.Content
-						unstyled
-						className={clsx(
-							'p-1 font-bold',
-							hasImage ?
-								'px-md text-xl text-[white] bg-[rgba(0,0,0,0.5)]'
-							:	'text-lg color-main-dark',
-						)}
-					>
-						<span>{description}</span>
-					</Card.Content>
+					{prompt && <Card.Content>{prompt}</Card.Content>}
+					<Card.Title>{description}</Card.Title>
 					{price && <Card.Content className="text-md">{price}</Card.Content>}
 					<Card.Content unstyled>
 						{lastPurchasedAt && (
@@ -103,9 +92,14 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 						<ItemOldBadge item={item} />
 					</Card.Content>
 				</Card.Main>
-				<ItemStar item={item} className="absolute right-1 top-1 z-1" />
-				<Card.Footer className="items-center justify-between">
-					<Card.Actions className="ml-auto mr-0">
+				<ItemStar
+					item={item}
+					style={{ position: 'absolute', right: 4, top: 4, zIndex: 1 }}
+				/>
+				<Card.Footer
+					style={{ alignItems: 'center', justifyContent: 'space-between' }}
+				>
+					<Card.Actions style={{ marginLeft: 'auto', marginRight: 0 }}>
 						{type === 'idea' ||
 							(type === 'link' && !link && <SearchButton item={item} />)}
 						{link && (

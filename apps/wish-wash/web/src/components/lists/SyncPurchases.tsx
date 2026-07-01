@@ -1,5 +1,5 @@
 import { hooks } from '@/hooks.js';
-import { Box, Button } from '@a-type/ui';
+import { Box, Button, Text } from '@a-type/ui';
 import { useHasServerAccess } from '@biscuits/client';
 import { graphql, useMutation, useQuery } from '@biscuits/graphql';
 import { List } from '@wish-wash.biscuits/verdant';
@@ -56,11 +56,13 @@ export function SyncPurchases({ className, list }: SyncPurchasesProps) {
 
 	return (
 		<Box col gap items="start" surface color="accent" p className={className}>
-			<span className="text-lg font-bold">Good things coming...</span>
-			<span>
+			<Text emphasis="primary" bold>
+				Good things coming...
+			</Text>
+			<Text>
 				Some of your items have been purchased by others. We don't want to spoil
 				the surprise... Click the button to reveal them when you're ready!
-			</span>
+			</Text>
 			<Button
 				onClick={async () => {
 					await client

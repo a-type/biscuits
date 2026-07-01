@@ -35,7 +35,7 @@ export function GnocchiPage() {
 	});
 
 	return (
-		<Root className="theme-lemon">
+		<Root className="@mode-lemon">
 			<Background>
 				<Suspense>{/* <Scene /> */}</Suspense>
 			</Background>

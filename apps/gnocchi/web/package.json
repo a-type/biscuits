@@ -80,7 +80,6 @@
 		"workbox-window": "^6.5.4"
 	},
 	"devDependencies": {
-		"@biscuits/uno-config": "workspace:*",
 		"@originjs/vite-plugin-commonjs": "^1.0.3",
 		"@types/convert-units": "^2.3.5",
 		"@types/dom-screen-wake-lock": "^1.0.0",

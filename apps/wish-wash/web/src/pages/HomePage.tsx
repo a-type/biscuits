@@ -21,8 +21,9 @@ export function HomePage({}: HomePageProps) {
 	return (
 		<PageRoot>
 			<PageContent>
-				<PageFixedArea className="items-end">
+				<PageFixedArea>
 					<UserMenu
+						style={{ alignSelf: 'end' }}
 						extraItems={
 							<Suspense>
 								<ListMenuExtraItems />
@@ -31,11 +32,8 @@ export function HomePage({}: HomePageProps) {
 					/>
 				</PageFixedArea>
 				<ListsList />
-				<PageNowPlaying unstyled>
-					<CreateListButton
-						className="self-center shadow-lg"
-						emphasis="primary"
-					/>
+				<PageNowPlaying>
+					<CreateListButton align="center" emphasis="primary" />
 				</PageNowPlaying>
 			</PageContent>
 		</PageRoot>

@@ -82,6 +82,7 @@
 		"chat.tools.terminal.autoApprove": {
 			"npx arbor": true,
 		},
+		"js/ts.tsdk.path": "📄 Configs/node_modules/typescript/lib",
 	},
 	"extensions": {
 		"recommendations": ["antfu.pnpm-catalog-lens"],

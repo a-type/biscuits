@@ -65,7 +65,7 @@ export function ItemCard({
 		<Card
 			className={clsx(
 				className,
-				`palette-${typeThemes[item.type]}`,
+				`@mode-${typeThemes[item.type]}`,
 				'color-main-ink bg-main-wash',
 				boughtAll && 'opacity-50',
 				item.prioritized && !boughtAll && 'min-h-200px sm:min-h-250px',

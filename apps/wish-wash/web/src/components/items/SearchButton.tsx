@@ -1,4 +1,5 @@
 import {
+	Box,
 	Button,
 	Icon,
 	Select,
@@ -50,9 +51,14 @@ export function SearchButton({ item }: SearchButtonProps) {
 	);
 
 	return (
-		<div className="flex flex-row">
+		<Box>
 			<Button
-				className="relative z-1 rounded-r-none"
+				style={{
+					borderTopRightRadius: 0,
+					borderBottomRightRadius: 0,
+					zIndex: 1,
+					position: 'relative',
+				}}
 				size="small"
 				render={
 					<Link
@@ -72,7 +78,10 @@ export function SearchButton({ item }: SearchButtonProps) {
 				onValueChange={(v) => (v ? setSelectedProvider(v) : undefined)}
 			>
 				<SelectTrigger
-					className="rounded-l-none border-l-none !gap-0"
+					style={{
+						borderTopLeftRadius: 0,
+						borderBottomLeftRadius: 0,
+					}}
 					size="small"
 				>
 					<SelectValue>{null}</SelectValue>
@@ -86,6 +95,6 @@ export function SearchButton({ item }: SearchButtonProps) {
 					))}
 				</SelectContent>
 			</Select>
-		</div>
+		</Box>
 	);
 }

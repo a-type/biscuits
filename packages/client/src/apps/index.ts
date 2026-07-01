@@ -2,6 +2,7 @@ export * from './AppIcon.js';
 export * from './DeveloperErrorDialog.js';
 export * from './EntityDeleteButton.js';
 export * from './Essentials.js';
+export * from './GlobalErrorFallback.js';
 export * from './InstallButton.js';
 export * from './InstallHint.js';
 export * from './NavLockup.js';

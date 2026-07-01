@@ -51,7 +51,7 @@ function ListsListItem({ item }: { item: List }) {
 	return (
 		<Card>
 			<Card.Main render={<Link to={`/${id}`} />}>
-				<CardTitle className="flex-row items-center gap-2">
+				<CardTitle>
 					<Icon name={item.isAuthorized ? 'lock' : 'add_person'} /> {name}
 				</CardTitle>
 			</Card.Main>
@@ -102,7 +102,7 @@ function ListMenu({ list }: { list: List }) {
 							</div>,
 						);
 					}}
-					color="attention"
+					className="@mode-attention"
 				>
 					Delete list
 					<DropdownMenuItemRightSlot>

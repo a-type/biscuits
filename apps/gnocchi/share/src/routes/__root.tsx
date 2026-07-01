@@ -61,7 +61,7 @@ export const Route = createRootRouteWithContext<{
 
 function RootDocument({ children }: { children: React.ReactNode }) {
 	return (
-		<html className="theme-lemon">
+		<html className="@mode-lemon">
 			<head>
 				<HeadContent />
 			</head>

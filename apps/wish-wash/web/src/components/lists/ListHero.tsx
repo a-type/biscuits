@@ -7,6 +7,7 @@ import {
 	H3,
 	Icon,
 	ImageUploader,
+	Img,
 	LiveUpdateTextField,
 } from '@a-type/ui';
 import { List } from '@wish-wash.biscuits/verdant';
@@ -33,18 +34,21 @@ export function ListHero({ list, className }: ListHeroProps) {
 	return (
 		<Box col items="start" className={className}>
 			{coverImage?.url && (
-				<img
+				<Img
+					full="width"
+					fit="cover"
+					style={{
+						height: '20vh',
+						borderRadius: 'var(--m-radius-lg)',
+					}}
 					src={coverImage.url}
-					className="h-[20vh] w-full rounded-lg object-cover"
 				/>
 			)}
 			<Box items="center">
 				<Dialog>
 					<Icon name={list.isAuthorized ? 'lock' : 'add_person'} />
 					<Dialog.Trigger
-						render={
-							<Button emphasis="ghost" className="gap-md text-xl font-bold" />
-						}
+						render={<Button emphasis="ghost" className="@mode-loose" />}
 					>
 						{name}
 						<Icon name="gear" />
@@ -56,7 +60,7 @@ export function ListHero({ list, className }: ListHeroProps) {
 						</Dialog.Description>
 						<Box col gap>
 							<ImageUploader
-								className="aspect-16/8 w-full"
+								style={{ width: '100%', aspectRatio: '16/8' }}
 								value={coverImage?.url ?? null}
 								onChange={(v) => list.set('coverImage', v)}
 							/>

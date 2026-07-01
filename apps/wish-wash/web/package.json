@@ -46,7 +46,6 @@
 		"workbox-window": "catalog:"
 	},
 	"devDependencies": {
-		"@biscuits/uno-config": "workspace:*",
 		"@originjs/vite-plugin-commonjs": "1.0.3",
 		"@vite-pwa/assets-generator": "catalog:",
 		"vite-plugin-circular-dependency": "^0.2.1"

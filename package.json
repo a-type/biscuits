@@ -35,8 +35,7 @@
 		"prettier": "3.4.2",
 		"turbo": "^2.3.3",
 		"typescript": "catalog:",
-		"typescript-eslint": "catalog:",
-		"@biscuits/uno-config": "workspace:*"
+		"typescript-eslint": "catalog:"
 	},
 	"volta": {
 		"node": "22.12.0"

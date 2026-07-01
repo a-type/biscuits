@@ -1,5 +1,5 @@
 import { useEditItem } from '@/components/items/hooks.js';
-import { Box, Button, clsx, Icon, Input } from '@a-type/ui';
+import { Box, Button, Icon, Input, PageNowPlaying } from '@a-type/ui';
 import { List } from '@wish-wash.biscuits/verdant';
 import { useState } from 'react';
 import { addToList } from './util.js';
@@ -32,21 +32,24 @@ export function AddBar({ className, list }: AddBarProps) {
 			elevated="lg"
 			border
 			layout="center stretch"
-			className={clsx('z-now-playing rounded-full', className)}
+			round="lg"
+			className={className}
 			render={
-				<form
-					onSubmit={(ev) => {
-						ev.preventDefault();
-						const isUrl = URL.canParse(value);
-						const itemId = addToList(list, {
-							type: isUrl ? 'link' : 'idea',
-							links: isUrl ? [value] : undefined,
-							description: isUrl ? undefined : value,
-						});
-						open(itemId);
-						setValue('');
-					}}
-				/>
+				<PageNowPlaying>
+					<form
+						onSubmit={(ev) => {
+							ev.preventDefault();
+							const isUrl = URL.canParse(value);
+							const itemId = addToList(list, {
+								type: isUrl ? 'link' : 'idea',
+								links: isUrl ? [value] : undefined,
+								description: isUrl ? undefined : value,
+							});
+							open(itemId);
+							setValue('');
+						}}
+					/>
+				</PageNowPlaying>
 			}
 		>
 			<Input

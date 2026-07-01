@@ -1,5 +1,6 @@
 import { hooks } from '@/hooks.js';
 import {
+	Box,
 	Card,
 	CardContent,
 	CardGrid,
@@ -19,7 +20,13 @@ import {
 	WishlistOnboarding,
 } from '@wish-wash.biscuits/common';
 import { List } from '@wish-wash.biscuits/verdant';
-import { ReactNode, Suspense, useCallback, useState } from 'react';
+import {
+	CSSProperties,
+	ReactNode,
+	Suspense,
+	useCallback,
+	useState,
+} from 'react';
 import { ItemEditDialog } from '../items/ItemEditDialog.jsx';
 import { ListItem } from '../items/ListItem.jsx';
 import { ItemSorter } from './ItemSorter.jsx';
@@ -28,6 +35,7 @@ import { AddBar } from './add/AddBar.jsx';
 export interface ListViewProps {
 	list: List;
 	className?: string;
+	style?: CSSProperties;
 }
 
 function useListOnboardingProps(list: List, onDone?: () => void) {
@@ -56,7 +64,7 @@ function useListOnboardingProps(list: List, onDone?: () => void) {
 	};
 }
 
-export function ListView({ list, className }: ListViewProps) {
+export function ListView({ list, className, style }: ListViewProps) {
 	const { items, type, completedQuestions } = hooks.useWatch(list);
 	hooks.useWatch(items);
 	hooks.useWatch(completedQuestions);
@@ -67,41 +75,48 @@ export function ListView({ list, className }: ListViewProps) {
 
 	if (needsOnboarding) {
 		return (
-			<div className="flex flex-col items-stretch gap-4">
-				<div className="mx-auto max-w-800px w-full rounded-lg p-4 bg-primary-wash">
+			<Box col items="stretch" gap style={style}>
+				<Box
+					surface="secondary"
+					full="width"
+					style={{
+						marginInline: 'auto',
+						maxWidth: '800px',
+					}}
+				>
 					<H2>Welcome to your wishlist!</H2>
 					<P>Let's get your wish list started with some ideas.</P>
 					<WishlistOnboarding
 						{...onboardingProps}
 						thanksText="That'll get your list started. Now add more ideas!"
 					/>
-				</div>
-			</div>
+				</Box>
+			</Box>
 		);
 	}
 
 	return (
-		<div className={clsx('col items-stretch gap-4', className)}>
-			<AddBar
-				list={list}
-				className="fixed bottom-sm center-x left-1/2 z-now-playing"
-			/>
-			<div className="row items-stretch">
-				<div className="flex-1">
-					<CardGrid columns={cardGridColumns.small} className="z-0 flex-1">
+		<Box col gap items="stretch" className={className} style={style}>
+			<AddBar list={list} />
+			<Box items="stretch" gap full="width">
+				<Box grow>
+					<CardGrid
+						columns={cardGridColumns.small}
+						style={{ zIndex: 0, flex: 1, width: '100%' }}
+					>
 						{items.map((item) => (
 							<ListItem item={item} key={item.get('id')} />
 						))}
 						{items.length === 0 && <TutorialCards />}
 						{items.length > 0 && <KeepAnsweringQuestionsCard list={list} />}
 					</CardGrid>
-				</div>
+				</Box>
 				<ItemSorter list={list} />
-			</div>
+			</Box>
 			<Suspense>
 				<ItemEditDialog list={list} />
 			</Suspense>
-		</div>
+		</Box>
 	);
 }
 
@@ -147,19 +162,16 @@ function TutorialCard({
 	icon: IconName;
 }) {
 	return (
-		<Card className={clsx(`palette-${theme}`, 'color-main-dark bg-main-wash')}>
-			<CardMain>
-				<CardContent
-					unstyled
-					className="flex flex-row items-center gap-3 p-3 text-lg font-bold"
-				>
-					<Icon className="[stroke-width:0.3] h-[30px] w-[30px]" name={icon} />
+		<Card className={clsx(`@mode-${theme}`, 'color-main-dark bg-main-wash')}>
+			<Card.Main>
+				<Card.Title>
+					<Icon size={30} name={icon} />
 					{title}
-				</CardContent>
-				<CardContent unstyled className="p-2">
-					{children}
-				</CardContent>
-			</CardMain>
+				</Card.Title>
+				<Card.Content unstyled>
+					<Box p>{children}</Box>
+				</Card.Content>
+			</Card.Main>
 		</Card>
 	);
 }
@@ -179,9 +191,7 @@ function KeepAnsweringQuestionsCard({ list }: { list: List }) {
 		<Dialog open={open} onOpenChange={setOpen}>
 			<Card>
 				<Dialog.Trigger render={<Card.Main />}>
-					<Card.Content unstyled className="p-sm text-sm">
-						Improve your list with more ideas
-					</Card.Content>
+					<Card.Content>Improve your list with more ideas</Card.Content>
 				</Dialog.Trigger>
 			</Card>
 			<Dialog.Content>

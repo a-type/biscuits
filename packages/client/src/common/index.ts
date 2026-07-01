@@ -10,6 +10,7 @@ export * from './Explainer.js';
 export * from './FeatureFlag.js';
 export * from './gates.js';
 export * from './InfrequentSubscriptionHint.js';
+export * from './Link.js';
 export * from './LoginButton.js';
 export * from './LogoutButton.js';
 export * from './LogoutNotice.js';

@@ -31,6 +31,7 @@ export interface UserMenuProps {
 	disableAppSettings?: boolean;
 	children?: ReactNode;
 	extraItems?: ReactNode;
+	style?: React.CSSProperties;
 }
 
 export function UserMenu({
@@ -38,6 +39,7 @@ export function UserMenu({
 	disableAppSettings,
 	children,
 	extraItems,
+	style,
 }: UserMenuProps) {
 	const [isLoggedIn, loading] = useIsLoggedIn();
 	const isOffline = useIsOffline();
@@ -53,7 +55,7 @@ export function UserMenu({
 	};
 
 	return (
-		<Box items="center" gap="sm" className={className}>
+		<Box items="center" gap="sm" className={className} style={style}>
 			<SmallUpdatePrompt />
 			<DropdownMenu>
 				<DropdownMenu.Trigger

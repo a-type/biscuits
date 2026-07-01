@@ -53,11 +53,7 @@ export function ShareTargetListPicker({}: ShareTargetListPickerProps) {
 					onValueChange={(v) => (v ? doAdd(v as string) : null)}
 				>
 					{lists.map((list) => (
-						<DialogSelectItem
-							value={list.get('id')}
-							key={list.get('id')}
-							className="[&>span]:(flex flex-row items-center gap-md)"
-						>
+						<DialogSelectItem value={list.get('id')} key={list.get('id')}>
 							<Icon name={list.isAuthorized ? 'lock' : 'add_person'} />
 							{list.get('name')}
 						</DialogSelectItem>

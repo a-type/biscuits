@@ -41,7 +41,6 @@
 		"motion": "catalog:"
 	},
 	"devDependencies": {
-		"@biscuits/uno-config": "workspace:*",
 		"@vite-pwa/assets-generator": "catalog:"
 	}
 }

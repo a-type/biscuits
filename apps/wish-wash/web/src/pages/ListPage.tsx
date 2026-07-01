@@ -51,7 +51,15 @@ function ListPageContent({ list }: { list: List }) {
 				gap
 				justify="between"
 				items="center"
-				className="sticky top-0 z-nav max-w-800px w-full py-sm bg-wash"
+				full="width"
+				p="sm"
+				surface
+				style={{
+					position: 'sticky',
+					top: 0,
+					zIndex: 100,
+					maxWidth: '800px',
+				}}
 			>
 				<Button emphasis="ghost" render={<Link to="/" />}>
 					<Icon name="arrowLeft" />
@@ -59,12 +67,26 @@ function ListPageContent({ list }: { list: List }) {
 				</Button>
 				<UserMenu />
 			</Box>
-			<Box col gap className="max-w-800px w-full">
+			<Box col gap full="width" style={{ maxWidth: '800px' }}>
 				<ListHero list={list} />
 				<SyncPurchases list={list} />
-				<ListActions className="sticky top-0 z-10" list={list} />
+				<ListActions
+					style={{
+						position: 'sticky',
+						top: 0,
+						zIndex: 10,
+					}}
+					list={list}
+				/>
 			</Box>
-			<ListView list={list} className="max-w-1280px w-full pb-[200px]" />
+			<ListView
+				list={list}
+				style={{
+					maxWidth: '1280px',
+					width: '100%',
+					paddingBottom: '200px',
+				}}
+			/>
 		</Box>
 	);
 }

@@ -3,7 +3,6 @@ import {
 	ActionButtonProps,
 	Box,
 	Button,
-	clsx,
 	Dialog,
 	Divider,
 	H3,
@@ -61,7 +60,8 @@ export function ListPublishAction({
 				emphasis="light"
 				color="accent"
 				{...rest}
-				className={clsx('self-start', className)}
+				align="start"
+				className={className}
 				onClick={() => (upsellState.show = true)}
 			>
 				<Icon name="send" />
@@ -77,8 +77,9 @@ export function ListPublishAction({
 					<ActionButton
 						emphasis={outOfDate ? 'light' : 'default'}
 						color="accent"
+						align="start"
 						{...rest}
-						className={clsx('self-start', className)}
+						className={className}
 					/>
 				}
 			>
@@ -176,14 +177,14 @@ function ManagePublishedList({
 		<>
 			<Dialog.Title>Manage sharing</Dialog.Title>
 			<Box col gap="sm">
-				<P className="mb-2">
+				<P>
 					Your list is currently public on the internet. You can unpublish it at
 					any time.
 				</P>
 				<Button
 					emphasis="light"
 					color="accent"
-					className="self-start"
+					align="start"
 					render={<Link to={url} newTab />}
 				>
 					View your list <Icon name="new_window" />
@@ -201,12 +202,12 @@ function ManagePublishedList({
 							Republish
 						</Button>
 					</Box>
-				:	<Box surface="white" gap col items="end" p>
+				:	<Box surface="ambient" gap col items="end" p>
 						This list was published on {format(publishedDate, 'PPp')} and should
 						be up to date. But you can still republish it if there's a problem.
 						<Button
 							emphasis="default"
-							className="self-start"
+							align="start"
 							onClick={() => doRepublish()}
 							loading={republishLoading}
 						>

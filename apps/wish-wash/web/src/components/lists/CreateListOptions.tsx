@@ -1,5 +1,6 @@
 import { hooks } from '@/hooks.js';
 import {
+	Box,
 	Button,
 	Card,
 	FormikForm,
@@ -11,6 +12,7 @@ import { useHasServerAccess } from '@biscuits/client';
 import { useNavigate } from '@verdant-web/react-router';
 import { authorization, List, ListInit } from '@wish-wash.biscuits/verdant';
 import { useState } from 'react';
+import cls from './CreateListOptions.module.css';
 
 export interface CreateListOptionsProps {
 	onCreated?: (list: List) => void;
@@ -60,7 +62,7 @@ export function CreateListOptions({
 							required
 							className="w-full"
 						/>
-						<div className="w-full row justify-between">
+						<Box className="w-full row justify-between">
 							<Button type="button" onClick={() => setStage('type')}>
 								<Icon name="arrowLeft" />
 								Back
@@ -68,11 +70,11 @@ export function CreateListOptions({
 							<Button emphasis="primary" type="submit">
 								Create
 							</Button>
-						</div>
+						</Box>
 					</FormikForm>
 				</>
 			:	<>
-					<div className="grid grid-cols-2 items-stretch justify-stretch gap-3">
+					<Box className={cls.grid}>
 						{canSync && (
 							<Card className="h-full">
 								<Card.Main
@@ -130,14 +132,11 @@ export function CreateListOptions({
 								</Card.Content>
 							</Card.Main>
 						</Card>
-					</div>
+					</Box>
 				</>
 			}
 		</>
 	);
 }
 
-const PremiumBadge = withClassName(
-	'div',
-	'text-xs font-bold color-accent-dark bg-accent-wash rounded-full py-1 px-4 border-accent-dark border-1 border-solid',
-);
+const PremiumBadge = withClassName('div', cls.premiumBadge);

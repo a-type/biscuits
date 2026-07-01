@@ -1,8 +1,8 @@
-import { IconName, PaletteName } from '@a-type/ui';
+import { IconName } from '@a-type/ui';
 
 type ItemType = 'idea' | 'link' | 'vibe';
 
-export const typeThemes: Record<ItemType, PaletteName> = {
+export const typeThemes: Record<ItemType, string> = {
 	idea: 'lemon',
 	link: 'leek',
 	vibe: 'eggplant',

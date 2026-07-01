@@ -1,4 +1,13 @@
-import { Button, H1, H2, Icon, P, PageContent, PageRoot } from '@a-type/ui';
+import {
+	Box,
+	Button,
+	H1,
+	H2,
+	Icon,
+	P,
+	PageContent,
+	PageRoot,
+} from '@a-type/ui';
 import { CONFIG } from '@biscuits/client';
 import {
 	StartingPrice,
@@ -12,14 +21,14 @@ export function BuyYearlyPage({}: BuyYearlyPageProps) {
 	return (
 		<PageRoot>
 			<PageContent>
-				<div className="m-auto flex flex-col gap-4">
+				<Box col gap style={{ margin: 'auto' }}>
 					<H1 className="font-fancy font-medium">Finish your subscription</H1>
 					<P>
 						You're about to get device sync and list sharing for a full year.
 					</P>
 					<MemberUpsell />
 					<YearlyPaymentForm />
-				</div>
+				</Box>
 			</PageContent>
 		</PageRoot>
 	);
@@ -29,7 +38,7 @@ export default BuyYearlyPage;
 
 function MemberUpsell() {
 	return (
-		<div className="col items-start border-1 rounded-lg border-solid p-3 bg-accent-wash border-accent-dark">
+		<Box col gap items="start" surface="secondary" color="accent">
 			<H2>
 				<Icon name="lightbulb" /> Or, get all our apps
 			</H2>
@@ -49,7 +58,7 @@ function MemberUpsell() {
 			>
 				Learn more
 			</Button>
-		</div>
+		</Box>
 	);
 }
 

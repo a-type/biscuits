@@ -167,7 +167,7 @@ export function RecipeOverview({ recipe }: RecipeOverviewProps) {
 									<Suspense>
 										<RecipeTagsEditor
 											recipe={recipe}
-											className="palette-primary"
+											className="@mode-primary"
 										/>
 									</Suspense>
 								</Box>

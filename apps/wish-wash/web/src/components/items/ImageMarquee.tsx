@@ -29,7 +29,7 @@ function ImageMarqueeItem({ image }: { image: EntityFile }) {
 				<img
 					src={image.url ?? ''}
 					alt={image.name ?? undefined}
-					className="object-cover"
+					style={{ objectFit: 'cover' }}
 				/>
 			}
 		/>
