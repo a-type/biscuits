@@ -1,12 +1,12 @@
 import { hooks } from '@/hooks.js';
-import { clsx, H3 } from '@a-type/ui';
+import { basicsOnboarding } from '@/onboarding/basics.js';
+import { Box, H3, Text } from '@a-type/ui';
+import { OnboardingTooltip } from '@biscuits/client';
 import { Project } from '@palette.biscuits/verdant';
 import { useColorSelection, useSort } from './hooks.js';
 // @ts-ignore
-import { basicsOnboarding } from '@/onboarding/basics.js';
-import { OnboardingTooltip } from '@biscuits/client';
-// @ts-ignore
 import { Color } from '@dynamize/color-utilities';
+import cls from './ProjectPalette.module.css';
 
 export interface ProjectPaletteProps {
 	project: Project;
@@ -37,7 +37,7 @@ export function ProjectPalette({ project, className }: ProjectPaletteProps) {
 	const [selectedId, selectId] = useColorSelection();
 
 	return (
-		<div className={clsx('m-1 flex flex-col items-stretch', className)}>
+		<Box col items="stretch" p="xs" className={className}>
 			<OnboardingTooltip
 				onboarding={basicsOnboarding}
 				step="palette"
@@ -46,15 +46,12 @@ export function ProjectPalette({ project, className }: ProjectPaletteProps) {
 				<H3>Saved Colors</H3>
 			</OnboardingTooltip>
 			{!sorted.length && (
-				<span className="m-auto text-xs italic color-gray-dark">
+				<Text emphasis="ambient" italic dim style={{ margin: 'auto' }}>
 					Click the image to select colors
-				</span>
+				</Text>
 			)}
 			<div
-				className={clsx(
-					'grid grid-cols-6 content-start items-start justify-start gap-1',
-					'md:grid-cols-4',
-				)}
+				className={cls.grid}
 				onClick={() => {
 					selectId(null);
 				}}
@@ -62,10 +59,8 @@ export function ProjectPalette({ project, className }: ProjectPaletteProps) {
 				{sorted.map((color, i) => (
 					<button
 						key={i}
-						className={clsx(
-							'[border-image:none] aspect-1 appearance-none rounded border-solid p-0',
-							selectedId === color.id ? 'border-2 border-black' : 'border-0',
-						)}
+						className={cls.item}
+						data-selected={selectedId === color.id}
 						onClick={(ev) => {
 							selectId(color.id);
 							ev.stopPropagation();
@@ -76,6 +71,6 @@ export function ProjectPalette({ project, className }: ProjectPaletteProps) {
 					/>
 				))}
 			</div>
-		</div>
+		</Box>
 	);
 }

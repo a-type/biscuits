@@ -1,9 +1,9 @@
-// @ts-ignore
 import { basicsOnboarding } from '@/onboarding/basics.js';
-import { clsx, useBoundsCssVars } from '@a-type/ui';
+import { Box, clsx, useBoundsCssVars } from '@a-type/ui';
 import { OnboardingTooltip } from '@biscuits/client';
 // @ts-ignore
 import { Color } from '@dynamize/color-utilities';
+import cls from './ColorBreakdown.module.css';
 
 export interface ColorBreakdownProps {
 	color: { r: number; g: number; b: number };
@@ -32,7 +32,7 @@ export function ColorBreakdown({ color, className }: ColorBreakdownProps) {
 			step="color"
 			content="This section shows the selected color and mixing helpers."
 		>
-			<div className={clsx('flex flex-row justify-around gap-3', className)}>
+			<Box justify="around" gap className={className}>
 				<PieChart
 					segments={[
 						{
@@ -52,16 +52,16 @@ export function ColorBreakdown({ color, className }: ColorBreakdownProps) {
 						},
 					]}
 				/>
-				<div className="relative h-100% w-32px flex-shrink-0 from-#000000 to-#ffffff bg-gradient-to-b">
-					<div
-						className="absolute h-5px w-full"
+				<Box full="height" className={cls.lightnessRange}>
+					<Box
+						className={cls.lightnessIndicator}
 						style={{
 							top: `${hsl.lightness}%`,
 							background: hsl.lightness > 50 ? 'black' : 'white',
 						}}
 					/>
-				</div>
-			</div>
+				</Box>
+			</Box>
 		</OnboardingTooltip>
 	);
 }
@@ -104,12 +104,9 @@ function PieChart({
 			style={{
 				backgroundImage: gradient,
 			}}
-			className={clsx(
-				'relative aspect-1 rounded-full transition-all',
-				className,
-			)}
+			className={clsx(cls.pieRoot, className)}
 		>
-			<div className="absolute left-1/2 top-1/2 overflow-visible">
+			<div className={cls.pieInner}>
 				{/* Render percentage values in the correct positions */}
 				{segments.map(({ label, percent }, i) => {
 					const x = Math.cos(segmentLabelRadians[i]);
@@ -118,7 +115,7 @@ function PieChart({
 					return (
 						<span
 							key={label}
-							className="absolute border-default rounded-full px-3 py-1 bg-white"
+							className={cls.pieLabel}
 							style={{
 								transform: `translate(-50%, -50%) translate(calc(var(--height) * 0.33 * ${x}), calc(var(--height) * 0.33 * ${y}))`,
 							}}

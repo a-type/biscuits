@@ -9,6 +9,7 @@ import { ProjectPalette } from '@/components/projects/ProjectPalette.jsx';
 import { hooks } from '@/hooks.js';
 import { ActionBar, Button, H1, Icon, PageContent } from '@a-type/ui';
 import { Link, useParams } from '@verdant-web/react-router';
+import cls from './ProjectPage.module.css';
 
 export interface ProjectPageProps {}
 
@@ -27,8 +28,8 @@ export function ProjectPage({}: ProjectPageProps) {
 	}
 
 	return (
-		<div className="min-h-100dvh w-full flex flex-col md:h-100dvh">
-			<div className="sticky top-0 z-100 row py-1 bg-wash">
+		<div className={cls.root}>
+			<div className={cls.header}>
 				<Button render={<Link to="/" />} emphasis="ghost" size="small">
 					<Icon name="arrowLeft" />
 					Projects
@@ -41,18 +42,15 @@ export function ProjectPage({}: ProjectPageProps) {
 					<SortAction />
 				</ActionBar>
 			</div>
-			<div className="w-full flex flex-1 flex-col items-stretch items-stretch gap-1 md:min-h-0 md:flex-row">
-				<div className="[flex:3_0_auto] min-h-80dvh flex flex-col gap-1 md:[flex:3_0_0] md:h-auto">
-					<ProjectCanvas project={project} className="[flex:3_0_200px]" />
+			<div className={cls.main}>
+				<div className={cls.canvasArea}>
+					<ProjectCanvas project={project} className={cls.canvas} />
 					<ProjectColorSpotlight
 						project={project}
-						className="[flex:1_0_240px] md:[flex:1_0_80px]"
+						className={cls.colorSpotlight}
 					/>
 				</div>
-				<ProjectPalette
-					project={project}
-					className="[flex:1_0_auto] md:([flex:1_0_0] min-h-100px overflow-y-auto)"
-				/>
+				<ProjectPalette project={project} className={cls.palette} />
 			</div>
 		</div>
 	);

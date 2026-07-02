@@ -1,9 +1,10 @@
 import { hooks } from '@/hooks.js';
-import { Button, clsx, Icon } from '@a-type/ui';
+import { Button, clsx, Icon, Text } from '@a-type/ui';
 import { Project } from '@palette.biscuits/verdant';
 import { useSnapshot } from 'valtio';
 import { ColorBreakdown } from './ColorBreakdown.jsx';
 import { useColorSelection } from './hooks.js';
+import cls from './ProjectColorSpotlight.module.css';
 import { toolState } from './state.js';
 
 export interface ProjectColorSpotlightProps {
@@ -27,19 +28,14 @@ export function ProjectColorSpotlight({
 
 	if (color) {
 		return (
-			<div
-				className={clsx(
-					'relative m-1 flex flex-col gap-1 md:flex-row',
-					className,
-				)}
-			>
+			<div className={clsx(cls.root, className)}>
 				<div
-					className={'relative h-full flex-1-0-0 rounded-lg'}
+					className={cls.display}
 					style={{
 						backgroundColor: `rgb(${color.r}, ${color.g}, ${color.b})`,
 					}}
 				>
-					<div className="absolute bottom-3 right-3 row">
+					<div className={cls.controls}>
 						{!!pickingColor && (
 							<Button
 								size="small"
@@ -56,21 +52,16 @@ export function ProjectColorSpotlight({
 						)}
 					</div>
 				</div>
-				<ColorBreakdown color={color} className="flex-1-0-0 p-2" />
+				<ColorBreakdown color={color} className={cls.breakdown} />
 			</div>
 		);
 	}
 
 	return (
-		<div
-			className={clsx(
-				'border-gray-4 flex flex-col items-center justify-center border-1 rounded-lg border-solid p-2',
-				className,
-			)}
-		>
-			<span className="text-xs italic color-gray-dark">
+		<div className={clsx(cls.empty, className)}>
+			<Text italic dim emphasis="ambient">
 				Select a color to see it here
-			</span>
+			</Text>
 		</div>
 	);
 }

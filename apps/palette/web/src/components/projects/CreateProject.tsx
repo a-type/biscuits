@@ -11,7 +11,7 @@ export function CreateProject(props: CreateProjectProps) {
 		<div className="col" {...props}>
 			<H2>Start a new project</H2>
 			<ImageUploader
-				className="h-400px max-w-600px w-full"
+				style={{ height: 400, maxWidth: 600, width: '100%' }}
 				onChange={async (value) => {
 					if (value) {
 						const project = await client.projects.put({
