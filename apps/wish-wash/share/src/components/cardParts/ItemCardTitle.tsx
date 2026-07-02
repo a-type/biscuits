@@ -1,4 +1,4 @@
-import { Card, clsx } from '@a-type/ui';
+import { Card } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 
 export const itemCardTitleFragment = graphql(`
@@ -20,20 +20,9 @@ export function ItemCardTitle({
 	className,
 }: ItemCardTitleProps) {
 	const item = readFragment(itemCardTitleFragment, itemMasked);
-	const hasImage = item.imageUrls.length > 0;
 	return (
-		<Card.Content
-			unstyled
-			className={clsx(
-				'p-1 font-bold',
-				hasImage ?
-					'px-md text-[white] bg-[rgba(0,0,0,0.5)]'
-				:	'color-primary-dark',
-				item.prioritized || hasImage ? 'text-xl' : 'text-lg',
-				className,
-			)}
-		>
+		<Card.Title className={className}>
 			<span>{item.description}</span>
-		</Card.Content>
+		</Card.Title>
 	);
 }

@@ -1,4 +1,4 @@
-import { Box, clsx } from '@a-type/ui';
+import { Box, Img } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 
 export const itemCardImageGalleryFragment = graphql(`
@@ -23,18 +23,30 @@ export function ItemCardImageGallery({
 			p
 			gap
 			items="center"
-			className={clsx(
-				'w-full justify-center-safe overflow-y-auto',
-				'grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))]',
-				className,
-			)}
+			full="width"
+			justify="safe-center"
+			overflow="auto-y"
+			style={{
+				display: 'grid',
+				gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+			}}
+			className={className}
 			border
 			surface
 		>
 			{item.imageUrls.map((url, i) => (
-				<img
+				<Img
 					key={i}
-					className="h-auto min-w-200px w-full flex-shrink-1 flex-grow-1 flex-basis-200px cursor-pointer rounded-lg object-contain"
+					fit="contain"
+					full="width"
+					style={{
+						minWidth: 200,
+						flexGrow: 1,
+						flexShrink: 1,
+						flexBasis: 200,
+						cursor: 'pointer',
+						borderRadius: 'var(--m-radius-lg)',
+					}}
 					crossOrigin="anonymous"
 					src={url}
 				/>

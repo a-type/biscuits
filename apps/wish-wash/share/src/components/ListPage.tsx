@@ -1,4 +1,4 @@
-import { Box, Chip, H1, Switch, Provider as UIProvider } from '@a-type/ui';
+import { Box, Chip, H1, Img, Switch, Provider as UIProvider } from '@a-type/ui';
 import { graphql, ResultOf } from '@biscuits/graphql';
 import { useEffect } from 'react';
 import { HubContextProvider } from '~/components/Context.js';
@@ -64,14 +64,16 @@ export function ListPage({ data }: ListPageProps) {
 					p
 					gap="lg"
 					items="center"
-					className="flex-[1_0_auto]"
+					grow
 					data-testid="list-page"
 				>
-					<Box col gap="lg" className="max-w-800px w-full">
+					<Box col gap="lg" full="width" style={{ maxWidth: 800 }}>
 						{snapshot.coverImageUrl && (
-							<img
+							<Img
+								fit="cover"
+								full="width"
+								style={{ height: '20dvh', borderRadius: 'var(--m-radius-lg)' }}
 								src={snapshot.coverImageUrl}
-								className="h-[20vh] w-full rounded-lg object-cover"
 								crossOrigin="anonymous"
 							/>
 						)}
@@ -82,16 +84,15 @@ export function ListPage({ data }: ListPageProps) {
 							<Chip>Created {createdAtDate.toLocaleDateString()}</Chip>
 						</Box>
 						<Box
-							className="flex-col md:flex-row"
+							surface="secondary"
+							wrap
 							justify="between"
-							items="start"
+							items="center"
 							full="width"
 							gap
 						>
-							<Box surface color="primary" p>
-								Click any item to see details and links
-							</Box>
-							<Box surface p items="center" render={<label />} gap>
+							<Box p>Click any item to see details and links</Box>
+							<Box p items="center" render={<label />} gap>
 								Show purchased items
 								<Switch
 									checked={showPurchased}
@@ -103,7 +104,7 @@ export function ListPage({ data }: ListPageProps) {
 					<Items
 						items={snapshot.items}
 						listAuthor={data.author.name}
-						className="max-w-1280px w-full pb-10"
+						style={{ maxWidth: 1280, width: '100%', paddingBottom: 40 }}
 					/>
 				</Box>
 			</UIProvider>

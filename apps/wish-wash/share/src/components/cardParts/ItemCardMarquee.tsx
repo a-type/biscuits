@@ -1,4 +1,4 @@
-import { Card, Marquee } from '@a-type/ui';
+import { Card, Img, Marquee } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 
 export const itemCardMarqueeFragment = graphql(`
@@ -26,11 +26,11 @@ export function ItemCardMarquee({ item: itemMasked }: ItemCardMarqueeProps) {
 					<Marquee.Item
 						key={url}
 						render={
-							<img
+							<Img
+								fit="cover"
 								crossOrigin="anonymous"
 								src={url}
 								alt={'Picture of ' + item.description}
-								className="object-cover"
 							/>
 						}
 					/>

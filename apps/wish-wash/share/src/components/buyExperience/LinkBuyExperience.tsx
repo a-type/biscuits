@@ -84,7 +84,7 @@ export function LinkBuyExperience({
 			}}
 		>
 			<Dialog.Trigger render={children} />
-			<Dialog.Content width="lg" className="flex flex-col gap-md">
+			<Dialog.Content width="lg">
 				{showPost ?
 					<PostBuyExperienceContent item={item} listAuthor={listAuthor} />
 				:	<PreLinkBuyExperienceContent
@@ -99,14 +99,14 @@ export function LinkBuyExperience({
 						<Button
 							emphasis="ghost"
 							onClick={() => setShowPost(false)}
-							className="mr-auto"
+							style={{ marginRight: 'auto' }}
 						>
 							What was it again?
 						</Button>
 					:	<ItemCardPurchaseButton
 							size="default"
 							itemId={item.id}
-							className="mr-auto"
+							style={{ marginRight: 'auto' }}
 						/>
 					}
 					<Dialog.Close />
@@ -131,7 +131,7 @@ function PreLinkBuyExperienceContent({
 	const needs = Math.max(0, item.count - item.purchasedCount);
 	return (
 		<>
-			<ItemCardTypeChip item={item} className="mr-auto" />
+			<ItemCardTypeChip item={item} style={{ marginRight: 'auto' }} />
 			<Dialog.Title>Visit the store page</Dialog.Title>
 			<Dialog.Description>
 				Come back to this tab to mark this item as purchased when you're done!
@@ -148,7 +148,7 @@ function PreLinkBuyExperienceContent({
 			<Button
 				render={<a href={link} target="_blank" rel="noreferrer" />}
 				emphasis="primary"
-				className="ml-auto"
+				style={{ marginLeft: 'auto' }}
 				onClick={onVisit}
 			>
 				Go to store page

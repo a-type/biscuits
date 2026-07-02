@@ -37,19 +37,22 @@ export function VibeCardBuyExperience({
 		<>
 			<Dialog>
 				<Dialog.Trigger render={children} />
-				<Dialog.Content width="lg" className="gap-md">
-					<ItemCardTypeChip item={item} className="mr-auto" />
+				<Dialog.Content width="lg">
+					<ItemCardTypeChip item={item} style={{ marginRight: 'auto' }} />
 					{item.description && <Dialog.Title>{item.description}</Dialog.Title>}
-					<ItemCardImageGallery item={item} maxCols={3} />
+					<ItemCardImageGallery item={item} />
 					<P>Be on the lookout for stuff that feels like this.</P>
 					{item.description && (
-						<SearchButton prompt={item.description} className="mr-auto" />
+						<SearchButton
+							prompt={item.description}
+							style={{ marginRight: 'auto' }}
+						/>
 					)}
 					<Dialog.Actions>
 						<ItemCardPurchaseButton
 							size="default"
 							itemId={item.id}
-							className="mr-auto"
+							style={{ marginRight: 'auto' }}
 						/>
 						<Dialog.Close>Close</Dialog.Close>
 					</Dialog.Actions>

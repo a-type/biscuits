@@ -1,0 +1,5 @@
+.root {
+	&[data-bought-all='true'] {
+		opacity: 0.5;
+	}
+}

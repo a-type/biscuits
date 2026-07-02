@@ -1,4 +1,4 @@
-import { Box, Button, H1, H2, P, Progress, TextArea } from '@a-type/ui';
+import { Box, Button, Field, H1, H2, P, Progress, TextArea } from '@a-type/ui';
 import { useState } from 'react';
 import { OnboardingQuestion, onboardingQuestions } from './questions.js';
 
@@ -57,7 +57,14 @@ export function WishlistOnboarding({
 
 	if (mode === 'summary') {
 		return (
-			<Box full="width" col items="stretch" gap="lg" className={(className)} {...rest}>
+			<Box
+				full="width"
+				col
+				items="stretch"
+				gap="lg"
+				className={className}
+				{...rest}
+			>
 				<H1>Thanks!</H1>
 				<P>{thanksText}</P>
 				{hasMoreQuestions && (
@@ -90,7 +97,14 @@ export function WishlistOnboarding({
 	}
 
 	return (
-		<Box full="width" col items="stretch" gap="lg" className={ className} {...rest}>
+		<Box
+			full="width"
+			col
+			items="stretch"
+			gap="lg"
+			className={className}
+			{...rest}
+		>
 			<Box col items="start" gap>
 				{sampleIndex + 1}/{questionsSample.length}
 				<Progress value={sampleIndex} max={questionsSample.length} />
@@ -129,27 +143,29 @@ function Question({
 	onCommit: (answer: string) => void;
 }) {
 	return (
-		<Box full="width" col grow items="stretch" gap>
-			<label className="text-xl" htmlFor={question.id}>
-				{question.question}
-			</label>
-			<TextArea
-				className="w-full"
-				id={question.id}
-				autoSize
-				autoFocus
-				padBottomPixels={40}
-				value={answer}
-				onChange={(ev) => onAnswer(ev.currentTarget.value)}
-				placeholders={question.suggestions}
-				onKeyDown={(ev) => {
-					if (ev.key === 'Enter' && !ev.shiftKey) {
-						ev.preventDefault();
-						onCommit(answer);
-					}
-				}}
+		<Field stretch id={question.id}>
+			<Field.Label>{question.question}</Field.Label>
+			<Field.Control
+				render={
+					<TextArea
+						className="w-full"
+						id={question.id}
+						autoSize
+						autoFocus
+						padBottomPixels={40}
+						value={answer}
+						onChange={(ev) => onAnswer(ev.currentTarget.value)}
+						placeholders={question.suggestions}
+						onKeyDown={(ev) => {
+							if (ev.key === 'Enter' && !ev.shiftKey) {
+								ev.preventDefault();
+								onCommit(answer);
+							}
+						}}
+					/>
+				}
 			/>
-		</Box>
+		</Field>
 	);
 }
 

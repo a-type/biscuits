@@ -1,4 +1,4 @@
-import { Card, clsx } from '@a-type/ui';
+import { Card } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 import { ReactNode } from 'react';
 
@@ -26,7 +26,10 @@ export function ItemCardMain({
 
 	return (
 		<Card.Main
-			className={clsx(hasImage && 'min-h-[300px]', className)}
+			style={{
+				minHeight: hasImage ? 300 : undefined,
+			}}
+			className={className}
 			{...rest}
 		>
 			{children}

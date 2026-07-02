@@ -19,12 +19,14 @@ export interface ItemsProps {
 	items: FragmentOf<typeof itemsFragment>[];
 	listAuthor: string;
 	className?: string;
+	style?: React.CSSProperties;
 }
 
 export function Items({
 	items: itemsMasked,
 	listAuthor,
 	className,
+	...rest
 }: ItemsProps) {
 	const items = itemsMasked.map((item) => readFragment(itemsFragment, item));
 
@@ -46,6 +48,7 @@ export function Items({
 				if (w < 1000) return 4;
 				return 5;
 			}}
+			{...rest}
 		>
 			{unpurchasedItems.map((item) => (
 				<ItemCard key={item.id} item={item} listAuthor={listAuthor} />

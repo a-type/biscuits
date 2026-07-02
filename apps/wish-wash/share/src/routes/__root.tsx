@@ -1,4 +1,5 @@
 /// <reference types="vite/client" />
+import '@a-type/ui/main.css';
 import { QueryClient } from '@tanstack/react-query';
 import {
 	HeadContent,
