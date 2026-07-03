@@ -17,7 +17,9 @@ export function Toolbar(props: ToolbarProps) {
 					onValueChange={([v]) => {
 						editorState.shapeType = v as any;
 					}}
-					className="mb-sm"
+					style={{
+						marginBottom: 4,
+					}}
 				>
 					<ToggleGroup.Item value="rectangle">
 						<Icon name="cardsGrid" size={25} />

@@ -1,6 +1,6 @@
 import { hooks } from '@/hooks.js';
 import { useMotionPoint } from '@/hooks/useVerdantMotion.js';
-import { useViewport } from '@a-type/ui';
+import { clsx, useViewport } from '@a-type/ui';
 import { FloorLinesValueStart as SnapPoint } from '@floorplan.biscuits/verdant';
 import { useDrag } from '@use-gesture/react';
 import { motion } from 'motion/react';
@@ -13,6 +13,7 @@ import {
 	getSnapChain,
 } from './pointLogic.js';
 import { computeConstrainedInput } from './positioning.js';
+import cls from './shape.module.css';
 
 export interface LinePointHandleProps {
 	point: SnapPoint;
@@ -77,7 +78,13 @@ export function LinePointHandle({
 			cx={x}
 			cy={y}
 			r={8 / zoom}
-			className="stroke-inherit z-1 cursor-grab touch-none fill-white stroke-width-[calc(2/var(--zoom-settled))]"
+			style={{
+				zIndex: 1,
+				cursor: 'grab',
+				touchAction: 'none',
+				strokeWidth: 'calc(2/var(--zoom-settled))',
+			}}
+			className={clsx(cls.fillWhite, cls.strokeInherit)}
 			strokeWidth={2}
 			data-snapped-to={
 				snap ? `${snap.get('lineId')}-${snap.get('side')}` : undefined

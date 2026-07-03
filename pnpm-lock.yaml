@@ -13,8 +13,8 @@ catalogs:
       specifier: 2.1.3
       version: 2.1.3
     '@a-type/ui':
-      specifier: ^6.0.59
-      version: 6.0.59
+      specifier: ^6.0.60
+      version: 6.0.60
     '@a-type/utils':
       specifier: ^1.1.9
       version: 1.1.9
@@ -268,7 +268,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.59(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.60(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -393,7 +393,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.59(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.60(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -540,7 +540,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.59(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.60(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -802,7 +802,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.59(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.60(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -908,7 +908,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.59(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.60(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1020,7 +1020,7 @@ importers:
         version: 0.2.15(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.59(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.60(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1141,7 +1141,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.59(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.60(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1262,7 +1262,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.59(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.60(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1306,7 +1306,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.59(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.60(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@biscuits/graphql':
         specifier: workspace:*
         version: link:../../../packages/graphql
@@ -1404,7 +1404,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.59(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.60(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1516,7 +1516,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.59(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.60(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@astrojs/check':
         specifier: ^0.9.4
         version: 0.9.4(prettier@3.6.2)(typescript@5.9.3)
@@ -1558,7 +1558,7 @@ importers:
         version: 2.1.3
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.59(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.60(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1706,7 +1706,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.59(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.60(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@arbor-css/core':
         specifier: 'catalog:'
         version: 0.0.136
@@ -2018,8 +2018,8 @@ packages:
       react: ^18.3.1
       react-dom: ^18.3.1
 
-  '@a-type/ui@6.0.59':
-    resolution: {integrity: sha512-om9nlkpL9lVTvQE7y0DCuCu4aHlAqC37v0ZrfWSo7szLxDN+wMvHlY1e7goRpzECrtSoHdDBAhPAZGXc789gyA==}
+  '@a-type/ui@6.0.60':
+    resolution: {integrity: sha512-UcpYvlN8cEn4Hro/562i7KadMKizR+wBnpMWCefDupDefio3ZcnUDrSXAa2ImlruBXde73WOmwCn/kjbwrbpng==}
     engines: {node: '>=24'}
     peerDependencies:
       react: ^19
@@ -10969,7 +10969,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@a-type/ui@6.0.59(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@a-type/ui@6.0.60(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@a-type/utils': 1.1.9
       '@arbor-css/core': 0.0.136

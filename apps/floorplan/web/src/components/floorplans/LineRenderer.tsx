@@ -1,5 +1,6 @@
 import { clsx } from '@a-type/ui';
 import { motion, MotionValue } from 'motion/react';
+import cls from './shape.module.css';
 
 export interface LineRendererProps extends React.SVGProps<SVGGElement> {
 	startX: MotionValue<number>;
@@ -28,10 +29,11 @@ export function LineRenderer({
 				x2={endX}
 				y2={endY}
 				strokeDasharray={lineDash}
-				className={clsx(
-					'stroke-inherit pointer-events-none stroke-width-[calc(2/var(--zoom-settled))]',
-					className,
-				)}
+				style={{
+					pointerEvents: 'none',
+					strokeWidth: 'calc(2/var(--zoom-settled))',
+				}}
+				className={clsx(cls.strokeInherit, className)}
 			/>
 		</g>
 	);

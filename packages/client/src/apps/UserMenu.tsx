@@ -60,7 +60,13 @@ export function UserMenu({
 			<DropdownMenu>
 				<DropdownMenu.Trigger
 					render={(props: any) => (
-						<Button size="small" emphasis="ghost" {...props} />
+						<Button
+							size="small"
+							emphasis="ghost"
+							disableIconMode
+							aria-label="App menu"
+							{...props}
+						/>
 					)}
 				>
 					{(children ?? (!isLoggedIn && loading && !isOffline)) ?

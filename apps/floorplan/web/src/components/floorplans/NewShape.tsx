@@ -8,6 +8,7 @@ import { useSnapshot } from 'valtio';
 import { editorState } from './editorState.js';
 import { applyPointSnap } from './pointLogic.js';
 import { computeConstrainedInput, PointPositionResult } from './positioning.js';
+import cls from './shape.module.css';
 import { ShapeRenderer } from './ShapeRenderer.jsx';
 
 export interface NewShapeProps {
@@ -102,7 +103,7 @@ export function NewShape({ floor }: NewShapeProps) {
 	}
 
 	return (
-		<g className="stroke-black">
+		<g className={cls.strokeBlack}>
 			<ShapeRenderer
 				centerX={toolStartX}
 				centerY={toolStartY}

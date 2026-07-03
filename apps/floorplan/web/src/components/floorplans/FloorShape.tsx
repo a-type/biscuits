@@ -10,6 +10,7 @@ import { editorState, gestureClaim, toggleSelection } from './editorState.js';
 import { useFloor } from './FloorProvider.jsx';
 import { applyPointSnap } from './pointLogic.js';
 import { computeConstrainedInput } from './positioning.js';
+import cls from './shape.module.css';
 import { ShapeRenderer } from './ShapeRenderer.jsx';
 
 export interface FloorShapeProps {
@@ -59,13 +60,14 @@ export function FloorShape({ shape }: FloorShapeProps) {
 
 	return (
 		<g
-			className={clsx(
-				'touch-none',
-				selected ? 'z-100 stroke-primary' : 'stroke-black',
-			)}
+			className={clsx(selected ? cls.strokeMain : cls.strokeBlack)}
+			style={{
+				touchAction: 'none',
+				zIndex: selected ? 100 : undefined,
+			}}
 			data-shape-id={id}
 		>
-			<g className="touch-none" data-role="move-handle" ref={ref}>
+			<g style={{ touchAction: 'none' }} data-role="move-handle" ref={ref}>
 				<ShapeRenderer
 					centerX={centerX}
 					centerY={centerY}
@@ -125,14 +127,24 @@ function FloorShapeResizeHandle({
 	);
 
 	return (
-		<g className="cursor-pointer touch-none" data-shape-id={id} ref={ref}>
+		<g
+			style={{
+				cursor: 'pointer',
+				touchAction: 'none',
+			}}
+			data-shape-id={id}
+			ref={ref}
+		>
 			<motion.rect
 				x={0}
 				y={0}
 				transform={transform}
 				width={1}
 				height={1}
-				className="fill-black stroke-width-[calc(2/var(--zoom-settled))] stroke-primary"
+				style={{
+					strokeWidth: 'calc(2/var(--zoom-settled))',
+				}}
+				className={clsx(cls.fillBlack, cls.strokeMain)}
 			/>
 		</g>
 	);
@@ -169,13 +181,23 @@ function FloorShapeRotationHandle({ shape }: { shape: FloorShapesValue }) {
 	);
 
 	return (
-		<g className="cursor-pointer touch-none" data-shape-id={id} ref={ref}>
+		<g
+			style={{
+				cursor: 'pointer',
+				touchAction: 'none',
+			}}
+			data-shape-id={id}
+			ref={ref}
+		>
 			<motion.circle
 				cx={centerX}
 				cy={centerY}
 				transform={transform}
 				r={0.5}
-				className="fill-black stroke-width-[calc(2/var(--zoom-settled))] stroke-primary"
+				style={{
+					strokeWidth: 'calc(2/var(--zoom-settled))',
+				}}
+				className={clsx(cls.fillBlack, cls.strokeMain)}
 			/>
 		</g>
 	);

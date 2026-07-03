@@ -12,6 +12,7 @@ import { useSnapshot } from 'valtio';
 import { editorState, gestureClaim, toggleSelection } from './editorState.js';
 import { LinePointHandle } from './LinePointHandle.jsx';
 import { LineRenderer } from './LineRenderer.jsx';
+import cls from './shape.module.css';
 
 const DEBUG = false;
 
@@ -50,8 +51,12 @@ export function FloorLine({ line }: FloorLineProps) {
 		<g
 			className={clsx(
 				'touch-none',
-				selected ? 'z-100 stroke-primary' : 'stroke-black',
+				selected ? cls.strokeMain : cls.strokeBlack,
 			)}
+			style={{
+				zIndex: selected ? 100 : undefined,
+				touchAction: 'none',
+			}}
 			data-line-id={id}
 		>
 			<g ref={ref} data-role="line-hitbox">
@@ -61,7 +66,12 @@ export function FloorLine({ line }: FloorLineProps) {
 					y1={startY}
 					x2={endX}
 					y2={endY}
-					className="cursor-pointer touch-none stroke-width-[calc(10/var(--zoom-settled))] stroke-transparent"
+					style={{
+						cursor: 'pointer',
+						touchAction: 'none',
+						strokeWidth: 'calc(10/var(--zoom-settled))',
+						stroke: 'transparent',
+					}}
 				/>
 				<LineRenderer
 					startX={startX}
@@ -106,7 +116,12 @@ function SnapIndicator({ point }: { point: SnapPoint }) {
 				cx={position.x}
 				cy={position.y}
 				r={5 / zoom}
-				className="pointer-events-none fill-none stroke-width-[calc(2/var(--zoom-settled))] stroke-gray"
+				style={{
+					pointerEvents: 'none',
+					fill: 'none',
+					strokeWidth: 'calc(2/var(--zoom-settled))',
+				}}
+				className={cls.strokeGray}
 			/>
 		);
 	}
@@ -128,7 +143,12 @@ function PointDebug({
 		<motion.text
 			x={position.x}
 			y={position.y}
-			className="pointer-events-none fill-black text-xxs"
+			style={{
+				pointerEvents: 'none',
+				fontSize: '5px',
+				fontFamily: 'monospace',
+			}}
+			className={cls.fillBlack}
 		>
 			{side} |{' '}
 			{snap ? `snapped to ${snap.get('lineId')}-${snap.get('side')}` : 'free'}
@@ -154,7 +174,12 @@ function LineDebug({ line }: { line: FloorLinesValue }) {
 		<motion.text
 			x={midX}
 			y={midY}
-			className="pointer-events-none fill-black text-xxs"
+			style={{
+				pointerEvents: 'none',
+				fontSize: '5px',
+				fontFamily: 'monospace',
+			}}
+			className={cls.fillBlack}
 		>
 			{id}
 		</motion.text>
