@@ -28,9 +28,7 @@ export function RecipePinToggle({ recipe, className }: RecipePinToggleProps) {
 			onClick={togglePinned}
 			className={className}
 		>
-			<Button.Icon>
-				<PinIcon isPinned={isPinned} />
-			</Button.Icon>
+			<PinIcon data-icon isPinned={isPinned} />
 		</Button>
 	);
 }

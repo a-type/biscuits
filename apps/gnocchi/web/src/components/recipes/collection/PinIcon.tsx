@@ -1,4 +1,4 @@
-import { Box, Icon } from '@a-type/ui';
+import { Icon } from '@a-type/ui';
 
 export interface PinIconProps {
 	isPinned: boolean;
@@ -6,16 +6,8 @@ export interface PinIconProps {
 
 export function PinIcon({ isPinned }: PinIconProps) {
 	if (isPinned) {
-		return (
-			<Box>
-				<Icon name="pinFilled" />
-			</Box>
-		);
+		return <Icon name="pinFilled" />;
 	}
 
-	return (
-		<Box>
-			<Icon name="pin" />
-		</Box>
-	);
+	return <Icon name="pin" />;
 }
