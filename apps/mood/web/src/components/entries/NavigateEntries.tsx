@@ -11,6 +11,7 @@ import {
 } from '@a-type/ui';
 import { addDays, startOfDay } from 'date-fns';
 import { Suspense, useState } from 'react';
+import cls from './NavigateEntries.module.css';
 
 export interface NavigateEntriesProps extends BoxProps {
 	className?: string;
@@ -43,11 +44,11 @@ export function NavigateEntries({
 
 	return (
 		<Box
-			surface="white"
+			surface="ambient"
 			border
 			gap
 			elevated="md"
-			className={clsx('fixed left-sm top-sm z-1', className)}
+			className={clsx(cls.root, className)}
 			{...rest}
 		>
 			<Button
@@ -135,16 +136,8 @@ function DateWithEntry({ value }: { value: CalendarDayValue }) {
 		<DatePicker.CalendarDay
 			value={value}
 			disabled={!entry}
-			className={clsx(
-				{
-					'bg-attention-light': moodValue === -2,
-					'bg-attention': moodValue === -1,
-					'bg-neutral-light': moodValue === 0,
-					'bg-success-light': moodValue === 1,
-					'bg-success': moodValue === 2,
-				},
-				'[&[data-selected=true]]:(ring ring-2 ring-offset-1 ring-bg)',
-			)}
+			data-mood-value={moodValue}
+			className={cls.day}
 		/>
 	);
 }

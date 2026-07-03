@@ -1,5 +1,5 @@
 import { hooks } from '@/hooks.js';
-import { Box, Button, Dialog, FormikForm, Icon } from '@a-type/ui';
+import { Button, Dialog, FormikForm, Icon } from '@a-type/ui';
 import { authorization, TagMetadata } from '@mood.biscuits/verdant';
 import { useState } from 'react';
 
@@ -50,11 +50,9 @@ export function AddTag({ className, onAdd }: AddTagProps) {
 						tools.resetForm();
 					}}
 				>
-					<Box gap items="end">
-						<FormikForm.EmojiField name="emoji" className="mb-1px" />
-						<FormikForm.TextField autoFocus name="value" label="Tag Name" />
-					</Box>
-					<Dialog.Actions className="justify-between">
+					<FormikForm.EmojiField name="emoji" label="Emoji" />
+					<FormikForm.TextField autoFocus name="value" label="Tag Name" />
+					<Dialog.Actions style={{ justifyContent: 'space-between' }}>
 						<Dialog.Close />
 						<FormikForm.SubmitButton>
 							<Icon name="check" />

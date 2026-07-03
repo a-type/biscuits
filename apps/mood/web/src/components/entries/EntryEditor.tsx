@@ -1,7 +1,8 @@
 import { hooks } from '@/hooks.js';
-import { Box, clsx } from '@a-type/ui';
+import { Box } from '@a-type/ui';
 import { Entry } from '@mood.biscuits/verdant';
 import { Suspense } from 'react';
+import cls from './EntryEditor.module.css';
 import { MetadataDisplay } from './MetadataDisplay.jsx';
 import { MoodPicker } from './MoodPicker.jsx';
 import { TagsEditor } from './TagsEditor.jsx';
@@ -17,17 +18,12 @@ export function EntryEditor({ entry, className }: EntryEditorProps) {
 	return (
 		<Box col className={className} items="center">
 			<MoodPicker
-				className={clsx(
-					'w-full transition-height duration-300',
-					value === null ? 'h-100dvh' : 'h-50dvh',
-				)}
+				className={cls.picker}
+				data-has-value={value !== null}
 				value={value}
 				onValueChange={(val) => entry.set('value', val)}
 			/>
-			<Box
-				col
-				className="max-w-lg w-full b-t-2 b-t-main-ink b-t-solid pb-xl pt-md"
-			>
+			<Box col className={cls.metadata}>
 				<Suspense>
 					<MetadataDisplay entry={entry} />
 				</Suspense>

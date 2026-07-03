@@ -1,0 +1,28 @@
+.root {
+	position: fixed;
+	left: var(--m-space-sm);
+	top: var(--m-space-sm);
+	z-index: 1;
+}
+
+.day {
+	&[data-mood-value='-2'] {
+		@apply --mx-bg(var(--m-color-palette-attention));
+	}
+	&[data-mood-value='-1'] {
+		@apply --mx-bg(var(--m-color-palette-attention-light));
+	}
+	&[data-mood-value='0'] {
+		@apply --mx-bg(var(--m-color-main-wash));
+	}
+	&[data-mood-value='1'] {
+		@apply --mx-bg(var(--m-color-palette-success-light));
+	}
+	&[data-mood-value='2'] {
+		@apply --mx-bg(var(--m-color-palette-success));
+	}
+
+	&[data-selected='true'] {
+		@apply --mx-ring(var(--mx-bg-ref), 2px, 1px);
+	}
+}
