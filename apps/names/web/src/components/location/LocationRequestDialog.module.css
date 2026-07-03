@@ -1,0 +1,34 @@
+.graphic {
+	@apply --mx-bg(var(--m-color-accent-wash));
+	position: relative;
+	height: 40vmin;
+	border-radius: var(--m-radius-lg);
+}
+
+.iconWrapper {
+	@apply --mx-fg(var(--m-color-accent-light));
+	position: absolute;
+	top: 50%;
+	z-index: 1;
+	height: 30vmin;
+	width: 30vmin;
+	display: flex;
+	transform: translate(-50%, -50%);
+	align-items: center;
+	justify-content: center;
+	border-radius: --fn-literal(999px);
+	@apply --mx-bg(var(--m-color-accent-ink));
+	@apply --mx-bg-faded(10%);
+}
+
+.leftIcon {
+	left: calc(3 / 8 * 100%);
+}
+.rightIcon {
+	left: calc(5 / 8 * 100%);
+}
+
+.icon {
+	width: 20vmin;
+	height: 20vmin;
+}

@@ -1,5 +1,6 @@
 import { Button, clsx, Icon, Input, withClassName } from '@a-type/ui';
-import { CSSProperties, useRef } from 'react';
+import { useRef } from 'react';
+import cls from './SuperBar.module.css';
 import { useSuperBar } from './SuperBarContext.jsx';
 import { SuperBarCreate } from './SuperBarCreate.jsx';
 
@@ -14,12 +15,10 @@ export function SuperBar({ className }: SuperBarProps) {
 	return (
 		<BottomContainer className={className}>
 			<SuperBarCreate />
-			<div className="relative w-full p-sm">
+			<div className={cls.inputWrap}>
 				<Input
 					ref={inputRef}
-					className={clsx('w-full', !!inputValue ? 'pr-[32px]' : undefined)}
-					// makes focus ring, which is normally accent, use primary color
-					style={{ '--p-accent-hue': 'var(--p-primary-hue)' } as CSSProperties}
+					className={clsx(cls.input, !!inputValue ? cls.inputEmpty : undefined)}
 					placeholder="Search or add..."
 					value={inputValue}
 					onValueChange={setInputValue}
@@ -28,30 +27,25 @@ export function SuperBar({ className }: SuperBarProps) {
 							createNew();
 						}
 					}}
+					endAccessory={
+						!!inputValue && (
+							<Button
+								size="small"
+								emphasis="ghost"
+								className={cls.clearButton}
+								onClick={() => {
+									setInputValue('');
+									inputRef.current?.focus();
+								}}
+							>
+								<Icon name="x" />
+							</Button>
+						)
+					}
 				/>
-				{!!inputValue && (
-					<Button
-						size="small"
-						emphasis="ghost"
-						className="absolute right-[-4px] top-[55%] translate--1/2"
-						onClick={() => {
-							setInputValue('');
-							inputRef.current?.focus();
-						}}
-					>
-						<Icon name="x" />
-					</Button>
-				)}
 			</div>
 		</BottomContainer>
 	);
 }
 
-const BottomContainer = withClassName(
-	'div',
-	'fixed bottom-0 left-1/2 z-[var(--z-now-playing)] translate-x--1/2 md:max-w-512px',
-	'flex flex-col items-stretch justify-center overflow-hidden bg-primary-wash',
-	'border-1 rounded-t-md border-solid border-gray lt-sm:(border-b-0 border-r-0 border-l-0)',
-	'pb-[var(--nav-height,env(safe-area-inset-bottom,0px))]',
-	'w-full animate-pop-up animate-duration-200 overflow-hidden shadow-md',
-);
+const BottomContainer = withClassName('div', cls.container);

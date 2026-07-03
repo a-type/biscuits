@@ -1,5 +1,5 @@
 import { hooks } from '@/hooks.js';
-import { clsx, ImageUploader } from '@a-type/ui';
+import { ImageUploader } from '@a-type/ui';
 import { Person } from '@names.biscuits/verdant';
 
 export interface PersonPhotoProps {
@@ -13,7 +13,13 @@ export function PersonPhoto({ person, className }: PersonPhotoProps) {
 
 	return (
 		<ImageUploader
-			className={clsx('min-h-160px w-full', photoUrl && 'aspect-1', className)}
+			style={{
+				minHeight: 160,
+				maxHeight: '50vh',
+				width: '100%',
+				aspectRatio: photoUrl ? '1 / 1' : undefined,
+			}}
+			className={className}
 			value={photoUrl}
 			onChange={(v) => person.set('photo', v)}
 			facingMode="environment"

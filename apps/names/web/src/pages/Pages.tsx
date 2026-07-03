@@ -21,7 +21,14 @@ const routes = makeRoutes([
 					</Suspense>
 					<Suspense
 						fallback={
-							<Spinner className="absolute left-1/2 top-1/2 translate--1/2" />
+							<Spinner
+								style={{
+									position: 'absolute',
+									left: '50%',
+									top: '50%',
+									transform: 'translate(-50%, -50%)',
+								}}
+							/>
 						}
 					>
 						<Outlet />
@@ -70,7 +77,14 @@ export function Pages() {
 		<DefaultErrorBoundary>
 			<Suspense
 				fallback={
-					<Spinner className="absolute left-1/2 top-1/2 translate--1/2" />
+					<Spinner
+						style={{
+							position: 'absolute',
+							left: '50%',
+							top: '50%',
+							transform: 'translate(-50%, -50%)',
+						}}
+					/>
 				}
 			>
 				<Router routes={routes} onNavigate={handleNavigate}>

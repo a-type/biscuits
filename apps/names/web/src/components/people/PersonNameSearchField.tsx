@@ -1,5 +1,5 @@
 import { hooks, useAddPerson } from '@/hooks.js';
-import { Box, clsx, Icon, Input, Popover } from '@a-type/ui';
+import { Box, Icon, Input, Popover, Text } from '@a-type/ui';
 import { Person } from '@names.biscuits/verdant';
 import { useCombobox } from 'downshift';
 import { Suspense, useDeferredValue, useRef, useState } from 'react';
@@ -88,7 +88,7 @@ export function PersonNameSearchField({
 			/>
 			<Popover.Content
 				{...getMenuProps()}
-				className="w-[var(--anchor-width)]"
+				style={{ width: 'var(--anchor-width)' }}
 				initialFocus={false}
 				sideOffset={8}
 				forceMount
@@ -103,16 +103,16 @@ export function PersonNameSearchField({
 					/>
 				))}
 				{!matches.length && (
-					<Box className="p-2 text-sm color-gray-dark">
+					<Text emphasis="ambient" dim>
 						{!!inputValue ? 'No matches' : 'Search people'}
-					</Box>
+					</Text>
 				)}
 				{allowAdd && !!inputValue && (
 					<Box
 						p="sm"
-						className={clsx(
-							highlightedIndex === items.length - 1 ? 'bg-gray-light' : '',
-						)}
+						surface={
+							highlightedIndex === items.length - 1 ? 'secondary' : 'ambient'
+						}
 						{...getItemProps({ item: ADD_TOKEN, index: items.length - 1 })}
 						items="center"
 						gap
@@ -140,22 +140,23 @@ function PersonItem({
 		<Box
 			p="sm"
 			{...props}
-			className={clsx('rounded-sm', highlighted ? 'bg-gray-light' : '')}
+			round="sm"
+			surface={highlighted ? 'secondary' : 'ambient'}
 			col
 			gap="xs"
 		>
 			<Box>{person.get('name')}</Box>
 			{note && (
-				<Box className="text-sm color-gray-dark" gap="sm" items="center">
+				<Text dim emphasis="ambient">
 					<Icon name="note" />
 					{note}
-				</Box>
+				</Text>
 			)}
 			{tags && (
 				<Suspense>
-					<Box className="text-sm color-gray-dark" gap="sm" items="center">
+					<Box className="@mode-dense" dim gap="sm" items="center">
 						{tags.map((tag) => (
-							<TagDisplay key={tag} name={tag} className="text-xs" />
+							<TagDisplay key={tag} name={tag} className="@mode-denser" />
 						))}
 					</Box>
 				</Suspense>

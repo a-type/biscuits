@@ -6,7 +6,7 @@ import {
 	useRelationshipSuggestions,
 } from '@/hooks.js';
 import { useHasGeolocationPermission } from '@/services/location.js';
-import { Button, clsx, HorizontalList, Icon } from '@a-type/ui';
+import { Button, HorizontalList, Icon } from '@a-type/ui';
 import { Person } from '@names.biscuits/verdant';
 import { useState } from 'react';
 
@@ -54,11 +54,7 @@ export function PersonQuickActions({
 	}
 
 	return (
-		<HorizontalList
-			open={open}
-			onOpenChange={setOpen}
-			className={clsx('items-center gap-0', className)}
-		>
+		<HorizontalList open={open} onOpenChange={setOpen} className={className}>
 			{showAttachLocation && (
 				<Button
 					size="small"
@@ -66,7 +62,7 @@ export function PersonQuickActions({
 					onClick={() => addLocation(person)}
 					emphasis="light"
 					color="accent"
-					className="my-auto font-normal"
+					style={{ marginBlock: 'auto' }}
 				>
 					<Icon name="location" />
 					Attach current location
@@ -80,7 +76,7 @@ export function PersonQuickActions({
 						size="small"
 						onClick={() => addRelationship(personId, recentPerson.get('id'))}
 						emphasis="default"
-						className="my-auto font-normal"
+						style={{ marginBlock: 'auto' }}
 					>
 						<Icon name="clock" />
 						Connect with {recentPerson.get('name')}
@@ -97,12 +93,12 @@ export function PersonQuickActions({
 						size="small"
 						emphasis="default"
 						render={<div />}
-						className="my-auto gap-0 p-0"
+						style={{ marginBlock: 'auto', gap: 0, padding: 0 }}
 					>
 						<Button
 							emphasis="ghost"
 							size="small"
-							className="border-0 font-normal"
+							style={{ border: 0, fontWeight: 'normal' }}
 							onClick={() => addRelationship(personId, relatedPerson.get('id'))}
 						>
 							<Icon name="connection" />
@@ -113,7 +109,7 @@ export function PersonQuickActions({
 							color="attention"
 							emphasis="ghost"
 							onClick={() => dismissedSuggestions.add(relatedPerson.get('id'))}
-							className="border-0"
+							style={{ border: 0 }}
 						>
 							<Icon name="x" />
 						</Button>

@@ -12,9 +12,11 @@ import {
 	Divider,
 	EditableText,
 	ErrorBoundary,
+	Heading,
 	Icon,
 	LiveUpdateTextField,
 	RelativeTime,
+	Text,
 	toast,
 } from '@a-type/ui';
 import { useUserInfo } from '@biscuits/client';
@@ -40,17 +42,21 @@ export function PersonDetails({ person, className }: PersonDetailsProps) {
 	return (
 		<Box col items="stretch" gap className={clsx('w-full', className)}>
 			<PersonPhoto person={person} />
-			<EditableText
-				value={name}
-				onValueChange={(value) => person.set('name', value)}
-				className="mr-auto text-xl"
-			/>
+			<Heading emphasis="primary">
+				<EditableText
+					value={name}
+					onValueChange={(value) => person.set('name', value)}
+					style={{ marginRight: 'auto' }}
+				/>
+			</Heading>
 			<PersonQuickActions person={person} />
-			<Box col items="stretch" gap>
-				<Box className="text-xs color-gray-dark" items="center" gap="md">
-					<Icon name="clock" /> Added {new Date(createdAt).toLocaleDateString()}{' '}
-					(
-					<RelativeTime value={createdAt} />)
+			<Box col items="stretch" className="@mode-dense" gap="lg">
+				<Box gap="md" dim>
+					<Icon name="clock" style={{ marginTop: 2 }} />
+					<Text dim>
+						Added {new Date(createdAt).toLocaleDateString()} (
+						<RelativeTime value={createdAt} />)
+					</Text>
 				</Box>
 				{createdBy && (
 					<Suspense fallback={null}>
@@ -62,19 +68,19 @@ export function PersonDetails({ person, className }: PersonDetailsProps) {
 				<Suspense fallback={null}>
 					<Location person={person} />
 				</Suspense>
-				<Box gap="md">
-					<Icon name="tag" className="mt-1.5 color-gray-dark" />
+				<Box gap="md" dim>
+					<Icon name="tag" style={{ marginTop: 6 }} />
 					<Suspense>
 						<PersonTagEditor person={person} />
 					</Suspense>
 				</Box>
-				<Box gap="md">
-					<Icon name="note" className="mt-18px color-gray-dark" />
-					<NoteEditor person={person} className="flex-1" />
+				<Box gap="md" dim>
+					<Icon name="note" style={{ marginTop: 6 }} />
+					<NoteEditor person={person} style={{ flex: 1 }} />
 				</Box>
-				<Divider />
+				<Divider padded />
 				<PersonRelationships person={person} />
-				<Divider />
+				<Divider padded />
 				<PersonManage person={person} />
 			</Box>
 		</Box>
@@ -84,19 +90,22 @@ export function PersonDetails({ person, className }: PersonDetailsProps) {
 function NoteEditor({
 	person,
 	className,
+	...rest
 }: {
 	person: Person;
 	className?: string;
+	style?: React.CSSProperties;
 }) {
 	const { note } = hooks.useWatch(person);
 
 	return (
 		<LiveUpdateTextField
-			className={clsx('w-full text-sm', className)}
+			className={clsx('w-full @mode-dense', className)}
 			textArea
 			value={note || ''}
 			onChange={(value) => person.set('note', value)}
 			placeholder="Add a note..."
+			{...rest}
 		/>
 	);
 }
@@ -137,12 +146,17 @@ function Location({ person }: { person: Person }) {
 
 	return (
 		<Box col gap="sm">
-			<Box className="text-xs color-gray-dark" items="start" gap="md">
+			<Box dim className="@mode-dense" items="start" gap="md">
 				<Icon name="locate" />
-				<Box col gap="sm" className="flex-1">
+				<Box col gap="sm" grow>
 					<LazyMapView
 						location={geolocation.getAll()}
-						className="pointer-events-none h-[200px] w-full rounded-md"
+						style={{
+							pointerEvents: 'none',
+							height: 200,
+							width: '100%',
+							borderRadius: 'var(--m-radius)',
+						}}
 					/>
 					{geolocation.get('label') && <span>{geolocation.get('label')}</span>}
 				</Box>
@@ -151,7 +165,7 @@ function Location({ person }: { person: Person }) {
 				</Button>
 			</Box>
 			{nearby && (
-				<Box className="text-xs color-gray-dark" items="center" gap="md">
+				<Box dim className="@mode-dense" items="center" gap="md">
 					<Icon name="location" /> Met nearby
 				</Box>
 			)}
@@ -163,12 +177,11 @@ function CreatedBy({ userId }: { userId: string }) {
 	const user = useUserInfo(userId);
 	if (!user) return null;
 	return (
-		<Box className="text-xs color-gray-dark" items="center" gap="sm">
+		<Box dim className="@mode-dense" items="center" gap="sm">
 			<Icon name="profile" /> Added by{' '}
 			<Avatar
-				popIn={false}
 				name={user.name}
-				className="opacity-70"
+				style={{ opacity: 0.7 }}
 				imageSrc={user.imageUrl ?? null}
 			/>
 			<span>{user.name}</span>

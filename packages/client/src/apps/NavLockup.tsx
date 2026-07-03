@@ -3,13 +3,21 @@ import { useAppInfo } from '../react.js';
 import { AppIcon } from './AppIcon.js';
 import cls from './NavLockup.module.css';
 
-export interface NavLockupProps {}
+export interface NavLockupProps {
+	showOnMobile?: boolean;
+}
 
-export function NavLockup({}: NavLockupProps) {
+export function NavLockup({ showOnMobile }: NavLockupProps) {
 	const app = useAppInfo();
 
 	return (
-		<Box gap="sm" layout="center" p="sm" className={cls.root}>
+		<Box
+			gap="sm"
+			layout="center"
+			p="sm"
+			className={cls.root}
+			data-show-on-mobile={showOnMobile}
+		>
 			<AppIcon style={{ width: 30, height: 30 }} />
 			<Heading
 				render={<h1 />}

@@ -2,13 +2,11 @@ import { hooks } from '@/hooks.js';
 import {
 	Box,
 	Button,
-	clsx,
 	Collapsible,
 	Dialog,
 	Field,
 	Icon,
 	IconName,
-	PaletteName,
 } from '@a-type/ui';
 import { RemovableTag, TagCreateForm } from '@biscuits/client';
 import { Person } from '@names.biscuits/verdant';
@@ -34,7 +32,7 @@ export function PersonTagEditor({ person, className }: PersonTagEditorProps) {
 	const client = hooks.useClient();
 	const createTag = async (init: {
 		name: string;
-		color?: PaletteName;
+		color?: string;
 		icon?: IconName;
 	}) => {
 		const tag = await client.tags.put({
@@ -44,18 +42,18 @@ export function PersonTagEditor({ person, className }: PersonTagEditorProps) {
 		tags.add(tag.get('name'));
 	};
 	return (
-		<div className={clsx('flex flex-wrap items-center gap-1', className)}>
+		<Box wrap items="center" gap="xs" className={className}>
 			{tags?.map((tag) => (
 				<Suspense key={tag}>
 					<TagDisplay key={tag} tag={tag} onRemove={removeTag} />
 				</Suspense>
 			))}
 			<Dialog>
-				<Dialog.Trigger render={<Button size="small" />}>
-					<Icon name="plus" className="h-10px w-10px" />
-					<span className="text-xs">tag</span>
+				<Dialog.Trigger render={<Button size="small" emphasis="ghost" />}>
+					<Icon name="plus" />
+					tag
 				</Dialog.Trigger>
-				<Dialog.Content className="flex flex-col">
+				<Dialog.Content>
 					<Suspense>
 						<Field>
 							<Field.Label>Edit tags</Field.Label>
@@ -70,16 +68,12 @@ export function PersonTagEditor({ person, className }: PersonTagEditorProps) {
 							/>
 						</Field>
 						<Collapsible className="w-full">
-							<Collapsible.Trigger
-								render={
-									<Button size="small" className="min-h-24px leading-1" />
-								}
-							>
-								<Icon name="plus" className="h-10px w-10px" />
-								<span className="text-xs">New tag</span>
+							<Collapsible.Trigger render={<Button size="small" />}>
+								<Icon name="plus" />
+								New tag
 							</Collapsible.Trigger>
 							<Collapsible.Content className="w-full">
-								<Box className="mt-sm w-full" surface color="primary" p>
+								<Box className="w-full" surface color="primary" p>
 									<TagCreateForm
 										onCreate={createTag}
 										defaultColor="leek"
@@ -89,12 +83,12 @@ export function PersonTagEditor({ person, className }: PersonTagEditorProps) {
 							</Collapsible.Content>
 						</Collapsible>
 					</Suspense>
-					<Dialog.Actions className="border-0 border-t border-solid border-gray">
+					<Dialog.Actions>
 						<Dialog.Close>Done</Dialog.Close>
 					</Dialog.Actions>
 				</Dialog.Content>
 			</Dialog>
-		</div>
+		</Box>
 	);
 }
 
@@ -108,7 +102,7 @@ function TagDisplay({
 	const data = hooks.useTag(tag);
 	hooks.useWatch(data);
 	const icon = data?.get('icon') as IconName | undefined;
-	const color = data?.get('color') as PaletteName | undefined;
+	const color = data?.get('color') as string | undefined;
 	const name = data?.get('name') ?? tag;
 
 	return (
