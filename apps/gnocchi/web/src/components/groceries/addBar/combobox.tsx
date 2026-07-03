@@ -207,7 +207,7 @@ export function AddBarComboboxItems(props: { className?: string }) {
 				{(group) => (
 					<BaseCombobox.Group key={group.id} items={group.items}>
 						<BaseCombobox.GroupLabel>{group.label}</BaseCombobox.GroupLabel>
-						<BaseCombobox.GroupItemList>
+						<BaseCombobox.GroupItemList className={cls.groupItemList}>
 							{group.items.map((item) => (
 								<BaseCombobox.Item
 									className="@mode-neutral"

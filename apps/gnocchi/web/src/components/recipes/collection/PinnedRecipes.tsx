@@ -52,27 +52,31 @@ function PinnedRecipeListItem({ recipe }: { recipe: Recipe }) {
 	const { title } = hooks.useWatch(recipe);
 
 	return (
-		<Box items="center" gap="xs" border rounded="lg">
-			<RecipePinToggle recipe={recipe} />
-			<Link
-				to={makeRecipeLink(recipe, '')}
-				className={classNames(
-					'min-w-0 flex flex-1 flex-col gap-2px',
-					title.length > 20 && 'text-sm',
-				)}
-			>
-				<Text truncate className={cls.title}>
-					{title}
-				</Text>
-			</Link>
-			<AddToListButton
-				recipe={recipe}
-				emphasis="ghost"
-				className={cls.noShrink}
-			>
-				<Icon name="add_to_list" />
-			</AddToListButton>
-			<RecipeListItemMenu recipe={recipe} className={cls.noShrink} />
+		<Box items="center" gap="xs" border round p="md" justify="between">
+			<Box items="center" gap>
+				<RecipePinToggle recipe={recipe} />
+				<Link
+					to={makeRecipeLink(recipe, '')}
+					className={classNames(
+						'min-w-0 flex flex-1 flex-col gap-2px',
+						title.length > 20 && 'text-sm',
+					)}
+				>
+					<Text truncate className={cls.title}>
+						{title}
+					</Text>
+				</Link>
+			</Box>
+			<Box items="center" gap>
+				<AddToListButton
+					recipe={recipe}
+					emphasis="ghost"
+					className={cls.noShrink}
+				>
+					<Icon name="add_to_list" />
+				</AddToListButton>
+				<RecipeListItemMenu recipe={recipe} className={cls.noShrink} />
+			</Box>
 		</Box>
 	);
 }

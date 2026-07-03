@@ -83,12 +83,16 @@ export interface PaprikaImporterProps {
 	className?: string;
 	children?: ReactNode;
 	onClose?: () => void;
+	open?: boolean;
 }
 
 export const PaprikaImporter = forwardRef<
 	HTMLLabelElement,
 	PaprikaImporterProps
->(function PaprikaImporter({ className, children, onClose, ...rest }, ref) {
+>(function PaprikaImporter(
+	{ className, children, onClose, open: userOpen, ...rest },
+	ref,
+) {
 	const [data, setData] = useState<PaprikaRecipe[]>([]);
 	const [selected, setSelected] = useState<Record<string, boolean>>({});
 	const [loading, setLoading] = useState(false);
@@ -150,7 +154,7 @@ export const PaprikaImporter = forwardRef<
 
 	return (
 		<Dialog
-			open={!!data.length}
+			open={userOpen}
 			onOpenChange={(open) => {
 				if (!open) {
 					setData([]);
@@ -159,48 +163,56 @@ export const PaprikaImporter = forwardRef<
 				}
 			}}
 		>
-			<label className={className} ref={ref} {...rest}>
-				<input
-					type="file"
-					accept=".paprikarecipes"
-					onChange={async (e) => {
-						const files = e.target.files;
-						if (files) {
-							const json = await readEntries(files[0]);
-							console.log(json);
-							setData(json);
-							setSelected(
-								json.reduce((acc, recipe) => {
-									acc[recipe.uid] = true;
-									return acc;
-								}, {} as Record<string, boolean>),
-							);
-						}
-					}}
-					style={{
-						display: 'none',
-					}}
-				/>
-				{children}
-			</label>
 			<Dialog.Content>
 				<Dialog.Title>Choose recipes</Dialog.Title>
-				<ActionBar style={{ flexShrink: 0 }}>
-					<ActionButton onClick={() => setSelected({})}>
-						Select none
-					</ActionButton>
-					<ActionButton
-						onClick={() =>
-							setSelected((prev) => {
-								const next = { ...prev };
-								data.forEach((recipe) => (next[recipe.uid] = true));
-								return next;
-							})
-						}
-					>
-						Select all
-					</ActionButton>
-				</ActionBar>
+				<label className={className} ref={ref} {...rest}>
+					<input
+						type="file"
+						accept=".paprikarecipes"
+						onChange={async (e) => {
+							const files = e.target.files;
+							if (files) {
+								const json = await readEntries(files[0]);
+								console.log(json);
+								setData(json);
+								setSelected(
+									json.reduce((acc, recipe) => {
+										acc[recipe.uid] = true;
+										return acc;
+									}, {} as Record<string, boolean>),
+								);
+							}
+						}}
+						style={{
+							position: 'absolute',
+							opacity: 0,
+							width: 0,
+							height: 0,
+							pointerEvents: 'none',
+						}}
+					/>
+					<Button emphasis="primary" render={<div />}>
+						Upload Paprika 3 Recipes File
+					</Button>
+				</label>
+				{data.length > 0 && (
+					<ActionBar style={{ flexShrink: 0 }}>
+						<ActionButton onClick={() => setSelected({})}>
+							Select none
+						</ActionButton>
+						<ActionButton
+							onClick={() =>
+								setSelected((prev) => {
+									const next = { ...prev };
+									data.forEach((recipe) => (next[recipe.uid] = true));
+									return next;
+								})
+							}
+						>
+							Select all
+						</ActionButton>
+					</ActionBar>
+				)}
 				<Box col items="stretch" gap="sm" style={{ margin: 0 }}>
 					{data.map((recipe) => (
 						<RecipeItem

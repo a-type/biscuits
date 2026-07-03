@@ -16,8 +16,9 @@ export function RecipesPage() {
 				<Suspense>
 					<PageNowPlaying style={{ pointerEvents: 'none' }}>
 						<Suspense>
-							<RecipeCreateButton style={{ pointerEvents: 'auto' }}>
-								<span className="hidden md:block">New Recipe</span>
+							<RecipeCreateButton
+								style={{ pointerEvents: 'auto', width: 48, height: 48 }}
+							>
 								<Icon name="plus" size={20} />
 							</RecipeCreateButton>
 						</Suspense>

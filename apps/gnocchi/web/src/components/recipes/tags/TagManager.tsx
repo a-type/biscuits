@@ -11,14 +11,13 @@ import {
 	TextField,
 } from '@a-type/ui';
 import { ColorPicker } from '@biscuits/client';
-import { ReactElement } from 'react';
 
 export function TagManager({
-	children,
 	onClose,
+	open,
 }: {
-	children: ReactElement;
 	onClose?: () => void;
+	open?: boolean;
 }) {
 	const tags = hooks.useAllRecipeTagMetadata().sort((a, b) => {
 		return a.get('name').localeCompare(b.get('name'));
@@ -36,11 +35,11 @@ export function TagManager({
 
 	return (
 		<Dialog
+			open={open}
 			onOpenChange={(open) => {
 				if (!open) onClose?.();
 			}}
 		>
-			<Dialog.Trigger render={children} />
 			<Dialog.Content>
 				<ActionBar>
 					<UndoAction />
@@ -58,7 +57,7 @@ export function TagManager({
 									onValueChange={(color) => tag.set('color', color)}
 									value={tag.get('color') ?? null}
 								/>
-								<div className="flex-1 text-md">{tag.get('name')}</div>
+								<Box grow>{tag.get('name')}</Box>
 								<Button
 									color="attention"
 									emphasis="ghost"
@@ -71,14 +70,15 @@ export function TagManager({
 						</>
 					))}
 				</Box>
-				<div style={{ marginTop: 16 }}>
+				<div style={{ marginTop: 16, width: '100%' }}>
 					<FormikForm
 						initialValues={{ tagName: '' }}
 						onSubmit={(values) => {
 							createTag(values.tagName);
 						}}
+						className="w-full"
 					>
-						<Box gap="sm" items="center">
+						<Box gap="sm" items="end" full="width">
 							<TextField
 								style={{ minWidth: 64, flex: 1 }}
 								name="tagName"

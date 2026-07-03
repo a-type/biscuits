@@ -3,7 +3,7 @@ import { HeaderBar } from '@/components/recipes/layout/HeaderBar.jsx';
 import { makeRecipeLink } from '@/components/recipes/makeRecipeLink.js';
 import { usePageTitle } from '@/hooks/usePageTitle.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { Box, Field, H2, LiveUpdateTextField } from '@a-type/ui';
+import { Box, Field, H2, Input } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { RecipeNotFound } from '../RecipeNotFound.jsx';
 import { useRecipeFromSlugUrl, useWatchChanges } from '../hooks.js';
@@ -42,7 +42,7 @@ function RecipeEditorContent({ recipe }: { recipe: Recipe }) {
 	usePageTitle('Editing ' + recipe.get('title').slice(0, 20));
 
 	return (
-		<Box col gap="xl">
+		<Box col gap="xl" items="stretch">
 			<HeaderBar backUrl={makeRecipeLink(recipe, '')}>
 				<RecipeEditActions />
 			</HeaderBar>
@@ -68,15 +68,14 @@ function RecipeEditorContent({ recipe }: { recipe: Recipe }) {
 				<Field.Label>Servings</Field.Label>
 				<Field.Control
 					render={
-						<LiveUpdateTextField
+						<Input
 							value={recipe.get('servings')?.toString() ?? ''}
-							onChange={(value) => {
+							onValueChange={(value) => {
 								const asNumber = parseInt(value, 10);
 								if (isNaN(asNumber)) return;
 								recipe.set('servings', asNumber);
 							}}
 							type="number"
-							style={{ width: 100 }}
 						/>
 					}
 				/>

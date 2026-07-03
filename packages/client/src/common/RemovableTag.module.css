@@ -4,7 +4,6 @@
 	align-items: center;
 	gap: var(--m-space-xs);
 	border-radius: var(--m-action-radius);
-	padding-inline: var(--m-space-xs);
 	font-weight: var(--m-text-weight-bold);
 	@apply --mx-borderColor(var(--m-color-neutral-heavy));
 	@apply --mx-bg(var(--m-color-main-light));

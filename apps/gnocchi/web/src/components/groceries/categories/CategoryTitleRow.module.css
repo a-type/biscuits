@@ -12,7 +12,7 @@
 	text-transform: uppercase;
 	font-weight: var(--m-text-weight-bold);
 	font-style: italic;
-	@apply --mx-fg(var(--m-color-neutral-ink));
+	@apply --mx-fg(var(--m-color-neutral-heavy));
 	user-select: none;
 	margin: 0;
 	min-width: 0;

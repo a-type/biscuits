@@ -1,4 +1,5 @@
 import {
+	Box,
 	Button,
 	clsx,
 	HorizontalList,
@@ -27,15 +28,15 @@ export function RecipeInstructionsField({
 	});
 
 	return (
-		<div className="flex flex-col gap-2">
+		<Box col gap="sm" surface="ambient" border p>
 			{editor && <Toolbar editor={editor} />}
 			<EditorContent editor={editor} className={clsx(tipTapClassName)} />
-			<P className="text-xs">
+			<P emphasis="ambient" dim>
 				Press <kbd>Enter</kbd> to create a new step. Each step line will have a
 				checkbox you can use to track completion. I recommend keeping steps
 				short and self-contained.
 			</P>
-		</div>
+		</Box>
 	);
 }
 

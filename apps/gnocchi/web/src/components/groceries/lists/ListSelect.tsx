@@ -10,7 +10,6 @@ import {
 	SubmitButton,
 	Text,
 	TextField,
-	withClassName,
 } from '@a-type/ui';
 import { List } from '@gnocchi.biscuits/verdant';
 import { useState } from 'react';
@@ -26,8 +25,6 @@ export interface ListSelectProps {
 	onChange: (value: string | null | undefined) => void;
 	className?: string;
 }
-
-const FilledIcon = withClassName(Icon, 'important:fill-main');
 
 export function ListSelect({
 	value,
@@ -121,7 +118,7 @@ function ListSelectItemLabel({ list }: { list: List | null | undefined }) {
 	if (list === null) {
 		return (
 			<Box items="center" gap="sm">
-				<FilledIcon name="tag" className="@mode-lemon" />
+				<Icon filled name="tag" className="@mode-lemon" />
 				<Text truncate>Default</Text>
 			</Box>
 		);
@@ -138,7 +135,8 @@ function ListSelectItemLabel({ list }: { list: List | null | undefined }) {
 
 	return (
 		<Box items="center" gap="sm">
-			<FilledIcon
+			<Icon
+				filled
 				name="tag"
 				className={`@mode-${list.get('color') ?? 'lemon'}`}
 			/>

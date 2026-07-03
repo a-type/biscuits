@@ -39,3 +39,10 @@
 		display: inline;
 	}
 }
+
+.initials {
+	display: inline;
+	@media (min-width: 900px) {
+		display: none;
+	}
+}

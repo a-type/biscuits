@@ -45,7 +45,7 @@ export function ListTag({
 				<CollapsibleContent data-horizontal className={cls.root}>
 					<Link to={`/list/${list.get('id')}`} className={cls.link}>
 						<div className={clsx(listThemeClass, cls.linkContent)}>
-							<Icon name="tag" style={{ display: 'inline' }} />
+							<Icon name="tag" filled style={{ display: 'inline' }} />
 							<span className={cls.name}>{name}</span>
 							<span className={cls.initials}>
 								{getInitials(name).toUpperCase()}

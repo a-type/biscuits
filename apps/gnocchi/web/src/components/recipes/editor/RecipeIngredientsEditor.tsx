@@ -56,7 +56,7 @@ export function RecipeIngredientsEditor({
 	);
 
 	return (
-		<Box border rounded p="sm">
+		<Box border round col p>
 			<DndContext
 				sensors={sensors}
 				onDragEnd={({ active, over }) => {
@@ -133,7 +133,11 @@ function RecipeIngredientItem({
 			<Box gap="sm" items="start">
 				<Icon
 					name="grabby"
-					className="relative top-2 touch-none"
+					style={{
+						position: 'relative',
+						top: 6,
+						touchAction: 'none',
+					}}
 					{...listeners}
 				/>
 

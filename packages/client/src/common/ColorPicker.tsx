@@ -15,7 +15,10 @@ export function ColorPicker({ value, onValueChange }: ColorPickerProps) {
 	];
 	return (
 		<Select value={value} onValueChange={onValueChange} items={colors}>
-			<Select.Trigger />
+			<Select.Trigger>
+				<Select.Value>{(color) => <Swatch color={color} />}</Select.Value>
+				<Select.Icon />
+			</Select.Trigger>
 			<Select.Content>
 				{colors.map((color) => (
 					<Select.Item key={color.value} value={color.value}>
