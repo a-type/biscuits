@@ -64,7 +64,6 @@
 		"stopword": "^2.0.8",
 		"superjson": "^1.12.0",
 		"suspend-react": "^0.0.8",
-		"tesseract.js": "^4.0.3",
 		"typescript": "catalog:",
 		"@arbor-css/core": "catalog:",
 		"@arbor-css/postcss": "catalog:",

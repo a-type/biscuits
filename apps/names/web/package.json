@@ -22,7 +22,7 @@
 		"@types/react-dom": "catalog:",
 		"@verdant-web/react-router": "catalog:",
 		"@verdant-web/store": "catalog:",
-		"@vitejs/plugin-react-swc": "catalog:",
+		"@vitejs/plugin-react": "catalog:",
 		"downshift": "^9.0.8",
 		"gql.tada": "catalog:",
 		"mapbox-gl": "^3.9.4",

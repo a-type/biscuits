@@ -2,7 +2,10 @@
 	"name": "biscuits",
 	"version": "1.0.0",
 	"description": "",
-	"packageManager": "pnpm@9.15.2",
+	"engines": {
+		"node": ">=22"
+	},
+	"packageManager": "pnpm@10.34.4",
 	"type": "module",
 	"scripts": {
 		"dev": "turbo run dev",
@@ -36,12 +39,6 @@
 		"turbo": "^2.3.3",
 		"typescript": "catalog:",
 		"typescript-eslint": "catalog:"
-	},
-	"volta": {
-		"node": "22.12.0"
-	},
-	"engines": {
-		"node": ">=22.12.0"
 	},
 	"devDependencies": {}
 }

@@ -23,7 +23,7 @@
 		"@types/react-dom": "catalog:",
 		"@verdant-web/react-router": "catalog:",
 		"@verdant-web/store": "catalog:",
-		"@vitejs/plugin-react-swc": "catalog:",
+		"@vitejs/plugin-react": "catalog:",
 		"@wish-wash.biscuits/common": "workspace:*",
 		"@wish-wash.biscuits/share-schema": "workspace:*",
 		"@wish-wash.biscuits/verdant": "workspace:*",

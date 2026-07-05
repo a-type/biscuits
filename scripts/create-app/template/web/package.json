@@ -28,7 +28,7 @@
 		"@verdant-web/store": "catalog:",
 		"typescript": "catalog:",
 		"vite": "catalog:",
-		"@vitejs/plugin-react-swc": "catalog:",
+		"@vitejs/plugin-react": "catalog:",
 		"vite-plugin-pwa": "catalog:",
 		"workbox-core": "catalog:",
 		"workbox-expiration": "catalog:",

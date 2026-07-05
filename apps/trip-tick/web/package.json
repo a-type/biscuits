@@ -25,7 +25,7 @@
 		"@verdant-web/react": "catalog:",
 		"@verdant-web/react-router": "catalog:",
 		"@verdant-web/store": "catalog:",
-		"@vitejs/plugin-react-swc": "catalog:",
+		"@vitejs/plugin-react": "catalog:",
 		"classnames": "^2.3.2",
 		"date-fns": "catalog:",
 		"downshift": "^7.0.1",

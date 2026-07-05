@@ -21,7 +21,7 @@
 		"@use-gesture/react": "catalog:",
 		"@verdant-web/react-router": "catalog:",
 		"@verdant-web/store": "catalog:",
-		"@vitejs/plugin-react-swc": "catalog:",
+		"@vitejs/plugin-react": "catalog:",
 		"gql.tada": "catalog:",
 		"motion": "^12.23.12",
 		"react": "catalog:",

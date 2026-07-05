@@ -37,7 +37,7 @@
 		"@arbor-css/postcss": "catalog:",
 		"typescript": "catalog:",
 		"vite": "catalog:",
-		"@vitejs/plugin-react-swc": "catalog:"
+		"@vitejs/plugin-react": "catalog:"
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "^1.0.3",

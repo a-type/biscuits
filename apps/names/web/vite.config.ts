@@ -1,5 +1,5 @@
 import { viteCommonjs } from '@originjs/vite-plugin-commonjs';
-import react from '@vitejs/plugin-react-swc';
+import react from '@vitejs/plugin-react';
 import { fileURLToPath } from 'url';
 import { defineConfig } from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
