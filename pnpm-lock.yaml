@@ -13,17 +13,17 @@ catalogs:
       specifier: 2.1.3
       version: 2.1.3
     '@a-type/ui':
-      specifier: ^6.0.62
-      version: 6.0.62
+      specifier: ^6.0.63
+      version: 6.0.63
     '@a-type/utils':
       specifier: ^1.1.9
       version: 1.1.9
     '@arbor-css/core':
-      specifier: ^0.0.136
-      version: 0.0.136
+      specifier: ^0.0.137
+      version: 0.0.137
     '@arbor-css/postcss':
-      specifier: ^0.0.136
-      version: 0.0.136
+      specifier: ^0.0.137
+      version: 0.0.137
     '@cloudflare/vite-plugin':
       specifier: ^1.31.0
       version: 1.31.0
@@ -268,16 +268,16 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.62(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.63(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
       '@arbor-css/core':
         specifier: 'catalog:'
-        version: 0.0.136
+        version: 0.0.137
       '@arbor-css/postcss':
         specifier: 'catalog:'
-        version: 0.0.136(@arbor-css/core@0.0.136)
+        version: 0.0.137(@arbor-css/core@0.0.137)
       '@biscuits/client':
         specifier: workspace:*
         version: link:../../../packages/client
@@ -393,7 +393,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.62(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.63(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -457,10 +457,10 @@ importers:
     devDependencies:
       '@arbor-css/core':
         specifier: 'catalog:'
-        version: 0.0.136
+        version: 0.0.137
       '@arbor-css/postcss':
         specifier: 'catalog:'
-        version: 0.0.136(@arbor-css/core@0.0.136)
+        version: 0.0.137(@arbor-css/core@0.0.137)
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
         version: 1.31.0(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(workerd@1.20260401.1)(wrangler@4.80.0)
@@ -540,16 +540,16 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.62(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.63(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
       '@arbor-css/core':
         specifier: 'catalog:'
-        version: 0.0.136
+        version: 0.0.137
       '@arbor-css/postcss':
         specifier: 'catalog:'
-        version: 0.0.136(@arbor-css/core@0.0.136)
+        version: 0.0.137(@arbor-css/core@0.0.137)
       '@biscuits/client':
         specifier: workspace:*
         version: link:../../../packages/client
@@ -802,16 +802,16 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.62(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.63(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
       '@arbor-css/core':
         specifier: 'catalog:'
-        version: 0.0.136
+        version: 0.0.137
       '@arbor-css/postcss':
         specifier: 'catalog:'
-        version: 0.0.136(@arbor-css/core@0.0.136)
+        version: 0.0.137(@arbor-css/core@0.0.137)
       '@biscuits/client':
         specifier: workspace:*
         version: link:../../../packages/client
@@ -908,16 +908,16 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.62(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.63(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
       '@arbor-css/core':
         specifier: 'catalog:'
-        version: 0.0.136
+        version: 0.0.137
       '@arbor-css/postcss':
         specifier: 'catalog:'
-        version: 0.0.136(@arbor-css/core@0.0.136)
+        version: 0.0.137(@arbor-css/core@0.0.137)
       '@biscuits/client':
         specifier: workspace:*
         version: link:../../../packages/client
@@ -1020,16 +1020,16 @@ importers:
         version: 0.2.15(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.62(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.63(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
       '@arbor-css/core':
         specifier: 'catalog:'
-        version: 0.0.136
+        version: 0.0.137
       '@arbor-css/postcss':
         specifier: 'catalog:'
-        version: 0.0.136(@arbor-css/core@0.0.136)
+        version: 0.0.137(@arbor-css/core@0.0.137)
       '@biscuits/client':
         specifier: workspace:*
         version: link:../../../packages/client
@@ -1141,16 +1141,16 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.62(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.63(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
       '@arbor-css/core':
         specifier: 'catalog:'
-        version: 0.0.136
+        version: 0.0.137
       '@arbor-css/postcss':
         specifier: 'catalog:'
-        version: 0.0.136(@arbor-css/core@0.0.136)
+        version: 0.0.137(@arbor-css/core@0.0.137)
       '@biscuits/client':
         specifier: workspace:*
         version: link:../../../packages/client
@@ -1262,7 +1262,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.62(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.63(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1306,7 +1306,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.62(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.63(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@biscuits/graphql':
         specifier: workspace:*
         version: link:../../../packages/graphql
@@ -1343,10 +1343,10 @@ importers:
     devDependencies:
       '@arbor-css/core':
         specifier: 'catalog:'
-        version: 0.0.136
+        version: 0.0.137
       '@arbor-css/postcss':
         specifier: 'catalog:'
-        version: 0.0.136(@arbor-css/core@0.0.136)
+        version: 0.0.137(@arbor-css/core@0.0.137)
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
         version: 1.31.0(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@22.10.2)(esbuild@0.27.3)(jiti@2.6.1)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(workerd@1.20260401.1)(wrangler@4.80.0)
@@ -1404,16 +1404,16 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.62(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.63(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
       '@arbor-css/core':
         specifier: 'catalog:'
-        version: 0.0.136
+        version: 0.0.137
       '@arbor-css/postcss':
         specifier: 'catalog:'
-        version: 0.0.136(@arbor-css/core@0.0.136)
+        version: 0.0.137(@arbor-css/core@0.0.137)
       '@biscuits/client':
         specifier: workspace:*
         version: link:../../../packages/client
@@ -1516,7 +1516,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.62(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.63(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@astrojs/check':
         specifier: ^0.9.4
         version: 0.9.4(prettier@3.6.2)(typescript@5.9.3)
@@ -1541,10 +1541,10 @@ importers:
     devDependencies:
       '@arbor-css/core':
         specifier: 'catalog:'
-        version: 0.0.136
+        version: 0.0.137
       '@arbor-css/postcss':
         specifier: 'catalog:'
-        version: 0.0.136(@arbor-css/core@0.0.136)
+        version: 0.0.137(@arbor-css/core@0.0.137)
       typescript:
         specifier: 'catalog:'
         version: 5.9.3
@@ -1558,7 +1558,7 @@ importers:
         version: 2.1.3
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.62(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.63(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1613,10 +1613,10 @@ importers:
     devDependencies:
       '@arbor-css/core':
         specifier: 'catalog:'
-        version: 0.0.136
+        version: 0.0.137
       '@arbor-css/postcss':
         specifier: 'catalog:'
-        version: 0.0.136(@arbor-css/core@0.0.136)
+        version: 0.0.137(@arbor-css/core@0.0.137)
       '@types/copy':
         specifier: ^0.3.5
         version: 0.3.5
@@ -1706,13 +1706,13 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.0.62(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+        version: 6.0.63(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       '@arbor-css/core':
         specifier: 'catalog:'
-        version: 0.0.136
+        version: 0.0.137
       '@arbor-css/postcss':
         specifier: 'catalog:'
-        version: 0.0.136(@arbor-css/core@0.0.136)
+        version: 0.0.137(@arbor-css/core@0.0.137)
       '@biscuits/apps':
         specifier: workspace:*
         version: link:../packages/apps
@@ -2018,8 +2018,8 @@ packages:
       react: ^18.3.1
       react-dom: ^18.3.1
 
-  '@a-type/ui@6.0.62':
-    resolution: {integrity: sha512-wVz1Xk1yw6YvedYSKD/pLB3Zz7wCcJx4kgUuWSQF2STCPTqBXh38HtI4nCELli0cf1MGnMOy1fTmSq9amcrSUw==}
+  '@a-type/ui@6.0.63':
+    resolution: {integrity: sha512-lEdLXpihwnw10exIZVXlYfswkRtwiMm6v4GhazKi1dBJ+WvDyCS0KURILI8nSZgqdNCTW/pFzxBiKMG7O7X2Ig==}
     engines: {node: '>=24'}
     peerDependencies:
       react: ^19
@@ -2056,31 +2056,61 @@ packages:
     resolution: {integrity: sha512-JlXPF7PR0+nPamYZSQ3sGdCJ9Cb2t4pHrToTup5415STv8BKvywv3ETRTnUuJbh1RAafsbr5fcNvI/LPS7Tf9A==}
     hasBin: true
 
+  '@arbor-css/core@0.0.137':
+    resolution: {integrity: sha512-dc7libdMiQtn6HPYlZE79CmjViJtQLNUwNAJNqu/LfG5nF2ZrPjWZuVd7JTfDPNYG9GVDNZ6f90lC51vMLH4Uw==}
+    hasBin: true
+
   '@arbor-css/css-eval@0.0.136':
     resolution: {integrity: sha512-BC65WWqiS96hTzZY9BdjkhGVR+G4pb49jIN7bDP5qfNctEz1miJj39AZj7QTElwW+Q8hx3SqQ1hpik1L2+2zVw==}
+
+  '@arbor-css/css-eval@0.0.137':
+    resolution: {integrity: sha512-YawoOX2Tb+nGA8WyziXt9JyLY9ZB2fzR/f3zXuegKsyGvSacPkAsvkolnhV3atzDuiD131qOzIfHdzUhj9Bd1g==}
 
   '@arbor-css/functions@0.0.136':
     resolution: {integrity: sha512-bR2j7kFk/ZyX7xfBk9is3JlKffg/mEb7Cf0bGVyb6nIbbsTCDdgmynytrCsF7czjUnO1lwtIfKBspYAk8yeQGg==}
 
+  '@arbor-css/functions@0.0.137':
+    resolution: {integrity: sha512-BYNQgqQM3axGvyZsuC1p/KcKTJwZKVcAMBv22MWG61xkJQtkP4LUm6W/jb2vSqBDsIp1fXaU48uEjUf1Nviywg==}
+
   '@arbor-css/globals@0.0.136':
     resolution: {integrity: sha512-etapQEN7rjablRtyb6gFs5sWwMH3ZJpyCvGQWgL5u7eMYC/ki0DQA9sJBHu7GLa+q1Hep8+ld8AOJRReSKNDOw==}
 
+  '@arbor-css/globals@0.0.137':
+    resolution: {integrity: sha512-eySwZq5Bs5Bc2eqGQd3J5lodeqyEliatIrFSUbno1TcAcHxf+6oXGDewvjNBauczeovxrvF6ryWz3j3yNf3BBg==}
+
   '@arbor-css/modes@0.0.136':
     resolution: {integrity: sha512-aB6xYthtBzddXnNPkBxLdTowfCkQxmdQUCm+pq0QU5vpa9TbrhCRw/xzkponzBVg7T5tmq1/jyyuF/i2bOelTg==}
+
+  '@arbor-css/modes@0.0.137':
+    resolution: {integrity: sha512-TiZSfKrFUdKkM1z2/ouZN408LfC0CmhBwb7SrqkFb3+de/6p6JFT65nZEgTmCX1DY0xDYI9pTwobM6QnQL5zkg==}
 
   '@arbor-css/postcss@0.0.136':
     resolution: {integrity: sha512-tIwx75ChxTgRsLj9f7KLl5RMu3rwmagQR86Hyse8ugiHR4apM7P5ZlNSuVV7NYXgC38MTGL4vERh0L3I0nzk+A==}
     peerDependencies:
       '@arbor-css/core': '*'
 
+  '@arbor-css/postcss@0.0.137':
+    resolution: {integrity: sha512-CYcYkhzR8uCOnJXkE/VmLEHecCW6kON9CFqd3p1rgQbkFIikiO9409GBcVTLMW6iyDJyT2P/7Oz1UDEr7CiaEg==}
+    peerDependencies:
+      '@arbor-css/core': '*'
+
   '@arbor-css/preset@0.0.136':
     resolution: {integrity: sha512-XiqzowsoC/UkFedQrD0tEnQxksPwDU1Jb579xNj3KLa5KslRYNvN+WwuWkPOTttuqglAlt7W5WIXm3796/iaNA==}
+
+  '@arbor-css/preset@0.0.137':
+    resolution: {integrity: sha512-PvL/hEy8TiBbsknR0m79FpEeQSA3ZXqCg+I7NYLVn/wyaCl2EZtQ4KeouBS28gdg0I5x8nFqfImg8aa3jxgzEQ==}
 
   '@arbor-css/tokens@0.0.136':
     resolution: {integrity: sha512-kE+DOGiFKAn55iw51kcy/NLIyrtIA61E38I7wE2PXzUoMUqcv9fPtSyHSrah8ygRvDHfqUZSGQxwQDhpGWjIQQ==}
 
+  '@arbor-css/tokens@0.0.137':
+    resolution: {integrity: sha512-xRKY/941ARgS5Wo+wj6wchMx6ErQSN97i4kE4AZnpnZftg5IiAfiHN4AO5X/LIiuphVZ6RZWZra9SwK2TMmcyw==}
+
   '@arbor-css/util@0.0.136':
     resolution: {integrity: sha512-mab+tC+KY+ZoeC6/UhNqlpi3aTXn1i7oJne66VdDbIsGmYZDQkvwVp5pg+JcAGvKFuiSgVLoAim058Ulj53jAQ==}
+
+  '@arbor-css/util@0.0.137':
+    resolution: {integrity: sha512-y3H7fvWolXfHfU1w+6IyoxA3zfbC/lKWt32KaTYSa9DCq8TWrInwEXkjWxOhxgOzzJdu/Cu4n7QUnrYBsb0BMA==}
 
   '@astrojs/check@0.9.4':
     resolution: {integrity: sha512-IOheHwCtpUfvogHHsvu0AbeRZEnjJg3MopdLddkJE70mULItS/Vh37BHcI00mcOJcH1vhD3odbpvWokpxam7xA==}
@@ -10969,7 +10999,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@a-type/ui@6.0.62(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
+  '@a-type/ui@6.0.63(@types/react@19.2.14)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)':
     dependencies:
       '@a-type/utils': 1.1.9
       '@arbor-css/core': 0.0.136
@@ -11039,10 +11069,31 @@ snapshots:
       lit-element: 4.2.2
       yargs: 18.0.0
 
+  '@arbor-css/core@0.0.137':
+    dependencies:
+      '@arbor-css/css-eval': 0.0.137
+      '@arbor-css/functions': 0.0.137
+      '@arbor-css/globals': 0.0.137
+      '@arbor-css/modes': 0.0.137
+      '@arbor-css/preset': 0.0.137
+      '@arbor-css/tokens': 0.0.137
+      '@arbor-css/util': 0.0.137
+      design-tokens-format-module: 0.11.2
+      jiti: 2.6.1
+      lil-gui: 0.21.0
+      lit-element: 4.2.2
+      yargs: 18.0.0
+
   '@arbor-css/css-eval@0.0.136':
     dependencies:
       '@arbor-css/tokens': 0.0.136
       '@arbor-css/util': 0.0.136
+      lightningcss: 1.32.0
+
+  '@arbor-css/css-eval@0.0.137':
+    dependencies:
+      '@arbor-css/tokens': 0.0.137
+      '@arbor-css/util': 0.0.137
       lightningcss: 1.32.0
 
   '@arbor-css/functions@0.0.136':
@@ -11050,10 +11101,20 @@ snapshots:
       '@arbor-css/css-eval': 0.0.136
       '@arbor-css/tokens': 0.0.136
 
+  '@arbor-css/functions@0.0.137':
+    dependencies:
+      '@arbor-css/css-eval': 0.0.137
+      '@arbor-css/tokens': 0.0.137
+
   '@arbor-css/globals@0.0.136':
     dependencies:
       '@arbor-css/functions': 0.0.136
       '@arbor-css/tokens': 0.0.136
+
+  '@arbor-css/globals@0.0.137':
+    dependencies:
+      '@arbor-css/functions': 0.0.137
+      '@arbor-css/tokens': 0.0.137
 
   '@arbor-css/modes@0.0.136':
     dependencies:
@@ -11061,6 +11122,13 @@ snapshots:
       '@arbor-css/globals': 0.0.136
       '@arbor-css/tokens': 0.0.136
       '@arbor-css/util': 0.0.136
+
+  '@arbor-css/modes@0.0.137':
+    dependencies:
+      '@arbor-css/css-eval': 0.0.137
+      '@arbor-css/globals': 0.0.137
+      '@arbor-css/tokens': 0.0.137
+      '@arbor-css/util': 0.0.137
 
   '@arbor-css/postcss@0.0.136(@arbor-css/core@0.0.136)':
     dependencies:
@@ -11073,6 +11141,17 @@ snapshots:
       jiti: 2.6.1
       postcss: 8.5.8
 
+  '@arbor-css/postcss@0.0.137(@arbor-css/core@0.0.137)':
+    dependencies:
+      '@arbor-css/core': 0.0.137
+      '@arbor-css/css-eval': 0.0.137
+      '@arbor-css/functions': 0.0.137
+      '@arbor-css/globals': 0.0.137
+      '@arbor-css/tokens': 0.0.137
+      '@arbor-css/util': 0.0.137
+      jiti: 2.6.1
+      postcss: 8.5.8
+
   '@arbor-css/preset@0.0.136':
     dependencies:
       '@arbor-css/css-eval': 0.0.136
@@ -11082,9 +11161,22 @@ snapshots:
       '@arbor-css/tokens': 0.0.136
       '@arbor-css/util': 0.0.136
 
+  '@arbor-css/preset@0.0.137':
+    dependencies:
+      '@arbor-css/css-eval': 0.0.137
+      '@arbor-css/functions': 0.0.137
+      '@arbor-css/globals': 0.0.137
+      '@arbor-css/modes': 0.0.137
+      '@arbor-css/tokens': 0.0.137
+      '@arbor-css/util': 0.0.137
+
   '@arbor-css/tokens@0.0.136': {}
 
+  '@arbor-css/tokens@0.0.137': {}
+
   '@arbor-css/util@0.0.136': {}
+
+  '@arbor-css/util@0.0.137': {}
 
   '@astrojs/check@0.9.4(prettier@3.6.2)(typescript@5.9.3)':
     dependencies:
