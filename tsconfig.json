@@ -15,7 +15,6 @@
 		"resolveJsonModule": true,
 		"preserveSymlinks": true,
 		"jsx": "react-jsx",
-		"downlevelIteration": true,
 		"experimentalDecorators": true,
 		"isolatedModules": true,
 		"customConditions": ["development"],
