@@ -19,6 +19,13 @@ export const ALLOWED_ORIGINS = (env: Env) => [
 	// including localhost versions
 	'http://localhost:6299',
 	'http://localhost:4444',
+	// cloudflare preview apps
+	'https://prod-biscuits-homepage-app.pages.dev',
+	'https://prod-biscuits-gnocchi-app.pages.dev',
+	'https://prod-biscuits-wish-wash-app.pages.dev',
+	'https://prod-biscuits-trip-tick-app.pages.dev',
+	'https://prod-biscuits-palette-app.pages.dev',
+	'https://prod-biscuits-names-app.pages.dev',
 	// app origins
 	...apps.map((app) => app.url),
 	...apps.map((app) => app.devOriginOverride),
