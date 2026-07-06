@@ -17,11 +17,11 @@
 			"default": "./dist/serviceWorkers.js",
 			"types": "./dist/serviceWorkers.d.ts"
 		},
-		"./henrietta.css": {
-			"production": "./henrietta.css",
-			"import": "./henrietta.css",
-			"node": "./henrietta.css",
-			"default": "./henrietta.css"
+		"./global.css": {
+			"production": "./global.css",
+			"import": "./global.css",
+			"node": "./global.css",
+			"default": "./global.css"
 		},
 		"./subscription": {
 			"production": "./dist/subscription/index.js",

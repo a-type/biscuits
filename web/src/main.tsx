@@ -1,6 +1,5 @@
-import '@biscuits/client/henrietta.css';
-
 import '@a-type/ui/main.css';
+import '@biscuits/client/global.css';
 import './main.css';
 
 import { Provider as UIProvider } from '@a-type/ui';

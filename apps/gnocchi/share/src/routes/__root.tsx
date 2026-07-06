@@ -1,4 +1,8 @@
 /// <reference types="vite/client" />
+
+import '@a-type/ui/main.css';
+import '@biscuits/client/global.css';
+
 import { Provider } from '@a-type/ui';
 import { QueryClient } from '@tanstack/react-query';
 import {
@@ -8,12 +12,9 @@ import {
 } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import * as React from 'react';
-
-import '@a-type/ui/main.css';
 import { DefaultCatchBoundary } from '~/components/DefaultCatchBoundary';
 import { NotFound } from '~/components/NotFound';
 import { seo } from '~/utils/seo';
-import '../henrietta.css';
 
 export const Route = createRootRouteWithContext<{
 	queryClient: QueryClient;
