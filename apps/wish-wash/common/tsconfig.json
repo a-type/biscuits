@@ -4,7 +4,6 @@
 		"jsx": "preserve",
 		"outDir": "./dist",
 		"rootDir": "./src",
-		"baseUrl": ".",
 		"customConditions": ["development"]
 	},
 	"include": ["src"],
