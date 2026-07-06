@@ -1,13 +1,12 @@
 import { AppChangelogEditor } from '@/components/admin/AppChangelogEditor.jsx';
-import { TabsContent, TabsList, TabsRoot, TabsTrigger } from '@a-type/ui';
+import { Box, TabsContent, TabsList, TabsRoot, TabsTrigger } from '@a-type/ui';
 import { apps } from '@biscuits/apps';
 import { Suspense, useState } from 'react';
-import classes from './AdminChangelogsPage.module.css';
 
 export function AdminChangelogsPage() {
 	const [val, setVal] = useState<string>(apps[0].id);
 	return (
-		<div className={classes.col}>
+		<Box col>
 			<TabsRoot value={val} onValueChange={setVal}>
 				<TabsList>
 					{apps.map((app) => (
@@ -24,7 +23,7 @@ export function AdminChangelogsPage() {
 					</TabsContent>
 				))}
 			</TabsRoot>
-		</div>
+		</Box>
 	);
 }
 
