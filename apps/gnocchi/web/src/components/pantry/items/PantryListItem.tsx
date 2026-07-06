@@ -119,7 +119,7 @@ export function PantryListItem({
 					</div>
 					<Icon name="new_window" className={cls.openIcon} />
 				</Card.Main>
-				<Card.Footer style={{ padding: showLabels ? 0 : undefined }}>
+				<Card.Footer>
 					<Card.Actions
 						className={classNames('flex-wrap', {
 							[cls.actions]: showLabels,

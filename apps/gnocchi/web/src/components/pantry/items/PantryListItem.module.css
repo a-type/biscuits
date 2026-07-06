@@ -37,7 +37,7 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 	align-items: center;
-	gap: var(--m-space-xs);
+	gap: var(--m-space-sm);
 	padding: var(--m-space-xs);
 	font-size: var(--m-prose-ambient-size);
 	font-style: italic;
