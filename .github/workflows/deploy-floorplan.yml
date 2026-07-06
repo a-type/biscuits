@@ -3,11 +3,11 @@ on:
   push:
     branches: [main]
     paths:
-      - 'apps/floorplan/**'
-      - 'packages/client/**'
-      - 'packages/apps/**'
-      - '.github/workflows/deploy-floorplan.yml'
-      - 'pnpm-workspace.yaml'
+      - "apps/floorplan/**"
+      - "packages/client/**"
+      - "packages/apps/**"
+      - ".github/workflows/deploy-floorplan.yml"
+      - "pnpm-workspace.yaml"
 
 jobs:
   build-and-deploy-floorplan:
@@ -19,11 +19,11 @@ jobs:
       - name: Setup pnpm
         uses: pnpm/action-setup@v2.0.1
         with:
-          version: 9.15.2
+          version: 10.34.4
       - name: Setup node
         uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: "24"
           cache: pnpm
 
       - name: Install dependencies
