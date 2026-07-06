@@ -44,7 +44,13 @@ export function TextWithMultipliedNumbers({
 								<Text
 									bold
 									color="main"
-									render={<Box items="center" gap="xs" />}
+									render={
+										<Box
+											items="center"
+											gap="xs"
+											style={{ display: 'inline' }}
+										/>
+									}
 									className="multiplied-number @mode-accent"
 								>
 									{fractionToText(parseFloat(fragment.trim()) * multiplier)}
