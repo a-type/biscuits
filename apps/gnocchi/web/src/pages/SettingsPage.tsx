@@ -1,7 +1,7 @@
 import { useKeepOpenAfterSelect } from '@/components/groceries/addBar/hooks.js';
 import { ManageCategoriesDialog } from '@/components/menu/ManageCategoriesDialog.jsx';
 import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
-import { Button, PageContent, Switch } from '@a-type/ui';
+import { Button, Field, PageContent, Switch, Text } from '@a-type/ui';
 import { SettingsPageWrapper } from '@biscuits/client/apps';
 
 export function SettingsPage() {
@@ -24,7 +24,7 @@ function ManageCategories() {
 			<ManageCategoriesDialog>
 				<Button>Manage categories</Button>
 			</ManageCategoriesDialog>
-			<span className="text-xs">Add, remove, and rearrange categories</span>
+			<Text emphasis="ambient">Add, remove, and rearrange categories</Text>
 		</div>
 	);
 }
@@ -32,15 +32,17 @@ function ManageCategories() {
 function ManageSettings() {
 	const [addBarKeepOpen, setAddBarKeepOpen] = useKeepOpenAfterSelect();
 	return (
-		<div className="row">
-			<Switch
-				id="addbar-keepopen"
-				checked={addBarKeepOpen}
-				onCheckedChange={setAddBarKeepOpen}
-			/>
-			<label htmlFor="addbar-keepopen" className="text-sm">
+		<Field horizontal>
+			<Field.Control>
+				<Switch
+					id="addbar-keepopen"
+					checked={addBarKeepOpen}
+					onCheckedChange={setAddBarKeepOpen}
+				/>
+			</Field.Control>
+			<Field.Label htmlFor="addbar-keepopen">
 				Keep add bar open after adding items
-			</label>
-		</div>
+			</Field.Label>
+		</Field>
 	);
 }

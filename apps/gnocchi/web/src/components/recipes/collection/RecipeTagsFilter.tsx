@@ -1,6 +1,6 @@
 import { RecipeTagMenuWrapper } from '@/components/recipes/tags/RecipeTagMenuWrapper.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { Button, HorizontalList, Icon } from '@a-type/ui';
+import { Button, Chip, HorizontalList, Icon } from '@a-type/ui';
 import classNames from 'classnames';
 
 export function RecipeTagsFilter({
@@ -30,20 +30,24 @@ export function RecipeTagsFilter({
 		<HorizontalList className={className}>
 			{filteredByOmit.map((tag) => (
 				<RecipeTagMenuWrapper tagName={tag.get('name')} key={tag.get('name')}>
-					<Button
-						size="small"
-						emphasis="light"
-						toggled={!!selectedValues?.includes(tag.get('name'))}
-						toggleMode="indicator"
+					<Chip
+						render={
+							<Button
+								size="small"
+								toggled={!!selectedValues?.includes(tag.get('name'))}
+								toggleMode="indicator"
+							/>
+						}
+						emphasis="primary"
 						onClick={() => onSelect(tag.get('name'))}
 						className={classNames(
-							'my-auto min-h-24px px-2 py-1 text-xs',
-							tag.get('color') && `palette-${tag.get('color')}`,
+							tag.get('color') && `@mode-${tag.get('color')}`,
 						)}
+						style={{ minHeight: 24 }}
 					>
 						<span>{tag.get('icon') ?? <Icon name="tag" />}</span>
 						<span>{tag.get('name')}</span>
-					</Button>
+					</Chip>
 				</RecipeTagMenuWrapper>
 			))}
 		</HorizontalList>

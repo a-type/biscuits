@@ -1,0 +1,68 @@
+.suggestionGroup {
+	display: flex;
+	flex-direction: column;
+	gap: var(--m-space-sm);
+
+	& + & {
+		padding-top: var(--m-space-md);
+		border-top: var(--m-lineWidth) solid var(--m-color-neutral-heavy);
+	}
+}
+
+.title {
+	margin-top: var(--m-space-sm);
+}
+
+.loadMore {
+	width: 100%;
+	justify-content: center;
+}
+
+.card {
+	max-width: 100%;
+	user-select: none;
+	min-width: 120px;
+}
+.cardFull {
+	width: 100%;
+}
+
+.cardMain {
+	padding: var(--m-space-sm);
+}
+
+.cardImage {
+	background-position: center 20%;
+	background-size: cover;
+}
+
+.cardTags {
+	display: flex;
+	flex-direction: row;
+	gap: var(--m-space-sm);
+	padding-inline: var(--m-space-sm);
+	padding-block: var(--m-space-xs);
+}
+
+.note {
+	min-width: 0;
+	flex: 1;
+	overflow: clip;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.inlineCardContent {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: var(--m-space-xs);
+	padding: var(--m-space-sm);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	position: relative;
+	align-self: stretch;
+	min-width: 0;
+	border-radius: 0;
+}

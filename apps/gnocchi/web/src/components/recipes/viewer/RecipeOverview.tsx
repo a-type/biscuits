@@ -12,14 +12,17 @@ import { useWakeLock } from '@/hooks/useWakeLock.js';
 import { saveHubRecipeOnboarding } from '@/onboarding/saveHubRecipeOnboarding.js';
 import { hooks } from '@/stores/groceries/index.js';
 import {
+	Box,
 	Button,
 	Chip,
 	Divider,
 	H1,
 	H2,
+	Heading,
 	Icon,
 	P,
 	PageNowPlaying,
+	Text,
 } from '@a-type/ui';
 import { formatMinutes } from '@a-type/utils';
 import { OnboardingBanner } from '@biscuits/client';
@@ -76,38 +79,46 @@ export function RecipeOverview({ recipe }: RecipeOverviewProps) {
 
 	return (
 		<>
-			<div id="pageTop" className="h-0 w-0" />
+			<div id="pageTop" />
 			<HeaderBar backUrl="/recipes">
-				<CookingActionBar recipe={recipe} className="flex-1" />
+				<CookingActionBar recipe={recipe} style={{ flex: 1, minWidth: 0 }} />
 			</HeaderBar>
 			<OnboardingBanner onboarding={saveHubRecipeOnboarding} step="recipe">
 				<H2>This is your copy!</H2>
 				<P>Feel free to make changes, add notes, etc.</P>
 			</OnboardingBanner>
-			<div className="w-full flex flex-col items-start gap-6 pb-33dvh">
+			<Box
+				full="width"
+				col
+				items="start"
+				gap="lg"
+				p="sm"
+				style={{ paddingBottom: '33dvh' }}
+			>
 				<TitleAndImageLayout>
 					<TitleContainer>
-						<div className="my-3 w-full flex flex-col items-start self-start gap-4 text-xs">
+						<Box
+							full="width"
+							col
+							items="start"
+							gap="md"
+							style={{ marginBlock: 12, alignSelf: 'start' }}
+						>
 							<H1>{title}</H1>
-							<div className="flex flex-row items-start gap-2">
+							<Box items="start" gap="sm">
 								<RecipeNote recipe={recipe} />
-							</div>
+							</Box>
 
-							<div className="w-full flex flex-col items-start justify-between gap-3">
-								<div className="palette-gray flex flex-row flex-wrap items-center gap-1">
+							<Box full="width" col items="start" gap="sm">
+								<Box wrap items="center" gap="sm" className="@mode-neutral">
 									<Chip
-										className="cursor-pointer"
 										onClick={() => {
 											document
 												.getElementById('#steps')
 												?.scrollIntoView({ behavior: 'smooth' });
 										}}
-										render={
-											<Button
-												emphasis="ghost"
-												className="text-xs font-normal"
-											/>
-										}
+										emphasis="ambient"
+										render={<Button size="small" />}
 									>
 										<Icon name="arrowDown" />
 										<span>Jump to steps</span>
@@ -125,19 +136,28 @@ export function RecipeOverview({ recipe }: RecipeOverviewProps) {
 									{!!servings && (
 										<Chip>
 											Serves{' '}
-											<span
+											<Text
+												color={multiplier !== 1 ? 'main' : undefined}
+												bold
 												className={classNames({
-													'font-bold color-accent-dark': multiplier !== 1,
+													'@mode-accent': multiplier !== 1,
 												})}
 											>
 												{multipliedServings.toLocaleString()}
-											</span>
+											</Text>
 										</Chip>
 									)}
 									{url && (
 										<Chip color="accent" render={<Link to={url} newTab />}>
 											View original{' '}
-											<Icon name="new_window" className="relative ml-2 b--1" />
+											<Icon
+												name="new_window"
+												style={{
+													position: 'relative',
+													marginLeft: 2,
+													bottom: -1,
+												}}
+											/>
 										</Chip>
 									)}
 									{copyOf && (
@@ -147,12 +167,12 @@ export function RecipeOverview({ recipe }: RecipeOverviewProps) {
 									<Suspense>
 										<RecipeTagsEditor
 											recipe={recipe}
-											className="palette-primary"
+											className="@mode-primary"
 										/>
 									</Suspense>
-								</div>
-							</div>
-						</div>
+								</Box>
+							</Box>
+						</Box>
 					</TitleContainer>
 					{mainImage && (
 						<ImageContainer>
@@ -165,33 +185,43 @@ export function RecipeOverview({ recipe }: RecipeOverviewProps) {
 				</Suspense>
 
 				<Divider />
-				<div className="w-full flex flex-col gap-4">
-					<div className="w-auto w-full flex flex-row items-center self-start justify-between gap-6">
-						<H2>Ingredients</H2>
+				<Box col gap full="width">
+					<Box
+						full="width"
+						items="center"
+						justify="between"
+						gap="lg"
+						style={{ alignSelf: 'start' }}
+					>
+						<Heading render={<h2 />} bold>
+							Ingredients
+						</Heading>
 						<RecipeMultiplierField recipe={recipe} />
-					</div>
-					<div className="w-full flex flex-row items-center justify-between gap-2">
+					</Box>
+					<Box full="width" items="center" justify="between" gap="sm">
 						<AddToListButton size="small" emphasis="primary" recipe={recipe}>
 							<Icon name="add_to_list" />
 							<span>Bulk add...</span>
 						</AddToListButton>
-					</div>
+					</Box>
 					<Suspense>
 						<RecipeIngredientsViewer recipe={recipe} />
 					</Suspense>
-				</div>
+				</Box>
 				<Divider />
-				<div className="w-full flex flex-col gap-4" ref={stepsRef}>
-					<H2 id="#steps">Steps</H2>
+				<Box col full="width" gap="md" ref={stepsRef}>
+					<Heading render={<h2 />} bold id="#steps">
+						Steps
+					</Heading>
 					<Suspense>
 						<InstructionsProvider isEditing={false} recipeId={recipe.get('id')}>
 							<RecipeInstructionsViewer recipe={recipe} />
 						</InstructionsProvider>
 					</Suspense>
-				</div>
+				</Box>
 				<PostCooking recipe={recipe} />
 				<OverviewNowPlaying recipe={recipe} />
-			</div>
+			</Box>
 		</>
 	);
 }
@@ -213,10 +243,10 @@ function PreludeSection({ recipe }: { recipe: Recipe }) {
 	}
 
 	return (
-		<div className="w-full">
-			<H2 className="gutter-bottom">Description</H2>
+		<Box full="width" col gap="sm">
+			<H2>Description</H2>
 			<RecipePreludeViewer recipe={recipe} />
-		</div>
+		</Box>
 	);
 }
 
@@ -224,14 +254,9 @@ function OverviewNowPlaying({ recipe }: { recipe: Recipe }) {
 	const { showCookTools } = useSnapshot(viewerState);
 	return (
 		<PageNowPlaying>
-			<div className="w-full flex flex-row items-center justify-end gap-2">
-				{showCookTools && (
-					<CookingToolbar
-						recipe={recipe}
-						className="animate-springy animate-pop-up animate-duration-200"
-					/>
-				)}
-			</div>
+			<Box full="width" items="center" justify="end" gap="sm">
+				{showCookTools && <CookingToolbar recipe={recipe} />}
+			</Box>
 			<Suspense>
 				<RecipesNowPlaying showSingle={false} />
 			</Suspense>
@@ -281,10 +306,10 @@ function PostCooking({ recipe }: { recipe: Recipe }) {
 
 	return (
 		<Suspense>
-			<div className="mt-10 w-full flex flex-col items-stretch gap-3">
+			<Box col full="width" gap="sm" style={{ marginBottom: 400 }}>
 				<AddImagePrompt recipe={recipe} />
 				<AddNotePrompt recipe={recipe} />
-			</div>
+			</Box>
 		</Suspense>
 	);
 }

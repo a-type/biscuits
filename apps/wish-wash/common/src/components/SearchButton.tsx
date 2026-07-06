@@ -1,10 +1,11 @@
-import { Button, clsx, Icon, Select } from '@a-type/ui';
+import { Box, Button, Icon, Select } from '@a-type/ui';
 import { useState } from 'react';
 
 export interface SearchButtonProps {
 	prompt: string;
 	provider?: keyof typeof searchConfigs;
 	className?: string;
+	style?: React.CSSProperties;
 }
 
 const searchConfigs = {
@@ -37,16 +38,22 @@ export function SearchButton({
 	prompt,
 	provider,
 	className,
+	style,
 }: SearchButtonProps) {
 	const [selectedProvider, setSelectedProvider] =
 		useState<keyof typeof searchConfigs>('amazon');
 	const finalProvider = provider || selectedProvider;
 
 	return (
-		<div className={clsx('flex flex-row', className)}>
+		<Box className={className}>
 			<Button
-				className={clsx('relative z-1', !provider && 'rounded-r-none')}
 				size="small"
+				style={{
+					position: 'relative',
+					zIndex: 1,
+					borderTopRightRadius: provider ? undefined : 0,
+					borderBottomRightRadius: provider ? undefined : 0,
+				}}
 				render={
 					<a
 						href={searchConfigs[finalProvider].template.replace('$1', prompt)}
@@ -64,8 +71,12 @@ export function SearchButton({
 					onValueChange={(v) => (v ? setSelectedProvider(v) : void 0)}
 				>
 					<Select.Trigger
-						className="rounded-l-none border-l-none !gap-0"
 						size="small"
+						style={{
+							borderTopLeftRadius: 0,
+							borderBottomLeftRadius: 0,
+							zIndex: 0,
+						}}
 					>
 						<Select.Value>{null}</Select.Value>
 						<Select.Icon />
@@ -79,6 +90,6 @@ export function SearchButton({
 					</Select.Content>
 				</Select>
 			)}
-		</div>
+		</Box>
 	);
 }

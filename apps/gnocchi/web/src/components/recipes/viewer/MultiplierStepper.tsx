@@ -13,6 +13,8 @@ export function MultiplierStepper(props: MultiplierStepperProps) {
 		<NumberStepper
 			{...props}
 			steps={STEPS}
+			defaultValue={1}
+			highlightChange
 			renderValue={(value) => (
 				<>
 					<Icon name="x" style={{ width: 10, height: 10 }} />{' '}

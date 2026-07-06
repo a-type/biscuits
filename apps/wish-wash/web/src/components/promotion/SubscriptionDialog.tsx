@@ -12,9 +12,7 @@ export function SubscriptionDialog({}: SubscriptionDialogProps) {
 		<Dialog open={show} onOpenChange={(o) => (upsellState.show = o)}>
 			<Dialog.Content>
 				<Dialog.Title>Share your list for a year</Dialog.Title>
-				<P className="gutter-bottom">
-					Sign up for free to share your list with friends and family!
-				</P>
+				<P>Sign up for free to share your list with friends and family!</P>
 				<P>
 					Free users get one published wishlist on the house to share with
 					others. Recipients can browse your list and mark items as purchased.

@@ -4,6 +4,7 @@ import {
 } from '@/components/trips/utils.js';
 import { hooks } from '@/store.js';
 import {
+	Box,
 	Button,
 	CheckboxRoot,
 	clsx,
@@ -11,6 +12,7 @@ import {
 	LiveUpdateTextField,
 	NumberStepper,
 	Slider,
+	Text,
 	useParticles,
 } from '@a-type/ui';
 import { ResultOf } from '@biscuits/graphql';
@@ -19,7 +21,6 @@ import {
 	TripCompletionsValue,
 	TripExtraItemsValueItem,
 } from '@trip-tick.biscuits/verdant';
-import classNames from 'classnames';
 import { useEffect, useRef, useState } from 'react';
 import { getItemRulesLabel } from '../lists/utils.js';
 
@@ -148,32 +149,42 @@ function ChecklistItem({
 	}, [completed, particles]);
 
 	return (
-		<div className="w-full flex flex-col gap-2 p-2">
-			<div className="w-full row">
+		<Box col gap="sm" p="sm" full="width">
+			<Box full="width" gap items="center">
 				<CheckboxRoot
 					checked={completed}
 					onCheckedChange={mainOnChecked}
-					className="palette-accent h-32px w-32px flex touch-none items-center justify-center rounded-full color-black"
+					style={{
+						touchAction: 'none',
+						display: 'flex',
+					}}
+					className="@mode-accent"
 				>
-					<Icon name="check" />
+					<Icon name="check" style={{ margin: 'auto' }} />
 				</CheckboxRoot>
-				<div className="flex flex-1 flex-col items-start">
-					<div className="w-full flex flex-row flex-wrap items-center gap-2">
+				<Box grow col items="start">
+					<Box full="width" wrap items="center" gap="sm">
 						{onDescriptionChanged && editing ?
 							<LiveUpdateTextField
 								value={description}
 								onChange={onDescriptionChanged}
 								placeholder="What is it?"
-								className="min-w-50% flex-1"
+								style={{
+									minWidth: '50%',
+									flexGrow: 1,
+								}}
 								autoSelect
 								autoFocus
 							/>
-						:	<label className="select-none font-bold">{description}</label>}
+						:	<Text render={<label />} bold style={{ userSelect: 'none' }}>
+								{description}
+							</Text>
+						}
 						{!!onQuantityChanged && editing && (
 							<NumberStepper
 								value={computedQuantity}
 								onChange={onQuantityChanged}
-								className="mr-auto"
+								style={{ marginRight: 'auto' }}
 							/>
 						)}
 						{editing && onDelete && (
@@ -189,17 +200,17 @@ function ChecklistItem({
 								<Icon name={editing ? 'check' : 'pencil'} />
 							</Button>
 						)}
-					</div>
+					</Box>
 					<Slider.Base
-						className={clsx(
-							'pointer-events-none w-full flex-1',
-							completed ? 'palette-accent' : 'palette-primary',
-						)}
+						className={clsx(completed ? '@mode-accent' : '@mode-primary')}
 						value={completedQuantity}
 						min={0}
 						max={computedQuantity}
 						onValueChange={(v) => onCompletionChanged(v as number)}
 						style={{
+							pointerEvents: 'none',
+							width: '100%',
+							flexGrow: 1,
 							// Fix overflow clipping in Safari
 							// https://gist.github.com/domske/b66047671c780a238b51c51ffde8d3a0
 							transform: 'translateZ(0)',
@@ -209,32 +220,39 @@ function ChecklistItem({
 						<Slider.Track className="pointer-events-none">
 							<Slider.Indicator className="pointer-events-none transition-all" />
 							{new Array(computedQuantity - 1).fill(0).map((_, i) => (
-								<div
+								<Box
 									key={i}
-									className="pointer-events-none absolute left-0 top-0 h-full w-1px bg-gray-dark"
 									style={{
+										pointerEvents: 'none',
+										position: 'absolute',
+										top: 0,
+										height: '100%',
+										width: '1px',
 										left: `${(100 / computedQuantity) * (i + 1)}%`,
+										backgroundColor: 'var(--m-color-neutral-heavy)',
 									}}
 								/>
 							))}
 							<Slider.Thumb
-								className={classNames(
-									'pointer-events-initial w-8px rounded-sm ring-1 transition-all',
-									completed && 'ring-1 color-white bg-main ring-black',
-									'flex items-center justify-center',
-									// completedQuantity === 0 && 'opacity-0',
-								)}
+								style={{
+									pointerEvents: 'initial',
+									width: '8px',
+								}}
 							/>
 						</Slider.Track>
 					</Slider.Base>
-				</div>
-			</div>
-			<div className="flex flex-row items-center justify-between gap-2 text-xs color-gray-dark">
-				{subline && <div className="italic">{subline}</div>}
-				<span className="ml-auto">
+				</Box>
+			</Box>
+			<Box items="center" justify="between" gap="sm" dim>
+				{subline && (
+					<Text italic dim emphasis="ambient">
+						{subline}
+					</Text>
+				)}
+				<Text italic dim emphasis="ambient" style={{ marginLeft: 'auto' }}>
 					{completedQuantity} / {computedQuantity}
-				</span>
-			</div>
-		</div>
+				</Text>
+			</Box>
+		</Box>
 	);
 }

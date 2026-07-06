@@ -3,6 +3,7 @@ import { useMotionPoint } from '@/hooks/useVerdantMotion.js';
 import { clsx } from '@a-type/ui';
 import { FloorLabelsValue } from '@floorplan.biscuits/verdant';
 import { motion, useMotionTemplate } from 'motion/react';
+import cls from './shape.module.css';
 
 export interface FloorLabelProps {
 	label: FloorLabelsValue;
@@ -23,14 +24,18 @@ export function FloorLabel({ label }: FloorLabelProps) {
 				y={-5}
 				rx={2}
 				ry={2}
-				className="fill-black"
+				className={cls.fillBlack}
 			/>
 			<motion.text
 				x={0}
 				y={0}
 				dominantBaseline="middle"
 				textAnchor="middle"
-				className={clsx('fill-white', 'stroke-none text-[5px] font-mono')}
+				style={{
+					fontSize: '5px',
+					fontFamily: 'monospace',
+				}}
+				className={clsx(cls.fillWhite, cls.strokeNone)}
 			>
 				{content}
 			</motion.text>

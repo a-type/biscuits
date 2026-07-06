@@ -1,5 +1,6 @@
 import { Box, Button, CollapsibleSimple, Icon } from '@a-type/ui';
 import { useSuperBar } from './SuperBarContext.jsx';
+import cls from './SuperBarCreate.module.css';
 
 export interface SuperBarCreateProps {}
 
@@ -8,19 +9,20 @@ export function SuperBarCreate({}: SuperBarCreateProps) {
 
 	return (
 		<CollapsibleSimple open={!!inputValue} className="w-full">
-			<Box col gap="xs" surface color="primary" className="rounded-none">
+			<Box col gap="xs" surface="secondary" round={false}>
 				<Button
 					emphasis="ghost"
-					className="[--focus:var(--color-primary-dark)] w-full justify-center justify-between gap-sm rounded-none text-wrap"
+					full="width"
+					className={cls.button}
 					loading={loading}
 					onClick={() => {
 						createNew();
 					}}
 				>
 					Create "{inputValue}"
-					<Box gap="xs" border className="px-md py-xs color-primary-dark">
-						<span className="text-xs font-mono">Enter</span>
-						<Icon name="enterKey" className="ml-auto" />
+					<Box gap="xs" border surface="primary" className={cls.kbd}>
+						<span>Enter</span>
+						<Icon name="enterKey" className={cls.icon} />
 					</Box>
 				</Button>
 			</Box>

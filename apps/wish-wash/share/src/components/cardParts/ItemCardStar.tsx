@@ -1,4 +1,4 @@
-import { clsx, Icon } from '@a-type/ui';
+import { Icon } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 
 export const itemCardStarFragment = graphql(`
@@ -22,12 +22,15 @@ export function ItemCardStar({
 	return (
 		<Icon
 			name="star"
-			className={clsx(
-				'h-20px w-20px',
-				'absolute right-md top-md z-1',
-				'fill-primary',
-				className,
-			)}
+			size={20}
+			style={{
+				position: 'absolute',
+				right: 'var(--m-space-md)',
+				top: 'var(--m-space-md)',
+				zIndex: 1,
+			}}
+			filled
+			className={className}
 		/>
 	);
 }

@@ -1,9 +1,10 @@
 import { makeRecipeLink } from '@/components/recipes/makeRecipeLink.js';
 import { hooks } from '@/stores/groceries/index.js';
-import { ConfirmedButton, Icon } from '@a-type/ui';
+import { clsx, ConfirmedButton, Icon, Text } from '@a-type/ui';
 import { Recipe, RecipeInstructionsInit } from '@gnocchi.biscuits/verdant';
 import { Link } from '@verdant-web/react-router';
 import { useKeepAliveSlugQuery } from '../hooks.js';
+import cls from './RecipeNowPlayingLink.module.css';
 
 export function RecipeNowPlayingLink({ recipe }: { recipe: Recipe }) {
 	const { title, instructions, session, slug } = hooks.useWatch(recipe);
@@ -27,15 +28,12 @@ export function RecipeNowPlayingLink({ recipe }: { recipe: Recipe }) {
 	};
 
 	return (
-		<div className="flex flex-row items-center justify-between gap-2 pr-2">
-			<Link
-				to={makeRecipeLink(recipe, '')}
-				className="w-full flex flex-row items-center gap-2 overflow-hidden p-2 focus-visible:outline-none focus-visible:bg-gray-light"
-			>
+		<div className={cls.root}>
+			<Link to={makeRecipeLink(recipe, '')} className={cls.link}>
 				<PieProgress value={progress} />
-				<div className="max-w-full min-w-0 overflow-hidden text-ellipsis whitespace-nowrap text-sm font-bold">
+				<Text emphasis="secondary" bold truncate>
 					{title}
-				</div>
+				</Text>
 			</Link>
 			<ConfirmedButton
 				confirmText="This will reset recipe progress"
@@ -57,7 +55,7 @@ function PieProgress({ value }: { value: number }) {
 	return (
 		<svg
 			viewBox="0 0 32 32"
-			className="h-32px w-32px flex-shrink-0 overflow-hidden border-light rounded-full"
+			className={clsx(cls.pieRoot, value >= 1 && '@mode-success')}
 		>
 			<circle
 				r="50%"
@@ -73,7 +71,7 @@ function PieProgress({ value }: { value: number }) {
 				cy="50%"
 				fill="transparent"
 				strokeDasharray={`${value * circumference} ${circumference}`}
-				className="origin-center rotate-270 transform stroke-32px stroke-primary"
+				className={cls.pieProgress}
 				opacity={0.7 + value * 0.3}
 			/>
 			{value >= 1 && (
@@ -82,7 +80,7 @@ function PieProgress({ value }: { value: number }) {
 					<path
 						d="M 12 16 L 16 20 L 22 12"
 						fill="none"
-						className="stroke-2 stroke-white"
+						className={cls.pieCheck}
 					/>
 				</>
 			)}

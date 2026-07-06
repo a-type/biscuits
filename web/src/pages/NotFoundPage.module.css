@@ -1,0 +1,11 @@
+.container {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: var(--m-space-lg);
+	padding-inline: var(--m-space-xl);
+}
+
+.selfStart {
+	align-self: flex-start;
+}

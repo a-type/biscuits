@@ -1,5 +1,5 @@
 import { hooks } from '@/hooks.js';
-import { Box, Button, PaletteName, paletteNames } from '@a-type/ui';
+import { Box, Button } from '@a-type/ui';
 import { EntryTags } from '@mood.biscuits/verdant';
 import { AddTag } from './AddTag.jsx';
 
@@ -22,8 +22,12 @@ export function TagsEditor({ tags }: TagsEditorProps) {
 			{allTags.map((tag) => {
 				const color = tag.get('color');
 				const showColor =
-					paletteNames.includes(color as any) ?
-						(color as PaletteName)
+					(
+						['lemon', 'leek', 'tomato', 'eggplant', 'blueberry'].includes(
+							color as any,
+						)
+					) ?
+						color
 					:	'primary';
 				return (
 					<Button
@@ -49,7 +53,7 @@ export function TagsEditor({ tags }: TagsEditorProps) {
 							}
 						}}
 						toggled={tags.has(tag.get('value'))}
-						color={showColor}
+						color={showColor as any}
 						emphasis="light"
 					>
 						{tag.get('value')}

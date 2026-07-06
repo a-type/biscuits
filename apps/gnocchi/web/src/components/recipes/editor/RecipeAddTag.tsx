@@ -2,6 +2,8 @@ import { hooks } from '@/stores/groceries/index.js';
 import {
 	Box,
 	Button,
+	Chip,
+	clsx,
 	Dialog,
 	DialogActions,
 	DialogClose,
@@ -9,8 +11,7 @@ import {
 	Icon,
 } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
-import classNames from 'classnames';
-import { ComponentPropsWithRef, ReactNode, Suspense, forwardRef } from 'react';
+import { ComponentPropsWithRef, forwardRef, ReactNode, Suspense } from 'react';
 import { RecipeTagsFullEditor } from './RecipeTagsFullEditor.jsx';
 
 export function RecipeEditTagsRoot(props: { children: ReactNode }) {
@@ -52,8 +53,8 @@ const DefaultTrigger = forwardRef<HTMLButtonElement, { className?: string }>(
 	function DefaultTrigger({ className, ...rest }, ref) {
 		return (
 			<Button
-				size="small"
-				className={classNames('min-h-24px px-2 py-1 text-xs', className)}
+				className={clsx('@mode-denser', className)}
+				render={<Chip />}
 				ref={ref}
 				{...rest}
 			>

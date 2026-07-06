@@ -24,11 +24,7 @@ export function RecentPeople({
 		<PeopleList count={people.length} className={className}>
 			{people.map((person, index) => (
 				<PeopleListItem index={index} key={person.profile.id}>
-					<PersonAvatar
-						key={person.profile.id}
-						person={person}
-						className="relative left-[calc(var(--index)*-8px)] z-[var(--index)]"
-					/>
+					<PersonAvatar key={person.profile.id} person={person} />
 				</PeopleListItem>
 			))}
 		</PeopleList>

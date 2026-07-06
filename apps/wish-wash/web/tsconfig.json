@@ -9,8 +9,7 @@
 		"paths": {
 			"@/*": ["./src/*"]
 		},
-		"types": ["vite/client", "vite-plugin-pwa"],
-		"composite": true
+		"types": ["vite/client", "vite-plugin-pwa"]
 	},
 	"include": ["src"],
 	"references": [
@@ -19,12 +18,6 @@
 		},
 		{
 			"path": "../../../packages/graphql"
-		},
-		{
-			"path": "../common"
-		},
-		{
-			"path": "../verdant"
 		}
 	]
 }

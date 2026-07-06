@@ -1,5 +1,5 @@
 import { hooks } from '@/hooks.js';
-import { clsx, Dialog, Icon, ScrollArea } from '@a-type/ui';
+import { Dialog, Icon, ScrollArea } from '@a-type/ui';
 import {
 	closestCenter,
 	DndContext,
@@ -22,6 +22,7 @@ import { Item, List } from '@wish-wash.biscuits/verdant';
 import { CSSProperties, forwardRef, useCallback, useState } from 'react';
 import { ItemTypeChip } from '../items/ItemTypeChip.jsx';
 import { useReordering } from './hooks.js';
+import cls from './ItemSorter.module.css';
 
 export interface ItemSorterProps {
 	list: List;
@@ -65,10 +66,7 @@ export function ItemSorter({ list, className }: ItemSorterProps) {
 
 	return (
 		<Dialog open={reordering} onOpenChange={setReordering}>
-			<Dialog.Content
-				disableSheet
-				className="left-auto right-2 top-4 h-90dvh flex flex-col translate-0 animate-fade-in-right"
-			>
+			<Dialog.Content disableSheet className={cls.dialog}>
 				<Dialog.Title>Reorder items</Dialog.Title>
 				<DndContext
 					sensors={sensors}
@@ -80,8 +78,8 @@ export function ItemSorter({ list, className }: ItemSorterProps) {
 						items={items.map((i) => i.get('id'))}
 						strategy={verticalListSortingStrategy}
 					>
-						<ScrollArea className={clsx('flex-1', className)}>
-							<ScrollArea.Content className="p-1">
+						<ScrollArea style={{ flex: 1 }} className={className}>
+							<ScrollArea.Content className={cls.content}>
 								{items.map((item, i) => (
 									<SortableItem
 										item={item}
@@ -109,8 +107,8 @@ const SorterItem = forwardRef<
 	const { description } = hooks.useWatch(item);
 
 	return (
-		<div ref={ref} className="mb-2 row rounded-md p-4 bg-wash" {...rest}>
-			<Icon name="grabby" className="mr-2" {...handleProps} />
+		<div ref={ref} className={cls.item} {...rest}>
+			<Icon name="grabby" className={cls.grabby} {...handleProps} />
 			<ItemTypeChip item={item} />
 			<div>{description}</div>
 		</div>

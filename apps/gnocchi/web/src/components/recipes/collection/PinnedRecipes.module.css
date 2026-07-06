@@ -1,0 +1,32 @@
+.root {
+	display: flex;
+	flex-direction: column;
+}
+
+.explainer {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: var(--m-space-sm);
+}
+
+.divider {
+	margin-block: var(--m-space-md);
+}
+
+.titleLink {
+	min-width: 0px;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	gap: var(--m-space-xs);
+	overflow: hidden;
+}
+
+.title {
+	padding-inline: var(--m-space-sm);
+}
+
+.noShrink {
+	flex-shrink: 0;
+}

@@ -68,7 +68,7 @@ export function SearchAndBuyExperience({
 			}}
 		>
 			<Dialog.Trigger render={children} />
-			<Dialog.Content width="lg" className="gap-md">
+			<Dialog.Content width="lg">
 				{showPost ?
 					<PostBuyExperienceContent item={item} listAuthor={listAuthor} />
 				:	<PreBuyExperienceContent
@@ -82,14 +82,14 @@ export function SearchAndBuyExperience({
 						<Button
 							emphasis="ghost"
 							onClick={() => setShowPost(false)}
-							className="mr-auto"
+							style={{ marginRight: 'auto' }}
 							size="default"
 						>
 							What was it again?
 						</Button>
 					:	<ItemCardPurchaseButton
 							itemId={item.id}
-							className="mr-auto"
+							style={{ marginRight: 'auto' }}
 							size="default"
 						/>
 					}

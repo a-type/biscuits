@@ -7,8 +7,8 @@ import {
 	useTransition,
 } from '@react-spring/web';
 import { useSearchParams } from '@verdant-web/react-router';
-import classNames from 'classnames';
 import { useEffect } from 'react';
+import classes from './AppDemo.module.css';
 import PhoneDemo from './PhoneDemo.jsx';
 
 const AImg = animated('img');
@@ -48,75 +48,53 @@ export function AppDemo({ className }: AppDemoProps) {
 	}, [appId, transRef]);
 
 	return (
-		<Box
-			d={{ default: 'col-reverse', md: 'row' }}
-			gap="md"
-			items="stretch"
-			justify="center"
-			className={clsx(className, `theme-${app.theme}`)}
-		>
-			<div
-				className={classNames(
-					'flex flex-1 flex-col-reverse items-center gap-8 p-md',
-					'sm:flex-row',
-				)}
-			>
-				<div
-					className={classNames(
-						'grid w-full flex-shrink-0 items-center justify-items-start gap-4 sm:w-1/2',
-						'[grid-template-areas:"icon_title""icon_description""icon_button"]',
-						'[grid-template-columns:auto_1fr]',
-						'sm:[grid-template-areas:"icon""title""description""button"]',
-						'sm:([grid-template-columns:auto] justify-items-end text-end)',
-					)}
-				>
-					{transitions((style, i) => {
-						const app = visibleApps[i];
-						return (
-							<>
-								<AImg
-									src={`${app.url}/${visibleApps[i].iconPath}`}
-									alt={app.name}
-									className="h-[120px] h-auto w-[120px] rounded-lg object-contain object-center"
-									style={{ gridArea: 'icon', ...style }}
-								/>
-								<AH3
-									className="m-0 text-2xl font-bold"
-									style={{ gridArea: 'title', ...style }}
-								>
-									{app.name}
-								</AH3>
-								<AP
-									className="m-0 h-80px text-lg"
-									style={{ gridArea: 'description', ...style }}
-								>
-									{app.description}
-								</AP>
-								<Button
-									emphasis="primary"
-									className="self-center justify-self-start sm:justify-self-end"
-									render={
-										<a href={url} target="_blank" rel="noopener noreferrer" />
-									}
-									style={{ gridArea: 'button' }}
-								>
-									Open app
-									<Icon name="new_window" />
-								</Button>
-							</>
-						);
-					})}
-				</div>
-				<div className="flex flex-col gap-2">
+		<div className={clsx(className, `@mode-${app.theme}`, classes.info)}>
+			<div className={classes.details}>
+				{transitions((style, i) => {
+					const app = visibleApps[i];
+					return (
+						<>
+							<AImg
+								src={`${app.url}/${app.iconPath}`}
+								alt={app.name}
+								className={classes.appIcon}
+								style={{ gridArea: 'icon', ...style }}
+							/>
+							<AH3
+								className={classes.appName}
+								style={{ gridArea: 'title', ...style }}
+							>
+								{app.name}
+							</AH3>
+							<AP
+								className={classes.appDescription}
+								style={{ gridArea: 'description', ...style }}
+							>
+								{app.description}
+							</AP>
+							<Button
+								emphasis="primary"
+								className={classes.openButton}
+								render={
+									<a href={url} target="_blank" rel="noopener noreferrer" />
+								}
+								style={{ gridArea: 'button' }}
+							>
+								Open app
+								<Icon name="new_window" />
+							</Button>
+						</>
+					);
+				})}
+				<div className={classes.phoneDemoWrap}>
 					<PhoneDemo src={app.demoVideoSrc} direction={'left'} />
 				</div>
 			</div>
 			<Box
-				d={{ default: 'row', md: 'col' }}
 				wrap
 				gap="md"
 				items="center"
-				className="w-full md:(h-full w-auto flex-0-0-auto)"
+				className={classes.sidebar}
 				justify="center"
 			>
 				{visibleApps.map((app) => (
@@ -127,18 +105,18 @@ export function AppDemo({ className }: AppDemoProps) {
 						toggled={app.id === appId}
 						toggleMode="state-only"
 						className={clsx(
-							'rounded-sm',
-							appId === app.id ? 'bg-primary-light' : '',
+							classes.appButton,
+							appId === app.id ? classes.appButtonActive : '',
 						)}
 					>
 						<img
 							src={`${app.url}/${app.iconPath}`}
 							alt={app.name}
-							className="h-60px w-60px"
+							className={classes.pickerIcon}
 						/>
 					</Button>
 				))}
 			</Box>
-		</Box>
+		</div>
 	);
 }

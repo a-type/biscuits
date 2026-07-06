@@ -7,25 +7,29 @@ import {
 	Description,
 	FeatureSection,
 	Footer,
+	Hero,
 	HeroTitle,
 	Root,
-	TitleWrap,
 } from '@/components/promo/layout.jsx';
+import classes from './TripTickPage.module.css';
 
 export interface TripTickPageProps {}
 
 export function TripTickPage({}: TripTickPageProps) {
 	return (
-		<Root className="theme-eggplant">
-			<Background className="h-80%">
-				<img src="/images/trip-tick/hero1.svg" className="h-full w-full" />
+		<Root className="@mode-eggplant">
+			<Background>
+				<img
+					src="/images/trip-tick/hero1.svg"
+					className={classes.backgroundImage}
+				/>
 			</Background>
-			<Content className="bg-wash">
-				<TitleWrap>
+			<Content>
+				<Hero>
 					<AppName appId="trip-tick" />
 					<HeroTitle>Never forget your socks again.</HeroTitle>
 					<Description>Trip Tick is a smarter packing list.</Description>
-				</TitleWrap>
+				</Hero>
 				<FeatureSection
 					title="The power of a spreadsheet; the simplicity of your notes app"
 					items={[

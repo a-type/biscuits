@@ -1,7 +1,9 @@
+import { NoteIcon } from '@/components/note/NoteIcon.jsx';
 import { useUnitConversion } from '@/components/recipes/viewer/unitConversion.js';
 import { hooks } from '@/stores/groceries/index.js';
 import { useAddIngredients } from '@/stores/groceries/mutations.js';
 import {
+	Box,
 	Button,
 	CollapsibleContent,
 	CollapsibleRoot,
@@ -11,17 +13,16 @@ import {
 	DropdownMenuLabel,
 	DropdownMenuTrigger,
 	Icon,
+	Text,
 	useToggle,
 } from '@a-type/ui';
 import { fractionToText } from '@a-type/utils';
 import { convertUnits, lookupUnit } from '@gnocchi.biscuits/conversion';
 import { RecipeIngredientsItem } from '@gnocchi.biscuits/verdant';
-import classNames from 'classnames';
-import { useCallback, useMemo, useState } from 'react';
+import { CSSProperties, useCallback, useMemo, useState } from 'react';
 import { NoteEditor } from '../editor/NoteEditor.jsx';
 import { IngredientText } from './IngredientText.jsx';
-
-(window as any).convertUnits = convertUnits;
+import cls from './RecipeIngredientViewer.module.css';
 
 export interface RecipeIngredientViewerProps {
 	ingredient: RecipeIngredientsItem;
@@ -30,6 +31,7 @@ export interface RecipeIngredientViewerProps {
 	disableAddNote?: boolean;
 	disableAddToList?: boolean;
 	recipeId: string;
+	style?: CSSProperties;
 }
 
 export function RecipeIngredientViewer({
@@ -39,6 +41,7 @@ export function RecipeIngredientViewer({
 	disableAddNote,
 	disableAddToList,
 	recipeId,
+	style,
 }: RecipeIngredientViewerProps) {
 	const { note, isSectionHeader, quantity, unit } = hooks.useWatch(ingredient);
 	const officialUnit = lookupUnit(unit);
@@ -92,21 +95,14 @@ export function RecipeIngredientViewer({
 	}, [ingredient, multiplier, add, recipeId]);
 
 	return (
-		<div
-			className={classNames(
-				'flex flex-col items-end gap-1',
-				isSectionHeader && 'font-bold',
-				className,
-			)}
-		>
-			<div className="w-full flex flex-row items-start">
+		<Box col items="end" gap="sm" className={className} style={style}>
+			<Box full="width" items="start">
 				<IngredientText
-					className="mt-1 block flex-1"
-					// don't multiply section headers.
-					multiplier={isSectionHeader ? 1 : multiplier}
+					style={{ marginTop: 4, display: 'block', flex: 1 }}
+					multiplier={multiplier}
 					ingredient={ingredient}
 				/>
-				<div className="relative top--1 flex flex-row items-center gap-2">
+				<Box items="center" gap="xs" dim>
 					{conversionEnabled && (
 						<>
 							<DropdownMenu
@@ -115,12 +111,10 @@ export function RecipeIngredientViewer({
 								}}
 							>
 								<DropdownMenuTrigger render={<Button emphasis="ghost" />}>
-									<Icon name="convert" />
+									<Icon name="convert" className={cls.icon} />
 								</DropdownMenuTrigger>
 								<DropdownMenuContent>
-									<DropdownMenuLabel className="py-1 pl-3 text-sm font-bold">
-										Convert to:
-									</DropdownMenuLabel>
+									<DropdownMenuLabel>Convert to:</DropdownMenuLabel>
 									{convertOptions.map((opt) => (
 										<DropdownMenuItem
 											key={opt}
@@ -135,36 +129,30 @@ export function RecipeIngredientViewer({
 					)}
 					{!isSectionHeader && !disableAddToList && (
 						<Button emphasis="ghost" onClick={addToList} disabled={added}>
-							<Icon name={added ? 'check' : 'add_to_list'} />
+							<Icon
+								name={added ? 'check' : 'add_to_list'}
+								className={cls.icon}
+							/>
 						</Button>
 					)}
 					{!disableAddNote && (
 						<Button emphasis="ghost" onClick={toggleShowNote}>
-							{!!note ? (
-								<Icon
-									name="note"
-									className={
-										showNote
-											? undefined
-											: 'color-primary-dark fill-primary stroke-primary-dark'
-									}
-								/>
-							) : (
-								<Icon name="add_note" />
-							)}
+							<NoteIcon open={showNote} hasNote={!!note} />
 						</Button>
 					)}
-				</div>
-			</div>
-			<CollapsibleRoot
-				open={!!conversion}
-				className="mr-auto self-start italic"
-			>
+				</Box>
+			</Box>
+			<CollapsibleRoot open={!!conversion} style={{ marginRight: 'auto' }}>
 				<CollapsibleContent className="pr-2">
-					<span className="inline-flex items-center gap-1 text-xs">
+					<Text
+						italic
+						emphasis="ambient"
+						dim
+						render={<Box items="center" gap="xs" />}
+					>
 						<Icon name="convert" size={15} />
 						{convertedValue}
-					</span>
+					</Text>
 				</CollapsibleContent>
 			</CollapsibleRoot>
 			<CollapsibleRoot open={showNote}>
@@ -174,10 +162,11 @@ export function RecipeIngredientViewer({
 						onChange={(val) => ingredient.set('note', val)}
 						autoFocus={!note}
 						onBlur={onNoteBlur}
+						style={{ fontStyle: 'italic' }}
 					/>
 				</CollapsibleContent>
 			</CollapsibleRoot>
-		</div>
+		</Box>
 	);
 }
 

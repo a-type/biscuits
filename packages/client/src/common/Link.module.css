@@ -1,0 +1,14 @@
+.linkButton {
+	&[data-transitioning='true'] {
+		opacity: 70%;
+	}
+}
+
+.textLink {
+	&[data-transitioning='true'] {
+		opacity: 70%;
+	}
+	@apply --mx-fg(var(--m-color-main-heavy));
+	cursor: pointer;
+	font-weight: var(--m-text-weight-bold);
+}

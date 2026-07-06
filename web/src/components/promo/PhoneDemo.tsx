@@ -1,6 +1,6 @@
-import classNames from 'classnames';
+import { clsx } from '@a-type/ui';
 import { useMemo } from 'react';
-import './phone.css';
+import classes from './PhoneDemo.module.css';
 
 export interface PhoneDemoProps {
 	src: string;
@@ -25,29 +25,19 @@ export function PhoneDemo({
 	const Media = type === 'video' ? Video : 'img';
 
 	return (
-		<div
-			className={classNames(
-				'phone-wrapper flex items-center justify-center overflow-hidden px-2 py-8',
-				className,
-			)}
-		>
+		<div className={clsx(classes.wrapper, className)}>
 			<div
-				className={classNames(
-					'phone aspect-ratio-11/24 h-30vh min-h-0 rounded-lg bg-[black] sm:h-auto',
-					size === 'large' && '!h-auto',
-					direction,
+				className={clsx(
+					classes.phone,
+					classes[direction],
+					size === 'large' && classes.large,
 				)}
 				style={{
 					animationDelay,
 				}}
 			>
-				<div className="font-fancy absolute left-0 z--1 h-full w-full flex items-center justify-center p-6 text-center text-lg color-gray-dark">
-					Video Coming Soon
-				</div>
-				<Media
-					src={src}
-					className="h-full w-full rounded-lg object-cover object-center"
-				/>
+				<div className={classes.placeholder}>Video Coming Soon</div>
+				<Media src={src} className={classes.media} />
 			</div>
 		</div>
 	);

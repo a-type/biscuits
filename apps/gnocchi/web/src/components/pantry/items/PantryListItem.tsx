@@ -10,6 +10,7 @@ import {
 	Button,
 	Card,
 	Chip,
+	clsx,
 	DatePicker,
 	Dialog,
 	Icon,
@@ -21,17 +22,20 @@ import { Food } from '@gnocchi.biscuits/verdant';
 import classNames from 'classnames';
 import { Suspense, useCallback, useState } from 'react';
 import { THREE_DAYS_FROM_NOW, useExpiresText } from '../hooks.js';
+import cls from './PantryListItem.module.css';
 
 export interface PantryListItemProps {
 	item: Food;
 	showLabels?: boolean;
 	snoozable?: boolean;
+	className?: string;
 }
 
 export function PantryListItem({
 	item,
 	showLabels = false,
 	snoozable,
+	className,
 	...rest
 }: PantryListItemProps) {
 	const [leaving, setLeaving] = useState(false);
@@ -64,43 +68,42 @@ export function PantryListItem({
 		<Suspense>
 			<Card
 				{...rest}
-				className={classNames(
-					frozenAt ? 'border-accent-dark' : '',
-					leaving && 'animate-fade-out-down animate-forwards',
-				)}
+				className={classNames(cls.root, className)}
+				data-frozen={!!frozenAt}
+				data-leaving={leaving}
 			>
 				<Card.Main
-					compact
+					size="sm"
 					render={
 						<OpenFoodDetailButton
 							foodName={food}
 							emphasis="unstyled"
-							className="items-start rounded-none border-none p-0 text-sm font-normal shadow-none"
+							className={cls.cardMain}
 						/>
 					}
 				>
-					<Card.Title className={classNames('text-wrap', 'text-md')}>
+					<Card.Title className={cls.title}>
 						<FoodName food={item} capitalize />
 					</Card.Title>
-					<div className="flex flex-row flex-wrap items-center gap-1 p-1 text-xs italic">
+					<div className={cls.content}>
 						{purchasedAt && (
 							<Chip title={new Date(purchasedAt).toLocaleDateString()}>
-								<Icon name="clock" />
+								<Icon name="clock" size={10} />
 								<RelativeTime value={purchasedAt} abbreviate />
 							</Chip>
 						)}
 						{purchasedAt && isAlmostOrExpired && !frozenAt && (
 							<Tooltip disabled={!expiresAt} content={expiresAtText}>
-								<Chip className="important:color-attentionDark">
-									<Icon name="warning" />
+								<Chip className={clsx(cls.warning, '@mode-attention')}>
+									<Icon name="warning" size={10} />
 									{expiresAtText}
 								</Chip>
 							</Tooltip>
 						)}
 						{frozenAt && (
 							<Tooltip content="You marked this item as frozen">
-								<Chip color="accent">
-									<Icon name="snowflake" />
+								<Chip className="@mode-accent">
+									<Icon name="snowflake" size={10} />
 									<RelativeTime value={frozenAt} abbreviate />
 								</Chip>
 							</Tooltip>
@@ -108,28 +111,22 @@ export function PantryListItem({
 						{isStaple && (
 							<Tooltip content="Staple foods are automatically added to the list when used up">
 								<Chip>
-									<Icon name="cart" />
+									<Icon name="cart" size={10} />
 									Staple
 								</Chip>
 							</Tooltip>
 						)}
 					</div>
-					<Icon
-						name="new_window"
-						className="absolute right-2 top-2 z-1 opacity-50 color-gray-dark"
-					/>
+					<Icon name="new_window" className={cls.openIcon} />
 				</Card.Main>
-				<Card.Footer className={classNames(showLabels ? 'p-0' : '')}>
+				<Card.Footer style={{ padding: showLabels ? 0 : undefined }}>
 					<Card.Actions
 						className={classNames('flex-wrap', {
-							'rounded-none border-b-none border-l-none border-r-none p-1':
-								showLabels,
+							[cls.actions]: showLabels,
 						})}
 					>
 						<Suspense
-							fallback={
-								<Button emphasis="default" className="h-[32px] w-[32px]" />
-							}
+							fallback={<Button emphasis="default" className={cls.quickAdd} />}
 						>
 							<QuickAddButton food={item} showLabel={showLabels} />
 						</Suspense>
@@ -140,7 +137,7 @@ export function PantryListItem({
 								onClick={snooze}
 							>
 								<Icon name="clock" />
-								{showLabels && <span className="font-normal">Snooze</span>}
+								{showLabels && <span>Snooze</span>}
 							</Button>
 						)}
 						{inInventory && (
@@ -151,7 +148,7 @@ export function PantryListItem({
 								onClick={clear}
 							>
 								<Icon name="trash" />
-								{showLabels && <span className="font-normal">Used</span>}
+								{showLabels && <span>Used</span>}
 							</Button>
 						)}
 						{(inInventory || !!frozenAt) && (
@@ -226,11 +223,7 @@ const QuickAddButton = ({
 			disabled={isOnList}
 		>
 			{isOnList ? <Icon name="check" /> : <Icon name="plus" />}
-			{showLabel && (
-				<span className="font-normal">
-					{isOnList ? 'In list' : 'Buy again'}
-				</span>
-			)}
+			{showLabel && <span>{isOnList ? 'In list' : 'Buy again'}</span>}
 		</Button>
 	);
 };
@@ -257,7 +250,7 @@ const FreezeButton = ({
 					}
 				>
 					<Icon name="snowflake" />
-					{showLabel && <span className="font-normal">Frozen</span>}
+					{showLabel && <span>Frozen</span>}
 				</Dialog.Trigger>
 				<Dialog.Content>
 					<FrozenTimeAdjuster food={food} />
@@ -280,7 +273,7 @@ const FreezeButton = ({
 				}}
 			>
 				<Icon name="snowflake" />
-				{showLabel && <span className="font-normal">Frozen</span>}
+				{showLabel && <span>Frozen</span>}
 			</Button>
 		</Tooltip>
 	);
@@ -298,7 +291,7 @@ function FrozenTimeAdjuster({ food: item }: { food: Food }) {
 		<>
 			<Dialog.Title>Change freeze time</Dialog.Title>
 			<DatePicker
-				className="self-center"
+				style={{ alignSelf: 'center' }}
 				value={frozenAtDate}
 				onChange={(date) => {
 					if (!date) return;

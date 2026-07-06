@@ -21,9 +21,13 @@ export function ItemCardPurchaseButton({
 				surface
 				items="center"
 				color="success"
-				rounded
+				round
 				gap="sm"
-				className="h-touch pl-md text-xs"
+				style={{
+					minHeight: 30,
+					paddingLeft: 'var(--m-space)',
+				}}
+				className="@mode-dense"
 			>
 				<Icon name="check" />
 				<span>You bought it!</span>
@@ -37,7 +41,7 @@ export function ItemCardPurchaseButton({
 					>
 						<Icon name="undo" />
 					</Button>
-				:	<div className="w-3" />}
+				:	<div style={{ width: 12 }} />}
 			</Box>
 		);
 	}

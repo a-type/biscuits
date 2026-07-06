@@ -1,0 +1,39 @@
+.spin {
+	animation-name: spin;
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+}
+
+@keyframes spin {
+	0% {
+		transform: rotate(0deg);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+
+.offline {
+	@apply --mx-fg(var(--m-color-palette-attention-heavy));
+}
+
+.banner {
+	max-width: 300px;
+	padding-block: var(--m-space-xs);
+	padding-inline: var(--m-space-md);
+}
+
+.highlightedOption {
+	@apply --mx-bg(var(--m-color-main-wash));
+	@apply --mx-fg(var(--m-color-main-ink));
+
+	&:focus-visible {
+		@apply --mx-bg(var(--m-color-main-light));
+	}
+}
+
+.installButton {
+	margin-block: var(--m-space-sm);
+	margin-inline: var(--m-space-md);
+	justify-content: space-between;
+}

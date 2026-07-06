@@ -1,0 +1,20 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "typescript",
+			"tsconfig": "client/tsconfig.json",
+			"option": "watch",
+			"problemMatcher": ["$tsc-watch"],
+			"group": "build",
+			"label": "Dev - Client Components"
+		},
+		{
+			"type": "npm",
+			"script": "build",
+			"problemMatcher": ["$tsc"],
+			"group": "build",
+			"label": "Build - Client Components"
+		}
+	]
+}

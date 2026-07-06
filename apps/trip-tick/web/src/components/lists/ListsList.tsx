@@ -1,5 +1,5 @@
 import { hooks } from '@/store.js';
-import { Button, H2, Icon, P } from '@a-type/ui';
+import { Box, Button, H2, Icon, P } from '@a-type/ui';
 import { Link } from '@verdant-web/react-router';
 import { AddListButton } from './AddListButton.jsx';
 
@@ -10,7 +10,7 @@ export function ListsList({}: ListsListProps) {
 
 	if (lists.length === 0) {
 		return (
-			<div className="flex flex-col items-start gap-4">
+			<Box col items="start" gap>
 				<H2>Welcome!</H2>
 				<P>
 					Trip Tick is a list-making app purpose-made for planning what to pack
@@ -18,14 +18,14 @@ export function ListsList({}: ListsListProps) {
 				</P>
 				<P>To get started, you need to create your first packing list.</P>
 				<AddListButton />
-			</div>
+			</Box>
 		);
 	}
 
 	return (
-		<div className="col items-start">
+		<Box col items="start" gap>
 			<H2>Lists</H2>
-			<div className="max-h-80px flex flex-row flex-wrap gap-2">
+			<Box wrap gap="sm" style={{ maxHeight: 80 }}>
 				{lists.map((list) => (
 					<Button
 						size="small"
@@ -39,7 +39,7 @@ export function ListsList({}: ListsListProps) {
 					<Icon name="plus" />
 					New List
 				</AddListButton>
-			</div>
-		</div>
+			</Box>
+		</Box>
 	);
 }

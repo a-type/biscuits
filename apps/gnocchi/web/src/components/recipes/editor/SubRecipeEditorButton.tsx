@@ -1,5 +1,5 @@
 import { hooks } from '@/stores/groceries/index.js';
-import { Box, Button, Dialog, FieldLabel, Icon } from '@a-type/ui';
+import { Box, Button, Dialog, Field, Icon } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { MultiplierStepper } from '../viewer/MultiplierStepper.jsx';
 
@@ -34,17 +34,23 @@ export function SubRecipeEditorButton({
 			</Dialog.Trigger>
 			<Dialog.Content>
 				<Dialog.Title>Edit sub-recipe</Dialog.Title>
-				<Box direction="col" gap="md">
-					<FieldLabel>Sub-recipe multiplier</FieldLabel>
-					<MultiplierStepper
-						onChange={setMultiplier}
-						value={subRecipeMultipliers.get(subRecipeId) || 1}
-						highlightChange
-					/>
-					<span className="text-sm color-gray-dark">
-						This applies a multiplier to the entire sub-recipe in addition to
-						any multiplier on the parent recipe.
-					</span>
+				<Box col gap="md">
+					<Field id="multiplier">
+						<Field.Label>Sub-recipe multiplier</Field.Label>
+						<Field.Control
+							render={
+								<MultiplierStepper
+									onChange={setMultiplier}
+									value={subRecipeMultipliers.get(subRecipeId) || 1}
+									highlightChange
+								/>
+							}
+						/>
+						<Field.Description>
+							This applies a multiplier to the entire sub-recipe in addition to
+							any multiplier on the parent recipe.
+						</Field.Description>
+					</Field>
 				</Box>
 				<Dialog.Actions className="justify-between">
 					<Button

@@ -1,0 +1,96 @@
+.container {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	aspect-ratio: 9 / 16;
+	max-width: 50%;
+	width: 100%;
+	overflow: hidden;
+
+	@media (min-width: 768px) {
+		max-width: 300px;
+	}
+}
+
+@keyframes frame {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes drift {
+	0% {
+		transform: translate(0, 0);
+	}
+	10% {
+		transform: translate(3px, -4px);
+	}
+	20% {
+		transform: translate(0px, -5px);
+	}
+	30% {
+		transform: translate(1px, -4px);
+	}
+	40% {
+		transform: translate(0px, -2px);
+	}
+	50% {
+		transform: translate(2px, 0px);
+	}
+	60% {
+		transform: translate(0px, -2px);
+	}
+	70% {
+		transform: translate(3px, -4px);
+	}
+	80% {
+		transform: translate(5px, -3px);
+	}
+	90% {
+		transform: translate(2px, 0px);
+	}
+	100% {
+		transform: translate(0, 0);
+	}
+}
+
+.driftLayer {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	animation-name: drift;
+	animation-duration: 20s;
+	animation-fill-mode: forwards;
+	animation-iteration-count: infinite;
+	animation-timing-function: linear;
+}
+
+.frame {
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 100%;
+	object-position: bottom left;
+	animation-name: frame;
+	animation-duration: 2s;
+	animation-fill-mode: forwards;
+	animation-iteration-count: infinite;
+	animation-timing-function: step-end;
+	filter: hue-rotate(-5deg);
+}
+
+.frame1 {
+	animation-delay: 0s;
+}
+
+.frame2 {
+	animation-delay: 1s;
+}

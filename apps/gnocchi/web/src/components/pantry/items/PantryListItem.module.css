@@ -1,0 +1,70 @@
+@keyframes fadeOutDown {
+	0% {
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+	100% {
+		opacity: 0;
+		transform: translate3d(0, 100px, 0);
+	}
+}
+
+.root {
+	&[data-frozen='true'] {
+		@apply --mx-borderColor(var(--m-color-accent-heavy));
+	}
+	&[data-leaving='true'] {
+		animation-name: fadeOutDown;
+		animation-duration: var(--m-duration);
+		animation-timing-function: var(--m-easing);
+		animation-fill-mode: forwards;
+	}
+}
+
+.cardMain {
+	align-items: start;
+	border-radius: 0;
+	border: none;
+	box-shadow: none;
+}
+
+.title {
+	text-wrap: wrap;
+}
+
+.content {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--m-space-xs);
+	padding: var(--m-space-xs);
+	font-size: var(--m-prose-ambient-size);
+	font-style: italic;
+}
+
+.warning {
+	@apply --mx-fg(var(--m-color-palette-attention-heavy));
+}
+
+.openIcon {
+	position: absolute;
+	right: var(--m-space-md);
+	top: var(--m-space-md);
+	z-index: 1;
+	opacity: 50%;
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+}
+
+.actions {
+	border-radius: 0;
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+	padding: var(--m-space-xs);
+}
+
+.quickAdd {
+	width: --fn-literal(32px);
+	height: --fn-literal(32px);
+}

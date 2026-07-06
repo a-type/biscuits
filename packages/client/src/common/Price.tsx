@@ -1,5 +1,3 @@
-import { clsx } from '@a-type/ui';
-
 export interface PriceProps {
 	value?: number | null;
 	currency?: string | null;
@@ -17,7 +15,14 @@ export function Price({
 	const currencySymbol =
 		currencySymbols[currency?.toUpperCase() ?? 'USD'] ?? '$';
 	return (
-		<span className={clsx('text-nowrap font-bold', className)} {...rest}>
+		<span
+			style={{
+				textWrap: 'nowrap',
+				fontWeight: 'var(--m-text-weight-bold)',
+			}}
+			className={className}
+			{...rest}
+		>
 			{currencySymbol}
 			{((value ?? 0) / 100).toFixed(2)} / {period}
 		</span>

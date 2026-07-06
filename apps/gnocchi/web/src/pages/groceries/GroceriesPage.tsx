@@ -15,7 +15,7 @@ import {
 	TopControls,
 	UnknownListRedirect,
 } from '@/pages/groceries/layout.jsx';
-import { PageNowPlaying } from '@a-type/ui';
+import { Box, PageNowPlaying } from '@a-type/ui';
 import { ChangelogDisplay } from '@biscuits/client';
 import { InstallButton, UserMenu } from '@biscuits/client/apps';
 import { useNavigate, useParams } from '@verdant-web/react-router';
@@ -58,15 +58,15 @@ export function GroceriesPage() {
 							{listId && <ListEdit listId={listId} />}
 						</ListSelectWrapper>
 
-						<div className="flex flex-row items-center gap-2">
+						<Box items="center" gap="sm">
 							<Suspense>
-								<ChangelogDisplay className="sm:hidden" hideOnSeen />
+								<ChangelogDisplay className="gt-sm" hideOnSeen />
 							</Suspense>
 							<InstallButton />
 							<Suspense>
 								<UserMenu />
 							</Suspense>
-						</div>
+						</Box>
 					</TopControls>
 					<MainActions />
 					<List />
@@ -74,7 +74,7 @@ export function GroceriesPage() {
 					<AutoRestoreScroll />
 					<PageNowPlaying
 						keepAboveKeyboard
-						className="pointer-events-none items-center children:pointer-events-auto"
+						style={{ pointerEvents: 'none', alignItems: 'center' }}
 					>
 						<FloatingAdd />
 					</PageNowPlaying>

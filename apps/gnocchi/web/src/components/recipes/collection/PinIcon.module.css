@@ -1,0 +1,14 @@
+.first {
+	position: relative;
+	left: 0;
+	top: --fn-literal(-3px);
+}
+
+.second {
+	position: absolute;
+	bottom: --fn-literal(0px);
+	right: --fn-literal(1px);
+	height: --fn-literal(10px);
+	width: --fn-literal(10px);
+	stroke: currentColor;
+}

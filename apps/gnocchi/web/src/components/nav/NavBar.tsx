@@ -2,7 +2,6 @@ import { Link } from '@/components/nav/Link.jsx';
 import { saveHubRecipeOnboarding } from '@/onboarding/saveHubRecipeOnboarding.js';
 import { hooks } from '@/stores/groceries/index.js';
 import {
-	Box,
 	IconName,
 	NavBarItem,
 	NavBarItemIcon,
@@ -14,6 +13,7 @@ import {
 	withClassName,
 } from '@a-type/ui';
 import { NavBarChangelog, OnboardingTooltip } from '@biscuits/client';
+import { NavLockup } from '@biscuits/client/apps';
 import { useOnLocationChange } from '@verdant-web/react-router';
 import {
 	ReactNode,
@@ -28,6 +28,7 @@ import { useSnapshot } from 'valtio';
 import { groceriesState } from '../groceries/state.js';
 import { useHasNewExpirations } from '../pantry/hooks.js';
 import { useRecipePresenceNotification } from '../sync/collaborationMenu/RecipePresenceNotification.jsx';
+import cls from './NavBar.module.css';
 import { PopEffect } from './PopEffect.jsx';
 
 export interface NavBarProps {}
@@ -44,10 +45,7 @@ export function NavBar({}: NavBarProps) {
 	return (
 		<PageNav>
 			<Suspense>
-				<Box gap="sm" layout="center center" p="sm" className="lt-md:hidden">
-					<img src="/android-chrome-192x192.png" className="h-30px w-30px" />
-					<h1 className="font-fancy text-md font-semibold">Gnocchi</h1>
-				</Box>
+				<NavLockup />
 				<NavBarRoot>
 					<GroceriesNavBarLink active={matchGroceries} />
 					<PantryNavBarLink active={matchPurchased} />
@@ -90,7 +88,7 @@ const NavBarLink = memo(
 					/>
 				}
 			>
-				<NavBarItemIconWrapper className="flex">
+				<NavBarItemIconWrapper style={{ display: 'flex' }}>
 					<PopEffect active={animate} />
 					<NavBarItemIcon name={icon} />
 				</NavBarItemIconWrapper>
@@ -117,10 +115,7 @@ function RecipesNavBarLink({ active }: { active: boolean }) {
 	);
 }
 
-const Pip = withClassName(
-	'div',
-	'absolute top-6px right-6px w-6px h-6px rounded-full bg-attention shadow-sm',
-);
+const Pip = withClassName('div', cls.pip);
 
 function PantryNavBarLink({ active }: { active: boolean }) {
 	const [newExpiredTime, onSeen] = useHasNewExpirations();

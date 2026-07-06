@@ -1,0 +1,32 @@
+.dialog {
+	left: auto;
+	right: var(--m-space-sm);
+	top: var(--m-space);
+	height: 90dvh;
+	display: flex;
+	flex-direction: column;
+	transition: transform var(--m-duration) var(--m-easing);
+	opacity: 1;
+	transform: translateX(0);
+
+	&[starting-style],
+	&[ending-style] {
+		transform: translateX(16px);
+		opacity: 0;
+	}
+}
+
+.content {
+	padding: var(--m-space-sm);
+}
+
+.item {
+	margin-bottom: var(--m-space-sm);
+	display: flex;
+	flex-direction: row;
+	@apply --mx-surface-ambient;
+}
+
+.grabby {
+	margin-right: var(--m-space-sm);
+}

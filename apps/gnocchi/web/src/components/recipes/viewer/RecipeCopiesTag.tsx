@@ -30,7 +30,7 @@ export function RecipeCopiesTag({ recipe }: RecipeCopiesTagProps) {
 							<Button
 								size="small"
 								emphasis="default"
-								className="font-normal shadow-none"
+								style={{ boxShadow: 'none' }}
 							>
 								{copies.length} {pluralize('copy', copies.length)}{' '}
 								<Icon name="new_window" />

@@ -1,4 +1,4 @@
-import { Dialog } from '@a-type/ui';
+import { Box, Dialog } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 import { SearchButton, searchProviders } from '@wish-wash.biscuits/common';
 import { ReactNode } from 'react';
@@ -44,10 +44,16 @@ export function PreBuyExperienceContent({
 	const item = readFragment(preBuyExperienceContentFragment, itemMasked);
 	return (
 		<>
-			<ItemCardTypeChip item={item} className="mr-auto" />
+			<ItemCardTypeChip item={item} style={{ marginRight: 'auto' }} />
 			<Dialog.Title>Search for {item.description}</Dialog.Title>
-			<ItemCardImageGallery item={item} maxCols={2} />
-			<ItemCardPurchases item={item} className="mr-auto !bg-accent-wash" />
+			<ItemCardImageGallery item={item} />
+			<ItemCardPurchases
+				item={item}
+				style={{
+					marginRight: 'auto',
+					backgroundColor: 'var(--m-color-accent-wash)',
+				}}
+			/>
 			<Dialog.Description>
 				{description || (
 					<>
@@ -56,11 +62,11 @@ export function PreBuyExperienceContent({
 					</>
 				)}
 			</Dialog.Description>
-			<div className="row flex-wrap">
+			<Box wrap gap items="center">
 				{searchProviders.map((provider) => (
 					<SearchButton prompt={item.description} provider={provider} />
 				))}
-			</div>
+			</Box>
 		</>
 	);
 }

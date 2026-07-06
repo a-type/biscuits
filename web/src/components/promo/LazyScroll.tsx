@@ -1,5 +1,6 @@
 import { Box, clsx } from '@a-type/ui';
 import { ReactNode, useEffect, useRef } from 'react';
+import cls from './LazyScroll.module.css';
 
 export interface LazyScrollProps {
 	children: ReactNode;
@@ -31,10 +32,7 @@ export function LazyScroll({ className, children }: LazyScrollProps) {
 	}, []);
 
 	return (
-		<Box
-			ref={outerRef}
-			className={clsx('h-[120px] w-full overflow-hidden', className)}
-		>
+		<Box ref={outerRef} className={clsx(cls.root, className)}>
 			<Box gap>{children}</Box>
 		</Box>
 	);

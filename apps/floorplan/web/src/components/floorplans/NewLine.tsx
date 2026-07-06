@@ -9,6 +9,7 @@ import { editorState } from './editorState.js';
 import { LineRenderer } from './LineRenderer.jsx';
 import { applyPointSnap } from './pointLogic.js';
 import { computeConstrainedInput, PointPositionResult } from './positioning.js';
+import cls from './shape.module.css';
 
 export interface NewLineProps {
 	floor: Floor;
@@ -101,7 +102,7 @@ export function NewLine({ floor }: NewLineProps) {
 	}
 
 	return (
-		<g className="stroke-black">
+		<g className={cls.strokeBlack}>
 			<LineRenderer
 				startX={toolStartX}
 				startY={toolStartY}

@@ -8,7 +8,9 @@ export function SuperBarTagFilter({}: SuperBarTagFilterProps) {
 
 	return (
 		<TagFilter
-			className="py-sm"
+			style={{
+				paddingBlock: 'var(--m-space-sm)',
+			}}
 			value={tagFilter}
 			onToggle={(name) =>
 				setTagFilter((v) => {

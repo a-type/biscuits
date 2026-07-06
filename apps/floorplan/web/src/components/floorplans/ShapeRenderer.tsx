@@ -6,6 +6,7 @@ import {
 	useMotionTemplate,
 	useTransform,
 } from 'motion/react';
+import cls from './shape.module.css';
 
 export function ShapeRenderer({
 	centerX,
@@ -38,9 +39,10 @@ export function ShapeRenderer({
 				width={width}
 				height={height}
 				transform={transform}
-				className={clsx(
-					'stroke-inherit fill-white stroke-width-[calc(2/var(--zoom-settled))]',
-				)}
+				style={{
+					strokeWidth: 'calc(2/var(--zoom-settled))',
+				}}
+				className={clsx(cls.strokeInherit, cls.fillWhite)}
 			/>
 		);
 	} else if (type === 'ellipse') {
@@ -51,7 +53,10 @@ export function ShapeRenderer({
 				rx={ellipseRx}
 				ry={ellipseRy}
 				transform={transform}
-				className="stroke-inherit fill-white stroke-width-[calc(2/var(--zoom-settled))]"
+				style={{
+					strokeWidth: 'calc(2/var(--zoom-settled))',
+				}}
+				className={clsx(cls.strokeInherit, cls.fillWhite)}
 			/>
 		);
 	} else {

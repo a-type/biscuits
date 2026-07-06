@@ -1,9 +1,10 @@
 import { useAnimationFrame } from '@/hooks/useAnimationFrame.js';
 import { preventDefault } from '@/lib/eventHandlers.js';
-import { ActionButton, ActionButtonProps, Popover } from '@a-type/ui';
+import { ActionButton, ActionButtonProps, Box, Popover } from '@a-type/ui';
 import { useDrag } from '@use-gesture/react';
 import classNames from 'classnames';
 import { useEffect, useRef, useState } from 'react';
+import cls from './LongPressAction.module.css';
 
 export type LongPressActionProps = ActionButtonProps & {
 	onActivate: () => void;
@@ -142,29 +143,31 @@ export function LongPressAction({
 				onContextMenu={preventDefault}
 				ref={ref}
 				{...rest}
-				className={classNames(rest.className)}
+				className={rest.className}
 			>
 				{children}
 			</ActionButton>
 
-			<Popover.Content anchor={ref} className="p-0" side="top" sideOffset={16}>
+			<Popover.Content
+				anchor={ref}
+				style={{ padding: 0 }}
+				side="top"
+				sideOffset={16}
+			>
 				<Popover.Arrow />
-				<div className="relative overflow-hidden rounded-lg px-4 py-2">
-					<div
-						className={classNames(
-							`palette-${progressColor}`,
-							'position-absolute left-0 top-0 h-full bg-main-light',
-							state === 'holding' &&
-								`animate-keyframes-progress-bar animate-ease-linear animate-forwards`,
-						)}
+				<Box overflow="hidden" rounded="lg" className={cls.popup}>
+					<Box
+						className={classNames(`@mode-${progressColor}`, cls.progress)}
+						data-state={state}
+						surface="secondary"
 						style={{
 							animationDuration: `${duration}ms`,
 						}}
 						// eslint-disable-next-line react-hooks/refs
 						key={timeoutRef.current as any}
 					/>
-					<div className="position-relative z-1">Hold for 2 seconds</div>
-				</div>
+					<Box className={cls.z}>Hold for 2 seconds</Box>
+				</Box>
 			</Popover.Content>
 		</Popover>
 	);

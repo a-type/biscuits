@@ -1,11 +1,12 @@
 import { hooks } from '@/hooks.js';
 import {
+	Box,
 	Button,
 	Card,
-	CardContent,
 	cardGridColumns,
 	clsx,
 	Icon,
+	Text,
 	withClassName,
 } from '@a-type/ui';
 import { Person, PersonGeolocation } from '@names.biscuits/verdant';
@@ -13,6 +14,7 @@ import { ReactNode, Suspense } from 'react';
 import { LocationOffer } from '../location/LocationOffer.jsx';
 import { TagDisplay } from '../tags/TagDisplay.jsx';
 import { useSuperBar } from './SuperBarContext.jsx';
+import cls from './SuperBarSuggestions.module.css';
 import { SuperBarTagFilter } from './SuperBarTagFilter.jsx';
 
 export interface SuperBarSuggestionsProps {
@@ -28,27 +30,37 @@ export function SuperBarSuggestions({ className }: SuperBarSuggestionsProps) {
 	) {
 		if (!inputValue) {
 			return (
-				<div className={clsx('col gap-6 p-8', className)}>
-					<Icon name="profile" size={80} className="color-gray" />
-					<div className="text-center text-lg color-gray-dark">
-						Add names to get started
-					</div>
-				</div>
+				<Box
+					col
+					gap="md"
+					p="lg"
+					items="center"
+					dim
+					className={clsx('@mode-loose', className)}
+				>
+					<Icon name="profile" size={80} />
+					<Text dim>Add names to get started</Text>
+				</Box>
 			);
 		}
 
 		return (
-			<div className={clsx('col gap-6 p-8', className)}>
-				<Icon name="profile" size={80} className="color-gray" />
-				<div className="text-center text-lg color-gray-dark">
-					No matches found
-				</div>
-			</div>
+			<Box
+				col
+				gap="md"
+				p="lg"
+				items="center"
+				dim
+				className={clsx('@mode-loose', className)}
+			>
+				<Icon name="profile" size={80} />
+				<Text dim>No matches found</Text>
+			</Box>
 		);
 	}
 
 	return (
-		<div className={clsx('w-full flex flex-col gap-md', className)}>
+		<Box full="width" gap col className={className}>
 			{groups.map((group) => (
 				<SuggestionGroup
 					key={group.title}
@@ -59,7 +71,7 @@ export function SuperBarSuggestions({ className }: SuperBarSuggestionsProps) {
 			<Suspense>
 				<LocationOffer />
 			</Suspense>
-		</div>
+		</Box>
 	);
 }
 
@@ -78,15 +90,10 @@ function SuggestionGroup({
 		return null;
 	}
 	return (
-		<div
-			className={clsx(
-				'flex flex-col gap-2 repeated:(border-0 border-t border-solid pt-md border-gray-dark)',
-				className,
-			)}
-		>
-			<div className="mt-1 text-xs font-bold uppercase color-gray-dark">
+		<div className={clsx(cls.suggestionGroup, className)}>
+			<Text emphasis="ambient" bold uppercase dim className={cls.title}>
 				{title}
-			</div>
+			</Text>
 			{isRecents && <SuperBarTagFilter />}
 			<Card.Grid columns={cardGridColumns.small}>
 				{items.map((suggestion) => (
@@ -97,7 +104,7 @@ function SuggestionGroup({
 				<Button
 					emphasis="ghost"
 					onClick={loadMoreRecents}
-					className="w-full justify-center"
+					className={cls.loadMore}
 				>
 					Load more
 					<Icon name="arrowDown" />
@@ -121,38 +128,33 @@ function SuggestionItem({
 	const { inputValue, selectPerson } = useSuperBar();
 
 	return (
-		<div className="flex flex-col items-start" {...rest}>
+		<Box col items="start" {...rest}>
 			<Card
 				className={clsx(
-					'max-w-full select-none',
-					!note && !tags.length && !photo?.url ? 'w-auto' : 'w-full',
+					cls.card,
+					note || tags.length || (photo?.url && cls.cardFull),
 				)}
 			>
 				<Card.Main
-					className={clsx('min-h-0', photo?.url && 'min-h-100px')}
-					compact
+					style={{ minHeight: photo?.url ? '100px' : 0 }}
+					className={cls.cardMain}
 					onClick={() => selectPerson(value)}
 				>
 					{photo?.url && (
 						<Card.Image
-							className="[background-position:center_20%] bg-cover"
+							className={cls.cardImage}
 							style={{ backgroundImage: `url(${photo.url})` }}
 						/>
 					)}
-					<CardTitle className="m-0 border-none px-md font-normal">
-						{name}
-					</CardTitle>
+					<Card.Title>{name}</Card.Title>
 					{!!tags.length && (
-						<CardContent
-							unstyled
-							className="mx-0 flex flex-row gap-sm px-sm py-xs"
-						>
+						<Card.Content unstyled className={cls.cardTags}>
 							{tags.map((tag) => (
 								<Suspense key={tag}>
 									<TagDisplay name={tag} />
 								</Suspense>
 							))}
-						</CardContent>
+						</Card.Content>
 					)}
 					{note && (
 						<NoteMatch
@@ -170,7 +172,7 @@ function SuggestionItem({
 					)}
 				</Card.Main>
 			</Card>
-		</div>
+		</Box>
 	);
 }
 
@@ -191,9 +193,9 @@ function NoteMatch({
 		content = [
 			noteMatchIndex - 10 > 0 ? '...' : '',
 			note.slice(Math.max(0, noteMatchIndex - 10), noteMatchIndex),
-			<span key="match" className="font-bold">
+			<Text bold key="match">
 				{note.slice(noteMatchIndex, noteMatchIndex + inputValue.length)}
-			</span>,
+			</Text>,
 			note.slice(
 				noteMatchIndex + inputValue.length,
 				Math.min(note.length, noteMatchIndex + 10),
@@ -202,10 +204,7 @@ function NoteMatch({
 	}
 	return (
 		<InlineCardContent unstyled={!overlay}>
-			<Icon name="note" />{' '}
-			<span className="min-w-0 flex-1 overflow-hidden text-ellipsis">
-				{content}
-			</span>
+			<Icon name="note" /> <span className={cls.note}>{content}</span>
 		</InlineCardContent>
 	);
 }
@@ -233,12 +232,12 @@ function GeolocationMatch({
 		content = [
 			locationMatchIndex - 10 > 0 ? '...' : '',
 			label.slice(Math.max(0, locationMatchIndex - 10), locationMatchIndex),
-			<span key="match" className="font-bold">
+			<Text bold key="match">
 				{label.slice(
 					locationMatchIndex,
 					locationMatchIndex + inputValue.length,
 				)}
-			</span>,
+			</Text>,
 			label.slice(
 				locationMatchIndex + inputValue.length,
 				Math.min(label.length, locationMatchIndex + 10),
@@ -247,21 +246,9 @@ function GeolocationMatch({
 	}
 	return (
 		<InlineCardContent unstyled={!overlay}>
-			<Icon name="location" />{' '}
-			<span className="min-w-0 flex-1 overflow-hidden text-ellipsis">
-				{content}
-			</span>
+			<Icon name="location" /> <span className={cls.note}>{content}</span>
 		</InlineCardContent>
 	);
 }
 
-const CardTitle = withClassName(
-	Card.Title,
-	'flex-row items-center gap-sm w-full rounded-none text-sm relative z-1',
-	'[:hover>&]:bg-gray-light',
-);
-
-const InlineCardContent = withClassName(
-	Card.Content,
-	'flex-row items-center text-nowrap text-ellipsis overflow-hidden gap-xs px-2 py-1 relative z-1 flex min-w-0 self-stretch',
-);
+const InlineCardContent = withClassName(Card.Content, cls.inlineCardContent);

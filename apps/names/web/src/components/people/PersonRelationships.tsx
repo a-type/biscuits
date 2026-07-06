@@ -6,7 +6,7 @@ import {
 	Button,
 	Chip,
 	clsx,
-	H2,
+	Heading,
 	Icon,
 	Masonry,
 	Select,
@@ -15,6 +15,7 @@ import { Person, Relationship } from '@names.biscuits/verdant';
 import { Link } from '@verdant-web/react-router';
 import { Suspense } from 'react';
 import { PersonNameSearchField } from './PersonNameSearchField.jsx';
+import cls from './PersonRelationships.module.css';
 
 export interface PersonRelationshipsProps {
 	person: Person;
@@ -30,10 +31,10 @@ export function PersonRelationships({ person }: PersonRelationshipsProps) {
 
 	return (
 		<Box col gap="lg">
-			<H2 className="text-md">
-				<Icon name="connection" className="mr-md color-gray-dark" />{' '}
+			<Heading emphasis="secondary" render={<h2 />}>
+				<Icon name="connection" className={cls.titleIcon} size={15} />{' '}
 				Relationships
-			</H2>
+			</Heading>
 			<RelationshipSearch person={person} />
 
 			<Masonry
@@ -95,18 +96,12 @@ function PersonRelationshipItem({
 	if (!person) return null;
 
 	return (
-		<div
-			className={clsx(
-				"[grid-template-areas:'avatar_name_arrow'_'remove_type_arrow'] [grid-template-columns:auto_1fr_auto] grid items-center gap-sm",
-				'select-none border rounded-md border-solid p-sm border-gray',
-				'sm:p-md',
-			)}
-		>
+		<div className={cls.item}>
 			<Button
 				color="attention"
 				emphasis="ghost"
 				onClick={remove}
-				className="grid-area-[remove]"
+				className={cls.remove}
 			>
 				<Icon name="x" />
 			</Button>
@@ -114,18 +109,18 @@ function PersonRelationshipItem({
 				imageSrc={photo?.url ?? null}
 				name={person.get('name')}
 				popIn={false}
-				className="grid-area-[avatar] ml-6px sm:ml-0"
+				className={cls.avatar}
 			/>
-			<span className="grid-area-[name]">{person.get('name')}</span>
+			<span className={cls.name}>{person.get('name')}</span>
 			<RelationshipTypeSelect
 				value={otherPersonLabel}
 				onChange={setOtherPersonLabel}
-				className="grid-area-[type]"
+				className={cls.type}
 				personName={person.get('name')}
 			/>
 			<Button
 				emphasis="ghost"
-				className="grid-area-[arrow]"
+				className={cls.arrow}
 				render={<Link to={`/people/${otherPersonId}`} />}
 			>
 				<Icon name="arrowRight" />
@@ -156,14 +151,7 @@ function RelationshipTypeSelect({
 			}}
 		>
 			<Select.Trigger
-				render={
-					<Chip
-						className={clsx(
-							'self-center justify-self-start px-4 text-sm',
-							className,
-						)}
-					/>
-				}
+				render={<Chip className={clsx(cls.selectTrigger, className)} />}
 			>
 				<Select.Value />
 			</Select.Trigger>
@@ -219,13 +207,13 @@ function RelationshipTypeSelect({
 function RelationshipSearch({ person }: { person: Person }) {
 	const addRelationship = useAddRelationship();
 	return (
-		<Box d="row" gap="md" items="center">
-			<Icon name="add_person" className="color-gray-dark" />
+		<Box gap="md" items="center">
+			<Icon name="add_person" className={cls.searchIcon} />
 			<Suspense>
 				<PersonNameSearchField
 					onSelect={(otherId) => addRelationship(person.get('id'), otherId)}
 					placeholder="Add relationships..."
-					className="flex-1"
+					className={cls.searchField}
 					allowAdd
 				/>
 			</Suspense>

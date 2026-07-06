@@ -1,9 +1,9 @@
 import {
+	Box,
 	Button,
 	ButtonProps,
-	clsx,
 	ConfirmedButton,
-	H2,
+	Heading,
 	Icon,
 	P,
 	toast,
@@ -119,36 +119,39 @@ export function ManageStorage({
 	// results...
 	if (isSubscribed) {
 		return (
-			<div className={clsx('flex flex-col items-start gap-2', className)}>
-				<H2>Manage Device Storage</H2>
-				<P className="mb-2 text-xs">
+			<Box col gap="sm" items="start" className={className}>
+				<Heading emphasis="ambient" render={<h3 />}>
+					Manage Device Storage
+				</Heading>
+				<P emphasis="secondary">
 					Your data is synced to Biscuits. If you're experiencing issues, you
 					can try resetting your local device to the server's data.
 				</P>
-				<div className="flex flex-row flex-wrap gap-2">
-					<ConfirmedButton
-						emphasis="primary"
-						color="attention"
-						confirmText="This will delete your local data and replace it with the server's data. It cannot be undone."
-						onConfirm={() => {
-							clientDesc?.__dangerous__resetLocal();
-						}}
-					>
-						Reset local data
-					</ConfirmedButton>
-				</div>
-			</div>
+				<ConfirmedButton
+					align="start"
+					emphasis="primary"
+					color="attention"
+					confirmText="This will delete your local data and replace it with the server's data. It cannot be undone."
+					onConfirm={() => {
+						clientDesc?.__dangerous__resetLocal();
+					}}
+				>
+					Reset local data
+				</ConfirmedButton>
+			</Box>
 		);
 	}
 
 	return (
-		<div className={clsx('flex flex-col items-start gap-2', className)}>
-			<H2>Manage App Storage</H2>
-			<P className="mb-2 text-xs">
+		<Box col gap="sm" items="start" className={className}>
+			<Heading emphasis="ambient" render={<h3 />}>
+				Manage App Storage
+			</Heading>
+			<P emphasis="secondary">
 				This app stores all data on your device. You can export and import your
 				data, or reset it.
 			</P>
-			<div className="flex flex-row flex-wrap gap-2">
+			<Box wrap gap="sm">
 				<ExportDataButton onError={onError} />
 				<ImportDataButton onError={onError} />
 				<ConfirmedButton
@@ -161,7 +164,7 @@ export function ManageStorage({
 				>
 					Reset data
 				</ConfirmedButton>
-			</div>
-		</div>
+			</Box>
+		</Box>
 	);
 }

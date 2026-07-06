@@ -1,7 +1,7 @@
 import { Link } from '@/components/nav/Link.jsx';
 import { makeRecipeLink } from '@/components/recipes/makeRecipeLink.js';
 import { Person, hooks } from '@/stores/groceries/index.js';
-import { Button, Icon } from '@a-type/ui';
+import { Box, Button, Icon, Text } from '@a-type/ui';
 import { useHasServerAccess } from '@biscuits/client';
 import { Suspense, useState } from 'react';
 import { PersonAvatar } from '../people/PersonAvatar.jsx';
@@ -64,28 +64,47 @@ function RecipePresenceLink({
 	if (!recipe) return null;
 
 	return (
-		<div className="max-w-full w-full flex flex-row items-center gap-2 overflow-hidden border-default rounded-lg p-2 bg-white">
+		<Box
+			full="width"
+			items="center"
+			gap="sm"
+			overflow="hidden"
+			border
+			surface="ambient"
+		>
 			<Button onClick={onDismiss} emphasis="ghost" className="flex-0-0-auto">
 				<Icon name="x" />
 			</Button>
-			<Link
-				to={makeRecipeLink(recipe)}
-				onClick={onDismiss}
-				className="flex flex-1 flex-row items-center gap-2"
+			<Box
+				render={<Link to={makeRecipeLink(recipe)} onClick={onDismiss} />}
+				grow
+				items="center"
+				gap="sm"
 			>
 				<PersonAvatar person={person} />
-				<div className="min-w-0 flex flex-[1_1_0] flex-col gap-2px">
-					<div className="ml--2px text-xxs">
+				<Box grow col gap="xs" style={{ minWidth: 0, flexBasis: 0 }}>
+					<Text
+						emphasis="ambient"
+						dim
+						style={{ marginLeft: -2 }}
+						className="@mode-dense"
+					>
 						&nbsp;{person.profile.name} is viewing
-					</div>
-					<div className="overflow-hidden text-ellipsis whitespace-nowrap text-xs font-bold">
+					</Text>
+					<Text truncate bold emphasis="primary">
 						{recipe.get('title')}
-					</div>
-				</div>
-				<Button size="small" className="whitespace-nowrap" render={<div />}>
+					</Text>
+				</Box>
+				<Button
+					size="small"
+					role="none"
+					tabIndex={-1}
+					className="whitespace-nowrap"
+					render={<div />}
+				>
 					Join
 				</Button>
-			</Link>
-		</div>
+			</Box>
+		</Box>
 	);
 }

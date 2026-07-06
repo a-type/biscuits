@@ -2,6 +2,7 @@ import { FoodName } from '@/components/foods/FoodName.jsx';
 import { OpenFoodDetailButton } from '@/components/foods/OpenFoodDetailButton.jsx';
 import { hooks } from '@/stores/groceries/index.js';
 import {
+	Box,
 	Button,
 	Dialog,
 	DialogActions,
@@ -9,6 +10,7 @@ import {
 	DialogContent,
 	DialogTitle,
 	DialogTrigger,
+	Text,
 } from '@a-type/ui';
 import { Suspense } from 'react';
 
@@ -33,18 +35,17 @@ function FoodsList() {
 	const foods = hooks.useAllFoods();
 
 	return (
-		<div className="flex flex-col">
+		<Box col>
 			{foods.map((food) => (
-				<div
-					key={food.get('canonicalName')}
-					className="flex flex-row justify-between gap-4 p-2"
-				>
-					<div className="flex flex-1 text-md font-bold">
-						<FoodName food={food} />
-					</div>
+				<Box key={food.get('canonicalName')} gap justify="between" p="sm">
+					<Box grow>
+						<Text emphasis="secondary">
+							<FoodName food={food} />
+						</Text>
+					</Box>
 					<OpenFoodDetailButton foodName={food.get('canonicalName')} />
-				</div>
+				</Box>
 			))}
-		</div>
+		</Box>
 	);
 }

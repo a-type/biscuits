@@ -1,0 +1,5 @@
+.popover {
+	@apply --mx-bg(var(--m-color-main-wash));
+	overflow: visible;
+	display: flex;
+}

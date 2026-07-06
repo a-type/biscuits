@@ -1,0 +1,25 @@
+.grid {
+	display: grid;
+	grid-template-columns: repeat(6, 1fr);
+	align-content: start;
+	align-items: start;
+	justify-content: start;
+	gap: var(--m-space-xs);
+
+	@media (min-width: 640px) {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}
+
+.item {
+	appearance: none;
+	border-image: none;
+	aspect-ratio: 1;
+	border-radius: var(--m-radius);
+	padding: 0;
+
+	&[data-selected='true'] {
+		@apply --mx-borderColor(var(--m-color-neutral-ink));
+		border-width: var(--m-lineWidth-lg);
+	}
+}

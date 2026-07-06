@@ -1,5 +1,5 @@
 import { hooks } from '@/stores/groceries/index.js';
-import classNames from 'classnames';
+import { Box } from '@a-type/ui';
 import { MeetupIcon } from './MeetupIcon.jsx';
 
 export interface MeetupHintProps {
@@ -14,15 +14,16 @@ export function MeetupHint({ className, ...props }: MeetupHintProps) {
 
 	if (meetup && meetup.get('createdAt') > now - 1000 * 60 * 60) {
 		return (
-			<div
-				className={classNames(
-					'h-17px w-17px flex items-center justify-center rounded-full p-2px color-white bg-attention',
-					className,
-				)}
+			<Box
+				surface="secondary"
+				color="attention"
+				layout="center center"
+				style={{ width: 17, height: 17 }}
+				className={className}
 				{...props}
 			>
 				<MeetupIcon />
-			</div>
+			</Box>
 		);
 	}
 

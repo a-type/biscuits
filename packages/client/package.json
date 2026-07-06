@@ -77,9 +77,9 @@
 		"motion": "catalog:"
 	},
 	"devDependencies": {
-		"@unocss/transformer-variant-group": "catalog:",
 		"@types/react": "catalog:",
-		"unocss": "catalog:",
+		"@arbor-css/core": "catalog:",
+		"@arbor-css/postcss": "catalog:",
 		"vite-plugin-pwa": "catalog:",
 		"@types/copy": "^0.3.5",
 		"copy": "^0.3.2",

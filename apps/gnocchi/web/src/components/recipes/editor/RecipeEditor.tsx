@@ -3,7 +3,7 @@ import { HeaderBar } from '@/components/recipes/layout/HeaderBar.jsx';
 import { makeRecipeLink } from '@/components/recipes/makeRecipeLink.js';
 import { usePageTitle } from '@/hooks/usePageTitle.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { H2, LiveUpdateTextField } from '@a-type/ui';
+import { Box, Field, H2, Input } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { RecipeNotFound } from '../RecipeNotFound.jsx';
 import { useRecipeFromSlugUrl, useWatchChanges } from '../hooks.js';
@@ -42,11 +42,11 @@ function RecipeEditorContent({ recipe }: { recipe: Recipe }) {
 	usePageTitle('Editing ' + recipe.get('title').slice(0, 20));
 
 	return (
-		<div className="flex flex-col gap-8">
+		<Box col gap="xl" items="stretch">
 			<HeaderBar backUrl={makeRecipeLink(recipe, '')}>
 				<RecipeEditActions />
 			</HeaderBar>
-			<div className="flex flex-col gap-2">
+			<Box col gap="sm">
 				<TitleAndImageLayout>
 					<TitleContainer>
 						<RecipeTitleField recipe={recipe} />
@@ -56,42 +56,45 @@ function RecipeEditorContent({ recipe }: { recipe: Recipe }) {
 					</ImageContainer>
 				</TitleAndImageLayout>
 				<RecipeUrlField recipe={recipe} />
-			</div>
+			</Box>
 			<RecipeTagsFullEditor recipe={recipe} />
 			<div>
-				<H2 className="mb-xs">Description</H2>
+				<H2>Description</H2>
 				<RecipePreludeEditor recipe={recipe} />
 			</div>
 			<RecipeNoteEditor recipe={recipe} />
 			<RecipeTimeFields recipe={recipe} />
-			<label className="mt-1 flex flex-row items-center justify-between">
-				<span>Servings</span>
-				<LiveUpdateTextField
-					value={recipe.get('servings')?.toString() ?? ''}
-					onChange={(value) => {
-						const asNumber = parseInt(value, 10);
-						if (isNaN(asNumber)) return;
-						recipe.set('servings', asNumber);
-					}}
-					type="number"
-					className="w-24"
+			<Field stretch id="servings">
+				<Field.Label>Servings</Field.Label>
+				<Field.Control
+					render={
+						<Input
+							value={recipe.get('servings')?.toString() ?? ''}
+							onValueChange={(value) => {
+								const asNumber = parseInt(value, 10);
+								if (isNaN(asNumber)) return;
+								recipe.set('servings', asNumber);
+							}}
+							type="number"
+						/>
+					}
 				/>
-			</label>
+			</Field>
 			<div>
-				<H2 className="mb-xs">Ingredients</H2>
+				<H2>Ingredients</H2>
 				<RecipeIngredientsEditor recipe={recipe} />
 			</div>
 			<div>
 				<InstructionsProvider isEditing recipeId={recipe.get('id')}>
-					<H2 className="mb-xs">Instructions</H2>
+					<H2>Instructions</H2>
 					<RecipeInstructionsField recipe={recipe} />
 				</InstructionsProvider>
 			</div>
 			<div>
-				<H2 className="mb-xs">Danger zone</H2>
-				<RecipeDeleteButton className="self-start" recipe={recipe} />
+				<H2>Danger zone</H2>
+				<RecipeDeleteButton style={{ alignSelf: 'start' }} recipe={recipe} />
 			</div>
-		</div>
+		</Box>
 	);
 }
 
@@ -101,7 +104,7 @@ function RecipeNoteEditor({ recipe }: { recipe: Recipe }) {
 		<NoteEditor
 			value={note ?? ''}
 			onChange={(v) => recipe.set('note', v)}
-			className="self-start"
+			style={{ alignSelf: 'start' }}
 		/>
 	);
 }

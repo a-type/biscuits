@@ -1,4 +1,4 @@
-import { ResetPasswordForm } from '@a-type/auth-ui';
+import { ResetPasswordForm } from '@/components/auth/ResetPasswordForm.jsx';
 import { H1, P, PageContent, PageRoot } from '@a-type/ui';
 import { CONFIG } from '@biscuits/client';
 import { useSearchParams } from '@verdant-web/react-router';

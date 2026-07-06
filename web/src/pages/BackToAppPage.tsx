@@ -1,4 +1,4 @@
-import { H1, PageContent, PageRoot } from '@a-type/ui';
+import { Heading, PageContent, PageRoot } from '@a-type/ui';
 import { AppId, appsById } from '@biscuits/apps';
 import { useSearchParams } from '@verdant-web/react-router';
 
@@ -11,7 +11,9 @@ export function BackToAppPage({}: BackToAppPageProps) {
 	return (
 		<PageRoot>
 			<PageContent>
-				<H1>Returning to {app?.name ?? 'app'}...</H1>
+				<Heading emphasis="primary">
+					Returning to {app?.name ?? 'app'}...
+				</Heading>
 			</PageContent>
 		</PageRoot>
 	);

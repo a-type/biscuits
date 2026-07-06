@@ -2,15 +2,19 @@ import { AddListsPicker } from '@/components/trips/AddListsPicker.jsx';
 import { useTripDays, useTripProgress } from '@/components/trips/hooks.js';
 import { hooks } from '@/store.js';
 import {
+	Box,
 	Button,
 	CollapsibleSimple,
-	H4,
+	EditableText,
+	Heading,
 	Icon,
-	LiveUpdateTextField,
+	P,
 	TabsContent,
 	TabsList,
 	TabsRoot,
 	TabsTrigger,
+	Text,
+	Ul,
 } from '@a-type/ui';
 import { useLocalStorage, usePageTitle } from '@biscuits/client';
 import { FragmentOf, graphql, useQuery } from '@biscuits/graphql';
@@ -32,6 +36,7 @@ import {
 import { TripDateRange } from './TripDateRange.jsx';
 import { TripGlobalProgress } from './TripGlobalProgress.jsx';
 import { ExtraItem, ListItem } from './TripItem.jsx';
+import cls from './TripView.module.css';
 import { quantityForecast } from './utils.js';
 
 export interface TripViewProps {
@@ -106,13 +111,23 @@ function TripViewImpl({ trip }: { trip: Trip }) {
 	const { forecast } = useWeather(trip);
 
 	return (
-		<div className="w-full flex flex-col gap-4">
+		<Box full="width" col gap>
 			<TripViewInfo trip={trip} forecast={forecast} />
 			<TripViewChecklists trip={trip} forecast={forecast} />
-			<div className="fixed bottom-0 left-0 right-0 w-full p-1 bg-wash">
+			<Box
+				style={{
+					position: 'fixed',
+					bottom: 0,
+					left: 0,
+					right: 0,
+					width: '100%',
+				}}
+				surface="ambient"
+				p="xs"
+			>
 				<TripGlobalProgress trip={trip} />
-			</div>
-		</div>
+			</Box>
+		</Box>
 	);
 }
 
@@ -126,46 +141,34 @@ function TripViewInfo({
 	const { name, startsAt, endsAt, location } = hooks.useWatch(trip);
 	const [editName, setEditName] = useState(!name || name === 'New Trip');
 	return (
-		<div
-			className={classNames(
-				'flex flex-col items-start ring-16px transition bg-primary-wash ring-primary-wash sm:rounded-md sm:ring-8px',
-				{
-					'gap-4': !startsAt || !endsAt,
-					'gap-1': startsAt && endsAt,
-				},
-			)}
+		<Box
+			gap={!startsAt || !endsAt ? 'lg' : 'md'}
+			className={classNames(cls.tripHeader)}
 		>
-			<div className="flex flex-row items-center gap-1">
-				<Button emphasis="ghost" render={<Link to="/" />}>
+			<Box items="center" gap="xs">
+				<Button
+					emphasis="ghost"
+					aria-label="Back to trips"
+					render={<Link to="/" />}
+				>
 					<Icon name="arrowLeft" />
-					<span className="sr-only">Back to trips</span>
 				</Button>
-				{editName ?
-					<LiveUpdateTextField
+				<Heading>
+					<EditableText
 						value={name}
-						onChange={(v) => trip.set('name', v)}
-						className="w-full text-xl"
-						autoFocus={editName}
-						onBlur={() => setEditName(false)}
-						autoSelect
+						onValueChange={(v) => trip.set('name', v)}
+						editing={editName}
+						onEditingChange={setEditName}
 					/>
-				:	<Button
-						emphasis="ghost"
-						className="text-xl"
-						onClick={() => setEditName(true)}
-					>
-						{name}
-						<Icon className="ml-2" name="pencil" />
-					</Button>
-				}
-			</div>
+				</Heading>
+			</Box>
 			<TripDateRange trip={trip} />
 			<LocationSelect
 				value={location}
 				onChange={(v) => trip.set('location', v)}
 			/>
 			{forecast && <WeatherForecast forecast={forecast} />}
-		</div>
+		</Box>
 	);
 }
 
@@ -196,9 +199,9 @@ function TripViewChecklists({
 
 	if (!days) {
 		return (
-			<div className="mt-8 w-full flex flex-1 flex-col items-center justify-center color-gray-dark">
+			<Box full="width" grow col layout="center" dim p="lg">
 				<div>Select dates to get started</div>
-			</div>
+			</Box>
 		);
 	}
 
@@ -212,17 +215,17 @@ function TripViewChecklists({
 				});
 			}}
 		>
-			<div className="mb-4 display-unset">
-				<div className="flex flex-row items-center gap-2 px-2">
-					<H4 className="flex-1">
+			<div className={cls.tabsHeaderRoot}>
+				<div className={cls.tabsHeader}>
+					<Text bold render={<h4 />} style={{ flex: 1 }}>
 						{editingLists ?
 							startedWithNoLists ?
 								'Add lists'
 							:	'Edit lists'
 						:	'Lists'}
-					</H4>
+					</Text>
 					<Button
-						className="m-1 flex-0-0-auto"
+						className={cls.tabsToggle}
 						size={editingLists ? 'small' : 'default'}
 						color="accent"
 						emphasis={editingLists ? 'primary' : 'ghost'}
@@ -230,19 +233,23 @@ function TripViewChecklists({
 					>
 						{editingLists ?
 							<>
-								Done <div className="i-solar-check-circle-linear" />
+								Done <Icon name="check" />
 							</>
-						:	<div className="i-solar-settings-linear" />}
+						:	<Icon name="gear" />}
 					</Button>
 				</div>
 				<CollapsibleSimple open={editingLists}>
-					<AddListsPicker trip={trip} className="p-2" />
+					<Box p="sm">
+						<AddListsPicker trip={trip} />
+					</Box>
 				</CollapsibleSimple>
-				<TabsList className="sticky top-0 z-2 w-full overflow-y-hidden border-none shadow-none bg-wash overflow-x-auto important:justify-start">
-					{mappedLists.map((list) => (
-						<ListTab list={list} key={list.get('id')} trip={trip} />
-					))}
-				</TabsList>
+				<CollapsibleSimple open={!editingLists}>
+					<TabsList className={cls.tabsList}>
+						{mappedLists.map((list) => (
+							<ListTab list={list} key={list.get('id')} trip={trip} />
+						))}
+					</TabsList>
+				</CollapsibleSimple>
 			</div>
 			{mappedLists.map((list) => {
 				const listId = list.get('id');
@@ -260,8 +267,8 @@ function TripViewChecklists({
 				);
 			})}
 			{startedWithNoLists && !mappedLists.length && (
-				<div className="w-full p-4 italic color-gray-dark">
-					<span className="[font-style:normal]">💡</span> Add lists to this trip
+				<div className={cls.tabsEmpty}>
+					<span style={{ fontStyle: 'normal' }}>💡</span> Add lists to this trip
 					for everything you want to pack. Once you start packing, check off
 					items as you go.
 				</div>
@@ -273,17 +280,11 @@ function TripViewChecklists({
 function ListTab({ trip, list }: { list: List; trip: Trip }) {
 	const { value } = useTripProgress(trip, { listFilter: [list.get('id')] });
 	return (
-		<TabsTrigger
-			value={list.get('id')}
-			className="relative z-1 flex-shrink-0 overflow-hidden"
-		>
-			<span className="text-nowrap">{list.get('name')}</span>
-			<Progress.Root
-				value={value}
-				className="absolute bottom-0 left-2 right-2 z-1 overflow-hidden border rounded-full border-l-solid border-r-solid border-t-solid border-primary"
-			>
+		<TabsTrigger value={list.get('id')} className={cls.tab}>
+			<span className={cls.tabText}>{list.get('name')}</span>
+			<Progress.Root value={value} className={cls.tabProgress}>
 				<Progress.Indicator
-					className="h-4px w-full bg-accent"
+					className={cls.tabProgressIndicator}
 					style={{
 						transform: `translateX(-${100 * (1 - value)}%)`,
 					}}
@@ -319,12 +320,12 @@ function TripViewChecklist({
 	}
 
 	return (
-		<div className="flex flex-col">
-			<ul className="m-0 mb-6 flex flex-col list-none gap-1 p-0">
+		<Box col>
+			<Ul unstyled>
 				{items.map((item) => {
 					const completion = completions.get(item.get('id')) ?? 0;
 					return (
-						<li key={item.get('id')} className="m-0 p-0">
+						<Ul.Item key={item.get('id')}>
 							<ListItem
 								item={item}
 								days={days}
@@ -334,13 +335,13 @@ function TripViewChecklist({
 								}}
 								forecast={forecast}
 							/>
-						</li>
+						</Ul.Item>
 					);
 				})}
 				{extraItemsForList?.map((item) => {
 					const completion = completions.get(item.get('id')) ?? 0;
 					return (
-						<li key={item.get('id')} className="m-0 p-0">
+						<Ul.Item key={item.get('id')}>
 							<ExtraItem
 								item={item}
 								completion={completion}
@@ -351,11 +352,11 @@ function TripViewChecklist({
 									extraItemsForList?.removeAll(item);
 								}}
 							/>
-						</li>
+						</Ul.Item>
 					);
 				})}
-			</ul>
-			<div className="flex flex-col gap-4">
+			</Ul>
+			<Box col gap p>
 				<Button
 					onClick={() => {
 						if (!extraItemsForList) {
@@ -371,18 +372,18 @@ function TripViewChecklist({
 						}
 					}}
 					size="small"
-					className="self-start"
+					align="start"
 				>
 					<Icon name="plus" /> Add item
 				</Button>
-				<p className="text-sm italic color-gray-dark">
+				<P emphasis="ambient" italic dim>
 					New items are only applied to this trip.{' '}
-					<Link className="font-bold" to={`/lists/${list.get('id')}`}>
-						Edit the list
-					</Link>{' '}
+					<Text bold>
+						<Link to={`/lists/${list.get('id')}`}>Edit the list</Link>
+					</Text>{' '}
 					if you want them for future trips.
-				</p>
-			</div>
-		</div>
+				</P>
+			</Box>
+		</Box>
 	);
 }

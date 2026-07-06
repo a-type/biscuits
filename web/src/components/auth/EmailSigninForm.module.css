@@ -1,0 +1,9 @@
+.forgotPassword {
+	background: transparent;
+	border: none;
+	padding: 0;
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+	text-decoration: underline;
+	cursor: pointer;
+	align-self: flex-end;
+}

@@ -1,0 +1,29 @@
+.row {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	padding-block: var(--m-space-xs);
+	padding-inline: var(--m-space-sm);
+	user-select: none;
+}
+
+.header {
+	@apply --mx-prose-ambient;
+	text-transform: uppercase;
+	font-weight: var(--m-text-weight-bold);
+	font-style: italic;
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+	user-select: none;
+	margin: 0;
+	min-width: 0;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	padding-inline-end: var(--m-space-xs);
+	flex: 1 0 0;
+
+	[data-is-item-dragging='true'] & {
+		font-size: var(--m-text-size-sm);
+		margin-top: var(--m-space-sm);
+	}
+}

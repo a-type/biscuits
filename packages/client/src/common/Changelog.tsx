@@ -1,4 +1,5 @@
 import {
+	Box,
 	Button,
 	Dialog,
 	DialogActions,
@@ -6,16 +7,19 @@ import {
 	DialogContent,
 	DialogTitle,
 	DialogTrigger,
+	Heading,
 	Icon,
 	NavBarItem,
 	NavBarItemIcon,
 	NavBarItemIconWrapper,
 	NavBarItemText,
+	P,
 	withClassName,
 } from '@a-type/ui';
 import { graphql, useQuery } from '@biscuits/graphql';
 import { useState } from 'react';
 import { useLocalStorage } from '../hooks/useStorage.js';
+import cls from './Changelog.module.css';
 import { useAppId } from './Context.js';
 
 export interface ChangelogDisplayProps {
@@ -73,12 +77,7 @@ export function ChangelogDisplay({
 				data-new={hasNew}
 				render={() =>
 					children || (
-						<Button
-							emphasis="ghost"
-							className={
-								hasNew ? 'color-accent-dark bg-accent-wash' : undefined
-							}
-						>
+						<Button emphasis={hasNew ? 'light' : 'ghost'} color="accent">
 							<Icon name="gift" />
 						</Button>
 					)
@@ -86,27 +85,32 @@ export function ChangelogDisplay({
 			/>
 			<DialogContent>
 				<DialogTitle>What&apos;s new</DialogTitle>
-				<div className="flex flex-col gap-4 overflow-y-auto">
+				<Box col gap overflow="auto-y">
 					{data.map((item, idx) => (
-						<div key={item.id} className="relative">
-							<p className="mb-1 text-xs italic color-gray-dark">
+						<div key={item.id} style={{ position: 'relative' }}>
+							<P italic emphasis="ambient">
 								{new Date(item.createdAt).toLocaleDateString()}
-							</p>
-							<h3 className="mb-2 mt-0 text-lg font-bold">{item.title}</h3>
+							</P>
+							<Heading render={<h3 />} emphasis="ambient">
+								{item.title}
+							</Heading>
 							{item.imageUrl && (
 								<img
 									src={item.imageUrl}
 									alt={item.title}
-									className="h-auto w-full"
+									style={{
+										height: 'auto',
+										width: '100%',
+									}}
 								/>
 							)}
-							<p className="mt-0 text-sm">{item.details}</p>
+							<P>{item.details}</P>
 							{(lastSeenIndex === -1 || idx < lastSeenIndex) && (
-								<div className="absolute right-4 top-4 h-2 w-2 rounded-full bg-accent" />
+								<div className={cls.pip} />
 							)}
 						</div>
 					))}
-				</div>
+				</Box>
 				<DialogActions>
 					<DialogClose />
 				</DialogActions>
@@ -117,7 +121,7 @@ export function ChangelogDisplay({
 
 export function NavBarChangelog() {
 	return (
-		<ChangelogDisplay hideOnSeen className="hidden md:flex">
+		<ChangelogDisplay hideOnSeen className={cls.desktopOnly}>
 			<NavBarChangelogButton>
 				<NavBarItemIconWrapper>
 					<NavBarItemIcon name="gift" />
@@ -128,7 +132,4 @@ export function NavBarChangelog() {
 	);
 }
 
-const NavBarChangelogButton = withClassName(
-	NavBarItem,
-	'[&[data-new=true]]:(bg-accent-wash color-accent-dark)',
-);
+const NavBarChangelogButton = withClassName(NavBarItem, cls.changelogItem);

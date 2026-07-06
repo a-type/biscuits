@@ -3,6 +3,7 @@ import { makeRecipeLink } from '@/components/recipes/makeRecipeLink.js';
 import { IngredientText } from '@/components/recipes/viewer/IngredientText.jsx';
 import { hooks } from '@/stores/groceries/index.js';
 import {
+	Box,
 	Button,
 	Dialog,
 	DialogActions,
@@ -15,8 +16,8 @@ import {
 } from '@a-type/ui';
 import { fractionToText } from '@a-type/utils';
 import { Item, ItemInputsItem } from '@gnocchi.biscuits/verdant';
-import classNames from 'classnames';
 import { Suspense } from 'react';
+import cls from './ItemSources.module.css';
 
 export interface ItemSourcesProps {
 	item: Item;
@@ -25,17 +26,11 @@ export interface ItemSourcesProps {
 export function ItemSources({ item, ...rest }: ItemSourcesProps) {
 	hooks.useWatch(item.get('inputs'));
 	return (
-		<div className="mb-0 mr-auto mt-2 min-w-0 text-xs leading-tight" {...rest}>
-			<label className="mr-2 inline italic">Sources:</label>
-			<ul
-				className="color-gray7 m-0 max-w-full inline-flex flex-col list-none overflow-hidden p-0"
-				{...rest}
-			>
+		<div className={cls.root} {...rest}>
+			<label className={cls.label}>Sources:</label>
+			<ul className={cls.items} {...rest}>
 				{item.get('inputs').map((input) => (
-					<li
-						className="inline max-w-full text-ellipsis text-inherit color-inherit after:[&:not(:last-child)]:content-[',_']"
-						key={(input as any).oid}
-					>
+					<li className={cls.item} key={(input as any).oid}>
 						<InputRenderer input={input} />
 					</li>
 				))}
@@ -67,7 +62,7 @@ function InputRenderer({ input }: { input: ItemInputsItem }) {
 		return (
 			<a
 				href={url}
-				className="font-bold"
+				className={cls.link}
 				rel="noopener noreferrer"
 				target="_blank"
 			>
@@ -101,7 +96,7 @@ function RecipePreview({
 	hooks.useWatch(recipe);
 	return (
 		<Dialog>
-			<DialogTrigger render={<span className="font-bold" />}>
+			<DialogTrigger render={<span className={cls.link} />}>
 				{recipe ? truncate(recipe.get('title')) : 'a recipe'}
 			</DialogTrigger>
 			<DialogContent>
@@ -113,7 +108,9 @@ function RecipePreview({
 					/>
 				</Suspense>
 				<DialogActions>
-					<DialogClose render={<Button align="end" />}>Close</DialogClose>
+					<DialogClose render={<Button style={{ alignSelf: 'end' }} />}>
+						Close
+					</DialogClose>
 				</DialogActions>
 			</DialogContent>
 		</Dialog>
@@ -144,7 +141,7 @@ function RecipePreviewContent({
 	const { title, ingredients } = live;
 
 	return (
-		<div className="flex flex-col gap-3">
+		<Box col gap="sm">
 			<H2>{title}</H2>
 			<LinkButton emphasis="primary" align="start" to={makeRecipeLink(recipe)}>
 				View recipe
@@ -157,14 +154,17 @@ function RecipePreviewContent({
 				{ingredients.map((ingredient) => (
 					<li
 						key={ingredient.get('id')}
-						className={classNames({
-							'font-bold': ingredient.get('text') === highlightIngredient,
-						})}
+						style={{
+							fontWeight:
+								ingredient.get('text') === highlightIngredient
+									? 'bold'
+									: 'normal',
+						}}
 					>
 						<IngredientText ingredient={ingredient} multiplier={multiplier} />
 					</li>
 				))}
 			</ul>
-		</div>
+		</Box>
 	);
 }

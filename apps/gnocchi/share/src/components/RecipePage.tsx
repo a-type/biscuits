@@ -5,12 +5,14 @@ import {
 	Divider,
 	H1,
 	H2,
+	Heading,
 	Icon,
 	Note,
 	P,
 	PageContent,
 	PageFixedArea,
 	PageRoot,
+	TextLink,
 } from '@a-type/ui';
 import { graphql, ResultOf } from '@biscuits/graphql';
 import { Link } from '@tanstack/react-router';
@@ -94,7 +96,7 @@ export function RecipePage({ data: response }: RecipePageProps) {
 
 	if (!data) {
 		return (
-			<PageRoot className="theme-lemon">
+			<PageRoot className="@mode-lemon">
 				<PageContent>
 					<H1>Not found</H1>
 					{!!publication && (
@@ -108,12 +110,16 @@ export function RecipePage({ data: response }: RecipePageProps) {
 	}
 
 	return (
-		<PageRoot className="theme-lemon">
-			<PageContent className="max-w-600px">
-				<article
+		<PageRoot className="@mode-lemon">
+			<PageContent style={{ maxWidth: 600 }}>
+				<Box
+					render={<article />}
+					col
+					items="stretch"
+					gap
 					itemScope
 					itemType="https://schema.org/Recipe"
-					className="h-recipe flex flex-col items-stretch gap-4"
+					className="h-recipe"
 				>
 					{publication ?
 						<Box gap items="center" render={<Link to={publication.url} />}>
@@ -135,12 +141,12 @@ export function RecipePage({ data: response }: RecipePageProps) {
 									{author?.name ?? 'Anonymous'}
 								</span>
 							</P>
-							<div className="row flex-wrap">
+							<Box wrap gap items="center">
 								{data.servings && <Chip>Serves {data.servings}</Chip>}
 								{data.prepTimeMinutes && (
 									<>
 										<Chip>Prep {data.prepTimeMinutes} min</Chip>
-										<span className="hidden" itemProp="prepTime">
+										<span style={{ display: 'none' }} itemProp="prepTime">
 											P0Y0M0DT0H{data.prepTimeMinutes}M0S
 										</span>
 									</>
@@ -148,7 +154,7 @@ export function RecipePage({ data: response }: RecipePageProps) {
 								{data.cookTimeMinutes && (
 									<>
 										<Chip>Cook {data.cookTimeMinutes} min</Chip>
-										<span className="hidden" itemProp="cookTime">
+										<span style={{ display: 'none' }} itemProp="cookTime">
 											P0Y0M0DT0H{data.cookTimeMinutes}M0S
 										</span>
 									</>
@@ -156,36 +162,53 @@ export function RecipePage({ data: response }: RecipePageProps) {
 								{data.totalTimeMinutes && (
 									<>
 										<Chip>Total {data.totalTimeMinutes} min</Chip>
-										<span className="hidden" itemProp="totalTime">
+										<span style={{ display: 'none' }} itemProp="totalTime">
 											P0Y0M0DT0H{data.totalTimeMinutes}M0S
 										</span>
 									</>
 								)}
-							</div>
+							</Box>
 						</TopLineTitle>
 					</TopLineRoot>
 					{data.note && (
-						<Note className="max-w-400px self-start">{data.note}</Note>
+						<Note
+							style={{
+								maxWidth: 400,
+								alignSelf: 'start',
+							}}
+						>
+							{data.note}
+						</Note>
 					)}
 					{data.prelude && (
 						<div>
 							<Prelude content={data.prelude} />
 						</div>
 					)}
-					<Divider />
-					<div className="my-4">
-						<H2 className="mb-md">Ingredients</H2>
+					<Divider padded />
+					<Box col>
+						<H2>Ingredients</H2>
 						<Ingredients data={data} />
-					</div>
-					<Divider />
-					<div className="mb-12 mt-4">
-						<H2 className="mb-md">Instructions</H2>
+					</Box>
+					<Divider padded />
+					<Box col>
+						<H2>Instructions</H2>
 						<MachineReadableInstructions data={data} />
 						<Suspense>
 							<Instructions data={data} />
 						</Suspense>
-					</div>
-					<PageFixedArea className="bottom-4 top-auto mb-4 flex flex-row justify-end bg-transparent">
+					</Box>
+					<PageFixedArea
+						style={{
+							bottom: 'var(--m-space-md)',
+							top: 'auto',
+							marginBlockEnd: 'var(--m-space-md)',
+							display: 'flex',
+							flexDirection: 'row',
+							justifyContent: 'flex-end',
+							backgroundColor: 'transparent',
+						}}
+					>
 						<Button
 							emphasis="primary"
 							className="shadow-lg"
@@ -200,17 +223,16 @@ export function RecipePage({ data: response }: RecipePageProps) {
 							Cook with Gnocchi
 						</Button>
 					</PageFixedArea>
-					<P className="color-gray7 ml-auto text-right text-xs">
+					<P
+						dim
+						emphasis="ambient"
+						style={{ marginLeft: 'auto', textAlign: 'right' }}
+					>
 						Powered by{' '}
-						<a
-							className="font-bold color-black"
-							href="https://biscuits.club/gnocchi"
-						>
-							Gnocchi
-						</a>
-						, the freshest way to manage your weekly cooking
+						<TextLink href="https://biscuits.club/gnocchi">Gnocchi</TextLink>,
+						the freshest way to manage your weekly cooking
 					</P>
-				</article>
+				</Box>
 			</PageContent>
 		</PageRoot>
 	);
@@ -219,8 +241,12 @@ export function RecipePage({ data: response }: RecipePageProps) {
 function GnocchiHeader() {
 	return (
 		<Box gap items="center" render={<a href="https://biscuits.club/gnocchi" />}>
-			<img src="/icon.png" className="h-30px w-30px" alt="Gnocchi icon" />
-			<H1 className="font-fancy !text-lg !font-medium">Gnocchi Recipes</H1>
+			<img
+				src="/icon.png"
+				style={{ width: 30, height: 30 }}
+				alt="Gnocchi icon"
+			/>
+			<Heading className="font-fancy">Gnocchi Recipes</Heading>
 		</Box>
 	);
 }

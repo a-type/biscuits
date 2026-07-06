@@ -1,0 +1,57 @@
+.grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: var(--m-space-lg);
+	width: 100%;
+	max-width: 1000px;
+
+	@media (min-width: 640px) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+.cardMain {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	grid-template-areas:
+		'icon name'
+		'description description';
+	align-items: center;
+	gap: var(--m-space-md);
+	padding: var(--m-space-md);
+	font-weight: var(--m-text-weight-normal);
+	position: relative;
+}
+
+.name {
+	grid-area: name;
+	margin: 0;
+	font-size: var(--m-text-size);
+	font-weight: var(--m-text-weight-bold);
+	background: transparent;
+	font-family: Henrietta, 'Noto Serif', serif;
+}
+
+.appIcon {
+	grid-area: icon;
+	height: --fn-literal(80px);
+	width: --fn-literal(80px);
+}
+
+.description {
+	grid-area: description;
+	font-size: var(--m-text-size-sm);
+	padding: var(--m-space-md) !important;
+	@apply --mx-fg(var(--m-color-neutral-ink));
+}
+
+.externalIcon {
+	position: absolute;
+	right: var(--m-space-lg);
+	top: var(--m-space-lg);
+	transition: transform 0.15s ease;
+
+	.cardMain:hover & {
+		transform: translate(var(--m-space-sm), calc(-1 * var(--m-space-sm)));
+	}
+}

@@ -9,6 +9,7 @@ import { Box, Button, Dialog, Icon } from '@a-type/ui';
 import { Link } from '@verdant-web/react-router';
 import { use, useState } from 'react';
 import { useSnapshot } from 'valtio';
+import cls from './LocationRequestDialog.module.css';
 
 const hasPermission = hasGeolocationPermission();
 
@@ -58,12 +59,12 @@ export function LocationRequestDialog() {
 				</Dialog.Content>
 			:	<Dialog.Content width="md">
 					<Dialog.Title>Detect Location</Dialog.Title>
-					<Box className="bg-accentWash relative h-40vmin rounded-lg" gap="md">
-						<div className="c-accentLight bg-overlay absolute left-3/8 top-1/2 z-1 h-30vmin w-30vmin flex translate--1/2 items-center justify-center rounded-full">
-							<Icon name="location" className="h-20vmin w-20vmin" />
+					<Box className={cls.graphic} gap="md">
+						<div className={`${cls.iconWrapper} ${cls.leftIcon}`}>
+							<Icon name="location" className={cls.icon} />
 						</div>
-						<div className="c-accentDark bg-overlay absolute left-5/8 top-1/2 z-2 h-30vmin w-30vmin flex translate--1/2 items-center justify-center rounded-full">
-							<Icon name="add_person" className="h-20vmin w-20vmin" />
+						<div className={`${cls.iconWrapper} ${cls.rightIcon}`}>
+							<Icon name="add_person" className={cls.icon} />
 						</div>
 					</Box>
 					<Dialog.Description>

@@ -2,6 +2,7 @@ import { useParticles } from '@a-type/ui';
 import { debounce } from '@a-type/utils';
 import classNames from 'classnames';
 import { useEffect, useMemo, useRef, useState } from 'react';
+import cls from './PopEffect.module.css';
 
 export interface PopEffectProps {
 	active?: boolean;
@@ -35,21 +36,11 @@ export function PopEffect({ active, className }: PopEffectProps) {
 
 	return (
 		<div
-			className={classNames(
-				'absolute center z--1 h-50px w-50px translate--50% scale-0 overflow-hidden rounded-full bg-primary',
-				'[&[data-active=true]]:(animate-keyframes-pop animate-duration-1500 animate-ease-out animate-iteration-1)',
-				className,
-			)}
+			className={classNames(cls.root, className)}
 			data-active={animate}
 			ref={ref}
 		>
-			<div
-				className={classNames(
-					'absolute center z-0 h-48px w-48px translate--50% scale-0 rounded-full bg-white',
-					'[&[data-active=true]]:(animate-keyframes-pop animate-duration-1000 animate-ease-out animate-iteration-1 delay-500)',
-				)}
-				data-active={animate}
-			/>
+			<div className={cls.dot} data-active={animate} />
 		</div>
 	);
 }

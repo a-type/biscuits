@@ -1,7 +1,10 @@
-import { Button, ErrorBoundary, H1, P, Spinner } from '@a-type/ui';
-import { ReloadButton } from '@biscuits/client';
-import { updateApp, updateState } from '@biscuits/client/apps';
-import { Link, makeRoutes, Outlet, Router } from '@verdant-web/react-router';
+import { ErrorBoundary, Spinner } from '@a-type/ui';
+import {
+	GlobalErrorFallback,
+	updateApp,
+	updateState,
+} from '@biscuits/client/apps';
+import { makeRoutes, Outlet, Router } from '@verdant-web/react-router';
 import { lazy, Suspense, useCallback } from 'react';
 import { HomePage } from './HomePage.jsx';
 
@@ -41,28 +44,12 @@ export function Pages() {
 		[],
 	);
 	return (
-		<ErrorBoundary fallback={(props) => <ErrorFallback {...props} />}>
+		<ErrorBoundary fallback={(props) => <GlobalErrorFallback {...props} />}>
 			<Suspense fallback={<Spinner />}>
 				<Router routes={routes} onNavigate={handleNavigate}>
 					<Outlet />
 				</Router>
 			</Suspense>
 		</ErrorBoundary>
-	);
-}
-
-function ErrorFallback({ clearError }: { clearError: () => void }) {
-	return (
-		<div className="flex flex-col items-center justify-center p-4">
-			<div className="max-w-content flex flex-col items-start justify-center gap-4">
-				<H1>Something went wrong</H1>
-				<P>
-					Sorry about this. The app has crashed. You can try refreshing, but if
-					that doesn't work, use the button below to report the issue.
-				</P>
-				<Button render={<Link to="/" onClick={clearError} />}>Go Home</Button>
-				<ReloadButton />
-			</div>
-		</div>
 	);
 }

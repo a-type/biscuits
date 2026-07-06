@@ -2,7 +2,7 @@ import {
 	updateApp,
 	updateState,
 } from '@/components/updatePrompt/updateState.js';
-import { Button, Icon } from '@a-type/ui';
+import { Box, Button, Icon } from '@a-type/ui';
 import { useState } from 'react';
 import { useSnapshot } from 'valtio';
 
@@ -20,7 +20,15 @@ export function UpdatePrompt({}: UpdatePromptProps) {
 	}
 
 	return (
-		<div className="w-full flex flex-col items-start gap-3 border rounded-lg border-solid p-4 color-black bg-primary-wash border-primary">
+		<Box
+			full="width"
+			col
+			items="start"
+			gap
+			border
+			round="lg"
+			surface="secondary"
+		>
 			<div>
 				<Icon name="star" />
 				&nbsp;App update available!
@@ -39,6 +47,6 @@ export function UpdatePrompt({}: UpdatePromptProps) {
 			>
 				Get the latest
 			</Button>
-		</div>
+		</Box>
 	);
 }

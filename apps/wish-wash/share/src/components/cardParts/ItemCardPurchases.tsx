@@ -1,4 +1,4 @@
-import { CardContent, clsx } from '@a-type/ui';
+import { CardContent, clsx, Text } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 
 export const itemCardPurchasesFragment = graphql(`
@@ -13,18 +13,20 @@ export const itemCardPurchasesFragment = graphql(`
 export interface ItemCardPurchasesProps {
 	item: FragmentOf<typeof itemCardPurchasesFragment>;
 	className?: string;
+	style?: React.CSSProperties;
 }
 
 export function ItemCardPurchases({
 	item: itemMasked,
 	className,
+	style,
 }: ItemCardPurchasesProps) {
 	const item = readFragment(itemCardPurchasesFragment, itemMasked);
 	if (!item.purchasedCount) {
 		if (item.count && item.count !== Infinity && item.type !== 'vibe') {
 			return (
-				<CardContent className={clsx('block items-center text-sm', className)}>
-					Wants <strong>{item.count}</strong>
+				<CardContent className={className} style={style}>
+					Wants <Text bold>{item.count}</Text>
 				</CardContent>
 			);
 		}
@@ -34,17 +36,18 @@ export function ItemCardPurchases({
 	return (
 		<CardContent
 			className={clsx(
-				'block items-center text-sm',
-				item.purchasedCount >= item.count ?
-					'color-contrast bg-main-dark'
-				:	'bg-white',
+				item.purchasedCount >= item.count && '@mode-inverted',
 				className,
 			)}
+			style={{
+				...style,
+				color: 'var(--m-color-neutral-ink)',
+			}}
 		>
-			<strong>
+			<Text bold>
 				{item.purchasedCount}
 				{item.count ? ` / ${item.count}` : ''}
-			</strong>{' '}
+			</Text>{' '}
 			bought
 		</CardContent>
 	);

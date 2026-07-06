@@ -1,4 +1,4 @@
-import { Note } from '@a-type/ui';
+import { Box, Heading, Note, Ul } from '@a-type/ui';
 import { ReactNode } from 'react';
 
 export interface IngredientListProps {
@@ -6,7 +6,7 @@ export interface IngredientListProps {
 }
 
 export function IngredientList({ children }: IngredientListProps) {
-	return <ul className="m-0 pl-md">{children}</ul>;
+	return <Ul>{children}</Ul>;
 }
 
 export function IngredientListItem({
@@ -17,13 +17,15 @@ export function IngredientListItem({
 	note?: string;
 }) {
 	return (
-		<li>
-			<div className="mb-sm flex flex-col items-start gap-xs">{children}</div>
+		<Ul.Item>
+			<Box col items="start" gap="xs">
+				{children}
+			</Box>
 			{note && <Note>{note}</Note>}
-		</li>
+		</Ul.Item>
 	);
 }
 
 export function IngredientListHeading({ children }: IngredientListProps) {
-	return <h3 className="mb-md text-sm font-bold">{children}</h3>;
+	return <Heading emphasis="ambient">{children}</Heading>;
 }

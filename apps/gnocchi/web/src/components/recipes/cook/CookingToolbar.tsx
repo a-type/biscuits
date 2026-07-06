@@ -5,6 +5,7 @@ import { useDrag } from '@use-gesture/react';
 import classNames from 'classnames';
 import { useCallback, useRef } from 'react';
 import { RecipeIngredientsViewer } from '../viewer/RecipeIngredientsViewer.jsx';
+import cls from './CookingToolbar.module.css';
 
 export interface CookingToolbarProps {
 	recipe: Recipe;
@@ -20,23 +21,18 @@ export function CookingToolbar({ recipe, className }: CookingToolbarProps) {
 	const { containerRef, containerStyle, bind } = useExpandingContainer();
 
 	return (
-		<div
-			className={classNames(
-				'relative bottom-[calc(0.25rem*-1)] mb-2 w-full flex flex-col items-center',
-				className,
-			)}
-		>
-			<div className="relative z-1 grid grid-cols-[1fr_auto_1fr] grid-rows-[1fr] grid-areas-[empty_ingredients_top] w-full items-center gap-2">
+		<div className={classNames(cls.root, className)}>
+			<div className={cls.grid}>
 				<AnimatedButton
 					size="small"
-					className="[grid-area:ingredients] flex touch-none items-center justify-center gap-2 rounded-full py-2 shadow-lg"
+					className={cls.ingredientsButton}
 					{...bind()}
 					style={{
 						y: containerStyle.height.to((h) => (h > 0 ? '50%' : '0%')),
 					}}
 				>
 					<animated.span
-						className="h-15px inline-flex items-center justify-center"
+						className={cls.listIconWrapper}
 						style={{
 							display: containerStyle.height.to((h) =>
 								h > 0 ? 'none' : 'block',
@@ -46,7 +42,7 @@ export function CookingToolbar({ recipe, className }: CookingToolbarProps) {
 						<Icon name="bulletList" />
 					</animated.span>
 					<animated.span
-						className="h-15px inline-flex items-center justify-center"
+						className={cls.listIconWrapper}
 						style={{
 							display: containerStyle.height.to((h) =>
 								h > 0 ? 'block' : 'none',
@@ -63,7 +59,7 @@ export function CookingToolbar({ recipe, className }: CookingToolbarProps) {
 				</AnimatedButton>
 				<Button
 					emphasis="default"
-					className="[grid-area:top] mr-2 justify-self-end shadow-lg"
+					className={cls.top}
 					onClick={() => {
 						// careful, this relies on page structure in RecipeOverview...
 						const top = document.getElementById('pageTop');
@@ -76,7 +72,7 @@ export function CookingToolbar({ recipe, className }: CookingToolbarProps) {
 
 			<animated.div
 				ref={containerRef}
-				className="relative w-full overflow-hidden rounded-lg bg-white"
+				className={cls.ingredients}
 				style={{
 					height: containerStyle.height,
 					border: containerStyle.height.to((h) =>
@@ -84,8 +80,8 @@ export function CookingToolbar({ recipe, className }: CookingToolbarProps) {
 					),
 				}}
 			>
-				<div className="mt-3 h-full flex flex-col items-center overflow-overlay px-1 pb-[calc(40px+env(safe-area-inset-bottom,0px))]">
-					<RecipeIngredientsViewer recipe={recipe} className="important:p-2" />
+				<div className={cls.ingredientsInner}>
+					<RecipeIngredientsViewer recipe={recipe} className={cls.wrap} />
 				</div>
 			</animated.div>
 		</div>

@@ -2,7 +2,7 @@ import { AutoRestoreScroll } from '@/components/nav/AutoRestoreScroll.jsx';
 import { useSearch } from '@/components/pantry/hooks.js';
 import { PantryListItem } from '@/components/pantry/items/PantryListItem.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { Button, CardGrid } from '@a-type/ui';
+import { Box, Button, CardGrid } from '@a-type/ui';
 
 export interface PantrySearchResultsProps {}
 
@@ -21,8 +21,13 @@ export function PantrySearchResults({}: PantrySearchResultsProps) {
 	}
 
 	return (
-		<div className="flex flex-col items-center gap-4">
-			<CardGrid className="grid-cols-[repeat(2,1fr)] w-full">
+		<Box col items="center" gap>
+			<CardGrid
+				style={{
+					width: '100%',
+					gridTemplateColumns: 'repeat(2, 1fr)',
+				}}
+			>
 				{results.map((item) => {
 					return <PantryListItem key={item.get('canonicalName')} item={item} />;
 				})}
@@ -33,6 +38,6 @@ export function PantrySearchResults({}: PantrySearchResultsProps) {
 				</Button>
 			)}
 			<AutoRestoreScroll />
-		</div>
+		</Box>
 	);
 }

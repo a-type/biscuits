@@ -1,5 +1,6 @@
 import { MeetupSelect } from '@/components/sync/meetup/MeetupSelect.jsx';
 import { hooks } from '@/stores/groceries/index.js';
+import cls from './MeetupHint.module.css';
 
 export function MeetupHint() {
 	const peers = hooks.usePeerIds();
@@ -9,14 +10,9 @@ export function MeetupHint() {
 	}
 
 	return (
-		<div className="flex flex-grow-1 flex-col items-center justify-center gap-3 p-4 text-center">
-			<p className="max-w-300px text-sm italic color-gray-dark">
-				Time to regroup? Pick a location to meet up.
-			</p>
-			<label
-				htmlFor="meetupHintSelect"
-				className="text-xs italic color-gray-dark"
-			>
+		<div className={cls.root}>
+			<p className={cls.text}>Time to regroup? Pick a location to meet up.</p>
+			<label htmlFor="meetupHintSelect" className={cls.label}>
 				Meet at:
 			</label>
 			<MeetupSelect id="meetupHintSelect" emptyLabel="Choose..." />

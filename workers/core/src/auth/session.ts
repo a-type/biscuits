@@ -4,6 +4,7 @@ import { Context } from 'hono';
 import { getRootDomain } from '../common/domains.js';
 import { HonoEnv } from '../config/hono.js';
 import { BiscuitsError } from '../error.js';
+import { isSubscribed } from './subscription.js';
 
 declare module '@a-type/auth' {
 	interface Session {
@@ -27,7 +28,7 @@ export const sessions = new SessionManager<Context<HonoEnv>>({
 				sameSite: 'lax',
 				domain: getRootDomain(ctx.env.DEPLOYED_ORIGIN),
 			},
-			expiration: ctx.env.ENVIRONMENT === 'production' ? '24h' : '15m',
+			expiration: ctx.env.ENVIRONMENT === 'production' ? '24h' : '5m',
 			async createSession(userId) {
 				const user = await db
 					.selectFrom('User')
@@ -58,7 +59,7 @@ export const sessions = new SessionManager<Context<HonoEnv>>({
 					planId: user.planId,
 					role: user.planRole,
 					allowedApp: user.allowedApp ?? undefined,
-					planHasSubscription: user.subscriptionStatus === 'active',
+					planHasSubscription: isSubscribed(user.subscriptionStatus),
 				};
 			},
 			secret: ctx.env.SESSION_SECRET,

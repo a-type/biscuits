@@ -1,0 +1,44 @@
+.fillBlack {
+	fill: var(--m-color-neutral-ink);
+}
+
+.fillWhite {
+	fill: var(--m-color-neutral-paper);
+}
+
+.strokeNone {
+	stroke: none;
+}
+
+.strokeBlack {
+	stroke: var(--m-color-neutral-ink);
+}
+
+.strokeWhite {
+	stroke: var(--m-color-neutral-paper);
+}
+
+.strokeMain {
+	stroke: var(--m-color-main);
+}
+
+.strokeGray {
+	stroke: var(--m-color-neutral);
+}
+
+.strokeInherit {
+	stroke: inherit;
+}
+
+.bgGray {
+	background-color: var(--m-color-neutral);
+}
+
+.bgWhite {
+	background-color: var(--m-color-neutral-paper);
+}
+
+.scaleZoom {
+	--scale: calc(1 / var(--zoom-settled));
+	transform: scale(var(--scale));
+}

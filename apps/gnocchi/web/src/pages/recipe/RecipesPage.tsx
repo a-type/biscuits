@@ -14,14 +14,12 @@ export function RecipesPage() {
 			<PageContent>
 				<RecipeList />
 				<Suspense>
-					<PageNowPlaying className="pointer-events-none flex flex-col items-center">
+					<PageNowPlaying style={{ pointerEvents: 'none' }}>
 						<Suspense>
-							<RecipeCreateButton className="pointer-events-auto h-48px w-48px items-center justify-center shadow-xl md:h-auto md:w-auto md:gap-2">
-								<span className="hidden md:block">New Recipe</span>
-								<Icon
-									name="plus"
-									className="h-20px w-20px md:(h-15px w-15px)"
-								/>
+							<RecipeCreateButton
+								style={{ pointerEvents: 'auto', width: 48, height: 48 }}
+							>
+								<Icon name="plus" size={20} />
 							</RecipeCreateButton>
 						</Suspense>
 						<RecipesNowPlaying showSingle defaultOpen />

@@ -10,6 +10,7 @@ import {
 import { Item } from '@gnocchi.biscuits/verdant';
 import { Link } from '@verdant-web/react-router';
 import { useListOrNull, useListThemeClass } from './hooks.js';
+import cls from './ListTag.module.css';
 
 export function ListTag({
 	item,
@@ -41,25 +42,12 @@ export function ListTag({
 	return (
 		<Tooltip content={list.get('name')}>
 			<CollapsibleRoot open={!collapsed} className={className}>
-				<CollapsibleContent
-					data-horizontal
-					className="focus-within:shadow-focus rounded-md focus-within:(outline-none)"
-				>
-					<Link
-						to={`/list/${list.get('id')}`}
-						className="focus-visible:outline-none"
-					>
-						<div
-							className={clsx(
-								listThemeClass,
-								'min-h-3 min-w-3 flex items-center justify-center gap-1 rounded-md p-1 text-xs color-black bg-main-light lg:px-2',
-							)}
-						>
-							<Icon name="tag" className="inline" />
-							<span className="hidden max-w-full overflow-hidden text-ellipsis whitespace-nowrap lg:inline">
-								{name}
-							</span>
-							<span className="inline max-w-full overflow-hidden text-ellipsis whitespace-nowrap lg:hidden">
+				<CollapsibleContent data-horizontal className={cls.root}>
+					<Link to={`/list/${list.get('id')}`} className={cls.link}>
+						<div className={clsx(listThemeClass, cls.linkContent)}>
+							<Icon name="tag" filled style={{ display: 'inline' }} />
+							<span className={cls.name}>{name}</span>
+							<span className={cls.initials}>
 								{getInitials(name).toUpperCase()}
 							</span>
 						</div>

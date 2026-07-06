@@ -1,0 +1,40 @@
+.root {
+	margin-bottom: 0;
+	margin-inline-end: auto;
+	min-width: 0;
+	font-size: var(--m-prose-ambient-size);
+	line-height: 1;
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+}
+
+.label {
+	margin-inline-end: var(--m-space-xs);
+	display: inline;
+	font-style: italic;
+}
+
+.items {
+	margin: 0;
+	max-width: 100%;
+	display: inline-flex;
+	flex-direction: column;
+	list-style: none;
+	overflow: hidden;
+	padding: 0;
+	margin-inline-start: var(--m-space-xs);
+}
+
+.item {
+	display: inline;
+	max-width: 100%;
+	text-overflow: ellipsis;
+	@apply --mx-fg(inherit);
+
+	&:not(:last-child)::after {
+		content: ', ';
+	}
+}
+
+.link {
+	font-weight: var(--m-text-weight-bold);
+}

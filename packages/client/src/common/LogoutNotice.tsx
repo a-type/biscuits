@@ -1,4 +1,5 @@
 import {
+	Box,
 	Button,
 	Dialog,
 	DialogClose,
@@ -40,7 +41,7 @@ export function LogoutNotice({}: LogoutNoticeProps) {
 			<DialogContent>
 				<DialogTitle>Session expired</DialogTitle>
 				<P>To resume syncing your data, please sign in again.</P>
-				<div className="flex flex-row items-center justify-end gap-3">
+				<Box items="center" justify="end" gap="sm">
 					<DialogClose render={<Button emphasis="ghost" />}>Cancel</DialogClose>
 					<DialogClose
 						render={
@@ -49,7 +50,7 @@ export function LogoutNotice({}: LogoutNoticeProps) {
 					>
 						Sign in
 					</DialogClose>
-				</div>
+				</Box>
 			</DialogContent>
 		</Dialog>
 	);

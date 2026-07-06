@@ -1,9 +1,9 @@
-import { Button, clsx, Icon, IconName, PaletteName } from '@a-type/ui';
+import { Button, clsx, Icon, IconName } from '@a-type/ui';
 
 export interface TagToggleProps {
 	name: string;
 	icon?: IconName | null;
-	color?: PaletteName | null;
+	color?: string | null;
 	className?: string;
 	onToggle?: () => void;
 	toggled?: boolean;
@@ -22,18 +22,12 @@ export function TagToggle({
 		<Button
 			size="small"
 			emphasis="light"
-			className={clsx(
-				'[font-weight:inherit] flex items-center gap-1 text-xs',
-				className,
-			)}
+			className={clsx(`@mode-${color} @mode-dense`, className)}
 			toggled={toggled}
 			onClick={onToggle}
-			color={color ?? undefined}
 			{...rest}
 		>
-			<span>
-				<Icon name={icon || 'tag'} className="h-10px w-10px" />
-			</span>
+			<Icon name={icon || 'tag'} size={10} />
 			<span>{name}</span>
 		</Button>
 	);

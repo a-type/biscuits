@@ -20,17 +20,17 @@
 		"@react-spring/web": "^9.7.5",
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
-		"@unocss/transformer-variant-group": "catalog:",
 		"@verdant-web/react-router": "catalog:",
 		"@verdant-web/store": "catalog:",
-		"@vitejs/plugin-react-swc": "catalog:",
+		"@vitejs/plugin-react": "catalog:",
 		"downshift": "^9.0.8",
 		"gql.tada": "catalog:",
 		"mapbox-gl": "^3.9.4",
 		"react": "catalog:",
 		"react-dom": "catalog:",
 		"typescript": "catalog:",
-		"unocss": "catalog:",
+		"@arbor-css/core": "catalog:",
+		"@arbor-css/postcss": "catalog:",
 		"valtio": "catalog:",
 		"vite": "catalog:",
 		"vite-plugin-pwa": "catalog:",
@@ -43,7 +43,6 @@
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "^1.0.3",
-		"@biscuits/uno-config": "workspace:*",
 		"@vite-pwa/assets-generator": "catalog:"
 	}
 }

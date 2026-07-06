@@ -2,7 +2,7 @@ import { Footer } from '@/components/help/Footer.jsx';
 import {
 	Box,
 	Button,
-	H1,
+	Heading,
 	Icon,
 	P,
 	PageContent,
@@ -13,6 +13,7 @@ import { BiscuitsError } from '@biscuits/error';
 import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
 import { Link, useNavigate, useParams } from '@verdant-web/react-router';
 import { useEffect } from 'react';
+import classes from './ClaimInvitePage.module.css';
 
 const claimInviteInfo = graphql(`
 	query ClaimInviteInfo($code: String!) {
@@ -83,13 +84,13 @@ function ClaimInvitePage() {
 	}
 
 	return (
-		<PageRoot className="flex-1">
-			<PageContent className="h-full flex flex-col justify-between gap-lg">
+		<PageRoot style={{ flex: 1 }}>
+			<PageContent className={classes.pageContent}>
 				<Box col items="start" gap grow justify="center">
-					<H1>
+					<Heading emphasis="primary">
 						Join {infoResult.data?.planInvitation?.inviterName ?? 'someone'}’s
 						plan
-					</H1>
+					</Heading>
 					<P>
 						You&apos;re about to join someone else&apos;s plan on Biscuits. That
 						means you&apos;ll share data with them in all the apps and be able

@@ -2,6 +2,7 @@ import {
 	Avatar,
 	Box,
 	Button,
+	clsx,
 	DropdownMenu,
 	DropdownMenuItem,
 	DropdownMenuItemProps,
@@ -23,12 +24,14 @@ import {
 import { getIsPWAInstalled } from '../platform.js';
 import { InstallButton } from './InstallButton.js';
 import { updateApp, useIsUpdateAvailable } from './updateState.js';
+import cls from './UserMenu.module.css';
 
 export interface UserMenuProps {
 	className?: string;
 	disableAppSettings?: boolean;
 	children?: ReactNode;
 	extraItems?: ReactNode;
+	style?: React.CSSProperties;
 }
 
 export function UserMenu({
@@ -36,6 +39,7 @@ export function UserMenu({
 	disableAppSettings,
 	children,
 	extraItems,
+	style,
 }: UserMenuProps) {
 	const [isLoggedIn, loading] = useIsLoggedIn();
 	const isOffline = useIsOffline();
@@ -51,16 +55,22 @@ export function UserMenu({
 	};
 
 	return (
-		<Box d="row" items="center" gap="sm" className={className}>
+		<Box items="center" gap="sm" className={className} style={style}>
 			<SmallUpdatePrompt />
 			<DropdownMenu>
 				<DropdownMenu.Trigger
 					render={(props: any) => (
-						<Button size="small" emphasis="ghost" {...props} />
+						<Button
+							size="small"
+							emphasis="ghost"
+							disableIconMode
+							aria-label="App menu"
+							{...props}
+						/>
 					)}
 				>
 					{(children ?? (!isLoggedIn && loading && !isOffline)) ?
-						<Icon name="refresh" className="animate-spin" />
+						<Icon name="refresh" className={cls.spin} />
 					: isLoggedIn ?
 						<>
 							{!hasServerAccess && <Icon name="refreshDisabled" />}
@@ -73,22 +83,29 @@ export function UserMenu({
 					:	<>
 							<Icon
 								name="refreshDisabled"
-								className={isOffline ? 'color-attention' : ''}
+								className={isOffline ? cls.offline : ''}
 							/>
-							<Icon name="gear" className="h-25px" />
+							<Icon name="gear" size={15} />
 						</>
 					}
 				</DropdownMenu.Trigger>
 				<DropdownMenu.Content>
 					{isOffline && (
-						<div className="max-w-300px py-1 pl-8 pr-4 text-sm color-attention-dark color-gray-dark bg-attention-wash">
+						<Box
+							color="attention"
+							surface="secondary"
+							className={clsx('@mode-attention @mode-denser', cls.banner)}
+						>
 							Offline - some features may be unavailable
-						</div>
+						</Box>
 					)}
 					{isLoggedIn && !hasServerAccess && (
-						<div className="max-w-300px py-1 pl-8 pr-4 text-sm color-gray-dark color-gray-dark bg-wash">
+						<Box
+							surface="secondary"
+							className={clsx('@mode-neutral @mode-denser', cls.banner)}
+						>
 							Your plan does not include sync for this app
-						</div>
+						</Box>
 					)}
 
 					{!isLoggedIn ?
@@ -97,8 +114,7 @@ export function UserMenu({
 								render={
 									<a href={`${CONFIG.HOME_ORIGIN}/join?appReferrer=${appId}`} />
 								}
-								color="accent"
-								className="color-main-ink bg-main-wash focus-visible:bg-main-light"
+								className={clsx('@mode-accent', cls.highlightedOption)}
 							>
 								Upgrade for sync
 								<DropdownMenuItemRightSlot>
@@ -106,7 +122,11 @@ export function UserMenu({
 								</DropdownMenuItemRightSlot>
 							</DropdownMenu.Item>
 							<DropdownMenu.Item
-								render={<LoginLink className="font-inherit color-inherit" />}
+								render={
+									<LoginLink
+										style={{ fontWeight: 'inherit', color: 'inherit' }}
+									/>
+								}
 							>
 								Log in
 								<DropdownMenuItemRightSlot>
@@ -173,10 +193,9 @@ export function UserMenu({
 									<InstallButton
 										emphasis="primary"
 										size="small"
-										className="mx-lg my-sm justify-between"
+										className={clsx('@mode-accent', cls.installButton)}
 									/>
 								}
-								color="accent"
 							>
 								Install app
 								<Icon name="download" />
@@ -241,7 +260,6 @@ function SmallUpdatePrompt() {
 			color="accent"
 			emphasis="ghost"
 			size="small"
-			className="font-normal"
 			onClick={async () => {
 				try {
 					setLoading(true);

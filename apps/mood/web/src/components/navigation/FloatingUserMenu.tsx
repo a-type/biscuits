@@ -1,7 +1,5 @@
 import { withClassName } from '@a-type/ui';
 import { UserMenu } from '@biscuits/client/apps';
+import cls from './FloatingUserMenu.module.css';
 
-export const FloatingUserMenu = withClassName(
-	UserMenu,
-	'fixed top-sm right-sm bg-white border-default rounded-full shadow-md',
-);
+export const FloatingUserMenu = withClassName(UserMenu, cls.root);

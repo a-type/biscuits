@@ -1,8 +1,9 @@
-import { Button, Chip, clsx, Icon, IconName, PaletteName } from '@a-type/ui';
+import { Button, Chip, clsx, Icon, IconName } from '@a-type/ui';
+import cls from './RemovableTag.module.css';
 
 export interface RemovableTagProps {
 	name: string;
-	color?: PaletteName | null;
+	color?: string | null;
 	icon?: IconName | null;
 	onRemove?: () => void;
 	className?: string;
@@ -18,18 +19,18 @@ export function RemovableTag({
 	return (
 		<Chip
 			color={color || 'primary'}
-			className={clsx(
-				'min-h-24px flex items-center gap-1 rounded-full px-2 text-xs font-bold color-black border-gray-dark !bg-main-light',
-				className,
-			)}
+			className={clsx(`@mode-${color || 'primary'}`, cls.root, className)}
 		>
-			<span>
-				<Icon name={icon || 'tag'} className="h-10px w-10px" />
-			</span>
+			<Icon name={icon || 'tag'} />
 			<span>{name}</span>
 			{onRemove && (
-				<Button emphasis="ghost" className="p-0" onClick={onRemove}>
-					<Icon name="x" className="h-[10px] w-[10px]" />
+				<Button
+					emphasis="ghost"
+					size="wrapper"
+					className="@mode-dense"
+					onClick={onRemove}
+				>
+					<Icon name="x" />
 				</Button>
 			)}
 		</Chip>

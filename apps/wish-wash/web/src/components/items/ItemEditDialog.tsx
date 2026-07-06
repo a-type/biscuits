@@ -4,12 +4,13 @@ import {
 	Button,
 	clsx,
 	Dialog,
+	Field,
 	Icon,
 	ImageUploader,
 	Input,
 	NumberStepper,
+	Text,
 	TextArea,
-	withClassName,
 } from '@a-type/ui';
 import { useHasServerAccess } from '@biscuits/client';
 import { graphql, useLazyQuery } from '@biscuits/graphql';
@@ -23,6 +24,7 @@ import {
 import { ReactNode, useCallback } from 'react';
 import { useSnapshot } from 'valtio';
 import { createdItemState } from '../lists/state.js';
+import cls from './ItemEditDialog.module.css';
 import { ItemNote } from './ItemNote.jsx';
 
 export interface ItemEditDialogProps {
@@ -37,6 +39,7 @@ export function ItemEditDialog({ list }: ItemEditDialogProps) {
 	hooks.useWatch(items);
 
 	const item = items.find((i) => i.get('id') === itemId);
+	hooks.useWatch(item ?? null);
 
 	const justAdded = useSnapshot(createdItemState).justCreatedId === itemId;
 
@@ -54,19 +57,14 @@ export function ItemEditDialog({ list }: ItemEditDialogProps) {
 		>
 			<Dialog.Content
 				initialFocus={false}
-				className={clsx(
-					`palette-${typeThemes[item?.get('type') ?? 'idea']}`,
-					'flex flex-col items-stretch gap-md bg-wash',
-				)}
+				className={clsx(`@mode-${typeThemes[item?.get('type') ?? 'idea']}`)}
 				width="md"
 			>
 				<Dialog.Title className="m-0">Edit item</Dialog.Title>
-				<Dialog.Description className="text-xs italic color-gray-dark">
-					All fields save automatically
-				</Dialog.Description>
+				<Dialog.Description>All fields save automatically</Dialog.Description>
 				{item && <ItemTypePicker item={item} />}
 				{item && <ItemEditor item={item} />}
-				<Dialog.Actions className="justify-between">
+				<Dialog.Actions style={{ justifyContent: 'space-between' }}>
 					{item && (
 						<Button
 							emphasis="primary"
@@ -106,8 +104,8 @@ function ItemTypePicker({ item }: { item: Item }) {
 				size="small"
 				toggled={type === 'idea'}
 				onClick={() => item.set('type', 'idea')}
-				color="lemon"
 				emphasis="primary"
+				className="@mode-lemon"
 			>
 				<Icon name="lightbulb" /> Idea
 			</Button>
@@ -115,8 +113,8 @@ function ItemTypePicker({ item }: { item: Item }) {
 				size="small"
 				toggled={type === 'link'}
 				onClick={() => item.set('type', 'link')}
-				color="leek"
 				emphasis="primary"
+				className="@mode-leek"
 			>
 				<Icon name="gift" /> Product
 			</Button>
@@ -124,8 +122,8 @@ function ItemTypePicker({ item }: { item: Item }) {
 				size="small"
 				toggled={type === 'vibe'}
 				onClick={() => item.set('type', 'vibe')}
-				color="eggplant"
 				emphasis="primary"
+				className="@mode-eggplant"
 			>
 				<Icon name="magic" /> Vibe
 			</Button>
@@ -198,9 +196,15 @@ function ImagesField({ item }: { item: Item }) {
 	hooks.useWatch(imageFiles);
 
 	return (
-		<div>
-			<Box surface overflow="auto-y" className="max-h-400px w-full py-sm">
-				<div className="grid gap-1 sm:grid-cols-3">
+		<Box col full="width" items="stretch" gap="sm">
+			<Box
+				surface
+				overflow="auto-y"
+				full="width"
+				style={{ maxHeight: 400 }}
+				p="sm"
+			>
+				<div className={cls.images}>
 					{imageFiles.map((file) => (
 						<ImageField
 							key={file.id}
@@ -212,17 +216,24 @@ function ImagesField({ item }: { item: Item }) {
 					))}
 				</div>
 			</Box>
-			<Label>Add images</Label>
-			<ImageUploader
-				value={null}
-				onChange={(v) => {
-					if (v) {
-						imageFiles.push(v);
+			<Field stretch id="image">
+				<Field.Label>Add images</Field.Label>
+				<Field.Control
+					render={
+						<ImageUploader
+							className="@mode-neutral"
+							value={null}
+							onChange={(v) => {
+								if (v) {
+									imageFiles.push(v);
+								}
+							}}
+							style={{ height: 200, aspectRatio: '16/8' }}
+						/>
 					}
-				}}
-				className="h-200px w-full rounded-lg"
-			/>
-		</div>
+				/>
+			</Field>
+		</Box>
 	);
 }
 
@@ -238,20 +249,17 @@ function ImageField({
 	hooks.useWatch(file);
 
 	return (
-		<div className={clsx('relative', className)}>
-			<img
-				className="h-full w-full rounded-lg object-cover"
-				src={file.url ?? ''}
-			/>
+		<Box className={className}>
+			<img className={cls.imageFieldImage} src={file.url ?? ''} />
 			<Button
 				emphasis="primary"
 				color="attention"
-				className="absolute right-1 top-1"
+				className={cls.imageFieldClear}
 				onClick={onRemove}
 			>
 				<Icon name="trash" />
 			</Button>
-		</div>
+		</Box>
 	);
 }
 
@@ -269,17 +277,19 @@ function DescriptionField({
 	const descriptionField = hooks.useField(item, 'description');
 
 	return (
-		<>
-			<Label htmlFor="description">{label ?? 'Description'}</Label>
-			<TextArea
-				id="description"
-				{...(descriptionField.inputProps as any)}
-				className="w-full"
-				autoSelect
-				placeholder={placeholder}
-				autoFocus={autoFocus}
+		<Field stretch id="description">
+			<Field.Label>{label ?? 'Description'}</Field.Label>
+			<Field.Control
+				render={
+					<TextArea
+						{...(descriptionField.inputProps as any)}
+						autoSelect
+						placeholder={placeholder}
+						autoFocus={autoFocus}
+					/>
+				}
 			/>
-		</>
+		</Field>
 	);
 }
 
@@ -287,16 +297,18 @@ function CountField({ item }: { item: Item }) {
 	const countField = hooks.useField(item, 'count');
 
 	return (
-		<>
-			<Label htmlFor="count">How many do you want?</Label>
-			<div className="row flex-wrap">
-				<NumberStepper
-					value={countField.value}
-					onChange={countField.setValue}
-					renderValue={(val) => (val === 0 ? '∞' : val)}
-				/>
-			</div>
-		</>
+		<Field stretch id="count">
+			<Field.Label>How many do you want?</Field.Label>
+			<Field.Control>
+				<Box wrap items="center" gap>
+					<NumberStepper
+						value={countField.value}
+						onChange={countField.setValue}
+						renderValue={(val) => (val === 0 ? '∞' : val)}
+					/>
+				</Box>
+			</Field.Control>
+		</Field>
 	);
 }
 
@@ -351,60 +363,63 @@ function SingleLinkField({
 	}, [firstLink, item, subscribed, doScan]);
 
 	return (
-		<>
-			<Label htmlFor="link">Link</Label>
-			<Input
-				id="link"
-				value={links.get(0) || ''}
-				type="url"
-				onChange={(e) => links.set(0, e.currentTarget.value)}
-				onBlur={maybeScanPage}
-				autoSelect
-				autoFocus={autoFocus}
-			/>
-			{!!scanning && (
-				<span className="pl-3 text-xs color-gray-dark">
-					<Icon name="refresh" className="h-10px w-10px animate-spin" />{' '}
-					Scanning page...
-				</span>
-			)}
-			{!!scanData?.storePageScan?.failedReason && (
-				<span className="pl-3 text-xs color-attention-dark">
-					<Icon name="warning" className="h-10px w-10px" />{' '}
-					{scanData.storePageScan.failedReason}
-				</span>
-			)}
-		</>
+		<Field stretch id="link">
+			<Field.Label>Link</Field.Label>
+			<Field.Control>
+				<Input
+					id="link"
+					value={links.get(0) || ''}
+					type="url"
+					onChange={(e) => links.set(0, e.currentTarget.value)}
+					onBlur={maybeScanPage}
+					autoSelect
+					autoFocus={autoFocus}
+				/>
+				{!!scanning && (
+					<Text emphasis="ambient" dim>
+						<Icon name="refresh" size={10} /> Scanning page...
+					</Text>
+				)}
+				{!!scanData?.storePageScan?.failedReason && (
+					<Text emphasis="ambient" dim color="attention">
+						<Icon name="warning" size={10} />{' '}
+						{scanData.storePageScan.failedReason}
+					</Text>
+				)}
+			</Field.Control>
+		</Field>
 	);
 }
-
-const Label = withClassName('label', 'py-1 text-sm font-bold color-gray-dark');
 
 function PriceRangeField({ item }: { item: Item }) {
 	const priceMinField = hooks.useField(item, 'priceMin');
 	const priceMaxField = hooks.useField(item, 'priceMax');
 
 	return (
-		<>
-			<Label htmlFor="priceMin">Price range</Label>
-			<div className="row">
-				<Input
-					id="priceMin"
-					{...priceMinField.inputProps}
-					value={priceMinField.inputProps.value ?? ''}
-					placeholder="$10"
-					className="w-1/2"
-				/>
-				<span className="px-2">to</span>
-				<Input
-					id="priceMax"
-					{...priceMaxField.inputProps}
-					value={priceMaxField.inputProps.value ?? ''}
-					placeholder="$100"
-					className="w-1/2"
-				/>
-			</div>
-		</>
+		<Field stretch>
+			<Field.Label>Price range</Field.Label>
+			<Field.Control>
+				<Box items="center" gap>
+					<Input
+						id="priceMin"
+						{...priceMinField.inputProps}
+						value={priceMinField.inputProps.value ?? ''}
+						placeholder="$10"
+						style={{ width: '50%' }}
+						aria-label="minimum price"
+					/>
+					<span>to</span>
+					<Input
+						id="priceMax"
+						{...priceMaxField.inputProps}
+						value={priceMaxField.inputProps.value ?? ''}
+						placeholder="$100"
+						style={{ width: '50%' }}
+						aria-label="maximum price"
+					/>
+				</Box>
+			</Field.Control>
+		</Field>
 	);
 }
 
@@ -412,15 +427,17 @@ function PriceField({ item }: { item: Item }) {
 	const priceField = hooks.useField(item, 'priceMin');
 
 	return (
-		<>
-			<Label htmlFor="price">Price</Label>
-			<Input
-				id="price"
-				{...priceField.inputProps}
-				value={priceField.inputProps.value ?? ''}
-				placeholder="$10"
-			/>
-		</>
+		<Field stretch id="price">
+			<Field.Label>Price</Field.Label>
+			<Field.Control>
+				<Input
+					id="price"
+					{...priceField.inputProps}
+					value={priceField.inputProps.value ?? ''}
+					placeholder="$10"
+				/>
+			</Field.Control>
+		</Field>
 	);
 }
 

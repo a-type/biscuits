@@ -1,20 +1,14 @@
 import { GlobalLoader } from '@/GlobalLoader.jsx';
 import { FoodDetailDialog } from '@/components/foods/FoodDetailDialog.jsx';
-import { BugButton } from '@/components/menu/BugButton.jsx';
-import { LinkButton } from '@/components/nav/Link.jsx';
 import { NavBar } from '@/components/nav/NavBar.jsx';
 import { SubscriptionPromotionContent } from '@/components/promotional/SubscriptionPromotionContent.jsx';
 import { RecipeTagEditor } from '@/components/recipes/tags/RecipeTagEditor.jsx';
-import {
-	ReloadButton,
-	useHadRecentError,
-} from '@/components/sync/ReloadButton.jsx';
-import { hooks, verdant } from '@/stores/groceries/index.js';
-import { ErrorBoundary, H1, P, PageRoot } from '@a-type/ui';
-import { SubscribedOnly, SubscriptionPromotion } from '@biscuits/client';
+import { hooks } from '@/stores/groceries/index.js';
+import { ErrorBoundary, PageRoot } from '@a-type/ui';
+import { SubscriptionPromotion } from '@biscuits/client';
 import {
 	Essentials,
-	ResetToServer,
+	GlobalErrorFallback,
 	updateApp,
 	updateState,
 } from '@biscuits/client/apps';
@@ -198,7 +192,7 @@ export function Pages() {
 		[client],
 	);
 	return (
-		<ErrorBoundary fallback={(props) => <ErrorFallback {...props} />}>
+		<ErrorBoundary fallback={(props) => <GlobalErrorFallback {...props} />}>
 			<Suspense fallback={<GlobalLoader />}>
 				<Router routes={routes} onNavigate={handleNavigate}>
 					<Outlet />
@@ -211,34 +205,5 @@ export function Pages() {
 				</Router>
 			</Suspense>
 		</ErrorBoundary>
-	);
-}
-
-function ErrorFallback({ clearError }: { clearError: () => void }) {
-	const hadRecentError = useHadRecentError();
-
-	return (
-		<div className="flex flex-col items-center justify-center p-4">
-			<div className="max-w-content flex flex-col items-start justify-center gap-4">
-				<H1>Something went wrong</H1>
-				<P>
-					Sorry about this. The app has crashed.{' '}
-					{hadRecentError
-						? `Looks like refreshing didn't work either... I recommend reporting a bug using the button below.`
-						: `You can try refreshing, but if
-					that doesn't work, use the button below to report the issue.`}
-				</P>
-				<LinkButton to="/" onClick={clearError}>
-					Go Home
-				</LinkButton>
-				<ReloadButton />
-				<BugButton />
-				{hadRecentError && (
-					<SubscribedOnly>
-						<ResetToServer client={verdant} />
-					</SubscribedOnly>
-				)}
-			</div>
-		</div>
 	);
 }

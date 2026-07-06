@@ -21,10 +21,9 @@
 		"@react-spring/web": "^9.7.3",
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
-		"@unocss/transformer-variant-group": "catalog:",
 		"@verdant-web/react-router": "catalog:",
 		"@verdant-web/store": "catalog:",
-		"@vitejs/plugin-react-swc": "catalog:",
+		"@vitejs/plugin-react": "catalog:",
 		"@wish-wash.biscuits/common": "workspace:*",
 		"@wish-wash.biscuits/share-schema": "workspace:*",
 		"@wish-wash.biscuits/verdant": "workspace:*",
@@ -34,7 +33,8 @@
 		"react": "catalog:",
 		"react-dom": "catalog:",
 		"typescript": "catalog:",
-		"unocss": "catalog:",
+		"@arbor-css/core": "catalog:",
+		"@arbor-css/postcss": "catalog:",
 		"valtio": "catalog:",
 		"vite": "catalog:",
 		"vite-plugin-pwa": "catalog:",
@@ -46,7 +46,6 @@
 		"workbox-window": "catalog:"
 	},
 	"devDependencies": {
-		"@biscuits/uno-config": "workspace:*",
 		"@originjs/vite-plugin-commonjs": "1.0.3",
 		"@vite-pwa/assets-generator": "catalog:",
 		"vite-plugin-circular-dependency": "^0.2.1"

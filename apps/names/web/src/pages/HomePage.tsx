@@ -5,8 +5,8 @@ import {
 } from '@/components/tags/TagManagement.jsx';
 import { Box, HideWhileKeyboardOpen, Icon } from '@a-type/ui';
 import {
-	AppIcon,
 	InstallButton,
+	NavLockup,
 	UserMenu,
 	UserMenuItem,
 	UserMenuItemRightSlot,
@@ -17,16 +17,8 @@ export interface HomePageProps {}
 export function HomePage({}: HomePageProps) {
 	return (
 		<>
-			<Box
-				items="center"
-				justify="between"
-				className="pb-sm"
-				render={<HideWhileKeyboardOpen />}
-			>
-				<Box items="center" gap="sm">
-					<AppIcon className="h-32px w-32px" />
-					<h1 className="font-fancy m-0 p-0 text-md font-semibold">Names</h1>
-				</Box>
+			<Box items="center" justify="between" render={<HideWhileKeyboardOpen />}>
+				<NavLockup showOnMobile />
 				<Box items="center" gap="sm">
 					<InstallButton />
 					<UserMenu

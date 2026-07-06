@@ -1,6 +1,7 @@
 import { Button } from '@a-type/ui';
 import { graphql, useSuspenseQuery } from '@biscuits/graphql';
 import { useState } from 'react';
+import classes from './AdminFoodsPage.module.css';
 
 export interface AdminFoodsPageProps {}
 
@@ -46,7 +47,7 @@ export function AdminFoodsPage({}: AdminFoodsPageProps) {
 	};
 
 	return (
-		<div className="col">
+		<div className={classes.col}>
 			<select value={letter} onChange={(e) => setLetter(e.target.value)}>
 				{Array.from({ length: 26 }, (_, i) => String.fromCharCode(97 + i)).map(
 					(letter) => (

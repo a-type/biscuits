@@ -1,4 +1,5 @@
 import {
+	Box,
 	Button,
 	clsx,
 	HorizontalList,
@@ -11,6 +12,7 @@ import { Editor } from '@tiptap/core';
 import { EditorContent } from '@tiptap/react';
 import { useSyncedInstructionsEditor } from '../hooks.js';
 import { IncludeSubRecipe } from './IncludeSubRecipe.jsx';
+import cls from './RecipeInstructionsField.module.css';
 
 export interface RecipeInstructionsFieldProps {
 	recipe: Recipe;
@@ -26,15 +28,15 @@ export function RecipeInstructionsField({
 	});
 
 	return (
-		<div className="flex flex-col gap-2">
+		<Box col gap="sm" surface="ambient" border p>
 			{editor && <Toolbar editor={editor} />}
 			<EditorContent editor={editor} className={clsx(tipTapClassName)} />
-			<P className="text-xs">
+			<P emphasis="ambient" dim>
 				Press <kbd>Enter</kbd> to create a new step. Each step line will have a
 				checkbox you can use to track completion. I recommend keeping steps
 				short and self-contained.
 			</P>
-		</div>
+		</Box>
 	);
 }
 
@@ -50,11 +52,8 @@ function isMobileOs() {
 function Toolbar({ editor }: { editor: Editor }) {
 	return (
 		// Sticks below the action bar
-		<div className="sticky top-[calc(var(--viewport-top-offset,0px)+48px)] z-menu">
-			<HorizontalList
-				contentClassName="items-center p-sm  bg-white"
-				className="rounded-sm"
-			>
+		<div className={cls.root}>
+			<HorizontalList contentClassName={cls.list} className={cls.listOuter}>
 				<Button
 					emphasis={editor.isActive('bold') ? 'default' : 'ghost'}
 					toggleMode="state-only"
@@ -86,7 +85,7 @@ function Toolbar({ editor }: { editor: Editor }) {
 					disabled={!editor.can().chain().focus().toggleSectionTitle().run()}
 					toggled={editor.isActive('sectionTitle')}
 				>
-					<span className="[font-size:10px] h-[15px] w-[15px] flex items-center justify-center">
+					<span aria-hidden className={cls.headingIcon}>
 						H
 					</span>
 				</Button>
@@ -113,7 +112,7 @@ function ToolbarEmbedButton({ editor }: { editor: Editor }) {
 			onSelect={embedToCurrentStep}
 			emphasis="ghost"
 			size="small"
-			className="[font-size:12px] gap-sm"
+			className="@mode-denser"
 			disabled={
 				!editor
 					.can()

@@ -19,8 +19,6 @@ export function RecipeInstructionsViewer({
 			className={classNames(
 				tipTapClassName,
 				tipTapReadonlyClassName,
-				'w-full p-0',
-				'[&_.ProseMirror]:(p-0)',
 				className,
 			)}
 			editor={editor}

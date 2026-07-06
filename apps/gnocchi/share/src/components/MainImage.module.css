@@ -1,0 +1,17 @@
+.root {
+	position: relative;
+	display: block;
+	overflow: clip;
+}
+
+.img {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
+	object-position: center;
+
+	@media (min-width: 768px) {
+		aspect-ratio: 1 / 1;
+		height: auto;
+	}
+}

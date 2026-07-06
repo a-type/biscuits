@@ -1,0 +1,16 @@
+.kbd {
+	padding-inline: var(--m-space);
+	padding-block: var(--m-space-xs);
+	font-family: monospace;
+	font-size: var(--m-text-size-sm);
+}
+
+.icon {
+	margin-left: auto;
+}
+
+.button {
+	justify-content: space-between;
+	text-wrap: wrap;
+	border-radius: inherit;
+}

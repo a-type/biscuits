@@ -18,18 +18,18 @@
 		"@originjs/vite-plugin-commonjs": "catalog:",
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
-		"@unocss/transformer-variant-group": "catalog:",
 		"@use-gesture/react": "catalog:",
 		"@verdant-web/react-router": "catalog:",
 		"@verdant-web/store": "catalog:",
-		"@vitejs/plugin-react-swc": "catalog:",
+		"@vitejs/plugin-react": "catalog:",
 		"gql.tada": "catalog:",
 		"motion": "^12.23.12",
 		"react": "catalog:",
 		"react-dom": "catalog:",
 		"react-hotkeys-hook": "^4.5.0",
 		"typescript": "catalog:",
-		"unocss": "catalog:",
+		"@arbor-css/core": "catalog:",
+		"@arbor-css/postcss": "catalog:",
 		"valtio": "catalog:",
 		"vite": "catalog:",
 		"vite-plugin-pwa": "catalog:",
@@ -40,7 +40,5 @@
 		"workbox-strategies": "catalog:",
 		"workbox-window": "catalog:"
 	},
-	"devDependencies": {
-		"@biscuits/uno-config": "workspace:*"
-	}
+	"devDependencies": {}
 }

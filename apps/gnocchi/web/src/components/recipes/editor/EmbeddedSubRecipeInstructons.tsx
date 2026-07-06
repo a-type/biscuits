@@ -5,10 +5,12 @@ import {
 	clsx,
 	Collapsible,
 	Icon,
+	Text,
 	UseRenderRenderProp,
 } from '@a-type/ui';
 import { ReactNode, Suspense } from 'react';
 import { RecipeInstructionsViewer } from '../viewer/RecipeInstructionsViewer.jsx';
+import cls from './EmbeddedSubInstructions.module.css';
 
 export function EmbeddedSubRecipeInstructionsWrapper({
 	children,
@@ -46,20 +48,19 @@ export function EmbeddedSubRecipeInstructionsToggle({
 				render || (
 					<Button
 						emphasis="ghost"
-						className={clsx('w-full items-center gap-2 text-start', className)}
+						className={clsx('w-full', className)}
 						size="small"
 						contentEditable={false}
 					/>
 				)
 			}
 		>
-			<Icon
-				name="chevron"
-				className="transition-all [[data-state=open]>&]:rotate-180deg"
-			/>
-			<span className="italic">
-				<span className="font-medium">Make</span> {recipe.get('title')}
-			</span>
+			<Collapsible.Icon>
+				<Icon name="chevron" />
+			</Collapsible.Icon>
+			<Text italic>
+				<Text bold>Make</Text> {recipe.get('title')}
+			</Text>
 		</Collapsible.Trigger>
 	);
 }
@@ -80,7 +81,7 @@ export function EmbeddedSubRecipeContent({
 
 	return (
 		<Collapsible.Content contentEditable={false} className={className}>
-			<Box className="ml-4 border-l border-l-solid pl-2 border-l-gray" p="none">
+			<Box className={cls.nested} p="none">
 				<RecipeInstructionsViewer recipe={recipe} />
 			</Box>
 		</Collapsible.Content>

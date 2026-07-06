@@ -67,7 +67,7 @@ export function PostBuyExperienceContent({
 			}
 			<Box surface col gap p full="width">
 				<TextField name="name" label="Your name (optional)" />
-				<SubmitButton emphasis="primary" className="ml-auto">
+				<SubmitButton emphasis="primary" align="end">
 					I bought it!
 				</SubmitButton>
 			</Box>

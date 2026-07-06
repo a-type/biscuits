@@ -11,9 +11,9 @@ export function SortAction() {
 	};
 
 	return (
-		<ActionButton onClick={goNext} className="capitalize">
+		<ActionButton onClick={goNext}>
 			<Icon name="drag_vertical" />
-			{sort}
+			<span style={{ textTransform: 'capitalize' }}>{sort}</span>
 		</ActionButton>
 	);
 }

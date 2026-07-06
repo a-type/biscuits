@@ -1,5 +1,5 @@
 import { useCreateCategory } from '@/stores/groceries/mutations.js';
-import { FormikForm, SubmitButton, TextField } from '@a-type/ui';
+import { Box, FormikForm, SubmitButton, TextField } from '@a-type/ui';
 import { Category } from '@gnocchi.biscuits/verdant';
 
 export function NewCategoryForm({
@@ -11,7 +11,7 @@ export function NewCategoryForm({
 }) {
 	const createCategory = useCreateCategory();
 	return (
-		<div className="w-full flex flex-col items-stretch gap-2">
+		<Box full="width" col items="stretch" gap="sm">
 			<FormikForm
 				initialValues={{ name: '' }}
 				onSubmit={async ({ name }) => {
@@ -21,17 +21,17 @@ export function NewCategoryForm({
 				}}
 				className="w-full"
 			>
-				<div className="w-full flex flex-row items-end justify-stretch gap-2">
+				<Box full="width" items="end" justify="stretch" gap="sm">
 					<TextField
 						placeholder="Dairy & Eggs"
 						autoFocusDelay={autoFocus ? 100 : undefined}
 						name="name"
-						className="flex-1"
+						style={{ flex: 1 }}
 						autoComplete="off"
 					/>
 					<SubmitButton>Add</SubmitButton>
-				</div>
+				</Box>
 			</FormikForm>
-		</div>
+		</Box>
 	);
 }

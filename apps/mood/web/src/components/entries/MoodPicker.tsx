@@ -1,7 +1,6 @@
 import {
 	Box,
 	clsx,
-	PaletteName,
 	Popover,
 	Slider,
 	Tooltip,
@@ -9,6 +8,7 @@ import {
 } from '@a-type/ui';
 import { getIsTouch } from '@biscuits/client';
 import { useEffect, useRef, useState } from 'react';
+import cls from './MoodPicker.module.css';
 
 const MOODS = [
 	{ value: -2, label: '😞' },
@@ -31,6 +31,7 @@ export function MoodPicker({
 	value,
 	onValueChange,
 	className,
+	...rest
 }: MoodPickerProps) {
 	const [localValue, setLocalValue] = useState<number>(value ?? 0);
 
@@ -44,7 +45,7 @@ export function MoodPicker({
 
 	const [active, setActive] = useState(false);
 
-	const palette: PaletteName =
+	const palette: string =
 		localValue < 0 ? 'attention'
 		: localValue > 0 ? 'success'
 		: 'primary';
@@ -55,22 +56,20 @@ export function MoodPicker({
 
 	return (
 		<Box
+			{...rest}
 			p="lg"
 			full
 			layout="center center"
-			className={clsx(
-				'transition-colors',
-				{
-					'bg-attention-light': localValue === min,
-					'bg-attention-wash':
-						localValue !== null && localValue < 0 && localValue > min,
-					'bg-main-wash': !localValue,
-					'bg-success-wash':
-						localValue !== null && localValue > 0 && localValue < max,
-					'bg-success-light': localValue === max,
-				},
-				className,
-			)}
+			color={
+				localValue < 0 ? 'attention'
+				: localValue > 0 ?
+					'success'
+				:	'primary'
+			}
+			surface={
+				localValue === min || localValue === max ? 'primary' : 'secondary'
+			}
+			className={clsx(cls.picker, className)}
 		>
 			<Tooltip
 				content="Slide to select mood"
@@ -113,10 +112,8 @@ export function MoodPicker({
 					>
 						<Popover open={active && getIsTouch()}>
 							<Slider.Thumb
-								className={clsx(
-									'h-touch-large w-touch-large text-2xl',
-									value === null && 'border-dashed',
-								)}
+								className={cls.thumb}
+								data-has-value={value !== null}
 								ref={thumbRef}
 							>
 								{value === null && !active ? '' : moodIcon}
@@ -126,9 +123,9 @@ export function MoodPicker({
 								anchor={thumbRef}
 								side="left"
 								sideOffset={16}
-								className="min-h-0 min-w-0"
+								style={{ minHeight: 0, minWidth: 0 }}
 							>
-								<Box p="xs" col gap layout="center center" className="text-3xl">
+								<Box p="xs" col gap layout="center center" className={cls.icon}>
 									{moodIcon}
 								</Box>
 							</Popover.Content>

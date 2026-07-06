@@ -1,0 +1,24 @@
+.root {
+	position: sticky;
+	top: --fn-literal(calc(var(--viewport-top-offset, 0px) + 48px));
+	z-index: 100;
+}
+
+.list {
+	align-items: center;
+	padding: var(--m-space-sm);
+	@apply --mx-bg(var(--m-color-neutral-paper));
+}
+
+.listOuter {
+	border-radius: var(--m-radius-sm);
+}
+
+.headingIcon {
+	font-size: --fn-literal(10px);
+	height: --fn-literal(15px);
+	width: --fn-literal(15px);
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}

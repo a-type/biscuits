@@ -2,24 +2,22 @@ import { UndoAction } from '@/components/groceries/actions/UndoAction.jsx';
 import { hooks } from '@/stores/groceries/index.js';
 import {
 	ActionBar,
+	Box,
 	Button,
-	ColorPicker,
 	Dialog,
 	Divider,
 	FormikForm,
 	Icon,
-	PaletteName,
 	TextField,
 } from '@a-type/ui';
-import classNames from 'classnames';
-import { ReactElement } from 'react';
+import { ColorPicker } from '@biscuits/client';
 
 export function TagManager({
-	children,
 	onClose,
+	open,
 }: {
-	children: ReactElement;
 	onClose?: () => void;
+	open?: boolean;
 }) {
 	const tags = hooks.useAllRecipeTagMetadata().sort((a, b) => {
 		return a.get('name').localeCompare(b.get('name'));
@@ -37,29 +35,29 @@ export function TagManager({
 
 	return (
 		<Dialog
+			open={open}
 			onOpenChange={(open) => {
 				if (!open) onClose?.();
 			}}
 		>
-			<Dialog.Trigger render={children} />
 			<Dialog.Content>
 				<ActionBar>
 					<UndoAction />
 				</ActionBar>
-				<div className="min-h-0 flex flex-1 flex-col gap-2 overflow-y-auto">
+				<Box col gap="sm" grow overflow="auto-y" style={{ minHeight: 0 }}>
 					{tags.map((tag) => (
 						<>
-							<div
+							<Box
 								key={tag.get('name')}
-								className={classNames(
-									'flex flex-shrink-0 flex-row items-center gap-2',
-								)}
+								gap="sm"
+								items="center"
+								style={{ flexShrink: 0 }}
 							>
 								<ColorPicker
-									onChange={(color) => tag.set('color', color)}
-									value={tag.get('color') as PaletteName}
+									onValueChange={(color) => tag.set('color', color)}
+									value={tag.get('color') ?? null}
 								/>
-								<div className="flex-1 text-md">{tag.get('name')}</div>
+								<Box grow>{tag.get('name')}</Box>
 								<Button
 									color="attention"
 									emphasis="ghost"
@@ -67,27 +65,29 @@ export function TagManager({
 								>
 									<Icon name="trash" />
 								</Button>
-							</div>
-							<Divider className="opacity-50" />
+							</Box>
+							<Divider />
 						</>
 					))}
-				</div>
-				<div className="mt-4">
+				</Box>
+				<div style={{ marginTop: 16, width: '100%' }}>
 					<FormikForm
 						initialValues={{ tagName: '' }}
 						onSubmit={(values) => {
 							createTag(values.tagName);
 						}}
-						className="flex flex-row items-end gap-2"
+						className="w-full"
 					>
-						<TextField
-							className="min-w-64px flex-1"
-							name="tagName"
-							label="New Tag Name"
-						/>
-						<Button type="submit" emphasis="primary">
-							Create
-						</Button>
+						<Box gap="sm" items="end" full="width">
+							<TextField
+								style={{ minWidth: 64, flex: 1 }}
+								name="tagName"
+								label="New Tag Name"
+							/>
+							<Button type="submit" emphasis="primary">
+								Create
+							</Button>
+						</Box>
 					</FormikForm>
 				</div>
 				<Dialog.Actions>

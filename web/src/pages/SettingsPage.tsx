@@ -23,6 +23,7 @@ import { SubscriptionSetup } from '@biscuits/client/subscription';
 import { graphql, NetworkStatus, useQuery } from '@biscuits/graphql';
 import { Link, useNavigate, useSearchParams } from '@verdant-web/react-router';
 import { Suspense, useEffect } from 'react';
+import classes from './SettingsPage.module.css';
 
 const PlanPageData = graphql(
 	`
@@ -84,8 +85,8 @@ export function PlanPage({}: PlanPageProps) {
 
 	return (
 		<PageRoot>
-			<PageContent gap="lg" className="self-stretch">
-				<PageFixedArea className="mb-10 w-full flex flex-row items-center justify-between">
+			<PageContent gap="lg" className={classes.pageContent}>
+				<PageFixedArea className={classes.topBar}>
 					<Button
 						render={<Link to={returnToAppUrl ?? '/'} />}
 						emphasis="primary"
@@ -95,22 +96,24 @@ export function PlanPage({}: PlanPageProps) {
 					</Button>
 					<LogoutButton />
 				</PageFixedArea>
-				<Tabs value={tab} onValueChange={setTab} className="flex-1">
+				<Tabs value={tab} onValueChange={setTab} className={classes.tabsFlex}>
 					<Tabs.List>
 						<Tabs.Trigger value="profile">Profile</Tabs.Trigger>
 						<Tabs.Trigger value="subscription">Subscription</Tabs.Trigger>
 						<Tabs.Trigger value="members">Members</Tabs.Trigger>
 						<Tabs.Trigger value="data">Data</Tabs.Trigger>
 					</Tabs.List>
-					<Box gap col className="flex-1 px-2 py-6">
+					<Box gap col className={classes.tabsContent}>
 						{justPaid && (
 							<Box
-								surface
+								surface="secondary"
 								color="success"
-								p
+								border
+								elevated="sm"
+								p="sm"
 								gap
 								items="center"
-								className="mx-auto"
+								className={classes.successBanner}
 							>
 								<Icon name="suitHeart" /> Thanks for subscribing!
 								<Button
@@ -123,7 +126,7 @@ export function PlanPage({}: PlanPageProps) {
 									}}
 									aria-label="Close notification"
 									emphasis="ghost"
-									className="ml-auto"
+									className={classes.successClose}
 								>
 									<Icon name="x" />
 								</Button>
@@ -173,7 +176,7 @@ export function PlanPage({}: PlanPageProps) {
 						<Tabs.Content value="data">
 							<ErrorBoundary>
 								<Suspense>
-									<div className="flex flex-col gap-3">
+									<div className={classes.dataTabContent}>
 										<H3>App data</H3>
 										<VerdantLibraries />
 									</div>

@@ -1,0 +1,22 @@
+.createButton {
+	position: relative;
+	z-index: 2;
+	aspect-ratio: 1 / 1;
+	height: --fn-literal(34px);
+	align-items: center;
+	justify-content: center;
+	border-radius: var(--m-action-radius);
+	right: --fn-literal(-4px);
+
+	@media (min-width: 768px) {
+		border-radius: --fn-literal(9999px);
+	}
+}
+
+.content {
+	padding: var(--m-space-sm);
+}
+
+.groupItemList {
+	gap: var(--m-space-sm);
+}

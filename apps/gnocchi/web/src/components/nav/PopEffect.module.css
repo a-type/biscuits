@@ -1,0 +1,50 @@
+.root {
+	position: absolute;
+	z-index: -1;
+	width: --fn-literal(50px);
+	height: --fn-literal(50px);
+	transform: translate(-50%, -50%) scale(0%);
+	overflow: clip;
+	border-radius: 50%;
+	@apply --mx-bg(var(--m-color-main));
+
+	&[data-active='true'] {
+		animation-name: pop;
+		animation-duration: 1.5s;
+		animation-timing-function: var(--m-easing);
+		animation-iteration-count: 1;
+	}
+}
+
+@keyframes pop {
+	0% {
+		transform: translate(-50%, -50%) scale(0);
+		opacity: 1;
+	}
+	25% {
+		transform: translate(-50%, -50%) scale(1);
+		opacity: 1;
+	}
+	100% {
+		transform: translate(-50%, -50%) scale(1);
+		opacity: 0;
+	}
+}
+
+.dot {
+	position: absolute;
+	width: --fn-literal(48px);
+	height: --fn-literal(48px);
+	transform: translate(-50%, -50%) scale(0%);
+	overflow: clip;
+	border-radius: 50%;
+	@apply --mx-bg(var(--m-color-neutral-paper));
+
+	&[data-active='true'] {
+		animation-name: pop;
+		animation-duration: 1s;
+		animation-timing-function: var(--m-easing);
+		animation-iteration-count: 1;
+		animation-delay: 500ms;
+	}
+}

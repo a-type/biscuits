@@ -1,0 +1,17 @@
+.grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	align-items: stretch;
+	justify-content: stretch;
+	gap: var(--m-space);
+}
+
+.premiumBadge {
+	font-weight: var(--m-text-weight-bold);
+	@apply --mx-fg(var(--m-color-accent-heavy));
+	@apply --mx-bg(var(--m-color-accent-wash));
+	border-radius: --fn-literal(999px);
+	padding: var(--m-space-xs) var(--m-space-md);
+	@apply --mx-borderColor(var(--m-color-accent-heavy));
+	font-size: var(--m-text-size-sm);
+}

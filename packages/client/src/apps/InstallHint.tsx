@@ -34,12 +34,12 @@ export function InstallHint({
 			className={className}
 		>
 			<P>{contentStr}</P>
-			<div className="w-full flex flex-row items-center justify-end gap-4">
+			<Box gap full="width" items="center" justify="end">
 				<Button emphasis="ghost" onClick={() => setIsDismissed(true)}>
 					Dismiss
 				</Button>
 				<InstallButton emphasis="primary" size="default" />
-			</div>
+			</Box>
 		</Box>
 	);
 }

@@ -26,9 +26,9 @@ export function TripMenu({ tripId }: TripMenuProps) {
 			<DropdownMenuTrigger render={<Button emphasis="ghost" />}>
 				<Icon name="dots" />
 			</DropdownMenuTrigger>
-			<DropdownMenuContent className="items-start">
+			<DropdownMenuContent style={{ alignItems: 'start' }}>
 				<DropdownMenuItem
-					className="text-red"
+					className="@mode-attention"
 					onClick={() => {
 						client.trips.delete(trip.get('id'));
 						navigate('/', { skipTransition: true });

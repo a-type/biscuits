@@ -357,10 +357,26 @@ export async function updatePlanSubscription({
 		throw new BiscuitsError(BiscuitsError.Code.Unexpected, 'Price not found');
 	}
 
-	const existingSubscription =
-		plan.stripeSubscriptionId ?
-			await ctx.stripe.subscriptions.retrieve(plan.stripeSubscriptionId)
-		:	null;
+	let existingSubscription: Stripe.Response<Stripe.Subscription> | null = null;
+	try {
+		existingSubscription =
+			plan.stripeSubscriptionId ?
+				await ctx.stripe.subscriptions.retrieve(plan.stripeSubscriptionId)
+			:	null;
+	} catch (err) {
+		if (err instanceof Stripe.errors.StripeError) {
+			if (err.code === 'resource_missing') {
+				// swallow missing resource errors
+				existingSubscription = null;
+			} else {
+				throw new BiscuitsError(
+					BiscuitsError.Code.Unexpected,
+					`Error retrieving subscription: ${err.message}`,
+					err,
+				);
+			}
+		}
+	}
 	// provision a new subscription if no existing, or if the existing
 	// one is incomplete_expired or cancelled
 	const provisionNewSubscription =
@@ -395,6 +411,11 @@ export async function updatePlanSubscription({
 
 		return updatedPlan;
 	}
+
+	assert(
+		!!existingSubscription,
+		'Existing subscription is null, this should have been handled above',
+	);
 
 	if (
 		!['active', 'incomplete', 'canceled'].includes(existingSubscription.status)

@@ -64,7 +64,9 @@ export function PublicationPage({ data }: PublicationPageProps) {
 								/>
 							)}
 							<Card.Main
-								className={node.data.mainImageUrl ? 'min-h-120px' : ''}
+								style={{
+									minHeight: node.data.mainImageUrl ? '120px' : undefined,
+								}}
 								render={<Link to={node.url} />}
 							>
 								<Card.Title>{node.data.title}</Card.Title>

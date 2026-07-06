@@ -1,0 +1,24 @@
+.root {
+	pointer-events: none;
+	position: relative;
+	height: --fn-literal(32px);
+	width: --fn-literal(32px);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
+.inner {
+	pointer-events: none;
+	position: absolute;
+	max-width: --fn-literal(200px);
+	transform: translateY(-130%);
+	user-select: none;
+	overflow: clip;
+	white-space: nowrap;
+	@apply --mx-borderColor(var(--m-color-neutral-ink));
+	border-radius: var(--m-radius-md);
+	padding: var(--m-space-md);
+	@apply --mx-bg(var(--m-color-neutral-paper));
+}

@@ -1,0 +1,36 @@
+.inputWrap {
+	position: relative;
+	width: 100%;
+	padding: var(--m-space-sm);
+}
+
+.inputEmpty {
+	padding-right: --fn-literal(32px);
+}
+
+.input {
+	width: 100%;
+}
+
+.container {
+	position: fixed;
+	bottom: calc(var(--m-space-md) + env(safe-area-inset-bottom));
+	left: 50%;
+	z-index: var(--z-now-playing);
+	transform: translateX(-50%);
+
+	width: 100%;
+	max-width: --fn-literal(512px);
+
+	display: flex;
+	flex-direction: column;
+	align-items: stretch;
+	justify-content: center;
+	overflow: clip;
+
+	@apply --mx-shadow(var(--m-shadow-md));
+	@apply --mx-surface-secondary;
+	@apply --mx-animation(fadeInUp);
+
+	padding: 0;
+}

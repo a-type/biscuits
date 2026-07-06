@@ -1,0 +1,74 @@
+.appLogo {
+	margin-inline-end: var(--space-sm);
+	display: inline-block;
+	width: --fn-literal(60px);
+	height: --fn-literal(60px);
+}
+
+.root {
+	height: 100vw;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	align-items: center;
+	justify-content: center;
+	@apply --mx-bg(var(--m-color-main-wash));
+}
+
+.referrerNote {
+	font-style: italic;
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+}
+
+.tabs {
+	display: flex;
+	flex-direction: column;
+	gap: var(--m-space-lg);
+}
+
+.tabsList {
+	margin-inline: auto;
+}
+
+.tabContent {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--m-space-md);
+}
+
+.toc {
+	max-width: 400px;
+	transition-property: color, background-color;
+	transition-duration: var(--m-duration);
+	transition-timing-function: var(--m-easing);
+}
+
+.link {
+	font-weight: var(--m-text-weight-bold);
+}
+
+.aside {
+	text-align: center;
+	@apply --mx-prose-ambient;
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+}
+
+.orBorder {
+	flex: 1;
+	border-top: var(--m-lineWidth) solid var(--m-color-neutral-heavy);
+}
+
+.or {
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+}
+.titleRow {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.positioned {
+	position: relative;
+	z-index: 1;
+}

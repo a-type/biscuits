@@ -13,6 +13,7 @@ import {
 	DialogTrigger,
 	Icon,
 	P,
+	Text,
 	toast,
 	Tooltip,
 } from '@a-type/ui';
@@ -140,13 +141,13 @@ function PublishedContent({
 	const publishDate = new Date(publishedAt ?? now);
 
 	return (
-		<Dialog.Content className="flex flex-col gap-4">
+		<Dialog.Content>
 			<Dialog.Title>Manage publication</Dialog.Title>
 			<SubRecipeWarning recipe={recipe} />
 			<Button
 				render={<Link to={url} newTab />}
 				emphasis="default"
-				className="self-start"
+				style={{ alignSelf: 'start' }}
 			>
 				View on the web
 				<Icon name="new_window" />
@@ -161,7 +162,7 @@ function PublishedContent({
 					</PublishButton>
 				</Box>
 			) : (
-				<Box surface="white" gap col items="end" p>
+				<Box surface="ambient" gap col items="end" p>
 					This recipe was published on {format(publishDate, 'PPp')} and should
 					be up to date. But you can still republish it if there's a problem.
 					<PublishButton recipe={recipe} onChange={onChange} emphasis="ghost">
@@ -204,27 +205,25 @@ function UnpublishedContent({
 	return (
 		<DialogContent>
 			<DialogTitle>Publish your recipe</DialogTitle>
-			<div className="flex flex-col gap-4">
-				<P>
-					Published recipes can be shared with others on the web. You retain
-					full rights to your recipe and can unpublish anytime
-				</P>
-				<div className="flex flex-row items-start gap-2">
-					<Checkbox
-						checked={consent}
-						onCheckedChange={(c) => setConsent(c !== false)}
-						id="publish-consent"
-					/>
-					<label htmlFor="publish-consent" className="text-xs">
-						I confirm that I own and have the right to publish this recipe, in
-						accordance with the{' '}
-						<TextLink to="https://biscuits.club/tos" newTab>
-							Biscuits Terms of Service
-						</TextLink>
-					</label>
-				</div>
-				<SubRecipeWarning recipe={recipe} />
-			</div>
+			<P>
+				Published recipes can be shared with others on the web. You retain full
+				rights to your recipe and can unpublish anytime
+			</P>
+			<Box items="start" gap="sm">
+				<Checkbox
+					checked={consent}
+					onCheckedChange={(c) => setConsent(c !== false)}
+					id="publish-consent"
+				/>
+				<Text render={<label htmlFor="publish-consent" />} emphasis="ambient">
+					I confirm that I own and have the right to publish this recipe, in
+					accordance with the{' '}
+					<TextLink to="https://biscuits.club/tos" newTab>
+						Biscuits Terms of Service
+					</TextLink>
+				</Text>
+			</Box>
+			<SubRecipeWarning recipe={recipe} />
 			<Dialog.Actions>
 				<Dialog.Close>Cancel</Dialog.Close>
 				<PublishButton
@@ -248,7 +247,7 @@ function SubRecipeWarning({ recipe }: { recipe: Recipe }) {
 	if (!hasSubRecipes) return null;
 
 	return (
-		<Box surface color="primary" p className="block">
+		<Box surface color="primary" p style={{ display: 'block' }}>
 			<strong>Warning:</strong> This recipe contains sub-recipes. They will be
 			embedded in the published recipe.
 		</Box>

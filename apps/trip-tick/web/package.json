@@ -22,11 +22,10 @@
 		"@trip-tick.biscuits/verdant": "workspace:*",
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
-		"@unocss/transformer-variant-group": "catalog:",
 		"@verdant-web/react": "catalog:",
 		"@verdant-web/react-router": "catalog:",
 		"@verdant-web/store": "catalog:",
-		"@vitejs/plugin-react-swc": "catalog:",
+		"@vitejs/plugin-react": "catalog:",
 		"classnames": "^2.3.2",
 		"date-fns": "catalog:",
 		"downshift": "^7.0.1",
@@ -36,7 +35,8 @@
 		"react-dom": "catalog:",
 		"react-lazy-with-preload": "^2.2.1",
 		"typescript": "catalog:",
-		"unocss": "catalog:",
+		"@arbor-css/core": "catalog:",
+		"@arbor-css/postcss": "catalog:",
 		"valtio": "catalog:",
 		"vite": "catalog:",
 		"vite-plugin-pwa": "catalog:",
@@ -48,11 +48,9 @@
 		"workbox-window": "catalog:"
 	},
 	"devDependencies": {
-		"@biscuits/uno-config": "workspace:*",
 		"@iconify-json/solar": "^1.1.3",
 		"@originjs/vite-plugin-commonjs": "^1.0.3",
 		"@types/pluralize": "^0.0.29",
-		"@unocss/preset-icons": "66.0.0",
 		"@vite-pwa/assets-generator": "catalog:"
 	}
 }

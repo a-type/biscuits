@@ -12,7 +12,7 @@ import {
 import { PaidFeature, apps } from '@biscuits/apps';
 import { StartingPrice } from '@biscuits/client/subscription';
 import { Link, useSearchParams } from '@verdant-web/react-router';
-import classNames from 'classnames';
+import classes from './JoinPage.module.css';
 
 export interface JoinPageProps {}
 
@@ -31,10 +31,10 @@ export function JoinPage({}: JoinPageProps) {
 		:	apps;
 
 	return (
-		<PageRoot className="bg-primary-wash">
-			<PageContent className="bg-primary-wash">
-				<div className="w-full flex flex-col gap-6">
-					<h1 className={classNames('color-primary-ink')}>
+		<PageRoot className={classes.pageRoot}>
+			<PageContent className={classes.pageContent}>
+				<div className={classes.mainCol}>
+					<h1 className={classes.heading}>
 						Join Biscuits to unlock features and collaboration in every app
 					</h1>
 					<p>
@@ -42,7 +42,7 @@ export function JoinPage({}: JoinPageProps) {
 						across devices, use fancy new features, and even share with family
 						and friends. Plans start at <StartingPrice />.
 					</p>
-					<PageFixedArea className="flex flex-row justify-between gap-3 py-4 bg-transparent">
+					<PageFixedArea className={classes.topBar}>
 						<Button render={<Link to={backTo || '/'} />} emphasis="default">
 							<Icon name="arrowLeft" />
 							{backTo ? 'Go back' : 'Back to apps'}
@@ -60,13 +60,13 @@ export function JoinPage({}: JoinPageProps) {
 						.filter((app) => !app.prerelease)
 						.map((app) => (
 							<Box gap col full="width" key={app.id}>
-								<div className="flex flex-row items-center gap-md">
+								<div className={classes.appRow}>
 									<img
 										src={`${app.url}/${app.iconPath}`}
 										alt={app.name}
 										width={48}
 									/>
-									<h2 className="m-0">{app.name}</h2>
+									<h2 className={classes.appName}>{app.name}</h2>
 								</div>
 								<p>{app.paidDescription}</p>
 								<PageSectionGrid>
@@ -74,7 +74,7 @@ export function JoinPage({}: JoinPageProps) {
 										<AppFeature key={index} feature={feature} />
 									))}
 								</PageSectionGrid>
-								<Divider className="my-8" />
+								<Divider className={classes.divider} />
 							</Box>
 						))}
 				</div>
@@ -86,19 +86,17 @@ export function JoinPage({}: JoinPageProps) {
 
 function AppFeature({ feature }: { feature: PaidFeature }) {
 	return (
-		<div className="flex flex-col items-start gap-4">
-			<div className="flex flex-row flex-wrap items-center gap-3">
-				<h3 className="my-0 text-md font-normal">{feature.title}</h3>
+		<div className={classes.featureItem}>
+			<div className={classes.featureHeader}>
+				<h3 className={classes.featureTitle}>{feature.title}</h3>
 				{feature.family && (
-					<div className="rounded-full px-3 py-1 text-xs color-white bg-accent-dark">
-						Family Style Plan
-					</div>
+					<div className={classes.premiumBadge}>Family Style Plan</div>
 				)}
 			</div>
-			<p className="my-0">{feature.description}</p>
+			<p className={classes.featureDescription}>{feature.description}</p>
 			{feature.imageUrl && (
 				<img
-					className="max-w-full min-w-0 flex-1-0-0 border-1 border rounded-lg border-solid border-black"
+					className={classes.featureImage}
 					src={feature.imageUrl}
 					alt="a visualization of the described feature"
 				/>

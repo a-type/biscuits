@@ -14,6 +14,7 @@ import {
 	itemCardStarFragment,
 } from './cardParts/ItemCardStar.js';
 import { IdeaCardContent, ideaCardContentFragment } from './IdeaCardContent.js';
+import cls from './ItemCard.module.css';
 import {
 	ProductCardContent,
 	productCardContentFragment,
@@ -28,6 +29,7 @@ export const itemCardFragment = graphql(
 			purchasedCount
 			prioritized
 			type
+			imageUrls
 
 			...ItemCardStar
 			...ItemCardMarquee
@@ -63,14 +65,15 @@ export function ItemCard({
 
 	return (
 		<Card
-			className={clsx(
-				className,
-				`palette-${typeThemes[item.type]}`,
-				'color-main-ink bg-main-wash',
-				boughtAll && 'opacity-50',
-				item.prioritized && !boughtAll && 'min-h-200px sm:min-h-250px',
-			)}
+			className={clsx(cls.root, className, `@mode-${typeThemes[item.type]}`)}
+			data-bought-all={boughtAll}
 			data-span={item.prioritized && !boughtAll ? 2 : 1}
+			size={
+				(item.prioritized || item.imageUrls.length > 0) && !boughtAll ?
+					'lg'
+				:	'md'
+			}
+			emphasis="secondary"
 		>
 			<ItemCardStar item={item} />
 			<ItemCardMarquee item={item} />

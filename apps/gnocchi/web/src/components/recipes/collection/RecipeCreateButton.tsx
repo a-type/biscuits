@@ -18,7 +18,7 @@ export function RecipeCreateButton({ children, ...rest }: ButtonProps) {
 			emphasis="primary"
 			{...rest}
 		>
-			{children || 'New Recipe'}
+			{children || <span className="gt-md">New Recipe</span>}
 		</Button>
 	);
 }

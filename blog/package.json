@@ -11,10 +11,8 @@
 	},
 	"devDependencies": {
 		"typescript": "catalog:",
-		"unocss": "catalog:",
-		"@unocss/transformer-variant-group": "catalog:",
-		"@unocss/astro": "66.0.0",
-		"@unocss/reset": "66.0.0"
+		"@arbor-css/core": "catalog:",
+		"@arbor-css/postcss": "catalog:"
 	},
 	"dependencies": {
 		"@a-type/ui": "catalog:",

@@ -1,11 +1,10 @@
 import { hooks } from '@/store.js';
-import { Button, Icon, Input, Popover, toast, useSize } from '@a-type/ui';
+import { Button, Combobox, Field, Icon, toast } from '@a-type/ui';
 import { useDebounced, useHasServerAccess } from '@biscuits/client';
 import { graphql, useClient, useQuery } from '@biscuits/graphql';
 import { TripLocation, TripLocationInit } from '@trip-tick.biscuits/verdant';
 import classNames from 'classnames';
-import { useCombobox } from 'downshift';
-import { useCallback, useRef, useState, useTransition } from 'react';
+import { useCallback, useState, useTransition } from 'react';
 
 export interface LocationSelectProps {
 	className?: string;
@@ -60,6 +59,7 @@ export function LocationSelect({
 				size="small"
 				className={classNames('font-normal', className)}
 				onClick={() => setShowEdit(true)}
+				full="width"
 			>
 				<Icon name="location" />
 				{value.get('name')}
@@ -76,6 +76,8 @@ export function LocationSelect({
 		/>
 	);
 }
+
+const LocationCombobox = Combobox.create<{ placeId: string; text: string }>();
 
 function LocationSelectAutocomplete({
 	value,
@@ -102,108 +104,62 @@ function LocationSelectAutocomplete({
 
 	const options = searchResult.data?.locationAutocomplete ?? [];
 
-	const {
-		isOpen,
-		getMenuProps,
-		getInputProps,
-		highlightedIndex,
-		getItemProps,
-		// setInputValue,
-	} = useCombobox({
-		items: options,
-		initialInputValue: name,
-		onInputValueChange({ inputValue }) {
-			startTransition(() => {
-				setSearchValue(inputValue || '');
-			});
-		},
-		async onSelectedItemChange({ selectedItem, inputValue: _ }) {
-			if (selectedItem) {
-				// we must now fetch the geocoded location
-				const result = await client.query({
-					query: geographicLocation,
-					variables: {
-						placeId: selectedItem.placeId,
-					},
-				});
-				const data = result.data?.geographicLocation;
-
-				if (data) {
-					onChange({
-						latitude: data.latitude,
-						longitude: data.longitude,
-						name: selectedItem.text,
-					});
-				} else {
-					toast.error('Failed to fetch location details');
-				}
-			}
-		},
-		itemToString: (item) => {
-			return item?.text ?? '';
-		},
-	});
-
-	const contentRef = useRef<HTMLDivElement>(null);
-	const innerRef = useSize<HTMLDivElement>(({ width }) => {
-		if (contentRef.current) {
-			contentRef.current.style.width = width + 'px';
-		}
-	});
 	return (
-		<Popover open={isOpen}>
-			<div
-				data-state={isOpen ? 'open' : 'closed'}
-				className={classNames('relative w-full flex flex-col gap-1', className)}
-				ref={innerRef}
-			>
-				<label htmlFor="location-input" className="font-bold">
-					Where are you going?
-				</label>
-				<Input
-					data-test="location-input"
-					id="location-input"
-					{...getInputProps({
-						placeholder: 'Raleigh, NC',
-					})}
-					className="flex-1"
-					required
-					autoComplete="off"
-					name="location"
-					autoFocus={autoFocus}
-					autoSelect
+		<LocationCombobox
+			items={options}
+			inputValue={searchValue}
+			onInputValueChange={(inputValue) => {
+				startTransition(() => {
+					setSearchValue(inputValue || '');
+				});
+			}}
+			itemToStringLabel={(item) => item.text}
+			itemToStringValue={(item) => item.placeId}
+			onValueChange={async (selectedItem) => {
+				if (selectedItem) {
+					// we must now fetch the geocoded location
+					const result = await client.query({
+						query: geographicLocation,
+						variables: {
+							placeId: selectedItem.placeId,
+						},
+					});
+					const data = result.data?.geographicLocation;
+
+					if (data) {
+						onChange({
+							latitude: data.latitude,
+							longitude: data.longitude,
+							name: selectedItem.text,
+						});
+					} else {
+						toast.error('Failed to fetch location details');
+					}
+				}
+			}}
+		>
+			<Field id="location" stretch className={className}>
+				<Field.Label>Where are you going?</Field.Label>
+				<Field.Control
+					render={
+						<LocationCombobox.Input
+							placeholder="Raleigh, NC"
+							autoComplete="off"
+							autoFocus={autoFocus}
+						/>
+					}
 				/>
-			</div>
-			<Popover.Content
-				radius="md"
-				align="start"
-				forceMount
-				initialFocus={false}
-				// eslint-disable-next-line react-hooks/refs
-				{...getMenuProps({
-					ref: contentRef,
-				})}
-				className={classNames(
-					'overflow-x-hidden overscroll-contain shadow-lg overflow-y-auto',
-				)}
-				anchor={innerRef}
-			>
-				{options.map((item, index) => (
-					<div
-						key={item.placeId}
-						{...getItemProps({ item, index })}
-						className={classNames(
-							'flex flex-col cursor-pointer p-2',
-							index === highlightedIndex && 'bg-gray-light',
-						)}
-					>
-						<span className="">{item.text}</span>
-					</div>
-				))}
-				{!options?.length && (
-					<div className="px-2 text-center">No results found</div>
-				)}
-			</Popover.Content>
-		</Popover>
+			</Field>
+			<LocationCombobox.Content>
+				<LocationCombobox.List>
+					{(item) => (
+						<LocationCombobox.Item value={item} key={item.placeId}>
+							{item.text}
+						</LocationCombobox.Item>
+					)}
+				</LocationCombobox.List>
+			</LocationCombobox.Content>
+			<LocationCombobox.Empty>No results</LocationCombobox.Empty>
+		</LocationCombobox>
 	);
 }

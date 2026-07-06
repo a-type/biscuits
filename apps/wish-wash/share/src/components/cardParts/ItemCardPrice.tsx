@@ -1,4 +1,4 @@
-import { Card } from '@a-type/ui';
+import { Card, Text } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 
 export const itemCardPriceFragment = graphql(`
@@ -30,7 +30,7 @@ export function ItemCardPrice({
 
 	return (
 		<Card.Content className={className}>
-			<span className="text-md">{priceDisplay}</span>
+			<Text>{priceDisplay}</Text>
 		</Card.Content>
 	);
 }

@@ -37,7 +37,6 @@
 		"@tiptap/starter-kit": "catalog:",
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
-		"@unocss/transformer-variant-group": "catalog:",
 		"@use-gesture/react": "^10.2.24",
 		"@verdant-web/react-router": "catalog:",
 		"@verdant-web/store": "catalog:",
@@ -65,9 +64,9 @@
 		"stopword": "^2.0.8",
 		"superjson": "^1.12.0",
 		"suspend-react": "^0.0.8",
-		"tesseract.js": "^4.0.3",
 		"typescript": "catalog:",
-		"unocss": "catalog:",
+		"@arbor-css/core": "catalog:",
+		"@arbor-css/postcss": "catalog:",
 		"valtio": "catalog:",
 		"vite": "catalog:",
 		"vite-plugin-pwa": "catalog:",
@@ -80,7 +79,6 @@
 		"workbox-window": "^6.5.4"
 	},
 	"devDependencies": {
-		"@biscuits/uno-config": "workspace:*",
 		"@originjs/vite-plugin-commonjs": "^1.0.3",
 		"@types/convert-units": "^2.3.5",
 		"@types/dom-screen-wake-lock": "^1.0.0",

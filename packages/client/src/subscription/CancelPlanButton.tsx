@@ -1,4 +1,4 @@
-import { ConfirmedButton } from '@a-type/ui';
+import { ConfirmedButton, Text } from '@a-type/ui';
 import { graphql, useMutation } from '@biscuits/graphql';
 import { manageSubscriptionInfo } from './ManageSubscription.js';
 import { checkoutData } from './SubscriptionCheckout.js';
@@ -43,10 +43,10 @@ export function CancelPlanButton({}: CancelPlanButtonProps) {
 			>
 				Cancel your plan
 			</ConfirmedButton>
-			<span className="text-xs">
+			<Text emphasis="ambient">
 				Keep your data, but lose access to member-only features, including
 				device sync and sharing.
-			</span>
+			</Text>
 		</div>
 	);
 }

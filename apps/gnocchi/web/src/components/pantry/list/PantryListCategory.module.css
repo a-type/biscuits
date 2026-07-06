@@ -1,0 +1,17 @@
+.root {
+	margin-bottom: var(--m-space-md);
+}
+
+.titleRow {
+	margin-bottom: var(--m-space-xs);
+}
+
+.title {
+	font-size: var(--m-prose-ambient-size);
+}
+
+.more {
+	margin-top: var(--m-space-md);
+	display: flex;
+	justify-content: center;
+}

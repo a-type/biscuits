@@ -13,6 +13,7 @@ import { NewLine } from './NewLine.jsx';
 import { NewShape } from './NewShape.jsx';
 import { Toolbar } from './Toolbar.jsx';
 import { editorState } from './editorState.js';
+import cls from './shape.module.css';
 import { useEditorGlobalKeys } from './useEditorGlobalKeys.js';
 
 export interface FloorplanRendererProps {
@@ -23,7 +24,14 @@ export interface FloorplanRendererProps {
 export function FloorplanRenderer({ className, id }: FloorplanRendererProps) {
 	return (
 		<Viewport
-			className={clsx('h-full w-full flex flex-1 flex-col bg-gray', className)}
+			style={{
+				height: '100%',
+				width: '100%',
+				display: 'flex',
+				flex: '1 0 0',
+				flexDirection: 'column',
+			}}
+			className={clsx(cls.bgGray, className)}
 			gestureOptions={{
 				filterDrag: (state) => {
 					const isFirstButton = (state.buttons & 1) === 1;
@@ -42,7 +50,7 @@ export function FloorplanRenderer({ className, id }: FloorplanRendererProps) {
 				<UserMenu />
 			</Viewport.Control>
 			<Viewport.Control position="bottom-right">
-				<Viewport.ZoomControls className="flex-row" />
+				<Viewport.ZoomControls style={{ flexDirection: 'row' }} />
 			</Viewport.Control>
 			<Viewport.Control position="top-left">
 				<ConstraintToggles />
@@ -69,7 +77,12 @@ function FloorplanContent({ id }: { id: string }) {
 
 	return (
 		<FloorProvider value={floor}>
-			<svg width={100} height={100} className="relative bg-white">
+			<svg
+				width={100}
+				height={100}
+				style={{ position: 'relative' }}
+				className={cls.bgWhite}
+			>
 				<g transform="translate(50, 50)">
 					<Grid />
 					<FloorplanLines floor={floor} />

@@ -1,0 +1,36 @@
+.washContent {
+	@apply --mx-bg(var(--m-color-main-wash));
+}
+
+.upgradeSectionContent {
+	border-block: var(--m-lineWidth) solid;
+	@apply --mx-bg(var(--m-color-main-light));
+	@apply --mx-borderColor {
+		--color: var(--m-color-main);
+	}
+	padding-top: 10dvh;
+}
+
+.upgradeHeading {
+	margin-bottom: var(--m-space-md);
+	font-size: 5vmax;
+	text-wrap: balance;
+	flex-shrink: 0;
+	font-weight: var(--m-text-weight-normal);
+	line-height: 1.2;
+}
+
+.upgradeActions {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	gap: var(--m-space-md);
+	padding-block: var(--m-space-xl);
+
+	@media (min-width: 768px) {
+		grid-column-end: span 2;
+	}
+}

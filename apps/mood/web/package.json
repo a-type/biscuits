@@ -27,10 +27,10 @@
 		"@verdant-web/store": "catalog:",
 		"typescript": "catalog:",
 		"vite": "catalog:",
-		"@vitejs/plugin-react-swc": "catalog:",
+		"@vitejs/plugin-react": "catalog:",
 		"vite-plugin-pwa": "catalog:",
-		"unocss": "catalog:",
-		"@unocss/transformer-variant-group": "catalog:",
+		"@arbor-css/core": "catalog:",
+		"@arbor-css/postcss": "catalog:",
 		"workbox-core": "catalog:",
 		"workbox-expiration": "catalog:",
 		"workbox-precaching": "catalog:",
@@ -41,7 +41,6 @@
 		"motion": "catalog:"
 	},
 	"devDependencies": {
-		"@biscuits/uno-config": "workspace:*",
 		"@vite-pwa/assets-generator": "catalog:"
 	}
 }

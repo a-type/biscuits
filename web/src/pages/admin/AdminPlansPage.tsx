@@ -11,6 +11,7 @@ import { apps } from '@biscuits/apps';
 import { featureFlags } from '@biscuits/client';
 import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
 import { useSearchParams } from '@verdant-web/react-router';
+import classes from './AdminPlansPage.module.css';
 
 export interface AdminPlansPageProps {}
 
@@ -72,7 +73,7 @@ export function AdminPlansPage({}: AdminPlansPageProps) {
 	)?.node;
 
 	return (
-		<div className="col">
+		<div className={classes.col}>
 			<ul>
 				{data.plans.edges.map(({ node }) => (
 					<li key={node.id}>
@@ -113,7 +114,7 @@ export function AdminPlansPage({}: AdminPlansPageProps) {
 				}}
 			>
 				<DialogContent width="lg">
-					<DialogTitle className="min-w-0 text-ellipsis">
+					<DialogTitle className={classes.dialogTitle}>
 						{selected?.id}
 					</DialogTitle>
 					<ul>
@@ -137,7 +138,7 @@ export function AdminPlansPage({}: AdminPlansPageProps) {
 					<h3>Feature Flags</h3>
 					<ul>
 						{Object.keys(featureFlags).map((flag) => (
-							<li className="row" key={flag}>
+							<li className={classes.flagRow} key={flag}>
 								<Checkbox
 									checked={selected?.featureFlags.includes(flag)}
 									onCheckedChange={async (checked) => {

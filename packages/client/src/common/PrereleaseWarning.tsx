@@ -1,4 +1,4 @@
-import { Icon } from '@a-type/ui';
+import { Box, Icon } from '@a-type/ui';
 import { useAppInfo, useLocalStorage } from '../react.js';
 
 export interface PrereleaseWarningProps {}
@@ -15,7 +15,13 @@ export function PrereleaseWarning({}: PrereleaseWarningProps) {
 	}
 
 	return (
-		<div className="row items-center justify-center p-1 text-xxs color-black bg-attention-light">
+		<Box
+			items="center"
+			justify="center"
+			color="attention"
+			p="sm"
+			className="@mode-denser"
+		>
 			<Icon name="warning" />
 			<span>
 				{app.name} is an unreleased{' '}
@@ -23,7 +29,7 @@ export function PrereleaseWarning({}: PrereleaseWarningProps) {
 					target="_blank"
 					rel="noreferrer"
 					href="https://biscuits.club"
-					className="underline"
+					style={{ textDecoration: 'underline' }}
 				>
 					Biscuits
 				</a>{' '}
@@ -35,6 +41,6 @@ export function PrereleaseWarning({}: PrereleaseWarningProps) {
 				tabIndex={0}
 				onClick={() => setDismissed(true)}
 			/>
-		</div>
+		</Box>
 	);
 }

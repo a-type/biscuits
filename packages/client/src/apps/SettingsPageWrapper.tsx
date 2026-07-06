@@ -4,9 +4,9 @@ import {
 	clsx,
 	ColorModeToggle,
 	Divider,
-	H1,
-	H2,
+	Heading,
 	Icon,
+	Text,
 } from '@a-type/ui';
 import { Link } from '@verdant-web/react-router';
 import { ReactNode } from 'react';
@@ -22,6 +22,7 @@ import {
 	usePageTitle,
 } from '../react.js';
 import { InstallHint } from './InstallHint.js';
+import cls from './SettingsPageWrapper.module.css';
 import { ManageStorage } from './storage.js';
 import { UpdatePrompt } from './UpdatePrompt.js';
 import { usePollForUpdates } from './updateState.js';
@@ -42,24 +43,25 @@ export function SettingsPageWrapper({
 	const subscribed = useHasServerAccess();
 
 	return (
-		<Box col p gap items="start" className={clsx('mt-lg', className)}>
+		<Box col p gap items="start" className={clsx(cls.root, className)}>
 			<Box gap items="center">
 				<Button
 					render={<Link to="/" />}
 					emphasis="ghost"
 					aria-label="Back to home"
-					className="sticky top-sm"
+					className={cls.back}
 				>
 					<Icon name="arrowLeft" />
 				</Button>
-				<H1>Settings</H1>
+				<Heading render={<h1 />} emphasis="primary">
+					Settings
+				</Heading>
 			</Box>
 			<InstallHint content={installPitch || 'Install the app'} />
 			<UpdatePrompt />
 			<ColorModeToggle />
-			<LogoutButton />
 			{!subscribed ?
-				<Box surface col color="accent" p>
+				<Box surface col color="accent">
 					<Box gap items="center">
 						<PromoteSubscriptionButton emphasis="primary">
 							Upgrade your plan
@@ -69,16 +71,19 @@ export function SettingsPageWrapper({
 							<span>Sign in</span>
 						</LoginButton>
 					</Box>
-					<div>
+					<Text emphasis="ambient" dim italic>
 						Sync devices, collaborate with others, and more with a Biscuits
 						subscription.
-					</div>
+					</Text>
 				</Box>
 			:	<ManagePlanButton />}
+			<LogoutButton full="width" emphasis="ghost" color="attention" />
 			<Divider />
 			{children}
 			{children && <Divider />}
-			<H2>Troubleshoot</H2>
+			<Heading render={<h2 />} emphasis="secondary">
+				Troubleshoot
+			</Heading>
 			<ManageStorage />
 			<Box gap>
 				<BugButton />
@@ -91,10 +96,10 @@ export function SettingsPageWrapper({
 					<span>What's new</span>
 				</Button>
 			</ChangelogDisplay>
-			<Link className="font-bold" to="https://biscuits.club/privacy-policy">
+			<Link className={cls.link} to="https://biscuits.club/privacy-policy">
 				Privacy policy
 			</Link>
-			<Link className="font-bold" to="https://biscuits.club/tos">
+			<Link className={cls.link} to="https://biscuits.club/tos">
 				Terms and conditions of use
 			</Link>
 		</Box>

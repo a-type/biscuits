@@ -1,0 +1,7 @@
+.pageContent {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	gap: var(--m-space-lg);
+}

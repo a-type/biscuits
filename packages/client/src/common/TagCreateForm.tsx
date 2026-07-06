@@ -1,21 +1,14 @@
-import {
-	Box,
-	ColorPicker,
-	FormikForm,
-	IconName,
-	PaletteName,
-	SubmitButton,
-	TextField,
-} from '@a-type/ui';
+import { Box, FormikForm, IconName, SubmitButton, TextField } from '@a-type/ui';
+import { ColorPicker } from './ColorPicker.js';
 
 export interface TagCreateFormProps {
 	onCreate: (init: {
 		name: string;
-		color?: PaletteName;
+		color?: string;
 		icon?: IconName;
 	}) => void | Promise<void>;
 	className?: string;
-	defaultColor?: PaletteName;
+	defaultColor?: string;
 }
 
 export function TagCreateForm({
@@ -41,18 +34,16 @@ export function TagCreateForm({
 		>
 			{({ setFieldValue, values }) => (
 				<>
-					<Box gap items="end" className="w-full">
-						<TextField name="name" label="New tag" className="flex-1-0-0" />
-						<Box className="flex-basis-auto">
-							<div className="mb-sm">
-								<ColorPicker
-									onChange={(v) => setFieldValue('color', v)}
-									value={values.color ?? defaultColor ?? null}
-								/>
-							</div>
+					<Box gap items="end" full="width">
+						<TextField name="name" label="New tag" style={{ flex: '1 0 0' }} />
+						<Box style={{ flexBasis: 'auto' }}>
+							<ColorPicker
+								onValueChange={(v) => setFieldValue('color', v)}
+								value={values.color ?? defaultColor ?? null}
+							/>
 						</Box>
 					</Box>
-					<Box justify="end" className="w-full">
+					<Box justify="end" full="width">
 						<SubmitButton emphasis="light" type="submit">
 							Create
 						</SubmitButton>

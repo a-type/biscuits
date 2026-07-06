@@ -1,12 +1,6 @@
 import { hooks, useDeleteTag } from '@/hooks.js';
-import {
-	Box,
-	Button,
-	ColorPicker,
-	Dialog,
-	Icon,
-	PaletteName,
-} from '@a-type/ui';
+import { Box, Button, Dialog, Icon } from '@a-type/ui';
+import { ColorPicker } from '@biscuits/client';
 import { Tag } from '@names.biscuits/verdant';
 import { Suspense } from 'react';
 import { proxy, useSnapshot } from 'valtio';
@@ -54,8 +48,8 @@ function TagManagementRow({ tag }: { tag: Tag }) {
 		<Box key={tag.uid} className="w-full" gap justify="between" items="center">
 			<Box gap items="center">
 				<ColorPicker
-					value={(color ?? 'leek') as PaletteName}
-					onChange={(v) => tag.set('color', v)}
+					value={color ?? 'leek'}
+					onValueChange={(v) => tag.set('color', v)}
 				/>
 				<TagDisplay name={tag.get('name')} />
 			</Box>

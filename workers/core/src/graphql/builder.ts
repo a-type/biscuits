@@ -258,6 +258,7 @@ export const builder = new SchemaBuilder<{
 		},
 	},
 	authScopes: async (context) => {
+		console.log(context.session);
 		const member =
 			!!context.session?.planId &&
 			// mild back-compat for sessions without this flag

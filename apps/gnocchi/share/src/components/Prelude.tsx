@@ -24,11 +24,7 @@ export function Prelude({ content }: PreludeProps) {
 				<EditorContent
 					editor={editor}
 					readOnly
-					className={clsx(
-						tipTapClassName,
-						tipTapReadonlyClassName,
-						'[&>div]:p-0',
-					)}
+					className={clsx(tipTapClassName, tipTapReadonlyClassName)}
 				/>
 			</div>
 		</Peek>

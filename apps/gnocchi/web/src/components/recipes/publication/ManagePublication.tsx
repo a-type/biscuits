@@ -4,8 +4,7 @@ import {
 	clsx,
 	CollapsibleSimple,
 	Dialog,
-	FieldLabel,
-	FieldRoot,
+	Field,
 	FormikForm,
 	P,
 	tipTapClassName,
@@ -17,11 +16,12 @@ import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
 import Link from '@tiptap/extension-link';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import { ReactElement, Suspense, useState } from 'react';
+import { CSSProperties, ReactElement, Suspense, useState } from 'react';
 
 export interface ManagePublicationProps {
 	className?: string;
 	children?: ReactElement | string;
+	style?: CSSProperties;
 }
 
 export const managePublicationQuery = graphql(`
@@ -47,8 +47,8 @@ const updatePublicationMutation = graphql(`
 `);
 
 export function ManagePublication({
-	className,
 	children,
+	...rest
 }: ManagePublicationProps) {
 	const { data, refetch } = useSuspenseQuery(managePublicationQuery);
 	const [mutate] = useMutation(updatePublicationMutation, {
@@ -68,13 +68,10 @@ export function ManagePublication({
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
-			<Dialog.Trigger
-				render={<Button emphasis="light" />}
-				className={className}
-			>
+			<Dialog.Trigger render={<Button emphasis="light" />} {...rest}>
 				{children}
 			</Dialog.Trigger>
-			<Dialog.Content className="flex flex-col gap-md" width="md">
+			<Dialog.Content width="md">
 				<Dialog.Title>Your Publication</Dialog.Title>
 				<Dialog.Description>
 					You can manage how your recipes are published online here.
@@ -136,7 +133,7 @@ export function ManagePublication({
 										/>
 										<Suspense
 											fallback={
-												<Box surface className="h-120px" full="width" />
+												<Box surface style={{ height: 120 }} full="width" />
 											}
 										>
 											<DescriptionField />
@@ -191,13 +188,14 @@ function DescriptionField() {
 	});
 
 	return (
-		<FieldRoot>
-			<FieldLabel>Description</FieldLabel>
-			<EditorContent
-				editor={editor}
-				className={clsx(tipTapClassName, '[&>div]:min-h-120px')}
+		<Field id="description">
+			<Field.Label>Description</Field.Label>
+			<Field.Control
+				render={
+					<EditorContent editor={editor} className={clsx(tipTapClassName)} />
+				}
 			/>
-		</FieldRoot>
+		</Field>
 	);
 }
 

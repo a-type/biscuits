@@ -1,6 +1,6 @@
 import { PersonDetails } from '@/components/people/PersonDetails.jsx';
 import { hooks } from '@/hooks.js';
-import { Button, H1, Icon } from '@a-type/ui';
+import { Box, Button, H1, Icon } from '@a-type/ui';
 import { usePageTitle } from '@biscuits/client';
 import { Link, useParams } from '@verdant-web/react-router';
 
@@ -23,17 +23,23 @@ export function PersonPage({}: PersonPageProps) {
 	}
 
 	return (
-		<>
-			<Button
-				className="mb-4 mr-auto"
-				emphasis="ghost"
-				render={<Link to="/" />}
-			>
+		<Box
+			col
+			gap
+			items="stretch"
+			style={{
+				width: '100%',
+				maxWidth: 600,
+				marginInline: 'auto',
+				marginBottom: 300,
+			}}
+		>
+			<Button emphasis="ghost" render={<Link to="/" />} align="start">
 				<Icon name="arrowLeft" />
 				Home
 			</Button>
 			<PersonDetails person={person} />
-		</>
+		</Box>
 	);
 }
 

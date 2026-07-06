@@ -1,4 +1,4 @@
-import { Card, Chip, clsx, Icon } from '@a-type/ui';
+import { Card, Chip, Icon } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 import { typeIcons } from '@wish-wash.biscuits/common';
 
@@ -12,16 +12,18 @@ export const itemCardTypeChipFragment = graphql(`
 export interface ItemCardTypeChipProps {
 	item: FragmentOf<typeof itemCardTypeChipFragment>;
 	className?: string;
+	style?: React.CSSProperties;
 }
 
 export function ItemCardTypeChip({
 	item: itemMasked,
 	className,
+	...rest
 }: ItemCardTypeChipProps) {
 	const item = readFragment(itemCardTypeChipFragment, itemMasked);
 	return (
-		<Card.Content unstyled className={clsx('pl-1 pt-2', className)}>
-			<Chip color="primary" className="inline-flex">
+		<Card.Content unstyled className={className} {...rest}>
+			<Chip emphasis="primary">
 				<Icon name={typeIcons[item.type]} />
 				{item.type}
 			</Chip>

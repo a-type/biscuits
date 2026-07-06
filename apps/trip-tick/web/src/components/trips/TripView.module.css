@@ -1,0 +1,86 @@
+.tripHeader {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	transition: all var(--m-duration) var(--m-easing);
+
+	@apply --mx-bg(var(--m-color-main-wash));
+	@apply --mx-ring(--fn-ring(var(--m-color-main-wash), 16px));
+
+	@media (min-width: 640px) {
+		border-radius: var(--m-radius);
+		@apply --mx-ring(--fn-ring(var(--m-color-main-wash), 8px));
+	}
+}
+
+.tabsHeaderRoot {
+	margin-block-end: var(--m-space-md);
+	display: unset;
+}
+
+.tabsHeader {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: var(--m-space-sm);
+	padding-inline: var(--m-space-sm);
+	padding-block: var(--m-space-md);
+}
+
+.tabsToggle {
+	margin: var(--m-space-xs);
+	flex: 0 0 auto;
+}
+
+.tabsList {
+	position: sticky;
+	top: 0;
+	z-index: 2;
+	width: 100%;
+	overflow-y: clip;
+	overflow-x: auto;
+	border: none;
+	box-shadow: none;
+	background-color: var(--m-color-neutral-wash);
+	justify-self: start;
+}
+
+.tabsEmpty {
+	width: 100%;
+	padding: var(--m-space-md);
+	font-style: italic;
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+}
+
+.tab {
+	position: relative;
+	z-index: 1;
+	flex-shrink: 0;
+	overflow: hidden;
+}
+
+.tabText {
+	text-wrap: nowrap;
+}
+
+.tabProgress {
+	position: absolute;
+	bottom: 0;
+	left: var(--m-space-sm);
+	right: var(--m-space-sm);
+	z-index: 1;
+	overflow: hidden;
+	border: var(--m-lineWidth) solid var(--m-color-main);
+	border-bottom-width: 0;
+}
+
+.tabProgressIndicator {
+	height: 4px;
+	width: 100%;
+	background-color: var(--m-color-palette-success);
+}
+
+.items {
+	margin: 0;
+	margin-block-end: var(--m-space-lg);
+}

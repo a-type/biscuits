@@ -1,0 +1,13 @@
+.root {
+	margin: auto;
+	margin-top: var(--m-space-xl);
+	display: flex;
+	flex-direction: column;
+	user-select: none;
+	align-items: center;
+	gap: var(--m-space-md);
+}
+
+.icon {
+	color: var(--m-color-neutral);
+}

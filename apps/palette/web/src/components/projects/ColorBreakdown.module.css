@@ -1,0 +1,34 @@
+.lightnessRange {
+	width: --fn-literal(32px);
+	flex-shrink: 0;
+	background: linear-gradient(to bottom, #000000, #ffffff);
+}
+
+.lightnessIndicator {
+	position: absolute;
+	width: 100%;
+	height: --fn-literal(5px);
+}
+
+.pieRoot {
+	position: relative;
+	aspect-ratio: 1;
+	border-radius: --fn-literal(999px);
+	transition: all var(--m-duration) var(--m-easing);
+}
+
+.pieInner {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	overflow: visible;
+}
+
+.pieLabel {
+	position: absolute;
+	border-radius: --fn-literal(999px);
+	padding-inline: var(--m-space);
+	padding-block: var(--m-space-xs);
+	background-color: var(--m-color-neutral-paper);
+	border: 1px solid var(--m-color-neutral-heavy);
+}

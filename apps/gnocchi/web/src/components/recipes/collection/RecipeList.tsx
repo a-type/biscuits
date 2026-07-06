@@ -5,6 +5,7 @@ import { RecipeListItem } from '@/components/recipes/collection/RecipeListItem.j
 import { RecipeSearchBar } from '@/components/recipes/collection/RecipeSearchBar.jsx';
 import { RecipePresenceNotification } from '@/components/sync/collaborationMenu/RecipePresenceNotification.jsx';
 import {
+	Box,
 	CardGrid,
 	cardGridColumns,
 	InfiniteLoadTrigger,
@@ -13,25 +14,26 @@ import {
 } from '@a-type/ui';
 import classNames from 'classnames';
 import { Suspense } from 'react';
-import { RecipeListActions } from './RecipeListActions.jsx';
-import { RecipeTagsFilter } from './RecipeTagsFilter.jsx';
 import {
 	useFilteredRecipes,
 	useGridStyle,
 	useRecipeTagFilter,
 } from './hooks.js';
+import cls from './RecipeList.module.css';
+import { RecipeListActions } from './RecipeListActions.jsx';
+import { RecipeTagsFilter } from './RecipeTagsFilter.jsx';
 
 export interface RecipeListProps {}
 
 export function RecipeList({}: RecipeListProps) {
 	return (
-		<div className="m-0 mb-6 flex flex-col gap-2 p-0">
+		<Box col gap="sm" className={cls.root}>
 			<Suspense>
-				<PageFixedArea className="mb-2 w-full pt-2">
-					<div className="w-full flex flex-row items-center justify-stretch">
-						<RecipeSearchBar className="min-w-80px flex-shrink-1 flex-grow-1 flex-basis-0" />
-						<RecipeCollectionMenu className="flex-0-0-auto" />
-					</div>
+				<PageFixedArea className={cls.controls}>
+					<Box full="width" items="center" justify="stretch">
+						<RecipeSearchBar className={cls.search} />
+						<RecipeCollectionMenu className={cls.menu} />
+					</Box>
 					<RecipeListActions />
 				</PageFixedArea>
 			</Suspense>
@@ -45,18 +47,8 @@ export function RecipeList({}: RecipeListProps) {
 				<TagFilterList />
 			</Suspense>
 
-			{/* <Suspense
-				fallback={
-					<CardGrid className="z-1">
-						<RecipePlaceholderItem className="min-h-200px md:(h-30dvh max-h-300px)" />
-						<RecipePlaceholderItem className="min-h-200px md:(h-30dvh max-h-300px)" />
-						<RecipePlaceholderItem className="min-h-200px md:(h-30dvh max-h-300px)" />
-					</CardGrid>
-				}
-			> */}
 			<RecipeListContent />
-			{/* </Suspense> */}
-		</div>
+		</Box>
 	);
 }
 
@@ -71,10 +63,8 @@ function RecipeListContent() {
 	return (
 		<>
 			<CardGrid
-				className={classNames('z-1', {
-					'grid-cols-1 sm:grid-cols-2': gridStyle === 'card-big',
-					'grid-cols-2 sm:grid-cols-3': gridStyle === 'card-small',
-				})}
+				className={classNames(cls.grid)}
+				data-style={gridStyle}
 				columns={
 					gridStyle === 'card-big'
 						? cardGridColumns.default
@@ -86,7 +76,7 @@ function RecipeListContent() {
 				))}
 			</CardGrid>
 			{hasMore && (
-				<InfiniteLoadTrigger onVisible={loadMore} className="mt-6 w-full">
+				<InfiniteLoadTrigger onVisible={loadMore} className={cls.loadTrigger}>
 					<Spinner />
 				</InfiniteLoadTrigger>
 			)}
@@ -103,7 +93,7 @@ function TagFilterList() {
 		<RecipeTagsFilter
 			onSelect={toggleTagFilter}
 			selectedValues={tagFilter ? [tagFilter] : []}
-			className="mb-1 text-xs font-normal"
+			className={cls.tagsFilter}
 		/>
 	);
 }

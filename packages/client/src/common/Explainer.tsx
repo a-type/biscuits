@@ -1,4 +1,5 @@
 import {
+	Box,
 	Button,
 	Dialog,
 	DialogActions,
@@ -27,15 +28,14 @@ export function Explainer({ stages }: ExplainerProps) {
 				}
 			}}
 		>
-			<DialogContent
-				outerClassName="h-screen max-h-90dvh sm:(h-auto max-h-[80dvh]) overflow-y-auto"
-				className="h-full sm:h-auto"
-			>
-				<div className="col flex-1 items-start gap-4">{stages[stage]}</div>
+			<DialogContent>
+				<Box grow items="start" gap col>
+					{stages[stage]}
+				</Box>
 				<DialogActions>
 					<DialogClose render={<Button />}>Skip</DialogClose>
 					<Button
-						className="ml-auto"
+						style={{ marginLeft: 'auto' }}
 						emphasis="primary"
 						onClick={() => {
 							if (stage === stages.length - 1) {

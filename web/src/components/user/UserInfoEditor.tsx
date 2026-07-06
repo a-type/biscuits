@@ -10,6 +10,7 @@ import {
 import { useMutation } from '@biscuits/graphql';
 import { useState } from 'react';
 import { FragmentOf, graphql, readFragment } from '../../graphql.js';
+import classes from './UserInfoEditor.module.css';
 
 export const userInfoFragment = graphql(`
 	fragment UserInfoEditor_userInfoFragment on User {
@@ -41,8 +42,8 @@ export function UserInfoEditor({ user, className }: UserInfoEditorProps) {
 
 	if (!editing) {
 		return (
-			<div className={clsx('w-full col items-start py-3', className)}>
-				<div className="w-full row justify-between">
+			<div className={clsx(classes.root, className)}>
+				<div className={classes.header}>
 					<H2>Your profile</H2>
 					<Button emphasis="ghost" onClick={() => setEditing(true)}>
 						<Icon name="pencil" /> Edit
@@ -61,10 +62,10 @@ export function UserInfoEditor({ user, className }: UserInfoEditorProps) {
 				await update({ variables: values });
 				setEditing(false);
 			}}
-			className="py-3"
+			className={classes.form}
 		>
 			<TextField name="name" label="Name" />
-			<div className="w-full row justify-end">
+			<div className={classes.formActions}>
 				<Button onClick={() => setEditing(false)}>Cancel</Button>
 				<SubmitButton>Save</SubmitButton>
 			</div>

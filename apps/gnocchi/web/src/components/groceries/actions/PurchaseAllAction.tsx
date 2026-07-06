@@ -27,7 +27,7 @@ export function PurchaseAllAction() {
 			visible={items.length > 0}
 			size="small"
 			onActivate={onActivate}
-			progressColor="primary"
+			progressColor="accent"
 		>
 			<Icon name="check" />
 			Purchase All

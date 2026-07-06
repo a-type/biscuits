@@ -15,7 +15,6 @@
 		"resolveJsonModule": true,
 		"preserveSymlinks": true,
 		"jsx": "react-jsx",
-		"downlevelIteration": true,
 		"experimentalDecorators": true,
 		"isolatedModules": true,
 		"customConditions": ["development"],
@@ -25,7 +24,8 @@
 				"schema": "./packages/graphql/schema.graphql",
 				"tadaOutputLocation": "./packages/graphql/src/graphql-env.d.ts",
 				"tadaTurboLocation": "./packages/graphql/src/graphql-cache.d.ts"
-			}
+			},
+			{ "name": "typescript-plugin-css-modules" }
 		],
 		"composite": true,
 		"declarationMap": true,

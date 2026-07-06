@@ -29,6 +29,7 @@ export const OpenFoodDetailButton = forwardRef<
 			ref={ref}
 			onClick={openDialog}
 			emphasis={!children && emphasis === undefined ? 'ghost' : emphasis}
+			aria-label="Open food details"
 			{...rest}
 		>
 			{children || <Icon name="food" />}

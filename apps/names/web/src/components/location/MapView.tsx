@@ -6,11 +6,13 @@ import { useEffect, useRef } from 'react';
 export interface MapViewProps {
 	location: { latitude: number; longitude: number };
 	className?: string;
+	style?: React.CSSProperties;
 }
 
 export function MapView({
 	location: { longitude, latitude },
 	className,
+	style,
 }: MapViewProps) {
 	const mapContainerRef = useRef<HTMLDivElement>(null);
 
@@ -49,7 +51,7 @@ export function MapView({
 				}),
 			);
 			new mapboxgl.Marker({
-				color: 'var(--color-primary-dark)',
+				color: 'var(--m-color-main-heavy)',
 			})
 				.setLngLat([longitude, latitude])
 
@@ -67,7 +69,7 @@ export function MapView({
 		}
 	}, [longitude, latitude]);
 
-	return <div ref={mapContainerRef} className={className} />;
+	return <div ref={mapContainerRef} className={className} style={style} />;
 }
 
 export default MapView;

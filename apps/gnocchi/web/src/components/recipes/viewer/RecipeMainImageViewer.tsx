@@ -1,6 +1,7 @@
 import { hooks } from '@/stores/groceries/index.js';
+import { clsx } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
-import classNames from 'classnames';
+import cls from './RecipeMainImageViewer.module.css';
 
 export interface RecipeMainImageViewerProps {
 	recipe: Recipe;
@@ -14,13 +15,5 @@ export function RecipeMainImageViewer({
 	const { mainImage } = hooks.useWatch(recipe);
 	const src = hooks.useWatch(mainImage);
 
-	return src ? (
-		<img
-			src={src}
-			className={classNames(
-				'h-full w-full overflow-hidden rounded-lg object-cover',
-				className,
-			)}
-		/>
-	) : null;
+	return src ? <img src={src} className={clsx(cls.root, className)} /> : null;
 }

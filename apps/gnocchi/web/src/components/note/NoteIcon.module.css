@@ -1,0 +1,8 @@
+.open {
+	@apply --mx-fg(var(--m-color-main-heavy));
+	@apply --mx-fill(var(--m-color-main));
+}
+
+.add {
+	@apply --mx-fg(var(--m-color-neutral-heavy));
+}

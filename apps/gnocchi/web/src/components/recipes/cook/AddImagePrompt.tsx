@@ -1,6 +1,6 @@
 import { AppearWithScroll } from '@/components/recipes/cook/AppearWithScroll.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { ImageUploader, P, useToggle } from '@a-type/ui';
+import { Box, ImageUploader, P, useToggle } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 
 export interface AddImagePromptProps {
@@ -16,20 +16,22 @@ export function AddImagePrompt({ recipe }: AddImagePromptProps) {
 	}
 
 	return (
-		<AppearWithScroll className="flex flex-col gap-2">
-			<P>Enjoy! Now would be a good time to add a photo to this recipe 🙂</P>
-			<ImageUploader
-				value={mainImage?.url || null}
-				onChange={(image) => {
-					recipe.update({
-						mainImage: image,
-						updatedAt: Date.now(),
-					});
-				}}
-				className="h-200px overflow-hidden rounded-sm"
-				maxDimension={1080}
-				facingMode="environment"
-			/>
+		<AppearWithScroll>
+			<Box col gap="sm">
+				<P>Enjoy! Now would be a good time to add a photo to this recipe 🙂</P>
+				<ImageUploader
+					value={mainImage?.url || null}
+					onChange={(image) => {
+						recipe.update({
+							mainImage: image,
+							updatedAt: Date.now(),
+						});
+					}}
+					style={{ height: 200, overflow: 'hidden' }}
+					maxDimension={1080}
+					facingMode="environment"
+				/>
+			</Box>
 		</AppearWithScroll>
 	);
 }

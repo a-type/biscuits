@@ -1,0 +1,15 @@
+.root {
+	margin-block: var(--m-space-md);
+
+	@media (max-width: 768px) {
+		display: none;
+
+		&[data-show-on-mobile='true'] {
+			display: flex;
+		}
+	}
+}
+
+.title {
+	font-weight: var(--m-text-weight-bold);
+}

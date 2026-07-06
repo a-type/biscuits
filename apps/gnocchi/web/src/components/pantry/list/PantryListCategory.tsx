@@ -9,10 +9,11 @@ import {
 import { useFilter } from '@/components/pantry/hooks.js';
 import { pantryOnboarding } from '@/onboarding/pantryOnboarding.js';
 import { hooks } from '@/stores/groceries/index.js';
-import { Button, CardGrid, cardGridColumns } from '@a-type/ui';
+import { Button, CardGrid, cardGridColumns, clsx } from '@a-type/ui';
 import { Category } from '@gnocchi.biscuits/verdant';
 import { useEffect } from 'react';
 import { PantryListItem } from '../items/PantryListItem.jsx';
+import cls from './PantryListCategory.module.css';
 
 export interface PantryListCategoryProps {
 	category: Category | null;
@@ -62,13 +63,13 @@ export function PantryListCategory({
 
 	return (
 		<CategoryRoot
-			className="pantryListCategory mb-4"
+			className={clsx('pantryListCategory', cls.root)}
 			data-is-empty={items.length === 0 && !showShowMore}
 			data-do-not-animate
 			{...rest}
 		>
-			<CategoryTitleRow className="mb-1">
-				<CategoryTitle className="!text-sm">
+			<CategoryTitleRow className={cls.titleRow}>
+				<CategoryTitle className={cls.title}>
 					{category?.get('name') ?? 'Uncategorized'}
 				</CategoryTitle>
 			</CategoryTitleRow>
@@ -82,7 +83,7 @@ export function PantryListCategory({
 				</CardGrid>
 			</CategoryItems>
 			{showShowMore && (
-				<div className="mt-4 flex justify-center">
+				<div className={cls.more}>
 					<Button emphasis="ghost" onClick={pagination.loadMore}>
 						Show more
 					</Button>

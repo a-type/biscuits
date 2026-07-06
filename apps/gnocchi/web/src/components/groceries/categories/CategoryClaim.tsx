@@ -68,7 +68,11 @@ export const CategoryClaim = memo(function CategoryClaim({
 		<Button
 			emphasis="ghost"
 			size="small"
-			className="h-auto w-auto p-0"
+			style={{
+				padding: 0,
+				height: '100%',
+				width: '100%',
+			}}
 			onClick={claim}
 		>
 			<PeopleList count={peopleCount} size={20}>
@@ -85,7 +89,9 @@ export const CategoryClaim = memo(function CategoryClaim({
 						index={0}
 						person={null}
 						popIn
-						className="opacity-50"
+						style={{
+							opacity: 0.5,
+						}}
 					/>
 				)}
 			</PeopleList>

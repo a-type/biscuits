@@ -3,6 +3,7 @@ import { apps } from '@biscuits/apps';
 import { useHasServerAccess } from '../hooks/graphql.js';
 import { useLocalStorage } from '../hooks/useStorage.js';
 import { useAppId } from './Context.js';
+import cls from './InfrequentSubscriptionHint.module.css';
 import { PromoteSubscriptionButton } from './PromoteSubscriptionButton.js';
 
 const now = Date.now();
@@ -30,9 +31,9 @@ export function InfrequentSubscriptionHint() {
 
 	if (daysSinceDismissed > 60 && daysSinceFirstSeen > 30) {
 		return (
-			<div className="color-gray8 flex flex-col gap-3 border-light rounded-md p-4">
+			<div className={cls.root}>
 				<P>Enjoying {appName}? A subscription unlocks device sync and more</P>
-				<div className="flex items-center justify-end gap-2">
+				<div className={cls.actions}>
 					<Button emphasis="ghost" onClick={() => setDismissedAt(Date.now())}>
 						Dismiss
 					</Button>

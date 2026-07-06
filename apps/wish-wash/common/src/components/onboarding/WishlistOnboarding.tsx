@@ -1,4 +1,4 @@
-import { Button, clsx, H1, H2, P, Progress, TextArea } from '@a-type/ui';
+import { Box, Button, Field, H1, H2, P, Progress, TextArea } from '@a-type/ui';
 import { useState } from 'react';
 import { OnboardingQuestion, onboardingQuestions } from './questions.js';
 
@@ -7,6 +7,7 @@ export interface WishlistOnboardingProps {
 	onAnswers: (answers: Map<OnboardingQuestion, string>) => void;
 	className?: string;
 	thanksText: string;
+	style?: React.CSSProperties;
 }
 
 export function WishlistOnboarding({
@@ -14,6 +15,7 @@ export function WishlistOnboarding({
 	onAnswers,
 	className,
 	thanksText,
+	...rest
 }: WishlistOnboardingProps) {
 	const [answers, setAnswers] = useState<Map<OnboardingQuestion, string>>(
 		new Map(),
@@ -55,17 +57,24 @@ export function WishlistOnboarding({
 
 	if (mode === 'summary') {
 		return (
-			<div className={clsx('w-full col items-stretch gap-6', className)}>
+			<Box
+				full="width"
+				col
+				items="stretch"
+				gap="lg"
+				className={className}
+				{...rest}
+			>
 				<H1>Thanks!</H1>
 				<P>{thanksText}</P>
 				{hasMoreQuestions && (
-					<div className="col items-start border-default rounded-lg p-4 bg-white">
+					<Box col items="start" surface="ambient" gap p>
 						<H2>More questions are available</H2>
 						<P>
 							Answering more questions increases the variety and quality of
 							gifts you receive.
 						</P>
-						<div className="row justify-start">
+						<Box justify="start" gap>
 							<Button
 								onClick={() => {
 									setMode('questions');
@@ -75,24 +84,31 @@ export function WishlistOnboarding({
 							>
 								Answer more questions
 							</Button>
-						</div>
-					</div>
+						</Box>
+					</Box>
 				)}
-				<div className="row justify-start">
+				<Box justify="start" gap>
 					<Button emphasis="primary" onClick={() => onAnswers(answers)}>
 						Finish up
 					</Button>
-				</div>
-			</div>
+				</Box>
+			</Box>
 		);
 	}
 
 	return (
-		<div className={clsx('w-full col items-stretch gap-6', className)}>
-			<div className="col items-start">
+		<Box
+			full="width"
+			col
+			items="stretch"
+			gap="lg"
+			className={className}
+			{...rest}
+		>
+			<Box col items="start" gap>
 				{sampleIndex + 1}/{questionsSample.length}
 				<Progress value={sampleIndex} max={questionsSample.length} />
-			</div>
+			</Box>
 			<Question
 				question={currentQuestion}
 				key={currentQuestion.id}
@@ -103,15 +119,15 @@ export function WishlistOnboarding({
 					handleAnswer();
 				}}
 			/>
-			<div className="w-full row items-center justify-between gap-4">
+			<Box full="width" gap items="center" justify="between">
 				<Button type="button" onClick={handleSkip}>
 					Skip
 				</Button>
 				<Button emphasis="primary" onClick={handleAnswer}>
 					Next
 				</Button>
-			</div>
-		</div>
+			</Box>
+		</Box>
 	);
 }
 
@@ -127,27 +143,29 @@ function Question({
 	onCommit: (answer: string) => void;
 }) {
 	return (
-		<div className="w-full col flex-1 items-stretch gap-4">
-			<label className="text-xl" htmlFor={question.id}>
-				{question.question}
-			</label>
-			<TextArea
-				className="w-full"
-				id={question.id}
-				autoSize
-				autoFocus
-				padBottomPixels={40}
-				value={answer}
-				onChange={(ev) => onAnswer(ev.currentTarget.value)}
-				placeholders={question.suggestions}
-				onKeyDown={(ev) => {
-					if (ev.key === 'Enter' && !ev.shiftKey) {
-						ev.preventDefault();
-						onCommit(answer);
-					}
-				}}
+		<Field stretch id={question.id}>
+			<Field.Label>{question.question}</Field.Label>
+			<Field.Control
+				render={
+					<TextArea
+						className="w-full"
+						id={question.id}
+						autoSize
+						autoFocus
+						padBottomPixels={40}
+						value={answer}
+						onChange={(ev) => onAnswer(ev.currentTarget.value)}
+						placeholders={question.suggestions}
+						onKeyDown={(ev) => {
+							if (ev.key === 'Enter' && !ev.shiftKey) {
+								ev.preventDefault();
+								onCommit(answer);
+							}
+						}}
+					/>
+				}
 			/>
-		</div>
+		</Field>
 	);
 }
 

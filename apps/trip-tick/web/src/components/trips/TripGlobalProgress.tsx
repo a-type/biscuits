@@ -1,4 +1,4 @@
-import { Progress, ProgressIndicator } from '@radix-ui/react-progress';
+import { Progress } from '@a-type/ui';
 import { Trip } from '@trip-tick.biscuits/verdant';
 import { useTripProgress } from './hooks.js';
 
@@ -8,18 +8,7 @@ export interface TripGlobalProgressProps {
 
 export function TripGlobalProgress({ trip }: TripGlobalProgressProps) {
 	const { value } = useTripProgress(trip);
+	console.log(value);
 
-	return (
-		<Progress
-			value={value}
-			className="relative w-full overflow-hidden border border-default rounded-full"
-		>
-			<ProgressIndicator
-				className="h-6px w-full bg-accent"
-				style={{
-					transform: `translateX(-${100 * (1 - value)}%`,
-				}}
-			/>
-		</Progress>
-	);
+	return <Progress value={value} max={1} style={{ width: '100%' }} />;
 }

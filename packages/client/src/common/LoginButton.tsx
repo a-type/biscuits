@@ -1,5 +1,5 @@
 import { Button, ButtonProps, Icon } from '@a-type/ui';
-import { ReactNode } from 'react';
+import { CSSProperties, ReactNode } from 'react';
 import * as CONFIG from '../config.js';
 import { useMaybeAppId } from './Context.js';
 
@@ -34,6 +34,7 @@ export function LoginLink({
 	tab?: 'login' | 'signup';
 	children?: ReactNode;
 	className?: string;
+	style?: CSSProperties;
 }) {
 	const url = new URL(CONFIG.HOME_ORIGIN + '/login');
 

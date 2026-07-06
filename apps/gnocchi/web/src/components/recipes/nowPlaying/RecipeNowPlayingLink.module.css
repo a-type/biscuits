@@ -1,0 +1,41 @@
+.root {
+	padding-inline-end: var(--m-space-sm);
+	gap: var(--m-space-sm);
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.link {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: var(--m-space-sm);
+	overflow: hidden;
+	padding: var(--m-space-sm);
+
+	@apply --mx-focus;
+}
+
+.pieRoot {
+	height: --fn-literal(32px);
+	width: --fn-literal(32px);
+	flex-shrink: 0;
+	overflow: hidden;
+	@apply --mx-borderColor(var(--m-color-main-heavy));
+	border-radius: --fn-literal(99999px);
+}
+
+.pieProgress {
+	transform-origin: center;
+	transform: rotate(-90deg);
+	stroke-width: --fn-literal(32px);
+	stroke: var(--m-color-main);
+}
+
+.pieCheck {
+	stroke-width: --fn-literal(2px);
+	stroke: var(--m-color-neutral-paper);
+}

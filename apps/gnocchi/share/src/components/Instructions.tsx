@@ -24,6 +24,7 @@ import {
 } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { createContext, useContext } from 'react';
+import cls from './Instructions.module.css';
 
 export const instructionsFragment = graphql(`
 	fragment Instructions on PublishedRecipeData {
@@ -53,7 +54,11 @@ export function MachineReadableInstructions({
 	const data = readFragment(instructionsFragment, dataMasked);
 	const instructionsData = data.instructions as PublicRecipe['instructions'];
 	return (
-		<div className="e-instructions hidden" itemProp="recipeInstructions">
+		<div
+			className="e-instructions"
+			style={{ display: 'none' }}
+			itemProp="recipeInstructions"
+		>
 			{(instructionsData.content ?? []).map((block) => {
 				if (!block) return null;
 
@@ -124,12 +129,7 @@ export function Instructions({
 	return (
 		<InstructionsContext.Provider value={data as any}>
 			<EditorContent
-				className={clsx(
-					tipTapClassName,
-					tipTapReadonlyClassName,
-					'[&>div]:p-0',
-					className,
-				)}
+				className={clsx(tipTapClassName, tipTapReadonlyClassName, className)}
 				editor={editor}
 				readOnly
 			/>
@@ -267,7 +267,7 @@ function InstructionStepView({
 	return (
 		<NodeViewWrapper
 			data-id={node.attrs.id}
-			className="mb-5 w-full flex flex-col gap-sm p-1"
+			className={cls.nodeViewWrapper}
 			contentEditable={false}
 		>
 			<div>
@@ -279,20 +279,22 @@ function InstructionStepView({
 								<Button emphasis="ghost" size="small" className="italic" />
 							}
 						>
-							<Icon
-								name="chevron"
-								className="transition-all [[data-state=open]_&]:rotate-180"
-							/>
+							<Collapsible.Icon>
+								<Icon name="chevron" />
+							</Collapsible.Icon>
 							Make {embeddedRecipe.title}
 						</Collapsible.Trigger>
 						<Collapsible.Content>
-							<Instructions className="pl-sm" data={embeddedRecipe as any} />
+							<Instructions
+								className={cls.subRecipeInstructions}
+								data={embeddedRecipe as any}
+							/>
 						</Collapsible.Content>
 					</Collapsible>
 				)}
 			</div>
 			{node.attrs.note && (
-				<Note className="ml-auto mt-2 max-w-80% w-max-content" data-note="true">
+				<Note className={cls.note} data-note="true">
 					{node.attrs.note}
 				</Note>
 			)}

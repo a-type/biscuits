@@ -1,5 +1,6 @@
 import { useRender, UseRenderComponentProps, withClassName } from '@a-type/ui';
 import { FC } from 'react';
+import cls from './shape.module.css';
 
 function GSlot({ render, ...rest }: UseRenderComponentProps<'g'>) {
 	return useRender({
@@ -11,5 +12,5 @@ function GSlot({ render, ...rest }: UseRenderComponentProps<'g'>) {
 
 export const Unzoomed: FC<UseRenderComponentProps<'g'>> = withClassName(
 	GSlot,
-	'scale-[calc(1/var(--zoom-settled))]',
+	cls.scaleZoom,
 );

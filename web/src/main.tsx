@@ -1,8 +1,8 @@
 import '@biscuits/client/henrietta.css';
-import 'uno.css';
+
+import '@a-type/ui/main.css';
 import './main.css';
 
-import { handleAppState } from '@a-type/auth-ui';
 import { Provider as UIProvider } from '@a-type/ui';
 import { AppId, appsById } from '@biscuits/apps';
 import { Provider } from '@biscuits/client';
@@ -26,6 +26,12 @@ function main() {
 
 main();
 
+function handleAppState(handler: (appState: any) => void) {
+	const appState = new URLSearchParams(window.location.search).get('appState');
+	if (appState) {
+		handler(JSON.parse(appState));
+	}
+}
 handleAppState((appState) => {
 	if (appState?.appReferrer) {
 		const app = appsById[appState.appReferrer as AppId];

@@ -1,0 +1,17 @@
+.picker {
+	width: 100%;
+	transition: height var(--m-duration) var(--m-easing);
+
+	height: 100dvh;
+	&[data-has-value='true'] {
+		height: 50dvh;
+	}
+}
+
+.metadata {
+	max-width: --fn-literal(512px);
+	width: 100%;
+	border-top: var(--m-lineWidth-lg) solid var(--m-color-main-ink);
+	padding-bottom: var(--m-space-xl);
+	padding-top: var(--m-space);
+}

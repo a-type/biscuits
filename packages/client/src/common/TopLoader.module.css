@@ -1,0 +1,31 @@
+.root {
+	pointer-events: none;
+	position: fixed;
+	left: 0;
+	top: 0;
+	z-index: 999999;
+	height: --fn-literal(4px);
+	width: 100%;
+	opacity: 0;
+	transition: opacity var(--m-duration) var(--m-easing);
+
+	&[data-state='visible'] {
+		opacity: 1;
+	}
+
+	@media (min-width: 800px) {
+		height: --fn-literal(2px);
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		display: none;
+	}
+}
+
+.bar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 100%;
+	@apply --mx-bg(var(--m-color-accent));
+}

@@ -23,6 +23,7 @@ import {
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ref, useSnapshot } from 'valtio';
 import { useColorSelection } from './hooks.js';
+import cls from './ProjectCanvas.module.css';
 import { toolState } from './state.js';
 
 export interface ProjectCanvasProps {
@@ -48,13 +49,11 @@ export function ProjectCanvas({ project, className }: ProjectCanvasProps) {
 			step="bubbles"
 			content="Tap and drag to pick a color. Pinch to zoom and pan."
 		>
-			<div
-				className={clsx(
-					'relative w-full flex flex-col sm:(h-full w-auto)',
-					className,
-				)}
-			>
-				<ViewportRoot viewport={viewport} className="h-auto flex-grow-1">
+			<div className={clsx(cls.canvasWrap, className)}>
+				<ViewportRoot
+					viewport={viewport}
+					style={{ height: 'auto', flexGrow: 1 }}
+				>
 					<ColorPickerCanvas image={image} />
 					{showBubbles && !activelyPicking && <Bubbles colors={colors} />}
 					<PickingBubble />
@@ -134,7 +133,11 @@ function ColorPickerCanvas({
 	return (
 		<CanvasRoot canvas={logicalCanvas} onContextMenu={preventDefault}>
 			{/* <CanvasBackground> */}
-			<canvas ref={canvasRef} className={clsx('touch-none', className)} />
+			<canvas
+				ref={canvasRef}
+				style={{ touchAction: 'none' }}
+				className={className}
+			/>
 			{/* </CanvasBackground> */}
 			{/* bubble preview */}
 			<BubblePicker getCanvasColors={getCanvasColors} />
@@ -288,23 +291,12 @@ function BubblePicker({
 	);
 
 	return (
-		<div
-			ref={previewRef}
-			className={clsx(
-				'[--pointer-size:32px] [--size:160px] [--x-mult:1] [--x:0] [--y-mult:1] [--y:0]',
-				'md:[--pointer-size:0px] md:[--size:84px]',
-				'[transform:translate(-50%,-50%)_translate(calc(var(--x-mult,1)*(var(--size)+var(--pointer-size))/2/var(--zoom,1)),calc(var(--y-mult,1)*(var(--size)+var(--pointer-size))/2/var(--zoom,1)))]',
-				'left-[var(--x)] top-[var(--y)]',
-				'h-[calc(var(--size)/var(--zoom,1))] w-[calc(var(--size)/var(--zoom,1))]',
-				'border-gray-4 pointer-events-none fixed overflow-hidden border-1 border-solid',
-				show ? 'block' : 'hidden',
-			)}
-		>
-			<canvas ref={previewCanvasRef} className="h-full w-full" />
-			<div
-				ref={dotRef}
-				className="border-gray-4 absolute left-1/2 top-1/2 z-1 h-[calc(var(--size)/6/var(--zoom))] w-[calc(var(--size)/6/var(--zoom))] border-1 rounded-full border-solid -translate-1/2"
+		<div ref={previewRef} className={cls.picker} data-show={show}>
+			<canvas
+				ref={previewCanvasRef}
+				style={{ width: '100%', height: '100%' }}
 			/>
+			<div ref={dotRef} className={cls.pickerDot} />
 		</div>
 	);
 }
@@ -313,7 +305,7 @@ function Bubbles({ colors }: { colors: ProjectColors }) {
 	const liveColors = hooks.useWatch(colors);
 
 	return (
-		<div className="pointer-events-none absolute inset-0">
+		<div className={cls.bubbles}>
 			{liveColors.map((color, i) => (
 				<Bubble color={color} key={i} />
 			))}
@@ -337,9 +329,7 @@ function Bubble({ color: colorVal }: { color: ProjectColorsItem }) {
 				setSelected(id);
 				toolState.pickedColor = null;
 			}}
-			className={clsx(
-				'pointer-events-auto absolute m-0 min-h-0 min-w-0 appearance-none rounded-full border-solid p-0 border-black -translate-1/2',
-			)}
+			className={clsx(cls.bubble)}
 			style={{
 				backgroundColor: `rgb(${r}, ${g}, ${b})`,
 				left: `${x * 100}%`,
@@ -361,7 +351,7 @@ function PickingBubble() {
 
 	return (
 		<div
-			className="pointer-events-none absolute -translate-1/2"
+			className={cls.pickingBubble}
 			style={{
 				left: `${pickedColor.percentage.x * 100}%`,
 				top: `${pickedColor.percentage.y * 100}%`,
@@ -370,9 +360,7 @@ function PickingBubble() {
 			}}
 		>
 			<div
-				className={clsx(
-					'pointer-events-none absolute h-full w-full animate-spin animate-duration-20s rounded-full border-dashed border-white',
-				)}
+				className={cls.pickingBubbleBorder}
 				style={{
 					backgroundColor: `rgb(${pickedColor.value.r}, ${pickedColor.value.g}, ${pickedColor.value.b})`,
 					borderWidth: `calc(2px / var(--zoom, 1))`,

@@ -1,5 +1,5 @@
 import { hooks } from '@/store.js';
-import { ActionButton, H3 } from '@a-type/ui';
+import { ActionButton, Box, H3 } from '@a-type/ui';
 import { useHasServerAccess } from '@biscuits/client';
 import { ListItems, ListItemsItemInit } from '@trip-tick.biscuits/verdant';
 
@@ -96,13 +96,13 @@ export function AddSuggested({ items }: AddSuggestedProps) {
 	return (
 		<div>
 			<H3 className="mb-2">Suggestions</H3>
-			<div className="flex flex-row flex-wrap gap-1">
+			<Box wrap gap="xs" items="center">
 				{filtered.map((d) => (
 					<ActionButton key={d.description} onClick={() => items.push(d)}>
 						{d.description}
 					</ActionButton>
 				))}
-			</div>
+			</Box>
 		</div>
 	);
 }

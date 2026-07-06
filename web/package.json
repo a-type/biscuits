@@ -9,12 +9,10 @@
 		"tsc": "tsc --build"
 	},
 	"dependencies": {
-		"@a-type/auth-ui": "catalog:",
 		"@biscuits/apps": "workspace:*",
 		"@biscuits/client": "workspace:*",
 		"@biscuits/error": "workspace:*",
 		"@biscuits/graphql": "workspace:*",
-		"@biscuits/uno-config": "workspace:*",
 		"@react-spring/three": "9.7.5",
 		"@react-spring/web": "^9.7.5",
 		"@react-three/drei": "9.121.4",
@@ -35,11 +33,11 @@
 		"@types/react-dom": "catalog:",
 		"@a-type/ui": "catalog:",
 		"gql.tada": "catalog:",
-		"unocss": "catalog:",
-		"@unocss/transformer-variant-group": "catalog:",
+		"@arbor-css/core": "catalog:",
+		"@arbor-css/postcss": "catalog:",
 		"typescript": "catalog:",
 		"vite": "catalog:",
-		"@vitejs/plugin-react-swc": "catalog:"
+		"@vitejs/plugin-react": "catalog:"
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "^1.0.3",

@@ -1,0 +1,19 @@
+.picker {
+	transition-property: background-color, color;
+	transition-duration: var(--m-duration);
+	transition-timing-function: var(--m-easing);
+}
+
+.thumb {
+	height: --fn-literal(40px);
+	width: --fn-literal(40px);
+	font-size: --fn-literal(24px);
+
+	&[data-has-value='false'] {
+		border-style: dashed;
+	}
+}
+
+.icon {
+	font-size: --fn-literal(32px);
+}

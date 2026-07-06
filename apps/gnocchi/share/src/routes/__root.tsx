@@ -8,7 +8,8 @@ import {
 } from '@tanstack/react-router';
 import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import * as React from 'react';
-import 'virtual:uno.css';
+
+import '@a-type/ui/main.css';
 import { DefaultCatchBoundary } from '~/components/DefaultCatchBoundary';
 import { NotFound } from '~/components/NotFound';
 import { seo } from '~/utils/seo';
@@ -60,7 +61,7 @@ export const Route = createRootRouteWithContext<{
 
 function RootDocument({ children }: { children: React.ReactNode }) {
 	return (
-		<html className="theme-lemon">
+		<html className="@mode-lemon">
 			<head>
 				<HeadContent />
 			</head>

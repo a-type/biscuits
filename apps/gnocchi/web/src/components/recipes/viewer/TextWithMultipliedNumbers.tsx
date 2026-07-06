@@ -1,4 +1,4 @@
-import { Tooltip } from '@a-type/ui';
+import { Box, Text, Tooltip } from '@a-type/ui';
 import { fractionToText } from '@a-type/utils';
 
 export interface TextWithMultipliedNumbersProps {
@@ -34,16 +34,21 @@ export function TextWithMultipliedNumbers({
 							<Tooltip
 								content={
 									(
-										<span className="max-w-80dvw text-wrap">
+										<Text style={{ maxWidth: '80dvw' }}>
 											Multiplier {fractionToText(multiplier)}x applied. Original
 											value: {fragment}
-										</span>
+										</Text>
 									) as any
 								}
 							>
-								<span className="multiplied-number inline-flex flex-row items-center gap-0.5 font-bold color-accent-dark">
+								<Text
+									bold
+									color="main"
+									render={<Box items="center" gap="xs" />}
+									className="multiplied-number @mode-accent"
+								>
 									{fractionToText(parseFloat(fragment.trim()) * multiplier)}
-								</span>
+								</Text>
 							</Tooltip>
 						)}
 					</span>
