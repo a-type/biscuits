@@ -167,8 +167,8 @@ export const PantryListItemSkeleton = ({
 	showLabels?: boolean;
 }) => {
 	return (
-		<Card>
-			<Card.Main compact>
+		<Card size="sm">
+			<Card.Main>
 				<Card.Title>
 					<TextSkeleton maxLength={12} />
 				</Card.Title>
