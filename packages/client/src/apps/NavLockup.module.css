@@ -1,5 +1,5 @@
 .root {
-	margin-block: var(--m-space-md);
+	margin-block: var(--m-sp-md);
 
 	@media (max-width: 768px) {
 		display: none;
@@ -11,5 +11,5 @@
 }
 
 .title {
-	font-weight: var(--m-text-weight-bold);
+	font-weight: var(--m-fw-bold);
 }

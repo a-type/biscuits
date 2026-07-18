@@ -1,7 +1,7 @@
 .inputWrap {
 	position: relative;
 	width: 100%;
-	padding: var(--m-space-sm);
+	padding: var(--m-sp-sm);
 }
 
 .inputEmpty {
@@ -14,7 +14,7 @@
 
 .container {
 	position: fixed;
-	bottom: calc(var(--m-space-md) + env(safe-area-inset-bottom));
+	bottom: calc(var(--m-sp-md) + env(safe-area-inset-bottom));
 	left: 50%;
 	z-index: var(--z-now-playing);
 	transform: translateX(-50%);

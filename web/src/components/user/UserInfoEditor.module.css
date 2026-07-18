@@ -3,7 +3,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	padding-block: var(--m-space-sm);
+	padding-block: var(--m-sp-sm);
 }
 
 .header {
@@ -15,7 +15,7 @@
 }
 
 .form {
-	padding-block: var(--m-space-sm);
+	padding-block: var(--m-sp-sm);
 }
 
 .formActions {
@@ -23,5 +23,5 @@
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
-	gap: var(--m-space-sm);
+	gap: var(--m-sp-sm);
 }

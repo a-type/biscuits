@@ -1,6 +1,6 @@
 .root {
-	padding-inline-end: var(--m-space-sm);
-	gap: var(--m-space-sm);
+	padding-inline-end: var(--m-sp-sm);
+	gap: var(--m-sp-sm);
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -12,9 +12,9 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: var(--m-space-sm);
+	gap: var(--m-sp-sm);
 	overflow: hidden;
-	padding: var(--m-space-sm);
+	padding: var(--m-sp-sm);
 
 	@apply --mx-focus;
 }
@@ -24,18 +24,22 @@
 	width: --fn-literal(32px);
 	flex-shrink: 0;
 	overflow: hidden;
-	@apply --mx-borderColor(var(--m-color-main-heavy));
+	@apply --mx-borderColor(var(--m-fg-light));
 	border-radius: --fn-literal(99999px);
+}
+
+.pieBg {
+	fill: var(--m-gray-wash);
 }
 
 .pieProgress {
 	transform-origin: center;
 	transform: rotate(-90deg);
 	stroke-width: --fn-literal(32px);
-	stroke: var(--m-color-main);
+	stroke: var(--m-tint);
 }
 
 .pieCheck {
 	stroke-width: --fn-literal(2px);
-	stroke: var(--m-color-neutral-paper);
+	stroke: var(--m-gray-paper);
 }

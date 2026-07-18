@@ -35,7 +35,7 @@ const Swatch = ({ color }: { color: string }) => (
 		style={{
 			width: 16,
 			height: 16,
-			backgroundColor: 'var(--m-color-main)',
+			backgroundColor: 'var(--m-tint)',
 			borderRadius: 4,
 		}}
 		className={`@mode-${color}`}

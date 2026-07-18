@@ -2,7 +2,7 @@
 	background: transparent;
 	border: none;
 	padding: 0;
-	@apply --mx-fg(var(--m-color-neutral-heavy));
+	@apply --mx-fg(var(--m-gray-heavy));
 	text-decoration: underline;
 	cursor: pointer;
 	align-self: flex-end;

@@ -4,7 +4,7 @@
 	width: --fn-literal(48px);
 	align-items: center;
 	justify-content: center;
-	border-radius: var(--m-radius-lg);
+	border-radius: var(--m-rd-lg);
 	box-shadow: var(--m-shadow-lg);
 	pointer-events: auto;
 
@@ -27,5 +27,5 @@
 }
 
 .input {
-	border-radius: var(--m-radius-md);
+	border-radius: var(--m-rd-md);
 }

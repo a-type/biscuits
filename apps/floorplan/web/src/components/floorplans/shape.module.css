@@ -1,9 +1,9 @@
 .fillBlack {
-	fill: var(--m-color-neutral-ink);
+	fill: var(--m-gray-ink);
 }
 
 .fillWhite {
-	fill: var(--m-color-neutral-paper);
+	fill: var(--m-gray-paper);
 }
 
 .strokeNone {
@@ -11,19 +11,19 @@
 }
 
 .strokeBlack {
-	stroke: var(--m-color-neutral-ink);
+	stroke: var(--m-gray-ink);
 }
 
 .strokeWhite {
-	stroke: var(--m-color-neutral-paper);
+	stroke: var(--m-gray-paper);
 }
 
 .strokeMain {
-	stroke: var(--m-color-main);
+	stroke: var(--m-tint);
 }
 
 .strokeGray {
-	stroke: var(--m-color-neutral);
+	stroke: var(--m-gray);
 }
 
 .strokeInherit {
@@ -31,11 +31,11 @@
 }
 
 .bgGray {
-	background-color: var(--m-color-neutral);
+	background-color: var(--m-gray);
 }
 
 .bgWhite {
-	background-color: var(--m-color-neutral-paper);
+	background-color: var(--m-gray-paper);
 }
 
 .scaleZoom {

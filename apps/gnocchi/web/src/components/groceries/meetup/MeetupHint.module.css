@@ -4,8 +4,8 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	gap: var(--m-space-sm);
-	padding: var(--m-space-md);
+	gap: var(--m-sp-sm);
+	padding: var(--m-sp-md);
 	text-align: center;
 }
 
@@ -13,11 +13,11 @@
 	max-width: 300px;
 	@apply --mx-prose-ambient;
 	font-style: italic;
-	@apply --mx-fg(var(--m-color-neutral-heavy));
+	@apply --mx-fg(var(--m-gray-heavy));
 }
 
 .label {
 	@apply --mx-prose-ambient;
 	font-style: italic;
-	@apply --mx-fg(var(--m-color-neutral-heavy));
+	@apply --mx-fg(var(--m-gray-heavy));
 }

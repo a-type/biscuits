@@ -1,6 +1,6 @@
 .titleIcon {
 	margin-right: var(--spacing-md);
-	@apply --mx-fg(var(--m-color-neutral-heavy));
+	@apply --mx-fg(var(--m-gray-heavy));
 }
 
 .item {
@@ -10,13 +10,13 @@
 	grid-template-rows: auto auto;
 	align-items: center;
 	gap: var(--spacing-sm);
-	border-radius: var(--m-surface-radius);
+	border-radius: var(--m-surface-rd);
 
 	user-select: none;
-	@apply --mx-borderColor(var(--m-color-neutral));
+	@apply --mx-borderColor(var(--m-gray));
 
 	@media (min-width: 640px) {
-		padding: var(--m-space);
+		padding: var(--m-sp);
 	}
 }
 
@@ -48,12 +48,12 @@
 .selectTrigger {
 	align-self: center;
 	justify-self: start;
-	padding-inline: var(--m-space);
-	font-size: var(--m-text-size-sm);
+	padding-inline: var(--m-sp);
+	font-size: var(--m-fs-sm);
 }
 
 .searchIcon {
-	@apply --mx-fg(var(--m-color-neutral-heavy));
+	@apply --mx-fg(var(--m-gray-heavy));
 }
 
 .searchField {

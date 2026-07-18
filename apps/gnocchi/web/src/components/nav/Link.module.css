@@ -8,7 +8,7 @@
 	&[data-transitioning='true'] {
 		opacity: 70%;
 	}
-	@apply --mx-fg(var(--m-color-main-heavy));
+	@apply --mx-fg(var(--m-tint));
 	cursor: pointer;
-	font-weight: var(--m-text-weight-bold);
+	font-weight: var(--m-fw-bold);
 }

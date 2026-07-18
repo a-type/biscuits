@@ -109,10 +109,6 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 				data-test="grocery-list-item"
 				render={
 					<motion.div
-						initial={{
-							height: 0,
-							y: -4,
-						}}
 						animate={{ height: 'auto', y: 0 }}
 						exit={{
 							height: 0,

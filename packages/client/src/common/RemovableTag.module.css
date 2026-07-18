@@ -2,9 +2,9 @@
 	min-height: --fn-literal(24px);
 	display: flex;
 	align-items: center;
-	gap: var(--m-space-xs);
-	border-radius: var(--m-action-radius);
-	font-weight: var(--m-text-weight-bold);
-	@apply --mx-borderColor(var(--m-color-neutral-heavy));
-	@apply --mx-bg(var(--m-color-main-light));
+	gap: var(--m-sp-xs);
+	border-radius: var(--m-action-rd);
+	font-weight: var(--m-fw-bold);
+	@apply --mx-borderColor(var(--m-gray-heavy));
+	@apply --mx-bg(var(--m-bg-light));
 }

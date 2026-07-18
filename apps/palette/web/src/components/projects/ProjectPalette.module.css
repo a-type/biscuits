@@ -4,7 +4,7 @@
 	align-content: start;
 	align-items: start;
 	justify-content: start;
-	gap: var(--m-space-xs);
+	gap: var(--m-sp-xs);
 
 	@media (min-width: 640px) {
 		grid-template-columns: repeat(4, 1fr);
@@ -15,11 +15,11 @@
 	appearance: none;
 	border-image: none;
 	aspect-ratio: 1;
-	border-radius: var(--m-radius);
+	border-radius: var(--m-rd);
 	padding: 0;
 
 	&[data-selected='true'] {
-		@apply --mx-borderColor(var(--m-color-neutral-ink));
-		border-width: var(--m-lineWidth-lg);
+		@apply --mx-borderColor(var(--m-gray-ink));
+		border-width: var(--m-lw-lg);
 	}
 }

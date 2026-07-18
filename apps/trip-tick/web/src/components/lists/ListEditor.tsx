@@ -97,7 +97,7 @@ const AddListItemButton = forwardRef<HTMLButtonElement, { list: List }>(
 				emphasis="primary"
 				style={{
 					position: 'sticky',
-					bottom: 'var(--m-space)',
+					bottom: 'var(--m-sp)',
 					alignSelf: 'center',
 					alignItems: 'center',
 					justifyContent: 'center',

@@ -4,5 +4,5 @@
 }
 
 .washContent {
-	@apply --mx-bg(var(--m-color-neutral-wash));
+	@apply --mx-bg(var(--m-gray-wash));
 }

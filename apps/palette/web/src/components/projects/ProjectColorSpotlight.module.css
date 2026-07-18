@@ -1,9 +1,9 @@
 .root {
 	position: relative;
-	margin: var(--m-space-xs);
+	margin: var(--m-sp-xs);
 	display: flex;
 	flex-direction: column;
-	gap: var(--m-space-xs);
+	gap: var(--m-sp-xs);
 
 	@media (min-width: 640px) {
 		flex-direction: row;
@@ -14,28 +14,28 @@
 	position: relative;
 	height: 100%;
 	flex: 1 0 0;
-	border-radius: var(--m-radius-lg);
+	border-radius: var(--m-rd-lg);
 }
 
 .controls {
 	position: absolute;
-	bottom: var(--m-space);
-	right: var(--m-space);
+	bottom: var(--m-sp);
+	right: var(--m-sp);
 	display: flex;
 	flex-direction: row;
 }
 
 .breakdown {
 	flex: 1 0 0;
-	padding: var(--m-space-sm);
+	padding: var(--m-sp-sm);
 }
 
 .empty {
-	@apply --mx-borderColor(var(--m-color-neutral-heavy));
+	@apply --mx-borderColor(var(--m-gray-heavy));
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	border-radius: var(--m-radius-lg);
-	padding: var(--m-space-sm);
+	border-radius: var(--m-rd-lg);
+	padding: var(--m-sp-sm);
 }

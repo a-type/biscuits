@@ -1,19 +1,19 @@
 .nodeViewWrapper {
-	margin-block-end: var(--m-space-md);
+	margin-block-end: var(--m-sp-md);
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	gap: var(--m-space-sm);
-	padding: var(--m-space-xs);
+	gap: var(--m-sp-sm);
+	padding: var(--m-sp-xs);
 }
 
 .subRecipeInstructions {
-	padding-block-start: var(--m-space-sm);
+	padding-block-start: var(--m-sp-sm);
 }
 
 .note {
 	margin-inline: auto;
-	margin-block-start: var(--m-space-sm);
+	margin-block-start: var(--m-sp-sm);
 	max-width: 80%;
 	width: max-content;
 }

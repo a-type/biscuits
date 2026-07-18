@@ -2,19 +2,19 @@
 	display: flex;
 	flex-direction: column;
 	user-select: none;
-	gap: var(--m-space-lg);
-	padding: var(--m-space-md);
+	gap: var(--m-sp-lg);
+	padding: var(--m-sp-md);
 }
 
 .content {
-	@apply --mx-fg(var(--m-color-neutral-ink));
+	@apply --mx-fg(var(--m-gray-ink));
 	display: flex;
 	flex-grow: 1;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	gap: var(--m-space-sm);
-	padding: var(--m-space-md);
+	gap: var(--m-sp-sm);
+	padding: var(--m-sp-md);
 	text-align: center;
 	font-size: var(--m-prose-ambient-size);
 	font-style: italic;

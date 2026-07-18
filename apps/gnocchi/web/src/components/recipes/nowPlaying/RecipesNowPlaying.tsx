@@ -30,6 +30,7 @@ export function RecipesNowPlaying({
 		<Box
 			surface="ambient"
 			full="width"
+			border
 			col
 			items="start"
 			overflow="hidden"
@@ -37,17 +38,25 @@ export function RecipesNowPlaying({
 			style={{ pointerEvents: 'auto' }}
 		>
 			<Collapsible defaultOpen={defaultOpen} className="w-full">
-				<Button
-					emphasis="unstyled"
-					style={{ width: '100%', justifyContent: 'space-between' }}
+				<Collapsible.Trigger
+					render={
+						<Button
+							emphasis="ghost"
+							style={{
+								width: '100%',
+								justifyContent: 'space-between',
+								borderRadius: 0,
+							}}
+						/>
+					}
 				>
 					<Text italic emphasis="ambient">
 						Now Cooking
 					</Text>
 					<Collapsible.Icon>
-						<Icon name="chevron" />
+						<Icon name="chevron" style={{ transform: 'rotate(180deg)' }} />
 					</Collapsible.Icon>
-				</Button>
+				</Collapsible.Trigger>
 				<Collapsible.Content>
 					<Box col gap="sm">
 						<RecipeNowPlayingLink recipe={firstRecipe} />

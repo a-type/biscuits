@@ -3,15 +3,15 @@
 	grid-template-columns: 1fr 1fr;
 	align-items: stretch;
 	justify-content: stretch;
-	gap: var(--m-space);
+	gap: var(--m-sp);
 }
 
 .premiumBadge {
-	font-weight: var(--m-text-weight-bold);
-	@apply --mx-fg(var(--m-color-accent-heavy));
-	@apply --mx-bg(var(--m-color-accent-wash));
+	font-weight: var(--m-fw-bold);
+	@apply --mx-fg(var(--m-accent-heavy));
+	@apply --mx-bg(var(--m-accent-wash));
 	border-radius: --fn-literal(999px);
-	padding: var(--m-space-xs) var(--m-space-md);
-	@apply --mx-borderColor(var(--m-color-accent-heavy));
-	font-size: var(--m-text-size-sm);
+	padding: var(--m-sp-xs) var(--m-sp-md);
+	@apply --mx-borderColor(var(--m-accent-heavy));
+	font-size: var(--m-fs-sm);
 }

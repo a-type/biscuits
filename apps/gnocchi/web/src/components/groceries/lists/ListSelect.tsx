@@ -161,7 +161,7 @@ function MultiListIcon() {
 					position: 'absolute',
 					left: 1,
 					top: 0,
-					fill: 'var(--m-color-neutral-paper)',
+					fill: 'var(--m-gray-paper)',
 				}}
 			/>
 		</div>

@@ -4,11 +4,11 @@
 	min-width: 0;
 	font-size: var(--m-prose-ambient-size);
 	line-height: 1;
-	@apply --mx-fg(var(--m-color-neutral-heavy));
+	@apply --mx-fg(var(--m-gray-heavy));
 }
 
 .label {
-	margin-inline-end: var(--m-space-xs);
+	margin-inline-end: var(--m-sp-xs);
 	display: inline;
 	font-style: italic;
 }
@@ -21,7 +21,7 @@
 	list-style: none;
 	overflow: hidden;
 	padding: 0;
-	margin-inline-start: var(--m-space-xs);
+	margin-inline-start: var(--m-sp-xs);
 }
 
 .item {
@@ -36,5 +36,5 @@
 }
 
 .link {
-	font-weight: var(--m-text-weight-bold);
+	font-weight: var(--m-fw-bold);
 }

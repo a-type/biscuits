@@ -33,10 +33,10 @@ arbor tokens:list
 arbor tokens:list --filter mode
 
 # get detailed information about a specific token
-arbor token:info --m-color-main-ink
+arbor token:info --m-tint-ink
 
 # get the base mode's resolved value for a token
-arbor token:resolve --m-color-main-ink
+arbor token:resolve --m-tint-ink
 ```
 
 You can also list available functions and mixins with their parameters and descriptions.
@@ -86,19 +86,19 @@ Arbor CSS organizes design tokens into modes with layers of tokens:
 
 The mode includes grouped tokens called "intents": 'action', 'control', 'surface', and 'text'. These represent broad categories of UI elements and their semantic intent.
 
-Some token examples: `--m-action-primary-bg`, `--m-surface-ambient-fg`, `--m-action-radius`, `--m-control-bg`, `--m-prose-secondary-size`. See the CLI `arbor tokens:list --filter intent` for a full list of available intent tokens.
+Some token examples: `--m-action-primary-bg`, `--m-surface-ambient-fg`, `--m-action-rd`, `--m-control-bg`, `--m-prose-secondary-size`. See the CLI `arbor tokens:list --filter intent` for a full list of available intent tokens.
 
 ### Semantic tokens
 
-Basic design tokens like colors, spacing, typography, are mapped under appropriate token namespaces, if an intent doesn't align with the need. These values are relative to the configuration of the active mode; for example, `--m-color-main` takes on the "main" color of a mode like `@mode-accent` or `@mode-success`, and `--m-space-md` gets larger in `@mode-hero` and smaller in `@mode-dense`. Thus proper usage depends on the applied modes on the component. Don't think in absolute terms; use tokens with semantic relationship to the local component; "medium" spacing is medium relative to the component itself, not a global range.
+Basic design tokens like colors, spacing, typography, are mapped under appropriate token namespaces, if an intent doesn't align with the need. These values are relative to the configuration of the active mode; for example, `--m-tint` takes on the "main" color of a mode like `@mode-accent` or `@mode-success`, and `--m-sp-md` gets larger in `@mode-hero` and smaller in `@mode-dense`. Thus proper usage depends on the applied modes on the component. Don't think in absolute terms; use tokens with semantic relationship to the local component; "medium" spacing is medium relative to the component itself, not a global range.
 
-Some token examples: `--m-color-main-light`, `--m-color-neutral-ink`, `--m-space-lg`, `--m-radius-sm`, `--m-text-size-lg`, `--m-text-weight-bold`, `--m-lineWidth`. See the CLI `arbor tokens:list` for a full list of available mode tokens. Semantic categories include: color, spacing, radius, typography, shadow, duration, easing, and lineWidth. These categories will be prefixes in the token names, like `--m-color-`, `--m-space-`, etc.
+Some token examples: `--m-tint-light`, `--m-gray-ink`, `--m-sp-lg`, `--m-rd-sm`, `--m-fs-lg`, `--m-fw-bold`, `--m-lw`. See the CLI `arbor tokens:list` for a full list of available mode tokens. Semantic categories include: color, spacing, radius, typography, shadow, duration, easing, and lineWidth. These categories will be prefixes in the token names, like `--m-color-`, `--m-sp-`, etc.
 
 ### Referencing other colors
 
 Each mode has a `main` color. Assume that the applied color is the intended color for the component. This includes components with inherent semantic meaning; assume that if the component is a "success check icon" it is already receiving "@mode-success" as a configured mode class, for example, and use the `main` color with that assumption.
 
-However, if you need to reference a second color besides `main`, the `--m-color-palette-<name>` token namespaces are available for use. This includes a named group for every color in the theme.
+However, if you need to reference a second color besides `main`, the `--m-color-<name>` token namespaces are available for use. This includes a named group for every color in the theme.
 
 ### Mapping variants to modes
 

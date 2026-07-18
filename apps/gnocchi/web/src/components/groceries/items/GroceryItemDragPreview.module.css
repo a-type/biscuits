@@ -17,8 +17,8 @@
 	user-select: none;
 	overflow: clip;
 	white-space: nowrap;
-	@apply --mx-borderColor(var(--m-color-neutral-ink));
-	border-radius: var(--m-radius-md);
-	padding: var(--m-space-md);
-	@apply --mx-bg(var(--m-color-neutral-paper));
+	@apply --mx-borderColor(var(--m-gray-ink));
+	border-radius: var(--m-rd-md);
+	padding: var(--m-sp-md);
+	@apply --mx-bg(var(--m-gray-paper));
 }

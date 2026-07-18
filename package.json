@@ -20,7 +20,9 @@
 		"create-app": "node ./scripts/create-app/create-app.mjs",
 		"provision-app": "node --env-file=.env ./scripts/provision-app.mjs",
 		"free-ports": "kill-port 6123 6124 6220 6221 6222 6223 6224 6225 6226 6227 6228 6229",
-		"compress-video": "node ./scripts/compress-video.mjs"
+		"compress-video": "node ./scripts/compress-video.mjs",
+		"report-m-css-usage": "node ./scripts/report-m-css-usage.mjs",
+		"test:arbor": "arbor validate --config ./apps/gnocchi/web/arbor.config.ts '**/src/**/*.css'"
 	},
 	"keywords": [],
 	"author": "",
@@ -38,7 +40,8 @@
 		"prettier": "3.4.2",
 		"turbo": "^2.3.3",
 		"typescript": "catalog:",
-		"typescript-eslint": "catalog:"
+		"typescript-eslint": "catalog:",
+		"@arbor-css/core": "catalog:"
 	},
 	"devDependencies": {}
 }

@@ -14,7 +14,7 @@
 	position: relative;
 	aspect-ratio: 1;
 	border-radius: --fn-literal(999px);
-	transition: all var(--m-duration) var(--m-easing);
+	transition: all var(--m-dur) var(--m-ease);
 }
 
 .pieInner {
@@ -27,8 +27,8 @@
 .pieLabel {
 	position: absolute;
 	border-radius: --fn-literal(999px);
-	padding-inline: var(--m-space);
-	padding-block: var(--m-space-xs);
-	background-color: var(--m-color-neutral-paper);
-	border: 1px solid var(--m-color-neutral-heavy);
+	padding-inline: var(--m-sp);
+	padding-block: var(--m-sp-xs);
+	background-color: var(--m-gray-paper);
+	border: 1px solid var(--m-gray-heavy);
 }

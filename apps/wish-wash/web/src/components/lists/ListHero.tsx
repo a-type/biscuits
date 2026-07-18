@@ -39,7 +39,7 @@ export function ListHero({ list, className }: ListHeroProps) {
 					fit="cover"
 					style={{
 						height: '20vh',
-						borderRadius: 'var(--m-radius-lg)',
+						borderRadius: 'var(--m-rd-lg)',
 					}}
 					src={coverImage.url}
 				/>

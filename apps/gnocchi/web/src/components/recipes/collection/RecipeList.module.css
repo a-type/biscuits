@@ -1,11 +1,11 @@
 .root {
-	margin-bottom: var(--m-space-xl);
+	margin-bottom: var(--m-sp-xl);
 }
 
 .controls {
-	margin-bottom: var(--m-space-sm);
+	margin-bottom: var(--m-sp-sm);
 	width: 100%;
-	padding-top: var(--m-space-sm);
+	padding-top: var(--m-sp-sm);
 }
 
 .search {
@@ -40,12 +40,12 @@
 }
 
 .loadTrigger {
-	margin-top: var(--m-space-lg);
+	margin-top: var(--m-sp-lg);
 	width: 100%;
 }
 
 .tagsFilter {
-	margin-bottom: var(--m-space-xs);
+	margin-bottom: var(--m-sp-xs);
 	font-size: var(--m-prose-ambient-size);
-	font-weight: var(--m-text-weight-normal);
+	font-weight: var(--m-fw-normal);
 }

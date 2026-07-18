@@ -1,14 +1,14 @@
 .bg {
 	@apply --mx-bg(
 		--fn-color-lighter(
-		--fn-color-desaturated(var(--m-color-main), 2),
+		--fn-color-desaturated(var(--m-tint), 2),
 		1)
 	);
 }
 
 .main {
 	@apply --mx-shadow(var(--m-shadow-lg));
-	@apply --mx-bg(var(--m-color-neutral-wash));
+	@apply --mx-bg(var(--m-gray-wash));
 	flex: 1;
 }
 
@@ -20,7 +20,7 @@
 .navFixed {
 	display: flex;
 	flex-direction: row;
-	padding-block: var(--m-space-sm);
+	padding-block: var(--m-sp-sm);
 	width: 100%;
 	@apply --mx-bg(transparent);
 
@@ -33,20 +33,20 @@
 }
 
 .logo {
-	width: 32px;
-	height: 32px;
-	@apply --mx-borderColor(var(--m-color-main-heavy));
-	border-radius: var(--m-radius-sm);
-	border-width: var(--m-lineWidth);
+	width: --fn-literal(32px);
+	height: --fn-literal(32px);
+	@apply --mx-borderColor(var(--m-tint));
+	border-radius: var(--m-rd-sm);
+	border-width: var(--m-lw);
 }
 
 .navTitle {
 	@apply --mx-prose-primary;
-	font-weight: var(--m-text-weight-bold);
+	font-weight: var(--m-fw-bold);
 	@apply --mx-fg(var(--color-main-ink));
 	margin: 0;
-	padding: var(--m-space-xs);
-	border-radius: var(--m-radius-lg);
+	padding: var(--m-sp-xs);
+	border-radius: var(--m-rd-lg);
 	@apply --mx-bg(var(--m-surface-ambient-bg));
 	font-family: Henrietta, 'Noto Serif', serif;
 }
@@ -67,15 +67,15 @@
 .heroTagline {
 	margin-top: 0;
 	display: block;
-	font-weight: var(--m-text-weight-normal);
+	font-weight: var(--m-fw-normal);
 	font-size: 10vmin;
-	@apply --mx-fg(var(--m-color-main-ink));
+	@apply --mx-fg(var(--m-tint));
 }
 
 .heroDescription {
 	margin: 0;
 	@apply --mx-prose-ambient;
-	@apply --mx-fg(var(--m-color-neutral-heavy));
+	@apply --mx-fg(var(--m-gray-heavy));
 	font-family:
 		system-ui,
 		-apple-system,
@@ -92,23 +92,22 @@
 
 .emphasis {
 	font-family: Henrietta, 'Noto Serif', serif;
-	font-weight: var(--m-text-weight-thin);
 }
 
 .carouselImage {
 	height: 100%;
 	width: auto;
-	border-radius: var(--m-radius-md);
+	border-radius: var(--m-rd-md);
 }
 
 .learnMore {
 	margin-inline-start: auto;
 	display: inline-flex;
 	align-items: center;
-	gap: var(--m-space-sm);
+	gap: var(--m-sp-sm);
 }
 
 .footer {
 	z-index: 1;
-	margin-top: 300px;
+	margin-top: --fn-literal(300px);
 }

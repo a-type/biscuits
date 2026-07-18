@@ -1,18 +1,18 @@
 .root {
 	pointer-events: none;
 	position: fixed;
-	top: var(--m-space-md);
-	right: var(--m-space-md);
+	top: var(--m-sp-md);
+	right: var(--m-sp-md);
 	z-index: 1000;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: var(--m-space-md);
-	border-radius: var(--m-surface-radius);
+	gap: var(--m-sp-md);
+	border-radius: var(--m-surface-rd);
 	opacity: 1;
-	transition: opacity var(--m-duration-short) var(--m-easing);
+	transition: opacity var(--m-dur-short) var(--m-ease);
 	transition-delay: 0.5s;
-	@apply --mx-bg(var(--m-color-neutral-wash));
+	@apply --mx-bg(var(--m-gray-wash));
 
 	&[aria-hidden='true'] {
 		opacity: 0;

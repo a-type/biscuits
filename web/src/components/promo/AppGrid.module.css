@@ -1,7 +1,7 @@
 .grid {
 	display: grid;
 	grid-template-columns: 1fr;
-	gap: var(--m-space-lg);
+	gap: var(--m-sp-lg);
 	width: 100%;
 	max-width: 1000px;
 
@@ -17,17 +17,17 @@
 		'icon name'
 		'description description';
 	align-items: center;
-	gap: var(--m-space-md);
-	padding: var(--m-space-md);
-	font-weight: var(--m-text-weight-normal);
+	gap: var(--m-sp-md);
+	padding: var(--m-sp-md);
+	font-weight: var(--m-fw-normal);
 	position: relative;
 }
 
 .name {
 	grid-area: name;
 	margin: 0;
-	font-size: var(--m-text-size);
-	font-weight: var(--m-text-weight-bold);
+	font-size: var(--m-fs);
+	font-weight: var(--m-fw-bold);
 	background: transparent;
 	font-family: Henrietta, 'Noto Serif', serif;
 }
@@ -40,18 +40,18 @@
 
 .description {
 	grid-area: description;
-	font-size: var(--m-text-size-sm);
-	padding: var(--m-space-md) !important;
-	@apply --mx-fg(var(--m-color-neutral-ink));
+	font-size: var(--m-fs-sm);
+	padding: var(--m-sp-md) !important;
+	@apply --mx-fg(var(--m-gray-ink));
 }
 
 .externalIcon {
 	position: absolute;
-	right: var(--m-space-lg);
-	top: var(--m-space-lg);
+	right: var(--m-sp-lg);
+	top: var(--m-sp-lg);
 	transition: transform 0.15s ease;
 
 	.cardMain:hover & {
-		transform: translate(var(--m-space-sm), calc(-1 * var(--m-space-sm)));
+		transform: translate(var(--m-sp-sm), calc(-1 * var(--m-sp-sm)));
 	}
 }

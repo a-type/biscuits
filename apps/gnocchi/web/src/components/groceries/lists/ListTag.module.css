@@ -1,8 +1,8 @@
 .root {
-	border-radius: var(--m-radius-md);
+	border-radius: var(--m-rd-md);
 	&:focus-within {
 		outline: none;
-		@apply --mx-ring(var(--m-color-main-heavy), 2px);
+		@apply --mx-ring(var(--m-tint), 2px);
 	}
 }
 
@@ -16,16 +16,16 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: var(--m-space-xs);
-	border-radius: var(--m-radius-md);
-	padding: var(--m-space-xs);
+	gap: var(--m-sp-xs);
+	border-radius: var(--m-rd-md);
+	padding: var(--m-sp-xs);
 	font-size: var(--m-prose-ambient-size);
-	@apply --mx-fg(var(--m-color-neutral-ink));
-	@apply --mx-bg(var(--m-color-main-light));
-	padding: var(--m-space-xs) var(--m-space-sm);
+	@apply --mx-fg(var(--m-gray-ink));
+	@apply --mx-bg(var(--m-tint));
+	padding: var(--m-sp-xs) var(--m-sp-sm);
 
 	@media (min-width: 900px) {
-		padding-inline: var(--m-space-sm);
+		padding-inline: var(--m-sp-sm);
 	}
 }
 

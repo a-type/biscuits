@@ -2,19 +2,19 @@
 	display: flex;
 	flex-direction: column;
 	align-items: start;
-	transition: all var(--m-duration) var(--m-easing);
+	transition: all var(--m-dur) var(--m-ease);
 
-	@apply --mx-bg(var(--m-color-main-wash));
-	@apply --mx-ring(--fn-ring(var(--m-color-main-wash), 16px));
+	@apply --mx-bg(var(--m-tint-wash));
+	@apply --mx-ring(--fn-ring(var(--m-tint-wash), 16px));
 
 	@media (min-width: 640px) {
-		border-radius: var(--m-radius);
-		@apply --mx-ring(--fn-ring(var(--m-color-main-wash), 8px));
+		border-radius: var(--m-rd);
+		@apply --mx-ring(--fn-ring(var(--m-tint-wash), 8px));
 	}
 }
 
 .tabsHeaderRoot {
-	margin-block-end: var(--m-space-md);
+	margin-block-end: var(--m-sp-md);
 	display: unset;
 }
 
@@ -22,13 +22,13 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: var(--m-space-sm);
-	padding-inline: var(--m-space-sm);
-	padding-block: var(--m-space-md);
+	gap: var(--m-sp-sm);
+	padding-inline: var(--m-sp-sm);
+	padding-block: var(--m-sp-md);
 }
 
 .tabsToggle {
-	margin: var(--m-space-xs);
+	margin: var(--m-sp-xs);
 	flex: 0 0 auto;
 }
 
@@ -41,15 +41,15 @@
 	overflow-x: auto;
 	border: none;
 	box-shadow: none;
-	background-color: var(--m-color-neutral-wash);
+	background-color: var(--m-gray-wash);
 	justify-self: start;
 }
 
 .tabsEmpty {
 	width: 100%;
-	padding: var(--m-space-md);
+	padding: var(--m-sp-md);
 	font-style: italic;
-	@apply --mx-fg(var(--m-color-neutral-heavy));
+	@apply --mx-fg(var(--m-gray-heavy));
 }
 
 .tab {
@@ -66,21 +66,21 @@
 .tabProgress {
 	position: absolute;
 	bottom: 0;
-	left: var(--m-space-sm);
-	right: var(--m-space-sm);
+	left: var(--m-sp-sm);
+	right: var(--m-sp-sm);
 	z-index: 1;
 	overflow: hidden;
-	border: var(--m-lineWidth) solid var(--m-color-main);
+	border: var(--m-lw) solid var(--m-tint);
 	border-bottom-width: 0;
 }
 
 .tabProgressIndicator {
-	height: 4px;
+	height: --fn-literal(4px);
 	width: 100%;
-	background-color: var(--m-color-palette-success);
+	background-color: var(--m-color-success);
 }
 
 .items {
 	margin: 0;
-	margin-block-end: var(--m-space-lg);
+	margin-block-end: var(--m-sp-lg);
 }

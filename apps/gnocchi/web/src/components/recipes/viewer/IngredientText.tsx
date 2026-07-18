@@ -83,7 +83,7 @@ export function IngredientTextRenderer({
 					<Text
 						bold
 						className="@mode-accent"
-						style={{ color: 'var(--m-color-main-heavy)' }}
+						style={{ color: 'var(--m-fg-light)' }}
 					>
 						{fractionToText(finalQuantity)}
 					</Text>

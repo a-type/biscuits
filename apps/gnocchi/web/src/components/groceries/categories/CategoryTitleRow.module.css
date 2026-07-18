@@ -2,28 +2,28 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	padding-block: var(--m-space-xs);
-	padding-inline: var(--m-space-sm);
+	padding-block: var(--m-sp-xs);
+	padding-inline: var(--m-sp-sm);
 	user-select: none;
 }
 
 .header {
 	@apply --mx-prose-ambient;
 	text-transform: uppercase;
-	font-weight: var(--m-text-weight-bold);
+	font-weight: var(--m-fw-bold);
 	font-style: italic;
-	@apply --mx-fg(var(--m-color-neutral-heavy));
+	@apply --mx-fg(var(--m-gray-heavy));
 	user-select: none;
 	margin: 0;
 	min-width: 0;
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	padding-inline-end: var(--m-space-xs);
+	padding-inline-end: var(--m-sp-xs);
 	flex: 1 0 0;
 
 	[data-is-item-dragging='true'] & {
-		font-size: var(--m-text-size-sm);
-		margin-top: var(--m-space-sm);
+		font-size: var(--m-fs-sm);
+		margin-top: var(--m-sp-sm);
 	}
 }

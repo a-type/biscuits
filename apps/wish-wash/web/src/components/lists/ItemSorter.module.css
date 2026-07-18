@@ -1,11 +1,11 @@
 .dialog {
 	left: auto;
-	right: var(--m-space-sm);
-	top: var(--m-space);
+	right: var(--m-sp-sm);
+	top: var(--m-sp);
 	height: 90dvh;
 	display: flex;
 	flex-direction: column;
-	transition: transform var(--m-duration) var(--m-easing);
+	transition: transform var(--m-dur) var(--m-ease);
 	opacity: 1;
 	transform: translateX(0);
 
@@ -17,16 +17,16 @@
 }
 
 .content {
-	padding: var(--m-space-sm);
+	padding: var(--m-sp-sm);
 }
 
 .item {
-	margin-bottom: var(--m-space-sm);
+	margin-bottom: var(--m-sp-sm);
 	display: flex;
 	flex-direction: row;
 	@apply --mx-surface-ambient;
 }
 
 .grabby {
-	margin-right: var(--m-space-sm);
+	margin-right: var(--m-sp-sm);
 }

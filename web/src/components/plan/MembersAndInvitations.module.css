@@ -7,15 +7,15 @@
 }
 
 .you {
-	font-weight: var(--m-text-weight-bold);
+	font-weight: var(--m-fw-bold);
 }
 
 .cardTitleRowMuted {
 	flex-direction: row;
-	@apply --mx-fg(var(--m-color-neutral-heavy));
+	@apply --mx-fg(var(--m-gray-heavy));
 }
 
 .membershipLimit {
-	padding-block: var(--m-space-md);
-	@apply --mx-fg(var(--m-color-neutral-heavy));
+	padding-block: var(--m-sp-md);
+	@apply --mx-fg(var(--m-gray-heavy));
 }

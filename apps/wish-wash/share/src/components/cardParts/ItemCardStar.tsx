@@ -25,8 +25,8 @@ export function ItemCardStar({
 			size={20}
 			style={{
 				position: 'absolute',
-				right: 'var(--m-space-md)',
-				top: 'var(--m-space-md)',
+				right: 'var(--m-sp-md)',
+				top: 'var(--m-sp-md)',
 				zIndex: 1,
 			}}
 			filled

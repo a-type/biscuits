@@ -25,7 +25,7 @@ export function ItemCardPurchaseButton({
 				gap="sm"
 				style={{
 					minHeight: 30,
-					paddingLeft: 'var(--m-space)',
+					paddingLeft: 'var(--m-sp)',
 				}}
 				className="@mode-dense"
 			>

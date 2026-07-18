@@ -72,7 +72,7 @@ export function ListPage({ data }: ListPageProps) {
 							<Img
 								fit="cover"
 								full="width"
-								style={{ height: '20dvh', borderRadius: 'var(--m-radius-lg)' }}
+								style={{ height: '20dvh', borderRadius: 'var(--m-rd-lg)' }}
 								src={snapshot.coverImageUrl}
 								crossOrigin="anonymous"
 							/>

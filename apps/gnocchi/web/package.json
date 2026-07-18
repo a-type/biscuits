@@ -12,7 +12,8 @@
 		"clear": "rm -rf node_modules/.vite",
 		"icons": "node ./scripts/generateIcons.js",
 		"tsc": "tsc --build tsconfig.json",
-		"assets": "pwa-assets-generator"
+		"assets": "pwa-assets-generator",
+		"test:arbor": "arbor validate './src/**/*.css'"
 	},
 	"dependencies": {
 		"@a-type/ui": "catalog:",

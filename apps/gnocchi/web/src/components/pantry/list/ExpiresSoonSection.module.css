@@ -1,11 +1,11 @@
 .root {
-	margin-block-end: var(--m-space-lg);
+	margin-block-end: var(--m-sp-lg);
 	display: flex;
 	flex-direction: column;
 }
 
 .title {
-	margin-inline-start: var(--m-space-md);
-	margin-block-end: var(--m-space-sm);
+	margin-inline-start: var(--m-sp-md);
+	margin-block-end: var(--m-sp-sm);
 	font-size: var(--m-prose-secondary-size);
 }

@@ -1,15 +1,15 @@
 .root {
-	@apply --mx-bg(var(--m-color-neutral-wash));
+	@apply --mx-bg(var(--m-gray-wash));
 	display: flex;
 	flex-direction: column;
-	gap: var(--m-space-sm);
-	border-radius: var(--m-radius-md);
-	padding: var(--m-space-md);
+	gap: var(--m-sp-sm);
+	border-radius: var(--m-rd-md);
+	padding: var(--m-sp-md);
 }
 
 .actions {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
-	gap: var(--m-space-sm);
+	gap: var(--m-sp-sm);
 }

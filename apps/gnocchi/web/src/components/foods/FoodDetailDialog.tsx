@@ -116,7 +116,7 @@ function FoodDetailView({
 						</Row>
 					)}
 					{!!frozenAt && (
-						<Row style={{ color: 'var(--m-color-accent-heavy)' }}>
+						<Row style={{ color: 'var(--m-accent-heavy)' }}>
 							<Icon name="snowflake" />
 							<Text emphasis="ambient" italic>
 								Frozen <RelativeTime value={frozenAt} />

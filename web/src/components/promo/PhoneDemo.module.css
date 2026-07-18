@@ -6,8 +6,8 @@
 	align-items: center;
 	justify-content: center;
 	overflow: hidden;
-	padding-inline: var(--m-space-xs);
-	padding-block: var(--m-space-xl);
+	padding-inline: var(--m-sp-xs);
+	padding-block: var(--m-sp-xl);
 }
 
 @keyframes drift-3d-left {
@@ -89,7 +89,7 @@
 	aspect-ratio: 11 / 24;
 	height: 30vh;
 	min-height: 0;
-	border-radius: var(--m-radius-sm);
+	border-radius: var(--m-rd-sm);
 	background-color: black;
 
 	@media (min-width: 640px) {
@@ -123,16 +123,16 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: var(--m-space-md);
+	padding: var(--m-sp-md);
 	text-align: center;
-	font-size: var(--m-text-size-lg);
-	@apply --mx-fg(var(--m-color-neutral-heavy));
+	font-size: var(--m-fs-lg);
+	@apply --mx-fg(var(--m-gray-heavy));
 }
 
 .media {
 	height: 100%;
 	width: 100%;
-	border-radius: var(--m-radius-sm);
+	border-radius: var(--m-rd-sm);
 	object-fit: cover;
 	object-position: center;
 }

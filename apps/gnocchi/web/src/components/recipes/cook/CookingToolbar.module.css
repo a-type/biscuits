@@ -1,14 +1,14 @@
 .root {
 	position: relative;
-	bottom: calc(var(--m-space-sm) * -1);
-	margin-bottom: var(--m-space-sm);
+	bottom: calc(var(--m-sp-sm) * -1);
+	margin-bottom: var(--m-sp-sm);
 	width: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 
 	@apply --mx-animation(fadeInUp);
-	animation-timing-function: var(--m-easing-out-loose);
+	animation-timing-function: var(--m-ease-out-loose);
 }
 
 .grid {
@@ -20,7 +20,7 @@
 	grid-template-areas: 'empty ingredients top';
 	width: 100%;
 	align-items: center;
-	gap: var(--m-space-sm);
+	gap: var(--m-sp-sm);
 }
 
 .ingredientsButton {
@@ -29,9 +29,9 @@
 	touch-action: none;
 	align-items: center;
 	justify-content: center;
-	gap: var(--m-space-sm);
+	gap: var(--m-sp-sm);
 	border-radius: --fn-literal(999px);
-	padding-block: var(--m-space-sm);
+	padding-block: var(--m-sp-sm);
 	@apply --mx-shadow(var(--m-shadow-lg));
 }
 
@@ -44,7 +44,7 @@
 
 .top {
 	grid-area: top;
-	margin-inline-end: var(--m-space-sm);
+	margin-inline-end: var(--m-sp-sm);
 	justify-self: end;
 	@apply --mx-shadow(var(--m-shadow-lg));
 }
@@ -53,21 +53,21 @@
 	position: relative;
 	width: 100%;
 	overflow: clip;
-	border-radius: var(--m-radius-lg);
-	@apply --mx-bg(var(--m-color-neutral-paper));
+	border-radius: var(--m-rd-lg);
+	@apply --mx-bg(var(--m-gray-paper));
 }
 
 .ingredientsInner {
-	margin-block-start: var(--m-space-sm);
+	margin-block-start: var(--m-sp-sm);
 	height: 100%;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	overflow: overlay;
-	padding: var(--m-space-md);
+	padding: var(--m-sp-md);
 	padding-block-end: calc(40px + env(safe-area-inset-bottom, 0px));
 }
 
 .wrap {
-	padding: var(--m-space-sm);
+	padding: var(--m-sp-sm);
 }

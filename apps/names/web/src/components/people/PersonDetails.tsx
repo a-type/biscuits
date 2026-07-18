@@ -155,7 +155,7 @@ function Location({ person }: { person: Person }) {
 							pointerEvents: 'none',
 							height: 200,
 							width: '100%',
-							borderRadius: 'var(--m-radius)',
+							borderRadius: 'var(--m-rd)',
 						}}
 					/>
 					{geolocation.get('label') && <span>{geolocation.get('label')}</span>}

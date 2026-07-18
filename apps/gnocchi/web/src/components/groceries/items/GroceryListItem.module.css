@@ -44,27 +44,27 @@
 	position: relative;
 	width: 100%;
 	user-select: none;
-	border-radius: var(--m-radius-lg);
-	transition: all var(--m-duration) var(--m-easing);
-	margin-top: var(--m-space-xs);
-	padding: var(--m-space-md);
+	border-radius: var(--m-rd-lg);
+	transition: all var(--m-dur) var(--m-ease);
+	margin-top: var(--m-sp-xs);
+	padding: var(--m-sp-md);
 	@apply --mx-borderColor(transparent);
 	@apply --mx-shadow;
 
 	&[data-dragging='true'] {
 		cursor: grabbing;
 		touch-action: none;
-		@apply --mx-borderColor(var(--m-color-neutral-light));
+		@apply --mx-borderColor(var(--m-gray-light));
 		box-shadow: var(--m-shadow-xl);
 	}
 
 	&[data-highlighted='true'] {
-		@apply --mx-bg(var(--m-color-main-wash));
+		@apply --mx-bg(var(--m-tint-wash));
 	}
 
 	&[data-menu-open='true'] {
-		@apply --mx-borderColor(var(--m-color-neutral));
-		@apply --mx-bg(var(--m-color-neutral-paper));
+		@apply --mx-borderColor(var(--m-gray));
+		@apply --mx-bg(var(--m-gray-paper));
 		@apply --mx-shadow(var(--m-shadow-md));
 	}
 
@@ -85,28 +85,28 @@
 }
 
 .content {
-	margin-right: var(--m-space-sm);
+	margin-right: var(--m-sp-sm);
 	min-width: 0;
 	display: flex;
 	flex: 1;
 	flex-direction: column;
 	align-items: start;
-	gap: var(--m-space-xs);
-	padding-block-start: var(--m-space-xs);
-	padding-inline: var(--m-space-xs);
-	margin-bottom: var(--m-space-md);
-	margin-left: var(--m-space-md);
+	gap: var(--m-sp-xs);
+	padding-block-start: var(--m-sp-xs);
+	padding-inline: var(--m-sp-xs);
+	margin-bottom: var(--m-sp-md);
+	margin-left: var(--m-sp-md);
 }
 
 .name {
 	position: relative;
-	margin-top: var(--m-space-xs);
+	margin-top: var(--m-sp-xs);
 	max-width: 100%;
 	min-width: 0;
 	display: flex;
 	flex-direction: row;
 	align-items: start;
-	gap: var(--m-space-xs);
+	gap: var(--m-sp-xs);
 	overflow: clip;
 	text-overflow: ellipsis;
 }
@@ -118,54 +118,54 @@
 	top: --fn-literal(15px);
 	height: --fn-literal(1px);
 	transform-origin: left;
-	animation: expand-scale-x var(--m-duration-short) cubic-bezier(0, 0, 0.2, 1);
-	border-bottom-width: var(--m-lineWidth);
+	animation: expand-scale-x var(--m-dur-short) cubic-bezier(0, 0, 0.2, 1);
+	border-bottom-width: var(--m-lw);
 	border-bottom-style: solid;
-	@apply --mx-borderColor(var(--m-color-neutral));
+	@apply --mx-borderColor(var(--m-gray));
 }
 
 .comment {
 	grid-area: comment;
 	align-self: stretch;
-	padding-left: var(--m-space-sm);
-	padding-right: var(--m-space-xs);
+	padding-left: var(--m-sp-sm);
+	padding-right: var(--m-sp-xs);
 	font-size: var(--m-prose-ambient-size);
 	font-style: italic;
-	@apply --mx-fg(var(--m-color-neutral-heavy));
+	@apply --mx-fg(var(--m-gray-heavy));
 }
 
 .accessories {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: var(--m-space-sm);
+	gap: var(--m-sp-sm);
 }
 
 .accessory {
-	margin-right: var(--m-space-xs);
+	margin-right: var(--m-sp-xs);
 	align-self: center;
 }
 
 .grab {
 	position: relative;
 	user-select: none;
-	padding-inline: var(--m-space-sm);
+	padding-inline: var(--m-sp-sm);
 	width: --fn-literal(15px);
 	height: --fn-literal(15px);
-	@apply --mx-fg(var(--m-color-neutral-heavy));
+	@apply --mx-fg(var(--m-gray-heavy));
 }
 
 .collapseTrigger {
 	flex-shrink: 0;
-	padding: var(--m-space-xs);
-	@apply --mx-fg(var(--m-color-neutral-heavy));
+	padding: var(--m-sp-xs);
+	@apply --mx-fg(var(--m-gray-heavy));
 
 	&[data-state='open'] .icon {
 		transform: rotate(180deg);
 	}
 
 	&:hover {
-		@apply --mx-fg(var(--m-color-neutral-ink));
+		@apply --mx-fg(var(--m-gray-ink));
 	}
 }
 
@@ -178,8 +178,8 @@
 	flex-direction: column;
 	align-items: end;
 	justify-content: end;
-	gap: var(--m-space-sm);
-	padding: var(--m-space-sm);
+	gap: var(--m-sp-sm);
+	padding: var(--m-sp-sm);
 	padding-top: 0;
 }
 
@@ -189,16 +189,16 @@
 	flex-direction: row;
 	align-items: center;
 	justify-content: end;
-	gap: var(--m-space-sm);
+	gap: var(--m-sp-sm);
 }
 
 .commentField {
-	margin-block: var(--m-space-xs);
+	margin-block: var(--m-sp-xs);
 	min-width: --fn-literal(60px);
 	flex-shrink: 1;
 	flex-grow: 2;
 	flex-basis: 50%;
-	@apply --mx-borderColor(var(--m-color-neutral-heavy));
+	@apply --mx-borderColor(var(--m-gray-heavy));
 
 	@media (min-width: 768px) {
 		flex-grow: 3;

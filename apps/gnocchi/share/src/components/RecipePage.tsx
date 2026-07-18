@@ -200,9 +200,9 @@ export function RecipePage({ data: response }: RecipePageProps) {
 					</Box>
 					<PageFixedArea
 						style={{
-							bottom: 'var(--m-space-md)',
+							bottom: 'var(--m-sp-md)',
 							top: 'auto',
-							marginBlockEnd: 'var(--m-space-md)',
+							marginBlockEnd: 'var(--m-sp-md)',
 							display: 'flex',
 							flexDirection: 'row',
 							justifyContent: 'flex-end',

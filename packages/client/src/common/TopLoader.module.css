@@ -7,7 +7,7 @@
 	height: --fn-literal(4px);
 	width: 100%;
 	opacity: 0;
-	transition: opacity var(--m-duration) var(--m-easing);
+	transition: opacity var(--m-dur) var(--m-ease);
 
 	&[data-state='visible'] {
 		opacity: 1;
@@ -27,5 +27,5 @@
 	top: 0;
 	left: 0;
 	height: 100%;
-	@apply --mx-bg(var(--m-color-accent));
+	@apply --mx-bg(var(--m-accent));
 }

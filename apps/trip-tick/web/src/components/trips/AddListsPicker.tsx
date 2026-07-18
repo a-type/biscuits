@@ -30,7 +30,7 @@ export function AddListsPicker({ trip, className }: AddListsPickerProps) {
 							}
 						}}
 						style={{
-							borderRadius: 'var(--m-radius)',
+							borderRadius: 'var(--m-rd)',
 						}}
 					>
 						<Icon name={active ? 'check' : 'plus'} />

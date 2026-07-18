@@ -229,7 +229,7 @@ function ChecklistItem({
 										height: '100%',
 										width: '1px',
 										left: `${(100 / computedQuantity) * (i + 1)}%`,
-										backgroundColor: 'var(--m-color-neutral-heavy)',
+										backgroundColor: 'var(--m-gray-heavy)',
 									}}
 								/>
 							))}

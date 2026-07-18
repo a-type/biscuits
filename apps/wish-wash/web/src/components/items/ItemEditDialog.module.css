@@ -1,6 +1,6 @@
 .images {
 	display: grid;
-	gap: var(--m-space-xs);
+	gap: var(--m-sp-xs);
 	@media (min-width: 640px) {
 		grid-template-columns: repeat(3, minmax(0, 1fr));
 	}
@@ -9,12 +9,12 @@
 .imageFieldImage {
 	height: 100%;
 	width: 100%;
-	border-radius: var(--m-radius-lg);
+	border-radius: var(--m-rd-lg);
 	object-fit: cover;
 }
 
 .imageFieldClear {
 	position: absolute;
-	top: var(--m-space-xs);
-	right: var(--m-space-xs);
+	top: var(--m-sp-xs);
+	right: var(--m-sp-xs);
 }

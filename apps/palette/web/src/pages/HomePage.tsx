@@ -22,7 +22,7 @@ export function HomePage({}: HomePageProps) {
 				step="intro"
 				style={{
 					marginInline: 'auto',
-					marginBottom: 'var(--m-space)',
+					marginBottom: 'var(--m-sp)',
 					maxWidth: 400,
 				}}
 			>

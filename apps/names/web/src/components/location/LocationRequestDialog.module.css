@@ -1,12 +1,12 @@
 .graphic {
-	@apply --mx-bg(var(--m-color-accent-wash));
+	@apply --mx-bg(var(--m-accent-wash));
 	position: relative;
 	height: 30vmin;
-	border-radius: var(--m-radius-lg);
+	border-radius: var(--m-rd-lg);
 }
 
 .iconWrapper {
-	@apply --mx-fg(var(--m-color-accent));
+	@apply --mx-fg(var(--m-accent));
 	position: absolute;
 	top: 50%;
 	z-index: 1;
@@ -17,7 +17,7 @@
 	align-items: center;
 	justify-content: center;
 	border-radius: --fn-literal(999px);
-	@apply --mx-bg(var(--m-color-accent-ink));
+	@apply --mx-bg(var(--m-accent-ink));
 	@apply --mx-bg-faded(10%);
 }
 

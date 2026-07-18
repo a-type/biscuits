@@ -2,8 +2,8 @@
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	gap: var(--m-space-lg);
-	padding-inline: var(--m-space-xl);
+	gap: var(--m-sp-lg);
+	padding-inline: var(--m-sp-xl);
 }
 
 .selfStart {

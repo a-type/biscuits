@@ -51,7 +51,7 @@ export function PreBuyExperienceContent({
 				item={item}
 				style={{
 					marginRight: 'auto',
-					backgroundColor: 'var(--m-color-accent-wash)',
+					backgroundColor: 'var(--m-accent-wash)',
 				}}
 			/>
 			<Dialog.Description>

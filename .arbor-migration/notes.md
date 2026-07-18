@@ -48,14 +48,14 @@ These were using a custom color system with `color-*` and `bg-*` utilities.
 
 | Legacy class         | Arbor equivalent                                               | Notes                                                                    |
 | -------------------- | -------------------------------------------------------------- | ------------------------------------------------------------------------ |
-| `color-primary-ink`  | `color: var(--m-color-main-ink)`                               | The web app uses `mainColor: 'lemon'` in arbor.config, so "main" = lemon |
-| `color-primary-dark` | `color: var(--m-color-main-heavy)`                             | "dark" maps to "heavy" shade                                             |
-| `color-primary-wash` | bg with `var(--m-color-main-wash)`                             | Very faint accent background                                             |
-| `bg-primary-wash`    | `@apply --mx-bg` with `var(--m-color-main-wash)`               |                                                                          |
+| `color-primary-ink`  | `color: var(--m-tint-ink)`                                     | The web app uses `mainColor: 'lemon'` in arbor.config, so "main" = lemon |
+| `color-primary-dark` | `color: var(--m-tint-heavy)`                                   | "dark" maps to "heavy" shade                                             |
+| `color-primary-wash` | bg with `var(--m-tint-wash)`                                   | Very faint accent background                                             |
+| `bg-primary-wash`    | `@apply --mx-bg` with `var(--m-tint-wash)`                     |                                                                          |
 | `bg-white`           | `background: white` or surface token                           | Literal white, use `--m-surface-primary-bg` if contextual                |
-| `color-black`        | `color: var(--m-color-neutral-ink)`                            | Neutral ink is nearly black                                              |
-| `color-gray-dark`    | `color: var(--m-color-neutral-heavy)`                          |                                                                          |
-| `color-gray-ink`     | `color: var(--m-color-neutral-ink)`                            |                                                                          |
+| `color-black`        | `color: var(--m-gray-ink)`                                     | Neutral ink is nearly black                                              |
+| `color-gray-dark`    | `color: var(--m-gray-heavy)`                                   |                                                                          |
+| `color-gray-ink`     | `color: var(--m-gray-ink)`                                     |                                                                          |
 | `bg-darken-2`        | Not directly mappable; use `@apply --mx-bg-heavier(--step: 2)` | Only works if bg was set with --mx-bg                                    |
 | `color-darken-1`     | Not directly mappable; use `@apply --mx-fg-heavier(--step: 1)` | Only works if fg was set with --mx-fg                                    |
 
@@ -68,9 +68,9 @@ Simple layout utilities (`flex`, `grid`, `gap-*`, `p-*`, etc.) are converted to 
 | Legacy class                      | Arbor equivalent                                                                                                                                            |
 | --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `font-fancy`                      | `font-family: Henrietta, 'Noto Serif', serif` literal — no Arbor token exists for display font, use literal or the `.font-fancy` global class from main.css |
-| `font-semibold` / `font-bold`     | `font-weight: var(--m-text-weight-bold)`                                                                                                                    |
-| `font-300` / `font-light`         | `font-weight: 300` (or `var(--m-text-weight-light)` if token exists)                                                                                        |
-| `text-sm` / `text-xs` / `text-lg` | `font-size: var(--m-text-size-sm)` etc.                                                                                                                     |
+| `font-semibold` / `font-bold`     | `font-weight: var(--m-fw-bold)`                                                                                                                             |
+| `font-300` / `font-light`         | `font-weight: 300` (or `var(--m-fw-light)` if token exists)                                                                                                 |
+| `text-sm` / `text-xs` / `text-lg` | `font-size: var(--m-fs-sm)` etc.                                                                                                                            |
 
 ## Opacity utilities
 

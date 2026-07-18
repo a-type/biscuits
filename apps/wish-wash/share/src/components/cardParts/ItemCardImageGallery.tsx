@@ -45,7 +45,7 @@ export function ItemCardImageGallery({
 						flexShrink: 1,
 						flexBasis: 200,
 						cursor: 'pointer',
-						borderRadius: 'var(--m-radius-lg)',
+						borderRadius: 'var(--m-rd-lg)',
 					}}
 					crossOrigin="anonymous"
 					src={url}

@@ -12,7 +12,7 @@ export function PreviewRequestPage({}: PreviewRequestPageProps) {
 						window.location.reload();
 					}}
 					thanksText="Thanks! That helps a lot!"
-					style={{ flex: 1, padding: 'var(--m-space-lg)' }}
+					style={{ flex: 1, padding: 'var(--m-sp-lg)' }}
 				/>
 			</PageContent>
 		</PageRoot>

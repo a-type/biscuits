@@ -14,26 +14,26 @@
 }
 
 .offline {
-	@apply --mx-fg(var(--m-color-palette-attention-heavy));
+	@apply --mx-fg(var(--m-color-attention-heavy));
 }
 
 .banner {
 	max-width: 300px;
-	padding-block: var(--m-space-xs);
-	padding-inline: var(--m-space-md);
+	padding-block: var(--m-sp-xs);
+	padding-inline: var(--m-sp-md);
 }
 
 .highlightedOption {
-	@apply --mx-bg(var(--m-color-main-wash));
-	@apply --mx-fg(var(--m-color-main-ink));
+	@apply --mx-bg(var(--m-bg-light));
+	@apply --mx-fg(var(--m-fg));
 
 	&:focus-visible {
-		@apply --mx-bg(var(--m-color-main-light));
+		@apply --mx-bg(var(--m-fg));
 	}
 }
 
 .installButton {
-	margin-block: var(--m-space-sm);
-	margin-inline: var(--m-space-md);
+	margin-block: var(--m-sp-sm);
+	margin-inline: var(--m-sp-md);
 	justify-content: space-between;
 }

@@ -5,7 +5,7 @@
 	height: --fn-literal(34px);
 	align-items: center;
 	justify-content: center;
-	border-radius: var(--m-action-radius);
+	border-radius: var(--m-action-rd);
 	right: --fn-literal(-4px);
 
 	@media (min-width: 768px) {
@@ -14,9 +14,9 @@
 }
 
 .content {
-	padding: var(--m-space-sm);
+	padding: var(--m-sp-sm);
 }
 
 .groupItemList {
-	gap: var(--m-space-sm);
+	gap: var(--m-sp-sm);
 }

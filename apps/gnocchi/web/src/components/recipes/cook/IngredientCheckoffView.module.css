@@ -4,7 +4,7 @@
 	display: flex;
 	flex-direction: column;
 	list-style: none;
-	gap: var(--m-space-md);
+	gap: var(--m-sp-md);
 	padding: 0;
 }
 
@@ -12,5 +12,5 @@
 	width: 100%;
 	display: flex;
 	flex-direction: row;
-	gap: var(--m-space-md);
+	gap: var(--m-sp-md);
 }

@@ -1,6 +1,6 @@
 .popup {
-	padding-inline: var(--m-space-md);
-	padding-block: var(--m-space-sm);
+	padding-inline: var(--m-sp-md);
+	padding-block: var(--m-sp-sm);
 }
 
 .progress {

@@ -4,7 +4,7 @@
 	display: grid;
 	grid-template-columns: 1fr;
 	align-items: start;
-	gap: var(--m-space-lg);
+	gap: var(--m-sp-lg);
 
 	@media (min-width: 768px) {
 		grid-template-columns: repeat(2, 1fr);
@@ -22,15 +22,15 @@
 	min-width: 0;
 	width: 100%;
 	flex: 1;
-	border: var(--m-lineWidth) solid;
-	@apply --mx-borderColor(var(--m-surface-secondary-borderColor));
-	border-radius: var(--m-surface-radius);
+	border: var(--m-lw) solid;
+	@apply --mx-borderColor(var(--m-surface-secondary-b-color));
+	border-radius: var(--m-surface-rd);
 	object-fit: contain;
 }
 
 .titleWrap {
 	border: none;
-	padding: var(--m-surface-padding);
+	padding: var(--m-surface-p);
 	@media (min-width: 768px) {
 		grid-column-end: span 2;
 	}
@@ -47,11 +47,11 @@
 	font-family: Henrietta, 'Noto Serif', serif;
 	font-size: 7vmax;
 	margin: 0;
-	margin-bottom: var(--m-space-xl);
+	margin-bottom: var(--m-sp-xl);
 	width: 100%;
-	font-weight: var(--m-text-weight-normal);
-	text-shadow: 0 0 16px var(--m-color-main-light);
-	@apply --mx-fg(var(--m-color-neutral-ink));
+	font-weight: var(--m-fw-normal);
+	text-shadow: 0 0 16px var(--m-tint-light);
+	@apply --mx-fg(var(--m-gray-ink));
 
 	@media (min-width: 768px) {
 		font-size: 7vmin;
@@ -59,10 +59,9 @@
 }
 
 .description {
-	margin-block: var(--m-space-xl);
+	margin-block: var(--m-sp-xl);
 	@apply --mx-prose-ambient;
-	font-weight: var(--m-text-weight-thin);
-	@apply --mx-fg(var(--m-color-neutral-ink));
+	@apply --mx-fg(var(--m-gray-ink));
 }
 
 .emoji {
@@ -78,7 +77,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: stretch;
-	@apply --mx-fg(var(--m-color-neutral-ink));
+	@apply --mx-fg(var(--m-gray-ink));
 	background: white;
 }
 
@@ -95,8 +94,8 @@
 	@apply --mx-prose-primary;
 	font-family: Henrietta, 'Noto Serif', serif;
 	margin: 0;
-	font-weight: var(--m-text-weight-bold);
-	@apply --mx-fg(var(--m-color-main-heavy));
+	font-weight: var(--m-fw-bold);
+	@apply --mx-fg(var(--m-tint-heavy));
 }
 
 /* Section component */
@@ -117,8 +116,8 @@
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	gap: var(--m-space-xl);
-	@apply --mx-bg(var(--m-color-main));
+	gap: var(--m-sp-xl);
+	@apply --mx-bg(var(--m-tint));
 }
 
 .contentInner {
@@ -128,13 +127,13 @@
 	margin-block: 0;
 	max-width: 800px;
 	width: 100%;
-	padding: var(--m-space-xl);
+	padding: var(--m-sp-xl);
 }
 
 /* FeatureSection */
 
 .gutterBottom {
-	margin-bottom: var(--m-space-md);
+	margin-bottom: var(--m-sp-md);
 }
 
 .featureItem {
@@ -144,7 +143,7 @@
 }
 
 .featureRow {
-	margin-block: var(--m-space-xs);
+	margin-block: var(--m-sp-xs);
 	display: flex;
 	flex-direction: row;
 	align-items: flex-start;
@@ -154,27 +153,27 @@
 	position: relative;
 	margin-inline-start: auto;
 	border-radius: --fn-literal(9999px);
-	padding-inline: var(--m-space-md);
-	padding-block: var(--m-space-xs);
-	font-size: var(--m-text-size-sm);
-	font-weight: var(--m-text-weight-bold);
+	padding-inline: var(--m-sp-md);
+	padding-block: var(--m-sp-xs);
+	font-size: var(--m-fs-sm);
+	font-weight: var(--m-fw-bold);
 	color: white;
-	top: calc(-1 * var(--m-space-xs));
-	@apply --mx-bg(var(--m-color-main-heavy));
+	top: calc(-1 * var(--m-sp-xs));
+	@apply --mx-bg(var(--m-tint-heavy));
 }
 
 /* Footer (promo) */
 
 .footerContent {
 	padding-bottom: 20dvh;
-	@apply --mx-bg(var(--m-color-main));
+	@apply --mx-bg(var(--m-tint));
 }
 
 .footerLinks {
-	margin-top: var(--m-space-lg);
+	margin-top: var(--m-sp-lg);
 	display: flex;
 	flex-direction: column;
-	gap: var(--m-space-md);
+	gap: var(--m-sp-md);
 }
 
 /* CallToAction */
@@ -188,12 +187,12 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: var(--m-space-sm);
-	border-top: var(--m-lineWidth) solid;
-	padding: var(--m-space-sm);
-	transition: background-color var(--m-duration) var(--m-easing);
-	@apply --mx-bg(var(--m-color-main-wash));
-	@apply --mx-borderColor(var(--m-color-main-heavy));
+	gap: var(--m-sp-sm);
+	border-top: var(--m-lw) solid;
+	padding: var(--m-sp-sm);
+	transition: background-color var(--m-dur) var(--m-ease);
+	@apply --mx-bg(var(--m-tint-wash));
+	@apply --mx-borderColor(var(--m-tint-heavy));
 }
 
 .ctaButtons {
@@ -202,12 +201,12 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
-	gap: var(--m-space-xs);
+	gap: var(--m-sp-xs);
 
 	@media (min-width: 640px) {
 		flex-direction: row-reverse;
 		justify-content: center;
-		gap: var(--m-space-lg);
+		gap: var(--m-sp-lg);
 	}
 }
 
@@ -226,6 +225,6 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: var(--m-space-md);
-	padding-block: var(--m-space-xs);
+	gap: var(--m-sp-md);
+	padding-block: var(--m-sp-xs);
 }

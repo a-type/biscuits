@@ -1,11 +1,11 @@
 .pip {
 	position: absolute;
-	right: var(--m-space-md);
-	top: var(--m-space-md);
+	right: var(--m-sp-md);
+	top: var(--m-sp-md);
 	width: --fn-literal(8px);
 	height: --fn-literal(8px);
 	border-radius: 50%;
-	@apply --mx-bg(var(--m-color-accent));
+	@apply --mx-bg(var(--m-accent));
 }
 
 .desktopOnly {
@@ -18,7 +18,7 @@
 
 .changelogItem {
 	&[data-new='true'] {
-		@apply --mx-bg(var(--m-color-accent-wash));
-		@apply --mx-fg(var(--m-color-accent-heavy));
+		@apply --mx-bg(var(--m-accent-wash));
+		@apply --mx-fg(var(--m-accent-heavy));
 	}
 }

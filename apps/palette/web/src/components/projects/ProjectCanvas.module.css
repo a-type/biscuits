@@ -41,7 +41,7 @@
 	height: calc(var(--size) / var(--zoom, 1));
 	width: calc(var(--size) / var(--zoom, 1));
 
-	@apply --mx-borderColor(var(--m-color-neutral-heavy));
+	@apply --mx-borderColor(var(--m-gray-heavy));
 	pointer-events: none;
 	position: fixed;
 	overflow: clip;
@@ -53,7 +53,7 @@
 }
 
 .pickerDot {
-	@apply --mx-borderColor(var(--m-color-neutral-heavy));
+	@apply --mx-borderColor(var(--m-gray-heavy));
 	position: absolute;
 	left: 50%;
 	top: 50%;
@@ -77,7 +77,7 @@
 	min-width: 0;
 	appearance: none;
 	border-radius: --fn-literal(999px);
-	@apply --mx-borderColor(var(--m-color-neutral-heavy));
+	@apply --mx-borderColor(var(--m-gray-heavy));
 	transform: translate(-50%, -50%);
 }
 
@@ -96,6 +96,6 @@
 	animation-duration: 20s;
 	animation-timing-function: linear;
 	border-style: dashed;
-	border-color: var(--m-color-neutral-paper);
+	border-color: var(--m-gray-paper);
 	border-radius: --fn-literal(999px);
 }

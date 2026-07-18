@@ -3,8 +3,8 @@
 	grid-template-columns: 1fr;
 	grid-template-rows: auto 1fr;
 	grid-template-areas: 'image' 'title';
-	margin-block-end: var(--m-space-lg);
-	gap: var(--m-space-md);
+	margin-block-end: var(--m-sp-lg);
+	gap: var(--m-sp-md);
 
 	@media (min-width: 768px) {
 		grid-template-columns: 1fr auto;
@@ -17,14 +17,14 @@
 	grid-area: title;
 	display: flex;
 	flex-direction: column;
-	gap: var(--m-space-sm);
+	gap: var(--m-sp-sm);
 }
 
 .topLineImage {
 	grid-area: image;
 	width: 100%;
 	object-fit: cover;
-	border-radius: var(--m-radius-sm);
+	border-radius: var(--m-rd-sm);
 	height: 30dvh;
 
 	@media (min-width: 768px) {

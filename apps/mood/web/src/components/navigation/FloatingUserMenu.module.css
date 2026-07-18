@@ -1,7 +1,7 @@
 .root {
 	position: fixed;
-	top: var(--m-space-sm);
-	right: var(--m-space-sm);
+	top: var(--m-sp-sm);
+	right: var(--m-sp-sm);
 	@apply --mx-surface-ambient;
 	border-radius: --fn-literal(999px);
 	@apply --mx-shadow(var(--m-shadow-md));

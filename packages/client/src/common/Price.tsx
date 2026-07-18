@@ -18,7 +18,7 @@ export function Price({
 		<span
 			style={{
 				textWrap: 'nowrap',
-				fontWeight: 'var(--m-text-weight-bold)',
+				fontWeight: 'var(--m-fw-bold)',
 			}}
 			className={className}
 			{...rest}

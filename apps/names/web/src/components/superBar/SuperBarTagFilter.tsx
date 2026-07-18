@@ -9,7 +9,7 @@ export function SuperBarTagFilter({}: SuperBarTagFilterProps) {
 	return (
 		<TagFilter
 			style={{
-				paddingBlock: 'var(--m-space-sm)',
+				paddingBlock: 'var(--m-sp-sm)',
 			}}
 			value={tagFilter}
 			onToggle={(name) =>

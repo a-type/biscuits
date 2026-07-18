@@ -1,6 +1,6 @@
 .picker {
 	width: 100%;
-	transition: height var(--m-duration) var(--m-easing);
+	transition: height var(--m-dur) var(--m-ease);
 
 	height: 100dvh;
 	&[data-has-value='true'] {
@@ -11,7 +11,7 @@
 .metadata {
 	max-width: --fn-literal(512px);
 	width: 100%;
-	border-top: var(--m-lineWidth-lg) solid var(--m-color-main-ink);
-	padding-bottom: var(--m-space-xl);
-	padding-top: var(--m-space);
+	border-top: var(--m-lw-lg) solid var(--m-tint-ink);
+	padding-bottom: var(--m-sp-xl);
+	padding-top: var(--m-sp);
 }

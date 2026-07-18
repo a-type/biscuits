@@ -1,17 +1,17 @@
 .toggleLabel {
-	font-size: var(--m-text-size-sm);
+	font-size: var(--m-fs-sm);
 	transition: color 0.15s ease;
 }
 
 .content {
-	margin-top: var(--m-space-xs);
+	margin-top: var(--m-sp-xs);
 	display: flex;
 	flex: 1;
 	flex-direction: column;
 	align-items: stretch;
-	gap: var(--m-space-xs);
+	gap: var(--m-sp-xs);
 }
 
 .subscriberNote {
-	font-weight: var(--m-text-weight-bold);
+	font-weight: var(--m-fw-bold);
 }

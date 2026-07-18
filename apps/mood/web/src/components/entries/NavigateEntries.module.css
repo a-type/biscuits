@@ -1,25 +1,25 @@
 .root {
 	position: fixed;
-	left: var(--m-space-sm);
-	top: var(--m-space-sm);
+	left: var(--m-sp-sm);
+	top: var(--m-sp-sm);
 	z-index: 1;
 }
 
 .day {
 	&[data-mood-value='-2'] {
-		@apply --mx-bg(var(--m-color-palette-attention));
+		@apply --mx-bg(var(--m-color-attention));
 	}
 	&[data-mood-value='-1'] {
-		@apply --mx-bg(var(--m-color-palette-attention-light));
+		@apply --mx-bg(var(--m-color-attention-light));
 	}
 	&[data-mood-value='0'] {
-		@apply --mx-bg(var(--m-color-main-wash));
+		@apply --mx-bg(var(--m-tint));
 	}
 	&[data-mood-value='1'] {
-		@apply --mx-bg(var(--m-color-palette-success-light));
+		@apply --mx-bg(var(--m-color-success-light));
 	}
 	&[data-mood-value='2'] {
-		@apply --mx-bg(var(--m-color-palette-success));
+		@apply --mx-bg(var(--m-color-success));
 	}
 
 	&[data-selected='true'] {

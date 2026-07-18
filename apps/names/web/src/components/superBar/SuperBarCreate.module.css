@@ -1,8 +1,8 @@
 .kbd {
-	padding-inline: var(--m-space);
-	padding-block: var(--m-space-xs);
+	padding-inline: var(--m-sp);
+	padding-block: var(--m-sp-xs);
 	font-family: monospace;
-	font-size: var(--m-text-size-sm);
+	font-size: var(--m-fs-sm);
 }
 
 .icon {

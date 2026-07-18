@@ -1,5 +1,5 @@
 .nested {
-	margin-inline-start: var(--m-space-md);
-	border-left: var(--m-lineWidth-lg) solid var(--m-color-neutral);
-	padding-inline-start: var(--m-space-lg);
+	margin-inline-start: var(--m-sp-md);
+	border-left: var(--m-lw-lg) solid var(--m-gray);
+	padding-inline-start: var(--m-sp-lg);
 }

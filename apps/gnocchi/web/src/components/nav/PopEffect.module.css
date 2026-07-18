@@ -6,12 +6,12 @@
 	transform: translate(-50%, -50%) scale(0%);
 	overflow: clip;
 	border-radius: 50%;
-	@apply --mx-bg(var(--m-color-main));
+	@apply --mx-bg(var(--m-tint));
 
 	&[data-active='true'] {
 		animation-name: pop;
 		animation-duration: 1.5s;
-		animation-timing-function: var(--m-easing);
+		animation-timing-function: var(--m-ease);
 		animation-iteration-count: 1;
 	}
 }
@@ -38,12 +38,12 @@
 	transform: translate(-50%, -50%) scale(0%);
 	overflow: clip;
 	border-radius: 50%;
-	@apply --mx-bg(var(--m-color-neutral-paper));
+	@apply --mx-bg(var(--m-gray-paper));
 
 	&[data-active='true'] {
 		animation-name: pop;
 		animation-duration: 1s;
-		animation-timing-function: var(--m-easing);
+		animation-timing-function: var(--m-ease);
 		animation-iteration-count: 1;
 		animation-delay: 500ms;
 	}

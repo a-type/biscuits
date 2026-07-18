@@ -1,7 +1,7 @@
 .picker {
 	transition-property: background-color, color;
-	transition-duration: var(--m-duration);
-	transition-timing-function: var(--m-easing);
+	transition-duration: var(--m-dur);
+	transition-timing-function: var(--m-ease);
 }
 
 .thumb {

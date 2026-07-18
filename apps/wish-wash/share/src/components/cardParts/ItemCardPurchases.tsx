@@ -41,7 +41,7 @@ export function ItemCardPurchases({
 			)}
 			style={{
 				...style,
-				color: 'var(--m-color-neutral-ink)',
+				color: 'var(--m-gray-ink)',
 			}}
 		>
 			<Text bold>

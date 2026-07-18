@@ -6,12 +6,12 @@
 
 .list {
 	align-items: center;
-	padding: var(--m-space-sm);
-	@apply --mx-bg(var(--m-color-neutral-paper));
+	padding: var(--m-sp-sm);
+	@apply --mx-bg(var(--m-gray-paper));
 }
 
 .listOuter {
-	border-radius: var(--m-radius-sm);
+	border-radius: var(--m-rd-sm);
 }
 
 .headingIcon {

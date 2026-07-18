@@ -1,9 +1,9 @@
 .root {
-	margin-bottom: var(--m-space-md);
+	margin-bottom: var(--m-sp-md);
 }
 
 .titleRow {
-	margin-bottom: var(--m-space-xs);
+	margin-bottom: var(--m-sp-xs);
 }
 
 .title {
@@ -11,7 +11,7 @@
 }
 
 .more {
-	margin-top: var(--m-space-md);
+	margin-top: var(--m-sp-md);
 	display: flex;
 	justify-content: center;
 }

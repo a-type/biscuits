@@ -63,7 +63,7 @@ function PieProgress({ value }: { value: number }) {
 				cy="50%"
 				strokeDasharray="100"
 				strokeDashoffset="100"
-				className="fill-gray-light"
+				className={cls.pieBg}
 			/>
 			<circle
 				r="50%"

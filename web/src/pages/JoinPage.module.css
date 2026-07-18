@@ -1,28 +1,28 @@
 .pageRoot {
-	@apply --mx-bg(var(--m-color-main-wash));
+	@apply --mx-bg(var(--m-tint-wash));
 }
 
 .pageContent {
-	@apply --mx-bg(var(--m-color-main-wash));
+	@apply --mx-bg(var(--m-tint-wash));
 }
 
 .mainCol {
 	width: 100%;
 	display: flex;
 	flex-direction: column;
-	gap: var(--m-space-xl);
+	gap: var(--m-sp-xl);
 }
 
 .heading {
-	@apply --mx-fg(var(--m-color-main-ink));
+	@apply --mx-fg(var(--m-tint-ink));
 }
 
 .topBar {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	gap: var(--m-space-sm);
-	padding-block: var(--m-space-sm);
+	gap: var(--m-sp-sm);
+	padding-block: var(--m-sp-sm);
 	background: transparent;
 }
 
@@ -30,7 +30,7 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	gap: var(--m-space-md);
+	gap: var(--m-sp-md);
 }
 
 .appName {
@@ -38,14 +38,14 @@
 }
 
 .divider {
-	margin-block: var(--m-space-xl);
+	margin-block: var(--m-sp-xl);
 }
 
 .featureItem {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	gap: var(--m-space-md);
+	gap: var(--m-sp-md);
 }
 
 .featureHeader {
@@ -53,22 +53,22 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 	align-items: center;
-	gap: var(--m-space-sm);
+	gap: var(--m-sp-sm);
 }
 
 .featureTitle {
 	margin-block: 0;
-	font-size: var(--m-text-size-md);
-	font-weight: var(--m-text-weight-normal);
+	font-size: var(--m-fs-md);
+	font-weight: var(--m-fw-normal);
 }
 
 .premiumBadge {
 	border-radius: --fn-literal(9999px);
-	padding-inline: var(--m-space-sm);
-	padding-block: var(--m-space-xs);
-	font-size: var(--m-text-size-sm);
+	padding-inline: var(--m-sp-sm);
+	padding-block: var(--m-sp-xs);
+	font-size: var(--m-fs-sm);
 	color: white;
-	@apply --mx-bg(var(--m-color-accent-heavy));
+	@apply --mx-bg(var(--m-accent-heavy));
 }
 
 .featureDescription {
@@ -79,10 +79,10 @@
 	max-width: 100%;
 	min-width: 0;
 	flex: 1 0 0;
-	border: var(--m-lineWidth) solid;
-	border-radius: var(--m-radius-sm);
+	border: var(--m-lw) solid;
+	border-radius: var(--m-rd-sm);
 	object-fit: contain;
 	@apply --mx-borderColor {
-		--color: var(--m-color-neutral-ink);
+		--color: var(--m-gray-ink);
 	}
 }
