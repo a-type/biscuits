@@ -69,7 +69,7 @@ export function RecipeTagsFullEditor({
 			}}
 		>
 			<TagCombobox.Chips style={{ width: '100%' }} className={className}>
-				<TagCombobox.MultiValue>
+				<TagCombobox.MultiValue className="w-full">
 					{(tags) => (
 						<>
 							<TagCombobox.ChipsList>

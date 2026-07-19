@@ -13,8 +13,8 @@ catalogs:
       specifier: 2.1.3
       version: 2.1.3
     '@a-type/ui':
-      specifier: ^6.1.2
-      version: 6.1.2
+      specifier: ^6.1.4
+      version: 6.1.4
     '@a-type/utils':
       specifier: ^1.1.9
       version: 1.1.9
@@ -268,7 +268,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.2(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -393,7 +393,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.2(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -540,7 +540,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.2(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -799,7 +799,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.2(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -905,7 +905,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.2(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1017,7 +1017,7 @@ importers:
         version: 0.2.15(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.2(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1138,7 +1138,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.2(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1259,7 +1259,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.2(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1303,7 +1303,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.2(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@biscuits/graphql':
         specifier: workspace:*
         version: link:../../../packages/graphql
@@ -1401,7 +1401,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.2(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1513,7 +1513,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.2(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@astrojs/check':
         specifier: ^0.9.4
         version: 0.9.4(prettier@3.6.2)(typescript@6.0.3)
@@ -1555,7 +1555,7 @@ importers:
         version: 2.1.3
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.2(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1703,7 +1703,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.2(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@arbor-css/core':
         specifier: 'catalog:'
         version: 0.0.145
@@ -2015,8 +2015,8 @@ packages:
       react: ^18.3.1
       react-dom: ^18.3.1
 
-  '@a-type/ui@6.1.2':
-    resolution: {integrity: sha512-D980jFEdYR/GSQ3F6S2PoNv9Q0itd6Fa0GfN9oo7br6Ad752uUe36eRCGQxmIcuZt6uxWOkn7ZlUizuLVh8NLQ==}
+  '@a-type/ui@6.1.4':
+    resolution: {integrity: sha512-BGPZaUNO47/HWwtG+cIHxSi6I8ILPq6xp50sX7uaT5BvBAL3zEWLoGeKKBjMliPBr/C6UtKZwksoUSeQ+JhWhg==}
     engines: {node: '>=24'}
     peerDependencies:
       '@arbor-css/core': ^0.0.144
@@ -10863,7 +10863,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@a-type/ui@6.1.2(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
+  '@a-type/ui@6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
     dependencies:
       '@a-type/utils': 1.1.9
       '@arbor-css/core': 0.0.145
