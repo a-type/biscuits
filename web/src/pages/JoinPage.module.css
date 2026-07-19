@@ -82,7 +82,5 @@
 	border: var(--m-lw) solid;
 	border-radius: var(--m-rd-sm);
 	object-fit: contain;
-	@apply --mx-borderColor {
-		--color: var(--m-gray-ink);
-	}
+	@apply --mx-borderColor(var(--m-gray-ink));
 }

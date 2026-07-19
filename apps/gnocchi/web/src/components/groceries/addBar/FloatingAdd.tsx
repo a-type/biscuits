@@ -24,6 +24,7 @@ export function FloatingAdd({ className, ...rest }: FloatingAddProps) {
 					ref={particleRef}
 					emphasis="primary"
 					className={clsx(cls.trigger, className)}
+					aria-label="Add an item"
 					{...rest}
 				>
 					<Icon name="plus" size={20} />

@@ -25,7 +25,6 @@ export function getVerdantSync<Presence>({
 		} satisfies BiscuitsVerdantProfile,
 		useBroadcastChannel: true,
 		fetchAuth: async () => {
-			console.log('HERE');
 			const response = await fetch(
 				`${CONFIG.API_ORIGIN}/verdant/token/${appId}?access=${access}`,
 				{

@@ -13,8 +13,8 @@ catalogs:
       specifier: 2.1.3
       version: 2.1.3
     '@a-type/ui':
-      specifier: ^6.1.4
-      version: 6.1.4
+      specifier: ^6.1.5
+      version: 6.1.5
     '@a-type/utils':
       specifier: ^1.1.9
       version: 1.1.9
@@ -199,8 +199,8 @@ catalogs:
       specifier: ^7.4.0
       version: 7.4.1
     wrangler:
-      specifier: 4.107.0
-      version: 4.107.0
+      specifier: 4.112.0
+      version: 4.112.0
     zod:
       specifier: ^4.1.12
       version: 4.4.3
@@ -271,7 +271,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.5(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -396,7 +396,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.5(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -466,7 +466,7 @@ importers:
         version: 0.0.145(@arbor-css/core@0.0.145)
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
-        version: 1.45.1(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(wrangler@4.107.0)
+        version: 1.45.1(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(wrangler@4.112.0)
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.2
@@ -490,7 +490,7 @@ importers:
         version: 6.1.1(typescript@6.0.3)(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.107.0
+        version: 4.112.0
 
   apps/gnocchi/share-schema:
     dependencies:
@@ -543,7 +543,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.5(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -811,7 +811,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.5(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -917,7 +917,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.5(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1029,7 +1029,7 @@ importers:
         version: 0.2.15(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.5(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1150,7 +1150,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.5(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1271,7 +1271,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.5(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1315,7 +1315,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.5(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@biscuits/graphql':
         specifier: workspace:*
         version: link:../../../packages/graphql
@@ -1358,7 +1358,7 @@ importers:
         version: 0.0.145(@arbor-css/core@0.0.145)
       '@cloudflare/vite-plugin':
         specifier: 'catalog:'
-        version: 1.45.1(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(wrangler@4.107.0)
+        version: 1.45.1(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(wrangler@4.112.0)
       '@types/node':
         specifier: 'catalog:'
         version: 24.13.2
@@ -1382,7 +1382,7 @@ importers:
         version: 6.1.1(typescript@6.0.3)(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
       wrangler:
         specifier: 'catalog:'
-        version: 4.107.0
+        version: 4.112.0
 
   apps/wish-wash/share-schema:
     dependencies:
@@ -1413,7 +1413,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.5(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1525,7 +1525,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.5(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@astrojs/check':
         specifier: ^0.9.4
         version: 0.9.4(prettier@3.6.2)(typescript@6.0.3)
@@ -1567,7 +1567,7 @@ importers:
         version: 2.1.3
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.5(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1715,7 +1715,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+        version: 6.1.5(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       '@arbor-css/core':
         specifier: 'catalog:'
         version: 0.0.145
@@ -1938,7 +1938,7 @@ importers:
         version: 14.25.0
       wrangler:
         specifier: 'catalog:'
-        version: 4.107.0
+        version: 4.112.0
       zod:
         specifier: ^4.1.11
         version: 4.1.11
@@ -1988,7 +1988,7 @@ importers:
     devDependencies:
       wrangler:
         specifier: 'catalog:'
-        version: 4.107.0
+        version: 4.112.0
 
 packages:
 
@@ -2003,7 +2003,6 @@ packages:
   '@0no-co/graphqlsp@1.12.16':
     resolution: {integrity: sha512-B5pyYVH93Etv7xjT6IfB7QtMBdaaC07yjbhN6v8H7KgFStMkPvi+oWYBTibMFRMY89qwc9H8YixXg8SXDVgYWw==}
     peerDependencies:
-      graphql: ^15.5.0 || ^16.0.0 || ^17.0.0
       typescript: ^5.0.0
 
   '@a-type/auth-email-ses@2.1.16':
@@ -2028,8 +2027,8 @@ packages:
       react: ^18.3.1
       react-dom: ^18.3.1
 
-  '@a-type/ui@6.1.4':
-    resolution: {integrity: sha512-BGPZaUNO47/HWwtG+cIHxSi6I8ILPq6xp50sX7uaT5BvBAL3zEWLoGeKKBjMliPBr/C6UtKZwksoUSeQ+JhWhg==}
+  '@a-type/ui@6.1.5':
+    resolution: {integrity: sha512-7UPfy52vUiE/MCTEuDQCjpCmvg7U2Q/r5C8z0MgmhDthWPfwyDnbVRMtaprZRGZBEe8UeUUid0+ibkMHP/InHQ==}
     engines: {node: '>=24'}
     peerDependencies:
       '@arbor-css/core': ^0.0.144
@@ -2952,22 +2951,10 @@ packages:
       vite: ^6.1.0 || ^7.0.0 || ^8.0.0
       wrangler: ^4.112.0
 
-  '@cloudflare/workerd-darwin-64@1.20260701.1':
-    resolution: {integrity: sha512-Zd9Y1bah6DwwBN2RW8vJohffQrIUazb8UXnqSNecOxM+jJLhUuvv5IOG8dbHcV83TyZAubea6gsQXo2yH1lDdw==}
-    engines: {node: '>=16'}
-    cpu: [x64]
-    os: [darwin]
-
   '@cloudflare/workerd-darwin-64@1.20260714.1':
     resolution: {integrity: sha512-ZWXqAN8G7Cx9hMRQuk+59ziJhR3j1F4iO+Qs8aHdfKZ3Dq5Yi/57xvkJTgCGBnW1YU/L78r8f6HEy51bwbTpNw==}
     engines: {node: '>=16'}
     cpu: [x64]
-    os: [darwin]
-
-  '@cloudflare/workerd-darwin-arm64@1.20260701.1':
-    resolution: {integrity: sha512-yBLsjS1qCWqFyCY37qRUrYfzHHvMGvjh8zRKJ6MvUivYDhkZTzqduppK38FoqYvayLJ5KbcxH7zo5rkxGqbsaA==}
-    engines: {node: '>=16'}
-    cpu: [arm64]
     os: [darwin]
 
   '@cloudflare/workerd-darwin-arm64@1.20260714.1':
@@ -2976,22 +2963,10 @@ packages:
     cpu: [arm64]
     os: [darwin]
 
-  '@cloudflare/workerd-linux-64@1.20260701.1':
-    resolution: {integrity: sha512-vMfqSIMfoo4xmZXEuUVqLpSFS921YKjiR9q7kDXPi6Vld1PK74UHg9LZuBavT2KSyemHUCTpj9y/4JSYOEyQbQ==}
-    engines: {node: '>=16'}
-    cpu: [x64]
-    os: [linux]
-
   '@cloudflare/workerd-linux-64@1.20260714.1':
     resolution: {integrity: sha512-1VChTZRb0l0F7R4e1G5RtLKV4oFi6x+rQgxh2+yu887j3l/3TLgatuv1L8/5zhc9gKEhATTxOh0e52Rtd9dDWQ==}
     engines: {node: '>=16'}
     cpu: [x64]
-    os: [linux]
-
-  '@cloudflare/workerd-linux-arm64@1.20260701.1':
-    resolution: {integrity: sha512-HRfwbKU2pK44V2NhoM0+iH0JJSj7nQ9Wv13ifIiGYCmTtDL8/zKtEhX7kQ3D4Vy/Cpjhttl0FkfqXj1aqLDPPg==}
-    engines: {node: '>=16'}
-    cpu: [arm64]
     os: [linux]
 
   '@cloudflare/workerd-linux-arm64@1.20260714.1':
@@ -2999,12 +2974,6 @@ packages:
     engines: {node: '>=16'}
     cpu: [arm64]
     os: [linux]
-
-  '@cloudflare/workerd-windows-64@1.20260701.1':
-    resolution: {integrity: sha512-ngxCiIN9s/fM2o1IBMD0o1/mcXrv2NJVdyznh51UH8sQuvrTrXvV2nM0Uj/qU2wMwF6prgNBcdcd7AZeZGiBQA==}
-    engines: {node: '>=16'}
-    cpu: [x64]
-    os: [win32]
 
   '@cloudflare/workerd-windows-64@1.20260714.1':
     resolution: {integrity: sha512-cGqnU3Hg2YZS/k3SAqrMp1DjpdsyFde72tWltdl6ZT9+SFz/Zrk/8gyTU1TcxC4YApXeNVH5TyU5cOGPgUJ0pg==}
@@ -8666,11 +8635,6 @@ packages:
     resolution: {integrity: sha512-z0yWI+4FDrrweS8Zmt4Ej5HdJmky15+L2e6Wgn3+iK5fWzb6T3fhNFq2+MeTRb064c6Wr4N/wv0DzQTjNzHNGQ==}
     engines: {node: '>=10'}
 
-  miniflare@4.20260701.0:
-    resolution: {integrity: sha512-L6eAAi6IKtyb/7J6L+YsH2vb1yBrJWKRXI293JYDiMl70+6nncdAgigex58w6WBd+CwvdMsqOyNyGs95Op5gWQ==}
-    engines: {node: '>=22.0.0'}
-    hasBin: true
-
   miniflare@4.20260714.0:
     resolution: {integrity: sha512-MYlTCLdWCPqvrYY2uLwOjXwmglXuiHE3TGGkbOW4BwjUPa1r07E0iuHwrNDIs/sxK21r+o90Jx58AV2KeNdJZw==}
     engines: {node: '>=22.0.0'}
@@ -10760,22 +10724,17 @@ packages:
   workbox-window@7.4.1:
     resolution: {integrity: sha512-notZDH2u8VXaqyuD7xaqIfEFi6SRM4SUSd7ewe9PDsVqADuepxX2ZMY3uvuZGxzY5ZOsGC/vD3A/3smFtJt4/A==}
 
-  workerd@1.20260701.1:
-    resolution: {integrity: sha512-uF813NG09JwNRRUfJ0zBomyTslSPM810dMj9LVvkQ7RAkLrQLzAlPU8Xh/3dIqZDo2bfd7tChbf2PtqLRARRJQ==}
-    engines: {node: '>=16'}
-    hasBin: true
-
   workerd@1.20260714.1:
     resolution: {integrity: sha512-oIbQzfdyl9UQUnG6XLegcSq0Mgt/7WKDbFOoqGgOWCS+/fhyGB460uKEgdAQQ9RHCO/ttcNCX/KiMIQzdoeu3Q==}
     engines: {node: '>=16'}
     hasBin: true
 
-  wrangler@4.107.0:
-    resolution: {integrity: sha512-fw69ThymNitZ0oIEBU2yNeq3kK59UKz/jyA3udwRrQIAIsxX57q5qLOpPTN7qc5t8n9pnUeofe0uxtMuhQZW8w==}
+  wrangler@4.112.0:
+    resolution: {integrity: sha512-5H+XUD0TySCv1LuktFHDIEOkboH2nTfQs+35L+USt3MtntjDTMVIJprLgQcL2WBjulOyjxpd1vyTiSTJVW5MjQ==}
     engines: {node: '>=22.0.0'}
     hasBin: true
     peerDependencies:
-      '@cloudflare/workers-types': ^4.20260701.1
+      '@cloudflare/workers-types': ^5.20260714.1
     peerDependenciesMeta:
       '@cloudflare/workers-types':
         optional: true
@@ -10954,13 +10913,7 @@ snapshots:
     optionalDependencies:
       graphql: 16.11.0
 
-  '@0no-co/graphqlsp@1.12.16(graphql@16.10.0)(typescript@6.0.3)':
-    dependencies:
-      '@gql.tada/internal': 1.0.9(graphql@16.10.0)(typescript@6.0.3)
-      graphql: 16.10.0
-      typescript: 6.0.3
-
-  '@0no-co/graphqlsp@1.12.16(graphql@16.11.0)(typescript@6.0.3)':
+  '@0no-co/graphqlsp@1.12.16(typescript@6.0.3)':
     dependencies:
       '@gql.tada/internal': 1.0.9(graphql@16.11.0)(typescript@6.0.3)
       graphql: 16.11.0
@@ -11013,7 +10966,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@a-type/ui@6.1.4(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
+  '@a-type/ui@6.1.5(@arbor-css/core@0.0.145)(@types/react@19.2.17)(react-dom@19.2.7(react@19.2.7))(react@19.2.7)':
     dependencies:
       '@a-type/utils': 1.1.9
       '@arbor-css/core': 0.0.145
@@ -12485,56 +12438,35 @@ snapshots:
 
   '@cloudflare/kv-asset-handler@0.5.0': {}
 
-  '@cloudflare/unenv-preset@2.16.1(unenv@2.0.0-rc.24)(workerd@1.20260701.1)':
-    dependencies:
-      unenv: 2.0.0-rc.24
-    optionalDependencies:
-      workerd: 1.20260701.1
-
   '@cloudflare/unenv-preset@2.16.1(unenv@2.0.0-rc.24)(workerd@1.20260714.1)':
     dependencies:
       unenv: 2.0.0-rc.24
     optionalDependencies:
       workerd: 1.20260714.1
 
-  '@cloudflare/vite-plugin@1.45.1(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(wrangler@4.107.0)':
+  '@cloudflare/vite-plugin@1.45.1(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))(wrangler@4.112.0)':
     dependencies:
       '@cloudflare/unenv-preset': 2.16.1(unenv@2.0.0-rc.24)(workerd@1.20260714.1)
       miniflare: 4.20260714.0
       unenv: 2.0.0-rc.24
       vite: 8.0.5(@emnapi/runtime@1.9.2)(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1)
       workerd: 1.20260714.1
-      wrangler: 4.107.0
+      wrangler: 4.112.0
       ws: 8.21.0
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
 
-  '@cloudflare/workerd-darwin-64@1.20260701.1':
-    optional: true
-
   '@cloudflare/workerd-darwin-64@1.20260714.1':
-    optional: true
-
-  '@cloudflare/workerd-darwin-arm64@1.20260701.1':
     optional: true
 
   '@cloudflare/workerd-darwin-arm64@1.20260714.1':
     optional: true
 
-  '@cloudflare/workerd-linux-64@1.20260701.1':
-    optional: true
-
   '@cloudflare/workerd-linux-64@1.20260714.1':
     optional: true
 
-  '@cloudflare/workerd-linux-arm64@1.20260701.1':
-    optional: true
-
   '@cloudflare/workerd-linux-arm64@1.20260714.1':
-    optional: true
-
-  '@cloudflare/workerd-windows-64@1.20260701.1':
     optional: true
 
   '@cloudflare/workerd-windows-64@1.20260714.1':
@@ -13000,14 +12932,14 @@ snapshots:
 
   '@gql.tada/cli-utils@1.7.1(graphql@16.11.0)(typescript@6.0.3)':
     dependencies:
-      '@0no-co/graphqlsp': 1.12.16(graphql@16.11.0)(typescript@6.0.3)
+      '@0no-co/graphqlsp': 1.12.16(typescript@6.0.3)
       '@gql.tada/internal': 1.0.8(graphql@16.11.0)(typescript@6.0.3)
       graphql: 16.11.0
       typescript: 6.0.3
 
   '@gql.tada/cli-utils@1.7.3(typescript@6.0.3)':
     dependencies:
-      '@0no-co/graphqlsp': 1.12.16(graphql@16.11.0)(typescript@6.0.3)
+      '@0no-co/graphqlsp': 1.12.16(typescript@6.0.3)
       '@gql.tada/internal': 1.0.9(graphql@16.11.0)(typescript@6.0.3)
       graphql: 16.11.0
       typescript: 6.0.3
@@ -17225,7 +17157,7 @@ snapshots:
   gql.tada@1.9.2(graphql@16.10.0)(typescript@6.0.3):
     dependencies:
       '@0no-co/graphql.web': 1.0.12(graphql@16.10.0)
-      '@0no-co/graphqlsp': 1.12.16(graphql@16.10.0)(typescript@6.0.3)
+      '@0no-co/graphqlsp': 1.12.16(typescript@6.0.3)
       '@gql.tada/cli-utils': 1.7.3(typescript@6.0.3)
       '@gql.tada/internal': 1.0.9(graphql@16.10.0)(typescript@6.0.3)
       typescript: 6.0.3
@@ -17237,7 +17169,7 @@ snapshots:
   gql.tada@1.9.2(graphql@16.11.0)(typescript@6.0.3):
     dependencies:
       '@0no-co/graphql.web': 1.0.12(graphql@16.11.0)
-      '@0no-co/graphqlsp': 1.12.16(graphql@16.11.0)(typescript@6.0.3)
+      '@0no-co/graphqlsp': 1.12.16(typescript@6.0.3)
       '@gql.tada/cli-utils': 1.7.3(typescript@6.0.3)
       '@gql.tada/internal': 1.0.9(graphql@16.11.0)(typescript@6.0.3)
       typescript: 6.0.3
@@ -18638,18 +18570,6 @@ snapshots:
       mime-db: 1.52.0
 
   mimic-response@3.1.0: {}
-
-  miniflare@4.20260701.0:
-    dependencies:
-      '@cspotcode/source-map-support': 0.8.1
-      sharp: 0.34.5
-      undici: 7.28.0
-      workerd: 1.20260701.1
-      ws: 8.21.0
-      youch: 4.1.0-beta.10
-    transitivePeerDependencies:
-      - bufferutil
-      - utf-8-validate
 
   miniflare@4.20260714.0:
     dependencies:
@@ -21067,14 +20987,6 @@ snapshots:
       '@types/trusted-types': 2.0.7
       workbox-core: 7.4.1
 
-  workerd@1.20260701.1:
-    optionalDependencies:
-      '@cloudflare/workerd-darwin-64': 1.20260701.1
-      '@cloudflare/workerd-darwin-arm64': 1.20260701.1
-      '@cloudflare/workerd-linux-64': 1.20260701.1
-      '@cloudflare/workerd-linux-arm64': 1.20260701.1
-      '@cloudflare/workerd-windows-64': 1.20260701.1
-
   workerd@1.20260714.1:
     optionalDependencies:
       '@cloudflare/workerd-darwin-64': 1.20260714.1
@@ -21083,16 +20995,16 @@ snapshots:
       '@cloudflare/workerd-linux-arm64': 1.20260714.1
       '@cloudflare/workerd-windows-64': 1.20260714.1
 
-  wrangler@4.107.0:
+  wrangler@4.112.0:
     dependencies:
       '@cloudflare/kv-asset-handler': 0.5.0
-      '@cloudflare/unenv-preset': 2.16.1(unenv@2.0.0-rc.24)(workerd@1.20260701.1)
+      '@cloudflare/unenv-preset': 2.16.1(unenv@2.0.0-rc.24)(workerd@1.20260714.1)
       blake3-wasm: 2.1.5
       esbuild: 0.28.1
-      miniflare: 4.20260701.0
+      miniflare: 4.20260714.0
       path-to-regexp: 6.3.0
       unenv: 2.0.0-rc.24
-      workerd: 1.20260701.1
+      workerd: 1.20260714.1
     optionalDependencies:
       fsevents: 2.3.3
     transitivePeerDependencies:

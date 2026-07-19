@@ -29,7 +29,13 @@ export function RecipeCollectionMenu({ className }: RecipeCollectionMenuProps) {
 			</Suspense>
 			<DropdownMenu open={open} onOpenChange={setOpen}>
 				<DropdownMenu.Trigger
-					render={<Button emphasis="ghost" className={className} />}
+					render={
+						<Button
+							emphasis="ghost"
+							className={className}
+							aria-label="Show recipe menu"
+						/>
+					}
 				>
 					<Icon name="dots" />
 				</DropdownMenu.Trigger>

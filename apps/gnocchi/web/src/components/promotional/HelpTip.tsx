@@ -10,12 +10,15 @@ import { ReactNode } from 'react';
 
 export interface HelpTipProps {
 	children: ReactNode;
+	'aria-label': string;
 }
 
-export function HelpTip({ children }: HelpTipProps) {
+export function HelpTip({ children, 'aria-label': ariaLabel }: HelpTipProps) {
 	return (
 		<Popover>
-			<PopoverTrigger render={<Button emphasis="ghost" />}>
+			<PopoverTrigger
+				render={<Button emphasis="ghost" aria-label={ariaLabel} />}
+			>
 				<Icon name="info" />
 			</PopoverTrigger>
 			<PopoverContent>

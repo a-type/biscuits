@@ -11,8 +11,8 @@ export function RecipeCreateButton({ children, ...rest }: ButtonProps) {
 		<Button
 			onClick={async () => {
 				const recipe = await client.recipes.put({});
-				navigate(makeRecipeLink(recipe, '/edit'), {
-					skipTransition: true,
+				navigate({
+					to: makeRecipeLink(recipe, '/edit'),
 				});
 			}}
 			emphasis="primary"

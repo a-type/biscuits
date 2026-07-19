@@ -167,6 +167,7 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 									<div
 										className={cls.grab}
 										onContextMenu={preventDefault}
+										aria-label="Reorder item"
 										{...menuProps}
 									>
 										<OnboardingTooltip
@@ -185,6 +186,9 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 											size="small"
 											emphasis="ghost"
 											className={cls.collapseTrigger}
+											aria-label={
+												menuOpen ? 'Close item details' : 'Open item details'
+											}
 										/>
 									}
 								>

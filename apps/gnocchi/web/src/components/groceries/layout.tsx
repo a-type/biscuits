@@ -46,11 +46,7 @@ export const MainActions = () => {
 	);
 };
 
-export const List = () => (
-	<Suspense fallback={<div>LIST LOADING</div>}>
-		<GroceryList />
-	</Suspense>
-);
+export const List = () => <GroceryList />;
 
 export function ThemedPageContent({
 	children,

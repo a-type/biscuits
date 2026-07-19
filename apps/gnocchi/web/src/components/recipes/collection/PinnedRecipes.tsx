@@ -34,7 +34,7 @@ export function PinnedRecipes({ className }: PinnedRecipesProps) {
 		<CollapsibleSimple open={show} className={classNames(cls.root, className)}>
 			<div className={cls.explainer}>
 				<H2>Pinned</H2>
-				<HelpTip>
+				<HelpTip aria-label="Information about pinned recipes">
 					Pins help you organize upcoming dishes. They expire after 3 weeks.
 				</HelpTip>
 			</div>
@@ -68,6 +68,7 @@ function PinnedRecipeListItem({ recipe }: { recipe: Recipe }) {
 					recipe={recipe}
 					emphasis="ghost"
 					className={cls.noShrink}
+					aria-label={`Add ${title} to groceries list`}
 				>
 					<Icon name="add_to_list" />
 				</AddToListButton>

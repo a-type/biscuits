@@ -1,4 +1,8 @@
-import { updateApp, updateState } from '@biscuits/client/apps';
+import {
+	GlobalErrorFallback,
+	updateApp,
+	updateState,
+} from '@biscuits/client/apps';
 import { createRouter } from '@tanstack/react-router';
 import { routeTree } from './routeTree.gen.js';
 import { verdant } from './stores/groceries/index.js';
@@ -7,6 +11,8 @@ export const router = createRouter({
 	routeTree,
 	scrollRestoration: true,
 	defaultPreload: 'intent',
+	defaultErrorComponent: GlobalErrorFallback,
+	defaultViewTransition: true,
 });
 
 router.subscribe('onBeforeNavigate', (event) => {

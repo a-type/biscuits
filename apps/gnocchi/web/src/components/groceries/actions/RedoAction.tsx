@@ -12,6 +12,7 @@ export function RedoAction({ showName }: { showName?: boolean }) {
 				groceries.undoHistory.redo();
 			}}
 			visible={canRedo}
+			aria-label={showName ? undefined : 'Redo last action'}
 		>
 			<Icon name="redo" />
 			{showName ? 'Redo' : undefined}

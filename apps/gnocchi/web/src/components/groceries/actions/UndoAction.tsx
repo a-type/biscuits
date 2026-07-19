@@ -13,6 +13,7 @@ export function UndoAction({ showName }: { showName?: boolean }) {
 					groceries.undoHistory.undo();
 				}}
 				visuallyDisabled={!canUndo}
+				aria-label={showName ? undefined : 'Undo last action'}
 			>
 				<Icon name="undo" />
 				{showName ? 'Undo' : undefined}

@@ -96,6 +96,7 @@ const NavBarLink = memo(
 						ref={ref}
 					/>
 				}
+				nativeButton={false}
 			>
 				<NavBarItemIconWrapper style={{ display: 'flex' }}>
 					<PopEffect active={animate} />

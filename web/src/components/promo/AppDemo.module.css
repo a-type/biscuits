@@ -87,9 +87,7 @@
 
 .appButtonActive {
 	border-radius: var(--m-rd-xs);
-	@apply --mx-bg {
-		--color: var(--m-tint);
-	}
+	@apply --mx-bg(var(--m-bg-light));
 }
 
 .pickerIcon {

@@ -16,6 +16,7 @@ export function RecipesPage() {
 					<PageNowPlaying style={{ pointerEvents: 'none' }}>
 						<Suspense>
 							<RecipeCreateButton
+								aria-label="Create a new recipe"
 								style={{ pointerEvents: 'auto', width: 48, height: 48 }}
 							>
 								<Icon name="plus" size={20} />

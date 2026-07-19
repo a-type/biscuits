@@ -27,6 +27,7 @@ export function RecipePinToggle({ recipe, className }: RecipePinToggleProps) {
 			emphasis={isPinned ? 'primary' : 'default'}
 			onClick={togglePinned}
 			className={className}
+			aria-label={isPinned ? 'Unpin recipe' : 'Pin recipe'}
 		>
 			<PinIcon data-icon isPinned={isPinned} />
 		</Button>

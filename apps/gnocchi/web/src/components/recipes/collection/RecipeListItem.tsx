@@ -50,7 +50,9 @@ export const RecipeListItem = memo(function RecipeListItem({
 			data-style={gridStyle}
 			data-image={!!mainImage}
 		>
-			<Card.Main render={<Link to={makeRecipeLink(recipe)} preserveQuery />}>
+			<Card.Main
+				render={<Link to={makeRecipeLink(recipe)} search={(prev) => prev} />}
+			>
 				<CardTitle className={cls.title}>
 					<Text truncate>{title}</Text>
 				</CardTitle>
@@ -81,7 +83,11 @@ export const RecipeListItem = memo(function RecipeListItem({
 				<Card.Actions>
 					<RecipePinToggle recipe={recipe} />
 
-					<AddToListButton recipe={recipe} emphasis="ghost">
+					<AddToListButton
+						aria-label="Add recipe to groceries list"
+						recipe={recipe}
+						emphasis="ghost"
+					>
 						<Icon name="add_to_list" />
 					</AddToListButton>
 				</Card.Actions>
@@ -143,7 +149,14 @@ export function RecipeListItemMenu({
 				modal={false}
 			>
 				<DropdownMenu.Trigger
-					render={<Button size="small" emphasis="ghost" {...rest} />}
+					render={
+						<Button
+							size="small"
+							emphasis="ghost"
+							aria-label="Show recipe menu"
+							{...rest}
+						/>
+					}
 				>
 					<Icon name="dots" size={20} />
 				</DropdownMenu.Trigger>
@@ -155,7 +168,7 @@ export function RecipeListItemMenu({
 						</DropdownMenuItemRightSlot>
 					</RecipeEditTagsTrigger>
 					<DropdownMenu.Item
-						render={<Link to={makeRecipeLink(recipe, '/edit')} preserveQuery />}
+						render={<Link to={makeRecipeLink(recipe, '/edit')} />}
 					>
 						<span>Edit</span>
 						<DropdownMenuItemRightSlot>

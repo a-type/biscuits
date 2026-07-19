@@ -17,7 +17,13 @@ export async function microdata($: CheerioAPI): Promise<ExtractorData | null> {
 	}
 
 	const first = $(elems.get(0)!);
-	const name = first.find('[itemprop="name"]').text().trim();
+	const names = first.find('[itemprop="name"]');
+	const name = names
+		.filter((index, element) => {
+			return findParentType(element as any) === 'http://schema.org/Recipe';
+		})
+		.text()
+		.trim();
 	const author = first.find('[itemprop="author"]').text().trim();
 	const copyrightHolder = first
 		.find('[itemprop="copyrightHolder"]')
@@ -68,4 +74,29 @@ export async function microdata($: CheerioAPI): Promise<ExtractorData | null> {
 		servings: extractNumber(recipeYield),
 		note,
 	};
+}
+
+function getItemScope(element: any): any | null {
+	if (!element || !('attribs' in element)) {
+		return null;
+	}
+	if (element.attribs.itemscope !== undefined) {
+		return element;
+	}
+	if (element.parent) {
+		return getItemScope(element.parent);
+	}
+	return null;
+}
+
+function findParentType(element: any) {
+	const itemScope = getItemScope(element);
+	if (!itemScope) {
+		return null;
+	}
+	return getSchemaType(itemScope);
+}
+
+function getSchemaType(element: any): string | null {
+	return element.attribs.itemtype || null;
 }

@@ -14,6 +14,7 @@ export type { LinkProps };
 export interface WrappedLinkProps extends LinkProps<'a'> {
 	className?: string;
 	newTab?: boolean;
+	onClick?: () => void;
 }
 
 export interface LinkButtonProps extends WrappedLinkProps {
