@@ -1,6 +1,6 @@
 import { hooks } from '@/hooks.js';
 import { toast } from '@a-type/ui';
-import { useNavigate, useSearchParams } from '@verdant-web/react-router';
+import { useNavigate, useSearchParams } from '@biscuits/client';
 import { authorization, List } from '@wish-wash.biscuits/verdant';
 import { useCallback } from 'react';
 

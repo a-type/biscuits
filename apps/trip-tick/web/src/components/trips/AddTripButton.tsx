@@ -1,6 +1,6 @@
 import { hooks } from '@/store.js';
 import { Button, ButtonProps } from '@a-type/ui';
-import { useNavigate } from '@verdant-web/react-router';
+import { useNavigate } from '@biscuits/client';
 
 export interface AddTripButtonProps extends ButtonProps {}
 

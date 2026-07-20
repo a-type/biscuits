@@ -5,7 +5,7 @@ import {
 	readFragment,
 	useLazyQuery,
 } from '@biscuits/graphql';
-import { useSearchParams } from '@verdant-web/react-router';
+import { useSearchParams } from '@biscuits/client';
 import { useEffect } from 'react';
 import * as CONFIG from '../config.js';
 import { CancelPlanButton } from './CancelPlanButton.js';

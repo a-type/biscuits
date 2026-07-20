@@ -11,7 +11,7 @@ import {
 } from '@a-type/ui';
 import { BiscuitsError } from '@biscuits/error';
 import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
-import { Link, useNavigate, useParams } from '@verdant-web/react-router';
+import { Link, useNavigate, useParams } from '@biscuits/client';
 import { useEffect } from 'react';
 import classes from './ClaimInvitePage.module.css';
 

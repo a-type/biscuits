@@ -1,7 +1,7 @@
 import { hooks } from '@/stores/groceries/index.js';
 import { ActionButton, Icon } from '@a-type/ui';
 import { Recipe, RecipeInit } from '@gnocchi.biscuits/verdant';
-import { useNavigate } from '@verdant-web/react-router';
+import { useNavigate } from '@tanstack/react-router';
 import { makeRecipeLink } from '../../makeRecipeLink.js';
 
 export interface RecipeCloneActionProps {
@@ -25,7 +25,7 @@ export function RecipeCloneAction({ recipe }: RecipeCloneActionProps) {
 				const copy = await client.recipes.put(snap, {
 					access: recipe.access as any,
 				});
-				navigate(makeRecipeLink(copy, '/edit'));
+				navigate({ to: makeRecipeLink(copy, '/edit') });
 			}}
 		>
 			<Icon name="copy" />

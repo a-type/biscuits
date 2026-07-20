@@ -12,7 +12,7 @@ import {
 	Select,
 } from '@a-type/ui';
 import { Person, Relationship } from '@names.biscuits/verdant';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@biscuits/client';
 import { Suspense } from 'react';
 import { PersonNameSearchField } from './PersonNameSearchField.jsx';
 import cls from './PersonRelationships.module.css';

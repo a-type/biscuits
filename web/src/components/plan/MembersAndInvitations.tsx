@@ -12,7 +12,7 @@ import {
 	H3,
 } from '@a-type/ui';
 import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@biscuits/client';
 import { InviteMember } from './InviteMember.js';
 import classes from './MembersAndInvitations.module.css';
 

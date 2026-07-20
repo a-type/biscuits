@@ -1,3 +1,4 @@
+import { CONFIG, Link } from '@biscuits/client';
 import {
 	Box,
 	Button,
@@ -8,12 +9,11 @@ import {
 	PageContent,
 	PageRoot,
 } from '@a-type/ui';
-import { CONFIG } from '@biscuits/client';
+
 import {
 	StartingPrice,
 	SubscriptionSetup,
 } from '@biscuits/client/subscription';
-import { Link } from '@verdant-web/react-router';
 
 export interface BuyYearlyPageProps {}
 

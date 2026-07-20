@@ -13,7 +13,7 @@ import {
 	Text,
 } from '@a-type/ui';
 import { Trip } from '@trip-tick.biscuits/verdant';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@biscuits/client';
 import { useState } from 'react';
 import { AddTripButton } from './AddTripButton.jsx';
 import { TripMenu } from './TripMenu.jsx';

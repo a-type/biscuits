@@ -8,7 +8,7 @@ import { ProjectColorSpotlight } from '@/components/projects/ProjectColorSpotlig
 import { ProjectPalette } from '@/components/projects/ProjectPalette.jsx';
 import { hooks } from '@/hooks.js';
 import { ActionBar, Button, H1, Icon, PageContent } from '@a-type/ui';
-import { Link, useParams } from '@verdant-web/react-router';
+import { Link, useParams } from '@biscuits/client';
 import cls from './ProjectPage.module.css';
 
 export interface ProjectPageProps {}

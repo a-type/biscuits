@@ -2,7 +2,7 @@ import { NavigateEntries } from '@/components/entries/NavigateEntries.jsx';
 import { UpsertEntry } from '@/components/entries/UpsertEntry.jsx';
 import { FloatingUserMenu } from '@/components/navigation/FloatingUserMenu.jsx';
 import { InstallHint } from '@biscuits/client/apps';
-import { useNavigate } from '@verdant-web/react-router';
+import { useNavigate } from '@biscuits/client';
 import { startOfDay } from 'date-fns';
 
 export function HomePage() {

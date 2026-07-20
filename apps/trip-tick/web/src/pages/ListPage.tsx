@@ -2,22 +2,20 @@ import { ListEditor } from '@/components/lists/ListEditor.jsx';
 import { ListMenu } from '@/components/lists/ListMenu.jsx';
 import { hooks } from '@/store.js';
 import { Box, Button, Icon, PageContent, PageFixedArea } from '@a-type/ui';
-import { usePageTitle } from '@biscuits/client';
-import { AutoRestoreScroll, Link, useParams } from '@verdant-web/react-router';
+import { Link, usePageTitle, useParams } from '@biscuits/client';
+
 import { Suspense } from 'react';
 
 export interface ListPageProps {}
 
 export function ListPage({}: ListPageProps) {
-	const params = useParams();
-	const listId = params.listId;
+	const { listId } = useParams({ from: '/lists/$listId' });
 
 	return (
 		<PageContent>
 			<Suspense>
 				<ListPageEditor listId={listId} />
 			</Suspense>
-			<AutoRestoreScroll />
 		</PageContent>
 	);
 }

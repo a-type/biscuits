@@ -1,7 +1,7 @@
 import { clsx } from '@a-type/ui';
 import { animated, useSpring } from '@react-spring/web';
-import { useIsRouteTransitioning } from '@verdant-web/react-router';
 import { useCallback, useEffect } from 'react';
+import { useIsRouteTransitioning } from './routerCompat.js';
 import cls from './TopLoader.module.css';
 
 export interface TopLoaderProps {

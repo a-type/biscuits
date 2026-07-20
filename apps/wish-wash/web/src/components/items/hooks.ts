@@ -1,5 +1,5 @@
-import { useLocalStorage } from '@biscuits/client';
-import { useSearchParams } from '@verdant-web/react-router';
+import { useLocalStorage, useSearchParams } from '@biscuits/client';
+
 
 export function useEditItem() {
 	const [_, setSearch] = useSearchParams();

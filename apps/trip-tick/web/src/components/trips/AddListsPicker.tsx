@@ -1,7 +1,7 @@
 import { hooks } from '@/store.js';
 import { Box, Button, Icon, Text } from '@a-type/ui';
 import { Trip } from '@trip-tick.biscuits/verdant';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@biscuits/client';
 
 export interface AddListsPickerProps {
 	trip: Trip;

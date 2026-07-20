@@ -6,7 +6,7 @@ import {
 	useSpringRef,
 	useTransition,
 } from '@react-spring/web';
-import { useSearchParams } from '@verdant-web/react-router';
+import { useSearchParams } from '@biscuits/client';
 import { useEffect } from 'react';
 import classes from './AppDemo.module.css';
 import PhoneDemo from './PhoneDemo.jsx';

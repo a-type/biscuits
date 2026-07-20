@@ -1,3 +1,4 @@
+import { DomainRouteView, useHasServerAccess, Link } from '@biscuits/client';
 import {
 	ActionButton,
 	ActionButtonProps,
@@ -9,9 +10,9 @@ import {
 	Icon,
 	P,
 } from '@a-type/ui';
-import { DomainRouteView, useHasServerAccess } from '@biscuits/client';
+
 import { graphql, useMutation, useQuery } from '@biscuits/graphql';
-import { Link } from '@verdant-web/react-router';
+
 import type { PublicWishlist } from '@wish-wash.biscuits/share-schema';
 import { List } from '@wish-wash.biscuits/verdant';
 import { format } from 'date-fns';

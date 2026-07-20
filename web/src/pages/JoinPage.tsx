@@ -11,7 +11,7 @@ import {
 } from '@a-type/ui';
 import { PaidFeature, apps } from '@biscuits/apps';
 import { StartingPrice } from '@biscuits/client/subscription';
-import { Link, useSearchParams } from '@verdant-web/react-router';
+import { Link, useSearchParams } from '@biscuits/client';
 import classes from './JoinPage.module.css';
 
 export interface JoinPageProps {}

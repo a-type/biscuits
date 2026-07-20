@@ -1,8 +1,7 @@
+import { usePageTitle, Link, useParams } from '@biscuits/client';
 import { PersonDetails } from '@/components/people/PersonDetails.jsx';
 import { hooks } from '@/hooks.js';
 import { Box, Button, H1, Icon } from '@a-type/ui';
-import { usePageTitle } from '@biscuits/client';
-import { Link, useParams } from '@verdant-web/react-router';
 
 export interface PersonPageProps {}
 

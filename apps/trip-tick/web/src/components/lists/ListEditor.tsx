@@ -1,3 +1,4 @@
+import { OnboardingTooltip, useSearchParams } from '@biscuits/client';
 import { firstList } from '@/onboarding/firstList.js';
 import { hooks } from '@/store.js';
 import {
@@ -9,9 +10,9 @@ import {
 	toast,
 } from '@a-type/ui';
 import { debounce } from '@a-type/utils';
-import { OnboardingTooltip } from '@biscuits/client';
+
 import { List } from '@trip-tick.biscuits/verdant';
-import { useSearchParams } from '@verdant-web/react-router';
+
 import { forwardRef, useState } from 'react';
 import { AddSuggested } from './AddSuggested.jsx';
 import { ListEditorItem } from './ListEditorItem.jsx';

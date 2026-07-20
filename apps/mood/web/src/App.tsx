@@ -1,8 +1,9 @@
-import { Pages } from '@/pages/Pages.jsx';
+import { router } from '@/router.js';
 import { verdant } from '@/store.js';
 import { ErrorBoundary, Provider as UIProvider } from '@a-type/ui';
 import { Provider, useHasServerAccess } from '@biscuits/client';
 import { GlobalErrorFallback } from '@biscuits/client/apps';
+import { RouterProvider } from '@tanstack/react-router';
 import { ReactNode, Suspense } from 'react';
 import { hooks } from './hooks.js';
 
@@ -15,7 +16,7 @@ export function App({}: AppProps) {
 				<Suspense>
 					<Provider appId="mood" verdantClient={verdant as any}>
 						<VerdantProvider>
-							<Pages />
+							<RouterProvider router={router} />
 						</VerdantProvider>
 					</Provider>
 				</Suspense>

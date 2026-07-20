@@ -8,7 +8,7 @@
 		"app-dev-old": "vite --host --mode development --port 6299",
 		"build": "vite build --mode production",
 		"preview": "vite preview --host",
-		"link-verdant": "pnpm link --global @verdant-web/store && pnpm link --global @verdant-web/common && pnpm link --global @verdant-web/react && pnpm link --global @verdant-web/cli && pnpm link --global @verdant-web/react-router",
+		"link-verdant": "pnpm link --global @verdant-web/store && pnpm link --global @verdant-web/common && pnpm link --global @verdant-web/react && pnpm link --global @verdant-web/cli",
 		"clear": "rm -rf node_modules/.vite",
 		"icons": "node ./scripts/generateIcons.js",
 		"tsc": "tsc --build tsconfig.json",

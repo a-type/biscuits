@@ -23,7 +23,7 @@
 		"valtio": "catalog:",
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
-		"@verdant-web/react-router": "catalog:",
+		"@tanstack/react-router": "catalog:",
 		"@verdant-web/store": "catalog:",
 		"typescript": "catalog:",
 		"vite": "catalog:",
@@ -41,6 +41,7 @@
 		"motion": "catalog:"
 	},
 	"devDependencies": {
+		"@tanstack/router-plugin": "^1.132.51",
 		"@vite-pwa/assets-generator": "catalog:"
 	}
 }

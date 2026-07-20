@@ -1,8 +1,9 @@
-import { Pages } from '@/pages/Pages.jsx';
+import { router } from '@/router.js';
 import { verdant } from '@/store.js';
 import { ErrorBoundary, Provider as UIProvider } from '@a-type/ui';
 import { Provider, useHasServerAccess } from '@biscuits/client';
 import { GlobalErrorFallback } from '@biscuits/client/apps';
+import { RouterProvider } from '@tanstack/react-router';
 import { ReactNode, Suspense } from 'react';
 import { LocationRequestDialog } from './components/location/LocationRequestDialog.jsx';
 import { SuperBarProvider } from './components/superBar/SuperBarContext.jsx';
@@ -18,7 +19,7 @@ export function App({}: AppProps) {
 					<Provider appId="names" verdantClient={verdant as any}>
 						<VerdantProvider>
 							<SuperBarProvider>
-								<Pages />
+								<RouterProvider router={router} />
 								<LocationRequestDialog />
 							</SuperBarProvider>
 						</VerdantProvider>

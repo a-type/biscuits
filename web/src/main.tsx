@@ -5,10 +5,11 @@ import './main.css';
 import { Provider as UIProvider } from '@a-type/ui';
 import { AppId, appsById } from '@biscuits/apps';
 import { Provider } from '@biscuits/client';
+import { RouterProvider } from '@tanstack/react-router';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { client } from './graphql.js';
-import { Pages } from './pages/index.jsx';
+import { router } from './router.js';
 
 function main() {
 	const root = createRoot(document.getElementById('root')!);
@@ -16,7 +17,7 @@ function main() {
 		<StrictMode>
 			<UIProvider>
 				<Provider graphqlClient={client}>
-					<Pages />
+					<RouterProvider router={router} />
 				</Provider>
 			</UIProvider>
 		</StrictMode>,

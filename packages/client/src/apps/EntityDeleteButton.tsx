@@ -1,5 +1,5 @@
 import { Box, Button, ButtonProps, Icon, toast } from '@a-type/ui';
-import { useNavigate } from '@verdant-web/react-router';
+import { useNavigate } from '@biscuits/client';
 import { ObjectEntity } from '@verdant-web/store';
 import { useContext } from 'react';
 import { VerdantContext } from '../verdant.js';

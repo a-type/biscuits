@@ -1,6 +1,6 @@
 import { Box, P, Spinner } from '@a-type/ui';
 import { graphql, useQuery } from '@biscuits/graphql';
-import { useSearchParams } from '@verdant-web/react-router';
+import { useSearchParams } from '@biscuits/client';
 import { lazy, Suspense, useEffect } from 'react';
 import {
 	ManageSubscription,

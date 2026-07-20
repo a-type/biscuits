@@ -2,7 +2,7 @@ import { hooks } from '@/hooks.js';
 import { Box, Button, clsx, Viewport } from '@a-type/ui';
 import { UserMenu } from '@biscuits/client/apps';
 import { Floor } from '@floorplan.biscuits/verdant';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@biscuits/client';
 import { Suspense } from 'react';
 import { ConstraintToggles } from './ConstraintToggles.jsx';
 import { FloorLine } from './FloorLine.jsx';

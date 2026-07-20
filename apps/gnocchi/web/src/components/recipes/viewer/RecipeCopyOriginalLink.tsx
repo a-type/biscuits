@@ -1,7 +1,7 @@
 import { hooks } from '@/stores/groceries/index.js';
 import { Icon } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@tanstack/react-router';
 import { makeRecipeLink } from '../makeRecipeLink.js';
 
 export interface RecipeCopyOfTagProps {

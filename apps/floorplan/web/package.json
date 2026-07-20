@@ -19,7 +19,7 @@
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
 		"@use-gesture/react": "catalog:",
-		"@verdant-web/react-router": "catalog:",
+		"@tanstack/react-router": "catalog:",
 		"@verdant-web/store": "catalog:",
 		"@vitejs/plugin-react": "catalog:",
 		"gql.tada": "catalog:",
@@ -40,5 +40,7 @@
 		"workbox-strategies": "catalog:",
 		"workbox-window": "catalog:"
 	},
-	"devDependencies": {}
+	"devDependencies": {
+		"@tanstack/router-plugin": "^1.132.51"
+	}
 }

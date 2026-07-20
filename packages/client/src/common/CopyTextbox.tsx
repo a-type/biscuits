@@ -1,5 +1,5 @@
 import { Box, BoxProps, Button, Icon, Input, clsx } from '@a-type/ui';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@biscuits/client';
 
 export interface CopyTextboxProps extends BoxProps {
 	value: string;

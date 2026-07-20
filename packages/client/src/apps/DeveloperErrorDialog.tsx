@@ -1,5 +1,5 @@
 import { Button, Dialog, DialogProps } from '@a-type/ui';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@biscuits/client';
 import { useContext, useEffect, useState } from 'react';
 import { CONFIG, VerdantContext } from '../index.js';
 import { useLocalStorage } from '../react.js';

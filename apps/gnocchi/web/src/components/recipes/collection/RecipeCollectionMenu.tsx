@@ -2,7 +2,7 @@ import PaprikaImporter from '@/components/import/PaprikaImporter.jsx';
 import { TagManager } from '@/components/recipes/tags/TagManager.jsx';
 import { Button, DropdownMenu, Icon } from '@a-type/ui';
 import { useFeatureFlag } from '@biscuits/client';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@tanstack/react-router';
 import { Suspense, useState } from 'react';
 
 export interface RecipeCollectionMenuProps {

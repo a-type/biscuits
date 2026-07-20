@@ -20,8 +20,8 @@
 		"@react-three/postprocessing": "2.19.1",
 		"@stripe/react-stripe-js": "^2.5.0",
 		"@stripe/stripe-js": "^3.0.5",
+		"@tanstack/react-router": "catalog:",
 		"@types/three": "0.165.0",
-		"@verdant-web/react-router": "0.7.0",
 		"classnames": "^2.3.2",
 		"cookie": "^0.6.0",
 		"formik": "^2.4.5",
@@ -41,6 +41,7 @@
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "^1.0.3",
+		"@tanstack/router-plugin": "^1.132.51",
 		"@types/cookie": "^0.5.4",
 		"@types/three": "0.173.0",
 		"vite-plugin-circular-dependency": "^0.2.1"

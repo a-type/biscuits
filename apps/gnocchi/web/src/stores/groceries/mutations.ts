@@ -17,7 +17,7 @@ import {
 	RecipeIngredientsItemSnapshot,
 	RecipeInit,
 } from '@gnocchi.biscuits/verdant';
-import { useSearchParams } from '@verdant-web/react-router';
+import { useSearch } from '@tanstack/react-router';
 import cuid from 'cuid';
 import pluralize from 'pluralize';
 import { useCallback } from 'react';
@@ -576,8 +576,8 @@ export function useClearPantryItem() {
 
 export function useChangeFoodCanonicalName() {
 	const client = hooks.useClient();
-	const [params, setParams] = useSearchParams();
-	const showFood = params.get('showFood');
+	const { showFood } = useSearch();
+	const navigate = useNavigate();
 	return useCallback(
 		async (food: Food, newName: string) => {
 			newName = newName.toLowerCase();
@@ -636,13 +636,12 @@ export function useChangeFoodCanonicalName() {
 			// if currently viewing the food (probably are) then redirect
 
 			if (showFood === food.get('canonicalName')) {
-				setParams((p) => {
-					p.set('showFood', finalCanonicalName);
-					return p;
+				navigate({
+					search: (p) => ({ ...p, showFood: finalCanonicalName }),
 				});
 			}
 		},
-		[client, showFood, setParams],
+		[client, showFood, navigate],
 	);
 }
 

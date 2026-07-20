@@ -1,7 +1,7 @@
 import { CreateFloorButton } from '@/components/floorplans/CreateFloor.jsx';
 import { useInitialFloorId } from '@/hooks/useLastFloorId.js';
 import { PageRoot } from '@a-type/ui';
-import { useNavigate } from '@verdant-web/react-router';
+import { useNavigate } from '@biscuits/client';
 import { useEffect } from 'react';
 
 export interface HomePageProps {}
@@ -11,7 +11,10 @@ export function HomePage({}: HomePageProps) {
 	const navigate = useNavigate();
 	useEffect(() => {
 		if (initialFloor) {
-			navigate(`/floors/${initialFloor}`);
+			navigate({
+				to: '/floors/$floorId',
+				params: { floorId: initialFloor },
+			});
 		}
 	}, [initialFloor, navigate]);
 	return (

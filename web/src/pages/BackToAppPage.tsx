@@ -1,6 +1,6 @@
 import { Heading, PageContent, PageRoot } from '@a-type/ui';
 import { AppId, appsById } from '@biscuits/apps';
-import { useSearchParams } from '@verdant-web/react-router';
+import { useSearchParams } from '@biscuits/client';
 
 export interface BackToAppPageProps {}
 

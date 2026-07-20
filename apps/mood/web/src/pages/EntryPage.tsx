@@ -1,7 +1,7 @@
 import { NavigateEntries } from '@/components/entries/NavigateEntries.jsx';
 import { UpsertEntry } from '@/components/entries/UpsertEntry.jsx';
 import { FloatingUserMenu } from '@/components/navigation/FloatingUserMenu.jsx';
-import { useNavigate, useParams } from '@verdant-web/react-router';
+import { useNavigate, useParams } from '@biscuits/client';
 import { startOfDay } from 'date-fns';
 
 const EntryPage = () => {

@@ -1,7 +1,6 @@
+import { CONFIG, useSearchParams } from '@biscuits/client';
 import { EmailCompleteSignupForm } from '@/components/auth/EmailCompleteSignupForm.jsx';
 import { H1, P, PageContent, PageRoot } from '@a-type/ui';
-import { CONFIG } from '@biscuits/client';
-import { useSearchParams } from '@verdant-web/react-router';
 
 export interface VerifyPageProps {}
 

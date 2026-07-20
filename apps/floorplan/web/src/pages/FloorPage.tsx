@@ -1,8 +1,8 @@
 import { FloorplanRenderer } from '@/components/floorplans/FloorplanRenderer.jsx';
-import { useParams } from '@verdant-web/react-router';
+import { useParams } from '@biscuits/client';
 
 const FloorPage = () => {
-	const { floorId } = useParams<{ floorId: string }>();
+	const { floorId } = useParams({ from: '/floors/$floorId' });
 
 	return <FloorplanRenderer className="h-full w-full" id={floorId} />;
 };

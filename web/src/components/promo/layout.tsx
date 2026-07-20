@@ -8,7 +8,7 @@ import {
 	withProps,
 } from '@a-type/ui';
 import { AppId, appsById } from '@biscuits/apps';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@biscuits/client';
 import { CSSProperties, forwardRef, ReactNode } from 'react';
 import PhoneDemo from './PhoneDemo.jsx';
 import classes from './layout.module.css';

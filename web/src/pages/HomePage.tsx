@@ -4,7 +4,7 @@ import { AppGrid } from '@/components/promo/AppGrid.jsx';
 import { LazyScroll } from '@/components/promo/LazyScroll.jsx';
 import { Box, Button, clsx, Heading, Icon, P, PageFixedArea } from '@a-type/ui';
 import { visibleApps } from '@biscuits/apps';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@biscuits/client';
 import classNames from 'classnames';
 import { lazy, Suspense } from 'react';
 import cls from './HomePage.module.css';

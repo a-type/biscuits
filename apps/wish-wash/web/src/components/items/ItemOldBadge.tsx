@@ -1,6 +1,6 @@
 import { hooks } from '@/hooks.js';
 import { Chip, Icon, RelativeTime } from '@a-type/ui';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@biscuits/client';
 import { Item } from '@wish-wash.biscuits/verdant';
 
 export interface ItemOldBadgeProps {

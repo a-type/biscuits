@@ -1,9 +1,10 @@
 import { hooks } from '@/hooks.js';
-import { Pages } from '@/pages/Pages.jsx';
+import { router } from '@/router.js';
 import { verdant } from '@/store.js';
 import { ErrorBoundary, Provider as UIProvider } from '@a-type/ui';
 import { Provider, useHasServerAccess } from '@biscuits/client';
 import { GlobalErrorFallback } from '@biscuits/client/apps';
+import { RouterProvider } from '@tanstack/react-router';
 import { ReactNode, Suspense } from 'react';
 import { SubscriptionDialog } from './components/promotion/SubscriptionDialog.jsx';
 
@@ -20,7 +21,7 @@ export function App({}: AppProps) {
 				<Suspense>
 					<Provider appId="wish-wash" verdantClient={verdant}>
 						<VerdantProvider>
-							<Pages />
+							<RouterProvider router={router} />
 							<SubscriptionDialog />
 						</VerdantProvider>
 					</Provider>

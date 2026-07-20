@@ -10,7 +10,7 @@ import {
 	toast,
 } from '@a-type/ui';
 import { List } from '@trip-tick.biscuits/verdant';
-import { useNavigate } from '@verdant-web/react-router';
+import { useNavigate } from '@biscuits/client';
 
 export function ListMenu({ list }: { list: List }) {
 	const client = hooks.useClient();

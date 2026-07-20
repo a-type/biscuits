@@ -1,6 +1,6 @@
 import { hooks } from '@/hooks.js';
 import { Button, Card, Chip, clsx, Icon } from '@a-type/ui';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@biscuits/client';
 import { typeThemes } from '@wish-wash.biscuits/common';
 import { Item } from '@wish-wash.biscuits/verdant';
 import { CSSProperties, forwardRef } from 'react';

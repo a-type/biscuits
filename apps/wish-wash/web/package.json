@@ -19,9 +19,9 @@
 		"@dnd-kit/sortable": "^8.0.0",
 		"@dnd-kit/utilities": "^3.2.2",
 		"@react-spring/web": "^9.7.3",
+		"@tanstack/react-router": "catalog:",
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
-		"@verdant-web/react-router": "catalog:",
 		"@verdant-web/store": "catalog:",
 		"@vitejs/plugin-react": "catalog:",
 		"@wish-wash.biscuits/common": "workspace:*",
@@ -47,6 +47,7 @@
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "1.0.3",
+		"@tanstack/router-plugin": "^1.132.51",
 		"@vite-pwa/assets-generator": "catalog:",
 		"vite-plugin-circular-dependency": "^0.2.1"
 	}

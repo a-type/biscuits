@@ -18,9 +18,9 @@
 		"@biscuits/graphql": "workspace:*",
 		"@names.biscuits/verdant": "workspace:*",
 		"@react-spring/web": "^9.7.5",
+		"@tanstack/react-router": "catalog:",
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
-		"@verdant-web/react-router": "catalog:",
 		"@verdant-web/store": "catalog:",
 		"@vitejs/plugin-react": "catalog:",
 		"downshift": "^9.0.8",
@@ -43,6 +43,7 @@
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "^1.0.3",
+		"@tanstack/router-plugin": "^1.132.51",
 		"@vite-pwa/assets-generator": "catalog:"
 	}
 }

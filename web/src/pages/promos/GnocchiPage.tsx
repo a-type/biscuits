@@ -1,3 +1,4 @@
+import { useLocalStorage, useOnVisible, Link } from '@biscuits/client';
 import {
 	AppName,
 	Background,
@@ -14,8 +15,7 @@ import {
 	TitleWrap,
 } from '@/components/promo/layout.jsx';
 import { Button, clsx, H2, P } from '@a-type/ui';
-import { useLocalStorage, useOnVisible } from '@biscuits/client';
-import { Link } from '@verdant-web/react-router';
+
 import { Suspense, useEffect, useRef, useState } from 'react';
 import classes from './GnocchiPage.module.css';
 

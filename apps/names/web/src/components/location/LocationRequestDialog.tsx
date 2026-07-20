@@ -6,7 +6,7 @@ import {
 	useHasDeniedGeolocation,
 } from '@/services/location.js';
 import { Box, Button, Dialog, Icon } from '@a-type/ui';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@biscuits/client';
 import { use, useState } from 'react';
 import { useSnapshot } from 'valtio';
 import cls from './LocationRequestDialog.module.css';

@@ -1,5 +1,5 @@
 import { TabsRoot, TabsTrigger } from '@a-type/ui';
-import { Link, useOnLocationChange } from '@verdant-web/react-router';
+import { Link } from '@biscuits/client';
 import { ComponentPropsWithoutRef, useState } from 'react';
 
 export const NavigationTabsRoot = (

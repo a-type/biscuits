@@ -14,7 +14,7 @@ import {
 	InfiniteLoadTrigger,
 	toast,
 } from '@a-type/ui';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@biscuits/client';
 import { List } from '@wish-wash.biscuits/verdant';
 import { FirstList } from '../onboarding/FirstList.jsx';
 import { useEditList } from './hooks.js';

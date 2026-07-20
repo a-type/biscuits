@@ -1,3 +1,4 @@
+import { useLocalStorage, Link } from '@biscuits/client';
 import {
 	Box,
 	Button,
@@ -9,8 +10,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@a-type/ui';
-import { useLocalStorage } from '@biscuits/client';
-import { Link } from '@verdant-web/react-router';
+
 import { Item } from '@wish-wash.biscuits/verdant';
 
 export interface SearchButtonProps {

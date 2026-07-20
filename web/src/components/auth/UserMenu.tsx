@@ -1,6 +1,5 @@
+import { useMe, Link } from '@biscuits/client';
 import { Avatar, Box, Button, clsx, Icon } from '@a-type/ui';
-import { useMe } from '@biscuits/client';
-import { Link } from '@verdant-web/react-router';
 
 export interface UserMenuProps {
 	className?: string;

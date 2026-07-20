@@ -1,5 +1,5 @@
 import { Box, Button, ErrorBoundary, H1, P } from '@a-type/ui';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@biscuits/client';
 import { ReloadButton } from './ReloadButton.js';
 
 export function DefaultErrorFallback({

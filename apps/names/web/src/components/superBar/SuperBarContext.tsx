@@ -5,7 +5,7 @@ import {
 	useGeolocation,
 } from '@/services/location.js';
 import { Person } from '@names.biscuits/verdant';
-import { useNavigate, useSearchParams } from '@verdant-web/react-router';
+import { useNavigate, useSearchParams } from '@biscuits/client';
 import {
 	createContext,
 	ReactNode,

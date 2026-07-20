@@ -1,5 +1,5 @@
 import { Button, H1, P, PageContent, PageRoot } from '@a-type/ui';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@biscuits/client';
 import classes from './NotFoundPage.module.css';
 
 export interface NotFoundPageProps {}

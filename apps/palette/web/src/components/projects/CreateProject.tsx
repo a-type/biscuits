@@ -1,6 +1,6 @@
 import { hooks } from '@/hooks.js';
 import { H2, ImageUploader } from '@a-type/ui';
-import { useNavigate } from '@verdant-web/react-router';
+import { useNavigate } from '@biscuits/client';
 
 export interface CreateProjectProps {}
 export function CreateProject(props: CreateProjectProps) {

@@ -1,5 +1,5 @@
 import { ReloadButton } from '@/components/sync/ReloadButton.jsx';
-import { GlobalLoader } from '@/GlobalLoader.jsx';
+import { GlobalLoader } from '@biscuits/client/apps';
 import { Box, ErrorBoundary, H1, P, Provider as UIProvider } from '@a-type/ui';
 import { Provider, useFeatureFlag } from '@biscuits/client';
 import { RouterProvider } from '@tanstack/react-router';

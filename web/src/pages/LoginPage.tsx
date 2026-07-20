@@ -1,3 +1,4 @@
+import { CONFIG, Link, useSearchParams } from '@biscuits/client';
 import { EmailSigninForm } from '@/components/auth/EmailSigninForm.jsx';
 import { EmailSignupForm } from '@/components/auth/EmailSignupForm.jsx';
 import { OAuthSigninButton } from '@/components/auth/OAuthSigninButton.jsx';
@@ -14,8 +15,7 @@ import {
 	toast,
 } from '@a-type/ui';
 import { AppId, appsById } from '@biscuits/apps';
-import { CONFIG } from '@biscuits/client';
-import { Link, useSearchParams } from '@verdant-web/react-router';
+
 import classNames from 'classnames';
 import { ReactNode, useEffect, useState } from 'react';
 import cls from './LoginPage.module.css';

@@ -7,7 +7,7 @@ import {
 	DialogTitle,
 	Icon,
 } from '@a-type/ui';
-import { useNavigate } from '@verdant-web/react-router';
+import { useNavigate } from '@biscuits/client';
 import { useSnapshot } from 'valtio';
 import { addToList } from '../lists/add/util.js';
 import { shareTargetState } from './shareTargetState.js';

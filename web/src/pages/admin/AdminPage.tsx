@@ -6,7 +6,8 @@ import {
 	TabsTrigger,
 } from '@a-type/ui';
 import { graphql, useSuspenseQuery } from '@biscuits/graphql';
-import { Link, Outlet, useNavigate } from '@verdant-web/react-router';
+import { Outlet } from '@tanstack/react-router';
+import { Link, useNavigate } from '@biscuits/client';
 
 export interface AdminPageProps {}
 

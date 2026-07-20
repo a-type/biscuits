@@ -8,7 +8,7 @@ import {
 	Icon,
 	Text,
 } from '@a-type/ui';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@biscuits/client';
 import { ReactNode } from 'react';
 import { BugButton } from '../common/BugButton.js';
 import {

@@ -11,7 +11,7 @@ import {
 } from '@a-type/ui';
 import { InfrequentSubscriptionHint, usePageTitle } from '@biscuits/client';
 import { AppIcon, InstallHint, UserMenu } from '@biscuits/client/apps';
-import { AutoRestoreScroll } from '@verdant-web/react-router';
+
 import { Suspense } from 'react';
 
 export interface TripsPageProps {}
@@ -42,7 +42,6 @@ export function TripsPage({}: TripsPageProps) {
 				<InstallHint content="Keep your packing lists handy. Install the app!" />
 				<InfrequentSubscriptionHint />
 			</Box>
-			<AutoRestoreScroll />
 			<PageNowPlaying>
 				<Box col items="center" p>
 					<AddTripButton>

@@ -18,6 +18,7 @@
 		"@palette.biscuits/verdant": "workspace:*",
 		"@react-spring/web": "^9.7.4",
 		"@scidian/iris": "^1.0.4",
+		"@tanstack/react-router": "catalog:",
 		"@use-gesture/react": "^10.2.24",
 		"@zsviczian/colormaster": "^1.2.2",
 		"colormaster": "^1.2.1",
@@ -29,7 +30,6 @@
 		"valtio": "catalog:",
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
-		"@verdant-web/react-router": "catalog:",
 		"@verdant-web/store": "catalog:",
 		"typescript": "catalog:",
 		"vite": "catalog:",
@@ -46,6 +46,7 @@
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "^1.0.3",
+		"@tanstack/router-plugin": "^1.132.51",
 		"@vite-pwa/assets-generator": "catalog:"
 	}
 }

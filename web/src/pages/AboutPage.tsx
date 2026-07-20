@@ -1,6 +1,6 @@
 import { Footer } from '@/components/help/Footer.jsx';
 import { Box, Button, Heading, P, PageContent, PageRoot } from '@a-type/ui';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@biscuits/client';
 import classes from './AboutPage.module.css';
 
 export interface AboutPageProps {}

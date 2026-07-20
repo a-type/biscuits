@@ -1,6 +1,6 @@
 import { Card, clsx, Icon } from '@a-type/ui';
 import { getAppUrl, visibleApps } from '@biscuits/apps';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@biscuits/client';
 import classes from './AppGrid.module.css';
 
 export interface AppGridProps {

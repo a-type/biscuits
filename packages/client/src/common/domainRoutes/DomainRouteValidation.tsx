@@ -1,6 +1,6 @@
 import { Box, BoxProps, Button, H3, Icon, P, Text } from '@a-type/ui';
 import { graphql, useQuery } from '@biscuits/graphql';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@biscuits/client';
 import { useEffect } from 'react';
 import { CopyTextbox, useAppId } from '../index.js';
 

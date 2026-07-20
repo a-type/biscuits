@@ -11,7 +11,7 @@ import {
 	Icon,
 } from '@a-type/ui';
 import { ListItemsItem } from '@trip-tick.biscuits/verdant';
-import { useSearchParams } from '@verdant-web/react-router';
+import { useSearchParams } from '@biscuits/client';
 import { ListItemEditor } from './ListItemEditor.jsx';
 import { getItemRulesLabel } from './utils.js';
 

@@ -7,7 +7,7 @@ import {
 	InfiniteLoadTrigger,
 } from '@a-type/ui';
 import { Project } from '@palette.biscuits/verdant';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@biscuits/client';
 
 export interface ProjectsListProps {}
 

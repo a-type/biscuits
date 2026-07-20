@@ -1,5 +1,5 @@
 import { clsx } from '@a-type/ui';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@biscuits/client';
 import classes from './Footer.module.css';
 
 export interface FooterProps {

@@ -4,15 +4,20 @@ import {
 	ButtonProps,
 	clsx,
 } from '@a-type/ui';
-import { Link, LinkProps, type NavigateOptions } from '@tanstack/react-router';
-import { forwardRef } from 'react';
+import {
+	LinkProps,
+	Link as RouterLink,
+	type NavigateOptions,
+} from '@tanstack/react-router';
+import { CSSProperties, forwardRef } from 'react';
 import cls from './Link.module.css';
 
-export { BaseTextLink, Link, NavigateOptions };
+export { BaseTextLink, NavigateOptions };
 export type { LinkProps };
 
 export interface WrappedLinkProps extends LinkProps<'a'> {
 	className?: string;
+	style?: CSSProperties;
 	newTab?: boolean;
 	onClick?: () => void;
 }
@@ -22,6 +27,19 @@ export interface LinkButtonProps extends WrappedLinkProps {
 	size?: ButtonProps['size'];
 	emphasis?: ButtonProps['emphasis'];
 }
+
+export const Link = forwardRef<HTMLAnchorElement, WrappedLinkProps>(
+	function Link({ className, newTab, ...props }, ref) {
+		return (
+			<RouterLink
+				ref={ref}
+				className={className}
+				{...getNewTabProps(newTab)}
+				{...props}
+			/>
+		);
+	},
+);
 
 function getNewTabProps(newTab?: boolean) {
 	if (newTab) {

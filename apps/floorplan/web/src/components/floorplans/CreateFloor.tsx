@@ -1,6 +1,6 @@
 import { hooks } from '@/hooks.js';
 import { Button, ButtonProps } from '@a-type/ui';
-import { useNavigate } from '@verdant-web/react-router';
+import { useNavigate } from '@biscuits/client';
 
 export interface CreateFloorButtonProps extends ButtonProps {}
 export function CreateFloorButton({
@@ -16,7 +16,10 @@ export function CreateFloorButton({
 			onClick={async (ev) => {
 				const floor = await client.floors.put({ name: 'New Floor' });
 				onClick?.(ev);
-				navigate(`/floors/${floor.get('id')}`);
+				navigate({
+					to: '/floors/$floorId',
+					params: { floorId: floor.get('id') },
+				});
 			}}
 			{...rest}
 		>

@@ -1,5 +1,5 @@
 import { H1, H2, P, PageContent } from '@a-type/ui';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@biscuits/client';
 
 export function TermsAndConditions() {
 	return (

@@ -8,7 +8,7 @@ import {
 	Tooltip,
 } from '@a-type/ui';
 import { Item } from '@gnocchi.biscuits/verdant';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@tanstack/react-router';
 import { useListOrNull, useListThemeClass } from './hooks.js';
 import cls from './ListTag.module.css';
 
@@ -43,7 +43,11 @@ export function ListTag({
 		<Tooltip content={list.get('name')}>
 			<CollapsibleRoot open={!collapsed} className={className}>
 				<CollapsibleContent data-horizontal className={cls.root}>
-					<Link to={`/list/${list.get('id')}`} className={cls.link}>
+					<Link
+						to="/list/$listId"
+						params={{ listId: list.get('id') }}
+						className={cls.link}
+					>
 						<div className={clsx(listThemeClass, cls.linkContent)}>
 							<Icon name="tag" filled style={{ display: 'inline' }} />
 							<span className={cls.name}>{name}</span>

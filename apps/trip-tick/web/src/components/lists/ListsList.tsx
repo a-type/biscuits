@@ -1,6 +1,6 @@
 import { hooks } from '@/store.js';
 import { Box, Button, H2, Icon, P } from '@a-type/ui';
-import { Link } from '@verdant-web/react-router';
+import { Link } from '@biscuits/client';
 import { AddListButton } from './AddListButton.jsx';
 
 export interface ListsListProps {}
