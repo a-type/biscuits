@@ -9,9 +9,9 @@ import {
 	PageRoot,
 	toast,
 } from '@a-type/ui';
+import { Link } from '@biscuits/client';
 import { BiscuitsError } from '@biscuits/error';
 import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
-import { Link } from '@biscuits/client';
 import { useNavigate, useParams } from '@tanstack/react-router';
 import { useEffect } from 'react';
 import classes from './ClaimInvitePage.module.css';

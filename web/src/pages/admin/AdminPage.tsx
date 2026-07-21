@@ -5,8 +5,8 @@ import {
 	TabsRoot,
 	TabsTrigger,
 } from '@a-type/ui';
-import { graphql, useSuspenseQuery } from '@biscuits/graphql';
 import { Link } from '@biscuits/client';
+import { graphql, useSuspenseQuery } from '@biscuits/graphql';
 import { Outlet, useNavigate } from '@tanstack/react-router';
 
 export interface AdminPageProps {}

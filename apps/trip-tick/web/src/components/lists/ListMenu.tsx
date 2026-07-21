@@ -9,8 +9,8 @@ import {
 	Icon,
 	toast,
 } from '@a-type/ui';
-import { List } from '@trip-tick.biscuits/verdant';
 import { useNavigate } from '@tanstack/react-router';
+import { List } from '@trip-tick.biscuits/verdant';
 
 export function ListMenu({ list }: { list: List }) {
 	const client = hooks.useClient();

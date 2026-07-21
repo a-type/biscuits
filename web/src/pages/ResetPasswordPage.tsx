@@ -1,6 +1,6 @@
-import { CONFIG } from '@biscuits/client';
 import { ResetPasswordForm } from '@/components/auth/ResetPasswordForm.jsx';
 import { H1, P, PageContent, PageRoot } from '@a-type/ui';
+import { CONFIG } from '@biscuits/client';
 import { useSearch } from '@tanstack/react-router';
 
 export interface ResetPasswordPageProps {}

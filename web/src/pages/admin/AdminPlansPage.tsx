@@ -1,4 +1,3 @@
-import { featureFlags } from '@biscuits/client';
 import { AdminPlanLibraryInfo } from '@/components/admin/AdminPlanLibraryInfo.jsx';
 import {
 	Box,
@@ -9,6 +8,7 @@ import {
 	DialogTitle,
 } from '@a-type/ui';
 import { apps } from '@biscuits/apps';
+import { featureFlags } from '@biscuits/client';
 
 import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
 import { useNavigate, useSearch } from '@tanstack/react-router';

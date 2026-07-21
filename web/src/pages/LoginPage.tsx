@@ -1,4 +1,3 @@
-import { CONFIG, Link } from '@biscuits/client';
 import { EmailSigninForm } from '@/components/auth/EmailSigninForm.jsx';
 import { EmailSignupForm } from '@/components/auth/EmailSignupForm.jsx';
 import { OAuthSigninButton } from '@/components/auth/OAuthSigninButton.jsx';
@@ -15,6 +14,7 @@ import {
 	toast,
 } from '@a-type/ui';
 import { AppId, appsById } from '@biscuits/apps';
+import { CONFIG, Link } from '@biscuits/client';
 import { useNavigate, useSearch } from '@tanstack/react-router';
 
 import classNames from 'classnames';
