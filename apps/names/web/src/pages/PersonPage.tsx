@@ -1,12 +1,13 @@
-import { usePageTitle, Link, useParams } from '@biscuits/client';
 import { PersonDetails } from '@/components/people/PersonDetails.jsx';
 import { hooks } from '@/hooks.js';
 import { Box, Button, H1, Icon } from '@a-type/ui';
+import { Link, usePageTitle } from '@biscuits/client';
+import { useParams } from '@tanstack/react-router';
 
 export interface PersonPageProps {}
 
 export function PersonPage({}: PersonPageProps) {
-	const { id } = useParams();
+	const { id } = useParams({ from: '/people/$id' });
 
 	const person = hooks.usePerson(id);
 

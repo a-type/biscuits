@@ -1,7 +1,7 @@
 import { NavigateEntries } from '@/components/entries/NavigateEntries.jsx';
 import { UpsertEntry } from '@/components/entries/UpsertEntry.jsx';
 import { FloatingUserMenu } from '@/components/navigation/FloatingUserMenu.jsx';
-import { useNavigate, useParams } from '@biscuits/client';
+import { useNavigate, useParams } from '@tanstack/react-router';
 import { startOfDay } from 'date-fns';
 
 const EntryPage = () => {
@@ -16,15 +16,15 @@ const EntryPage = () => {
 				value={date.getTime()}
 				onValueChange={(value: number) => {
 					const newDate = startOfDay(new Date(value));
-					navigate(
-						`/entry/${newDate
+					navigate({
+						to: `/entry/${newDate
 							.toLocaleDateString(undefined, {
 								year: 'numeric',
 								month: '2-digit',
 								day: '2-digit',
 							})
 							.replaceAll('/', '-')}`,
-					);
+					});
 				}}
 			/>
 			<FloatingUserMenu />

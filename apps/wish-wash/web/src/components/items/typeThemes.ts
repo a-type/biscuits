@@ -1,7 +1,7 @@
-import { IconName, PaletteName } from '@a-type/ui';
+import { IconName } from '@a-type/ui';
 import { ListItemsItemType } from '@wish-wash.biscuits/verdant';
 
-export const typeThemes: Record<ListItemsItemType, PaletteName> = {
+export const typeThemes: Record<ListItemsItemType, string> = {
 	idea: 'lemon',
 	link: 'leek',
 	vibe: 'eggplant',

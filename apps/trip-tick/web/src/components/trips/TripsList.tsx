@@ -12,8 +12,8 @@ import {
 	P,
 	Text,
 } from '@a-type/ui';
-import { Trip } from '@trip-tick.biscuits/verdant';
 import { Link } from '@biscuits/client';
+import { Trip } from '@trip-tick.biscuits/verdant';
 import { useState } from 'react';
 import { AddTripButton } from './AddTripButton.jsx';
 import { TripMenu } from './TripMenu.jsx';
@@ -128,7 +128,9 @@ function TripsListItem({ trip }: { trip: Trip }) {
 		<Card>
 			<Card.Main
 				size={isPast ? 'sm' : 'md'}
-				render={<Link to={`/trips/${trip.get('id')}`} />}
+				render={
+					<Link to="/trips/$tripId" params={{ tripId: trip.get('id') }} />
+				}
 			>
 				<Card.Title style={{ position: 'relative', zIndex: 1 }}>
 					{name}

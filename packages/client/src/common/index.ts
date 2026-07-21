@@ -23,7 +23,6 @@ export * from './PromoteSubscriptionButton.js';
 export * from './PushSubscriptionToggle.js';
 export * from './ReloadButton.js';
 export * from './RemovableTag.js';
-export * from './routerCompat.js';
 export * from './SubscriptionExpiredDialog.js';
 export * from './SubscriptionPromotion.js';
 export * from './TagCreateForm.js';

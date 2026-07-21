@@ -1,14 +1,14 @@
 import { TabsRoot, TabsTrigger } from '@a-type/ui';
 import { Link } from '@biscuits/client';
-import { ComponentPropsWithoutRef, useState } from 'react';
+import { useLocation } from '@tanstack/react-router';
+import { ComponentPropsWithoutRef } from 'react';
 
 export const NavigationTabsRoot = (
 	props: ComponentPropsWithoutRef<typeof TabsRoot>,
 ) => {
-	const [path, setPath] = useState(() => window.location.pathname);
-	useOnLocationChange(() => setPath(window.location.pathname));
+	const location = useLocation();
 
-	return <TabsRoot {...props} value={path} />;
+	return <TabsRoot {...props} value={location.pathname} />;
 };
 
 export const NavigationTab = ({

@@ -21,9 +21,14 @@ import z from 'zod';
 export const Route = createRootRoute({
 	component: RootComponent,
 	validateSearch: zodValidator(
-		z.object({
-			showFood: z.string().default(''),
-		}),
+		z
+			.object({
+				showFood: z.string(),
+				recipeUrl: z.string(),
+				recipeSlug: z.string(),
+				recipeTitle: z.string(),
+			})
+			.partial(),
 	),
 	search: {
 		middlewares: [

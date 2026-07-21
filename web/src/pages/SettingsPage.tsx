@@ -1,4 +1,3 @@
-import { LogoutButton, useLocalStorage, Link, useNavigate, useSearchParams } from '@biscuits/client';
 import { Footer } from '@/components/help/Footer.jsx';
 import { MembersAndInvitations } from '@/components/plan/MembersAndInvitations.jsx';
 import { VerdantLibraries } from '@/components/storage/VerdantLibraries.jsx';
@@ -19,9 +18,11 @@ import {
 	Tabs,
 } from '@a-type/ui';
 import { apps } from '@biscuits/apps';
+import { LogoutButton, useLocalStorage } from '@biscuits/client';
 
 import { SubscriptionSetup } from '@biscuits/client/subscription';
 import { graphql, NetworkStatus, useQuery } from '@biscuits/graphql';
+import { useNavigate, useSearch } from '@tanstack/react-router';
 
 import { Suspense, useEffect } from 'react';
 import classes from './SettingsPage.module.css';
@@ -48,8 +49,9 @@ export interface PlanPageProps {}
 export function PlanPage({}: PlanPageProps) {
 	const result = useQuery(PlanPageData);
 	const { data } = result;
-	const [searchParams, updateSearchParams] = useSearchParams();
-	const returnToAppId = searchParams.get('appReferrer');
+	const navigate = useNavigate();
+	const search = useSearch({ strict: false }) as Record<string, string>;
+	const returnToAppId = search.appReferrer;
 	const returnToApp = apps.find((app) => app.id === returnToAppId) ?? undefined;
 	const returnToAppUrl =
 		import.meta.env.DEV ? returnToApp?.devOriginOverride : returnToApp?.url;
@@ -61,26 +63,24 @@ export function PlanPage({}: PlanPageProps) {
 	}, [setSeen, hasAccount]);
 
 	const justPaid =
-		searchParams.get('paymentComplete') ||
-		searchParams.get('redirect_status') === 'succeeded';
-
-	const navigate = useNavigate();
+		search.paymentComplete || search.redirect_status === 'succeeded';
 
 	useEffect(() => {
 		if (result.networkStatus === NetworkStatus.ready && !hasAccount) {
-			const search = window.location.search;
+			const searchStr = window.location.search;
 			const path = window.location.pathname;
-			const returnTo = encodeURIComponent(path + search);
-			navigate(`/login?returnTo=${returnTo}`);
+			navigate({ to: '/login', search: { returnTo: `${path}${searchStr}` } });
 		}
 	}, [result, navigate, hasAccount]);
 
-	const [search, setSearch] = useSearchParams();
-	const tab = search.get('tab') ?? 'profile';
+	const tab = search.tab ?? 'profile';
 	const setTab = (tab: string) => {
-		setSearch((s) => {
-			s.set('tab', tab);
-			return s;
+		navigate({
+			replace: true,
+			search: {
+				...search,
+				tab,
+			} as any,
 		});
 	};
 
@@ -89,7 +89,7 @@ export function PlanPage({}: PlanPageProps) {
 			<PageContent gap="lg" className={classes.pageContent}>
 				<PageFixedArea className={classes.topBar}>
 					<Button
-						render={<Link to={returnToAppUrl ?? '/'} />}
+						render={<a href={returnToAppUrl ?? '/'} />}
 						emphasis="primary"
 					>
 						<Icon name="arrowLeft" />
@@ -119,10 +119,13 @@ export function PlanPage({}: PlanPageProps) {
 								<Icon name="suitHeart" /> Thanks for subscribing!
 								<Button
 									onClick={() => {
-										updateSearchParams((params) => {
-											params.delete('paymentComplete');
-											params.delete('redirect_status');
-											return params;
+										navigate({
+											replace: true,
+											search: {
+												...search,
+												paymentComplete: undefined,
+												redirect_status: undefined,
+											} as any,
 										});
 									}}
 									aria-label="Close notification"

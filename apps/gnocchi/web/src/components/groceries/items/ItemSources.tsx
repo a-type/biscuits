@@ -1,5 +1,5 @@
 import { LinkButton } from '@/components/nav/Link.jsx';
-import { makeRecipeLink } from '@/components/recipes/makeRecipeLink.js';
+import { makeRecipeSlug } from '@/components/recipes/makeRecipeLink.js';
 import { IngredientText } from '@/components/recipes/viewer/IngredientText.jsx';
 import { hooks } from '@/stores/groceries/index.js';
 import {
@@ -143,7 +143,14 @@ function RecipePreviewContent({
 	return (
 		<Box col gap="sm">
 			<H2>{title}</H2>
-			<LinkButton emphasis="primary" align="start" to={makeRecipeLink(recipe)}>
+			<LinkButton
+				emphasis="primary"
+				to="/recipes/$slug"
+				params={{
+					slug: makeRecipeSlug(recipe),
+				}}
+				style={{ alignSelf: 'start' }}
+			>
 				View recipe
 			</LinkButton>
 			<H3>Ingredients</H3>

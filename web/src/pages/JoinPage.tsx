@@ -10,16 +10,17 @@ import {
 	PageSectionGrid,
 } from '@a-type/ui';
 import { PaidFeature, apps } from '@biscuits/apps';
+import { Link } from '@biscuits/client';
 import { StartingPrice } from '@biscuits/client/subscription';
-import { Link, useSearchParams } from '@biscuits/client';
+import { useSearch } from '@tanstack/react-router';
 import classes from './JoinPage.module.css';
 
 export interface JoinPageProps {}
 
 export function JoinPage({}: JoinPageProps) {
-	const [search] = useSearchParams();
-	const appReferrer = search.get('appReferrer');
-	const backTo = search.get('backTo') || search.get('returnTo');
+	const search = useSearch({ strict: false }) as Record<string, string>;
+	const appReferrer = search.appReferrer;
+	const backTo = search.backTo || search.returnTo;
 
 	const sortedApps =
 		appReferrer ?
@@ -43,13 +44,21 @@ export function JoinPage({}: JoinPageProps) {
 						and friends. Plans start at <StartingPrice />.
 					</p>
 					<PageFixedArea className={classes.topBar}>
-						<Button render={<Link to={backTo || '/'} />} emphasis="default">
+						<Button
+							render={<Link to={(backTo as any) || '/'} />}
+							emphasis="default"
+						>
 							<Icon name="arrowLeft" />
 							{backTo ? 'Go back' : 'Back to apps'}
 						</Button>
 						<Button
 							render={
-								<Link to="/login?returnTo=/settings?tab=subscription&tab=signup" />
+								<Link
+									to="/login"
+									search={{
+										returnTo: '/settings?tab=subscription&tab=signup',
+									}}
+								/>
 							}
 							emphasis="primary"
 						>

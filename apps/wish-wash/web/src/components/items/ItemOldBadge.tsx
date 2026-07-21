@@ -16,7 +16,15 @@ export function ItemOldBadge({ item }: ItemOldBadgeProps) {
 	}
 
 	return (
-		<Chip render={<Link to={`?itemId=${id}`} />}>
+		<Chip
+			render={
+				<Link
+					search={{
+						itemId: id,
+					}}
+				/>
+			}
+		>
 			<Icon name="clock" />
 			<RelativeTime value={createdAt} />
 		</Chip>

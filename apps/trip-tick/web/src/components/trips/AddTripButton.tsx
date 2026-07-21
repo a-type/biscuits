@@ -1,6 +1,6 @@
 import { hooks } from '@/store.js';
 import { Button, ButtonProps } from '@a-type/ui';
-import { useNavigate } from '@biscuits/client';
+import { useNavigate } from '@tanstack/react-router';
 
 export interface AddTripButtonProps extends ButtonProps {}
 
@@ -22,7 +22,7 @@ export function AddTripButton({
 			emphasis="primary"
 			onClick={async () => {
 				const trip = await client.trips.put({});
-				navigate(`/trips/${trip.get('id')}`);
+				navigate({ to: `/trips/${trip.get('id')}` });
 			}}
 			{...props}
 		>

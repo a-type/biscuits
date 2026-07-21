@@ -6,8 +6,8 @@ import {
 	CardRoot,
 	InfiniteLoadTrigger,
 } from '@a-type/ui';
-import { Project } from '@palette.biscuits/verdant';
 import { Link } from '@biscuits/client';
+import { Project } from '@palette.biscuits/verdant';
 
 export interface ProjectsListProps {}
 
@@ -37,7 +37,7 @@ function ProjectsListItem({ item }: { item: Project }) {
 	hooks.useWatch(image);
 	return (
 		<CardRoot style={{ height: 240 }}>
-			<CardMain render={<Link to={`/projects/${id}`} />} />
+			<CardMain render={<Link to="/projects/$id" params={{ id }} />} />
 			{image.url && <CardImage render={<img src={image.url} />} />}
 		</CardRoot>
 	);

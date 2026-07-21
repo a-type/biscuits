@@ -1,7 +1,7 @@
 import { hooks } from '@/store.js';
 import { Box, Button, Icon, Text } from '@a-type/ui';
 import { Trip } from '@trip-tick.biscuits/verdant';
-import { Link } from '@biscuits/client';
+import { AddListButton } from '../lists/AddListButton.jsx';
 
 export interface AddListsPickerProps {
 	trip: Trip;
@@ -45,7 +45,11 @@ export function AddListsPicker({ trip, className }: AddListsPickerProps) {
 			})}
 			{!lists.length && (
 				<Text italic dim>
-					You have no lists yet. <Link to="/lists">Create one</Link>?
+					You have no lists yet.{' '}
+					<AddListButton emphasis="light" size="small">
+						Create one
+					</AddListButton>
+					?
 				</Text>
 			)}
 		</Box>

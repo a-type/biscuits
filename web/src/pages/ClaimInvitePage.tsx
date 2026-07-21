@@ -11,7 +11,8 @@ import {
 } from '@a-type/ui';
 import { BiscuitsError } from '@biscuits/error';
 import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
-import { Link, useNavigate, useParams } from '@biscuits/client';
+import { Link } from '@biscuits/client';
+import { useNavigate, useParams } from '@tanstack/react-router';
 import { useEffect } from 'react';
 import classes from './ClaimInvitePage.module.css';
 
@@ -41,7 +42,7 @@ const claimInviteAction = graphql(`
 `);
 
 function ClaimInvitePage() {
-	const params = useParams<{ code: string }>();
+	const params = useParams({ from: '/invite/$code' });
 	const navigate = useNavigate();
 	const code = params.code;
 
@@ -55,9 +56,14 @@ function ClaimInvitePage() {
 	const isNotAuthenticated = !infoResult.data?.me;
 	useEffect(() => {
 		if (isNotAuthenticated) {
-			navigate(
-				`/login?tab=signup&returnTo=${encodeURIComponent(`/invite/${code}`)}&message=${encodeURIComponent('Sign up or log in to claim your invite.')}`,
-			);
+			navigate({
+				to: '/login',
+				search: {
+					tab: 'signup',
+					returnTo: `/invite/${code}`,
+					message: 'Sign up or log in to claim your invite.',
+				},
+			});
 		}
 	}, [navigate, isNotAuthenticated, code]);
 
@@ -68,7 +74,7 @@ function ClaimInvitePage() {
 			toast.success('Welcome to your new plan!', {
 				duration: 15000,
 			});
-			navigate('/settings');
+			navigate({ to: '/settings' });
 		} else {
 			const biscuitsError = BiscuitsError.readFirstGraphQLError(result.errors);
 			if (biscuitsError?.code === BiscuitsError.Code.NotFound) {

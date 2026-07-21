@@ -6,7 +6,7 @@ import {
 	useSpringRef,
 	useTransition,
 } from '@react-spring/web';
-import { useSearchParams } from '@biscuits/client';
+import { useNavigate, useSearch } from '@tanstack/react-router';
 import { useEffect } from 'react';
 import classes from './AppDemo.module.css';
 import PhoneDemo from './PhoneDemo.jsx';
@@ -20,12 +20,16 @@ export interface AppDemoProps {
 }
 
 export function AppDemo({ className }: AppDemoProps) {
-	const [search, updateSearch] = useSearchParams();
-	const appId = (search.get('appId') ?? 'gnocchi') as AppId;
+	const search = useSearch({ strict: false }) as Record<string, string>;
+	const navigate = useNavigate();
+	const appId = (search.appId ?? 'gnocchi') as AppId;
 	const setAppId = (appId: AppId) =>
-		updateSearch((s) => {
-			s.set('appId', appId);
-			return s;
+		navigate({
+			replace: true,
+			search: {
+				...search,
+				appId,
+			} as any,
 		});
 
 	const app = appsById[appId];

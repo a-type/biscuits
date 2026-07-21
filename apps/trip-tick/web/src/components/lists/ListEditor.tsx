@@ -1,4 +1,3 @@
-import { OnboardingTooltip, useSearchParams } from '@biscuits/client';
 import { firstList } from '@/onboarding/firstList.js';
 import { hooks } from '@/store.js';
 import {
@@ -10,7 +9,9 @@ import {
 	toast,
 } from '@a-type/ui';
 import { debounce } from '@a-type/utils';
+import { OnboardingTooltip } from '@biscuits/client';
 
+import { useNavigate } from '@tanstack/react-router';
 import { List } from '@trip-tick.biscuits/verdant';
 
 import { forwardRef, useState } from 'react';
@@ -91,7 +92,7 @@ function ListItemsEditor({ list }: { list: List }) {
 const AddListItemButton = forwardRef<HTMLButtonElement, { list: List }>(
 	function AddListItemButton({ list }, ref) {
 		const { items } = hooks.useWatch(list);
-		const [_, setParams] = useSearchParams();
+		const navigate = useNavigate();
 
 		return (
 			<Button
@@ -108,15 +109,10 @@ const AddListItemButton = forwardRef<HTMLButtonElement, { list: List }>(
 						description: 'New item',
 					});
 					const item = items.get(items.length - 1);
-					setParams(
-						(p) => {
-							p.set('item', item.get('id'));
-							return p;
-						},
-						{
-							replace: true,
-						},
-					);
+					navigate({
+						replace: true,
+						search: (prev) => ({ ...prev, item: item.get('id') }) as never,
+					});
 				}}
 				ref={ref}
 			>

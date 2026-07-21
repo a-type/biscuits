@@ -2,7 +2,8 @@ import { ListEditor } from '@/components/lists/ListEditor.jsx';
 import { ListMenu } from '@/components/lists/ListMenu.jsx';
 import { hooks } from '@/store.js';
 import { Box, Button, Icon, PageContent, PageFixedArea } from '@a-type/ui';
-import { Link, usePageTitle, useParams } from '@biscuits/client';
+import { Link, usePageTitle } from '@biscuits/client';
+import { useParams } from '@tanstack/react-router';
 
 import { Suspense } from 'react';
 

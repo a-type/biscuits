@@ -127,7 +127,7 @@ export function RecipeSavePrompt({}: RecipeSavePromptProps) {
 
 				<Text emphasis="ambient">
 					By continuing you agree to{' '}
-					<TextLink to="/tos" newTab>
+					<TextLink href={`${import.meta.env.VITE_HOME_ORIGIN}/tos`} newTab>
 						the terms and conditions of usage.
 					</TextLink>
 				</Text>

@@ -1,4 +1,3 @@
-import { DomainRouteView, useHasServerAccess, Link } from '@biscuits/client';
 import {
 	ActionButton,
 	ActionButtonProps,
@@ -10,6 +9,7 @@ import {
 	Icon,
 	P,
 } from '@a-type/ui';
+import { DomainRouteView, useHasServerAccess } from '@biscuits/client';
 
 import { graphql, useMutation, useQuery } from '@biscuits/graphql';
 
@@ -186,7 +186,7 @@ function ManagePublishedList({
 					emphasis="light"
 					color="accent"
 					align="start"
-					render={<Link to={url} newTab />}
+					render={<a href={url} target="_blank" rel="noopener noreferrer" />}
 				>
 					View your list <Icon name="new_window" />
 				</Button>

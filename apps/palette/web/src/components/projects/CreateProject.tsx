@@ -1,6 +1,6 @@
 import { hooks } from '@/hooks.js';
 import { H2, ImageUploader } from '@a-type/ui';
-import { useNavigate } from '@biscuits/client';
+import { useNavigate } from '@tanstack/react-router';
 
 export interface CreateProjectProps {}
 export function CreateProject(props: CreateProjectProps) {
@@ -17,8 +17,9 @@ export function CreateProject(props: CreateProjectProps) {
 						const project = await client.projects.put({
 							image: value,
 						});
-						navigate(`/projects/${project.get('id')}`, {
-							skipTransition: true,
+						navigate({
+							to: `/projects/${project.get('id')}`,
+							viewTransition: false,
 						});
 					}
 				}}

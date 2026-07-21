@@ -145,7 +145,7 @@ function PublishedContent({
 			<Dialog.Title>Manage publication</Dialog.Title>
 			<SubRecipeWarning recipe={recipe} />
 			<Button
-				render={<Link to={url} newTab />}
+				render={<Link href={url} newTab />}
 				emphasis="default"
 				style={{ alignSelf: 'start' }}
 			>
@@ -218,7 +218,7 @@ function UnpublishedContent({
 				<Text render={<label htmlFor="publish-consent" />} emphasis="ambient">
 					I confirm that I own and have the right to publish this recipe, in
 					accordance with the{' '}
-					<TextLink to="https://biscuits.club/tos" newTab>
+					<TextLink href="https://biscuits.club/tos" newTab>
 						Biscuits Terms of Service
 					</TextLink>
 				</Text>

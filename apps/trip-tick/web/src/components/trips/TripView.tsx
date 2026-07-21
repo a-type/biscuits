@@ -1,4 +1,3 @@
-import { useLocalStorage, usePageTitle, Link, useSearchParams } from '@biscuits/client';
 import { AddListsPicker } from '@/components/trips/AddListsPicker.jsx';
 import { useTripDays, useTripProgress } from '@/components/trips/hooks.js';
 import { hooks } from '@/store.js';
@@ -17,9 +16,11 @@ import {
 	Text,
 	Ul,
 } from '@a-type/ui';
+import { Link, useLocalStorage, usePageTitle } from '@biscuits/client';
 
 import { FragmentOf, graphql, useQuery } from '@biscuits/graphql';
 import * as Progress from '@radix-ui/react-progress';
+import { useNavigate, useSearch } from '@tanstack/react-router';
 import {
 	List,
 	Trip,
@@ -192,8 +193,9 @@ function TripViewChecklists({
 			return x !== undefined;
 		});
 
-	const [params, setParams] = useSearchParams();
-	const activeList = (params.get('list') ?? lists.get(0)) || '';
+	const search = useSearch({ strict: false }) as Record<string, string>;
+	const navigate = useNavigate();
+	const activeList = (search.list ?? lists.get(0)) || '';
 
 	const [editingLists, setEditingLists] = useState(lists.length === 0);
 	const [startedWithNoLists] = useState(editingLists);
@@ -210,9 +212,9 @@ function TripViewChecklists({
 		<TabsRoot
 			value={activeList}
 			onValueChange={(val) => {
-				setParams((params) => {
-					params.set('list', val);
-					return params;
+				navigate({
+					replace: true,
+					search: (prev) => ({ ...prev, list: val }) as never,
 				});
 			}}
 		>
@@ -380,7 +382,9 @@ function TripViewChecklist({
 				<P emphasis="ambient" italic dim>
 					New items are only applied to this trip.{' '}
 					<Text bold>
-						<Link to={`/lists/${list.get('id')}`}>Edit the list</Link>
+						<Link to="/lists/$listId" params={{ listId: list.get('id') }}>
+							Edit the list
+						</Link>
 					</Text>{' '}
 					if you want them for future trips.
 				</P>

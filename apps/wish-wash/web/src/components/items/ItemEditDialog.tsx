@@ -1,4 +1,3 @@
-import { useHasServerAccess, useSearchParams } from '@biscuits/client';
 import { hooks } from '@/hooks.js';
 import {
 	Box,
@@ -13,9 +12,11 @@ import {
 	Text,
 	TextArea,
 } from '@a-type/ui';
+import { useHasServerAccess } from '@biscuits/client';
 
 import { graphql, useLazyQuery } from '@biscuits/graphql';
 
+import { useNavigate, useSearch } from '@tanstack/react-router';
 import { typeThemes } from '@wish-wash.biscuits/common';
 import {
 	Item,
@@ -33,9 +34,10 @@ export interface ItemEditDialogProps {
 }
 
 export function ItemEditDialog({ list }: ItemEditDialogProps) {
-	const [search, setSearch] = useSearchParams();
+	const search = useSearch({ strict: false }) as Record<string, string>;
+	const navigate = useNavigate();
 
-	const itemId = search.get('itemId');
+	const itemId = search.itemId;
 	const { items } = hooks.useWatch(list);
 	hooks.useWatch(items);
 
@@ -49,9 +51,9 @@ export function ItemEditDialog({ list }: ItemEditDialogProps) {
 			open={!!item}
 			onOpenChange={(o) => {
 				if (!o) {
-					setSearch((p) => {
-						p.delete('itemId');
-						return p;
+					navigate({
+						replace: true,
+						search: (prev) => ({ ...prev, itemId: undefined }) as never,
 					});
 				}
 			}}
@@ -72,15 +74,10 @@ export function ItemEditDialog({ list }: ItemEditDialogProps) {
 							color="attention"
 							onClick={() => {
 								items.removeAll(item);
-								setSearch(
-									(p) => {
-										p.delete('itemId');
-										return p;
-									},
-									{
-										replace: true,
-									},
-								);
+								navigate({
+									replace: true,
+									search: (prev) => ({ ...prev, itemId: undefined }) as never,
+								});
 							}}
 						>
 							<Icon name="trash" />

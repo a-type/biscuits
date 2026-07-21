@@ -1,6 +1,6 @@
 import { Box, P, Spinner } from '@a-type/ui';
 import { graphql, useQuery } from '@biscuits/graphql';
-import { useSearchParams } from '@biscuits/client';
+import { useNavigate, useSearch } from '@tanstack/react-router';
 import { lazy, Suspense, useEffect } from 'react';
 import {
 	ManageSubscription,
@@ -43,8 +43,9 @@ const TERMINAL_STATUSES = [
 ];
 
 export function SubscriptionSetup({ priceKeys }: SubscriptionSetupProps) {
-	const [params, setParams] = useSearchParams();
-	const didJustCheckout = params.get('paymentComplete');
+	const search = useSearch({ strict: false }) as Record<string, string>;
+	const navigate = useNavigate();
+	const didJustCheckout = search.paymentComplete;
 
 	const { data, refetch, loading } = useQuery(PlanSubscriptionInfo);
 
@@ -57,9 +58,12 @@ export function SubscriptionSetup({ priceKeys }: SubscriptionSetupProps) {
 	useEffect(() => {
 		if (didJustCheckout) {
 			if (isTerminalStatus) {
-				setParams((p) => {
-					p.delete('paymentComplete');
-					return p;
+				navigate({
+					replace: true,
+					search: {
+						...search,
+						paymentComplete: undefined,
+					} as any,
 				});
 			} else {
 				let checkCount = 0;
@@ -69,16 +73,19 @@ export function SubscriptionSetup({ priceKeys }: SubscriptionSetupProps) {
 					checkCount++;
 					if (checkCount > 10) {
 						clearInterval(interval);
-						setParams((p) => {
-							p.delete('paymentComplete');
-							return p;
+						navigate({
+							replace: true,
+							search: {
+								...search,
+								paymentComplete: undefined,
+							} as any,
 						});
 					}
 				}, 5000);
 				return () => clearInterval(interval);
 			}
 		}
-	}, [didJustCheckout, refetch, isTerminalStatus, setParams]);
+	}, [didJustCheckout, navigate, refetch, isTerminalStatus, search]);
 
 	if (didJustCheckout) {
 		return (

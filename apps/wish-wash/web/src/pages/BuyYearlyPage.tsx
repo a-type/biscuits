@@ -1,4 +1,3 @@
-import { CONFIG, Link } from '@biscuits/client';
 import {
 	Box,
 	Button,
@@ -9,6 +8,7 @@ import {
 	PageContent,
 	PageRoot,
 } from '@a-type/ui';
+import { CONFIG } from '@biscuits/client';
 
 import {
 	StartingPrice,
@@ -51,8 +51,8 @@ function MemberUpsell() {
 				emphasis="light"
 				color="accent"
 				render={
-					<Link
-						to={`${CONFIG.HOME_ORIGIN}/join?returnTo=${window.location.href}`}
+					<a
+						href={`${CONFIG.HOME_ORIGIN}/join?returnTo=${window.location.href}`}
 					/>
 				}
 			>

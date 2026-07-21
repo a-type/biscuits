@@ -4,7 +4,10 @@ import {
 	RecipeEditTagsRoot,
 	RecipeEditTagsTrigger,
 } from '@/components/recipes/editor/RecipeAddTag.jsx';
-import { makeRecipeLink } from '@/components/recipes/makeRecipeLink.js';
+import {
+	makeRecipeLink,
+	makeRecipeSlug,
+} from '@/components/recipes/makeRecipeLink.js';
 import { AddToListButton } from '@/components/recipes/viewer/AddToListButton.jsx';
 import { hooks } from '@/stores/groceries/index.js';
 import { useDeleteRecipe } from '@/stores/groceries/mutations.js';
@@ -51,7 +54,15 @@ export const RecipeListItem = memo(function RecipeListItem({
 			data-image={!!mainImage}
 		>
 			<Card.Main
-				render={<Link to={makeRecipeLink(recipe)} search={(prev) => prev} />}
+				render={
+					<Link
+						to="/recipes/$slug"
+						params={{
+							slug: makeRecipeSlug(recipe),
+						}}
+						search={(prev) => prev}
+					/>
+				}
 			>
 				<CardTitle className={cls.title}>
 					<Text truncate>{title}</Text>
@@ -168,7 +179,14 @@ export function RecipeListItemMenu({
 						</DropdownMenuItemRightSlot>
 					</RecipeEditTagsTrigger>
 					<DropdownMenu.Item
-						render={<Link to={makeRecipeLink(recipe, '/edit')} />}
+						render={
+							<Link
+								to="/recipes/$slug/edit"
+								params={{
+									slug: makeRecipeSlug(recipe),
+								}}
+							/>
+						}
 					>
 						<span>Edit</span>
 						<DropdownMenuItemRightSlot>

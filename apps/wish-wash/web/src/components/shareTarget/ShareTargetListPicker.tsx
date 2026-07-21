@@ -7,7 +7,7 @@ import {
 	DialogTitle,
 	Icon,
 } from '@a-type/ui';
-import { useNavigate } from '@biscuits/client';
+import { useNavigate } from '@tanstack/react-router';
 import { useSnapshot } from 'valtio';
 import { addToList } from '../lists/add/util.js';
 import { shareTargetState } from './shareTargetState.js';
@@ -34,7 +34,7 @@ export function ShareTargetListPicker({}: ShareTargetListPickerProps) {
 			links: share.url ? [share.url] : [],
 			type: share.url ? 'link' : 'idea',
 		});
-		navigate(`/${listId}?itemId=${itemId}`);
+		navigate({ to: `/${listId}`, search: { itemId } });
 		shareTargetState.share = null;
 	};
 

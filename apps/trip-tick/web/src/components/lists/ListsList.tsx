@@ -30,7 +30,14 @@ export function ListsList({}: ListsListProps) {
 					<Button
 						size="small"
 						key={list.get('id')}
-						render={<Link to={`/lists/${list.get('id')}`} />}
+						render={
+							<Link
+								to="/lists/$listId"
+								params={{
+									listId: list.get('id'),
+								}}
+							/>
+						}
 					>
 						{list.get('name')}
 					</Button>

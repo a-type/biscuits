@@ -10,8 +10,8 @@ import {
 	Dialog,
 	Icon,
 } from '@a-type/ui';
+import { useNavigate, useSearch } from '@tanstack/react-router';
 import { ListItemsItem } from '@trip-tick.biscuits/verdant';
-import { useSearchParams } from '@biscuits/client';
 import { ListItemEditor } from './ListItemEditor.jsx';
 import { getItemRulesLabel } from './utils.js';
 
@@ -24,28 +24,19 @@ export function ListEditorItem({ item, onDelete }: ListEditorItemProps) {
 	const { id, description, conditions } = hooks.useWatch(item);
 	hooks.useWatch(conditions);
 	const shortString = getItemRulesLabel(item);
-	const [params, setParams] = useSearchParams();
-	const open = params.get('item') === id;
+	const search = useSearch({ strict: false }) as Record<string, string>;
+	const navigate = useNavigate();
+	const open = search.item === id;
 	const onClose = () =>
-		setParams(
-			(p) => {
-				p.delete('item');
-				return p;
-			},
-			{
-				replace: true,
-			},
-		);
+		navigate({
+			replace: true,
+			search: (prev) => ({ ...prev, item: undefined }) as never,
+		});
 	const onOpen = () =>
-		setParams(
-			(p) => {
-				p.set('item', id);
-				return p;
-			},
-			{
-				replace: true,
-			},
-		);
+		navigate({
+			replace: true,
+			search: (prev) => ({ ...prev, item: id }) as never,
+		});
 
 	return (
 		<Dialog

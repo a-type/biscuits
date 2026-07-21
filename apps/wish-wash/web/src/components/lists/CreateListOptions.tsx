@@ -1,4 +1,4 @@
-import { useHasServerAccess, useNavigate } from '@biscuits/client';
+import { useHasServerAccess } from '@biscuits/client';
 import { hooks } from '@/hooks.js';
 import {
 	Box,
@@ -11,6 +11,7 @@ import {
 } from '@a-type/ui';
 
 import { authorization, List, ListInit } from '@wish-wash.biscuits/verdant';
+import { useNavigate } from '@tanstack/react-router';
 import { useState } from 'react';
 import cls from './CreateListOptions.module.css';
 
@@ -37,7 +38,7 @@ export function CreateListOptions({
 		access?: (typeof authorization)['private'],
 	) => {
 		const list = await client.lists.put({ name, type }, { access });
-		navigate(`/${list.get('id')}`);
+		navigate({ to: `/${list.get('id')}` });
 		setStage('type');
 		onCreated?.(list);
 	};

@@ -1,4 +1,4 @@
-import { H1, H2, P, PageContent } from '@a-type/ui';
+import { H1, H2, P, PageContent, TextLink } from '@a-type/ui';
 import { Link } from '@biscuits/client';
 
 export function TermsAndConditions() {
@@ -278,7 +278,9 @@ export function TermsAndConditions() {
 					deciphering, or otherwise attempting to derive the source code for the
 					Services or any related technology that is not open source (p.s.
 					Biscuits and the underlying data platform is{' '}
-					<Link to="https://github.com/a-type/biscuits">open source</Link>
+					<TextLink href="https://github.com/a-type/biscuits">
+						open source
+					</TextLink>
 					); and
 				</li>
 				<li>
@@ -349,7 +351,7 @@ export function TermsAndConditions() {
 				As we ask others to respect our intellectual property rights, we respect
 				the intellectual property rights of others. If you believe any Content
 				violates your copyright, please{' '}
-				<Link to="mailto:hi@gnocchi.club">contact us</Link>.
+				<TextLink href="mailto:hi@gnocchi.club">contact us</TextLink>.
 			</P>
 
 			<H2>Intellectual Property</H2>

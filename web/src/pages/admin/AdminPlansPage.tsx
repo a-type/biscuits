@@ -1,4 +1,4 @@
-import { featureFlags, useSearchParams } from '@biscuits/client';
+import { featureFlags } from '@biscuits/client';
 import { AdminPlanLibraryInfo } from '@/components/admin/AdminPlanLibraryInfo.jsx';
 import {
 	Box,
@@ -11,6 +11,7 @@ import {
 import { apps } from '@biscuits/apps';
 
 import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
+import { useNavigate, useSearch } from '@tanstack/react-router';
 
 import classes from './AdminPlansPage.module.css';
 
@@ -49,8 +50,9 @@ const setFlagMutation = graphql(`
 `);
 
 export function AdminPlansPage({}: AdminPlansPageProps) {
-	const [search, setSearch] = useSearchParams();
-	const selectedId = search.get('planId');
+	const search = useSearch({ strict: false }) as Record<string, string>;
+	const navigate = useNavigate();
+	const selectedId = search.planId;
 
 	const { data, fetchMore } = useSuspenseQuery(plans, {
 		variables: {
@@ -90,9 +92,12 @@ export function AdminPlansPage({}: AdminPlansPageProps) {
 						</ul>
 						<Button
 							onClick={() =>
-								setSearch((old) => {
-									old.set('planId', node.id.toString());
-									return old;
+								navigate({
+									replace: true,
+									search: {
+										...search,
+										planId: node.id.toString(),
+									} as any,
 								})
 							}
 						>
@@ -108,9 +113,12 @@ export function AdminPlansPage({}: AdminPlansPageProps) {
 				open={!!selected}
 				onOpenChange={(open) => {
 					if (!open)
-						setSearch((old) => {
-							old.delete('planId');
-							return old;
+						navigate({
+							replace: true,
+							search: {
+								...search,
+								planId: undefined,
+							} as any,
 						});
 				}}
 			>

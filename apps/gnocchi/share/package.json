@@ -6,7 +6,7 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
-		"tsc": "tsc --build",
+		"tsc": "tsc --build --dry",
 		"preview": "vite preview",
 		"deploy": "wrangler deploy",
 		"types": "wrangler types -c wrangler.jsonc",

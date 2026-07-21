@@ -97,7 +97,9 @@ function UnknownListRedirectInner({ listId }: { listId: string }) {
 
 	useEffect(() => {
 		if (!list) {
-			navigate('/');
+			navigate({
+				to: '/',
+			});
 		}
 	}, [list, navigate]);
 

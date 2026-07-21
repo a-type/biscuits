@@ -8,13 +8,14 @@ import { ProjectColorSpotlight } from '@/components/projects/ProjectColorSpotlig
 import { ProjectPalette } from '@/components/projects/ProjectPalette.jsx';
 import { hooks } from '@/hooks.js';
 import { ActionBar, Button, H1, Icon, PageContent } from '@a-type/ui';
-import { Link, useParams } from '@biscuits/client';
+import { Link } from '@biscuits/client';
+import { useParams } from '@tanstack/react-router';
 import cls from './ProjectPage.module.css';
 
 export interface ProjectPageProps {}
 
 export function ProjectPage({}: ProjectPageProps) {
-	const id = useParams().id;
+	const id = useParams({ from: '/projects/$id' }).id;
 	const project = hooks.useProject(id);
 
 	if (!project) {

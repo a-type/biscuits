@@ -1,22 +1,25 @@
-import { useLocalStorage, useSearchParams } from '@biscuits/client';
-
-
+import { useLocalStorage } from '@biscuits/client';
+import { useNavigate, useSearch } from '@tanstack/react-router';
 import { useCallback } from 'react';
 
 export function useColorSelection() {
-	const [params, setParams] = useSearchParams();
+	const search = useSearch({ strict: false }) as Record<string, string>;
+	const navigate = useNavigate();
 	const setColor = useCallback(
 		(colorId: string | null) => {
-			setParams((p) => {
-				if (!colorId) p.delete('color');
-				else p.set('color', colorId);
-				return p;
+			navigate({
+				replace: true,
+				search: (prev) =>
+					({
+						...prev,
+						color: colorId || undefined,
+					}) as never,
 			});
 		},
-		[setParams],
+		[navigate],
 	);
 
-	return [params.get('color'), setColor] as const;
+	return [search.color, setColor] as const;
 }
 
 export type ColorSort = 'hue' | 'saturation' | 'lightness';

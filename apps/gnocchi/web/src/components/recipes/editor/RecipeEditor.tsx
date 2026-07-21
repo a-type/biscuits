@@ -1,6 +1,9 @@
 import { RecipeTimeFields } from '@/components/recipes/editor/RecipeTimeFields.jsx';
-import { HeaderBar } from '@/components/recipes/layout/HeaderBar.jsx';
-import { makeRecipeLink } from '@/components/recipes/makeRecipeLink.js';
+import {
+	HeaderBar,
+	HeaderBarBack,
+} from '@/components/recipes/layout/HeaderBar.jsx';
+import { makeRecipeSlug } from '@/components/recipes/makeRecipeLink.js';
 import { usePageTitle } from '@/hooks/usePageTitle.jsx';
 import { hooks } from '@/stores/groceries/index.js';
 import { Box, Field, H2, Input } from '@a-type/ui';
@@ -43,7 +46,13 @@ function RecipeEditorContent({ recipe }: { recipe: Recipe }) {
 
 	return (
 		<Box col gap="xl" items="stretch">
-			<HeaderBar backUrl={makeRecipeLink(recipe, '')}>
+			<HeaderBar>
+				<HeaderBarBack
+					to="/recipes/$slug"
+					params={{
+						slug: makeRecipeSlug(recipe),
+					}}
+				/>
 				<RecipeEditActions />
 			</HeaderBar>
 			<Box col gap="sm">

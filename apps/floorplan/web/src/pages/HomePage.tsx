@@ -1,7 +1,7 @@
 import { CreateFloorButton } from '@/components/floorplans/CreateFloor.jsx';
 import { useInitialFloorId } from '@/hooks/useLastFloorId.js';
 import { PageRoot } from '@a-type/ui';
-import { useNavigate } from '@biscuits/client';
+import { useNavigate } from '@tanstack/react-router';
 import { useEffect } from 'react';
 
 export interface HomePageProps {}

@@ -1,13 +1,14 @@
-import { CONFIG, useSearchParams } from '@biscuits/client';
+import { CONFIG } from '@biscuits/client';
 import { ResetPasswordForm } from '@/components/auth/ResetPasswordForm.jsx';
 import { H1, P, PageContent, PageRoot } from '@a-type/ui';
+import { useSearch } from '@tanstack/react-router';
 
 export interface ResetPasswordPageProps {}
 
 export function ResetPasswordPage({}: ResetPasswordPageProps) {
-	const [searchParams] = useSearchParams();
-	const code = searchParams.get('code');
-	const email = searchParams.get('email');
+	const search = useSearch({ strict: false }) as Record<string, string>;
+	const code = search.code;
+	const email = search.email;
 
 	if (!code || !email) {
 		return (

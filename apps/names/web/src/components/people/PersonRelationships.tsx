@@ -11,8 +11,8 @@ import {
 	Masonry,
 	Select,
 } from '@a-type/ui';
-import { Person, Relationship } from '@names.biscuits/verdant';
 import { Link } from '@biscuits/client';
+import { Person, Relationship } from '@names.biscuits/verdant';
 import { Suspense } from 'react';
 import { PersonNameSearchField } from './PersonNameSearchField.jsx';
 import cls from './PersonRelationships.module.css';
@@ -121,7 +121,7 @@ function PersonRelationshipItem({
 			<Button
 				emphasis="ghost"
 				className={cls.arrow}
-				render={<Link to={`/people/${otherPersonId}`} />}
+				render={<Link to="/people/$id" params={{ id: otherPersonId }} />}
 			>
 				<Icon name="arrowRight" />
 			</Button>

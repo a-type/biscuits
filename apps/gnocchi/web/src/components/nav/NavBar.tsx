@@ -1,6 +1,6 @@
 import { Link } from '@/components/nav/Link.jsx';
 import { saveHubRecipeOnboarding } from '@/onboarding/saveHubRecipeOnboarding.js';
-import { hooks } from '@/stores/groceries/index.js';
+import { FileRouteTypes } from '@/routeTree.gen.js';
 import {
 	IconName,
 	NavBarItem,
@@ -15,14 +15,7 @@ import {
 import { NavBarChangelog, OnboardingTooltip } from '@biscuits/client';
 import { NavLockup } from '@biscuits/client/apps';
 import { useMatch } from '@tanstack/react-router';
-import {
-	ReactNode,
-	Suspense,
-	forwardRef,
-	memo,
-	useCallback,
-	useEffect,
-} from 'react';
+import { ReactNode, Suspense, forwardRef, memo, useEffect } from 'react';
 import { useSnapshot } from 'valtio';
 import { groceriesState } from '../groceries/state.js';
 import { useHasNewExpirations } from '../pantry/hooks.js';
@@ -70,18 +63,14 @@ const NavBarLink = memo(
 	forwardRef<
 		HTMLAnchorElement,
 		{
-			to: string;
+			to: FileRouteTypes['to'];
 			children: ReactNode;
 			icon: IconName;
 			animate?: boolean;
 			active: boolean;
 			onClick?: () => void;
-			onHover?: () => void;
 		}
-	>(function NavBarLink(
-		{ to, children, icon, animate, active, onHover, onClick },
-		ref,
-	) {
+	>(function NavBarLink({ to, children, icon, animate, active, onClick }, ref) {
 		return (
 			<NavBarItem
 				render={
@@ -91,7 +80,6 @@ const NavBarLink = memo(
 							active,
 						})}
 						data-active={active}
-						onMouseOver={onHover}
 						onClick={onClick}
 						ref={ref}
 					/>
@@ -109,16 +97,10 @@ const NavBarLink = memo(
 );
 
 function RecipesNavBarLink({ active }: { active: boolean }) {
-	const client = hooks.useClient();
-	const preload = useCallback(() => {
-		// fire off the query to preload it
-		client.recipes.findAll();
-	}, [client]);
-
 	const { peer: someoneViewingRecipe } = useRecipePresenceNotification();
 
 	return (
-		<NavBarLink to="/recipes" icon="book" active={active} onHover={preload}>
+		<NavBarLink to="/recipes" icon="book" active={active}>
 			<span>Recipes</span>
 			{someoneViewingRecipe && <Pip />}
 		</NavBarLink>

@@ -10,7 +10,7 @@ import {
 	toast,
 } from '@a-type/ui';
 import { List } from '@trip-tick.biscuits/verdant';
-import { useNavigate } from '@biscuits/client';
+import { useNavigate } from '@tanstack/react-router';
 
 export function ListMenu({ list }: { list: List }) {
 	const client = hooks.useClient();
@@ -27,7 +27,7 @@ export function ListMenu({ list }: { list: List }) {
 					className="@mode-attention"
 					onClick={() => {
 						client.lists.delete(list.get('id'));
-						navigate('/');
+						navigate({ to: '/' });
 						const id = toast.success('List deleted', {
 							data: {
 								actions: [

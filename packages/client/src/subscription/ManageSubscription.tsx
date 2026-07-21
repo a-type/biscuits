@@ -5,7 +5,7 @@ import {
 	readFragment,
 	useLazyQuery,
 } from '@biscuits/graphql';
-import { useSearchParams } from '@biscuits/client';
+import { useNavigate, useSearch } from '@tanstack/react-router';
 import { useEffect } from 'react';
 import * as CONFIG from '../config.js';
 import { CancelPlanButton } from './CancelPlanButton.js';
@@ -46,19 +46,23 @@ export function ManageSubscription({
 	data: $data,
 	...props
 }: ManageSubscriptionProps) {
-	const [params, setParams] = useSearchParams();
+	const search = useSearch({ strict: false }) as Record<string, string>;
+	const navigate = useNavigate();
 
 	const data = readFragment(manageSubscriptionInfo, $data);
 
 	useEffect(() => {
-		if (params.get('paymentComplete')) {
+		if (search.paymentComplete) {
 			toast.success('Your subscription is activated! 🎉');
-			setParams((p) => {
-				p.delete('paymentComplete');
-				return p;
+			navigate({
+				replace: true,
+				search: {
+					...search,
+					paymentComplete: undefined,
+				} as any,
 			});
 		}
-	}, [params, setParams]);
+	}, [navigate, search.paymentComplete]);
 
 	const [refetchStatus] = useLazyQuery(refetchPlanStatus);
 

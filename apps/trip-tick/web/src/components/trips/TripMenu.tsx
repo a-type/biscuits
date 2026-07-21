@@ -8,7 +8,7 @@ import {
 	Icon,
 	toast,
 } from '@a-type/ui';
-import { useNavigate } from '@biscuits/client';
+import { useNavigate } from '@tanstack/react-router';
 
 export interface TripMenuProps {
 	tripId: string;
@@ -31,7 +31,7 @@ export function TripMenu({ tripId }: TripMenuProps) {
 					className="@mode-attention"
 					onClick={() => {
 						client.trips.delete(trip.get('id'));
-						navigate('/', { skipTransition: true });
+						navigate({ to: '/', viewTransition: false });
 						const id = toast.success('Trip deleted', {
 							data: {
 								actions: [

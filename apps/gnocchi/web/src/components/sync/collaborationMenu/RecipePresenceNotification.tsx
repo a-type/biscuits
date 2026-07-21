@@ -1,5 +1,5 @@
 import { Link } from '@/components/nav/Link.jsx';
-import { makeRecipeLink } from '@/components/recipes/makeRecipeLink.js';
+import { makeRecipeSlug } from '@/components/recipes/makeRecipeLink.js';
 import { Person, hooks } from '@/stores/groceries/index.js';
 import { Box, Button, Icon, Text } from '@a-type/ui';
 import { useHasServerAccess } from '@biscuits/client';
@@ -76,7 +76,15 @@ function RecipePresenceLink({
 				<Icon name="x" />
 			</Button>
 			<Box
-				render={<Link to={makeRecipeLink(recipe)} onClick={onDismiss} />}
+				render={
+					<Link
+						to="/recipes/$slug"
+						params={{
+							slug: makeRecipeSlug(recipe),
+						}}
+						onClick={onDismiss}
+					/>
+				}
 				grow
 				items="center"
 				gap="sm"

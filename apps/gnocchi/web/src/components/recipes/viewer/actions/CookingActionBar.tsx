@@ -135,7 +135,7 @@ function AddChefsAction() {
 							device sync, grocery collaboration, and web recipe scanning.
 						</p>
 						<p>
-							<TextLink newTab to={`${CONFIG.HOME_ORIGIN}/join`}>
+							<TextLink newTab href={`${CONFIG.HOME_ORIGIN}/join`}>
 								Learn more about subscription features.
 							</TextLink>
 						</p>

@@ -1,5 +1,5 @@
 import { Box, Button, ButtonProps, Icon, toast } from '@a-type/ui';
-import { useNavigate } from '@biscuits/client';
+import { useNavigate } from '@tanstack/react-router';
 import { ObjectEntity } from '@verdant-web/store';
 import { useContext } from 'react';
 import { VerdantContext } from '../verdant.js';
@@ -29,7 +29,7 @@ export function EntityDeleteButton({
 			onClick={(ev) => {
 				entity.deleteSelf();
 				if (redirectTo) {
-					navigate(redirectTo);
+					navigate({ to: redirectTo });
 				}
 				const id = toast(
 					<Box gap items="center">

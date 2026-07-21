@@ -1,4 +1,3 @@
-import { useLocalStorage, Link } from '@biscuits/client';
 import {
 	Box,
 	Button,
@@ -10,6 +9,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from '@a-type/ui';
+import { useLocalStorage } from '@biscuits/client';
 
 import { Item } from '@wish-wash.biscuits/verdant';
 
@@ -61,12 +61,13 @@ export function SearchButton({ item }: SearchButtonProps) {
 				}}
 				size="small"
 				render={
-					<Link
-						to={searchConfigs[selectedProvider].template.replace(
+					<a
+						href={searchConfigs[selectedProvider].template.replace(
 							'$1',
 							item.get('description'),
 						)}
-						newTab
+						target="_blank"
+						rel="noopener noreferrer"
 					/>
 				}
 			>

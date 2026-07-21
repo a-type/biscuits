@@ -2,7 +2,10 @@ import { AddImagePrompt } from '@/components/recipes/cook/AddImagePrompt.jsx';
 import { AddNotePrompt } from '@/components/recipes/cook/AddNotePrompt.jsx';
 import { CookingToolbar } from '@/components/recipes/cook/CookingToolbar.jsx';
 import { InstructionsProvider } from '@/components/recipes/editor/InstructionStepNodeView.jsx';
-import { HeaderBar } from '@/components/recipes/layout/HeaderBar.jsx';
+import {
+	HeaderBar,
+	HeaderBarBack,
+} from '@/components/recipes/layout/HeaderBar.jsx';
 import { RecipesNowPlaying } from '@/components/recipes/nowPlaying/RecipesNowPlaying.jsx';
 import { CookingActionBar } from '@/components/recipes/viewer/actions/CookingActionBar.jsx';
 import { RecipeNote } from '@/components/recipes/viewer/RecipeNote.jsx';
@@ -79,7 +82,8 @@ export function RecipeOverview({ recipe }: RecipeOverviewProps) {
 	return (
 		<>
 			<div id="pageTop" />
-			<HeaderBar backUrl="/recipes">
+			<HeaderBar>
+				<HeaderBarBack to="/recipes" />
 				<CookingActionBar recipe={recipe} style={{ flex: 1, minWidth: 0 }} />
 			</HeaderBar>
 			<OnboardingBanner onboarding={saveHubRecipeOnboarding} step="recipe">

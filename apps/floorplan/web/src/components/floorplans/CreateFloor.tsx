@@ -1,6 +1,6 @@
 import { hooks } from '@/hooks.js';
 import { Button, ButtonProps } from '@a-type/ui';
-import { useNavigate } from '@biscuits/client';
+import { useNavigate } from '@tanstack/react-router';
 
 export interface CreateFloorButtonProps extends ButtonProps {}
 export function CreateFloorButton({

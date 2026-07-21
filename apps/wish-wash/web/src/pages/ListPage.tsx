@@ -1,20 +1,21 @@
-import { useLocalStorage, Link, useNavigate, useParams } from '@biscuits/client';
 import { ListActions } from '@/components/lists/ListActions.jsx';
 import { ListHero } from '@/components/lists/ListHero.jsx';
 import { ListView } from '@/components/lists/ListView.jsx';
 import { SyncPurchases } from '@/components/lists/SyncPurchases.jsx';
 import { hooks } from '@/hooks.js';
 import { Box, Button, H1, Icon, PageContent, PageRoot } from '@a-type/ui';
+import { Link, useLocalStorage } from '@biscuits/client';
 
 import { UserMenu } from '@biscuits/client/apps';
 
+import { useNavigate, useParams } from '@tanstack/react-router';
 import { List } from '@wish-wash.biscuits/verdant';
 import { useEffect } from 'react';
 
 export interface ListPageProps {}
 
 export function ListPage({}: ListPageProps) {
-	const { listId } = useParams();
+	const { listId } = useParams({ from: '/$listId' });
 	const [_, setLastList] = useLocalStorage<string | null>('last-list', null);
 
 	const list = hooks.useList(listId);
@@ -27,7 +28,7 @@ export function ListPage({}: ListPageProps) {
 	useEffect(() => {
 		if (!hasList) {
 			setLastList(null);
-			navigate('/');
+			navigate({ to: '/' });
 		}
 	}, [hasList, navigate, setLastList]);
 

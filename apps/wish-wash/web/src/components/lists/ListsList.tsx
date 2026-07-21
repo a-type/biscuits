@@ -50,7 +50,7 @@ function ListsListItem({ item }: { item: List }) {
 	const { name, id } = hooks.useWatch(item);
 	return (
 		<Card>
-			<Card.Main render={<Link to={`/${id}`} />}>
+			<Card.Main render={<Link to="/$listId" params={{ listId: id }} />}>
 				<CardTitle>
 					<Icon name={item.isAuthorized ? 'lock' : 'add_person'} /> {name}
 				</CardTitle>

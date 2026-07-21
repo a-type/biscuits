@@ -1,18 +1,13 @@
-import { useLocalStorage, useSearchParams } from '@biscuits/client';
-
+import { useLocalStorage } from '@biscuits/client';
+import { useNavigate } from '@tanstack/react-router';
 
 export function useEditItem() {
-	const [_, setSearch] = useSearchParams();
+	const navigate = useNavigate();
 	return (id: string) =>
-		setSearch(
-			(s) => {
-				s.set('itemId', id);
-				return s;
-			},
-			{
-				replace: true,
-			},
-		);
+		navigate({
+			replace: true,
+			search: (prev) => ({ ...prev, itemId: id }) as never,
+		});
 }
 
 export type ItemSize = 'small' | 'large';

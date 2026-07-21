@@ -5,7 +5,7 @@ import {
 	useGeolocation,
 } from '@/services/location.js';
 import { Person } from '@names.biscuits/verdant';
-import { useNavigate, useSearchParams } from '@biscuits/client';
+import { useLocation, useNavigate, useSearch } from '@tanstack/react-router';
 import {
 	createContext,
 	ReactNode,
@@ -50,32 +50,44 @@ const SuperBarContext = createContext<{
 });
 
 export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
-	const [search] = useSearchParams();
-	const inputValue = search.get('q') ?? '';
+	const search = useSearch({ strict: false }) as Record<string, string>;
+	const inputValue = search.q ?? '';
+	const routerLocation = useLocation();
 	const navigate = useNavigate();
 	const setInputValue = useCallback(
 		(v: string) => {
 			const currentPersonId = /\/people\/([^/]+)/.exec(
-				window.location.pathname,
+				routerLocation.pathname,
 			)?.[1];
 			if (v === '') {
-				const prev = new URLSearchParams(window.location.search).get('prev');
+				const prev = search.prev;
 				if (prev) {
-					navigate(`/people/${prev}`, { replace: true });
+					navigate({ to: `/people/${prev}`, replace: true });
 				} else {
-					navigate(window.location.pathname, { replace: true });
+					navigate({
+						to: routerLocation.pathname,
+						replace: true,
+						search: (prevSearch) => ({
+							...prevSearch,
+							q: undefined,
+							prev: undefined,
+						}),
+					});
 				}
 				return;
 			}
 
-			const search = new URLSearchParams(window.location.search);
-			search.set('q', v);
-			if (currentPersonId) {
-				search.set('prev', currentPersonId);
-			}
-			navigate(`/?${search.toString()}`, { replace: true });
+			navigate({
+				to: '/',
+				replace: true,
+				search: (prevSearch) => ({
+					...prevSearch,
+					q: v,
+					prev: currentPersonId || undefined,
+				}),
+			});
 		},
-		[navigate],
+		[routerLocation.pathname, navigate, search.prev],
 	);
 	const deferredInput = useDeferredValue(inputValue);
 	const deferredSearchWord = deferredInput.split(/\s+/)[0] ?? '';
@@ -162,7 +174,7 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 	const addPerson = useAddPerson();
 	const [addRelationshipToCurrentPerson, setAddRelationshipToCurrentPerson] =
 		useState(true);
-	const previousPersonId = search.get('prev');
+	const previousPersonId = search.prev;
 	const relateTo = useMemo(() => {
 		if (previousPersonId) {
 			return [previousPersonId];
@@ -174,7 +186,7 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 		try {
 			setLoading(true);
 			const person = await addPerson(inputValue);
-			navigate(`/people/${person.get('id')}`);
+			navigate({ to: `/people/${person.get('id')}` });
 		} finally {
 			setLoading(false);
 		}
@@ -182,8 +194,9 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 
 	const selectPerson = useCallback(
 		(person: Person) => {
-			navigate(`/people/${person.get('id')}`, {
-				preserveQuery: true,
+			navigate({
+				to: `/people/${person.get('id')}`,
+				search: (prevSearch) => prevSearch,
 			});
 			// delay clearing search so we don't have a flash
 			// of unfiltered results

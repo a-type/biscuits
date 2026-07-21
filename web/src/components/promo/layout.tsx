@@ -98,15 +98,19 @@ export const FeatureSection = ({
 export const Footer = ({ className }: { className?: string }) => (
 	<Content className={clsx('@mode-dense', className)}>
 		<div className={classes.footerLinks}>
-			<Link to="/privacy-policy" newTab>
+			<Link to="/privacy" newTab>
 				Read the privacy policy
 			</Link>
 			<Link to="/tos" newTab>
 				Terms and Conditions of usage
 			</Link>
-			<Link to="https://github.com/a-type/biscuits" newTab>
+			<a
+				href="https://github.com/a-type/biscuits"
+				target="_blank"
+				rel="noopener noreferrer"
+			>
 				Biscuits is open source
-			</Link>
+			</a>
 		</div>
 	</Content>
 );
@@ -121,7 +125,7 @@ export const CallToAction = ({
 	<div className={clsx(classes.cta, className)}>
 		<div className={classes.ctaButtons}>
 			<Button
-				render={<Link to={appsById[appId].url} data-test="get-started" />}
+				render={<a href={appsById[appId].url} data-test="get-started" />}
 				emphasis="primary"
 				className={classes.ctaGetStarted}
 			>

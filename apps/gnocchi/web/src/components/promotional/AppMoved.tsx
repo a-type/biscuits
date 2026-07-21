@@ -47,7 +47,7 @@ export function AppMoved({}: AppMovedProps) {
 				<P>
 					Sorry, I know this is annoying, but Gnocchi has moved to a new app to
 					join{' '}
-					<TextLink newTab to={CONFIG.HOME_ORIGIN}>
+					<TextLink newTab href={CONFIG.HOME_ORIGIN}>
 						Biscuits
 					</TextLink>
 					. You'll have to go there to use the app now.
@@ -55,10 +55,10 @@ export function AppMoved({}: AppMovedProps) {
 				{!canSync ? <LoggedOut /> : <LoggedIn />}
 				<InstallNote />
 				<DialogActions>
-					<LinkButton to={`${CONFIG.HOME_ORIGIN}/contact`} newTab>
+					<LinkButton href={`${CONFIG.HOME_ORIGIN}/contact`} newTab>
 						Contact Support
 					</LinkButton>
-					<LinkButton emphasis="primary" to={goTo.toString()} newTab>
+					<LinkButton emphasis="primary" href={goTo.toString()} newTab>
 						Open Gnocchi
 					</LinkButton>
 				</DialogActions>

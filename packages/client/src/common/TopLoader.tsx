@@ -1,7 +1,7 @@
 import { clsx } from '@a-type/ui';
 import { animated, useSpring } from '@react-spring/web';
-import { useCallback, useEffect } from 'react';
-import { useIsRouteTransitioning } from './routerCompat.js';
+import { useRouterState } from '@tanstack/react-router';
+import { useCallback, useEffect, useState } from 'react';
 import cls from './TopLoader.module.css';
 
 export interface TopLoaderProps {
@@ -9,7 +9,9 @@ export interface TopLoaderProps {
 }
 
 export function TopLoader({ className }: TopLoaderProps) {
-	const show = useIsRouteTransitioning(500);
+	const isTransitioning = useRouterState({
+		select: (state) => state.isLoading,
+	});
 
 	const [style, spring] = useSpring(() => ({
 		width: '0%',
@@ -39,6 +41,17 @@ export function TopLoader({ className }: TopLoaderProps) {
 			});
 		};
 	}, [spring]);
+
+	const [show, setShow] = useState(false);
+
+	useEffect(() => {
+		if (!isTransitioning) {
+			setShow(false);
+			return;
+		}
+		const timeout = setTimeout(() => setShow(true), 500);
+		return () => clearTimeout(timeout);
+	}, [isTransitioning]);
 
 	useEffect(() => {
 		if (show) {

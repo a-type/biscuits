@@ -1,5 +1,5 @@
 import { FloorplanRenderer } from '@/components/floorplans/FloorplanRenderer.jsx';
-import { useParams } from '@biscuits/client';
+import { useParams } from '@tanstack/react-router';
 
 const FloorPage = () => {
 	const { floorId } = useParams({ from: '/floors/$floorId' });

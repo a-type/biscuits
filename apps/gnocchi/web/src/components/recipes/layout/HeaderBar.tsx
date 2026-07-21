@@ -1,14 +1,14 @@
 import { LinkButton } from '@/components/nav/Link.jsx';
 import { Box, Icon, PageFixedArea } from '@a-type/ui';
+import { LinkButtonProps } from '@biscuits/client';
 import { ReactNode } from 'react';
 
 export interface HeaderBarProps {
 	children?: ReactNode;
-	backUrl: string;
 	className?: string;
 }
 
-export function HeaderBar({ children, backUrl, className }: HeaderBarProps) {
+export function HeaderBar({ children, className }: HeaderBarProps) {
 	return (
 		<PageFixedArea
 			style={{
@@ -18,12 +18,17 @@ export function HeaderBar({ children, backUrl, className }: HeaderBarProps) {
 			className={className}
 		>
 			<Box items="center" gap="sm" p="xs">
-				<LinkButton to={backUrl} emphasis="ghost">
-					<Icon name="arrowLeft" />
-					Back
-				</LinkButton>
 				{children}
 			</Box>
 		</PageFixedArea>
+	);
+}
+
+export function HeaderBarBack(props: LinkButtonProps) {
+	return (
+		<LinkButton to="/recipes" {...props} emphasis="ghost">
+			<Icon name="arrowLeft" />
+			Back
+		</LinkButton>
 	);
 }

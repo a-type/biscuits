@@ -1,6 +1,5 @@
 import { hooks } from '@/hooks.js';
 import { Button, Card, Chip, clsx, Icon } from '@a-type/ui';
-import { Link } from '@biscuits/client';
 import { typeThemes } from '@wish-wash.biscuits/common';
 import { Item } from '@wish-wash.biscuits/verdant';
 import { CSSProperties, forwardRef } from 'react';
@@ -106,7 +105,9 @@ export const ListItem = forwardRef<HTMLDivElement, ListItemProps>(
 							<Button
 								emphasis="default"
 								size="small"
-								render={<Link to={link} newTab />}
+								render={
+									<a href={link} target="_blank" rel="noopener noreferrer" />
+								}
 							>
 								<Icon name="link" /> View
 							</Button>

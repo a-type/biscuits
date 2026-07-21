@@ -5,8 +5,7 @@ import {
 	locationRequestDialogState,
 	useHasDeniedGeolocation,
 } from '@/services/location.js';
-import { Box, Button, Dialog, Icon } from '@a-type/ui';
-import { Link } from '@biscuits/client';
+import { Box, Button, Dialog, Icon, TextLink } from '@a-type/ui';
 import { use, useState } from 'react';
 import { useSnapshot } from 'valtio';
 import cls from './LocationRequestDialog.module.css';
@@ -75,9 +74,14 @@ export function LocationRequestDialog() {
 						<p>
 							This data is only used to provide features in this app, in
 							accordance with the{' '}
-							<Link to="https://biscuits.club/privacy" className="font-bold">
+							<TextLink
+								href="https://biscuits.club/privacy"
+								target="_blank"
+								rel="noopener, noreferrer"
+								className="font-bold"
+							>
 								Privacy Policy.
-							</Link>
+							</TextLink>
 						</p>
 					</Dialog.Description>
 					<Dialog.Actions>

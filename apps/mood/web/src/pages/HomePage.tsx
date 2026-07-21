@@ -2,7 +2,7 @@ import { NavigateEntries } from '@/components/entries/NavigateEntries.jsx';
 import { UpsertEntry } from '@/components/entries/UpsertEntry.jsx';
 import { FloatingUserMenu } from '@/components/navigation/FloatingUserMenu.jsx';
 import { InstallHint } from '@biscuits/client/apps';
-import { useNavigate } from '@biscuits/client';
+import { useNavigate } from '@tanstack/react-router';
 import { startOfDay } from 'date-fns';
 
 export function HomePage() {
@@ -16,7 +16,7 @@ export function HomePage() {
 				value={today.getTime()}
 				onValueChange={(value: number) => {
 					const newDate = startOfDay(new Date(value));
-					navigate(`/entry/${newDate.toISOString()}`);
+					navigate({ to: `/entry/${newDate.toISOString()}` });
 				}}
 			/>
 			<FloatingUserMenu />

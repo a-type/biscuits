@@ -1,6 +1,7 @@
-import { useMe, useNavigate } from '@biscuits/client';
 import { hooks } from '@/store.js';
 import { Button, ButtonProps } from '@a-type/ui';
+import { useMe } from '@biscuits/client';
+import { useNavigate as useTanstackNavigate } from '@tanstack/react-router';
 
 export interface AddListButtonProps extends ButtonProps {}
 
@@ -10,7 +11,7 @@ export function AddListButton({
 	...rest
 }: AddListButtonProps) {
 	const client = hooks.useClient();
-	const navigate = useNavigate();
+	const navigate = useTanstackNavigate();
 	const { data: me } = useMe();
 	const allLists = hooks.useAllLists();
 	const hasLists = allLists.length > 0;
@@ -23,16 +24,18 @@ export function AddListButton({
 					const list = await client.lists.put({
 						name: 'New list',
 					});
-					navigate(`/lists/${list.get('id')}`, {
-						skipTransition: true,
+					navigate({
+						to: `/lists/${list.get('id')}`,
+						viewTransition: false,
 					});
 				} else {
 					const listName = me ? me.me.name : `My stuff`;
 					const list = await client.lists.put({
 						name: listName,
 					});
-					navigate(`/lists/${list.get('id')}`, {
-						skipTransition: true,
+					navigate({
+						to: `/lists/${list.get('id')}`,
+						viewTransition: false,
 					});
 				}
 			}}

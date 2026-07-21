@@ -25,7 +25,9 @@ export function RecipeDeleteButton({
 			color="attention"
 			onClick={() => {
 				client.recipes.delete(recipe.get('id'));
-				navigate('/recipes');
+				navigate({
+					to: '/recipes',
+				});
 			}}
 		>
 			Delete

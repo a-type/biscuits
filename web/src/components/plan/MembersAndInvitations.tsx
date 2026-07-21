@@ -11,8 +11,8 @@ import {
 	ConfirmedButton,
 	H3,
 } from '@a-type/ui';
-import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
 import { Link } from '@biscuits/client';
+import { graphql, useMutation, useSuspenseQuery } from '@biscuits/graphql';
 import { InviteMember } from './InviteMember.js';
 import classes from './MembersAndInvitations.module.css';
 
@@ -47,8 +47,8 @@ export function MembersAndInvitations() {
 	if (!plan) {
 		return (
 			<p>
-				<Link to="?tab=subscription">Subscribe to a plan</Link> to manage
-				members.
+				<Link search={{ tab: 'subscription' }}>Subscribe to a plan</Link> to
+				manage members.
 			</p>
 		);
 	}

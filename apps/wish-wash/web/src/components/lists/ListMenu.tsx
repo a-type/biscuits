@@ -1,4 +1,4 @@
-import { useHasServerAccess, useNavigate } from '@biscuits/client';
+import { useHasServerAccess } from '@biscuits/client';
 import { hooks } from '@/hooks.js';
 import {
 	Button,
@@ -13,6 +13,7 @@ import {
 } from '@a-type/ui';
 
 import { authorization } from '@wish-wash.biscuits/verdant';
+import { useNavigate } from '@tanstack/react-router';
 
 export interface ListMenuProps extends ButtonProps {}
 
@@ -27,7 +28,7 @@ export function ListMenu(props: ListMenuProps) {
 				access: isPrivate ? authorization.private : authorization.public,
 			},
 		);
-		navigate(`/${list.get('id')}?listId=${list.get('id')}`);
+		navigate({ to: `/${list.get('id')}`, search: { listId: list.get('id') } });
 	};
 
 	const canSync = useHasServerAccess();

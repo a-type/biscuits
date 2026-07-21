@@ -6,8 +6,8 @@ import {
 	TabsTrigger,
 } from '@a-type/ui';
 import { graphql, useSuspenseQuery } from '@biscuits/graphql';
-import { Outlet } from '@tanstack/react-router';
-import { Link, useNavigate } from '@biscuits/client';
+import { Link } from '@biscuits/client';
+import { Outlet, useNavigate } from '@tanstack/react-router';
 
 export interface AdminPageProps {}
 
@@ -25,7 +25,7 @@ export function AdminPage({}: AdminPageProps) {
 	const tabValue = location.pathname.split('/')[2];
 
 	if (!data?.me?.isProductAdmin) {
-		navigate('/login');
+		navigate({ to: '/login' });
 		return null;
 	}
 

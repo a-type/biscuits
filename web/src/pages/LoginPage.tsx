@@ -1,4 +1,4 @@
-import { CONFIG, Link, useSearchParams } from '@biscuits/client';
+import { CONFIG, Link } from '@biscuits/client';
 import { EmailSigninForm } from '@/components/auth/EmailSigninForm.jsx';
 import { EmailSignupForm } from '@/components/auth/EmailSignupForm.jsx';
 import { OAuthSigninButton } from '@/components/auth/OAuthSigninButton.jsx';
@@ -15,31 +15,33 @@ import {
 	toast,
 } from '@a-type/ui';
 import { AppId, appsById } from '@biscuits/apps';
+import { useNavigate, useSearch } from '@tanstack/react-router';
 
 import classNames from 'classnames';
 import { ReactNode, useEffect, useState } from 'react';
 import cls from './LoginPage.module.css';
 
 export default function LoginPage() {
-	const [searchParams, setParams] = useSearchParams();
-	const returnTo = searchParams.get('returnTo') ?? undefined;
-	const appReferrer = searchParams.get('appReferrer') ?? undefined;
+	const searchParams = useSearch({ strict: false }) as Record<string, string>;
+	const navigate = useNavigate();
+	const returnTo = searchParams.returnTo ?? undefined;
+	const appReferrer = searchParams.appReferrer ?? undefined;
 	let appState: any = undefined;
 	if (!returnTo && appReferrer) {
 		appState = {
 			appReferrer,
-			appReturnTo: searchParams.get('appReturnTo') ?? undefined,
+			appReturnTo: searchParams.appReturnTo ?? undefined,
 		};
 	}
-	const error = searchParams.get('error');
+	const error = searchParams.error;
 	useEffect(() => {
 		if (error) {
 			toast.error(error, { id: error });
 		}
 	}, [error]);
 
-	const activeTab = searchParams.get('tab') ?? 'signin';
-	const message = searchParams.get('message');
+	const activeTab = searchParams.tab ?? 'signin';
+	const message = searchParams.message;
 
 	const [tosAgreed, setTosAgreed] = useState(false);
 
@@ -90,9 +92,12 @@ export default function LoginPage() {
 						className={cls.tabs}
 						value={activeTab}
 						onValueChange={(val) =>
-							setParams((old) => {
-								old.set('tab', val);
-								return old;
+							navigate({
+								replace: true,
+								search: {
+									...searchParams,
+									tab: val,
+								} as any,
 							})
 						}
 					>
@@ -127,7 +132,7 @@ export default function LoginPage() {
 							<OAuthSigninButton
 								endpoint={`${CONFIG.API_ORIGIN}/auth/provider/google/login`}
 								returnTo={returnTo || '/settings?tab=subscription'}
-								inviteId={searchParams.get('inviteId')}
+								inviteId={searchParams.inviteId}
 								disabled={!tosAgreed}
 								appState={appState}
 							>
@@ -156,7 +161,7 @@ export default function LoginPage() {
 							<OAuthSigninButton
 								endpoint={`${CONFIG.API_ORIGIN}/auth/provider/google/login`}
 								returnTo={returnTo}
-								inviteId={searchParams.get('inviteId')}
+								inviteId={searchParams.inviteId}
 								appState={appState}
 							>
 								Sign in with Google
