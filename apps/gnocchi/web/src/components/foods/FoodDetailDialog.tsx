@@ -34,10 +34,11 @@ export function FoodDetailDialog({}: FoodDetailDialogProps) {
 	const open = !!foodName;
 	const onClose = () => {
 		navigate({
-			search: {
+			search: (prev) => ({
+				...prev,
 				showFood: undefined,
-			},
-			to: '.',
+			}),
+			viewTransition: false,
 		});
 	};
 	return (

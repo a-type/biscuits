@@ -83,6 +83,7 @@
 	display: flex;
 	flex-direction: column;
 	transition: opacity var(--m-dur) var(--m-ease-loose);
+	padding-block-end: var(--m-sp-sm);
 
 	&[data-is-item-dragging='true'] {
 		opacity: 0;

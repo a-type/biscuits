@@ -74,7 +74,8 @@ export function useFilteredRecipes() {
 	const normalizedTagFilter = tagFilter?.toLowerCase().trim();
 	const normalizedFoodFilter = titleFilter?.toLowerCase().trim();
 	// only the first word
-	const normalizedTitleWords = titleFilter?.toLowerCase().trim()?.split(/\s+/);
+	const normalizedTitleWords =
+		titleFilter?.toLowerCase().trim()?.split(/\s+/) ?? [];
 	const firstTitleWord = removeStopwords(normalizedTitleWords)[0];
 	const hasTitleFilter = !!titleFilter;
 

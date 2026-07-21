@@ -3,12 +3,8 @@ import { NavBar } from '@/components/nav/NavBar.jsx';
 import { SubscriptionPromotionContent } from '@/components/promotional/SubscriptionPromotionContent.jsx';
 import { RecipeTagEditor } from '@/components/recipes/tags/RecipeTagEditor.jsx';
 import { ErrorBoundary, PageRoot } from '@a-type/ui';
-import { SubscriptionPromotion, TopLoader } from '@biscuits/client';
-import {
-	Essentials,
-	GlobalErrorFallback,
-	GlobalLoader,
-} from '@biscuits/client/apps';
+import { SubscriptionPromotion } from '@biscuits/client';
+import { GlobalErrorFallback, GlobalLoader } from '@biscuits/client/apps';
 import {
 	Outlet,
 	createRootRoute,
@@ -43,12 +39,10 @@ function RootComponent() {
 	return (
 		<ErrorBoundary fallback={(props) => <GlobalErrorFallback {...props} />}>
 			<Suspense fallback={<GlobalLoader />}>
-				<TopLoader />
 				<PageRoot>
 					<Outlet />
 					<NavBar />
 				</PageRoot>
-				<Essentials />
 				<RecipeTagEditor />
 				<FoodDetailDialog />
 				<SubscriptionPromotion>

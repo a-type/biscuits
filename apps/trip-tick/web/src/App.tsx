@@ -10,7 +10,7 @@ export function App() {
 	return (
 		<Suspense fallback={<FullScreenSpinner />}>
 			<UIProvider disableViewportOffset manifestPath="/manifest.webmanifest">
-				<Provider appId="trip-tick" verdantClient={verdant as any}>
+				<Provider appId="trip-tick" verdantClient={verdant} router={router}>
 					<LofiProvider>
 						<RouterProvider router={router} />
 						<Explainer />

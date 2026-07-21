@@ -18,6 +18,7 @@ export function App({}: AppProps) {
 						disablePreviewWarning
 						appId="palette"
 						verdantClient={verdant as any}
+						router={router}
 					>
 						<VerdantProvider>
 							<RouterProvider router={router} />

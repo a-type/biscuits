@@ -19,6 +19,7 @@ export const OpenFoodDetailButton = forwardRef<
 			emphasis={!children && emphasis === undefined ? 'ghost' : emphasis}
 			to="."
 			search={{ showFood: foodName }}
+			viewTransition={false}
 			{...rest}
 		>
 			{children || <Icon name="food" />}

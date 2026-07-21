@@ -19,7 +19,7 @@ export function App({}: AppProps) {
 		>
 			<UIProvider disableViewportOffset manifestPath="/manifest.webmanifest">
 				<Suspense>
-					<Provider appId="wish-wash" verdantClient={verdant}>
+					<Provider appId="wish-wash" verdantClient={verdant} router={router}>
 						<VerdantProvider>
 							<RouterProvider router={router} />
 							<SubscriptionDialog />

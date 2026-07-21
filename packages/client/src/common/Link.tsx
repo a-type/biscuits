@@ -69,6 +69,7 @@ export const LinkButton = forwardRef<HTMLAnchorElement, LinkButtonProps>(
 				color={color}
 				size={size}
 				emphasis={emphasis}
+				nativeButton={false}
 			/>
 		);
 	},

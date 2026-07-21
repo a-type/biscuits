@@ -6,10 +6,12 @@ import z from 'zod';
 export const Route = createFileRoute('/recipes/$slug/')({
 	component: RouteComponent,
 	validateSearch: zodValidator(
-		z.object({
-			firstTimeScanFlow: z.boolean(),
-			skipWelcome: z.boolean(),
-		}),
+		z
+			.object({
+				firstTimeScanFlow: z.boolean(),
+				skipWelcome: z.boolean(),
+			})
+			.partial(),
 	),
 });
 

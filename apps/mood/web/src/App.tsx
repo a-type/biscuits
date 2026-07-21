@@ -14,7 +14,7 @@ export function App({}: AppProps) {
 		<ErrorBoundary fallback={<GlobalErrorFallback />}>
 			<UIProvider manifestPath="/manifest.webmanifest">
 				<Suspense>
-					<Provider appId="mood" verdantClient={verdant as any}>
+					<Provider appId="mood" verdantClient={verdant as any} router={router}>
 						<VerdantProvider>
 							<RouterProvider router={router} />
 						</VerdantProvider>

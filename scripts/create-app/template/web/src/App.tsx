@@ -5,10 +5,10 @@ import {
 	Provider,
 	useHasServerAccess,
 } from '@biscuits/client';
+import { RouterProvider } from '@tanstack/react-router';
 import { ReactNode, Suspense } from 'react';
 import { hooks } from './hooks.js';
 import { router } from './router.js';
-import { RouterProvider } from '@tanstack/react-router';
 
 export interface AppProps {}
 
@@ -17,7 +17,7 @@ export function App({}: AppProps) {
 		<ErrorBoundary fallback={(props) => <GlobalErrorFallback {...props} />}>
 			<UIProvider manifestPath="/manifest.webmanifest">
 				<Suspense>
-					<Provider appId="{{todoId}}" verdantClient={verdant as any}>
+					<Provider appId="{{todoId}}" verdantClient={verdant} router={router}>
 						<VerdantProvider>
 							<RouterProvider router={router} />
 						</VerdantProvider>

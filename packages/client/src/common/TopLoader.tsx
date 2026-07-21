@@ -1,15 +1,17 @@
 import { clsx } from '@a-type/ui';
 import { animated, useSpring } from '@react-spring/web';
-import { useRouterState } from '@tanstack/react-router';
+import { Router, useRouterState } from '@tanstack/react-router';
 import { useCallback, useEffect, useState } from 'react';
 import cls from './TopLoader.module.css';
 
 export interface TopLoaderProps {
 	className?: string;
+	router: Router<any>;
 }
 
-export function TopLoader({ className }: TopLoaderProps) {
+export function TopLoader({ className, router }: TopLoaderProps) {
 	const isTransitioning = useRouterState({
+		router,
 		select: (state) => state.isLoading,
 	});
 
@@ -46,6 +48,7 @@ export function TopLoader({ className }: TopLoaderProps) {
 
 	useEffect(() => {
 		if (!isTransitioning) {
+			// eslint-disable-next-line react-hooks/set-state-in-effect
 			setShow(false);
 			return;
 		}

@@ -14,7 +14,7 @@ export function App({}: AppProps) {
 		<ErrorBoundary fallback={(props) => <GlobalErrorFallback {...props} />}>
 			<UIProvider>
 				<Suspense>
-					<Provider appId="floorplan" verdantClient={verdant}>
+					<Provider appId="floorplan" verdantClient={verdant} router={router}>
 						<VerdantProvider>
 							<RouterProvider router={router} />
 						</VerdantProvider>

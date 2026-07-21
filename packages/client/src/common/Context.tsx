@@ -4,6 +4,7 @@ import {
 	ApolloProvider,
 	graphqlClient as defaultClient,
 } from '@biscuits/graphql';
+import { Router } from '@tanstack/react-router';
 import { ReactNode, createContext, useContext } from 'react';
 import { AppPreviewNotice } from '../apps/AppPreviewNotice.js';
 import { Essentials } from '../apps/Essentials.js';
@@ -18,12 +19,14 @@ export function Provider({
 	children,
 	verdantClient = null,
 	disablePreviewWarning,
+	router,
 }: {
 	appId?: AppId;
 	graphqlClient?: ApolloClient<any>;
 	children: ReactNode;
 	verdantClient?: any | null;
 	disablePreviewWarning?: boolean;
+	router: Router<any>;
 }) {
 	return (
 		<ApolloProvider client={graphqlClient}>
@@ -31,7 +34,7 @@ export function Provider({
 				<VerdantContext.Provider value={verdantClient}>
 					{appId && <AppPreviewNotice />}
 					{appId && !disablePreviewWarning && <PrereleaseWarning />}
-					<TopLoader />
+					<TopLoader router={router} />
 					{verdantClient && <GlobalSyncingIndicator />}
 					{children}
 					<Essentials />
