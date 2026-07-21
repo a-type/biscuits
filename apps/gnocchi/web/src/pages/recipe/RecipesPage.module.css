@@ -1,0 +1,10 @@
+.createButton {
+	z-index: 100;
+	height: --fn-literal(48px);
+	width: --fn-literal(48px);
+	align-items: center;
+	justify-content: center;
+	border-radius: var(--m-rd-lg);
+	box-shadow: var(--m-shadow-sm);
+	pointer-events: auto;
+}

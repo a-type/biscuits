@@ -4,6 +4,7 @@ import { RecipesNowPlaying } from '@/components/recipes/nowPlaying/RecipesNowPla
 import { usePageTitle } from '@/hooks/usePageTitle.jsx';
 import { Icon, PageContent, PageNowPlaying } from '@a-type/ui';
 import { Suspense } from 'react';
+import cls from './RecipesPage.module.css';
 
 export function RecipesPage() {
 	usePageTitle('Recipes');
@@ -17,7 +18,7 @@ export function RecipesPage() {
 						<Suspense>
 							<RecipeCreateButton
 								aria-label="Create a new recipe"
-								style={{ pointerEvents: 'auto', width: 48, height: 48 }}
+								className={cls.createButton}
 							>
 								<Icon name="plus" size={20} />
 							</RecipeCreateButton>

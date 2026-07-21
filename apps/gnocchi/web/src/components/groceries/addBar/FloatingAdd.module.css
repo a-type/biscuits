@@ -5,7 +5,7 @@
 	align-items: center;
 	justify-content: center;
 	border-radius: var(--m-rd-lg);
-	box-shadow: var(--m-shadow-lg);
+	box-shadow: var(--m-shadow-sm);
 	pointer-events: auto;
 
 	@media (min-width: 768px) {
