@@ -5,7 +5,7 @@
 	height: --fn-literal(34px);
 	align-items: center;
 	justify-content: center;
-	border-radius: var(--m-action-rd);
+	border-radius: var(--m-rd-full);
 	right: --fn-literal(-4px);
 
 	@media (min-width: 768px) {
