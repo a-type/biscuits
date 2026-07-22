@@ -9,10 +9,12 @@ export const CategorySelect = withSuspense(function CategorySelect({
 	value,
 	onChange,
 	children,
+	...rest
 }: {
 	value: string | null;
 	onChange: (v: string | null) => void;
 	children?: ReactElement;
+	className?: string;
 }) {
 	const [open, onOpenChange] = useState(false);
 	const [state, setState] = useState<'idle' | 'create'>('idle');
@@ -51,7 +53,7 @@ export const CategorySelect = withSuspense(function CategorySelect({
 	return (
 		<>
 			<Dialog open={open} onOpenChange={onOpenChange}>
-				<Dialog.SelectTrigger render={children}>
+				<Dialog.SelectTrigger render={children} {...rest}>
 					{category?.get('name') || 'Uncategorized'}
 				</Dialog.SelectTrigger>
 				<Dialog.Content>

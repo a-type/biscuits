@@ -105,9 +105,11 @@ const GroceryListCategories = forwardRef<
 		<Box
 			id="groceryList"
 			style={{
+				paddingTop: 'var(--m-sp-lg)',
 				marginBottom: 80,
 			}}
 			col
+			gap="xs"
 			p="sm"
 			full="width"
 			grow

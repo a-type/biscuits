@@ -102,7 +102,7 @@ function FoodDetailView({
 		: 0;
 
 	return (
-		<Box col gap>
+		<Box col gap="lg">
 			<DialogTitle>
 				<FoodNameEditor food={food} />
 			</DialogTitle>
@@ -150,6 +150,7 @@ function FoodDetailView({
 						<CategorySelect
 							value={food.get('categoryId')}
 							onChange={(val) => food.set('categoryId', val)}
+							className="@mode-dense"
 						/>
 					}
 				/>

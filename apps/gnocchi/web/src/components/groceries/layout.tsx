@@ -77,8 +77,6 @@ function ThemedPageContentInner({
 
 	return (
 		<PageContent
-			gap="none"
-			p="none"
 			className={classNames(cls.pageContent, className, theme)}
 			id="page-content"
 		>
