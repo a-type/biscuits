@@ -1,12 +1,13 @@
+import NotFoundPage from '@/pages/NotFoundPage.jsx';
 import {
 	GlobalErrorFallback,
+	GlobalLoader,
 	updateApp,
 	updateState,
 } from '@biscuits/client/apps';
 import { createRouter } from '@tanstack/react-router';
 import { routeTree } from './routeTree.gen.js';
 import { verdant } from './stores/groceries/index.js';
-import NotFoundPage from '@/pages/NotFoundPage.jsx';
 
 export const router = createRouter({
 	routeTree,
@@ -15,6 +16,7 @@ export const router = createRouter({
 	defaultErrorComponent: GlobalErrorFallback,
 	defaultViewTransition: true,
 	defaultNotFoundComponent: NotFoundPage,
+	defaultPendingComponent: GlobalLoader,
 });
 
 router.subscribe('onBeforeNavigate', (event) => {

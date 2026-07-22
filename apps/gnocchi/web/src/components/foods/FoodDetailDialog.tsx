@@ -2,7 +2,6 @@ import { FoodName } from '@/components/foods/FoodName.jsx';
 import { FoodNamesEditor } from '@/components/foods/FoodNamesEditor.jsx';
 import { ListSelect } from '@/components/groceries/lists/ListSelect.jsx';
 import { useExpiresText } from '@/components/pantry/hooks.js';
-import { Route } from '@/routes/__root.jsx';
 import { hooks } from '@/stores/groceries/index.js';
 import { useChangeFoodCanonicalName } from '@/stores/groceries/mutations.js';
 import {
@@ -23,21 +22,23 @@ import {
 	withProps,
 } from '@a-type/ui';
 import { Food } from '@gnocchi.biscuits/verdant';
+import { useNavigate, useSearch } from '@tanstack/react-router';
 import { Suspense, useState } from 'react';
 import { CategorySelect } from '../groceries/categories/CategorySelect.jsx';
 
 export interface FoodDetailDialogProps {}
 
 export function FoodDetailDialog({}: FoodDetailDialogProps) {
-	const navigate = Route.useNavigate();
-	const { showFood: foodName } = Route.useSearch();
+	const navigate = useNavigate();
+	const { showFood: foodName } = useSearch({ strict: false });
 	const open = !!foodName;
 	const onClose = () => {
 		navigate({
-			search: (prev) => ({
-				...prev,
-				showFood: undefined,
-			}),
+			search: (prev) =>
+				({
+					...prev,
+					showFood: undefined,
+				} as never),
 			viewTransition: false,
 		});
 	};

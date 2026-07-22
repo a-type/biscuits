@@ -58,11 +58,9 @@ export function ThemedPageContent({
 	className?: string;
 }) {
 	return (
-		<Suspense fallback={<PageContent>{children}</PageContent>}>
-			<ThemedPageContentInner listId={listId} className={className}>
-				{children}
-			</ThemedPageContentInner>
-		</Suspense>
+		<ThemedPageContentInner listId={listId} className={className}>
+			{children}
+		</ThemedPageContentInner>
 	);
 }
 
@@ -78,16 +76,14 @@ function ThemedPageContentInner({
 	const theme = useListThemeClass(listId);
 
 	return (
-		<Suspense fallback={children}>
-			<PageContent
-				gap="none"
-				p="none"
-				className={classNames(cls.pageContent, className, theme)}
-				id="page-content"
-			>
-				{children}
-			</PageContent>
-		</Suspense>
+		<PageContent
+			gap="none"
+			p="none"
+			className={classNames(cls.pageContent, className, theme)}
+			id="page-content"
+		>
+			{children}
+		</PageContent>
 	);
 }
 
