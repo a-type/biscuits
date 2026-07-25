@@ -146,6 +146,7 @@ function TripViewInfo({
 		<Box
 			gap={!startsAt || !endsAt ? 'lg' : 'md'}
 			className={classNames(cls.tripHeader)}
+			p="lg"
 		>
 			<Box items="center" gap="xs">
 				<Button
@@ -209,74 +210,76 @@ function TripViewChecklists({
 	}
 
 	return (
-		<TabsRoot
-			value={activeList}
-			onValueChange={(val) => {
-				navigate({
-					replace: true,
-					search: (prev) => ({ ...prev, list: val }) as never,
-				});
-			}}
-		>
-			<div className={cls.tabsHeaderRoot}>
-				<div className={cls.tabsHeader}>
-					<Text bold render={<h4 />} style={{ flex: 1 }}>
-						{editingLists ?
-							startedWithNoLists ?
-								'Add lists'
-							:	'Edit lists'
-						:	'Lists'}
-					</Text>
-					<Button
-						className={cls.tabsToggle}
-						size={editingLists ? 'small' : 'default'}
-						color="accent"
-						emphasis={editingLists ? 'primary' : 'ghost'}
-						onClick={() => setEditingLists((v) => !v)}
-					>
-						{editingLists ?
-							<>
-								Done <Icon name="check" />
-							</>
-						:	<Icon name="gear" />}
-					</Button>
+		<Box full="width" grow col p="lg">
+			<TabsRoot
+				value={activeList}
+				onValueChange={(val) => {
+					navigate({
+						replace: true,
+						search: (prev) => ({ ...prev, list: val }) as never,
+					});
+				}}
+			>
+				<div className={cls.tabsHeaderRoot}>
+					<div className={cls.tabsHeader}>
+						<Text bold render={<h4 />} style={{ flex: 1 }}>
+							{editingLists ?
+								startedWithNoLists ?
+									'Add lists'
+								:	'Edit lists'
+							:	'Lists'}
+						</Text>
+						<Button
+							className={cls.tabsToggle}
+							size={editingLists ? 'small' : 'default'}
+							color="accent"
+							emphasis={editingLists ? 'primary' : 'ghost'}
+							onClick={() => setEditingLists((v) => !v)}
+						>
+							{editingLists ?
+								<>
+									Done <Icon name="check" />
+								</>
+							:	<Icon name="gear" />}
+						</Button>
+					</div>
+					<CollapsibleSimple open={editingLists}>
+						<Box p="sm">
+							<AddListsPicker trip={trip} />
+						</Box>
+					</CollapsibleSimple>
+					<CollapsibleSimple open={!editingLists}>
+						<TabsList className={cls.tabsList}>
+							{mappedLists.map((list) => (
+								<ListTab list={list} key={list.get('id')} trip={trip} />
+							))}
+						</TabsList>
+					</CollapsibleSimple>
 				</div>
-				<CollapsibleSimple open={editingLists}>
-					<Box p="sm">
-						<AddListsPicker trip={trip} />
-					</Box>
-				</CollapsibleSimple>
-				<CollapsibleSimple open={!editingLists}>
-					<TabsList className={cls.tabsList}>
-						{mappedLists.map((list) => (
-							<ListTab list={list} key={list.get('id')} trip={trip} />
-						))}
-					</TabsList>
-				</CollapsibleSimple>
-			</div>
-			{mappedLists.map((list) => {
-				const listId = list.get('id');
-				return (
-					<TabsContent key={list.get('id')} value={list.get('id')}>
-						<TripViewChecklist
-							key={listId}
-							list={list}
-							days={days}
-							completions={completions}
-							extraItems={extraItems}
-							forecast={forecast}
-						/>
-					</TabsContent>
-				);
-			})}
-			{startedWithNoLists && !mappedLists.length && (
-				<div className={cls.tabsEmpty}>
-					<span style={{ fontStyle: 'normal' }}>💡</span> Add lists to this trip
-					for everything you want to pack. Once you start packing, check off
-					items as you go.
-				</div>
-			)}
-		</TabsRoot>
+				{mappedLists.map((list) => {
+					const listId = list.get('id');
+					return (
+						<TabsContent key={list.get('id')} value={list.get('id')}>
+							<TripViewChecklist
+								key={listId}
+								list={list}
+								days={days}
+								completions={completions}
+								extraItems={extraItems}
+								forecast={forecast}
+							/>
+						</TabsContent>
+					);
+				})}
+				{startedWithNoLists && !mappedLists.length && (
+					<div className={cls.tabsEmpty}>
+						<span style={{ fontStyle: 'normal' }}>💡</span> Add lists to this
+						trip for everything you want to pack. Once you start packing, check
+						off items as you go.
+					</div>
+				)}
+			</TabsRoot>
+		</Box>
 	);
 }
 
