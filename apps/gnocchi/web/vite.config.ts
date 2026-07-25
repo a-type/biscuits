@@ -12,11 +12,7 @@ export default defineConfig(({ mode }) => ({
 			target: 'react',
 			autoCodeSplitting: true,
 		}),
-		react({
-			babel: {
-				// plugins: ['babel-plugin-react-compiler'],
-			},
-		}),
+		react(),
 		VitePWA({
 			includeManifestIcons: true,
 			strategies: 'injectManifest',
@@ -137,6 +133,7 @@ export default defineConfig(({ mode }) => ({
 	},
 	build: {
 		sourcemap: true,
-		cssMinify: 'esbuild',
+		cssMinify: false,
+		// cssMinify: 'esbuild',
 	},
 }));

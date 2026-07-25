@@ -85,6 +85,6 @@ export default defineConfig(({ command, mode }) => ({
 	},
 	build: {
 		sourcemap: true,
-		cssMinify: 'esbuild',
+		cssMinify: false,
 	},
 }));
