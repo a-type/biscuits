@@ -8,10 +8,8 @@ import {
 	Box,
 	Button,
 	Checkbox,
-	CollapsibleContent,
-	CollapsibleRoot,
+	Collapsible,
 	CollapsibleSimple,
-	CollapsibleTrigger,
 	Icon,
 	LiveUpdateTextField,
 	clsx,
@@ -94,7 +92,7 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 		const subline = useItemSubline(item);
 
 		return (
-			<CollapsibleRoot
+			<Collapsible
 				className={clsx('item', cls.root, className)}
 				open={menuOpen}
 				onOpenChange={setMenuOpen}
@@ -114,136 +112,136 @@ export const GroceryListItem = forwardRef<HTMLDivElement, GroceryListItemProps>(
 							height: 0,
 						}}
 						transition={{ type: 'spring', duration: 0.2 }}
-					>
-						<div className={cls.checkbox}>
-							<ItemCheckbox
-								isPurchased={isPurchased}
-								isPartiallyPurchased={isPartiallyPurchased}
-								togglePurchased={togglePurchased}
-							/>
+					/>
+				}
+			>
+				<div className={cls.checkbox}>
+					<ItemCheckbox
+						isPurchased={isPurchased}
+						isPartiallyPurchased={isPartiallyPurchased}
+						togglePurchased={togglePurchased}
+					/>
+				</div>
+				<div className={cls.main}>
+					<div className={clsx(cls.content, isPurchased && 'item-purchased')}>
+						<div className={cls.name}>
+							<span>{displayString}</span>
 						</div>
-						<div className={cls.main}>
+						{isPurchased && <div className={cls.crossout} />}
+						<CollapsibleSimple
+							open={!!subline && !menuOpen && !isPurchased}
+							className={cls.comment}
+						>
+							{subline}
+						</CollapsibleSimple>
+					</div>
+					<div className={cls.accessories}>
+						<RecentPeople item={item} className={cls.accessory} />
+						<Suspense>
+							<ListTag
+								item={item}
+								collapsed={menuOpen}
+								className={cls.accessory}
+							/>
+						</Suspense>
+						{!isPurchased && (
+							<Suspense>
+								<RecentPurchaseHint
+									compact
+									className={cls.accessory}
+									foodName={food}
+								/>
+							</Suspense>
+						)}
+						<div
+							onTouchStart={stopPropagation}
+							onTouchMove={stopPropagation}
+							onTouchEnd={stopPropagation}
+							onPointerDown={stopPropagation}
+							onPointerMove={stopPropagation}
+							onPointerUp={stopPropagation}
+							className={cls.accessory}
+						>
 							<div
-								className={clsx(cls.content, isPurchased && 'item-purchased')}
+								className={cls.grab}
+								onContextMenu={preventDefault}
+								aria-label="Reorder item"
+								{...menuProps}
 							>
-								<div className={cls.name}>
-									<span>{displayString}</span>
-								</div>
-								{isPurchased && <div className={cls.crossout} />}
-								<CollapsibleSimple
-									open={!!subline && !menuOpen && !isPurchased}
-									className={cls.comment}
+								<OnboardingTooltip
+									onboarding={categorizeOnboarding}
+									step="categorize"
+									content="Tap and hold to change category"
+									disableNext
 								>
-									{subline}
-								</CollapsibleSimple>
+									<Icon name="grabby" />
+								</OnboardingTooltip>
 							</div>
-							<div className={cls.accessories}>
-								<RecentPeople item={item} className={cls.accessory} />
+						</div>
+						<Collapsible.Trigger
+							render={
+								<Button
+									size="small"
+									emphasis="ghost"
+									className={cls.collapseTrigger}
+									aria-label={
+										menuOpen ? 'Close item details' : 'Open item details'
+									}
+								/>
+							}
+						>
+							<Collapsible.Icon>
+								<Icon name="chevron" className="icon" />
+							</Collapsible.Icon>
+						</Collapsible.Trigger>
+					</div>
+				</div>
+				<Collapsible.Content keepMounted className={cls.secondary}>
+					<Suspense>
+						<div className={cls.secondaryContent}>
+							<div className={cls.commentSection}>
+								<LiveUpdateTextField
+									value={comment || ''}
+									onChange={(val) => item.set('comment', val)}
+									placeholder="Add a comment"
+									className={clsx(cls.commentField, '@mode-dense')}
+								/>
 								<Suspense>
-									<ListTag
-										item={item}
-										collapsed={menuOpen}
-										className={cls.accessory}
+									<ListSelect
+										value={listId}
+										onChange={(listId) => item.set('listId', listId)}
+										className={clsx('@mode-denser', cls.listSelect)}
 									/>
 								</Suspense>
-								{!isPurchased && (
-									<Suspense>
-										<RecentPurchaseHint
-											compact
-											className={cls.accessory}
-											foodName={food}
-										/>
-									</Suspense>
-								)}
-								<div
-									onTouchStart={stopPropagation}
-									onTouchMove={stopPropagation}
-									onTouchEnd={stopPropagation}
-									onPointerDown={stopPropagation}
-									onPointerMove={stopPropagation}
-									onPointerUp={stopPropagation}
-									className={cls.accessory}
-								>
-									<div
-										className={cls.grab}
-										onContextMenu={preventDefault}
-										aria-label="Reorder item"
-										{...menuProps}
-									>
-										<OnboardingTooltip
-											onboarding={categorizeOnboarding}
-											step="categorize"
-											content="Tap and hold to change category"
-											disableNext
-										>
-											<Icon name="grabby" />
-										</OnboardingTooltip>
-									</div>
-								</div>
-								<CollapsibleTrigger
-									render={
-										<Button
-											size="small"
-											emphasis="ghost"
-											className={cls.collapseTrigger}
-											aria-label={
-												menuOpen ? 'Close item details' : 'Open item details'
-											}
-										/>
-									}
-								>
-									<Icon name="chevron" className="icon" />
-								</CollapsibleTrigger>
 							</div>
-						</div>
-						<CollapsibleContent className={cls.secondary}>
+							<Box full="width" items="center" justify="end" gap="xs">
+								<Suspense>
+									<QuantityEditor className={cls.editButton} item={item} />
+								</Suspense>
+								<Suspense>
+									<RecentPurchaseHint
+										foodName={food}
+										className={clsx('@mode-denser', cls.recentHint)}
+									/>
+								</Suspense>
+								<OpenFoodDetailButton foodName={food} />
+								<Suspense>
+									<ItemDeleteButton
+										color="attention"
+										emphasis="ghost"
+										item={item}
+									>
+										<Icon name="trash" />
+									</ItemDeleteButton>
+								</Suspense>
+							</Box>
 							<Suspense>
-								<div className={cls.secondaryContent}>
-									<div className={cls.commentSection}>
-										<LiveUpdateTextField
-											value={comment || ''}
-											onChange={(val) => item.set('comment', val)}
-											placeholder="Add a comment"
-											className={clsx(cls.commentField, '@mode-dense')}
-										/>
-										<Suspense>
-											<ListSelect
-												value={listId}
-												onChange={(listId) => item.set('listId', listId)}
-												className={clsx('@mode-denser', cls.listSelect)}
-											/>
-										</Suspense>
-									</div>
-									<Box full="width" items="center" justify="end" gap="xs">
-										<Suspense>
-											<QuantityEditor className={cls.editButton} item={item} />
-										</Suspense>
-										<Suspense>
-											<RecentPurchaseHint
-												foodName={food}
-												className={clsx('@mode-denser', cls.recentHint)}
-											/>
-										</Suspense>
-										<OpenFoodDetailButton foodName={food} />
-										<Suspense>
-											<ItemDeleteButton
-												color="attention"
-												emphasis="ghost"
-												item={item}
-											>
-												<Icon name="trash" />
-											</ItemDeleteButton>
-										</Suspense>
-									</Box>
-									<Suspense>
-										<ItemSources item={item} />
-									</Suspense>
-								</div>
+								<ItemSources item={item} />
 							</Suspense>
-						</CollapsibleContent>
-					</motion.div>
-				}
-			/>
+						</div>
+					</Suspense>
+				</Collapsible.Content>
+			</Collapsible>
 		);
 	},
 );
