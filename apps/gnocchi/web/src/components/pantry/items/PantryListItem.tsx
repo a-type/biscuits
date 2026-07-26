@@ -71,9 +71,9 @@ export function PantryListItem({
 				className={classNames(cls.root, className)}
 				data-frozen={!!frozenAt}
 				data-leaving={leaving}
+				size="sm"
 			>
 				<Card.Main
-					size="sm"
 					render={
 						<OpenFoodDetailButton
 							foodName={food}
@@ -135,6 +135,7 @@ export function PantryListItem({
 								size={showLabels ? 'small' : 'default'}
 								emphasis="ghost"
 								onClick={snooze}
+								aria-label={showLabels ? undefined : 'Snooze'}
 							>
 								<Icon name="clock" />
 								{showLabels && <span>Snooze</span>}
@@ -146,6 +147,7 @@ export function PantryListItem({
 								color="attention"
 								emphasis="ghost"
 								onClick={clear}
+								aria-label={showLabels ? undefined : 'Used'}
 							>
 								<Icon name="trash" />
 								{showLabels && <span>Used</span>}
@@ -221,6 +223,7 @@ const QuickAddButton = ({
 			emphasis="default"
 			onClick={repurchaseItem}
 			disabled={isOnList}
+			aria-label={showLabel ? undefined : isOnList ? 'In list' : 'Buy again'}
 		>
 			{isOnList ? <Icon name="check" /> : <Icon name="plus" />}
 			{showLabel && <span>{isOnList ? 'In list' : 'Buy again'}</span>}
@@ -246,6 +249,7 @@ const FreezeButton = ({
 							size={showLabel ? 'small' : 'default'}
 							emphasis="light"
 							color="accent"
+							aria-label={showLabel ? undefined : 'Change freeze time'}
 						/>
 					}
 				>

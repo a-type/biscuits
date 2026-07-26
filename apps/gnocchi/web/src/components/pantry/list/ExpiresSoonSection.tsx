@@ -1,4 +1,4 @@
-import { CardGrid, cardGridColumns, H2 } from '@a-type/ui';
+import { CardGrid, cardGridColumns, Heading } from '@a-type/ui';
 import classNames from 'classnames';
 import { useExpiresSoonItems } from '../hooks.js';
 import { PantryListItem } from '../items/PantryListItem.jsx';
@@ -15,7 +15,9 @@ export function ExpiresSoonSection({ className }: ExpiresSoonSectionProps) {
 
 	return (
 		<div className={classNames(cls.root, className)}>
-			<H2 className={cls.title}>Expiring soon</H2>
+			<Heading emphasis="ambient" bold render={<h2 />} className={cls.title}>
+				Expiring soon
+			</Heading>
 			<CardGrid columns={cardGridColumns.default}>
 				{expiresSoonItems.map((item) => (
 					<PantryListItem

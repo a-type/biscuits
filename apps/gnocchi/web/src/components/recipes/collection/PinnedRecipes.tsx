@@ -9,7 +9,14 @@ import {
 import { makeRecipeLink } from '@/components/recipes/makeRecipeLink.js';
 import { AddToListButton } from '@/components/recipes/viewer/AddToListButton.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import { Box, CollapsibleSimple, Divider, H2, Icon, Text } from '@a-type/ui';
+import {
+	Box,
+	CollapsibleSimple,
+	Divider,
+	Heading,
+	Icon,
+	Text,
+} from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { Link } from '@tanstack/react-router';
 import classNames from 'classnames';
@@ -33,7 +40,9 @@ export function PinnedRecipes({ className }: PinnedRecipesProps) {
 	return (
 		<CollapsibleSimple open={show} className={classNames(cls.root, className)}>
 			<div className={cls.explainer}>
-				<H2>Pinned</H2>
+				<Heading emphasis="ambient" bold render={<h2 />}>
+					Pinned
+				</Heading>
 				<HelpTip aria-label="Information about pinned recipes">
 					Pins help you organize upcoming dishes. They expire after 3 weeks.
 				</HelpTip>

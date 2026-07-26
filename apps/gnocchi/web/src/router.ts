@@ -1,7 +1,6 @@
 import NotFoundPage from '@/pages/NotFoundPage.jsx';
 import {
 	GlobalErrorFallback,
-	GlobalLoader,
 	updateApp,
 	updateState,
 } from '@biscuits/client/apps';
@@ -16,7 +15,6 @@ export const router = createRouter({
 	defaultErrorComponent: GlobalErrorFallback,
 	defaultViewTransition: true,
 	defaultNotFoundComponent: NotFoundPage,
-	defaultPendingComponent: GlobalLoader,
 });
 
 router.subscribe('onBeforeNavigate', (event) => {

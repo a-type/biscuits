@@ -7,5 +7,4 @@
 .title {
 	margin-inline-start: var(--m-sp-md);
 	margin-block-end: var(--m-sp-sm);
-	font-size: var(--m-prose-secondary-size);
 }
