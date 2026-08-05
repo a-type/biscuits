@@ -1,12 +1,4 @@
-import {
-	Button,
-	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
-	DialogTitle,
-	P,
-} from '@a-type/ui';
+import { Button, Dialog, P } from '@a-type/ui';
 import { useContext, useEffect, useState } from 'react';
 import { VerdantContext } from '../verdant.js';
 
@@ -36,16 +28,16 @@ export function ResetNotifier({}: ResetNotifierProps) {
 
 	return (
 		<Dialog open={shown} onOpenChange={setShown}>
-			<DialogContent>
-				<DialogTitle>Catching up...</DialogTitle>
+			<Dialog.Content>
+				<Dialog.Title>Catching up...</Dialog.Title>
 				<P>
 					It's been a while since you've used this app. Fetching the latest data
 					from the server!
 				</P>
-				<DialogActions>
-					<DialogClose render={<Button loading={waiting} />}>Ok</DialogClose>
-				</DialogActions>
-			</DialogContent>
+				<Dialog.Actions>
+					<Dialog.Close render={<Button loading={waiting} />}>Ok</Dialog.Close>
+				</Dialog.Actions>
+			</Dialog.Content>
 		</Dialog>
 	);
 }

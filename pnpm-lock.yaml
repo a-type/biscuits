@@ -13,8 +13,8 @@ catalogs:
       specifier: 2.1.3
       version: 2.1.3
     '@a-type/ui':
-      specifier: ^6.1.16
-      version: 6.1.16
+      specifier: ^6.1.23
+      version: 6.1.23
     '@a-type/utils':
       specifier: ^1.1.9
       version: 1.1.9
@@ -268,7 +268,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.16(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.23(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -397,7 +397,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.16(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.23(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -544,7 +544,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.16(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.23(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -812,7 +812,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.16(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.23(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -921,7 +921,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.16(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.23(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1036,7 +1036,7 @@ importers:
         version: 0.2.15(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.16(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.23(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1160,7 +1160,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.16(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.23(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1284,7 +1284,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.16(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.23(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1328,7 +1328,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.16(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.23(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@biscuits/graphql':
         specifier: workspace:*
         version: link:../../../packages/graphql
@@ -1426,7 +1426,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.16(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.23(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1541,7 +1541,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.16(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.23(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@astrojs/check':
         specifier: ^0.9.4
         version: 0.9.4(prettier@3.6.2)(typescript@7.0.2)
@@ -1583,7 +1583,7 @@ importers:
         version: 2.1.3
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.16(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.23(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1731,7 +1731,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.16(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.23(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@arbor-css/core':
         specifier: 'catalog:'
         version: 0.0.147
@@ -2046,8 +2046,8 @@ packages:
       react: ^18.3.1
       react-dom: ^18.3.1
 
-  '@a-type/ui@6.1.16':
-    resolution: {integrity: sha512-8zfkvBVBWQ1KSTwnCJn3kHoSZXmAZjgnBdTSdQWITQFPQcToL0xcqruqc2TZ3Bo5IPVKBFmMIZY010qqGyb3sw==}
+  '@a-type/ui@6.1.23':
+    resolution: {integrity: sha512-71A9xzmnQ+4IibF0pvOdD+S7Q6jTyyVtcMsuqtzfxHagqrULYDh44pDxmvouniVol+HNdu1BHYzBYKQktxZJ1A==}
     engines: {node: '>=24'}
     peerDependencies:
       '@arbor-css/core': ^0.0.144
@@ -6466,8 +6466,8 @@ packages:
     resolution: {integrity: sha512-b6Ilus+c3RrdDk+JhLKUAQfzzgLEPy6wcXqS7f/xe1EETvsDP6GORG7SFuOs6cID5YkqchW/LXZbX5bc8j7ZcQ==}
     engines: {node: '>=8'}
 
-  calendar-blocks@0.4.0:
-    resolution: {integrity: sha512-W5OIg9EhTmBD9pOb/ZpmbKeMJr8zGcHB7GFIYlcHGNc8W9WDncU4CDG9ZA2RS0Ykxegboo9WES4+AkLR3rV46Q==}
+  calendar-blocks@0.5.3:
+    resolution: {integrity: sha512-CrJoDSIpXkAGdUynugL7Li4WNvV1SECqqWf4KGtPpWJpNFPceOn83lzYFP7D1aO704d3y9wiJBk+y00a9YIWHw==}
     peerDependencies:
       react: '*'
 
@@ -11095,14 +11095,14 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@a-type/ui@6.1.16(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@a-type/ui@6.1.23(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@a-type/utils': 1.1.9
       '@arbor-css/core': 0.0.147
       '@base-ui/react': 1.6.0(@types/react@19.2.18)(date-fns@4.1.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@use-gesture/react': 10.3.1(react@19.2.8)
       browser-image-resizer: 2.4.1
-      calendar-blocks: 0.4.0(react@19.2.8)
+      calendar-blocks: 0.5.3(react@19.2.8)
       clsx: 2.1.1
       date-fns: 4.1.0
       formik: 2.4.6(react@19.2.8)
@@ -15911,7 +15911,7 @@ snapshots:
 
   cac@6.7.14: {}
 
-  calendar-blocks@0.4.0(react@19.2.8):
+  calendar-blocks@0.5.3(react@19.2.8):
     dependencies:
       react: 19.2.8
 

@@ -1,6 +1,6 @@
 import { AddToListDialog } from '@/components/recipes/viewer/AddToListDialog.jsx';
 import { saveHubRecipeOnboarding } from '@/onboarding/saveHubRecipeOnboarding.js';
-import { Button, ButtonProps, DialogTrigger } from '@a-type/ui';
+import { Button, ButtonProps, Dialog } from '@a-type/ui';
 import { OnboardingTooltip } from '@biscuits/client';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { Suspense } from 'react';
@@ -38,9 +38,9 @@ export function AddToListButton({
 					}
 				>
 					<AddToListDialog recipe={recipe} listId={listId}>
-						<DialogTrigger render={<Button emphasis="default" {...rest} />}>
+						<Dialog.Trigger render={<Button emphasis="default" {...rest} />}>
 							{children || 'Add to list'}
-						</DialogTrigger>
+						</Dialog.Trigger>
 					</AddToListDialog>
 				</Suspense>
 			</div>

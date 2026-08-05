@@ -2,7 +2,6 @@ import { hooks } from '@/stores/groceries/index.js';
 import {
 	Box,
 	Dialog,
-	DialogContent,
 	FormikForm,
 	Icon,
 	Select,
@@ -79,7 +78,7 @@ export function ListSelect({
 				</Select.Content>
 			</Select>
 			<Dialog open={isCreating} onOpenChange={() => setIsCreating(false)}>
-				<DialogContent>
+				<Dialog.Content>
 					<FormikForm
 						initialValues={{ name: '' }}
 						onSubmit={async ({ name }) => {
@@ -99,7 +98,7 @@ export function ListSelect({
 						/>
 						<SubmitButton>Create</SubmitButton>
 					</FormikForm>
-				</DialogContent>
+				</Dialog.Content>
 			</Dialog>
 		</>
 	);

@@ -1,5 +1,5 @@
 import { hooks } from '@/stores/groceries/index.js';
-import { Button, Dialog, DialogContent, DialogSelectItem } from '@a-type/ui';
+import { Button, Dialog } from '@a-type/ui';
 import { Category } from '@gnocchi.biscuits/verdant';
 import { ReactElement, useCallback, useState } from 'react';
 import { withSuspense } from '../../../hocs/withSuspense.jsx';
@@ -70,7 +70,7 @@ export const CategorySelect = withSuspense(function CategorySelect({
 								{category.get('name')}
 							</Dialog.SelectItem>
 						))}
-						<DialogSelectItem value="null">Uncategorized</DialogSelectItem>
+						<Dialog.SelectItem value="null">Uncategorized</Dialog.SelectItem>
 					</Dialog.SelectList>
 
 					<Dialog.Actions style={{ justifyContent: 'space-between' }}>
@@ -102,9 +102,9 @@ function CreateCategory({
 }) {
 	return (
 		<Dialog {...rest}>
-			<DialogContent>
+			<Dialog.Content>
 				<NewCategoryForm onDone={onCreate} autoFocus />
-			</DialogContent>
+			</Dialog.Content>
 		</Dialog>
 	);
 }

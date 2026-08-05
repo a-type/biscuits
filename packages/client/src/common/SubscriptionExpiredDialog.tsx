@@ -1,4 +1,4 @@
-import { Dialog, DialogContent, H2 } from '@a-type/ui';
+import { Dialog, H2 } from '@a-type/ui';
 import { useMe } from '../hooks/graphql.js';
 import { LogoutButton } from './LogoutButton.js';
 import { ManagePlanButton } from './ManagePlanButton.js';
@@ -14,7 +14,7 @@ export function SubscriptionExpiredDialog({}: SubscriptionExpiredDialogProps) {
 
 	return (
 		<Dialog open={open}>
-			<DialogContent>
+			<Dialog.Content>
 				<H2>Subscription expired</H2>
 				<p>
 					Looks like you either cancelled your subscription, or your payment
@@ -27,7 +27,7 @@ export function SubscriptionExpiredDialog({}: SubscriptionExpiredDialogProps) {
 					message.
 				</p>
 				<LogoutButton>Log out</LogoutButton>
-			</DialogContent>
+			</Dialog.Content>
 		</Dialog>
 	);
 }

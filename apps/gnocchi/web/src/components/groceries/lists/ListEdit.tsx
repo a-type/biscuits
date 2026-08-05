@@ -1,17 +1,6 @@
 import { hooks } from '@/stores/groceries/index.js';
 import { useDeleteList } from '@/stores/groceries/mutations.js';
-import {
-	Box,
-	Button,
-	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
-	DialogTrigger,
-	H2,
-	Icon,
-	LiveUpdateTextField,
-} from '@a-type/ui';
+import { Box, Button, Dialog, H2, Icon, LiveUpdateTextField } from '@a-type/ui';
 import { ColorPicker } from '@biscuits/client';
 import { useState } from 'react';
 
@@ -32,10 +21,10 @@ export function ListEdit({ listId }: ListEditProps) {
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
-			<DialogTrigger render={<Button emphasis="ghost" size="small" />}>
+			<Dialog.Trigger render={<Button emphasis="ghost" size="small" />}>
 				<Icon name="gear" />
-			</DialogTrigger>
-			<DialogContent>
+			</Dialog.Trigger>
+			<Dialog.Content>
 				<Box col items="start" gap="sm">
 					<H2>Edit List</H2>
 					<Box gap="sm">
@@ -59,13 +48,13 @@ export function ListEdit({ listId }: ListEditProps) {
 					>
 						Delete List
 					</Button>
-					<DialogActions>
-						<DialogClose render={<Button emphasis="primary" />}>
+					<Dialog.Actions>
+						<Dialog.Close render={<Button emphasis="primary" />}>
 							Done
-						</DialogClose>
-					</DialogActions>
+						</Dialog.Close>
+					</Dialog.Actions>
 				</Box>
-			</DialogContent>
+			</Dialog.Content>
 		</Dialog>
 	);
 }

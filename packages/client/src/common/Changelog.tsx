@@ -2,11 +2,6 @@ import {
 	Box,
 	Button,
 	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
-	DialogTitle,
-	DialogTrigger,
 	Heading,
 	Icon,
 	NavBarItem,
@@ -72,7 +67,7 @@ export function ChangelogDisplay({
 				}
 			}}
 		>
-			<DialogTrigger
+			<Dialog.Trigger
 				className={className}
 				data-new={hasNew}
 				render={() =>
@@ -83,8 +78,8 @@ export function ChangelogDisplay({
 					)
 				}
 			/>
-			<DialogContent>
-				<DialogTitle>What&apos;s new</DialogTitle>
+			<Dialog.Content>
+				<Dialog.Title>What&apos;s new</Dialog.Title>
 				<Box col gap overflow="auto-y">
 					{data.map((item, idx) => (
 						<div key={item.id} style={{ position: 'relative' }}>
@@ -111,10 +106,10 @@ export function ChangelogDisplay({
 						</div>
 					))}
 				</Box>
-				<DialogActions>
-					<DialogClose />
-				</DialogActions>
-			</DialogContent>
+				<Dialog.Actions>
+					<Dialog.Close />
+				</Dialog.Actions>
+			</Dialog.Content>
 		</Dialog>
 	);
 }

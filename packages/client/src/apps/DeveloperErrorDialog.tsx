@@ -4,7 +4,8 @@ import { useContext, useEffect, useState } from 'react';
 import { CONFIG, VerdantContext } from '../index.js';
 import { useLocalStorage } from '../react.js';
 
-export interface DeveloperErrorDialogProps extends DialogProps {}
+export interface DeveloperErrorDialogProps
+	extends Omit<DialogProps, 'children'> {}
 
 const now = Date.now();
 

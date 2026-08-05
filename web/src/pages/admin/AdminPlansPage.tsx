@@ -1,12 +1,5 @@
 import { AdminPlanLibraryInfo } from '@/components/admin/AdminPlanLibraryInfo.jsx';
-import {
-	Box,
-	Button,
-	Checkbox,
-	Dialog,
-	DialogContent,
-	DialogTitle,
-} from '@a-type/ui';
+import { Box, Button, Checkbox, Dialog } from '@a-type/ui';
 import { apps } from '@biscuits/apps';
 import { featureFlags } from '@biscuits/client';
 
@@ -122,10 +115,10 @@ export function AdminPlansPage({}: AdminPlansPageProps) {
 						});
 				}}
 			>
-				<DialogContent width="lg">
-					<DialogTitle className={classes.dialogTitle}>
+				<Dialog.Content width="lg">
+					<Dialog.Title className={classes.dialogTitle}>
 						{selected?.id}
-					</DialogTitle>
+					</Dialog.Title>
 					<ul>
 						{selected?.members.map((member) => (
 							<li key={member.id}>
@@ -164,7 +157,7 @@ export function AdminPlansPage({}: AdminPlansPageProps) {
 							</li>
 						))}
 					</ul>
-				</DialogContent>
+				</Dialog.Content>
 			</Dialog>
 		</div>
 	);

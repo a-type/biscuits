@@ -1,4 +1,4 @@
-import { Button, Dialog, DialogActions } from '@a-type/ui';
+import { Button, Dialog } from '@a-type/ui';
 import { FragmentOf, graphql, readFragment } from '@biscuits/graphql';
 import { ReactElement, ReactNode, useEffect, useState } from 'react';
 import { itemCardImageGalleryFragment } from '../cardParts/ItemCardImageGallery.js';
@@ -77,7 +77,7 @@ export function SearchAndBuyExperience({
 						listAuthor={listAuthor}
 					/>
 				}
-				<DialogActions>
+				<Dialog.Actions>
 					{showPost ?
 						<Button
 							emphasis="ghost"
@@ -94,7 +94,7 @@ export function SearchAndBuyExperience({
 						/>
 					}
 					<Dialog.Close>Close</Dialog.Close>
-				</DialogActions>
+				</Dialog.Actions>
 			</Dialog.Content>
 		</Dialog>
 	);

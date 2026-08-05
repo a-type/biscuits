@@ -1,11 +1,4 @@
-import {
-	Box,
-	Button,
-	Dialog,
-	DialogActions,
-	DialogContent,
-	DialogTitle,
-} from '@a-type/ui';
+import { Box, Button, Dialog } from '@a-type/ui';
 import { graphql, useMutation } from '@biscuits/graphql';
 import * as CONFIG from '../config.js';
 import { useMe } from '../hooks/graphql.js';
@@ -34,8 +27,8 @@ export function TosPrompt() {
 
 	return (
 		<Dialog open={needsToUpdateTos}>
-			<DialogContent>
-				<DialogTitle>Terms of Service Update</DialogTitle>
+			<Dialog.Content>
+				<Dialog.Title>Terms of Service Update</Dialog.Title>
 				<p>
 					We&apos;ve updated our terms of service. Please review and accept to
 					continue using Biscuits apps.
@@ -56,7 +49,7 @@ export function TosPrompt() {
 						Privacy Policy
 					</Button>
 				</Box>
-				<DialogActions>
+				<Dialog.Actions>
 					<Button
 						render={
 							<a href={`${CONFIG.HOME_ORIGIN}/settings`} target="_blank" />
@@ -67,8 +60,8 @@ export function TosPrompt() {
 					<Button emphasis="primary" onClick={() => acceptTos()}>
 						Accept
 					</Button>
-				</DialogActions>
-			</DialogContent>
+				</Dialog.Actions>
+			</Dialog.Content>
 		</Dialog>
 	);
 }

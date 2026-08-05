@@ -47,7 +47,7 @@
 }
 
 .pageContent {
-	padding: 0;
+	padding: var(--m-sp-sm);
 	gap: 0;
 	@media (min-width: 768px) {
 		padding-block-start: var(--m-sp-lg);

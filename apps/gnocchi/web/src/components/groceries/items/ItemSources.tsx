@@ -2,18 +2,7 @@ import { LinkButton } from '@/components/nav/Link.jsx';
 import { makeRecipeSlug } from '@/components/recipes/makeRecipeLink.js';
 import { IngredientText } from '@/components/recipes/viewer/IngredientText.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import {
-	Box,
-	Button,
-	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
-	DialogTrigger,
-	H2,
-	H3,
-	P,
-} from '@a-type/ui';
+import { Box, Button, Dialog, H2, H3, P } from '@a-type/ui';
 import { fractionToText } from '@a-type/utils';
 import { Item, ItemInputsItem } from '@gnocchi.biscuits/verdant';
 import { Suspense } from 'react';
@@ -96,10 +85,10 @@ function RecipePreview({
 	hooks.useWatch(recipe);
 	return (
 		<Dialog>
-			<DialogTrigger render={<span className={cls.link} />}>
+			<Dialog.Trigger render={<span className={cls.link} />}>
 				{recipe ? truncate(recipe.get('title')) : 'a recipe'}
-			</DialogTrigger>
-			<DialogContent>
+			</Dialog.Trigger>
+			<Dialog.Content>
 				<Suspense>
 					<RecipePreviewContent
 						recipeId={recipeId}
@@ -107,12 +96,12 @@ function RecipePreview({
 						highlightIngredient={highlightIngredient}
 					/>
 				</Suspense>
-				<DialogActions>
-					<DialogClose render={<Button style={{ alignSelf: 'end' }} />}>
+				<Dialog.Actions>
+					<Dialog.Close render={<Button style={{ alignSelf: 'end' }} />}>
 						Close
-					</DialogClose>
-				</DialogActions>
-			</DialogContent>
+					</Dialog.Close>
+				</Dialog.Actions>
+			</Dialog.Content>
 		</Dialog>
 	);
 }

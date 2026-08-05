@@ -1,13 +1,4 @@
-import {
-	Box,
-	Button,
-	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
-	DialogTitle,
-	Icon,
-} from '@a-type/ui';
+import { Box, Button, Dialog, Icon } from '@a-type/ui';
 import { graphql, useQuery } from '@biscuits/graphql';
 import { ReactNode } from 'react';
 import { proxy, useSnapshot } from 'valtio';
@@ -64,16 +55,16 @@ export function SubscriptionPromotion({
 				}
 			}}
 		>
-			<DialogContent width="lg">
+			<Dialog.Content width="lg">
 				<Box items="start" gap="sm">
-					<DialogTitle className="flex-1">{title}</DialogTitle>
-					<DialogClose render={<Button size="small" emphasis="ghost" />}>
+					<Dialog.Title className="flex-1">{title}</Dialog.Title>
+					<Dialog.Close render={<Button size="small" emphasis="ghost" />}>
 						<Icon name="x" />
-					</DialogClose>
+					</Dialog.Close>
 				</Box>
 				{description && <Dialog.Description>{description}</Dialog.Description>}
 				{children}
-				<DialogActions>
+				<Dialog.Actions>
 					<Box
 						col
 						items="center"
@@ -93,8 +84,8 @@ export function SubscriptionPromotion({
 							days free.
 						</span>
 					</Box>
-				</DialogActions>
-			</DialogContent>
+				</Dialog.Actions>
+			</Dialog.Content>
 		</Dialog>
 	);
 }

@@ -1,13 +1,4 @@
-import {
-	Box,
-	Dialog,
-	DialogActions,
-	DialogContent,
-	DialogTitle,
-	Icon,
-	P,
-	toast,
-} from '@a-type/ui';
+import { Box, Dialog, Icon, P, toast } from '@a-type/ui';
 import {
 	CONFIG,
 	LinkButton,
@@ -42,8 +33,8 @@ export function AppMoved({}: AppMovedProps) {
 
 	return (
 		<Dialog open>
-			<DialogContent>
-				<DialogTitle>Gnocchi has moved</DialogTitle>
+			<Dialog.Content>
+				<Dialog.Title>Gnocchi has moved</Dialog.Title>
 				<P>
 					Sorry, I know this is annoying, but Gnocchi has moved to a new app to
 					join{' '}
@@ -54,15 +45,15 @@ export function AppMoved({}: AppMovedProps) {
 				</P>
 				{!canSync ? <LoggedOut /> : <LoggedIn />}
 				<InstallNote />
-				<DialogActions>
+				<Dialog.Actions>
 					<LinkButton href={`${CONFIG.HOME_ORIGIN}/contact`} newTab>
 						Contact Support
 					</LinkButton>
 					<LinkButton emphasis="primary" href={goTo.toString()} newTab>
 						Open Gnocchi
 					</LinkButton>
-				</DialogActions>
-			</DialogContent>
+				</Dialog.Actions>
+			</Dialog.Content>
 		</Dialog>
 	);
 }

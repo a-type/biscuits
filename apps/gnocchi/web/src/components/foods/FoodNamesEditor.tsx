@@ -3,8 +3,6 @@ import {
 	Box,
 	Button,
 	Dialog,
-	DialogActions,
-	DialogClose,
 	FormikForm,
 	Icon,
 	SubmitButton,
@@ -90,10 +88,10 @@ function AddNameButton({ names }: { names: FoodAlternateNames }) {
 					}}
 				>
 					<TextField name="name" label="Name" required />
-					<DialogActions>
-						<DialogClose />
+					<Dialog.Actions>
+						<Dialog.Close />
 						<SubmitButton>Add</SubmitButton>
-					</DialogActions>
+					</Dialog.Actions>
 				</FormikForm>
 			</Dialog.Content>
 		</Dialog>

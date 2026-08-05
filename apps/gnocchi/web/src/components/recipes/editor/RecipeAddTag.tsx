@@ -1,15 +1,5 @@
 import { hooks } from '@/stores/groceries/index.js';
-import {
-	Box,
-	Button,
-	Chip,
-	clsx,
-	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogTitle,
-	Icon,
-} from '@a-type/ui';
+import { Box, Button, Chip, clsx, Dialog, Icon } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { ComponentPropsWithRef, forwardRef, ReactNode, Suspense } from 'react';
 import { RecipeTagsFullEditor } from './RecipeTagsFullEditor.jsx';
@@ -37,14 +27,14 @@ export function RecipeEditTagsContent({
 	return (
 		<Dialog.Content className={className}>
 			<Box col gap full="width">
-				<DialogTitle>Tags for {title}</DialogTitle>
+				<Dialog.Title>Tags for {title}</Dialog.Title>
 				<Suspense>
 					<RecipeTagsFullEditor recipe={recipe} />
 				</Suspense>
 			</Box>
-			<DialogActions>
-				<DialogClose>Done</DialogClose>
-			</DialogActions>
+			<Dialog.Actions>
+				<Dialog.Close>Done</Dialog.Close>
+			</Dialog.Actions>
 		</Dialog.Content>
 	);
 }

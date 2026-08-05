@@ -2,10 +2,6 @@ import {
 	Box,
 	Button,
 	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
-	DialogTrigger,
 	Field,
 	FormikForm,
 	Input,
@@ -98,13 +94,13 @@ function ForgotPassword({
 	const [errorMessage, setErrorMessage] = useState('');
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
-			<DialogTrigger
+			<Dialog.Trigger
 				className={className}
 				render={<button className={cls.forgotPassword} />}
 			>
 				Forgot password?
-			</DialogTrigger>
-			<DialogContent>
+			</Dialog.Trigger>
+			<Dialog.Content>
 				<FormikForm
 					initialValues={{
 						email: '',
@@ -140,14 +136,14 @@ function ForgotPassword({
 							<P>{errorMessage}</P>
 						</Box>
 					)}
-					<DialogActions>
-						<DialogClose>Cancel</DialogClose>
+					<Dialog.Actions>
+						<Dialog.Close>Cancel</Dialog.Close>
 						<Button color="primary" type="submit" style={{ alignSelf: 'end' }}>
 							Send reset email
 						</Button>
-					</DialogActions>
+					</Dialog.Actions>
 				</FormikForm>
-			</DialogContent>
+			</Dialog.Content>
 		</Dialog>
 	);
 }

@@ -1,32 +1,22 @@
 import { FoodName } from '@/components/foods/FoodName.jsx';
 import { OpenFoodDetailButton } from '@/components/foods/OpenFoodDetailButton.jsx';
 import { hooks } from '@/stores/groceries/index.js';
-import {
-	Box,
-	Button,
-	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
-	DialogTitle,
-	DialogTrigger,
-	Text,
-} from '@a-type/ui';
+import { Box, Button, Dialog, Text } from '@a-type/ui';
 import { Suspense } from 'react';
 
 export function ManageFoodsButton() {
 	return (
 		<Dialog>
-			<DialogTrigger render={<Button />}>Manage foods</DialogTrigger>
-			<DialogContent>
-				<DialogTitle>Manage foods</DialogTitle>
+			<Dialog.Trigger render={<Button />}>Manage foods</Dialog.Trigger>
+			<Dialog.Content>
+				<Dialog.Title>Manage foods</Dialog.Title>
 				<Suspense>
 					<FoodsList />
 				</Suspense>
-				<DialogActions>
-					<DialogClose />
-				</DialogActions>
-			</DialogContent>
+				<Dialog.Actions>
+					<Dialog.Close />
+				</Dialog.Actions>
+			</Dialog.Content>
 		</Dialog>
 	);
 }

@@ -1,13 +1,6 @@
 import { recipeTagEditorState } from '@/components/recipes/tags/recipeTagEditorState.js';
 import { hooks } from '@/stores/groceries/index.js';
-import {
-	Box,
-	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
-	DialogTitle,
-} from '@a-type/ui';
+import { Box, Dialog } from '@a-type/ui';
 import { ColorPicker } from '@biscuits/client';
 import { useSnapshot } from 'valtio';
 
@@ -29,8 +22,8 @@ export function RecipeTagEditor() {
 				}
 			}}
 		>
-			<DialogContent>
-				<DialogTitle>Edit {tag?.get('name')}</DialogTitle>
+			<Dialog.Content>
+				<Dialog.Title>Edit {tag?.get('name')}</Dialog.Title>
 				<Box gap="sm">
 					<div>Color:</div>
 					<ColorPicker
@@ -39,10 +32,10 @@ export function RecipeTagEditor() {
 					/>
 				</Box>
 
-				<DialogActions>
-					<DialogClose>Done</DialogClose>
-				</DialogActions>
-			</DialogContent>
+				<Dialog.Actions>
+					<Dialog.Close>Done</Dialog.Close>
+				</Dialog.Actions>
+			</Dialog.Content>
 		</Dialog>
 	);
 }

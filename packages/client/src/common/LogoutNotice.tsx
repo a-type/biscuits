@@ -1,12 +1,4 @@
-import {
-	Box,
-	Button,
-	Dialog,
-	DialogClose,
-	DialogContent,
-	DialogTitle,
-	P,
-} from '@a-type/ui';
+import { Box, Button, Dialog, P } from '@a-type/ui';
 import { useEffect, useState } from 'react';
 import { useIsLoggedIn } from '../hooks/graphql.js';
 import { useWasLoggedIn } from '../hooks/useWasLoggedIn.js';
@@ -38,20 +30,22 @@ export function LogoutNotice({}: LogoutNoticeProps) {
 
 	return (
 		<Dialog open={wasLoggedInButNowLoggedOut} onOpenChange={setWasLoggedIn}>
-			<DialogContent>
-				<DialogTitle>Session expired</DialogTitle>
+			<Dialog.Content>
+				<Dialog.Title>Session expired</Dialog.Title>
 				<P>To resume syncing your data, please sign in again.</P>
 				<Box items="center" justify="end" gap="sm">
-					<DialogClose render={<Button emphasis="ghost" />}>Cancel</DialogClose>
-					<DialogClose
+					<Dialog.Close render={<Button emphasis="ghost" />}>
+						Cancel
+					</Dialog.Close>
+					<Dialog.Close
 						render={
 							<LoginButton emphasis="primary" onClick={() => setClose(true)} />
 						}
 					>
 						Sign in
-					</DialogClose>
+					</Dialog.Close>
 				</Box>
-			</DialogContent>
+			</Dialog.Content>
 		</Dialog>
 	);
 }

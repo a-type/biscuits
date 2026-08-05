@@ -8,9 +8,6 @@ import {
 	ButtonProps,
 	Checkbox,
 	Dialog,
-	DialogContent,
-	DialogTitle,
-	DialogTrigger,
 	Icon,
 	P,
 	Text,
@@ -92,7 +89,7 @@ export const RecipePublishAction = withSuspense(
 
 		return (
 			<Dialog>
-				<DialogTrigger
+				<Dialog.Trigger
 					render={
 						<ActionButton
 							color="accent"
@@ -102,7 +99,7 @@ export const RecipePublishAction = withSuspense(
 				>
 					<Icon name={outOfDate ? 'clock' : 'send'} />
 					{isPublished ? (outOfDate ? 'Outdated' : 'Shared') : 'Share'}
-				</DialogTrigger>
+				</Dialog.Trigger>
 				{publishedRecipe ? (
 					<PublishedContent
 						recipe={recipe}
@@ -203,8 +200,8 @@ function UnpublishedContent({
 	const [consent, setConsent] = useState(false);
 
 	return (
-		<DialogContent>
-			<DialogTitle>Publish your recipe</DialogTitle>
+		<Dialog.Content>
+			<Dialog.Title>Publish your recipe</Dialog.Title>
 			<P>
 				Published recipes can be shared with others on the web. You retain full
 				rights to your recipe and can unpublish anytime
@@ -235,7 +232,7 @@ function UnpublishedContent({
 					Publish
 				</PublishButton>
 			</Dialog.Actions>
-		</DialogContent>
+		</Dialog.Content>
 	);
 }
 

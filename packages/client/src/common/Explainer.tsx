@@ -1,11 +1,4 @@
-import {
-	Box,
-	Button,
-	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
-} from '@a-type/ui';
+import { Box, Button, Dialog } from '@a-type/ui';
 import { ReactNode, useState } from 'react';
 import { useLocalStorage } from '../hooks/useStorage.js';
 
@@ -28,12 +21,12 @@ export function Explainer({ stages }: ExplainerProps) {
 				}
 			}}
 		>
-			<DialogContent>
+			<Dialog.Content>
 				<Box grow items="start" gap col>
 					{stages[stage]}
 				</Box>
-				<DialogActions>
-					<DialogClose render={<Button />}>Skip</DialogClose>
+				<Dialog.Actions>
+					<Dialog.Close render={<Button />}>Skip</Dialog.Close>
 					<Button
 						style={{ marginLeft: 'auto' }}
 						emphasis="primary"
@@ -47,8 +40,8 @@ export function Explainer({ stages }: ExplainerProps) {
 					>
 						{stage === stages.length - 1 ? 'Got it!' : 'Next'}
 					</Button>
-				</DialogActions>
-			</DialogContent>
+				</Dialog.Actions>
+			</Dialog.Content>
 		</Dialog>
 	);
 }

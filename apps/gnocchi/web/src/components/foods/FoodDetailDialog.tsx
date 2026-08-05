@@ -8,7 +8,6 @@ import {
 	Box,
 	Button,
 	Dialog,
-	DialogTitle,
 	Divider,
 	Field,
 	H3,
@@ -103,9 +102,9 @@ function FoodDetailView({
 
 	return (
 		<Box col gap="lg">
-			<DialogTitle>
+			<Dialog.Title>
 				<FoodNameEditor food={food} />
-			</DialogTitle>
+			</Dialog.Title>
 			{lastPurchasedAt || expiresText || purchaseIntervalDays ? (
 				<Box col gap="sm">
 					{!!lastPurchasedAt && (

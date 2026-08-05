@@ -10,10 +10,6 @@ import {
 	CheckboxField,
 	ConfirmedButton,
 	Dialog,
-	DialogActions,
-	DialogClose,
-	DialogContent,
-	DialogTitle,
 	FormikForm,
 	SubmitButton,
 	TextAreaField,
@@ -104,7 +100,7 @@ export function AppChangelogEditor({ appId }: AppChangelogEditorProps) {
 			</CardGrid>
 			<Dialog open={showCreate} onOpenChange={setShowCreate}>
 				<Dialog.Trigger render={<Button />}>New Changelog Item</Dialog.Trigger>
-				<DialogContent>
+				<Dialog.Content>
 					<FormikForm
 						initialValues={{
 							title: '',
@@ -125,17 +121,17 @@ export function AppChangelogEditor({ appId }: AppChangelogEditorProps) {
 							}
 						}}
 					>
-						<DialogTitle>New Changelog Item</DialogTitle>
+						<Dialog.Title>New Changelog Item</Dialog.Title>
 						<TextField name="title" label="Title" />
 						<TextAreaField name="details" label="Details" />
 						<TextField name="imageUrl" label="Image URL" type="url" />
 						<CheckboxField name="important" label="important" />
-						<DialogActions>
-							<DialogClose />
+						<Dialog.Actions>
+							<Dialog.Close />
 							<SubmitButton>Publish</SubmitButton>
-						</DialogActions>
+						</Dialog.Actions>
 					</FormikForm>
-				</DialogContent>
+				</Dialog.Content>
 			</Dialog>
 		</div>
 	);

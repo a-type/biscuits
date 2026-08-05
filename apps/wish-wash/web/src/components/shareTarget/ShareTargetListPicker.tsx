@@ -1,12 +1,5 @@
 import { hooks } from '@/hooks.js';
-import {
-	Dialog,
-	DialogContent,
-	DialogSelectItem,
-	DialogSelectList,
-	DialogTitle,
-	Icon,
-} from '@a-type/ui';
+import { Dialog, Icon } from '@a-type/ui';
 import { useNavigate } from '@tanstack/react-router';
 import { useSnapshot } from 'valtio';
 import { addToList } from '../lists/add/util.js';
@@ -47,19 +40,19 @@ export function ShareTargetListPicker({}: ShareTargetListPickerProps) {
 				}
 			}}
 		>
-			<DialogContent>
-				<DialogTitle>Add to list</DialogTitle>
-				<DialogSelectList
+			<Dialog.Content>
+				<Dialog.Title>Add to list</Dialog.Title>
+				<Dialog.SelectList
 					onValueChange={(v) => (v ? doAdd(v as string) : null)}
 				>
 					{lists.map((list) => (
-						<DialogSelectItem value={list.get('id')} key={list.get('id')}>
+						<Dialog.SelectItem value={list.get('id')} key={list.get('id')}>
 							<Icon name={list.isAuthorized ? 'lock' : 'add_person'} />
 							{list.get('name')}
-						</DialogSelectItem>
+						</Dialog.SelectItem>
 					))}
-				</DialogSelectList>
-			</DialogContent>
+				</Dialog.SelectList>
+			</Dialog.Content>
 		</Dialog>
 	);
 }
