@@ -123,6 +123,7 @@ export function ManageStorage({
 				<Heading emphasis="ambient" render={<h3 />}>
 					Manage Device Storage
 				</Heading>
+				<ExportDataButton onError={onError} />
 				<P emphasis="secondary">
 					Your data is synced to Biscuits. If you're experiencing issues, you
 					can try resetting your local device to the server's data.
