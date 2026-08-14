@@ -214,6 +214,7 @@ const QuickAddButton = ({
 			},
 			order: 'asc',
 		},
+		key: `pantry-list-item-${foodName}-matching-item`,
 	});
 	const isOnList = !!matchingItem;
 
