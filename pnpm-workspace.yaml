@@ -25,11 +25,11 @@ catalog:
   '@originjs/vite-plugin-commonjs': 1.0.3
   '@react-spring/web': 10.0.3
   '@verdant-web/cli': 5.2.0
-  '@verdant-web/react': 43.1.0
-  '@verdant-web/store': 5.4.0
-  '@verdant-web/server': 4.2.3
-  '@verdant-web/tiptap': 12.0.0
-  '@verdant-web/cloudflare': 0.4.4
+  '@verdant-web/react': 43.1.1
+  '@verdant-web/store': 5.4.2
+  '@verdant-web/server': 4.2.4
+  '@verdant-web/tiptap': 12.0.2
+  '@verdant-web/cloudflare': 0.4.5
   '@vitejs/plugin-react': 6.0.3
   gql.tada: 1.9.2
   react: 19.2.8
