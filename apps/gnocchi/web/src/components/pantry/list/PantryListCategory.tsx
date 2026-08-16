@@ -9,7 +9,7 @@ import {
 import { useFilter } from '@/components/pantry/hooks.js';
 import { pantryOnboarding } from '@/onboarding/pantryOnboarding.js';
 import { hooks } from '@/stores/groceries/index.js';
-import { Button, CardGrid, cardGridColumns, clsx } from '@a-type/ui';
+import { Button, clsx } from '@a-type/ui';
 import { Category } from '@gnocchi.biscuits/verdant';
 import { useEffect } from 'react';
 import { PantryListItem } from '../items/PantryListItem.jsx';
@@ -74,13 +74,13 @@ export function PantryListCategory({
 				</CategoryTitle>
 			</CategoryTitleRow>
 			<CategoryItems>
-				<CardGrid columns={cardGridColumns.small}>
+				<div className={cls.grid}>
 					{items.map((item) => {
 						return (
 							<PantryListItem key={item.get('canonicalName')} item={item} />
 						);
 					})}
-				</CardGrid>
+				</div>
 			</CategoryItems>
 			{showShowMore && (
 				<div className={cls.more}>

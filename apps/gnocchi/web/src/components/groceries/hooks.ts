@@ -6,6 +6,14 @@ import { groceriesState } from './state.js';
 
 export function useItemsGroupedAndSorted(
 	listId: string | null | undefined = undefined,
+	{
+		statusFilter,
+	}: {
+		statusFilter?:
+			| 'unpurchased'
+			| 'purchased'
+			| 'unpurchased-and-just-purchased';
+	} = {},
 ) {
 	const items = hooks.useAllItems({
 		key: `groceries:${listId ?? 'all'}`,
@@ -25,11 +33,24 @@ export function useItemsGroupedAndSorted(
 
 	const visibleItems = useMemo(
 		() =>
-			items.filter((item) => {
-				if (!item.get('purchasedAt')) return true;
-				return purchasedThisSession.has(item.get('id'));
-			}),
-		[items, purchasedThisSession],
+			!statusFilter
+				? items
+				: items.filter((item) => {
+						if (statusFilter === 'unpurchased') {
+							return !item.get('purchasedAt');
+						}
+						// special case for unpurchased items - keep showing them if
+						// they were purchased this session so they don't disappear from the list
+						if (statusFilter === 'unpurchased-and-just-purchased') {
+							if (!item.get('purchasedAt')) return true;
+							return purchasedThisSession.has(item.get('id'));
+						}
+						if (statusFilter === 'purchased') {
+							return item.get('purchasedAt');
+						}
+						return true;
+				  }),
+		[items, purchasedThisSession, statusFilter],
 	);
 
 	// subscribe to the cateogryId on all visible items to re-render when the category changes

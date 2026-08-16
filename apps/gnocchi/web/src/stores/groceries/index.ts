@@ -78,6 +78,12 @@ export function createClient(options: { namespace: string }) {
 		log:
 			import.meta.env.DEV || DEBUG
 				? (level: string, ...args: any[]) => {
+						const queryLog = args.some((arg) =>
+							`${arg}`.startsWith('Executing query'),
+						);
+						if (queryLog) {
+							console.trace('🌿', ...args);
+						}
 						if (level === 'debug') {
 							if (DEBUG) {
 								console.debug('🌿', ...args);
@@ -128,29 +134,38 @@ document.addEventListener('keydown', async (e) => {
 
 // startup tasks
 // delete any purchased items older than 1 year
-const purchased = await verdant.items.findAll({
-	index: {
-		where: 'purchased',
-		equals: 'yes',
-	},
-}).resolved;
-const now = Date.now();
-const itemsToDelete = purchased
-	.filter((item) => {
-		const purchasedAt = item.get('purchasedAt');
-		return purchasedAt && purchasedAt < now - 365 * 24 * 60 * 60 * 1000;
-	})
-	.map((i) => i.get('id'));
-await verdant.items.deleteAll(itemsToDelete);
+async function cleanupOldPurchasedItems() {
+	const purchased = await verdant.items.findAll({
+		index: {
+			where: 'purchasedAt',
+			lt: Date.now() - 365 * 24 * 60 * 60 * 1000,
+		},
+		key: `groceries-old-purchased-items`,
+	}).resolved;
+	// double-check the purchase time to be extra sure we don't delete
+	// current items.
+	const now = Date.now();
+	const itemsToDelete = purchased
+		.filter((item) => {
+			const purchasedAt = item.get('purchasedAt');
+			return purchasedAt && purchasedAt < now - 365 * 24 * 60 * 60 * 1000;
+		})
+		.map((i) => i.get('id'));
+	await verdant.items.deleteAll(itemsToDelete);
+}
+cleanupOldPurchasedItems();
 
-const backup = await import('@verdant-web/store/backup');
-backup.transferOrigins(
-	verdant,
-	'https://gnocchi.club',
-	'https://gnocchi.biscuits.club',
-);
-backup.transferOrigins(
-	verdant,
-	'http://localhost:6299',
-	'http://localhost:6220',
-);
+async function transferOrigins() {
+	const backup = await import('@verdant-web/store/backup');
+	backup.transferOrigins(
+		verdant,
+		'https://gnocchi.club',
+		'https://gnocchi.biscuits.club',
+	);
+	backup.transferOrigins(
+		verdant,
+		'http://localhost:6299',
+		'http://localhost:6220',
+	);
+}
+transferOrigins();

@@ -1,7 +1,7 @@
 import { PantryListItemSkeleton } from '@/components/pantry/items/PantryListItem.jsx';
 import { pantryOnboarding } from '@/onboarding/pantryOnboarding.js';
 import { hooks } from '@/stores/groceries/index.js';
-import { Box, CardGrid } from '@a-type/ui';
+import { Box } from '@a-type/ui';
 import { OnboardingBanner } from '@biscuits/client';
 import { Suspense } from 'react';
 import { ExpiresSoonSection } from './ExpiresSoonSection.jsx';
@@ -61,11 +61,11 @@ function SkeletonList() {
 	return (
 		<Box col items="stretch">
 			<Box style={{ height: 30 }} />
-			<CardGrid className={cls.grid}>
+			<div className={cls.grid}>
 				{new Array(8).fill(null).map((_, i) => (
 					<PantryListItemSkeleton key={i} />
 				))}
-			</CardGrid>
+			</div>
 		</Box>
 	);
 }

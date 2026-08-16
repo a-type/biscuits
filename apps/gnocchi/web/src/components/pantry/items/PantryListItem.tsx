@@ -125,11 +125,7 @@ export function PantryListItem({
 							[cls.actions]: showLabels,
 						})}
 					>
-						<Suspense
-							fallback={<Button emphasis="default" className={cls.quickAdd} />}
-						>
-							<QuickAddButton food={item} showLabel={showLabels} />
-						</Suspense>
+						<QuickAddButton food={item} showLabel={showLabels} />
 						{snoozable && expiresAt && (
 							<Button
 								size={showLabels ? 'small' : 'default'}
@@ -177,7 +173,11 @@ export const PantryListItemSkeleton = ({
 			</Card.Main>
 			<Card.Footer>
 				<Card.Actions>
-					<Button size={showLabels ? 'small' : 'default'} emphasis="default">
+					<Button
+						size={showLabels ? 'small' : 'default'}
+						emphasis="default"
+						aria-hidden
+					>
 						<Icon name="plus" />
 						{showLabels && <TextSkeleton maxLength={8} />}
 					</Button>
@@ -205,7 +205,7 @@ const QuickAddButton = ({
 		groceriesState.justAddedSomething = true;
 	}, [addItems, food]);
 
-	const matchingItem = hooks.useOneItem({
+	const { data: matchingItem, status } = hooks.useOneItemUnsuspended({
 		index: {
 			where: 'purchased_food_listId',
 			match: {
@@ -223,7 +223,7 @@ const QuickAddButton = ({
 			size={showLabel ? 'small' : 'default'}
 			emphasis="default"
 			onClick={repurchaseItem}
-			disabled={isOnList}
+			disabled={status === 'initializing' || isOnList}
 			aria-label={showLabel ? undefined : isOnList ? 'In list' : 'Buy again'}
 		>
 			{isOnList ? <Icon name="check" /> : <Icon name="plus" />}
@@ -276,6 +276,7 @@ const FreezeButton = ({
 						expiresAt: null,
 					});
 				}}
+				aria-label={showLabel ? undefined : 'Mark as frozen'}
 			>
 				<Icon name="snowflake" />
 				{showLabel && <span>Frozen</span>}

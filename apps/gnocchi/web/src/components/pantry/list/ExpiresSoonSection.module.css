@@ -8,3 +8,9 @@
 	margin-inline-start: var(--m-sp-md);
 	margin-block-end: var(--m-sp-sm);
 }
+
+.grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: var(--m-sp);
+}

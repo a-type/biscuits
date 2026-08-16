@@ -10,6 +10,7 @@ export function PurchaseAllAction() {
 	const listId = useListId();
 	const items = hooks
 		.useAllItems({
+			key: `groceries-unpurchased`,
 			index: {
 				where: 'purchased',
 				equals: 'no',

@@ -1,4 +1,4 @@
-import { CardGrid, cardGridColumns, Heading } from '@a-type/ui';
+import { Heading } from '@a-type/ui';
 import classNames from 'classnames';
 import { useExpiresSoonItems } from '../hooks.js';
 import { PantryListItem } from '../items/PantryListItem.jsx';
@@ -18,7 +18,7 @@ export function ExpiresSoonSection({ className }: ExpiresSoonSectionProps) {
 			<Heading emphasis="ambient" bold render={<h2 />} className={cls.title}>
 				Expiring soon
 			</Heading>
-			<CardGrid columns={cardGridColumns.default}>
+			<div className={cls.grid}>
 				{expiresSoonItems.map((item) => (
 					<PantryListItem
 						item={item}
@@ -27,7 +27,7 @@ export function ExpiresSoonSection({ className }: ExpiresSoonSectionProps) {
 						snoozable
 					/>
 				))}
-			</CardGrid>
+			</div>
 		</div>
 	);
 }

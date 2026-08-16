@@ -208,7 +208,7 @@ export interface GeneratedHooks<Presence, Profile> {
   useOneItem: <Config extends HookConfig<ItemFilter>>(
     config?: Config,
   ) => Item | null;
-  useOneItemsUnsuspended: <Config extends HookConfig<ItemFilter>>(
+  useOneItemUnsuspended: <Config extends HookConfig<ItemFilter>>(
     config?: Config,
   ) => { data: Item | null; status: QueryStatus };
   useAllItems: <Config extends HookConfig<ItemFilter>>(

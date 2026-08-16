@@ -95,7 +95,9 @@ const GroceryListCategories = forwardRef<
 	{ className?: string }
 >(function GroceryListCategories(props, ref) {
 	const listId = useListId();
-	const { categoryGroups, itemCount } = useItemsGroupedAndSorted(listId);
+	const { categoryGroups, itemCount } = useItemsGroupedAndSorted(listId, {
+		statusFilter: 'unpurchased-and-just-purchased',
+	});
 
 	if (itemCount === 0) {
 		return <GroceryEmptyContent />;
