@@ -183,6 +183,19 @@ export const apps = [
 		theme: 'tomato',
 		demoVideoSrc: '',
 	} as AppManifest<'floorplan'>,
+	{
+		id: 'tasks',
+		description: '',
+		devOriginOverride: 'http://localhost:6230',
+		iconPath: 'icon.png',
+		name: 'Tasks',
+		paidDescription: 'TODO',
+		paidFeatures: [],
+		url: 'https://tasks.biscuits.club',
+		prerelease: true,
+		theme: 'blueberry',
+		demoVideoSrc: '',
+	} as AppManifest<'tasks'>,
 ] as const;
 
 export type AppId = (typeof apps)[number]['id'];

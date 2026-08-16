@@ -9,27 +9,22 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as SettingsRouteImport } from './routes/settings'
-import { Route as RecipesRouteRouteImport } from './routes/recipes/route'
-import { Route as PantryRouteRouteImport } from './routes/pantry/route'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as RecipesIndexRouteImport } from './routes/recipes/index'
-import { Route as PantryIndexRouteImport } from './routes/pantry/index'
-import { Route as RecipesPublishedRouteImport } from './routes/recipes/published'
-import { Route as PantrySearchRouteImport } from './routes/pantry/search'
+import { Route as PantryRouteRouteImport } from './routes/pantry/route'
+import { Route as RecipesRouteRouteImport } from './routes/recipes/route'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as ListListIdRouteImport } from './routes/list/$listId'
+import { Route as PantryIndexRouteImport } from './routes/pantry/index'
+import { Route as PantrySearchRouteImport } from './routes/pantry/search'
+import { Route as RecipesIndexRouteImport } from './routes/recipes/index'
 import { Route as RecipesSlugRouteRouteImport } from './routes/recipes/$slug/route'
+import { Route as RecipesPublishedRouteImport } from './routes/recipes/published'
 import { Route as RecipesSlugIndexRouteImport } from './routes/recipes/$slug/index'
 import { Route as RecipesSlugEditRouteImport } from './routes/recipes/$slug/edit'
 
-const SettingsRoute = SettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RecipesRouteRoute = RecipesRouteRouteImport.update({
-  id: '/recipes',
-  path: '/recipes',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PantryRouteRoute = PantryRouteRouteImport.update({
@@ -37,39 +32,44 @@ const PantryRouteRoute = PantryRouteRouteImport.update({
   path: '/pantry',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const RecipesRouteRoute = RecipesRouteRouteImport.update({
+  id: '/recipes',
+  path: '/recipes',
   getParentRoute: () => rootRouteImport,
 } as any)
-const RecipesIndexRoute = RecipesIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => RecipesRouteRoute,
-} as any)
-const PantryIndexRoute = PantryIndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => PantryRouteRoute,
-} as any)
-const RecipesPublishedRoute = RecipesPublishedRouteImport.update({
-  id: '/published',
-  path: '/published',
-  getParentRoute: () => RecipesRouteRoute,
-} as any)
-const PantrySearchRoute = PantrySearchRouteImport.update({
-  id: '/search',
-  path: '/search',
-  getParentRoute: () => PantryRouteRoute,
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
 } as any)
 const ListListIdRoute = ListListIdRouteImport.update({
   id: '/list/$listId',
   path: '/list/$listId',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PantryIndexRoute = PantryIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => PantryRouteRoute,
+} as any)
+const PantrySearchRoute = PantrySearchRouteImport.update({
+  id: '/search',
+  path: '/search',
+  getParentRoute: () => PantryRouteRoute,
+} as any)
+const RecipesIndexRoute = RecipesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => RecipesRouteRoute,
+} as any)
 const RecipesSlugRouteRoute = RecipesSlugRouteRouteImport.update({
   id: '/$slug',
   path: '/$slug',
+  getParentRoute: () => RecipesRouteRoute,
+} as any)
+const RecipesPublishedRoute = RecipesPublishedRouteImport.update({
+  id: '/published',
+  path: '/published',
   getParentRoute: () => RecipesRouteRoute,
 } as any)
 const RecipesSlugIndexRoute = RecipesSlugIndexRouteImport.update({
@@ -175,18 +175,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/settings': {
-      id: '/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof SettingsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/recipes': {
-      id: '/recipes'
-      path: '/recipes'
-      fullPath: '/recipes'
-      preLoaderRoute: typeof RecipesRouteRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pantry': {
@@ -196,40 +189,19 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PantryRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/recipes': {
+      id: '/recipes'
+      path: '/recipes'
+      fullPath: '/recipes'
+      preLoaderRoute: typeof RecipesRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/recipes/': {
-      id: '/recipes/'
-      path: '/'
-      fullPath: '/recipes/'
-      preLoaderRoute: typeof RecipesIndexRouteImport
-      parentRoute: typeof RecipesRouteRoute
-    }
-    '/pantry/': {
-      id: '/pantry/'
-      path: '/'
-      fullPath: '/pantry/'
-      preLoaderRoute: typeof PantryIndexRouteImport
-      parentRoute: typeof PantryRouteRoute
-    }
-    '/recipes/published': {
-      id: '/recipes/published'
-      path: '/published'
-      fullPath: '/recipes/published'
-      preLoaderRoute: typeof RecipesPublishedRouteImport
-      parentRoute: typeof RecipesRouteRoute
-    }
-    '/pantry/search': {
-      id: '/pantry/search'
-      path: '/search'
-      fullPath: '/pantry/search'
-      preLoaderRoute: typeof PantrySearchRouteImport
-      parentRoute: typeof PantryRouteRoute
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
     }
     '/list/$listId': {
       id: '/list/$listId'
@@ -238,11 +210,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ListListIdRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pantry/': {
+      id: '/pantry/'
+      path: '/'
+      fullPath: '/pantry/'
+      preLoaderRoute: typeof PantryIndexRouteImport
+      parentRoute: typeof PantryRouteRoute
+    }
+    '/pantry/search': {
+      id: '/pantry/search'
+      path: '/search'
+      fullPath: '/pantry/search'
+      preLoaderRoute: typeof PantrySearchRouteImport
+      parentRoute: typeof PantryRouteRoute
+    }
+    '/recipes/': {
+      id: '/recipes/'
+      path: '/'
+      fullPath: '/recipes/'
+      preLoaderRoute: typeof RecipesIndexRouteImport
+      parentRoute: typeof RecipesRouteRoute
+    }
     '/recipes/$slug': {
       id: '/recipes/$slug'
       path: '/$slug'
       fullPath: '/recipes/$slug'
       preLoaderRoute: typeof RecipesSlugRouteRouteImport
+      parentRoute: typeof RecipesRouteRoute
+    }
+    '/recipes/published': {
+      id: '/recipes/published'
+      path: '/published'
+      fullPath: '/recipes/published'
+      preLoaderRoute: typeof RecipesPublishedRouteImport
       parentRoute: typeof RecipesRouteRoute
     }
     '/recipes/$slug/': {

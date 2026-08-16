@@ -83,7 +83,7 @@
 	},
 	"devDependencies": {
 		"@originjs/vite-plugin-commonjs": "^1.0.3",
-		"@tanstack/router-plugin": "^1.132.51",
+		"@tanstack/router-plugin": "catalog:",
 		"@types/convert-units": "^2.3.5",
 		"@types/dom-screen-wake-lock": "^1.0.0",
 		"@types/pako": "^2.0.0",

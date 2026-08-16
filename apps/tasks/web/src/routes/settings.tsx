@@ -1,14 +1,15 @@
 import { PageContent } from '@a-type/ui';
 import { SettingsPageWrapper } from '@biscuits/client/apps';
+import { createFileRoute } from '@tanstack/react-router';
 
-export interface SettingsPageProps {}
+export const Route = createFileRoute('/settings')({
+	component: SettingsPage,
+});
 
-export function SettingsPage({}: SettingsPageProps) {
+function SettingsPage() {
 	return (
 		<PageContent p="none">
 			<SettingsPageWrapper />
 		</PageContent>
 	);
 }
-
-export default SettingsPage;

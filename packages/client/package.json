@@ -1,6 +1,6 @@
 {
 	"name": "@biscuits/client",
-	"private": false,
+	"private": true,
 	"version": "0.0.1",
 	"exports": {
 		".": {
@@ -43,6 +43,20 @@
 			"node": "./dist/fetch.js",
 			"default": "./dist/fetch.js",
 			"types": "./dist/fetch.d.ts"
+		},
+		"./verdant": {
+			"production": "./dist/verdant.js",
+			"import": "./dist/verdant.js",
+			"node": "./dist/verdant.js",
+			"default": "./dist/verdant.js",
+			"types": "./dist/verdant.d.ts"
+		},
+		"./schema": {
+			"production": "./dist/schema.js",
+			"import": "./dist/schema.js",
+			"node": "./dist/schema.js",
+			"default": "./dist/schema.js",
+			"types": "./dist/schema.d.ts"
 		}
 	},
 	"scripts": {
@@ -54,8 +68,10 @@
 		"tsc": "tsc --build"
 	},
 	"type": "module",
+	"peerDependencies": {
+		"@a-type/ui": "*"
+	},
 	"dependencies": {
-		"@a-type/ui": "catalog:",
 		"@a-type/utils": "catalog:",
 		"@a-type/auth-fetch": "catalog:",
 		"@biscuits/apps": "workspace:*",
@@ -73,12 +89,15 @@
 		"valtio": "catalog:",
 		"gql.tada": "catalog:",
 		"typescript": "catalog:",
-		"motion": "catalog:"
+		"motion": "catalog:",
+		"stopword": "catalog:"
 	},
 	"devDependencies": {
+		"@a-type/ui": "catalog:",
 		"@types/react": "catalog:",
 		"@arbor-css/core": "catalog:",
 		"@arbor-css/postcss": "catalog:",
+		"@types/stopword": "catalog:",
 		"vite-plugin-pwa": "catalog:",
 		"@types/copy": "^0.3.5",
 		"copy": "^0.3.2",

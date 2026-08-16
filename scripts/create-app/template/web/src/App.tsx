@@ -1,10 +1,7 @@
 import { verdant } from '@/store.js';
 import { ErrorBoundary, Provider as UIProvider } from '@a-type/ui';
-import {
-	GlobalErrorFallback,
-	Provider,
-	useHasServerAccess,
-} from '@biscuits/client';
+import { Provider, useHasServerAccess } from '@biscuits/client';
+import { GlobalErrorFallback } from '@biscuits/client/apps';
 import { RouterProvider } from '@tanstack/react-router';
 import { ReactNode, Suspense } from 'react';
 import { hooks } from './hooks.js';

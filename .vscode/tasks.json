@@ -160,6 +160,20 @@
 			"label": "📏 Floorplan: Generate",
 			"path": "apps/floorplan/verdant",
 			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "app-dev",
+			"label": "🗒️ Tasks: Web",
+			"path": "apps/tasks/web",
+			"problemMatcher": []
+		},
+		{
+			"type": "npm",
+			"script": "generate",
+			"label": "🗒️ Tasks: Generate",
+			"path": "apps/tasks/verdant",
+			"problemMatcher": []
 		}
 	]
 }

@@ -26,6 +26,7 @@
 		"@types/react-dom": "catalog:",
 		"@verdant-web/store": "catalog:",
 		"@tanstack/react-router": "catalog:",
+		"@tanstack/router-plugin": "catalog:",
 		"typescript": "catalog:",
 		"vite": "catalog:",
 		"@vitejs/plugin-react": "catalog:",

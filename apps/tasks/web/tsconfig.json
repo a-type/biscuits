@@ -1,0 +1,31 @@
+{
+	"extends": "../../../tsconfig.json",
+	"compilerOptions": {
+		"composite": true,
+		"jsx": "preserve",
+		"outDir": "./dist",
+		"rootDir": "./src",
+		"paths": {
+			"@/*": ["./src/*"]
+		},
+		"types": ["vite/client", "vite-plugin-pwa"]
+	},
+	"include": ["src"],
+	"references": [
+		{
+			"path": "../../../packages/apps"
+		},
+		{
+			"path": "../../../packages/client"
+		},
+		{
+			"path": "../../../packages/error"
+		},
+		{
+			"path": "../../../packages/graphql"
+		},
+		{
+			"path": "../verdant"
+		}
+	]
+}

@@ -1,5 +1,5 @@
+import { fullTextIndex } from '@biscuits/client/schema';
 import { schema } from '@verdant-web/common';
-import { fullTextIndex } from '../fullTextIndex.js';
 
 export const foods = schema.collection({
 	name: 'food',

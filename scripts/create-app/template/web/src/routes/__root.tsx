@@ -1,4 +1,5 @@
 import { SubscriptionPromotionContent } from '@/components/promotional/SubscriptionPromotionContent.jsx';
+import { router } from '@/router.js';
 import { ErrorBoundary, PageRoot } from '@a-type/ui';
 import { SubscriptionPromotion, TopLoader } from '@biscuits/client';
 import {
@@ -17,7 +18,7 @@ function RootComponent() {
 	return (
 		<ErrorBoundary fallback={(props) => <GlobalErrorFallback {...props} />}>
 			<Suspense fallback={<GlobalLoader />}>
-				<TopLoader />
+				<TopLoader router={router} />
 				<PageRoot>
 					<Outlet />
 				</PageRoot>

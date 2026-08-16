@@ -1,7 +1,7 @@
+import { fullTextIndex } from '@biscuits/client/schema';
 import { schema } from '@verdant-web/common';
 import { createTipTapFieldSchema } from '@verdant-web/tiptap';
 import cuid from 'cuid';
-import { fullTextIndex } from '../fullTextIndex.js';
 
 export const recipes = schema.collection({
 	name: 'recipe',
