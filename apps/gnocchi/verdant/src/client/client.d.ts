@@ -444,6 +444,14 @@ export interface ItemPurchasedFoodListIdCompoundFilter {
   };
   order?: "asc" | "desc";
 }
+export interface ItemFoodPurchasedCompoundFilter {
+  where: "food_purchased";
+  match: {
+    food: string;
+    purchased?: string;
+  };
+  order?: "asc" | "desc";
+}
 export type ItemFilter =
   | ItemCategoryIdSortFilter
   | ItemCategoryIdMatchFilter
@@ -464,7 +472,8 @@ export type ItemFilter =
   | ItemListIdMatchFilter
   | ItemListIdRangeFilter
   | ItemListIdStartsWithFilter
-  | ItemPurchasedFoodListIdCompoundFilter;
+  | ItemPurchasedFoodListIdCompoundFilter
+  | ItemFoodPurchasedCompoundFilter;
 
 /** Generated types for Food */
 

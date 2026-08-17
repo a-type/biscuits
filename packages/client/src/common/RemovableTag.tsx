@@ -29,6 +29,7 @@ export function RemovableTag({
 					size="wrapper"
 					className="@mode-dense"
 					onClick={onRemove}
+					aria-label="Remove"
 				>
 					<Icon name="x" />
 				</Button>

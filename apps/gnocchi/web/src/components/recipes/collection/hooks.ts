@@ -86,7 +86,7 @@ export function useFilteredRecipes() {
 						where: 'generalSearch',
 						startsWith: firstTitleWord,
 					},
-					key: 'recipes',
+					key: 'recipes:search',
 			  }
 			: normalizedTagFilter
 			? {
@@ -94,7 +94,7 @@ export function useFilteredRecipes() {
 						where: 'tag',
 						equals: normalizedTagFilter,
 					},
-					key: 'recipes',
+					key: 'recipes:tagged',
 			  }
 			: {
 					key: 'recipes',

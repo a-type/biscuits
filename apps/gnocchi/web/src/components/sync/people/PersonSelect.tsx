@@ -56,6 +56,7 @@ export function PersonSelect({
 			<Select.Trigger
 				contentEditable={false}
 				render={<Button emphasis="ghost" size="small" />}
+				aria-label={label || 'Select a person'}
 			>
 				<Button.Icon
 					render={

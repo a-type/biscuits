@@ -10,24 +10,22 @@ export function RecipesPage() {
 	usePageTitle('Recipes');
 
 	return (
-		<>
-			<PageContent>
-				<RecipeList />
-				<Suspense>
-					<PageNowPlaying style={{ pointerEvents: 'none' }}>
-						<Suspense>
-							<RecipeCreateButton
-								aria-label="Create a new recipe"
-								className={cls.createButton}
-							>
-								<Icon name="plus" size={20} />
-							</RecipeCreateButton>
-						</Suspense>
-						<RecipesNowPlaying showSingle defaultOpen />
-					</PageNowPlaying>
-				</Suspense>
-			</PageContent>
-		</>
+		<PageContent data-scroll-restoration-id="recipes-main">
+			<RecipeList />
+			<Suspense>
+				<PageNowPlaying style={{ pointerEvents: 'none' }}>
+					<Suspense>
+						<RecipeCreateButton
+							aria-label="Create a new recipe"
+							className={cls.createButton}
+						>
+							<Icon name="plus" size={20} />
+						</RecipeCreateButton>
+					</Suspense>
+					<RecipesNowPlaying showSingle defaultOpen />
+				</PageNowPlaying>
+			</Suspense>
+		</PageContent>
 	);
 }
 

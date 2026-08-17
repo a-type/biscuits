@@ -5,6 +5,9 @@
 .controls {
 	margin-bottom: var(--m-sp-sm);
 	width: 100%;
+	@apply --mx-bg(var(--m-bg-paper));
+	box-shadow: 0px 0px 8px 8px var(--mx-bg-ref),
+		0px 0px 0px -16px var(--mx-bg-ref), 0px -16px 0px 16px var(--mx-bg-ref);
 }
 
 .search {
@@ -20,6 +23,11 @@
 
 .grid {
 	z-index: 1;
+	display: grid;
+	gap: var(--m-sp-lg);
+	grid-auto-rows: auto;
+	width: 100%;
+	overflow: clip;
 
 	&[data-style='card-big'] {
 		grid-template-columns: repeat(1, 1fr);

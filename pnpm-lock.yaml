@@ -13,8 +13,8 @@ catalogs:
       specifier: 2.1.3
       version: 2.1.3
     '@a-type/ui':
-      specifier: ^6.1.25
-      version: 6.1.25
+      specifier: ^6.1.29
+      version: 6.1.29
     '@a-type/utils':
       specifier: ^1.1.9
       version: 1.1.9
@@ -94,8 +94,8 @@ catalogs:
       specifier: 10.3.1
       version: 10.3.1
     '@verdant-web/cli':
-      specifier: 5.2.0
-      version: 5.2.0
+      specifier: 5.2.1
+      version: 5.2.1
     '@verdant-web/cloudflare':
       specifier: 0.4.5
       version: 0.4.5
@@ -106,11 +106,11 @@ catalogs:
       specifier: 4.2.4
       version: 4.2.4
     '@verdant-web/store':
-      specifier: 5.4.3
-      version: 5.4.3
+      specifier: 5.4.4
+      version: 5.4.4
     '@verdant-web/tiptap':
-      specifier: 12.0.2
-      version: 12.0.2
+      specifier: 12.0.4
+      version: 12.0.4
     '@vite-pwa/assets-generator':
       specifier: ^1.0.2
       version: 1.0.2
@@ -262,13 +262,13 @@ importers:
     dependencies:
       '@verdant-web/cli':
         specifier: 'catalog:'
-        version: 5.2.0
+        version: 5.2.1
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 43.1.1(@verdant-web/store@5.4.3)(react@19.2.8)
+        version: 43.1.1(@verdant-web/store@5.4.4)(react@19.2.8)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 5.4.3
+        version: 5.4.4
       react:
         specifier: 'catalog:'
         version: 19.2.8
@@ -277,7 +277,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.25(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.29(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -313,7 +313,7 @@ importers:
         version: 10.3.1(react@19.2.8)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 5.4.3
+        version: 5.4.4
       '@vitejs/plugin-react':
         specifier: 'catalog:'
         version: 6.0.3(babel-plugin-react-compiler@1.0.0)(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
@@ -406,7 +406,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.25(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.29(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -522,16 +522,16 @@ importers:
         version: link:../../../packages/graphql
       '@verdant-web/cli':
         specifier: 'catalog:'
-        version: 5.2.0
+        version: 5.2.1
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 43.1.1(@verdant-web/store@5.4.3)(react@19.2.8)
+        version: 43.1.1(@verdant-web/store@5.4.4)(react@19.2.8)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 5.4.3
+        version: 5.4.4
       '@verdant-web/tiptap':
         specifier: 'catalog:'
-        version: 12.0.2(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@verdant-web/react@43.1.1(@verdant-web/store@5.4.3)(react@19.2.8))(@verdant-web/store@5.4.3)(react@19.2.8)
+        version: 12.0.4(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@verdant-web/react@43.1.1(@verdant-web/store@5.4.4)(react@19.2.8))(@verdant-web/store@5.4.4)(react@19.2.8)
       cuid:
         specifier: ^2.1.8
         version: 2.1.8
@@ -553,7 +553,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.25(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.29(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -634,10 +634,10 @@ importers:
         version: 10.3.1(react@19.2.8)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 5.4.3
+        version: 5.4.4
       '@verdant-web/tiptap':
         specifier: 'catalog:'
-        version: 12.0.2(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@verdant-web/react@43.1.1(@verdant-web/store@5.4.3)(react@19.2.8))(@verdant-web/store@5.4.3)(react@19.2.8)
+        version: 12.0.4(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@verdant-web/react@43.1.1(@verdant-web/store@5.4.4)(react@19.2.8))(@verdant-web/store@5.4.4)(react@19.2.8)
       '@zip.js/zip.js':
         specifier: ^2.7.6
         version: 2.7.54
@@ -803,13 +803,13 @@ importers:
     dependencies:
       '@verdant-web/cli':
         specifier: 'catalog:'
-        version: 5.2.0
+        version: 5.2.1
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 43.1.1(@verdant-web/store@5.4.3)(react@19.2.8)
+        version: 43.1.1(@verdant-web/store@5.4.4)(react@19.2.8)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 5.4.3
+        version: 5.4.4
       date-fns:
         specifier: 'catalog:'
         version: 4.1.0
@@ -821,7 +821,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.25(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.29(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -854,7 +854,7 @@ importers:
         version: 19.2.4(@types/react@19.2.18)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 5.4.3
+        version: 5.4.4
       '@vitejs/plugin-react':
         specifier: 'catalog:'
         version: 6.0.3(babel-plugin-react-compiler@1.0.0)(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
@@ -915,13 +915,13 @@ importers:
     dependencies:
       '@verdant-web/cli':
         specifier: 'catalog:'
-        version: 5.2.0
+        version: 5.2.1
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 43.1.1(@verdant-web/store@5.4.3)(react@19.2.8)
+        version: 43.1.1(@verdant-web/store@5.4.4)(react@19.2.8)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 5.4.3
+        version: 5.4.4
       react:
         specifier: 'catalog:'
         version: 19.2.8
@@ -930,7 +930,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.25(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.29(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -963,7 +963,7 @@ importers:
         version: 19.2.4(@types/react@19.2.18)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 5.4.3
+        version: 5.4.4
       '@vitejs/plugin-react':
         specifier: 'catalog:'
         version: 6.0.3(babel-plugin-react-compiler@1.0.0)(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
@@ -1027,13 +1027,13 @@ importers:
     dependencies:
       '@verdant-web/cli':
         specifier: 'catalog:'
-        version: 5.2.0
+        version: 5.2.1
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 43.1.1(@verdant-web/store@5.4.3)(react@19.2.8)
+        version: 43.1.1(@verdant-web/store@5.4.4)(react@19.2.8)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 5.4.3
+        version: 5.4.4
       react:
         specifier: 'catalog:'
         version: 19.2.8
@@ -1045,7 +1045,7 @@ importers:
         version: 0.2.15(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.25(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.29(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1087,7 +1087,7 @@ importers:
         version: 10.3.1(react@19.2.8)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 5.4.3
+        version: 5.4.4
       '@vitejs/plugin-react':
         specifier: 'catalog:'
         version: 6.0.3(babel-plugin-react-compiler@1.0.0)(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
@@ -1154,13 +1154,13 @@ importers:
         version: link:../../../packages/client
       '@verdant-web/cli':
         specifier: 'catalog:'
-        version: 5.2.0
+        version: 5.2.1
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 43.1.1(@verdant-web/store@5.4.3)(react@19.2.8)
+        version: 43.1.1(@verdant-web/store@5.4.4)(react@19.2.8)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 5.4.3
+        version: 5.4.4
       react:
         specifier: 'catalog:'
         version: 19.2.8
@@ -1169,7 +1169,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.25(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.29(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1205,7 +1205,7 @@ importers:
         version: 19.2.4(@types/react@19.2.18)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 5.4.3
+        version: 5.4.4
       '@vitejs/plugin-react':
         specifier: 'catalog:'
         version: 6.0.3(babel-plugin-react-compiler@1.0.0)(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
@@ -1260,13 +1260,13 @@ importers:
     dependencies:
       '@verdant-web/cli':
         specifier: 'catalog:'
-        version: 5.2.0
+        version: 5.2.1
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 43.1.1(@verdant-web/store@5.4.3)(react@19.2.8)
+        version: 43.1.1(@verdant-web/store@5.4.4)(react@19.2.8)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 5.4.3
+        version: 5.4.4
       cuid:
         specifier: ^2.1.8
         version: 2.1.8
@@ -1278,7 +1278,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.25(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.29(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1320,10 +1320,10 @@ importers:
         version: 19.2.4(@types/react@19.2.18)
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 43.1.1(@verdant-web/store@5.4.3)(react@19.2.8)
+        version: 43.1.1(@verdant-web/store@5.4.4)(react@19.2.8)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 5.4.3
+        version: 5.4.4
       '@vitejs/plugin-react':
         specifier: 'catalog:'
         version: 6.0.3(babel-plugin-react-compiler@1.0.0)(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
@@ -1402,7 +1402,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.25(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.29(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1446,7 +1446,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.25(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.29(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@biscuits/graphql':
         specifier: workspace:*
         version: link:../../../packages/graphql
@@ -1529,13 +1529,13 @@ importers:
     dependencies:
       '@verdant-web/cli':
         specifier: 'catalog:'
-        version: 5.2.0
+        version: 5.2.1
       '@verdant-web/react':
         specifier: 'catalog:'
-        version: 43.1.1(@verdant-web/store@5.4.3)(react@19.2.8)
+        version: 43.1.1(@verdant-web/store@5.4.4)(react@19.2.8)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 5.4.3
+        version: 5.4.4
       react:
         specifier: 'catalog:'
         version: 19.2.8
@@ -1544,7 +1544,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.25(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.29(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@a-type/utils':
         specifier: 'catalog:'
         version: 1.1.9
@@ -1583,7 +1583,7 @@ importers:
         version: 19.2.4(@types/react@19.2.18)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 5.4.3
+        version: 5.4.4
       '@vitejs/plugin-react':
         specifier: 'catalog:'
         version: 6.0.3(babel-plugin-react-compiler@1.0.0)(vite@8.0.5(@emnapi/runtime@1.9.2)(@types/node@24.13.2)(esbuild@0.28.1)(jiti@2.7.0)(terser@5.37.0)(tsx@4.20.6)(yaml@2.6.1))
@@ -1659,7 +1659,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.25(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.29(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@astrojs/check':
         specifier: ^0.9.4
         version: 0.9.4(prettier@3.6.2)(typescript@6.0.3)
@@ -1728,7 +1728,7 @@ importers:
         version: 1.170.29(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@verdant-web/store':
         specifier: 'catalog:'
-        version: 5.4.3
+        version: 5.4.4
       gql.tada:
         specifier: 'catalog:'
         version: 1.9.2(graphql@16.11.0)(typescript@6.0.3)
@@ -1756,7 +1756,7 @@ importers:
     devDependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.25(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.29(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@arbor-css/core':
         specifier: 'catalog:'
         version: 0.0.147
@@ -1855,7 +1855,7 @@ importers:
     dependencies:
       '@a-type/ui':
         specifier: 'catalog:'
-        version: 6.1.25(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 6.1.29(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@arbor-css/core':
         specifier: 'catalog:'
         version: 0.0.147
@@ -2024,7 +2024,7 @@ importers:
         version: 4.2.4(hono@4.9.9)
       '@verdant-web/tiptap':
         specifier: 'catalog:'
-        version: 12.0.2(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@verdant-web/react@43.1.1(@verdant-web/store@5.4.3)(react@19.2.8))(@verdant-web/store@5.4.3)(react@19.2.8)
+        version: 12.0.4(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@verdant-web/react@43.1.1(@verdant-web/store@5.4.4)(react@19.2.8))(@verdant-web/store@5.4.4)(react@19.2.8)
       '@wish-wash.biscuits/scanning':
         specifier: workspace:*
         version: link:../../apps/wish-wash/scanning
@@ -2170,8 +2170,8 @@ packages:
       react: ^18.3.1
       react-dom: ^18.3.1
 
-  '@a-type/ui@6.1.25':
-    resolution: {integrity: sha512-W1lvcP/AUBGExztA2Qtq9XwFbVFuxGSx4/wzhRcZz7+Lk9T++OZMDe6PSDvyzF49iWH19JzIDpV84r1ODAyf/g==}
+  '@a-type/ui@6.1.29':
+    resolution: {integrity: sha512-5lV9qbvui8XMZs/em4cNZYncW1Sc9XXPL0EwP8JWNSy8KUR9Yb/D8DtathbIoJY7kIFpBEklXkG1MZhMcm7fuw==}
     engines: {node: '>=24'}
     peerDependencies:
       '@arbor-css/core': ^0.0.144
@@ -5908,8 +5908,8 @@ packages:
     peerDependencies:
       react: '>= 16.8.0'
 
-  '@verdant-web/cli@5.2.0':
-    resolution: {integrity: sha512-0Wf3WNbIWIIE6o6hgqFhzYgNV+K7gSa+vwHLNj1mGJXLPoZATMRDEnrAPTSpkXgyN0OYx8NlhDeNwCeVs2zuzg==}
+  '@verdant-web/cli@5.2.1':
+    resolution: {integrity: sha512-iPYxHyOCh4PbcI75xjDonqfYaGJfz3P36CcQP2GsQGlPljR/rKLcBNEluY4EQGYBEGYIrJRuamZKiYSfnvB86Q==}
     hasBin: true
 
   '@verdant-web/cloudflare@0.4.5':
@@ -5936,17 +5936,17 @@ packages:
       hono:
         optional: true
 
-  '@verdant-web/store@5.4.3':
-    resolution: {integrity: sha512-lZROQAIvVZ4wxLy4AFoMD10tpHiXAZRlldFSKsPGOZwIR7ANcYTZ86dAdT0YKlXwcNXcw2R2y2Qa8DIZgbvkHw==}
+  '@verdant-web/store@5.4.4':
+    resolution: {integrity: sha512-Z/thNHkYiaNFMnoWZ62FVFWGC+Ed9GTwPSaypXsbq+p+BtwTtEMdLrdeaHQN5UFIl/je7TneCATd0DwSQ7TCAA==}
 
-  '@verdant-web/tiptap@12.0.2':
-    resolution: {integrity: sha512-gkyIg3hhRSFgXYuFHR9phGTIqL0nMbz/0/kRcl6XJg1OFMVypbst+Ewgp2ZBmEvGY6TmsiZ+GtCDso31THGUGA==}
+  '@verdant-web/tiptap@12.0.4':
+    resolution: {integrity: sha512-cvjyGaZwthPi9hR71CYUGrf48iuj9X9KJnILHHMnvcBLLt/tNnSfS1H7wBAzsdQtqXGyWSjkrF05Tb402QHLYg==}
     peerDependencies:
       '@tiptap/core': ^2.11.5
       '@tiptap/pm': ^2.11.5
       '@tiptap/react': ^2.11.5
       '@verdant-web/react': 43.1.1
-      '@verdant-web/store': 5.4.2
+      '@verdant-web/store': 5.4.4
       react: ^19.0.0
     peerDependenciesMeta:
       '@tiptap/react':
@@ -11002,7 +11002,7 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@a-type/ui@6.1.25(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@a-type/ui@6.1.29(@arbor-css/core@0.0.147)(@types/react@19.2.18)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@a-type/utils': 1.1.9
       '@arbor-css/core': 0.0.147
@@ -14989,7 +14989,7 @@ snapshots:
       '@use-gesture/core': 10.3.1
       react: 19.2.8
 
-  '@verdant-web/cli@5.2.0':
+  '@verdant-web/cli@5.2.1':
     dependencies:
       '@clack/prompts': 0.5.1
       '@swc/core': 1.13.5
@@ -15017,10 +15017,10 @@ snapshots:
       object-hash: 3.0.0
       uuid: 8.3.2
 
-  '@verdant-web/react@43.1.1(@verdant-web/store@5.4.3)(react@19.2.8)':
+  '@verdant-web/react@43.1.1(@verdant-web/store@5.4.4)(react@19.2.8)':
     dependencies:
       '@verdant-web/common': 3.2.1
-      '@verdant-web/store': 5.4.3
+      '@verdant-web/store': 5.4.4
       react: 19.2.8
       suspend-react: 0.1.3(react@19.2.8)
       use-sync-external-store: 1.6.0(react@19.2.8)
@@ -15039,7 +15039,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@verdant-web/store@5.4.3':
+  '@verdant-web/store@5.4.4':
     dependencies:
       '@verdant-web/common': 3.2.1
       cuid: 2.1.8
@@ -15047,15 +15047,15 @@ snapshots:
       jwt-decode: 3.1.2
       weak-event: 2.0.5
 
-  '@verdant-web/tiptap@12.0.2(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@verdant-web/react@43.1.1(@verdant-web/store@5.4.3)(react@19.2.8))(@verdant-web/store@5.4.3)(react@19.2.8)':
+  '@verdant-web/tiptap@12.0.4(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(@tiptap/react@2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.2.8(react@19.2.8))(react@19.2.8))(@verdant-web/react@43.1.1(@verdant-web/store@5.4.4)(react@19.2.8))(@verdant-web/store@5.4.4)(react@19.2.8)':
     dependencies:
       '@tiptap/core': 2.11.5(@tiptap/pm@2.11.5)
       '@tiptap/pm': 2.11.5
       '@verdant-web/common': 3.2.1
     optionalDependencies:
       '@tiptap/react': 2.11.5(@tiptap/core@2.11.5(@tiptap/pm@2.11.5))(@tiptap/pm@2.11.5)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
-      '@verdant-web/react': 43.1.1(@verdant-web/store@5.4.3)(react@19.2.8)
-      '@verdant-web/store': 5.4.3
+      '@verdant-web/react': 43.1.1(@verdant-web/store@5.4.4)(react@19.2.8)
+      '@verdant-web/store': 5.4.4
       react: 19.2.8
 
   '@vite-pwa/assets-generator@1.0.2':

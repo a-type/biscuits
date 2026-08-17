@@ -1,16 +1,17 @@
-import RecipesWrapper from '@/pages/recipe/RecipesWrapper.jsx';
 import { verdant } from '@/stores/groceries/index.js';
-import { createFileRoute } from '@tanstack/react-router';
+import { createFileRoute, Outlet } from '@tanstack/react-router';
 
 export const Route = createFileRoute('/recipes')({
-	component: RecipesWrapper,
-	loader: () =>
-		verdant.recipes.findAllInfinite({
-			index: {
-				where: 'updatedAt',
-				order: 'desc',
-			},
-			pageSize: 10,
-			key: 'recipes',
-		}).resolved,
+	component: () => <Outlet />,
+	// keep main recipe query alive as long as the user is in /recipes
+	onEnter() {
+		verdant.queries.keepAlive('recipes');
+		verdant.queries.keepAlive('pinnedRecipes');
+		verdant.queries.keepAlive('allRecipeTags');
+	},
+	onLeave() {
+		verdant.queries.dropKeepAlive('recipes');
+		verdant.queries.dropKeepAlive('pinnedRecipes');
+		verdant.queries.dropKeepAlive('allRecipeTags');
+	},
 });

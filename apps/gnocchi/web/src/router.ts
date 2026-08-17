@@ -11,6 +11,14 @@ import { verdant } from './stores/groceries/index.js';
 export const router = createRouter({
 	routeTree,
 	scrollRestoration: true,
+	scrollToTopSelectors: ['#page--main-content'],
+	getScrollRestorationKey(location) {
+		// always restore recipes main page to the same position
+		if (location.pathname === '/recipes') {
+			return 'recipes';
+		}
+		return location.pathname;
+	},
 	defaultPreload: 'intent',
 	defaultErrorComponent: GlobalErrorFallback,
 	defaultViewTransition: true,

@@ -161,7 +161,7 @@ export interface GeneratedHooks<Presence, Profile> {
   useOneCategory: <Config extends HookConfig<CategoryFilter>>(
     config?: Config,
   ) => Category | null;
-  useOneCategoriesUnsuspended: <Config extends HookConfig<CategoryFilter>>(
+  useOneCategoryUnsuspended: <Config extends HookConfig<CategoryFilter>>(
     config?: Config,
   ) => { data: Category | null; status: QueryStatus };
   useAllCategories: <Config extends HookConfig<CategoryFilter>>(
@@ -255,7 +255,7 @@ export interface GeneratedHooks<Presence, Profile> {
   useOneFood: <Config extends HookConfig<FoodFilter>>(
     config?: Config,
   ) => Food | null;
-  useOneFoodsUnsuspended: <Config extends HookConfig<FoodFilter>>(
+  useOneFoodUnsuspended: <Config extends HookConfig<FoodFilter>>(
     config?: Config,
   ) => { data: Food | null; status: QueryStatus };
   useAllFoods: <Config extends HookConfig<FoodFilter>>(
@@ -302,7 +302,7 @@ export interface GeneratedHooks<Presence, Profile> {
   useOneList: <Config extends HookConfig<ListFilter>>(
     config?: Config,
   ) => List | null;
-  useOneListsUnsuspended: <Config extends HookConfig<ListFilter>>(
+  useOneListUnsuspended: <Config extends HookConfig<ListFilter>>(
     config?: Config,
   ) => { data: List | null; status: QueryStatus };
   useAllLists: <Config extends HookConfig<ListFilter>>(
@@ -403,7 +403,7 @@ export interface GeneratedHooks<Presence, Profile> {
   useOneRecipe: <Config extends HookConfig<RecipeFilter>>(
     config?: Config,
   ) => Recipe | null;
-  useOneRecipesUnsuspended: <Config extends HookConfig<RecipeFilter>>(
+  useOneRecipeUnsuspended: <Config extends HookConfig<RecipeFilter>>(
     config?: Config,
   ) => { data: Recipe | null; status: QueryStatus };
   useAllRecipes: <Config extends HookConfig<RecipeFilter>>(

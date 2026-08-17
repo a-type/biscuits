@@ -230,7 +230,12 @@ export function InstructionStepNodeView({
 			)}
 			<div className={cls.endTools} contentEditable={false}>
 				{isEditing && (
-					<Button emphasis="ghost" size="small" onClick={removeSelf}>
+					<Button
+						emphasis="ghost"
+						size="small"
+						onClick={removeSelf}
+						aria-label="Delete step"
+					>
 						<Icon name="x" />
 					</Button>
 				)}
@@ -252,7 +257,17 @@ export function InstructionStepNodeView({
 							: 'Show note'
 					}
 				>
-					<Button emphasis="ghost" onClick={toggleShowNote}>
+					<Button
+						emphasis="ghost"
+						onClick={toggleShowNote}
+						aria-label={
+							note === undefined
+								? 'Add a note'
+								: showNote
+								? 'Hide note'
+								: 'Show note'
+						}
+					>
 						{!!note ? (
 							<Icon
 								name="note"

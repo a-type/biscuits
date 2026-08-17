@@ -13,6 +13,5 @@ export const Route = createFileRoute('/')({
 				key: 'groceryCategories',
 			}),
 		]);
-		console.log('loaded');
 	},
 });

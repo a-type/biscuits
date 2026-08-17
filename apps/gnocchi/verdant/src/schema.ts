@@ -8,7 +8,7 @@ import { recipes } from './schema/recipes.js';
 import { recipeTagMetadata } from './schema/recipeTagMetadata.js';
 
 export default schema({
-  version: 47,
+  version: 48,
   collections: {
     categories,
     items,

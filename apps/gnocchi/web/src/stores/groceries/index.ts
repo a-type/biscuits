@@ -78,12 +78,6 @@ export function createClient(options: { namespace: string }) {
 		log:
 			import.meta.env.DEV || DEBUG
 				? (level: string, ...args: any[]) => {
-						const queryLog = args.some((arg) =>
-							`${arg}`.startsWith('Executing query'),
-						);
-						if (queryLog) {
-							console.trace('🌿', ...args);
-						}
 						if (level === 'debug') {
 							if (DEBUG) {
 								console.debug('🌿', ...args);

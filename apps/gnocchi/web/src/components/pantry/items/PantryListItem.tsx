@@ -17,6 +17,7 @@ import {
 	RelativeTime,
 	TextSkeleton,
 	Tooltip,
+	useOnVisible,
 } from '@a-type/ui';
 import { Food } from '@gnocchi.biscuits/verdant';
 import classNames from 'classnames';
@@ -194,6 +195,8 @@ const QuickAddButton = ({
 	food: Food;
 	showLabel: boolean;
 }) => {
+	const [runQueries, setRunQueries] = useState(false);
+	const observeRef = useOnVisible(() => setRunQueries(true));
 	const { canonicalName: foodName } = hooks.useWatch(food);
 
 	const addItems = useAddItems();
@@ -207,7 +210,7 @@ const QuickAddButton = ({
 
 	const { data: matchingItem, status } = hooks.useOneItemUnsuspended({
 		index: {
-			where: 'purchased_food_listId',
+			where: 'food_purchased',
 			match: {
 				purchased: 'no',
 				food: foodName,
@@ -215,6 +218,7 @@ const QuickAddButton = ({
 			order: 'asc',
 		},
 		key: `pantry-list-item-${foodName}-matching-item`,
+		skip: !runQueries,
 	});
 	const isOnList = !!matchingItem;
 
@@ -225,6 +229,7 @@ const QuickAddButton = ({
 			onClick={repurchaseItem}
 			disabled={status === 'initializing' || isOnList}
 			aria-label={showLabel ? undefined : isOnList ? 'In list' : 'Buy again'}
+			ref={observeRef}
 		>
 			{isOnList ? <Icon name="check" /> : <Icon name="plus" />}
 			{showLabel && <span>{isOnList ? 'In list' : 'Buy again'}</span>}

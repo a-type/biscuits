@@ -1,6 +1,6 @@
 .root {
-	align-self: end;
 	max-height: 200px;
+	min-width: 80px;
 	@apply --mx-shadow(var(--m-shadow-sm));
 
 	&[data-style='card-small'] {

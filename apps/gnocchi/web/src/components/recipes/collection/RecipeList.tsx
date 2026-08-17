@@ -4,15 +4,7 @@ import { RecipeCollectionMenu } from '@/components/recipes/collection/RecipeColl
 import { RecipeListItem } from '@/components/recipes/collection/RecipeListItem.jsx';
 import { RecipeSearchBar } from '@/components/recipes/collection/RecipeSearchBar.jsx';
 import { RecipePresenceNotification } from '@/components/sync/collaborationMenu/RecipePresenceNotification.jsx';
-import {
-	Box,
-	CardGrid,
-	cardGridColumns,
-	InfiniteLoadTrigger,
-	PageFixedArea,
-	Spinner,
-} from '@a-type/ui';
-import classNames from 'classnames';
+import { Box, InfiniteLoadTrigger, PageFixedArea, Spinner } from '@a-type/ui';
 import { Suspense } from 'react';
 import {
 	useFilteredRecipes,
@@ -62,19 +54,11 @@ function RecipeListContent() {
 
 	return (
 		<>
-			<CardGrid
-				className={classNames(cls.grid)}
-				data-style={gridStyle}
-				columns={
-					gridStyle === 'card-big'
-						? cardGridColumns.default
-						: cardGridColumns.small
-				}
-			>
+			<div className={cls.grid} data-style={gridStyle}>
 				{recipes.map((recipe) => (
 					<RecipeListItem key={recipe.get('id')} recipe={recipe} />
 				))}
-			</CardGrid>
+			</div>
 			{hasMore && (
 				<InfiniteLoadTrigger onVisible={loadMore} className={cls.loadTrigger}>
 					<Spinner />

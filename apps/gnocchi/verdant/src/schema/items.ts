@@ -92,5 +92,9 @@ export const items = schema.collection({
 		purchased_food_listId: {
 			of: ['purchased', 'food', 'listId'],
 		},
+		// similar, but optimized for detecting if a food is on any list.
+		food_purchased: {
+			of: ['food', 'purchased'],
+		},
 	},
 });
