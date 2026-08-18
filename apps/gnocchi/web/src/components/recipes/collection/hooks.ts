@@ -15,6 +15,7 @@ export function useRecipeTagFilter() {
 				search: {
 					tag: tag || undefined,
 				},
+				viewTransition: false,
 			});
 		},
 		[navigate],

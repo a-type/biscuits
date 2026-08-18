@@ -4,14 +4,14 @@ import {
 	updateApp,
 	updateState,
 } from '@biscuits/client/apps';
+import { commonRouterConfig } from '@biscuits/client/router';
 import { createRouter } from '@tanstack/react-router';
 import { routeTree } from './routeTree.gen.js';
 import { verdant } from './stores/groceries/index.js';
 
 export const router = createRouter({
+	...commonRouterConfig,
 	routeTree,
-	scrollRestoration: true,
-	scrollToTopSelectors: ['#page--main-content'],
 	getScrollRestorationKey(location) {
 		// always restore recipes main page to the same position
 		if (location.pathname === '/recipes') {
@@ -19,9 +19,7 @@ export const router = createRouter({
 		}
 		return location.pathname;
 	},
-	defaultPreload: 'intent',
 	defaultErrorComponent: GlobalErrorFallback,
-	defaultViewTransition: true,
 	defaultNotFoundComponent: NotFoundPage,
 });
 

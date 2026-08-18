@@ -57,6 +57,13 @@
 			"node": "./dist/schema.js",
 			"default": "./dist/schema.js",
 			"types": "./dist/schema.d.ts"
+		},
+		"./router": {
+			"production": "./dist/router.js",
+			"import": "./dist/router.js",
+			"node": "./dist/router.js",
+			"default": "./dist/router.js",
+			"types": "./dist/router.d.ts"
 		}
 	},
 	"scripts": {

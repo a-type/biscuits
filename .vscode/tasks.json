@@ -9,6 +9,13 @@
 		},
 		{
 			"type": "npm",
+			"script": "build",
+			"problemMatcher": [],
+			"label": "⚙️ Build Client Shared",
+			"path": "packages/client"
+		},
+		{
+			"type": "npm",
 			"script": "dev",
 			"label": "💽 Core",
 			"path": "workers/core",

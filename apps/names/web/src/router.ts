@@ -1,18 +1,17 @@
+import NotFoundPage from '@/pages/NotFoundPage.jsx';
 import {
 	GlobalErrorFallback,
 	updateApp,
 	updateState,
 } from '@biscuits/client/apps';
+import { commonRouterConfig } from '@biscuits/client/router';
 import { createRouter } from '@tanstack/react-router';
 import { routeTree } from './routeTree.gen.js';
-import NotFoundPage from '@/pages/NotFoundPage.jsx';
 
 export const router = createRouter({
+	...commonRouterConfig,
 	routeTree,
-	scrollRestoration: true,
-	defaultPreload: 'intent',
 	defaultErrorComponent: GlobalErrorFallback,
-	defaultViewTransition: true,
 	defaultNotFoundComponent: NotFoundPage,
 });
 
