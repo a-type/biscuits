@@ -9,6 +9,7 @@ import {
 	Button,
 	Checkbox,
 	Dialog,
+	Field,
 	Icon,
 	Note,
 	Text,
@@ -109,45 +110,47 @@ export function AddToListDialog({
 							}
 
 							return (
-								<Box
-									items="start"
-									full="width"
-									gap="sm"
-									render={<Ul.Item />}
-									key={ingredient.id}
-								>
-									<Checkbox
-										checked={!unchecked[ingredient.id]}
-										onCheckedChange={(checked) => {
-											setUnchecked((v) => ({
-												...v,
-												[ingredient.id]: !checked,
-											}));
-										}}
-										disabled={isSectionHeader}
+								<Ul.Item key={ingredient.id}>
+									<Field
 										id={`ingredient-${ingredient.id}`}
-									/>
-									<Box
-										col
-										grow
-										gap="xs"
-										render={<label htmlFor={`ingredient-${ingredient.id}`} />}
+										horizontal
+										key={ingredient.id}
 									>
-										<IngredientTextRenderer
-											{...ingredient}
-											multiplier={
-												isSectionHeader
-													? 1
-													: (ingredient.multiplier ?? 1) * multiplier
+										<Field.Control
+											render={
+												<Checkbox
+													checked={!unchecked[ingredient.id]}
+													onCheckedChange={(checked) => {
+														setUnchecked((v) => ({
+															...v,
+															[ingredient.id]: !checked,
+														}));
+													}}
+													disabled={isSectionHeader}
+												/>
 											}
 										/>
-										{ingredient.note && (
-											<Note style={{ alignSelf: 'end' }}>
-												{ingredient.note}
-											</Note>
-										)}
-									</Box>
-								</Box>
+										<Field.Label>
+											<Box col grow gap="xs">
+												<Text emphasis="secondary">
+													<IngredientTextRenderer
+														{...ingredient}
+														multiplier={
+															isSectionHeader
+																? 1
+																: (ingredient.multiplier ?? 1) * multiplier
+														}
+													/>
+												</Text>
+												{ingredient.note && (
+													<Note style={{ alignSelf: 'end' }}>
+														{ingredient.note}
+													</Note>
+												)}
+											</Box>
+										</Field.Label>
+									</Field>
+								</Ul.Item>
 							);
 						})}
 					</Ul>
