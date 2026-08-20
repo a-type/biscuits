@@ -3,7 +3,7 @@ import { useNowPlayingRecipes } from '@/components/recipes/nowPlaying/hooks.js';
 import { RecipeNotFound } from '@/components/recipes/RecipeNotFound.jsx';
 import { RecipeOverview as RecipeOverviewBase } from '@/components/recipes/viewer/RecipeOverview.jsx';
 import { Route } from '@/routes/recipes/$slug/index.jsx';
-import { Activity, memo } from 'react';
+import { Activity, memo, useEffect } from 'react';
 
 const RecipeOverview = memo(RecipeOverviewBase);
 
@@ -13,6 +13,11 @@ export function RecipeOverviewPage({}: RecipeOverviewPageProps) {
 	const { slug: activeSlugFull } = Route.useParams();
 	const { allRecipes } = useNowPlayingRecipes();
 	const activeRecipe = useRecipeFromSlugUrl(activeSlugFull);
+
+	useEffect(() => {
+		// easier debugging this way
+		(window as any).recipe = activeRecipe;
+	}, [activeRecipe]);
 
 	if (!activeRecipe) return <RecipeNotFound />;
 

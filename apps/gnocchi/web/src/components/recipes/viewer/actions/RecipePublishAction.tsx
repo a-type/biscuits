@@ -1,4 +1,4 @@
-import { Link, TextLink } from '@/components/nav/Link.jsx';
+import { TextLink } from '@/components/nav/Link.jsx';
 import { withSuspense } from '@/hocs/withSuspense.jsx';
 import { GnocchiClient, hooks } from '@/stores/groceries/index.js';
 import {
@@ -8,9 +8,9 @@ import {
 	ButtonProps,
 	Checkbox,
 	Dialog,
+	Field,
 	Icon,
 	P,
-	Text,
 	toast,
 	Tooltip,
 } from '@a-type/ui';
@@ -142,7 +142,7 @@ function PublishedContent({
 			<Dialog.Title>Manage publication</Dialog.Title>
 			<SubRecipeWarning recipe={recipe} />
 			<Button
-				render={<Link href={url} newTab />}
+				render={<a href={url} target="_blank" rel="noopener noreferrer" />}
 				emphasis="default"
 				style={{ alignSelf: 'start' }}
 			>
@@ -150,7 +150,7 @@ function PublishedContent({
 				<Icon name="new_window" />
 			</Button>
 			{outOfDate ? (
-				<Box surface gap col items="end" color="accent" p>
+				<Box surface gap col items="end" color="accent">
 					This recipe has been updated since it was published on{' '}
 					{format(publishDate, 'PPp')}. Click "Republish" to update the
 					published version.
@@ -159,10 +159,10 @@ function PublishedContent({
 					</PublishButton>
 				</Box>
 			) : (
-				<Box surface="ambient" gap col items="end" p>
+				<Box surface="ambient" gap col items="end">
 					This recipe was published on {format(publishDate, 'PPp')} and should
 					be up to date. But you can still republish it if there's a problem.
-					<PublishButton recipe={recipe} onChange={onChange} emphasis="ghost">
+					<PublishButton recipe={recipe} onChange={onChange} emphasis="default">
 						Republish
 					</PublishButton>
 				</Box>
@@ -206,20 +206,26 @@ function UnpublishedContent({
 				Published recipes can be shared with others on the web. You retain full
 				rights to your recipe and can unpublish anytime
 			</P>
-			<Box items="start" gap="sm">
-				<Checkbox
-					checked={consent}
-					onCheckedChange={(c) => setConsent(c !== false)}
-					id="publish-consent"
+			<Field horizontal id="publish-consent">
+				<Field.Control
+					render={
+						<Checkbox
+							checked={consent}
+							onCheckedChange={(c) => {
+								console.log('consent changed', c);
+								setConsent(c !== false);
+							}}
+						/>
+					}
 				/>
-				<Text render={<label htmlFor="publish-consent" />} emphasis="ambient">
+				<Field.Label>
 					I confirm that I own and have the right to publish this recipe, in
 					accordance with the{' '}
 					<TextLink href="https://biscuits.club/tos" newTab>
 						Biscuits Terms of Service
 					</TextLink>
-				</Text>
-			</Box>
+				</Field.Label>
+			</Field>
 			<SubRecipeWarning recipe={recipe} />
 			<Dialog.Actions>
 				<Dialog.Close>Cancel</Dialog.Close>
@@ -314,8 +320,29 @@ async function getPublicRecipeData(
 	// avoid circular loops
 	subRecipeIds.forEach((r) => seen.add(r));
 
+	// attach image urls to step attributes
+	const instructions = {
+		...snapshot.instructions,
+		content:
+			snapshot.instructions.content?.map((step) => {
+				if (step.type === 'step') {
+					return {
+						...step,
+						attrs: {
+							...step.attrs,
+							imageUrl:
+								snapshot.stepImages?.[step.attrs?.id ?? '']?.url ?? null,
+						},
+					};
+				}
+
+				return step;
+			}) ?? [],
+	};
+
 	return {
 		...snapshot,
+		instructions,
 		mainImageUrl: snapshot.mainImage?.url ?? undefined,
 		subRecipes: await Promise.all(
 			subRecipes.map((r) => getPublicRecipeData(r, client, seen)),

@@ -9,8 +9,8 @@
 
 	&[data-image='true'] {
 		@media (min-width: 768px) {
-			height: 30dvh;
-			max-height: 300px;
+			height: 20dvh;
+			max-height: 180px;
 		}
 	}
 }

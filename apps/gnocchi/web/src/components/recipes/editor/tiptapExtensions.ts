@@ -6,7 +6,7 @@ import { Plugin, PluginKey } from '@tiptap/pm/state';
 import { ReactNodeViewRenderer } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import cuid from 'cuid';
-import { InstructionStepNodeView } from './InstructionStepNodeView.jsx';
+import { InstructionStepNodeView } from '../steps/InstructionStepNodeView.jsx';
 
 declare module '@tiptap/core' {
 	interface Commands<ReturnType> {

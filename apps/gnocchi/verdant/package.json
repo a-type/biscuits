@@ -15,7 +15,8 @@
 		"generate": "verdant -s ./src/schema.ts -o ./src/client -r",
 		"link-verdant": "pnpm link --global @verdant-web/store && pnpm link --global @verdant-web/cli && pnpm link --global @verdant-web/common && pnpm link --global @verdant-web/react",
 		"preflight": "verdant preflight -s ./src/schema.ts -o ./src/client",
-		"build": "tsc && node ./scripts/copyClient.js"
+		"build": "tsc && node ./scripts/copyClient.js",
+		"postgenerate": "pnpm run build"
 	},
 	"dependencies": {
 		"@biscuits/client": "workspace:*",

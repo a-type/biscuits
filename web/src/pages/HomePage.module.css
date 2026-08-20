@@ -43,7 +43,7 @@
 .navTitle {
 	@apply --mx-prose-primary;
 	font-weight: var(--m-fw-bold);
-	@apply --mx-fg(var(--color-main-ink));
+	@apply --mx-fg(var(--m-tint-ink));
 	margin: 0;
 	padding: var(--m-sp-xs);
 	border-radius: var(--m-rd-lg);
@@ -69,7 +69,7 @@
 	display: block;
 	font-weight: var(--m-fw-normal);
 	font-size: 10vmin;
-	@apply --mx-fg(var(--m-tint));
+	@apply --mx-fg(var(--m-tint-heavy));
 }
 
 .heroDescription {

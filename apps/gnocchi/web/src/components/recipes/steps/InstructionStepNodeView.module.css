@@ -1,8 +1,8 @@
 .nodeView {
 	display: grid;
-	grid-template-areas: 'label label label' 'tools content endTools' 'note note note' 'embed embed embed';
+	grid-template-areas: 'label label label' 'tools image endTools' 'tools content endTools' 'note note note' 'embed embed embed';
 	grid-template-columns: min-content 1fr min-content;
-	grid-template-rows: repeat(4, min-content);
+	grid-template-rows: min-content auto 1fr min-content min-content;
 	margin-block-end: var(--m-sp-sm);
 	width: 100%;
 	align-items: start;
@@ -107,4 +107,10 @@
 
 .embed {
 	grid-area: embed;
+}
+
+.image {
+	grid-area: image;
+	justify-self: center;
+	align-self: center;
 }

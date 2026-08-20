@@ -26,7 +26,7 @@ export function EmptyState({ className }: EmptyStateProps) {
 			<Icon name="book" size={120} className={cls.icon} />
 			<P>There are no recipes in your collection.</P>
 			<Suspense>
-				<RecipeCreateButton />
+				<RecipeCreateButton>Make one</RecipeCreateButton>
 			</Suspense>
 		</div>
 	);

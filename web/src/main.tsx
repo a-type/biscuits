@@ -16,7 +16,7 @@ function main() {
 	root.render(
 		<StrictMode>
 			<UIProvider>
-				<Provider graphqlClient={client}>
+				<Provider graphqlClient={client} router={router}>
 					<RouterProvider router={router} />
 				</Provider>
 			</UIProvider>

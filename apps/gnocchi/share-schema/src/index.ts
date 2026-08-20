@@ -38,11 +38,12 @@ export const publicRecipeStepNodeSchema = z.object({
 	content: z.array(publicRecipeTextNodeSchema.nullable()).nullable(),
 	attrs: z.looseObject({
 		id: z.string().optional(),
+		imageUrl: z.url().nullable().optional(),
+		note: z.string().nullable().optional(),
 	}),
 });
 export type PublicRecipeStepNode = z.infer<typeof publicRecipeStepNodeSchema>;
 
-// TODO: embedded recipes
 export const publicRecipeSchema = z.object({
 	id: z.string(),
 	title: z.string(),

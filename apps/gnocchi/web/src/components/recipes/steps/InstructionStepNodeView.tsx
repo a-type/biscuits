@@ -1,9 +1,4 @@
-import { InstructionsContext } from '@/components/recipes/editor/InstructionsContext.jsx';
-import {
-	isActiveCookingSession,
-	useCookSessionAction,
-} from '@/components/recipes/hooks.js';
-import { PersonSelect } from '@/components/sync/people/PersonSelect.jsx';
+import { InstructionsContext } from '@/components/recipes/steps/InstructionsContext.jsx';
 import { hooks } from '@/stores/groceries/index.js';
 import {
 	Button,
@@ -28,9 +23,12 @@ import {
 	EmbeddedSubRecipeContent,
 	EmbeddedSubRecipeInstructionsToggle,
 	EmbeddedSubRecipeInstructionsWrapper,
-} from './EmbeddedSubRecipeInstructons.jsx';
-import { IncludeSubRecipe } from './IncludeSubRecipe.jsx';
+} from '../editor/EmbeddedSubRecipeInstructons.jsx';
+import { IncludeSubRecipe } from '../editor/IncludeSubRecipe.jsx';
+import { useStepAssignment, useStepCompleted } from './hooks.js';
 import cls from './InstructionStepNodeView.module.css';
+import { StepImage } from './StepImage.jsx';
+import { StepImageButton } from './StepImageButton.jsx';
 
 export interface InstructionStepAttributes {
 	id?: string;
@@ -56,7 +54,6 @@ export function InstructionStepNodeView({
 	updateAttributes,
 	editor,
 }: InstructionStepNodeViewProps) {
-	const self = hooks.useSelf();
 	const parentCtx = useContext(InstructionsContext);
 	const { isEditing } = parentCtx;
 
@@ -66,53 +63,9 @@ export function InstructionStepNodeView({
 	const [showNote, toggleShowNote] = useToggle(!!note);
 
 	const maybeRecipe = extension.storage.recipe;
-	hooks.useWatch(maybeRecipe || null);
-	let maybeSession = maybeRecipe?.get('session') ?? null;
-	if (!isActiveCookingSession(maybeSession)) {
-		maybeSession = null;
-	}
-	hooks.useWatch(maybeSession || null);
-	const maybeCompletedSteps = maybeSession
-		? maybeSession.get('completedInstructions')
-		: null;
-	hooks.useWatch(maybeCompletedSteps);
-	const maybeAssignments = maybeSession
-		? maybeSession.get('instructionAssignments')
-		: null;
-	hooks.useWatch(maybeAssignments);
-
-	const completed = id && maybeCompletedSteps?.has(id);
-
-	const sessionAction = useCookSessionAction(maybeRecipe || null);
-
-	const assignedPersonId = id ? maybeAssignments?.get(id) ?? null : null;
-
-	const assignPersonId = useCallback(
-		(personId: string | null) => {
-			if (!id) return;
-			if (!maybeAssignments) {
-				if (maybeRecipe && personId) {
-					maybeRecipe.set('session', {
-						instructionAssignments: {
-							[id]: personId,
-						},
-					});
-				}
-				return;
-			}
-
-			sessionAction((session) => {
-				if (personId) {
-					session?.get('instructionAssignments').set(id, personId);
-				} else {
-					session?.get('instructionAssignments').delete(id);
-				}
-			});
-		},
-		[maybeAssignments, id, maybeRecipe, sessionAction],
-	);
-
-	const isAssignedToMe = assignedPersonId === self.id;
+	const { completed, setCompleted } = useStepCompleted(id, maybeRecipe);
+	const { assignedPersonId, assignPersonId, isAssignedToMe } =
+		useStepAssignment(id, maybeRecipe);
 
 	const updateNote = useCallback(
 		(value: string) => {
@@ -159,6 +112,9 @@ export function InstructionStepNodeView({
 				/>
 			}
 		>
+			{id && maybeRecipe && (
+				<StepImage stepId={id} recipe={maybeRecipe} className={cls.image} />
+			)}
 			<div className={clsx(cls.content)} data-has-sub-recipe={!!subRecipeId}>
 				{subRecipeId ? (
 					<InstructionsContext value={embeddedCtx}>
@@ -212,19 +168,7 @@ export function InstructionStepNodeView({
 						checked={!isEditing && !!completed}
 						contentEditable={false}
 						checkedMode="faded"
-						onCheckedChange={(checked) => {
-							if (!id) {
-								return;
-							}
-
-							sessionAction((session) => {
-								if (checked) {
-									session?.get('completedInstructions').add(id);
-								} else {
-									session?.get('completedInstructions').removeAll(id);
-								}
-							});
-						}}
+						onCheckedChange={setCompleted}
 					/>
 				</div>
 			)}
@@ -239,7 +183,7 @@ export function InstructionStepNodeView({
 						<Icon name="x" />
 					</Button>
 				)}
-				{!isEditing && isSubscribed && (
+				{/* {!isEditing && isSubscribed && (
 					<PersonSelect
 						includeSelf
 						allowNone
@@ -247,7 +191,7 @@ export function InstructionStepNodeView({
 						onChange={assignPersonId}
 						label="Assign to:"
 					/>
-				)}
+				)} */}
 				<Tooltip
 					content={
 						note === undefined
@@ -278,6 +222,9 @@ export function InstructionStepNodeView({
 						)}
 					</Button>
 				</Tooltip>
+				{id && maybeRecipe && (
+					<StepImageButton stepId={id} recipe={maybeRecipe} />
+				)}
 			</div>
 			{subRecipeId && (
 				<EmbeddedSubRecipeContent

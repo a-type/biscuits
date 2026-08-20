@@ -110,7 +110,9 @@ export function RecipeIngredientViewer({
 									if (open) resetConversion();
 								}}
 							>
-								<DropdownMenuTrigger render={<Button emphasis="ghost" />}>
+								<DropdownMenuTrigger
+									render={<Button emphasis="ghost" aria-label="Convert" />}
+								>
 									<Icon name="convert" className={cls.icon} />
 								</DropdownMenuTrigger>
 								<DropdownMenuContent>
@@ -128,7 +130,12 @@ export function RecipeIngredientViewer({
 						</>
 					)}
 					{!isSectionHeader && !disableAddToList && (
-						<Button emphasis="ghost" onClick={addToList} disabled={added}>
+						<Button
+							emphasis="ghost"
+							onClick={addToList}
+							disabled={added}
+							aria-label={added ? 'Added to list' : 'Add to list'}
+						>
 							<Icon
 								name={added ? 'check' : 'add_to_list'}
 								className={cls.icon}
@@ -136,7 +143,17 @@ export function RecipeIngredientViewer({
 						</Button>
 					)}
 					{!disableAddNote && (
-						<Button emphasis="ghost" onClick={toggleShowNote}>
+						<Button
+							emphasis="ghost"
+							onClick={toggleShowNote}
+							aria-label={
+								note === undefined
+									? 'Add a note'
+									: showNote
+									? 'Hide note'
+									: 'Show note'
+							}
+						>
 							<NoteIcon open={showNote} hasNote={!!note} />
 						</Button>
 					)}

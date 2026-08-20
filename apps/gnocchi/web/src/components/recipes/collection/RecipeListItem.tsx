@@ -60,7 +60,7 @@ export const RecipeListItem = memo(function RecipeListItem({
 						params={{
 							slug: makeRecipeSlug(recipe),
 						}}
-						search={(prev) => prev}
+						search={(prev: any) => prev}
 					/>
 				}
 			>

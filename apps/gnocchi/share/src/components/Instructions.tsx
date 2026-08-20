@@ -180,6 +180,18 @@ const Step = Node.create({
 					};
 				},
 			},
+			imageUrl: {
+				default: undefined,
+				keepOnSplit: false,
+				rendered: false,
+				parseHTML: (element: HTMLElement) =>
+					element.getAttribute('data-image-url'),
+				renderHTML: (attributes: any) => {
+					return {
+						'data-image-url': attributes.imageUrl,
+					};
+				},
+			},
 		};
 	},
 
@@ -253,6 +265,7 @@ function InstructionStepView({
 			id?: string;
 			note?: string;
 			subRecipeId?: string;
+			imageUrl?: string;
 		};
 	};
 }) {
@@ -264,6 +277,7 @@ function InstructionStepView({
 		node.attrs.subRecipeId ?
 			data.embeddedRecipes.find((r) => r.id === node.attrs.subRecipeId)
 		:	null;
+	const imageUrl = node.attrs.imageUrl;
 	return (
 		<NodeViewWrapper
 			data-id={node.attrs.id}
@@ -271,6 +285,7 @@ function InstructionStepView({
 			contentEditable={false}
 		>
 			<div>
+				{imageUrl && <img src={imageUrl} className={cls.stepImage} />}
 				{!embeddedRecipe && <NodeViewContent />}
 				{embeddedRecipe && (
 					<Collapsible>

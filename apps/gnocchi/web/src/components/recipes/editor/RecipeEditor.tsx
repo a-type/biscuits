@@ -15,7 +15,7 @@ import {
 	TitleAndImageLayout,
 	TitleContainer,
 } from '../layout/TitleAndImageLayout.jsx';
-import { InstructionsProvider } from './InstructionStepNodeView.jsx';
+import { InstructionsProvider } from '../steps/InstructionStepNodeView.jsx';
 import { NoteEditor } from './NoteEditor.jsx';
 import { RecipeDeleteButton } from './RecipeDeleteButton.jsx';
 import { RecipeEditActions } from './RecipeEditActions.jsx';

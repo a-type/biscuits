@@ -1,0 +1,13 @@
+.clear {
+	position: absolute;
+	top: var(--m-sp-sm);
+	right: var(--m-sp-sm);
+}
+
+.image {
+	width: 100%;
+	height: auto;
+	max-width: 800px;
+	justify-self: center;
+	align-self: center;
+}

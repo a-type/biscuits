@@ -134,6 +134,9 @@ export const recipes = schema.collection({
 		copyOf: schema.fields.string({
 			nullable: true,
 		}),
+		stepImages: schema.fields.map({
+			values: schema.fields.file(),
+		}),
 	},
 	indexes: {
 		slug: {

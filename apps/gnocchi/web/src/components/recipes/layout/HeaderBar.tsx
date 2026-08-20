@@ -1,7 +1,8 @@
 import { LinkButton } from '@/components/nav/Link.jsx';
-import { Box, Icon, PageFixedArea } from '@a-type/ui';
+import { Box, clsx, Icon, PageFixedArea } from '@a-type/ui';
 import { LinkButtonProps } from '@biscuits/client';
 import { ReactNode } from 'react';
+import cls from './HeaderBar.module.css';
 
 export interface HeaderBarProps {
 	children?: ReactNode;
@@ -10,13 +11,7 @@ export interface HeaderBarProps {
 
 export function HeaderBar({ children, className }: HeaderBarProps) {
 	return (
-		<PageFixedArea
-			style={{
-				top: 0,
-				zIndex: 10,
-			}}
-			className={className}
-		>
+		<PageFixedArea className={clsx(cls.root, className)}>
 			<Box items="center" gap="sm" p="xs">
 				{children}
 			</Box>

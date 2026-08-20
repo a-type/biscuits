@@ -17,3 +17,11 @@
 	max-width: 80%;
 	width: max-content;
 }
+
+.stepImage {
+	width: 100%;
+	height: auto;
+	max-width: 800px;
+	border-radius: var(--m-rd-md);
+	overflow: hidden;
+}
