@@ -266,6 +266,7 @@ function InstructionStepView({
 			note?: string;
 			subRecipeId?: string;
 			imageUrl?: string;
+			imageAlt?: string;
 		};
 	};
 }) {
@@ -285,7 +286,13 @@ function InstructionStepView({
 			contentEditable={false}
 		>
 			<div>
-				{imageUrl && <img src={imageUrl} className={cls.stepImage} />}
+				{imageUrl && (
+					<img
+						src={imageUrl}
+						alt={node.attrs.imageAlt ?? ''}
+						className={cls.stepImage}
+					/>
+				)}
 				{!embeddedRecipe && <NodeViewContent />}
 				{embeddedRecipe && (
 					<Collapsible>

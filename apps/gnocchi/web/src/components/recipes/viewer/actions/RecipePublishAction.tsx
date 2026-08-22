@@ -332,6 +332,8 @@ async function getPublicRecipeData(
 							...step.attrs,
 							imageUrl:
 								snapshot.stepImages?.[step.attrs?.id ?? '']?.url ?? null,
+							imageAlt:
+								snapshot.stepImages?.[step.attrs?.id ?? '']?.alt ?? null,
 						},
 					};
 				}
@@ -344,6 +346,7 @@ async function getPublicRecipeData(
 		...snapshot,
 		instructions,
 		mainImageUrl: snapshot.mainImage?.url ?? undefined,
+		mainImageAlt: snapshot.mainImage?.alt ?? undefined,
 		subRecipes: await Promise.all(
 			subRecipes.map((r) => getPublicRecipeData(r, client, seen)),
 		),

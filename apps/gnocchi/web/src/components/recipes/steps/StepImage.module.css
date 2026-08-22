@@ -1,6 +1,6 @@
-.clear {
+.alt {
 	position: absolute;
-	top: var(--m-sp-sm);
+	bottom: var(--m-sp-sm);
 	right: var(--m-sp-sm);
 }
 

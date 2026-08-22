@@ -42,6 +42,7 @@ export const recipePageQuery = graphql(
 					totalTimeMinutes
 					servings
 					mainImageUrl
+					mainImageAlt
 					prelude
 					...Ingredients
 					...Instructions
@@ -129,7 +130,11 @@ export function RecipePage({ data: response }: RecipePageProps) {
 					:	<GnocchiHeader />}
 					<TopLineRoot>
 						{data.mainImageUrl && (
-							<MainImage url={data.mainImageUrl} title={data.title} />
+							<MainImage
+								url={data.mainImageUrl}
+								title={data.title}
+								alt={data.mainImageAlt}
+							/>
 						)}
 						<TopLineTitle>
 							<H1 itemProp="name" className="p-name">

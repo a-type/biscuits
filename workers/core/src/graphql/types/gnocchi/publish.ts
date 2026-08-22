@@ -326,6 +326,7 @@ builder.objectType('PublishedRecipeData', {
 			resolve: (recipe) => recipe.prelude,
 		}),
 		mainImageUrl: t.exposeString('mainImageUrl', { nullable: true }),
+		mainImageAlt: t.exposeString('mainImageAlt', { nullable: true }),
 		ingredients: t.field({
 			type: ['PublishedRecipeIngredient'],
 			resolve: (recipe) =>

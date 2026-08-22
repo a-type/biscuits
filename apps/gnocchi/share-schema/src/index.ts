@@ -39,6 +39,7 @@ export const publicRecipeStepNodeSchema = z.object({
 	attrs: z.looseObject({
 		id: z.string().optional(),
 		imageUrl: z.url().nullable().optional(),
+		imageAlt: z.string().nullable().optional(),
 		note: z.string().nullable().optional(),
 	}),
 });
@@ -54,6 +55,7 @@ export const publicRecipeSchema = z.object({
 		})
 		.nullable(),
 	mainImageUrl: z.url().optional(),
+	mainImageAlt: z.string().nullable().optional(),
 	ingredients: z.array(publicRecipeIngredientSchema),
 	// tiptap/prosemirror content
 	instructions: z.object({

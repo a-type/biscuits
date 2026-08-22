@@ -5,15 +5,16 @@ import cls from './MainImage.module.css';
 export interface MainImageProps {
 	url: string;
 	title: string;
+	alt?: string | null;
 }
 
-export function MainImage({ url, title }: MainImageProps) {
+export function MainImage({ url, title, alt }: MainImageProps) {
 	return (
 		<TopLineImage className={cls.root}>
 			<img
 				src={url}
 				className={clsx('u-photo', cls.img)}
-				alt={`A photo of ${title}`}
+				alt={alt ?? `A photo of ${title}`}
 			/>
 		</TopLineImage>
 	);

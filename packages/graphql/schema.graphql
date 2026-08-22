@@ -337,6 +337,7 @@ type PublishedRecipeData {
   id: ID!
   ingredients: [PublishedRecipeIngredient!]!
   instructions: JSON!
+  mainImageAlt: String
   mainImageUrl: String
   note: String
   prelude: JSON
