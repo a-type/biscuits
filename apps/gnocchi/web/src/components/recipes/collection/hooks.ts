@@ -52,6 +52,7 @@ export function useRecipeTitleFilter() {
 				search: {
 					search: value || undefined,
 				},
+				viewTransition: false,
 			});
 		},
 		[navigate],

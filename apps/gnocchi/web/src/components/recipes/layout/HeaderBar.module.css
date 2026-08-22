@@ -1,3 +1,7 @@
 .root {
+	/* TODO: figure this out */
 	top: calc(-1 * var(--m-sp-lg));
+	@media (min-width: 740px) {
+		top: 0;
+	}
 }

@@ -56,3 +56,9 @@
 	font-size: var(--m-prose-ambient-size);
 	font-weight: var(--m-fw-normal);
 }
+
+.skeletonItem {
+	@apply --mx-bg(var(--m-bg-paper));
+	border-radius: var(--m-rd-sm);
+	height: 100px;
+}

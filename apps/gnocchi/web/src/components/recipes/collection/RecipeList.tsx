@@ -39,7 +39,9 @@ export function RecipeList({}: RecipeListProps) {
 				<TagFilterList />
 			</Suspense>
 
-			<RecipeListContent />
+			<Suspense fallback={<RecipeListSkeleton />}>
+				<RecipeListContent />
+			</Suspense>
 		</Box>
 	);
 }
@@ -65,6 +67,16 @@ function RecipeListContent() {
 				</InfiniteLoadTrigger>
 			)}
 		</>
+	);
+}
+
+function RecipeListSkeleton() {
+	return (
+		<div className={cls.grid}>
+			{Array.from({ length: 10 }).map((_, i) => (
+				<div key={i} className={cls.skeletonItem} />
+			))}
+		</div>
 	);
 }
 
