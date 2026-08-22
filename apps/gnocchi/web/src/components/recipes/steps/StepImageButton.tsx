@@ -1,3 +1,4 @@
+import { hooks } from '@/stores/groceries/index.js';
 import { Button, Dialog, Icon, ImageUploader, Tooltip } from '@a-type/ui';
 import { Recipe } from '@gnocchi.biscuits/verdant';
 import { useStepImage } from './hooks.js';
@@ -9,6 +10,7 @@ export interface StepImageButtonProps {
 
 export function StepImageButton({ stepId, recipe }: StepImageButtonProps) {
 	const { stepImage, setStepImage } = useStepImage(stepId, recipe);
+	hooks.useWatch(stepImage);
 
 	if (stepImage) {
 		return null;

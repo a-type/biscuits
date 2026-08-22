@@ -22,6 +22,8 @@ export function RecipeMainImageEditor({ recipe }: RecipeMainImageEditorProps) {
 			}}
 			maxDimension={1080}
 			facingMode="environment"
+			altText={mainImage?.alt ?? undefined}
+			onAltText={(txt) => mainImage?.setAlt(txt)}
 		/>
 	);
 }
