@@ -1,5 +1,47 @@
-import { scanWebRecipe } from '@gnocchi.biscuits/scanning';
+import {
+	BrowserRunBinding,
+	scanWebRecipe,
+	scanWebRecipeWithBrowser,
+} from '@gnocchi.biscuits/scanning';
 import { builder } from '../../builder.js';
+
+async function scanRecipeWithFallback(url: string, browser: BrowserRunBinding) {
+	let result;
+	let fallbackReason: 'no-result' | 'html-scan-error';
+	try {
+		result = await scanWebRecipe(url);
+		if (result?.scanner !== 'none') return result;
+		fallbackReason = 'no-result';
+	} catch (error) {
+		fallbackReason = 'html-scan-error';
+		console.warn('Recipe browser scrape fallback triggered', {
+			url,
+			reason: fallbackReason,
+			error,
+		});
+	}
+
+	if (fallbackReason === 'no-result') {
+		console.info('Recipe browser scrape fallback triggered', {
+			url,
+			reason: fallbackReason,
+		});
+	}
+
+	try {
+		const browserResult = await scanWebRecipeWithBrowser(browser, url);
+		console.info('Recipe browser scrape fallback completed', {
+			url,
+			reason: fallbackReason,
+			success: browserResult !== null,
+			scanner: browserResult?.scanner,
+		});
+		return browserResult ?? result;
+	} catch (error) {
+		console.error('Recipe browser scrape fallback failed', { url, error });
+		return result;
+	}
+}
 
 builder.queryFields((t) => ({
 	recipeScan: t.field({
@@ -25,7 +67,10 @@ builder.queryFields((t) => ({
 		},
 		resolve: async (_, { input }, ctx) => {
 			if (input.url) {
-				const result = await scanWebRecipe(input.url);
+				const result = await scanRecipeWithFallback(
+					input.url,
+					ctx.reqCtx.env.BROWSER,
+				);
 				if (!result) return null;
 				return {
 					type: 'web' as const,
@@ -42,7 +87,10 @@ builder.queryFields((t) => ({
 					return null;
 				}
 				const publicUrl = `${ctx.reqCtx.env.GNOCCHI_HUB_ORIGIN}/p/${recipe.planId}/${recipe.slug}`;
-				const result = await scanWebRecipe(publicUrl);
+				const result = await scanRecipeWithFallback(
+					publicUrl,
+					ctx.reqCtx.env.BROWSER,
+				);
 				if (!result) return null;
 				return {
 					type: 'web' as const,

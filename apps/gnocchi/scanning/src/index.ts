@@ -1,7 +1,8 @@
+export { scanWebRecipeWithBrowser, type BrowserRunBinding } from './browser.js';
 export type * from './extractors/types.js';
 import { load } from 'cheerio';
-import { extract } from './extractor.js';
 import { default as robotsParser } from 'robots-parser';
+import { extract } from './extractor.js';
 
 export class ScanForbiddenError extends Error {
 	constructor() {
