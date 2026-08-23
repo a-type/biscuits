@@ -194,17 +194,26 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 
 	const selectPerson = useCallback(
 		(person: Person) => {
+			const personId = person.get('id');
 			navigate({
-				to: `/people/${person.get('id')}`,
+				to: `/people/${personId}`,
 				search: (prevSearch) => prevSearch,
 			});
 			// delay clearing search so we don't have a flash
 			// of unfiltered results
 			setTimeout(() => {
-				setInputValue('');
+				navigate({
+					to: `/people/${personId}`,
+					replace: true,
+					search: (prevSearch) => ({
+						...prevSearch,
+						q: undefined,
+						prev: undefined,
+					}),
+				});
 			}, 200);
 		},
-		[navigate, setInputValue],
+		[navigate],
 	);
 
 	return (
