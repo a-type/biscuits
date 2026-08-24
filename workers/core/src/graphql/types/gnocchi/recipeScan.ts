@@ -1,48 +1,5 @@
-import {
-	BrowserRunBinding,
-	scanWebRecipe,
-	scanWebRecipeWithBrowser,
-} from '@gnocchi.biscuits/scanning';
-import { logger } from '../../../logger.js';
+import { scanWebRecipe } from '@gnocchi.biscuits/scanning';
 import { builder } from '../../builder.js';
-
-async function scanRecipeWithFallback(url: string, browser: BrowserRunBinding) {
-	let result;
-	let fallbackReason: 'no-result' | 'html-scan-error';
-	try {
-		result = await scanWebRecipe(url);
-		if (result?.scanner !== 'none') return result;
-		fallbackReason = 'no-result';
-	} catch (error) {
-		fallbackReason = 'html-scan-error';
-		logger.warn('Recipe browser scrape fallback triggered', {
-			url,
-			reason: fallbackReason,
-			error,
-		});
-	}
-
-	if (fallbackReason === 'no-result') {
-		logger.info('Recipe browser scrape fallback triggered', {
-			url,
-			reason: fallbackReason,
-		});
-	}
-
-	try {
-		const browserResult = await scanWebRecipeWithBrowser(browser, url);
-		logger.info('Recipe browser scrape fallback completed', {
-			url,
-			reason: fallbackReason,
-			success: browserResult !== null,
-			scanner: browserResult?.scanner,
-		});
-		return browserResult ?? result;
-	} catch (error) {
-		logger.warn('Recipe browser scrape fallback failed', { url, error });
-		return result;
-	}
-}
 
 builder.queryFields((t) => ({
 	recipeScan: t.field({
@@ -68,10 +25,7 @@ builder.queryFields((t) => ({
 		},
 		resolve: async (_, { input }, ctx) => {
 			if (input.url) {
-				const result = await scanRecipeWithFallback(
-					input.url,
-					ctx.reqCtx.env.BROWSER,
-				);
+				const result = await scanWebRecipe(input.url);
 				if (!result) return null;
 				return {
 					type: 'web' as const,
@@ -88,10 +42,7 @@ builder.queryFields((t) => ({
 					return null;
 				}
 				const publicUrl = `${ctx.reqCtx.env.GNOCCHI_HUB_ORIGIN}/p/${recipe.planId}/${recipe.slug}`;
-				const result = await scanRecipeWithFallback(
-					publicUrl,
-					ctx.reqCtx.env.BROWSER,
-				);
+				const result = await scanWebRecipe(publicUrl);
 				if (!result) return null;
 				return {
 					type: 'web' as const,
