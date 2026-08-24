@@ -3,6 +3,7 @@ import {
 	scanWebRecipe,
 	scanWebRecipeWithBrowser,
 } from '@gnocchi.biscuits/scanning';
+import { logger } from '../../../logger.js';
 import { builder } from '../../builder.js';
 
 async function scanRecipeWithFallback(url: string, browser: BrowserRunBinding) {
@@ -14,7 +15,7 @@ async function scanRecipeWithFallback(url: string, browser: BrowserRunBinding) {
 		fallbackReason = 'no-result';
 	} catch (error) {
 		fallbackReason = 'html-scan-error';
-		console.warn('Recipe browser scrape fallback triggered', {
+		logger.warn('Recipe browser scrape fallback triggered', {
 			url,
 			reason: fallbackReason,
 			error,
@@ -22,7 +23,7 @@ async function scanRecipeWithFallback(url: string, browser: BrowserRunBinding) {
 	}
 
 	if (fallbackReason === 'no-result') {
-		console.info('Recipe browser scrape fallback triggered', {
+		logger.info('Recipe browser scrape fallback triggered', {
 			url,
 			reason: fallbackReason,
 		});
@@ -30,7 +31,7 @@ async function scanRecipeWithFallback(url: string, browser: BrowserRunBinding) {
 
 	try {
 		const browserResult = await scanWebRecipeWithBrowser(browser, url);
-		console.info('Recipe browser scrape fallback completed', {
+		logger.info('Recipe browser scrape fallback completed', {
 			url,
 			reason: fallbackReason,
 			success: browserResult !== null,
@@ -38,7 +39,7 @@ async function scanRecipeWithFallback(url: string, browser: BrowserRunBinding) {
 		});
 		return browserResult ?? result;
 	} catch (error) {
-		console.error('Recipe browser scrape fallback failed', { url, error });
+		logger.warn('Recipe browser scrape fallback failed', { url, error });
 		return result;
 	}
 }
