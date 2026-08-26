@@ -4,6 +4,7 @@ import {
 	clsx,
 	HorizontalList,
 	Icon,
+	Input,
 	P,
 	tipTapClassName,
 } from '@a-type/ui';
@@ -16,10 +17,12 @@ import cls from './RecipeInstructionsField.module.css';
 
 export interface RecipeInstructionsFieldProps {
 	recipe: Recipe;
+	className?: string;
 }
 
 export function RecipeInstructionsField({
 	recipe,
+	className,
 }: RecipeInstructionsFieldProps) {
 	const editor = useSyncedInstructionsEditor({
 		recipe,
@@ -28,15 +31,20 @@ export function RecipeInstructionsField({
 	});
 
 	return (
-		<Box col gap="sm" surface="ambient" border p>
-			{editor && <Toolbar editor={editor} />}
-			<EditorContent editor={editor} className={clsx(tipTapClassName)} />
-			<P emphasis="ambient" dim>
-				Press <kbd>Enter</kbd> to create a new step. Each step line will have a
-				checkbox you can use to track completion. I recommend keeping steps
-				short and self-contained.
-			</P>
-		</Box>
+		<Input.Border className={clsx(cls.root, className)}>
+			<Box col gap="sm">
+				{editor && <Toolbar editor={editor} />}
+				<EditorContent
+					editor={editor}
+					className={clsx(tipTapClassName, cls.editor)}
+				/>
+				<P emphasis="ambient" dim className={cls.tip}>
+					Press <kbd>Enter</kbd> to create a new step. Each step line will have
+					a checkbox you can use to track completion. I recommend keeping steps
+					short and self-contained.
+				</P>
+			</Box>
+		</Input.Border>
 	);
 }
 
@@ -52,7 +60,7 @@ function isMobileOs() {
 function Toolbar({ editor }: { editor: Editor }) {
 	return (
 		// Sticks below the action bar
-		<div className={cls.root}>
+		<div className={cls.toolbar}>
 			<HorizontalList contentClassName={cls.list} className={cls.listOuter}>
 				<Button
 					emphasis={editor.isActive('bold') ? 'default' : 'ghost'}
@@ -85,9 +93,9 @@ function Toolbar({ editor }: { editor: Editor }) {
 					disabled={!editor.can().chain().focus().toggleSectionTitle().run()}
 					toggled={editor.isActive('sectionTitle')}
 				>
-					<span aria-hidden className={cls.headingIcon}>
+					<Button.Icon data-icon aria-hidden className={cls.headingIcon}>
 						H
-					</span>
+					</Button.Icon>
 				</Button>
 				<ToolbarEmbedButton editor={editor} />
 			</HorizontalList>

@@ -1,7 +1,12 @@
 .root {
+	width: 100%;
+}
+
+.toolbar {
 	position: sticky;
 	top: --fn-literal(calc(var(--viewport-top-offset, 0px) + 48px));
 	z-index: 100;
+	padding: var(--m-sp-sm);
 }
 
 .list {
@@ -21,4 +26,14 @@
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.editor {
+	& [contenteditable='true'] {
+		padding: var(--m-control-p);
+	}
+}
+
+.tip {
+	padding: var(--m-control-p);
 }

@@ -1,0 +1,11 @@
+.root {
+	width: 100%;
+	padding: 0;
+	overflow: visible;
+}
+
+.editor {
+	& [contenteditable='true'] {
+		padding: var(--m-control-p);
+	}
+}
