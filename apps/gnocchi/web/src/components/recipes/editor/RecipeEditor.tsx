@@ -41,8 +41,9 @@ export function RecipeEditor({ slug }: RecipeEditorProps) {
 
 function RecipeEditorContent({ recipe }: { recipe: Recipe }) {
 	useWatchChanges(recipe);
+	const { servings, title } = hooks.useWatch(recipe);
 
-	usePageTitle('Editing ' + recipe.get('title').slice(0, 20));
+	usePageTitle('Editing ' + title.slice(0, 20));
 
 	return (
 		<Box col gap="xl" items="stretch">
@@ -78,7 +79,7 @@ function RecipeEditorContent({ recipe }: { recipe: Recipe }) {
 				<Field.Control
 					render={
 						<Input
-							value={recipe.get('servings')?.toString() ?? ''}
+							value={servings?.toString() ?? ''}
 							onValueChange={(value) => {
 								const asNumber = parseInt(value, 10);
 								if (isNaN(asNumber)) return;
