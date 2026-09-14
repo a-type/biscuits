@@ -10,13 +10,5 @@
 		},
 		"types": ["vite/client", "vite-plugin-pwa"]
 	},
-	"include": ["src"],
-	"references": [
-		{
-			"path": "../../../packages/client"
-		},
-		{
-			"path": "../../../packages/graphql"
-		}
-	]
+	"include": ["src"]
 }

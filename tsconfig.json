@@ -13,7 +13,6 @@
 		"allowSyntheticDefaultImports": true,
 		"esModuleInterop": true,
 		"resolveJsonModule": true,
-		"preserveSymlinks": true,
 		"jsx": "react-jsx",
 		"experimentalDecorators": true,
 		"isolatedModules": true,
@@ -27,7 +26,6 @@
 			},
 			{ "name": "typescript-plugin-css-modules" }
 		],
-		"composite": true,
 		"declarationMap": true,
 		"declaration": true
 	},

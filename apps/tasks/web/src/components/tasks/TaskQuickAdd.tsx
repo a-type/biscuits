@@ -1,10 +1,14 @@
 import { hooks } from '@/hooks.js';
 import { Box, FormikForm, SubmitButton, TextField } from '@a-type/ui';
 import { useNavigate } from '@tanstack/react-router';
+import { Task } from '@tasks.biscuits/verdant';
 
-export interface TaskQuickAddProps {}
+export interface TaskQuickAddProps {
+	/** Overrides default create navigation */
+	onCreate?: (task: Task) => void;
+}
 
-export function TaskQuickAdd({}: TaskQuickAddProps) {
+export function TaskQuickAdd({ onCreate }: TaskQuickAddProps) {
 	const client = hooks.useClient();
 	const navigate = useNavigate();
 
@@ -13,6 +17,9 @@ export function TaskQuickAdd({}: TaskQuickAddProps) {
 			initialValues={{ title: '' }}
 			onSubmit={async (values) => {
 				const task = await client.tasks.put({ title: values.title });
+				if (onCreate) {
+					return onCreate(task);
+				}
 				navigate({
 					to: `/tasks/$taskId`,
 					params: {

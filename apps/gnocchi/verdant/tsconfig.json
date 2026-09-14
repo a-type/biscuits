@@ -1,18 +1,9 @@
 {
 	"extends": "../../../tsconfig.json",
 	"compilerOptions": {
-		"composite": true,
 		"outDir": "./dist/esm",
 		"rootDir": "./src",
 		"allowJs": true
 	},
-	"include": ["**/*.ts", "**/*.mts"],
-	"references": [
-		{
-			"path": "../../../packages/client"
-		},
-		{
-			"path": "../../../packages/graphql"
-		}
-	]
+	"include": ["**/*.ts", "**/*.mts"]
 }

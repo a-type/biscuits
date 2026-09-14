@@ -1,6 +1,6 @@
 {
 	"extends": "../../../tsconfig.json",
-	"include": ["**/*.ts", "**/*.tsx"],
+	"include": ["**/*.ts", "**/*.tsx"]
 	"compilerOptions": {
 		"module": "ESNext",
 		"moduleResolution": "Bundler",
@@ -23,15 +23,6 @@
 				"tadaTurboLocation": "../../../packages/graphql/src/graphql-cache.d.ts"
 			}
 		],
-		"composite": true,
 		"outDir": "dist"
 	},
-	"references": [
-		{
-			"path": "../../../packages/client"
-		},
-		{
-			"path": "../share-schema"
-		}
-	]
 }

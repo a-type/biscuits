@@ -6,22 +6,7 @@
 		"declaration": true,
 		"declarationDir": "./dist",
 		"sourceMap": true,
-		"types": ["vite-plugin-pwa/client"],
-		"composite": true
+		"types": ["vite-plugin-pwa/client"]
 	},
-	"include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.mts", "./typings"],
-	"references": [
-		{
-			"path": "../apps"
-		},
-		{
-			"path": "../error"
-		},
-		{
-			"path": "../graphql"
-		},
-		{
-			"path": "../libraries"
-		}
-	]
+	"include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.mts", "./typings"]
 }

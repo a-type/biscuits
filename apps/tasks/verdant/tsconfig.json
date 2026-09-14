@@ -1,15 +1,9 @@
 {
 	"extends": "../../../tsconfig.json",
 	"compilerOptions": {
-		"composite": true,
 		"outDir": "./dist",
 		"rootDir": "./src",
 		"lib": ["es2021", "dom"]
 	},
-	"include": ["**/*.ts", "**/*.mts"],
-	"references": [
-		{
-			"path": "../../../packages/client"
-		}
-	]
+	"include": ["**/*.ts", "**/*.mts"]
 }

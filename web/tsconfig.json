@@ -20,16 +20,5 @@
 		"outDir": "dist"
 	},
 	"include": ["**/*.ts", "**/*.tsx"],
-	"exclude": ["node_modules", "*.ts"],
-	"references": [
-		{
-			"path": "../packages/client"
-		},
-		{
-			"path": "../packages/error"
-		},
-		{
-			"path": "../packages/graphql"
-		}
-	]
+	"exclude": ["node_modules", "*.ts"]
 }

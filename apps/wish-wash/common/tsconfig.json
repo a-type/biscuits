@@ -6,10 +6,5 @@
 		"rootDir": "./src",
 		"customConditions": ["development"]
 	},
-	"include": ["src"],
-	"references": [
-		{
-			"path": "../../../packages/graphql"
-		}
-	]
+	"include": ["src"]
 }

@@ -65,6 +65,20 @@ const tasks = schema.collection({
 		scale: schema.fields.number({
 			nullable: true,
 		}),
+
+		blockedBy: schema.fields.array({
+			documentation: 'Snapshot of metadata for tasks that block this task',
+			items: schema.fields.object({
+				fields: {
+					taskId: schema.fields.string(),
+					active: schema.fields.boolean({
+						documentation:
+							'This can be set to false when an upstream task is completed, and may be reset to true if that task is reopened for any reason',
+						default: true,
+					}),
+				},
+			}),
+		}),
 	},
 	indexes: {
 		createdAt: {
@@ -90,15 +104,24 @@ const tasks = schema.collection({
 			type: 'string[]',
 			compute: (item) => item.blocks,
 		},
+		blockedCount: {
+			type: 'number',
+			compute: (item) => item.blockedBy.filter((block) => block.active).length,
+		},
 		scheduledAt: {
 			type: 'number',
 			compute: (item) => {
-				if (!item.recurrence) {
-					return Number.MAX_SAFE_INTEGER;
-				}
 				const lastCompletion = item.completions.reduce((latest, completion) => {
 					return Math.max(latest, completion.completedAt);
 				}, item.createdAt);
+				if (!item.recurrence) {
+					if (lastCompletion) {
+						// one-off, completed task - scheduled for never
+						return Number.MAX_SAFE_INTEGER;
+					}
+					// one-off, not yet completed task - scheduled when created
+					return item.createdAt;
+				}
 				const { interval, unit } = item.recurrence;
 				let nextScheduledAt = lastCompletion;
 				switch (unit) {
@@ -136,6 +159,10 @@ const playlists = schema.collection({
 	indexes: {
 		name: {
 			field: 'name',
+		},
+		taskId: {
+			type: 'string[]',
+			compute: (item) => item.items,
 		},
 	},
 });

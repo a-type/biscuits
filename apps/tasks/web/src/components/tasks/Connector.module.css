@@ -1,0 +1,4 @@
+.root {
+	margin-left: var(--m-sp-lg);
+	@apply --mx-fg(var(--m-tint-heavy));
+}

@@ -2,16 +2,7 @@
 	"extends": "../../tsconfig.json",
 	"compilerOptions": {
 		"outDir": "./dist",
-		"rootDir": "./src",
-		"composite": true
+		"rootDir": "./src"
 	},
-	"include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.mts", "./typings"],
-	"references": [
-		{
-			"path": "../../apps/gnocchi/share-schema"
-		},
-		{
-			"path": "../../apps/wish-wash/share-schema"
-		}
-	]
+	"include": ["src/**/*.ts", "src/**/*.tsx", "src/**/*.mts", "./typings"]
 }

@@ -16,13 +16,5 @@
 			"~/*": ["./src/*"]
 		},
 		"outDir": "dist"
-	},
-	"references": [
-		{
-			"path": "../../../packages/graphql"
-		},
-		{
-			"path": "../common"
-		}
-	]
+	}
 }

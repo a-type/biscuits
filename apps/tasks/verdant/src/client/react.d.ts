@@ -151,7 +151,7 @@ export interface GeneratedHooks<Presence, Profile> {
   useOneTask: <Config extends HookConfig<TaskFilter>>(
     config?: Config,
   ) => Task | null;
-  useOneTasksUnsuspended: <Config extends HookConfig<TaskFilter>>(
+  useOneTaskUnsuspended: <Config extends HookConfig<TaskFilter>>(
     config?: Config,
   ) => { data: Task | null; status: QueryStatus };
   useAllTasks: <Config extends HookConfig<TaskFilter>>(
@@ -198,7 +198,7 @@ export interface GeneratedHooks<Presence, Profile> {
   useOnePlaylist: <Config extends HookConfig<PlaylistFilter>>(
     config?: Config,
   ) => Playlist | null;
-  useOnePlaylistsUnsuspended: <Config extends HookConfig<PlaylistFilter>>(
+  useOnePlaylistUnsuspended: <Config extends HookConfig<PlaylistFilter>>(
     config?: Config,
   ) => { data: Playlist | null; status: QueryStatus };
   useAllPlaylists: <Config extends HookConfig<PlaylistFilter>>(

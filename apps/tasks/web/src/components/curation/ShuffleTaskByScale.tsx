@@ -1,8 +1,24 @@
+import { useOnlyUnblockedTasks } from '@/graph.js';
 import { hooks } from '@/hooks.js';
 import { scaleDurations } from '@/time.js';
-import { Box, BoxProps, Button, Icon, Select } from '@a-type/ui';
+import {
+	ActionButton,
+	Box,
+	BoxProps,
+	Button,
+	HorizontalList,
+	Icon,
+} from '@a-type/ui';
 import { Task, TaskScale } from '@tasks.biscuits/verdant';
-import { createContext, use, useCallback, useEffect, useState } from 'react';
+import {
+	createContext,
+	startTransition,
+	Suspense,
+	use,
+	useCallback,
+	useEffect,
+	useState,
+} from 'react';
 import { TaskSummaryCard } from '../tasks/TaskSummaryCard.js';
 
 export interface ShuffleTaskByScaleProps extends BoxProps {
@@ -24,35 +40,27 @@ export function ShuffleTaskByScale({
 		<ShuffledTaskProvider scale={scaleFilter}>
 			<Box gap col full="width" {...boxProps}>
 				<Box gap items="center">
-					<ShuffleButton />
-					<Select
-						value={scaleFilter ? scaleFilter.toString() : ''}
-						onValueChange={(valStr) => {
-							if (!valStr) {
-								setScaleFilter(0);
-								return;
-							}
-							const valInt = parseInt(valStr);
-							if (isNaN(valInt)) {
-								setScaleFilter(0);
-							} else {
-								setScaleFilter(valInt as TaskScale);
-							}
-						}}
-						items={scaleFilterItems}
-					>
-						<Select.Trigger placeholder="Size..." />
-						<Select.Content>
-							{scaleFilterItems.map((item) => (
-								<Select.Item key={item.value} value={item.value}>
-									{item.label}
-								</Select.Item>
-							))}
-						</Select.Content>
-					</Select>
+					<HorizontalList>
+						<ShuffleButton />
+						{scaleFilterItems.map((item) => (
+							<ActionButton
+								key={item.value}
+								toggled={scaleFilter === parseInt(item.value)}
+								onClick={() => {
+									startTransition(() => {
+										setScaleFilter(parseInt(item.value) as TaskScale);
+									});
+								}}
+							>
+								{item.label}
+							</ActionButton>
+						))}
+					</HorizontalList>
 				</Box>
 				<Box col gap="sm">
-					<ShuffledTask />
+					<Suspense>
+						<ShuffledTask />
+					</Suspense>
 				</Box>
 			</Box>
 		</ShuffledTaskProvider>
@@ -91,7 +99,8 @@ function ShuffledTaskProvider({
 				}
 			),
 	});
-	const randomMatch = matches[Math.floor(randomPosition * matches.length)];
+	const unblocked = useOnlyUnblockedTasks(matches);
+	const randomMatch = unblocked[Math.floor(randomPosition * unblocked.length)];
 	return (
 		<ShuffledTaskContext.Provider
 			value={{ task: randomMatch ?? null, shuffle }}
@@ -112,12 +121,7 @@ function ShuffledTask() {
 function ShuffleButton() {
 	const { shuffle } = use(ShuffledTaskContext);
 	return (
-		<Button
-			onClick={shuffle}
-			emphasis="light"
-			aria-label="Shuffle tasks"
-			align="start"
-		>
+		<Button onClick={shuffle} emphasis="light" aria-label="Shuffle tasks">
 			<Icon name="refresh" />
 		</Button>
 	);
