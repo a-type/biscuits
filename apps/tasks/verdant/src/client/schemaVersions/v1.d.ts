@@ -11,7 +11,6 @@ export type TaskSnapshot = {
   completions: TaskCompletionsSnapshot;
   blocks: TaskBlocksSnapshot;
   scale: number | null;
-  blockedBy: TaskBlockedBySnapshot;
 };
 
 export type TaskRecurrenceSnapshot = {
@@ -25,8 +24,6 @@ export type TaskCompletionsItemSnapshot = {
 };
 export type TaskCompletionsSnapshot = TaskCompletionsItemSnapshot[];
 export type TaskBlocksSnapshot = string[];
-export type TaskBlockedByItemSnapshot = { taskId: string; active: boolean };
-export type TaskBlockedBySnapshot = TaskBlockedByItemSnapshot[];
 export type TaskInit = {
   id?: string;
   title?: string;
@@ -36,7 +33,6 @@ export type TaskInit = {
   completions?: TaskCompletionsInit;
   blocks?: TaskBlocksInit;
   scale?: number | null;
-  blockedBy?: TaskBlockedByInit;
 };
 
 export type TaskRecurrenceInit = {
@@ -50,8 +46,6 @@ export type TaskCompletionsItemInit = {
 };
 export type TaskCompletionsInit = TaskCompletionsItemInit[];
 export type TaskBlocksInit = string[];
-export type TaskBlockedByItemInit = { taskId: string; active?: boolean };
-export type TaskBlockedByInit = TaskBlockedByItemInit[];
 
 export type PlaylistSnapshot = {
   id: string;

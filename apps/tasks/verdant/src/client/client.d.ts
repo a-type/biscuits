@@ -158,20 +158,6 @@ export type TaskBlocks = ListEntity<
 >;
 export type TaskBlocksItem = string;
 export type TaskScale = number;
-/** Snapshot of metadata for tasks that block this task */
-export type TaskBlockedBy = ListEntity<
-  TaskBlockedByInit,
-  TaskBlockedByDestructured,
-  TaskBlockedBySnapshot
->;
-export type TaskBlockedByItem = ObjectEntity<
-  TaskBlockedByItemInit,
-  TaskBlockedByItemDestructured,
-  TaskBlockedByItemSnapshot
->;
-export type TaskBlockedByItemTaskId = string;
-/** This can be set to false when an upstream task is completed, and may be reset to true if that task is reopened for any reason */
-export type TaskBlockedByItemActive = boolean;
 export type TaskInit = {
   id?: string;
   title?: string;
@@ -181,7 +167,6 @@ export type TaskInit = {
   completions?: TaskCompletionsInit;
   blocks?: TaskBlocksInit;
   scale?: number | null;
-  blockedBy?: TaskBlockedByInit;
 };
 
 export type TaskRecurrenceInit = {
@@ -195,8 +180,6 @@ export type TaskCompletionsItemInit = {
 };
 export type TaskCompletionsInit = TaskCompletionsItemInit[];
 export type TaskBlocksInit = string[];
-export type TaskBlockedByItemInit = { taskId: string; active?: boolean };
-export type TaskBlockedByInit = TaskBlockedByItemInit[];
 export type TaskDestructured = {
   id: string;
   title: string;
@@ -206,7 +189,6 @@ export type TaskDestructured = {
   completions: TaskCompletions;
   blocks: TaskBlocks;
   scale: number | null;
-  blockedBy: TaskBlockedBy;
 };
 
 export type TaskRecurrenceDestructured = {
@@ -220,8 +202,6 @@ export type TaskCompletionsItemDestructured = {
 };
 export type TaskCompletionsDestructured = TaskCompletionsItem[];
 export type TaskBlocksDestructured = string[];
-export type TaskBlockedByItemDestructured = { taskId: string; active: boolean };
-export type TaskBlockedByDestructured = TaskBlockedByItem[];
 export type TaskSnapshot = {
   id: string;
   title: string;
@@ -231,7 +211,6 @@ export type TaskSnapshot = {
   completions: TaskCompletionsSnapshot;
   blocks: TaskBlocksSnapshot;
   scale: number | null;
-  blockedBy: TaskBlockedBySnapshot;
 };
 
 export type TaskRecurrenceSnapshot = {
@@ -245,8 +224,6 @@ export type TaskCompletionsItemSnapshot = {
 };
 export type TaskCompletionsSnapshot = TaskCompletionsItemSnapshot[];
 export type TaskBlocksSnapshot = string[];
-export type TaskBlockedByItemSnapshot = { taskId: string; active: boolean };
-export type TaskBlockedBySnapshot = TaskBlockedByItemSnapshot[];
 
 /** Index filters for Task **/
 
@@ -345,23 +322,6 @@ export interface TaskBlocksStartsWithFilter {
   startsWith: string;
   order?: "asc" | "desc";
 }
-export interface TaskBlockedCountSortFilter {
-  where: "blockedCount";
-  order: "asc" | "desc";
-}
-export interface TaskBlockedCountMatchFilter {
-  where: "blockedCount";
-  equals: number;
-  order?: "asc" | "desc";
-}
-export interface TaskBlockedCountRangeFilter {
-  where: "blockedCount";
-  gte?: number;
-  gt?: number;
-  lte?: number;
-  lt?: number;
-  order?: "asc" | "desc";
-}
 export interface TaskScheduledAtSortFilter {
   where: "scheduledAt";
   order: "asc" | "desc";
@@ -397,9 +357,6 @@ export type TaskFilter =
   | TaskBlocksMatchFilter
   | TaskBlocksRangeFilter
   | TaskBlocksStartsWithFilter
-  | TaskBlockedCountSortFilter
-  | TaskBlockedCountMatchFilter
-  | TaskBlockedCountRangeFilter
   | TaskScheduledAtSortFilter
   | TaskScheduledAtMatchFilter
   | TaskScheduledAtRangeFilter;
