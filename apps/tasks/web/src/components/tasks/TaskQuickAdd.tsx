@@ -6,9 +6,10 @@ import { Task } from '@tasks.biscuits/verdant';
 export interface TaskQuickAddProps {
 	/** Overrides default create navigation */
 	onCreate?: (task: Task) => void;
+	autoFocus?: boolean;
 }
 
-export function TaskQuickAdd({ onCreate }: TaskQuickAddProps) {
+export function TaskQuickAdd({ onCreate, autoFocus }: TaskQuickAddProps) {
 	const client = hooks.useClient();
 	const navigate = useNavigate();
 
@@ -29,7 +30,12 @@ export function TaskQuickAdd({ onCreate }: TaskQuickAddProps) {
 			}}
 		>
 			<Box full gap items="center">
-				<TextField name="title" label="Task Title" style={{ flex: 1 }} />
+				<TextField
+					name="title"
+					label="Task Title"
+					style={{ flex: 1 }}
+					autoFocus={autoFocus}
+				/>
 				<SubmitButton>Add task</SubmitButton>
 			</Box>
 		</FormikForm>

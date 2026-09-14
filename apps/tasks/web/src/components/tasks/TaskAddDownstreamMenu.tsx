@@ -44,6 +44,7 @@ export function TaskAddDownstreamMenu({
 							blocks.add(created.get('id'));
 							setShowNewModal(false);
 						}}
+						autoFocus
 					/>
 				</Dialog.Content>
 			</Dialog>
