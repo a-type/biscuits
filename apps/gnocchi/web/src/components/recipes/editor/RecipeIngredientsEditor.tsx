@@ -302,6 +302,9 @@ function AddIngredientsForm({
 			}}
 			validate={({ text }) => {
 				setStoredValue(text);
+				if (!text) {
+					return { text: 'Please specify some ingredients' };
+				}
 			}}
 			validateOnBlur
 		>
@@ -309,7 +312,6 @@ function AddIngredientsForm({
 				<>
 					<TextAreaField
 						name="text"
-						required
 						placeholder="Add ingredient line(s)"
 						autoSize
 						padBottomPixels={40}
