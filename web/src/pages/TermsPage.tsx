@@ -454,8 +454,8 @@ export function TermsAndConditions() {
 				our Services can be accessed. By using the Services, you represent and
 				warrant that you (i) are not located or residing in any country or
 				territory subject to comprehensive US sanctions (currently Cuba, Crimea,
-				Iran, North Korea, Donetsk People's Republic, Luhansk People's Republic,
-				and Syria); (ii) are not listed on any United States list of prohibited
+				Iran, North Korea, Donetsk People's Republic, and Luhansk People's
+				Republic); (ii) are not listed on any United States list of prohibited
 				or restricted parties, such as OFAC's Specially Designated Nationals and
 				Persons List, or otherwise subject to US sanctions that would prohibit
 				your access to or use of our Services; and (iii) shall not use or allow
