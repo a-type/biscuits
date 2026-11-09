@@ -62,11 +62,16 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 			if (v === '') {
 				const prev = search.prev;
 				if (prev) {
-					navigate({ to: `/people/${prev}`, replace: true });
+					navigate({
+						to: `/people/${prev}`,
+						replace: true,
+						viewTransition: false,
+					});
 				} else {
 					navigate({
 						to: routerLocation.pathname,
 						replace: true,
+						viewTransition: false,
 						search: (prevSearch) => ({
 							...prevSearch,
 							q: undefined,
@@ -78,8 +83,9 @@ export const SuperBarProvider = ({ children }: { children: ReactNode }) => {
 			}
 
 			navigate({
-				to: '/',
+				to: currentPersonId ? routerLocation.pathname : '/',
 				replace: true,
+				viewTransition: false,
 				search: (prevSearch) => ({
 					...prevSearch,
 					q: v,

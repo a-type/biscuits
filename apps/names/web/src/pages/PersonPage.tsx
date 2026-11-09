@@ -1,12 +1,20 @@
 import { PersonDetails } from '@/components/people/PersonDetails.jsx';
+import { useSuperBar } from '@/components/superBar/SuperBarContext.jsx';
 import { hooks } from '@/hooks.js';
 import { Box, Button, H1, Icon } from '@a-type/ui';
 import { Link, usePageTitle } from '@biscuits/client';
 import { useParams } from '@tanstack/react-router';
+import { HomePage } from './HomePage.jsx';
 
 export interface PersonPageProps {}
 
 export function PersonPage({}: PersonPageProps) {
+	const { inputValue } = useSuperBar();
+
+	return inputValue ? <HomePage /> : <PersonPageContent />;
+}
+
+function PersonPageContent() {
 	const { id } = useParams({ from: '/people/$id' });
 
 	const person = hooks.usePerson(id);
